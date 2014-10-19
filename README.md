@@ -4,7 +4,7 @@
 This is a C#-Library that makes reading CS:GO-Demos and analyzing them easier. 
 
 ##Correctness
-This is the most accurate implementation I know of. This is because I worked 
+This is the most accurate implementation I know of. This is because I worked with Valve while creating this.
 
 ##Usage
 Include the DemoInfo-Project. You can then can create an instance of the ``DemoParser``-Class. 
