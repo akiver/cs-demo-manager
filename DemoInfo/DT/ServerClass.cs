@@ -15,6 +15,11 @@ namespace DemoInfo.DT
         public string DTName;
 
         public List<FlattenedPropEntry> flattenedProps = new List<FlattenedPropEntry>();
+
+		public override string ToString()
+		{
+			return Name + "|" + DTName;
+		}
     }
 
     public class FlattenedPropEntry
