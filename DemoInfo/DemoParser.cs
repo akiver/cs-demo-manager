@@ -62,6 +62,16 @@ namespace DemoInfo
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
+		public float TickRate
+		{
+			get { return this.Header.PlaybackFrames / this.Header.PlaybackTime; }
+		}
+
+		public float TickTime
+		{
+			get { return this.Header.PlaybackTime / this.Header.PlaybackFrames; }
+		}
+
 		public DemoParser(Stream input)
 		{
 			reader = new BinaryReader(input);
