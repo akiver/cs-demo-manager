@@ -195,7 +195,7 @@ namespace DemoInfo
 			int TickNum = reader.ReadInt32();
 			int playerSlot = reader.ReadByte();
 
-			this.CurrentTick = TickNum;
+			this.CurrrentTick = TickNum;
 
 			switch (command)
 			{
