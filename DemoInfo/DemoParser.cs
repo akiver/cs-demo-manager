@@ -62,6 +62,7 @@ namespace DemoInfo
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
+
 		public float TickRate
 		{
 			get { return this.Header.PlaybackFrames / this.Header.PlaybackTime; }
@@ -71,6 +72,10 @@ namespace DemoInfo
 		{
 			get { return this.Header.PlaybackTime / this.Header.PlaybackFrames; }
 		}
+
+		public int CurrrentTick { get; private set; }
+		public double CurrentTime { get; private set; }
+
 
 		public DemoParser(Stream input)
 		{
@@ -189,6 +194,8 @@ namespace DemoInfo
 
 			int TickNum = reader.ReadInt32();
 			int playerSlot = reader.ReadByte();
+
+			this.CurrentTick = TickNum;
 
 			switch (command)
 			{

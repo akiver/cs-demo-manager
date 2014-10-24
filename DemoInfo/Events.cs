@@ -25,6 +25,10 @@ namespace DemoInfo
 
 	}
 
+	public class RoundStartedEventArgs : EventArgs
+	{
+	}
+
 	public class PlayerKilledEventArgs : EventArgs
 	{
 		public Equipment Weapon { get; internal set; }
