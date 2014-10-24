@@ -25,9 +25,9 @@ namespace DemoInfo.DT
         public List<ServerClass> ServerClasses = new List<ServerClass>();
         List<ExcludeEntry> CurrentExcludes = new List<ExcludeEntry>();
 
-        public void ParsePacket(byte[] data)
+		public void ParsePacket(Stream stream)
         {
-            BinaryReader reader = new BinaryReader(new MemoryStream(data));
+			BinaryReader reader = new BinaryReader(stream);
 
             while (true)
             {

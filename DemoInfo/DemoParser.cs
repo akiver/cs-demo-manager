@@ -197,17 +197,19 @@ namespace DemoInfo
 				case DemoCommand.Stop:
 					return false;
 				case DemoCommand.ConsoleCommand:
-					reader.ReadVolvoPacket();
+					using (var volvo = reader.ReadVolvoPacket()) ;
 					break;
 				case DemoCommand.DataTables:
-					DataTables.ParsePacket(reader.ReadVolvoPacket());
+					using (var volvo = reader.ReadVolvoPacket())
+						DataTables.ParsePacket(volvo);
 					break;
 				case DemoCommand.StringTables:
-					StringTables.ParsePacket(reader.ReadVolvoPacket(), this);
+					using (var volvo = reader.ReadVolvoPacket())
+						StringTables.ParsePacket(volvo, this);
 					break;
 				case DemoCommand.UserCommand:
 					reader.ReadInt32();
-					reader.ReadVolvoPacket();
+					using (var volvo = reader.ReadVolvoPacket()) ;
 					break;
 				case DemoCommand.Signon:
 				case DemoCommand.Packet:
@@ -226,9 +228,8 @@ namespace DemoInfo
 			int SeqNrIn = reader.ReadInt32();
 			int SeqNrOut = reader.ReadInt32();
 
-			var packet = reader.ReadVolvoPacket();
-
-			DemoPacketParser.ParsePacket(packet, this);
+			using (var volvo = reader.ReadVolvoPacket())
+				DemoPacketParser.ParsePacket(volvo, this);
 		}
 		
 		private void AttributeWeapons()

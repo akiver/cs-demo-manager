@@ -10,9 +10,15 @@ namespace DemoInfo.ST
 {
     class StringTableParser
     {
-		public void ParsePacket(byte[] data, DemoParser parser)
+		public void ParsePacket(Stream stream, DemoParser parser)
         {
-            BitArrayStream reader = new BitArrayStream(data);
+			// This is where the optimization ends.
+			// Once it becomes a bottleneck, we can still reimplement a Stream version of BitArray.
+			BitArrayStream reader;
+			using (var memstream = new MemoryStream(checked((int)stream.Length))) {
+				stream.CopyTo(memstream);
+				reader = new BitArrayStream(memstream.GetBuffer());
+			}
 
             int numTables = reader.ReadByte();
 

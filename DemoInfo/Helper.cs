@@ -93,9 +93,9 @@ namespace DemoInfo
                     yield return value;
         }
 
-        public static byte[] ReadVolvoPacket(this BinaryReader reader)
+		public static Stream ReadVolvoPacket(this BinaryReader reader)
         {
-            return reader.ReadBytes(reader.ReadInt32());
+			return new LimitStream(reader.BaseStream, reader.ReadInt32());
         }
 
         public static T ReadProtobufMessage<T>(this BinaryReader reader)

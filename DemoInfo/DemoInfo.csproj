@@ -68,6 +68,7 @@
     <Compile Include="Structs.cs" />
     <Compile Include="ST\StringTableParser.cs" />
     <Compile Include="DP\Handler\UserMessageHandler.cs" />
+    <Compile Include="LimitStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
