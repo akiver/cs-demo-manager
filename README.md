@@ -34,9 +34,9 @@ For starting parsing, you can call the ``ParseDemo``-Method of the parser. You c
 * The following Game-Events: 
  * Exploding / Starting / Stopping of the following Nades: 
    * Grenade (Position, Throwing player)
-   * Smoke (Position, Throwing player, when did it start, when did it stop)
-   * Fire (Position, ~~Throwing player~~, when did it start, when did it stop)
-   * Flash (Position, Throwing player, Flashed Players)
+    * Smoke (Position, Throwing player, when did it start, when did it stop)
+    * Fire (Position, ~~Throwing player~~, when did it start, when did it stop)
+    * Flash (Position, Throwing player, Flashed Players)
  * Weapon fired (Who fired, what weapon)
  * Player died (Weapon, Killer, Killed Person
  * Round-Restart if it's the first round
