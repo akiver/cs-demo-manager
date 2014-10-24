@@ -18,11 +18,11 @@ namespace DemoInfo.DP
 			orderby -parser.GetPriority()
 			select parser).ToArray();
 
-		public static void ParsePacket(byte[] data, DemoParser demo)
+		public static void ParsePacket(Stream stream, DemoParser demo)
         {
-            BinaryReader reader = new BinaryReader(new MemoryStream(data));
+			var reader = new BinaryReader(stream);
 
-            while (reader.BaseStream.Position < reader.BaseStream.Length)
+			while (stream.Position < stream.Length)
             {
                 int cmd = reader.ReadVarInt32();
 
