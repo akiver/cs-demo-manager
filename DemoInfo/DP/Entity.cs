@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP
 {
-    class Entity
+    internal class Entity
     {
         public int ID { get; set; }
         public ServerClass ServerClass { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DemoInfo.DP;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +19,8 @@ namespace DemoInfo
 
 		public float ViewDirectionX { get; set; }
 		public float ViewDirectionY { get; set; }
+
+		internal Entity Entity;
 
 		public bool IsAlive 
 		{

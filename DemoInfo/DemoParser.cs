@@ -107,7 +107,7 @@ namespace DemoInfo
 				//Console.WriteLine ("##" + type.ServerClass.Name);
 			}
 
-
+			
 			for (int i = 0; i < RawPlayers.Count; i++)
 			{
 				var rawPlayer = RawPlayers[i];
@@ -118,7 +118,6 @@ namespace DemoInfo
 
 				Entity entity = entites[i + 1];
 
-
 				if (entity.Properties.ContainsKey("m_vecOrigin"))
 				{
 					if (!Players.ContainsKey(id))
@@ -126,7 +125,7 @@ namespace DemoInfo
 
 					Player p = Players[id];
 					p.EntityID = entity.ID;
-
+					p.Entity = entity;
 
 					p.EntityID = entity.ID;
 					p.Position = (Vector)entity.Properties["m_vecOrigin"];
@@ -159,6 +158,8 @@ namespace DemoInfo
 				}
 
 			}
+
+			AttributeWeapons();
 
 			if (b)
 			{
@@ -228,6 +229,26 @@ namespace DemoInfo
 			var packet = reader.ReadVolvoPacket();
 
 			DemoPacketParser.ParsePacket(packet, this);
+		}
+		
+		private void AttributeWeapons()
+		{
+			foreach (var weapon in entites.Values.Where(a => a.ServerClass.Name == "CKnife"))
+			{
+				int weaponID = (int)weapon.Properties["m_hOwner"];
+
+				var players = Players.Values
+					.Select(a => a.Entity)
+					.Where(a => a.Properties.ContainsKey("m_hViewModel")).ToList();
+
+				var p = players[3];
+
+				var ent = players
+					.FirstOrDefault(a => (int)((object[])a.Properties["m_hViewModel"])[1] == weaponID);
+
+				if(ent != null)
+					Console.WriteLine("trololo");
+			}
 		}
 
 		#region EventCaller
