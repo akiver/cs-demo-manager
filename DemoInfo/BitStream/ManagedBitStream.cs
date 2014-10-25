@@ -57,12 +57,6 @@ namespace DemoInfo.BitStreamImpl
 			return result;
 		}
 
-		public int ReadSignedInt(int numBits)
-		{
-			// Read the int normally and then shift it back and forth to extend the sign bit.
-			return (((int)ReadInt(numBits)) << (32 - numBits)) >> (32 - numBits);
-		}
-
 		public uint PeekInt(int numBits)
 		{
 			Debug.Assert((Offset + numBits) <= (BitsInBuffer + (SLED * 8)));
@@ -96,54 +90,6 @@ namespace DemoInfo.BitStreamImpl
 			var ret = new byte[bytes];
 			for (int i = 0; i < bytes; i++)
 				ret[i] = ReadByte();
-			return ret;
-		}
-
-		public string ReadString()
-		{
-			return ReadString(Int32.MaxValue);
-		}
-
-		public string ReadString(int limit)
-		{
-			var result = new List<byte>(512);
-			for (int pos = 0; pos < limit; pos++) {
-				var b = ReadByte();
-				if ((b == 0) || (b == 10))
-					break;
-				result.Add(b);
-			}
-			return Encoding.ASCII.GetString(result.ToArray());
-		}
-
-		public uint ReadVarInt()
-		{
-			uint tmpByte = 0x80;
-			uint result = 0;
-			for (int count = 0; (tmpByte & 0x80) != 0; count++) {
-				if (count > 5)
-					throw new InvalidDataException("VarInt32 out of range");
-				tmpByte = ReadByte();
-				result |= (tmpByte & 0x7F) << (7 * count);
-			}
-			return result;
-		}
-
-		public uint ReadUBitInt()
-		{
-			uint ret = ReadInt(6);
-			switch (ret & (16 | 32))
-			{
-			case 16:
-				ret = (ret & 15) | (ReadInt(4) << 4);
-				break;
-			case 32:
-				ret = (ret & 15) | (ReadInt(8) << 4);
-				break;
-			case 48:
-				ret = (ret & 15) | (ReadInt(32 - 4) << 4);
-				break;
-			}
 			return ret;
 		}
 	}
