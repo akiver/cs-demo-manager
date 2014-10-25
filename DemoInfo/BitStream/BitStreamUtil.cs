@@ -3,6 +3,7 @@ using System.IO;
 using DemoInfo.BitStreamImpl;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace DemoInfo
 {
@@ -96,6 +97,11 @@ namespace DemoInfo
 			return result;
 		}
 
+		[Conditional("DEBUG")]
+		public static void AssertMaxBits(int max, int actual)
+		{
+			Debug.Assert(actual <= max, "trying to read too many bits", "Attempted to read {0} bits (max={1})", actual, max);
+		}
 	}
 }
 
