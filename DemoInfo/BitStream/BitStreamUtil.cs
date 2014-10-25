@@ -96,11 +96,6 @@ namespace DemoInfo
 			return result;
 		}
 
-		public static int ReadSignedInt(this IBitStream bs, int numBits)
-		{
-			// Read the int normally and then shift it back and forth to extend the sign bit.
-			return (((int)bs.ReadInt(numBits)) << (32 - numBits)) >> (32 - numBits);
-		}
 	}
 }
 

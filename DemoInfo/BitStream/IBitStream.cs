@@ -9,6 +9,7 @@ namespace DemoInfo
 
 		uint ReadInt(int bits);
 		uint PeekInt(int bits);
+		int ReadSignedInt(int numBits);
 		bool ReadBit();
 		byte ReadByte();
 		byte ReadByte(int bits);

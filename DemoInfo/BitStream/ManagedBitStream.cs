@@ -11,11 +11,6 @@ namespace DemoInfo.BitStreamImpl
 		private static readonly int SLED = 4;
 		private static readonly int BUFSIZE = 2048 + SLED;
 
-		/// <summary>
-		/// Gets the current position in bits.
-		/// </summary>
-		/// <value>The position in bits.</value>
-		public int Position { get; private set; }
 		private int Offset;
 		private Stream Underlying;
 		private readonly byte[] Buffer = new byte[BUFSIZE];
@@ -68,6 +63,16 @@ namespace DemoInfo.BitStreamImpl
 
 
 			return (uint)((BitConverter.ToUInt64(Buffer, (Offset / 8) & ~3) << ((8 * 8) - (Offset % (8 * 4)) - numBits)) >> ((8 * 8) - numBits));
+		}
+
+		public int ReadSignedInt(int numBits)
+		{
+			BitStreamUtil.AssertMaxBits(32, numBits);
+
+			// Just like PeekInt, but we cast to signed long before the shr because we need to sext
+			var result = (int)(((long)(BitConverter.ToUInt64(Buffer, (Offset / 8) & ~3) << ((8 * 8) - (Offset % (8 * 4)) - numBits))) >> ((8 * 8) - numBits));
+			Advance(numBits);
+			return result;
 		}
 
 		public bool ReadBit()
