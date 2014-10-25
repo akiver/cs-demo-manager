@@ -24,7 +24,9 @@ namespace DemoInfo
 			var bs1 = new BitArrayStream(data);
 			var bs2 = new ManagedBitStream();
 			bs2.Initialize(new MemoryStream(data));
-			return new DebugBitStream(bs1, bs2);
+			var bs3 = new UnsafeBitStream();
+			bs3.Initialize(new MemoryStream(data));
+			return new DebugBitStream(bs1, new DebugBitStream(bs2, bs3));
 			#else
 			var bs = new ManagedBitStream();
 			bs.Initialize(stream);
@@ -38,10 +40,12 @@ namespace DemoInfo
 		public static IBitStream Create(byte[] data)
 		{
 			#if DEBUG
-			var bs1 = new ManagedBitStream();
-			bs1.Initialize(new MemoryStream(data));
-			var bs2 = new BitArrayStream(data);
-			return new DebugBitStream(bs1, bs2);
+			var bs1 = new BitArrayStream(data);
+			var bs2 = new ManagedBitStream();
+			bs2.Initialize(new MemoryStream(data));
+			var bs3 = new UnsafeBitStream();
+			bs3.Initialize(new MemoryStream(data));
+			return new DebugBitStream(bs1, new DebugBitStream(bs2, bs3));
 			#else
 			var bs = new ManagedBitStream();
 			bs.Initialize(new MemoryStream(data));

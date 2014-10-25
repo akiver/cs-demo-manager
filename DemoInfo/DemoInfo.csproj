@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
@@ -73,6 +75,7 @@
     <Compile Include="BitStream\ManagedBitStream.cs" />
     <Compile Include="BitStream\DebugBitStream.cs" />
     <Compile Include="BitStream\IBitStream.cs" />
+    <Compile Include="BitStream\UnsafeBitStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
