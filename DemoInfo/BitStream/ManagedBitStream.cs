@@ -28,17 +28,12 @@ namespace DemoInfo.BitStreamImpl
 			RefillBuffer();
 
 			Offset = SLED * 8;
-			Position = 0;
-			/*Position = -(8 * 8);
-			Advance(4 * 8);
-			Advance(4 * 8);*/
 		}
 
 		private void Advance(int howMuch)
 		{
 			Debug.Assert(howMuch <= (SLED * 8));
 
-			Position += howMuch;
 			Offset += howMuch;
 			if (Offset >= BitsInBuffer)
 				RefillBuffer();
