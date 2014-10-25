@@ -3,7 +3,7 @@ using System.IO;
 
 namespace DemoInfo
 {
-	public interface IBitStream
+	public interface IBitStream : IDisposable
 	{
 		void Initialize(Stream stream);
 

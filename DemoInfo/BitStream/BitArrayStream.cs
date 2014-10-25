@@ -115,5 +115,10 @@ namespace DemoInfo.BitStreamImpl
 			// Read the int normally and then shift it back and forth to extend the sign bit.
 			return (((int)ReadInt(numBits)) << (32 - numBits)) >> (32 - numBits);
 		}
+
+		void IDisposable.Dispose()
+		{
+			array = null;
+		}
     }
 }

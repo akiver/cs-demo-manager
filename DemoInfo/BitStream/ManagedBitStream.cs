@@ -99,6 +99,10 @@ namespace DemoInfo.BitStreamImpl
 				ret[i] = ReadByte();
 			return ret;
 		}
+
+		void IDisposable.Dispose()
+		{
+		}
 	}
 }
 

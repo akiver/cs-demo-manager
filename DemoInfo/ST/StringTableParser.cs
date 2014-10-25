@@ -11,16 +11,15 @@ namespace DemoInfo.ST
     {
 		public void ParsePacket(Stream stream, DemoParser parser)
         {
-			IBitStream reader = BitStreamUtil.Create(stream);
+			using (IBitStream reader = BitStreamUtil.Create(stream)) {
+				int numTables = reader.ReadByte();
 
-            int numTables = reader.ReadByte();
+				for (int i = 0; i < numTables; i++) {
+					string tableName = reader.ReadString();
 
-            for (int i = 0; i < numTables; i++)
-            {
-                string tableName = reader.ReadString();
-
-				ParseStringTable(reader, tableName == "userinfo", parser);
-            }
+					ParseStringTable(reader, tableName == "userinfo", parser);
+				}
+			}
         }
 
 		public void ParseStringTable(IBitStream reader, bool isUserInfo, DemoParser parser)

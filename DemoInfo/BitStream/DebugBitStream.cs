@@ -18,6 +18,12 @@ namespace DemoInfo.BitStreamImpl
 			throw new NotImplementedException();
 		}
 
+		void IDisposable.Dispose()
+		{
+			A.Dispose();
+			B.Dispose();
+		}
+
 		private void Verify<T>(T a, T b)
 		{
 			if (!a.Equals(b)) {
