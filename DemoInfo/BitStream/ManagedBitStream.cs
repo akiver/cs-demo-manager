@@ -27,7 +27,7 @@ namespace DemoInfo.BitStreamImpl
 
 		private void Advance(int howMuch)
 		{
-			Debug.Assert(howMuch <= (SLED * 8), "can't advance that far!");
+			Debug.Assert(howMuch <= (SLED * 8), "can't advance that far!", "howMuch={0} Offset={1} BitsInBuffer={2}", howMuch, Offset, BitsInBuffer);
 
 			Offset += howMuch;
 			if (Offset >= BitsInBuffer)
@@ -55,7 +55,7 @@ namespace DemoInfo.BitStreamImpl
 		public uint PeekInt(int numBits)
 		{
 			BitStreamUtil.AssertMaxBits(32, numBits);
-			Debug.Assert((Offset + numBits) <= (BitsInBuffer + (SLED * 8)), "gg", "This code just fell apart. We're all dead.");
+			Debug.Assert((Offset + numBits) <= (BitsInBuffer + (SLED * 8)), "gg", "This code just fell apart. We're all dead. Offset={0} numBits={1} BitsInBuffer={2}", Offset, numBits, BitsInBuffer);
 
 
 			// _      xxxnno      _
