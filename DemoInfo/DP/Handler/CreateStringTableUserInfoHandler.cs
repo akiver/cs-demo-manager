@@ -1,5 +1,4 @@
 ﻿using DemoInfo.Messages;
-using demoinfosharp;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -26,7 +25,7 @@ namespace DemoInfo.DP.Handler
 
         public void ParseStringTableUpdate(CSVCMsg_CreateStringTable table, DemoParser parser)
         {
-            BitArrayStream reader = new BitArrayStream(table.string_data);
+			IBitStream reader = BitStreamUtil.Create(table.string_data);
 
             if (reader.ReadBit())
                 throw new NotImplementedException("Encoded with dictionaries, unable to decode");

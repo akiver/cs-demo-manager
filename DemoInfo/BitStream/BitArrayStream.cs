@@ -6,19 +6,33 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 
-namespace demoinfosharp
+namespace DemoInfo.BitStreamImpl
 {
-    public class BitArrayStream
+	public class BitArrayStream : IBitStream
     {
         BitArray array;
 
 		public int Position { get; private set; }
 
+		public BitArrayStream()
+		{
+		}
+
         public BitArrayStream(byte[] data)
-        {
-            array = new BitArray(data);
+		{
+			array = new BitArray(data);
 			Position = 0;
-        }
+		}
+
+		public void Initialize(Stream stream)
+		{
+			using (var memstream = new MemoryStream(checked((int)stream.Length))) {
+				stream.CopyTo(memstream);
+				array = new BitArray(memstream.GetBuffer());
+			}
+
+			Position = 0;
+		}
 
         public void Seek(int pos, SeekOrigin origin)
         {
