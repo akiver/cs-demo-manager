@@ -19,6 +19,8 @@ namespace DemoInfo
 
 		public event EventHandler<MatchStartedEventArgs> MatchStarted;
 
+		public event EventHandler<RoundStartedEventArgs> RoundStart;
+
 		public event EventHandler<TickDoneEventArgs> TickDone;
 
 		public event EventHandler<PlayerKilledEventArgs> PlayerKilled;
@@ -266,6 +268,13 @@ namespace DemoInfo
 				MatchStarted(this, new MatchStartedEventArgs());
 		}
 
+		public void RaiseRoundStart()
+		{
+			if (RoundStart != null)
+				RoundStart(this, new RoundStartedEventArgs());
+
+		}
+
 		internal void RaisePlayerKilled(PlayerKilledEventArgs kill)
 		{
 			if (PlayerKilled != null)
@@ -277,6 +286,7 @@ namespace DemoInfo
 			if (WeaponFired != null)
 				WeaponFired(this, fire);
 		}
+
 
 		internal void RaiseSmokeStart(SmokeEventArgs args)
 		{
@@ -349,7 +359,6 @@ namespace DemoInfo
 			if (NadeReachedTarget != null)
 				NadeReachedTarget(this, args);
 		}
-
 		#endregion
 	}
 }

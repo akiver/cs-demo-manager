@@ -15,7 +15,7 @@ namespace DemoInfo.DP.Handler
             return message is CSVCMsg_GameEventList || message is CSVCMsg_GameEvent;
         }
 
-        List<CSVCMsg_GameEventList.descriptor_t> descriptors = null;
+		Dictionary<int, CSVCMsg_GameEventList.descriptor_t> descriptors = null;
 
         List<string> occuredEvents = new List<string>();
 
@@ -25,7 +25,11 @@ namespace DemoInfo.DP.Handler
         {
             if (message is CSVCMsg_GameEventList)
             {
-                descriptors = ((CSVCMsg_GameEventList)message).descriptors;
+				descriptors = new Dictionary<int, CSVCMsg_GameEventList.descriptor_t>();
+
+				foreach (var d in ((CSVCMsg_GameEventList)message).descriptors) {
+					descriptors[d.eventid] = d;
+				}
                 return;
             }
 
@@ -36,11 +40,17 @@ namespace DemoInfo.DP.Handler
             if (!occuredEvents.Contains(eventDescriptor.name))
             {
                 occuredEvents.Add(eventDescriptor.name);
-                Debug.WriteLine(eventDescriptor.name);
+//				Console.WriteLine(eventDescriptor.name);
+//				foreach (var line in MapData(eventDescriptor, rawEvent)) {
+//					Console.WriteLine("  {0}: {1}", line.Key, line.Value);
+//				}
             }
 
-            if (eventDescriptor.name == "round_announce_match_start")
-                parser.RaiseMatchStarted();
+			if (eventDescriptor.name == "round_start")
+				parser.RaiseRoundStart();
+
+			if (eventDescriptor.name == "round_announce_match_start")
+				parser.RaiseMatchStarted();
 
 			foreach (var d in rawEvent.keys) {
 				GetData (d);
