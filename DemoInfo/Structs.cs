@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DemoInfo
 {
-    public struct DemoHeader
+	public class DemoHeader
     {
         const int MAX_OSPATH = 260;
 
@@ -43,7 +43,7 @@ namespace DemoInfo
         }
     }
 
-    public struct Vector
+	public class Vector
     {
         public float X { get; set; }
         public float Y { get; set; }
@@ -65,7 +65,7 @@ namespace DemoInfo
         }
     }
 
-    struct QAngle
+	class QAngle
     {
         public float X { get; private set; }
         public float Y { get; private set; }
@@ -84,7 +84,7 @@ namespace DemoInfo
 
     
 
-    struct Split
+	class Split
     {
         const int FDEMO_NORMAL = 0, FDEMO_USE_ORIGIN2 = 1, FDEMO_USE_ANGLES2 = 2, FDEMO_NOINTERP = 4;
 
@@ -119,7 +119,7 @@ namespace DemoInfo
         }
     }
 
-    struct CommandInfo
+	class CommandInfo
     {
         public Split[] u { get; private set; }
 
