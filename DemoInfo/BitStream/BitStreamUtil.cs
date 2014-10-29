@@ -10,7 +10,7 @@ namespace DemoInfo
 	public static class BitStreamUtil
 	{
 		/// <summary>
-		/// Creates an instance of the preferred <see cref="BitStream"/> implementation for streams.
+		/// Creates an instance of the preferred <see cref="IBitStream"/> implementation for streams.
 		/// </summary>
 		public static IBitStream Create(Stream stream)
 		{
@@ -35,7 +35,7 @@ namespace DemoInfo
 		}
 
 		/// <summary>
-		/// Creates an instance of the preferred <see cref="BitStream"/> implementation for byte arrays.
+		/// Creates an instance of the preferred <see cref="IBitStream"/> implementation for byte arrays.
 		/// </summary>
 		public static IBitStream Create(byte[] data)
 		{
