@@ -167,7 +167,7 @@ namespace DemoInfo
 
 			}
 
-			AttributeWeapons();
+			//AttributeWeapons();
 
 			if (b)
 			{
