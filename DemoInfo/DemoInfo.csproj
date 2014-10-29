@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -29,6 +30,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="protobuf-net">
@@ -43,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BitArrayStream.cs" />
     <Compile Include="DemoParser.cs" />
     <Compile Include="DP\DemoPacketParser.cs" />
     <Compile Include="DP\Entity.cs" />
@@ -69,6 +70,12 @@
     <Compile Include="ST\StringTableParser.cs" />
     <Compile Include="DP\Handler\UserMessageHandler.cs" />
     <Compile Include="LimitStream.cs" />
+    <Compile Include="BitStream\BitArrayStream.cs" />
+    <Compile Include="BitStream\BitStreamUtil.cs" />
+    <Compile Include="BitStream\ManagedBitStream.cs" />
+    <Compile Include="BitStream\DebugBitStream.cs" />
+    <Compile Include="BitStream\IBitStream.cs" />
+    <Compile Include="BitStream\UnsafeBitStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -85,4 +92,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="BitStream\" />
+  </ItemGroup>
 </Project>

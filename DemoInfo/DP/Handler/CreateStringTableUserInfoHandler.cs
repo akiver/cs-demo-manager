@@ -1,5 +1,4 @@
 ﻿using DemoInfo.Messages;
-using demoinfosharp;
 using ProtoBuf;
 using System;
 using System.Collections.Generic;
@@ -26,89 +25,78 @@ namespace DemoInfo.DP.Handler
 
         public void ParseStringTableUpdate(CSVCMsg_CreateStringTable table, DemoParser parser)
         {
-            BitArrayStream reader = new BitArrayStream(table.string_data);
+			using (IBitStream reader = BitStreamUtil.Create(table.string_data)) {
+				if (reader.ReadBit())
+					throw new NotImplementedException("Encoded with dictionaries, unable to decode");
 
-            if (reader.ReadBit())
-                throw new NotImplementedException("Encoded with dictionaries, unable to decode");
-
-            int nTemp = table.max_entries;
-            int nEntryBits = 0;
-	        while ((nTemp >>= 1) != 0) ++nEntryBits;
+				int nTemp = table.max_entries;
+				int nEntryBits = 0;
+				while ((nTemp >>= 1) != 0)
+					++nEntryBits;
 
 
-            List<string> history = new List<string>();
+				List<string> history = new List<string>();
 
-            int lastEntry = -1;
+				int lastEntry = -1;
 	
-            for (int i = 0; i < table.num_entries; i++)
-            {
-                int entryIndex = lastEntry + 1;
-                //read in the entity-index
-                if (!reader.ReadBit())
-                {
-                    entryIndex = (int)reader.ReadInt(nEntryBits);
-                }
+				for (int i = 0; i < table.num_entries; i++) {
+					int entryIndex = lastEntry + 1;
+					// read in the entity-index
+					if (!reader.ReadBit()) {
+						entryIndex = (int)reader.ReadInt(nEntryBits);
+					}
 
-                lastEntry = entryIndex;
+					lastEntry = entryIndex;
 
-                //Read the name of the string into entry. 
-                string entry = "";
-                if (entryIndex < 0 || entryIndex >= table.max_entries)
-                {
-                    throw new InvalidDataException("bogus string index");
-                }
+					// Read the name of the string into entry.
+					string entry = "";
+					if (entryIndex < 0 || entryIndex >= table.max_entries) {
+						throw new InvalidDataException("bogus string index");
+					}
 
-                if (reader.ReadBit())
-                {
-                    bool substringcheck = reader.ReadBit();
+					if (reader.ReadBit()) {
+						bool substringcheck = reader.ReadBit();
 
-                    if (substringcheck)
-                    {
-                        int index = (int)reader.ReadInt(5);
-                        int bytestocopy = (int)reader.ReadInt(5);
+						if (substringcheck) {
+							int index = (int)reader.ReadInt(5);
+							int bytestocopy = (int)reader.ReadInt(5);
 
-                        entry = history[index].Substring(0, bytestocopy);
+							entry = history[index].Substring(0, bytestocopy);
 
-                        entry += reader.ReadString(1024); ;
-                    }
-                    else
-                    {
-                        entry = reader.ReadString(1024);
-                    }
-                }
+							entry += reader.ReadString(1024);
+						} else {
+							entry = reader.ReadString(1024);
+						}
+					}
 
-                if (entry == null)
-                    entry = "";
+					if (entry == null)
+						entry = "";
 
-                // Read in the user data.
-                byte[] userdata = new byte[0];
-                if (reader.ReadBit())
-                {
-                    if (table.user_data_fixed_size)
-                    {
-                        userdata = reader.ReadBytes(table.user_data_size);
-                    }
-                    else
-                    {
-                        int bytesToRead = (int)reader.ReadInt(14);
+					// Read in the user data.
+					byte[] userdata = new byte[0];
+					if (reader.ReadBit()) {
+						if (table.user_data_fixed_size) {
+							userdata = reader.ReadBytes(table.user_data_size);
+						} else {
+							int bytesToRead = (int)reader.ReadInt(14);
 
-                        userdata = reader.ReadBytes(bytesToRead);
-                    }
-                }
+							userdata = reader.ReadBytes(bytesToRead);
+						}
+					}
 
-                if (userdata.Length == 0)
-                    break;
+					if (userdata.Length == 0)
+						break;
 
-                //Now we'll parse the players out of it.
-                BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
-                PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
+					// Now we'll parse the players out of it.
+					BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
+					PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
 
-                if (entryIndex < parser.RawPlayers.Count)
-                    parser.RawPlayers[entryIndex] = info;
-                else
-                    parser.RawPlayers.Add(info);
-            }
-
+					if (entryIndex < parser.RawPlayers.Count)
+						parser.RawPlayers[entryIndex] = info;
+					else
+						parser.RawPlayers.Add(info);
+				}
+			}
         }
 
         public int GetPriority()

@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DemoInfo.DT;
-using demoinfosharp;
 
 namespace DemoInfo.DP.Handler
 {
     static class PropDecoder
     {
-        public static object DecodeProp(FlattenedPropEntry prop, BitArrayStream stream)
+        public static object DecodeProp(FlattenedPropEntry prop, IBitStream stream)
         {
             var sendProp = prop.Prop;
             switch (sendProp.Type)
@@ -34,7 +33,7 @@ namespace DemoInfo.DP.Handler
             }
         }
 
-        static int DecodeInt(SendTableProperty prop, BitArrayStream reader)
+        static int DecodeInt(SendTableProperty prop, IBitStream reader)
         {
             if (prop.Flags.HasFlag(SendPropertyFlags.VarInt))
             {
@@ -61,7 +60,7 @@ namespace DemoInfo.DP.Handler
             }
         }
 
-        static float DecodeFloat(SendTableProperty prop, BitArrayStream reader)
+        static float DecodeFloat(SendTableProperty prop, IBitStream reader)
         {
             float fVal = 0.0f;
             ulong dwInterp;
@@ -79,7 +78,7 @@ namespace DemoInfo.DP.Handler
             return fVal;
         }
 
-        static Vector DecodeVector(SendTableProperty prop, BitArrayStream reader)
+        static Vector DecodeVector(SendTableProperty prop, IBitStream reader)
         {
             if (prop.Flags.HasFlag(SendPropertyFlags.Normal))
             {
@@ -117,7 +116,7 @@ namespace DemoInfo.DP.Handler
             return v;
         }
 
-        static object[] DecodeArray(FlattenedPropEntry flattenedProp, int numElements, BitArrayStream reader)
+        static object[] DecodeArray(FlattenedPropEntry flattenedProp, int numElements, IBitStream reader)
         {
             int maxElements = numElements;
 
@@ -141,12 +140,12 @@ namespace DemoInfo.DP.Handler
             return result;
         }
 
-        static string DecodeString(SendTableProperty prop, BitArrayStream reader)
+        static string DecodeString(SendTableProperty prop, IBitStream reader)
         {
             return Encoding.Default.GetString(reader.ReadBytes((int)reader.ReadInt(9)));
         }
 
-        static Vector DecodeVectorXY(SendTableProperty prop, BitArrayStream reader )
+        static Vector DecodeVectorXY(SendTableProperty prop, IBitStream reader )
         {
             Vector v = new Vector();
             v.X = DecodeFloat(prop, reader);
@@ -156,7 +155,7 @@ namespace DemoInfo.DP.Handler
        } 
 
         #region Float-Stuff
-        static bool DecodeSpecialFloat(SendTableProperty prop, BitArrayStream reader, out float result)
+        static bool DecodeSpecialFloat(SendTableProperty prop, IBitStream reader, out float result)
         {
             if (prop.Flags.HasFlag(SendPropertyFlags.Coord))
             {
@@ -216,7 +215,7 @@ namespace DemoInfo.DP.Handler
         static readonly float COORD_DENOMINATOR_LOWPRECISION = (1<<(COORD_FRACTIONAL_BITS_MP_LOWPRECISION));
         static readonly float COORD_RESOLUTION_LOWPRECISION = (1.0f / (COORD_DENOMINATOR_LOWPRECISION));
 
-        static float ReadBitCoord(BitArrayStream reader)
+        static float ReadBitCoord(IBitStream reader)
         {
             int intVal, fractVal;
             float value = 0;
@@ -256,7 +255,7 @@ namespace DemoInfo.DP.Handler
             return value;
         }
 
-        static float ReadBitCoordMP(BitArrayStream reader, bool isIntegral, bool isLowPrecision)
+        static float ReadBitCoordMP(IBitStream reader, bool isIntegral, bool isLowPrecision)
         {
             int intval = 0, fractval = 0;
             float value = 0.0f;
@@ -326,7 +325,7 @@ namespace DemoInfo.DP.Handler
             return value;
         }
 
-        static float ReadBitCellCoord(BitArrayStream reader, int bits, bool lowPrecision, bool integral)
+        static float ReadBitCellCoord(IBitStream reader, int bits, bool lowPrecision, bool integral)
         {
             int intval = 0, fractval = 0;
             float value = 0.0f;
@@ -352,7 +351,7 @@ namespace DemoInfo.DP.Handler
         static readonly int NORMAL_DENOMINATOR = ((1 << (NORMAL_FRACTIONAL_BITS)) - 1);
         static readonly float NORMAL_RESOLUTION = (1.0f / (NORMAL_DENOMINATOR));
 
-        static float ReadBitNormal(BitArrayStream reader)
+        static float ReadBitNormal(IBitStream reader)
         {
             bool isNegative = reader.ReadBit();
 

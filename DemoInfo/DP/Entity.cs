@@ -1,6 +1,5 @@
 ﻿using DemoInfo.DP.Handler;
 using DemoInfo.DT;
-using demoinfosharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,7 +23,7 @@ namespace DemoInfo.DP
             this.ServerClass = serverClass;
         }
 
-        public void ApplyUpdate(BitArrayStream reader)
+        public void ApplyUpdate(IBitStream reader)
         {
             var updates = ReadUpdatedFileds(reader).ToList();
 
@@ -35,7 +34,7 @@ namespace DemoInfo.DP
             }
         }
 
-        private IEnumerable<FlattenedPropEntry> ReadUpdatedFileds(BitArrayStream reader)
+        private IEnumerable<FlattenedPropEntry> ReadUpdatedFileds(IBitStream reader)
         {
             bool newWay = reader.ReadBit();
 
@@ -56,7 +55,7 @@ namespace DemoInfo.DP
             return fieldIndicies.Select(a => ServerClass.flattenedProps[a]);
         }
 
-        int ReadFieldIndex(BitArrayStream reader, int lastIndex, bool bNewWay)
+        int ReadFieldIndex(IBitStream reader, int lastIndex, bool bNewWay)
         {
             if (bNewWay)
             {

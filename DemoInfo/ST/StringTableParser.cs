@@ -1,5 +1,4 @@
-﻿using demoinfosharp;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,25 +11,18 @@ namespace DemoInfo.ST
     {
 		public void ParsePacket(Stream stream, DemoParser parser)
         {
-			// This is where the optimization ends.
-			// Once it becomes a bottleneck, we can still reimplement a Stream version of BitArray.
-			BitArrayStream reader;
-			using (var memstream = new MemoryStream(checked((int)stream.Length))) {
-				stream.CopyTo(memstream);
-				reader = new BitArrayStream(memstream.GetBuffer());
+			using (IBitStream reader = BitStreamUtil.Create(stream)) {
+				int numTables = reader.ReadByte();
+
+				for (int i = 0; i < numTables; i++) {
+					string tableName = reader.ReadString();
+
+					ParseStringTable(reader, tableName == "userinfo", parser);
+				}
 			}
-
-            int numTables = reader.ReadByte();
-
-            for (int i = 0; i < numTables; i++)
-            {
-                string tableName = reader.ReadString();
-
-				ParseStringTable(reader, tableName == "userinfo", parser);
-            }
         }
 
-		public void ParseStringTable(BitArrayStream reader, bool isUserInfo, DemoParser parser)
+		public void ParseStringTable(IBitStream reader, bool isUserInfo, DemoParser parser)
         {
 			if (isUserInfo)
 				parser.RawPlayers.Clear();

@@ -6,19 +6,33 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
 
-namespace demoinfosharp
+namespace DemoInfo.BitStreamImpl
 {
-    public class BitArrayStream
+	public class BitArrayStream : IBitStream
     {
         BitArray array;
 
 		public int Position { get; private set; }
 
+		public BitArrayStream()
+		{
+		}
+
         public BitArrayStream(byte[] data)
-        {
-            array = new BitArray(data);
+		{
+			array = new BitArray(data);
 			Position = 0;
-        }
+		}
+
+		public void Initialize(Stream stream)
+		{
+			using (var memstream = new MemoryStream(checked((int)stream.Length))) {
+				stream.CopyTo(memstream);
+				array = new BitArray(memstream.GetBuffer());
+			}
+
+			Position = 0;
+		}
 
         public void Seek(int pos, SeekOrigin origin)
         {
@@ -38,14 +52,6 @@ namespace demoinfosharp
             Position += numBits;
 
             return result;
-        }
-
-        public int ReadSignedInt(int numBits)
-        {
-            int nRet = (int)ReadInt(numBits);
-
-
-            return (nRet << (32 - numBits)) >> (32 - numBits);
         }
 
         public uint PeekInt(int numBits)
@@ -73,7 +79,6 @@ namespace demoinfosharp
 
         public byte ReadByte(int numBits)
         {
-            
             return (byte)ReadInt(numBits);
         }
 
@@ -87,78 +92,6 @@ namespace demoinfosharp
             }
 
             return result;
-        }
-
-        public string ReadString(int size)
-        {
-            List<byte> result = new List<byte>(512);
-            int pos=0;
-            while (true)
-            {
-                byte a = ReadByte();
-                if (a == 0)
-                    break;
-                else if (a == 10)
-                    break;
-
-                result.Add(a);
-
-                if (++pos == size)
-                {
-                    break;
-                }
-            }
-
-            return Encoding.ASCII.GetString(result.ToArray());
-        }
-
-        public string ReadString()
-        {
-            return ReadString(int.MaxValue);
-        }
-
-        public uint ReadVarInt()
-        {
-            int count = 0;
-            uint result = 0;
-
-            while(true)
-            {
-                if (count > 5)
-                    throw new InvalidDataException("VarInt32 out of range");
-
-
-                uint tmpByte = ReadByte();
-
-                result |= (tmpByte & 0x7F) << (7 * count);
-
-
-                if ((tmpByte & 0x80) == 0)
-                    break;
-
-                count++;
-            }
-
-            return result;
-        }
-
-        public uint ReadUBitInt()
-        {
-            uint ret = ReadInt(6);
-            switch (ret & (16 | 32))
-            {
-                case 16:
-                    ret = (ret & 15) | (ReadInt(4) << 4);
-                    break;
-
-                case 32:
-                    ret = (ret & 15) | (ReadInt(8) << 4);
-                    break;
-                case 48:
-                    ret = (ret & 15) | (ReadInt(32 - 4) << 4);
-                    break;
-            }
-            return ret;
         }
 
         public string PeekBools(int length)
@@ -177,6 +110,15 @@ namespace demoinfosharp
             return Encoding.ASCII.GetString(buffer, 0, Math.Min(length, array.Count - Position));
         }
 
-        
+		public int ReadSignedInt(int numBits)
+		{
+			// Read the int normally and then shift it back and forth to extend the sign bit.
+			return (((int)ReadInt(numBits)) << (32 - numBits)) >> (32 - numBits);
+		}
+
+		void IDisposable.Dispose()
+		{
+			array = null;
+		}
     }
 }
