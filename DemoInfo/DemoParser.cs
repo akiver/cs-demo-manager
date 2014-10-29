@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
 
 namespace DemoInfo
 {
@@ -257,7 +258,7 @@ namespace DemoInfo
 					.FirstOrDefault(a => (int)((object[])a.Properties["m_hViewModel"])[1] == weaponID);
 
 				if(ent != null)
-					Console.WriteLine("trololo");
+					Trace.WriteLine("ent is null and we somehow didn't expect this? srsly dude, this message...", "DemoParser.AttributeWeapons()");
 			}
 		}
 

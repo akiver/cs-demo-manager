@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace DemoInfo
 {
@@ -283,7 +284,7 @@ namespace DemoInfo
                     weapon = EquipmentElement.USP;
                     break;
                 default:
-                    Console.WriteLine("Unknown weapon. " + OriginalString);
+					Trace.WriteLine("Unknown weapon. " + OriginalString, "Equipment.MapEquipment()");
                     break;
 				}
 			}

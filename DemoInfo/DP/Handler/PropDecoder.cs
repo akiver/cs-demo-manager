@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 using DemoInfo.DT;
 
 namespace DemoInfo.DP.Handler
@@ -43,7 +44,7 @@ namespace DemoInfo.DP.Handler
                 }
                 else
                 {
-                    Console.WriteLine("warning");
+					Trace.WriteLine("signed varints are not implemented. BAAAAAAD.", "PropDecoder:DecodeInt()");
                     return (int)reader.ReadVarInt();
                 }
             }
