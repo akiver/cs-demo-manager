@@ -17,7 +17,6 @@ namespace DemoInfo.DP.Handler
             {
                 case SendPropertyType.Int:
                     return DecodeInt(sendProp, stream);
-                    break;
                 case SendPropertyType.Float:
                     return DecodeFloat(sendProp, stream);
                 case SendPropertyType.Vector:

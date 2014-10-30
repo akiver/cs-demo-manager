@@ -196,7 +196,7 @@ namespace DemoInfo
 			DemoCommand command = (DemoCommand)reader.ReadByte();
 
 			int TickNum = reader.ReadInt32();
-			int playerSlot = reader.ReadByte();
+			reader.ReadByte(); // player slot
 
 			this.CurrrentTick = TickNum;
 
@@ -234,9 +234,9 @@ namespace DemoInfo
 
 		private void ParseDemoPacket()
 		{
-			CommandInfo info = CommandInfo.Parse(reader);
-			int SeqNrIn = reader.ReadInt32();
-			int SeqNrOut = reader.ReadInt32();
+			CommandInfo.Parse(reader);
+			reader.ReadInt32(); // SeqNrIn
+			reader.ReadInt32(); // SeqNrOut
 
 			using (var volvo = reader.ReadVolvoPacket())
 				DemoPacketParser.ParsePacket(volvo, this);

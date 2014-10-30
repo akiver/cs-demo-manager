@@ -58,7 +58,7 @@ namespace DemoInfo.ST
 		        int numstrings = (int)reader.ReadInt(16);
 		        for ( int i = 0 ; i < numstrings; i++ )
 		        {
-			        string stringname = reader.ReadString();
+			        reader.ReadString(); // stringname
 
 			        if ( reader.ReadBit() )
 			        {
