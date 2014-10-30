@@ -46,14 +46,21 @@ namespace DemoInfo
 		{
 			var data = new byte[count];
 			int offset = 0;
-			while ((offset += Read(data, offset, count - offset)) < count) ;
+			while (offset < count) {
+				int thisTime = Read(data, offset, count - offset);
+				if (thisTime == 0)
+					throw new EndOfStreamException();
+				offset += thisTime;
+			}
 			return data;
 		}
 
 		public override int Read(byte[] buffer, int offset, int count)
 		{
-			_Position += count = checked((int)Math.Min(count, Length - _Position)); // should never throw (count <= int_max)
-			return Underlying.Read(buffer, offset, count);
+			count = checked((int)Math.Min(count, Length - _Position)); // should never throw (count <= int_max)
+			int ret = Underlying.Read(buffer, offset, count);
+			_Position += ret;
+			return ret;
 		}
 
 		public override long Seek(long offset, SeekOrigin origin)
