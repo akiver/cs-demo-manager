@@ -153,7 +153,7 @@ namespace DemoInfo
 					p.SteamID = rawPlayer.XUID;
 
 					if (entity.Properties.ContainsKey("m_angEyeAngles[1]"))
-						p.ViewDirectionX = (float)entity.Properties["m_angEyeAngles[1]"] + 90;
+						p.ViewDirectionX = (float)entity.Properties["m_angEyeAngles[1]"];
 
 					if (entity.Properties.ContainsKey("m_angEyeAngles[0]"))
 						p.ViewDirectionY = (float)entity.Properties["m_angEyeAngles[0]"];
