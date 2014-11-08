@@ -10,7 +10,7 @@ namespace DemoInfo
     public class Player
     {
         public string Name { get; set; }
-        public int SteamID { get; set; }
+        public long SteamID { get; set; }
         public Vector Position { get; set; }
         public int EntityID { get; set; }
 		public int HP { get; set; }
