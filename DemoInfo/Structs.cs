@@ -49,6 +49,14 @@ namespace DemoInfo
         public float Y { get; set; }
         public float Z { get; set; }
 
+		public double Angle2D
+		{
+			get
+			{
+				return Math.Atan2(this.Y, this.X); 
+			}
+		}
+
         public static Vector Parse(BinaryReader reader)
         {
             return new Vector
@@ -58,6 +66,16 @@ namespace DemoInfo
                 Z = reader.ReadSingle(),
             };
         }
+
+		public static Vector operator + (Vector a, Vector b)
+		{
+			return new Vector() {X = a.X + b.X, Y = a.Y + b.Y, Z = a.Z + b.Z };
+		}
+
+		public static Vector operator - (Vector a, Vector b)
+		{
+			return new Vector() {X = a.X - b.X, Y = a.Y - b.Y, Z = a.Z - b.Z };
+		}
 
         public override string ToString()
         {
