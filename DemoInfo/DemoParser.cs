@@ -156,6 +156,11 @@ namespace DemoInfo
 					p.Name = rawPlayer.Name;
 					p.SteamID = rawPlayer.XUID;
 
+					p.Velocity = new Vector();
+					p.Velocity.X = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[0]", 0f);
+					p.Velocity.Y = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[1]", 0f);
+					p.Velocity.Z = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[2]", 0f);
+
 					if (entity.Properties.ContainsKey("m_angEyeAngles[1]"))
 						p.ViewDirectionX = (float)entity.Properties["m_angEyeAngles[1]"];
 

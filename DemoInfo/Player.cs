@@ -16,6 +16,7 @@ namespace DemoInfo
 		public int HP { get; set; }
 
 		public Vector LastAlivePosition { get; set; }
+		public Vector Velocity { get; set; }
 
 		public float ViewDirectionX { get; set; }
 		public float ViewDirectionY { get; set; }
