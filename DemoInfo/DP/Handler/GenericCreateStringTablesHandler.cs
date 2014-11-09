@@ -18,9 +18,6 @@ namespace DemoInfo.DP.Handler
             parser.stringTables.Add((Messages.CSVCMsg_CreateStringTable)message);
         }
 
-        public int GetPriority()
-        {
-            return 0;
-        }
+		public int Priority { get { return 0; } }
     }
 }

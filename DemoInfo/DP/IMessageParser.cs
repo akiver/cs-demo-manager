@@ -33,7 +33,7 @@ namespace DemoInfo.DP
 		/// Parsers with a higher priority will run first.
 		/// Parsers with a priority > 0 will additionally prevent other parsers from receiving a message they parsed.
 		/// </remarks>
-		/// <returns>The priority.</returns>
-        int GetPriority();
+		/// <value>The priority.</value>
+		int Priority { get; }
     }
 }

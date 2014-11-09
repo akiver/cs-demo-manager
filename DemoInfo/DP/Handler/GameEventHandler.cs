@@ -174,9 +174,6 @@ namespace DemoInfo.DP.Handler
 			return null;
 		}
 
-        public int GetPriority()
-        {
-            return 0;
-        }
+		public int Priority { get { return 0; } }
     }
 }

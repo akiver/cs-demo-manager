@@ -15,7 +15,7 @@ namespace DemoInfo.DP
 			from type in Assembly.GetExecutingAssembly().GetTypes()
 			where type.GetInterfaces().Contains(typeof(IMessageParser))
 			let parser = (IMessageParser)type.GetConstructor(new Type[0]).Invoke(new object[0])
-			orderby -parser.GetPriority()
+			orderby -parser.Priority
 			select parser).ToArray();
 
 		public static void ParsePacket(Stream stream, DemoParser demo)
@@ -54,7 +54,7 @@ namespace DemoInfo.DP
                     {
                         parser.ApplyMessage(result, demo);
 
-                        if(parser.GetPriority() > 0)
+                        if (parser.Priority > 0)
                             break;
                     }
                 }

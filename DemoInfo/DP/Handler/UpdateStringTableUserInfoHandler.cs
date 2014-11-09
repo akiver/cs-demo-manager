@@ -30,9 +30,6 @@ namespace DemoInfo.DP.Handler
             h.ParseStringTableUpdate(create, parser);
         }
 
-        public int GetPriority()
-        {
-            return 0;
-        }
+		public int Priority { get { return 0; } }
     }
 }

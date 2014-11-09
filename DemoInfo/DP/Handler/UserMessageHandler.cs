@@ -23,11 +23,7 @@ namespace DemoInfo.DP
 
 		}
 
-		public int GetPriority ()
-		{
-			return 0;
-		}
-
+		public int Priority { get { return 0; } }
 	}
 }
 

@@ -70,9 +70,6 @@ namespace DemoInfo.DP.Handler
         }
 
 
-        public int GetPriority()
-        {
-            return 0;
-        }
+		public int Priority { get { return 0; } }
     }
 }
