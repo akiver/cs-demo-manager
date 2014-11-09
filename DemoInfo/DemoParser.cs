@@ -65,6 +65,10 @@ namespace DemoInfo
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
+		#region Context for GameEventHandler
+		internal Dictionary<int, CSVCMsg_GameEventList.descriptor_t> GEH_Descriptors = null;
+		internal List<Player> GEH_BlindPlayers = new List<Player>();
+		#endregion
 
 		public float TickRate
 		{

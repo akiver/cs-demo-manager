@@ -15,12 +15,11 @@ namespace DemoInfo.DP.Handler
             return message is CSVCMsg_GameEventList || message is CSVCMsg_GameEvent;
         }
 
-		Dictionary<int, CSVCMsg_GameEventList.descriptor_t> descriptors = null;
-
-		List<Player> blindPlayers = new List<Player>();
-
         public void ApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
+			var descriptors = parser.GEH_Descriptors;
+			var blindPlayers = parser.GEH_BlindPlayers;
+
             if (message is CSVCMsg_GameEventList)
             {
 				descriptors = new Dictionary<int, CSVCMsg_GameEventList.descriptor_t>();
