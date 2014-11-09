@@ -14,7 +14,7 @@ namespace DemoInfo.DP.Handler
         public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
 			CSVCMsg_PacketEntities packetEntites = message as CSVCMsg_PacketEntities;
-			if (message == null)
+			if (packetEntites == null)
 				return false;
 
 			using (IBitStream reader = BitStreamUtil.Create(packetEntites.entity_data)) {

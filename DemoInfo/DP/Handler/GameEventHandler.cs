@@ -12,19 +12,19 @@ namespace DemoInfo.DP.Handler
     {
         public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
-			var descriptors = parser.GEH_Descriptors;
-			var blindPlayers = parser.GEH_BlindPlayers;
-
             if (message is CSVCMsg_GameEventList)
             {
-				descriptors = new Dictionary<int, CSVCMsg_GameEventList.descriptor_t>();
+				parser.GEH_Descriptors = new Dictionary<int, CSVCMsg_GameEventList.descriptor_t>();
 
 				foreach (var d in ((CSVCMsg_GameEventList)message).descriptors) {
-					descriptors[d.eventid] = d;
+					parser.GEH_Descriptors[d.eventid] = d;
 				}
 
 				return true;
             }
+
+			var descriptors = parser.GEH_Descriptors;
+			var blindPlayers = parser.GEH_BlindPlayers;
 
 			var rawEvent = message as CSVCMsg_GameEvent;
 			if (rawEvent == null)
