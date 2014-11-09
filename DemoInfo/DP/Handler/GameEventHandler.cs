@@ -17,8 +17,6 @@ namespace DemoInfo.DP.Handler
 
 		Dictionary<int, CSVCMsg_GameEventList.descriptor_t> descriptors = null;
 
-        List<string> occuredEvents = new List<string>();
-
 		List<Player> blindPlayers = new List<Player>();
 
         public void ApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
@@ -36,15 +34,6 @@ namespace DemoInfo.DP.Handler
             var rawEvent = (CSVCMsg_GameEvent)message;
 
             var eventDescriptor = descriptors[rawEvent.eventid];
-
-            if (!occuredEvents.Contains(eventDescriptor.name))
-            {
-                occuredEvents.Add(eventDescriptor.name);
-//				Console.WriteLine(eventDescriptor.name);
-//				foreach (var line in MapData(eventDescriptor, rawEvent)) {
-//					Console.WriteLine("  {0}: {1}", line.Key, line.Value);
-//				}
-            }
 
 			if (eventDescriptor.name == "round_start")
 				parser.RaiseRoundStart();
