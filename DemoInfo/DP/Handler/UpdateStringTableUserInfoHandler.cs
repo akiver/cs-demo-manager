@@ -10,17 +10,11 @@ namespace DemoInfo.DP.Handler
 {
     class UpdateStringTableUserInfoHandler : IMessageParser
     {
-        public bool CanHandleMessage(IExtensible message)
+		public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
-            return message is CSVCMsg_UpdateStringTable;
-        }
-
-        public void ApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
-        {
-            var update = (CSVCMsg_UpdateStringTable)message;
-
-            if (parser.stringTables[update.table_id].name != "userinfo")
-                return;
+			var update = message as CSVCMsg_UpdateStringTable;
+			if ((update == null) || (parser.stringTables[update.table_id].name != "userinfo"))
+				return false;
 
             CSVCMsg_CreateStringTable create = parser.stringTables[update.table_id];
             create.num_entries = update.num_changed_entries;
@@ -28,6 +22,8 @@ namespace DemoInfo.DP.Handler
 
             CreateStringTableUserInfoHandler h = new CreateStringTableUserInfoHandler();
             h.ParseStringTableUpdate(create, parser);
+
+			return true;
         }
 
 		public int Priority { get { return 0; } }

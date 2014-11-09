@@ -13,18 +13,12 @@ namespace DemoInfo.DP
     public interface IMessageParser
     {
 		/// <summary>
-		/// Determines whether this instance can handle the specified message.
+		/// Attempts to parse a given protobuf message.
 		/// </summary>
-		/// <returns><c>true</c> if this instance can handle the specified message; otherwise, <c>false</c>.</returns>
-		/// <param name="message">Message.</param>
-        bool CanHandleMessage(IExtensible message);
-
-		/// <summary>
-		/// Parses a given protobuf message.
-		/// </summary>
+		/// <returns><c>true</c> if this instance was able to handle the specified message; otherwise, <c>false</c>.</returns>
 		/// <param name="message">The protobuf Message.</param>
 		/// <param name="parser">The <see cref="DemoParser"/> that holds the parsing context.</param>
-        void ApplyMessage(IExtensible message, DemoParser parser);
+        bool TryApplyMessage(IExtensible message, DemoParser parser);
 
 		/// <summary>
 		/// Gets this parser's priority.

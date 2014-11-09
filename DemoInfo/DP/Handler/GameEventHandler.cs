@@ -10,12 +10,7 @@ namespace DemoInfo.DP.Handler
 {
     class GameEventHandler : IMessageParser
     {
-        public bool CanHandleMessage(ProtoBuf.IExtensible message)
-        {
-            return message is CSVCMsg_GameEventList || message is CSVCMsg_GameEvent;
-        }
-
-        public void ApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
+        public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
 			var descriptors = parser.GEH_Descriptors;
 			var blindPlayers = parser.GEH_BlindPlayers;
@@ -27,10 +22,13 @@ namespace DemoInfo.DP.Handler
 				foreach (var d in ((CSVCMsg_GameEventList)message).descriptors) {
 					descriptors[d.eventid] = d;
 				}
-                return;
+
+				return true;
             }
 
-            var rawEvent = (CSVCMsg_GameEvent)message;
+			var rawEvent = message as CSVCMsg_GameEvent;
+			if (rawEvent == null)
+				return false;
 
             var eventDescriptor = descriptors[rawEvent.eventid];
 
@@ -110,6 +108,8 @@ namespace DemoInfo.DP.Handler
 				break;
 				#endregion
 			}
+
+			return true;
         }
 
 		private T FillNadeEvent<T>(Dictionary<string, object> data, DemoParser parser) where T : NadeEventArgs, new()

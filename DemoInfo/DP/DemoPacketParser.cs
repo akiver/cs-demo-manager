@@ -49,16 +49,8 @@ namespace DemoInfo.DP
                 var result = reader.ReadProtobufMessage(toParse, ProtoBuf.PrefixStyle.Base128);
 
                 foreach (var parser in Parsers)
-                {
-                    if (parser.CanHandleMessage(result))
-                    {
-                        parser.ApplyMessage(result, demo);
-
-                        if (parser.Priority > 0)
-                            break;
-                    }
-                }
-                
+					if (parser.TryApplyMessage(result, demo) && (parser.Priority > 0))
+						break;
             }
         }
     }

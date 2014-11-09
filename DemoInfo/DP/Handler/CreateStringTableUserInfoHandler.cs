@@ -11,16 +11,14 @@ namespace DemoInfo.DP.Handler
 {
     class CreateStringTableUserInfoHandler : IMessageParser
     {
-        public bool CanHandleMessage(IExtensible message)
+        public bool TryApplyMessage(IExtensible message, DemoParser parser)
         {
-            return message is CSVCMsg_CreateStringTable && ((CSVCMsg_CreateStringTable)message).name == "userinfo";
-        }
-
-        public void ApplyMessage(IExtensible message, DemoParser parser)
-        {
-            var create = (CSVCMsg_CreateStringTable)message;
+			var create = message as CSVCMsg_CreateStringTable;
+			if ((create == null) || (create.name != "userinfo"))
+				return false;
 
             ParseStringTableUpdate(create, parser);
+			return true;
         }
 
         public void ParseStringTableUpdate(CSVCMsg_CreateStringTable table, DemoParser parser)

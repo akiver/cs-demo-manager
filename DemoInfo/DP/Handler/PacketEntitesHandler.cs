@@ -11,14 +11,11 @@ namespace DemoInfo.DP.Handler
 {
     class PacketEntitesHandler : IMessageParser
     {
-        public bool CanHandleMessage(IExtensible message)
+        public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
-            return message.GetType() == typeof(Messages.CSVCMsg_PacketEntities);
-        }
-
-        public void ApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
-        {
-            CSVCMsg_PacketEntities packetEntites = (CSVCMsg_PacketEntities)message;
+			CSVCMsg_PacketEntities packetEntites = message as CSVCMsg_PacketEntities;
+			if (message == null)
+				return false;
 
 			using (IBitStream reader = BitStreamUtil.Create(packetEntites.entity_data)) {
 				int currentEntity = -1;
@@ -49,6 +46,8 @@ namespace DemoInfo.DP.Handler
 					}
 				}
 			}
+
+			return true;
         }
 
         public Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)

@@ -8,14 +8,14 @@ namespace DemoInfo.DP.Handler
 {
     class GenericCreateStringTablesHandler : IMessageParser
     {
-        public bool CanHandleMessage(ProtoBuf.IExtensible message)
+        public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
         {
-            return message is Messages.CSVCMsg_CreateStringTable;
-        }
+			if (message is Messages.CSVCMsg_CreateStringTable) {
+				parser.stringTables.Add((Messages.CSVCMsg_CreateStringTable)message);
+				return true;
+			}
 
-        public void ApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
-        {
-            parser.stringTables.Add((Messages.CSVCMsg_CreateStringTable)message);
+			return false;
         }
 
 		public int Priority { get { return 0; } }

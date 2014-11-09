@@ -6,21 +6,15 @@ namespace DemoInfo.DP
 {
 	public class UserMessageHandler : IMessageParser
 	{
-		public UserMessageHandler ()
+		public bool TryApplyMessage (ProtoBuf.IExtensible message, DemoParser parser)
 		{
-		}
-
-		public bool CanHandleMessage (ProtoBuf.IExtensible message)
-		{
-			return message is CSVCMsg_UserMessage;
-		}
-
-		public void ApplyMessage (ProtoBuf.IExtensible message, DemoParser parser)
-		{
-			CSVCMsg_UserMessage userMessage = (CSVCMsg_UserMessage)message;
+			CSVCMsg_UserMessage userMessage = message as CSVCMsg_UserMessage;
+			if (userMessage == null)
+				return false;
 
 			var messageType = (Messages.ECstrike15UserMessages)userMessage.msg_type;
-
+			// TODO: maybe, like, implement something here one day?
+			return true;
 		}
 
 		public int Priority { get { return 0; } }
