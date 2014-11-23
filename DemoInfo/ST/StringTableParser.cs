@@ -17,15 +17,15 @@ namespace DemoInfo.ST
 				for (int i = 0; i < numTables; i++) {
 					string tableName = reader.ReadString();
 
-					ParseStringTable(reader, tableName == "userinfo", parser);
+					ParseStringTable(reader, tableName, parser);
 				}
 			}
         }
 
-		public void ParseStringTable(IBitStream reader, bool isUserInfo, DemoParser parser)
-        {
-			if (isUserInfo)
-				parser.RawPlayers.Clear();
+		public void ParseStringTable(IBitStream reader, string tableName, DemoParser parser)
+		{
+			if (tableName == "userinfo")
+				parser.RawPlayers.Clear(); 
 
             int numStrings = (int)reader.ReadInt(16);
 
@@ -43,12 +43,15 @@ namespace DemoInfo.ST
 
                     byte[] data = reader.ReadBytes(userDataSize);
 
-                    if (isUserInfo && data.Length >= 340)
-                    {
-                        PlayerInfo info = PlayerInfo.ParseFrom(new BinaryReader(new MemoryStream(data)));
+					if (tableName == "userinfo") {
+						PlayerInfo info = PlayerInfo.ParseFrom(new BinaryReader(new MemoryStream(data)));
 
-                        parser.RawPlayers.Add(info);
-                    }
+						parser.RawPlayers.Add(info);
+					} else if (tableName == "instancebaseline") {
+						int classid = int.Parse(stringName); //wtf volvo?
+
+						parser.instanceBaseline[classid] = data; 
+					}
                 }
             }
 

@@ -14,7 +14,7 @@ namespace DemoInfo.DP.Handler
         public bool TryApplyMessage(IExtensible message, DemoParser parser)
         {
 			var create = message as CSVCMsg_CreateStringTable;
-			if ((create == null) || (create.name != "userinfo"))
+			if ((create == null))
 				return false;
 
             ParseStringTableUpdate(create, parser);
@@ -31,7 +31,6 @@ namespace DemoInfo.DP.Handler
 				int nEntryBits = 0;
 				while ((nTemp >>= 1) != 0)
 					++nEntryBits;
-
 
 				List<string> history = new List<string>();
 
@@ -70,6 +69,8 @@ namespace DemoInfo.DP.Handler
 					if (entry == null)
 						entry = "";
 
+					history.Add(entry);
+
 					// Read in the user data.
 					byte[] userdata = new byte[0];
 					if (reader.ReadBit()) {
@@ -85,14 +86,22 @@ namespace DemoInfo.DP.Handler
 					if (userdata.Length == 0)
 						break;
 
-					// Now we'll parse the players out of it.
-					BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
-					PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
+					if (table.name == "userinfo") {
 
-					if (entryIndex < parser.RawPlayers.Count)
-						parser.RawPlayers[entryIndex] = info;
-					else
-						parser.RawPlayers.Add(info);
+						// Now we'll parse the players out of it.
+						BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
+						PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
+
+						if (entryIndex < parser.RawPlayers.Count)
+							parser.RawPlayers[entryIndex] = info;
+						else
+							parser.RawPlayers.Add(info);
+					
+					} else if (table.name == "instancebaseline") {
+						int classid = int.Parse(entry); //wtf volvo?
+
+						parser.instanceBaseline[classid] = userdata; 
+					}
 				}
 			}
         }

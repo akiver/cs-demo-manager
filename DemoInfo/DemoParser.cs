@@ -70,6 +70,8 @@ namespace DemoInfo
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
 		#endregion
 
+		internal Dictionary<int, byte[]> instanceBaseline = new Dictionary<int, byte[]>();
+
 		public float TickRate
 		{
 			get { return this.Header.PlaybackFrames / this.Header.PlaybackTime; }

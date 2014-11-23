@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
@@ -27,13 +28,11 @@ namespace DemoInfo.DP.Handler
 						// enter flag
 						if (reader.ReadBit()) {
 							var e = ReadEnterPVS(reader, currentEntity, parser);
+
 							e.ApplyUpdate(reader);
 						} else {
 							// preserve
 							Entity e = parser.entites[currentEntity];
-							//Console.ForegroundColor = ConsoleColor.Green;
-							//Console.WriteLine("Entity #" + e.ID + ": " + e.ServerClass.Name);
-							//Console.ResetColor();
 							e.ApplyUpdate(reader);
 						}
 					} else {
@@ -64,6 +63,13 @@ namespace DemoInfo.DP.Handler
             //Console.ResetColor();
 
             parser.entites[newEntity.ID] = newEntity;
+
+
+
+			MemoryStream ms = new MemoryStream(parser.instanceBaseline[serverClassID]);
+			ms.Seek(0, SeekOrigin.Begin);
+			newEntity.ApplyUpdate(BitStreamUtil.Create(ms));
+			ms.Close();
 
             return newEntity;
         }
