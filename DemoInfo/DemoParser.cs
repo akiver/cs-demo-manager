@@ -59,11 +59,13 @@ namespace DemoInfo
 
 		public Dictionary<int, Player> Players = new Dictionary<int, Player>();
 
-		internal Dictionary<int, Entity> entites = new Dictionary<int, Entity>();
+		internal Dictionary<int, Entity> entities = new Dictionary<int, Entity>();
 
 		public List<PlayerInfo> RawPlayers = new List<PlayerInfo>();
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
+
+		Entity ctTeamEntity, tTeamEntity;
 
 		#region Context for GameEventHandler
 		internal Dictionary<int, CSVCMsg_GameEventList.descriptor_t> GEH_Descriptors = null;
@@ -111,26 +113,24 @@ namespace DemoInfo
 
 		public bool ParseNextTick()
 		{
-
 			bool b = ParseTick();
 
-			foreach (var type in entites.Values.Where(a => !types.Contains(a.ServerClass.Name)))
+			foreach (var type in entities.Values.Where(a => !types.Contains(a.ServerClass.Name)))
 			{
 				types.Add(type.ServerClass.Name);
 
 				//Console.WriteLine ("##" + type.ServerClass.Name);
 			}
-
 			
 			for (int i = 0; i < RawPlayers.Count; i++)
 			{
 				var rawPlayer = RawPlayers[i];
 
 				int id = rawPlayer.UserID;
-				if (!entites.ContainsKey(i + 1))
+				if (!entities.ContainsKey(i + 1))
 					continue;
 
-				Entity entity = entites[i + 1];
+				Entity entity = entities[i + 1];
 
 				if (entity.Properties.ContainsKey("m_vecOrigin"))
 				{
@@ -255,7 +255,7 @@ namespace DemoInfo
 		
 		private void AttributeWeapons()
 		{
-			foreach (var weapon in entites.Values.Where(a => a.ServerClass.Name == "CKnife"))
+			foreach (var weapon in entities.Values.Where(a => a.ServerClass.Name == "CKnife"))
 			{
 				int weaponID = (int)weapon.Properties["m_hOwner"];
 
