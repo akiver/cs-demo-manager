@@ -64,12 +64,10 @@ namespace DemoInfo.DP.Handler
 
             parser.entites[newEntity.ID] = newEntity;
 
-
-
-			MemoryStream ms = new MemoryStream(parser.instanceBaseline[serverClassID]);
-			ms.Seek(0, SeekOrigin.Begin);
-			newEntity.ApplyUpdate(BitStreamUtil.Create(ms));
-			ms.Close();
+			using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {
+				ms.Position = 0;
+				newEntity.ApplyUpdate(BitStreamUtil.Create(ms));
+			}
 
             return newEntity;
         }
