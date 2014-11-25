@@ -32,13 +32,13 @@ namespace DemoInfo.DP.Handler
 							e.ApplyUpdate(reader);
 						} else {
 							// preserve
-							Entity e = parser.entites[currentEntity];
+							Entity e = parser.entities[currentEntity];
 							e.ApplyUpdate(reader);
 						}
 					} else {
 						// leave
 						if (reader.ReadBit()) {
-							parser.entites.Remove(currentEntity);
+							parser.entities.Remove(currentEntity);
 							if (parser.Players.ContainsKey(currentEntity))
 								parser.Players.Remove(currentEntity);
 						}
@@ -62,7 +62,7 @@ namespace DemoInfo.DP.Handler
             //Console.WriteLine("Entity #"+id+": " + entityClass.Name);
             //Console.ResetColor();
 
-            parser.entites[newEntity.ID] = newEntity;
+            parser.entities[newEntity.ID] = newEntity;
 
 			using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {
 				ms.Position = 0;

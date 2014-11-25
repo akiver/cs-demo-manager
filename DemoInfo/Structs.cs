@@ -189,7 +189,11 @@ namespace DemoInfo
 	    // this counter increases each time the server downloaded a new file
         byte FilesDownloaded { get; set; }
 
-        public PlayerInfo(BinaryReader reader)
+		internal PlayerInfo()
+		{
+		}
+
+		internal PlayerInfo(BinaryReader reader)
         {
             Version = reader.ReadInt64SwapEndian();
             XUID = reader.ReadInt64SwapEndian();

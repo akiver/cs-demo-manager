@@ -26,6 +26,9 @@ namespace DemoInfo.DP.Handler
 			var descriptors = parser.GEH_Descriptors;
 			var blindPlayers = parser.GEH_BlindPlayers;
 
+			if (descriptors == null)
+				return false;
+
 			var rawEvent = message as CSVCMsg_GameEvent;
 			if (rawEvent == null)
 				return false;
@@ -107,6 +110,41 @@ namespace DemoInfo.DP.Handler
 				parser.RaiseFireEnd(FillNadeEvent<FireEventArgs>(MapData(eventDescriptor, rawEvent), parser));
 				break;
 				#endregion
+			
+			case "player_connect":
+				data = MapData(eventDescriptor, rawEvent);
+
+				PlayerInfo player = new PlayerInfo();
+				player.UserID = (int)data["userid"];
+				player.Name = (string)data["name"];
+
+				//player.IsFakePlayer = (bool)data["bot"];
+
+				int index = (int)data["index"];
+
+				if (index < parser.RawPlayers.Count) {
+					//Roy said:
+					//"only replace existing player slot if the userID is different (very unlikely)"
+
+					if (player.UserID != parser.RawPlayers[index].UserID) {
+						parser.RawPlayers[index] = player;
+					}
+
+				} else {
+					parser.RawPlayers.Add(player);
+				}
+
+
+				break;
+			case "player_disconnect":
+				data = MapData(eventDescriptor, rawEvent);
+
+				var user = parser.RawPlayers.Single(a => a.UserID == (int)data["userid"]);
+				parser.RawPlayers.Remove(user);
+
+				parser.Players[(int)data["userid"]].Disconnected = true;
+
+				break;
 			}
 
 			return true;

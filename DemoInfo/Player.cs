@@ -23,6 +23,8 @@ namespace DemoInfo
 
 		internal Entity Entity;
 
+		public bool Disconnected { get; set; }
+
 		public bool IsAlive 
 		{
 			get { return HP > 0; }
@@ -31,7 +33,7 @@ namespace DemoInfo
         public Team Team { get; set; }
 
     }
-    public enum Team {
+	public enum Team {
 		Spectate = 1,
 		Terrorist = 2,
 		CounterTerrorist = 3,
