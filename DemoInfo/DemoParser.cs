@@ -121,6 +121,19 @@ namespace DemoInfo
 
 				//Console.WriteLine ("##" + type.ServerClass.Name);
 			}
+
+			if (this.ctTeamEntity == null) {
+				this.ctTeamEntity = entities.Values.ToList().SingleOrDefault(
+					a => a.ServerClass.DTName == "DT_CSTeam" &&
+					(string)a.Properties["m_szTeamname"] == "CT"
+				);
+			}
+			if (this.tTeamEntity == null) {
+				this.tTeamEntity = entities.Values.SingleOrDefault(a => 
+					a.ServerClass.DTName == "DT_CSTeam" &&
+					(string)a.Properties["m_szTeamname"] == "TERRORIST"
+				);
+			}
 			
 			for (int i = 0; i < RawPlayers.Count; i++)
 			{
@@ -144,8 +157,11 @@ namespace DemoInfo
 					p.EntityID = entity.ID;
 					p.Position = (Vector)entity.Properties["m_vecOrigin"];
 
-					if (entity.Properties.ContainsKey("m_iTeamNum"))
-						p.Team = (Team)entity.Properties["m_iTeamNum"];
+
+					if ((int)entity.Properties["m_iTeamNum"] == (int)ctTeamEntity.Properties["m_iTeamNum"])
+						p.Team = Team.CounterTerrorist;
+					else if ((int)entity.Properties["m_iTeamNum"] == (int)tTeamEntity.Properties["m_iTeamNum"])
+						p.Team = Team.Terrorist;
 					else
 						p.Team = Team.Spectate;
 
