@@ -67,6 +67,26 @@ namespace DemoInfo
             };
         }
 
+		public Vector()
+		{
+			
+		}
+
+		public Vector(float x, float y, float z)
+		{
+			this.X = x;
+			this.Y = y;
+			this.Z = z;
+		}
+
+		/// <summary>
+		/// Copy this instance.
+		/// </summary>
+		public Vector Copy()
+		{
+			return new Vector(X,Y,Z);
+		}
+
 		public static Vector operator + (Vector a, Vector b)
 		{
 			return new Vector() {X = a.X + b.X, Y = a.Y + b.Y, Z = a.Z + b.Z };

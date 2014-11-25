@@ -32,6 +32,36 @@ namespace DemoInfo
 
         public Team Team { get; set; }
 
+		/// <summary>
+		/// Copy this instance for multi-threading use. 
+		/// </summary>
+		public Player Copy()
+		{
+			Player me = new Player();
+			me.EntityID = -1; //this should bot be copied
+			me.Entity = null;
+
+			me.Name = Name;
+			me.SteamID = SteamID;
+			me.HP = HP;
+
+			me.ViewDirectionX = ViewDirectionX;
+			me.ViewDirectionY = ViewDirectionY;
+			me.Disconnected = Disconnected;
+			me.Team = Team;
+
+			if(me.Position != null)
+				me.Position = Position.Copy(); //Vector is a class, not a struct - thus we need to make it thread-safe. 
+
+			if(me.LastAlivePosition != null)
+				me.LastAlivePosition = LastAlivePosition.Copy();
+
+			if(me.Velocity != null)
+				me.Velocity = Velocity.Copy();
+
+			return me;
+		}
+
     }
 	public enum Team {
 		Spectate = 1,
