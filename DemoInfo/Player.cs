@@ -50,13 +50,13 @@ namespace DemoInfo
 			me.Disconnected = Disconnected;
 			me.Team = Team;
 
-			if(me.Position != null)
+			if(Position != null)
 				me.Position = Position.Copy(); //Vector is a class, not a struct - thus we need to make it thread-safe. 
 
-			if(me.LastAlivePosition != null)
+			if(LastAlivePosition != null)
 				me.LastAlivePosition = LastAlivePosition.Copy();
 
-			if(me.Velocity != null)
+			if(Velocity != null)
 				me.Velocity = Velocity.Copy();
 
 			return me;
