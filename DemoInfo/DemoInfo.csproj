@@ -102,6 +102,8 @@
     <Compile Include="BitStream\DebugBitStream.cs" />
     <Compile Include="BitStream\IBitStream.cs" />
     <Compile Include="BitStream\UnsafeBitStream.cs" />
+    <Compile Include="Messages\steammessages.cs" />
+    <Compile Include="Messages\gcmessages.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
