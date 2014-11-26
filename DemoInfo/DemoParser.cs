@@ -67,6 +67,22 @@ namespace DemoInfo
 
 		Entity ctTeamEntity, tTeamEntity;
 
+		public int CTScore
+		{
+			get 
+			{
+				return (int)ctTeamEntity.Properties.GetValueOrDefault("m_scoreTotal", 0);
+			}
+		}
+
+		public int TScore
+		{
+			get 
+			{
+				return (int)tTeamEntity.Properties.GetValueOrDefault("m_scoreTotal", 0);
+			}
+		}
+
 		#region Context for GameEventHandler
 		internal Dictionary<int, CSVCMsg_GameEventList.descriptor_t> GEH_Descriptors = null;
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
