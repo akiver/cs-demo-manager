@@ -85,7 +85,7 @@ namespace DemoInfo
 		}
 
 		public int CurrrentTick { get; private set; }
-		public double CurrentTime { get; private set; }
+		public float CurrentTime { get  { return CurrrentTick * TickTime; } }
 
 
 		public DemoParser(Stream input)
@@ -179,6 +179,8 @@ namespace DemoInfo
 					p.Velocity.Y = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[1]", 0f);
 					p.Velocity.Z = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[2]", 0f);
 
+					p.Money = (int)entity.Properties.GetValueOrDefault<string, object>("m_iAccount", 0);
+
 					if (entity.Properties.ContainsKey("m_angEyeAngles[1]"))
 						p.ViewDirectionX = (float)entity.Properties["m_angEyeAngles[1]"];
 
@@ -225,7 +227,7 @@ namespace DemoInfo
 			int TickNum = reader.ReadInt32();
 			reader.ReadByte(); // player slot
 
-			this.CurrrentTick = TickNum;
+			this.CurrrentTick++; // = TickNum;
 
 			switch (command)
 			{

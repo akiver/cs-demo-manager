@@ -21,6 +21,8 @@ namespace DemoInfo
 		public float ViewDirectionX { get; set; }
 		public float ViewDirectionY { get; set; }
 
+		public int Money { get; set; }
+
 		internal Entity Entity;
 
 		public bool Disconnected { get; set; }
