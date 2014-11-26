@@ -41,9 +41,6 @@ namespace DemoInfo.DP.Handler
 			if (eventDescriptor.name == "round_announce_match_start")
 				parser.RaiseMatchStarted();
 
-			foreach (var d in rawEvent.keys) {
-				GetData (d);
-			}
 
 			Dictionary<string, object> data;
 			switch (eventDescriptor.name) {
