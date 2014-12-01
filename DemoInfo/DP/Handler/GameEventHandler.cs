@@ -137,9 +137,16 @@ namespace DemoInfo.DP.Handler
 				data = MapData(eventDescriptor, rawEvent);
 
 				var user = parser.RawPlayers.Single(a => a.UserID == (int)data["userid"]);
-				parser.RawPlayers.Remove(user);
+				user.Name = "disconnected";
+				user.UserID = -1;
+				user.IsFakePlayer = true;
 
-				parser.Players[(int)data["userid"]].Disconnected = true;
+
+
+				var p = parser.Players[(int)data["userid"]];
+				p.Disconnected = true;
+				p.HP = -1;
+				p.Team = Team.Spectate;
 
 				break;
 			}
