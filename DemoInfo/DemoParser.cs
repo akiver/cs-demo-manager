@@ -100,7 +100,15 @@ namespace DemoInfo
 			get { return this.Header.PlaybackTime / this.Header.PlaybackFrames; }
 		}
 
-		public int CurrrentTick { get; private set; }
+		[Obsolete("This was a typo. Please use the CurrentTick-Property (2 \"r\"s instead of 3) from now on. This will be removed soon.")]
+		public int CurrrentTick { 
+			get {
+				return CurrentTick;
+			}
+		}
+
+		public int CurrentTick { get; private set; }
+
 		public float CurrentTime { get  { return CurrrentTick * TickTime; } }
 
 
@@ -244,7 +252,7 @@ namespace DemoInfo
 			int TickNum = reader.ReadInt32();
 			reader.ReadByte(); // player slot
 
-			this.CurrrentTick++; // = TickNum;
+			this.CurrentTick++; // = TickNum;
 
 			switch (command)
 			{
