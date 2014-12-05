@@ -57,6 +57,22 @@ namespace DemoInfo
 			}
 		}
 
+		public double Absolute
+		{
+			get
+			{
+				return Math.Sqrt(AbsoluteSquared); 
+			}
+		}
+
+		public double AbsoluteSquared
+		{
+			get 
+			{
+				return this.X * this.X + this.Y * this.Y;
+			}
+		}
+
         public static Vector Parse(BinaryReader reader)
         {
             return new Vector
