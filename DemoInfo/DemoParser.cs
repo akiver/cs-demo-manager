@@ -172,6 +172,7 @@ namespace DemoInfo
 
 					p.EntityID = entity.ID;
 					p.Position = (Vector)entity.Properties["m_vecOrigin"];
+					p.Position.Z = (float)entity.Properties.GetValueOrDefault("m_vecOrigin[2]", 0);
 
 
 					if ((int)entity.Properties["m_iTeamNum"] == (int)ctTeamEntity.Properties["m_iTeamNum"])
