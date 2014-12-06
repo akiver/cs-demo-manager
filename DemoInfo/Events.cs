@@ -338,13 +338,13 @@ namespace DemoInfo
 		G3SG1 = 311,
 
 		//Equipment
-		DefuseKit = 401,
 		Zeus = 401,
 		Kevlar = 402,
 		Helmet = 403,
 		Bomb = 404,
-		Knife = 505,
-		World = 506,
+		Knife = 405,
+		DefuseKit = 406,
+		World = 407,
 
 		//Grenades
 		Decoy = 501,
