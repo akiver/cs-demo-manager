@@ -105,6 +105,20 @@ namespace DemoInfo
 		}
 	}
 
+    public class BombEventArgs : EventArgs
+    {
+        public Player Player { get; set; }
+
+        public char Site { get; set; }
+    }
+
+    public class BombDefuseEventArgs : EventArgs
+    {
+        public Player Player { get; set; }
+
+        public bool HasKit { get; set; }
+    }
+
 	public class Equipment
 	{
 		public EquipmentElement Weapon { get; set; }

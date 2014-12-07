@@ -34,6 +34,8 @@ namespace DemoInfo
 
         public Team Team { get; set; }
 
+        public bool HasDefuseKit { get; set; }
+
 		/// <summary>
 		/// Copy this instance for multi-threading use. 
 		/// </summary>
@@ -51,7 +53,9 @@ namespace DemoInfo
 			me.ViewDirectionY = ViewDirectionY;
 			me.Disconnected = Disconnected;
 			me.Team = Team;
-
+            
+            me.HasDefuseKit = HasDefuseKit;
+            
 			if(Position != null)
 				me.Position = Position.Copy(); //Vector is a class, not a struct - thus we need to make it thread-safe. 
 

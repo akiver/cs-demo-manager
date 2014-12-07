@@ -149,6 +149,94 @@ namespace DemoInfo.DP.Handler
 				p.Team = Team.Spectate;
 
 				break;
+            case "bomb_beginplant": //When the bomb is starting to get planted
+            case "bomb_abortplant": //When the bomb planter stops planting the bomb
+            case "bomb_planted": //When the bomb has been planted
+            case "bomb_defused": //When the bomb has been defused
+            case "bomb_exploded": //When the bomb has exploded
+                data = MapData(eventDescriptor, rawEvent);
+
+                var bombEventArgs = new BombEventArgs();
+                bombEventArgs.Player = parser.Players [(int)data ["userid"]];
+                var bombSiteIndex = (int)data["site"]; //entity index of the bombsite.
+                if(bombSiteIndex == parser.bombSiteAEntityIndex)
+                {
+                    //planted at A.
+                    bombEventArgs.Site = 'A';
+                }
+                else if (bombSiteIndex == parser.bombSiteBEntityIndex)
+                {
+                    //planted at B.
+                    bombEventArgs.Site = 'B';
+                }
+                else
+                {
+                    //we don't know where the sites are: find them out
+                    if (parser.entities.ContainsKey(bombSiteIndex))
+                    {
+                        var bombSite = parser.entities[bombSiteIndex];
+                        if (bombSite.Properties.ContainsKey("m_vecMins") && bombSite.Properties.ContainsKey("m_vecMaxs"))
+                        {
+                            var min = bombSite.Properties["m_vecMins"] as Vector;
+                            var max = bombSite.Properties["m_vecMaxs"] as Vector;
+                            var center = new Vector((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2);
+
+                            var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
+                            if (csPlayerResource != null)
+                            {
+                                var centerA = csPlayerResource.Properties["m_bombsiteCenterA"] as Vector;
+                                if ((center - centerA).Length < 0.005)
+                                {
+                                    //planted at A.
+                                    parser.bombSiteAEntityIndex = bombSiteIndex;
+                                    bombEventArgs.Site = 'A';
+                                }
+                                else
+                                {
+                                    parser.bombSiteBEntityIndex = bombSiteIndex;
+                                    bombEventArgs.Site = 'B';
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (bombEventArgs.Site != default(char))
+                {
+                    switch(eventDescriptor.name)
+                    {
+                        case "bomb_beginplant":
+                            parser.RaiseBombBeginPlant(bombEventArgs);
+                            break;
+                        case "bomb_abortplant":
+                            parser.RaiseBombAbortPlant(bombEventArgs);
+                            break;
+                        case "bomb_planted":
+                            parser.RaiseBombPlanted(bombEventArgs);
+                            break;
+                        case "bomb_defused":
+                            parser.RaiseBombDefused(bombEventArgs);
+                            break;
+                        case "bomb_exploded":
+                            parser.RaiseBombExploded(bombEventArgs);
+                            break;
+                    }
+                }
+                break;
+            case "bomb_begindefuse":
+                data = MapData(eventDescriptor, rawEvent);
+                var e = new BombDefuseEventArgs();
+                e.Player = parser.Players[(int)data["userid"]];
+                e.HasKit = (bool)data["haskit"];
+                parser.RaiseBombBeginDefuse(e);
+                break;
+            case "bomb_abortdefuse":
+                data = MapData(eventDescriptor, rawEvent);
+                var e2 = new BombDefuseEventArgs();
+                e2.Player = parser.Players[(int)data["userid"]];
+                e2.HasKit = e2.Player.HasDefuseKit;
+                parser.RaiseBombAbortDefuse(e2);
+                break;
 			}
 
 			return true;
