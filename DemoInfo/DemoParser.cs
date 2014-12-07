@@ -41,6 +41,14 @@ namespace DemoInfo
 		public event EventHandler<GrenadeEventArgs> ExplosiveNadeExploded;
 
 		public event EventHandler<NadeEventArgs> NadeReachedTarget;
+
+        public event EventHandler<BombEventArgs> BombBeginPlant;
+        public event EventHandler<BombEventArgs> BombAbortPlant;
+        public event EventHandler<BombEventArgs> BombPlanted;
+        public event EventHandler<BombEventArgs> BombDefused;
+        public event EventHandler<BombEventArgs> BombExploded;
+        public event EventHandler<BombDefuseEventArgs> BombBeginDefuse;
+        public event EventHandler<BombDefuseEventArgs> BombAbortDefuse;
 		#endregion
 
 		#region Information
@@ -65,7 +73,10 @@ namespace DemoInfo
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
-		Entity ctTeamEntity, tTeamEntity;
+        Entity ctTeamEntity, tTeamEntity;
+
+        internal int bombSiteAEntityIndex = -1;
+        internal int bombSiteBEntityIndex = -1;
 
 		public int CTScore
 		{
@@ -212,6 +223,8 @@ namespace DemoInfo
 					if (entity.Properties.ContainsKey("m_angEyeAngles[0]"))
 						p.ViewDirectionY = (float)entity.Properties["m_angEyeAngles[0]"];
 
+                    if (entity.Properties.ContainsKey("m_bHasDefuser"))
+                        p.HasDefuseKit = (int)entity.Properties["m_bHasDefuser"] == 0;
 
 					if (p.IsAlive)
 					{
@@ -414,6 +427,48 @@ namespace DemoInfo
 			if (NadeReachedTarget != null)
 				NadeReachedTarget(this, args);
 		}
+
+        internal void RaiseBombBeginPlant(BombEventArgs args)
+        {
+            if (BombBeginPlant != null)
+                BombBeginPlant(this, args);
+        }
+
+        internal void RaiseBombAbortPlant(BombEventArgs args)
+        {
+            if (BombAbortPlant != null)
+                BombAbortPlant(this, args);
+        }
+
+        internal void RaiseBombPlanted(BombEventArgs args)
+        {
+            if (BombPlanted != null)
+                BombPlanted(this, args);
+        }
+
+        internal void RaiseBombDefused(BombEventArgs args)
+        {
+            if (BombDefused != null)
+                BombDefused(this, args);
+        }
+
+        internal void RaiseBombExploded(BombEventArgs args)
+        {
+            if (BombExploded != null)
+                BombExploded(this, args);
+        }
+
+        internal void RaiseBombBeginDefuse(BombDefuseEventArgs args)
+        {
+            if (BombBeginDefuse != null)
+                BombBeginDefuse(this, args);
+        }
+        internal void RaiseBombAbortDefuse(BombDefuseEventArgs args)
+        {
+            if (BombAbortDefuse != null)
+                BombAbortDefuse(this, args);
+        }
+
 		#endregion
 	}
 }
