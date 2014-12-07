@@ -119,6 +119,14 @@ namespace DemoInfo.BitStreamImpl
 			Verify(a, b);
 			return a;
 		}
+
+		public float ReadFloat()
+		{
+			var a = A.ReadFloat();
+			var b = B.ReadFloat();
+			Verify(a, b);
+			return a;
+		}
 	}
 }
 

@@ -151,5 +151,12 @@ namespace DemoInfo
 			Advance(numBits);
 			return result;
 		}
+
+		public float ReadFloat()
+		{
+			uint iResult = PeekInt(32); // omfg please inline this
+			Advance(32);
+			return *(float*)&iResult; // standard reinterpret cast
+		}
 	}
 }

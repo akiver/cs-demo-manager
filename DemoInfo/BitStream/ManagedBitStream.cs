@@ -103,6 +103,11 @@ namespace DemoInfo.BitStreamImpl
 		void IDisposable.Dispose()
 		{
 		}
+
+		public float ReadFloat()
+		{
+			return BitConverter.ToSingle(ReadBytes(4), 0);
+		}
 	}
 }
 

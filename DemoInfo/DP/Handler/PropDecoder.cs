@@ -152,7 +152,7 @@ namespace DemoInfo.DP.Handler
 				result = ReadBitCoordMP(reader, true, false);
 				return true;
 			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.NoScale)) {
-				result = BitConverter.ToSingle(reader.ReadBytes(4), 0);
+				result = reader.ReadFloat();
 				return true;
 			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.Normal)) {
 				result = ReadBitNormal(reader);
