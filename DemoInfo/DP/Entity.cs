@@ -9,95 +9,88 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP
 {
-    internal class Entity
-    {
-        public int ID { get; set; }
-        public ServerClass ServerClass { get; set; }
+	internal class Entity
+	{
+		public int ID { get; set; }
 
-        public Dictionary<string, object> Properties { get; private set; }
-        
-        public Entity(int id, ServerClass serverClass)
-        {
-            Properties = new Dictionary<string,object>();
-            this.ID = id;
-            this.ServerClass = serverClass;
-        }
+		public ServerClass ServerClass { get; set; }
 
-        public void ApplyUpdate(IBitStream reader)
-        {
-            var updates = ReadUpdatedFileds(reader).ToList();
+		public Dictionary<string, object> Properties { get; private set; }
 
-            foreach (var prop in updates)
-            {
-                var val = PropDecoder.DecodeProp(prop, reader);
-                Properties[prop.Prop.Name] = val;
-            }
-        }
+		public Entity(int id, ServerClass serverClass)
+		{
+			Properties = new Dictionary<string,object>();
+			this.ID = id;
+			this.ServerClass = serverClass;
+		}
 
-        private IEnumerable<FlattenedPropEntry> ReadUpdatedFileds(IBitStream reader)
-        {
-            bool newWay = reader.ReadBit();
+		public void ApplyUpdate(IBitStream reader)
+		{
+			var updates = ReadUpdatedFileds(reader).ToList();
 
-            List<int> fieldIndicies = new List<int>();
+			foreach (var prop in updates) {
+				var val = PropDecoder.DecodeProp(prop, reader);
 
-            int index = -1;
+				Properties[prop.PropertyName] = val;
+			}
+		}
 
-            while (true)
-            {
-                index = ReadFieldIndex(reader, index, newWay);
+		private IEnumerable<FlattenedPropEntry> ReadUpdatedFileds(IBitStream reader)
+		{
+			bool newWay = reader.ReadBit();
 
-                if (index != -1)
-                    fieldIndicies.Add(index);
-                else
-                    break;
-            }
+			List<int> fieldIndicies = new List<int>();
 
-            return fieldIndicies.Select(a => ServerClass.flattenedProps[a]);
-        }
+			int index = -1;
 
-        int ReadFieldIndex(IBitStream reader, int lastIndex, bool bNewWay)
-        {
-            if (bNewWay)
-            {
-                if (reader.ReadBit())
-                {
-                    return lastIndex + 1;
-                }
-            }
+			while (true) {
+				index = ReadFieldIndex(reader, index, newWay);
 
-            int ret = 0;
-            if (bNewWay && reader.ReadBit())
-            {
-                ret = (int)reader.ReadInt(3);  // read 3 bits
-            }
-            else
-            {
-                ret = (int)reader.ReadInt(7); // read 7 bits
-                switch (ret & (32 | 64))
-                {
-                    case 32:
-                        ret = (ret & ~96) | ((int)reader.ReadInt(2) << 5);
-                        break;
-                    case 64:
-                        ret = (ret & ~96) | ((int)reader.ReadInt(4) << 5);
-                        break;
-                    case 96:
-                        ret = (ret & ~96) | ((int)reader.ReadInt(7) << 5);
-                        break;
-                }
-            }
+				if (index != -1)
+					fieldIndicies.Add(index);
+				else
+					break;
+			}
 
-            if (ret == 0xFFF) // end marker is 4095 for cs:go
-            {
-                return -1;
-            }
+			return fieldIndicies.Select(a => ServerClass.flattenedProps[a]);
+		}
 
-            return lastIndex + 1 + ret;
-        }
+		int ReadFieldIndex(IBitStream reader, int lastIndex, bool bNewWay)
+		{
+			if (bNewWay) {
+				if (reader.ReadBit()) {
+					return lastIndex + 1;
+				}
+			}
+
+			int ret = 0;
+			if (bNewWay && reader.ReadBit()) {
+				ret = (int)reader.ReadInt(3);  // read 3 bits
+			} else {
+				ret = (int)reader.ReadInt(7); // read 7 bits
+				switch (ret & ( 32 | 64 )) {
+				case 32:
+					ret = ( ret & ~96 ) | ( (int)reader.ReadInt(2) << 5 );
+					break;
+				case 64:
+					ret = ( ret & ~96 ) | ( (int)reader.ReadInt(4) << 5 );
+					break;
+				case 96:
+					ret = ( ret & ~96 ) | ( (int)reader.ReadInt(7) << 5 );
+					break;
+				}
+			}
+
+			if (ret == 0xFFF) { // end marker is 4095 for cs:go
+				return -1;
+			}
+
+			return lastIndex + 1 + ret;
+		}
 
 		public override string ToString()
 		{
 			return ID + ": " + this.ServerClass;
 		}
-    }
+	}
 }

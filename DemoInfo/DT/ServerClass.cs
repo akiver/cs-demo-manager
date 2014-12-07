@@ -18,20 +18,27 @@ namespace DemoInfo.DT
 
 		public override string ToString()
 		{
-			return Name + "|" + DTName;
+			return Name + " | " + DTName;
 		}
     }
 
-    public class FlattenedPropEntry
+	internal class FlattenedPropEntry
     {
 	    public SendTableProperty Prop { get; private set; }
         public SendTableProperty ArrayElementProp { get; private set; }
+		public string PropertyName { get; private set; }
 
-        public FlattenedPropEntry(SendTableProperty prop, SendTableProperty arrayElementProp)
+		public FlattenedPropEntry(string propertyName, SendTableProperty prop, SendTableProperty arrayElementProp)
 	    {
             this.Prop = prop;
             this.ArrayElementProp = arrayElementProp;
+			this.PropertyName = propertyName;
 	    }
+
+		public override string ToString()
+		{
+			return string.Format("[FlattenedPropEntry: PropertyName={2}, Prop={0}, ArrayElementProp={1}]", Prop, ArrayElementProp, PropertyName);
+		}
 
     };
 

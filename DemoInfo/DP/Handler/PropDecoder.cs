@@ -113,7 +113,7 @@ namespace DemoInfo.DP.Handler
 
 			object[] result = new object[nElements];
 
-			FlattenedPropEntry temp = new FlattenedPropEntry(flattenedProp.ArrayElementProp, null);
+			FlattenedPropEntry temp = new FlattenedPropEntry("", flattenedProp.ArrayElementProp, null);
 			for (int i = 0; i < nElements; i++) {
 				result[i] = DecodeProp(temp, reader);
 			}

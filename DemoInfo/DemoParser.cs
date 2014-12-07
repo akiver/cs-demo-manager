@@ -166,7 +166,7 @@ namespace DemoInfo
 
 				Entity entity = entities[i + 1];
 
-				if (entity.Properties.ContainsKey("m_vecOrigin")) {
+				if (entity.Properties.ContainsKey("cslocaldata.m_vecOrigin")) {
 					if (!Players.ContainsKey(id))
 						Players[id] = new Player();
 
@@ -175,8 +175,8 @@ namespace DemoInfo
 					p.Entity = entity;
 
 					p.EntityID = entity.ID;
-					p.Position = (Vector)entity.Properties["m_vecOrigin"];
-					p.Position.Z = (float)entity.Properties.GetValueOrDefault("m_vecOrigin[2]", 0);
+					p.Position = (Vector)entity.Properties["cslocaldata.m_vecOrigin"];
+					p.Position.Z = (float)entity.Properties.GetValueOrDefault("cslocaldata.m_vecOrigin[2]", 0);
 
 
 					if ((int)entity.Properties["m_iTeamNum"] == (int)ctTeamEntity.Properties["m_iTeamNum"])
@@ -215,7 +215,7 @@ namespace DemoInfo
 
 			}
 
-			//AttributeWeapons();
+			AttributeWeapons();
 
 			if (b) {
 				if (TickDone != null)
@@ -290,23 +290,31 @@ namespace DemoInfo
 				DemoPacketParser.ParsePacket(volvo, this);
 		}
 
+		const int MAX_EDICT_BITS = 11;
+		const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
 		private void AttributeWeapons()
 		{
-			foreach (var weapon in entities.Values.Where(a => a.ServerClass.Name == "CKnife")) {
-				int weaponID = (int)weapon.Properties["m_hOwner"];
+			foreach (var player in Players.Values) {
+				//The entites 000 ... 64 come from m_hMyWeapons. 
+				//So they contain ONLY weapons. 
 
-				var players = Players.Values
-					.Select(a => a.Entity)
-					.Where(a => a.Properties.ContainsKey("m_hViewModel")).ToList();
-
-				var p = players[3];
-
-				var ent = players
-					.FirstOrDefault(a => (int)( (object[])a.Properties["m_hViewModel"] )[1] == weaponID);
-
-				if (ent != null)
-					Trace.WriteLine("ent is null and we somehow didn't expect this? srsly dude, this message...", "DemoParser.AttributeWeapons()");
 			}
+		}
+
+		private Entity RetrieveWeaponEntity(int index)
+		{
+			index &= INDEX_MASK;
+
+			if (index == INDEX_MASK || index < 100) //Never seen an index < 50. 
+				return null;
+
+			//001 -> secondary
+			var entity = (Entity)entities.GetValueOrDefault(index, null);
+
+			if(entity == null)
+				Console.WriteLine("wat?");
+
+			return entity;
 		}
 
 		#region EventCaller

@@ -23,7 +23,7 @@ namespace DemoInfo.DT
 
         public List<SendTable> DataTables = new List<SendTable>();
         public List<ServerClass> ServerClasses = new List<ServerClass>();
-        List<ExcludeEntry> CurrentExcludes = new List<ExcludeEntry>();
+		List<ExcludeEntry> CurrentExcludes = new List<ExcludeEntry>();
 
 		public void ParsePacket(Stream stream)
         {
@@ -69,11 +69,12 @@ namespace DemoInfo.DT
         void FlattenDataTable(int serverClassIndex)
         {
             SendTable table = DataTables[ServerClasses[serverClassIndex].DataTableID];
+
             CurrentExcludes.Clear();
 
             GatherExcludes(table);
 
-            GatherProps(table, serverClassIndex);
+			GatherProps(table, serverClassIndex, "");
 
             var flattenedProps = ServerClasses[serverClassIndex].flattenedProps;
 
@@ -113,8 +114,6 @@ namespace DemoInfo.DT
                     if (currentProp == flattenedProps.Count)
                         break;
                 }
-
-
             }
 
         }
@@ -133,17 +132,17 @@ namespace DemoInfo.DT
             }
         }
 
-        void GatherProps(SendTable table, int serverClassIndex)
+		void GatherProps(SendTable table, int serverClassIndex, string prefix)
         {
             List<FlattenedPropEntry> tmpFlattenedProps = new List<FlattenedPropEntry>();
-            GatherProps_IterateProps(table, serverClassIndex, tmpFlattenedProps);
+			GatherProps_IterateProps(table, serverClassIndex, tmpFlattenedProps, prefix);
 
             List<FlattenedPropEntry> flattenedProps = ServerClasses[serverClassIndex].flattenedProps;
 
             flattenedProps.AddRange(tmpFlattenedProps);
         }
 
-        void GatherProps_IterateProps(SendTable table, int ServerClassIndex, List<FlattenedPropEntry> flattenedProps)
+		void GatherProps_IterateProps(SendTable table, int ServerClassIndex, List<FlattenedPropEntry> flattenedProps, string prefix)
         {
             for (int i = 0; i < table.Properties.Count; i++)
             {
@@ -158,22 +157,27 @@ namespace DemoInfo.DT
 
                     if (property.Flags.HasFlagFast(SendPropertyFlags.Collapsible))
                     {
-                        GatherProps_IterateProps(subTable, ServerClassIndex, flattenedProps);
+						//we don't prefix Collapsible stuff, since it is just derived mostly
+						GatherProps_IterateProps(subTable, ServerClassIndex, flattenedProps, prefix);
                     }
                     else
                     {
-                        GatherProps(subTable, ServerClassIndex);
+						//We do however prefix everything else
+
+						string nfix = prefix + ((property.Name.Length > 0) ? property.Name + "." : "");
+
+						GatherProps(subTable, ServerClassIndex, nfix);
                     }
                 }
                 else
                 {
                     if (property.Type == SendPropertyType.Array)
                     {
-                        flattenedProps.Add(new FlattenedPropEntry(property, table.Properties[i - 1]));
+						flattenedProps.Add(new FlattenedPropEntry(prefix + property.Name, property, table.Properties[i - 1]));
                     }
                     else
                     {
-                        flattenedProps.Add(new FlattenedPropEntry(property, null));
+						flattenedProps.Add(new FlattenedPropEntry(prefix + property.Name, property, null));
                     }
                 }
 
