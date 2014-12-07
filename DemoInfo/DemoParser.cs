@@ -68,6 +68,8 @@ namespace DemoInfo
 		internal DataTableParser DataTables = new DataTableParser();
 		StringTableParser StringTables = new StringTableParser();
 
+		internal Dictionary<ServerClass, EquipmentElement> equipmentMapping = new Dictionary<ServerClass, EquipmentElement>();
+
 		public Dictionary<int, Player> Players = new Dictionary<int, Player>();
 
 		internal Dictionary<int, Entity> entities = new Dictionary<int, Entity>();
@@ -195,10 +197,9 @@ namespace DemoInfo
 					p.Name = rawPlayer.Name;
 					p.SteamID = rawPlayer.XUID;
 
-					p.Velocity = new Vector();
-					p.Velocity.X = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[0]", 0f);
-					p.Velocity.Y = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[1]", 0f);
-					p.Velocity.Z = (float)entity.Properties.GetValueOrDefault<string, object>("m_vecVelocity[2]", 0f);
+					p.Velocity.X = (float)entity.Properties.GetValueOrDefault<string, object>("localdata.m_vecVelocity[0]", 0f);
+					p.Velocity.Y = (float)entity.Properties.GetValueOrDefault<string, object>("localdata.m_vecVelocity[1]", 0f);
+					p.Velocity.Z = (float)entity.Properties.GetValueOrDefault<string, object>("localdata.m_vecVelocity[2]", 0f);
 
 					p.Money = (int)entity.Properties.GetValueOrDefault<string, object>("m_iAccount", 0);
 
@@ -259,6 +260,28 @@ namespace DemoInfo
 			case DemoCommand.DataTables:
 				using (var volvo = reader.ReadVolvoPacket())
 					DataTables.ParsePacket(volvo);
+
+				for(int i = 0; i < DataTables.ServerClasses.Count; i++)
+				{
+					var sc = DataTables.ServerClasses[i];
+					if (sc.DTName.StartsWith("DT_Weapon")) {
+						var s = sc.DTName.Substring(9).ToLower();
+						equipmentMapping.Add(sc, Equipment.MapEquipment(s));
+					} else if (sc.DTName == "DT_Flashbang") {
+						equipmentMapping.Add(sc, EquipmentElement.Flash);
+					} else if (sc.DTName == "DT_SmokeGrenade") {
+						equipmentMapping.Add(sc, EquipmentElement.Smoke);
+					} else if (sc.DTName == "DT_HEGrenade") {
+						equipmentMapping.Add(sc, EquipmentElement.HE);
+					} else if (sc.DTName == "DT_DecoyGrenade") {
+						equipmentMapping.Add(sc, EquipmentElement.Decoy);
+					} else if (sc.DTName == "DT_IncendiaryGrenade") {
+						equipmentMapping.Add(sc, EquipmentElement.Incendiary);
+					} else if (sc.DTName == "DT_MolotovGrenade") {
+						equipmentMapping.Add(sc, EquipmentElement.Molotov);
+					}
+				}
+
 				break;
 			case DemoCommand.StringTables:
 				using (var volvo = reader.ReadVolvoPacket())
@@ -295,26 +318,34 @@ namespace DemoInfo
 		private void AttributeWeapons()
 		{
 			foreach (var player in Players.Values) {
-				//The entites 000 ... 64 come from m_hMyWeapons. 
-				//So they contain ONLY weapons. 
+				for (int i = 0; i < 64; i++) {
+					int index = (int)player.Entity.Properties["m_hMyWeapons." + i.ToString().PadLeft(3, '0')] & INDEX_MASK;
 
+					if (index != INDEX_MASK) {
+						var entity = (Entity)entities[index];
+
+						if (!player.rawWeapons.ContainsKey(index)) {
+							Equipment e = new Equipment();
+							e.Weapon = equipmentMapping[entity.ServerClass];
+
+							if(e.Weapon == EquipmentElement.Unknown)
+								throw new Exception("This weapon is unknown: " + entity.ServerClass.DTName);
+
+							player.rawWeapons.Add(index, e);
+						}
+
+						player.rawWeapons[index].lastUpdate = CurrentTick;
+					}
+				}
+
+				IEnumerable<int> deletedWeapons = player.rawWeapons
+					.Where(a => a.Value.lastUpdate != CurrentTick)
+					.Select(a => a.Key)
+					.ToList();
+
+				foreach (var weapon in deletedWeapons)
+					player.rawWeapons.Remove(weapon);
 			}
-		}
-
-		private Entity RetrieveWeaponEntity(int index)
-		{
-			index &= INDEX_MASK;
-
-			if (index == INDEX_MASK || index < 100) //Never seen an index < 50. 
-				return null;
-
-			//001 -> secondary
-			var entity = (Entity)entities.GetValueOrDefault(index, null);
-
-			if(entity == null)
-				Console.WriteLine("wat?");
-
-			return entity;
 		}
 
 		#region EventCaller

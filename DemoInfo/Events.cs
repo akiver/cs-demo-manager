@@ -121,6 +121,7 @@ namespace DemoInfo
 
 	public class Equipment
 	{
+		internal int lastUpdate = 0;
 		public EquipmentElement Weapon { get; set; }
 		public EquipmentClass Class {
 			get
@@ -142,7 +143,7 @@ namespace DemoInfo
 		{
 			OriginalString = originalString;
 
-			MapEquipment (originalString);
+			this.Weapon = MapEquipment (originalString);
 
 		}
 
@@ -150,12 +151,12 @@ namespace DemoInfo
 		{
 			OriginalString = originalString;
 
-			MapEquipment (originalString);
+			this.Weapon = MapEquipment (originalString);
 
 			SkinID = skin;
 		}
 
-		private void MapEquipment(string OriginalString)
+		public static EquipmentElement MapEquipment(string OriginalString)
 		{
 			EquipmentElement weapon = EquipmentElement.Unknown;
 
@@ -201,6 +202,7 @@ namespace DemoInfo
 				case "g3sg1":
 					weapon = EquipmentElement.G3SG1;
 					break;
+				case "galil":
 				case "galilar":
 					weapon = EquipmentElement.Gallil;
 					break;
@@ -255,9 +257,11 @@ namespace DemoInfo
 				case "sawedoff":
 					weapon = EquipmentElement.SawedOff;
 					break;
+				case "scar17":
 				case "scar20":
 					weapon = EquipmentElement.Scar20;
 					break;
+				case "sg550":
 				case "sg556":
 					weapon = EquipmentElement.SG556;
 					break;
@@ -285,6 +289,7 @@ namespace DemoInfo
 				case "cz75a":
 					weapon = EquipmentElement.CZ;
 					break;
+				case "usp":
 				case "usp_silencer":
 					weapon = EquipmentElement.USP;
 					break;
@@ -303,7 +308,7 @@ namespace DemoInfo
 				}
 			}
 
-			this.Weapon = weapon;
+			return weapon;
 		}
 	}
 

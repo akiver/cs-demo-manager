@@ -33,6 +33,9 @@ namespace DemoInfo
 
 		public bool Disconnected { get; set; }
 
+		internal Dictionary<int, Equipment> rawWeapons = new Dictionary<int, Equipment>();
+		public IEnumerable<Equipment> Weapons { get { return rawWeapons.Values; } }
+
 		public bool IsAlive {
 			get { return HP > 0; }
 		}
@@ -40,6 +43,13 @@ namespace DemoInfo
 		public Team Team { get; set; }
 
 		public bool HasDefuseKit { get; set; }
+
+		public Player()
+		{
+			Velocity = new Vector();
+			LastAlivePosition = new Vector();
+
+		}
 
 		/// <summary>
 		/// Copy this instance for multi-threading use. 
