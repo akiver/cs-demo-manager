@@ -195,11 +195,11 @@ namespace DemoInfo
 					else
 						p.Team = Team.Spectate;
 
-					if (p.Team != Team.Spectate && entity.Properties.ContainsKey("m_iHealth"))
-						p.HP = (int)entity.Properties["m_iHealth"];
-					else
+					if (p.Team != Team.Spectate) {
+						p.HP = (int)entity.Properties.GetValueOrDefault("m_iHealth", -1);
+					} else {
 						p.HP = -1;
-
+					}
 
 					p.Name = rawPlayer.Name;
 					p.SteamID = rawPlayer.XUID;
@@ -211,14 +211,11 @@ namespace DemoInfo
 
 					p.Money = (int)entity.Properties.GetValueOrDefault<string, object>("m_iAccount", 0);
 
-					if (entity.Properties.ContainsKey("m_angEyeAngles[1]"))
-						p.ViewDirectionX = (float)entity.Properties["m_angEyeAngles[1]"];
+					p.ViewDirectionX = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[1]", 0);
 
-					if (entity.Properties.ContainsKey("m_angEyeAngles[0]"))
-						p.ViewDirectionY = (float)entity.Properties["m_angEyeAngles[0]"];
+					p.ViewDirectionY = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[0]", 0);
 
-					if (entity.Properties.ContainsKey("m_bHasDefuser"))
-						p.HasDefuseKit = (int)entity.Properties["m_bHasDefuser"] == 0;
+					p.HasDefuseKit = ((int)entity.Properties.GetValueOrDefault("m_bHasDefuser", 0)) == 0;
 
 					if (p.IsAlive) {
 						p.LastAlivePosition = p.Position;
