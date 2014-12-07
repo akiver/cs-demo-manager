@@ -119,7 +119,7 @@ namespace DemoInfo
 
 		public int CurrentTick { get; private set; }
 
-		public float CurrentTime { get { return CurrrentTick * TickTime; } }
+		public float CurrentTime { get { return CurrentTick * TickTime; } }
 
 
 		public DemoParser(Stream input)
@@ -242,7 +242,7 @@ namespace DemoInfo
 		{
 			DemoCommand command = (DemoCommand)reader.ReadByte();
 
-			int TickNum = reader.ReadInt32();
+			reader.ReadInt32(); // tick number
 			reader.ReadByte(); // player slot
 
 			this.CurrentTick++; // = TickNum;
