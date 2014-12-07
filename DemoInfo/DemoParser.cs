@@ -13,6 +13,7 @@ namespace DemoInfo
 	public class DemoParser
 	{
 		#region Events
+
 		/// <summary>
 		/// Called once when the Header of the demo is parsed
 		/// </summary>
@@ -42,24 +43,26 @@ namespace DemoInfo
 
 		public event EventHandler<NadeEventArgs> NadeReachedTarget;
 
-        public event EventHandler<BombEventArgs> BombBeginPlant;
-        public event EventHandler<BombEventArgs> BombAbortPlant;
-        public event EventHandler<BombEventArgs> BombPlanted;
-        public event EventHandler<BombEventArgs> BombDefused;
-        public event EventHandler<BombEventArgs> BombExploded;
-        public event EventHandler<BombDefuseEventArgs> BombBeginDefuse;
-        public event EventHandler<BombDefuseEventArgs> BombAbortDefuse;
+		public event EventHandler<BombEventArgs> BombBeginPlant;
+		public event EventHandler<BombEventArgs> BombAbortPlant;
+		public event EventHandler<BombEventArgs> BombPlanted;
+		public event EventHandler<BombEventArgs> BombDefused;
+		public event EventHandler<BombEventArgs> BombExploded;
+		public event EventHandler<BombDefuseEventArgs> BombBeginDefuse;
+		public event EventHandler<BombDefuseEventArgs> BombAbortDefuse;
+
 		#endregion
 
 		#region Information
-		public string Map
-		{
+
+		public string Map {
 			get { return Header.MapName; }
 		}
 
 		#endregion
 
 		BinaryReader reader;
+
 		public DemoHeader Header { get; private set; }
 
 		internal DataTableParser DataTables = new DataTableParser();
@@ -73,41 +76,37 @@ namespace DemoInfo
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
-        Entity ctTeamEntity, tTeamEntity;
+		Entity ctTeamEntity, tTeamEntity;
 
-        internal int bombSiteAEntityIndex = -1;
-        internal int bombSiteBEntityIndex = -1;
+		internal int bombSiteAEntityIndex = -1;
+		internal int bombSiteBEntityIndex = -1;
 
-		public int CTScore
-		{
-			get 
-			{
+		public int CTScore {
+			get {
 				return (int)ctTeamEntity.Properties.GetValueOrDefault("m_scoreTotal", 0);
 			}
 		}
 
-		public int TScore
-		{
-			get 
-			{
+		public int TScore {
+			get {
 				return (int)tTeamEntity.Properties.GetValueOrDefault("m_scoreTotal", 0);
 			}
 		}
 
 		#region Context for GameEventHandler
+
 		internal Dictionary<int, CSVCMsg_GameEventList.descriptor_t> GEH_Descriptors = null;
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
+
 		#endregion
 
 		internal Dictionary<int, byte[]> instanceBaseline = new Dictionary<int, byte[]>();
 
-		public float TickRate
-		{
+		public float TickRate {
 			get { return this.Header.PlaybackFrames / this.Header.PlaybackTime; }
 		}
 
-		public float TickTime
-		{
+		public float TickTime {
 			get { return this.Header.PlaybackTime / this.Header.PlaybackFrames; }
 		}
 
@@ -120,7 +119,7 @@ namespace DemoInfo
 
 		public int CurrentTick { get; private set; }
 
-		public float CurrentTime { get  { return CurrrentTick * TickTime; } }
+		public float CurrentTime { get { return CurrrentTick * TickTime; } }
 
 
 		public DemoParser(Stream input)
@@ -135,10 +134,8 @@ namespace DemoInfo
 			if (HeaderParsed != null)
 				HeaderParsed(this, new HeaderParsedEventArgs(Header));
 
-			if (fullParse)
-			{
-				while (ParseNextTick())
-				{
+			if (fullParse) {
+				while (ParseNextTick()) {
 				}
 			}
 
@@ -150,8 +147,7 @@ namespace DemoInfo
 		{
 			bool b = ParseTick();
 
-			foreach (var type in entities.Values.Where(a => !types.Contains(a.ServerClass.Name)))
-			{
+			foreach (var type in entities.Values.Where(a => !types.Contains(a.ServerClass.Name))) {
 				types.Add(type.ServerClass.Name);
 
 				//Console.WriteLine ("##" + type.ServerClass.Name);
@@ -166,12 +162,11 @@ namespace DemoInfo
 			if (this.tTeamEntity == null) {
 				this.tTeamEntity = entities.Values.SingleOrDefault(a => 
 					a.ServerClass.DTName == "DT_CSTeam" &&
-					(string)a.Properties["m_szTeamname"] == "TERRORIST"
+				(string)a.Properties["m_szTeamname"] == "TERRORIST"
 				);
 			}
 			
-			for (int i = 0; i < RawPlayers.Count; i++)
-			{
+			for (int i = 0; i < RawPlayers.Count; i++) {
 				var rawPlayer = RawPlayers[i];
 
 				int id = rawPlayer.UserID;
@@ -180,8 +175,7 @@ namespace DemoInfo
 
 				Entity entity = entities[i + 1];
 
-				if (entity.Properties.ContainsKey("m_vecOrigin"))
-				{
+				if (entity.Properties.ContainsKey("m_vecOrigin")) {
 					if (!Players.ContainsKey(id))
 						Players[id] = new Player();
 
@@ -223,11 +217,10 @@ namespace DemoInfo
 					if (entity.Properties.ContainsKey("m_angEyeAngles[0]"))
 						p.ViewDirectionY = (float)entity.Properties["m_angEyeAngles[0]"];
 
-                    if (entity.Properties.ContainsKey("m_bHasDefuser"))
-                        p.HasDefuseKit = (int)entity.Properties["m_bHasDefuser"] == 0;
+					if (entity.Properties.ContainsKey("m_bHasDefuser"))
+						p.HasDefuseKit = (int)entity.Properties["m_bHasDefuser"] == 0;
 
-					if (p.IsAlive)
-					{
+					if (p.IsAlive) {
 						p.LastAlivePosition = p.Position;
 					}
 				}
@@ -236,8 +229,7 @@ namespace DemoInfo
 
 			//AttributeWeapons();
 
-			if (b)
-			{
+			if (b) {
 				if (TickDone != null)
 					TickDone(this, new TickDoneEventArgs());
 			}
@@ -267,33 +259,34 @@ namespace DemoInfo
 
 			this.CurrentTick++; // = TickNum;
 
-			switch (command)
-			{
-				case DemoCommand.Synctick:
-					break;
-				case DemoCommand.Stop:
-					return false;
-				case DemoCommand.ConsoleCommand:
-					using (var volvo = reader.ReadVolvoPacket()) ;
-					break;
-				case DemoCommand.DataTables:
-					using (var volvo = reader.ReadVolvoPacket())
-						DataTables.ParsePacket(volvo);
-					break;
-				case DemoCommand.StringTables:
-					using (var volvo = reader.ReadVolvoPacket())
-						StringTables.ParsePacket(volvo, this);
-					break;
-				case DemoCommand.UserCommand:
-					reader.ReadInt32();
-					using (var volvo = reader.ReadVolvoPacket()) ;
-					break;
-				case DemoCommand.Signon:
-				case DemoCommand.Packet:
-					ParseDemoPacket();
-					break;
-				default:
-					throw new Exception("Can't handle Demo-Command " + command);
+			switch (command) {
+			case DemoCommand.Synctick:
+				break;
+			case DemoCommand.Stop:
+				return false;
+			case DemoCommand.ConsoleCommand:
+				using (var volvo = reader.ReadVolvoPacket())
+					;
+				break;
+			case DemoCommand.DataTables:
+				using (var volvo = reader.ReadVolvoPacket())
+					DataTables.ParsePacket(volvo);
+				break;
+			case DemoCommand.StringTables:
+				using (var volvo = reader.ReadVolvoPacket())
+					StringTables.ParsePacket(volvo, this);
+				break;
+			case DemoCommand.UserCommand:
+				reader.ReadInt32();
+				using (var volvo = reader.ReadVolvoPacket())
+					;
+				break;
+			case DemoCommand.Signon:
+			case DemoCommand.Packet:
+				ParseDemoPacket();
+				break;
+			default:
+				throw new Exception("Can't handle Demo-Command " + command);
 			}
 
 			return true;
@@ -308,11 +301,10 @@ namespace DemoInfo
 			using (var volvo = reader.ReadVolvoPacket())
 				DemoPacketParser.ParsePacket(volvo, this);
 		}
-		
+
 		private void AttributeWeapons()
 		{
-			foreach (var weapon in entities.Values.Where(a => a.ServerClass.Name == "CKnife"))
-			{
+			foreach (var weapon in entities.Values.Where(a => a.ServerClass.Name == "CKnife")) {
 				int weaponID = (int)weapon.Properties["m_hOwner"];
 
 				var players = Players.Values
@@ -322,14 +314,15 @@ namespace DemoInfo
 				var p = players[3];
 
 				var ent = players
-					.FirstOrDefault(a => (int)((object[])a.Properties["m_hViewModel"])[1] == weaponID);
+					.FirstOrDefault(a => (int)( (object[])a.Properties["m_hViewModel"] )[1] == weaponID);
 
-				if(ent != null)
+				if (ent != null)
 					Trace.WriteLine("ent is null and we somehow didn't expect this? srsly dude, this message...", "DemoParser.AttributeWeapons()");
 			}
 		}
 
 		#region EventCaller
+
 		internal void RaiseMatchStarted()
 		{
 			if (MatchStarted != null)
@@ -428,46 +421,47 @@ namespace DemoInfo
 				NadeReachedTarget(this, args);
 		}
 
-        internal void RaiseBombBeginPlant(BombEventArgs args)
-        {
-            if (BombBeginPlant != null)
-                BombBeginPlant(this, args);
-        }
+		internal void RaiseBombBeginPlant(BombEventArgs args)
+		{
+			if (BombBeginPlant != null)
+				BombBeginPlant(this, args);
+		}
 
-        internal void RaiseBombAbortPlant(BombEventArgs args)
-        {
-            if (BombAbortPlant != null)
-                BombAbortPlant(this, args);
-        }
+		internal void RaiseBombAbortPlant(BombEventArgs args)
+		{
+			if (BombAbortPlant != null)
+				BombAbortPlant(this, args);
+		}
 
-        internal void RaiseBombPlanted(BombEventArgs args)
-        {
-            if (BombPlanted != null)
-                BombPlanted(this, args);
-        }
+		internal void RaiseBombPlanted(BombEventArgs args)
+		{
+			if (BombPlanted != null)
+				BombPlanted(this, args);
+		}
 
-        internal void RaiseBombDefused(BombEventArgs args)
-        {
-            if (BombDefused != null)
-                BombDefused(this, args);
-        }
+		internal void RaiseBombDefused(BombEventArgs args)
+		{
+			if (BombDefused != null)
+				BombDefused(this, args);
+		}
 
-        internal void RaiseBombExploded(BombEventArgs args)
-        {
-            if (BombExploded != null)
-                BombExploded(this, args);
-        }
+		internal void RaiseBombExploded(BombEventArgs args)
+		{
+			if (BombExploded != null)
+				BombExploded(this, args);
+		}
 
-        internal void RaiseBombBeginDefuse(BombDefuseEventArgs args)
-        {
-            if (BombBeginDefuse != null)
-                BombBeginDefuse(this, args);
-        }
-        internal void RaiseBombAbortDefuse(BombDefuseEventArgs args)
-        {
-            if (BombAbortDefuse != null)
-                BombAbortDefuse(this, args);
-        }
+		internal void RaiseBombBeginDefuse(BombDefuseEventArgs args)
+		{
+			if (BombBeginDefuse != null)
+				BombBeginDefuse(this, args);
+		}
+
+		internal void RaiseBombAbortDefuse(BombDefuseEventArgs args)
+		{
+			if (BombAbortDefuse != null)
+				BombAbortDefuse(this, args);
+		}
 
 		#endregion
 	}

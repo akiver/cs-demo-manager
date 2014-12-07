@@ -6,7 +6,7 @@ namespace DemoInfo.DP
 {
 	public class UserMessageHandler : IMessageParser
 	{
-		public bool TryApplyMessage (ProtoBuf.IExtensible message, DemoParser parser)
+		public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
 		{
 			CSVCMsg_UserMessage userMessage = message as CSVCMsg_UserMessage;
 			if (userMessage == null)

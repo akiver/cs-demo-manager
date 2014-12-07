@@ -8,12 +8,11 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP.Handler
 {
-    class GameEventHandler : IMessageParser
-    {
-        public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
-        {
-            if (message is CSVCMsg_GameEventList)
-            {
+	class GameEventHandler : IMessageParser
+	{
+		public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
+		{
+			if (message is CSVCMsg_GameEventList) {
 				parser.GEH_Descriptors = new Dictionary<int, CSVCMsg_GameEventList.descriptor_t>();
 
 				foreach (var d in ((CSVCMsg_GameEventList)message).descriptors) {
@@ -21,7 +20,7 @@ namespace DemoInfo.DP.Handler
 				}
 
 				return true;
-            }
+			}
 
 			var descriptors = parser.GEH_Descriptors;
 			var blindPlayers = parser.GEH_BlindPlayers;
@@ -33,7 +32,7 @@ namespace DemoInfo.DP.Handler
 			if (rawEvent == null)
 				return false;
 
-            var eventDescriptor = descriptors[rawEvent.eventid];
+			var eventDescriptor = descriptors[rawEvent.eventid];
 
 			if (eventDescriptor.name == "round_start")
 				parser.RaiseRoundStart();
@@ -45,14 +44,14 @@ namespace DemoInfo.DP.Handler
 			Dictionary<string, object> data;
 			switch (eventDescriptor.name) {
 			case "weapon_fire":
-				data = MapData (eventDescriptor, rawEvent);
+				data = MapData(eventDescriptor, rawEvent);
 
-				if (parser.Players.ContainsKey ((int)data ["userid"])) {
-					WeaponFiredEventArgs fire = new WeaponFiredEventArgs ();
-					fire.Shooter = parser.Players [(int)data ["userid"]];
-					fire.Weapon = new Equipment ((string)data ["weapon"]);
+				if (parser.Players.ContainsKey((int)data["userid"])) {
+					WeaponFiredEventArgs fire = new WeaponFiredEventArgs();
+					fire.Shooter = parser.Players[(int)data["userid"]];
+					fire.Weapon = new Equipment((string)data["weapon"]);
 
-					parser.RaiseWeaponFired (fire);
+					parser.RaiseWeaponFired(fire);
 				}
 				break;
 			case "player_death":
@@ -68,21 +67,20 @@ namespace DemoInfo.DP.Handler
 					kill.PenetratedObjects = (int)data["penetrated"];
 
 					parser.RaisePlayerKilled(kill);
-				} else
-				{
+				} else {
 				}
 				break;
 
 				#region Nades
 			case "player_blind":
-				data = MapData (eventDescriptor, rawEvent);
-				if(parser.Players.ContainsKey((int)data["userid"] - 2))
+				data = MapData(eventDescriptor, rawEvent);
+				if (parser.Players.ContainsKey((int)data["userid"] - 2))
 					blindPlayers.Add(parser.Players[(int)data["userid"] - 2]);
 				break;
 			case "flashbang_detonate":
 				var args = FillNadeEvent<FlashEventArgs>(MapData(eventDescriptor, rawEvent), parser);
 				args.FlashedPlayers = blindPlayers.ToArray();
-				parser.RaiseFlashExploded (args);
+				parser.RaiseFlashExploded(args);
 				blindPlayers.Clear();
 				break;
 			case "hegrenade_detonate":
@@ -149,110 +147,97 @@ namespace DemoInfo.DP.Handler
 				p.Team = Team.Spectate;
 
 				break;
-            case "bomb_beginplant": //When the bomb is starting to get planted
-            case "bomb_abortplant": //When the bomb planter stops planting the bomb
-            case "bomb_planted": //When the bomb has been planted
-            case "bomb_defused": //When the bomb has been defused
-            case "bomb_exploded": //When the bomb has exploded
-                data = MapData(eventDescriptor, rawEvent);
+			case "bomb_beginplant": //When the bomb is starting to get planted
+			case "bomb_abortplant": //When the bomb planter stops planting the bomb
+			case "bomb_planted": //When the bomb has been planted
+			case "bomb_defused": //When the bomb has been defused
+			case "bomb_exploded": //When the bomb has exploded
+				data = MapData(eventDescriptor, rawEvent);
 
-                var bombEventArgs = new BombEventArgs();
-                bombEventArgs.Player = parser.Players [(int)data ["userid"]];
-                var bombSiteIndex = (int)data["site"]; //entity index of the bombsite.
-                if(bombSiteIndex == parser.bombSiteAEntityIndex)
-                {
-                    //planted at A.
-                    bombEventArgs.Site = 'A';
-                }
-                else if (bombSiteIndex == parser.bombSiteBEntityIndex)
-                {
-                    //planted at B.
-                    bombEventArgs.Site = 'B';
-                }
-                else
-                {
-                    //we don't know where the sites are: find them out
-                    if (parser.entities.ContainsKey(bombSiteIndex))
-                    {
-                        var bombSite = parser.entities[bombSiteIndex];
-                        if (bombSite.Properties.ContainsKey("m_vecMins") && bombSite.Properties.ContainsKey("m_vecMaxs"))
-                        {
-                            var min = bombSite.Properties["m_vecMins"] as Vector;
-                            var max = bombSite.Properties["m_vecMaxs"] as Vector;
-                            var center = new Vector((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2);
+				var bombEventArgs = new BombEventArgs();
+				bombEventArgs.Player = parser.Players[(int)data["userid"]];
+				var bombSiteIndex = (int)data["site"]; //entity index of the bombsite.
+				if (bombSiteIndex == parser.bombSiteAEntityIndex) {
+					//planted at A.
+					bombEventArgs.Site = 'A';
+				} else if (bombSiteIndex == parser.bombSiteBEntityIndex) {
+					//planted at B.
+					bombEventArgs.Site = 'B';
+				} else {
+					//we don't know where the sites are: find them out
+					if (parser.entities.ContainsKey(bombSiteIndex)) {
+						var bombSite = parser.entities[bombSiteIndex];
+						if (bombSite.Properties.ContainsKey("m_vecMins") && bombSite.Properties.ContainsKey("m_vecMaxs")) {
+							var min = bombSite.Properties["m_vecMins"] as Vector;
+							var max = bombSite.Properties["m_vecMaxs"] as Vector;
+							var center = new Vector(( min.X + max.X ) / 2, ( min.Y + max.Y ) / 2, ( min.Z + max.Z ) / 2);
 
-                            var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
-                            if (csPlayerResource != null)
-                            {
-                                var centerA = csPlayerResource.Properties["m_bombsiteCenterA"] as Vector;
-                                if ((center - centerA).Length < 0.005)
-                                {
-                                    //planted at A.
-                                    parser.bombSiteAEntityIndex = bombSiteIndex;
-                                    bombEventArgs.Site = 'A';
-                                }
-                                else
-                                {
-                                    parser.bombSiteBEntityIndex = bombSiteIndex;
-                                    bombEventArgs.Site = 'B';
-                                }
-                            }
-                        }
-                    }
-                }
+							var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
+							if (csPlayerResource != null) {
+								var centerA = csPlayerResource.Properties["m_bombsiteCenterA"] as Vector;
+								if (( center - centerA ).Length < 0.005) {
+									//planted at A.
+									parser.bombSiteAEntityIndex = bombSiteIndex;
+									bombEventArgs.Site = 'A';
+								} else {
+									parser.bombSiteBEntityIndex = bombSiteIndex;
+									bombEventArgs.Site = 'B';
+								}
+							}
+						}
+					}
+				}
 
-                if (bombEventArgs.Site != default(char))
-                {
-                    switch(eventDescriptor.name)
-                    {
-                        case "bomb_beginplant":
-                            parser.RaiseBombBeginPlant(bombEventArgs);
-                            break;
-                        case "bomb_abortplant":
-                            parser.RaiseBombAbortPlant(bombEventArgs);
-                            break;
-                        case "bomb_planted":
-                            parser.RaiseBombPlanted(bombEventArgs);
-                            break;
-                        case "bomb_defused":
-                            parser.RaiseBombDefused(bombEventArgs);
-                            break;
-                        case "bomb_exploded":
-                            parser.RaiseBombExploded(bombEventArgs);
-                            break;
-                    }
-                }
-                break;
-            case "bomb_begindefuse":
-                data = MapData(eventDescriptor, rawEvent);
-                var e = new BombDefuseEventArgs();
-                e.Player = parser.Players[(int)data["userid"]];
-                e.HasKit = (bool)data["haskit"];
-                parser.RaiseBombBeginDefuse(e);
-                break;
-            case "bomb_abortdefuse":
-                data = MapData(eventDescriptor, rawEvent);
-                var e2 = new BombDefuseEventArgs();
-                e2.Player = parser.Players[(int)data["userid"]];
-                e2.HasKit = e2.Player.HasDefuseKit;
-                parser.RaiseBombAbortDefuse(e2);
-                break;
+				if (bombEventArgs.Site != default(char)) {
+					switch (eventDescriptor.name) {
+					case "bomb_beginplant":
+						parser.RaiseBombBeginPlant(bombEventArgs);
+						break;
+					case "bomb_abortplant":
+						parser.RaiseBombAbortPlant(bombEventArgs);
+						break;
+					case "bomb_planted":
+						parser.RaiseBombPlanted(bombEventArgs);
+						break;
+					case "bomb_defused":
+						parser.RaiseBombDefused(bombEventArgs);
+						break;
+					case "bomb_exploded":
+						parser.RaiseBombExploded(bombEventArgs);
+						break;
+					}
+				}
+				break;
+			case "bomb_begindefuse":
+				data = MapData(eventDescriptor, rawEvent);
+				var e = new BombDefuseEventArgs();
+				e.Player = parser.Players[(int)data["userid"]];
+				e.HasKit = (bool)data["haskit"];
+				parser.RaiseBombBeginDefuse(e);
+				break;
+			case "bomb_abortdefuse":
+				data = MapData(eventDescriptor, rawEvent);
+				var e2 = new BombDefuseEventArgs();
+				e2.Player = parser.Players[(int)data["userid"]];
+				e2.HasKit = e2.Player.HasDefuseKit;
+				parser.RaiseBombAbortDefuse(e2);
+				break;
 			}
 
 			return true;
-        }
+		}
 
 		private T FillNadeEvent<T>(Dictionary<string, object> data, DemoParser parser) where T : NadeEventArgs, new()
 		{
 			var nade = new T();
 
-			if (data.ContainsKey ("userid") && parser.Players.ContainsKey ((int)data ["userid"]))
-				nade.ThrownBy = parser.Players [(int)data ["userid"]];
+			if (data.ContainsKey("userid") && parser.Players.ContainsKey((int)data["userid"]))
+				nade.ThrownBy = parser.Players[(int)data["userid"]];
 				
-			Vector vec = new Vector ();
-			vec.X = (float)data ["x"];
-			vec.Y = (float)data ["y"];
-			vec.Z = (float)data ["z"];
+			Vector vec = new Vector();
+			vec.X = (float)data["x"];
+			vec.Y = (float)data["y"];
+			vec.Z = (float)data["z"];
 			nade.Position = vec;
 
 			return nade;
@@ -260,11 +245,11 @@ namespace DemoInfo.DP.Handler
 
 		private Dictionary<string, object> MapData(CSVCMsg_GameEventList.descriptor_t eventDescriptor, CSVCMsg_GameEvent rawEvent)
 		{
-			Dictionary<string, object> data = new Dictionary<string, object> ();
+			Dictionary<string, object> data = new Dictionary<string, object>();
 
 			var i = 0;
 			foreach (var key in eventDescriptor.keys) {
-				data [key.name] = GetData (rawEvent.keys [i++]);
+				data[key.name] = GetData(rawEvent.keys[i++]);
 			}
 
 			return data;
@@ -293,5 +278,5 @@ namespace DemoInfo.DP.Handler
 		}
 
 		public int Priority { get { return 0; } }
-    }
+	}
 }

@@ -9,8 +9,8 @@ using System.IO;
 namespace DemoInfo.BitStreamImpl
 {
 	public class BitArrayStream : IBitStream
-    {
-        BitArray array;
+	{
+		BitArray array;
 
 		public int Position { get; private set; }
 
@@ -18,7 +18,7 @@ namespace DemoInfo.BitStreamImpl
 		{
 		}
 
-        public BitArrayStream(byte[] data)
+		public BitArrayStream(byte[] data)
 		{
 			array = new BitArray(data);
 			Position = 0;
@@ -34,91 +34,88 @@ namespace DemoInfo.BitStreamImpl
 			Position = 0;
 		}
 
-        public void Seek(int pos, SeekOrigin origin)
-        {
-            if (origin == SeekOrigin.Begin)
-                Position = pos;
+		public void Seek(int pos, SeekOrigin origin)
+		{
+			if (origin == SeekOrigin.Begin)
+				Position = pos;
 
-            if (origin == SeekOrigin.Current)
-                Position += pos;
+			if (origin == SeekOrigin.Current)
+				Position += pos;
 
-            if (origin == SeekOrigin.End)
-                Position = array.Count - pos;
-        }
+			if (origin == SeekOrigin.End)
+				Position = array.Count - pos;
+		}
 
-        public uint ReadInt(int numBits)
-        {
-            uint result = PeekInt(numBits);
-            Position += numBits;
+		public uint ReadInt(int numBits)
+		{
+			uint result = PeekInt(numBits);
+			Position += numBits;
 
-            return result;
-        }
+			return result;
+		}
 
-        public uint PeekInt(int numBits)
-        {
-            uint result = 0;
-            int intPos = 0;
+		public uint PeekInt(int numBits)
+		{
+			uint result = 0;
+			int intPos = 0;
 
-            for (int i = 0; i < numBits; i++)
-            {
-                result |= ((array[i + Position] ? 1u : 0u) << intPos++);
-            }
+			for (int i = 0; i < numBits; i++) {
+				result |= ( ( array[i + Position] ? 1u : 0u ) << intPos++ );
+			}
 
-            return result;
-        }
+			return result;
+		}
 
-        public bool ReadBit()
-        {
-            return ReadInt(1) == 1;
-        }
+		public bool ReadBit()
+		{
+			return ReadInt(1) == 1;
+		}
 
-        public byte ReadByte()
-        {
-            return (byte)ReadInt(8);
-        }
+		public byte ReadByte()
+		{
+			return (byte)ReadInt(8);
+		}
 
-        public byte ReadByte(int numBits)
-        {
-            return (byte)ReadInt(numBits);
-        }
+		public byte ReadByte(int numBits)
+		{
+			return (byte)ReadInt(numBits);
+		}
 
-        public byte[] ReadBytes(int length)
-        {
-            byte[] result = new byte[length];
+		public byte[] ReadBytes(int length)
+		{
+			byte[] result = new byte[length];
 
-            for (int i = 0; i < length; i++)
-            {
-                result[i] = this.ReadByte();
-            }
+			for (int i = 0; i < length; i++) {
+				result[i] = this.ReadByte();
+			}
 
-            return result;
-        }
+			return result;
+		}
 
-        public string PeekBools(int length)
-        {
-            byte[] buffer = new byte[length];
+		public string PeekBools(int length)
+		{
+			byte[] buffer = new byte[length];
 
-            int idx = 0;
-            for (int i = Position; i < Math.Min(Position + length, array.Count); i++)
-            {
-                if (array[i])
-                    buffer[idx++] = 49;
-                else
-                    buffer[idx++] = 48;
-            }
+			int idx = 0;
+			for (int i = Position; i < Math.Min(Position + length, array.Count); i++) {
+				if (array[i])
+					buffer[idx++] = 49;
+				else
+					buffer[idx++] = 48;
+			}
 
-            return Encoding.ASCII.GetString(buffer, 0, Math.Min(length, array.Count - Position));
-        }
+			return Encoding.ASCII.GetString(buffer, 0, Math.Min(length, array.Count - Position));
+		}
 
 		public int ReadSignedInt(int numBits)
 		{
 			// Read the int normally and then shift it back and forth to extend the sign bit.
-			return (((int)ReadInt(numBits)) << (32 - numBits)) >> (32 - numBits);
+			return ( ( (int)ReadInt(numBits) ) << ( 32 - numBits ) ) >> ( 32 - numBits );
 		}
 
 		void IDisposable.Dispose()
 		{
 			array = null;
 		}
-    }
+	}
 }

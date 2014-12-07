@@ -7,18 +7,24 @@ using System.Threading.Tasks;
 
 namespace DemoInfo
 {
-    public class Player
-    {
-        public string Name { get; set; }
-        public long SteamID { get; set; }
-        public Vector Position { get; set; }
-        public int EntityID { get; set; }
+	public class Player
+	{
+		public string Name { get; set; }
+
+		public long SteamID { get; set; }
+
+		public Vector Position { get; set; }
+
+		public int EntityID { get; set; }
+
 		public int HP { get; set; }
 
 		public Vector LastAlivePosition { get; set; }
+
 		public Vector Velocity { get; set; }
 
 		public float ViewDirectionX { get; set; }
+
 		public float ViewDirectionY { get; set; }
 
 		public int Money { get; set; }
@@ -27,14 +33,13 @@ namespace DemoInfo
 
 		public bool Disconnected { get; set; }
 
-		public bool IsAlive 
-		{
+		public bool IsAlive {
 			get { return HP > 0; }
 		}
 
-        public Team Team { get; set; }
+		public Team Team { get; set; }
 
-        public bool HasDefuseKit { get; set; }
+		public bool HasDefuseKit { get; set; }
 
 		/// <summary>
 		/// Copy this instance for multi-threading use. 
@@ -52,26 +57,28 @@ namespace DemoInfo
 			me.ViewDirectionX = ViewDirectionX;
 			me.ViewDirectionY = ViewDirectionY;
 			me.Disconnected = Disconnected;
+
 			me.Team = Team;
-            
-            me.HasDefuseKit = HasDefuseKit;
-            
-			if(Position != null)
+
+			me.HasDefuseKit = HasDefuseKit;
+			if (Position != null)
 				me.Position = Position.Copy(); //Vector is a class, not a struct - thus we need to make it thread-safe. 
 
-			if(LastAlivePosition != null)
+			if (LastAlivePosition != null)
 				me.LastAlivePosition = LastAlivePosition.Copy();
 
-			if(Velocity != null)
+			if (Velocity != null)
 				me.Velocity = Velocity.Copy();
 
 			return me;
 		}
 
-    }
-	public enum Team {
+	}
+
+	public enum Team
+	{
 		Spectate = 1,
 		Terrorist = 2,
 		CounterTerrorist = 3,
-    }
+	}
 }
