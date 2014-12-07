@@ -76,7 +76,9 @@ namespace DemoInfo
 
 		public bool ReadBit()
 		{
-			return ReadInt(1) == 1;
+			bool bit = (Buffer[Offset / 8] & (1 << (Offset & 7))) != 0;
+			Advance(1);
+			return bit;
 		}
 
 		public byte ReadByte()
