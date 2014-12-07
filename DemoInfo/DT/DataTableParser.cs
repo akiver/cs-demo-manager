@@ -95,7 +95,7 @@ namespace DemoInfo.DT
                     {
                         SendTableProperty prop = flattenedProps[currentProp].Prop;
 
-                        if (prop.Priority == priority || (priority == 64 && prop.Flags.HasFlag(SendPropertyFlags.ChangesOften)))
+                        if (prop.Priority == priority || (priority == 64 && prop.Flags.HasFlagFast(SendPropertyFlags.ChangesOften)))
                         {
                             if (start != currentProp)
                             {
@@ -123,7 +123,7 @@ namespace DemoInfo.DT
         {
             CurrentExcludes.AddRange(
                 sendTable.Properties
-                    .Where(a => a.Flags.HasFlag(SendPropertyFlags.Exclude))
+                    .Where(a => a.Flags.HasFlagFast(SendPropertyFlags.Exclude))
                     .Select(a => new ExcludeEntry(a.Name, a.DataTableName, sendTable.Name))
                 );
 
@@ -149,14 +149,14 @@ namespace DemoInfo.DT
             {
                 SendTableProperty property = table.Properties[i];
 
-                if (property.Flags.HasFlag(SendPropertyFlags.InsideArray) || property.Flags.HasFlag(SendPropertyFlags.Exclude) || IsPropExcluded(table, property))
+                if (property.Flags.HasFlagFast(SendPropertyFlags.InsideArray) || property.Flags.HasFlagFast(SendPropertyFlags.Exclude) || IsPropExcluded(table, property))
                     continue;
 
                 if (property.Type == SendPropertyType.DataTable)
                 {
                     SendTable subTable = GetTableByName(property.DataTableName);
 
-                    if (property.Flags.HasFlag(SendPropertyFlags.Collapsible))
+                    if (property.Flags.HasFlagFast(SendPropertyFlags.Collapsible))
                     {
                         GatherProps_IterateProps(subTable, ServerClassIndex, flattenedProps);
                     }

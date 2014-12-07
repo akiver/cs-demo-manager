@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DemoInfo.DT;
 
 namespace DemoInfo
 {
@@ -129,6 +130,11 @@ namespace DemoInfo
 			TValue value;
 			return dictionary.TryGetValue(key, out value) ? value
 				 : defaultValueProvider();
+		}
+
+		public static bool HasFlagFast(this SendPropertyFlags flags, SendPropertyFlags check)
+		{
+			return (flags & check) == check;
 		}
 	}
 }

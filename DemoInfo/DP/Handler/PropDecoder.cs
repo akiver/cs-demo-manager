@@ -34,15 +34,15 @@ namespace DemoInfo.DP.Handler
 
 		static int DecodeInt(SendTableProperty prop, IBitStream reader)
 		{
-			if (prop.Flags.HasFlag(SendPropertyFlags.VarInt)) {
-				if (prop.Flags.HasFlag(SendPropertyFlags.Unsigned)) {
+			if (prop.Flags.HasFlagFast(SendPropertyFlags.VarInt)) {
+				if (prop.Flags.HasFlagFast(SendPropertyFlags.Unsigned)) {
 					return (int)reader.ReadVarInt();
 				} else {
 					Trace.WriteLine("signed varints are not implemented. BAAAAAAD.", "PropDecoder:DecodeInt()");
 					return (int)reader.ReadVarInt();
 				}
 			} else {
-				if (prop.Flags.HasFlag(SendPropertyFlags.Unsigned)) {
+				if (prop.Flags.HasFlagFast(SendPropertyFlags.Unsigned)) {
 					return (int)reader.ReadInt(prop.NumberOfBits);
 				} else {
 					return reader.ReadSignedInt(prop.NumberOfBits);
@@ -70,7 +70,7 @@ namespace DemoInfo.DP.Handler
 
 		static Vector DecodeVector(SendTableProperty prop, IBitStream reader)
 		{
-			if (prop.Flags.HasFlag(SendPropertyFlags.Normal)) {
+			if (prop.Flags.HasFlagFast(SendPropertyFlags.Normal)) {
             
 			}
 
@@ -79,7 +79,7 @@ namespace DemoInfo.DP.Handler
 			v.X = DecodeFloat(prop, reader);
 			v.Y = DecodeFloat(prop, reader);
 
-			if (!prop.Flags.HasFlag(SendPropertyFlags.Normal)) {
+			if (!prop.Flags.HasFlagFast(SendPropertyFlags.Normal)) {
 				v.Z = DecodeFloat(prop, reader);
 			} else {
 				bool isNegative = reader.ReadBit();
@@ -139,31 +139,31 @@ namespace DemoInfo.DP.Handler
 
 		static bool DecodeSpecialFloat(SendTableProperty prop, IBitStream reader, out float result)
 		{
-			if (prop.Flags.HasFlag(SendPropertyFlags.Coord)) {
+			if (prop.Flags.HasFlagFast(SendPropertyFlags.Coord)) {
 				result = ReadBitCoord(reader);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.CoordMp)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.CoordMp)) {
 				result = ReadBitCoordMP(reader, false, false);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.CoordMpLowPrecision)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.CoordMpLowPrecision)) {
 				result = ReadBitCoordMP(reader, false, true);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.CoordMpIntegral)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.CoordMpIntegral)) {
 				result = ReadBitCoordMP(reader, true, false);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.NoScale)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.NoScale)) {
 				result = BitConverter.ToSingle(reader.ReadBytes(4), 0);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.Normal)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.Normal)) {
 				result = ReadBitNormal(reader);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.CellCoord)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.CellCoord)) {
 				result = ReadBitCellCoord(reader, prop.NumberOfBits, false, false);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.CellCoordLowPrecision)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.CellCoordLowPrecision)) {
 				result = ReadBitCellCoord(reader, prop.NumberOfBits, true, false);
 				return true;
-			} else if (prop.Flags.HasFlag(SendPropertyFlags.CellCoordIntegral)) {
+			} else if (prop.Flags.HasFlagFast(SendPropertyFlags.CellCoordIntegral)) {
 				result = ReadBitCellCoord(reader, prop.NumberOfBits, false, true);
 				return true;
 			}
