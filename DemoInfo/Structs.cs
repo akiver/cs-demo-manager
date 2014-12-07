@@ -73,14 +73,6 @@ namespace DemoInfo
 			}
 		}
 
-        public double Length
-        {
-            get
-            {
-                return Math.Sqrt(this.X * this.X + this.Y * this.Y + this.Z * this.Z);
-            }
-        }
-
         public static Vector Parse(BinaryReader reader)
         {
             return new Vector

@@ -175,7 +175,7 @@ namespace DemoInfo.DP.Handler
 							var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
 							if (csPlayerResource != null) {
 								var centerA = csPlayerResource.Properties["m_bombsiteCenterA"] as Vector;
-								if (( center - centerA ).Length < 0.005) {
+								if (( center - centerA ).AbsoluteSquared < 0.005) {
 									//planted at A.
 									parser.bombSiteAEntityIndex = bombSiteIndex;
 									bombEventArgs.Site = 'A';
