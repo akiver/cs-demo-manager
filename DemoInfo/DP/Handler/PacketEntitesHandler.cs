@@ -39,8 +39,6 @@ namespace DemoInfo.DP.Handler
 						// leave
 						if (reader.ReadBit()) {
 							parser.entities.Remove(currentEntity);
-							if (parser.Players.ContainsKey(currentEntity))
-								parser.Players.Remove(currentEntity);
 						}
 					}
 				}

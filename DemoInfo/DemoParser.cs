@@ -138,20 +138,11 @@ namespace DemoInfo
 				while (ParseNextTick()) {
 				}
 			}
-
 		}
-
-		List<string> types = new List<string>();
 
 		public bool ParseNextTick()
 		{
 			bool b = ParseTick();
-
-			foreach (var type in entities.Values.Where(a => !types.Contains(a.ServerClass.Name))) {
-				types.Add(type.ServerClass.Name);
-
-				//Console.WriteLine ("##" + type.ServerClass.Name);
-			}
 
 			if (this.ctTeamEntity == null) {
 				this.ctTeamEntity = entities.Values.ToList().SingleOrDefault(
