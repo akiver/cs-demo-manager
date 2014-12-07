@@ -318,6 +318,10 @@ namespace DemoInfo
 		private void AttributeWeapons()
 		{
 			foreach (var player in Players.Values) {
+
+				if (player.Team == Team.Spectate)
+					continue;
+
 				for (int i = 0; i < 64; i++) {
 					int index = (int)player.Entity.Properties["m_hMyWeapons." + i.ToString().PadLeft(3, '0')] & INDEX_MASK;
 
@@ -337,6 +341,8 @@ namespace DemoInfo
 						player.rawWeapons[index].lastUpdate = CurrentTick;
 					}
 				}
+
+				player.ActiveWeaponID = (int)player.Entity.Properties["m_hActiveWeapon"] & INDEX_MASK;
 
 				IEnumerable<int> deletedWeapons = player.rawWeapons
 					.Where(a => a.Value.lastUpdate != CurrentTick)

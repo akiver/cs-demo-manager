@@ -33,6 +33,16 @@ namespace DemoInfo
 
 		public bool Disconnected { get; set; }
 
+		internal int ActiveWeaponID;
+
+		public Equipment ActiveWeapon
+		{
+			get
+			{
+				return rawWeapons[ActiveWeaponID];
+			}
+		}
+
 		internal Dictionary<int, Equipment> rawWeapons = new Dictionary<int, Equipment>();
 		public IEnumerable<Equipment> Weapons { get { return rawWeapons.Values; } }
 
