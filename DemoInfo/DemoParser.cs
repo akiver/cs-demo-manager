@@ -215,7 +215,7 @@ namespace DemoInfo
 
 					p.ViewDirectionY = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[0]", 0);
 
-					p.HasDefuseKit = ((int)entity.Properties.GetValueOrDefault("m_bHasDefuser", 0)) == 0;
+					p.HasDefuseKit = ((int)entity.Properties.GetValueOrDefault("m_bHasDefuser", 0)) == 1;
 
 					if (p.IsAlive) {
 						p.LastAlivePosition = p.Position;
