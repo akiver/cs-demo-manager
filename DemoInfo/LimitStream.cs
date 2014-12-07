@@ -32,12 +32,24 @@ namespace DemoInfo
 			this._Position = 0;
 		}
 
+		private const int TrashSize = 4096;
+		private static readonly byte[] Dignitrash = new byte[TrashSize];
+
 		protected override void Dispose(bool disposing)
 		{
 			base.Dispose(disposing);
 
-			if (disposing)
-				ReadBytes(checked((int)(Length - _Position))); // Just read all the remaining shit in case we didn't read everything.
+			if (disposing) {
+				var remaining = Length - _Position;
+				if (Underlying.CanSeek)
+					Underlying.Seek(remaining, SeekOrigin.Current);
+				else {
+					while (remaining > 0) {
+						Underlying.Read(Dignitrash, 0, checked((int)Math.Min(TrashSize, remaining)));
+						remaining -= TrashSize; // could go beyond 0, but it's signed so who cares
+					}
+				}
+			}
 		}
 
 		public override void Flush() { Underlying.Flush(); }
