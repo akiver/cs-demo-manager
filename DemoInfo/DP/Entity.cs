@@ -26,33 +26,14 @@ namespace DemoInfo.DP
 
 		public void ApplyUpdate(IBitStream reader)
 		{
-			var updates = ReadUpdatedFileds(reader).ToList();
-
-			foreach (var prop in updates) {
-				var val = PropDecoder.DecodeProp(prop, reader);
-
-				Properties[prop.PropertyName] = val;
-			}
-		}
-
-		private IEnumerable<FlattenedPropEntry> ReadUpdatedFileds(IBitStream reader)
-		{
 			bool newWay = reader.ReadBit();
-
-			List<int> fieldIndicies = new List<int>();
-
 			int index = -1;
+			var entries = new List<FlattenedPropEntry>();
+			while ((index = ReadFieldIndex(reader, index, newWay)) != -1)
+				entries.Add(ServerClass.flattenedProps[index]);
 
-			while (true) {
-				index = ReadFieldIndex(reader, index, newWay);
-
-				if (index != -1)
-					fieldIndicies.Add(index);
-				else
-					break;
-			}
-
-			return fieldIndicies.Select(a => ServerClass.flattenedProps[a]);
+			foreach (var prop in entries)
+				Properties[prop.PropertyName] = PropDecoder.DecodeProp(prop, reader);
 		}
 
 		int ReadFieldIndex(IBitStream reader, int lastIndex, bool bNewWay)
