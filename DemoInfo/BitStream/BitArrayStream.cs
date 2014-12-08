@@ -122,5 +122,18 @@ namespace DemoInfo.BitStreamImpl
 		{
 			return BitConverter.ToSingle(ReadBytes(4), 0);
 		}
+
+		public byte[] ReadBits(int bits)
+		{
+			byte[] result = new byte[(bits + 7) / 8];
+
+			for (int i = 0; i < (bits / 8); i++)
+				result[i] = this.ReadByte();
+
+			if ((bits % 8) != 0)
+				result[bits / 8] = ReadByte(bits % 8);
+
+			return result;
+		}
 	}
 }

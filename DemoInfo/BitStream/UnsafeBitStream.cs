@@ -95,6 +95,12 @@ namespace DemoInfo
 		public byte[] ReadBytes(int bytes)
 		{
 			var ret = new byte[bytes];
+			ReadBytes(ret, bytes);
+			return ret;
+		}
+
+		private void ReadBytes(byte[] ret, int bytes)
+		{
 			if (bytes < 3) {
 				for (int i = 0; i < bytes; i++)
 					ret[i] = ReadByte();
@@ -115,7 +121,6 @@ namespace DemoInfo
 					offset += remainingBytes;
 				}
 			}
-			return ret;
 		}
 
 		private void HyperspeedCopyRound(int bytes, byte* retptr) // you spin me right round baby right round...
@@ -159,6 +164,17 @@ namespace DemoInfo
 			uint iResult = PeekInt(32); // omfg please inline this
 			Advance(32);
 			return *(float*)&iResult; // standard reinterpret cast
+		}
+
+		public byte[] ReadBits(int bits)
+		{
+			byte[] result = new byte[(bits + 7) / 8];
+			ReadBytes(result, bits / 8);
+
+			if ((bits % 8) != 0)
+				result[bits / 8] = ReadByte(bits % 8);
+
+			return result;
 		}
 	}
 }

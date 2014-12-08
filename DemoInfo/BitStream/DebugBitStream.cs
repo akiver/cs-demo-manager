@@ -127,6 +127,14 @@ namespace DemoInfo.BitStreamImpl
 			Verify(a, b);
 			return a;
 		}
+
+		public byte[] ReadBits(int bits)
+		{
+			var a = A.ReadBits(bits);
+			var b = B.ReadBits(bits);
+			Verify(a.SequenceEqual(b), true);
+			return a;
+		}
 	}
 }
 
