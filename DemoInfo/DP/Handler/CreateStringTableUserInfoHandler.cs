@@ -38,7 +38,7 @@ namespace DemoInfo.DP.Handler
 	
 				for (int i = 0; i < table.num_entries; i++) {
 					int entryIndex = lastEntry + 1;
-					// read in the entity-index
+					// d in the entity-index
 					if (!reader.ReadBit()) {
 						entryIndex = (int)reader.ReadInt(nEntryBits);
 					}
@@ -69,13 +69,16 @@ namespace DemoInfo.DP.Handler
 					if (entry == null)
 						entry = "";
 
+					if (history.Count > 31)
+						history.RemoveAt(0);
+
 					history.Add(entry);
 
 					// Read in the user data.
 					byte[] userdata = new byte[0];
 					if (reader.ReadBit()) {
 						if (table.user_data_fixed_size) {
-							userdata = reader.ReadBytes(table.user_data_size);
+							userdata = reader.ReadBits(table.user_data_size_bits);
 						} else {
 							int bytesToRead = (int)reader.ReadInt(14);
 
