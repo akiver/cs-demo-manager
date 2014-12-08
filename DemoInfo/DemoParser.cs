@@ -147,7 +147,7 @@ namespace DemoInfo
 			bool b = ParseTick();
 
 			if (this.ctTeamEntity == null) {
-				this.ctTeamEntity = entities.Values.ToList().SingleOrDefault(
+				this.ctTeamEntity = entities.Values.SingleOrDefault(
 					a => a.ServerClass.DTName == "DT_CSTeam" &&
 					(string)a.Properties["m_szTeamname"] == "CT"
 				);

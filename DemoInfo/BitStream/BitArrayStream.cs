@@ -117,5 +117,10 @@ namespace DemoInfo.BitStreamImpl
 		{
 			array = null;
 		}
+
+		public float ReadFloat()
+		{
+			return BitConverter.ToSingle(ReadBytes(4), 0);
+		}
 	}
 }

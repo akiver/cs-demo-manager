@@ -14,6 +14,7 @@ namespace DemoInfo
 		byte ReadByte();
 		byte ReadByte(int bits);
 		byte[] ReadBytes(int bytes);
+		float ReadFloat();
 	}
 }
 

@@ -76,7 +76,9 @@ namespace DemoInfo
 
 		public bool ReadBit()
 		{
-			return ReadInt(1) == 1;
+			bool bit = (Buffer[Offset / 8] & (1 << (Offset & 7))) != 0;
+			Advance(1);
+			return bit;
 		}
 
 		public byte ReadByte()
@@ -150,6 +152,13 @@ namespace DemoInfo
 			var result = (int)(((long)((*(ulong*)(PBuffer + ((Offset / 8) & ~3))) << ((8 * 8) - (Offset % (8 * 4)) - numBits))) >> ((8 * 8) - numBits));
 			Advance(numBits);
 			return result;
+		}
+
+		public float ReadFloat()
+		{
+			uint iResult = PeekInt(32); // omfg please inline this
+			Advance(32);
+			return *(float*)&iResult; // standard reinterpret cast
 		}
 	}
 }
