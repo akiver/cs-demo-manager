@@ -136,16 +136,14 @@ namespace DemoInfo.DP.Handler
 
 				var user = parser.RawPlayers.Single(a => a.UserID == (int)data["userid"]);
 				user.Name = "disconnected";
-				user.UserID = -1;
 				user.IsFakePlayer = true;
 
-
-
-				var p = parser.Players[(int)data["userid"]];
-				p.Disconnected = true;
-				p.HP = -1;
-				p.Team = Team.Spectate;
-
+				if (parser.Players.Contains((int)data["userid"])) {
+					var p = parser.Players[(int)data["userid"]];
+					p.Disconnected = true;
+					p.HP = -1;
+					p.Team = Team.Spectate;
+				} 
 				break;
 			case "bomb_beginplant": //When the bomb is starting to get planted
 			case "bomb_abortplant": //When the bomb planter stops planting the bomb
