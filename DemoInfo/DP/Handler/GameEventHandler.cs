@@ -167,21 +167,22 @@ namespace DemoInfo.DP.Handler
 					//we don't know where the sites are: find them out
 					if (parser.entities.ContainsKey(bombSiteIndex)) {
 						var bombSite = parser.entities[bombSiteIndex];
-						if (bombSite.Properties.ContainsKey("m_vecMins") && bombSite.Properties.ContainsKey("m_vecMaxs")) {
-							var min = bombSite.Properties["m_vecMins"] as Vector;
-							var max = bombSite.Properties["m_vecMaxs"] as Vector;
-							var center = new Vector(( min.X + max.X ) / 2, ( min.Y + max.Y ) / 2, ( min.Z + max.Z ) / 2);
-
+						var min = (Vector)bombSite.Properties.GetValueOrDefault("m_Collision.m_vecMins", null);
+						var max = (Vector)bombSite.Properties.GetValueOrDefault("m_Collision.m_vecMaxs", null);
+						if (min != null && max != null) {
+							var center = new Vector((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2);
 							var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
 							if (csPlayerResource != null) {
-								var centerA = csPlayerResource.Properties["m_bombsiteCenterA"] as Vector;
-								if (( center - centerA ).AbsoluteSquared < 0.005) {
-									//planted at A.
-									parser.bombSiteAEntityIndex = bombSiteIndex;
-									bombEventArgs.Site = 'A';
-								} else {
-									parser.bombSiteBEntityIndex = bombSiteIndex;
-									bombEventArgs.Site = 'B';
+								var centerA = (Vector)csPlayerResource.Properties.GetValueOrDefault("m_bombsiteCenterA", null);
+								if (centerA != null) {
+									if ((center - centerA).AbsoluteSquared < 0.005) {
+										//planted at A.
+										parser.bombSiteAEntityIndex = bombSiteIndex;
+										bombEventArgs.Site = 'A';
+									} else {
+										parser.bombSiteBEntityIndex = bombSiteIndex;
+										bombEventArgs.Site = 'B';
+									}
 								}
 							}
 						}
