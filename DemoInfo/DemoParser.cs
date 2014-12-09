@@ -190,8 +190,12 @@ namespace DemoInfo
 
 					if (p.Team != Team.Spectate) {
 						p.HP = (int)entity.Properties.GetValueOrDefault("m_iHealth", -1);
+						p.Armor = (int)entity.Properties.GetValueOrDefault("m_ArmorValue", -1);
+						p.HasDefuseKit = ((int)entity.Properties.GetValueOrDefault("m_bHasDefuser", 0)) == 1;
+						p.HasHelmet = ((int)entity.Properties.GetValueOrDefault("m_bHasHelmet", 0)) == 1;
 					} else {
 						p.HP = -1;
+						p.Armor = -1;
 					}
 
 					p.Name = rawPlayer.Name;
@@ -206,8 +210,6 @@ namespace DemoInfo
 					p.ViewDirectionX = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[1]", 0);
 
 					p.ViewDirectionY = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[0]", 0);
-
-					p.HasDefuseKit = ((int)entity.Properties.GetValueOrDefault("m_bHasDefuser", 0)) == 1;
 
 					if (p.IsAlive) {
 						p.LastAlivePosition = p.Position;
@@ -314,7 +316,7 @@ namespace DemoInfo
 		}
 
 		const int MAX_EDICT_BITS = 11;
-		const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
+		internal const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
 		private void AttributeWeapons()
 		{
 			foreach (var player in Players.Values) {
