@@ -138,7 +138,7 @@ namespace DemoInfo.DP.Handler
 				user.Name = "disconnected";
 				user.IsFakePlayer = true;
 
-				if (parser.Players.Contains((int)data["userid"])) {
+				if (parser.Players.ContainsKey((int)data["userid"])) {
 					var p = parser.Players[(int)data["userid"]];
 					p.Disconnected = true;
 					p.HP = -1;
