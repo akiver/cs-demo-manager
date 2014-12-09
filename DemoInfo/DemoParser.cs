@@ -78,6 +78,14 @@ namespace DemoInfo
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
+		/// <summary>
+		/// Gets or sets a value indicating whether this <see cref="DemoInfo.DemoParser"/> will attribute weapons to the players.
+		/// Default: false
+		/// Note: Enableing this might decrease performance in the current implementation. Will be removed once the code is optimized. 
+		/// </summary>
+		/// <value><c>true</c> to attribute weapons; otherwise, <c>false</c>.</value>
+		public bool ShallAttributeWeapons { get; set; }
+
 		Entity ctTeamEntity, tTeamEntity;
 
 		internal int bombSiteAEntityIndex = -1;
@@ -218,7 +226,8 @@ namespace DemoInfo
 
 			}
 
-			AttributeWeapons();
+			if(ShallAttributeWeapons)
+				AttributeWeapons();
 
 			if (b) {
 				if (TickDone != null)
