@@ -19,6 +19,8 @@ namespace DemoInfo
 
 		public int HP { get; set; }
 
+		public int Armor { get; set; }
+
 		public Vector LastAlivePosition { get; set; }
 
 		public Vector Velocity { get; set; }
@@ -39,6 +41,7 @@ namespace DemoInfo
 		{
 			get
 			{
+				if (ActiveWeaponID == DemoParser.INDEX_MASK) return null;
 				return rawWeapons[ActiveWeaponID];
 			}
 		}
@@ -53,6 +56,8 @@ namespace DemoInfo
 		public Team Team { get; set; }
 
 		public bool HasDefuseKit { get; set; }
+
+		public bool HasHelmet { get; set; }
 
 		public Player()
 		{
@@ -73,6 +78,7 @@ namespace DemoInfo
 			me.Name = Name;
 			me.SteamID = SteamID;
 			me.HP = HP;
+			me.Armor = Armor;
 
 			me.ViewDirectionX = ViewDirectionX;
 			me.ViewDirectionY = ViewDirectionY;
@@ -81,6 +87,8 @@ namespace DemoInfo
 			me.Team = Team;
 
 			me.HasDefuseKit = HasDefuseKit;
+			me.HasHelmet = HasHelmet;
+
 			if (Position != null)
 				me.Position = Position.Copy(); //Vector is a class, not a struct - thus we need to make it thread-safe. 
 
