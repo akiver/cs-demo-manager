@@ -3,8 +3,14 @@
 
 This is a C#-Library that makes reading CS:GO-Demos and analyzing them easier. 
 
+##IRC
+
+We now got an fany IRC-Channel. Join [#demoinfogo](http://webchat.quakenet.org/?channels=demoinfogo) on Quakenet. If no one is there, you might want to try [#dota2replay](http://webchat.quakenet.org/?channels=dota2ŕeplay), the parsing is pretty similar (There are some differences in how the field-headers are stored in the packet-entites, however) 
+
 ##Correctness
-This is the most accurate implementation I know of. This is because I worked with Valve while creating this.
+This is the most accurate implementation I know of. This is because I worked with Valve while creating this. If you find bugs, create an issue. Be sure to provide a demo to reproduce the issue!
+
+
 
 ##Usage
 Include the DemoInfo-Project. You can then can create an instance of the ``DemoParser``-Class. 
