@@ -47,5 +47,5 @@ For starting parsing, you can call the ``ParseDemo``-Method of the parser. You c
  * Player died (Weapon, Killer, Killed Person
  * Round-Restart if it's the first round
  * *I'm working on more! - Include your own, see ``DP/Handler/GameEventHandler.cs`` for how to implement those, and create a pull-request! 
- 
+  
  Any questions? Contact me on GitHub!
