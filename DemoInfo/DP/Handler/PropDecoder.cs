@@ -251,8 +251,6 @@ namespace DemoInfo.DP.Handler
 
 				// If we got either parse them, otherwise it's a zero.
 				if (intval == 1) {
-					// Read the sign bit
-					isNegative = reader.ReadBit();
 
 					// If there's an integer, read it in
 					// Adjust the integers from [0..MAX_COORD_VALUE-1] to [1..MAX_COORD_VALUE]
