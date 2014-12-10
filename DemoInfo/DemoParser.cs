@@ -333,8 +333,14 @@ namespace DemoInfo
 				if (player.Team == Team.Spectate)
 					continue;
 
+				string weaponPrefix = "m_hMyWeapons.";
+
+				if(!player.Entity.Properties.ContainsKey("m_hMyWeapons.000"))
+					weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
+
 				for (int i = 0; i < 64; i++) {
-					int index = (int)player.Entity.Properties["m_hMyWeapons." + i.ToString().PadLeft(3, '0')] & INDEX_MASK;
+
+					int index = (int)player.Entity.Properties[weaponPrefix + i.ToString().PadLeft(3, '0')] & INDEX_MASK;
 
 					if (index != INDEX_MASK) {
 						var entity = (Entity)entities[index];
