@@ -74,7 +74,7 @@ namespace DemoInfo
 
 		internal Dictionary<int, Entity> entities = new Dictionary<int, Entity>();
 
-		public List<PlayerInfo> RawPlayers = new List<PlayerInfo>();
+		public PlayerInfo[] RawPlayers = new PlayerInfo[64];
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
@@ -167,10 +167,16 @@ namespace DemoInfo
 				);
 			}
 			
-			for (int i = 0; i < RawPlayers.Count; i++) {
+			for (int i = 0; i < RawPlayers.Length; i++) {
+				if (RawPlayers[i] == null)
+					continue;
+				if (entities.Count == 0)
+					break;
+
 				var rawPlayer = RawPlayers[i];
 
 				int id = rawPlayer.UserID;
+
 				if (!entities.ContainsKey(i + 1))
 					continue;
 

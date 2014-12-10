@@ -24,9 +24,6 @@ namespace DemoInfo.ST
 
 		public void ParseStringTable(IBitStream reader, string tableName, DemoParser parser)
 		{
-			if (tableName == "userinfo")
-				parser.RawPlayers.Clear(); 
-
             int numStrings = (int)reader.ReadInt(16);
 
 
@@ -46,7 +43,7 @@ namespace DemoInfo.ST
 					if (tableName == "userinfo") {
 						PlayerInfo info = PlayerInfo.ParseFrom(new BinaryReader(new MemoryStream(data)));
 
-						parser.RawPlayers.Add(info);
+						parser.RawPlayers[int.Parse(stringName)] = info;
 					} else if (tableName == "instancebaseline") {
 						int classid = int.Parse(stringName); //wtf volvo?
 

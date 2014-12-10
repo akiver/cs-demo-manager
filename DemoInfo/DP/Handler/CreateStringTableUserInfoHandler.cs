@@ -95,10 +95,7 @@ namespace DemoInfo.DP.Handler
 						BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
 						PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
 
-						if (entryIndex < parser.RawPlayers.Count)
-							parser.RawPlayers[entryIndex] = info;
-						else
-							parser.RawPlayers.Add(info);
+						parser.RawPlayers[entryIndex] = info;
 					
 					} else if (table.name == "instancebaseline") {
 						int classid = int.Parse(entry); //wtf volvo?

@@ -22,6 +22,7 @@ namespace DemoInfo.DP.Handler
 				return true;
 			}
 
+
 			var descriptors = parser.GEH_Descriptors;
 			var blindPlayers = parser.GEH_BlindPlayers;
 
@@ -32,7 +33,11 @@ namespace DemoInfo.DP.Handler
 			if (rawEvent == null)
 				return false;
 
+
 			var eventDescriptor = descriptors[rawEvent.eventid];
+
+			if (parser.Players.Count == 0 && eventDescriptor.name != "player_connect")
+				return true;
 
 			if (eventDescriptor.name == "round_start")
 				parser.RaiseRoundStart();
@@ -44,31 +49,27 @@ namespace DemoInfo.DP.Handler
 			Dictionary<string, object> data;
 			switch (eventDescriptor.name) {
 			case "weapon_fire":
+
 				data = MapData(eventDescriptor, rawEvent);
 
-				if (parser.Players.ContainsKey((int)data["userid"])) {
-					WeaponFiredEventArgs fire = new WeaponFiredEventArgs();
-					fire.Shooter = parser.Players[(int)data["userid"]];
-					fire.Weapon = new Equipment((string)data["weapon"]);
+				WeaponFiredEventArgs fire = new WeaponFiredEventArgs();
+				fire.Shooter = parser.Players[(int)data["userid"]];
+				fire.Weapon = new Equipment((string)data["weapon"]);
 
-					parser.RaiseWeaponFired(fire);
-				}
+				parser.RaiseWeaponFired(fire);
 				break;
 			case "player_death":
 				data = MapData(eventDescriptor, rawEvent);
 
 				PlayerKilledEventArgs kill = new PlayerKilledEventArgs();
 
-				if (parser.Players.ContainsKey((int)data["userid"]) && parser.Players.ContainsKey((int)data["attacker"])) {
-					kill.DeathPerson = parser.Players[(int)data["userid"]];
-					kill.Killer = parser.Players[(int)data["attacker"]];
-					kill.Headshot = (bool)data["headshot"];
-					kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
-					kill.PenetratedObjects = (int)data["penetrated"];
+				kill.DeathPerson = parser.Players[(int)data["userid"]];
+				kill.Killer = parser.Players[(int)data["attacker"]];
+				kill.Headshot = (bool)data["headshot"];
+				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
+				kill.PenetratedObjects = (int)data["penetrated"];
 
 					parser.RaisePlayerKilled(kill);
-				} else {
-				}
 				break;
 
 				#region Nades
@@ -117,33 +118,24 @@ namespace DemoInfo.DP.Handler
 
 				int index = (int)data["index"];
 
-				if (index < parser.RawPlayers.Count) {
-					//Roy said:
-					//"only replace existing player slot if the userID is different (very unlikely)"
-
-					if (player.UserID != parser.RawPlayers[index].UserID) {
-						parser.RawPlayers[index] = player;
-					}
-
-				} else {
-					parser.RawPlayers.Add(player);
-				}
+				parser.RawPlayers[index] = player;
 
 
 				break;
 			case "player_disconnect":
 				data = MapData(eventDescriptor, rawEvent);
+				int toDelete = (int)data["userid"];
+				bool found = false;
+				for (int i = 0; i < parser.RawPlayers.Length; i++) {
 
-				var user = parser.RawPlayers.Single(a => a.UserID == (int)data["userid"]);
-				user.Name = "disconnected";
-				user.IsFakePlayer = true;
+					if (parser.RawPlayers[i] != null && parser.RawPlayers[i].UserID == toDelete) {
+						parser.RawPlayers[i] = null;
+						break;
+					}
+				}
 
-				if (parser.Players.ContainsKey((int)data["userid"])) {
-					var p = parser.Players[(int)data["userid"]];
-					p.Disconnected = true;
-					p.HP = -1;
-					p.Team = Team.Spectate;
-				} 
+				parser.Players.Remove(toDelete);
+
 				break;
 			case "bomb_beginplant": //When the bomb is starting to get planted
 			case "bomb_abortplant": //When the bomb planter stops planting the bomb
