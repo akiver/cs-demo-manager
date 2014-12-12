@@ -1,26 +1,22 @@
 #DemoInfo
 
-
 This is a C#-Library that makes reading CS:GO-Demos and analyzing them easier. 
+
+![Travis CI results](https://travis-ci.org/moritzuehling/demoinfo-public.svg?branch=master)
 
 ##IRC
 
 We now have a fancy IRC-Channel. Join [#demoinfogo](http://webchat.quakenet.org/?channels=demoinfogo) on Quakenet. If no one is there, you might want to try [#dota2replay](http://webchat.quakenet.org/?channels=dota2ŕeplay), the parsing of demos is pretty similar between those two games (There are some differences in how the field-headers are stored in the packet-entites, however).
 
-##Correctness
-This is the most accurate implementation I know of. This is because I worked with Valve while creating this. If you find bugs, create an issue. Be sure to provide a demo to reproduce the issue!
-
-
-
 ##Usage
 Include the DemoInfo-Project. You can then can create an instance of the ``DemoParser``-Class. 
 
-    DemoParser parser = new DemoParser(File.OpenRead("file.dem"));
+	DemoParser parser = new DemoParser(File.OpenRead("file.dem"));
     
 Then you can subscribe to events: 
 
-    parser.TickDone += parser_TickDone;
-    parser.MatchStarted += parser_MatchStarted;
+	parser.TickDone += parser_TickDone;
+	parser.MatchStarted += parser_MatchStarted;
 	parser.PlayerKilled += HandlePlayerKilled;
 	parser.WeaponFired += HandleWeaponFired;
     
@@ -36,6 +32,13 @@ For starting parsing, you can call the ``ParseDemo``-Method of the parser. You c
  * ID of his Entity-Object
  * Wether he is alive
  * His Team (CT / T / Spec)
+ * His weapons
+ * Still work in progress:
+   * Kills
+   * Deaths
+   * ...
+
+* Team-Scores
  
 * The following Game-Events: 
  * Exploding / Starting / Stopping of the following Nades: 
@@ -46,6 +49,7 @@ For starting parsing, you can call the ``ParseDemo``-Method of the parser. You c
  * Weapon fired (Who fired, what weapon)
  * Player died (Weapon, Killer, Killed Person
  * Round-Restart if it's the first round
+ * Bomb-Events
  * *I'm working on more! - Include your own, see ``DP/Handler/GameEventHandler.cs`` for how to implement those, and create a pull-request! 
   
  Any questions? Contact me on GitHub!
