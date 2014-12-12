@@ -43,7 +43,7 @@ namespace DemoInfo.DP
 				entries.Add(this.Props[index]);
 
 			foreach (var prop in entries) {
-				prop.Decode(reader);
+				prop.Decode(reader, this);
 			}
 		}
 
@@ -94,52 +94,54 @@ namespace DemoInfo.DP
 		public event EventHandler<PropertyUpdateEventArgs<float>> FloatRecived;
 		public event EventHandler<PropertyUpdateEventArgs<Vector>>  VectorRecived;
 		public event EventHandler<PropertyUpdateEventArgs<string>>  StringRecived;
-		public event EventHandler<PropertyUpdateEventArgs<long>> LongRecived;
 		public event EventHandler<PropertyUpdateEventArgs<object[]>>  ArrayRecived;
 
-		public void Decode(IBitStream stream)
+		public void Decode(IBitStream stream, Entity e)
 		{
+			//I found no better place for this, sorry.
+			CheckBindings(e);
+
 			switch (Entry.Prop.Type) {
 			case SendPropertyType.Int:
 				{
 					var val = PropDecoder.DecodeInt(Entry.Prop, stream);
 					if (IntRecived != null)
-						IntRecived(this, new PropertyUpdateEventArgs<int>(val));
+						IntRecived(this, new PropertyUpdateEventArgs<int>(val, e, this));
 				}
 				break;
 			case SendPropertyType.Float:
 				{
 					var val = PropDecoder.DecodeFloat(Entry.Prop, stream);
 					if (FloatRecived != null)
-						FloatRecived(this, new PropertyUpdateEventArgs<float>(val));
+						FloatRecived(this, new PropertyUpdateEventArgs<float>(val, e, this));
 				}
 				break;
 			case SendPropertyType.Vector:
 				{
 					var val = PropDecoder.DecodeVector(Entry.Prop, stream);
 					if (VectorRecived != null)
-						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val));
+						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
 				}
 				break;
 			case SendPropertyType.Array:
 				{
 					var val = PropDecoder.DecodeArray(Entry, stream);
 					if (ArrayRecived != null)
-						ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val));
+						ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val, e, this));
 				}
 				break;
 			case SendPropertyType.String:
 				{
 					var val = PropDecoder.DecodeString(Entry.Prop, stream);
 					if (StringRecived != null)
-						StringRecived(this, new PropertyUpdateEventArgs<string>(val));
+						StringRecived(this, new PropertyUpdateEventArgs<string>(val, e, this));
 				}
 				break;
 			case SendPropertyType.VectorXY:
 				{
 					var val = PropDecoder.DecodeVectorXY(Entry.Prop, stream);
 					if (VectorRecived != null)
-						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val));
+						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
 				}
 				break;
 			default:
@@ -151,6 +153,49 @@ namespace DemoInfo.DP
 		{
 			this.Entry = new FlattenedPropEntry(prop.PropertyName, prop.Prop, prop.ArrayElementProp);
 		}
+
+
+
+		[Conditional("DEBUG"), Conditional("YOLODEBUG")]
+		public void CheckBindings(Entity e)
+		{
+			if (IntRecived != null && this.Entry.Prop.Type != SendPropertyType.Int)
+				throw new InvalidOperationException(
+					string.Format("({0}).({1}) isn't an {2}", 
+						e.ServerClass.Name, 
+						Entry.PropertyName, 
+						SendPropertyType.Int));
+
+			if (FloatRecived != null && this.Entry.Prop.Type != SendPropertyType.Float)
+				throw new InvalidOperationException(
+					string.Format("({0}).({1}) isn't an {2}", 
+						e.ServerClass.Name, 
+						Entry.PropertyName, 
+						SendPropertyType.Float));
+
+			if (StringRecived != null && this.Entry.Prop.Type != SendPropertyType.String)
+				throw new InvalidOperationException(
+					string.Format("({0}).({1}) isn't an {2}", 
+						e.ServerClass.Name, 
+						Entry.PropertyName, 
+						SendPropertyType.String));
+
+			if (ArrayRecived != null && this.Entry.Prop.Type != SendPropertyType.Array)
+				throw new InvalidOperationException(
+					string.Format("({0}).({1}) isn't an {2}", 
+						e.ServerClass.Name, 
+						Entry.PropertyName, 
+						SendPropertyType.Array));
+
+			if (VectorRecived != null && (this.Entry.Prop.Type != SendPropertyType.Vector && this.Entry.Prop.Type != SendPropertyType.VectorXY))
+				throw new InvalidOperationException(
+					string.Format("({0}).({1}) isn't an {2}", 
+						e.ServerClass.Name, 
+						Entry.PropertyName, 
+						SendPropertyType.Vector));
+
+
+		}
 	}
 
 	#region Update-Types
@@ -158,9 +203,15 @@ namespace DemoInfo.DP
 	{
 		public T Value { get; private set; }
 
-		public PropertyUpdateEventArgs(T value)
+		public Entity Entity { get; private set; }
+
+		public PropertyEntry Property { get; private set; }
+
+		public PropertyUpdateEventArgs(T value, Entity e, PropertyEntry p)
 		{
 			this.Value = value;
+			this.Entity = e;
+			this.Property = p;
 		}
 	}
 	#endregion
