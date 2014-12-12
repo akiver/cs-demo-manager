@@ -90,12 +90,12 @@ namespace DemoInfo.DP
 	{
 		public FlattenedPropEntry Entry { get; private set; }
 
-		public event EventHandler<IntUpdateEventArgs> IntRecived;
-		public event EventHandler<FloatUpdateEventArgs> FloatRecived;
-		public event EventHandler<VectorUpdateEventArgs> VectorRecived;
-		public event EventHandler<StringUpdateEventArgs> StringRecived;
-		public event EventHandler<LongUpdateEventArgs> LongRecived;
-		public event EventHandler<ArrayUpdateEventArgs> ArrayRecived;
+		public event EventHandler<PropertyUpdateEventArgs<int>> IntRecived;
+		public event EventHandler<PropertyUpdateEventArgs<float>> FloatRecived;
+		public event EventHandler<PropertyUpdateEventArgs<Vector>>  VectorRecived;
+		public event EventHandler<PropertyUpdateEventArgs<string>>  StringRecived;
+		public event EventHandler<PropertyUpdateEventArgs<long>> LongRecived;
+		public event EventHandler<PropertyUpdateEventArgs<object[]>>  ArrayRecived;
 
 		public void Decode(IBitStream stream)
 		{
@@ -104,42 +104,42 @@ namespace DemoInfo.DP
 				{
 					var val = PropDecoder.DecodeInt(Entry.Prop, stream);
 					if (IntRecived != null)
-						IntRecived(this, new IntUpdateEventArgs(val));
+						IntRecived(this, new PropertyUpdateEventArgs<int>(val));
 				}
 				break;
 			case SendPropertyType.Float:
 				{
 					var val = PropDecoder.DecodeFloat(Entry.Prop, stream);
 					if (FloatRecived != null)
-						FloatRecived(this, new FloatUpdateEventArgs(val));
+						FloatRecived(this, new PropertyUpdateEventArgs<float>(val));
 				}
 				break;
 			case SendPropertyType.Vector:
 				{
 					var val = PropDecoder.DecodeVector(Entry.Prop, stream);
 					if (VectorRecived != null)
-						VectorRecived(this, new VectorUpdateEventArgs(val));
+						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val));
 				}
 				break;
 			case SendPropertyType.Array:
 				{
 					var val = PropDecoder.DecodeArray(Entry, stream);
 					if (ArrayRecived != null)
-						ArrayRecived(this, new ArrayUpdateEventArgs(val));
+						ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val));
 				}
 				break;
 			case SendPropertyType.String:
 				{
 					var val = PropDecoder.DecodeString(Entry.Prop, stream);
 					if (StringRecived != null)
-						StringRecived(this, new StringUpdateEventArgs(val));
+						StringRecived(this, new PropertyUpdateEventArgs<string>(val));
 				}
 				break;
 			case SendPropertyType.VectorXY:
 				{
 					var val = PropDecoder.DecodeVectorXY(Entry.Prop, stream);
 					if (VectorRecived != null)
-						VectorRecived(this, new VectorUpdateEventArgs(val));
+						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val));
 				}
 				break;
 			default:
@@ -154,71 +154,14 @@ namespace DemoInfo.DP
 	}
 
 	#region Update-Types
-	class PropertyUpdateEventArgs : EventArgs
+	class PropertyUpdateEventArgs<T> : EventArgs
 	{
+		public T Value { get; private set; }
 
-	}
-
-	class IntUpdateEventArgs : PropertyUpdateEventArgs
-	{
-		public int Value { get; private set; }
-
-		public IntUpdateEventArgs(int value)
+		public PropertyUpdateEventArgs(T value)
 		{
 			this.Value = value;
 		}
 	}
-
-	class FloatUpdateEventArgs : PropertyUpdateEventArgs
-	{
-		public float Value { get; private set; }
-
-		public FloatUpdateEventArgs(float value)
-		{
-			this.Value = value;
-		}
-	}
-
-	class VectorUpdateEventArgs : PropertyUpdateEventArgs
-	{
-		public Vector Value { get; private set; }
-
-		public VectorUpdateEventArgs(Vector value)
-		{
-			this.Value = value;
-		}
-	}
-
-	class StringUpdateEventArgs : PropertyUpdateEventArgs
-	{
-		public string Value { get; private set; }
-
-		public StringUpdateEventArgs(string value)
-		{
-			this.Value = value;
-		}
-	}
-
-	class LongUpdateEventArgs : PropertyUpdateEventArgs
-	{
-		public long Value { get; private set; }
-
-		public LongUpdateEventArgs(long value)
-		{
-			this.Value = value;
-		}
-	}
-
-	class ArrayUpdateEventArgs : PropertyUpdateEventArgs
-	{
-		//TODO: Improve this. 
-		public object[] Values { get; private set; }
-
-		public ArrayUpdateEventArgs(object[] values)
-		{
-			this.Values = values;
-		}
-	}
-
 	#endregion
 }

@@ -303,7 +303,7 @@ namespace DemoInfo
 				int teamID = -1;
 				int score = 0;
 
-				e.Entity.FindProperty("m_scoreTotal").IntRecived += (object xx, IntUpdateEventArgs update) => { 
+				e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => { 
 					score = update.Value;
 				};
 
@@ -327,7 +327,7 @@ namespace DemoInfo
 					}
 				};
 
-				e.Entity.FindProperty("m_szTeamname").StringRecived += (object sender_, StringUpdateEventArgs teamName) => { 
+				e.Entity.FindProperty("m_szTeamname").StringRecived += (sender_, teamName) => { 
 					team = teamName.Value;
 
 					//We got the name. Lets bind the updates accordingly!
