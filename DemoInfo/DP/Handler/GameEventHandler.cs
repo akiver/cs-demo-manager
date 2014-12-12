@@ -147,57 +147,7 @@ namespace DemoInfo.DP.Handler
 				var bombEventArgs = new BombEventArgs();
 				bombEventArgs.Player = parser.Players[(int)data["userid"]];
 				var bombSiteIndex = (int)data["site"]; //entity index of the bombsite.
-				if (bombSiteIndex == parser.bombSiteAEntityIndex) {
-					//planted at A.
-					bombEventArgs.Site = 'A';
-				} else if (bombSiteIndex == parser.bombSiteBEntityIndex) {
-					//planted at B.
-					bombEventArgs.Site = 'B';
-				} else {
-					//we don't know where the sites are: find them out
-					if (parser.entities.ContainsKey(bombSiteIndex)) {
-						var bombSite = parser.entities[bombSiteIndex];
-						var min = (Vector)bombSite.Properties.GetValueOrDefault("m_Collision.m_vecMins", null);
-						var max = (Vector)bombSite.Properties.GetValueOrDefault("m_Collision.m_vecMaxs", null);
-						if (min != null && max != null) {
-							var center = new Vector((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2);
-							var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
-							if (csPlayerResource != null) {
-								var centerA = (Vector)csPlayerResource.Properties.GetValueOrDefault("m_bombsiteCenterA", null);
-								if (centerA != null) {
-									if ((center - centerA).AbsoluteSquared < 0.005) {
-										//planted at A.
-										parser.bombSiteAEntityIndex = bombSiteIndex;
-										bombEventArgs.Site = 'A';
-									} else {
-										parser.bombSiteBEntityIndex = bombSiteIndex;
-										bombEventArgs.Site = 'B';
-									}
-								}
-							}
-						}
-					}
-				}
 
-				if (bombEventArgs.Site != default(char)) {
-					switch (eventDescriptor.name) {
-					case "bomb_beginplant":
-						parser.RaiseBombBeginPlant(bombEventArgs);
-						break;
-					case "bomb_abortplant":
-						parser.RaiseBombAbortPlant(bombEventArgs);
-						break;
-					case "bomb_planted":
-						parser.RaiseBombPlanted(bombEventArgs);
-						break;
-					case "bomb_defused":
-						parser.RaiseBombDefused(bombEventArgs);
-						break;
-					case "bomb_exploded":
-						parser.RaiseBombExploded(bombEventArgs);
-						break;
-					}
-				}
 				break;
 			case "bomb_begindefuse":
 				data = MapData(eventDescriptor, rawEvent);

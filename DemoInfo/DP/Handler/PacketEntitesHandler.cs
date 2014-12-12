@@ -29,16 +29,20 @@ namespace DemoInfo.DP.Handler
 						if (reader.ReadBit()) {
 							var e = ReadEnterPVS(reader, currentEntity, parser);
 
+							parser.Entities[currentEntity] = e;
+
+							e.ServerClass.AnnounceNewEntity(e);
+
 							e.ApplyUpdate(reader);
 						} else {
 							// preserve
-							Entity e = parser.entities[currentEntity];
+							Entity e = parser.Entities[currentEntity];
 							e.ApplyUpdate(reader);
 						}
 					} else {
 						// leave
 						if (reader.ReadBit()) {
-							parser.entities.Remove(currentEntity);
+							parser.Entities[currentEntity] = null;
 						}
 					}
 				}
@@ -56,11 +60,7 @@ namespace DemoInfo.DP.Handler
             reader.ReadInt(10); //Entity serial. 
 
             Entity newEntity = new Entity(id, entityClass);
-            //Console.ForegroundColor = ConsoleColor.Red;
-            //Console.WriteLine("Entity #"+id+": " + entityClass.Name);
-            //Console.ResetColor();
 
-            parser.entities[newEntity.ID] = newEntity;
 
 			if (parser.instanceBaseline.ContainsKey(serverClassID)) {
 				using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {

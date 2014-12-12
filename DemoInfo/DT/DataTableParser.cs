@@ -195,5 +195,10 @@ namespace DemoInfo.DT
         {
             return DataTables.FirstOrDefault(a => a.Name == pName);
         }
+
+		public ServerClass FindByName(string className)
+		{
+			return ServerClasses.Single(a => a.Name == className);
+		}
     }
 }

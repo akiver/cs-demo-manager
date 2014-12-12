@@ -72,9 +72,15 @@ namespace DemoInfo
 
 		public Dictionary<int, Player> Players = new Dictionary<int, Player>();
 
-		internal Dictionary<int, Entity> entities = new Dictionary<int, Entity>();
+		public Player[] PlayerInformations = new Player[64];
 
 		public PlayerInfo[] RawPlayers = new PlayerInfo[64];
+
+		const int MAX_EDICT_BITS = 11;
+		internal const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
+		internal const int MAX_ENTITIES = ( ( 1 << MAX_EDICT_BITS ) );
+
+		internal Entity[] Entities = new Entity[MAX_ENTITIES]; //Max 2048 entities. 
 
 		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
 
@@ -86,21 +92,27 @@ namespace DemoInfo
 		/// <value><c>true</c> to attribute weapons; otherwise, <c>false</c>.</value>
 		public bool ShallAttributeWeapons { get; set; }
 
-		Entity ctTeamEntity, tTeamEntity;
 
 		internal int bombSiteAEntityIndex = -1;
 		internal int bombSiteBEntityIndex = -1;
 
-		public int CTScore {
-			get {
-				return (int)ctTeamEntity.Properties.GetValueOrDefault("m_scoreTotal", 0);
-			}
+		/// <summary>
+		/// The ID of the CT-Team
+		/// </summary>
+		int ctID = -1;
+		/// <summary>
+		/// The ID of the terrorist team
+		/// </summary>
+		int tID = -1;
+
+		public int CTScore  {
+			get;
+			private set;
 		}
 
-		public int TScore {
-			get {
-				return (int)tTeamEntity.Properties.GetValueOrDefault("m_scoreTotal", 0);
-			}
+		public int TScore  {
+			get;
+			private set;
 		}
 
 		#region Context for GameEventHandler
@@ -118,14 +130,7 @@ namespace DemoInfo
 
 		public float TickTime {
 			get { return this.Header.PlaybackTime / this.Header.PlaybackFrames; }
-		}
-
-		[Obsolete("This was a typo. Please use the CurrentTick-Property (2 \"r\"s instead of 3) from now on. This will be removed soon.")]
-		public int CurrrentTick { 
-			get {
-				return CurrentTick;
-			}
-		}
+   		}
 
 		public int CurrentTick { get; private set; }
 
@@ -153,83 +158,27 @@ namespace DemoInfo
 		public bool ParseNextTick()
 		{
 			bool b = ParseTick();
-
-			if (this.ctTeamEntity == null) {
-				this.ctTeamEntity = entities.Values.SingleOrDefault(
-					a => a.ServerClass.DTName == "DT_CSTeam" &&
-					(string)a.Properties["m_szTeamname"] == "CT"
-				);
-			}
-			if (this.tTeamEntity == null) {
-				this.tTeamEntity = entities.Values.SingleOrDefault(a => 
-					a.ServerClass.DTName == "DT_CSTeam" &&
-				(string)a.Properties["m_szTeamname"] == "TERRORIST"
-				);
-			}
 			
 			for (int i = 0; i < RawPlayers.Length; i++) {
 				if (RawPlayers[i] == null)
 					continue;
-				if (entities.Count == 0)
-					break;
 
 				var rawPlayer = RawPlayers[i];
 
 				int id = rawPlayer.UserID;
 
-				if (!entities.ContainsKey(i + 1))
-					continue;
-
-				Entity entity = entities[i + 1];
-
-				if (entity.Properties.ContainsKey("cslocaldata.m_vecOrigin")) {
+				if (PlayerInformations[i] != null) { //There is an good entity for this
 					if (!Players.ContainsKey(id))
-						Players[id] = new Player();
+						Players[id] = PlayerInformations[i];
 
 					Player p = Players[id];
-					p.EntityID = entity.ID;
-					p.Entity = entity;
-
-					p.EntityID = entity.ID;
-					p.Position = (Vector)entity.Properties["cslocaldata.m_vecOrigin"];
-					p.Position.Z = (float)entity.Properties.GetValueOrDefault("cslocaldata.m_vecOrigin[2]", 0);
-
-
-					if ((int)entity.Properties["m_iTeamNum"] == (int)ctTeamEntity.Properties["m_iTeamNum"])
-						p.Team = Team.CounterTerrorist;
-					else if ((int)entity.Properties["m_iTeamNum"] == (int)tTeamEntity.Properties["m_iTeamNum"])
-						p.Team = Team.Terrorist;
-					else
-						p.Team = Team.Spectate;
-
-					if (p.Team != Team.Spectate) {
-						p.HP = (int)entity.Properties.GetValueOrDefault("m_iHealth", -1);
-						p.Armor = (int)entity.Properties.GetValueOrDefault("m_ArmorValue", -1);
-						p.HasDefuseKit = ((int)entity.Properties.GetValueOrDefault("m_bHasDefuser", 0)) == 1;
-						p.HasHelmet = ((int)entity.Properties.GetValueOrDefault("m_bHasHelmet", 0)) == 1;
-					} else {
-						p.HP = -1;
-						p.Armor = -1;
-					}
-
 					p.Name = rawPlayer.Name;
 					p.SteamID = rawPlayer.XUID;
 
-					p.Velocity.X = (float)entity.Properties.GetValueOrDefault<string, object>("localdata.m_vecVelocity[0]", 0f);
-					p.Velocity.Y = (float)entity.Properties.GetValueOrDefault<string, object>("localdata.m_vecVelocity[1]", 0f);
-					p.Velocity.Z = (float)entity.Properties.GetValueOrDefault<string, object>("localdata.m_vecVelocity[2]", 0f);
-
-					p.Money = (int)entity.Properties.GetValueOrDefault<string, object>("m_iAccount", 0);
-
-					p.ViewDirectionX = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[1]", 0);
-
-					p.ViewDirectionY = (float)entity.Properties.GetValueOrDefault("m_angEyeAngles[0]", 0);
-
 					if (p.IsAlive) {
-						p.LastAlivePosition = p.Position;
+						p.LastAlivePosition = p.Position.Copy();
 					}
 				}
-
 			}
 
 			if(ShallAttributeWeapons)
@@ -278,8 +227,7 @@ namespace DemoInfo
 				using (var volvo = reader.ReadVolvoPacket())
 					DataTables.ParsePacket(volvo);
 
-				for(int i = 0; i < DataTables.ServerClasses.Count; i++)
-				{
+				for (int i = 0; i < DataTables.ServerClasses.Count; i++) {
 					var sc = DataTables.ServerClasses[i];
 					if (sc.DTName.StartsWith("DT_Weapon")) {
 						var s = sc.DTName.Substring(9).ToLower();
@@ -298,6 +246,8 @@ namespace DemoInfo
 						equipmentMapping.Add(sc, EquipmentElement.Molotov);
 					}
 				}
+
+				BindEntites();
 
 				break;
 			case DemoCommand.StringTables:
@@ -328,53 +278,148 @@ namespace DemoInfo
 
 			using (var volvo = reader.ReadVolvoPacket())
 				DemoPacketParser.ParsePacket(volvo, this);
-		}
+   		}
 
-		const int MAX_EDICT_BITS = 11;
-		internal const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
 		private void AttributeWeapons()
 		{
-			foreach (var player in Players.Values) {
 
-				if (player.Team == Team.Spectate)
-					continue;
+		}
 
-				string weaponPrefix = "m_hMyWeapons.";
+		private void BindEntites()
+		{
+			//Okay, first the team-stuff. 
+			HandleTeamScores();
 
-				if(!player.Entity.Properties.ContainsKey("m_hMyWeapons.000"))
-					weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
+			HandlePlayers();
 
-				for (int i = 0; i < 64; i++) {
+		}
 
-					int index = (int)player.Entity.Properties[weaponPrefix + i.ToString().PadLeft(3, '0')] & INDEX_MASK;
+		private void HandleTeamScores()
+		{
+			DataTables.FindByName("CCSTeam")
+				.OnNewEntity += (object sender, EntityCreatedEventArgs e) => {
 
-					if (index != INDEX_MASK) {
-						var entity = (Entity)entities[index];
+				string team = null;
+				int teamID = -1;
+				int score = 0;
 
-						if (!player.rawWeapons.ContainsKey(index)) {
-							Equipment e = new Equipment();
-							e.Weapon = equipmentMapping[entity.ServerClass];
+				e.Entity.FindProperty("m_scoreTotal").IntRecived += (object xx, IntUpdateEventArgs update) => { 
+					score = update.Value;
+				};
 
-							if(e.Weapon == EquipmentElement.Unknown)
-								throw new Exception("This weapon is unknown: " + entity.ServerClass.DTName);
+				e.Entity.FindProperty("m_iTeamNum").IntRecived += (xx, update) => { 
+					teamID = update.Value;
 
-							player.rawWeapons.Add(index, e);
+					if(team == "CT")
+					{
+						this.ctID = teamID;
+						CTScore = score;
+						foreach(var p in PlayerInformations.Where(a => a != null && a.TeamID == teamID))
+							p.Team = Team.CounterTerrorist;
+					}
+
+					if(team == "TERRORIST")
+					{
+						this.tID = teamID;
+						TScore = score;
+						foreach(var p in PlayerInformations.Where(a => a != null && a.TeamID == teamID))
+							p.Team = Team.CounterTerrorist;
+					}
+				};
+
+				e.Entity.FindProperty("m_szTeamname").StringRecived += (object sender_, StringUpdateEventArgs teamName) => { 
+					team = teamName.Value;
+
+					//We got the name. Lets bind the updates accordingly!
+					if(teamName.Value == "CT")
+					{
+						CTScore = score;
+						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => { 
+							CTScore = update.Value;
+						};
+
+						if(teamID != -1)
+						{
+							this.ctID = teamID;
+							foreach(var p in PlayerInformations.Where(a => a != null && a.TeamID == teamID))
+								p.Team = Team.CounterTerrorist;
 						}
 
-						player.rawWeapons[index].lastUpdate = CurrentTick;
 					}
-				}
+					else if(teamName.Value == "TERRORIST")
+					{
+						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => TScore = update.Value;
+						e.Entity.FindProperty("m_iTeamNum").IntRecived += (xx, update) => tID = update.Value;
 
-				player.ActiveWeaponID = (int)player.Entity.Properties["m_hActiveWeapon"] & INDEX_MASK;
 
-				IEnumerable<int> deletedWeapons = player.rawWeapons
-					.Where(a => a.Value.lastUpdate != CurrentTick)
-					.Select(a => a.Key)
-					.ToList();
+						if(teamID != -1)
+						{
+							this.tID = teamID;
+							foreach(var p in PlayerInformations.Where(a => a != null && a.TeamID == teamID))
+								p.Team = Team.Terrorist;
+						}
+					}
+				};
+			};
+		}
 
-				foreach (var weapon in deletedWeapons)
-					player.rawWeapons.Remove(weapon);
-			}
+		private void HandlePlayers()
+		{
+			DataTables.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => 
+			{
+				HandleNewPlayer(e.Entity);
+			};
+		}
+
+		private void HandleNewPlayer(Entity playerEntity)
+		{
+			Player p = new Player();
+			this.PlayerInformations[playerEntity.ID - 1] = p;
+
+			p.Name = "unconnected";
+			p.EntityID = playerEntity.ID;
+			p.SteamID = -1;
+			p.Entity = playerEntity;
+			p.Position = new Vector();
+			p.Velocity = new Vector();
+
+			//position update
+			playerEntity.FindProperty("cslocaldata.m_vecOrigin").VectorRecived += (sender, e) => {
+				p.Position.X = e.Value.X; 
+				p.Position.Y = e.Value.Y;
+			};
+
+			playerEntity.FindProperty("cslocaldata.m_vecOrigin[2]").FloatRecived += (sender, e) => {
+				p.Position.Z = e.Value; 
+			};
+
+			//team update
+			//problem: Teams are networked after the players... How do we solve that?
+			playerEntity.FindProperty("m_iTeamNum").IntRecived += (sender, e) => { 
+
+				p.TeamID = e.Value;
+
+				if (e.Value == ctID)
+					p.Team = Team.CounterTerrorist;
+				else if (e.Value == tID)
+					p.Team = Team.Terrorist;
+				else
+					p.Team = Team.Spectate;
+			};
+
+			//update some stats
+			playerEntity.FindProperty("m_iHealth").IntRecived += (sender, e) => p.HP = e.Value;
+			playerEntity.FindProperty("m_ArmorValue").IntRecived += (sender, e) => p.Armor = e.Value;
+			playerEntity.FindProperty("m_bHasDefuser").IntRecived += (sender, e) => p.HasDefuseKit = e.Value == 1;
+			playerEntity.FindProperty("m_bHasHelmet").IntRecived += (sender, e) => p.HasHelmet = e.Value == 1;
+			playerEntity.FindProperty("m_iAccount").IntRecived += (sender, e) => p.Money = e.Value;
+			playerEntity.FindProperty("m_angEyeAngles[1]").FloatRecived += (sender, e) => p.ViewDirectionX = e.Value;
+			playerEntity.FindProperty("m_angEyeAngles[0]").IntRecived += (sender, e) => p.ViewDirectionY = e.Value;
+
+
+			playerEntity.FindProperty("localdata.m_vecVelocity[0]").FloatRecived += (sender, e) => p.Velocity.X = e.Value;
+			playerEntity.FindProperty("localdata.m_vecVelocity[1]").FloatRecived += (sender, e) => p.Velocity.Y = e.Value;
+			playerEntity.FindProperty("localdata.m_vecVelocity[2]").FloatRecived += (sender, e) => p.Velocity.Z = e.Value;
 		}
 
 		#region EventCaller
