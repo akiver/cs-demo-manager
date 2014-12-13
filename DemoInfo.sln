@@ -12,7 +12,6 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 		Bitstream-Debugging|Any CPU = Bitstream-Debugging|Any CPU
-		Yolo|Any CPU = Yolo|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|Any CPU.ActiveCfg = Bitstream-Debugging|Any CPU
@@ -21,16 +20,12 @@ Global
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Yolo|Any CPU.ActiveCfg = Yolo|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Yolo|Any CPU.Build.0 = Yolo|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Bitstream-Debugging|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Bitstream-Debugging|Any CPU.Build.0 = Debug|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Yolo|Any CPU.ActiveCfg = Release|Any CPU
-		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Yolo|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = DemoInfo\DemoInfo.csproj
