@@ -1,0 +1,9 @@
+language: csharp
+solution: DemoInfo.sln
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y mono-profiler python-pip
+  - sudo pip install --upgrade requests
+after_script:
+  - git clone 'https://github.com/main--/demoinfo-testdata.git' testdemos
+  - python ci/brofiler.py
