@@ -1,5 +1,5 @@
 from __future__ import nested_scopes, generators, division, absolute_import, with_statement, print_function, unicode_literals
-import json, base64, os, subprocess, select, requests
+import json, base64, os, subprocess, select, requests, sys
 
 GH_TOKEN = os.environ['STATUS_APIKEY']
 COMMIT = os.environ['TRAVIS_COMMIT']
@@ -33,10 +33,19 @@ def set_status(sha, state, desc, ctx, url=None):
 
 demos = [dem for dem in os.listdir(TESTDATA) if dem.endswith('.dem')]
 
+
+if sys.argv[1] == 'cleanup':
+    for dem in demos:
+        set_status(COMMIT, 'error', '???', dem)
+    sys.exit(0)
+elif sys.argv[1] != 'run':
+    raise ValueError('Illegal parameter')
+
 # start by setting all of them to Preparing
 for dem in demos:
     set_status(COMMIT, 'pending', 'Preparing', dem)
 
+failure_count = 0
 # now actually run profiling
 for dem in demos:
     set_status(COMMIT, 'pending', 'Running', dem)
@@ -66,6 +75,9 @@ for dem in demos:
             (pipe_chunks if fd is pipe_rfd else stdout_chunks if fd is stdout_rfd else stderr_chunks).append(chunk.decode('utf-8'))
     retval = p.wait()
     print('%s return value %d' % (dem, retval))
+
+    os.unlink(TESTDATA + '/' + dem)
+
     gist_text = '' if retval == 0 else 'return code %d' % (retval,)
     err_text = ''.join(stderr_chunks)
     out_text = ''.join(stdout_chunks)
@@ -89,3 +101,7 @@ for dem in demos:
     gistlink = create_gist(gist_text)
     print('Profiling results posted to: ' + gistlink)
     set_status(COMMIT, 'success' if retval is 0 else 'failure', 'Completed', dem, gistlink)
+    if retval != 0:
+        failure_count += 1
+
+sys.exit(failure_count)

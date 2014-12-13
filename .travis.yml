@@ -2,9 +2,15 @@ language: csharp
 solution: DemoInfo.sln
 before_install:
   - sudo apt-get update -qq
+install:
   - sudo apt-get install -y mono-profiler python-pip
   - sudo pip install --upgrade requests
-after_script:
-  - xbuild /p:Configuration=Bitstream-Debugging DemoInfo.sln
+before_script:
   - git clone 'https://github.com/main--/demoinfo-testdata.git' testdemos
-  - python ci/brofiler.py
+script:
+  - nuget restore DemoInfo.sln
+  - xbuild /p:Configuration=Bitstream-Debugging DemoInfo.sln
+  - xbuild /p:Configuration=Release DemoInfo.sln
+  - python ci/brofiler.py run
+after_script:
+  - python ci/brofiler.py cleanup
