@@ -31,7 +31,9 @@ def set_status(sha, state, desc, ctx, url=None):
                         headers={'Authorization': 'token ' + GH_TOKEN}, data=json.dumps(request).encode('utf-8'))
     return res.text
 
-def invoke(script, dem):
+dotcnt = 0
+def invoke(script, dem, echo_dots=False):
+    global dotcnt
     pipe_rfd, pipe_wfd = os.pipe()
     p = subprocess.Popen(
         ['/bin/bash', script, dem, str(pipe_wfd)],
@@ -51,7 +53,10 @@ def invoke(script, dem):
         rready, _, _ = select.select(pending, [], [])
         fd = rready[0]
         chunk = os.read(fd, 4096)
-        if len(chunk) == 0:
+        if echo_dots and chunk == '.':
+            dotcnt += 1
+            print(str(dotcnt), end='\r')
+        elif len(chunk) == 0:
             # end of stream
             pending.remove(fd)
         else:
@@ -88,7 +93,7 @@ elif sys.argv[1] == 'verify':
 
     # now run verification
     for dem in demos:
-        retval, out_text, err_text, _ = invoke('ci/verify.sh', dem) # pipe not in use
+        retval, out_text, err_text, _ = invoke('ci/verify.sh', dem, True) # pipe not in use
         if retval == 0:
             set_status(COMMIT, 'pending', 'Verify success', dem)
         else:
