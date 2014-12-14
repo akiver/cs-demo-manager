@@ -11,7 +11,7 @@ namespace DevNullPlayer
 			using (var input = File.OpenRead(args[0])) {
 				var parser = new DemoParser(input);
 				#if DEBUG
-				parser.TickDone += (sender, e) => Console.WriteLine(".");;
+				parser.TickDone += (sender, e) => Console.Write(".");;
 				#endif
 				parser.ParseDemo(true);
 			}
