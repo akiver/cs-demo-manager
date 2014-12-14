@@ -11,6 +11,7 @@ script:
   - nuget restore DemoInfo.sln
   - xbuild /p:Configuration=Bitstream-Debugging DemoInfo.sln
   - xbuild /p:Configuration=Release DemoInfo.sln
+  - python ci/brofiler.py verify
   - python ci/brofiler.py run
 after_script:
   - python ci/brofiler.py cleanup

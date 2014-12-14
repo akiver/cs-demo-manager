@@ -31,27 +31,10 @@ def set_status(sha, state, desc, ctx, url=None):
                         headers={'Authorization': 'token ' + GH_TOKEN}, data=json.dumps(request).encode('utf-8'))
     return res.text
 
-demos = [dem for dem in os.listdir(TESTDATA) if dem.endswith('.dem')]
-
-
-if sys.argv[1] == 'cleanup':
-    for dem in demos:
-        set_status(COMMIT, 'error', '???', dem)
-    sys.exit(0)
-elif sys.argv[1] != 'run':
-    raise ValueError('Illegal parameter')
-
-# start by setting all of them to Preparing
-for dem in demos:
-    set_status(COMMIT, 'pending', 'Preparing', dem)
-
-failure_count = 0
-# now actually run profiling
-for dem in demos:
-    set_status(COMMIT, 'pending', 'Running', dem)
+def invoke(script, dem):
     pipe_rfd, pipe_wfd = os.pipe()
     p = subprocess.Popen(
-        ['/bin/bash', 'ci/profile.sh', dem, str(pipe_wfd)],
+        ['/bin/bash', script, dem, str(pipe_wfd)],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         shell=False,
@@ -75,29 +58,66 @@ for dem in demos:
             (pipe_chunks if fd is pipe_rfd else stdout_chunks if fd is stdout_rfd else stderr_chunks).append(chunk.decode('utf-8'))
     retval = p.wait()
     print('%s return value %d' % (dem, retval))
-
-    os.unlink(TESTDATA + '/' + dem)
-
-    gist_text = '' if retval == 0 else 'return code %d' % (retval,)
     err_text = ''.join(stderr_chunks)
     out_text = ''.join(stdout_chunks)
     pipe_text = ''.join(pipe_chunks)
+    return retval, out_text, err_text, pipe_text
+
+SEP_LEN = 25
+SEP_CHAR = '-'
+def maybe_append(buf, piece, title):
+    if len(piece) > 0:
+        req_sep = SEP_LEN - (len(title) + 2)
+        buf += '\n' + (SEP_CHAR * (req_sep / 2)) + ' ' + title + ' ' + (SEP_CHAR * ((req_sep + 1) / 2)) + '\n'
+        buf += piece
+        buf += '\n' + (SEP_CHAR * SEP_LEN) + '\n'
+    return buf
+
+demos = [dem for dem in os.listdir(TESTDATA) if dem.endswith('.dem')]
+
+
+if sys.argv[1] == 'cleanup':
+    for dem in demos:
+        set_status(COMMIT, 'error', '???', dem)
+    sys.exit(0)
+elif sys.argv[1] == 'verify':
+    how_many_failures = 0
+    # start by setting all of them to Preparing
+    for dem in demos:
+        set_status(COMMIT, 'pending', 'Preparing', dem)
+
+    # now run verification
+    for dem in demos:
+        retval, out_text, err_text, _ = invoke('ci/verify.sh', dem) # pipe not in use
+        if retval == 0:
+            set_status(COMMIT, 'pending', 'Verify success', dem)
+        else:
+            how_many_failures += 1
+            gistlink = create_gist(maybe_append(maybe_append(
+                'return code ' + retval, err_text, 'stderr'), out_text, 'stdout'))
+            set_status(COMMIT, 'failure', 'Verification failed', dem, gistlink)
+
+    sys.exit(how_many_failures)
+elif sys.argv[1] != 'run':
+    raise ValueError('Illegal parameter')
+
+
+
+failure_count = 0
+# now actually run profiling
+for dem in demos:
+    set_status(COMMIT, 'pending', 'Running', dem)
+    retval, out_text, err_text, pipe_text = invoke('ci/profile.sh', dem)
+    os.unlink(TESTDATA + '/' + dem)
+
+    gist_text = '' if retval == 0 else 'return code %d' % (retval,)
     pipe_text = '\n'.join([x for x in pipe_text.split('\n') if not x.startswith('unmatched leave at stack pos')])
-    if len(err_text) > 0:
-        gist_text += '\n----- stderr -----\n'
-        gist_text += err_text
-        gist_text += '\n------------------\n'
-    if len(out_text) > 0:
-        gist_text += '\n----- stdout -----\n'
-        gist_text += out_text
-        gist_text += '\n------------------\n'
-    if len(pipe_text) > 0:
-        all_is_well = len(gist_text) == 0
-        if not all_is_well:
-            gist_text += '\n----- results-----\n'
-        gist_text += pipe_text
-        if not all_is_well:
-            gist_text += '\n------------------\n'
+    gist_text = maybe_append(gist_text, err_text, 'stderr')
+    gist_text = maybe_append(gist_text, out_text, 'stdout')
+    if gist_text:
+        gist_text = maybe_append(gist_text, pipe_text, 'results')
+    else:
+        gist_text = pipe_text # no need for bars if it's the only output
     gistlink = create_gist(gist_text)
     print('Profiling results posted to: ' + gistlink)
     set_status(COMMIT, 'success' if retval is 0 else 'failure', 'Completed', dem, gistlink)
