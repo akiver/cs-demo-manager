@@ -31,8 +31,6 @@ namespace DemoInfo.DP.Handler
 
 							parser.Entities[currentEntity] = e;
 
-							e.ServerClass.AnnounceNewEntity(e);
-
 							e.ApplyUpdate(reader);
 						} else {
 							// preserve
@@ -53,14 +51,15 @@ namespace DemoInfo.DP.Handler
 
         public Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
-            int serverClassID = (int)reader.ReadInt(parser.DataTables.ClassBits);
+            int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
 
-            ServerClass entityClass = parser.DataTables.ServerClasses[serverClassID];
+            ServerClass entityClass = parser.SendTableParser.ServerClasses[serverClassID];
 
             reader.ReadInt(10); //Entity serial. 
 
-            Entity newEntity = new Entity(id, entityClass);
+			Entity newEntity = new Entity(id, entityClass);
 
+			newEntity.ServerClass.AnnounceNewEntity(newEntity);
 
 			if (parser.instanceBaseline.ContainsKey(serverClassID)) {
 				using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {

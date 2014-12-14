@@ -65,7 +65,7 @@ namespace DemoInfo
 
 		public DemoHeader Header { get; private set; }
 
-		internal DataTableParser DataTables = new DataTableParser();
+		internal DataTableParser SendTableParser = new DataTableParser();
 		StringTableParser StringTables = new StringTableParser();
 
 		internal Dictionary<ServerClass, EquipmentElement> equipmentMapping = new Dictionary<ServerClass, EquipmentElement>();
@@ -93,8 +93,8 @@ namespace DemoInfo
 		public bool ShallAttributeWeapons { get; set; }
 
 
-		internal int bombSiteAEntityIndex = -1;
-		internal int bombSiteBEntityIndex = -1;
+		internal int bombsiteAIndex = -1, bombsiteBIndex = -1;
+		internal Vector bombsiteACenter, bombsiteBCenter;
 
 		/// <summary>
 		/// The ID of the CT-Team
@@ -104,6 +104,7 @@ namespace DemoInfo
 		/// The ID of the terrorist team
 		/// </summary>
 		int tID = -1;
+
 
 		public int CTScore  {
 			get;
@@ -225,10 +226,10 @@ namespace DemoInfo
 				break;
 			case DemoCommand.DataTables:
 				using (var volvo = reader.ReadVolvoPacket())
-					DataTables.ParsePacket(volvo);
+					SendTableParser.ParsePacket(volvo);
 
-				for (int i = 0; i < DataTables.ServerClasses.Count; i++) {
-					var sc = DataTables.ServerClasses[i];
+				for (int i = 0; i < SendTableParser.ServerClasses.Count; i++) {
+					var sc = SendTableParser.ServerClasses[i];
 					if (sc.DTName.StartsWith("DT_Weapon")) {
 						var s = sc.DTName.Substring(9).ToLower();
 						equipmentMapping.Add(sc, Equipment.MapEquipment(s));
@@ -290,13 +291,16 @@ namespace DemoInfo
 			//Okay, first the team-stuff. 
 			HandleTeamScores();
 
+			HandleBombSites();
+
+
 			HandlePlayers();
 
 		}
 
 		private void HandleTeamScores()
 		{
-			DataTables.FindByName("CCSTeam")
+			SendTableParser.FindByName("CCSTeam")
 				.OnNewEntity += (object sender, EntityCreatedEventArgs e) => {
 
 				string team = null;
@@ -365,7 +369,7 @@ namespace DemoInfo
 
 		private void HandlePlayers()
 		{
-			DataTables.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => 
+			SendTableParser.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => 
 			{
 				HandleNewPlayer(e.Entity);
 			};
@@ -420,6 +424,35 @@ namespace DemoInfo
 			playerEntity.FindProperty("localdata.m_vecVelocity[0]").FloatRecived += (sender, e) => p.Velocity.X = e.Value;
 			playerEntity.FindProperty("localdata.m_vecVelocity[1]").FloatRecived += (sender, e) => p.Velocity.Y = e.Value;
 			playerEntity.FindProperty("localdata.m_vecVelocity[2]").FloatRecived += (sender, e) => p.Velocity.Z = e.Value;
+		}
+
+
+		internal List<TriggerInformation> triggers = new List<TriggerInformation>();
+		private void HandleBombSites()
+		{
+			SendTableParser.FindByName("CCSPlayerResource").OnNewEntity += (s1, newResource) => {
+				newResource.Entity.FindProperty("m_bombsiteCenterA").VectorRecived += (s2, center) => {
+					bombsiteACenter = center.Value;
+				};
+				newResource.Entity.FindProperty("m_bombsiteCenterB").VectorRecived += (s3, center) => {
+					bombsiteBCenter = center.Value;
+				};
+			};
+
+			SendTableParser.FindByName("CBaseTrigger").OnNewEntity += (s1, newResource) => {
+
+				TriggerInformation trigger = new TriggerInformation(newResource.Entity.ID);
+				triggers.Add(trigger);
+
+				newResource.Entity.FindProperty("m_Collision.m_vecMins").VectorRecived += (s2, vector) => {
+					trigger.Min = vector.Value;
+				};
+
+				newResource.Entity.FindProperty("m_Collision.m_vecMaxs").VectorRecived += (s3, vector) => {
+					trigger.Max = vector.Value;
+				};
+			};
+
 		}
 
 		#region EventCaller

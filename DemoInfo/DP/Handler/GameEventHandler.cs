@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
@@ -146,7 +147,48 @@ namespace DemoInfo.DP.Handler
 
 				var bombEventArgs = new BombEventArgs();
 				bombEventArgs.Player = parser.Players[(int)data["userid"]];
-				var bombSiteIndex = (int)data["site"]; //entity index of the bombsite.
+
+				int site = (int)data["site"];
+
+				if (site == parser.bombsiteAIndex) {
+					bombEventArgs.Site = 'A';
+				} else if (site == parser.bombsiteBIndex) {
+					bombEventArgs.Site = 'B';
+				} else {
+					var relevantTrigger = parser.triggers.Single(a => a.Index == site);
+					if (relevantTrigger.IsInside(parser.bombsiteACenter)) {
+						//planted at A.
+						bombEventArgs.Site = 'A';
+						parser.bombsiteAIndex = site;
+					} else if (relevantTrigger.IsInside(parser.bombsiteBCenter)) {
+						//planted at B.
+						bombEventArgs.Site = 'B';
+						parser.bombsiteBIndex = site;
+					} else {
+						throw new InvalidDataException("Was the bomb planted at C? Neither A nor B is inside the bombsite");
+					}
+				}
+
+
+
+
+				switch (eventDescriptor.name) {
+				case "bomb_beginplant":
+					parser.RaiseBombBeginPlant(bombEventArgs);
+					break;
+				case "bomb_abortplant":
+					parser.RaiseBombAbortPlant(bombEventArgs);
+					break;
+				case "bomb_planted":
+					parser.RaiseBombPlanted(bombEventArgs);
+					break;
+				case "bomb_defused":
+					parser.RaiseBombDefused(bombEventArgs);
+					break;
+				case "bomb_exploded":
+					parser.RaiseBombExploded(bombEventArgs);
+					break;
+				}
 
 				break;
 			case "bomb_begindefuse":

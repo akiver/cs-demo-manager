@@ -24,7 +24,6 @@ namespace DemoInfo.DT
         public List<SendTable> DataTables = new List<SendTable>();
         public List<ServerClass> ServerClasses = new List<ServerClass>();
 		List<ExcludeEntry> CurrentExcludes = new List<ExcludeEntry>();
-		Dictionary<int, EquipmentElement> equipmentMapping = new Dictionary<int, EquipmentElement>();
 
 		public void ParsePacket(Stream stream)
         {

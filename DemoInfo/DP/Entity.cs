@@ -96,6 +96,34 @@ namespace DemoInfo.DP
 		public event EventHandler<PropertyUpdateEventArgs<string>>  StringRecived;
 		public event EventHandler<PropertyUpdateEventArgs<object[]>>  ArrayRecived;
 
+		#if DEBUG || YOLODEBUG
+		//DON'T USE THIS. 
+		//SERIOUSLY, NO!
+		//THERE IS ONLY _ONE_ PATTERN WHERE THIS IS OKAY. 
+
+		public event EventHandler<PropertyUpdateEventArgs<object>>  DataRecivedDontUse;
+
+		/* 
+		 * SendTableParser.FindByName("CBaseTrigger").OnNewEntity += (s1, newResource) => {
+		 * 
+				Dictionary<string, object> values = new Dictionary<string, object>();
+				foreach(var res in newResource.Entity.Props)
+				{
+					res.DataRecived += (sender, e) => values[e.Property.Entry.PropertyName] = e.Value;
+				}
+				
+		 * 
+		 */
+
+		/*
+		* The single purpose for this is to see what kind of values an entity has. You can check this faster with this thing. 
+			Really, ignore it if you don't know what you're doing.
+		 */
+		#else
+		[Obsolete("Don't use this attribute. It is only avaible for debugging. Bind to the correct event instead.", true)]
+		public event EventHandler<PropertyUpdateEventArgs<object>>  DataRecivedDontUse;
+		#endif
+
 		public void Decode(IBitStream stream, Entity e)
 		{
 			//I found no better place for this, sorry.
@@ -107,6 +135,11 @@ namespace DemoInfo.DP
 					var val = PropDecoder.DecodeInt(Entry.Prop, stream);
 					if (IntRecived != null)
 						IntRecived(this, new PropertyUpdateEventArgs<int>(val, e, this));
+
+					#if DEBUG || YOLODEBUG
+					if (DataRecivedDontUse != null)
+						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+					#endif
 				}
 				break;
 			case SendPropertyType.Float:
@@ -114,6 +147,12 @@ namespace DemoInfo.DP
 					var val = PropDecoder.DecodeFloat(Entry.Prop, stream);
 					if (FloatRecived != null)
 						FloatRecived(this, new PropertyUpdateEventArgs<float>(val, e, this));
+
+
+					#if DEBUG || YOLODEBUG
+					if (DataRecivedDontUse != null)
+						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+					#endif
 				}
 				break;
 			case SendPropertyType.Vector:
@@ -121,6 +160,12 @@ namespace DemoInfo.DP
 					var val = PropDecoder.DecodeVector(Entry.Prop, stream);
 					if (VectorRecived != null)
 						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
+
+
+					#if DEBUG || YOLODEBUG
+					if (DataRecivedDontUse != null)
+						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+					#endif
 				}
 				break;
 			case SendPropertyType.Array:
@@ -128,6 +173,12 @@ namespace DemoInfo.DP
 					var val = PropDecoder.DecodeArray(Entry, stream);
 					if (ArrayRecived != null)
 						ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val, e, this));
+
+
+					#if DEBUG || YOLODEBUG
+					if (DataRecivedDontUse != null)
+						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+					#endif
 				}
 				break;
 			case SendPropertyType.String:
@@ -135,6 +186,12 @@ namespace DemoInfo.DP
 					var val = PropDecoder.DecodeString(Entry.Prop, stream);
 					if (StringRecived != null)
 						StringRecived(this, new PropertyUpdateEventArgs<string>(val, e, this));
+
+
+					#if DEBUG || YOLODEBUG
+					if (DataRecivedDontUse != null)
+						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+					#endif
 				}
 				break;
 			case SendPropertyType.VectorXY:
@@ -142,11 +199,18 @@ namespace DemoInfo.DP
 					var val = PropDecoder.DecodeVectorXY(Entry.Prop, stream);
 					if (VectorRecived != null)
 						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
+
+
+					#if DEBUG || YOLODEBUG
+					if (DataRecivedDontUse != null)
+						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+					#endif
 				}
 				break;
 			default:
 				throw new NotImplementedException("Could not read property. Abort! ABORT! (is it a long?)");
 			}
+
 		}
 
 		public PropertyEntry(FlattenedPropEntry prop)
@@ -154,7 +218,10 @@ namespace DemoInfo.DP
 			this.Entry = new FlattenedPropEntry(prop.PropertyName, prop.Prop, prop.ArrayElementProp);
 		}
 
-
+		public override string ToString()
+		{
+			return string.Format("[PropertyEntry: Entry={0}]", Entry);
+		}
 
 		[Conditional("DEBUG"), Conditional("YOLODEBUG")]
 		public void CheckBindings(Entity e)
