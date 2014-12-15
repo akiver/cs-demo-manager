@@ -126,7 +126,6 @@ namespace DemoInfo.DP.Handler
 			case "player_disconnect":
 				data = MapData(eventDescriptor, rawEvent);
 				int toDelete = (int)data["userid"];
-				bool found = false;
 				for (int i = 0; i < parser.RawPlayers.Length; i++) {
 
 					if (parser.RawPlayers[i] != null && parser.RawPlayers[i].UserID == toDelete) {

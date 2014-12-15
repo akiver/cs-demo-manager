@@ -22,9 +22,9 @@ namespace DemoInfo.DP
 			this.ID = id;
 			this.ServerClass = serverClass;
 
-			Props = new PropertyEntry[ServerClass.flattenedProps.Count];
+			Props = new PropertyEntry[ServerClass.FlattenedProps.Count];
 			int i = 0;
-			foreach (var prop in ServerClass.flattenedProps) {
+			foreach (var prop in ServerClass.FlattenedProps) {
 				Props[i++] = new PropertyEntry(prop);
 			}
 		}

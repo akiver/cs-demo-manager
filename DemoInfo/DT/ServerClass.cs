@@ -15,7 +15,9 @@ namespace DemoInfo.DT
         public string Name;
         public string DTName;
 
-        public List<FlattenedPropEntry> flattenedProps = new List<FlattenedPropEntry>();
+        public List<FlattenedPropEntry> FlattenedProps = new List<FlattenedPropEntry>();
+		public List<ServerClass> BaseClasses = new List<ServerClass> ();
+
 
 		public event EventHandler<EntityCreatedEventArgs> OnNewEntity; 
 

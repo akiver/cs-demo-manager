@@ -24,6 +24,7 @@ namespace DemoInfo.DT
         public List<SendTable> DataTables = new List<SendTable>();
         public List<ServerClass> ServerClasses = new List<ServerClass>();
 		List<ExcludeEntry> CurrentExcludes = new List<ExcludeEntry>();
+		List<ServerClass> CurrentBaseclasses = new List<ServerClass>();
 
 		public void ParsePacket(Stream stream)
         {
@@ -71,12 +72,16 @@ namespace DemoInfo.DT
             SendTable table = DataTables[ServerClasses[serverClassIndex].DataTableID];
 
             CurrentExcludes.Clear();
+			CurrentBaseclasses = new List<ServerClass> (); //NOT .clear because we use *this* reference
+			//LITERALLY 3 lines later. @main--, this is warning for you. 
 
-            GatherExcludes(table);
+            GatherExcludesAndBaseclasses(table, true);
+
+			ServerClasses [serverClassIndex].BaseClasses = CurrentBaseclasses;
 
 			GatherProps(table, serverClassIndex, "");
 
-            var flattenedProps = ServerClasses[serverClassIndex].flattenedProps;
+            var flattenedProps = ServerClasses[serverClassIndex].FlattenedProps;
 
             List<int> priorities = new List<int>();
             priorities.Add(64);
@@ -118,7 +123,7 @@ namespace DemoInfo.DT
 
         }
 
-        void GatherExcludes(SendTable sendTable)
+		void GatherExcludesAndBaseclasses(SendTable sendTable, bool collectBaseClasses)
         {
             CurrentExcludes.AddRange(
                 sendTable.Properties
@@ -128,7 +133,12 @@ namespace DemoInfo.DT
 
             foreach (var prop in sendTable.Properties.Where(a => a.Type == SendPropertyType.DataTable))
             {
-                GatherExcludes(GetTableByName(prop.DataTableName));
+				if (collectBaseClasses && prop.Name == "baseclass") {
+					GatherExcludesAndBaseclasses (GetTableByName (prop.DataTableName), true);
+					CurrentBaseclasses.Add (FindByDTName (prop.DataTableName));
+				} else {
+					GatherExcludesAndBaseclasses (GetTableByName (prop.DataTableName), false);
+				}
             }
         }
 
@@ -137,7 +147,7 @@ namespace DemoInfo.DT
             List<FlattenedPropEntry> tmpFlattenedProps = new List<FlattenedPropEntry>();
 			GatherProps_IterateProps(table, serverClassIndex, tmpFlattenedProps, prefix);
 
-            List<FlattenedPropEntry> flattenedProps = ServerClasses[serverClassIndex].flattenedProps;
+            List<FlattenedPropEntry> flattenedProps = ServerClasses[serverClassIndex].FlattenedProps;
 
             flattenedProps.AddRange(tmpFlattenedProps);
         }
@@ -195,9 +205,16 @@ namespace DemoInfo.DT
             return DataTables.FirstOrDefault(a => a.Name == pName);
         }
 
+
+
 		public ServerClass FindByName(string className)
 		{
 			return ServerClasses.Single(a => a.Name == className);
+		}
+
+		private ServerClass FindByDTName(string dtName)
+		{
+			return ServerClasses.Single(a => a.DTName == dtName);
 		}
     }
 }

@@ -84,13 +84,6 @@ namespace DemoInfo
 			return Encoding.Default.GetString(result.ToArray());
 		}
 
-		public static IEnumerable<Enum> GetFlagsOfEnum(Enum input)
-		{
-			foreach (Enum value in Enum.GetValues(input.GetType()))
-				if (input.HasFlag(value))
-					yield return value;
-		}
-
 		public static Stream ReadVolvoPacket(this BinaryReader reader)
 		{
 			return new LimitStream(reader.BaseStream, reader.ReadInt32());

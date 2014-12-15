@@ -182,8 +182,13 @@ namespace DemoInfo
 				}
 			}
 
-			if(ShallAttributeWeapons)
-				AttributeWeapons();
+			for (int i = 0; i < unknownWeapons.Count; i++) {
+				var attribution = unknownWeapons [i];
+				if (AttributeWeapon (attribution.Item1, attribution.Item2)) {
+					unknownWeapons.RemoveAt (i);
+					i--;
+				}
+			}
 
 			if (b) {
 				if (TickDone != null)
@@ -230,21 +235,27 @@ namespace DemoInfo
 
 				for (int i = 0; i < SendTableParser.ServerClasses.Count; i++) {
 					var sc = SendTableParser.ServerClasses[i];
-					if (sc.DTName.StartsWith("DT_Weapon")) {
-						var s = sc.DTName.Substring(9).ToLower();
-						equipmentMapping.Add(sc, Equipment.MapEquipment(s));
-					} else if (sc.DTName == "DT_Flashbang") {
-						equipmentMapping.Add(sc, EquipmentElement.Flash);
-					} else if (sc.DTName == "DT_SmokeGrenade") {
-						equipmentMapping.Add(sc, EquipmentElement.Smoke);
-					} else if (sc.DTName == "DT_HEGrenade") {
-						equipmentMapping.Add(sc, EquipmentElement.HE);
-					} else if (sc.DTName == "DT_DecoyGrenade") {
-						equipmentMapping.Add(sc, EquipmentElement.Decoy);
-					} else if (sc.DTName == "DT_IncendiaryGrenade") {
-						equipmentMapping.Add(sc, EquipmentElement.Incendiary);
-					} else if (sc.DTName == "DT_MolotovGrenade") {
-						equipmentMapping.Add(sc, EquipmentElement.Molotov);
+
+					if (sc.BaseClasses.Count > 6 && sc.BaseClasses [6].Name == "CWeaponCSBase") { 
+						//It is a "weapon" (Gun, C4, ... (...is the cz still a "weapon" after the nerf?))
+						if (sc.BaseClasses.Count > 7) {
+							if (sc.BaseClasses [7].Name == "CWeaponCSBaseGun") {
+								//it is a ratatatata-weapon.
+								var s = sc.DTName.Substring (9).ToLower ();
+								equipmentMapping.Add (sc, Equipment.MapEquipment (s));
+							} else if (sc.BaseClasses [7].Name == "CBaseCSGrenade") {
+								//"boom"-weapon. 
+								equipmentMapping.Add (sc, Equipment.MapEquipment (sc.DTName.Substring (3).ToLower ()));
+							} 
+						} else if (sc.Name == "CC4") {
+							//Bomb is neither "ratatata" nor "boom", its "booooooom".
+							equipmentMapping.Add (sc, EquipmentElement.Bomb);
+						} else if (sc.Name == "CKnife" || (sc.BaseClasses.Count > 6 && sc.BaseClasses [6].Name == "CKnife")) {
+							//tsching weapon
+							equipmentMapping.Add (sc, EquipmentElement.Knife);
+						} else if (sc.Name == "CWeaponNOVA" || sc.Name == "CWeaponSawedoff" || sc.Name == "CWeaponXM1014") {
+							equipmentMapping.Add (sc, Equipment.MapEquipment (sc.Name.Substring (7).ToLower()));
+						}
 					}
 				}
 
@@ -281,11 +292,6 @@ namespace DemoInfo
 				DemoPacketParser.ParsePacket(volvo, this);
    		}
 
-		private void AttributeWeapons()
-		{
-
-		}
-
 		private void BindEntites()
 		{
 			//Okay, first the team-stuff. 
@@ -293,9 +299,7 @@ namespace DemoInfo
 
 			HandleBombSites();
 
-
 			HandlePlayers();
-
 		}
 
 		private void HandleTeamScores()
@@ -375,6 +379,7 @@ namespace DemoInfo
 			};
 		}
 
+		List<Tuple<int, Player>> unknownWeapons = new List<Tuple<int, Player>>();
 		private void HandleNewPlayer(Entity playerEntity)
 		{
 			Player p = new Player();
@@ -424,8 +429,73 @@ namespace DemoInfo
 			playerEntity.FindProperty("localdata.m_vecVelocity[0]").FloatRecived += (sender, e) => p.Velocity.X = e.Value;
 			playerEntity.FindProperty("localdata.m_vecVelocity[1]").FloatRecived += (sender, e) => p.Velocity.Y = e.Value;
 			playerEntity.FindProperty("localdata.m_vecVelocity[2]").FloatRecived += (sender, e) => p.Velocity.Z = e.Value;
+
+
+
+			//Weapon attribution
+			if (ShallAttributeWeapons) {
+				string weaponPrefix = "m_hMyWeapons.";
+
+				if(!playerEntity.Props.Any(a => a.Entry.PropertyName == "m_hMyWeapons.000"))
+					weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
+
+
+				int[] cache = new int[64];
+
+				for(int i = 0; i < 64; i++)
+				{
+					int iForTheMethod = i; //Because else i is passed as reference to the delegate. 
+
+					playerEntity.FindProperty(weaponPrefix + i.ToString().PadLeft(3, '0')).IntRecived += (sender, e) => {
+
+						int index = e.Value & INDEX_MASK;
+
+						if (index != INDEX_MASK) {
+							if(cache[iForTheMethod] != 0) //Player already has a weapon in this slot. 
+							{
+								p.rawWeapons.Remove(cache[iForTheMethod]);
+								cache[iForTheMethod] = 0;
+							}
+
+							cache[iForTheMethod] = index;
+
+							if(Entities[index] == null)
+								unknownWeapons.Add(new Tuple<int, Player>(index, p)); //Attribute it later
+							else
+								AttributeWeapon(index, p);
+						} else {
+							p.rawWeapons.Remove(cache[iForTheMethod]);
+							cache[iForTheMethod] = 0;
+
+
+						}
+
+					};
+				}
+
+				playerEntity.FindProperty("m_hActiveWeapon").IntRecived += (sender, e) => p.ActiveWeaponID = e.Value & INDEX_MASK;
+			}
 		}
 
+		private bool AttributeWeapon(int weaponEntityIndex, Player p)
+		{
+			var entity = Entities[weaponEntityIndex];
+
+			Equipment weapon = new Equipment ();
+
+			///TODO: Don't drop this silent. This is a very wtf-y "volvo-pls" bug
+			if (entity == null || !equipmentMapping.ContainsKey (entity.ServerClass))
+				return false;
+
+			weapon.Weapon = equipmentMapping [entity.ServerClass];
+
+			if (weapon.Weapon == EquipmentElement.Unknown)
+				throw new Exception ("This weapon is unknown: " + entity.ServerClass.DTName);
+
+			p.rawWeapons[weaponEntityIndex] = weapon;
+
+			return true;
+		}
 
 		internal List<TriggerInformation> triggers = new List<TriggerInformation>();
 		private void HandleBombSites()
