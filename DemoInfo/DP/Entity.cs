@@ -96,14 +96,11 @@ namespace DemoInfo.DP
 		public event EventHandler<PropertyUpdateEventArgs<string>>  StringRecived;
 		public event EventHandler<PropertyUpdateEventArgs<object[]>>  ArrayRecived;
 
-		#if DEBUG || YOLODEBUG
-		//DON'T USE THIS. 
-		//SERIOUSLY, NO!
-		//THERE IS ONLY _ONE_ PATTERN WHERE THIS IS OKAY. 
-
-		public event EventHandler<PropertyUpdateEventArgs<object>>  DataRecivedDontUse;
-
-		/* 
+		/*
+		 * DON'T USE THIS.
+		 * SERIOUSLY, NO!
+		 * THERE IS ONLY _ONE_ PATTERN WHERE THIS IS OKAY.
+		 *
 		 * SendTableParser.FindByName("CBaseTrigger").OnNewEntity += (s1, newResource) => {
 		 * 
 				Dictionary<string, object> values = new Dictionary<string, object>();
@@ -112,17 +109,29 @@ namespace DemoInfo.DP
 					res.DataRecived += (sender, e) => values[e.Property.Entry.PropertyName] = e.Value;
 				}
 				
-		 * 
+		 *
+		 * The single purpose for this is to see what kind of values an entity has. You can check this faster with this thing.
+		 * Really, ignore it if you don't know what you're doing.
 		 */
-
-		/*
-		* The single purpose for this is to see what kind of values an entity has. You can check this faster with this thing. 
-			Really, ignore it if you don't know what you're doing.
-		 */
-		#else
-		[Obsolete("Don't use this attribute. It is only avaible for debugging. Bind to the correct event instead.", true)]
-		public event EventHandler<PropertyUpdateEventArgs<object>>  DataRecivedDontUse;
+		[Obsolete("Don't use this attribute. It is only avaible for debugging. Bind to the correct event instead."
+		#if !DEBUG
+			, true
 		#endif
+			)]
+		#pragma warning disable 0067 // this is unused in release builds, just as it should be
+		public event EventHandler<PropertyUpdateEventArgs<object>>  DataRecivedDontUse;
+		#pragma warning restore 0067
+
+		[Conditional("DEBUG")]
+		private void FireDataReceived_DebugEvent(object val, Entity e)
+		{
+			#if DEBUG
+			#pragma warning disable 0618
+			if (DataRecivedDontUse != null)
+				DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+			#pragma warning restore 0618
+			#endif
+		}
 
 		public void Decode(IBitStream stream, Entity e)
 		{
@@ -136,10 +145,7 @@ namespace DemoInfo.DP
 					if (IntRecived != null)
 						IntRecived(this, new PropertyUpdateEventArgs<int>(val, e, this));
 
-					#if DEBUG || YOLODEBUG
-					if (DataRecivedDontUse != null)
-						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-					#endif
+					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
 			case SendPropertyType.Float:
@@ -148,11 +154,7 @@ namespace DemoInfo.DP
 					if (FloatRecived != null)
 						FloatRecived(this, new PropertyUpdateEventArgs<float>(val, e, this));
 
-
-					#if DEBUG || YOLODEBUG
-					if (DataRecivedDontUse != null)
-						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-					#endif
+					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
 			case SendPropertyType.Vector:
@@ -161,11 +163,7 @@ namespace DemoInfo.DP
 					if (VectorRecived != null)
 						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
 
-
-					#if DEBUG || YOLODEBUG
-					if (DataRecivedDontUse != null)
-						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-					#endif
+					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
 			case SendPropertyType.Array:
@@ -174,11 +172,7 @@ namespace DemoInfo.DP
 					if (ArrayRecived != null)
 						ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val, e, this));
 
-
-					#if DEBUG || YOLODEBUG
-					if (DataRecivedDontUse != null)
-						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-					#endif
+					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
 			case SendPropertyType.String:
@@ -187,11 +181,7 @@ namespace DemoInfo.DP
 					if (StringRecived != null)
 						StringRecived(this, new PropertyUpdateEventArgs<string>(val, e, this));
 
-
-					#if DEBUG || YOLODEBUG
-					if (DataRecivedDontUse != null)
-						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-					#endif
+					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
 			case SendPropertyType.VectorXY:
@@ -200,11 +190,7 @@ namespace DemoInfo.DP
 					if (VectorRecived != null)
 						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
 
-
-					#if DEBUG || YOLODEBUG
-					if (DataRecivedDontUse != null)
-						DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-					#endif
+					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
 			default:
@@ -223,7 +209,7 @@ namespace DemoInfo.DP
 			return string.Format("[PropertyEntry: Entry={0}]", Entry);
 		}
 
-		[Conditional("DEBUG"), Conditional("YOLODEBUG")]
+		[Conditional("DEBUG")]
 		public void CheckBindings(Entity e)
 		{
 			if (IntRecived != null && this.Entry.Prop.Type != SendPropertyType.Int)
