@@ -59,6 +59,8 @@ namespace DemoInfo
 
 		public bool HasHelmet { get; set; }
 
+		internal int TeamID;
+
 		public Player()
 		{
 			Velocity = new Vector();

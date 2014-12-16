@@ -69,7 +69,7 @@ namespace DemoInfo
 		{
 			get 
 			{
-				return this.X * this.X + this.Y * this.Y;
+				return this.X * this.X + this.Y * this.Y + this.Z * this.Z;
 			}
 		}
 
@@ -257,6 +257,27 @@ namespace DemoInfo
 
         public static int SizeOf { get { return 8 + 8 + 128 + 4 + 3 + 4 + 1 + 1 + 4 * 8 + 1; } }
     }
+
+
+
+	class TriggerInformation
+	{
+		public int Index { get; private set; }
+		public Vector Min { get; set; }
+		public Vector Max { get; set; }
+
+		public TriggerInformation (int index)
+		{
+			this.Index = index;
+		}
+
+		public bool IsInside(Vector test)
+		{
+			return test.X >= Min.X && test.X <= Max.X &&
+				test.Y >= Min.Y && test.Y <= Max.Y &&
+				test.Z >= Min.Z && test.Z <= Max.Z;
+		}
+	}
 
     enum DemoCommand
     {

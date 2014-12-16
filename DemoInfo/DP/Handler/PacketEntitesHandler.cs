@@ -29,16 +29,18 @@ namespace DemoInfo.DP.Handler
 						if (reader.ReadBit()) {
 							var e = ReadEnterPVS(reader, currentEntity, parser);
 
+							parser.Entities[currentEntity] = e;
+
 							e.ApplyUpdate(reader);
 						} else {
 							// preserve
-							Entity e = parser.entities[currentEntity];
+							Entity e = parser.Entities[currentEntity];
 							e.ApplyUpdate(reader);
 						}
 					} else {
 						// leave
+						parser.Entities[currentEntity] = null;
 						if (reader.ReadBit()) {
-							parser.entities.Remove(currentEntity);
 						}
 					}
 				}
@@ -49,18 +51,15 @@ namespace DemoInfo.DP.Handler
 
         public Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
-            int serverClassID = (int)reader.ReadInt(parser.DataTables.ClassBits);
+            int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
 
-            ServerClass entityClass = parser.DataTables.ServerClasses[serverClassID];
+            ServerClass entityClass = parser.SendTableParser.ServerClasses[serverClassID];
 
             reader.ReadInt(10); //Entity serial. 
 
-            Entity newEntity = new Entity(id, entityClass);
-            //Console.ForegroundColor = ConsoleColor.Red;
-            //Console.WriteLine("Entity #"+id+": " + entityClass.Name);
-            //Console.ResetColor();
+			Entity newEntity = new Entity(id, entityClass);
 
-            parser.entities[newEntity.ID] = newEntity;
+			newEntity.ServerClass.AnnounceNewEntity(newEntity);
 
 			if (parser.instanceBaseline.ContainsKey(serverClassID)) {
 				using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {

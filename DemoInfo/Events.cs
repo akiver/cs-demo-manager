@@ -121,7 +121,6 @@ namespace DemoInfo
 
 	public class Equipment
 	{
-		internal int lastUpdate = 0;
 		public EquipmentElement Weapon { get; set; }
 		public EquipmentClass Class {
 			get
@@ -185,6 +184,7 @@ namespace DemoInfo
 					weapon = EquipmentElement.Deagle;
 					break;
 				case "decoy":
+				case "decoygrenade":
 					weapon = EquipmentElement.Decoy;
 					break;
 				case "elite":
@@ -216,6 +216,7 @@ namespace DemoInfo
 					weapon = EquipmentElement.P2000;
 					break;
 				case "incgrenade":
+				case "incendiarygrenade":
 					weapon = EquipmentElement.Incendiary;
 					break;
 				case "m249":
@@ -234,6 +235,7 @@ namespace DemoInfo
 					weapon = EquipmentElement.AK47;
 					break;
 				case "molotov":
+				case "molotovgrenade":
 					weapon = EquipmentElement.Molotov;
 					break;
 				case "mp7":
@@ -257,11 +259,9 @@ namespace DemoInfo
 				case "sawedoff":
 					weapon = EquipmentElement.SawedOff;
 					break;
-				case "scar17":
 				case "scar20":
 					weapon = EquipmentElement.Scar20;
 					break;
-				case "sg550":
 				case "sg556":
 					weapon = EquipmentElement.SG556;
 					break;
@@ -301,7 +301,16 @@ namespace DemoInfo
 					break;
                 case "usp_silencer_off":
                     weapon = EquipmentElement.USP;
-                    break;
+					break;
+				case "scar17"://These crash the game when given via give weapon_[mp5navy|...], and cannot be purchased ingame.
+				case "sg550"://yet the server-classes are networked, so I need to resolve them. 
+				case "mp5navy": 
+				case "p228":
+				case "scout":
+				case "sg552":
+				case "tmp":
+					weapon = EquipmentElement.Unknown;
+					break;
                 default:
 					Trace.WriteLine("Unknown weapon. " + OriginalString, "Equipment.MapEquipment()");
                     break;

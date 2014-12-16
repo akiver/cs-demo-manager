@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
@@ -125,7 +126,6 @@ namespace DemoInfo.DP.Handler
 			case "player_disconnect":
 				data = MapData(eventDescriptor, rawEvent);
 				int toDelete = (int)data["userid"];
-				bool found = false;
 				for (int i = 0; i < parser.RawPlayers.Length; i++) {
 
 					if (parser.RawPlayers[i] != null && parser.RawPlayers[i].UserID == toDelete) {
@@ -146,58 +146,49 @@ namespace DemoInfo.DP.Handler
 
 				var bombEventArgs = new BombEventArgs();
 				bombEventArgs.Player = parser.Players[(int)data["userid"]];
-				var bombSiteIndex = (int)data["site"]; //entity index of the bombsite.
-				if (bombSiteIndex == parser.bombSiteAEntityIndex) {
-					//planted at A.
+
+				int site = (int)data["site"];
+
+				if (site == parser.bombsiteAIndex) {
 					bombEventArgs.Site = 'A';
-				} else if (bombSiteIndex == parser.bombSiteBEntityIndex) {
-					//planted at B.
+				} else if (site == parser.bombsiteBIndex) {
 					bombEventArgs.Site = 'B';
 				} else {
-					//we don't know where the sites are: find them out
-					if (parser.entities.ContainsKey(bombSiteIndex)) {
-						var bombSite = parser.entities[bombSiteIndex];
-						var min = (Vector)bombSite.Properties.GetValueOrDefault("m_Collision.m_vecMins", null);
-						var max = (Vector)bombSite.Properties.GetValueOrDefault("m_Collision.m_vecMaxs", null);
-						if (min != null && max != null) {
-							var center = new Vector((min.X + max.X) / 2, (min.Y + max.Y) / 2, (min.Z + max.Z) / 2);
-							var csPlayerResource = parser.entities.Values.FirstOrDefault(x => x.ServerClass.Name == "CCSPlayerResource");
-							if (csPlayerResource != null) {
-								var centerA = (Vector)csPlayerResource.Properties.GetValueOrDefault("m_bombsiteCenterA", null);
-								if (centerA != null) {
-									if ((center - centerA).AbsoluteSquared < 0.005) {
-										//planted at A.
-										parser.bombSiteAEntityIndex = bombSiteIndex;
-										bombEventArgs.Site = 'A';
-									} else {
-										parser.bombSiteBEntityIndex = bombSiteIndex;
-										bombEventArgs.Site = 'B';
-									}
-								}
-							}
-						}
+					var relevantTrigger = parser.triggers.Single(a => a.Index == site);
+					if (relevantTrigger.IsInside(parser.bombsiteACenter)) {
+						//planted at A.
+						bombEventArgs.Site = 'A';
+						parser.bombsiteAIndex = site;
+					} else if (relevantTrigger.IsInside(parser.bombsiteBCenter)) {
+						//planted at B.
+						bombEventArgs.Site = 'B';
+						parser.bombsiteBIndex = site;
+					} else {
+						throw new InvalidDataException("Was the bomb planted at C? Neither A nor B is inside the bombsite");
 					}
 				}
 
-				if (bombEventArgs.Site != default(char)) {
-					switch (eventDescriptor.name) {
-					case "bomb_beginplant":
-						parser.RaiseBombBeginPlant(bombEventArgs);
-						break;
-					case "bomb_abortplant":
-						parser.RaiseBombAbortPlant(bombEventArgs);
-						break;
-					case "bomb_planted":
-						parser.RaiseBombPlanted(bombEventArgs);
-						break;
-					case "bomb_defused":
-						parser.RaiseBombDefused(bombEventArgs);
-						break;
-					case "bomb_exploded":
-						parser.RaiseBombExploded(bombEventArgs);
-						break;
-					}
+
+
+
+				switch (eventDescriptor.name) {
+				case "bomb_beginplant":
+					parser.RaiseBombBeginPlant(bombEventArgs);
+					break;
+				case "bomb_abortplant":
+					parser.RaiseBombAbortPlant(bombEventArgs);
+					break;
+				case "bomb_planted":
+					parser.RaiseBombPlanted(bombEventArgs);
+					break;
+				case "bomb_defused":
+					parser.RaiseBombDefused(bombEventArgs);
+					break;
+				case "bomb_exploded":
+					parser.RaiseBombExploded(bombEventArgs);
+					break;
 				}
+
 				break;
 			case "bomb_begindefuse":
 				data = MapData(eventDescriptor, rawEvent);

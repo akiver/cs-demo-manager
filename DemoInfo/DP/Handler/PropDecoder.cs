@@ -21,7 +21,7 @@ namespace DemoInfo.DP.Handler
 			case SendPropertyType.Vector:
 				return DecodeVector(sendProp, stream);
 			case SendPropertyType.Array:
-				var test = DecodeArray(prop, sendProp.NumberOfElements, stream);
+				var test = DecodeArray(prop, stream);
 				return test;
 			case SendPropertyType.String:
 				return DecodeString(sendProp, stream);
@@ -32,7 +32,7 @@ namespace DemoInfo.DP.Handler
 			}
 		}
 
-		static int DecodeInt(SendTableProperty prop, IBitStream reader)
+		public static int DecodeInt(SendTableProperty prop, IBitStream reader)
 		{
 			if (prop.Flags.HasFlagFast(SendPropertyFlags.VarInt)) {
 				if (prop.Flags.HasFlagFast(SendPropertyFlags.Unsigned)) {
@@ -50,7 +50,7 @@ namespace DemoInfo.DP.Handler
 			}
 		}
 
-		static float DecodeFloat(SendTableProperty prop, IBitStream reader)
+		public static float DecodeFloat(SendTableProperty prop, IBitStream reader)
 		{
 			float fVal = 0.0f;
 			ulong dwInterp;
@@ -68,7 +68,7 @@ namespace DemoInfo.DP.Handler
 			return fVal;
 		}
 
-		static Vector DecodeVector(SendTableProperty prop, IBitStream reader)
+		public static Vector DecodeVector(SendTableProperty prop, IBitStream reader)
 		{
 			if (prop.Flags.HasFlagFast(SendPropertyFlags.Normal)) {
             
@@ -99,8 +99,9 @@ namespace DemoInfo.DP.Handler
 			return v;
 		}
 
-		static object[] DecodeArray(FlattenedPropEntry flattenedProp, int numElements, IBitStream reader)
+		public static object[] DecodeArray(FlattenedPropEntry flattenedProp, IBitStream reader)
 		{
+			int numElements = flattenedProp.Prop.NumberOfElements;
 			int maxElements = numElements;
 
 			int numBits = 1;
@@ -121,12 +122,12 @@ namespace DemoInfo.DP.Handler
 			return result;
 		}
 
-		static string DecodeString(SendTableProperty prop, IBitStream reader)
+		public static string DecodeString(SendTableProperty prop, IBitStream reader)
 		{
 			return Encoding.Default.GetString(reader.ReadBytes((int)reader.ReadInt(9)));
 		}
 
-		static Vector DecodeVectorXY(SendTableProperty prop, IBitStream reader)
+		public static Vector DecodeVectorXY(SendTableProperty prop, IBitStream reader)
 		{
 			Vector v = new Vector();
 			v.X = DecodeFloat(prop, reader);

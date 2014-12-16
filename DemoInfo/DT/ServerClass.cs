@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DemoInfo.DP;
 
 namespace DemoInfo.DT
 {
@@ -14,7 +15,17 @@ namespace DemoInfo.DT
         public string Name;
         public string DTName;
 
-        public List<FlattenedPropEntry> flattenedProps = new List<FlattenedPropEntry>();
+        public List<FlattenedPropEntry> FlattenedProps = new List<FlattenedPropEntry>();
+		public List<ServerClass> BaseClasses = new List<ServerClass> ();
+
+
+		public event EventHandler<EntityCreatedEventArgs> OnNewEntity; 
+
+		internal void AnnounceNewEntity(Entity e)
+		{
+			if(OnNewEntity != null)
+				OnNewEntity(this, new EntityCreatedEventArgs(this, e));
+		}
 
 		public override string ToString()
 		{
@@ -55,5 +66,18 @@ namespace DemoInfo.DT
         public string DTName { get; private set; }
         public string ExcludingDT { get; private set; }
     }
+		
+
+	class EntityCreatedEventArgs : EventArgs
+	{
+		public ServerClass Class { get; private set; }
+		public Entity Entity { get; private set; }
+
+		public EntityCreatedEventArgs(ServerClass c, Entity e)
+		{
+			this.Class = c;
+			this.Entity = e;
+		}
+	}
 
 }
