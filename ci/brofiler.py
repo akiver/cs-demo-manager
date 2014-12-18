@@ -99,7 +99,7 @@ elif sys.argv[1] == 'verify':
         else:
             how_many_failures += 1
             gistlink = create_gist(maybe_append(maybe_append(
-                'return code ' + retval, err_text, 'stderr'), out_text, 'stdout'))
+                'return code ' + str(retval), err_text, 'stderr'), out_text, 'stdout'))
             set_status(COMMIT, 'failure', 'Verification failed', dem, gistlink)
 
     sys.exit(how_many_failures)
