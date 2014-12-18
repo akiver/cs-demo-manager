@@ -29,7 +29,7 @@ namespace DemoInfo
 			return new DebugBitStream(bs1, new DebugBitStream(bs2, bs3));
 			#else
 
-			#if YOLO
+			#if !DEBUG || YOLO
 			var bs = new UnsafeBitStream();
 			#else
 			var bs = new ManagedBitStream();
@@ -54,7 +54,7 @@ namespace DemoInfo
 			return new DebugBitStream(bs1, new DebugBitStream(bs2, bs3));
 			#else
 
-			#if YOLO
+			#if !DEBUG || YOLO
 			var bs = new UnsafeBitStream();
 			#else
 			var bs = new ManagedBitStream();
