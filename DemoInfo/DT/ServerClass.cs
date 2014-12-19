@@ -8,7 +8,7 @@ using DemoInfo.DP;
 
 namespace DemoInfo.DT
 {
-    class ServerClass
+	class ServerClass : IDisposable
     {
         public int ClassID;
         public int DataTableID;
@@ -30,6 +30,12 @@ namespace DemoInfo.DT
 		public override string ToString()
 		{
 			return Name + " | " + DTName;
+		}
+
+
+		public void Dispose ()
+		{
+			this.OnNewEntity = null;
 		}
     }
 

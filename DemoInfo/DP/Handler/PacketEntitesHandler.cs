@@ -39,6 +39,7 @@ namespace DemoInfo.DP.Handler
 						}
 					} else {
 						// leave
+						parser.Entities [currentEntity].Leave ();
 						parser.Entities[currentEntity] = null;
 						if (reader.ReadBit()) {
 						}

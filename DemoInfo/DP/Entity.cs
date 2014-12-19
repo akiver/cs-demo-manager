@@ -80,6 +80,14 @@ namespace DemoInfo.DP
 			return lastIndex + 1 + ret;
 		}
 
+		public void Leave ()
+		{
+			foreach (var prop in Props)
+				prop.Destroy ();
+
+
+		}
+
 		public override string ToString()
 		{
 			return ID + ": " + this.ServerClass;
@@ -129,6 +137,16 @@ namespace DemoInfo.DP
 			#pragma warning disable 0618
 			if (DataRecivedDontUse != null)
 				DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
+			#pragma warning restore 0618
+			#endif
+		}
+
+		[Conditional("DEBUG")]
+		private void DeleteDataRecived()
+		{
+			#if DEBUG
+			#pragma warning disable 0618
+			DataRecivedDontUse = null;
 			#pragma warning restore 0618
 			#endif
 		}
@@ -202,6 +220,17 @@ namespace DemoInfo.DP
 		public PropertyEntry(FlattenedPropEntry prop)
 		{
 			this.Entry = new FlattenedPropEntry(prop.PropertyName, prop.Prop, prop.ArrayElementProp);
+		}
+
+		public void Destroy()
+		{
+			this.IntRecived = null;
+			this.FloatRecived = null;
+			this.ArrayRecived = null;
+			this.StringRecived = null;
+			this.VectorRecived = null;
+
+			DeleteDataRecived ();
 		}
 
 		public override string ToString()

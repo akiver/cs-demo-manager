@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace DemoInfo
 {
-	public class DemoParser
+	public class DemoParser : IDisposable
 	{
 		#region Events
 
@@ -668,5 +668,44 @@ namespace DemoInfo
 		}
 
 		#endregion
+
+		public void Dispose ()
+		{
+			foreach (var entity in Entities) {
+				if(entity != null)
+					entity.Leave ();
+			}
+
+			foreach (var serverClass in this.SendTableParser.ServerClasses)
+			{
+				serverClass.Dispose ();
+			}
+
+			this.TickDone = null;
+			this.BombAbortDefuse = null;
+			this.BombAbortPlant = null;
+			this.BombBeginDefuse = null;
+			this.BombBeginPlant = null;
+			this.BombDefused = null;
+			this.BombExploded = null;
+			this.BombPlanted = null;
+			this.DecoyNadeEnded = null;
+			this.DecoyNadeStarted = null;
+			this.ExplosiveNadeExploded = null;
+			this.FireNadeEnded = null;
+			this.FireNadeStarted = null;
+			this.FlashNadeExploded = null;
+			this.HeaderParsed = null;
+			this.MatchStarted = null;
+			this.NadeReachedTarget = null;
+			this.PlayerKilled = null;
+			this.RoundStart = null;
+			this.SmokeNadeEnded = null;
+			this.SmokeNadeStarted = null;
+			this.WeaponFired = null;
+
+			Players.Clear ();
+		}
+
 	}
 }
