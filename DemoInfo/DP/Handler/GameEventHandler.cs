@@ -23,7 +23,6 @@ namespace DemoInfo.DP.Handler
 				return true;
 			}
 
-
 			var descriptors = parser.GEH_Descriptors;
 			var blindPlayers = parser.GEH_BlindPlayers;
 
@@ -54,7 +53,7 @@ namespace DemoInfo.DP.Handler
 				data = MapData(eventDescriptor, rawEvent);
 
 				WeaponFiredEventArgs fire = new WeaponFiredEventArgs();
-				fire.Shooter = parser.Players[(int)data["userid"]];
+                fire.Shooter = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
 				fire.Weapon = new Equipment((string)data["weapon"]);
 
 				parser.RaiseWeaponFired(fire);
@@ -64,8 +63,8 @@ namespace DemoInfo.DP.Handler
 
 				PlayerKilledEventArgs kill = new PlayerKilledEventArgs();
 
-				kill.DeathPerson = parser.Players[(int)data["userid"]];
-				kill.Killer = parser.Players[(int)data["attacker"]];
+                kill.DeathPerson = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
+                kill.Killer = parser.Players.ContainsKey((int)data["attacker"]) ? parser.Players[(int)data["attacker"]] : null;
 				kill.Headshot = (bool)data["headshot"];
 				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
 				kill.PenetratedObjects = (int)data["penetrated"];
@@ -76,8 +75,8 @@ namespace DemoInfo.DP.Handler
 				#region Nades
 			case "player_blind":
 				data = MapData(eventDescriptor, rawEvent);
-				if (parser.Players.ContainsKey((int)data["userid"] - 2))
-					blindPlayers.Add(parser.Players[(int)data["userid"] - 2]);
+				if (parser.Players.ContainsKey((int)data["userid"]))
+					blindPlayers.Add(parser.Players[(int)data["userid"]]);
 				break;
 			case "flashbang_detonate":
 				var args = FillNadeEvent<FlashEventArgs>(MapData(eventDescriptor, rawEvent), parser);
@@ -145,7 +144,7 @@ namespace DemoInfo.DP.Handler
 				data = MapData(eventDescriptor, rawEvent);
 
 				var bombEventArgs = new BombEventArgs();
-				bombEventArgs.Player = parser.Players[(int)data["userid"]];
+                bombEventArgs.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
 
 				int site = (int)data["site"];
 
@@ -193,14 +192,14 @@ namespace DemoInfo.DP.Handler
 			case "bomb_begindefuse":
 				data = MapData(eventDescriptor, rawEvent);
 				var e = new BombDefuseEventArgs();
-				e.Player = parser.Players[(int)data["userid"]];
+                e.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
 				e.HasKit = (bool)data["haskit"];
 				parser.RaiseBombBeginDefuse(e);
 				break;
 			case "bomb_abortdefuse":
 				data = MapData(eventDescriptor, rawEvent);
 				var e2 = new BombDefuseEventArgs();
-				e2.Player = parser.Players[(int)data["userid"]];
+                e2.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
 				e2.HasKit = e2.Player.HasDefuseKit;
 				parser.RaiseBombAbortDefuse(e2);
 				break;
