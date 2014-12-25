@@ -46,7 +46,7 @@ namespace DemoInfo.BitStreamImpl
 		private void RefillBuffer()
 		{
 			// copy the sled
-			*(uint*)PBuffer = *(uint*)&PBuffer[(BitsInBuffer / 8)];
+			*(uint*)PBuffer = *(uint*)(PBuffer + (BitsInBuffer >> 3));
 
 			Offset -= BitsInBuffer;
 			BitsInBuffer = 8 * Underlying.Read(Buffer, SLED, BUFSIZE - SLED);
@@ -66,12 +66,12 @@ namespace DemoInfo.BitStreamImpl
 			BitStreamUtil.AssertMaxBits(32, numBits);
 			Debug.Assert((Offset + numBits) <= (BitsInBuffer + (SLED * 8)), "gg", "This code just fell apart. We're all dead. Offset={0} numBits={1} BitsInBuffer={2}", Offset, numBits, BitsInBuffer);
 
-			return (uint)(((*(ulong*)(PBuffer + ((Offset / 8) & ~3))) << ((8 * 8) - (Offset % (8 * 4)) - numBits)) >> ((8 * 8) - numBits));
+			return (uint)(((*(ulong*)(PBuffer + ((Offset >> 3) & ~3))) << ((8 * 8) - ((Offset & ((8 * 4) - 1))) - numBits)) >> ((8 * 8) - numBits));
 		}
 
 		public bool ReadBit()
 		{
-			bool bit = (PBuffer[Offset / 8] & (1 << (Offset & 7))) != 0;
+			bool bit = (PBuffer[Offset >> 3] & (1 << (Offset & 7))) != 0;
 			Advance(1);
 			return bit;
 		}
@@ -99,19 +99,19 @@ namespace DemoInfo.BitStreamImpl
 			if (bytes < 3) {
 				for (int i = 0; i < bytes; i++)
 					ret[i] = ReadByte();
-			} else if ((Offset % 8) == 0) {
+			} else if ((Offset & 7) == 0) {
 				// zomg we have byte alignment
 				int offset = 0;
 				while (offset < bytes) {
-					int remainingBytes = Math.Min((BitsInBuffer - Offset) / 8, bytes - offset);
-					System.Buffer.BlockCopy(Buffer, Offset / 8, ret, offset, remainingBytes);
+					int remainingBytes = Math.Min((BitsInBuffer - Offset) >> 3, bytes - offset);
+					System.Buffer.BlockCopy(Buffer, Offset >> 3, ret, offset, remainingBytes);
 					offset += remainingBytes;
 					Advance(remainingBytes * 8);
 				}
 			} else fixed (byte* retptr = ret) {
 				int offset = 0;
 				while (offset < bytes) {
-					int remainingBytes = Math.Min((BitsInBuffer - Offset) / 8 + 1, bytes - offset);
+					int remainingBytes = Math.Min(((BitsInBuffer - Offset) >> 3) + 1, bytes - offset);
 					HyperspeedCopyRound(remainingBytes, retptr + offset);
 					offset += remainingBytes;
 				}
@@ -124,10 +124,10 @@ namespace DemoInfo.BitStreamImpl
 			// We can copy ~64 bits at a time (vs 8)
 
 			// begin by aligning to the first byte
-			int misalign = 8 - (Offset % 8);
+			int misalign = 8 - (Offset & 7);
 			int realign = sizeof(ulong) * 8 - misalign;
 			ulong step = ReadByte(misalign);
-			var inptr = (ulong*)(PBuffer + (Offset / 8));
+			var inptr = (ulong*)(PBuffer + (Offset >> 3));
 			var outptr = (ulong*)retptr;
 			// main loop
 			for (int i = 0; i < ((bytes - 1) / sizeof(ulong)); i++) {
@@ -149,7 +149,7 @@ namespace DemoInfo.BitStreamImpl
 		{
 			// Just like PeekInt, but we cast to signed long before the shr because we need to sext
 			BitStreamUtil.AssertMaxBits(32, numBits);
-			var result = (int)(((long)((*(ulong*)(PBuffer + ((Offset / 8) & ~3))) << ((8 * 8) - (Offset % (8 * 4)) - numBits))) >> ((8 * 8) - numBits));
+			var result = (int)(((long)((*(ulong*)(PBuffer + ((Offset >> 3) & ~3))) << ((8 * 8) - (Offset & ((8 * 4) - 1)) - numBits))) >> ((8 * 8) - numBits));
 			Advance(numBits);
 			return result;
 		}
@@ -163,11 +163,11 @@ namespace DemoInfo.BitStreamImpl
 
 		public byte[] ReadBits(int bits)
 		{
-			byte[] result = new byte[(bits + 7) / 8];
-			ReadBytes(result, bits / 8);
+			byte[] result = new byte[(bits + 7) >> 3];
+			ReadBytes(result, bits >> 3);
 
-			if ((bits % 8) != 0)
-				result[bits / 8] = ReadByte(bits % 8);
+			if ((bits & 7) != 0)
+				result[bits >> 3] = ReadByte(bits & 7);
 
 			return result;
 		}
