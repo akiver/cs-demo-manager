@@ -3,7 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace DemoInfo
+namespace DemoInfo.BitStreamImpl
 {
 	public unsafe class UnsafeBitStream : IBitStream
 	{
