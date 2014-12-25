@@ -7,8 +7,8 @@ namespace DemoInfo.BitStreamImpl
 {
 	public unsafe class UnsafeBitStream : IBitStream
 	{
-		private static readonly int SLED = 4;
-		public static readonly int BUFSIZE = 2048 + SLED;
+		private const int SLED = 4;
+		private const int BUFSIZE = 2048 + SLED;
 
 		private int Offset;
 		private Stream Underlying;
