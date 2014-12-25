@@ -71,7 +71,7 @@ namespace DemoInfo.BitStreamImpl
 
 		public bool ReadBit()
 		{
-			bool bit = (Buffer[Offset / 8] & (1 << (Offset & 7))) != 0;
+			bool bit = (PBuffer[Offset / 8] & (1 << (Offset & 7))) != 0;
 			Advance(1);
 			return bit;
 		}
