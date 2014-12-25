@@ -10,11 +10,6 @@ namespace DemoInfo.BitStreamImpl
 		private static readonly int SLED = 4;
 		public static readonly int BUFSIZE = 2048 + SLED;
 
-		/// <summary>
-		/// Gets the current position in bits.
-		/// </summary>
-		/// <value>The position in bits.</value>
-		public int Position { get; private set; }
 		private int Offset;
 		private Stream Underlying;
 		private GCHandle HBuffer;
