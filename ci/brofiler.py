@@ -101,6 +101,8 @@ elif sys.argv[1] == 'verify':
             gistlink = create_gist(maybe_append(maybe_append(
                 'return code ' + str(retval), err_text, 'stderr'), out_text, 'stdout'))
             set_status(COMMIT, 'failure', 'Verification failed', dem, gistlink)
+            print('Failure info posted to: ' + gistlink)
+            os.unlink(TESTDATA + '/' + dem)
 
     sys.exit(how_many_failures)
 elif sys.argv[1] != 'run':
