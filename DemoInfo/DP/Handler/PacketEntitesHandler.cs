@@ -65,7 +65,9 @@ namespace DemoInfo.DP.Handler
 			if (parser.instanceBaseline.ContainsKey(serverClassID)) {
 				using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {
 					ms.Position = 0;
-					newEntity.ApplyUpdate(BitStreamUtil.Create(ms));
+					using (IBitStream reader2 = BitStreamUtil.Create(ms)) {
+						newEntity.ApplyUpdate(reader2);
+					}
 				}
 			}
 
