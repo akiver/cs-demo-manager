@@ -28,7 +28,8 @@ namespace DemoInfo.BitStreamImpl
 		{
 			if (!a.Equals(b)) {
 				System.Diagnostics.Debug.Assert(false);
-				throw new InvalidOperationException();
+				throw new InvalidOperationException(String.Format("{0} vs {1} ({2} vs {3})",
+					a, b, A.GetType().Name, B.GetType().Name));
 			}
 		}
 
