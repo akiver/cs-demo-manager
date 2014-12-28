@@ -9,16 +9,14 @@ namespace DemoInfo.ST
 {
     class StringTableParser
     {
-		public void ParsePacket(Stream stream, DemoParser parser)
+		public void ParsePacket(IBitStream reader, DemoParser parser)
         {
-			using (IBitStream reader = BitStreamUtil.Create(stream)) {
-				int numTables = reader.ReadByte();
+			int numTables = reader.ReadByte();
 
-				for (int i = 0; i < numTables; i++) {
-					string tableName = reader.ReadString();
+			for (int i = 0; i < numTables; i++) {
+				string tableName = reader.ReadString();
 
-					ParseStringTable(reader, tableName, parser);
-				}
+				ParseStringTable(reader, tableName, parser);
 			}
         }
 

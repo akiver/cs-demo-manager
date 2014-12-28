@@ -26,18 +26,18 @@ namespace DemoInfo.DT
 		List<ExcludeEntry> CurrentExcludes = new List<ExcludeEntry>();
 		List<ServerClass> CurrentBaseclasses = new List<ServerClass>();
 
-		public void ParsePacket(Stream stream)
+		public void ParsePacket(IBitStream bitstream)
         {
-			BinaryReader reader = new BinaryReader(stream);
-
-            while (true)
+			while (true)
             {
-                var type = (SVC_Messages)reader.ReadVarInt32();
-                if (type != SVC_Messages.svc_SendTable)
-                    throw new Exception("Expected SendTable, got " + type);
+				var type = (SVC_Messages)bitstream.ReadProtobufVarInt();
+				if (type != SVC_Messages.svc_SendTable)
+					throw new Exception("Expected SendTable, got " + type);
 
-
-                var sendTable = reader.ReadProtobufMessage<CSVCMsg_SendTable>();
+				CSVCMsg_SendTable sendTable;
+				var size = bitstream.ReadProtobufVarInt();
+				using (var memstream = new MemoryStream(bitstream.ReadBytes(size)))
+					sendTable = ProtoBuf.Serializer.Deserialize<CSVCMsg_SendTable>(memstream);
 
                 if (sendTable.is_end)
                     break;
@@ -45,18 +45,18 @@ namespace DemoInfo.DT
                 DataTables.Add(new SendTable(sendTable));
             }
 
-            int serverClassCount = reader.ReadInt16();
+			int serverClassCount = checked((int)bitstream.ReadInt(16));
 
             for (int i = 0; i < serverClassCount; i++)
             {
                 ServerClass entry = new ServerClass();
-                entry.ClassID = reader.ReadInt16();
+				entry.ClassID = checked((int)bitstream.ReadInt(16));
 
                 if (entry.ClassID > serverClassCount)
                     throw new Exception("Invalid class index");
 
-                entry.Name = reader.ReadNullTerminatedString();
-                entry.DTName = reader.ReadNullTerminatedString();
+				entry.Name = bitstream.ReadDataTableString();
+				entry.DTName = bitstream.ReadDataTableString();
 
                 entry.DataTableID = DataTables.FindIndex(a => a.Name == entry.DTName);
 

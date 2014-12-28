@@ -18,13 +18,20 @@ namespace DemoInfo.DP
 			orderby -parser.Priority
 			select parser).ToArray();
 
-		public static void ParsePacket(Stream stream, DemoParser demo)
+		public static void ParsePacket(IBitStream bitstream, DemoParser demo)
         {
-			var reader = new BinaryReader(stream);
-
-			while (stream.Position < stream.Length)
+			while (!bitstream.ChunkFinished)
             {
-                int cmd = reader.ReadVarInt32();
+				int cmd = bitstream.ReadProtobufVarInt();
+
+				if (cmd == (int)NET_Messages.net_Tick) {
+					var swagtick = new NETTick();
+					var bsz = bitstream.ReadProtobufVarInt();
+					swagtick.Parse(bitstream, bsz);
+					continue;
+				}/* else if (cmd == (int)SVC_Messages.svc_PacketEntities) {
+					continue;
+				}*/
 
                 Type toParse = null;
 
@@ -39,14 +46,13 @@ namespace DemoInfo.DP
                     toParse = Assembly.GetExecutingAssembly().GetType("DemoInfo.Messages.CNETMsg_" + msg.ToString().Substring(4));
                 }
 
-                if (toParse == null)  
-                {
-                    reader.ReadBytes(reader.ReadVarInt32());
+				var data = bitstream.ReadBytes(bitstream.ReadProtobufVarInt());
+                if (toParse == null)
                     continue;
-                }
 
-
-                var result = reader.ReadProtobufMessage(toParse, ProtoBuf.PrefixStyle.Base128);
+				ProtoBuf.IExtensible result;
+				using (var memstream = new MemoryStream(data))
+					result = memstream.ReadProtobufMessage(toParse);
 
                 foreach (var parser in Parsers)
 					if (parser.TryApplyMessage(result, demo) && (parser.Priority > 0))

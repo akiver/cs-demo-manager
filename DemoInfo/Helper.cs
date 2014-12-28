@@ -84,11 +84,6 @@ namespace DemoInfo
 			return Encoding.Default.GetString(result.ToArray());
 		}
 
-		public static Stream ReadVolvoPacket(this BinaryReader reader)
-		{
-			return new LimitStream(reader.BaseStream, reader.ReadInt32());
-		}
-
 		public static T ReadProtobufMessage<T>(this BinaryReader reader)
 		{
 			return ReadProtobufMessage<T>(reader, PrefixStyle.Base128);
@@ -110,6 +105,18 @@ namespace DemoInfo
 			deserialize = deserialize.MakeGenericMethod(T);
 
 			return (IExtensible)deserialize.Invoke(null, new object[] { reader.BaseStream, style });
+		}
+
+		public static IExtensible ReadProtobufMessage(this Stream stream, Type T)
+		{
+			var type = typeof(ProtoBuf.Serializer);
+			var deserialize = type.GetMethod("Deserialize", new Type[] {
+				typeof(Stream),
+			});
+
+			deserialize = deserialize.MakeGenericMethod(T);
+
+			return (IExtensible)deserialize.Invoke(null, new object[] { stream });
 		}
 
 		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)

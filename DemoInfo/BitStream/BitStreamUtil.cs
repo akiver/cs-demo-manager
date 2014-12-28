@@ -100,6 +100,22 @@ namespace DemoInfo
 			return Encoding.ASCII.GetString(result.ToArray());
 		}
 
+		public static string ReadDataTableString(this IBitStream bs)
+		{
+			using (var memstream = new MemoryStream()) {
+				// not particulary efficient, but probably fine
+				for (byte b = bs.ReadByte(); b != 0; b = bs.ReadByte())
+					memstream.WriteByte(b);
+
+				return Encoding.Default.GetString(memstream.GetBuffer(), 0, checked((int)memstream.Length));
+			}
+		}
+
+		public static string ReadCString(this IBitStream reader, int length)
+		{
+			return Encoding.Default.GetString(reader.ReadBytes(length)).Split(new char[] { '\0' }, 2)[0];
+		}
+
 		public static uint ReadVarInt(this IBitStream bs)
 		{
 			uint tmpByte = 0x80;
@@ -110,6 +126,20 @@ namespace DemoInfo
 				tmpByte = bs.ReadByte();
 				result |= (tmpByte & 0x7F) << (7 * count);
 			}
+			return result;
+		}
+
+		public static int ReadProtobufVarIntStub(IBitStream reader)
+		{
+			byte b = 0x80;
+			int result = 0;
+			for (int count = 0; (b & 0x80) != 0; count++) {
+				if (count >= 4)
+					throw new OverflowException("This might be a valid protobuf varint128, but we can't read it :/");
+				b = reader.ReadByte();
+				result |= (b & ~0x80) << (7 * count);
+			}
+
 			return result;
 		}
 
