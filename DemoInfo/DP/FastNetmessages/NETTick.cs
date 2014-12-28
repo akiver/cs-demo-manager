@@ -36,7 +36,8 @@ namespace DemoInfo
 					HostFramestartTimeStdDeviation = val;
 					break;
 				default:
-					throw new InvalidDataException();
+					// silently drop
+					break;
 				}
 			}
 			bitstream.EndChunk();

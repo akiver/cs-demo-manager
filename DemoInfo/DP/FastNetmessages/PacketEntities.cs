@@ -63,7 +63,8 @@ namespace DemoInfo
 					DeltaFrom = val;
 					break;
 				default:
-					throw new InvalidDataException();
+					// silently drop
+					break;
 				}
 			}
 			bitstream.EndChunk();
