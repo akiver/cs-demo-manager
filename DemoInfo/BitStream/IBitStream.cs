@@ -8,7 +8,6 @@ namespace DemoInfo
 		void Initialize(Stream stream);
 
 		uint ReadInt(int bits);
-		uint PeekInt(int bits);
 		int ReadSignedInt(int numBits);
 		bool ReadBit();
 		byte ReadByte();

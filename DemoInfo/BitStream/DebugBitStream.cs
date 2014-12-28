@@ -48,14 +48,6 @@ namespace DemoInfo.BitStreamImpl
 			return a;
 		}
 
-		public uint PeekInt(int bits)
-		{
-			var a = A.PeekInt(bits);
-			var b = B.PeekInt(bits);
-			Verify(a, b);
-			return a;
-		}
-
 		public bool ReadBit()
 		{
 			var a = A.ReadBit();
