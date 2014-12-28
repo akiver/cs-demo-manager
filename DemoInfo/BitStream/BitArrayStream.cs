@@ -10,8 +10,9 @@ namespace DemoInfo.BitStreamImpl
 {
 	public class BitArrayStream : IBitStream
 	{
-		BitArray array;
-
+		private BitArray array;
+		private readonly List<int> RemainingInOldChunks = new List<int>();
+		private int RemainingInCurrentChunk = -1;
 		public int Position { get; private set; }
 
 		public BitArrayStream()
@@ -36,6 +37,9 @@ namespace DemoInfo.BitStreamImpl
 
 		public void Seek(int pos, SeekOrigin origin)
 		{
+			if (RemainingInCurrentChunk >= 0)
+				throw new NotSupportedException("Can't seek while inside a chunk");
+
 			if (origin == SeekOrigin.Begin)
 				Position = pos;
 
@@ -50,6 +54,15 @@ namespace DemoInfo.BitStreamImpl
 		{
 			uint result = PeekInt(numBits);
 			Position += numBits;
+			if (RemainingInCurrentChunk >= 0) {
+				if (numBits > RemainingInCurrentChunk)
+					throw new OverflowException("Trying to read beyond a chunk boundary!");
+				else {
+					RemainingInCurrentChunk -= numBits;
+					for (int i = 1; i < RemainingInOldChunks.Count; i++)
+						RemainingInOldChunks[i] -= numBits;
+				}
+			}
 
 			return result;
 		}
@@ -135,5 +148,28 @@ namespace DemoInfo.BitStreamImpl
 
 			return result;
 		}
+
+		public int ReadProtobufVarInt()
+		{
+			return BitStreamUtil.ReadProtobufVarIntStub(this);
+		}
+
+		public void BeginChunk(int length)
+		{
+			if ((RemainingInCurrentChunk >= 0) && (RemainingInCurrentChunk < length))
+				throw new InvalidOperationException("trying to create a too big nested chunk"); // grammar much
+			RemainingInOldChunks.Add(RemainingInCurrentChunk);
+			RemainingInCurrentChunk = length;
+		}
+
+		public void EndChunk()
+		{
+			ReadBits(RemainingInCurrentChunk); // hella inefficient, but this is the BitArrayStream so no one cares
+			int idx = RemainingInOldChunks.Count - 1;
+			RemainingInCurrentChunk = RemainingInOldChunks[idx];
+			RemainingInOldChunks.RemoveAt(idx);
+		}
+
+		public bool ChunkFinished { get { return RemainingInCurrentChunk == 0; } }
 	}
 }

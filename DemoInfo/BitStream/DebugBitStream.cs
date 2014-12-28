@@ -128,6 +128,35 @@ namespace DemoInfo.BitStreamImpl
 			Verify(a.SequenceEqual(b), true);
 			return a;
 		}
+
+		public int ReadProtobufVarInt()
+		{
+			var a = A.ReadProtobufVarInt();
+			var b = B.ReadProtobufVarInt();
+			Verify(a, b);
+			return a;
+		}
+
+		public void BeginChunk(int bits)
+		{
+			A.BeginChunk(bits);
+			B.BeginChunk(bits);
+		}
+
+		public void EndChunk()
+		{
+			A.EndChunk();
+			B.EndChunk();
+		}
+
+		public bool ChunkFinished {
+			get {
+				var a = A.ChunkFinished;
+				var b = B.ChunkFinished;
+				Verify(a, b);
+				return a;
+			}
+		}
 	}
 }
 
