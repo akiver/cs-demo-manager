@@ -25,13 +25,18 @@ namespace DemoInfo.DP
 				int cmd = bitstream.ReadProtobufVarInt();
 
 				if (cmd == (int)NET_Messages.net_Tick) {
-					var swagtick = new NETTick();
-					var bsz = bitstream.ReadProtobufVarInt();
-					swagtick.Parse(bitstream, bsz);
+					new NETTick().Parse(bitstream);
 					continue;
-				}/* else if (cmd == (int)SVC_Messages.svc_PacketEntities) {
+				} else if (cmd == (int)SVC_Messages.svc_PacketEntities) {
+					new PacketEntities().Parse(bitstream, demo);
 					continue;
-				}*/
+				} else if (cmd == (int)SVC_Messages.svc_EncryptedData) {
+					int length = bitstream.ReadProtobufVarInt();
+					bitstream.BeginChunk(length * 8);
+					// TODO: maybe one day find the key for this?
+					bitstream.EndChunk();
+					continue;
+				}
 
                 Type toParse = null;
 

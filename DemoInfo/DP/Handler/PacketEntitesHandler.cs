@@ -10,47 +10,39 @@ using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
-    class PacketEntitesHandler : IMessageParser
+    class PacketEntitesHandler
     {
-        public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
+		public static void Apply(PacketEntities packetEntities, IBitStream reader, DemoParser parser)
         {
-			CSVCMsg_PacketEntities packetEntites = message as CSVCMsg_PacketEntities;
-			if (packetEntites == null)
-				return false;
+			int currentEntity = -1;
+			for (int i = 0; i < packetEntities.UpdatedEntries; i++) {
+				currentEntity += 1 + (int)reader.ReadUBitInt();
 
-			using (IBitStream reader = BitStreamUtil.Create(packetEntites.entity_data)) {
-				int currentEntity = -1;
-				for (int i = 0; i < packetEntites.updated_entries; i++) {
-					currentEntity += 1 + (int)reader.ReadUBitInt();
+				// Leave flag
+				if (!reader.ReadBit()) {
+					// enter flag
+					if (reader.ReadBit()) {
+						var e = ReadEnterPVS(reader, currentEntity, parser);
 
-					// Leave flag
-					if (!reader.ReadBit()) {
-						// enter flag
-						if (reader.ReadBit()) {
-							var e = ReadEnterPVS(reader, currentEntity, parser);
+						parser.Entities[currentEntity] = e;
 
-							parser.Entities[currentEntity] = e;
-
-							e.ApplyUpdate(reader);
-						} else {
-							// preserve
-							Entity e = parser.Entities[currentEntity];
-							e.ApplyUpdate(reader);
-						}
+						e.ApplyUpdate(reader);
 					} else {
-						// leave
-						parser.Entities [currentEntity].Leave ();
-						parser.Entities[currentEntity] = null;
-						if (reader.ReadBit()) {
-						}
+						// preserve
+						Entity e = parser.Entities[currentEntity];
+						e.ApplyUpdate(reader);
+					}
+				} else {
+					// leave
+					parser.Entities [currentEntity].Leave ();
+					parser.Entities[currentEntity] = null;
+					if (reader.ReadBit()) {
 					}
 				}
 			}
-
-			return true;
         }
 
-        public Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
+        public static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
             int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
 
@@ -71,8 +63,5 @@ namespace DemoInfo.DP.Handler
 
             return newEntity;
         }
-
-
-		public int Priority { get { return 0; } }
     }
 }

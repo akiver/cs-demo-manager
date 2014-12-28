@@ -10,9 +10,9 @@ namespace DemoInfo
 		public UInt32 HostComputationTimeStdDeviation;
 		public UInt32 HostFramestartTimeStdDeviation;
 
-		public void Parse(IBitStream bitstream, int length)
+		public void Parse(IBitStream bitstream)
 		{
-			bitstream.BeginChunk(length * 8);
+			bitstream.BeginChunk(bitstream.ReadProtobufVarInt() * 8);
 			while (!bitstream.ChunkFinished) {
 				var desc = bitstream.ReadProtobufVarInt();
 				var wireType = desc & 7;

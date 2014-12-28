@@ -97,6 +97,7 @@
     <Compile Include="Messages\steammessages.cs" />
     <Compile Include="Messages\gcmessages.cs" />
     <Compile Include="DP\FastNetmessages\NETTick.cs" />
+    <Compile Include="DP\FastNetmessages\PacketEntities.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
