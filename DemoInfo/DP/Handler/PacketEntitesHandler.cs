@@ -10,7 +10,7 @@ using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
-    class PacketEntitesHandler
+    public static class PacketEntitesHandler
     {
 		public static void Apply(PacketEntities packetEntities, IBitStream reader, DemoParser parser)
         {
@@ -42,7 +42,7 @@ namespace DemoInfo.DP.Handler
 			}
         }
 
-        public static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
+        private static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
             int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
 

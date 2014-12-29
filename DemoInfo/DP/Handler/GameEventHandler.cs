@@ -9,7 +9,7 @@ using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
-	class GameEventHandler
+	public static class GameEventHandler
 	{
 		public static void HandleGameEventList(IEnumerable<GameEventList.Descriptor> gel, DemoParser parser)
 		{
@@ -223,7 +223,5 @@ namespace DemoInfo.DP.Handler
 
 			return data;
 		}
-
-		public int Priority { get { return 0; } }
 	}
 }
