@@ -18,7 +18,6 @@ namespace DemoInfo
 
 		public void Parse(IBitStream bitstream, DemoParser parser)
 		{
-			bitstream.BeginChunk(bitstream.ReadProtobufVarInt() * 8);
 			while (!bitstream.ChunkFinished) {
 				var desc = bitstream.ReadProtobufVarInt();
 				var wireType = desc & 7;
@@ -67,7 +66,6 @@ namespace DemoInfo
 					break;
 				}
 			}
-			bitstream.EndChunk();
 		}
 	}
 }
