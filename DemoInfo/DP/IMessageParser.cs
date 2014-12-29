@@ -1,5 +1,4 @@
-﻿using ProtoBuf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +7,8 @@ using System.Threading.Tasks;
 namespace DemoInfo.DP
 {
 	#if SLOW_PROTOBUF
+	using ProtoBuf;
+
 	/// <summary>
 	/// A generic *singleton* object that can parse messages.
 	/// </summary>

@@ -102,6 +102,7 @@
     <Compile Include="DP\FastNetmessages\CreateStringTable.cs" />
     <Compile Include="DP\FastNetmessages\UpdateStringTable.cs" />
     <Compile Include="DP\FastNetmessages\SendTable.cs" />
+    <Compile Include="Messages\EnumConstants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

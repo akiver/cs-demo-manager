@@ -35,6 +35,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#if SLOW_PROTOBUF
 // Generated from: cstrike15_usermessages_public.proto
 // Note: requires additional types generated from: google/protobuf/descriptor.proto
 // Note: requires additional types generated from: netmessages_public.proto
@@ -2143,3 +2144,4 @@ namespace DemoInfo.Messages
 	}
 
 }
+#endif

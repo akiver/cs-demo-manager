@@ -1,5 +1,4 @@
-﻿using ProtoBuf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -85,6 +84,7 @@ namespace DemoInfo
 			return Encoding.Default.GetString(result.ToArray());
 		}
 
+		#if SLOW_PROTOBUF
 		public static T ReadProtobufMessage<T>(this BinaryReader reader)
 		{
 			return ReadProtobufMessage<T>(reader, PrefixStyle.Base128);
@@ -119,6 +119,7 @@ namespace DemoInfo
 
 			return (IExtensible)deserialize.Invoke(null, new object[] { stream });
 		}
+		#endif
 
 		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
 		{
