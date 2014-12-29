@@ -11,12 +11,14 @@ namespace DemoInfo.DP
 {
 	public static class DemoPacketParser
     {
+		#if SLOW_PROTOBUF
 		private static IEnumerable<IMessageParser> Parsers = (
 			from type in Assembly.GetExecutingAssembly().GetTypes()
 			where type.GetInterfaces().Contains(typeof(IMessageParser))
 			let parser = (IMessageParser)type.GetConstructor(new Type[0]).Invoke(new object[0])
 			orderby -parser.Priority
 			select parser).ToArray();
+		#endif
 
 		public static void ParsePacket(IBitStream bitstream, DemoParser demo)
         {
@@ -40,6 +42,7 @@ namespace DemoInfo.DP
 				} else if (cmd == (int)SVC_Messages.svc_UpdateStringTable) {
 					new UpdateStringTable().Parse(bitstream, demo);
 				} else {
+					#if SLOW_PROTOBUF
 					Type toParse = null;
 
 					if (Enum.IsDefined(typeof(SVC_Messages), cmd)) {
@@ -61,6 +64,7 @@ namespace DemoInfo.DP
 					foreach (var parser in Parsers)
 						if (parser.TryApplyMessage(result, demo) && (parser.Priority > 0))
 							break;
+					#endif
 				}
 				bitstream.EndChunk();
             }

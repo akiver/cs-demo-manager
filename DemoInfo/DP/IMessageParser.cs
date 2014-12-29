@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP
 {
+	#if SLOW_PROTOBUF
 	/// <summary>
 	/// A generic *singleton* object that can parse messages.
 	/// </summary>
@@ -30,4 +31,5 @@ namespace DemoInfo.DP
 		/// <value>The priority.</value>
 		int Priority { get; }
     }
+	#endif
 }
