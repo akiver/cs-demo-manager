@@ -7,14 +7,14 @@ namespace DemoInfo
 	{
 		// These are uints but should be ints
 		// please forgive me the inaccuracy
-		public UInt32 MaxEntries;
-		public UInt32 UpdatedEntries;
-		private UInt32 _IsDelta;
+		public Int32 MaxEntries;
+		public Int32 UpdatedEntries;
+		private Int32 _IsDelta;
 		public bool IsDelta { get { return _IsDelta != 0; } }
-		private UInt32 _UpdateBaseline;
+		private Int32 _UpdateBaseline;
 		public bool UpdateBaseline { get { return _UpdateBaseline != 0; } }
-		public UInt32 Baseline;
-		public UInt32 DeltaFrom;
+		public Int32 Baseline;
+		public Int32 DeltaFrom;
 
 		public void Parse(IBitStream bitstream, DemoParser parser)
 		{
@@ -40,7 +40,7 @@ namespace DemoInfo
 				if (wireType != 0)
 					throw new InvalidDataException();
 
-				var val = (uint)bitstream.ReadProtobufVarInt();
+				var val = bitstream.ReadProtobufVarInt();
 
 				switch (fieldnum) {
 				case 1:
