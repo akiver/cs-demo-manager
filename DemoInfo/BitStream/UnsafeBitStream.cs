@@ -216,7 +216,9 @@ namespace DemoInfo.BitStreamImpl
 						result |= (buf & MSK_4) >> 3;
 						BitStreamUtil.AssertMaxBits(availableBits, 3 * 8);
 						if ((buf & MSB_4) != 0)
-							throw new OverflowException("This might be a valid protobuf varint128, but we can't read it :/");
+							// dammit, it's too large (probably negative)
+							// fall back to the slow implementation, that's rare
+							return BitStreamUtil.ReadProtobufVarIntStub(this);
 						else Advance(4 * 8);
 					} else Advance(3 * 8);
 				} else Advance(2 * 8);

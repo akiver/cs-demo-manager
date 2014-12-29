@@ -134,13 +134,23 @@ namespace DemoInfo
 			byte b = 0x80;
 			int result = 0;
 			for (int count = 0; (b & 0x80) != 0; count++) {
-				if (count >= 4)
-					throw new OverflowException("This might be a valid protobuf varint128, but we can't read it :/");
 				b = reader.ReadByte();
-				result |= (b & ~0x80) << (7 * count);
+
+				if ((count < 4) || ((count == 4) && (((b & 0xF8) == 0) || ((b & 0xF8) == 0xF8))))
+					result |= (b & ~0x80) << (7 * count);
+				else {
+					if (count >= 10)
+						throw new OverflowException("Nope nope nope nope! 10 bytes max!");
+					if ((count == 9) ? (b != 1) : ((b & 0x7F) != 0x7F))
+						throw new NotSupportedException("more than 32 bits are not supported");
+				}
 			}
 
 			return result;
+		}
+
+		public static string ReadProtobufString(this IBitStream reader) {
+			return Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadProtobufVarInt()));
 		}
 
 		[Conditional("DEBUG")]
