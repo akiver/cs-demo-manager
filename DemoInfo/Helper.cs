@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using DemoInfo.DT;
+using DemoInfo.DP;
 
 namespace DemoInfo
 {
@@ -128,6 +129,11 @@ namespace DemoInfo
 		public static bool HasFlagFast(this SendPropertyFlags flags, SendPropertyFlags check)
 		{
 			return (flags & check) == check;
+		}
+
+		public static RecordedPropertyUpdate<T> Record<T>(this PropertyUpdateEventArgs<T> args)
+		{
+			return new RecordedPropertyUpdate<T>(args.Property.Index, args.Value);
 		}
 	}
 }

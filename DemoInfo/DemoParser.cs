@@ -122,7 +122,9 @@ namespace DemoInfo
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
 
 		#endregion
-
+		// These could be Dictionary<int, RecordedPropertyUpdate[]>, but I was too lazy to
+		// define that class. Also: It doesn't matter anyways, we always have to cast.
+		internal Dictionary<int, object[]> PreprocessedBaselines = new Dictionary<int, object[]>();
 		internal Dictionary<int, byte[]> instanceBaseline = new Dictionary<int, byte[]>();
 
 		public float TickRate {
