@@ -101,6 +101,7 @@
     <Compile Include="DP\FastNetmessages\GameEvent.cs" />
     <Compile Include="DP\FastNetmessages\CreateStringTable.cs" />
     <Compile Include="DP\FastNetmessages\UpdateStringTable.cs" />
+    <Compile Include="DP\FastNetmessages\SendTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

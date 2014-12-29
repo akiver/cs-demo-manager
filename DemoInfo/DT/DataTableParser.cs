@@ -34,15 +34,15 @@ namespace DemoInfo.DT
 				if (type != SVC_Messages.svc_SendTable)
 					throw new Exception("Expected SendTable, got " + type);
 
-				CSVCMsg_SendTable sendTable;
 				var size = bitstream.ReadProtobufVarInt();
-				using (var memstream = new MemoryStream(bitstream.ReadBytes(size)))
-					sendTable = ProtoBuf.Serializer.Deserialize<CSVCMsg_SendTable>(memstream);
+				bitstream.BeginChunk(size * 8);
+				var sendTable = new SendTable(bitstream);
+				bitstream.EndChunk();
 
-                if (sendTable.is_end)
+                if (sendTable.IsEnd)
                     break;
 
-                DataTables.Add(new SendTable(sendTable));
+				DataTables.Add(sendTable);
             }
 
 			int serverClassCount = checked((int)bitstream.ReadInt(16));
