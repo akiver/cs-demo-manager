@@ -31,6 +31,10 @@ namespace DemoInfo.DP
 					new PacketEntities().Parse(bitstream, demo);
 				} else if (cmd == (int)SVC_Messages.svc_EncryptedData) {
 					// TODO: maybe one day find the key for this?
+				} else if (cmd == (int)SVC_Messages.svc_GameEventList) {
+					new GameEventList().Parse(bitstream, demo);
+				} else if (cmd == (int)SVC_Messages.svc_GameEvent) {
+					new GameEvent().Parse(bitstream, demo);
 				} else {
 					Type toParse = null;
 

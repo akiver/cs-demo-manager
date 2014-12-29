@@ -118,7 +118,7 @@ namespace DemoInfo
 
 		#region Context for GameEventHandler
 
-		internal Dictionary<int, CSVCMsg_GameEventList.descriptor_t> GEH_Descriptors = null;
+		internal Dictionary<int, GameEventList.Descriptor> GEH_Descriptors = null;
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
 
 		#endregion

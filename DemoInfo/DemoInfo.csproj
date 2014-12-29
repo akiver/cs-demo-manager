@@ -98,6 +98,8 @@
     <Compile Include="Messages\gcmessages.cs" />
     <Compile Include="DP\FastNetmessages\NETTick.cs" />
     <Compile Include="DP\FastNetmessages\PacketEntities.cs" />
+    <Compile Include="DP\FastNetmessages\GameEventList.cs" />
+    <Compile Include="DP\FastNetmessages\GameEvent.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
