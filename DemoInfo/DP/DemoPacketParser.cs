@@ -35,6 +35,10 @@ namespace DemoInfo.DP
 					new GameEventList().Parse(bitstream, demo);
 				} else if (cmd == (int)SVC_Messages.svc_GameEvent) {
 					new GameEvent().Parse(bitstream, demo);
+				} else if (cmd == (int)SVC_Messages.svc_CreateStringTable) {
+					new CreateStringTable().Parse(bitstream, demo);
+				} else if (cmd == (int)SVC_Messages.svc_UpdateStringTable) {
+					new UpdateStringTable().Parse(bitstream, demo);
 				} else {
 					Type toParse = null;
 

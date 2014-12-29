@@ -9,103 +9,89 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP.Handler
 {
-    class CreateStringTableUserInfoHandler : IMessageParser
+	public static class CreateStringTableUserInfoHandler
     {
-        public bool TryApplyMessage(IExtensible message, DemoParser parser)
+        public static void Apply(CreateStringTable table, IBitStream reader, DemoParser parser)
         {
-			var create = message as CSVCMsg_CreateStringTable;
-			if ((create == null))
-				return false;
+			if (reader.ReadBit())
+				throw new NotImplementedException("Encoded with dictionaries, unable to decode");
 
-            ParseStringTableUpdate(create, parser);
-			return true;
-        }
+			int nTemp = table.MaxEntries;
+			int nEntryBits = 0;
+			while ((nTemp >>= 1) != 0)
+				++nEntryBits;
 
-        public void ParseStringTableUpdate(CSVCMsg_CreateStringTable table, DemoParser parser)
-        {
-			using (IBitStream reader = BitStreamUtil.Create(table.string_data)) {
-				if (reader.ReadBit())
-					throw new NotImplementedException("Encoded with dictionaries, unable to decode");
+			List<string> history = new List<string>();
 
-				int nTemp = table.max_entries;
-				int nEntryBits = 0;
-				while ((nTemp >>= 1) != 0)
-					++nEntryBits;
+			int lastEntry = -1;
 
-				List<string> history = new List<string>();
+			for (int i = 0; i < table.NumEntries; i++) {
+				int entryIndex = lastEntry + 1;
+				// d in the entity-index
+				if (!reader.ReadBit()) {
+					entryIndex = (int)reader.ReadInt(nEntryBits);
+				}
 
-				int lastEntry = -1;
-	
-				for (int i = 0; i < table.num_entries; i++) {
-					int entryIndex = lastEntry + 1;
-					// d in the entity-index
-					if (!reader.ReadBit()) {
-						entryIndex = (int)reader.ReadInt(nEntryBits);
-					}
+				lastEntry = entryIndex;
 
-					lastEntry = entryIndex;
+				// Read the name of the string into entry.
+				string entry = "";
+				if (entryIndex < 0 || entryIndex >= table.MaxEntries) {
+					throw new InvalidDataException("bogus string index");
+				}
 
-					// Read the name of the string into entry.
-					string entry = "";
-					if (entryIndex < 0 || entryIndex >= table.max_entries) {
-						throw new InvalidDataException("bogus string index");
-					}
+				if (reader.ReadBit()) {
+					bool substringcheck = reader.ReadBit();
 
-					if (reader.ReadBit()) {
-						bool substringcheck = reader.ReadBit();
+					if (substringcheck) {
+						int index = (int)reader.ReadInt(5);
+						int bytestocopy = (int)reader.ReadInt(5);
 
-						if (substringcheck) {
-							int index = (int)reader.ReadInt(5);
-							int bytestocopy = (int)reader.ReadInt(5);
+						entry = history[index].Substring(0, bytestocopy);
 
-							entry = history[index].Substring(0, bytestocopy);
-
-							entry += reader.ReadString(1024);
-						} else {
-							entry = reader.ReadString(1024);
-						}
-					}
-
-					if (entry == null)
-						entry = "";
-
-					if (history.Count > 31)
-						history.RemoveAt(0);
-
-					history.Add(entry);
-
-					// Read in the user data.
-					byte[] userdata = new byte[0];
-					if (reader.ReadBit()) {
-						if (table.user_data_fixed_size) {
-							userdata = reader.ReadBits(table.user_data_size_bits);
-						} else {
-							int bytesToRead = (int)reader.ReadInt(14);
-
-							userdata = reader.ReadBytes(bytesToRead);
-						}
-					}
-
-					if (userdata.Length == 0)
-						break;
-
-					if (table.name == "userinfo") {
-
-						// Now we'll parse the players out of it.
-						BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
-						PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
-
-						parser.RawPlayers[entryIndex] = info;
-					
-					} else if (table.name == "instancebaseline") {
-						int classid = int.Parse(entry); //wtf volvo?
-
-						parser.instanceBaseline[classid] = userdata; 
+						entry += reader.ReadString(1024);
+					} else {
+						entry = reader.ReadString(1024);
 					}
 				}
-			}
-        }
 
-		public int Priority { get { return 0; } }
+				if (entry == null)
+					entry = "";
+
+				if (history.Count > 31)
+					history.RemoveAt(0);
+
+				history.Add(entry);
+
+				// Read in the user data.
+				byte[] userdata = new byte[0];
+				if (reader.ReadBit()) {
+					if (table.UserDataFixedSize) {
+						userdata = reader.ReadBits(table.UserDataSizeBits);
+					} else {
+						int bytesToRead = (int)reader.ReadInt(14);
+
+						userdata = reader.ReadBytes(bytesToRead);
+					}
+				}
+
+				if (userdata.Length == 0)
+					break;
+
+				if (table.Name == "userinfo") {
+					// Now we'll parse the players out of it.
+					BinaryReader playerReader = new BinaryReader(new MemoryStream(userdata));
+					PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
+
+					parser.RawPlayers[entryIndex] = info;
+				} else if (table.Name == "instancebaseline") {
+					int classid = int.Parse(entry); //wtf volvo?
+
+					parser.instanceBaseline[classid] = userdata;
+				}
+			}
+
+			parser.stringTables.Add(table);
+        }
     }
 }

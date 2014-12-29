@@ -82,7 +82,7 @@ namespace DemoInfo
 
 		internal Entity[] Entities = new Entity[MAX_ENTITIES]; //Max 2048 entities. 
 
-		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
+		public List<CreateStringTable> stringTables = new List<CreateStringTable>();
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="DemoInfo.DemoParser"/> will attribute weapons to the players.

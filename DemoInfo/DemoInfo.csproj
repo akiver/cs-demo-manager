@@ -67,7 +67,6 @@
     <Compile Include="DP\DemoPacketParser.cs" />
     <Compile Include="DP\Entity.cs" />
     <Compile Include="DP\Handler\GameEventHandler.cs" />
-    <Compile Include="DP\Handler\GenericCreateStringTablesHandler.cs" />
     <Compile Include="DP\Handler\PacketEntitesHandler.cs" />
     <Compile Include="DP\Handler\PropDecoder.cs" />
     <Compile Include="DP\Handler\CreateStringTableUserInfoHandler.cs" />
@@ -100,6 +99,8 @@
     <Compile Include="DP\FastNetmessages\PacketEntities.cs" />
     <Compile Include="DP\FastNetmessages\GameEventList.cs" />
     <Compile Include="DP\FastNetmessages\GameEvent.cs" />
+    <Compile Include="DP\FastNetmessages\CreateStringTable.cs" />
+    <Compile Include="DP\FastNetmessages\UpdateStringTable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

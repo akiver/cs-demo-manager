@@ -8,24 +8,19 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP.Handler
 {
-	class UpdateStringTableUserInfoHandler : IMessageParser
+	public static class UpdateStringTableUserInfoHandler
 	{
-		public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
+		public static void Apply(UpdateStringTable update, IBitStream reader, DemoParser parser)
 		{
-			var update = message as CSVCMsg_UpdateStringTable;
-			if (( update == null ) || ( parser.stringTables[update.table_id].name != "userinfo" ))
-				return false;
-
-			CSVCMsg_CreateStringTable create = parser.stringTables[update.table_id];
-			create.num_entries = update.num_changed_entries;
-			create.string_data = update.string_data;
-
-			CreateStringTableUserInfoHandler h = new CreateStringTableUserInfoHandler();
-			h.ParseStringTableUpdate(create, parser);
-
-			return true;
+			CreateStringTable create = parser.stringTables[update.TableId];
+			if (create.Name == "userinfo") {
+				/*
+				 * Ignore updates for everything except 'userinfo'.
+				 * Create a fake CreateStringTable message and parse it.
+				 */
+				create.NumEntries = update.NumChangedEntries;
+				CreateStringTableUserInfoHandler.Apply(create, reader, parser);
+			}
 		}
-
-		public int Priority { get { return 0; } }
 	}
 }
