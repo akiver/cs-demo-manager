@@ -4,6 +4,7 @@ using System.Diagnostics;
 
 namespace DemoInfo.DP
 {
+	#if SLOW_PROTOBUF
 	public class UserMessageHandler : IMessageParser
 	{
 		public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
@@ -19,5 +20,5 @@ namespace DemoInfo.DP
 
 		public int Priority { get { return 0; } }
 	}
+	#endif
 }
-

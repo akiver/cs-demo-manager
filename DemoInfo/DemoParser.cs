@@ -61,7 +61,7 @@ namespace DemoInfo
 
 		#endregion
 
-		BinaryReader reader;
+		private readonly IBitStream BitStream;
 
 		public DemoHeader Header { get; private set; }
 
@@ -82,7 +82,7 @@ namespace DemoInfo
 
 		internal Entity[] Entities = new Entity[MAX_ENTITIES]; //Max 2048 entities. 
 
-		public List<CSVCMsg_CreateStringTable> stringTables = new List<CSVCMsg_CreateStringTable>();
+		public List<CreateStringTable> stringTables = new List<CreateStringTable>();
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="DemoInfo.DemoParser"/> will attribute weapons to the players.
@@ -118,11 +118,13 @@ namespace DemoInfo
 
 		#region Context for GameEventHandler
 
-		internal Dictionary<int, CSVCMsg_GameEventList.descriptor_t> GEH_Descriptors = null;
+		internal Dictionary<int, GameEventList.Descriptor> GEH_Descriptors = null;
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
 
 		#endregion
-
+		// These could be Dictionary<int, RecordedPropertyUpdate[]>, but I was too lazy to
+		// define that class. Also: It doesn't matter anyways, we always have to cast.
+		internal Dictionary<int, object[]> PreprocessedBaselines = new Dictionary<int, object[]>();
 		internal Dictionary<int, byte[]> instanceBaseline = new Dictionary<int, byte[]>();
 
 		public float TickRate {
@@ -140,7 +142,7 @@ namespace DemoInfo
 
 		public DemoParser(Stream input)
 		{
-			reader = new BinaryReader(input);
+			BitStream = BitStreamUtil.Create(input);
 		}
 
 		public void ParseDemo(bool fullParse)
@@ -200,7 +202,7 @@ namespace DemoInfo
 
 		private void ParseHeader()
 		{
-			var header = DemoHeader.ParseFrom(reader);
+			var header = DemoHeader.ParseFrom(BitStream);
 
 			if (header.Filestamp != "HL2DEMO")
 				throw new Exception("Invalid File-Type - expecting HL2DEMO");
@@ -213,10 +215,10 @@ namespace DemoInfo
 
 		private bool ParseTick()
 		{
-			DemoCommand command = (DemoCommand)reader.ReadByte();
+			DemoCommand command = (DemoCommand)BitStream.ReadByte();
 
-			reader.ReadInt32(); // tick number
-			reader.ReadByte(); // player slot
+			BitStream.ReadInt(32); // tick number
+			BitStream.ReadByte(); // player slot
 
 			this.CurrentTick++; // = TickNum;
 
@@ -226,12 +228,13 @@ namespace DemoInfo
 			case DemoCommand.Stop:
 				return false;
 			case DemoCommand.ConsoleCommand:
-				using (var volvo = reader.ReadVolvoPacket())
-					;
+				BitStream.BeginChunk(BitStream.ReadSignedInt(32) * 8);
+				BitStream.EndChunk();
 				break;
 			case DemoCommand.DataTables:
-				using (var volvo = reader.ReadVolvoPacket())
-					SendTableParser.ParsePacket(volvo);
+				BitStream.BeginChunk(BitStream.ReadSignedInt(32) * 8);
+				SendTableParser.ParsePacket(BitStream);
+				BitStream.EndChunk();
 
 				for (int i = 0; i < SendTableParser.ServerClasses.Count; i++) {
 					var sc = SendTableParser.ServerClasses[i];
@@ -263,13 +266,14 @@ namespace DemoInfo
 
 				break;
 			case DemoCommand.StringTables:
-				using (var volvo = reader.ReadVolvoPacket())
-					StringTables.ParsePacket(volvo, this);
+				BitStream.BeginChunk(BitStream.ReadSignedInt(32) * 8);
+				StringTables.ParsePacket(BitStream, this);
+				BitStream.EndChunk();
 				break;
 			case DemoCommand.UserCommand:
-				reader.ReadInt32();
-				using (var volvo = reader.ReadVolvoPacket())
-					;
+				BitStream.ReadInt(32);
+				BitStream.BeginChunk(BitStream.ReadSignedInt(32) * 8);
+				BitStream.EndChunk();
 				break;
 			case DemoCommand.Signon:
 			case DemoCommand.Packet:
@@ -284,12 +288,13 @@ namespace DemoInfo
 
 		private void ParseDemoPacket()
 		{
-			CommandInfo.Parse(reader);
-			reader.ReadInt32(); // SeqNrIn
-			reader.ReadInt32(); // SeqNrOut
+			CommandInfo.Parse(BitStream);
+			BitStream.ReadInt(32); // SeqNrIn
+			BitStream.ReadInt(32); // SeqNrOut
 
-			using (var volvo = reader.ReadVolvoPacket())
-				DemoPacketParser.ParsePacket(volvo, this);
+			BitStream.BeginChunk(BitStream.ReadSignedInt(32) * 8);
+			DemoPacketParser.ParsePacket(BitStream, this);
+			BitStream.EndChunk();
    		}
 
 		private void BindEntites()

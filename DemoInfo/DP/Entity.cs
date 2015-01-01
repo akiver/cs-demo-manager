@@ -22,11 +22,10 @@ namespace DemoInfo.DP
 			this.ID = id;
 			this.ServerClass = serverClass;
 
-			Props = new PropertyEntry[ServerClass.FlattenedProps.Count];
-			int i = 0;
-			foreach (var prop in ServerClass.FlattenedProps) {
-				Props[i++] = new PropertyEntry(prop);
-			}
+			var flattenedProps = ServerClass.FlattenedProps;
+			Props = new PropertyEntry[flattenedProps.Count];
+			for (int i = 0; i < flattenedProps.Count; i++)
+				Props[i] = new PropertyEntry(flattenedProps[i], i);
 		}
 
 		public PropertyEntry FindProperty(string name)
@@ -96,6 +95,7 @@ namespace DemoInfo.DP
 
 	class PropertyEntry
 	{
+		public readonly int Index;
 		public FlattenedPropEntry Entry { get; private set; }
 
 		public event EventHandler<PropertyUpdateEventArgs<int>> IntRecived;
@@ -217,9 +217,10 @@ namespace DemoInfo.DP
 
 		}
 
-		public PropertyEntry(FlattenedPropEntry prop)
+		public PropertyEntry(FlattenedPropEntry prop, int index)
 		{
 			this.Entry = new FlattenedPropEntry(prop.PropertyName, prop.Prop, prop.ArrayElementProp);
+			this.Index = index;
 		}
 
 		public void Destroy()
@@ -278,6 +279,40 @@ namespace DemoInfo.DP
 
 
 		}
+
+		public static void Emit(Entity entity, object[] captured)
+		{
+			foreach (var arg in captured) {
+				var intReceived = arg as RecordedPropertyUpdate<int>;
+				var floatReceived = arg as RecordedPropertyUpdate<float>;
+				var vectorReceived = arg as RecordedPropertyUpdate<Vector>;
+				var stringReceived = arg as RecordedPropertyUpdate<string>;
+				var arrayReceived = arg as RecordedPropertyUpdate<object[]>;
+
+				if (intReceived != null) {
+					var e = entity.Props[intReceived.PropIndex].IntRecived;
+					if (e != null)
+						e(null, new PropertyUpdateEventArgs<int>(intReceived.Value, entity, entity.Props[intReceived.PropIndex]));
+				} else if (floatReceived != null) {
+					var e = entity.Props[floatReceived.PropIndex].FloatRecived;
+					if (e != null)
+						e(null, new PropertyUpdateEventArgs<float>(floatReceived.Value, entity, entity.Props[floatReceived.PropIndex]));
+				} else if (vectorReceived != null) {
+					var e = entity.Props[vectorReceived.PropIndex].VectorRecived;
+					if (e != null)
+						e(null, new PropertyUpdateEventArgs<Vector>(vectorReceived.Value, entity, entity.Props[vectorReceived.PropIndex]));
+				} else if (stringReceived != null) {
+					var e = entity.Props[stringReceived.PropIndex].StringRecived;
+					if (e != null)
+						e(null, new PropertyUpdateEventArgs<string>(stringReceived.Value, entity, entity.Props[stringReceived.PropIndex]));
+				} else if (arrayReceived != null) {
+					var e = entity.Props[arrayReceived.PropIndex].ArrayRecived;
+					if (e != null)
+						e(null, new PropertyUpdateEventArgs<object[]>(arrayReceived.Value, entity, entity.Props[arrayReceived.PropIndex]));
+				} else
+					throw new NotImplementedException();
+			}
+		}
 	}
 
 	#region Update-Types
@@ -294,6 +329,18 @@ namespace DemoInfo.DP
 			this.Value = value;
 			this.Entity = e;
 			this.Property = p;
+		}
+	}
+
+	public class RecordedPropertyUpdate<T>
+	{
+		public int PropIndex;
+		public T Value;
+
+		public RecordedPropertyUpdate (int propIndex, T value)
+		{
+			PropIndex = propIndex;
+			Value = value;
 		}
 	}
 	#endregion

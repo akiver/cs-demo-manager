@@ -73,7 +73,7 @@ SEP_CHAR = '-'
 def maybe_append(buf, piece, title):
     if len(piece) > 0:
         req_sep = SEP_LEN - (len(title) + 2)
-        buf += '\n' + (SEP_CHAR * (req_sep / 2)) + ' ' + title + ' ' + (SEP_CHAR * ((req_sep + 1) / 2)) + '\n'
+        buf += '\n' + (SEP_CHAR * (req_sep // 2)) + ' ' + title + ' ' + (SEP_CHAR * ((req_sep + 1) // 2)) + '\n'
         buf += piece
         buf += '\n' + (SEP_CHAR * SEP_LEN) + '\n'
     return buf
@@ -101,6 +101,8 @@ elif sys.argv[1] == 'verify':
             gistlink = create_gist(maybe_append(maybe_append(
                 'return code ' + str(retval), err_text, 'stderr'), out_text, 'stdout'))
             set_status(COMMIT, 'failure', 'Verification failed', dem, gistlink)
+            print('Failure info posted to: ' + gistlink)
+            os.unlink(TESTDATA + '/' + dem)
 
     sys.exit(how_many_failures)
 elif sys.argv[1] != 'run':

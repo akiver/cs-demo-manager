@@ -1,5 +1,4 @@
-﻿using ProtoBuf;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using DemoInfo.DT;
+using DemoInfo.DP;
 
 namespace DemoInfo
 {
@@ -84,11 +84,7 @@ namespace DemoInfo
 			return Encoding.Default.GetString(result.ToArray());
 		}
 
-		public static Stream ReadVolvoPacket(this BinaryReader reader)
-		{
-			return new LimitStream(reader.BaseStream, reader.ReadInt32());
-		}
-
+		#if SLOW_PROTOBUF
 		public static T ReadProtobufMessage<T>(this BinaryReader reader)
 		{
 			return ReadProtobufMessage<T>(reader, PrefixStyle.Base128);
@@ -112,6 +108,19 @@ namespace DemoInfo
 			return (IExtensible)deserialize.Invoke(null, new object[] { reader.BaseStream, style });
 		}
 
+		public static IExtensible ReadProtobufMessage(this Stream stream, Type T)
+		{
+			var type = typeof(ProtoBuf.Serializer);
+			var deserialize = type.GetMethod("Deserialize", new Type[] {
+				typeof(Stream),
+			});
+
+			deserialize = deserialize.MakeGenericMethod(T);
+
+			return (IExtensible)deserialize.Invoke(null, new object[] { stream });
+		}
+		#endif
+
 		public static TValue GetValueOrDefault<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
 		{
 			TValue value;
@@ -121,6 +130,11 @@ namespace DemoInfo
 		public static bool HasFlagFast(this SendPropertyFlags flags, SendPropertyFlags check)
 		{
 			return (flags & check) == check;
+		}
+
+		public static RecordedPropertyUpdate<T> Record<T>(this PropertyUpdateEventArgs<T> args)
+		{
+			return new RecordedPropertyUpdate<T>(args.Property.Index, args.Value);
 		}
 	}
 }
