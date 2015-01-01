@@ -16,11 +16,11 @@ namespace Testing
 		private byte[] data;
 		private IBitStream dbgAll;
 
-		private static IBitStream CreateBS(byte[] data)
+		private IBitStream CreateBS(byte[] data)
 		{
 			IBitStream managed = new ManagedBitStream(), @unsafe = new UnsafeBitStream();
-			managed.Initialize(new MemoryStream(data));
-			@unsafe.Initialize(new MemoryStream(data));
+			managed.Initialize(new AwkwardStream(new MemoryStream(data), rng));
+			@unsafe.Initialize(new AwkwardStream(new MemoryStream(data), rng));
 			return new DebugBitStream(new BitArrayStream(data), new DebugBitStream(managed, @unsafe));
 		}
 
