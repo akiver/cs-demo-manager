@@ -17,7 +17,7 @@ namespace Testing
 		public override int Read(byte[] buffer, int offset, int count)
 		{
 			// 50% of all reads will return 1-4 bytes.
-			return Underlying.Read(buffer, offset, Rng.Next((Rng.Next(1) == 0) ? 5 : count + 1));
+			return Underlying.Read(buffer, offset, Rng.Next((Rng.Next(1) == 0) ? 4 : count) + 1);
 		}
 
 		#region Unsupported stuff
