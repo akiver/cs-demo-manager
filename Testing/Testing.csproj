@@ -39,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestBitstreams.cs" />
+    <Compile Include="AwkwardStream.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DemoInfo\DemoInfo.csproj">

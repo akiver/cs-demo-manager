@@ -22,7 +22,7 @@ namespace DemoInfo.BitStreamImpl
 		private byte* PBuffer;
 		private byte[] Buffer = new byte[BUFSIZE];
 
-		public int BitsInBuffer;
+		private int BitsInBuffer;
 
 		private readonly Stack<long> ChunkTargets = new Stack<long>();
 		private long LazyGlobalPosition = 0;
@@ -61,9 +61,15 @@ namespace DemoInfo.BitStreamImpl
 			Offset -= BitsInBuffer;
 			LazyGlobalPosition += BitsInBuffer;
 
-			BitsInBuffer = 8 * Underlying.Read(Buffer, SLED, BUFSIZE - SLED);
-			if (BitsInBuffer == 0) // end of stream, so we can consume the sled now
-				BitsInBuffer = SLED * 8;
+			int offset, thisTime = 1337; // I'll cry if this ends up in the generated code
+			for (offset = 0; (offset < 4) && (thisTime != 0); offset += thisTime)
+				thisTime = Underlying.Read(Buffer, SLED + offset, BUFSIZE - SLED - offset);
+
+			BitsInBuffer = 8 * offset;
+
+			if (thisTime == 0)
+				// end of stream, so we can consume the sled now
+				BitsInBuffer += SLED * 8;
 		}
 
 		public uint ReadInt(int numBits)
@@ -255,9 +261,16 @@ namespace DemoInfo.BitStreamImpl
 						int unbufferedSkipBits = delta - bufferBits;
 						Underlying.Seek((unbufferedSkipBits >> 3) - SLED, SeekOrigin.Current);
 
-						BitsInBuffer = 8 * (Underlying.Read(Buffer, 0, BUFSIZE) - SLED);
-						if (BitsInBuffer < 0)
-							BitsInBuffer = SLED * 8;
+						// Read at least 8 bytes, because we rely on that
+						int offset, thisTime = 1337; // I'll cry if this ends up in the generated code
+						for (offset = 0; (offset < 8) && (thisTime != 0); offset += thisTime)
+							thisTime = Underlying.Read(Buffer, offset, BUFSIZE - offset);
+
+						BitsInBuffer = 8 * (offset - SLED);
+
+						if (thisTime == 0)
+							// end of stream, so we can consume the sled now
+							BitsInBuffer += SLED * 8;
 
 						Offset = unbufferedSkipBits & 7;
 						LazyGlobalPosition = target - Offset;
