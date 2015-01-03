@@ -41,36 +41,46 @@ namespace DemoInfo.BitStreamImpl
 			Buffer = null;
 		}
 
-		private void Advance(int howMuch)
+		private bool TryAdvance(int howMuch)
 		{
-			Offset += howMuch;
-			while (Offset >= BitsInBuffer)
-				RefillBuffer();
+			/*
+			 * So the problem is: Apparently mono can't inline the old Advance() because
+			 * that would mess up the call stack: Advance->RefillBuffer->Stream.Read
+			 * which could then throw. Advance's stack frame would be missing.
+			 *
+			 * Because of that, the call to RefillBuffer has to be inlined manually:
+			 * if (TryAdvance(howMuch)) RefillBuffer();
+			 *
+			 * Ugly, but it works.
+			 */
+			return (Offset += howMuch) >= BitsInBuffer;
 		}
 
 		private void RefillBuffer()
 		{
-			// copy the sled
-			*(uint*)PBuffer = *(uint*)(PBuffer + (BitsInBuffer >> 3));
+			do {
+				// copy the sled
+				*(uint*)PBuffer = *(uint*)(PBuffer + (BitsInBuffer >> 3));
 
-			Offset -= BitsInBuffer;
-			LazyGlobalPosition += BitsInBuffer;
+				Offset -= BitsInBuffer;
+				LazyGlobalPosition += BitsInBuffer;
 
-			int offset, thisTime = 1337; // I'll cry if this ends up in the generated code
-			for (offset = 0; (offset < 4) && (thisTime != 0); offset += thisTime)
-				thisTime = Underlying.Read(Buffer, SLED + offset, BUFSIZE - SLED - offset);
+				int offset, thisTime = 1337; // I'll cry if this ends up in the generated code
+				for (offset = 0; (offset < 4) && (thisTime != 0); offset += thisTime)
+					thisTime = Underlying.Read(Buffer, SLED + offset, BUFSIZE - SLED - offset);
 
-			BitsInBuffer = 8 * offset;
+				BitsInBuffer = 8 * offset;
 
-			if (thisTime == 0)
-				// end of stream, so we can consume the sled now
-				BitsInBuffer += SLED * 8;
+				if (thisTime == 0)
+					// end of stream, so we can consume the sled now
+					BitsInBuffer += SLED * 8;
+			} while (Offset >= BitsInBuffer);
 		}
 
 		public uint ReadInt(int numBits)
 		{
 			uint result = PeekInt(numBits);
-			Advance(numBits);
+			if (TryAdvance(numBits)) RefillBuffer();
 			return result;
 		}
 
@@ -85,19 +95,23 @@ namespace DemoInfo.BitStreamImpl
 		public bool ReadBit()
 		{
 			bool bit = (PBuffer[Offset >> 3] & (1 << (Offset & 7))) != 0;
-			Advance(1);
+			if (TryAdvance(1)) RefillBuffer();
 			return bit;
 		}
 
 		public byte ReadByte()
 		{
-			return ReadByte(8);
+			var ret = (byte)PeekInt(8);
+			if (TryAdvance(8)) RefillBuffer();
+			return ret;
 		}
 
 		public byte ReadByte(int bits)
 		{
 			BitStreamUtil.AssertMaxBits(8, bits);
-			return (byte)ReadInt(bits);
+			var ret = (byte)PeekInt(bits);
+			if (TryAdvance(bits)) RefillBuffer();
+			return ret;
 		}
 
 		public byte[] ReadBytes(int bytes)
@@ -119,7 +133,7 @@ namespace DemoInfo.BitStreamImpl
 					int remainingBytes = Math.Min((BitsInBuffer - Offset) >> 3, bytes - offset);
 					System.Buffer.BlockCopy(Buffer, Offset >> 3, ret, offset, remainingBytes);
 					offset += remainingBytes;
-					Advance(remainingBytes * 8);
+					if (TryAdvance(remainingBytes * 8)) RefillBuffer();
 				}
 			} else fixed (byte* retptr = ret) {
 				int offset = 0;
@@ -163,14 +177,14 @@ namespace DemoInfo.BitStreamImpl
 			// Just like PeekInt, but we cast to signed long before the shr because we need to sext
 			BitStreamUtil.AssertMaxBits(32, numBits);
 			var result = (int)(((long)((*(ulong*)(PBuffer + ((Offset >> 3) & ~3))) << ((8 * 8) - (Offset & ((8 * 4) - 1)) - numBits))) >> ((8 * 8) - numBits));
-			Advance(numBits);
+			if (TryAdvance(numBits)) RefillBuffer();
 			return result;
 		}
 
 		public float ReadFloat()
 		{
 			uint iResult = PeekInt(32); // omfg please inline this
-			Advance(32);
+			if (TryAdvance(32)) RefillBuffer();
 			return *(float*)&iResult; // standard reinterpret cast
 		}
 
@@ -220,10 +234,10 @@ namespace DemoInfo.BitStreamImpl
 							// dammit, it's too large (probably negative)
 							// fall back to the slow implementation, that's rare
 							return BitStreamUtil.ReadProtobufVarIntStub(this);
-						else Advance(4 * 8);
-					} else Advance(3 * 8);
-				} else Advance(2 * 8);
-			} else Advance(1 * 8);
+						else if (TryAdvance(4 * 8)) RefillBuffer();
+					} else if (TryAdvance(3 * 8)) RefillBuffer();
+				} else if (TryAdvance(2 * 8)) RefillBuffer();
+			} else if (TryAdvance(1 * 8)) RefillBuffer();
 
 			return unchecked((int)result);
 		}
@@ -271,10 +285,10 @@ namespace DemoInfo.BitStreamImpl
 						LazyGlobalPosition = target - Offset;
 					} else
 						// no need to efficiently skip, so just read and discard
-						Advance(delta);
+						if (TryAdvance(delta)) RefillBuffer();
 				} else
 					// dammit, can't efficiently skip, so just read and discard
-					Advance(delta);
+					if (TryAdvance(delta)) RefillBuffer();
 			}
 		}
 
