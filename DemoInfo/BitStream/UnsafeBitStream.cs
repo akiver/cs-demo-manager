@@ -3,6 +3,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.CompilerServices;
 
 namespace DemoInfo.BitStreamImpl
 {
@@ -41,6 +42,7 @@ namespace DemoInfo.BitStreamImpl
 			Buffer = null;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private bool TryAdvance(int howMuch)
 		{
 			/*
@@ -84,6 +86,7 @@ namespace DemoInfo.BitStreamImpl
 			return result;
 		}
 
+		[MethodImpl(MethodImplOptions.AggressiveInlining)]
 		private uint PeekInt(int numBits, bool mayOverflow = false)
 		{
 			BitStreamUtil.AssertMaxBits(32, numBits);
