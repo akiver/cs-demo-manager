@@ -23,22 +23,22 @@ namespace DemoInfo
         public int PlaybackFrames { get; private set; }			// # of frames in track
         public int SignonLength { get; private set; }				// length of sigondata in bytes
 
-        public static DemoHeader ParseFrom(BinaryReader reader)
+        public static DemoHeader ParseFrom(IBitStream reader)
         {
             return new DemoHeader() {
                 Filestamp = reader.ReadCString(8),
-                Protocol = reader.ReadInt32(),
-                NetworkProtocal = reader.ReadInt32(),
+                Protocol = reader.ReadSignedInt(32),
+				NetworkProtocal = reader.ReadSignedInt(32),
                 ServerName = reader.ReadCString(MAX_OSPATH),
 
                 ClientName = reader.ReadCString(MAX_OSPATH),
                 MapName = reader.ReadCString(MAX_OSPATH),
                 GameDirectory = reader.ReadCString(MAX_OSPATH),
-                PlaybackTime = reader.ReadSingle(),
+				PlaybackTime = reader.ReadFloat(),
 
-                PlaybackTicks = reader.ReadInt32(),
-                PlaybackFrames = reader.ReadInt32(),
-                SignonLength = reader.ReadInt32(),
+				PlaybackTicks = reader.ReadSignedInt(32),
+				PlaybackFrames = reader.ReadSignedInt(32),
+				SignonLength = reader.ReadSignedInt(32),
             };
         }
     }
@@ -73,13 +73,13 @@ namespace DemoInfo
 			}
 		}
 
-        public static Vector Parse(BinaryReader reader)
+        public static Vector Parse(IBitStream reader)
         {
             return new Vector
             {
-                X = reader.ReadSingle(),
-                Y = reader.ReadSingle(),
-                Z = reader.ReadSingle(),
+                X = reader.ReadFloat(),
+				Y = reader.ReadFloat(),
+				Z = reader.ReadFloat(),
             };
         }
 
@@ -125,13 +125,13 @@ namespace DemoInfo
         public float Y { get; private set; }
         public float Z { get; private set; }
 
-        public static QAngle Parse(BinaryReader reader)
+		public static QAngle Parse(IBitStream reader)
         {
             return new QAngle
             {
-                X = reader.ReadSingle(),
-                Y = reader.ReadSingle(),
-                Z = reader.ReadSingle(),
+				X = reader.ReadFloat(),
+				Y = reader.ReadFloat(),
+				Z = reader.ReadFloat(),
             };
         }
     }
@@ -157,11 +157,11 @@ namespace DemoInfo
     
         public QAngle LocalViewAngles { get { return (Flags & FDEMO_USE_ANGLES2) != 0 ? localViewAngles2 : localViewAngles; }}
     
-        public static Split Parse(BinaryReader reader)
+        public static Split Parse(IBitStream reader)
         {
             return new Split
             {
-                Flags = reader.ReadInt32(),
+                Flags = reader.ReadSignedInt(32),
                 viewOrigin = Vector.Parse(reader),
                 viewAngles = QAngle.Parse(reader),
                 localViewAngles = QAngle.Parse(reader),
@@ -177,7 +177,7 @@ namespace DemoInfo
     {
         public Split[] u { get; private set; }
 
-        public static CommandInfo Parse(BinaryReader reader)
+        public static CommandInfo Parse(IBitStream reader)
         {
             return new CommandInfo 
             {

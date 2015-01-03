@@ -9,45 +9,37 @@ using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
-	class GameEventHandler : IMessageParser
+	public static class GameEventHandler
 	{
-		public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
+		public static void HandleGameEventList(IEnumerable<GameEventList.Descriptor> gel, DemoParser parser)
 		{
-			if (message is CSVCMsg_GameEventList) {
-				parser.GEH_Descriptors = new Dictionary<int, CSVCMsg_GameEventList.descriptor_t>();
+			parser.GEH_Descriptors = new Dictionary<int, GameEventList.Descriptor>();
+			foreach (var d in gel)
+				parser.GEH_Descriptors[d.EventId] = d;
+		}
 
-				foreach (var d in ((CSVCMsg_GameEventList)message).descriptors) {
-					parser.GEH_Descriptors[d.eventid] = d;
-				}
-
-				return true;
-			}
-
+		public static void Apply(GameEvent rawEvent, DemoParser parser)
+		{
 			var descriptors = parser.GEH_Descriptors;
 			var blindPlayers = parser.GEH_BlindPlayers;
 
 			if (descriptors == null)
-				return false;
+				return;
 
-			var rawEvent = message as CSVCMsg_GameEvent;
-			if (rawEvent == null)
-				return false;
+			var eventDescriptor = descriptors[rawEvent.EventId];
 
+			if (parser.Players.Count == 0 && eventDescriptor.Name != "player_connect")
+				return;
 
-			var eventDescriptor = descriptors[rawEvent.eventid];
-
-			if (parser.Players.Count == 0 && eventDescriptor.name != "player_connect")
-				return true;
-
-			if (eventDescriptor.name == "round_start")
+			if (eventDescriptor.Name == "round_start")
 				parser.RaiseRoundStart();
 
-			if (eventDescriptor.name == "round_announce_match_start")
+			if (eventDescriptor.Name == "round_announce_match_start")
 				parser.RaiseMatchStarted();
 
 
 			Dictionary<string, object> data;
-			switch (eventDescriptor.name) {
+			switch (eventDescriptor.Name) {
 			case "weapon_fire":
 
 				data = MapData(eventDescriptor, rawEvent);
@@ -170,7 +162,7 @@ namespace DemoInfo.DP.Handler
 
 
 
-				switch (eventDescriptor.name) {
+				switch (eventDescriptor.Name) {
 				case "bomb_beginplant":
 					parser.RaiseBombBeginPlant(bombEventArgs);
 					break;
@@ -204,11 +196,9 @@ namespace DemoInfo.DP.Handler
 				parser.RaiseBombAbortDefuse(e2);
 				break;
 			}
-
-			return true;
 		}
 
-		private T FillNadeEvent<T>(Dictionary<string, object> data, DemoParser parser) where T : NadeEventArgs, new()
+		private static T FillNadeEvent<T>(Dictionary<string, object> data, DemoParser parser) where T : NadeEventArgs, new()
 		{
 			var nade = new T();
 
@@ -224,40 +214,14 @@ namespace DemoInfo.DP.Handler
 			return nade;
 		}
 
-		private Dictionary<string, object> MapData(CSVCMsg_GameEventList.descriptor_t eventDescriptor, CSVCMsg_GameEvent rawEvent)
+		private static Dictionary<string, object> MapData(GameEventList.Descriptor eventDescriptor, GameEvent rawEvent)
 		{
 			Dictionary<string, object> data = new Dictionary<string, object>();
 
-			var i = 0;
-			foreach (var key in eventDescriptor.keys) {
-				data[key.name] = GetData(rawEvent.keys[i++]);
-			}
+			for (int i = 0; i < eventDescriptor.Keys.Length; i++)
+				data.Add(eventDescriptor.Keys[i].Name, rawEvent.Keys[i]);
 
 			return data;
 		}
-
-		private object GetData(CSVCMsg_GameEvent.key_t eventData)
-		{
-			switch (eventData.type) {
-			case 1:
-				return eventData.val_string;
-			case 2:
-				return eventData.val_float;
-			case 3:
-				return eventData.val_long;
-			case 4:
-				return eventData.val_short;
-			case 5:
-				return eventData.val_byte; 
-			case 6:
-				return eventData.val_bool;
-			default:
-				break;
-			}
-
-			return null;
-		}
-
-		public int Priority { get { return 0; } }
 	}
 }

@@ -100,6 +100,22 @@ namespace DemoInfo
 			return Encoding.ASCII.GetString(result.ToArray());
 		}
 
+		public static string ReadDataTableString(this IBitStream bs)
+		{
+			using (var memstream = new MemoryStream()) {
+				// not particulary efficient, but probably fine
+				for (byte b = bs.ReadByte(); b != 0; b = bs.ReadByte())
+					memstream.WriteByte(b);
+
+				return Encoding.Default.GetString(memstream.GetBuffer(), 0, checked((int)memstream.Length));
+			}
+		}
+
+		public static string ReadCString(this IBitStream reader, int length)
+		{
+			return Encoding.Default.GetString(reader.ReadBytes(length)).Split(new char[] { '\0' }, 2)[0];
+		}
+
 		public static uint ReadVarInt(this IBitStream bs)
 		{
 			uint tmpByte = 0x80;
@@ -111,6 +127,30 @@ namespace DemoInfo
 				result |= (tmpByte & 0x7F) << (7 * count);
 			}
 			return result;
+		}
+
+		public static int ReadProtobufVarIntStub(IBitStream reader)
+		{
+			byte b = 0x80;
+			int result = 0;
+			for (int count = 0; (b & 0x80) != 0; count++) {
+				b = reader.ReadByte();
+
+				if ((count < 4) || ((count == 4) && (((b & 0xF8) == 0) || ((b & 0xF8) == 0xF8))))
+					result |= (b & ~0x80) << (7 * count);
+				else {
+					if (count >= 10)
+						throw new OverflowException("Nope nope nope nope! 10 bytes max!");
+					if ((count == 9) ? (b != 1) : ((b & 0x7F) != 0x7F))
+						throw new NotSupportedException("more than 32 bits are not supported");
+				}
+			}
+
+			return result;
+		}
+
+		public static string ReadProtobufString(this IBitStream reader) {
+			return Encoding.UTF8.GetString(reader.ReadBytes(reader.ReadProtobufVarInt()));
 		}
 
 		[Conditional("DEBUG")]

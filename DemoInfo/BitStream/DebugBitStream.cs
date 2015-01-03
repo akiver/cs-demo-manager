@@ -28,7 +28,8 @@ namespace DemoInfo.BitStreamImpl
 		{
 			if (!a.Equals(b)) {
 				System.Diagnostics.Debug.Assert(false);
-				throw new InvalidOperationException();
+				throw new InvalidOperationException(String.Format("{0} vs {1} ({2} vs {3})",
+					a, b, A.GetType().Name, B.GetType().Name));
 			}
 		}
 
@@ -44,14 +45,6 @@ namespace DemoInfo.BitStreamImpl
 		{
 			var a = A.ReadSignedInt(bits);
 			var b = B.ReadSignedInt(bits);
-			Verify(a, b);
-			return a;
-		}
-
-		public uint PeekInt(int bits)
-		{
-			var a = A.PeekInt(bits);
-			var b = B.PeekInt(bits);
 			Verify(a, b);
 			return a;
 		}
@@ -134,6 +127,35 @@ namespace DemoInfo.BitStreamImpl
 			var b = B.ReadBits(bits);
 			Verify(a.SequenceEqual(b), true);
 			return a;
+		}
+
+		public int ReadProtobufVarInt()
+		{
+			var a = A.ReadProtobufVarInt();
+			var b = B.ReadProtobufVarInt();
+			Verify(a, b);
+			return a;
+		}
+
+		public void BeginChunk(int bits)
+		{
+			A.BeginChunk(bits);
+			B.BeginChunk(bits);
+		}
+
+		public void EndChunk()
+		{
+			A.EndChunk();
+			B.EndChunk();
+		}
+
+		public bool ChunkFinished {
+			get {
+				var a = A.ChunkFinished;
+				var b = B.ChunkFinished;
+				Verify(a, b);
+				return a;
+			}
 		}
 	}
 }

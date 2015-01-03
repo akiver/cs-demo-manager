@@ -11,6 +11,7 @@ script:
   - nuget restore DemoInfo.sln
   - xbuild /p:Configuration=Bitstream-Debugging DemoInfo.sln
   - xbuild /p:Configuration=Release DemoInfo.sln
+  - mono packages/NUnit.Runners.2.6.4/tools/nunit-console.exe -noxml -nodots -labels Testing/bin/Release/Testing.dll
   - python ci/brofiler.py verify
   - python ci/brofiler.py run
 after_script:

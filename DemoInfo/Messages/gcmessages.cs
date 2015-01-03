@@ -7,6 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+#if SLOW_PROTOBUF
 // Generated from: cstrike15_gcmessages.proto
 // Note: requires additional types generated from: steammessages.proto
 namespace DemoInfo.Messages
@@ -4732,3 +4733,4 @@ namespace DemoInfo.Messages
     }
   
 }
+#endif

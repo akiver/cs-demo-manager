@@ -1,6 +1,5 @@
 ﻿using DemoInfo.DT;
 using DemoInfo.Messages;
-using ProtoBuf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,47 +9,39 @@ using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
-    class PacketEntitesHandler : IMessageParser
+    public static class PacketEntitesHandler
     {
-        public bool TryApplyMessage(ProtoBuf.IExtensible message, DemoParser parser)
+		public static void Apply(PacketEntities packetEntities, IBitStream reader, DemoParser parser)
         {
-			CSVCMsg_PacketEntities packetEntites = message as CSVCMsg_PacketEntities;
-			if (packetEntites == null)
-				return false;
+			int currentEntity = -1;
+			for (int i = 0; i < packetEntities.UpdatedEntries; i++) {
+				currentEntity += 1 + (int)reader.ReadUBitInt();
 
-			using (IBitStream reader = BitStreamUtil.Create(packetEntites.entity_data)) {
-				int currentEntity = -1;
-				for (int i = 0; i < packetEntites.updated_entries; i++) {
-					currentEntity += 1 + (int)reader.ReadUBitInt();
+				// Leave flag
+				if (!reader.ReadBit()) {
+					// enter flag
+					if (reader.ReadBit()) {
+						var e = ReadEnterPVS(reader, currentEntity, parser);
 
-					// Leave flag
-					if (!reader.ReadBit()) {
-						// enter flag
-						if (reader.ReadBit()) {
-							var e = ReadEnterPVS(reader, currentEntity, parser);
+						parser.Entities[currentEntity] = e;
 
-							parser.Entities[currentEntity] = e;
-
-							e.ApplyUpdate(reader);
-						} else {
-							// preserve
-							Entity e = parser.Entities[currentEntity];
-							e.ApplyUpdate(reader);
-						}
+						e.ApplyUpdate(reader);
 					} else {
-						// leave
-						parser.Entities [currentEntity].Leave ();
-						parser.Entities[currentEntity] = null;
-						if (reader.ReadBit()) {
-						}
+						// preserve
+						Entity e = parser.Entities[currentEntity];
+						e.ApplyUpdate(reader);
+					}
+				} else {
+					// leave
+					parser.Entities [currentEntity].Leave ();
+					parser.Entities[currentEntity] = null;
+					if (reader.ReadBit()) {
 					}
 				}
 			}
-
-			return true;
         }
 
-        public Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
+        private static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
             int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
 
@@ -62,17 +53,87 @@ namespace DemoInfo.DP.Handler
 
 			newEntity.ServerClass.AnnounceNewEntity(newEntity);
 
-			if (parser.instanceBaseline.ContainsKey(serverClassID)) {
-				using (var ms = new MemoryStream(parser.instanceBaseline[serverClassID])) {
-					ms.Position = 0;
-					newEntity.ApplyUpdate(BitStreamUtil.Create(ms));
-				}
+			object[] fastBaseline;
+			if (parser.PreprocessedBaselines.TryGetValue(serverClassID, out fastBaseline))
+				PropertyEntry.Emit(newEntity, fastBaseline);
+			else {
+				var preprocessedBaseline = new List<object>();
+				if (parser.instanceBaseline.ContainsKey(serverClassID))
+					using (var collector = new PropertyCollector(newEntity, preprocessedBaseline))
+					using (var bitStream = BitStreamUtil.Create(parser.instanceBaseline[serverClassID]))
+						newEntity.ApplyUpdate(bitStream);
+
+				parser.PreprocessedBaselines.Add(serverClassID, preprocessedBaseline.ToArray());
 			}
 
             return newEntity;
         }
 
+		private class PropertyCollector : IDisposable
+		{
+			private readonly Entity Underlying;
+			private readonly IList<object> Capture;
 
-		public int Priority { get { return 0; } }
+			public PropertyCollector(Entity underlying, IList<object> capture)
+			{
+				Underlying = underlying;
+				Capture = capture;
+
+				foreach (var prop in Underlying.Props) {
+					switch (prop.Entry.Prop.Type) {
+					case SendPropertyType.Array:
+						prop.ArrayRecived += HandleArrayRecived;
+						break;
+					case SendPropertyType.Float:
+						prop.FloatRecived += HandleFloatRecived;
+						break;
+					case SendPropertyType.Int:
+						prop.IntRecived += HandleIntRecived;
+						break;
+					case SendPropertyType.String:
+						prop.StringRecived += HandleStringRecived;
+						break;
+					case SendPropertyType.Vector:
+					case SendPropertyType.VectorXY:
+						prop.VectorRecived += HandleVectorRecived;
+						break;
+					default:
+						throw new NotImplementedException();
+					}
+				}
+			}
+
+			private void HandleVectorRecived (object sender, PropertyUpdateEventArgs<Vector> e) { Capture.Add(e.Record()); }
+			private void HandleStringRecived (object sender, PropertyUpdateEventArgs<string> e) { Capture.Add(e.Record()); }
+			private void HandleIntRecived (object sender, PropertyUpdateEventArgs<int> e) { Capture.Add(e.Record()); }
+			private void HandleFloatRecived (object sender, PropertyUpdateEventArgs<float> e) { Capture.Add(e.Record()); }
+			private void HandleArrayRecived (object sender, PropertyUpdateEventArgs<object[]> e) { Capture.Add(e.Record()); }
+
+			public void Dispose()
+			{
+				foreach (var prop in Underlying.Props) {
+					switch (prop.Entry.Prop.Type) {
+					case SendPropertyType.Array:
+						prop.ArrayRecived -= HandleArrayRecived;
+						break;
+					case SendPropertyType.Float:
+						prop.FloatRecived -= HandleFloatRecived;
+						break;
+					case SendPropertyType.Int:
+						prop.IntRecived -= HandleIntRecived;
+						break;
+					case SendPropertyType.String:
+						prop.StringRecived -= HandleStringRecived;
+						break;
+					case SendPropertyType.Vector:
+					case SendPropertyType.VectorXY:
+						prop.VectorRecived -= HandleVectorRecived;
+						break;
+					default:
+						throw new NotImplementedException();
+					}
+				}
+			}
+		}
     }
 }

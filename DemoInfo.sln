@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoInfo", "DemoInfo\DemoIn
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevNullPlayer", "DevNullPlayer\DevNullPlayer.csproj", "{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Testing", "Testing\Testing.csproj", "{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,12 @@ Global
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}.Bitstream-Debugging|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}.Bitstream-Debugging|Any CPU.Build.0 = Debug|Any CPU
+		{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EAC2881-AD2B-44E3-9CB3-525EA4598C01}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Bitstream-Debugging|Any CPU.ActiveCfg = Debug|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Bitstream-Debugging|Any CPU.Build.0 = Debug|Any CPU
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

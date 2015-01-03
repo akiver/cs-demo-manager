@@ -17,34 +17,30 @@ namespace DemoInfo.DT
         }
 
 		public string Name { get; set; }
+		public bool IsEnd { get; set; }
 
-		public SendTable (Messages.CSVCMsg_SendTable dataTable)
-		{
-			Parse (dataTable);
-		}
+		public SendTable(IBitStream bitstream) {
+			DemoInfo.SendTable dataTable = new DemoInfo.SendTable();
 
-		private void Parse (Messages.CSVCMsg_SendTable dataTable)
-		{
-            this.Name = dataTable.net_table_name;
-
-			foreach (var prop in dataTable.props) {
+			foreach (var prop in dataTable.Parse(bitstream)) {
 				SendTableProperty property = new SendTableProperty () {
-					DataTableName = prop.dt_name,
-					HighValue = prop.high_value,
-					LowValue = prop.low_value,
-					Name = prop.var_name,
-					NumberOfBits = prop.num_bits,
-					NumberOfElements = prop.num_elements,
-					Priority = prop.priority,
-					RawFlags = prop.flags,
-					RawType = prop.type
+					DataTableName = prop.DtName,
+					HighValue = prop.HighValue,
+					LowValue = prop.LowValue,
+					Name = prop.VarName,
+					NumberOfBits = prop.NumBits,
+					NumberOfElements = prop.NumElements,
+					Priority = prop.Priority,
+					RawFlags = prop.Flags,
+					RawType = prop.Type
 				};
 
 				properties.Add (property);
 			}
+
+			this.Name = dataTable.NetTableName;
+			this.IsEnd = dataTable.IsEnd;
 		}
 	}
-
-
 }
 
