@@ -61,6 +61,8 @@ namespace DemoInfo
 
 		internal int TeamID;
 
+		internal int[] AmmoLeft = new int[32];
+
 		public Player()
 		{
 			Velocity = new Vector();

@@ -46,6 +46,10 @@ namespace DemoInfo.ST
 						int classid = int.Parse(stringName); //wtf volvo?
 
 						parser.instanceBaseline[classid] = data; 
+					} else if (tableName == "modelprecache") {
+						if (data.Length > 1) {
+							Console.WriteLine (Encoding.ASCII.GetString(data));
+						}
 					}
                 }
             }
