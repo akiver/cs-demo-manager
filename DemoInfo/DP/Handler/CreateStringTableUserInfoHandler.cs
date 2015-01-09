@@ -12,6 +12,10 @@ namespace DemoInfo.DP.Handler
     {
         public static void Apply(CreateStringTable table, IBitStream reader, DemoParser parser)
         {
+			if (table.Name == "modelprecache") {
+				parser.modelprecache.Clear ();
+			}
+
 			if (reader.ReadBit())
 				throw new NotImplementedException("Encoded with dictionaries, unable to decode");
 

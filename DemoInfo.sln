@@ -36,7 +36,7 @@ Global
 		{CDC69D65-52DD-45D5-97F8-A7711F35BDC5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = DemoInfo\DemoInfo.csproj
+		StartupItem = DevNullPlayer\DevNullPlayer.csproj
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
