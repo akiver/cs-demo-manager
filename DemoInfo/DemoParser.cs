@@ -13,7 +13,6 @@ namespace DemoInfo
 	public class DemoParser : IDisposable
 	{
 		#region Events
-
 		/// <summary>
 		/// Called once when the Header of the demo is parsed
 		/// </summary>
@@ -82,7 +81,10 @@ namespace DemoInfo
 
 		internal Entity[] Entities = new Entity[MAX_ENTITIES]; //Max 2048 entities. 
 
+		internal List<string> modelprecache = new List<string> ();
+
 		public List<CreateStringTable> stringTables = new List<CreateStringTable>();
+
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="DemoInfo.DemoParser"/> will attribute weapons to the players.
@@ -90,7 +92,9 @@ namespace DemoInfo
 		/// Note: Enableing this might decrease performance in the current implementation. Will be removed once the code is optimized. 
 		/// </summary>
 		/// <value><c>true</c> to attribute weapons; otherwise, <c>false</c>.</value>
+		[Obsolete("Weapons are always attributed now. No need to use this anymore", true)]
 		public bool ShallAttributeWeapons { get; set; }
+		Equipment[] weapons = new Equipment[1024];
 
 
 		internal int bombsiteAIndex = -1, bombsiteBIndex = -1;
@@ -148,7 +152,6 @@ namespace DemoInfo
 		public void ParseDemo(bool fullParse)
 		{
 			ParseHeader();
-
 			if (HeaderParsed != null)
 				HeaderParsed(this, new HeaderParsedEventArgs(Header));
 
@@ -181,14 +184,6 @@ namespace DemoInfo
 					if (p.IsAlive) {
 						p.LastAlivePosition = p.Position.Copy();
 					}
-				}
-			}
-
-			for (int i = 0; i < unknownWeapons.Count; i++) {
-				var attribution = unknownWeapons [i];
-				if (AttributeWeapon (attribution.Item1, attribution.Item2)) {
-					unknownWeapons.RemoveAt (i);
-					i--;
 				}
 			}
 
@@ -305,6 +300,8 @@ namespace DemoInfo
 			HandleBombSites();
 
 			HandlePlayers();
+
+			HandleWeapons ();
 		}
 
 		private void HandleTeamScores()
@@ -361,9 +358,10 @@ namespace DemoInfo
 					}
 					else if(teamName.Value == "TERRORIST")
 					{
-						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => TScore = update.Value;
-						e.Entity.FindProperty("m_iTeamNum").IntRecived += (xx, update) => tID = update.Value;
-
+						TScore = score;
+						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => { 
+							TScore = update.Value;
+						};
 
 						if(teamID != -1)
 						{
@@ -384,15 +382,19 @@ namespace DemoInfo
 			};
 		}
 
-		List<Tuple<int, Player>> unknownWeapons = new List<Tuple<int, Player>>();
 		private void HandleNewPlayer(Entity playerEntity)
 		{
-			Player p = new Player();
-			this.PlayerInformations[playerEntity.ID - 1] = p;
+			Player p = null;
+			if (this.PlayerInformations [playerEntity.ID - 1] != null) {
+				p = this.PlayerInformations [playerEntity.ID - 1];
+			} else {
+				p = new Player ();
+				this.PlayerInformations [playerEntity.ID - 1] = p;
+				p.SteamID = -1;
+				p.Name = "unconnected";
+			}
 
-			p.Name = "unconnected";
 			p.EntityID = playerEntity.ID;
-			p.SteamID = -1;
 			p.Entity = playerEntity;
 			p.Position = new Vector();
 			p.Velocity = new Vector();
@@ -438,68 +440,132 @@ namespace DemoInfo
 
 
 			//Weapon attribution
-			if (ShallAttributeWeapons) {
-				string weaponPrefix = "m_hMyWeapons.";
+			string weaponPrefix = "m_hMyWeapons.";
 
-				if(!playerEntity.Props.Any(a => a.Entry.PropertyName == "m_hMyWeapons.000"))
-					weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
+			if(!playerEntity.Props.Any(a => a.Entry.PropertyName == "m_hMyWeapons.000"))
+				weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
 
 
-				int[] cache = new int[64];
+			int[] cache = new int[64];
 
-				for(int i = 0; i < 64; i++)
-				{
-					int iForTheMethod = i; //Because else i is passed as reference to the delegate. 
+			for(int i = 0; i < 64; i++)
+			{
+				int iForTheMethod = i; //Because else i is passed as reference to the delegate. 
 
-					playerEntity.FindProperty(weaponPrefix + i.ToString().PadLeft(3, '0')).IntRecived += (sender, e) => {
+				playerEntity.FindProperty(weaponPrefix + i.ToString().PadLeft(3, '0')).IntRecived += (sender, e) => {
 
-						int index = e.Value & INDEX_MASK;
+					int index = e.Value & INDEX_MASK;
 
-						if (index != INDEX_MASK) {
-							if(cache[iForTheMethod] != 0) //Player already has a weapon in this slot. 
-							{
-								p.rawWeapons.Remove(cache[iForTheMethod]);
-								cache[iForTheMethod] = 0;
-							}
-
-							cache[iForTheMethod] = index;
-
-							if(Entities[index] == null)
-								unknownWeapons.Add(new Tuple<int, Player>(index, p)); //Attribute it later
-							else
-								AttributeWeapon(index, p);
-						} else {
+					if (index != INDEX_MASK) {
+						if(cache[iForTheMethod] != 0) //Player already has a weapon in this slot. 
+						{
 							p.rawWeapons.Remove(cache[iForTheMethod]);
 							cache[iForTheMethod] = 0;
+						}
+						cache[iForTheMethod] = index;
 
+						AttributeWeapon(index, p);
+					} else {
+						if(cache[iForTheMethod] != 0)
+						{
+							p.rawWeapons[cache[iForTheMethod]].Owner = null;
+						}
+						p.rawWeapons.Remove(cache[iForTheMethod]);
+
+						if(p.rawWeapons.Count == 0)
+						{
 
 						}
 
-					};
-				}
-
-				playerEntity.FindProperty("m_hActiveWeapon").IntRecived += (sender, e) => p.ActiveWeaponID = e.Value & INDEX_MASK;
+						cache[iForTheMethod] = 0;
+					}
+				};
 			}
+
+			playerEntity.FindProperty("m_hActiveWeapon").IntRecived += (sender, e) => p.ActiveWeaponID = e.Value & INDEX_MASK;
+
+			for (int i = 0; i < 32; i++) {
+				int iForTheMethod = i;
+
+				playerEntity.FindProperty ("m_iAmmo." + i.ToString ().PadLeft (3, '0')).IntRecived += (sender, e) => {
+					p.AmmoLeft [iForTheMethod] = e.Value;
+				};
+			}
+
+
 		}
 
 		private bool AttributeWeapon(int weaponEntityIndex, Player p)
 		{
-			var entity = Entities[weaponEntityIndex];
-
-			Equipment weapon = new Equipment ();
-
-			///TODO: Don't drop this silent. This is a very wtf-y "volvo-pls" bug
-			if (entity == null || !equipmentMapping.ContainsKey (entity.ServerClass))
-				return false;
-
-			weapon.Weapon = equipmentMapping [entity.ServerClass];
-
-			if (weapon.Weapon == EquipmentElement.Unknown)
-				throw new Exception ("This weapon is unknown: " + entity.ServerClass.DTName);
-
-			p.rawWeapons[weaponEntityIndex] = weapon;
+			var weapon = weapons[weaponEntityIndex];
+			weapon.Owner = p;
+			p.rawWeapons [weaponEntityIndex] = weapon;
 
 			return true;
+		}
+
+		void HandleWeapons ()
+		{
+			for (int i = 0; i < 1024; i++) {
+				weapons [i] = new Equipment ();
+			}
+
+			foreach (var s in SendTableParser.ServerClasses.Where(a => a.BaseClasses.Any(c => c.Name == "CWeaponCSBase"))) {
+				s.OnNewEntity += HandleWeapon;
+			}
+		}
+
+		void HandleWeapon (object sender, EntityCreatedEventArgs e)
+		{
+			var equipment = weapons [e.Entity.ID];
+			equipment.EntityID = e.Entity.ID;
+			equipment.Weapon = equipmentMapping [e.Class];
+			equipment.AmmoInMagazine = -1;
+
+			e.Entity.FindProperty("m_iClip1").IntRecived += (asdasd, ammoUpdate) => {
+				equipment.AmmoInMagazine = ammoUpdate.Value - 1; //wtf volvo y -1?
+			};
+
+			e.Entity.FindProperty("LocalWeaponData.m_iPrimaryAmmoType").IntRecived += (asdasd, typeUpdate) => {
+				equipment.AmmoType = typeUpdate.Value;
+			};
+
+			if (equipment.Weapon == EquipmentElement.P2000) {
+				e.Entity.FindProperty("m_nModelIndex").IntRecived += (sender2, e2) => {
+					equipment.OriginalString = modelprecache[e2.Value];
+
+					if(modelprecache[e2.Value].EndsWith("_pist_223.mdl"))
+						equipment.Weapon = EquipmentElement.USP; //BAM
+					else if(modelprecache[e2.Value].EndsWith("_pist_hkp2000.mdl"))
+						equipment.Weapon = EquipmentElement.P2000;
+					else 
+						throw new InvalidDataException("Unknown weapon model");
+				};
+			}
+
+			if (equipment.Weapon == EquipmentElement.M4A4) {
+				e.Entity.FindProperty("m_nModelIndex").IntRecived += (sender2, e2) => {
+					equipment.OriginalString = modelprecache[e2.Value];
+					if(modelprecache[e2.Value].EndsWith("_rif_m4a1_s.mdl"))
+						equipment.Weapon = EquipmentElement.M4A1;  //BAM
+					else if(modelprecache[e2.Value].EndsWith("_rif_m4a1.mdl"))
+						equipment.Weapon = EquipmentElement.M4A4;
+					else 
+						throw new InvalidDataException("Unknown weapon model");
+				};
+			}
+
+			if (equipment.Weapon == EquipmentElement.P250) {
+				e.Entity.FindProperty("m_nModelIndex").IntRecived += (sender2, e2) => {
+					equipment.OriginalString = modelprecache[e2.Value];
+					if(modelprecache[e2.Value].EndsWith("_pist_cz_75.mdl"))
+						equipment.Weapon = EquipmentElement.CZ;  //BAM
+					else if(modelprecache[e2.Value].EndsWith("_pist_p250.mdl"))
+						equipment.Weapon = EquipmentElement.P250;
+					else 
+						throw new InvalidDataException("Unknown weapon model");
+				};
+			}
 		}
 
 		internal List<TriggerInformation> triggers = new List<TriggerInformation>();

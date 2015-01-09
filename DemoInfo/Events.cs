@@ -121,6 +121,8 @@ namespace DemoInfo
 
 	public class Equipment
 	{
+		internal int EntityID { get; set; }
+
 		public EquipmentElement Weapon { get; set; }
 		public EquipmentClass Class {
 			get
@@ -133,9 +135,21 @@ namespace DemoInfo
 
 		public string SkinID { get; set; }
 
+		public int AmmoInMagazine { get; set; }
+
+		internal int AmmoType { get; set; }
+
+		public Player Owner { get; set; }
+
+		public int ReserveAmmo {
+			get {
+				return Owner.AmmoLeft [AmmoType];
+			}
+		}
+
 		internal Equipment ()
 		{
-			
+			this.Weapon = EquipmentElement.Unknown;
 		}
 
 		internal Equipment (string originalString)

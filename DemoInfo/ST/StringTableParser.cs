@@ -24,6 +24,9 @@ namespace DemoInfo.ST
 		{
             int numStrings = (int)reader.ReadInt(16);
 
+			if (tableName == "modelprecache") {
+				parser.modelprecache.Clear ();
+			}
 
             for (int i = 0; i < numStrings; i++)
             {
@@ -46,6 +49,8 @@ namespace DemoInfo.ST
 						int classid = int.Parse(stringName); //wtf volvo?
 
 						parser.instanceBaseline[classid] = data; 
+					} else if (tableName == "modelprecache") {
+						parser.modelprecache.Add (stringName);
 					}
                 }
             }

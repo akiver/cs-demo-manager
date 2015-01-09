@@ -42,11 +42,15 @@ namespace DemoInfo.DP.Handler
 			switch (eventDescriptor.Name) {
 			case "weapon_fire":
 
-				data = MapData(eventDescriptor, rawEvent);
+				data = MapData (eventDescriptor, rawEvent);
 
-				WeaponFiredEventArgs fire = new WeaponFiredEventArgs();
-                fire.Shooter = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
-				fire.Weapon = new Equipment((string)data["weapon"]);
+				WeaponFiredEventArgs fire = new WeaponFiredEventArgs ();
+				fire.Shooter = parser.Players.ContainsKey ((int)data ["userid"]) ? parser.Players [(int)data ["userid"]] : null;
+				fire.Weapon = new Equipment ((string)data ["weapon"]);
+
+				if (fire.Shooter != null && fire.Weapon.Class != EquipmentClass.Grenade) {
+					fire.Weapon = fire.Shooter.ActiveWeapon;
+				}
 
 				parser.RaiseWeaponFired(fire);
 				break;
@@ -59,9 +63,19 @@ namespace DemoInfo.DP.Handler
                 kill.Killer = parser.Players.ContainsKey((int)data["attacker"]) ? parser.Players[(int)data["attacker"]] : null;
 				kill.Headshot = (bool)data["headshot"];
 				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
+
+				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade && kill.Killer.Weapons.Count() != 0) {
+					#if DEBUG
+					if(kill.Weapon.Weapon != kill.Killer.ActiveWeapon.Weapon)
+						throw new InvalidDataException();
+					#endif
+					kill.Weapon = kill.Killer.ActiveWeapon;
+				}
+
+
 				kill.PenetratedObjects = (int)data["penetrated"];
 
-					parser.RaisePlayerKilled(kill);
+				parser.RaisePlayerKilled(kill);
 				break;
 
 				#region Nades
