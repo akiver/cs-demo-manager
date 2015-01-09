@@ -92,6 +92,7 @@ namespace DemoInfo
 		/// Note: Enableing this might decrease performance in the current implementation. Will be removed once the code is optimized. 
 		/// </summary>
 		/// <value><c>true</c> to attribute weapons; otherwise, <c>false</c>.</value>
+		[Obsolete("Weapons are always attributed now. No need to use this anymore", true)]
 		public bool ShallAttributeWeapons { get; set; }
 		Equipment[] weapons = new Equipment[1024];
 
@@ -439,58 +440,56 @@ namespace DemoInfo
 
 
 			//Weapon attribution
-			if (ShallAttributeWeapons) {
-				string weaponPrefix = "m_hMyWeapons.";
+			string weaponPrefix = "m_hMyWeapons.";
 
-				if(!playerEntity.Props.Any(a => a.Entry.PropertyName == "m_hMyWeapons.000"))
-					weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
+			if(!playerEntity.Props.Any(a => a.Entry.PropertyName == "m_hMyWeapons.000"))
+				weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
 
 
-				int[] cache = new int[64];
+			int[] cache = new int[64];
 
-				for(int i = 0; i < 64; i++)
-				{
-					int iForTheMethod = i; //Because else i is passed as reference to the delegate. 
+			for(int i = 0; i < 64; i++)
+			{
+				int iForTheMethod = i; //Because else i is passed as reference to the delegate. 
 
-					playerEntity.FindProperty(weaponPrefix + i.ToString().PadLeft(3, '0')).IntRecived += (sender, e) => {
+				playerEntity.FindProperty(weaponPrefix + i.ToString().PadLeft(3, '0')).IntRecived += (sender, e) => {
 
-						int index = e.Value & INDEX_MASK;
+					int index = e.Value & INDEX_MASK;
 
-						if (index != INDEX_MASK) {
-							if(cache[iForTheMethod] != 0) //Player already has a weapon in this slot. 
-							{
-								p.rawWeapons.Remove(cache[iForTheMethod]);
-								cache[iForTheMethod] = 0;
-							}
-							cache[iForTheMethod] = index;
-
-							AttributeWeapon(index, p);
-						} else {
-							if(cache[iForTheMethod] != 0)
-							{
-								p.rawWeapons[cache[iForTheMethod]].Owner = null;
-							}
+					if (index != INDEX_MASK) {
+						if(cache[iForTheMethod] != 0) //Player already has a weapon in this slot. 
+						{
 							p.rawWeapons.Remove(cache[iForTheMethod]);
-
-							if(p.rawWeapons.Count == 0)
-							{
-
-							}
-
 							cache[iForTheMethod] = 0;
 						}
-					};
-				}
+						cache[iForTheMethod] = index;
 
-				playerEntity.FindProperty("m_hActiveWeapon").IntRecived += (sender, e) => p.ActiveWeaponID = e.Value & INDEX_MASK;
+						AttributeWeapon(index, p);
+					} else {
+						if(cache[iForTheMethod] != 0)
+						{
+							p.rawWeapons[cache[iForTheMethod]].Owner = null;
+						}
+						p.rawWeapons.Remove(cache[iForTheMethod]);
 
-				for (int i = 0; i < 32; i++) {
-					int iForTheMethod = i;
+						if(p.rawWeapons.Count == 0)
+						{
 
-					playerEntity.FindProperty ("m_iAmmo." + i.ToString ().PadLeft (3, '0')).IntRecived += (sender, e) => {
-						p.AmmoLeft [iForTheMethod] = e.Value;
-					};
-				}
+						}
+
+						cache[iForTheMethod] = 0;
+					}
+				};
+			}
+
+			playerEntity.FindProperty("m_hActiveWeapon").IntRecived += (sender, e) => p.ActiveWeaponID = e.Value & INDEX_MASK;
+
+			for (int i = 0; i < 32; i++) {
+				int iForTheMethod = i;
+
+				playerEntity.FindProperty ("m_iAmmo." + i.ToString ().PadLeft (3, '0')).IntRecived += (sender, e) => {
+					p.AmmoLeft [iForTheMethod] = e.Value;
+				};
 			}
 
 
