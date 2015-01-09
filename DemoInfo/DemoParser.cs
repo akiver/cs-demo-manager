@@ -357,9 +357,10 @@ namespace DemoInfo
 					}
 					else if(teamName.Value == "TERRORIST")
 					{
-						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => TScore = update.Value;
-						e.Entity.FindProperty("m_iTeamNum").IntRecived += (xx, update) => tID = update.Value;
-
+						TScore = score;
+						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => { 
+							TScore = update.Value;
+						};
 
 						if(teamID != -1)
 						{
@@ -382,12 +383,17 @@ namespace DemoInfo
 
 		private void HandleNewPlayer(Entity playerEntity)
 		{
-			Player p = new Player();
-			this.PlayerInformations[playerEntity.ID - 1] = p;
+			Player p = null;
+			if (this.PlayerInformations [playerEntity.ID - 1] != null) {
+				p = this.PlayerInformations [playerEntity.ID - 1];
+			} else {
+				p = new Player ();
+				this.PlayerInformations [playerEntity.ID - 1] = p;
+				p.SteamID = -1;
+				p.Name = "unconnected";
+			}
 
-			p.Name = "unconnected";
 			p.EntityID = playerEntity.ID;
-			p.SteamID = -1;
 			p.Entity = playerEntity;
 			p.Position = new Vector();
 			p.Velocity = new Vector();
@@ -465,6 +471,12 @@ namespace DemoInfo
 								p.rawWeapons[cache[iForTheMethod]].Owner = null;
 							}
 							p.rawWeapons.Remove(cache[iForTheMethod]);
+
+							if(p.rawWeapons.Count == 0)
+							{
+
+							}
+
 							cache[iForTheMethod] = 0;
 						}
 					};

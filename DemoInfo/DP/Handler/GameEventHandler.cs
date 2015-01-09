@@ -64,7 +64,7 @@ namespace DemoInfo.DP.Handler
 				kill.Headshot = (bool)data["headshot"];
 				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
 
-				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade) {
+				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade && kill.Killer.Weapons.Count() != 0) {
 					#if DEBUG
 					if(kill.Weapon.Weapon != kill.Killer.ActiveWeapon.Weapon)
 						throw new InvalidDataException();
