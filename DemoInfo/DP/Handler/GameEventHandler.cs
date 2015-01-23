@@ -34,8 +34,8 @@ namespace DemoInfo.DP.Handler
 			if (eventDescriptor.Name == "round_start")
 				parser.RaiseRoundStart();
 
-			if (eventDescriptor.Name == "round_announce_match_start")
-				parser.RaiseMatchStarted();
+			if (eventDescriptor.Name == "begin_new_match")
+				parser.RaiseMatchStarted ();
 
 
 			Dictionary<string, object> data;
