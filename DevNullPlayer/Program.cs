@@ -13,7 +13,8 @@ namespace DevNullPlayer
 				#if DEBUG
 				parser.TickDone += (sender, e) => Console.Write(".");;
 				#endif
-				parser.ParseDemo(true);
+				parser.ParseHeader ();
+				parser.ParseToEnd ();
 			}
 		}
 	}
