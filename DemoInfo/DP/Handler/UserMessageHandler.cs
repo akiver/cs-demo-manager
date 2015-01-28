@@ -15,6 +15,7 @@ namespace DemoInfo.DP
 
 			var messageType = (Messages.ECstrike15UserMessages)userMessage.msg_type;
 			// TODO: maybe, like, implement something here one day?
+			//Problem: There is no real useful info here if I see it correcly. Sorry.
 			return true;
 		}
 

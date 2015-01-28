@@ -7,13 +7,25 @@ using System.Threading.Tasks;
 
 namespace DemoInfo
 {
+	/// <summary>
+	/// A Demo header.
+	/// </summary>
 	public class DemoHeader
     {
         const int MAX_OSPATH = 260;
 
 	    public string Filestamp { get; private set; }		// Should be HL2DEMO
-        public int Protocol { get; private set; }		// Should be DEMO_PROTOCOL
-        public int NetworkProtocal { get; private set; }				// Should be PROTOCOL_VERSION
+		public int Protocol { get; private set; }		// Should be DEMO_PROTOCOL (4)
+
+		[Obsolete("This was a typo. Use NetworkProtocol instead")]
+		public int NetworkProtocal { 
+			get { 
+				return NetworkProtocol;
+			}
+		}
+
+        public int NetworkProtocol { get; private set; }				// Should be PROTOCOL_VERSION
+
         public string ServerName { get; private set; }		            // Name of server
         public string ClientName { get; private set; }		            // Name of client who recorded the game
         public string MapName { get; private set; }			        // Name of map
@@ -28,7 +40,7 @@ namespace DemoInfo
             return new DemoHeader() {
                 Filestamp = reader.ReadCString(8),
                 Protocol = reader.ReadSignedInt(32),
-				NetworkProtocal = reader.ReadSignedInt(32),
+				NetworkProtocol = reader.ReadSignedInt(32),
                 ServerName = reader.ReadCString(MAX_OSPATH),
 
                 ClientName = reader.ReadCString(MAX_OSPATH),
@@ -43,6 +55,9 @@ namespace DemoInfo
         }
     }
 
+	/// <summary>
+	/// And Source-Engine Vector. 
+	/// </summary>
 	public class Vector
     {
         public float X { get; set; }
@@ -96,13 +111,14 @@ namespace DemoInfo
 		}
 
 		/// <summary>
-		/// Copy this instance.
+		/// Copy this instance. So if you want to permanently store the position of a player at a point in time, 
+		/// COPY it. 
 		/// </summary>
 		public Vector Copy()
 		{
 			return new Vector(X,Y,Z);
 		}
-
+			
 		public static Vector operator + (Vector a, Vector b)
 		{
 			return new Vector() {X = a.X + b.X, Y = a.Y + b.Y, Z = a.Z + b.Z };
@@ -119,6 +135,9 @@ namespace DemoInfo
         }
     }
 
+	/// <summary>
+	/// And Angle in the Source-Engine. Looks pretty much like a vector. 
+	/// </summary>
 	class QAngle
     {
         public float X { get; private set; }
@@ -137,7 +156,9 @@ namespace DemoInfo
     }
 
     
-
+	/// <summary>
+	/// A split. 
+	/// </summary>
 	class Split
     {
         const int FDEMO_NORMAL = 0, FDEMO_USE_ORIGIN2 = 1, FDEMO_USE_ANGLES2 = 2, FDEMO_NOINTERP = 4;
@@ -186,6 +207,9 @@ namespace DemoInfo
         }
     }
     
+	/// <summary>
+	/// A playerinfo, based on playerinfo_t by Volvo. 
+	/// </summary>
     public class PlayerInfo
     {
 	    /// version for future compatibility
@@ -259,26 +283,35 @@ namespace DemoInfo
     }
 
 
-
-	class TriggerInformation
+	/// <summary>
+	/// This contains information about Collideables (specific edicts), mostly used for bombsites. 
+	/// </summary>
+	class BoundingBoxInformation
 	{
 		public int Index { get; private set; }
 		public Vector Min { get; set; }
 		public Vector Max { get; set; }
 
-		public TriggerInformation (int index)
+		public BoundingBoxInformation (int index)
 		{
 			this.Index = index;
 		}
 
-		public bool IsInside(Vector test)
+		/// <summary>
+		/// Checks wheter a point lies within the BoundingBox. 
+		/// </summary>
+		/// <param name="point">The point to check</param>
+		public bool Contains(Vector point)
 		{
-			return test.X >= Min.X && test.X <= Max.X &&
-				test.Y >= Min.Y && test.Y <= Max.Y &&
-				test.Z >= Min.Z && test.Z <= Max.Z;
+			return point.X >= Min.X && point.X <= Max.X &&
+				point.Y >= Min.Y && point.Y <= Max.Y &&
+				point.Z >= Min.Z && point.Z <= Max.Z;
 		}
 	}
 
+	/// <summary>
+	/// The demo-commands as given by Valve.
+	/// </summary>
     enum DemoCommand
     {
 

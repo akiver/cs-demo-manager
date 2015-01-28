@@ -20,20 +20,22 @@ namespace DemoInfo.DP
 			select parser).ToArray();
 		#endif
 
+		/// <summary>
+		/// Parses a demo-packet. 
+		/// </summary>
+		/// <param name="bitstream">Bitstream.</param>
+		/// <param name="demo">Demo.</param>
 		public static void ParsePacket(IBitStream bitstream, DemoParser demo)
         {
+			//As long as there is stuff to read
 			while (!bitstream.ChunkFinished)
             {
-				int cmd = bitstream.ReadProtobufVarInt();
-				int length = bitstream.ReadProtobufVarInt();
-				bitstream.BeginChunk(length * 8);
-				if (cmd == (int)NET_Messages.net_Tick) {
-					new NETTick().Parse(bitstream);
-				} else if (cmd == (int)SVC_Messages.svc_PacketEntities) {
-					new PacketEntities().Parse(bitstream, demo);
-				} else if (cmd == (int)SVC_Messages.svc_EncryptedData) {
-					// TODO: maybe one day find the key for this?
-				} else if (cmd == (int)SVC_Messages.svc_GameEventList) {
+				int cmd = bitstream.ReadProtobufVarInt(); //What type of packet is this?
+				int length = bitstream.ReadProtobufVarInt(); //And how long is it?
+				bitstream.BeginChunk(length * 8); //read length bytes
+				if (cmd == (int)SVC_Messages.svc_PacketEntities) { //Parse packet entities
+					new PacketEntities().Parse(bitstream, demo); 
+				} else if (cmd == (int)SVC_Messages.svc_GameEventList) { //and all this other stuff
 					new GameEventList().Parse(bitstream, demo);
 				} else if (cmd == (int)SVC_Messages.svc_GameEvent) {
 					new GameEvent().Parse(bitstream, demo);
@@ -42,7 +44,10 @@ namespace DemoInfo.DP
 				} else if (cmd == (int)SVC_Messages.svc_UpdateStringTable) {
 					new UpdateStringTable().Parse(bitstream, demo);
 				} else {
-					#if SLOW_PROTOBUF
+					//You can use this flag to see what information the other packets contain, 
+					//if you want. Then you can look into the objects. Has some advnatages, and some disdavantages (mostly speed), 
+					//so we use our own lightning-fast parsing code. 
+					#if SLOW_PROTOBUF 
 					Type toParse = null;
 
 					if (Enum.IsDefined(typeof(SVC_Messages), cmd)) {

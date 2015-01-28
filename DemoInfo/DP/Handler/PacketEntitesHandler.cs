@@ -11,47 +11,75 @@ namespace DemoInfo.DP.Handler
 {
     public static class PacketEntitesHandler
     {
+		/// <summary>
+		/// Decodes the bytes in the packet-entites message. 
+		/// </summary>
+		/// <param name="packetEntities">Packet entities.</param>
+		/// <param name="reader">Reader.</param>
+		/// <param name="parser">Parser.</param>
 		public static void Apply(PacketEntities packetEntities, IBitStream reader, DemoParser parser)
         {
 			int currentEntity = -1;
+
 			for (int i = 0; i < packetEntities.UpdatedEntries; i++) {
+
+				//First read which entity is updated
 				currentEntity += 1 + (int)reader.ReadUBitInt();
 
+				//Find out whether we should create, destroy or update it. 
 				// Leave flag
 				if (!reader.ReadBit()) {
 					// enter flag
 					if (reader.ReadBit()) {
+						//create it
 						var e = ReadEnterPVS(reader, currentEntity, parser);
 
 						parser.Entities[currentEntity] = e;
 
 						e.ApplyUpdate(reader);
 					} else {
-						// preserve
+						// preserve / update
 						Entity e = parser.Entities[currentEntity];
 						e.ApplyUpdate(reader);
 					}
 				} else {
-					// leave
+					// leave / destroy
 					parser.Entities [currentEntity].Leave ();
 					parser.Entities[currentEntity] = null;
+
+					//dunno, but you gotta read this. 
 					if (reader.ReadBit()) {
 					}
 				}
 			}
         }
 
+		/// <summary>
+		/// Reads an update that occures when a new edict enters the PVS (potentially visible system)
+		/// </summary>
+		/// <returns>The new Entity.</returns>
         private static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
         {
+			//What kind of entity?
             int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
 
+			//So find the correct server class
             ServerClass entityClass = parser.SendTableParser.ServerClasses[serverClassID];
 
             reader.ReadInt(10); //Entity serial. 
+			//Never used anywhere I guess. Every parser just skips this
+
 
 			Entity newEntity = new Entity(id, entityClass);
 
+			//give people the chance to subscribe to events for this
 			newEntity.ServerClass.AnnounceNewEntity(newEntity);
+
+			//And then parse the instancebaseline. 
+			//basically you could call
+			//newEntity.ApplyUpdate(parser.instanceBaseline[entityClass]; 
+			//This code below is just faster, since it only parses stuff once
+			//which is faster. 
 
 			object[] fastBaseline;
 			if (parser.PreprocessedBaselines.TryGetValue(serverClassID, out fastBaseline))

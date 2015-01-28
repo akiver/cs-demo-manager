@@ -30,6 +30,10 @@ namespace DemoInfo
 	{
 	}
 
+	public class FreezetimeEndedEventArgs : EventArgs
+	{
+	}
+
 	public class PlayerKilledEventArgs : EventArgs
 	{
 		public Equipment Weapon { get; internal set; }
@@ -37,6 +41,8 @@ namespace DemoInfo
 		public Player DeathPerson { get; internal set; }
 
 		public Player Killer { get; internal set; }
+
+		public Player Assister { get; internal set; }
 
 		public int PenetratedObjects { get; internal set; }
 

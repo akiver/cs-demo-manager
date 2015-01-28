@@ -9,6 +9,9 @@ using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
+	/// <summary>
+	/// This class manages all GameEvents for a demo-parser. 
+	/// </summary>
 	public static class GameEventHandler
 	{
 		public static void HandleGameEventList(IEnumerable<GameEventList.Descriptor> gel, DemoParser parser)
@@ -18,6 +21,11 @@ namespace DemoInfo.DP.Handler
 				parser.GEH_Descriptors[d.EventId] = d;
 		}
 
+		/// <summary>
+		/// Apply the specified rawEvent to the parser.
+		/// </summary>
+		/// <param name="rawEvent">The raw event.</param>
+		/// <param name="parser">The parser to mutate.</param>
 		public static void Apply(GameEvent rawEvent, DemoParser parser)
 		{
 			var descriptors = parser.GEH_Descriptors;
@@ -37,6 +45,12 @@ namespace DemoInfo.DP.Handler
 			if (eventDescriptor.Name == "begin_new_match")
 				parser.RaiseMatchStarted ();
 
+			if (eventDescriptor.Name == "round_freeze_end")
+				parser.RaiseFreezetimeEnded ();
+
+			//if (eventDescriptor.Name != "player_footstep" && eventDescriptor.Name != "weapon_fire" && eventDescriptor.Name != "player_jump") {
+			//	Console.WriteLine (eventDescriptor.Name);
+			//}
 
 			Dictionary<string, object> data;
 			switch (eventDescriptor.Name) {
@@ -60,11 +74,12 @@ namespace DemoInfo.DP.Handler
 				PlayerKilledEventArgs kill = new PlayerKilledEventArgs();
 
                 kill.DeathPerson = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
-                kill.Killer = parser.Players.ContainsKey((int)data["attacker"]) ? parser.Players[(int)data["attacker"]] : null;
+				kill.Killer = parser.Players.ContainsKey((int)data["attacker"]) ? parser.Players[(int)data["attacker"]] : null;
+				kill.Assister = parser.Players.ContainsKey((int)data["assister"]) ? parser.Players[(int)data["assister"]] : null;
 				kill.Headshot = (bool)data["headshot"];
 				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
 
-				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade && kill.Killer.Weapons.Count() != 0) {
+				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade && kill.Killer.Weapons.Any()) {
 					#if DEBUG
 					if(kill.Weapon.Weapon != kill.Killer.ActiveWeapon.Weapon)
 						throw new InvalidDataException();
@@ -160,11 +175,11 @@ namespace DemoInfo.DP.Handler
 					bombEventArgs.Site = 'B';
 				} else {
 					var relevantTrigger = parser.triggers.Single(a => a.Index == site);
-					if (relevantTrigger.IsInside(parser.bombsiteACenter)) {
+					if (relevantTrigger.Contains(parser.bombsiteACenter)) {
 						//planted at A.
 						bombEventArgs.Site = 'A';
 						parser.bombsiteAIndex = site;
-					} else if (relevantTrigger.IsInside(parser.bombsiteBCenter)) {
+					} else if (relevantTrigger.Contains(parser.bombsiteBCenter)) {
 						//planted at B.
 						bombEventArgs.Site = 'B';
 						parser.bombsiteBIndex = site;
