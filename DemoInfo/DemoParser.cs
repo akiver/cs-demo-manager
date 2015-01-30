@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Diagnostics;
+using System.Text;
 
 namespace DemoInfo
 {
@@ -813,6 +815,46 @@ namespace DemoInfo
 			};
 
 		}
+		#if SAVE_PROP_VALUES
+		private string DumpAllEntities()
+		{
+			StringBuilder res = new StringBuilder ();
+			for (int i = 0; i < MAX_ENTITIES; i++) {
+				Entity entity = Entities [i];
+
+				if (entity == null)
+					break;
+
+				res.Append("Entity " + i + ": " + entity.ServerClass.Name + " (inherits: ");
+
+				//The class with the lowest order is the first
+				//But we obv. want the highest order first :D
+				foreach(var c in entity.ServerClass.BaseClasses.Reverse<ServerClass>())
+				{
+					res.Append (c.Name + "; ");
+				}
+				res.AppendLine (")");
+
+				foreach (var prop in entity.Props) {
+					res.Append(prop.Entry.PropertyName.PadLeft(50));
+					res.Append(" = ");
+					res.Append(prop.Value);
+					res.AppendLine ();
+				}
+			}
+
+			return res.ToString();
+		}
+
+		private void DumpAllEntities(string fileName)
+		{
+
+			StreamWriter writer = new StreamWriter(fileName);
+			writer.WriteLine(DumpAllEntities());
+			writer.Flush();
+			writer.Close();
+		}
+		#endif 
 
 		#region EventCaller
 

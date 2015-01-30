@@ -117,6 +117,10 @@ namespace DemoInfo.DP
 		public event EventHandler<PropertyUpdateEventArgs<string>>  StringRecived;
 		public event EventHandler<PropertyUpdateEventArgs<object[]>>  ArrayRecived;
 
+		#if SAVE_PROP_VALUES
+		public object Value { get; private set; }
+		#endif
+
 		/*
 		 * DON'T USE THIS.
 		 * SERIOUSLY, NO!
@@ -154,6 +158,7 @@ namespace DemoInfo.DP
 			#endif
 		}
 
+
 		[Conditional("DEBUG")]
 		private void DeleteDataRecived()
 		{
@@ -183,6 +188,7 @@ namespace DemoInfo.DP
 					if (IntRecived != null)
 						IntRecived(this, new PropertyUpdateEventArgs<int>(val, e, this));
 
+					SaveValue (val);
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
@@ -192,6 +198,7 @@ namespace DemoInfo.DP
 					if (FloatRecived != null)
 						FloatRecived(this, new PropertyUpdateEventArgs<float>(val, e, this));
 
+					SaveValue (val);
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
@@ -201,6 +208,7 @@ namespace DemoInfo.DP
 					if (VectorRecived != null)
 						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
 
+					SaveValue (val);
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
@@ -210,6 +218,7 @@ namespace DemoInfo.DP
 					if (ArrayRecived != null)
 						ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val, e, this));
 
+					SaveValue (val);
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
@@ -219,6 +228,7 @@ namespace DemoInfo.DP
 					if (StringRecived != null)
 						StringRecived(this, new PropertyUpdateEventArgs<string>(val, e, this));
 
+					SaveValue (val);
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
@@ -228,6 +238,7 @@ namespace DemoInfo.DP
 					if (VectorRecived != null)
 						VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
 
+					SaveValue (val);
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
@@ -252,6 +263,14 @@ namespace DemoInfo.DP
 			this.VectorRecived = null;
 
 			DeleteDataRecived ();
+		}
+
+		[Conditional("SAVE_PROP_VALUES")]
+		private void SaveValue(object value)
+		{
+			#if SAVE_PROP_VALUES
+			this.Value = value;
+			#endif
 		}
 
 		public override string ToString()

@@ -17,8 +17,9 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Externalconsole>true</Externalconsole>
-    <Commandlineparameters>/home/noah/Downloads/ESLOneCologne-GF-nip-vs-fnatic/ESLOneCologne-GF-nip-vs-fnatic-inferno.dem</Commandlineparameters>
+    <Commandlineparameters>/home/moritz/Desktop/ldlcpass.dem</Commandlineparameters>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>full</DebugType>
@@ -26,8 +27,14 @@
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Externalconsole>true</Externalconsole>
-    <Commandlineparameters>/home/noah/Downloads/ESLOneCologne-GF-nip-vs-fnatic/ESLOneCologne-GF-nip-vs-fnatic-cobblestone.dem</Commandlineparameters>
+    <Commandlineparameters>/home/moritz/Desktop/ldlcpass.dem</Commandlineparameters>
+    <ConsolePause>false</ConsolePause>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SavePropValues|AnyCPU' ">
+    <Optimize>false</Optimize>
+    <OutputPath>bin\SavePropValues</OutputPath>
+    <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
