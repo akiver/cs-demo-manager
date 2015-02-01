@@ -282,6 +282,24 @@ namespace DemoInfo
 			private set;
 		}
 
+		/// <summary>
+		/// The clan name of the Counter-Terrorists
+		/// </summary>
+		/// <value>The name of the CT clan.</value>
+		public string CTClanName {
+			get;
+			private set;
+		}
+
+		/// <summary>
+		/// The clan name of the Terrorists
+		/// </summary>
+		/// <value>The name of the T clan.</value>
+		public string TClanName {
+			get;
+			private set;
+		}
+
 		#region Context for GameEventHandler
 		/// <summary>
 		/// And GameEvent is just sent with ID |--> Value, but we need Name |--> Value. 
@@ -349,6 +367,11 @@ namespace DemoInfo
 		/// <value>The current time.</value>
 		public float CurrentTime { get { return CurrentTick * TickTime; } }
 
+		/// <summary>
+		/// This contains additional informations about each player, such as Kills, Deaths, etc. 
+		/// This is networked seperately from the player, so we need to cache it somewhere else.
+		/// </summary>
+		private AdditionalPlayerInformation[] additionalInformations = new AdditionalPlayerInformation[MAXPLAYERS];
 
 		/// <summary>
 		/// Initializes a new DemoParser. Right point if you want to start analyzing demos. 
@@ -359,56 +382,12 @@ namespace DemoInfo
 		{
 			BitStream = BitStreamUtil.Create(input);
 
-		}
-
-		/// <summary>
-		/// Parses this file until the end of the demo is reached. 
-		/// Useful if you have subscribed to events
-		/// </summary>
-		public void ParseToEnd()
-		{
-			while (ParseNextTick()) {
+			for (int i = 0; i < MAXPLAYERS; i++) {
+				additionalInformations [i] = new AdditionalPlayerInformation ();
 			}
 		}
 
-		/// <summary>
-		/// Parses the next tick of the demo.
-		/// </summary>
-		/// <returns><c>true</c>, if this wasn't the last tick, <c>false</c> otherwise.</returns>
-		public bool ParseNextTick()
-		{
-			bool b = ParseTick();
-			
-			for (int i = 0; i < RawPlayers.Length; i++) {
-				if (RawPlayers[i] == null)
-					continue;
 
-				var rawPlayer = RawPlayers[i];
-
-				int id = rawPlayer.UserID;
-
-				if (PlayerInformations[i] != null) { //There is an good entity for this
-					if (!Players.ContainsKey(id))
-						Players[id] = PlayerInformations[i];
-
-					Player p = Players[id];
-					p.Name = rawPlayer.Name;
-					p.SteamID = rawPlayer.XUID;
-
-					//it is weird that this is the entity-id, since this is used nowhere else
-					if (p.IsAlive) {
-						p.LastAlivePosition = p.Position.Copy();
-					}
-				}
-			}
-
-			if (b) {
-				if (TickDone != null)
-					TickDone(this, new TickDoneEventArgs());
-			}
-
-			return b;
-		}
 
 		/// <summary>
 		/// Parses the header (first few hundret bytes) of the demo. 
@@ -428,6 +407,59 @@ namespace DemoInfo
 
 			if (HeaderParsed != null)
 				HeaderParsed(this, new HeaderParsedEventArgs(Header));
+		}
+
+		/// <summary>
+		/// Parses this file until the end of the demo is reached. 
+		/// Useful if you have subscribed to events
+		/// </summary>
+		public void ParseToEnd()
+		{
+			while (ParseNextTick()) {
+			}
+		}
+
+		/// <summary>
+		/// Parses the next tick of the demo.
+		/// </summary>
+		/// <returns><c>true</c>, if this wasn't the last tick, <c>false</c> otherwise.</returns>
+		public bool ParseNextTick()
+		{
+			if (Header == null)
+				throw new InvalidOperationException ("You need to call ParseHeader first before you call ParseToEnd or ParseNextTick!");
+
+			bool b = ParseTick();
+			
+			for (int i = 0; i < RawPlayers.Length; i++) {
+				if (RawPlayers[i] == null)
+					continue;
+
+				var rawPlayer = RawPlayers[i];
+
+				int id = rawPlayer.UserID;
+
+				if (PlayerInformations[i] != null) { //There is an good entity for this
+					if (!Players.ContainsKey(id))
+						Players[id] = PlayerInformations[i];
+
+					Player p = Players[id];
+					p.Name = rawPlayer.Name;
+					p.SteamID = rawPlayer.XUID;
+
+					p.AdditionaInformations = additionalInformations [p.EntityID];
+
+					if (p.IsAlive) {
+						p.LastAlivePosition = p.Position.Copy();
+					}
+				}
+			}
+
+			if (b) {
+				if (TickDone != null)
+					TickDone(this, new TickDoneEventArgs());
+			}
+
+			return b;
 		}
 
 		/// <summary>
@@ -548,6 +580,7 @@ namespace DemoInfo
 				.OnNewEntity += (object sender, EntityCreatedEventArgs e) => {
 
 				string team = null;
+				string teamName = null;
 				int teamID = -1;
 				int score = 0;
 
@@ -575,13 +608,14 @@ namespace DemoInfo
 					}
 				};
 
-				e.Entity.FindProperty("m_szTeamname").StringRecived += (sender_, teamName) => { 
-					team = teamName.Value;
+				e.Entity.FindProperty("m_szTeamname").StringRecived += (sender_, recivedTeamName) => { 
+					team = recivedTeamName.Value;
 
 					//We got the name. Lets bind the updates accordingly!
-					if(teamName.Value == "CT")
+					if(recivedTeamName.Value == "CT")
 					{
 						CTScore = score;
+						CTClanName = teamName;
 						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => { 
 							CTScore = update.Value;
 						};
@@ -594,9 +628,10 @@ namespace DemoInfo
 						}
 
 					}
-					else if(teamName.Value == "TERRORIST")
+					else if(recivedTeamName.Value == "TERRORIST")
 					{
 						TScore = score;
+						TClanName = teamName;
 						e.Entity.FindProperty("m_scoreTotal").IntRecived += (xx, update) => { 
 							TScore = update.Value;
 						};
@@ -609,12 +644,76 @@ namespace DemoInfo
 						}
 					}
 				};
+
+				e.Entity.FindProperty("m_szClanTeamname").StringRecived += (sender_, recivedClanName) => {
+					teamName = recivedClanName.Value;
+					if(team == "CT")
+					{
+						CTClanName = recivedClanName.Value;
+					}
+					else if(team == "T")
+					{
+						TClanName = recivedClanName.Value;
+					}
+				};
 			};
 		}
 
 		private void HandlePlayers()
 		{
 			SendTableParser.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => HandleNewPlayer (e.Entity);
+
+			SendTableParser.FindByName("CCSPlayerResource").OnNewEntity += (blahblah, playerResources) => {
+				for(int i = 0; i < 64; i++)
+				{
+					//Since this is passed as reference to the delegates
+					int iForTheMethod = i;
+					string iString = i.ToString().PadLeft(3, '0');
+
+					playerResources.Entity.FindProperty("m_szClan."+iString).StringRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].Clantag = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iPing."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].Ping = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iScore."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].Score = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iKills."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].Kills = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iDeaths."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].Deaths = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iAssists."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].Deaths = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iMVPs."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].MVPs = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iTotalCashSpent."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].TotalCashSpent = e.Value;
+					};
+
+					#if DEBUG
+					playerResources.Entity.FindProperty("m_iArmor."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].ScoreboardArmor = e.Value;
+					};
+
+					playerResources.Entity.FindProperty("m_iHealth."+iString).IntRecived += (sender, e) => {
+						additionalInformations[iForTheMethod].ScoreboardHP = e.Value;
+					};
+
+					#endif
+				}
+			};
 		}
 
 		private void HandleNewPlayer(Entity playerEntity)
@@ -673,6 +772,9 @@ namespace DemoInfo
 			playerEntity.FindProperty("localdata.m_vecVelocity[2]").FloatRecived += (sender, e) => p.Velocity.Z = e.Value;
 
 
+			playerEntity.FindProperty("m_unCurrentEquipmentValue").IntRecived += (sender, e) => p.CurrentEquipmentValue = e.Value;
+			playerEntity.FindProperty("m_unRoundStartEquipmentValue").IntRecived += (sender, e) => p.RoundStartEquipmentValue = e.Value;
+			playerEntity.FindProperty("m_unFreezetimeEndEquipmentValue").IntRecived += (sender, e) => p.FreezetimeEndEquipmentValue = e.Value;
 
 			//Weapon attribution
 			string weaponPrefix = "m_hMyWeapons.";
