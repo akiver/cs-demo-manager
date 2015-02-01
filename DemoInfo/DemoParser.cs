@@ -333,7 +333,7 @@ namespace DemoInfo
 		/// </summary>
 		/// <value>The parsing progess.</value>
 		public float ParsingProgess {
-			get { return (CurrentTick / TickRate) / (Header.PlaybackTime); }
+			get { return (CurrentTick / (float)Header.PlaybackFrames); }
 		}
 
 		/// <summary>
