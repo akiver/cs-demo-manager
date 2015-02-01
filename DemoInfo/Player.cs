@@ -31,6 +31,12 @@ namespace DemoInfo
 
 		public int Money { get; set; }
 
+		public int CurrentEquipmentValue { get; set; }
+
+		public int FreezetimeEndEquipmentValue { get; set; }
+
+		public int RoundStartEquipmentValue { get; set; }
+
 		internal Entity Entity;
 
 		public bool Disconnected { get; set; }
@@ -62,6 +68,10 @@ namespace DemoInfo
 		internal int TeamID;
 
 		internal int[] AmmoLeft = new int[32];
+
+		public AdditionalPlayerInformation AdditionaInformations { get; internal set; }
+
+
 
 		public Player()
 		{
