@@ -805,7 +805,8 @@ namespace DemoInfo
 
 		}
 		#if SAVE_PROP_VALUES
-		private string DumpAllEntities()
+		[Obsolete("This method is only for debugging-purposes and shuld never be used in production, so you need to live with this warning.")]
+		public string DumpAllEntities()
 		{
 			StringBuilder res = new StringBuilder ();
 			for (int i = 0; i < MAX_ENTITIES; i++) {
@@ -835,9 +836,9 @@ namespace DemoInfo
 			return res.ToString();
 		}
 
-		private void DumpAllEntities(string fileName)
+		[Obsolete("This method is only for debugging-purposes and shuld never be used in production, so you need to live with this warning.")]
+		public void DumpAllEntities(string fileName)
 		{
-
 			StreamWriter writer = new StreamWriter(fileName);
 			writer.WriteLine(DumpAllEntities());
 			writer.Flush();
