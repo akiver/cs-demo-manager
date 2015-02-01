@@ -52,7 +52,8 @@ def invoke(script, dem, report_progress=False):
         fd = rready[0]
         chunk = os.read(fd, 4096)
         if report_progress and fd is pipe_rfd:
-            print('\r' + str(chunk), end='')
+            print('\r%03d%%' % (int(chunk),), end='')
+            sys.stdout.flush()
         elif len(chunk) == 0:
             # end of stream
             pending.remove(fd)
