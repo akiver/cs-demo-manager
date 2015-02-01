@@ -15,7 +15,8 @@ namespace DevNullPlayer
 				#if DEBUG
 				if (args.Length >= 2) {
 					// progress reporting requested
-					using (var progressWriter = new StreamWriter(args[1]) { AutoFlush = false }) {
+					using (var progressFile = File.OpenWrite(args[1]))
+					using (var progressWriter = new StreamWriter(progressFile) { AutoFlush = false }) {
 						int lastPercentage = -1;
 						while (parser.ParseNextTick()) {
 							var newProgress = (int)(parser.ParsingProgess * 100);
