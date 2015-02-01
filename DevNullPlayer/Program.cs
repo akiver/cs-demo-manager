@@ -10,18 +10,13 @@ namespace DevNullPlayer
 	{
 		public static void Main(string[] args)
 		{
+
 			using (var input = File.OpenRead(args[0])) {
 				var parser = new DemoParser(input);
-
-
-				parser.TickDone += (sender, e) => Console.WriteLine((parser.ParsingProgess * 100).ToString() + "%");
+				
+				parser.ParseHeader ();
 
 				#if DEBUG
-				Debug.Listeners.Add(new ConsoleTraceListener(true));
-
-				parser.TickDone += (sender, e) => Console.WriteLine((parser.ParsingProgess * 100).ToString() + "%");
-
-				//This is a different "unit-test", so it gets a different method.
 				Dictionary<Player, int> failures = new Dictionary<Player, int>();
 				parser.TickDone += (sender, e) => {
 					//Problem: The HP coming from CCSPlayerEvent are sent 1-4 ticks later
@@ -52,10 +47,28 @@ namespace DevNullPlayer
 
 					}
 				};
-				#endif
 
-				parser.ParseHeader ();
-				parser.ParseToEnd ();
+				
+
+				if (args.Length >= 2) {
+					// progress reporting requested
+					using (var progressFile = File.OpenWrite(args[1]))
+					using (var progressWriter = new StreamWriter(progressFile) { AutoFlush = false }) {
+						int lastPercentage = -1;
+						while (parser.ParseNextTick()) {
+							var newProgress = (int)(parser.ParsingProgess * 100);
+							if (newProgress != lastPercentage) {
+								progressWriter.Write(lastPercentage = newProgress);
+								progressWriter.Flush();
+							}
+						}
+					}
+
+					return;
+				}
+				#endif
+				
+				parser.ParseToEnd();
 			}
 		}
 	}

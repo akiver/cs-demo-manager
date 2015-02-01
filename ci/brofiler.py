@@ -31,9 +31,7 @@ def set_status(sha, state, desc, ctx, url=None):
                         headers={'Authorization': 'token ' + GH_TOKEN}, data=json.dumps(request).encode('utf-8'))
     return res.text
 
-dotcnt = 0
-def invoke(script, dem, echo_dots=False):
-    global dotcnt
+def invoke(script, dem, report_progress=False):
     pipe_rfd, pipe_wfd = os.pipe()
     p = subprocess.Popen(
         ['/bin/bash', script, dem, str(pipe_wfd)],
@@ -49,20 +47,20 @@ def invoke(script, dem, echo_dots=False):
     stderr_chunks = []
     stdout_rfd, stderr_rfd = p.stdout.fileno(), p.stderr.fileno()
     pending = [pipe_rfd, stdout_rfd, stderr_rfd]
-    while len(pending) > 1 or pipe_rfd not in pending: # wait for all except pipe
+    while len(pending) > 1:
         rready, _, _ = select.select(pending, [], [])
         fd = rready[0]
         chunk = os.read(fd, 4096)
-        if echo_dots and chunk == '.':
-            dotcnt += 1
-            print(str(dotcnt), end='\r')
+        if report_progress and fd is pipe_rfd:
+            print('\r%03d%%' % (int(chunk),), end='')
+            sys.stdout.flush()
         elif len(chunk) == 0:
             # end of stream
             pending.remove(fd)
         else:
             (pipe_chunks if fd is pipe_rfd else stdout_chunks if fd is stdout_rfd else stderr_chunks).append(chunk.decode('utf-8'))
     retval = p.wait()
-    print('%s return value %d' % (dem, retval))
+    print('\r%s return value %d' % (dem, retval))
     err_text = ''.join(stderr_chunks)
     out_text = ''.join(stdout_chunks)
     pipe_text = ''.join(pipe_chunks)
@@ -94,7 +92,7 @@ elif sys.argv[1] == 'verify':
     # now run verification
     for dem in demos:
         retval, out_text, err_text, _ = invoke('ci/verify.sh', dem, True) # pipe not in use
-        if retval == 0:
+        if retval == 0 and not out_text and not err_text:
             set_status(COMMIT, 'pending', 'Verify success', dem)
         else:
             how_many_failures += 1
