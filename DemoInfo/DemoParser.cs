@@ -615,7 +615,6 @@ namespace DemoInfo
 		private void HandlePlayers()
 		{
 			SendTableParser.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => HandleNewPlayer (e.Entity);
-			};
 		}
 
 		private void HandleNewPlayer(Entity playerEntity)
