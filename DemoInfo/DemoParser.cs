@@ -13,6 +13,13 @@ namespace DemoInfo
 {
 	public class DemoParser : IDisposable
 	{
+		const int MAX_EDICT_BITS = 11;
+		internal const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
+		internal const int MAX_ENTITIES = ( ( 1 << MAX_EDICT_BITS ) );
+		const int MAXPLAYERS = 64;
+		const int MAXWEAPONS = 64;
+
+
 		#region Events
 		/// <summary>
 		/// Raised once when the Header of the demo is parsed
@@ -141,8 +148,6 @@ namespace DemoInfo
 
 		#endregion
 
-		#region Information
-
 		/// <summary>
 		/// The mapname of the Demo. Only avaible after the header is parsed. 
 		/// Is a string like "de_dust2".
@@ -152,37 +157,11 @@ namespace DemoInfo
 			get { return Header.MapName; }
 		}
 
-		#endregion
-
-		/// <summary>
-		/// The stream of the demo - all the information go here
-		/// </summary>
-		private readonly IBitStream BitStream;
-
 		/// <summary>
 		/// The header of the demo, containing some useful information. 
 		/// </summary>
 		/// <value>The header.</value>
 		public DemoHeader Header { get; private set; }
-
-		/// <summary>
-		/// A parser for DataTables. This contains the ServerClasses and DataTables. 
-		/// </summary>
-		internal DataTableParser SendTableParser = new DataTableParser();
-
-		/// <summary>
-		/// A parser for DEM_STRINGTABLES-Packets
-		/// </summary>
-		StringTableParser StringTables = new StringTableParser();
-
-		/// <summary>
-		/// This maps an ServerClass to an Equipment. 
-		/// Note that this is wrong for the CZ,M4A1 and USP-S, there is an additional fix for those
-		/// </summary>
-		internal Dictionary<ServerClass, EquipmentElement> equipmentMapping = new Dictionary<ServerClass, EquipmentElement>();
-
-		[Obsolete("There is no need for users to know the userid. Use Participants instead. This will be removed in a future update. ")]
-		public Dictionary<int, Player> Players = new Dictionary<int, Player>();
 
 		/// <summary>
 		/// Gets the participants of this game
@@ -205,18 +184,39 @@ namespace DemoInfo
 		}
 
 		/// <summary>
+		/// The stream of the demo - all the information go here
+		/// </summary>
+		private readonly IBitStream BitStream;
+
+
+
+		/// <summary>
+		/// A parser for DataTables. This contains the ServerClasses and DataTables. 
+		/// </summary>
+		internal DataTableParser SendTableParser = new DataTableParser();
+
+		/// <summary>
+		/// A parser for DEM_STRINGTABLES-Packets
+		/// </summary>
+		StringTableParser StringTables = new StringTableParser();
+
+		/// <summary>
+		/// This maps an ServerClass to an Equipment. 
+		/// Note that this is wrong for the CZ,M4A1 and USP-S, there is an additional fix for those
+		/// </summary>
+		internal Dictionary<ServerClass, EquipmentElement> equipmentMapping = new Dictionary<ServerClass, EquipmentElement>();
+
+		internal Dictionary<int, Player> Players = new Dictionary<int, Player>();
+
+		/// <summary>
 		/// Containing info about players, accessible by the entity-id
 		/// </summary>
-		public Player[] PlayerInformations = new Player[64];
+		internal Player[] PlayerInformations = new Player[MAXPLAYERS];
 
 		/// <summary>
 		/// Contains information about the players, accessible by the userid. 
 		/// </summary>
-		public PlayerInfo[] RawPlayers = new PlayerInfo[64];
-
-		const int MAX_EDICT_BITS = 11;
-		internal const int INDEX_MASK = ( ( 1 << MAX_EDICT_BITS ) - 1 );
-		internal const int MAX_ENTITIES = ( ( 1 << MAX_EDICT_BITS ) );
+		internal PlayerInfo[] RawPlayers = new PlayerInfo[MAXPLAYERS];
 
 		/// <summary>
 		/// All entities currently alive in the demo. 
@@ -232,7 +232,7 @@ namespace DemoInfo
 		/// <summary>
 		/// The string tables sent by the server. 
 		/// </summary>
-		public List<CreateStringTable> stringTables = new List<CreateStringTable>();
+		internal List<CreateStringTable> stringTables = new List<CreateStringTable>();
 
 
 		/// <summary>
@@ -336,11 +336,6 @@ namespace DemoInfo
 		public DemoParser(Stream input)
 		{
 			BitStream = BitStreamUtil.Create(input);
-		}
-
-		[Obsolete("Use ParserHeader() and afterwards ParseToEnd() or ParseNextTick() please", true)]
-		public void ParseDemo(bool fullParse)
-		{
 
 		}
 
@@ -378,6 +373,7 @@ namespace DemoInfo
 					p.Name = rawPlayer.Name;
 					p.SteamID = rawPlayer.XUID;
 
+					//it is weird that this is the entity-id, since this is used nowhere else
 					if (p.IsAlive) {
 						p.LastAlivePosition = p.Position.Copy();
 					}
@@ -596,9 +592,7 @@ namespace DemoInfo
 
 		private void HandlePlayers()
 		{
-			SendTableParser.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => 
-			{
-				HandleNewPlayer(e.Entity);
+			SendTableParser.FindByName("CCSPlayer").OnNewEntity += (object sender, EntityCreatedEventArgs e) => HandleNewPlayer (e.Entity);
 			};
 		}
 
@@ -666,9 +660,9 @@ namespace DemoInfo
 				weaponPrefix = "bcc_nonlocaldata.m_hMyWeapons.";
 
 
-			int[] cache = new int[64];
+			int[] cache = new int[MAXWEAPONS];
 
-			for(int i = 0; i < 64; i++)
+			for(int i = 0; i < MAXWEAPONS; i++)
 			{
 				int iForTheMethod = i; //Because else i is passed as reference to the delegate. 
 
@@ -691,11 +685,6 @@ namespace DemoInfo
 							p.rawWeapons[cache[iForTheMethod]].Owner = null;
 						}
 						p.rawWeapons.Remove(cache[iForTheMethod]);
-
-						if(p.rawWeapons.Count == 0)
-						{
-
-						}
 
 						cache[iForTheMethod] = 0;
 					}
@@ -823,7 +812,7 @@ namespace DemoInfo
 				Entity entity = Entities [i];
 
 				if (entity == null)
-					break;
+					continue;
 
 				res.Append("Entity " + i + ": " + entity.ServerClass.Name + " (inherits: ");
 
