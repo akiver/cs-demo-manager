@@ -312,17 +312,32 @@ namespace DemoInfo
 		/// </summary>
 		internal Dictionary<int, byte[]> instanceBaseline = new Dictionary<int, byte[]>();
 
-
+		/// <summary>
+		/// The tickrate *of the demo* (16 for normal GOTV-demos)
+		/// </summary>
+		/// <value>The tick rate.</value>
 		public float TickRate {
 			get { return this.Header.PlaybackFrames / this.Header.PlaybackTime; }
 		}
 
+		/// <summary>
+		/// How long a tick of the demo is in s^-1
+		/// </summary>
+		/// <value>The tick time.</value>
 		public float TickTime {
 			get { return this.Header.PlaybackTime / this.Header.PlaybackFrames; }
    		}
 
 		/// <summary>
-		/// The current tick the demo has seen. So if it's a 16-tick demo, 
+		/// Gets the parsing progess. 0 = beginning, ~1 = finished (it can actually be > 1, so be careful!)
+		/// </summary>
+		/// <value>The parsing progess.</value>
+		public float ParsingProgess {
+			get { return (CurrentTick / TickRate) / (Header.PlaybackTime); }
+		}
+
+		/// <summary>
+		/// The current tick the parser has seen. So if it's a 16-tick demo, 
 		/// it will have 16 after one second. 
 		/// </summary>
 		/// <value>The current tick.</value>
