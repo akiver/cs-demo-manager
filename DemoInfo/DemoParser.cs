@@ -691,7 +691,7 @@ namespace DemoInfo
 					};
 
 					playerResources.Entity.FindProperty("m_iAssists."+iString).IntRecived += (sender, e) => {
-						additionalInformations[iForTheMethod].Deaths = e.Value;
+						additionalInformations[iForTheMethod].Assists = e.Value;
 					};
 
 					playerResources.Entity.FindProperty("m_iMVPs."+iString).IntRecived += (sender, e) => {

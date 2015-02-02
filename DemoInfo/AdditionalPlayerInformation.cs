@@ -15,6 +15,7 @@ namespace DemoInfo
 	{
 		public int Kills { get; internal set; }
 		public int Deaths { get; internal set; }
+		public int Assists { get; internal set; }
 		public int Score { get; internal set; }
 		public int MVPs { get; internal set; }
 		public int Ping { get; internal set; }
