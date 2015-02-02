@@ -31,34 +31,34 @@ For starting parsing, you first need to parse the Header of the Demo by calling 
  * Position
  * View-Direction
  * HP
- * ID of his Entity-Object
  * Wether he is alive
- * His Team (CT / T / Spec)
- * His weapons
+ * The players team (CT / T / Spectator)
+ * The players weapons
  * Kills
  * Deaths
  * Assists
  * MVPs
  * Score
  * Money
-    * Current Money
-    * Current Equipment Value
+    * Current money
+    * Current equipment value
 * Scores
-* Team-Names
-* The following Game-Events: 
- * Exploding / Starting / Stopping of the following Nades: 
-    * Grenade (Position, Throwing player)
-    * Smoke (Position, Throwing player, when did it start, when did it stop)
-    * Fire (Position, ~~Throwing player~~, when did it start, when did it stop)
-    * Flash (Position, Throwing player, Flashed Players)
- * Weapon fired (Who fired, what weapon^1, position)
- * Player died (Weapon, Killer, Killed Person, Weapon, Position)
- * Round Start
- * Match Start
+* Team-names
+* The following game-events: 
+ * Exploding / starting / stopping of the following nades: 
+    * Grenade (position, throwing player)
+    * Smoke (position, throwing player, when did it start, when did it stop)
+    * Fire (position, ~~throwing player~~[1], when did it start, when did it stop)
+    * Flash (position, throwing player, flashed players)
+ * Weapon fired (who fired, what weapon[2], position)
+ * Player died (weapon, killer, victim, weapon, position)
+ * Round start
+ * Match start
  * End of Freezetime
  * Bomb-Events
- * We're working on more! - Include your own, see ``DP/Handler/GameEventHandler.cs`` for how to implement those, and create a pull-request! 
+ * 
+[1] This is not networked for some odd reason. 
 
-[1] This is actually pretty tricky since, for example the USP and the CZ are actually networked with the same class. We use some dark magic to find out what is the correct weapon. 
+[2] This is actually pretty tricky since, for example the USP and the CZ are actually networked with the same class. We use some dark magic to find out what is the correct weapon. 
   
  Any questions? Contact me per mail or just join #demoinfogo on QuakeNet. 
