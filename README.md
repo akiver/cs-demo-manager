@@ -10,46 +10,55 @@ We now have a fancy IRC-Channel. Join [#demoinfogo](http://webchat.quakenet.org/
 
 ##Usage
 Include the DemoInfo-Project. You can then can create an instance of the ``DemoParser``-Class. 
-
-	DemoParser parser = new DemoParser(File.OpenRead("file.dem"));
-    
+```csharp
+DemoParser parser = new DemoParser(File.OpenRead("file.dem"));
+```
 Then you can subscribe to events: 
-
-	parser.TickDone += parser_TickDone;
-	parser.MatchStarted += parser_MatchStarted;
-	parser.PlayerKilled += HandlePlayerKilled;
-	parser.WeaponFired += HandleWeaponFired;
-    
-For starting parsing, you can call the ``ParseDemo``-Method of the parser. You can either parse the whole demo (then you call ``parser.ParseDemo(true)``), or parse tick by tick. (then call ``parser.ParseDemo(false)``, and repeatedly ``parser.ParseNextTick ()`` to parse the next tick. The method returns true as long as there is an other tick. 
+```csharp
+parser.TickDone += parser_TickDone;
+parser.MatchStarted += parser_MatchStarted;
+parser.PlayerKilled += HandlePlayerKilled;
+parser.WeaponFired += HandleWeaponFired;
+```
+For starting parsing, you first need to parse the Header of the Demo by calling the ``ParsHeader``-Method of the ``DemoParser``. You can either parse the whole demo (then you call ``parser.ParseToEnd()``), or parse tick by tick. (then call  repeatedly ``parser.ParseNextTick ()`` to parse the next tick). The method returns ``true`` as long as there is an other tick. 
 
 ##Features 
-* Get Informations about each player:
+* Get Informations about each player at any point in time: 
  * Name
  * SteamID
- * Position (Where he died)
+ * Team
+ * Clantag
+ * Position
  * View-Direction
  * HP
  * ID of his Entity-Object
  * Wether he is alive
  * His Team (CT / T / Spec)
  * His weapons
- * Still work in progress:
-   * Kills
-   * Deaths
-   * ...
-
-* Team-Scores
- 
+ * Kills
+ * Deaths
+ * Assists
+ * MVPs
+ * Score
+ * Money
+    * Current Money
+    * Current Equipment Value
+* Scores
+* Team-Names
 * The following Game-Events: 
  * Exploding / Starting / Stopping of the following Nades: 
-   * Grenade (Position, Throwing player)
+    * Grenade (Position, Throwing player)
     * Smoke (Position, Throwing player, when did it start, when did it stop)
     * Fire (Position, ~~Throwing player~~, when did it start, when did it stop)
     * Flash (Position, Throwing player, Flashed Players)
- * Weapon fired (Who fired, what weapon)
- * Player died (Weapon, Killer, Killed Person
- * Round-Restart if it's the first round
+ * Weapon fired (Who fired, what weapon^1, position)
+ * Player died (Weapon, Killer, Killed Person, Weapon, Position)
+ * Round Start
+ * Match Start
+ * End of Freezetime
  * Bomb-Events
- * *I'm working on more! - Include your own, see ``DP/Handler/GameEventHandler.cs`` for how to implement those, and create a pull-request! 
+ * We're working on more! - Include your own, see ``DP/Handler/GameEventHandler.cs`` for how to implement those, and create a pull-request! 
+
+[1] This is actually pretty tricky since, for example the USP and the CZ are actually networked with the same class. We use some dark magic to find out what is the correct weapon. 
   
- Any questions? Contact me on GitHub!
+ Any questions? Contact me per mail or just join #demoinfogo on QuakeNet. 
