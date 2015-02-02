@@ -651,7 +651,7 @@ namespace DemoInfo
 					{
 						CTClanName = recivedClanName.Value;
 					}
-					else if(team == "T")
+					else if(team == "TERRORIST")
 					{
 						TClanName = recivedClanName.Value;
 					}
@@ -689,6 +689,7 @@ namespace DemoInfo
 					playerResources.Entity.FindProperty("m_iDeaths."+iString).IntRecived += (sender, e) => {
 						additionalInformations[iForTheMethod].Deaths = e.Value;
 					};
+
 
 					playerResources.Entity.FindProperty("m_iAssists."+iString).IntRecived += (sender, e) => {
 						additionalInformations[iForTheMethod].Assists = e.Value;
