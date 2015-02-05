@@ -149,7 +149,7 @@ namespace DemoInfo
 
 		public int ReserveAmmo {
 			get {
-				return Owner.AmmoLeft [AmmoType];
+				return (Owner != null || AmmoType == -1) ? Owner.AmmoLeft [AmmoType] : -1;
 			}
 		}
 
