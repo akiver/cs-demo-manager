@@ -300,7 +300,6 @@ namespace DemoInfo
 			private set;
 		}
 
-		#region Context for GameEventHandler
 		/// <summary>
 		/// And GameEvent is just sent with ID |--> Value, but we need Name |--> Value. 
 		/// Luckily these contain a map ID |--> Name.
@@ -312,7 +311,6 @@ namespace DemoInfo
 		/// </summary>
 		internal List<Player> GEH_BlindPlayers = new List<Player>();
 
-		#endregion
 		// These could be Dictionary<int, RecordedPropertyUpdate[]>, but I was too lazy to
 		// define that class. Also: It doesn't matter anyways, we always have to cast.
 
@@ -485,36 +483,12 @@ namespace DemoInfo
 				BitStream.EndChunk();
 				break;
 			case DemoCommand.DataTables:
-				BitStream.BeginChunk(BitStream.ReadSignedInt(32) * 8);
-				SendTableParser.ParsePacket(BitStream);
-				BitStream.EndChunk();
+				BitStream.BeginChunk (BitStream.ReadSignedInt (32) * 8);
+				SendTableParser.ParsePacket (BitStream);
+				BitStream.EndChunk ();
 
 				//Map the weapons in the equipmentMapping-Dictionary.
-				for (int i = 0; i < SendTableParser.ServerClasses.Count; i++) {
-					var sc = SendTableParser.ServerClasses[i];
-
-					if (sc.BaseClasses.Count > 6 && sc.BaseClasses [6].Name == "CWeaponCSBase") { 
-						//It is a "weapon" (Gun, C4, ... (...is the cz still a "weapon" after the nerf? (fml, it was buffed again)))
-						if (sc.BaseClasses.Count > 7) {
-							if (sc.BaseClasses [7].Name == "CWeaponCSBaseGun") {
-								//it is a ratatatata-weapon.
-								var s = sc.DTName.Substring (9).ToLower ();
-								equipmentMapping.Add (sc, Equipment.MapEquipment (s));
-							} else if (sc.BaseClasses [7].Name == "CBaseCSGrenade") {
-								//"boom"-weapon. 
-								equipmentMapping.Add (sc, Equipment.MapEquipment (sc.DTName.Substring (3).ToLower ()));
-							} 
-						} else if (sc.Name == "CC4") {
-							//Bomb is neither "ratatata" nor "boom", its "booooooom".
-							equipmentMapping.Add (sc, EquipmentElement.Bomb);
-						} else if (sc.Name == "CKnife" || (sc.BaseClasses.Count > 6 && sc.BaseClasses [6].Name == "CKnife")) {
-							//tsching weapon
-							equipmentMapping.Add (sc, EquipmentElement.Knife);
-						} else if (sc.Name == "CWeaponNOVA" || sc.Name == "CWeaponSawedoff" || sc.Name == "CWeaponXM1014") {
-							equipmentMapping.Add (sc, Equipment.MapEquipment (sc.Name.Substring (7).ToLower()));
-						}
-					}
-				}
+				MapEquipment ();
 
 				//And now we have the entities, we can bind events on them. 
 				BindEntites();
@@ -825,6 +799,36 @@ namespace DemoInfo
 				};
 			}
 
+
+		}
+
+		private void MapEquipment()
+		{				
+			for (int i = 0; i < SendTableParser.ServerClasses.Count; i++) {
+				var sc = SendTableParser.ServerClasses[i];
+
+				if (sc.BaseClasses.Count > 6 && sc.BaseClasses [6].Name == "CWeaponCSBase") { 
+					//It is a "weapon" (Gun, C4, ... (...is the cz still a "weapon" after the nerf? (fml, it was buffed again)))
+					if (sc.BaseClasses.Count > 7) {
+						if (sc.BaseClasses [7].Name == "CWeaponCSBaseGun") {
+							//it is a ratatatata-weapon.
+							var s = sc.DTName.Substring (9).ToLower ();
+							equipmentMapping.Add (sc, Equipment.MapEquipment (s));
+						} else if (sc.BaseClasses [7].Name == "CBaseCSGrenade") {
+							//"boom"-weapon. 
+							equipmentMapping.Add (sc, Equipment.MapEquipment (sc.DTName.Substring (3).ToLower ()));
+						} 
+					} else if (sc.Name == "CC4") {
+						//Bomb is neither "ratatata" nor "boom", its "booooooom".
+						equipmentMapping.Add (sc, EquipmentElement.Bomb);
+					} else if (sc.Name == "CKnife" || (sc.BaseClasses.Count > 6 && sc.BaseClasses [6].Name == "CKnife")) {
+						//tsching weapon
+						equipmentMapping.Add (sc, EquipmentElement.Knife);
+					} else if (sc.Name == "CWeaponNOVA" || sc.Name == "CWeaponSawedoff" || sc.Name == "CWeaponXM1014") {
+						equipmentMapping.Add (sc, Equipment.MapEquipment (sc.Name.Substring (7).ToLower()));
+					}
+				}
+			}
 
 		}
 
