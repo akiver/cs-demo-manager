@@ -246,7 +246,7 @@ namespace DemoInfo
 		/// An map entity <-> weapon. Used to remember whether a weapon is a p250, 
 		/// how much ammonition it has, etc. 
 		/// </summary>
-		Equipment[] weapons = new Equipment[1024];
+		Equipment[] weapons = new Equipment[MAX_ENTITIES];
 
 		/// <summary>
 		/// The indicies of the bombsites - useful to find out
@@ -843,7 +843,7 @@ namespace DemoInfo
 
 		void HandleWeapons ()
 		{
-			for (int i = 0; i < 1024; i++) {
+			for (int i = 0; i < MAX_ENTITIES; i++) {
 				weapons [i] = new Equipment ();
 			}
 
