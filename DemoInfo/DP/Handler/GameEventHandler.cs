@@ -129,11 +129,14 @@ namespace DemoInfo.DP.Handler
 				#endregion
 			
 			case "player_connect":
-				data = MapData(eventDescriptor, rawEvent);
+				data = MapData (eventDescriptor, rawEvent);
 
-				PlayerInfo player = new PlayerInfo();
-				player.UserID = (int)data["userid"];
-				player.Name = (string)data["name"];
+				PlayerInfo player = new PlayerInfo ();
+				player.UserID = (int)data ["userid"];
+				player.Name = (string)data ["name"];
+				player.GUID = (string)data ["networkid"];
+				player.XUID = player.GUID == "BOT" ? 0 : GetCommunityID (player.GUID);
+
 
 				//player.IsFakePlayer = (bool)data["bot"];
 
@@ -251,6 +254,13 @@ namespace DemoInfo.DP.Handler
 				data.Add(eventDescriptor.Keys[i].Name, rawEvent.Keys[i]);
 
 			return data;
+		}
+
+		private static long GetCommunityID(string steamID)
+		{
+			long authServer = Convert.ToInt64(steamID.Substring(8, 1));
+			long authID = Convert.ToInt64(steamID.Substring(10));
+			return (76561197960265728 + (authID * 2) + authServer);
 		}
 	}
 }
