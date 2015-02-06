@@ -982,14 +982,14 @@ namespace DemoInfo
 				MatchStarted(this, new MatchStartedEventArgs());
 		}
 
-		public void RaiseRoundStart()
+		internal void RaiseRoundStart()
 		{
 			if (RoundStart != null)
 				RoundStart(this, new RoundStartedEventArgs());
 
 		}
 
-		public void RaiseFreezetimeEnded ()
+		internal void RaiseFreezetimeEnded ()
 		{
 			if (FreezetimeEnded != null)
 				FreezetimeEnded(this, new FreezetimeEndedEventArgs());
