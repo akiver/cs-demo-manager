@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>DemoInfo</id>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <authors>EHVAG</authors>
     <owners>EHVAG</owners>
     <licenseUrl>https://github.com/moritzuehling/demoinfo-public/blob/master/License.txt</licenseUrl>
