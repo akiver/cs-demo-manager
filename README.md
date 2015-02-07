@@ -8,19 +8,13 @@ This is a C#-Library that makes reading CS:GO-Demos and analyzing them easier.
 
 We now have a fancy IRC-Channel. Join [#demoinfogo](http://webchat.quakenet.org/?channels=demoinfogo) on Quakenet. If no one is there, you might want to try [#dota2replay](http://webchat.quakenet.org/?channels=dota2ŕeplay), the parsing of demos is pretty similar between those two games (There are some differences in how the field-headers are stored in the packet-entites, however).
 
+##nuget-package
+We now have an official nuget-package! See https://www.nuget.org/packages/DemoInfo/
+
+
+
 ##Usage
-Include the DemoInfo-Project. You can then can create an instance of the ``DemoParser``-Class. 
-```csharp
-DemoParser parser = new DemoParser(File.OpenRead("file.dem"));
-```
-Then you can subscribe to events: 
-```csharp
-parser.TickDone += parser_TickDone;
-parser.MatchStarted += parser_MatchStarted;
-parser.PlayerKilled += HandlePlayerKilled;
-parser.WeaponFired += HandleWeaponFired;
-```
-For starting parsing, you first need to parse the Header of the Demo by calling the ``ParsHeader``-Method of the ``DemoParser``. You can either parse the whole demo (then you call ``parser.ParseToEnd()``), or parse tick by tick. (then call  repeatedly ``parser.ParseNextTick ()`` to parse the next tick). The method returns ``true`` as long as there is an other tick. 
+Refer to [this guide](https://github.com/moritzuehling/demostatistics-generator/blob/master/README.md#usage-of-demoinfo-public). There is also an example-project where you can see the parser in action!
 
 ##Features 
 * Get Informations about each player at any point in time: 
