@@ -46,6 +46,12 @@ namespace DemoInfo
 		public event EventHandler<RoundStartedEventArgs> RoundStart;
 
 		/// <summary>
+		/// Occurs when round ends
+		/// </summary>
+		public event EventHandler<RoundEndedEventArgs> RoundEnd;
+
+
+		/// <summary>
 		/// Occurs when freezetime ended. Raised on "round_freeze_end" 
 		/// </summary>
 		public event EventHandler<FreezetimeEndedEventArgs> FreezetimeEnded;
@@ -986,6 +992,13 @@ namespace DemoInfo
 		{
 			if (RoundStart != null)
 				RoundStart(this, new RoundStartedEventArgs());
+
+		}
+
+		internal void RaiseRoundEnd()
+		{
+			if (RoundEnd != null)
+				RoundEnd(this, new RoundEndedEventArgs());
 
 		}
 

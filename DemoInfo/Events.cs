@@ -26,6 +26,10 @@ namespace DemoInfo
 
 	}
 
+	public class RoundEndedEventArgs : EventArgs
+	{
+	}
+
 	public class RoundStartedEventArgs : EventArgs
 	{
 	}
