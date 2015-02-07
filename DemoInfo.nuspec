@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>DemoInfo</id>
+    <version>1.0.0</version>
+    <authors>EHVAG</authors>
+    <owners>EHVAG</owners>
+    <licenseUrl>https://github.com/moritzuehling/demoinfo-public/blob/master/License.txt</licenseUrl>
+    <projectUrl>https://github.com/moritzuehling/demoinfo-public/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This is a C#-Library that makes reading CS:GO-Demos and analyzing them easier.</description>
+    <releaseNotes>Initial nuget release.</releaseNotes>
+    <tags>csgo demoinfo demoinfo-public</tags>
+  </metadata>
+  <files>
+    <file src="DemoInfo/bin/Release/DemoInfo.dll" target="lib/net45" />
+  </files>
+</package>
