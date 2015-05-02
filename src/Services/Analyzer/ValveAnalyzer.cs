@@ -279,7 +279,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					else
 					{
 						// Regular kill
-						if (!killEvent.Killer.IsControllingBot) killEvent.Killer.KillsCount++;
+						if (!killEvent.Killer.IsControllingBot)
+						{
+							killEvent.Killer.KillsCount++;
+							if(e.Headshot) killEvent.Killer.HeadshotCount++;
+						}
 						if (!killEvent.DeathPerson.IsControllingBot) killEvent.DeathPerson.DeathCount++;
 					}
 				}
@@ -300,7 +304,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					else
 					{
 						// Regular kill
-						if (!killEvent.Killer.IsControllingBot) killEvent.Killer.KillsCount++;
+						if (!killEvent.Killer.IsControllingBot)
+						{
+							killEvent.Killer.KillsCount++;
+							if (e.Headshot) killEvent.Killer.HeadshotCount++;
+						}
 					}
 				}
 			}
