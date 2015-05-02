@@ -2,7 +2,6 @@
 using System.IO;
 using System.Collections.ObjectModel;
 using System;
-using System.Linq;
 
 namespace CSGO_Demos_Manager
 {
