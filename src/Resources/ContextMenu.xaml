@@ -1,0 +1,68 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:vm="clr-namespace:CSGO_Demos_Manager.ViewModel">
+
+	<vm:ViewModelLocator x:Key="Locator" />
+
+	<ContextMenu x:Key="DemoRowContextMenu">
+		<MenuItem Header="Details"
+							  Command="{Binding Home.ShowDemoDetailsCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Home.SelectedDemo, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Analyze"
+							  Command="{Binding Home.AnalyzeDemosCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Home.SelectedDemos, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Browse"
+							  Command="{Binding Home.BrowseToDemoCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Home.SelectedDemo, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Status">
+			<MenuItem Header="None"
+								  Command="{Binding Home.SaveStatusDemoCommand, Source={StaticResource Locator}}"
+								  CommandParameter="none" />
+			<MenuItem Header="To Watch"
+								  Command="{Binding Home.SaveStatusDemoCommand, Source={StaticResource Locator}}"
+								  CommandParameter="towatch" />
+			<MenuItem Header="Watched"
+								  Command="{Binding Home.SaveStatusDemoCommand, Source={StaticResource Locator}}"
+								  CommandParameter="watched" />
+		</MenuItem>
+		<MenuItem Header="Source">
+			<MenuItem Header="Valve"
+								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
+								  CommandParameter="valve" />
+			<MenuItem Header="Esea"
+								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
+								  CommandParameter="esea" />
+			<MenuItem Header="eBot"
+								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
+								  CommandParameter="ebot" />
+		</MenuItem>
+	</ContextMenu>
+
+	<ContextMenu x:Key="SuspectRowContextMenu">
+		<MenuItem Header="Profile"
+							  Command="{Binding Suspects.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Suspects.SelectedSuspect, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Remove"
+							  Command="{Binding Suspects.RemoveSuspectCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Suspects.SelectedSuspect, Source={StaticResource Locator}}"/>
+	</ContextMenu>
+
+	<ContextMenu x:Key="PlayerTeam1RowContextMenu">
+		<MenuItem Header="Profile"
+							  Command="{Binding Details.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Add to suspect list"
+							  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+	</ContextMenu>
+
+	<ContextMenu x:Key="PlayerTeam2RowContextMenu">
+		<MenuItem Header="Profile"
+							  Command="{Binding Details.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Add to suspect list"
+							  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
+	</ContextMenu>
+
+</ResourceDictionary>

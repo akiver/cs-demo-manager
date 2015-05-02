@@ -1,0 +1,102 @@
+﻿<UserControl x:Class="CSGO_Demos_Manager.Views.HeatmapView"
+			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+			 Background="{StaticResource LightGreyBrush}"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720" d:DesignWidth="1280"
+			 DataContext="{Binding Heatmap, Source={StaticResource Locator}}">
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding GenerateCommand}"
+					Gesture="CTRL+G" />
+		<KeyBinding Command="{Binding ExportCommand}"
+					Gesture="CTRL+S" />
+	</UserControl.InputBindings>
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<!-- ActionBar-->
+		<Grid Grid.Row="0" Margin="5">
+			<StackPanel Orientation="Horizontal">
+
+				<Button Margin="10"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					Width="70"
+					Height="30"
+					Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					ToolTip="Back (CTRL+B)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<ComboBox
+					ItemsSource="{Binding HeatmapSelectors}"
+					SelectedItem="{Binding CurrentHeatmapSelector}"
+					DisplayMemberPath ="Title"
+					SelectedValuePath="Title"
+					Width="180" Height="25" Margin="5 0 0 0"/>
+
+				<Button Command="{Binding GenerateCommand}"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					ToolTip="Generate heatmap (CTRL+G)"
+					Width="90"
+					Height="30" Margin="10 0 0 0">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_draw_pixel_fill_grid}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Generate" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Command="{Binding ExportCommand}"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					ToolTip="Save as PNG (CTRL+S)"
+					Width="80"
+					Height="30" Margin="10 0 0 0">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_page_png}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Export" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+					<controls:ProgressRing 
+						IsActive="{Binding IsGenerating}"
+						Foreground="{DynamicResource AccentColorBrush}"
+						Width="40" Height="40" />
+					<TextBlock Text="Generating..."
+							   Style="{StaticResource LabelGeneralInfoDemo}"
+							   Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				</StackPanel>
+
+			</StackPanel>
+		</Grid>
+
+		<cefSharp:ChromiumWebBrowser x:Name="HeatmapBrowser" Grid.Row="1"
+									 WebBrowser="{Binding HeatmapBrowser, Mode=OneWayToSource}"
+									 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+									 Width="Auto" Height="Auto" Margin="10" />
+	</Grid>
+</UserControl>

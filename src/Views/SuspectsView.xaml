@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="CSGO_Demos_Manager.Views.SuspectsView"
+		xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+		xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+		xmlns:helpers="clr-namespace:CSGO_Demos_Manager.Converters"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		Background="{StaticResource LightGreyBrush}"
+		mc:Ignorable="d"
+		d:DesignHeight="720" d:DesignWidth="1280"
+		DataContext="{Binding Suspects, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<helpers:RowSuspectDoubleClickedToProfileConverter 
+				x:Key="RowSuspectDoubleClickedToProfile" />
+			<helpers:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding RefreshSuspectListCommand}"
+					Gesture="CTRL+R" />
+	</UserControl.InputBindings>
+	
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<StackPanel Orientation="Horizontal">
+
+				<Button Margin="10 0 5 0"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					Width="70"
+					Height="30"
+					Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+				
+				<TextBox x:Name="SuspectSteamCommunityLinkTextBox"
+						 controls:TextBoxHelper.Watermark="Steam community URL or SteamID 64"
+						 Height="20" Margin="0 0 10 0"
+						 MinWidth="350"
+						 VerticalAlignment="Center"
+						 HorizontalAlignment="Right"
+						 Text="{Binding SuspectSteamCommunityUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+				<Button Margin="10"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					Width="110" Height="30"
+					Command="{Binding AddSuspectCommand}"
+					CommandParameter="{Binding Path=Text, ElementName=SuspectSteamCommunityLinkTextBox}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_user_add}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Add a suspect" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					Width="120"
+					Height="30"
+					Command="{Binding RemoveSuspectCommand}"
+					CommandParameter="{Binding SelectedSuspect}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_user_delete}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Remove suspect" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					Width="80"
+					Height="30"
+					Command="{Binding GoToSuspectProfileCommand}"
+					CommandParameter="{Binding SelectedSuspect}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_user}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Profile" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					Width="80"
+					Height="30"
+					ToolTip="Refresh list (CTRL+R)"
+					Command="{Binding RefreshSuspectListCommand}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_refresh}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<StackPanel Orientation="Horizontal">
+					<controls:ProgressRing 
+						IsActive="{Binding IsRefreshing}"
+						Foreground="{DynamicResource AccentColorBrush}"
+						Width="40" Height="40" />
+					<TextBlock Text="Refreshing..."
+							   Style="{StaticResource LabelGeneralInfoDemo}"
+							   Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+		
+		<DataGrid Grid.Row="1"
+				  x:Name="DataGridSuspects"
+				  ItemsSource="{Binding Suspects}"
+				  SelectedItem="{Binding SelectedSuspect}"
+				  CellStyle="{StaticResource DataGridCellSuspectStyle}"
+				  RowStyle="{StaticResource DataGridRowSuspectsListStyle}"
+				  Style="{StaticResource DemosDataGridStyle}" HorizontalGridLinesBrush="{x:Null}">
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseDoubleClick">
+					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Suspects.GoToSuspectProfileCommand}"
+														 PassEventArgsToCommand="True"
+														 EventArgsConverter="{StaticResource RowSuspectDoubleClickedToProfile}"
+														 EventArgsConverterParameter="{Binding SelectedSuspect}"/>
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Header="Avatar" Width="Auto">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Image Source="{Binding AvatarUrl}" Height="42" Width="42" />
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="NicknameColumn" Width="Auto" Header="Nickname" Binding="{Binding Nickname}" />
+				<DataGridTextColumn x:Name="ProfileColumn" Width="Auto" Header="Profile" Binding="{Binding ProfileUrl}" />
+				<DataGridTextColumn x:Name="StatusColumn" Width="Auto" Header="Status" Binding="{Binding CurrentStatusString}" />
+				<DataGridTextColumn x:Name="PublicProfileColumn" Width="Auto" Header="Profile Visibility" Binding="{Binding PublicProfile}" />
+				<DataGridTextColumn x:Name="LastLogOffColumn" Width="Auto" Header="Last Connection" Binding="{Binding LastLogOffDate}" />
+				<DataGridTextColumn x:Name="ProfileConfiguredColumn" Width="Auto" Header="Profile setup" Binding="{Binding ProfileStateString}" />
+				<DataGridTextColumn x:Name="VacBannedColumn" Width="Auto" Header="VAC Banned" Binding="{Binding VacBanned, Converter={StaticResource BooleanToStringConverter}}" />
+				<DataGridTextColumn x:Name="BanCountColumn" Width="Auto" Header="Ban Count" Binding="{Binding BanCount}" />
+				<DataGridTextColumn x:Name="DaySinceLastBanCountColumn" Width="Auto" Header="DSLB" Binding="{Binding DaySinceLastBanCount}" HeaderStyle="{StaticResource DaySinceLastBanHeader}"/>
+				<DataGridTextColumn x:Name="CommunityBannedColumn" Width="Auto" Header="Community Banned" Binding="{Binding CommunityBanned, Converter={StaticResource BooleanToStringConverter}}" />
+				<DataGridTextColumn x:Name="EconomyBannedColumn" Width="Auto" Header="Economy Banned" Binding="{Binding EconomyBan}" />
+			</DataGrid.Columns>
+		</DataGrid>
+			
+	</Grid>
+</UserControl>

@@ -1,0 +1,31 @@
+<Application x:Class="CSGO_Demos_Manager.App"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 StartupUri="MainWindow.xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 d1P1:Ignorable="d"
+			 xmlns:d1P1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+	<Application.Resources>
+		
+		<ResourceDictionary>
+			<vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" xmlns:vm="clr-namespace:CSGO_Demos_Manager.ViewModel" />
+
+			<ResourceDictionary.MergedDictionaries>
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Lime.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+				
+				<ResourceDictionary Source="Resources/Icons.xaml" />
+				<ResourceDictionary Source="Resources/Colors.xaml" />
+				<ResourceDictionary Source="Resources/ContextMenu.xaml" />
+				<ResourceDictionary Source="Resources/DataGrids.xaml" />
+				<ResourceDictionary Source="Resources/Textblocks.xaml" />
+				<ResourceDictionary Source="Resources/ListView.xaml" />
+				<ResourceDictionary Source="Resources/ComboBoxs.xaml" />
+				<ResourceDictionary Source="Resources/CheckBoxs.xaml" />
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+</Application>

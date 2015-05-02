@@ -1,0 +1,139 @@
+﻿<controls:MetroWindow x:Class="CSGO_Demos_Manager.MainWindow"
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+		xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
+		xmlns:helpers="clr-namespace:CSGO_Demos_Manager.Converters"
+		Background="{StaticResource LightGreyBrush}"
+		GlowBrush="{StaticResource LightGreenBrush}"
+		Title="CSGO Demos Manager"
+		SaveWindowPosition="True"
+		Loaded="MetroWindow_Loaded"
+		DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+	<controls:MetroWindow.Resources>
+		<ResourceDictionary>
+			<helpers:NullableValueConverter
+				x:Key="NullableValue"/>
+		</ResourceDictionary>
+	</controls:MetroWindow.Resources>
+
+	<controls:MetroWindow.RightWindowCommands>
+		<controls:WindowCommands>
+			<Button Command="{Binding ToggleSettingsFlyOutCommand}"
+					ToolTip="Display settings"
+					Content="Settings" />
+		</controls:WindowCommands>
+	</controls:MetroWindow.RightWindowCommands>
+
+	<Grid>
+		<pageTransitions:PageTransition Content="{Binding CurrentPage }" TransitionType="SlideAndFade" />
+	</Grid>
+
+	<controls:MetroWindow.Flyouts>
+		<controls:FlyoutsControl>
+			<controls:Flyout
+				x:Name="SettingsFlyout"
+				Header="Settings"
+				Position="Right"
+				Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
+				IsOpen="{Binding IsSettingsOpen}"
+				CloseCommand="{Binding SettingsFlyoutClosedCommand}">
+
+				<Grid Margin="20 0 0 0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<Grid Grid.Column="0">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+
+						<StackPanel Margin="10" Grid.Row="0">
+							<TextBlock Text="Launch Options" Style="{StaticResource TitleSettingsStyle}" />
+							<StackPanel Orientation="Vertical">
+								<CheckBox Content="Fullscreen"
+										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionFullscreen}" />
+
+								<Label Target="{Binding ElementName=ResolutionWidthTextBox}">Width:</Label>
+								<TextBox x:Name="ResolutionWidthTextBox" PreviewTextInput="NumberPreviewTextInput"
+											Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth, Converter={StaticResource NullableValue}}">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="LostFocus">
+											<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveResolutionWidthCommand}"
+																	CommandParameter="{Binding Path=Text, ElementName=ResolutionWidthTextBox}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</TextBox>
+
+								<Label Target="{Binding ElementName=ResolutionHeightTextBox}">Height:</Label>
+								<TextBox x:Name="ResolutionHeightTextBox"
+											Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionHeight, Converter={StaticResource NullableValue}}"
+											PreviewTextInput="NumberPreviewTextInput">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="LostFocus">
+											<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveResolutionHeightCommand}"
+																	CommandParameter="{Binding Path=Text, ElementName=ResolutionHeightTextBox}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</TextBox>
+
+								<Label Target="{Binding ElementName=SteamIDTextBox}">SteamID:</Label>
+								<TextBox x:Name="SteamIDTextBox"
+											Text="{Binding Source={StaticResource Locator}, Path=Settings.SteamId, Converter={StaticResource NullableValue}}"
+											PreviewTextInput="NumberPreviewTextInput">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="LostFocus">
+											<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveSteamIdCommand}"
+																	CommandParameter="{Binding Path=Text, ElementName=SteamIDTextBox}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</TextBox>
+								
+								<Button Margin="0 5 0 0"
+										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDataCacheCommand}"
+										Style="{StaticResource AccentedSquareButtonStyle}"
+										Content="Clear Data Cache" />
+							</StackPanel>
+						</StackPanel>
+					</Grid>
+
+					<Grid Grid.Column="1">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<Grid Grid.Row="0">
+							<StackPanel Margin="10">
+								<TextBlock Text="Folders options" Style="{StaticResource TitleSettingsStyle}" />
+								<ListView ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}"/>
+								<StackPanel Orientation="Horizontal">
+									<Button Command="{Binding AddFolderCommand}"
+											Style="{StaticResource AccentedSquareButtonStyle}"
+											Margin="0 5 0 0">
+										<TextBlock Text="Add folder" Style="{StaticResource ButtonTitleStyle}" />
+									</Button>
+									<Button Command="{Binding RemoveFolderCommand}"
+											CommandParameter="{Binding Path=SelectedFolder}"
+											Style="{StaticResource AccentedSquareButtonStyle}"
+											Margin="10 5 0 0">
+										<TextBlock Text="Remove folder" Style="{StaticResource ButtonTitleStyle}" />
+									</Button>
+								</StackPanel>
+							</StackPanel>
+						</Grid>
+						<Grid Grid.Row="1">
+							<TextBlock Text="{Binding CreditsText}" Style="{StaticResource CreditsTextStyle}"/>
+						</Grid>
+					</Grid>
+					
+				</Grid>
+			</controls:Flyout>
+		</controls:FlyoutsControl>
+	</controls:MetroWindow.Flyouts>
+</controls:MetroWindow>
