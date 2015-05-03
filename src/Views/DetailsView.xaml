@@ -263,7 +263,7 @@
 					<StackPanel Orientation="Vertical">
 						<StackPanel Orientation="Horizontal">
 							<Image Source="../Resources/images/headshot.png" Width="50" Height="30"/>
-							<TextBlock Text="Most Headshots : " Style="{StaticResource LabelGeneralInfoDemo}" />
+							<TextBlock Text="Most Headshots % : " Style="{StaticResource LabelGeneralInfoDemo}" />
 							<TextBlock Text="{Binding CurrentDemo.MostHeadshotPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
