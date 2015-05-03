@@ -82,7 +82,7 @@
 									</i:Interaction.Triggers>
 								</TextBox>
 
-								<Label Target="{Binding ElementName=SteamIDTextBox}">SteamID:</Label>
+								<Label Target="{Binding ElementName=SteamIDTextBox}">SteamID 64:</Label>
 								<TextBox x:Name="SteamIDTextBox"
 											Text="{Binding Source={StaticResource Locator}, Path=Settings.SteamId, Converter={StaticResource NullableValue}}"
 											PreviewTextInput="NumberPreviewTextInput">
