@@ -21,15 +21,6 @@ namespace CSGO_Demos_Manager
 
 		private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
 		{
-			if (!AppSettings.IsCsgoInstalled())
-			{
-				DispatcherHelper.CheckBeginInvokeOnUI(
-				async () =>
-				{
-					await this.ShowMessageAsync("CSGO Not Found", "CSGO doesn't seems to be installed, you will not be able to launch the game.");
-				});
-			}
-
 			if (Properties.Settings.Default.EnableCheckUpdate)
 			{
 				DispatcherHelper.CheckBeginInvokeOnUI(

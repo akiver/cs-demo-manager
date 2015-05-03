@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.ObjectModel;
 using System;
+using System.Linq;
 
 namespace CSGO_Demos_Manager
 {
@@ -34,18 +35,14 @@ namespace CSGO_Demos_Manager
 		}
 
 		/// <summary>
-		/// Check if CSGO is installed
+		/// Check if CSGO is installed, we do not need to know where it's installed to launch the game
 		/// </summary>
 		/// <returns>bool true if CSGO is installed, false if not.</returns>
 		public static bool IsCsgoInstalled()
 		{
-			bool isInstalled = true;
-			string csgoExe = SteamPath() + "/SteamApps/common/Counter-Strike Global Offensive/csgo.exe";
-			if (!File.Exists(SteamExePath()) || !File.Exists(csgoExe))
-			{
-				isInstalled = false;
-			}
-			return isInstalled;
+			var isInstalled = Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam\Apps\730", "Installed", null);
+			if (isInstalled == null || (int)isInstalled == 0) return false;
+			return true;
 		}
 
 		/// <summary>
@@ -54,12 +51,7 @@ namespace CSGO_Demos_Manager
 		/// <returns></returns>
 		public static string GetCsgoPath()
 		{
-			string csgoPath = SteamPath() + "/SteamApps/common/Counter-Strike Global Offensive/csgo";
-			if (!Directory.Exists(csgoPath))
-			{
-				return Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System));
-			}
-			return csgoPath;
+			return SteamPath() + "/SteamApps/common/Counter-Strike Global Offensive/csgo";
 		}
 
 		/// <summary>
@@ -73,6 +65,12 @@ namespace CSGO_Demos_Manager
 			RegistryKey keyDirectories = Registry.CurrentUser.OpenSubKey("Software\\" + AUTHOR + "\\" + APP_NAME + "\\" + REGISTRY_KEY_DIRECTORIES, true);
 			if (keyDirectories != null)
 			{
+				if (!keyDirectories.GetValueNames().Any())
+				{
+					InitCsgoFolders(folders);
+					return folders;
+				}
+
 				foreach (var v in keyDirectories.GetValueNames())
 				{
 					object value = keyDirectories.GetValue(v);
@@ -91,15 +89,32 @@ namespace CSGO_Demos_Manager
 			{
 				if (IsCsgoInstalled())
 				{
-					// Try to get "csgo" and "replays" folders
-					string csgoPath = GetCsgoPath();
-					AddFolder(csgoPath.ToLower());
-					folders.Add(csgoPath);
-					AddFolder(csgoPath + "/replays".ToLower());
-					folders.Add(csgoPath);
+					InitCsgoFolders(folders);
 				}
 			}
+
 			return folders;
+		}
+
+		/// <summary>
+		/// Add the defaults "csgo" and "replays" folder to the list
+		/// If they doesn't they will not be added
+		/// </summary>
+		/// <param name="folders"></param>
+		private static void AddDefaultFolders(ObservableCollection<string> folders)
+		{
+			string csgoPath = Path.GetFullPath(GetCsgoPath());
+			if (Directory.Exists(csgoPath))
+			{
+				AddFolder(csgoPath);
+				folders.Add(csgoPath);
+			}
+			string replaysPath = Path.GetFullPath(csgoPath + "/replays");
+			if (Directory.Exists(replaysPath))
+			{
+				AddFolder(replaysPath);
+				folders.Add(replaysPath);
+			}
 		}
 
 		/// <summary>
@@ -126,7 +141,7 @@ namespace CSGO_Demos_Manager
 		/// Add a folder to registry
 		/// </summary>
 		/// <param name="path"></param>
-		internal static void AddFolder(string path)
+		internal static bool AddFolder(string path)
 		{
 			RegistryKey keyDirectories = Registry.CurrentUser.OpenSubKey("Software\\" + AUTHOR + "\\" + APP_NAME + "\\" + REGISTRY_KEY_DIRECTORIES, true);
 			if (keyDirectories == null)
@@ -134,9 +149,17 @@ namespace CSGO_Demos_Manager
 				keyDirectories = Registry.CurrentUser.CreateSubKey("Software\\" + AUTHOR + "\\" + APP_NAME + "\\" + REGISTRY_KEY_DIRECTORIES);
 			}
 
-			if (keyDirectories == null) return;
+			if (keyDirectories == null) return false;
+
+			// Don't add it if it's already in the list
+			if (keyDirectories.GetValueNames().Any())
+			{
+				if (keyDirectories.GetValueNames().Any(valueName => string.Compare(valueName, path, StringComparison.InvariantCultureIgnoreCase) == 0)) return false;
+			}
+
 			int nbDirectories = keyDirectories.ValueCount;
-			keyDirectories.SetValue(nbDirectories.ToString(), path.ToLower());
+			keyDirectories.SetValue(nbDirectories.ToString(), path);
+			return true;
 		}
 
 		/// <summary>
@@ -155,6 +178,25 @@ namespace CSGO_Demos_Manager
 			}
 
 			return appDataFolder;
+		}
+
+		/// <summary>
+		/// Set the "csgo" and "replays" folders if they exist
+		/// </summary>
+		public static void InitCsgoFolders(ObservableCollection<string> folders = null)
+		{
+			string csgoFolderPath = Path.GetFullPath(GetCsgoPath()).ToLower();
+			if (Directory.Exists(csgoFolderPath))
+			{
+				AddFolder(csgoFolderPath);
+				folders?.Add(csgoFolderPath);
+			}
+			string replayFolderPath = Path.GetFullPath(csgoFolderPath + "/replays").ToLower();
+			if (Directory.Exists(replayFolderPath))
+			{
+				AddFolder(replayFolderPath);
+				folders?.Add(replayFolderPath);
+			}
 		}
 	}
 }

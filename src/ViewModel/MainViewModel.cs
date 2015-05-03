@@ -1,11 +1,15 @@
+using System;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Windows.Forms;
 using CSGO_Demos_Manager.Views;
 using GalaSoft.MvvmLight.Messaging;
 using WpfPageTransitions;
 using CSGO_Demos_Manager.Messages;
+using CSGO_Demos_Manager.Services;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -31,6 +35,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<string> _removeFolderCommand;
 
 		public string CreditsText => AppSettings.APP_NAME + " " + AppSettings.APP_VERSION + " by " + AppSettings.AUTHOR;
+
+		private readonly DialogService _dialogService;
+
+		private RelayCommand _windowLoadedCommand;
+
+		private RelayCommand _windowClosedCommand;
 
 		#endregion
 
@@ -65,6 +75,45 @@ namespace CSGO_Demos_Manager.ViewModel
 		#region Commands
 
 		/// <summary>
+		/// Command fired when MainWindow is loaded
+		/// </summary>
+		public RelayCommand WindowLoaded
+		{
+			get
+			{
+				return _windowLoadedCommand
+					?? (_windowLoadedCommand = new RelayCommand(
+					async () =>
+					{
+						if (Folders.Count == 0)
+						{
+							await _dialogService.ShowMessageAsync("It seems that CSGO is not installed on your main hard drive. The defaults \"csgo\" and \"replays\" can not be found. Please add folders from the settings.", MessageDialogStyle.Affirmative);
+						}
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command fired when Main Window is loaded
+		/// </summary>
+		public RelayCommand WindowClosed
+		{
+			get
+			{
+				return _windowClosedCommand
+					?? (_windowClosedCommand = new RelayCommand(
+					() =>
+					{
+						if (Folders.Count == 0)
+						{
+							Properties.Settings.Default.LastFolder = "";
+							Properties.Settings.Default.Save();
+						}
+					}));
+			}
+		}
+
+		/// <summary>
 		/// Command to add a new folder
 		/// </summary>
 		public RelayCommand AddFolderCommand
@@ -77,14 +126,17 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						FolderBrowserDialog folderDialog = new FolderBrowserDialog
 						{
-							SelectedPath = AppSettings.GetCsgoPath()
-						};
+							SelectedPath = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System))
+					};
 
 						DialogResult result = folderDialog.ShowDialog();
 						if (result != DialogResult.OK) return;
-						if (Folders.Contains(folderDialog.SelectedPath)) return;
-						Folders.Add(folderDialog.SelectedPath);
-						AppSettings.AddFolder(folderDialog.SelectedPath);
+						string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
+						if (Folders.Contains(path)) return;
+						if (AppSettings.AddFolder(path))
+						{
+							Folders.Add(path);
+						}
 					}));
 			}
 		}
@@ -113,13 +165,15 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public MainViewModel()
+		public MainViewModel(DialogService dialogService)
 		{
+			_dialogService = dialogService;
+
 			CurrentPage = new PageTransition();
 			HomeView homeView = new HomeView();
 			CurrentPage.ShowPage(homeView);
 
-			_folders = AppSettings.GetFolders();
+			Folders = AppSettings.GetFolders();
 
 			ToggleSettingsFlyOutCommand = new RelayCommand(() =>
 			{

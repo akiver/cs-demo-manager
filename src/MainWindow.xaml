@@ -5,6 +5,7 @@
 		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 		xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
 		xmlns:helpers="clr-namespace:CSGO_Demos_Manager.Converters"
+		xmlns:command="http://www.galasoft.ch/mvvmlight"
 		Background="{StaticResource LightGreyBrush}"
 		GlowBrush="{StaticResource LightGreenBrush}"
 		Title="CSGO Demos Manager"
@@ -18,6 +19,15 @@
 				x:Key="NullableValue"/>
 		</ResourceDictionary>
 	</controls:MetroWindow.Resources>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+		<i:EventTrigger EventName="Closed">
+			<command:EventToCommand Command="{Binding WindowClosed, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
 
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
