@@ -115,7 +115,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerOpenNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}" x:Name="TotalOpenKillCountColumn" Width="Auto" Header="Total" Binding="{Binding OpeningKills.Count}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}" x:Name="RoundWinOpenKillCountColumn" Width="Auto" Header="Win" Binding="{Binding OpenKillWinCount}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseOpenKillCountColumn" Width="Auto" Header="Lose" Binding="{Binding OpenKillLooseCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseOpenKillCountColumn" Width="Auto" Header="Loss" Binding="{Binding OpenKillLooseCount}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}" x:Name="RatioOpenKillColumn" Width="Auto" Header="Ratio" Binding="{Binding RatioOpenKillAsString}" />
 								</DataGrid.Columns>
 							</DataGrid>
@@ -139,7 +139,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" x:Name="TeamOpenKillNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}" x:Name="TotalOpenKillTeamCountColumn" Width="Auto" Header="Total" Binding="{Binding OpenKillCount}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}" x:Name="RoundWinOpenKillTeamCountColumn" Width="Auto" Header="Win" Binding="{Binding OpenKillWinCount}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseOpenKillTeamCountColumn" Width="Auto" Header="Lose" Binding="{Binding OpenKillLooseCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseOpenKillTeamCountColumn" Width="Auto" Header="Loss" Binding="{Binding OpenKillLooseCount}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}" x:Name="RatioOpenKillTeamColumn" Width="Auto" Header="Ratio" Binding="{Binding RatioOpenKillAsString}" />
 								</DataGrid.Columns>
 							</DataGrid>
@@ -216,7 +216,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}" x:Name="TotalEntryKillCountColumn" Width="Auto" Header="Total" Binding="{Binding EntryKills.Count}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}" x:Name="RoundWinEntryKillCountColumn" Width="Auto" Header="Win" Binding="{Binding EntryKillWinCount}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseEntryKillCountColumn" Width="Auto" Header="Lose" Binding="{Binding EntryKillLooseCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseEntryKillCountColumn" Width="Auto" Header="Loss" Binding="{Binding EntryKillLooseCount}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}" x:Name="RatioEntryKillColumn" Width="Auto" Header="Ratio" Binding="{Binding RatioEntryKillAsString}" />
 								</DataGrid.Columns>
 							</DataGrid>
@@ -239,7 +239,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" x:Name="TeamNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}" x:Name="TotalEntryKillTeamCountColumn" Width="Auto" Header="Total" Binding="{Binding EntryKillCount}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}" x:Name="RoundWinEntryKillTeamCountColumn" Width="Auto" Header="Win" Binding="{Binding EntryKillWinCount}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseEntryKillTeamCountColumn" Width="Auto" Header="Lose" Binding="{Binding EntryKillLooseCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource RoundLooseHeader}" x:Name="RoundLooseEntryKillTeamCountColumn" Width="Auto" Header="Loss" Binding="{Binding EntryKillLooseCount}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}" x:Name="RatioEntryKillTeamColumn" Width="Auto" Header="Ratio" Binding="{Binding RatioEntryKillAsString}" />
 								</DataGrid.Columns>
 							</DataGrid>

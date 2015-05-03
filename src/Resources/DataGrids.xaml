@@ -264,7 +264,7 @@
 	</Style>
 	
 	<Style TargetType="DataGridColumnHeader" x:Key="RoundLooseHeader">
-		<Setter Property="ToolTipService.ToolTip" Value="Round Lose" />
+		<Setter Property="ToolTipService.ToolTip" Value="Round Loss" />
 	</Style>
 	
 	<Style TargetType="DataGridColumnHeader" x:Key="TotalEntryKillHeader">
