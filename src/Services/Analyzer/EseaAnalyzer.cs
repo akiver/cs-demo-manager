@@ -106,7 +106,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (IsOvertime && _matchStartedCount == 3)
 			{
-				if (IsOvertime && CurrentRound.Number > 32)
+				// Ignore the first OT
+				if (CurrentRound.Number > 32)
 				{
 					if (!_overtimeHasSwapped)
 					{
