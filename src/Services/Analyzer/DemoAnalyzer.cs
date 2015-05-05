@@ -447,6 +447,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		}
 
 		/// <summary>
+		/// Swap players team
+		/// </summary>
+		protected void SwapTeams()
+		{
+			foreach (PlayerExtended pl in Demo.Players)
+			{
+				pl.Team = pl.Team == Team.Terrorist ? Team.CounterTerrorist : Team.Terrorist;
+			}
+		}
+
+		/// <summary>
 		/// Check if there is any clutch situation and if so add clutch to player
 		/// </summary>
 		protected void ProcessClutches()

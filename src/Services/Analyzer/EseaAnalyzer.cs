@@ -14,6 +14,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		// 2 match_started without freeze time ended = match started
 		private int _matchStartedCount;
 
+		// Used to detect swap team on overtime
+		private bool _overtimeHasSwapped;
+
 		// Keep in memory scores to detect when a new side of overtime has begun
 		// On ESEA demos score doesn't change until the match is really in progress
 		private int _previousScoreT;
@@ -103,6 +106,19 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (IsOvertime && _matchStartedCount == 3)
 			{
+				if (IsOvertime && CurrentRound.Number > 32)
+				{
+					if (!_overtimeHasSwapped)
+					{
+						SwapTeams();
+						_overtimeHasSwapped = true;
+					}
+					else
+					{
+						_overtimeHasSwapped = false;
+					}
+				}
+
 				if (IsHalfMatch && CurrentOvertime.ScoreTeam1 != 0 && CurrentOvertime.ScoreTeam2 != 0)
 				{
 					Application.Current.Dispatcher.Invoke(delegate
@@ -170,6 +186,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
 				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
 			});
+
+			// On ESEA demos round_announce_last_round_half isn't raised
+			if (CurrentRound.Number == 15)
+			{
+				Application.Current.Dispatcher.Invoke(SwapTeams);
+			}
+
 		}
 
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)

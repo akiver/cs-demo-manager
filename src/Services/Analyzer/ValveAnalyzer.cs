@@ -190,12 +190,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				Application.Current.Dispatcher.Invoke(delegate
 				{
-					// Swap teams
-					foreach (PlayerExtended pl in Demo.Players)
-					{
-						pl.Team = pl.Team == Team.Terrorist ? Team.CounterTerrorist : Team.Terrorist;
-					}
-
+					SwapTeams();
 					Demo.Rounds.Add(CurrentRound);
 				});
 			}
