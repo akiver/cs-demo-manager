@@ -118,5 +118,53 @@ namespace CSGO_Demos_Manager.Properties {
                 this["SteamID"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowPovDemos {
+            get {
+                return ((bool)(this["ShowPovDemos"]));
+            }
+            set {
+                this["ShowPovDemos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowEbotDemos {
+            get {
+                return ((bool)(this["ShowEbotDemos"]));
+            }
+            set {
+                this["ShowEbotDemos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowEseaDemos {
+            get {
+                return ((bool)(this["ShowEseaDemos"]));
+            }
+            set {
+                this["ShowEseaDemos"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowValveDemos {
+            get {
+                return ((bool)(this["ShowValveDemos"]));
+            }
+            set {
+                this["ShowValveDemos"] = value;
+            }
+        }
     }
 }

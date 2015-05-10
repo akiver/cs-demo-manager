@@ -40,6 +40,14 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isShowAllFolders;
 
+		private bool _isShowPovDemos = Properties.Settings.Default.ShowPovDemos;
+
+		private bool _isShowEbotDemos = Properties.Settings.Default.ShowEbotDemos;
+
+		private bool _isShowEseaDemos = Properties.Settings.Default.ShowEseaDemos;
+
+		private bool _isShowValveDemos = Properties.Settings.Default.ShowValveDemos;
+
 		private string _notificationMessage;
 
 		ObservableCollection<Demo> _demos;
@@ -67,6 +75,14 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<Demo> _goToTickCommand;
 
 		private RelayCommand<bool> _showAllFoldersCommand;
+
+		private RelayCommand<bool> _showPovDemosCommand;
+
+		private RelayCommand<bool> _showEbotDemosCommand;
+
+		private RelayCommand<bool> _showEseaDemosCommand;
+
+		private RelayCommand<bool> _showValveDemosCommand;
 
 		private RelayCommand _backToHomeCommand;
 
@@ -98,6 +114,46 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _isShowAllFolders; }
 			set { Set(() => IsShowAllFolders, ref _isShowAllFolders, value); }
+		}
+
+		public bool IsShowPovDemos
+		{
+			get { return _isShowPovDemos; }
+			set
+			{
+				Set(() => IsShowPovDemos, ref _isShowPovDemos, value);
+				FilterCollection();
+			}
+		}
+
+		public bool IsShowEbotDemos
+		{
+			get { return _isShowEbotDemos; }
+			set
+			{
+				Set(() => IsShowEbotDemos, ref _isShowEbotDemos, value);
+				FilterCollection();
+			}
+		}
+
+		public bool IsShowEseaDemos
+		{
+			get { return _isShowEseaDemos; }
+			set
+			{
+				Set(() => IsShowEseaDemos, ref _isShowEseaDemos, value);
+				FilterCollection();
+			}
+		}
+
+		public bool IsShowValveDemos
+		{
+			get { return _isShowValveDemos; }
+			set
+			{
+				Set(() => IsShowValveDemos, ref _isShowValveDemos, value);
+				FilterCollection();
+			}
 		}
 
 		public int NewBannedPlayerCount
@@ -191,6 +247,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			var data = obj as Demo;
 			if (data != null)
 			{
+				// Text filter
 				if (!string.IsNullOrEmpty(_filterDemoText))
 				{
 					return data.Name.Contains(_filterDemoText) || data.MapName.Contains(_filterDemoText)
@@ -199,6 +256,19 @@ namespace CSGO_Demos_Manager.ViewModel
 						|| data.ClanTagNameTeam2.Contains(_filterDemoText) || data.SourceName.Contains(_filterDemoText)
 						|| (data.Date != null && data.Date.Contains(_filterDemoText));
 				}
+
+				// POV filter
+				if (!IsShowPovDemos && data.SourceName == "pov") return false;
+
+				// eBot filter
+				if (!IsShowEbotDemos && data.SourceName == "ebot") return false;
+
+				// ESEA filter
+				if (!IsShowEseaDemos && data.SourceName == "esea") return false;
+
+				// Valve filter
+				if (!IsShowValveDemos && data.SourceName == "valve") return false;
+
 				return true;
 			}
 			return false;
@@ -316,6 +386,86 @@ namespace CSGO_Demos_Manager.ViewModel
 								
 							}
 							Properties.Settings.Default.ShowAllFolders = isChecked;
+							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle POV demos is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowPovDemosCommand
+		{
+			get
+			{
+				return _showPovDemosCommand
+					?? (_showPovDemosCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowPovDemos = isChecked;
+							DataGridDemosCollection.Refresh();
+							Properties.Settings.Default.ShowPovDemos = isChecked;
+							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle eBot demos is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowEbotDemosCommand
+		{
+			get
+			{
+				return _showEbotDemosCommand
+					?? (_showEbotDemosCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowEbotDemos = isChecked;
+							DataGridDemosCollection.Refresh();
+							Properties.Settings.Default.ShowEbotDemos = isChecked;
+							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle ESEA demos is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowEseaDemosCommand
+		{
+			get
+			{
+				return _showEseaDemosCommand
+					?? (_showEseaDemosCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowEseaDemos = isChecked;
+							DataGridDemosCollection.Refresh();
+							Properties.Settings.Default.ShowEseaDemos = isChecked;
+							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle Valve demos is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowValveDemosCommand
+		{
+			get
+			{
+				return _showValveDemosCommand
+					?? (_showValveDemosCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowValveDemos = isChecked;
+							DataGridDemosCollection.Refresh();
+							Properties.Settings.Default.ShowValveDemos = isChecked;
 							Properties.Settings.Default.Save();
 						},
 						isChecked => !IsBusy));
