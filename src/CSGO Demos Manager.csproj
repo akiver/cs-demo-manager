@@ -230,6 +230,7 @@
     <Compile Include="Services\Excel\ExcelService.cs" />
     <Compile Include="Services\Excel\Sheets\AbstractSheet.cs" />
     <Compile Include="Services\Excel\Sheets\EnryKillsPlayerSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\GeneralSheet.cs" />
     <Compile Include="Services\Excel\Sheets\OpenKillsPlayerSheet.cs" />
     <Compile Include="Services\Excel\Sheets\EntryKillsRoundSheet.cs" />
     <Compile Include="Services\Excel\Sheets\OpenKillsRoundSheet.cs" />

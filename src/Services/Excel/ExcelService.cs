@@ -9,6 +9,8 @@ namespace CSGO_Demos_Manager.Services.Excel
 {
 	public class ExcelService
 	{
+		private GeneralSheet _generalSheet;
+
 		private PlayersSheet _playersSheet;
 
 		private RoundsSheet _roundsSheet;
@@ -31,6 +33,8 @@ namespace CSGO_Demos_Manager.Services.Excel
 		public async Task GenerateXls(Demo demo, string fileName)
 		{
 			IWorkbook workbook = new XSSFWorkbook();
+			_generalSheet = new GeneralSheet(workbook, demo);
+			await _generalSheet.Generate();
 			_playersSheet = new PlayersSheet(workbook, demo);
 			await _playersSheet.Generate();
 			_roundsSheet = new RoundsSheet(workbook, demo);
