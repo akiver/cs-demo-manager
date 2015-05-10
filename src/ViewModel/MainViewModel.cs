@@ -3,6 +3,8 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSGO_Demos_Manager.Views;
 using GalaSoft.MvvmLight.Messaging;
@@ -88,6 +90,19 @@ namespace CSGO_Demos_Manager.ViewModel
 						if (Folders.Count == 0)
 						{
 							await _dialogService.ShowMessageAsync("It seems that CSGO is not installed on your main hard drive. The defaults \"csgo\" and \"replays\" can not be found. Please add folders from the settings.", MessageDialogStyle.Affirmative);
+						}
+
+						if (Properties.Settings.Default.EnableCheckUpdate)
+						{
+							bool isUpdateAvailable = await CheckUpdate();
+							if (isUpdateAvailable)
+							{
+								var download = await _dialogService.ShowMessageAsync("A new version is available. Do you want to download it?", MessageDialogStyle.AffirmativeAndNegative);
+								if (download == MessageDialogResult.Affirmative)
+								{
+									System.Diagnostics.Process.Start(AppSettings.APP_WEBSITE);
+								}
+							}
 						}
 					}));
 			}
@@ -190,6 +205,28 @@ namespace CSGO_Demos_Manager.ViewModel
 				RefreshDemosMessage msg = new RefreshDemosMessage();
 				Messenger.Default.Send(msg);
 			});
+		}
+
+
+		private static async Task<bool> CheckUpdate()
+		{
+			using (var httpClient = new HttpClient())
+			{
+				//  Grab general infos from user
+				string url = AppSettings.APP_WEBSITE + "/update";
+				HttpResponseMessage result = await httpClient.GetAsync(url);
+				string version = await result.Content.ReadAsStringAsync();
+
+				Version lastVersion = new Version(version);
+				Version currentVersion = new Version(AppSettings.APP_VERSION);
+
+				var resultCompare = currentVersion.CompareTo(lastVersion);
+				if (resultCompare < 0)
+				{
+					return true;
+				}
+				return false;
+			}
 		}
 	}
 }

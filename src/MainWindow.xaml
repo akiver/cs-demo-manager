@@ -10,7 +10,6 @@
 		GlowBrush="{StaticResource LightGreenBrush}"
 		Title="CSGO Demos Manager"
 		SaveWindowPosition="True"
-		Loaded="MetroWindow_Loaded"
 		DataContext="{Binding Main, Source={StaticResource Locator}}">
 
 	<controls:MetroWindow.Resources>
