@@ -92,7 +92,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				Name = Path.GetFileName(pathDemoFile),
 				Path = pathDemoFile,
-				Date = File.GetCreationTime(pathDemoFile).ToString("MM/dd/yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture)
+				Date = File.GetCreationTime(pathDemoFile).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
 			};
 
 			try

@@ -52,7 +52,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Demo.Tickrate = Parser.TickRate;
 			Demo.MapName = Parser.Map;
-			Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
+			Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
 
 			if (Demo.Rounds.Count < (Demo.ScoreTeam1 + Demo.ScoreTeam2))
 			{
