@@ -398,7 +398,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						GameLauncher launcher = new GameLauncher();
 						launcher.WatchDemo(demo);
 					},
-					demo => SelectedDemo != null && AppSettings.IsCsgoInstalled() == true));
+					demo => SelectedDemo != null && AppSettings.IsCsgoInstalled()));
 			}
 		}
 
