@@ -167,7 +167,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!IsMatchStarted) return;
 
 			UpdateTeamScore(e);
-			UpdateKillsCount();
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
@@ -192,6 +191,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				Application.Current.Dispatcher.Invoke(delegate
 				{
+					UpdateKillsCount();
 					SwapTeams();
 					Demo.Rounds.Add(CurrentRound);
 				});
