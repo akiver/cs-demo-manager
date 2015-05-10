@@ -63,7 +63,11 @@
 	<Style TargetType="DataGridColumnHeader" x:Key="TickrateHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Server tickrate" />
 	</Style>
-	
+
+	<Style TargetType="DataGridColumnHeader" x:Key="DemoDateHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Demo's creation date" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="DemoNameHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Demo's name" />
 	</Style>

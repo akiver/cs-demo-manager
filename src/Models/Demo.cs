@@ -23,6 +23,11 @@ namespace CSGO_Demos_Manager.Models
 		private string _name = "";
 
 		/// <summary>
+		/// Demo's date
+		/// </summary>
+		private string _date;
+
+		/// <summary>
 		/// Demo's source (MM, ESEA, FaceIt)
 		/// </summary>
 		private Source.Source _source;
@@ -227,6 +232,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _name; }
 			set { Set(() => Name, ref _name, value); }
+		}
+
+		[JsonProperty("date")]
+		public string Date
+		{
+			get { return _date; }
+			set { Set(() => Date, ref _date, value); }
 		}
 
 		[JsonIgnore]

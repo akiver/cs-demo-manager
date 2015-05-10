@@ -260,6 +260,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date}" HeaderStyle="{StaticResource DemoDateHeader}" />
 				<DataGridTextColumn x:Name="FileNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}" HeaderStyle="{StaticResource DemoNameHeader}" />
 				<DataGridTextColumn x:Name="MapNameColumn" Width="Auto" Header="Map" Binding="{Binding MapName}" HeaderStyle="{StaticResource MapNameHeader}" />
 				<DataGridTextColumn x:Name="TeamName1Column" Width="Auto" Header="Team 1" Binding="{Binding ClanTagNameTeam1}" HeaderStyle="{StaticResource Team1NameHeader}" />

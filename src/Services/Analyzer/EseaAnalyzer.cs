@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
@@ -60,6 +61,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Demo.Tickrate = Parser.TickRate;
 			Demo.MapName = Parser.Map;
+			Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture);
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{

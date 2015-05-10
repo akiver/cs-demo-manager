@@ -196,7 +196,8 @@ namespace CSGO_Demos_Manager.ViewModel
 					return data.Name.Contains(_filterDemoText) || data.MapName.Contains(_filterDemoText)
 						|| data.Comment.Contains(_filterDemoText) || data.Hostname.Contains(_filterDemoText)
 						|| data.ClientName.Contains(_filterDemoText) || data.ClanTagNameTeam1.Contains(_filterDemoText)
-						|| data.ClanTagNameTeam2.Contains(_filterDemoText) || data.SourceName.Contains(_filterDemoText);
+						|| data.ClanTagNameTeam2.Contains(_filterDemoText) || data.SourceName.Contains(_filterDemoText)
+						|| (data.Date != null && data.Date.Contains(_filterDemoText));
 				}
 				return true;
 			}

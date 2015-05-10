@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -90,7 +91,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Demo demo = new Demo
 			{
 				Name = Path.GetFileName(pathDemoFile),
-				Path = pathDemoFile
+				Path = pathDemoFile,
+				Date = File.GetCreationTime(pathDemoFile).ToString("MM/dd/yyyy HH:mm:ss.fff", CultureInfo.InvariantCulture)
 			};
 
 			try
