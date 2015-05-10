@@ -54,6 +54,12 @@
 		<MenuItem Header="Add to suspect list"
 							  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch highlights"
+							  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch lowlights"
+							  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="PlayerTeam2RowContextMenu">
@@ -63,6 +69,12 @@
 		<MenuItem Header="Add to suspect list"
 							  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch highlights"
+							  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch lowlights"
+							  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 </ResourceDictionary>

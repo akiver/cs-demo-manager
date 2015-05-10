@@ -39,19 +39,19 @@ namespace CSGO_Demos_Manager.Services
 			_arguments.Add(!Properties.Settings.Default.IsFullscreen ? "-windowed" : "-fullscreen");
 		}
 
-		internal void WatchHighlightDemo(Demo demo)
+		internal void WatchHighlightDemo(Demo demo, string steamId = null)
 		{
 			_arguments.Add("+playdemo");
 			_arguments.Add(demo.Path);
-			_arguments.Add(Properties.Settings.Default.SteamID.ToString());
+			_arguments.Add(steamId ?? Properties.Settings.Default.SteamID.ToString());
 			StartGame();
 		}
 
-		internal void WatchLowlightDemo(Demo demo)
+		internal void WatchLowlightDemo(Demo demo, string steamId = null)
 		{
 			_arguments.Add("+playdemo");
 			_arguments.Add(demo.Path);
-			_arguments.Add(Properties.Settings.Default.SteamID.ToString());
+			_arguments.Add(steamId ?? Properties.Settings.Default.SteamID.ToString());
 			_arguments.Add("lowlights");
 			StartGame();
 		}

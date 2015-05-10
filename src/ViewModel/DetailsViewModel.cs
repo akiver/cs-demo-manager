@@ -56,6 +56,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<PlayerExtended> _goToSuspectProfileCommand;
 
+		private RelayCommand<PlayerExtended> _watchHighlightsCommand;
+
+		private RelayCommand<PlayerExtended> _watchLowlightsCommand;
+
 		private RelayCommand _exportDemoToExcelCommand;
 
 		private readonly HeatmapView _heatmapView;
@@ -178,6 +182,38 @@ namespace CSGO_Demos_Manager.ViewModel
 								await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
 							}
 							
+						},
+						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+			}
+		}
+
+		public RelayCommand<PlayerExtended> WatchHighlights
+		{
+			get
+			{
+				return _watchHighlightsCommand
+					?? (_watchHighlightsCommand = new RelayCommand<PlayerExtended>(
+						player =>
+						{
+							string steamId = player.SteamId.ToString();
+							GameLauncher launcher = new GameLauncher();
+							launcher.WatchHighlightDemo(CurrentDemo, steamId);
+						},
+						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+			}
+		}
+
+		public RelayCommand<PlayerExtended> WatchLowlights
+		{
+			get
+			{
+				return _watchLowlightsCommand
+					?? (_watchLowlightsCommand = new RelayCommand<PlayerExtended>(
+						player =>
+						{
+							string steamId = player.SteamId.ToString();
+							GameLauncher launcher = new GameLauncher();
+							launcher.WatchLowlightDemo(CurrentDemo, steamId);
 						},
 						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
 			}
