@@ -60,7 +60,8 @@ namespace CSGO_Demos_Manager.Services
 		{
 			if (!File.Exists(demo.Path))
 			{
-				throw new Exception("Demo not found.");
+				// Demo may be moved to an other folder, just clear cache
+				await _cacheService.RemoveDemo(demo);
 			}
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);

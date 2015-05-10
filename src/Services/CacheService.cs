@@ -147,5 +147,18 @@ namespace CSGO_Demos_Manager.Services
 				}
 			});
 		}
+
+		/// <summary>
+		/// Remove a specific demo from cache
+		/// </summary>
+		/// <returns></returns>
+		public Task RemoveDemo(Demo demo)
+		{
+			return Task.Run(() =>
+			{
+				string path = _pathFolderCache + "\\" + demo.Id + ".json";
+				if (File.Exists(path)) File.Delete(path);
+			});
+		}
 	}
 }
