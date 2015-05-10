@@ -16,7 +16,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 			{ "SteamID", CellType.String },
 			{ "Total", CellType.Numeric },
 			{ "Win", CellType.Numeric },
-			{ "Loose", CellType.Numeric },
+			{ "Loss", CellType.Numeric },
 			{ "Ratio", CellType.String }
 		};
 
@@ -62,7 +62,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 					SetCellValue(row, columnNumber++, CellType.String, player.SteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKills.Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillWinCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillLooseCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillLossCount);
 					SetCellValue(row, columnNumber, CellType.String, player.RatioEntryKillAsString);
 
 					rowNumber++;

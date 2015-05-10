@@ -398,8 +398,8 @@ namespace CSGO_Demos_Manager.Models
 			get { return EntryKills.Count(e => e.HasWin); }
 		}
 
-		[JsonProperty("entry_kill_loose_count")]
-		public int EntryKillLooseCount
+		[JsonProperty("entry_kill_loss_count")]
+		public int EntryKillLossCount
 		{
 			get { return EntryKills.Count(e => e.HasWin == false); }
 		}
@@ -410,8 +410,8 @@ namespace CSGO_Demos_Manager.Models
 			get { return OpeningKills.Count(e => e.HasWin); }
 		}
 
-		[JsonProperty("open_kill_loose_count")]
-		public int OpenKillLooseCount
+		[JsonProperty("open_kill_loss_count")]
+		public int OpenKillLossCount
 		{
 			get { return OpeningKills.Count(e => e.HasWin == false); }
 		}
@@ -423,11 +423,11 @@ namespace CSGO_Demos_Manager.Models
 			{
 				int entryKillCount = EntryKills.Count();
 				int entryKillWin = EntryKills.Count(e => e.HasWin);
-				int entryKillLoose = EntryKills.Count(e => e.HasWin == false);
+				int entryKillLoss = EntryKills.Count(e => e.HasWin == false);
 
 				decimal entryKillPercent = 0;
 				if (entryKillWin == 0) return entryKillPercent;
-				if (entryKillLoose == 0) return 100;
+				if (entryKillLoss == 0) return 100;
 				entryKillPercent = (entryKillWin / (decimal)entryKillCount) * 100;
 				entryKillPercent = Math.Round(entryKillPercent, 0);
 
@@ -442,11 +442,11 @@ namespace CSGO_Demos_Manager.Models
 			{
 				int openKillCount = OpeningKills.Count();
 				int openKillWin = OpeningKills.Count(e => e.HasWin);
-				int openKillLoose = OpeningKills.Count(e => e.HasWin == false);
+				int openKillLoss = OpeningKills.Count(e => e.HasWin == false);
 
 				decimal openKillPercent = 0;
 				if (openKillWin == 0) return openKillPercent;
-				if (openKillLoose == 0) return 100;
+				if (openKillLoss == 0) return 100;
 				openKillPercent = (openKillWin / (decimal)openKillCount) * 100;
 				openKillPercent = Math.Round(openKillPercent, 0);
 
@@ -487,7 +487,7 @@ namespace CSGO_Demos_Manager.Models
 		{
 			RaisePropertyChanged(() => EntryKills);
 			RaisePropertyChanged("EntryKillWinCount");
-			RaisePropertyChanged("EntryKillLooseCount");
+			RaisePropertyChanged("EntryKillLossCount");
 			RaisePropertyChanged("RatioEntryKillAsString");
 		}
 
@@ -495,7 +495,7 @@ namespace CSGO_Demos_Manager.Models
 		{
 			RaisePropertyChanged(() => EntryKills);
 			RaisePropertyChanged("OpenKillWinCount");
-			RaisePropertyChanged("OpenKillLooseCount");
+			RaisePropertyChanged("OpenKillLossCount");
 			RaisePropertyChanged("RatioOpenKillAsString");
 		}
 	}

@@ -263,7 +263,7 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Round Win" />
 	</Style>
 	
-	<Style TargetType="DataGridColumnHeader" x:Key="RoundLooseHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="RoundLossHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Round Loss" />
 	</Style>
 	

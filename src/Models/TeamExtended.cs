@@ -33,8 +33,8 @@ namespace CSGO_Demos_Manager.Models
 			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin); }
 		}
 
-		[JsonProperty("entry_kill_loose_count")]
-		public int EntryKillLooseCount
+		[JsonProperty("entry_kill_loss_count")]
+		public int EntryKillLossCount
 		{
 			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false); }
 		}
@@ -46,11 +46,11 @@ namespace CSGO_Demos_Manager.Models
 			{
 				int entryKillCount = Players.SelectMany(p => p.EntryKills).Count();
 				int entryKillWin = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin);
-				int entryKillLoose = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false);
+				int entryKillLoss = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false);
 
 				decimal entryKillPercent = 0;
 				if (EntryKillWinCount == 0) return entryKillPercent;
-				if (entryKillLoose == 0) return 100;
+				if (entryKillLoss == 0) return 100;
 				entryKillPercent = (entryKillWin / (decimal)entryKillCount) * 100;
 				entryKillPercent = Math.Round(entryKillPercent, 0);
 
@@ -72,8 +72,8 @@ namespace CSGO_Demos_Manager.Models
 			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin); }
 		}
 
-		[JsonProperty("open_kill_loose_count")]
-		public int OpenKillLooseCount
+		[JsonProperty("open_kill_loss_count")]
+		public int OpenKillLossCount
 		{
 			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false); }
 		}
@@ -85,11 +85,11 @@ namespace CSGO_Demos_Manager.Models
 			{
 				int openKillCount = Players.SelectMany(p => p.OpeningKills).Count();
 				int openKillWin = Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin);
-				int openKillLoose = Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false);
+				int openKillLoss = Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false);
 
 				decimal openKillPercent = 0;
 				if (openKillWin == 0) return openKillPercent;
-				if (openKillLoose == 0) return 100;
+				if (openKillLoss == 0) return 100;
 				openKillPercent = (openKillWin / (decimal)openKillCount) * 100;
 				openKillPercent = Math.Round(openKillPercent, 0);
 
@@ -132,7 +132,7 @@ namespace CSGO_Demos_Manager.Models
 		{
 			RaisePropertyChanged("EntryKillCount");
 			RaisePropertyChanged("EntryKillWinCount");
-			RaisePropertyChanged("EntryKillLooseCount");
+			RaisePropertyChanged("EntryKillLossCount");
 			RaisePropertyChanged("RatioEntryKillAsString");
 		}
 
@@ -140,7 +140,7 @@ namespace CSGO_Demos_Manager.Models
 		{
 			RaisePropertyChanged("OpenKillCount");
 			RaisePropertyChanged("OpenKillWinCount");
-			RaisePropertyChanged("OpenKillLooseCount");
+			RaisePropertyChanged("OpenKillLossCount");
 			RaisePropertyChanged("RatioOpenKillAsString");
 		}
 	}
