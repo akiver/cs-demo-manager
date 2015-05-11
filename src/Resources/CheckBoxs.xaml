@@ -5,5 +5,9 @@
 		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}"/>
 		<Setter Property="Margin" Value="0 0 5 0" />
 	</Style>
-	
+
+	<Style x:Key="CheckBoxColumnOptionStyle" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MetroCheckBox}">
+		<Setter Property="Margin" Value="0 5 5 5" />
+	</Style>
+
 </ResourceDictionary>

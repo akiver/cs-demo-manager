@@ -113,6 +113,7 @@
 
 					<Grid Grid.Column="1">
 						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
@@ -136,7 +137,139 @@
 								</StackPanel>
 							</StackPanel>
 						</Grid>
-						<Grid Grid.Row="1">
+						<StackPanel Grid.Row="1">
+							<StackPanel Margin="10">
+								<TextBlock Text="Columns options" Style="{StaticResource TitleSettingsStyle}" />
+								<StackPanel Orientation="Vertical">
+									<StackPanel Orientation="Horizontal">
+									<CheckBox Content="Date"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Demo name"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Map name"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowMapNameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Team 1 name"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Team 2 name"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Score team 1"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Score team 2"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam2Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Hostname"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowHostnameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Clientname"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClientnameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Demo type"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoTypeColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+									<CheckBox Content="Tickrate"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="1K"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="2K"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="3K"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="4K"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="5K"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Total kills"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Bomb planted"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Bomb defused"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Bomb exploded"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+									<CheckBox Content="Clutch 1v1"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Clutch 1v2"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v2Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Clutch 1v3"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v3Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Clutch 1v4"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v4Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Clutch 1v5"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Assists"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Deaths"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="K/D"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="HS"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="TK"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+									<CheckBox Content="Entry kills"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEkColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="MVP"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Player score"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Winner clan name"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Winner side"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Start money team 1"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam1Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Start money team 2"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam2Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Equipement value team 1"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam1Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Equipement value team 2"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam2Column}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									</StackPanel>
+								</StackPanel>
+							</StackPanel>
+						</StackPanel>
+						<Grid Grid.Row="2">
 							<TextBlock Text="{Binding CreditsText}" Style="{StaticResource CreditsTextStyle}"/>
 						</Grid>
 					</Grid>
