@@ -48,6 +48,7 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
@@ -342,5 +343,14 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 			</DataGrid.Columns>
 		</DataGrid>
+
+		<Grid Grid.Row="3">
+			<Grid Background="{StaticResource LightGreyBrush}">
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Comment : " Style="{StaticResource CurrentFolderStyle}" />
+					<TextBlock Text="{Binding SelectedDemo.Comment}" Style="{StaticResource ValueGeneralInfoDemo}" />
+				</StackPanel>
+			</Grid>
+		</Grid>
 	</Grid>
 </UserControl>
