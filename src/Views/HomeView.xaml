@@ -7,7 +7,9 @@
 			 xmlns:helpers="clr-namespace:CSGO_Demos_Manager.Converters"
 			 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 			 xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
-			 mc:Ignorable="d" 
+			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 mc:Ignorable="d"
+			 Name="HomeUserControl"
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding Home, Source={StaticResource Locator}}" Focusable="True">
 
@@ -37,6 +39,8 @@
 					Gesture="CTRL+R" />
 		<KeyBinding Command="{Binding ShowSuspectsCommand}"
 					Gesture="CTRL+F" />
+		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
+									CommandParameter="{Binding ElementName=HomeUserControl}"/>
 	</UserControl.InputBindings>
 
 	<Grid>

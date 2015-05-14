@@ -6,7 +6,9 @@
 		xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 		xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
 		xmlns:helpers="clr-namespace:CSGO_Demos_Manager.Converters"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+		Name="SuspectsUserControl"
 		Background="{StaticResource LightGreyBrush}"
 		mc:Ignorable="d"
 		d:DesignHeight="720" d:DesignWidth="1280"
@@ -24,6 +26,8 @@
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding RefreshSuspectListCommand}"
 					Gesture="CTRL+R" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+									Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}" />
 	</UserControl.InputBindings>
 	
 	<Grid>
