@@ -88,11 +88,19 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			DemoParser parser = new DemoParser(File.OpenRead(pathDemoFile));
 
+			DateTime dateFile = File.GetCreationTime(pathDemoFile);
+			string dateAsString = dateFile.ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+
+			if (Properties.Settings.Default.DateFormatEuropean)
+			{
+				dateAsString = dateFile.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+			}
+
 			Demo demo = new Demo
 			{
 				Name = Path.GetFileName(pathDemoFile),
 				Path = pathDemoFile,
-				Date = File.GetCreationTime(pathDemoFile).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture)
+				Date = dateAsString
 			};
 
 			try

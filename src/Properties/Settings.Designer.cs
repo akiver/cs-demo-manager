@@ -658,5 +658,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowWinnerSideColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DateFormatEuropean {
+            get {
+                return ((bool)(this["DateFormatEuropean"]));
+            }
+            set {
+                this["DateFormatEuropean"] = value;
+            }
+        }
     }
 }

@@ -109,6 +109,15 @@
 										Content="Clear Data Cache" />
 							</StackPanel>
 						</StackPanel>
+
+						<StackPanel Margin="10" Grid.Row="1">
+							<TextBlock Text="Date Format" Style="{StaticResource TitleSettingsStyle}" />
+							<StackPanel Orientation="Vertical">
+								<CheckBox Content="dd/mm/yyyy"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.DateFormatUsa}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+							</StackPanel>
+						</StackPanel>
 					</Grid>
 
 					<Grid Grid.Column="1">

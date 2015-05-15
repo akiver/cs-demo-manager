@@ -61,7 +61,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Demo.Tickrate = Parser.TickRate;
 			Demo.MapName = Parser.Map;
-			Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+			if (Properties.Settings.Default.DateFormatEuropean)
+			{
+				Demo.Date = File.GetCreationTime(Demo.Path).ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+			}
+			else
+			{
+				Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+			}
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{

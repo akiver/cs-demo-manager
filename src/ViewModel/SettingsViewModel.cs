@@ -108,6 +108,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showWinnerSideColumn = Properties.Settings.Default.ShowWinnerSideColumn;
 
+		private bool _dateFormatEuropean = Properties.Settings.Default.DateFormatEuropean;
+
 		#endregion
 
 		#region Accessors
@@ -132,6 +134,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Properties.Settings.Default.IsFullscreen = value;
 				Properties.Settings.Default.Save();
 				Set(() => ResolutionFullscreen, ref _resolutionFullscreen, value);
+			}
+		}
+
+		public bool DateFormatUsa
+		{
+			get { return _dateFormatEuropean; }
+			set
+			{
+				Properties.Settings.Default.DateFormatEuropean = value;
+				Properties.Settings.Default.Save();
+				Set(() => DateFormatUsa, ref _dateFormatEuropean, value);
 			}
 		}
 
