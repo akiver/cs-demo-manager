@@ -138,8 +138,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
             // Check for faceit demos, using regex with filename
             // No false positive but could miss some Faceit demo (when premade playing cause of custom team name)
-            if (FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
-            {
+            if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
+			{
                 demo.Source = Source.Factory("faceit");
                 return demo;
             }
