@@ -53,6 +53,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private static readonly Regex LocalRegex = new Regex("^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]+(\\:[0-9]{1,5})?$");
 
+        private static readonly Regex FILENAME_FACEIT_REGEX = new Regex("^[0-9]+_team[a-z0-9-]+-team[a-z0-9-]+_de_[a-z0-9]+\\.dem");
+
 		#endregion
 
 		public abstract Task<Demo> AnalyzeDemoAsync();
@@ -76,6 +78,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				case "esea":
 					return new EseaAnalyzer(demo);
 				case "ebot":
+                case "faceit":
 					return new EbotAnalyzer(demo);
 				case "pov":
 					return null;
@@ -132,6 +135,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				demo.Source = Source.Factory("esea");
 				return demo;
 			}
+
+            // Check for faceit demos, using regex with filename
+            // No false positive but could miss some Faceit demo (when premade playing cause of custom team name)
+            if (FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
+            {
+                demo.Source = Source.Factory("faceit");
+                return demo;
+            }
 
 			// Check for ebot demos
 			if (demo.Hostname.Contains("eBot"))
