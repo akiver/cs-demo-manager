@@ -219,6 +219,7 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			
 			<Grid Grid.Column="0">
@@ -231,38 +232,46 @@
 					  IsEnabled="{Binding Path=IsShowAllFolders, Converter={StaticResource BooleanInvertedConverter}}"/>
 
 			<Grid Grid.Column="2">
-				<CheckBox x:Name="CheckBoxShowPov" Content="Show POV"
+				<CheckBox x:Name="CheckBoxShowOldDemos" Content="No analyzable demos"
+						  IsChecked="{Binding IsShowOldDemos}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowOldDemosCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOldDemos}"/>
+			</Grid>
+			
+			<Grid Grid.Column="3">
+				<CheckBox x:Name="CheckBoxShowPov" Content="POV"
 						  IsChecked="{Binding IsShowPovDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowPovDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPov}"/>
 			</Grid>
 
-			<Grid Grid.Column="3">
-				<CheckBox x:Name="CheckBoxShowValve" Content="Show Valve"
+			<Grid Grid.Column="4">
+				<CheckBox x:Name="CheckBoxShowValve" Content="Valve"
 						  IsChecked="{Binding IsShowValveDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowValveDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowValve}"/>
 			</Grid>
 
-			<Grid Grid.Column="4">
-				<CheckBox x:Name="CheckBoxShowEbot" Content="Show eBot"
+			<Grid Grid.Column="5">
+				<CheckBox x:Name="CheckBoxShowEbot" Content="eBot"
 						  IsChecked="{Binding IsShowEbotDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowEbotDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowEbot}"/>
 			</Grid>
 
-			<Grid Grid.Column="5">
-				<CheckBox x:Name="CheckBoxShowEsea" Content="Show ESEA"
+			<Grid Grid.Column="6">
+				<CheckBox x:Name="CheckBoxShowEsea" Content="ESEA"
 						  IsChecked="{Binding IsShowEseaDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowEseaDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowEsea}"/>
 			</Grid>
 
-			<Grid Grid.Column="6">
+			<Grid Grid.Column="7">
 				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
 						  IsChecked="{Binding IsShowAllFolders}"
 						  Style="{StaticResource CheckBoxFilterStyle}"

@@ -50,6 +50,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isShowValveDemos = Properties.Settings.Default.ShowValveDemos;
 
+		private bool _isShowOldDemos = Properties.Settings.Default.ShowOldDemos;
+
 		private string _notificationMessage;
 
 		ObservableCollection<Demo> _demos;
@@ -86,6 +88,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<bool> _showValveDemosCommand;
 
+		private RelayCommand<bool> _showOldDemosCommand;
+
 		private RelayCommand _backToHomeCommand;
 
 		private RelayCommand _showSuspectsCommand;
@@ -118,6 +122,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _isShowAllFolders; }
 			set { Set(() => IsShowAllFolders, ref _isShowAllFolders, value); }
+		}
+
+		public bool IsShowOldDemos
+		{
+			get { return _isShowOldDemos; }
+			set { Set(() => IsShowOldDemos, ref _isShowOldDemos, value); }
 		}
 
 		public bool IsShowPovDemos
@@ -273,6 +283,9 @@ namespace CSGO_Demos_Manager.ViewModel
 				// Valve filter
 				if (!IsShowValveDemos && data.SourceName == "valve") return false;
 
+				// No analyzable demos filter
+				if (!IsShowOldDemos && data.Status == "old") return false;
+
 				return true;
 			}
 			return false;
@@ -390,6 +403,26 @@ namespace CSGO_Demos_Manager.ViewModel
 								
 							}
 							Properties.Settings.Default.ShowAllFolders = isChecked;
+							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle old demos is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowOldDemosCommand
+		{
+			get
+			{
+				return _showOldDemosCommand
+					?? (_showOldDemosCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowOldDemos = isChecked;
+							DataGridDemosCollection.Refresh();
+							Properties.Settings.Default.ShowOldDemos = isChecked;
 							Properties.Settings.Default.Save();
 						},
 						isChecked => !IsBusy));

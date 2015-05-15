@@ -670,5 +670,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["DateFormatEuropean"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowOldDemos {
+            get {
+                return ((bool)(this["ShowOldDemos"]));
+            }
+            set {
+                this["ShowOldDemos"] = value;
+            }
+        }
     }
 }
