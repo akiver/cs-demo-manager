@@ -36,6 +36,10 @@
 			<DataTrigger Binding="{Binding Status}" Value="watched">
 				<Setter Property="Background" Value="{StaticResource LightGreenBrush}"/>
 			</DataTrigger>
+
+			<DataTrigger Binding="{Binding Status}" Value="old">
+				<Setter Property="Background" Value="{StaticResource RedColorBrush}"/>
+			</DataTrigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource DemoRowContextMenu}" />
 	</Style>

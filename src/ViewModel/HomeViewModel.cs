@@ -743,6 +743,9 @@ namespace CSGO_Demos_Manager.ViewModel
 			IsBusy = true;
 			HasNotification = true;
 			NotificationMessage = "Analyzing...";
+
+			List<Demo> demosFailed = new List<Demo>();
+
 			foreach (Demo demo in SelectedDemos)
 			{
 				try
@@ -751,13 +754,23 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 				catch (Exception e)
 				{
-					await _dialogService.ShowErrorAsync("An error occured while analyzing the demo " + demo.Name + "." +
-														"The demo may be too old, if not please send an email with the attached demo." +
-														"You can find more information on http://csgo-demos-manager.com.", MessageDialogStyle.Affirmative);
+					demo.Status = "old";
+					demosFailed.Add(demo);
+					await _cacheService.WriteDemoDataCache(demo);
 				}
 			}
+
 			IsBusy = false;
 			HasNotification = false;
+
+			if (demosFailed.Any())
+			{
+				string errorMessage = "An error occured while analyzing the following demos : " + Environment.NewLine;
+				errorMessage = demosFailed.Aggregate(errorMessage, (current, demoFailed) => current + (demoFailed.Name + Environment.NewLine));
+				errorMessage += "This demos may be too old, if not please send an email with the attached demos." +
+					"You can find more information on http://csgo-demos-manager.com.";
+				await _dialogService.ShowErrorAsync(errorMessage, MessageDialogStyle.Affirmative);
+			}
 		}
 
 		private async Task RefreshBannedPlayerCount()

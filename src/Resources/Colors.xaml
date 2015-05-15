@@ -1,15 +1,17 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Color x:Key="LightGrey">#2D2D30</Color>
-    <Color x:Key="LightGreen">#A4C400</Color>
-    <Color x:Key="LightWhite">#ecf0f1</Color>
-    <Color x:Key="LightRed">#C65D57</Color>
-    
-    <SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
-    <SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
-    <SolidColorBrush x:Key="LightWhiteBrush" Color="{StaticResource LightWhite}" />
-    <SolidColorBrush x:Key="LightRedColorBrush" Color="{StaticResource LightRed}" />
-    
-    <!--Override MahApps-->
-    <SolidColorBrush x:Key="RightArrowFill" Color="{StaticResource LightGrey}" />
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+	<Color x:Key="LightGrey">#2D2D30</Color>
+	<Color x:Key="LightGreen">#A4C400</Color>
+	<Color x:Key="LightWhite">#ecf0f1</Color>
+	<Color x:Key="LightRed">#C65D57</Color>
+	<Color x:Key="Red">#e74c3c</Color>
+	
+	<SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
+	<SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
+	<SolidColorBrush x:Key="LightWhiteBrush" Color="{StaticResource LightWhite}" />
+	<SolidColorBrush x:Key="LightRedColorBrush" Color="{StaticResource LightRed}" />
+	<SolidColorBrush x:Key="RedColorBrush" Color="{StaticResource Red}" />
+	
+	<!--Override MahApps-->
+	<SolidColorBrush x:Key="RightArrowFill" Color="{StaticResource LightGrey}" />
 </ResourceDictionary>
