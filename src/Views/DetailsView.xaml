@@ -3,9 +3,11 @@
 		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 		Background="{StaticResource LightGreyBrush}"
 		mc:Ignorable="d"
+		Name="DetailsUserControl"
 		d:DesignHeight="720" d:DesignWidth="1280"
 		DataContext="{Binding Details, Source={StaticResource Locator}}">
 	<UserControl.InputBindings>
@@ -26,6 +28,9 @@
 		<KeyBinding Command="{Binding ExportDemoToExcelCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+X" />
+		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"/>
+		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
+									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
 	</UserControl.InputBindings>
 	
 	<Grid>

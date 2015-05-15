@@ -16,6 +16,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using CSGO_Demos_Manager.Models.Source;
 
@@ -99,6 +101,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private ObservableCollection<string> _folders;
 
 		private string _selectedFolder;
+
+		private RelayCommand<UserControl> _showLastUserControlCommand;
 
 		#endregion
 
@@ -524,8 +528,8 @@ namespace CSGO_Demos_Manager.ViewModel
 						() =>
 						{
 							var mainViewModel = (new ViewModelLocator()).Main;
-							SuspectsView myDemosView = new SuspectsView();
-							mainViewModel.CurrentPage.ShowPage(myDemosView);
+							SuspectsView suspectsView = new SuspectsView();
+							mainViewModel.CurrentPage.ShowPage(suspectsView);
 						}));
 			}
 		}
@@ -639,8 +643,31 @@ namespace CSGO_Demos_Manager.ViewModel
 					() =>
 					{
 						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Show the last window viewed
+		/// </summary>
+		public RelayCommand<UserControl> ShowLastUserControlCommand
+		{
+			get
+			{
+				return _showLastUserControlCommand
+					?? (_showLastUserControlCommand = new RelayCommand<UserControl>(
+					userControl =>
+					{
+						UserControl lastUserControl = (UserControl)Application.Current.Properties["LastPageViewed"];
+						if (lastUserControl != null)
+						{
+							var mainViewModel = (new ViewModelLocator()).Main;
+							mainViewModel.CurrentPage.ShowPage(lastUserControl);
+							Application.Current.Properties["LastPageViewed"] = userControl;
+						}
 					}));
 			}
 		}

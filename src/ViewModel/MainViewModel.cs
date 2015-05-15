@@ -109,7 +109,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		}
 
 		/// <summary>
-		/// Command fired when Main Window is loaded
+		/// Command fired when Main Window is closed
 		/// </summary>
 		public RelayCommand WindowClosed
 		{

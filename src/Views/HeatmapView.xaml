@@ -5,17 +5,23 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
+			 Name="HeatmapUserControl"
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding Heatmap, Source={StaticResource Locator}}">
 	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"
+		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding GenerateCommand}"
 					Gesture="CTRL+G" />
 		<KeyBinding Command="{Binding ExportCommand}"
 					Gesture="CTRL+S" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+					Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}" />
 	</UserControl.InputBindings>
 	<Grid>
 		<Grid.RowDefinitions>

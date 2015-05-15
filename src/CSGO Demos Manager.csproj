@@ -170,12 +170,14 @@
     <Compile Include="Converters\BooleanToStringConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToSourceConverter.cs" />
+    <Compile Include="Converters\MouseGestureExtendedConverter.cs" />
     <Compile Include="Converters\NullableValueConverter.cs" />
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Exceptions\Heatmap\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Heatmap\HeatmapException.cs" />
     <Compile Include="Exceptions\Heatmap\MapHeatmapUnavailableException.cs" />
+    <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Models\Demo.cs" />
     <Compile Include="Models\Events\BaseEvent.cs" />
@@ -205,6 +207,7 @@
     <Compile Include="Models\Suspect.cs" />
     <Compile Include="Models\TeamExtended.cs" />
     <Compile Include="Models\Weapon.cs" />
+    <Compile Include="Internals\Mouse\MouseBindingExtended.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
