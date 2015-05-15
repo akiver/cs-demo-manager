@@ -136,13 +136,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				return demo;
 			}
 
-            // Check for faceit demos, using regex with filename
-            // No false positive but could miss some Faceit demo (when premade playing cause of custom team name)
-            if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
+			// Check for faceit demos
+			// (Before Mai 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
+			// (Mai 2015) Faceit : uses hostname
+			if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
 			{
-                demo.Source = Source.Factory("faceit");
-                return demo;
-            }
+				demo.Source = Source.Factory("faceit");
+				return demo;
+			}
 
 			// Check for ebot demos
 			if (demo.Hostname.Contains("eBot"))
