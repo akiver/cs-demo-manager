@@ -35,6 +35,9 @@
 			<MenuItem Header="eBot"
 								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
 								  CommandParameter="ebot" />
+			<MenuItem Header="Faceit"
+								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
+								  CommandParameter="faceit" />
 		</MenuItem>
 	</ContextMenu>
 

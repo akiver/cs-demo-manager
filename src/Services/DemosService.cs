@@ -100,6 +100,9 @@ namespace CSGO_Demos_Manager.Services
 					case "ebot":
 						demo.Source = new Ebot();
 						break;
+					case "faceit":
+						demo.Source = new Faceit();
+						break;
 					default:
 						demo.Source = new Valve();
 						break;
