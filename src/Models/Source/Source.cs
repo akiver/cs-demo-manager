@@ -23,6 +23,8 @@ namespace CSGO_Demos_Manager.Models.Source
 					return new Ebot();
 				case "pov":
 					return new Pov();
+				case "faceit":
+					return new Faceit();
 				default:
 					return null;
 			}

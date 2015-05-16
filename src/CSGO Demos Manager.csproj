@@ -199,6 +199,7 @@
     <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Source\Ebot.cs" />
     <Compile Include="Models\Source\Esea.cs" />
+    <Compile Include="Models\Source\Faceit.cs" />
     <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
     <Compile Include="Models\Source\Valve.cs" />
@@ -220,6 +221,7 @@
     <None Include="Resources\images\overview\de_cbble.png" />
     <Resource Include="Resources\images\overview\base64\de_cbble.txt" />
     <Resource Include="Resources\images\overview\base64\de_mirage.txt" />
+    <None Include="Resources\images\logo\faceit.png" />
     <Content Include="Resources\images\overview\base64\de_season.txt" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EseaAnalyzer.cs" />
