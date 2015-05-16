@@ -78,7 +78,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				case "esea":
 					return new EseaAnalyzer(demo);
 				case "ebot":
-                case "faceit":
+				case "faceit":
 					return new EbotAnalyzer(demo);
 				case "pov":
 					return null;
@@ -137,8 +137,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			// Check for faceit demos
-			// (Before Mai 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
-			// (Mai 2015) Faceit : uses hostname
+			// (Before May 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
+			// (May 2015) Faceit : uses hostname
 			if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
 			{
 				demo.Source = Source.Factory("faceit");
