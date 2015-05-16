@@ -105,7 +105,7 @@
 								
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDataCacheCommand}"
-										Style="{StaticResource AccentedSquareButtonStyle}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Clear Data Cache" />
 							</StackPanel>
 						</StackPanel>
@@ -133,13 +133,13 @@
 								<ListView ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}"/>
 								<StackPanel Orientation="Horizontal">
 									<Button Command="{Binding AddFolderCommand}"
-											Style="{StaticResource AccentedSquareButtonStyle}"
+											Style="{DynamicResource AccentedSquareButtonStyle}"
 											Margin="0 5 0 0">
 										<TextBlock Text="Add folder" Style="{StaticResource ButtonTitleStyle}" />
 									</Button>
 									<Button Command="{Binding RemoveFolderCommand}"
 											CommandParameter="{Binding Path=SelectedFolder}"
-											Style="{StaticResource AccentedSquareButtonStyle}"
+											Style="{DynamicResource AccentedSquareButtonStyle}"
 											Margin="10 5 0 0">
 										<TextBlock Text="Remove folder" Style="{StaticResource ButtonTitleStyle}" />
 									</Button>

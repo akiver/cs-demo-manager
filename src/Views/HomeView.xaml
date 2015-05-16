@@ -63,7 +63,7 @@
 						CommandParameter="{Binding SelectedDemos}"
 						Margin="10"
 						ToolTip="Analyze selected demos (CTRL+S)"
-						Style="{StaticResource AccentedSquareButtonStyle}" Width="90" Height="30">
+						Style="{DynamicResource AccentedSquareButtonStyle}" Width="90" Height="30">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="25" Height="15">
 							<Rectangle.Fill>
@@ -75,7 +75,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="70"
 					Height="30"
 					ToolTip="Watch selected demo (CTRL+W)"
@@ -92,7 +92,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="100"
 					Height="30"
 					ToolTip="Start watching selected demo at specific tick (CTRL+G)"
@@ -108,7 +108,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="130"
 					Height="30"
 					ToolTip="Watch your best actions."
@@ -125,7 +125,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="120"
 					Height="30"
 					ToolTip="Watch your mistakes."
@@ -142,7 +142,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="80"
 					Height="30"
 					ToolTip="Demo's details (CTRL+D)"
@@ -159,7 +159,7 @@
 				</Button>
 
 				<Button Command="{Binding RefreshListCommand}"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Margin="5 0 0 0"
 					ToolTip="Refresh demos list (CTRL+R)"
 					Width="90"
@@ -175,7 +175,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="100"
 					Height="30"
 					ToolTip="Go to suspects view (CTRL+F)"
