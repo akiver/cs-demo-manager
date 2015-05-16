@@ -19,6 +19,7 @@
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,7 +32,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -199,6 +199,7 @@
     <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Source\Ebot.cs" />
     <Compile Include="Models\Source\Esea.cs" />
+    <Compile Include="Models\Source\Faceit.cs" />
     <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
     <Compile Include="Models\Source\Valve.cs" />
@@ -220,6 +221,7 @@
     <None Include="Resources\images\overview\de_cbble.png" />
     <Resource Include="Resources\images\overview\base64\de_cbble.txt" />
     <Resource Include="Resources\images\overview\base64\de_mirage.txt" />
+    <None Include="Resources\images\logo\faceit.png" />
     <Content Include="Resources\images\overview\base64\de_season.txt" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EseaAnalyzer.cs" />
@@ -254,7 +256,9 @@
     <Compile Include="Services\Heatmap\Season.cs" />
     <Compile Include="Services\ICacheService.cs" />
     <Compile Include="Services\IDemosService.cs" />
+    <Compile Include="Services\IPlayerRatingService.cs" />
     <Compile Include="Services\ISteamService.cs" />
+    <Compile Include="Services\PlayerRatingService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
@@ -415,6 +419,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\images\flags\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
