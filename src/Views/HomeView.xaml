@@ -220,6 +220,7 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			
 			<Grid Grid.Column="0">
@@ -264,6 +265,14 @@
 			</Grid>
 
 			<Grid Grid.Column="6">
+				<CheckBox x:Name="CheckBoxShowFaceit" Content="Faceit"
+						  IsChecked="{Binding IsShowFaceitDemos}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowFaceitDemosCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowFaceit}"/>
+			</Grid>
+
+			<Grid Grid.Column="7">
 				<CheckBox x:Name="CheckBoxShowEsea" Content="ESEA"
 						  IsChecked="{Binding IsShowEseaDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
@@ -271,7 +280,7 @@
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowEsea}"/>
 			</Grid>
 
-			<Grid Grid.Column="7">
+			<Grid Grid.Column="8">
 				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
 						  IsChecked="{Binding IsShowAllFolders}"
 						  Style="{StaticResource CheckBoxFilterStyle}"

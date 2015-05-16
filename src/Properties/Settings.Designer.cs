@@ -682,5 +682,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowOldDemos"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowFaceitDemos {
+            get {
+                return ((bool)(this["ShowFaceitDemos"]));
+            }
+            set {
+                this["ShowFaceitDemos"] = value;
+            }
+        }
     }
 }
