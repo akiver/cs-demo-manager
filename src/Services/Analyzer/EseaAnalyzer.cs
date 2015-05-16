@@ -303,6 +303,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			ProcessClutches();
 			ProcessOpenAndEntryKills(killEvent);
+			ProcessPlayersRating();
 
 			Demo.Kills.Add(killEvent);
 		}

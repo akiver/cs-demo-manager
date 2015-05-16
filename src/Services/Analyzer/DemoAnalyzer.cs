@@ -536,6 +536,24 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 		}
 
+		/// <summary>
+		/// Calculate rating for each players
+		/// </summary>
+		protected void ProcessPlayersRating()
+		{
+			IPlayerRatingService ratingService = new PlayerRatingService();
+
+			// Update players score
+			foreach (Player player in Parser.PlayingParticipants)
+			{
+				PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+				if (pl != null)
+				{
+					pl.RatingHltv = (float)ratingService.ComputeHltvOrgRating(Demo.Rounds.Count, pl.KillsCount, pl.DeathCount, new int[5] { pl.OnekillCount, pl.TwokillCount, pl.ThreekillCount, pl.FourKillCount, pl.FiveKillCount });
+				}
+			}
+		}
+
 		protected void ProcessOpenAndEntryKills(KillEvent killEvent)
 		{
 			if (killEvent.DeathPerson == null || killEvent.Killer == null) return;
