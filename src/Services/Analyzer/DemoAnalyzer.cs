@@ -22,41 +22,30 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		public Demo Demo { get; set; }
 
 		public Round CurrentRound { get; set; } = new Round();
-
 		public Overtime CurrentOvertime { get; set; } = new Overtime();
 
 		public bool IsMatchStarted { get; set; } = false;
-
 		public bool IsEntryKillDone { get; set; }
-
 		public bool IsOpeningKillDone { get; set; }
-
 		public bool IsHalfMatch { get; set; } = false;
-
 		public bool IsOvertime { get; set; } = false;
+		public bool IsLastRoundHalf;
 
 		public bool IsFreezetime { get; set; } = false;
 
 		public int MoneySaveAmoutTeam1 { get; set; } = 0;
-
 		public int MoneySaveAmoutTeam2 { get; set; } = 0;
 
 		public int RoundCount { get; set; } = 0;
-
 		public int OvertimeCount { get; set; } = 0;
-
-		public bool IsLastRoundHalf;
 
 		public Dictionary<Player, int> KillsThisRound { get; set; } = new Dictionary<Player, int>();
 
 		public const string TEAM2_NAME = "Team 2";
-
 		public const string TEAM1_NAME = "Team 1";
 
 		private static readonly Regex LocalRegex = new Regex("^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]+(\\:[0-9]{1,5})?$");
-
 		private static readonly Regex FILENAME_FACEIT_REGEX = new Regex("^[0-9]+_team[a-z0-9-]+-team[a-z0-9-]+_de_[a-z0-9]+\\.dem");
-
 		private static readonly Regex FILENAME_EBOT_REGEX = new Regex("^([0-9]*)_(.*?)-(.*?)_(.*?)(.dem)$");
 
 		public bool AnalyzeHeatmapPoint { get; set; } = false;
@@ -81,11 +70,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected abstract void RegisterEvents();
 
 		protected abstract void HandleMatchStarted(object sender, MatchStartedEventArgs e);
-
 		protected abstract void HandleRoundStart(object sender, RoundStartedEventArgs e);
-
 		protected abstract void HandleRoundEnd(object sender, RoundEndedEventArgs e);
-
 		protected abstract void HandlePlayerKilled(object sender, PlayerKilledEventArgs e);
 
 		public static DemoAnalyzer Factory(Demo demo)
@@ -111,12 +97,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			DemoParser parser = new DemoParser(File.OpenRead(pathDemoFile));
 
 			DateTime dateFile = File.GetCreationTime(pathDemoFile);
-			string dateAsString = dateFile.ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-
-			if (Properties.Settings.Default.DateFormatEuropean)
-			{
-				dateAsString = dateFile.ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-			}
+			string dateAsString = dateFile.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
 			Demo demo = new Demo
 			{
@@ -151,21 +132,25 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 			demo.Duration = header.PlaybackTime;
 			demo.MapName = header.MapName;
+			demo.Source = DetermineDemoSource(demo, parser, header);
 
+			return demo;
+		}
+
+		private static Source DetermineDemoSource(Demo demo, DemoParser parser, DemoHeader header)
+		{
 			// Check if it's a POV demo
 			Match match = LocalRegex.Match(header.ServerName);
 			if (match.Success)
 			{
 				demo.Type = "POV";
-				demo.Source = Source.Factory("pov");
-				return demo;
+				return Source.Factory("pov");
 			}
 
 			// Check for esea demos, appart the filename there is no magic to detect it
 			if (demo.Name.Contains("esea"))
 			{
-				demo.Source = Source.Factory("esea");
-				return demo;
+				return Source.Factory("esea");
 			}
 
 			// Check for faceit demos
@@ -173,20 +158,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// (May 2015) Faceit : uses hostname
 			if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
 			{
-				demo.Source = Source.Factory("faceit");
-				return demo;
+				return Source.Factory("faceit");
 			}
 
 			// Check for ebot demos
 			if (demo.Hostname.Contains("eBot") || FILENAME_EBOT_REGEX.Match(demo.Name).Success)
 			{
-				demo.Source = Source.Factory("ebot");
-				return demo;
+				return Source.Factory("ebot");
 			}
 
 			// If none of the previous checks matched, we use ValveAnalyzer
-			demo.Source = Source.Factory("valve");
-			return demo;
+			return Source.Factory("valve");
 		}
 
 		#region Events Handlers

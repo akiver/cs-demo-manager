@@ -63,18 +63,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			await Task.Run(() => Parser.ParseToEnd());
 
-			Demo.Tickrate = Parser.TickRate;
-			Demo.MapName = Parser.Map;
-			Demo.Duration = Parser.Header.PlaybackTime;
-			if (Properties.Settings.Default.DateFormatEuropean)
-			{
-				Demo.Date = File.GetCreationTime(Demo.Path).ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-			}
-			else
-			{
-				Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-			}
-
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				// As round_officialy_ended isn't raised we add the last round / OT after the analyze
