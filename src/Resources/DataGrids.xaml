@@ -44,6 +44,10 @@
 		<Setter Property="ContextMenu" Value="{StaticResource DemoRowContextMenu}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="WinStatusHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Win/Lose/Draw" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="ScoreTeam1Header">
 		<Setter Property="ToolTipService.ToolTip" Value="Score team 1" />
 	</Style>

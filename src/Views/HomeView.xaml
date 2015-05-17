@@ -329,6 +329,7 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TeamName2Column" Width="Auto" Header="Team 2" Binding="{Binding ClanTagNameTeam2}" HeaderStyle="{StaticResource Team2NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="WinStatusHeader" Width="Auto" Header="Status" Binding="{Binding WinStatus}" HeaderStyle="{StaticResource WinStatusHeader}" />
 				<DataGridTextColumn x:Name="ScoreTeam1Column" Width="Auto" Header="ST1" Binding="{Binding ScoreTeam1}" HeaderStyle="{StaticResource ScoreTeam1Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ScoreTeam2Column" Width="Auto" Header="ST2" Binding="{Binding ScoreTeam2}" HeaderStyle="{StaticResource ScoreTeam2Header}"
