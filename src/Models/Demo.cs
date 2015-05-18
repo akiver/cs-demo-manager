@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System;
 
 namespace CSGO_Demos_Manager.Models
 {
@@ -61,6 +62,11 @@ namespace CSGO_Demos_Manager.Models
 		/// Server's tickrate (64 or 128 usually)
 		/// </summary>
 		private float _serverTickrate;
+
+		/// <summary>
+		/// Demo duration
+		/// </summary>
+		private float _duration;
 
 		/// <summary>
 		/// Demo's map name
@@ -305,6 +311,19 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _serverTickrate; }
 			set { Set(() => ServerTickrate, ref _serverTickrate, value); }
+		}
+
+		[JsonProperty("duration")]
+		public float Duration
+		{
+			get { return _duration; }
+			set { Set(() => Duration, ref _duration, value); }
+		}
+
+		[JsonIgnore]
+		public string DurationTime
+		{
+			get { return TimeSpan.FromSeconds(_duration).ToString(@"hh\:mm\:ss"); }
 		}
 
 		[JsonProperty("map_name")]
