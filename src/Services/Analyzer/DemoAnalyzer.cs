@@ -59,6 +59,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		public bool AnalyzePlayersPosition { get; set; } = false;
 
+		private readonly IPlayerRatingService _playerRatingService = new PlayerRatingService();
+
 		/// <summary>
 		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who throw a moloto
 		/// </summary>
@@ -852,16 +854,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// </summary>
 		protected void ProcessPlayersRating()
 		{
-			IPlayerRatingService ratingService = new PlayerRatingService();
-
 			// Update players score
-			foreach (Player player in Parser.PlayingParticipants)
+			foreach (PlayerExtended player in Demo.Players)
 			{
-				PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
-				if (pl != null)
+				player.RatingHltv = (float)_playerRatingService.ComputeHltvOrgRating(Demo.Rounds.Count, player.KillsCount, player.DeathCount, new int[5]
 				{
-					pl.RatingHltv = (float)ratingService.ComputeHltvOrgRating(Demo.Rounds.Count, pl.KillsCount, pl.DeathCount, new int[5] { pl.OnekillCount, pl.TwokillCount, pl.ThreekillCount, pl.FourKillCount, pl.FiveKillCount });
-				}
+					player.OnekillCount, player.TwokillCount, player.ThreekillCount, player.FourKillCount, player.FiveKillCount
+				});
 			}
 		}
 
