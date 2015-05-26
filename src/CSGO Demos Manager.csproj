@@ -158,6 +158,10 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -179,23 +183,30 @@
     <Compile Include="Exceptions\Heatmap\MapHeatmapUnavailableException.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
+    <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />
     <Compile Include="Models\Events\BaseEvent.cs" />
     <Compile Include="Models\Events\BombDefusedEvent.cs" />
     <Compile Include="Models\Events\BombPlantedEvent.cs" />
+    <Compile Include="Models\Events\DecoyEndedEvent.cs" />
+    <Compile Include="Models\Events\DecoyStartedEvent.cs" />
     <Compile Include="Models\Events\EntryKillEvent.cs" />
+    <Compile Include="Models\Events\MolotovFireStartedEvent.cs" />
     <Compile Include="Models\Events\OpenKillEvent.cs" />
     <Compile Include="Models\Events\ExplosiveNadeExplodedEvent.cs" />
     <Compile Include="Models\Events\FlashbangExplodedEvent.cs" />
     <Compile Include="Models\Events\KillEvent.cs" />
     <Compile Include="Models\Events\MolotovFireEndedEvent.cs" />
     <Compile Include="Models\Events\NadeBaseEvent.cs" />
+    <Compile Include="Models\Events\SmokeNadeEndedEvent.cs" />
     <Compile Include="Models\Events\SmokeNadeStartedEvent.cs" />
     <Compile Include="Models\Events\WeaponFire.cs" />
     <Compile Include="Models\HeatmapPoint.cs" />
-    <Compile Include="Models\HeatmapSelector.cs" />
+    <Compile Include="Models\MapPoint.cs" />
     <Compile Include="Models\Overtime.cs" />
+    <Compile Include="Models\PlayerColor.cs" />
     <Compile Include="Models\PlayerExtended.cs" />
+    <Compile Include="Models\PositionPoint.cs" />
     <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Source\Ebot.cs" />
     <Compile Include="Models\Source\Esea.cs" />
@@ -207,6 +218,7 @@
     <Compile Include="Models\Steam\PlayerSummary.cs" />
     <Compile Include="Models\Suspect.cs" />
     <Compile Include="Models\TeamExtended.cs" />
+    <Compile Include="Models\ComboboxSelector.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Internals\Mouse\MouseBindingExtended.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -216,12 +228,29 @@
     </Compile>
     <Resource Include="Resources\steam_api_key.txt" />
     <Resource Include="Resources\images\overview\de_mirage.png" />
-    <None Include="Resources\images\overview\de_overpass.png" />
+    <Resource Include="Resources\images\overview\de_overpass.png" />
     <Resource Include="Resources\images\overview\base64\de_overpass.txt" />
-    <None Include="Resources\images\overview\de_cbble.png" />
+    <Resource Include="Resources\images\overview\de_cbble.png" />
     <Resource Include="Resources\images\overview\base64\de_cbble.txt" />
     <Resource Include="Resources\images\overview\base64\de_mirage.txt" />
     <None Include="Resources\images\logo\faceit.png" />
+    <None Include="Resources\images\icons\flashbang.png" />
+    <None Include="Resources\images\icons\flashbang_exploded.png" />
+    <None Include="Resources\images\icons\decoy.png" />
+    <None Include="Resources\images\icons\hegrenade.png" />
+    <None Include="Resources\images\icons\incendiary.png" />
+    <None Include="Resources\images\icons\molotov.png" />
+    <None Include="Resources\images\icons\smokegrenade.png" />
+    <None Include="Resources\images\icons\bomb_exploded.png" />
+    <None Include="Resources\images\icons\he_exploded.png" />
+    <None Include="Resources\images\icons\kill.png" />
+    <None Include="Resources\images\icons\molotov_burning.png" />
+    <None Include="Resources\images\icons\smoke.png" />
+    <None Include="Resources\images\icons\smoke_start.png" />
+    <None Include="Resources\images\icons\defuser.png" />
+    <None Include="Resources\images\icons\decoy_exploded.png" />
+    <None Include="Resources\images\icons\decoy_screaming.png" />
+    <None Include="Resources\images\icons\bomb.png" />
     <Content Include="Resources\images\overview\base64\de_season.txt" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EseaAnalyzer.cs" />
@@ -232,6 +261,7 @@
     <Compile Include="Services\DemosService.cs" />
     <Compile Include="Services\DemosServiceDesign.cs" />
     <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\DrawService.cs" />
     <Compile Include="Services\Excel\ExcelService.cs" />
     <Compile Include="Services\Excel\Sheets\AbstractSheet.cs" />
     <Compile Include="Services\Excel\Sheets\EnryKillsPlayerSheet.cs" />
@@ -245,18 +275,19 @@
     <Compile Include="Services\Excel\Sheets\RoundsSheet.cs" />
     <Compile Include="Services\Excel\Sheets\ShootsSheet.cs" />
     <Compile Include="Services\GameLauncher.cs" />
-    <Compile Include="Services\Heatmap\Cache.cs" />
-    <Compile Include="Services\Heatmap\Cbble.cs" />
-    <Compile Include="Services\Heatmap\Dust2.cs" />
-    <Compile Include="Services\Heatmap\HeatmapService.cs" />
-    <Compile Include="Services\Heatmap\Inferno.cs" />
-    <Compile Include="Services\Heatmap\Mirage.cs" />
-    <Compile Include="Services\Heatmap\Nuke.cs" />
-    <Compile Include="Services\Heatmap\Overpass.cs" />
-    <Compile Include="Services\Heatmap\Season.cs" />
+    <Compile Include="Services\Map\Cache.cs" />
+    <Compile Include="Services\Map\Cbble.cs" />
+    <Compile Include="Services\Map\Dust2.cs" />
+    <Compile Include="Services\HeatmapService.cs" />
+    <Compile Include="Services\Map\Inferno.cs" />
+    <Compile Include="Services\Map\Mirage.cs" />
+    <Compile Include="Services\Map\Nuke.cs" />
+    <Compile Include="Services\Map\Overpass.cs" />
+    <Compile Include="Services\Map\Season.cs" />
     <Compile Include="Services\ICacheService.cs" />
     <Compile Include="Services\IDemosService.cs" />
     <Compile Include="Services\ISteamService.cs" />
+    <Compile Include="Services\Map\MapService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
@@ -264,6 +295,7 @@
     <Compile Include="ViewModel\HeatmapViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OverviewViewModel.cs" />
     <Compile Include="ViewModel\SuspectsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -278,6 +310,9 @@
     </Compile>
     <Compile Include="Views\HomeView.xaml.cs">
       <DependentUpon>HomeView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OverviewView.xaml.cs">
+      <DependentUpon>OverviewView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SuspectsView.xaml.cs">
       <DependentUpon>SuspectsView.xaml</DependentUpon>
@@ -340,6 +375,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OverviewView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

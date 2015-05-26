@@ -2,7 +2,7 @@
 
 namespace CSGO_Demos_Manager.Models
 {
-	public class HeatmapSelector : ObservableObject
+	public class ComboboxSelector : ObservableObject
 	{
 		#region Properties
 
@@ -16,31 +16,19 @@ namespace CSGO_Demos_Manager.Models
 
 		public string Id
 		{
-			get
-			{
-				return _id;
-			}
-			set
-			{
-				Set(() => Id, ref _id, value);
-			}
+			get { return _id; }
+			set { Set(() => Id, ref _id, value); }
 		}
 
 		public string Title
 		{
-			get
-			{
-				return _title;
-			}
-			set
-			{
-				Set(() => Title, ref _title, value);
-			}
+			get { return _title; }
+			set { Set(() => Title, ref _title, value); }
 		}
 
 		#endregion
 
-		public HeatmapSelector(string id, string title)
+		public ComboboxSelector(string id, string title)
 		{
 			_id = id;
 			_title = title;

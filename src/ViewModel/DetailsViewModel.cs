@@ -4,7 +4,6 @@ using CSGO_Demos_Manager.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Threading.Tasks;
-using CSGO_Demos_Manager.Services.Heatmap;
 using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Services;
 using MahApps.Metro.Controls.Dialogs;
@@ -45,6 +44,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<Demo> _analyzeDemoCommand;
 
 		private RelayCommand<Demo> _heatmapCommand;
+
+		private RelayCommand<Demo> _overviewCommand;
 
 		private RelayCommand<Demo> _goToKillsCommand;
 
@@ -127,8 +128,6 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						try
 						{
-							// TODO ugly
-							HeatmapService.Factory(CurrentDemo.MapName);
 							var heatmapViewModel = (new ViewModelLocator()).Heatmap;
 							heatmapViewModel.CurrentDemo = demo;
 							heatmapViewModel.HasGeneratedHeatmap = false;
@@ -140,6 +139,26 @@ namespace CSGO_Demos_Manager.ViewModel
 						{
 							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
 						}
+					}, demo => !IsAnalyzing));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to overview control
+		/// </summary>
+		public RelayCommand<Demo> OverviewCommand
+		{
+			get
+			{
+				return _overviewCommand
+					?? (_overviewCommand = new RelayCommand<Demo>(
+					demo =>
+					{
+						var overviewViewModel = (new ViewModelLocator()).Overview;
+						overviewViewModel.CurrentDemo = demo;
+						OverviewView overviewView = new OverviewView();
+						var mainViewModel = (new ViewModelLocator()).Main;
+						mainViewModel.CurrentPage.ShowPage(overviewView);
 					}, demo => !IsAnalyzing));
 			}
 		}

@@ -12,6 +12,8 @@
 
 		public Weapon Weapon { get; set; }
 
+		public override string Message => Killer.Name + " killed " + DeathPerson.Name + " with " + Weapon.Name;
+
 		public KillEvent(int tick)
 			: base(tick)
 		{

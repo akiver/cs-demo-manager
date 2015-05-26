@@ -253,5 +253,17 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		#endregion
+
+		public override bool Equals(object obj)
+		{
+			var item = obj as Round;
+
+			return item != null && Number.Equals(item.Number);
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
 	}
 }

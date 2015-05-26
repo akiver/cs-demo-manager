@@ -35,6 +35,9 @@
 		<KeyBinding Command="{Binding ExportDemoToExcelCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+X" />
+		<KeyBinding Command="{Binding OverviewCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Gesture="CTRL+O" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"/>
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
@@ -81,7 +84,24 @@
 						<TextBlock Text="Heatmap" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-				
+
+				<Button Command="{Binding OverviewCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Style="{StaticResource AccentedSquareButtonStyle}"
+					ToolTip="Overview (CTRL+O)"
+					Margin="5 0 0 0"
+					Width="90"
+					Height="30">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_map_treasure}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Overview" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<Button Command="{Binding GoToKillsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Style="{DynamicResource AccentedSquareButtonStyle}"

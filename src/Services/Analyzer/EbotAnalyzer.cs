@@ -49,6 +49,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerTeam += HandlePlayerTeam;
 			Parser.RoundFinal += HandleRoundFinal;
 			Parser.WinPanelMatch += HandleWinPanelMatch;
+			Parser.SmokeNadeEnded += HandleSmokeNadeEnded;
+			Parser.FireNadeStarted += HandleFireNadeStarted;
+			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
+			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync()
@@ -67,6 +71,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			else
 			{
 				Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+			}
+
+			if (AnalyzePlayersPosition)
+			{
+				LastPlayersFireEndedMolotov.Clear();
 			}
 
 			return Demo;
@@ -121,6 +130,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
 			// begin_new_match is raised after round_start, we have to detect first round here
+
+			IsFreezetime = true;
 
 			// Reset until both scores > 0
 			if (Parser.CTScore == 0 && Parser.TScore == 0)
@@ -277,6 +288,20 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Demo.Kills.Add(killEvent);
 			CurrentRound.Kills.Add(killEvent);
+
+			if (AnalyzePlayersPosition)
+			{
+				PositionPoint positionPoint = new PositionPoint
+				{
+					X = e.Victim.Position.X,
+					Y = e.Victim.Position.Y,
+					Player = Demo.Players.First(p => p.SteamId == e.Killer.SteamID),
+					Team = e.Killer.Team,
+					Event = killEvent,
+					Round = CurrentRound
+				};
+				Demo.PositionsPoint.Add(positionPoint);
+			}
 		}
 
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)

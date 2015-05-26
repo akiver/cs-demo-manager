@@ -1,0 +1,24 @@
+﻿using System.Windows.Media;
+using GalaSoft.MvvmLight;
+
+namespace CSGO_Demos_Manager.Models
+{
+	public class PlayerColor : ObservableObject
+	{
+		public string Name { get; set; }
+
+		public SolidColorBrush Color { get; set; }
+
+		public override bool Equals(object obj)
+		{
+			var item = obj as PlayerColor;
+
+			return item != null && Name == item.Name && Color.Equals(item.Color);
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+	}
+}

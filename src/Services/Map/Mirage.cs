@@ -1,9 +1,10 @@
-﻿namespace CSGO_Demos_Manager.Services.Heatmap
+﻿namespace CSGO_Demos_Manager.Services.Map
 {
-	public class Mirage : HeatmapService
+	public class Mirage : MapService
 	{
 		public Mirage()
 		{
+			MapName = "de_mirage";
 			StartX = -3217;
 			StartY = -3401;
 			EndX = 1912;

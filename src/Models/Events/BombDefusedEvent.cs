@@ -6,6 +6,8 @@
 
 		public string Site { get; set; }
 
+		public override string Message => "Bomb defused";
+
 		public BombDefusedEvent(int tick)
 			: base(tick)
 		{

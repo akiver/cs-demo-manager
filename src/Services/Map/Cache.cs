@@ -1,9 +1,10 @@
-﻿namespace CSGO_Demos_Manager.Services.Heatmap
+﻿namespace CSGO_Demos_Manager.Services.Map
 {
-	public class Cache : HeatmapService
+	public class Cache : MapService
 	{
 		public Cache()
 		{
+			MapName = "de_cache";
 			StartX = -2281;
 			StartY = -2155;
 			EndX = 3370;

@@ -1,9 +1,10 @@
-﻿namespace CSGO_Demos_Manager.Services.Heatmap
+﻿namespace CSGO_Demos_Manager.Services.Map
 {
-	public class Dust2 : HeatmapService
+	public class Dust2 : MapService
 	{
 		public Dust2()
 		{
+			MapName = "de_dust2";
 			StartX = -2486;
 			StartY = -1150;
 			EndX = 2127;

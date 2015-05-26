@@ -254,5 +254,10 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(true);
 		}
-	}
+
+		public Task<Demo> AnalyzePlayersPosition(Demo demo)
+		{
+			return Task.FromResult(demo);
+		}
+    }
 }

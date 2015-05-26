@@ -69,7 +69,7 @@ namespace CSGO_Demos_Manager.Services
 			demo = await analyzer.AnalyzeDemoAsync();
 
 			await _cacheService.WriteDemoDataCache(demo);
-	   
+
 			return demo;
 		}
 
@@ -109,6 +109,24 @@ namespace CSGO_Demos_Manager.Services
 				}
 				await _cacheService.WriteDemoDataCache(demo);
 			}
+		}
+
+		public async Task<Demo> AnalyzePlayersPosition(Demo demo)
+		{
+			if (!File.Exists(demo.Path))
+			{
+				// Demo may be moved to an other folder, just clear cache
+				await _cacheService.RemoveDemo(demo);
+			}
+
+			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+			analyzer.AnalyzePlayersPosition = true;
+
+			demo = await analyzer.AnalyzeDemoAsync();
+
+			await _cacheService.WriteDemoDataCache(demo);
+
+			return demo;
 		}
 	}
 }

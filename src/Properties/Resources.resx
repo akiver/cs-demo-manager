@@ -118,6 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="decoy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\decoy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="de_cache" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_cache.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -175,16 +178,64 @@
   <data name="faceit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\logo\faceit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="flashbang" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\flashbang.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flashbang_exploded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\flashbang_exploded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="heatmap" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\html\heatmap.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="hegrenade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\hegrenade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="incendiary" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\incendiary.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="molotov" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\molotov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="pov" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\logo\pov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smokegrenade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\smokegrenade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="steam_api_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="valve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\logo\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bomb_exploded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\bomb_exploded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="he_exploded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\he_exploded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kill" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\kill.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="molotov_burning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\molotov_burning.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smoke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\smoke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="smoke_start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\smoke_start.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defuser" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\defuser.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="decoy_exploded" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\decoy_exploded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="decoy_screaming" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\decoy_screaming.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bomb" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\icons\bomb.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

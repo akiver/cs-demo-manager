@@ -37,5 +37,7 @@ namespace CSGO_Demos_Manager.Services
 		Task SaveStatus(Demo demo, string status);
 
 		Task SetSource(ObservableCollection<Demo> demos, string source);
+
+		Task<Demo> AnalyzePlayersPosition(Demo demo);
 	}
 }

@@ -1,9 +1,10 @@
-﻿namespace CSGO_Demos_Manager.Services.Heatmap
+﻿namespace CSGO_Demos_Manager.Services.Map
 {
-	public class Overpass : HeatmapService
+	public class Overpass : MapService
 	{
 		public Overpass()
 		{
+			MapName = "de_overpass";
 			StartX = -4820;
 			StartY = -3591;
 			EndX = 503;

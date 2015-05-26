@@ -42,6 +42,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.BotTakeOver += HandleBotTakeOver;
 			Parser.LastRoundHalf += HandleLastRoundHalf;
 			Parser.WinPanelMatch += HandleWinPanelMatch;
+			Parser.SmokeNadeEnded += HandleSmokeNadeEnded;
+			Parser.FireNadeStarted += HandleFireNadeStarted;
+			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
+			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync()
@@ -81,6 +85,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}).OrderByDescending(w => w.Count);
 				Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
 			});
+
+			if (AnalyzePlayersPosition)
+			{
+				LastPlayersFireEndedMolotov.Clear();
+			}
 
 			return Demo;
 		}
@@ -163,8 +172,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
-			// Reset the round counter if the match isn't really started
 			if (!IsMatchStarted) return;
+
+			IsFreezetime = true;
 
 			CreateNewRound();
 		}
@@ -352,6 +362,19 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Demo.Kills.Add(killEvent);
 			CurrentRound.Kills.Add(killEvent);
+			if (AnalyzePlayersPosition)
+			{
+				PositionPoint positionPoint = new PositionPoint
+				{
+					X = e.Victim.Position.X,
+					Y = e.Victim.Position.Y,
+					Player = Demo.Players.First(p => p.SteamId == e.Killer.SteamID),
+					Team = e.Killer.Team,
+					Event = killEvent,
+					Round = CurrentRound
+				};
+				Demo.PositionsPoint.Add(positionPoint);
+			}
 		}
 
 		#endregion

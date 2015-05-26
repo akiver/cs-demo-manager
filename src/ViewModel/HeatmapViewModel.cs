@@ -2,7 +2,6 @@
 using CSGO_Demos_Manager.Exceptions.Heatmap;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Services;
-using CSGO_Demos_Manager.Services.Heatmap;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
@@ -13,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
 
 namespace CSGO_Demos_Manager.ViewModel
@@ -36,9 +36,11 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private readonly DialogService _dialogService;
 
-		private List<HeatmapSelector> _heatmapSelectors = new List<HeatmapSelector>();
+		private HeatmapService _heatmapService;
 
-		private HeatmapSelector _currentHeatmapSelector;
+		private List<ComboboxSelector> _heatmapSelectors = new List<ComboboxSelector>();
+
+		private ComboboxSelector _currentHeatmapSelector;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -70,13 +72,13 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		public HeatmapService HeamapService { get; set; }
 
-		public List<HeatmapSelector> HeatmapSelectors
+		public List<ComboboxSelector> HeatmapSelectors
 		{
 			get { return _heatmapSelectors; }
 			set { Set(() => HeatmapSelectors, ref _heatmapSelectors, value); }
 		}
 
-		public HeatmapSelector CurrentHeatmapSelector
+		public ComboboxSelector CurrentHeatmapSelector
 		{
 			get { return _currentHeatmapSelector; }
 			set { Set(() => CurrentHeatmapSelector, ref _currentHeatmapSelector, value); }
@@ -113,8 +115,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						try
 						{
-							HeamapService = HeatmapService.Factory(CurrentDemo.MapName);
-							string html = await HeamapService.GenerateHtml(CurrentDemo, CurrentHeatmapSelector);
+							MapService mapService = MapService.Factory(CurrentDemo.MapName);
+							_heatmapService = new HeatmapService(mapService);
+							
+							string html = await _heatmapService.Generate(CurrentDemo, CurrentHeatmapSelector);
 							HeatmapBrowser.LoadHtml(html, "http://render/html");
 						}
 						catch (HeatmapException e)
@@ -146,7 +150,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var response = t.Result;
 							EvaluateJavaScriptResult = response.Success ? (response.Result ?? "null") : response.Message;
 
-							Image image = HeamapService.GenerateImage((string)response.Result);
+							Image image = _heatmapService.GenerateImage((string)response.Result);
 
 							SaveFileDialog saveHeatmapDialog = new SaveFileDialog
 							{
@@ -190,12 +194,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		public HeatmapViewModel(DialogService dialogService)
 		{
 			_dialogService = dialogService;
-			HeatmapSelectors.Add(new HeatmapSelector("kills", "Kills"));
-			HeatmapSelectors.Add(new HeatmapSelector("shots", "Shots fired"));
-			HeatmapSelectors.Add(new HeatmapSelector("flashbangs", "Flashbangs"));
-			HeatmapSelectors.Add(new HeatmapSelector("he", "HE Grenades"));
-			HeatmapSelectors.Add(new HeatmapSelector("smokes", "Smokes"));
-			HeatmapSelectors.Add(new HeatmapSelector("molotovs", "Molotovs"));
+			HeatmapSelectors.Add(new ComboboxSelector("kills", "Kills"));
+			HeatmapSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
+			HeatmapSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
+			HeatmapSelectors.Add(new ComboboxSelector("he", "HE Grenades"));
+			HeatmapSelectors.Add(new ComboboxSelector("smokes", "Smokes"));
+			HeatmapSelectors.Add(new ComboboxSelector("molotovs", "Molotovs"));
 			CurrentHeatmapSelector = HeatmapSelectors[0];
 		}
 

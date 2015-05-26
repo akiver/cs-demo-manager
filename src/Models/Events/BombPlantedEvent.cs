@@ -6,6 +6,10 @@
 
 		public string Site { get; set; }
 
+		public float X { get; set; }
+
+		public float Y { get; set; }
+
 		public BombPlantedEvent(int tick) : base(tick)
 		{
 			Player = new PlayerExtended();

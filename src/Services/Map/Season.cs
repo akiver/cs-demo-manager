@@ -1,9 +1,10 @@
-﻿namespace CSGO_Demos_Manager.Services.Heatmap
+﻿namespace CSGO_Demos_Manager.Services.Map
 {
-	public class Season : HeatmapService
+	public class Season : MapService
 	{
 		public Season()
 		{
+			MapName = "de_season";
 			StartX = -985;
 			StartY = -2604;
 			EndX = 4122;

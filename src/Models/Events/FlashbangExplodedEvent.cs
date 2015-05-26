@@ -6,6 +6,8 @@ namespace CSGO_Demos_Manager.Models.Events
 	{
 		public List<PlayerExtended> FlashedPlayers { get; set; }
 
+		public override string Message => "Flashbang explosed";
+
 		public FlashbangExplodedEvent(int tick)
 			: base(tick)
 		{

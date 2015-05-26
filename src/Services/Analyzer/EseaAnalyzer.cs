@@ -51,6 +51,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.ExplosiveNadeExploded += HandleExplosiveNadeExploded;
 			Parser.SmokeNadeStarted += HandleSmokeNadeStarted;
 			Parser.FireNadeEnded += HandleFireNadeEnded;
+			Parser.SmokeNadeEnded += HandleSmokeNadeEnded;
+			Parser.FireNadeStarted += HandleFireNadeStarted;
+			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
+			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync()
@@ -95,6 +99,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
 			});
 
+			if (AnalyzePlayersPosition)
+			{
+				LastPlayersFireEndedMolotov.Clear();
+			}
+
 			return Demo;
 		}
 
@@ -102,6 +111,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected new void HandleFreezetimeEnded(object sender, FreezetimeEndedEventArgs e)
 		{
+			IsFreezetime = false;
 			_matchStartedCount = 0;
 			base.HandleFreezetimeEnded(sender, e);
 		}
@@ -164,6 +174,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// Match is really ongoing after a LO3
 			if (!IsOvertime && _matchStartedCount > 1) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
+
+			IsFreezetime = true;
 
 			CreateNewRound();
 		}
@@ -312,6 +324,20 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			ProcessOpenAndEntryKills(killEvent);
 
 			Demo.Kills.Add(killEvent);
+
+			if (AnalyzePlayersPosition)
+			{
+				PositionPoint positionPoint = new PositionPoint
+				{
+					X = e.Victim.Position.X,
+					Y = e.Victim.Position.Y,
+					Player = Demo.Players.First(p => p.SteamId == e.Killer.SteamID),
+					Team = e.Killer.Team,
+					Event = killEvent,
+					Round = CurrentRound
+				};
+				Demo.PositionsPoint.Add(positionPoint);
+			}
 		}
 
 		#endregion

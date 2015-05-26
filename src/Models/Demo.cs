@@ -216,6 +216,9 @@ namespace CSGO_Demos_Manager.Models
 
 		private ObservableCollection<TeamExtended> _teams = new ObservableCollection<TeamExtended>();
 
+		[JsonIgnore]
+		public List<PositionPoint> PositionsPoint { get; set; } = new List<PositionPoint>();
+
 		#endregion
 
 		#region Accessors
@@ -589,6 +592,7 @@ namespace CSGO_Demos_Manager.Models
 					_kills.Clear();
 					_teams.Clear();
 					_overtimes.Clear();
+					PositionsPoint.Clear();
 				});
 		}
 	}

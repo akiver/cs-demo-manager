@@ -1,9 +1,10 @@
-﻿namespace CSGO_Demos_Manager.Services.Heatmap
+﻿namespace CSGO_Demos_Manager.Services.Map
 {
-	public class Cbble : HeatmapService
+	public class Cbble : MapService
 	{
 		public Cbble()
 		{
+			MapName = "de_cbble";
 			StartX = -3819;
 			StartY = -3073;
 			EndX = 2282;
