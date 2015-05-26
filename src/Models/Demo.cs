@@ -320,7 +320,11 @@ namespace CSGO_Demos_Manager.Models
 		public float Duration
 		{
 			get { return _duration; }
-			set { Set(() => Duration, ref _duration, value); }
+			set
+			{
+				Set(() => Duration, ref _duration, value);
+				RaisePropertyChanged("DurationTime");
+			}
 		}
 
 		[JsonIgnore]
