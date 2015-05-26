@@ -106,8 +106,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DemoInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dc7de83c756ec63d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\DemoInfo.1.1.0-ci1430436743-f2a3d2f\lib\net45\DemoInfo.dll</HintPath>
+      <HintPath>..\packages\DemoInfo.1.1.0\lib\net45\DemoInfo.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.1.1.35049, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
