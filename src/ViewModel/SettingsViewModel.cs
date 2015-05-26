@@ -108,6 +108,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showWinnerSideColumn = Properties.Settings.Default.ShowWinnerSideColumn;
 
+		private bool _showDurationColumn = Properties.Settings.Default.ShowDurationColumn;
+
 		private bool _dateFormatEuropean = Properties.Settings.Default.DateFormatEuropean;
 
 		#endregion
@@ -574,6 +576,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Properties.Settings.Default.ShowClutch1v5Column = value;
 				Properties.Settings.Default.Save();
 				Set(() => ShowClutch1v5Column, ref _showClutch1v5Column, value);
+			}
+		}
+
+		public bool ShowDurationColumn
+		{
+			get { return _showDurationColumn; }
+			set
+			{
+				Properties.Settings.Default.ShowDurationColumn = value;
+				Properties.Settings.Default.Save();
+				Set(() => ShowDurationColumn, ref _showDurationColumn, value);
 			}
 		}
 

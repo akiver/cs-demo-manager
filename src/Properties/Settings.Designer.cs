@@ -694,5 +694,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowFaceitDemos"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowDurationColumn {
+            get {
+                return ((bool)(this["ShowDurationColumn"]));
+            }
+            set {
+                this["ShowDurationColumn"] = value;
+            }
+        }
     }
 }
