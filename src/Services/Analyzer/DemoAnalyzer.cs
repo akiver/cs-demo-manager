@@ -139,6 +139,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				demo.ServerTickrate = header.PlaybackTicks / header.PlaybackTime;
 			}
+			if (header.PlaybackFrames != 0 && header.PlaybackTime != 0)
+			{
+				demo.Tickrate = (int)Math.Round((double)header.PlaybackFrames / header.PlaybackTime);
+			}
+			demo.Duration = header.PlaybackTime;
 			demo.MapName = header.MapName;
 
 			// Check if it's a POV demo

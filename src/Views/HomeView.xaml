@@ -333,6 +333,7 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ScoreTeam2Column" Width="Auto" Header="ST2" Binding="{Binding ScoreTeam2}" HeaderStyle="{StaticResource ScoreTeam2Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="DurationColumn1" Width="Auto" Header="Duration" Binding="{Binding DurationTime}" />
 				<DataGridTextColumn x:Name="HostnameColumn" Width="Auto" Header="Hostname" Binding="{Binding Hostname}" HeaderStyle="{StaticResource HostnameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHostnameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ClientNameColumn" Width="Auto" Header="Client" Binding="{Binding ClientName}" HeaderStyle="{StaticResource ClientnameHeader}"
