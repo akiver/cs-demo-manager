@@ -424,6 +424,8 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource ScoreHeader}" x:Name="ScoreTeam1Column" Width="Auto" Header="Score" Binding="{Binding Score}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}" x:Name="RatingTeam1Column" Width="Auto" Header="Rating" Binding="{Binding RatingHltv}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
 											<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillsPlayerTeam1Column" Width="Auto" Header="5K" Binding="{Binding FiveKillCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}" x:Name="FourKillsPlayerTeam1Column" Width="Auto" Header="4K" Binding="{Binding FourKillCount}"
@@ -479,6 +481,8 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource ScoreHeader}" x:Name="ScoreTeam2Column" Width="Auto" Header="Score" Binding="{Binding Score}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}" x:Name="RatingTeam2Column" Width="Auto" Header="Rating" Binding="{Binding RatingHltv}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
 											<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillsPlayerTeam2Column" Width="Auto" Header="5K" Binding="{Binding FiveKillCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}" x:Name="FourKillsPlayerTeam2Column" Width="Auto" Header="4K" Binding="{Binding FourKillCount}"

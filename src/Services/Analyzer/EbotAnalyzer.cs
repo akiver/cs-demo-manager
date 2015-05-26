@@ -112,6 +112,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					Demo.Overtimes.Add(CurrentOvertime);
 				});
 			}
+
+			ProcessPlayersRating();
 		}
 
 		protected void HandleRoundFinal(object sender, RoundFinalEventArgs e)

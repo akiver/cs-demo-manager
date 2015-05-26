@@ -156,6 +156,11 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private bool _hasOpeningKill;
 
+		/// <summary>
+		/// Rating based on hltv.org formula that the player made during the match
+		/// </summary>
+		private float _ratingHltv;
+
 		#endregion
 
 		#region Accessors
@@ -321,6 +326,13 @@ namespace CSGO_Demos_Manager.Models
 				RaisePropertyChanged("HeadshotAsString");
 				Set(() => KillsCount, ref _killCount, value);
 			}
+		}
+
+		[JsonProperty("rating_hltv")]
+		public float RatingHltv
+		{
+			get { return _ratingHltv; }
+			set { Set(() => RatingHltv, ref _ratingHltv, value); }
 		}
 
 		[JsonIgnore]

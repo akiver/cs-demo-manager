@@ -144,6 +144,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Score" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="RatingHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Rating" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="AssistHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Assist" />
 	</Style>

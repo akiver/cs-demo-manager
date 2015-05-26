@@ -286,8 +286,10 @@
     <Compile Include="Services\Map\Season.cs" />
     <Compile Include="Services\ICacheService.cs" />
     <Compile Include="Services\IDemosService.cs" />
+    <Compile Include="Services\IPlayerRatingService.cs" />
     <Compile Include="Services\ISteamService.cs" />
     <Compile Include="Services\Map\MapService.cs" />
+    <Compile Include="Services\PlayerRatingService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
