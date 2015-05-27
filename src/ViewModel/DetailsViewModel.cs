@@ -1,9 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using CSGO_Demos_Manager.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Services;
 using MahApps.Metro.Controls.Dialogs;
@@ -65,6 +67,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private readonly HeatmapView _heatmapView;
 
+		private ICollectionView _playersTeam1Collection;
+
+		private ICollectionView _playersTeam2Collection;
+
 		#endregion
 
 		#region Accessors
@@ -72,7 +78,14 @@ namespace CSGO_Demos_Manager.ViewModel
 		public Demo CurrentDemo
 		{
 			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
+			set
+			{
+				Set(() => CurrentDemo, ref _currentDemo, value);
+				PlayersTeam1Collection = CollectionViewSource.GetDefaultView(_currentDemo.PlayersTeam1);
+				PlayersTeam2Collection = CollectionViewSource.GetDefaultView(_currentDemo.PlayersTeam2);
+				PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+				PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+			}
 		}
 
 		public Round CurrentRound
@@ -109,6 +122,18 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _notificationMessage; }
 			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
+		}
+
+		public ICollectionView PlayersTeam1Collection
+		{
+			get { return _playersTeam1Collection; }
+			set { Set(() => PlayersTeam1Collection, ref _playersTeam1Collection, value); }
+		}
+
+		public ICollectionView PlayersTeam2Collection
+		{
+			get { return _playersTeam2Collection; }
+			set { Set(() => PlayersTeam2Collection, ref _playersTeam2Collection, value); }
 		}
 
 		#endregion

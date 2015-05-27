@@ -394,7 +394,7 @@
 
 								<Grid Grid.Column="0">
 									<DataGrid x:Name="ListViewTeam1"
-											  ItemsSource="{Binding CurrentDemo.PlayersTeam1}"
+											  ItemsSource="{Binding PlayersTeam1Collection}"
 											  SelectedItem="{Binding SelectedPlayerTeam1}"
 											  Width="Auto"
 											  Style="{StaticResource DemosDataGridStyle}"
@@ -452,7 +452,7 @@
 
 								<Grid Grid.Column="1">
 									<DataGrid x:Name="ListViewtTeam2"
-									  ItemsSource="{Binding CurrentDemo.PlayersTeam2}"
+									  ItemsSource="{Binding PlayersTeam2Collection}"
 									  SelectedItem="{Binding SelectedPlayerTeam2}"
 									  CellStyle="{StaticResource DataGridCellStyle}"
 									  RowStyle="{StaticResource DataGridRowPlayerTeam2Style}"
