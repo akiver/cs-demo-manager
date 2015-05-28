@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services.Map;
@@ -319,7 +320,7 @@ namespace CSGO_Demos_Manager.Services
 				}
 				catch (Exception e)
 				{
-					Console.WriteLine(e.Message);
+					Logger.Instance.Log(e);
 				}
 			}
 		}
@@ -343,7 +344,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -367,7 +368,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -385,7 +386,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -403,7 +404,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -421,7 +422,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -444,7 +445,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -467,7 +468,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -486,7 +487,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -513,7 +514,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -540,7 +541,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -559,7 +560,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 
@@ -585,7 +586,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 

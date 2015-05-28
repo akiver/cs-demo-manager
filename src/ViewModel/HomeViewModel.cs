@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
 
 namespace CSGO_Demos_Manager.ViewModel
@@ -824,6 +825,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 				catch (Exception e)
 				{
+					Logger.Instance.Log(e);
 					demo.Status = "old";
 					demosFailed.Add(demo);
 					await _cacheService.WriteDemoDataCache(demo);
@@ -853,6 +855,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			catch (Exception e)
 			{
 				await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
+				Logger.Instance.Log(e);
 			}
 		}
 

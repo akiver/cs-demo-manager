@@ -181,6 +181,7 @@
     <Compile Include="Exceptions\Heatmap\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Heatmap\HeatmapException.cs" />
     <Compile Include="Exceptions\Heatmap\MapHeatmapUnavailableException.cs" />
+    <Compile Include="Internals\Logger.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />

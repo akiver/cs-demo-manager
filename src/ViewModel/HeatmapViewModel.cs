@@ -12,6 +12,7 @@ using System.Drawing.Imaging;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Input;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
 
@@ -123,6 +124,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 						catch (HeatmapException e)
 						{
+							Logger.Instance.Log(e);
 							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative).ConfigureAwait(false);
 						}
 
@@ -213,7 +215,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 			catch (Exception e)
 			{
-				Console.WriteLine(e.Message);
+				Logger.Instance.Log(e);
 			}
 		}
 	}

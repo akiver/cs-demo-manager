@@ -11,6 +11,7 @@ using CSGO_Demos_Manager.Services;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
 using CSGO_Demos_Manager.Exceptions.Heatmap;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Excel;
 
 namespace CSGO_Demos_Manager.ViewModel
@@ -223,6 +224,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							catch (Exception e)
 							{
+								Logger.Instance.Log(e);
 								await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
 							}
 							
@@ -308,6 +310,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 						catch (Exception e)
 						{
+							Logger.Instance.Log(e);
 							await _dialogService.ShowErrorAsync("An error occured while analyzing the demo " + demo.Name + "." +
 																"The demo may be too old, if not please send an email with the attached demo." +
 																"You can find more information on http://csgo-demos-manager.com.", MessageDialogStyle.Affirmative);
@@ -396,6 +399,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							catch (Exception e)
 							{
+								Logger.Instance.Log(e);
 								await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
 							}
 

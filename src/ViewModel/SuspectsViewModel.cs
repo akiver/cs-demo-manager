@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using CSGO_Demos_Manager.Internals;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace CSGO_Demos_Manager.ViewModel
@@ -102,6 +103,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							catch (Exception e)
 							{
+								Logger.Instance.Log(e);
 								await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
 							}
 
@@ -135,6 +137,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							catch (Exception e)
 							{
+								Logger.Instance.Log(e);
 								await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
 							}
 
@@ -214,6 +217,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 				catch (Exception e)
 				{
+					Logger.Instance.Log(e);
 					await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
 				}
 			}
