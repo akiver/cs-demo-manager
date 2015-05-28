@@ -84,28 +84,28 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Kills, ref _kills, value); }
 		}
 
-		[JsonProperty("flashbangs_exploded")]
+		[JsonIgnore]
 		public ObservableCollection<FlashbangExplodedEvent> FlashbangsExploded
 		{
 			get { return _flashbangsExploded; }
 			set { Set(() => FlashbangsExploded, ref _flashbangsExploded, value); }
 		}
 
-		[JsonProperty("smokes_started")]
+		[JsonIgnore]
 		public ObservableCollection<SmokeNadeStartedEvent> SmokesStarted
 		{
 			get { return _smokeNadeStarted; }
 			set { Set(() => SmokesStarted, ref _smokeNadeStarted, value); }
 		}
 
-		[JsonProperty("explosives_grenade_exploded")]
+		[JsonIgnore]
 		public ObservableCollection<ExplosiveNadeExplodedEvent> ExplosiveGrenadesExploded
 		{
 			get { return _explosiveGrenadesExploded; }
 			set { Set(() => ExplosiveGrenadesExploded, ref _explosiveGrenadesExploded, value); }
 		}
 
-		[JsonProperty("molotovs_throwed")]
+		[JsonIgnore]
 		public ObservableCollection<MolotovFireEndedEvent> MolotovsThrowed
 		{
 			get { return _molotovsThrowed; }

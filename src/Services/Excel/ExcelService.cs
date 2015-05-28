@@ -15,8 +15,6 @@ namespace CSGO_Demos_Manager.Services.Excel
 
 		private RoundsSheet _roundsSheet;
 
-		private ShootsSheet _shootsSheet;
-
 		private OpenKillsRoundSheet _openKillsRoundSheet;
 
 		private OpenKillsPlayerSheet _openKillsPlayerSheet;
@@ -39,8 +37,6 @@ namespace CSGO_Demos_Manager.Services.Excel
 			await _playersSheet.Generate();
 			_roundsSheet = new RoundsSheet(workbook, demo);
 			await _roundsSheet.Generate();
-			_shootsSheet = new ShootsSheet(workbook, demo);
-			await _shootsSheet.Generate();
 			_openKillsRoundSheet = new OpenKillsRoundSheet(workbook, demo);
 			await _openKillsRoundSheet.Generate();
 			_openKillsPlayerSheet = new OpenKillsPlayerSheet(workbook, demo);

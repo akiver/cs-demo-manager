@@ -39,5 +39,7 @@ namespace CSGO_Demos_Manager.Services
 		Task SetSource(ObservableCollection<Demo> demos, string source);
 
 		Task<Demo> AnalyzePlayersPosition(Demo demo);
+
+		Task<Demo> AnalyzeHeatmapPoints(Demo demo);
 	}
 }

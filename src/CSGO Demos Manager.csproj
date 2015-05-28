@@ -274,7 +274,6 @@
     <Compile Include="Services\Excel\Sheets\OpenKillsTeamSheet.cs" />
     <Compile Include="Services\Excel\Sheets\PlayersSheet.cs" />
     <Compile Include="Services\Excel\Sheets\RoundsSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\ShootsSheet.cs" />
     <Compile Include="Services\GameLauncher.cs" />
     <Compile Include="Services\Map\Cache.cs" />
     <Compile Include="Services\Map\Cbble.cs" />

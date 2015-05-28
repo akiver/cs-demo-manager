@@ -29,6 +29,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private Demo _currentDemo;
 
+		private readonly IDemosService _demosService;
+
 		private IWpfWebBrowser _heatmapBrowser;
 
 		private object _evaluateJavaScriptResult;
@@ -118,7 +120,10 @@ namespace CSGO_Demos_Manager.ViewModel
 						{
 							MapService mapService = MapService.Factory(CurrentDemo.MapName);
 							_heatmapService = new HeatmapService(mapService);
-							
+
+							// Analyze demos to get heatmap points
+							CurrentDemo = await _demosService.AnalyzeHeatmapPoints(CurrentDemo);
+
 							string html = await _heatmapService.Generate(CurrentDemo, CurrentHeatmapSelector);
 							HeatmapBrowser.LoadHtml(html, "http://render/html");
 						}
@@ -193,9 +198,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public HeatmapViewModel(DialogService dialogService)
+		public HeatmapViewModel(DialogService dialogService, IDemosService demoService)
 		{
 			_dialogService = dialogService;
+			_demosService = demoService;
 			HeatmapSelectors.Add(new ComboboxSelector("kills", "Kills"));
 			HeatmapSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
 			HeatmapSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));

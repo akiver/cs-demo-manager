@@ -39,7 +39,7 @@ namespace CSGO_Demos_Manager.Models.Events
 			}
 		}
 
-		[JsonProperty("result")]
+		[JsonIgnore]
 		public string Result => HasWin ? "Win" : "Loss";
 
 		public OpenKillEvent(int tick) : base(tick)

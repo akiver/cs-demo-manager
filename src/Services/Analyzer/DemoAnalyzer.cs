@@ -57,6 +57,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private static readonly Regex FILENAME_FACEIT_REGEX = new Regex("^[0-9]+_team[a-z0-9-]+-team[a-z0-9-]+_de_[a-z0-9]+\\.dem");
 
+		public bool AnalyzeHeatmapPoint { get; set; } = false;
+
 		public bool AnalyzePlayersPosition { get; set; } = false;
 
 		private readonly IPlayerRatingService _playerRatingService = new PlayerRatingService();
@@ -359,8 +361,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
 		{
-			if (!IsMatchStarted) return;
-			if (e.Shooter == null) return;
+			if (!AnalyzeHeatmapPoint && !AnalyzePlayersPosition || !IsMatchStarted || e.Shooter == null) return;
 
 			WeaponFire shoot = new WeaponFire(Parser.IngameTick)
 			{
@@ -370,10 +371,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Shooter = Demo.Players.First(p => p.SteamId == e.Shooter.SteamID),
 				Weapon = new Weapon()
 				{
+					// TODO OriginalString is OK only for stuffs
 					Name = e.Weapon.OriginalString,
 					ReserveAmmo = e.Weapon.ReserveAmmo
 				}
 			};
+
 			Demo.WeaponFired.Add(shoot);
 
 			if (AnalyzePlayersPosition)
@@ -447,7 +450,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleFireNadeEnded(object sender, FireEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!AnalyzePlayersPosition || !IsMatchStarted) return;
 
 			switch (e.NadeType)
 			{
@@ -470,7 +473,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 					}
 
-					if (AnalyzePlayersPosition && LastPlayersFireStartedMolotov.Any())
+					if (LastPlayersFireStartedMolotov.Any())
 					{
 						LastPlayersFireEndedMolotov.Enqueue(LastPlayersFireStartedMolotov.Peek());
 						// Remove the last player who started a fire
@@ -480,26 +483,24 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					molotovEvent.Thrower = thrower;
 					CurrentRound.MolotovsThrowed.Add(molotovEvent);
 
-					if (AnalyzePlayersPosition)
+					PositionPoint positionPoint = new PositionPoint
 					{
-						PositionPoint positionPoint = new PositionPoint
-						{
-							X = e.Position.X,
-							Y = e.Position.Y,
-							Player = thrower,
-							Team = thrower?.Team ?? Team.Spectate,
-							Event = molotovEvent,
-							Round = CurrentRound
-						};
-						Demo.PositionsPoint.Add(positionPoint);
-					}
+						X = e.Position.X,
+						Y = e.Position.Y,
+						Player = thrower,
+						Team = thrower?.Team ?? Team.Spectate,
+						Event = molotovEvent,
+						Round = CurrentRound
+					};
+					Demo.PositionsPoint.Add(positionPoint);
+					
 					break;
 			}
 		}
 
 		protected void HandleExplosiveNadeExploded(object sender, GrenadeEventArgs e)
 		{
-			if (!IsMatchStarted || e.ThrownBy == null) return;
+			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
 
 			ExplosiveNadeExplodedEvent explosiveEvent = new ExplosiveNadeExplodedEvent(Parser.IngameTick)
 			{
@@ -511,6 +512,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID)
 			};
 			CurrentRound.ExplosiveGrenadesExploded.Add(explosiveEvent);
+
 			if (AnalyzePlayersPosition)
 			{
 				PositionPoint positionPoint = new PositionPoint
@@ -528,8 +530,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleFlashNadeExploded(object sender, FlashEventArgs e)
 		{
-			if (!IsMatchStarted) return;
-			if (e.ThrownBy == null) return;
+			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
 
 			FlashbangExplodedEvent flashbangEvent = new FlashbangExplodedEvent(Parser.IngameTick)
 			{
@@ -552,6 +553,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}
 			}
 			CurrentRound.FlashbangsExploded.Add(flashbangEvent);
+
 			if (AnalyzePlayersPosition)
 			{
 				PositionPoint positionPoint = new PositionPoint
@@ -569,8 +571,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleSmokeNadeStarted(object sender, SmokeEventArgs e)
 		{
-			if (!IsMatchStarted) return;
-			if (e.ThrownBy == null) return;
+			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
 
 			SmokeNadeStartedEvent smokeEvent = new SmokeNadeStartedEvent(Parser.IngameTick)
 			{
@@ -582,6 +583,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID)
 			};
 			CurrentRound.SmokesStarted.Add(smokeEvent);
+
 			if (AnalyzePlayersPosition)
 			{
 				PositionPoint positionPoint = new PositionPoint
@@ -615,56 +617,47 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Round = CurrentRound
 			};
 			Demo.PositionsPoint.Add(positionPoint);
-			
 		}
 
 		protected void HandleDecoyNadeStarted(object sender, DecoyEventArgs e)
 		{
-			if (!IsMatchStarted || !AnalyzePlayersPosition) return;
+			// TODO add decoy to heatmap
+			if (!AnalyzePlayersPosition || !IsMatchStarted) return;
 		
-			// TODO Add to demo events list
 			DecoyStartedEvent decoyStartedEvent = new DecoyStartedEvent(Parser.IngameTick)
 			{
 				Thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID)
 			};
-
-			if (AnalyzePlayersPosition)
+			PositionPoint positionPoint = new PositionPoint
 			{
-				PositionPoint positionPoint = new PositionPoint
-				{
-					X = e.Position.X,
-					Y = e.Position.Y,
-					Player = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID),
-					Team = e.ThrownBy.Team,
-					Event = decoyStartedEvent,
-					Round = CurrentRound
-				};
-				Demo.PositionsPoint.Add(positionPoint);
-			}
+				X = e.Position.X,
+				Y = e.Position.Y,
+				Player = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID),
+				Team = e.ThrownBy.Team,
+				Event = decoyStartedEvent,
+				Round = CurrentRound
+			};
+			Demo.PositionsPoint.Add(positionPoint);
 		}
 
 		protected void HandleDecoyNadeEnded(object sender, DecoyEventArgs e)
 		{
-			if (!IsMatchStarted || !AnalyzePlayersPosition) return;
+			if (!AnalyzePlayersPosition || !IsMatchStarted) return;
 
 			DecoyEndedEvent decoyEndedEvent = new DecoyEndedEvent(Parser.IngameTick)
 			{
 				Thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID)
 			};
-
-			if (AnalyzePlayersPosition)
+			PositionPoint positionPoint = new PositionPoint
 			{
-				PositionPoint positionPoint = new PositionPoint
-				{
-					X = e.Position.X,
-					Y = e.Position.Y,
-					Player = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID),
-					Team = e.ThrownBy.Team,
-					Event = decoyEndedEvent,
-					Round = CurrentRound
-				};
-				Demo.PositionsPoint.Add(positionPoint);
-			}
+				X = e.Position.X,
+				Y = e.Position.Y,
+				Player = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID),
+				Team = e.ThrownBy.Team,
+				Event = decoyEndedEvent,
+				Round = CurrentRound
+			};
+			Demo.PositionsPoint.Add(positionPoint);
 		}
 
 		protected void HandleRoundMvp(object sender, RoundMVPEventArgs e)

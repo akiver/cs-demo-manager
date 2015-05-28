@@ -259,5 +259,10 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(demo);
 		}
-    }
+
+		public Task<Demo> AnalyzeHeatmapPoints(Demo demo)
+		{
+			return Task.FromResult(demo);
+		}
+	}
 }

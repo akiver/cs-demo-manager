@@ -466,8 +466,10 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
 		public string RatioEntryKillAsString => RatioEntryKill + " %";
 
+		[JsonIgnore]
 		public string RatioOpenKillAsString => RatioOpenKill + " %";
 
 		[JsonIgnore]

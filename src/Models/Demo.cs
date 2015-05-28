@@ -556,7 +556,7 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		[JsonProperty("shoots")]
+		[JsonIgnore]
 		public List<WeaponFire> WeaponFired => _weaponFired;
 
 		[JsonIgnore]

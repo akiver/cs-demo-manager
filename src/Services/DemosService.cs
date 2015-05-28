@@ -128,5 +128,23 @@ namespace CSGO_Demos_Manager.Services
 
 			return demo;
 		}
+
+		public async Task<Demo> AnalyzeHeatmapPoints(Demo demo)
+		{
+			if (!File.Exists(demo.Path))
+			{
+				// Demo may be moved to an other folder, just clear cache
+				await _cacheService.RemoveDemo(demo);
+			}
+
+			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+			analyzer.AnalyzeHeatmapPoint = true;
+
+			demo = await analyzer.AnalyzeDemoAsync();
+
+			await _cacheService.WriteDemoDataCache(demo);
+
+			return demo;
+		}
 	}
 }
