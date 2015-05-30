@@ -193,21 +193,21 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				CurrentRound.Winner = e.Winner;
 
-				if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
-					CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+				if (CurrentRound.OpenKillEvent != null)
 				{
-					if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
-					if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+					if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
+						CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+					{
+						if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
+						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+					}
+
+					var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
+					playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
+
+					var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
+					playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
 				}
-			});
-
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
-				playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
-
-				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
-				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
 			});
 
 			// On ESEA demos round_announce_last_round_half isn't raised

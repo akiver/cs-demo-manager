@@ -169,11 +169,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				CurrentRound.Winner = e.Winner;
 
-				if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
-					CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+				if (CurrentRound.OpenKillEvent != null)
 				{
-					if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
-					if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+					if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
+						CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+					{
+						if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
+						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+					}
 				}
 			});
 
