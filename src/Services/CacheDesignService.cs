@@ -61,9 +61,19 @@ namespace CSGO_Demos_Manager.Services
 			return Task.FromResult(true);
 		}
 
-		public Task ClearData()
+		public Task ClearDemosFile()
 		{
 			return Task.FromResult(true);
+		}
+
+		public Task CreateBackupCustomDataFile(string filePath)
+		{
+			return Task.FromResult(true);
+		}
+
+		public bool ContainsDemos()
+		{
+			return true;
 		}
 	}
 }

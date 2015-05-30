@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Services.Analyzer;
+using CSGO_Demos_Manager.Services.Serialization;
+using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -145,6 +147,21 @@ namespace CSGO_Demos_Manager.Services
 			await _cacheService.WriteDemoDataCache(demo);
 
 			return demo;
+		}
+
+		/// <summary>
+		/// Return demos from JSON backup file
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<Demo>> GetDemosFromBackup(string jsonFile)
+		{
+			List<Demo> demos = new List<Demo>();
+			if (File.Exists(jsonFile))
+			{
+				string json = File.ReadAllText(jsonFile);
+				demos = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Demo>>(json, new DemoListBackupConverter()));
+			}
+			return demos;
 		}
 	}
 }

@@ -59,6 +59,7 @@
 					<Grid Grid.Column="0">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 
@@ -102,11 +103,6 @@
 										</i:EventTrigger>
 									</i:Interaction.Triggers>
 								</TextBox>
-								
-								<Button Margin="0 5 0 0"
-										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDataCacheCommand}"
-										Style="{DynamicResource AccentedSquareButtonStyle}"
-										Content="Clear Data Cache" />
 							</StackPanel>
 						</StackPanel>
 
@@ -117,6 +113,22 @@
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.DateFormatUsa}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							</StackPanel>
+						</StackPanel>
+						
+						<StackPanel Margin="10" Grid.Row="2">
+							<TextBlock Text="Data" Style="{StaticResource TitleSettingsStyle}" />
+							<Button Margin="0 5 0 0"
+										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
+										Content="Clear Demos Data" />
+							<Button Margin="0 5 0 0"
+										Command="{Binding Source={StaticResource Locator}, Path=Settings.ExportCustomDataCacheCommand}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
+										Content="Export Custom Data" />
+							<Button Margin="0 5 0 0"
+										Command="{Binding Source={StaticResource Locator}, Path=Settings.ImportCustomDataCacheCommand}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
+										Content="Import Custom Data" />
 						</StackPanel>
 					</Grid>
 

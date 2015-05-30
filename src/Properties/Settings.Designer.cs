@@ -706,5 +706,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowDurationColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ApplicationVersion {
+            get {
+                return ((string)(this["ApplicationVersion"]));
+            }
+            set {
+                this["ApplicationVersion"] = value;
+            }
+        }
     }
 }

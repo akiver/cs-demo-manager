@@ -12,6 +12,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		private Demo _currentDemo;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
+
 		#endregion
 
 		public Demo CurrentDemo

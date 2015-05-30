@@ -41,5 +41,7 @@ namespace CSGO_Demos_Manager.Services
 		Task<Demo> AnalyzePlayersPosition(Demo demo);
 
 		Task<Demo> AnalyzeHeatmapPoints(Demo demo);
+
+		Task<List<Demo>> GetDemosFromBackup(string jsonFile);
 	}
 }

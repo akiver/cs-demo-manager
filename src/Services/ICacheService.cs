@@ -18,6 +18,10 @@ namespace CSGO_Demos_Manager.Services
 
 		Task<bool> RemoveSuspectFromCache(string steamId);
 
-		Task ClearData();
+		Task ClearDemosFile();
+
+		Task CreateBackupCustomDataFile(string filePath);
+
+		bool ContainsDemos();
 	}
 }

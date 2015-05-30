@@ -121,10 +121,16 @@ namespace CSGO_Demos_Manager.Models
 		private void OnPlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			RaisePropertyChanged(() => Players);
-			foreach (var player in Players)
+			if (Players.Any())
 			{
-				player.EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
-				player.OpeningKills.CollectionChanged += OnOpenKillsCollectionChanged;
+				foreach (var player in Players)
+				{
+					if (player != null)
+					{
+						player.EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
+						player.OpeningKills.CollectionChanged += OnOpenKillsCollectionChanged;
+					}
+				}
 			}
 		}
 

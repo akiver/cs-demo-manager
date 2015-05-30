@@ -1,8 +1,12 @@
-﻿using CSGO_Demos_Manager.Models;
+﻿using System;
+using CSGO_Demos_Manager.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using CSGO_Demos_Manager.Services.Serialization;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -22,15 +26,18 @@ namespace CSGO_Demos_Manager.Services
 
 		private const string SUSPECT_FILENAME = "suspects.json";
 
+		private readonly Regex _demoFilePattern = new Regex("^(.*?)([_])([^0-9]*)([0-9]*)(.json)$");
+
 		#endregion
 
 		public CacheService()
 		{
 			_pathFolderCache = AppSettings.GetFolderCachePath();
-			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_FILENAME)) File.Create(_pathFolderCache + "\\" + SUSPECT_FILENAME);
-			#if DEBUG
+			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_FILENAME))
+				File.Create(_pathFolderCache + "\\" + SUSPECT_FILENAME);
+#if DEBUG
 			_settingsJson.Formatting = Formatting.Indented;
-			#endif
+#endif
 			_settingsJson.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 			_settingsJson.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
 		}
@@ -132,18 +139,25 @@ namespace CSGO_Demos_Manager.Services
 		}
 
 		/// <summary>
-		/// Delete all json files from cache folder
+		/// Delete all JSON demos files from cache folder
 		/// </summary>
 		/// <returns></returns>
-		public Task ClearData()
+		public Task ClearDemosFile()
 		{
-			const string files = "*.json";
-			string[] fileList = Directory.GetFiles(_pathFolderCache, files);
 			return Task.Run(() =>
 			{
+				string[] fileList = Directory.GetFiles(_pathFolderCache);
+
 				foreach (string file in fileList)
 				{
-					if (File.Exists(file)) File.Delete(file);
+					if (File.Exists(file))
+					{
+						Match match = _demoFilePattern.Match(file);
+						if (match.Success)
+						{
+							File.Delete(file);
+						}
+					}
 				}
 			});
 		}
@@ -159,6 +173,45 @@ namespace CSGO_Demos_Manager.Services
 				string path = _pathFolderCache + "\\" + demo.Id + ".json";
 				if (File.Exists(path)) File.Delete(path);
 			});
+		}
+
+		/// <summary>
+		/// Create a backup file of all demos with custom data
+		/// </summary>
+		/// <param name="filePath">Backup file path</param>
+		/// <returns></returns>
+		public async Task CreateBackupCustomDataFile(string filePath)
+		{
+			List<Demo> demos = new List<Demo>();
+			string[] fileList = Directory.GetFiles(_pathFolderCache);
+			foreach (string file in fileList)
+			{
+				Match match = _demoFilePattern.Match(file);
+				if (match.Success)
+				{
+					string json = File.ReadAllText(file);
+					Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, new DemoBackupConverter()));
+					if (demo != null) demos.Add(demo);
+				}
+			}
+
+			string jsonBackup = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demos, new DemoListBackupConverter()));
+			File.WriteAllText(filePath, jsonBackup);
+		}
+
+		/// <summary>
+		/// Check if there is any demos in the cache folder
+		/// </summary>
+		/// <returns></returns>
+		public bool ContainsDemos()
+		{
+			string[] fileList = Directory.GetFiles(_pathFolderCache);
+			foreach (string file in fileList)
+			{
+				Match match = _demoFilePattern.Match(file);
+				if (match.Success) return true;
+			}
+			return false;
 		}
 	}
 }

@@ -1,8 +1,15 @@
-﻿using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows.Forms;
+using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services;
+using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -10,13 +17,13 @@ namespace CSGO_Demos_Manager.ViewModel
 	{
 		#region Properties
 
-		private int _resolutionWidth = Properties.Settings.Default.ResolutionWidth;
+		private int _resolutionWidth = Settings.Default.ResolutionWidth;
 
-		private int _resolutionHeight = Properties.Settings.Default.ResolutionHeight;
+		private int _resolutionHeight = Settings.Default.ResolutionHeight;
 
-		private bool _resolutionFullscreen = Properties.Settings.Default.IsFullscreen;
+		private bool _resolutionFullscreen = Settings.Default.IsFullscreen;
 
-		private long _steamId = Properties.Settings.Default.SteamID;
+		private long _steamId = Settings.Default.SteamID;
 
 		private RelayCommand<string> _saveResolutionWidthCommand;
 
@@ -24,93 +31,99 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<string> _saveSteamIdCommand;
 
-		private RelayCommand _clearDataCacheCommand;
+		private RelayCommand _clearDemosDataCacheCommand;
+
+		private RelayCommand _importCustomDataCacheCommand;
+
+		private RelayCommand _exportCustomDataCacheCommand;
 
 		private readonly ICacheService _cacheService;
 
+		private readonly IDemosService _demosService;
+
 		private readonly DialogService _dialogService;
 
-		private bool _showDateColumn = Properties.Settings.Default.ShowDateColumn;
+		private bool _showDateColumn = Settings.Default.ShowDateColumn;
 
-		private bool _showBombPlantedColumn = Properties.Settings.Default.ShowBombPlantedColumn;
+		private bool _showBombPlantedColumn = Settings.Default.ShowBombPlantedColumn;
 
-		private bool _showBombDefusedColumn = Properties.Settings.Default.ShowBombDefusedColumn;
+		private bool _showBombDefusedColumn = Settings.Default.ShowBombDefusedColumn;
 
-		private bool _showBombExplodedColumn = Properties.Settings.Default.ShowBombExplodedColumn;
+		private bool _showBombExplodedColumn = Settings.Default.ShowBombExplodedColumn;
 
-		private bool _showDemoNameColumn = Properties.Settings.Default.ShowDemoNameColumn;
+		private bool _showDemoNameColumn = Settings.Default.ShowDemoNameColumn;
 
-		private bool _showMapNameColumn = Properties.Settings.Default.ShowMapNameColumn;
+		private bool _showMapNameColumn = Settings.Default.ShowMapNameColumn;
 
-		private bool _showTeam1NameColumn = Properties.Settings.Default.ShowTeam1NameColumn;
+		private bool _showTeam1NameColumn = Settings.Default.ShowTeam1NameColumn;
 
-		private bool _showTeam2NameColumn = Properties.Settings.Default.ShowTeam2NameColumn;
+		private bool _showTeam2NameColumn = Settings.Default.ShowTeam2NameColumn;
 
-		private bool _showScoreTeam1Column = Properties.Settings.Default.ShowScoreTeam1Column;
+		private bool _showScoreTeam1Column = Settings.Default.ShowScoreTeam1Column;
 
-		private bool _showScoreTeam2Column = Properties.Settings.Default.ShowScoreTeam2Column;
+		private bool _showScoreTeam2Column = Settings.Default.ShowScoreTeam2Column;
 
-		private bool _showHostnameColumn = Properties.Settings.Default.ShowHostnameColumn;
+		private bool _showHostnameColumn = Settings.Default.ShowHostnameColumn;
 
-		private bool _showClientnameColumn = Properties.Settings.Default.ShowClientnameColumn;
+		private bool _showClientnameColumn = Settings.Default.ShowClientnameColumn;
 
-		private bool _showDemoTypeColumn = Properties.Settings.Default.ShowDemoTypeColumn;
+		private bool _showDemoTypeColumn = Settings.Default.ShowDemoTypeColumn;
 
-		private bool _showTickrateColumn = Properties.Settings.Default.ShowTickrateColumn;
+		private bool _showTickrateColumn = Settings.Default.ShowTickrateColumn;
 
-		private bool _showOneKillColumn = Properties.Settings.Default.ShowOneKillColumn;
+		private bool _showOneKillColumn = Settings.Default.ShowOneKillColumn;
 
-		private bool _showTwoKillsColumn = Properties.Settings.Default.ShowTwoKillsColumn;
+		private bool _showTwoKillsColumn = Settings.Default.ShowTwoKillsColumn;
 
-		private bool _showThreeKillsColumn = Properties.Settings.Default.ShowThreeKillsColumn;
+		private bool _showThreeKillsColumn = Settings.Default.ShowThreeKillsColumn;
 
-		private bool _showFourKillsColumn = Properties.Settings.Default.ShowFourKillsColumn;
+		private bool _showFourKillsColumn = Settings.Default.ShowFourKillsColumn;
 
-		private bool _showFiveKillsColumn = Properties.Settings.Default.ShowFiveKillsColumn;
+		private bool _showFiveKillsColumn = Settings.Default.ShowFiveKillsColumn;
 
-		private bool _showTotalKillsColumn = Properties.Settings.Default.ShowTotalKillsColumn;
+		private bool _showTotalKillsColumn = Settings.Default.ShowTotalKillsColumn;
 
-		private bool _showDeathsColumn = Properties.Settings.Default.ShowDeathsColumn;
+		private bool _showDeathsColumn = Settings.Default.ShowDeathsColumn;
 
-		private bool _showAssistsColumn = Properties.Settings.Default.ShowAssistsColumn;
+		private bool _showAssistsColumn = Settings.Default.ShowAssistsColumn;
 
-		private bool _showKdColumn = Properties.Settings.Default.ShowKdColumn;
+		private bool _showKdColumn = Settings.Default.ShowKdColumn;
 
-		private bool _showHsColumn = Properties.Settings.Default.ShowHsColumn;
+		private bool _showHsColumn = Settings.Default.ShowHsColumn;
 
-		private bool _showTkColumn = Properties.Settings.Default.ShowTkColumn;
+		private bool _showTkColumn = Settings.Default.ShowTkColumn;
 
-		private bool _showEkColumn = Properties.Settings.Default.ShowEkColumn;
+		private bool _showEkColumn = Settings.Default.ShowEkColumn;
 
-		private bool _showMvpColumn = Properties.Settings.Default.ShowMvpColumn;
+		private bool _showMvpColumn = Settings.Default.ShowMvpColumn;
 
-		private bool _showPlayerScoreColumn = Properties.Settings.Default.ShowPlayerScoreColumn;
+		private bool _showPlayerScoreColumn = Settings.Default.ShowPlayerScoreColumn;
 
-		private bool _showClutch1v1Column = Properties.Settings.Default.ShowClutch1v1Column;
+		private bool _showClutch1v1Column = Settings.Default.ShowClutch1v1Column;
 
-		private bool _showClutch1v2Column = Properties.Settings.Default.ShowClutch1v2Column;
+		private bool _showClutch1v2Column = Settings.Default.ShowClutch1v2Column;
 
-		private bool _showClutch1v3Column = Properties.Settings.Default.ShowClutch1v3Column;
+		private bool _showClutch1v3Column = Settings.Default.ShowClutch1v3Column;
 
-		private bool _showClutch1v4Column = Properties.Settings.Default.ShowClutch1v4Column;
+		private bool _showClutch1v4Column = Settings.Default.ShowClutch1v4Column;
 
-		private bool _showClutch1v5Column = Properties.Settings.Default.ShowClutch1v5Column;
+		private bool _showClutch1v5Column = Settings.Default.ShowClutch1v5Column;
 
-		private bool _showStartMoneyTeam1Column = Properties.Settings.Default.ShowStartMoneyTeam1Column;
+		private bool _showStartMoneyTeam1Column = Settings.Default.ShowStartMoneyTeam1Column;
 
-		private bool _showStartMoneyTeam2Column = Properties.Settings.Default.ShowStartMoneyTeam2Column;
+		private bool _showStartMoneyTeam2Column = Settings.Default.ShowStartMoneyTeam2Column;
 
-		private bool _showEquipementValueTeam1Column = Properties.Settings.Default.ShowEquipementValueTeam1Column;
+		private bool _showEquipementValueTeam1Column = Settings.Default.ShowEquipementValueTeam1Column;
 
-		private bool _showEquipementValueTeam2Column = Properties.Settings.Default.ShowEquipementValueTeam2Column;
+		private bool _showEquipementValueTeam2Column = Settings.Default.ShowEquipementValueTeam2Column;
 
-		private bool _showWinnerClanNameColumn = Properties.Settings.Default.ShowWinnerClanNameColumn;
+		private bool _showWinnerClanNameColumn = Settings.Default.ShowWinnerClanNameColumn;
 
-		private bool _showWinnerSideColumn = Properties.Settings.Default.ShowWinnerSideColumn;
+		private bool _showWinnerSideColumn = Settings.Default.ShowWinnerSideColumn;
 
-		private bool _showDurationColumn = Properties.Settings.Default.ShowDurationColumn;
+		private bool _showDurationColumn = Settings.Default.ShowDurationColumn;
 
-		private bool _dateFormatEuropean = Properties.Settings.Default.DateFormatEuropean;
+		private bool _dateFormatEuropean = Settings.Default.DateFormatEuropean;
 
 		#endregion
 
@@ -133,8 +146,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _resolutionFullscreen; }
 			set
 			{
-				Properties.Settings.Default.IsFullscreen = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.IsFullscreen = value;
+				Settings.Default.Save();
 				Set(() => ResolutionFullscreen, ref _resolutionFullscreen, value);
 			}
 		}
@@ -144,8 +157,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _dateFormatEuropean; }
 			set
 			{
-				Properties.Settings.Default.DateFormatEuropean = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.DateFormatEuropean = value;
+				Settings.Default.Save();
 				Set(() => DateFormatUsa, ref _dateFormatEuropean, value);
 			}
 		}
@@ -155,8 +168,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showWinnerClanNameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowWinnerClanNameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowWinnerClanNameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowWinnerClanNameColumn, ref _showWinnerClanNameColumn, value);
 			}
 		}
@@ -166,8 +179,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showWinnerSideColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowWinnerSideColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowWinnerSideColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowWinnerSideColumn, ref _showWinnerSideColumn, value);
 			}
 		}
@@ -177,8 +190,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showStartMoneyTeam1Column; }
 			set
 			{
-				Properties.Settings.Default.ShowStartMoneyTeam1Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowStartMoneyTeam1Column = value;
+				Settings.Default.Save();
 				Set(() => ShowStartMoneyTeam1Column, ref _showStartMoneyTeam1Column, value);
 			}
 		}
@@ -188,8 +201,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showStartMoneyTeam2Column; }
 			set
 			{
-				Properties.Settings.Default.ShowStartMoneyTeam2Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowStartMoneyTeam2Column = value;
+				Settings.Default.Save();
 				Set(() => ShowStartMoneyTeam2Column, ref _showStartMoneyTeam2Column, value);
 			}
 		}
@@ -199,8 +212,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showEquipementValueTeam1Column; }
 			set
 			{
-				Properties.Settings.Default.ShowEquipementValueTeam1Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowEquipementValueTeam1Column = value;
+				Settings.Default.Save();
 				Set(() => ShowEquipementValueTeam1Column, ref _showEquipementValueTeam1Column, value);
 			}
 		}
@@ -210,8 +223,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showEquipementValueTeam2Column; }
 			set
 			{
-				Properties.Settings.Default.ShowEquipementValueTeam2Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowEquipementValueTeam2Column = value;
+				Settings.Default.Save();
 				Set(() => ShowEquipementValueTeam2Column, ref _showEquipementValueTeam2Column, value);
 			}
 		}
@@ -221,8 +234,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showDateColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowDateColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowDateColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowDateColumn, ref _showDateColumn, value);
 			}
 		}
@@ -232,8 +245,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showDemoNameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowDemoNameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowDemoNameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowDemoNameColumn, ref _showDemoNameColumn, value);
 			}
 		}
@@ -243,8 +256,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showMapNameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowMapNameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowMapNameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowMapNameColumn, ref _showMapNameColumn, value);
 			}
 		}
@@ -254,8 +267,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showHostnameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowHostnameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowHostnameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowHostnameColumn, ref _showHostnameColumn, value);
 			}
 		}
@@ -265,8 +278,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showClientnameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowClientnameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowClientnameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowClientnameColumn, ref _showClientnameColumn, value);
 			}
 		}
@@ -276,8 +289,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showDemoTypeColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowDemoTypeColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowDemoTypeColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowDemoTypeColumn, ref _showDemoTypeColumn, value);
 			}
 		}
@@ -287,8 +300,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showTickrateColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowTickrateColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowTickrateColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowTickrateColumn, ref _showTickrateColumn, value);
 			}
 		}
@@ -298,8 +311,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showTeam1NameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowTeam1NameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowTeam1NameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowTeam1NameColumn, ref _showTeam1NameColumn, value);
 			}
 		}
@@ -309,8 +322,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showTeam2NameColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowTeam2NameColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowTeam2NameColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowTeam2NameColumn, ref _showTeam2NameColumn, value);
 			}
 		}
@@ -320,8 +333,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showScoreTeam1Column; }
 			set
 			{
-				Properties.Settings.Default.ShowScoreTeam1Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowScoreTeam1Column = value;
+				Settings.Default.Save();
 				Set(() => ShowScoreTeam1Column, ref _showScoreTeam1Column, value);
 			}
 		}
@@ -331,8 +344,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showScoreTeam2Column; }
 			set
 			{
-				Properties.Settings.Default.ShowScoreTeam2Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowScoreTeam2Column = value;
+				Settings.Default.Save();
 				Set(() => ShowScoreTeam2Column, ref _showScoreTeam2Column, value);
 			}
 		}
@@ -342,8 +355,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showBombPlantedColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowBombPlantedColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowBombPlantedColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowBombPlantedColumn, ref _showBombPlantedColumn, value);
 			}
 		}
@@ -353,8 +366,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showBombExplodedColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowBombExplodedColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowBombExplodedColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowBombExplodedColumn, ref _showBombExplodedColumn, value);
 			}
 		}
@@ -364,8 +377,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showBombDefusedColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowBombDefusedColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowBombDefusedColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowBombDefusedColumn, ref _showBombDefusedColumn, value);
 			}
 		}
@@ -375,8 +388,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showOneKillColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowOneKillColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowOneKillColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowOneKillColumn, ref _showOneKillColumn, value);
 			}
 		}
@@ -386,8 +399,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showTwoKillsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowTwoKillsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowTwoKillsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowTwoKillsColumn, ref _showTwoKillsColumn, value);
 			}
 		}
@@ -397,8 +410,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showThreeKillsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowThreeKillsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowThreeKillsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowThreeKillsColumn, ref _showThreeKillsColumn, value);
 			}
 		}
@@ -408,8 +421,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showFourKillsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowFourKillsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowFourKillsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowFourKillsColumn, ref _showFourKillsColumn, value);
 			}
 		}
@@ -419,8 +432,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showFiveKillsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowFiveKillsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowFiveKillsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowFiveKillsColumn, ref _showFiveKillsColumn, value);
 			}
 		}
@@ -430,8 +443,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showTotalKillsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowTotalKillsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowTotalKillsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowTotalKillsColumn, ref _showTotalKillsColumn, value);
 			}
 		}
@@ -441,8 +454,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showDeathsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowDeathsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowDeathsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowDeathsColumn, ref _showDeathsColumn, value);
 			}
 		}
@@ -452,8 +465,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showAssistsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowAssistsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowAssistsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowAssistsColumn, ref _showAssistsColumn, value);
 			}
 		}
@@ -463,8 +476,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showHsColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowHsColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowHsColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowHsColumn, ref _showHsColumn, value);
 			}
 		}
@@ -474,8 +487,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showKdColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowKdColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowKdColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowKdColumn, ref _showKdColumn, value);
 			}
 		}
@@ -485,8 +498,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showMvpColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowMvpColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowMvpColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowMvpColumn, ref _showMvpColumn, value);
 			}
 		}
@@ -496,8 +509,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showTkColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowTkColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowTkColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowTkColumn, ref _showTkColumn, value);
 			}
 		}
@@ -507,8 +520,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showEkColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowEkColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowEkColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowEkColumn, ref _showEkColumn, value);
 			}
 		}
@@ -518,8 +531,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showPlayerScoreColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowPlayerScoreColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowPlayerScoreColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowPlayerScoreColumn, ref _showPlayerScoreColumn, value);
 			}
 		}
@@ -529,8 +542,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showClutch1v1Column; }
 			set
 			{
-				Properties.Settings.Default.ShowClutch1v1Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowClutch1v1Column = value;
+				Settings.Default.Save();
 				Set(() => ShowClutch1v1Column, ref _showClutch1v1Column, value);
 			}
 		}
@@ -540,8 +553,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showClutch1v2Column; }
 			set
 			{
-				Properties.Settings.Default.ShowClutch1v2Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowClutch1v2Column = value;
+				Settings.Default.Save();
 				Set(() => ShowClutch1v2Column, ref _showClutch1v2Column, value);
 			}
 		}
@@ -551,8 +564,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showClutch1v3Column; }
 			set
 			{
-				Properties.Settings.Default.ShowClutch1v3Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowClutch1v3Column = value;
+				Settings.Default.Save();
 				Set(() => ShowClutch1v3Column, ref _showClutch1v3Column, value);
 			}
 		}
@@ -562,8 +575,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showClutch1v4Column; }
 			set
 			{
-				Properties.Settings.Default.ShowClutch1v4Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowClutch1v4Column = value;
+				Settings.Default.Save();
 				Set(() => ShowClutch1v4Column, ref _showClutch1v4Column, value);
 			}
 		}
@@ -573,8 +586,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showClutch1v5Column; }
 			set
 			{
-				Properties.Settings.Default.ShowClutch1v5Column = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowClutch1v5Column = value;
+				Settings.Default.Save();
 				Set(() => ShowClutch1v5Column, ref _showClutch1v5Column, value);
 			}
 		}
@@ -584,8 +597,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _showDurationColumn; }
 			set
 			{
-				Properties.Settings.Default.ShowDurationColumn = value;
-				Properties.Settings.Default.Save();
+				Settings.Default.ShowDurationColumn = value;
+				Settings.Default.Save();
 				Set(() => ShowDurationColumn, ref _showDurationColumn, value);
 			}
 		}
@@ -611,8 +624,8 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_saveResolutionWidthCommand = new RelayCommand<string>(
 						width =>
 						{
-							Properties.Settings.Default.ResolutionWidth = Convert.ToInt32(width);
-							Properties.Settings.Default.Save();
+							Settings.Default.ResolutionWidth = Convert.ToInt32(width);
+							Settings.Default.Save();
 						},
 						width => !string.IsNullOrEmpty(width)));
 			}
@@ -629,8 +642,8 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_saveResolutionHeightCommand = new RelayCommand<string>(
 						height =>
 						{
-							Properties.Settings.Default.ResolutionHeight = Convert.ToInt32(height);
-							Properties.Settings.Default.Save();
+							Settings.Default.ResolutionHeight = Convert.ToInt32(height);
+							Settings.Default.Save();
 						}, height => !string.IsNullOrEmpty(height)));
 			}
 		}
@@ -654,20 +667,112 @@ namespace CSGO_Demos_Manager.ViewModel
 		}
 
 		/// <summary>
-		/// Command to clear data cache
+		/// Command to clear demos data from cache
 		/// </summary>
-		public RelayCommand ClearDataCacheCommand
+		public RelayCommand ClearDemosDataCacheCommand
 		{
 			get
 			{
-				return _clearDataCacheCommand
-					?? (_clearDataCacheCommand = new RelayCommand(
+				return _clearDemosDataCacheCommand
+					?? (_clearDemosDataCacheCommand = new RelayCommand(
 					async () =>
 					{
-						var result = await _dialogService.ShowMessageAsync("Data will be deleted! Are you sure?", MessageDialogStyle.AffirmativeAndNegative);
+						var result = await _dialogService.ShowMessageAsync("Demos data will be deleted! Are you sure?", MessageDialogStyle.AffirmativeAndNegative);
 						if (result == MessageDialogResult.Negative) return;
-						await _cacheService.ClearData();
-						await _dialogService.ShowMessageAsync("Data cleared.", MessageDialogStyle.Affirmative);
+						await _cacheService.ClearDemosFile();
+						await _dialogService.ShowMessageAsync("Demos data cleared.", MessageDialogStyle.Affirmative);
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to export custom data from the cache
+		/// </summary>
+		public RelayCommand ExportCustomDataCacheCommand
+		{
+			get
+			{
+				return _exportCustomDataCacheCommand
+					?? (_exportCustomDataCacheCommand = new RelayCommand(
+					async () =>
+					{
+						SaveFileDialog saveCustomDataDialog = new SaveFileDialog
+						{
+							FileName = "backup.json",
+							Filter = "JSON file (*.json)|*.json"
+						};
+
+						if (saveCustomDataDialog.ShowDialog() == DialogResult.OK)
+						{
+							try
+							{
+								await _cacheService.CreateBackupCustomDataFile(saveCustomDataDialog.FileName);
+								await _dialogService.ShowMessageAsync("The backup file has been created, you can re-import it from settings.", MessageDialogStyle.Affirmative);
+							}
+							catch (Exception e)
+							{
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync("An error occured while exporting custom data.", MessageDialogStyle.Affirmative);
+							}
+						}
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to import custom data to the cache
+		/// </summary>
+		public RelayCommand ImportCustomDataCacheCommand
+		{
+			get
+			{
+				return _importCustomDataCacheCommand
+					?? (_importCustomDataCacheCommand = new RelayCommand(
+					async () =>
+					{
+						OpenFileDialog fileDialog = new OpenFileDialog
+						{
+							DefaultExt = ".json",
+							Filter = "JSON file (.json)|*.json"
+						};
+
+						bool? result = fileDialog.ShowDialog();
+
+						if (result == true)
+						{
+							try
+							{
+								string filename = fileDialog.FileName;
+
+								// contains demos with only custom data
+								List<Demo> demosFromBackup = await _demosService.GetDemosFromBackup(filename);
+
+								// Retrieve needed demos information for serialization from headers
+								List<string> folders = AppSettings.GetFolders().ToList();
+								List<Demo> demosHeader = await _demosService.GetDemosHeader(folders);
+
+								// Update custom data if the demo has been find
+								foreach (Demo demo in demosFromBackup)
+								{
+									foreach (Demo demoHeader in demosHeader)
+									{
+										if (demoHeader.Equals(demo))
+										{
+											demoHeader.Comment = demo.Comment;
+											await _cacheService.WriteDemoDataCache(demoHeader);
+											break;
+										}
+									}
+								}
+
+								await _dialogService.ShowMessageAsync("Custom data has been imported.", MessageDialogStyle.Affirmative);
+							}
+							catch (Exception e)
+							{
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync("An error occured while importing custom data. The backup file may be corrupt.", MessageDialogStyle.Affirmative);
+							}
+						}
 					}));
 			}
 		}
@@ -682,16 +787,17 @@ namespace CSGO_Demos_Manager.ViewModel
 		/// <param name="steamId"></param>
 		private void SaveSteamId(string steamId)
 		{
-			Properties.Settings.Default.SteamID = Convert.ToInt64(steamId);
-			Properties.Settings.Default.Save();
+			Settings.Default.SteamID = Convert.ToInt64(steamId);
+			Settings.Default.Save();
 		}
 
 		#endregion
 
-		public SettingsViewModel(DialogService dialogService, ICacheService chacheService)
+		public SettingsViewModel(DialogService dialogService, ICacheService chacheService, IDemosService demosService)
 		{
 			_dialogService = dialogService;
 			_cacheService = chacheService;
+			_demosService = demosService;
 		}
 	}
 }

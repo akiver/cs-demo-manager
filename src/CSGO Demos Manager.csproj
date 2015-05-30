@@ -19,6 +19,7 @@
     <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -31,7 +32,6 @@
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -183,6 +183,7 @@
     <Compile Include="Exceptions\Heatmap\MapHeatmapUnavailableException.cs" />
     <Compile Include="Internals\Logger.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
+    <Compile Include="Messages\MainWindowLoadedMessage.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />
@@ -290,6 +291,9 @@
     <Compile Include="Services\ISteamService.cs" />
     <Compile Include="Services\Map\MapService.cs" />
     <Compile Include="Services\PlayerRatingService.cs" />
+    <Compile Include="Services\Serialization\DemoBackupConverter.cs" />
+    <Compile Include="Services\Serialization\DemoListBackupConverter.cs" />
+    <Compile Include="Services\Serialization\JsonCreationConverter.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
@@ -461,14 +465,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(SolutionDir)/src/bin/x86/Debug
+    <PostBuildEvent>cd $(SolutionDir)src\bin\x86\Debug
 snremove.exe -r DemoInfo.dll
-cd $(SolutionDir)/src/bin/x86/Release
+cd $(SolutionDir)src\bin\x86\Release
 snremove.exe -r DemoInfo.dll
 
-cd $(SolutionDir)/src/bin/x64/Debug
+cd $(SolutionDir)src\bin\x64\Debug
 snremove.exe -r DemoInfo.dll
-cd $(SolutionDir)/src/bin/x64/Release
+cd $(SolutionDir)src\bin\x64\Release
 snremove.exe -r DemoInfo.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>

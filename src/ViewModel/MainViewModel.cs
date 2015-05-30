@@ -6,6 +6,7 @@ using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Views;
 using GalaSoft.MvvmLight.Messaging;
 using WpfPageTransitions;
@@ -43,6 +44,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _windowLoadedCommand;
 
 		private RelayCommand _windowClosedCommand;
+
+		private readonly ICacheService _cacheService;
 
 		#endregion
 
@@ -92,6 +95,45 @@ namespace CSGO_Demos_Manager.ViewModel
 							await _dialogService.ShowMessageAsync("It seems that CSGO is not installed on your main hard drive. The defaults \"csgo\" and \"replays\" can not be found. Please add folders from the settings.", MessageDialogStyle.Affirmative);
 						}
 
+						// Check for 1st launch or upgrade that required cache clear
+						if (_cacheService.ContainsDemos())
+						{
+							if ((string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion))
+							|| (!string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion) && new Version(Properties.Settings.Default.ApplicationVersion).CompareTo(AppSettings.APP_VERSION) < 0 && AppSettings.REQUIRE_CLEAR_CACHE))
+							{
+								var saveCustomData = await _dialogService.ShowMessageAsync("This update required to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
+								if (saveCustomData == MessageDialogResult.Affirmative)
+								{
+									SaveFileDialog saveCustomDataDialog = new SaveFileDialog
+									{
+										FileName = "backup.json",
+										Filter = "JSON file (*.json)|*.json"
+									};
+
+									if (saveCustomDataDialog.ShowDialog() == DialogResult.OK)
+									{
+										try
+										{
+											await _cacheService.CreateBackupCustomDataFile(saveCustomDataDialog.FileName);
+											await _dialogService.ShowMessageAsync("The backup file has been created, you have to re-import your custom data from settings.", MessageDialogStyle.Affirmative);
+										}
+										catch (Exception e)
+										{
+											Logger.Instance.Log(e);
+											await _dialogService.ShowErrorAsync("An error occured while exporting custom data.", MessageDialogStyle.Affirmative);
+										}
+									}
+								}
+								// Clear cache even if user didn't want to backup his custom data
+								await _cacheService.ClearDemosFile();
+							}
+						}
+
+						// Update the user version
+						Properties.Settings.Default.ApplicationVersion = AppSettings.APP_VERSION.ToString();
+						Properties.Settings.Default.Save();
+
+						// Check for update
 						if (Properties.Settings.Default.EnableCheckUpdate)
 						{
 							bool isUpdateAvailable = await CheckUpdate();
@@ -104,6 +146,10 @@ namespace CSGO_Demos_Manager.ViewModel
 								}
 							}
 						}
+
+						// Notify the HomeViewModel that it can now load demos data
+						MainWindowLoadedMessage msg = new MainWindowLoadedMessage();
+						Messenger.Default.Send(msg);
 					}));
 			}
 		}
@@ -121,7 +167,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						if (Folders.Count == 0)
 						{
-							Properties.Settings.Default.LastFolder = "";
+							Properties.Settings.Default.LastFolder = string.Empty;
 							Properties.Settings.Default.Save();
 						}
 					}));
@@ -180,9 +226,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public MainViewModel(DialogService dialogService)
+		public MainViewModel(DialogService dialogService, ICacheService cacheService)
 		{
 			_dialogService = dialogService;
+			_cacheService = cacheService;
 
 			CurrentPage = new PageTransition();
 			HomeView homeView = new HomeView();
@@ -207,20 +254,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			});
 		}
 
-
 		private static async Task<bool> CheckUpdate()
 		{
 			using (var httpClient = new HttpClient())
 			{
-				//  Grab general infos from user
 				string url = AppSettings.APP_WEBSITE + "/update";
 				HttpResponseMessage result = await httpClient.GetAsync(url);
 				string version = await result.Content.ReadAsStringAsync();
-
 				Version lastVersion = new Version(version);
-				Version currentVersion = new Version(AppSettings.APP_VERSION);
 
-				var resultCompare = currentVersion.CompareTo(lastVersion);
+				var resultCompare = AppSettings.APP_VERSION.CompareTo(lastVersion);
 				if (resultCompare < 0)
 				{
 					return true;

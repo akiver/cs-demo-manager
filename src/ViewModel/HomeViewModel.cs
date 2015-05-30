@@ -757,31 +757,14 @@ namespace CSGO_Demos_Manager.ViewModel
 				DispatcherHelper.Initialize();
 			}
 
+			NotificationMessage = "Loading...";
+			IsBusy = true;
+			HasNotification = true;
+
 			Demos = new ObservableCollection<Demo>();
 			SelectedDemos = new ObservableCollection<Demo>();
 			DataGridDemosCollection = CollectionViewSource.GetDefaultView(Demos);
 			DataGridDemosCollection.Filter = Filter;
-			Folders = AppSettings.GetFolders();
-			IsShowAllFolders = Properties.Settings.Default.ShowAllFolders;
-
-			if (IsShowAllFolders)
-			{
-				SelectedFolder = null;
-			} else if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.LastFolder))
-			{
-				SelectedFolder = Properties.Settings.Default.LastFolder;
-			} else if (Folders.Count > 0)
-			{
-				SelectedFolder = Folders.ElementAt(0);
-			}
-			
-
-			DispatcherHelper.CheckBeginInvokeOnUI(
-			async () =>
-			{
-				await LoadDemosHeader();
-				await RefreshBannedPlayerCount();
-			});
 
 			DemosSelectionChangedCommand = new RelayCommand<IList>(
 			demos =>
@@ -796,7 +779,34 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 			});
 
+			Messenger.Default.Register<MainWindowLoadedMessage>(this, HandleMainWindowLoadedMessage);
 			Messenger.Default.Register<RefreshDemosMessage>(this, HandleRefreshDemosMessage);
+		}
+
+		private void HandleMainWindowLoadedMessage(MainWindowLoadedMessage msg)
+		{
+			DispatcherHelper.CheckBeginInvokeOnUI(
+			async () =>
+			{
+				Folders = AppSettings.GetFolders();
+				IsShowAllFolders = Properties.Settings.Default.ShowAllFolders;
+
+				if (IsShowAllFolders)
+				{
+					SelectedFolder = null;
+				}
+				else if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.LastFolder))
+				{
+					SelectedFolder = Properties.Settings.Default.LastFolder;
+				}
+				else if (Folders.Count > 0)
+				{
+					SelectedFolder = Folders.ElementAt(0);
+				}
+
+				await LoadDemosHeader();
+				await RefreshBannedPlayerCount();
+			});
 		}
 
 		private void HandleRefreshDemosMessage(RefreshDemosMessage msg)
