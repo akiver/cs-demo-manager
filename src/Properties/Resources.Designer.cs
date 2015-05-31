@@ -83,6 +83,16 @@ namespace CSGO_Demos_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap cevo {
+            get {
+                object obj = ResourceManager.GetObject("cevo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap de_cache {
             get {
                 object obj = ResourceManager.GetObject("de_cache", resourceCulture);
@@ -301,7 +311,10 @@ namespace CSGO_Demos_Manager.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap flashbang {
             get {
                 object obj = ResourceManager.GetObject("flashbang", resourceCulture);
@@ -434,7 +447,7 @@ namespace CSGO_Demos_Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ﻿YOUR STEAM API KEY GOES HERE.
+        ///   Looks up a localized string similar to YOUR STEAM API KEY GOES HERE.
         /// </summary>
         internal static string steam_api_key {
             get {
