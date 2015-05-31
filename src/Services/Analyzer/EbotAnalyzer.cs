@@ -331,7 +331,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Demo.Kills.Add(killEvent);
 			CurrentRound.Kills.Add(killEvent);
 
-			if (AnalyzePlayersPosition)
+			if (AnalyzePlayersPosition && killEvent.Killer != null)
 			{
 				PositionPoint positionPoint = new PositionPoint
 				{
