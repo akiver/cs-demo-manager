@@ -311,7 +311,7 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="Source" Width="Auto">
+				<DataGridTemplateColumn Header="Source" Width="Auto" SortMemberPath="Source.Name">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding Path=Source.Logo, Converter={StaticResource ImageToSourceConverter}}"
