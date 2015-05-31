@@ -370,7 +370,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				X = e.Shooter.Position.X,
 				Y = e.Shooter.Position.Y,
 				Z = e.Shooter.Position.Z,
-				Shooter = Demo.Players.First(p => p.SteamId == e.Shooter.SteamID),
+				Shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID),
 				Weapon = new Weapon()
 				{
 					// TODO OriginalString is OK only for stuffs
