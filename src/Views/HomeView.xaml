@@ -319,7 +319,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date}" HeaderStyle="{StaticResource DemoDateHeader}"
+				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date}" HeaderStyle="{StaticResource DemoDateHeader}" SortDirection="Descending" 
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="FileNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}" HeaderStyle="{StaticResource DemoNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />

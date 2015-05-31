@@ -764,6 +764,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			Demos = new ObservableCollection<Demo>();
 			SelectedDemos = new ObservableCollection<Demo>();
 			DataGridDemosCollection = CollectionViewSource.GetDefaultView(Demos);
+			DataGridDemosCollection.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Descending));
 			DataGridDemosCollection.Filter = Filter;
 
 			DemosSelectionChangedCommand = new RelayCommand<IList>(
