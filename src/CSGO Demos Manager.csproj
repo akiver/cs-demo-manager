@@ -235,7 +235,6 @@
     <Resource Include="Resources\images\overview\de_cbble.png" />
     <Resource Include="Resources\images\overview\base64\de_cbble.txt" />
     <Resource Include="Resources\images\overview\base64\de_mirage.txt" />
-    <None Include="Resources\images\logo\faceit.png" />
     <None Include="Resources\images\icons\flashbang.png" />
     <None Include="Resources\images\icons\flashbang_exploded.png" />
     <None Include="Resources\images\icons\decoy.png" />
@@ -439,6 +438,8 @@
     <Resource Include="Resources\images\logo\pov.png" />
     <Resource Include="Resources\images\logo\esea.png" />
     <Resource Include="Resources\images\logo\valve.png" />
+    <Resource Include="Resources\images\logo\cevo.png" />
+    <Resource Include="Resources\images\logo\faceit.png" />
     <Resource Include="Resources\images\suicide-black.png" />
     <Resource Include="Resources\images\suicide.png" />
     <Resource Include="Resources\images\deagle.png" />

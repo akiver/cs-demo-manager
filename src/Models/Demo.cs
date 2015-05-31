@@ -84,6 +84,11 @@ namespace CSGO_Demos_Manager.Models
 		private int _totalKillCount;
 
 		/// <summary>
+		/// Game win/lose/draw status
+		/// </summary>
+		private string _winStatus;
+
+		/// <summary>
 		/// Team 1 score
 		/// </summary>
 		private int _scoreTeam1;
@@ -345,6 +350,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _path; }
 			set { Set(() => Path, ref _path, value); }
+		}
+
+		[JsonProperty("win_status")]
+		public string WinStatus
+		{
+			get { return _winStatus; }
+			set { Set(() => WinStatus, ref _winStatus, value); }
 		}
 
 		[JsonProperty("score_team_1")]

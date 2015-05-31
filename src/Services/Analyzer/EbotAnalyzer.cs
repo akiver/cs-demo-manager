@@ -65,9 +65,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			await Task.Run(() => Parser.ParseToEnd());
 
-			Demo.Tickrate = Parser.TickRate;
-			Demo.MapName = Parser.Map;
-			Demo.Duration = Parser.Header.PlaybackTime;
+			Application.Current.Dispatcher.Invoke(ProcessWinStatus);
 			Application.Current.Dispatcher.Invoke(ProcessPlayersRating);
 			Application.Current.Dispatcher.Invoke(delegate
 			{
@@ -81,15 +79,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}).OrderByDescending(w => w.Count);
 				Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
 			});
-
-			if (Properties.Settings.Default.DateFormatEuropean)
-			{
-				Demo.Date = File.GetCreationTime(Demo.Path).ToString("dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-			}
-			else
-			{
-				Demo.Date = File.GetCreationTime(Demo.Path).ToString("MM/dd/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
-			}
 
 			if (AnalyzePlayersPosition)
 			{

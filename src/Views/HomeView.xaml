@@ -311,7 +311,7 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="Source" Width="Auto">
+				<DataGridTemplateColumn Header="Source" Width="Auto" SortMemberPath="Source.Name">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding Path=Source.Logo, Converter={StaticResource ImageToSourceConverter}}"
@@ -319,7 +319,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date}" HeaderStyle="{StaticResource DemoDateHeader}"
+				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date}" HeaderStyle="{StaticResource DemoDateHeader}" SortDirection="Descending" 
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="FileNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}" HeaderStyle="{StaticResource DemoNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -329,6 +329,30 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TeamName2Column" Width="Auto" Header="Team 2" Binding="{Binding ClanTagNameTeam2}" HeaderStyle="{StaticResource Team2NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTemplateColumn x:Name="WinStatusHeader" Header="Status" Width="Auto" HeaderStyle="{StaticResource WinStatusHeader}" SortMemberPath="WinStatus">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Path=WinStatus}" TextAlignment="Center" FontWeight="DemiBold">
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}">
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=WinStatus}" Value="won">
+												<Setter Property="Background" Value="LightGreen"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Path=WinStatus}" Value="lost">
+												<Setter Property="Background" Value="Firebrick"/>
+												<Setter Property="Foreground" Value="White"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Path=WinStatus}" Value="draw">
+												<Setter Property="Background" Value="LightBlue"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 				<DataGridTextColumn x:Name="ScoreTeam1Column" Width="Auto" Header="ST1" Binding="{Binding ScoreTeam1}" HeaderStyle="{StaticResource ScoreTeam1Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ScoreTeam2Column" Width="Auto" Header="ST2" Binding="{Binding ScoreTeam2}" HeaderStyle="{StaticResource ScoreTeam2Header}"
