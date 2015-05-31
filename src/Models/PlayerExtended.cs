@@ -512,5 +512,34 @@ namespace CSGO_Demos_Manager.Models
 			RaisePropertyChanged("OpenKillLossCount");
 			RaisePropertyChanged("RatioOpenKillAsString");
 		}
+
+		public void ResetStats()
+		{
+			KillsCount = 0;
+			DeathCount = 0;
+			AssistCount = 0;
+			HeadshotCount = 0;
+			TeamKillCount = 0;
+			RoundMvpCount = 0;
+			OnekillCount = 0;
+			TwokillCount = 0;
+			ThreekillCount = 0;
+			FourKillCount = 0;
+			FiveKillCount = 0;
+			Clutch1V1Count = 0;
+			Clutch1V2Count = 0;
+			Clutch1V3Count = 0;
+			Clutch1V4Count = 0;
+			Clutch1V5Count = 0;
+			BombDefusedCount = 0;
+			BombPlantedCount = 0;
+			Score = 0;
+			OpponentClutchCount = 0;
+			HasEntryKill = false;
+			HasOpeningKill = false;
+			RatingHltv = 0;
+			OpeningKills.Clear();
+			EntryKills.Clear();
+		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +17,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		// Counter of player team swap (used detect end of a half)
 		private int _playerTeamCount;
 
+		private bool _isMatchStartedOccured = false;
+
+		private bool _isTeamsInitialized = false;
+
 		public EbotAnalyzer(Demo demo)
 		{
 			Parser = new DemoParser(File.OpenRead(demo.Path));
@@ -25,6 +28,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			demo.ResetStats();
 			Demo = demo;
 			RegisterEvents();
+			IsMatchStarted = true;
 		}
 
 		protected override sealed void RegisterEvents()
@@ -64,6 +68,19 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Demo.Tickrate = Parser.TickRate;
 			Demo.MapName = Parser.Map;
 			Demo.Duration = Parser.Header.PlaybackTime;
+			Application.Current.Dispatcher.Invoke(ProcessPlayersRating);
+			Application.Current.Dispatcher.Invoke(delegate
+			{
+				Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
+				Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
+				Demo.MostEntryKillPlayer = Demo.Players.MaxBy(p => p.EntryKills.Count);
+				var weapons = Demo.Kills.GroupBy(k => k.Weapon).Select(weap => new
+				{
+					Weapon = weap.Key,
+					Count = weap.Count()
+				}).OrderByDescending(w => w.Count);
+				Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
+			});
 
 			if (Properties.Settings.Default.DateFormatEuropean)
 			{
@@ -82,6 +99,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			return Demo;
 		}
 
+		protected new void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
+		{
+			if (!_isTeamsInitialized) return;
+
+			base.HandleWeaponFired(sender, e);
+		}
+
 		protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
 		{
 			if (!IsMatchStarted && !IsOvertime) return;
@@ -96,14 +120,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
 		{
-			if (!IsMatchStarted && !IsOvertime) return;
-
-			// Add the last round
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				ProcessPlayersStats();
 				Demo.Rounds.Add(CurrentRound);
 			});
+
+			if (IsMatchStarted && !IsOvertime)
+			{
+				// Stop analyze
+				IsMatchStarted = false;
+				return;
+			}
 
 			if (CurrentOvertime.ScoreTeam1 != 0 || CurrentOvertime.ScoreTeam2 != 0)
 			{
@@ -113,8 +140,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					Demo.Overtimes.Add(CurrentOvertime);
 				});
 			}
-
-			ProcessPlayersRating();
 		}
 
 		protected void HandleRoundFinal(object sender, RoundFinalEventArgs e)
@@ -125,21 +150,29 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
 		{
-			IsMatchStarted = true;
+			if (!IsMatchStarted) return;
 
-			AddTeams();
+			if (!_isMatchStartedOccured && !IsOvertime)
+			{
+				_isMatchStartedOccured = true;
+				// Reset demo start recording before
+				Demo.ResetStats(false);
+				AddTeams();
+				RoundCount = 0;
+				CreateNewRound();
+			}
 		}
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
-			// begin_new_match is raised after round_start, we have to detect first round here
+			if (!IsMatchStarted) return;
 
 			IsFreezetime = true;
 
 			// Reset until both scores > 0
 			if (Parser.CTScore == 0 && Parser.TScore == 0)
 			{
-				Demo.ResetStats();
+				Demo.ResetStats(false);
 				RoundCount = 0;
 				AddTeams();
 			}
@@ -149,6 +182,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (RoundCount == 16)
 			{
 				IsHalfMatch = true;
+				SwapTeams();
 			}
 
 			if(!IsOvertime) return;
@@ -168,14 +202,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				CurrentRound.Winner = e.Winner;
-
 				if (CurrentRound.OpenKillEvent != null)
 				{
 					if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
-						CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+							CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
 					{
-						if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
-						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+						if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
+							CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+						{
+							if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
+							if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+						}
 					}
 				}
 			});
@@ -183,7 +220,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// On faceit round_officialy_ended is raised between half side, not on eBot public demos
 			if (IsLastRoundHalf)
 			{
-				ProcessPlayersStats();
 				Application.Current.Dispatcher.Invoke(delegate
 				{
 					Demo.Rounds.Add(CurrentRound);
@@ -327,58 +363,31 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 		}
 
-		private void ProcessPlayersStats()
+		protected new void HandleTickDone(object sender, TickDoneEventArgs e)
 		{
-			foreach (KeyValuePair<Player, int> pair in KillsThisRound)
+			if (Parser.PlayingParticipants.Count() >= 10
+				&& Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == 0) == null
+				&& !_isTeamsInitialized)
 			{
-				// Keep individual kills for each players
-				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == pair.Key.SteamID);
-				if (player == null) continue;
-				switch (pair.Value)
+				Application.Current.Dispatcher.Invoke(delegate
 				{
-					case 1:
-						player.OnekillCount++;
-						Demo.OneKillCount++;
-						CurrentRound.OneKillCount++;
-						break;
-					case 2:
-						player.TwokillCount++;
-						Demo.TwoKillCount++;
-						CurrentRound.TwoKillCount++;
-						break;
-					case 3:
-						player.ThreekillCount++;
-						Demo.ThreeKillCount++;
-						CurrentRound.ThreeKillCount++;
-						break;
-					case 4:
-						player.FourKillCount++;
-						Demo.FourKillCount++;
-						CurrentRound.FourKillCount++;
-						break;
-					case 5:
-						player.FiveKillCount++;
-						Demo.FiveKillCount++;
-						CurrentRound.FiveKillCount++;
-						break;
-				}
+					if (Demo.Players.Count < 10)
+					{
+						AddTeams();
+					}
+					else
+					{
+						_isTeamsInitialized = true;
+					}
+					Demo.Rounds.Clear();
+					RoundCount = 0;
+					CreateNewRound();
+					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+				});
 			}
 
-			Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
-			Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
-			Demo.MostEntryKillPlayer = Demo.Players.MaxBy(p => p.EntryKills.Count);
-			var weapons = Demo.Kills.GroupBy(k => k.Weapon).Select(weap => new
-			{
-				Weapon = weap.Key,
-				Count = weap.Count()
-			}).OrderByDescending(w => w.Count);
-			Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
-
-			var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
-			playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
-
-			var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
-			playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
+			base.HandleTickDone(sender, e);
 		}
 
 		private void AddTeams()
@@ -400,29 +409,50 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// Add all players to our ObservableCollection of PlayerExtended and teams
 			foreach (Player player in Parser.PlayingParticipants)
 			{
-				PlayerExtended pl = new PlayerExtended
+				if (player.SteamID != 0)
 				{
-					SteamId = player.SteamID,
-					Name = player.Name,
-					Team = player.Team
-				};
-
-				Application.Current.Dispatcher.Invoke(delegate
-				{
-					if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
-
-					if (pl.Team == Team.CounterTerrorist)
+					PlayerExtended pl = new PlayerExtended
 					{
-						if (!Demo.PlayersTeam1.Contains(pl)) Demo.PlayersTeam1.Add(pl);
-						if (!team1.Players.Contains(pl)) team1.Players.Add(pl);
-					}
+						SteamId = player.SteamID,
+						Name = player.Name,
+						Team = player.Team
+					};
 
-					if (pl.Team == Team.Terrorist)
+					Application.Current.Dispatcher.Invoke(delegate
 					{
-						if (!Demo.PlayersTeam2.Contains(pl)) Demo.PlayersTeam2.Add(pl);
-						if (!team2.Players.Contains(pl)) team2.Players.Add(pl);
-					}
-				});
+						if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
+
+						if (pl.Team == Team.CounterTerrorist)
+						{
+							// Check swap
+							if (Demo.PlayersTeam2.Contains(pl))
+							{
+								Demo.PlayersTeam1.Add(Demo.PlayersTeam2.First(p => p.Equals(pl)));
+								Demo.PlayersTeam2.Remove(pl);
+							}
+							else
+							{
+								if (!Demo.PlayersTeam1.Contains(pl)) Demo.PlayersTeam1.Add(pl);
+							}
+							team1.Players.Add(Demo.Players.First(p => p.Equals(pl)));
+						}
+
+						if (pl.Team == Team.Terrorist)
+						{
+							// Check swap
+							if (Demo.PlayersTeam1.Contains(pl))
+							{
+								Demo.PlayersTeam2.Add(Demo.PlayersTeam1.First(p => p.Equals(pl)));
+								Demo.PlayersTeam1.Remove(pl);
+							}
+							else
+							{
+								if (!Demo.PlayersTeam2.Contains(pl)) Demo.PlayersTeam2.Add(pl);
+							}
+							team2.Players.Add(Demo.Players.First(p => p.Equals(pl)));
+						}
+					});
+				}
 			}
 
 			// Add teams

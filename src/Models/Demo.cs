@@ -585,8 +585,8 @@ namespace CSGO_Demos_Manager.Models
 		{
 			return base.GetHashCode();
 		}
-
-		public void ResetStats()
+		
+		public void ResetStats(bool resetTeams = true)
 		{
 			DispatcherHelper.CheckBeginInvokeOnUI(
 				() =>
@@ -607,13 +607,23 @@ namespace CSGO_Demos_Manager.Models
 					_scoreSecondHalfTeam1 = 0;
 					_scoreSecondHalfTeam2 = 0;
 					_bombPlanted.Clear();
-					_players.Clear();
-					_playersTeam1.Clear();
-					_playersTeam2.Clear();
+					if (resetTeams)
+					{
+						_players.Clear();
+						_playersTeam1.Clear();
+						_playersTeam2.Clear();
+						_teams.Clear();
+					}
+					else
+					{
+						foreach (PlayerExtended playerExtended in Players)
+						{
+							playerExtended.ResetStats();
+						}
+					}
 					_rounds.Clear();
 					_weaponFired.Clear();
 					_kills.Clear();
-					_teams.Clear();
 					_overtimes.Clear();
 					PositionsPoint.Clear();
 				});
