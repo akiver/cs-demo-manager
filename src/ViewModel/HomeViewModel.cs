@@ -895,6 +895,8 @@ namespace CSGO_Demos_Manager.ViewModel
 				Demos.Add(demo);
 			}
 
+			DataGridDemosCollection.Refresh();
+
 			IsBusy = false;
 			HasNotification = false;
 		}

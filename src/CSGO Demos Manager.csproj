@@ -178,6 +178,7 @@
     <Compile Include="Converters\NullableValueConverter.cs" />
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
+    <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Exceptions\Heatmap\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Heatmap\HeatmapException.cs" />
     <Compile Include="Exceptions\Heatmap\MapHeatmapUnavailableException.cs" />

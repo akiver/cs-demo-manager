@@ -20,6 +20,7 @@
 			<helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
 			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 			<helpers:ImageToSourceConverter x:Key="ImageToSourceConverter" />
+			<helpers:StringToDateConverter x:Key="StringToDateConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -319,7 +320,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date}" HeaderStyle="{StaticResource DemoDateHeader}" SortDirection="Descending" 
+				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date, Converter={StaticResource StringToDateConverter}}" HeaderStyle="{StaticResource DemoDateHeader}" SortDirection="Descending" 
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="FileNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}" HeaderStyle="{StaticResource DemoNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
