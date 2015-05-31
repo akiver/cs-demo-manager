@@ -860,25 +860,21 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			int personnalTeamScore = 0;
 			int opponentTeamScore = 0;
 
-			try
+			PlayerExtended pl = Demo.PlayersTeam1.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SteamID);
+			if (pl != null)
 			{
-				PlayerExtended pl = Demo.PlayersTeam1.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SteamID);
-				if (pl != null)
+				personnalTeamScore = Demo.ScoreTeam1;
+				opponentTeamScore = Demo.ScoreTeam2;
+			}
+			else
+			{
+				PlayerExtended pl2 = Demo.PlayersTeam2.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SteamID);
+				if (pl2 != null)
 				{
-					personnalTeamScore = Demo.ScoreTeam1;
-					opponentTeamScore = Demo.ScoreTeam2;
-                }
-				else
-				{
-					PlayerExtended pl2 = Demo.PlayersTeam2.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SteamID);
-					if (pl2 != null)
-					{
-						personnalTeamScore = Demo.ScoreTeam2;
-						opponentTeamScore = Demo.ScoreTeam1;
-					}
+					personnalTeamScore = Demo.ScoreTeam2;
+					opponentTeamScore = Demo.ScoreTeam1;
 				}
 			}
-			catch (Exception) { }
 
 			if (personnalTeamScore != 0 && opponentTeamScore != 0)
 			{
