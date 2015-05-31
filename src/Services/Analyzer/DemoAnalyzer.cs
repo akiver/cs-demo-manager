@@ -57,6 +57,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private static readonly Regex FILENAME_FACEIT_REGEX = new Regex("^[0-9]+_team[a-z0-9-]+-team[a-z0-9-]+_de_[a-z0-9]+\\.dem");
 
+		private static readonly Regex FILENAME_EBOT_REGEX = new Regex("^([0-9]*)_(.*?)-(.*?)_(.*?)(.dem)$");
+
 		public bool AnalyzeHeatmapPoint { get; set; } = false;
 
 		public bool AnalyzePlayersPosition { get; set; } = false;
@@ -176,7 +178,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			// Check for ebot demos
-			if (demo.Hostname.Contains("eBot"))
+			if (demo.Hostname.Contains("eBot") || FILENAME_EBOT_REGEX.Match(demo.Name).Success)
 			{
 				demo.Source = Source.Factory("ebot");
 				return demo;
