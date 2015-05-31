@@ -329,7 +329,30 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TeamName2Column" Width="Auto" Header="Team 2" Binding="{Binding ClanTagNameTeam2}" HeaderStyle="{StaticResource Team2NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-				<DataGridTextColumn x:Name="WinStatusHeader" Width="Auto" Header="Status" Binding="{Binding WinStatus}" HeaderStyle="{StaticResource WinStatusHeader}" />
+				<DataGridTemplateColumn x:Name="WinStatusHeader" Header="Status" Width="Auto" HeaderStyle="{StaticResource WinStatusHeader}" SortMemberPath="WinStatus">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding Path=WinStatus}" TextAlignment="Center" FontWeight="DemiBold">
+								<TextBlock.Style>
+									<Style TargetType="{x:Type TextBlock}">
+										<Style.Triggers>
+											<DataTrigger Binding="{Binding Path=WinStatus}" Value="won">
+												<Setter Property="Background" Value="LightGreen"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Path=WinStatus}" Value="lost">
+												<Setter Property="Background" Value="Firebrick"/>
+												<Setter Property="Foreground" Value="White"/>
+											</DataTrigger>
+											<DataTrigger Binding="{Binding Path=WinStatus}" Value="draw">
+												<Setter Property="Background" Value="LightBlue"/>
+											</DataTrigger>
+										</Style.Triggers>
+									</Style>
+								</TextBlock.Style>
+							</TextBlock>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 				<DataGridTextColumn x:Name="ScoreTeam1Column" Width="Auto" Header="ST1" Binding="{Binding ScoreTeam1}" HeaderStyle="{StaticResource ScoreTeam1Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ScoreTeam2Column" Width="Auto" Header="ST2" Binding="{Binding ScoreTeam2}" HeaderStyle="{StaticResource ScoreTeam2Header}"

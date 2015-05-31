@@ -884,11 +884,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				if (personnalTeamScore > opponentTeamScore)
 				{
-					Demo.WinStatus = "win";
+					Demo.WinStatus = "won";
 				}
 				else if (personnalTeamScore < opponentTeamScore)
 				{
-					Demo.WinStatus = "lose";
+					Demo.WinStatus = "lost";
 				}
 				else
 				{
