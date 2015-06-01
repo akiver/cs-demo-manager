@@ -260,7 +260,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Point = (AnalyzePlayersPosition) ? new HeatmapPoint
+				Point = (AnalyzeHeatmapPoint) ? new HeatmapPoint
 				{
 					X = e.Victim.Position.X,
 					Y = e.Victim.Position.Y
