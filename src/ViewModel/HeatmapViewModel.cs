@@ -31,6 +31,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private WriteableBitmap _colorsLayer;
 
+		private List<HeatmapPoint> _points = new List<HeatmapPoint>();
+
 		private readonly DialogService _dialogService;
 
 		private HeatmapService _heatmapService;
@@ -46,6 +48,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _hasGeneratedHeatmap;
 
 		private readonly IDemosService _demosService;
+
+		private byte _opacity = 150;
 
 		#endregion
 
@@ -93,6 +97,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => HasGeneratedHeatmap, ref _hasGeneratedHeatmap, value); }
 		}
 
+		public byte Opacity
+		{
+			get { return _opacity; }
+			set
+			{
+				Set(() => Opacity, ref _opacity, value);
+				ColorsLayer = _heatmapService.GenerateHeatmap(_points, value);
+			}
+		}
+
 		#endregion
 
 		#region Commands
@@ -120,11 +134,10 @@ namespace CSGO_Demos_Manager.ViewModel
 							// Get HeatmapPoints based on selection
 							// TODO more selection
 							_heatmapService = new HeatmapService(mapService);
-							List<HeatmapPoint> points = await _heatmapService.GetPoints(CurrentDemo, CurrentHeatmapSelector);
+							_points = await _heatmapService.GetPoints(CurrentDemo, CurrentHeatmapSelector);
 
 							// Generate the colored layer
-							// TODO variable opacity
-							ColorsLayer = _heatmapService.GenerateHeatmap(points);
+							ColorsLayer = _heatmapService.GenerateHeatmap(_points, _opacity);
 						}
 						catch (Exception e)
 						{

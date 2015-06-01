@@ -157,16 +157,16 @@ namespace CSGO_Demos_Manager.Services
 		/// Generate the final overview heatmap
 		/// </summary>
 		/// <param name="points"></param>
+		/// <param name="alpha"></param>
 		/// <returns></returns>
-		public WriteableBitmap GenerateHeatmap(List<HeatmapPoint> points)
+		public WriteableBitmap GenerateHeatmap(List<HeatmapPoint> points, byte alpha)
 		{
 			// Create a blank bitmap
 			Bitmap blankBitmap = new Bitmap(MapService.ResX, MapService.ResY);
 			// Calculate mask intensity
 			Bitmap dataBitmap = CreateIntensityMask(blankBitmap, points);
 			// Colorize the mask
-			// TODO variable opacity
-			dataBitmap = Colorize(dataBitmap, 150);
+			dataBitmap = Colorize(dataBitmap, alpha);
 			// Convert to BitmapSource
 			BitmapSource bitmapSource = CreateBitmapSourceFromBitmap(dataBitmap);
 			// Convert to WriteableBitmap

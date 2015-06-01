@@ -5,11 +5,19 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
 			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
 			 Name="HeatmapUserControl"
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding Heatmap, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
+	
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
@@ -85,6 +93,19 @@
 						<TextBlock Text="Export" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Opacity:" Style="{StaticResource SmallTitleStyle}"/>
+					<Slider x:Name="SliderOpacity"
+					Minimum="0"
+					Maximum="255"
+					LargeChange="1"
+					SmallChange="1"
+					Width="150"
+					Margin="5 0 0 0"
+					Value="{Binding Opacity}"
+					IsEnabled="{Binding HasGeneratedHeatmap}"/>
+				</StackPanel>
 
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing
