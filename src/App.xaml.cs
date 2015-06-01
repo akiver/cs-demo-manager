@@ -1,11 +1,10 @@
-﻿using CefSharp;
-using CSGO_Demos_Manager.Services;
-using GalaSoft.MvvmLight.Threading;
+﻿using GalaSoft.MvvmLight.Threading;
 using System.Windows;
 #if RELEASE
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Threading;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Services;
 #endif
 
 namespace CSGO_Demos_Manager
@@ -28,10 +27,6 @@ namespace CSGO_Demos_Manager
 
 		private void Application_Exit(object sender, ExitEventArgs e)
 		{
-			if (Cef.IsInitialized)
-			{
-				Cef.Shutdown();
-			}
 		}
 
 #if RELEASE

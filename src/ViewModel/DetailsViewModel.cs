@@ -66,8 +66,6 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _exportDemoToExcelCommand;
 
-		private readonly HeatmapView _heatmapView;
-
 		private ICollectionView _playersTeam1Collection;
 
 		private ICollectionView _playersTeam2Collection;
@@ -158,8 +156,9 @@ namespace CSGO_Demos_Manager.ViewModel
 							heatmapViewModel.CurrentDemo = demo;
 							heatmapViewModel.HasGeneratedHeatmap = false;
 
+							HeatmapView heatmapView = new HeatmapView();
 							var mainViewModel = (new ViewModelLocator()).Main;
-							mainViewModel.CurrentPage.ShowPage(_heatmapView);
+							mainViewModel.CurrentPage.ShowPage(heatmapView);
 						}
 						catch (MapHeatmapUnavailableException e)
 						{
@@ -420,8 +419,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			_steamService = steamService;
 			_cacheService = cacheService;
 			_excelService = excelService;
-
-			_heatmapView = new HeatmapView();
 
 			if (IsInDesignModeStatic)
 			{

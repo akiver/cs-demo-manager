@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\packages\CefSharp.Wpf.39.0.1\build\CefSharp.Wpf.props" Condition="Exists('..\packages\CefSharp.Wpf.39.0.1\build\CefSharp.Wpf.props')" />
-  <Import Project="..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -186,6 +184,7 @@
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Messages\MainWindowLoadedMessage.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
+    <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />
     <Compile Include="Models\Events\BaseEvent.cs" />
@@ -232,10 +231,7 @@
     <Resource Include="Resources\steam_api_key.txt" />
     <Resource Include="Resources\images\overview\de_mirage.png" />
     <Resource Include="Resources\images\overview\de_overpass.png" />
-    <Resource Include="Resources\images\overview\base64\de_overpass.txt" />
     <Resource Include="Resources\images\overview\de_cbble.png" />
-    <Resource Include="Resources\images\overview\base64\de_cbble.txt" />
-    <Resource Include="Resources\images\overview\base64\de_mirage.txt" />
     <None Include="Resources\images\icons\flashbang.png" />
     <None Include="Resources\images\icons\flashbang_exploded.png" />
     <None Include="Resources\images\icons\decoy.png" />
@@ -253,7 +249,7 @@
     <None Include="Resources\images\icons\decoy_exploded.png" />
     <None Include="Resources\images\icons\decoy_screaming.png" />
     <None Include="Resources\images\icons\bomb.png" />
-    <Content Include="Resources\images\overview\base64\de_season.txt" />
+    <None Include="Resources\images\colors.jpg" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EseaAnalyzer.cs" />
     <Compile Include="Services\Analyzer\ValveAnalyzer.cs" />
@@ -431,9 +427,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\overview\base64\de_cache.txt" />
     <Resource Include="Resources\images\overview\de_cache.png" />
-    <Resource Include="Resources\images\overview\base64\de_nuke.txt" />
     <Resource Include="Resources\images\overview\de_nuke.png" />
     <Resource Include="Resources\images\logo\ebot.png" />
     <Resource Include="Resources\images\logo\pov.png" />
@@ -445,13 +439,10 @@
     <Resource Include="Resources\images\suicide.png" />
     <Resource Include="Resources\images\deagle.png" />
     <Resource Include="Resources\images\bomb.png" />
-    <Resource Include="Resources\images\overview\base64\de_dust2.txt" />
     <Resource Include="app.ico" />
     <Resource Include="Resources\images\overview\de_dust2.png" />
-    <Resource Include="Resources\images\overview\base64\de_inferno.txt" />
     <Resource Include="Resources\images\overview\de_inferno.png" />
     <Resource Include="Resources\images\headshot.png" />
-    <Content Include="Resources\html\heatmap.html" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -481,19 +472,6 @@ snremove.exe -r DemoInfo.dll</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\cef.redist.x64.3.2171.2069\build\cef.redist.x64.targets" Condition="Exists('..\packages\cef.redist.x64.3.2171.2069\build\cef.redist.x64.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\packages\cef.redist.x64.3.2171.2069\build\cef.redist.x64.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.3.2171.2069\build\cef.redist.x64.targets'))" />
-    <Error Condition="!Exists('..\packages\cef.redist.x86.3.2171.2069\build\cef.redist.x86.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.3.2171.2069\build\cef.redist.x86.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\packages\CefSharp.Wpf.39.0.1\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Wpf.39.0.1\build\CefSharp.Wpf.props'))" />
-  </Target>
-  <Import Project="..\packages\cef.redist.x86.3.2171.2069\build\cef.redist.x86.targets" Condition="Exists('..\packages\cef.redist.x86.3.2171.2069\build\cef.redist.x86.targets')" />
-  <Import Project="..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.39.0.1\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

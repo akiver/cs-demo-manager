@@ -124,50 +124,26 @@
   <data name="de_cache" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_cache.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="de_cache_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_cache.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="de_cbble" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_cbble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_cbble_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_cbble.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="de_dust2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_dust2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="de_dust2_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_dust2.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="de_inferno" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_inferno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_inferno_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_inferno.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
   <data name="de_mirage" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_mirage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="de_mirage_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_mirage.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="de_nuke" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_nuke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_nuke_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_nuke.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="de_overpass" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_overpass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="de_overpass_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_overpass.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="de_season" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_season.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_season_base64" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\base64\de_season.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="ebot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\logo\ebot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -183,9 +159,6 @@
   </data>
   <data name="flashbang_exploded" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\icons\flashbang_exploded.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="heatmap" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\html\heatmap.html;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
   <data name="hegrenade" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\icons\hegrenade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -240,5 +213,8 @@
   </data>
   <data name="cevo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\logo\cevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="colors" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

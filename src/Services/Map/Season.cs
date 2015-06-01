@@ -12,7 +12,6 @@
 			ResX = 1024;
 			ResY = 1024;
 			Overview = Properties.Resources.de_season;
-			OverviewImageData = Properties.Resources.de_season_base64;
 			CalcSize();
 		}
 	}

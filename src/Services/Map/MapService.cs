@@ -27,8 +27,6 @@ namespace CSGO_Demos_Manager.Services.Map
 
 		public Image Overview { get; set; }
 
-		public string OverviewImageData { get; set; }
-
 		public static MapService Factory(string name)
 		{
 			switch (name)

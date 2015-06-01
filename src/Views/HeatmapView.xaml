@@ -4,7 +4,6 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:cefSharp="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
@@ -88,21 +87,25 @@
 				</Button>
 
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-					<controls:ProgressRing 
+					<controls:ProgressRing
 						IsActive="{Binding IsGenerating}"
 						Foreground="{DynamicResource AccentColorBrush}"
 						Width="40" Height="40" />
 					<TextBlock Text="Generating..."
-							   Style="{StaticResource LabelGeneralInfoDemo}"
-							   Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+								 Style="{StaticResource LabelGeneralInfoDemo}"
+								 Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 
 			</StackPanel>
 		</Grid>
 
-		<cefSharp:ChromiumWebBrowser x:Name="HeatmapBrowser" Grid.Row="1"
-									 WebBrowser="{Binding HeatmapBrowser, Mode=OneWayToSource}"
-									 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-									 Width="Auto" Height="Auto" Margin="10" />
+		<Image Grid.Row="1" Source="{Binding OverviewLayer}" Stretch="Uniform"
+					 Width="Auto" Height="Auto" Margin="10"
+					 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+		<Image Grid.Row="1" Source="{Binding ColorsLayer}" Stretch="Uniform"
+					 Width="Auto" Height="Auto" Margin="10"
+					 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
 	</Grid>
 </UserControl>

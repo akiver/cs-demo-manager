@@ -12,7 +12,6 @@
 			ResX = 1024;
 			ResY = 1024;
 			Overview = Properties.Resources.de_overpass;
-			OverviewImageData = Properties.Resources.de_overpass_base64;
 			CalcSize();
 		}
 	}

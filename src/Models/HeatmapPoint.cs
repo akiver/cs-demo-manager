@@ -2,7 +2,7 @@
 {
 	public class HeatmapPoint : MapPoint
 	{
-		public int Value { get; set; }
+		public byte Intensity { get; set; } = 100;
 
 		public HeatmapPoint Clone()
 		{

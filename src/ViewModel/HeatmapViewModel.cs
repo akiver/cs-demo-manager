@@ -1,17 +1,15 @@
-﻿using CefSharp.Wpf;
+﻿using System;
 using CSGO_Demos_Manager.Exceptions.Heatmap;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
-using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
@@ -29,13 +27,9 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private Demo _currentDemo;
 
-		private readonly IDemosService _demosService;
+		private WriteableBitmap _overviewLayer;
 
-		private IWpfWebBrowser _heatmapBrowser;
-
-		private object _evaluateJavaScriptResult;
-
-		public ICommand EvaluateJavaScriptCommand { get; set; }
+		private WriteableBitmap _colorsLayer;
 
 		private readonly DialogService _dialogService;
 
@@ -51,6 +45,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _hasGeneratedHeatmap;
 
+		private readonly IDemosService _demosService;
+
 		#endregion
 
 		#region Accessors
@@ -61,19 +57,17 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => CurrentDemo, ref _currentDemo, value); }
 		}
 
-		public IWpfWebBrowser HeatmapBrowser
+		public WriteableBitmap ColorsLayer
 		{
-			get { return _heatmapBrowser; }
-			set { Set(() => HeatmapBrowser, ref _heatmapBrowser, value); }
+			get { return _colorsLayer; }
+			set { Set(() => ColorsLayer, ref _colorsLayer, value); }
 		}
 
-		public object EvaluateJavaScriptResult
+		public WriteableBitmap OverviewLayer
 		{
-			get { return _evaluateJavaScriptResult; }
-			set { Set(() => EvaluateJavaScriptResult, ref _evaluateJavaScriptResult, value); }
+			get { return _overviewLayer; }
+			set { Set(() => OverviewLayer, ref _overviewLayer, value); }
 		}
-
-		public HeatmapService HeamapService { get; set; }
 
 		public List<ComboboxSelector> HeatmapSelectors
 		{
@@ -114,23 +108,31 @@ namespace CSGO_Demos_Manager.ViewModel
 						IsGenerating = true;
 						HasGeneratedHeatmap = false;
 
-						EvaluateJavaScriptCommand = new RelayCommand<string>(EvaluateJavaScript, s => !string.IsNullOrWhiteSpace(s));
-
 						try
 						{
-							MapService mapService = MapService.Factory(CurrentDemo.MapName);
-							_heatmapService = new HeatmapService(mapService);
-
-							// Analyze demos to get heatmap points
+							// Analyze the demo to get HeatmapPoints
 							CurrentDemo = await _demosService.AnalyzeHeatmapPoints(CurrentDemo);
 
-							string html = await _heatmapService.Generate(CurrentDemo, CurrentHeatmapSelector);
-							HeatmapBrowser.LoadHtml(html, "http://render/html");
+							// Get the original overview image
+							MapService mapService = MapService.Factory(CurrentDemo.MapName);
+							OverviewLayer = mapService.GetWriteableImage();
+
+							// Get HeatmapPoints based on selection
+							// TODO more selection
+							_heatmapService = new HeatmapService(mapService);
+							List<HeatmapPoint> points = await _heatmapService.GetPoints(CurrentDemo, CurrentHeatmapSelector);
+
+							// Generate the colored layer
+							// TODO variable opacity
+							ColorsLayer = _heatmapService.GenerateHeatmap(points);
 						}
-						catch (HeatmapException e)
+						catch (Exception e)
 						{
 							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative).ConfigureAwait(false);
+							if (e is HeatmapException)
+							{
+								await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative).ConfigureAwait(false);
+							}
 						}
 
 						IsGenerating = false;
@@ -140,25 +142,20 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command to export heatmap as PNG
+		/// </summary>
 		public RelayCommand ExportCommand
 		{
 			get
 			{
 				return _exportCommand
 					?? (_exportCommand = new RelayCommand(
-					() =>
+					async () =>
 					{
-						var task = HeatmapBrowser.EvaluateScriptAsync("dataToPNG()");
-
-						task.ContinueWith(t =>
+						try
 						{
-							if (t.IsFaulted) return;
-
-							var response = t.Result;
-							EvaluateJavaScriptResult = response.Success ? (response.Result ?? "null") : response.Message;
-
-							Image image = _heatmapService.GenerateImage((string)response.Result);
-
+							Image overviewImage = _heatmapService.GenerateOverviewImage(OverviewLayer, ColorsLayer);
 							SaveFileDialog saveHeatmapDialog = new SaveFileDialog
 							{
 								FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + ".png",
@@ -167,9 +164,14 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							if (saveHeatmapDialog.ShowDialog() == DialogResult.OK)
 							{
-								image.Save(saveHeatmapDialog.FileName, ImageFormat.Png);
+								overviewImage.Save(saveHeatmapDialog.FileName, ImageFormat.Png);
 							}
-						}, TaskScheduler.FromCurrentSynchronizationContext());
+						}
+						catch (Exception e)
+						{
+							Logger.Instance.Log(e);
+							await _dialogService.ShowErrorAsync("An error occured while exporting heatmap to PNG.", MessageDialogStyle.Affirmative).ConfigureAwait(false);
+						}
 
 					}, () => HasGeneratedHeatmap && !IsGenerating));
 			}
@@ -198,10 +200,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public HeatmapViewModel(DialogService dialogService, IDemosService demoService)
+		public HeatmapViewModel(DialogService dialogService, IDemosService demosService)
 		{
 			_dialogService = dialogService;
-			_demosService = demoService;
+			_demosService = demosService;
 			HeatmapSelectors.Add(new ComboboxSelector("kills", "Kills"));
 			HeatmapSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
 			HeatmapSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
@@ -209,20 +211,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			HeatmapSelectors.Add(new ComboboxSelector("smokes", "Smokes"));
 			HeatmapSelectors.Add(new ComboboxSelector("molotovs", "Molotovs"));
 			CurrentHeatmapSelector = HeatmapSelectors[0];
-		}
-
-		private async void EvaluateJavaScript(string s)
-		{
-			try
-			{
-				var response = await HeatmapBrowser.EvaluateScriptAsync(s);
-
-				EvaluateJavaScriptResult = response.Success ? (response.Result ?? "null") : response.Message;
-			}
-			catch (Exception e)
-			{
-				Logger.Instance.Log(e);
-			}
 		}
 	}
 }

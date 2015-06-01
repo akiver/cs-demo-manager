@@ -12,7 +12,6 @@
 			ResX = 1024;
 			ResY = 1024;
 			Overview = Properties.Resources.de_cache;
-			OverviewImageData = Properties.Resources.de_cache_base64;
 			CalcSize();
 		}
 	}

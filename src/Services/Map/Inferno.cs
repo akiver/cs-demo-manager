@@ -12,7 +12,6 @@
 			ResX = 1024;
 			ResY = 1024;
 			Overview = Properties.Resources.de_inferno;
-			OverviewImageData = Properties.Resources.de_inferno_base64;
 			CalcSize();
 		}
 	}
