@@ -458,14 +458,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>cd $(SolutionDir)src\bin\x86\Debug
+    <PostBuildEvent>cd $(SolutionDir)src\bin\Debug
 snremove.exe -r DemoInfo.dll
-cd $(SolutionDir)src\bin\x86\Release
-snremove.exe -r DemoInfo.dll
-
-cd $(SolutionDir)src\bin\x64\Debug
-snremove.exe -r DemoInfo.dll
-cd $(SolutionDir)src\bin\x64\Release
+cd $(SolutionDir)src\bin\Release
 snremove.exe -r DemoInfo.dll</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
