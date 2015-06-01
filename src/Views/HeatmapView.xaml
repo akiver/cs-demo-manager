@@ -41,7 +41,7 @@
 			<StackPanel Orientation="Horizontal">
 
 				<Button Margin="10"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="70"
 					Height="30"
 					Command="{Binding BackToDemoDetailsCommand}"
@@ -65,7 +65,7 @@
 					Width="180" Height="25" Margin="5 0 0 0"/>
 
 				<Button Command="{Binding GenerateCommand}"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Generate heatmap (CTRL+G)"
 					Width="90"
 					Height="30" Margin="10 0 0 0">
@@ -80,7 +80,7 @@
 				</Button>
 
 				<Button Command="{Binding ExportCommand}"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Save as PNG (CTRL+S)"
 					Width="80"
 					Height="30" Margin="10 0 0 0">
