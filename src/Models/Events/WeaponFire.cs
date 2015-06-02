@@ -1,12 +1,11 @@
-﻿namespace CSGO_Demos_Manager.Models.Events
+﻿using Newtonsoft.Json;
+
+namespace CSGO_Demos_Manager.Models.Events
 {
 	public class WeaponFire : BaseEvent
 	{
-		public float X { get; set; }
-
-		public float Y { get; set; }
-
-		public float Z { get; set; }
+		[JsonIgnore]
+		public HeatmapPoint Point { get; set; }
 
 		public PlayerExtended Shooter { get; set; }
 

@@ -15,9 +15,10 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
+			<converters:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
-	
+
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
@@ -57,12 +58,56 @@
 					</StackPanel>
 				</Button>
 
-				<ComboBox
-					ItemsSource="{Binding HeatmapSelectors}"
-					SelectedItem="{Binding CurrentHeatmapSelector}"
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Event" Style="{StaticResource SmallTitleStyle}"/>
+					<ComboBox
+					ItemsSource="{Binding EventSelectors}"
+					SelectedItem="{Binding CurrentEventSelector}"
 					DisplayMemberPath ="Title"
 					SelectedValuePath="Title"
-					Width="180" Height="25" Margin="5 0 0 0"/>
+					Width="180" Height="25" Margin="5 0 0 0"
+					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Side" Style="{StaticResource SmallTitleStyle}"/>
+					<ComboBox
+					ItemsSource="{Binding TeamSelectors}"
+					SelectedItem="{Binding CurrentTeamSelector}"
+					DisplayMemberPath ="Title"
+					SelectedValuePath="Title"
+					Width="180" Height="25" Margin="5 0 0 0"
+					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Player" Style="{StaticResource SmallTitleStyle}"/>
+					<ComboBox
+					ItemsSource="{Binding CurrentDemo.Players}"
+					SelectedItem="{Binding SelectedPlayer}"
+					DisplayMemberPath ="Name"
+					SelectedValuePath="Name"
+					Width="180" Height="25" Margin="5 0 0 0"
+					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Round" Style="{StaticResource SmallTitleStyle}"/>
+					<ComboBox
+					ItemsSource="{Binding CurrentDemo.Rounds}"
+					SelectedItem="{Binding SelectedRound}"
+					DisplayMemberPath ="Number"
+					SelectedValuePath="Number"
+					Width="180" Height="25" Margin="5 0 0 0"
+					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+				</StackPanel>
+
+				<CheckBox Content="All rounds"
+						  IsChecked="{Binding SelectAllRounds}"
+						  IsEnabled="{Binding IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5 0 0 0"
+						  VerticalAlignment="Center" />
 
 				<Button Command="{Binding GenerateCommand}"
 					Style="{DynamicResource AccentedSquareButtonStyle}"

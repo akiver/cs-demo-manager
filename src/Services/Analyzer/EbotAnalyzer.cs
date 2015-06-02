@@ -245,11 +245,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Point = (AnalyzeHeatmapPoint) ? new HeatmapPoint
-				{
-					X = e.Victim.Position.X,
-					Y = e.Victim.Position.Y
-				} : null,
 				Weapon = new Weapon()
 				{
 					Name = e.Weapon.Weapon.ToString(),
@@ -316,6 +311,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			ProcessClutches();
+
+			if (AnalyzeHeatmapPoint)
+			{
+				killEvent.Point = new HeatmapPoint
+				{
+					X = e.Victim.Position.X,
+					Y = e.Victim.Position.Y,
+					Round = CurrentRound,
+					Player = killEvent.Killer,
+					Team = e.Killer.Team
+				};
+			}
 
 			Demo.Kills.Add(killEvent);
 			CurrentRound.Kills.Add(killEvent);

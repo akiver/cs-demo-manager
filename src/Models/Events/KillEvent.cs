@@ -13,11 +13,11 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("assister")]
 		public PlayerExtended Assister { get; set; }
 
-		[JsonIgnore]
-		public HeatmapPoint Point { get; set; }
-
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }
+
+		[JsonIgnore]
+		public HeatmapPoint Point { get; set; }
 
 		[JsonIgnore]
 		public override string Message => Killer.Name + " killed " + DeathPerson.Name + " with " + Weapon.Name;

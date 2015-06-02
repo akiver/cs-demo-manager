@@ -204,31 +204,44 @@ namespace CSGO_Demos_Manager.Models
 		private ObservableCollection<KillEvent> _kills = new ObservableCollection<KillEvent>();
 
 		/// <summary>
-		/// 
+		/// Demo's overtimes
 		/// </summary>
 		private ObservableCollection<Overtime> _overtimes = new ObservableCollection<Overtime>();
 
 		/// <summary>
-		/// Contains information about all shoots occured during the match (Heatmap data)
+		/// Team 1 players
 		/// </summary>
-		private readonly List<WeaponFire> _weaponFired = new List<WeaponFire>();
-
 		private ObservableCollection<PlayerExtended> _playersTeam1 = new ObservableCollection<PlayerExtended>();
 
+		/// <summary>
+		/// Team 2 players
+		/// </summary>
 		private ObservableCollection<PlayerExtended> _playersTeam2 = new ObservableCollection<PlayerExtended>();
 
+		/// <summary>
+		/// Player with the best HS ratio
+		/// </summary>
 		private PlayerExtended _mostHeadshotPlayer;
 
+		/// <summary>
+		/// Player with the most bomb planted
+		/// </summary>
 		private PlayerExtended _mostBombPlantedPlayer;
 
+		/// <summary>
+		/// Player with the most entry kill
+		/// </summary>
 		private PlayerExtended _mostEntryKillPlayer;
 
+		/// <summary>
+		/// Weapon with the most kills
+		/// </summary>
 		private Weapon _mostKillingWeapon;
 
+		/// <summary>
+		/// Contains teams of the match
+		/// </summary>
 		private ObservableCollection<TeamExtended> _teams = new ObservableCollection<TeamExtended>();
-
-		[JsonIgnore]
-		public List<PositionPoint> PositionsPoint { get; set; } = new List<PositionPoint>();
 
 		#endregion
 
@@ -333,10 +346,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public string DurationTime
-		{
-			get { return TimeSpan.FromSeconds(_duration).ToString(@"hh\:mm\:ss"); }
-		}
+		public string DurationTime => TimeSpan.FromSeconds(_duration).ToString(@"hh\:mm\:ss");
 
 		[JsonProperty("map_name")]
 		public string MapName
@@ -568,21 +578,29 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		/// <summary>
+		/// Contains all PositionPoint for overview generation 
+		/// </summary>
 		[JsonIgnore]
-		public List<WeaponFire> WeaponFired => _weaponFired;
+		public List<PositionPoint> PositionsPoint { get; set; } = new List<PositionPoint>();
 
+		/// <summary>
+		/// DecoyStartedEvent list used for heatmap generation
+		/// </summary>
 		[JsonIgnore]
-		public List<HeatmapPoint> HeatmapPoints
-		{
-			get
-			{
-				return _weaponFired.Select(fire => new HeatmapPoint
-				{
-					X = fire.X,
-					Y = fire.Y
-				}).ToList();
-			}
-		}
+		public List<DecoyStartedEvent> DecoyStarted = new List<DecoyStartedEvent>();
+
+		/// <summary>
+		/// MolotovFireStartedEvent list used for heatmap generation
+		/// </summary>
+		[JsonIgnore]
+		public List<MolotovFireStartedEvent> MolotovFireStarted = new List<MolotovFireStartedEvent>();
+
+		/// <summary>
+		/// Contains information about all shoots occured during the match (Heatmap data)
+		/// </summary>
+		[JsonIgnore]
+		public List<WeaponFire> WeaponFired = new List<WeaponFire>();
 
 		#endregion
 
@@ -634,10 +652,12 @@ namespace CSGO_Demos_Manager.Models
 						}
 					}
 					_rounds.Clear();
-					_weaponFired.Clear();
+					WeaponFired.Clear();
 					_kills.Clear();
 					_overtimes.Clear();
 					PositionsPoint.Clear();
+					MolotovFireStarted.Clear();
+					DecoyStarted.Clear();
 				});
 		}
 	}

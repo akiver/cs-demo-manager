@@ -12,7 +12,9 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Heatmap;
 using CSGO_Demos_Manager.Models.Comparers;
+using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services.Map;
+using DemoInfo;
 using Color = System.Drawing.Color;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Point = System.Drawing.Point;
@@ -28,9 +30,24 @@ namespace CSGO_Demos_Manager.Services
 
 		public MapService MapService { get; set; }
 
-		public HeatmapService(MapService mapService)
+		private readonly Demo _demo;
+
+		private readonly ComboboxSelector _eventSelector;
+
+		private readonly ComboboxSelector _sideSelector;
+
+		private readonly PlayerExtended _selectedPlayer;
+
+		private readonly Round _selectedRound;
+
+		public HeatmapService(MapService mapService, Demo demo, ComboboxSelector eventSelector, ComboboxSelector sideSelector, PlayerExtended selectedPlayer, Round selectedRound)
 		{
 			MapService = mapService;
+			_demo = demo;
+			_eventSelector = eventSelector;
+			_sideSelector = sideSelector;
+			_selectedPlayer = selectedPlayer;
+			_selectedRound = selectedRound;
 		}
 
 		/// <summary>
@@ -61,58 +78,66 @@ namespace CSGO_Demos_Manager.Services
 		/// <summary>
 		/// Return HeatmapPoints to draw on the overview
 		/// </summary>
-		/// <param name="demo"></param>
-		/// <param name="selector"></param>
 		/// <returns></returns>
-		public async Task<List<HeatmapPoint>> GetPoints(Demo demo, ComboboxSelector selector)
+		public async Task<List<HeatmapPoint>> GetPoints()
 		{
 			List<HeatmapPoint> heatmapPoints;
 			List<HeatmapPoint> points = new List<HeatmapPoint>();
 
-			switch (selector.Id)
+			switch (_eventSelector.Id)
 			{
 				case "kills":
-					heatmapPoints = new List<HeatmapPoint>(demo.Kills.Select(t => t.Point.Clone()).ToList());
+					heatmapPoints = GetKillsPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No kills occurs in this match");
+						throw new HeatmapDataNotFoundException("No kills occured with this selection.");
 					}
 					break;
 				case "shots":
-					heatmapPoints = new List<HeatmapPoint>(demo.HeatmapPoints);
+					heatmapPoints = GetWeaponFiredPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No shots occurs during this match");
+						throw new HeatmapDataNotFoundException("No shots occured with this selection.");
 					}
-					// Reduce intensity for "shots" as there is a lot of points
-					foreach (HeatmapPoint heatmapPoint in heatmapPoints) heatmapPoint.Intensity = 20;
+					if (heatmapPoints.Count > 600)
+					{
+						// Reduce intensity for "shots" as there is a lot of points
+						foreach (HeatmapPoint heatmapPoint in heatmapPoints) heatmapPoint.Intensity = 20;
+					}
 					break;
 				case "flashbangs":
-					heatmapPoints = new List<HeatmapPoint>(demo.Rounds.SelectMany(r => r.FlashbangsExploded.Select(f => f.Point.Clone())).ToList());
+					heatmapPoints = GetFlashbangExplodedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No flashbangs has been thrown during this match");
+						throw new HeatmapDataNotFoundException("No flashbang throwed with this selection.");
 					}
 					break;
 				case "he":
-					heatmapPoints = new List<HeatmapPoint>(demo.Rounds.SelectMany(r => r.ExplosiveGrenadesExploded.Select(f => f.Point.Clone())).ToList());
+					heatmapPoints = GetHeGrenadeExplodedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No HE grenades has been thrown during this match");
+						throw new HeatmapDataNotFoundException("No HE grenade throwed with this selection.");
 					}
 					break;
 				case "smokes":
-					heatmapPoints = new List<HeatmapPoint>(demo.Rounds.SelectMany(r => r.SmokesStarted.Select(f => f.Point.Clone())).ToList());
+					heatmapPoints = GetSmokeStartedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No smokes has been thrown during this match");
+						throw new HeatmapDataNotFoundException("No smoke throwed with this selection");
 					}
 					break;
 				case "molotovs":
-					heatmapPoints = new List<HeatmapPoint>(demo.Rounds.SelectMany(r => r.MolotovsThrowed.Select(f => f.Point.Clone())).ToList());
+					heatmapPoints = GetMolotovFireStartedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No molotovs has been thrown during this match");
+						throw new HeatmapDataNotFoundException("No molotov throwed with this selection.");
+					}
+					break;
+				case "decoys":
+					heatmapPoints = GetDecoyStartedPoints();
+					if (heatmapPoints.Count == 0)
+					{
+						throw new HeatmapDataNotFoundException("No decoy throwed with this selection.");
 					}
 					break;
 				default:
@@ -360,6 +385,752 @@ namespace CSGO_Demos_Manager.Services
 				bmp = new Bitmap(outStream);
 			}
 			return bmp;
+		}
+
+		#endregion
+
+		#region Getter points
+
+		private List<HeatmapPoint> GetKillsPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from killEvent
+								in _demo.Kills
+								where killEvent.Point.Team == Team.CounterTerrorist && killEvent.Point.Round.Equals(_selectedRound)
+								select killEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from killEvent
+								in _demo.Kills
+								where killEvent.Point.Team == Team.CounterTerrorist
+								select killEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from killEvent
+								in _demo.Kills
+								where killEvent.Point.Team == Team.Terrorist && killEvent.Point.Round.Equals(_selectedRound)
+								select killEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from killEvent
+								in _demo.Kills
+								where killEvent.Point.Team == Team.Terrorist
+								select killEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from killEvent
+								in _demo.Kills
+								where killEvent.Point.Round.Equals(_selectedRound)
+								select killEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(_demo.Kills.Select(killEvent => killEvent.Point));
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from killEvent
+						in _demo.Kills
+						where killEvent.Point.Player.Equals(_selectedPlayer) && killEvent.Point.Round.Equals(_selectedRound)
+						select killEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from killEvent
+						in _demo.Kills
+						where killEvent.Point.Player.Equals(_selectedPlayer)
+						select killEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetWeaponFiredPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from weaponFiredEvent
+								in _demo.WeaponFired
+								where weaponFiredEvent.Point.Team == Team.CounterTerrorist && weaponFiredEvent.Point.Round.Equals(_selectedRound)
+								select weaponFiredEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from weaponFiredEvent
+								in _demo.WeaponFired
+								where weaponFiredEvent.Point.Team == Team.CounterTerrorist
+								select weaponFiredEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from weaponFiredEvent
+								in _demo.WeaponFired
+								where weaponFiredEvent.Point.Team == Team.Terrorist && weaponFiredEvent.Point.Round.Equals(_selectedRound)
+								select weaponFiredEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from weaponFiredEvent
+								in _demo.WeaponFired
+								where weaponFiredEvent.Point.Team == Team.Terrorist
+								select weaponFiredEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from weaponFiredEvent
+								in _demo.WeaponFired
+								where weaponFiredEvent.Point.Round.Equals(_selectedRound)
+								select weaponFiredEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(_demo.WeaponFired.Select(weaponFiredEvent => weaponFiredEvent.Point));
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from weaponFiredEvent
+						in _demo.WeaponFired
+						where weaponFiredEvent.Point.Player.Equals(_selectedPlayer) && weaponFiredEvent.Point.Round.Equals(_selectedRound)
+						select weaponFiredEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from weaponFiredEvent
+						in _demo.WeaponFired
+						where weaponFiredEvent.Point.Player.Equals(_selectedPlayer)
+						select weaponFiredEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetHeGrenadeExplodedPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from explosiveNadeExplodedEvent
+								in round.ExplosiveGrenadesExploded
+								where explosiveNadeExplodedEvent.Point.Round.Equals(_selectedRound) && explosiveNadeExplodedEvent.Point.Team == Team.CounterTerrorist
+								select explosiveNadeExplodedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from explosiveNadeExplodedEvent
+								in round.ExplosiveGrenadesExploded
+								where explosiveNadeExplodedEvent.Point.Team == Team.CounterTerrorist
+								select explosiveNadeExplodedEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from explosiveNadeExplodedEvent
+								in round.ExplosiveGrenadesExploded
+								where explosiveNadeExplodedEvent.Point.Round.Equals(_selectedRound) && explosiveNadeExplodedEvent.Point.Team == Team.Terrorist
+								select explosiveNadeExplodedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from explosiveNadeExplodedEvent
+								in round.ExplosiveGrenadesExploded
+								where explosiveNadeExplodedEvent.Point.Team == Team.Terrorist
+								select explosiveNadeExplodedEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from explosiveNadeExplodedEvent
+								in round.ExplosiveGrenadesExploded
+								where explosiveNadeExplodedEvent.Point.Round.Equals(_selectedRound)
+								select explosiveNadeExplodedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from explosiveNadeExplodedEvent
+								in round.ExplosiveGrenadesExploded
+								select explosiveNadeExplodedEvent.Point);
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from round
+						in _demo.Rounds
+						from explosiveNadeExplodedEvent
+						in round.ExplosiveGrenadesExploded
+						where explosiveNadeExplodedEvent.Point.Round.Equals(_selectedRound) && explosiveNadeExplodedEvent.Point.Player.Equals(_selectedPlayer)
+						select explosiveNadeExplodedEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from round
+						in _demo.Rounds
+						from explosiveNadeExplodedEvent
+						in round.ExplosiveGrenadesExploded
+						where explosiveNadeExplodedEvent.Point.Player.Equals(_selectedPlayer)
+						select explosiveNadeExplodedEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetFlashbangExplodedPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from flashbangsExplodedEvent
+								in round.FlashbangsExploded
+								where flashbangsExplodedEvent.Point.Round.Equals(_selectedRound) && flashbangsExplodedEvent.Point.Team == Team.CounterTerrorist
+								select flashbangsExplodedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from flashbangsExplodedEvent
+								in round.FlashbangsExploded
+								where flashbangsExplodedEvent.Point.Team == Team.CounterTerrorist
+								select flashbangsExplodedEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from flashbangsExplodedEvent
+								in round.FlashbangsExploded
+								where flashbangsExplodedEvent.Point.Round.Equals(_selectedRound) && flashbangsExplodedEvent.Point.Team == Team.Terrorist
+								select flashbangsExplodedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from flashbangsExplodedEvent
+								in round.FlashbangsExploded
+								where flashbangsExplodedEvent.Point.Team == Team.Terrorist
+								select flashbangsExplodedEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from flashbangsExplodedEvent
+								in round.FlashbangsExploded
+								where flashbangsExplodedEvent.Point.Round.Equals(_selectedRound)
+								select flashbangsExplodedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from flashbangsExplodedEvent
+								in round.FlashbangsExploded
+								select flashbangsExplodedEvent.Point);
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from round
+						in _demo.Rounds
+						from flashbangsExplodedEvent
+						in round.FlashbangsExploded
+						where flashbangsExplodedEvent.Point.Round.Equals(_selectedRound) && flashbangsExplodedEvent.Point.Player.Equals(_selectedPlayer)
+						select flashbangsExplodedEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from round
+						in _demo.Rounds
+						from flashbangsExplodedEvent
+						in round.FlashbangsExploded
+						where flashbangsExplodedEvent.Point.Player.Equals(_selectedPlayer)
+						select flashbangsExplodedEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetSmokeStartedPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from smokeStartedEvent
+								in round.SmokesStarted
+								where smokeStartedEvent.Point.Round.Equals(_selectedRound) && smokeStartedEvent.Point.Team == Team.CounterTerrorist
+								select smokeStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from smokeStartedEvent
+								in round.SmokesStarted
+								where smokeStartedEvent.Point.Team == Team.CounterTerrorist
+								select smokeStartedEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from smokeStartedEvent
+								in round.SmokesStarted
+								where smokeStartedEvent.Point.Round.Equals(_selectedRound) && smokeStartedEvent.Point.Team == Team.Terrorist
+								select smokeStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from smokeStartedEvent
+								in round.SmokesStarted
+								where smokeStartedEvent.Point.Team == Team.Terrorist
+								select smokeStartedEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from smokeStartedEvent
+								in round.SmokesStarted
+								where smokeStartedEvent.Point.Round.Equals(_selectedRound)
+								select smokeStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from round
+								in _demo.Rounds
+								from smokeStartedEvent
+								in round.SmokesStarted
+								select smokeStartedEvent.Point);
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from round
+						in _demo.Rounds
+						from smokeStartedEvent
+						in round.SmokesStarted
+						where smokeStartedEvent.Point.Round.Equals(_selectedRound) && smokeStartedEvent.Point.Player.Equals(_selectedPlayer)
+						select smokeStartedEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from round
+						in _demo.Rounds
+						from smokeStartedEvent
+						in round.SmokesStarted
+						where smokeStartedEvent.Point.Player.Equals(_selectedPlayer)
+						select smokeStartedEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetMolotovFireStartedPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from molotovFireStartedEvent
+								in _demo.MolotovFireStarted
+								where molotovFireStartedEvent.Point.Round.Equals(_selectedRound) && molotovFireStartedEvent.Point.Team == Team.CounterTerrorist
+								select molotovFireStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from molotovFireStartedEvent
+								in _demo.MolotovFireStarted
+								where molotovFireStartedEvent.Point.Team == Team.CounterTerrorist
+								select molotovFireStartedEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from molotovFireStartedEvent
+								in _demo.MolotovFireStarted
+								where molotovFireStartedEvent.Point.Round.Equals(_selectedRound) && molotovFireStartedEvent.Point.Team == Team.Terrorist
+								select molotovFireStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from molotovFireStartedEvent
+								in _demo.MolotovFireStarted
+								where molotovFireStartedEvent.Point.Team == Team.Terrorist
+								select molotovFireStartedEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from molotovFireStartedEvent
+								in _demo.MolotovFireStarted
+								where molotovFireStartedEvent.Point.Round.Equals(_selectedRound)
+								select molotovFireStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from molotovFireStartedEvent
+								in _demo.MolotovFireStarted
+								select molotovFireStartedEvent.Point);
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from molotovFireStartedEvent
+						in _demo.MolotovFireStarted
+						where molotovFireStartedEvent.Point.Round.Equals(_selectedRound) && molotovFireStartedEvent.Point.Player.Equals(_selectedPlayer)
+						select molotovFireStartedEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from molotovFireStartedEvent
+						in _demo.MolotovFireStarted
+						where molotovFireStartedEvent.Point.Player.Equals(_selectedPlayer)
+						select molotovFireStartedEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetDecoyStartedPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from decoyStartedEvent
+								in _demo.DecoyStarted
+								where decoyStartedEvent.Point.Round.Equals(_selectedRound) && decoyStartedEvent.Point.Team == Team.CounterTerrorist
+								select decoyStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from decoyStartedEvent
+								in _demo.DecoyStarted
+								where decoyStartedEvent.Point.Team == Team.CounterTerrorist
+								select decoyStartedEvent.Point);
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from decoyStartedEvent
+								in _demo.DecoyStarted
+								where decoyStartedEvent.Point.Round.Equals(_selectedRound) && decoyStartedEvent.Point.Team == Team.Terrorist
+								select decoyStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from decoyStartedEvent
+								in _demo.DecoyStarted
+								where decoyStartedEvent.Point.Team == Team.Terrorist
+								select decoyStartedEvent.Point);
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							heatmapPoints.AddRange(
+								from decoyStartedEvent
+								in _demo.DecoyStarted
+								where decoyStartedEvent.Point.Round.Equals(_selectedRound)
+								select decoyStartedEvent.Point);
+						}
+						else
+						{
+							// All rounds
+							heatmapPoints.AddRange(
+								from decoyStartedEvent
+								in _demo.DecoyStarted
+								select decoyStartedEvent.Point);
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					heatmapPoints.AddRange(
+						from decoyStartedEvent
+						in _demo.DecoyStarted
+						where decoyStartedEvent.Point.Round.Equals(_selectedRound) && decoyStartedEvent.Point.Player.Equals(_selectedPlayer)
+						select decoyStartedEvent.Point);
+				}
+				else
+				{
+					// All rounds
+					heatmapPoints.AddRange(
+						from decoyStartedEvent
+						in _demo.DecoyStarted
+						where decoyStartedEvent.Point.Player.Equals(_selectedPlayer)
+						select decoyStartedEvent.Point);
+				}
+			}
+
+			return heatmapPoints;
 		}
 
 		#endregion

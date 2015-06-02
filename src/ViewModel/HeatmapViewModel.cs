@@ -37,9 +37,17 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private HeatmapService _heatmapService;
 
-		private List<ComboboxSelector> _heatmapSelectors = new List<ComboboxSelector>();
+		private List<ComboboxSelector> _eventSelectors = new List<ComboboxSelector>();
 
-		private ComboboxSelector _currentHeatmapSelector;
+		private List<ComboboxSelector> _teamSelectors = new List<ComboboxSelector>();
+
+		private ComboboxSelector _currentEventSelector;
+
+		private ComboboxSelector _currentTeamSelector;
+
+		private PlayerExtended _selectedPlayer;
+
+		private Round _selectedRound;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -50,6 +58,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private readonly IDemosService _demosService;
 
 		private byte _opacity = 150;
+
+		private bool _selectAllRounds;
 
 		#endregion
 
@@ -73,16 +83,55 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => OverviewLayer, ref _overviewLayer, value); }
 		}
 
-		public List<ComboboxSelector> HeatmapSelectors
+		public List<ComboboxSelector> EventSelectors
 		{
-			get { return _heatmapSelectors; }
-			set { Set(() => HeatmapSelectors, ref _heatmapSelectors, value); }
+			get { return _eventSelectors; }
+			set { Set(() => EventSelectors, ref _eventSelectors, value); }
 		}
 
-		public ComboboxSelector CurrentHeatmapSelector
+		public ComboboxSelector CurrentEventSelector
 		{
-			get { return _currentHeatmapSelector; }
-			set { Set(() => CurrentHeatmapSelector, ref _currentHeatmapSelector, value); }
+			get { return _currentEventSelector; }
+			set { Set(() => CurrentEventSelector, ref _currentEventSelector, value); }
+		}
+
+		public ComboboxSelector CurrentTeamSelector
+		{
+			get { return _currentTeamSelector; }
+			set
+			{
+				Set(() => CurrentTeamSelector, ref _currentTeamSelector, value);
+				if (value == null) return;
+				if (SelectedPlayer != null) SelectedPlayer = null;
+			}
+		}
+
+		public List<ComboboxSelector> TeamSelectors
+		{
+			get { return _teamSelectors; }
+			set { Set(() => TeamSelectors, ref _teamSelectors, value); }
+		}
+
+		public PlayerExtended SelectedPlayer
+		{
+			get { return _selectedPlayer; }
+			set
+			{
+				Set(() => SelectedPlayer, ref _selectedPlayer, value);
+				if (value == null) return;
+				if (CurrentTeamSelector != null) CurrentTeamSelector = null;
+			}
+		}
+
+		public Round SelectedRound
+		{
+			get { return _selectedRound; }
+			set
+			{
+				Set(() => SelectedRound, ref _selectedRound, value);
+				if (value == null) return;
+				if (SelectAllRounds) SelectAllRounds = false;
+			}
 		}
 
 		public bool IsGenerating
@@ -95,6 +144,16 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _hasGeneratedHeatmap; }
 			set { Set(() => HasGeneratedHeatmap, ref _hasGeneratedHeatmap, value); }
+		}
+
+		public bool SelectAllRounds
+		{
+			get { return _selectAllRounds; }
+			set
+			{
+				Set(() => SelectAllRounds, ref _selectAllRounds, value);
+				if (value) SelectedRound = null;
+			}
 		}
 
 		public byte Opacity
@@ -124,24 +183,31 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						try
 						{
+							// temp selection variables
+							PlayerExtended player = SelectedPlayer;
+							Round round = SelectedRound;
+
 							// Analyze the demo to get HeatmapPoints
 							CurrentDemo = await _demosService.AnalyzeHeatmapPoints(CurrentDemo);
+
+							// Get back selection
+							SelectedPlayer = player;
+							SelectedRound = round;
 
 							// Get the original overview image
 							MapService mapService = MapService.Factory(CurrentDemo.MapName);
 							OverviewLayer = mapService.GetWriteableImage();
 
 							// Get HeatmapPoints based on selection
-							// TODO more selection
-							_heatmapService = new HeatmapService(mapService);
-							_points = await _heatmapService.GetPoints(CurrentDemo, CurrentHeatmapSelector);
+							_heatmapService = new HeatmapService(mapService, CurrentDemo, CurrentEventSelector, CurrentTeamSelector, SelectedPlayer, SelectedRound);
+							_points = await _heatmapService.GetPoints();
 
 							// Generate the colored layer
 							ColorsLayer = _heatmapService.GenerateHeatmap(_points, _opacity);
 						}
 						catch (Exception e)
 						{
-							Logger.Instance.Log(e);
+							if (!(e is HeatmapException)) Logger.Instance.Log(e);
 							if (e is HeatmapException)
 							{
 								await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative).ConfigureAwait(false);
@@ -151,7 +217,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						IsGenerating = false;
 						HasGeneratedHeatmap = true;
 
-					}, () => !IsGenerating));
+					}, () => !IsGenerating && (CurrentTeamSelector != null || SelectedPlayer != null) && (SelectAllRounds || SelectedRound != null)));
 			}
 		}
 
@@ -217,13 +283,19 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			_dialogService = dialogService;
 			_demosService = demosService;
-			HeatmapSelectors.Add(new ComboboxSelector("kills", "Kills"));
-			HeatmapSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
-			HeatmapSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
-			HeatmapSelectors.Add(new ComboboxSelector("he", "HE Grenades"));
-			HeatmapSelectors.Add(new ComboboxSelector("smokes", "Smokes"));
-			HeatmapSelectors.Add(new ComboboxSelector("molotovs", "Molotovs"));
-			CurrentHeatmapSelector = HeatmapSelectors[0];
+			EventSelectors.Add(new ComboboxSelector("kills", "Kills"));
+			EventSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
+			EventSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
+			EventSelectors.Add(new ComboboxSelector("he", "HE Grenades"));
+			EventSelectors.Add(new ComboboxSelector("smokes", "Smokes"));
+			EventSelectors.Add(new ComboboxSelector("molotovs", "Molotovs"));
+			EventSelectors.Add(new ComboboxSelector("decoys", "Decoy"));
+			CurrentEventSelector = EventSelectors[0];
+
+			TeamSelectors.Add(new ComboboxSelector("CT", "Counter-Terrorists"));
+			TeamSelectors.Add(new ComboboxSelector("T", "Terrorists"));
+			TeamSelectors.Add(new ComboboxSelector("BOTH", "Both"));
+			CurrentTeamSelector = TeamSelectors[2];
 		}
 	}
 }
