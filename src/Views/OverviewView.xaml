@@ -12,6 +12,7 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<converters:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
+			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	
@@ -116,7 +117,7 @@
 				</Button>
 
 				<Button Command="{Binding StopCommand}"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Stop (CTRL+S)"
 					Width="90"
 					Height="30" Margin="10 0 0 0"
