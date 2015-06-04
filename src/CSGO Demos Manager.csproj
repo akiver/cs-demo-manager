@@ -212,6 +212,7 @@
     <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Source\Ebot.cs" />
     <Compile Include="Models\Source\Esea.cs" />
+    <Compile Include="Models\Source\Cevo.cs" />
     <Compile Include="Models\Source\Faceit.cs" />
     <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
