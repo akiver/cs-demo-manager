@@ -718,5 +718,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ApplicationVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowFramerateColumn {
+            get {
+                return ((bool)(this["ShowFramerateColumn"]));
+            }
+            set {
+                this["ShowFramerateColumn"] = value;
+            }
+        }
     }
 }

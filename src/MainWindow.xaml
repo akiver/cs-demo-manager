@@ -198,6 +198,9 @@
 									<CheckBox Content="Tickrate"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Framerate"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowFramerateColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 									<CheckBox Content="1K"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
