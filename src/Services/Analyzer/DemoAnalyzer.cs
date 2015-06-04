@@ -79,6 +79,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			switch (demo.SourceName)
 			{
 				case "valve":
+				case "cevo":
 					return new ValveAnalyzer(demo);
 				case "esea":
 					return new EseaAnalyzer(demo);
@@ -159,6 +160,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
 			{
 				return Source.Factory("faceit");
+			}
+
+			// Check for cevo demos
+			if (demo.Hostname.Contains("CEVO.com"))
+			{
+				return Source.Factory("cevo");
 			}
 
 			// Check for ebot demos

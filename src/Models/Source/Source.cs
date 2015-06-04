@@ -25,6 +25,8 @@ namespace CSGO_Demos_Manager.Models.Source
 					return new Pov();
 				case "faceit":
 					return new Faceit();
+				case "cevo":
+					return new Cevo();
 				default:
 					return null;
 			}
