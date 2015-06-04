@@ -410,7 +410,9 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource KDHeader}" x:Name="KillDeathRatioTeam1Column" Width="Auto" Header="K/D" Binding="{Binding KillDeathRatio}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-											<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}" x:Name="HeadshotPercentTeam1Column" Width="Auto" Header="HS" Binding="{Binding HeadshotAsString}"
+											<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}" x:Name="HeadshotCountTeam1Column" Width="Auto" Header="HS" Binding="{Binding HeadshotCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource HeadshotPercentHeader}" x:Name="HeadshotPercentTeam1Column" Width="Auto" Header="HS%" Binding="{Binding HeadshotPercent}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}" x:Name="TeamKillCountTeam1Column" Width="Auto" Header="TK" Binding="{Binding TeamKillCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -467,7 +469,9 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource KDHeader}" x:Name="KillDeathRatioTeam2Column" Width="Auto" Header="K/D" Binding="{Binding KillDeathRatio}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-											<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}" x:Name="HeadshotPercentTeam2Column" Width="Auto" Header="HS" Binding="{Binding HeadshotAsString}"
+											<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}" x:Name="HeadshotCountTeam2Column" Width="Auto" Header="HS" Binding="{Binding HeadshotCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource HeadshotPercentHeader}" x:Name="HeadshotPercentTeam2Column" Width="Auto" Header="HS%" Binding="{Binding HeadshotPercent}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}" x:Name="TeamKillCountTeam2Column" Width="Auto" Header="TK" Binding="{Binding TeamKillCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
