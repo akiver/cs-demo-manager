@@ -119,7 +119,7 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => WinnerClanName, ref _winnerClanName, value); }
 		}
 
-		[JsonIgnore]
+		[JsonProperty("winner_team")]
 		public Team Winner
 		{
 			get { return _winner; }
@@ -130,7 +130,7 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		[JsonProperty("winner")]
+		[JsonProperty("winner_as_string")]
 		public string WinnerAsString => _winner == Team.CounterTerrorist ? "CT" : "T";
 
 		[JsonProperty("number")]
