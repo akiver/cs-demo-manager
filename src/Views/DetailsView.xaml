@@ -87,7 +87,7 @@
 
 				<Button Command="{Binding OverviewCommand}"
 					CommandParameter="{Binding CurrentDemo}"
-					Style="{StaticResource AccentedSquareButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Overview (CTRL+O)"
 					Margin="5 0 0 0"
 					Width="90"
