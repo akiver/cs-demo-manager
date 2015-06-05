@@ -333,48 +333,44 @@
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
-								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="*"/>
 							</Grid.RowDefinitions>
 
 							<Grid Grid.Row="0">
-								<Grid HorizontalAlignment="Center">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="Auto"/>
-										<ColumnDefinition Width="*"/>
-									</Grid.ColumnDefinitions>
-									<Grid Grid.Column="0"  HorizontalAlignment="Right">
-										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="{Binding CurrentDemo.ClanTagNameTeam1}" Style="{StaticResource TeamTitleScoreboard}"/>
-											<TextBlock Text="{Binding CurrentDemo.ScoreTeam1}" Style="{StaticResource TeamScoreScoreboard}"/>
-										</StackPanel>
-									</Grid>
-									<Grid Grid.Column="1"  HorizontalAlignment="Left">
-										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="{Binding CurrentDemo.ScoreTeam2}" Style="{StaticResource TeamScoreScoreboard}"/>
-											<TextBlock Text="{Binding CurrentDemo.ClanTagNameTeam2}" Margin="10 0 0 0" Style="{StaticResource TeamTitleScoreboard}"/>
-										</StackPanel>
-									</Grid>
-								</Grid>
-							</Grid>
-
-							<Grid Grid.Row="1">
-								<Grid HorizontalAlignment="Center">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="100"/>
+									<ColumnDefinition Width="*"/>
+								</Grid.ColumnDefinitions>
+								<Grid Grid.Column="0" HorizontalAlignment="Right">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="1st Half" Style="{StaticResource HalfScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeam1}" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="-" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeam2}" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="/" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="2nd Half" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeam1}" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="-" Style="{StaticResource HalfScoreScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeam2}" Style="{StaticResource HalfScoreScoreboard}"/>
+										<TextBlock Text="{Binding CurrentDemo.ClanTagNameTeam1}" Style="{StaticResource TeamTitleScoreboard}"/>
+										<TextBlock Text="{Binding CurrentDemo.ScoreTeam1}" Style="{StaticResource TeamScoreScoreboard}"/>
+									</StackPanel>
+								</Grid>
+								<Grid Grid.Column="1" HorizontalAlignment="Center">
+									<StackPanel Orientation="Vertical" VerticalAlignment="Center">
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeam1}" Style="{StaticResource HalfScoreScoreboard}" Foreground="Blue" TextAlignment="Right"/>
+											<TextBlock Text="-" Style="{StaticResource HalfScoreScoreboard}" TextAlignment="Center"/>
+											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeam2}" Style="{StaticResource HalfScoreScoreboard}" Foreground="Red" TextAlignment="Left"/>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal">
+											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeam1}" Style="{StaticResource HalfScoreScoreboard}" Foreground="Red" TextAlignment="Right"/>
+											<TextBlock Text="-" Style="{StaticResource HalfScoreScoreboard}" TextAlignment="Center"/>
+											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeam2}" Style="{StaticResource HalfScoreScoreboard}" Foreground="Blue" TextAlignment="Left"/>
+										</StackPanel>
+									</StackPanel>
+								</Grid>
+								<Grid Grid.Column="2" HorizontalAlignment="Left">
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="{Binding CurrentDemo.ScoreTeam2}" Style="{StaticResource TeamScoreScoreboard}"/>
+										<TextBlock Text="{Binding CurrentDemo.ClanTagNameTeam2}" Style="{StaticResource TeamTitleScoreboard}"/>
 									</StackPanel>
 								</Grid>
 							</Grid>
 							
-							<Grid Grid.Row="2">
+							<Grid Grid.Row="1">
 								<Grid HorizontalAlignment="Center">
 									<StackPanel Orientation="Horizontal">
 										<ListView ItemsSource="{Binding CurrentDemo.Overtimes}"
@@ -386,7 +382,7 @@
 								</Grid>
 							</Grid>
 
-							<Grid Grid.Row="3">
+							<Grid Grid.Row="2">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="*" />
 									<ColumnDefinition Width="*" />
