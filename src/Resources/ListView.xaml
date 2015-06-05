@@ -27,6 +27,11 @@
 	<DataTemplate x:Key="OvertimeScoreboardItemTemplate" DataType="{x:Type ListViewItem}">
 		<Grid HorizontalAlignment="Center">
 			<StackPanel Orientation="Horizontal">
+				<StackPanel.Resources>
+					<Style TargetType="TextBlock">
+						<Setter Property="FontSize" Value="12"/>
+					</Style>
+				</StackPanel.Resources>
 				<TextBlock Text="Overtime " />
 				<TextBlock Text="{Binding Number}" />
 				<TextBlock Text=" : " />
