@@ -10,6 +10,7 @@ using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Services;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
+using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Excel;
 
@@ -394,6 +395,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							IsAnalyzing = false;
 							NotificationMessage = "Player added to suspects list.";
+							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
 							HasNotification = false;
 						}));
