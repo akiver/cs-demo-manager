@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using MahApps.Metro.Controls.Dialogs;
 
@@ -108,6 +109,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 
 							IsRefreshing = false;
+							CommandManager.InvalidateRequerySuggested();
 						},
 						steamCommunityUrl => SuspectSteamCommunityUrl != null));
 			}

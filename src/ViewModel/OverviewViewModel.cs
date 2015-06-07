@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Map;
@@ -334,6 +335,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							MessageNotification = "Playing...";
 							IsPlaying = true;
 
+							CommandManager.InvalidateRequerySuggested();
 
 							// Start render loop
 							CompositionTarget.Rendering += CompositionTarget_Rendering;

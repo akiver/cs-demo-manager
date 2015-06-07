@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Map;
 using CSGO_Demos_Manager.Internals;
@@ -204,6 +205,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							// Generate the colored layer
 							ColorsLayer = _heatmapService.GenerateHeatmap(_points, _opacity);
+
+							CommandManager.InvalidateRequerySuggested();
 						}
 						catch (Exception e)
 						{
