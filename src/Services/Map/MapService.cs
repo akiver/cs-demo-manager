@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Media.Imaging;
-using CSGO_Demos_Manager.Exceptions.Heatmap;
+using CSGO_Demos_Manager.Exceptions.Map;
 
 namespace CSGO_Demos_Manager.Services.Map
 {
@@ -48,7 +48,7 @@ namespace CSGO_Demos_Manager.Services.Map
 				case "de_mirage":
 					return new Mirage();
 				default:
-					throw new MapHeatmapUnavailableException();
+					throw new MapUnavailableException();
 			}
 		}
 

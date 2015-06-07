@@ -4,6 +4,8 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using CSGO_Demos_Manager.Exceptions.Map;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services;
@@ -79,6 +81,30 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _pauseCommand;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
+
+		private double FrameLimiter
+		{
+			get
+			{
+				if (CurrentDemo.Tickrate > 0 && CurrentDemo.Tickrate <= 17)
+				{
+					return 16 * _frameLimiterMultiplier;
+				}
+				if (CurrentDemo.Tickrate > 17 && CurrentDemo.Tickrate <= 33)
+				{
+					return 47 * _frameLimiterMultiplier;
+				}
+				if (CurrentDemo.Tickrate > 33 && CurrentDemo.Tickrate <= 44)
+				{
+					if (_frameLimiterMultiplier > 1) _frameLimiterMultiplier *= 1.5;
+					return 57 * _frameLimiterMultiplier;
+				}
+				if (_frameLimiterMultiplier > 1) _frameLimiterMultiplier *= 2;
+				return 70 * _frameLimiterMultiplier;
+			}
+		}
+
+		private double _frameLimiterMultiplier = 1;
 
 		#endregion
 
@@ -200,6 +226,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public double FrameLimiterMultiplier
+		{
+			get { return _frameLimiterMultiplier; }
+			set
+			{
+				Set(() => FrameLimiterMultiplier, ref _frameLimiterMultiplier, value);
+				RaisePropertyChanged("FrameLimiter");
+			}
+		}
+
 		public bool IsBusy
 		{
 			get { return _isBusy; }
@@ -253,51 +289,66 @@ namespace CSGO_Demos_Manager.ViewModel
 						IsBusy = true;
 						MessageNotification = "Generating data...";
 
-						PlayersColor.Clear();
-						Events.Clear();
-
-						MapService mapService = MapService.Factory(CurrentDemo.MapName);
-						_drawService = new DrawService(mapService);
-
-						PlayerExtended player = SelectedPlayer;
-						Round round = SelectedRound;
-
-						// Analyze demos to get player's positions
-						CurrentDemo = await _demoService.AnalyzePlayersPosition(CurrentDemo);
-
-						// Get back selection
-						SelectedPlayer = player;
-						SelectedRound = round;
-
-						// Generate points to draw
-						Points = await _drawService.GetPoints(CurrentDemo, CurrentTeamSelector, player, round);
-
-						// Set players colors on UI
-						foreach (List<PositionPoint> positionPoints in Points)
+						try
 						{
-							System.Drawing.Color col = System.Drawing.Color.FromArgb(positionPoints.First().Color);
-							PlayerColor playerColor = new PlayerColor()
+							PlayersColor.Clear();
+							Events.Clear();
+
+							MapService mapService = MapService.Factory(CurrentDemo.MapName);
+							_drawService = new DrawService(mapService);
+
+							PlayerExtended player = SelectedPlayer;
+							Round round = SelectedRound;
+
+							// Analyze demos to get player's positions
+							CurrentDemo = await _demoService.AnalyzePlayersPosition(CurrentDemo);
+
+							// Get back selection
+							SelectedPlayer = player;
+							SelectedRound = round;
+
+							// Generate points to draw
+							Points = await _drawService.GetPoints(CurrentDemo, CurrentTeamSelector, player, round);
+
+							// Set players colors on UI
+							foreach (List<PositionPoint> positionPoints in Points)
 							{
-								Name = positionPoints.First().Player.Name,
-								Color = new SolidColorBrush(MediaColor.FromRgb(col.R, col.G, col.B))
-							};
-							if (!PlayersColor.Contains(playerColor)) PlayersColor.Add(playerColor);
-						}
+								System.Drawing.Color col = System.Drawing.Color.FromArgb(positionPoints.First().Color);
+								PlayerColor playerColor = new PlayerColor()
+								{
+									Name = positionPoints.First().Player.Name,
+									Color = new SolidColorBrush(MediaColor.FromRgb(col.R, col.G, col.B))
+								};
+								if (!PlayersColor.Contains(playerColor)) PlayersColor.Add(playerColor);
+							}
 
-						if (!Points.Any())
+							if (!Points.Any())
+							{
+								await _dialogService.ShowMessageAsync("No points found. You may have to analyze this demo.", MessageDialogStyle.Affirmative);
+								IsBusy = false;
+								return;
+							}
+
+							InitLayers();
+
+							MessageNotification = "Playing...";
+							IsPlaying = true;
+
+
+							// Start render loop
+							CompositionTarget.Rendering += CompositionTarget_Rendering;
+						}
+						catch (Exception e)
 						{
-							await _dialogService.ShowMessageAsync("No points found. You may have to analyze this demo.", MessageDialogStyle.Affirmative);
+							IsPlaying = false;
 							IsBusy = false;
-							return;
+
+							if (!(e is MapException)) Logger.Instance.Log(e);
+							if (e is MapException)
+							{
+								await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative).ConfigureAwait(false);
+							}
 						}
-
-						InitLayers();
-
-						MessageNotification = "Playing...";
-						IsPlaying = true;
-
-						// Start render loop
-						CompositionTarget.Rendering += CompositionTarget_Rendering;
 
 					}, () => (!IsBusy && !IsPaused || IsBusy && IsPaused) && (SelectedPlayer != null || CurrentTeamSelector != null) && SelectedRound != null));
 			}
@@ -359,6 +410,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var mainViewModel = (new ViewModelLocator()).Main;
 							DetailsView detailsView = new DetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
+							Cleanup();
 						},
 						demo => CurrentDemo != null && !IsBusy));
 			}
@@ -384,7 +436,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			TimeSpan timeSinceLastRender = (DateTime.Now.TimeOfDay - LastRenderTime);
 
-			if (timeSinceLastRender.TotalSeconds < (1.0 / 30)) return;
+			if (timeSinceLastRender.TotalSeconds < (1.0 / FrameLimiter)) return;
 
 			LastRenderTime = DateTime.Now.TimeOfDay;
 
@@ -435,6 +487,23 @@ namespace CSGO_Demos_Manager.ViewModel
 					}
 				}
 			}
+		}
+
+		public override void Cleanup()
+		{
+			WriteableBitmapDecoy = null;
+			WriteableBitmapFlashbang = null;
+			WriteableBitmapHegrenade = null;
+			WriteableBitmapKill = null;
+			WriteableBitmapMolotov = null;
+			WriteableBitmapOverview = null;
+			WriteableBitmapPlayerMarker = null;
+			WriteableBitmapSmoke = null;
+			WriteableBitmapWeapon = null;
+			FrameLimiterMultiplier = 1;
+			PlayersColor.Clear();
+			Events.Clear();
+			CurrentDemo = null;
 		}
 
 		private void InitLayers()

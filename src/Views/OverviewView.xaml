@@ -144,6 +144,16 @@
 					Value="{Binding Volume}"/>
 				</StackPanel>
 
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Speed:" Style="{StaticResource SmallTitleStyle}"/>
+					<Slider x:Name="SliderSpeed"
+					Minimum="1"
+					Maximum="5"
+					Width="100"
+					Margin="5 0 0 0"
+					Value="{Binding FrameLimiterMultiplier}"/>
+				</StackPanel>
+
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing 
 						IsActive="{Binding IsBusy}"

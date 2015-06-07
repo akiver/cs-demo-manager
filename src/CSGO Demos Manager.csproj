@@ -177,9 +177,9 @@
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
-    <Compile Include="Exceptions\Heatmap\HeatmapDataNotFoundException.cs" />
-    <Compile Include="Exceptions\Heatmap\HeatmapException.cs" />
-    <Compile Include="Exceptions\Heatmap\MapHeatmapUnavailableException.cs" />
+    <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
+    <Compile Include="Exceptions\Map\MapException.cs" />
+    <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
     <Compile Include="Internals\Logger.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Messages\MainWindowLoadedMessage.cs" />

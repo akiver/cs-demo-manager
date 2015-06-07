@@ -1,5 +1,4 @@
 ﻿using System;
-using CSGO_Demos_Manager.Exceptions.Heatmap;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Services;
 using GalaSoft.MvvmLight;
@@ -10,6 +9,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Windows.Forms;
 using System.Windows.Media.Imaging;
+using CSGO_Demos_Manager.Exceptions.Map;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
@@ -207,8 +207,8 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 						catch (Exception e)
 						{
-							if (!(e is HeatmapException)) Logger.Instance.Log(e);
-							if (e is HeatmapException)
+							if (!(e is MapException)) Logger.Instance.Log(e);
+							if (e is MapException)
 							{
 								await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative).ConfigureAwait(false);
 							}

@@ -10,7 +10,6 @@ using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Services;
 using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
-using CSGO_Demos_Manager.Exceptions.Heatmap;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Excel;
 
@@ -148,24 +147,17 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _heatmapCommand
 					?? (_heatmapCommand = new RelayCommand<Demo>(
-					async demo =>
+					demo =>
 					{
-						try
-						{
-							var heatmapViewModel = (new ViewModelLocator()).Heatmap;
-							heatmapViewModel.CurrentDemo = demo;
-							heatmapViewModel.HasGeneratedHeatmap = false;
-							heatmapViewModel.OverviewLayer = null;
-							heatmapViewModel.ColorsLayer = null;
+						var heatmapViewModel = (new ViewModelLocator()).Heatmap;
+						heatmapViewModel.CurrentDemo = demo;
+						heatmapViewModel.HasGeneratedHeatmap = false;
+						heatmapViewModel.OverviewLayer = null;
+						heatmapViewModel.ColorsLayer = null;
 
-							HeatmapView heatmapView = new HeatmapView();
-							var mainViewModel = (new ViewModelLocator()).Main;
-							mainViewModel.CurrentPage.ShowPage(heatmapView);
-						}
-						catch (MapHeatmapUnavailableException e)
-						{
-							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
-						}
+						HeatmapView heatmapView = new HeatmapView();
+						var mainViewModel = (new ViewModelLocator()).Main;
+						mainViewModel.CurrentPage.ShowPage(heatmapView);
 					}, demo => !IsAnalyzing));
 			}
 		}
