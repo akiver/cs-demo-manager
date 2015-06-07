@@ -34,6 +34,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private string _messageNotification;
 
+		private int _volume = 10;
+
 		private WriteableBitmap _writeableBitmapOverview;
 
 		private WriteableBitmap _writeableBitmapWeapon;
@@ -186,6 +188,16 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _teamSelectors; }
 			set { Set(() => TeamSelectors, ref _teamSelectors, value); }
+		}
+
+		public int Volume
+		{
+			get { return _volume; }
+			set
+			{
+				Set(() => Volume, ref _volume, value);
+				SoundService.SetVolume(value);
+			}
 		}
 
 		public bool IsBusy

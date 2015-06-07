@@ -132,6 +132,18 @@
 					</StackPanel>
 				</Button>
 
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Volume:" Style="{StaticResource SmallTitleStyle}"/>
+					<Slider x:Name="SliderVolume"
+					Minimum="0"
+					Maximum="10"
+					LargeChange="1"
+					SmallChange="1"
+					Width="100"
+					Margin="5 0 0 0"
+					Value="{Binding Volume}"/>
+				</StackPanel>
+
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing 
 						IsActive="{Binding IsBusy}"

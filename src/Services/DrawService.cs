@@ -669,14 +669,18 @@ namespace CSGO_Demos_Manager.Services
 			if (type == typeof(WeaponFire))
 			{
 				DrawWeapon(positionPoint);
+				WeaponFire e = (WeaponFire)positionPoint.Event;
+				SoundService.PlayWeaponFired(positionPoint.Team, e);
 			}
 			else if (type == typeof(FlashbangExplodedEvent))
 			{
 				DrawFlashbangExploded(positionPoint);
+				SoundService.PlayFlashbangExploded();
 			}
 			else if (type == typeof(SmokeNadeStartedEvent))
 			{
 				DrawSmokeStarted(positionPoint);
+				SoundService.PlaySmokeDetonated();
 			}
 			else if (type == typeof(SmokeNadeEndedEvent))
 			{
@@ -685,10 +689,12 @@ namespace CSGO_Demos_Manager.Services
 			else if (type == typeof(ExplosiveNadeExplodedEvent))
 			{
 				DrawExplosiveNadeExploded(positionPoint);
+				SoundService.PlayHeExploded();
 			}
 			else if (type == typeof(MolotovFireStartedEvent))
 			{
 				DrawMolotovStarted(positionPoint);
+				SoundService.PlayMolotovExploded();
 			}
 			else if (type == typeof(MolotovFireEndedEvent))
 			{
@@ -697,6 +703,7 @@ namespace CSGO_Demos_Manager.Services
 			else if (type == typeof(KillEvent))
 			{
 				DrawKill(positionPoint);
+				SoundService.PlayPlayerKilled(positionPoint.Team);
 			}
 			else if (type == typeof(DecoyStartedEvent))
 			{
@@ -705,18 +712,22 @@ namespace CSGO_Demos_Manager.Services
 			else if (type == typeof(DecoyEndedEvent))
 			{
 				DrawDecoyEnded(positionPoint);
+				SoundService.PlayDecoyExploded();
 			}
 			else if (type == typeof(BombPlantedEvent))
 			{
 				DrawBombPlanted(positionPoint);
+				SoundService.PlayBombPlanted();
 			}
 			else if (type == typeof(BombExplodedEvent))
 			{
 				DrawBombExploded(positionPoint);
+				SoundService.PlayBombExploded();
 			}
 			else if (type == typeof(BombDefusedEvent))
 			{
 				DrawBombDefused(positionPoint);
+				SoundService.PlayBombDefused();
 			}
 		}
 	}
