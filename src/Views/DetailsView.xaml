@@ -523,6 +523,7 @@
 							  ItemsSource="{Binding CurrentDemo.Rounds}"
 							  SelectedItem="{Binding CurrentRound}"
 							  CellStyle="{StaticResource DataGridCellStyle}"
+							  RowStyle="{StaticResource DataGridRowRoundStyle}"
 							  Style="{StaticResource DemosDataGridStyle}">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource NumberHeader}" x:Name="NumberRoundColumn" Width="Auto" Header="#" Binding="{Binding Number}" />

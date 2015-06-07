@@ -40,6 +40,11 @@
 			<DataTrigger Binding="{Binding Status}" Value="old">
 				<Setter Property="Background" Value="{StaticResource RedColorBrush}"/>
 			</DataTrigger>
+			
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource DemoRowContextMenu}" />
 	</Style>
@@ -249,6 +254,10 @@
 			<DataTrigger Binding="{Binding VacBanned}" Value="true">
 				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
 			</DataTrigger>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource SuspectRowContextMenu}" />
 	</Style>
@@ -260,12 +269,33 @@
 	<!--DataGrid Row style for scoreboard -->
 	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerTeam1Style">
 		<Setter Property="ContextMenu" Value="{StaticResource PlayerTeam1RowContextMenu}" />
+		<Style.Triggers>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
+		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerTeam2Style">
 		<Setter Property="ContextMenu" Value="{StaticResource PlayerTeam2RowContextMenu}" />
+		<Style.Triggers>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
+		</Style.Triggers>
 	</Style>
-	
+
+	<Style TargetType="DataGridRow" x:Key="DataGridRowRoundStyle">
+		<Style.Triggers>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
 	<!-- Datagrid header for entry kills usercontrol-->
 	<Style TargetType="DataGridColumnHeader" x:Key="RoundNumberHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Round Number" />
