@@ -272,6 +272,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var mainViewModel = (new ViewModelLocator()).Main;
 							DetailsView detailsView = new DetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
+							Cleanup();
 						},
 						demo => CurrentDemo != null));
 			}
@@ -296,6 +297,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			TeamSelectors.Add(new ComboboxSelector("T", "Terrorists"));
 			TeamSelectors.Add(new ComboboxSelector("BOTH", "Both"));
 			CurrentTeamSelector = TeamSelectors[2];
+		}
+
+		public override void Cleanup()
+		{
+			HasGeneratedHeatmap = false;
+			IsGenerating = false;
+			OverviewLayer = null;
+			ColorsLayer = null;
+			SelectedPlayer = null;
+			SelectedRound = null;
 		}
 	}
 }

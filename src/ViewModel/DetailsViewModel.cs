@@ -151,10 +151,6 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						var heatmapViewModel = (new ViewModelLocator()).Heatmap;
 						heatmapViewModel.CurrentDemo = demo;
-						heatmapViewModel.HasGeneratedHeatmap = false;
-						heatmapViewModel.OverviewLayer = null;
-						heatmapViewModel.ColorsLayer = null;
-
 						HeatmapView heatmapView = new HeatmapView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(heatmapView);
