@@ -251,6 +251,7 @@
     <None Include="Resources\images\icons\decoy_screaming.png" />
     <None Include="Resources\images\icons\bomb.png" />
     <None Include="Resources\images\colors.jpg" />
+    <Compile Include="Services\Analyzer\CevoAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EseaAnalyzer.cs" />
     <Compile Include="Services\Analyzer\ValveAnalyzer.cs" />

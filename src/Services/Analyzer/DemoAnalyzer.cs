@@ -79,13 +79,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			switch (demo.SourceName)
 			{
 				case "valve":
-				case "cevo":
 					return new ValveAnalyzer(demo);
 				case "esea":
 					return new EseaAnalyzer(demo);
 				case "ebot":
 				case "faceit":
 					return new EbotAnalyzer(demo);
+				case "cevo":
+					return new CevoAnalyzer(demo);
 				case "pov":
 					return null;
 				default:
