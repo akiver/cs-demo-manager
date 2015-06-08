@@ -804,7 +804,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								List<string> folders = AppSettings.GetFolders().ToList();
 								List<Demo> demosHeader = await _demosService.GetDemosHeader(folders);
 
-								// Update custom data if the demo has been find
+								// Update custom data if the demo has been found
 								foreach (Demo demo in demosFromBackup)
 								{
 									foreach (Demo demoHeader in demosHeader)
@@ -812,6 +812,7 @@ namespace CSGO_Demos_Manager.ViewModel
 										if (demoHeader.Equals(demo))
 										{
 											demoHeader.Comment = demo.Comment;
+											demoHeader.Status = demo.Status;
 											await _cacheService.WriteDemoDataCache(demoHeader);
 											break;
 										}

@@ -27,6 +27,8 @@ namespace CSGO_Demos_Manager.Services.Serialization
 				writer.WriteValue(demo.Id);
 				writer.WritePropertyName("Comment");
 				writer.WriteValue(demo.Comment);
+				writer.WritePropertyName("status");
+				writer.WriteValue(demo.Status);
 				writer.WriteEndObject();
 			}
 			writer.WriteEndArray();
@@ -45,9 +47,10 @@ namespace CSGO_Demos_Manager.Services.Serialization
 				Demo demo = new Demo
 				{
 					Id = Convert.ToString(((JValue) obj["Id"]).Value),
-					Comment = Convert.ToString(((JValue) obj["Comment"]).Value)
+					Comment = Convert.ToString(((JValue) obj["Comment"]).Value),
+					Status = Convert.ToString(((JValue)obj["status"]).Value)
 				};
-				if(!string.IsNullOrEmpty(demo.Comment)) demos.Add(demo);
+				if(!string.IsNullOrEmpty(demo.Comment) || !string.IsNullOrEmpty(demo.Status)) demos.Add(demo);
 			}
 
 			return demos;

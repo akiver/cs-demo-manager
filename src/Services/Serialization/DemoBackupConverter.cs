@@ -22,7 +22,8 @@ namespace CSGO_Demos_Manager.Services.Serialization
 				return new Demo()
 				{
 					Id = jObject["id"].ToString(),
-					Comment = jObject["comment"].ToString()
+					Comment = jObject["comment"].ToString(),
+					Status = jObject["status"].ToString()
 				};
 			}
 			return null;
