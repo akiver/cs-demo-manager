@@ -223,6 +223,7 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			
 			<Grid Grid.Column="0">
@@ -296,6 +297,14 @@
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowAllFoldersCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllFolders}"/>
+			</Grid>
+
+			<Grid Grid.Column="10">
+				<CheckBox x:Name="CheckBoxShowOnlyUserStats" Content="Show only my stats"
+						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowOnlyUserStatsCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyUserStats}"/>
 			</Grid>
 		</Grid>
 
