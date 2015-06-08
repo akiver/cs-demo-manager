@@ -19,6 +19,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
 
@@ -882,6 +883,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			IsBusy = false;
 			HasNotification = false;
+			CommandManager.InvalidateRequerySuggested();
 
 			if (demosFailed.Any())
 			{
