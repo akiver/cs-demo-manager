@@ -29,7 +29,7 @@
 			<MenuItem Header="Valve"
 								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
 								  CommandParameter="valve" />
-			<MenuItem Header="Esea"
+			<MenuItem Header="ESEA"
 								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
 								  CommandParameter="esea" />
 			<MenuItem Header="eBot"
@@ -38,6 +38,9 @@
 			<MenuItem Header="Faceit"
 								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
 								  CommandParameter="faceit" />
+			<MenuItem Header="CEVO"
+								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
+								  CommandParameter="cevo" />
 		</MenuItem>
 	</ContextMenu>
 

@@ -222,6 +222,7 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 			
 			<Grid Grid.Column="0">
@@ -282,6 +283,14 @@
 			</Grid>
 
 			<Grid Grid.Column="8">
+				<CheckBox x:Name="CheckBoxShowCevo" Content="CEVO"
+						  IsChecked="{Binding IsShowCevoDemos}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowCevoDemosCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowCevo}"/>
+			</Grid>
+
+			<Grid Grid.Column="9">
 				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
 						  IsChecked="{Binding IsShowAllFolders}"
 						  Style="{StaticResource CheckBoxFilterStyle}"

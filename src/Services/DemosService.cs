@@ -105,6 +105,9 @@ namespace CSGO_Demos_Manager.Services
 					case "faceit":
 						demo.Source = new Faceit();
 						break;
+					case "cevo":
+						demo.Source = new Cevo();
+						break;
 					default:
 						demo.Source = new Valve();
 						break;

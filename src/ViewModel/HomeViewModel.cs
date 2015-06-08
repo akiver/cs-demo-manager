@@ -51,6 +51,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isShowEseaDemos = Properties.Settings.Default.ShowEseaDemos;
 
+		private bool _isShowCevoDemos = Properties.Settings.Default.ShowCevoDemos;
+
 		private bool _isShowValveDemos = Properties.Settings.Default.ShowValveDemos;
 
 		private bool _isShowOldDemos = Properties.Settings.Default.ShowOldDemos;
@@ -94,6 +96,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<bool> _showOldDemosCommand;
 
 		private RelayCommand<bool> _showFaceitDemosCommand;
+
+		private RelayCommand<bool> _showCevoDemosCommand;
 
 		private RelayCommand _backToHomeCommand;
 
@@ -161,6 +165,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			set
 			{
 				Set(() => IsShowFaceitDemos, ref _isShowFaceitDemos, value);
+				FilterCollection();
+			}
+		}
+
+		public bool IsShowCevoDemos
+		{
+			get { return _isShowCevoDemos; }
+			set
+			{
+				Set(() => IsShowCevoDemos, ref _isShowCevoDemos, value);
 				FilterCollection();
 			}
 		}
@@ -300,6 +314,9 @@ namespace CSGO_Demos_Manager.ViewModel
 
 				// Faceit filter
 				if (!IsShowFaceitDemos && data.SourceName == "faceit") return false;
+
+				// Cevo filter
+				if (!IsShowCevoDemos && data.SourceName == "cevo") return false;
 
 				// No analyzable demos filter
 				if (!IsShowOldDemos && data.Status == "old") return false;
@@ -461,6 +478,26 @@ namespace CSGO_Demos_Manager.ViewModel
 							IsShowFaceitDemos = isChecked;
 							DataGridDemosCollection.Refresh();
 							Properties.Settings.Default.ShowFaceitDemos = isChecked;
+							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle CEVO demos is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowCevoDemosCommand
+		{
+			get
+			{
+				return _showCevoDemosCommand
+					?? (_showCevoDemosCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowCevoDemos = isChecked;
+							DataGridDemosCollection.Refresh();
+							Properties.Settings.Default.ShowCevoDemos = isChecked;
 							Properties.Settings.Default.Save();
 						},
 						isChecked => !IsBusy));
