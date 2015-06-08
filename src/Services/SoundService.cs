@@ -153,5 +153,28 @@ namespace CSGO_Demos_Manager.Services
 			mciSendString("open \"" + SoundsPath + fileName + "\" type waveaudio alias " + fileName, null, 0, IntPtr.Zero);
 			mciSendString("play " + fileName, null, 0, IntPtr.Zero);
 		}
+
+		public static void CloseSounds()
+		{
+			mciSendString("close ct_death.wav", null, 0, IntPtr.Zero);
+			mciSendString("close t_death.wav", null, 0, IntPtr.Zero);
+			mciSendString("close bomb_exploded.wav", null, 0, IntPtr.Zero);
+			mciSendString("close bomb_defused.wav", null, 0, IntPtr.Zero);
+			mciSendString("close bomb_planted.wav", null, 0, IntPtr.Zero);
+			mciSendString("close molotov_detonate.wav", null, 0, IntPtr.Zero);
+			mciSendString("close t_smoke.wav", null, 0, IntPtr.Zero);
+			mciSendString("close ct_smoke.wav", null, 0, IntPtr.Zero);
+			mciSendString("close t_decoy.wav", null, 0, IntPtr.Zero);
+			mciSendString("close ct_decoy.wav", null, 0, IntPtr.Zero);
+			mciSendString("close t_grenade.wav", null, 0, IntPtr.Zero);
+			mciSendString("close ct_grenade.wav", null, 0, IntPtr.Zero);
+			mciSendString("close t_flashbang.wav", null, 0, IntPtr.Zero);
+			mciSendString("close ct_flashbang.wav", null, 0, IntPtr.Zero);
+			mciSendString("close t_molotov.wav", null, 0, IntPtr.Zero);
+			mciSendString("close ct_molotov.wav", null, 0, IntPtr.Zero);
+			mciSendString("close smoke_explode.wav", null, 0, IntPtr.Zero);
+			mciSendString("close flashbang_explode.wav", null, 0, IntPtr.Zero);
+			mciSendString("close he_explode.wav", null, 0, IntPtr.Zero);
+		}
 	}
 }

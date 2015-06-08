@@ -304,6 +304,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		public override void Cleanup()
 		{
+			base.Cleanup();
 			HasGeneratedHeatmap = false;
 			IsGenerating = false;
 			OverviewLayer = null;

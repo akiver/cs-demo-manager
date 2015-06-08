@@ -493,6 +493,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		public override void Cleanup()
 		{
+			base.Cleanup();
 			WriteableBitmapDecoy = null;
 			WriteableBitmapFlashbang = null;
 			WriteableBitmapHegrenade = null;
@@ -506,6 +507,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			PlayersColor.Clear();
 			Events.Clear();
 			CurrentDemo = null;
+			SoundService.CloseSounds();
 		}
 
 		private void InitLayers()
