@@ -265,7 +265,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			// If the killer isn't a bot we can add a kill to the match
-			Demo.TotalKillCount++;
 			killEvent.Killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
 
 			if (killEvent.Killer != null)

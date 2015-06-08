@@ -60,6 +60,7 @@
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 
@@ -129,6 +130,15 @@
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ImportCustomDataCacheCommand}"
 										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Import Custom Data" />
+						</StackPanel>
+
+						<StackPanel Margin="10" Grid.Row="3">
+							<TextBlock Text="Miscellaneous" Style="{StaticResource TitleSettingsStyle}" />
+							<StackPanel Orientation="Vertical">
+								<CheckBox Content="Show only my stats"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+							</StackPanel>
 						</StackPanel>
 					</Grid>
 

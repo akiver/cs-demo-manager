@@ -249,7 +249,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				killEvent.Assister = Demo.Players.FirstOrDefault(player => player.SteamId == e.Assister.SteamID);
 			}
 
-			Demo.TotalKillCount++;
 			killEvent.Killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
 
 			if (killEvent.Killer != null)

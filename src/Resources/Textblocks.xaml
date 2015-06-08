@@ -80,4 +80,204 @@
 		<Setter Property="VerticalAlignment" Value="Center"></Setter>
 	</Style>
 
+	<!-- TextBlock inside DataGridTextColumn for only user data -->
+	<Style TargetType="TextBlock" x:Key="OneKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding OneKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding OneKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="TwoKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding TwoKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding TwoKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="ThreeKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding ThreeKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding ThreeKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="FourKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding FourKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding FourKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="FiveKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding FiveKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding FiveKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="TotalKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding TotalKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding TotalKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BombPlantedCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding BombPlantedCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding BombPlantedUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BombDefusedCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding BombDefusedCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding BombDefusedUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BombExplodedCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding BombExplodedCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding BombExplodedUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<!-- TextBlock inside DataGridTextColumn for only user data on DetailsView -->
+	<Style TargetType="TextBlock" x:Key="TotalKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding KillsCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding TotalKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="OneKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding OneKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding OneKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="TwoKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding TwoKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding TwoKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="ThreeKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding ThreeKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding ThreeKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="FourKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding FourKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding FourKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="FiveKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding FiveKillCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding FiveKillUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BombExplodedRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding BombExplodedCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding BombExplodedUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BombPlantedRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding BombPlantedCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding BombPlantedUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BombDefusedRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+				<Setter Property="Text" Value="{Binding BombDefusedCount}"></Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+				<Setter Property="Text" Value="{Binding BombDefusedUserCount}"></Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 </ResourceDictionary>

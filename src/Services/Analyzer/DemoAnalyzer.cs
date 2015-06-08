@@ -272,8 +272,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}
 			}
 			bombPlantedEvent.Site = e.Site.ToString();
-			Demo.BombPlantedCount++;
 			Demo.BombPlanted.Add(bombPlantedEvent);
+			CurrentRound.BombPlanted.Add(bombPlantedEvent);
+
 			if (AnalyzePlayersPosition && bombPlantedEvent.Player != null)
 			{
 				PositionPoint positionPoint = new PositionPoint
@@ -303,9 +304,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					bombDefusedEvent.Player = player;
 				}
 			}
-			CurrentRound.BombDefusedCount++;
-			Demo.BombDefusedCount++;
 			Demo.BombDefused.Add(bombDefusedEvent);
+			CurrentRound.BombDefused.Add(bombDefusedEvent);
 
 			if (AnalyzePlayersPosition && bombDefusedEvent.Player != null)
 			{
@@ -326,15 +326,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted) return;
 
-			// TODO add BombExplodedEvent list to Demo model
 			BombExplodedEvent bombExplodedEvent = new BombExplodedEvent(Parser.IngameTick)
 			{
 				Site = e.Site.ToString(),
 				Player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID)
 			};
 
-			CurrentRound.BombExplodedCount++;
-			Demo.BombExplodedCount++;
+			Demo.BombExploded.Add(bombExplodedEvent);
+			CurrentRound.BombExploded.Add(bombExplodedEvent);
 
 			if (AnalyzePlayersPosition && bombExplodedEvent.Player != null)
 			{

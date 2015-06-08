@@ -2,6 +2,9 @@
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Linq;
+using CSGO_Demos_Manager.Properties;
 using DemoInfo;
 
 namespace CSGO_Demos_Manager.Models
@@ -14,12 +17,6 @@ namespace CSGO_Demos_Manager.Models
 
 		private int _tick;
 
-		private int _bombPlantCount;
-
-		private int _bombDefusedCount;
-
-		private int _bombExplodedCount;
-
 		private int _equipementValueTeam2;
 
 		private int _equipementValueTeam1;
@@ -27,8 +24,6 @@ namespace CSGO_Demos_Manager.Models
 		private int _startMoneyTeam1;
 
 		private int _startMoneyTeam2;
-
-		private int _killsCount;
 
 		private string _winnerClanName = "Team 1";
 
@@ -68,6 +63,21 @@ namespace CSGO_Demos_Manager.Models
 		private ObservableCollection<SmokeNadeStartedEvent> _smokeNadeStarted = new ObservableCollection<SmokeNadeStartedEvent>();
 
 		private ObservableCollection<MolotovFireEndedEvent> _molotovsThrowed = new ObservableCollection<MolotovFireEndedEvent>();
+
+		/// <summary>
+		/// Infos on bomb planted during the round
+		/// </summary>
+		private ObservableCollection<BombPlantedEvent> _bombPlanted = new ObservableCollection<BombPlantedEvent>();
+
+		/// <summary>
+		/// Infos on bomb defused during the round
+		/// </summary>
+		private ObservableCollection<BombDefusedEvent> _bombDefused = new ObservableCollection<BombDefusedEvent>();
+
+		/// <summary>
+		/// Infos on bomb exploded during the round
+		/// </summary>
+		private ObservableCollection<BombExplodedEvent> _bombExploded = new ObservableCollection<BombExplodedEvent>();
 
 		private OpenKillEvent _openKillEvent;
 
@@ -148,11 +158,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("total_kill_count")]
-		public int KillsCount
-		{
-			get { return _kills.Count; }
-			set { Set(() => KillsCount, ref _killsCount, value); }
-		}
+		public int KillsCount => Kills.Count;
 
 		[JsonProperty("five_kill_count")]
 		public int FiveKillCount
@@ -190,11 +196,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_planted_count")]
-		public int BombPlantedCount
-		{
-			get { return _bombPlantCount; }
-			set { Set(() => BombPlantedCount, ref _bombPlantCount, value); }
-		}
+		public int BombPlantedCount => BombPlanted.Count;
 
 		[JsonProperty("equipement_value_team2")]
 		public int EquipementValueTeam2
@@ -225,18 +227,10 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_defused_count")]
-		public int BombDefusedCount
-		{
-			get { return _bombDefusedCount; }
-			set { Set(() => BombDefusedCount, ref _bombDefusedCount, value); }
-		}
+		public int BombDefusedCount => BombDefused.Count;
 
 		[JsonProperty("bomb_exploded_count")]
-		public int BombExplodedCount
-		{
-			get { return _bombExplodedCount; }
-			set { Set(() => BombExplodedCount, ref _bombExplodedCount, value); }
-		}
+		public int BombExplodedCount => BombExploded.Count;
 
 		[JsonProperty("open_kill")]
 		public OpenKillEvent OpenKillEvent
@@ -252,7 +246,119 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => EntryKillEvent, ref _entryKillEvent, value); }
 		}
 
+		[JsonProperty("bomb_planted")]
+		public ObservableCollection<BombPlantedEvent> BombPlanted
+		{
+			get { return _bombPlanted; }
+			set { Set(() => BombPlanted, ref _bombPlanted, value); }
+		}
+
+		[JsonProperty("bomb_defused")]
+		public ObservableCollection<BombDefusedEvent> BombDefused
+		{
+			get { return _bombDefused; }
+			set { Set(() => BombDefused, ref _bombDefused, value); }
+		}
+
+		[JsonProperty("bomb_exploded")]
+		public ObservableCollection<BombExplodedEvent> BombExploded
+		{
+			get { return _bombExploded; }
+			set { Set(() => BombExploded, ref _bombExploded, value); }
+		}
+
 		#endregion
+
+		#region User data accessors
+
+		[JsonIgnore]
+		public int TotalKillUserCount
+		{
+			get { return Kills.Count(k => k.Killer.SteamId == Settings.Default.SteamID); }
+		}
+
+		[JsonIgnore]
+		public int OneKillUserCount
+		{
+			get
+			{
+				int killUserCount = Kills.Count(k => k.Killer.SteamId == Settings.Default.SteamID);
+				if (killUserCount == 1) return 1;
+				return 0;
+			}
+		}
+
+		[JsonIgnore]
+		public int TwoKillUserCount
+		{
+			get
+			{
+				int killUserCount = Kills.Count(k => k.Killer.SteamId == Settings.Default.SteamID);
+				if (killUserCount == 2) return 1;
+				return 0;
+			}
+		}
+
+		[JsonIgnore]
+		public int ThreeKillUserCount
+		{
+			get
+			{
+				int killUserCount = Kills.Count(k => k.Killer.SteamId == Settings.Default.SteamID);
+				if (killUserCount == 2) return 1;
+				return 0;
+			}
+		}
+
+		[JsonIgnore]
+		public int FourKillUserCount
+		{
+			get
+			{
+				int killUserCount = Kills.Count(k => k.Killer.SteamId == Settings.Default.SteamID);
+				if (killUserCount == 4) return 1;
+				return 0;
+			}
+		}
+
+		[JsonIgnore]
+		public int FiveKillUserCount
+		{
+			get
+			{
+				int killUserCount = Kills.Count(k => k.Killer.SteamId == Settings.Default.SteamID);
+				if (killUserCount == 5) return 1;
+				return 0;
+			}
+		}
+
+		[JsonIgnore]
+		public int BombExplodedUserCount
+		{
+			get { return BombExploded.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
+		}
+
+		[JsonIgnore]
+		public int BombPlantedUserCount
+		{
+			get { return BombPlanted.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
+		}
+
+		[JsonIgnore]
+		public int BombDefusedUserCount
+		{
+			get { return BombDefused.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
+		}
+
+		#endregion
+
+		public Round()
+		{
+			Kills.CollectionChanged += OnKillsCollectionChanged;
+			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
+			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
+			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
+		}
 
 		public override bool Equals(object obj)
 		{
@@ -265,5 +371,38 @@ namespace CSGO_Demos_Manager.Models
 		{
 			return base.GetHashCode();
 		}
+
+		#region Handler collections changed
+
+		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("KillsCount");
+			RaisePropertyChanged("TotalKillUserCount");
+			RaisePropertyChanged("OneKillUserCount");
+			RaisePropertyChanged("TwoKillUserCount");
+			RaisePropertyChanged("ThreeKillUserCount");
+			RaisePropertyChanged("FourKillUserCount");
+			RaisePropertyChanged("FiveKillUserCount");
+		}
+
+		private void OnBombPlantedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("BombPlantedCount");
+			RaisePropertyChanged("BombPlantedUserCount");
+		}
+
+		private void OnBombDefusedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("BombDefusedCount");
+			RaisePropertyChanged("BombDefusedUserCount");
+		}
+
+		private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("BombExplodedCount");
+			RaisePropertyChanged("BombExplodedUserCount");
+		}
+
+		#endregion
 	}
 }

@@ -730,16 +730,28 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowFramerateColumn"] = value;
             }
         }
-        
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowCevoDemos {
+        public bool ShowCevoDemos
+        {
+            get { return ((bool) (this["ShowCevoDemos"])); }
+            set
+            {
+                this["ShowCevoDemos"] = value;
+            }
+        }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowOnlyUserStats {
             get {
-                return ((bool)(this["ShowCevoDemos"]));
+                return ((bool)(this["ShowOnlyUserStats"]));
             }
             set {
-                this["ShowCevoDemos"] = value;
+                this["ShowOnlyUserStats"] = value;
             }
         }
     }

@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System;
+using System.Collections.Specialized;
+using CSGO_Demos_Manager.Properties;
 
 namespace CSGO_Demos_Manager.Models
 {
@@ -79,11 +81,6 @@ namespace CSGO_Demos_Manager.Models
 		private string _path;
 
 		/// <summary>
-		/// Total kills during the match
-		/// </summary>
-		private int _totalKillCount;
-
-		/// <summary>
 		/// Game win/lose/draw status
 		/// </summary>
 		private string _winStatus;
@@ -144,21 +141,6 @@ namespace CSGO_Demos_Manager.Models
 		private int _fivekillCount;
 
 		/// <summary>
-		/// Number of bomb defused during the match
-		/// </summary>
-		private int _bombDefusedCount;
-
-		/// <summary>
-		/// Number of bomb exploded during the match
-		/// </summary>
-		private int _bombExplodedCount;
-
-		/// <summary>
-		/// Number of bomb planted during the match
-		/// </summary>
-		private int _bombPlantedCount;
-
-		/// <summary>
 		/// Clan tag name 1st team
 		/// </summary>
 		private string _clanTagNameTeam1 = "Team 1";
@@ -197,6 +179,11 @@ namespace CSGO_Demos_Manager.Models
 		/// Infos on bomb defused during the match
 		/// </summary>
 		private ObservableCollection<BombDefusedEvent> _bombDefused = new ObservableCollection<BombDefusedEvent>();
+
+		/// <summary>
+		/// Infos on bomb exploded during the match
+		/// </summary>
+		private ObservableCollection<BombExplodedEvent> _bombExploded = new ObservableCollection<BombExplodedEvent>();
 
 		/// <summary>
 		/// All kills during the match
@@ -412,11 +399,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("total_kill_count")]
-		public int TotalKillCount
-		{
-			get { return _kills.Count; }
-			set { Set(() => TotalKillCount, ref _totalKillCount, value); }
-		}
+		public int TotalKillCount => Kills.Count;
 
 		[JsonProperty("five_kill_count")]
 		public int FiveKillCount
@@ -454,25 +437,13 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_defused_count")]
-		public int BombDefusedCount
-		{
-			get { return _bombDefusedCount; }
-			set { Set(() => BombDefusedCount, ref _bombDefusedCount, value); }
-		}
+		public int BombDefusedCount => BombDefused.Count;
 
 		[JsonProperty("bomb_exploded_count")]
-		public int BombExplodedCount
-		{
-			get { return _bombExplodedCount; }
-			set { Set(() => BombExplodedCount, ref _bombExplodedCount, value); }
-		}
+		public int BombExplodedCount => BombExploded.Count();
 
 		[JsonProperty("bomb_planted_count")]
-		public int BombPlantedCount
-		{
-			get { return _bombPlantedCount; }
-			set { Set(() => BombPlantedCount, ref _bombPlantedCount, value); }
-		}
+		public int BombPlantedCount => BombPlanted.Count;
 
 		[JsonProperty("most_killing_weapon")]
 		public Weapon MostKillingWeapon
@@ -568,14 +539,16 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => BombDefused, ref _bombDefused, value); }
 		}
 
+		public ObservableCollection<BombExplodedEvent> BombExploded
+		{
+			get { return _bombExploded; }
+			set { Set(() => BombExploded, ref _bombExploded, value); }
+		}
+
 		public ObservableCollection<KillEvent> Kills
 		{
 			get { return _kills; }
-			set
-			{
-				RaisePropertyChanged("TotalKillCount");
-				Set(() => Kills, ref _kills, value);
-			}
+			set { Set(() => Kills, ref _kills, value); }
 		}
 
 		/// <summary>
@@ -604,6 +577,113 @@ namespace CSGO_Demos_Manager.Models
 
 		#endregion
 
+		#region User data accessors
+
+		[JsonIgnore]
+		public int TotalKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.KillsCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int OneKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.OnekillCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int TwoKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.TwokillCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int ThreeKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.ThreekillCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int FourKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.FourKillCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int FiveKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.FiveKillCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int BombExplodedUserCount
+		{
+			get { return BombExploded.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
+		}
+
+		[JsonIgnore]
+		public int BombDefusedUserCount
+		{
+			get { return BombDefused.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
+		}
+
+		[JsonIgnore]
+		public int BombPlantedUserCount
+		{
+			get { return BombPlanted.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
+		}
+
+		[JsonIgnore]
+		public int TeamKillUserCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SteamID);
+				if (player == null) return 0;
+				return player.TeamKillCount;
+			}
+		}
+
+		#endregion
+
+		public Demo()
+		{
+			Kills.CollectionChanged += OnKillsCollectionChanged;
+			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
+			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
+			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
+		}
+
 		public override bool Equals(object obj)
 		{
 			var item = obj as Demo;
@@ -626,17 +706,12 @@ namespace CSGO_Demos_Manager.Models
 					_threekillCount = 0;
 					_fourkillCount = 0;
 					_fivekillCount = 0;
-					_bombDefusedCount = 0;
-					_bombExplodedCount = 0;
-					_bombPlantedCount = 0;
-					_totalKillCount = 0;
 					_scoreTeam1 = 0;
 					_scoreTeam2 = 0;
 					_scoreFirstHalfTeam1 = 0;
 					_scoreFirstHalfTeam2 = 0;
 					_scoreSecondHalfTeam1 = 0;
 					_scoreSecondHalfTeam2 = 0;
-					_bombPlanted.Clear();
 					if (resetTeams)
 					{
 						_players.Clear();
@@ -658,7 +733,43 @@ namespace CSGO_Demos_Manager.Models
 					PositionsPoint.Clear();
 					MolotovFireStarted.Clear();
 					DecoyStarted.Clear();
+					_bombPlanted.Clear();
+					_bombDefused.Clear();
+					_bombExploded.Clear();
 				});
 		}
+
+		#region Handler collections changed
+
+		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("TotalKillCount");
+			RaisePropertyChanged("TotalKillUserCount");
+			RaisePropertyChanged("OneKillUserCount");
+			RaisePropertyChanged("TwoKillUserCount");
+			RaisePropertyChanged("ThreeKillUserCount");
+			RaisePropertyChanged("FourKillUserCount");
+			RaisePropertyChanged("FiveKillUserCount");
+		}
+
+		private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("BombExplodedCount");
+			RaisePropertyChanged("BombExplodedUserCount");
+		}
+
+		private void OnBombDefusedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("BombDefusedCount");
+			RaisePropertyChanged("BombDefusedUserCount");
+		}
+
+		private void OnBombPlantedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("BombPlantedCount");
+			RaisePropertyChanged("BombPlantedUserCount");
+		}
+
+		#endregion
 	}
 }

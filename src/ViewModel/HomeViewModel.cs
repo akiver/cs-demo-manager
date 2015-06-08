@@ -100,6 +100,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<bool> _showCevoDemosCommand;
 
+		private RelayCommand<bool> _showOnlyUserStatsCommand;
+
 		private RelayCommand _backToHomeCommand;
 
 		private RelayCommand _showSuspectsCommand;
@@ -440,6 +442,32 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							Properties.Settings.Default.ShowAllFolders = isChecked;
 							Properties.Settings.Default.Save();
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to show only user's stats is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowOnlyUserStatsCommand
+		{
+			get
+			{
+				return _showOnlyUserStatsCommand
+					?? (_showOnlyUserStatsCommand = new RelayCommand<bool>(
+						async isChecked =>
+						{
+							if (Properties.Settings.Default.SteamID == 0)
+							{
+								await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
+										MessageDialogStyle.Affirmative);
+								return;
+							}
+							IsBusy = true;
+							NotificationMessage = "Loading...";
+							DataGridDemosCollection.Refresh();
+							IsBusy = false;
 						},
 						isChecked => !IsBusy));
 			}
@@ -938,6 +966,14 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			IsBusy = false;
 			HasNotification = false;
+		}
+
+		private async Task RefreshDataGridDemos()
+		{
+			await Task.Run(() =>
+			{
+				DataGridDemosCollection.Refresh();
+			});
 		}
 	}
 }

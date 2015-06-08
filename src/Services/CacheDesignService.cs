@@ -24,9 +24,6 @@ namespace CSGO_Demos_Manager.Services
 			demo.ThreeKillCount = 25;
 			demo.FourKillCount = 3;
 			demo.FiveKillCount = 1;
-			demo.BombExplodedCount = 5;
-			demo.BombDefusedCount = 6;
-			demo.TotalKillCount = 260;
 			demo.Path = "C:\\mydemo.dem";
 			demo.ScoreTeam1 = 16;
 			demo.ScoreTeam2 = 6;

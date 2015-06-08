@@ -186,6 +186,13 @@
 					</StackPanel>
 				</Button>
 
+				<CheckBox x:Name="CheckBoxShowOnlyUserStats" Content="Show only my stats"
+						  Margin="5 0 0 0"
+						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowOnlyUserStatsCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyUserStats}"/>
+
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing 
 						IsActive="{Binding IsAnalyzing}"
@@ -532,23 +539,23 @@
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerHeader}" x:Name="WinnerRoundColumn" Width="Auto" Header="W" Binding="{Binding WinnerAsString}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountRoundColumn" Width="Auto" Header="K" Binding="{Binding KillsCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountRoundColumn" Width="Auto" Header="K" ElementStyle="{StaticResource TotalKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillCountRoundColumn" Width="Auto" Header="1K" Binding="{Binding OneKillCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillCountRoundColumn" Width="Auto" Header="1K" ElementStyle="{StaticResource OneKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource TwoKillHeader}" x:Name="TwoKillCountRoundColumn" Width="Auto" Header="2K" Binding="{Binding TwoKillCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource TwoKillHeader}" x:Name="TwoKillCountRoundColumn" Width="Auto" Header="2K" ElementStyle="{StaticResource TwoKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource ThreeKillHeader}" x:Name="ThreeKillCountRoundColumn" Width="Auto" Header="3K" Binding="{Binding ThreeKillCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource ThreeKillHeader}" x:Name="ThreeKillCountRoundColumn" Width="Auto" Header="3K" ElementStyle="{StaticResource ThreeKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}" x:Name="FourKillCountRoundColumn" Width="Auto" Header="4K" Binding="{Binding FourKillCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}" x:Name="FourKillCountRoundColumn" Width="Auto" Header="4K" ElementStyle="{StaticResource FourKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillCountRoundColumn" Width="Auto" Header="5K" Binding="{Binding FiveKillCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillCountRoundColumn" Width="Auto" Header="5K" ElementStyle="{StaticResource FiveKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource BombExplodedHeader}" x:Name="BombExplodedRoundColumn" Width="Auto" Header="BE" Binding="{Binding BombExplodedCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource BombExplodedHeader}" x:Name="BombExplodedRoundColumn" Width="Auto" Header="BE" ElementStyle="{StaticResource BombExplodedRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}" x:Name="BombPlantedRoundColumn" Width="Auto" Header="BP" Binding="{Binding BombPlantedCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}" x:Name="BombPlantedRoundColumn" Width="Auto" Header="BP" ElementStyle="{StaticResource BombPlantedRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource BombDefusedHeader}" x:Name="BombDefusedRoundColumn" Width="Auto" Header="BD" Binding="{Binding BombDefusedCount}"
+									<DataGridTextColumn HeaderStyle="{StaticResource BombDefusedHeader}" x:Name="BombDefusedRoundColumn" Width="Auto" Header="BD" ElementStyle="{StaticResource BombDefusedRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource StartMoneyTeam1Header}" x:Name="StartMoneyTeam1RoundColumn" Width="Auto" Header="SM Team 1 ($)" Binding="{Binding StartMoneyTeam1}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />

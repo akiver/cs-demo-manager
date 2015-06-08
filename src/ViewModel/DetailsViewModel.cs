@@ -66,6 +66,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _exportDemoToExcelCommand;
 
+		private RelayCommand<bool> _showOnlyUserStatsCommand;
+
 		private ICollectionView _playersTeam1Collection;
 
 		private ICollectionView _playersTeam2Collection;
@@ -402,6 +404,27 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command when the checkbox to show only user's stats is clicked
+		/// </summary>
+		public RelayCommand<bool> ShowOnlyUserStatsCommand
+		{
+			get
+			{
+				return _showOnlyUserStatsCommand
+					?? (_showOnlyUserStatsCommand = new RelayCommand<bool>(
+						async isChecked =>
+						{
+							if (Properties.Settings.Default.SteamID == 0)
+							{
+								await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
+										MessageDialogStyle.Affirmative);
+							}
+						},
+						isChecked => !IsAnalyzing));
+			}
+		}
+
 		#endregion
 
 		public DetailsViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService, ExcelService excelService)
@@ -417,6 +440,20 @@ namespace CSGO_Demos_Manager.ViewModel
 				var demo = _demosService.AnalyzeDemo(new Demo());
 				CurrentDemo = demo.Result;
 			}
+		}
+
+		public override void Cleanup()
+		{
+			base.Cleanup();
+			HasNotification = false;
+			IsAnalyzing = false;
+			SelectedPlayerTeam1 = null;
+			SelectedPlayerTeam2 = null;
+			PlayersTeam1Collection = null;
+			PlayersTeam2Collection = null;
+			CurrentDemo = null;
+			CurrentRound = null;
+			NotificationMessage = string.Empty;
 		}
 	}
 }

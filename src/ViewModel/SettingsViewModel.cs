@@ -127,6 +127,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _dateFormatEuropean = Settings.Default.DateFormatEuropean;
 
+		private bool _showOnlyUserStats = Settings.Default.ShowOnlyUserStats;
+
 		#endregion
 
 		#region Accessors
@@ -613,6 +615,18 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowDurationColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowDurationColumn, ref _showDurationColumn, value);
+			}
+		}
+
+		public bool ShowOnlyUserStats
+		{
+			get { return _showOnlyUserStats; }
+			set
+			{
+				if (Settings.Default.SteamID == 0) return;
+				Settings.Default.ShowOnlyUserStats = value;
+				Settings.Default.Save();
+				Set(() => ShowOnlyUserStats, ref _showOnlyUserStats, value);
 			}
 		}
 
