@@ -139,6 +139,10 @@
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							</StackPanel>
+							<Button Margin="0 5 0 0"
+										Command="{Binding Source={StaticResource Locator}, Path=Settings.NavigateToLogFile}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
+										Content="Errors log file" />
 						</StackPanel>
 					</Grid>
 

@@ -5,7 +5,7 @@ namespace CSGO_Demos_Manager.Internals
 {
 	public sealed class Logger
 	{
-		private const string LOG_FILENAME = "errors.log";
+		public const string LOG_FILENAME = "errors.log";
 
 		private static readonly Lazy<Logger> Lazy = new Lazy<Logger>(() => new Logger());
 

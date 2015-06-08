@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using CSGO_Demos_Manager.Internals;
@@ -36,6 +38,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _importCustomDataCacheCommand;
 
 		private RelayCommand _exportCustomDataCacheCommand;
+
+		private RelayCommand _navigateToLogFile;
 
 		private readonly ICacheService _cacheService;
 
@@ -639,6 +643,28 @@ namespace CSGO_Demos_Manager.ViewModel
 		#endregion
 
 		#region Commands
+
+		/// <summary>
+		/// Command to go to the log file
+		/// </summary>
+		public RelayCommand NavigateToLogFile
+		{
+			get
+			{
+				return _navigateToLogFile
+					?? (_navigateToLogFile = new RelayCommand(
+						async () =>
+						{
+							if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + Logger.LOG_FILENAME))
+							{
+								await _dialogService.ShowErrorAsync("There is no errors log file.", MessageDialogStyle.Affirmative);
+								return;
+							}
+							string argument = "/select, \"" + AppDomain.CurrentDomain.BaseDirectory + Logger.LOG_FILENAME + "\"";
+							Process.Start("explorer.exe", argument);
+						}));
+			}
+		}
 
 		/// <summary>
 		/// Command to save width resolution
