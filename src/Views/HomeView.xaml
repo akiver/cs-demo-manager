@@ -412,11 +412,11 @@
 				</StackPanel>
 				<StackPanel Grid.Column="1" Orientation="Horizontal">
 					<StackPanel Orientation="Horizontal">
-						<Rectangle Width="10" Height="10" Fill="{StaticResource LightGreenBrush}" />
+						<Rectangle Width="10" Height="10" Fill="{StaticResource LightRedColorBrush}" />
 						<TextBlock Text="To watch" Style="{StaticResource CurrentFolderStyle}" />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-						<Rectangle Width="10" Height="10" Fill="{StaticResource LightRedColorBrush}" />
+						<Rectangle Width="10" Height="10" Fill="{StaticResource LightGreenBrush}" />
 						<TextBlock Text="Watched" Style="{StaticResource CurrentFolderStyle}" />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5 0 5 0">
