@@ -30,6 +30,12 @@
 		<mouse:MouseBindingExtended Gesture="XButton1"
 									Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}" />
 	</UserControl.InputBindings>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<mvvm:EventToCommand Command="{Binding RefreshSuspectListCommand, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
 	
 	<Grid>
 		<Grid.RowDefinitions>
