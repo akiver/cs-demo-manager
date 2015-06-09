@@ -224,5 +224,12 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 			}
 		}
+
+		public override void Cleanup()
+		{
+			base.Cleanup();
+			SelectedSuspect = null;
+			Suspects.Clear();
+		}
 	}
 }

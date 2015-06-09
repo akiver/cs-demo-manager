@@ -41,5 +41,11 @@ namespace CSGO_Demos_Manager.ViewModel
 						demo => CurrentDemo != null));
 			}
 		}
+
+		public override void Cleanup()
+		{
+			base.Cleanup();
+			CurrentDemo = null;
+		}
 	}
 }
