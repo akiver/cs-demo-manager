@@ -5,6 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
+			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding Overview, Source={StaticResource Locator}}">
@@ -15,12 +16,18 @@
 			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
-	
+
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding PlayCommand}"
 					Gesture="CTRL+P" />
 		<KeyBinding Command="{Binding StopCommand}"
 					Gesture="CTRL+S" />
+		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Gesture="CTRL+B" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+					Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}" />
 	</UserControl.InputBindings>
 	
 	<Grid>
