@@ -450,6 +450,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				IsPlaying = false;
 				CurrentDemo.PositionsPoint.Clear();
 				Points.Clear();
+				CommandManager.InvalidateRequerySuggested();
 				return;
 			}
 
