@@ -127,20 +127,20 @@ namespace CSGO_Demos_Manager.Services
 		{
 			switch (weapon.Weapon.Name)
 			{
-				case "flashbang":
+				case "Flashbang":
 					PlayFlashbangThrowed(team);
 					break;
-				case "smokegrenade":
+				case "Smoke":
 					PlaySmokeThrowed(team);
 					break;
-				case "hegrenade":
+				case "He Grenade":
 					PlayHeGrenadeThrowed(team);
 					break;
-				case "decoy":
+				case "Decoy":
 					PlayDecoyThrowed(team);
 					break;
-				case "molotov":
-				case "incgrenade":
+				case "Molotov":
+				case "Incendiary":
 					PlayMolotovThrowed(team);
 					break;
 			}

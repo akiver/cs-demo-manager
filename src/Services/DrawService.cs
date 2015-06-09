@@ -286,22 +286,22 @@ namespace CSGO_Demos_Manager.Services
 			Bitmap icon = null;
 			switch (ev.Weapon.Name)
 			{
-				case "flashbang":
+				case "Flashbang":
 					icon = new Bitmap(Properties.Resources.flashbang);
 					break;
-				case "hegrenade":
+				case "He grenade":
 					icon = new Bitmap(Properties.Resources.hegrenade);
 					break;
-				case "smokegrenade":
+				case "Smoke":
 					icon = new Bitmap(Properties.Resources.smokegrenade);
 					break;
-				case "decoy":
+				case "Decoy":
 					icon = new Bitmap(Properties.Resources.decoy);
 					break;
-				case "molotov":
+				case "Molotov":
 					icon = new Bitmap(Properties.Resources.molotov);
 					break;
-				case "incgrenade":
+				case "Incendiary":
 					icon = new Bitmap(Properties.Resources.incendiary);
 					break;
 			}

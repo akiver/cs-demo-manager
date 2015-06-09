@@ -247,12 +247,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Weapon = new Weapon()
-				{
-					Name = e.Weapon.Weapon.ToString(),
-					AmmoInMagazine = e.Weapon.AmmoInMagazine,
-					ReserveAmmo = e.Weapon.ReserveAmmo
-				}
+				Weapon = new Weapon(e.Weapon)
 			};
 
 			bool killerIsBot = false;

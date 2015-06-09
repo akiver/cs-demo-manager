@@ -357,12 +357,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			WeaponFire shoot = new WeaponFire(Parser.IngameTick)
 			{
 				Shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID),
-				Weapon = new Weapon()
-				{
-					// TODO OriginalString is OK only for stuffs
-					Name = e.Weapon.OriginalString,
-					ReserveAmmo = e.Weapon.ReserveAmmo
-				}
+				Weapon = new Weapon(e.Weapon)
 			};
 
 			if (AnalyzeHeatmapPoint && shoot.Shooter != null)
@@ -985,12 +980,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						KillerName = killEvent.Killer.Name,
 						KillerSteamId = killEvent.Killer.SteamId,
 						KillerTeam = killEvent.Killer.Team,
-						Weapon = new Weapon()
-						{
-							Name = killEvent.Weapon.Name,
-							AmmoInMagazine = killEvent.Weapon.AmmoInMagazine,
-							ReserveAmmo = killEvent.Weapon.ReserveAmmo
-						}
+						Weapon = killEvent.Weapon
 					};
 					CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
 					{
@@ -1000,12 +990,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						KillerName = killEvent.Killer.Name,
 						KillerSteamId = killEvent.Killer.SteamId,
 						KillerTeam = killEvent.Killer.Team,
-						Weapon = new Weapon()
-						{
-							Name = killEvent.Weapon.Name,
-							AmmoInMagazine = killEvent.Weapon.AmmoInMagazine,
-							ReserveAmmo = killEvent.Weapon.ReserveAmmo
-						}
+						Weapon = killEvent.Weapon
 					};
 					IsEntryKillDone = true;
 					IsOpeningKillDone = true;
@@ -1022,12 +1007,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					KillerName = killEvent.Killer.Name,
 					KillerSteamId = killEvent.Killer.SteamId,
 					KillerTeam = killEvent.Killer.Team,
-					Weapon = new Weapon()
-					{
-						Name = killEvent.Weapon.Name,
-						AmmoInMagazine = killEvent.Weapon.AmmoInMagazine,
-						ReserveAmmo = killEvent.Weapon.ReserveAmmo
-					}
+					Weapon = killEvent.Weapon
 				};
 				killEvent.Killer.HasOpeningKill = true;
 				IsOpeningKillDone = true;

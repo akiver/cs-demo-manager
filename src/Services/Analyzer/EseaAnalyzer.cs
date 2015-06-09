@@ -260,12 +260,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Weapon = new Weapon()
-				{
-					Name = e.Weapon.Weapon.ToString(),
-					AmmoInMagazine = e.Weapon.AmmoInMagazine,
-					ReserveAmmo = e.Weapon.ReserveAmmo
-				},
+				Weapon = new Weapon(e.Weapon),
 				Killer = Demo.Players.FirstOrDefault(p => p.SteamId == e.Killer.SteamID),
 				DeathPerson = Demo.Players.FirstOrDefault(p => p.SteamId == e.Victim.SteamID)
 			};
