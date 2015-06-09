@@ -504,11 +504,11 @@ namespace CSGO_Demos_Manager.Services
 				ClearIcon(WeaponLayer, icon, positionPoint);
 
 				icon = new Bitmap(Properties.Resources.bomb_exploded);
-				DrawIcon(OverviewLayer, icon, positionPoint);
+				DrawIcon(WeaponLayer, icon, positionPoint);
 
 				await Task.Delay(3000);
 
-				ClearIcon(OverviewLayer, icon, positionPoint);
+				ClearIcon(WeaponLayer, icon, positionPoint);
 
 				icon.Dispose();
 			}
