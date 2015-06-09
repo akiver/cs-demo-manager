@@ -288,6 +288,7 @@
     <Compile Include="Services\IPlayerRatingService.cs" />
     <Compile Include="Services\ISteamService.cs" />
     <Compile Include="Services\Map\MapService.cs" />
+    <Compile Include="Services\Map\Train.cs" />
     <Compile Include="Services\PlayerRatingService.cs" />
     <Compile Include="Services\Serialization\DemoBackupConverter.cs" />
     <Compile Include="Services\Serialization\DemoListBackupConverter.cs" />
@@ -558,6 +559,9 @@
     <None Include="Resources\sounds\t_smoke.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\overview\de_train.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

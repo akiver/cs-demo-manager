@@ -47,6 +47,8 @@ namespace CSGO_Demos_Manager.Services.Map
 					return new Overpass();
 				case "de_mirage":
 					return new Mirage();
+				case "de_train":
+					return new Train();
 				default:
 					throw new MapUnavailableException();
 			}
@@ -83,7 +85,14 @@ namespace CSGO_Demos_Manager.Services.Map
 
 		public WriteableBitmap GetWriteableImage()
 		{
-			return BitmapFactory.New(SizeX, SizeY).FromResource("Resources/images/overview/" + MapName + ".png");
+			try
+			{
+				return BitmapFactory.New(SizeX, SizeY).FromResource("Resources/images/overview/" + MapName + ".png");
+			}
+			catch (System.IO.FileNotFoundException)
+			{
+				throw new MapUnavailableException();
+			}
 		}
 	}
 }

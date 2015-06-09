@@ -264,6 +264,16 @@ namespace CSGO_Demos_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap de_train {
+            get {
+                object obj = ResourceManager.GetObject("de_train", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap decoy {
             get {
                 object obj = ResourceManager.GetObject("decoy", resourceCulture);
