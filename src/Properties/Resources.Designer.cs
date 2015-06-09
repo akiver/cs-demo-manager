@@ -71,39 +71,12 @@ namespace CSGO_Demos_Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream bomb_defused {
-            get {
-                return ResourceManager.GetStream("bomb_defused", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap bomb_exploded {
             get {
                 object obj = ResourceManager.GetObject("bomb_exploded", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream bomb_planted {
-            get {
-                return ResourceManager.GetStream("bomb_planted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream c4_explode {
-            get {
-                return ResourceManager.GetStream("c4_explode", resourceCulture);
             }
         }
         
@@ -124,60 +97,6 @@ namespace CSGO_Demos_Manager.Properties {
             get {
                 object obj = ResourceManager.GetObject("colors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ct_death {
-            get {
-                return ResourceManager.GetStream("ct_death", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ct_decoy {
-            get {
-                return ResourceManager.GetStream("ct_decoy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ct_flashbang {
-            get {
-                return ResourceManager.GetStream("ct_flashbang", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ct_grenade {
-            get {
-                return ResourceManager.GetStream("ct_grenade", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ct_molotov {
-            get {
-                return ResourceManager.GetStream("ct_molotov", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream ct_smoke {
-            get {
-                return ResourceManager.GetStream("ct_smoke", resourceCulture);
             }
         }
         
@@ -352,30 +271,12 @@ namespace CSGO_Demos_Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream flashbang_explode {
-            get {
-                return ResourceManager.GetStream("flashbang_explode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap flashbang_exploded {
             get {
                 object obj = ResourceManager.GetObject("flashbang_exploded", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream he_explode {
-            get {
-                return ResourceManager.GetStream("he_explode", resourceCulture);
             }
         }
         
@@ -396,15 +297,6 @@ namespace CSGO_Demos_Manager.Properties {
             get {
                 object obj = ResourceManager.GetObject("hegrenade", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream inc_grenade_detonate {
-            get {
-                return ResourceManager.GetStream("inc_grenade_detonate", resourceCulture);
             }
         }
         
@@ -449,15 +341,6 @@ namespace CSGO_Demos_Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream molotov_detonate {
-            get {
-                return ResourceManager.GetStream("molotov_detonate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap pov {
@@ -474,15 +357,6 @@ namespace CSGO_Demos_Manager.Properties {
             get {
                 object obj = ResourceManager.GetObject("smoke", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream smoke_explode {
-            get {
-                return ResourceManager.GetStream("smoke_explode", resourceCulture);
             }
         }
         
@@ -512,60 +386,6 @@ namespace CSGO_Demos_Manager.Properties {
         internal static string steam_api_key {
             get {
                 return ResourceManager.GetString("steam_api_key", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream t_death {
-            get {
-                return ResourceManager.GetStream("t_death", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream t_decoy {
-            get {
-                return ResourceManager.GetStream("t_decoy", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream t_flashbang {
-            get {
-                return ResourceManager.GetStream("t_flashbang", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream t_grenade {
-            get {
-                return ResourceManager.GetStream("t_grenade", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream t_molotov {
-            get {
-                return ResourceManager.GetStream("t_molotov", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        internal static System.IO.UnmanagedMemoryStream t_smoke {
-            get {
-                return ResourceManager.GetStream("t_smoke", resourceCulture);
             }
         }
         

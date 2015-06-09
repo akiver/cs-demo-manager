@@ -476,7 +476,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\c4_explode.wav">
+    <None Include="Resources\sounds\bomb_exploded.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

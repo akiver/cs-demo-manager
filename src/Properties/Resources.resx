@@ -217,66 +217,6 @@
   <data name="colors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="he_explode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\he_explode.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="bomb_defused" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\bomb_defused.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="bomb_planted" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\bomb_planted.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="c4_explode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\c4_explode.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ct_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\ct_death.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ct_decoy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\ct_decoy.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ct_flashbang" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\ct_flashbang.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ct_grenade" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\ct_grenade.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ct_molotov" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\ct_molotov.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="ct_smoke" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\ct_smoke.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="flashbang_explode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\flashbang_explode.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="inc_grenade_detonate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\inc_grenade_detonate.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="molotov_detonate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\molotov_detonate.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="smoke_explode" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\smoke_explode.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="t_death" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\t_death.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="t_decoy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\t_decoy.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="t_flashbang" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\t_flashbang.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="t_grenade" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\t_grenade.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="t_molotov" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\t_molotov.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="t_smoke" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\sounds\t_smoke.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="de_train" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\overview\de_train.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
