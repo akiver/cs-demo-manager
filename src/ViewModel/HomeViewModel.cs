@@ -898,6 +898,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				try
 				{
+					NotificationMessage = "Analyzing " + demo.Name + "...";
 					await _demosService.AnalyzeDemo(demo);
 				}
 				catch (Exception e)
