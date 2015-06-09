@@ -112,6 +112,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<string> _setDemoSourceCommand;
 
+		private RelayCommand<IList> _demosSelectionChangedCommand;
+
 		private int _newBannedPlayerCount;
 
 		private ObservableCollection<string> _folders;
@@ -337,8 +339,6 @@ namespace CSGO_Demos_Manager.ViewModel
 		#endregion
 
 		#region Commands
-
-		public RelayCommand<IList> DemosSelectionChangedCommand { get; private set; }
 
 		/// <summary>
 		/// Command to start demo(s) analysis
@@ -809,6 +809,28 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command fired when a demo selection is done
+		/// </summary>
+		public RelayCommand<IList> DemosSelectionChangedCommand
+		{
+			get
+			{
+				return _demosSelectionChangedCommand
+					?? (_demosSelectionChangedCommand = new RelayCommand<IList>(
+						demos =>
+						{
+							if (IsBusy) return;
+							if (demos == null) return;
+							SelectedDemos.Clear();
+							foreach (Demo demo in demos)
+							{
+								SelectedDemos.Add(demo);
+							}
+					}));
+			}
+		}
+
 		#endregion
 
 		public HomeViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService)
@@ -832,19 +854,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			DataGridDemosCollection = CollectionViewSource.GetDefaultView(Demos);
 			DataGridDemosCollection.SortDescriptions.Add(new SortDescription("Date", ListSortDirection.Descending));
 			DataGridDemosCollection.Filter = Filter;
-
-			DemosSelectionChangedCommand = new RelayCommand<IList>(
-			demos =>
-			{
-				if (IsBusy) return;
-				if (demos == null) return;
-				
-				SelectedDemos.Clear();
-				foreach(Demo demo in demos)
-				{
-					SelectedDemos.Add(demo);
-				}
-			});
 
 			Messenger.Default.Register<MainWindowLoadedMessage>(this, HandleMainWindowLoadedMessage);
 			Messenger.Default.Register<RefreshDemosMessage>(this, HandleRefreshDemosMessage);
@@ -967,14 +976,6 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			IsBusy = false;
 			HasNotification = false;
-		}
-
-		private async Task RefreshDataGridDemos()
-		{
-			await Task.Run(() =>
-			{
-				DataGridDemosCollection.Refresh();
-			});
 		}
 	}
 }

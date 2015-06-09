@@ -30,7 +30,7 @@
 
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
-			<Button Command="{Binding ToggleSettingsFlyOutCommand}"
+			<Button Command="{Binding SettingsFlyoutOpenedCommand}"
 					ToolTip="Display settings"
 					Content="Settings" />
 		</controls:WindowCommands>

@@ -25,11 +25,11 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isSettingsOpen;
 
-		public RelayCommand ToggleSettingsFlyOutCommand { get; set; }
+		private RelayCommand _settingsFlyoutOpendedCommand;
 
-		public RelayCommand SettingsFlyoutClosedCommand { get; set; }
+		private RelayCommand _settingsFlyoutClosedCommand;
 
-		ObservableCollection<string> _folders;
+		private ObservableCollection<string> _folders;
 
 		private string _selectedFolder;
 
@@ -224,6 +224,45 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command fired when the settings flyout is opened
+		/// </summary>
+		public RelayCommand SettingsFlyoutOpenedCommand
+		{
+			get
+			{
+				return _settingsFlyoutOpendedCommand
+					?? (_settingsFlyoutOpendedCommand = new RelayCommand(
+					() =>
+					{
+						IsSettingsOpen = true;
+					},
+					() => IsSettingsOpen == false));
+			}
+		}
+
+		/// <summary>
+		/// Command fired when the settings flyout is closed
+		/// </summary>
+		public RelayCommand SettingsFlyoutClosedCommand
+		{
+			get
+			{
+				return _settingsFlyoutClosedCommand
+					?? (_settingsFlyoutClosedCommand = new RelayCommand(
+					() =>
+					{
+						IsSettingsOpen = false;
+
+						Folders.Clear();
+						Folders = AppSettings.GetFolders();
+
+						RefreshDemosMessage msg = new RefreshDemosMessage();
+						Messenger.Default.Send(msg);
+					}));
+			}
+		}
+
 		#endregion
 
 		public MainViewModel(DialogService dialogService, ICacheService cacheService)
@@ -236,22 +275,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			CurrentPage.ShowPage(homeView);
 
 			Folders = AppSettings.GetFolders();
-
-			ToggleSettingsFlyOutCommand = new RelayCommand(() =>
-			{
-				IsSettingsOpen = true;
-			}, () => IsSettingsOpen == false);
-
-			SettingsFlyoutClosedCommand = new RelayCommand(() =>
-			{
-				IsSettingsOpen = false;
-
-				Folders.Clear();
-				Folders = AppSettings.GetFolders();
-
-				RefreshDemosMessage msg = new RefreshDemosMessage();
-				Messenger.Default.Send(msg);
-			});
 		}
 
 		private static async Task<bool> CheckUpdate()
