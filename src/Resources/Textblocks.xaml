@@ -180,7 +180,18 @@
 		</Style.Triggers>
 	</Style>
 
-	<!-- TextBlock inside DataGridTextColumn for only user data on DetailsView -->
+    <Style TargetType="TextBlock" x:Key="CommentDataGridTextColumnStyle">
+        <Style.Triggers >
+            <DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+                <Setter Property="Text" Value="{Binding BombPlantedCount}"></Setter>
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
+                <Setter Property="Text" Value="{Binding BombPlantedUserCount}"></Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- TextBlock inside DataGridTextColumn for only user data on DetailsView -->
 	<Style TargetType="TextBlock" x:Key="TotalKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">

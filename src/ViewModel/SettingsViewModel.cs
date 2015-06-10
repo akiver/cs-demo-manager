@@ -133,6 +133,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showOnlyUserStats = Settings.Default.ShowOnlyUserStats;
 
+		private bool _showCommentColumn = Settings.Default.ShowCommentColumn;
+
 		#endregion
 
 		#region Accessors
@@ -631,6 +633,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowOnlyUserStats = value;
 				Settings.Default.Save();
 				Set(() => ShowOnlyUserStats, ref _showOnlyUserStats, value);
+			}
+		}
+
+		public bool ShowCommentColumn
+		{
+			get { return _showCommentColumn; }
+			set
+			{
+				Settings.Default.ShowCommentColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowCommentColumn, ref _showCommentColumn, value);
 			}
 		}
 

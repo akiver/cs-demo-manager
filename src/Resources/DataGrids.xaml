@@ -237,6 +237,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="1 versus 5" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="CommentHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Demo's comment" />
+	</Style>
+
 
 	<!--DataGrid for suspects list style -->
 	<Style TargetType="DataGridCell" x:Key="DataGridCellSuspectStyle">

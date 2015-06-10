@@ -406,6 +406,8 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="BombPlantedColumn" Width="Auto" Header="BP" HeaderStyle="{StaticResource BombPlantedHeader}" ElementStyle="{StaticResource BombPlantedCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="CommentColumn" Width="Auto" Header="Comment" Binding="{Binding Comment}" HeaderStyle="{StaticResource CommentHeader}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowCommentColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 			</DataGrid.Columns>
 		</DataGrid>
 

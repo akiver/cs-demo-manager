@@ -277,6 +277,9 @@
 									<CheckBox Content="Duration"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDurationColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Comment"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowCommentColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 									</StackPanel>
 									<StackPanel Orientation="Horizontal">
 									<CheckBox Content="Entry kills"

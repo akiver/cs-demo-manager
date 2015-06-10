@@ -730,19 +730,19 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowFramerateColumn"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowCevoDemos
-        {
-            get { return ((bool) (this["ShowCevoDemos"])); }
-            set
-            {
+        public bool ShowCevoDemos {
+            get {
+                return ((bool)(this["ShowCevoDemos"]));
+            }
+            set {
                 this["ShowCevoDemos"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
@@ -752,6 +752,18 @@ namespace CSGO_Demos_Manager.Properties {
             }
             set {
                 this["ShowOnlyUserStats"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowCommentColumn {
+            get {
+                return ((bool)(this["ShowCommentColumn"]));
+            }
+            set {
+                this["ShowCommentColumn"] = value;
             }
         }
     }
