@@ -76,8 +76,8 @@
 
 						<Grid Grid.Column="0" Margin="5">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="33*"/>
-								<ColumnDefinition Width="247*"/>
+								<ColumnDefinition Width="Auto"/>
+								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto" />
