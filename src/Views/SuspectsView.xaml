@@ -166,17 +166,18 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTextColumn x:Name="NicknameColumn" Width="Auto" Header="Nickname" Binding="{Binding Nickname}" />
-				<DataGridTextColumn x:Name="ProfileColumn" Width="Auto" Header="Profile" Binding="{Binding ProfileUrl}" />
-				<DataGridTextColumn x:Name="StatusColumn" Width="Auto" Header="Status" Binding="{Binding CurrentStatusString}" />
-				<DataGridTextColumn x:Name="PublicProfileColumn" Width="Auto" Header="Profile Visibility" Binding="{Binding PublicProfile}" />
-				<DataGridTextColumn x:Name="LastLogOffColumn" Width="Auto" Header="Last Connection" Binding="{Binding LastLogOffDate}" />
-				<DataGridTextColumn x:Name="ProfileConfiguredColumn" Width="Auto" Header="Profile setup" Binding="{Binding ProfileStateString}" />
-				<DataGridTextColumn x:Name="VacBannedColumn" Width="Auto" Header="VAC Banned" Binding="{Binding VacBanned, Converter={StaticResource BooleanToStringConverter}}" />
-				<DataGridTextColumn x:Name="BanCountColumn" Width="Auto" Header="Ban Count" Binding="{Binding BanCount}" />
-				<DataGridTextColumn x:Name="DaySinceLastBanCountColumn" Width="Auto" Header="DSLB" Binding="{Binding DaySinceLastBanCount}" HeaderStyle="{StaticResource DaySinceLastBanHeader}"/>
-				<DataGridTextColumn x:Name="CommunityBannedColumn" Width="Auto" Header="Community Banned" Binding="{Binding CommunityBanned, Converter={StaticResource BooleanToStringConverter}}" />
-				<DataGridTextColumn x:Name="EconomyBannedColumn" Width="Auto" Header="Economy Banned" Binding="{Binding EconomyBan}" />
+                <DataGridTextColumn x:Name="NicknameColumn" Width="Auto" Header="Nickname" Binding="{Binding Nickname}" HeaderStyle="{StaticResource NicknameHeader}" />
+                <DataGridTextColumn x:Name="ProfileColumn" Width="Auto" Header="Profile" Binding="{Binding ProfileUrl}" HeaderStyle="{StaticResource ProfileUrlHeader}" />
+                <DataGridTextColumn x:Name="StatusColumn" Width="Auto" Header="Status" Binding="{Binding CurrentStatusString}" HeaderStyle="{StaticResource CurrentStatusHeader}" />
+                <DataGridTextColumn x:Name="PublicProfileColumn" Width="Auto" Header="Profile Visibility" Binding="{Binding PublicProfile}" HeaderStyle="{StaticResource PublicProfileHeader}" />
+                <DataGridTextColumn x:Name="LastLogOffColumn" Width="Auto" Header="Last Connection" Binding="{Binding LastLogOffDate}" HeaderStyle="{StaticResource LastLogOffHeader}" />
+                <DataGridTextColumn x:Name="ProfileConfiguredColumn" Width="Auto" Header="Profile setup" Binding="{Binding ProfileStateString}" HeaderStyle="{StaticResource ProfileStateHeader}" />
+                <DataGridTextColumn x:Name="VacBannedColumn" Width="Auto" Header="VAC Banned" Binding="{Binding VacBanned, Converter={StaticResource BooleanToStringConverter}}" HeaderStyle="{StaticResource VacBannedHeader}" />
+                <DataGridTextColumn x:Name="GameBanCountColumn" Width="Auto" Header="Game ban" Binding="{Binding GameBanCount}" HeaderStyle="{StaticResource GameBanCountHeader}" />
+                <DataGridTextColumn x:Name="BanCountColumn" Width="Auto" Header="Ban Count" Binding="{Binding BanCount}" HeaderStyle="{StaticResource BanCountHeader}" />
+				<DataGridTextColumn x:Name="DaySinceLastBanCountColumn" Width="Auto" Header="DSLB" Binding="{Binding DaySinceLastBanCount}" HeaderStyle="{StaticResource DaySinceLastBanHeader}" />
+                <DataGridTextColumn x:Name="CommunityBannedColumn" Width="Auto" Header="Community Banned" Binding="{Binding CommunityBanned, Converter={StaticResource BooleanToStringConverter}}" HeaderStyle="{StaticResource CommunityBannedHeader}" />
+                <DataGridTextColumn x:Name="EconomyBannedColumn" Width="Auto" Header="Economy Banned" Binding="{Binding EconomyBan}" HeaderStyle="{StaticResource EconomyBanHeader}" />
 			</DataGrid.Columns>
 		</DataGrid>
 			

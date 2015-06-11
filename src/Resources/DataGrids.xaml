@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters">
 	
 	<Style x:Key="DemosDataGridStyle" TargetType="DataGrid">
 		<Setter Property="Background" Value="{StaticResource LightWhiteBrush}" />
@@ -254,11 +255,17 @@
 	</Style>
 
 	<Style TargetType="DataGridRow" x:Key="DataGridRowSuspectsListStyle">
+		<Style.Resources>
+			<converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+		</Style.Resources>
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding VacBanned}" Value="true">
 				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
 			</DataTrigger>
-			<Trigger Property="IsSelected" Value="True">
+			<DataTrigger Binding="{Binding GameBanCount, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=GameBanCount}" Value="true">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
+			 <Trigger Property="IsSelected" Value="True">
 				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
 				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
 			</Trigger>
@@ -266,8 +273,53 @@
 		<Setter Property="ContextMenu" Value="{StaticResource SuspectRowContextMenu}" />
 	</Style>
 
+	<!-- Supects view header -->
 	<Style TargetType="DataGridColumnHeader" x:Key="DaySinceLastBanHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Days Since Last Ban" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="GameBanCountHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Number Of Game Ban (OW)" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="VacBannedHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Account VAC Banned" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="BanCountHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Number Of VAC Ban" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="NicknameHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Account's Nickname" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="ProfileUrlHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Account's Profile URL" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="CurrentStatusHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Account's Status (offline, online...)" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="PublicProfileHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Account's Visibility Status" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="LastLogOffHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Last Time The User Was Online" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="ProfileStateHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Community Profile Configured" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="CommunityBannedHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Community Banned" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="EconomyBanHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Market Banned" />
 	</Style>
 
 	<!--DataGrid Row style for scoreboard -->

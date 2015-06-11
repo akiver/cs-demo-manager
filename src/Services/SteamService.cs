@@ -95,7 +95,8 @@ namespace CSGO_Demos_Manager.Services
 					BanCount = playerBan.NumberOfVacBans,
 					VacBanned = playerBan.VacBanned,
 					CommunityBanned = playerBan.CommunityBanned,
-					EconomyBan = playerBan.EconomyBan
+					EconomyBan = playerBan.EconomyBan,
+					GameBanCount = playerBan.NumberOfGameBans
 				};
 
 				return suspect;
@@ -149,6 +150,7 @@ namespace CSGO_Demos_Manager.Services
 					suspects.First(pl => pl.SteamId == playerBan.SteamId).VacBanned = playerBan.VacBanned;
 					suspects.First(pl => pl.SteamId == playerBan.SteamId).CommunityBanned = playerBan.CommunityBanned;
 					suspects.First(pl => pl.SteamId == playerBan.SteamId).EconomyBan = playerBan.EconomyBan;
+					suspects.First(pl => pl.SteamId == playerBan.SteamId).GameBanCount = playerBan.NumberOfGameBans;
 				}
 
 				IEnumerable<Suspect> suspectOrdered = suspects.OrderBy(suspect => suspect.Nickname);

@@ -82,6 +82,11 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private int _daySinceLastBanCount;
 
+		/// <summary>
+		/// Game ban count
+		/// </summary>
+		private int _gameBanCount;
+
 		#endregion
 
 		#region Accessors
@@ -178,6 +183,12 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _banCount; }
 			set { Set(() => BanCount, ref _banCount, value); }
+		}
+
+		public int GameBanCount
+		{
+			get { return _gameBanCount; }
+			set { Set(() => GameBanCount, ref _gameBanCount, value); }
 		}
 
 		public int DaySinceLastBanCount
