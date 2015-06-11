@@ -858,7 +858,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (playerInClutch != null)
 			{
-				// CT win his clutch
+				// Player win his clutch
 				switch (playerInClutch.OpponentClutchCount)
 				{
 					case 1:

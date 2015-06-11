@@ -114,6 +114,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Kills" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="ClutchCountHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Number of clutch" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="OneKillHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="1 Kill" />
 	</Style>

@@ -135,6 +135,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showCommentColumn = Settings.Default.ShowCommentColumn;
 
+		private bool _showClutchCountColumn = Settings.Default.ShowClutchCountColumn;
+
 		#endregion
 
 		#region Accessors
@@ -644,6 +646,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowCommentColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowCommentColumn, ref _showCommentColumn, value);
+			}
+		}
+
+		public bool ShowClutchCountColumn
+		{
+			get { return _showClutchCountColumn; }
+			set
+			{
+				Settings.Default.ShowClutchCountColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowClutchCountColumn, ref _showClutchCountColumn, value);
 			}
 		}
 

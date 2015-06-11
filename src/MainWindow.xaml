@@ -242,6 +242,9 @@
 									<CheckBox Content="Bomb exploded"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									<CheckBox Content="Clutch"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 									</StackPanel>
 									<StackPanel Orientation="Horizontal">
 									<CheckBox Content="Clutch 1v1"

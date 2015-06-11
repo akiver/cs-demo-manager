@@ -766,5 +766,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowCommentColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowClutchCountColumn {
+            get {
+                return ((bool)(this["ShowClutchCountColumn"]));
+            }
+            set {
+                this["ShowClutchCountColumn"] = value;
+            }
+        }
     }
 }

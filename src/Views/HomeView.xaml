@@ -400,6 +400,8 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TotalKillsColumn" Width="Auto" Header="Kills" HeaderStyle="{StaticResource KillsHeader}" ElementStyle="{StaticResource TotalKillCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="ClutchCountColumn" Width="Auto" Header="Clutchs" Binding="{Binding ClutchCount}" HeaderStyle="{StaticResource ClutchCountHeader}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="BombDefusedColumn" Width="Auto" Header="BD" HeaderStyle="{StaticResource BombDefusedHeader}" ElementStyle="{StaticResource BombDefusedCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="BombExplosedColumn" Width="Auto" Header="BE" HeaderStyle="{StaticResource BombExplodedHeader}" ElementStyle="{StaticResource BombExplodedCountDataGridTextColumnStyle}"

@@ -515,6 +515,17 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => MostEntryKillPlayer, ref _mostEntryKillPlayer, value); }
 		}
 
+		[JsonProperty("clutch_count")]
+		public int ClutchCount
+		{
+			get
+			{
+				return Players.Sum(
+					playerExtended => playerExtended.Clutch1V1Count + playerExtended.Clutch1V2Count
+					+ playerExtended.Clutch1V3Count + playerExtended.Clutch1V4Count + playerExtended.Clutch1V5Count);
+			}
+		}
+
 		public ObservableCollection<PlayerExtended> PlayersTeam1
 		{
 			get { return _playersTeam1; }
@@ -750,6 +761,7 @@ namespace CSGO_Demos_Manager.Models
 			RaisePropertyChanged("ThreeKillUserCount");
 			RaisePropertyChanged("FourKillUserCount");
 			RaisePropertyChanged("FiveKillUserCount");
+			RaisePropertyChanged("ClutchCount");
 		}
 
 		private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
