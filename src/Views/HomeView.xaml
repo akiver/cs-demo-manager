@@ -177,6 +177,23 @@
 
 				<Button Margin="10"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Width="120"
+					Height="30"
+					ToolTip="Add players to suspects list (CTRL+W)"
+					Command="{Binding AddPlayersToSuspectsListCommand}"
+					CommandParameter="{Binding SelectedDemos}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_group_add}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Add to suspects" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+				
+				<Button Margin="5 0 0 0"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="100"
 					Height="30"
 					ToolTip="Go to suspects view (CTRL+F)"

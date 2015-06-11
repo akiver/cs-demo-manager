@@ -84,6 +84,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Demo> _goToTickCommand;
 
+		private RelayCommand<ObservableCollection<Demo>> _addPlayersToSuspectsListCommand;
+
 		private RelayCommand<bool> _showAllFoldersCommand;
 
 		private RelayCommand<bool> _showPovDemosCommand;
@@ -407,6 +409,62 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 						},
 						demo => SelectedDemo != null && AppSettings.IsCsgoInstalled()));
+			}
+		}
+
+		/// <summary>
+		/// Command to add all players from selected demos to suspects list
+		/// </summary>
+		public RelayCommand<ObservableCollection<Demo>> AddPlayersToSuspectsListCommand
+		{
+			get
+			{
+				return _addPlayersToSuspectsListCommand
+					?? (_addPlayersToSuspectsListCommand = new RelayCommand<ObservableCollection<Demo>>(
+						async demos =>
+						{
+							IsBusy = true;
+							HasNotification = true;
+							List<Demo> demosFailed = new List<Demo>();
+							for (int i = 0; i < demos.Count; i++)
+							{
+								if (!demos[i].Players.Any())
+								{
+									try
+									{
+										NotificationMessage = "Analyzing " + demos[i].Name + "...";
+										demos[i] = await _demosService.AnalyzeDemo(demos[i]);
+									}
+									catch (Exception e)
+									{
+										Logger.Instance.Log(e);
+										demos[i].Status = "old";
+										demosFailed.Add(demos[i]);
+										await _cacheService.WriteDemoDataCache(demos[i]);
+									}
+									
+								}
+								if (demos[i].Players.Any())
+								{
+									foreach (PlayerExtended playerExtended in demos[i].Players)
+									{
+										NotificationMessage = "Adding suspects...";
+										await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
+									}
+								}
+							}
+
+							if (demosFailed.Any())
+							{
+								await _dialogService.ShowDemosFailedAsync(demosFailed);
+							}
+
+							NotificationMessage = "Refreshing suspects list...";
+							await RefreshBannedPlayerCount();
+							IsBusy = false;
+							HasNotification = false;
+						},
+						demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
 		}
 
@@ -937,11 +995,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			if (demosFailed.Any())
 			{
-				string errorMessage = "An error occured while analyzing the following demos : " + Environment.NewLine;
-				errorMessage = demosFailed.Aggregate(errorMessage, (current, demoFailed) => current + (demoFailed.Name + Environment.NewLine));
-				errorMessage += "This demos may be too old, if not please send an email with the attached demos." +
-					"You can find more information on http://csgo-demos-manager.com.";
-				await _dialogService.ShowErrorAsync(errorMessage, MessageDialogStyle.Affirmative);
+				await _dialogService.ShowDemosFailedAsync(demosFailed);
 			}
 		}
 
