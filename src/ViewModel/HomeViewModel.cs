@@ -725,6 +725,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var mainViewModel = (new ViewModelLocator()).Main;
 							SuspectsView suspectsView = new SuspectsView();
 							mainViewModel.CurrentPage.ShowPage(suspectsView);
+							NewBannedPlayerCount = 0;
 						}));
 			}
 		}
@@ -951,7 +952,12 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 
 				await LoadDemosHeader();
+				HasNotification = true;
+				IsBusy = true;
+				NotificationMessage = "Checking for new banned suspects...";
 				await RefreshBannedPlayerCount();
+				HasNotification = false;
+				IsBusy = false;
 			});
 		}
 
@@ -1001,10 +1007,24 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private async Task RefreshBannedPlayerCount()
 		{
-			List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
 			try
 			{
-				NewBannedPlayerCount = await _steamService.GetBannedPlayerCount(suspectIdList);
+				List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
+				List<string> bannedIdList = await _cacheService.GetSuspectsBannedList();
+				List<Suspect> newSuspectBannedList = await _steamService.GetNewSuspectBannedList(suspectIdList, bannedIdList);
+				if (newSuspectBannedList.Any())
+				{
+					NewBannedPlayerCount += newSuspectBannedList.Count;
+					NotificationMessage = NewBannedPlayerCount + " suspects have been banned!";
+					// Add new banned suspects to banned list
+					foreach (Suspect suspectBanned in newSuspectBannedList)
+					{
+						await _cacheService.AddSuspectToBannedList(suspectBanned);
+					}
+					IsBusy = false;
+					await Task.Delay(5000);
+					HasNotification = false;
+				}
 			}
 			catch (Exception e)
 			{

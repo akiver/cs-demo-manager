@@ -381,13 +381,14 @@ namespace CSGO_Demos_Manager.ViewModel
 								}
 
 								bool added = await _cacheService.AddSuspectToCache(suspect.SteamId);
+								IsAnalyzing = false;
 								if (!added)
 								{
-									HasNotification = false;
-									IsAnalyzing = false;
-									await _dialogService.ShowErrorAsync("Error while adding user to suspects list.", MessageDialogStyle.Affirmative);
-									return;
+
+									NotificationMessage = "This player is already in your suspects list.";
+									await Task.Delay(5000);
 								}
+								HasNotification = false;
 							}
 							catch (Exception e)
 							{

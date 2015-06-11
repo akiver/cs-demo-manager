@@ -72,5 +72,21 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return true;
 		}
+
+		public Task<bool> AddSuspectToBannedList(Suspect suspect)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<List<string>> GetSuspectsBannedList()
+		{
+			List<string> suspecIdtList = new List<string>()
+			{
+				"121545454",
+				"5455155"
+			};
+
+			return Task.FromResult(suspecIdtList);
+		}
 	}
 }

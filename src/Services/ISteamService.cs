@@ -10,8 +10,6 @@ namespace CSGO_Demos_Manager.Services
 
 		Task<IEnumerable<Suspect>> GetBanStatusForUserList(List<string> users);
 
-		Task UpdateBannedPlayerCount(List<string> suspectIdList);
-
-		Task<int> GetBannedPlayerCount(List<string> suspectIdList);
+		Task<List<Suspect>> GetNewSuspectBannedList(List<string> suspectIdList, List<string> suspectBannedIdList);
 	}
 }

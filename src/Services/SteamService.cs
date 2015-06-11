@@ -17,42 +17,27 @@ namespace CSGO_Demos_Manager.Services
 		private readonly Regex _regexSteamCommunityUrl = new Regex(STEAM_COMMUNITY_URL_PATTERN);
 
 		/// <summary>
-		/// Update the number of player banned from the suspects list
+		/// Return suspect list that have been banned
 		/// </summary>
 		/// <param name="suspectIdList"></param>
-		public async Task UpdateBannedPlayerCount(List<string> suspectIdList)
-		{
-			if (suspectIdList.Any())
-			{
-				IEnumerable<Suspect> suspects = await GetBanStatusForUserList(suspectIdList);
-				int bannedPlayerCount = suspects.Count(s => s.VacBanned);
-				Properties.Settings.Default.BannedPlayerCount = bannedPlayerCount;
-				Properties.Settings.Default.Save();
-			}
-		}
-
-		/// <summary>
-		/// Return the number of player banned since last time that the app has been launched
-		/// </summary>
-		/// <param name="suspectIdList"></param>
+		/// <param name="suspectBannedIdList"></param>
 		/// <returns></returns>
-		public async Task<int> GetBannedPlayerCount(List<string> suspectIdList)
+		public async Task<List<Suspect>> GetNewSuspectBannedList(List<string> suspectIdList, List<string> suspectBannedIdList)
 		{
-			int newBannedPlayerCount = 0;
-			int currentBannedPlayerCount = Properties.Settings.Default.BannedPlayerCount;
-
-			if (!suspectIdList.Any()) return newBannedPlayerCount;
-
-			IEnumerable<Suspect> suspects = await GetBanStatusForUserList(suspectIdList);
-			int bannedPlayerCountFromCurrentList = suspects.Count(s => s.VacBanned);
-			if (bannedPlayerCountFromCurrentList > currentBannedPlayerCount)
+			List<Suspect> newSuspectBannedList = new List<Suspect>();
+			foreach (string steamId in suspectIdList)
 			{
-				newBannedPlayerCount = bannedPlayerCountFromCurrentList - currentBannedPlayerCount;
-				Properties.Settings.Default.BannedPlayerCount = bannedPlayerCountFromCurrentList;
-				Properties.Settings.Default.Save();
+				if (!suspectBannedIdList.Contains(steamId))
+				{
+					Suspect suspect = await GetBanStatusForUser(steamId);
+					if (suspect.VacBanned || suspect.BanCount > 0)
+					{
+						newSuspectBannedList.Add(suspect);
+					}
+				}
 			}
 
-			return newBannedPlayerCount;
+			return newSuspectBannedList;
 		}
 
 		public async Task<Suspect> GetBanStatusForUser(string steamId)

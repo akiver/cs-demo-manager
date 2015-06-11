@@ -23,5 +23,9 @@ namespace CSGO_Demos_Manager.Services
 		Task CreateBackupCustomDataFile(string filePath);
 
 		bool ContainsDemos();
+
+		Task<bool> AddSuspectToBannedList(Suspect suspect);
+
+		Task<List<string>> GetSuspectsBannedList();
 	}
 }

@@ -98,8 +98,10 @@ namespace CSGO_Demos_Manager.ViewModel
 								if (added)
 								{
 									Suspects.Add(suspect);
-									List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
-									await _steamService.UpdateBannedPlayerCount(suspectIdList);
+									if (suspect.VacBanned || suspect.GameBanCount > 0)
+									{
+										await _cacheService.AddSuspectToBannedList(suspect);
+									}
 								}
 							}
 							catch (Exception e)
@@ -130,17 +132,6 @@ namespace CSGO_Demos_Manager.ViewModel
 							if (!removed)
 							{
 								await _dialogService.ShowErrorAsync("Error while deleting user.", MessageDialogStyle.Affirmative);
-							}
-
-							try
-							{
-								List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
-								await _steamService.UpdateBannedPlayerCount(suspectIdList);
-							}
-							catch (Exception e)
-							{
-								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
 							}
 
 							IsRefreshing = false;

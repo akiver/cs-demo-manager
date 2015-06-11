@@ -25,18 +25,6 @@ namespace CSGO_Demos_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public int BannedPlayerCount {
-            get {
-                return ((int)(this["BannedPlayerCount"]));
-            }
-            set {
-                this["BannedPlayerCount"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool EnableCheckUpdate {
             get {
