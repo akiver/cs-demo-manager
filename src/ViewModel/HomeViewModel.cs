@@ -703,12 +703,18 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _watchHighlightCommand
 					?? (_watchHighlightCommand = new RelayCommand<Demo>(
-					demo =>
+					async demo =>
 					{
+						if (Properties.Settings.Default.SteamID == 0)
+						{
+							await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
+										MessageDialogStyle.Affirmative);
+							return;
+						}
 						GameLauncher launcher = new GameLauncher();
 						launcher.WatchHighlightDemo(demo);
 					},
-					demo => SelectedDemo != null && Properties.Settings.Default.SteamID != 0));
+					demo => SelectedDemo != null));
 			}
 		}
 
@@ -721,12 +727,18 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _watchLowlightCommand
 					?? (_watchLowlightCommand = new RelayCommand<Demo>(
-					demo =>
+					async demo =>
 					{
+						if (Properties.Settings.Default.SteamID == 0)
+						{
+							await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
+										MessageDialogStyle.Affirmative);
+							return;
+						}
 						GameLauncher launcher = new GameLauncher();
 						launcher.WatchLowlightDemo(demo);
 					},
-					demo => SelectedDemo != null && Properties.Settings.Default.SteamID != 0));
+					demo => SelectedDemo != null));
 			}
 		}
 
