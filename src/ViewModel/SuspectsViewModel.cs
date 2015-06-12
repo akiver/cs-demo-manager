@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Services;
 using GalaSoft.MvvmLight;
@@ -6,8 +7,10 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using MahApps.Metro.Controls.Dialogs;
@@ -28,13 +31,19 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<string> _addSuspectCommand;
 
-		private RelayCommand<Suspect> _removeSuspectCommand;
+		private RelayCommand _removeSelectedSuspectsCommand;
 
 		private RelayCommand<Suspect> _goToSuspectProfileCommand;
 
 		private RelayCommand _refreshSuspectListCommand;
 
+		private RelayCommand<IList> _suspectsSelectionChangedCommand;
+
 		ObservableCollection<Suspect> _suspects;
+
+		ObservableCollection<Suspect> _selectedsuspects;
+
+		private ICollectionView _dataGridSuspectsCollection;
 
 		Suspect _selectedSuspect;
 
@@ -54,6 +63,18 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _suspects; }
 			set { Set(() => Suspects, ref _suspects, value); }
+		}
+
+		public ObservableCollection<Suspect> SelectedSuspects
+		{
+			get { return _selectedsuspects; }
+			set { Set(() => SelectedSuspects, ref _selectedsuspects, value); }
+		}
+
+		public ICollectionView DataGridSuspectsCollection
+		{
+			get { return _dataGridSuspectsCollection; }
+			set { Set(() => DataGridSuspectsCollection, ref _dataGridSuspectsCollection, value); }
 		}
 
 		public string SuspectSteamCommunityUrl
@@ -123,26 +144,33 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public RelayCommand<Suspect> RemoveSuspectCommand
+		public RelayCommand RemoveSuspectCommand
 		{
 			get
 			{
-				return _removeSuspectCommand
-					?? (_removeSuspectCommand = new RelayCommand<Suspect>(
-						async suspect =>
+				return _removeSelectedSuspectsCommand
+					?? (_removeSelectedSuspectsCommand = new RelayCommand(
+						async () =>
 						{
-							Suspects.Remove(suspect);
-
-							// Call cache service
-							bool removed = await _cacheService.RemoveSuspectFromCache(suspect.SteamId);
-							if (!removed)
+							for (int i = SelectedSuspects.Count - 1; i >= 0; i--)
 							{
-								await _dialogService.ShowErrorAsync("Error while deleting user.", MessageDialogStyle.Affirmative);
+								Console.WriteLine(SelectedSuspects[i].Nickname);
+								bool removed = await _cacheService.RemoveSuspectFromCache(SelectedSuspects[i].SteamId);
+								if (!removed)
+								{
+									await _dialogService.ShowErrorAsync("Error while deleting user.", MessageDialogStyle.Affirmative);
+								}
+								else
+								{
+									Suspects.Remove(SelectedSuspects[i]);
+								}
 							}
 
+							SelectedSuspects.Clear();
+							DataGridSuspectsCollection.Refresh();
 							IsRefreshing = false;
 						},
-						suspect => SelectedSuspect != null));
+						() => SelectedSuspects.Any()));
 			}
 		}
 
@@ -175,6 +203,28 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command fired when a suspect selection is done
+		/// </summary>
+		public RelayCommand<IList> SuspectsSelectionChangedCommand
+		{
+			get
+			{
+				return _suspectsSelectionChangedCommand
+					?? (_suspectsSelectionChangedCommand = new RelayCommand<IList>(
+						suspects =>
+						{
+							if (IsRefreshing) return;
+							if (suspects == null) return;
+							SelectedSuspects.Clear();
+							foreach (Suspect suspect in suspects)
+							{
+								SelectedSuspects.Add(suspect);
+							}
+						}));
+			}
+		}
+
 		#endregion
 
 		public SuspectsViewModel(ISteamService steamService, ICacheService cacheService, DialogService dialogService)
@@ -189,6 +239,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 
 			Suspects = new ObservableCollection<Suspect>();
+			SelectedSuspects = new ObservableCollection<Suspect>();
+			DataGridSuspectsCollection = CollectionViewSource.GetDefaultView(Suspects);
 
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
