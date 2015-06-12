@@ -364,6 +364,12 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_addSuspectCommand = new RelayCommand<string>(
 						async steamCommunityUrl =>
 						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
 							NotificationMessage = "Adding player to suspects list...";
 							HasNotification = true;
 							IsAnalyzing = true;

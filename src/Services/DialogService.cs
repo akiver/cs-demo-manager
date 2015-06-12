@@ -47,5 +47,13 @@ namespace CSGO_Demos_Manager.Services
 
 			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 		}
+
+		public async Task<MessageDialogResult> ShowNoInternetConnectionAsync()
+		{
+			var metroWindow = (Application.Current.MainWindow as MetroWindow);
+			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
+
+			return await metroWindow.ShowMessageAsync("No Internet Connection", "No Internet connection detected, you can't use this feature.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+		}
 	}
 }

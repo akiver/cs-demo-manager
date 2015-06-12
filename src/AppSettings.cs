@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.ObjectModel;
 using System;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace CSGO_Demos_Manager
 {
@@ -199,6 +200,19 @@ namespace CSGO_Demos_Manager
 				AddFolder(replayFolderPath);
 				folders?.Add(replayFolderPath);
 			}
+		}
+
+		/// <summary>
+		/// Check if the user has access to awesome world of the Internet
+		/// </summary>
+		/// <returns></returns>
+		[DllImport("wininet.dll")]
+		private extern static bool InternetGetConnectedState(out int description, int reservedValue);
+
+		public static bool IsInternetConnectionAvailable()
+		{
+			int description;
+			return InternetGetConnectedState(out description, 0);
 		}
 	}
 }

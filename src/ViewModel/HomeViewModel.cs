@@ -423,6 +423,12 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_addPlayersToSuspectsListCommand = new RelayCommand<ObservableCollection<Demo>>(
 						async demos =>
 						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
 							IsBusy = true;
 							HasNotification = true;
 							List<Demo> demosFailed = new List<Demo>();
@@ -720,8 +726,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _showSuspectsCommand
 					?? (_showSuspectsCommand = new RelayCommand(
-						() =>
+						async () =>
 						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
 							var mainViewModel = (new ViewModelLocator()).Main;
 							SuspectsView suspectsView = new SuspectsView();
 							mainViewModel.CurrentPage.ShowPage(suspectsView);
@@ -952,6 +964,9 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 
 				await LoadDemosHeader();
+
+				if (!AppSettings.IsInternetConnectionAvailable()) return;
+
 				HasNotification = true;
 				IsBusy = true;
 				NotificationMessage = "Checking for new banned suspects...";

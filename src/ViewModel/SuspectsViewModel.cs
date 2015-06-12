@@ -80,6 +80,12 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_addSuspectCommand = new RelayCommand<string>(
 						async steamCommunityUrl =>
 						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
 							IsRefreshing = true;
 							SuspectSteamCommunityUrl = null;
 
@@ -195,6 +201,12 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private async Task LoadSuspects()
 		{
+			if (!AppSettings.IsInternetConnectionAvailable())
+			{
+				await _dialogService.ShowNoInternetConnectionAsync();
+				return;
+			}
+
 			Suspects.Clear();
 
 			List<string> suspectsIdList = await _cacheService.GetSuspectsListFromCache();

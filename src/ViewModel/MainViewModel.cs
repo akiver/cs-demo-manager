@@ -134,7 +134,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						Properties.Settings.Default.Save();
 
 						// Check for update
-						if (Properties.Settings.Default.EnableCheckUpdate)
+						if (AppSettings.IsInternetConnectionAvailable() && Properties.Settings.Default.EnableCheckUpdate)
 						{
 							bool isUpdateAvailable = await CheckUpdate();
 							if (isUpdateAvailable)
