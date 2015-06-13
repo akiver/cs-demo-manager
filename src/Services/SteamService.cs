@@ -25,16 +25,14 @@ namespace CSGO_Demos_Manager.Services
 		public async Task<List<Suspect>> GetNewSuspectBannedList(List<string> suspectIdList, List<string> suspectBannedIdList)
 		{
 			List<Suspect> newSuspectBannedList = new List<Suspect>();
-			foreach (string steamId in suspectIdList)
+			// Get the SteamIDs that aren't in the banned list
+			List<string> idToCheck = suspectIdList.Where(steamId => !suspectBannedIdList.Contains(steamId)).ToList();
+
+			// Add new banned suspects to the returned list
+			if (idToCheck.Any())
 			{
-				if (!suspectBannedIdList.Contains(steamId))
-				{
-					Suspect suspect = await GetBanStatusForUser(steamId);
-					if (suspect.VacBanned || suspect.BanCount > 0)
-					{
-						newSuspectBannedList.Add(suspect);
-					}
-				}
+				IEnumerable<Suspect> suspects = await GetBanStatusForUserList(idToCheck);
+				newSuspectBannedList.AddRange(suspects.Where(suspect => suspect.VacBanned || suspect.BanCount > 0));
 			}
 
 			return newSuspectBannedList;
