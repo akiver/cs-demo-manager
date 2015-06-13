@@ -12,7 +12,7 @@ namespace CSGO_Demos_Manager
 		public static string AUTHOR = "AkiVer";
 		public static string APP_NAME = "CSGO Demos Manager";
 		public static string APP_WEBSITE = "http://csgo-demos-manager.com";
-		public static Version APP_VERSION = new Version("2.0.3");
+		public static Version APP_VERSION = new Version("2.1.0");
 		public static string REGISTRY_KEY_DIRECTORIES = "directories";
 		// Don't forget to put your Steam API key into the file "steam_api_key.txt"
 		public static string STEAM_API_KEY = Properties.Resources.steam_api_key;
