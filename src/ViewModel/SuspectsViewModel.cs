@@ -13,7 +13,9 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Models.Source;
 using MahApps.Metro.Controls.Dialogs;
+using MoreLinq;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -24,6 +26,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private readonly ISteamService _steamService;
 
 		private readonly ICacheService _cacheService;
+
+		private readonly IDemosService _demosService;
 
 		private readonly DialogService _dialogService;
 
@@ -37,6 +41,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _refreshSuspectListCommand;
 
+		private RelayCommand _addAllPlayerToListCommand;
+
+		private RelayCommand _stopCommand;
+
 		private RelayCommand<IList> _suspectsSelectionChangedCommand;
 
 		ObservableCollection<Suspect> _suspects;
@@ -48,6 +56,10 @@ namespace CSGO_Demos_Manager.ViewModel
 		Suspect _selectedSuspect;
 
 		private bool _isRefreshing;
+
+		private string _notificationMessage;
+
+		private bool _isAnalyzing;
 
 		#endregion
 
@@ -89,6 +101,18 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => IsRefreshing, ref _isRefreshing, value); }
 		}
 
+		public bool IsAnalyzing
+		{
+			get { return _isAnalyzing; }
+			set { Set(() => IsAnalyzing, ref _isAnalyzing, value); }
+		}
+
+		public string NotificationMessage
+		{
+			get { return _notificationMessage; }
+			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
+		}
+
 		#endregion
 
 		#region Commands
@@ -109,6 +133,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							IsRefreshing = true;
 							SuspectSteamCommunityUrl = null;
+							NotificationMessage = "Adding suspect(s) to list...";
 
 							try
 							{
@@ -154,11 +179,10 @@ namespace CSGO_Demos_Manager.ViewModel
 						{
 							for (int i = SelectedSuspects.Count - 1; i >= 0; i--)
 							{
-								Console.WriteLine(SelectedSuspects[i].Nickname);
 								bool removed = await _cacheService.RemoveSuspectFromCache(SelectedSuspects[i].SteamId);
 								if (!removed)
 								{
-									await _dialogService.ShowErrorAsync("Error while deleting user.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync("Error while deleting suspect.", MessageDialogStyle.Affirmative);
 								}
 								else
 								{
@@ -171,6 +195,66 @@ namespace CSGO_Demos_Manager.ViewModel
 							IsRefreshing = false;
 						},
 						() => SelectedSuspects.Any()));
+			}
+		}
+
+		public RelayCommand AddAllPlayerToListCommand
+		{
+			get
+			{
+				return _addAllPlayerToListCommand
+					?? (_addAllPlayerToListCommand = new RelayCommand(
+						async () =>
+						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
+							IsRefreshing = true;
+							IsAnalyzing = true;
+							List<Demo> demosFailed = new List<Demo>();
+							List<Demo> demos = await _demosService.GetDemosHeader(AppSettings.GetFolders().ToList());
+							for (int i = 0; i < demos.Count; i++)
+							{
+								if (demos[i].Source.GetType() != typeof(Pov) && IsAnalyzing)
+								{
+									try
+									{
+										NotificationMessage = "Analyzing " + demos[i].Name + "...";
+										demos[i] = await _demosService.AnalyzeDemo(demos[i]);
+										if (demos[i].Players.Any())
+										{
+											foreach (PlayerExtended playerExtended in demos[i].Players)
+											{
+												NotificationMessage = "Adding suspects...";
+												await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
+											}
+										}
+									}
+									catch (Exception e)
+									{
+										Logger.Instance.Log(e);
+										demos[i].Status = "old";
+										demosFailed.Add(demos[i]);
+										await _cacheService.WriteDemoDataCache(demos[i]);
+									}
+								}
+							}
+
+							if (demosFailed.Any())
+							{
+								await _dialogService.ShowDemosFailedAsync(demosFailed);
+							}
+
+							NotificationMessage = "Refreshing...";
+							await LoadSuspects();
+							CommandManager.InvalidateRequerySuggested();
+							IsRefreshing = false;
+							IsAnalyzing = false;
+						},
+						() => !IsRefreshing));
 			}
 		}
 
@@ -197,8 +281,10 @@ namespace CSGO_Demos_Manager.ViewModel
 						async () =>
 						{
 							IsRefreshing = true;
+							NotificationMessage = "Refreshing...";
 							await LoadSuspects();
 							IsRefreshing = false;
+							CommandManager.InvalidateRequerySuggested();
 						}, () => IsRefreshing == false));
 			}
 		}
@@ -225,13 +311,28 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public RelayCommand StopCommand
+		{
+			get
+			{
+				return _stopCommand
+					?? (_stopCommand = new RelayCommand(
+						() =>
+						{
+							IsAnalyzing = false;
+						},
+						() => IsRefreshing));
+			}
+		}
+
 		#endregion
 
-		public SuspectsViewModel(ISteamService steamService, ICacheService cacheService, DialogService dialogService)
+		public SuspectsViewModel(ISteamService steamService, ICacheService cacheService, DialogService dialogService, IDemosService demosService)
 		{
 			_steamService = steamService;
 			_cacheService = cacheService;
 			_dialogService = dialogService;
+			_demosService = demosService;
 
 			if (IsInDesignModeStatic)
 			{
@@ -246,8 +347,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			async () =>
 			{
 				IsRefreshing = true;
+				NotificationMessage = "Refreshing...";
 				await LoadSuspects();
 				IsRefreshing = false;
+				CommandManager.InvalidateRequerySuggested();
 			});
 		}
 
@@ -260,16 +363,23 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 
 			Suspects.Clear();
+			SelectedSuspects.Clear();
 
 			List<string> suspectsIdList = await _cacheService.GetSuspectsListFromCache();
+			
 			if (suspectsIdList.Any())
 			{
+				// Split list to 100 elements as Steam API allow to request by 100 SteamID maximum
+				IEnumerable<IEnumerable<string>> ids = suspectsIdList.Batch(100);
 				try
 				{
-					IEnumerable<Suspect> suspects = await _steamService.GetBanStatusForUserList(suspectsIdList);
-					foreach (Suspect suspect in suspects)
+					foreach (IEnumerable<string> idList in ids)
 					{
-						Suspects.Add(suspect);
+						IEnumerable<Suspect> suspects = await _steamService.GetBanStatusForUserList(idList.ToList());
+						foreach (Suspect suspect in suspects)
+						{
+							Suspects.Add(suspect);
+						}
 					}
 				}
 				catch (Exception e)

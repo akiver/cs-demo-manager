@@ -20,6 +20,7 @@
 				x:Key="RowSuspectDoubleClickedToProfile" />
 			<helpers:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
 			<helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
+			<helpers:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -27,6 +28,10 @@
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding RefreshSuspectListCommand}"
 					Gesture="CTRL+R" />
+		<KeyBinding Command="{Binding AddAllPlayerToListCommand}"
+					Gesture="CTRL+G" />
+		<KeyBinding Command="{Binding StopCommand}"
+					Gesture="CTRL+S" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 									Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}" />
 	</UserControl.InputBindings>
@@ -50,6 +55,7 @@
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="70"
 					Height="30"
+					IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}"
 					Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -117,6 +123,22 @@
 
 				<Button Margin="10"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Width="145"
+					Height="30"
+					ToolTip="Add all players seen to list (CTRL+G)"
+					Command="{Binding AddAllPlayerToListCommand}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_group_add}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Add all players seen" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="80"
 					Height="30"
 					ToolTip="Refresh list (CTRL+R)"
@@ -131,12 +153,29 @@
 					</StackPanel>
 				</Button>
 
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Width="80"
+					Height="30"
+					ToolTip="Stop (CTRL+S)"
+					Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}"
+					Command="{Binding StopCommand}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_control_stop}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Stop" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<StackPanel Orientation="Horizontal">
 					<controls:ProgressRing 
 						IsActive="{Binding IsRefreshing}"
 						Foreground="{DynamicResource AccentColorBrush}"
 						Width="40" Height="40" />
-					<TextBlock Text="Refreshing..."
+					<TextBlock Text="{Binding NotificationMessage}"
 							   Style="{StaticResource LabelGeneralInfoDemo}"
 							   Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
