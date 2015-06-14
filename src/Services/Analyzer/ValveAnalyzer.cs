@@ -272,6 +272,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						killEvent.Killer.TeamKillCount++;
 						killEvent.Killer.KillsCount--;
+						if (killEvent.Killer.HeadshotCount > 0) killEvent.Killer.HeadshotCount--;
 						killEvent.DeathPerson.DeathCount++;
 					}
 					else
