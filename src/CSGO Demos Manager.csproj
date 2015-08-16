@@ -541,6 +541,9 @@
   <ItemGroup>
     <Resource Include="Resources\images\overview\de_train.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\icons\bomb_overview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)src\bin\x64\Debug

@@ -98,9 +98,9 @@ namespace CSGO_Demos_Manager.Services
 								// Keep kills from terrorists
 								if (demo.PositionsPoint[i].Event != null
 									&& demo.PositionsPoint[i].Team == Team.Terrorist
-									&& demo.PositionsPoint[i].Event.GetType() == typeof (KillEvent))
+									&& demo.PositionsPoint[i].Event.GetType() == typeof(KillEvent))
 								{
-									KillEvent e = (KillEvent) demo.PositionsPoint[i].Event;
+									KillEvent e = (KillEvent)demo.PositionsPoint[i].Event;
 									if (e.DeathPerson.Equals(playerExtended))
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
@@ -115,7 +115,7 @@ namespace CSGO_Demos_Manager.Services
 								if (demo.PositionsPoint[i].Event != null
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(MolotovFireStartedEvent))
 								{
-									MolotovFireStartedEvent e = (MolotovFireStartedEvent) demo.PositionsPoint[i].Event;
+									MolotovFireStartedEvent e = (MolotovFireStartedEvent)demo.PositionsPoint[i].Event;
 									if (e.Thrower.Equals(playerExtended))
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
@@ -144,7 +144,7 @@ namespace CSGO_Demos_Manager.Services
 									demo.PositionsPoint.RemoveAt(i);
 								}
 							}
-							if(playerPoints.Any()) points.Add(playerPoints);
+							if (playerPoints.Any()) points.Add(playerPoints);
 						}
 						break;
 					case "T":
@@ -231,7 +231,7 @@ namespace CSGO_Demos_Manager.Services
 						|| (positionPoint.Event != null
 						&& positionPoint.Event.GetType() == typeof(KillEvent))
 						&& positionPoint.Round.Number == round.Number).ToList();
-					if(pt.Any()) points.Add(pt);
+					if (pt.Any()) points.Add(pt);
 				});
 			}
 
@@ -269,11 +269,33 @@ namespace CSGO_Demos_Manager.Services
 		/// <param name="positionPoint"></param>
 		public async void DrawPlayerMarker(PositionPoint positionPoint)
 		{
-			PlayerMarkerLayer.FillEllipseCentered((int)positionPoint.X, (int)positionPoint.Y, 5, 5, positionPoint.Color);
+			try
+			{
+				PlayerMarkerLayer.FillEllipseCentered((int)positionPoint.X, (int)positionPoint.Y, 5, 5, positionPoint.Color);
 
-			await Task.Delay(200);
+				Bitmap icon = null;
+				if (positionPoint.Player.HasBomb)
+				{
+					icon = new Bitmap(Properties.Resources.bomb_overview);
+					DrawIcon(PlayerMarkerLayer, icon, positionPoint);
+				}
 
-			PlayerMarkerLayer.FillEllipseCentered((int)positionPoint.X, (int)positionPoint.Y, 5, 5, Colors.Transparent);
+				await Task.Delay(200);
+
+				PlayerMarkerLayer.FillEllipseCentered((int)positionPoint.X, (int)positionPoint.Y, 5, 5, Colors.Transparent);
+
+				if (positionPoint.Player.HasBomb)
+				{
+					await Task.Delay(200);
+
+					ClearIcon(PlayerMarkerLayer, icon, positionPoint);
+					icon?.Dispose();
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
 		}
 
 		/// <summary>
@@ -282,7 +304,7 @@ namespace CSGO_Demos_Manager.Services
 		/// <param name="positionPoint"></param>
 		public async void DrawWeapon(PositionPoint positionPoint)
 		{
-			var ev = (WeaponFire) positionPoint.Event;
+			var ev = (WeaponFire)positionPoint.Event;
 			Bitmap icon = null;
 			switch (ev.Weapon.Name)
 			{

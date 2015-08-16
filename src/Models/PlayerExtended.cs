@@ -161,6 +161,11 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private float _ratingHltv;
 
+		/// <summary>
+		/// Indicates if the player has the bomb, used for the overview animation
+		/// </summary>
+		private bool _hasBomb = false;
+
 		#endregion
 
 		#region Accessors
@@ -475,6 +480,13 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public string HeadshotAsString => _headshotCount + " (" + HeadshotPercent + "%)";
 
+		[JsonIgnore]
+		public bool HasBomb
+		{
+			get { return _hasBomb; }
+			set { Set(() => HasBomb, ref _hasBomb, value); }
+		}
+
 		#endregion
 
 		public override bool Equals(object obj)
@@ -540,6 +552,11 @@ namespace CSGO_Demos_Manager.Models
 			RatingHltv = 0;
 			OpeningKills.Clear();
 			EntryKills.Clear();
+		}
+
+		public PlayerExtended Clone()
+		{
+			return (PlayerExtended)MemberwiseClone();
 		}
 	}
 }

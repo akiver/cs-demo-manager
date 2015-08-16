@@ -194,19 +194,29 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				if (Demo.Players.Any())
 				{
+					// Reset bomber
+					foreach (PlayerExtended playerExtended in Demo.Players)
+					{
+						playerExtended.HasBomb = false;
+					}
+
 					// Update players position
 					foreach (Player player in Parser.PlayingParticipants)
 					{
 						if (!player.IsAlive) continue;
 						PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
 						if (pl == null || pl.SteamId == 0) continue;
+
+						// Set the bomber
+						if (player.Weapons.FirstOrDefault(w => w.Weapon == EquipmentElement.Bomb) != null) pl.HasBomb = true;
+
 						PositionPoint positionPoint = new PositionPoint
 						{
 							X = player.Position.X,
 							Y = player.Position.Y,
 							Round = CurrentRound,
 							Team = player.Team,
-							Player = pl
+							Player = pl.Clone()
 						};
 						Demo.PositionsPoint.Add(positionPoint);
 					}
@@ -376,6 +386,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (AnalyzePlayersPosition || AnalyzeHeatmapPoint && shoot.Shooter != null)
 			{
+				if (e.Shooter.SteamID == 0) return;
+
 				switch (e.Weapon.Weapon)
 				{
 					case EquipmentElement.Incendiary:
