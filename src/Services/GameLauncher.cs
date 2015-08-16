@@ -18,6 +18,12 @@ namespace CSGO_Demos_Manager.Services
 
 		public void StartGame()
 		{
+			Process[] currentProcess = Process.GetProcessesByName("csgo");
+			if (currentProcess.Length > 0)
+			{
+				currentProcess[0].Kill();
+			}
+
 			string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
 			_process.StartInfo.Arguments = args;
 			_process.Start();
