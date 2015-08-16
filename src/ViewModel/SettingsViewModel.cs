@@ -27,11 +27,15 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private long _steamId = Settings.Default.SteamID;
 
+		private string _launchParameters = Settings.Default.LaunchParameters;
+
 		private RelayCommand<string> _saveResolutionWidthCommand;
 
 		private RelayCommand<string> _saveResolutionHeightCommand;
 
 		private RelayCommand<string> _saveSteamIdCommand;
+
+		private RelayCommand<string> _saveLaunchParametersCommand;
 
 		private RelayCommand _clearDemosDataCacheCommand;
 
@@ -162,6 +166,12 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.Save();
 				Set(() => ResolutionFullscreen, ref _resolutionFullscreen, value);
 			}
+		}
+
+		public string LaunchParameters
+		{
+			get { return _launchParameters; }
+			set { Set(() => LaunchParameters, ref _launchParameters, value); }
 		}
 
 		public bool DateFormatUsa
@@ -741,6 +751,23 @@ namespace CSGO_Demos_Manager.ViewModel
 						{
 							long steamIdAsLong;
 							return Int64.TryParse(steamId, out steamIdAsLong);
+						}));
+			}
+		}
+
+		/// <summary>
+		/// Command to save additionals launch parameters
+		/// </summary>
+		public RelayCommand<string> SaveLaunchParametersCommand
+		{
+			get
+			{
+				return _saveLaunchParametersCommand
+					?? (_saveLaunchParametersCommand = new RelayCommand<string>(
+						parameters =>
+						{
+							Settings.Default.LaunchParameters = parameters;
+							Settings.Default.Save();
 						}));
 			}
 		}

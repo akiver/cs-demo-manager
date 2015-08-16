@@ -25,7 +25,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
-			_process.StartInfo.Arguments = args;
+			_process.StartInfo.Arguments = args + " " + Properties.Settings.Default.LaunchParameters;
 			_process.Start();
 		}
 
