@@ -12,6 +12,7 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Services.Excel;
 
 namespace CSGO_Demos_Manager.ViewModel
@@ -157,7 +158,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						HeatmapView heatmapView = new HeatmapView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(heatmapView);
-					}, demo => !IsAnalyzing));
+					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -177,7 +178,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						OverviewView overviewView = new OverviewView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(overviewView);
-					}, demo => !IsAnalyzing));
+					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -197,7 +198,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						KillsView killsView = new KillsView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(killsView);
-					}, demo => !IsAnalyzing));
+					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -277,7 +278,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 
 						},
-						() => CurrentDemo != null && !IsAnalyzing));
+						() => CurrentDemo != null && !IsAnalyzing && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -311,7 +312,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						IsAnalyzing = false;
 						HasNotification = false;
 					},
-					demo => !IsAnalyzing));
+					demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
