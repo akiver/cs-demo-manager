@@ -18,11 +18,6 @@ namespace CSGO_Demos_Manager.Services
 
 		private async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
 		{
-			if (!File.Exists(demoFilePath))
-			{
-				throw new Exception("Demo not found.");
-			}
-
 			var demo = await Task.Run(() => DemoAnalyzer.ParseDemoHeader(demoFilePath));
 			if (demo == null) return null;
 
@@ -32,6 +27,9 @@ namespace CSGO_Demos_Manager.Services
 			{
 				demo = await _cacheService.GetDemoDataFromCache(demo);
 				demo.Source = Source.Factory(demo.SourceName);
+				// Update the demo name and path because it may be renamed / moved
+				demo.Name = Path.GetFileName(demoFilePath);
+				demo.Path = demoFilePath;
 			}
 			return demo;
 		}

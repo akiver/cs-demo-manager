@@ -368,8 +368,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _showDemoDetailsCommand
 					?? (_showDemoDetailsCommand = new RelayCommand<Demo>(
-						demo =>
+						async demo =>
 						{
+							if (!File.Exists(demo.Path))
+							{
+								await _dialogService.ShowErrorAsync("Demo " +  demo.Name + " not found.", MessageDialogStyle.Affirmative);
+								return;
+							}
+
 							// Set the demo
 							var detailsViewModel = (new ViewModelLocator()).Details;
 							detailsViewModel.CurrentDemo = demo;
@@ -991,9 +997,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			NotificationMessage = "Analyzing...";
 
 			List<Demo> demosFailed = new List<Demo>();
+			List<Demo> demosNotFound = new List<Demo>();
 
 			foreach (Demo demo in SelectedDemos)
 			{
+				if (!File.Exists(demo.Path))
+				{
+					demosNotFound.Add(demo);
+					continue;
+				}
+
 				try
 				{
 					NotificationMessage = "Analyzing " + demo.Name + "...";
@@ -1011,6 +1024,11 @@ namespace CSGO_Demos_Manager.ViewModel
 			IsBusy = false;
 			HasNotification = false;
 			CommandManager.InvalidateRequerySuggested();
+
+			if (demosNotFound.Any())
+			{
+				await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
+			}
 
 			if (demosFailed.Any())
 			{
