@@ -19,7 +19,7 @@ namespace CSGO_Demos_Manager.ViewModel
 	public class MainViewModel : ViewModelBase
 	{
 
-		# region Properties
+		#region Properties
 
 		private PageTransition _currentPage;
 
