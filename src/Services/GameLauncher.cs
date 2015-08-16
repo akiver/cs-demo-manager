@@ -6,7 +6,7 @@ namespace CSGO_Demos_Manager.Services
 {
 	public class GameLauncher
 	{
-		private readonly List<string> _arguments = new List<string>{"-novid", "-applaunch 730"};
+		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid"};
 		private readonly Process _process = new Process();
 		private const string ARGUMENT_SEPARATOR = " ";
 
