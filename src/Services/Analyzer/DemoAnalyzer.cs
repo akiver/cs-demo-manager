@@ -112,9 +112,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				parser.ParseHeader();
 			}
-			catch (InvalidDataException)
+			catch (Exception)
 			{
-				// Silently ignore no CSGO demos
+				// Silently ignore no CSGO demos or unreadable file
 				return null;
 			}
 

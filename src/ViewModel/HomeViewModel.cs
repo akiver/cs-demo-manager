@@ -963,8 +963,6 @@ namespace CSGO_Demos_Manager.ViewModel
 					SelectedFolder = Folders.ElementAt(0);
 				}
 
-				await LoadDemosHeader();
-
 				if (!AppSettings.IsInternetConnectionAvailable()) return;
 
 				HasNotification = true;
@@ -1054,29 +1052,39 @@ namespace CSGO_Demos_Manager.ViewModel
 			IsBusy = true;
 			HasNotification = true;
 
-			List<string> folders = new List<string>();
-
-			if (SelectedFolder != null)
+			try
 			{
-				folders.Add(SelectedFolder);
+				List<string> folders = new List<string>();
+
+				if (SelectedFolder != null)
+				{
+					folders.Add(SelectedFolder);
+				}
+				else
+				{
+					folders = Folders.ToList();
+				}
+
+				Demos.Clear();
+
+				var demos = await _demosService.GetDemosHeader(folders);
+
+				foreach (var demo in demos)
+				{
+					Demos.Add(demo);
+				}
+
+				DataGridDemosCollection.Refresh();
 			}
-			else
+			catch (Exception e)
 			{
-				folders = Folders.ToList();
+				Logger.Instance.Log(e);
 			}
-
-			var demos = await _demosService.GetDemosHeader(folders);
-
-			Demos.Clear();
-			foreach (var demo in demos)
+			finally
 			{
-				Demos.Add(demo);
+				IsBusy = false;
+				HasNotification = false;
 			}
-
-			DataGridDemosCollection.Refresh();
-
-			IsBusy = false;
-			HasNotification = false;
 		}
 	}
 }
