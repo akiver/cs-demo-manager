@@ -199,7 +199,7 @@
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="KDHeader">
-		<Setter Property="ToolTipService.ToolTip" Value="Kills / Deaths" />
+		<Setter Property="ToolTipService.ToolTip" Value="Kills Per Death" />
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="MVPHeader">
