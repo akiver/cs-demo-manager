@@ -778,5 +778,41 @@ namespace CSGO_Demos_Manager.Properties {
                 this["LaunchParameters"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTotalDamageHealthColumn {
+            get {
+                return ((bool)(this["ShowTotalDamageHealthColumn"]));
+            }
+            set {
+                this["ShowTotalDamageHealthColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTotalDamageArmorColumn {
+            get {
+                return ((bool)(this["ShowTotalDamageArmorColumn"]));
+            }
+            set {
+                this["ShowTotalDamageArmorColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowAverageDamageColumn {
+            get {
+                return ((bool)(this["ShowAverageDamageColumn"]));
+            }
+            set {
+                this["ShowAverageDamageColumn"] = value;
+            }
+        }
     }
 }

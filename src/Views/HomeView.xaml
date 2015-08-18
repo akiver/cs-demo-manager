@@ -417,6 +417,12 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TotalKillsColumn" Width="Auto" Header="Kills" HeaderStyle="{StaticResource KillsHeader}" ElementStyle="{StaticResource TotalKillCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="AverageDamageByRoundColumn" Width="Auto" Header="ADR" HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" ElementStyle="{StaticResource AverageDamageByRoundCountDataGridTextColumnStyle}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="TotalDamageHealthColumn" Width="Auto" Header="TDH" HeaderStyle="{StaticResource TotalDamageHealthHeader}" ElementStyle="{StaticResource TotalDamageHealthCountDataGridTextColumnStyle}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="TotalDamageArmorColumn" Width="Auto" Header="TDA" HeaderStyle="{StaticResource TotalDamageArmorHeader}" ElementStyle="{StaticResource TotalDamageArmorCountDataGridTextColumnStyle}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ClutchCountColumn" Width="Auto" Header="Clutchs" Binding="{Binding ClutchCount}" HeaderStyle="{StaticResource ClutchCountHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="BombDefusedColumn" Width="Auto" Header="BD" HeaderStyle="{StaticResource BombDefusedHeader}" ElementStyle="{StaticResource BombDefusedCountDataGridTextColumnStyle}"

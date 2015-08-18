@@ -739,6 +739,40 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (playerMvp != null) playerMvp.RoundMvpCount++;
 		}
 
+		/// <summary>
+		/// When a player is hurted
+		/// Trigerred only with demos > 6/30/2015
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected void HandlePlayerHurted(object sender, PlayerHurtEventArgs e)
+		{
+			if (!IsMatchStarted) return;
+
+			// may be a bot on MM demos
+			PlayerExtended hurted = Demo.Players.FirstOrDefault(player => player.SteamId == e.Player.SteamID);
+			PlayerExtended attacker = null;
+			// attacker may be null (hurted by world)
+			if (e.Attacker != null) attacker = Demo.Players.FirstOrDefault(player => player.SteamId == e.Attacker.SteamID);
+
+			PlayerHurtedEvent playerHurtedEvent = new PlayerHurtedEvent(Parser.IngameTick)
+			{
+				Attacker = attacker,
+				Hurted = hurted,
+				Armor = e.Armor,
+				ArmorDamage = e.ArmorDamage,
+				Health = e.Health,
+				HealthDamage = e.HealthDamage,
+				HitGroup = e.Hitgroup,
+				Weapon = new Weapon(e.Weapon),
+				RoundNumber = CurrentRound.Number
+			};
+
+			attacker?.PlayersHurted.Add(playerHurtedEvent);
+			hurted?.PlayersHurted.Add(playerHurtedEvent);
+			CurrentRound.PlayersHurted.Add(playerHurtedEvent);
+		}
+
 		#endregion
 
 		#region Process

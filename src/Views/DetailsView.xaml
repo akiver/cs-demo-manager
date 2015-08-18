@@ -320,6 +320,11 @@
 							<TextBlock Text="Most killing weapon : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
 							<TextBlock Text="{Binding CurrentDemo.MostKillingWeapon.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
 						</StackPanel>
+						<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+							<Image Source="../Resources/images/bullet.png" Width="45" Height="22" />
+							<TextBlock Text="Most damaging weapon : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
+							<TextBlock Text="{Binding CurrentDemo.MostDamageWeapon.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
+						</StackPanel>
 					</StackPanel>
 				</Grid>
 			</Grid>
@@ -441,6 +446,12 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillPlayerTeam1Column" Width="Auto" Header="1K" Binding="{Binding OnekillCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" x:Name="AverageDamageTeam1Column" Width="Auto" Header="ADR" Binding="{Binding AverageDamageByRoundCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthTeam1Column" Width="Auto" Header="TDH" Binding="{Binding TotalDamageHealthCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}" x:Name="TotalDamageArmorTeam1Column" Width="Auto" Header="TDA" Binding="{Binding TotalDamageArmorCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v1Header}" x:Name="Clutch1V1Team1Column" Width="Auto" Header="1V1" Binding="{Binding Clutch1V1Count}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v2Header}" x:Name="Clutch1V2Team1Column" Width="Auto" Header="1V2" Binding="{Binding Clutch1V2Count}"
@@ -500,6 +511,12 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillPlayerTeam2Column" Width="Auto" Header="1K" Binding="{Binding OnekillCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" x:Name="AverageDamageTeam2Column" Width="Auto" Header="ADR" Binding="{Binding AverageDamageByRoundCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthTeam2Column" Width="Auto" Header="TDH" Binding="{Binding TotalDamageHealthCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}" x:Name="TotalDamageArmorTeam2Column" Width="Auto" Header="TDA" Binding="{Binding TotalDamageArmorCount}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v1Header}" x:Name="Clutch1V1Team2Column" Width="Auto" Header="1V1" Binding="{Binding Clutch1V1Count}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v2Header}" x:Name="Clutch1V2Team2Column" Width="Auto" Header="1V2" Binding="{Binding Clutch1V2Count}"
@@ -551,6 +568,12 @@
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillCountRoundColumn" Width="Auto" Header="5K" ElementStyle="{StaticResource FiveKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerPlayerHeader}" x:Name="AverageDamageCountRoundColumn" Width="Auto" Header="ADP" ElementStyle="{StaticResource AverageDamageRoundCountDataGridTextColumnStyle}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthCountRoundColumn" Width="Auto" Header="TDH" ElementStyle="{StaticResource TotalDamageHealthRoundCountDataGridTextColumnStyle}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageArmorCountRoundColumn" Width="Auto" Header="TDA" ElementStyle="{StaticResource TotalDamageArmorRoundCountDataGridTextColumnStyle}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource BombExplodedHeader}" x:Name="BombExplodedRoundColumn" Width="Auto" Header="BE" ElementStyle="{StaticResource BombExplodedRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}" x:Name="BombPlantedRoundColumn" Width="Auto" Header="BP" ElementStyle="{StaticResource BombPlantedRoundCountDataGridTextColumnStyle}"

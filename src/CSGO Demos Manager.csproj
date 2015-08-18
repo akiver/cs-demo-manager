@@ -178,6 +178,7 @@
     <Compile Include="Models\Events\KillEvent.cs" />
     <Compile Include="Models\Events\MolotovFireEndedEvent.cs" />
     <Compile Include="Models\Events\NadeBaseEvent.cs" />
+    <Compile Include="Models\Events\PlayerHurtedEvent.cs" />
     <Compile Include="Models\Events\SmokeNadeEndedEvent.cs" />
     <Compile Include="Models\Events\SmokeNadeStartedEvent.cs" />
     <Compile Include="Models\Events\WeaponFire.cs" />
@@ -543,6 +544,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\images\icons\bomb_overview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\bullet.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

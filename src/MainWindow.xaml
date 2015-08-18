@@ -324,6 +324,17 @@
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam2Column}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 									</StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<CheckBox Content="Total damage health"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+										<CheckBox Content="Total damage armor"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+										<CheckBox Content="Average damage"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+									</StackPanel>
 								</StackPanel>
 							</StackPanel>
 						</StackPanel>

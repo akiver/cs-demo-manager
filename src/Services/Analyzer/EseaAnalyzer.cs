@@ -55,6 +55,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.FireNadeStarted += HandleFireNadeStarted;
 			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
 			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
+			Parser.PlayerHurt += HandlePlayerHurted;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync()

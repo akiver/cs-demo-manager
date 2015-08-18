@@ -141,6 +141,12 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showClutchCountColumn = Settings.Default.ShowClutchCountColumn;
 
+		private bool _showTotalDamageHealthColumn = Settings.Default.ShowTotalDamageHealthColumn;
+
+		private bool _showTotalDamageArmorColumn = Settings.Default.ShowTotalDamageArmorColumn;
+
+		private bool _showAverageDamageColumn = Settings.Default.ShowAverageDamageColumn;
+
 		#endregion
 
 		#region Accessors
@@ -667,6 +673,39 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowClutchCountColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowClutchCountColumn, ref _showClutchCountColumn, value);
+			}
+		}
+
+		public bool ShowTotalDamageHealthColumn
+		{
+			get { return _showTotalDamageHealthColumn; }
+			set
+			{
+				Settings.Default.ShowTotalDamageHealthColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTotalDamageHealthColumn, ref _showTotalDamageHealthColumn, value);
+			}
+		}
+
+		public bool ShowTotalDamageArmorColumn
+		{
+			get { return _showTotalDamageArmorColumn; }
+			set
+			{
+				Settings.Default.ShowTotalDamageArmorColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTotalDamageArmorColumn, ref _showTotalDamageArmorColumn, value);
+			}
+		}
+
+		public bool ShowAverageDamageColumn
+		{
+			get { return _showAverageDamageColumn; }
+			set
+			{
+				Settings.Default.ShowAverageDamageColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowAverageDamageColumn, ref _showAverageDamageColumn, value);
 			}
 		}
 

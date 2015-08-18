@@ -395,6 +395,71 @@ namespace CSGO_Demos_Manager.Models
 		[JsonProperty("opening_kills")]
 		public ObservableCollection<OpenKillEvent> OpeningKills { get; set; }
 
+		/// <summary>
+		/// List of PlayerHurtedEvent in which the player is involved
+		/// </summary>
+		[JsonProperty("players_hurted")]
+		public ObservableCollection<PlayerHurtedEvent> PlayersHurted { get; set; }
+
+		/// <summary>
+		/// Total health damage made by the player
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageHealthCount => PlayersHurted.ToList()
+			.Where(playerHurtedEvent => playerHurtedEvent?.Attacker != null && playerHurtedEvent.Attacker.SteamId == SteamId)
+			.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+
+		/// <summary>
+		/// Total armor damage made by the player
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageArmorCount => PlayersHurted.ToList()
+			.Where(playerHurtedEvent => playerHurtedEvent?.Attacker != null && playerHurtedEvent.Attacker.SteamId == SteamId)
+			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+
+		/// <summary>
+		/// Total health damage the player has received
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageHealthReceivedCount => PlayersHurted.ToList()
+			.Where(playerHurtedEvent => playerHurtedEvent?.Hurted != null && playerHurtedEvent.Hurted.SteamId == SteamId)
+			.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+
+		/// <summary>
+		/// Total armor damage the player has received
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageArmorReceivedCount => PlayersHurted.ToList()
+			.Where(playerHurtedEvent => playerHurtedEvent?.Hurted != null && playerHurtedEvent.Hurted.SteamId == SteamId)
+			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+
+		/// <summary>
+		/// Average damage (Health + armor) the player has done during the match
+		/// </summary>
+		[JsonIgnore]
+		public double AverageDamageByRoundCount
+		{
+			get
+			{
+				double total = 0;
+
+				if (PlayersHurted.Any())
+				{
+					int roundNumber = 1;
+					foreach (PlayerHurtedEvent playerHurtedEvent in PlayersHurted.ToList().Where(
+						playerHurtedEvent => playerHurtedEvent?.Attacker != null && playerHurtedEvent.Attacker.SteamId == SteamId))
+					{
+						total += playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
+						roundNumber = playerHurtedEvent.RoundNumber;
+					}
+					if (Math.Abs(total) < 0.1) return total;
+					total = Math.Round(total / roundNumber, 1);
+				}
+
+				return total;
+			}
+		}
+
 		[JsonIgnore]
 		public decimal HeadshotPercent
 		{
@@ -505,8 +570,17 @@ namespace CSGO_Demos_Manager.Models
 		{
 			EntryKills = new ObservableCollection<EntryKillEvent>();
 			OpeningKills = new ObservableCollection<OpenKillEvent>();
+			PlayersHurted = new ObservableCollection<PlayerHurtedEvent>();
 			EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
 			OpeningKills.CollectionChanged += OnOpeningKillsCollectionChanged;
+			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
+		}
+
+		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged("TotalDamageHealthCount");
+			RaisePropertyChanged("TotalDamageArmorCount");
+			RaisePropertyChanged("AverageDamageByRoundCount");
 		}
 
 		private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -552,6 +626,7 @@ namespace CSGO_Demos_Manager.Models
 			RatingHltv = 0;
 			OpeningKills.Clear();
 			EntryKills.Clear();
+			PlayersHurted.Clear();
 		}
 
 		public PlayerExtended Clone()

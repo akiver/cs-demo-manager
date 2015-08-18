@@ -1,4 +1,5 @@
-﻿using CSGO_Demos_Manager.Models.Events;
+﻿using System;
+using CSGO_Demos_Manager.Models.Events;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -82,6 +83,11 @@ namespace CSGO_Demos_Manager.Models
 		private OpenKillEvent _openKillEvent;
 
 		private EntryKillEvent _entryKillEvent;
+
+		/// <summary>
+		/// Infos on players damages made during the round
+		/// </summary>
+		private ObservableCollection<PlayerHurtedEvent> _playerHurted = new ObservableCollection<PlayerHurtedEvent>();
 
 		#endregion
 
@@ -267,6 +273,45 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => BombExploded, ref _bombExploded, value); }
 		}
 
+		/// <summary>
+		/// List of all hits happened during the round
+		/// </summary>
+		[JsonProperty("players_hurted")]
+		public ObservableCollection<PlayerHurtedEvent> PlayersHurted
+		{
+			get { return _playerHurted; }
+			set { Set(() => PlayersHurted, ref _playerHurted, value); }
+		}
+
+		/// <summary>
+		/// Total health damage during the round
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageHealthCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.Attacker != null)
+			.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+
+		/// <summary>
+		/// Total armor damage during the round
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageArmorCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.Attacker != null)
+			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+
+		/// <summary>
+		/// Average damage made by players during the round
+		/// </summary>
+		[JsonIgnore]
+		public double AverageDamageByPlayerCount
+		{
+			get
+			{
+				double total = PlayersHurted.Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
+				current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
+				if (Math.Abs(total) < 0.1) return total;
+				return Math.Round(total / 10, 1);
+			}
+		}
+
 		#endregion
 
 		#region User data accessors
@@ -350,6 +395,27 @@ namespace CSGO_Demos_Manager.Models
 			get { return BombDefused.Count(b => b.Player.SteamId == Settings.Default.SteamID); }
 		}
 
+		/// <summary>
+		/// Damage (health + armor) made by the user during the round
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageUserCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SteamID)
+			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage);
+
+		/// <summary>
+		/// Damage health made by the user during the round
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageHealthUserCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SteamID)
+			.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+
+		/// <summary>
+		/// Damage armor made by the user during the round
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageArmorUserCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SteamID)
+			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+
 		#endregion
 
 		public Round()
@@ -358,6 +424,7 @@ namespace CSGO_Demos_Manager.Models
 			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
 			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
 			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
+			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
 		}
 
 		public override bool Equals(object obj)
@@ -401,6 +468,22 @@ namespace CSGO_Demos_Manager.Models
 		{
 			RaisePropertyChanged("BombExplodedCount");
 			RaisePropertyChanged("BombExplodedUserCount");
+		}
+
+		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			if (Settings.Default.ShowOnlyUserStats)
+			{
+				RaisePropertyChanged("TotalDamageUserCount");
+				RaisePropertyChanged("TotalDamageHealthUserCount");
+				RaisePropertyChanged("TotalDamageArmorUserCount");
+			}
+			else
+			{
+				RaisePropertyChanged("TotalDamageHealthCount");
+				RaisePropertyChanged("TotalDamageArmorCount");
+				RaisePropertyChanged("AverageDamageByPlayerCount");
+			}
 		}
 
 		#endregion

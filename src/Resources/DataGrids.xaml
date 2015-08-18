@@ -114,6 +114,22 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Kills" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="AverageDamagePerRoundHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Average Damage Per Round" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="AverageDamagePerPlayerHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Average Damage Per Player" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="TotalDamageHealthHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Total Damage Health" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="TotalDamageArmorHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Total Damage Armor" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="ClutchCountHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Number of clutch" />
 	</Style>

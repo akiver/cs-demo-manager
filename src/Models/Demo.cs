@@ -586,6 +586,76 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public List<WeaponFire> WeaponFired = new List<WeaponFire>();
 
+		/// <summary>
+		/// Total health damage has been done during the match
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageHealthCount
+		{
+			get
+			{
+				return Rounds.SelectMany(round => round.PlayersHurted.ToList()).Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+			}
+		}
+
+		/// <summary>
+		/// Total armor damage has been done during the match
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageArmorCount
+		{
+			get
+			{
+				return Rounds.SelectMany(round => round.PlayersHurted.ToList()).Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+			}
+		}
+
+		/// <summary>
+		/// Most damaging weapon of the match
+		/// </summary>
+		[JsonIgnore]
+		public Weapon MostDamageWeapon
+		{
+			get
+			{
+				Dictionary<Weapon, int> weapons = new Dictionary<Weapon, int>();
+
+				foreach (PlayerHurtedEvent playerHurtedEvent in Rounds.SelectMany(round => round.PlayersHurted))
+				{
+					if (!weapons.ContainsKey(playerHurtedEvent.Weapon))
+					{
+						weapons[playerHurtedEvent.Weapon] = playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
+					}
+					else
+					{
+						weapons[playerHurtedEvent.Weapon] += playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
+					}
+				}
+
+				return weapons.OrderByDescending(x => x.Value).FirstOrDefault().Key;
+			}
+		}
+
+		/// <summary>
+		/// Average damage (health + armor) made during the game
+		/// </summary>
+		[JsonIgnore]
+		public double AverageDamageCount
+		{
+			get
+			{
+				double total = 0;
+				foreach (Round round in Rounds.Where(round => round.PlayersHurted.Any()))
+				{
+					total = round.PlayersHurted.Aggregate(total, (current, playerHurtedEvent) =>
+					current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
+					if (Math.Abs(total) < 0.1) return total;
+					total = Math.Round(total / Rounds.Count, 1);
+				}
+				return total;
+			}
+		}
+
 		#endregion
 
 		#region User data accessors
@@ -685,6 +755,53 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		/// <summary>
+		/// Total health damage the user made during the match
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageHealthUserCount => (from round
+												  in Rounds
+												  where round.PlayersHurted.Any()
+												  from playerHurtedEvent
+												  in round.PlayersHurted
+												  where playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SteamID
+												  select playerHurtedEvent.HealthDamage).Sum();
+
+		/// <summary>
+		/// Total armor damage the user made during the match
+		/// </summary>
+		[JsonIgnore]
+		public int TotalDamageArmorUserCount => (
+			from round
+			in Rounds
+			where round.PlayersHurted.Any()
+			from playerHurtedEvent
+			in round.PlayersHurted
+			where playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SteamID
+			select playerHurtedEvent.ArmorDamage).Sum();
+
+		/// <summary>
+		/// Average damages (health + armor) made by the user during the game
+		/// </summary>
+		[JsonIgnore]
+		public double AverageDamageUserCount
+		{
+			get
+			{
+				double total = (from round
+								in Rounds
+								where round.PlayersHurted.Any()
+								from playerHurtedEvent
+								in round.PlayersHurted
+								where playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SteamID
+								select playerHurtedEvent).Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
+								current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
+				if (Math.Abs(total) < 0.1) return total;
+				total = Math.Round(total / Rounds.Count, 1);
+				return total;
+			}
+		}
+
 		#endregion
 
 		public Demo()
@@ -693,6 +810,7 @@ namespace CSGO_Demos_Manager.Models
 			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
 			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
 			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
+			Rounds.CollectionChanged += OnRoundsCollectionChanged;
 		}
 
 		public override bool Equals(object obj)
@@ -780,6 +898,23 @@ namespace CSGO_Demos_Manager.Models
 		{
 			RaisePropertyChanged("BombPlantedCount");
 			RaisePropertyChanged("BombPlantedUserCount");
+		}
+
+		private void OnRoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			if (Settings.Default.ShowOnlyUserStats)
+			{
+				RaisePropertyChanged("TotalDamageHealthUserCount");
+				RaisePropertyChanged("TotalDamageArmorUserCount");
+				RaisePropertyChanged("AverageDamageUserCount");
+			}
+			else
+			{
+				RaisePropertyChanged("TotalDamageHealthCount");
+				RaisePropertyChanged("TotalDamageArmorCount");
+				RaisePropertyChanged("AverageDamageCount");
+			}
+			RaisePropertyChanged("MostDamageWeapon");
 		}
 
 		#endregion

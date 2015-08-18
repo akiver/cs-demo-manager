@@ -80,6 +80,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.LastRoundHalf += HandleLastRoundHalf;
 			Parser.WinPanelMatch += HandleWinPanelMatch;
 			Parser.RoundFinal += HandleRoundFinal;
+			Parser.PlayerHurt += HandlePlayerHurted;
 		}
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
