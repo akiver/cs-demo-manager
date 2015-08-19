@@ -41,6 +41,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isAnalyzing;
 
+		private bool _isLeftSideVisible = true;
+
 		private bool _hasNotification;
 
 		private string _notificationMessage;
@@ -68,6 +70,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _exportDemoToExcelCommand;
 
 		private RelayCommand<bool> _showOnlyUserStatsCommand;
+
+		private RelayCommand _toggleLeftSideCommand;
 
 		private ICollectionView _playersTeam1Collection;
 
@@ -112,6 +116,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _isAnalyzing; }
 			set { Set(() => IsAnalyzing, ref _isAnalyzing, value); }
+		}
+
+		public bool IsLeftSideVisible
+		{
+			get { return _isLeftSideVisible; }
+			set { Set(() => IsLeftSideVisible, ref _isLeftSideVisible, value); }
 		}
 
 		public bool HasNotification
@@ -430,6 +440,22 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 						},
 						isChecked => !IsAnalyzing));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to toggle the left side of the view
+		/// </summary>
+		public RelayCommand ToggleLeftSideCommand
+		{
+			get
+			{
+				return _toggleLeftSideCommand
+					?? (_toggleLeftSideCommand = new RelayCommand(
+					() =>
+					{
+						IsLeftSideVisible = !IsLeftSideVisible;
+					}));
 			}
 		}
 
