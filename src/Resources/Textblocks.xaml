@@ -195,6 +195,17 @@
 		</Style.Triggers>
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="ClutchCountDataGridTextColumnStyle">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding ClutchCount}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding ClutchUserCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<Style TargetType="TextBlock" x:Key="TotalDamageHealthCountDataGridTextColumnStyle">
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">

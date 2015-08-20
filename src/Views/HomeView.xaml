@@ -423,7 +423,7 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TotalDamageArmorColumn" Width="Auto" Header="TDA" HeaderStyle="{StaticResource TotalDamageArmorHeader}" ElementStyle="{StaticResource TotalDamageArmorCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-				<DataGridTextColumn x:Name="ClutchCountColumn" Width="Auto" Header="Clutchs" Binding="{Binding ClutchCount}" HeaderStyle="{StaticResource ClutchCountHeader}"
+				<DataGridTextColumn x:Name="ClutchCountColumn" Width="Auto" Header="Clutchs" ElementStyle="{StaticResource ClutchCountDataGridTextColumnStyle}" HeaderStyle="{StaticResource ClutchCountHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="BombDefusedColumn" Width="Auto" Header="BD" HeaderStyle="{StaticResource BombDefusedHeader}" ElementStyle="{StaticResource BombDefusedCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
