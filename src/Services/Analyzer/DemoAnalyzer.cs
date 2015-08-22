@@ -338,9 +338,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			BombExplodedEvent bombExplodedEvent = new BombExplodedEvent(Parser.IngameTick)
 			{
-				Site = e.Site.ToString(),
-				Player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID)
+				Site = e.Site.ToString()
 			};
+
+			if (e.Player != null) bombExplodedEvent.Player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
 
 			Demo.BombExploded.Add(bombExplodedEvent);
 			CurrentRound.BombExploded.Add(bombExplodedEvent);
