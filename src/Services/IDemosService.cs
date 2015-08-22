@@ -43,5 +43,7 @@ namespace CSGO_Demos_Manager.Services
 		Task<Demo> AnalyzeHeatmapPoints(Demo demo);
 
 		Task<List<Demo>> GetDemosFromBackup(string jsonFile);
+
+		Task<Demo> AnalyzeBannedPlayersAsync(Demo demo);
 	}
 }

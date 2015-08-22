@@ -147,6 +147,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showAverageDamageColumn = Settings.Default.ShowAverageDamageColumn;
 
+		private bool _showBanColumns = Settings.Default.ShowBanColumns;
+
 		#endregion
 
 		#region Accessors
@@ -706,6 +708,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowAverageDamageColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowAverageDamageColumn, ref _showAverageDamageColumn, value);
+			}
+		}
+
+		public bool ShowBanColumns
+		{
+			get { return _showBanColumns; }
+			set
+			{
+				Settings.Default.ShowBanColumns = value;
+				Settings.Default.Save();
+				Set(() => ShowBanColumns, ref _showBanColumns, value);
 			}
 		}
 

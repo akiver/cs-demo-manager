@@ -255,5 +255,10 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(new List<Demo>());
 		}
+
+		public Task<Demo> AnalyzeBannedPlayersAsync(Demo demo)
+		{
+			return Task.FromResult(demo);
+		}
 	}
 }

@@ -446,6 +446,11 @@ namespace CSGO_Demos_Manager.ViewModel
 									{
 										NotificationMessage = "Analyzing " + demos[i].Name + "...";
 										demos[i] = await _demosService.AnalyzeDemo(demos[i]);
+										if (AppSettings.IsInternetConnectionAvailable())
+										{
+											await _demosService.AnalyzeBannedPlayersAsync(demos[i]);
+										}
+										await _cacheService.WriteDemoDataCache(demos[i]);
 									}
 									catch (Exception e)
 									{
@@ -1011,6 +1016,11 @@ namespace CSGO_Demos_Manager.ViewModel
 				{
 					NotificationMessage = "Analyzing " + demo.Name + "...";
 					await _demosService.AnalyzeDemo(demo);
+					if (AppSettings.IsInternetConnectionAvailable())
+					{
+						await _demosService.AnalyzeBannedPlayersAsync(demo);
+					}
+					await _cacheService.WriteDemoDataCache(demo);
 				}
 				catch (Exception e)
 				{

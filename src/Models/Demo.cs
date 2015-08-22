@@ -89,6 +89,11 @@ namespace CSGO_Demos_Manager.Models
 		private string _winStatus;
 
 		/// <summary>
+		/// Indicates if there are at least 1 banned player (OW / VAC)
+		/// </summary>
+		private bool _hasCheater;
+
+		/// <summary>
 		/// Team 1 score
 		/// </summary>
 		private int _scoreTeam1;
@@ -357,6 +362,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _winStatus; }
 			set { Set(() => WinStatus, ref _winStatus, value); }
+		}
+		
+		[JsonProperty("has_cheater")]
+		public bool HasCheater
+		{
+			get { return _hasCheater; }
+			set { Set(() => HasCheater, ref _hasCheater, value); }
 		}
 
 		[JsonProperty("score_team_1")]

@@ -393,6 +393,15 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="ScoreTeam2Column" Width="Auto" Header="ST2" Binding="{Binding ScoreTeam2}" HeaderStyle="{StaticResource ScoreTeam2Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTemplateColumn x:Name="PlayersBannedHeader" Header="Ban" Width="Auto" HeaderStyle="{StaticResource BannedPlayerHeader}"
+										Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<TextBlock Text="Yes" Background="{StaticResource RedColorBrush}" TextAlignment="Center"
+									   Visibility="{Binding HasCheater, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
 				<DataGridTextColumn x:Name="DurationColumn" Width="Auto" Header="Duration" Binding="{Binding DurationTime}" HeaderStyle="{StaticResource DurationHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDurationColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="HostnameColumn" Width="Auto" Header="Hostname" Binding="{Binding Hostname}" HeaderStyle="{StaticResource HostnameHeader}"

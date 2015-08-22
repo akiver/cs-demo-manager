@@ -166,6 +166,16 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private bool _hasBomb = false;
 
+		/// <summary>
+		/// Indicates if the player has been VAC banned
+		/// </summary>
+		private bool _isVacBanned;
+
+		/// <summary>
+		/// Indicates if the player has been overwatch banned
+		/// </summary>
+		private bool _isOverwatchBanned;
+
 		#endregion
 
 		#region Accessors
@@ -387,6 +397,20 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _1V5Count; }
 			set { Set(() => Clutch1V5Count, ref _1V5Count, value); }
+		}
+
+		[JsonProperty("vac_banned")]
+		public bool IsVacBanned
+		{
+			get { return _isVacBanned; }
+			set { Set(() => IsVacBanned, ref _isVacBanned, value); }
+		}
+
+		[JsonProperty("overwatch_banned")]
+		public bool IsOverwatchBanned
+		{
+			get { return _isOverwatchBanned; }
+			set { Set(() => IsOverwatchBanned, ref _isOverwatchBanned, value); }
 		}
 
 		[JsonProperty("entry_kills")]

@@ -332,6 +332,11 @@ namespace CSGO_Demos_Manager.ViewModel
 						try
 						{
 							CurrentDemo = await _demosService.AnalyzeDemo(demo);
+							if (AppSettings.IsInternetConnectionAvailable())
+							{
+								await _demosService.AnalyzeBannedPlayersAsync(demo);
+							}
+							await _cacheService.WriteDemoDataCache(demo);
 						}
 						catch (Exception e)
 						{

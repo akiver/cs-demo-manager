@@ -16,6 +16,47 @@ namespace CSGO_Demos_Manager.Services
 	{
 		private readonly CacheService _cacheService = new CacheService();
 
+		private readonly ISteamService _steamService;
+
+		public DemosService(ISteamService steamService)
+		{
+			_steamService = steamService;
+		}
+
+		/// <summary>
+		/// Check if there are banned players and update their banned flags
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		public async Task<Demo> AnalyzeBannedPlayersAsync(Demo demo)
+		{
+			List<string> ids = demo.Players.Select(playerExtended => playerExtended.SteamId.ToString()).ToList();
+			IEnumerable<Suspect> suspects = await _steamService.GetBanStatusForUserList(ids);
+			var enumerableSuspects = suspects as IList<Suspect> ?? suspects.ToList();
+			if (enumerableSuspects.Any())
+			{
+				// Update player's flag
+				foreach (Suspect suspect in enumerableSuspects)
+				{
+					PlayerExtended cheater = demo.Players.FirstOrDefault(p => p.SteamId.ToString() == suspect.SteamId);
+					if (cheater != null)
+					{
+						if (suspect.CommunityBanned)
+						{
+							demo.HasCheater = true;
+							cheater.IsOverwatchBanned = true;
+						}
+						if (suspect.VacBanned)
+						{
+							demo.HasCheater = true;
+							cheater.IsVacBanned = true;
+						}
+					}
+				}
+			}
+			return demo;
+		}
+
 		private async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
 		{
 			var demo = await Task.Run(() => DemoAnalyzer.ParseDemoHeader(demoFilePath));
@@ -67,8 +108,6 @@ namespace CSGO_Demos_Manager.Services
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
 			
 			demo = await analyzer.AnalyzeDemoAsync();
-
-			await _cacheService.WriteDemoDataCache(demo);
 
 			return demo;
 		}

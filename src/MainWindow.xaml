@@ -334,6 +334,9 @@
 										<CheckBox Content="Average damage"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+										<CheckBox Content="Ban (VAC / OW)"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 									</StackPanel>
 								</StackPanel>
 							</StackPanel>

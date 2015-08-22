@@ -224,6 +224,7 @@ namespace CSGO_Demos_Manager.ViewModel
 									{
 										NotificationMessage = "Analyzing " + demos[i].Name + "...";
 										demos[i] = await _demosService.AnalyzeDemo(demos[i]);
+										await _cacheService.WriteDemoDataCache(demos[i]);
 										if (demos[i].Players.Any())
 										{
 											foreach (PlayerExtended playerExtended in demos[i].Players)

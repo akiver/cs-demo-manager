@@ -54,6 +54,18 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Win/Lose/Draw" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="BannedPlayerHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="VAC / OW ban?" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="VacPlayerHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="VAC banned?" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="OverwatchPlayerHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Overwatch banned?" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="ScoreTeam1Header">
 		<Setter Property="ToolTipService.ToolTip" Value="Score team 1" />
 	</Style>

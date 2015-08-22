@@ -814,5 +814,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowAverageDamageColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowBanColumns {
+            get {
+                return ((bool)(this["ShowBanColumns"]));
+            }
+            set {
+                this["ShowBanColumns"] = value;
+            }
+        }
     }
 }
