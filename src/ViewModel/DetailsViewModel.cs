@@ -55,6 +55,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Demo> _goToKillsCommand;
 
+		private RelayCommand<Demo> _goToDemoDamagesCommand;
+
 		private RelayCommand<string> _saveCommentDemoCommand;
 
 		private RelayCommand<string> _addSuspectCommand;
@@ -208,6 +210,26 @@ namespace CSGO_Demos_Manager.ViewModel
 						KillsView killsView = new KillsView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(killsView);
+					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to demo damages control
+		/// </summary>
+		public RelayCommand<Demo> GoToDemoDamagesCommand
+		{
+			get
+			{
+				return _goToDemoDamagesCommand
+					?? (_goToDemoDamagesCommand = new RelayCommand<Demo>(
+					demo =>
+					{
+						var demoDamagesViewModel = (new ViewModelLocator()).DemoDamages;
+						demoDamagesViewModel.CurrentDemo = demo;
+						DemoDamagesView demoDamagesView = new DemoDamagesView();
+						var mainViewModel = (new ViewModelLocator()).Main;
+						mainViewModel.CurrentPage.ShowPage(demoDamagesView);
 					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}

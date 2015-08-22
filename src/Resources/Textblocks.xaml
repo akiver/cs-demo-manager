@@ -84,7 +84,12 @@
 		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 
-	<!-- TextBlock inside DataGridTextColumn for only user data -->
+    <Style TargetType="TextBlock" x:Key="DamageValueStyle">
+        <Setter Property="FontSize" Value="30" />
+        <Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+    </Style>
+
+    <!-- TextBlock inside DataGridTextColumn for only user data -->
 	<Style TargetType="TextBlock" x:Key="OneKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">

@@ -7,7 +7,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System;
 using System.Collections.Specialized;
+using System.Globalization;
+using System.Threading.Tasks;
 using CSGO_Demos_Manager.Properties;
+using DemoInfo;
 
 namespace CSGO_Demos_Manager.Models
 {
@@ -654,6 +657,111 @@ namespace CSGO_Demos_Manager.Models
 				}
 				return total;
 			}
+		}
+
+		/// <summary>
+		/// Get damage formatted string => % (damage)
+		/// </summary>
+		/// <param name="hitGroup"></param>
+		/// <param name="players"></param>
+		/// <param name="rounds"></param>
+		/// <returns></returns>
+		public async Task<string> GetDamageAsync(Hitgroup hitGroup, List<PlayerExtended> players, List<Round> rounds)
+		{
+			string result = "0";
+			int damageAreaCount = 0;
+			int totalDamageCount = 0;
+
+			await Task.Factory.StartNew(() =>
+			{
+				// get the total damage made at specific round(s) and player(s)
+				totalDamageCount += (
+				from round
+				in rounds
+				from playerHurtedEvent
+				in round.PlayersHurted
+				where playerHurtedEvent.Attacker != null && players.Contains(playerHurtedEvent.Attacker)
+				select playerHurtedEvent.HealthDamage).Sum();
+
+				// get the total damage made at the specific hitgroup
+				switch (hitGroup)
+				{
+					case Hitgroup.Chest:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.Chest
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+					case Hitgroup.Head:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.Head
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+					case Hitgroup.LeftArm:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.LeftArm
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+					case Hitgroup.RightArm:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.RightArm
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+					case Hitgroup.LeftLeg:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.LeftLeg
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+					case Hitgroup.RightLeg:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.RightLeg
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+					case Hitgroup.Stomach:
+						damageAreaCount += (
+						from round
+						in rounds
+						from playerHurtedEvent
+						in round.PlayersHurted
+						where players.Contains(playerHurtedEvent.Attacker)
+						where playerHurtedEvent.HitGroup == Hitgroup.Stomach
+						select playerHurtedEvent.HealthDamage).Sum();
+						break;
+				}
+			});
+
+			if(damageAreaCount != 0) result = Math.Round((double)damageAreaCount * 100 / totalDamageCount, 2).ToString(CultureInfo.InvariantCulture);
+			result += "% (" + damageAreaCount + ")";
+			return result;
 		}
 
 		#endregion

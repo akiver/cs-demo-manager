@@ -38,6 +38,9 @@
 		<KeyBinding Command="{Binding OverviewCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+O" />
+		<KeyBinding Command="{Binding GoToDemoDamagesCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Gesture="CTRL+D" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"/>
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
@@ -116,6 +119,23 @@
 							</Rectangle.Fill>
 						</Rectangle>
 						<TextBlock Text="Kills" Style="{StaticResource ButtonTitleStyle}" Margin="5 0 0 0"/>
+					</StackPanel>
+				</Button>
+
+				<Button Command="{Binding GoToDemoDamagesCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					ToolTip="Damages (CTRL+D)"
+					Margin="5 0 0 0"
+					Width="90"
+					Height="30">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_medical_pulse}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Damages" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 

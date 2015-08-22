@@ -39,6 +39,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<HeatmapViewModel>();
 			SimpleIoc.Default.Register<EntryKillsViewModel>();
 			SimpleIoc.Default.Register<OverviewViewModel>();
+			SimpleIoc.Default.Register<DemoDamagesViewModel>();
 		}
 
 		public MainViewModel Main
@@ -102,6 +103,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			get
 			{
 				return ServiceLocator.Current.GetInstance<OverviewViewModel>();
+			}
+		}
+
+		public DemoDamagesViewModel DemoDamages
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<DemoDamagesViewModel>();
 			}
 		}
 

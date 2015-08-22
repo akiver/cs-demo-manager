@@ -275,6 +275,7 @@
     <Compile Include="Services\SoundService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
+    <Compile Include="ViewModel\DemoDamagesViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
     <Compile Include="ViewModel\EntryKillsViewModel.cs" />
     <Compile Include="ViewModel\HeatmapViewModel.cs" />
@@ -284,6 +285,9 @@
     <Compile Include="ViewModel\SuspectsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\DemoDamagesView.xaml.cs">
+      <DependentUpon>DemoDamagesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DetailsView.xaml.cs">
       <DependentUpon>DetailsView.xaml</DependentUpon>
     </Compile>
@@ -344,6 +348,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\Textblocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DemoDamagesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -547,6 +555,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\images\bullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\model.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
