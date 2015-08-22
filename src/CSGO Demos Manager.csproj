@@ -150,6 +150,7 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToSourceConverter.cs" />
     <Compile Include="Converters\IntToBooleanConverter.cs" />
+    <Compile Include="Converters\MapNameToImageConverter.cs" />
     <Compile Include="Converters\MouseGestureExtendedConverter.cs" />
     <Compile Include="Converters\NullableValueConverter.cs" />
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
@@ -209,9 +210,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Resource Include="Resources\steam_api_key.txt" />
-    <Resource Include="Resources\images\overview\de_mirage.png" />
-    <Resource Include="Resources\images\overview\de_overpass.png" />
-    <Resource Include="Resources\images\overview\de_cbble.png" />
+    <Resource Include="Resources\images\maps\overview\de_mirage.png" />
+    <Resource Include="Resources\images\maps\overview\de_overpass.png" />
+    <Resource Include="Resources\images\maps\overview\de_cbble.png" />
     <None Include="Resources\images\icons\flashbang.png" />
     <None Include="Resources\images\icons\flashbang_exploded.png" />
     <None Include="Resources\images\icons\decoy.png" />
@@ -306,7 +307,7 @@
     <Compile Include="Views\SuspectsView.xaml.cs">
       <DependentUpon>SuspectsView.xaml</DependentUpon>
     </Compile>
-    <Resource Include="Resources\images\overview\de_season.png" />
+    <Resource Include="Resources\images\maps\overview\de_season.png" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -418,8 +419,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\overview\de_cache.png" />
-    <Resource Include="Resources\images\overview\de_nuke.png" />
+    <Resource Include="Resources\images\maps\overview\de_cache.png" />
+    <Resource Include="Resources\images\maps\overview\de_nuke.png" />
     <Resource Include="Resources\images\logo\ebot.png" />
     <Resource Include="Resources\images\logo\pov.png" />
     <Resource Include="Resources\images\logo\esea.png" />
@@ -431,8 +432,8 @@
     <Resource Include="Resources\images\deagle.png" />
     <Resource Include="Resources\images\bomb.png" />
     <Resource Include="app.ico" />
-    <Resource Include="Resources\images\overview\de_dust2.png" />
-    <Resource Include="Resources\images\overview\de_inferno.png" />
+    <Resource Include="Resources\images\maps\overview\de_dust2.png" />
+    <Resource Include="Resources\images\maps\overview\de_inferno.png" />
     <Resource Include="Resources\images\headshot.png" />
   </ItemGroup>
   <ItemGroup>
@@ -548,7 +549,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\overview\de_train.png" />
+    <Resource Include="Resources\images\maps\overview\de_train.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\images\icons\bomb_overview.png" />
@@ -558,6 +559,50 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\images\model.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\maps\preview\unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\maps\preview\dust2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\maps\preview\ali.png" />
+    <Resource Include="Resources\images\maps\preview\aztec.png" />
+    <Resource Include="Resources\images\maps\preview\black_gold.png" />
+    <Resource Include="Resources\images\maps\preview\cache.png" />
+    <Resource Include="Resources\images\maps\preview\castle.png" />
+    <Resource Include="Resources\images\maps\preview\cobblestone.png" />
+    <Resource Include="Resources\images\maps\preview\dust.png" />
+    <Resource Include="Resources\images\maps\preview\facade.png" />
+    <Resource Include="Resources\images\maps\preview\favela.png" />
+    <Resource Include="Resources\images\maps\preview\gwalior.png" />
+    <Resource Include="Resources\images\maps\preview\inferno.png" />
+    <Resource Include="Resources\images\maps\preview\inferno_ce.png" />
+    <Resource Include="Resources\images\maps\preview\log.png" />
+    <Resource Include="Resources\images\maps\preview\marquis.png" />
+    <Resource Include="Resources\images\maps\preview\mirage.png" />
+    <Resource Include="Resources\images\maps\preview\mist.png" />
+    <Resource Include="Resources\images\maps\preview\nuke.png" />
+    <Resource Include="Resources\images\maps\preview\overpass.png" />
+    <Resource Include="Resources\images\maps\preview\rails.png" />
+    <Resource Include="Resources\images\maps\preview\resort.png" />
+    <Resource Include="Resources\images\maps\preview\seaside.png" />
+    <Resource Include="Resources\images\maps\preview\season.png" />
+    <Resource Include="Resources\images\maps\preview\train.png" />
+    <Resource Include="Resources\images\maps\preview\tuscan.png" />
+    <Resource Include="Resources\images\maps\preview\vertigo.png" />
+    <Resource Include="Resources\images\maps\preview\zoo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\images\maps\preview\bazaar.png" />
+    <Resource Include="Resources\images\maps\preview\chinatown.png" />
+    <Resource Include="Resources\images\maps\preview\contra.png" />
+    <Resource Include="Resources\images\maps\preview\crown.png" />
+    <Resource Include="Resources\images\maps\preview\fire.png" />
+    <Resource Include="Resources\images\maps\preview\overgrown.png" />
+    <Resource Include="Resources\images\maps\preview\print.png" />
+    <Resource Include="Resources\images\maps\preview\ruins.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

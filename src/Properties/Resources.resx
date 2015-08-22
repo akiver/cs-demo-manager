@@ -121,30 +121,6 @@
   <data name="decoy" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\icons\decoy.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="de_cache" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_cache.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_cbble" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_cbble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_dust2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_dust2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_inferno" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_inferno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_mirage" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_mirage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_nuke" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_nuke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_overpass" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_overpass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="de_season" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_season.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="ebot" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\logo\ebot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -217,9 +193,6 @@
   <data name="colors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="de_train" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\overview\de_train.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="bomb_overview" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\icons\bomb_overview.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -228,5 +201,137 @@
   </data>
   <data name="model" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_cache" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_cache.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_cbble" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_cbble.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_dust2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_dust2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_inferno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_inferno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_mirage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_mirage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_nuke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_nuke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_overpass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_overpass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_season" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_season.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_train" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_train.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dust2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\dust2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ali" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\ali.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="aztec" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\aztec.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="bazaar" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\bazaar.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="black_gold" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\black_gold.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cache" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\cache.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="castle" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\castle.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="chinatown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\chinatown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cobblestone" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\cobblestone.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="contra" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\contra.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="crown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\crown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="dust" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\dust.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="facade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\facade.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="favela" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\favela.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="gwalior" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\gwalior.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inferno" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\inferno.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="inferno_ce" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\inferno_ce.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="log" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\log.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="marquis" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\marquis.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mirage" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\mirage.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mist" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\mist.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="nuke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\nuke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overgrown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\overgrown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="overpass" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\overpass.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="print" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\print.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="rails" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\rails.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="resort" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\resort.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ruins" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\ruins.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="seaside" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\seaside.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="season" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\season.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="train" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\train.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tuscan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\tuscan.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="unknown" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\unknown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="vertigo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\vertigo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zoo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\zoo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

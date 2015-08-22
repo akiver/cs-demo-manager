@@ -14,6 +14,7 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
+			<helpers:MapNameToImageConverter x:Key="MapNameToImageConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	
@@ -245,6 +246,10 @@
 				</Grid.RowDefinitions>
 
 				<StackPanel Orientation="Vertical" Grid.Row="0">
+					<Border BorderThickness="1" BorderBrush="{StaticResource LightGreenBrush}">
+						<Image Source="{Binding CurrentDemo.MapName, Converter={StaticResource MapNameToImageConverter}}"
+							   Stretch="Fill" MaxHeight="250"/>
+					</Border>
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
