@@ -143,7 +143,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			// Check if it's a POV demo
 			Match match = LocalRegex.Match(header.ServerName);
-			if (match.Success)
+			if (match.Success || header.ServerName.Contains("localhost"))
 			{
 				demo.Type = "POV";
 				return Source.Factory("pov");
