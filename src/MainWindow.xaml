@@ -340,12 +340,40 @@
 									</StackPanel>
 								</StackPanel>
 							</StackPanel>
+							<StackPanel Margin="10">
+								<TextBlock Text="Moviemaking" Style="{StaticResource TitleSettingsStyle}" />
+								<StackPanel Orientation="Horizontal">
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto"></RowDefinition>
+											<RowDefinition Height="Auto"></RowDefinition>
+										</Grid.RowDefinitions>
+										<CheckBox x:Name="EnableMoviemakerModeCheckbox" Grid.Row="0" Content="Enable moviemaker mode"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}">
+											<i:Interaction.Triggers>
+												<i:EventTrigger EventName="Checked">
+													<command:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerModeCommand, Mode=OneWay}"
+																		CommandParameter="{Binding IsChecked, ElementName=EnableMoviemakerModeCheckbox}" />
+												</i:EventTrigger>
+											</i:Interaction.Triggers>
+										</CheckBox>
+										<StackPanel Grid.Row="1">
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="csgo.exe path : " Style="{StaticResource SubTitleSettingsStyle}"/>
+												<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.CsgoExePath}" IsEnabled="False" />
+												<Button Content="Browse" Margin="10 0 0 0" IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
+														Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}"/>
+											</StackPanel>
+										</StackPanel>
+									</Grid>
+								</StackPanel>
+							</StackPanel>
 						</StackPanel>
 						<Grid Grid.Row="2">
 							<TextBlock Text="{Binding CreditsText}" Style="{StaticResource CreditsTextStyle}"/>
 						</Grid>
 					</Grid>
-
 				</Grid>
 			</controls:Flyout>
 		</controls:FlyoutsControl>

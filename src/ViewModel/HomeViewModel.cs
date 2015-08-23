@@ -762,15 +762,23 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _watchDemoCommand
 					?? (_watchDemoCommand = new RelayCommand<Demo>(
-					demo =>
+					async demo =>
 					{
 						if (!WatchDemoCommand.CanExecute(null))
 						{
 							return;
 						}
-						// Play the demo
-						GameLauncher launcher = new GameLauncher();
-						launcher.WatchDemo(demo);
+
+						try
+						{
+							// Play the demo
+							GameLauncher launcher = new GameLauncher();
+							launcher.WatchDemo(demo);
+						}
+						catch (Exception e)
+						{
+							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
+						}
 					},
 					demo => SelectedDemo != null && AppSettings.IsCsgoInstalled()));
 			}

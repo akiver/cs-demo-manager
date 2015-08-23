@@ -45,6 +45,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _navigateToLogFile;
 
+		private RelayCommand _selectCsgoExePathCommand;
+
+		private RelayCommand _enableMoviemakerModeCommand;
+
 		private readonly ICacheService _cacheService;
 
 		private readonly IDemosService _demosService;
@@ -148,6 +152,10 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _showAverageDamageColumn = Settings.Default.ShowAverageDamageColumn;
 
 		private bool _showBanColumns = Settings.Default.ShowBanColumns;
+
+		private string _csgoExePath = Settings.Default.CsgoExePath;
+
+		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
 
 		#endregion
 
@@ -722,6 +730,28 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public string CsgoExePath
+		{
+			get { return _csgoExePath; }
+			set
+			{
+				Settings.Default.CsgoExePath = value;
+				Settings.Default.Save();
+				Set(() => CsgoExePath, ref _csgoExePath, value);
+			}
+		}
+
+		public bool EnableMoviemakerMode
+		{
+			get { return _enableMoviemakerMode; }
+			set
+			{
+				Settings.Default.MoviemakerMode = value;
+				Settings.Default.Save();
+				Set(() => EnableMoviemakerMode, ref _enableMoviemakerMode, value);
+			}
+		}
+
 		public long SteamId
 		{
 			get { return _steamId; }
@@ -936,6 +966,62 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command to enable moviemaker mode
+		/// </summary>
+		public RelayCommand EnableMoviemakerModeCommand
+		{
+			get
+			{
+				return _enableMoviemakerModeCommand
+					?? (_enableMoviemakerModeCommand = new RelayCommand(
+					async () =>
+					{
+						string warningMessage =
+							"Enabling moviemaker mode change the way the game is started (when you click on all \"Watch\" buttons."
+							+ Environment.NewLine + "It will use the tool \"Half-Life Advanced Effects\" (HLAE) which is technically a hack."
+							+ Environment.NewLine + "You should use it ONLY if you know what you are doing AND to make moviemaking related stuff."
+							+ Environment.NewLine + "If you don't know what is this or you are not planning to make movies just click on cancel."
+							+ Environment.NewLine + "If you enable it, the game is launched with the \"-insecure\" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.";
+
+						if (Settings.Default.CsgoExePath == string.Empty)
+						{
+							warningMessage += Environment.NewLine + "Please select the csgo.exe file location to enable it.";
+						}
+
+						var enable = await _dialogService.ShowMessageAsync(warningMessage, MessageDialogStyle.AffirmativeAndNegative);
+
+						if (enable == MessageDialogResult.Affirmative)
+						{
+							if (Settings.Default.CsgoExePath == string.Empty)
+							{
+								EnableMoviemakerMode = ShowCsgoExeDialog();
+							}
+						}
+						else
+						{
+							EnableMoviemakerMode = false;
+						}
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to select the csgo.exe location
+		/// </summary>
+		public RelayCommand SelectCsgoExePathCommand
+		{
+			get
+			{
+				return _selectCsgoExePathCommand
+					?? (_selectCsgoExePathCommand = new RelayCommand(
+					() =>
+					{
+						ShowCsgoExeDialog();
+					}));
+			}
+		}
+
 		#endregion
 
 		#region Callbacks
@@ -957,6 +1043,30 @@ namespace CSGO_Demos_Manager.ViewModel
 			_dialogService = dialogService;
 			_cacheService = chacheService;
 			_demosService = demosService;
+		}
+
+		/// <summary>
+		/// Display a file dialog to select the csgo.exe location
+		/// </summary>
+		/// <returns></returns>
+		private bool ShowCsgoExeDialog()
+		{
+			bool enableMoviemakerMode = false;
+
+			OpenFileDialog dialog = new OpenFileDialog
+			{
+				DefaultExt = "csgo.exe",
+				Filter = "EXE Files (csgo.exe)|csgo.exe"
+			};
+
+			bool? result = dialog.ShowDialog();
+			if (result != null && (bool)result)
+			{
+				CsgoExePath = dialog.FileName;
+				enableMoviemakerMode = true;
+			}
+
+			return enableMoviemakerMode;
 		}
 	}
 }

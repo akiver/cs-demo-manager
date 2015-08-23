@@ -53,26 +53,6 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
-    <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x64\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
-    <OutputPath>bin\x64\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x64</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-  </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>app.ico</ApplicationIcon>
   </PropertyGroup>
@@ -80,6 +60,10 @@
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AfxCppCli, Version=1.0.5707.30208, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\Compressed\advancedfx-master\AfxGui\Resources\AfxCppCli.dll</HintPath>
+    </Reference>
     <Reference Include="DemoInfo, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dc7de83c756ec63d, processorArchitecture=MSIL">
       <HintPath>..\packages\DemoInfo.1.1.0-ci1439734307-fe66823\lib\net45\DemoInfo.dll</HintPath>
       <Private>True</Private>
@@ -156,6 +140,7 @@
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
+    <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
@@ -209,28 +194,46 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Resource Include="Resources\steam_api_key.txt" />
-    <Resource Include="Resources\images\maps\overview\de_mirage.png" />
-    <Resource Include="Resources\images\maps\overview\de_overpass.png" />
-    <Resource Include="Resources\images\maps\overview\de_cbble.png" />
-    <None Include="Resources\images\icons\flashbang.png" />
-    <None Include="Resources\images\icons\flashbang_exploded.png" />
-    <None Include="Resources\images\icons\decoy.png" />
-    <None Include="Resources\images\icons\hegrenade.png" />
-    <None Include="Resources\images\icons\incendiary.png" />
-    <None Include="Resources\images\icons\molotov.png" />
-    <None Include="Resources\images\icons\smokegrenade.png" />
-    <None Include="Resources\images\icons\bomb_exploded.png" />
-    <None Include="Resources\images\icons\he_exploded.png" />
-    <None Include="Resources\images\icons\kill.png" />
-    <None Include="Resources\images\icons\molotov_burning.png" />
-    <None Include="Resources\images\icons\smoke.png" />
-    <None Include="Resources\images\icons\smoke_start.png" />
-    <None Include="Resources\images\icons\defuser.png" />
-    <None Include="Resources\images\icons\decoy_exploded.png" />
-    <None Include="Resources\images\icons\decoy_screaming.png" />
-    <None Include="Resources\images\icons\bomb.png" />
-    <None Include="Resources\images\colors.jpg" />
+    <Resource Include="resources\steam_api_key.txt" />
+    <Resource Include="resources\images\maps\overview\de_mirage.png" />
+    <Resource Include="resources\images\maps\overview\de_overpass.png" />
+    <Resource Include="resources\images\maps\overview\de_cbble.png" />
+    <None Include="AfxHook.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\depth.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\greenmatte.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\invisible.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\shaders\afx_line_ps20.fxo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\shaders\afx_line_vs20.fxo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\images\icons\flashbang.png" />
+    <None Include="resources\images\icons\flashbang_exploded.png" />
+    <None Include="resources\images\icons\decoy.png" />
+    <None Include="resources\images\icons\hegrenade.png" />
+    <None Include="resources\images\icons\incendiary.png" />
+    <None Include="resources\images\icons\molotov.png" />
+    <None Include="resources\images\icons\smokegrenade.png" />
+    <None Include="resources\images\icons\bomb_exploded.png" />
+    <None Include="resources\images\icons\he_exploded.png" />
+    <None Include="resources\images\icons\kill.png" />
+    <None Include="resources\images\icons\molotov_burning.png" />
+    <None Include="resources\images\icons\smoke.png" />
+    <None Include="resources\images\icons\smoke_start.png" />
+    <None Include="resources\images\icons\defuser.png" />
+    <None Include="resources\images\icons\decoy_exploded.png" />
+    <None Include="resources\images\icons\decoy_screaming.png" />
+    <None Include="resources\images\icons\bomb.png" />
+    <None Include="resources\images\colors.jpg" />
     <Compile Include="Services\Analyzer\CevoAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EseaAnalyzer.cs" />
@@ -307,7 +310,7 @@
     <Compile Include="Views\SuspectsView.xaml.cs">
       <DependentUpon>SuspectsView.xaml</DependentUpon>
     </Compile>
-    <Resource Include="Resources\images\maps\overview\de_season.png" />
+    <Resource Include="resources\images\maps\overview\de_season.png" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -320,35 +323,35 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\CheckBoxs.xaml">
+    <Page Include="resources\CheckBoxs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Colors.xaml">
+    <Page Include="resources\Colors.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\ComboBoxs.xaml">
+    <Page Include="resources\ComboBoxs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\ContextMenu.xaml">
+    <Page Include="resources\ContextMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\DataGrids.xaml">
+    <Page Include="resources\DataGrids.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Icons.xaml">
+    <Page Include="resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Resources\ListView.xaml">
+    <Page Include="resources\ListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Resources\Textblocks.xaml">
+    <Page Include="resources\Textblocks.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -401,16 +404,16 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="Resources\Entypo.ttf" />
+    <Resource Include="resources\Entypo.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\WindowsIcons-license.txt" />
+    <Resource Include="resources\WindowsIcons-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Entypo-license.txt" />
+    <Resource Include="resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\WpfPageTransitions\WpfPageTransitions.csproj">
@@ -419,22 +422,22 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\maps\overview\de_cache.png" />
-    <Resource Include="Resources\images\maps\overview\de_nuke.png" />
-    <Resource Include="Resources\images\logo\ebot.png" />
-    <Resource Include="Resources\images\logo\pov.png" />
-    <Resource Include="Resources\images\logo\esea.png" />
-    <Resource Include="Resources\images\logo\valve.png" />
-    <Resource Include="Resources\images\logo\cevo.png" />
-    <Resource Include="Resources\images\logo\faceit.png" />
-    <Resource Include="Resources\images\suicide-black.png" />
-    <Resource Include="Resources\images\suicide.png" />
-    <Resource Include="Resources\images\deagle.png" />
-    <Resource Include="Resources\images\bomb.png" />
+    <Resource Include="resources\images\maps\overview\de_cache.png" />
+    <Resource Include="resources\images\maps\overview\de_nuke.png" />
+    <Resource Include="resources\images\logo\ebot.png" />
+    <Resource Include="resources\images\logo\pov.png" />
+    <Resource Include="resources\images\logo\esea.png" />
+    <Resource Include="resources\images\logo\valve.png" />
+    <Resource Include="resources\images\logo\cevo.png" />
+    <Resource Include="resources\images\logo\faceit.png" />
+    <Resource Include="resources\images\suicide-black.png" />
+    <Resource Include="resources\images\suicide.png" />
+    <Resource Include="resources\images\deagle.png" />
+    <Resource Include="resources\images\bomb.png" />
     <Resource Include="app.ico" />
-    <Resource Include="Resources\images\maps\overview\de_dust2.png" />
-    <Resource Include="Resources\images\maps\overview\de_inferno.png" />
-    <Resource Include="Resources\images\headshot.png" />
+    <Resource Include="resources\images\maps\overview\de_dust2.png" />
+    <Resource Include="resources\images\maps\overview\de_inferno.png" />
+    <Resource Include="resources\images\headshot.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
@@ -449,160 +452,166 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\bomb_defused.wav">
+    <None Include="resources\sounds\bomb_defused.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\he_explode.wav">
+    <None Include="resources\sounds\he_explode.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\bomb_planted.wav">
+    <None Include="resources\sounds\bomb_planted.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\bomb_exploded.wav">
+    <None Include="resources\sounds\bomb_exploded.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\ct_death.wav">
+    <None Include="resources\sounds\ct_death.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\ct_decoy.wav">
+    <None Include="resources\sounds\ct_decoy.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\ct_flashbang.wav">
+    <None Include="resources\sounds\ct_flashbang.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\ct_grenade.wav">
+    <None Include="resources\sounds\ct_grenade.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\ct_molotov.wav">
+    <None Include="resources\sounds\ct_molotov.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\ct_smoke.wav">
+    <None Include="resources\sounds\ct_smoke.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\flashbang_explode.wav">
+    <None Include="resources\sounds\flashbang_explode.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\inc_grenade_detonate.wav">
+    <None Include="resources\sounds\inc_grenade_detonate.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\molotov_detonate.wav">
+    <None Include="resources\sounds\molotov_detonate.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\smoke_explode.wav">
+    <None Include="resources\sounds\smoke_explode.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\t_death.wav">
+    <None Include="resources\sounds\t_death.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\t_decoy.wav">
+    <None Include="resources\sounds\t_decoy.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\t_flashbang.wav">
+    <None Include="resources\sounds\t_flashbang.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\t_grenade.wav">
+    <None Include="resources\sounds\t_grenade.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\t_molotov.wav">
+    <None Include="resources\sounds\t_molotov.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\sounds\t_smoke.wav">
+    <None Include="resources\sounds\t_smoke.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\maps\overview\de_train.png" />
+    <Resource Include="resources\images\maps\overview\de_train.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\icons\bomb_overview.png" />
+    <Resource Include="resources\images\icons\bomb_overview.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\bullet.png" />
+    <Resource Include="resources\images\bullet.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\model.png" />
+    <Resource Include="resources\images\model.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\maps\preview\unknown.png" />
+    <Resource Include="resources\images\maps\preview\unknown.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\maps\preview\dust2.png" />
+    <Resource Include="resources\images\maps\preview\dust2.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\maps\preview\ali.png" />
-    <Resource Include="Resources\images\maps\preview\aztec.png" />
-    <Resource Include="Resources\images\maps\preview\black_gold.png" />
-    <Resource Include="Resources\images\maps\preview\cache.png" />
-    <Resource Include="Resources\images\maps\preview\castle.png" />
-    <Resource Include="Resources\images\maps\preview\cobblestone.png" />
-    <Resource Include="Resources\images\maps\preview\dust.png" />
-    <Resource Include="Resources\images\maps\preview\facade.png" />
-    <Resource Include="Resources\images\maps\preview\favela.png" />
-    <Resource Include="Resources\images\maps\preview\gwalior.png" />
-    <Resource Include="Resources\images\maps\preview\inferno.png" />
-    <Resource Include="Resources\images\maps\preview\inferno_ce.png" />
-    <Resource Include="Resources\images\maps\preview\log.png" />
-    <Resource Include="Resources\images\maps\preview\marquis.png" />
-    <Resource Include="Resources\images\maps\preview\mirage.png" />
-    <Resource Include="Resources\images\maps\preview\mist.png" />
-    <Resource Include="Resources\images\maps\preview\nuke.png" />
-    <Resource Include="Resources\images\maps\preview\overpass.png" />
-    <Resource Include="Resources\images\maps\preview\rails.png" />
-    <Resource Include="Resources\images\maps\preview\resort.png" />
-    <Resource Include="Resources\images\maps\preview\seaside.png" />
-    <Resource Include="Resources\images\maps\preview\season.png" />
-    <Resource Include="Resources\images\maps\preview\train.png" />
-    <Resource Include="Resources\images\maps\preview\tuscan.png" />
-    <Resource Include="Resources\images\maps\preview\vertigo.png" />
-    <Resource Include="Resources\images\maps\preview\zoo.png" />
+    <Resource Include="resources\images\maps\preview\ali.png" />
+    <Resource Include="resources\images\maps\preview\aztec.png" />
+    <Resource Include="resources\images\maps\preview\black_gold.png" />
+    <Resource Include="resources\images\maps\preview\cache.png" />
+    <Resource Include="resources\images\maps\preview\castle.png" />
+    <Resource Include="resources\images\maps\preview\cobblestone.png" />
+    <Resource Include="resources\images\maps\preview\dust.png" />
+    <Resource Include="resources\images\maps\preview\facade.png" />
+    <Resource Include="resources\images\maps\preview\favela.png" />
+    <Resource Include="resources\images\maps\preview\gwalior.png" />
+    <Resource Include="resources\images\maps\preview\inferno.png" />
+    <Resource Include="resources\images\maps\preview\inferno_ce.png" />
+    <Resource Include="resources\images\maps\preview\log.png" />
+    <Resource Include="resources\images\maps\preview\marquis.png" />
+    <Resource Include="resources\images\maps\preview\mirage.png" />
+    <Resource Include="resources\images\maps\preview\mist.png" />
+    <Resource Include="resources\images\maps\preview\nuke.png" />
+    <Resource Include="resources\images\maps\preview\overpass.png" />
+    <Resource Include="resources\images\maps\preview\rails.png" />
+    <Resource Include="resources\images\maps\preview\resort.png" />
+    <Resource Include="resources\images\maps\preview\seaside.png" />
+    <Resource Include="resources\images\maps\preview\season.png" />
+    <Resource Include="resources\images\maps\preview\train.png" />
+    <Resource Include="resources\images\maps\preview\tuscan.png" />
+    <Resource Include="resources\images\maps\preview\vertigo.png" />
+    <Resource Include="resources\images\maps\preview\zoo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\images\maps\preview\bazaar.png" />
-    <Resource Include="Resources\images\maps\preview\chinatown.png" />
-    <Resource Include="Resources\images\maps\preview\contra.png" />
-    <Resource Include="Resources\images\maps\preview\crown.png" />
-    <Resource Include="Resources\images\maps\preview\fire.png" />
-    <Resource Include="Resources\images\maps\preview\overgrown.png" />
-    <Resource Include="Resources\images\maps\preview\print.png" />
-    <Resource Include="Resources\images\maps\preview\ruins.png" />
+    <Resource Include="resources\images\maps\preview\bazaar.png" />
+    <Resource Include="resources\images\maps\preview\chinatown.png" />
+    <Resource Include="resources\images\maps\preview\contra.png" />
+    <Resource Include="resources\images\maps\preview\crown.png" />
+    <Resource Include="resources\images\maps\preview\fire.png" />
+    <Resource Include="resources\images\maps\preview\overgrown.png" />
+    <Resource Include="resources\images\maps\preview\print.png" />
+    <Resource Include="resources\images\maps\preview\ruins.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AfxCppCli.dll" />
+    <Content Include="AfxHookSource.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

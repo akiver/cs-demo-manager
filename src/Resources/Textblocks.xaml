@@ -17,7 +17,12 @@
 		<Setter Property="Margin" Value="0 0 0 10" />
 	</Style>
 
-	<Style TargetType="TextBlock" x:Key="CreditsTextStyle">
+    <Style TargetType="TextBlock" x:Key="SubTitleSettingsStyle">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="CreditsTextStyle">
 		<Setter Property="FontSize" Value="18" />
 		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
 		<Setter Property="VerticalAlignment" Value="Center" />

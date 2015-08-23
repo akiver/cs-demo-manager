@@ -826,5 +826,29 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowBanColumns"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MoviemakerMode {
+            get {
+                return ((bool)(this["MoviemakerMode"]));
+            }
+            set {
+                this["MoviemakerMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string CsgoExePath {
+            get {
+                return ((string)(this["CsgoExePath"]));
+            }
+            set {
+                this["CsgoExePath"] = value;
+            }
+        }
     }
 }

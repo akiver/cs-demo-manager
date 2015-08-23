@@ -1,6 +1,8 @@
 ﻿using CSGO_Demos_Manager.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
+using CSGO_Demos_Manager.Exceptions.Launcher;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -18,15 +20,28 @@ namespace CSGO_Demos_Manager.Services
 
 		public void StartGame()
 		{
-			Process[] currentProcess = Process.GetProcessesByName("csgo");
-			if (currentProcess.Length > 0)
+			if (Properties.Settings.Default.MoviemakerMode)
 			{
-				currentProcess[0].Kill();
+				if (!File.Exists(Properties.Settings.Default.CsgoExePath))
+				{
+					throw new CsgoNotFoundException();
+				}
+				string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
+				args += " -steam -insecure +sv_lan 1 -game csgo " + Properties.Settings.Default.LaunchParameters;
+				AfxCppCli.AfxHook.LauchAndHook(Properties.Settings.Default.CsgoExePath, args, Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\AfxHookSource.dll");
 			}
+			else
+			{
+				Process[] currentProcess = Process.GetProcessesByName("csgo");
+				if (currentProcess.Length > 0)
+				{
+					currentProcess[0].Kill();
+				}
 
-			string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
-			_process.StartInfo.Arguments = args + " " + Properties.Settings.Default.LaunchParameters;
-			_process.Start();
+				string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
+				_process.StartInfo.Arguments = args + " " + Properties.Settings.Default.LaunchParameters;
+				_process.Start();
+			}
 		}
 
 		public void WatchDemo(Demo demo)
