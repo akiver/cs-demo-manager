@@ -134,12 +134,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 			demo.Duration = header.PlaybackTime;
 			demo.MapName = header.MapName;
-			demo.Source = DetermineDemoSource(demo, parser, header);
+			demo.Source = DetermineDemoSource(demo, header);
 
 			return demo;
 		}
 
-		private static Source DetermineDemoSource(Demo demo, DemoParser parser, DemoHeader header)
+		private static Source DetermineDemoSource(Demo demo, DemoHeader header)
 		{
 			// Check if it's a POV demo
 			Match match = LocalRegex.Match(header.ServerName);
