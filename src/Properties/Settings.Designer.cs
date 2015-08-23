@@ -850,5 +850,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["CsgoExePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowLeftPartDetails {
+            get {
+                return ((bool)(this["ShowLeftPartDetails"]));
+            }
+            set {
+                this["ShowLeftPartDetails"] = value;
+            }
+        }
     }
 }

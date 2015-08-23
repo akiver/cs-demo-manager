@@ -41,7 +41,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isAnalyzing;
 
-		private bool _isLeftSideVisible = true;
+		private bool _isLeftSideVisible = Properties.Settings.Default.ShowLeftPartDetails;
 
 		private bool _hasNotification;
 
@@ -123,7 +123,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		public bool IsLeftSideVisible
 		{
 			get { return _isLeftSideVisible; }
-			set { Set(() => IsLeftSideVisible, ref _isLeftSideVisible, value); }
+			set
+			{
+				Properties.Settings.Default.ShowLeftPartDetails = value;
+				Properties.Settings.Default.Save();
+				Set(() => IsLeftSideVisible, ref _isLeftSideVisible, value);
+			}
 		}
 
 		public bool HasNotification
