@@ -245,95 +245,100 @@
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
 
-			<!-- Slider -->
-			<Grid Grid.Column="0" Width="10">
-				<Button Height="400" Margin="2" Command="{Binding ToggleLeftSideCommand}" Style="{DynamicResource AccentedSquareButtonStyle}" Width="10" />
-			</Grid>
-
-			<Grid Margin="10" Grid.Column="1" Visibility="{Binding IsLeftSideVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-
-				<StackPanel Orientation="Vertical" Grid.Row="0">
-					<Border BorderThickness="1" BorderBrush="{StaticResource LightGreenBrush}">
-						<Image Source="{Binding CurrentDemo.MapName, Converter={StaticResource MapNameToImageConverter}}"
-							   Stretch="Fill" MaxHeight="250"/>
-					</Border>
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Text="Filename : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Text="{Binding CurrentDemo.Name}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+			<ScrollViewer>
+				<Grid Grid.Column="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<!-- Slider -->
+					<Grid Grid.Column="0" Width="10">
+						<Button Height="400" Margin="2" Command="{Binding ToggleLeftSideCommand}" Style="{DynamicResource AccentedSquareButtonStyle}" Width="10" />
 					</Grid>
 
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Text="Map : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Text="{Binding CurrentDemo.MapName}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
-					</Grid>
-
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Text="Type : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Text="{Binding CurrentDemo.Type}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
-					</Grid>
-
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Text="Hostname : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Text="{Binding CurrentDemo.Hostname}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
-					</Grid>
-
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Text="Clientname : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Text="{Binding CurrentDemo.ClientName}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
-					</Grid>
-
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
-						<TextBlock Text="Tickrate : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Text="{Binding CurrentDemo.ServerTickrate}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
-					</Grid>
-
-					<Grid>
+					<Grid Margin="10" Grid.Column="1" Visibility="{Binding IsLeftSideVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="*" />
 						</Grid.RowDefinitions>
-						<TextBlock Text="Comment : " Grid.Row="0" Style="{StaticResource LabelGeneralInfoDemo}" VerticalAlignment="Bottom"/>
-						<TextBox Grid.Row="1" x:Name="TextBoxComment" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CurrentDemo.Comment}" />
-						<Button Grid.Row="2"
+
+						<StackPanel Orientation="Vertical" Grid.Row="0">
+							<Border BorderThickness="1" BorderBrush="{StaticResource LightGreenBrush}">
+								<Image Source="{Binding CurrentDemo.MapName, Converter={StaticResource MapNameToImageConverter}}"
+							   Stretch="Fill" MaxHeight="250"/>
+							</Border>
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="Filename : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<TextBlock Text="{Binding CurrentDemo.Name}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="Map : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<TextBlock Text="{Binding CurrentDemo.MapName}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="Type : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<TextBlock Text="{Binding CurrentDemo.Type}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="Hostname : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<TextBlock Text="{Binding CurrentDemo.Hostname}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="Clientname : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<TextBlock Text="{Binding CurrentDemo.ClientName}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
+
+								<TextBlock Text="Tickrate : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<TextBlock Text="{Binding CurrentDemo.ServerTickrate}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<TextBlock Text="Comment : " Grid.Row="0" Style="{StaticResource LabelGeneralInfoDemo}" VerticalAlignment="Bottom"/>
+								<TextBox Grid.Row="1" x:Name="TextBoxComment" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CurrentDemo.Comment}" />
+								<Button Grid.Row="2"
 								Margin="0 5 0 0"
 								Command="{Binding SaveCommentDemoCommand}"
 								CommandParameter="{Binding ElementName=TextBoxComment, Path=Text}"
@@ -341,41 +346,43 @@
 								Content="Save comment"
 								Width="90"
 								Height="30"/>
+							</Grid>
+						</StackPanel>
+
+						<Grid Grid.Row="1">
+							<StackPanel Orientation="Vertical">
+								<StackPanel Orientation="Horizontal">
+									<Image Source="../Resources/images/headshot.png" Width="50" Height="30"/>
+									<TextBlock Text="Most Headshots % : " Style="{StaticResource LabelGeneralInfoDemo}" />
+									<TextBlock Text="{Binding CurrentDemo.MostHeadshotPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+									<Image Source="../Resources/images/bomb.png" Width="45" Height="23" />
+									<TextBlock Text="Most Bomb plants : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
+									<TextBlock Text="{Binding CurrentDemo.MostBombPlantedPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+									<Image Source="../Resources/images/suicide.png" Width="45" Height="22" />
+									<TextBlock Text="Most Entry Kill : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
+									<TextBlock Text="{Binding CurrentDemo.MostEntryKillPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+									<Image Source="../Resources/images/deagle.png" Width="45" Height="22" />
+									<TextBlock Text="Most killing weapon : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
+									<TextBlock Text="{Binding CurrentDemo.MostKillingWeapon.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+									<Image Source="../Resources/images/bullet.png" Width="45" Height="22" />
+									<TextBlock Text="Most damaging weapon : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
+									<TextBlock Text="{Binding CurrentDemo.MostDamageWeapon.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
+								</StackPanel>
+							</StackPanel>
+						</Grid>
 					</Grid>
-				</StackPanel>
-
-				<Grid Grid.Row="1">
-					<StackPanel Orientation="Vertical">
-						<StackPanel Orientation="Horizontal">
-							<Image Source="../Resources/images/headshot.png" Width="50" Height="30"/>
-							<TextBlock Text="Most Headshots % : " Style="{StaticResource LabelGeneralInfoDemo}" />
-							<TextBlock Text="{Binding CurrentDemo.MostHeadshotPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-							<Image Source="../Resources/images/bomb.png" Width="45" Height="23" />
-							<TextBlock Text="Most Bomb plants : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
-							<TextBlock Text="{Binding CurrentDemo.MostBombPlantedPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-							<Image Source="../Resources/images/suicide.png" Width="45" Height="22" />
-							<TextBlock Text="Most Entry Kill : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
-							<TextBlock Text="{Binding CurrentDemo.MostEntryKillPlayer.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-							<Image Source="../Resources/images/deagle.png" Width="45" Height="22" />
-							<TextBlock Text="Most killing weapon : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
-							<TextBlock Text="{Binding CurrentDemo.MostKillingWeapon.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
-						</StackPanel>
-						<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-							<Image Source="../Resources/images/bullet.png" Width="45" Height="22" />
-							<TextBlock Text="Most damaging weapon : " Style="{StaticResource LabelGeneralInfoDemo}" Margin="5 0 0 0"/>
-							<TextBlock Text="{Binding CurrentDemo.MostDamageWeapon.Name}" Style="{StaticResource ValueGeneralInfoDemo}" />
-						</StackPanel>
-					</StackPanel>
 				</Grid>
-			</Grid>
+			</ScrollViewer>
 
-			<Grid Grid.Column="2">
+			<Grid Grid.Column="1">
 				<Grid Margin="10">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
@@ -387,7 +394,6 @@
 						Background="{StaticResource LightWhiteBrush}"
 						CornerRadius="10">
 						<Grid Grid.Row="0">
-
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
