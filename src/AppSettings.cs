@@ -1,8 +1,6 @@
 ﻿using Microsoft.Win32;
 using System.IO;
-using System.Collections.ObjectModel;
 using System;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace CSGO_Demos_Manager
