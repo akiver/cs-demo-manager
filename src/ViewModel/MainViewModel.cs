@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using System.Collections.ObjectModel;
@@ -183,21 +184,19 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _addFolderCommand
 					?? (_addFolderCommand = new RelayCommand(
-					() =>
+					async () =>
 					{
 						FolderBrowserDialog folderDialog = new FolderBrowserDialog
 						{
 							SelectedPath = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System))
-					};
+						};
 
 						DialogResult result = folderDialog.ShowDialog();
 						if (result != DialogResult.OK) return;
 						string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
 						if (Folders.Contains(path)) return;
-						if (AppSettings.AddFolder(path))
-						{
-							Folders.Add(path);
-						}
+						bool isAdded = await _cacheService.AddFolderAsync(path);
+						if (isAdded) Folders.Add(path);
 					}));
 			}
 		}
@@ -211,14 +210,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _removeFolderCommand
 					?? (_removeFolderCommand = new RelayCommand<string>(
-					f =>
+					async folder =>
 					{
-						if (!RemoveFolderCommand.CanExecute(null))
-						{
-							return;
-						}
-						Folders.Remove(f);
-						AppSettings.RemoveFolder(f);
+						bool isRemoved = await _cacheService.RemoveFolderAsync(folder);
+						if (isRemoved) Folders.Remove(folder);
 					},
 					f => SelectedFolder != null));
 			}
@@ -250,12 +245,13 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _settingsFlyoutClosedCommand
 					?? (_settingsFlyoutClosedCommand = new RelayCommand(
-					() =>
+					async () =>
 					{
 						IsSettingsOpen = false;
 
 						Folders.Clear();
-						Folders = AppSettings.GetFolders();
+						List<string> folders = await _cacheService.GetFoldersAsync();
+						Folders = new ObservableCollection<string>(folders);
 
 						RefreshDemosMessage msg = new RefreshDemosMessage();
 						Messenger.Default.Send(msg);
@@ -274,7 +270,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			HomeView homeView = new HomeView();
 			CurrentPage.ShowPage(homeView);
 
-			Folders = AppSettings.GetFolders();
+			Task.Run(async () =>
+			{
+				List<string> folders = await _cacheService.GetFoldersAsync();
+				Folders = new ObservableCollection<string>(folders);
+			});
+
 		}
 
 		private static async Task<bool> CheckUpdate()

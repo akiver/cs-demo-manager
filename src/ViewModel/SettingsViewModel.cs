@@ -1153,7 +1153,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								List<Demo> demosFromBackup = await _demosService.GetDemosFromBackup(filename);
 
 								// Retrieve needed demos information for serialization from headers
-								List<string> folders = AppSettings.GetFolders().ToList();
+								List<string> folders = await _cacheService.GetFoldersAsync();
 								List<Demo> demosHeader = await _demosService.GetDemosHeader(folders);
 
 								// Update custom data if the demo has been found

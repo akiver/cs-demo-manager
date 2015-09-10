@@ -1012,7 +1012,9 @@ namespace CSGO_Demos_Manager.ViewModel
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
-				Folders = AppSettings.GetFolders();
+				List<string> folders = await _cacheService.GetFoldersAsync();
+				Folders = new ObservableCollection<string>(folders);
+
 				IsShowAllFolders = Properties.Settings.Default.ShowAllFolders;
 
 				if (IsShowAllFolders)
@@ -1044,7 +1046,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
-				Folders = AppSettings.GetFolders();
+				List<string> folders = await _cacheService.GetFoldersAsync();
+				Folders = new ObservableCollection<string>(folders);
 				await LoadDemosHeader();
 			});
 		}

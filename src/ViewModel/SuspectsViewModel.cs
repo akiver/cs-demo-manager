@@ -215,7 +215,8 @@ namespace CSGO_Demos_Manager.ViewModel
 							IsRefreshing = true;
 							IsAnalyzing = true;
 							List<Demo> demosFailed = new List<Demo>();
-							List<Demo> demos = await _demosService.GetDemosHeader(AppSettings.GetFolders().ToList());
+							List<string> folders = await _cacheService.GetFoldersAsync();
+							List<Demo> demos = await _demosService.GetDemosHeader(folders);
 							for (int i = 0; i < demos.Count; i++)
 							{
 								if (demos[i].Source.GetType() != typeof(Pov) && IsAnalyzing)

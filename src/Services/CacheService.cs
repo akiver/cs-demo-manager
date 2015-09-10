@@ -35,6 +35,11 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		private const string ACCOUNTS_FILENAME = "accounts.json";
 
+		/// <summary>
+		/// Contains the folders list saved
+		/// </summary>
+		private const string FOLDERS_FILENAME = "folders.json";
+
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)([_])([^0-9]*)([0-9]*)(.json)$");
 
 		#endregion
@@ -328,6 +333,71 @@ namespace CSGO_Demos_Manager.Services
 				if (match.Success) return true;
 			}
 			return false;
+		}
+
+		public async Task<List<string>> GetFoldersAsync()
+		{
+			List<string> folders = new List<string>();
+			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+			if (!File.Exists(pathFoldersFileJson))
+			{
+				folders = await InitCsgoFolders(folders);
+			}
+			else
+			{
+				string json = File.ReadAllText(pathFoldersFileJson);
+				folders = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
+				if (!folders.Any())
+				{
+					folders = await InitCsgoFolders(folders);
+				}
+			}
+			
+			return folders;
+		}
+
+		public async Task<bool> AddFolderAsync(string path)
+		{
+			List<string> folders = await GetFoldersAsync();
+			if (folders.Contains(path)) return false;
+			folders.Add(path);
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders, _settingsJson));
+			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+			File.WriteAllText(pathFoldersFileJson, json);
+
+			return true;
+		}
+
+		public async Task<bool> RemoveFolderAsync(string path)
+		{
+			List<string> folders = await GetFoldersAsync();
+			if (!folders.Contains(path)) return false;
+			folders.Remove(path);
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders, _settingsJson));
+			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+			File.WriteAllText(pathFoldersFileJson, json);
+
+			return true;
+		}
+
+		/// <summary>
+		/// Add the "csgo" and "replays" folders if they exist
+		/// </summary>
+		private async Task<List<string>> InitCsgoFolders(List<string> folders)
+		{
+			string csgoFolderPath = Path.GetFullPath(AppSettings.GetCsgoPath()).ToLower();
+			if (Directory.Exists(csgoFolderPath)) folders.Add(csgoFolderPath);
+			string replayFolderPath = Path.GetFullPath(csgoFolderPath + "/replays").ToLower();
+			if (Directory.Exists(replayFolderPath)) folders.Add(replayFolderPath);
+
+			if (folders.Any())
+			{
+				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders, _settingsJson));
+				string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+				File.WriteAllText(pathFoldersFileJson, json);
+			}
+
+			return folders;
 		}
 	}
 }

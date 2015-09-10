@@ -108,5 +108,20 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(new Account());
 		}
+
+		public Task<List<string>> GetFoldersAsync()
+		{
+			return Task.FromResult(new List<string>());
+		}
+
+		public Task<bool> AddFolderAsync(string path)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<bool> RemoveFolderAsync(string path)
+		{
+			return Task.FromResult(true);
+		}
 	}
 }

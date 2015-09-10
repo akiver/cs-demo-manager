@@ -35,5 +35,11 @@ namespace CSGO_Demos_Manager.Services
 		Task<List<Account>> GetAccountListAsync();
 
 		Task<Account> GetAccountAsync(long steamId);
+
+		Task<List<string>> GetFoldersAsync();
+
+		Task<bool> AddFolderAsync(string path);
+
+		Task<bool> RemoveFolderAsync(string path);
 	}
 }
