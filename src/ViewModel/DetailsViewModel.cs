@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using CSGO_Demos_Manager.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -12,8 +13,10 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Forms;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Services.Excel;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -71,13 +74,17 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _exportDemoToExcelCommand;
 
-		private RelayCommand<bool> _showOnlyUserStatsCommand;
+		private RelayCommand<bool> _showAllPlayersCommand;
 
 		private RelayCommand _toggleLeftSideCommand;
+
+		private RelayCommand<string> _addPlayerToAccountListCommand;
 
 		private ICollectionView _playersTeam1Collection;
 
 		private ICollectionView _playersTeam2Collection;
+
+		private ICollectionView _roundsCollection;
 
 		#endregion
 
@@ -93,6 +100,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				PlayersTeam2Collection = CollectionViewSource.GetDefaultView(_currentDemo.PlayersTeam2);
 				PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 				PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+				RoundsCollection = CollectionViewSource.GetDefaultView(_currentDemo.Rounds);
 			}
 		}
 
@@ -147,6 +155,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _playersTeam1Collection; }
 			set { Set(() => PlayersTeam1Collection, ref _playersTeam1Collection, value); }
+		}
+
+		public ICollectionView RoundsCollection
+		{
+			get { return _roundsCollection; }
+			set { Set(() => RoundsCollection, ref _roundsCollection, value); }
 		}
 
 		public ICollectionView PlayersTeam2Collection
@@ -269,8 +283,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _watchHighlightsCommand
 					?? (_watchHighlightsCommand = new RelayCommand<PlayerExtended>(
-						player =>
+						async player =>
 						{
+							if (AppSettings.SteamExePath() == null)
+							{
+								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								return;
+							}
 							string steamId = player.SteamId.ToString();
 							GameLauncher launcher = new GameLauncher();
 							launcher.WatchHighlightDemo(CurrentDemo, steamId);
@@ -285,8 +305,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _watchLowlightsCommand
 					?? (_watchLowlightsCommand = new RelayCommand<PlayerExtended>(
-						player =>
+						async player =>
 						{
+							if (AppSettings.SteamExePath() == null)
+							{
+								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								return;
+							}
 							string steamId = player.SteamId.ToString();
 							GameLauncher launcher = new GameLauncher();
 							launcher.WatchLowlightDemo(CurrentDemo, steamId);
@@ -333,6 +359,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						NotificationMessage = "Analyzing...";
 						IsAnalyzing = true;
 						HasNotification = true;
+						(new ViewModelLocator().Settings).IsShowAllPlayers = true;
 
 						try
 						{
@@ -353,6 +380,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						
 						IsAnalyzing = false;
 						HasNotification = false;
+						CommandManager.InvalidateRequerySuggested();
 					},
 					demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
@@ -387,12 +415,18 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _watchRoundCommand
 					?? (_watchRoundCommand = new RelayCommand<Round>(
-					round =>
+					async round =>
 					{
+						if (AppSettings.SteamExePath() == null)
+						{
+							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							return;
+						}
 						GameLauncher launcher = new GameLauncher();
 						launcher.WatchDemoAt(CurrentDemo, round.Tick);
 					},
-					round => CurrentDemo != null && CurrentRound != null && AppSettings.IsCsgoInstalled()));
+					round => CurrentDemo != null && CurrentRound != null));
 			}
 		}
 
@@ -455,23 +489,25 @@ namespace CSGO_Demos_Manager.ViewModel
 		}
 
 		/// <summary>
-		/// Command when the checkbox to show only user's stats is clicked
+		/// Command when the checkbox to toggle specific player's stats is clicked
 		/// </summary>
-		public RelayCommand<bool> ShowOnlyUserStatsCommand
+		public RelayCommand<bool> ShowAllPlayersCommand
 		{
 			get
 			{
-				return _showOnlyUserStatsCommand
-					?? (_showOnlyUserStatsCommand = new RelayCommand<bool>(
-						async isChecked =>
+				return _showAllPlayersCommand
+					?? (_showAllPlayersCommand = new RelayCommand<bool>(
+						isChecked =>
 						{
-							if (Properties.Settings.Default.SteamID == 0)
+							var settingsViewModel = (new ViewModelLocator().Settings);
+							settingsViewModel.IsShowAllPlayers = isChecked;
+							if (!isChecked)
 							{
-								await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
-										MessageDialogStyle.Affirmative);
+								settingsViewModel.SelectedPlayer = CurrentDemo.Players[0];
 							}
+							RoundsCollection.Refresh();
 						},
-						isChecked => !IsAnalyzing));
+						isChecked => !IsAnalyzing && CurrentDemo.Players.Any()));
 			}
 		}
 
@@ -491,6 +527,60 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command to add a player to accounts list
+		/// </summary>
+		public RelayCommand<string> AddPlayerToAccountListCommand
+		{
+			get
+			{
+				return _addPlayerToAccountListCommand
+					?? (_addPlayerToAccountListCommand = new RelayCommand<string>(
+					async steamId =>
+					{
+						NotificationMessage = "Adding player to the account list...";
+						HasNotification = true;
+						IsAnalyzing = true;
+
+						bool added = false;
+						try
+						{
+							Account account = new Account
+							{
+								SteamId = steamId
+							};
+
+							if (AppSettings.IsInternetConnectionAvailable())
+							{
+								Suspect player = await _steamService.GetBanStatusForUser(steamId);
+								account.Name = player.Nickname;
+							}
+							else
+							{
+								account.Name = steamId;
+							}
+
+							added = await _cacheService.AddAccountAsync(account);
+							if (!added) await _dialogService.ShowErrorAsync("This player is already in your account list.", MessageDialogStyle.Affirmative);
+
+							var settingsViewModel = (new ViewModelLocator()).Settings;
+							settingsViewModel.Accounts.Add(account);
+						}
+						catch (Exception e)
+						{
+							Logger.Instance.Log(e);
+							await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
+						}
+
+						IsAnalyzing = false;
+						if(added) NotificationMessage = "Player added to the account list.";
+						CommandManager.InvalidateRequerySuggested();
+						if(added) await Task.Delay(5000);
+						HasNotification = false;
+					}));
+			}
+		}
+
 		#endregion
 
 		public DetailsViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService, ExcelService excelService)
@@ -506,6 +596,13 @@ namespace CSGO_Demos_Manager.ViewModel
 				var demo = _demosService.AnalyzeDemo(new Demo());
 				CurrentDemo = demo.Result;
 			}
+
+			Messenger.Default.Register<SelectedPlayerChangedMessage>(this, HandleSelectedPlayerChangedMessage);
+		}
+
+		private void HandleSelectedPlayerChangedMessage(SelectedPlayerChangedMessage msg)
+		{
+			RoundsCollection.Refresh();
 		}
 
 		public override void Cleanup()
@@ -517,7 +614,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SelectedPlayerTeam2 = null;
 			PlayersTeam1Collection = null;
 			PlayersTeam2Collection = null;
-			CurrentDemo = null;
+			RoundsCollection = null;
 			CurrentRound = null;
 			NotificationMessage = string.Empty;
 		}

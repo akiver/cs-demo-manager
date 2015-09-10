@@ -15,9 +15,10 @@
 		<ResourceDictionary>
 			<helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
 			<helpers:MapNameToImageConverter x:Key="MapNameToImageConverter" />
+			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
-	
+
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"
 					Gesture="CTRL+B" />
@@ -46,7 +47,7 @@
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
 	</UserControl.InputBindings>
-	
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -207,12 +208,26 @@
 					</StackPanel>
 				</Button>
 
-				<CheckBox x:Name="CheckBoxShowOnlyUserStats" Content="Show only my stats"
-						  Margin="5 0 0 0"
-						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}"
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+						<ColumnDefinition Width="Auto"></ColumnDefinition>
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.Column="0" Text="Player stats: " Style="{StaticResource CurrentFolderStyle}"/>
+					<ComboBox Grid.Column="1" Style="{StaticResource ComboBoxAccountsStyle}"
+					ItemsSource="{Binding CurrentDemo.Players}"
+					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedPlayer}"
+					DisplayMemberPath ="Name" SelectedValuePath="SteamId"
+					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers, Converter={StaticResource BooleanInvertedConverter}}" />
+
+					<CheckBox Grid.Column="2" x:Name="CheckBoxShowAllPlayers" Content="Show all"
+						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowOnlyUserStatsCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyUserStats}"/>
+						  Command="{Binding ShowAllPlayersCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllPlayers}"/>
+				</Grid>
 
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing 
@@ -412,7 +427,7 @@
 									</StackPanel>
 								</Grid>
 							</Grid>
-							
+
 							<Grid Grid.Row="1">
 								<Grid HorizontalAlignment="Center">
 									<StackPanel Orientation="Horizontal">
@@ -611,7 +626,7 @@
 							<TextBlock Grid.Row="0" Text="Rounds Details" Foreground="{StaticResource LightGreenBrush}" />
 
 							<DataGrid Grid.Row="1" x:Name="DataGridRounds"
-							  ItemsSource="{Binding CurrentDemo.Rounds}"
+							  ItemsSource="{Binding RoundsCollection}"
 							  SelectedItem="{Binding CurrentRound}"
 							  CellStyle="{StaticResource DataGridCellStyle}"
 							  RowStyle="{StaticResource DataGridRowRoundStyle}"

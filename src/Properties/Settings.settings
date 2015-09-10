@@ -20,7 +20,7 @@
     <Setting Name="IsFullscreen" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="SteamID" Type="System.Int64" Scope="User">
+    <Setting Name="SelectedStatsAccountSteamID" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="ShowPovDemos" Type="System.Boolean" Scope="User">
@@ -179,9 +179,6 @@
     <Setting Name="ShowCevoDemos" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ShowOnlyUserStats" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="ShowCommentColumn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -211,6 +208,18 @@
     </Setting>
     <Setting Name="ShowLeftPartDetails" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="IsShowAllAccounts" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SelectedPlayerSteamId" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="IsShowAllPlayers" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="WatchAccountSteamId" Type="System.Int64" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

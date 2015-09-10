@@ -69,6 +69,9 @@
 		<MenuItem Header="Watch lowlights"
 							  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Add to account list"
+							  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="PlayerTeam2RowContextMenu">
@@ -84,6 +87,9 @@
 		<MenuItem Header="Watch lowlights"
 							  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Add to account list"
+							  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 </ResourceDictionary>

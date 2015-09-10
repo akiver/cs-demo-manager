@@ -88,5 +88,25 @@ namespace CSGO_Demos_Manager.Services
 
 			return Task.FromResult(suspecIdtList);
 		}
+
+		public Task<bool> AddAccountAsync(Account account)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<bool> RemoveAccountAsync(Account account)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<List<Account>> GetAccountListAsync()
+		{
+			return Task.FromResult(new List<Account>());
+		}
+
+		public Task<Account> GetAccountAsync(long steamId)
+		{
+			return Task.FromResult(new Account());
+		}
 	}
 }

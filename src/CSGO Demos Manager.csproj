@@ -147,7 +147,10 @@
     <Compile Include="Internals\Logger.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Messages\MainWindowLoadedMessage.cs" />
+    <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
+    <Compile Include="Messages\SelectedPlayerChangedMessage.cs" />
+    <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />

@@ -98,12 +98,12 @@ namespace CSGO_Demos_Manager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public long SteamID {
+        public long SelectedStatsAccountSteamID {
             get {
-                return ((long)(this["SteamID"]));
+                return ((long)(this["SelectedStatsAccountSteamID"]));
             }
             set {
-                this["SteamID"] = value;
+                this["SelectedStatsAccountSteamID"] = value;
             }
         }
         
@@ -733,18 +733,6 @@ namespace CSGO_Demos_Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowOnlyUserStats {
-            get {
-                return ((bool)(this["ShowOnlyUserStats"]));
-            }
-            set {
-                this["ShowOnlyUserStats"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ShowCommentColumn {
             get {
@@ -860,6 +848,54 @@ namespace CSGO_Demos_Manager.Properties {
             }
             set {
                 this["ShowLeftPartDetails"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsShowAllAccounts {
+            get {
+                return ((bool)(this["IsShowAllAccounts"]));
+            }
+            set {
+                this["IsShowAllAccounts"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long SelectedPlayerSteamId {
+            get {
+                return ((long)(this["SelectedPlayerSteamId"]));
+            }
+            set {
+                this["SelectedPlayerSteamId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IsShowAllPlayers {
+            get {
+                return ((bool)(this["IsShowAllPlayers"]));
+            }
+            set {
+                this["IsShowAllPlayers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long WatchAccountSteamId {
+            get {
+                return ((long)(this["WatchAccountSteamId"]));
+            }
+            set {
+                this["WatchAccountSteamId"] = value;
             }
         }
     }

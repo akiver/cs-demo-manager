@@ -102,7 +102,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<bool> _showCevoDemosCommand;
 
-		private RelayCommand<bool> _showOnlyUserStatsCommand;
+		private RelayCommand<bool> _showAllAccountsCommand;
 
 		private RelayCommand _backToHomeCommand;
 
@@ -257,7 +257,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		public string FilterDemoText
 		{
 			get { return _filterDemoText; }
-			set {
+			set
+			{
 				Set(() => FilterDemoText, ref _filterDemoText, value);
 				FilterCollection();
 			}
@@ -372,7 +373,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						{
 							if (!File.Exists(demo.Path))
 							{
-								await _dialogService.ShowErrorAsync("Demo " +  demo.Name + " not found.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync("Demo " + demo.Name + " not found.", MessageDialogStyle.Affirmative);
 								return;
 							}
 
@@ -400,21 +401,36 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_goToTickCommand = new RelayCommand<Demo>(
 						async demo =>
 						{
+							if (AppSettings.SteamExePath() == null)
+							{
+								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								return;
+							}
 							var result = await _dialogService.ShowInputAsync("Goto Tick", "Enter the tick.");
 							if (string.IsNullOrEmpty(result)) return;
 							int tick;
 							bool isInt = int.TryParse(result, out tick);
-								
+
 							if (isInt)
 							{
-								GameLauncher launcher = new GameLauncher();
-								launcher.WatchDemoAt(SelectedDemo, tick);
-							} else
+								try
+								{
+									GameLauncher launcher = new GameLauncher();
+									launcher.WatchDemoAt(SelectedDemo, tick);
+								}
+								catch (Exception e)
+								{
+									Logger.Instance.Log(e);
+									await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
+								}
+							}
+							else
 							{
 								await _dialogService.ShowErrorAsync("Invalid tick.", MessageDialogStyle.Affirmative);
 							}
 						},
-						demo => SelectedDemo != null && AppSettings.IsCsgoInstalled()));
+						demo => SelectedDemo != null));
 			}
 		}
 
@@ -459,7 +475,7 @@ namespace CSGO_Demos_Manager.ViewModel
 										demosFailed.Add(demos[i]);
 										await _cacheService.WriteDemoDataCache(demos[i]);
 									}
-									
+
 								}
 								if (demos[i].Players.Any())
 								{
@@ -513,7 +529,7 @@ namespace CSGO_Demos_Manager.ViewModel
 										SelectedFolder = Folders.ElementAt(0);
 									}
 								}
-								
+
 							}
 							Properties.Settings.Default.ShowAllFolders = isChecked;
 							Properties.Settings.Default.Save();
@@ -523,28 +539,27 @@ namespace CSGO_Demos_Manager.ViewModel
 		}
 
 		/// <summary>
-		/// Command when the checkbox to show only user's stats is clicked
+		/// Command when the checkbox to show all account stats is clicked
 		/// </summary>
-		public RelayCommand<bool> ShowOnlyUserStatsCommand
+		public RelayCommand<bool> ShowAllAccountsCommand
 		{
 			get
 			{
-				return _showOnlyUserStatsCommand
-					?? (_showOnlyUserStatsCommand = new RelayCommand<bool>(
-						async isChecked =>
+				return _showAllAccountsCommand
+					?? (_showAllAccountsCommand = new RelayCommand<bool>(
+						isChecked =>
 						{
-							if (Properties.Settings.Default.SteamID == 0)
+							var settingsViewModel = (new ViewModelLocator().Settings);
+							if (!isChecked)
 							{
-								await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
-										MessageDialogStyle.Affirmative);
-								return;
+								settingsViewModel.SelectedStatsAccount = settingsViewModel.Accounts[0];
 							}
 							IsBusy = true;
 							NotificationMessage = "Loading...";
 							DataGridDemosCollection.Refresh();
 							IsBusy = false;
 						},
-						isChecked => !IsBusy));
+						isChecked => !IsBusy && (new ViewModelLocator().Settings).Accounts.Any()));
 			}
 		}
 
@@ -764,23 +779,24 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_watchDemoCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (!WatchDemoCommand.CanExecute(null))
+						if (AppSettings.SteamExePath() == null)
 						{
+							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
 							return;
 						}
-
 						try
 						{
-							// Play the demo
 							GameLauncher launcher = new GameLauncher();
 							launcher.WatchDemo(demo);
 						}
 						catch (Exception e)
 						{
+							Logger.Instance.Log(e);
 							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
 						}
 					},
-					demo => SelectedDemo != null && AppSettings.IsCsgoInstalled()));
+					demo => SelectedDemo != null));
 			}
 		}
 
@@ -795,14 +811,28 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_watchHighlightCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (Properties.Settings.Default.SteamID == 0)
+						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
+							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							return;
+						}
+						if (Properties.Settings.Default.WatchAccountSteamId == 0)
+						{
+							await _dialogService.ShowMessageAsync("You have to set the account that you want to focus from settings to be able to use this feature.",
 										MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncher launcher = new GameLauncher();
-						launcher.WatchHighlightDemo(demo);
+						try
+						{
+							GameLauncher launcher = new GameLauncher();
+							launcher.WatchHighlightDemo(demo);
+						}
+						catch (Exception e)
+						{
+							Logger.Instance.Log(e);
+							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
+						}
 					},
 					demo => SelectedDemo != null));
 			}
@@ -819,14 +849,28 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_watchLowlightCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (Properties.Settings.Default.SteamID == 0)
+						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("You have to set your SteamID 64 from settings to be able to enable this functionality.",
+							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							return;
+						}
+						if (Properties.Settings.Default.WatchAccountSteamId == 0)
+						{
+							await _dialogService.ShowMessageAsync("You have to set the account that you want to focus from settings to be able to use this feature.",
 										MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncher launcher = new GameLauncher();
-						launcher.WatchLowlightDemo(demo);
+						try
+						{
+							GameLauncher launcher = new GameLauncher();
+							launcher.WatchLowlightDemo(demo);
+						}
+						catch (Exception e)
+						{
+							Logger.Instance.Log(e);
+							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
+						}
 					},
 					demo => SelectedDemo != null));
 			}
@@ -885,6 +929,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
+						(new ViewModelLocator().Settings).IsShowAllPlayers = true;
 					}));
 			}
 		}
@@ -929,7 +974,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							{
 								SelectedDemos.Add(demo);
 							}
-					}));
+						}));
 			}
 		}
 
@@ -959,6 +1004,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			Messenger.Default.Register<MainWindowLoadedMessage>(this, HandleMainWindowLoadedMessage);
 			Messenger.Default.Register<RefreshDemosMessage>(this, HandleRefreshDemosMessage);
+			Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
 		}
 
 		private void HandleMainWindowLoadedMessage(MainWindowLoadedMessage msg)
@@ -1000,6 +1046,15 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				Folders = AppSettings.GetFolders();
 				await LoadDemosHeader();
+			});
+		}
+
+		private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)
+		{
+			DispatcherHelper.CheckBeginInvokeOnUI(
+			() =>
+			{
+				DataGridDemosCollection.Refresh();
 			});
 		}
 

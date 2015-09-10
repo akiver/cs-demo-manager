@@ -1,5 +1,4 @@
-﻿using System;
-using CSGO_Demos_Manager.Models;
+﻿using CSGO_Demos_Manager.Models;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
@@ -30,6 +29,11 @@ namespace CSGO_Demos_Manager.Services
 		///  Contains the ids of suspects that as been detected as banned
 		/// </summary>
 		private const string SUSPECT_BANNED_FILENAME = "suspects_banned.json";
+
+		/// <summary>
+		/// Contains the tracked Account
+		/// </summary>
+		private const string ACCOUNTS_FILENAME = "accounts.json";
 
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)([_])([^0-9]*)([0-9]*)(.json)$");
 
@@ -164,6 +168,62 @@ namespace CSGO_Demos_Manager.Services
 			if (ids == null) ids = new List<string>();
 
 			return ids;
+		}
+
+		/// <summary>
+		/// Return the accounts SteamID from the list saved in accounts.json
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<Account>> GetAccountListAsync()
+		{
+			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			if (!File.Exists(pathAccountsFileJson)) return new List<Account>();
+			string json = File.ReadAllText(pathAccountsFileJson);
+			List<Account> accounts = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Account>>(json));
+			if (accounts == null) accounts = new List<Account>();
+
+			return accounts;
+		}
+
+		public async Task<Account> GetAccountAsync(long steamId)
+		{
+			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			if (!File.Exists(pathAccountsFileJson)) return null;
+			string json = File.ReadAllText(pathAccountsFileJson);
+			List<Account> accounts = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Account>>(json));
+			Account account = accounts?.FirstOrDefault(a => a.SteamId == steamId.ToString());
+			return account;
+		}
+
+		public async Task<bool> AddAccountAsync(Account newAccount)
+		{
+			// Get current list
+			List<Account> accounts = await GetAccountListAsync();
+
+			// Check if already in the list
+			if (accounts.Any(account => account.SteamId == newAccount.SteamId)) return false;
+			accounts.Add(newAccount);
+
+			// If not add it and update
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts, _settingsJson));
+
+			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			File.WriteAllText(pathAccountsFileJson, json);
+
+			return true;
+		}
+
+		public async Task<bool> RemoveAccountAsync(Account accountToRemove)
+		{
+			List<Account> accounts = await GetAccountListAsync();
+			Account accountFromJson = accounts.FirstOrDefault(a => a.SteamId == accountToRemove.SteamId);
+			if (accountFromJson == null) return false;
+			accounts.Remove(accountFromJson);
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts, _settingsJson));
+			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			File.WriteAllText(pathAccountsFileJson, json);
+
+			return true;
 		}
 
 		/// <summary>

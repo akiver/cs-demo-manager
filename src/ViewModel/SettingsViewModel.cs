@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
@@ -25,15 +30,17 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _resolutionFullscreen = Settings.Default.IsFullscreen;
 
-		private long _steamId = Settings.Default.SteamID;
+		private bool _isShowAllAccounts = Settings.Default.IsShowAllAccounts;
+
+		private bool _isShowAllPlayers = Settings.Default.IsShowAllPlayers;
 
 		private string _launchParameters = Settings.Default.LaunchParameters;
+
+		private string _notificationMessage = "Settings";
 
 		private RelayCommand<string> _saveResolutionWidthCommand;
 
 		private RelayCommand<string> _saveResolutionHeightCommand;
-
-		private RelayCommand<string> _saveSteamIdCommand;
 
 		private RelayCommand<string> _saveLaunchParametersCommand;
 
@@ -49,11 +56,21 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _enableMoviemakerModeCommand;
 
+		private RelayCommand _addAccountCommand;
+
+		private RelayCommand<Account> _removeAccountCommand;
+
+		private RelayCommand _syncAccountNickname;
+
+		private RelayCommand _setAsWatchAccountCommand;
+
 		private readonly ICacheService _cacheService;
 
 		private readonly IDemosService _demosService;
 
 		private readonly DialogService _dialogService;
+
+		private readonly ISteamService _steamService;
 
 		private bool _showDateColumn = Settings.Default.ShowDateColumn;
 
@@ -139,8 +156,6 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _dateFormatEuropean = Settings.Default.DateFormatEuropean;
 
-		private bool _showOnlyUserStats = Settings.Default.ShowOnlyUserStats;
-
 		private bool _showCommentColumn = Settings.Default.ShowCommentColumn;
 
 		private bool _showClutchCountColumn = Settings.Default.ShowClutchCountColumn;
@@ -157,9 +172,146 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
 
+		/// <summary>
+		/// List of user's accounts saved
+		/// </summary>
+		private ObservableCollection<Account> _accounts = new ObservableCollection<Account>();
+
+		/// <summary>
+		/// Account currently selected on the settings view
+		/// </summary>
+		private Account _selectedAccount;
+
+		/// <summary>
+		/// Account selected on the Home view
+		/// </summary>
+		private Account _selectedStatsAccount;
+
+		/// <summary>
+		/// Account selected for watch features
+		/// </summary>
+		private Account _selectedWatchAccount;
+
+		/// <summary>
+		/// Player currently selected on details view
+		/// </summary>
+		private PlayerExtended _selectedPlayer;
+
+		/// <summary>
+		/// SteamID of the account used for "watch" (lowlights / highlights) buttons
+		/// </summary>
+		private long _watchAccountSteamId = Settings.Default.WatchAccountSteamId;
+
+		/// <summary>
+		/// If the SteamID is 0 it means that the user want to see all stats
+		/// </summary>
+		public bool ShowOnlyAccountStats => Settings.Default.SelectedStatsAccountSteamID != 0;
+
 		#endregion
 
 		#region Accessors
+
+		public Account SelectedAccount
+		{
+			get { return _selectedAccount; }
+			set { Set(() => SelectedAccount, ref _selectedAccount, value); }
+		}
+
+		public PlayerExtended SelectedPlayer
+		{
+			get { return _selectedPlayer; }
+			set
+			{
+				Set(() => SelectedPlayer, ref _selectedPlayer, value);
+				Settings.Default.SelectedPlayerSteamId = value?.SteamId ?? 0;
+				Settings.Default.Save();
+				Messenger.Default.Send(new SelectedPlayerChangedMessage());
+			}
+		}
+
+		public Account SelectedStatsAccount
+		{
+			get { return _selectedStatsAccount; }
+			set
+			{
+				Set(() => SelectedStatsAccount, ref _selectedStatsAccount, value);
+				if (value == null)
+				{
+					Settings.Default.SelectedStatsAccountSteamID = 0;
+					Settings.Default.Save();
+				}
+				else
+				{
+					long steamId;
+					long.TryParse(value.SteamId, out steamId);
+					Settings.Default.SelectedStatsAccountSteamID = steamId;
+					Settings.Default.Save();
+				}
+				Messenger.Default.Send(new SelectedAccountChangedMessage());
+			}
+		}
+
+		public ObservableCollection<Account> Accounts
+		{
+			get { return _accounts; }
+			set { Set(() => Accounts, ref _accounts, value); }
+		}
+
+		public bool IsShowAllAccounts
+		{
+			get
+			{
+				if (!_isShowAllAccounts && Accounts != null && Accounts.Any())
+				{
+					SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
+				}
+				return _isShowAllAccounts;
+			}
+			set
+			{
+				Settings.Default.IsShowAllAccounts = value;
+				Settings.Default.Save();
+				if (value && SelectedStatsAccount != null) SelectedStatsAccount = null;
+				Set(() => IsShowAllAccounts, ref _isShowAllAccounts, value);
+			}
+		}
+
+		public Account SelectedWatchAccount
+		{
+			get { return _selectedWatchAccount; }
+			set
+			{
+				Set(() => SelectedWatchAccount, ref _selectedWatchAccount, value);
+				if (value != null)
+				{
+					long steamId;
+					long.TryParse(value.SteamId, out steamId);
+					WatchAccountSteamId = steamId;
+				}
+				else
+				{
+					WatchAccountSteamId = 0;
+				}
+			}
+		}
+
+		public bool IsShowAllPlayers
+		{
+			get { return _isShowAllPlayers; }
+			set
+			{
+				Set(() => IsShowAllPlayers, ref _isShowAllPlayers, value);
+				Settings.Default.IsShowAllPlayers = value;
+				Settings.Default.Save();
+				if (value && SelectedPlayer != null) SelectedPlayer = null;
+			}
+		}
+
+		public string NotificationMessage
+		{
+			get { return _notificationMessage; }
+			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
+		}
 
 		public int ResolutionWidth
 		{
@@ -652,18 +804,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public bool ShowOnlyUserStats
-		{
-			get { return _showOnlyUserStats; }
-			set
-			{
-				if (Settings.Default.SteamID == 0) return;
-				Settings.Default.ShowOnlyUserStats = value;
-				Settings.Default.Save();
-				Set(() => ShowOnlyUserStats, ref _showOnlyUserStats, value);
-			}
-		}
-
 		public bool ShowCommentColumn
 		{
 			get { return _showCommentColumn; }
@@ -752,15 +892,110 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public long SteamId
+		public long WatchAccountSteamId
 		{
-			get { return _steamId; }
-			set { Set(() => SteamId, ref _steamId, value); }
+			get { return _watchAccountSteamId; }
+			set
+			{
+				Settings.Default.WatchAccountSteamId = value;
+				Settings.Default.Save();
+				Set(() => WatchAccountSteamId, ref _watchAccountSteamId, value);
+			}
 		}
 
 		#endregion
 
 		#region Commands
+
+		/// <summary>
+		/// Command to add an account
+		/// </summary>
+		public RelayCommand AddAccountCommand
+		{
+			get
+			{
+				return _addAccountCommand
+					?? (_addAccountCommand = new RelayCommand(
+						async () =>
+						{
+							var steamId = await _dialogService.ShowInputAsync("Add an account", "Enter the SteamID 64 or the Steam community URL.");
+							if (string.IsNullOrEmpty(steamId)) return;
+
+							NotificationMessage = "Adding account...";
+
+							long steamIdAsLong;
+							bool isLong = long.TryParse(steamId, out steamIdAsLong);
+							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/");
+							Match match = regexSteamCommunity.Match(steamId);
+
+							if (isLong || match.Success)
+							{
+								try
+								{
+									Account account = new Account
+									{
+										SteamId = match.Success ? match.Groups["steamID"].Value : steamId
+									};
+									if (AppSettings.IsInternetConnectionAvailable())
+									{
+										Suspect player = await _steamService.GetBanStatusForUser(steamId);
+										account.Name = player.Nickname;
+									}
+									else
+									{
+										account.Name = match.Success ? match.Groups["steamID"].Value : steamId;
+									}
+
+									bool added = await _cacheService.AddAccountAsync(account);
+									if (!added)
+									{
+										await _dialogService.ShowErrorAsync("This player is already in your accounts list.", MessageDialogStyle.Affirmative);
+										NotificationMessage = "Settings";
+										return;
+									}
+
+									Accounts.Add(account);
+								}
+								catch (Exception e)
+								{
+									Logger.Instance.Log(e);
+									await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
+								}
+							}
+							else
+							{
+								await _dialogService.ShowErrorAsync("Invalid SteamID 64 or Steam community URL.", MessageDialogStyle.Affirmative);
+							}
+							NotificationMessage = "Settings";
+						}));
+			}
+		}
+
+		/// <summary>
+		/// Command to remove an account
+		/// </summary>
+		public RelayCommand<Account> RemoveAccountCommand
+		{
+			get
+			{
+				return _removeAccountCommand
+					?? (_removeAccountCommand = new RelayCommand<Account>(
+						async account =>
+						{
+							bool removed = await _cacheService.RemoveAccountAsync(account);
+							if (!removed)
+							{
+								await _dialogService.ShowErrorAsync("An error occured while removing the account.", MessageDialogStyle.Affirmative);
+								return;
+							}
+							// if there is no more accounts or the current stats account is removed, we show stats from all accounts
+							if (!Accounts.Any() || SelectedStatsAccount.SteamId.ToString() == account.SteamId) IsShowAllAccounts = true;
+							// if the current watch account is removed, we reset the displayed watch account
+							if (WatchAccountSteamId.ToString() == account.SteamId) SelectedWatchAccount = null;
+							Accounts.Remove(account);
+						}, account => SelectedAccount != null));
+			}
+		}
 
 		/// <summary>
 		/// Command to go to the log file
@@ -816,24 +1051,6 @@ namespace CSGO_Demos_Manager.ViewModel
 							Settings.Default.ResolutionHeight = Convert.ToInt32(height);
 							Settings.Default.Save();
 						}, height => !string.IsNullOrEmpty(height)));
-			}
-		}
-
-		/// <summary>
-		/// Command to save User's SteamID
-		/// </summary>
-		public RelayCommand<string> SaveSteamIdCommand
-		{
-			get
-			{
-				return _saveSteamIdCommand
-					?? (_saveSteamIdCommand = new RelayCommand<string>(
-						SaveSteamId,
-						steamId =>
-						{
-							long steamIdAsLong;
-							return Int64.TryParse(steamId, out steamIdAsLong);
-						}));
 			}
 		}
 
@@ -1022,27 +1239,76 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		#endregion
-
-		#region Callbacks
+		/// <summary>
+		/// Command to define the account used for "watch" features
+		/// </summary>
+		public RelayCommand SetAsWatchAccountCommand
+		{
+			get
+			{
+				return _setAsWatchAccountCommand
+					?? (_setAsWatchAccountCommand = new RelayCommand(
+						() =>
+						{
+							SelectedWatchAccount = SelectedAccount;
+						},
+						() => Accounts.Any() && SelectedAccount != null));
+			}
+		}
 
 		/// <summary>
-		/// Callback to save SteamID
+		/// Command to update the accounts nickname
 		/// </summary>
-		/// <param name="steamId"></param>
-		private void SaveSteamId(string steamId)
+		public RelayCommand SyncAccountsNickname
 		{
-			Settings.Default.SteamID = Convert.ToInt64(steamId);
-			Settings.Default.Save();
+			get
+			{
+				return _syncAccountNickname
+					?? (_syncAccountNickname = new RelayCommand(
+						async () =>
+						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
+							NotificationMessage = "Syncing accounts nickname...";
+							List<string> steamIdList = Accounts.Select(a => a.SteamId.ToString()).ToList();
+							IEnumerable<Suspect> players = await _steamService.GetBanStatusForUserList(steamIdList);
+							Accounts.Clear();
+							foreach (Suspect player in players)
+							{
+								Accounts.Add(new Account
+								{
+									SteamId = player.SteamId,
+									Name = player.Nickname
+								});
+							}
+
+							NotificationMessage = "Settings";
+
+						}, () => Accounts.Any()));
+			}
 		}
 
 		#endregion
 
-		public SettingsViewModel(DialogService dialogService, ICacheService chacheService, IDemosService demosService)
+		public SettingsViewModel(DialogService dialogService, ICacheService chacheService, IDemosService demosService, ISteamService steamService)
 		{
 			_dialogService = dialogService;
 			_cacheService = chacheService;
 			_demosService = demosService;
+			_steamService = steamService;
+			Task.Run(async () =>
+			{
+				List<Account> accounts = await _cacheService.GetAccountListAsync();
+				Accounts = new ObservableCollection<Account>(accounts);
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
+				}
+			});
 		}
 
 		/// <summary>

@@ -17,12 +17,12 @@
 		<Setter Property="Margin" Value="0 0 0 10" />
 	</Style>
 
-    <Style TargetType="TextBlock" x:Key="SubTitleSettingsStyle">
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
-    </Style>
+	<Style TargetType="TextBlock" x:Key="SubTitleSettingsStyle">
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+	</Style>
 
-    <Style TargetType="TextBlock" x:Key="CreditsTextStyle">
+	<Style TargetType="TextBlock" x:Key="CreditsTextStyle">
 		<Setter Property="FontSize" Value="18" />
 		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -89,296 +89,296 @@
 		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 
-    <Style TargetType="TextBlock" x:Key="DamageValueStyle">
-        <Setter Property="FontSize" Value="30" />
-        <Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
-    </Style>
+	<Style TargetType="TextBlock" x:Key="DamageValueStyle">
+		<Setter Property="FontSize" Value="30" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+	</Style>
 
-    <!-- TextBlock inside DataGridTextColumn for only user data -->
+	<!-- TextBlock inside DataGridTextColumn for selected account stats data -->
 	<Style TargetType="TextBlock" x:Key="OneKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding OneKillCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding OneKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding OneKillSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TwoKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding TwoKillCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding TwoKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding TwoKillSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="ThreeKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding ThreeKillCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding ThreeKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding ThreeKillSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="FourKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding FourKillCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding FourKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding FourKillSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="FiveKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding FiveKillCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding FiveKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding FiveKillSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TotalKillCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding TotalKillCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding TotalKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding TotalKillSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="BombPlantedCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding BombPlantedCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombPlantedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding BombPlantedSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="BombDefusedCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding BombDefusedCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombDefusedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding BombDefusedSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="BombExplodedCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding BombExplodedCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombExplodedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding BombExplodedSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="CommentDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding BombPlantedCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombPlantedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding BombPlantedSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="ClutchCountDataGridTextColumnStyle">
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding ClutchCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
-				<Setter Property="Text" Value="{Binding ClutchUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding ClutchSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TotalDamageHealthCountDataGridTextColumnStyle">
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding TotalDamageHealthCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
-				<Setter Property="Text" Value="{Binding TotalDamageHealthUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding TotalDamageHealthSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TotalDamageArmorCountDataGridTextColumnStyle">
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding TotalDamageArmorCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
-				<Setter Property="Text" Value="{Binding TotalDamageArmorUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding TotalDamageArmorSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="AverageDamageByRoundCountDataGridTextColumnStyle">
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding AverageDamageCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
-				<Setter Property="Text" Value="{Binding AverageDamageUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding AverageDamageSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
-	<!-- TextBlock inside DataGridTextColumn for only user data on DetailsView -->
+	<!-- TextBlock inside DataGridTextColumn for selected player round stats on DetailsView -->
 	<Style TargetType="TextBlock" x:Key="TotalKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding KillsCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TotalKillSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding TotalKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding KillsCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="OneKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding OneKillCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding OneKillSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding OneKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding OneKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TwoKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding TwoKillCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TwoKillSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding TwoKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TwoKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="ThreeKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding ThreeKillCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding ThreeKillSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding ThreeKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding ThreeKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TotalDamageHealthRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
-				<Setter Property="Text" Value="{Binding TotalDamageHealthCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TotalDamageHealthSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
-				<Setter Property="Text" Value="{Binding TotalDamageHealthUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TotalDamageHealthCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="TotalDamageArmorRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
-				<Setter Property="Text" Value="{Binding TotalDamageArmorCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TotalDamageArmorSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
-				<Setter Property="Text" Value="{Binding TotalDamageArmorUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding TotalDamageArmorCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="AverageDamageRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
-				<Setter Property="Text" Value="{Binding AverageDamageByPlayerCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<!-- if the user show only specific player stats, we display the sum of damages he made during the round -->
+				<Setter Property="Text" Value="{Binding TotalDamageSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
-				<!-- if the user show only its stats, we display the sum of damages made during the round -->
-				<Setter Property="Text" Value="{Binding TotalDamageUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding AverageDamageByPlayerCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="FourKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding FourKillCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding FourKillSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding FourKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding FourKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="FiveKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding FiveKillCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding FiveKillSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding FiveKillUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding FiveKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="BombExplodedRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding BombExplodedCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding BombExplodedSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombExplodedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding BombExplodedCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="BombPlantedRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding BombPlantedCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding BombPlantedSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombPlantedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding BombPlantedCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="BombDefusedRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="False">
-				<Setter Property="Text" Value="{Binding BombDefusedCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding BombDefusedSelectedPlayerCount}" />
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}" Value="True">
-				<Setter Property="Text" Value="{Binding BombDefusedUserCount}" />
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding BombDefusedCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>

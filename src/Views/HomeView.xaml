@@ -48,17 +48,18 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
-			
+
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
 			</Grid.ColumnDefinitions>
-			
+
 			<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Height="50" >
 				<Button Command="{Binding AnalyzeDemosCommand}"
 						CommandParameter="{Binding SelectedDemos}"
@@ -191,7 +192,7 @@
 						<TextBlock Text="Add to suspects" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-				
+
 				<Button Margin="5 0 0 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="100"
@@ -208,26 +209,33 @@
 						<TextBlock Text="{Binding NewBannedPlayerCountAsString}" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
-				<StackPanel Orientation="Horizontal">
-					<controls:ProgressRing
-				IsActive="{Binding IsBusy}"
-				Foreground="{DynamicResource AccentColorBrush}"
-				Width="40" Height="40" />
-					<TextBlock Text="{Binding NotificationMessage}"
-							   Style="{StaticResource LabelGeneralInfoDemo}"
-							   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				</StackPanel>
 			</StackPanel>
-			<TextBox Text="{Binding FilterDemoText, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1"
-					 Height="20" Width="160"
-					 controls:TextBoxHelper.Watermark="Filter..."
-					 controls:TextBoxHelper.ClearTextButton="True"
-					 Margin="0 0 10 0"
-					 VerticalAlignment="Center"
-					 HorizontalAlignment="Right" />
+
+			<Grid Grid.Column="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+					<ColumnDefinition Width="Auto"></ColumnDefinition>
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Grid.Column="0" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
+				<ComboBox Grid.Column="1"
+					ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
+					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
+					DisplayMemberPath ="Name"
+					SelectedValuePath="SteamId"
+					Style="{StaticResource ComboBoxAccountsStyle}"
+					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanInvertedConverter}}">
+				</ComboBox>
+
+				<CheckBox Grid.Column="2" x:Name="CheckBoxShowAllAccounts" Content="Show all"
+						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowAllAccountsCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
+			</Grid>
 		</Grid>
-		
+
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
@@ -242,24 +250,24 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
-			
+
 			<Grid Grid.Column="0">
-				<TextBlock Text="Current folder: " Style="{StaticResource CurrentFolderStyle}"/>
+				<TextBlock Text="Folder: " Style="{StaticResource CurrentFolderStyle}"/>
 			</Grid>
-			
+
 			<ComboBox Grid.Column="1" ItemsSource="{Binding Folders, Mode=TwoWay}"
 					  Style="{StaticResource ComboBoxFoldersStyle}"
 					  SelectedItem="{Binding SelectedFolder}"
 					  IsEnabled="{Binding Path=IsShowAllFolders, Converter={StaticResource BooleanInvertedConverter}}"/>
 
 			<Grid Grid.Column="2">
-				<CheckBox x:Name="CheckBoxShowOldDemos" Content="No analyzable demos"
-						  IsChecked="{Binding IsShowOldDemos}"
+				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
+						  IsChecked="{Binding IsShowAllFolders}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowOldDemosCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOldDemos}"/>
+						  Command="{Binding ShowAllFoldersCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllFolders}"/>
 			</Grid>
-			
+
 			<Grid Grid.Column="3">
 				<CheckBox x:Name="CheckBoxShowPov" Content="POV"
 						  IsChecked="{Binding IsShowPovDemos}"
@@ -309,24 +317,33 @@
 			</Grid>
 
 			<Grid Grid.Column="9">
-				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
-						  IsChecked="{Binding IsShowAllFolders}"
+				<CheckBox x:Name="CheckBoxShowOldDemos" Content="No analyzable demos"
+						  IsChecked="{Binding IsShowOldDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowAllFoldersCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllFolders}"/>
+						  Command="{Binding ShowOldDemosCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOldDemos}"/>
 			</Grid>
 
 			<Grid Grid.Column="10">
-				<CheckBox x:Name="CheckBoxShowOnlyUserStats" Content="Show only my stats"
-						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyUserStats}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowOnlyUserStatsCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyUserStats}"/>
+				<TextBox Text="{Binding FilterDemoText, UpdateSourceTrigger=PropertyChanged}"
+					 Height="20" Width="160"
+					 controls:TextBoxHelper.Watermark="Filter..."
+					 controls:TextBoxHelper.ClearTextButton="True"
+					 Margin="0 0 10 0"
+					 VerticalAlignment="Center"
+					 HorizontalAlignment="Right" />
 			</Grid>
 		</Grid>
 
-		
-		<DataGrid Grid.Row="2"
+		<Grid Grid.Row="2" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+				<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
+				<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+			</StackPanel>
+		</Grid>
+
+		<DataGrid Grid.Row="3"
 				  x:Name="DataGridDemos"
 				  ItemsSource="{Binding DataGridDemosCollection}"
 				  SelectedItem="{Binding SelectedDemo}"
@@ -445,7 +462,7 @@
 			</DataGrid.Columns>
 		</DataGrid>
 
-		<Grid Grid.Row="3">
+		<Grid Grid.Row="4">
 			<Grid Background="{StaticResource LightGreyBrush}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />

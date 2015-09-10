@@ -64,7 +64,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			_arguments.Add("+playdemo");
 			_arguments.Add(demo.Path);
-			_arguments.Add(steamId ?? Properties.Settings.Default.SteamID.ToString());
+			_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
 			StartGame();
 		}
 
@@ -72,7 +72,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			_arguments.Add("+playdemo");
 			_arguments.Add(demo.Path);
-			_arguments.Add(steamId ?? Properties.Settings.Default.SteamID.ToString());
+			_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
 			_arguments.Add("lowlights");
 			StartGame();
 		}

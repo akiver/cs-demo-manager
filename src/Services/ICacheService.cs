@@ -27,5 +27,13 @@ namespace CSGO_Demos_Manager.Services
 		Task<bool> AddSuspectToBannedList(Suspect suspect);
 
 		Task<List<string>> GetSuspectsBannedList();
+
+		Task<bool> AddAccountAsync(Account account);
+
+		Task<bool> RemoveAccountAsync(Account account);
+
+		Task<List<Account>> GetAccountListAsync();
+
+		Task<Account> GetAccountAsync(long steamId);
 	}
 }

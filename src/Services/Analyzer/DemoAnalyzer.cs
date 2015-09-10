@@ -970,7 +970,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			int personnalTeamScore = 0;
 			int opponentTeamScore = 0;
 
-			PlayerExtended pl = Demo.PlayersTeam1.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SteamID);
+			PlayerExtended pl = Demo.PlayersTeam1.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
 			if (pl != null)
 			{
 				personnalTeamScore = Demo.ScoreTeam1;
@@ -978,7 +978,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 			else
 			{
-				PlayerExtended pl2 = Demo.PlayersTeam2.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SteamID);
+				PlayerExtended pl2 = Demo.PlayersTeam2.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
 				if (pl2 != null)
 				{
 					personnalTeamScore = Demo.ScoreTeam2;
