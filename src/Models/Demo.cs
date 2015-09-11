@@ -84,11 +84,6 @@ namespace CSGO_Demos_Manager.Models
 		private string _path;
 
 		/// <summary>
-		/// Game win/lose/draw status
-		/// </summary>
-		private string _winStatus;
-
-		/// <summary>
 		/// Indicates if there are at least 1 banned player (OW / VAC)
 		/// </summary>
 		private bool _hasCheater;
@@ -357,11 +352,32 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Path, ref _path, value); }
 		}
 
-		[JsonProperty("win_status")]
 		public string WinStatus
 		{
-			get { return _winStatus; }
-			set { Set(() => WinStatus, ref _winStatus, value); }
+			get
+			{
+				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return string.Empty;
+
+				// was in team 1?
+				PlayerExtended player = PlayersTeam1.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player != null)
+				{
+					if (ScoreTeam1 == ScoreTeam2) return "draw";
+					if (ScoreTeam1 > ScoreTeam2) return "won";
+					return "lost";
+				}
+
+				// was in team 2?
+				player = PlayersTeam2.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player != null)
+				{
+					if (ScoreTeam1 == ScoreTeam2) return "draw";
+					if (ScoreTeam1 < ScoreTeam2) return "won";
+					return "lost";
+				}
+
+				return string.Empty;
+			}
 		}
 		
 		[JsonProperty("has_cheater")]
@@ -1047,6 +1063,7 @@ namespace CSGO_Demos_Manager.Models
 				RaisePropertyChanged("AverageDamageCount");
 			}
 			RaisePropertyChanged("MostDamageWeapon");
+			RaisePropertyChanged("WinStatus");
 		}
 
 		#endregion

@@ -66,7 +66,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			await Task.Run(() => Parser.ParseToEnd());
 
-			Application.Current.Dispatcher.Invoke(ProcessWinStatus);
 			Application.Current.Dispatcher.Invoke(ProcessPlayersRating);
 			Application.Current.Dispatcher.Invoke(delegate
 			{

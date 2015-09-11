@@ -221,7 +221,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				});
 			}
 
-			ProcessWinStatus();
 			ProcessPlayersRating();
 		}
 

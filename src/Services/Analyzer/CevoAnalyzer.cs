@@ -101,7 +101,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			ProcessPlayersRating();
-			ProcessWinStatus();
 		}
 
 		protected void HandleLastRoundHalf(object sender, LastRoundHalfEventArgs e)

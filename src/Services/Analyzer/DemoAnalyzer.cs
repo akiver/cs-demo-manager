@@ -962,47 +962,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 		}
 
-		/// <summary>
-		/// Determine game win status using user's SteamId (set via Settings)
-		/// </summary>
-		protected void ProcessWinStatus()
-		{
-			int personnalTeamScore = 0;
-			int opponentTeamScore = 0;
-
-			PlayerExtended pl = Demo.PlayersTeam1.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
-			if (pl != null)
-			{
-				personnalTeamScore = Demo.ScoreTeam1;
-				opponentTeamScore = Demo.ScoreTeam2;
-			}
-			else
-			{
-				PlayerExtended pl2 = Demo.PlayersTeam2.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
-				if (pl2 != null)
-				{
-					personnalTeamScore = Demo.ScoreTeam2;
-					opponentTeamScore = Demo.ScoreTeam1;
-				}
-			}
-
-			if (personnalTeamScore != 0 && opponentTeamScore != 0)
-			{
-				if (personnalTeamScore > opponentTeamScore)
-				{
-					Demo.WinStatus = "won";
-				}
-				else if (personnalTeamScore < opponentTeamScore)
-				{
-					Demo.WinStatus = "lost";
-				}
-				else
-				{
-					Demo.WinStatus = "draw";
-				}
-			}
-		}
-
 		protected void ProcessOpenAndEntryKills(KillEvent killEvent)
 		{
 			if (killEvent.DeathPerson == null || killEvent.Killer == null) return;
