@@ -989,7 +989,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								return;
 							}
 							// if there is no more accounts or the current stats account is removed, we show stats from all accounts
-							if (!Accounts.Any() || SelectedStatsAccount.SteamId.ToString() == account.SteamId) IsShowAllAccounts = true;
+							if (!Accounts.Any() || (SelectedStatsAccount != null && SelectedStatsAccount.SteamId.ToString() == account.SteamId)) IsShowAllAccounts = true;
 							// if the current watch account is removed, we reset the displayed watch account
 							if (WatchAccountSteamId.ToString() == account.SteamId) SelectedWatchAccount = null;
 							Accounts.Remove(account);
