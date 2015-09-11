@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{22D4CFC7-6810-4C18-A353-71A49782394F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>DemoInfo</RootNamespace>
+    <AssemblyName>DemoInfo</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>true</DelaySign>
+    <AssemblyOriginatorKeyFile>demoinfo-release.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SLOW_PROTOBUF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;SLOW_PROTOBUF</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\Release\DemoInfo.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Bitstream-Debugging|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;BITSTREAMDEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'YoloDebug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;YOLO;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SavePropValues|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;SAVE_PROP_VALUES</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DemoParser.cs" />
+    <Compile Include="DP\DemoPacketParser.cs" />
+    <Compile Include="DP\Entity.cs" />
+    <Compile Include="DP\Handler\GameEventHandler.cs" />
+    <Compile Include="DP\Handler\PacketEntitesHandler.cs" />
+    <Compile Include="DP\Handler\PropDecoder.cs" />
+    <Compile Include="DP\Handler\CreateStringTableUserInfoHandler.cs" />
+    <Compile Include="DP\Handler\UpdateStringTableUserInfoHandler.cs" />
+    <Compile Include="DP\IMessageParser.cs" />
+    <Compile Include="DT\DataTableParser.cs" />
+    <Compile Include="DT\SendTableProperty.cs" />
+    <Compile Include="DT\SendTable.cs" />
+    <Compile Include="DT\ServerClass.cs" />
+    <Compile Include="Events.cs" />
+    <Compile Include="Helper.cs" />
+    <Compile Include="Messages\netmessages.cs" />
+    <Compile Include="Messages\usermessages.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Structs.cs" />
+    <Compile Include="ST\StringTableParser.cs" />
+    <Compile Include="DP\Handler\UserMessageHandler.cs" />
+    <Compile Include="LimitStream.cs" />
+    <Compile Include="BitStream\BitArrayStream.cs" />
+    <Compile Include="BitStream\BitStreamUtil.cs" />
+    <Compile Include="BitStream\ManagedBitStream.cs" />
+    <Compile Include="BitStream\DebugBitStream.cs" />
+    <Compile Include="BitStream\IBitStream.cs" />
+    <Compile Include="BitStream\UnsafeBitStream.cs" />
+    <Compile Include="Messages\steammessages.cs" />
+    <Compile Include="Messages\gcmessages.cs" />
+    <Compile Include="DP\FastNetmessages\NETTick.cs" />
+    <Compile Include="DP\FastNetmessages\PacketEntities.cs" />
+    <Compile Include="DP\FastNetmessages\GameEventList.cs" />
+    <Compile Include="DP\FastNetmessages\GameEvent.cs" />
+    <Compile Include="DP\FastNetmessages\CreateStringTable.cs" />
+    <Compile Include="DP\FastNetmessages\UpdateStringTable.cs" />
+    <Compile Include="DP\FastNetmessages\SendTable.cs" />
+    <Compile Include="Messages\EnumConstants.cs" />
+    <Compile Include="AdditionalPlayerInformation.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup />
+  <ItemGroup />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(SolutionDir)DemoInfo\bin\Debug
+snremove.exe -r DemoInfo.dll
+cd $(SolutionDir)DemoInfo\bin\Release
+snremove.exe -r DemoInfo.dll</PostBuildEvent>
+  </PropertyGroup>
+</Project>
