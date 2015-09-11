@@ -10,6 +10,8 @@ using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
 using DemoInfo;
+using DemoInfo.Messages;
+using ProtoBuf;
 
 namespace CSGO_Demos_Manager.Services.Analyzer
 {
@@ -135,6 +137,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			demo.Duration = header.PlaybackTime;
 			demo.MapName = header.MapName;
 			demo.Source = DetermineDemoSource(demo, header);
+
+			// Read .info file to get the real match date
+			string infoFilePath = demo.Path + ".info";
+			if (File.Exists(infoFilePath))
+			{
+				using (FileStream file = File.OpenRead(infoFilePath))
+				{
+					CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
+					DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+					demo.Date = unixTime.AddSeconds(infoMsg.matchtime).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+				}
+			}
 
 			return demo;
 		}
