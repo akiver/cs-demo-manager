@@ -561,10 +561,16 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 
 							added = await _cacheService.AddAccountAsync(account);
-							if (!added) await _dialogService.ShowErrorAsync("This player is already in your account list.", MessageDialogStyle.Affirmative);
-
-							var settingsViewModel = (new ViewModelLocator()).Settings;
-							settingsViewModel.Accounts.Add(account);
+							if (!added)
+							{
+								await
+									_dialogService.ShowErrorAsync("This player is already in your account list.", MessageDialogStyle.Affirmative);
+							}
+							else
+							{
+								var settingsViewModel = (new ViewModelLocator()).Settings;
+								settingsViewModel.Accounts.Add(account);
+							}
 						}
 						catch (Exception e)
 						{
