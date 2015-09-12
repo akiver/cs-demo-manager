@@ -193,7 +193,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding Details.ExportDemoToExcelCommand, Source={StaticResource Locator}}"
+				<Button Command="{Binding ExportDemoToExcelCommand}"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Export as XLS (CTRL+X)"
 					Margin="5 0 0 0"

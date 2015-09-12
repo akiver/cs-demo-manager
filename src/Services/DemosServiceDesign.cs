@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
+using CSGO_Demos_Manager.Models.Source;
 using DemoInfo;
 
 namespace CSGO_Demos_Manager.Services
@@ -123,8 +124,9 @@ namespace CSGO_Demos_Manager.Services
 
 		public Task<Demo> AnalyzeDemo(Demo demo)
 		{
-			ObservableCollection<PlayerExtended> players = new ObservableCollection<PlayerExtended>();
 			Random random = new Random();
+
+			ObservableCollection<PlayerExtended> players = new ObservableCollection<PlayerExtended>();
 			for (int i = 0; i < 10; i++)
 			{
 				ObservableCollection<EntryKillEvent> entryKills = new ObservableCollection<EntryKillEvent>();
@@ -163,11 +165,26 @@ namespace CSGO_Demos_Manager.Services
 					KillsCount = random.Next(30),
 					AssistCount = random.Next(15),
 					Score = random.Next(10, 80),
-					RoundMvpCount = random.Next(6)
+					RoundMvpCount = random.Next(6),
+					OldRank = Demo.RankList[random.Next(0, 19)]
 				};
 
 				players.Add(player);
 			}
+
+			ObservableCollection<TeamExtended> teams = new ObservableCollection<TeamExtended>
+			{
+				new TeamExtended
+				{
+					Name = "Team 1",
+					Players = new ObservableCollection<PlayerExtended>(players.Take(5))
+				},
+				new TeamExtended
+				{
+					Name = "Team 2",
+					Players = new ObservableCollection<PlayerExtended>(players.Skip(5).Take(5))
+				}
+			};
 
 			ObservableCollection<Round> rounds = new ObservableCollection<Round>();
 			for (int i = 0; i < 32; i++)
@@ -184,42 +201,47 @@ namespace CSGO_Demos_Manager.Services
 					EquipementValueTeam2 = random.Next(4200, 30000),
 					StartMoneyTeam1 = random.Next(4200, 50000),
 					StartMoneyTeam2 = random.Next(4200, 50000),
-					Tick = random.Next(7000, 100000)
+					Tick = random.Next(7000, 100000),
+					WinnerClanName = teams[random.Next(0, 2)].Name
 				};
 
 				rounds.Add(round);
 			}
 
-			demo = new Demo
+			demo.Id = "de_dust25445648778447878";
+			demo.Source = new Valve();
+			demo.Name = "esea_nip_vs_titan.dem";
+			demo.Tickrate = 15;
+			demo.ServerTickrate = 128;
+			demo.MapName = "de_dust2";
+			demo.ClientName = "localhost";
+			demo.Hostname = "local";
+			demo.OneKillCount = 90;
+			demo.TwoKillCount = 30;
+			demo.ThreeKillCount = 25;
+			demo.FourKillCount = 3;
+			demo.FiveKillCount = 1;
+			demo.Path = "C:\\mydemo.dem";
+			demo.ScoreTeam1 = 16;
+			demo.ScoreTeam2 = 6;
+			demo.Type = "GOTV";
+			demo.Comment = "comment";
+			demo.ScoreFirstHalfTeam1 = 10;
+			demo.ScoreFirstHalfTeam2 = 5;
+			demo.ScoreSecondHalfTeam1 = 6;
+			demo.ScoreSecondHalfTeam2 = 1;
+			demo.Players = players;
+			demo.PlayersTeam1 = teams[0].Players;
+			demo.PlayersTeam2 = teams[1].Players;
+			demo.MostBombPlantedPlayer = players.ElementAt(random.Next(10));
+			demo.MostHeadshotPlayer = players.ElementAt(random.Next(10));
+			demo.MostEntryKillPlayer = players.ElementAt(random.Next(10));
+			demo.MostKillingWeapon = new Weapon
 			{
-				Id = "de_dust25445648778447878",
-				Name = "esea_nip_vs_titan.dem",
-				Tickrate = 128,
-				MapName = "de_dust2",
-				ClientName = "localhost",
-				Hostname = "local",
-				OneKillCount = 90,
-				TwoKillCount = 30,
-				ThreeKillCount = 25,
-				FourKillCount = 3,
-				FiveKillCount = 1,
-				Path = "C:\\mydemo.dem",
-				ScoreTeam1 = 16,
-				ScoreTeam2 = 6,
-				Type = "GOTV",
-				Comment = "comment",
-				ScoreFirstHalfTeam1 = 10,
-				ScoreFirstHalfTeam2 = 5,
-				ScoreSecondHalfTeam1 = 6,
-				ScoreSecondHalfTeam2 = 1,
-				Players = players,
-				PlayersTeam1 = new ObservableCollection<PlayerExtended>(players.Take(5)),
-				PlayersTeam2 = new ObservableCollection<PlayerExtended>(players.Skip(5).Take(5)),
-				MostBombPlantedPlayer = players.ElementAt(random.Next(10)),
-				MostHeadshotPlayer = players.ElementAt(random.Next(10)),
-				Rounds = rounds
+				Name =  "AK-47"
 			};
-
+			demo.Teams = teams;
+			demo.Rounds = rounds;
 
 			return Task.FromResult(demo);
 		}
