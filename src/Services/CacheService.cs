@@ -6,6 +6,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Services.Serialization;
+#if DEBUG
+using Newtonsoft.Json.Serialization;
+#endif
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -42,7 +45,12 @@ namespace CSGO_Demos_Manager.Services
 
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)([_])([^0-9]*)([0-9]*)(.json)$");
 
-		#endregion
+#if DEBUG
+		private readonly ITraceWriter _traceWriter = new MemoryTraceWriter();
+		private const string OUTPUT_TRACE_WRITER_FILE = " debug_json.log";
+#endif
+
+#endregion
 
 		public CacheService()
 		{
@@ -52,7 +60,9 @@ namespace CSGO_Demos_Manager.Services
 			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME))
 				File.Create(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME);
 #if DEBUG
+			
 			_settingsJson.Formatting = Formatting.Indented;
+			_settingsJson.TraceWriter = _traceWriter;
 #endif
 			_settingsJson.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
 			_settingsJson.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
@@ -80,7 +90,11 @@ namespace CSGO_Demos_Manager.Services
 
 			string json = File.ReadAllText(pathDemoFileJson);
 
-			Demo demoFromJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json));
+			Demo demoFromJson = await Task.Factory.StartNew(() => demoFromJson =  JsonConvert.DeserializeObject<Demo>(json, _settingsJson));
+
+#if DEBUG
+			File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
+#endif
 
 			return demoFromJson;
 		}
@@ -96,6 +110,10 @@ namespace CSGO_Demos_Manager.Services
 			string pathDemoFileJson = _pathFolderCache + "\\" + demo.Id + ".json";
 
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, _settingsJson));
+
+#if DEBUG
+			File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
+#endif
 
 			File.WriteAllText(pathDemoFileJson, json);
 		}
