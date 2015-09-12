@@ -134,6 +134,7 @@
     <Compile Include="Converters\BooleanInvertedConverter.cs" />
     <Compile Include="Converters\BooleanToStringConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityInvertedConverter.cs" />
     <Compile Include="Converters\ImageToSourceConverter.cs" />
     <Compile Include="Converters\IntToBooleanConverter.cs" />
     <Compile Include="Converters\MapNameToImageConverter.cs" />
@@ -353,6 +354,10 @@
     <Page Include="resources\Icons.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\ListView.xaml">
       <SubType>Designer</SubType>

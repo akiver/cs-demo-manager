@@ -21,6 +21,7 @@
 			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 			<helpers:ImageToSourceConverter x:Key="ImageToSourceConverter" />
 			<helpers:StringToDateConverter x:Key="StringToDateConverter" />
+			<helpers:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -55,28 +56,130 @@
 
 		<Grid Grid.Row="0">
 
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
 
-			<StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" Height="50" >
-				<Button Command="{Binding AnalyzeDemosCommand}"
+			<!-- Action bar 1st row -->
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<Grid Grid.Row="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Button Grid.Column="0" Command="{Binding AnalyzeDemosCommand}"
 						CommandParameter="{Binding SelectedDemos}"
-						Margin="10"
+						Margin="5"
 						ToolTip="Analyze selected demos (CTRL+S)"
 						Style="{DynamicResource AccentedSquareButtonStyle}" Width="90" Height="30">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="25" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_social_twitter_retweet}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Analyze" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="25" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_social_twitter_retweet}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Analyze" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 
-				<Button Margin="10"
+					<Button Grid.Column="1" Margin="5"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Width="80"
+					Height="30"
+					ToolTip="Demo's details (CTRL+D)"
+					Command="{Binding ShowDemoDetailsCommand}"
+					CommandParameter="{Binding SelectedDemo}">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="15" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_page_text}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Details" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<Button Grid.Column="2" Command="{Binding RefreshListCommand}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Margin="5"
+					ToolTip="Refresh demos list (CTRL+R)"
+					Width="90"
+					Height="30">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="15" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_refresh}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<Button Grid.Column="3"
+							Command="{Binding BrowseToDemoCommand}"
+							CommandParameter="{Binding SelectedDemo}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Margin="5"
+					ToolTip="Browse to demo (CTRL+B)"
+					Width="90"
+					Height="30">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="15" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_refresh}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Browse" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<TextBlock Grid.Column="4" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
+					<ComboBox Grid.Column="5"
+					ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
+					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
+					DisplayMemberPath ="Name"
+					SelectedValuePath="SteamId"
+					Style="{StaticResource ComboBoxAccountsStyle}"
+					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanInvertedConverter}}">
+					</ComboBox>
+
+					<CheckBox Grid.Column="6" x:Name="CheckBoxShowAllAccounts" Content="Show all"
+						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowAllAccountsCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
+
+					<Image Grid.Column="7" Style="{StaticResource RankStyle}" Height="32"
+						   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
+				</Grid>
+			</Grid>
+			<!--end action bar 1st row -->
+
+			<!-- Action bar 2nd row -->
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
+
+				<Button Grid.Column="0" Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="70"
 					Height="30"
@@ -93,7 +196,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
+				<Button Grid.Column="1" Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="100"
 					Height="30"
@@ -109,7 +212,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
+				<Button Grid.Column="2" Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="130"
 					Height="30"
@@ -126,7 +229,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
+				<Button Grid.Column="3" Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="120"
 					Height="30"
@@ -143,40 +246,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="80"
-					Height="30"
-					ToolTip="Demo's details (CTRL+D)"
-					Command="{Binding ShowDemoDetailsCommand}"
-					CommandParameter="{Binding SelectedDemo}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_page_text}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Details" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Command="{Binding RefreshListCommand}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Margin="5 0 0 0"
-					ToolTip="Refresh demos list (CTRL+R)"
-					Width="90"
-					Height="30">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_refresh}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Margin="10"
+				<Button Grid.Column="4" Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="120"
 					Height="30"
@@ -193,7 +263,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="5 0 0 0"
+				<Button Grid.Column="5" Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="100"
 					Height="30"
@@ -209,32 +279,9 @@
 						<TextBlock Text="{Binding NewBannedPlayerCountAsString}" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-			</StackPanel>
-
-			<Grid Grid.Column="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"></ColumnDefinition>
-					<ColumnDefinition Width="Auto"></ColumnDefinition>
-					<ColumnDefinition Width="Auto"></ColumnDefinition>
-				</Grid.ColumnDefinitions>
-
-				<TextBlock Grid.Column="0" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
-				<ComboBox Grid.Column="1"
-					ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
-					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
-					DisplayMemberPath ="Name"
-					SelectedValuePath="SteamId"
-					Style="{StaticResource ComboBoxAccountsStyle}"
-					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanInvertedConverter}}">
-				</ComboBox>
-
-				<CheckBox Grid.Column="2" x:Name="CheckBoxShowAllAccounts" Content="Show all"
-						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowAllAccountsCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
 			</Grid>
 		</Grid>
+		<!-- end action bar 2nd row -->
 
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
@@ -372,7 +419,7 @@
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
-				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding Date, Converter={StaticResource StringToDateConverter}}" HeaderStyle="{StaticResource DemoDateHeader}" SortDirection="Descending" 
+				<DataGridTextColumn x:Name="DateColumn" Width="Auto" Header="Date" Binding="{Binding DateAsString, Converter={StaticResource StringToDateConverter}}" HeaderStyle="{StaticResource DemoDateHeader}" SortDirection="Descending" 
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="FileNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}" HeaderStyle="{StaticResource DemoNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />

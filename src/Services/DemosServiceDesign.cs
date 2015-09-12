@@ -282,5 +282,10 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(demo);
 		}
+
+		public Task<Rank> GetLastRankAccountStatsAsync()
+		{
+			return Task.FromResult(Demo.RankList[0]);
+		}
 	}
 }

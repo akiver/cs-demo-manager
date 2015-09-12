@@ -31,7 +31,7 @@ namespace CSGO_Demos_Manager.Models
 		/// <summary>
 		/// Demo's date
 		/// </summary>
-		private string _date;
+		private DateTime _date;
 
 		/// <summary>
 		/// Demo's source (MM, ESEA, FaceIt)
@@ -371,11 +371,13 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("date")]
-		public string Date
+		public DateTime Date
 		{
 			get { return _date; }
 			set { Set(() => Date, ref _date, value); }
 		}
+
+		public string DateAsString => _date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
 		[JsonIgnore]
 		public Source.Source Source

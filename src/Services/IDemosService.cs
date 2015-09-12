@@ -45,5 +45,11 @@ namespace CSGO_Demos_Manager.Services
 		Task<List<Demo>> GetDemosFromBackup(string jsonFile);
 
 		Task<Demo> AnalyzeBannedPlayersAsync(Demo demo);
+
+		/// <summary>
+		/// Return the last rank detected of the selected account
+		/// </summary>
+		/// <returns></returns>
+		Task<Rank> GetLastRankAccountStatsAsync();
 	}
 }

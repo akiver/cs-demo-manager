@@ -25,6 +25,7 @@
 				<ResourceDictionary Source="Resources/ListView.xaml" />
 				<ResourceDictionary Source="Resources/ComboBoxs.xaml" />
 				<ResourceDictionary Source="Resources/CheckBoxs.xaml" />
+				<ResourceDictionary Source="Resources/Images.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

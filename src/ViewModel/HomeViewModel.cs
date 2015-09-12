@@ -124,6 +124,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<UserControl> _showLastUserControlCommand;
 
+		private Rank _lastRankAccountStats;
+
 		#endregion
 
 		#region Accessors
@@ -289,6 +291,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public Rank LastRankAccountStats
+		{
+			get { return _lastRankAccountStats; }
+			set { Set(() => LastRankAccountStats, ref _lastRankAccountStats, value); }
+		}
+
 		#endregion
 
 		#region Filters
@@ -305,7 +313,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						|| data.Comment.Contains(_filterDemoText) || data.Hostname.Contains(_filterDemoText)
 						|| data.ClientName.Contains(_filterDemoText) || data.ClanTagNameTeam1.Contains(_filterDemoText)
 						|| data.ClanTagNameTeam2.Contains(_filterDemoText) || data.SourceName.Contains(_filterDemoText)
-						|| (data.Date != null && data.Date.Contains(_filterDemoText));
+						|| (data.DateAsString.Contains(_filterDemoText));
 				}
 
 				// POV filter
@@ -1055,9 +1063,10 @@ namespace CSGO_Demos_Manager.ViewModel
 		private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)
 		{
 			DispatcherHelper.CheckBeginInvokeOnUI(
-			() =>
+			async () =>
 			{
 				DataGridDemosCollection.Refresh();
+				LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync();
 			});
 		}
 

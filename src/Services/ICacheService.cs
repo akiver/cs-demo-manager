@@ -41,5 +41,11 @@ namespace CSGO_Demos_Manager.Services
 		Task<bool> AddFolderAsync(string path);
 
 		Task<bool> RemoveFolderAsync(string path);
+
+		/// <summary>
+		/// Return all the demos inside each folders
+		/// </summary>
+		/// <returns></returns>
+		Task<List<Demo>> GetDemoListAsync();
 	}
 }

@@ -123,5 +123,10 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(true);
 		}
+
+		public Task<List<Demo>> GetDemoListAsync()
+		{
+			return Task.FromResult(new List<Demo>());
+		}
 	}
 }

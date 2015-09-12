@@ -101,13 +101,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			DemoParser parser = new DemoParser(File.OpenRead(pathDemoFile));
 
 			DateTime dateFile = File.GetCreationTime(pathDemoFile);
-			string dateAsString = dateFile.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
 			Demo demo = new Demo
 			{
 				Name = Path.GetFileName(pathDemoFile),
 				Path = pathDemoFile,
-				Date = dateAsString
+				Date = dateFile
 			};
 
 			try
@@ -123,7 +121,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			DemoHeader header = parser.Header;
 			DateTime dateTime = File.GetCreationTime(pathDemoFile);
 			int seconds = (int)(dateTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-			demo.Id = header.MapName.Replace("/", "") + seconds + header.SignonLength + header.PlaybackFrames;
+			demo.Id = header.MapName.Replace("/", "") + "_" + seconds + header.SignonLength + header.PlaybackFrames;
 			demo.ClientName = header.ClientName;
 			demo.Hostname = header.ServerName;
 			if (header.PlaybackTicks != 0 && header.PlaybackTime != 0)
@@ -146,7 +144,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
 					DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-					demo.Date = unixTime.AddSeconds(infoMsg.matchtime).ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+					demo.Date = unixTime.AddSeconds(infoMsg.matchtime);
 				}
 			}
 

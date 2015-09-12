@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Style TargetType="Image" x:Key="RankStyle">
+		<Setter Property="ToolTip" Value="Last rank detected" />
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False">
+				<Setter Property="Source" Value="../resources/images/ranks/no_rank.png" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True">
+				<Setter Property="Source" Value="{Binding Source={StaticResource Locator}, Path=Home.LastRankAccountStats.Logo}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+</ResourceDictionary>

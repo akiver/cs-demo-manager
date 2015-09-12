@@ -1,13 +1,14 @@
 ﻿using CSGO_Demos_Manager.Models;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
 using CSGO_Demos_Manager.Services.Serialization;
+using MoreLinq;
 using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Services
@@ -202,6 +203,24 @@ namespace CSGO_Demos_Manager.Services
 				demos = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Demo>>(json, new DemoListBackupConverter()));
 			}
 			return demos;
+		}
+
+		public async Task<Rank> GetLastRankAccountStatsAsync()
+		{
+			Rank rank = Demo.RankList[0];
+			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			if (demos.Any())
+			{
+				// demos where account played
+				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
+				if (demosPlayerList.Any())
+				{
+					Demo lastDemo = demosPlayerList.MaxBy(d => d.Date);
+					rank = lastDemo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).NewRank;
+				}
+			}
+
+			return rank;
 		}
 	}
 }
