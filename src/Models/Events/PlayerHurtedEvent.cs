@@ -9,7 +9,7 @@ namespace CSGO_Demos_Manager.Models.Events
 		{
 		}
 
-		[JsonProperty("defuser")]
+		[JsonProperty("hurted")]
 		public PlayerExtended Hurted { get; set; }
 
 		[JsonProperty("attacker")]
