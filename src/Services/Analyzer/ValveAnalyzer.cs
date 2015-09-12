@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using CSGO_Demos_Manager.Models;
+﻿using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using DemoInfo;
 using System.IO;
@@ -47,6 +46,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
 			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 			Parser.PlayerHurt += HandlePlayerHurted;
+			Parser.ServerRankUpdate += HandleServerRankUpdate;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync()
@@ -85,6 +85,20 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		}
 
 		#region Events Handlers
+
+		private void HandleServerRankUpdate(object sender, ServerRankUpdateEventArgs e)
+		{
+			foreach (ServerRankUpdateEventArgs.RankStruct rankStruct in e.RankStructList)
+			{
+				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == rankStruct.SteamId);
+				if (player != null)
+				{
+					player.OldRank = Demo.RankList.First(r => r.Number == rankStruct.Old);
+					player.NewRank = Demo.RankList.First(r => r.Number == rankStruct.New);
+					player.WinCount = rankStruct.NumWins;
+				}
+			}
+		}
 
 		private void HandleBotTakeOver(object sender, BotTakeOverEventArgs e)
 		{

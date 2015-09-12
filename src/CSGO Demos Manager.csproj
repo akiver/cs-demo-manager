@@ -129,6 +129,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppSettings.cs" />
+    <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BooleanInvertedConverter.cs" />
     <Compile Include="Converters\BooleanToStringConverter.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
+    <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
@@ -178,6 +180,7 @@
     <Compile Include="Models\PlayerColor.cs" />
     <Compile Include="Models\PlayerExtended.cs" />
     <Compile Include="Models\PositionPoint.cs" />
+    <Compile Include="Models\Rank.cs" />
     <Compile Include="Models\Round.cs" />
     <Compile Include="Models\Source\Ebot.cs" />
     <Compile Include="Models\Source\Esea.cs" />
@@ -620,6 +623,25 @@
     <Content Include="AfxHookSource.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\ranks\elo03.png" />
+    <Resource Include="resources\images\ranks\no_rank.png" />
+    <Resource Include="resources\images\ranks\elo01.png" />
+    <Resource Include="resources\images\ranks\elo02.png" />
+    <Resource Include="resources\images\ranks\elo04.png" />
+    <Resource Include="resources\images\ranks\elo05.png" />
+    <Resource Include="resources\images\ranks\elo06.png" />
+    <Resource Include="resources\images\ranks\elo07.png" />
+    <Resource Include="resources\images\ranks\elo08.png" />
+    <Resource Include="resources\images\ranks\elo09.png" />
+    <Resource Include="resources\images\ranks\elo10.png" />
+    <Resource Include="resources\images\ranks\elo11.png" />
+    <Resource Include="resources\images\ranks\elo12.png" />
+    <Resource Include="resources\images\ranks\elo13.png" />
+    <Resource Include="resources\images\ranks\elo14.png" />
+    <Resource Include="resources\images\ranks\elo15.png" />
+    <Resource Include="resources\images\ranks\elo16.png" />
+    <Resource Include="resources\images\ranks\elo17.png" />
+    <Resource Include="resources\images\ranks\elo18.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

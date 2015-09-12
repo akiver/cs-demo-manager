@@ -233,6 +233,125 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private ObservableCollection<TeamExtended> _teams = new ObservableCollection<TeamExtended>();
 
+		[JsonProperty("ranks")]
+		public static List<Rank> RankList = new List<Rank>
+		{
+			new Rank
+			{
+				Number = 0,
+				Name = "None",
+				Logo = "../resources/images/ranks/no_rank.png"
+			},
+			new Rank
+			{
+				Number = 1,
+				Name = "Silver I",
+				Logo = "../resources/images/ranks/elo01.png"
+			},
+			new Rank
+			{
+				Number = 2,
+				Name = "Silver II",
+				Logo = "../resources/images/ranks/elo02.png"
+			},
+			new Rank
+			{
+				Number = 3,
+				Name = "Silver III",
+				Logo = "../resources/images/ranks/elo03.png"
+			},
+			new Rank
+			{
+				Number = 4,
+				Name = "Silver IV",
+				Logo = "../resources/images/ranks/elo04.png"
+			},
+			new Rank
+			{
+				Number = 5,
+				Name = "Silver Elite",
+				Logo = "../resources/images/ranks/elo05.png"
+			},
+			new Rank
+			{
+				Number = 6,
+				Name = "Silver Elite Master",
+				Logo = "../resources/images/ranks/elo06.png"
+			},
+			new Rank
+			{
+				Number = 7,
+				Name = "Gold Nova I",
+				Logo = "../resources/images/ranks/elo07.png"
+			},
+			new Rank
+			{
+				Number = 8,
+				Name = "Gold Nova II",
+				Logo = "../resources/images/ranks/elo08.png"
+			},
+			new Rank
+			{
+				Number = 9,
+				Name = "Gold Nova III",
+				Logo = "../resources/images/ranks/elo09.png"
+			},
+			new Rank
+			{
+				Number = 10,
+				Name = "Gold Nova Master",
+				Logo = "../resources/images/ranks/elo10.png"
+			},
+			new Rank
+			{
+				Number = 11,
+				Name = "Master Guardian I",
+				Logo = "../resources/images/ranks/elo11.png"
+			},
+			new Rank
+			{
+				Number = 12,
+				Name = "Master Guardian II",
+				Logo = "../resources/images/ranks/elo12.png"
+			},
+			new Rank
+			{
+				Number = 13,
+				Name = "Master Guardian Elite",
+				Logo = "../resources/images/ranks/elo13.png"
+			},
+			new Rank
+			{
+				Number = 14,
+				Name = "Distinguished Master Guardian",
+				Logo = "../resources/images/ranks/elo14.png"
+			},
+			new Rank
+			{
+				Number = 15,
+				Name = "Legendary Eagle",
+				Logo = "../resources/images/ranks/elo15.png"
+			},
+			new Rank
+			{
+				Number = 16,
+				Name = "Legendary Eagle Master",
+				Logo = "../resources/images/ranks/elo16.png"
+			},
+			new Rank
+			{
+				Number = 17,
+				Name = "Supreme Master First Class",
+				Logo = "../resources/images/ranks/elo17.png"
+			},
+			new Rank
+			{
+				Number = 18,
+				Name = "Global Elite",
+				Logo = "../resources/images/ranks/elo18.png"
+			}
+		};
+
 		#endregion
 
 		#region Accessors

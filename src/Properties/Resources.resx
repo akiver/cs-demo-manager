@@ -334,4 +334,61 @@
   <data name="zoo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\maps\preview\zoo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="elo01" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo02" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo04" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo04.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo05" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo06" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo06.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo07" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo07.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo08" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo08.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo09" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo09.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo10" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo11" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo13" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo14" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo15" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo17" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo18" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="elo03" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\elo03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="no_rank" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\ranks\no_rank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

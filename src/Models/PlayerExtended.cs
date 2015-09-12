@@ -176,6 +176,12 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private bool _isOverwatchBanned;
 
+		private Rank _oldRank = Demo.RankList[0];
+
+		private Rank _newRank = Demo.RankList[0];
+
+		private int _winCount = 0;
+
 		#endregion
 
 		#region Accessors
@@ -424,6 +430,27 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		[JsonProperty("players_hurted")]
 		public ObservableCollection<PlayerHurtedEvent> PlayersHurted { get; set; }
+
+		[JsonProperty("old_rank")]
+		public Rank OldRank
+		{
+			get { return _oldRank; }
+			set { Set(() => OldRank, ref _oldRank, value); }
+		}
+
+		[JsonProperty("new_rank")]
+		public Rank NewRank
+		{
+			get { return _newRank; }
+			set { Set(() => NewRank, ref _newRank, value); }
+		}
+
+		[JsonProperty("number_wins")]
+		public int WinCount
+		{
+			get { return _winCount; }
+			set { Set(() => WinCount, ref _winCount, value); }
+		}
 
 		/// <summary>
 		/// Total health damage made by the player

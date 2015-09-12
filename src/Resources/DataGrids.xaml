@@ -117,6 +117,10 @@
 	<Style TargetType="DataGridColumnHeader" x:Key="Team2NameHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Team 2 name" />
 	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="PlayerOldRankNameHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Player's rank" />
+	</Style>
 	
 	<Style TargetType="DataGridColumnHeader" x:Key="PlayerNameHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Player's name" />

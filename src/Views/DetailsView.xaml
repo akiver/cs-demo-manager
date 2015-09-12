@@ -16,6 +16,7 @@
 			<helpers:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
 			<helpers:MapNameToImageConverter x:Key="MapNameToImageConverter" />
 			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
+			<helpers:ValveDemoToVisibilityConverter x:Key="ValveDemoToVisibilityConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -460,7 +461,18 @@
 											  Style="{StaticResource DemosDataGridStyle}"
 											  CellStyle="{StaticResource DataGridCellStyle}"
 											  RowStyle="{StaticResource DataGridRowPlayerTeam1Style}">
+										<DataGrid.Resources>
+											<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
+										</DataGrid.Resources>
 										<DataGrid.Columns>
+											<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}" x:Name="PlayerRankTeam1Column" Width="Auto" Header="Rank"
+														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
+												<DataGridTemplateColumn.CellTemplate>
+													<DataTemplate>
+														<Image Source="{Binding OldRank.Logo}" Height="18" Width="45" />
+													</DataTemplate>
+												</DataGridTemplateColumn.CellTemplate>
+											</DataGridTemplateColumn>
 											<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerNameTeam1Column" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 											<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountTeam1Column" Width="Auto" Header="K" Binding="{Binding KillsCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -543,7 +555,18 @@
 									  CellStyle="{StaticResource DataGridCellStyle}"
 									  RowStyle="{StaticResource DataGridRowPlayerTeam2Style}"
 									  Style="{StaticResource DemosDataGridStyle}">
+										<DataGrid.Resources>
+											<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
+										</DataGrid.Resources>
 										<DataGrid.Columns>
+											<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}" x:Name="PlayerRankTeam2Column" Width="Auto" Header="Rank"
+														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
+												<DataGridTemplateColumn.CellTemplate>
+													<DataTemplate>
+														<Image Source="{Binding OldRank.Logo}" Height="18" Width="45" />
+													</DataTemplate>
+												</DataGridTemplateColumn.CellTemplate>
+											</DataGridTemplateColumn>
 											<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerNameTeam2Column" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 											<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountTeam2Column" Width="Auto" Header="K" Binding="{Binding KillsCount}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
