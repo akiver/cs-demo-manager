@@ -1062,11 +1062,15 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)
 		{
-			DispatcherHelper.CheckBeginInvokeOnUI(
-			async () =>
+			Application.Current.Dispatcher.Invoke(async () =>
 			{
+				HasNotification = true;
+				IsBusy = true;
+				NotificationMessage = "Searching account's last rank...";
 				DataGridDemosCollection.Refresh();
 				LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync();
+				IsBusy = false;
+				HasNotification = false;
 			});
 		}
 

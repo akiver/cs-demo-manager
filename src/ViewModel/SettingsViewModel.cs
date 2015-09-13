@@ -247,6 +247,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					Settings.Default.SelectedStatsAccountSteamID = steamId;
 					Settings.Default.Save();
 				}
+				RaisePropertyChanged(() => ShowOnlyAccountStats);
 				Messenger.Default.Send(new SelectedAccountChangedMessage());
 			}
 		}
