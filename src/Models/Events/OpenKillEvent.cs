@@ -35,7 +35,7 @@ namespace CSGO_Demos_Manager.Models.Events
 			set
 			{
 				_hasWin = value;
-				RaisePropertyChanged("Result");
+				RaisePropertyChanged(() => Result);
 			}
 		}
 

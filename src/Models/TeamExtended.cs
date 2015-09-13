@@ -136,18 +136,18 @@ namespace CSGO_Demos_Manager.Models
 
 		private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("EntryKillCount");
-			RaisePropertyChanged("EntryKillWinCount");
-			RaisePropertyChanged("EntryKillLossCount");
-			RaisePropertyChanged("RatioEntryKillAsString");
+			RaisePropertyChanged(() => EntryKillCount);
+			RaisePropertyChanged(() => EntryKillWinCount);
+			RaisePropertyChanged(() => EntryKillLossCount);
+			RaisePropertyChanged(() => RatioEntryKillAsString);
 		}
 
 		private void OnOpenKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("OpenKillCount");
-			RaisePropertyChanged("OpenKillWinCount");
-			RaisePropertyChanged("OpenKillLossCount");
-			RaisePropertyChanged("RatioOpenKillAsString");
+			RaisePropertyChanged(() => OpenKillCount);
+			RaisePropertyChanged(() => OpenKillWinCount);
+			RaisePropertyChanged(() => OpenKillLossCount);
+			RaisePropertyChanged(() => RatioOpenKillAsString);
 		}
 	}
 }

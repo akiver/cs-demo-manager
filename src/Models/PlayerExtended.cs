@@ -247,7 +247,7 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _deathCount; }
 			set {
-				RaisePropertyChanged("KillDeathRatio");
+				RaisePropertyChanged(() => KillDeathRatio);
 				Set(() => DeathCount, ref _deathCount, value);
 			}
 		}
@@ -293,7 +293,7 @@ namespace CSGO_Demos_Manager.Models
 			get { return _headshotCount; }
 			set
 			{
-				RaisePropertyChanged("HeadshotAsString");
+				RaisePropertyChanged(() => HeadshotAsString);
 				Set(() => HeadshotCount, ref _headshotCount, value);
 			}
 		}
@@ -343,8 +343,8 @@ namespace CSGO_Demos_Manager.Models
 			get { return _killCount; }
 			set
 			{
-				RaisePropertyChanged("KillDeathRatio");
-				RaisePropertyChanged("HeadshotAsString");
+				RaisePropertyChanged(() =>KillDeathRatio);
+				RaisePropertyChanged(() => HeadshotAsString);
 				Set(() => KillsCount, ref _killCount, value);
 			}
 		}
@@ -629,25 +629,25 @@ namespace CSGO_Demos_Manager.Models
 
 		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("TotalDamageHealthCount");
-			RaisePropertyChanged("TotalDamageArmorCount");
-			RaisePropertyChanged("AverageDamageByRoundCount");
+			RaisePropertyChanged(() => TotalDamageHealthCount);
+			RaisePropertyChanged(() => TotalDamageArmorCount);
+			RaisePropertyChanged(() => AverageDamageByRoundCount);
 		}
 
 		private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			RaisePropertyChanged(() => EntryKills);
-			RaisePropertyChanged("EntryKillWinCount");
-			RaisePropertyChanged("EntryKillLossCount");
-			RaisePropertyChanged("RatioEntryKillAsString");
+			RaisePropertyChanged(() => EntryKillWinCount);
+			RaisePropertyChanged(() => EntryKillLossCount);
+			RaisePropertyChanged(() => RatioEntryKillAsString);
 		}
 
 		private void OnOpeningKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			RaisePropertyChanged(() => EntryKills);
-			RaisePropertyChanged("OpenKillWinCount");
-			RaisePropertyChanged("OpenKillLossCount");
-			RaisePropertyChanged("RatioOpenKillAsString");
+			RaisePropertyChanged(() => OpenKillWinCount);
+			RaisePropertyChanged(() => OpenKillLossCount);
+			RaisePropertyChanged(() => RatioOpenKillAsString);
 		}
 
 		public void ResetStats()

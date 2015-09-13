@@ -233,7 +233,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			set
 			{
 				Set(() => FrameLimiterMultiplier, ref _frameLimiterMultiplier, value);
-				RaisePropertyChanged("FrameLimiter");
+				RaisePropertyChanged(() => FrameLimiter);
 			}
 		}
 

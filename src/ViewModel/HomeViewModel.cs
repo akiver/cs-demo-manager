@@ -214,7 +214,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			set
 			{
 				Set(() => NewBannedPlayerCount, ref _newBannedPlayerCount, value);
-				RaisePropertyChanged("NewBannedPlayerCountAsString");
+				RaisePropertyChanged(() => NewBannedPlayerCountAsString);
 			}
 		}
 

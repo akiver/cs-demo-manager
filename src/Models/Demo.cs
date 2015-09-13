@@ -452,7 +452,7 @@ namespace CSGO_Demos_Manager.Models
 			set
 			{
 				Set(() => Duration, ref _duration, value);
-				RaisePropertyChanged("DurationTime");
+				RaisePropertyChanged(() => DurationTime);
 			}
 		}
 
@@ -1140,51 +1140,51 @@ namespace CSGO_Demos_Manager.Models
 
 		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("TotalKillCount");
-			RaisePropertyChanged("TotalKillSelectedAccountCount");
-			RaisePropertyChanged("OneKillSelectedAccountCount");
-			RaisePropertyChanged("TwoKillSelectedAccountCount");
-			RaisePropertyChanged("ThreeKillSelectedAccountCount");
-			RaisePropertyChanged("FourKillSelectedAccountCount");
-			RaisePropertyChanged("FiveKillSelectedAccountCount");
-			RaisePropertyChanged("ClutchCount");
-			RaisePropertyChanged("ClutchSelectedAccountCount");
+			RaisePropertyChanged(() => TotalKillCount);
+			RaisePropertyChanged(() => TotalKillSelectedAccountCount);
+			RaisePropertyChanged(() => OneKillSelectedAccountCount);
+			RaisePropertyChanged(() => TwoKillSelectedAccountCount);
+			RaisePropertyChanged(() => ThreeKillSelectedAccountCount);
+			RaisePropertyChanged(() => FourKillSelectedAccountCount);
+			RaisePropertyChanged(() => FiveKillSelectedAccountCount);
+			RaisePropertyChanged(() => ClutchCount);
+			RaisePropertyChanged(() => ClutchSelectedAccountCount);
 		}
 
 		private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("BombExplodedCount");
-			RaisePropertyChanged("BombExplodedSelectedAccountCount");
+			RaisePropertyChanged(() => BombExplodedCount);
+			RaisePropertyChanged(() => BombExplodedSelectedAccountCount);
 		}
 
 		private void OnBombDefusedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("BombDefusedCount");
-			RaisePropertyChanged("BombDefusedSelectedAccountCount");
+			RaisePropertyChanged(() => BombDefusedCount);
+			RaisePropertyChanged(() => BombDefusedSelectedAccountCount);
 		}
 
 		private void OnBombPlantedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged("BombPlantedCount");
-			RaisePropertyChanged("BombPlantedSelectedAccountCount");
+			RaisePropertyChanged(() => BombPlantedCount);
+			RaisePropertyChanged(() => BombPlantedSelectedAccountCount);
 		}
 
 		private void OnRoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			if (Settings.Default.SelectedStatsAccountSteamID != 0)
 			{
-				RaisePropertyChanged("TotalDamageHealthSelectedAccountCount");
-				RaisePropertyChanged("TotalDamageArmorSelectedAccountCount");
-				RaisePropertyChanged("AverageDamageSelectedAccountCount");
+				RaisePropertyChanged(() => TotalDamageHealthSelectedAccountCount);
+				RaisePropertyChanged(() => TotalDamageArmorSelectedAccountCount);
+				RaisePropertyChanged(() => AverageDamageSelectedAccountCount);
 			}
 			else
 			{
-				RaisePropertyChanged("TotalDamageHealthCount");
-				RaisePropertyChanged("TotalDamageArmorCount");
-				RaisePropertyChanged("AverageDamageCount");
+				RaisePropertyChanged(() => TotalDamageHealthCount);
+				RaisePropertyChanged(() => TotalDamageArmorCount);
+				RaisePropertyChanged(() => AverageDamageCount);
 			}
-			RaisePropertyChanged("MostDamageWeapon");
-			RaisePropertyChanged("WinStatus");
+			RaisePropertyChanged(() => MostDamageWeapon);
+			RaisePropertyChanged(() => WinStatus);
 		}
 
 		#endregion

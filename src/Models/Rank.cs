@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-
-namespace CSGO_Demos_Manager.Models
+﻿namespace CSGO_Demos_Manager.Models
 {
 	public class Rank
 	{
