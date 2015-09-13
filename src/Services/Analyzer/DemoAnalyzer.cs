@@ -764,6 +764,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			// may be a bot on MM demos
 			PlayerExtended hurted = Demo.Players.FirstOrDefault(player => player.SteamId == e.Player.SteamID);
+			if (hurted == null) return;
 			PlayerExtended attacker = null;
 			// attacker may be null (hurted by world)
 			if (e.Attacker != null) attacker = Demo.Players.FirstOrDefault(player => player.SteamId == e.Attacker.SteamID);
