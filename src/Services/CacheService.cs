@@ -6,10 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Services.Serialization;
-#if DEBUG
-using Newtonsoft.Json.Serialization;
-#endif
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -23,14 +21,9 @@ namespace CSGO_Demos_Manager.Services
 		private readonly string _pathFolderCache;
 
 		/// <summary>
-		/// JSON Settings for serialization
+		/// JSON Settings
 		/// </summary>
-		private readonly JsonSerializerSettings _settingsJsonSerialization = new JsonSerializerSettings();
-
-		/// <summary>
-		/// JSON Settings for deserialization
-		/// </summary>
-		private readonly JsonSerializerSettings _settingsJsonDeserialization = new JsonSerializerSettings();
+		private readonly JsonSerializerSettings _settingsJson = new JsonSerializerSettings();
 
 		private const string SUSPECT_FILENAME = "suspects.json";
 
@@ -51,11 +44,6 @@ namespace CSGO_Demos_Manager.Services
 
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)([_])([0-9]*)([0-9]*)(.json)$");
 
-#if DEBUG
-		private readonly ITraceWriter _traceWriter = new MemoryTraceWriter();
-		private const string OUTPUT_TRACE_WRITER_FILE = " debug_json.log";
-#endif
-
 #endregion
 
 		public CacheService()
@@ -67,13 +55,11 @@ namespace CSGO_Demos_Manager.Services
 				File.Create(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME);
 #if DEBUG
 
-			_settingsJsonSerialization.Formatting = Formatting.Indented;
-			_settingsJsonSerialization.TraceWriter = _traceWriter;
-			_settingsJsonDeserialization.Formatting = Formatting.Indented;
-			_settingsJsonDeserialization.TraceWriter = _traceWriter;
+			_settingsJson.Formatting = Formatting.Indented;
 #endif
-			_settingsJsonSerialization.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-			_settingsJsonSerialization.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+			_settingsJson.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+			_settingsJson.PreserveReferencesHandling = PreserveReferencesHandling.All;
+			_settingsJson.NullValueHandling = NullValueHandling.Include;
 		}
 
 		public async Task<List<Demo>> GetDemoListAsync()
@@ -91,14 +77,12 @@ namespace CSGO_Demos_Manager.Services
 						string json = File.ReadAllText(file);
 						try
 						{
-							Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJsonDeserialization));
+							Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJson));
 							demos.Add(demo);
 						}
-						catch (Exception)
+						catch (Exception e)
 						{
-#if DEBUG
-							File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
-#endif
+							Logger.Instance.Log(e);
 							throw;
 						}
 					}
@@ -133,13 +117,11 @@ namespace CSGO_Demos_Manager.Services
 			Demo demoFromJson;
 			try
 			{
-				demoFromJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJsonDeserialization));
+				demoFromJson = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJson));
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-#if DEBUG
-				File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
-#endif
+				Logger.Instance.Log(e);
 				throw;
 			}
 
@@ -159,19 +141,13 @@ namespace CSGO_Demos_Manager.Services
 			string json;
 			try
 			{
-				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, _settingsJsonSerialization));
+				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, _settingsJson));
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-#if DEBUG
-				File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
-#endif
+				Logger.Instance.Log(e);
 				throw;
 			}
-
-#if DEBUG
-			File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
-#endif
 
 			File.WriteAllText(pathDemoFileJson, json);
 		}
@@ -192,16 +168,13 @@ namespace CSGO_Demos_Manager.Services
 			ids.Add(suspectSteamCommunityId);
 
 			string json;
-			// If not add it
 			try
 			{
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
 			}
-			catch (Exception)
+			catch (Exception e)
 			{
-#if DEBUG
-				File.WriteAllText(OUTPUT_TRACE_WRITER_FILE, _traceWriter.ToString());
-#endif
+				Logger.Instance.Log(e);
 				throw;
 			}
 
@@ -226,7 +199,7 @@ namespace CSGO_Demos_Manager.Services
 
 			ids.Add(suspect.SteamId);
 			// If not add it and update
-			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids, _settingsJsonSerialization));
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
 
 			string pathSuspectsBannedFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
 			File.WriteAllText(pathSuspectsBannedFileJson, json);
@@ -298,7 +271,7 @@ namespace CSGO_Demos_Manager.Services
 			accounts.Add(newAccount);
 
 			// If not add it and update
-			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts, _settingsJsonSerialization));
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
 
 			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
 			File.WriteAllText(pathAccountsFileJson, json);
@@ -312,7 +285,7 @@ namespace CSGO_Demos_Manager.Services
 			Account accountFromJson = accounts.FirstOrDefault(a => a.SteamId == accountToRemove.SteamId);
 			if (accountFromJson == null) return false;
 			accounts.Remove(accountFromJson);
-			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts, _settingsJsonSerialization));
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
 			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
 			File.WriteAllText(pathAccountsFileJson, json);
 
@@ -330,7 +303,7 @@ namespace CSGO_Demos_Manager.Services
 			if (!ids.Contains(steamId)) return false;
 
 			ids.Remove(steamId);
-			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids, _settingsJsonSerialization));
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
 			string pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_FILENAME;
 			File.WriteAllText(pathSuspectsFileJson, json);
 
@@ -339,7 +312,7 @@ namespace CSGO_Demos_Manager.Services
 			if (suspectBannedIdList.Contains(steamId))
 			{
 				suspectBannedIdList.Remove(steamId);
-				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(suspectBannedIdList, _settingsJsonSerialization));
+				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(suspectBannedIdList));
 				pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
 				File.WriteAllText(pathSuspectsFileJson, json);
 			}
@@ -449,7 +422,7 @@ namespace CSGO_Demos_Manager.Services
 			List<string> folders = await GetFoldersAsync();
 			if (folders.Contains(path)) return false;
 			folders.Add(path);
-			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders, _settingsJsonSerialization));
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders));
 			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
 			File.WriteAllText(pathFoldersFileJson, json);
 
@@ -461,7 +434,7 @@ namespace CSGO_Demos_Manager.Services
 			List<string> folders = await GetFoldersAsync();
 			if (!folders.Contains(path)) return false;
 			folders.Remove(path);
-			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders, _settingsJsonSerialization));
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders));
 			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
 			File.WriteAllText(pathFoldersFileJson, json);
 
@@ -480,7 +453,7 @@ namespace CSGO_Demos_Manager.Services
 
 			if (folders.Any())
 			{
-				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders, _settingsJsonSerialization));
+				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders));
 				string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
 				File.WriteAllText(pathFoldersFileJson, json);
 			}
