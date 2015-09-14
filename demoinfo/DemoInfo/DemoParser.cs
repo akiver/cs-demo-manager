@@ -581,7 +581,7 @@ namespace DemoInfo
 		{
 			DemoCommand command = (DemoCommand)BitStream.ReadByte();
 
-			BitStream.ReadInt(32); // tick number
+			IngameTick = (int)BitStream.ReadInt(32); // tick number
 			BitStream.ReadByte(); // player slot
 
 			this.CurrentTick++; // = TickNum;
