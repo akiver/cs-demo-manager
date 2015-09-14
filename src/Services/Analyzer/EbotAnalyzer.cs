@@ -1,6 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
 using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
@@ -12,7 +13,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 {
 	public class EbotAnalyzer : DemoAnalyzer
 	{
-		private bool _isLastRoundFinal;
+		// TODO use it for OT on faceit demos
+		private bool _isLastRoundFinal = false;
 
 		// Counter of player team swap (used detect end of a half)
 		private int _playerTeamCount;
@@ -20,6 +22,22 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		private bool _isMatchStartedOccured = false;
 
 		private bool _isTeamsInitialized = false;
+
+		private readonly Regex _scoreRegex = new Regex("^eBot: (.*) (?<score1>[0-9]+) - (?<score2>[0-9]+) (.*)$");
+
+		private readonly Regex _faceitScoreRegex = new Regex("^ \\[ANNA\\^\\] (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
+
+		private readonly Regex _endMatchRegex = new Regex("^eBot: (.*) win(.*)$");
+
+		private const string FACEIT_LIVE = " [ANNA^] LIVE!";
+
+		private const string EBOT_LIVE = "eBot: LIVE!";
+
+		private const string BEGIN_FIRST_SIDE_OVERTIME = "eBot: 1st Side OT: LIVE!";
+
+		private const string BEGIN_SECOND_SIDE_OVERTIME = "eBot: 2nd Side OT: LIVE!";
+
+		private const string PLEASE_WRITE_READY = "eBot: Please write !ready when your team is ready !";
 
 		public EbotAnalyzer(Demo demo)
 		{
@@ -51,13 +69,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.FireNadeEnded += HandleFireNadeEnded;
 			Parser.LastRoundHalf += HandleLastRoundHalf;
 			Parser.PlayerTeam += HandlePlayerTeam;
-			Parser.RoundFinal += HandleRoundFinal;
 			Parser.WinPanelMatch += HandleWinPanelMatch;
 			Parser.SmokeNadeEnded += HandleSmokeNadeEnded;
 			Parser.FireNadeStarted += HandleFireNadeStarted;
 			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
 			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 			Parser.PlayerHurt += HandlePlayerHurted;
+			Parser.SayText += HandleSayText;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync()
@@ -97,7 +115,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
 		{
-			if (!IsMatchStarted && !IsOvertime) return;
+			if (!IsMatchStarted) return;
 			if (e.Silent) _playerTeamCount++;
 		}
 
@@ -107,34 +125,102 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (IsOvertime) IsLastRoundHalf = true;
 		}
 
-		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
+		protected void HandleSayText(object sender, SayTextEventArgs e)
 		{
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				Demo.Rounds.Add(CurrentRound);
-			});
+			// cleanup text
+			e.Text = Regex.Replace(e.Text, @"[\u0001\u0005\u0004]", string.Empty);
 
-			if (IsMatchStarted && !IsOvertime)
+			// Beginning of the match
+			if (e.Text == EBOT_LIVE || e.Text == FACEIT_LIVE)
 			{
-				// Stop analyze
+				Demo.ResetStats(false);
+				AddTeams();
+				RoundCount = 0;
+				CreateNewRound();
+				IsMatchStarted = true;
+			}
+
+			Match scoreUpdateEbot = _scoreRegex.Match(e.Text);
+			Match scoreUpdateFaceit = _faceitScoreRegex.Match(e.Text);
+			// Score update
+			if (scoreUpdateEbot.Success || scoreUpdateFaceit.Success)
+			{
+				int score1;
+				int score2;
+				if (scoreUpdateEbot.Success)
+				{
+					score1 = Convert.ToInt32(scoreUpdateEbot.Groups["score1"].Value);
+					score2 = Convert.ToInt32(scoreUpdateEbot.Groups["score2"].Value);
+				}
+				else
+				{
+					score1 = Convert.ToInt32(scoreUpdateFaceit.Groups["score1"].Value);
+					score2 = Convert.ToInt32(scoreUpdateFaceit.Groups["score2"].Value);
+				}
+				
+				int scoreTotal = score1 + score2;
+				// End of the match may have an overtime, init the 1st one
+				if (scoreTotal == 30)
+				{
+					IsOvertime = true;
+					IsHalfMatch = false;
+					IsMatchStarted = false;
+					CurrentOvertime = new Overtime
+					{
+						Number = ++OvertimeCount
+					};
+				}
+				return;
+			}
+
+			// End of the match (OT or not)
+			Match matchEnd = _endMatchRegex.Match(e.Text);
+			if (matchEnd.Success)
+			{
 				IsMatchStarted = false;
 				return;
 			}
 
-			if (CurrentOvertime.ScoreTeam1 != 0 || CurrentOvertime.ScoreTeam2 != 0)
+			if (IsOvertime)
 			{
-				// Add the last overtime
-				Application.Current.Dispatcher.Invoke(delegate
+				// if eBot is waiting for !ready, the match isn't started
+				if (e.Text == PLEASE_WRITE_READY) IsMatchStarted = false;
+
+				// announce the beginning of the 1st OT side
+				if (e.Text == BEGIN_FIRST_SIDE_OVERTIME)
 				{
-					Demo.Overtimes.Add(CurrentOvertime);
-				});
+					IsMatchStarted = true;
+					// Add the last OT played and create a new one
+					if (Demo.ScoreTeam1 + Demo.ScoreTeam2 > 30)
+					{
+						Application.Current.Dispatcher.Invoke(delegate
+						{
+							Demo.Overtimes.Add(CurrentOvertime);
+						});
+						CurrentOvertime = new Overtime
+						{
+							Number = ++OvertimeCount
+						};
+					}
+					IsHalfMatch = Demo.Overtimes.Any();
+				}
+
+				// announce the beginning of the 2nd OT side
+				if (e.Text == BEGIN_SECOND_SIDE_OVERTIME)
+				{
+					IsMatchStarted = true;
+					IsHalfMatch = !Demo.Overtimes.Any();
+				}
 			}
 		}
 
-		protected void HandleRoundFinal(object sender, RoundFinalEventArgs e)
+		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
 		{
-			// Detect OT swap, we cannot know if it's MR3 or MR5
-			if (IsOvertime) _isLastRoundFinal = true;
+			Application.Current.Dispatcher.Invoke(delegate
+			{
+				if(!IsOvertime) Demo.Rounds.Add(CurrentRound);
+				if(IsOvertime) Demo.Overtimes.Add(CurrentOvertime);
+			});
 		}
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
@@ -154,6 +240,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
+			if (_playerTeamCount > 8) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
 
 			IsFreezetime = true;
@@ -168,20 +255,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			CreateNewRound();
 
-			if (RoundCount == 16)
-			{
-				IsHalfMatch = true;
-				SwapTeams();
-			}
+			if (Demo.ScoreTeam1 + Demo.ScoreTeam2 == 15) IsHalfMatch = true;
 
 			if(!IsOvertime) return;
 
-			// Detect the half of an overtime
-			if (_playerTeamCount > 8 && IsLastRoundHalf) IsHalfMatch = !IsHalfMatch;
-			if (IsLastRoundHalf) IsLastRoundHalf = false;
 			_playerTeamCount = 0;
 		}
 
+		/// <summary>
+		/// TODO  Round end isn't raised at 15-15 on Faceit demos
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
 		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
 			if (!IsMatchStarted) return;
@@ -204,37 +289,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						}
 					}
 				}
-			});
 
-			// On faceit round_officialy_ended is raised between half side, not on eBot public demos
-			if (IsLastRoundHalf)
-			{
-				Application.Current.Dispatcher.Invoke(delegate
-				{
-					Demo.Rounds.Add(CurrentRound);
-				});
-				if (!IsOvertime) return;
-			}
+				if (IsLastRoundHalf) Demo.Rounds.Add(CurrentRound);
 
-			Application.Current.Dispatcher.Invoke(delegate
-			{
 				var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
 				playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
 
 				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
 				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
-
-				// Last round of the match or of an overtime, the final overtime is added on cs_win_panel_match
-				if (IsOvertime && _isLastRoundFinal)
-				{
-					Demo.Overtimes.Add(CurrentOvertime);
-					_isLastRoundFinal = false;
-
-					CurrentOvertime = new Overtime
-					{
-						Number = ++OvertimeCount
-					};
-				}
 			});
 		}
 
@@ -245,21 +307,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Weapon = new Weapon(e.Weapon)
+				Weapon = new Weapon(e.Weapon),
+				DeathPerson = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID)
 			};
 
-			killEvent.DeathPerson = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID);
-			if (killEvent.DeathPerson != null)
-			{
-				killEvent.DeathPerson.IsAlive = false;
-			}
+			// Set the player killed as dead
+			if (killEvent.DeathPerson != null) killEvent.DeathPerson.IsAlive = false;
 
 			if (e.Assister != null)
 			{
 				killEvent.Assister = Demo.Players.FirstOrDefault(player => player.SteamId == e.Assister.SteamID);
 			}
 
-			// If the killer isn't a bot we can add a kill to the match
 			killEvent.Killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
 
 			if (killEvent.Killer != null)
@@ -333,23 +392,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					Round = CurrentRound
 				};
 				Demo.PositionsPoint.Add(positionPoint);
-			}
-		}
-
-		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
-		{
-			base.HandleRoundOfficiallyEnd(sender, e);
-
-			int score = Demo.ScoreTeam1 + Demo.ScoreTeam2;
-			if (score < 30) return;
-			if (score == 30)
-			{
-				IsHalfMatch = false;
-				IsOvertime = true;
-				CurrentOvertime = new Overtime
-				{
-					Number = ++OvertimeCount
-				};
 			}
 		}
 
