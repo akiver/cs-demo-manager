@@ -1097,6 +1097,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync();
 				IsBusy = false;
 				HasNotification = false;
+				CommandManager.InvalidateRequerySuggested();
 			});
 		}
 
