@@ -22,6 +22,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Views.AccountStats;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -71,6 +72,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private Demo _selectedDemo;
 
 		private RelayCommand<Demo> _showDemoDetailsCommand;
+
+		private RelayCommand _goToAccountStatsCommand;
 
 		private RelayCommand<ObservableCollection<Demo>> _analyzeDemosCommand;
 
@@ -395,6 +398,29 @@ namespace CSGO_Demos_Manager.ViewModel
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 						},
 						demo => SelectedDemo != null));
+			}
+		}
+
+		/// <summary>
+		/// Command to show account stats view
+		/// </summary>
+		public RelayCommand GoToAccountStatsCommand
+		{
+			get
+			{
+				return _goToAccountStatsCommand
+					?? (_goToAccountStatsCommand = new RelayCommand(
+						async () =>
+						{
+							if (Properties.Settings.Default.SelectedStatsAccountSteamID == 0)
+							{
+								await _dialogService.ShowErrorAsync("You have to select an account first.", MessageDialogStyle.Affirmative);
+								return;
+							}
+							var mainViewModel = (new ViewModelLocator()).Main;
+							GeneralView statsView = new GeneralView();
+							mainViewModel.CurrentPage.ShowPage(statsView);
+						},() => !IsBusy));
 			}
 		}
 

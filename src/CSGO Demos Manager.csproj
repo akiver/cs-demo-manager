@@ -101,6 +101,10 @@
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Sparrow.Chart.Wpf.40, Version=13.1.0.118, Culture=neutral, PublicKeyToken=50f33fb8697e9a92, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sparrow.Chart.Wpf.13.1.0.118\lib\net40\Sparrow.Chart.Wpf.40.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
@@ -156,6 +160,7 @@
     <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Messages\SelectedPlayerChangedMessage.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />
@@ -288,6 +293,8 @@
     <Compile Include="Services\SoundService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
+    <Compile Include="ViewModel\AccountStats\AccountStatsGeneralViewModel.cs" />
+    <Compile Include="ViewModel\AccountStats\AccountStatsRankViewModel.cs" />
     <Compile Include="ViewModel\DemoDamagesViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
     <Compile Include="ViewModel\EntryKillsViewModel.cs" />
@@ -298,6 +305,12 @@
     <Compile Include="ViewModel\SuspectsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\AccountStats\GeneralView.xaml.cs">
+      <DependentUpon>GeneralView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountStats\RankView.xaml.cs">
+      <DependentUpon>RankView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\DemoDamagesView.xaml.cs">
       <DependentUpon>DemoDamagesView.xaml</DependentUpon>
     </Compile>
@@ -332,6 +345,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="resources\Charts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\CheckBoxs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -365,6 +382,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\Textblocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountStats\GeneralView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountStats\RankView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

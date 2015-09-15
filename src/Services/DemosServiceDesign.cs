@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
 using DemoInfo;
@@ -239,7 +240,7 @@ namespace CSGO_Demos_Manager.Services
 			demo.MostEntryKillPlayer = players.ElementAt(random.Next(10));
 			demo.MostKillingWeapon = new Weapon
 			{
-				Name =  "AK-47"
+				Name = "AK-47"
 			};
 			demo.Teams = teams;
 			demo.Rounds = rounds;
@@ -288,6 +289,147 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return Task.FromResult(AppSettings.RankList[0]);
 		}
+
+		public Task<List<RankDateChart>> GetRankDateChartDataAsync()
+		{
+			return Task.FromResult(new List<RankDateChart>
+			{
+				new RankDateChart
+							{
+								Date = DateTime.Now,
+								Rank = 1
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(1),
+								Rank = 2
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(2),
+								Rank = 3
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(3),
+								Rank = 4
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(4),
+								Rank = 4
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(5),
+								Rank = 3
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(6),
+								Rank = 4
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(7),
+								Rank = 5
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(8),
+								Rank = 6
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(9),
+								Rank = 7
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(10),
+								Rank = 8
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(11),
+								Rank = 9
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(12),
+								Rank = 10
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(13),
+								Rank = 11
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(14),
+								Rank = 11
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(15),
+								Rank = 11
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(16),
+								Rank = 12
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(17),
+								Rank = 13
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(18),
+								Rank = 13
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(19),
+								Rank = 14
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(20),
+								Rank = 14
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(21),
+								Rank = 15
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(22),
+								Rank = 16
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(23),
+								Rank = 17
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(24),
+								Rank = 18
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(25),
+								Rank = 18
+							},
+							new RankDateChart
+							{
+								Date = DateTime.Now.AddDays(26),
+								Rank = 18
+							}
+			});
 		}
 	}
 }

@@ -78,6 +78,7 @@
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
 					<Button Grid.Column="0" Command="{Binding AnalyzeDemosCommand}"
@@ -146,8 +147,22 @@
 						</StackPanel>
 					</Button>
 
-					<TextBlock Grid.Column="4" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
-					<ComboBox Grid.Column="5"
+					<Button Grid.Column="4" Margin="5" Width="90" Height="30"
+							Command="{Binding GoToAccountStatsCommand}"
+							Style="{DynamicResource AccentedSquareButtonStyle}"
+							ToolTip="Account stats (CTRL+S)">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="15" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_database}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Stats" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<TextBlock Grid.Column="5" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
+					<ComboBox Grid.Column="6"
 					ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
 					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
 					DisplayMemberPath ="Name"
@@ -156,13 +171,13 @@
 					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanInvertedConverter}}">
 					</ComboBox>
 
-					<CheckBox Grid.Column="6" x:Name="CheckBoxShowAllAccounts" Content="Show all"
+					<CheckBox Grid.Column="7" x:Name="CheckBoxShowAllAccounts" Content="Show all"
 						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowAllAccountsCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
 
-					<Image Grid.Column="7" Style="{StaticResource RankStyle}" Height="32"
+					<Image Grid.Column="8" Style="{StaticResource RankStyle}" Height="32"
 						   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
 				</Grid>
 			</Grid>

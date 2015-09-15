@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="CSGO_Demos_Manager.Views.AccountStats.GeneralView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="720" d:DesignWidth="1280"
+			 DataContext="{Binding AccountStatsGeneral, Source={StaticResource Locator}}">
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	<Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<StackPanel Orientation="Horizontal">
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Width="70"
+					Height="30"
+					Command="{Binding BackToHomeCommand}"
+					ToolTip="Back (CTRL+B)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Command="{Binding GoToRankCommand}"
+					Width="70" Height="30" ToolTip="Rank (CTRL+R)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_down_up}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Rank" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="1">
+
+		</Grid>
+	</Grid>
+</UserControl>

@@ -1,5 +1,6 @@
 using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Services.Excel;
+using CSGO_Demos_Manager.ViewModel.AccountStats;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
@@ -40,6 +41,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<EntryKillsViewModel>();
 			SimpleIoc.Default.Register<OverviewViewModel>();
 			SimpleIoc.Default.Register<DemoDamagesViewModel>();
+			SimpleIoc.Default.Register<AccountStatsGeneralViewModel>();
+			SimpleIoc.Default.Register<AccountStatsRankViewModel>();
 		}
 
 		public MainViewModel Main
@@ -111,6 +114,22 @@ namespace CSGO_Demos_Manager.ViewModel
 			get
 			{
 				return ServiceLocator.Current.GetInstance<DemoDamagesViewModel>();
+			}
+		}
+
+		public AccountStatsGeneralViewModel AccountStatsGeneral
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<AccountStatsGeneralViewModel>();
+			}
+		}
+
+		public AccountStatsRankViewModel AccountStatsRank
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<AccountStatsRankViewModel>();
 			}
 		}
 

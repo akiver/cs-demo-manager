@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using CSGO_Demos_Manager.Models.Charts;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -51,5 +52,11 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<Rank> GetLastRankAccountStatsAsync();
+
+		/// <summary>
+		/// Return Rank model evolution for the rank chart
+		/// </summary>
+		/// <returns></returns>
+		Task<List<RankDateChart>> GetRankDateChartDataAsync();
 	}
 }

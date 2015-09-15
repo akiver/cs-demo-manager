@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
@@ -222,6 +223,31 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			return rank;
+		}
+
+		public async Task<List<RankDateChart>> GetRankDateChartDataAsync()
+		{
+			List<RankDateChart> datas = new List<RankDateChart>();
+			List<Demo> demos = await _cacheService.GetDemoListAsync();
+
+			if (demos.Any())
+			{
+				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
+				if (demosPlayerList.Any())
+				{
+					foreach (Demo demo in demosPlayerList)
+					{
+						int rankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
+						datas.Add(new RankDateChart
+						{
+							Date = demo.Date,
+							Rank = AppSettings.RankList.First(r => r.Number == rankNumber).Number
+						});
+					}
+				}
+			}
+
+			return datas;
 		}
 	}
 }
