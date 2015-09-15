@@ -17,6 +17,7 @@
 			<helpers:MapNameToImageConverter x:Key="MapNameToImageConverter" />
 			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 			<helpers:ValveDemoToVisibilityConverter x:Key="ValveDemoToVisibilityConverter" />
+			<helpers:RankToImageConverter x:Key="RankToImageConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -469,7 +470,7 @@
 														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 												<DataGridTemplateColumn.CellTemplate>
 													<DataTemplate>
-														<Image Source="{Binding OldRank.Logo}" Height="18" Width="45" />
+														<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}" Height="18" Width="45" />
 													</DataTemplate>
 												</DataGridTemplateColumn.CellTemplate>
 											</DataGridTemplateColumn>

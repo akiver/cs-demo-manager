@@ -207,7 +207,7 @@ namespace CSGO_Demos_Manager.Services
 
 		public async Task<Rank> GetLastRankAccountStatsAsync()
 		{
-			Rank rank = Demo.RankList[0];
+			Rank rank = AppSettings.RankList[0];
 			List<Demo> demos = await _cacheService.GetDemoListAsync();
 			if (demos.Any())
 			{
@@ -216,7 +216,8 @@ namespace CSGO_Demos_Manager.Services
 				if (demosPlayerList.Any())
 				{
 					Demo lastDemo = demosPlayerList.MaxBy(d => d.Date);
-					rank = lastDemo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).NewRank;
+					int rankNumber = lastDemo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
+					rank = AppSettings.RankList.First(r => r.Number == rankNumber);
 				}
 			}
 

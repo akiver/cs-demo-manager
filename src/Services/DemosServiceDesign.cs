@@ -166,7 +166,8 @@ namespace CSGO_Demos_Manager.Services
 					AssistCount = random.Next(15),
 					Score = random.Next(10, 80),
 					RoundMvpCount = random.Next(6),
-					OldRank = Demo.RankList[random.Next(0, 19)]
+					RankNumberNew = 5,
+					RankNumberOld = 4
 				};
 
 				players.Add(player);
@@ -285,7 +286,8 @@ namespace CSGO_Demos_Manager.Services
 
 		public Task<Rank> GetLastRankAccountStatsAsync()
 		{
-			return Task.FromResult(Demo.RankList[0]);
+			return Task.FromResult(AppSettings.RankList[0]);
+		}
 		}
 	}
 }

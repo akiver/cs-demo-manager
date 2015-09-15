@@ -93,8 +93,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == rankStruct.SteamId);
 				if (player != null)
 				{
-					player.OldRank = Demo.RankList.First(r => r.Number == rankStruct.Old);
-					player.NewRank = Demo.RankList.First(r => r.Number == rankStruct.New);
+					player.RankNumberOld = rankStruct.Old;
+					player.RankNumberNew = rankStruct.New;
 					player.WinCount = rankStruct.NumWins;
 				}
 			}

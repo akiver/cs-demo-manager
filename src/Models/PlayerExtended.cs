@@ -176,9 +176,9 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private bool _isOverwatchBanned;
 
-		private Rank _oldRank = Demo.RankList[0];
+		private int _rankNumberOld = 0;
 
-		private Rank _newRank = Demo.RankList[0];
+		private int _rankNumberNew = 0;
 
 		private int _winCount = 0;
 
@@ -431,18 +431,18 @@ namespace CSGO_Demos_Manager.Models
 		[JsonProperty("players_hurted")]
 		public ObservableCollection<PlayerHurtedEvent> PlayersHurted { get; set; }
 
-		[JsonProperty("old_rank")]
-		public Rank OldRank
+		[JsonProperty("rank_number_old")]
+		public int RankNumberOld
 		{
-			get { return _oldRank; }
-			set { Set(() => OldRank, ref _oldRank, value); }
+			get { return _rankNumberOld; }
+			set { Set(() => RankNumberOld, ref _rankNumberOld, value); }
 		}
 
-		[JsonProperty("new_rank")]
-		public Rank NewRank
+		[JsonProperty("rank_number_new")]
+		public int RankNumberNew
 		{
-			get { return _newRank; }
-			set { Set(() => NewRank, ref _newRank, value); }
+			get { return _rankNumberNew; }
+			set { Set(() => RankNumberNew, ref _rankNumberNew, value); }
 		}
 
 		[JsonProperty("number_wins")]
