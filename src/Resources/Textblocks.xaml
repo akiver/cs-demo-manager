@@ -94,6 +94,20 @@
 		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="StatsTitleStyle">
+		<Setter Property="FontSize" Value="28" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+	
+	<Style TargetType="TextBlock" x:Key="StatsValueStyle">
+		<Setter Property="FontSize" Value="26" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
 	<!-- TextBlock inside DataGridTextColumn for selected account stats data -->
 	<Style TargetType="TextBlock" x:Key="OneKillCountDataGridTextColumnStyle">
 		<Style.Triggers >

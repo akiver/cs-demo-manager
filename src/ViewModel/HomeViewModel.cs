@@ -418,8 +418,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								return;
 							}
 							var mainViewModel = (new ViewModelLocator()).Main;
-							GeneralView statsView = new GeneralView();
-							mainViewModel.CurrentPage.ShowPage(statsView);
+							OverallView overallView = new OverallView();
+							mainViewModel.CurrentPage.ShowPage(overallView);
 						},() => !IsBusy));
 			}
 		}

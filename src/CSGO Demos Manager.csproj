@@ -181,6 +181,7 @@
     <Compile Include="Models\Events\SmokeNadeEndedEvent.cs" />
     <Compile Include="Models\Events\SmokeNadeStartedEvent.cs" />
     <Compile Include="Models\Events\WeaponFire.cs" />
+    <Compile Include="Models\OverallStats.cs" />
     <Compile Include="Models\HeatmapPoint.cs" />
     <Compile Include="Models\MapPoint.cs" />
     <Compile Include="Models\Overtime.cs" />
@@ -305,8 +306,8 @@
     <Compile Include="ViewModel\SuspectsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\AccountStats\GeneralView.xaml.cs">
-      <DependentUpon>GeneralView.xaml</DependentUpon>
+    <Compile Include="Views\AccountStats\OverallView.xaml.cs">
+      <DependentUpon>OverallView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AccountStats\RankView.xaml.cs">
       <DependentUpon>RankView.xaml</DependentUpon>
@@ -385,7 +386,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AccountStats\GeneralView.xaml">
+    <Page Include="Views\AccountStats\OverallView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

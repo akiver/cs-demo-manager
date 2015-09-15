@@ -46,6 +46,20 @@
 					</StackPanel>
 				</Button>
 
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Command="{Binding GoToOverallCommand}"
+					Width="80" Height="30" ToolTip="Overall (CTRL+O)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_globe_wire}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Overall" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<Button Margin="10" Width="70" Height="30"
 						Style="{DynamicResource AccentedSquareButtonStyle}"
 						IsEnabled="False" ToolTip="Rank (CTRL+R)">

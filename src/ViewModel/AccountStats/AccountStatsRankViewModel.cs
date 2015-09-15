@@ -5,6 +5,7 @@ using System.Windows.Input;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Views;
+using CSGO_Demos_Manager.Views.AccountStats;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
@@ -34,6 +35,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private RelayCommand _windowLoadedCommand;
 
 		private RelayCommand _backToHomeCommand;
+
+		private RelayCommand _goToOverallCommand;
 
 		private RelayCommand<MouseWheelEventArgs> _mouseWheelCommand;
 
@@ -232,6 +235,25 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to the overall stats page
+		/// </summary>
+		public RelayCommand GoToOverallCommand
+		{
+			get
+			{
+				return _goToOverallCommand
+					?? (_goToOverallCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						OverallView overallView = new OverallView();
+						mainViewModel.CurrentPage.ShowPage(overallView);
 					}));
 			}
 		}

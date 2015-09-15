@@ -58,5 +58,11 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<List<RankDateChart>> GetRankDateChartDataAsync();
+
+		/// <summary>
+		/// Return overall stats for the selected account
+		/// </summary>
+		/// <returns></returns>
+		Task<OverallStats> GetGeneralAccountStatsAsync();
 	}
 }

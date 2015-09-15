@@ -2,9 +2,9 @@
 
 namespace CSGO_Demos_Manager.Views.AccountStats
 {
-	public partial class GeneralView : UserControl
+	public partial class OverallView : UserControl
 	{
-		public GeneralView()
+		public OverallView()
 		{
 			InitializeComponent();
 		}

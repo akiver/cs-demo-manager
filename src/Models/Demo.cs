@@ -799,6 +799,61 @@ namespace CSGO_Demos_Manager.Models
 		#region Selected account data accessors
 
 		[JsonIgnore]
+		public int HeadshotSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.HeadshotCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int DeathSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.DeathCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int AssistSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.AssistCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int EntryKillSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.EntryKills.Count;
+			}
+		}
+
+		[JsonIgnore]
+		public int KnifeKillSelectedAccountCount
+		{
+			get
+			{
+				IEnumerable<KillEvent> kills = Kills.Where(k => k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (!kills.Any()) return 0;
+				return Kills.Count(k => k.Weapon.Name == "Knife");
+			}
+		}
+
+		[JsonIgnore]
 		public int TotalKillSelectedAccountCount
 		{
 			get
@@ -806,6 +861,17 @@ namespace CSGO_Demos_Manager.Models
 				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 				if (player == null) return 0;
 				return player.KillsCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int MvpSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.RoundMvpCount;
 			}
 		}
 

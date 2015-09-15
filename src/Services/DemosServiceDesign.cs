@@ -431,5 +431,30 @@ namespace CSGO_Demos_Manager.Services
 							}
 			});
 		}
+
+		public Task<OverallStats> GetGeneralAccountStatsAsync()
+		{
+			return Task.FromResult(new OverallStats
+			{
+				KillCount = 2450,
+				MatchCount = 214,
+				DeathCount = 2000,
+				HeadshotRatio = (decimal)42.5,
+				HeadshotCount = 1100,
+				KillDeathRatio = (decimal)1.1,
+				KnifeKillCount = 10,
+				AssistCount = 1500,
+				EntryKillCount = 620,
+				FiveKillCount = 15,
+				FourKillCount = 20,
+				ThreeKillCount = 46,
+				TwoKillCount = 62,
+				BombDefusedCount = 51,
+				BombExplodedCount = 48,
+				BombPlantedCount = 110,
+				MvpCount = 620,
+				DamageCount = 122241
+			});
+		}
 	}
 }

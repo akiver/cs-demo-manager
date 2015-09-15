@@ -1,4 +1,5 @@
-﻿using CSGO_Demos_Manager.Models;
+﻿using System;
+using CSGO_Demos_Manager.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -248,6 +249,50 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			return datas;
+		}
+
+		public async Task<OverallStats> GetGeneralAccountStatsAsync()
+		{
+			OverallStats stats = new OverallStats();
+
+			List<Demo> demos = await _cacheService.GetDemoListAsync();
+
+			if (demos.Any())
+			{
+				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
+				if (demosPlayerList.Any())
+				{
+					stats.MatchCount = demosPlayerList.Count;
+					foreach (Demo demo in demosPlayerList)
+					{
+						stats.KillCount += demo.TotalKillSelectedAccountCount;
+						stats.AssistCount += demo.AssistSelectedAccountCount;
+						stats.DeathCount += demo.DeathSelectedAccountCount;
+						stats.KnifeKillCount += demo.KnifeKillSelectedAccountCount;
+						stats.EntryKillCount += demo.EntryKillSelectedAccountCount;
+						stats.FiveKillCount += demo.FiveKillSelectedAccountCount;
+						stats.FourKillCount += demo.FourKillSelectedAccountCount;
+						stats.ThreeKillCount += demo.ThreeKillSelectedAccountCount;
+						stats.TwoKillCount += demo.TwoKillSelectedAccountCount;
+						stats.HeadshotCount += demo.HeadshotSelectedAccountCount;
+						stats.BombDefusedCount += demo.BombDefusedSelectedAccountCount;
+						stats.BombExplodedCount += demo.BombExplodedSelectedAccountCount;
+						stats.BombPlantedCount += demo.BombPlantedSelectedAccountCount;
+						stats.MvpCount += demo.MvpSelectedAccountCount;
+						stats.DamageCount += demo.TotalDamageHealthSelectedAccountCount;
+					}
+				}
+				if (stats.KillCount != 0 && stats.DeathCount != 0)
+				{
+					stats.KillDeathRatio = Math.Round(stats.KillCount / (decimal)stats.DeathCount, 2);
+				}
+				if (stats.KillCount != 0 && stats.HeadshotCount != 0)
+				{
+					stats.HeadshotRatio = Math.Round(stats.KillCount / (decimal)stats.HeadshotCount, 2);
+				}
+			}
+
+			return stats;
 		}
 	}
 }
