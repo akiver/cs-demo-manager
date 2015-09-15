@@ -564,7 +564,7 @@
 														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 												<DataGridTemplateColumn.CellTemplate>
 													<DataTemplate>
-														<Image Source="{Binding OldRank.Logo}" Height="18" Width="45" />
+														<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}" Height="18" Width="45" />
 													</DataTemplate>
 												</DataGridTemplateColumn.CellTemplate>
 											</DataGridTemplateColumn>
