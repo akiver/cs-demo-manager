@@ -140,7 +140,7 @@
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 							<Rectangle Width="15" Height="15">
 								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_refresh}" />
+									<VisualBrush Visual="{StaticResource appbar_magnify_browse}" />
 								</Rectangle.Fill>
 							</Rectangle>
 							<TextBlock Text="Browse" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
