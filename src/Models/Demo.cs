@@ -1014,6 +1014,14 @@ namespace CSGO_Demos_Manager.Models
 					_bombPlanted.Clear();
 					_bombDefused.Clear();
 					_bombExploded.Clear();
+					_bombPlanted.Clear();
+					_bombDefused.Clear();
+					_bombExploded.Clear();
+					_mostBombPlantedPlayer = null;
+					_mostEntryKillPlayer = null;
+					_mostHeadshotPlayer = null;
+					_mostKillingWeapon = null;
+					_hasCheater = false;
 				});
 		}
 
