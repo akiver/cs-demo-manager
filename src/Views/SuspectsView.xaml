@@ -24,7 +24,7 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"
+		<KeyBinding Command="{Binding BackToHomeCommand}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding RefreshSuspectListCommand}"
 					Gesture="CTRL+R" />
@@ -33,7 +33,7 @@
 		<KeyBinding Command="{Binding StopCommand}"
 					Gesture="CTRL+S" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
-									Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}" />
+									Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
 
 	<i:Interaction.Triggers>
@@ -56,7 +56,7 @@
 					Width="70"
 					Height="30"
 					IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}"
-					Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}">
+					Command="{Binding BackToHomeCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>

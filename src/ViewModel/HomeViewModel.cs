@@ -107,8 +107,6 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<bool> _showAllAccountsCommand;
 
-		private RelayCommand _backToHomeCommand;
-
 		private RelayCommand _showSuspectsCommand;
 
 		private RelayCommand _refreshListCommand;
@@ -945,26 +943,6 @@ namespace CSGO_Demos_Manager.ViewModel
 						await _demosService.SetSource(SelectedDemos, source);
 					},
 					source => SelectedDemos != null && SelectedDemos.Count > 0));
-			}
-		}
-
-		/// <summary>
-		/// Command to back to the home page
-		/// </summary>
-		public RelayCommand BackToHomeCommand
-		{
-			get
-			{
-				return _backToHomeCommand
-					?? (_backToHomeCommand = new RelayCommand(
-					() =>
-					{
-						var mainViewModel = (new ViewModelLocator()).Main;
-						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-						HomeView homeView = new HomeView();
-						mainViewModel.CurrentPage.ShowPage(homeView);
-						(new ViewModelLocator().Settings).IsShowAllPlayers = true;
-					}));
 			}
 		}
 

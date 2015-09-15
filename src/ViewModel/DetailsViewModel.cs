@@ -50,6 +50,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private string _notificationMessage;
 
+		private RelayCommand _backToHomeCommand;
+
 		private RelayCommand<Demo> _analyzeDemoCommand;
 
 		private RelayCommand<Demo> _heatmapCommand;
@@ -172,6 +174,25 @@ namespace CSGO_Demos_Manager.ViewModel
 		#endregion
 
 		#region Commands
+
+		/// <summary>
+		/// Command to back to the home page
+		/// </summary>
+		public RelayCommand BackToHomeCommand
+		{
+			get
+			{
+				return _backToHomeCommand
+					?? (_backToHomeCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						HomeView homeView = new HomeView();
+						mainViewModel.CurrentPage.ShowPage(homeView);
+					}));
+			}
+		}
 
 		/// <summary>
 		/// Command to go to heatmap control

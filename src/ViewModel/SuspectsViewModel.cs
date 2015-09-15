@@ -14,6 +14,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Views;
 using MahApps.Metro.Controls.Dialogs;
 using MoreLinq;
 
@@ -32,6 +33,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private readonly DialogService _dialogService;
 
 		private string _suspectSteamCommunityUrl;
+
+		private RelayCommand _backToHomeCommand;
 
 		private RelayCommand<string> _addSuspectCommand;
 
@@ -116,6 +119,25 @@ namespace CSGO_Demos_Manager.ViewModel
 		#endregion
 
 		#region Commands
+
+		/// <summary>
+		/// Command to back to the home page
+		/// </summary>
+		public RelayCommand BackToHomeCommand
+		{
+			get
+			{
+				return _backToHomeCommand
+					?? (_backToHomeCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						HomeView homeView = new HomeView();
+						mainViewModel.CurrentPage.ShowPage(homeView);
+					}));
+			}
+		}
 
 		public RelayCommand<string> AddSuspectCommand
 		{

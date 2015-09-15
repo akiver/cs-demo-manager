@@ -22,7 +22,7 @@
 	</UserControl.Resources>
 
 	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"
+		<KeyBinding Command="{Binding BackToHomeCommand}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding HeatmapCommand}"
 					CommandParameter="{Binding CurrentDemo}"
@@ -45,7 +45,7 @@
 		<KeyBinding Command="{Binding GoToDemoDamagesCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+D" />
-		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}"/>
+		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}"/>
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
 	</UserControl.InputBindings>
@@ -65,7 +65,7 @@
 					ToolTip="Back (CTRL+B)"
 					Width="70"
 					Height="30"
-					Command="{Binding Home.BackToHomeCommand, Source={StaticResource Locator}}">
+					Command="{Binding BackToHomeCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
