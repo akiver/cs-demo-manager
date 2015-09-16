@@ -301,7 +301,7 @@ namespace CSGO_Demos_Manager.Services
 				}
 				if (stats.KillCount != 0 && stats.HeadshotCount != 0)
 				{
-					stats.HeadshotRatio = Math.Round(stats.KillCount / (decimal)stats.HeadshotCount, 2);
+					stats.HeadshotRatio = Math.Round(((decimal)stats.HeadshotCount * 100) / stats.KillCount, 2);
 				}
 			}
 
