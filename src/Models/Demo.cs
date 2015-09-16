@@ -959,19 +959,19 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int BombExplodedSelectedAccountCount
 		{
-			get { return BombExploded.Count(b => b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
+			get { return BombExploded.Count(b => b.Player != null && b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
 		}
 
 		[JsonIgnore]
 		public int BombDefusedSelectedAccountCount
 		{
-			get { return BombDefused.Count(b => b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
+			get { return BombDefused.Count(b => b.Player != null && b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
 		}
 
 		[JsonIgnore]
 		public int BombPlantedSelectedAccountCount
 		{
-			get { return BombPlanted.Count(b => b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
+			get { return BombPlanted.Count(b => b.Player != null && b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
 		}
 
 		[JsonIgnore]
