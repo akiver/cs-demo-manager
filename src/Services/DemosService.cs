@@ -236,14 +236,20 @@ namespace CSGO_Demos_Manager.Services
 				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
 				if (demosPlayerList.Any())
 				{
+					// Sort by date
+					demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
 					foreach (Demo demo in demosPlayerList)
 					{
-						int rankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
-						datas.Add(new RankDateChart
+						// Ignore demos where all players have no rank, sometimes CCSUsrMsg_ServerRankUpdate isn't raised
+						if (demo.Players.All(p => p.RankNumberOld != 0))
 						{
-							Date = demo.Date,
-							Rank = AppSettings.RankList.First(r => r.Number == rankNumber).Number
-						});
+							int rankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
+							datas.Add(new RankDateChart
+							{
+								Date = demo.Date,
+								Rank = AppSettings.RankList.First(r => r.Number == rankNumber).Number
+							});
+						}
 					}
 				}
 			}
