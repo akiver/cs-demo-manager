@@ -260,14 +260,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		public bool IsShowAllAccounts
 		{
-			get
-			{
-				if (!_isShowAllAccounts && Accounts != null && Accounts.Any())
-				{
-					SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
-				}
-				return _isShowAllAccounts;
-			}
+			get { return _isShowAllAccounts; }
 			set
 			{
 				Settings.Default.IsShowAllAccounts = value;
@@ -1301,14 +1294,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			_cacheService = chacheService;
 			_demosService = demosService;
 			_steamService = steamService;
-			Task.Run(async () =>
+
+			System.Windows.Application.Current.Dispatcher.Invoke(async () =>
 			{
 				List<Account> accounts = await _cacheService.GetAccountListAsync();
 				Accounts = new ObservableCollection<Account>(accounts);
-				if (Settings.Default.SelectedStatsAccountSteamID != 0)
-				{
-					SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
-				}
+				SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
 			});
 		}
 
