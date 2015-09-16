@@ -105,7 +105,7 @@ namespace DemoInfo
 
 		public List<RankStruct> RankStructList { get; set; }
 	}
-#endif
+	#endif
 
 	public class TickDoneEventArgs : EventArgs
 	{

@@ -999,10 +999,9 @@ namespace DemoInfo
 			if (equipment.Weapon == EquipmentElement.P2000) {
 				e.Entity.FindProperty("m_nModelIndex").IntRecived += (sender2, e2) => {
 					equipment.OriginalString = modelprecache[e2.Value];
-
-					if(modelprecache[e2.Value].EndsWith("_pist_223.mdl"))
+					if (modelprecache[e2.Value].Contains("_pist_223"))
 						equipment.Weapon = EquipmentElement.USP; //BAM
-					else if(modelprecache[e2.Value].EndsWith("_pist_hkp2000.mdl"))
+					else if(modelprecache[e2.Value].Contains("_pist_hkp2000"))
 						equipment.Weapon = EquipmentElement.P2000;
 					else 
 						throw new InvalidDataException("Unknown weapon model");
@@ -1012,9 +1011,10 @@ namespace DemoInfo
 			if (equipment.Weapon == EquipmentElement.M4A4) {
 				e.Entity.FindProperty("m_nModelIndex").IntRecived += (sender2, e2) => {
 					equipment.OriginalString = modelprecache[e2.Value];
-					if(modelprecache[e2.Value].EndsWith("_rif_m4a1_s.mdl"))
+					if (modelprecache[e2.Value].Contains("_rif_m4a1_s"))
 						equipment.Weapon = EquipmentElement.M4A1;  //BAM
-					else if(modelprecache[e2.Value].EndsWith("_rif_m4a1.mdl"))
+						// if it's not an M4A1-S, check if it's an M4A4
+					else if(modelprecache[e2.Value].Contains("_rif_m4a1"))
 						equipment.Weapon = EquipmentElement.M4A4;
 					else 
 						throw new InvalidDataException("Unknown weapon model");
@@ -1024,9 +1024,9 @@ namespace DemoInfo
 			if (equipment.Weapon == EquipmentElement.P250) {
 				e.Entity.FindProperty("m_nModelIndex").IntRecived += (sender2, e2) => {
 					equipment.OriginalString = modelprecache[e2.Value];
-					if(modelprecache[e2.Value].EndsWith("_pist_cz_75.mdl"))
+					if (modelprecache[e2.Value].Contains("_pist_cz_75"))
 						equipment.Weapon = EquipmentElement.CZ;  //BAM
-					else if(modelprecache[e2.Value].EndsWith("_pist_p250.mdl"))
+					else if(modelprecache[e2.Value].Contains("_pist_p250"))
 						equipment.Weapon = EquipmentElement.P250;
 					else 
 						throw new InvalidDataException("Unknown weapon model");
