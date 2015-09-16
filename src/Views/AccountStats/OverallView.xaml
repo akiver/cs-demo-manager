@@ -6,6 +6,7 @@
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding AccountStatsGeneral, Source={StaticResource Locator}}">
@@ -79,6 +80,7 @@
 		<ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Auto" HorizontalAlignment="Center">
 			<Grid>
 				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
@@ -263,6 +265,22 @@
 					</Grid>
 				</Grid>
 
+				<Grid Grid.Row="2">
+					<metroChart:PieChart ChartTitle="Match Stats" ChartSubTitle="Number of win / loss / draw"
+										 FontSize="18" MinHeight="380" MinWidth="320"
+										 HorizontalAlignment="Left"
+										 Foreground="{StaticResource LightWhiteBrush}"
+										 Background="{StaticResource LightGreyBrush}"
+										 SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
+										 Palette="{StaticResource MatchStatsChartPalette}">
+						<metroChart:PieChart.Series>
+							<metroChart:ChartSeries ItemsSource="{Binding Path=DatasMatchStats}"
+													SeriesTitle="Match Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+						</metroChart:PieChart.Series>
+					</metroChart:PieChart>
+				</Grid>
 			</Grid>
 		</ScrollViewer>
 	</Grid>

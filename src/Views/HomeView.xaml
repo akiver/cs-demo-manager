@@ -452,14 +452,13 @@
 									<Style TargetType="{x:Type TextBlock}">
 										<Style.Triggers>
 											<DataTrigger Binding="{Binding Path=WinStatus}" Value="won">
-												<Setter Property="Background" Value="LightGreen"/>
+												<Setter Property="Background" Value="{StaticResource GreenBrush}"/>
 											</DataTrigger>
 											<DataTrigger Binding="{Binding Path=WinStatus}" Value="lost">
-												<Setter Property="Background" Value="Firebrick"/>
-												<Setter Property="Foreground" Value="White"/>
+												<Setter Property="Background" Value="{StaticResource RedColorBrush}"/>
 											</DataTrigger>
 											<DataTrigger Binding="{Binding Path=WinStatus}" Value="draw">
-												<Setter Property="Background" Value="LightBlue"/>
+												<Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
 											</DataTrigger>
 										</Style.Triggers>
 									</Style>

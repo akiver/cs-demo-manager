@@ -453,7 +453,10 @@ namespace CSGO_Demos_Manager.Services
 				BombExplodedCount = 48,
 				BombPlantedCount = 110,
 				MvpCount = 620,
-				DamageCount = 122241
+				DamageCount = 122241,
+				MatchWinCount = 60,
+				MatchLossCount = 15,
+				MatchDrawCount = 7
 			});
 		}
 	}

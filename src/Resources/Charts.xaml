@@ -1,5 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart">
 
 	<Style TargetType="{x:Type Grid}" x:Key="SeriesLineGridStyle">
 		<Style.Triggers>
@@ -13,5 +14,17 @@
 		<Setter Property="Stroke" Value="{StaticResource LightGreenBrush}"/>
 		<Setter Property="StrokeThickness" Value="1"/>
 	</Style>
+
+	<metroChart:ResourceDictionaryCollection x:Key="MatchStatsChartPalette">
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush1" Color="{StaticResource Green}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush2" Color="{StaticResource Red}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource LightBlue}" />
+		</ResourceDictionary>
+	</metroChart:ResourceDictionaryCollection>
 
 </ResourceDictionary>

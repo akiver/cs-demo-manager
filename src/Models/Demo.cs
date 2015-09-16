@@ -358,27 +358,17 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
-				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return string.Empty;
-
-				// was in team 1?
-				PlayerExtended player = PlayersTeam1.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
-				if (player != null)
+				switch (MatchVerdictSelectedAccountCount)
 				{
-					if (ScoreTeam1 == ScoreTeam2) return "draw";
-					if (ScoreTeam1 > ScoreTeam2) return "won";
-					return "lost";
+					case -1:
+						return "lost";
+					case 0:
+						return "draw";
+					case 1:
+						return "won";
+					default:
+						return string.Empty;
 				}
-
-				// was in team 2?
-				player = PlayersTeam2.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
-				if (player != null)
-				{
-					if (ScoreTeam1 == ScoreTeam2) return "draw";
-					if (ScoreTeam1 < ScoreTeam2) return "won";
-					return "lost";
-				}
-
-				return string.Empty;
 			}
 		}
 		
@@ -797,6 +787,42 @@ namespace CSGO_Demos_Manager.Models
 		#endregion
 
 		#region Selected account data accessors
+
+		/// <summary>
+		/// Return the result of the match for the selected account
+		/// -2 : error
+		/// -1 : loss
+		/// 0 : draw
+		/// 1 : win
+		/// </summary>
+		[JsonIgnore]
+		public int MatchVerdictSelectedAccountCount
+		{
+			get
+			{
+				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return -2;
+
+				// was in team 1?
+				PlayerExtended player = PlayersTeam1.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player != null)
+				{
+					if (ScoreTeam1 == ScoreTeam2) return 0;
+					if (ScoreTeam1 > ScoreTeam2) return 1;
+					return -1;
+				}
+
+				// was in team 2?
+				player = PlayersTeam2.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player != null)
+				{
+					if (ScoreTeam1 == ScoreTeam2) return 0;
+					if (ScoreTeam1 < ScoreTeam2) return 1;
+					return -1;
+				}
+
+				return -2;
+			}
+		}
 
 		[JsonIgnore]
 		public int HeadshotSelectedAccountCount

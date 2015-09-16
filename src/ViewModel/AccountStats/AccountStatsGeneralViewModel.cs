@@ -1,6 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Views.AccountStats;
@@ -24,6 +26,10 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private bool _isBusy;
 
 		private string _notificationMessage;
+
+		private List<GenericPieData> _datasMatchStats;
+
+		private object _selectedItem;
 
 		private int _matchCount;
 
@@ -64,6 +70,18 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		#endregion
 
 		#region Accessors
+
+		public List<GenericPieData> DatasMatchStats
+		{
+			get { return _datasMatchStats; }
+			set { Set(() => DatasMatchStats, ref _datasMatchStats, value); }
+		}
+
+		public object SelectedItem
+		{
+			get { return _selectedItem; }
+			set { Set(() => SelectedItem, ref _selectedItem, value); }
+		}
 
 		public bool IsBusy
 		{
@@ -266,6 +284,24 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			BombPlantedCount = datas.BombPlantedCount;
 			MvpCount = datas.MvpCount;
 			DamageCount = datas.DamageCount;
+			DatasMatchStats = new List<GenericPieData>
+			{
+				new GenericPieData
+				{
+					Category = "Win",
+					Value = datas.MatchWinCount
+				},
+				new GenericPieData
+				{
+					Category = "Loss",
+					Value = datas.MatchLossCount
+				},
+				new GenericPieData
+				{
+					Category = "Draw",
+					Value = datas.MatchDrawCount
+				}
+			};
 		}
 
 		public AccountStatsGeneralViewModel(IDemosService demoService)

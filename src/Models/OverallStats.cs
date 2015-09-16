@@ -37,5 +37,11 @@
 		public int DamageCount { get; set; } = 0;
 
 		public int MvpCount { get; set; } = 0;
+
+		public int MatchWinCount { get; set; } = 0;
+
+		public int MatchLossCount { get; set; } = 0;
+
+		public int MatchDrawCount { get; set; } = 0;
 	}
 }

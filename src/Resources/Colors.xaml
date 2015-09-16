@@ -4,14 +4,18 @@
 	<Color x:Key="LightGreen">#A4C400</Color>
 	<Color x:Key="LightWhite">#ecf0f1</Color>
 	<Color x:Key="LightRed">#C65D57</Color>
-	<Color x:Key="Red">#e74c3c</Color>
+	<Color x:Key="Red">#c9302c</Color>
+	<Color x:Key="Green">#5cb85c</Color>
+	<Color x:Key="LightBlue">#5bc0de</Color>
 	
 	<SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
 	<SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
 	<SolidColorBrush x:Key="LightWhiteBrush" Color="{StaticResource LightWhite}" />
 	<SolidColorBrush x:Key="LightRedColorBrush" Color="{StaticResource LightRed}" />
 	<SolidColorBrush x:Key="RedColorBrush" Color="{StaticResource Red}" />
-	
+	<SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}" />
+	<SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
+
 	<!--Override MahApps-->
 	<SolidColorBrush x:Key="RightArrowFill" Color="{StaticResource LightGrey}" />
 </ResourceDictionary>

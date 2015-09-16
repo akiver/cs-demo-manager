@@ -280,8 +280,21 @@ namespace CSGO_Demos_Manager.Services
 						stats.BombPlantedCount += demo.BombPlantedSelectedAccountCount;
 						stats.MvpCount += demo.MvpSelectedAccountCount;
 						stats.DamageCount += demo.TotalDamageHealthSelectedAccountCount;
+						switch (demo.MatchVerdictSelectedAccountCount)
+						{
+							case -1:
+								stats.MatchLossCount++;
+								break;
+							case 0:
+								stats.MatchDrawCount++;
+								break;
+							case 1:
+								stats.MatchWinCount++;
+								break;
+						}
 					}
 				}
+
 				if (stats.KillCount != 0 && stats.DeathCount != 0)
 				{
 					stats.KillDeathRatio = Math.Round(stats.KillCount / (decimal)stats.DeathCount, 2);
