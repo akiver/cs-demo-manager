@@ -12,12 +12,12 @@ namespace CSGO_Demos_Manager
 		public static string AUTHOR = "AkiVer";
 		public static string APP_NAME = "CSGO Demos Manager";
 		public static string APP_WEBSITE = "http://csgo-demos-manager.com";
-		public static Version APP_VERSION = new Version("2.1.0");
+		public static Version APP_VERSION = new Version("2.1.1");
 		public static string REGISTRY_KEY_DIRECTORIES = "directories";
 		// Don't forget to put your Steam API key into the file "steam_api_key.txt"
 		public static string STEAM_API_KEY = Properties.Resources.steam_api_key;
 		// when an update needs to clear data cache, set it to true to prompt the user to save his comments
-		public static bool REQUIRE_CLEAR_CACHE = true;
+		public static bool REQUIRE_CLEAR_CACHE = false;
 
 		/// <summary>
 		/// Return the Steam exe path from the registry
