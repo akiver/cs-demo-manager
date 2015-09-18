@@ -300,7 +300,7 @@
     <Compile Include="Services\SoundService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
-    <Compile Include="ViewModel\AccountStats\AccountStatsGeneralViewModel.cs" />
+    <Compile Include="ViewModel\AccountStats\AccountStatsOverallViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsMapViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsRankViewModel.cs" />
     <Compile Include="ViewModel\DemoDamagesViewModel.cs" />

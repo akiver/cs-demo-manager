@@ -41,7 +41,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<EntryKillsViewModel>();
 			SimpleIoc.Default.Register<OverviewViewModel>();
 			SimpleIoc.Default.Register<DemoDamagesViewModel>();
-			SimpleIoc.Default.Register<AccountStatsGeneralViewModel>();
+			SimpleIoc.Default.Register<AccountStatsOverallViewModel>();
 			SimpleIoc.Default.Register<AccountStatsRankViewModel>();
 			SimpleIoc.Default.Register<AccountStatsMapViewModel>();
 		}
@@ -118,11 +118,11 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public AccountStatsGeneralViewModel AccountStatsGeneral
+		public AccountStatsOverallViewModel AccountStatsGeneral
 		{
 			get
 			{
-				return ServiceLocator.Current.GetInstance<AccountStatsGeneralViewModel>();
+				return ServiceLocator.Current.GetInstance<AccountStatsOverallViewModel>();
 			}
 		}
 

@@ -11,7 +11,7 @@ using GalaSoft.MvvmLight.CommandWpf;
 
 namespace CSGO_Demos_Manager.ViewModel.AccountStats
 {
-	public class AccountStatsGeneralViewModel : ViewModelBase
+	public class AccountStatsOverallViewModel : ViewModelBase
 	{
 		#region Properties
 
@@ -328,7 +328,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			};
 		}
 
-		public AccountStatsGeneralViewModel(IDemosService demoService)
+		public AccountStatsOverallViewModel(IDemosService demoService)
 		{
 			_demosService = demoService;
 
