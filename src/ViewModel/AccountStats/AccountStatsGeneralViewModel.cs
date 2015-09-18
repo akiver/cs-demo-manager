@@ -240,6 +240,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
+						Cleanup();
 					}));
 			}
 		}
@@ -259,6 +260,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						RankView rankView = new RankView();
 						mainViewModel.CurrentPage.ShowPage(rankView);
+						Cleanup();
 					}));
 			}
 		}
@@ -278,6 +280,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						MapView mapView = new MapView();
 						mainViewModel.CurrentPage.ShowPage(mapView);
+						Cleanup();
 					}));
 			}
 		}
@@ -336,6 +339,31 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					await LoadDatas();
 				});
 			}
+		}
+
+		public override void Cleanup()
+		{
+			base.Cleanup();
+			AssistCount = 0;
+			BombDefusedCount = 0;
+			BombExplodedCount = 0;
+			BombPlantedCount = 0;
+			DamageCount = 0;
+			DatasMatchStats = null;
+			DeathCount = 0;
+			EntryKillCount = 0;
+			FiveKillCount = 0;
+			FourKillCount = 0;
+			HeadshotCount = 0;
+			HeadshotRatio = 0;
+			KillCount = 0;
+			KillDeathRatio = 0;
+			TwoKillCount = 0;
+			KnifeKillCount = 0;
+			MvpCount = 0;
+			MatchCount = 0;
+			ThreeKillCount = 0;
+			SelectedItem = null;
 		}
 	}
 }
