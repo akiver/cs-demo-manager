@@ -73,10 +73,24 @@
 					</StackPanel>
 				</Button>
 
+				<Button Margin="10" Width="70" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToMapCommand}"
+						ToolTip="Maps (CTRL+M)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_map}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Maps" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
 					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
-						   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>

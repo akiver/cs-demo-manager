@@ -7,6 +7,7 @@ using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Models.Stats;
 using DemoInfo;
 
 namespace CSGO_Demos_Manager.Services
@@ -457,6 +458,45 @@ namespace CSGO_Demos_Manager.Services
 				MatchWinCount = 60,
 				MatchLossCount = 15,
 				MatchDrawCount = 7
+			});
+		}
+
+		public Task<MapStats> GetMapStatsAsync()
+		{
+			return Task.FromResult(new MapStats
+			{
+				Dust2WinCount = 24,
+				Dust2LossCount = 10,
+				Dust2DrawCount = 6,
+				Dust2WinPercentage = 50,
+				NukeWinCount = 12,
+				NukeLossCount = 2,
+				NukeDrawCount = 5,
+				NukeWinPercentage = 40,
+				MirageWinCount = 12,
+				MirageLossCount = 1,
+				MirageDrawCount = 6,
+				MirageWinPercentage = 62,
+				CacheWinCount = 13,
+				CacheLossCount = 10,
+				CacheDrawCount = 5,
+				CacheWinPercentage = 30,
+				CobblestoneWinCount = 3,
+				CobblestoneLossCount = 2,
+				CobblestoneDrawCount = 2,
+				CobblestoneWinPercentage = 41,
+				TrainWinCount = 4,
+				TrainLossCount = 0,
+				TrainDrawCount = 5,
+				TrainWinPercentage = 20,
+				InfernoWinCount = 14,
+				InfernoLossCount = 2,
+				InfernoDrawCount = 14,
+				InfernoWinPercentage = 54,
+				OverpassWinCount = 9,
+				OverpassLossCount = 7,
+				OverpassDrawCount = 8,
+				OverpassWinPercentage = 70
 			});
 		}
 	}

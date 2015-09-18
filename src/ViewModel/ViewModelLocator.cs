@@ -43,6 +43,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<DemoDamagesViewModel>();
 			SimpleIoc.Default.Register<AccountStatsGeneralViewModel>();
 			SimpleIoc.Default.Register<AccountStatsRankViewModel>();
+			SimpleIoc.Default.Register<AccountStatsMapViewModel>();
 		}
 
 		public MainViewModel Main
@@ -130,6 +131,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			get
 			{
 				return ServiceLocator.Current.GetInstance<AccountStatsRankViewModel>();
+			}
+		}
+
+		public AccountStatsMapViewModel AccountStatsMap
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<AccountStatsMapViewModel>();
 			}
 		}
 

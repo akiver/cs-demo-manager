@@ -7,7 +7,15 @@
 	<Color x:Key="Red">#c9302c</Color>
 	<Color x:Key="Green">#5cb85c</Color>
 	<Color x:Key="LightBlue">#5bc0de</Color>
-	
+	<Color x:Key="Dust2Color">#bdb387</Color>
+	<Color x:Key="CobblestoneColor">#350d46</Color>
+	<Color x:Key="OverpassColor">#ffcc00</Color>
+	<Color x:Key="TrainColor">#f8f1d3</Color>
+	<Color x:Key="NukeColor">#141d1a</Color>
+	<Color x:Key="InfernoColor">#611e05</Color>
+	<Color x:Key="MirageColor">#56a5b3</Color>
+	<Color x:Key="CacheColor">#2a1014</Color>
+
 	<SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
 	<SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
 	<SolidColorBrush x:Key="LightWhiteBrush" Color="{StaticResource LightWhite}" />

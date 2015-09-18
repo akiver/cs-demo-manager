@@ -165,6 +165,7 @@
     <Compile Include="Messages\SelectedPlayerChangedMessage.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Charts\GenericPieData.cs" />
+    <Compile Include="Models\Stats\MapStats.cs" />
     <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
@@ -300,6 +301,7 @@
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\SteamServiceDesign.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsGeneralViewModel.cs" />
+    <Compile Include="ViewModel\AccountStats\AccountStatsMapViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsRankViewModel.cs" />
     <Compile Include="ViewModel\DemoDamagesViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
@@ -311,6 +313,9 @@
     <Compile Include="ViewModel\SuspectsViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\AccountStats\MapView.xaml.cs">
+      <DependentUpon>MapView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AccountStats\OverallView.xaml.cs">
       <DependentUpon>OverallView.xaml</DependentUpon>
     </Compile>
@@ -388,6 +393,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\Textblocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountStats\MapView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

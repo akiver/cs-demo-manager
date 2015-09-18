@@ -23,6 +23,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToRankCommand;
 
+		private RelayCommand _goToMapCommand;
+
 		private bool _isBusy;
 
 		private string _notificationMessage;
@@ -257,6 +259,25 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						RankView rankView = new RankView();
 						mainViewModel.CurrentPage.ShowPage(rankView);
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to the maps stats page
+		/// </summary>
+		public RelayCommand GoToMapCommand
+		{
+			get
+			{
+				return _goToMapCommand
+					?? (_goToMapCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						MapView mapView = new MapView();
+						mainViewModel.CurrentPage.ShowPage(mapView);
 					}));
 			}
 		}

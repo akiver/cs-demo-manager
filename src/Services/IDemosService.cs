@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models.Charts;
+using CSGO_Demos_Manager.Models.Stats;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -64,5 +65,11 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<OverallStats> GetGeneralAccountStatsAsync();
+
+		/// <summary>
+		/// Return stats for the map stats view
+		/// </summary>
+		/// <returns></returns>
+		Task<MapStats> GetMapStatsAsync();
 	}
 }

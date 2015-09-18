@@ -38,6 +38,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToOverallCommand;
 
+		private RelayCommand _goToMapCommand;
+
 		private RelayCommand<MouseWheelEventArgs> _mouseWheelCommand;
 
 		private RelayCommand<MouseEventArgs> _mouseDownCommand;
@@ -254,6 +256,25 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						OverallView overallView = new OverallView();
 						mainViewModel.CurrentPage.ShowPage(overallView);
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to the maps stats page
+		/// </summary>
+		public RelayCommand GoToMapCommand
+		{
+			get
+			{
+				return _goToMapCommand
+					?? (_goToMapCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						MapView mapView = new MapView();
+						mainViewModel.CurrentPage.ShowPage(mapView);
 					}));
 			}
 		}

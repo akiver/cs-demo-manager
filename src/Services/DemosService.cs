@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
 using CSGO_Demos_Manager.Services.Serialization;
@@ -308,6 +309,94 @@ namespace CSGO_Demos_Manager.Services
 				if (stats.KillCount != 0 && stats.HeadshotCount != 0)
 				{
 					stats.HeadshotRatio = Math.Round(((decimal)stats.HeadshotCount * 100) / stats.KillCount, 2);
+				}
+			}
+
+			return stats;
+		}
+
+		public async Task<MapStats> GetMapStatsAsync()
+		{
+			MapStats stats = new MapStats();
+
+			List<Demo> demos = await _cacheService.GetDemoListAsync();
+
+			if (demos.Any())
+			{
+				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
+				if (demosPlayerList.Any())
+				{
+					stats.Dust2WinCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.Dust2LossCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.Dust2DrawCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && d.MatchVerdictSelectedAccountCount == 0);
+					int matchCount = stats.Dust2WinCount + stats.Dust2LossCount + stats.Dust2DrawCount;
+					if (matchCount > 0)
+					{
+						stats.Dust2WinPercentage = Math.Round((stats.Dust2WinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.MirageWinCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.MirageLossCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.MirageDrawCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.MirageWinCount + stats.MirageLossCount + stats.MirageDrawCount;
+					if (matchCount > 0)
+					{
+						stats.MirageWinPercentage = Math.Round((stats.MirageWinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.InfernoWinCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.InfernoLossCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.InfernoDrawCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.InfernoWinCount + stats.InfernoLossCount + stats.InfernoDrawCount;
+					if (matchCount > 0)
+					{
+						stats.InfernoWinPercentage = Math.Round((stats.InfernoWinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.TrainWinCount = demosPlayerList.Count(d => d.MapName == "de_train" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.TrainLossCount = demosPlayerList.Count(d => d.MapName == "de_train" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.TrainDrawCount = demosPlayerList.Count(d => d.MapName == "de_train" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.TrainWinCount + stats.TrainLossCount + stats.TrainDrawCount;
+					if (matchCount > 0)
+					{
+						stats.TrainWinPercentage = Math.Round((stats.TrainWinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.OverpassWinCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.OverpassLossCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.OverpassDrawCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.OverpassWinCount + stats.OverpassLossCount + stats.OverpassDrawCount;
+					if (matchCount > 0)
+					{
+						stats.OverpassWinPercentage = Math.Round((stats.OverpassWinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.CacheWinCount = demosPlayerList.Count(d => d.MapName == "de_cache" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.CacheLossCount = demosPlayerList.Count(d => d.MapName == "de_cache" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.CacheDrawCount = demosPlayerList.Count(d => d.MapName == "de_cache" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.CacheWinCount + stats.CacheLossCount + stats.CacheDrawCount;
+					if (matchCount > 0)
+					{
+						stats.CacheWinPercentage = Math.Round((stats.CacheWinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.CobblestoneWinCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.CobblestoneLossCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.CobblestoneDrawCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.CobblestoneWinCount + stats.CobblestoneLossCount + stats.CobblestoneDrawCount;
+					if (matchCount > 0)
+					{
+						stats.CobblestoneWinPercentage = Math.Round((stats.CobblestoneWinCount / (double)matchCount * 100), 2);
+					}
+
+					stats.NukeWinCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && d.MatchVerdictSelectedAccountCount == 1);
+					stats.NukeLossCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && d.MatchVerdictSelectedAccountCount == -1);
+					stats.NukeDrawCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && d.MatchVerdictSelectedAccountCount == 0);
+					matchCount = stats.NukeWinCount + stats.NukeLossCount + stats.NukeDrawCount;
+					if (matchCount > 0)
+					{
+						stats.NukeWinPercentage = Math.Round((stats.NukeWinCount / (double)matchCount * 100), 2);
+					}
 				}
 			}
 

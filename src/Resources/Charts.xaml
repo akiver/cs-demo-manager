@@ -27,4 +27,31 @@
 		</ResourceDictionary>
 	</metroChart:ResourceDictionaryCollection>
 
+	<metroChart:ResourceDictionaryCollection x:Key="MapPercentageWinStatsChartPalette">
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush1" Color="{StaticResource Dust2Color}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush2" Color="{StaticResource InfernoColor}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource MirageColor}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource CacheColor}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource OverpassColor}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource CobblestoneColor}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource TrainColor}" />
+		</ResourceDictionary>
+		<ResourceDictionary>
+			<SolidColorBrush x:Key="Brush3" Color="{StaticResource NukeColor}" />
+		</ResourceDictionary>
+	</metroChart:ResourceDictionaryCollection>
+
 </ResourceDictionary>

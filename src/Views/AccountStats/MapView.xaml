@@ -1,0 +1,271 @@
+﻿<UserControl x:Class="CSGO_Demos_Manager.Views.AccountStats.MapView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="720" d:DesignWidth="1280"
+			 DataContext="{Binding AccountStatsMap, Source={StaticResource Locator}}">
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	<Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<StackPanel Orientation="Horizontal">
+				<Button Margin="10" Width="70" Height="30"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding BackToHomeCommand}"
+						ToolTip="Back (CTRL+B)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Command="{Binding GoToOverallCommand}"
+					Width="80" Height="30" ToolTip="Overall (CTRL+O)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_globe_wire}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Overall" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="70" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToRankCommand}"
+						ToolTip="Rank (CTRL+R)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_up_down}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Rank" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="70" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						IsEnabled="False"
+						ToolTip="Maps (CTRL+M)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_map}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Maps" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
+					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+						   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="1" Margin="10">
+
+			<Grid.Resources>
+				<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+			</Grid.Resources>
+
+			<TabControl controls:TabControlHelper.IsUnderlined="True">
+				<controls:MetroTabItem Header="Match Stats">
+
+					<Grid Margin="10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+
+						<Grid Grid.Row="0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<metroChart:PieChart Grid.Column="0"
+									ChartTitle="Dust2"
+									ChartSubTitle="Number of match win / loss / draw on dust2"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding Dust2PieDatas}"
+													SeriesTitle="Dust2 Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+							<metroChart:PieChart Grid.Column="1"
+									ChartTitle="Inferno"
+									ChartSubTitle="Number of match win / loss / draw on inferno"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding InfernoPieDatas}"
+													SeriesTitle="Inferno Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+							<metroChart:PieChart Grid.Column="2"
+									ChartTitle="Mirage"
+									ChartSubTitle="Number of match win / loss / draw on mirage"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding MiragePieDatas}"
+													SeriesTitle="Mirage Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+							<metroChart:PieChart Grid.Column="3"
+									ChartTitle="Overpass"
+									ChartSubTitle="Number of match win / loss / draw on overpass"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding OverpassPieDatas}"
+													SeriesTitle="Overpass Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+						</Grid>
+
+						<Grid Grid.Row="1">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<metroChart:PieChart Grid.Column="0"
+									ChartTitle="Train"
+									ChartSubTitle="Number of match win / loss / draw on train"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding TrainPieDatas}"
+													SeriesTitle="Train Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+							<metroChart:PieChart Grid.Column="1"
+									ChartTitle="Nuke"
+									ChartSubTitle="Number of match win / loss / draw on nuke"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding NukePieDatas}"
+													SeriesTitle="Nuke Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+							<metroChart:PieChart Grid.Column="2"
+									ChartTitle="Cobblestone"
+									ChartSubTitle="Number of match win / loss / draw on cobblestone"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding CobblestonePieDatas}"
+													SeriesTitle="Cobblestone Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+
+							<metroChart:PieChart Grid.Column="3"
+									ChartTitle="Cache"
+									ChartSubTitle="Number of match win / loss / draw on cache"
+									FontSize="18"
+									Foreground="{StaticResource LightWhiteBrush}"
+									Background="{StaticResource LightGreyBrush}"
+									Palette="{StaticResource MatchStatsChartPalette}">
+								<metroChart:PieChart.Series>
+									<metroChart:ChartSeries ItemsSource="{Binding CachePieDatas}"
+													SeriesTitle="Cache Stats"
+													DisplayMember="Category"
+													ValueMember="Value" />
+								</metroChart:PieChart.Series>
+							</metroChart:PieChart>
+						</Grid>
+					</Grid>
+
+				</controls:MetroTabItem>
+				<controls:MetroTabItem Header="Percentage Win">
+					<metroChart:RadialGaugeChart
+					ChartTitle="Percentage win by map"
+					ChartSubTitle=""
+					IsManipulationEnabled="False"
+				Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+				FontSize="18"
+				ChartLegendVisibility="Collapsed"
+				HorizontalAlignment="Left"
+				Foreground="{StaticResource LightWhiteBrush}" 
+				Background="{StaticResource LightGreyBrush}">
+						<metroChart:RadialGaugeChart.Series>
+							<metroChart:ChartSeries SeriesTitle="Maps percentage"
+													DisplayMember="Category" ValueMember="Value"
+													ItemsSource="{Binding MapPercentDatas}">
+							</metroChart:ChartSeries>
+						</metroChart:RadialGaugeChart.Series>
+					</metroChart:RadialGaugeChart>
+				</controls:MetroTabItem>
+			</TabControl>
+
+		</Grid>
+	</Grid>
+</UserControl>
