@@ -237,6 +237,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
+						Cleanup();
 					}));
 			}
 		}
@@ -256,6 +257,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						OverallView overallView = new OverallView();
 						mainViewModel.CurrentPage.ShowPage(overallView);
+						Cleanup();
 					}));
 			}
 		}
@@ -275,6 +277,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						MapView mapView = new MapView();
 						mainViewModel.CurrentPage.ShowPage(mapView);
+						Cleanup();
 					}));
 			}
 		}
@@ -296,6 +299,15 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					Datas = new ObservableCollection<RankDateChart>(datas);
 				});
 			}
+		}
+
+		public override void Cleanup()
+		{
+			base.Cleanup();
+			Datas = null;
+			IsMouseDown = false;
+			ZoomCoefficientX = 1.0;
+			ZoomOffsetX = 0;
 		}
 	}
 }
