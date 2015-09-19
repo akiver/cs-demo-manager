@@ -2,9 +2,9 @@
 
 namespace CSGO_Demos_Manager.Models.Charts
 {
-	public class RankDateChart
+	public class GenericDateChart
 	{
-		public double Rank { get; set; }
+		public double Value { get; set; }
 		public DateTime Date { get; set; }
 	}
 }

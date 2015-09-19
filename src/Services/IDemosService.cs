@@ -58,7 +58,7 @@ namespace CSGO_Demos_Manager.Services
 		/// Return Rank model evolution for the rank chart
 		/// </summary>
 		/// <returns></returns>
-		Task<List<RankDateChart>> GetRankDateChartDataAsync();
+		Task<List<GenericDateChart>> GetRankDateChartDataAsync();
 
 		/// <summary>
 		/// Return overall stats for the selected account
@@ -84,5 +84,11 @@ namespace CSGO_Demos_Manager.Services
 		/// <param name="steamId"></param>
 		/// <returns></returns>
 		Task<List<Demo>> GetDemosPlayer(string steamId);
+
+		/// <summary>
+		/// Return stats for the progression stats view
+		/// </summary>
+		/// <returns></returns>
+		Task<ProgressStats> GetProgressStatsAsync();
 	}
 }

@@ -167,7 +167,7 @@
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Charts\GenericPieData.cs" />
     <Compile Include="Models\Stats\MapStats.cs" />
-    <Compile Include="Models\Charts\RankDateChart.cs" />
+    <Compile Include="Models\Charts\GenericDateChart.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />
@@ -204,6 +204,7 @@
     <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
     <Compile Include="Models\Source\Valve.cs" />
+    <Compile Include="Models\Stats\ProgressStats.cs" />
     <Compile Include="Models\Stats\WeaponStats.cs" />
     <Compile Include="Models\Steam\PlayerBan.cs" />
     <Compile Include="Models\Steam\PlayerSummary.cs" />
@@ -304,6 +305,7 @@
     <Compile Include="Services\SteamServiceDesign.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsOverallViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsMapViewModel.cs" />
+    <Compile Include="ViewModel\AccountStats\AccountStatsProgressViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsRankViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsWeaponViewModel.cs" />
     <Compile Include="ViewModel\DemoDamagesViewModel.cs" />
@@ -321,6 +323,9 @@
     </Compile>
     <Compile Include="Views\AccountStats\OverallView.xaml.cs">
       <DependentUpon>OverallView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountStats\ProgressView.xaml.cs">
+      <DependentUpon>ProgressView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AccountStats\RankView.xaml.cs">
       <DependentUpon>RankView.xaml</DependentUpon>
@@ -407,6 +412,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AccountStats\OverallView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountStats\ProgressView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

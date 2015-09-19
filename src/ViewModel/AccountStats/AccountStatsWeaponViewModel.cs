@@ -27,6 +27,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToMapCommand;
 
+		private RelayCommand _goToProgressCommand;
+
 		private bool _isBusy;
 
 		private string _notificationMessage;
@@ -473,6 +475,26 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						MapView mapView = new MapView();
 						mainViewModel.CurrentPage.ShowPage(mapView);
+						Cleanup();
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to the progression stats page
+		/// </summary>
+		public RelayCommand GoToProgressCommand
+		{
+			get
+			{
+				return _goToProgressCommand
+					?? (_goToProgressCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						ProgressView progressView = new ProgressView();
+						mainViewModel.CurrentPage.ShowPage(progressView);
 						Cleanup();
 					}));
 			}

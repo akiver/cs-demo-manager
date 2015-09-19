@@ -291,145 +291,145 @@ namespace CSGO_Demos_Manager.Services
 			return Task.FromResult(AppSettings.RankList[0]);
 		}
 
-		public Task<List<RankDateChart>> GetRankDateChartDataAsync()
+		public Task<List<GenericDateChart>> GetRankDateChartDataAsync()
 		{
-			return Task.FromResult(new List<RankDateChart>
+			return Task.FromResult(new List<GenericDateChart>
 			{
-				new RankDateChart
-							{
-								Date = DateTime.Now,
-								Rank = 1
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(1),
-								Rank = 2
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(2),
-								Rank = 3
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(3),
-								Rank = 4
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(4),
-								Rank = 4
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(5),
-								Rank = 3
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(6),
-								Rank = 4
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(7),
-								Rank = 5
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(8),
-								Rank = 6
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(9),
-								Rank = 7
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(10),
-								Rank = 8
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(11),
-								Rank = 9
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(12),
-								Rank = 10
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(13),
-								Rank = 11
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(14),
-								Rank = 11
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(15),
-								Rank = 11
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(16),
-								Rank = 12
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(17),
-								Rank = 13
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(18),
-								Rank = 13
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(19),
-								Rank = 14
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(20),
-								Rank = 14
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(21),
-								Rank = 15
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(22),
-								Rank = 16
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(23),
-								Rank = 17
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(24),
-								Rank = 18
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(25),
-								Rank = 18
-							},
-							new RankDateChart
-							{
-								Date = DateTime.Now.AddDays(26),
-								Rank = 18
-							}
+				new GenericDateChart
+				{
+					Date = DateTime.Now,
+					Value = 1
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(1),
+					Value = 2
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(2),
+					Value = 3
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(3),
+					Value = 4
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(4),
+					Value = 4
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(5),
+					Value = 3
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(6),
+					Value = 4
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(7),
+					Value = 5
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(8),
+					Value = 6
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(9),
+					Value = 7
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(10),
+					Value = 8
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(11),
+					Value = 9
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(12),
+					Value = 10
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(13),
+					Value = 11
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(14),
+					Value = 11
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(15),
+					Value = 11
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(16),
+					Value = 12
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(17),
+					Value = 13
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(18),
+					Value = 13
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(19),
+					Value = 14
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(20),
+					Value = 14
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(21),
+					Value = 15
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(22),
+					Value = 16
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(23),
+					Value = 17
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(24),
+					Value = 18
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(25),
+					Value = 18
+				},
+				new GenericDateChart
+				{
+					Date = DateTime.Now.AddDays(26),
+					Value = 18
+				}
 			});
 		}
 
@@ -590,6 +590,110 @@ namespace CSGO_Demos_Manager.Services
 		public Task<List<Demo>> GetDemosPlayer(string steamId)
 		{
 			return Task.FromResult(new List<Demo>());
+		}
+
+		public Task<ProgressStats> GetProgressStatsAsync()
+		{
+			return Task.FromResult(new ProgressStats
+			{
+				Win = new List<GenericDateChart>
+				{
+					new GenericDateChart
+					{
+						Date = DateTime.Now,
+						Value = 50
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Now.AddMonths(1),
+						Value = 20
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Now.AddMonths(2),
+						Value = 60
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Now.AddMonths(3),
+						Value = 10.5
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Now.AddMonths(4),
+						Value = 70.5
+					},
+				},
+				Kill = new List<GenericDateChart>
+				{
+					new GenericDateChart
+					{
+						Date = DateTime.Today,
+						Value = 21
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(1),
+						Value = 65
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(2),
+						Value = 50
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(3),
+						Value = 100
+					},
+				},
+				Damage = new List<GenericDateChart>
+				{
+					new GenericDateChart
+					{
+						Date = DateTime.Today,
+						Value = 1252
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(1),
+						Value = 1600
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(2),
+						Value = 1400
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(3),
+						Value = 1000
+					},
+				},
+				HeadshotRatio = new List<GenericDateChart>
+				{
+					new GenericDateChart
+					{
+						Date = DateTime.Today,
+						Value = 30.4
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(1),
+						Value = 50
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(3),
+						Value = 54.5
+					},
+					new GenericDateChart
+					{
+						Date = DateTime.Today.AddMonths(4),
+						Value = 49.8
+					},
+				}
+			});
 		}
 	}
 }

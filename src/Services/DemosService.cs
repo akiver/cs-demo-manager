@@ -227,9 +227,9 @@ namespace CSGO_Demos_Manager.Services
 			return rank;
 		}
 
-		public async Task<List<RankDateChart>> GetRankDateChartDataAsync()
+		public async Task<List<GenericDateChart>> GetRankDateChartDataAsync()
 		{
-			List<RankDateChart> datas = new List<RankDateChart>();
+			List<GenericDateChart> datas = new List<GenericDateChart>();
 			List<Demo> demos = await _cacheService.GetDemoListAsync();
 
 			if (demos.Any())
@@ -245,10 +245,10 @@ namespace CSGO_Demos_Manager.Services
 						if (demo.Players.All(p => p.RankNumberOld != 0))
 						{
 							int rankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
-							datas.Add(new RankDateChart
+							datas.Add(new GenericDateChart
 							{
 								Date = demo.Date,
-								Rank = AppSettings.RankList.First(r => r.Number == rankNumber).Number
+								Value = AppSettings.RankList.First(r => r.Number == rankNumber).Number
 							});
 						}
 					}
@@ -709,6 +709,109 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			return result;
+		}
+
+		public async Task<ProgressStats> GetProgressStatsAsync()
+		{
+			ProgressStats stats = new ProgressStats();
+			List<Demo> demos = await _cacheService.GetDemoListAsync();
+
+			if (demos.Any())
+			{
+				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
+				if (demosPlayerList.Any())
+				{
+					demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
+					// init the first date
+					int currentMonth = demosPlayerList[0].Date.Month;
+					DateTime initDate = new DateTime(demosPlayerList[0].Date.Year, demosPlayerList[0].Date.Month, 1);
+					stats.Win = new List<GenericDateChart>
+					{
+						new GenericDateChart
+						{
+							Date = initDate,
+							Value = 0
+						}
+					};
+					stats.HeadshotRatio = new List<GenericDateChart>
+					{
+						new GenericDateChart
+						{
+							Date = initDate,
+							Value = 0
+						}
+					};
+					stats.Damage = new List<GenericDateChart>
+					{
+						new GenericDateChart
+						{
+							Date = initDate,
+							Value = 0
+						}
+					};
+					stats.Kill = new List<GenericDateChart>
+					{
+						new GenericDateChart
+						{
+							Date = initDate,
+							Value = 0
+						}
+					};
+
+					int matchCount = 0;
+					int winCount = 0;
+					int headshotCount = 0;
+					int killCount = 0;
+					int damageCount = 0;
+					foreach (Demo demo in demosPlayerList)
+					{
+						matchCount++;
+						if (!Equals(currentMonth, demo.Date.Month))
+						{
+							matchCount = 1;
+							winCount = 0;
+							headshotCount = 0;
+							killCount = 0;
+							damageCount = 0;
+							DateTime newDate = new DateTime(demo.Date.Year, demo.Date.Month, 1);
+							// It's a new month, generate new stats for it
+							stats.Win.Add(new GenericDateChart
+							{
+								Date = newDate,
+								Value = 0
+							});
+							stats.HeadshotRatio.Add(new GenericDateChart
+							{
+								Date = newDate,
+								Value = 0
+							});
+							stats.Damage.Add(new GenericDateChart
+							{
+								Date = newDate,
+								Value = 0
+							});
+							stats.Kill.Add(new GenericDateChart
+							{
+								Date = newDate,
+								Value = 0
+							});
+						}
+
+						if (demo.MatchVerdictSelectedAccountCount == 1) winCount += demo.MatchVerdictSelectedAccountCount;
+						if (winCount > 0) stats.Win.Last().Value = Math.Round((winCount / (double)matchCount * 100), 2);
+						headshotCount += demo.HeadshotSelectedAccountCount;
+						killCount += demo.TotalKillSelectedAccountCount;
+						damageCount += demo.TotalDamageHealthSelectedAccountCount + demo.TotalDamageArmorSelectedAccountCount;
+
+						stats.HeadshotRatio.Last().Value = Math.Round((headshotCount / (double)killCount * 100), 2);
+						stats.Damage.Last().Value = (double)damageCount/matchCount;
+						stats.Kill.Last().Value = (double) killCount/matchCount;
+						currentMonth = demo.Date.Month;
+					}
+				}
+			}
+
+			return stats;
 		}
 	}
 }

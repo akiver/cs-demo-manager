@@ -22,6 +22,8 @@
 					Gesture="CTRL+M" />
 		<KeyBinding Command="{Binding GoToWeaponCommand}"
 					Gesture="CTRL+W" />
+		<KeyBinding Command="{Binding GoToProgressCommand}"
+					Gesture="CTRL+P" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
 	
@@ -110,6 +112,20 @@
 					</StackPanel>
 				</Button>
 
+				<Button Margin="10" Width="110" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToProgressCommand}"
+						ToolTip="Progression (CTRL+P)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_graph_line_up}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Progression" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
 					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
@@ -160,7 +176,7 @@
 				</sparrow:SparrowChart.YAxis>
 
 				<sparrow:SparrowChart.Series>
-					<sparrow:LineSeries Label="Rank" PointsSource="{Binding Datas}" XPath="Date" YPath="Rank"
+					<sparrow:LineSeries Label="Rank" PointsSource="{Binding Datas}" XPath="Date" YPath="Value"
 										Stroke="{StaticResource LightWhiteBrush}" StrokeThickness="3" />
 				</sparrow:SparrowChart.Series>
 			</sparrow:SparrowChart>

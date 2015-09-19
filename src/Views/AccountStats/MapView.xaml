@@ -21,6 +21,8 @@
 					Gesture="CTRL+O" />
 		<KeyBinding Command="{Binding GoToWeaponCommand}"
 					Gesture="CTRL+W" />
+		<KeyBinding Command="{Binding GoToProgressCommand}"
+					Gesture="CTRL+P" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
 	
@@ -101,6 +103,20 @@
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Image Source="../../resources/images/icons/weapon.png" Width="15" Height="15"/>
 						<TextBlock Text="Weapons" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="110" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToProgressCommand}"
+						ToolTip="Progression (CTRL+P)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_graph_line_up}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Progression" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 

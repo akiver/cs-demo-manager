@@ -1,17 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Models.Charts;
+using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Views.AccountStats;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using GalaSoft.MvvmLight.Threading;
 
 namespace CSGO_Demos_Manager.ViewModel.AccountStats
 {
-	public class AccountStatsRankViewModel : ViewModelBase
+	public class AccountStatsProgressViewModel : ViewModelBase
 	{
 		#region Properties
 
@@ -25,11 +26,13 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private double _zoomOffsetX;
 
-		private double _minDate;
+		private List<GenericDateChart> _datasHeadshot;
 
-		private double _maxDate;
+		private List<GenericDateChart> _datasDamage;
 
-		private List<GenericDateChart> _datas;
+		private List<GenericDateChart> _datasWin;
+
+		private List<GenericDateChart> _datasKill;
 
 		private RelayCommand _windowLoadedCommand;
 
@@ -41,7 +44,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToWeaponCommand;
 
-		private RelayCommand _goToProgressCommand;
+		private RelayCommand _goToRankCommand;
 
 		private RelayCommand<MouseWheelEventArgs> _mouseWheelCommand;
 
@@ -73,10 +76,28 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
-		public List<GenericDateChart> Datas
+		public List<GenericDateChart> DatasHeadshot
 		{
-			get { return _datas; }
-			set { Set(() => Datas, ref _datas, value); }
+			get { return _datasHeadshot; }
+			set { Set(() => DatasHeadshot, ref _datasHeadshot, value); }
+		}
+
+		public List<GenericDateChart> DatasWin
+		{
+			get { return _datasWin; }
+			set { Set(() => DatasWin, ref _datasWin, value); }
+		}
+
+		public List<GenericDateChart> DatasDamage
+		{
+			get { return _datasDamage; }
+			set { Set(() => DatasDamage, ref _datasDamage, value); }
+		}
+
+		public List<GenericDateChart> DatasKill
+		{
+			get { return _datasKill; }
+			set { Set(() => DatasKill, ref _datasKill, value); }
 		}
 
 		public double ZoomCoefficientX
@@ -89,18 +110,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		{
 			get { return _zoomOffsetX; }
 			set { Set(() => ZoomOffsetX, ref _zoomOffsetX, value); }
-		}
-
-		public double MinDate
-		{
-			get { return _minDate; }
-			set { Set(() => MinDate, ref _minDate, value); }
-		}
-
-		public double MaxDate
-		{
-			get { return _maxDate; }
-			set { Set(() => MaxDate, ref _maxDate, value); }
 		}
 
 		public bool IsMouseDown
@@ -123,7 +132,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					{
 						IsBusy = true;
 						NotificationMessage = "Loading...";
-						Datas = await _demosService.GetRankDateChartDataAsync();
+						await LoadDatas();
 						IsBusy = false;
 					}));
 			}
@@ -164,7 +173,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						IsMouseDown = true;
 						// Save the position when use click on the chart
 						Point point = Mouse.GetPosition((IInputElement)e.Source);
-						_xPosition = (int) point.X;
+						_xPosition = (int)point.X;
 					}));
 			}
 		}
@@ -209,7 +218,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 							// Get the current position to compare with the previous one
 							Point point = Mouse.GetPosition((IInputElement)e.Source);
 							// Move to the right
-							if ((int) point.X > _xPosition)
+							if ((int)point.X > _xPosition)
 							{
 								if (ZoomOffsetX > 0) ZoomOffsetX -= 0.005;
 							}
@@ -305,20 +314,20 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		}
 
 		/// <summary>
-		/// Command to go to the progression stats page
+		/// Command to go to the rank stats page
 		/// </summary>
-		public RelayCommand GoToProgressCommand
+		public RelayCommand GoToRankCommand
 		{
 			get
 			{
-				return _goToProgressCommand
-					?? (_goToProgressCommand = new RelayCommand(
+				return _goToRankCommand
+					?? (_goToRankCommand = new RelayCommand(
 					() =>
 					{
 						var mainViewModel = (new ViewModelLocator()).Main;
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-						ProgressView progressView = new ProgressView();
-						mainViewModel.CurrentPage.ShowPage(progressView);
+						RankView rankView = new RankView();
+						mainViewModel.CurrentPage.ShowPage(rankView);
 						Cleanup();
 					}));
 			}
@@ -326,18 +335,24 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		#endregion
 
-		public AccountStatsRankViewModel(IDemosService demoService)
+		private async Task LoadDatas()
+		{
+			ProgressStats datas = await _demosService.GetProgressStatsAsync();
+			DatasWin = datas.Win;
+			DatasDamage = datas.Damage;
+			DatasHeadshot = datas.HeadshotRatio;
+			DatasKill = datas.Kill;
+		}
+
+		public AccountStatsProgressViewModel(IDemosService demoService)
 		{
 			_demosService = demoService;
 
 			if (IsInDesignMode)
 			{
-				DispatcherHelper.Initialize();
-				NotificationMessage = "Loading...";
-				IsBusy = true;
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
-					Datas = await _demosService.GetRankDateChartDataAsync();
+					await LoadDatas();
 				});
 			}
 		}
@@ -345,7 +360,10 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		public override void Cleanup()
 		{
 			base.Cleanup();
-			Datas = null;
+			DatasDamage = null;
+			DatasKill = null;
+			DatasWin = null;
+			DatasHeadshot = null;
 			IsMouseDown = false;
 			ZoomCoefficientX = 1.0;
 			ZoomOffsetX = 0;
