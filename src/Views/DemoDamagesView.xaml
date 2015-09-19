@@ -20,7 +20,7 @@
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding UpdateCommand}"
-					Gesture="CTRL+G" />
+					Gesture="CTRL+R" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 					Command="{Binding BackToDemoDetailsCommand}"
 					CommandParameter="{Binding CurrentDemo}" />
@@ -102,7 +102,7 @@
 
 				<Button Command="{Binding UpdateCommand}"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Update (CTRL+G)"
+					ToolTip="Update (CTRL+R)"
 					Width="90"
 					Height="30" Margin="10 0 0 0">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
