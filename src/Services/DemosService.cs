@@ -692,5 +692,23 @@ namespace CSGO_Demos_Manager.Services
 
 			return stats;
 		}
+
+		public async Task<List<Demo>> GetDemosPlayer(string steamId)
+		{
+			List<Demo> result = new List<Demo>();
+
+			List<Demo> demos = await _cacheService.GetDemoListAsync();
+
+			if (demos.Any())
+			{
+				result = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
+				for(int i = 0; i < result.Count; i++)
+				{
+					result[i] = await GetDemoHeaderAsync(result[i].Path);
+				}
+			}
+
+			return result;
+		}
 	}
 }

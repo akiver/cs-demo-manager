@@ -77,5 +77,12 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<WeaponStats> GetWeaponStatsAsync();
+
+		/// <summary>
+		/// Return demos that contains the SteamID
+		/// </summary>
+		/// <param name="steamId"></param>
+		/// <returns></returns>
+		Task<List<Demo>> GetDemosPlayer(string steamId);
 	}
 }

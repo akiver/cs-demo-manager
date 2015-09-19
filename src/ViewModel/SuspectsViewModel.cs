@@ -42,6 +42,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Suspect> _goToSuspectProfileCommand;
 
+		private RelayCommand<Suspect> _displayDemosCommand;
+
 		private RelayCommand _refreshSuspectListCommand;
 
 		private RelayCommand _addAllPlayerToListCommand;
@@ -291,6 +293,46 @@ namespace CSGO_Demos_Manager.ViewModel
 						suspect =>
 						{
 							System.Diagnostics.Process.Start(suspect.ProfileUrl);
+						},
+						suspect => SelectedSuspect != null));
+			}
+		}
+
+		/// <summary>
+		/// Command to display demos within suspect has played
+		/// </summary>
+		public RelayCommand<Suspect> DisplayDemosCommand
+		{
+			get
+			{
+				return _displayDemosCommand
+					?? (_displayDemosCommand = new RelayCommand<Suspect>(
+						async suspect =>
+						{
+							IsRefreshing = true;
+							NotificationMessage = "Searching...";
+							List<Demo> demos = await _demosService.GetDemosPlayer(suspect.SteamId);
+							IsRefreshing = false;
+							if (!demos.Any())
+							{
+								await _dialogService.ShowMessageAsync("No demos found for this suspect." + Environment.NewLine
+									+ "Demos with this suspect might not have been analyzed.", MessageDialogStyle.Affirmative);
+								return;
+							}
+
+							var homeViewModel = (new ViewModelLocator()).Home;
+							homeViewModel.SelectedDemos.Clear();
+							homeViewModel.Demos.Clear();
+							foreach (Demo demo in demos)
+							{
+								homeViewModel.Demos.Add(demo);
+							}
+							homeViewModel.DataGridDemosCollection.Refresh();
+
+							var mainViewModel = (new ViewModelLocator()).Main;
+							System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+							HomeView homeView = new HomeView();
+							mainViewModel.CurrentPage.ShowPage(homeView);
 						},
 						suspect => SelectedSuspect != null));
 			}

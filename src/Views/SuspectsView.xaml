@@ -32,6 +32,9 @@
 					Gesture="CTRL+G" />
 		<KeyBinding Command="{Binding StopCommand}"
 					Gesture="CTRL+S" />
+		<KeyBinding Command="{Binding DisplayDemosCommand}"
+					CommandParameter="{Binding SelectedSuspect}"
+					Gesture="CTRL+F" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 									Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
@@ -134,6 +137,24 @@
 							</Rectangle.Fill>
 						</Rectangle>
 						<TextBlock Text="Add all players seen" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Width="150"
+					Height="30"
+					ToolTip="Show demos that contains the suspect (CTRL+F)"
+					Command="{Binding DisplayDemosCommand}"
+					CommandParameter="{Binding SelectedSuspect}"
+					IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_magnify}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Show suspect demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 

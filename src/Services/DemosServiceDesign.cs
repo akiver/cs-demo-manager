@@ -586,5 +586,10 @@ namespace CSGO_Demos_Manager.Services
 				IncendiaryThrowedCount = 25
 			});
 		}
+
+		public Task<List<Demo>> GetDemosPlayer(string steamId)
+		{
+			return Task.FromResult(new List<Demo>());
+		}
 	}
 }
