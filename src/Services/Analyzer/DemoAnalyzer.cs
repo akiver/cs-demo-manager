@@ -430,11 +430,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			else
 			{
 				PlayerExtended shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID);
-				if (shooter == null)
-				{
-					Console.WriteLine(e.Weapon.Weapon);
-					return;
-				}
+				if (shooter == null) return;
 				
 				switch (e.Weapon.Weapon)
 				{
