@@ -167,9 +167,7 @@
 					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
 					DisplayMemberPath ="Name"
 					SelectedValuePath="SteamId"
-					Style="{StaticResource ComboBoxAccountsStyle}"
-					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanInvertedConverter}}">
-					</ComboBox>
+					Style="{StaticResource ComboBoxAccountsStyle}" />
 
 					<CheckBox Grid.Column="7" x:Name="CheckBoxShowAllAccounts" Content="Show all"
 						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
