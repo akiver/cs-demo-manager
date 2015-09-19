@@ -22,7 +22,7 @@
 					Gesture="CTRL+M" />
 		<KeyBinding Command="{Binding GoToWeaponCommand}"
 					Gesture="CTRL+W" />
-		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding BackToHomeCommand}" />
+		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
 	
 	<UserControl.Resources>
