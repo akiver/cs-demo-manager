@@ -374,53 +374,87 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
 		{
-			if (!AnalyzeHeatmapPoint && !AnalyzePlayersPosition || !IsMatchStarted || e.Shooter == null) return;
+			if (!IsMatchStarted || e.Shooter == null) return;
 
-			WeaponFire shoot = new WeaponFire(Parser.IngameTick)
+			if (AnalyzeHeatmapPoint || AnalyzePlayersPosition)
 			{
-				Shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID),
-				Weapon = new Weapon(e.Weapon)
-			};
-
-			if (AnalyzeHeatmapPoint && shoot.Shooter != null)
-			{
-				shoot.Point = new HeatmapPoint
+				WeaponFire shoot = new WeaponFire(Parser.IngameTick)
 				{
-					X = e.Shooter.Position.X,
-					Y = e.Shooter.Position.Y,
-					Round = CurrentRound,
-					Player = shoot.Shooter,
-					Team = e.Shooter.Team
+					Shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID),
+					Weapon = new Weapon(e.Weapon)
 				};
+
+				if (AnalyzeHeatmapPoint && shoot.Shooter != null)
+				{
+					shoot.Point = new HeatmapPoint
+					{
+						X = e.Shooter.Position.X,
+						Y = e.Shooter.Position.Y,
+						Round = CurrentRound,
+						Player = shoot.Shooter,
+						Team = e.Shooter.Team
+					};
+				}
+
+				Demo.WeaponFired.Add(shoot);
+
+				if (AnalyzePlayersPosition || AnalyzeHeatmapPoint && shoot.Shooter != null)
+				{
+					if (e.Shooter.SteamID == 0) return;
+
+					switch (e.Weapon.Weapon)
+					{
+						case EquipmentElement.Incendiary:
+						case EquipmentElement.Molotov:
+							LastPlayersThrowedMolotov.Enqueue(Demo.Players.First(p => p.SteamId == e.Shooter.SteamID));
+							if (AnalyzeHeatmapPoint) return;
+							goto case EquipmentElement.Decoy;
+						case EquipmentElement.Decoy:
+						case EquipmentElement.Flash:
+						case EquipmentElement.HE:
+						case EquipmentElement.Smoke:
+							PositionPoint positionPoint = new PositionPoint
+							{
+								X = e.Shooter.Position.X,
+								Y = e.Shooter.Position.Y,
+								Player = Demo.Players.First(p => p.SteamId == e.Shooter.SteamID),
+								Team = e.Shooter.Team,
+								Event = shoot,
+								Round = CurrentRound
+							};
+							Demo.PositionsPoint.Add(positionPoint);
+							break;
+					}
+				}
 			}
-
-			Demo.WeaponFired.Add(shoot);
-
-			if (AnalyzePlayersPosition || AnalyzeHeatmapPoint && shoot.Shooter != null)
+			else
 			{
-				if (e.Shooter.SteamID == 0) return;
-
+				PlayerExtended shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID);
+				if (shooter == null)
+				{
+					Console.WriteLine(e.Weapon.Weapon);
+					return;
+				}
+				
 				switch (e.Weapon.Weapon)
 				{
 					case EquipmentElement.Incendiary:
+						shooter.IncendiaryThrowedCount++;
+						break;
 					case EquipmentElement.Molotov:
-						LastPlayersThrowedMolotov.Enqueue(Demo.Players.First(p => p.SteamId == e.Shooter.SteamID));
-						if (AnalyzeHeatmapPoint) return;
-						goto case EquipmentElement.Decoy;
+						shooter.MolotovThrowedCount++;
+						break;
 					case EquipmentElement.Decoy:
+						shooter.DecoyThrowedCount++;
+						break;
 					case EquipmentElement.Flash:
+						shooter.FlashbangThrowedCount++;
+						break;
 					case EquipmentElement.HE:
+						shooter.HeGrenadeThrowedCount++;
+						break;
 					case EquipmentElement.Smoke:
-						PositionPoint positionPoint = new PositionPoint
-						{
-							X = e.Shooter.Position.X,
-							Y = e.Shooter.Position.Y,
-							Player = Demo.Players.First(p => p.SteamId == e.Shooter.SteamID),
-							Team = e.Shooter.Team,
-							Event = shoot,
-							Round = CurrentRound
-						};
-						Demo.PositionsPoint.Add(positionPoint);
+						shooter.SMokeThrowedCount++;
 						break;
 				}
 			}

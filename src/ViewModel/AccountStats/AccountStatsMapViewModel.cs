@@ -25,6 +25,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToOverallCommand;
 
+		private RelayCommand _goToWeaponCommand;
+
 		private bool _isBusy;
 
 		private string _notificationMessage;
@@ -192,6 +194,26 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						OverallView overallView = new OverallView();
 						mainViewModel.CurrentPage.ShowPage(overallView);
+						Cleanup();
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to the weapon stats page
+		/// </summary>
+		public RelayCommand GoToWeaponCommand
+		{
+			get
+			{
+				return _goToWeaponCommand
+					?? (_goToWeaponCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						WeaponView weaponView = new WeaponView();
+						mainViewModel.CurrentPage.ShowPage(weaponView);
 						Cleanup();
 					}));
 			}

@@ -71,5 +71,11 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<MapStats> GetMapStatsAsync();
+
+		/// <summary>
+		/// Return stats for the weapon stats view
+		/// </summary>
+		/// <returns></returns>
+		Task<WeaponStats> GetWeaponStatsAsync();
 	}
 }

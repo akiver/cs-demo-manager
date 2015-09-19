@@ -40,6 +40,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToMapCommand;
 
+		private RelayCommand _goToWeaponCommand;
+
 		private RelayCommand<MouseWheelEventArgs> _mouseWheelCommand;
 
 		private RelayCommand<MouseEventArgs> _mouseDownCommand;
@@ -277,6 +279,26 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						MapView mapView = new MapView();
 						mainViewModel.CurrentPage.ShowPage(mapView);
+						Cleanup();
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to the weapon stats page
+		/// </summary>
+		public RelayCommand GoToWeaponCommand
+		{
+			get
+			{
+				return _goToWeaponCommand
+					?? (_goToWeaponCommand = new RelayCommand(
+					() =>
+					{
+						var mainViewModel = (new ViewModelLocator()).Main;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						WeaponView weaponView = new WeaponView();
+						mainViewModel.CurrentPage.ShowPage(weaponView);
 						Cleanup();
 					}));
 			}

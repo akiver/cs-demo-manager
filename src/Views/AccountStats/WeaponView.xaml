@@ -1,0 +1,297 @@
+﻿<UserControl x:Class="CSGO_Demos_Manager.Views.AccountStats.WeaponView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+			 mc:Ignorable="d" 
+			 d:DesignHeight="720" d:DesignWidth="1280"
+			 DataContext="{Binding AccountStatsWeapon, Source={StaticResource Locator}}">
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<StackPanel Orientation="Horizontal">
+				<Button Margin="10" Width="70" Height="30"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding BackToHomeCommand}"
+						ToolTip="Back (CTRL+B)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Command="{Binding GoToOverallCommand}"
+					Width="80" Height="30" ToolTip="Overall (CTRL+O)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_globe_wire}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Overall" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="70" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToRankCommand}"
+						ToolTip="Rank (CTRL+R)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_up_down}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Rank" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="70" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToMapCommand}"
+						ToolTip="Maps (CTRL+M)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_map}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Maps" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="90" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						IsEnabled="False"
+						ToolTip="Weapons (CTRL+W)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Image Source="../../resources/images/icons/weapon.png" Width="15" Height="15"/>
+						<TextBlock Text="Weapons" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
+					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+						   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="1" Margin="10">
+
+			<TabControl controls:TabControlHelper.IsUnderlined="True">
+				<controls:MetroTabItem Header="Rifle">
+					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
+												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+												   Foreground="{StaticResource LightWhiteBrush}"
+												   Background="{StaticResource LightGreyBrush}">
+						<metroChart:StackedColumnChart.Series>
+							<metroChart:ChartSeries SeriesTitle="AK-47" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasAk47}" />
+							<metroChart:ChartSeries SeriesTitle="M4A4" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasM4A4}" />
+							<metroChart:ChartSeries SeriesTitle="M4A1" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasM4A1}" />
+							<metroChart:ChartSeries SeriesTitle="AUG" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasAug}" />
+							<metroChart:ChartSeries SeriesTitle="Galil AR" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasGalilar}" />
+							<metroChart:ChartSeries SeriesTitle="SG556" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasSg556}" />
+							<metroChart:ChartSeries SeriesTitle="Famas" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasFamas}" />
+						</metroChart:StackedColumnChart.Series>
+					</metroChart:StackedColumnChart>
+				</controls:MetroTabItem>
+
+				<controls:MetroTabItem Header="Sniper">
+					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"  FontStretch="Condensed"
+												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+												   Foreground="{StaticResource LightWhiteBrush}"
+												   Background="{StaticResource LightGreyBrush}">
+						<metroChart:StackedColumnChart.Series>
+							<metroChart:ChartSeries SeriesTitle="AWP" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasAwp}" />
+							<metroChart:ChartSeries SeriesTitle="SSG08 (Scout)" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasScout}" />
+							<metroChart:ChartSeries SeriesTitle="SCAR-20" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasScar20}" />
+							<metroChart:ChartSeries SeriesTitle="G3SG1" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasG3Sg1}" />
+						</metroChart:StackedColumnChart.Series>
+					</metroChart:StackedColumnChart>
+				</controls:MetroTabItem>
+
+				<controls:MetroTabItem Header="SMG">
+					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
+												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+												   Foreground="{StaticResource LightWhiteBrush}"
+												   Background="{StaticResource LightGreyBrush}">
+						<metroChart:StackedColumnChart.Series>
+							<metroChart:ChartSeries SeriesTitle="MP7" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMp7}" />
+							<metroChart:ChartSeries SeriesTitle="MP9" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMp9}" />
+							<metroChart:ChartSeries SeriesTitle="P90" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasP90}" />
+							<metroChart:ChartSeries SeriesTitle="MAC-10" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMac10}" />
+							<metroChart:ChartSeries SeriesTitle="PP-Bizon" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasBizon}" />
+							<metroChart:ChartSeries SeriesTitle="UMP-45" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasUmp45}" />
+						</metroChart:StackedColumnChart.Series>
+					</metroChart:StackedColumnChart>
+				</controls:MetroTabItem>
+
+				<controls:MetroTabItem Header="Heavy">
+					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
+												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+												   Foreground="{StaticResource LightWhiteBrush}"
+												   Background="{StaticResource LightGreyBrush}">
+						<metroChart:StackedColumnChart.Series>
+							<metroChart:ChartSeries SeriesTitle="Nova" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasNova}" />
+							<metroChart:ChartSeries SeriesTitle="XM1014" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasXm1014}" />
+							<metroChart:ChartSeries SeriesTitle="MAG-7" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMag7}" />
+							<metroChart:ChartSeries SeriesTitle="Sawed-Off" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasSawedOff}" />
+							<metroChart:ChartSeries SeriesTitle="M249" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasM249}" />
+							<metroChart:ChartSeries SeriesTitle="Negev" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasNegev}" />
+						</metroChart:StackedColumnChart.Series>
+					</metroChart:StackedColumnChart>
+				</controls:MetroTabItem>
+
+				<controls:MetroTabItem Header="Pistol">
+					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
+												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+												   Foreground="{StaticResource LightWhiteBrush}"
+												   Background="{StaticResource LightGreyBrush}">
+						<metroChart:StackedColumnChart.Series>
+							<metroChart:ChartSeries SeriesTitle="USP-S" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasUsp}" />
+							<metroChart:ChartSeries SeriesTitle="P2000" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasP2000}" />
+							<metroChart:ChartSeries SeriesTitle="Glock-18" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasGlock}" />
+							<metroChart:ChartSeries SeriesTitle="Tec-9" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasTec9}" />
+							<metroChart:ChartSeries SeriesTitle="CZ75 Auto" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasCz75}" />
+							<metroChart:ChartSeries SeriesTitle="P250" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasP250}" />
+							<metroChart:ChartSeries SeriesTitle="Deagle" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasDeagle}" />
+							<metroChart:ChartSeries SeriesTitle="Dual Barettas" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasDualElite}" />
+							<metroChart:ChartSeries SeriesTitle="Five-Seven" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasFiveSeven}" />
+						</metroChart:StackedColumnChart.Series>
+					</metroChart:StackedColumnChart>
+				</controls:MetroTabItem>
+
+				<controls:MetroTabItem Header="Equipment">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18" Grid.Column="0"
+												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
+												   Foreground="{StaticResource LightWhiteBrush}"
+												   Background="{StaticResource LightGreyBrush}">
+							<metroChart:StackedColumnChart.Series>
+								<metroChart:ChartSeries SeriesTitle="HE Grenade" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasHeGrenade}" />
+								<metroChart:ChartSeries SeriesTitle="Molotov" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMolotov}" />
+								<metroChart:ChartSeries SeriesTitle="Incendiary" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasIncendiary}" />
+								<metroChart:ChartSeries SeriesTitle="Tazer" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasTazer}" />
+								<metroChart:ChartSeries SeriesTitle="Knife" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasKnife}" />
+							</metroChart:StackedColumnChart.Series>
+						</metroChart:StackedColumnChart>
+
+						<Grid Grid.Column="1">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0"  HorizontalAlignment="Center" Style="{StaticResource TitleSettingsStyle}" Text="Stuffs Throwed"></TextBlock>
+
+							<Grid Grid.Row="1">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Grid Grid.Column="0">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+									</Grid.RowDefinitions>
+
+									<Grid Grid.Row="0" Margin="10">
+										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+											<StackPanel Orientation="Vertical" Margin="5">
+												<TextBlock Text="Smoke" Style="{StaticResource StatsTitleStyle}"/>
+												<TextBlock Text="{Binding SmokeThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+											</StackPanel>
+										</Border>
+									</Grid>
+									<Grid Grid.Row="1" Margin="10">
+										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+											<StackPanel Orientation="Vertical" Margin="5">
+												<TextBlock Text="Flashbang" Style="{StaticResource StatsTitleStyle}"/>
+												<TextBlock Text="{Binding FlashbangThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+											</StackPanel>
+										</Border>
+									</Grid>
+									<Grid Grid.Row="2" Margin="10">
+										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+											<StackPanel Orientation="Vertical" Margin="5">
+												<TextBlock Text="He Grenade" Style="{StaticResource StatsTitleStyle}"/>
+												<TextBlock Text="{Binding HeGrenadeThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+											</StackPanel>
+										</Border>
+									</Grid>
+								</Grid>
+
+								<Grid Grid.Column="1">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+										<RowDefinition Height="Auto"/>
+									</Grid.RowDefinitions>
+
+									<Grid Grid.Row="0" Margin="10">
+										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+											<StackPanel Orientation="Vertical" Margin="5">
+												<TextBlock Text="Molotov" Style="{StaticResource StatsTitleStyle}"/>
+												<TextBlock Text="{Binding MolotovThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+											</StackPanel>
+										</Border>
+									</Grid>
+									<Grid Grid.Row="1" Margin="10">
+										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+											<StackPanel Orientation="Vertical" Margin="5">
+												<TextBlock Text="Incendiary" Style="{StaticResource StatsTitleStyle}"/>
+												<TextBlock Text="{Binding IncendiaryThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+											</StackPanel>
+										</Border>
+									</Grid>
+									<Grid Grid.Row="2" Margin="10">
+										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+											<StackPanel Orientation="Vertical" Margin="5">
+												<TextBlock Text="Decoy" Style="{StaticResource StatsTitleStyle}"/>
+												<TextBlock Text="{Binding DecoyThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+											</StackPanel>
+										</Border>
+									</Grid>
+								</Grid>
+							</Grid>
+						</Grid>
+					</Grid>
+				</controls:MetroTabItem>
+
+			</TabControl>
+
+		</Grid>
+
+	</Grid>
+</UserControl>

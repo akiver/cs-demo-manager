@@ -203,6 +203,7 @@
     <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
     <Compile Include="Models\Source\Valve.cs" />
+    <Compile Include="Models\Stats\WeaponStats.cs" />
     <Compile Include="Models\Steam\PlayerBan.cs" />
     <Compile Include="Models\Steam\PlayerSummary.cs" />
     <Compile Include="Models\Suspect.cs" />
@@ -303,6 +304,7 @@
     <Compile Include="ViewModel\AccountStats\AccountStatsOverallViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsMapViewModel.cs" />
     <Compile Include="ViewModel\AccountStats\AccountStatsRankViewModel.cs" />
+    <Compile Include="ViewModel\AccountStats\AccountStatsWeaponViewModel.cs" />
     <Compile Include="ViewModel\DemoDamagesViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
     <Compile Include="ViewModel\EntryKillsViewModel.cs" />
@@ -321,6 +323,9 @@
     </Compile>
     <Compile Include="Views\AccountStats\RankView.xaml.cs">
       <DependentUpon>RankView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AccountStats\WeaponView.xaml.cs">
+      <DependentUpon>WeaponView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\DemoDamagesView.xaml.cs">
       <DependentUpon>DemoDamagesView.xaml</DependentUpon>
@@ -405,6 +410,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AccountStats\RankView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountStats\WeaponView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -670,6 +679,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="De.TorstenMandelkow.MetroChart.dll" />
+    <Resource Include="resources\images\icons\weapon.png" />
     <Resource Include="resources\images\ranks\elo03.png" />
     <Resource Include="resources\images\ranks\no_rank.png" />
     <Resource Include="resources\images\ranks\elo01.png" />

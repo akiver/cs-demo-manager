@@ -87,6 +87,16 @@
 					</StackPanel>
 				</Button>
 
+				<Button Margin="10" Width="90" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Command="{Binding GoToWeaponCommand}"
+						ToolTip="Weapons (CTRL+W)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Image Source="../../resources/images/icons/weapon.png" Width="15" Height="15"/>
+						<TextBlock Text="Weapons" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
 					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
