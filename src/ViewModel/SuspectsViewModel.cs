@@ -50,6 +50,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _stopCommand;
 
+		private RelayCommand<bool> _showOnlyBannedSuspects;
+
 		private RelayCommand<IList> _suspectsSelectionChangedCommand;
 
 		ObservableCollection<Suspect> _suspects;
@@ -65,6 +67,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private string _notificationMessage;
 
 		private bool _isAnalyzing;
+
+		private bool _isShowOnlyBannedSuspects = Properties.Settings.Default.ShowOnlyBannedSuspects;
 
 		#endregion
 
@@ -116,6 +120,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _notificationMessage; }
 			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
+		}
+
+		public bool IsShowOnlyBannedSuspects
+		{
+			get { return _isShowOnlyBannedSuspects; }
+			set { Set(() => IsShowOnlyBannedSuspects, ref _isShowOnlyBannedSuspects, value); }
 		}
 
 		#endregion
@@ -391,6 +401,22 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public RelayCommand<bool> ShowOnlyBannedSuspectCommand
+		{
+			get
+			{
+				return _showOnlyBannedSuspects
+					?? (_showOnlyBannedSuspects = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsShowOnlyBannedSuspects = isChecked;
+							Properties.Settings.Default.ShowOnlyBannedSuspects = isChecked;
+							Properties.Settings.Default.Save();
+							DataGridSuspectsCollection.Refresh();
+						}, isChecked => !IsRefreshing));
+			}
+		}
+
 		#endregion
 
 		public SuspectsViewModel(ISteamService steamService, ICacheService cacheService, DialogService dialogService, IDemosService demosService)
@@ -408,6 +434,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			Suspects = new ObservableCollection<Suspect>();
 			SelectedSuspects = new ObservableCollection<Suspect>();
 			DataGridSuspectsCollection = CollectionViewSource.GetDefaultView(Suspects);
+			DataGridSuspectsCollection.Filter = Filter;
 
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
@@ -418,6 +445,23 @@ namespace CSGO_Demos_Manager.ViewModel
 				IsRefreshing = false;
 				CommandManager.InvalidateRequerySuggested();
 			});
+		}
+
+		public bool Filter(object obj)
+		{
+			var data = obj as Suspect;
+			if (data != null)
+			{
+				if (IsShowOnlyBannedSuspects)
+				{
+					if (data.VacBanned || data.GameBanCount != 0 ) return true;
+					return false;
+				}
+
+				return true;
+			}
+
+			return true;
 		}
 
 		private async Task LoadSuspects()

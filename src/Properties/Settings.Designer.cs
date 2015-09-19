@@ -898,5 +898,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["WatchAccountSteamId"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowOnlyBannedSuspects {
+            get {
+                return ((bool)(this["ShowOnlyBannedSuspects"]));
+            }
+            set {
+                this["ShowOnlyBannedSuspects"] = value;
+            }
+        }
     }
 }

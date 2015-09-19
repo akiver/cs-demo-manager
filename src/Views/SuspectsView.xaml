@@ -44,7 +44,7 @@
 			<mvvm:EventToCommand Command="{Binding RefreshSuspectListCommand, Mode=OneWay}" />
 		</i:EventTrigger>
 	</i:Interaction.Triggers>
-	
+
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -54,7 +54,7 @@
 		<Grid Grid.Row="0">
 			<StackPanel Orientation="Horizontal">
 
-				<Button Margin="10 0 5 0"
+				<Button Margin="5 0 5 0"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="70"
 					Height="30"
@@ -69,19 +69,17 @@
 						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-				
+
 				<TextBox x:Name="SuspectSteamCommunityLinkTextBox"
 						 controls:TextBoxHelper.Watermark="Steam community URL or SteamID 64"
-						 Height="20" Margin="0 0 10 0"
-						 MinWidth="350"
+						 Height="20" MinWidth="300"
 						 VerticalAlignment="Center"
 						 HorizontalAlignment="Right"
 						 Text="{Binding SuspectSteamCommunityUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="110" Height="30"
-					Command="{Binding AddSuspectCommand}"
-					CommandParameter="{Binding Path=Text, ElementName=SuspectSteamCommunityLinkTextBox}">
+
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="110" Height="30" Margin="5 0 0 0"
+						Command="{Binding AddSuspectCommand}"
+						CommandParameter="{Binding Path=Text, ElementName=SuspectSteamCommunityLinkTextBox}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -92,12 +90,9 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="120"
-					Height="30"
-					Command="{Binding RemoveSuspectCommand}"
-					CommandParameter="{Binding SelectedSuspect}">
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="120" Height="30" Margin="5 0 0 0"
+						Command="{Binding RemoveSuspectCommand}"
+						CommandParameter="{Binding SelectedSuspect}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -108,12 +103,9 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="80"
-					Height="30"
-					Command="{Binding GoToSuspectProfileCommand}"
-					CommandParameter="{Binding SelectedSuspect}">
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
+						Command="{Binding GoToSuspectProfileCommand}"
+						CommandParameter="{Binding SelectedSuspect}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -124,12 +116,9 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="145"
-					Height="30"
-					ToolTip="Add all players seen to list (CTRL+G)"
-					Command="{Binding AddAllPlayerToListCommand}">
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="145" Height="30" Margin="5 0 0 0"
+						ToolTip="Add all players seen to list (CTRL+G)"
+						Command="{Binding AddAllPlayerToListCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -140,14 +129,11 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="150"
-					Height="30"
-					ToolTip="Show demos that contains the suspect (CTRL+F)"
-					Command="{Binding DisplayDemosCommand}"
-					CommandParameter="{Binding SelectedSuspect}"
-					IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="150" Height="30" Margin="5 0 0 0"
+						ToolTip="Show demos that contains the suspect (CTRL+F)"
+						Command="{Binding DisplayDemosCommand}"
+						CommandParameter="{Binding SelectedSuspect}"
+						IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -158,12 +144,9 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="80"
-					Height="30"
-					ToolTip="Refresh list (CTRL+R)"
-					Command="{Binding RefreshSuspectListCommand}">
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
+						ToolTip="Refresh list (CTRL+R)"
+						Command="{Binding RefreshSuspectListCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -174,13 +157,16 @@
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					Width="80"
-					Height="30"
-					ToolTip="Stop (CTRL+S)"
-					Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}"
-					Command="{Binding StopCommand}">
+				<CheckBox x:Name="CheckBoxShowOnlyBannedSuspects" Content="Show only banned" Margin="5 0 0 0"
+						  IsChecked="{Binding IsShowOnlyBannedSuspects}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowOnlyBannedSuspectCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyBannedSuspects}"/>
+
+				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
+						ToolTip="Stop (CTRL+S)"
+						Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}"
+						Command="{Binding StopCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -191,7 +177,7 @@
 					</StackPanel>
 				</Button>
 
-				<StackPanel Orientation="Horizontal">
+				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing 
 						IsActive="{Binding IsRefreshing}"
 						Foreground="{DynamicResource AccentColorBrush}"
@@ -202,7 +188,7 @@
 				</StackPanel>
 			</StackPanel>
 		</Grid>
-		
+
 		<DataGrid Grid.Row="1"
 				  x:Name="DataGridSuspects"
 				  ItemsSource="{Binding DataGridSuspectsCollection}"
@@ -245,6 +231,6 @@
 				<DataGridTextColumn x:Name="EconomyBannedColumn" Width="Auto" Header="Economy Banned" Binding="{Binding EconomyBan}" HeaderStyle="{StaticResource EconomyBanHeader}" />
 			</DataGrid.Columns>
 		</DataGrid>
-			
+
 	</Grid>
 </UserControl>
