@@ -9,10 +9,10 @@ namespace CSGO_Demos_Manager.Views.AccountStats
 		public WeaponView()
 		{
 			InitializeComponent();
-			IsVisibleChanged += HomeView_IsVisibleChanged;
+			IsVisibleChanged += WeaponView_IsVisibleChanged;
 		}
 
-		private void HomeView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		private void WeaponView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			if (!(bool)e.NewValue) return;
 			Focusable = true;

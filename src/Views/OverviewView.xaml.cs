@@ -9,10 +9,10 @@ namespace CSGO_Demos_Manager.Views
 		public OverviewView()
 		{
 			InitializeComponent();
-			IsVisibleChanged += HomeView_IsVisibleChanged;
+			IsVisibleChanged += OverviewView_IsVisibleChanged;
 		}
 
-		private void HomeView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		private void OverviewView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			if (!(bool)e.NewValue) return;
 			Focusable = true;

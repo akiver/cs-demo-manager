@@ -9,10 +9,10 @@ namespace CSGO_Demos_Manager.Views.AccountStats
 		public RankView()
 		{
 			InitializeComponent();
-			IsVisibleChanged += HomeView_IsVisibleChanged;
+			IsVisibleChanged += RankView_IsVisibleChanged;
 		}
 
-		private void HomeView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		private void RankView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			if (!(bool)e.NewValue) return;
 			Focusable = true;

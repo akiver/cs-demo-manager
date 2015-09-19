@@ -9,10 +9,10 @@ namespace CSGO_Demos_Manager.Views
 		public HeatmapView()
 		{
 			InitializeComponent();
-			IsVisibleChanged += HomeView_IsVisibleChanged;
+			IsVisibleChanged += HeatmapView_IsVisibleChanged;
 		}
 
-		private void HomeView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
+		private void HeatmapView_IsVisibleChanged(object sender, DependencyPropertyChangedEventArgs e)
 		{
 			if (!(bool)e.NewValue) return;
 			Focusable = true;
