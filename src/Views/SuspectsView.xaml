@@ -48,148 +48,159 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0">
-			<StackPanel Orientation="Horizontal">
+		<Grid Grid.Row="0" Margin="0 5 0 0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
 
-				<Button Margin="5 0 5 0"
+			<Button Grid.Column="0" Margin="5"
 					Style="{DynamicResource AccentedSquareButtonStyle}"
 					Width="70"
 					Height="30"
 					IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}"
 					Command="{Binding BackToHomeCommand}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<TextBox x:Name="SuspectSteamCommunityLinkTextBox"
+			<TextBox x:Name="SuspectSteamCommunityLinkTextBox" Grid.Column="1" Margin="5"
 						 controls:TextBoxHelper.Watermark="Steam community URL or SteamID 64"
 						 Height="20" MinWidth="300"
 						 VerticalAlignment="Center"
 						 HorizontalAlignment="Right"
 						 Text="{Binding SuspectSteamCommunityUrl, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="110" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="2" Style="{DynamicResource AccentedSquareButtonStyle}" Width="60" Height="30" Margin="5"
 						Command="{Binding AddSuspectCommand}"
 						CommandParameter="{Binding Path=Text, ElementName=SuspectSteamCommunityLinkTextBox}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_user_add}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Add a suspect" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user_add}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Add" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="120" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="3" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5"
 						Command="{Binding RemoveSuspectCommand}"
 						CommandParameter="{Binding SelectedSuspect}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_user_delete}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Remove suspect" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user_delete}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Remove" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="4" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5"
 						Command="{Binding GoToSuspectProfileCommand}"
 						CommandParameter="{Binding SelectedSuspect}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_user}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Profile" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Profile" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="145" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="5" Style="{DynamicResource AccentedSquareButtonStyle}" Width="145" Height="30" Margin="5"
 						ToolTip="Add all players seen to list (CTRL+G)"
 						Command="{Binding AddAllPlayerToListCommand}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_group_add}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Add all players seen" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_group_add}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Add all players seen" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="150" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="6" Style="{DynamicResource AccentedSquareButtonStyle}" Width="150" Height="30" Margin="5"
 						ToolTip="Show demos that contains the suspect (CTRL+F)"
 						Command="{Binding DisplayDemosCommand}"
 						CommandParameter="{Binding SelectedSuspect}"
 						IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_magnify}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Show suspect demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_magnify}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Show suspect demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="7" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
 						ToolTip="Refresh list (CTRL+R)"
 						Command="{Binding RefreshSuspectListCommand}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_refresh}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_refresh}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-				<CheckBox x:Name="CheckBoxShowOnlyBannedSuspects" Content="Show only banned" Margin="5 0 0 0"
+			<CheckBox Grid.Column="8" x:Name="CheckBoxShowOnlyBannedSuspects" Content="Show only banned" Margin="5 0 0 0"
 						  IsChecked="{Binding IsShowOnlyBannedSuspects}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowOnlyBannedSuspectCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyBannedSuspects}"/>
 
-				<Button Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5 0 0 0"
+			<Button Grid.Column="9" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5"
 						ToolTip="Stop (CTRL+S)"
 						Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}"
 						Command="{Binding StopCommand}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_control_stop}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Stop" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-					<controls:ProgressRing 
-						IsActive="{Binding IsRefreshing}"
-						Foreground="{DynamicResource AccentColorBrush}"
-						Width="40" Height="40" />
-					<TextBlock Text="{Binding NotificationMessage}"
-							   Style="{StaticResource LabelGeneralInfoDemo}"
-							   Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_control_stop}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Stop" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
+			</Button>
+		</Grid>
+
+		<Grid Grid.Row="1" Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}">
+				<controls:ProgressRing IsActive="{Binding IsRefreshing}"
+									   Foreground="{DynamicResource AccentColorBrush}"
+									   Width="40" Height="40" />
+				<TextBlock Text="{Binding NotificationMessage}"
+						   Style="{StaticResource LabelGeneralInfoDemo}" />
 			</StackPanel>
 		</Grid>
 
-		<DataGrid Grid.Row="1"
+		<DataGrid Grid.Row="2" Margin="0 5 0 0"
 				  x:Name="DataGridSuspects"
 				  ItemsSource="{Binding DataGridSuspectsCollection}"
 				  SelectedItem="{Binding SelectedSuspect}"

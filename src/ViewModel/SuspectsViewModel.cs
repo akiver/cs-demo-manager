@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
@@ -396,6 +397,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						() =>
 						{
 							IsAnalyzing = false;
+							NotificationMessage = "Stopping analyze...";
 						},
 						() => IsRefreshing));
 			}
@@ -426,9 +428,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			_dialogService = dialogService;
 			_demosService = demosService;
 
-			if (IsInDesignModeStatic)
+			if (IsInDesignMode)
 			{
 				DispatcherHelper.Initialize();
+				IsAnalyzing = true;
 			}
 
 			Suspects = new ObservableCollection<Suspect>();
@@ -436,13 +439,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			DataGridSuspectsCollection = CollectionViewSource.GetDefaultView(Suspects);
 			DataGridSuspectsCollection.Filter = Filter;
 
-			DispatcherHelper.CheckBeginInvokeOnUI(
-			async () =>
+			Application.Current.Dispatcher.Invoke(async () =>
 			{
 				IsRefreshing = true;
 				NotificationMessage = "Refreshing...";
 				await LoadSuspects();
-				IsRefreshing = false;
+				if(!IsInDesignMode) IsRefreshing = false;
 				CommandManager.InvalidateRequerySuggested();
 			});
 		}
