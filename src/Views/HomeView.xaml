@@ -25,6 +25,11 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding BrowseToDemoCommand}"
+					CommandParameter="{Binding SelectedDemo}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding GoToAccountStatsCommand}"
+					Gesture="CTRL+E" />
 		<KeyBinding Command="{Binding ShowDemoDetailsCommand}"
 					CommandParameter="{Binding SelectedDemo}"
 					Gesture="CTRL+D" />
@@ -150,7 +155,7 @@
 					<Button Grid.Column="4" Margin="5" Width="90" Height="30"
 							Command="{Binding GoToAccountStatsCommand}"
 							Style="{DynamicResource AccentedSquareButtonStyle}"
-							ToolTip="Account stats (CTRL+S)">
+							ToolTip="Account stats (CTRL+E)">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 							<Rectangle Width="15" Height="15">
 								<Rectangle.Fill>

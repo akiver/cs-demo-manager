@@ -8,10 +8,23 @@
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding AccountStatsRank, Source={StaticResource Locator}}">
 
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding BackToHomeCommand}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding GoToOverallCommand}"
+					Gesture="CTRL+O" />
+		<KeyBinding Command="{Binding GoToMapCommand}"
+					Gesture="CTRL+M" />
+		<KeyBinding Command="{Binding GoToWeaponCommand}"
+					Gesture="CTRL+W" />
+		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding BackToHomeCommand}" />
+	</UserControl.InputBindings>
+	
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<converters:RankToImageConverter  x:Key="RankToImageConverter" />

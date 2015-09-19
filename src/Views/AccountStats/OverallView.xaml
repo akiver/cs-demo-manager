@@ -7,10 +7,23 @@
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
+			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding AccountStatsGeneral, Source={StaticResource Locator}}">
 
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding BackToHomeCommand}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding GoToRankCommand}"
+					Gesture="CTRL+R" />
+		<KeyBinding Command="{Binding GoToMapCommand}"
+					Gesture="CTRL+M" />
+		<KeyBinding Command="{Binding GoToWeaponCommand}"
+					Gesture="CTRL+W" />
+		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding BackToHomeCommand}" />
+	</UserControl.InputBindings>
+	
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="Loaded">
 			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
