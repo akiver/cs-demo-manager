@@ -934,5 +934,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowAssistPerRoundColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowDeathPerRoundColumn {
+            get {
+                return ((bool)(this["ShowDeathPerRoundColumn"]));
+            }
+            set {
+                this["ShowDeathPerRoundColumn"] = value;
+            }
+        }
     }
 }

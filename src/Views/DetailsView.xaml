@@ -516,6 +516,8 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource AssistPerRoundHeader}" x:Name="AssistPerRoundTeam1Column" Width="Auto" Header="APR" Binding="{Binding AssistPerRound}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource DeathPerRoundHeader}" x:Name="DeathPerRoundTeam1Column" Width="Auto" Header="DPR" Binding="{Binding DeathPerRound}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" x:Name="AverageDamageTeam1Column" Width="Auto" Header="ADR" Binding="{Binding AverageDamageByRoundCount, Converter={StaticResource DoubleToStringConverter}}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthTeam1Column" Width="Auto" Header="TDH" Binding="{Binding TotalDamageHealthCount}"
@@ -614,6 +616,8 @@
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource AssistPerRoundHeader}" x:Name="AssistPerRoundTeam2Column" Width="Auto" Header="APR" Binding="{Binding AssistPerRound}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+											<DataGridTextColumn HeaderStyle="{StaticResource DeathPerRoundHeader}" x:Name="DeathPerRoundTeam2Column" Width="Auto" Header="DPR" Binding="{Binding DeathPerRound}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" x:Name="AverageDamageTeam2Column" Width="Auto" Header="ADR" Binding="{Binding AverageDamageByRoundCount, Converter={StaticResource DoubleToStringConverter}}"
 																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 											<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthTeam2Column" Width="Auto" Header="TDH" Binding="{Binding TotalDamageHealthCount}"
