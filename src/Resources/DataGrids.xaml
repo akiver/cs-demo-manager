@@ -366,6 +366,12 @@
 				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
 				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
 			</Trigger>
+			<DataTrigger Binding="{Binding IsVacBanned}" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding IsOverwatchBanned}" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
@@ -376,6 +382,12 @@
 				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
 				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
 			</Trigger>
+			<DataTrigger Binding="{Binding IsVacBanned}" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding IsOverwatchBanned}" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
 		</Style.Triggers>
 	</Style>
 
