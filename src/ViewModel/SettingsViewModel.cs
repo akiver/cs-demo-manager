@@ -170,6 +170,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showKillPerRoundColumn = Settings.Default.ShowKillPerRoundColumn;
 
+		private bool _showAssistPerRoundColumn = Settings.Default.ShowAssistPerRoundColumn;
+
 		private string _csgoExePath = Settings.Default.CsgoExePath;
 
 		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
@@ -874,6 +876,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowKillPerRoundColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowKillPerRoundColumn, ref _showKillPerRoundColumn, value);
+			}
+		}
+
+		public bool ShowAssistPerRoundColumn
+		{
+			get { return _showAssistPerRoundColumn; }
+			set
+			{
+				Settings.Default.ShowAssistPerRoundColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowAssistPerRoundColumn, ref _showAssistPerRoundColumn, value);
 			}
 		}
 

@@ -696,6 +696,16 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
+		public double AssistPerRound
+		{
+			get
+			{
+				if (RoundPlayedCount > 0) return Math.Round((double)AssistCount / RoundPlayedCount, 2);
+				return 0;
+			}
+		}
+
 		#endregion
 
 		public override bool Equals(object obj)
