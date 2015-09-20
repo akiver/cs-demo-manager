@@ -319,6 +319,15 @@
 											<CheckBox Content="Ban (VAC / OW)"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="Round type"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundTypeColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="Side trouble"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowSideTroubleColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="Team trouble"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 										</StackPanel>
 									</StackPanel>
 								</StackPanel>
