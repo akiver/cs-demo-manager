@@ -58,7 +58,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerKilled += HandlePlayerKilled;
 			Parser.RoundStart += HandleRoundStart;
 			Parser.RoundOfficiallyEnd += HandleRoundOfficiallyEnd;
-			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 			Parser.BombPlanted += HandleBombPlanted;
 			Parser.BombDefused += HandleBombDefused;
 			Parser.BombExploded += HandleBombExploded;
@@ -252,8 +251,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (_playerTeamCount > 8) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
-
-			IsFreezetime = true;
 
 			// Reset until both scores > 0
 			if (Parser.CTScore == 0 && Parser.TScore == 0)

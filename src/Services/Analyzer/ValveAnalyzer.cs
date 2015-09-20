@@ -27,7 +27,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerKilled += HandlePlayerKilled;
 			Parser.RoundStart += HandleRoundStart;
 			Parser.RoundOfficiallyEnd += HandleRoundOfficiallyEnd;
-			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 			Parser.BombPlanted += HandleBombPlanted;
 			Parser.BombDefused += HandleBombDefused;
 			Parser.BombExploded += HandleBombExploded;
@@ -177,9 +176,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
 			if (!IsMatchStarted) return;
-
-			IsFreezetime = true;
-
 			CreateNewRound();
 		}
 

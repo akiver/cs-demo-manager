@@ -31,6 +31,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		public bool IsHalfMatch { get; set; } = false;
 		public bool IsOvertime { get; set; } = false;
 		public bool IsLastRoundHalf;
+		/// <summary>
+		/// Used to detect when the first shot occured to be able to have the right equipement money value
+		/// I use this because the event buytime_ended isn't raised everytime
+		/// </summary>
+		public bool IsFirstShotOccured { get; set; } = false;
 
 		public bool IsFreezetime { get; set; } = false;
 
@@ -270,10 +275,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!IsMatchStarted) return;
 
 			IsFreezetime = false;
-
-			// TODO Players can buy after the end of the freezetime, must find an other way
-			CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-			CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
 		}
 
 		protected void HandleBombPlanted(object sender, BombEventArgs e)
@@ -375,6 +376,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
 		{
 			if (!IsMatchStarted || e.Shooter == null) return;
+
+			if (!IsFirstShotOccured)
+			{
+				IsFirstShotOccured = true;
+				CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+				CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+			}
 
 			if (AnalyzeHeatmapPoint || AnalyzePlayersPosition)
 			{
@@ -883,6 +891,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			IsEntryKillDone = false;
 			IsOpeningKillDone = false;
+			IsFirstShotOccured = false;
 
 			KillsThisRound.Clear();
 
