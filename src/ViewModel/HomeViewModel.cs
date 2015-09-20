@@ -77,6 +77,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<ObservableCollection<Demo>> _analyzeDemosCommand;
 
+		private RelayCommand<ObservableCollection<Demo>> _deleteDemosCommand;
+
 		private RelayCommand<Demo> _watchDemoCommand;
 
 		private RelayCommand<Demo> _watchHighlightCommand;
@@ -366,6 +368,42 @@ namespace CSGO_Demos_Manager.ViewModel
 						RefreshSelectedDemos();
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command to delete demo(s)
+		/// </summary>
+		public RelayCommand<ObservableCollection<Demo>> DeleteDemosCommand
+		{
+			get
+			{
+				return _deleteDemosCommand
+					?? (_deleteDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
+					async demos =>
+					{
+						var delete = await _dialogService.ShowMessageAsync("Are you sure you want to delete permanently this demo(s)?", MessageDialogStyle.AffirmativeAndNegative);
+						if (delete == MessageDialogResult.Negative) return;
+
+						List<Demo> demosNotFound = new List<Demo>();
+						foreach (Demo demo in demos)
+						{
+							bool isDeleted = await _demosService.DeleteDemo(demo);
+							if(!isDeleted) demosNotFound.Add(demo);
+						}
+
+						if (demosNotFound.Any())
+						{
+							await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
+						}
+						else
+						{
+							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) deleted.", MessageDialogStyle.Affirmative);
+						}
+
+						await LoadDemosHeader();
+					},
+					demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
 			}
 		}
 

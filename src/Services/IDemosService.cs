@@ -90,5 +90,12 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<ProgressStats> GetProgressStatsAsync();
+
+		/// <summary>
+		/// Delete a demo from file system
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<bool> DeleteDemo(Demo demo);
 	}
 }

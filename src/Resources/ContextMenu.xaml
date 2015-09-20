@@ -25,6 +25,9 @@
 								  Command="{Binding Home.SaveStatusDemoCommand, Source={StaticResource Locator}}"
 								  CommandParameter="watched" />
 		</MenuItem>
+		<MenuItem Header="Delete"
+							  Command="{Binding Home.DeleteDemosCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Home.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Add players to suspects list"
 							  Command="{Binding Home.AddPlayersToSuspectsListCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Home.SelectedDemos, Source={StaticResource Locator}}"/>

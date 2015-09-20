@@ -695,5 +695,10 @@ namespace CSGO_Demos_Manager.Services
 				}
 			});
 		}
+
+		public Task<bool> DeleteDemo(Demo demo)
+		{
+			return Task.FromResult(true);
+		}
 	}
 }

@@ -813,5 +813,15 @@ namespace CSGO_Demos_Manager.Services
 
 			return stats;
 		}
+
+		public async Task<bool> DeleteDemo(Demo demo)
+		{
+			if (!File.Exists(demo.Path)) return false;
+			await _cacheService.RemoveDemo(demo);
+			if (File.Exists(demo.Path + ".info")) File.Delete(demo.Path + ".info");
+			File.Delete(demo.Path);
+
+			return true;
+		}
 	}
 }
