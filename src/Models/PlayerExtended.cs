@@ -211,6 +211,11 @@ namespace CSGO_Demos_Manager.Models
 		/// Number of decoy throwed by the player
 		/// </summary>
 		private int _decoyThrowedCount;
+
+		/// <summary>
+		/// Number of round that the player played
+		/// </summary>
+		private int _roundPlayedCount = 0;
 		#endregion
 
 		#region Accessors
@@ -490,6 +495,13 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => DecoyThrowedCount, ref _decoyThrowedCount, value); }
 		}
 
+		[JsonProperty("round_played_count")]
+		public int RoundPlayedCount
+		{
+			get { return _roundPlayedCount; }
+			set { Set(() => RoundPlayedCount, ref _roundPlayedCount, value); }
+		}
+
 		[JsonProperty("entry_kills")]
 		public ObservableCollection<EntryKillEvent> EntryKills { get; set; }
 
@@ -674,6 +686,16 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => HasBomb, ref _hasBomb, value); }
 		}
 
+		[JsonIgnore]
+		public double KillPerRound
+		{
+			get
+			{
+				if (RoundPlayedCount > 0) return Math.Round((double)KillsCount / RoundPlayedCount, 2);
+				return 0;
+			}
+		}
+
 		#endregion
 
 		public override bool Equals(object obj)
@@ -749,6 +771,7 @@ namespace CSGO_Demos_Manager.Models
 			OpeningKills.Clear();
 			EntryKills.Clear();
 			PlayersHurted.Clear();
+			RoundPlayedCount = 0;
 		}
 
 		public PlayerExtended Clone()

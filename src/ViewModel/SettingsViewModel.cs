@@ -168,6 +168,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showBanColumns = Settings.Default.ShowBanColumns;
 
+		private bool _showKillPerRoundColumn = Settings.Default.ShowKillPerRoundColumn;
+
 		private string _csgoExePath = Settings.Default.CsgoExePath;
 
 		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
@@ -861,6 +863,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowBanColumns = value;
 				Settings.Default.Save();
 				Set(() => ShowBanColumns, ref _showBanColumns, value);
+			}
+		}
+
+		public bool ShowKillPerRoundColumn
+		{
+			get { return _showKillPerRoundColumn; }
+			set
+			{
+				Settings.Default.ShowKillPerRoundColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowKillPerRoundColumn, ref _showKillPerRoundColumn, value);
 			}
 		}
 

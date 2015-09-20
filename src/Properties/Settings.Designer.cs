@@ -910,5 +910,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowOnlyBannedSuspects"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowKillPerRoundColumn {
+            get {
+                return ((bool)(this["ShowKillPerRoundColumn"]));
+            }
+            set {
+                this["ShowKillPerRoundColumn"] = value;
+            }
+        }
     }
 }

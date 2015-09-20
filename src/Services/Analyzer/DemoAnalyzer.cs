@@ -894,6 +894,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				pl.HasEntryKill = false;
 				pl.HasOpeningKill = false;
 				pl.IsControllingBot = false;
+				if (Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId) != null) pl.RoundPlayedCount++;
 			}
 		}
 

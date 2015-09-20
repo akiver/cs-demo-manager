@@ -142,6 +142,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Total Damage Health" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="KillPerRoundHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Kill Per Round" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="TotalDamageArmorHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Total Damage Armor" />
 	</Style>
