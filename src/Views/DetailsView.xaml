@@ -681,6 +681,12 @@
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerHeader}" x:Name="WinnerRoundColumn" Width="Auto" Header="W" Binding="{Binding WinnerAsString}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource RoundTypeHeader}" x:Name="TypeRoundColumn" Width="Auto" Header="Type" Binding="{Binding RoundTypeAsString}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundTypeColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource SideTroubleHeader}" x:Name="SideTroubleRoundColumn" Width="Auto" Header="Side" Binding="{Binding SideTroubleAsString}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowSideTroubleColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TeamTroubleHeader}" x:Name="TeamTroubleRoundColumn" Width="Auto" Header="Team" Binding="{Binding TeamTrouble.Name}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountRoundColumn" Width="Auto" Header="K" ElementStyle="{StaticResource TotalKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillCountRoundColumn" Width="Auto" Header="1K" ElementStyle="{StaticResource OneKillRoundCountDataGridTextColumnStyle}"

@@ -241,7 +241,19 @@
 	<Style TargetType="DataGridColumnHeader" x:Key="WinnerClanNameHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Winner Clan Name" />
 	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="RoundTypeHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Round type (normal / eco / force buy / semi-eco)" />
+	</Style>
 	
+	<Style TargetType="DataGridColumnHeader" x:Key="SideTroubleHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Side on eco / force buy or semi-eco" />
+	</Style>
+	
+	<Style TargetType="DataGridColumnHeader" x:Key="TeamTroubleHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Team's mame on eco / force buy or semi-eco" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="WinnerHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Winner" />
 	</Style>

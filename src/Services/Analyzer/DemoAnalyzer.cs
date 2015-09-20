@@ -382,6 +382,95 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				IsFirstShotOccured = true;
 				CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
 				CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+
+				// Not 100% accurate maybe improved it with current equipement...
+				if (CurrentRound.StartMoneyTeam1 == 4000 && CurrentRound.StartMoneyTeam2 == 4000)
+				{
+					CurrentRound.Type = RoundType.PISTOL_ROUND;
+				}
+				else
+				{
+					double diffPercent = Math.Abs(Math.Round((((double)CurrentRound.EquipementValueTeam1 - CurrentRound.EquipementValueTeam2) / (((double)CurrentRound.EquipementValueTeam1 + CurrentRound.EquipementValueTeam2) / 2) * 100), 2));
+					if (diffPercent >= 90)
+					{
+						CurrentRound.Type = RoundType.ECO;
+					}
+					else if (diffPercent >= 75 && diffPercent < 90)
+					{
+						CurrentRound.Type = RoundType.SEMI_ECO;
+					}
+					else if (diffPercent >= 50 && diffPercent < 75)
+					{
+						CurrentRound.Type = RoundType.FORCE_BUY;
+					}
+					else
+					{
+						CurrentRound.Type = RoundType.NORMAL;
+					}
+
+					if (CurrentRound.Type != RoundType.NORMAL)
+					{
+						if (IsOvertime)
+						{
+							if (IsHalfMatch)
+							{
+								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.SideTrouble = Team.CounterTerrorist;
+								}
+								else
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.SideTrouble = Team.Terrorist;
+								}
+							}
+							else
+							{
+								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.SideTrouble = Team.CounterTerrorist;
+								}
+								else
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.SideTrouble = Team.Terrorist;
+								}
+							}
+						}
+						else
+						{
+							if (IsHalfMatch)
+							{
+								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.SideTrouble = Team.Terrorist;
+								}
+								else
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.SideTrouble = Team.CounterTerrorist;
+								}
+							}
+							else
+							{
+								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.SideTrouble = Team.Terrorist;
+								}
+								else
+								{
+									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.SideTrouble = Team.CounterTerrorist;
+								}
+							}
+						}
+					}
+						
+				}
 			}
 
 			if (AnalyzeHeatmapPoint || AnalyzePlayersPosition)

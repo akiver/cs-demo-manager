@@ -946,5 +946,41 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowDeathPerRoundColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowRoundTypeColumn {
+            get {
+                return ((bool)(this["ShowRoundTypeColumn"]));
+            }
+            set {
+                this["ShowRoundTypeColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowSideTroubleColumn {
+            get {
+                return ((bool)(this["ShowSideTroubleColumn"]));
+            }
+            set {
+                this["ShowSideTroubleColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTeamTroubleColumn {
+            get {
+                return ((bool)(this["ShowTeamTroubleColumn"]));
+            }
+            set {
+                this["ShowTeamTroubleColumn"] = value;
+            }
+        }
     }
 }

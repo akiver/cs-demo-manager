@@ -10,6 +10,15 @@ using DemoInfo;
 
 namespace CSGO_Demos_Manager.Models
 {
+	public enum RoundType
+	{
+		ECO = 0,
+		SEMI_ECO = 1,
+		NORMAL = 2,
+		FORCE_BUY = 3,
+		PISTOL_ROUND = 4
+	}
+
 	public class Round : ObservableObject
 	{
 		#region Properties
@@ -29,6 +38,16 @@ namespace CSGO_Demos_Manager.Models
 		private string _winnerClanName = "Team 1";
 
 		private Team _winner;
+
+		/// <summary>
+		/// Refers to the side currently on eco / semi-eco or force buy
+		/// </summary>
+		private Team _sideTrouble;
+
+		/// <summary>
+		/// Refers to the team currently on eco / semi-eco or force buy
+		/// </summary>
+		private TeamExtended _teamTrouble;
 
 		/// <summary>
 		/// Number of 1K during the round
@@ -271,6 +290,66 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _bombExploded; }
 			set { Set(() => BombExploded, ref _bombExploded, value); }
+		}
+
+		[JsonProperty("round_type")]
+		public RoundType Type { get; set; }
+
+		[JsonIgnore]
+		public string RoundTypeAsString
+		{
+			get
+			{
+				switch (Type)
+				{
+					case RoundType.ECO:
+						return "Eco";
+					case RoundType.FORCE_BUY:
+						return "Force buy";
+					case RoundType.SEMI_ECO:
+						return "Semi-Eco";
+					case RoundType.PISTOL_ROUND:
+						return "Pistol round";
+					default:
+						return "Normal";
+				}
+			}
+		}
+
+		/// <summary>
+		/// When a round isn't a full buy for both team, one of the team is on eco, semi eco or force buy.
+		/// This property return the TeamExtended concerned by this status.
+		/// </summary>
+		[JsonProperty("round_type_team")]
+		public TeamExtended TeamTrouble
+		{
+			get { return _teamTrouble; }
+			set { Set(() => TeamTrouble, ref _teamTrouble, value); }
+		}
+
+		
+		[JsonProperty("round_type_side")]
+		public Team SideTrouble
+		{
+			get { return _sideTrouble; }
+			set { Set(() => SideTrouble, ref _sideTrouble, value); }
+		}
+
+		[JsonIgnore]
+		public string SideTroubleAsString
+		{
+			get
+			{
+				switch (SideTrouble)
+				{
+					case Team.CounterTerrorist:
+						return "CT";
+						case Team.Terrorist:
+						return "T";
+					default:
+						return string.Empty;
+				}
+			}
 		}
 
 		/// <summary>

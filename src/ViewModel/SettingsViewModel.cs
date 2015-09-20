@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Messages;
@@ -173,6 +172,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _showAssistPerRoundColumn = Settings.Default.ShowAssistPerRoundColumn;
 
 		private bool _showDeathPerRoundColumn = Settings.Default.ShowDeathPerRoundColumn;
+
+		private bool _showRoundTypeColumn = Settings.Default.ShowRoundTypeColumn;
+
+		private bool _showSideTroubleColumn = Settings.Default.ShowSideTroubleColumn;
+
+		private bool _showTeamTroubleColumn = Settings.Default.ShowTeamTroubleColumn;
 
 		private string _csgoExePath = Settings.Default.CsgoExePath;
 
@@ -900,6 +905,39 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowDeathPerRoundColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowDeathPerRoundColumn, ref _showDeathPerRoundColumn, value);
+			}
+		}
+
+		public bool ShowRoundTypeColumn
+		{
+			get { return _showRoundTypeColumn; }
+			set
+			{
+				Settings.Default.ShowRoundTypeColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowRoundTypeColumn, ref _showRoundTypeColumn, value);
+			}
+		}
+
+		public bool ShowSideTroubleColumn
+		{
+			get { return _showSideTroubleColumn; }
+			set
+			{
+				Settings.Default.ShowSideTroubleColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowSideTroubleColumn, ref _showSideTroubleColumn, value);
+			}
+		}
+
+		public bool ShowTeamTroubleColumn
+		{
+			get { return _showTeamTroubleColumn; }
+			set
+			{
+				Settings.Default.ShowTeamTroubleColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTeamTroubleColumn, ref _showTeamTroubleColumn, value);
 			}
 		}
 
