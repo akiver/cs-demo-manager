@@ -267,6 +267,15 @@
 											<CheckBox Content="HS"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="KPR"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="APR"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="DPR"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 											<CheckBox Content="TK"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
