@@ -62,10 +62,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
 					if (round.EntryKillEvent != null)
 					{
-						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KillerName);
-						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KilledSteamId.ToString());
-						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KilledName);
-						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KilledSteamId.ToString());
+						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.Killer.Name);
+						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.Killer.SteamId.ToString());
+						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.Killed.Name);
+						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.Killed.SteamId.ToString());
 						SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.Weapon.Name);
 						SetCellValue(row, columnNumber, CellType.String, round.EntryKillEvent.Result);
 					}

@@ -5,20 +5,14 @@ namespace CSGO_Demos_Manager.Models.Events
 {
 	public class OpenKillEvent : BaseEvent
 	{
-		[JsonProperty("killer_player_name")]
-		public string KillerName { get; set; }
-
-		[JsonProperty("killer_player_steamid")]
-		public long KillerSteamId { get; set; }
+		[JsonProperty("killer_player")]
+		public PlayerExtended Killer { get; set; }
 
 		[JsonProperty("killer_player_team")]
 		public Team KillerTeam { get; set; }
 
-		[JsonProperty("killed_player_name")]
-		public string KilledName { get; set; }
-
-		[JsonProperty("killed_player_steamid")]
-		public long KilledSteamId { get; set; }
+		[JsonProperty("killed_player")]
+		public PlayerExtended Killed { get; set; }
 
 		[JsonProperty("killed_player_team")]
 		public Team KilledTeam { get; set; }

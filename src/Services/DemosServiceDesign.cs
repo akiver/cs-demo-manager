@@ -28,11 +28,9 @@ namespace CSGO_Demos_Manager.Services
 				{
 					EntryKillEvent entryKill = new EntryKillEvent(random.Next(7000, 100000))
 					{
-						KilledName = "killed" + indexEntryKill,
-						KilledSteamId = random.Next(8000000),
+						Killed = players.ElementAt(random.Next(0, 9)),
 						KilledTeam = Team.Terrorist,
-						KillerName = "killer" + indexEntryKill,
-						KillerSteamId = random.Next(800000),
+						Killer = players.ElementAt(random.Next(0, 9)),
 						KillerTeam = Team.CounterTerrorist
 					};
 					entryKills.Add(entryKill);
@@ -131,21 +129,6 @@ namespace CSGO_Demos_Manager.Services
 			ObservableCollection<PlayerExtended> players = new ObservableCollection<PlayerExtended>();
 			for (int i = 0; i < 10; i++)
 			{
-				ObservableCollection<EntryKillEvent> entryKills = new ObservableCollection<EntryKillEvent>();
-				for (int indexEntryKill = 0; indexEntryKill < random.Next(5); indexEntryKill++)
-				{
-					EntryKillEvent entryKill = new EntryKillEvent(random.Next(7000, 100000))
-					{
-						KilledName = "killed" + indexEntryKill,
-						KilledSteamId = random.Next(8000000),
-						KilledTeam = Team.Terrorist,
-						KillerName = "killer" + indexEntryKill,
-						KillerSteamId = random.Next(800000),
-						KillerTeam = Team.CounterTerrorist
-					};
-					entryKills.Add(entryKill);
-				}
-
 				PlayerExtended player = new PlayerExtended
 				{
 					Name = "player" + (i + 1),
@@ -162,17 +145,51 @@ namespace CSGO_Demos_Manager.Services
 					Clutch1V5Count = random.Next(1),
 					BombDefusedCount = random.Next(0, 2),
 					BombPlantedCount = random.Next(0, 2),
-					EntryKills = entryKills,
 					DeathCount = random.Next(0, 32),
 					KillsCount = random.Next(30),
 					AssistCount = random.Next(15),
 					Score = random.Next(10, 80),
 					RoundMvpCount = random.Next(6),
 					RankNumberNew = 5,
-					RankNumberOld = 4
+					RankNumberOld = 4,
+					RatingHltv = (float)random.NextDouble(),
+					SteamId = random.Next(1000, 800000),
+					IsOverwatchBanned = random.Next(100) < 40,
+					IsVacBanned = random.Next(100) < 40,
+					TeamKillCount = random.Next(0, 1),
+					WinCount = random.Next(10, 687)
 				};
 
 				players.Add(player);
+
+				ObservableCollection<EntryKillEvent> entryKills = new ObservableCollection<EntryKillEvent>();
+				for (int indexEntryKill = 0; indexEntryKill < random.Next(5); indexEntryKill++)
+				{
+					EntryKillEvent entryKill = new EntryKillEvent(random.Next(7000, 100000))
+					{
+						Killed = players.ElementAt(random.Next(0, 9)),
+						KilledTeam = Team.Terrorist,
+						Killer = players.ElementAt(random.Next(0, 9)),
+						KillerTeam = Team.CounterTerrorist
+					};
+					entryKills.Add(entryKill);
+				}
+
+				ObservableCollection<OpenKillEvent> openKills = new ObservableCollection<OpenKillEvent>();
+				for (int indexOpenKill = 0; indexOpenKill < random.Next(5); indexOpenKill++)
+				{
+					OpenKillEvent openKill = new OpenKillEvent(random.Next(7000, 100000))
+					{
+						Killed = players.ElementAt(random.Next(0, 9)),
+						KilledTeam = Team.Terrorist,
+						Killer = players.ElementAt(random.Next(0, 9)),
+						KillerTeam = Team.CounterTerrorist
+					};
+					openKills.Add(openKill);
+				}
+
+				players.Last().EntryKills = entryKills;
+				players.Last().OpeningKills = openKills;
 			}
 
 			ObservableCollection<TeamExtended> teams = new ObservableCollection<TeamExtended>

@@ -1121,21 +1121,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 					CurrentRound.EntryKillEvent = new EntryKillEvent(Parser.IngameTick)
 					{
-						KilledName = killEvent.DeathPerson.Name,
-						KilledSteamId = killEvent.DeathPerson.SteamId,
+						Killed = Demo.Players.First(p => Equals(p, killEvent.DeathPerson)),
 						KilledTeam = killEvent.DeathPerson.Team,
-						KillerName = killEvent.Killer.Name,
-						KillerSteamId = killEvent.Killer.SteamId,
+						Killer = Demo.Players.First(p => Equals(p, killEvent.Killer)),
 						KillerTeam = killEvent.Killer.Team,
 						Weapon = killEvent.Weapon
 					};
 					CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
 					{
-						KilledName = killEvent.DeathPerson.Name,
-						KilledSteamId = killEvent.DeathPerson.SteamId,
+						Killer = Demo.Players.First(p => Equals(p, killEvent.Killer)),
 						KilledTeam = killEvent.DeathPerson.Team,
-						KillerName = killEvent.Killer.Name,
-						KillerSteamId = killEvent.Killer.SteamId,
+						Killed = Demo.Players.First(p => Equals(p, killEvent.DeathPerson)),
 						KillerTeam = killEvent.Killer.Team,
 						Weapon = killEvent.Weapon
 					};
@@ -1148,11 +1144,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				// CT done the kill , it's an open kill
 				CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
 				{
-					KilledName = killEvent.DeathPerson.Name,
-					KilledSteamId = killEvent.DeathPerson.SteamId,
+					Killer = Demo.Players.First(p => Equals(p, killEvent.Killer)),
 					KilledTeam = killEvent.DeathPerson.Team,
-					KillerName = killEvent.Killer.Name,
-					KillerSteamId = killEvent.Killer.SteamId,
+					Killed = Demo.Players.First(p => Equals(p, killEvent.DeathPerson)),
 					KillerTeam = killEvent.Killer.Team,
 					Weapon = killEvent.Weapon
 				};

@@ -60,10 +60,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 					IRow row = _sheet.CreateRow(rowNumber);
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
-					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.KillerName);
-					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.KilledSteamId.ToString());
-					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.KilledName);
-					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.KilledSteamId.ToString());
+					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.Killer.Name);
+					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.Killer.SteamId.ToString());
+					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.Killed.Name);
+					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.Killed.SteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.String, round.OpenKillEvent.Weapon.Name);
 					SetCellValue(row, columnNumber, CellType.String, round.OpenKillEvent.Result);
 
