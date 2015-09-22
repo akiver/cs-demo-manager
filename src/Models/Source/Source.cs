@@ -27,6 +27,8 @@ namespace CSGO_Demos_Manager.Models.Source
 					return new Faceit();
 				case "cevo":
 					return new Cevo();
+				case "popflash":
+					return new PopFlash();
 				default:
 					return null;
 			}

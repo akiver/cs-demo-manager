@@ -330,6 +330,7 @@
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
 			<Grid Grid.Column="0">
@@ -398,6 +399,14 @@
 			</Grid>
 
 			<Grid Grid.Column="9">
+				<CheckBox x:Name="CheckBoxShowPopFlash" Content="PopFlash"
+						  IsChecked="{Binding IsShowPopFlashDemos}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Command="{Binding ShowPopFlashDemosCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPopFlash}"/>
+			</Grid>
+
+			<Grid Grid.Column="10">
 				<CheckBox x:Name="CheckBoxShowOldDemos" Content="No analyzable demos"
 						  IsChecked="{Binding IsShowOldDemos}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
@@ -405,7 +414,7 @@
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOldDemos}"/>
 			</Grid>
 
-			<Grid Grid.Column="10">
+			<Grid Grid.Column="11">
 				<TextBox Text="{Binding FilterDemoText, UpdateSourceTrigger=PropertyChanged}"
 					 Height="20" Width="160"
 					 controls:TextBoxHelper.Watermark="Filter..."

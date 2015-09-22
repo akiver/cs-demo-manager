@@ -982,5 +982,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowTeamTroubleColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowPopFlashDemos {
+            get {
+                return ((bool)(this["ShowPopFlashDemos"]));
+            }
+            set {
+                this["ShowPopFlashDemos"] = value;
+            }
+        }
     }
 }

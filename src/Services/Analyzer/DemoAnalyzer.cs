@@ -85,6 +85,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			switch (demo.SourceName)
 			{
 				case "valve":
+				case "popflash":
 					return new ValveAnalyzer(demo);
 				case "esea":
 					return new EseaAnalyzer(demo);
@@ -189,6 +190,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (demo.Hostname.Contains("eBot") || FILENAME_EBOT_REGEX.Match(demo.Name).Success)
 			{
 				return Source.Factory("ebot");
+			}
+
+			if (demo.Name.IndexOf("popflash", StringComparison.OrdinalIgnoreCase) >= 0 ||
+				demo.Hostname.IndexOf("popflash", StringComparison.OrdinalIgnoreCase) >= 0)
+			{
+				return Source.Factory("popflash");
 			}
 
 			// If none of the previous checks matched, we use ValveAnalyzer
