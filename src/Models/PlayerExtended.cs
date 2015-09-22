@@ -216,9 +216,21 @@ namespace CSGO_Demos_Manager.Models
 		/// Number of round that the player played
 		/// </summary>
 		private int _roundPlayedCount = 0;
+
+		/// <summary>
+		/// Avatar URL of the player (get from Steam API)
+		/// </summary>
+		private string _avatarUrl = "../resources/images/avatar.jpg";
 		#endregion
 
 		#region Accessors
+
+		[JsonIgnore]
+		public string AvatarUrl
+		{
+			get { return _avatarUrl; }
+			set { Set(() => AvatarUrl, ref _avatarUrl, value); }
+		}
 
 		[JsonIgnore]
 		public bool HasEntryKill

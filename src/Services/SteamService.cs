@@ -141,5 +141,23 @@ namespace CSGO_Demos_Manager.Services
 				return suspectOrdered;
 			}
 		}
+
+		public async Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users)
+		{
+			using (var httpClient = new HttpClient())
+			{
+				string ids = string.Join(",", users.ToArray());
+
+				//  Grab general infos from user
+				string url = string.Format(PLAYERS_SUMMARIES_URL, AppSettings.STEAM_API_KEY, ids);
+				HttpResponseMessage result = await httpClient.GetAsync(url);
+				string json = await result.Content.ReadAsStringAsync();
+				JObject o = JObject.Parse(json);
+				var playerSummaryList = o.SelectToken("response.players.player").ToObject<List<PlayerSummary>>();
+				if (playerSummaryList == null) return null;
+
+				return playerSummaryList;
+			}
+		}
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -15,6 +16,7 @@ using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Models.Steam;
 using CSGO_Demos_Manager.Services.Excel;
 using GalaSoft.MvvmLight.Messaging;
 
@@ -103,6 +105,18 @@ namespace CSGO_Demos_Manager.ViewModel
 				PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 				PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 				RoundsCollection = CollectionViewSource.GetDefaultView(_currentDemo.Rounds);
+				if (AppSettings.IsInternetConnectionAvailable())
+				{
+					Task.Run(async () =>
+					{
+						IEnumerable<string> steamIdList = CurrentDemo.Players.Select(p => p.SteamId.ToString()).Distinct();
+						List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
+						foreach (PlayerSummary playerSummary in playerSummaryList)
+						{
+							CurrentDemo.Players.First(p => p.SteamId.ToString() == playerSummary.SteamId).AvatarUrl = playerSummary.AvatarMedium;
+						}
+					});
+				}
 			}
 		}
 

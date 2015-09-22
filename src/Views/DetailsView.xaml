@@ -467,6 +467,13 @@
 											<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 										</DataGrid.Resources>
 										<DataGrid.Columns>
+											<DataGridTemplateColumn Header="Avatar" Width="Auto">
+												<DataGridTemplateColumn.CellTemplate>
+													<DataTemplate>
+														<Image Source="{Binding AvatarUrl}" Height="22" Width="22" />
+													</DataTemplate>
+												</DataGridTemplateColumn.CellTemplate>
+											</DataGridTemplateColumn>
 											<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}" x:Name="PlayerRankTeam1Column" Width="Auto" Header="Rank"
 														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 												<DataGridTemplateColumn.CellTemplate>
@@ -567,6 +574,13 @@
 											<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 										</DataGrid.Resources>
 										<DataGrid.Columns>
+											<DataGridTemplateColumn Header="Avatar" Width="Auto">
+												<DataGridTemplateColumn.CellTemplate>
+													<DataTemplate>
+														<Image Source="{Binding AvatarUrl}" Height="22" Width="22" />
+													</DataTemplate>
+												</DataGridTemplateColumn.CellTemplate>
+											</DataGridTemplateColumn>
 											<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}" x:Name="PlayerRankTeam2Column" Width="Auto" Header="Rank"
 														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 												<DataGridTemplateColumn.CellTemplate>

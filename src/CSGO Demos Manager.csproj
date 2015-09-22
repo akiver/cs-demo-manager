@@ -689,6 +689,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="De.TorstenMandelkow.MetroChart.dll" />
+    <Resource Include="resources\images\avatar.jpg" />
     <Resource Include="resources\images\icons\weapon.png" />
     <Resource Include="resources\images\ranks\elo03.png" />
     <Resource Include="resources\images\ranks\no_rank.png" />

@@ -1,7 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Models.Steam;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -92,6 +94,29 @@ namespace CSGO_Demos_Manager.Services
 			suspects.Add(suspect);
 
 			return Task.FromResult(suspects);
+		}
+
+		public Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users)
+		{
+			Random random = new Random();
+			return Task.FromResult(new List<PlayerSummary>
+			{
+				new PlayerSummary
+				{
+					SteamId = random.Next(151541578).ToString(),
+					Avatar = "../resources/images/avatar.jpg",
+					AvatarFull = "../resources/images/avatar.jpg",
+					AvatarMedium =  "../resources/images/avatar.jpg",
+					LastLogoff = 121545,
+					PersonaState = 1,
+					CommunityVisibilityState = 3,
+					PersonaName = "AkiVer",
+					ProfileState = 1,
+					RealName = "AkiVer",
+					ProfileUrl = "http://steamcommunity.com/id/AkiVer",
+					TimeCreated = 1442916551
+				}
+			});
 		}
 	}
 }
