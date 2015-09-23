@@ -533,7 +533,11 @@
 				<DataGridTextColumn x:Name="TotalKillsColumn" Width="Auto" Header="Kills" HeaderStyle="{StaticResource KillsHeader}" ElementStyle="{StaticResource TotalKillCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="AverageDamageByRoundColumn" Width="Auto" Header="ADR" HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" ElementStyle="{StaticResource AverageDamageByRoundCountDataGridTextColumnStyle}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="KillPerRoundColumn" Width="Auto" Header="KPR/DPR" HeaderStyle="{StaticResource KprDprHeader}" ElementStyle="{StaticResource KillPerRoundDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="AssistPerRoundColumn" Width="Auto" Header="APR" HeaderStyle="{StaticResource AssistPerRoundHeader}" ElementStyle="{StaticResource AssistPerRoundDataGridTextColumnStyle}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TotalDamageHealthColumn" Width="Auto" Header="TDH" HeaderStyle="{StaticResource TotalDamageHealthHeader}" ElementStyle="{StaticResource TotalDamageHealthCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TotalDamageArmorColumn" Width="Auto" Header="TDA" HeaderStyle="{StaticResource TotalDamageArmorHeader}" ElementStyle="{StaticResource TotalDamageArmorCountDataGridTextColumnStyle}"

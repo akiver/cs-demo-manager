@@ -263,6 +263,28 @@
 		</Style.Triggers>
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="KillPerRoundDataGridTextColumnStyle">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding KillPerRound}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding KillPerRoundSelectedAccountCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="AssistPerRoundDataGridTextColumnStyle">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding AssistPerRound}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding AssistPerRoundSelectedAccountCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<!-- TextBlock inside DataGridTextColumn for selected player round stats on DetailsView -->
 	<Style TargetType="TextBlock" x:Key="TotalKillRoundCountDataGridTextColumnStyle">
 		<Style.Triggers >

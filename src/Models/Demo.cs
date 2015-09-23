@@ -675,6 +675,36 @@ namespace CSGO_Demos_Manager.Models
 				return total;
 			}
 		}
+
+		/// <summary>
+		/// return the KPR ratio of the match
+		/// It's the DPR too as 1 kill = 1 death
+		/// </summary>
+		[JsonIgnore]
+		public double KillPerRound
+		{
+			get
+			{
+				if (!Players.Any()) return 0;
+				double total = Rounds.Aggregate<Round, double>(0, (current, round) => current + round.KillsCount);
+				total = Math.Round(total/Rounds.Count, 2);
+				if (Math.Abs(total) < 0.1) return total;
+				return total;
+			}
+		}
+
+		/// <summary>
+		/// return the APR ratio of the match
+		/// </summary>
+		[JsonIgnore]
+		public double AssistPerRound
+		{
+			get
+			{
+				if (!Players.Any()) return 0;
+				double total = Rounds.Aggregate<Round, double>(0, (current, round) => current + round.Kills.Count(k => k.Assister != null));
+				total = Math.Round(total / Rounds.Count, 2);
+				if (Math.Abs(total) < 0.1) return total;
 				return total;
 			}
 		}
@@ -982,6 +1012,39 @@ namespace CSGO_Demos_Manager.Models
 				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 				if (player == null) return 0;
 				return player.TeamKillCount;
+			}
+		}
+
+		[JsonIgnore]
+		public double KillPerRoundSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.KillPerRound;
+			}
+		}
+
+		[JsonIgnore]
+		public double AssistPerRoundSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.AssistPerRound;
+			}
+		}
+
+		[JsonIgnore]
+		public double DeathPerRoundSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.DeathPerRound;
 			}
 		}
 
