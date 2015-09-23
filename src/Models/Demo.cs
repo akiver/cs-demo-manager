@@ -667,14 +667,14 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
-				double total = 0;
-				foreach (Round round in Rounds.Where(round => round.PlayersHurted.Any()))
-				{
-					total = round.PlayersHurted.Aggregate(total, (current, playerHurtedEvent) =>
+				double total = Rounds.Where(round => round.PlayersHurted.Any()).SelectMany(
+					round => round.PlayersHurted).Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) => 
 					current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
-					if (Math.Abs(total) < 0.1) return total;
-					total = Math.Round(total / Rounds.Count, 1);
-				}
+				if (total < 0.1) return 0;
+				total = Math.Round(total / Rounds.Count, 1);
+				return total;
+			}
+		}
 				return total;
 			}
 		}
