@@ -10,6 +10,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 
 		public void SetCellValue(IRow row, int index, CellType cellType, dynamic value)
 		{
+			if (value == null) value = string.Empty;
 			if (value is string)
 			{
 				value = Convert.ChangeType(value, TypeCode.String);

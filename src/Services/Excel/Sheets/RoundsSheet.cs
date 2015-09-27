@@ -17,12 +17,18 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 			{ "Tick", CellType.Numeric},
 			{ "Winner Clan Name", CellType.String },
 			{ "Winner", CellType.String },
+			{ "Type", CellType.String },
+			{ "Side", CellType.String },
+			{ "Team", CellType.String },
 			{ "Kills", CellType.Numeric },
 			{ "1K", CellType.Numeric },
 			{ "2K", CellType.Numeric },
 			{ "3K", CellType.Numeric },
 			{ "4K", CellType.Numeric },
 			{ "5K", CellType.Numeric },
+			{ "ADP", CellType.Numeric },
+			{ "TDH", CellType.Numeric },
+			{ "TDA", CellType.Numeric },
 			{ "Bomb Exploded", CellType.Numeric },
 			{ "Bomb planted", CellType.Numeric },
 			{ "Bomb defused", CellType.Numeric },
@@ -74,12 +80,25 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerClanName);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerAsString);
+					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
+					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);
+					if (round.TeamTrouble != null)
+					{
+						SetCellValue(row, columnNumber++, CellType.String, round.TeamTrouble.Name);
+					}
+					else
+					{
+						SetCellValue(row, columnNumber++, CellType.String, string.Empty);
+					}
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Kills.Count());
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.TwoKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.ThreeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.FourKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.FiveKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.AverageDamageByPlayerCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.TotalDamageHealthCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.TotalDamageArmorCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.BombExplodedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.BombPlantedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.BombDefusedCount);
