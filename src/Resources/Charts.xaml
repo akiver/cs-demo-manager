@@ -94,6 +94,19 @@
 		</StackPanel>
 	</DataTemplate>
 
+	<DataTemplate x:Key="PieCountLabelTemplate">
+		<StackPanel Orientation="Vertical">
+			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+					   Text="{Binding DataItem.Label}"
+					   FontSize="18"
+					   TextAlignment="Center" />
+			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
+					   FontSize="18"
+					   TextAlignment="Center" />
+		</StackPanel>
+	</DataTemplate>
+
 	<DataTemplate x:Key="PieMatchWinStatsLabelTemplate">
 		<TextBlock Foreground="{StaticResource LightWhiteBrush}"
 					   Text="{Binding DataItem.Value}"

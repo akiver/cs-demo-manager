@@ -324,11 +324,11 @@
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 
-					<telerik:RadPieChart Grid.Row="0" Palette="{StaticResource MatchStatsChartPalette}" TooltipTemplate="{StaticResource TooltipPercentageChartTemplate}">
+					<telerik:RadPieChart Grid.Row="0" Palette="{StaticResource MatchStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
 						<telerik:RadPieChart.Series>
 							<telerik:PieSeries ItemsSource="{Binding DatasMatchStats}" ValueBinding="Value" ShowLabels="True" DefaultSliceStyle="{StaticResource PieSliceStyle}" RadiusFactor="0.65" >
 								<telerik:PieSeries.LabelDefinitions>
-									<telerik:ChartSeriesLabelDefinition Margin="-10" Template="{StaticResource PieStatsLabelTemplate}" />
+									<telerik:ChartSeriesLabelDefinition Margin="-10" Template="{StaticResource PieCountLabelTemplate}" />
 								</telerik:PieSeries.LabelDefinitions>
 								<telerik:PieSeries.LabelConnectorsSettings>
 									<telerik:ChartSeriesLabelConnectorsSettings Style="{StaticResource LabelConnectorStyle}" />
