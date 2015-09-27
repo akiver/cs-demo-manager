@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Services;
@@ -318,6 +319,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			DatasDamage = datas.Damage;
 			DatasHeadshot = datas.HeadshotRatio;
 			DatasKill = datas.Kill;
+			CommandManager.InvalidateRequerySuggested();
 		}
 
 		public AccountStatsProgressViewModel(IDemosService demoService)
