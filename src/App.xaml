@@ -3,8 +3,8 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 StartupUri="MainWindow.xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 d1P1:Ignorable="d"
-			 xmlns:d1P1="http://schemas.openxmlformats.org/markup-compatibility/2006">
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d">
 	<Application.Resources>
 		
 		<ResourceDictionary>
@@ -26,7 +26,7 @@
 				<ResourceDictionary Source="Resources/ComboBoxs.xaml" />
 				<ResourceDictionary Source="Resources/CheckBoxs.xaml" />
 				<ResourceDictionary Source="Resources/Images.xaml" />
-				<ResourceDictionary Source="Resources/Charts.xaml" />
+				<ResourceDictionary Source="Resources/Charts.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

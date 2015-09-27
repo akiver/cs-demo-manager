@@ -24,6 +24,15 @@
 	<SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}" />
 	<SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
 
+	<SolidColorBrush x:Key="Dust2ColorBrush" Color="{StaticResource Dust2Color}" />
+	<SolidColorBrush x:Key="InfernoColorBrush" Color="{StaticResource InfernoColor}" />
+	<SolidColorBrush x:Key="MirageColorBrush" Color="{StaticResource MirageColor}" />
+	<SolidColorBrush x:Key="CobblestoneColorBrush" Color="{StaticResource CobblestoneColor}" />
+	<SolidColorBrush x:Key="CacheColorBrush" Color="{StaticResource CacheColor}" />
+	<SolidColorBrush x:Key="OverpassColorBrush" Color="{StaticResource OverpassColor}" />
+	<SolidColorBrush x:Key="NukeColorBrush" Color="{StaticResource NukeColor}" />
+	<SolidColorBrush x:Key="TrainColorBrush" Color="{StaticResource TrainColor}" />
+
 	<!--Override MahApps-->
 	<SolidColorBrush x:Key="RightArrowFill" Color="{StaticResource LightGrey}" />
 </ResourceDictionary>

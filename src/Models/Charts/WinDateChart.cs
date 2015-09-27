@@ -2,9 +2,9 @@
 
 namespace CSGO_Demos_Manager.Models.Charts
 {
-	public class GenericDateChart
+	public class WinDateChart
 	{
-		public double Value { get; set; }
+		public double WinPercentage { get; set; }
 		public DateTime Date { get; set; }
 	}
 }

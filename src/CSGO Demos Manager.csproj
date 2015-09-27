@@ -64,10 +64,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Downloads\Compressed\advancedfx-master\AfxGui\Resources\AfxCppCli.dll</HintPath>
     </Reference>
-    <Reference Include="De.TorstenMandelkow.MetroChart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=d5b8d1bbc99c4a2a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>.\De.TorstenMandelkow.MetroChart.dll</HintPath>
-    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.2.0.37222, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.2.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -105,10 +101,6 @@
       <HintPath>..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Sparrow.Chart.Wpf.40, Version=13.1.0.118, Culture=neutral, PublicKeyToken=50f33fb8697e9a92, processorArchitecture=MSIL">
-      <HintPath>..\packages\Sparrow.Chart.Wpf.13.1.0.118\lib\net40\Sparrow.Chart.Wpf.40.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Net.Http" />
@@ -123,6 +115,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -144,6 +139,7 @@
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityInvertedConverter.cs" />
     <Compile Include="Converters\DoubleToStringConverter.cs" />
+    <Compile Include="Converters\DoubleToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToSourceConverter.cs" />
     <Compile Include="Converters\IntToBooleanConverter.cs" />
     <Compile Include="Converters\MapNameToImageConverter.cs" />
@@ -165,10 +161,15 @@
     <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Messages\SelectedPlayerChangedMessage.cs" />
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\Charts\GenericPieData.cs" />
+    <Compile Include="Models\Charts\DamageDateChart.cs" />
+    <Compile Include="Models\Charts\GenericDoubleChart.cs" />
+    <Compile Include="Models\Charts\HeadshotDateChart.cs" />
+    <Compile Include="Models\Charts\KillDateChart.cs" />
+    <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
+    <Compile Include="Models\Charts\WinDateChart.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
     <Compile Include="Models\Stats\MapStats.cs" />
-    <Compile Include="Models\Charts\GenericDateChart.cs" />
+    <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
     <Compile Include="Models\Demo.cs" />
@@ -689,7 +690,6 @@
     <Content Include="AfxHookSource.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="De.TorstenMandelkow.MetroChart.dll" />
     <Resource Include="resources\images\logo\popflash.png" />
     <Resource Include="resources\images\avatar.jpg" />
     <Resource Include="resources\images\icons\weapon.png" />

@@ -17,8 +17,8 @@
 		public int KillGalilarCount { get; set; } = 0;
 		public int DeathGalilarCount { get; set; } = 0;
 
-		public int KillSg556Count { get; set; } = 0;
-		public int DeathSg556Count { get; set; } = 0;
+		public int KillSg553Count { get; set; } = 0;
+		public int DeathSg553Count { get; set; } = 0;
 
 		public int KillFamasCount { get; set; } = 0;
 		public int DeathFamasCount { get; set; } = 0;

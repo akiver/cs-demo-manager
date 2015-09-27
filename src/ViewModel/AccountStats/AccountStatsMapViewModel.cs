@@ -33,23 +33,37 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private string _notificationMessage;
 
-		private List<GenericPieData> _dust2PieDatas;
+		private List<GenericDoubleChart> _dust2PieDatas;
 
-		private List<GenericPieData> _infernoPieDatas;
+		private List<GenericDoubleChart> _infernoPieDatas;
 
-		private List<GenericPieData> _miragePieDatas;
+		private List<GenericDoubleChart> _miragePieDatas;
 
-		private List<GenericPieData> _nukePieDatas;
+		private List<GenericDoubleChart> _nukePieDatas;
 
-		private List<GenericPieData> _cobblestonePieDatas;
+		private List<GenericDoubleChart> _cobblestonePieDatas;
 
-		private List<GenericPieData> _overpassPieDatas;
+		private List<GenericDoubleChart> _overpassPieDatas;
 
-		private List<GenericPieData> _cachePieDatas;
+		private List<GenericDoubleChart> _cachePieDatas;
 
-		private List<GenericPieData> _trainPieDatas;
+		private List<GenericDoubleChart> _trainPieDatas;
 
-		private List<GenericPieData> _mapPercentageDatas;
+		private List<GenericDoubleChart> _dust2PercentageDatas;
+
+		private List<GenericDoubleChart> _miragePercentageDatas;
+
+		private List<GenericDoubleChart> _infernoPercentageDatas;
+
+		private List<GenericDoubleChart> _nukePercentageDatas;
+
+		private List<GenericDoubleChart> _overpassPercentageDatas;
+
+		private List<GenericDoubleChart> _cobblestonePercentageDatas;
+
+		private List<GenericDoubleChart> _trainPercentageDatas;
+
+		private List<GenericDoubleChart> _cachePercentageDatas;
 
 		#endregion
 
@@ -67,58 +81,100 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
-		public List<GenericPieData> Dust2PieDatas
+		public List<GenericDoubleChart> Dust2PieDatas
 		{
 			get { return _dust2PieDatas; }
 			set { Set(() => Dust2PieDatas, ref _dust2PieDatas, value); }
 		}
 
-		public List<GenericPieData> InfernoPieDatas
+		public List<GenericDoubleChart> InfernoPieDatas
 		{
 			get { return _infernoPieDatas; }
 			set { Set(() => InfernoPieDatas, ref _infernoPieDatas, value); }
 		}
 
-		public List<GenericPieData> MiragePieDatas
+		public List<GenericDoubleChart> MiragePieDatas
 		{
 			get { return _miragePieDatas; }
 			set { Set(() => MiragePieDatas, ref _miragePieDatas, value); }
 		}
 
-		public List<GenericPieData> CobblestonePieDatas
+		public List<GenericDoubleChart> CobblestonePieDatas
 		{
 			get { return _cobblestonePieDatas; }
 			set { Set(() => CobblestonePieDatas, ref _cobblestonePieDatas, value); }
 		}
 
-		public List<GenericPieData> CachePieDatas
+		public List<GenericDoubleChart> CachePieDatas
 		{
 			get { return _cachePieDatas; }
 			set { Set(() => CachePieDatas, ref _cachePieDatas, value); }
 		}
 
-		public List<GenericPieData> TrainPieDatas
+		public List<GenericDoubleChart> TrainPieDatas
 		{
 			get { return _trainPieDatas; }
 			set { Set(() => TrainPieDatas, ref _trainPieDatas, value); }
 		}
 
-		public List<GenericPieData> NukePieDatas
+		public List<GenericDoubleChart> NukePieDatas
 		{
 			get { return _nukePieDatas; }
 			set { Set(() => NukePieDatas, ref _nukePieDatas, value); }
 		}
 
-		public List<GenericPieData> OverpassPieDatas
+		public List<GenericDoubleChart> OverpassPieDatas
 		{
 			get { return _overpassPieDatas; }
 			set { Set(() => OverpassPieDatas, ref _overpassPieDatas, value); }
 		}
 
-		public List<GenericPieData> MapPercentDatas
+		public List<GenericDoubleChart> Dust2PercentDatas
 		{
-			get { return _mapPercentageDatas; }
-			set { Set(() => MapPercentDatas, ref _mapPercentageDatas, value); }
+			get { return _dust2PercentageDatas; }
+			set { Set(() => Dust2PercentDatas, ref _dust2PercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> MiragePercentDatas
+		{
+			get { return _miragePercentageDatas; }
+			set { Set(() => MiragePercentDatas, ref _miragePercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> InfernoPercentDatas
+		{
+			get { return _infernoPercentageDatas; }
+			set { Set(() => InfernoPercentDatas, ref _infernoPercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> TrainPercentDatas
+		{
+			get { return _trainPercentageDatas; }
+			set { Set(() => TrainPercentDatas, ref _trainPercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> CachePercentDatas
+		{
+			get { return _cachePercentageDatas; }
+			set { Set(() => CachePercentDatas, ref _cachePercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> CobblestonePercentDatas
+		{
+			get { return _cobblestonePercentageDatas; }
+			set { Set(() => CobblestonePercentDatas, ref _cobblestonePercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> OverpassPercentDatas
+		{
+			get { return _overpassPercentageDatas; }
+			set { Set(() => OverpassPercentDatas, ref _overpassPercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> NukePercentDatas
+		{
+			get { return _nukePercentageDatas; }
+			set { Set(() => NukePercentDatas, ref _nukePercentageDatas, value); }
 		}
 
 		#endregion
@@ -247,200 +303,228 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		{
 			MapStats datas = await _demosService.GetMapStatsAsync();
 
-			Dust2PieDatas = new List<GenericPieData>
+			Dust2PieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.Dust2WinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.Dust2LossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.Dust2DrawCount
 				}
 			};
 
-			InfernoPieDatas = new List<GenericPieData>
+			InfernoPieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.InfernoWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.InfernoLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.InfernoDrawCount
 				}
 			};
 
-			MiragePieDatas = new List<GenericPieData>
+			MiragePieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.MirageWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.MirageLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.MirageDrawCount
 				}
 			};
 
-			NukePieDatas = new List<GenericPieData>
+			NukePieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.NukeWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.NukeLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.NukeDrawCount
 				}
 			};
 
-			TrainPieDatas = new List<GenericPieData>
+			TrainPieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.TrainWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.TrainLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.TrainDrawCount
 				}
 			};
 
-			OverpassPieDatas = new List<GenericPieData>
+			OverpassPieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.OverpassWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.OverpassLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.OverpassDrawCount
 				}
 			};
 
-			CachePieDatas = new List<GenericPieData>
+			CachePieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.CacheWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.CacheLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.CacheDrawCount
 				}
 			};
 
-			CobblestonePieDatas = new List<GenericPieData>
+			CobblestonePieDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.CobblestoneWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.CobblestoneLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.CobblestoneDrawCount
 				}
 			};
 
-			MapPercentDatas = new List<GenericPieData>
+			Dust2PercentDatas = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Dust2",
+					Label = "Dust2",
 					Value = (float) datas.Dust2WinPercentage
-				},
-				new GenericPieData
+				}
+			};
+
+			MiragePercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
 				{
-					Category = "Inferno",
-					Value = (float) datas.InfernoWinPercentage
-				},
-				new GenericPieData
-				{
-					Category = "Mirage",
+					Label = "Mirage",
 					Value = (float) datas.MirageWinPercentage
-				},
-				new GenericPieData
+				}
+			};
+
+			InfernoPercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
 				{
-					Category = "Cache",
-					Value = (float) datas.CacheWinPercentage
-				},
-				new GenericPieData
+					Label = "Inferno",
+					Value = (float) datas.InfernoWinPercentage
+				}
+			};
+
+			NukePercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
 				{
-					Category = "Overpass",
-					Value = (float) datas.OverpassWinPercentage
-				},
-				new GenericPieData
-				{
-					Category = "Cobblestone",
-					Value = (float) datas.CobblestoneWinPercentage
-				},
-				new GenericPieData
-				{
-					Category = "Train",
-					Value = (float) datas.TrainWinPercentage
-				},
-				new GenericPieData
-				{
-					Category = "Nuke",
+					Label = "Nuke",
 					Value = (float) datas.NukeWinPercentage
-				},
+				}
+			};
+
+			OverpassPercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
+				{
+					Label = "Overpass",
+					Value = (float) datas.OverpassWinPercentage
+				}
+			};
+
+			CobblestonePercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
+				{
+					Label = "Cobblestone",
+					Value = (float) datas.CobblestoneWinPercentage
+				}
+			};
+
+			CachePercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
+				{
+					Label = "Cache",
+					Value = (float) datas.CacheWinPercentage
+				}
+			};
+
+			TrainPercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
+				{
+					Label = "Train",
+					Value = (float) datas.TrainWinPercentage
+				}
 			};
 		}
 
@@ -468,7 +552,14 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			NukePieDatas = null;
 			OverpassPieDatas = null;
 			TrainPieDatas = null;
-			MapPercentDatas = null;
+			Dust2PercentDatas = null;
+			MiragePercentDatas = null;
+			InfernoPercentDatas = null;
+			NukePercentDatas = null;
+			OverpassPercentDatas = null;
+			CobblestonePercentDatas = null;
+			TrainPercentDatas = null;
+			CachePercentDatas = null;
 		}
 	}
 }

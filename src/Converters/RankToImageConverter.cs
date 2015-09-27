@@ -17,7 +17,7 @@ namespace CSGO_Demos_Manager.Converters
 			}
 			else
 			{
-				rankNumber = (int)value;
+				rankNumber = System.Convert.ToDouble(value);
 			}
 
 			if (rankNumber >= 1 && rankNumber < 2) return new Uri("/resources/images/ranks/elo01.png", UriKind.Relative);

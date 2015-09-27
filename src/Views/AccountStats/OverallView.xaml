@@ -6,8 +6,8 @@
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-			 xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding AccountStatsGeneral, Source={StaticResource Locator}}">
@@ -25,7 +25,7 @@
 					Gesture="CTRL+P" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
-	
+
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="Loaded">
 			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
@@ -135,7 +135,7 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
 				<Grid Grid.Row="0">
@@ -319,20 +319,42 @@
 				</Grid>
 
 				<Grid Grid.Row="2">
-					<metroChart:PieChart ChartTitle="Match Stats" ChartSubTitle="Number of win / loss / draw"
-										 FontSize="18" MinHeight="380" MinWidth="320"
-										 HorizontalAlignment="Left"
-										 Foreground="{StaticResource LightWhiteBrush}"
-										 Background="{StaticResource LightGreyBrush}"
-										 SelectedItem="{Binding Path=SelectedItem, Mode=TwoWay}"
-										 Palette="{StaticResource MatchStatsChartPalette}">
-						<metroChart:PieChart.Series>
-							<metroChart:ChartSeries ItemsSource="{Binding Path=DatasMatchStats}"
-													SeriesTitle="Match Stats"
-													DisplayMember="Category"
-													ValueMember="Value" />
-						</metroChart:PieChart.Series>
-					</metroChart:PieChart>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+
+					<telerik:RadPieChart Grid.Row="0" Palette="{StaticResource MatchStatsChartPalette}" TooltipTemplate="{StaticResource TooltipPercentageChartTemplate}">
+						<telerik:RadPieChart.Series>
+							<telerik:PieSeries ItemsSource="{Binding DatasMatchStats}" ValueBinding="Value" ShowLabels="True" DefaultSliceStyle="{StaticResource PieSliceStyle}" RadiusFactor="0.65" >
+								<telerik:PieSeries.LabelDefinitions>
+									<telerik:ChartSeriesLabelDefinition Margin="-10" Template="{StaticResource PieStatsLabelTemplate}" />
+								</telerik:PieSeries.LabelDefinitions>
+								<telerik:PieSeries.LabelConnectorsSettings>
+									<telerik:ChartSeriesLabelConnectorsSettings Style="{StaticResource LabelConnectorStyle}" />
+								</telerik:PieSeries.LabelConnectorsSettings>
+							</telerik:PieSeries>
+						</telerik:RadPieChart.Series>
+						<telerik:RadPieChart.Behaviors>
+							<telerik:ChartSelectionBehavior DataPointSelectionMode="Multiple" />
+							<telerik:ChartTooltipBehavior />
+						</telerik:RadPieChart.Behaviors>
+					</telerik:RadPieChart>
+
+					<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+						<telerik:RadLegend.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Orientation="Horizontal" />
+							</ItemsPanelTemplate>
+						</telerik:RadLegend.ItemsPanel>
+						<telerik:RadLegend.Items>
+							<telerik:LegendItemCollection>
+								<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Win"/>
+								<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Loss" />
+								<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}" Title="Draw" />
+							</telerik:LegendItemCollection>
+						</telerik:RadLegend.Items>
+					</telerik:RadLegend>
 				</Grid>
 			</Grid>
 		</ScrollViewer>

@@ -1,9 +1,8 @@
 ﻿namespace CSGO_Demos_Manager.Models.Charts
 {
-	public class GenericPieData
+	public class GenericDoubleChart
 	{
-		public string Category { get; set; }
-
+		public string Label { get; set; }
 		public float Value { get; set; }
 	}
 }

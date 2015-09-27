@@ -95,7 +95,7 @@
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="StatsTitleStyle">
-		<Setter Property="FontSize" Value="28" />
+		<Setter Property="FontSize" Value="24" />
 		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
 		<Setter Property="TextAlignment" Value="Center" />
 		<Setter Property="VerticalAlignment" Value="Center" />
@@ -417,6 +417,13 @@
 				<Setter Property="Text" Value="{Binding BombDefusedCount}" />
 			</DataTrigger>
 		</Style.Triggers>
+	</Style>
+	
+	<!-- Charts TextBlock -->
+	<Style TargetType="TextBlock" x:Key="MapTitleStatsStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}"/>
+		<Setter Property="FontSize" Value="22"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
 	</Style>
 
 </ResourceDictionary>

@@ -227,9 +227,9 @@ namespace CSGO_Demos_Manager.Services
 			return rank;
 		}
 
-		public async Task<List<GenericDateChart>> GetRankDateChartDataAsync()
+		public async Task<List<RankDateChart>> GetRankDateChartDataAsync()
 		{
-			List<GenericDateChart> datas = new List<GenericDateChart>();
+			List<RankDateChart> datas = new List<RankDateChart>();
 			List<Demo> demos = await _cacheService.GetDemoListAsync();
 
 			if (demos.Any())
@@ -244,11 +244,15 @@ namespace CSGO_Demos_Manager.Services
 						// Ignore demos where all players have no rank, sometimes CCSUsrMsg_ServerRankUpdate isn't raised
 						if (demo.Players.All(p => p.RankNumberOld != 0))
 						{
-							int rankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
-							datas.Add(new GenericDateChart
+							int newRankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
+							int oldRankNumber = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberOld;
+							int winCount = demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).WinCount;
+							datas.Add(new RankDateChart
 							{
 								Date = demo.Date,
-								Value = AppSettings.RankList.First(r => r.Number == rankNumber).Number
+								OldRank = oldRankNumber,
+								NewRank = newRankNumber,
+								WinCount = winCount
 							});
 						}
 					}
@@ -452,12 +456,12 @@ namespace CSGO_Demos_Manager.Services
 							demo.Kills.Count(
 								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Galil AR");
 
-						stats.KillSg556Count +=
+						stats.KillSg553Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG556");
-						stats.DeathSg556Count +=
+								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG 553");
+						stats.DeathSg553Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG556");
+								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG 553");
 
 						stats.KillFamasCount +=
 							demo.Kills.Count(
@@ -725,36 +729,37 @@ namespace CSGO_Demos_Manager.Services
 					// init the first date
 					int currentMonth = demosPlayerList[0].Date.Month;
 					DateTime initDate = new DateTime(demosPlayerList[0].Date.Year, demosPlayerList[0].Date.Month, 1);
-					stats.Win = new List<GenericDateChart>
+					stats.Win = new List<WinDateChart>
 					{
-						new GenericDateChart
+						new WinDateChart
 						{
 							Date = initDate,
-							Value = 0
+							WinPercentage = 0
 						}
 					};
-					stats.HeadshotRatio = new List<GenericDateChart>
+					stats.HeadshotRatio = new List<HeadshotDateChart>
 					{
-						new GenericDateChart
+						new HeadshotDateChart
 						{
 							Date = initDate,
-							Value = 0
+							HeadshotPercentage = 0
 						}
 					};
-					stats.Damage = new List<GenericDateChart>
+					stats.Damage = new List<DamageDateChart>
 					{
-						new GenericDateChart
+						new DamageDateChart
 						{
 							Date = initDate,
-							Value = 0
+							DamageCount = 0
 						}
 					};
-					stats.Kill = new List<GenericDateChart>
+					stats.Kill = new List<KillDateChart>
 					{
-						new GenericDateChart
+						new KillDateChart
 						{
 							Date = initDate,
-							Value = 0
+							KillAverage = 0,
+							DeathAverage = 0
 						}
 					};
 
@@ -762,6 +767,7 @@ namespace CSGO_Demos_Manager.Services
 					int winCount = 0;
 					int headshotCount = 0;
 					int killCount = 0;
+					int deathCount = 0;
 					int damageCount = 0;
 					foreach (Demo demo in demosPlayerList)
 					{
@@ -772,40 +778,45 @@ namespace CSGO_Demos_Manager.Services
 							winCount = 0;
 							headshotCount = 0;
 							killCount = 0;
+							deathCount = 0;
 							damageCount = 0;
+
 							DateTime newDate = new DateTime(demo.Date.Year, demo.Date.Month, 1);
 							// It's a new month, generate new stats for it
-							stats.Win.Add(new GenericDateChart
+							stats.Win.Add(new WinDateChart
 							{
 								Date = newDate,
-								Value = 0
+								WinPercentage = 0
 							});
-							stats.HeadshotRatio.Add(new GenericDateChart
+							stats.HeadshotRatio.Add(new HeadshotDateChart
 							{
 								Date = newDate,
-								Value = 0
+								HeadshotPercentage = 0
 							});
-							stats.Damage.Add(new GenericDateChart
+							stats.Damage.Add(new DamageDateChart
 							{
 								Date = newDate,
-								Value = 0
+								DamageCount = 0
 							});
-							stats.Kill.Add(new GenericDateChart
+							stats.Kill.Add(new KillDateChart
 							{
 								Date = newDate,
-								Value = 0
+								KillAverage = 0,
+								DeathAverage = 0
 							});
 						}
 
 						if (demo.MatchVerdictSelectedAccountCount == 1) winCount += demo.MatchVerdictSelectedAccountCount;
-						if (winCount > 0) stats.Win.Last().Value = Math.Round((winCount / (double)matchCount * 100), 2);
+						if (winCount > 0) stats.Win.Last().WinPercentage = Math.Round((winCount / (double)matchCount * 100), 2);
 						headshotCount += demo.HeadshotSelectedAccountCount;
 						killCount += demo.TotalKillSelectedAccountCount;
+						deathCount += demo.DeathSelectedAccountCount;
 						damageCount += demo.TotalDamageHealthSelectedAccountCount + demo.TotalDamageArmorSelectedAccountCount;
 
-						stats.HeadshotRatio.Last().Value = Math.Round((headshotCount / (double)killCount * 100), 2);
-						stats.Damage.Last().Value = (double)damageCount/matchCount;
-						stats.Kill.Last().Value = (double) killCount/matchCount;
+						stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
+						stats.Damage.Last().DamageCount = (double)damageCount/matchCount;
+						stats.Kill.Last().KillAverage = Math.Round((double)killCount/matchCount, 1);
+						stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
 						currentMonth = demo.Date.Month;
 					}
 				}

@@ -33,9 +33,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private string _notificationMessage;
 
-		private List<GenericPieData> _datasMatchStats;
-
-		private object _selectedItem;
+		private List<GenericDoubleChart> _datasMatchStats;
 
 		private int _matchCount;
 
@@ -77,16 +75,10 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		#region Accessors
 
-		public List<GenericPieData> DatasMatchStats
+		public List<GenericDoubleChart> DatasMatchStats
 		{
 			get { return _datasMatchStats; }
 			set { Set(() => DatasMatchStats, ref _datasMatchStats, value); }
-		}
-
-		public object SelectedItem
-		{
-			get { return _selectedItem; }
-			set { Set(() => SelectedItem, ref _selectedItem, value); }
 		}
 
 		public bool IsBusy
@@ -352,21 +344,21 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			BombPlantedCount = datas.BombPlantedCount;
 			MvpCount = datas.MvpCount;
 			DamageCount = datas.DamageCount;
-			DatasMatchStats = new List<GenericPieData>
+			DatasMatchStats = new List<GenericDoubleChart>
 			{
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Win",
+					Label = "Win",
 					Value = datas.MatchWinCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Loss",
+					Label = "Loss",
 					Value = datas.MatchLossCount
 				},
-				new GenericPieData
+				new GenericDoubleChart
 				{
-					Category = "Draw",
+					Label = "Draw",
 					Value = datas.MatchDrawCount
 				}
 			};
@@ -407,7 +399,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			MvpCount = 0;
 			MatchCount = 0;
 			ThreeKillCount = 0;
-			SelectedItem = null;
 		}
 	}
 }

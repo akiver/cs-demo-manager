@@ -3,12 +3,11 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-			 xmlns:sparrow="http://sparrowtoolkit.codeplex.com/wpf"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
-			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding AccountStatsRank, Source={StaticResource Locator}}">
@@ -26,12 +25,6 @@
 					Gesture="CTRL+P" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
-	
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<converters:RankToImageConverter  x:Key="RankToImageConverter" />
-		</ResourceDictionary>
-	</UserControl.Resources>
 
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="Loaded">
@@ -134,52 +127,30 @@
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Row="1" Style="{StaticResource SeriesLineGridStyle}">
-			<sparrow:SparrowChart Margin="20" Foreground="{StaticResource LightWhiteBrush}" Background="{StaticResource LightGreyBrush}">
-				<i:Interaction.Triggers>
-					<i:EventTrigger EventName="MouseWheel">
-						<command:EventToCommand Command="{Binding MouseWheelCommand}"
-														 PassEventArgsToCommand="True"/>
-					</i:EventTrigger>
-					<i:EventTrigger EventName="MouseDown">
-						<command:EventToCommand Command="{Binding MouseDownCommand}"
-														 PassEventArgsToCommand="True"/>
-					</i:EventTrigger>
-					<i:EventTrigger EventName="MouseUp">
-						<command:EventToCommand Command="{Binding MouseUpCommand}" />
-					</i:EventTrigger>
-					<i:EventTrigger EventName="MouseMove">
-						<command:EventToCommand Command="{Binding MouseMoveCommand}"
-														 PassEventArgsToCommand="True"/>
-					</i:EventTrigger>
-					<i:EventTrigger EventName="MouseLeave">
-						<command:EventToCommand Command="{Binding MouseLeaveCommand}"/>
-					</i:EventTrigger>
-				</i:Interaction.Triggers>
-
-				<sparrow:SparrowChart.XAxis>
-					<sparrow:DateTimeXAxis StringFormat="dd.MM.yy"
-										   Header="Date"
-										   LabelAngle="45"
-										   ZoomCoefficient="{Binding ZoomCoefficientX}"
-										   ZoomOffset="{Binding ZoomOffsetX}"
-										   CrossLineStyle="{StaticResource CrossLineStyle}"/>
-				</sparrow:SparrowChart.XAxis>
-				<sparrow:SparrowChart.YAxis>
-					<sparrow:LinearYAxis Interval="1" MinValue="0" MaxValue="18">
-						<sparrow:LinearYAxis.LabelTemplate>
-							<DataTemplate>
-								<Image Source="{Binding Converter={StaticResource RankToImageConverter}}" Height="30" />
-							</DataTemplate>
-						</sparrow:LinearYAxis.LabelTemplate>
-					</sparrow:LinearYAxis>
-				</sparrow:SparrowChart.YAxis>
-
-				<sparrow:SparrowChart.Series>
-					<sparrow:LineSeries Label="Rank" PointsSource="{Binding Datas}" XPath="Date" YPath="Value"
-										Stroke="{StaticResource LightWhiteBrush}" StrokeThickness="3" />
-				</sparrow:SparrowChart.Series>
-			</sparrow:SparrowChart>
+		<Grid Grid.Row="1">
+			<telerik:RadCartesianChart TooltipTemplate="{StaticResource RankToolTipTemplate}" ClipToBounds="False">
+				<telerik:RadCartesianChart.VerticalAxis>
+					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}" MajorStep="1" RangeExtendDirection="Both"/>
+				</telerik:RadCartesianChart.VerticalAxis>
+				<telerik:RadCartesianChart.HorizontalAxis>
+					<telerik:DateTimeCategoricalAxis LabelFormat="d" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" LabelInterval="5" />
+				</telerik:RadCartesianChart.HorizontalAxis>
+				<telerik:RadCartesianChart.Behaviors>
+					<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
+					<telerik:ChartTooltipBehavior />
+				</telerik:RadCartesianChart.Behaviors>
+				<telerik:LineSeries ItemsSource="{Binding Datas}" CategoryBinding="Date" ValueBinding="NewRank"
+									StrokeThickness="3" Stroke="{StaticResource LightGreenBrush}">
+					<telerik:LineSeries.PointTemplate>
+						<DataTemplate>
+							<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+						</DataTemplate>
+					</telerik:LineSeries.PointTemplate>
+				</telerik:LineSeries>
+				<telerik:RadCartesianChart.Grid>
+					<telerik:CartesianChartGrid MajorLinesVisibility="X" />
+				</telerik:RadCartesianChart.Grid>
+			</telerik:RadCartesianChart>
 		</Grid>
 	</Grid>
 </UserControl>

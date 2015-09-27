@@ -58,7 +58,7 @@ namespace CSGO_Demos_Manager.Services
 		/// Return Rank model evolution for the rank chart
 		/// </summary>
 		/// <returns></returns>
-		Task<List<GenericDateChart>> GetRankDateChartDataAsync();
+		Task<List<RankDateChart>> GetRankDateChartDataAsync();
 
 		/// <summary>
 		/// Return overall stats for the selected account

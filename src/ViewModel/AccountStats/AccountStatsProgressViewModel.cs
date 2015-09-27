@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Input;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Services;
@@ -22,17 +21,21 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private string _notificationMessage;
 
-		private double _zoomCoefficientX = 1.0;
+		private bool _isKillChartEnabled = true;
 
-		private double _zoomOffsetX;
+		private bool _isWinChartEnabled = true;
 
-		private List<GenericDateChart> _datasHeadshot;
+		private bool _isDamageChartEnabled = true;
 
-		private List<GenericDateChart> _datasDamage;
+		private bool _isHeadshotChartEnabled = true;
 
-		private List<GenericDateChart> _datasWin;
+		private List<HeadshotDateChart> _datasHeadshot;
 
-		private List<GenericDateChart> _datasKill;
+		private List<DamageDateChart> _datasDamage;
+
+		private List<WinDateChart> _datasWin;
+
+		private List<KillDateChart> _datasKill;
 
 		private RelayCommand _windowLoadedCommand;
 
@@ -46,19 +49,13 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand _goToRankCommand;
 
-		private RelayCommand<MouseWheelEventArgs> _mouseWheelCommand;
+		private RelayCommand<bool> _toggleWinChartCommand;
 
-		private RelayCommand<MouseEventArgs> _mouseDownCommand;
+		private RelayCommand<bool> _toggleKillChartCommand;
 
-		private RelayCommand _mouseUpCommand;
+		private RelayCommand<bool> _toggleDamageChartCommand;
 
-		private RelayCommand<MouseEventArgs> _mouseMoveCommand;
-
-		private RelayCommand _mouseLeaveCommand;
-
-		private bool _isMouseDown;
-
-		private int _xPosition;
+		private RelayCommand<bool> _toggleHeadshotChartCommand;
 
 		#endregion
 
@@ -76,46 +73,52 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
-		public List<GenericDateChart> DatasHeadshot
+		public bool IsKillChartEnabled
+		{
+			get { return _isKillChartEnabled; }
+			set { Set(() => IsKillChartEnabled, ref _isKillChartEnabled, value); }
+		}
+
+		public bool IsWinChartEnabled
+		{
+			get { return _isWinChartEnabled; }
+			set { Set(() => IsWinChartEnabled, ref _isWinChartEnabled, value); }
+		}
+
+		public bool IsDamageChartEnabled
+		{
+			get { return _isDamageChartEnabled; }
+			set { Set(() => IsDamageChartEnabled, ref _isDamageChartEnabled, value); }
+		}
+
+		public bool IsHeadshotChartEnabled
+		{
+			get { return _isHeadshotChartEnabled; }
+			set { Set(() => IsHeadshotChartEnabled, ref _isHeadshotChartEnabled, value); }
+		}
+
+		public List<HeadshotDateChart> DatasHeadshot
 		{
 			get { return _datasHeadshot; }
 			set { Set(() => DatasHeadshot, ref _datasHeadshot, value); }
 		}
 
-		public List<GenericDateChart> DatasWin
+		public List<WinDateChart> DatasWin
 		{
 			get { return _datasWin; }
 			set { Set(() => DatasWin, ref _datasWin, value); }
 		}
 
-		public List<GenericDateChart> DatasDamage
+		public List<DamageDateChart> DatasDamage
 		{
 			get { return _datasDamage; }
 			set { Set(() => DatasDamage, ref _datasDamage, value); }
 		}
 
-		public List<GenericDateChart> DatasKill
+		public List<KillDateChart> DatasKill
 		{
 			get { return _datasKill; }
 			set { Set(() => DatasKill, ref _datasKill, value); }
-		}
-
-		public double ZoomCoefficientX
-		{
-			get { return _zoomCoefficientX; }
-			set { Set(() => ZoomCoefficientX, ref _zoomCoefficientX, value); }
-		}
-
-		public double ZoomOffsetX
-		{
-			get { return _zoomOffsetX; }
-			set { Set(() => ZoomOffsetX, ref _zoomOffsetX, value); }
-		}
-
-		public bool IsMouseDown
-		{
-			get { return _isMouseDown; }
-			set { Set(() => IsMouseDown, ref _isMouseDown, value); }
 		}
 
 		#endregion
@@ -134,101 +137,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						NotificationMessage = "Loading...";
 						await LoadDatas();
 						IsBusy = false;
-					}));
-			}
-		}
-
-		public RelayCommand<MouseWheelEventArgs> MouseWheelCommand
-		{
-			get
-			{
-				return _mouseWheelCommand
-					?? (_mouseWheelCommand = new RelayCommand<MouseWheelEventArgs>(
-					e =>
-					{
-						// MOUSE UP
-						if (e.Delta > 0)
-						{
-							if (ZoomCoefficientX > 0) ZoomCoefficientX -= 0.1;
-							if (ZoomCoefficientX < 0) ZoomCoefficientX = 0;
-						}
-						else
-						{
-							// MOUSE DOWN
-							if (ZoomCoefficientX < 1) ZoomCoefficientX += 0.1;
-							if (ZoomCoefficientX > 1) ZoomCoefficientX = 1;
-						}
-					}));
-			}
-		}
-
-		public RelayCommand<MouseEventArgs> MouseDownCommand
-		{
-			get
-			{
-				return _mouseDownCommand
-					?? (_mouseDownCommand = new RelayCommand<MouseEventArgs>(
-					e =>
-					{
-						IsMouseDown = true;
-						// Save the position when use click on the chart
-						Point point = Mouse.GetPosition((IInputElement)e.Source);
-						_xPosition = (int)point.X;
-					}));
-			}
-		}
-
-		public RelayCommand MouseUpCommand
-		{
-			get
-			{
-				return _mouseUpCommand
-					?? (_mouseUpCommand = new RelayCommand(
-					() =>
-					{
-						IsMouseDown = false;
-					}));
-			}
-		}
-
-		public RelayCommand MouseLeaveCommand
-		{
-			get
-			{
-				return _mouseLeaveCommand
-					?? (_mouseLeaveCommand = new RelayCommand(
-					() =>
-					{
-						IsMouseDown = false;
-					}));
-			}
-		}
-
-		public RelayCommand<MouseEventArgs> MouseMoveCommand
-		{
-			get
-			{
-				return _mouseMoveCommand
-					?? (_mouseMoveCommand = new RelayCommand<MouseEventArgs>(
-					e =>
-					{
-						// Move chart only when the user maintains the click
-						if (IsMouseDown && ZoomCoefficientX < 1)
-						{
-							// Get the current position to compare with the previous one
-							Point point = Mouse.GetPosition((IInputElement)e.Source);
-							// Move to the right
-							if ((int)point.X > _xPosition)
-							{
-								if (ZoomOffsetX > 0) ZoomOffsetX -= 0.005;
-							}
-							else
-							{
-								// Move to the left
-								if (ZoomOffsetX < 1) ZoomOffsetX += 0.005;
-							}
-							_xPosition = (int)point.X;
-						}
 					}));
 			}
 		}
@@ -333,6 +241,74 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			}
 		}
 
+		/// <summary>
+		/// Command when the checkbox to toggle win chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleWinChartCommand
+		{
+			get
+			{
+				return _toggleWinChartCommand
+					?? (_toggleWinChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsWinChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle kills chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleKillChartCommand
+		{
+			get
+			{
+				return _toggleKillChartCommand
+					?? (_toggleKillChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsKillChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle damage chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleDamageChartCommand
+		{
+			get
+			{
+				return _toggleDamageChartCommand
+					?? (_toggleDamageChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsDamageChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle headshot chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleHeadshotChartCommand
+		{
+			get
+			{
+				return _toggleHeadshotChartCommand
+					?? (_toggleHeadshotChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsHeadshotChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
 		#endregion
 
 		private async Task LoadDatas()
@@ -364,9 +340,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			DatasKill = null;
 			DatasWin = null;
 			DatasHeadshot = null;
-			IsMouseDown = false;
-			ZoomCoefficientX = 1.0;
-			ZoomOffsetX = 0;
 		}
 	}
 }

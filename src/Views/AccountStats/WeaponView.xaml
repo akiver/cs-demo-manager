@@ -6,8 +6,8 @@
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-			 xmlns:metroChart="clr-namespace:De.TorstenMandelkow.MetroChart;assembly=De.TorstenMandelkow.MetroChart"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 mc:Ignorable="d" 
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding AccountStatsWeapon, Source={StaticResource Locator}}">
@@ -25,7 +25,7 @@
 					Gesture="CTRL+P" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
-	
+
 	<i:Interaction.Triggers>
 		<i:EventTrigger EventName="Loaded">
 			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
@@ -133,106 +133,620 @@
 
 			<TabControl controls:TabControlHelper.IsUnderlined="True">
 				<controls:MetroTabItem Header="Rifle">
-					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
-												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
-												   Foreground="{StaticResource LightWhiteBrush}"
-												   Background="{StaticResource LightGreyBrush}">
-						<metroChart:StackedColumnChart.Series>
-							<metroChart:ChartSeries SeriesTitle="AK-47" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasAk47}" />
-							<metroChart:ChartSeries SeriesTitle="M4A4" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasM4A4}" />
-							<metroChart:ChartSeries SeriesTitle="M4A1" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasM4A1}" />
-							<metroChart:ChartSeries SeriesTitle="AUG" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasAug}" />
-							<metroChart:ChartSeries SeriesTitle="Galil AR" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasGalilar}" />
-							<metroChart:ChartSeries SeriesTitle="SG556" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasSg556}" />
-							<metroChart:ChartSeries SeriesTitle="Famas" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasFamas}" />
-						</metroChart:StackedColumnChart.Series>
-					</metroChart:StackedColumnChart>
+
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<telerik:RadCartesianChart Grid.Row="0" Palette="{StaticResource WeaponStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:CategoricalAxis GapLength="0.5" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}" Minimum="0" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+							</telerik:RadCartesianChart.Grid>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:RadCartesianChart.Series>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="ak" ItemsSource="{Binding DatasAk47Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="ak" ItemsSource="{Binding DatasAk47Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="m4a4" ItemsSource="{Binding DatasM4A4Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="m4a4" ItemsSource="{Binding DatasM4A4Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="m4a1" ItemsSource="{Binding DatasM4A1Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="m4a1" ItemsSource="{Binding DatasM4A1Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="aug" ItemsSource="{Binding DatasAugKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="aug" ItemsSource="{Binding DatasAugDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="famas" ItemsSource="{Binding DatasFamasKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="famas" ItemsSource="{Binding DatasFamasDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="galilar" ItemsSource="{Binding DatasGalilarKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="galilar" ItemsSource="{Binding DatasGalilarDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="sg553" ItemsSource="{Binding DatasSg553Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="sg553" ItemsSource="{Binding DatasSg553Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+							</telerik:RadCartesianChart.Series>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Kills"/>
+									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Deaths" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+					</Grid>
 				</controls:MetroTabItem>
 
 				<controls:MetroTabItem Header="Sniper">
-					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"  FontStretch="Condensed"
-												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
-												   Foreground="{StaticResource LightWhiteBrush}"
-												   Background="{StaticResource LightGreyBrush}">
-						<metroChart:StackedColumnChart.Series>
-							<metroChart:ChartSeries SeriesTitle="AWP" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasAwp}" />
-							<metroChart:ChartSeries SeriesTitle="SSG08 (Scout)" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasScout}" />
-							<metroChart:ChartSeries SeriesTitle="SCAR-20" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasScar20}" />
-							<metroChart:ChartSeries SeriesTitle="G3SG1" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasG3Sg1}" />
-						</metroChart:StackedColumnChart.Series>
-					</metroChart:StackedColumnChart>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<telerik:RadCartesianChart Grid.Row="0" Palette="{StaticResource WeaponStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:CategoricalAxis GapLength="0.5" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}" Minimum="0" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+							</telerik:RadCartesianChart.Grid>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:RadCartesianChart.Series>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="awp" ItemsSource="{Binding DatasAwpKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="awp" ItemsSource="{Binding DatasAwpDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="scout" ItemsSource="{Binding DatasScoutKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="scout" ItemsSource="{Binding DatasScoutDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="scar20" ItemsSource="{Binding DatasScar20Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="scar20" ItemsSource="{Binding DatasScar20Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="g3sg1" ItemsSource="{Binding DatasG3Sg1Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="g3sg1" ItemsSource="{Binding DatasG3Sg1Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+							</telerik:RadCartesianChart.Series>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Kills"/>
+									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Deaths" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+					</Grid>
 				</controls:MetroTabItem>
 
 				<controls:MetroTabItem Header="SMG">
-					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
-												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
-												   Foreground="{StaticResource LightWhiteBrush}"
-												   Background="{StaticResource LightGreyBrush}">
-						<metroChart:StackedColumnChart.Series>
-							<metroChart:ChartSeries SeriesTitle="MP7" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMp7}" />
-							<metroChart:ChartSeries SeriesTitle="MP9" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMp9}" />
-							<metroChart:ChartSeries SeriesTitle="P90" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasP90}" />
-							<metroChart:ChartSeries SeriesTitle="MAC-10" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMac10}" />
-							<metroChart:ChartSeries SeriesTitle="PP-Bizon" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasBizon}" />
-							<metroChart:ChartSeries SeriesTitle="UMP-45" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasUmp45}" />
-						</metroChart:StackedColumnChart.Series>
-					</metroChart:StackedColumnChart>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<telerik:RadCartesianChart Grid.Row="0" Palette="{StaticResource WeaponStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:CategoricalAxis GapLength="0.5" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}" Minimum="0" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+							</telerik:RadCartesianChart.Grid>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:RadCartesianChart.Series>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mp7" ItemsSource="{Binding DatasMp7Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mp7" ItemsSource="{Binding DatasMp7Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mp9" ItemsSource="{Binding DatasMp9Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mp9" ItemsSource="{Binding DatasMp9Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="p90" ItemsSource="{Binding DatasP90Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="p90" ItemsSource="{Binding DatasP90Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="ump45" ItemsSource="{Binding DatasUmp45Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="ump45" ItemsSource="{Binding DatasUmp45Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="bizon" ItemsSource="{Binding DatasBizonKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="bizon" ItemsSource="{Binding DatasBizonDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mac10" ItemsSource="{Binding DatasMac10Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mac10" ItemsSource="{Binding DatasMac10Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+							</telerik:RadCartesianChart.Series>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Kills"/>
+									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Deaths" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+					</Grid>
 				</controls:MetroTabItem>
 
 				<controls:MetroTabItem Header="Heavy">
-					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
-												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
-												   Foreground="{StaticResource LightWhiteBrush}"
-												   Background="{StaticResource LightGreyBrush}">
-						<metroChart:StackedColumnChart.Series>
-							<metroChart:ChartSeries SeriesTitle="Nova" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasNova}" />
-							<metroChart:ChartSeries SeriesTitle="XM1014" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasXm1014}" />
-							<metroChart:ChartSeries SeriesTitle="MAG-7" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMag7}" />
-							<metroChart:ChartSeries SeriesTitle="Sawed-Off" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasSawedOff}" />
-							<metroChart:ChartSeries SeriesTitle="M249" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasM249}" />
-							<metroChart:ChartSeries SeriesTitle="Negev" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasNegev}" />
-						</metroChart:StackedColumnChart.Series>
-					</metroChart:StackedColumnChart>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<telerik:RadCartesianChart Grid.Row="0" Palette="{StaticResource WeaponStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:CategoricalAxis GapLength="0.5" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}" Minimum="0" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+							</telerik:RadCartesianChart.Grid>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:RadCartesianChart.Series>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="nova" ItemsSource="{Binding DatasNovaKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="nova" ItemsSource="{Binding DatasNovaDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="xm1014" ItemsSource="{Binding DatasXm1014Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="xm1014" ItemsSource="{Binding DatasXm1014Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mag7" ItemsSource="{Binding DatasMag7Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="mag7" ItemsSource="{Binding DatasMag7Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="sawed" ItemsSource="{Binding DatasSawedOffKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="sawed" ItemsSource="{Binding DatasSawedOffDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="m249" ItemsSource="{Binding DatasM249Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="m249" ItemsSource="{Binding DatasM249Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="negev" ItemsSource="{Binding DatasNegevKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="negev" ItemsSource="{Binding DatasNegevDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+							</telerik:RadCartesianChart.Series>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Kills"/>
+									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Deaths" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+					</Grid>
 				</controls:MetroTabItem>
 
 				<controls:MetroTabItem Header="Pistol">
-					<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18"
-												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
-												   Foreground="{StaticResource LightWhiteBrush}"
-												   Background="{StaticResource LightGreyBrush}">
-						<metroChart:StackedColumnChart.Series>
-							<metroChart:ChartSeries SeriesTitle="USP-S" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasUsp}" />
-							<metroChart:ChartSeries SeriesTitle="P2000" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasP2000}" />
-							<metroChart:ChartSeries SeriesTitle="Glock-18" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasGlock}" />
-							<metroChart:ChartSeries SeriesTitle="Tec-9" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasTec9}" />
-							<metroChart:ChartSeries SeriesTitle="CZ75 Auto" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasCz75}" />
-							<metroChart:ChartSeries SeriesTitle="P250" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasP250}" />
-							<metroChart:ChartSeries SeriesTitle="Deagle" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasDeagle}" />
-							<metroChart:ChartSeries SeriesTitle="Dual Barettas" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasDualElite}" />
-							<metroChart:ChartSeries SeriesTitle="Five-Seven" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasFiveSeven}" />
-						</metroChart:StackedColumnChart.Series>
-					</metroChart:StackedColumnChart>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<telerik:RadCartesianChart Grid.Row="0" Palette="{StaticResource WeaponStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:CategoricalAxis GapLength="0.5" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}" Minimum="0" LabelStyle="{StaticResource LabelChartStyle}" />
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+							</telerik:RadCartesianChart.Grid>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:RadCartesianChart.Series>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="glock" ItemsSource="{Binding DatasGlockKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="glock" ItemsSource="{Binding DatasGlockDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="usp" ItemsSource="{Binding DatasUspKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="usp" ItemsSource="{Binding DatasUspDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="p2000" ItemsSource="{Binding DatasP2000Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="p2000" ItemsSource="{Binding DatasP2000Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="p250" ItemsSource="{Binding DatasP250Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="p250" ItemsSource="{Binding DatasP250Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="cz75" ItemsSource="{Binding DatasCz75Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="cz75" ItemsSource="{Binding DatasCz75Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="deagle" ItemsSource="{Binding DatasDeagleKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="deagle" ItemsSource="{Binding DatasDeagleDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="five" ItemsSource="{Binding DatasFiveSevenKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="five" ItemsSource="{Binding DatasFiveSevenDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="dual" ItemsSource="{Binding DatasDualEliteKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="dual" ItemsSource="{Binding DatasDualEliteDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="tec" ItemsSource="{Binding DatasTec9Kill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack" StackGroupKey="tec" ItemsSource="{Binding DatasTec9Death}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+							</telerik:RadCartesianChart.Series>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Kills"/>
+									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Deaths" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+					</Grid>
 				</controls:MetroTabItem>
 
 				<controls:MetroTabItem Header="Equipment">
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto"/>
 						</Grid.ColumnDefinitions>
 
-						<metroChart:StackedColumnChart ChartTitleVisibility="Collapsed" FontSize="18" Grid.Column="0"
-												   Palette="{StaticResource MapPercentageWinStatsChartPalette}"
-												   Foreground="{StaticResource LightWhiteBrush}"
-												   Background="{StaticResource LightGreyBrush}">
-							<metroChart:StackedColumnChart.Series>
-								<metroChart:ChartSeries SeriesTitle="HE Grenade" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasHeGrenade}" />
-								<metroChart:ChartSeries SeriesTitle="Molotov" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasMolotov}" />
-								<metroChart:ChartSeries SeriesTitle="Incendiary" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasIncendiary}" />
-								<metroChart:ChartSeries SeriesTitle="Tazer" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasTazer}" />
-								<metroChart:ChartSeries SeriesTitle="Knife" DisplayMember="Category" ValueMember="Value" ItemsSource="{Binding DatasKnife}" />
-							</metroChart:StackedColumnChart.Series>
-						</metroChart:StackedColumnChart>
+						<Grid Grid.Column="0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+
+							<telerik:RadCartesianChart Grid.Row="0" Palette="{StaticResource WeaponStatsChartPalette}" TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+								<telerik:RadCartesianChart.HorizontalAxis>
+									<telerik:CategoricalAxis GapLength="0.5" LabelStyle="{StaticResource LabelChartStyle}" />
+								</telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:RadCartesianChart.VerticalAxis>
+									<telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}" Minimum="0" LabelStyle="{StaticResource LabelChartStyle}" />
+								</telerik:RadCartesianChart.VerticalAxis>
+								<telerik:RadCartesianChart.Grid>
+									<telerik:CartesianChartGrid MajorLinesVisibility="Y" />
+								</telerik:RadCartesianChart.Grid>
+								<telerik:RadCartesianChart.Behaviors>
+									<telerik:ChartTooltipBehavior />
+								</telerik:RadCartesianChart.Behaviors>
+								<telerik:RadCartesianChart.Series>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="he" ItemsSource="{Binding DatasHeGrenadeKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="he" ItemsSource="{Binding DatasHeGrenadeDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="molotov" ItemsSource="{Binding DatasMolotovKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="molotov" ItemsSource="{Binding DatasMolotovDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="incendiary" ItemsSource="{Binding DatasIncendiaryKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}"/>
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="incendiary" ItemsSource="{Binding DatasIncendiaryDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="tazer" ItemsSource="{Binding DatasTazerKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}"/>
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="tazer" ItemsSource="{Binding DatasTazerDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="knife" ItemsSource="{Binding DatasKnifeKill}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+									<telerik:BarSeries CombineMode="Stack" StackGroupKey="knife" ItemsSource="{Binding DatasKnifeDeath}" CategoryBinding="Category" ValueBinding="Value" ShowLabels="True">
+										<telerik:BarSeries.LabelDefinitions>
+											<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+										</telerik:BarSeries.LabelDefinitions>
+									</telerik:BarSeries>
+								</telerik:RadCartesianChart.Series>
+							</telerik:RadCartesianChart>
+
+							<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+								<telerik:RadLegend.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Horizontal" />
+									</ItemsPanelTemplate>
+								</telerik:RadLegend.ItemsPanel>
+								<telerik:RadLegend.Items>
+									<telerik:LegendItemCollection>
+										<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Kills"/>
+										<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Deaths" />
+									</telerik:LegendItemCollection>
+								</telerik:RadLegend.Items>
+							</telerik:RadLegend>
+						</Grid>
 
 						<Grid Grid.Column="1">
 							<Grid.RowDefinitions>
@@ -317,10 +831,7 @@
 						</Grid>
 					</Grid>
 				</controls:MetroTabItem>
-
 			</TabControl>
-
 		</Grid>
-
 	</Grid>
 </UserControl>
