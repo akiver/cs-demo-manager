@@ -380,9 +380,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _analyzeDemosCommand
 					?? (_analyzeDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
-					demos =>
+					async demos =>
 					{
-						RefreshSelectedDemos();
+						await RefreshSelectedDemos();
+						Messenger.Default.Send(new SelectedAccountChangedMessage());
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
@@ -1157,7 +1158,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		private async void RefreshSelectedDemos()
+		private async Task RefreshSelectedDemos()
 		{
 			IsBusy = true;
 			HasNotification = true;
