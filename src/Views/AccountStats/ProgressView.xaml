@@ -146,23 +146,17 @@
 
 						<Grid Grid.Row="0">
 							<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-								<TextBlock Text="Graph : " Style="{StaticResource CurrentFolderStyle}"/>
-								<CheckBox x:Name="CheckBoxShowWinChart" Content="Win"
+								<CheckBox x:Name="CheckBoxShowWinChart" Content="Win %"
 						  IsChecked="{Binding IsWinChartEnabled}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ToggleWinChartCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowWinChart}"/>
-								<CheckBox x:Name="CheckBoxShowKillChart" Content="Kill"
-						  IsChecked="{Binding IsKillChartEnabled}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ToggleKillChartCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowKillChart}"/>
-								<CheckBox x:Name="CheckBoxShowDamageChart" Content="Damage"
+								<CheckBox x:Name="CheckBoxShowDamageChart" Content="Damage value"
 						  IsChecked="{Binding IsDamageChartEnabled}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ToggleDamageChartCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowDamageChart}"/>
-								<CheckBox x:Name="CheckBoxShowHeadshotChart" Content="Headshot"
+								<CheckBox x:Name="CheckBoxShowHeadshotChart" Content="Headshot %"
 						  IsChecked="{Binding IsHeadshotChartEnabled}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ToggleHeadshotChartCommand}"

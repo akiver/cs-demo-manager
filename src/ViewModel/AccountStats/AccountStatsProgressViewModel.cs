@@ -22,8 +22,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private string _notificationMessage;
 
-		private bool _isKillChartEnabled = true;
-
 		private bool _isWinChartEnabled = true;
 
 		private bool _isDamageChartEnabled = true;
@@ -52,8 +50,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private RelayCommand<bool> _toggleWinChartCommand;
 
-		private RelayCommand<bool> _toggleKillChartCommand;
-
 		private RelayCommand<bool> _toggleDamageChartCommand;
 
 		private RelayCommand<bool> _toggleHeadshotChartCommand;
@@ -72,12 +68,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		{
 			get { return _notificationMessage; }
 			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
-
-		public bool IsKillChartEnabled
-		{
-			get { return _isKillChartEnabled; }
-			set { Set(() => IsKillChartEnabled, ref _isKillChartEnabled, value); }
 		}
 
 		public bool IsWinChartEnabled
@@ -254,23 +244,6 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						isChecked =>
 						{
 							IsWinChartEnabled = isChecked;
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle kills chart is clicked
-		/// </summary>
-		public RelayCommand<bool> ToggleKillChartCommand
-		{
-			get
-			{
-				return _toggleKillChartCommand
-					?? (_toggleKillChartCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsKillChartEnabled = isChecked;
 						},
 						isChecked => !IsBusy));
 			}
