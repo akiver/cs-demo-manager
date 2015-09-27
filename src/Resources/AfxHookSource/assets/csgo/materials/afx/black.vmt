@@ -1,6 +1,6 @@
 "UnlitGeneric"
 {
-	"$color" "[0 1 0]"
+	"$color" "[0 0 0]"
 	"$nofog" "1"
 	"$LINEARWRITE" "1"
 }

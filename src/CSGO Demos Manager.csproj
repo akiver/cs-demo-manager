@@ -227,6 +227,7 @@
     <None Include="AfxHook.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\black.vmt" />
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\depth.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -236,6 +237,7 @@
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\invisible.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\white.vmt" />
     <None Include="resources\AfxHookSource\shaders\afx_line_ps20.fxo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
