@@ -99,7 +99,10 @@ namespace CSGO_Demos_Manager.ViewModel
 						// Check for 1st launch or upgrade that required cache clear
 						if (_cacheService.ContainsDemos())
 						{
-							if (!string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion) && new Version(Properties.Settings.Default.ApplicationVersion).CompareTo(AppSettings.APP_VERSION) < 0 && AppSettings.REQUIRE_CLEAR_CACHE)
+							if ((string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion) && AppSettings.REQUIRE_CLEAR_CACHE)
+								|| (!string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
+								&& new Version(Properties.Settings.Default.ApplicationVersion).CompareTo(AppSettings.APP_VERSION) < 0
+								&& AppSettings.REQUIRE_CLEAR_CACHE))
 							{
 								var saveCustomData = await _dialogService.ShowMessageAsync("This update required to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
 								if (saveCustomData == MessageDialogResult.Affirmative)
