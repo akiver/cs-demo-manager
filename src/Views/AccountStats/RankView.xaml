@@ -133,7 +133,7 @@
 					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}" MajorStep="1" RangeExtendDirection="Both"/>
 				</telerik:RadCartesianChart.VerticalAxis>
 				<telerik:RadCartesianChart.HorizontalAxis>
-					<telerik:DateTimeCategoricalAxis LabelFormat="d" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" LabelInterval="5" />
+					<telerik:DateTimeCategoricalAxis LabelFormat="d" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" />
 				</telerik:RadCartesianChart.HorizontalAxis>
 				<telerik:RadCartesianChart.Behaviors>
 					<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
