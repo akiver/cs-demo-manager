@@ -214,6 +214,7 @@ namespace CSGO_Demos_Manager.Services
 		public async Task<List<string>> GetSuspectsListFromCache()
 		{
 			string pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_FILENAME;
+			if (!File.Exists(pathSuspectsFileJson)) return new List<string>();
 			string json = File.ReadAllText(pathSuspectsFileJson);
 			List<string> ids = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
 			if (ids == null) ids = new List<string>();
