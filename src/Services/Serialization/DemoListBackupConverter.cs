@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using CSGO_Demos_Manager.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -11,6 +12,9 @@ namespace CSGO_Demos_Manager.Services.Serialization
 	/// </summary>
 	public class DemoListBackupConverter: JsonConverter
 	{
+		private readonly Regex _oldDemoIdPattern = new Regex("^(?<mapName>.*?)(?<identifier>([0-9]*))$");
+
+
 		public override bool CanConvert(Type objectType)
 		{
 			return objectType.IsGenericType;
@@ -23,6 +27,12 @@ namespace CSGO_Demos_Manager.Services.Serialization
 			foreach (Demo demo in (List<Demo>)value)
 			{
 				writer.WriteStartObject();
+				Match matchId = _oldDemoIdPattern.Match(demo.Id);
+				if (matchId.Success)
+				{
+					// Add a "_" for new id formatting
+					demo.Id = matchId.Groups["mapName"] + "_" + matchId.Groups["identifier"];
+				}
 				writer.WritePropertyName("Id");
 				writer.WriteValue(demo.Id);
 				writer.WritePropertyName("Comment");
