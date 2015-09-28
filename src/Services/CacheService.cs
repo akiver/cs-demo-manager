@@ -369,12 +369,15 @@ namespace CSGO_Demos_Manager.Services
 			string[] fileList = Directory.GetFiles(_pathFolderCache);
 			foreach (string file in fileList)
 			{
-				Match match = _demoFilePattern.Match(file);
-				if (match.Success)
+				if (file != null)
 				{
-					string json = File.ReadAllText(file);
-					Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, new DemoBackupConverter()));
-					if (demo != null) demos.Add(demo);
+					Match match = _demoFilePattern.Match(Path.GetFileName(file));
+					if (match.Success)
+					{
+						string json = File.ReadAllText(file);
+						Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, new DemoBackupConverter()));
+						if (demo != null) demos.Add(demo);
+					}
 				}
 			}
 
