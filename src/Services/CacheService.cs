@@ -42,7 +42,7 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		private const string FOLDERS_FILENAME = "folders.json";
 
-		private readonly Regex _demoFilePattern = new Regex("^(.*?)([_])([0-9]*)([0-9]*)(.json)$");
+		private readonly Regex _demoFilePattern = new Regex("^(.*?)(_|[0-9]+)(.json)$");
 
 #endregion
 
