@@ -14,7 +14,7 @@ You can download the last release from http://csgo-demos-manager.com.
 - Watch rounds from an animated map overview
 - Display damages by hitbox
 - Watch stats on graphs
-- [HLAE](https://github.com/ripieces/advancedfx/wiki/Half-Life-Advanced-Effects)integration
+- [HLAE](https://github.com/ripieces/advancedfx/wiki/Half-Life-Advanced-Effects) integration
 
 ## Dependencies ##
 
