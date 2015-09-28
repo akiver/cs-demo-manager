@@ -3,6 +3,10 @@
 CSGO Demos Manager is an application to manage replays from the game Counter-Strike: Global Offensive.
 You can download the last release from http://csgo-demos-manager.com.
 
+## Preview ##
+
+Screenshots and video are available at [http://csgo-demos-manager.com](http://csgo-demos-manager.com).
+
 ## Features ##
 - Generate data from demos (kills, deaths, round stats, damages...)
 - Watch quickly demos (Highlights / Lowlights)
