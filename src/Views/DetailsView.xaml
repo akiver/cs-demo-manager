@@ -54,19 +54,30 @@
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
 		<!-- ActionBar-->
 		<Grid Grid.Row="0" Margin="5">
-			<StackPanel Orientation="Horizontal">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
+				</Grid.ColumnDefinitions>
 
-				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Back (CTRL+B)"
-					Width="70"
-					Height="30"
-					Command="{Binding BackToHomeCommand}">
+				<Button Grid.Column="0" Margin="5" Width="70" Height="30"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Back (CTRL+B)" 
+						Command="{Binding BackToHomeCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -77,12 +88,10 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding HeatmapCommand}"
-					CommandParameter="{Binding CurrentDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Heatmap generator (CTRL+H)"
-					Width="90"
-					Height="30">
+				<Button Grid.Column="1" Margin="5" Width="90" Height="30"
+						Command="{Binding HeatmapCommand}" CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Heatmap generator (CTRL+H)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -93,13 +102,10 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding OverviewCommand}"
-					CommandParameter="{Binding CurrentDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Overview (CTRL+O)"
-					Margin="5 0 0 0"
-					Width="90"
-					Height="30">
+				<Button Grid.Column="2" Margin="5" Width="90" Height="30"
+						Command="{Binding OverviewCommand}" CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Overview (CTRL+O)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -110,13 +116,10 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding GoToKillsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Kills details (CTRL+K)"
-					Margin="5 0 0 0"
-					Width="80"
-					Height="30">
+				<Button Grid.Column="3" Margin="5" Width="80" Height="30"
+						Command="{Binding GoToKillsCommand}" CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Kills details (CTRL+K)">
 					<StackPanel Orientation="Horizontal">
 						<Rectangle Width="25" Height="15">
 							<Rectangle.Fill>
@@ -127,13 +130,11 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding GoToDemoDamagesCommand}"
-					CommandParameter="{Binding CurrentDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Damages (CTRL+D)"
-					Margin="5 0 0 0"
-					Width="90"
-					Height="30">
+				<Button Grid.Column="4" Margin="5" Width="90" Height="30"
+						Command="{Binding GoToDemoDamagesCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Damages (CTRL+D)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -144,13 +145,11 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding AnalyzeDemoCommand}"
-					CommandParameter="{Binding CurrentDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Analyze (CTRL+S)"
-					Margin="5 0 0 0"
-					Width="90"
-					Height="30">
+				<Button Grid.Column="5" Margin="5" Width="90" Height="30"
+						Command="{Binding AnalyzeDemoCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Analyze (CTRL+S)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="25" Height="15">
 							<Rectangle.Fill>
@@ -161,13 +160,11 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding Home.WatchDemoCommand, Source={StaticResource Locator}}"
-					CommandParameter="{Binding CurrentDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Watch Demo (CTRL+W)"
-					Margin="5 0 0 0"
-					Width="110"
-					Height="30">
+				<Button Grid.Column="6" Margin="5" Width="110" Height="30"
+						Command="{Binding Home.WatchDemoCommand, Source={StaticResource Locator}}"
+						CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Watch Demo (CTRL+W)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -178,13 +175,11 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding Details.WatchRoundCommand, Source={StaticResource Locator}}"
-					CommandParameter="{Binding CurrentRound}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Watch round"
-					Margin="5 0 0 0"
-					Width="110"
-					Height="30">
+				<Button Grid.Column="7" Margin="5" Width="110" Height="30"
+						Command="{Binding Details.WatchRoundCommand, Source={StaticResource Locator}}"
+						CommandParameter="{Binding CurrentRound}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Watch round">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -195,12 +190,10 @@
 					</StackPanel>
 				</Button>
 
-				<Button Command="{Binding ExportDemoToExcelCommand}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Export as XLS (CTRL+X)"
-					Margin="5 0 0 0"
-					Width="110"
-					Height="30">
+				<Button Grid.Column="8" Margin="5" Width="110" Height="30"
+						Command="{Binding ExportDemoToExcelCommand}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Export as XLS (CTRL+X)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
 							<Rectangle.Fill>
@@ -211,7 +204,7 @@
 					</StackPanel>
 				</Button>
 
-				<Grid>
+				<Grid Grid.Column="9">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -231,21 +224,19 @@
 						  Command="{Binding ShowAllPlayersCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllPlayers}"/>
 				</Grid>
+			</Grid>
+		</Grid>
 
-				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-					<controls:ProgressRing 
-						IsActive="{Binding IsAnalyzing}"
-						Foreground="{DynamicResource AccentColorBrush}"
-						Width="40" Height="40" />
-					<TextBlock Text="{Binding NotificationMessage}"
-							   Style="{StaticResource LabelGeneralInfoDemo}"
-							   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				</StackPanel>
+		<Grid Grid.Row="1" Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+				<controls:ProgressRing IsActive="{Binding IsAnalyzing}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
+				<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			</StackPanel>
 		</Grid>
 
 		<!--Details-->
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="2">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />

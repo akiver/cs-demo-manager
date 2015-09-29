@@ -636,6 +636,9 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				var demo = _demosService.AnalyzeDemo(new Demo());
 				CurrentDemo = demo.Result;
+				IsAnalyzing = true;
+				HasNotification = true;
+				NotificationMessage = "Loading...";
 			}
 
 			Messenger.Default.Register<SelectedPlayerChangedMessage>(this, HandleSelectedPlayerChangedMessage);
