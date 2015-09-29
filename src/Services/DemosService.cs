@@ -45,7 +45,7 @@ namespace CSGO_Demos_Manager.Services
 					PlayerExtended cheater = demo.Players.FirstOrDefault(p => p.SteamId.ToString() == suspect.SteamId);
 					if (cheater != null)
 					{
-						if (suspect.CommunityBanned)
+						if (suspect.GameBanCount > 0)
 						{
 							demo.HasCheater = true;
 							cheater.IsOverwatchBanned = true;
