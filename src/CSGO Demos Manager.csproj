@@ -692,6 +692,12 @@
     <Content Include="AfxHookSource.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="msvcp100.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcr100.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Resource Include="resources\images\logo\popflash.png" />
     <Resource Include="resources\images\avatar.jpg" />
     <Resource Include="resources\images\icons\weapon.png" />
