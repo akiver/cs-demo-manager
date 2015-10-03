@@ -38,8 +38,7 @@ namespace DemoInfo.DP.Handler
 				if (prop.Flags.HasFlagFast(SendPropertyFlags.Unsigned)) {
 					return (int)reader.ReadVarInt();
 				} else {
-					Trace.WriteLine("signed varints are not implemented. BAAAAAAD.", "PropDecoder:DecodeInt()");
-					return (int)reader.ReadVarInt();
+					return (int)reader.ReadSignedVarInt();
 				}
 			} else {
 				if (prop.Flags.HasFlagFast(SendPropertyFlags.Unsigned)) {

@@ -129,6 +129,12 @@ namespace DemoInfo
 			return result;
 		}
 
+		public static uint ReadSignedVarInt(this IBitStream bs)
+		{
+			uint result = bs.ReadVarInt();
+			return (uint)((result >> 1) ^ -(result & 1));
+		}
+
 		public static int ReadProtobufVarIntStub(IBitStream reader)
 		{
 			byte b = 0x80;
