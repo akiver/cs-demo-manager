@@ -131,35 +131,39 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{
-				PlayerExtended pl = new PlayerExtended
+				// don't add bot
+				if (player.SteamID != 0)
 				{
-					SteamId = player.SteamID,
-					Name = player.Name,
-					Team = player.Team
-				};
-				if (!Demo.Players.Contains(pl))
-				{
-					Application.Current.Dispatcher.Invoke(delegate
+					PlayerExtended pl = new PlayerExtended
 					{
-						Demo.Players.Add(pl);
-						if (pl.Team == Team.CounterTerrorist && !Demo.PlayersTeam1.Contains(pl))
+						SteamId = player.SteamID,
+						Name = player.Name,
+						Team = player.Team
+					};
+					if (!Demo.Players.Contains(pl))
+					{
+						Application.Current.Dispatcher.Invoke(delegate
 						{
-							Demo.PlayersTeam1.Add(pl);
-							if (!team1.Players.Contains(pl))
+							Demo.Players.Add(pl);
+							if (pl.Team == Team.CounterTerrorist && !Demo.PlayersTeam1.Contains(pl))
 							{
-								team1.Players.Add(pl);
+								Demo.PlayersTeam1.Add(pl);
+								if (!team1.Players.Contains(pl))
+								{
+									team1.Players.Add(pl);
+								}
 							}
-						}
 
-						if (pl.Team == Team.Terrorist && !Demo.PlayersTeam2.Contains(pl))
-						{
-							Demo.PlayersTeam2.Add(pl);
-							if (!team2.Players.Contains(pl))
+							if (pl.Team == Team.Terrorist && !Demo.PlayersTeam2.Contains(pl))
 							{
-								team2.Players.Add(pl);
+								Demo.PlayersTeam2.Add(pl);
+								if (!team2.Players.Contains(pl))
+								{
+									team2.Players.Add(pl);
+								}
 							}
-						}
-					});
+						});
+					}
 				}
 			}
 
@@ -176,6 +180,36 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
 			if (!IsMatchStarted) return;
+			// Check players count to prevent missing players who was connected after the match started event
+			if (Demo.Players.Count < 10)
+			{
+				// Add all players to our ObservableCollection of PlayerExtended
+				foreach (Player player in Parser.PlayingParticipants)
+				{
+					// don't add bot and already known players
+					if (player.SteamID != 0 && Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID) == null)
+					{
+						PlayerExtended pl = new PlayerExtended
+						{
+							SteamId = player.SteamID,
+							Name = player.Name,
+							Team = player.Team
+						};
+						Application.Current.Dispatcher.Invoke(delegate
+						{
+							Demo.Players.Add(pl);
+							if (pl.Team == Team.CounterTerrorist)
+							{
+								Demo.PlayersTeam1.Add(pl);
+							}
+							else
+							{
+								Demo.PlayersTeam2.Add(pl);
+							}
+						});
+					}
+				}
+			}
 			CreateNewRound();
 		}
 
