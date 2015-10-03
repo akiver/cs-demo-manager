@@ -395,8 +395,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!IsFirstShotOccured)
 			{
 				IsFirstShotOccured = true;
-				CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-				CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+				if (IsHalfMatch)
+				{
+					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+				}
+				else
+				{
+					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+				}
 
 				// Not 100% accurate maybe improved it with current equipement...
 				if (CurrentRound.StartMoneyTeam1 == 4000 && CurrentRound.StartMoneyTeam2 == 4000)
@@ -989,8 +997,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 			else
 			{
-				CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.Money);
-				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
+				if (IsHalfMatch)
+				{
+					CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.Money);
+					CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
+				}
+				else
+				{
+					CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
+					CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.Money);
+				}
 			}
 
 			IsEntryKillDone = false;
