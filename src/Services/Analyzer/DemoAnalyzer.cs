@@ -147,9 +147,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				using (FileStream file = File.OpenRead(infoFilePath))
 				{
-					CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
-					DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-					demo.Date = unixTime.AddSeconds(infoMsg.matchtime);
+					try
+					{
+						CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
+						DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
+						demo.Date = unixTime.AddSeconds(infoMsg.matchtime);
+					}
+					catch (Exception)
+					{
+						// silently ignore old .info files
+						// Maybe add the old message to handle it?
+					}
 				}
 			}
 
