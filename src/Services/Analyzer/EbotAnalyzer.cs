@@ -166,6 +166,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}
 				
 				int scoreTotal = score1 + score2;
+				if (scoreTotal == 15) IsSwapTeamRequired = true;
 				// End of the match may have an overtime, init the 1st one
 				if (scoreTotal == 30)
 				{
@@ -219,6 +220,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					IsMatchStarted = true;
 					IsHalfMatch = !Demo.Overtimes.Any();
+					IsSwapTeamRequired = true;
 				}
 			}
 		}

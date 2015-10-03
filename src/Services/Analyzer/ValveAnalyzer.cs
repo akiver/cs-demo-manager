@@ -245,7 +245,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Application.Current.Dispatcher.Invoke(delegate
 				{
 					UpdateKillsCount();
-					SwapTeams();
+					IsSwapTeamRequired = true;
 					Demo.Rounds.Add(CurrentRound);
 				});
 			}

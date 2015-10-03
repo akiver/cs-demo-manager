@@ -186,10 +186,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// End of a half
 			if (IsLastRoundHalf)
 			{
-				IsLastRoundHalf = false;
 				IsHalfMatch = !IsHalfMatch;
 				IsMatchStarted = false;
-				SwapTeams();
 			}
 
 			// Last round of the match ended, may have OT
@@ -218,6 +216,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					Number = ++OvertimeCount
 				};
+			}
+
+			if (IsLastRoundHalf)
+			{
+				IsSwapTeamRequired = true;
+				IsLastRoundHalf = false;
 			}
 		}
 

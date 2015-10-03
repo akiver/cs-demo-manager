@@ -31,6 +31,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		public bool IsHalfMatch { get; set; } = false;
 		public bool IsOvertime { get; set; } = false;
 		public bool IsLastRoundHalf;
+		public bool IsSwapTeamRequired { get; set; } = false;
 		/// <summary>
 		/// Used to detect when the first shot occured to be able to have the right equipement money value
 		/// I use this because the event buytime_ended isn't raised everytime
@@ -282,6 +283,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					IsLastRoundHalf = false;
 					IsHalfMatch = !IsHalfMatch;
 				}
+			}
+
+			if (IsSwapTeamRequired)
+			{
+				SwapTeams();
+				IsSwapTeamRequired = false;
 			}
 		}
 
@@ -997,16 +1004,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 			else
 			{
-				if (IsHalfMatch)
-				{
-					CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.Money);
-					CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
-				}
-				else
-				{
-					CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
-					CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.Money);
-				}
+				CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.Money);
+				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
 			}
 
 			IsEntryKillDone = false;

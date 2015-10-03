@@ -202,7 +202,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// On ESEA demos round_announce_last_round_half isn't raised
 			if (CurrentRound.Number == 15)
 			{
-				Application.Current.Dispatcher.Invoke(SwapTeams);
+				IsSwapTeamRequired = true;
 			}
 
 		}
