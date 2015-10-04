@@ -20,6 +20,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private bool _isTeamsInitialized = false;
 
+		private bool _isRoundOffiallyEndedOccured = false;
+
 		/// <summary>
 		/// Used to make some specific check on Faceit demos and avoid some on eBot demos
 		/// </summary>
@@ -110,6 +112,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
 		{
 			base.HandleRoundOfficiallyEnd(sender, e);
+			_isRoundOffiallyEndedOccured = true;
 			if (IsOvertime && IsLastRoundHalf) IsHalfMatch = true;
 		}
 
@@ -228,6 +231,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
 		{
+			if (!_isRoundOffiallyEndedOccured)
+			{
+				// Update players stats here because some demos doesn't have round_officialy_ended at the last round
+				UpdateKillsCount();
+				UpdatePlayerScore();
+			}
+
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				if (!IsOvertime || !_isFaceit) Demo.Rounds.Add(CurrentRound);
@@ -254,6 +264,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (_playerTeamCount > 8) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
+			_isRoundOffiallyEndedOccured = false;
 
 			// Reset until both scores > 0
 			if (Parser.CTScore == 0 && Parser.TScore == 0)
