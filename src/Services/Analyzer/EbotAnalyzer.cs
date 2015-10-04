@@ -22,6 +22,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private bool _isRoundOffiallyEndedOccured = false;
 
+		private bool _isTeamsNameDetected = false;
+
 		/// <summary>
 		/// Used to make some specific check on Faceit demos and avoid some on eBot demos
 		/// </summary>
@@ -155,6 +157,20 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// Score update
 			if (scoreUpdateEbot.Success || scoreUpdateFaceit.Success)
 			{
+				// sometimes the parser doesn't have the right team's name when they have been swapped
+				// use the first score update to know the right name of the teams
+				if (!_isTeamsNameDetected)
+				{
+					_isTeamsNameDetected = true;
+					if (Parser.CTClanName != Demo.ClanTagNameTeam1)
+					{
+						Demo.ClanTagNameTeam1 = Parser.CTClanName;
+						Demo.ClanTagNameTeam2 = Parser.TClanName;
+						Demo.Teams[0].Name = Parser.CTClanName;
+						Demo.Teams[1].Name = Parser.TClanName;
+					}
+				}
+
 				int score1;
 				int score2;
 				if (scoreUpdateEbot.Success)
