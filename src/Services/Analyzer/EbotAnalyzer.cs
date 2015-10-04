@@ -27,11 +27,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private readonly Regex _scoreRegex = new Regex("^eBot: (.*) (?<score1>[0-9]+) - (?<score2>[0-9]+) (.*)$");
 
-		private readonly Regex _faceitScoreRegex = new Regex("^ \\[ANNA\\^\\] (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
+		private readonly Regex _faceitScoreRegex = new Regex("^ (\\[FACEIT\\^\\]|\\[ANNA\\^\\]) (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
 
 		private readonly Regex _endMatchRegex = new Regex("^eBot: (.*) win(.*)$");
 
-		private const string FACEIT_LIVE = " [ANNA^] LIVE!";
+		private readonly Regex _faceItLiveRegex = new Regex("^ (\\[FACEIT\\^\\]|\\[ANNA\\^\\]) LIVE!$");
 
 		private const string EBOT_LIVE = "eBot: LIVE!";
 
@@ -137,7 +137,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			e.Text = Regex.Replace(e.Text, @"[\u0001\u0005\u0004]", string.Empty);
 
 			// Beginning of the match
-			if (e.Text == EBOT_LIVE || e.Text == FACEIT_LIVE)
+			Match faceItLive = _faceItLiveRegex.Match(e.Text);
+			if (e.Text == EBOT_LIVE || faceItLive.Success)
 			{
 				Demo.ResetStats(false);
 				AddTeams();
