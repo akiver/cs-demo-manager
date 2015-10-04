@@ -241,12 +241,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}
 			});
 
-
 			if (IsLastRoundHalf)
 			{
 				Application.Current.Dispatcher.Invoke(delegate
 				{
-					UpdateKillsCount();
 					IsSwapTeamRequired = true;
 					Demo.Rounds.Add(CurrentRound);
 				});
@@ -374,18 +372,15 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			// If the killer isn't a bot we can update individual kill, open and entry kills
-			if (killEvent.Killer != null)
+			if (killEvent.Killer != null && !killEvent.Killer.IsControllingBot)
 			{
-				if (!killEvent.Killer.IsControllingBot)
+				if (!KillsThisRound.ContainsKey(e.Killer))
 				{
-					if (!KillsThisRound.ContainsKey(e.Killer))
-					{
-						KillsThisRound[e.Killer] = 0;
-					}
-					KillsThisRound[e.Killer]++;
-
-					ProcessOpenAndEntryKills(killEvent);
+					KillsThisRound[e.Killer] = 0;
 				}
+				KillsThisRound[e.Killer]++;
+
+				ProcessOpenAndEntryKills(killEvent);
 			}
 
 			ProcessClutches();
