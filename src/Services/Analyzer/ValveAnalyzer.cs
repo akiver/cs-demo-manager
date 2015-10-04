@@ -114,6 +114,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
 		{
+			if(IsMatchStarted) Demo.ResetStats(false);
+			RoundCount = 0;
 			IsMatchStarted = true;
 
 			TeamExtended team1 = new TeamExtended()
