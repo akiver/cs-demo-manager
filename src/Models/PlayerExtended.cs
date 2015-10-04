@@ -122,6 +122,16 @@ namespace CSGO_Demos_Manager.Models
 		private string _name = "";
 
 		/// <summary>
+		/// Number of clutch (win and loss) the player has been involved during the match
+		/// </summary>
+		private int _clutchCount;
+
+		/// <summary>
+		/// Number of clutch the player lost during the match
+		/// </summary>
+		private int _clutchLostCount;
+
+		/// <summary>
 		/// Number of 1v1 the player made during the match
 		/// </summary>
 		private int _1V1Count;
@@ -449,6 +459,20 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _1V5Count; }
 			set { Set(() => Clutch1V5Count, ref _1V5Count, value); }
+		}
+
+		[JsonProperty("clutch_count")]
+		public int ClutchCount
+		{
+			get { return _clutchCount; }
+			set { Set(() => ClutchCount, ref _clutchCount, value); }
+		}
+
+		[JsonProperty("clutch_lost_count")]
+		public int ClutchLostCount
+		{
+			get { return _clutchLostCount; }
+			set { Set(() => ClutchLostCount, ref _clutchLostCount, value); }
 		}
 
 		[JsonProperty("vac_banned")]
@@ -804,6 +828,8 @@ namespace CSGO_Demos_Manager.Models
 			EntryKills.Clear();
 			PlayersHurted.Clear();
 			RoundPlayedCount = 0;
+			ClutchCount = 0;
+			ClutchLostCount = 0;
 		}
 
 		public PlayerExtended Clone()

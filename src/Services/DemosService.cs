@@ -291,6 +291,9 @@ namespace CSGO_Demos_Manager.Services
 						stats.BombPlantedCount += demo.BombPlantedSelectedAccountCount;
 						stats.MvpCount += demo.MvpSelectedAccountCount;
 						stats.DamageCount += demo.TotalDamageHealthSelectedAccountCount;
+						stats.RoundCount += demo.Rounds.Count;
+						stats.ClutchCount += demo.ClutchSelectedAccountCount;
+						stats.ClutchWin += demo.ClutchWinCountSelectedAccountCount;
 						switch (demo.MatchVerdictSelectedAccountCount)
 						{
 							case -1:

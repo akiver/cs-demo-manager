@@ -1102,6 +1102,28 @@ namespace CSGO_Demos_Manager.Models
 			{
 				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 				if (player == null) return 0;
+				return player.ClutchCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int ClutchLostSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.ClutchLostCount;
+			}
+		}
+
+		[JsonIgnore]
+		public int ClutchWinCountSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
 				return player.Clutch1V1Count + player.Clutch1V2Count + player.Clutch1V3Count + player.Clutch1V4Count + player.Clutch1V5Count;
 			}
 		}

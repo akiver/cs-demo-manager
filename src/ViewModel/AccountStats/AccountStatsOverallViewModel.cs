@@ -71,6 +71,16 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private int _damageCount;
 
+		private int _roundCount;
+
+		private double _killPerRoundPercentage;
+
+		private double _assistPerRoundPercentage;
+
+		private double _deathPerRoundPercentage;
+
+		private double _clutchWinPercentage;
+
 		#endregion
 
 		#region Accessors
@@ -199,6 +209,36 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		{
 			get { return _damageCount; }
 			set { Set(() => DamageCount, ref _damageCount, value); }
+		}
+
+		public int RoundCount
+		{
+			get { return _roundCount; }
+			set { Set(() => RoundCount, ref _roundCount, value); }
+		}
+
+		public double KillPerRoundPercentage
+		{
+			get { return _killPerRoundPercentage; }
+			set { Set(() => KillPerRoundPercentage, ref _killPerRoundPercentage, value); }
+		}
+
+		public double AssistPerRoundPercentage
+		{
+			get { return _assistPerRoundPercentage; }
+			set { Set(() => AssistPerRoundPercentage, ref _assistPerRoundPercentage, value); }
+		}
+
+		public double DeathPerRoundPercentage
+		{
+			get { return _deathPerRoundPercentage; }
+			set { Set(() => DeathPerRoundPercentage, ref _deathPerRoundPercentage, value); }
+		}
+
+		public double ClutchWinPercentage
+		{
+			get { return _clutchWinPercentage; }
+			set { Set(() => ClutchWinPercentage, ref _clutchWinPercentage, value); }
 		}
 
 		#endregion
@@ -342,8 +382,13 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			BombDefusedCount = datas.BombDefusedCount;
 			BombExplodedCount = datas.BombExplodedCount;
 			BombPlantedCount = datas.BombPlantedCount;
+			KillPerRoundPercentage = datas.KillPerRoundPercentage;
+			AssistPerRoundPercentage = datas.AssistPerRoundPercentage;
+			DeathPerRoundPercentage = datas.DeathPerRoundPercentage;
+			ClutchWinPercentage = datas.ClutchWinPercentage;
 			MvpCount = datas.MvpCount;
 			DamageCount = datas.DamageCount;
+			RoundCount = datas.RoundCount;
 			DatasMatchStats = new List<GenericDoubleChart>
 			{
 				new GenericDoubleChart
@@ -399,6 +444,10 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			MvpCount = 0;
 			MatchCount = 0;
 			ThreeKillCount = 0;
+			ClutchWinPercentage = 0;
+			AssistPerRoundPercentage = 0;
+			DeathPerRoundPercentage = 0;
+			KillPerRoundPercentage = 0;
 		}
 	}
 }

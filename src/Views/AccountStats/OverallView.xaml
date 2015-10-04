@@ -135,10 +135,11 @@
 				<Grid.RowDefinitions>
 					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
-				<Grid Grid.Row="0">
+				<Grid Grid.Row="0" HorizontalAlignment="Center">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
@@ -253,7 +254,7 @@
 					</Grid>
 				</Grid>
 
-				<Grid Grid.Row="1">
+				<Grid Grid.Row="1" HorizontalAlignment="Center">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
@@ -318,7 +319,63 @@
 					</Grid>
 				</Grid>
 
-				<Grid Grid.Row="2">
+				<Grid Grid.Row="2" HorizontalAlignment="Center">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+
+					<Grid Grid.Column="0" Margin="10" ToolTip="Number of round played">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+							<StackPanel Orientation="Vertical" Margin="5">
+								<TextBlock Text="Rounds" Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding RoundCount}" Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="1" Margin="10" ToolTip="Kill Per Round %">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+							<StackPanel Orientation="Vertical" Margin="5">
+								<TextBlock Text="KPR %" Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding KillPerRoundPercentage}" Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="2" Margin="10" ToolTip="Assist Per Round %">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+							<StackPanel Orientation="Vertical" Margin="5">
+								<TextBlock Text="APR %" Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding AssistPerRoundPercentage}" Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="3" Margin="10" ToolTip="Death Per Round %">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+							<StackPanel Orientation="Vertical" Margin="5">
+								<TextBlock Text="DPR %" Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding DeathPerRoundPercentage}" Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="4" Margin="10" ToolTip="Clutch won %">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+							<StackPanel Orientation="Vertical" Margin="5">
+								<TextBlock Text="Clutch %" Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding ClutchWinPercentage}" Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+				</Grid>
+
+				<Grid Grid.Row="3">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="*"/>
 						<RowDefinition Height="Auto"/>

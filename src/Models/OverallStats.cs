@@ -1,4 +1,6 @@
-﻿namespace CSGO_Demos_Manager.Models
+﻿using System;
+
+namespace CSGO_Demos_Manager.Models
 {
 	public class OverallStats
 	{
@@ -43,5 +45,47 @@
 		public int MatchLossCount { get; set; } = 0;
 
 		public int MatchDrawCount { get; set; } = 0;
+
+		public int RoundCount { get; set; } = 0;
+
+		public int ClutchCount { get; set; } = 0;
+
+		public int ClutchWin { get; set; } = 0;
+
+		public double KillPerRoundPercentage
+		{
+			get
+			{
+				if (RoundCount == 0) return 0;
+				return Math.Round((double)KillCount / RoundCount, 2);
+			}
+		}
+
+		public double AssistPerRoundPercentage
+		{
+			get
+			{
+				if (RoundCount == 0) return 0;
+				return Math.Round((double)AssistCount / RoundCount, 2);
+			}
+		}
+
+		public double DeathPerRoundPercentage
+		{
+			get
+			{
+				if (RoundCount == 0) return 0;
+				return Math.Round((double)DeathCount / RoundCount, 2);
+			}
+		}
+
+		public double ClutchWinPercentage
+		{
+			get
+			{
+				if (ClutchCount == 0) return 0;
+				return Math.Round((ClutchWin * 100) / (double)ClutchCount, 2);
+			}
+		}
 	}
 }

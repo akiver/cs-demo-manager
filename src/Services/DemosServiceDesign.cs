@@ -474,7 +474,10 @@ namespace CSGO_Demos_Manager.Services
 				DamageCount = 122241,
 				MatchWinCount = 60,
 				MatchLossCount = 15,
-				MatchDrawCount = 7
+				MatchDrawCount = 7,
+				ClutchCount = 50,
+				ClutchWin = 36,
+				RoundCount = 100
 			});
 		}
 
