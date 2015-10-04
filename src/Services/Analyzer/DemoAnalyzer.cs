@@ -1043,10 +1043,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				pl.HasEntryKill = false;
 				pl.HasOpeningKill = false;
 				pl.IsControllingBot = false;
-				if (Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId) != null)
+				Player player = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId);
+				if (player != null)
 				{
 					pl.RoundPlayedCount++;
 					pl.IsAlive = true;
+					pl.Team = player.Team;
 				}
 			}
 		}
