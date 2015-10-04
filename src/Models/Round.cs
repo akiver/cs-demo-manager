@@ -429,7 +429,7 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				int killUserCount = Kills.Where(k => k.Killer != null).Count(k => k.Killer.SteamId == Settings.Default.SelectedPlayerSteamId);
-				if (killUserCount == 2) return 1;
+				if (killUserCount == 3) return 1;
 				return 0;
 			}
 		}
