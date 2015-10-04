@@ -154,7 +154,7 @@
 						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
-					<Grid Grid.Column="0" Margin="10">
+					<Grid Grid.Column="0" Margin="10" ToolTip="Total matches played">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Matches" Style="{StaticResource StatsTitleStyle}"/>
@@ -163,7 +163,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="1" Margin="10">
+					<Grid Grid.Column="1" Margin="10" ToolTip="Total kills done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Kills" Style="{StaticResource StatsTitleStyle}"/>
@@ -172,7 +172,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="2" Margin="10">
+					<Grid Grid.Column="2" Margin="10" ToolTip="Total assists done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Assists" Style="{StaticResource StatsTitleStyle}"/>
@@ -181,7 +181,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="3" Margin="10">
+					<Grid Grid.Column="3" Margin="10" ToolTip="Total deaths you had">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Deaths" Style="{StaticResource StatsTitleStyle}"/>
@@ -190,7 +190,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="4" Margin="10">
+					<Grid Grid.Column="4" Margin="10" ToolTip="Kill / Death ratio">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="K/D" Style="{StaticResource StatsTitleStyle}"/>
@@ -199,7 +199,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="5" Margin="10">
+					<Grid Grid.Column="5" Margin="10" ToolTip="Total headshot kill done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Headshot" Style="{StaticResource StatsTitleStyle}"/>
@@ -208,7 +208,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="6" Margin="10">
+					<Grid Grid.Column="6" Margin="10" ToolTip="Headshot %">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Headshot %" Style="{StaticResource StatsTitleStyle}"/>
@@ -217,7 +217,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="7" Margin="10">
+					<Grid Grid.Column="7" Margin="10" ToolTip="Total 5 kills done (ace)">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="5K" Style="{StaticResource StatsTitleStyle}"/>
@@ -226,7 +226,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="8" Margin="10">
+					<Grid Grid.Column="8" Margin="10" ToolTip="Total 4 kills done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="4K" Style="{StaticResource StatsTitleStyle}"/>
@@ -235,7 +235,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="9" Margin="10">
+					<Grid Grid.Column="9" Margin="10" ToolTip="Total 3 kills done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="3K" Style="{StaticResource StatsTitleStyle}"/>
@@ -244,7 +244,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="10" Margin="10">
+					<Grid Grid.Column="10" Margin="10" ToolTip="Total 2 kills done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="2K" Style="{StaticResource StatsTitleStyle}"/>
@@ -264,7 +264,7 @@
 						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
-					<Grid Grid.Column="0" Margin="10">
+					<Grid Grid.Column="0" Margin="10" ToolTip="Number of knife kills">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Knife kills" Style="{StaticResource StatsTitleStyle}"/>
@@ -273,7 +273,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="1" Margin="10">
+					<Grid Grid.Column="1" Margin="10" ToolTip="Number of bomb planted">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Bomb planted" Style="{StaticResource StatsTitleStyle}"/>
@@ -282,7 +282,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="2" Margin="10">
+					<Grid Grid.Column="2" Margin="10" ToolTip="Number of bomb defused">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Bomb Defused" Style="{StaticResource StatsTitleStyle}"/>
@@ -291,7 +291,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="3" Margin="10">
+					<Grid Grid.Column="3" Margin="10" ToolTip="Number of bomb exploded">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Bomb Exploded" Style="{StaticResource StatsTitleStyle}"/>
@@ -300,7 +300,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="4" Margin="10">
+					<Grid Grid.Column="4" Margin="10" ToolTip="Number of MVP">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="MVP" Style="{StaticResource StatsTitleStyle}"/>
@@ -309,7 +309,7 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="5" Margin="10">
+					<Grid Grid.Column="5" Margin="10" ToolTip="Total damage done">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Total Damage" Style="{StaticResource StatsTitleStyle}"/>
