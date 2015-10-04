@@ -80,6 +80,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.WinPanelMatch += HandleWinPanelMatch;
 			Parser.RoundFinal += HandleRoundFinal;
 			Parser.PlayerHurt += HandlePlayerHurted;
+			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 		}
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
@@ -175,6 +176,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted) return;
 
+			CheckForSpecialClutchEnd();
 			UpdateKillsCount();
 			UpdatePlayerScore();
 
@@ -220,6 +222,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (IsLastRoundHalf)
 			{
+				CheckForSpecialClutchEnd();
 				IsSwapTeamRequired = true;
 				IsLastRoundHalf = false;
 			}

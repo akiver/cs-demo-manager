@@ -48,6 +48,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		public Dictionary<Player, int> KillsThisRound { get; set; } = new Dictionary<Player, int>();
 
+		private PlayerExtended _playerInClutch1 = null;
+		private PlayerExtended _playerInClutch2 = null;
+
 		public const string TEAM2_NAME = "Team 2";
 		public const string TEAM1_NAME = "Team 1";
 
@@ -265,6 +268,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
 		{
 			if (!IsMatchStarted) return;
+
+			CheckForSpecialClutchEnd();
 			UpdateKillsCount();
 			UpdatePlayerScore();
 
@@ -943,6 +948,21 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CurrentRound.PlayersHurted.Add(playerHurtedEvent);
 		}
 
+		/// <summary>
+		/// Handler for when a player disconnect from the server
+		/// Used to avoid wrong clutch count as the player may be considered as alive and in a specific team whereas he is not
+		/// </summary>
+		/// <param name="sender"></param>
+		/// <param name="e"></param>
+		protected void HandlePlayerDisconnect(object sender, PlayerDisconnectEventArgs e)
+		{
+			if (e.Player == null) return;
+			PlayerExtended playerDisconnected = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
+			if (playerDisconnected == null) return;
+			playerDisconnected.IsAlive = false;
+			playerDisconnected.Team = Team.Spectate;
+		}
+
 		#endregion
 
 		#region Process
@@ -1011,18 +1031,23 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			IsEntryKillDone = false;
 			IsOpeningKillDone = false;
 			IsFirstShotOccured = false;
+			_playerInClutch1 = null;
+			_playerInClutch2 = null;
 
 			KillsThisRound.Clear();
 
 			// Nobody is controlling a BOT at the beginning of a round
 			foreach (PlayerExtended pl in Demo.Players)
 			{
-				pl.IsAlive = true;
 				pl.OpponentClutchCount = 0;
 				pl.HasEntryKill = false;
 				pl.HasOpeningKill = false;
 				pl.IsControllingBot = false;
-				if (Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId) != null) pl.RoundPlayedCount++;
+				if (Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId) != null)
+				{
+					pl.RoundPlayedCount++;
+					pl.IsAlive = true;
+				}
 			}
 		}
 
@@ -1060,61 +1085,40 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			int terroristAliveCount = Demo.Players.Count(p => p.Team == Team.Terrorist && p.IsAlive);
 			int counterTerroristAliveCount = Demo.Players.Count(p => p.Team == Team.CounterTerrorist && p.IsAlive);
-			PlayerExtended playerInClutch = null;
 
-			// T loose his clutch
-			if (terroristAliveCount == 0)
-			{
-				playerInClutch = Demo.Players.FirstOrDefault(p => p.Team == Team.CounterTerrorist && p.IsAlive && p.OpponentClutchCount != 0);
-			}
-
-			// CT loose his clutch
-			if (counterTerroristAliveCount == 0)
-			{
-				playerInClutch = Demo.Players.FirstOrDefault(p => p.Team == Team.Terrorist && p.IsAlive && p.OpponentClutchCount != 0);
-			}
-
-			if (playerInClutch != null)
-			{
-				// Player win his clutch
-				switch (playerInClutch.OpponentClutchCount)
-				{
-					case 1:
-						playerInClutch.Clutch1V1Count++;
-						break;
-					case 2:
-						playerInClutch.Clutch1V2Count++;
-						break;
-					case 3:
-						playerInClutch.Clutch1V3Count++;
-						break;
-					case 4:
-						playerInClutch.Clutch1V4Count++;
-						break;
-					case 5:
-						playerInClutch.Clutch1V5Count++;
-						break;
-				}
-				return;
-			}
-
-			if (terroristAliveCount == 1)
+			// First dectection of a 1vX situation, a terro is in clutch
+			if (_playerInClutch1 == null && terroristAliveCount == 1)
 			{
 				// Set the number of opponent in his clutch
-				PlayerExtended terroristInClutch = Demo.Players.FirstOrDefault(p => p.Team == Team.Terrorist && p.IsAlive);
-				if (terroristInClutch != null && terroristInClutch.OpponentClutchCount == 0)
+				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Team == Team.Terrorist && p.IsAlive);
+				if (_playerInClutch1 != null && _playerInClutch1.OpponentClutchCount == 0)
 				{
-					terroristInClutch.OpponentClutchCount = Demo.Players.Count(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+					_playerInClutch1.ClutchCount++;
+					return;
 				}
 			}
 
-			if (counterTerroristAliveCount == 1)
+			// First dectection of a 1vX situation, a CT is in clutch
+			if (_playerInClutch1 == null && counterTerroristAliveCount == 1)
 			{
-				PlayerExtended counterTerroristInClutch = Demo.Players.FirstOrDefault(p => p.Team == Team.CounterTerrorist && p.IsAlive);
-				if (counterTerroristInClutch != null && counterTerroristInClutch.OpponentClutchCount == 0)
+				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+				if (_playerInClutch1 != null && _playerInClutch1.OpponentClutchCount == 0)
 				{
-					counterTerroristInClutch.OpponentClutchCount = Demo.Players.Count(p => p.Team == Team.Terrorist && p.IsAlive);
+					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Team == Team.Terrorist && p.IsAlive);
+					_playerInClutch1.ClutchCount++;
+					return;
 				}
+			}
+
+			// 1v1 detection
+			if (counterTerroristAliveCount == 1 && terroristAliveCount == 1 && _playerInClutch1 != null)
+			{
+				Team player2Team = _playerInClutch1.Team == Team.CounterTerrorist ? Team.Terrorist : Team.CounterTerrorist;
+				_playerInClutch2 = Demo.Players.FirstOrDefault(p => p.Team == player2Team && p.IsAlive);
+				if (_playerInClutch2 == null) return;
+				_playerInClutch2.ClutchCount++;
+				_playerInClutch2.OpponentClutchCount = 1;
 			}
 		}
 
@@ -1256,6 +1260,81 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam2) ? Demo.ClanTagNameTeam2 : TEAM2_NAME;
 					}
 				}
+			}
+		}
+
+		/// <summary>
+		/// A clutch can be lost / won by bomb exploded / defused
+		/// It checks if one of the players currently in a clutch won
+		/// </summary>
+		protected void CheckForSpecialClutchEnd()
+		{
+			// 1vX
+			if (_playerInClutch1 != null && _playerInClutch2 == null)
+			{
+				if (_playerInClutch1.Team == Team.Terrorist && CurrentRound.Winner == Team.Terrorist
+					|| _playerInClutch1.Team == Team.CounterTerrorist && CurrentRound.Winner == Team.CounterTerrorist)
+				{
+					// T won the clutch
+					UpdatePlayerClutchCount(_playerInClutch1);
+					if (_playerInClutch2 != null) _playerInClutch2.ClutchLostCount++;
+				}
+			} else if (_playerInClutch1 != null && _playerInClutch2 != null)
+			{
+				// 1V1
+				switch (CurrentRound.Winner)
+				{
+					case Team.CounterTerrorist:
+						if (_playerInClutch1.Team == Team.CounterTerrorist)
+						{
+							// CT won
+							UpdatePlayerClutchCount(_playerInClutch1);
+							_playerInClutch2.ClutchLostCount++;
+						}
+						else
+						{
+							// T won
+							UpdatePlayerClutchCount(_playerInClutch2);
+							_playerInClutch1.ClutchLostCount++;
+						}
+						break;
+					case Team.Terrorist:
+						if (_playerInClutch1.Team == Team.Terrorist)
+						{
+							// T won
+							UpdatePlayerClutchCount(_playerInClutch1);
+							_playerInClutch2.ClutchLostCount++;
+						}
+						else
+						{
+							// CT won
+							UpdatePlayerClutchCount(_playerInClutch2);
+							_playerInClutch1.ClutchLostCount++;
+						}
+						break;
+				}
+			}
+		}
+
+		private void UpdatePlayerClutchCount(PlayerExtended player)
+		{
+			switch (player.OpponentClutchCount)
+			{
+				case 1:
+					player.Clutch1V1Count++;
+					break;
+				case 2:
+					player.Clutch1V2Count++;
+					break;
+				case 3:
+					player.Clutch1V3Count++;
+					break;
+				case 4:
+					player.Clutch1V4Count++;
+					break;
+				case 5:
+					player.Clutch1V5Count++;
+					break;
 			}
 		}
 
