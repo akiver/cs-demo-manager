@@ -68,6 +68,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<string> _addSuspectCommand;
 
+		private RelayCommand<string> _addPlayerToWhitelistCommand;
+
 		private RelayCommand<Round> _watchRoundCommand;
 
 		private RelayCommand<PlayerExtended> _goToSuspectProfileCommand;
@@ -502,9 +504,9 @@ namespace CSGO_Demos_Manager.ViewModel
 								IsAnalyzing = false;
 								if (!added)
 								{
-
-									NotificationMessage = "This player is already in your suspects list.";
-									await Task.Delay(5000);
+									await _dialogService.ShowMessageAsync("This player is already in your suspect or he is in your account list." + Environment.NewLine
+											+ "You have to remove it from your account list to be able to add him in your supect list.",
+											MessageDialogStyle.Affirmative);
 								}
 								HasNotification = false;
 							}
@@ -516,6 +518,64 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							IsAnalyzing = false;
 							NotificationMessage = "Player added to suspects list.";
+							CommandManager.InvalidateRequerySuggested();
+							await Task.Delay(5000);
+							HasNotification = false;
+						}));
+			}
+		}
+
+		/// <summary>
+		/// Command to add a player to the whitelist
+		/// </summary>
+		public RelayCommand<string> AddPlayerToWhitelistCommand
+		{
+			get
+			{
+				return _addPlayerToWhitelistCommand
+					?? (_addPlayerToWhitelistCommand = new RelayCommand<string>(
+						async steamCommunityUrl =>
+						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
+							NotificationMessage = "Adding player to whitelist...";
+							HasNotification = true;
+							IsAnalyzing = true;
+
+							try
+							{
+								Suspect suspect = await _steamService.GetBanStatusForUser(steamCommunityUrl);
+
+								if (suspect == null)
+								{
+									HasNotification = false;
+									IsAnalyzing = false;
+									await _dialogService.ShowErrorAsync("User not found", MessageDialogStyle.Affirmative);
+									return;
+								}
+
+								bool added = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
+								IsAnalyzing = false;
+								if (!added)
+								{
+									await _dialogService.ShowMessageAsync("This player is already in your whitelist or he is in your account list." + Environment.NewLine
+											+ "You have to remove it from your account list to be able to add him in your whitelist.",
+											MessageDialogStyle.Affirmative);
+								}
+								HasNotification = false;
+							}
+							catch (Exception e)
+							{
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
+							}
+
+							IsAnalyzing = false;
+							NotificationMessage = "Player added to whitelist.";
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
 							HasNotification = false;

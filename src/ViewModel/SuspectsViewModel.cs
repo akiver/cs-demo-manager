@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -37,7 +38,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _backToHomeCommand;
 
-		private RelayCommand<string> _addSuspectCommand;
+		private RelayCommand _addSuspectCommand;
 
 		private RelayCommand _removeSelectedSuspectsCommand;
 
@@ -50,6 +51,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _addAllPlayerToListCommand;
 
 		private RelayCommand _stopCommand;
+
+		private RelayCommand _goToWhitelistCommand;
 
 		private RelayCommand<bool> _showOnlyBannedSuspects;
 
@@ -145,62 +148,82 @@ namespace CSGO_Demos_Manager.ViewModel
 					() =>
 					{
 						var mainViewModel = (new ViewModelLocator()).Main;
-						System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
 					}));
 			}
 		}
 
-		public RelayCommand<string> AddSuspectCommand
+		public RelayCommand AddSuspectCommand
 		{
 			get
 			{
 				return _addSuspectCommand
-					?? (_addSuspectCommand = new RelayCommand<string>(
-						async steamCommunityUrl =>
+					?? (_addSuspectCommand = new RelayCommand(
+						async () =>
 						{
-							if (!AppSettings.IsInternetConnectionAvailable())
+							var steamIdOrUrl = await _dialogService.ShowInputAsync("Add a suspect", "Enter the SteamID 64 or the Steam community URL.");
+							if (string.IsNullOrEmpty(steamIdOrUrl)) return;
+
+							long steamIdAsLong;
+							bool isLong = long.TryParse(steamIdOrUrl, out steamIdAsLong);
+							if (isLong)
 							{
-								await _dialogService.ShowNoInternetConnectionAsync();
-								return;
+								steamIdOrUrl = "http://steamcommunity.com/profiles/" + steamIdAsLong + "/";
 							}
+							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/?");
+							Match match = regexSteamCommunity.Match(steamIdOrUrl);
 
-							IsRefreshing = true;
-							SuspectSteamCommunityUrl = null;
-							NotificationMessage = "Adding suspect(s) to list...";
-
-							try
+							if (match.Success)
 							{
-								Suspect suspect = await _steamService.GetBanStatusForUser(steamCommunityUrl);
-
-								if (suspect == null)
+								try
 								{
-									await _dialogService.ShowErrorAsync("User not found.", MessageDialogStyle.Affirmative);
-									IsRefreshing = false;
-									return;
-								}
+									NotificationMessage = "Adding suspect...";
+									IsRefreshing = true;
 
-								bool added = await _cacheService.AddSuspectToCache(suspect.SteamId);
-								if (added)
-								{
-									Suspects.Add(suspect);
-									if (suspect.VacBanned || suspect.GameBanCount > 0)
+									Suspect suspect = await _steamService.GetBanStatusForUser(steamIdOrUrl);
+
+									if (suspect == null)
 									{
-										await _cacheService.AddSuspectToBannedList(suspect);
+										await _dialogService.ShowErrorAsync("User not found.", MessageDialogStyle.Affirmative);
+										IsRefreshing = false;
+										return;
 									}
+
+									bool added = await _cacheService.AddSuspectToCache(suspect.SteamId);
+									if (added)
+									{
+										Suspects.Add(suspect);
+										if (suspect.VacBanned || suspect.GameBanCount > 0)
+										{
+											await _cacheService.AddSuspectToBannedList(suspect);
+										}
+									}
+									else
+									{
+										await
+											_dialogService.ShowMessageAsync( "This player is in your suspect / white / account list." + Environment.NewLine
+											+ "You have to remove it from your account and white list to be able to add him in your supect list.",
+											MessageDialogStyle.Affirmative);
+									}
+
+									IsRefreshing = false;
+								}
+								catch (Exception e)
+								{
+									Logger.Instance.Log(e);
+									await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
 								}
 							}
-							catch (Exception e)
+							else
 							{
-								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync("Invalid SteamID 64 or Steam community URL.", MessageDialogStyle.Affirmative);
 							}
 
-							IsRefreshing = false;
 							CommandManager.InvalidateRequerySuggested();
 						},
-						steamCommunityUrl => SuspectSteamCommunityUrl != null));
+						AppSettings.IsInternetConnectionAvailable));
 			}
 		}
 
@@ -416,6 +439,21 @@ namespace CSGO_Demos_Manager.ViewModel
 							Properties.Settings.Default.Save();
 							DataGridSuspectsCollection.Refresh();
 						}, isChecked => !IsRefreshing));
+			}
+		}
+
+		public RelayCommand GoToWhitelistCommand
+		{
+			get
+			{
+				return _goToWhitelistCommand
+					?? (_goToWhitelistCommand = new RelayCommand(
+						() =>
+						{
+							var mainViewModel = (new ViewModelLocator()).Main;
+							WhitelistView whitelistView = new WhitelistView();
+							mainViewModel.CurrentPage.ShowPage(whitelistView);
+						}));
 			}
 		}
 

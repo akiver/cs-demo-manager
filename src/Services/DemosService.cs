@@ -39,11 +39,12 @@ namespace CSGO_Demos_Manager.Services
 			var enumerableSuspects = suspects as IList<Suspect> ?? suspects.ToList();
 			if (enumerableSuspects.Any())
 			{
+				List<string> whitelistIds =  await _cacheService.GetPlayersWhitelist();
 				// Update player's flag
 				foreach (Suspect suspect in enumerableSuspects)
 				{
 					PlayerExtended cheater = demo.Players.FirstOrDefault(p => p.SteamId.ToString() == suspect.SteamId);
-					if (cheater != null)
+					if (cheater != null && !whitelistIds.Contains(cheater.SteamId.ToString()))
 					{
 						if (suspect.GameBanCount > 0)
 						{

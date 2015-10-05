@@ -47,5 +47,11 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <returns></returns>
 		Task<List<Demo>> GetDemoListAsync();
+
+		Task<List<string>> GetPlayersWhitelist();
+
+		Task<bool> AddPlayerToWhitelist(string suspectSteamCommunityId);
+
+		Task<bool> RemovePlayerFromWhitelist(string steamId);
 	}
 }

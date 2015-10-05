@@ -468,5 +468,25 @@
 	<Style TargetType="DataGridColumnHeader" x:Key="TeamNameHeader">
 		<Setter Property="ToolTipService.ToolTip" Value="Team Name" />
 	</Style>
+	
+	<!-- Whitelist -->
+	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerWhitelistStyle">
+		<Style.Resources>
+			<converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
+		</Style.Resources>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding VacBanned}" Value="true">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding GameBanCount, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=GameBanCount}" Value="true">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
+		</Style.Triggers>
+		<Setter Property="ContextMenu" Value="{StaticResource WhitelistRowContextMenu}" />
+	</Style>
 
 </ResourceDictionary>

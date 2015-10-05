@@ -27,6 +27,8 @@ namespace CSGO_Demos_Manager.Services
 
 		private const string SUSPECT_FILENAME = "suspects.json";
 
+		private const string SUSPECT_WHITELIST_FILENAME = "suspects_whitelist.json";
+
 		/// <summary>
 		///  Contains the ids of suspects that as been detected as banned
 		/// </summary>
@@ -53,6 +55,8 @@ namespace CSGO_Demos_Manager.Services
 				File.Create(_pathFolderCache + "\\" + SUSPECT_FILENAME);
 			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME))
 				File.Create(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME);
+			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME))
+				File.Create(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME);
 #if DEBUG
 
 			_settingsJson.Formatting = Formatting.Indented;
@@ -159,11 +163,16 @@ namespace CSGO_Demos_Manager.Services
 		/// <returns></returns>
 		public async Task<bool> AddSuspectToCache(string suspectSteamCommunityId)
 		{
-			// Get current list
+			// Check if he is already in the current suspect list
 			List<string> ids = await GetSuspectsListFromCache();
-
-			// Check if already in the list
 			if (ids.Contains(suspectSteamCommunityId)) return false;
+
+			// Check if he is in the user's account list
+			List<Account> accountList = await GetAccountListAsync();
+			if (accountList.Any(account => account.SteamId == suspectSteamCommunityId)) return false;
+
+			// Remove from whitelist
+			await RemovePlayerFromWhitelist(suspectSteamCommunityId);
 
 			ids.Add(suspectSteamCommunityId);
 
@@ -463,6 +472,87 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			return folders;
+		}
+
+		/// <summary>
+		/// Return the players SteamID from the whitelist
+		/// </summary>
+		/// <returns></returns>
+		public async Task<List<string>> GetPlayersWhitelist()
+		{
+			string pathWhitelistFileJson = _pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME;
+			if (!File.Exists(pathWhitelistFileJson)) return new List<string>();
+			string json = File.ReadAllText(pathWhitelistFileJson);
+			List<string> ids = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
+			if (ids == null) ids = new List<string>();
+
+			return ids;
+		}
+
+		/// <summary>
+		/// Add player to the whitelist
+		/// </summary>
+		/// <param name="suspectSteamCommunityId"></param>
+		/// <returns></returns>
+		public async Task<bool> AddPlayerToWhitelist(string suspectSteamCommunityId)
+		{
+			// Get current list
+			List<string> ids = await GetPlayersWhitelist();
+
+			// Check if he is already in the whitelist
+			if (ids.Contains(suspectSteamCommunityId)) return false;
+
+			ids.Add(suspectSteamCommunityId);
+
+			string json;
+			try
+			{
+				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				throw;
+			}
+
+			string pathWhitelistFileJson = _pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME;
+			File.WriteAllText(pathWhitelistFileJson, json);
+
+			// remove players from suspects / banned list
+			foreach (string steamId in ids)
+			{
+				await Task.Factory.StartNew(() => RemoveSuspectFromCache(steamId));
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Remove a player from the whitelist
+		/// </summary>
+		/// <param name="steamId"></param>
+		/// <returns></returns>
+		public async Task<bool> RemovePlayerFromWhitelist(string steamId)
+		{
+			List<string> ids = await GetPlayersWhitelist();
+			if (!ids.Contains(steamId)) return false;
+
+			ids.Remove(steamId);
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
+			string pathWhitelistFileJson = _pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME;
+			File.WriteAllText(pathWhitelistFileJson, json);
+
+			// If this player is in the banned suspects list, we remove it
+			List<string> suspectBannedIdList = await GetSuspectsBannedList();
+			if (suspectBannedIdList.Contains(steamId))
+			{
+				suspectBannedIdList.Remove(steamId);
+				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(suspectBannedIdList));
+				string pathSuspectsBannedFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
+				File.WriteAllText(pathSuspectsBannedFileJson, json);
+			}
+
+			return true;
 		}
 	}
 }

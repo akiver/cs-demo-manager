@@ -220,6 +220,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\WhitelistViewModel.cs" />
+    <Compile Include="Views\WhitelistView.xaml.cs">
+      <DependentUpon>WhitelistView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\WhitelistView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Resource Include="resources\steam_api_key.txt" />
     <Resource Include="resources\images\maps\overview\de_mirage.png" />
     <Resource Include="resources\images\maps\overview\de_overpass.png" />

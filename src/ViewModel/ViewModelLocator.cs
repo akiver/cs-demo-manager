@@ -46,6 +46,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<AccountStatsMapViewModel>();
 			SimpleIoc.Default.Register<AccountStatsWeaponViewModel>();
 			SimpleIoc.Default.Register<AccountStatsProgressViewModel>();
+			SimpleIoc.Default.Register<WhitelistViewModel>();
 		}
 
 		public MainViewModel Main
@@ -157,6 +158,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			get
 			{
 				return ServiceLocator.Current.GetInstance<AccountStatsProgressViewModel>();
+			}
+		}
+
+		public WhitelistViewModel Whitelist
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<WhitelistViewModel>();
 			}
 		}
 
