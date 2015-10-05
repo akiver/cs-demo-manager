@@ -30,7 +30,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		public bool IsOpeningKillDone { get; set; }
 		public bool IsHalfMatch { get; set; } = false;
 		public bool IsOvertime { get; set; } = false;
-		public bool IsLastRoundHalf;
+		public bool IsLastRoundHalf { get; set; }
 		public bool IsSwapTeamRequired { get; set; } = false;
 		/// <summary>
 		/// Used to detect when the first shot occured to be able to have the right equipement money value
