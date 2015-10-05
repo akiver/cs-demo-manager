@@ -996,7 +996,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							long steamIdAsLong;
 							bool isLong = long.TryParse(steamId, out steamIdAsLong);
-							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/");
+							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/?");
 							Match match = regexSteamCommunity.Match(steamId);
 
 							if (isLong || match.Success)
