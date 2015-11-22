@@ -430,6 +430,19 @@
 				<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
 				<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				<Button Margin="20 0 0 0" Width="70" Height="30"
+							Command="{Binding StopAnalyzeCommand}"
+							Style="{DynamicResource AccentedSquareButtonStyle}"
+							ToolTip="Stop (CTRL+S)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_control_stop}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Stop" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
 			</StackPanel>
 		</Grid>
 

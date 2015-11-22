@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Data;
@@ -73,6 +74,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _isAnalyzing;
 
 		private bool _isShowOnlyBannedSuspects = Properties.Settings.Default.ShowOnlyBannedSuspects;
+
+		private CancellationTokenSource _cts;
 
 		#endregion
 
@@ -281,8 +284,13 @@ namespace CSGO_Demos_Manager.ViewModel
 								{
 									try
 									{
+										if (_cts == null)
+										{
+											_cts = new CancellationTokenSource();
+										}
+
 										NotificationMessage = "Analyzing " + demos[i].Name + "...";
-										demos[i] = await _demosService.AnalyzeDemo(demos[i]);
+										demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
 										await _cacheService.WriteDemoDataCache(demos[i]);
 										if (demos[i].Players.Any())
 										{

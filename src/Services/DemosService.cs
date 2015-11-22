@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Models.Stats;
@@ -102,7 +103,7 @@ namespace CSGO_Demos_Manager.Services
 			return demos;
 		}
 
-		public async Task<Demo> AnalyzeDemo(Demo demo)
+		public async Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)
 		{
 			if (!File.Exists(demo.Path))
 			{
@@ -112,7 +113,7 @@ namespace CSGO_Demos_Manager.Services
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
 			
-			demo = await analyzer.AnalyzeDemoAsync();
+			demo = await analyzer.AnalyzeDemoAsync(token);
 
 			return demo;
 		}
@@ -158,7 +159,7 @@ namespace CSGO_Demos_Manager.Services
 			}
 		}
 
-		public async Task<Demo> AnalyzePlayersPosition(Demo demo)
+		public async Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token)
 		{
 			if (!File.Exists(demo.Path))
 			{
@@ -169,14 +170,14 @@ namespace CSGO_Demos_Manager.Services
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
 			analyzer.AnalyzePlayersPosition = true;
 
-			demo = await analyzer.AnalyzeDemoAsync();
+			demo = await analyzer.AnalyzeDemoAsync(token);
 
 			await _cacheService.WriteDemoDataCache(demo);
 
 			return demo;
 		}
 
-		public async Task<Demo> AnalyzeHeatmapPoints(Demo demo)
+		public async Task<Demo> AnalyzeHeatmapPoints(Demo demo, CancellationToken token)
 		{
 			if (!File.Exists(demo.Path))
 			{
@@ -187,7 +188,7 @@ namespace CSGO_Demos_Manager.Services
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
 			analyzer.AnalyzeHeatmapPoint = true;
 
-			demo = await analyzer.AnalyzeDemoAsync();
+			demo = await analyzer.AnalyzeDemoAsync(token);
 
 			await _cacheService.WriteDemoDataCache(demo);
 

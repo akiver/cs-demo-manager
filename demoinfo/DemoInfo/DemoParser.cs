@@ -8,6 +8,7 @@ using System.IO;
 using System.Linq;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 
 namespace DemoInfo
 {
@@ -517,7 +518,18 @@ namespace DemoInfo
 		/// </summary>
 		public void ParseToEnd()
 		{
-			while (ParseNextTick()) {
+			ParseToEnd(CancellationToken.None);
+		}
+
+		/// <summary>
+		/// Same as ParseToEnd() but accepts a CancellationToken to be able to cancel parsing
+		/// </summary>
+		/// <param name="token"></param>
+		public void ParseToEnd(CancellationToken token)
+		{
+			while (ParseNextTick())
+			{
+				if (token.IsCancellationRequested) return;
 			}
 		}
 

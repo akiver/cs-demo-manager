@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
@@ -84,11 +85,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 		}
 
-		public async override Task<Demo> AnalyzeDemoAsync()
+		public async override Task<Demo> AnalyzeDemoAsync(CancellationToken token)
 		{
 			Parser.ParseHeader();
 
-			await Task.Run(() => Parser.ParseToEnd());
+			await Task.Run(() => Parser.ParseToEnd(token), token);
 
 			Application.Current.Dispatcher.Invoke(ProcessPlayersRating);
 			Application.Current.Dispatcher.Invoke(delegate

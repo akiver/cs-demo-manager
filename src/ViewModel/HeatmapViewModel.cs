@@ -7,6 +7,7 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -61,6 +62,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private byte _opacity = 150;
 
 		private bool _selectAllRounds;
+
+		private CancellationTokenSource _cts;
 
 		#endregion
 
@@ -184,12 +187,17 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						try
 						{
+							if (_cts == null)
+							{
+								_cts = new CancellationTokenSource();
+							}
+
 							// temp selection variables
 							PlayerExtended player = SelectedPlayer;
 							Round round = SelectedRound;
 
 							// Analyze the demo to get HeatmapPoints
-							CurrentDemo = await _demosService.AnalyzeHeatmapPoints(CurrentDemo);
+							CurrentDemo = await _demosService.AnalyzeHeatmapPoints(CurrentDemo, _cts.Token);
 
 							// Get back selection
 							SelectedPlayer = player;

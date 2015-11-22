@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -82,6 +83,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _pauseCommand;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
+
+		private CancellationTokenSource _cts;
 
 		private double FrameLimiter
 		{
@@ -292,6 +295,11 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						try
 						{
+							if (_cts == null)
+							{
+								_cts = new CancellationTokenSource();
+							}
+
 							PlayersColor.Clear();
 							Events.Clear();
 
@@ -302,7 +310,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							Round round = SelectedRound;
 
 							// Analyze demos to get player's positions
-							CurrentDemo = await _demoService.AnalyzePlayersPosition(CurrentDemo);
+							CurrentDemo = await _demoService.AnalyzePlayersPosition(CurrentDemo, _cts.Token);
 
 							// Get back selection
 							SelectedPlayer = player;

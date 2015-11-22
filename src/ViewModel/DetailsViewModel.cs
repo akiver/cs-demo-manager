@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using CSGO_Demos_Manager.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -51,6 +52,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _hasNotification;
 
 		private string _notificationMessage;
+
+		private CancellationTokenSource _cts;
 
 		private RelayCommand _backToHomeCommand;
 
@@ -400,7 +403,12 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						try
 						{
-							CurrentDemo = await _demosService.AnalyzeDemo(demo);
+							if (_cts == null)
+							{
+								_cts = new CancellationTokenSource();
+							}
+
+							CurrentDemo = await _demosService.AnalyzeDemo(demo, _cts.Token);
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
 								await _demosService.AnalyzeBannedPlayersAsync(demo);
@@ -694,7 +702,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			if (IsInDesignModeStatic)
 			{
-				var demo = _demosService.AnalyzeDemo(new Demo());
+				var demo = _demosService.AnalyzeDemo(new Demo(), CancellationToken.None);
 				CurrentDemo = demo.Result;
 				IsAnalyzing = true;
 				HasNotification = true;

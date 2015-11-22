@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Charts;
@@ -122,7 +123,7 @@ namespace CSGO_Demos_Manager.Services
 			return Task.FromResult(demos);
 		}
 
-		public Task<Demo> AnalyzeDemo(Demo demo)
+		public Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)
 		{
 			Random random = new Random();
 
@@ -283,12 +284,12 @@ namespace CSGO_Demos_Manager.Services
 			return Task.FromResult(true);
 		}
 
-		public Task<Demo> AnalyzePlayersPosition(Demo demo)
+		public Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token)
 		{
 			return Task.FromResult(demo);
 		}
 
-		public Task<Demo> AnalyzeHeatmapPoints(Demo demo)
+		public Task<Demo> AnalyzeHeatmapPoints(Demo demo, CancellationToken token)
 		{
 			return Task.FromResult(demo);
 		}

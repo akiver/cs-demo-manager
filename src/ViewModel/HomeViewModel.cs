@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -23,6 +24,7 @@ using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Views.AccountStats;
+using Nito.AsyncEx;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -123,6 +125,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<IList> _demosSelectionChangedCommand;
 
+		private RelayCommand _stopAnalyzeCommand;
+
 		private int _newBannedPlayerCount;
 
 		private ObservableCollection<string> _folders;
@@ -132,6 +136,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<UserControl> _showLastUserControlCommand;
 
 		private Rank _lastRankAccountStats;
+
+		private CancellationTokenSource _cts = new CancellationTokenSource();
 
 		#endregion
 
@@ -382,7 +388,11 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_analyzeDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
-						await RefreshSelectedDemos();
+						if (_cts == null)
+						{
+							_cts = new CancellationTokenSource();
+						}
+						await RefreshSelectedDemos(_cts.Token);
 						Messenger.Default.Send(new SelectedAccountChangedMessage());
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
@@ -548,8 +558,12 @@ namespace CSGO_Demos_Manager.ViewModel
 								{
 									try
 									{
+										if (_cts == null)
+										{
+											_cts = new CancellationTokenSource();
+										}
 										NotificationMessage = "Analyzing " + demos[i].Name + "...";
-										demos[i] = await _demosService.AnalyzeDemo(demos[i]);
+										demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
 										if (AppSettings.IsInternetConnectionAvailable())
 										{
 											await _demosService.AnalyzeBannedPlayersAsync(demos[i]);
@@ -1066,6 +1080,26 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command to stop current analyze
+		/// </summary>
+		public RelayCommand StopAnalyzeCommand
+		{
+			get
+			{
+				return _stopAnalyzeCommand
+					?? (_stopAnalyzeCommand = new RelayCommand(
+						() =>
+						{
+							if (_cts != null)
+							{
+								_cts.Cancel();
+								_cts = null;
+							}
+						}, () => IsBusy));
+			}
+		}
+
 		#endregion
 
 		public HomeViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService)
@@ -1158,40 +1192,38 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		private async Task RefreshSelectedDemos()
+		private async Task RefreshSelectedDemos(CancellationToken token)
 		{
 			IsBusy = true;
 			HasNotification = true;
-			NotificationMessage = "Analyzing...";
+			NotificationMessage = "Analyzing multiple demos...";
+			if (SelectedDemos.Count == 1) NotificationMessage = "Analyzing " + SelectedDemos[0].Name + "...";
 
 			List<Demo> demosFailed = new List<Demo>();
 			List<Demo> demosNotFound = new List<Demo>();
 
-			foreach (Demo demo in SelectedDemos)
+			Task[] tasks = SelectedDemos.Select(async (demo) =>
 			{
-				if (!File.Exists(demo.Path))
+				int result = await AnalyzeDemoAsync(demo, token);
+				switch (result)
 				{
-					demosNotFound.Add(demo);
-					continue;
+					case -1:
+						demosFailed.Add(demo);
+						break;
+					case -2:
+						demosNotFound.Add(demo);
+						break;
 				}
+			}).ToArray();
 
-				try
-				{
-					NotificationMessage = "Analyzing " + demo.Name + "...";
-					await _demosService.AnalyzeDemo(demo);
-					if (AppSettings.IsInternetConnectionAvailable())
-					{
-						await _demosService.AnalyzeBannedPlayersAsync(demo);
-					}
-					await _cacheService.WriteDemoDataCache(demo);
-				}
-				catch (Exception e)
-				{
-					Logger.Instance.Log(e);
-					demo.Status = "old";
-					demosFailed.Add(demo);
-					await _cacheService.WriteDemoDataCache(demo);
-				}
+			try
+			{
+				await Task.WhenAny(Task.WhenAll(tasks), token.AsTask());
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				await _dialogService.ShowErrorAsync("An error occured while anylizing demos.", MessageDialogStyle.Affirmative);
 			}
 
 			IsBusy = false;
@@ -1207,6 +1239,36 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				await _dialogService.ShowDemosFailedAsync(demosFailed);
 			}
+		}
+
+		/// <summary>
+		/// Process analyze for 1 demo
+		/// </summary>
+		/// <param name="demo"></param>
+		/// /// <param name="token"></param>
+		/// <returns></returns>
+		private async Task<int> AnalyzeDemoAsync(Demo demo, CancellationToken token)
+		{
+			if (!File.Exists(demo.Path)) return -2;
+
+			try
+			{
+				await _demosService.AnalyzeDemo(demo, token);
+				if (AppSettings.IsInternetConnectionAvailable())
+				{
+					await _demosService.AnalyzeBannedPlayersAsync(demo);
+				}
+				await _cacheService.WriteDemoDataCache(demo);
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				demo.Status = "old";
+				await _cacheService.WriteDemoDataCache(demo);
+				return -1;
+			}
+
+			return 1;
 		}
 
 		private async Task RefreshBannedPlayerCount()

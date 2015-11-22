@@ -1,6 +1,7 @@
 ﻿using CSGO_Demos_Manager.Models;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Stats;
@@ -20,7 +21,7 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		/// <param name="demo"></param>
 		/// <returns></returns>
-		Task<Demo> AnalyzeDemo(Demo demo);
+		Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token);
 
 		/// <summary>
 		/// Save the demo's comment
@@ -40,9 +41,9 @@ namespace CSGO_Demos_Manager.Services
 
 		Task SetSource(ObservableCollection<Demo> demos, string source);
 
-		Task<Demo> AnalyzePlayersPosition(Demo demo);
+		Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token);
 
-		Task<Demo> AnalyzeHeatmapPoints(Demo demo);
+		Task<Demo> AnalyzeHeatmapPoints(Demo demo, CancellationToken token);
 
 		Task<List<Demo>> GetDemosFromBackup(string jsonFile);
 

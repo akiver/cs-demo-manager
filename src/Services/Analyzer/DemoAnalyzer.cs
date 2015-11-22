@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
@@ -75,7 +76,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		#endregion
 
-		public abstract Task<Demo> AnalyzeDemoAsync();
+		public abstract Task<Demo> AnalyzeDemoAsync(CancellationToken token);
 
 		protected abstract void RegisterEvents();
 
