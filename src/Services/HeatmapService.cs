@@ -12,6 +12,7 @@ using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Map;
 using CSGO_Demos_Manager.Models.Comparers;
+using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services.Map;
 using DemoInfo;
 using Color = System.Drawing.Color;
@@ -90,6 +91,13 @@ namespace CSGO_Demos_Manager.Services
 					if (heatmapPoints.Count == 0)
 					{
 						throw new HeatmapDataNotFoundException("No kills occured with this selection.");
+					}
+					break;
+				case "deaths":
+					heatmapPoints = GetDeathsPoints();
+					if (heatmapPoints.Count == 0)
+					{
+						throw new HeatmapDataNotFoundException("No deaths occured with this selection.");
 					}
 					break;
 				case "shots":
@@ -403,20 +411,24 @@ namespace CSGO_Demos_Manager.Services
 						// Specific round selected
 						if (_selectedRound != null)
 						{
-							heatmapPoints.AddRange(
-								from killEvent
-								in _demo.Kills
-								where killEvent.Point.Team == Team.CounterTerrorist && killEvent.Point.Round.Equals(_selectedRound)
-								select killEvent.Point);
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.KillerTeam == Team.CounterTerrorist
+								&& killEvent.Point.Round.Equals(_selectedRound)))
+							{
+								killEvent.Point.X = killEvent.Point.KillerX;
+								killEvent.Point.Y = killEvent.Point.KillerY;
+								heatmapPoints.Add(killEvent.Point);
+							}
 						}
 						else
 						{
-							// All rounds
-							heatmapPoints.AddRange(
-								from killEvent
-								in _demo.Kills
-								where killEvent.Point.Team == Team.CounterTerrorist
-								select killEvent.Point);
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.KillerTeam == Team.CounterTerrorist))
+							{
+								killEvent.Point.X = killEvent.Point.KillerX;
+								killEvent.Point.Y = killEvent.Point.KillerY;
+								heatmapPoints.Add(killEvent.Point);
+							}
 						}
 
 						break;
@@ -424,20 +436,25 @@ namespace CSGO_Demos_Manager.Services
 						// Specific round selected
 						if (_selectedRound != null)
 						{
-							heatmapPoints.AddRange(
-								from killEvent
-								in _demo.Kills
-								where killEvent.Point.Team == Team.Terrorist && killEvent.Point.Round.Equals(_selectedRound)
-								select killEvent.Point);
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.KillerTeam == Team.Terrorist
+								&& killEvent.Point.Round.Equals(_selectedRound)))
+							{
+								killEvent.Point.X = killEvent.Point.KillerX;
+								killEvent.Point.Y = killEvent.Point.KillerY;
+								heatmapPoints.Add(killEvent.Point);
+							}
 						}
 						else
 						{
 							// All rounds
-							heatmapPoints.AddRange(
-								from killEvent
-								in _demo.Kills
-								where killEvent.Point.Team == Team.Terrorist
-								select killEvent.Point);
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.KillerTeam == Team.Terrorist))
+							{
+								killEvent.Point.X = killEvent.Point.KillerX;
+								killEvent.Point.Y = killEvent.Point.KillerY;
+								heatmapPoints.Add(killEvent.Point);
+							}
 						}
 
 						break;
@@ -445,16 +462,23 @@ namespace CSGO_Demos_Manager.Services
 						// Specific round selected
 						if (_selectedRound != null)
 						{
-							heatmapPoints.AddRange(
-								from killEvent
-								in _demo.Kills
-								where killEvent.Point.Round.Equals(_selectedRound)
-								select killEvent.Point);
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.Round.Equals(_selectedRound)))
+							{
+								killEvent.Point.X = killEvent.Point.KillerX;
+								killEvent.Point.Y = killEvent.Point.KillerY;
+								heatmapPoints.Add(killEvent.Point);
+							}
 						}
 						else
 						{
 							// All rounds
-							heatmapPoints.AddRange(_demo.Kills.Select(killEvent => killEvent.Point));
+							foreach (KillEvent killEvent in _demo.Kills)
+							{
+								killEvent.Point.X = killEvent.Point.KillerX;
+								killEvent.Point.Y = killEvent.Point.KillerY;
+								heatmapPoints.Add(killEvent.Point);
+							}
 						}
 
 						break;
@@ -467,20 +491,142 @@ namespace CSGO_Demos_Manager.Services
 				// Specific round selected
 				if (_selectedRound != null)
 				{
-					heatmapPoints.AddRange(
-						from killEvent
-						in _demo.Kills
-						where killEvent.Point.Player.Equals(_selectedPlayer) && killEvent.Point.Round.Equals(_selectedRound)
-						select killEvent.Point);
+					foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.Killer.Equals(_selectedPlayer)
+								&& killEvent.Point.Round.Equals(_selectedRound)))
+					{
+						killEvent.Point.X = killEvent.Point.KillerX;
+						killEvent.Point.Y = killEvent.Point.KillerY;
+						heatmapPoints.Add(killEvent.Point);
+					}
+				}
+				else
+				{
+					foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.Killer.Equals(_selectedPlayer)))
+					{
+						killEvent.Point.X = killEvent.Point.KillerX;
+						killEvent.Point.Y = killEvent.Point.KillerY;
+						heatmapPoints.Add(killEvent.Point);
+					}
+				}
+			}
+
+			return heatmapPoints;
+		}
+
+		private List<HeatmapPoint> GetDeathsPoints()
+		{
+			List<HeatmapPoint> heatmapPoints = new List<HeatmapPoint>();
+
+			// side selected
+			if (_sideSelector != null)
+			{
+				switch (_sideSelector.Id)
+				{
+					case "CT":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.VictimTeam == Team.CounterTerrorist
+								&& killEvent.Point.Round.Equals(_selectedRound)))
+							{
+								killEvent.Point.X = killEvent.Point.VictimX;
+								killEvent.Point.Y = killEvent.Point.VictimY;
+								heatmapPoints.Add(killEvent.Point);
+							}
+						}
+						else
+						{
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.VictimTeam == Team.CounterTerrorist))
+							{
+								killEvent.Point.X = killEvent.Point.VictimX;
+								killEvent.Point.Y = killEvent.Point.VictimY;
+								heatmapPoints.Add(killEvent.Point);
+							}
+						}
+
+						break;
+					case "T":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.VictimTeam == Team.Terrorist
+								&& killEvent.Point.Round.Equals(_selectedRound)))
+							{
+								killEvent.Point.X = killEvent.Point.VictimX;
+								killEvent.Point.Y = killEvent.Point.VictimY;
+								heatmapPoints.Add(killEvent.Point);
+							}
+						}
+						else
+						{
+							// All rounds
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.VictimTeam == Team.Terrorist))
+							{
+								killEvent.Point.X = killEvent.Point.VictimX;
+								killEvent.Point.Y = killEvent.Point.VictimY;
+								heatmapPoints.Add(killEvent.Point);
+							}
+						}
+
+						break;
+					case "BOTH":
+						// Specific round selected
+						if (_selectedRound != null)
+						{
+							foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.Round.Equals(_selectedRound)))
+							{
+								killEvent.Point.X = killEvent.Point.VictimX;
+								killEvent.Point.Y = killEvent.Point.VictimY;
+								heatmapPoints.Add(killEvent.Point);
+							}
+						}
+						else
+						{
+							// All rounds
+							foreach (KillEvent killEvent in _demo.Kills)
+							{
+								killEvent.Point.X = killEvent.Point.VictimX;
+								killEvent.Point.Y = killEvent.Point.VictimY;
+								heatmapPoints.Add(killEvent.Point);
+							}
+						}
+
+						break;
+				}
+			}
+
+			// Specific player selected
+			if (_selectedPlayer != null)
+			{
+				// Specific round selected
+				if (_selectedRound != null)
+				{
+					foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.Victim.Equals(_selectedPlayer)
+								&& killEvent.Point.Round.Equals(_selectedRound)))
+					{
+						killEvent.Point.X = killEvent.Point.VictimX;
+						killEvent.Point.Y = killEvent.Point.VictimY;
+						heatmapPoints.Add(killEvent.Point);
+					}
 				}
 				else
 				{
 					// All rounds
-					heatmapPoints.AddRange(
-						from killEvent
-						in _demo.Kills
-						where killEvent.Point.Player.Equals(_selectedPlayer)
-						select killEvent.Point);
+					foreach (KillEvent killEvent in _demo.Kills.Where(
+								killEvent => killEvent.Point.Victim.Equals(_selectedPlayer)))
+					{
+						killEvent.Point.X = killEvent.Point.VictimX;
+						killEvent.Point.Y = killEvent.Point.VictimY;
+						heatmapPoints.Add(killEvent.Point);
+					}
 				}
 			}
 

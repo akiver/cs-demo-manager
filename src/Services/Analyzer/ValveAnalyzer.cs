@@ -389,13 +389,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (AnalyzeHeatmapPoint)
 			{
-				killEvent.Point = new HeatmapPoint
+				killEvent.Point = new KillHeatmapPoint
 				{
-					X = e.Victim.Position.X,
-					Y = e.Victim.Position.Y,
+					KillerX = e.Killer.Position.X,
+					KillerY = e.Killer.Position.Y,
+					VictimX = e.Victim.Position.X,
+					VictimY = e.Victim.Position.Y,
 					Round = CurrentRound,
-					Player = killEvent.Killer,
-					Team = e.Killer.Team
+					Killer = killEvent.Killer,
+					KillerTeam = e.Killer.Team,
+					Victim = killEvent.DeathPerson,
+					VictimTeam = e.Victim.Team
 				};
 			}
 

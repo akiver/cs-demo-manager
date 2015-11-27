@@ -207,7 +207,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							MapService mapService = MapService.Factory(CurrentDemo.MapName);
 							OverviewLayer = mapService.GetWriteableImage();
 
-							// Get HeatmapPoints based on selection
+							// Get KillHeatmapPoint list based on selection
 							_heatmapService = new HeatmapService(mapService, CurrentDemo, CurrentEventSelector, CurrentTeamSelector, SelectedPlayer, SelectedRound);
 							_points = await _heatmapService.GetPoints();
 
@@ -296,6 +296,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			_dialogService = dialogService;
 			_demosService = demosService;
 			EventSelectors.Add(new ComboboxSelector("kills", "Kills"));
+			EventSelectors.Add(new ComboboxSelector("deaths", "Deaths"));
 			EventSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
 			EventSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
 			EventSelectors.Add(new ComboboxSelector("he", "HE Grenades"));

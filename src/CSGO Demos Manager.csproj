@@ -179,6 +179,7 @@
     <Compile Include="Models\Charts\KillDateChart.cs" />
     <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
+    <Compile Include="Models\KillHeatmapPoint.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
     <Compile Include="Models\Stats\MapStats.cs" />
     <Compile Include="Models\Charts\RankDateChart.cs" />
