@@ -54,6 +54,9 @@
 		<MenuItem Header="Profile"
 							  Command="{Binding Suspects.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Suspects.SelectedSuspect, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Show suspect demos"
+							  Command="{Binding Suspects.DisplayDemosCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Suspects.SelectedSuspect, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Remove"
 							  Command="{Binding Suspects.RemoveSuspectCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Suspects.SelectedSuspect, Source={StaticResource Locator}}"/>
