@@ -89,6 +89,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<string> _addPlayerToAccountListCommand;
 
+		private RelayCommand<PlayerExtended> _showPlayerDemosCommand;
+
 		private ICollectionView _playersTeam1Collection;
 
 		private ICollectionView _playersTeam2Collection;
@@ -687,6 +689,48 @@ namespace CSGO_Demos_Manager.ViewModel
 						if(added) await Task.Delay(5000);
 						HasNotification = false;
 					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to display demos within selected player has played
+		/// </summary>
+		public RelayCommand<PlayerExtended> ShowPlayerDemosCommand
+		{
+			get
+			{
+				return _showPlayerDemosCommand
+					?? (_showPlayerDemosCommand = new RelayCommand<PlayerExtended>(
+						async player =>
+						{
+							IsAnalyzing = true;
+							HasNotification = true;
+							NotificationMessage = "Searching demos with this player...";
+							List<Demo> demos = await _demosService.GetDemosPlayer(player.SteamId.ToString());
+							IsAnalyzing = false;
+							HasNotification = false;
+							if (!demos.Any())
+							{
+								await _dialogService.ShowMessageAsync("No demos found for this player." + Environment.NewLine
+									+ "Demos with this player might not have been analyzed.", MessageDialogStyle.Affirmative);
+								return;
+							}
+
+							var homeViewModel = (new ViewModelLocator()).Home;
+							homeViewModel.SelectedDemos.Clear();
+							homeViewModel.Demos.Clear();
+							foreach (Demo demo in demos)
+							{
+								homeViewModel.Demos.Add(demo);
+							}
+							homeViewModel.DataGridDemosCollection.Refresh();
+
+							var mainViewModel = (new ViewModelLocator()).Main;
+							System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+							HomeView homeView = new HomeView();
+							mainViewModel.CurrentPage.ShowPage(homeView);
+						},
+						player => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
 			}
 		}
 

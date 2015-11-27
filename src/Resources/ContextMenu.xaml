@@ -81,6 +81,9 @@
 		<MenuItem Header="Add to account list"
 							  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Show player demos"
+							  Command="{Binding Details.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="PlayerTeam2RowContextMenu">
@@ -102,6 +105,9 @@
 		<MenuItem Header="Add to account list"
 							  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Show player demos"
+							  Command="{Binding Details.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="WhitelistRowContextMenu">
