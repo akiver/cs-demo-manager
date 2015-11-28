@@ -164,6 +164,11 @@ namespace CSGO_Demos_Manager.Models
 		private string _status = "None";
 
 		/// <summary>
+		/// Ref to handle surrended match
+		/// </summary>
+		private TeamExtended _surrender;
+
+		/// <summary>
 		/// List of rounds during the match
 		/// </summary>
 		private ObservableCollection<Round> _rounds = new ObservableCollection<Round>();
@@ -354,18 +359,33 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Path, ref _path, value); }
 		}
 
+		[JsonProperty("surrender_team")]
+		public TeamExtended Surrender
+		{
+			get { return _surrender; }
+			set
+			{
+				Set(() => Surrender, ref _surrender, value);
+				RaisePropertyChanged(() => Surrender);
+			}
+		}
+
 		public string WinStatus
 		{
 			get
 			{
 				switch (MatchVerdictSelectedAccountCount)
 				{
+					case -2:
+						return "lost-s";
 					case -1:
 						return "lost";
 					case 0:
 						return "draw";
 					case 1:
 						return "won";
+					case 2:
+						return "won-s";
 					default:
 						return string.Empty;
 				}
@@ -820,20 +840,30 @@ namespace CSGO_Demos_Manager.Models
 
 		/// <summary>
 		/// Return the result of the match for the selected account
-		/// -2 : error
+		/// -3 : error
+		/// -2 : loss by surrender
 		/// -1 : loss
 		/// 0 : draw
 		/// 1 : win
+		/// 2 : win by surrender
 		/// </summary>
 		[JsonIgnore]
 		public int MatchVerdictSelectedAccountCount
 		{
 			get
 			{
-				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return -2;
+				PlayerExtended player;
+				if (Surrender != null)
+				{
+					player = Surrender.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+					if (player != null) return -2;
+					return 2;
+				}
+
+				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return -3;
 
 				// was in team 1?
-				PlayerExtended player = PlayersTeam1.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				player = PlayersTeam1.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 				if (player != null)
 				{
 					if (ScoreTeam1 == ScoreTeam2) return 0;
@@ -850,7 +880,7 @@ namespace CSGO_Demos_Manager.Models
 					return -1;
 				}
 
-				return -2;
+				return -3;
 			}
 		}
 

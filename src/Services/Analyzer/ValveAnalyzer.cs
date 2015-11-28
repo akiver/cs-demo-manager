@@ -1,4 +1,5 @@
-﻿using CSGO_Demos_Manager.Models;
+﻿using System;
+using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using DemoInfo;
 using System.IO;
@@ -222,6 +223,15 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!IsMatchStarted) return;
 
 			UpdateTeamScore(e);
+
+			if (e.Reason == RoundEndReason.CTSurrender)
+			{
+				Demo.Surrender = IsHalfMatch ? Demo.Teams[1] : Demo.Teams[0];
+			}
+			if (e.Reason == RoundEndReason.TerroristsSurrender)
+			{
+				Demo.Surrender = IsHalfMatch ? Demo.Teams[0] : Demo.Teams[1];
+			}
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{

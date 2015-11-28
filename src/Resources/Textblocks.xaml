@@ -418,7 +418,37 @@
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
-	
+	<!-- End TextBlock inside DataGridTextColumn for selected player round stats on DetailsView -->
+
+	<!-- TextBlock on HomeView -->
+	<Style TargetType="TextBlock" x:Key="WinStatusStyle">
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="FontWeight" Value="DemiBold" />
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Path=WinStatus}" Value="won" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Background" Value="{StaticResource GreenBrush}" />
+				<Setter Property="Text" Value="Win" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=WinStatus}" Value="won-s" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Background" Value="{StaticResource GreenBrush}" />
+				<Setter Property="Text" Value="Win (S)" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=WinStatus}" Value="lost" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Background" Value="{StaticResource RedColorBrush}" />
+				<Setter Property="Text" Value="Lost" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=WinStatus}" Value="lost-s" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Background" Value="{StaticResource RedColorBrush}" />
+				<Setter Property="Text" Value="Lost (S)" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=WinStatus}" Value="draw" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Background" Value="{StaticResource LightBlueBrush}" />
+				<Setter Property="Text" Value="Draw" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	<!-- End TextBlock on HomeView -->
+
 	<!-- Charts TextBlock -->
 	<Style TargetType="TextBlock" x:Key="MapTitleStatsStyle">
 		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}"/>

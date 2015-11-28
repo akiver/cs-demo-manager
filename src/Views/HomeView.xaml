@@ -488,23 +488,7 @@
 				<DataGridTemplateColumn x:Name="WinStatusHeader" Header="Status" Width="Auto" HeaderStyle="{StaticResource WinStatusHeader}" SortMemberPath="WinStatus">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding Path=WinStatus}" TextAlignment="Center" FontWeight="DemiBold">
-								<TextBlock.Style>
-									<Style TargetType="{x:Type TextBlock}">
-										<Style.Triggers>
-											<DataTrigger Binding="{Binding Path=WinStatus}" Value="won">
-												<Setter Property="Background" Value="{StaticResource GreenBrush}"/>
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Path=WinStatus}" Value="lost">
-												<Setter Property="Background" Value="{StaticResource RedColorBrush}"/>
-											</DataTrigger>
-											<DataTrigger Binding="{Binding Path=WinStatus}" Value="draw">
-												<Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
-											</DataTrigger>
-										</Style.Triggers>
-									</Style>
-								</TextBlock.Style>
-							</TextBlock>
+							<TextBlock Style="{StaticResource WinStatusStyle}" />
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
