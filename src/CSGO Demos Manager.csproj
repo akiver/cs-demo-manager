@@ -127,9 +127,13 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Telerik.Windows.Controls, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
-    <Reference Include="Telerik.Windows.Data, Version=2015.2.728.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Pivot.Core, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2015.3.930.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -179,8 +183,10 @@
     <Compile Include="Models\Charts\KillDateChart.cs" />
     <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
+    <Compile Include="Models\Events\PlayerFlashedEvent.cs" />
     <Compile Include="Models\KillHeatmapPoint.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
+    <Compile Include="Models\Stats\FlashbangDataPoint.cs" />
     <Compile Include="Models\Stats\MapStats.cs" />
     <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
@@ -233,10 +239,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\FlashbangService.cs" />
+    <Compile Include="Services\FlashbangServiceDesign.cs" />
+    <Compile Include="Services\IFlashbangService.cs" />
+    <Compile Include="ViewModel\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\WhitelistViewModel.cs" />
+    <Compile Include="Views\DemoFlashbangsView.xaml.cs">
+      <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WhitelistView.xaml.cs">
       <DependentUpon>WhitelistView.xaml</DependentUpon>
     </Compile>
+    <Page Include="resources\Heatmaps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DemoFlashbangsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WhitelistView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

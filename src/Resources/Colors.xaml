@@ -15,6 +15,7 @@
 	<Color x:Key="InfernoColor">#611e05</Color>
 	<Color x:Key="MirageColor">#56a5b3</Color>
 	<Color x:Key="CacheColor">#2a1014</Color>
+	<Color x:Key="Orange">#f0ad4e</Color>
 
 	<SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
 	<SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
@@ -23,6 +24,7 @@
 	<SolidColorBrush x:Key="RedColorBrush" Color="{StaticResource Red}" />
 	<SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}" />
 	<SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
+	<SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
 
 	<SolidColorBrush x:Key="Dust2ColorBrush" Color="{StaticResource Dust2Color}" />
 	<SolidColorBrush x:Key="InfernoColorBrush" Color="{StaticResource InfernoColor}" />

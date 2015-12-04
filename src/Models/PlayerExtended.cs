@@ -107,9 +107,11 @@ namespace CSGO_Demos_Manager.Models
 		private decimal _killsDeathsRatio;
 
 		/// <summary>
-		/// Player's current team (change when half side is over)
+		/// Player's current team side (change when half side is over)
 		/// </summary>
-		private Team _team;
+		private Team _side;
+
+		private TeamExtended _team;
 
 		/// <summary>
 		/// Player's SteamID 64
@@ -231,6 +233,12 @@ namespace CSGO_Demos_Manager.Models
 		/// Avatar URL of the player (get from Steam API)
 		/// </summary>
 		private string _avatarUrl = "../resources/images/avatar.jpg";
+
+		/// <summary>
+		/// Temp variable to calculate flash duration
+		/// </summary>
+		private float _flashDurationTemp = 0;
+
 		#endregion
 
 		#region Accessors
@@ -373,10 +381,10 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public Team Team
+		public Team Side
 		{
-			get { return _team; }
-			set { Set(() => Team, ref _team, value); }
+			get { return _side; }
+			set { Set(() => Side, ref _side, value); }
 		}
 
 		[JsonProperty("steamid")]
@@ -536,6 +544,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _roundPlayedCount; }
 			set { Set(() => RoundPlayedCount, ref _roundPlayedCount, value); }
+		}
+
+		[JsonIgnore]
+		public float FlashDurationTemp
+		{
+			get { return _flashDurationTemp; }
+			set { Set(() => FlashDurationTemp, ref _flashDurationTemp, value); }
 		}
 
 		[JsonProperty("entry_kills")]
@@ -750,6 +765,13 @@ namespace CSGO_Demos_Manager.Models
 				if (RoundPlayedCount > 0) return Math.Round((double)DeathCount / RoundPlayedCount, 2);
 				return 0;
 			}
+		}
+
+		[JsonProperty("team", IsReference = false)]
+		public TeamExtended Team
+		{
+			get { return _team; }
+			set { Set(() => Team, ref _team, value); }
 		}
 
 		#endregion

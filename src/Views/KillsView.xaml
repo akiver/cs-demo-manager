@@ -128,7 +128,7 @@
 
 								<TextBlock Grid.Row="0" Text="Teams" Style="{StaticResource SmallTitleStyle}"/>
 								<DataGrid x:Name="OpenFragsByTeams" Grid.Row="1"
-										  ItemsSource="{Binding CurrentDemo.Teams}"
+										  ItemsSource="{Binding Teams}"
 										  Style="{StaticResource DemosDataGridStyle}"
 										  CellStyle="{StaticResource DataGridCellStyle}">
 									<DataGrid.Columns>
@@ -223,7 +223,7 @@
 								<TextBlock Grid.Row="0" Text="Teams" Style="{StaticResource SmallTitleStyle}"/>
 								<DataGrid x:Name="EntryKillsByTeams"
 									  Grid.Row="1" Width="Auto"
-									  ItemsSource="{Binding CurrentDemo.Teams}"
+									  ItemsSource="{Binding Teams}"
 									  Style="{StaticResource DemosDataGridStyle}"
 									  CellStyle="{StaticResource DataGridCellStyle}">
 									<DataGrid.Columns>

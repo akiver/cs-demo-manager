@@ -18,9 +18,6 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Name, ref _name, value); }
 		}
 
-		[JsonProperty("players")]
-		public ObservableCollection<PlayerExtended> Players { get; set; }
-
 		[JsonProperty("entry_kill_count")]
 		public int EntryKillCount
 		{
@@ -38,6 +35,10 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false); }
 		}
+
+		[JsonProperty("flashbang_throwed_count")]
+		public int FlashbangThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+			.Sum(playerExtended => playerExtended.FlashbangThrowedCount);
 
 		[JsonIgnore]
 		public decimal RatioEntryKill
@@ -78,6 +79,9 @@ namespace CSGO_Demos_Manager.Models
 			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false); }
 		}
 
+		[JsonProperty("players", IsReference = false)]
+		public ObservableCollection<PlayerExtended> Players { get; set; }
+
 		[JsonIgnore]
 		public decimal RatioOpenKill
 		{
@@ -97,6 +101,7 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
 		public string RatioOpenKillAsString => RatioOpenKill + " %";
 
 		public override bool Equals(object obj)
@@ -115,7 +120,11 @@ namespace CSGO_Demos_Manager.Models
 		{
 			Players = new ObservableCollection<PlayerExtended>();
 			Players.CollectionChanged += OnPlayersCollectionChanged;
-			
+		}
+
+		public void Clear()
+		{
+			Players.Clear();
 		}
 
 		private void OnPlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

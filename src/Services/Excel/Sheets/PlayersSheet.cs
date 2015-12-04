@@ -87,13 +87,12 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 
 				foreach (PlayerExtended player in _demo.Players)
 				{
-					string teamName = _demo.Teams.First(t => t.Players.Contains(player)).Name;
 					IRow row = _sheet.CreateRow(rowNumber);
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.String, player.Name);
 					SetCellValue(row, columnNumber++, CellType.String, player.SteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RankNumberNew);
-					SetCellValue(row, columnNumber++, CellType.String, teamName);
+					SetCellValue(row, columnNumber++, CellType.String, player.Team.Name);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.KillsCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.AssistCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.DeathCount);

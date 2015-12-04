@@ -488,5 +488,17 @@
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource WhitelistRowContextMenu}" />
 	</Style>
+	<!-- End Whitelist -->
+	
+	<!-- Flashbangs view -->
+	<Style TargetType="DataGridColumnHeader" x:Key="TotalPlayerFlashbangThrowedHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang throwed by the player" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="TotalTeamFlashbangThrowedHeader">
+		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang throwed by the team" />
+	</Style>
+	<!-- End Flashbangs view -->
+
 
 </ResourceDictionary>

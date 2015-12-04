@@ -27,6 +27,7 @@
 				<ResourceDictionary Source="Resources/CheckBoxs.xaml" />
 				<ResourceDictionary Source="Resources/Images.xaml" />
 				<ResourceDictionary Source="Resources/Charts.xaml"/>
+				<ResourceDictionary Source="Resources/Heatmaps.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

@@ -46,6 +46,9 @@
 		<KeyBinding Command="{Binding GoToDemoDamagesCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+D" />
+		<KeyBinding Command="{Binding GoToDemoFlashbangsCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Gesture="CTRL+F" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}"/>
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
@@ -62,6 +65,7 @@
 		<Grid Grid.Row="0" Margin="5">
 			<Grid>
 				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
@@ -145,7 +149,22 @@
 					</StackPanel>
 				</Button>
 
-				<Button Grid.Column="5" Margin="5" Width="90" Height="30"
+				<Button Grid.Column="5" Margin="5" Width="95" Height="30"
+						Command="{Binding GoToDemoFlashbangsCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						Style="{DynamicResource AccentedSquareButtonStyle}"
+						ToolTip="Flashbangs (CTRL+F)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="20">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_camera_flash}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Flashbangs" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Grid.Column="6" Margin="5" Width="90" Height="30"
 						Command="{Binding AnalyzeDemoCommand}"
 						CommandParameter="{Binding CurrentDemo}"
 						Style="{DynamicResource AccentedSquareButtonStyle}"
@@ -160,7 +179,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Grid.Column="6" Margin="5" Width="110" Height="30"
+				<Button Grid.Column="7" Margin="5" Width="110" Height="30"
 						Command="{Binding Home.WatchDemoCommand, Source={StaticResource Locator}}"
 						CommandParameter="{Binding CurrentDemo}"
 						Style="{DynamicResource AccentedSquareButtonStyle}"
@@ -175,7 +194,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Grid.Column="7" Margin="5" Width="110" Height="30"
+				<Button Grid.Column="8" Margin="5" Width="110" Height="30"
 						Command="{Binding Details.WatchRoundCommand, Source={StaticResource Locator}}"
 						CommandParameter="{Binding CurrentRound}"
 						Style="{DynamicResource AccentedSquareButtonStyle}"
@@ -190,7 +209,7 @@
 					</StackPanel>
 				</Button>
 
-				<Button Grid.Column="8" Margin="5" Width="110" Height="30"
+				<Button Grid.Column="9" Margin="5" Width="110" Height="30"
 						Command="{Binding ExportDemoToExcelCommand}"
 						Style="{DynamicResource AccentedSquareButtonStyle}"
 						ToolTip="Export as XLS (CTRL+X)">
@@ -204,7 +223,7 @@
 					</StackPanel>
 				</Button>
 
-				<Grid Grid.Column="9">
+				<Grid Grid.Column="10">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>

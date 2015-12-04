@@ -333,55 +333,36 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void AddTeams()
 		{
-			// We must set team1 as CT and team2 as T
-			TeamExtended team1 = new TeamExtended()
-			{
-				Name = !string.IsNullOrWhiteSpace(Parser.CTClanName) ? Parser.CTClanName : TEAM1_NAME
-			};
+			Demo.ClanTagNameTeam1 = Demo.TeamCT.Name;
+			Demo.ClanTagNameTeam2 = Demo.TeamT.Name;
 
-			TeamExtended team2 = new TeamExtended()
-			{
-				Name = !string.IsNullOrWhiteSpace(Parser.TClanName) ? Parser.TClanName : TEAM2_NAME
-			};
-
-			Demo.ClanTagNameTeam1 = team1.Name;
-			Demo.ClanTagNameTeam2 = team2.Name;
-
-			// Add all players to our ObservableCollection of PlayerExtended and teams
+			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{
 				PlayerExtended pl = new PlayerExtended
 				{
 					SteamId = player.SteamID,
 					Name = player.Name,
-					Team = player.Team
+					Side = player.Team
 				};
 
 				Application.Current.Dispatcher.Invoke(delegate
 				{
 					if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
 
-					if (pl.Team == Team.CounterTerrorist)
+					if (pl.Side == Team.CounterTerrorist)
 					{
-						if (!Demo.PlayersTeam1.Contains(pl)) Demo.PlayersTeam1.Add(pl);
-						if (!team1.Players.Contains(pl)) team1.Players.Add(pl);
+						pl.Team = Demo.TeamCT;
+						if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
 					}
 
-					if (pl.Team == Team.Terrorist)
+					if (pl.Side == Team.Terrorist)
 					{
-						if (!Demo.PlayersTeam2.Contains(pl)) Demo.PlayersTeam2.Add(pl);
-						if (!team2.Players.Contains(pl)) team2.Players.Add(pl);
+						pl.Team = Demo.TeamT;
+						if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
 					}
 				});
 			}
-
-			// Add teams
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				Demo.Teams.Clear();
-				Demo.Teams.Add(team1);
-				Demo.Teams.Add(team2);
-			});
 		}
 	}
 }

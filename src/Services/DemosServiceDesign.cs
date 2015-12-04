@@ -87,6 +87,7 @@ namespace CSGO_Demos_Manager.Services
 					rounds.Add(round);
 				}
 
+				// TODO add teams and fix design time
 				Demo demo = new Demo
 				{
 					Id = "de_dust25445648778447878",
@@ -110,8 +111,6 @@ namespace CSGO_Demos_Manager.Services
 					ScoreSecondHalfTeam1 = 6,
 					ScoreSecondHalfTeam2 = 1,
 					Players = players,
-					PlayersTeam1 = new ObservableCollection<PlayerExtended>(players.Take(5)),
-					PlayersTeam2 = new ObservableCollection<PlayerExtended>(players.Skip(5).Take(5)),
 					MostBombPlantedPlayer = players.ElementAt(random.Next(10)),
 					MostHeadshotPlayer = players.ElementAt(random.Next(10)),
 					Rounds = rounds
@@ -252,8 +251,6 @@ namespace CSGO_Demos_Manager.Services
 			demo.ScoreSecondHalfTeam1 = 6;
 			demo.ScoreSecondHalfTeam2 = 1;
 			demo.Players = players;
-			demo.PlayersTeam1 = teams[0].Players;
-			demo.PlayersTeam2 = teams[1].Players;
 			demo.MostBombPlantedPlayer = players.ElementAt(random.Next(10));
 			demo.MostHeadshotPlayer = players.ElementAt(random.Next(10));
 			demo.MostEntryKillPlayer = players.ElementAt(random.Next(10));
@@ -261,7 +258,6 @@ namespace CSGO_Demos_Manager.Services
 			{
 				Name = "AK-47"
 			};
-			demo.Teams = teams;
 			demo.Rounds = rounds;
 
 			return Task.FromResult(demo);

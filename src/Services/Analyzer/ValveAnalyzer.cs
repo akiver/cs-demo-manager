@@ -1,5 +1,4 @@
-﻿using System;
-using CSGO_Demos_Manager.Models;
+﻿using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using DemoInfo;
 using System.IO;
@@ -121,17 +120,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			RoundCount = 0;
 			IsMatchStarted = true;
 
-			TeamExtended team1 = new TeamExtended()
-			{
-				Name = !string.IsNullOrWhiteSpace(Parser.CTClanName) ? Parser.CTClanName : TEAM1_NAME
-			};
-			TeamExtended team2 = new TeamExtended()
-			{
-				Name = !string.IsNullOrWhiteSpace(Parser.TClanName) ? Parser.TClanName : TEAM2_NAME
-			};
+			Demo.TeamCT.Name = !string.IsNullOrWhiteSpace(Parser.CTClanName) ? Parser.CTClanName : TEAM1_NAME;
+			Demo.TeamT.Name = !string.IsNullOrWhiteSpace(Parser.TClanName) ? Parser.TClanName : TEAM2_NAME;
 
-			Demo.ClanTagNameTeam1 = team1.Name;
-			Demo.ClanTagNameTeam2 = team2.Name;
+			Demo.ClanTagNameTeam1 = Demo.TeamCT.Name;
+			Demo.ClanTagNameTeam2 = Demo.TeamT.Name;
 
 			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
@@ -143,40 +136,36 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						SteamId = player.SteamID,
 						Name = player.Name,
-						Team = player.Team
+						Side = player.Team
 					};
 					if (!Demo.Players.Contains(pl))
 					{
 						Application.Current.Dispatcher.Invoke(delegate
 						{
 							Demo.Players.Add(pl);
-							if (pl.Team == Team.CounterTerrorist && !Demo.PlayersTeam1.Contains(pl))
+							if (pl.Side == Team.CounterTerrorist && !Demo.TeamCT.Players.Contains(pl))
 							{
-								Demo.PlayersTeam1.Add(pl);
-								if (!team1.Players.Contains(pl))
+								Demo.TeamCT.Players.Add(pl);
+								if (!Demo.TeamCT.Players.Contains(pl))
 								{
-									team1.Players.Add(pl);
+									Demo.TeamCT.Players.Add(pl);
 								}
+								pl.Team = Demo.TeamCT;
 							}
 
-							if (pl.Team == Team.Terrorist && !Demo.PlayersTeam2.Contains(pl))
+							if (pl.Side == Team.Terrorist && !Demo.TeamT.Players.Contains(pl))
 							{
-								Demo.PlayersTeam2.Add(pl);
-								if (!team2.Players.Contains(pl))
+								Demo.TeamT.Players.Add(pl);
+								if (!Demo.TeamT.Players.Contains(pl))
 								{
-									team2.Players.Add(pl);
+									Demo.TeamT.Players.Add(pl);
 								}
+								pl.Team = Demo.TeamT;
 							}
 						});
 					}
 				}
 			}
-
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				if (!Demo.Teams.Contains(team1)) Demo.Teams.Add(team1);
-				if (!Demo.Teams.Contains(team2)) Demo.Teams.Add(team2);
-			});
 
 			// First round handled here because round_start is raised before begin_new_match
 			CreateNewRound();
@@ -198,19 +187,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						{
 							SteamId = player.SteamID,
 							Name = player.Name,
-							Team = player.Team
+							Side = player.Team
 						};
 						Application.Current.Dispatcher.Invoke(delegate
 						{
 							Demo.Players.Add(pl);
-							if (pl.Team == Team.CounterTerrorist)
-							{
-								Demo.PlayersTeam1.Add(pl);
-							}
-							else
-							{
-								Demo.PlayersTeam2.Add(pl);
-							}
+							pl.Team = pl.Side == Team.CounterTerrorist ? Demo.TeamCT : Demo.TeamT;
 						});
 					}
 				}
@@ -226,11 +208,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (e.Reason == RoundEndReason.CTSurrender)
 			{
-				Demo.Surrender = IsHalfMatch ? Demo.Teams[1] : Demo.Teams[0];
+				Demo.Surrender = IsHalfMatch ? Demo.TeamT : Demo.TeamCT;
 			}
 			if (e.Reason == RoundEndReason.TerroristsSurrender)
 			{
-				Demo.Surrender = IsHalfMatch ? Demo.Teams[0] : Demo.Teams[1];
+				Demo.Surrender = IsHalfMatch ? Demo.TeamCT : Demo.TeamT;
 			}
 
 			Application.Current.Dispatcher.Invoke(delegate
@@ -351,7 +333,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				if (killEvent.Killer != null)
 				{
 					// TK
-					if (killEvent.Killer.Team == e.Victim.Team)
+					if (killEvent.Killer.Side == e.Victim.Team)
 					{
 						killEvent.Killer.TeamKillCount++;
 						killEvent.Killer.KillsCount--;

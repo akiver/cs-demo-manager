@@ -455,5 +455,41 @@
 		<Setter Property="FontSize" Value="22"/>
 		<Setter Property="HorizontalAlignment" Value="Center"/>
 	</Style>
+	<!-- End Charts TextBlock -->
+	
+	<!-- Heatmaps TextBlock -->
+	<Style TargetType="TextBlock" x:Key="ToolTipPlayerHeatmapStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="ToolTipLabelHeatmapStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="LabelHeatmapStyle">
+		<Setter Property="Margin" Value="0 0 0 5" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="DescriptionLabelHeatmapStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="LabelHeatmapInvisibleStyle">
+		<Setter Property="Visibility" Value="Hidden" />
+	</Style>
+	<!-- End heatmaps TextBlock -->
 
 </ResourceDictionary>

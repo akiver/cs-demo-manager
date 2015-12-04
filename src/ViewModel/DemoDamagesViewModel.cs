@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using CSGO_Demos_Manager.Models;
-using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Views;
 using DemoInfo;
@@ -226,7 +225,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						// A team has been selected
 						if (SelectedTeam != null)
 						{
-							players = SelectedTeam.Id == "T" ? CurrentDemo.PlayersTeam1.ToList() : CurrentDemo.PlayersTeam2.ToList();
+							players = SelectedTeam.Id == "CT" ? CurrentDemo.TeamCT.Players.ToList() : CurrentDemo.TeamT.Players.ToList();
 						}
 
 						// All players selected

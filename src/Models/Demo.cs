@@ -204,16 +204,6 @@ namespace CSGO_Demos_Manager.Models
 		private ObservableCollection<Overtime> _overtimes = new ObservableCollection<Overtime>();
 
 		/// <summary>
-		/// Team 1 players
-		/// </summary>
-		private ObservableCollection<PlayerExtended> _playersTeam1 = new ObservableCollection<PlayerExtended>();
-
-		/// <summary>
-		/// Team 2 players
-		/// </summary>
-		private ObservableCollection<PlayerExtended> _playersTeam2 = new ObservableCollection<PlayerExtended>();
-
-		/// <summary>
 		/// Player with the best HS ratio
 		/// </summary>
 		private PlayerExtended _mostHeadshotPlayer;
@@ -234,9 +224,19 @@ namespace CSGO_Demos_Manager.Models
 		private Weapon _mostKillingWeapon;
 
 		/// <summary>
-		/// Contains teams of the match
+		/// Counter-Terrorist team
 		/// </summary>
-		private ObservableCollection<TeamExtended> _teams = new ObservableCollection<TeamExtended>();
+		private TeamExtended _teamCt;
+
+		/// <summary>
+		/// Terrorit team
+		/// </summary>
+		private TeamExtended _teamT;
+
+		/// <summary>
+		/// Contains data about flashbangs which had blinded players
+		/// </summary>
+		private ObservableCollection<PlayerBlindedEvent> _playerBlindedEvents = new ObservableCollection<PlayerBlindedEvent>();
 
 		#endregion
 
@@ -263,6 +263,7 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Date, ref _date, value); }
 		}
 
+		[JsonIgnore]
 		public string DateAsString => _date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
 
 		[JsonIgnore]
@@ -359,39 +360,7 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Path, ref _path, value); }
 		}
 
-		[JsonProperty("surrender_team")]
-		public TeamExtended Surrender
-		{
-			get { return _surrender; }
-			set
-			{
-				Set(() => Surrender, ref _surrender, value);
-				RaisePropertyChanged(() => Surrender);
-			}
-		}
 
-		public string WinStatus
-		{
-			get
-			{
-				switch (MatchVerdictSelectedAccountCount)
-				{
-					case -2:
-						return "lost-s";
-					case -1:
-						return "lost";
-					case 0:
-						return "draw";
-					case 1:
-						return "won";
-					case 2:
-						return "won-s";
-					default:
-						return string.Empty;
-				}
-			}
-		}
-		
 		[JsonProperty("has_cheater")]
 		public bool HasCheater
 		{
@@ -441,9 +410,6 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => ScoreSecondHalfTeam2, ref _scoreSecondHalfTeam2, value); }
 		}
 
-		[JsonProperty("total_kill_count")]
-		public int TotalKillCount => Kills.Count;
-
 		[JsonProperty("five_kill_count")]
 		public int FiveKillCount
 		{
@@ -479,6 +445,85 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => OneKillCount, ref _onekillCount, value); }
 		}
 
+		[JsonProperty("clan_tag_name_team1")]
+		public string ClanTagNameTeam1
+		{
+			get { return _clanTagNameTeam1; }
+			set { Set(() => ClanTagNameTeam1, ref _clanTagNameTeam1, value); }
+		}
+
+		[JsonProperty("clan_tag_name_team2")]
+		public string ClanTagNameTeam2
+		{
+			get { return _clanTagNameTeam2; }
+			set { Set(() => ClanTagNameTeam2, ref _clanTagNameTeam2, value); }
+		}
+
+		[JsonProperty("team_ct", IsReference = true)]
+		public TeamExtended TeamCT
+		{
+			get { return _teamCt; }
+			set { Set(() => TeamCT, ref _teamCt, value); }
+		}
+
+		[JsonProperty("team_t", IsReference = true)]
+		public TeamExtended TeamT
+		{
+			get { return _teamT; }
+			set { Set(() => TeamT, ref _teamT, value); }
+		}
+
+		[JsonProperty("surrender_team")]
+		public TeamExtended Surrender
+		{
+			get { return _surrender; }
+			set
+			{
+				Set(() => Surrender, ref _surrender, value);
+				RaisePropertyChanged(() => Surrender);
+			}
+		}
+
+		[JsonProperty("rounds", IsReference = false)]
+		public ObservableCollection<Round> Rounds
+		{
+			get { return _rounds; }
+			set { Set(() => Rounds, ref _rounds, value); }
+		}
+
+		[JsonProperty("players", IsReference = false)]
+		public ObservableCollection<PlayerExtended> Players
+		{
+			get { return _players; }
+			set { Set(() => Players, ref _players, value); }
+		}
+
+		[JsonProperty("win_status")]
+		public string WinStatus
+		{
+			get
+			{
+				switch (MatchVerdictSelectedAccountCount)
+				{
+					case -2:
+						return "lost-s";
+					case -1:
+						return "lost";
+					case 0:
+						return "draw";
+					case 1:
+						return "won";
+					case 2:
+						return "won-s";
+					default:
+						return string.Empty;
+				}
+			}
+		}
+		
+		[JsonProperty("total_kill_count")]
+		public int TotalKillCount => Kills.Count;
+
 		[JsonProperty("bomb_defused_count")]
 		public int BombDefusedCount => BombDefused.Count;
 
@@ -495,42 +540,7 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => MostKillingWeapon, ref _mostKillingWeapon, value); }
 		}
 
-		[JsonProperty("clan_tag_name_team1")]
-		public string ClanTagNameTeam1
-		{
-			get { return _clanTagNameTeam1; }
-			set { Set(() => ClanTagNameTeam1, ref _clanTagNameTeam1, value); }
-		}
-
-		[JsonProperty("clan_tag_name_team2")]
-		public string ClanTagNameTeam2
-		{
-			get { return _clanTagNameTeam2; }
-			set { Set(() => ClanTagNameTeam2, ref _clanTagNameTeam2, value); }
-		}
-
-		[JsonProperty("rounds")]
-		public ObservableCollection<Round> Rounds
-		{
-			get { return _rounds; }
-			set { Set(() => Rounds, ref _rounds, value); }
-		}
-
-		[JsonProperty("players")]
-		public ObservableCollection<PlayerExtended> Players
-		{
-			get { return _players; }
-			set { Set(() => Players, ref _players, value); }
-		}
-
-		[JsonProperty("teams")]
-		public ObservableCollection<TeamExtended> Teams
-		{
-			get { return _teams; }
-			set { Set(() => Teams, ref _teams, value); }
-		}
-
-		[JsonProperty("overtimes")]
+		[JsonProperty("overtimes", IsReference = false)]
 		public ObservableCollection<Overtime> Overtimes
 		{
 			get { return _overtimes; }
@@ -569,36 +579,35 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		public ObservableCollection<PlayerExtended> PlayersTeam1
+		[JsonProperty("blinded_events", IsReference = false)]
+		public ObservableCollection<PlayerBlindedEvent> PlayerBlindedEvents
 		{
-			get { return _playersTeam1; }
-			set { Set(() => PlayersTeam1, ref _playersTeam1, value); }
+			get { return _playerBlindedEvents; }
+			set { Set(() => PlayerBlindedEvents, ref _playerBlindedEvents, value); }
 		}
 
-		public ObservableCollection<PlayerExtended> PlayersTeam2
-		{
-			get { return _playersTeam2; }
-			set { Set(() => PlayersTeam2, ref _playersTeam2, value); }
-		}
-
+		[JsonProperty("bombs_planted", IsReference = false)]
 		public ObservableCollection<BombPlantedEvent> BombPlanted
 		{
 			get { return _bombPlanted; }
 			set { Set(() => BombPlanted, ref _bombPlanted, value); }
 		}
 
+		[JsonProperty("bombs_defused", IsReference = false)]
 		public ObservableCollection<BombDefusedEvent> BombDefused
 		{
 			get { return _bombDefused; }
 			set { Set(() => BombDefused, ref _bombDefused, value); }
 		}
 
+		[JsonProperty("bombs_exploded", IsReference = false)]
 		public ObservableCollection<BombExplodedEvent> BombExploded
 		{
 			get { return _bombExploded; }
 			set { Set(() => BombExploded, ref _bombExploded, value); }
 		}
 
+		[JsonProperty("kills", IsReference = false)]
 		public ObservableCollection<KillEvent> Kills
 		{
 			get { return _kills; }
@@ -862,8 +871,8 @@ namespace CSGO_Demos_Manager.Models
 
 				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return -3;
 
-				// was in team 1?
-				player = PlayersTeam1.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				// was in team 1 (CT)?
+				player = TeamCT.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 				if (player != null)
 				{
 					if (ScoreTeam1 == ScoreTeam2) return 0;
@@ -871,8 +880,8 @@ namespace CSGO_Demos_Manager.Models
 					return -1;
 				}
 
-				// was in team 2?
-				player = PlayersTeam2.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				// was in team 2 (T)?
+				player = TeamT.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 				if (player != null)
 				{
 					if (ScoreTeam1 == ScoreTeam2) return 0;
@@ -1162,6 +1171,14 @@ namespace CSGO_Demos_Manager.Models
 
 		public Demo()
 		{
+			_teamCt = new TeamExtended
+			{
+				Name = "Team 1"
+			};
+			_teamT = new TeamExtended
+			{
+				Name = "Team 2"
+			};
 			Kills.CollectionChanged += OnKillsCollectionChanged;
 			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
 			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
@@ -1200,9 +1217,8 @@ namespace CSGO_Demos_Manager.Models
 					if (resetTeams)
 					{
 						_players.Clear();
-						_playersTeam1.Clear();
-						_playersTeam2.Clear();
-						_teams.Clear();
+						_teamCt.Clear();
+						_teamT.Clear();
 					}
 					else
 					{

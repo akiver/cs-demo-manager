@@ -112,13 +112,16 @@ namespace CSGO_Demos_Manager.Models
 
 		#region Accessors
 
-		[JsonProperty("kills")]
+		[JsonProperty("kills", IsReference = false)]
 		public ObservableCollection<KillEvent> Kills
 		{
 			get { return _kills; }
 			set { Set(() => Kills, ref _kills, value); }
 		}
 
+		/// <summary>
+		/// Used for overview
+		/// </summary>
 		[JsonIgnore]
 		public ObservableCollection<FlashbangExplodedEvent> FlashbangsExploded
 		{
@@ -271,21 +274,21 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => EntryKillEvent, ref _entryKillEvent, value); }
 		}
 
-		[JsonProperty("bomb_planted")]
+		[JsonProperty("bomb_planted", IsReference = false)]
 		public ObservableCollection<BombPlantedEvent> BombPlanted
 		{
 			get { return _bombPlanted; }
 			set { Set(() => BombPlanted, ref _bombPlanted, value); }
 		}
 
-		[JsonProperty("bomb_defused")]
+		[JsonProperty("bomb_defused", IsReference = false)]
 		public ObservableCollection<BombDefusedEvent> BombDefused
 		{
 			get { return _bombDefused; }
 			set { Set(() => BombDefused, ref _bombDefused, value); }
 		}
 
-		[JsonProperty("bomb_exploded")]
+		[JsonProperty("bomb_exploded", IsReference = false)]
 		public ObservableCollection<BombExplodedEvent> BombExploded
 		{
 			get { return _bombExploded; }
@@ -355,7 +358,7 @@ namespace CSGO_Demos_Manager.Models
 		/// <summary>
 		/// List of all hits happened during the round
 		/// </summary>
-		[JsonProperty("players_hurted")]
+		[JsonProperty("players_hurted", IsReference = false)]
 		public ObservableCollection<PlayerHurtedEvent> PlayersHurted
 		{
 			get { return _playerHurted; }

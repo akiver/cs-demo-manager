@@ -67,6 +67,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Demo> _goToDemoDamagesCommand;
 
+		private RelayCommand<Demo> _goToDemoFlashbangsCommand;
+
 		private RelayCommand<string> _saveCommentDemoCommand;
 
 		private RelayCommand<string> _addSuspectCommand;
@@ -107,8 +109,8 @@ namespace CSGO_Demos_Manager.ViewModel
 			set
 			{
 				Set(() => CurrentDemo, ref _currentDemo, value);
-				PlayersTeam1Collection = CollectionViewSource.GetDefaultView(_currentDemo.PlayersTeam1);
-				PlayersTeam2Collection = CollectionViewSource.GetDefaultView(_currentDemo.PlayersTeam2);
+				PlayersTeam1Collection = CollectionViewSource.GetDefaultView(_currentDemo.TeamCT.Players);
+				PlayersTeam2Collection = CollectionViewSource.GetDefaultView(_currentDemo.TeamT.Players);
 				PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 				PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 				RoundsCollection = CollectionViewSource.GetDefaultView(_currentDemo.Rounds);
@@ -291,6 +293,31 @@ namespace CSGO_Demos_Manager.ViewModel
 						DemoDamagesView demoDamagesView = new DemoDamagesView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(demoDamagesView);
+					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to demo flashbangs stats control
+		/// </summary>
+		public RelayCommand<Demo> GoToDemoFlashbangsCommand
+		{
+			get
+			{
+				return _goToDemoFlashbangsCommand
+					?? (_goToDemoFlashbangsCommand = new RelayCommand<Demo>(
+					async demo =>
+					{
+						if (!demo.PlayerBlindedEvents.Any())
+						{
+							await _dialogService.ShowMessageAsync("No flashbang events detected or you didn't analyze this demo.", MessageDialogStyle.Affirmative);
+							return;
+						}
+						var demoFlashbangsViewModel = (new ViewModelLocator()).DemoFlashbangs;
+						demoFlashbangsViewModel.CurrentDemo = demo;
+						DemoFlashbangsView demoFlashbangsView = new DemoFlashbangsView();
+						var mainViewModel = (new ViewModelLocator()).Main;
+						mainViewModel.CurrentPage.ShowPage(demoFlashbangsView);
 					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}

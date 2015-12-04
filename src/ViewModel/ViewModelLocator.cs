@@ -22,6 +22,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<ISteamService, SteamServiceDesign>();
 				SimpleIoc.Default.Register<ICacheService, CacheDesignService>();
 				SimpleIoc.Default.Register<ExcelService, ExcelService>();
+				SimpleIoc.Default.Register<IFlashbangService, FlashbangServiceDesign>();
 			}
 			else
 			{
@@ -30,6 +31,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<ISteamService, SteamService>();
 				SimpleIoc.Default.Register<ICacheService, CacheService>();
 				SimpleIoc.Default.Register<ExcelService, ExcelService>();
+				SimpleIoc.Default.Register<IFlashbangService, FlashbangService>();
 			}
 
 			SimpleIoc.Default.Register<MainViewModel>();
@@ -47,6 +49,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<AccountStatsWeaponViewModel>();
 			SimpleIoc.Default.Register<AccountStatsProgressViewModel>();
 			SimpleIoc.Default.Register<WhitelistViewModel>();
+			SimpleIoc.Default.Register<DemoFlashbangsViewModel>();
 		}
 
 		public MainViewModel Main
@@ -166,6 +169,14 @@ namespace CSGO_Demos_Manager.ViewModel
 			get
 			{
 				return ServiceLocator.Current.GetInstance<WhitelistViewModel>();
+			}
+		}
+
+		public DemoFlashbangsViewModel DemoFlashbangs
+		{
+			get
+			{
+				return ServiceLocator.Current.GetInstance<DemoFlashbangsViewModel>();
 			}
 		}
 

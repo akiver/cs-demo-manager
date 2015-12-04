@@ -51,20 +51,21 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 		{
 			await Task.Factory.StartNew(() =>
 			{
-				int rowNumber = 1;
+				IRow row = _sheet.CreateRow(1);
+				int columnNumber = 0;
+				SetCellValue(row, columnNumber++, CellType.String, _demo.TeamCT.Name);
+				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.TeamCT.EntryKillCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.TeamCT.EntryKillWinCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.TeamCT.EntryKillLossCount);
+				SetCellValue(row, columnNumber, CellType.String, _demo.TeamCT.RatioEntryKillAsString);
 
-				foreach (TeamExtended team in _demo.Teams)
-				{
-					IRow row = _sheet.CreateRow(rowNumber);
-					int columnNumber = 0;
-					SetCellValue(row, columnNumber++, CellType.String, team.Name);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.EntryKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.EntryKillWinCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.EntryKillLossCount);
-					SetCellValue(row, columnNumber, CellType.String, team.RatioEntryKillAsString);
-
-					rowNumber++;
-				}
+				row = _sheet.CreateRow(2);
+				columnNumber = 0;
+				SetCellValue(row, columnNumber++, CellType.String, _demo.TeamT.Name);
+				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.TeamT.EntryKillCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.TeamT.EntryKillWinCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.TeamT.EntryKillLossCount);
+				SetCellValue(row, columnNumber, CellType.String, _demo.TeamT.RatioEntryKillAsString);
 			});
 		}
 	}

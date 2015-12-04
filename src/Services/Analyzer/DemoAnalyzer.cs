@@ -63,6 +63,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		public bool AnalyzePlayersPosition { get; set; } = false;
 
+		public bool AnalyzeFlashbang { get; set; } = false;
+
 		private readonly IPlayerRatingService _playerRatingService = new PlayerRatingService();
 
 		/// <summary>
@@ -73,6 +75,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		public readonly Queue<PlayerExtended> LastPlayersFireStartedMolotov = new Queue<PlayerExtended>();
 
 		public readonly Queue<PlayerExtended> LastPlayersFireEndedMolotov = new Queue<PlayerExtended>();
+
+		/// <summary>
+		/// Last player who throwed a flashbang, used for flashbangs stats
+		/// </summary>
+		public PlayerExtended LastPlayerExplodedFlashbang { get; set; }
+
+		public Queue<PlayerExtended> PlayersFlashQueue = new Queue<PlayerExtended>();
 
 		#endregion
 
@@ -224,7 +233,29 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// <param name="e"></param>
 		protected void HandleTickDone(object sender, TickDoneEventArgs e)
 		{
-			if (!IsMatchStarted || IsFreezetime || !AnalyzePlayersPosition) return;
+			if (!IsMatchStarted || IsFreezetime) return;
+
+			if (AnalyzeFlashbang)
+			{
+				foreach (Player player in Parser.PlayingParticipants)
+				{
+					PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+					if (pl != null && player.FlashDuration >= pl.FlashDurationTemp)
+					{
+						PlayerBlindedEvent playerBlindedEvent = new PlayerBlindedEvent(Parser.CurrentTick)
+						{
+							Thrower = LastPlayerExplodedFlashbang,
+							Victim = pl,
+							Round = CurrentRound,
+							Duration = player.FlashDuration - pl.FlashDurationTemp
+						};
+						Demo.PlayerBlindedEvents.Add(playerBlindedEvent);
+					}
+				}
+				AnalyzeFlashbang = false;
+			}
+
+			if (!AnalyzePlayersPosition) return;
 
 			if (Parser.PlayingParticipants.Any())
 			{
@@ -452,12 +483,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							{
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.TeamTrouble = Demo.TeamCT;
 									CurrentRound.SideTrouble = Team.CounterTerrorist;
 								}
 								else
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.TeamTrouble = Demo.TeamT;
 									CurrentRound.SideTrouble = Team.Terrorist;
 								}
 							}
@@ -465,12 +496,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							{
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.TeamTrouble = Demo.TeamT;
 									CurrentRound.SideTrouble = Team.CounterTerrorist;
 								}
 								else
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.TeamTrouble = Demo.TeamCT;
 									CurrentRound.SideTrouble = Team.Terrorist;
 								}
 							}
@@ -481,12 +512,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							{
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.TeamTrouble = Demo.TeamCT;
 									CurrentRound.SideTrouble = Team.Terrorist;
 								}
 								else
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.TeamTrouble = Demo.TeamT;
 									CurrentRound.SideTrouble = Team.CounterTerrorist;
 								}
 							}
@@ -494,12 +525,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							{
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[1];
+									CurrentRound.TeamTrouble = Demo.TeamT;
 									CurrentRound.SideTrouble = Team.Terrorist;
 								}
 								else
 								{
-									CurrentRound.TeamTrouble = Demo.Teams[0];
+									CurrentRound.TeamTrouble = Demo.TeamCT;
 									CurrentRound.SideTrouble = Team.CounterTerrorist;
 								}
 							}
@@ -578,6 +609,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						break;
 					case EquipmentElement.Flash:
 						shooter.FlashbangThrowedCount++;
+						PlayersFlashQueue.Enqueue(shooter);
 						break;
 					case EquipmentElement.HE:
 						shooter.HeGrenadeThrowedCount++;
@@ -620,7 +652,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							X = e.Position.X,
 							Y = e.Position.Y,
 							Player = thrower,
-							Team = thrower?.Team ?? Team.Spectate,
+							Team = thrower?.Side ?? Team.Spectate,
 							Event = molotovEvent,
 							Round = CurrentRound
 						};
@@ -634,7 +666,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							X = e.Position.X,
 							Y = e.Position.Y,
 							Player = thrower,
-							Team = thrower?.Team ?? Team.Spectate,
+							Team = thrower?.Side ?? Team.Spectate,
 							Round = CurrentRound
 						};
 						Demo.MolotovFireStarted.Add(molotovEvent);
@@ -684,7 +716,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						X = e.Position.X,
 						Y = e.Position.Y,
 						Player = thrower,
-						Team = thrower?.Team ?? Team.Spectate,
+						Team = thrower?.Side ?? Team.Spectate,
 						Event = molotovEvent,
 						Round = CurrentRound
 					};
@@ -734,7 +766,22 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleFlashNadeExploded(object sender, FlashEventArgs e)
 		{
-			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
+			if(!IsMatchStarted || e.ThrownBy == null || !PlayersFlashQueue.Any()) return;
+
+			if (PlayersFlashQueue.Any())
+			{
+				LastPlayerExplodedFlashbang = PlayersFlashQueue.Dequeue();
+				// update flash intensity value for each player when the flash poped
+				foreach (Player player in Parser.PlayingParticipants)
+				{
+					PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+					if (pl != null) pl.FlashDurationTemp = player.FlashDuration;
+				}
+				// set it to true to start analyzing flashbang status at each tick
+				AnalyzeFlashbang = true;
+			}
+
+			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint) return;
 
 			FlashbangExplodedEvent flashbangEvent = new FlashbangExplodedEvent(Parser.IngameTick)
 			{
@@ -961,7 +1008,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			PlayerExtended playerDisconnected = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
 			if (playerDisconnected == null) return;
 			playerDisconnected.IsAlive = false;
-			playerDisconnected.Team = Team.Spectate;
+			playerDisconnected.Side = Team.Spectate;
 		}
 
 		#endregion
@@ -1049,7 +1096,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					pl.RoundPlayedCount++;
 					pl.IsAlive = true;
-					pl.Team = player.Team;
+					pl.Side = player.Team;
 				}
 			}
 		}
@@ -1077,7 +1124,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			foreach (PlayerExtended pl in Demo.Players)
 			{
-				pl.Team = pl.Team == Team.Terrorist ? Team.CounterTerrorist : Team.Terrorist;
+				pl.Side = pl.Side == Team.Terrorist ? Team.CounterTerrorist : Team.Terrorist;
 			}
 		}
 
@@ -1086,17 +1133,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// </summary>
 		protected void ProcessClutches()
 		{
-			int terroristAliveCount = Demo.Players.Count(p => p.Team == Team.Terrorist && p.IsAlive);
-			int counterTerroristAliveCount = Demo.Players.Count(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+			int terroristAliveCount = Demo.Players.Count(p => p.Side == Team.Terrorist && p.IsAlive);
+			int counterTerroristAliveCount = Demo.Players.Count(p => p.Side == Team.CounterTerrorist && p.IsAlive);
 
 			// First dectection of a 1vX situation, a terro is in clutch
 			if (_playerInClutch1 == null && terroristAliveCount == 1)
 			{
 				// Set the number of opponent in his clutch
-				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Team == Team.Terrorist && p.IsAlive);
+				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Side == Team.Terrorist && p.IsAlive);
 				if (_playerInClutch1 != null && _playerInClutch1.OpponentClutchCount == 0)
 				{
-					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Side == Team.CounterTerrorist && p.IsAlive);
 					_playerInClutch1.ClutchCount++;
 					return;
 				}
@@ -1105,10 +1152,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// First dectection of a 1vX situation, a CT is in clutch
 			if (_playerInClutch1 == null && counterTerroristAliveCount == 1)
 			{
-				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Side == Team.CounterTerrorist && p.IsAlive);
 				if (_playerInClutch1 != null && _playerInClutch1.OpponentClutchCount == 0)
 				{
-					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Team == Team.Terrorist && p.IsAlive);
+					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Side == Team.Terrorist && p.IsAlive);
 					_playerInClutch1.ClutchCount++;
 					return;
 				}
@@ -1117,8 +1164,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// 1v1 detection
 			if (counterTerroristAliveCount == 1 && terroristAliveCount == 1 && _playerInClutch1 != null)
 			{
-				Team player2Team = _playerInClutch1.Team == Team.CounterTerrorist ? Team.Terrorist : Team.CounterTerrorist;
-				_playerInClutch2 = Demo.Players.FirstOrDefault(p => p.Team == player2Team && p.IsAlive);
+				Team player2Team = _playerInClutch1.Side == Team.CounterTerrorist ? Team.Terrorist : Team.CounterTerrorist;
+				_playerInClutch2 = Demo.Players.FirstOrDefault(p => p.Side == player2Team && p.IsAlive);
 				if (_playerInClutch2 == null) return;
 				_playerInClutch2.ClutchCount++;
 				_playerInClutch2.OpponentClutchCount = 1;
@@ -1148,7 +1195,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (IsOpeningKillDone) return;
 
-			if (killEvent.Killer.Team == Team.Terrorist)
+			if (killEvent.Killer.Side == Team.Terrorist)
 			{
 				// This is an entry kill
 				Application.Current.Dispatcher.Invoke(delegate
@@ -1159,17 +1206,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					CurrentRound.EntryKillEvent = new EntryKillEvent(Parser.IngameTick)
 					{
 						Killed = Demo.Players.First(p => Equals(p, killEvent.DeathPerson)),
-						KilledTeam = killEvent.DeathPerson.Team,
+						KilledTeam = killEvent.DeathPerson.Side,
 						Killer = Demo.Players.First(p => Equals(p, killEvent.Killer)),
-						KillerTeam = killEvent.Killer.Team,
+						KillerTeam = killEvent.Killer.Side,
 						Weapon = killEvent.Weapon
 					};
 					CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
 					{
 						Killer = Demo.Players.First(p => Equals(p, killEvent.Killer)),
-						KilledTeam = killEvent.DeathPerson.Team,
+						KilledTeam = killEvent.DeathPerson.Side,
 						Killed = Demo.Players.First(p => Equals(p, killEvent.DeathPerson)),
-						KillerTeam = killEvent.Killer.Team,
+						KillerTeam = killEvent.Killer.Side,
 						Weapon = killEvent.Weapon
 					};
 					IsEntryKillDone = true;
@@ -1182,9 +1229,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
 				{
 					Killer = Demo.Players.First(p => Equals(p, killEvent.Killer)),
-					KilledTeam = killEvent.DeathPerson.Team,
+					KilledTeam = killEvent.DeathPerson.Side,
 					Killed = Demo.Players.First(p => Equals(p, killEvent.DeathPerson)),
-					KillerTeam = killEvent.Killer.Team,
+					KillerTeam = killEvent.Killer.Side,
 					Weapon = killEvent.Weapon
 				};
 				killEvent.Killer.HasOpeningKill = true;
@@ -1275,8 +1322,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// 1vX
 			if (_playerInClutch1 != null && _playerInClutch2 == null)
 			{
-				if (_playerInClutch1.Team == Team.Terrorist && CurrentRound.Winner == Team.Terrorist
-					|| _playerInClutch1.Team == Team.CounterTerrorist && CurrentRound.Winner == Team.CounterTerrorist)
+				if (_playerInClutch1.Side == Team.Terrorist && CurrentRound.Winner == Team.Terrorist
+					|| _playerInClutch1.Side == Team.CounterTerrorist && CurrentRound.Winner == Team.CounterTerrorist)
 				{
 					// T won the clutch
 					UpdatePlayerClutchCount(_playerInClutch1);
@@ -1288,7 +1335,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				switch (CurrentRound.Winner)
 				{
 					case Team.CounterTerrorist:
-						if (_playerInClutch1.Team == Team.CounterTerrorist)
+						if (_playerInClutch1.Side == Team.CounterTerrorist)
 						{
 							// CT won
 							UpdatePlayerClutchCount(_playerInClutch1);
@@ -1302,7 +1349,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						}
 						break;
 					case Team.Terrorist:
-						if (_playerInClutch1.Team == Team.Terrorist)
+						if (_playerInClutch1.Side == Team.Terrorist)
 						{
 							// T won
 							UpdatePlayerClutchCount(_playerInClutch1);

@@ -168,8 +168,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						Demo.ClanTagNameTeam1 = Parser.CTClanName;
 						Demo.ClanTagNameTeam2 = Parser.TClanName;
-						Demo.Teams[0].Name = Parser.CTClanName;
-						Demo.Teams[1].Name = Parser.TClanName;
+						Demo.TeamCT.Name = Parser.CTClanName;
+						Demo.TeamT.Name = Parser.TClanName;
 					}
 				}
 
@@ -462,21 +462,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void AddTeams()
 		{
-			// We must set team1 as CT and team2 as T
-			TeamExtended team1 = new TeamExtended()
-			{
-				Name = Parser.CTClanName
-			};
+			Demo.ClanTagNameTeam1 = Demo.TeamCT.Name;
+			Demo.ClanTagNameTeam2 = Demo.TeamT.Name;
 
-			TeamExtended team2 = new TeamExtended()
-			{
-				Name = Parser.TClanName
-			};
-
-			Demo.ClanTagNameTeam1 = team1.Name;
-			Demo.ClanTagNameTeam2 = team2.Name;
-
-			// Add all players to our ObservableCollection of PlayerExtended and teams
+			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{
 				if (player.SteamID != 0)
@@ -485,53 +474,45 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						SteamId = player.SteamID,
 						Name = player.Name,
-						Team = player.Team
+						Side = player.Team
 					};
 
 					Application.Current.Dispatcher.Invoke(delegate
 					{
 						if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
 
-						if (pl.Team == Team.CounterTerrorist)
+						if (pl.Side == Team.CounterTerrorist)
 						{
+							pl.Team = Demo.TeamCT;
 							// Check swap
-							if (Demo.PlayersTeam2.Contains(pl))
+							if (Demo.TeamT.Players.Contains(pl))
 							{
-								Demo.PlayersTeam1.Add(Demo.PlayersTeam2.First(p => p.Equals(pl)));
-								Demo.PlayersTeam2.Remove(pl);
+								Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
+								Demo.TeamT.Players.Remove(pl);
 							}
 							else
 							{
-								if (!Demo.PlayersTeam1.Contains(pl)) Demo.PlayersTeam1.Add(pl);
+								if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
 							}
-							team1.Players.Add(Demo.Players.First(p => p.Equals(pl)));
 						}
 
-						if (pl.Team == Team.Terrorist)
+						if (pl.Side == Team.Terrorist)
 						{
+							pl.Team = Demo.TeamT;
 							// Check swap
-							if (Demo.PlayersTeam1.Contains(pl))
+							if (Demo.TeamCT.Players.Contains(pl))
 							{
-								Demo.PlayersTeam2.Add(Demo.PlayersTeam1.First(p => p.Equals(pl)));
-								Demo.PlayersTeam1.Remove(pl);
+								Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
+								Demo.TeamCT.Players.Remove(pl);
 							}
 							else
 							{
-								if (!Demo.PlayersTeam2.Contains(pl)) Demo.PlayersTeam2.Add(pl);
+								if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
 							}
-							team2.Players.Add(Demo.Players.First(p => p.Equals(pl)));
 						}
 					});
 				}
 			}
-
-			// Add teams
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				Demo.Teams.Clear();
-				Demo.Teams.Add(team1);
-				Demo.Teams.Add(team2);
-			});
 		}
 	}
 }
