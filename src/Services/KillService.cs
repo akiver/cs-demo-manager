@@ -31,6 +31,8 @@ namespace CSGO_Demos_Manager.Services
 					{
 						if (player.Equals(e.Killer))
 						{
+							if (!playerKillStats.ContainsKey(e.DeathPerson))
+								playerKillStats.Add(e.DeathPerson, 0);
 							playerKillStats[e.DeathPerson]++;
 						}
 					}
