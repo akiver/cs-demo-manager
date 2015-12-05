@@ -327,6 +327,7 @@
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
 					<Grid Grid.Column="0" Margin="10" ToolTip="Number of round played">
@@ -365,7 +366,16 @@
 						</Border>
 					</Grid>
 
-					<Grid Grid.Column="4" Margin="10" ToolTip="Clutch won %">
+					<Grid Grid.Column="4" Margin="10" ToolTip="Average Damages Per Round">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
+							<StackPanel Orientation="Vertical" Margin="5">
+								<TextBlock Text="ADR" Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding AverageDamagesPerRound}" Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="5" Margin="10" ToolTip="Clutch won %">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 							<StackPanel Orientation="Vertical" Margin="5">
 								<TextBlock Text="Clutch %" Style="{StaticResource StatsTitleStyle}"/>

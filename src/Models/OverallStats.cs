@@ -87,5 +87,14 @@ namespace CSGO_Demos_Manager.Models
 				return Math.Round((ClutchWin * 100) / (double)ClutchCount, 2);
 			}
 		}
+
+		public double AverageDamagesPerRound
+		{
+			get
+			{
+				if (RoundCount == 0) return 0;
+				return Math.Round((double)DamageCount / RoundCount, 2);
+			}
+		}
 	}
 }
