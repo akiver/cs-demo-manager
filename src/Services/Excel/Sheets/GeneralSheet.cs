@@ -89,8 +89,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets
 				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.ServerTickrate);
 				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.Tickrate);
 				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.Duration);
-				SetCellValue(row, columnNumber++, CellType.String, _demo.ClanTagNameTeam1);
-				SetCellValue(row, columnNumber++, CellType.String, _demo.ClanTagNameTeam2);
+				SetCellValue(row, columnNumber++, CellType.String, _demo.TeamCT.Name);
+				SetCellValue(row, columnNumber++, CellType.String, _demo.TeamT.Name);
 				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.ScoreTeam1);
 				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.ScoreTeam2);
 				SetCellValue(row, columnNumber++, CellType.Numeric, _demo.ScoreFirstHalfTeam1);

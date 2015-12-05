@@ -164,10 +164,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				if (!_isTeamsNameDetected)
 				{
 					_isTeamsNameDetected = true;
-					if (Parser.CTClanName != Demo.ClanTagNameTeam1)
+					if (Parser.CTClanName != Demo.TeamCT.Name)
 					{
-						Demo.ClanTagNameTeam1 = Parser.CTClanName;
-						Demo.ClanTagNameTeam2 = Parser.TClanName;
+						Demo.TeamCT.Name = Parser.CTClanName;
+						Demo.TeamT.Name = Parser.TClanName;
 						Demo.TeamCT.Name = Parser.CTClanName;
 						Demo.TeamT.Name = Parser.TClanName;
 					}
@@ -454,6 +454,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					CreateNewRound();
 					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
 					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
+					if (!string.IsNullOrEmpty(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
+					if (!string.IsNullOrEmpty(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
 				});
 			}
 
@@ -462,9 +464,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void AddTeams()
 		{
-			Demo.ClanTagNameTeam1 = Demo.TeamCT.Name;
-			Demo.ClanTagNameTeam2 = Demo.TeamT.Name;
-
 			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{

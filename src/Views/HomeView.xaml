@@ -482,9 +482,9 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="MapNameColumn" Width="Auto" Header="Map" Binding="{Binding MapName}" HeaderStyle="{StaticResource MapNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMapNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-				<DataGridTextColumn x:Name="TeamName1Column" Width="Auto" Header="Team 1" Binding="{Binding ClanTagNameTeam1}" HeaderStyle="{StaticResource Team1NameHeader}"
+				<DataGridTextColumn x:Name="TeamName1Column" Width="Auto" Header="Team 1" Binding="{Binding TeamCT.Name}" HeaderStyle="{StaticResource Team1NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-				<DataGridTextColumn x:Name="TeamName2Column" Width="Auto" Header="Team 2" Binding="{Binding ClanTagNameTeam2}" HeaderStyle="{StaticResource Team2NameHeader}"
+				<DataGridTextColumn x:Name="TeamName2Column" Width="Auto" Header="Team 2" Binding="{Binding TeamT.Name}" HeaderStyle="{StaticResource Team2NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTemplateColumn x:Name="WinStatusHeader" Header="Status" Width="Auto" HeaderStyle="{StaticResource WinStatusHeader}" SortMemberPath="WinStatus">
 					<DataGridTemplateColumn.CellTemplate>

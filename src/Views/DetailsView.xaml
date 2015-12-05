@@ -418,7 +418,7 @@
 								</Grid.ColumnDefinitions>
 								<Grid Grid.Column="0" HorizontalAlignment="Right">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="{Binding CurrentDemo.ClanTagNameTeam1}" Style="{StaticResource TeamTitleScoreboard}"/>
+										<TextBlock Text="{Binding CurrentDemo.TeamCT.Name}" Style="{StaticResource TeamTitleScoreboard}"/>
 										<TextBlock Text="{Binding CurrentDemo.ScoreTeam1}" Style="{StaticResource TeamScoreScoreboard}"/>
 									</StackPanel>
 								</Grid>
@@ -439,7 +439,7 @@
 								<Grid Grid.Column="2" HorizontalAlignment="Left">
 									<StackPanel Orientation="Horizontal">
 										<TextBlock Text="{Binding CurrentDemo.ScoreTeam2}" Style="{StaticResource TeamScoreScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ClanTagNameTeam2}" Style="{StaticResource TeamTitleScoreboard}"/>
+										<TextBlock Text="{Binding CurrentDemo.TeamT.Name}" Style="{StaticResource TeamTitleScoreboard}"/>
 									</StackPanel>
 								</Grid>
 							</Grid>

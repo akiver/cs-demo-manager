@@ -116,15 +116,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
 		{
-			if(IsMatchStarted) Demo.ResetStats(false);
+			if (IsMatchStarted) Demo.ResetStats(false);
 			RoundCount = 0;
 			IsMatchStarted = true;
 
-			Demo.TeamCT.Name = !string.IsNullOrWhiteSpace(Parser.CTClanName) ? Parser.CTClanName : TEAM1_NAME;
-			Demo.TeamT.Name = !string.IsNullOrWhiteSpace(Parser.TClanName) ? Parser.TClanName : TEAM2_NAME;
-
-			Demo.ClanTagNameTeam1 = Demo.TeamCT.Name;
-			Demo.ClanTagNameTeam2 = Demo.TeamT.Name;
+			if (!string.IsNullOrWhiteSpace(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
+			if (!string.IsNullOrWhiteSpace(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
 
 			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
@@ -428,13 +425,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam2) ? Demo.ClanTagNameTeam2 : TEAM2_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam1) ? Demo.ClanTagNameTeam1 : TEAM1_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 					}
@@ -443,13 +440,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam1) ? Demo.ClanTagNameTeam1 : TEAM1_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam2) ? Demo.ClanTagNameTeam2 : TEAM2_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 					}
@@ -461,13 +458,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam2) ? Demo.ClanTagNameTeam2 : TEAM2_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						Demo.ScoreSecondHalfTeam2++;
 						Demo.ScoreTeam2++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam1) ? Demo.ClanTagNameTeam1 : TEAM1_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
 					}
@@ -476,13 +473,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.Terrorist)
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam2) ? Demo.ClanTagNameTeam2 : TEAM2_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						Demo.ScoreFirstHalfTeam2++;
 						Demo.ScoreTeam2++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = !string.IsNullOrWhiteSpace(Demo.ClanTagNameTeam1) ? Demo.ClanTagNameTeam1 : TEAM1_NAME;
+						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;
 					}

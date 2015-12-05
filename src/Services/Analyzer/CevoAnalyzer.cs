@@ -333,9 +333,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void AddTeams()
 		{
-			Demo.ClanTagNameTeam1 = Demo.TeamCT.Name;
-			Demo.ClanTagNameTeam2 = Demo.TeamT.Name;
-
 			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{

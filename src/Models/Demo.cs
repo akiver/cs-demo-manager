@@ -144,16 +144,6 @@ namespace CSGO_Demos_Manager.Models
 		private int _fivekillCount;
 
 		/// <summary>
-		/// Clan tag name 1st team
-		/// </summary>
-		private string _clanTagNameTeam1 = "Team 1";
-
-		/// <summary>
-		/// Clan tag name 2nd team
-		/// </summary>
-		private string _clanTagNameTeam2 = "Team 2";
-
-		/// <summary>
 		/// User's comment
 		/// </summary>
 		private string _comment = "";
@@ -443,20 +433,6 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _onekillCount; }
 			set { Set(() => OneKillCount, ref _onekillCount, value); }
-		}
-
-		[JsonProperty("clan_tag_name_team1")]
-		public string ClanTagNameTeam1
-		{
-			get { return _clanTagNameTeam1; }
-			set { Set(() => ClanTagNameTeam1, ref _clanTagNameTeam1, value); }
-		}
-
-		[JsonProperty("clan_tag_name_team2")]
-		public string ClanTagNameTeam2
-		{
-			get { return _clanTagNameTeam2; }
-			set { Set(() => ClanTagNameTeam2, ref _clanTagNameTeam2, value); }
 		}
 
 		[JsonProperty("team_ct", IsReference = true)]
