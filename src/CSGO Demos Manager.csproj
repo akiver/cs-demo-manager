@@ -187,6 +187,7 @@
     <Compile Include="Models\KillHeatmapPoint.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
     <Compile Include="Models\Stats\FlashbangDataPoint.cs" />
+    <Compile Include="Models\Stats\KillDataPoint.cs" />
     <Compile Include="Models\Stats\MapStats.cs" />
     <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Comparers\HeatmapPointComparer.cs" />
@@ -239,9 +240,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\KillService.cs" />
     <Compile Include="Services\FlashbangService.cs" />
     <Compile Include="Services\FlashbangServiceDesign.cs" />
     <Compile Include="Services\IFlashbangService.cs" />
+    <Compile Include="Services\IKillService.cs" />
+    <Compile Include="Services\KillServiceDesign.cs" />
     <Compile Include="ViewModel\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\WhitelistViewModel.cs" />
     <Compile Include="Views\DemoFlashbangsView.xaml.cs">
@@ -360,7 +364,7 @@
     <Compile Include="ViewModel\AccountStats\AccountStatsWeaponViewModel.cs" />
     <Compile Include="ViewModel\DemoDamagesViewModel.cs" />
     <Compile Include="ViewModel\DetailsViewModel.cs" />
-    <Compile Include="ViewModel\EntryKillsViewModel.cs" />
+    <Compile Include="ViewModel\KillsViewModel.cs" />
     <Compile Include="ViewModel\HeatmapViewModel.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

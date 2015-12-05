@@ -23,6 +23,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<ICacheService, CacheDesignService>();
 				SimpleIoc.Default.Register<ExcelService, ExcelService>();
 				SimpleIoc.Default.Register<IFlashbangService, FlashbangServiceDesign>();
+				SimpleIoc.Default.Register<IKillService, KillServiceDesign>();
 			}
 			else
 			{
@@ -32,6 +33,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<ICacheService, CacheService>();
 				SimpleIoc.Default.Register<ExcelService, ExcelService>();
 				SimpleIoc.Default.Register<IFlashbangService, FlashbangService>();
+				SimpleIoc.Default.Register<IKillService, KillService>();
 			}
 
 			SimpleIoc.Default.Register<MainViewModel>();
@@ -40,7 +42,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<DetailsViewModel>();
 			SimpleIoc.Default.Register<SuspectsViewModel>();
 			SimpleIoc.Default.Register<HeatmapViewModel>();
-			SimpleIoc.Default.Register<EntryKillsViewModel>();
+			SimpleIoc.Default.Register<KillsViewModel>();
 			SimpleIoc.Default.Register<OverviewViewModel>();
 			SimpleIoc.Default.Register<DemoDamagesViewModel>();
 			SimpleIoc.Default.Register<AccountStatsOverallViewModel>();
@@ -100,11 +102,11 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public EntryKillsViewModel Kills
+		public KillsViewModel Kills
 		{
 			get
 			{
-				return ServiceLocator.Current.GetInstance<EntryKillsViewModel>();
+				return ServiceLocator.Current.GetInstance<KillsViewModel>();
 			}
 		}
 

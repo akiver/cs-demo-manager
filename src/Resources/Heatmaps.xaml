@@ -51,4 +51,30 @@
 		</Border>
 	</DataTemplate>
 
+	<DataTemplate x:Key="KillPlayerToolTipTemplate">
+		<Border Padding="10">
+			<Border.Effect>
+				<DropShadowEffect BlurRadius="3" ShadowDepth="1" Color="{StaticResource LightGreen}" />
+			</Border.Effect>
+			<Grid Background="{StaticResource LightGreyBrush}">
+				<Grid Margin="10">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					<TextBlock Grid.Column="0" Text="{Binding DataItem.Killer}" Style="{StaticResource ToolTipPlayerHeatmapStyle}" />
+					<TextBlock Grid.Column="1" Text=" killed " Style="{StaticResource ToolTipLabelHeatmapStyle}" />
+					<TextBlock Grid.Column="2" Text="{Binding DataItem.Victim}" Style="{StaticResource ToolTipPlayerHeatmapStyle}" />
+					<TextBlock Grid.Column="3" Text="{Binding DataItem.Count, StringFormat='{} {0}'}"
+							   Style="{StaticResource ToolTipPlayerHeatmapStyle}"
+							   Foreground="{StaticResource LightRedColorBrush}" />
+					<TextBlock Grid.Column="4" Text=" time(s)" Style="{StaticResource ToolTipLabelHeatmapStyle}" />
+				</Grid>
+			</Grid>
+		</Border>
+	</DataTemplate>
+
 </ResourceDictionary>
