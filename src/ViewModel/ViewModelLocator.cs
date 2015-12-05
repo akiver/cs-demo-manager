@@ -56,133 +56,37 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<DemoFlashbangsViewModel>();
 		}
 
-		public MainViewModel Main
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<MainViewModel>();
-			}
-		}
+		public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
-		public SettingsViewModel Settings
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<SettingsViewModel>();
-			}
-		}
+		public SettingsViewModel Settings => ServiceLocator.Current.GetInstance<SettingsViewModel>();
 
-		public DetailsViewModel Details
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<DetailsViewModel>();
-			}
-		}
+		public DetailsViewModel Details => ServiceLocator.Current.GetInstance<DetailsViewModel>();
 
-		public HomeViewModel Home
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<HomeViewModel>();
-			}
-		}
+		public HomeViewModel Home => ServiceLocator.Current.GetInstance<HomeViewModel>();
 
-		public SuspectsViewModel Suspects
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<SuspectsViewModel>();
-			}
-		}
+		public SuspectsViewModel Suspects => ServiceLocator.Current.GetInstance<SuspectsViewModel>();
 
-		public HeatmapViewModel Heatmap
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<HeatmapViewModel>();
-			}
-		}
+		public HeatmapViewModel Heatmap => ServiceLocator.Current.GetInstance<HeatmapViewModel>();
 
-		public KillsViewModel Kills
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<KillsViewModel>();
-			}
-		}
+		public KillsViewModel Kills => ServiceLocator.Current.GetInstance<KillsViewModel>();
 
-		public OverviewViewModel Overview
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<OverviewViewModel>();
-			}
-		}
+		public OverviewViewModel Overview => ServiceLocator.Current.GetInstance<OverviewViewModel>();
 
-		public DemoDamagesViewModel DemoDamages
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<DemoDamagesViewModel>();
-			}
-		}
+		public DemoDamagesViewModel DemoDamages => ServiceLocator.Current.GetInstance<DemoDamagesViewModel>();
 
-		public AccountStatsOverallViewModel AccountStatsGeneral
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<AccountStatsOverallViewModel>();
-			}
-		}
+		public AccountStatsOverallViewModel AccountStatsGeneral => ServiceLocator.Current.GetInstance<AccountStatsOverallViewModel>();
 
-		public AccountStatsRankViewModel AccountStatsRank
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<AccountStatsRankViewModel>();
-			}
-		}
+		public AccountStatsRankViewModel AccountStatsRank => ServiceLocator.Current.GetInstance<AccountStatsRankViewModel>();
 
-		public AccountStatsMapViewModel AccountStatsMap
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<AccountStatsMapViewModel>();
-			}
-		}
+		public AccountStatsMapViewModel AccountStatsMap => ServiceLocator.Current.GetInstance<AccountStatsMapViewModel>();
 
-		public AccountStatsWeaponViewModel AccountStatsWeapon
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<AccountStatsWeaponViewModel>();
-			}
-		}
+		public AccountStatsWeaponViewModel AccountStatsWeapon => ServiceLocator.Current.GetInstance<AccountStatsWeaponViewModel>();
 
-		public AccountStatsProgressViewModel AccountStatsProgress
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<AccountStatsProgressViewModel>();
-			}
-		}
+		public AccountStatsProgressViewModel AccountStatsProgress => ServiceLocator.Current.GetInstance<AccountStatsProgressViewModel>();
 
-		public WhitelistViewModel Whitelist
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<WhitelistViewModel>();
-			}
-		}
+		public WhitelistViewModel Whitelist => ServiceLocator.Current.GetInstance<WhitelistViewModel>();
 
-		public DemoFlashbangsViewModel DemoFlashbangs
-		{
-			get
-			{
-				return ServiceLocator.Current.GetInstance<DemoFlashbangsViewModel>();
-			}
-		}
+		public DemoFlashbangsViewModel DemoFlashbangs => ServiceLocator.Current.GetInstance<DemoFlashbangsViewModel>();
 
 		public static void Cleanup()
 		{
