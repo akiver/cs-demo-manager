@@ -25,14 +25,14 @@ namespace CSGO_Demos_Manager.Services
 				{
 					Dictionary<PlayerExtended, float> playerFlashStats = new Dictionary<PlayerExtended, float>();
 
-					foreach (PlayerBlindedEvent e in Demo.PlayerBlindedEvents)
+					foreach (PlayerExtended pl in Demo.Players)
 					{
-						if (player.Equals(e.Thrower))
-						{
-							if (!playerFlashStats.ContainsKey(e.Victim))
-								playerFlashStats.Add(e.Victim, 0);
-							playerFlashStats[e.Victim] += e.Duration;
-						}
+						if (!playerFlashStats.ContainsKey(pl)) playerFlashStats.Add(pl, 0);
+					}
+
+					foreach (PlayerBlindedEvent e in Demo.PlayerBlindedEvents.Where(e => player.Equals(e.Thrower)))
+					{
+						playerFlashStats[e.Victim] += e.Duration;
 					}
 
 					data.AddRange(playerFlashStats.Select(playerStats => new FlashbangDataPoint
