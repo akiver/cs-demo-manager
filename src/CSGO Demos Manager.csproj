@@ -250,6 +250,10 @@
     <Compile Include="Views\WhitelistView.xaml.cs">
       <DependentUpon>WhitelistView.xaml</DependentUpon>
     </Compile>
+    <Page Include="resources\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\Heatmaps.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

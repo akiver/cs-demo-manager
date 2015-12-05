@@ -79,7 +79,7 @@
 				</Grid.ColumnDefinitions>
 
 				<Button Grid.Column="0" Margin="5" Width="70" Height="30"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Back (CTRL+B)" 
 						Command="{Binding BackToHomeCommand}">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -94,7 +94,7 @@
 
 				<Button Grid.Column="1" Margin="5" Width="90" Height="30"
 						Command="{Binding HeatmapCommand}" CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Heatmap generator (CTRL+H)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -108,7 +108,7 @@
 
 				<Button Grid.Column="2" Margin="5" Width="90" Height="30"
 						Command="{Binding OverviewCommand}" CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Overview (CTRL+O)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -122,7 +122,7 @@
 
 				<Button Grid.Column="3" Margin="5" Width="80" Height="30"
 						Command="{Binding GoToKillsCommand}" CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Kills details (CTRL+K)">
 					<StackPanel Orientation="Horizontal">
 						<Rectangle Width="25" Height="15">
@@ -137,7 +137,7 @@
 				<Button Grid.Column="4" Margin="5" Width="90" Height="30"
 						Command="{Binding GoToDemoDamagesCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Damages (CTRL+D)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -152,7 +152,7 @@
 				<Button Grid.Column="5" Margin="5" Width="95" Height="30"
 						Command="{Binding GoToDemoFlashbangsCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Flashbangs (CTRL+F)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="20">
@@ -167,7 +167,7 @@
 				<Button Grid.Column="6" Margin="5" Width="90" Height="30"
 						Command="{Binding AnalyzeDemoCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Analyze (CTRL+S)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="25" Height="15">
@@ -182,7 +182,7 @@
 				<Button Grid.Column="7" Margin="5" Width="110" Height="30"
 						Command="{Binding Home.WatchDemoCommand, Source={StaticResource Locator}}"
 						CommandParameter="{Binding CurrentDemo}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Watch Demo (CTRL+W)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -197,7 +197,7 @@
 				<Button Grid.Column="8" Margin="5" Width="110" Height="30"
 						Command="{Binding Details.WatchRoundCommand, Source={StaticResource Locator}}"
 						CommandParameter="{Binding CurrentRound}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Watch round">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -211,7 +211,7 @@
 
 				<Button Grid.Column="9" Margin="5" Width="110" Height="30"
 						Command="{Binding ExportDemoToExcelCommand}"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Export as XLS (CTRL+X)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">
@@ -269,10 +269,13 @@
 					</Grid.ColumnDefinitions>
 					<!-- Slider -->
 					<Grid Grid.Column="0" Width="10">
-						<Button Height="400" Margin="2" Command="{Binding ToggleLeftSideCommand}" Style="{DynamicResource AccentedSquareButtonStyle}" Width="10" />
+						<Button Height="400" Margin="2" Width="10"
+								Command="{Binding ToggleLeftSideCommand}"
+								Style="{StaticResource GeneralButtonStyle}" />
 					</Grid>
 
-					<Grid Margin="10" Grid.Column="1" Visibility="{Binding IsLeftSideVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<Grid Margin="10" Grid.Column="1"
+						  Visibility="{Binding IsLeftSideVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="*" />
@@ -351,14 +354,11 @@
 								</Grid.RowDefinitions>
 								<TextBlock Text="Comment : " Grid.Row="0" Style="{StaticResource LabelGeneralInfoDemo}" VerticalAlignment="Bottom"/>
 								<TextBox Grid.Row="1" x:Name="TextBoxComment" TextWrapping="Wrap" AcceptsReturn="True" Text="{Binding CurrentDemo.Comment}" />
-								<Button Grid.Row="2"
-								Margin="0 5 0 0"
-								Command="{Binding SaveCommentDemoCommand}"
-								CommandParameter="{Binding ElementName=TextBoxComment, Path=Text}"
-								Style="{DynamicResource AccentedSquareButtonStyle}"
-								Content="Save comment"
-								Width="90"
-								Height="30"/>
+								<Button Grid.Row="2" Margin="0 5 0 0" HorizontalAlignment="Center"
+										Command="{Binding SaveCommentDemoCommand}"
+										CommandParameter="{Binding ElementName=TextBoxComment, Path=Text}"
+										Style="{StaticResource GeneralButtonStyle}"
+										Content="Save comment" />
 							</Grid>
 						</StackPanel>
 

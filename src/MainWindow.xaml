@@ -118,23 +118,23 @@
 								<TextBlock Text="Data" Style="{StaticResource TitleSettingsStyle}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
-										Style="{DynamicResource AccentedSquareButtonStyle}"
-										Content="Clear Demos Data" />
+										Style="{StaticResource GeneralButtonStyle}"
+										Content="Clear demos data" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ExportCustomDataCacheCommand}"
-										Style="{DynamicResource AccentedSquareButtonStyle}"
-										Content="Export Custom Data" />
+										Style="{StaticResource GeneralButtonStyle}"
+										Content="Export custom data" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ImportCustomDataCacheCommand}"
-										Style="{DynamicResource AccentedSquareButtonStyle}"
-										Content="Import Custom Data" />
+										Style="{StaticResource GeneralButtonStyle}"
+										Content="Import custom data" />
 							</StackPanel>
 
 							<StackPanel Margin="10" Grid.Row="3">
 								<TextBlock Text="Miscellaneous" Style="{StaticResource TitleSettingsStyle}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.NavigateToLogFile}"
-										Style="{DynamicResource AccentedSquareButtonStyle}"
+										Style="{StaticResource GeneralButtonStyle}"
 										Content="Errors log file" />
 							</StackPanel>
 						</Grid>
@@ -152,16 +152,14 @@
 									<ListView ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}"/>
 									<StackPanel Orientation="Horizontal">
 										<Button Command="{Binding AddFolderCommand}"
-											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Margin="0 5 0 0">
-											<TextBlock Text="Add folder" Style="{StaticResource ButtonTitleStyle}" />
-										</Button>
+												Style="{StaticResource GeneralButtonStyle}"
+												Margin="0 5 0 0"
+												Content="Add folder" />
 										<Button Command="{Binding RemoveFolderCommand}"
-											CommandParameter="{Binding Path=SelectedFolder}"
-											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Margin="10 5 0 0">
-											<TextBlock Text="Remove folder" Style="{StaticResource ButtonTitleStyle}" />
-										</Button>
+												CommandParameter="{Binding Path=SelectedFolder}"
+												Style="{StaticResource GeneralButtonStyle}"
+												Margin="10 5 0 0"
+												Content="Remove folder" />
 									</StackPanel>
 								</StackPanel>
 							</Grid>
@@ -353,27 +351,23 @@
 									</StackPanel>
 									<StackPanel Orientation="Horizontal">
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.AddAccountCommand}"
-											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Margin="0 5 0 0">
-											<TextBlock Text="Add an account" Style="{StaticResource ButtonTitleStyle}" />
-										</Button>
+												Style="{StaticResource GeneralButtonStyle}"
+												Margin="0 5 0 0"
+												Content="Add an account" />
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.RemoveAccountCommand}"
-											CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"
-											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Margin="10 5 0 0">
-											<TextBlock Text="Remove account" Style="{StaticResource ButtonTitleStyle}" />
-										</Button>
+												CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"
+												Style="{StaticResource GeneralButtonStyle}"
+												Margin="10 5 0 0"
+												Content="Remove account" />
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.SetAsWatchAccountCommand}"
 												CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedWatchAccount}"
-											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Margin="10 5 0 0">
-											<TextBlock Text="use this account for watch" Style="{StaticResource ButtonTitleStyle}" />
-										</Button>
+												Style="{StaticResource GeneralButtonStyle}"
+												Margin="10 5 0 0"
+												Content="Use this account for watch" />
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.SyncAccountsNickname}"
-											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Margin="10 5 0 0">
-											<TextBlock Text="Sync nicknames" Style="{StaticResource ButtonTitleStyle}" />
-										</Button>
+												Style="{StaticResource GeneralButtonStyle}"
+												Margin="10 5 0 0"
+												Content="Sync nicknames" />
 									</StackPanel>
 								</StackPanel>
 
@@ -399,8 +393,10 @@
 												<StackPanel Orientation="Horizontal">
 													<TextBlock Text="csgo.exe path : " Style="{StaticResource SubTitleSettingsStyle}"/>
 													<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.CsgoExePath}" IsEnabled="False" />
-													<Button Content="Browse" Margin="10 0 0 0" IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
-														Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}"/>
+													<Button Content="Browse" Margin="10 0 0 0"
+															Style="{StaticResource GeneralButtonStyle}"
+															IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
+															Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}"/>
 												</StackPanel>
 											</StackPanel>
 										</Grid>

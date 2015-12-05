@@ -60,7 +60,7 @@
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0" Margin="5"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="70"
 					Height="30"
 					Command="{Binding GoToSuspectsCommand}">
@@ -74,7 +74,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="1" Style="{DynamicResource AccentedSquareButtonStyle}" Width="60" Height="30" Margin="5"
+			<Button Grid.Column="1" Style="{StaticResource GeneralButtonStyle}" Width="60" Height="30" Margin="5"
 						Command="{Binding AddPlayerCommand}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 					<Rectangle Width="15" Height="15">
@@ -86,7 +86,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="2" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5"
+			<Button Grid.Column="2" Style="{StaticResource GeneralButtonStyle}" Width="80" Height="30" Margin="5"
 						Command="{Binding RemoveSelectedPlayersCommand}"
 						CommandParameter="{Binding SelectedSuspects}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -99,7 +99,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="3" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5"
+			<Button Grid.Column="3" Style="{StaticResource GeneralButtonStyle}" Width="80" Height="30" Margin="5"
 						Command="{Binding GoToPlayerProfileCommand}"
 						CommandParameter="{Binding SelectedSuspect}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -112,7 +112,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="4" Style="{DynamicResource AccentedSquareButtonStyle}" Width="80" Height="30" Margin="5"
+			<Button Grid.Column="4" Style="{StaticResource GeneralButtonStyle}" Width="80" Height="30" Margin="5"
 						ToolTip="Refresh list (CTRL+R)"
 						Command="{Binding RefreshPlayerListCommand}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -125,7 +125,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="5" Style="{DynamicResource AccentedSquareButtonStyle}" Width="150" Height="30" Margin="5"
+			<Button Grid.Column="5" Style="{StaticResource GeneralButtonStyle}" Width="150" Height="30" Margin="5"
 						ToolTip="Show demos that contains the player (CTRL+F)"
 						Command="{Binding DisplayDemosCommand}"
 						CommandParameter="{Binding SelectedSuspect}"

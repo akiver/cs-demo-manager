@@ -47,7 +47,7 @@
 		<Grid Grid.Row="0">
 			<StackPanel Orientation="Horizontal">
 				<Button Margin="10" Width="70" Height="30"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 						Command="{Binding BackToHomeCommand}"
 						ToolTip="Back (CTRL+B)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -61,7 +61,7 @@
 				</Button>
 
 				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Command="{Binding GoToOverallCommand}"
 					Width="80" Height="30" ToolTip="Overall (CTRL+O)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -75,7 +75,7 @@
 				</Button>
 
 				<Button Margin="10" Width="70" Height="30"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						Command="{Binding GoToRankCommand}"
 						ToolTip="Rank (CTRL+R)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -89,7 +89,7 @@
 				</Button>
 
 				<Button Margin="10" Width="70" Height="30"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						Command="{Binding GoToMapCommand}"
 						ToolTip="Maps (CTRL+M)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -103,7 +103,7 @@
 				</Button>
 
 				<Button Margin="10" Width="90" Height="30"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						Command="{Binding GoToWeaponCommand}"
 						ToolTip="Weapons (CTRL+W)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -113,7 +113,7 @@
 				</Button>
 
 				<Button Margin="10" Width="110" Height="30"
-						Style="{DynamicResource AccentedSquareButtonStyle}"
+						Style="{StaticResource GeneralButtonStyle}"
 						IsEnabled="False"
 						ToolTip="Progression (CTRL+P)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">

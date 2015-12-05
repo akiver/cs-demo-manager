@@ -91,7 +91,7 @@
 						CommandParameter="{Binding SelectedDemos}"
 						Margin="5"
 						ToolTip="Analyze selected demos (CTRL+S)"
-						Style="{DynamicResource AccentedSquareButtonStyle}" Width="90" Height="30">
+						Style="{StaticResource GeneralButtonStyle}" Width="90" Height="30">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 							<Rectangle Width="25" Height="15">
 								<Rectangle.Fill>
@@ -103,7 +103,7 @@
 					</Button>
 
 					<Button Grid.Column="1" Margin="5"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="80"
 					Height="30"
 					ToolTip="Demo's details (CTRL+D)"
@@ -120,7 +120,7 @@
 					</Button>
 
 					<Button Grid.Column="2" Command="{Binding RefreshListCommand}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Margin="5"
 					ToolTip="Refresh demos list (CTRL+R)"
 					Width="90"
@@ -138,7 +138,7 @@
 					<Button Grid.Column="3"
 							Command="{Binding BrowseToDemoCommand}"
 							CommandParameter="{Binding SelectedDemo}"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Margin="5"
 					ToolTip="Browse to demo (CTRL+B)"
 					Width="90"
@@ -156,7 +156,7 @@
 					<Button Grid.Column="4" Margin="5" Width="80" Height="30"
 							Command="{Binding DeleteDemosCommand}"
 							CommandParameter="{Binding SelectedDemos}"
-							Style="{DynamicResource AccentedSquareButtonStyle}"
+							Style="{StaticResource GeneralButtonStyle}"
 							ToolTip="Delete (CTRL+D)">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 							<Rectangle Width="15" Height="15">
@@ -170,7 +170,7 @@
 					
 					<Button Grid.Column="5" Margin="5" Width="90" Height="30"
 							Command="{Binding GoToAccountStatsCommand}"
-							Style="{DynamicResource AccentedSquareButtonStyle}"
+							Style="{StaticResource GeneralButtonStyle}"
 							ToolTip="Account stats (CTRL+E)">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 							<Rectangle Width="15" Height="15">
@@ -214,7 +214,7 @@
 				</Grid.ColumnDefinitions>
 
 				<Button Grid.Column="0" Margin="5 0 5 0"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="70"
 					Height="30"
 					ToolTip="Watch selected demo (CTRL+W)"
@@ -231,7 +231,7 @@
 				</Button>
 
 				<Button Grid.Column="1" Margin="5 0 5 0"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="100"
 					Height="30"
 					ToolTip="Start watching selected demo at specific tick (CTRL+G)"
@@ -247,7 +247,7 @@
 				</Button>
 
 				<Button Grid.Column="2" Margin="5 0 5 0"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="130"
 					Height="30"
 					ToolTip="Watch your best actions."
@@ -264,7 +264,7 @@
 				</Button>
 
 				<Button Grid.Column="3" Margin="5 0 5 0"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="120"
 					Height="30"
 					ToolTip="Watch your mistakes."
@@ -281,7 +281,7 @@
 				</Button>
 
 				<Button Grid.Column="4" Margin="5 0 5 0"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="120"
 					Height="30"
 					ToolTip="Add players to suspects list (CTRL+W)"
@@ -298,7 +298,7 @@
 				</Button>
 
 				<Button Grid.Column="5" Margin="5 0 5 0"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="100"
 					Height="30"
 					ToolTip="Go to suspects view (CTRL+F)"
@@ -432,7 +432,7 @@
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				<Button Margin="20 0 0 0" Width="70" Height="30"
 							Command="{Binding StopAnalyzeCommand}"
-							Style="{DynamicResource AccentedSquareButtonStyle}"
+							Style="{StaticResource GeneralButtonStyle}"
 							ToolTip="Stop (CTRL+S)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">

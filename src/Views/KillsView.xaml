@@ -27,7 +27,7 @@
 			<StackPanel Orientation="Horizontal">
 
 				<Button Margin="10"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
+					Style="{StaticResource GeneralButtonStyle}"
 					ToolTip="Back (CTRL+B)"
 					Width="70"
 					Height="30"
