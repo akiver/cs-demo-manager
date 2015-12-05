@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Steam;
 using System.Text.RegularExpressions;
+using CSGO_Demos_Manager.Services.Interfaces;
 
 namespace CSGO_Demos_Manager.Services
 {

@@ -11,6 +11,7 @@ using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
 using GalaSoft.MvvmLight;

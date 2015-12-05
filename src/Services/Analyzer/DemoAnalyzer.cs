@@ -38,12 +38,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// I use this because the event buytime_ended isn't raised everytime
 		/// </summary>
 		public bool IsFirstShotOccured { get; set; } = false;
-
 		public bool IsFreezetime { get; set; } = false;
-
 		public int MoneySaveAmoutTeam1 { get; set; } = 0;
 		public int MoneySaveAmoutTeam2 { get; set; } = 0;
-
 		public int RoundCount { get; set; } = 0;
 		public int OvertimeCount { get; set; } = 0;
 
@@ -60,12 +57,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		private static readonly Regex FILENAME_EBOT_REGEX = new Regex("^([0-9]*)_(.*?)-(.*?)_(.*?)(.dem)$");
 
 		public bool AnalyzeHeatmapPoint { get; set; } = false;
-
 		public bool AnalyzePlayersPosition { get; set; } = false;
-
 		public bool AnalyzeFlashbang { get; set; } = false;
 
-		private readonly IPlayerRatingService _playerRatingService = new PlayerRatingService();
+		// HTLV rating variables http://www.hltv.org/?pageid=242&eventid=0
+		const double AVERAGE_KPR = 0.679; // average kills per round
+		const double AVERAGE_SPR = 0.317; // average survived rounds per round
+		const double AVERAGE_RMK = 1.277; // average value calculated from rounds with multiple kills
 
 		/// <summary>
 		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who throw a moloto
@@ -1173,18 +1171,37 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		}
 
 		/// <summary>
-		/// Calculate rating for each players
+		/// Calculate HLTV rating for each players
 		/// </summary>
 		protected void ProcessPlayersRating()
 		{
-			// Update players score
 			foreach (PlayerExtended player in Demo.Players)
 			{
-				player.RatingHltv = (float)_playerRatingService.ComputeHltvOrgRating(Demo.Rounds.Count, player.KillsCount, player.DeathCount, new int[5]
+				player.RatingHltv = (float)ComputeHltvOrgRating(Demo.Rounds.Count, player.KillsCount, player.DeathCount, new int[5]
 				{
 					player.OnekillCount, player.TwokillCount, player.ThreekillCount, player.FourKillCount, player.FiveKillCount
 				});
 			}
+		}
+
+		/// <summary>
+		/// Compute HLTV.org's player rating from player data
+		/// </summary>
+		/// <param name="roundCount">total number of rounds for the game</param>
+		/// <param name="kills">number of kills of a player during the whole game</param>
+		/// <param name="deaths">number of deaths of a player during the whole game</param>
+		/// <param name="nKills">an array of int containing the total number of x kills in a round during a game for a player. nKills[0] = number of 1 kill, nKills[1] = number of 2 kills, ...</param>
+		/// <returns></returns>
+		private static double ComputeHltvOrgRating(int roundCount, int kills, int deaths, int[] nKills)
+		{
+			// Kills/Rounds/AverageKPR
+			double killRating = kills / (double)roundCount / AVERAGE_KPR;
+			// (Rounds-Deaths)/Rounds/AverageSPR
+			double survivalRating = (roundCount - deaths) / (double)roundCount / AVERAGE_SPR;
+			// (1K + 4*2K + 9*3K + 16*4K + 25*5K)/Rounds/AverageRMK
+			double roundsWithMultipleKillsRating = (nKills[0] + 4 * nKills[1] + 9 * nKills[2] + 16 * nKills[3] + 25 * nKills[4]) / (double)roundCount / AVERAGE_RMK;
+
+			return Math.Round((killRating + 0.7 * survivalRating + roundsWithMultipleKillsRating) / 2.7, 3);
 		}
 
 		protected void ProcessOpenAndEntryKills(KillEvent killEvent)

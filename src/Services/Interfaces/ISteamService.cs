@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Steam;
 
-namespace CSGO_Demos_Manager.Services
+namespace CSGO_Demos_Manager.Services.Interfaces
 {
 	public interface ISteamService
 	{

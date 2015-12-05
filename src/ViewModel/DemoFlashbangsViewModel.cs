@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Stats;
-using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;

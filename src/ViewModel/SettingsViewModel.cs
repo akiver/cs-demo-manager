@@ -11,6 +11,7 @@ using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Interfaces;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;

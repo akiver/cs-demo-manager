@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Serialization;
 
 namespace CSGO_Demos_Manager.Services

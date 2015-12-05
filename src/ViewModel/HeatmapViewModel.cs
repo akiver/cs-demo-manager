@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Map;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
 

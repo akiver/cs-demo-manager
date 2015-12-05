@@ -11,6 +11,7 @@ using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Serialization;
 using MoreLinq;
 using Newtonsoft.Json;

@@ -9,9 +9,10 @@ using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Models.Stats;
+using CSGO_Demos_Manager.Services.Interfaces;
 using DemoInfo;
 
-namespace CSGO_Demos_Manager.Services
+namespace CSGO_Demos_Manager.Services.Design
 {
 	public class DemosDesignService : IDemosService
 	{

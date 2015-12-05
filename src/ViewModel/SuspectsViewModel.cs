@@ -17,6 +17,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Views;
 using MahApps.Metro.Controls.Dialogs;
 using MoreLinq;

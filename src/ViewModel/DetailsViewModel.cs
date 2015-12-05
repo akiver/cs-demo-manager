@@ -19,6 +19,7 @@ using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Models.Steam;
 using CSGO_Demos_Manager.Services.Excel;
+using CSGO_Demos_Manager.Services.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
 
 namespace CSGO_Demos_Manager.ViewModel

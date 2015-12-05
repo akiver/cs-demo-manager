@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Steam;
+using CSGO_Demos_Manager.Services.Interfaces;
 
-namespace CSGO_Demos_Manager.Services
+namespace CSGO_Demos_Manager.Services.Design
 {
 	public class SteamServiceDesign : ISteamService
 	{

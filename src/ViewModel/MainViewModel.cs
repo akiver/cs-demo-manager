@@ -13,6 +13,7 @@ using GalaSoft.MvvmLight.Messaging;
 using WpfPageTransitions;
 using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Interfaces;
 using MahApps.Metro.Controls.Dialogs;
 
 namespace CSGO_Demos_Manager.ViewModel

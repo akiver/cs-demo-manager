@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Stats;
 
-namespace CSGO_Demos_Manager.Services
+namespace CSGO_Demos_Manager.Services.Interfaces
 {
 	public interface IDemosService
 	{

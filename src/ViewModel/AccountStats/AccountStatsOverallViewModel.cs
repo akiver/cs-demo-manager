@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Charts;
-using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Views.AccountStats;
 using GalaSoft.MvvmLight;

@@ -1,5 +1,7 @@
 using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Design;
 using CSGO_Demos_Manager.Services.Excel;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.ViewModel.AccountStats;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 
-namespace CSGO_Demos_Manager.Services
+namespace CSGO_Demos_Manager.Services.Interfaces
 {
 	public interface ICacheService
 	{

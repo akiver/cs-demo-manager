@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Services.Interfaces;
 
-namespace CSGO_Demos_Manager.Services
+namespace CSGO_Demos_Manager.Services.Design
 {
 	public class CacheDesignService : ICacheService
 	{
