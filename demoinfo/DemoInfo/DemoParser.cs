@@ -232,7 +232,7 @@ namespace DemoInfo
 		public event EventHandler<ServerRankUpdateEventArgs> ServerRankUpdate;
 
 		#endregion
-#endif
+		#endif
 
 		/// <summary>
 		/// The mapname of the Demo. Only avaible after the header is parsed. 
@@ -880,6 +880,7 @@ namespace DemoInfo
 			playerEntity.FindProperty("m_iAccount").IntRecived += (sender, e) => p.Money = e.Value;
 			playerEntity.FindProperty("m_angEyeAngles[1]").FloatRecived += (sender, e) => p.ViewDirectionX = e.Value;
 			playerEntity.FindProperty("m_angEyeAngles[0]").FloatRecived += (sender, e) => p.ViewDirectionY = e.Value;
+			playerEntity.FindProperty("m_flFlashDuration").FloatRecived += (sender, e) => p.FlashDuration = e.Value;
 
 
 			playerEntity.FindProperty("localdata.m_vecVelocity[0]").FloatRecived += (sender, e) => p.Velocity.X = e.Value;
@@ -1346,7 +1347,7 @@ namespace DemoInfo
 		}
 
 		#endregion
-#endif
+		#endif
 
 		/// <summary>
 		/// Releases all resource used by the <see cref="DemoInfo.DemoParser"/> object. This must be called or evil things (memory leaks) happen. 

@@ -29,6 +29,8 @@ namespace DemoInfo
 
 		public float ViewDirectionY { get; set; }
 
+		public float FlashDuration { get; set; }
+
 		public int Money { get; set; }
 
 		public int CurrentEquipmentValue { get; set; }
@@ -99,6 +101,7 @@ namespace DemoInfo
 			me.ViewDirectionX = ViewDirectionX;
 			me.ViewDirectionY = ViewDirectionY;
 			me.Disconnected = Disconnected;
+			me.FlashDuration = FlashDuration;
 
 			me.Team = Team;
 

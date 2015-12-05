@@ -142,7 +142,7 @@ namespace DemoInfo.DP.Handler
 				kill.Headshot = (bool)data["headshot"];
 				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
 
-				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade && kill.Killer.Weapons.Any()) {
+				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade && kill.Killer.Weapons.Any() && kill.Weapon.Weapon != EquipmentElement.World) {
 					#if DEBUG
 					if(kill.Weapon.Weapon != kill.Killer.ActiveWeapon.Weapon)
 						throw new InvalidDataException();
@@ -298,7 +298,7 @@ namespace DemoInfo.DP.Handler
 					bombEventArgs.Site = 'B';
 				} else {
 					var relevantTrigger = parser.triggers.Single(a => a.Index == site);
-					if (relevantTrigger.Contains(parser.bombsiteACenter)) {
+					if ((parser.bombsiteACenter - bombEventArgs.Player.Position).Absolute < (parser.bombsiteBCenter - bombEventArgs.Player.Position).Absolute) {
 						//planted at A.
 						bombEventArgs.Site = 'A';
 						parser.bombsiteAIndex = site;
@@ -306,9 +306,7 @@ namespace DemoInfo.DP.Handler
 						//planted at B.
 						bombEventArgs.Site = 'B';
 						parser.bombsiteBIndex = site;
-					} else {
-						throw new InvalidDataException("Was the bomb planted at C? Neither A nor B is inside the bombsite");
-					}
+					} 
 				}
 
 

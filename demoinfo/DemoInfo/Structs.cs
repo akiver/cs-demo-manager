@@ -435,13 +435,13 @@ namespace DemoInfo
 		/// </summary>
 		GameStart,
 		/// <summary>
-		/// Terrorists Surrender
-		/// </summary>
-		TerroristsSurrender,
-		/// <summary>
 		/// CTs Surrender
 		/// </summary>
-		CTSurrender
+		CTSurrender,
+		/// <summary>
+		/// Terrorists Surrender
+		/// </summary>
+		TerroristsSurrender
 	};
 
 	public enum RoundMVPReason
