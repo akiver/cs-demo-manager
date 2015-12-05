@@ -452,7 +452,8 @@
 				  SelectedItem="{Binding SelectedDemo}"
 				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}"
-				  Style="{StaticResource DemosDataGridStyle}">
+				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+				  Style="{StaticResource DataGridStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Home.ShowDemoDetailsCommand}"
@@ -568,7 +569,7 @@
 						<TextBlock Text="To watch" Style="{StaticResource CurrentFolderStyle}" />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-						<Rectangle Width="10" Height="10" Fill="{StaticResource LightGreenBrush}" />
+						<Rectangle Width="10" Height="10" Fill="{StaticResource LightBlueBrush}" />
 						<TextBlock Text="Watched" Style="{StaticResource CurrentFolderStyle}" />
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Margin="5 0 5 0">

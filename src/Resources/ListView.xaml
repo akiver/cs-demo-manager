@@ -3,7 +3,7 @@
 	
 	<Style x:Key="OvertimeScoreboardTemplate" TargetType="{x:Type ListView}">
 		<Setter Property="BorderBrush" Value="Transparent"></Setter>
-		<Setter Property="Background" Value="{StaticResource LightWhiteBrush}"></Setter>
+		<Setter Property="Background" Value="Transparent"></Setter>
 	</Style>
 	
 	<Style x:Key="OvertimeScoreboardItemStyle" TargetType="{x:Type ListViewItem}">
@@ -30,6 +30,7 @@
 				<StackPanel.Resources>
 					<Style TargetType="TextBlock">
 						<Setter Property="FontSize" Value="12"/>
+						<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}"/>
 					</Style>
 				</StackPanel.Resources>
 				<TextBlock Text="Overtime " />

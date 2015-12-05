@@ -86,8 +86,10 @@
 							<DataGrid x:Name="OpenFragsByRound"
 									  Grid.Row="1" Width="Auto" Grid.Column="0"
 									  ItemsSource="{Binding CurrentDemo.Rounds}"
-									  Style="{StaticResource DemosDataGridStyle}"
+									  Style="{StaticResource DataGridStyle}"
+									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 									  CellStyle="{StaticResource DataGridCellStyle}"
+									  RowStyle="{StaticResource DataGridRowStyle}"
 									  Grid.ColumnSpan="2">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}" x:Name="RoundOpenNumberColumn" Width="Auto" Header="#" Binding="{Binding Number}"/>
@@ -109,7 +111,9 @@
 							<TextBlock Grid.Row="0" Text="Players" Style="{StaticResource SmallTitleStyle}"/>
 							<DataGrid x:Name="OpenFragsByPlayers" Grid.Row="1"
 									  ItemsSource="{Binding CurrentDemo.Players}"
-									  Style="{StaticResource DemosDataGridStyle}"
+									  Style="{StaticResource DataGridStyle}"
+									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+									  RowStyle="{StaticResource DataGridRowStyle}"
 									  CellStyle="{StaticResource DataGridCellStyle}">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerOpenNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
@@ -129,7 +133,9 @@
 								<TextBlock Grid.Row="0" Text="Teams" Style="{StaticResource SmallTitleStyle}"/>
 								<DataGrid x:Name="OpenFragsByTeams" Grid.Row="1"
 										  ItemsSource="{Binding Teams}"
-										  Style="{StaticResource DemosDataGridStyle}"
+										  Style="{StaticResource DataGridStyle}"
+										  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+										  RowStyle="{StaticResource DataGridRowStyle}"
 										  CellStyle="{StaticResource DataGridCellStyle}">
 									<DataGrid.Columns>
 										<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" x:Name="TeamOpenKillNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
@@ -180,7 +186,9 @@
 							<TextBlock Grid.Row="0" Text="Rounds" Style="{StaticResource SmallTitleStyle}" Grid.ColumnSpan="2"/>
 							<DataGrid x:Name="EntryKillsByRound" Grid.Column="0"
 									  Grid.Row="1" ItemsSource="{Binding CurrentDemo.Rounds}"
-									  Width="Auto" Style="{StaticResource DemosDataGridStyle}"
+									  Width="Auto" Style="{StaticResource DataGridStyle}"
+									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+									  RowStyle="{StaticResource DataGridRowStyle}"
 									  CellStyle="{StaticResource DataGridCellStyle}" Grid.ColumnSpan="2">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}" x:Name="RoundNumberColumn" Width="Auto" Header="#" Binding="{Binding Number}"/>
@@ -203,7 +211,9 @@
 							<DataGrid x:Name="EntryKillsByPlayers"
 									  Grid.Row="1" Width="Auto"
 									  ItemsSource="{Binding CurrentDemo.Players}"
-									  Style="{StaticResource DemosDataGridStyle}"
+									  Style="{StaticResource DataGridStyle}"
+									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+									  RowStyle="{StaticResource DataGridRowStyle}"
 									  CellStyle="{StaticResource DataGridCellStyle}">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
@@ -222,10 +232,12 @@
 
 								<TextBlock Grid.Row="0" Text="Teams" Style="{StaticResource SmallTitleStyle}"/>
 								<DataGrid x:Name="EntryKillsByTeams"
-									  Grid.Row="1" Width="Auto"
-									  ItemsSource="{Binding Teams}"
-									  Style="{StaticResource DemosDataGridStyle}"
-									  CellStyle="{StaticResource DataGridCellStyle}">
+										  Grid.Row="1" Width="Auto"
+										  ItemsSource="{Binding Teams}"
+										  Style="{StaticResource DataGridStyle}"
+										  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+										  RowStyle="{StaticResource DataGridRowStyle}"
+										  CellStyle="{StaticResource DataGridCellStyle}">
 									<DataGrid.Columns>
 										<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" x:Name="TeamNameColumn" Width="Auto" Header="Name" Binding="{Binding Name}"/>
 										<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}" x:Name="TotalEntryKillTeamCountColumn" Width="Auto" Header="Total" Binding="{Binding EntryKillCount}" />
