@@ -33,6 +33,8 @@ namespace CSGO_Demos_Manager.Services
 
 					foreach (PlayerBlindedEvent e in Demo.PlayerBlindedEvents.Where(e => player.Equals(e.Thrower)))
 					{
+						if (!playerFlashStats.ContainsKey(e.Victim))
+							playerFlashStats.Add(e.Victim, 0);
 						playerFlashStats[e.Victim] += e.Duration;
 					}
 
