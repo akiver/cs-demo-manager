@@ -431,16 +431,6 @@
 
 
 	<!--DataGrid for suspects list style -->
-	<Style TargetType="DataGridCell" x:Key="DataGridCellSuspectStyle">
-		<Style.Triggers>
-			<Trigger Property="IsSelected" Value="True">
-				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
-				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
-			</Trigger>
-		</Style.Triggers>
-		<Setter Property="VerticalAlignment" Value="Center"/>
-	</Style>
-
 	<Style TargetType="DataGridRow" x:Key="DataGridRowSuspectsListStyle" BasedOn="{StaticResource DataGridRowStyle}">
 		<Style.Resources>
 			<converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
@@ -457,51 +447,51 @@
 	</Style>
 
 	<!-- Supects view header -->
-	<Style TargetType="DataGridColumnHeader" x:Key="DaySinceLastBanHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="DaySinceLastBanHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Days Since Last Ban" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="GameBanCountHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="GameBanCountHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Number Of Game Ban (OW)" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="VacBannedHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="VacBannedHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Account VAC Banned" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="BanCountHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="BanCountHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Number Of VAC Ban" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="NicknameHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="NicknameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Account's Nickname" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="ProfileUrlHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="ProfileUrlHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Account's Profile URL" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="CurrentStatusHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="CurrentStatusHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Account's Status (offline, online...)" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="PublicProfileHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="PublicProfileHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Account's Visibility Status" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="LastLogOffHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="LastLogOffHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Last Time The User Was Online" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="ProfileStateHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="ProfileStateHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Community Profile Configured" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="CommunityBannedHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="CommunityBannedHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Community Banned" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="EconomyBanHeader">
+	<Style TargetType="DataGridColumnHeader" x:Key="EconomyBanHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Market Banned" />
 	</Style>
 
@@ -572,7 +562,7 @@
 	</Style>
 
 	<!-- Whitelist -->
-	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerWhitelistStyle">
+	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerWhitelistStyle" BasedOn="{StaticResource DataGridRowStyle}">
 		<Style.Resources>
 			<converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
 		</Style.Resources>
@@ -583,10 +573,6 @@
 			<DataTrigger Binding="{Binding GameBanCount, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=GameBanCount}" Value="true">
 				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
 			</DataTrigger>
-			<Trigger Property="IsSelected" Value="True">
-				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
-				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
-			</Trigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource WhitelistRowContextMenu}" />
 	</Style>

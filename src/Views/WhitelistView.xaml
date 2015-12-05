@@ -160,9 +160,10 @@
 		<DataGrid Grid.Row="3" x:Name="DataGridPlayers" Margin="0 5 0 0"
 				  ItemsSource="{Binding Suspects}"
 				  SelectedItem="{Binding SelectedSuspect}"
-				  CellStyle="{StaticResource DataGridCellSuspectStyle}"
+				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowPlayerWhitelistStyle}"
-				  Style="{StaticResource DemosDataGridStyle}" HorizontalGridLinesBrush="{x:Null}">
+				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+				  Style="{StaticResource DataGridStyle}">
 
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
@@ -178,7 +179,7 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="Avatar" Width="Auto">
+				<DataGridTemplateColumn Header="Avatar" Width="Auto" HeaderStyle="{StaticResource PlayerAvatarHeader}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding AvatarUrl}" Height="42" Width="42" />

@@ -209,9 +209,10 @@
 				  x:Name="DataGridSuspects"
 				  ItemsSource="{Binding DataGridSuspectsCollection}"
 				  SelectedItem="{Binding SelectedSuspect}"
-				  CellStyle="{StaticResource DataGridCellSuspectStyle}"
+				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowSuspectsListStyle}"
-				  Style="{StaticResource DemosDataGridStyle}" HorizontalGridLinesBrush="{x:Null}">
+				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+				  Style="{StaticResource DataGridStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Suspects.GoToSuspectProfileCommand}"
@@ -226,7 +227,7 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="Avatar" Width="Auto">
+				<DataGridTemplateColumn Header="Avatar" Width="Auto" HeaderStyle="{StaticResource PlayerAvatarHeader}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding AvatarUrl}" Height="42" Width="42" />
