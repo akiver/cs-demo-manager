@@ -25,6 +25,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private bool _isTeamsNameDetected = false;
 
+		private bool _isFinalRound = false;
+
 		/// <summary>
 		/// Used to make some specific check on Faceit demos and avoid some on eBot demos
 		/// </summary>
@@ -32,7 +34,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private readonly Regex _scoreRegex = new Regex("^eBot: (.*) (?<score1>[0-9]+) - (?<score2>[0-9]+) (.*)$");
 
-		private readonly Regex _faceitScoreRegex = new Regex("^ (\\[FACEIT\\^\\]|\\[ANNA\\^\\]) (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
+		private readonly Regex _faceitScoreRegex = new Regex("^ (\\[FACEIT\\^?\\]|\\[ANNA\\^\\]) (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
 
 		private readonly Regex _endMatchRegex = new Regex("^eBot: (.*) win(.*)$");
 
@@ -83,6 +85,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerHurt += HandlePlayerHurted;
 			Parser.SayText += HandleSayText;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
+			Parser.RoundFinal += HandleRoundFinal;
 		}
 
 		public async override Task<Demo> AnalyzeDemoAsync(CancellationToken token)
@@ -117,7 +120,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			base.HandleRoundOfficiallyEnd(sender, e);
 			_isRoundOffiallyEndedOccured = true;
-			if (IsOvertime && IsLastRoundHalf) IsHalfMatch = true;
+			// Don't stop the match for Faceit demos because there isn't warmup between end of the match and OT
+			if (!_isFaceit && CurrentRound.Number == 30) IsMatchStarted = false;
+		}
+
+		private void HandleRoundFinal(object sender, RoundFinalEventArgs e)
+		{
+			if (!_isFaceit && !IsMatchStarted && !IsOvertime) return;
+			_isFinalRound = true;
 		}
 
 		protected new void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
@@ -130,6 +140,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted) return;
 			if (e.Silent) _playerTeamCount++;
+			if (IsOvertime && e.Silent && _playerTeamCount == 10) IsHalfMatch = !IsHalfMatch;
 		}
 
 		protected void HandleLastRoundHalf(object sender, LastRoundHalfEventArgs e)
@@ -141,7 +152,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected void HandleSayText(object sender, SayTextEventArgs e)
 		{
 			// cleanup text
-			e.Text = Regex.Replace(e.Text, @"[\u0001\u0005\u0004]", string.Empty);
+			e.Text = Regex.Replace(e.Text, @"[\u0001\u0002\u0003\u0004\u0005\u0006\u0007]", string.Empty);
 
 			// Beginning of the match
 			Match faceItLive = _faceItLiveRegex.Match(e.Text);
@@ -189,19 +200,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				
 				int scoreTotal = score1 + score2;
 				if (scoreTotal == 15) IsSwapTeamRequired = true;
-				// End of the match may have an overtime, init the 1st one
-				if (scoreTotal == 30)
-				{
-					// Don't stop the match for Faceit demos because there isn't warmup between end of the match and OT
-					if(!scoreUpdateFaceit.Success) IsMatchStarted = false;
-					// Start the OT
-					IsOvertime = true;
-					IsHalfMatch = false;
-					CurrentOvertime = new Overtime
-					{
-						Number = ++OvertimeCount
-					};
-				}
 				return;
 			}
 
@@ -235,14 +233,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							Number = ++OvertimeCount
 						};
 					}
-					IsHalfMatch = Demo.Overtimes.Any();
 				}
 
 				// announce the beginning of the 2nd OT side
 				if (e.Text == BEGIN_SECOND_SIDE_OVERTIME)
 				{
 					IsMatchStarted = true;
-					IsHalfMatch = !Demo.Overtimes.Any();
 					IsSwapTeamRequired = true;
 				}
 			}
@@ -260,7 +256,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				if (!IsOvertime || !_isFaceit) Demo.Rounds.Add(CurrentRound);
-				if(IsOvertime) Demo.Overtimes.Add(CurrentOvertime);
+				if (IsOvertime) Demo.Overtimes.Add(CurrentOvertime);
 			});
 		}
 
@@ -284,6 +280,31 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (_playerTeamCount > 8) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
 			_isRoundOffiallyEndedOccured = false;
+
+			// Detect new OT for FaceIt demos
+			if (_isFaceit && IsOvertime && _isFinalRound)
+			{
+				Application.Current.Dispatcher.Invoke(delegate
+				{
+					Demo.Overtimes.Add(CurrentOvertime);
+				});
+				CurrentOvertime = new Overtime
+				{
+					Number = ++OvertimeCount
+				};
+				IsHalfMatch = false;
+			}
+			_isFinalRound = false;
+
+			// First OT detection for FaceIt demos
+			if (Parser.CTScore + Parser.TScore == 30)
+			{
+				IsOvertime = true;
+				CurrentOvertime = new Overtime
+				{
+					Number = ++OvertimeCount
+				};
+			}
 
 			// Reset until both scores > 0
 			if (Parser.CTScore == 0 && Parser.TScore == 0)
@@ -511,6 +532,49 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							}
 						}
 					});
+				}
+			}
+		}
+
+		/// <summary>
+		/// Update team score
+		/// TODO Move to DemoAnalyzer
+		/// </summary>
+		/// <param name="roundEndedEventArgs"></param>
+		protected new void UpdateTeamScore(RoundEndedEventArgs roundEndedEventArgs)
+		{
+			if (IsHalfMatch)
+			{
+				if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
+				{
+					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
+					if (!IsOvertime) Demo.ScoreSecondHalfTeam2++;
+					Demo.ScoreTeam2++;
+					CurrentRound.Winner = Demo.TeamT;
+				}
+				else
+				{
+					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
+					if (!IsOvertime) Demo.ScoreSecondHalfTeam1++;
+					Demo.ScoreTeam1++;
+					CurrentRound.Winner = Demo.TeamCT;
+				}
+			}
+			else
+			{
+				if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
+				{
+					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
+					if (!IsOvertime) Demo.ScoreFirstHalfTeam1++;
+					Demo.ScoreTeam1++;
+					CurrentRound.Winner = Demo.TeamCT;
+				}
+				else
+				{
+					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
+					if (!IsOvertime) Demo.ScoreFirstHalfTeam2++;
+					Demo.ScoreTeam2++;
+					CurrentRound.Winner = Demo.TeamT;
 				}
 			}
 		}
