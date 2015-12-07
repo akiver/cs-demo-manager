@@ -407,7 +407,28 @@ namespace CSGO_Demos_Manager.ViewModel
 
 							if (saveHeatmapDialog.ShowDialog() == DialogResult.OK)
 							{
-								await _excelService.GenerateXls(CurrentDemo, saveHeatmapDialog.FileName);
+								try
+								{
+									if (!_cacheService.HasDemoInCache(CurrentDemo))
+									{
+										IsAnalyzing = true;
+										HasNotification = true;
+										NotificationMessage = "Analyzing " + CurrentDemo.Name + " for export...";
+										await _demosService.AnalyzeDemo(CurrentDemo, CancellationToken.None);
+									}
+									await _excelService.GenerateXls(CurrentDemo, saveHeatmapDialog.FileName);
+								}
+								catch (Exception e)
+								{
+									Logger.Instance.Log(e);
+									await _dialogService.ShowErrorAsync("An error occured while exporting the demo.",
+										MessageDialogStyle.Affirmative);
+								}
+								finally
+								{
+									IsAnalyzing = false;
+									HasNotification = false;
+								}
 							}
 
 						},
