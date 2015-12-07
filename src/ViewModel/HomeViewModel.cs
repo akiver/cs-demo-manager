@@ -1428,6 +1428,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				return -1;
 			}
 
+			if (demo.Status == "old") demo.Status = "None";
 			return 1;
 		}
 
