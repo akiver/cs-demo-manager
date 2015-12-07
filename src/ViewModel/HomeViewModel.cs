@@ -1421,6 +1421,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 			catch (Exception e)
 			{
+				if (e is TaskCanceledException) return -1;
 				Logger.Instance.Log(e);
 				demo.Status = "old";
 				await _cacheService.WriteDemoDataCache(demo);
