@@ -83,7 +83,17 @@ namespace CSGO_Demos_Manager.Services
 						try
 						{
 							Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJson));
-							demos.Add(demo);
+							if (!Properties.Settings.Default.ShowAllFolders
+								&& Properties.Settings.Default.LimitStatsFolder
+								&& !string.IsNullOrEmpty(Properties.Settings.Default.LastFolder))
+							{
+								string demoDirectory = Path.GetDirectoryName(demo.Path);
+								if (Properties.Settings.Default.LastFolder.Equals(demoDirectory)) demos.Add(demo);
+							}
+							else
+							{
+								demos.Add(demo);
+							}
 						}
 						catch (Exception e)
 						{

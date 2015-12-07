@@ -994,5 +994,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowPopFlashDemos"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LimitStatsFolder {
+            get {
+                return ((bool)(this["LimitStatsFolder"]));
+            }
+            set {
+                this["LimitStatsFolder"] = value;
+            }
+        }
     }
 }

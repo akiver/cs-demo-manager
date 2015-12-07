@@ -184,6 +184,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
 
+		private bool _limitStatsSelectedFolder = Settings.Default.LimitStatsFolder;
+
 		/// <summary>
 		/// List of user's accounts saved
 		/// </summary>
@@ -961,6 +963,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.MoviemakerMode = value;
 				Settings.Default.Save();
 				Set(() => EnableMoviemakerMode, ref _enableMoviemakerMode, value);
+			}
+		}
+
+		public bool LimitStatsSelectedFolder
+		{
+			get { return _limitStatsSelectedFolder; }
+			set
+			{
+				Settings.Default.LimitStatsFolder = value;
+				Settings.Default.Save();
+				Set(() => LimitStatsSelectedFolder, ref _limitStatsSelectedFolder, value);
 			}
 		}
 
