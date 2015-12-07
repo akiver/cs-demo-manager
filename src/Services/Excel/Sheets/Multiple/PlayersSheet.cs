@@ -142,7 +142,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RoundPlayedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatingHltv / Demos.Count());
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatingHltv / player.MatchCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.FiveKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.FourKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.ThreekillCount);
