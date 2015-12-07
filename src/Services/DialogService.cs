@@ -66,5 +66,20 @@ namespace CSGO_Demos_Manager.Services
 
 			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 		}
+
+		public async Task<MessageDialogResult> ShowExportDemosAsync()
+		{
+			var metroWindow = (Application.Current.MainWindow as MetroWindow);
+			MetroDialogSettings dialogOptions = new MetroDialogSettings
+			{
+				AffirmativeButtonText = "Single",
+				NegativeButtonText = "Multiple",
+				FirstAuxiliaryButtonText = "Cancel",
+				ColorScheme = MetroDialogColorScheme.Accented
+			};
+
+			return await metroWindow.ShowMessageAsync("Export", "Do you want to export data into a single file or in multiple files?",
+				MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
+		}
 	}
 }

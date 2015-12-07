@@ -40,6 +40,26 @@ namespace CSGO_Demos_Manager.Models
 		public int FlashbangThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
 			.Sum(playerExtended => playerExtended.FlashbangThrowedCount);
 
+		[JsonProperty("grenade_throwed_count")]
+		public int HeGrenadeThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+			.Sum(playerExtended => playerExtended.HeGrenadeThrowedCount);
+
+		[JsonProperty("smoke_throwed_count")]
+		public int SmokeThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+			.Sum(playerExtended => playerExtended.SmokeThrowedCount);
+
+		[JsonProperty("molotov_throwed_count")]
+		public int MolotovThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+			.Sum(playerExtended => playerExtended.MolotovThrowedCount);
+
+		[JsonProperty("incendiary_throwed_count")]
+		public int IncendiaryThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+			.Sum(playerExtended => playerExtended.IncendiaryThrowedCount);
+
+		[JsonProperty("decoy_throwed_count")]
+		public int DecoyThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+			.Sum(playerExtended => playerExtended.DecoyThrowedCount);
+
 		[JsonIgnore]
 		public decimal RatioEntryKill
 		{
@@ -104,11 +124,94 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public string RatioOpenKillAsString => RatioOpenKill + " %";
 
+		[JsonIgnore]
+		public int MatchCount { get; set; } = 1;
+
+		[JsonIgnore]
+		public int WinCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int LostCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int KillCount => Players.Sum(player => player.KillsCount);
+
+		[JsonIgnore]
+		public int AssistCount => Players.Sum(player => player.AssistCount);
+
+		[JsonIgnore]
+		public int DeathCount => Players.Sum(player => player.DeathCount);
+
+		[JsonIgnore]
+		public int RoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinRoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int LostRoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinRoundCtCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int LostRoundCtCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinRoundTCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int LostRoundTCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinPistolRoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinEcoRoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinSemiEcoRoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int WinForceBuyRoundCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int BombPlantedCount => Players.Sum(player => player.BombPlantedCount);
+
+		[JsonIgnore]
+		public int BombDefusedCount => Players.Sum(player => player.BombDefusedCount);
+
+		[JsonIgnore]
+		public int BombExplodedCount => Players.Sum(player => player.BombExplodedCount);
+
+		[JsonIgnore]
+		public int BombPlantedOnACount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int BombPlantedOnBCount { get; set; } = 0;
+
+		[JsonIgnore]
+		public int FiveKillCount => Players.Sum(player => player.FiveKillCount);
+
+		[JsonIgnore]
+		public int FourKillCount => Players.Sum(player => player.FourKillCount);
+
+		[JsonIgnore]
+		public int ThreeKillCount => Players.Sum(player => player.ThreekillCount);
+
+		[JsonIgnore]
+		public int TwoKillCount => Players.Sum(player => player.TwokillCount);
+
+		[JsonIgnore]
+		public int OneKillCount => Players.Sum(player => player.OnekillCount);
+
+
 		public override bool Equals(object obj)
 		{
 			var item = obj as TeamExtended;
 
-			return item != null && Name.Equals(item.Name);
+			return item != null
+				&& string.Compare(Name, item.Name, StringComparison.InvariantCultureIgnoreCase) == 0;
 		}
 
 		public override int GetHashCode()
@@ -125,6 +228,11 @@ namespace CSGO_Demos_Manager.Models
 		public void Clear()
 		{
 			Players.Clear();
+		}
+
+		public TeamExtended Clone()
+		{
+			return (TeamExtended)MemberwiseClone();
 		}
 
 		private void OnPlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

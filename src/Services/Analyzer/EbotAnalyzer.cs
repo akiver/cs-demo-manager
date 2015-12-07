@@ -210,6 +210,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (matchEnd.Success)
 			{
 				IsMatchStarted = false;
+				Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
 				return;
 			}
 
@@ -309,7 +310,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				CurrentRound.Winner = e.Winner;
+				CurrentRound.WinnerSide = e.Winner;
 				if (CurrentRound.OpenKillEvent != null)
 				{
 					if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||

@@ -185,6 +185,7 @@
     <Compile Include="Models\Charts\WinDateChart.cs" />
     <Compile Include="Models\Events\PlayerFlashedEvent.cs" />
     <Compile Include="Models\KillHeatmapPoint.cs" />
+    <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
     <Compile Include="Models\Stats\FlashbangDataPoint.cs" />
     <Compile Include="Models\Stats\KillDataPoint.cs" />
@@ -240,6 +241,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Excel\AbstractExport.cs" />
+    <Compile Include="Services\Excel\MultipleExport.cs" />
+    <Compile Include="Services\Excel\Sheets\AbstractSingleSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\AbstractMultipleSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Multiple\GeneralSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Multiple\MapsSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Multiple\PlayersSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Multiple\TeamsSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Multiple\WeaponsSheet.cs" />
+    <Compile Include="Services\Excel\SingleExport.cs" />
     <Compile Include="Services\KillService.cs" />
     <Compile Include="Services\FlashbangService.cs" />
     <Compile Include="Services\Design\FlashbangServiceDesign.cs" />
@@ -325,15 +336,15 @@
     <Compile Include="Services\DrawService.cs" />
     <Compile Include="Services\Excel\ExcelService.cs" />
     <Compile Include="Services\Excel\Sheets\AbstractSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\EnryKillsPlayerSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\GeneralSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\OpenKillsPlayerSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\EntryKillsRoundSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\OpenKillsRoundSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\EntryKillsTeamSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\OpenKillsTeamSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\PlayersSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\RoundsSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\EnryKillsPlayerSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\GeneralSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\OpenKillsPlayerSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\EntryKillsRoundSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\OpenKillsRoundSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\EntryKillsTeamSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\OpenKillsTeamSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\PlayersSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\RoundsSheet.cs" />
     <Compile Include="Services\GameLauncher.cs" />
     <Compile Include="Services\Map\Cache.cs" />
     <Compile Include="Services\Map\Cbble.cs" />

@@ -17,15 +17,17 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
+using CSGO_Demos_Manager.Services.Excel;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Views.AccountStats;
 using Nito.AsyncEx;
+using Application = System.Windows.Application;
+using UserControl = System.Windows.Controls.UserControl;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -41,6 +43,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private readonly ICacheService _cacheService;
 
 		private readonly ISteamService _steamService;
+
+		private readonly ExcelService _excelService;
 
 		private bool _isBusy;
 
@@ -83,6 +87,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<ObservableCollection<Demo>> _analyzeDemosCommand;
 
 		private RelayCommand<ObservableCollection<Demo>> _deleteDemosCommand;
+
+		private RelayCommand<ObservableCollection<Demo>> _exportExcelCommand;
 
 		private RelayCommand<Demo> _watchDemoCommand;
 
@@ -431,6 +437,157 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 
 						await LoadDemosHeader();
+					},
+					demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
+			}
+		}
+
+		public RelayCommand<ObservableCollection<Demo>> ExportExcelCommand
+		{
+			get
+			{
+				return _exportExcelCommand
+					?? (_exportExcelCommand = new RelayCommand<ObservableCollection<Demo>>(
+					async demos =>
+					{
+						if (demos.Count > 1)
+						{
+							var isMultipleExport = await _dialogService.ShowExportDemosAsync();
+							switch (isMultipleExport)
+							{
+								case MessageDialogResult.FirstAuxiliary:
+									return;
+								case MessageDialogResult.Affirmative:
+								{
+									SaveFileDialog saveExportFileDialog = new SaveFileDialog
+									{
+										FileName = "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx",
+										Filter = "XLSX file (*.xlsx)|*.xlsx"
+									};
+
+									if (saveExportFileDialog.ShowDialog() != DialogResult.OK) return;
+									if (_cts == null) _cts = new CancellationTokenSource();
+
+									Task[] tasks = SelectedDemos.Select(async (demo) =>
+									{
+										if (!_cacheService.HasDemoInCache(demo))
+										{
+											int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
+											if (analyzeResult != 1 && _cts != null)
+											{
+												SelectedDemos.Remove(demo);
+											}
+										}
+									}).ToArray();
+
+									try
+									{
+										IsBusy = true;
+										HasNotification = true;
+										NotificationMessage = "Analyzing demos for export...";
+										await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+										if(_cts != null) await _excelService.GenerateXls(SelectedDemos.ToList(), saveExportFileDialog.FileName);
+									}
+									catch (Exception e)
+									{
+										Logger.Instance.Log(e);
+										await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+									}
+									finally
+									{
+										IsBusy = false;
+										HasNotification = false;
+									}
+								}
+									break;
+								default:
+								{
+									FolderBrowserDialog folderDialog = new FolderBrowserDialog
+									{
+										SelectedPath = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System))
+									};
+
+									DialogResult result = folderDialog.ShowDialog();
+									if (result != DialogResult.OK) return;
+									string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
+									if (_cts == null) _cts = new CancellationTokenSource();
+
+									Task[] tasks = SelectedDemos.Select(async (demo) =>
+									{
+										if (!_cacheService.HasDemoInCache(demo))
+										{
+											int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
+											if (analyzeResult == 1 && _cts != null)
+											{
+												NotificationMessage = "Exporting " + demo.Name + "...";
+												await _excelService.GenerateXls(demo,
+													path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
+											}
+										}
+										else
+										{
+											NotificationMessage = "Exporting " + demo.Name + "...";
+											await _excelService.GenerateXls(demo,
+												path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
+										}
+									}).ToArray();
+
+									try
+									{
+										IsBusy = true;
+										HasNotification = true;
+										NotificationMessage = "Analyzing demos for export...";
+										await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+									}
+									catch (Exception e)
+									{
+										Logger.Instance.Log(e);
+										await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+									}
+									finally
+									{
+										IsBusy = false;
+										HasNotification = false;
+									}
+								}
+									break;
+							}
+						}
+						else
+						{
+							SaveFileDialog saveHeatmapDialog = new SaveFileDialog
+							{
+								FileName = SelectedDemo.Name.Substring(0, SelectedDemo.Name.Length - 4) + "-export.xlsx",
+								Filter = "XLSX file (*.xlsx)|*.xlsx"
+							};
+
+							if (saveHeatmapDialog.ShowDialog() == DialogResult.OK)
+							{
+								try
+								{
+									IsBusy = true;
+									HasNotification = true;
+									if (!_cacheService.HasDemoInCache(SelectedDemo))
+									{
+										NotificationMessage = "Analyzing " + SelectedDemo.Name + "for export...";
+										if (_cts == null) _cts = new CancellationTokenSource();
+										await AnalyzeDemoAsync(SelectedDemo, _cts.Token);
+									}
+									NotificationMessage = "Exporting " + SelectedDemo.Name + "...";
+									await _excelService.GenerateXls(SelectedDemo, saveHeatmapDialog.FileName);
+								}
+								catch (Exception e)
+								{
+									Logger.Instance.Log(e);
+									await _dialogService.ShowErrorAsync("An error occured while exporting the demo.", MessageDialogStyle.Affirmative);
+								}
+								finally
+								{
+									IsBusy = false;
+									HasNotification = false;
+								}
+							}
+						}
 					},
 					demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
 			}
@@ -1103,12 +1260,13 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public HomeViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService)
+		public HomeViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService, ExcelService excelService)
 		{
 			_demosService = demosService;
 			_dialogService = dialogService;
 			_steamService = steamService;
 			_cacheService = cacheService;
+			_excelService = excelService;
 
 			if (IsInDesignModeStatic)
 			{

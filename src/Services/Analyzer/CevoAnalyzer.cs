@@ -35,6 +35,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			await Task.Run(() => Parser.ParseToEnd(token), token);
 
+			Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
+
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
@@ -149,7 +151,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				CurrentRound.Winner = e.Winner;
+				CurrentRound.WinnerSide = e.Winner;
 
 				if (CurrentRound.OpenKillEvent != null)
 				{

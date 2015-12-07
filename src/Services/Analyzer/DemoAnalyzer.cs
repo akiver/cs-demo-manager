@@ -408,6 +408,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			};
 
 			if (e.Player != null) bombExplodedEvent.Player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
+			if (bombExplodedEvent.Player != null)
+			{
+				bombExplodedEvent.Player.BombExplodedCount++;
+			}
 
 			Demo.BombExploded.Add(bombExplodedEvent);
 			CurrentRound.BombExploded.Add(bombExplodedEvent);
@@ -610,7 +614,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						shooter.HeGrenadeThrowedCount++;
 						break;
 					case EquipmentElement.Smoke:
-						shooter.SMokeThrowedCount++;
+						shooter.SmokeThrowedCount++;
 						break;
 				}
 			}
@@ -1268,12 +1272,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerClanName = Demo.TeamT.Name;
+						CurrentRound.Winner = Demo.TeamT;
 					}
 					else
 					{
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
+						CurrentRound.Winner = Demo.TeamCT;
 					}
 				}
 				else
@@ -1283,12 +1289,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerClanName = Demo.TeamT.Name;
+						CurrentRound.Winner = Demo.TeamT;
 					}
 					else
 					{
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
+						CurrentRound.Winner = Demo.TeamCT;
 					}
 				}
 			}
@@ -1301,12 +1309,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
+						CurrentRound.Winner = Demo.TeamCT;
 					}
 					else
 					{
 						Demo.ScoreSecondHalfTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerClanName = Demo.TeamT.Name;
+						CurrentRound.Winner = Demo.TeamT;
 					}
 				}
 				else
@@ -1316,12 +1326,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
+						CurrentRound.Winner = Demo.TeamCT;
 					}
 					else
 					{
 						Demo.ScoreFirstHalfTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerClanName = Demo.TeamT.Name;
+						CurrentRound.Winner = Demo.TeamT;
 					}
 				}
 			}
@@ -1336,8 +1348,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// 1vX
 			if (_playerInClutch1 != null && _playerInClutch2 == null)
 			{
-				if (_playerInClutch1.Side == Team.Terrorist && CurrentRound.Winner == Team.Terrorist
-					|| _playerInClutch1.Side == Team.CounterTerrorist && CurrentRound.Winner == Team.CounterTerrorist)
+				if (_playerInClutch1.Side == Team.Terrorist && CurrentRound.WinnerSide == Team.Terrorist
+					|| _playerInClutch1.Side == Team.CounterTerrorist && CurrentRound.WinnerSide == Team.CounterTerrorist)
 				{
 					// T won the clutch
 					UpdatePlayerClutchCount(_playerInClutch1);
@@ -1346,7 +1358,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			} else if (_playerInClutch1 != null && _playerInClutch2 != null)
 			{
 				// 1V1
-				switch (CurrentRound.Winner)
+				switch (CurrentRound.WinnerSide)
 				{
 					case Team.CounterTerrorist:
 						if (_playerInClutch1.Side == Team.CounterTerrorist)

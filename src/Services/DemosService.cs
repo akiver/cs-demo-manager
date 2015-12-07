@@ -689,7 +689,7 @@ namespace CSGO_Demos_Manager.Services
 						stats.FlashbangThrowedCount +=
 							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).FlashbangThrowedCount;
 						stats.SmokeThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).SMokeThrowedCount;
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).SmokeThrowedCount;
 						stats.DecoyThrowedCount +=
 							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).DecoyThrowedCount;
 						stats.HeGrenadeThrowedCount +=

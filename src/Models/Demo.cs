@@ -159,6 +159,11 @@ namespace CSGO_Demos_Manager.Models
 		private TeamExtended _surrender;
 
 		/// <summary>
+		/// Winner of the match
+		/// </summary>
+		private TeamExtended _winner;
+
+		/// <summary>
 		/// List of rounds during the match
 		/// </summary>
 		private ObservableCollection<Round> _rounds = new ObservableCollection<Round>();
@@ -458,6 +463,13 @@ namespace CSGO_Demos_Manager.Models
 				Set(() => Surrender, ref _surrender, value);
 				RaisePropertyChanged(() => Surrender);
 			}
+		}
+
+		[JsonProperty("winner_team")]
+		public TeamExtended Winner
+		{
+			get { return _winner; }
+			set { Set(() => Winner, ref _winner, value); }
 		}
 
 		[JsonProperty("rounds", IsReference = false)]

@@ -4,77 +4,50 @@ using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using NPOI.SS.UserModel;
 
-namespace CSGO_Demos_Manager.Services.Excel.Sheets
+namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 {
-	public class RoundsSheet : AbstractSheet
+	public class RoundsSheet : AbstractSingleSheet
 	{
-		private readonly ISheet _sheet;
-
-		private readonly Demo _demo;
-
-		public Dictionary<string, CellType> Headers => new Dictionary<string, CellType>(){
-			{ "Number", CellType.Numeric },
-			{ "Tick", CellType.Numeric},
-			{ "Winner Clan Name", CellType.String },
-			{ "Winner", CellType.String },
-			{ "Type", CellType.String },
-			{ "Side", CellType.String },
-			{ "Team", CellType.String },
-			{ "Kills", CellType.Numeric },
-			{ "1K", CellType.Numeric },
-			{ "2K", CellType.Numeric },
-			{ "3K", CellType.Numeric },
-			{ "4K", CellType.Numeric },
-			{ "5K", CellType.Numeric },
-			{ "ADP", CellType.Numeric },
-			{ "TDH", CellType.Numeric },
-			{ "TDA", CellType.Numeric },
-			{ "Bomb Exploded", CellType.Numeric },
-			{ "Bomb planted", CellType.Numeric },
-			{ "Bomb defused", CellType.Numeric },
-			{ "Start money team 1", CellType.Numeric },
-			{ "Start money team 2", CellType.Numeric },
-			{ "Equipement value team 1", CellType.Numeric },
-			{ "Equipement value team 2", CellType.Numeric }
-		};
-
 		public RoundsSheet(IWorkbook workbook, Demo demo)
 		{
-			_demo = demo;
-			_sheet = workbook.CreateSheet("Rounds");
+			Headers = new Dictionary<string, CellType>(){
+				{ "Number", CellType.Numeric },
+				{ "Tick", CellType.Numeric},
+				{ "Winner Clan Name", CellType.String },
+				{ "Winner", CellType.String },
+				{ "Type", CellType.String },
+				{ "Side", CellType.String },
+				{ "Team", CellType.String },
+				{ "Kills", CellType.Numeric },
+				{ "1K", CellType.Numeric },
+				{ "2K", CellType.Numeric },
+				{ "3K", CellType.Numeric },
+				{ "4K", CellType.Numeric },
+				{ "5K", CellType.Numeric },
+				{ "ADP", CellType.Numeric },
+				{ "TDH", CellType.Numeric },
+				{ "TDA", CellType.Numeric },
+				{ "Bomb Exploded", CellType.Numeric },
+				{ "Bomb planted", CellType.Numeric },
+				{ "Bomb defused", CellType.Numeric },
+				{ "Start money team 1", CellType.Numeric },
+				{ "Start money team 2", CellType.Numeric },
+				{ "Equipement value team 1", CellType.Numeric },
+				{ "Equipement value team 2", CellType.Numeric }
+			};
+			Demo = demo;
+			Sheet = workbook.CreateSheet("Rounds");
 		}
 
-		public override async Task Generate()
-		{
-			await GenerateHeaders();
-			await GenerateContent();
-		}
-
-		private async Task GenerateHeaders()
-		{
-			await Task.Factory.StartNew(() =>
-			{
-				IRow row = _sheet.CreateRow(0);
-				int i = 0;
-				foreach (KeyValuePair<string, CellType> pair in Headers)
-				{
-					ICell cell = row.CreateCell(i);
-					cell.SetCellType(pair.Value);
-					cell.SetCellValue(pair.Key);
-					i++;
-				}
-			});
-		}
-
-		private async Task GenerateContent()
+		public override async Task GenerateContent()
 		{
 			await Task.Factory.StartNew(() =>
 			{
 				var rowNumber = 1;
 
-				foreach (Round round in _demo.Rounds)
+				foreach (Round round in Demo.Rounds)
 				{
-					IRow row = _sheet.CreateRow(rowNumber);
+					IRow row = Sheet.CreateRow(rowNumber);
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);

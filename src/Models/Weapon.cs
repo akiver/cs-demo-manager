@@ -14,6 +14,18 @@ namespace CSGO_Demos_Manager.Models
 		[JsonProperty("weapon_ammo_in_magazine")]
 		public int AmmoInMagazine { get; set; }
 
+		[JsonIgnore]
+		public int KillCount { get; set; }
+
+		[JsonIgnore]
+		public int DeathCount { get; set; }
+
+		[JsonIgnore]
+		public int TotalDamageHealth { get; set; }
+
+		[JsonIgnore]
+		public int TotalDamageArmor { get; set; }
+
 		public override bool Equals(object obj)
 		{
 			var item = (Weapon)obj;
@@ -23,7 +35,7 @@ namespace CSGO_Demos_Manager.Models
 
 		public override int GetHashCode()
 		{
-			return 1;
+			return base.GetHashCode();
 		}
 
 		public Weapon()

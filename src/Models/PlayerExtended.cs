@@ -82,6 +82,11 @@ namespace CSGO_Demos_Manager.Models
 		private int _bombDefusedCount;
 
 		/// <summary>
+		/// Number of bomb exploded which was planted by the player
+		/// </summary>
+		private int _bombExplodedCount;
+
+		/// <summary>
 		/// Score of the player (calculated by the game)
 		/// </summary>
 		private int _score;
@@ -306,6 +311,13 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => BombDefusedCount, ref _bombDefusedCount, value); }
 		}
 
+		[JsonProperty("bomb_exploded_count")]
+		public int BombExplodedCount
+		{
+			get { return _bombExplodedCount; }
+			set { Set(() => BombExplodedCount, ref _bombExplodedCount, value); }
+		}
+
 		[JsonProperty("death_count")]
 		public int DeathCount
 		{
@@ -505,10 +517,10 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("smoke_throwed_count")]
-		public int SMokeThrowedCount
+		public int SmokeThrowedCount
 		{
 			get { return _smokeThrowedCount; }
-			set { Set(() => SMokeThrowedCount, ref _smokeThrowedCount, value); }
+			set { Set(() => SmokeThrowedCount, ref _smokeThrowedCount, value); }
 		}
 
 		[JsonProperty("hegrenade_throwed_count")]
@@ -773,6 +785,9 @@ namespace CSGO_Demos_Manager.Models
 			get { return _team; }
 			set { Set(() => Team, ref _team, value); }
 		}
+
+		[JsonIgnore]
+		public int MatchCount { get; set; } = 1;
 
 		#endregion
 

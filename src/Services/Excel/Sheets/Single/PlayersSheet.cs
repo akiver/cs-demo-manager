@@ -4,90 +4,62 @@ using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using NPOI.SS.UserModel;
 
-namespace CSGO_Demos_Manager.Services.Excel.Sheets
+namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 {
-	public class PlayersSheet : AbstractSheet
+	public class PlayersSheet : AbstractSingleSheet
 	{
-		private readonly ISheet _sheet;
-
-		private readonly Demo _demo;
-
-		public Dictionary<string, CellType> Headers => new Dictionary<string, CellType>(){
-			{ "Name", CellType.String },
-			{ "SteamID", CellType.String },
-			{ "Rank", CellType.Numeric },
-			{ "Team", CellType.String },
-			{ "Kills", CellType.Numeric },
-			{ "Assists", CellType.Numeric },
-			{ "Deaths", CellType.Numeric },
-			{ "K/D", CellType.Numeric },
-			{ "HS", CellType.Numeric },
-			{ "HS%", CellType.Numeric },
-			{ "Team kill", CellType.Numeric },
-			{ "Entry kill", CellType.Numeric },
-			{ "Bomb planted", CellType.Numeric },
-			{ "Bomb defused", CellType.Numeric },
-			{ "MVP", CellType.Numeric },
-			{ "Score", CellType.Numeric },
-			{ "Rating", CellType.Numeric },
-			{ "KPR", CellType.Numeric },
-			{ "APR", CellType.Numeric },
-			{ "DPR", CellType.Numeric },
-			{ "ADR", CellType.Numeric },
-			{ "TDH", CellType.Numeric },
-			{ "TDA", CellType.Numeric },
-			{ "5K", CellType.Numeric },
-			{ "4K", CellType.Numeric },
-			{ "3K", CellType.Numeric },
-			{ "2K", CellType.Numeric },
-			{ "1K", CellType.Numeric },
-			{ "1v1", CellType.Numeric },
-			{ "1v2", CellType.Numeric },
-			{ "1v3", CellType.Numeric },
-			{ "1v4", CellType.Numeric },
-			{ "1v5", CellType.Numeric },
-			{ "VAC", CellType.Boolean },
-			{ "OW", CellType.Boolean },
-		};
-
 		public PlayersSheet(IWorkbook workbook, Demo demo)
 		{
-			_demo = demo;
-			_sheet = workbook.CreateSheet("Players");
+			Headers = new Dictionary<string, CellType>(){
+				{ "Name", CellType.String },
+				{ "SteamID", CellType.String },
+				{ "Rank", CellType.Numeric },
+				{ "Team", CellType.String },
+				{ "Kills", CellType.Numeric },
+				{ "Assists", CellType.Numeric },
+				{ "Deaths", CellType.Numeric },
+				{ "K/D", CellType.Numeric },
+				{ "HS", CellType.Numeric },
+				{ "HS%", CellType.Numeric },
+				{ "Team kill", CellType.Numeric },
+				{ "Entry kill", CellType.Numeric },
+				{ "Bomb planted", CellType.Numeric },
+				{ "Bomb defused", CellType.Numeric },
+				{ "MVP", CellType.Numeric },
+				{ "Score", CellType.Numeric },
+				{ "Rating", CellType.Numeric },
+				{ "KPR", CellType.Numeric },
+				{ "APR", CellType.Numeric },
+				{ "DPR", CellType.Numeric },
+				{ "ADR", CellType.Numeric },
+				{ "TDH", CellType.Numeric },
+				{ "TDA", CellType.Numeric },
+				{ "5K", CellType.Numeric },
+				{ "4K", CellType.Numeric },
+				{ "3K", CellType.Numeric },
+				{ "2K", CellType.Numeric },
+				{ "1K", CellType.Numeric },
+				{ "1v1", CellType.Numeric },
+				{ "1v2", CellType.Numeric },
+				{ "1v3", CellType.Numeric },
+				{ "1v4", CellType.Numeric },
+				{ "1v5", CellType.Numeric },
+				{ "VAC", CellType.Boolean },
+				{ "OW", CellType.Boolean },
+			};
+			Demo = demo;
+			Sheet = workbook.CreateSheet("Players");
 		}
 
-		public override async Task Generate()
-		{
-			await GenerateHeaders();
-			await GenerateContent();
-		}
-
-		private async Task GenerateHeaders()
-		{
-			await Task.Factory.StartNew(() =>
-			{
-				IRow row = _sheet.CreateRow(0);
-				int i = 0;
-				foreach (KeyValuePair<string, CellType> pair in Headers)
-				{
-					ICell cell = row.CreateCell(i);
-					cell.SetCellType(pair.Value);
-					cell.SetCellValue(pair.Key);
-					i++;
-				}
-			});
-		}
-
-
-		private async Task GenerateContent()
+		public override async Task GenerateContent()
 		{
 			await Task.Factory.StartNew(() =>
 			{
 				var rowNumber = 1;
 
-				foreach (PlayerExtended player in _demo.Players)
+				foreach (PlayerExtended player in Demo.Players)
 				{
-					IRow row = _sheet.CreateRow(rowNumber);
+					IRow row = Sheet.CreateRow(rowNumber);
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.String, player.Name);
 					SetCellValue(row, columnNumber++, CellType.String, player.SteamId.ToString());

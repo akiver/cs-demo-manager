@@ -37,7 +37,10 @@ namespace CSGO_Demos_Manager.Models
 
 		private string _winnerClanName = "Team 1";
 
-		private Team _winner;
+		/// <summary>
+		/// Round's side winner
+		/// </summary>
+		private Team _winnerSide;
 
 		/// <summary>
 		/// Refers to the side currently on eco / semi-eco or force buy
@@ -48,6 +51,11 @@ namespace CSGO_Demos_Manager.Models
 		/// Refers to the team currently on eco / semi-eco or force buy
 		/// </summary>
 		private TeamExtended _teamTrouble;
+
+		/// <summary>
+		/// Round's team winner
+		/// </summary>
+		private TeamExtended _winner;
 
 		/// <summary>
 		/// Number of 1K during the round
@@ -157,19 +165,26 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => WinnerClanName, ref _winnerClanName, value); }
 		}
 
-		[JsonProperty("winner_team")]
-		public Team Winner
+		[JsonProperty("winner_side")]
+		public Team WinnerSide
 		{
-			get { return _winner; }
+			get { return _winnerSide; }
 			set
 			{
-				Set(() => Winner, ref _winner, value);
+				Set(() => WinnerSide, ref _winnerSide, value);
 				RaisePropertyChanged(() => WinnerAsString);
 			}
 		}
 
-		[JsonProperty("winner_as_string")]
-		public string WinnerAsString => _winner == Team.CounterTerrorist ? "CT" : "T";
+		[JsonProperty("winner")]
+		public TeamExtended Winner
+		{
+			get { return _winner; }
+			set { Set(() => Winner, ref _winner, value); }
+		}
+
+		[JsonProperty("winner_side_as_string")]
+		public string WinnerAsString => _winnerSide == Team.CounterTerrorist ? "CT" : "T";
 
 		[JsonProperty("number")]
 		public int Number

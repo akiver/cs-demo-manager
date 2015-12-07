@@ -46,6 +46,9 @@
 					Gesture="CTRL+R" />
 		<KeyBinding Command="{Binding ShowSuspectsCommand}"
 					Gesture="CTRL+F" />
+		<KeyBinding Command="{Binding ExportExcelCommand}"
+					CommandParameter="{Binding SelectedDemos}"
+					Gesture="CTRL+X" />
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=HomeUserControl}"/>
 	</UserControl.InputBindings>
@@ -75,6 +78,7 @@
 
 				<Grid Grid.Row="0">
 					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
@@ -182,21 +186,36 @@
 						</StackPanel>
 					</Button>
 
-					<TextBlock Grid.Column="6" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
-					<ComboBox Grid.Column="7"
+					<Button Grid.Column="6" Margin="5" Width="90" Height="30"
+							Command="{Binding ExportExcelCommand}"
+							CommandParameter="{Binding SelectedDemos}"
+							Style="{StaticResource GeneralButtonStyle}"
+							ToolTip="Export as XLS (CTRL+X)">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="15" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_office_excel}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Export" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<TextBlock Grid.Column="7" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
+					<ComboBox Grid.Column="8"
 					ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
 					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
 					DisplayMemberPath ="Name"
 					SelectedValuePath="SteamId"
 					Style="{StaticResource ComboBoxAccountsStyle}" />
 
-					<CheckBox Grid.Column="8" x:Name="CheckBoxShowAllAccounts" Content="Show all"
+					<CheckBox Grid.Column="9" x:Name="CheckBoxShowAllAccounts" Content="Show all"
 						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
 						  Style="{StaticResource CheckBoxFilterStyle}"
 						  Command="{Binding ShowAllAccountsCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
 
-					<Image Grid.Column="9" Style="{StaticResource RankStyle}" Height="32"
+					<Image Grid.Column="10" Style="{StaticResource RankStyle}" Height="32"
 						   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
 				</Grid>
 			</Grid>
