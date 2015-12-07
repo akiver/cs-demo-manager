@@ -9,7 +9,9 @@ namespace CSGO_Demos_Manager
 		public App()
 		{
 			DispatcherHelper.Initialize();
+#if RELEASE
 			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainUnhandleException;
+#endif
 		}
 
 		private static void HandleAppDomainUnhandleException(object sender, UnhandledExceptionEventArgs args)
