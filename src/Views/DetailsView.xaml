@@ -700,7 +700,7 @@
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource NumberHeader}" x:Name="NumberRoundColumn" Width="Auto" Header="#" Binding="{Binding Number}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}" x:Name="TickRoundColumn" Width="Auto" Header="Tick" Binding="{Binding Tick}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource WinnerClanNameHeader}" x:Name="WinnerClanNameRoundColumn" Width="Auto" Header="W Clan Name" Binding="{Binding WinnerClanName}"
+									<DataGridTextColumn HeaderStyle="{StaticResource WinnerClanNameHeader}" x:Name="WinnerClanNameRoundColumn" Width="Auto" Header="W Clan Name" Binding="{Binding Winner.Name}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerHeader}" x:Name="WinnerRoundColumn" Width="Auto" Header="W" Binding="{Binding WinnerAsString}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />

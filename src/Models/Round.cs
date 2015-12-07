@@ -35,8 +35,6 @@ namespace CSGO_Demos_Manager.Models
 
 		private int _startMoneyTeam2;
 
-		private string _winnerClanName = "Team 1";
-
 		/// <summary>
 		/// Round's side winner
 		/// </summary>
@@ -156,13 +154,6 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _molotovsThrowed; }
 			set { Set(() => MolotovsThrowed, ref _molotovsThrowed, value); }
-		}
-
-		[JsonProperty("winner_clan_name")]
-		public string WinnerClanName
-		{
-			get { return _winnerClanName; }
-			set { Set(() => WinnerClanName, ref _winnerClanName, value); }
 		}
 
 		[JsonProperty("winner_side")]

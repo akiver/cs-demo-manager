@@ -223,7 +223,7 @@ namespace CSGO_Demos_Manager.Services.Design
 					StartMoneyTeam1 = random.Next(4200, 50000),
 					StartMoneyTeam2 = random.Next(4200, 50000),
 					Tick = random.Next(7000, 100000),
-					WinnerClanName = teams[random.Next(0, 2)].Name
+					Winner = teams[random.Next(0, 2)]
 				};
 
 				rounds.Add(round);

@@ -427,14 +427,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
 					{
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
@@ -444,14 +442,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
 					{
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
@@ -464,14 +460,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.CounterTerrorist)
 					{
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 						Demo.ScoreSecondHalfTeam2++;
 						Demo.ScoreTeam2++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
@@ -481,14 +475,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					if (roundEndedEventArgs.Winner == Team.Terrorist)
 					{
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 						Demo.ScoreFirstHalfTeam2++;
 						Demo.ScoreTeam2++;
 					}
 					else
 					{
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;

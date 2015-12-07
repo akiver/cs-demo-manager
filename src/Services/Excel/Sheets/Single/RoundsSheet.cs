@@ -51,7 +51,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
-					SetCellValue(row, columnNumber++, CellType.String, round.WinnerClanName);
+					SetCellValue(row, columnNumber++, CellType.String, round.Winner.Name);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);

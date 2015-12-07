@@ -1271,14 +1271,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 					}
 					else
 					{
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 					}
 				}
@@ -1288,14 +1286,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 					}
 					else
 					{
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 					}
 				}
@@ -1308,14 +1304,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 					}
 					else
 					{
 						Demo.ScoreSecondHalfTeam2++;
 						Demo.ScoreTeam2++;
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 					}
 				}
@@ -1325,14 +1319,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;
-						CurrentRound.WinnerClanName = Demo.TeamCT.Name;
 						CurrentRound.Winner = Demo.TeamCT;
 					}
 					else
 					{
 						Demo.ScoreFirstHalfTeam2++;
 						Demo.ScoreTeam2++;
-						CurrentRound.WinnerClanName = Demo.TeamT.Name;
 						CurrentRound.Winner = Demo.TeamT;
 					}
 				}
