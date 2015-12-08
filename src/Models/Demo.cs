@@ -1233,6 +1233,8 @@ namespace CSGO_Demos_Manager.Models
 					_mostHeadshotPlayer = null;
 					_mostKillingWeapon = null;
 					_hasCheater = false;
+					_playerBlindedEvents.Clear();
+					_winner = null;
 				});
 		}
 
