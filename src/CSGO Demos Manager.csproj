@@ -184,6 +184,7 @@
     <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
     <Compile Include="Models\Events\PlayerFlashedEvent.cs" />
+    <Compile Include="Models\Excel\WeaponsData.cs" />
     <Compile Include="Models\KillHeatmapPoint.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />

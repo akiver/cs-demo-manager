@@ -539,15 +539,47 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}
 			}
 
+			PlayerExtended shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID);
+			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
+			if (shooter == null || weapon == null) return;
+
+			switch (e.Weapon.Weapon)
+			{
+				case EquipmentElement.Incendiary:
+					shooter.IncendiaryThrowedCount++;
+					break;
+				case EquipmentElement.Molotov:
+					shooter.MolotovThrowedCount++;
+					break;
+				case EquipmentElement.Decoy:
+					shooter.DecoyThrowedCount++;
+					break;
+				case EquipmentElement.Flash:
+					shooter.FlashbangThrowedCount++;
+					PlayersFlashQueue.Enqueue(shooter);
+					break;
+				case EquipmentElement.HE:
+					shooter.HeGrenadeThrowedCount++;
+					break;
+				case EquipmentElement.Smoke:
+					shooter.SmokeThrowedCount++;
+					break;
+			}
+
+			WeaponFire shoot = new WeaponFire(Parser.IngameTick)
+			{
+				Shooter = shooter,
+				Weapon = weapon,
+				Round = CurrentRound,
+				ShooterVelocityX = e.Shooter.Velocity.X,
+				ShooterVelocityY = e.Shooter.Velocity.Y,
+				ShooterVelocityZ = e.Shooter.Velocity.Z
+			};
+			Demo.WeaponFired.Add(shoot);
+
 			if (AnalyzeHeatmapPoint || AnalyzePlayersPosition)
 			{
-				WeaponFire shoot = new WeaponFire(Parser.IngameTick)
-				{
-					Shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID),
-					Weapon = new Weapon(e.Weapon)
-				};
-
-				if (AnalyzeHeatmapPoint && shoot.Shooter != null)
+				if (AnalyzeHeatmapPoint)
 				{
 					shoot.Point = new HeatmapPoint
 					{
@@ -559,9 +591,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					};
 				}
 
-				Demo.WeaponFired.Add(shoot);
-
-				if (AnalyzePlayersPosition || AnalyzeHeatmapPoint && shoot.Shooter != null)
+				if (AnalyzePlayersPosition || AnalyzeHeatmapPoint)
 				{
 					if (e.Shooter.SteamID == 0) return;
 
@@ -588,34 +618,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							Demo.PositionsPoint.Add(positionPoint);
 							break;
 					}
-				}
-			}
-			else
-			{
-				PlayerExtended shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID);
-				if (shooter == null) return;
-				
-				switch (e.Weapon.Weapon)
-				{
-					case EquipmentElement.Incendiary:
-						shooter.IncendiaryThrowedCount++;
-						break;
-					case EquipmentElement.Molotov:
-						shooter.MolotovThrowedCount++;
-						break;
-					case EquipmentElement.Decoy:
-						shooter.DecoyThrowedCount++;
-						break;
-					case EquipmentElement.Flash:
-						shooter.FlashbangThrowedCount++;
-						PlayersFlashQueue.Enqueue(shooter);
-						break;
-					case EquipmentElement.HE:
-						shooter.HeGrenadeThrowedCount++;
-						break;
-					case EquipmentElement.Smoke:
-						shooter.SmokeThrowedCount++;
-						break;
 				}
 			}
 		}
@@ -962,17 +964,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		/// <summary>
 		/// When a player is hurted
-		/// Trigerred only with demos > 6/30/2015
+		/// Trigerred only with demos > 06/30/2015
 		/// </summary>
 		/// <param name="sender"></param>
 		/// <param name="e"></param>
 		protected void HandlePlayerHurted(object sender, PlayerHurtEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || e.Player == null) return;
 
 			// may be a bot on MM demos
 			PlayerExtended hurted = Demo.Players.FirstOrDefault(player => player.SteamId == e.Player.SteamID);
-			if (hurted == null) return;
+			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
+			if (hurted == null || weapon == null) return;
 			PlayerExtended attacker = null;
 			// attacker may be null (hurted by world)
 			if (e.Attacker != null) attacker = Demo.Players.FirstOrDefault(player => player.SteamId == e.Attacker.SteamID);
@@ -986,12 +989,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Health = e.Health,
 				HealthDamage = e.HealthDamage,
 				HitGroup = e.Hitgroup,
-				Weapon = new Weapon(e.Weapon),
+				Weapon = weapon,
 				RoundNumber = CurrentRound.Number
 			};
 
+			Demo.PlayersHurted.Add(playerHurtedEvent);
 			attacker?.PlayersHurted.Add(playerHurtedEvent);
-			hurted?.PlayersHurted.Add(playerHurtedEvent);
+			hurted.PlayersHurted.Add(playerHurtedEvent);
 			CurrentRound.PlayersHurted.Add(playerHurtedEvent);
 		}
 

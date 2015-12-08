@@ -189,6 +189,11 @@ namespace CSGO_Demos_Manager.Models
 		private ObservableCollection<BombExplodedEvent> _bombExploded = new ObservableCollection<BombExplodedEvent>();
 
 		/// <summary>
+		/// Infos about players hurted event
+		/// </summary>
+		private ObservableCollection<PlayerHurtedEvent> _playersHurted = new ObservableCollection<PlayerHurtedEvent>();
+
+		/// <summary>
 		/// All kills during the match
 		/// </summary>
 		private ObservableCollection<KillEvent> _kills = new ObservableCollection<KillEvent>();
@@ -621,10 +626,17 @@ namespace CSGO_Demos_Manager.Models
 		public List<MolotovFireStartedEvent> MolotovFireStarted = new List<MolotovFireStartedEvent>();
 
 		/// <summary>
-		/// Contains information about all shoots occured during the match (Heatmap data)
+		/// Contains information about all shoots occured during the match
 		/// </summary>
-		[JsonIgnore]
+		[JsonProperty("weapon_fired")]
 		public List<WeaponFire> WeaponFired = new List<WeaponFire>();
+
+		[JsonProperty("players_hurted")]
+		public ObservableCollection<PlayerHurtedEvent> PlayersHurted
+		{
+			get { return _playersHurted; }
+			set { Set(() => PlayersHurted, ref _playersHurted, value); }
+		}
 
 		/// <summary>
 		/// Total health damage has been done during the match
@@ -1233,6 +1245,7 @@ namespace CSGO_Demos_Manager.Models
 					_mostHeadshotPlayer = null;
 					_mostKillingWeapon = null;
 					_hasCheater = false;
+					_playersHurted.Clear();
 					_playerBlindedEvents.Clear();
 					_winner = null;
 				});

@@ -281,10 +281,15 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted) return;
 			if (e.Killer == null || e.Victim == null) return;
+			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
+			if (weapon == null) return;
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Weapon = new Weapon(e.Weapon)
+				Weapon = weapon,
+				KillerVelocityX = e.Killer.Velocity.X,
+				KillerVelocityY = e.Killer.Velocity.Y,
+				KillerVelocityZ = e.Killer.Velocity.Z
 			};
 
 			bool killerIsBot = false;
@@ -305,7 +310,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				if (killEvent.DeathPerson != null && killEvent.Killer != null)
 				{
 					// TK
-					if (killEvent.Killer.Team == killEvent.DeathPerson.Team)
+					if (killEvent.Killer.Team.Equals(killEvent.DeathPerson.Team))
 					{
 						killEvent.Killer.TeamKillCount++;
 						killEvent.Killer.KillsCount--;

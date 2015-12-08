@@ -235,13 +235,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted) return;
 			if (e.Killer == null || e.Victim == null) return;
-
+			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
+			if (weapon == null) return;
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Weapon = new Weapon(e.Weapon)
+				Weapon = weapon,
+				DeathPerson = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID),
+				KillerVelocityX = e.Killer.Velocity.X,
+				KillerVelocityY = e.Killer.Velocity.Y,
+				KillerVelocityZ = e.Killer.Velocity.Z
 			};
 
-			killEvent.DeathPerson = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID);
 			if (killEvent.DeathPerson != null)
 			{
 				killEvent.DeathPerson.IsAlive = false;

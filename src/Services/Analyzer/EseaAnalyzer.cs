@@ -262,12 +262,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!IsMatchStarted) return;
 
 			if (e.Killer == null || e.Victim == null) return;
+			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
+			if (weapon == null) return;
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick)
 			{
-				Weapon = new Weapon(e.Weapon),
+				Weapon = weapon,
 				Killer = Demo.Players.FirstOrDefault(p => p.SteamId == e.Killer.SteamID),
-				DeathPerson = Demo.Players.FirstOrDefault(p => p.SteamId == e.Victim.SteamID)
+				DeathPerson = Demo.Players.FirstOrDefault(p => p.SteamId == e.Victim.SteamID),
+				KillerVelocityX = e.Killer.Velocity.X,
+				KillerVelocityY = e.Killer.Velocity.Y,
+				KillerVelocityZ = e.Killer.Velocity.Z
 			};
 
 			if (killEvent.Killer != null)
@@ -297,7 +302,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// TK
 			if (killEvent.Killer != null && killEvent.DeathPerson != null)
 			{
-				if (killEvent.Killer.Team == killEvent.DeathPerson.Team)
+				if (killEvent.Killer.Team.Equals(killEvent.DeathPerson.Team))
 				{
 					killEvent.Killer.KillsCount--;
 					killEvent.Killer.TeamKillCount++;

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
+using CSGO_Demos_Manager.Models.Excel;
 using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
@@ -16,7 +16,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{"Name", CellType.String},
 				{"Kills", CellType.Numeric},
 				{"Damage health", CellType.Numeric},
-				{"Damage armor", CellType.Numeric}
+				{"Damage armor", CellType.Numeric},
+				{"Shots", CellType.Numeric},
+				{"Hits", CellType.Numeric},
+				{"Accuracy %", CellType.Numeric}
 			};
 			Demos = demos;
 			Sheet = workbook.CreateSheet("Weapons");
@@ -26,57 +29,43 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 		{
 			await Task.Factory.StartNew(() =>
 			{
-				List<Weapon> weapons = new List<Weapon>();
+				Dictionary<Weapon, WeaponsData> data = new Dictionary<Weapon, WeaponsData>();
+				
 				foreach (Demo demo in Demos)
 				{
-					foreach (PlayerHurtedEvent hurtedEvent in demo.Rounds.SelectMany(round => round.PlayersHurted)
-					.Where(hurtedEvent => hurtedEvent.Weapon.Name != "World" && hurtedEvent.Weapon.Name != "Unknown 2 stronk"))
+					foreach (WeaponFire weaponFire in demo.WeaponFired)
 					{
-						if (weapons.Contains(hurtedEvent.Weapon))
-						{
-							Weapon weapon = weapons.First(w => w.Equals(hurtedEvent.Weapon));
-							weapon.TotalDamageArmor += hurtedEvent.ArmorDamage;
-							weapon.TotalDamageHealth += hurtedEvent.HealthDamage;
-						}
-						else
-						{
-							Weapon weapon = new Weapon
-							{
-								Name = hurtedEvent.Weapon.Name,
-								TotalDamageArmor = hurtedEvent.ArmorDamage,
-								TotalDamageHealth = hurtedEvent.HealthDamage
-							};
-							weapons.Add(weapon);
-						}
+						if (!data.ContainsKey(weaponFire.Weapon)) data.Add(weaponFire.Weapon, new WeaponsData());
+						data[weaponFire.Weapon].Shots++;
 					}
-					foreach (KillEvent kill in demo.Kills.Where(kill => kill.Weapon.Name != "World" && kill.Weapon.Name != "Unknown 2 stronk"))
+
+					foreach (PlayerHurtedEvent hurtedEvent in demo.PlayersHurted)
 					{
-						if (weapons.Contains(kill.Weapon))
-						{
-							Weapon weapon = weapons.First(w => w.Equals(kill.Weapon));
-							weapon.KillCount++;
-						}
-						else
-						{
-							Weapon weapon = new Weapon
-							{
-								Name = kill.Weapon.Name,
-								KillCount = 1
-							};
-							weapons.Add(weapon);
-						}
+						if (!data.ContainsKey(hurtedEvent.Weapon)) data.Add(hurtedEvent.Weapon, new WeaponsData());
+						data[hurtedEvent.Weapon].Hits++;
+						data[hurtedEvent.Weapon].TotalDamageArmor += hurtedEvent.ArmorDamage;
+						data[hurtedEvent.Weapon].TotalDamageHealth += hurtedEvent.HealthDamage;
+					}
+
+					foreach (KillEvent killEvent in demo.Kills)
+					{
+						if (!data.ContainsKey(killEvent.Weapon)) data.Add(killEvent.Weapon, new WeaponsData());
+						data[killEvent.Weapon].KillCount++;
 					}
 				}
 
 				int rowCount = 1;
-				foreach (Weapon weapon in weapons)
+				foreach (KeyValuePair<Weapon, WeaponsData> keyValuePair in data)
 				{
 					IRow row = Sheet.CreateRow(rowCount++);
 					int columnNumber = 0;
-					SetCellValue(row, columnNumber++, CellType.String, weapon.Name);
-					SetCellValue(row, columnNumber++, CellType.Numeric, weapon.KillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, weapon.TotalDamageHealth);
-					SetCellValue(row, columnNumber, CellType.Numeric, weapon.TotalDamageArmor);
+					SetCellValue(row, columnNumber++, CellType.String, keyValuePair.Key.Name);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TotalDamageHealth);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TotalDamageArmor);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Shots);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Hits);
+					SetCellValue(row, columnNumber, CellType.Numeric, keyValuePair.Value.Accurary);
 				}
 			});
 		}

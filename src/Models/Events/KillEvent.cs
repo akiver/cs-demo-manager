@@ -19,6 +19,15 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public KillHeatmapPoint Point { get; set; }
 
+		[JsonProperty("killer_velocity_x")]
+		public float KillerVelocityX { get; set; }
+
+		[JsonProperty("killer_velocity_Y")]
+		public float KillerVelocityY { get; set; }
+
+		[JsonProperty("killer_velocity_z")]
+		public float KillerVelocityZ { get; set; }
+
 		[JsonIgnore]
 		public override string Message => Killer.Name + " killed " + DeathPerson.Name + " with " + Weapon.Name;
 
