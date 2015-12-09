@@ -800,7 +800,7 @@ namespace CSGO_Demos_Manager.Models
 
 		public override int GetHashCode()
 		{
-			return base.GetHashCode();
+			return 1;
 		}
 
 		public PlayerExtended()

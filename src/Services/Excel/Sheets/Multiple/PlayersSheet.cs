@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
-using CSGO_Demos_Manager.Models.Events;
+using CSGO_Demos_Manager.Models.Excel;
 using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
@@ -33,6 +31,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "Team kill", CellType.Numeric },
 				{ "Bomb planted", CellType.Numeric },
 				{ "Bomb defused", CellType.Numeric },
+				{ "Bomb exploded", CellType.Numeric },
 				{ "MVP", CellType.Numeric },
 				{ "Score", CellType.Numeric },
 				{ "Clutch", CellType.Numeric },
@@ -74,115 +73,115 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 		{
 			await Task.Factory.StartNew(() =>
 			{
-				List<PlayerExtended> players = new List<PlayerExtended>();
+				Dictionary<PlayerExtended, PlayerStats> data = new Dictionary<PlayerExtended, PlayerStats>();
 
 				foreach (Demo demo in Demos)
 				{
 					foreach (PlayerExtended player in demo.Players)
 					{
-						if (players.Contains(player))
-						{
-							PlayerExtended pl = players.First(p => p.Equals(player));
-							pl.MatchCount++;
-							pl.RankNumberNew = pl.RankNumberNew < player.RankNumberNew ? player.RankNumberNew : pl.RankNumberNew;
-							pl.KillsCount += player.KillsCount;
-							pl.AssistCount += player.AssistCount;
-							pl.DeathCount += player.DeathCount;
-							pl.FiveKillCount += player.FiveKillCount;
-							pl.FourKillCount += player.FourKillCount;
-							pl.ThreekillCount += player.ThreekillCount;
-							pl.TwokillCount += player.TwokillCount;
-							pl.OnekillCount += player.OnekillCount;
-							pl.HeadshotCount += player.HeadshotCount;
-							pl.TeamKillCount += player.TeamKillCount;
-							pl.Clutch1V1Count += player.Clutch1V1Count;
-							pl.Clutch1V2Count += player.Clutch1V2Count;
-							pl.Clutch1V3Count += player.Clutch1V3Count;
-							pl.Clutch1V4Count += player.Clutch1V4Count;
-							pl.Clutch1V5Count += player.Clutch1V5Count;
-							pl.BombPlantedCount += player.BombPlantedCount;
-							pl.BombDefusedCount += player.BombDefusedCount;
-							pl.RoundMvpCount += player.RoundMvpCount;
-							pl.Score += player.Score;
-							pl.RatingHltv += player.RatingHltv;
-							pl.RoundPlayedCount += player.RoundPlayedCount;
-							pl.IsVacBanned = pl.IsVacBanned || player.IsVacBanned;
-							pl.FlashbangThrowedCount += player.FlashbangThrowedCount;
-							pl.SmokeThrowedCount += player.SmokeThrowedCount;
-							pl.HeGrenadeThrowedCount += player.HeGrenadeThrowedCount;
-							pl.DecoyThrowedCount += player.DecoyThrowedCount;
-							pl.MolotovThrowedCount += player.MolotovThrowedCount;
-							pl.IncendiaryThrowedCount += player.IncendiaryThrowedCount;
-							pl.ClutchCount += player.ClutchCount;
-							pl.ClutchLostCount += player.ClutchLostCount;
-							pl.IsOverwatchBanned = pl.IsOverwatchBanned || player.IsOverwatchBanned;
-							pl.EntryKills = new ObservableCollection<EntryKillEvent>(pl.EntryKills.Concat(player.EntryKills).ToList());
-							pl.OpeningKills = new ObservableCollection<OpenKillEvent>(pl.OpeningKills.Concat(player.OpeningKills).ToList());
-							pl.PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(pl.PlayersHurted.Concat(player.PlayersHurted).ToList());
-						}
-						else
-						{
-							players.Add(player.Clone());
-						}
+						if(!data.ContainsKey(player)) data.Add(player, new PlayerStats());
+						data[player].MatchCount++;
+						data[player].RankMax = data[player].RankMax < player.RankNumberNew ? player.RankNumberNew : data[player].RankMax;
+						data[player].KillCount += player.KillsCount;
+						data[player].AssistCount += player.AssistCount;
+						data[player].DeathCount += player.DeathCount;
+						data[player].FiveKillCount += player.FiveKillCount;
+						data[player].FourKillCount += player.FourKillCount;
+						data[player].ThreeKillCount += player.ThreekillCount;
+						data[player].TwoKillCount += player.TwokillCount;
+						data[player].OneKillCount += player.OnekillCount;
+						data[player].HeadshotCount += player.HeadshotCount;
+						data[player].TeamKillCount += player.TeamKillCount;
+						data[player].ClutchCount += player.ClutchCount;
+						data[player].ClutchLostCount += player.ClutchLostCount;
+						data[player].Clutch1V1Count += player.Clutch1V1Count;
+						data[player].Clutch1V2Count += player.Clutch1V2Count;
+						data[player].Clutch1V3Count += player.Clutch1V3Count;
+						data[player].Clutch1V4Count += player.Clutch1V4Count;
+						data[player].Clutch1V5Count += player.Clutch1V5Count;
+						data[player].BombPlantedCount += player.BombPlantedCount;
+						data[player].BombDefusedCount += player.BombDefusedCount;
+						data[player].BombExplodedCount += player.BombExplodedCount;
+						data[player].MvpCount += player.RoundMvpCount;
+						data[player].ScoreCount += player.Score;
+						data[player].Rating += player.RatingHltv;
+						data[player].RoundCount += player.RoundPlayedCount;
+						data[player].IsVacBanned = data[player].IsVacBanned || player.IsVacBanned;
+						data[player].IsOverwatchBanned = data[player].IsOverwatchBanned || player.IsOverwatchBanned;
+						data[player].FlashbangThrowedCount += player.FlashbangThrowedCount;
+						data[player].SmokeThrowedCount += player.SmokeThrowedCount;
+						data[player].HeGrenadeThrowedCount += player.HeGrenadeThrowedCount;
+						data[player].DecoyThrowedCount += player.DecoyThrowedCount;
+						data[player].MolotovThrowedCount += player.MolotovThrowedCount;
+						data[player].IncendiaryThrowedCount += player.IncendiaryThrowedCount;
+						data[player].DamageHealthCount += player.TotalDamageHealthCount;
+						data[player].DamageArmorCount += player.TotalDamageArmorCount;
+						data[player].EntryKillCount += player.EntryKills.Count;
+						data[player].EntryKillWinCount += player.EntryKillWinCount;
+						data[player].EntryKillLossCount += player.EntryKillLossCount;
+						data[player].OpenKillCount += player.OpeningKills.Count;
+						data[player].OpenKillWinCount += player.OpenKillWinCount;
+						data[player].OpenKillLossCount += player.OpenKillLossCount;
 					}
 				}
 
 				int rowCount = 1;
-				foreach (PlayerExtended player in players)
+				foreach (KeyValuePair<PlayerExtended, PlayerStats> keyValuePair in data)
 				{
 					IRow row = Sheet.CreateRow(rowCount++);
 					int columnNumber = 0;
-					SetCellValue(row, columnNumber++, CellType.String, player.Name);
-					SetCellValue(row, columnNumber++, CellType.String, player.SteamId);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.MatchCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.KillsCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.AssistCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.DeathCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.KillDeathRatio);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotPercent);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RoundPlayedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatingHltv / player.MatchCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.FiveKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.FourKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.ThreekillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.TwokillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OnekillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.TeamKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.BombPlantedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.BombDefusedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RoundMvpCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.Score);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.ClutchCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.ClutchLostCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V1Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V2Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKills.Count());
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillWinCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillLossCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatioEntryKill);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OpeningKills.Count());
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OpenKillWinCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OpenKillLossCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatioOpenKill);
-					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round((double)player.KillsCount / player.RoundPlayedCount, 2)); // KPR
-					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round((double)player.AssistCount / player.RoundPlayedCount, 2)); // APR
-					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round((double)player.DeathCount / player.RoundPlayedCount, 2)); // DPR
-					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round((double)player.TotalDamageHealthCount / player.RoundPlayedCount, 2)); // ADR
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.TotalDamageHealthCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.TotalDamageArmorCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.FlashbangThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.SmokeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeGrenadeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.DecoyThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.MolotovThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.IncendiaryThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.RankNumberNew);
-					SetCellValue(row, columnNumber++, CellType.Boolean, player.IsVacBanned);
-					SetCellValue(row, columnNumber, CellType.Boolean, player.IsOverwatchBanned);
+					SetCellValue(row, columnNumber++, CellType.String, keyValuePair.Key.Name);
+					SetCellValue(row, columnNumber++, CellType.String, keyValuePair.Key.SteamId);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MatchCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AssistCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DeathCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillPerDeath);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeadshotCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeadshotPercent);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.RoundCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.Rating / keyValuePair.Value.MatchCount, 2));
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.FiveKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.FourKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ThreeKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TwoKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OneKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TeamKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.BombPlantedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.BombDefusedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.BombExplodedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MvpCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ScoreCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ClutchCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ClutchLostCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V1Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V2Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V3Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V4Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V5Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillWinCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillLossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillWinPercent);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillWinCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillLossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillWinPercent);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillPerDeath);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AssistPerRound);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DeathPerRound);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AverageDamagePerRound);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DamageHealthCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DamageArmorCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.FlashbangThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.SmokeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeGrenadeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DecoyThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MolotovThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.IncendiaryThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.RankMax);
+					SetCellValue(row, columnNumber++, CellType.Boolean, keyValuePair.Value.IsVacBanned);
+					SetCellValue(row, columnNumber, CellType.Boolean, keyValuePair.Value.IsOverwatchBanned);
 				}
 			});
 		}
