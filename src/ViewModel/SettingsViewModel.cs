@@ -122,6 +122,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showHsColumn = Settings.Default.ShowHsColumn;
 
+		private bool _showJumpKillColumn = Settings.Default.ShowJumpKillCoulmn;
+
 		private bool _showTkColumn = Settings.Default.ShowTkColumn;
 
 		private bool _showEkColumn = Settings.Default.ShowEkColumn;
@@ -589,6 +591,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowBombDefusedColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowBombDefusedColumn, ref _showBombDefusedColumn, value);
+			}
+		}
+
+		public bool ShowJumpKillColumn
+		{
+			get { return _showJumpKillColumn; }
+			set
+			{
+				Settings.Default.ShowJumpKillCoulmn = value;
+				Settings.Default.Save();
+				Set(() => ShowJumpKillColumn, ref _showJumpKillColumn, value);
 			}
 		}
 

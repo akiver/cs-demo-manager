@@ -400,6 +400,9 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
+		public int JumpKillCount => Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
+
 		#endregion
 
 		#region Selected player data accessors
@@ -409,6 +412,9 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return Kills.Where(k => k.Killer != null).Count(k => k.Killer.SteamId == Settings.Default.SelectedPlayerSteamId); }
 		}
+
+		[JsonIgnore]
+		public int JumpKillSelectedPlayerCount => Kills.Count(killEvent => killEvent.Killer.SteamId == Settings.Default.SelectedPlayerSteamId && killEvent.KillerVelocityZ > 0);
 
 		[JsonIgnore]
 		public int OneKillSelectedPlayerCount

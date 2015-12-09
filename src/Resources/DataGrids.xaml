@@ -253,6 +253,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Kills" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="JumpKillsHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Jump kills" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="AverageDamagePerRoundHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Average Damage Per Round" />
 	</Style>

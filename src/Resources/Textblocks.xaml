@@ -109,7 +109,7 @@
 
 	<!-- TextBlock inside DataGridTextColumn for selected account stats data -->
 	<Style TargetType="TextBlock" x:Key="OneKillCountDataGridTextColumnStyle">
-		<Style.Triggers >
+		<Style.Triggers>
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding OneKillCount}" />
 			</DataTrigger>
@@ -170,6 +170,17 @@
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
 				<Setter Property="Text" Value="{Binding TotalKillSelectedAccountCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="JumpKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding JumpKillCount}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding JumpKillCountSelectedAccountCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
@@ -381,6 +392,17 @@
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
 				<Setter Property="Text" Value="{Binding FiveKillCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="JumpKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding JumpKillSelectedPlayerCount}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding JumpKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
