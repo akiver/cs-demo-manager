@@ -452,6 +452,7 @@
 				<Button Margin="20 0 0 0" Width="70" Height="30"
 							Command="{Binding StopAnalyzeCommand}"
 							Style="{StaticResource GeneralButtonStyle}"
+							Visibility="{Binding IsCancellable, Converter={StaticResource BooleanToVisibilityConverter}}"
 							ToolTip="Stop (CTRL+S)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 						<Rectangle Width="15" Height="15">

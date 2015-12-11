@@ -20,6 +20,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Threading;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Services.Excel;
@@ -48,9 +49,13 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isBusy;
 
+		private bool _isCancellable;
+
 		private bool _hasNotification;
 
 		private bool _isShowAllFolders;
+
+		private bool _isMainWindowLoaded;
 
 		private bool _isShowPovDemos = Properties.Settings.Default.ShowPovDemos;
 
@@ -154,6 +159,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			get { return _isBusy; }
 			set { Set(() => IsBusy, ref _isBusy, value); }
+		}
+
+		public bool IsCancellable
+		{
+			get { return _isCancellable; }
+			set { Set(() => IsCancellable, ref _isCancellable, value); }
 		}
 
 		public bool IsShowAllFolders
@@ -308,16 +319,19 @@ namespace CSGO_Demos_Manager.ViewModel
 			set
 			{
 				Set(() => SelectedFolder, ref _selectedFolder, value);
-				DispatcherHelper.CheckBeginInvokeOnUI(
-				async () =>
+				if (!string.IsNullOrWhiteSpace(value))
 				{
-					if (!string.IsNullOrWhiteSpace(value))
+					Properties.Settings.Default.LastFolder = value;
+					Properties.Settings.Default.Save();
+				}
+				if (_isMainWindowLoaded)
+				{
+					DispatcherHelper.CheckBeginInvokeOnUI(
+					async () =>
 					{
-						Properties.Settings.Default.LastFolder = value;
-						Properties.Settings.Default.Save();
-					}
-					await LoadDemosHeader();
-				});
+						await LoadDemosHeader();
+					});
+				}
 			}
 		}
 
@@ -436,7 +450,11 @@ namespace CSGO_Demos_Manager.ViewModel
 							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) deleted.", MessageDialogStyle.Affirmative);
 						}
 
-						await LoadDemosHeader();
+						DispatcherHelper.CheckBeginInvokeOnUI(
+						async () =>
+						{
+							await LoadDemosHeader();
+						});
 					},
 					demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
 			}
@@ -815,6 +833,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								settingsViewModel.SelectedStatsAccount = settingsViewModel.Accounts[0];
 							}
 							IsBusy = true;
+							IsCancellable = false;
 							NotificationMessage = "Loading...";
 							DataGridDemosCollection.Refresh();
 							IsBusy = false;
@@ -1016,9 +1035,13 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _refreshListCommand
 					?? (_refreshListCommand = new RelayCommand(
-						async () =>
+						() =>
 						{
-							await LoadDemosHeader();
+							DispatcherHelper.CheckBeginInvokeOnUI(
+							async () =>
+							{
+								await LoadDemosHeader();
+							});
 						}, () => !IsBusy));
 			}
 		}
@@ -1273,10 +1296,6 @@ namespace CSGO_Demos_Manager.ViewModel
 				DispatcherHelper.Initialize();
 			}
 
-			NotificationMessage = "Loading...";
-			IsBusy = true;
-			HasNotification = true;
-
 			Demos = new ObservableCollection<Demo>();
 			SelectedDemos = new ObservableCollection<Demo>();
 			DataGridDemosCollection = CollectionViewSource.GetDefaultView(Demos);
@@ -1313,12 +1332,9 @@ namespace CSGO_Demos_Manager.ViewModel
 
 				if (!AppSettings.IsInternetConnectionAvailable()) return;
 
-				HasNotification = true;
-				IsBusy = true;
-				NotificationMessage = "Checking for new banned suspects...";
 				await RefreshBannedPlayerCount();
-				HasNotification = false;
-				IsBusy = false;
+				await LoadDemosHeader();
+				_isMainWindowLoaded = true;
 			});
 		}
 
@@ -1327,9 +1343,21 @@ namespace CSGO_Demos_Manager.ViewModel
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
-				List<string> folders = await _cacheService.GetFoldersAsync();
-				Folders = new ObservableCollection<string>(folders);
-				await LoadDemosHeader();
+				try
+				{
+					List<string> folders = await _cacheService.GetFoldersAsync();
+					Folders = new ObservableCollection<string>(folders);
+					await LoadDemosHeader();
+				}
+				catch (Exception e)
+				{
+					Logger.Instance.Log(e);
+				}
+				finally
+				{
+					IsBusy = false;
+					HasNotification = false;
+				}
 			});
 		}
 
@@ -1412,6 +1440,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			try
 			{
+				IsCancellable = true;
 				await _demosService.AnalyzeDemo(demo, token);
 				if (AppSettings.IsInternetConnectionAvailable())
 				{
@@ -1427,12 +1456,18 @@ namespace CSGO_Demos_Manager.ViewModel
 				await _cacheService.WriteDemoDataCache(demo);
 				return -1;
 			}
+			finally
+			{
+				IsCancellable = false;
+			}
 
 			if (demo.Status == "old")
 			{
 				demo.Status = "None";
 				await _cacheService.WriteDemoDataCache(demo);
 			}
+			IsCancellable = false;
+
 			return 1;
 		}
 
@@ -1440,6 +1475,10 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			try
 			{
+				HasNotification = true;
+				IsBusy = true;
+				IsCancellable = false;
+				NotificationMessage = "Checking for new banned suspects...";
 				List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
 				List<string> bannedIdList = await _cacheService.GetSuspectsBannedList();
 				List<Suspect> newSuspectBannedList = await _steamService.GetNewSuspectBannedList(suspectIdList, bannedIdList);
@@ -1462,16 +1501,21 @@ namespace CSGO_Demos_Manager.ViewModel
 				await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
 				Logger.Instance.Log(e);
 			}
+			finally
+			{
+				HasNotification = false;
+				IsBusy = false;
+			}
 		}
 
-		public async Task LoadDemosHeader()
+		private async Task LoadDemosHeader()
 		{
-			NotificationMessage = "Loading...";
-			IsBusy = true;
-			HasNotification = true;
-
 			try
 			{
+				NotificationMessage = "Loading demos...";
+				IsBusy = true;
+				HasNotification = true;
+				IsCancellable = false;
 				List<string> folders = new List<string>();
 
 				if (SelectedFolder != null)
