@@ -1197,6 +1197,7 @@ namespace CSGO_Demos_Manager.Models
 			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
 			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
 			Rounds.CollectionChanged += OnRoundsCollectionChanged;
+			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
 		}
 
 		public override bool Equals(object obj)
@@ -1277,6 +1278,16 @@ namespace CSGO_Demos_Manager.Models
 			RaisePropertyChanged(() => FiveKillSelectedAccountCount);
 			RaisePropertyChanged(() => ClutchCount);
 			RaisePropertyChanged(() => ClutchSelectedAccountCount);
+			RaisePropertyChanged(() => AssistPerRound);
+			RaisePropertyChanged(() => KillPerRound);
+			if (Settings.Default.SelectedStatsAccountSteamID != 0)
+			{
+				RaisePropertyChanged(() => KillPerRoundSelectedAccountCount);
+			}
+			else
+			{
+				RaisePropertyChanged(() => KillPerRound);
+			}
 		}
 
 		private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -1313,6 +1324,22 @@ namespace CSGO_Demos_Manager.Models
 			}
 			RaisePropertyChanged(() => MostDamageWeapon);
 			RaisePropertyChanged(() => WinStatus);
+		}
+
+		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			if (Settings.Default.SelectedStatsAccountSteamID != 0)
+			{
+				RaisePropertyChanged(() => AverageDamageSelectedAccountCount);
+				RaisePropertyChanged(() => TotalDamageArmorSelectedAccountCount);
+				RaisePropertyChanged(() => TotalDamageHealthSelectedAccountCount);
+			}
+			else
+			{
+				RaisePropertyChanged(() => AverageDamageCount);
+				RaisePropertyChanged(() => TotalDamageArmorCount);
+				RaisePropertyChanged(() => TotalDamageHealthCount);
+			}
 		}
 
 		#endregion
