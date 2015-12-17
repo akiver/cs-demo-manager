@@ -458,6 +458,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			DeathPerRoundPercentage = 0;
 			KillPerRoundPercentage = 0;
 			AverageDamagesPerRound = 0;
+			RoundCount = 0;
 		}
 	}
 }
