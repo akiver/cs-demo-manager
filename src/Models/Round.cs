@@ -93,17 +93,17 @@ namespace CSGO_Demos_Manager.Models
 		/// <summary>
 		/// Infos on bomb planted during the round
 		/// </summary>
-		private ObservableCollection<BombPlantedEvent> _bombPlanted = new ObservableCollection<BombPlantedEvent>();
+		private BombPlantedEvent _bombPlanted;
 
 		/// <summary>
 		/// Infos on bomb defused during the round
 		/// </summary>
-		private ObservableCollection<BombDefusedEvent> _bombDefused = new ObservableCollection<BombDefusedEvent>();
+		private BombDefusedEvent _bombDefused;
 
 		/// <summary>
 		/// Infos on bomb exploded during the round
 		/// </summary>
-		private ObservableCollection<BombExplodedEvent> _bombExploded = new ObservableCollection<BombExplodedEvent>();
+		private BombExplodedEvent _bombExploded;
 
 		private OpenKillEvent _openKillEvent;
 
@@ -193,7 +193,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_planted_count")]
-		public int BombPlantedCount => BombPlanted.Count;
+		public int BombPlantedCount => BombPlanted != null ? 1 : 0;
 
 		[JsonProperty("equipement_value_team2")]
 		public int EquipementValueTeam2
@@ -224,10 +224,10 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_defused_count")]
-		public int BombDefusedCount => BombDefused.Count;
+		public int BombDefusedCount => BombDefused != null ? 1 : 0;
 
 		[JsonProperty("bomb_exploded_count")]
-		public int BombExplodedCount => BombExploded.Count;
+		public int BombExplodedCount => BombExploded != null ? 1 : 0;
 
 		[JsonProperty("open_kill")]
 		public OpenKillEvent OpenKillEvent
@@ -244,21 +244,21 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_planted", IsReference = false)]
-		public ObservableCollection<BombPlantedEvent> BombPlanted
+		public BombPlantedEvent BombPlanted
 		{
 			get { return _bombPlanted; }
 			set { Set(() => BombPlanted, ref _bombPlanted, value); }
 		}
 
 		[JsonProperty("bomb_defused", IsReference = false)]
-		public ObservableCollection<BombDefusedEvent> BombDefused
+		public BombDefusedEvent BombDefused
 		{
 			get { return _bombDefused; }
 			set { Set(() => BombDefused, ref _bombDefused, value); }
 		}
 
 		[JsonProperty("bomb_exploded", IsReference = false)]
-		public ObservableCollection<BombExplodedEvent> BombExploded
+		public BombExplodedEvent BombExploded
 		{
 			get { return _bombExploded; }
 			set { Set(() => BombExploded, ref _bombExploded, value); }
@@ -472,22 +472,13 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public int BombExplodedSelectedPlayerCount
-		{
-			get { return BombExploded.Count(b => b.PlanterSteamId == Settings.Default.SelectedPlayerSteamId); }
-		}
+		public int BombExplodedSelectedPlayerCount => BombPlanted != null && BombExploded.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
 
 		[JsonIgnore]
-		public int BombPlantedSelectedPlayerCount
-		{
-			get { return BombPlanted.Count(b => b.PlanterSteamId == Settings.Default.SelectedPlayerSteamId); }
-		}
+		public int BombPlantedSelectedPlayerCount => BombPlanted != null && BombPlanted.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
 
 		[JsonIgnore]
-		public int BombDefusedSelectedPlayerCount
-		{
-			get { return BombDefused.Count(b => b.DefuserSteamId == Settings.Default.SelectedPlayerSteamId); }
-		}
+		public int BombDefusedSelectedPlayerCount => BombDefused != null && BombDefused.DefuserSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
 
 		/// <summary>
 		/// Damage (health + armor) made by the user during the round
@@ -518,9 +509,6 @@ namespace CSGO_Demos_Manager.Models
 		public Round()
 		{
 			Kills.CollectionChanged += OnKillsCollectionChanged;
-			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
-			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
-			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
 			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
 		}
 
@@ -547,24 +535,6 @@ namespace CSGO_Demos_Manager.Models
 			RaisePropertyChanged(() => ThreeKillSelectedPlayerCount);
 			RaisePropertyChanged(() => FourKillSelectedPlayerCount);
 			RaisePropertyChanged(() => FiveKillSelectedPlayerCount);
-		}
-
-		private void OnBombPlantedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			RaisePropertyChanged(() => BombPlantedCount);
-			RaisePropertyChanged(() => BombPlantedSelectedPlayerCount);
-		}
-
-		private void OnBombDefusedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			RaisePropertyChanged(() => BombDefusedCount);
-			RaisePropertyChanged(() => BombDefusedSelectedPlayerCount);
-		}
-
-		private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-		{
-			RaisePropertyChanged(() => BombExplodedCount);
-			RaisePropertyChanged(() => BombExplodedSelectedPlayerCount);
 		}
 
 		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

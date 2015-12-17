@@ -465,7 +465,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 			bombPlantedEvent.Site = e.Site.ToString();
 			Demo.BombPlanted.Add(bombPlantedEvent);
-			CurrentRound.BombPlanted.Add(bombPlantedEvent);
+			CurrentRound.BombPlanted = bombPlantedEvent;
 
 			if (AnalyzePlayersPosition && bombPlantedEvent.PlanterSteamId != 0)
 			{
@@ -499,7 +499,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				}
 			}
 			Demo.BombDefused.Add(bombDefusedEvent);
-			CurrentRound.BombDefused.Add(bombDefusedEvent);
+			CurrentRound.BombDefused = bombDefusedEvent;
 
 			if (AnalyzePlayersPosition && bombDefusedEvent.DefuserSteamId != 0)
 			{
@@ -535,7 +535,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			Demo.BombExploded.Add(bombExplodedEvent);
-			CurrentRound.BombExploded.Add(bombExplodedEvent);
+			CurrentRound.BombExploded = bombExplodedEvent;
 
 			if (AnalyzePlayersPosition && planter != null)
 			{
