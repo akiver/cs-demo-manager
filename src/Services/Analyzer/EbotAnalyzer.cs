@@ -6,7 +6,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
-using CSGO_Demos_Manager.Models.Events;
 using DemoInfo;
 using MoreLinq;
 
@@ -58,7 +57,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			IsMatchStarted = true;
 		}
 
-		protected override sealed void RegisterEvents()
+		protected sealed override void RegisterEvents()
 		{
 			Parser.MatchStarted += HandleMatchStarted;
 			Parser.RoundMVP += HandleRoundMvp;
@@ -88,7 +87,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.RoundFinal += HandleRoundFinal;
 		}
 
-		public async override Task<Demo> AnalyzeDemoAsync(CancellationToken token)
+		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
 		{
 			Parser.ParseHeader();
 
@@ -334,11 +333,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				CurrentRound.WinnerSide = e.Winner;
 				if (CurrentRound.OpenKillEvent != null)
 				{
-					if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
-							CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
+							CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
 					{
-						if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
-							CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+						if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
+							CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
 						{
 							if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
 							if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
@@ -354,110 +353,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
 				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
 			});
-		}
-
-		protected override void HandlePlayerKilled(object sender, PlayerKilledEventArgs e)
-		{
-			if (!IsMatchStarted) return;
-			if (e.Killer == null || e.Victim == null) return;
-			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
-			if (weapon == null) return;
-
-			KillEvent killEvent = new KillEvent(Parser.IngameTick)
-			{
-				Weapon = weapon,
-				DeathPerson = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID),
-				KillerVelocityX = e.Killer.Velocity.X,
-				KillerVelocityY = e.Killer.Velocity.Y,
-				KillerVelocityZ = e.Killer.Velocity.Z
-			};
-
-			// Set the player killed as dead
-			if (killEvent.DeathPerson != null) killEvent.DeathPerson.IsAlive = false;
-
-			if (e.Assister != null)
-			{
-				killEvent.Assister = Demo.Players.FirstOrDefault(player => player.SteamId == e.Assister.SteamID);
-			}
-
-			killEvent.Killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
-
-			if (killEvent.Killer != null)
-			{
-				if (!KillsThisRound.ContainsKey(e.Killer))
-				{
-					KillsThisRound[e.Killer] = 0;
-				}
-				KillsThisRound[e.Killer]++;
-
-				ProcessOpenAndEntryKills(killEvent);
-			}
-
-			if (killEvent.DeathPerson != null)
-			{
-				killEvent.DeathPerson.DeathCount++;
-
-				// TK
-				if (e.Killer.Team == e.Victim.Team)
-				{
-					if (killEvent.Killer != null && killEvent.DeathPerson != null)
-					{
-						PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Killer.SteamID);
-						if (player != null) player.TeamKillCount++;
-					}
-				}
-				else
-				{
-					if (killEvent.Killer != null)
-					{
-						killEvent.Killer.KillsCount++;
-						if (e.Headshot)
-						{
-							killEvent.Killer.HeadshotCount++;
-						}
-					}
-				}
-			}
-
-			if (killEvent.Assister != null)
-			{
-				killEvent.Assister.AssistCount++;
-			}
-
-			ProcessClutches();
-
-			if (AnalyzeHeatmapPoint)
-			{
-				killEvent.Point = new KillHeatmapPoint
-				{
-					KillerX = e.Killer.Position.X,
-					KillerY = e.Killer.Position.Y,
-					VictimX = e.Victim.Position.X,
-					VictimY = e.Victim.Position.Y,
-					Round = CurrentRound,
-					Killer = killEvent.Killer,
-					KillerTeam = e.Killer.Team,
-					Victim = killEvent.DeathPerson,
-					VictimTeam = e.Victim.Team
-				};
-			}
-
-			Demo.Kills.Add(killEvent);
-			CurrentRound.Kills.Add(killEvent);
-
-			if (AnalyzePlayersPosition && killEvent.Killer != null)
-			{
-				PositionPoint positionPoint = new PositionPoint
-				{
-					X = e.Victim.Position.X,
-					Y = e.Victim.Position.Y,
-					Player = Demo.Players.First(p => p.SteamId == e.Killer.SteamID),
-					Team = e.Killer.Team,
-					Event = killEvent,
-					Round = CurrentRound
-				};
-				Demo.PositionsPoint.Add(positionPoint);
-			}
 		}
 
 		protected new void HandleTickDone(object sender, TickDoneEventArgs e)
@@ -509,7 +404,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 						if (pl.Side == Team.CounterTerrorist)
 						{
-							pl.Team = Demo.TeamCT;
+							pl.TeamName = Demo.TeamCT.Name;
 							// Check swap
 							if (Demo.TeamT.Players.Contains(pl))
 							{
@@ -524,7 +419,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 						if (pl.Side == Team.Terrorist)
 						{
-							pl.Team = Demo.TeamT;
+							pl.TeamName = Demo.TeamT.Name;
 							// Check swap
 							if (Demo.TeamCT.Players.Contains(pl))
 							{
@@ -555,14 +450,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
 					if (!IsOvertime) Demo.ScoreSecondHalfTeam2++;
 					Demo.ScoreTeam2++;
-					CurrentRound.Winner = Demo.TeamT;
+					CurrentRound.WinnerName = Demo.TeamT.Name;
 				}
 				else
 				{
 					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
 					if (!IsOvertime) Demo.ScoreSecondHalfTeam1++;
 					Demo.ScoreTeam1++;
-					CurrentRound.Winner = Demo.TeamCT;
+					CurrentRound.WinnerName = Demo.TeamCT.Name;
 				}
 			}
 			else
@@ -572,14 +467,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
 					if (!IsOvertime) Demo.ScoreFirstHalfTeam1++;
 					Demo.ScoreTeam1++;
-					CurrentRound.Winner = Demo.TeamCT;
+					CurrentRound.WinnerName = Demo.TeamCT.Name;
 				}
 				else
 				{
 					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
 					if (!IsOvertime) Demo.ScoreFirstHalfTeam2++;
 					Demo.ScoreTeam2++;
-					CurrentRound.Winner = Demo.TeamT;
+					CurrentRound.WinnerName = Demo.TeamT.Name;
 				}
 			}
 		}

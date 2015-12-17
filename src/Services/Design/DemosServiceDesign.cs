@@ -28,12 +28,16 @@ namespace CSGO_Demos_Manager.Services.Design
 				ObservableCollection<EntryKillEvent> entryKills = new ObservableCollection<EntryKillEvent>();
 				for (int indexEntryKill = 0; indexEntryKill < random.Next(5); indexEntryKill++)
 				{
+					PlayerExtended killer = players.ElementAt(random.Next(0, 9));
+					PlayerExtended killed = players.ElementAt(random.Next(0, 9));
 					EntryKillEvent entryKill = new EntryKillEvent(random.Next(7000, 100000))
 					{
-						Killed = players.ElementAt(random.Next(0, 9)),
-						KilledTeam = Team.Terrorist,
-						Killer = players.ElementAt(random.Next(0, 9)),
-						KillerTeam = Team.CounterTerrorist
+						KilledSteamId = killed.SteamId,
+						KilledName = killed.Name,
+						KilledSide = Team.Terrorist,
+						KillerSteamId = killer.SteamId,
+						KillerName = killer.Name,
+						KillerSide = Team.CounterTerrorist
 					};
 					entryKills.Add(entryKill);
 				}
@@ -166,12 +170,16 @@ namespace CSGO_Demos_Manager.Services.Design
 				ObservableCollection<EntryKillEvent> entryKills = new ObservableCollection<EntryKillEvent>();
 				for (int indexEntryKill = 0; indexEntryKill < random.Next(5); indexEntryKill++)
 				{
+					PlayerExtended killer = players.ElementAt(random.Next(0, 9));
+					PlayerExtended killed = players.ElementAt(random.Next(0, 9));
 					EntryKillEvent entryKill = new EntryKillEvent(random.Next(7000, 100000))
 					{
-						Killed = players.ElementAt(random.Next(0, 9)),
-						KilledTeam = Team.Terrorist,
-						Killer = players.ElementAt(random.Next(0, 9)),
-						KillerTeam = Team.CounterTerrorist
+						KilledSteamId = killed.SteamId,
+						KilledName = killed.Name,
+						KilledSide = Team.Terrorist,
+						KillerSteamId = killer.SteamId,
+						KillerName = killer.Name,
+						KillerSide = Team.CounterTerrorist
 					};
 					entryKills.Add(entryKill);
 				}
@@ -179,12 +187,16 @@ namespace CSGO_Demos_Manager.Services.Design
 				ObservableCollection<OpenKillEvent> openKills = new ObservableCollection<OpenKillEvent>();
 				for (int indexOpenKill = 0; indexOpenKill < random.Next(5); indexOpenKill++)
 				{
+					PlayerExtended killer = players.ElementAt(random.Next(0, 9));
+					PlayerExtended killed = players.ElementAt(random.Next(0, 9));
 					OpenKillEvent openKill = new OpenKillEvent(random.Next(7000, 100000))
 					{
-						Killed = players.ElementAt(random.Next(0, 9)),
-						KilledTeam = Team.Terrorist,
-						Killer = players.ElementAt(random.Next(0, 9)),
-						KillerTeam = Team.CounterTerrorist
+						KilledSteamId = killed.SteamId,
+						KilledName = killed.Name,
+						KilledSide = Team.Terrorist,
+						KillerSteamId = killer.SteamId,
+						KillerName = killer.Name,
+						KillerSide = Team.CounterTerrorist
 					};
 					openKills.Add(openKill);
 				}
@@ -223,7 +235,7 @@ namespace CSGO_Demos_Manager.Services.Design
 					StartMoneyTeam1 = random.Next(4200, 50000),
 					StartMoneyTeam2 = random.Next(4200, 50000),
 					Tick = random.Next(7000, 100000),
-					Winner = teams[random.Next(0, 2)]
+					WinnerName = teams[random.Next(0, 2)].Name
 				};
 
 				rounds.Add(round);

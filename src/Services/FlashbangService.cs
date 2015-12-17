@@ -24,24 +24,24 @@ namespace CSGO_Demos_Manager.Services
 			{
 				foreach (PlayerExtended player in Demo.Players)
 				{
-					Dictionary<PlayerExtended, float> playerFlashStats = new Dictionary<PlayerExtended, float>();
+					Dictionary<long, float> playerFlashStats = new Dictionary<long, float>();
 
 					foreach (PlayerExtended pl in Demo.Players)
 					{
-						if (!playerFlashStats.ContainsKey(pl)) playerFlashStats.Add(pl, 0);
+						if (!playerFlashStats.ContainsKey(pl.SteamId)) playerFlashStats.Add(pl.SteamId, 0);
 					}
 
-					foreach (PlayerBlindedEvent e in Demo.PlayerBlindedEvents.Where(e => player.Equals(e.Thrower)))
+					foreach (PlayerBlindedEvent e in Demo.PlayerBlindedEvents.Where(e => player.SteamId == e.ThrowerSteamId))
 					{
-						if (!playerFlashStats.ContainsKey(e.Victim))
-							playerFlashStats.Add(e.Victim, 0);
-						playerFlashStats[e.Victim] += e.Duration;
+						if (!playerFlashStats.ContainsKey(e.VictimSteamId))
+							playerFlashStats.Add(e.VictimSteamId, 0);
+						playerFlashStats[e.VictimSteamId] += e.Duration;
 					}
 
 					data.AddRange(playerFlashStats.Select(playerStats => new FlashbangDataPoint
 					{
 						Flasher = player.Name,
-						Flashed = playerStats.Key.Name,
+						Flashed = Demo.Players.First(p => p.SteamId == playerStats.Key).Name,
 						Duration = Math.Round((decimal)playerStats.Value, 2, MidpointRounding.AwayFromZero)
 					}));
 				}
@@ -60,36 +60,36 @@ namespace CSGO_Demos_Manager.Services
 
 			await Task.Factory.StartNew(() =>
 			{
-				Dictionary<TeamExtended, float> teamCtStats = new Dictionary<TeamExtended, float>();
-				Dictionary<TeamExtended, float> teamTStats = new Dictionary<TeamExtended, float>();
+				Dictionary<string, float> teamCtStats = new Dictionary<string, float>();
+				Dictionary<string, float> teamTStats = new Dictionary<string, float>();
 
 				foreach (PlayerBlindedEvent e in Demo.PlayerBlindedEvents)
 				{
-					if (e.Thrower.Team.Equals(Demo.TeamCT))
+					if (e.ThrowerTeamName == Demo.TeamCT.Name)
 					{
-						if (!teamCtStats.ContainsKey(e.Victim.Team))
-							teamCtStats.Add(e.Victim.Team, 0);
-						teamCtStats[e.Victim.Team] += e.Duration;
+						if (!teamCtStats.ContainsKey(e.VictimTeamName))
+							teamCtStats.Add(e.VictimTeamName, 0);
+						teamCtStats[e.VictimTeamName] += e.Duration;
 					}
 					else
 					{
-						if (!teamTStats.ContainsKey(e.Victim.Team))
-							teamTStats.Add(e.Victim.Team, 0);
-						teamTStats[e.Victim.Team] += e.Duration;
+						if (!teamTStats.ContainsKey(e.VictimTeamName))
+							teamTStats.Add(e.VictimTeamName, 0);
+						teamTStats[e.VictimTeamName] += e.Duration;
 					}
 				}
 
 				data.AddRange(teamCtStats.Select(ctStats => new FlashbangDataPoint
 				{
 					Flasher = Demo.TeamCT.Name,
-					Flashed = ctStats.Key.Name,
+					Flashed = ctStats.Key,
 					Duration = Math.Round((decimal)ctStats.Value, 2, MidpointRounding.AwayFromZero)
 				}));
 
 				data.AddRange(teamTStats.Select(tStats => new FlashbangDataPoint
 				{
 					Flasher = Demo.TeamT.Name,
-					Flashed = tStats.Key.Name,
+					Flashed = tStats.Key,
 					Duration = Math.Round((decimal)tStats.Value, 2, MidpointRounding.AwayFromZero)
 				}));
 			});
@@ -112,7 +112,7 @@ namespace CSGO_Demos_Manager.Services
 				foreach (PlayerExtended player in Demo.Players)
 				{
 					float totalDuration = Demo.PlayerBlindedEvents
-						.Where(e => e.Thrower.Equals(player))
+						.Where(e => e.ThrowerSteamId == player.SteamId)
 						.Sum(e => e.Duration);
 
 					if (!playerFlashStats.ContainsKey(player))

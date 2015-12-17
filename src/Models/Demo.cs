@@ -263,26 +263,13 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => Date, ref _date, value); }
 		}
 
-		[JsonIgnore]
-		public string DateAsString => _date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
-
-		[JsonIgnore]
-		public Source.Source Source
-		{
-			get { return _source; }
-			set
-			{
-				Set(() => Source, ref _source, value);
-				SourceName = value.Name;
-			}
-		}
-
 		[JsonProperty("source")]
 		public string SourceName
 		{
-			get { return _sourceName;}
+			get { return _sourceName; }
 			set { Set(() => SourceName, ref _sourceName, value); }
 		}
+
 		[JsonProperty("comment")]
 		public string Comment
 		{
@@ -343,9 +330,6 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		[JsonIgnore]
-		public string DurationTime => TimeSpan.FromSeconds(_duration).ToString(@"hh\:mm\:ss");
-
 		[JsonProperty("map_name")]
 		public string MapName
 		{
@@ -368,98 +352,98 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => HasCheater, ref _hasCheater, value); }
 		}
 
-		[JsonProperty("score_team_1")]
+		[JsonProperty("score_team1")]
 		public int ScoreTeam1
 		{
 			get { return _scoreTeam1; }
 			set { Set(() => ScoreTeam1, ref _scoreTeam1, value); }
 		}
 
-		[JsonProperty("score_team_2")]
+		[JsonProperty("score_team2")]
 		public int ScoreTeam2
 		{
 			get { return _scoreTeam2; }
 			set { Set(() => ScoreTeam2, ref _scoreTeam2, value); }
 		}
 
-		[JsonProperty("score_first_half_team_1")]
+		[JsonProperty("score_half1_team1")]
 		public int ScoreFirstHalfTeam1
 		{
 			get { return _scoreFirstHalfTeam1; }
 			set { Set(() => ScoreFirstHalfTeam1, ref _scoreFirstHalfTeam1, value); }
 		}
 
-		[JsonProperty("score_first_half_team_2")]
+		[JsonProperty("score_half1_team2")]
 		public int ScoreFirstHalfTeam2
 		{
 			get { return _scoreFirstHalfTeam2; }
 			set { Set(() => ScoreFirstHalfTeam2, ref _scoreFirstHalfTeam2, value); }
 		}
 
-		[JsonProperty("score_second_half_team_1")]
+		[JsonProperty("score_half2_team1")]
 		public int ScoreSecondHalfTeam1
 		{
 			get { return _scoreSecondHalfTeam1; }
 			set { Set(() => ScoreSecondHalfTeam1, ref _scoreSecondHalfTeam1, value); }
 		}
 
-		[JsonProperty("score_second_half_team_2")]
+		[JsonProperty("score_half2_team2")]
 		public int ScoreSecondHalfTeam2
 		{
 			get { return _scoreSecondHalfTeam2; }
 			set { Set(() => ScoreSecondHalfTeam2, ref _scoreSecondHalfTeam2, value); }
 		}
 
-		[JsonProperty("five_kill_count")]
+		[JsonProperty("5k_count")]
 		public int FiveKillCount
 		{
 			get { return _fivekillCount; }
 			set { Set(() => FiveKillCount, ref _fivekillCount, value); }
 		}
 
-		[JsonProperty("four_kill_count")]
+		[JsonProperty("4k_count")]
 		public int FourKillCount
 		{
 			get { return _fourkillCount; }
 			set { Set(() => FourKillCount, ref _fourkillCount, value); }
 		}
 
-		[JsonProperty("three_kill_count")]
+		[JsonProperty("3k_count")]
 		public int ThreeKillCount
 		{
 			get { return _threekillCount; }
 			set { Set(() => ThreeKillCount, ref _threekillCount, value); }
 		}
 
-		[JsonProperty("two_kill_count")]
+		[JsonProperty("2k_count")]
 		public int TwoKillCount
 		{
 			get { return _twokillCount; }
 			set { Set(() => TwoKillCount, ref _twokillCount, value); }
 		}
 
-		[JsonProperty("one_kill_count")]
+		[JsonProperty("1k_count")]
 		public int OneKillCount
 		{
 			get { return _onekillCount; }
 			set { Set(() => OneKillCount, ref _onekillCount, value); }
 		}
 
-		[JsonProperty("team_ct", IsReference = true)]
+		[JsonProperty("team_ct", IsReference = false)]
 		public TeamExtended TeamCT
 		{
 			get { return _teamCt; }
 			set { Set(() => TeamCT, ref _teamCt, value); }
 		}
 
-		[JsonProperty("team_t", IsReference = true)]
+		[JsonProperty("team_t", IsReference = false)]
 		public TeamExtended TeamT
 		{
 			get { return _teamT; }
 			set { Set(() => TeamT, ref _teamT, value); }
 		}
 
-		[JsonProperty("surrender_team")]
+		[JsonProperty("team_surrender", IsReference = true)]
 		public TeamExtended Surrender
 		{
 			get { return _surrender; }
@@ -470,7 +454,7 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		[JsonProperty("winner_team")]
+		[JsonProperty("team_winner", IsReference = true)]
 		public TeamExtended Winner
 		{
 			get { return _winner; }
@@ -489,6 +473,89 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _players; }
 			set { Set(() => Players, ref _players, value); }
+		}
+
+		[JsonProperty("most_killing_weapon")]
+		public Weapon MostKillingWeapon
+		{
+			get { return _mostKillingWeapon; }
+			set { Set(() => MostKillingWeapon, ref _mostKillingWeapon, value); }
+		}
+
+		[JsonProperty("overtimes", IsReference = false)]
+		public ObservableCollection<Overtime> Overtimes
+		{
+			get { return _overtimes; }
+			set { Set(() => Overtimes, ref _overtimes, value); }
+		}
+
+		[JsonProperty("most_headshot_player", IsReference = true)]
+		public PlayerExtended MostHeadshotPlayer
+		{
+			get { return _mostHeadshotPlayer; }
+			set { Set(() => MostHeadshotPlayer, ref _mostHeadshotPlayer, value); }
+		}
+
+		[JsonProperty("most_bomb_planted_player", IsReference = true)]
+		public PlayerExtended MostBombPlantedPlayer
+		{
+			get { return _mostBombPlantedPlayer; }
+			set { Set(() => MostBombPlantedPlayer, ref _mostBombPlantedPlayer, value); }
+		}
+
+		[JsonProperty("most_entry_kill", IsReference = true)]
+		public PlayerExtended MostEntryKillPlayer
+		{
+			get { return _mostEntryKillPlayer; }
+			set { Set(() => MostEntryKillPlayer, ref _mostEntryKillPlayer, value); }
+		}
+
+		[JsonProperty("player_blinded_events", IsReference = false)]
+		public ObservableCollection<PlayerBlindedEvent> PlayerBlindedEvents
+		{
+			get { return _playerBlindedEvents; }
+			set { Set(() => PlayerBlindedEvents, ref _playerBlindedEvents, value); }
+		}
+
+		[JsonProperty("bomb_planted", IsReference = false)]
+		public ObservableCollection<BombPlantedEvent> BombPlanted
+		{
+			get { return _bombPlanted; }
+			set { Set(() => BombPlanted, ref _bombPlanted, value); }
+		}
+
+		[JsonProperty("bomb_defused", IsReference = false)]
+		public ObservableCollection<BombDefusedEvent> BombDefused
+		{
+			get { return _bombDefused; }
+			set { Set(() => BombDefused, ref _bombDefused, value); }
+		}
+
+		[JsonProperty("bomb_exploded", IsReference = false)]
+		public ObservableCollection<BombExplodedEvent> BombExploded
+		{
+			get { return _bombExploded; }
+			set { Set(() => BombExploded, ref _bombExploded, value); }
+		}
+
+		[JsonProperty("kills", IsReference = false)]
+		public ObservableCollection<KillEvent> Kills
+		{
+			get { return _kills; }
+			set { Set(() => Kills, ref _kills, value); }
+		}
+
+		/// <summary>
+		/// Contains information about all shoots occured during the match
+		/// </summary>
+		[JsonProperty("weapon_fired", IsReference = false)]
+		public List<WeaponFire> WeaponFired = new List<WeaponFire>();
+
+		[JsonProperty("player_hurted", IsReference = false)]
+		public ObservableCollection<PlayerHurtedEvent> PlayersHurted
+		{
+			get { return _playersHurted; }
+			set { Set(() => PlayersHurted, ref _playersHurted, value); }
 		}
 
 		[JsonProperty("win_status")]
@@ -513,55 +580,37 @@ namespace CSGO_Demos_Manager.Models
 				}
 			}
 		}
+
+		[JsonIgnore]
+		public string DateAsString => _date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+
+		[JsonIgnore]
+		public Source.Source Source
+		{
+			get { return _source; }
+			set
+			{
+				Set(() => Source, ref _source, value);
+				SourceName = value.Name;
+			}
+		}
+
+		[JsonIgnore]
+		public string DurationTime => TimeSpan.FromSeconds(_duration).ToString(@"hh\:mm\:ss");
 		
-		[JsonProperty("total_kill_count")]
+		[JsonIgnore]
 		public int TotalKillCount => Kills.Count;
 
-		[JsonProperty("bomb_defused_count")]
+		[JsonIgnore]
 		public int BombDefusedCount => BombDefused.Count;
 
-		[JsonProperty("bomb_exploded_count")]
-		public int BombExplodedCount => BombExploded.Count();
+		[JsonIgnore]
+		public int BombExplodedCount => BombExploded.Count;
 
-		[JsonProperty("bomb_planted_count")]
+		[JsonIgnore]
 		public int BombPlantedCount => BombPlanted.Count;
 
-		[JsonProperty("most_killing_weapon")]
-		public Weapon MostKillingWeapon
-		{
-			get { return _mostKillingWeapon; }
-			set { Set(() => MostKillingWeapon, ref _mostKillingWeapon, value); }
-		}
-
-		[JsonProperty("overtimes", IsReference = false)]
-		public ObservableCollection<Overtime> Overtimes
-		{
-			get { return _overtimes; }
-			set { Set(() => Overtimes, ref _overtimes, value); }
-		}
-
-		[JsonProperty("most_headshot_player")]
-		public PlayerExtended MostHeadshotPlayer
-		{
-			get { return _mostHeadshotPlayer; }
-			set { Set(() => MostHeadshotPlayer, ref _mostHeadshotPlayer, value); }
-		}
-
-		[JsonProperty("most_bomb_planted_player")]
-		public PlayerExtended MostBombPlantedPlayer
-		{
-			get { return _mostBombPlantedPlayer; }
-			set { Set(() => MostBombPlantedPlayer, ref _mostBombPlantedPlayer, value); }
-		}
-
-		[JsonProperty("most_entry_kill_player")]
-		public PlayerExtended MostEntryKillPlayer
-		{
-			get { return _mostEntryKillPlayer; }
-			set { Set(() => MostEntryKillPlayer, ref _mostEntryKillPlayer, value); }
-		}
-
-		[JsonProperty("clutch_count")]
+		[JsonIgnore]
 		public int ClutchCount
 		{
 			get
@@ -570,41 +619,6 @@ namespace CSGO_Demos_Manager.Models
 					playerExtended => playerExtended.Clutch1V1Count + playerExtended.Clutch1V2Count
 					+ playerExtended.Clutch1V3Count + playerExtended.Clutch1V4Count + playerExtended.Clutch1V5Count);
 			}
-		}
-
-		[JsonProperty("blinded_events", IsReference = false)]
-		public ObservableCollection<PlayerBlindedEvent> PlayerBlindedEvents
-		{
-			get { return _playerBlindedEvents; }
-			set { Set(() => PlayerBlindedEvents, ref _playerBlindedEvents, value); }
-		}
-
-		[JsonProperty("bombs_planted", IsReference = false)]
-		public ObservableCollection<BombPlantedEvent> BombPlanted
-		{
-			get { return _bombPlanted; }
-			set { Set(() => BombPlanted, ref _bombPlanted, value); }
-		}
-
-		[JsonProperty("bombs_defused", IsReference = false)]
-		public ObservableCollection<BombDefusedEvent> BombDefused
-		{
-			get { return _bombDefused; }
-			set { Set(() => BombDefused, ref _bombDefused, value); }
-		}
-
-		[JsonProperty("bombs_exploded", IsReference = false)]
-		public ObservableCollection<BombExplodedEvent> BombExploded
-		{
-			get { return _bombExploded; }
-			set { Set(() => BombExploded, ref _bombExploded, value); }
-		}
-
-		[JsonProperty("kills", IsReference = false)]
-		public ObservableCollection<KillEvent> Kills
-		{
-			get { return _kills; }
-			set { Set(() => Kills, ref _kills, value); }
 		}
 
 		/// <summary>
@@ -626,41 +640,16 @@ namespace CSGO_Demos_Manager.Models
 		public List<MolotovFireStartedEvent> MolotovFireStarted = new List<MolotovFireStartedEvent>();
 
 		/// <summary>
-		/// Contains information about all shoots occured during the match
-		/// </summary>
-		[JsonProperty("weapon_fired")]
-		public List<WeaponFire> WeaponFired = new List<WeaponFire>();
-
-		[JsonProperty("players_hurted")]
-		public ObservableCollection<PlayerHurtedEvent> PlayersHurted
-		{
-			get { return _playersHurted; }
-			set { Set(() => PlayersHurted, ref _playersHurted, value); }
-		}
-
-		/// <summary>
 		/// Total health damage has been done during the match
 		/// </summary>
 		[JsonIgnore]
-		public int TotalDamageHealthCount
-		{
-			get
-			{
-				return Rounds.SelectMany(round => round.PlayersHurted.ToList()).Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
-			}
-		}
+		public int TotalDamageHealthCount => Rounds.SelectMany(round => round.PlayersHurted.ToList()).Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
 
 		/// <summary>
 		/// Total armor damage has been done during the match
 		/// </summary>
 		[JsonIgnore]
-		public int TotalDamageArmorCount
-		{
-			get
-			{
-				return Rounds.SelectMany(round => round.PlayersHurted.ToList()).Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
-			}
-		}
+		public int TotalDamageArmorCount => Rounds.SelectMany(round => round.PlayersHurted.ToList()).Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
 
 		/// <summary>
 		/// Most damaging weapon of the match
@@ -731,7 +720,7 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				if (!Players.Any()) return 0;
-				double total = Rounds.Aggregate<Round, double>(0, (current, round) => current + round.Kills.Count(k => k.Assister != null));
+				double total = Rounds.Aggregate<Round, double>(0, (current, round) => current + round.Kills.Count(k => k.AssisterSteamId != 0));
 				total = Math.Round(total / Rounds.Count, 2);
 				if (Math.Abs(total) < 0.1) return total;
 				return total;
@@ -762,7 +751,7 @@ namespace CSGO_Demos_Manager.Models
 				in rounds
 				from playerHurtedEvent
 				in round.PlayersHurted
-				where playerHurtedEvent.Attacker != null && players.Contains(playerHurtedEvent.Attacker)
+				where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 				select playerHurtedEvent.HealthDamage).Sum();
 
 				// get the total damage made at the specific hitgroup
@@ -774,7 +763,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.Chest
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -784,7 +773,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.Head
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -794,7 +783,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.LeftArm
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -804,7 +793,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.RightArm
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -814,7 +803,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.LeftLeg
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -824,7 +813,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.RightLeg
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -834,7 +823,7 @@ namespace CSGO_Demos_Manager.Models
 						in rounds
 						from playerHurtedEvent
 						in round.PlayersHurted
-						where players.Contains(playerHurtedEvent.Attacker)
+						where players.FirstOrDefault(p => p.SteamId == playerHurtedEvent.AttackerSteamId) != null
 						where playerHurtedEvent.HitGroup == Hitgroup.Stomach
 						select playerHurtedEvent.HealthDamage).Sum();
 						break;
@@ -945,7 +934,7 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
-				IEnumerable<KillEvent> kills = Kills.Where(k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID).ToList();
+				IEnumerable<KillEvent> kills = Kills.Where(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID).ToList();
 				if (!kills.Any()) return 0;
 				return kills.Count(k => k.Weapon.Name == "Knife");
 			}
@@ -1031,19 +1020,19 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int BombExplodedSelectedAccountCount
 		{
-			get { return BombExploded.Count(b => b.Player != null && b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
+			get { return BombExploded.Count(b => b.PlanterSteamId != 0 && b.PlanterSteamId == Settings.Default.SelectedStatsAccountSteamID); }
 		}
 
 		[JsonIgnore]
 		public int BombDefusedSelectedAccountCount
 		{
-			get { return BombDefused.Count(b => b.Player != null && b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
+			get { return BombDefused.Count(b => b.DefuserSteamId != 0 && b.DefuserSteamId == Settings.Default.SelectedStatsAccountSteamID); }
 		}
 
 		[JsonIgnore]
 		public int BombPlantedSelectedAccountCount
 		{
-			get { return BombPlanted.Count(b => b.Player != null && b.Player.SteamId == Settings.Default.SelectedStatsAccountSteamID); }
+			get { return BombPlanted.Count(b => b.PlanterSteamId != 0 && b.PlanterSteamId == Settings.Default.SelectedStatsAccountSteamID); }
 		}
 
 		[JsonIgnore]
@@ -1099,7 +1088,7 @@ namespace CSGO_Demos_Manager.Models
 												  where round.PlayersHurted.Any()
 												  from playerHurtedEvent
 												  in round.PlayersHurted
-												  where playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SelectedStatsAccountSteamID
+												  where playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID
 												  select playerHurtedEvent.HealthDamage).Sum();
 
 		/// <summary>
@@ -1112,7 +1101,7 @@ namespace CSGO_Demos_Manager.Models
 			where round.PlayersHurted.Any()
 			from playerHurtedEvent
 			in round.PlayersHurted
-			where playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SelectedStatsAccountSteamID
+			where playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID
 			select playerHurtedEvent.ArmorDamage).Sum();
 
 		/// <summary>
@@ -1128,7 +1117,7 @@ namespace CSGO_Demos_Manager.Models
 								where round.PlayersHurted.Any()
 								from playerHurtedEvent
 								in round.PlayersHurted
-								where playerHurtedEvent.Attacker != null && playerHurtedEvent.Attacker.SteamId == Settings.Default.SelectedStatsAccountSteamID
+								where playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID
 								select playerHurtedEvent).Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
 								current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
 				if (Math.Abs(total) < 0.1) return total;
@@ -1176,7 +1165,7 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
-				return player == null ? 0 : Kills.Count(killEvent => killEvent.KillerVelocityZ > 0 && killEvent.Killer.Equals(player));
+				return player == null ? 0 : Kills.Count(killEvent => killEvent.KillerVelocityZ > 0 && killEvent.KillerSteamId ==player.SteamId);
 			}
 		}
 

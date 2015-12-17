@@ -11,54 +11,75 @@ namespace CSGO_Demos_Manager.Models
 	{
 		private string _name;
 
-		[JsonProperty("name")]
+		[JsonProperty("team_name")]
 		public string Name
 		{
 			get { return _name; }
 			set { Set(() => Name, ref _name, value); }
 		}
 
-		[JsonProperty("entry_kill_count")]
+		[JsonProperty("team_players", IsReference = false)]
+		public ObservableCollection<PlayerExtended> Players { get; set; }
+
+		[JsonIgnore]
 		public int EntryKillCount
 		{
 			get { return Players.SelectMany(p => p.EntryKills).Count(); }
 		}
 
-		[JsonProperty("entry_kill_win_count")]
+		[JsonIgnore]
 		public int EntryKillWinCount
 		{
 			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin); }
 		}
 
-		[JsonProperty("entry_kill_loss_count")]
+		[JsonIgnore]
 		public int EntryKillLossCount
 		{
 			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false); }
 		}
 
-		[JsonProperty("flashbang_throwed_count")]
-		public int FlashbangThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+		[JsonIgnore]
+		public int FlashbangThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
 			.Sum(playerExtended => playerExtended.FlashbangThrowedCount);
 
-		[JsonProperty("grenade_throwed_count")]
-		public int HeGrenadeThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+		[JsonIgnore]
+		public int HeGrenadeThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
 			.Sum(playerExtended => playerExtended.HeGrenadeThrowedCount);
 
-		[JsonProperty("smoke_throwed_count")]
-		public int SmokeThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+		[JsonIgnore]
+		public int SmokeThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
 			.Sum(playerExtended => playerExtended.SmokeThrowedCount);
 
-		[JsonProperty("molotov_throwed_count")]
-		public int MolotovThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+		[JsonIgnore]
+		public int MolotovThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
 			.Sum(playerExtended => playerExtended.MolotovThrowedCount);
 
-		[JsonProperty("incendiary_throwed_count")]
-		public int IncendiaryThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+		[JsonIgnore]
+		public int IncendiaryThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
 			.Sum(playerExtended => playerExtended.IncendiaryThrowedCount);
 
-		[JsonProperty("decoy_throwed_count")]
-		public int DecoyThrowedCount => Players.Where(playerExtended => playerExtended.Team.Equals(this))
+		[JsonIgnore]
+		public int DecoyThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
 			.Sum(playerExtended => playerExtended.DecoyThrowedCount);
+
+		[JsonIgnore]
+		public int OpenKillCount
+		{
+			get { return Players.SelectMany(p => p.OpeningKills).Count(); }
+		}
+
+		[JsonIgnore]
+		public int OpenKillWinCount
+		{
+			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin); }
+		}
+
+		[JsonIgnore]
+		public int OpenKillLossCount
+		{
+			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false); }
+		}
 
 		[JsonIgnore]
 		public decimal RatioEntryKill
@@ -79,28 +100,8 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
 		public string RatioEntryKillAsString => RatioEntryKill + " %";
-
-		[JsonProperty("open_kill_count")]
-		public int OpenKillCount
-		{
-			get { return Players.SelectMany(p => p.OpeningKills).Count(); }
-		}
-
-		[JsonProperty("open_kill_win_count")]
-		public int OpenKillWinCount
-		{
-			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin); }
-		}
-
-		[JsonProperty("open_kill_loss_count")]
-		public int OpenKillLossCount
-		{
-			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false); }
-		}
-
-		[JsonProperty("players", IsReference = false)]
-		public ObservableCollection<PlayerExtended> Players { get; set; }
 
 		[JsonIgnore]
 		public decimal RatioOpenKill

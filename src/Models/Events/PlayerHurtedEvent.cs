@@ -5,24 +5,16 @@ namespace CSGO_Demos_Manager.Models.Events
 {
 	public class PlayerHurtedEvent : BaseEvent
 	{
-		public PlayerHurtedEvent(int tick) : base(tick)
-		{
-		}
+		public PlayerHurtedEvent(int tick) : base(tick) { }
 
-		[JsonProperty("hurted")]
-		public PlayerExtended Hurted { get; set; }
+		[JsonProperty("hurted_steamid")]
+		public long HurtedSteamId { get; set; }
 
-		[JsonProperty("attacker")]
-		public PlayerExtended Attacker { get; set; }
-
-		[JsonProperty("armor")]
-		public int Armor { get; set; }
+		[JsonProperty("attacker_steamid")]
+		public long AttackerSteamId { get; set; }
 
 		[JsonProperty("armor_damage")]
 		public int ArmorDamage { get; set; }
-
-		[JsonProperty("health")]
-		public int Health { get; set; }
 
 		[JsonProperty("health_damage")]
 		public int HealthDamage { get; set; }

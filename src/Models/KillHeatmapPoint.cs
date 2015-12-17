@@ -12,9 +12,13 @@ namespace CSGO_Demos_Manager.Models
 
 		public float VictimY { get; set; }
 
-		public PlayerExtended Killer { get; set; }
+		public long KillerSteamId { get; set; }
 
-		public PlayerExtended Victim { get; set; }
+		public string KillerName { get; set; }
+
+		public long VictimSteamId { get; set; }
+
+		public string VictimName { get; set; }
 
 		public Team KillerTeam { get; set; }
 

@@ -5,13 +5,17 @@ namespace CSGO_Demos_Manager.Models
 {
 	public class PositionPoint : MapPoint
 	{
-		public Round Round { get; set; }
+		public int RoundNumber { get; set; }
 
 		public int Color { get; set; }
 
 		public Team Team { get; set; }
 
-		public PlayerExtended Player { get; set; }
+		public long PlayerSteamId { get; set; }
+
+		public string PlayerName { get; set; }
+
+		public bool PlayerHasBomb { get; set; }
 
 		public BaseEvent Event { get; set; }
 
@@ -21,7 +25,7 @@ namespace CSGO_Demos_Manager.Models
 			{
 				var item = (PositionPoint)obj;
 
-				return (X.Equals(item.X)) && (Y.Equals(item.Y) && Round.Equals(item.Round));
+				return X.Equals(item.X) && Y.Equals(item.Y) && RoundNumber == item.RoundNumber;
 			}
 
 			return false;

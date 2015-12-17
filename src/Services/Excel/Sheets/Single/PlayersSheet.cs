@@ -64,7 +64,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.String, player.Name);
 					SetCellValue(row, columnNumber++, CellType.String, player.SteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RankNumberNew);
-					SetCellValue(row, columnNumber++, CellType.String, player.Team.Name);
+					SetCellValue(row, columnNumber++, CellType.String, player.TeamName);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.KillsCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.AssistCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.DeathCount);

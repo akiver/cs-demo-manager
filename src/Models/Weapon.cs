@@ -6,7 +6,7 @@ namespace CSGO_Demos_Manager.Models
 {
 	public class Weapon
 	{
-		[JsonIgnore]
+		[JsonProperty("element")]
 		public EquipmentElement Element { get; set; }
 
 		[JsonProperty("weapon_name")]

@@ -1,11 +1,9 @@
-﻿using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Models;
-using CSGO_Demos_Manager.Models.Events;
 using DemoInfo;
 using MoreLinq;
 
@@ -34,7 +32,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			RegisterEvents();
 		}
 
-		protected override sealed void RegisterEvents()
+		protected sealed override void RegisterEvents()
 		{
 			Parser.MatchStarted += HandleMatchStarted;
 			Parser.RoundMVP += HandleRoundMvp;
@@ -60,7 +58,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 		}
 
-		public async override Task<Demo> AnalyzeDemoAsync(CancellationToken token)
+		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
 		{
 			Parser.ParseHeader();
 
@@ -188,8 +186,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 				if (CurrentRound.OpenKillEvent != null)
 				{
-					if (CurrentRound.OpenKillEvent.KillerTeam == Team.Terrorist && e.Winner == Team.Terrorist ||
-						CurrentRound.OpenKillEvent.KillerTeam == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
+						CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
 					{
 						if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
 						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
@@ -257,96 +255,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 		}
 
-		protected override void HandlePlayerKilled(object sender, PlayerKilledEventArgs e)
-		{
-			if (!IsMatchStarted) return;
-
-			if (e.Killer == null || e.Victim == null) return;
-			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
-			if (weapon == null) return;
-
-			KillEvent killEvent = new KillEvent(Parser.IngameTick)
-			{
-				Weapon = weapon,
-				Killer = Demo.Players.FirstOrDefault(p => p.SteamId == e.Killer.SteamID),
-				DeathPerson = Demo.Players.FirstOrDefault(p => p.SteamId == e.Victim.SteamID),
-				KillerVelocityX = e.Killer.Velocity.X,
-				KillerVelocityY = e.Killer.Velocity.Y,
-				KillerVelocityZ = e.Killer.Velocity.Z
-			};
-
-			if (killEvent.Killer != null)
-			{
-				killEvent.Killer.KillsCount++;
-				if (e.Headshot) killEvent.Killer.HeadshotCount++;
-			}
-
-			if (killEvent.DeathPerson != null)
-			{
-				killEvent.DeathPerson.DeathCount++;
-				killEvent.DeathPerson.IsAlive = false;
-			}
-
-			if (e.Assister != null)
-			{
-				killEvent.Assister = Demo.Players.FirstOrDefault(p => p.SteamId == e.Assister.SteamID);
-				if (killEvent.Assister != null) killEvent.Assister.AssistCount++;
-			}
-
-			if (!KillsThisRound.ContainsKey(e.Killer))
-			{
-				KillsThisRound[e.Killer] = 0;
-			}
-			KillsThisRound[e.Killer]++;
-
-			// TK
-			if (killEvent.Killer != null && killEvent.DeathPerson != null)
-			{
-				if (killEvent.Killer.Team.Equals(killEvent.DeathPerson.Team))
-				{
-					killEvent.Killer.KillsCount--;
-					killEvent.Killer.TeamKillCount++;
-				}
-			}
-
-			ProcessClutches();
-			ProcessOpenAndEntryKills(killEvent);
-			ProcessPlayersRating();
-
-			if (AnalyzeHeatmapPoint)
-			{
-				killEvent.Point = new KillHeatmapPoint
-				{
-					KillerX = e.Killer.Position.X,
-					KillerY = e.Killer.Position.Y,
-					VictimX = e.Victim.Position.X,
-					VictimY = e.Victim.Position.Y,
-					Round = CurrentRound,
-					Killer = killEvent.Killer,
-					KillerTeam = e.Killer.Team,
-					Victim = killEvent.DeathPerson,
-					VictimTeam = e.Victim.Team
-				};
-			}
-
-			CurrentRound.Kills.Add(killEvent);
-			Demo.Kills.Add(killEvent);
-
-			if (AnalyzePlayersPosition)
-			{
-				PositionPoint positionPoint = new PositionPoint
-				{
-					X = e.Victim.Position.X,
-					Y = e.Victim.Position.Y,
-					Player = Demo.Players.First(p => p.SteamId == e.Killer.SteamID),
-					Team = e.Killer.Team,
-					Event = killEvent,
-					Round = CurrentRound
-				};
-				Demo.PositionsPoint.Add(positionPoint);
-			}
-		}
-
 		#endregion
 
 		#region Process
@@ -369,13 +277,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 					if (pl.Side == Team.CounterTerrorist)
 					{
-						pl.Team = Demo.TeamCT;
+						pl.TeamName = Demo.TeamCT.Name;
 						if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
 					}
 
 					if (pl.Side == Team.Terrorist)
 					{
-						pl.Team = Demo.TeamT;
+						pl.TeamName = Demo.TeamT.Name;
 						if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
 					}
 				});

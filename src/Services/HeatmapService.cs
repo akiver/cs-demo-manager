@@ -492,7 +492,7 @@ namespace CSGO_Demos_Manager.Services
 				if (_selectedRound != null)
 				{
 					foreach (KillEvent killEvent in _demo.Kills.Where(
-								killEvent => killEvent.Point.Killer.Equals(_selectedPlayer)
+								killEvent => killEvent.Point.KillerSteamId == _selectedPlayer.SteamId
 								&& killEvent.Point.Round.Equals(_selectedRound)))
 					{
 						killEvent.Point.X = killEvent.Point.KillerX;
@@ -503,7 +503,7 @@ namespace CSGO_Demos_Manager.Services
 				else
 				{
 					foreach (KillEvent killEvent in _demo.Kills.Where(
-								killEvent => killEvent.Point.Killer.Equals(_selectedPlayer)))
+								killEvent => killEvent.Point.KillerSteamId == _selectedPlayer.SteamId))
 					{
 						killEvent.Point.X = killEvent.Point.KillerX;
 						killEvent.Point.Y = killEvent.Point.KillerY;
@@ -609,7 +609,7 @@ namespace CSGO_Demos_Manager.Services
 				if (_selectedRound != null)
 				{
 					foreach (KillEvent killEvent in _demo.Kills.Where(
-								killEvent => killEvent.Point.Victim.Equals(_selectedPlayer)
+								killEvent => killEvent.Point.VictimSteamId == _selectedPlayer.SteamId
 								&& killEvent.Point.Round.Equals(_selectedRound)))
 					{
 						killEvent.Point.X = killEvent.Point.VictimX;
@@ -621,7 +621,7 @@ namespace CSGO_Demos_Manager.Services
 				{
 					// All rounds
 					foreach (KillEvent killEvent in _demo.Kills.Where(
-								killEvent => killEvent.Point.Victim.Equals(_selectedPlayer)))
+								killEvent => killEvent.Point.VictimSteamId == _selectedPlayer.SteamId))
 					{
 						killEvent.Point.X = killEvent.Point.VictimX;
 						killEvent.Point.Y = killEvent.Point.VictimY;

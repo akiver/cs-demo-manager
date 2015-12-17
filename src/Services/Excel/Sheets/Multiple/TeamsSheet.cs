@@ -177,7 +177,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 		{
 			foreach (Round round in demo.Rounds)
 			{
-				if (round.Winner.Equals(team))
+				if (round.WinnerName == team.Name)
 				{
 					team.WinRoundCount++;
 					if (round.WinnerSide == Team.CounterTerrorist)
@@ -226,7 +226,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 		{
 			foreach (BombPlantedEvent plantedEvent in demo.BombPlanted)
 			{
-				if (team.Players.Contains(plantedEvent.Player))
+				if (team.Players.FirstOrDefault(p => p.SteamId == plantedEvent.PlanterSteamId) != null)
 				{
 					if (plantedEvent.Site == "A")
 					{

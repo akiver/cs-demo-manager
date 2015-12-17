@@ -93,7 +93,7 @@ namespace CSGO_Demos_Manager.Services
 
 							for (int i = demo.PositionsPoint.Count - 1; i >= 0; i--)
 							{
-								if (!demo.PositionsPoint[i].Round.Equals(round)) continue;
+								if (demo.PositionsPoint[i].RoundNumber != round.Number) continue;
 
 								// Keep kills from terrorists
 								if (demo.PositionsPoint[i].Event != null
@@ -101,7 +101,7 @@ namespace CSGO_Demos_Manager.Services
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(KillEvent))
 								{
 									KillEvent e = (KillEvent)demo.PositionsPoint[i].Event;
-									if (e.DeathPerson.Equals(playerExtended))
+									if (e.KillerSteamId == playerExtended.SteamId)
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
 										demo.PositionsPoint.RemoveAt(i);
@@ -116,7 +116,7 @@ namespace CSGO_Demos_Manager.Services
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(MolotovFireStartedEvent))
 								{
 									MolotovFireStartedEvent e = (MolotovFireStartedEvent)demo.PositionsPoint[i].Event;
-									if (e.Thrower.Equals(playerExtended))
+									if (e.ThrowerSteamId == playerExtended.SteamId)
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
 										demo.PositionsPoint.RemoveAt(i);
@@ -129,7 +129,7 @@ namespace CSGO_Demos_Manager.Services
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(MolotovFireEndedEvent))
 								{
 									MolotovFireEndedEvent e = (MolotovFireEndedEvent)demo.PositionsPoint[i].Event;
-									if (e.Thrower.Equals(playerExtended))
+									if (e.ThrowerSteamId == playerExtended.SteamId)
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
 										demo.PositionsPoint.RemoveAt(i);
@@ -137,8 +137,8 @@ namespace CSGO_Demos_Manager.Services
 									}
 								}
 
-								if (demo.PositionsPoint[i].Player != null
-								&& demo.PositionsPoint[i].Player.Equals(playerExtended))
+								if (demo.PositionsPoint[i].PlayerSteamId != 0
+								&& demo.PositionsPoint[i].PlayerSteamId == playerExtended.SteamId)
 								{
 									playerPoints.Add(demo.PositionsPoint[i]);
 									demo.PositionsPoint.RemoveAt(i);
@@ -156,7 +156,7 @@ namespace CSGO_Demos_Manager.Services
 
 							for (int i = demo.PositionsPoint.Count - 1; i >= 0; i--)
 							{
-								if (!demo.PositionsPoint[i].Round.Equals(round)) continue;
+								if (demo.PositionsPoint[i].RoundNumber != round.Number) continue;
 
 								// Keep kills from CT
 								if (demo.PositionsPoint[i].Event != null
@@ -164,7 +164,7 @@ namespace CSGO_Demos_Manager.Services
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(KillEvent))
 								{
 									KillEvent e = (KillEvent)demo.PositionsPoint[i].Event;
-									if (e.DeathPerson.Equals(playerExtended))
+									if (e.KilledSteamId == playerExtended.SteamId)
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
 										demo.PositionsPoint.RemoveAt(i);
@@ -179,7 +179,7 @@ namespace CSGO_Demos_Manager.Services
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(MolotovFireStartedEvent))
 								{
 									MolotovFireStartedEvent e = (MolotovFireStartedEvent)demo.PositionsPoint[i].Event;
-									if (e.Thrower.Equals(playerExtended))
+									if (e.ThrowerSteamId == playerExtended.SteamId)
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
 										demo.PositionsPoint.RemoveAt(i);
@@ -192,7 +192,7 @@ namespace CSGO_Demos_Manager.Services
 									&& demo.PositionsPoint[i].Event.GetType() == typeof(MolotovFireEndedEvent))
 								{
 									MolotovFireEndedEvent e = (MolotovFireEndedEvent)demo.PositionsPoint[i].Event;
-									if (e.Thrower.Equals(playerExtended))
+									if (e.ThrowerSteamId == playerExtended.SteamId)
 									{
 										playerPoints.Add(demo.PositionsPoint[i]);
 										demo.PositionsPoint.RemoveAt(i);
@@ -200,8 +200,7 @@ namespace CSGO_Demos_Manager.Services
 									}
 								}
 
-								if (demo.PositionsPoint[i].Player != null
-								&& demo.PositionsPoint[i].Player.Equals(playerExtended))
+								if (demo.PositionsPoint[i].PlayerSteamId == playerExtended.SteamId)
 								{
 									playerPoints.Add(demo.PositionsPoint[i]);
 									demo.PositionsPoint.RemoveAt(i);
@@ -214,8 +213,8 @@ namespace CSGO_Demos_Manager.Services
 						points.AddRange(
 							demo.Players.Select(
 								playerExtended => demo.PositionsPoint.Where(
-									point => point.Round.Number == round.Number
-									&& point.Player.SteamId == playerExtended.SteamId).ToList())
+									point => point.RoundNumber == round.Number
+									&& point.PlayerSteamId == playerExtended.SteamId).ToList())
 									.Where(pts => pts.Any()));
 						break;
 				}
@@ -226,11 +225,11 @@ namespace CSGO_Demos_Manager.Services
 				await Task.Run(delegate
 				{
 					List<PositionPoint> pt = demo.PositionsPoint.ToList().Where(
-						positionPoint => positionPoint.Player.SteamId == selectedPlayer.SteamId
-						&& positionPoint.Round.Number == round.Number
+						positionPoint => positionPoint.PlayerSteamId == selectedPlayer.SteamId
+						&& positionPoint.RoundNumber == round.Number
 						|| (positionPoint.Event != null
 						&& positionPoint.Event.GetType() == typeof(KillEvent))
-						&& positionPoint.Round.Number == round.Number).ToList();
+						&& positionPoint.RoundNumber == round.Number).ToList();
 					if (pt.Any()) points.Add(pt);
 				});
 			}
@@ -274,7 +273,7 @@ namespace CSGO_Demos_Manager.Services
 				PlayerMarkerLayer.FillEllipseCentered((int)positionPoint.X, (int)positionPoint.Y, 5, 5, positionPoint.Color);
 
 				Bitmap icon = null;
-				if (positionPoint.Player.HasBomb)
+				if (positionPoint.PlayerHasBomb)
 				{
 					icon = new Bitmap(Properties.Resources.bomb_overview);
 					DrawIcon(PlayerMarkerLayer, icon, positionPoint);
@@ -284,7 +283,7 @@ namespace CSGO_Demos_Manager.Services
 
 				PlayerMarkerLayer.FillEllipseCentered((int)positionPoint.X, (int)positionPoint.Y, 5, 5, Colors.Transparent);
 
-				if (positionPoint.Player.HasBomb)
+				if (positionPoint.PlayerHasBomb)
 				{
 					await Task.Delay(200);
 

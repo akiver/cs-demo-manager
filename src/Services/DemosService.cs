@@ -431,260 +431,260 @@ namespace CSGO_Demos_Manager.Services
 						// Rifles
 						stats.KillAk47Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AK-47");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AK-47");
 						stats.DeathAk47Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AK-47");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AK-47");
 
 						stats.KillM4A4Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A4");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A4");
 						stats.DeathM4A4Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A4");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A4");
 
 						stats.KillM4A1Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A1");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A1");
 						stats.DeathM4A1Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A1");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M4A1");
 
 						stats.KillAugCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AUG");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AUG");
 						stats.DeathAugCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AUG");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AUG");
 
 						stats.KillGalilarCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Galil AR");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Galil AR");
 						stats.DeathGalilarCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Galil AR");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Galil AR");
 
 						stats.KillSg553Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG 553");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG 553");
 						stats.DeathSg553Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG 553");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SG 553");
 
 						stats.KillFamasCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Famas");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Famas");
 						stats.DeathFamasCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Famas");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Famas");
 
 						// Snipers
 						stats.KillAwpCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AWP");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AWP");
 						stats.DeathAwpCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AWP");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "AWP");
 
 						stats.KillScoutCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SSG 08 (Scout)");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SSG 08 (Scout)");
 						stats.DeathScoutCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SSG 08 (Scout)");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "SSG 08 (Scout)");
 
 						stats.KillScar20Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Scar-20 (Autonoob)");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Scar-20 (Autonoob)");
 						stats.DeathScar20Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Scar-20 (Autonoob)");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Scar-20 (Autonoob)");
 
 						stats.KillG3Sg1Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "G3SG1 (Autonoob)");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "G3SG1 (Autonoob)");
 						stats.DeathG3Ssg1Count+=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "G3SG1 (Autonoob)");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "G3SG1 (Autonoob)");
 
 						// SMGs
 						stats.KillMp7Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP7");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP7");
 						stats.DeathMp7Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP7");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP7");
 
 						stats.KillMp9Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP9");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP9");
 						stats.DeathMp9Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP9");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MP9");
 
 						stats.KillP90Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P90");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P90");
 						stats.DeathP90Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P90");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P90");
 
 						stats.KillBizonCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "PP-Bizon");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "PP-Bizon");
 						stats.DeathBizonCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "PP-Bizon");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "PP-Bizon");
 
 						stats.KillMac10Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAC-10");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAC-10");
 						stats.DeathMac10Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAC-10");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAC-10");
 
 						stats.KillUmp45Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "UMP-45");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "UMP-45");
 						stats.DeathUmp45Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "UMP-45");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "UMP-45");
 
 						// Heavy
 						stats.KillNovaCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Nova");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Nova");
 						stats.DeathNovaCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Nova");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Nova");
 
 						stats.KillXm1014Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "XM1014");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "XM1014");
 						stats.DeathXm1014Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "XM1014");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "XM1014");
 
 						stats.KillMag7Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAG-7");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAG-7");
 						stats.DeathMag7Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAG-7");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "MAG-7");
 
 						stats.KillSawedOffCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Sawed-Off");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Sawed-Off");
 						stats.DeathSawedOffCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Sawed-Off");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Sawed-Off");
 
 						stats.KillM249Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M249");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M249");
 						stats.DeathM249Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M249");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "M249");
 
 						stats.KillNegevCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Negev");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Negev");
 						stats.DeathNegevCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Negev");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Negev");
 
 						// Pistols
 						stats.KillGlockCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Glock-18");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Glock-18");
 						stats.DeathGlockCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Glock-18");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Glock-18");
 
 						stats.KillUspCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "USP-S");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "USP-S");
 						stats.DeathUspCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "USP-S");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "USP-S");
 
 						stats.KillP2000Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P2000");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P2000");
 						stats.DeathP2000Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P2000");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P2000");
 
 						stats.KillP250Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P250");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P250");
 						stats.DeathP250Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P250");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "P250");
 
 						stats.KillCz75Count +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "CZ75-Auto");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "CZ75-Auto");
 						stats.DeathCz75Count +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "CZ75-Auto");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "CZ75-Auto");
 
 						stats.KillDeagleCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Deagle");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Deagle");
 						stats.DeathDeagleCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Deagle");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Deagle");
 
 						stats.KillDualEliteCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Dual Barettas");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Dual Barettas");
 						stats.DeathDualEliteCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Dual Barettas");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Dual Barettas");
 
 						stats.KillFiveSevenCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Five-SeveN");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Five-SeveN");
 						stats.DeathFiveSevenCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Five-SeveN");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Five-SeveN");
 
 						// Equipment
 						stats.KillHeGrenadeCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "He grenade");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "He grenade");
 						stats.DeathHeGrenadeCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "He grenade");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "He grenade");
 
 						stats.KillMolotovCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Molotov");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Molotov");
 						stats.DeathMolotovCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Molotov");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Molotov");
 
 						stats.KillIncendiaryCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Incendiary");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Incendiary");
 						stats.DeathIncendiaryCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Incendiary");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Incendiary");
 
 						stats.KillTazerCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Zeus (Tazer)");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Zeus (Tazer)");
 						stats.DeathTazerCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Zeus (Tazer)");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Zeus (Tazer)");
 
 						stats.KillKnifeCount +=
 							demo.Kills.Count(
-								k => k.Killer != null && k.Killer.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Knife");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Knife");
 						stats.DeathKnifeCount +=
 							demo.Kills.Count(
-								k => k.DeathPerson != null && k.DeathPerson.SteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Knife");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Knife");
 
 						stats.FlashbangThrowedCount +=
 							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).FlashbangThrowedCount;

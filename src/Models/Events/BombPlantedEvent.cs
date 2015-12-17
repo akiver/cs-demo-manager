@@ -4,10 +4,13 @@ namespace CSGO_Demos_Manager.Models.Events
 {
 	public class BombPlantedEvent : BaseEvent
 	{
-		[JsonProperty("planter")]
-		public PlayerExtended Player { get; set; }
+		[JsonProperty("planter_steamid")]
+		public long PlanterSteamId { get; set; }
 
-		[JsonProperty("bomb_site")]
+		[JsonProperty("planter_name")]
+		public string PlanterName { get; set; }
+
+		[JsonProperty("site")]
 		public string Site { get; set; }
 
 		[JsonIgnore]
@@ -17,11 +20,10 @@ namespace CSGO_Demos_Manager.Models.Events
 		public float Y { get; set; }
 
 		[JsonIgnore]
-		public override string Message => "Bomb planted by " + Player.Name + " on BP " + Site;
+		public override string Message => "Bomb planted by " + PlanterName + " on BP " + Site;
 
 		public BombPlantedEvent(int tick) : base(tick)
 		{
-			Player = new PlayerExtended();
 		}
 	}
 }

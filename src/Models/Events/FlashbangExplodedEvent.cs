@@ -5,8 +5,8 @@ namespace CSGO_Demos_Manager.Models.Events
 {
 	public class FlashbangExplodedEvent : NadeBaseEvent
 	{
-		[JsonProperty("players_flashed")]
-		public List<PlayerExtended> FlashedPlayers { get; set; }
+		[JsonProperty("flashed_players_steamid")]
+		public List<long> FlashedPlayerSteamIdList { get; set; } = new List<long>();
 
 		[JsonIgnore]
 		public override string Message => "Flashbang explosed";
@@ -14,7 +14,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		public FlashbangExplodedEvent(int tick)
 			: base(tick)
 		{
-			FlashedPlayers = new List<PlayerExtended>();
 		}
 	}
 }

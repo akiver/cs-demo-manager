@@ -1,17 +1,18 @@
-﻿using Newtonsoft.Json;
+﻿using DemoInfo;
+using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Models.Events
 {
 	public class KillEvent : BaseEvent
 	{
-		[JsonProperty("killer")]
-		public PlayerExtended Killer { get; set; }
+		[JsonProperty("killer_steamid")]
+		public long KillerSteamId { get; set; }
 
-		[JsonProperty("victim")]
-		public PlayerExtended DeathPerson { get; set; }
+		[JsonProperty("killed_steamid")]
+		public long KilledSteamId { get; set; }
 
-		[JsonProperty("assister")]
-		public PlayerExtended Assister { get; set; }
+		[JsonProperty("assister_steamid")]
+		public long AssisterSteamId { get; set; }
 
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }
@@ -19,21 +20,34 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public KillHeatmapPoint Point { get; set; }
 
-		[JsonProperty("killer_velocity_x")]
+		[JsonProperty("killer_vel_x")]
 		public float KillerVelocityX { get; set; }
 
-		[JsonProperty("killer_velocity_Y")]
+		[JsonProperty("killer_vel_y")]
 		public float KillerVelocityY { get; set; }
 
-		[JsonProperty("killer_velocity_z")]
+		[JsonProperty("killer_vel_z")]
 		public float KillerVelocityZ { get; set; }
 
+		[JsonProperty("killer_side")]
+		public Team KillerSide { get; set; }
+
+		[JsonProperty("killed_side")]
+		public Team KilledSide { get; set; }
+
+		[JsonProperty("killer_name")]
+		public string KillerName { get; set; }
+
+		[JsonProperty("killed_name")]
+		public string KilledName { get; set; }
+
+		[JsonProperty("assister_name")]
+		public string AssisterName { get; set; }
+
 		[JsonIgnore]
-		public override string Message => Killer.Name + " killed " + DeathPerson.Name + " with " + Weapon.Name;
+		public override string Message => KillerName + " killed " + KilledName + " with " + Weapon.Name;
 
 		public KillEvent(int tick)
-			: base(tick)
-		{
-		}
+			: base(tick) { }
 	}
 }

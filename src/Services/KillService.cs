@@ -19,28 +19,28 @@ namespace CSGO_Demos_Manager.Services
 			{
 				foreach (PlayerExtended player in Demo.Players)
 				{
-					Dictionary<PlayerExtended, int> playerKillStats = new Dictionary<PlayerExtended, int>();
+					Dictionary<long, int> playerKillStats = new Dictionary<long, int>();
 
 					foreach (PlayerExtended pl in Demo.Players)
 					{
-						if (!playerKillStats.ContainsKey(pl))
-							playerKillStats.Add(pl, 0);
+						if (!playerKillStats.ContainsKey(pl.SteamId))
+							playerKillStats.Add(pl.SteamId, 0);
 					}
 
 					foreach (KillEvent e in Demo.Kills)
 					{
-						if (player.Equals(e.Killer))
+						if (player.SteamId == e.KillerSteamId)
 						{
-							if (!playerKillStats.ContainsKey(e.DeathPerson))
-								playerKillStats.Add(e.DeathPerson, 0);
-							playerKillStats[e.DeathPerson]++;
+							if (!playerKillStats.ContainsKey(e.KilledSteamId))
+								playerKillStats.Add(e.KilledSteamId, 0);
+							playerKillStats[e.KilledSteamId]++;
 						}
 					}
 
 					data.AddRange(playerKillStats.Select(playerStats => new KillDataPoint
 					{
 						Killer = player.Name,
-						Victim = playerStats.Key.Name,
+						Victim = Demo.Players.First(p => p.SteamId == playerStats.Key).Name,
 						Count = playerStats.Value
 					}));
 				}

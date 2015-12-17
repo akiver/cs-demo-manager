@@ -326,7 +326,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								System.Drawing.Color col = System.Drawing.Color.FromArgb(positionPoints.First().Color);
 								PlayerColor playerColor = new PlayerColor()
 								{
-									Name = positionPoints.First().Player.Name,
+									Name = positionPoints.First().PlayerName,
 									Color = new SolidColorBrush(MediaColor.FromRgb(col.R, col.G, col.B))
 								};
 								if (!PlayersColor.Contains(playerColor)) PlayersColor.Add(playerColor);

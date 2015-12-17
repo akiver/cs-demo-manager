@@ -7,28 +7,30 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public HeatmapPoint Point { get; set; }
 
-		[JsonProperty("shooter")]
-		public PlayerExtended Shooter { get; set; }
+		[JsonProperty("shooter_steamid")]
+		public long ShooterSteamId { get; set; }
+
+		[JsonProperty("shooter_name")]
+		public string ShooterName { get; set; }
 
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }
 
-		[JsonProperty("round")]
-		public Round Round { get; set; }
+		[JsonProperty("round_number")]
+		public int RoundNumber { get; set; }
 
-		[JsonProperty("shooter_velocity_x")]
+		[JsonProperty("shooter_vel_x")]
 		public float ShooterVelocityX { get; set; }
 
-		[JsonProperty("shooter_velocity_y")]
+		[JsonProperty("shooter_vel_y")]
 		public float ShooterVelocityY { get; set; }
 
-		[JsonProperty("shooter_velocity_z")]
+		[JsonProperty("shooter_vel_z")]
 		public float ShooterVelocityZ { get; set; }
 
-		public override string Message => Shooter.Name + " throwed " + Weapon.Name;
+		[JsonIgnore]
+		public override string Message => ShooterName + " throwed " + Weapon.Name;
 
-		public WeaponFire(int tick) : base(tick)
-		{
-		}
+		public WeaponFire(int tick) : base(tick) { }
 	}
 }
