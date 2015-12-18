@@ -853,7 +853,12 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
-				PlayerExtended player;
+				if (Settings.Default.SelectedStatsAccountSteamID == 0
+					|| (ScoreTeam1 == 0 && ScoreTeam2 == 0)) return -3;
+
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return -3;
+
 				if (Surrender != null)
 				{
 					player = Surrender.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -861,20 +866,16 @@ namespace CSGO_Demos_Manager.Models
 					return 2;
 				}
 
-				if (ScoreTeam1 == 0 && ScoreTeam2 == 0) return -3;
-
-				// was in team 1 (CT)?
-				player = TeamCT.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
-				if (player != null)
+				// was in CT?
+				if (player.TeamName == TeamCT.Name)
 				{
 					if (ScoreTeam1 == ScoreTeam2) return 0;
 					if (ScoreTeam1 > ScoreTeam2) return 1;
 					return -1;
 				}
 
-				// was in team 2 (T)?
-				player = TeamT.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
-				if (player != null)
+				// was in T?
+				if (player.TeamName == TeamT.Name)
 				{
 					if (ScoreTeam1 == ScoreTeam2) return 0;
 					if (ScoreTeam1 < ScoreTeam2) return 1;
