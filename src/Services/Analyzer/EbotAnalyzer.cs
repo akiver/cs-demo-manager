@@ -176,6 +176,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					_isTeamsNameDetected = true;
 					if (Parser.CTClanName != Demo.TeamCT.Name)
 					{
+						foreach (PlayerExtended player in Demo.Players)
+						{
+							player.TeamName = player.TeamName == Demo.TeamCT.Name ? Demo.TeamT.Name : Demo.TeamCT.Name;
+						}
 						Demo.TeamCT.Name = Parser.CTClanName;
 						Demo.TeamT.Name = Parser.TClanName;
 						Demo.TeamCT.Name = Parser.CTClanName;
