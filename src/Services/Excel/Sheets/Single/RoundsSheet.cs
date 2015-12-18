@@ -55,14 +55,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSideAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);
-					if (round.TeamTroubleName != string.Empty)
-					{
-						SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName);
-					}
-					else
-					{
-						SetCellValue(row, columnNumber++, CellType.String, string.Empty);
-					}
+					SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Kills.Count());
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.TwoKillCount);
