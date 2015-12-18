@@ -13,9 +13,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public HeatmapPoint Point { get; set; }
 
-		public NadeBaseEvent(int tick)
-			: base(tick)
-		{
-		}
+		public NadeBaseEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

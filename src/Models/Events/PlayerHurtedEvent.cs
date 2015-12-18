@@ -5,7 +5,7 @@ namespace CSGO_Demos_Manager.Models.Events
 {
 	public class PlayerHurtedEvent : BaseEvent
 	{
-		public PlayerHurtedEvent(int tick) : base(tick) { }
+		public PlayerHurtedEvent(int tick, float seconds) : base(tick, seconds) { }
 
 		[JsonProperty("hurted_steamid")]
 		public long HurtedSteamId { get; set; }

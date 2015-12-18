@@ -23,16 +23,49 @@ namespace CSGO_Demos_Manager.Models
 	{
 		#region Properties
 
+		/// <summary>
+		/// Round's number
+		/// </summary>
 		private int _number = 1;
 
+		/// <summary>
+		/// Round's start tick
+		/// </summary>
 		private int _tick;
 
+		/// <summary>
+		/// Number of the seconds from the start of the match the round started
+		/// </summary>
+		private float _timeStartSeconds;
+
+		/// <summary>
+		/// Number of the seconds from the start of the match the round ended
+		/// </summary>
+		private float _timeEndSeconds;
+
+		/// <summary>
+		/// Why the round ended
+		/// </summary>
+		private RoundEndReason _endReason;
+
+		/// <summary>
+		/// Equipement value of the team 2
+		/// </summary>
 		private int _equipementValueTeam2;
 
+		/// <summary>
+		/// Equipement value of the team 1
+		/// </summary>
 		private int _equipementValueTeam1;
 
+		/// <summary>
+		/// Start money of the team 1
+		/// </summary>
 		private int _startMoneyTeam1;
 
+		/// <summary>
+		/// Start money of the team 2
+		/// </summary>
 		private int _startMoneyTeam2;
 
 		/// <summary>
@@ -80,6 +113,36 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private int _fivekillCount;
 
+		/// <summary>
+		/// Number of flashbang throwed during the round
+		/// </summary>
+		private int _flashbangThrowedCount;
+
+		/// <summary>
+		/// Number of smoke during the round
+		/// </summary>
+		private int _smokeThrowedCount;
+
+		/// <summary>
+		/// Number of HE throwed during the round
+		/// </summary>
+		private int _heGrenadeThrowedCount;
+
+		/// <summary>
+		/// Number of decoy throwed during the round
+		/// </summary>
+		private int _decoyThrowedCount;
+
+		/// <summary>
+		/// Number of molotov throwed during the round
+		/// </summary>
+		private int _molotovThrowedCount;
+
+		/// <summary>
+		/// Number of incendiary throwed during the round
+		/// </summary>
+		private int _incendiaryThrowedCount;
+
 		private ObservableCollection<KillEvent> _kills = new ObservableCollection<KillEvent>();
 
 		private ObservableCollection<FlashbangExplodedEvent> _flashbangsExploded = new ObservableCollection<FlashbangExplodedEvent>();
@@ -105,8 +168,14 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private BombExplodedEvent _bombExploded;
 
+		/// <summary>
+		/// Infos on the round's open kill
+		/// </summary>
 		private OpenKillEvent _openKillEvent;
 
+		/// <summary>
+		/// Infos on the round's entry kill
+		/// </summary>
 		private EntryKillEvent _entryKillEvent;
 
 		/// <summary>
@@ -130,6 +199,27 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _tick; }
 			set { Set(() => Tick, ref _tick, value); }
+		}
+
+		[JsonProperty("start_seconds")]
+		public float StartTimeSeconds
+		{
+			get { return _timeStartSeconds; }
+			set { Set(() => StartTimeSeconds, ref _timeStartSeconds, value); }
+		}
+
+		[JsonProperty("end_seconds")]
+		public float EndTimeSeconds
+		{
+			get { return _timeEndSeconds; }
+			set { Set(() => EndTimeSeconds, ref _timeEndSeconds, value); }
+		}
+
+		[JsonProperty("end_reason")]
+		public RoundEndReason EndReason
+		{
+			get { return _endReason; }
+			set { Set(() => EndReason, ref _endReason, value); }
 		}
 
 		[JsonProperty("kills", IsReference = false)]
@@ -285,6 +375,72 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => SideTrouble, ref _sideTrouble, value); }
 		}
 
+		public int FlashbangThrowedCount
+		{
+			get { return _flashbangThrowedCount; }
+			set { Set(() => FlashbangThrowedCount, ref _flashbangThrowedCount, value); }
+		}
+
+		[JsonProperty("round_smoke_count")]
+		public int SmokeThrowedCount
+		{
+			get { return _smokeThrowedCount; }
+			set { Set(() => SmokeThrowedCount, ref _smokeThrowedCount, value); }
+		}
+
+		[JsonProperty("round_he_count")]
+		public int HeGrenadeThrowedCount
+		{
+			get { return _heGrenadeThrowedCount; }
+			set { Set(() => HeGrenadeThrowedCount, ref _heGrenadeThrowedCount, value); }
+		}
+
+		[JsonProperty("round_decoy_count")]
+		public int DecoyThrowedCount
+		{
+			get { return _decoyThrowedCount; }
+			set { Set(() => DecoyThrowedCount, ref _decoyThrowedCount, value); }
+		}
+
+		[JsonProperty("round_molotov_count")]
+		public int MolotovThrowedCount
+		{
+			get { return _molotovThrowedCount; }
+			set { Set(() => MolotovThrowedCount, ref _molotovThrowedCount, value); }
+		}
+
+		[JsonProperty("round_incendiary_count")]
+		public int IncendiaryThrowedCount
+		{
+			get { return _incendiaryThrowedCount; }
+			set { Set(() => IncendiaryThrowedCount, ref _incendiaryThrowedCount, value); }
+		}
+
+		[JsonIgnore]
+		public string EndReasonAsString
+		{
+			get
+			{
+				switch (EndReason)
+				{
+					case RoundEndReason.CTWin:
+						return "Counter-Terrorists win";
+					case RoundEndReason.TerroristWin:
+						return "Terrorists win";
+					case RoundEndReason.TargetBombed:
+						return "Bomb exploded";
+					case RoundEndReason.BombDefused:
+						return "Bomb defused";
+					case RoundEndReason.CTSurrender:
+						return "CT surrender";
+					case RoundEndReason.TerroristsSurrender:
+						return "T surrender";
+					default:
+						return "Unknown";
+				}
+			}
+		}
+
 		/// <summary>
 		/// List of all hits happened during the round
 		/// </summary>
@@ -294,6 +450,18 @@ namespace CSGO_Demos_Manager.Models
 			get { return _playerHurted; }
 			set { Set(() => PlayersHurted, ref _playerHurted, value); }
 		}
+
+		/// <summary>
+		/// Round duration (seconds)
+		/// </summary>
+		[JsonIgnore]
+		public float Duration => EndTimeSeconds - StartTimeSeconds;
+
+		[JsonIgnore]
+		public DateTime StartTickTime => DateTime.Today;
+
+		[JsonIgnore]
+		public DateTime EndTickTime => DateTime.Today.AddSeconds(Duration);
 
 		[JsonIgnore]
 		public string WinnerSideAsString => _winnerSide == Team.CounterTerrorist ? "CT" : "T";

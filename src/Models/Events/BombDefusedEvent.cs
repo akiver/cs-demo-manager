@@ -16,8 +16,8 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => "Bomb defused on BP " + Site + " by " + DefuserName;
 
-		public BombDefusedEvent(int tick)
-			: base(tick)
+		public BombDefusedEvent(int tick, float seconds)
+			: base(tick, seconds)
 		{
 		}
 	}

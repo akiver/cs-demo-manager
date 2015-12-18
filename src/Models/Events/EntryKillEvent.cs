@@ -42,8 +42,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public string Result => HasWin ? "Win" : "Loss";
 
-		public EntryKillEvent(int tick) : base(tick)
-		{
-		}
+		public EntryKillEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

@@ -2,6 +2,7 @@ using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Services.Design;
 using CSGO_Demos_Manager.Services.Excel;
 using CSGO_Demos_Manager.Services.Interfaces;
+using CSGO_Demos_Manager.Services.Stats;
 using CSGO_Demos_Manager.ViewModel.AccountStats;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
@@ -26,6 +27,8 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<ExcelService, ExcelService>();
 				SimpleIoc.Default.Register<IFlashbangService, FlashbangServiceDesign>();
 				SimpleIoc.Default.Register<IKillService, KillServiceDesign>();
+				SimpleIoc.Default.Register<IRoundService, RoundServiceDesign>();
+				SimpleIoc.Default.Register<IPlayerService, PlayerServiceDesign>();
 			}
 			else
 			{
@@ -36,6 +39,8 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<ExcelService, ExcelService>();
 				SimpleIoc.Default.Register<IFlashbangService, FlashbangService>();
 				SimpleIoc.Default.Register<IKillService, KillService>();
+				SimpleIoc.Default.Register<IRoundService, RoundService>();
+				SimpleIoc.Default.Register<IPlayerService, PlayerService>();
 			}
 
 			SimpleIoc.Default.Register<MainViewModel>();
@@ -54,6 +59,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<AccountStatsProgressViewModel>();
 			SimpleIoc.Default.Register<WhitelistViewModel>();
 			SimpleIoc.Default.Register<DemoFlashbangsViewModel>();
+			SimpleIoc.Default.Register<RoundViewModel>();
 		}
 
 		public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -87,6 +93,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		public WhitelistViewModel Whitelist => ServiceLocator.Current.GetInstance<WhitelistViewModel>();
 
 		public DemoFlashbangsViewModel DemoFlashbangs => ServiceLocator.Current.GetInstance<DemoFlashbangsViewModel>();
+
+		public RoundViewModel Round => ServiceLocator.Current.GetInstance<RoundViewModel>();
 
 		public static void Cleanup()
 		{

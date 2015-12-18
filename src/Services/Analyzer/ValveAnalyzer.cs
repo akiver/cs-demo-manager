@@ -201,6 +201,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted) return;
 
+			CurrentRound.EndReason = e.Reason;
+			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 			UpdateTeamScore(e);
 
 			if (e.Reason == RoundEndReason.CTSurrender)
@@ -287,7 +289,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (killed == null) return;
 			PlayerExtended killer = null;
 
-			KillEvent killEvent = new KillEvent(Parser.IngameTick)
+			KillEvent killEvent = new KillEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				KillerSteamId = e.Killer?.SteamID ?? 0,
 				KillerName = e.Killer?.Name ?? "World",
@@ -298,7 +300,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KillerVelocityZ = e.Killer?.Velocity.Z ?? 0,
 				KilledSteamId = e.Victim.SteamID,
 				KilledName = e.Victim.Name,
-				KilledSide = e.Victim.Team
+				KilledSide = e.Victim.Team,
+				RoundNumber = CurrentRound.Number
 			};
 
 			bool killerIsBot = false;

@@ -257,6 +257,22 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Jump kills" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="StartMoneyHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Start Money" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="EquipementValueHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Equipement Value" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="ShotsHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Shots fired" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="HitsHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Hits" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="AverageDamagePerRoundHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Average Damage Per Round" />
 	</Style>
@@ -537,6 +553,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Killed Name" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="AssisterNameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Assister Name" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="WeaponNameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Weapon Name" />
 	</Style>
@@ -591,5 +611,9 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang throwed by the team" />
 	</Style>
 	<!-- End Flashbangs view -->
+
+	<Style TargetType="DataGridRow" x:Key="DataGridRowRoundListStyle" BasedOn="{StaticResource DataGridRowStyle}">
+		<Setter Property="ContextMenu" Value="{StaticResource RoundRowContextMenu}" />
+	</Style>
 
 </ResourceDictionary>

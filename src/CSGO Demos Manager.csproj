@@ -186,8 +186,10 @@
     <Compile Include="Models\Events\PlayerBlindedEvent.cs" />
     <Compile Include="Models\Excel\PlayerStats.cs" />
     <Compile Include="Models\Excel\WeaponsData.cs" />
+    <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\KillHeatmapPoint.cs" />
     <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\Selectors\RoundTimelineTemplateSelector.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
     <Compile Include="Models\Stats\FlashbangDataPoint.cs" />
     <Compile Include="Models\Stats\KillDataPoint.cs" />
@@ -229,6 +231,7 @@
     <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
     <Compile Include="Models\Source\Valve.cs" />
+    <Compile Include="Models\Stats\PlayerRoundStats.cs" />
     <Compile Include="Models\Stats\ProgressStats.cs" />
     <Compile Include="Models\Stats\WeaponStats.cs" />
     <Compile Include="Models\Steam\PlayerBan.cs" />
@@ -236,6 +239,7 @@
     <Compile Include="Models\Suspect.cs" />
     <Compile Include="Models\TeamExtended.cs" />
     <Compile Include="Models\ComboboxSelector.cs" />
+    <Compile Include="Models\Timeline\RoundEvent.cs" />
     <Compile Include="Models\Weapon.cs" />
     <Compile Include="Internals\Mouse\MouseBindingExtended.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -243,6 +247,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Design\PlayerServiceDesign.cs" />
+    <Compile Include="Services\Design\RoundServiceDesign.cs" />
     <Compile Include="Services\Excel\AbstractExport.cs" />
     <Compile Include="Services\Excel\MultipleExport.cs" />
     <Compile Include="Services\Excel\Sheets\AbstractSingleSheet.cs" />
@@ -253,16 +259,24 @@
     <Compile Include="Services\Excel\Sheets\Multiple\TeamsSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Multiple\WeaponsSheet.cs" />
     <Compile Include="Services\Excel\SingleExport.cs" />
+    <Compile Include="Services\Interfaces\IPlayerService.cs" />
+    <Compile Include="Services\Interfaces\IRoundService.cs" />
     <Compile Include="Services\KillService.cs" />
     <Compile Include="Services\FlashbangService.cs" />
     <Compile Include="Services\Design\FlashbangServiceDesign.cs" />
     <Compile Include="Services\Interfaces\IFlashbangService.cs" />
     <Compile Include="Services\Interfaces\IKillService.cs" />
     <Compile Include="Services\Design\KillServiceDesign.cs" />
+    <Compile Include="Services\Stats\PlayerService.cs" />
+    <Compile Include="Services\Stats\RoundService.cs" />
     <Compile Include="ViewModel\DemoFlashbangsViewModel.cs" />
+    <Compile Include="ViewModel\RoundViewModel.cs" />
     <Compile Include="ViewModel\WhitelistViewModel.cs" />
     <Compile Include="Views\DemoFlashbangsView.xaml.cs">
       <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RoundView.xaml.cs">
+      <DependentUpon>RoundView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WhitelistView.xaml.cs">
       <DependentUpon>WhitelistView.xaml</DependentUpon>
@@ -275,7 +289,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="resources\Timelines.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\DemoFlashbangsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RoundView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,23 +329,23 @@
     <None Include="resources\AfxHookSource\shaders\afx_line_vs20.fxo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="resources\images\icons\flashbang.png" />
+    <Resource Include="resources\images\icons\flashbang.png" />
     <None Include="resources\images\icons\flashbang_exploded.png" />
-    <None Include="resources\images\icons\decoy.png" />
-    <None Include="resources\images\icons\hegrenade.png" />
-    <None Include="resources\images\icons\incendiary.png" />
-    <None Include="resources\images\icons\molotov.png" />
-    <None Include="resources\images\icons\smokegrenade.png" />
-    <None Include="resources\images\icons\bomb_exploded.png" />
+    <Resource Include="resources\images\icons\decoy.png" />
+    <Resource Include="resources\images\icons\hegrenade.png" />
+    <Resource Include="resources\images\icons\incendiary.png" />
+    <Resource Include="resources\images\icons\molotov.png" />
+    <Resource Include="resources\images\icons\smokegrenade.png" />
+    <Resource Include="resources\images\icons\bomb_exploded.png" />
     <None Include="resources\images\icons\he_exploded.png" />
-    <None Include="resources\images\icons\kill.png" />
+    <Resource Include="resources\images\icons\kill.png" />
     <None Include="resources\images\icons\molotov_burning.png" />
     <None Include="resources\images\icons\smoke.png" />
     <None Include="resources\images\icons\smoke_start.png" />
-    <None Include="resources\images\icons\defuser.png" />
+    <Resource Include="resources\images\icons\defuser.png" />
     <None Include="resources\images\icons\decoy_exploded.png" />
     <None Include="resources\images\icons\decoy_screaming.png" />
-    <None Include="resources\images\icons\bomb.png" />
+    <Resource Include="resources\images\icons\bomb.png" />
     <None Include="resources\images\colors.jpg" />
     <Compile Include="Services\Analyzer\CevoAnalyzer.cs" />
     <Compile Include="Services\Analyzer\EbotAnalyzer.cs" />

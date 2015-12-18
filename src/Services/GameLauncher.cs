@@ -77,9 +77,10 @@ namespace CSGO_Demos_Manager.Services
 			StartGame();
 		}
 
-		internal void WatchDemoAt(Demo demo, int tick)
+		internal void WatchDemoAt(Demo demo, int tick, bool delay = false)
 		{
 			_arguments.Add("+playdemo");
+			if (delay && tick > 1000) tick -= 1000;
 			_arguments.Add(demo.Path + "@" + tick);
 			StartGame();
 		}

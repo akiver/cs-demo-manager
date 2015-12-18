@@ -28,7 +28,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("duration")]
 		public float Duration { get; set; }
 
-		public PlayerBlindedEvent(int tick)
-			: base(tick) { }
+		public PlayerBlindedEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

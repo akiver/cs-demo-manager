@@ -31,6 +31,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => ShooterName + " throwed " + Weapon.Name;
 
-		public WeaponFire(int tick) : base(tick) { }
+		public WeaponFire(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

@@ -11,9 +11,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => "Flashbang explosed";
 
-		public FlashbangExplodedEvent(int tick)
-			: base(tick)
-		{
-		}
+		public FlashbangExplodedEvent(int tick, float seconds): base(tick, seconds) { }
 	}
 }

@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -243,6 +244,16 @@ namespace CSGO_Demos_Manager.Models
 		/// Temp variable to calculate flash duration
 		/// </summary>
 		private float _flashDurationTemp = 0;
+
+		/// <summary>
+		/// Start money the player had at each rounds
+		/// </summary>
+		private Dictionary<int, int> _startMoneyRounds = new Dictionary<int, int>();
+
+		/// <summary>
+		/// Equipement value the player at each round
+		/// </summary>
+		private Dictionary<int, int> _equipementValueRounds = new Dictionary<int, int>();
 
 		#endregion
 
@@ -515,6 +526,20 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _teamName; }
 			set { Set(() => TeamName, ref _teamName, value); }
+		}
+
+		[JsonProperty("start_money_rounds")]
+		public Dictionary<int, int> StartMoneyRounds
+		{
+			get { return _startMoneyRounds; }
+			set { Set(() => StartMoneyRounds, ref _startMoneyRounds, value); }
+		}
+
+		[JsonProperty("equipement_value_rounds")]
+		public Dictionary<int, int> EquipementValueRounds
+		{
+			get { return _equipementValueRounds; }
+			set { Set(() => EquipementValueRounds, ref _equipementValueRounds, value); }
 		}
 
 		[JsonProperty("entry_kills")]
@@ -870,6 +895,9 @@ namespace CSGO_Demos_Manager.Models
 			RoundPlayedCount = 0;
 			ClutchCount = 0;
 			ClutchLostCount = 0;
+			StartMoneyRounds.Clear();
+			EquipementValueRounds.Clear();
+			_flashDurationTemp = 0;
 		}
 
 		public PlayerExtended Clone()

@@ -44,10 +44,12 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("assister_name")]
 		public string AssisterName { get; set; }
 
+		[JsonProperty("round_number")]
+		public int RoundNumber { get; set; }
+
 		[JsonIgnore]
 		public override string Message => KillerName + " killed " + KilledName + " with " + Weapon.Name;
 
-		public KillEvent(int tick)
-			: base(tick) { }
+		public KillEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

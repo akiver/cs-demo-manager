@@ -7,9 +7,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => "Molotov started";
 
-		public MolotovFireStartedEvent(int tick)
-			: base(tick)
-		{
-		}
+		public MolotovFireStartedEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

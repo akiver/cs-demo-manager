@@ -7,9 +7,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => "HE grenade exploded";
 
-		public ExplosiveNadeExplodedEvent(int tick)
-			: base(tick)
-		{
-		}
+		public ExplosiveNadeExplodedEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

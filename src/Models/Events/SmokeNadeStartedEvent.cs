@@ -2,9 +2,6 @@
 {
 	public class SmokeNadeStartedEvent : NadeBaseEvent
 	{
-		public SmokeNadeStartedEvent(int tick)
-			: base(tick)
-		{
-		}
+		public SmokeNadeStartedEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

@@ -22,8 +22,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => "Bomb planted by " + PlanterName + " on BP " + Site;
 
-		public BombPlantedEvent(int tick) : base(tick)
-		{
-		}
+		public BombPlantedEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

@@ -7,9 +7,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonIgnore]
 		public override string Message => "Decoy started";
 
-		public DecoyStartedEvent(int tick)
-			: base(tick)
-		{
-		}
+		public DecoyStartedEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

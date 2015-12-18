@@ -6,6 +6,8 @@
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 		xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 		xmlns:helpers="clr-namespace:CSGO_Demos_Manager.Converters"
+		xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+		xmlns:command="http://www.galasoft.ch/mvvmlight"
 		Background="{StaticResource LightGreyBrush}"
 		mc:Ignorable="d"
 		Name="DetailsUserControl"
@@ -49,6 +51,9 @@
 		<KeyBinding Command="{Binding GoToDemoFlashbangsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+F" />
+		<KeyBinding Command="{Binding ShowRoundCommand}"
+					CommandParameter="{Binding SelectedRound.Number}"
+					Gesture="CTRL+R" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}"/>
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
@@ -58,18 +63,19 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
 		<!-- ActionBar-->
-		<Grid Grid.Row="0" Margin="5">
-			<Grid>
+		<Grid Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			
+			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
@@ -91,80 +97,7 @@
 						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
 				<Button Grid.Column="1" Margin="5" Width="90" Height="30"
-						Command="{Binding HeatmapCommand}" CommandParameter="{Binding CurrentDemo}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Heatmap generator (CTRL+H)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_map}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Heatmap" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Grid.Column="2" Margin="5" Width="90" Height="30"
-						Command="{Binding OverviewCommand}" CommandParameter="{Binding CurrentDemo}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Overview (CTRL+O)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_map_treasure}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Overview" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Grid.Column="3" Margin="5" Width="80" Height="30"
-						Command="{Binding GoToKillsCommand}" CommandParameter="{Binding CurrentDemo}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Kills details (CTRL+K)">
-					<StackPanel Orientation="Horizontal">
-						<Rectangle Width="25" Height="15">
-							<Rectangle.Fill>
-								<ImageBrush ImageSource="../Resources/images/suicide-black.png" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Kills" Style="{StaticResource ButtonTitleStyle}" Margin="5 0 0 0"/>
-					</StackPanel>
-				</Button>
-
-				<Button Grid.Column="4" Margin="5" Width="90" Height="30"
-						Command="{Binding GoToDemoDamagesCommand}"
-						CommandParameter="{Binding CurrentDemo}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Damages (CTRL+D)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_medical_pulse}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Damages" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Grid.Column="5" Margin="5" Width="95" Height="30"
-						Command="{Binding GoToDemoFlashbangsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Flashbangs (CTRL+F)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="20">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_camera_flash}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Flashbangs" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Grid.Column="6" Margin="5" Width="90" Height="30"
 						Command="{Binding AnalyzeDemoCommand}"
 						CommandParameter="{Binding CurrentDemo}"
 						Style="{StaticResource GeneralButtonStyle}"
@@ -178,8 +111,7 @@
 						<TextBlock Text="Analyze" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
-				<Button Grid.Column="7" Margin="5" Width="110" Height="30"
+				<Button Grid.Column="2" Margin="5" Width="110" Height="30"
 						Command="{Binding Home.WatchDemoCommand, Source={StaticResource Locator}}"
 						CommandParameter="{Binding CurrentDemo}"
 						Style="{StaticResource GeneralButtonStyle}"
@@ -193,10 +125,9 @@
 						<TextBlock Text="Watch demo" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
-				<Button Grid.Column="8" Margin="5" Width="110" Height="30"
+				<Button Grid.Column="3" Margin="5" Width="110" Height="30"
 						Command="{Binding Details.WatchRoundCommand, Source={StaticResource Locator}}"
-						CommandParameter="{Binding CurrentRound}"
+						CommandParameter="{Binding SelectedRound}"
 						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Watch round">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -208,8 +139,7 @@
 						<TextBlock Text="Watch round" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
-				<Button Grid.Column="9" Margin="5" Width="110" Height="30"
+				<Button Grid.Column="4" Margin="5" Width="110" Height="30"
 						Command="{Binding ExportDemoToExcelCommand}"
 						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Export as XLS (CTRL+X)">
@@ -223,7 +153,7 @@
 					</StackPanel>
 				</Button>
 
-				<Grid Grid.Column="10">
+				<Grid Grid.Column="5">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
 						<ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -231,22 +161,122 @@
 					</Grid.ColumnDefinitions>
 
 					<TextBlock Grid.Column="0" Text="Player stats: " Style="{StaticResource CurrentFolderStyle}"/>
-					<ComboBox Grid.Column="1" Style="{StaticResource ComboBoxAccountsStyle}"
-					ItemsSource="{Binding CurrentDemo.Players}"
-					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedPlayer}"
-					DisplayMemberPath ="Name" SelectedValuePath="SteamId"
-					IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers, Converter={StaticResource BooleanInvertedConverter}}" />
+					<ComboBox Grid.Column="1"
+							  Style="{StaticResource ComboBoxAccountsStyle}"
+							  ItemsSource="{Binding CurrentDemo.Players}"
+							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedPlayer}"
+							  DisplayMemberPath ="Name" SelectedValuePath="SteamId"
+							  IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers, Converter={StaticResource BooleanInvertedConverter}}" />
 
-					<CheckBox Grid.Column="2" x:Name="CheckBoxShowAllPlayers" Content="Show all"
-						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowAllPlayersCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllPlayers}"/>
+					<CheckBox Grid.Column="2" x:Name="CheckBoxShowAllPlayers"
+							  Content="Show all"
+							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}"
+							  Style="{StaticResource CheckBoxFilterStyle}"
+							  Command="{Binding ShowAllPlayersCommand}"
+							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllPlayers}"/>
 				</Grid>
 			</Grid>
 		</Grid>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
 
-		<Grid Grid.Row="1" Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<Button Grid.Column="1" Margin="5 0 5 0" Width="90" Height="30"
+						Command="{Binding HeatmapCommand}" CommandParameter="{Binding CurrentDemo}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Heatmap generator (CTRL+H)">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_map}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Heatmap" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="2" Margin="5 0 5 0" Width="90" Height="30"
+						Command="{Binding OverviewCommand}" CommandParameter="{Binding CurrentDemo}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Overview (CTRL+O)">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_map_treasure}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Overview" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="3" Margin="5 0 5 0" Width="80" Height="30"
+						Command="{Binding GoToKillsCommand}" CommandParameter="{Binding CurrentDemo}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Kills details (CTRL+K)">
+				<StackPanel Orientation="Horizontal">
+					<Rectangle Width="25" Height="15">
+						<Rectangle.Fill>
+							<ImageBrush ImageSource="../Resources/images/suicide-black.png" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Kills" Style="{StaticResource ButtonTitleStyle}" Margin="5 0 0 0"/>
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="4" Margin="5 0 5 0" Width="90" Height="30"
+						Command="{Binding GoToDemoDamagesCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Damages (CTRL+D)">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_medical_pulse}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Damages" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="5" Margin="5 0 5 0" Width="95" Height="30"
+						Command="{Binding GoToDemoFlashbangsCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Flashbangs (CTRL+F)">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="20">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_camera_flash}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Flashbangs" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+			<Button Grid.Column="6" Margin="5 0 5 0" Width="110" Height="30"
+						Command="{Binding ShowRoundCommand}"
+						CommandParameter="{Binding SelectedRound.Number}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Round details (CTRL+R)">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="20">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_page_text}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Round details" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+		</Grid>
+		<!-- end action bar -->
+
+		<Grid Grid.Row="2" Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 				<controls:ProgressRing IsActive="{Binding IsAnalyzing}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
 				<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
@@ -255,7 +285,7 @@
 		</Grid>
 
 		<!--Details-->
-		<Grid Grid.Row="2">
+		<Grid Grid.Row="3">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
@@ -274,7 +304,7 @@
 								Style="{StaticResource GeneralButtonStyle}" />
 					</Grid>
 
-					<Grid Margin="10" Grid.Column="1"
+					<Grid Margin="10 5 5 0" Grid.Column="1"
 						  Visibility="{Binding IsLeftSideVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
@@ -692,11 +722,17 @@
 
 							<DataGrid Grid.Row="1" x:Name="DataGridRounds"
 									  ItemsSource="{Binding RoundsCollection}"
-									  SelectedItem="{Binding CurrentRound}"
+									  SelectedItem="{Binding SelectedRound}"
 									  CellStyle="{StaticResource DataGridCellStyle}"
-									  RowStyle="{StaticResource DataGridRowStyle}"
+									  RowStyle="{StaticResource DataGridRowRoundListStyle}"
 									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 									  Style="{StaticResource DataGridStyle}">
+								<i:Interaction.Triggers>
+									<i:EventTrigger EventName="MouseDoubleClick">
+										<command:EventToCommand Command="{Binding ShowRoundCommand, Mode=OneWay}"
+																CommandParameter="{Binding SelectedRound.Number}"/>
+									</i:EventTrigger>
+								</i:Interaction.Triggers>
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource NumberHeader}" x:Name="NumberRoundColumn" Width="Auto" Header="#" Binding="{Binding Number}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}" x:Name="TickRoundColumn" Width="Auto" Header="Tick" Binding="{Binding Tick}" />

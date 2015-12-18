@@ -178,6 +178,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (!IsMatchStarted) return;
 
+			CurrentRound.EndReason = e.Reason;
+			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 			UpdateTeamScore(e);
 
 			Application.Current.Dispatcher.Invoke(delegate

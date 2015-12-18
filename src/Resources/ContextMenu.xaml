@@ -119,4 +119,10 @@
 							  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
+	<ContextMenu x:Key="RoundRowContextMenu">
+		<MenuItem Header="Details"
+				  Command="{Binding Details.ShowRoundCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedRound.Number, Source={StaticResource Locator}}"/>
+	</ContextMenu>
+
 </ResourceDictionary>

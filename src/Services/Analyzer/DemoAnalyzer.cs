@@ -236,7 +236,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
 					if (pl != null && player.FlashDuration >= pl.FlashDurationTemp)
 					{
-						PlayerBlindedEvent playerBlindedEvent = new PlayerBlindedEvent(Parser.CurrentTick)
+						PlayerBlindedEvent playerBlindedEvent = new PlayerBlindedEvent(Parser.CurrentTick, Parser.CurrentTime)
 						{
 							ThrowerSteamId = LastPlayerExplodedFlashbang.SteamId,
 							ThrowerName = LastPlayerExplodedFlashbang.Name,
@@ -308,7 +308,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (weapon == null) return;
 			PlayerExtended killer = null;
 
-			KillEvent killEvent = new KillEvent(Parser.IngameTick)
+			KillEvent killEvent = new KillEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				Weapon = weapon,
 				KillerSteamId = e.Killer?.SteamID ?? 0,
@@ -316,9 +316,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KillerSide = e.Killer?.Team ?? Team.Spectate,
 				KilledSide = e.Victim.Team,
 				KilledSteamId = e.Victim.SteamID,
+				KilledName = e.Victim.Name,
 				KillerVelocityX = e.Killer?.Velocity.X ?? 0,
 				KillerVelocityY = e.Killer?.Velocity.Y ?? 0,
 				KillerVelocityZ = e.Killer?.Velocity.Z ?? 0,
+				RoundNumber = CurrentRound.Number
 			};
 
 			killed.IsAlive = false;
@@ -414,6 +416,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CheckForSpecialClutchEnd();
 			UpdateKillsCount();
 			UpdatePlayerScore();
+			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 
 			if (!IsLastRoundHalf)
 			{
@@ -448,33 +451,34 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleBombPlanted(object sender, BombEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || e.Player == null) return;
 
-			BombPlantedEvent bombPlantedEvent = new BombPlantedEvent(Parser.IngameTick);
+			BombPlantedEvent bombPlantedEvent = new BombPlantedEvent(Parser.IngameTick, Parser.CurrentTime)
+			{
+				PlanterSteamId = e.Player.SteamID,
+				PlanterName = e.Player.Name,
+				Site = e.Site.ToString(),
+				X = e.Player.Position.X,
+				Y = e.Player.Position.Y
+			};
+
 			if (e.Player.SteamID != 0)
 			{
 				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
-				if (player != null)
-				{
-					player.BombPlantedCount++;
-					bombPlantedEvent.PlanterSteamId = e.Player.SteamID;
-					bombPlantedEvent.PlanterName = e.Player.Name;
-					bombPlantedEvent.X = e.Player.Position.X;
-					bombPlantedEvent.Y = e.Player.Position.Y;
-				}
+				if (player != null) player.BombPlantedCount++;
 			}
-			bombPlantedEvent.Site = e.Site.ToString();
+
 			Demo.BombPlanted.Add(bombPlantedEvent);
 			CurrentRound.BombPlanted = bombPlantedEvent;
 
-			if (AnalyzePlayersPosition && bombPlantedEvent.PlanterSteamId != 0)
+			if (AnalyzePlayersPosition && e.Player.SteamID != 0)
 			{
 				PositionPoint positionPoint = new PositionPoint
 				{
-					X = Demo.BombPlanted.Last().X,
-					Y = Demo.BombPlanted.Last().Y,
-					PlayerSteamId = bombPlantedEvent.PlanterSteamId,
-					PlayerName = bombPlantedEvent.PlanterName,
+					X = e.Player.Position.X,
+					Y = e.Player.Position.Y,
+					PlayerSteamId = e.Player.SteamID,
+					PlayerName = e.Player.Name,
 					Team = e.Player.Team,
 					Event = bombPlantedEvent,
 					RoundNumber = CurrentRound.Number
@@ -485,18 +489,19 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleBombDefused(object sender, BombEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || e.Player == null) return;
 
-			BombDefusedEvent bombDefusedEvent = new BombDefusedEvent(Parser.IngameTick);
+			BombDefusedEvent bombDefusedEvent = new BombDefusedEvent(Parser.IngameTick, Parser.CurrentTime)
+			{
+				DefuserSteamId = e.Player.SteamID,
+				DefuserName = e.Player.Name,
+				Site = e.Site.ToString()
+			};
+
 			if (e.Player.SteamID != 0)
 			{
 				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
-				if (player != null)
-				{
-					player.BombDefusedCount++;
-					bombDefusedEvent.DefuserSteamId = player.SteamId;
-					bombDefusedEvent.DefuserName = player.Name;
-				}
+				if (player != null) player.BombDefusedCount++;
 			}
 			Demo.BombDefused.Add(bombDefusedEvent);
 			CurrentRound.BombDefused = bombDefusedEvent;
@@ -505,10 +510,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				PositionPoint positionPoint = new PositionPoint
 				{
-					X = Demo.BombPlanted.Last().X,
-					Y = Demo.BombPlanted.Last().Y,
-					PlayerSteamId = bombDefusedEvent.DefuserSteamId,
-					PlayerName = bombDefusedEvent.DefuserName,
+					X = e.Player.Position.X,
+					Y = e.Player.Position.Y,
+					PlayerSteamId = e.Player.SteamID,
+					PlayerName = e.Player.Name,
 					Team = e.Player.Team,
 					Event = bombDefusedEvent,
 					RoundNumber = CurrentRound.Number
@@ -521,7 +526,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!IsMatchStarted || e.Player == null) return;
 
-			BombExplodedEvent bombExplodedEvent = new BombExplodedEvent(Parser.IngameTick)
+			BombExplodedEvent bombExplodedEvent = new BombExplodedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				Site = e.Site.ToString(),
 				PlanterSteamId = e.Player.SteamID,
@@ -529,10 +534,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			};
 
 			PlayerExtended planter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
-			if (planter != null)
-			{
-				planter.BombExplodedCount++;
-			}
+			if (planter != null) planter.BombExplodedCount++;
 
 			Demo.BombExploded.Add(bombExplodedEvent);
 			CurrentRound.BombExploded = bombExplodedEvent;
@@ -560,6 +562,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!IsFirstShotOccured)
 			{
 				IsFirstShotOccured = true;
+				// update the equipement value for each player
+				foreach (Player pl in Parser.PlayingParticipants)
+				{
+					PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID);
+					if (player != null && !player.EquipementValueRounds.ContainsKey(CurrentRound.Number))
+					{
+						player.EquipementValueRounds.Add(CurrentRound.Number, pl.CurrentEquipmentValue);
+					}
+				}
+
 				if (IsHalfMatch)
 				{
 					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
@@ -668,27 +680,33 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			switch (e.Weapon.Weapon)
 			{
 				case EquipmentElement.Incendiary:
+					CurrentRound.IncendiaryThrowedCount++;
 					shooter.IncendiaryThrowedCount++;
 					break;
 				case EquipmentElement.Molotov:
+					CurrentRound.MolotovThrowedCount++;
 					shooter.MolotovThrowedCount++;
 					break;
 				case EquipmentElement.Decoy:
+					CurrentRound.DecoyThrowedCount++;
 					shooter.DecoyThrowedCount++;
 					break;
 				case EquipmentElement.Flash:
+					CurrentRound.FlashbangThrowedCount++;
 					shooter.FlashbangThrowedCount++;
 					PlayersFlashQueue.Enqueue(shooter);
 					break;
 				case EquipmentElement.HE:
+					CurrentRound.HeGrenadeThrowedCount++;
 					shooter.HeGrenadeThrowedCount++;
 					break;
 				case EquipmentElement.Smoke:
+					CurrentRound.SmokeThrowedCount++;
 					shooter.SmokeThrowedCount++;
 					break;
 			}
 
-			WeaponFire shoot = new WeaponFire(Parser.IngameTick)
+			WeaponFire shoot = new WeaponFire(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ShooterSteamId = shooter.SteamId,
 				ShooterName = shooter.Name,
@@ -754,7 +772,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				case EquipmentElement.Incendiary:
 				case EquipmentElement.Molotov:
-					MolotovFireStartedEvent molotovEvent = new MolotovFireStartedEvent(Parser.IngameTick);
+					MolotovFireStartedEvent molotovEvent = new MolotovFireStartedEvent(Parser.IngameTick, Parser.CurrentTime);
 					PlayerExtended thrower = null;
 					
 					if (e.ThrownBy != null)
@@ -815,7 +833,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				case EquipmentElement.Incendiary:
 				case EquipmentElement.Molotov:
-					MolotovFireEndedEvent molotovEvent = new MolotovFireEndedEvent(Parser.IngameTick)
+					MolotovFireEndedEvent molotovEvent = new MolotovFireEndedEvent(Parser.IngameTick, Parser.CurrentTime)
 					{
 						Point = new HeatmapPoint
 						{
@@ -866,7 +884,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		{
 			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
-			ExplosiveNadeExplodedEvent explosiveEvent = new ExplosiveNadeExplodedEvent(Parser.IngameTick)
+			ExplosiveNadeExplodedEvent explosiveEvent = new ExplosiveNadeExplodedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name
@@ -922,7 +940,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
-			FlashbangExplodedEvent flashbangEvent = new FlashbangExplodedEvent(Parser.IngameTick)
+			FlashbangExplodedEvent flashbangEvent = new FlashbangExplodedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name
@@ -976,7 +994,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 
-			SmokeNadeStartedEvent smokeEvent = new SmokeNadeStartedEvent(Parser.IngameTick)
+			SmokeNadeStartedEvent smokeEvent = new SmokeNadeStartedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name
@@ -1018,7 +1036,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 
-			SmokeNadeEndedEvent smokeEvent = new SmokeNadeEndedEvent(Parser.IngameTick)
+			SmokeNadeEndedEvent smokeEvent = new SmokeNadeEndedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name
@@ -1045,7 +1063,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
-			DecoyStartedEvent decoyStartedEvent = new DecoyStartedEvent(Parser.IngameTick)
+			DecoyStartedEvent decoyStartedEvent = new DecoyStartedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name
@@ -1085,7 +1103,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (!AnalyzePlayersPosition || !IsMatchStarted) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
-			DecoyEndedEvent decoyEndedEvent = new DecoyEndedEvent(Parser.IngameTick)
+			DecoyEndedEvent decoyEndedEvent = new DecoyEndedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name
@@ -1134,7 +1152,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// attacker may be null (hurted by world)
 			if (e.Attacker != null) attacker = Demo.Players.FirstOrDefault(player => player.SteamId == e.Attacker.SteamID);
 
-			PlayerHurtedEvent playerHurtedEvent = new PlayerHurtedEvent(Parser.IngameTick)
+			PlayerHurtedEvent playerHurtedEvent = new PlayerHurtedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				AttackerSteamId = attacker?.SteamId ?? 0,
 				HurtedSteamId = hurted.SteamId,
@@ -1216,7 +1234,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CurrentRound = new Round
 			{
 				Tick = Parser.IngameTick,
-				Number = ++RoundCount
+				Number = ++RoundCount,
+				StartTimeSeconds = Parser.CurrentTime
 			};
 
 			// Sometimes parser return wrong money values on 1st round of side
@@ -1252,6 +1271,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					pl.RoundPlayedCount++;
 					pl.IsAlive = true;
 					pl.Side = player.Team;
+					if (!pl.StartMoneyRounds.ContainsKey(CurrentRound.Number)) pl.StartMoneyRounds.Add(CurrentRound.Number, player.Money);
 				}
 			}
 		}
@@ -1382,7 +1402,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					killer.HasEntryKill = true;
 					killer.HasOpeningKill = true;
 
-					CurrentRound.EntryKillEvent = new EntryKillEvent(Parser.IngameTick)
+					CurrentRound.EntryKillEvent = new EntryKillEvent(Parser.IngameTick, Parser.CurrentTime)
 					{
 						KilledSteamId = killed.SteamId,
 						KilledName = killed.Name,
@@ -1392,7 +1412,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						KillerSide = killEvent.KillerSide,
 						Weapon = killEvent.Weapon
 					};
-					CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
+					CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick, Parser.CurrentTime)
 					{
 						KillerSteamId = killer.SteamId,
 						KillerName = killer.Name,
@@ -1409,7 +1429,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			else
 			{
 				// CT done the kill , it's an open kill
-				CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick)
+				CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick, Parser.CurrentTime)
 				{
 					KillerSteamId = killer.SteamId,
 					KillerName = killer.Name,

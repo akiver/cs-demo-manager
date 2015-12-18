@@ -21,6 +21,7 @@ using CSGO_Demos_Manager.Models.Steam;
 using CSGO_Demos_Manager.Services.Excel;
 using CSGO_Demos_Manager.Services.Interfaces;
 using GalaSoft.MvvmLight.Messaging;
+using Application = System.Windows.Application;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
@@ -30,7 +31,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private Demo _currentDemo;
 
-		private Round _currentRound;
+		private Round _selectedRound;
 
 		private readonly IDemosService _demosService;
 
@@ -59,6 +60,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _backToHomeCommand;
 
 		private RelayCommand<Demo> _analyzeDemoCommand;
+
+		private RelayCommand<int> _goToRoundCommand;
 
 		private RelayCommand<Demo> _heatmapCommand;
 
@@ -130,10 +133,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public Round CurrentRound
+		public Round SelectedRound
 		{
-			get { return _currentRound; }
-			set { Set(() => CurrentRound, ref _currentRound, value); }
+			get { return _selectedRound; }
+			set { Set(() => SelectedRound, ref _selectedRound, value); }
 		}
 
 		public PlayerExtended SelectedPlayerTeam1
@@ -215,6 +218,28 @@ namespace CSGO_Demos_Manager.ViewModel
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
 					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to round control
+		/// </summary>
+		public RelayCommand<int> ShowRoundCommand
+		{
+			get
+			{
+				return _goToRoundCommand
+					?? (_goToRoundCommand = new RelayCommand<int>(
+					roundNumber =>
+					{
+						var roundViewModel = (new ViewModelLocator()).Round;
+						roundViewModel.RoundNumber = roundNumber;
+						roundViewModel.CurrentDemo = CurrentDemo;
+						RoundView roundView = new RoundView();
+						var mainViewModel = (new ViewModelLocator()).Main;
+						mainViewModel.CurrentPage.ShowPage(roundView);
+					}, roundNumber => !IsAnalyzing && CurrentDemo != null
+					&& CurrentDemo.Source.GetType() != typeof(Pov) && SelectedRound != null));
 			}
 		}
 
@@ -522,7 +547,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						GameLauncher launcher = new GameLauncher();
 						launcher.WatchDemoAt(CurrentDemo, round.Tick);
 					},
-					round => CurrentDemo != null && CurrentRound != null));
+					round => CurrentDemo != null && SelectedRound != null));
 			}
 		}
 
@@ -785,7 +810,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public DetailsViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService, ExcelService excelService)
+		public DetailsViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService,
+			ICacheService cacheService, ExcelService excelService)
 		{
 			_demosService = demosService;
 			_dialogService = dialogService;
@@ -795,11 +821,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			if (IsInDesignModeStatic)
 			{
-				var demo = _demosService.AnalyzeDemo(new Demo(), CancellationToken.None);
-				CurrentDemo = demo.Result;
-				IsAnalyzing = true;
-				HasNotification = true;
-				NotificationMessage = "Loading...";
+				Application.Current.Dispatcher.Invoke(async () =>
+				{
+					CurrentDemo = await _demosService.AnalyzeDemo(new Demo(), CancellationToken.None);
+				});
 			}
 
 			Messenger.Default.Register<SelectedPlayerChangedMessage>(this, HandleSelectedPlayerChangedMessage);
@@ -820,7 +845,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			PlayersTeam1Collection = null;
 			PlayersTeam2Collection = null;
 			RoundsCollection = null;
-			CurrentRound = null;
+			SelectedRound = null;
 			NotificationMessage = string.Empty;
 		}
 	}
