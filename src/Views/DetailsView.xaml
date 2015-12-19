@@ -24,6 +24,12 @@
 		</ResourceDictionary>
 	</UserControl.Resources>
 
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToHomeCommand}"
 					Gesture="CTRL+B" />

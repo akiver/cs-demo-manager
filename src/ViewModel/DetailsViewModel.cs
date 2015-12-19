@@ -57,6 +57,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private CancellationTokenSource _cts;
 
+		private RelayCommand _windowLoadedCommand;
+
 		private RelayCommand _backToHomeCommand;
 
 		private RelayCommand<Demo> _analyzeDemoCommand;
@@ -110,27 +112,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		public Demo CurrentDemo
 		{
 			get { return _currentDemo; }
-			set
-			{
-				Set(() => CurrentDemo, ref _currentDemo, value);
-				PlayersTeam1Collection = CollectionViewSource.GetDefaultView(_currentDemo.TeamCT.Players);
-				PlayersTeam2Collection = CollectionViewSource.GetDefaultView(_currentDemo.TeamT.Players);
-				PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
-				PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
-				RoundsCollection = CollectionViewSource.GetDefaultView(_currentDemo.Rounds);
-				if (AppSettings.IsInternetConnectionAvailable())
-				{
-					Task.Run(async () =>
-					{
-						IEnumerable<string> steamIdList = CurrentDemo.Players.Select(p => p.SteamId.ToString()).Distinct();
-						List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
-						foreach (PlayerSummary playerSummary in playerSummaryList)
-						{
-							CurrentDemo.Players.First(p => p.SteamId.ToString() == playerSummary.SteamId).AvatarUrl = playerSummary.AvatarMedium;
-						}
-					});
-				}
-			}
+			set { Set(() => CurrentDemo, ref _currentDemo, value); }
 		}
 
 		public Round SelectedRound
@@ -202,6 +184,35 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#region Commands
 
+		public RelayCommand WindowLoaded
+		{
+			get
+			{
+				return _windowLoadedCommand
+					?? (_windowLoadedCommand = new RelayCommand(
+					() =>
+					{
+						PlayersTeam1Collection = CollectionViewSource.GetDefaultView(_currentDemo.TeamCT.Players);
+						PlayersTeam2Collection = CollectionViewSource.GetDefaultView(_currentDemo.TeamT.Players);
+						PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+						PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+						RoundsCollection = CollectionViewSource.GetDefaultView(_currentDemo.Rounds);
+						if (AppSettings.IsInternetConnectionAvailable())
+						{
+							Task.Run(async () =>
+							{
+								IEnumerable<string> steamIdList = CurrentDemo.Players.Select(p => p.SteamId.ToString()).Distinct();
+								List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
+								foreach (PlayerSummary playerSummary in playerSummaryList)
+								{
+									CurrentDemo.Players.First(p => p.SteamId.ToString() == playerSummary.SteamId).AvatarUrl = playerSummary.AvatarMedium;
+								}
+							});
+						}
+					}));
+			}
+		}
+
 		/// <summary>
 		/// Command to back to the home page
 		/// </summary>
@@ -214,7 +225,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					() =>
 					{
 						var mainViewModel = (new ViewModelLocator()).Main;
-						System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
 						mainViewModel.CurrentPage.ShowPage(homeView);
 					}));
@@ -800,7 +811,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							homeViewModel.DataGridDemosCollection.Refresh();
 
 							var mainViewModel = (new ViewModelLocator()).Main;
-							System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
+							Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 							HomeView homeView = new HomeView();
 							mainViewModel.CurrentPage.ShowPage(homeView);
 						},
