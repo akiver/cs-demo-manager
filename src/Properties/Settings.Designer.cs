@@ -1018,5 +1018,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowJumpKillCoulmn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LogOnlyKillOnOverview {
+            get {
+                return ((bool)(this["LogOnlyKillOnOverview"]));
+            }
+            set {
+                this["LogOnlyKillOnOverview"] = value;
+            }
+        }
     }
 }

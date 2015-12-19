@@ -10,6 +10,7 @@ using CSGO_Demos_Manager.Exceptions.Map;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
+using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Map;
@@ -36,6 +37,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _isPlaying;
 
 		private bool _isPaused;
+
+		private bool _isLogOnlyKills = Settings.Default.LogOnlyKillOnOverview;
 
 		private string _messageNotification;
 
@@ -84,6 +87,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _pauseCommand;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
+
+		private RelayCommand<bool> _toggleLogOnlyKillsCommand;
 
 		private CancellationTokenSource _cts;
 
@@ -259,6 +264,17 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => IsPaused, ref _isPaused, value); }
 		}
 
+		public bool IsLogOnlyKills
+		{
+			get { return _isLogOnlyKills; }
+			set
+			{
+				Settings.Default.LogOnlyKillOnOverview = value;
+				Settings.Default.Save();
+				Set(() => IsLogOnlyKills, ref _isLogOnlyKills, value);
+			}
+		}
+
 		public string MessageNotification
 		{
 			get { return _messageNotification; }
@@ -268,6 +284,24 @@ namespace CSGO_Demos_Manager.ViewModel
 		#endregion
 
 		#region Commands
+
+		/// <summary>
+		/// Command to toggle log only kills
+		/// </summary>
+		public RelayCommand<bool> ToggleLogOnlyKillsCommand
+		{
+			get
+			{
+				return _toggleLogOnlyKillsCommand
+					?? (_toggleLogOnlyKillsCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsLogOnlyKills = isChecked;
+							Settings.Default.LogOnlyKillOnOverview = isChecked;
+							Settings.Default.Save();
+						}));
+			}
+		}
 
 		/// <summary>
 		/// Command to start animation

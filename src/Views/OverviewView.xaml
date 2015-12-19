@@ -14,6 +14,7 @@
 		<ResourceDictionary>
 			<converters:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
+			<converters:EventToVisibilityConverter x:Key="EventToVisibilityConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -161,6 +162,14 @@
 					Value="{Binding FrameLimiterMultiplier}"/>
 				</StackPanel>
 
+				<CheckBox x:Name="CbLogOnlyKills" Content="Log only kills"
+						  IsChecked="{Binding IsLogOnlyKills}"
+						  Style="{StaticResource CheckBoxFilterStyle}"
+						  VerticalAlignment="Center"
+						  Margin="5 0 0 0"
+						  Command="{Binding ToggleLogOnlyKillsCommand}"
+						  CommandParameter="{Binding IsChecked, ElementName=CbLogOnlyKills}"/>
+
 				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
 					<controls:ProgressRing 
 						IsActive="{Binding IsBusy}"
@@ -205,7 +214,8 @@
 				<ItemsControl ItemsSource="{Binding Events}" Background="Transparent" Margin="10" BorderThickness="0">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
-							<TextBlock Text="{Binding Message}" Style="{StaticResource SmallTitleStyle}"/>
+							<TextBlock Text="{Binding Message}"
+									   Style="{StaticResource SmallTitleStyle}" Visibility="{Binding Path=., Converter={StaticResource EventToVisibilityConverter}}" />
 						</DataTemplate>
 					</ItemsControl.ItemTemplate>
 				</ItemsControl>
