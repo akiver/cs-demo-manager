@@ -255,7 +255,7 @@
 								<telerik:ChartTooltipBehavior />
 							</telerik:RadCartesianChart.Behaviors>
 							<telerik:LineSeries ItemsSource="{Binding DatasKill}" CategoryBinding="Date" ValueBinding="KillAverage"
-									StrokeThickness="3" Stroke="{StaticResource LightGreenBrush}" Visibility="{Binding IsKillChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+									StrokeThickness="3" Stroke="{StaticResource LightGreenBrush}"
 									TooltipTemplate="{StaticResource KillTooltipTemplate}">
 								<telerik:LineSeries.PointTemplate>
 									<DataTemplate>
