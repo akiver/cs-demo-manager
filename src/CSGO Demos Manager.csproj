@@ -248,6 +248,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Design\DamageServiceDesign.cs" />
     <Compile Include="Services\Design\PlayerServiceDesign.cs" />
     <Compile Include="Services\Design\RoundServiceDesign.cs" />
     <Compile Include="Services\Excel\AbstractExport.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Services\Excel\Sheets\Multiple\TeamsSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Multiple\WeaponsSheet.cs" />
     <Compile Include="Services\Excel\SingleExport.cs" />
+    <Compile Include="Services\Interfaces\IDamageService.cs" />
     <Compile Include="Services\Interfaces\IPlayerService.cs" />
     <Compile Include="Services\Interfaces\IRoundService.cs" />
     <Compile Include="Services\KillService.cs" />
@@ -268,6 +270,7 @@
     <Compile Include="Services\Interfaces\IFlashbangService.cs" />
     <Compile Include="Services\Interfaces\IKillService.cs" />
     <Compile Include="Services\Design\KillServiceDesign.cs" />
+    <Compile Include="Services\Stats\DamageService.cs" />
     <Compile Include="Services\Stats\PlayerService.cs" />
     <Compile Include="Services\Stats\RoundService.cs" />
     <Compile Include="ViewModel\DemoFlashbangsViewModel.cs" />

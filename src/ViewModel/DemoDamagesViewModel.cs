@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Windows;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Services;
+using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Views;
 using DemoInfo;
 using GalaSoft.MvvmLight;
@@ -18,19 +22,35 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
-		private string _damageHeadValue;
+		private double _totalDamage;
 
-		private string _damageChestValue;
+		private double _damageHeadValue;
 
-		private string _damageStomachValue;
+		private double _damageChestValue;
 
-		private string _damageLeftArmValue;
+		private double _damageStomachValue;
 
-		private string _damageRightArmValue;
+		private double _damageLeftArmValue;
 
-		private string _damageLeftLegValue;
+		private double _damageRightArmValue;
 
-		private string _damageRightLegValue;
+		private double _damageLeftLegValue;
+
+		private double _damageRightLegValue;
+
+		private double _damagePercentHead;
+
+		private double _damagePercentStomach;
+
+		private double _damagePercentChest;
+
+		private double _damagePercentRightLeg;
+
+		private double _damagePercentLeftLeg;
+
+		private double _damagePercentRightArm;
+
+		private double _damagePercentLeftArm;
 
 		private bool _isGenerating;
 
@@ -47,6 +67,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _selectAllPlayers = true;
 
 		private readonly DialogService _dialogService;
+
+		private readonly IDamageService _damageService;
 
 		private RelayCommand _updateCommand;
 
@@ -128,46 +150,94 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => IsGenerating, ref _isGenerating, value); }
 		}
 
-		public string DamageHeadValue
+		public double TotalDamage
+		{
+			get { return _totalDamage; }
+			set { Set(() => TotalDamage, ref _totalDamage, value); }
+		}
+
+		public double DamageHeadValue
 		{
 			get { return _damageHeadValue; }
 			set { Set(() => DamageHeadValue, ref _damageHeadValue, value); }
 		}
 
-		public string DamageChestValue
+		public double DamageChestValue
 		{
 			get { return _damageChestValue; }
 			set { Set(() => DamageChestValue, ref _damageChestValue, value); }
 		}
 
-		public string DamageStomachValue
+		public double DamageStomachValue
 		{
 			get { return _damageStomachValue; }
 			set { Set(() => DamageStomachValue, ref _damageStomachValue, value); }
 		}
 
-		public string DamageLeftArmValue
+		public double DamageLeftArmValue
 		{
 			get { return _damageLeftArmValue; }
 			set { Set(() => DamageLeftArmValue, ref _damageLeftArmValue, value); }
 		}
 
-		public string DamageRightArmValue
+		public double DamageRightArmValue
 		{
 			get { return _damageRightArmValue; }
 			set { Set(() => DamageRightArmValue, ref _damageRightArmValue, value); }
 		}
 
-		public string DamageLeftLegValue
+		public double DamageLeftLegValue
 		{
 			get { return _damageLeftLegValue; }
 			set { Set(() => DamageLeftLegValue, ref _damageLeftLegValue, value); }
 		}
 
-		public string DamageRightLegValue
+		public double DamageRightLegValue
 		{
 			get { return _damageRightLegValue; }
 			set { Set(() => DamageRightLegValue, ref _damageRightLegValue, value); }
+		}
+
+		public double DamagePercentHead
+		{
+			get { return _damagePercentHead; }
+			set { Set(() => DamagePercentHead, ref _damagePercentHead, value); }
+		}
+
+		public double DamagePercentStomach
+		{
+			get { return _damagePercentStomach; }
+			set { Set(() => DamagePercentStomach, ref _damagePercentStomach, value); }
+		}
+
+		public double DamagePercentChest
+		{
+			get { return _damagePercentChest; }
+			set { Set(() => DamagePercentChest, ref _damagePercentChest, value); }
+		}
+
+		public double DamagePercentLeftArm
+		{
+			get { return _damagePercentLeftArm; }
+			set { Set(() => DamagePercentLeftArm, ref _damagePercentLeftArm, value); }
+		}
+
+		public double DamagePercentRightArm
+		{
+			get { return _damagePercentRightArm; }
+			set { Set(() => DamagePercentRightArm, ref _damagePercentRightArm, value); }
+		}
+
+		public double DamagePercentLeftLeg
+		{
+			get { return _damagePercentLeftLeg; }
+			set { Set(() => DamagePercentLeftLeg, ref _damagePercentLeftLeg, value); }
+		}
+
+		public double DamagePercentRightLeg
+		{
+			get { return _damagePercentRightLeg; }
+			set { Set(() => DamagePercentRightLeg, ref _damagePercentRightLeg, value); }
 		}
 
 		#endregion
@@ -207,62 +277,94 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_updateCommand = new RelayCommand(
 					async () =>
 					{
-						IsGenerating = true;
-
-						bool hasDamageData = CurrentDemo.Rounds.Any(round => round.PlayersHurted.Any());
-						if (!hasDamageData)
+						if (!CurrentDemo.PlayersHurted.Any())
 						{
-							await
-								_dialogService.ShowMessageAsync("No damages data found. The demo is too old or you didn't analyze it.",
+							await _dialogService.ShowMessageAsync("No damages data found. The demo is too old or you didn't analyze it.",
 									MessageDialogStyle.Affirmative);
 							IsGenerating = false;
 							return;
 						}
 
-						List<PlayerExtended> players = new List<PlayerExtended>();
-						List<Round> rounds = new List<Round>();
+						List<long> steamIdList = new List<long>();
+						List<int> roundNumberList = new List<int>();
 
 						// A team has been selected
 						if (SelectedTeam != null)
 						{
-							players = SelectedTeam.Id == "CT" ? CurrentDemo.TeamCT.Players.ToList() : CurrentDemo.TeamT.Players.ToList();
+							steamIdList.AddRange(SelectedTeam.Id == "CT"
+								? CurrentDemo.TeamCT.Players.Select(player => player.SteamId)
+								: CurrentDemo.Players.Select(player => player.SteamId));
 						}
 
 						// All players selected
-						if (SelectAllPlayers) players = CurrentDemo.Players.ToList();
+						if (SelectAllPlayers)
+						{
+							steamIdList.AddRange(CurrentDemo.Players.Select(player => player.SteamId));
+						}
 
 						// only 1 player selected
-						if (SelectedPlayer != null) players.Add(CurrentDemo.Players.FirstOrDefault(p => p.SteamId == SelectedPlayer.SteamId));
+						if (SelectedPlayer != null)
+						{
+							steamIdList.Add(CurrentDemo.Players.First(p => p.SteamId == SelectedPlayer.SteamId).SteamId);
+						}
 
 						// All rounds selected
-						if (SelectAllRounds) rounds = CurrentDemo.Rounds.ToList();
+						if (SelectAllRounds)
+						{
+							roundNumberList.AddRange(CurrentDemo.Rounds.Select(round => round.Number));
+						}
 
 						// only 1 round selected
-						if (SelectedRound != null) rounds.Add(CurrentDemo.Rounds.FirstOrDefault(r => r.Number == SelectedRound.Number));
+						if (SelectedRound != null)
+						{
+							roundNumberList.Add(CurrentDemo.Rounds.First(r => r.Number == SelectedRound.Number).Number);
+						}
 
-						DamageHeadValue = await CurrentDemo.GetDamageAsync(Hitgroup.Head, players, rounds);
-						DamageChestValue = await CurrentDemo.GetDamageAsync(Hitgroup.Chest, players, rounds);
-						DamageLeftArmValue = await CurrentDemo.GetDamageAsync(Hitgroup.LeftArm, players, rounds);
-						DamageRightArmValue = await CurrentDemo.GetDamageAsync(Hitgroup.RightArm, players, rounds);
-						DamageLeftLegValue = await CurrentDemo.GetDamageAsync(Hitgroup.LeftLeg, players, rounds);
-						DamageRightLegValue = await CurrentDemo.GetDamageAsync(Hitgroup.RightLeg, players, rounds);
-						DamageStomachValue = await CurrentDemo.GetDamageAsync(Hitgroup.Stomach, players, rounds);
+						await LoadDatas(steamIdList, roundNumberList);
 
-						IsGenerating = false;
-
-					}, () => !IsGenerating && (SelectAllRounds && SelectAllPlayers)|| (SelectAllPlayers && SelectedRound != null)
+					}, () => !IsGenerating && (SelectAllRounds && SelectAllPlayers) || (SelectAllPlayers && SelectedRound != null)
 					|| (SelectedTeam != null || SelectedPlayer != null) && (SelectAllRounds || SelectedRound != null)));
 			}
 		}
 
 		#endregion
 
-		public DemoDamagesViewModel(DialogService dialogService)
+		public DemoDamagesViewModel(DialogService dialogService, IDamageService damageService)
 		{
 			_dialogService = dialogService;
+			_damageService = damageService;
 
 			TeamSelectors.Add(new ComboboxSelector("CT", "Counter-Terrorists"));
 			TeamSelectors.Add(new ComboboxSelector("T", "Terrorists"));
+
+			if (IsInDesignMode)
+			{
+				Application.Current.Dispatcher.Invoke(async () =>
+				{
+					await LoadDatas(new List<long>(), new List<int>());
+				});
+			}
+		}
+
+		private async Task LoadDatas(List<long> steamIdList, List<int> roundNumberList)
+		{
+			IsGenerating = true;
+			TotalDamage = await _damageService.GetTotalDamageAsync(CurrentDemo, steamIdList, roundNumberList);
+			DamageHeadValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.Head, steamIdList, roundNumberList);
+			if (DamageHeadValue > 0) DamagePercentHead = Math.Round(DamageHeadValue * 100 / TotalDamage, 1);
+			DamageChestValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.Chest, steamIdList, roundNumberList);
+			if (DamageChestValue > 0) DamagePercentChest = Math.Round(DamageChestValue * 100 / TotalDamage, 1);
+			DamageLeftArmValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.LeftArm, steamIdList, roundNumberList);
+			if (DamageLeftArmValue > 0) DamagePercentLeftArm = Math.Round(DamageLeftArmValue * 100 / TotalDamage, 1);
+			DamageRightArmValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.RightArm, steamIdList, roundNumberList);
+			if (DamageRightArmValue > 0) DamagePercentRightArm = Math.Round(DamageRightArmValue * 100 / TotalDamage, 1);
+			DamageLeftLegValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.LeftLeg, steamIdList, roundNumberList);
+			if (DamageLeftLegValue > 0) DamagePercentLeftLeg = Math.Round(DamageLeftLegValue * 100 / TotalDamage, 1);
+			DamageRightLegValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.RightLeg, steamIdList, roundNumberList);
+			if (DamageRightLegValue > 0) DamagePercentRightLeg = Math.Round(DamageRightLegValue * 100 / TotalDamage, 1);
+			DamageStomachValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.Stomach, steamIdList, roundNumberList);
+			if (DamageStomachValue > 0) DamagePercentStomach = Math.Round(DamageStomachValue * 100 / TotalDamage, 1);
+			IsGenerating = false;
 		}
 
 		public override void Cleanup()
@@ -270,13 +372,13 @@ namespace CSGO_Demos_Manager.ViewModel
 			base.Cleanup();
 			SelectAllPlayers = true;
 			SelectAllRounds = true;
-			DamageStomachValue = string.Empty;
-			DamageHeadValue = string.Empty;
-			DamageLeftArmValue = string.Empty;
-			DamageRightArmValue = string.Empty;
-			DamageLeftLegValue = string.Empty;
-			DamageRightLegValue = string.Empty;
-			DamageChestValue = string.Empty;
+			DamageStomachValue = 0;
+			DamageHeadValue = 0;
+			DamageLeftArmValue = 0;
+			DamageRightArmValue = 0;
+			DamageLeftLegValue = 0;
+			DamageRightLegValue = 0;
+			DamageChestValue = 0;
 			IsGenerating = false;
 		}
 	}

@@ -128,13 +128,48 @@
 
 		<Grid Grid.Row="1">
 			<Canvas Width="800">
-				<TextBlock x:Name="DamageHeadValue" Text="{Binding DamageHeadValue}" Canvas.Left="440" Style="{StaticResource DamageValueStyle}" />
-				<TextBlock x:Name="DamageChestValue" Text="{Binding DamageChestValue}" Canvas.Left="210" Style="{StaticResource DamageValueStyle}" />
-				<TextBlock x:Name="DamageLeftArmValue" Text="{Binding DamageLeftArmValue}" Canvas.Left="620" Canvas.Top="120" Style="{StaticResource DamageValueStyle}" />
-				<TextBlock x:Name="DamageRightArmValue" Text="{Binding DamageRightArmValue}" Canvas.Left="10" Canvas.Top="140" Style="{StaticResource DamageValueStyle}" />
-				<TextBlock x:Name="DamageRightLegValue" Text="{Binding DamageRightLegValue}" Canvas.Left="10" Canvas.Top="520" Style="{StaticResource DamageValueStyle}" />
-				<TextBlock x:Name="DamageLeftLegValue" Text="{Binding DamageLeftLegValue}" Canvas.Left="620" Canvas.Top="525" Style="{StaticResource DamageValueStyle}" />
-				<TextBlock x:Name="DamageStomachValue" Text="{Binding DamageStomachValue}" Canvas.Left="620" Canvas.Top="340" Style="{StaticResource DamageValueStyle}" />
+				<TextBlock x:Name="DamageHeadValue" Canvas.Left="440" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageHeadValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentHead}"/>
+					<Run Text="%)"/>
+				</TextBlock>
+				<TextBlock x:Name="DamageChestValue" Canvas.Left="210" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageChestValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentChest}"/>
+					<Run Text="%)"/>
+				</TextBlock>
+				<TextBlock x:Name="DamageLeftArmValue" Canvas.Left="620" Canvas.Top="120" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageLeftArmValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentLeftArm}"/>
+					<Run Text="%)"/>
+				</TextBlock>
+				<TextBlock x:Name="DamageRightArmValue" Canvas.Left="10" Canvas.Top="140" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageRightArmValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentRightArm}"/>
+					<Run Text="%)"/>
+				</TextBlock>
+				<TextBlock x:Name="DamageRightLegValue" Canvas.Left="10" Canvas.Top="520" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageRightLegValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentRightLeg}"/>
+					<Run Text="%)"/>
+				</TextBlock>
+				<TextBlock x:Name="DamageLeftLegValue" Canvas.Left="620" Canvas.Top="525" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageLeftLegValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentLeftLeg}"/>
+					<Run Text="%)"/>
+				</TextBlock>
+				<TextBlock x:Name="DamageStomachValue" Canvas.Left="620" Canvas.Top="340" Style="{StaticResource DamageValueStyle}">
+					<Run Text="{Binding DamageStomachValue}"/>
+					<Run Text="("/>
+					<Run Text="{Binding DamagePercentStomach}"/>
+					<Run Text="%)"/>
+				</TextBlock>
 				<Image Source="../Resources/images/model.png" Height="600" Width="425" Canvas.Left="190" Canvas.Top="40"/>
 			</Canvas>
 		</Grid>

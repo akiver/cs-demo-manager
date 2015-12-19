@@ -29,6 +29,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<IKillService, KillServiceDesign>();
 				SimpleIoc.Default.Register<IRoundService, RoundServiceDesign>();
 				SimpleIoc.Default.Register<IPlayerService, PlayerServiceDesign>();
+				SimpleIoc.Default.Register<IDamageService, DamageServiceDesign>();
 			}
 			else
 			{
@@ -41,6 +42,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				SimpleIoc.Default.Register<IKillService, KillService>();
 				SimpleIoc.Default.Register<IRoundService, RoundService>();
 				SimpleIoc.Default.Register<IPlayerService, PlayerService>();
+				SimpleIoc.Default.Register<IDamageService, DamageService>();
 			}
 
 			SimpleIoc.Default.Register<MainViewModel>();
