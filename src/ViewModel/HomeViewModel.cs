@@ -322,8 +322,12 @@ namespace CSGO_Demos_Manager.ViewModel
 				if (!string.IsNullOrWhiteSpace(value))
 				{
 					Properties.Settings.Default.LastFolder = value;
-					Properties.Settings.Default.Save();
 				}
+				else
+				{
+					Properties.Settings.Default.LastFolder = string.Empty;
+				}
+				Properties.Settings.Default.Save();
 				if (_isMainWindowLoaded)
 				{
 					DispatcherHelper.CheckBeginInvokeOnUI(
@@ -1525,6 +1529,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				else
 				{
 					folders = Folders.ToList();
+					IsShowAllFolders = true;
 				}
 
 				Demos.Clear();
