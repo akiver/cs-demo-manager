@@ -748,6 +748,7 @@ namespace CSGO_Demos_Manager.Services
 					int sniperKillCount = 0;
 					int pistolKillCount = 0;
 					int smgKillCount = 0;
+					int crouchKillCount = 0;
 					Dictionary<WeaponType, double> velocityStats = new Dictionary<WeaponType, double>();
 					foreach (Demo demo in demosPlayerList)
 					{
@@ -802,6 +803,11 @@ namespace CSGO_Demos_Manager.Services
 								Date = demoDate,
 								VelocityAverage = 0
 							});
+							stats.CrouchKill.Add(new CrouchKillDateChart
+							{
+								Date = demoDate,
+								CrouchKillPercentage = 0
+							});
 
 							currentDate = demoDate;
 							matchCount = 1;
@@ -815,6 +821,7 @@ namespace CSGO_Demos_Manager.Services
 							sniperKillCount = 0;
 							pistolKillCount = 0;
 							smgKillCount = 0;
+							crouchKillCount = 0;
 							velocityStats.Clear();
 						}
 
@@ -824,12 +831,17 @@ namespace CSGO_Demos_Manager.Services
 						killCount += demo.TotalKillSelectedAccountCount;
 						deathCount += demo.DeathSelectedAccountCount;
 						damageCount += demo.TotalDamageHealthSelectedAccountCount + demo.TotalDamageArmorSelectedAccountCount;
+						crouchKillCount += demo.CrouchKillSelectedAccountCount;
 
-						stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
+						if (killCount > 0)
+						{
+							stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
+							stats.CrouchKill.Last().CrouchKillPercentage = Math.Round((crouchKillCount / (double)killCount * 100), 2);
+						}
 						stats.Damage.Last().DamageCount = Math.Round((double)damageCount/ matchCount, 2);
 						stats.Kill.Last().KillAverage = Math.Round((double)killCount/ matchCount, 1);
 						stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
-						
+
 						foreach (KillEvent e in demo.Kills)
 						{
 							if (e.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID)

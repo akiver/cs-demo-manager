@@ -24,5 +24,7 @@ namespace CSGO_Demos_Manager.Models.Stats
 		public List<KillVelocityChart> KillVelocityHeavy { get; set; } = new List<KillVelocityChart>();
 
 		public double MaximumVelocity { get; set; } = 250;
+
+		public List<CrouchKillDateChart> CrouchKill { get; set; } = new List<CrouchKillDateChart>();
 	}
 }

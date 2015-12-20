@@ -178,6 +178,7 @@
     <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Messages\SelectedPlayerChangedMessage.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Charts\CrouchKillDateChart.cs" />
     <Compile Include="Models\Charts\DamageDateChart.cs" />
     <Compile Include="Models\Charts\GenericDoubleChart.cs" />
     <Compile Include="Models\Charts\HeadshotDateChart.cs" />

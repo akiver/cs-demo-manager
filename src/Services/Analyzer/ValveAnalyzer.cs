@@ -311,7 +311,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (e.Killer != null && e.Killer.SteamID == 0) killerIsBot = true;
 			if (e.Victim.SteamID == 0) victimIsBot = true;
 			if (e.Assister != null && e.Assister.SteamID == 0) assisterIsBot = true;
-			if(e.Killer != null) killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
+			if (e.Killer != null) killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
+			if (killer != null && e.Killer.IsDucking) killer.CrouchKillCount++;
 
 			// Human killed human
 			if (!killerIsBot && !victimIsBot)

@@ -28,6 +28,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private bool _isHeadshotChartEnabled = true;
 
+		private bool _isCrouchKillChartEnabled = true;
+
 		private bool _isVelocityRifleChartEnabled = true;
 
 		private bool _isVelocityPistolChartEnabled = true;
@@ -41,6 +43,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private double _maximumVelocity = 250;
 
 		private List<HeadshotDateChart> _datasHeadshot;
+
+		private List<CrouchKillDateChart> _datasCrouchKill;
 
 		private List<DamageDateChart> _datasDamage;
 
@@ -75,6 +79,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private RelayCommand<bool> _toggleDamageChartCommand;
 
 		private RelayCommand<bool> _toggleHeadshotChartCommand;
+
+		private RelayCommand<bool> _toggleCrouchKillChartCommand;
 
 		private RelayCommand<bool> _toggleVelocityRifleChartCommand;
 
@@ -120,6 +126,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => IsHeadshotChartEnabled, ref _isHeadshotChartEnabled, value); }
 		}
 
+		public bool IsCrouchKillChartEnabled
+		{
+			get { return _isCrouchKillChartEnabled; }
+			set { Set(() => IsCrouchKillChartEnabled, ref _isCrouchKillChartEnabled, value); }
+		}
+
 		public bool IsVelocityRifleChartEnabled
 		{
 			get { return _isVelocityRifleChartEnabled; }
@@ -160,6 +172,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		{
 			get { return _datasHeadshot; }
 			set { Set(() => DatasHeadshot, ref _datasHeadshot, value); }
+		}
+
+		public List<CrouchKillDateChart> DatasCrouchKill
+		{
+			get { return _datasCrouchKill; }
+			set { Set(() => DatasCrouchKill, ref _datasCrouchKill, value); }
 		}
 
 		public List<WinDateChart> DatasWin
@@ -382,6 +400,23 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		}
 
 		/// <summary>
+		/// Command when the checkbox to toggle crouch kill % chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleCrouchKillChartCommand
+		{
+			get
+			{
+				return _toggleCrouchKillChartCommand
+					?? (_toggleCrouchKillChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsCrouchKillChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
 		/// Command when the checkbox to toggle kill velocity rifle chart is clicked
 		/// </summary>
 		public RelayCommand<bool> ToggleVelocityRifleChartCommand
@@ -481,6 +516,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			VelocitySniper = datas.KillVelocitySniper;
 			VelocityHeavy = datas.KillVelocityHeavy;
 			MaximumVelocity = datas.MaximumVelocity + 10;
+			DatasCrouchKill = datas.CrouchKill;
 			CommandManager.InvalidateRequerySuggested();
 		}
 
@@ -510,6 +546,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			VelocitySmg.Clear();
 			VelocityPistol.Clear();
 			MaximumVelocity = 250;
+			DatasCrouchKill.Clear();
 		}
 	}
 }

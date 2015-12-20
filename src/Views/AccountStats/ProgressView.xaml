@@ -146,21 +146,30 @@
 
 						<Grid Grid.Row="0">
 							<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-								<CheckBox x:Name="CheckBoxShowWinChart" Content="Win %"
-						  IsChecked="{Binding IsWinChartEnabled}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ToggleWinChartCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowWinChart}"/>
-								<CheckBox x:Name="CheckBoxShowDamageChart" Content="Damage value"
-						  IsChecked="{Binding IsDamageChartEnabled}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ToggleDamageChartCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowDamageChart}"/>
-								<CheckBox x:Name="CheckBoxShowHeadshotChart" Content="Headshot %"
-						  IsChecked="{Binding IsHeadshotChartEnabled}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ToggleHeadshotChartCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowHeadshotChart}"/>
+								<CheckBox x:Name="CheckBoxShowWinChart"
+										  Content="Win %"
+										  IsChecked="{Binding IsWinChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleWinChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowWinChart}"/>
+								<CheckBox x:Name="CheckBoxShowDamageChart"
+										  Content="Damage value"
+										  IsChecked="{Binding IsDamageChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleDamageChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowDamageChart}"/>
+								<CheckBox x:Name="CheckBoxShowHeadshotChart"
+										  Content="Headshot %"
+										  IsChecked="{Binding IsHeadshotChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleHeadshotChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowHeadshotChart}"/>
+								<CheckBox x:Name="CheckBoxShowCrouchKillChart"
+										  Content="Crouch kill %"
+										  IsChecked="{Binding IsCrouchKillChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleCrouchKillChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowCrouchKillChart}"/>
 							</StackPanel>
 						</Grid>
 
@@ -177,7 +186,7 @@
 									</telerik:LinearAxis>
 								</telerik:RadCartesianChart.Resources>
 								<telerik:RadCartesianChart.VerticalAxis>
-									<telerik:LinearAxis MajorStep="10" RangeExtendDirection="Both" Minimum="0" Maximum="110" LastLabelVisibility="Hidden" LabelStyle="{StaticResource LabelChartStyle}" Title="% monhtly" TitleTemplate="{StaticResource TitleChartTemplate}"/>
+									<telerik:LinearAxis MajorStep="10" RangeExtendDirection="Both" Minimum="0" Maximum="110" LastLabelVisibility="Hidden" LabelStyle="{StaticResource LabelChartStyle}" Title="% weekly" TitleTemplate="{StaticResource TitleChartTemplate}"/>
 								</telerik:RadCartesianChart.VerticalAxis>
 								<telerik:RadCartesianChart.HorizontalAxis>
 									<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" LabelInterval="1" />
@@ -186,28 +195,53 @@
 									<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
 									<telerik:ChartTooltipBehavior />
 								</telerik:RadCartesianChart.Behaviors>
-								<telerik:LineSeries ItemsSource="{Binding DatasWin}" CategoryBinding="Date" ValueBinding="WinPercentage"
-									StrokeThickness="3" Stroke="{StaticResource LightGreenBrush}"
-									TooltipTemplate="{StaticResource WinTooltipTemplate}"
-										Visibility="{Binding IsWinChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<telerik:LineSeries ItemsSource="{Binding DatasWin}"
+													CategoryBinding="Date"
+													ValueBinding="WinPercentage"
+													StrokeThickness="3"
+													Stroke="{StaticResource LightGreenBrush}"
+													TooltipTemplate="{StaticResource WinTooltipTemplate}"
+													Visibility="{Binding IsWinChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
 									<telerik:LineSeries.PointTemplate>
 										<DataTemplate>
 											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
 										</DataTemplate>
 									</telerik:LineSeries.PointTemplate>
 								</telerik:LineSeries>
-								<telerik:LineSeries ItemsSource="{Binding DatasDamage}" CategoryBinding="Date" ValueBinding="DamageCount"
-									StrokeThickness="3" Stroke="{StaticResource LightBlueBrush}" Visibility="{Binding IsDamageChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
-									VerticalAxis="{StaticResource DamageAxisAxis}" TooltipTemplate="{StaticResource DamageTooltipTemplate}">
+								<telerik:LineSeries ItemsSource="{Binding DatasDamage}"
+													CategoryBinding="Date"
+													ValueBinding="DamageCount"
+													StrokeThickness="3"
+													Stroke="{StaticResource LightBlueBrush}"
+													Visibility="{Binding IsDamageChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+													VerticalAxis="{StaticResource DamageAxisAxis}"
+													TooltipTemplate="{StaticResource DamageTooltipTemplate}">
 									<telerik:LineSeries.PointTemplate>
 										<DataTemplate>
 											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
 										</DataTemplate>
 									</telerik:LineSeries.PointTemplate>
 								</telerik:LineSeries>
-								<telerik:LineSeries ItemsSource="{Binding DatasHeadshot}" CategoryBinding="Date" ValueBinding="HeadshotPercentage"
-									StrokeThickness="3" Stroke="{StaticResource GreenBrush}" Visibility="{Binding IsHeadshotChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
-									TooltipTemplate="{StaticResource HeadshotTooltipTemplate}">
+								<telerik:LineSeries ItemsSource="{Binding DatasHeadshot}"
+													CategoryBinding="Date"
+													ValueBinding="HeadshotPercentage"
+													StrokeThickness="3"
+													Stroke="{StaticResource GreenBrush}"
+													Visibility="{Binding IsHeadshotChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+													TooltipTemplate="{StaticResource HeadshotTooltipTemplate}">
+									<telerik:LineSeries.PointTemplate>
+										<DataTemplate>
+											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+										</DataTemplate>
+									</telerik:LineSeries.PointTemplate>
+								</telerik:LineSeries>
+								<telerik:LineSeries ItemsSource="{Binding DatasCrouchKill}"
+													CategoryBinding="Date"
+													ValueBinding="CrouchKillPercentage"
+													StrokeThickness="3"
+													Stroke="{StaticResource OrangeBrush}"
+													Visibility="{Binding IsCrouchKillChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+													TooltipTemplate="{StaticResource CrouchKillTooltipTemplate}">
 									<telerik:LineSeries.PointTemplate>
 										<DataTemplate>
 											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
@@ -230,6 +264,7 @@
 										<telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}" Title="Win %"/>
 										<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Headshot %" />
 										<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}" Title="Damage value" />
+										<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}" Title="Crouch kill %" />
 									</telerik:LegendItemCollection>
 								</telerik:RadLegend.Items>
 							</telerik:RadLegend>

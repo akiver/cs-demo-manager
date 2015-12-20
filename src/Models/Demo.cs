@@ -815,6 +815,17 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
+		public int CrouchKillSelectedAccountCount
+		{
+			get
+			{
+				PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+				if (player == null) return 0;
+				return player.CrouchKillCount;
+			}
+		}
+
+		[JsonIgnore]
 		public int EntryKillSelectedAccountCount
 		{
 			get

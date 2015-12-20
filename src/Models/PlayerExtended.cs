@@ -63,6 +63,11 @@ namespace CSGO_Demos_Manager.Models
 		private int _killCount;
 
 		/// <summary>
+		/// Number of kills that the player made while crouching
+		/// </summary>
+		private int _crouchKillCount;
+
+		/// <summary>
 		/// Number of teamkill that the player made during the match
 		/// </summary>
 		private int _teamKillCount;
@@ -283,6 +288,13 @@ namespace CSGO_Demos_Manager.Models
 				RaisePropertyChanged(() => HeadshotAsString);
 				Set(() => KillsCount, ref _killCount, value);
 			}
+		}
+
+		[JsonProperty("crouch_kill_count")]
+		public int CrouchKillCount
+		{
+			get { return _crouchKillCount; }
+			set { Set(() => CrouchKillCount, ref _crouchKillCount, value); }
 		}
 
 		[JsonProperty("score")]
@@ -896,6 +908,7 @@ namespace CSGO_Demos_Manager.Models
 			StartMoneyRounds.Clear();
 			EquipementValueRounds.Clear();
 			_flashDurationTemp = 0;
+			CrouchKillCount = 0;
 		}
 
 		public PlayerExtended Clone()
