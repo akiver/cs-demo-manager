@@ -640,7 +640,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public int BombExplodedSelectedPlayerCount => BombPlanted != null && BombExploded.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
+		public int BombExplodedSelectedPlayerCount => BombExploded != null && BombExploded.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
 
 		[JsonIgnore]
 		public int BombPlantedSelectedPlayerCount => BombPlanted != null && BombPlanted.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
