@@ -185,6 +185,17 @@
 		</Style.Triggers>
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="CrouchKillCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding CrouchKillCount}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="True" d:DataContext="{d:DesignInstance local:Demo}">
+				<Setter Property="Text" Value="{Binding CrouchKillSelectedAccountCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
 	<Style TargetType="TextBlock" x:Key="BombPlantedCountDataGridTextColumnStyle">
 		<Style.Triggers >
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.ShowOnlyAccountStats}" Value="False" d:DataContext="{d:DesignInstance local:Demo}">
@@ -403,6 +414,17 @@
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
 				<Setter Property="Text" Value="{Binding JumpKillCount}" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="CrouchKillRoundCountDataGridTextColumnStyle">
+		<Style.Triggers >
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="False" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding CrouchKillSelectedPlayerCount}" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllPlayers}" Value="True" d:DataContext="{d:DesignInstance local:Round}">
+				<Setter Property="Text" Value="{Binding CrouchKillCount}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>

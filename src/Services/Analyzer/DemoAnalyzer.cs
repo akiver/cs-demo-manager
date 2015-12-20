@@ -320,7 +320,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KillerVelocityX = e.Killer?.Velocity.X ?? 0,
 				KillerVelocityY = e.Killer?.Velocity.Y ?? 0,
 				KillerVelocityZ = e.Killer?.Velocity.Z ?? 0,
-				RoundNumber = CurrentRound.Number
+				RoundNumber = CurrentRound.Number,
+				IsKillerCrouching = e.Killer?.IsDucking ?? false
 			};
 
 			killed.IsAlive = false;

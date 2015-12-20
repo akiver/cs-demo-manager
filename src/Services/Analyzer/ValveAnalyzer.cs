@@ -301,7 +301,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KilledSteamId = e.Victim.SteamID,
 				KilledName = e.Victim.Name,
 				KilledSide = e.Victim.Team,
-				RoundNumber = CurrentRound.Number
+				RoundNumber = CurrentRound.Number,
+				IsKillerCrouching = e.Killer?.IsDucking ?? false
 			};
 
 			bool killerIsBot = false;

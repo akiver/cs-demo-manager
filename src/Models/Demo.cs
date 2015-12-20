@@ -750,6 +750,10 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int JumpKillCount => Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
 
+
+		[JsonIgnore]
+		public int CrouchKillCount => Players.Sum(p => p.CrouchKillCount);
+
 		#endregion
 
 		#region Selected account data accessors

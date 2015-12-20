@@ -124,6 +124,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showJumpKillColumn = Settings.Default.ShowJumpKillCoulmn;
 
+		private bool _showCrouchKillColumn = Settings.Default.ShowCrouchKillsColumn;
+
 		private bool _showTkColumn = Settings.Default.ShowTkColumn;
 
 		private bool _showEkColumn = Settings.Default.ShowEkColumn;
@@ -602,6 +604,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowJumpKillCoulmn = value;
 				Settings.Default.Save();
 				Set(() => ShowJumpKillColumn, ref _showJumpKillColumn, value);
+			}
+		}
+
+		public bool ShowCrouchKillColumn
+		{
+			get { return _showCrouchKillColumn; }
+			set
+			{
+				Settings.Default.ShowCrouchKillsColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowCrouchKillColumn, ref _showCrouchKillColumn, value);
 			}
 		}
 

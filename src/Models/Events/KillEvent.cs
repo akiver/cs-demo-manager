@@ -47,6 +47,9 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("round_number")]
 		public int RoundNumber { get; set; }
 
+		[JsonProperty("killer_crouching")]
+		public bool IsKillerCrouching { get; set; }
+
 		[JsonIgnore]
 		public override string Message => KillerName + " killed " + KilledName + " with " + Weapon.Name;
 

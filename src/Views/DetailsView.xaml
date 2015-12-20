@@ -766,6 +766,8 @@
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource JumpKillsHeader}" x:Name="JumpKillCountRoundColumn" Width="Auto" Header="JK" ElementStyle="{StaticResource JumpKillRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowJumpKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource CrouchKillsHeader}" x:Name="CrouchKillCountRoundColumn" Width="Auto" Header="CK" ElementStyle="{StaticResource CrouchKillRoundCountDataGridTextColumnStyle}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowCrouchKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerPlayerHeader}" x:Name="AverageDamageCountRoundColumn" Width="Auto" Header="ADP" ElementStyle="{StaticResource AverageDamageRoundCountDataGridTextColumnStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthCountRoundColumn" Width="Auto" Header="TDH" ElementStyle="{StaticResource TotalDamageHealthRoundCountDataGridTextColumnStyle}"

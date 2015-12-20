@@ -244,6 +244,9 @@
 											<CheckBox Content="Jump kills"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowJumpKillColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="Crouch kills"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowCrouchKillColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 										</StackPanel>
 										<StackPanel Orientation="Horizontal">
 											<CheckBox Content="Clutch 1v1"

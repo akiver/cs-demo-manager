@@ -539,6 +539,9 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int JumpKillCount => Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
 
+		[JsonIgnore]
+		public int CrouchKillCount => Kills.Count(killEvent => killEvent.IsKillerCrouching);
+
 		/// <summary>
 		/// Used for overview
 		/// </summary>
@@ -671,6 +674,9 @@ namespace CSGO_Demos_Manager.Models
 		public int TotalDamageArmorSelectedPlayerCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
 		&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
 			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+
+		[JsonIgnore]
+		public int CrouchKillSelectedPlayerCount => Kills.Count(e => e.KillerSteamId == Settings.Default.SelectedPlayerSteamId && e.IsKillerCrouching);
 
 		#endregion
 
