@@ -390,9 +390,7 @@
     <Compile Include="Services\Interfaces\ISteamService.cs" />
     <Compile Include="Services\Map\MapService.cs" />
     <Compile Include="Services\Map\Train.cs" />
-    <Compile Include="Services\Serialization\DemoBackupConverter.cs" />
     <Compile Include="Services\Serialization\DemoListBackupConverter.cs" />
-    <Compile Include="Services\Serialization\JsonCreationConverter.cs" />
     <Compile Include="Services\SoundService.cs" />
     <Compile Include="Services\SteamService.cs" />
     <Compile Include="Services\Design\SteamServiceDesign.cs" />

@@ -12,7 +12,7 @@ namespace CSGO_Demos_Manager.Services.Serialization
 	/// </summary>
 	public class DemoListBackupConverter: JsonConverter
 	{
-		private readonly Regex _oldDemoIdPattern = new Regex("^(?<mapName>.*?)(?<identifier>([0-9]*))$");
+		private readonly Regex _oldDemoIdPattern = new Regex("^(?<mapName>.*?_([^_0-9]+))(?<identifier>([0-9]*))$");
 
 
 		public override bool CanConvert(Type objectType)

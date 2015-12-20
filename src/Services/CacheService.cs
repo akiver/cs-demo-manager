@@ -398,8 +398,14 @@ namespace CSGO_Demos_Manager.Services
 					if (match.Success)
 					{
 						string json = File.ReadAllText(file);
-						Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, new DemoBackupConverter()));
-						if (demo != null) demos.Add(demo);
+						dynamic demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject(json));
+						Demo newDemo = new Demo
+						{
+							Id = demo.id,
+							Status = demo.status,
+							Comment = demo.comment
+						};
+						demos.Add(newDemo);
 					}
 				}
 			}
