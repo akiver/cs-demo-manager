@@ -182,6 +182,7 @@
     <Compile Include="Models\Charts\GenericDoubleChart.cs" />
     <Compile Include="Models\Charts\HeadshotDateChart.cs" />
     <Compile Include="Models\Charts\KillDateChart.cs" />
+    <Compile Include="Models\Charts\KillVelocityChart.cs" />
     <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
     <Compile Include="Models\Events\PlayerBlindedEvent.cs" />

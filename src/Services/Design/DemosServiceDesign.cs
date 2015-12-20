@@ -751,6 +751,96 @@ namespace CSGO_Demos_Manager.Services.Design
 						Date = DateTime.Today.AddMonths(4),
 						HeadshotPercentage = 49.8
 					},
+				},
+				KillVelocityPistol = new List<KillVelocityChart>
+				{
+					new KillVelocityChart
+					{
+						Date = DateTime.Today,
+						VelocityAverage = 100
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(3),
+						VelocityAverage = 70
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(7),
+						VelocityAverage = 80
+					}
+				},
+				KillVelocitySniper = new List<KillVelocityChart>
+				{
+					new KillVelocityChart
+					{
+						Date = DateTime.Today,
+						VelocityAverage = 12
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(3),
+						VelocityAverage = 8
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(7),
+						VelocityAverage = 5
+					}
+				},
+				KillVelocityHeavy = new List<KillVelocityChart>
+				{
+					new KillVelocityChart
+					{
+						Date = DateTime.Today,
+						VelocityAverage = 74
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(3),
+						VelocityAverage = 66
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(7),
+						VelocityAverage = 80
+					}
+				},
+				KillVelocitySmg = new List<KillVelocityChart>
+				{
+					new KillVelocityChart
+					{
+						Date = DateTime.Today,
+						VelocityAverage = 120
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(3),
+						VelocityAverage = 110
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(7),
+						VelocityAverage = 100
+					}
+				},
+				KillVelocityRifle = new List<KillVelocityChart>
+				{
+					new KillVelocityChart
+					{
+						Date = DateTime.Today,
+						VelocityAverage = 30
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(3),
+						VelocityAverage = 40
+					},
+					new KillVelocityChart
+					{
+						Date = DateTime.Today.AddDays(7),
+						VelocityAverage = 20
+					}
 				}
 			});
 		}

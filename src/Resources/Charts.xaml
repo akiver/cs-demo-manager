@@ -263,4 +263,21 @@
 		</Grid>
 	</DataTemplate>
 
+	<DataTemplate x:Key="VelocityTooltipTemplate">
+		<Grid Background="{StaticResource LightWhiteBrush}">
+			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
+							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
+					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.VelocityAverage, StringFormat='{}Velocity average: {0}'}" 
+							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+				</Grid>
+			</Border>
+		</Grid>
+	</DataTemplate>
+
 </ResourceDictionary>

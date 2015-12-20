@@ -728,8 +728,6 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		
-
 		[JsonIgnore]
 		public decimal RatioEntryKill
 		{

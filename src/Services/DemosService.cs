@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using CSGO_Demos_Manager.Models.Charts;
+using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Properties;
@@ -733,88 +734,91 @@ namespace CSGO_Demos_Manager.Services
 				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
 				if (demosPlayerList.Any())
 				{
+					double maximumVelocity = 0;
 					demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
-					// init the first date
-					int currentMonth = demosPlayerList[0].Date.Month;
-					DateTime initDate = new DateTime(demosPlayerList[0].Date.Year, demosPlayerList[0].Date.Month, 1);
-					stats.Win = new List<WinDateChart>
-					{
-						new WinDateChart
-						{
-							Date = initDate,
-							WinPercentage = 0
-						}
-					};
-					stats.HeadshotRatio = new List<HeadshotDateChart>
-					{
-						new HeadshotDateChart
-						{
-							Date = initDate,
-							HeadshotPercentage = 0
-						}
-					};
-					stats.Damage = new List<DamageDateChart>
-					{
-						new DamageDateChart
-						{
-							Date = initDate,
-							DamageCount = 0
-						}
-					};
-					stats.Kill = new List<KillDateChart>
-					{
-						new KillDateChart
-						{
-							Date = initDate,
-							KillAverage = 0,
-							DeathAverage = 0
-						}
-					};
-
+					DateTime currentDate = new DateTime(demosPlayerList[0].Date.Year, demosPlayerList[0].Date.Month, demosPlayerList[0].Date.Day);
 					int matchCount = 0;
 					int winCount = 0;
 					int headshotCount = 0;
 					int killCount = 0;
 					int deathCount = 0;
 					int damageCount = 0;
+					int rifleKillCount = 0;
+					int heavyKillCount = 0;
+					int sniperKillCount = 0;
+					int pistolKillCount = 0;
+					int smgKillCount = 0;
+					Dictionary<WeaponType, double> velocityStats = new Dictionary<WeaponType, double>();
 					foreach (Demo demo in demosPlayerList)
 					{
 						matchCount++;
-						if (!Equals(currentMonth, demo.Date.Month))
+						DateTime demoDate = new DateTime(demo.Date.Year, demo.Date.Month, demo.Date.Day);
+						if (demo.Equals(demosPlayerList.First()) || demo.Equals(demosPlayerList.Last())
+							|| demoDate >= currentDate.AddDays(7))
 						{
+							stats.Win.Add(new WinDateChart
+							{
+								Date = demoDate,
+								WinPercentage = 0
+							});
+							stats.HeadshotRatio.Add(new HeadshotDateChart
+							{
+								Date = demoDate,
+								HeadshotPercentage = 0
+							});
+							stats.Damage.Add(new DamageDateChart
+							{
+								Date = demoDate,
+								DamageCount = 0
+							});
+							stats.Kill.Add(new KillDateChart
+							{
+								Date = demoDate,
+								KillAverage = 0,
+								DeathAverage = 0
+							});
+							stats.KillVelocityRifle.Add(new KillVelocityChart
+							{
+								Date = demoDate,
+								VelocityAverage = 0
+							});
+							stats.KillVelocityPistol.Add(new KillVelocityChart
+							{
+								Date = demoDate,
+								VelocityAverage = 0
+							});
+							stats.KillVelocitySmg.Add(new KillVelocityChart
+							{
+								Date = demoDate,
+								VelocityAverage = 0
+							});
+							stats.KillVelocitySniper.Add(new KillVelocityChart
+							{
+								Date = demoDate,
+								VelocityAverage = 0
+							});
+							stats.KillVelocityHeavy.Add(new KillVelocityChart
+							{
+								Date = demoDate,
+								VelocityAverage = 0
+							});
+
+							currentDate = demoDate;
 							matchCount = 1;
 							winCount = 0;
 							headshotCount = 0;
 							killCount = 0;
 							deathCount = 0;
 							damageCount = 0;
-
-							DateTime newDate = new DateTime(demo.Date.Year, demo.Date.Month, 1);
-							// It's a new month, generate new stats for it
-							stats.Win.Add(new WinDateChart
-							{
-								Date = newDate,
-								WinPercentage = 0
-							});
-							stats.HeadshotRatio.Add(new HeadshotDateChart
-							{
-								Date = newDate,
-								HeadshotPercentage = 0
-							});
-							stats.Damage.Add(new DamageDateChart
-							{
-								Date = newDate,
-								DamageCount = 0
-							});
-							stats.Kill.Add(new KillDateChart
-							{
-								Date = newDate,
-								KillAverage = 0,
-								DeathAverage = 0
-							});
+							rifleKillCount = 0;
+							heavyKillCount = 0;
+							sniperKillCount = 0;
+							pistolKillCount = 0;
+							smgKillCount = 0;
+							velocityStats.Clear();
 						}
 
-						if (demo.MatchVerdictSelectedAccountCount == 1 || demo.MatchVerdictSelectedAccountCount == 2) winCount += demo.MatchVerdictSelectedAccountCount;
+						if (demo.MatchVerdictSelectedAccountCount == 1 || demo.MatchVerdictSelectedAccountCount == 2) winCount++;
 						if (winCount > 0) stats.Win.Last().WinPercentage = Math.Round((winCount / (double)matchCount * 100), 2);
 						headshotCount += demo.HeadshotSelectedAccountCount;
 						killCount += demo.TotalKillSelectedAccountCount;
@@ -822,11 +826,59 @@ namespace CSGO_Demos_Manager.Services
 						damageCount += demo.TotalDamageHealthSelectedAccountCount + demo.TotalDamageArmorSelectedAccountCount;
 
 						stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
-						stats.Damage.Last().DamageCount = (double)damageCount/matchCount;
-						stats.Kill.Last().KillAverage = Math.Round((double)killCount/matchCount, 1);
+						stats.Damage.Last().DamageCount = Math.Round((double)damageCount/ matchCount, 2);
+						stats.Kill.Last().KillAverage = Math.Round((double)killCount/ matchCount, 1);
 						stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
-						currentMonth = demo.Date.Month;
+						
+						foreach (KillEvent e in demo.Kills)
+						{
+							if (e.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID)
+							{
+								if(!velocityStats.ContainsKey(e.Weapon.Type)) velocityStats.Add(e.Weapon.Type, 0);
+								switch (e.Weapon.Type)
+								{
+									case WeaponType.Rifle:
+										rifleKillCount++;
+										break;
+									case WeaponType.Heavy:
+										heavyKillCount++;
+										break;
+									case WeaponType.Pistol:
+										pistolKillCount++;
+										break;
+									case  WeaponType.SMG:
+										smgKillCount++;
+										break;
+									case WeaponType.Sniper:
+										sniperKillCount++;
+										break;
+								}
+								velocityStats[e.Weapon.Type] += Math.Abs(e.KillerVelocityY + e.KillerVelocityX + e.KillerVelocityZ);
+							}
+						}
+
+						if (velocityStats.ContainsKey(WeaponType.Rifle))
+							stats.KillVelocityRifle.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Rifle] / rifleKillCount, 1);
+						if (velocityStats.ContainsKey(WeaponType.Pistol))
+							stats.KillVelocityPistol.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Pistol] / pistolKillCount, 1);
+						if (velocityStats.ContainsKey(WeaponType.Sniper))
+							stats.KillVelocitySniper.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Sniper] / sniperKillCount, 1);
+						if (velocityStats.ContainsKey(WeaponType.SMG))
+							stats.KillVelocitySmg.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.SMG] / smgKillCount, 1);
+						if (velocityStats.ContainsKey(WeaponType.Heavy))
+							stats.KillVelocityHeavy.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Heavy] / heavyKillCount, 1);
 					}
+					maximumVelocity = stats.KillVelocityPistol.Select(k
+						=> k.VelocityAverage).Concat(new[] {maximumVelocity}).Max();
+					maximumVelocity = stats.KillVelocityRifle.Select(k
+						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+					maximumVelocity = stats.KillVelocityHeavy.Select(k
+						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+					maximumVelocity = stats.KillVelocitySmg.Select(k
+						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+					maximumVelocity = stats.KillVelocitySniper.Select(k
+						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+					stats.MaximumVelocity = maximumVelocity;
 				}
 			}
 

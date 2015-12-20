@@ -28,6 +28,18 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private bool _isHeadshotChartEnabled = true;
 
+		private bool _isVelocityRifleChartEnabled = true;
+
+		private bool _isVelocityPistolChartEnabled = true;
+
+		private bool _isVelocitySniperChartEnabled = true;
+
+		private bool _isVelocityHeavyChartEnabled = true;
+
+		private bool _isVelocitySmgChartEnabled = true;
+
+		private double _maximumVelocity = 250;
+
 		private List<HeadshotDateChart> _datasHeadshot;
 
 		private List<DamageDateChart> _datasDamage;
@@ -35,6 +47,16 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private List<WinDateChart> _datasWin;
 
 		private List<KillDateChart> _datasKill;
+
+		private List<KillVelocityChart> _velocityRifle;
+
+		private List<KillVelocityChart> _velocityPistol;
+
+		private List<KillVelocityChart> _velocitySniper;
+
+		private List<KillVelocityChart> _velocityHeavy;
+
+		private List<KillVelocityChart> _velocitySmg;
 
 		private RelayCommand _windowLoadedCommand;
 
@@ -53,6 +75,16 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private RelayCommand<bool> _toggleDamageChartCommand;
 
 		private RelayCommand<bool> _toggleHeadshotChartCommand;
+
+		private RelayCommand<bool> _toggleVelocityRifleChartCommand;
+
+		private RelayCommand<bool> _toggleVelocitySniperChartCommand;
+
+		private RelayCommand<bool> _toggleVelocityPistolChartCommand;
+
+		private RelayCommand<bool> _toggleVelocityHeavyChartCommand;
+
+		private RelayCommand<bool> _toggleVelocitySmgChartCommand;
 
 		#endregion
 
@@ -88,6 +120,42 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => IsHeadshotChartEnabled, ref _isHeadshotChartEnabled, value); }
 		}
 
+		public bool IsVelocityRifleChartEnabled
+		{
+			get { return _isVelocityRifleChartEnabled; }
+			set { Set(() => IsVelocityRifleChartEnabled, ref _isVelocityRifleChartEnabled, value); }
+		}
+
+		public bool IsVelocityPistolChartEnabled
+		{
+			get { return _isVelocityPistolChartEnabled; }
+			set { Set(() => IsVelocityPistolChartEnabled, ref _isVelocityPistolChartEnabled, value); }
+		}
+
+		public bool IsVelocitySniperChartEnabled
+		{
+			get { return _isVelocitySniperChartEnabled; }
+			set { Set(() => IsVelocitySniperChartEnabled, ref _isVelocitySniperChartEnabled, value); }
+		}
+
+		public bool IsVelocityHeavyChartEnabled
+		{
+			get { return _isVelocityHeavyChartEnabled; }
+			set { Set(() => IsVelocityHeavyChartEnabled, ref _isVelocityHeavyChartEnabled, value); }
+		}
+
+		public bool IsVelocitySmgChartEnabled
+		{
+			get { return _isVelocitySmgChartEnabled; }
+			set { Set(() => IsVelocitySmgChartEnabled, ref _isVelocitySmgChartEnabled, value); }
+		}
+
+		public double MaximumVelocity
+		{
+			get { return _maximumVelocity; }
+			set { Set(() => MaximumVelocity, ref _maximumVelocity, value); }
+		}
+
 		public List<HeadshotDateChart> DatasHeadshot
 		{
 			get { return _datasHeadshot; }
@@ -110,6 +178,36 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		{
 			get { return _datasKill; }
 			set { Set(() => DatasKill, ref _datasKill, value); }
+		}
+
+		public List<KillVelocityChart> VelocityRifle
+		{
+			get { return _velocityRifle; }
+			set { Set(() => VelocityRifle, ref _velocityRifle, value); }
+		}
+
+		public List<KillVelocityChart> VelocitySniper
+		{
+			get { return _velocitySniper; }
+			set { Set(() => VelocitySniper, ref _velocitySniper, value); }
+		}
+
+		public List<KillVelocityChart> VelocityHeavy
+		{
+			get { return _velocityHeavy; }
+			set { Set(() => VelocityHeavy, ref _velocityHeavy, value); }
+		}
+
+		public List<KillVelocityChart> VelocityPistol
+		{
+			get { return _velocityPistol; }
+			set { Set(() => VelocityPistol, ref _velocityPistol, value); }
+		}
+
+		public List<KillVelocityChart> VelocitySmg
+		{
+			get { return _velocitySmg; }
+			set { Set(() => VelocitySmg, ref _velocitySmg, value); }
 		}
 
 		#endregion
@@ -283,6 +381,91 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			}
 		}
 
+		/// <summary>
+		/// Command when the checkbox to toggle kill velocity rifle chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleVelocityRifleChartCommand
+		{
+			get
+			{
+				return _toggleVelocityRifleChartCommand
+					?? (_toggleVelocityRifleChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsVelocityRifleChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle kill velocity sniper chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleVelocitySniperChartCommand
+		{
+			get
+			{
+				return _toggleVelocitySniperChartCommand
+					?? (_toggleVelocitySniperChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsVelocitySniperChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle kill velocity heavy chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleVelocityHeavyChartCommand
+		{
+			get
+			{
+				return _toggleVelocityHeavyChartCommand
+					?? (_toggleVelocityHeavyChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsVelocityHeavyChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle kill velocity pistol chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleVelocityPistolChartCommand
+		{
+			get
+			{
+				return _toggleVelocityPistolChartCommand
+					?? (_toggleVelocityPistolChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsVelocityPistolChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command when the checkbox to toggle kill velocity SMG chart is clicked
+		/// </summary>
+		public RelayCommand<bool> ToggleVelocitySmgChartCommand
+		{
+			get
+			{
+				return _toggleVelocitySmgChartCommand
+					?? (_toggleVelocitySmgChartCommand = new RelayCommand<bool>(
+						isChecked =>
+						{
+							IsVelocitySmgChartEnabled = isChecked;
+						},
+						isChecked => !IsBusy));
+			}
+		}
+
 		#endregion
 
 		private async Task LoadDatas()
@@ -292,6 +475,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			DatasDamage = datas.Damage;
 			DatasHeadshot = datas.HeadshotRatio;
 			DatasKill = datas.Kill;
+			VelocityRifle = datas.KillVelocityRifle;
+			VelocityPistol = datas.KillVelocityPistol;
+			VelocitySmg = datas.KillVelocitySmg;
+			VelocitySniper = datas.KillVelocitySniper;
+			VelocityHeavy = datas.KillVelocityHeavy;
+			MaximumVelocity = datas.MaximumVelocity + 10;
 			CommandManager.InvalidateRequerySuggested();
 		}
 
@@ -311,10 +500,16 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		public override void Cleanup()
 		{
 			base.Cleanup();
-			DatasDamage = null;
-			DatasKill = null;
-			DatasWin = null;
-			DatasHeadshot = null;
+			DatasDamage.Clear();
+			DatasKill.Clear();
+			DatasWin.Clear();
+			DatasHeadshot.Clear();
+			VelocityRifle.Clear();
+			VelocityHeavy.Clear();
+			VelocitySniper.Clear();
+			VelocitySmg.Clear();
+			VelocityPistol.Clear();
+			MaximumVelocity = 250;
 		}
 	}
 }
