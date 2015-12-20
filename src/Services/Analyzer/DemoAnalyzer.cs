@@ -326,7 +326,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			killed.IsAlive = false;
 			killed.DeathCount++;
 			if (e.Killer != null) killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
-			if (killer != null && e.Killer.IsDucking) killer.CrouchKillCount++;
+			if (killer != null)
+			{
+				if (e.Killer.IsDucking) killer.CrouchKillCount++;
+				if (e.Killer.Velocity.Z > 0) killer.JumpKillCount++;
+			}
 
 			if (e.Assister != null)
 			{

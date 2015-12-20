@@ -8,7 +8,6 @@ using System.Linq;
 using System;
 using System.Collections.Specialized;
 using System.Globalization;
-using System.Threading.Tasks;
 using CSGO_Demos_Manager.Properties;
 using DemoInfo;
 
@@ -602,6 +601,9 @@ namespace CSGO_Demos_Manager.Models
 		public int TotalKillCount => Kills.Count;
 
 		[JsonIgnore]
+		public int AssistCount => Players.Sum(p => p.AssistCount);
+
+		[JsonIgnore]
 		public int BombDefusedCount => BombDefused.Count;
 
 		[JsonIgnore]
@@ -609,6 +611,24 @@ namespace CSGO_Demos_Manager.Models
 
 		[JsonIgnore]
 		public int BombPlantedCount => BombPlanted.Count;
+
+		[JsonIgnore]
+		public int FlashbangThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
+
+		[JsonIgnore]
+		public int SmokeThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
+
+		[JsonIgnore]
+		public int HeGrenadeThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.HE);
+
+		[JsonIgnore]
+		public int DecoyThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
+
+		[JsonIgnore]
+		public int MolotovThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
+
+		[JsonIgnore]
+		public int IncendiaryThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
 
 		[JsonIgnore]
 		public int ClutchCount

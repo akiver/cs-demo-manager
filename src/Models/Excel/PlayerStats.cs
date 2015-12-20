@@ -34,6 +34,10 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public int TeamKillCount { get; set; }
 
+		public int JumpKillCount { get; set; }
+
+		public int CrouchKillCount { get; set; }
+
 		public int BombPlantedCount { get; set; }
 
 		public int BombDefusedCount { get; set; }

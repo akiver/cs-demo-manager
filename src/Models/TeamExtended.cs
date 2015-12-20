@@ -206,6 +206,11 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int OneKillCount => Players.Sum(player => player.OnekillCount);
 
+		[JsonIgnore]
+		public int JumpKillCount => Players.Sum(player => player.JumpKillCount);
+
+		[JsonIgnore]
+		public int CrouchKillCount => Players.Sum(player => player.CrouchKillCount);
 
 		public override bool Equals(object obj)
 		{

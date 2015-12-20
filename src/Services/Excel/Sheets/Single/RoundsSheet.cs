@@ -13,8 +13,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 			Headers = new Dictionary<string, CellType>(){
 				{ "Number", CellType.Numeric },
 				{ "Tick", CellType.Numeric},
+				{ "Duration (s)", CellType.Numeric},
 				{ "Winner Clan Name", CellType.String },
 				{ "Winner", CellType.String },
+				{ "End reason", CellType.String },
 				{ "Type", CellType.String },
 				{ "Side", CellType.String },
 				{ "Team", CellType.String },
@@ -24,6 +26,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "3K", CellType.Numeric },
 				{ "4K", CellType.Numeric },
 				{ "5K", CellType.Numeric },
+				{ "Jump kills", CellType.Numeric },
 				{ "ADP", CellType.Numeric },
 				{ "TDH", CellType.Numeric },
 				{ "TDA", CellType.Numeric },
@@ -33,7 +36,13 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "Start money team 1", CellType.Numeric },
 				{ "Start money team 2", CellType.Numeric },
 				{ "Equipement value team 1", CellType.Numeric },
-				{ "Equipement value team 2", CellType.Numeric }
+				{ "Equipement value team 2", CellType.Numeric },
+				{ "Flashbang", CellType.Numeric },
+				{ "Smoke", CellType.Numeric },
+				{ "HE", CellType.Numeric },
+				{ "Decoy", CellType.Numeric },
+				{ "Molotov", CellType.Numeric },
+				{ "Incendiary", CellType.Numeric }
 			};
 			Demo = demo;
 			Sheet = workbook.CreateSheet("Rounds");
@@ -51,17 +60,20 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.Duration);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSideAsString);
+					SetCellValue(row, columnNumber++, CellType.String, round.EndReasonAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.Kills.Count());
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.Kills.Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.TwoKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.ThreeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.FourKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.FiveKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.JumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.AverageDamageByPlayerCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.TotalDamageHealthCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.TotalDamageArmorCount);
@@ -71,7 +83,13 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeam1);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeam2);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeam1);
-					SetCellValue(row, columnNumber, CellType.Numeric, round.EquipementValueTeam2);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeam2);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.FlashbangThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.SmokeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.HeGrenadeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.DecoyThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, round.MolotovThrowedCount);
+					SetCellValue(row, columnNumber, CellType.Numeric, round.IncendiaryThrowedCount);
 
 					rowNumber++;
 				}

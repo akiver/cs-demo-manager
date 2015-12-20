@@ -27,7 +27,9 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "Score 1st half team 2", CellType.Numeric },
 				{ "Score 2nd half team 1", CellType.Numeric },
 				{ "Score 2nd half team 2", CellType.Numeric },
+				{ "Winner", CellType.String },
 				{ "Kills", CellType.Numeric },
+				{ "Assists", CellType.Numeric },
 				{ "5K", CellType.Numeric },
 				{ "4K", CellType.Numeric },
 				{ "3K", CellType.Numeric },
@@ -40,6 +42,15 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "Bomb Defused", CellType.Numeric },
 				{ "Bomb Exploded", CellType.Numeric },
 				{ "Bomb Planted", CellType.Numeric },
+				{ "Flashbang", CellType.Numeric },
+				{ "Smoke", CellType.Numeric },
+				{ "HE", CellType.Numeric },
+				{ "Decoy", CellType.Numeric },
+				{ "Molotov", CellType.Numeric },
+				{ "Incendiary", CellType.Numeric },
+				{ "Shots", CellType.Numeric },
+				{ "Hits", CellType.Numeric },
+				{ "Round", CellType.Numeric },
 				{ "Comment", CellType.String },
 				{ "Cheater", CellType.Boolean }
 			};
@@ -73,7 +84,9 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeam2);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeam1);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeam2);
+					SetCellValue(row, columnNumber++, CellType.String, demo.Winner.Name);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.Kills.Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.AssistCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.FiveKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.FourKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ThreeKillCount);
@@ -86,6 +99,15 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombDefusedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombExplodedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombPlantedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.FlashbangThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.SmokeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.HeGrenadeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.DecoyThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.MolotovThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.IncendiaryThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.WeaponFired.Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.PlayersHurted.Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, demo.Rounds.Count);
 					SetCellValue(row, columnNumber++, CellType.String, demo.Comment);
 					SetCellValue(row, columnNumber, CellType.Boolean, demo.HasCheater);
 				}

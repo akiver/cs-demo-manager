@@ -29,6 +29,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "2K", CellType.Numeric },
 				{ "1K", CellType.Numeric },
 				{ "Team kill", CellType.Numeric },
+				{ "Jump kill", CellType.Numeric },
+				{ "Crouch kill", CellType.Numeric },
 				{ "Bomb planted", CellType.Numeric },
 				{ "Bomb defused", CellType.Numeric },
 				{ "Bomb exploded", CellType.Numeric },
@@ -92,6 +94,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 						data[player].OneKillCount += player.OnekillCount;
 						data[player].HeadshotCount += player.HeadshotCount;
 						data[player].TeamKillCount += player.TeamKillCount;
+						data[player].JumpKillCount += player.JumpKillCount;
+						data[player].CrouchKillCount += player.CrouchKillCount;
 						data[player].ClutchCount += player.ClutchCount;
 						data[player].ClutchLostCount += player.ClutchLostCount;
 						data[player].Clutch1V1Count += player.Clutch1V1Count;
@@ -147,6 +151,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TwoKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OneKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TeamKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.JumpKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.CrouchKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.BombPlantedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.BombDefusedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.BombExplodedCount);

@@ -68,6 +68,11 @@ namespace CSGO_Demos_Manager.Models
 		private int _crouchKillCount;
 
 		/// <summary>
+		/// Number of kills that the player made when is wasn't on the floor
+		/// </summary>
+		private int _jumpKillCount;
+
+		/// <summary>
 		/// Number of teamkill that the player made during the match
 		/// </summary>
 		private int _teamKillCount;
@@ -295,6 +300,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _crouchKillCount; }
 			set { Set(() => CrouchKillCount, ref _crouchKillCount, value); }
+		}
+
+		[JsonProperty("jump_kill_count")]
+		public int JumpKillCount
+		{
+			get { return _jumpKillCount; }
+			set { Set(() => JumpKillCount, ref _jumpKillCount, value); }
 		}
 
 		[JsonProperty("score")]

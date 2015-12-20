@@ -39,11 +39,19 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "3K", CellType.Numeric },
 				{ "2K", CellType.Numeric },
 				{ "1K", CellType.Numeric },
+				{ "Crouch kill", CellType.Numeric },
+				{ "Jump kill", CellType.Numeric },
 				{ "1v1", CellType.Numeric },
 				{ "1v2", CellType.Numeric },
 				{ "1v3", CellType.Numeric },
 				{ "1v4", CellType.Numeric },
 				{ "1v5", CellType.Numeric },
+				{ "Flashbang", CellType.Numeric },
+				{ "Smoke", CellType.Numeric },
+				{ "HE", CellType.Numeric },
+				{ "Decoy", CellType.Numeric },
+				{ "Molotov", CellType.Numeric },
+				{ "Incendiary", CellType.Numeric },
 				{ "VAC", CellType.Boolean },
 				{ "OW", CellType.Boolean },
 			};
@@ -89,11 +97,19 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.ThreekillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.TwokillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.OnekillCount);
+					SetCellValue(row, columnNumber++, CellType.Boolean, player.CrouchKillCount);
+					SetCellValue(row, columnNumber++, CellType.Boolean, player.JumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V1Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V2Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.FlashbangThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.SmokeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeGrenadeThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.DecoyThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.MolotovThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.IncendiaryThrowedCount);
 					SetCellValue(row, columnNumber++, CellType.Boolean, player.IsVacBanned);
 					SetCellValue(row, columnNumber, CellType.Boolean, player.IsOverwatchBanned);
 

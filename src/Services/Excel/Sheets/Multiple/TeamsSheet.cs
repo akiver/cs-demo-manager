@@ -43,13 +43,14 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{"3K", CellType.Numeric},
 				{"2K", CellType.Numeric},
 				{"1K", CellType.Numeric},
+				{"Jump kill", CellType.Numeric},
+				{"Crouch kill", CellType.Numeric},
 				{"Flash", CellType.Numeric},
 				{"HE", CellType.Numeric},
 				{"Smoke", CellType.Numeric},
 				{"Molotov", CellType.Numeric},
 				{"Incendiary", CellType.Numeric},
 				{"Decoy", CellType.Numeric},
-
 			};
 			Demos = demos;
 			Sheet = workbook.CreateSheet("Teams");
@@ -120,6 +121,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.ThreeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.TwoKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.OneKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.JumpKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.CrouchKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrowedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.HeGrenadeThrowedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.SmokeThrowedCount);

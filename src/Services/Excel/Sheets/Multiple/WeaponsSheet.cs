@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Excel;
+using DemoInfo;
 using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
@@ -35,22 +36,31 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{
 					foreach (WeaponFire weaponFire in demo.WeaponFired)
 					{
-						if (!data.ContainsKey(weaponFire.Weapon)) data.Add(weaponFire.Weapon, new WeaponsData());
-						data[weaponFire.Weapon].Shots++;
+						if (weaponFire.Weapon.Element != EquipmentElement.Unknown)
+						{
+							if (!data.ContainsKey(weaponFire.Weapon)) data.Add(weaponFire.Weapon, new WeaponsData());
+							data[weaponFire.Weapon].Shots++;
+						}
 					}
 
 					foreach (PlayerHurtedEvent hurtedEvent in demo.PlayersHurted)
 					{
-						if (!data.ContainsKey(hurtedEvent.Weapon)) data.Add(hurtedEvent.Weapon, new WeaponsData());
-						data[hurtedEvent.Weapon].Hits++;
-						data[hurtedEvent.Weapon].TotalDamageArmor += hurtedEvent.ArmorDamage;
-						data[hurtedEvent.Weapon].TotalDamageHealth += hurtedEvent.HealthDamage;
+						if (hurtedEvent.Weapon.Element != EquipmentElement.Unknown)
+						{
+							if (!data.ContainsKey(hurtedEvent.Weapon)) data.Add(hurtedEvent.Weapon, new WeaponsData());
+							data[hurtedEvent.Weapon].Hits++;
+							data[hurtedEvent.Weapon].TotalDamageArmor += hurtedEvent.ArmorDamage;
+							data[hurtedEvent.Weapon].TotalDamageHealth += hurtedEvent.HealthDamage;
+						}
 					}
 
 					foreach (KillEvent killEvent in demo.Kills)
 					{
-						if (!data.ContainsKey(killEvent.Weapon)) data.Add(killEvent.Weapon, new WeaponsData());
-						data[killEvent.Weapon].KillCount++;
+						if (killEvent.Weapon.Element != EquipmentElement.Unknown)
+						{
+							if (!data.ContainsKey(killEvent.Weapon)) data.Add(killEvent.Weapon, new WeaponsData());
+							data[killEvent.Weapon].KillCount++;
+						}
 					}
 				}
 
