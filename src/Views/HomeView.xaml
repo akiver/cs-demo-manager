@@ -49,6 +49,8 @@
 		<KeyBinding Command="{Binding ExportExcelCommand}"
 					CommandParameter="{Binding SelectedDemos}"
 					Gesture="CTRL+X" />
+		<KeyBinding Command="{Binding RefreshListCommand}"
+					Gesture="F5" />
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding Home.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=HomeUserControl}"/>
 	</UserControl.InputBindings>
@@ -126,7 +128,7 @@
 					<Button Grid.Column="2" Command="{Binding RefreshListCommand}"
 					Style="{StaticResource GeneralButtonStyle}"
 					Margin="5"
-					ToolTip="Refresh demos list (CTRL+R)"
+					ToolTip="Refresh demos list (CTRL+R | F5)"
 					Width="90"
 					Height="30">
 						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
