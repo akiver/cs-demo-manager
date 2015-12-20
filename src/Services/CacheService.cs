@@ -369,13 +369,16 @@ namespace CSGO_Demos_Manager.Services
 		/// Remove a specific demo from cache
 		/// </summary>
 		/// <returns></returns>
-		public Task RemoveDemo(Demo demo)
+		public Task<bool> RemoveDemo(Demo demo)
 		{
-			return Task.Run(() =>
+			bool isDeleted = false;
+			string path = _pathFolderCache + "\\" + demo.Id + ".json";
+			if (File.Exists(path))
 			{
-				string path = _pathFolderCache + "\\" + demo.Id + ".json";
-				if (File.Exists(path)) File.Delete(path);
-			});
+				File.Delete(path);
+				isDeleted = true;
+			}
+			return Task.FromResult(isDeleted);
 		}
 
 		/// <summary>

@@ -59,5 +59,7 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		Task<long> GetCacheSizeAsync();
+
+		Task<bool> RemoveDemo(Demo demo);
 	}
 }

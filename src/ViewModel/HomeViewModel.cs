@@ -93,6 +93,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<ObservableCollection<Demo>> _deleteDemosCommand;
 
+		private RelayCommand<ObservableCollection<Demo>> _removeDemosFromCacheCommand;
+
 		private RelayCommand<ObservableCollection<Demo>> _exportExcelCommand;
 
 		private RelayCommand<Demo> _watchDemoCommand;
@@ -452,6 +454,47 @@ namespace CSGO_Demos_Manager.ViewModel
 						else
 						{
 							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) deleted.", MessageDialogStyle.Affirmative);
+						}
+
+						DispatcherHelper.CheckBeginInvokeOnUI(
+						async () =>
+						{
+							await LoadDemosHeader();
+						});
+					},
+					demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command to remove demo(s) from the cache
+		/// </summary>
+		public RelayCommand<ObservableCollection<Demo>> RemoveDemosFromCacheCommand
+		{
+			get
+			{
+				return _removeDemosFromCacheCommand
+					?? (_removeDemosFromCacheCommand = new RelayCommand<ObservableCollection<Demo>>(
+					async demos =>
+					{
+						var delete = await _dialogService.ShowMessageAsync("Are you sure you want to delete this demo(s) from data cache?"
+							+ Environment.NewLine + "This will not delete this demo(s) from your HDD.", MessageDialogStyle.AffirmativeAndNegative);
+						if (delete == MessageDialogResult.Negative) return;
+
+						List<Demo> demosNotFound = new List<Demo>();
+						foreach (Demo demo in demos)
+						{
+							bool isDeleted = await _cacheService.RemoveDemo(demo);
+							if (!isDeleted) demosNotFound.Add(demo);
+						}
+
+						if (demosNotFound.Any())
+						{
+							await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
+						}
+						else
+						{
+							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) deleted from data cache.", MessageDialogStyle.Affirmative);
 						}
 
 						DispatcherHelper.CheckBeginInvokeOnUI(

@@ -165,8 +165,6 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 						}
 
-						CacheSize = await _cacheService.GetCacheSizeAsync();
-
 						// Notify the HomeViewModel that it can now load demos data
 						MainWindowLoadedMessage msg = new MainWindowLoadedMessage();
 						Messenger.Default.Send(msg);

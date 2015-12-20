@@ -149,5 +149,10 @@ namespace CSGO_Demos_Manager.Services.Design
 		{
 			return Task.FromResult((long)145214);
 		}
+
+		public Task<bool> RemoveDemo(Demo demo)
+		{
+			return Task.FromResult(true);
+		}
 	}
 }
