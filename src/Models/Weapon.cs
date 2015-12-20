@@ -240,6 +240,12 @@ namespace CSGO_Demos_Manager.Models
 			},
 			new Weapon
 			{
+				Element = EquipmentElement.Revolver,
+				Name = "R8 Revolver",
+				Type = WeaponType.Pistol
+			},
+			new Weapon
+			{
 				Element = EquipmentElement.XM1014,
 				Name = "XM1014",
 				Type = WeaponType.Heavy
