@@ -25,7 +25,7 @@ Screenshots and video are available at [http://csgo-demos-manager.com](http://cs
 * Microsoft Visual Studio 2015 (C# 6 is required)
 * [MVVM Light](https://mvvmlight.codeplex.com/)
 * [Mahapps](https://github.com/MahApps/MahApps.Metro)
-* [DemoInfo](https://github.com/EHVAG/demoinfo)
+* [DemoInfo](https://github.com/EHVAG/demoinfo) (This [branch](https://github.com/akiver/demoinfo/tree/csgodm) is used)
 * [Json.net](https://github.com/JamesNK/Newtonsoft.Json)
 * [Steam API](http://steamcommunity.com/dev) (You need a Steam API key to be able to use the "suspects" feature)
 * [NPOI](https://github.com/tonyqus/npoi)
@@ -37,8 +37,11 @@ Screenshots and video are available at [http://csgo-demos-manager.com](http://cs
 
 ### You need Telerik binaries to be able to compile the application.
 
+* Install Telerik binaries
 * Download the repository and extract it
+* Launch the solution in Visual Studio
+* Set the correct path for Telerik references if needed
 * Copy / paste your Steam API key into the file "steam_api_key.txt". If you don't do it you will have an error each time a call to the Steam API occurs.
-* The [DemoInfo](https://github.com/EHVAG/demoinfo) pre-release isn't properly signed. You have to download [snremove](http://www.nirsoft.net/dot_net_tools/strong_name_remove.html) and copy / paste it into your "bin/Debug" and "bin/Release" folders.
-* Open the solution within Visual Studio 2015
+* The [DemoInfo](https://github.com/EHVAG/demoinfo) pre-release isn't properly signed. You have to download [snremove](http://www.nirsoft.net/dot_net_tools/strong_name_remove.html) and copy / paste it into the folder "bin/Debug" and "bin/Release" of demoinfo AND CSGO Demos Manager.
+* Select the x86 platform configuration
 * Build and start
