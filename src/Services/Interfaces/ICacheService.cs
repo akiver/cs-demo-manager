@@ -53,5 +53,11 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		Task<bool> AddPlayerToWhitelist(string suspectSteamCommunityId);
 
 		Task<bool> RemovePlayerFromWhitelist(string steamId);
+
+		/// <summary>
+		/// Return the size of the cache folder
+		/// </summary>
+		/// <returns></returns>
+		Task<long> GetCacheSizeAsync();
 	}
 }

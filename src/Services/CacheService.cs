@@ -565,5 +565,10 @@ namespace CSGO_Demos_Manager.Services
 
 			return true;
 		}
+
+		public Task<long> GetCacheSizeAsync()
+		{
+			return Task.FromResult(new DirectoryInfo(_pathFolderCache).GetFiles("*.json", SearchOption.AllDirectories).Sum(file => file.Length));
+		}
 	}
 }

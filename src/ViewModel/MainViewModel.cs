@@ -49,6 +49,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private readonly ICacheService _cacheService;
 
+		private long _cacheSize;
+
 		#endregion
 
 		#region Accessors
@@ -76,6 +78,18 @@ namespace CSGO_Demos_Manager.ViewModel
 			get { return _folders; }
 			set { Set(() => Folders, ref _folders, value); }
 		}
+
+		public long CacheSize
+		{
+			get { return _cacheSize; }
+			set
+			{
+				Set(() => CacheSize, ref _cacheSize, value);
+				RaisePropertyChanged(() => CacheSizeAsString);
+			}
+		}
+
+		public string CacheSizeAsString => "Size : ~ " + Math.Round(_cacheSize / 1024f / 1024f) + "MB";
 
 		#endregion
 
@@ -150,6 +164,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								}
 							}
 						}
+
+						CacheSize = await _cacheService.GetCacheSizeAsync();
 
 						// Notify the HomeViewModel that it can now load demos data
 						MainWindowLoadedMessage msg = new MainWindowLoadedMessage();
@@ -231,9 +247,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _settingsFlyoutOpendedCommand
 					?? (_settingsFlyoutOpendedCommand = new RelayCommand(
-					() =>
+					async () =>
 					{
 						IsSettingsOpen = true;
+						CacheSize = await _cacheService.GetCacheSizeAsync();
 					},
 					() => IsSettingsOpen == false));
 			}

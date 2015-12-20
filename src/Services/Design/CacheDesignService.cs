@@ -144,5 +144,10 @@ namespace CSGO_Demos_Manager.Services.Design
 		{
 			return Task.FromResult(true);
 		}
+
+		public Task<long> GetCacheSizeAsync()
+		{
+			return Task.FromResult((long)145214);
+		}
 	}
 }

@@ -120,6 +120,9 @@
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
 										Style="{StaticResource GeneralButtonStyle}"
 										Content="Clear demos data" />
+								<TextBlock Text="{Binding CacheSizeAsString}"
+										   Style="{StaticResource LabelChartStyle}"
+										   FontSize="12" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ExportCustomDataCacheCommand}"
 										Style="{StaticResource GeneralButtonStyle}"
