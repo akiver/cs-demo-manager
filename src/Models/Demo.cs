@@ -1015,10 +1015,10 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		[JsonIgnore]
 		public int TotalDamageHealthSelectedAccountCount => (from round
-												  in Rounds
+												  in Rounds.ToList()
 												  where round.PlayersHurted.Any()
 												  from playerHurtedEvent
-												  in round.PlayersHurted
+												  in round.PlayersHurted.ToList()
 												  where playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID
 												  select playerHurtedEvent.HealthDamage).Sum();
 
@@ -1028,10 +1028,10 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int TotalDamageArmorSelectedAccountCount => (
 			from round
-			in Rounds
+			in Rounds.ToList()
 			where round.PlayersHurted.Any()
 			from playerHurtedEvent
-			in round.PlayersHurted
+			in round.PlayersHurted.ToList()
 			where playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID
 			select playerHurtedEvent.ArmorDamage).Sum();
 
@@ -1044,10 +1044,10 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				double total = (from round
-								in Rounds
+								in Rounds.ToList()
 								where round.PlayersHurted.Any()
 								from playerHurtedEvent
-								in round.PlayersHurted
+								in round.PlayersHurted.ToList()
 								where playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID
 								select playerHurtedEvent).Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
 								current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
