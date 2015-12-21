@@ -867,7 +867,7 @@ namespace CSGO_Demos_Manager.Models
 			{
 				IEnumerable<KillEvent> kills = Kills.Where(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID).ToList();
 				if (!kills.Any()) return 0;
-				return kills.Count(k => k.Weapon.Name == "Knife");
+				return kills.Count(k => k.Weapon.Element == EquipmentElement.Knife);
 			}
 		}
 
