@@ -57,12 +57,12 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "ADR", CellType.Numeric },
 				{ "TDH", CellType.Numeric },
 				{ "TDA", CellType.Numeric },
-				{ "Flashbang throwed", CellType.Numeric },
-				{ "Smoke throwed", CellType.Numeric },
-				{ "HE throwed", CellType.Numeric },
-				{ "Decoy throwed", CellType.Numeric },
-				{ "Molotov throwed", CellType.Numeric },
-				{ "Incendiary throwed", CellType.Numeric },
+				{ "Flashbang thrown", CellType.Numeric },
+				{ "Smoke thrown", CellType.Numeric },
+				{ "HE thrown", CellType.Numeric },
+				{ "Decoy thrown", CellType.Numeric },
+				{ "Molotov thrown", CellType.Numeric },
+				{ "Incendiary thrown", CellType.Numeric },
 				{ "Rank max", CellType.Numeric },
 				{ "VAC", CellType.Boolean },
 				{ "OW", CellType.Boolean }
@@ -112,12 +112,12 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 						data[player].RoundCount += player.RoundPlayedCount;
 						data[player].IsVacBanned = data[player].IsVacBanned || player.IsVacBanned;
 						data[player].IsOverwatchBanned = data[player].IsOverwatchBanned || player.IsOverwatchBanned;
-						data[player].FlashbangThrowedCount += player.FlashbangThrowedCount;
-						data[player].SmokeThrowedCount += player.SmokeThrowedCount;
-						data[player].HeGrenadeThrowedCount += player.HeGrenadeThrowedCount;
-						data[player].DecoyThrowedCount += player.DecoyThrowedCount;
-						data[player].MolotovThrowedCount += player.MolotovThrowedCount;
-						data[player].IncendiaryThrowedCount += player.IncendiaryThrowedCount;
+						data[player].FlashbangThrownCount += player.FlashbangThrownCount;
+						data[player].SmokeThrownCount += player.SmokeThrownCount;
+						data[player].HeGrenadeThrownCount += player.HeGrenadeThrownCount;
+						data[player].DecoyThrownCount += player.DecoyThrownCount;
+						data[player].MolotovThrownCount += player.MolotovThrownCount;
+						data[player].IncendiaryThrownCount += player.IncendiaryThrownCount;
 						data[player].DamageHealthCount += player.TotalDamageHealthCount;
 						data[player].DamageArmorCount += player.TotalDamageArmorCount;
 						data[player].EntryKillCount += player.EntryKills.Count;
@@ -179,12 +179,12 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AverageDamagePerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DamageHealthCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DamageArmorCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.FlashbangThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.SmokeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeGrenadeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DecoyThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MolotovThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.IncendiaryThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.FlashbangThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.SmokeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeGrenadeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DecoyThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MolotovThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.IncendiaryThrownCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.RankMax);
 					SetCellValue(row, columnNumber++, CellType.Boolean, keyValuePair.Value.IsVacBanned);
 					SetCellValue(row, columnNumber, CellType.Boolean, keyValuePair.Value.IsOverwatchBanned);

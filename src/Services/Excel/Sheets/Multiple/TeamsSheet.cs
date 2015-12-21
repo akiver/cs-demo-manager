@@ -123,12 +123,12 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.OneKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.JumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.CrouchKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.HeGrenadeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.SmokeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.MolotovThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, team.IncendiaryThrowedCount);
-					SetCellValue(row, columnNumber, CellType.Numeric, team.DecoyThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.HeGrenadeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.SmokeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.MolotovThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.IncendiaryThrownCount);
+					SetCellValue(row, columnNumber, CellType.Numeric, team.DecoyThrownCount);
 				}
 			});
 		}

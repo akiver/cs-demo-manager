@@ -199,7 +199,7 @@
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0">
-							<TextBlock Text="Total flashbang throwed" Style="{StaticResource SmallTitleStyle}"/>
+							<TextBlock Text="Total flashbang thrown" Style="{StaticResource SmallTitleStyle}"/>
 						</Grid>
 						<Grid Grid.Row="1">
 							<Grid.ColumnDefinitions>
@@ -215,8 +215,8 @@
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 														Width="Auto" Header="Player Name" Binding="{Binding Name}"/>
-									<DataGridTextColumn HeaderStyle="{StaticResource TotalPlayerFlashbangThrowedHeader}"
-														Width="Auto" Header="Total" Binding="{Binding FlashbangThrowedCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TotalPlayerFlashbangThrownHeader}"
+														Width="Auto" Header="Total" Binding="{Binding FlashbangThrownCount}" />
 								</DataGrid.Columns>
 							</DataGrid>
 							<DataGrid Grid.Column="1" Margin="5 0 0 0"
@@ -227,7 +227,7 @@
 									  CellStyle="{StaticResource DataGridCellStyle}" Width="Auto">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" Width="Auto" Header="Team Name" Binding="{Binding Name}"/>
-									<DataGridTextColumn HeaderStyle="{StaticResource TotalTeamFlashbangThrowedHeader}"  Width="Auto" Header="Total" Binding="{Binding FlashbangThrowedCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TotalTeamFlashbangThrownHeader}"  Width="Auto" Header="Total" Binding="{Binding FlashbangThrownCount}" />
 								</DataGrid.Columns>
 							</DataGrid>
 						</Grid>

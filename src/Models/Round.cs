@@ -114,34 +114,34 @@ namespace CSGO_Demos_Manager.Models
 		private int _fivekillCount;
 
 		/// <summary>
-		/// Number of flashbang throwed during the round
+		/// Number of flashbang thrown during the round
 		/// </summary>
-		private int _flashbangThrowedCount;
+		private int _flashbangThrownCount;
 
 		/// <summary>
-		/// Number of smoke during the round
+		/// Number of smoke thrown during the round
 		/// </summary>
-		private int _smokeThrowedCount;
+		private int _smokeThrownCount;
 
 		/// <summary>
-		/// Number of HE throwed during the round
+		/// Number of HE thrown during the round
 		/// </summary>
-		private int _heGrenadeThrowedCount;
+		private int _heGrenadeThrownCount;
 
 		/// <summary>
-		/// Number of decoy throwed during the round
+		/// Number of decoy thrown during the round
 		/// </summary>
-		private int _decoyThrowedCount;
+		private int _decoyThrownCount;
 
 		/// <summary>
-		/// Number of molotov throwed during the round
+		/// Number of molotov thrown during the round
 		/// </summary>
-		private int _molotovThrowedCount;
+		private int _molotovThrownCount;
 
 		/// <summary>
-		/// Number of incendiary throwed during the round
+		/// Number of incendiary thrown during the round
 		/// </summary>
-		private int _incendiaryThrowedCount;
+		private int _incendiaryThrownCount;
 
 		private ObservableCollection<KillEvent> _kills = new ObservableCollection<KillEvent>();
 
@@ -151,7 +151,7 @@ namespace CSGO_Demos_Manager.Models
 
 		private ObservableCollection<SmokeNadeStartedEvent> _smokeNadeStarted = new ObservableCollection<SmokeNadeStartedEvent>();
 
-		private ObservableCollection<MolotovFireEndedEvent> _molotovsThrowed = new ObservableCollection<MolotovFireEndedEvent>();
+		private ObservableCollection<MolotovFireEndedEvent> _molotovsThrown = new ObservableCollection<MolotovFireEndedEvent>();
 
 		/// <summary>
 		/// Infos on bomb planted during the round
@@ -375,45 +375,45 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => SideTrouble, ref _sideTrouble, value); }
 		}
 
-		public int FlashbangThrowedCount
+		public int FlashbangThrownCount
 		{
-			get { return _flashbangThrowedCount; }
-			set { Set(() => FlashbangThrowedCount, ref _flashbangThrowedCount, value); }
+			get { return _flashbangThrownCount; }
+			set { Set(() => FlashbangThrownCount, ref _flashbangThrownCount, value); }
 		}
 
 		[JsonProperty("round_smoke_count")]
-		public int SmokeThrowedCount
+		public int SmokeThrownCount
 		{
-			get { return _smokeThrowedCount; }
-			set { Set(() => SmokeThrowedCount, ref _smokeThrowedCount, value); }
+			get { return _smokeThrownCount; }
+			set { Set(() => SmokeThrownCount, ref _smokeThrownCount, value); }
 		}
 
 		[JsonProperty("round_he_count")]
-		public int HeGrenadeThrowedCount
+		public int HeGrenadeThrownCount
 		{
-			get { return _heGrenadeThrowedCount; }
-			set { Set(() => HeGrenadeThrowedCount, ref _heGrenadeThrowedCount, value); }
+			get { return _heGrenadeThrownCount; }
+			set { Set(() => HeGrenadeThrownCount, ref _heGrenadeThrownCount, value); }
 		}
 
 		[JsonProperty("round_decoy_count")]
-		public int DecoyThrowedCount
+		public int DecoyThrownCount
 		{
-			get { return _decoyThrowedCount; }
-			set { Set(() => DecoyThrowedCount, ref _decoyThrowedCount, value); }
+			get { return _decoyThrownCount; }
+			set { Set(() => DecoyThrownCount, ref _decoyThrownCount, value); }
 		}
 
 		[JsonProperty("round_molotov_count")]
-		public int MolotovThrowedCount
+		public int MolotovThrownCount
 		{
-			get { return _molotovThrowedCount; }
-			set { Set(() => MolotovThrowedCount, ref _molotovThrowedCount, value); }
+			get { return _molotovThrownCount; }
+			set { Set(() => MolotovThrownCount, ref _molotovThrownCount, value); }
 		}
 
 		[JsonProperty("round_incendiary_count")]
-		public int IncendiaryThrowedCount
+		public int IncendiaryThrownCount
 		{
-			get { return _incendiaryThrowedCount; }
-			set { Set(() => IncendiaryThrowedCount, ref _incendiaryThrowedCount, value); }
+			get { return _incendiaryThrownCount; }
+			set { Set(() => IncendiaryThrownCount, ref _incendiaryThrownCount, value); }
 		}
 
 		[JsonIgnore]
@@ -567,10 +567,10 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public ObservableCollection<MolotovFireEndedEvent> MolotovsThrowed
+		public ObservableCollection<MolotovFireEndedEvent> MolotovsThrown
 		{
-			get { return _molotovsThrowed; }
-			set { Set(() => MolotovsThrowed, ref _molotovsThrowed, value); }
+			get { return _molotovsThrown; }
+			set { Set(() => MolotovsThrown, ref _molotovsThrown, value); }
 		}
 		// End overview properties
 

@@ -113,11 +113,11 @@
 		public int KillKnifeCount { get; set; } = 0;
 		public int DeathKnifeCount { get; set; } = 0;
 
-		public int FlashbangThrowedCount { get; set; } = 0;
-		public int SmokeThrowedCount { get; set; } = 0;
-		public int DecoyThrowedCount { get; set; } = 0;
-		public int HeGrenadeThrowedCount { get; set; } = 0;
-		public int MolotovThrowedCount { get; set; } = 0;
-		public int IncendiaryThrowedCount { get; set; } = 0;
+		public int FlashbangThrownCount { get; set; } = 0;
+		public int SmokeThrownCount { get; set; } = 0;
+		public int DecoyThrownCount { get; set; } = 0;
+		public int HeGrenadeThrownCount { get; set; } = 0;
+		public int MolotovThrownCount { get; set; } = 0;
+		public int IncendiaryThrownCount { get; set; } = 0;
 	}
 }

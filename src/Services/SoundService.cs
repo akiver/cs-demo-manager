@@ -43,7 +43,7 @@ namespace CSGO_Demos_Manager.Services
 			PlaySound("smoke_explode.wav");
 		}
 
-		public static void PlayMolotovThrowed(Team team)
+		public static void PlayMolotovThrown(Team team)
 		{
 			if (team == Team.CounterTerrorist)
 			{
@@ -53,7 +53,7 @@ namespace CSGO_Demos_Manager.Services
 			PlaySound("t_molotov.wav");
 		}
 
-		public static void PlayFlashbangThrowed(Team team)
+		public static void PlayFlashbangThrown(Team team)
 		{
 			if (team == Team.CounterTerrorist)
 			{
@@ -63,7 +63,7 @@ namespace CSGO_Demos_Manager.Services
 			PlaySound("t_flashbang.wav");
 		}
 
-		public static void PlayHeGrenadeThrowed(Team team)
+		public static void PlayHeGrenadeThrown(Team team)
 		{
 			if (team == Team.CounterTerrorist)
 			{
@@ -73,7 +73,7 @@ namespace CSGO_Demos_Manager.Services
 			PlaySound("t_grenade.wav");
 		}
 
-		public static void PlayDecoyThrowed(Team team)
+		public static void PlayDecoyThrown(Team team)
 		{
 			if (team == Team.CounterTerrorist)
 			{
@@ -83,7 +83,7 @@ namespace CSGO_Demos_Manager.Services
 			PlaySound("t_decoy.wav");
 		}
 
-		public static void PlaySmokeThrowed(Team team)
+		public static void PlaySmokeThrown(Team team)
 		{
 			if (team == Team.CounterTerrorist)
 			{
@@ -128,20 +128,20 @@ namespace CSGO_Demos_Manager.Services
 			switch (weapon.Weapon.Name)
 			{
 				case "Flashbang":
-					PlayFlashbangThrowed(team);
+					PlayFlashbangThrown(team);
 					break;
 				case "Smoke":
-					PlaySmokeThrowed(team);
+					PlaySmokeThrown(team);
 					break;
 				case "He Grenade":
-					PlayHeGrenadeThrowed(team);
+					PlayHeGrenadeThrown(team);
 					break;
 				case "Decoy":
-					PlayDecoyThrowed(team);
+					PlayDecoyThrown(team);
 					break;
 				case "Molotov":
 				case "Incendiary":
-					PlayMolotovThrowed(team);
+					PlayMolotovThrown(team);
 					break;
 			}
 		}

@@ -123,12 +123,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private List<CategoricalDataPoint> _datasTazerDeath;
 		private List<CategoricalDataPoint> _datasKnifeKill;
 		private List<CategoricalDataPoint> _datasKnifeDeath;
-		private int _decoyThrowedCount;
-		private int _smokeThrowedCount;
-		private int _flashbangThrowedCount;
-		private int _heGrenadeThrowedCount;
-		private int _molotovThrowedCount;
-		private int _incendiaryThrowedCount;
+		private int _decoyThrownCount;
+		private int _smokeThrownCount;
+		private int _flashbangThrownCount;
+		private int _heGrenadeThrownCount;
+		private int _molotovThrownCount;
+		private int _incendiaryThrownCount;
 		#endregion
 
 		#endregion
@@ -602,40 +602,40 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => DatasKnifeDeath, ref _datasKnifeDeath, value); }
 		}
 
-		public int DecoyThrowedCount
+		public int DecoyThrownCount
 		{
-			get { return _decoyThrowedCount; }
-			set { Set(() => DecoyThrowedCount, ref _decoyThrowedCount, value); }
+			get { return _decoyThrownCount; }
+			set { Set(() => DecoyThrownCount, ref _decoyThrownCount, value); }
 		}
 
-		public int FlashbangThrowedCount
+		public int FlashbangThrownCount
 		{
-			get { return _flashbangThrowedCount; }
-			set { Set(() => FlashbangThrowedCount, ref _flashbangThrowedCount, value); }
+			get { return _flashbangThrownCount; }
+			set { Set(() => FlashbangThrownCount, ref _flashbangThrownCount, value); }
 		}
 
-		public int SmokeThrowedCount
+		public int SmokeThrownCount
 		{
-			get { return _smokeThrowedCount; }
-			set { Set(() => SmokeThrowedCount, ref _smokeThrowedCount, value); }
+			get { return _smokeThrownCount; }
+			set { Set(() => SmokeThrownCount, ref _smokeThrownCount, value); }
 		}
 
-		public int HeGrenadeThrowedCount
+		public int HeGrenadeThrownCount
 		{
-			get { return _heGrenadeThrowedCount; }
-			set { Set(() => HeGrenadeThrowedCount, ref _heGrenadeThrowedCount, value); }
+			get { return _heGrenadeThrownCount; }
+			set { Set(() => HeGrenadeThrownCount, ref _heGrenadeThrownCount, value); }
 		}
 
-		public int MolotovThrowedCount
+		public int MolotovThrownCount
 		{
-			get { return _molotovThrowedCount; }
-			set { Set(() => MolotovThrowedCount, ref _molotovThrowedCount, value); }
+			get { return _molotovThrownCount; }
+			set { Set(() => MolotovThrownCount, ref _molotovThrownCount, value); }
 		}
 
-		public int IncendiaryThrowedCount
+		public int IncendiaryThrownCount
 		{
-			get { return _incendiaryThrowedCount; }
-			set { Set(() => IncendiaryThrowedCount, ref _incendiaryThrowedCount, value); }
+			get { return _incendiaryThrownCount; }
+			set { Set(() => IncendiaryThrownCount, ref _incendiaryThrownCount, value); }
 		}
 		#endregion
 
@@ -1510,12 +1510,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 				}
 			};
 
-			SmokeThrowedCount = datas.SmokeThrowedCount;
-			DecoyThrowedCount = datas.DecoyThrowedCount;
-			FlashbangThrowedCount = datas.FlashbangThrowedCount;
-			HeGrenadeThrowedCount = datas.HeGrenadeThrowedCount;
-			MolotovThrowedCount = datas.MolotovThrowedCount;
-			IncendiaryThrowedCount = datas.IncendiaryThrowedCount;
+			SmokeThrownCount = datas.SmokeThrownCount;
+			DecoyThrownCount = datas.DecoyThrownCount;
+			FlashbangThrownCount = datas.FlashbangThrownCount;
+			HeGrenadeThrownCount = datas.HeGrenadeThrownCount;
+			MolotovThrownCount = datas.MolotovThrownCount;
+			IncendiaryThrownCount = datas.IncendiaryThrownCount;
 		}
 
 		public AccountStatsWeaponViewModel(IDemosService demoService)
@@ -1534,12 +1534,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		public override void Cleanup()
 		{
 			base.Cleanup();
-			HeGrenadeThrowedCount = 0;
-			IncendiaryThrowedCount = 0;
-			MolotovThrowedCount = 0;
-			DecoyThrowedCount = 0;
-			SmokeThrowedCount = 0;
-			FlashbangThrowedCount = 0;
+			HeGrenadeThrownCount = 0;
+			IncendiaryThrownCount = 0;
+			MolotovThrownCount = 0;
+			DecoyThrownCount = 0;
+			SmokeThrownCount = 0;
+			FlashbangThrownCount = 0;
 			DatasAk47Kill = null;
 			DatasAk47Death = null;
 			DatasM249Kill = null;

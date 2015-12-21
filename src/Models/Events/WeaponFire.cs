@@ -29,7 +29,7 @@ namespace CSGO_Demos_Manager.Models.Events
 		public float ShooterVelocityZ { get; set; }
 
 		[JsonIgnore]
-		public override string Message => ShooterName + " throwed " + Weapon.Name;
+		public override string Message => ShooterName + " thrown " + Weapon.Name;
 
 		public WeaponFire(int tick, float seconds) : base(tick, seconds) { }
 	}

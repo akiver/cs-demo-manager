@@ -90,17 +90,17 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public int DamageArmorCount { get; set; }
 
-		public int FlashbangThrowedCount { get; set; }
+		public int FlashbangThrownCount { get; set; }
 
-		public int SmokeThrowedCount { get; set; }
+		public int SmokeThrownCount { get; set; }
 
-		public int HeGrenadeThrowedCount { get; set; }
+		public int HeGrenadeThrownCount { get; set; }
 
-		public int DecoyThrowedCount { get; set; }
+		public int DecoyThrownCount { get; set; }
 
-		public int MolotovThrowedCount { get; set; }
+		public int MolotovThrownCount { get; set; }
 
-		public int IncendiaryThrowedCount { get; set; }
+		public int IncendiaryThrownCount { get; set; }
 
 		public int RankMax { get; set; }
 

@@ -688,18 +688,18 @@ namespace CSGO_Demos_Manager.Services
 							demo.Kills.Count(
 								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Knife");
 
-						stats.FlashbangThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).FlashbangThrowedCount;
-						stats.SmokeThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).SmokeThrowedCount;
-						stats.DecoyThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).DecoyThrowedCount;
-						stats.HeGrenadeThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).HeGrenadeThrowedCount;
-						stats.MolotovThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).MolotovThrowedCount;
-						stats.IncendiaryThrowedCount +=
-							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).IncendiaryThrowedCount;
+						stats.FlashbangThrownCount +=
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).FlashbangThrownCount;
+						stats.SmokeThrownCount +=
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).SmokeThrownCount;
+						stats.DecoyThrownCount +=
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).DecoyThrownCount;
+						stats.HeGrenadeThrownCount +=
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).HeGrenadeThrownCount;
+						stats.MolotovThrownCount +=
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).MolotovThrownCount;
+						stats.IncendiaryThrownCount +=
+							demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).IncendiaryThrownCount;
 					}
 				}
 			}

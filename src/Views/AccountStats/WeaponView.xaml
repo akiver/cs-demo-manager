@@ -754,7 +754,7 @@
 								<RowDefinition Height="Auto"/>
 							</Grid.RowDefinitions>
 
-							<TextBlock Grid.Row="0"  HorizontalAlignment="Center" Style="{StaticResource TitleSettingsStyle}" Text="Stuffs Throwed"></TextBlock>
+							<TextBlock Grid.Row="0"  HorizontalAlignment="Center" Style="{StaticResource TitleSettingsStyle}" Text="Stuffs Thrown"></TextBlock>
 
 							<Grid Grid.Row="1">
 								<Grid.ColumnDefinitions>
@@ -773,7 +773,7 @@
 										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 											<StackPanel Orientation="Vertical" Margin="5">
 												<TextBlock Text="Smoke" Style="{StaticResource StatsTitleStyle}"/>
-												<TextBlock Text="{Binding SmokeThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+												<TextBlock Text="{Binding SmokeThrownCount}" Style="{StaticResource StatsValueStyle}"/>
 											</StackPanel>
 										</Border>
 									</Grid>
@@ -781,7 +781,7 @@
 										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 											<StackPanel Orientation="Vertical" Margin="5">
 												<TextBlock Text="Flashbang" Style="{StaticResource StatsTitleStyle}"/>
-												<TextBlock Text="{Binding FlashbangThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+												<TextBlock Text="{Binding FlashbangThrownCount}" Style="{StaticResource StatsValueStyle}"/>
 											</StackPanel>
 										</Border>
 									</Grid>
@@ -789,7 +789,7 @@
 										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 											<StackPanel Orientation="Vertical" Margin="5">
 												<TextBlock Text="He Grenade" Style="{StaticResource StatsTitleStyle}"/>
-												<TextBlock Text="{Binding HeGrenadeThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+												<TextBlock Text="{Binding HeGrenadeThrownCount}" Style="{StaticResource StatsValueStyle}"/>
 											</StackPanel>
 										</Border>
 									</Grid>
@@ -806,7 +806,7 @@
 										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 											<StackPanel Orientation="Vertical" Margin="5">
 												<TextBlock Text="Molotov" Style="{StaticResource StatsTitleStyle}"/>
-												<TextBlock Text="{Binding MolotovThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+												<TextBlock Text="{Binding MolotovThrownCount}" Style="{StaticResource StatsValueStyle}"/>
 											</StackPanel>
 										</Border>
 									</Grid>
@@ -814,7 +814,7 @@
 										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 											<StackPanel Orientation="Vertical" Margin="5">
 												<TextBlock Text="Incendiary" Style="{StaticResource StatsTitleStyle}"/>
-												<TextBlock Text="{Binding IncendiaryThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+												<TextBlock Text="{Binding IncendiaryThrownCount}" Style="{StaticResource StatsValueStyle}"/>
 											</StackPanel>
 										</Border>
 									</Grid>
@@ -822,7 +822,7 @@
 										<Border BorderBrush="{StaticResource LightWhiteBrush}" BorderThickness="1">
 											<StackPanel Orientation="Vertical" Margin="5">
 												<TextBlock Text="Decoy" Style="{StaticResource StatsTitleStyle}"/>
-												<TextBlock Text="{Binding DecoyThrowedCount}" Style="{StaticResource StatsValueStyle}"/>
+												<TextBlock Text="{Binding DecoyThrownCount}" Style="{StaticResource StatsValueStyle}"/>
 											</StackPanel>
 										</Border>
 									</Grid>

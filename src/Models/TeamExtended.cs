@@ -40,28 +40,28 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public int FlashbangThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
-			.Sum(playerExtended => playerExtended.FlashbangThrowedCount);
+		public int FlashbangThrownCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
+			.Sum(playerExtended => playerExtended.FlashbangThrownCount);
 
 		[JsonIgnore]
-		public int HeGrenadeThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
-			.Sum(playerExtended => playerExtended.HeGrenadeThrowedCount);
+		public int HeGrenadeThrownCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
+			.Sum(playerExtended => playerExtended.HeGrenadeThrownCount);
 
 		[JsonIgnore]
-		public int SmokeThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
-			.Sum(playerExtended => playerExtended.SmokeThrowedCount);
+		public int SmokeThrownCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
+			.Sum(playerExtended => playerExtended.SmokeThrownCount);
 
 		[JsonIgnore]
-		public int MolotovThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
-			.Sum(playerExtended => playerExtended.MolotovThrowedCount);
+		public int MolotovThrownCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
+			.Sum(playerExtended => playerExtended.MolotovThrownCount);
 
 		[JsonIgnore]
-		public int IncendiaryThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
-			.Sum(playerExtended => playerExtended.IncendiaryThrowedCount);
+		public int IncendiaryThrownCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
+			.Sum(playerExtended => playerExtended.IncendiaryThrownCount);
 
 		[JsonIgnore]
-		public int DecoyThrowedCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
-			.Sum(playerExtended => playerExtended.DecoyThrowedCount);
+		public int DecoyThrownCount => Players.Where(playerExtended => playerExtended.TeamName == Name)
+			.Sum(playerExtended => playerExtended.DecoyThrownCount);
 
 		[JsonIgnore]
 		public int OpenKillCount

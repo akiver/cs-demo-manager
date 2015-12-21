@@ -42,32 +42,32 @@ namespace CSGO_Demos_Manager.Services.Stats
 							case EquipmentElement.Flash:
 								type = "flash";
 								category = "Flashbang";
-								message = e.ShooterName + " throwed a flashbang";
+								message = e.ShooterName + " thrown a flashbang";
 								break;
 							case EquipmentElement.Smoke:
 								type = "smoke";
 								category = "Smoke";
-								message = e.ShooterName + " throwed a smoke";
+								message = e.ShooterName + " thrown a smoke";
 								break;
 							case EquipmentElement.Decoy:
 								type = "decoy";
 								category = "Decoy";
-								message = e.ShooterName + " throwed a decoy";
+								message = e.ShooterName + " thrown a decoy";
 								break;
 							case EquipmentElement.HE:
 								type = "he";
 								category = "HE";
-								message = e.ShooterName + " throwed a HE grenade";
+								message = e.ShooterName + " thrown a HE grenade";
 								break;
 							case EquipmentElement.Molotov:
 								type = "molotov";
 								category = "Molotov";
-								message = e.ShooterName + " throwed a molotov";
+								message = e.ShooterName + " thrown a molotov";
 								break;
 							case EquipmentElement.Incendiary:
 								type = "incendiary";
 								category = "Molotov";
-								message = e.ShooterName + " throwed an incendiary";
+								message = e.ShooterName + " thrown an incendiary";
 								break;
 						}
 

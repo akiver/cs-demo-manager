@@ -121,8 +121,8 @@ namespace CSGO_Demos_Manager.Services
 				}
 
 				data.AddRange(from playersValue in playerFlashStats
-					let total = playersValue.Key.FlashbangThrowedCount > 0
-					? Math.Round((decimal)(playersValue.Value/playersValue.Key.FlashbangThrowedCount),
+					let total = playersValue.Key.FlashbangThrownCount > 0
+					? Math.Round((decimal)(playersValue.Value/playersValue.Key.FlashbangThrownCount),
 					2, MidpointRounding.AwayFromZero)
 					: 0
 					select new FlashbangDataPoint

@@ -607,12 +607,12 @@
 	<!-- End Whitelist -->
 
 	<!-- Flashbangs view -->
-	<Style TargetType="DataGridColumnHeader" x:Key="TotalPlayerFlashbangThrowedHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang throwed by the player" />
+	<Style TargetType="DataGridColumnHeader" x:Key="TotalPlayerFlashbangThrownHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang thrown by the player" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="TotalTeamFlashbangThrowedHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang throwed by the team" />
+	<Style TargetType="DataGridColumnHeader" x:Key="TotalTeamFlashbangThrownHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Total flashbang thrown by the team" />
 	</Style>
 	<!-- End Flashbangs view -->
 

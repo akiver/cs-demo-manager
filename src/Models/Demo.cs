@@ -613,22 +613,22 @@ namespace CSGO_Demos_Manager.Models
 		public int BombPlantedCount => BombPlanted.Count;
 
 		[JsonIgnore]
-		public int FlashbangThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
+		public int FlashbangThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
 
 		[JsonIgnore]
-		public int SmokeThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
+		public int SmokeThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
 
 		[JsonIgnore]
-		public int HeGrenadeThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.HE);
+		public int HeGrenadeThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.HE);
 
 		[JsonIgnore]
-		public int DecoyThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
+		public int DecoyThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
 
 		[JsonIgnore]
-		public int MolotovThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
+		public int MolotovThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
 
 		[JsonIgnore]
-		public int IncendiaryThrowedCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
+		public int IncendiaryThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
 
 		[JsonIgnore]
 		public int ClutchCount

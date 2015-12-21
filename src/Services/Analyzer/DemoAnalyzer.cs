@@ -63,16 +63,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		const double AVERAGE_RMK = 1.277; // average value calculated from rounds with multiple kills
 
 		/// <summary>
-		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who throw a moloto
+		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who thrown a moloto
 		/// </summary>
-		public readonly Queue<PlayerExtended> LastPlayersThrowedMolotov = new Queue<PlayerExtended>();
+		public readonly Queue<PlayerExtended> LastPlayersThrownMolotov = new Queue<PlayerExtended>();
 
 		public readonly Queue<PlayerExtended> LastPlayersFireStartedMolotov = new Queue<PlayerExtended>();
 
 		public readonly Queue<PlayerExtended> LastPlayersFireEndedMolotov = new Queue<PlayerExtended>();
 
 		/// <summary>
-		/// Last player who throwed a flashbang, used for flashbangs stats
+		/// Last player who thrown a flashbang, used for flashbangs stats
 		/// </summary>
 		public PlayerExtended LastPlayerExplodedFlashbang { get; set; }
 
@@ -686,29 +686,29 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			switch (e.Weapon.Weapon)
 			{
 				case EquipmentElement.Incendiary:
-					CurrentRound.IncendiaryThrowedCount++;
-					shooter.IncendiaryThrowedCount++;
+					CurrentRound.IncendiaryThrownCount++;
+					shooter.IncendiaryThrownCount++;
 					break;
 				case EquipmentElement.Molotov:
-					CurrentRound.MolotovThrowedCount++;
-					shooter.MolotovThrowedCount++;
+					CurrentRound.MolotovThrownCount++;
+					shooter.MolotovThrownCount++;
 					break;
 				case EquipmentElement.Decoy:
-					CurrentRound.DecoyThrowedCount++;
-					shooter.DecoyThrowedCount++;
+					CurrentRound.DecoyThrownCount++;
+					shooter.DecoyThrownCount++;
 					break;
 				case EquipmentElement.Flash:
-					CurrentRound.FlashbangThrowedCount++;
-					shooter.FlashbangThrowedCount++;
+					CurrentRound.FlashbangThrownCount++;
+					shooter.FlashbangThrownCount++;
 					PlayersFlashQueue.Enqueue(shooter);
 					break;
 				case EquipmentElement.HE:
-					CurrentRound.HeGrenadeThrowedCount++;
-					shooter.HeGrenadeThrowedCount++;
+					CurrentRound.HeGrenadeThrownCount++;
+					shooter.HeGrenadeThrownCount++;
 					break;
 				case EquipmentElement.Smoke:
-					CurrentRound.SmokeThrowedCount++;
-					shooter.SmokeThrowedCount++;
+					CurrentRound.SmokeThrownCount++;
+					shooter.SmokeThrownCount++;
 					break;
 			}
 
@@ -746,7 +746,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						case EquipmentElement.Incendiary:
 						case EquipmentElement.Molotov:
-							LastPlayersThrowedMolotov.Enqueue(Demo.Players.First(p => p.SteamId == e.Shooter.SteamID));
+							LastPlayersThrownMolotov.Enqueue(Demo.Players.First(p => p.SteamId == e.Shooter.SteamID));
 							if (AnalyzeHeatmapPoint) return;
 							goto case EquipmentElement.Decoy;
 						case EquipmentElement.Decoy:
@@ -786,11 +786,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						thrower = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID);
 					}
 
-					if (AnalyzePlayersPosition || AnalyzeHeatmapPoint && LastPlayersThrowedMolotov.Any())
+					if (AnalyzePlayersPosition || AnalyzeHeatmapPoint && LastPlayersThrownMolotov.Any())
 					{
-						LastPlayersFireStartedMolotov.Enqueue(LastPlayersThrowedMolotov.Peek());
-						// Remove the last player who throwed a molo
-						thrower = LastPlayersThrowedMolotov.Dequeue();
+						LastPlayersFireStartedMolotov.Enqueue(LastPlayersThrownMolotov.Peek());
+						// Remove the last player who thrown a molo
+						thrower = LastPlayersThrownMolotov.Dequeue();
 					}
 
 					if (thrower != null)
@@ -867,7 +867,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						molotovEvent.ThrowerSteamId = thrower.SteamId;
 						molotovEvent.ThrowerName = thrower.Name;
-						CurrentRound.MolotovsThrowed.Add(molotovEvent);
+						CurrentRound.MolotovsThrown.Add(molotovEvent);
 
 						PositionPoint positionPoint = new PositionPoint
 						{

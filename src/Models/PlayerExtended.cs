@@ -211,34 +211,34 @@ namespace CSGO_Demos_Manager.Models
 		private int _winCount = 0;
 
 		/// <summary>
-		/// Number of flashbang throwed by the player
+		/// Number of flashbang thrown by the player
 		/// </summary>
-		private int _flashbangThrowedCount;
+		private int _flashbangThrownCount;
 
 		/// <summary>
-		/// Number of smoke throwed by the player
+		/// Number of smoke thrown by the player
 		/// </summary>
-		private int _smokeThrowedCount;
+		private int _smokeThrownCount;
 
 		/// <summary>
-		/// Number of HE Grenade throwed by the player
+		/// Number of HE Grenade thrown by the player
 		/// </summary>
-		private int _heGrenadeThrowedCount;
+		private int _heGrenadeThrowCount;
 
 		/// <summary>
-		/// Number of molotov throwed by the player
+		/// Number of molotov thrown by the player
 		/// </summary>
-		private int _molotovThrowedCount;
+		private int _molotovThrownCount;
 
 		/// <summary>
-		/// Number of incendiary throwed by the player
+		/// Number of incendiary thrown by the player
 		/// </summary>
-		private int _incendiaryThrowedCount;
+		private int _incendiaryThrowCount;
 
 		/// <summary>
-		/// Number of decoy throwed by the player
+		/// Number of decoy thrown by the player
 		/// </summary>
-		private int _decoyThrowedCount;
+		private int _decoyThrownCount;
 
 		/// <summary>
 		/// Number of round that the player played
@@ -497,45 +497,45 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("flashbang_count")]
-		public int FlashbangThrowedCount
+		public int FlashbangThrownCount
 		{
-			get { return _flashbangThrowedCount; }
-			set { Set(() => FlashbangThrowedCount, ref _flashbangThrowedCount, value); }
+			get { return _flashbangThrownCount; }
+			set { Set(() => FlashbangThrownCount, ref _flashbangThrownCount, value); }
 		}
 
 		[JsonProperty("smoke_count")]
-		public int SmokeThrowedCount
+		public int SmokeThrownCount
 		{
-			get { return _smokeThrowedCount; }
-			set { Set(() => SmokeThrowedCount, ref _smokeThrowedCount, value); }
+			get { return _smokeThrownCount; }
+			set { Set(() => SmokeThrownCount, ref _smokeThrownCount, value); }
 		}
 
 		[JsonProperty("he_count")]
-		public int HeGrenadeThrowedCount
+		public int HeGrenadeThrownCount
 		{
-			get { return _heGrenadeThrowedCount; }
-			set { Set(() => HeGrenadeThrowedCount, ref _heGrenadeThrowedCount, value); }
+			get { return _heGrenadeThrowCount; }
+			set { Set(() => HeGrenadeThrownCount, ref _heGrenadeThrowCount, value); }
 		}
 
 		[JsonProperty("molotov_count")]
-		public int MolotovThrowedCount
+		public int MolotovThrownCount
 		{
-			get { return _molotovThrowedCount; }
-			set { Set(() => MolotovThrowedCount, ref _molotovThrowedCount, value); }
+			get { return _molotovThrownCount; }
+			set { Set(() => MolotovThrownCount, ref _molotovThrownCount, value); }
 		}
 
 		[JsonProperty("incendiary_count")]
-		public int IncendiaryThrowedCount
+		public int IncendiaryThrownCount
 		{
-			get { return _incendiaryThrowedCount; }
-			set { Set(() => IncendiaryThrowedCount, ref _incendiaryThrowedCount, value); }
+			get { return _incendiaryThrowCount; }
+			set { Set(() => IncendiaryThrownCount, ref _incendiaryThrowCount, value); }
 		}
 
 		[JsonProperty("decoy_count")]
-		public int DecoyThrowedCount
+		public int DecoyThrownCount
 		{
-			get { return _decoyThrowedCount; }
-			set { Set(() => DecoyThrowedCount, ref _decoyThrowedCount, value); }
+			get { return _decoyThrownCount; }
+			set { Set(() => DecoyThrownCount, ref _decoyThrownCount, value); }
 		}
 
 		[JsonProperty("round_count")]

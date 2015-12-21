@@ -116,35 +116,35 @@ namespace CSGO_Demos_Manager.Services
 					heatmapPoints = GetFlashbangExplodedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No flashbang throwed with this selection.");
+						throw new HeatmapDataNotFoundException("No flashbang thrown with this selection.");
 					}
 					break;
 				case "he":
 					heatmapPoints = GetHeGrenadeExplodedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No HE grenade throwed with this selection.");
+						throw new HeatmapDataNotFoundException("No HE grenade thrown with this selection.");
 					}
 					break;
 				case "smokes":
 					heatmapPoints = GetSmokeStartedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No smoke throwed with this selection");
+						throw new HeatmapDataNotFoundException("No smoke thrown with this selection");
 					}
 					break;
 				case "molotovs":
 					heatmapPoints = GetMolotovFireStartedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No molotov throwed with this selection.");
+						throw new HeatmapDataNotFoundException("No molotov thrown with this selection.");
 					}
 					break;
 				case "decoys":
 					heatmapPoints = GetDecoyStartedPoints();
 					if (heatmapPoints.Count == 0)
 					{
-						throw new HeatmapDataNotFoundException("No decoy throwed with this selection.");
+						throw new HeatmapDataNotFoundException("No decoy thrown with this selection.");
 					}
 					break;
 				default:

@@ -203,7 +203,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Flasbang : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.FlashbangThrowedCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.FlashbangThrownCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -211,7 +211,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Smoke : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.SmokeThrowedCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.SmokeThrownCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -219,7 +219,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="HE Grenade : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.HeGrenadeThrowedCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.HeGrenadeThrownCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -227,7 +227,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Molotov : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.MolotovThrowedCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.MolotovThrownCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -235,7 +235,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Incendiary : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.IncendiaryThrowedCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.IncendiaryThrownCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -243,7 +243,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Decoy : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.DecoyThrowedCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.DecoyThrownCount}" Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 				</StackPanel>
 

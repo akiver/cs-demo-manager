@@ -104,12 +104,12 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.FlashbangThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.SmokeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeGrenadeThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.DecoyThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.MolotovThrowedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.IncendiaryThrowedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.FlashbangThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.SmokeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeGrenadeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.DecoyThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.MolotovThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.IncendiaryThrownCount);
 					SetCellValue(row, columnNumber++, CellType.Boolean, player.IsVacBanned);
 					SetCellValue(row, columnNumber, CellType.Boolean, player.IsOverwatchBanned);
 
