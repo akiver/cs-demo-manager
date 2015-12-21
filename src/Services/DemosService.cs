@@ -218,8 +218,9 @@ namespace CSGO_Demos_Manager.Services
 			List<Demo> demos = await _cacheService.GetDemoListAsync();
 			if (demos.Any())
 			{
-				// demos where account played
-				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
+				// demos where account played and only from valve
+				List<Demo> demosPlayerList = demos.Where(demo => demo.SourceName == "valve"
+				&& demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
 				if (demosPlayerList.Any())
 				{
 					Demo lastDemo = demosPlayerList.MaxBy(d => d.Date);
