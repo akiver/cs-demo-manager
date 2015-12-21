@@ -205,13 +205,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 			UpdateTeamScore(e);
 
-			if (e.Reason == RoundEndReason.CTSurrender)
+			// some demos return the wrong surrender RoundEndReason, I use the round's winner to detect which team has surrendered
+			if (e.Reason == RoundEndReason.CTSurrender || e.Reason == RoundEndReason.TerroristsSurrender)
 			{
-				Demo.Surrender = IsHalfMatch ? Demo.TeamT : Demo.TeamCT;
-			}
-			if (e.Reason == RoundEndReason.TerroristsSurrender)
-			{
-				Demo.Surrender = IsHalfMatch ? Demo.TeamCT : Demo.TeamT;
+				if (IsHalfMatch)
+				{
+					Demo.Surrender = e.Winner == Team.CounterTerrorist ? Demo.TeamCT : Demo.TeamT;
+				}
+				else
+				{
+					Demo.Surrender = e.Winner == Team.CounterTerrorist ? Demo.TeamT : Demo.TeamCT;
+				}
 			}
 
 			Application.Current.Dispatcher.Invoke(delegate
