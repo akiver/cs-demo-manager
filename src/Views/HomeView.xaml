@@ -470,11 +470,13 @@
 
 		<DataGrid Grid.Row="3"
 				  x:Name="DataGridDemos"
-				  ItemsSource="{Binding DataGridDemosCollection}"
+				  ItemsSource="{Binding DataGridDemosCollection, IsAsync=True}"
 				  SelectedItem="{Binding SelectedDemo}"
 				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}"
 				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+				  EnableColumnVirtualization ="True"
+				  EnableRowVirtualization ="True"
 				  Style="{StaticResource DataGridStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">

@@ -207,11 +207,13 @@
 
 		<DataGrid Grid.Row="2" Margin="0 5 0 0"
 				  x:Name="DataGridSuspects"
-				  ItemsSource="{Binding DataGridSuspectsCollection}"
+				  ItemsSource="{Binding DataGridSuspectsCollection, IsAsync=True}"
 				  SelectedItem="{Binding SelectedSuspect}"
 				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowSuspectsListStyle}"
 				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+				  EnableColumnVirtualization ="True"
+				  EnableRowVirtualization ="True"
 				  Style="{StaticResource DataGridStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">

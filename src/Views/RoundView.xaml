@@ -253,9 +253,12 @@
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 					<TextBlock Grid.Row="0" Text="Kills" Style="{StaticResource TitleSettingsStyle}" HorizontalAlignment="Center"/>
-					<DataGrid Grid.Row="1" Margin="0 0 5 0"
+					<DataGrid Grid.Row="1"
+							  Margin="0 0 5 0"
 							  x:Name="KillsDataGrid"
-							  ItemsSource="{Binding CurrentRound.Kills}"
+							  EnableColumnVirtualization ="True"
+							  EnableRowVirtualization ="True"
+							  ItemsSource="{Binding CurrentRound.Kills, IsAsync=True}"
 							  SelectedItem="{Binding SelectedKill}"
 							  CellStyle="{StaticResource DataGridCellStyle}"
 							  RowStyle="{StaticResource DataGridRowStyle}"
@@ -288,7 +291,9 @@
 					<TextBlock Grid.Row="0" Text="Players" Style="{StaticResource TitleSettingsStyle}" HorizontalAlignment="Center"/>
 					<DataGrid Grid.Row="1" Margin="0 0 5 0"
 							  x:Name="PlayersDataGrid"
-							  ItemsSource="{Binding PlayersStats}"
+							  EnableColumnVirtualization ="True"
+							  EnableRowVirtualization ="True"
+							  ItemsSource="{Binding PlayersStats, IsAsync=True}"
 							  CellStyle="{StaticResource DataGridCellStyle}"
 							  RowStyle="{StaticResource DataGridRowStyle}"
 							  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"

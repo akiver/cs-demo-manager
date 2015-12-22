@@ -207,10 +207,12 @@
 								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
 							<DataGrid Grid.Column="0" Margin="5 0 0 0"
-									  ItemsSource="{Binding CurrentDemo.Players}"
+									  ItemsSource="{Binding CurrentDemo.Players, IsAsync=True}"
 									  Style="{StaticResource DataGridStyle}"
 									  RowStyle="{StaticResource DataGridRowStyle}"
 									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+									  EnableColumnVirtualization ="True"
+									  EnableRowVirtualization ="True"
 									  CellStyle="{StaticResource DataGridCellStyle}" Width="Auto">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
@@ -220,11 +222,14 @@
 								</DataGrid.Columns>
 							</DataGrid>
 							<DataGrid Grid.Column="1" Margin="5 0 0 0"
-									  ItemsSource="{Binding Teams}"
+									  ItemsSource="{Binding Teams, IsAsync=True}"
 									  Style="{StaticResource DataGridStyle}"
 									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 									  RowStyle="{StaticResource DataGridRowStyle}"
-									  CellStyle="{StaticResource DataGridCellStyle}" Width="Auto">
+									  EnableColumnVirtualization ="True"
+									  EnableRowVirtualization ="True"
+									  CellStyle="{StaticResource DataGridCellStyle}"
+									  Width="Auto">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" Width="Auto" Header="Team Name" Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalTeamFlashbangThrownHeader}"  Width="Auto" Header="Total" Binding="{Binding FlashbangThrownCount}" />

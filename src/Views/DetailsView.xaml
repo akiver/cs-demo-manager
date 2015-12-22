@@ -498,14 +498,17 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 
-								<DataGrid x:Name="ListViewTeam1" Grid.Column="0"
-											  ItemsSource="{Binding PlayersTeam1Collection}"
-											  SelectedItem="{Binding SelectedPlayerTeam1}"
-											  Width="Auto"
-											  Style="{StaticResource DataGridStyle}"
-											  CellStyle="{StaticResource DataGridCellStyle}"
-											  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-											  RowStyle="{StaticResource DataGridRowPlayerTeam1Style}">
+								<DataGrid x:Name="ListViewTeam1"
+										  Grid.Column="0"
+										  ItemsSource="{Binding PlayersTeam1Collection, IsAsync=True}"
+										  SelectedItem="{Binding SelectedPlayerTeam1}"
+										  Width="Auto"
+										  Style="{StaticResource DataGridStyle}"
+										  CellStyle="{StaticResource DataGridCellStyle}"
+										  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+										  EnableColumnVirtualization ="True"
+										  EnableRowVirtualization ="True"
+										  RowStyle="{StaticResource DataGridRowPlayerTeam1Style}">
 									<DataGrid.Resources>
 										<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 									</DataGrid.Resources>
@@ -607,12 +610,15 @@
 
 
 
-								<DataGrid x:Name="ListViewtTeam2" Grid.Column="1"
-										  ItemsSource="{Binding PlayersTeam2Collection}"
+								<DataGrid x:Name="ListViewtTeam2"
+										  Grid.Column="1"
+										  ItemsSource="{Binding PlayersTeam2Collection, IsAsync=True}"
 										  SelectedItem="{Binding SelectedPlayerTeam2}"
 										  CellStyle="{StaticResource DataGridCellStyle}"
 										  RowStyle="{StaticResource DataGridRowPlayerTeam2Style}"
 										  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+										  EnableColumnVirtualization ="True"
+										  EnableRowVirtualization ="True"
 										  Style="{StaticResource DataGridStyle}">
 									<DataGrid.Resources>
 										<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
@@ -727,11 +733,13 @@
 							<TextBlock Grid.Row="0" Text="Rounds Details" Foreground="{StaticResource LightGreenBrush}" />
 
 							<DataGrid Grid.Row="1" x:Name="DataGridRounds"
-									  ItemsSource="{Binding RoundsCollection}"
+									  ItemsSource="{Binding RoundsCollection, IsAsync=True}"
 									  SelectedItem="{Binding SelectedRound}"
 									  CellStyle="{StaticResource DataGridCellStyle}"
 									  RowStyle="{StaticResource DataGridRowRoundListStyle}"
 									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+									  EnableColumnVirtualization ="True"
+									  EnableRowVirtualization ="True"
 									  Style="{StaticResource DataGridStyle}">
 								<i:Interaction.Triggers>
 									<i:EventTrigger EventName="MouseDoubleClick">
