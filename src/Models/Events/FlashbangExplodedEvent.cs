@@ -9,7 +9,7 @@ namespace CSGO_Demos_Manager.Models.Events
 		public List<long> FlashedPlayerSteamIdList { get; set; } = new List<long>();
 
 		[JsonIgnore]
-		public override string Message => "Flashbang explosed";
+		public override string Message => "Flashbang exploded";
 
 		public FlashbangExplodedEvent(int tick, float seconds): base(tick, seconds) { }
 	}
