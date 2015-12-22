@@ -20,7 +20,6 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
-using System.Windows.Threading;
 using CSGO_Demos_Manager.Internals;
 using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Services.Excel;
@@ -36,6 +35,8 @@ namespace CSGO_Demos_Manager.ViewModel
 	{
 
 		#region Properties
+
+		private const int MAX_ANALYZE_DEMO_COUNT = 4;
 
 		private readonly IDemosService _demosService;
 
@@ -415,11 +416,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_analyzeDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
-						if (_cts == null)
-						{
-							_cts = new CancellationTokenSource();
-						}
-						await RefreshSelectedDemos(_cts.Token);
+						await RefreshSelectedDemos();
 						Messenger.Default.Send(new SelectedAccountChangedMessage());
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
@@ -531,26 +528,28 @@ namespace CSGO_Demos_Manager.ViewModel
 									};
 
 									if (saveExportFileDialog.ShowDialog() != DialogResult.OK) return;
-									if (_cts == null) _cts = new CancellationTokenSource();
-
-									Task[] tasks = SelectedDemos.Select(async (demo) =>
-									{
-										if (!_cacheService.HasDemoInCache(demo))
-										{
-											int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
-											if (analyzeResult != 1 && _cts != null)
-											{
-												SelectedDemos.Remove(demo);
-											}
-										}
-									}).ToArray();
 
 									try
 									{
 										IsBusy = true;
 										HasNotification = true;
 										NotificationMessage = "Analyzing demos for export...";
-										await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+										IsCancellable = true;
+										if (_cts == null) _cts = new CancellationTokenSource();
+
+										List<Demo> demoList = demos.ToList();
+										while (demoList.Any() && _cts != null)
+										{
+											Task[] tasks = demoList.Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+											{
+												if (!_cacheService.HasDemoInCache(demo))
+												{
+													await AnalyzeDemoAsync(demo, _cts.Token);
+												}
+												demoList.Remove(demo);
+											}).ToArray();
+											await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+										}
 										if(_cts != null) await _excelService.GenerateXls(SelectedDemos.ToList(), saveExportFileDialog.FileName);
 									}
 									catch (Exception e)
@@ -577,32 +576,38 @@ namespace CSGO_Demos_Manager.ViewModel
 									string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
 									if (_cts == null) _cts = new CancellationTokenSource();
 
-									Task[] tasks = SelectedDemos.Select(async (demo) =>
-									{
-										if (!_cacheService.HasDemoInCache(demo))
-										{
-											int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
-											if (analyzeResult == 1 && _cts != null)
-											{
-												NotificationMessage = "Exporting " + demo.Name + "...";
-												await _excelService.GenerateXls(demo,
-													path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
-											}
-										}
-										else
-										{
-											NotificationMessage = "Exporting " + demo.Name + "...";
-											await _excelService.GenerateXls(demo,
-												path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
-										}
-									}).ToArray();
-
 									try
 									{
 										IsBusy = true;
 										HasNotification = true;
 										NotificationMessage = "Analyzing demos for export...";
-										await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+										IsCancellable = true;
+
+										List<Demo> demoList = demos.ToList();
+										while (demoList.Any() && _cts != null)
+										{
+											Task[] tasks = demoList.Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+											{
+												if (!_cacheService.HasDemoInCache(demo))
+												{
+													int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
+													if (analyzeResult == 1 && _cts != null)
+													{
+														NotificationMessage = "Exporting " + demo.Name + "...";
+														await _excelService.GenerateXls(demo,
+															path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
+													}
+												}
+												else
+												{
+													NotificationMessage = "Exporting " + demo.Name + "...";
+													await _excelService.GenerateXls(demo,
+														path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
+												}
+												demoList.Remove(demo);
+											}).ToArray();
+											await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+										}
 									}
 									catch (Exception e)
 									{
@@ -613,6 +618,7 @@ namespace CSGO_Demos_Manager.ViewModel
 									{
 										IsBusy = false;
 										HasNotification = false;
+										IsCancellable = false;
 									}
 								}
 									break;
@@ -635,11 +641,15 @@ namespace CSGO_Demos_Manager.ViewModel
 									if (!_cacheService.HasDemoInCache(SelectedDemo))
 									{
 										NotificationMessage = "Analyzing " + SelectedDemo.Name + "for export...";
+										IsCancellable = true;
 										if (_cts == null) _cts = new CancellationTokenSource();
 										await AnalyzeDemoAsync(SelectedDemo, _cts.Token);
 									}
-									NotificationMessage = "Exporting " + SelectedDemo.Name + "...";
-									await _excelService.GenerateXls(SelectedDemo, saveHeatmapDialog.FileName);
+									if (_cts != null)
+									{
+										NotificationMessage = "Exporting " + SelectedDemo.Name + "...";
+										await _excelService.GenerateXls(SelectedDemo, saveHeatmapDialog.FileName);
+									}
 								}
 								catch (Exception e)
 								{
@@ -650,6 +660,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								{
 									IsBusy = false;
 									HasNotification = false;
+									IsCancellable = false;
 								}
 							}
 						}
@@ -1426,52 +1437,54 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		private async Task RefreshSelectedDemos(CancellationToken token)
+		private async Task RefreshSelectedDemos()
 		{
 			IsBusy = true;
 			HasNotification = true;
+			IsCancellable = true;
 			NotificationMessage = "Analyzing multiple demos...";
 			if (SelectedDemos.Count == 1) NotificationMessage = "Analyzing " + SelectedDemos[0].Name + "...";
 
 			List<Demo> demosFailed = new List<Demo>();
 			List<Demo> demosNotFound = new List<Demo>();
 
-			Task[] tasks = SelectedDemos.Select(async (demo) =>
-			{
-				int result = await AnalyzeDemoAsync(demo, token);
-				switch (result)
-				{
-					case -1:
-						demosFailed.Add(demo);
-						break;
-					case -2:
-						demosNotFound.Add(demo);
-						break;
-				}
-			}).ToArray();
-
 			try
 			{
-				await Task.WhenAny(Task.WhenAll(tasks), token.AsTask());
+				if (_cts == null) _cts = new CancellationTokenSource();
+				List<Demo> demos = SelectedDemos.ToList();
+				while (demos.Any() && _cts != null)
+				{
+					Task[] tasks = demos.Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+					{
+						int result = await AnalyzeDemoAsync(demo, _cts.Token);
+						switch (result)
+						{
+							case -1:
+								demosFailed.Add(demo);
+								break;
+							case -2:
+								demosNotFound.Add(demo);
+								break;
+						}
+						demos.Remove(demo);
+					}).ToArray();
+
+					await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+				}
 			}
 			catch (Exception e)
 			{
 				Logger.Instance.Log(e);
 				await _dialogService.ShowErrorAsync("An error occured while anylizing demos.", MessageDialogStyle.Affirmative);
 			}
-
-			IsBusy = false;
-			HasNotification = false;
-			CommandManager.InvalidateRequerySuggested();
-
-			if (demosNotFound.Any())
+			finally
 			{
-				await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
-			}
-
-			if (demosFailed.Any())
-			{
-				await _dialogService.ShowDemosFailedAsync(demosFailed);
+				IsBusy = false;
+				HasNotification = false;
+				IsCancellable = false;
+				CommandManager.InvalidateRequerySuggested();
+				if (demosNotFound.Any()) await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
+				if (demosFailed.Any()) await _dialogService.ShowDemosFailedAsync(demosFailed);
 			}
 		}
 
@@ -1487,13 +1500,15 @@ namespace CSGO_Demos_Manager.ViewModel
 
 			try
 			{
-				IsCancellable = true;
 				await _demosService.AnalyzeDemo(demo, token);
-				if (AppSettings.IsInternetConnectionAvailable())
+				if (_cts != null)
 				{
-					await _demosService.AnalyzeBannedPlayersAsync(demo);
+					if (AppSettings.IsInternetConnectionAvailable())
+					{
+						await _demosService.AnalyzeBannedPlayersAsync(demo);
+					}
+					await _cacheService.WriteDemoDataCache(demo);
 				}
-				await _cacheService.WriteDemoDataCache(demo);
 			}
 			catch (Exception e)
 			{
@@ -1505,15 +1520,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 			finally
 			{
-				IsCancellable = false;
+				if (_cts != null && demo.Status == "old")
+				{
+					demo.Status = "None";
+					await _cacheService.WriteDemoDataCache(demo);
+				}
 			}
-
-			if (demo.Status == "old")
-			{
-				demo.Status = "None";
-				await _cacheService.WriteDemoDataCache(demo);
-			}
-			IsCancellable = false;
 
 			return 1;
 		}

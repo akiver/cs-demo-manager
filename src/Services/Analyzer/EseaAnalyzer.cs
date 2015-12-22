@@ -64,37 +64,42 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			await Task.Run(() => Parser.ParseToEnd(token), token);
 
-			Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
-
 			Application.Current.Dispatcher.Invoke(delegate
 			{
+				Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
+
 				// As round_officialy_ended isn't raised we add the last round / OT after the analyze
-				if (Demo.Rounds.Count < (Demo.ScoreTeam1 + Demo.ScoreTeam2))
+				if (Demo.Rounds.Count < Demo.ScoreTeam1 + Demo.ScoreTeam2)
 				{
-					UpdateKillsCount();
-					UpdatePlayerScore();
-
+					if (Demo.Players.Any())
+					{
+						UpdateKillsCount();
+						UpdatePlayerScore();
+					}
 					Demo.Rounds.Add(CurrentRound);
-
 					// Add last overtime if there was an overtime at the end
 					if (IsOvertime) Demo.Overtimes.Add(CurrentOvertime);
 				}
-
-				Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
-				Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
-				Demo.MostEntryKillPlayer = Demo.Players.MaxBy(p => p.EntryKills.Count);
-				var weapons = Demo.Kills.GroupBy(k => k.Weapon).Select(weap => new
+				if (Demo.Players.Any())
 				{
-					Weapon = weap.Key,
-					Count = weap.Count()
-				}).OrderByDescending(w => w.Count);
-				Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
+					Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
+					Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
+					Demo.MostEntryKillPlayer = Demo.Players.MaxBy(p => p.EntryKills.Count);
+				}
+				if (Demo.Kills.Any())
+				{
+					var weapons = Demo.Kills.GroupBy(k => k.Weapon).Select(weap => new
+					{
+						Weapon = weap.Key,
+						Count = weap.Count()
+					}).OrderByDescending(w => w.Count);
+					if(weapons.Any()) Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
+				}
+				if (AnalyzePlayersPosition)
+				{
+					LastPlayersFireEndedMolotov.Clear();
+				}
 			});
-
-			if (AnalyzePlayersPosition)
-			{
-				LastPlayersFireEndedMolotov.Clear();
-			}
 
 			return Demo;
 		}

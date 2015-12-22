@@ -93,24 +93,29 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			await Task.Run(() => Parser.ParseToEnd(token), token);
 
-			Application.Current.Dispatcher.Invoke(ProcessPlayersRating);
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
-				Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
-				Demo.MostEntryKillPlayer = Demo.Players.MaxBy(p => p.EntryKills.Count);
-				var weapons = Demo.Kills.GroupBy(k => k.Weapon).Select(weap => new
+				if (Demo.Players.Any())
 				{
-					Weapon = weap.Key,
-					Count = weap.Count()
-				}).OrderByDescending(w => w.Count);
-				Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
+					ProcessPlayersRating();
+					Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
+					Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
+					Demo.MostEntryKillPlayer = Demo.Players.MaxBy(p => p.EntryKills.Count);
+				}
+				if (Demo.Kills.Any())
+				{
+					var weapons = Demo.Kills.GroupBy(k => k.Weapon).Select(weap => new
+					{
+						Weapon = weap.Key,
+						Count = weap.Count()
+					}).OrderByDescending(w => w.Count);
+					if (weapons.Any()) Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
+				}
+				if (AnalyzePlayersPosition)
+				{
+					LastPlayersFireEndedMolotov.Clear();
+				}
 			});
-
-			if (AnalyzePlayersPosition)
-			{
-				LastPlayersFireEndedMolotov.Clear();
-			}
 
 			return Demo;
 		}
