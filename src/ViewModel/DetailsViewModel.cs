@@ -197,7 +197,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 						PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 						RoundsCollection = CollectionViewSource.GetDefaultView(_currentDemo.Rounds);
-						if (AppSettings.IsInternetConnectionAvailable())
+						if (AppSettings.IsInternetConnectionAvailable() && CurrentDemo.Players.Any())
 						{
 							Task.Run(async () =>
 							{
