@@ -192,6 +192,7 @@
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\KillHeatmapPoint.cs" />
     <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />
     <Compile Include="Models\Selectors\RoundTimelineTemplateSelector.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
     <Compile Include="Models\Stats\FlashbangDataPoint.cs" />

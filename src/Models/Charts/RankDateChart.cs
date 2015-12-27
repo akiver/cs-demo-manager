@@ -8,5 +8,6 @@ namespace CSGO_Demos_Manager.Models.Charts
 		public double NewRank { get; set; }
 		public double WinCount { get; set; }
 		public DateTime Date { get; set; }
+		public int WinStatus { get; set; }
 	}
 }

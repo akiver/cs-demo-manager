@@ -257,7 +257,8 @@ namespace CSGO_Demos_Manager.Services
 								Date = demo.Date,
 								OldRank = oldRankNumber,
 								NewRank = newRankNumber,
-								WinCount = winCount
+								WinCount = winCount,
+								WinStatus = demo.MatchVerdictSelectedAccountCount
 							});
 						}
 					}

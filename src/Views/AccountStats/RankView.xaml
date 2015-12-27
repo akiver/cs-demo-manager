@@ -128,7 +128,12 @@
 		</Grid>
 
 		<Grid Grid.Row="1">
-			<telerik:RadCartesianChart TooltipTemplate="{StaticResource RankToolTipTemplate}" ClipToBounds="False">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			
+			<telerik:RadCartesianChart Grid.Row="0" TooltipTemplate="{StaticResource RankToolTipTemplate}" ClipToBounds="False">
 				<telerik:RadCartesianChart.VerticalAxis>
 					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}" MajorStep="1" RangeExtendDirection="Both"/>
 				</telerik:RadCartesianChart.VerticalAxis>
@@ -140,17 +145,29 @@
 					<telerik:ChartTooltipBehavior />
 				</telerik:RadCartesianChart.Behaviors>
 				<telerik:LineSeries ItemsSource="{Binding Datas}" CategoryBinding="Date" ValueBinding="NewRank"
-									StrokeThickness="3" Stroke="{StaticResource LightGreenBrush}">
-					<telerik:LineSeries.PointTemplate>
-						<DataTemplate>
-							<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
-						</DataTemplate>
-					</telerik:LineSeries.PointTemplate>
+									StrokeThickness="3"
+									Stroke="{StaticResource LightGreenBrush}"
+									PointTemplateSelector="{StaticResource RankPointTemplateSelector}">
 				</telerik:LineSeries>
 				<telerik:RadCartesianChart.Grid>
 					<telerik:CartesianChartGrid MajorLinesVisibility="X" />
 				</telerik:RadCartesianChart.Grid>
 			</telerik:RadCartesianChart>
+			
+			<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+				<telerik:RadLegend.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal" />
+					</ItemsPanelTemplate>
+				</telerik:RadLegend.ItemsPanel>
+				<telerik:RadLegend.Items>
+					<telerik:LegendItemCollection>
+						<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Win" />
+						<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Lost" />
+						<telerik:LegendItem MarkerFill="{StaticResource BlueBrush}" Title="Draw" />
+					</telerik:LegendItemCollection>
+				</telerik:RadLegend.Items>
+			</telerik:RadLegend>
 		</Grid>
 	</Grid>
 </UserControl>

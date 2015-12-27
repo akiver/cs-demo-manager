@@ -345,142 +345,170 @@ namespace CSGO_Demos_Manager.Services.Design
 
 		public Task<List<RankDateChart>> GetRankDateChartDataAsync()
 		{
+			Random ran = new Random();
 			return Task.FromResult(new List<RankDateChart>
 			{
 				new RankDateChart
 				{
 					Date = DateTime.Now,
-					NewRank = 1
+					NewRank = 1,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(1),
-					NewRank = 2
+					NewRank = 2,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(2),
-					NewRank = 3
+					NewRank = 3,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(3),
-					NewRank = 4
+					NewRank = 4,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(4),
-					NewRank = 4
+					NewRank = 4,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(5),
-					NewRank = 3
+					NewRank = 3,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(6),
-					NewRank = 4
+					NewRank = 4,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(7),
-					NewRank = 5
+					NewRank = 5,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(8),
-					NewRank = 6
+					NewRank = 6,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(9),
-					NewRank = 7
+					NewRank = 7,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(10),
-					NewRank = 8
+					NewRank = 8,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(11),
-					NewRank = 9
+					NewRank = 9,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(12),
-					NewRank = 10
+					NewRank = 10,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(13),
-					NewRank = 11
+					NewRank = 11,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(14),
-					NewRank = 11
+					NewRank = 11,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(15),
-					NewRank = 11
+					NewRank = 11,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(16),
-					NewRank = 12
+					NewRank = 12,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(17),
-					NewRank = 13
+					NewRank = 13,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(18),
-					NewRank = 13
+					NewRank = 13,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(19),
-					NewRank = 14
+					NewRank = 14,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(20),
-					NewRank = 14
+					NewRank = 14,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(21),
-					NewRank = 15
+					NewRank = 15,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(22),
-					NewRank = 16
+					NewRank = 16,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(23),
-					NewRank = 17
+					NewRank = 17,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(24),
-					NewRank = 18
+					NewRank = 18,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(25),
-					NewRank = 18
+					NewRank = 18,
+					WinStatus = ran.Next(3)
 				},
 				new RankDateChart
 				{
 					Date = DateTime.Now.AddDays(26),
-					NewRank = 18
+					NewRank = 18,
+					WinStatus = ran.Next(3)
 				}
 			});
 		}

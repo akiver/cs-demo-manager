@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
-					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+					xmlns:selectors="clr-namespace:CSGO_Demos_Manager.Models.Selectors">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary>
@@ -75,6 +76,23 @@
 	<DataTemplate x:Key="RankAxisTemplate">
 		<Image Source="{Binding Converter={StaticResource RankToImageConverter}}" Height="32"/>
 	</DataTemplate>
+
+	<DataTemplate x:Key="WinPointTemplate">
+		<Ellipse Width="10" Height="10" Fill="{StaticResource GreenBrush}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="LostPointTemplate">
+		<Ellipse Width="10" Height="10" Fill="{StaticResource RedColorBrush}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DrawPointTemplate">
+		<Ellipse Width="10" Height="10" Fill="{StaticResource BlueBrush}" />
+	</DataTemplate>
+
+	<selectors:RankPointTemplateSelector x:Key="RankPointTemplateSelector"
+										 WinTemplate="{StaticResource WinPointTemplate}"
+										 LostTemplate="{StaticResource LostPointTemplate}"
+										 DrawTemplate="{StaticResource DrawPointTemplate}"/>
 
 	<Style x:Key="LabelChartStyle" TargetType="{x:Type TextBlock}">
 		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
