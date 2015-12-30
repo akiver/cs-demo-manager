@@ -109,8 +109,8 @@
 												  Grid.ColumnSpan="2">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}" x:Name="RoundOpenNumberColumn" Width="Auto" Header="#" Binding="{Binding Number}"/>
-												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}" x:Name="KillerOpenNameRoundColumn" Width="Auto" Header="Killer Name" Binding="{Binding OpenKillEvent.Killer.Name}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}" x:Name="KilledOpenNameRoundColumn" Width="Auto" Header="Killed Name" Binding="{Binding OpenKillEvent.Killed.Name}" />
+												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}" x:Name="KillerOpenNameRoundColumn" Width="Auto" Header="Killer Name" Binding="{Binding OpenKillEvent.KillerName}" />
+												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}" x:Name="KilledOpenNameRoundColumn" Width="Auto" Header="Killed Name" Binding="{Binding OpenKillEvent.KilledName}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}" x:Name="WeaponOpenNameRoundColumn" Width="Auto" Header="Weapon" Binding="{Binding OpenKillEvent.Weapon.Name}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource HasWinHeader}" x:Name="HasWinOpenRoundColumn" Width="Auto" Header="Result" Binding="{Binding OpenKillEvent.Result}" />
 											</DataGrid.Columns>
@@ -213,8 +213,8 @@
 												  CellStyle="{StaticResource DataGridCellStyle}" Grid.ColumnSpan="2">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}" x:Name="RoundNumberColumn" Width="Auto" Header="#" Binding="{Binding Number}"/>
-												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}" x:Name="KillerNameRoundColumn" Width="Auto" Header="Killer Name" Binding="{Binding EntryKillEvent.Killer.Name}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}" x:Name="KilledNameRoundColumn" Width="Auto" Header="Killed Name" Binding="{Binding EntryKillEvent.Killed.Name}" />
+												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}" x:Name="KillerNameRoundColumn" Width="Auto" Header="Killer Name" Binding="{Binding EntryKillEvent.KillerName}" />
+												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}" x:Name="KilledNameRoundColumn" Width="Auto" Header="Killed Name" Binding="{Binding EntryKillEvent.KilledName}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}" x:Name="WeaponNameRoundColumn" Width="Auto" Header="Weapon" Binding="{Binding EntryKillEvent.Weapon.Name}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource HasWinHeader}" x:Name="HasWinRoundColumn" Width="Auto" Header="Result" Binding="{Binding EntryKillEvent.Result}" />
 											</DataGrid.Columns>
