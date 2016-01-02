@@ -1309,7 +1309,6 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_demosSelectionChangedCommand = new RelayCommand<IList>(
 						demos =>
 						{
-							if (IsBusy) return;
 							if (demos == null) return;
 							SelectedDemos.Clear();
 							foreach (Demo demo in demos)
