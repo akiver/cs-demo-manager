@@ -541,7 +541,7 @@ namespace CSGO_Demos_Manager.ViewModel
 										List<Demo> demoList = demos.ToList();
 										while (demoList.Any() && _cts != null)
 										{
-											Task[] tasks = demoList.Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+											Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
 											{
 												if (!_cacheService.HasDemoInCache(demo))
 												{
@@ -587,7 +587,7 @@ namespace CSGO_Demos_Manager.ViewModel
 										List<Demo> demoList = demos.ToList();
 										while (demoList.Any() && _cts != null)
 										{
-											Task[] tasks = demoList.Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+											Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
 											{
 												if (!_cacheService.HasDemoInCache(demo))
 												{
@@ -1460,7 +1460,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				List<Demo> demos = SelectedDemos.ToList();
 				while (demos.Any() && _cts != null)
 				{
-					Task[] tasks = demos.Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+					Task[] tasks = demos.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
 					{
 						int result = await AnalyzeDemoAsync(demo, _cts.Token);
 						switch (result)
