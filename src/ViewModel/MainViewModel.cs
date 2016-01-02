@@ -111,13 +111,15 @@ namespace CSGO_Demos_Manager.ViewModel
 							await _dialogService.ShowMessageAsync("It seems that CSGO is not installed on your main hard drive. The defaults \"csgo\" and \"replays\" can not be found. Please add folders from the settings.", MessageDialogStyle.Affirmative);
 						}
 
-						// Check for 1st launch or upgrade that required cache clear
+						// Check for 1st launch or upgrade that required cache clear (when app major / minor version > major / minor config version)
 						if (_cacheService.ContainsDemos())
 						{
-							if ((string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion) && AppSettings.REQUIRE_CLEAR_CACHE)
+							if (string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
+								|| !string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
+								&& new Version(Properties.Settings.Default.ApplicationVersion).Major.CompareTo(AppSettings.APP_VERSION.Major) < 0
 								|| (!string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
-								&& new Version(Properties.Settings.Default.ApplicationVersion).CompareTo(AppSettings.APP_VERSION) < 0
-								&& AppSettings.REQUIRE_CLEAR_CACHE))
+								&& new Version(Properties.Settings.Default.ApplicationVersion).Major.CompareTo(AppSettings.APP_VERSION.Major) == 0
+								&& new Version(Properties.Settings.Default.ApplicationVersion).Minor.CompareTo(AppSettings.APP_VERSION.Minor) < 0))
 							{
 								var saveCustomData = await _dialogService.ShowMessageAsync("This update required to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
 								if (saveCustomData == MessageDialogResult.Affirmative)
