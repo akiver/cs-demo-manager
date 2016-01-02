@@ -416,8 +416,9 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_analyzeDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
+						Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof (Valve));
 						await RefreshSelectedDemos();
-						Messenger.Default.Send(new SelectedAccountChangedMessage());
+						if (hasValveDemo != null) Messenger.Default.Send(new SelectedAccountChangedMessage());
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
