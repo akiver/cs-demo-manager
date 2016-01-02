@@ -1362,8 +1362,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			DataGridDemosCollection.Filter = Filter;
 
 			Messenger.Default.Register<MainWindowLoadedMessage>(this, HandleMainWindowLoadedMessage);
-			Messenger.Default.Register<RefreshDemosMessage>(this, HandleRefreshDemosMessage);
-			Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
 		}
 
 		private void HandleMainWindowLoadedMessage(MainWindowLoadedMessage msg)
@@ -1388,11 +1386,13 @@ namespace CSGO_Demos_Manager.ViewModel
 				{
 					SelectedFolder = Folders.ElementAt(0);
 				}
-
-				if (!AppSettings.IsInternetConnectionAvailable()) return;
-
-				await RefreshBannedPlayerCount();
+				
 				await LoadDemosHeader();
+				await RefreshLastRankAccount();
+				if (!AppSettings.IsInternetConnectionAvailable()) await RefreshBannedPlayerCount();
+
+				Messenger.Default.Register<RefreshDemosMessage>(this, HandleRefreshDemosMessage);
+				Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
 				_isMainWindowLoaded = true;
 			});
 		}
@@ -1422,19 +1422,25 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)
 		{
+			DispatcherHelper.CheckBeginInvokeOnUI(
+			async () =>
+			{
+				await RefreshLastRankAccount();
+			});
+		}
+
+		private async Task RefreshLastRankAccount()
+		{
 			if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0)
 			{
-				Application.Current.Dispatcher.Invoke(async () =>
-				{
-					HasNotification = true;
-					IsBusy = true;
-					NotificationMessage = "Searching account's last rank...";
-					DataGridDemosCollection.Refresh();
-					LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync();
-					IsBusy = false;
-					HasNotification = false;
-					CommandManager.InvalidateRequerySuggested();
-				});
+				HasNotification = true;
+				IsBusy = true;
+				NotificationMessage = "Searching account's last rank...";
+				DataGridDemosCollection.Refresh();
+				LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync();
+				IsBusy = false;
+				HasNotification = false;
+				CommandManager.InvalidateRequerySuggested();
 			}
 		}
 
