@@ -192,8 +192,6 @@ namespace CSGO_Demos_Manager.Services
 
 			demo = await analyzer.AnalyzeDemoAsync(token);
 
-			await _cacheService.WriteDemoDataCache(demo);
-
 			return demo;
 		}
 

@@ -547,6 +547,7 @@ namespace CSGO_Demos_Manager.ViewModel
 												{
 													await AnalyzeDemoAsync(demo, _cts.Token);
 												}
+												demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 												demoList.Remove(demo);
 											}).ToArray();
 											await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
@@ -595,6 +596,7 @@ namespace CSGO_Demos_Manager.ViewModel
 													if (analyzeResult == 1 && _cts != null)
 													{
 														NotificationMessage = "Exporting " + demo.Name + "...";
+														demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 														await _excelService.GenerateXls(demo,
 															path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
 													}
@@ -602,6 +604,7 @@ namespace CSGO_Demos_Manager.ViewModel
 												else
 												{
 													NotificationMessage = "Exporting " + demo.Name + "...";
+													demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 													await _excelService.GenerateXls(demo,
 														path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
 												}

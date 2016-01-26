@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Models.Events;
 
 namespace CSGO_Demos_Manager.Services.Interfaces
 {
@@ -60,6 +61,18 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// <returns></returns>
 		Task<long> GetCacheSizeAsync();
 
+		/// <summary>
+		/// Remove demo from cache
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
 		Task<bool> RemoveDemo(Demo demo);
+
+		/// <summary>
+		/// Return the list of WeaponFire events of the demo
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<List<WeaponFire>> GetDemoWeaponFiredAsync(Demo demo);
 	}
 }

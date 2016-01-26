@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
+using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services.Interfaces;
 
 namespace CSGO_Demos_Manager.Services.Design
@@ -153,6 +154,11 @@ namespace CSGO_Demos_Manager.Services.Design
 		public Task<bool> RemoveDemo(Demo demo)
 		{
 			return Task.FromResult(true);
+		}
+
+		public Task<List<WeaponFire>> GetDemoWeaponFiredAsync(Demo demo)
+		{
+			return Task.FromResult(new List<WeaponFire>());
 		}
 	}
 }

@@ -28,6 +28,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private readonly IPlayerService _playerService;
 
+		private readonly ICacheService _cacheService;
+
 		private Demo _currentDemo;
 
 		private int _roundNumber;
@@ -210,6 +212,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private async Task LoadDatas()
 		{
+			CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
 			CurrentRound = CurrentDemo.Rounds.First(r => r.Number == RoundNumber);
 			VisibleStartTime = DateTime.Today.AddSeconds(-5);
 			VisibleEndTime = CurrentRound.EndTickTime.AddSeconds(5);
@@ -238,11 +241,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		public RoundViewModel(DialogService dialogService, IRoundService rounderService, IPlayerService playerService)
+		public RoundViewModel(DialogService dialogService, IRoundService rounderService, IPlayerService playerService, ICacheService cacheService)
 		{
 			_dialogService = dialogService;
 			_roundService = rounderService;
 			_playerService = playerService;
+			_cacheService = cacheService;
 
 			if (IsInDesignMode)
 			{

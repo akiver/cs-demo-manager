@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Serialization;
 
@@ -45,9 +46,22 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		private const string FOLDERS_FILENAME = "folders.json";
 
+		/// <summary>
+		/// Demo filename regex
+		/// </summary>
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)(_|[0-9]+)(.json)$");
 
-#endregion
+		/// <summary>
+		/// WeaponFire events filename regex
+		/// </summary>
+		private readonly Regex _weaponFiredFilePattern = new Regex("^(.*?)(_|[0-9]+)(_weapon_fired.json)$");
+
+		/// <summary>
+		/// Filename suffix containing WeaponFire events
+		/// </summary>
+		private const string WEAPON_FIRED_FILE_SUFFIX = "_weapon_fired.json";
+
+		#endregion
 
 		public CacheService()
 		{
@@ -114,7 +128,7 @@ namespace CSGO_Demos_Manager.Services
 		/// <returns></returns>
 		public bool HasDemoInCache(Demo demo)
 		{
-			string pathDemoFileJson = _pathFolderCache + "\\" + demo.Id + ".json";
+			string pathDemoFileJson = GetDemoFilePath(demo);
 			return File.Exists(pathDemoFileJson);
 		}
 
@@ -125,7 +139,7 @@ namespace CSGO_Demos_Manager.Services
 		/// <returns></returns>
 		public async Task<Demo> GetDemoDataFromCache(Demo demo)
 		{
-			string pathDemoFileJson = _pathFolderCache + "\\" + demo.Id + ".json";
+			string pathDemoFileJson = GetDemoFilePath(demo);
 
 			string json = File.ReadAllText(pathDemoFileJson);
 
@@ -151,20 +165,24 @@ namespace CSGO_Demos_Manager.Services
 		/// <returns></returns>
 		public async Task WriteDemoDataCache(Demo demo)
 		{
-			string pathDemoFileJson = _pathFolderCache + "\\" + demo.Id + ".json";
+			string pathDemoFileJson = GetDemoFilePath(demo);
+			string pathDemoWeaponFiredFileJson = GetWeaponFiredFilePath(demo);
 
-			string json;
 			try
 			{
+				// Save WeaponFire events to dedicated file and release it from RAM
+				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.WeaponFired, _settingsJson));
+				File.WriteAllText(pathDemoWeaponFiredFileJson, json);
+				demo.WeaponFired.Clear();
+
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, _settingsJson));
+				File.WriteAllText(pathDemoFileJson, json);
 			}
 			catch (Exception e)
 			{
 				Logger.Instance.Log(e);
 				throw;
 			}
-
-			File.WriteAllText(pathDemoFileJson, json);
 		}
 
 		/// <summary>
@@ -356,7 +374,8 @@ namespace CSGO_Demos_Manager.Services
 					if (File.Exists(file))
 					{
 						Match match = _demoFilePattern.Match(file);
-						if (match.Success)
+						Match matchWeaponFiredFile = _weaponFiredFilePattern.Match(file);
+						if (match.Success || matchWeaponFiredFile.Success)
 						{
 							File.Delete(file);
 						}
@@ -372,13 +391,34 @@ namespace CSGO_Demos_Manager.Services
 		public Task<bool> RemoveDemo(Demo demo)
 		{
 			bool isDeleted = false;
-			string path = _pathFolderCache + "\\" + demo.Id + ".json";
-			if (File.Exists(path))
+			string demoFilePath = GetDemoFilePath(demo);
+			string weaponFiredFilePath = GetWeaponFiredFilePath(demo);
+			if (File.Exists(demoFilePath))
 			{
-				File.Delete(path);
+				File.Delete(demoFilePath);
 				isDeleted = true;
 			}
+			if (File.Exists(weaponFiredFilePath)) File.Delete(weaponFiredFilePath);
 			return Task.FromResult(isDeleted);
+		}
+
+		public async Task<List<WeaponFire>> GetDemoWeaponFiredAsync(Demo demo)
+		{
+			string pathDemoFileJson = GetWeaponFiredFilePath(demo);
+			string json = File.ReadAllText(pathDemoFileJson);
+
+			List<WeaponFire> weaponFiredList;
+			try
+			{
+				weaponFiredList = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<WeaponFire>>(json, _settingsJson));
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				throw;
+			}
+
+			return weaponFiredList;
 		}
 
 		/// <summary>
@@ -578,6 +618,16 @@ namespace CSGO_Demos_Manager.Services
 		public Task<long> GetCacheSizeAsync()
 		{
 			return Task.FromResult(new DirectoryInfo(_pathFolderCache).GetFiles("*.json", SearchOption.AllDirectories).Sum(file => file.Length));
+		}
+
+		private string GetDemoFilePath(Demo demo)
+		{
+			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + ".json";
+		}
+
+		private string GetWeaponFiredFilePath(Demo demo)
+		{
+			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + WEAPON_FIRED_FILE_SUFFIX;
 		}
 	}
 }
