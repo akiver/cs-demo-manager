@@ -12,7 +12,7 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public int DeathCount { get; set; }
 
-		public decimal KillPerDeath => Math.Round((decimal)KillCount/ DeathCount, 2);
+		public decimal KillPerDeath => DeathCount == 0 ? KillCount : Math.Round((decimal)KillCount / DeathCount, 2);
 
 		public int HeadshotCount { get; set; }
 
@@ -78,13 +78,13 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public decimal OpenKillWinPercent => OpenKillCount == 0 ? 0 : Math.Round((decimal)(OpenKillWinCount * 100) / OpenKillCount, 2);
 
-		public decimal KillPerRound => Math.Round((decimal)KillCount / RoundCount, 2);
+		public decimal KillPerRound => RoundCount == 0 ? 0 : Math.Round((decimal)KillCount / RoundCount, 2);
 
-		public decimal AssistPerRound => Math.Round((decimal)AssistCount / RoundCount, 2);
+		public decimal AssistPerRound => RoundCount == 0 ? 0 : Math.Round((decimal)AssistCount / RoundCount, 2);
 
-		public decimal DeathPerRound => Math.Round((decimal)DeathCount / RoundCount, 2);
+		public decimal DeathPerRound => RoundCount == 0 ? 0 : Math.Round((decimal)DeathCount / RoundCount, 2);
 
-		public decimal AverageDamagePerRound => Math.Round((decimal)DamageHealthCount / RoundCount, 2);
+		public decimal AverageDamagePerRound => RoundCount == 0 ? 0 : Math.Round((decimal)DamageHealthCount / RoundCount, 2);
 
 		public int DamageHealthCount { get; set; }
 
