@@ -232,11 +232,6 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private TeamExtended _teamT;
 
-		/// <summary>
-		/// Contains data about flashbangs which had blinded players
-		/// </summary>
-		private ObservableCollection<PlayerBlindedEvent> _playerBlindedEvents = new ObservableCollection<PlayerBlindedEvent>();
-
 		#endregion
 
 		#region Accessors
@@ -509,13 +504,6 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => MostEntryKillPlayer, ref _mostEntryKillPlayer, value); }
 		}
 
-		[JsonProperty("player_blinded_events", IsReference = false)]
-		public ObservableCollection<PlayerBlindedEvent> PlayerBlindedEvents
-		{
-			get { return _playerBlindedEvents; }
-			set { Set(() => PlayerBlindedEvents, ref _playerBlindedEvents, value); }
-		}
-
 		[JsonProperty("bomb_planted", IsReference = false)]
 		public ObservableCollection<BombPlantedEvent> BombPlanted
 		{
@@ -549,6 +537,12 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		[JsonProperty("weapon_fired", IsReference = false)]
 		public List<WeaponFire> WeaponFired = new List<WeaponFire>();
+
+		/// <summary>
+		/// Contains data about flashbangs which had blinded players
+		/// </summary>
+		[JsonProperty("player_blinded_events", IsReference = false)]
+		public List<PlayerBlindedEvent> PlayerBlindedEvents = new List<PlayerBlindedEvent>();
 
 		[JsonProperty("player_hurted", IsReference = false)]
 		public ObservableCollection<PlayerHurtedEvent> PlayersHurted
@@ -1180,7 +1174,7 @@ namespace CSGO_Demos_Manager.Models
 					_mostKillingWeapon = null;
 					_hasCheater = false;
 					_playersHurted.Clear();
-					_playerBlindedEvents.Clear();
+					PlayerBlindedEvents.Clear();
 					_winner = null;
 				});
 		}

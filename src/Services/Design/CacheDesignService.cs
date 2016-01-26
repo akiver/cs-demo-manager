@@ -160,5 +160,10 @@ namespace CSGO_Demos_Manager.Services.Design
 		{
 			return Task.FromResult(new List<WeaponFire>());
 		}
+
+		public Task<List<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo)
+		{
+			return Task.FromResult(new List<PlayerBlindedEvent>());
+		}
 	}
 }

@@ -52,14 +52,19 @@ namespace CSGO_Demos_Manager.Services
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)(_|[0-9]+)(.json)$");
 
 		/// <summary>
-		/// WeaponFire events filename regex
+		/// Regex for demo's related files
 		/// </summary>
-		private readonly Regex _weaponFiredFilePattern = new Regex("^(.*?)(_|[0-9]+)(_weapon_fired.json)$");
+		private readonly Regex _demoRelatedFilePattern = new Regex("^(.*?)(_|[0-9]+)_([^0-9]+\\.json)$");
 
 		/// <summary>
 		/// Filename suffix containing WeaponFire events
 		/// </summary>
 		private const string WEAPON_FIRED_FILE_SUFFIX = "_weapon_fired.json";
+
+		/// <summary>
+		/// Filename suffix containing PlayerBlinded events
+		/// </summary>
+		private const string PLAYER_BLINDED_FILE_SUFFIX = "_players_blinded.json";
 
 		#endregion
 
@@ -167,6 +172,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			string pathDemoFileJson = GetDemoFilePath(demo);
 			string pathDemoWeaponFiredFileJson = GetWeaponFiredFilePath(demo);
+			string pathDemoPlayerBlindedFileJson = GetPlayerBlindedFilePath(demo);
 
 			try
 			{
@@ -174,7 +180,12 @@ namespace CSGO_Demos_Manager.Services
 				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.WeaponFired, _settingsJson));
 				File.WriteAllText(pathDemoWeaponFiredFileJson, json);
 				demo.WeaponFired.Clear();
+				// Save PlayerBlindedEvent to dedicated file and release it from RAM
+				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.PlayerBlindedEvents, _settingsJson));
+				File.WriteAllText(pathDemoPlayerBlindedFileJson, json);
+				demo.PlayerBlindedEvents.Clear();
 
+				// Save general demo's data
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, _settingsJson));
 				File.WriteAllText(pathDemoFileJson, json);
 			}
@@ -374,8 +385,8 @@ namespace CSGO_Demos_Manager.Services
 					if (File.Exists(file))
 					{
 						Match match = _demoFilePattern.Match(file);
-						Match matchWeaponFiredFile = _weaponFiredFilePattern.Match(file);
-						if (match.Success || matchWeaponFiredFile.Success)
+						Match matchDemoRelatedFile = _demoRelatedFilePattern.Match(file);
+						if (match.Success || matchDemoRelatedFile.Success)
 						{
 							File.Delete(file);
 						}
@@ -393,12 +404,14 @@ namespace CSGO_Demos_Manager.Services
 			bool isDeleted = false;
 			string demoFilePath = GetDemoFilePath(demo);
 			string weaponFiredFilePath = GetWeaponFiredFilePath(demo);
+			string playerBlindedFilePath = GetPlayerBlindedFilePath(demo);
 			if (File.Exists(demoFilePath))
 			{
 				File.Delete(demoFilePath);
 				isDeleted = true;
 			}
 			if (File.Exists(weaponFiredFilePath)) File.Delete(weaponFiredFilePath);
+			if (File.Exists(playerBlindedFilePath)) File.Delete(playerBlindedFilePath);
 			return Task.FromResult(isDeleted);
 		}
 
@@ -419,6 +432,25 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			return weaponFiredList;
+		}
+
+		public async Task<List<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo)
+		{
+			string pathFile = GetPlayerBlindedFilePath(demo);
+			string json = File.ReadAllText(pathFile);
+
+			List<PlayerBlindedEvent> playerBlindedList;
+			try
+			{
+				playerBlindedList = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<PlayerBlindedEvent>>(json, _settingsJson));
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				throw;
+			}
+
+			return playerBlindedList;
 		}
 
 		/// <summary>
@@ -628,6 +660,11 @@ namespace CSGO_Demos_Manager.Services
 		private string GetWeaponFiredFilePath(Demo demo)
 		{
 			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + WEAPON_FIRED_FILE_SUFFIX;
+		}
+
+		private string GetPlayerBlindedFilePath(Demo demo)
+		{
+			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + PLAYER_BLINDED_FILE_SUFFIX;
 		}
 	}
 }

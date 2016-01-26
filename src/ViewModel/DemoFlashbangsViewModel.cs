@@ -23,6 +23,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private readonly IFlashbangService _flashbangService;
 
+		private readonly ICacheService _cacheService;
+
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
 		private RelayCommand _windowLoadedCommand;
@@ -169,9 +171,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public DemoFlashbangsViewModel(IFlashbangService flashbangService)
+		public DemoFlashbangsViewModel(IFlashbangService flashbangService, ICacheService cacheService)
 		{
 			_flashbangService = flashbangService;
+			_cacheService = cacheService;
 
 			if (IsInDesignMode)
 			{
@@ -186,6 +189,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		{
 			IsBusy = true;
 			NotificationMessage = "Loading...";
+			CurrentDemo.PlayerBlindedEvents = await _cacheService.GetDemoPlayerBlindedAsync(CurrentDemo);
 			_flashbangService.Demo = CurrentDemo;
 			PlayersFlashTimes = await _flashbangService.GetPlayersFlashTimesData();
 			if (PlayersFlashTimes.Any()) MaxDurationPlayer = PlayersFlashTimes.Max(p => p.Duration);

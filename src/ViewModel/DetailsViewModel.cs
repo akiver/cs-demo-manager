@@ -345,9 +345,9 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_goToDemoFlashbangsCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (!demo.PlayerBlindedEvents.Any())
+						if (!_cacheService.HasDemoInCache(demo))
 						{
-							await _dialogService.ShowMessageAsync("No flashbang events detected or you didn't analyze this demo.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync("You have to analyze this demo first.", MessageDialogStyle.Affirmative);
 							return;
 						}
 						var demoFlashbangsViewModel = (new ViewModelLocator()).DemoFlashbangs;

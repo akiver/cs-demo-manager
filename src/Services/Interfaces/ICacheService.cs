@@ -74,5 +74,12 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// <param name="demo"></param>
 		/// <returns></returns>
 		Task<List<WeaponFire>> GetDemoWeaponFiredAsync(Demo demo);
+
+		/// <summary>
+		/// Return the list of PlayerBlindedEvent of the demo
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<List<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo);
 	}
 }
