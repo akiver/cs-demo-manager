@@ -397,6 +397,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void AddTeams()
 		{
+			// Detect possible swap by teams name, work for some demos
+			if (Parser.TClanName == Demo.TeamCT.Name || Parser.CTClanName == Demo.TeamT.Name)
+			{
+				TeamExtended tmp = Demo.TeamT;
+				Demo.TeamT = Demo.TeamCT;
+				Demo.TeamCT = tmp.Clone();
+			}
+
 			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{
