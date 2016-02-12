@@ -1103,6 +1103,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							if (!Accounts.Any() || (SelectedStatsAccount != null && SelectedStatsAccount.SteamId.ToString() == account.SteamId)) IsShowAllAccounts = true;
 							// if the current watch account is removed, we reset the displayed watch account
 							if (WatchAccountSteamId.ToString() == account.SteamId) SelectedWatchAccount = null;
+							await _cacheService.RemoveRankInfoAsync(Convert.ToInt64(account.SteamId));
 							Accounts.Remove(account);
 						}, account => SelectedAccount != null));
 			}
@@ -1196,6 +1197,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						var result = await _dialogService.ShowMessageAsync("Demos data will be deleted! Are you sure?", MessageDialogStyle.AffirmativeAndNegative);
 						if (result == MessageDialogResult.Negative) return;
 						await _cacheService.ClearDemosFile();
+						await _cacheService.ClearRankInfoAsync();
 						await _dialogService.ShowMessageAsync("Demos data cleared.", MessageDialogStyle.Affirmative);
 					}));
 			}

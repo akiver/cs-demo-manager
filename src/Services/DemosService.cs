@@ -14,7 +14,6 @@ using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Serialization;
-using MoreLinq;
 using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Services
@@ -210,24 +209,40 @@ namespace CSGO_Demos_Manager.Services
 			return demos;
 		}
 
-		public async Task<Rank> GetLastRankAccountStatsAsync()
+		public async Task<Rank> GetLastRankAccountStatsAsync(long steamId)
 		{
-			Rank rank = AppSettings.RankList[0];
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			Rank lastRank = AppSettings.RankList[0];
+			List<string> folders = await _cacheService.GetFoldersAsync();
+			// Get only the demos header to have access to the demo's date
+			List<Demo> demos = await GetDemosHeader(folders);
 			if (demos.Any())
 			{
-				// demos where account played and only from valve
-				List<Demo> demosPlayerList = demos.Where(demo => demo.SourceName == "valve"
-				&& demo.Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID) != null).ToList();
-				if (demosPlayerList.Any())
+				if (steamId == 0) steamId = Settings.Default.SelectedStatsAccountSteamID;
+				if (steamId == 0) return lastRank;
+				// keep only demos from valve where the account played
+				List<Demo> newDemoList = demos.Where(d => d.SourceName == "valve"
+				&& d.Players.FirstOrDefault(p => p.SteamId == steamId) != null)
+				.ToList();
+				if (newDemoList.Any())
 				{
-					Demo lastDemo = demosPlayerList.MaxBy(d => d.Date);
-					int rankNumber = lastDemo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RankNumberNew;
-					rank = AppSettings.RankList.First(r => r.Number == rankNumber);
+					// Sort by date and keep the more recent
+					newDemoList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
+					Demo lastDemo = newDemoList.Last();
+					// Get the new rank
+					PlayerExtended player = lastDemo.Players.First(p => p.SteamId == steamId);
+					lastRank = AppSettings.RankList.FirstOrDefault(r => r.Number == player.RankNumberNew);
+					// Save it to the cache
+					RankInfo rankInfo = new RankInfo
+					{
+						Number = player.RankNumberNew,
+						SteamId = player.SteamId,
+						LastDate = lastDemo.Date
+					};
+					await _cacheService.SaveLastRankInfoAsync(rankInfo);
 				}
 			}
 
-			return rank;
+			return lastRank;
 		}
 
 		public async Task<List<RankDateChart>> GetRankDateChartDataAsync()

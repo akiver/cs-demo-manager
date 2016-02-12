@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
@@ -164,6 +165,54 @@ namespace CSGO_Demos_Manager.Services.Design
 		public Task<List<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo)
 		{
 			return Task.FromResult(new List<PlayerBlindedEvent>());
+		}
+
+		public Task<RankInfo> GetLastRankInfoAsync()
+		{
+			return Task.FromResult(new RankInfo
+			{
+				Number = 1,
+				SteamId = 158841,
+				LastDate = DateTime.Now
+			});
+		}
+
+		public Task<Rank> GetLastRankAsync(long steamId)
+		{
+			return Task.FromResult(AppSettings.RankList[0]);
+		}
+
+		public Task<bool> SaveLastRankInfoAsync(RankInfo rankInfo)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<List<RankInfo>> GetRankInfoListAsync()
+		{
+			return Task.FromResult(new List<RankInfo>
+			{
+				new RankInfo
+				{
+					Number = 2,
+					LastDate = DateTime.Now,
+					SteamId = 54454,
+				}
+			});
+		}
+
+		public Task<bool> UpdateRankInfoAsync(Demo demo)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task ClearRankInfoAsync()
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<bool> RemoveRankInfoAsync(long steamId)
+		{
+			return Task.FromResult(true);
 		}
 	}
 }

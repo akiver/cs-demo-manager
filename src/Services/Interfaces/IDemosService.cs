@@ -50,10 +50,11 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		Task<Demo> AnalyzeBannedPlayersAsync(Demo demo);
 
 		/// <summary>
-		/// Return the last rank detected of the selected account
+		/// Return the last rank detected for the specific steamId
 		/// </summary>
+		/// <param name="steamId"></param>
 		/// <returns></returns>
-		Task<Rank> GetLastRankAccountStatsAsync();
+		Task<Rank> GetLastRankAccountStatsAsync(long steamId);
 
 		/// <summary>
 		/// Return Rank model evolution for the rank chart

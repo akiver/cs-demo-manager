@@ -338,7 +338,7 @@ namespace CSGO_Demos_Manager.Services.Design
 			return Task.FromResult(demo);
 		}
 
-		public Task<Rank> GetLastRankAccountStatsAsync()
+		public Task<Rank> GetLastRankAccountStatsAsync(long steamId)
 		{
 			return Task.FromResult(AppSettings.RankList[0]);
 		}

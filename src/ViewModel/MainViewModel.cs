@@ -275,6 +275,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						RefreshDemosMessage msg = new RefreshDemosMessage();
 						Messenger.Default.Send(msg);
+						SelectedAccountChangedMessage msgRank = new SelectedAccountChangedMessage();
+						Messenger.Default.Send(msgRank);
 					}));
 			}
 		}

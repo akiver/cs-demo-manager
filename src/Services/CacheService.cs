@@ -47,6 +47,11 @@ namespace CSGO_Demos_Manager.Services
 		private const string FOLDERS_FILENAME = "folders.json";
 
 		/// <summary>
+		/// Contains the last RankInfo detected for each account
+		/// </summary>
+		private const string RANKS_FILENAME = "ranks.json";
+
+		/// <summary>
 		/// Demo filename regex
 		/// </summary>
 		private readonly Regex _demoFilePattern = new Regex("^(.*?)(_|[0-9]+)(.json)$");
@@ -77,6 +82,8 @@ namespace CSGO_Demos_Manager.Services
 				File.Create(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME);
 			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME))
 				File.Create(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME);
+			if (!File.Exists(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME))
+				File.Create(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME);
 #if DEBUG
 
 			_settingsJson.Formatting = Formatting.Indented;
@@ -338,6 +345,9 @@ namespace CSGO_Demos_Manager.Services
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
 			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
 			File.WriteAllText(pathAccountsFileJson, json);
+
+			// remove its RankInfo data
+			await RemoveRankInfoAsync(Convert.ToInt64(accountToRemove.SteamId));
 
 			return true;
 		}
@@ -665,6 +675,119 @@ namespace CSGO_Demos_Manager.Services
 		private string GetPlayerBlindedFilePath(Demo demo)
 		{
 			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + PLAYER_BLINDED_FILE_SUFFIX;
+		}
+
+		public async Task<List<RankInfo>> GetRankInfoListAsync()
+		{
+			string pathRankFile = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+			string json = File.ReadAllText(pathRankFile);
+			List<RankInfo>  rankAccountList = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<RankInfo>>(json));
+			if (rankAccountList == null) rankAccountList = new List<RankInfo>();
+
+			return rankAccountList;
+		}
+
+		public async Task<RankInfo> GetLastRankInfoAsync()
+		{
+			RankInfo rankInfo = null;
+			List<RankInfo> rankAccountList = await GetRankInfoListAsync();
+			if (rankAccountList.Any())
+			{
+				rankInfo = rankAccountList.FirstOrDefault(r => r.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
+			}
+
+			return rankInfo;
+		}
+
+		public async Task<Rank> GetLastRankAsync(long steamId)
+		{
+			Rank rank = null;
+			List<RankInfo> rankAccountList = await GetRankInfoListAsync();
+			if (rankAccountList.Any())
+			{
+				RankInfo rankInfo = rankAccountList.FirstOrDefault(r => r.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
+				if (rankInfo != null) rank = AppSettings.RankList.FirstOrDefault(r => r.Number == rankInfo.Number);
+			}
+
+			return rank;
+		}
+
+		public async Task<bool> SaveLastRankInfoAsync(RankInfo rankInfo)
+		{
+			try
+			{
+				// Get the current RankInfo list
+				List<RankInfo> rankInfoList = await GetRankInfoListAsync();
+				// Check if it's already in the list
+				RankInfo lastRankInfo = rankInfoList.FirstOrDefault(r => r.SteamId == rankInfo.SteamId);
+				if (lastRankInfo != null)
+				{
+					// Known account, update it
+					rankInfoList.Remove(lastRankInfo);
+					rankInfoList.Add(rankInfo);
+				}
+				else
+				{
+					// New account, add it
+					rankInfoList.Add(rankInfo);
+				}
+
+				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(rankInfoList));
+				string pathWhitelistFileJson = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+				File.WriteAllText(pathWhitelistFileJson, json);
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				throw;
+			}
+
+			return true;
+		}
+
+		public async Task<bool> UpdateRankInfoAsync(Demo demo)
+		{
+			// We don't care about no valve demos
+			if (demo.SourceName != "valve") return false;
+			// Check if the player is in the demo
+			PlayerExtended player = demo.Players
+				.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
+			if (player == null) return false;
+			// Don't update if demo's date is higher than the known last rank date detected
+			RankInfo lastRankInfo = await GetLastRankInfoAsync();
+			if (lastRankInfo != null && lastRankInfo.LastDate > demo.Date) return false;
+			lastRankInfo = new RankInfo
+			{
+				SteamId = player.SteamId,
+				Number = player.RankNumberNew,
+				LastDate = demo.Date
+			};
+			await SaveLastRankInfoAsync(lastRankInfo);
+
+			return true;
+		}
+
+		public Task ClearRankInfoAsync()
+		{
+			return Task.Run(() =>
+			{
+				string pathRankFile = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+				File.WriteAllText(pathRankFile, string.Empty);
+			});
+		}
+
+		public async Task<bool> RemoveRankInfoAsync(long steamId)
+		{
+			List<RankInfo> rankInfoList = await GetRankInfoListAsync();
+			RankInfo rankInfo = rankInfoList.FirstOrDefault(r => r.SteamId == steamId);
+			if (rankInfo == null) return false;
+
+			rankInfoList.Remove(rankInfo);
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(rankInfoList));
+			string pathRankFile = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+			File.WriteAllText(pathRankFile, json);
+
+			return true;
 		}
 	}
 }

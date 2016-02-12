@@ -81,5 +81,50 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// <param name="demo"></param>
 		/// <returns></returns>
 		Task<List<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo);
+
+		/// <summary>
+		/// Return the last RankInfo detected for the selected account
+		/// </summary>
+		/// <returns></returns>
+		Task<RankInfo> GetLastRankInfoAsync();
+
+		/// <summary>
+		/// Return the last Rank detected for the steamId
+		/// </summary>
+		/// <returns></returns>
+		Task<Rank> GetLastRankAsync(long steamId);
+
+		/// <summary>
+		/// Save the RankInfo
+		/// </summary>
+		/// <param name="rankInfo"></param>
+		/// <returns></returns>
+		Task<bool> SaveLastRankInfoAsync(RankInfo rankInfo);
+
+		/// <summary>
+		/// Return all RankInfo
+		/// </summary>
+		/// <returns></returns>
+		Task<List<RankInfo>> GetRankInfoListAsync();
+
+		/// <summary>
+		/// Update the RankInfo if it's necessary (based on the demo's data)
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<bool> UpdateRankInfoAsync(Demo demo);
+
+		/// <summary>
+		/// Clear the RankInfo list
+		/// </summary>
+		/// <returns></returns>
+		Task ClearRankInfoAsync();
+
+		/// <summary>
+		/// Remove a specific RankInfo based on the SteamID
+		/// </summary>
+		/// <param name="steamId"></param>
+		/// <returns></returns>
+		Task<bool> RemoveRankInfoAsync(long steamId);
 	}
 }

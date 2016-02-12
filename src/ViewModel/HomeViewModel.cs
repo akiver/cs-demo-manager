@@ -1439,7 +1439,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				IsBusy = true;
 				NotificationMessage = "Searching account's last rank...";
 				DataGridDemosCollection.Refresh();
-				LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync();
+				long steamId = Properties.Settings.Default.SelectedStatsAccountSteamID;
+				Rank lastRank = await _cacheService.GetLastRankAsync(steamId);
+				if (lastRank == null)
+				{
+					// if the rank is not in the cache we try to get it from demos
+					LastRankAccountStats = await _demosService.GetLastRankAccountStatsAsync(steamId);
+				}
+				else
+				{
+					LastRankAccountStats = lastRank;
+				}
 				IsBusy = false;
 				HasNotification = false;
 				CommandManager.InvalidateRequerySuggested();
@@ -1516,7 +1526,9 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						await _demosService.AnalyzeBannedPlayersAsync(demo);
 					}
+					
 					await _cacheService.WriteDemoDataCache(demo);
+					await _cacheService.UpdateRankInfoAsync(demo);
 				}
 			}
 			catch (Exception e)
