@@ -35,7 +35,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private readonly Regex _faceitScoreRegex = new Regex("^ (\\[FACEIT\\^?\\]|\\[ANNA\\^\\]) (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
 
-		private readonly Regex _endMatchRegex = new Regex("^eBot: (.*) win(.*)$");
+		private readonly Regex _endMatchRegex = new Regex("^eBot: (.*) win(.*)$|^ \\[FACEIT\\^\\] (.*) won the match(.*)$");
 
 		private readonly Regex _faceItLiveRegex = new Regex("^ (\\[FACEIT\\^\\]|\\[ANNA\\^\\]) LIVE!$");
 
@@ -205,7 +205,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					score2 = Convert.ToInt32(scoreUpdateFaceit.Groups["score2"].Value);
 					_isFaceit = true;
 				}
-				
+
 				int scoreTotal = score1 + score2;
 				if (scoreTotal == 15) IsSwapTeamRequired = true;
 				return;
