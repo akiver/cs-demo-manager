@@ -669,10 +669,10 @@ namespace CSGO_Demos_Manager.Services
 						// Equipment
 						stats.KillHeGrenadeCount +=
 							demo.Kills.Count(
-								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "He grenade");
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "HE Grenade");
 						stats.DeathHeGrenadeCount +=
 							demo.Kills.Count(
-								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "He grenade");
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "HE Grenade");
 
 						stats.KillMolotovCount +=
 							demo.Kills.Count(
