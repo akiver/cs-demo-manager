@@ -19,6 +19,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "Server Tickrate", CellType.Numeric },
 				{ "Framerate", CellType.Numeric },
 				{ "Duration", CellType.Numeric },
+				{ "Ticks", CellType.Numeric },
 				{ "Name team 1", CellType.String },
 				{ "Name team 2", CellType.String },
 				{ "Score team 1", CellType.Numeric },
@@ -73,6 +74,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ServerTickrate);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Tickrate);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Duration);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Ticks);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamCT.Name);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamT.Name);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreTeam1);
