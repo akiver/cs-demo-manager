@@ -346,6 +346,9 @@
 											<CheckBox Content="Team trouble"
 										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn}"
 										Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="Ticks"
+										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTicksColumn}"
+										Style="{StaticResource CheckBoxColumnOptionStyle}" />
 										</StackPanel>
 									</StackPanel>
 								</StackPanel>

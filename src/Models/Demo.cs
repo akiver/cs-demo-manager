@@ -73,6 +73,11 @@ namespace CSGO_Demos_Manager.Models
 		private float _duration;
 
 		/// <summary>
+		/// Demo's tick count
+		/// </summary>
+		private int _ticks;
+
+		/// <summary>
 		/// Demo's map name
 		/// </summary>
 		private string _mapName;
@@ -322,6 +327,13 @@ namespace CSGO_Demos_Manager.Models
 				Set(() => Duration, ref _duration, value);
 				RaisePropertyChanged(() => DurationTime);
 			}
+		}
+
+		[JsonProperty("ticks")]
+		public int Ticks
+		{
+			get { return _ticks; }
+			set { Set(() => Ticks, ref _ticks, value); }
 		}
 
 		[JsonProperty("map_name")]

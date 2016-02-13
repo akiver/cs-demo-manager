@@ -148,6 +148,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			demo.Duration = header.PlaybackTime;
 			demo.MapName = header.MapName;
 			demo.Source = DetermineDemoSource(demo, header);
+			demo.Ticks = header.PlaybackTicks;
 
 			// Read .info file to get the real match date
 			string infoFilePath = demo.Path + ".info";

@@ -100,6 +100,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showFramerateColumn = Settings.Default.ShowFramerateColumn;
 
+		private bool _showTicksColumn = Settings.Default.ShowTicksColumn;
+
 		private bool _showTickrateColumn = Settings.Default.ShowTickrateColumn;
 
 		private bool _showOneKillColumn = Settings.Default.ShowOneKillColumn;
@@ -505,6 +507,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowFramerateColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowFramerateColumn, ref _showFramerateColumn, value);
+			}
+		}
+
+		public bool ShowTicksColumn
+		{
+			get { return _showTicksColumn; }
+			set
+			{
+				Settings.Default.ShowTicksColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTicksColumn, ref _showTicksColumn, value);
 			}
 		}
 

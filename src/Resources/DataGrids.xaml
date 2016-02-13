@@ -217,6 +217,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Demo's framerate" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="TicksHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Demo's ticks" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="DemoDateHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Demo's creation date" />
 	</Style>

@@ -1042,5 +1042,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowCrouchKillsColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTicksColumn {
+            get {
+                return ((bool)(this["ShowTicksColumn"]));
+            }
+            set {
+                this["ShowTicksColumn"] = value;
+            }
+        }
     }
 }

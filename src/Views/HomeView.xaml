@@ -542,6 +542,8 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="DemoFramerateColumn" Width="Auto" Header="Framerate" Binding="{Binding Tickrate}" HeaderStyle="{StaticResource FramerateHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFramerateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn x:Name="DemoTicksColumn" Width="Auto" Header="Ticks" Binding="{Binding Ticks}" HeaderStyle="{StaticResource TicksHeader}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTicksColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="OneKillsColumn" Width="Auto" Header="1K" HeaderStyle="{StaticResource OneKillHeader}" ElementStyle="{StaticResource OneKillCountDataGridTextColumnStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn x:Name="TwoKillsColumn" Width="Auto" Header="2K" HeaderStyle="{StaticResource TwoKillHeader}" ElementStyle="{StaticResource TwoKillCountDataGridTextColumnStyle}"
