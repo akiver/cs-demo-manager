@@ -29,6 +29,7 @@
 				<ResourceDictionary Source="Resources/Charts.xaml"/>
 				<ResourceDictionary Source="Resources/Heatmaps.xaml"/>
 				<ResourceDictionary Source="Resources/Buttons.xaml"/>
+				<ResourceDictionary Source="Resources/ListBox.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

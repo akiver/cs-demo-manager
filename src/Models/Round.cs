@@ -542,24 +542,21 @@ namespace CSGO_Demos_Manager.Models
 		[JsonIgnore]
 		public int CrouchKillCount => Kills.Count(killEvent => killEvent.IsKillerCrouching);
 
-		/// <summary>
-		/// Used for overview
-		/// </summary>
-		[JsonIgnore]
+		[JsonProperty("flashbangs_exploded")]
 		public ObservableCollection<FlashbangExplodedEvent> FlashbangsExploded
 		{
 			get { return _flashbangsExploded; }
 			set { Set(() => FlashbangsExploded, ref _flashbangsExploded, value); }
 		}
 
-		[JsonIgnore]
+		[JsonProperty("smokes_started")]
 		public ObservableCollection<SmokeNadeStartedEvent> SmokesStarted
 		{
 			get { return _smokeNadeStarted; }
 			set { Set(() => SmokesStarted, ref _smokeNadeStarted, value); }
 		}
 
-		[JsonIgnore]
+		[JsonProperty("he_exploded")]
 		public ObservableCollection<ExplosiveNadeExplodedEvent> ExplosiveGrenadesExploded
 		{
 			get { return _explosiveGrenadesExploded; }
@@ -572,7 +569,6 @@ namespace CSGO_Demos_Manager.Models
 			get { return _molotovsThrown; }
 			set { Set(() => MolotovsThrown, ref _molotovsThrown, value); }
 		}
-		// End overview properties
 
 		#endregion
 

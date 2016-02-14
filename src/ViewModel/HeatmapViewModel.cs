@@ -7,12 +7,14 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Map;
 using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.Internals.MultiSelect;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Map;
 using CSGO_Demos_Manager.Views;
@@ -23,6 +25,8 @@ namespace CSGO_Demos_Manager.ViewModel
 	{
 
 		#region Properties
+
+		private RelayCommand _windowLoadedCommand;
 
 		private RelayCommand _generateCommand;
 
@@ -42,29 +46,39 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private List<ComboboxSelector> _eventSelectors = new List<ComboboxSelector>();
 
-		private List<ComboboxSelector> _teamSelectors = new List<ComboboxSelector>();
-
 		private ComboboxSelector _currentEventSelector;
 
-		private ComboboxSelector _currentTeamSelector;
-
-		private PlayerExtended _selectedPlayer;
-
-		private Round _selectedRound;
-
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
+
+		private RelayCommand _clearSelectedPlayerCommand;
+
+		private RelayCommand _clearSelectedRoundCommand;
+
+		private RelayCommand _clearSelectedSideCommand;
+
+		private RelayCommand _selectAllSideCommand;
+
+		private RelayCommand _selectAllRoundCommand;
+
+		private RelayCommand _selectAllPlayerCommand;
 
 		private bool _isGenerating;
 
 		private bool _hasGeneratedHeatmap;
+		
+		private readonly ICacheService _cacheService;
 
-		private readonly IDemosService _demosService;
+		private MapService _mapService;
 
 		private byte _opacity = 150;
 
-		private bool _selectAllRounds;
-
 		private CancellationTokenSource _cts;
+
+		private MultiSelectCollectionView<Round> _rounds;
+
+		private MultiSelectCollectionView<PlayerExtended> _players;
+
+		private MultiSelectCollectionView<ComboboxSelector> _sides;
 
 		#endregion
 
@@ -100,45 +114,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => CurrentEventSelector, ref _currentEventSelector, value); }
 		}
 
-		public ComboboxSelector CurrentTeamSelector
-		{
-			get { return _currentTeamSelector; }
-			set
-			{
-				Set(() => CurrentTeamSelector, ref _currentTeamSelector, value);
-				if (value == null) return;
-				if (SelectedPlayer != null) SelectedPlayer = null;
-			}
-		}
-
-		public List<ComboboxSelector> TeamSelectors
-		{
-			get { return _teamSelectors; }
-			set { Set(() => TeamSelectors, ref _teamSelectors, value); }
-		}
-
-		public PlayerExtended SelectedPlayer
-		{
-			get { return _selectedPlayer; }
-			set
-			{
-				Set(() => SelectedPlayer, ref _selectedPlayer, value);
-				if (value == null) return;
-				if (CurrentTeamSelector != null) CurrentTeamSelector = null;
-			}
-		}
-
-		public Round SelectedRound
-		{
-			get { return _selectedRound; }
-			set
-			{
-				Set(() => SelectedRound, ref _selectedRound, value);
-				if (value == null) return;
-				if (SelectAllRounds) SelectAllRounds = false;
-			}
-		}
-
 		public bool IsGenerating
 		{
 			get { return _isGenerating; }
@@ -151,16 +126,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => HasGeneratedHeatmap, ref _hasGeneratedHeatmap, value); }
 		}
 
-		public bool SelectAllRounds
-		{
-			get { return _selectAllRounds; }
-			set
-			{
-				Set(() => SelectAllRounds, ref _selectAllRounds, value);
-				if (value) SelectedRound = null;
-			}
-		}
-
 		public byte Opacity
 		{
 			get { return _opacity; }
@@ -171,9 +136,128 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public MultiSelectCollectionView<Round> Rounds
+		{
+			get { return _rounds; }
+			set { Set(() => Rounds, ref _rounds, value); }
+		}
+
+		public MultiSelectCollectionView<PlayerExtended> Players
+		{
+			get { return _players; }
+			set { Set(() => Players, ref _players, value); }
+		}
+
+		public MultiSelectCollectionView<ComboboxSelector> Sides
+		{
+			get { return _sides; }
+			set { Set(() => Sides, ref _sides, value); }
+		}
+
 		#endregion
 
 		#region Commands
+
+		public RelayCommand WindowLoaded
+		{
+			get
+			{
+				return _windowLoadedCommand
+					?? (_windowLoadedCommand = new RelayCommand(
+					() =>
+					{
+						Sides = new MultiSelectCollectionView<ComboboxSelector>(new List<ComboboxSelector>
+						{
+							new ComboboxSelector("CT", "Counter-Terrorists"),
+							new ComboboxSelector("T", "Terrorists")
+						});
+						Rounds = new MultiSelectCollectionView<Round>(CurrentDemo.Rounds);
+						Players = new MultiSelectCollectionView<PlayerExtended>(CurrentDemo.Players);
+
+						// Get the original overview image
+						_mapService = MapService.Factory(CurrentDemo.MapName);
+						OverviewLayer = _mapService.GetWriteableImage();
+					}));
+			}
+		}
+
+		public RelayCommand ClearSelectedPlayerCommand
+		{
+			get
+			{
+				return _clearSelectedPlayerCommand
+					?? (_clearSelectedPlayerCommand = new RelayCommand(
+					() =>
+					{
+						Players.DeselectAll();
+					}));
+			}
+		}
+
+		public RelayCommand ClearSelectedRoundCommand
+		{
+			get
+			{
+				return _clearSelectedRoundCommand
+					?? (_clearSelectedRoundCommand = new RelayCommand(
+					() =>
+					{
+						Rounds.DeselectAll();
+					}));
+			}
+		}
+
+		public RelayCommand ClearSelectedSideCommand
+		{
+			get
+			{
+				return _clearSelectedSideCommand
+					?? (_clearSelectedSideCommand = new RelayCommand(
+					() =>
+					{
+						Sides.DeselectAll();
+					}));
+			}
+		}
+
+		public RelayCommand SelectAllSideCommand
+		{
+			get
+			{
+				return _selectAllSideCommand
+					?? (_selectAllSideCommand = new RelayCommand(
+					() =>
+					{
+						Sides.SelectAll();
+					}));
+			}
+		}
+
+		public RelayCommand SelectAllRoundCommand
+		{
+			get
+			{
+				return _selectAllRoundCommand
+					?? (_selectAllRoundCommand = new RelayCommand(
+					() =>
+					{
+						Rounds.SelectAll();
+					}));
+			}
+		}
+
+		public RelayCommand SelectAllPlayerCommand
+		{
+			get
+			{
+				return _selectAllPlayerCommand
+					?? (_selectAllPlayerCommand = new RelayCommand(
+					() =>
+					{
+						Players.SelectAll();
+					}));
+			}
+		}
 
 		public RelayCommand GenerateCommand
 		{
@@ -193,23 +277,14 @@ namespace CSGO_Demos_Manager.ViewModel
 								_cts = new CancellationTokenSource();
 							}
 
-							// temp selection variables
-							PlayerExtended player = SelectedPlayer;
-							Round round = SelectedRound;
-
-							// Analyze the demo to get HeatmapPoints
-							CurrentDemo = await _demosService.AnalyzeHeatmapPoints(CurrentDemo, _cts.Token);
-
-							// Get back selection
-							SelectedPlayer = player;
-							SelectedRound = round;
-
-							// Get the original overview image
-							MapService mapService = MapService.Factory(CurrentDemo.MapName);
-							OverviewLayer = mapService.GetWriteableImage();
+							if (_currentEventSelector.Id == "shots" && !CurrentDemo.WeaponFired.Any())
+							{
+								CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
+							}
 
 							// Get KillHeatmapPoint list based on selection
-							_heatmapService = new HeatmapService(mapService, CurrentDemo, CurrentEventSelector, CurrentTeamSelector, SelectedPlayer, SelectedRound);
+							_heatmapService = new HeatmapService(_mapService, CurrentDemo, CurrentEventSelector, Sides.SelectedItems.ToList(),
+								Players.SelectedItems.ToList(), Rounds.SelectedItems.ToList());
 							_points = await _heatmapService.GetPoints();
 
 							// Generate the colored layer
@@ -229,7 +304,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						IsGenerating = false;
 						HasGeneratedHeatmap = true;
 
-					}, () => !IsGenerating && (CurrentTeamSelector != null || SelectedPlayer != null) && (SelectAllRounds || SelectedRound != null)));
+					}, () => !IsGenerating));
 			}
 		}
 
@@ -292,10 +367,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		#endregion
 
-		public HeatmapViewModel(DialogService dialogService, IDemosService demosService)
+		public HeatmapViewModel(DialogService dialogService, ICacheService cacheService)
 		{
 			_dialogService = dialogService;
-			_demosService = demosService;
+			_cacheService = cacheService;
 			EventSelectors.Add(new ComboboxSelector("kills", "Kills"));
 			EventSelectors.Add(new ComboboxSelector("deaths", "Deaths"));
 			EventSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
@@ -306,10 +381,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			EventSelectors.Add(new ComboboxSelector("decoys", "Decoy"));
 			CurrentEventSelector = EventSelectors[0];
 
-			TeamSelectors.Add(new ComboboxSelector("CT", "Counter-Terrorists"));
-			TeamSelectors.Add(new ComboboxSelector("T", "Terrorists"));
-			TeamSelectors.Add(new ComboboxSelector("BOTH", "Both"));
-			CurrentTeamSelector = TeamSelectors[2];
+			if (IsInDesignMode)
+			{
+				OverviewLayer = BitmapFactory.New(1024, 1024).FromResource("Resources/images/maps/overview/de_dust2.png");
+			}
 		}
 
 		public override void Cleanup()
@@ -319,8 +394,6 @@ namespace CSGO_Demos_Manager.ViewModel
 			IsGenerating = false;
 			OverviewLayer = null;
 			ColorsLayer = null;
-			SelectedPlayer = null;
-			SelectedRound = null;
 		}
 	}
 }

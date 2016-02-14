@@ -87,7 +87,9 @@ namespace CSGO_Demos_Manager.Services.Map
 		{
 			try
 			{
-				return BitmapFactory.New(SizeX, SizeY).FromResource("Resources/images/maps/overview/" + MapName + ".png");
+				WriteableBitmap biptmap = BitmapFactory.New(SizeX, SizeY).FromResource("Resources/images/maps/overview/" + MapName + ".png");
+				GC.Collect();
+				return biptmap;
 			}
 			catch (System.IO.FileNotFoundException)
 			{

@@ -172,8 +172,11 @@
     <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
+    <Compile Include="Internals\MultiSelect\IMultiSelectCollectionView.cs" />
     <Compile Include="Internals\Logger.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
+    <Compile Include="Internals\MultiSelect\MultiSelect.cs" />
+    <Compile Include="Internals\MultiSelect\MultiSelectCollectionView.cs" />
     <Compile Include="Messages\MainWindowLoadedMessage.cs" />
     <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
     <Compile Include="Messages\RefreshDemosMessage.cs" />
@@ -295,6 +298,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\Heatmaps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ListBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

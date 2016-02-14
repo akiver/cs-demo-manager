@@ -1,10 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using DemoInfo;
+using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Models.Events
 {
 	public class WeaponFire : BaseEvent
 	{
-		[JsonIgnore]
+		[JsonProperty("heatmap_point")]
 		public HeatmapPoint Point { get; set; }
 
 		[JsonProperty("shooter_steamid")]
@@ -12,6 +13,9 @@ namespace CSGO_Demos_Manager.Models.Events
 
 		[JsonProperty("shooter_name")]
 		public string ShooterName { get; set; }
+
+		[JsonProperty("shooter_side")]
+		public Team ShooterSide { get; set; }
 
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }

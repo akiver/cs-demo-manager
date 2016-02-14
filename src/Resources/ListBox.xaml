@@ -1,0 +1,55 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.listbox.xaml" />
+
+	</ResourceDictionary.MergedDictionaries>
+	<Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource MetroListBoxItem}">
+		<Setter Property="Foreground" Value="{StaticResource LightGreyBrush}"/>
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Grid Margin="4,0,4,4">
+						<Border Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding BorderBrush}"
+								BorderThickness="1"
+								SnapsToDevicePixels="True" />
+						<ContentPresenter Margin="8,5" />
+					</Grid>
+					<ControlTemplate.Triggers>
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver"
+										   Value="True" />
+								<Condition Property="IsSelected"
+										   Value="False" />
+							</MultiTrigger.Conditions>
+							<Setter Property="Background"
+									Value="{StaticResource LightGreyBrush}" />
+							<Setter Property="Foreground"
+									Value="{StaticResource LightWhiteBrush}" />
+							<Setter Property="BorderBrush"
+									Value="{StaticResource LightGreenBrush}" />
+						</MultiTrigger>
+						<Trigger Property="IsSelected"
+								 Value="True">
+							<Setter Property="Background"
+									Value="{StaticResource LightGreyBrush}" />
+							<Setter Property="BorderBrush"
+									Value="{StaticResource LightGreenBrush}" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<Trigger Property="IsSelected" Value="True">
+				<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
+				<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+	
+</ResourceDictionary>

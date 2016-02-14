@@ -6,6 +6,9 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
 			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:multiSelect="clr-namespace:CSGO_Demos_Manager.Internals.MultiSelect"
 			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
 			 Name="HeatmapUserControl"
@@ -31,6 +34,13 @@
 					Command="{Binding BackToDemoDetailsCommand}"
 					CommandParameter="{Binding CurrentDemo}" />
 	</UserControl.InputBindings>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+	
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -68,46 +78,6 @@
 					Width="180" Height="25" Margin="5 0 0 0"
 					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 				</StackPanel>
-
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Side" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding TeamSelectors}"
-					SelectedItem="{Binding CurrentTeamSelector}"
-					DisplayMemberPath ="Title"
-					SelectedValuePath="Title"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
-				</StackPanel>
-
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Player" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding CurrentDemo.Players}"
-					SelectedItem="{Binding SelectedPlayer}"
-					DisplayMemberPath ="Name"
-					SelectedValuePath="Name"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
-				</StackPanel>
-
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Round" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding CurrentDemo.Rounds}"
-					SelectedItem="{Binding SelectedRound}"
-					DisplayMemberPath ="Number"
-					SelectedValuePath="Number"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
-				</StackPanel>
-
-				<CheckBox Content="All rounds"
-						  IsChecked="{Binding SelectAllRounds}"
-						  IsEnabled="{Binding IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Margin="5 0 0 0"
-						  VerticalAlignment="Center" />
 
 				<Button Command="{Binding GenerateCommand}"
 					Style="{StaticResource GeneralButtonStyle}"
@@ -165,13 +135,110 @@
 			</StackPanel>
 		</Grid>
 
-		<Image Grid.Row="1" Source="{Binding OverviewLayer}" Stretch="Uniform"
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			
+			<Grid Grid.Column="0" Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<StackPanel Orientation="Horizontal" Grid.Row="0">
+					<TextBlock
+						   Text="Sides"
+						   Style="{StaticResource SmallTitleStyle}"/>
+					<Button Content="All"
+							Command="{Binding SelectAllSideCommand}"
+							Style="{StaticResource GeneralButtonStyle}"
+							Margin="5 0 0 0" />
+					<Button Content="Clear"
+							Command="{Binding ClearSelectedSideCommand}"
+							Style="{StaticResource GeneralButtonStyle}"
+							Margin="5 0 0 0" />
+				</StackPanel>
+				<ListBox Name="SideListBox"
+						 Grid.Row="1"
+						 Margin="10"
+						 ItemsSource="{Binding Sides}"
+						 SelectionMode="Extended"
+						 ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+						 multiSelect:MultiSelect.IsEnabled="True"
+						 DisplayMemberPath="Title"
+						 SelectedValuePath="Title"/>
+
+				<StackPanel Orientation="Horizontal" Grid.Row="2">
+					<TextBlock Text="Players"
+							   Style="{StaticResource SmallTitleStyle}"/>
+					<Button Content="All"
+							Command="{Binding SelectAllPlayerCommand}"
+							Style="{StaticResource GeneralButtonStyle}"
+							Margin="5 0 0 0" />
+					<Button Content="Clear"
+							Command="{Binding ClearSelectedPlayerCommand}"
+							Style="{StaticResource GeneralButtonStyle}"
+							Margin="5 0 0 0"/>
+				</StackPanel>
+				<ListBox Name="PlayerListBox"
+						 Margin="10"
+						 Grid.Row="3"
+						 ItemsSource="{Binding Players}"
+						 SelectionMode="Extended"
+						 ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+						 multiSelect:MultiSelect.IsEnabled="True"
+						 DisplayMemberPath="Name"
+						 SelectedValuePath="Name"/>
+			</Grid>
+			
+			<Grid Grid.Column="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				
+				<StackPanel Orientation="Horizontal" Grid.Row="0">
+					<TextBlock
+						   Text="Rounds"
+						   Style="{StaticResource SmallTitleStyle}"/>
+					<Button Content="All"
+							Command="{Binding SelectAllRoundCommand}"
+							Style="{StaticResource GeneralButtonStyle}"
+							Margin="5 0 0 0" />
+					<Button Content="Clear"
+							Command="{Binding ClearSelectedRoundCommand}"
+							Style="{StaticResource GeneralButtonStyle}"
+							Margin="5 0 0 0" />
+				</StackPanel>
+
+				<Grid Grid.Row="1">
+					<ListBox Name="RoundListBox"
+								Margin="10"
+								ItemsSource="{Binding Rounds}"
+								SelectionMode="Extended"
+								multiSelect:MultiSelect.IsEnabled="True"
+								DisplayMemberPath="Number"
+								ScrollViewer.VerticalScrollBarVisibility="Visible"
+								ItemContainerStyle="{StaticResource ListBoxItemStyle}"
+								SelectedValuePath="Number"/>
+				</Grid>
+				
+			</Grid>
+			
+			<Grid Grid.Column="2">
+				<Image Source="{Binding OverviewLayer}" Stretch="Uniform"
 					 Width="Auto" Height="Auto" Margin="10"
 					 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
-		<Image Grid.Row="1" Source="{Binding ColorsLayer}" Stretch="Uniform"
+				<Image Source="{Binding ColorsLayer}" Stretch="Uniform"
 					 Width="Auto" Height="Auto" Margin="10"
 					 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
+			</Grid>
+		</Grid>
+		
 	</Grid>
 </UserControl>

@@ -17,7 +17,7 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }
 
-		[JsonIgnore]
+		[JsonProperty("heatmap_point")]
 		public KillHeatmapPoint Point { get; set; }
 
 		[JsonProperty("killer_vel_x")]

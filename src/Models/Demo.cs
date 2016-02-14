@@ -648,7 +648,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		/// <summary>
-		/// Contains all PositionPoint for overview generation 
+		/// Contains all PositionPoint for overview generation
 		/// </summary>
 		[JsonIgnore]
 		public List<PositionPoint> PositionsPoint { get; set; } = new List<PositionPoint>();
@@ -656,13 +656,13 @@ namespace CSGO_Demos_Manager.Models
 		/// <summary>
 		/// DecoyStartedEvent list used for heatmap generation
 		/// </summary>
-		[JsonIgnore]
+		[JsonProperty("decoys")]
 		public List<DecoyStartedEvent> DecoyStarted = new List<DecoyStartedEvent>();
 
 		/// <summary>
 		/// MolotovFireStartedEvent list used for heatmap generation
 		/// </summary>
-		[JsonIgnore]
+		[JsonProperty("molotovs")]
 		public List<MolotovFireStartedEvent> MolotovFireStarted = new List<MolotovFireStartedEvent>();
 
 		/// <summary>

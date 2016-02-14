@@ -113,7 +113,9 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
-			
+			// TODO remove AnalyzeHeatmapPoint logic
+			analyzer.AnalyzeHeatmapPoint = true;
+
 			demo = await analyzer.AnalyzeDemoAsync(token);
 
 			return demo;

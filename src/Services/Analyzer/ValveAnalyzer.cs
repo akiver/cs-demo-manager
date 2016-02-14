@@ -415,14 +415,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					KillerX = e.Killer?.Position.X ?? 0,
 					KillerY = e.Killer?.Position.Y ?? 0,
 					VictimX = e.Victim.Position.X,
-					VictimY = e.Victim.Position.Y,
-					Round = CurrentRound,
-					KillerSteamId = e.Killer?.SteamID ?? 0,
-					KillerName = e.Killer?.Name ?? string.Empty,
-					KillerTeam = e.Killer?.Team ?? Team.Spectate,
-					VictimSteamId = e.Victim.SteamID,
-					VictimName = e.Victim.Name,
-					VictimTeam = e.Victim.Team
+					VictimY = e.Victim.Position.Y
 				};
 			}
 

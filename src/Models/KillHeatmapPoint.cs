@@ -1,28 +1,20 @@
-﻿using DemoInfo;
+﻿using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Models
 {
 	public class KillHeatmapPoint : HeatmapPoint
 	{
+		[JsonProperty("killer_x")]
 		public float KillerX { get; set; }
 
+		[JsonProperty("killer_y")]
 		public float KillerY { get; set; }
 
+		[JsonProperty("victim_x")]
 		public float VictimX { get; set; }
 
+		[JsonProperty("victim_y")]
 		public float VictimY { get; set; }
-
-		public long KillerSteamId { get; set; }
-
-		public string KillerName { get; set; }
-
-		public long VictimSteamId { get; set; }
-
-		public string VictimName { get; set; }
-
-		public Team KillerTeam { get; set; }
-
-		public Team VictimTeam { get; set; }
 
 		public override bool Equals(object obj)
 		{

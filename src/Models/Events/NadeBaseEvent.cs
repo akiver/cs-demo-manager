@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using DemoInfo;
+using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Models.Events
 {
@@ -10,8 +11,14 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("thrower_name")]
 		public string ThrowerName { get; set; }
 
-		[JsonIgnore]
+		[JsonProperty("thrower_side")]
+		public Team ThrowerSide { get; set; }
+
+		[JsonProperty("heatmap_point")]
 		public HeatmapPoint Point { get; set; }
+
+		[JsonProperty("round_number")]
+		public int RoundNumber { get; set; }
 
 		public NadeBaseEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
