@@ -16,7 +16,7 @@ namespace CSGO_Demos_Manager.Services.Design
 {
 	public class DemosDesignService : IDemosService
 	{
-		public Task<List<Demo>> GetDemosHeader(List<string> folders)
+		public Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
 		{
 			List<Demo> demos = new List<Demo>();
 
@@ -124,6 +124,12 @@ namespace CSGO_Demos_Manager.Services.Design
 			}
 
 			return Task.FromResult(demos);
+		}
+
+
+		public Task<Demo> GetDemoDataAsync(Demo demo)
+		{
+			return Task.FromResult(new Demo());
 		}
 
 		public Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)

@@ -11,10 +11,20 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 	public interface IDemosService
 	{
 		/// <summary>
-		/// Return only header's demos 
+		/// Return only demos header
 		/// </summary>
+		/// <param name="folders"></param>
+		/// <param name="currentDemos"></param>
+		/// <param name="limit"></param>
 		/// <returns></returns>
-		Task<List<Demo>> GetDemosHeader(List<string> folders);
+		Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false);
+
+		/// <summary>
+		/// Return the whole demo
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<Demo> GetDemoDataAsync(Demo demo);
 
 		/// <summary>
 		/// Analyze the demo passed on parameter

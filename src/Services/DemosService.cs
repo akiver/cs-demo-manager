@@ -14,6 +14,7 @@ using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Serialization;
+using MoreLinq;
 using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Services
@@ -64,27 +65,32 @@ namespace CSGO_Demos_Manager.Services
 			return demo;
 		}
 
-		private async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
+		private static async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
 		{
-			var demo = await Task.Run(() => DemoAnalyzer.ParseDemoHeader(demoFilePath));
-			if (demo == null) return null;
+			Demo demo = await Task.Run(() => DemoAnalyzer.ParseDemoHeader(demoFilePath));
+			// Update the demo name and path because it may be renamed / moved
+			demo.Name = Path.GetFileName(demoFilePath);
+			demo.Path = demoFilePath;
 
+			return demo;
+		}
+
+		public async Task<Demo> GetDemoDataAsync(Demo demo)
+		{
 			// If demo is in cache we retrieve its data
 			bool demosIsCached = _cacheService.HasDemoInCache(demo);
 			if (demosIsCached)
 			{
 				demo = await _cacheService.GetDemoDataFromCache(demo);
 				demo.Source = Source.Factory(demo.SourceName);
-				// Update the demo name and path because it may be renamed / moved
-				demo.Name = Path.GetFileName(demoFilePath);
-				demo.Path = demoFilePath;
 			}
 			return demo;
 		}
 
-		public async Task<List<Demo>> GetDemosHeader(List<string> folders)
+		public async Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
 		{
 			List<Demo> demos = new List<Demo>();
+			List<Demo> demoKeeped = new List<Demo>();
 
 			if (folders.Count > 0)
 			{
@@ -96,12 +102,34 @@ namespace CSGO_Demos_Manager.Services
 						foreach (string file in files)
 						{
 							var demo = await GetDemoHeaderAsync(file);
-							if (demo != null && !demos.Contains(demo)) demos.Add(demo);
+							if (!limit) demo = await GetDemoDataAsync(demo);
+							if (demo != null)
+							{
+								if (currentDemos != null)
+								{
+									if(!currentDemos.Contains(demo)) demos.Add(demo);
+								}
+								else
+								{
+									if (!demos.Contains(demo)) demos.Add(demo);
+								}
+							}
+						}
+						if (limit)
+						{
+							// sort by date and keep the 50 first
+							demos.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
+							demoKeeped = demos.TakeLast(50).ToList();
+							for (int i = 0; i < demoKeeped.Count; i++)
+							{
+								demoKeeped[i] = await GetDemoDataAsync(demoKeeped[i]);
+							}
 						}
 					}
 				}
 			}
-			return demos;
+
+			return limit ? demoKeeped : demos;
 		}
 
 		public async Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)

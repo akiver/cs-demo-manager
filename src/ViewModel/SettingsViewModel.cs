@@ -1289,6 +1289,7 @@ namespace CSGO_Demos_Manager.ViewModel
 									{
 										if (demoHeader.Equals(demo))
 										{
+											await _demosService.GetDemoDataAsync(demoHeader);
 											demoHeader.Comment = demo.Comment;
 											demoHeader.Status = demo.Status;
 											await _cacheService.WriteDemoDataCache(demoHeader);

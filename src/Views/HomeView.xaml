@@ -62,6 +62,7 @@
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0">
@@ -584,6 +585,24 @@
 		</DataGrid>
 
 		<Grid Grid.Row="4">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Content="Show more demos"
+					Grid.Column="0"
+					Margin="10 5 0 0"
+					Style="{StaticResource GeneralButtonStyle}"
+					Command="{Binding ShowMoreDemosCommand}"/>
+			<TextBlock Grid.Column="1"
+					   Style="{StaticResource SmallTitleStyle}"
+					   TextAlignment="Right"
+					   Margin="10 0 5 0"
+					   Text="{Binding Demos.Count, StringFormat='{}{0} demo(s)'}"/>
+		</Grid>
+
+		<Grid Grid.Row="5">
 			<Grid Background="{StaticResource LightGreyBrush}">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="*" />

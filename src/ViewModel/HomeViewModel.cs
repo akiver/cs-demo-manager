@@ -98,6 +98,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<ObservableCollection<Demo>> _exportExcelCommand;
 
+		private RelayCommand _showMoreDemosCommand;
+
 		private RelayCommand<Demo> _watchDemoCommand;
 
 		private RelayCommand<Demo> _watchHighlightCommand;
@@ -1342,6 +1344,43 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public RelayCommand ShowMoreDemosCommand
+		{
+			get
+			{
+				return _showMoreDemosCommand
+					?? (_showMoreDemosCommand = new RelayCommand(
+					async () =>
+					{
+						NotificationMessage = "Loading more demos...";
+						IsBusy = true;
+						HasNotification = true;
+						List<string> folders = new List<string>();
+						if (SelectedFolder != null)
+						{
+							folders.Add(SelectedFolder);
+						}
+						else
+						{
+							folders = Folders.ToList();
+						}
+
+						var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
+
+						foreach (var demo in demos)
+						{
+							Demos.Add(demo);
+						}
+
+						DataGridDemosCollection.Refresh();
+
+						IsBusy = false;
+						HasNotification = false;
+					},
+					() => !IsBusy));
+			}
+		}
+
 		#endregion
 
 		public HomeViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService, ExcelService excelService)
@@ -1461,6 +1500,32 @@ namespace CSGO_Demos_Manager.ViewModel
 			IsBusy = true;
 			HasNotification = true;
 			IsCancellable = true;
+			if (SelectedDemos.Count == Demos.Count)
+			{
+				var isAllAnalyze = await _dialogService.ShowAnalyzeAllDemosAsync();
+				if (isAllAnalyze == MessageDialogResult.Negative)
+				{
+					NotificationMessage = "Loading all demos...";
+					List<string> folders = new List<string>();
+					if (SelectedFolder != null)
+					{
+						folders.Add(SelectedFolder);
+					}
+					else
+					{
+						folders = Folders.ToList();
+					}
+					List<Demo> allDemos = await _demosService.GetDemosHeader(folders);
+					foreach (Demo demo in allDemos)
+					{
+						if (!SelectedDemos.Contains(demo))
+						{
+							SelectedDemos.Add(demo);
+						}
+					}
+				}
+			}
+
 			NotificationMessage = "Analyzing multiple demos...";
 			if (SelectedDemos.Count == 1) NotificationMessage = "Analyzing " + SelectedDemos[0].Name + "...";
 
@@ -1610,7 +1675,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 				Demos.Clear();
 
-				var demos = await _demosService.GetDemosHeader(folders);
+				var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
 
 				foreach (var demo in demos)
 				{
