@@ -169,6 +169,7 @@
 					<TextBlock Grid.Column="0" Text="Player stats: " Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox Grid.Column="1"
 							  Style="{StaticResource ComboBoxAccountsStyle}"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
 							  ItemsSource="{Binding CurrentDemo.Players}"
 							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedPlayer}"
 							  DisplayMemberPath ="Name" SelectedValuePath="SteamId"

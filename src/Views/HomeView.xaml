@@ -207,11 +207,12 @@
 
 					<TextBlock Grid.Column="7" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox Grid.Column="8"
-					ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
-					SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
-					DisplayMemberPath ="Name"
-					SelectedValuePath="SteamId"
-					Style="{StaticResource ComboBoxAccountsStyle}" />
+							  ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
+							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
+							  DisplayMemberPath ="Name"
+							  SelectedValuePath="SteamId"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Style="{StaticResource ComboBoxAccountsStyle}" />
 
 					<CheckBox Grid.Column="9" x:Name="CheckBoxShowAllAccounts" Content="Show all"
 						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
@@ -362,6 +363,7 @@
 
 			<ComboBox Grid.Column="1" ItemsSource="{Binding Folders, Mode=TwoWay}"
 					  Style="{StaticResource ComboBoxFoldersStyle}"
+					  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
 					  SelectedItem="{Binding SelectedFolder}">
 				<ComboBox.IsEnabled>
 					<MultiBinding Converter="{StaticResource BooleanMultipleConverter}">

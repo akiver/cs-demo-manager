@@ -70,13 +70,15 @@
 
 				<StackPanel Orientation="Vertical">
 					<TextBlock Text="Event" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding EventSelectors}"
-					SelectedItem="{Binding CurrentEventSelector}"
-					DisplayMemberPath ="Title"
-					SelectedValuePath="Title"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+					<ComboBox ItemsSource="{Binding EventSelectors}"
+							  SelectedItem="{Binding CurrentEventSelector}"
+							  DisplayMemberPath ="Title"
+							  SelectedValuePath="Title"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Width="180"
+							  Height="25"
+							  Margin="5 0 0 0"
+							  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 				</StackPanel>
 
 				<Button Command="{Binding GenerateCommand}"

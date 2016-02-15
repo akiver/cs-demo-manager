@@ -55,24 +55,28 @@
 
 				<StackPanel Orientation="Vertical">
 					<TextBlock Text="Team" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding TeamSelectors}"
-					SelectedItem="{Binding SelectedTeam}"
-					DisplayMemberPath ="Title"
-					SelectedValuePath="Title"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+					<ComboBox ItemsSource="{Binding TeamSelectors}"
+							  SelectedItem="{Binding SelectedTeam}"
+							  DisplayMemberPath ="Title"
+							  SelectedValuePath="Title"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Width="180"
+							  Height="25"
+							  Margin="5 0 0 0"
+							  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 				</StackPanel>
 
 				<StackPanel Orientation="Vertical">
 					<TextBlock Text="Player" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding CurrentDemo.Players}"
-					SelectedItem="{Binding SelectedPlayer}"
-					DisplayMemberPath ="Name"
-					SelectedValuePath="Name"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+					<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
+							  SelectedItem="{Binding SelectedPlayer}"
+							  DisplayMemberPath ="Name"
+							  SelectedValuePath="Name"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Width="180"
+							  Height="25"
+							  Margin="5 0 0 0"
+							  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 				</StackPanel>
 
 				<CheckBox Content="All players"
@@ -84,13 +88,15 @@
 
 				<StackPanel Orientation="Vertical">
 					<TextBlock Text="Round" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox
-					ItemsSource="{Binding CurrentDemo.Rounds}"
-					SelectedItem="{Binding SelectedRound}"
-					DisplayMemberPath ="Number"
-					SelectedValuePath="Number"
-					Width="180" Height="25" Margin="5 0 0 0"
-					IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+					<ComboBox ItemsSource="{Binding CurrentDemo.Rounds}"
+							  SelectedItem="{Binding SelectedRound}"
+							  DisplayMemberPath ="Number"
+							  SelectedValuePath="Number"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Width="180"
+							  Height="25"
+							  Margin="5 0 0 0"
+							  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 				</StackPanel>
 
 				<CheckBox Content="All rounds"
