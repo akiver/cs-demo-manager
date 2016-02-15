@@ -250,40 +250,101 @@ namespace CSGO_Demos_Manager.Models
 		[JsonProperty("5k_count")]
 		public int FiveKillCount
 		{
-			get { return _fivekillCount; }
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 5) return 1;
+					return 0;
+				}
+
+				return _fivekillCount;
+			}
 			set { Set(() => FiveKillCount, ref _fivekillCount, value); }
 		}
 
 		[JsonProperty("4k_count")]
 		public int FourKillCount
 		{
-			get { return _fourkillCount; }
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 4) return 1;
+					return 0;
+				}
+
+				return _fourkillCount;
+			}
 			set { Set(() => FourKillCount, ref _fourkillCount, value); }
 		}
 
 		[JsonProperty("3k_count")]
 		public int ThreeKillCount
 		{
-			get { return _threekillCount; }
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 3) return 1;
+					return 0;
+				}
+
+				return _threekillCount;
+			}
 			set { Set(() => ThreeKillCount, ref _threekillCount, value); }
 		}
 
 		[JsonProperty("2k_count")]
 		public int TwoKillCount
 		{
-			get { return _twokillCount; }
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 2) return 1;
+					return 0;
+				}
+
+				return _twokillCount;
+			}
 			set { Set(() => TwoKillCount, ref _twokillCount, value); }
 		}
 
 		[JsonProperty("1k_count")]
 		public int OneKillCount
 		{
-			get { return _onekillCount; }
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 1) return 1;
+					return 0;
+				}
+
+				return _onekillCount;
+			}
 			set { Set(() => OneKillCount, ref _onekillCount, value); }
 		}
 
 		[JsonProperty("bomb_planted_count")]
-		public int BombPlantedCount => BombPlanted != null ? 1 : 0;
+		public int BombPlantedCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return BombPlanted != null && BombPlanted.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
+				}
+
+				return BombPlanted != null ? 1 : 0;
+			}
+		}
 
 		[JsonProperty("equipement_value_team2")]
 		public int EquipementValueTeam2
@@ -314,10 +375,32 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("bomb_defused_count")]
-		public int BombDefusedCount => BombDefused != null ? 1 : 0;
+		public int BombDefusedCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return BombDefused != null && BombDefused.DefuserSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
+				}
+
+				return BombDefused != null ? 1 : 0;
+			}
+		}
 
 		[JsonProperty("bomb_exploded_count")]
-		public int BombExplodedCount => BombExploded != null ? 1 : 0;
+		public int BombExplodedCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return BombExploded != null && BombExploded.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
+				}
+
+				return BombExploded != null ? 1 : 0;
+			}
+		}
 
 		[JsonProperty("open_kill")]
 		public OpenKillEvent OpenKillEvent
@@ -467,7 +550,18 @@ namespace CSGO_Demos_Manager.Models
 		public string WinnerSideAsString => _winnerSide == Team.CounterTerrorist ? "CT" : "T";
 
 		[JsonIgnore]
-		public int KillsCount => Kills.Count;
+		public int KillCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+				}
+
+				return Kills.Count;
+			}
+		}
 
 		[JsonIgnore]
 		public string RoundTypeAsString
@@ -511,36 +605,95 @@ namespace CSGO_Demos_Manager.Models
 		/// Total health damage during the round
 		/// </summary>
 		[JsonIgnore]
-		public int TotalDamageHealthCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
-			.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+		public int DamageHealthCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
+					&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
+					.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+				}
+
+				return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
+					.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+			}
+		}
 
 		/// <summary>
 		/// Total armor damage during the round
 		/// </summary>
 		[JsonIgnore]
-		public int TotalDamageArmorCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
-			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+		public int DamageArmorCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
+					&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
+					.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+				}
+
+				return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
+					.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+			}
+		}
 
 		/// <summary>
 		/// Average damage made by players during the round
 		/// </summary>
 		[JsonIgnore]
-		public double AverageDamageByPlayerCount
+		public double AverageDamage
 		{
 			get
 			{
-				double total = PlayersHurted.Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
-				current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
+				double total = 0;
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					total = PlayersHurted.Where(e => e.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
+						.Aggregate(total, (current, e) => current + e.HealthDamage);
+				}
+				else
+				{
+					total = PlayersHurted.Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
+					current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
+				}
+
 				if (Math.Abs(total) < 0.1) return total;
 				return Math.Round(total / 10, 1);
 			}
 		}
 
 		[JsonIgnore]
-		public int JumpKillCount => Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
+		public int JumpKillCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return Kills.Count(killEvent => killEvent.KillerSteamId == Settings.Default.SelectedPlayerSteamId
+					&& killEvent.KillerVelocityZ > 0);
+				}
+
+				return Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
+			}
+		}
 
 		[JsonIgnore]
-		public int CrouchKillCount => Kills.Count(killEvent => killEvent.IsKillerCrouching);
+		public int CrouchKillCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return Kills.Count(e => e.KillerSteamId == Settings.Default.SelectedPlayerSteamId && e.IsKillerCrouching);
+				}
+
+				return Kills.Count(killEvent => killEvent.IsKillerCrouching);
+			}
+		}
 
 		[JsonProperty("flashbangs_exploded")]
 		public ObservableCollection<FlashbangExplodedEvent> FlashbangsExploded
@@ -572,110 +725,6 @@ namespace CSGO_Demos_Manager.Models
 
 		#endregion
 
-		#region Selected player data accessors
-
-		[JsonIgnore]
-		public int TotalKillSelectedPlayerCount
-		{
-			get { return Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId); }
-		}
-
-		[JsonIgnore]
-		public int JumpKillSelectedPlayerCount => Kills.Count(killEvent => killEvent.KillerSteamId == Settings.Default.SelectedPlayerSteamId && killEvent.KillerVelocityZ > 0);
-
-		[JsonIgnore]
-		public int OneKillSelectedPlayerCount
-		{
-			get
-			{
-				int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
-				if (killUserCount == 1) return 1;
-				return 0;
-			}
-		}
-
-		[JsonIgnore]
-		public int TwoKillSelectedPlayerCount
-		{
-			get
-			{
-				int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
-				if (killUserCount == 2) return 1;
-				return 0;
-			}
-		}
-
-		[JsonIgnore]
-		public int ThreeKillSelectedPlayerCount
-		{
-			get
-			{
-				int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
-				if (killUserCount == 3) return 1;
-				return 0;
-			}
-		}
-
-		[JsonIgnore]
-		public int FourKillSelectedPlayerCount
-		{
-			get
-			{
-				int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
-				if (killUserCount == 4) return 1;
-				return 0;
-			}
-		}
-
-		[JsonIgnore]
-		public int FiveKillSelectedPlayerCount
-		{
-			get
-			{
-				int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
-				if (killUserCount == 5) return 1;
-				return 0;
-			}
-		}
-
-		[JsonIgnore]
-		public int BombExplodedSelectedPlayerCount => BombExploded != null && BombExploded.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
-
-		[JsonIgnore]
-		public int BombPlantedSelectedPlayerCount => BombPlanted != null && BombPlanted.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
-
-		[JsonIgnore]
-		public int BombDefusedSelectedPlayerCount => BombDefused != null && BombDefused.DefuserSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
-
-		/// <summary>
-		/// Damage (health + armor) made by the user during the round
-		/// </summary>
-		[JsonIgnore]
-		public int TotalDamageSelectedPlayerCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
-		&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
-			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage);
-
-		/// <summary>
-		/// Damage health made by the user during the round
-		/// </summary>
-		[JsonIgnore]
-		public int TotalDamageHealthSelectedPlayerCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0 
-		&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
-			.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
-
-		/// <summary>
-		/// Damage armor made by the user during the round
-		/// </summary>
-		[JsonIgnore]
-		public int TotalDamageArmorSelectedPlayerCount => PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
-		&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
-			.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
-
-		[JsonIgnore]
-		public int CrouchKillSelectedPlayerCount => Kills.Count(e => e.KillerSteamId == Settings.Default.SelectedPlayerSteamId && e.IsKillerCrouching);
-
-		#endregion
-
 		public Round()
 		{
 			Kills.CollectionChanged += OnKillsCollectionChanged;
@@ -698,29 +747,19 @@ namespace CSGO_Demos_Manager.Models
 
 		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged(() => KillsCount);
-			RaisePropertyChanged(() => TotalKillSelectedPlayerCount);
-			RaisePropertyChanged(() => OneKillSelectedPlayerCount);
-			RaisePropertyChanged(() => TwoKillSelectedPlayerCount);
-			RaisePropertyChanged(() => ThreeKillSelectedPlayerCount);
-			RaisePropertyChanged(() => FourKillSelectedPlayerCount);
-			RaisePropertyChanged(() => FiveKillSelectedPlayerCount);
+			RaisePropertyChanged(() => KillCount);
+			RaisePropertyChanged(() => OneKillCount);
+			RaisePropertyChanged(() => TwoKillCount);
+			RaisePropertyChanged(() => ThreeKillCount);
+			RaisePropertyChanged(() => FourKillCount);
+			RaisePropertyChanged(() => FiveKillCount);
 		}
 
 		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			if (Settings.Default.SelectedStatsAccountSteamID != 0)
-			{
-				RaisePropertyChanged(() => TotalDamageSelectedPlayerCount);
-				RaisePropertyChanged(() => TotalDamageHealthSelectedPlayerCount);
-				RaisePropertyChanged(() => TotalDamageArmorSelectedPlayerCount);
-			}
-			else
-			{
-				RaisePropertyChanged(() => TotalDamageHealthCount);
-				RaisePropertyChanged(() => TotalDamageArmorCount);
-				RaisePropertyChanged(() => AverageDamageByPlayerCount);
-			}
+			RaisePropertyChanged(() => DamageHealthCount);
+			RaisePropertyChanged(() => DamageArmorCount);
+			RaisePropertyChanged(() => AverageDamage);
 		}
 
 		#endregion

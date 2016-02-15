@@ -325,24 +325,24 @@ namespace CSGO_Demos_Manager.Services
 					stats.MatchCount = demosPlayerList.Count;
 					foreach (Demo demo in demosPlayerList)
 					{
-						stats.KillCount += demo.TotalKillSelectedAccountCount;
-						stats.AssistCount += demo.AssistSelectedAccountCount;
-						stats.DeathCount += demo.DeathSelectedAccountCount;
-						stats.KnifeKillCount += demo.KnifeKillSelectedAccountCount;
-						stats.EntryKillCount += demo.EntryKillSelectedAccountCount;
-						stats.FiveKillCount += demo.FiveKillSelectedAccountCount;
-						stats.FourKillCount += demo.FourKillSelectedAccountCount;
-						stats.ThreeKillCount += demo.ThreeKillSelectedAccountCount;
-						stats.TwoKillCount += demo.TwoKillSelectedAccountCount;
-						stats.HeadshotCount += demo.HeadshotSelectedAccountCount;
-						stats.BombDefusedCount += demo.BombDefusedSelectedAccountCount;
-						stats.BombExplodedCount += demo.BombExplodedSelectedAccountCount;
-						stats.BombPlantedCount += demo.BombPlantedSelectedAccountCount;
-						stats.MvpCount += demo.MvpSelectedAccountCount;
-						stats.DamageCount += demo.TotalDamageHealthSelectedAccountCount;
+						stats.KillCount += demo.KillCount;
+						stats.AssistCount += demo.AssistCount;
+						stats.DeathCount += demo.DeathCount;
+						stats.KnifeKillCount += demo.KnifeKillCount;
+						stats.EntryKillCount += demo.EntryKillCount;
+						stats.FiveKillCount += demo.FiveKillCount;
+						stats.FourKillCount += demo.FourKillCount;
+						stats.ThreeKillCount += demo.ThreeKillCount;
+						stats.TwoKillCount += demo.TwoKillCount;
+						stats.HeadshotCount += demo.HeadshotCount;
+						stats.BombDefusedCount += demo.BombDefusedCount;
+						stats.BombExplodedCount += demo.BombExplodedCount;
+						stats.BombPlantedCount += demo.BombPlantedCount;
+						stats.MvpCount += demo.MvpCount;
+						stats.DamageCount += demo.DamageHealthCount;
 						stats.RoundCount += demo.Rounds.Count;
-						stats.ClutchCount += demo.ClutchSelectedAccountCount;
-						stats.ClutchWin += demo.ClutchWinCountSelectedAccountCount;
+						stats.ClutchCount += demo.ClutchCount;
+						stats.ClutchWin += demo.ClutchWinCount;
 						switch (demo.MatchVerdictSelectedAccountCount)
 						{
 							case -1:
@@ -872,11 +872,11 @@ namespace CSGO_Demos_Manager.Services
 
 						if (demo.MatchVerdictSelectedAccountCount == 1 || demo.MatchVerdictSelectedAccountCount == 2) winCount++;
 						if (winCount > 0) stats.Win.Last().WinPercentage = Math.Round((winCount / (double)matchCount * 100), 2);
-						headshotCount += demo.HeadshotSelectedAccountCount;
-						killCount += demo.TotalKillSelectedAccountCount;
-						deathCount += demo.DeathSelectedAccountCount;
-						damageCount += demo.TotalDamageHealthSelectedAccountCount + demo.TotalDamageArmorSelectedAccountCount;
-						crouchKillCount += demo.CrouchKillSelectedAccountCount;
+						headshotCount += demo.HeadshotCount;
+						killCount += demo.KillCount;
+						deathCount += demo.DeathCount;
+						damageCount += demo.DamageHealthCount;
+						crouchKillCount += demo.CrouchKillCount;
 
 						if (killCount > 0)
 						{

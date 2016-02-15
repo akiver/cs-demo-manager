@@ -91,9 +91,9 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ThreeKillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TwoKillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.OneKillCount);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.AverageDamageCount);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TotalDamageHealthCount);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TotalDamageArmorCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.AverageDamage);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.DamageHealthCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.DamageArmorCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ClutchCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.BombDefusedCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.BombExplodedCount);
