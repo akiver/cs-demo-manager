@@ -660,10 +660,15 @@
 									HeaderStyle="{StaticResource AverageDamagePerRoundHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="KPR/DPR"
-									HeaderStyle="{StaticResource KprDprHeader}"
+									Header="KPR"
+									HeaderStyle="{StaticResource KillPerRoundHeader}"
 									Binding="{Binding KillPerRound}"
-									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn Width="Auto"
+									Header="DPR"
+									HeaderStyle="{StaticResource DeathPerRoundHeader}"
+									Binding="{Binding DeathPerRound}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
 									Header="APR"
 									Binding="{Binding AssistPerRound}"

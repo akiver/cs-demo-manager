@@ -297,10 +297,6 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Kill Per Round" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="KprDprHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-		<Setter Property="ToolTipService.ToolTip" Value="Kill Per Round / Death Per Round" />
-	</Style>
-
 	<Style TargetType="DataGridColumnHeader" x:Key="AssistPerRoundHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Assist Per Round" />
 	</Style>
