@@ -179,8 +179,8 @@
     <Compile Include="Internals\MultiSelect\MultiSelect.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelectCollectionView.cs" />
     <Compile Include="Messages\MainWindowLoadedMessage.cs" />
+    <Compile Include="Messages\RefreshHomeMessage.cs" />
     <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
-    <Compile Include="Messages\RefreshDemosMessage.cs" />
     <Compile Include="Messages\SelectedPlayerChangedMessage.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Charts\CrouchKillDateChart.cs" />

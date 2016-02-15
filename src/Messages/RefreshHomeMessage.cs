@@ -1,6 +1,6 @@
 ﻿namespace CSGO_Demos_Manager.Messages
 {
-	public class RefreshDemosMessage
+	public class RefreshHomeMessage
 	{
 	}
 }

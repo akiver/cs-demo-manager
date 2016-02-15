@@ -420,7 +420,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof (Valve));
 						await RefreshSelectedDemos();
-						if (hasValveDemo != null) Messenger.Default.Send(new SelectedAccountChangedMessage());
+						if (hasValveDemo != null) await RefreshLastRankAccount();
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
@@ -1432,32 +1432,9 @@ namespace CSGO_Demos_Manager.ViewModel
 				await RefreshLastRankAccount();
 				if (!AppSettings.IsInternetConnectionAvailable()) await RefreshBannedPlayerCount();
 
-				Messenger.Default.Register<RefreshDemosMessage>(this, HandleRefreshDemosMessage);
 				Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
+				Messenger.Default.Register<RefreshHomeMessage>(this, HandleRefreshHomeMessage);
 				_isMainWindowLoaded = true;
-			});
-		}
-
-		private void HandleRefreshDemosMessage(RefreshDemosMessage msg)
-		{
-			DispatcherHelper.CheckBeginInvokeOnUI(
-			async () =>
-			{
-				try
-				{
-					List<string> folders = await _cacheService.GetFoldersAsync();
-					Folders = new ObservableCollection<string>(folders);
-					await LoadDemosHeader();
-				}
-				catch (Exception e)
-				{
-					Logger.Instance.Log(e);
-				}
-				finally
-				{
-					IsBusy = false;
-					HasNotification = false;
-				}
 			});
 		}
 
@@ -1470,6 +1447,16 @@ namespace CSGO_Demos_Manager.ViewModel
 			});
 		}
 
+		private void HandleRefreshHomeMessage(RefreshHomeMessage msg)
+		{
+			DispatcherHelper.CheckBeginInvokeOnUI(
+			async () =>
+			{
+				await LoadDemosHeader();
+				await RefreshLastRankAccount();
+			});
+		}
+
 		private async Task RefreshLastRankAccount()
 		{
 			if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0)
@@ -1477,7 +1464,6 @@ namespace CSGO_Demos_Manager.ViewModel
 				HasNotification = true;
 				IsBusy = true;
 				NotificationMessage = "Searching account's last rank...";
-				DataGridDemosCollection.Refresh();
 				long steamId = Properties.Settings.Default.SelectedStatsAccountSteamID;
 				Rank lastRank = await _cacheService.GetLastRankAsync(steamId);
 				if (lastRank == null)

@@ -272,11 +272,8 @@ namespace CSGO_Demos_Manager.ViewModel
 						Folders.Clear();
 						List<string> folders = await _cacheService.GetFoldersAsync();
 						Folders = new ObservableCollection<string>(folders);
-
-						RefreshDemosMessage msg = new RefreshDemosMessage();
+						RefreshHomeMessage msg = new RefreshHomeMessage();
 						Messenger.Default.Send(msg);
-						SelectedAccountChangedMessage msgRank = new SelectedAccountChangedMessage();
-						Messenger.Default.Send(msgRank);
 					}));
 			}
 		}
