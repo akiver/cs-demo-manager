@@ -224,6 +224,11 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_backToHomeCommand = new RelayCommand(
 					() =>
 					{
+						if (Properties.Settings.Default.SelectedPlayerSteamId != 0)
+						{
+							var settingsViewModel = (new ViewModelLocator().Settings);
+							settingsViewModel.IsShowAllPlayers = true;
+						}
 						var mainViewModel = (new ViewModelLocator()).Main;
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						HomeView homeView = new HomeView();
