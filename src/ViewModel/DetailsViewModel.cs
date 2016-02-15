@@ -209,6 +209,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								}
 							});
 						}
+						new ViewModelLocator().Settings.IsShowAllPlayers = true;
 					}));
 			}
 		}
