@@ -60,8 +60,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				UpdateKillsCount();
 				UpdatePlayerScore();
-				if (Demo.Rounds.Count < (Demo.ScoreTeam1 + Demo.ScoreTeam2))
+				if (Demo.Rounds.Count < Parser.CTScore + Parser.TScore)
 				{
+					Demo.ScoreTeam1 = Parser.CTScore;
+					Demo.ScoreTeam2 = Parser.TScore;
 					Demo.Rounds.Add(CurrentRound);
 				}
 				if (Demo.Players.Any())
