@@ -294,7 +294,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
 			if (weapon == null) return;
 			PlayerExtended killed = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID);
-			if (killed == null) return;
 			PlayerExtended killer = null;
 
 			KillEvent killEvent = new KillEvent(Parser.IngameTick, Parser.CurrentTime)
@@ -330,9 +329,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// Human killed human
 			if (!killerIsBot && !victimIsBot)
 			{
-				killed.IsAlive = false;
-				if (killer != null)
+				if (killer != null && killed != null)
 				{
+					killed.IsAlive = false;
 					// TK
 					if (killer.TeamName == killed.TeamName)
 					{
@@ -378,7 +377,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			// A bot killed a human
-			if (killerIsBot && !victimIsBot)
+			if (killerIsBot && !victimIsBot && killed != null)
 			{
 				// TK or not we add a death to the human
 				killed.DeathCount++;
