@@ -1475,6 +1475,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				{
 					LastRankAccountStats = lastRank;
 				}
+				DataGridDemosCollection.Refresh();
 				IsBusy = false;
 				HasNotification = false;
 				CommandManager.InvalidateRequerySuggested();
