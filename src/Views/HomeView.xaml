@@ -21,6 +21,7 @@
 			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 			<helpers:ImageToSourceConverter x:Key="ImageToSourceConverter" />
 			<helpers:StringToDateConverter x:Key="StringToDateConverter" />
+			<helpers:BooleanMultipleConverter x:Key="BooleanMultipleConverter" />
 			<helpers:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -361,8 +362,14 @@
 
 			<ComboBox Grid.Column="1" ItemsSource="{Binding Folders, Mode=TwoWay}"
 					  Style="{StaticResource ComboBoxFoldersStyle}"
-					  SelectedItem="{Binding SelectedFolder}"
-					  IsEnabled="{Binding Path=IsShowAllFolders, Converter={StaticResource BooleanInvertedConverter}}"/>
+					  SelectedItem="{Binding SelectedFolder}">
+				<ComboBox.IsEnabled>
+					<MultiBinding Converter="{StaticResource BooleanMultipleConverter}">
+						<Binding Path="IsShowAllFolders" Converter="{StaticResource BooleanInvertedConverter}" />
+						<Binding Path="IsBusy" Converter="{StaticResource BooleanInvertedConverter}" />
+					</MultiBinding>
+				</ComboBox.IsEnabled>
+			</ComboBox>
 
 			<Grid Grid.Column="2">
 				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
@@ -450,7 +457,9 @@
 		<Grid Grid.Row="2" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 				<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
-				<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+				<TextBlock Name="NotificationText"
+						   Text="{Binding NotificationMessage}"
+						   Style="{StaticResource LabelGeneralInfoDemo}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				<Button Margin="20 0 0 0" Width="70" Height="30"
 							Command="{Binding StopAnalyzeCommand}"

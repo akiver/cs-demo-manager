@@ -152,6 +152,7 @@
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BooleanInvertedConverter.cs" />
+    <Compile Include="Converters\BooleanMultipleConverter.cs" />
     <Compile Include="Converters\BooleanToStringConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityInvertedConverter.cs" />
