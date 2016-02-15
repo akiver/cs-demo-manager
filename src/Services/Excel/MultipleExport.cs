@@ -20,6 +20,8 @@ namespace CSGO_Demos_Manager.Services.Excel
 
 		private WeaponsSheet _weaponsSheet;
 
+		private RoundsSheet _roundsSheet;
+
 		public MultipleExport(List<Demo> demos)
 		{
 			_demos = demos;
@@ -37,6 +39,8 @@ namespace CSGO_Demos_Manager.Services.Excel
 			await _teamsSheet.Generate();
 			_weaponsSheet = new WeaponsSheet(Workbook, _demos);
 			await _weaponsSheet.Generate();
+			_roundsSheet = new RoundsSheet(Workbook, _demos);
+			await _roundsSheet.Generate();
 
 			return Workbook;
 		}

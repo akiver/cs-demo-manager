@@ -267,6 +267,7 @@
     <Compile Include="Services\Excel\Sheets\Multiple\GeneralSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Multiple\MapsSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Multiple\PlayersSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Multiple\RoundsSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Multiple\TeamsSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Multiple\WeaponsSheet.cs" />
     <Compile Include="Services\Excel\SingleExport.cs" />
