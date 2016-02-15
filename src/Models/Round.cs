@@ -259,6 +259,13 @@ namespace CSGO_Demos_Manager.Models
 					return 0;
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID);
+					if (killUserCount == 5) return 1;
+					return 0;
+				}
+
 				return _fivekillCount;
 			}
 			set { Set(() => FiveKillCount, ref _fivekillCount, value); }
@@ -272,6 +279,13 @@ namespace CSGO_Demos_Manager.Models
 				if (Settings.Default.SelectedPlayerSteamId != 0)
 				{
 					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 4) return 1;
+					return 0;
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID);
 					if (killUserCount == 4) return 1;
 					return 0;
 				}
@@ -293,6 +307,13 @@ namespace CSGO_Demos_Manager.Models
 					return 0;
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID);
+					if (killUserCount == 3) return 1;
+					return 0;
+				}
+
 				return _threekillCount;
 			}
 			set { Set(() => ThreeKillCount, ref _threekillCount, value); }
@@ -306,6 +327,13 @@ namespace CSGO_Demos_Manager.Models
 				if (Settings.Default.SelectedPlayerSteamId != 0)
 				{
 					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
+					if (killUserCount == 2) return 1;
+					return 0;
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID);
 					if (killUserCount == 2) return 1;
 					return 0;
 				}
@@ -327,6 +355,13 @@ namespace CSGO_Demos_Manager.Models
 					return 0;
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					int killUserCount = Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID);
+					if (killUserCount == 1) return 1;
+					return 0;
+				}
+
 				return _onekillCount;
 			}
 			set { Set(() => OneKillCount, ref _onekillCount, value); }
@@ -340,6 +375,11 @@ namespace CSGO_Demos_Manager.Models
 				if (Settings.Default.SelectedPlayerSteamId != 0)
 				{
 					return BombPlanted != null && BombPlanted.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return BombPlanted != null && BombPlanted.PlanterSteamId == Settings.Default.SelectedStatsAccountSteamID ? 1 : 0;
 				}
 
 				return BombPlanted != null ? 1 : 0;
@@ -384,6 +424,11 @@ namespace CSGO_Demos_Manager.Models
 					return BombDefused != null && BombDefused.DefuserSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return BombDefused != null && BombDefused.DefuserSteamId == Settings.Default.SelectedStatsAccountSteamID ? 1 : 0;
+				}
+
 				return BombDefused != null ? 1 : 0;
 			}
 		}
@@ -396,6 +441,11 @@ namespace CSGO_Demos_Manager.Models
 				if (Settings.Default.SelectedPlayerSteamId != 0)
 				{
 					return BombExploded != null && BombExploded.PlanterSteamId == Settings.Default.SelectedPlayerSteamId ? 1 : 0;
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return BombExploded != null && BombExploded.PlanterSteamId == Settings.Default.SelectedStatsAccountSteamID ? 1 : 0;
 				}
 
 				return BombExploded != null ? 1 : 0;
@@ -458,6 +508,7 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => SideTrouble, ref _sideTrouble, value); }
 		}
 
+		[JsonProperty("round_flashbang_count")]
 		public int FlashbangThrownCount
 		{
 			get { return _flashbangThrownCount; }
@@ -559,6 +610,11 @@ namespace CSGO_Demos_Manager.Models
 					return Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId);
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID);
+				}
+
 				return Kills.Count;
 			}
 		}
@@ -616,6 +672,13 @@ namespace CSGO_Demos_Manager.Models
 					.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
+					&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID)
+					.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
+				}
+
 				return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
 					.Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
 			}
@@ -636,6 +699,13 @@ namespace CSGO_Demos_Manager.Models
 					.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0
+					&& playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID)
+					.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
+				}
+
 				return PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
 					.Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
 			}
@@ -653,6 +723,10 @@ namespace CSGO_Demos_Manager.Models
 				if (Settings.Default.SelectedPlayerSteamId != 0)
 				{
 					total = PlayersHurted.Where(e => e.AttackerSteamId == Settings.Default.SelectedPlayerSteamId)
+						.Aggregate(total, (current, e) => current + e.HealthDamage);
+				} else if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					total = PlayersHurted.Where(e => e.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID)
 						.Aggregate(total, (current, e) => current + e.HealthDamage);
 				}
 				else
@@ -677,6 +751,12 @@ namespace CSGO_Demos_Manager.Models
 					&& killEvent.KillerVelocityZ > 0);
 				}
 
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return Kills.Count(killEvent => killEvent.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& killEvent.KillerVelocityZ > 0);
+				}
+
 				return Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
 			}
 		}
@@ -689,6 +769,11 @@ namespace CSGO_Demos_Manager.Models
 				if (Settings.Default.SelectedPlayerSteamId != 0)
 				{
 					return Kills.Count(e => e.KillerSteamId == Settings.Default.SelectedPlayerSteamId && e.IsKillerCrouching);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return Kills.Count(e => e.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && e.IsKillerCrouching);
 				}
 
 				return Kills.Count(killEvent => killEvent.IsKillerCrouching);

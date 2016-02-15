@@ -515,6 +515,13 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_exportExcelCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
+						if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0)
+						{
+							var settingsViewModel = (new ViewModelLocator().Settings);
+							var isExportFocusedOnPlayer = await _dialogService.ShowExportPlayerStatsAsync(settingsViewModel.SelectedStatsAccount.Name);
+							if (isExportFocusedOnPlayer == MessageDialogResult.Negative) return;
+						}
+
 						if (demos.Count > 1)
 						{
 							var isMultipleExport = await _dialogService.ShowExportDemosAsync();

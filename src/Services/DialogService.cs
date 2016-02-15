@@ -82,6 +82,20 @@ namespace CSGO_Demos_Manager.Services
 				MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
 
+		public async Task<MessageDialogResult> ShowExportPlayerStatsAsync(string playerName)
+		{
+			var metroWindow = (Application.Current.MainWindow as MetroWindow);
+			MetroDialogSettings dialogOptions = new MetroDialogSettings
+			{
+				AffirmativeButtonText = "OK",
+				NegativeButtonText = "Cancel",
+				ColorScheme = MetroDialogColorScheme.Accented
+			};
+
+			return await metroWindow.ShowMessageAsync("Export", "You are going to export data for the player \"" + playerName
+				+ "\" Do you want to continue?", MessageDialogStyle.AffirmativeAndNegative, dialogOptions);
+		}
+
 		public async Task<MessageDialogResult> ShowAnalyzeAllDemosAsync()
 		{
 			var metroWindow = (Application.Current.MainWindow as MetroWindow);

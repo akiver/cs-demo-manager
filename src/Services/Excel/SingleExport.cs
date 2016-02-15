@@ -34,6 +34,8 @@ namespace CSGO_Demos_Manager.Services.Excel
 
 		public override async Task<IWorkbook> Generate()
 		{
+			CacheService cacheService = new CacheService();
+			_demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(_demo);
 			_generalSheet = new GeneralSheet(Workbook, _demo);
 			await _generalSheet.Generate();
 			_playersSheet = new PlayersSheet(Workbook, _demo);

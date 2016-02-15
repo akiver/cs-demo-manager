@@ -88,6 +88,15 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 			map.BombExplodedCount += demo.BombExplodedCount;
 			foreach (Round round in demo.Rounds)
 			{
+				if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					PlayerExtended player = demo.Players.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.SelectedStatsAccountSteamID);
+					if (player != null)
+					{
+						if (player.TeamName != round.WinnerName) continue;
+					}
+				}
+
 				if (round.WinnerSide == Team.CounterTerrorist) map.WinCounterTerroritsCount++;
 				if (round.WinnerSide == Team.Terrorist) map.WinTerroristCount++;
 				if (round.SideTrouble != Team.Spectate)
@@ -111,6 +120,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 			}
 			foreach (BombPlantedEvent plantedEvent in demo.BombPlanted)
 			{
+				if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+				    && plantedEvent.PlanterSteamId != Properties.Settings.Default.SelectedStatsAccountSteamID) continue;
 				if (plantedEvent.Site == "A")
 				{
 					map.BombPlantedOnACount++;

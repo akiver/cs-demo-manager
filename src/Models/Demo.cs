@@ -653,6 +653,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.KillsCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -669,6 +676,11 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return BombDefused.Count(b => b.DefuserSteamId != 0 && b.DefuserSteamId == Settings.Default.SelectedPlayerSteamId);
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					return BombDefused.Count(b => b.DefuserSteamId != 0 && b.DefuserSteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -683,6 +695,11 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return BombExploded.Count(b => b.PlanterSteamId != 0 && b.PlanterSteamId == Settings.Default.SelectedPlayerSteamId);
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					return BombExploded.Count(b => b.PlanterSteamId != 0 && b.PlanterSteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -697,6 +714,11 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return BombPlanted.Count(b => b.PlanterSteamId != 0 && b.PlanterSteamId == Settings.Default.SelectedPlayerSteamId);
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					return BombPlanted.Count(b => b.PlanterSteamId != 0 && b.PlanterSteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -707,28 +729,155 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public int FlashbangThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
+		public int FlashbangThrownCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId
+					&& w.Weapon.Element == EquipmentElement.Flash);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& w.Weapon.Element == EquipmentElement.Flash);
+				}
+
+				return WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
+			}
+		}
 
 		[JsonIgnore]
-		public int SmokeThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
+		public int SmokeThrownCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId
+					&& w.Weapon.Element == EquipmentElement.Smoke);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& w.Weapon.Element == EquipmentElement.Smoke);
+				}
+
+				return WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
+			}
+		}
 
 		[JsonIgnore]
-		public int HeGrenadeThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.HE);
+		public int HeGrenadeThrownCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId
+					&& w.Weapon.Element == EquipmentElement.HE);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& w.Weapon.Element == EquipmentElement.HE);
+				}
+
+				return WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.HE);
+			}
+		}
 
 		[JsonIgnore]
-		public int DecoyThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
+		public int DecoyThrownCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId
+					&& w.Weapon.Element == EquipmentElement.Decoy);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& w.Weapon.Element == EquipmentElement.Decoy);
+				}
+
+				return WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
+			}
+		}
 
 		[JsonIgnore]
-		public int MolotovThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
+		public int MolotovThrownCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId
+					&& w.Weapon.Element == EquipmentElement.Molotov);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& w.Weapon.Element == EquipmentElement.Molotov);
+				}
+
+				return WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
+			}
+		}
 
 		[JsonIgnore]
-		public int IncendiaryThrownCount => WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
+		public int IncendiaryThrownCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId
+					&& w.Weapon.Element == EquipmentElement.Incendiary);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID
+					&& w.Weapon.Element == EquipmentElement.Incendiary);
+				}
+
+				return WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
+			}
+		}
 
 		[JsonIgnore]
 		public int ClutchCount
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.ClutchCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -768,6 +917,17 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return (from round
+							in Rounds.ToList()
+							where round.PlayersHurted.Any()
+							from playerHurtedEvent
+							in round.PlayersHurted.ToList()
+							where playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId
+							select playerHurtedEvent.HealthDamage).Sum();
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					return (from round
@@ -791,6 +951,17 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return (from round
+					   in Rounds.ToList()
+							where round.PlayersHurted.Any()
+							from playerHurtedEvent
+							in round.PlayersHurted.ToList()
+							where playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId
+							select playerHurtedEvent.ArmorDamage).Sum();
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					return (from round
@@ -841,6 +1012,22 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				double total;
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					total = (from round
+							 in Rounds.ToList()
+							 where round.PlayersHurted.Any()
+							 from playerHurtedEvent
+							 in round.PlayersHurted.ToList()
+							 where
+							 playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == Settings.Default.SelectedPlayerSteamId
+							 select playerHurtedEvent).Aggregate<PlayerHurtedEvent, double>(0, (current, playerHurtedEvent) =>
+							 current + (playerHurtedEvent.ArmorDamage + playerHurtedEvent.HealthDamage));
+					if (Math.Abs(total) < 0.1) return total;
+					total = Math.Round(total / Rounds.Count, 1);
+					return total;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					total = (from round
@@ -876,6 +1063,13 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				if (!Players.Any()) return 0;
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.KillPerRound;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -899,6 +1093,13 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				if (!Players.Any()) return 0;
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.AssistPerRound;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -918,6 +1119,12 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					return player == null ? 0 : Kills.Count(killEvent => killEvent.KillerVelocityZ > 0 && killEvent.KillerSteamId == player.SteamId);
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -933,6 +1140,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.CrouchKillCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -996,6 +1210,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.HeadshotCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1012,6 +1233,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.DeathCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1028,6 +1256,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.AssistCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1044,6 +1279,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.EntryKills.Count;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1077,6 +1319,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.RoundMvpCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1093,6 +1342,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.TeamKillCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1109,6 +1365,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.DeathPerRound;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1126,6 +1389,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.ClutchLostCount;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1142,6 +1412,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get
 			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
+					if (player == null) return 0;
+					return player.Clutch1V1Count + player.Clutch1V2Count + player.Clutch1V3Count + player.Clutch1V4Count + player.Clutch1V5Count;
+				}
+
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
@@ -1150,6 +1427,48 @@ namespace CSGO_Demos_Manager.Models
 				}
 
 				return Players.Sum(player => player.Clutch1V1Count + player.Clutch1V2Count + player.Clutch1V3Count + player.Clutch1V4Count + player.Clutch1V5Count);
+			}
+		}
+
+		[JsonIgnore]
+		public int WeaponFiredCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedPlayerSteamId);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return WeaponFired.Count(w => w.ShooterSteamId != 0
+					&& w.ShooterSteamId == Settings.Default.SelectedStatsAccountSteamID);
+				}
+
+				return WeaponFired.Count;
+			}
+		}
+
+		[JsonIgnore]
+		public int HitCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return PlayersHurted.Count(e => e.AttackerSteamId != 0 &&
+					e.AttackerSteamId == Settings.Default.SelectedPlayerSteamId);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return PlayersHurted.Count(e => e.AttackerSteamId != 0 &&
+					e.AttackerSteamId == Settings.Default.SelectedStatsAccountSteamID);
+				}
+
+				return PlayersHurted.Count;
 			}
 		}
 

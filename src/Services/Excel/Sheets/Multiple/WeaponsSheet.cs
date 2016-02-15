@@ -36,6 +36,9 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{
 					foreach (WeaponFire weaponFire in demo.WeaponFired)
 					{
+						if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+						    && weaponFire.ShooterSteamId != Properties.Settings.Default.SelectedStatsAccountSteamID) continue;
+
 						if (weaponFire.Weapon.Element != EquipmentElement.Unknown)
 						{
 							if (!data.ContainsKey(weaponFire.Weapon)) data.Add(weaponFire.Weapon, new WeaponsData());
@@ -45,6 +48,9 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 
 					foreach (PlayerHurtedEvent hurtedEvent in demo.PlayersHurted)
 					{
+						if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+							&& hurtedEvent.AttackerSteamId != Properties.Settings.Default.SelectedStatsAccountSteamID) continue;
+
 						if (hurtedEvent.Weapon.Element != EquipmentElement.Unknown)
 						{
 							if (!data.ContainsKey(hurtedEvent.Weapon)) data.Add(hurtedEvent.Weapon, new WeaponsData());
@@ -56,6 +62,9 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 
 					foreach (KillEvent killEvent in demo.Kills)
 					{
+						if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+							&& killEvent.KillerSteamId != Properties.Settings.Default.SelectedStatsAccountSteamID) continue;
+
 						if (killEvent.Weapon.Element != EquipmentElement.Unknown)
 						{
 							if (!data.ContainsKey(killEvent.Weapon)) data.Add(killEvent.Weapon, new WeaponsData());

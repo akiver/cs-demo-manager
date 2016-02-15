@@ -440,13 +440,20 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_exportDemoToExcelCommand = new RelayCommand(
 						async ()=>
 						{
-							SaveFileDialog saveHeatmapDialog = new SaveFileDialog
+							if (Properties.Settings.Default.SelectedPlayerSteamId != 0)
+							{
+								var settingsViewModel = (new ViewModelLocator().Settings);
+								var isExportFocusedOnPlayer = await _dialogService.ShowExportPlayerStatsAsync(settingsViewModel.SelectedPlayer.Name);
+								if (isExportFocusedOnPlayer == MessageDialogResult.Negative) return;
+							}
+
+							SaveFileDialog exportDialog = new SaveFileDialog
 							{
 								FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + "-export.xlsx",
 								Filter = "XLSX file (*.xlsx)|*.xlsx"
 							};
 
-							if (saveHeatmapDialog.ShowDialog() == DialogResult.OK)
+							if (exportDialog.ShowDialog() == DialogResult.OK)
 							{
 								try
 								{
@@ -457,7 +464,7 @@ namespace CSGO_Demos_Manager.ViewModel
 										NotificationMessage = "Analyzing " + CurrentDemo.Name + " for export...";
 										await _demosService.AnalyzeDemo(CurrentDemo, CancellationToken.None);
 									}
-									await _excelService.GenerateXls(CurrentDemo, saveHeatmapDialog.FileName);
+									await _excelService.GenerateXls(CurrentDemo, exportDialog.FileName);
 								}
 								catch (Exception e)
 								{

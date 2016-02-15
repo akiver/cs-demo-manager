@@ -84,7 +84,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeam1);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeam2);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.Winner.Name);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Kills.Count);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.KillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.AssistCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.FiveKillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.FourKillCount);
@@ -104,8 +104,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.DecoyThrownCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.MolotovThrownCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.IncendiaryThrownCount);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.WeaponFired.Count);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.PlayersHurted.Count);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.WeaponFiredCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.HitCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Rounds.Count);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.Comment);
 				SetCellValue(row, columnNumber, CellType.Boolean, Demo.HasCheater);
