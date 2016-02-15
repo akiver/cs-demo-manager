@@ -58,6 +58,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
+				UpdateKillsCount();
+				UpdatePlayerScore();
 				if (Demo.Rounds.Count < (Demo.ScoreTeam1 + Demo.ScoreTeam2))
 				{
 					Demo.Rounds.Add(CurrentRound);
