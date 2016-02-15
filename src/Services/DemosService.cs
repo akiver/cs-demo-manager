@@ -689,6 +689,13 @@ namespace CSGO_Demos_Manager.Services
 							demo.Kills.Count(
 								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Dual Barettas");
 
+						stats.KillTec9Count +=
+							demo.Kills.Count(
+								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Tec-9");
+						stats.DeathTec9Count +=
+							demo.Kills.Count(
+								k => k.KilledSteamId != 0 && k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Tec-9");
+
 						stats.KillFiveSevenCount +=
 							demo.Kills.Count(
 								k => k.KillerSteamId != 0 && k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.Weapon.Name == "Five-SeveN");
