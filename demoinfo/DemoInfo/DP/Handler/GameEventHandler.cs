@@ -300,11 +300,11 @@ namespace DemoInfo.DP.Handler
 					bombEventArgs.Site = 'B';
 				} else {
 					var relevantTrigger = parser.triggers.Single(a => a.Index == site);
-					if ((parser.bombsiteACenter - bombEventArgs.Player.Position).Absolute < (parser.bombsiteBCenter - bombEventArgs.Player.Position).Absolute) {
+					if (relevantTrigger.Contains(parser.bombsiteACenter)) {
 						//planted at A.
 						bombEventArgs.Site = 'A';
 						parser.bombsiteAIndex = site;
-					} else if (relevantTrigger.Contains(parser.bombsiteBCenter)) {
+					} else {
 						//planted at B.
 						bombEventArgs.Site = 'B';
 						parser.bombsiteBIndex = site;
