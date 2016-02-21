@@ -677,35 +677,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
 			if (shooter == null || weapon == null) return;
 
-			switch (e.Weapon.Weapon)
-			{
-				case EquipmentElement.Incendiary:
-					CurrentRound.IncendiaryThrownCount++;
-					shooter.IncendiaryThrownCount++;
-					break;
-				case EquipmentElement.Molotov:
-					CurrentRound.MolotovThrownCount++;
-					shooter.MolotovThrownCount++;
-					break;
-				case EquipmentElement.Decoy:
-					CurrentRound.DecoyThrownCount++;
-					shooter.DecoyThrownCount++;
-					break;
-				case EquipmentElement.Flash:
-					CurrentRound.FlashbangThrownCount++;
-					shooter.FlashbangThrownCount++;
-					PlayersFlashQueue.Enqueue(shooter);
-					break;
-				case EquipmentElement.HE:
-					CurrentRound.HeGrenadeThrownCount++;
-					shooter.HeGrenadeThrownCount++;
-					break;
-				case EquipmentElement.Smoke:
-					CurrentRound.SmokeThrownCount++;
-					shooter.SmokeThrownCount++;
-					break;
-			}
-
 			WeaponFire shoot = new WeaponFire(Parser.IngameTick, Parser.CurrentTime)
 			{
 				ShooterSteamId = shooter.SteamId,
@@ -717,6 +688,35 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				ShooterVelocityZ = e.Shooter.Velocity.Z,
 				ShooterSide = e.Shooter.Team
 			};
+
+			if (e.Weapon.Class == EquipmentClass.Grenade)
+			{
+				CurrentRound.WeaponFired.Add(shoot);
+			}
+
+			switch (e.Weapon.Weapon)
+			{
+				case EquipmentElement.Incendiary:
+					shooter.IncendiaryThrownCount++;
+					break;
+				case EquipmentElement.Molotov:
+					shooter.MolotovThrownCount++;
+					break;
+				case EquipmentElement.Decoy:
+					shooter.DecoyThrownCount++;
+					break;
+				case EquipmentElement.Flash:
+					shooter.FlashbangThrownCount++;
+					PlayersFlashQueue.Enqueue(shooter);
+					break;
+				case EquipmentElement.HE:
+					shooter.HeGrenadeThrownCount++;
+					break;
+				case EquipmentElement.Smoke:
+					shooter.SmokeThrownCount++;
+					break;
+			}
+
 			Demo.WeaponFired.Add(shoot);
 
 			if (AnalyzeHeatmapPoint || AnalyzePlayersPosition)
@@ -858,7 +858,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						molotovEvent.ThrowerSteamId = thrower.SteamId;
 						molotovEvent.ThrowerName = thrower.Name;
-						CurrentRound.MolotovsThrown.Add(molotovEvent);
 
 						PositionPoint positionPoint = new PositionPoint
 						{

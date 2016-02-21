@@ -66,42 +66,6 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{
 					foreach (Round round in demo.Rounds)
 					{
-						round.FlashbangThrownCount = 0;
-						round.SmokeThrownCount = 0;
-						round.HeGrenadeThrownCount = 0;
-						round.DecoyThrownCount = 0;
-						round.MolotovThrownCount = 0;
-						round.IncendiaryThrownCount = 0;
-						foreach (WeaponFire weaponFire in demo.WeaponFired)
-						{
-							if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0
-							&& weaponFire.ShooterSteamId != Properties.Settings.Default.SelectedStatsAccountSteamID) continue;
-							if (weaponFire.RoundNumber == round.Number)
-							{
-								switch (weaponFire.Weapon.Element)
-								{
-									case EquipmentElement.Flash:
-										round.FlashbangThrownCount++;
-										break;
-									case EquipmentElement.Smoke:
-										round.SmokeThrownCount++;
-										break;
-									case EquipmentElement.Decoy:
-										round.DecoyThrownCount++;
-										break;
-									case EquipmentElement.Molotov:
-										round.MolotovThrownCount++;
-										break;
-									case EquipmentElement.Incendiary:
-										round.IncendiaryThrownCount++;
-										break;
-									case EquipmentElement.HE:
-										round.HeGrenadeThrownCount++;
-										break;
-								}
-							}
-						}
-
 						IRow row = Sheet.CreateRow(rowNumber);
 						int columnNumber = 0;
 						SetCellValue(row, columnNumber++, CellType.String, demo.Id);

@@ -58,44 +58,6 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 
 				foreach (Round round in Demo.Rounds)
 				{
-					round.FlashbangThrownCount = 0;
-					round.SmokeThrownCount = 0;
-					round.HeGrenadeThrownCount = 0;
-					round.DecoyThrownCount = 0;
-					round.MolotovThrownCount = 0;
-					round.IncendiaryThrownCount = 0;
-					foreach (WeaponFire weaponFire in Demo.WeaponFired)
-					{
-						if (Properties.Settings.Default.SelectedPlayerSteamId != 0
-						& weaponFire.ShooterSteamId != Properties.Settings.Default.SelectedPlayerSteamId
-						|| Properties.Settings.Default.SelectedStatsAccountSteamID != 0
-						& weaponFire.ShooterSteamId != Properties.Settings.Default.SelectedStatsAccountSteamID) continue;
-						if (weaponFire.RoundNumber == round.Number)
-						{
-							switch (weaponFire.Weapon.Element)
-							{
-								case EquipmentElement.Flash:
-									round.FlashbangThrownCount++;
-									break;
-								case EquipmentElement.Smoke:
-									round.SmokeThrownCount++;
-									break;
-								case EquipmentElement.Decoy:
-									round.DecoyThrownCount++;
-									break;
-								case EquipmentElement.Molotov:
-									round.MolotovThrownCount++;
-									break;
-								case EquipmentElement.Incendiary:
-									round.IncendiaryThrownCount++;
-									break;
-								case EquipmentElement.HE:
-									round.HeGrenadeThrownCount++;
-									break;
-							}
-						}
-					}
-
 					IRow row = Sheet.CreateRow(rowNumber);
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
@@ -107,29 +69,29 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.KillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.TwoKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.ThreeKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.FourKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.FiveKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.JumpKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.AverageDamage);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageHealthCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageArmorCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.BombExplodedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.BombPlantedCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.BombDefusedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.KillCount : round.SelectedPlayerKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.OneKillCount : round.SelectedPlayerOneKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.TwoKillCount : round.SelectedPlayerTwoKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.ThreeKillCount : round.SelectedPlayerThreeKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.FourKillCount: round.SelectedPlayerFourKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.FiveKillCount : round.SelectedPlayerFiveKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.JumpKillCount : round.SelectedPlayerJumpKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.AverageDamage : round.SelectedPlayerAverageDamage);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.DamageHealthCount: round.SelectedPlayerDamageHealthCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.DamageArmorCount : round.SelectedPlayerDamageArmorCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.BombExplodedCount : round.SelectedPlayerBombExplodedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.BombPlantedCount : round.SelectedPlayerBombPlantedCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.BombDefusedCount : round.SelectedPlayerBombDefusedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeam1);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeam2);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeam1);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeam2);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.FlashbangThrownCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.SmokeThrownCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.HeGrenadeThrownCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.DecoyThrownCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, round.MolotovThrownCount);
-					SetCellValue(row, columnNumber, CellType.Numeric, round.IncendiaryThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.FlashbangThrownCount : round.SelectedPlayerFlashbangThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.SmokeThrownCount : round.SelectedPlayerSmokeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.HeGrenadeThrownCount : round.SelectedPlayerHeGrenadeThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.DecoyThrownCount : round.SelectedPlayerDecoyThrownCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.MolotovThrownCount : round.SelectedPlayerMolotovThrownCount);
+					SetCellValue(row, columnNumber, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.IncendiaryThrownCount : round.SelectedPlayerIncendiaryThrownCount);
 
 					rowNumber++;
 				}
