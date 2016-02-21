@@ -14,6 +14,9 @@
 		<MenuItem Header="Browse"
 							  Command="{Binding Home.BrowseToDemoCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Home.SelectedDemo, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Copy playdemo command"
+							  Command="{Binding Home.CopyPlaydemoCommand, Source={StaticResource Locator}}"
+							  CommandParameter="{Binding Home.SelectedDemo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Status">
 			<MenuItem Header="None"
 								  Command="{Binding Home.SaveStatusDemoCommand, Source={StaticResource Locator}}"

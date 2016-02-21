@@ -459,7 +459,10 @@
 
 		<Grid Grid.Row="2" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
-				<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
+				<controls:ProgressRing IsActive="{Binding HasRing}"
+									   Foreground="{DynamicResource AccentColorBrush}"
+									   Width="40"
+									   Height="40" />
 				<TextBlock Name="NotificationText"
 						   Text="{Binding NotificationMessage}"
 						   Style="{StaticResource LabelGeneralInfoDemo}"

@@ -50,6 +50,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _isBusy;
 
+		private bool _hasRing;
+
 		private bool _isCancellable;
 
 		private bool _hasNotification;
@@ -76,9 +78,9 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private string _notificationMessage;
 
-		ObservableCollection<Demo> _demos;
+		private ObservableCollection<Demo> _demos;
 
-		ObservableCollection<Demo> _selectedDemos;
+		private ObservableCollection<Demo> _selectedDemos;
 
 		private ICollectionView _dataGridDemosCollection;
 
@@ -107,6 +109,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<Demo> _watchLowlightCommand;
 
 		private RelayCommand<Demo> _browseToDemoCommand;
+
+		private RelayCommand<Demo> _copyPlaydemoCommand;
 
 		private RelayCommand<Demo> _goToTickCommand;
 
@@ -159,6 +163,12 @@ namespace CSGO_Demos_Manager.ViewModel
 		#endregion
 
 		#region Accessors
+
+		public bool HasRing
+		{
+			get { return _hasRing; }
+			set { Set(() => HasRing, ref _hasRing, value); }
+		}
 
 		public bool IsBusy
 		{
@@ -542,6 +552,7 @@ namespace CSGO_Demos_Manager.ViewModel
 									try
 									{
 										IsBusy = true;
+										HasRing = true;
 										HasNotification = true;
 										NotificationMessage = "Analyzing demos for export...";
 										IsCancellable = true;
@@ -590,6 +601,7 @@ namespace CSGO_Demos_Manager.ViewModel
 									try
 									{
 										IsBusy = true;
+										HasRing = true;
 										HasNotification = true;
 										NotificationMessage = "Analyzing demos for export...";
 										IsCancellable = true;
@@ -650,6 +662,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								try
 								{
 									IsBusy = true;
+									HasRing = true;
 									HasNotification = true;
 									if (!_cacheService.HasDemoInCache(SelectedDemo))
 									{
@@ -736,6 +749,30 @@ namespace CSGO_Demos_Manager.ViewModel
 		}
 
 		/// <summary>
+		/// Command to copy watch command to clipboard
+		/// </summary>
+		public RelayCommand<Demo> CopyPlaydemoCommand
+		{
+			get
+			{
+				return _copyPlaydemoCommand
+					?? (_copyPlaydemoCommand = new RelayCommand<Demo>(
+						async demo =>
+						{
+							Clipboard.SetText("playdemo \"" + demo.Path + "\"");
+							IsBusy = true;
+							HasRing = false;
+							HasNotification = true;
+							NotificationMessage = "Playdemo command copied to clipboard";
+							await Task.Delay(3000);
+							HasNotification = false;
+							IsBusy = false;
+						},
+						demo => SelectedDemo != null));
+			}
+		}
+
+		/// <summary>
 		/// Command to go to a specific tick
 		/// </summary>
 		public RelayCommand<Demo> GoToTickCommand
@@ -797,6 +834,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 
 							IsBusy = true;
+							HasRing = true;
 							HasNotification = true;
 							List<Demo> demosFailed = new List<Demo>();
 							for (int i = 0; i < demos.Count; i++)
@@ -904,6 +942,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								settingsViewModel.SelectedStatsAccount = settingsViewModel.Accounts[0];
 							}
 							IsBusy = true;
+							HasRing = true;
 							IsCancellable = false;
 							NotificationMessage = "Loading...";
 							DataGridDemosCollection.Refresh();
@@ -1361,6 +1400,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						NotificationMessage = "Loading more demos...";
 						IsBusy = true;
+						HasRing = true;
 						HasNotification = true;
 						List<string> folders = new List<string>();
 						if (SelectedFolder != null)
@@ -1476,6 +1516,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				HasNotification = true;
 				IsBusy = true;
+				HasRing = true;
 				NotificationMessage = "Searching account's last rank...";
 				long steamId = Properties.Settings.Default.SelectedStatsAccountSteamID;
 				Rank lastRank = await _cacheService.GetLastRankAsync(steamId);
@@ -1498,6 +1539,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		private async Task RefreshSelectedDemos()
 		{
 			IsBusy = true;
+			HasRing = true;
 			HasNotification = true;
 			IsCancellable = true;
 			if (SelectedDemos.Count == Demos.Count)
@@ -1622,6 +1664,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				HasNotification = true;
 				IsBusy = true;
+				HasRing = true;
 				IsCancellable = false;
 				NotificationMessage = "Checking for new banned suspects...";
 				List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
@@ -1659,6 +1702,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				NotificationMessage = "Loading demos...";
 				IsBusy = true;
+				HasRing = true;
 				HasNotification = true;
 				IsCancellable = false;
 				List<string> folders = new List<string>();
