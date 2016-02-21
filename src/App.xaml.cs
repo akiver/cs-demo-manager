@@ -13,6 +13,7 @@ namespace CSGO_Demos_Manager
 			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainUnhandleException;
 #endif
 			CSGO_Demos_Manager.Properties.Settings.Default.SelectedPlayerSteamId = 0;
+			CSGO_Demos_Manager.Properties.Settings.Default.DateStatsTo = DateTime.Today;
 			CSGO_Demos_Manager.Properties.Settings.Default.Save();
 		}
 

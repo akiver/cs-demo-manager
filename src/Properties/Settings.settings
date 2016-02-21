@@ -260,5 +260,11 @@
     <Setting Name="ShowTicksColumn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="DateStatsFrom" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">2011-11-30</Value>
+    </Setting>
+    <Setting Name="DateStatsTo" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

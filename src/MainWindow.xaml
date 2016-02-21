@@ -60,10 +60,25 @@
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="*"/>
 							</Grid.RowDefinitions>
 
 							<StackPanel Margin="10" Grid.Row="0">
+								<TextBlock Text="Stats date" Style="{StaticResource TitleSettingsStyle}" />
+								<TextBlock Text="From :"
+										   Style="{StaticResource LabelStyle}" />
+								<DatePicker IsTodayHighlighted="True"
+											Focusable="False"
+											DisplayDateStart="2011-11-30"
+											SelectedDate="{Binding Source={StaticResource Locator}, Path=Settings.DateStatsFrom}"/>
+								<TextBlock Text="To :" Style="{StaticResource LabelStyle}" />
+								<DatePicker IsTodayHighlighted="True"
+											Focusable="False"
+											SelectedDate="{Binding Source={StaticResource Locator}, Path=Settings.DateStatsTo}" />
+							</StackPanel>
+
+							<StackPanel Margin="10" Grid.Row="1">
 								<TextBlock Text="Launch Options" Style="{StaticResource TitleSettingsStyle}" />
 								<StackPanel Orientation="Vertical">
 									<CheckBox Content="Fullscreen"
@@ -105,7 +120,7 @@
 								</StackPanel>
 							</StackPanel>
 
-							<StackPanel Margin="10" Grid.Row="1">
+							<StackPanel Margin="10" Grid.Row="2">
 								<TextBlock Text="Date Format" Style="{StaticResource TitleSettingsStyle}" />
 								<StackPanel Orientation="Vertical">
 									<CheckBox Content="dd/mm/yyyy"
@@ -114,7 +129,7 @@
 								</StackPanel>
 							</StackPanel>
 
-							<StackPanel Margin="10" Grid.Row="2">
+							<StackPanel Margin="10" Grid.Row="3">
 								<TextBlock Text="Data" Style="{StaticResource TitleSettingsStyle}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
@@ -133,7 +148,7 @@
 										Content="Import custom data" />
 							</StackPanel>
 
-							<StackPanel Margin="10" Grid.Row="3">
+							<StackPanel Margin="10" Grid.Row="4">
 								<TextBlock Text="Miscellaneous" Style="{StaticResource TitleSettingsStyle}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.NavigateToLogFile}"

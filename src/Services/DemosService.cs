@@ -279,7 +279,7 @@ namespace CSGO_Demos_Manager.Services
 		public async Task<List<RankDateChart>> GetRankDateChartDataAsync()
 		{
 			List<RankDateChart> datas = new List<RankDateChart>();
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
 
 			if (demos.Any())
 			{
@@ -316,7 +316,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			OverallStats stats = new OverallStats();
 
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
 
 			if (demos.Any())
 			{
@@ -378,7 +378,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			MapStats stats = new MapStats();
 
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
 
 			if (demos.Any())
 			{
@@ -466,7 +466,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			WeaponStats stats = new WeaponStats();
 
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
 
 			if (demos.Any())
 			{
@@ -780,7 +780,7 @@ namespace CSGO_Demos_Manager.Services
 		public async Task<ProgressStats> GetProgressStatsAsync()
 		{
 			ProgressStats stats = new ProgressStats();
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
+			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
 
 			if (demos.Any())
 			{

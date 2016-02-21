@@ -1439,7 +1439,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				if (!AppSettings.IsInternetConnectionAvailable()) await RefreshBannedPlayerCount();
 
 				Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
-				Messenger.Default.Register<RefreshHomeMessage>(this, HandleRefreshHomeMessage);
+				Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
 				_isMainWindowLoaded = true;
 			});
 		}
@@ -1453,7 +1453,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			});
 		}
 
-		private void HandleRefreshHomeMessage(RefreshHomeMessage msg)
+		private void HandleSettingsFlyoutClosedMessage(SettingsFlyoutClosed msg)
 		{
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>

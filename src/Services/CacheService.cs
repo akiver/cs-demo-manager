@@ -93,7 +93,7 @@ namespace CSGO_Demos_Manager.Services
 			_settingsJson.NullValueHandling = NullValueHandling.Include;
 		}
 
-		public async Task<List<Demo>> GetDemoListAsync()
+		public async Task<List<Demo>> GetDemoListAsync(bool filterOnSelectedDate = false)
 		{
 			List<Demo> demos = new List<Demo>();
 			string[] fileList = Directory.GetFiles(_pathFolderCache);
@@ -114,11 +114,30 @@ namespace CSGO_Demos_Manager.Services
 								&& !string.IsNullOrEmpty(Properties.Settings.Default.LastFolder))
 							{
 								string demoDirectory = Path.GetDirectoryName(demo.Path);
-								if (Properties.Settings.Default.LastFolder.Equals(demoDirectory)) demos.Add(demo);
+								if (Properties.Settings.Default.LastFolder.Equals(demoDirectory))
+								{
+									if (filterOnSelectedDate)
+									{
+										if(demo.Date >= Properties.Settings.Default.DateStatsFrom
+											&& demo.Date <= Properties.Settings.Default.DateStatsTo) demos.Add(demo);
+									}
+									else
+									{
+										demos.Add(demo);
+									}
+								}
 							}
 							else
 							{
-								demos.Add(demo);
+								if (filterOnSelectedDate)
+								{
+									if (demo.Date >= Properties.Settings.Default.DateStatsFrom
+									    && demo.Date <= Properties.Settings.Default.DateStatsTo) demos.Add(demo);
+								}
+								else
+								{
+									demos.Add(demo);
+								}
 							}
 						}
 						catch (Exception e)

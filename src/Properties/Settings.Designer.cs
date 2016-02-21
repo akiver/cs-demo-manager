@@ -1054,5 +1054,28 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowTicksColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("2011-11-30")]
+        public global::System.DateTime DateStatsFrom {
+            get {
+                return ((global::System.DateTime)(this["DateStatsFrom"]));
+            }
+            set {
+                this["DateStatsFrom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public global::System.DateTime DateStatsTo {
+            get {
+                return ((global::System.DateTime)(this["DateStatsTo"]));
+            }
+            set {
+                this["DateStatsTo"] = value;
+            }
+        }
     }
 }

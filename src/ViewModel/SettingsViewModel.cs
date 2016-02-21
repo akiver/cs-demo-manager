@@ -192,6 +192,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _limitStatsSelectedFolder = Settings.Default.LimitStatsFolder;
 
+		private DateTime _dateStatsFrom = Settings.Default.DateStatsFrom;
+
+		private DateTime _dateStatsTo = Settings.Default.DateStatsTo;
+
 		/// <summary>
 		/// List of user's accounts saved
 		/// </summary>
@@ -1024,6 +1028,28 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.WatchAccountSteamId = value;
 				Settings.Default.Save();
 				Set(() => WatchAccountSteamId, ref _watchAccountSteamId, value);
+			}
+		}
+
+		public DateTime DateStatsFrom
+		{
+			get { return _dateStatsFrom; }
+			set
+			{
+				Settings.Default.DateStatsFrom = value;
+				Settings.Default.Save();
+				Set(() => DateStatsFrom, ref _dateStatsFrom, value);
+			}
+		}
+
+		public DateTime DateStatsTo
+		{
+			get { return _dateStatsTo; }
+			set
+			{
+				Settings.Default.DateStatsTo = value;
+				Settings.Default.Save();
+				Set(() => DateStatsTo, ref _dateStatsTo, value);
 			}
 		}
 

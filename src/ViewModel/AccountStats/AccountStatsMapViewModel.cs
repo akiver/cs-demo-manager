@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using CSGO_Demos_Manager.Messages;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Services.Interfaces;
@@ -8,6 +9,8 @@ using CSGO_Demos_Manager.Views;
 using CSGO_Demos_Manager.Views.AccountStats;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
+using GalaSoft.MvvmLight.Threading;
 
 namespace CSGO_Demos_Manager.ViewModel.AccountStats
 {
@@ -192,6 +195,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 						IsBusy = true;
 						NotificationMessage = "Loading...";
 						await LoadDatas();
+						Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
 						IsBusy = false;
 					}));
 			}
@@ -539,6 +543,15 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					await LoadDatas();
 				});
 			}
+		}
+
+		private void HandleSettingsFlyoutClosedMessage(SettingsFlyoutClosed msg)
+		{
+			DispatcherHelper.CheckBeginInvokeOnUI(
+				async () =>
+				{
+					await LoadDatas();
+				});
 		}
 
 		public override void Cleanup()

@@ -107,6 +107,11 @@
 		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 
+	<Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="FontSize" Value="14" />
+	</Style>
+
 	<!-- TextBlock on HomeView -->
 	<Style TargetType="TextBlock" x:Key="WinStatusStyle">
 		<Setter Property="TextAlignment" Value="Center" />

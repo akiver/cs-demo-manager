@@ -47,7 +47,7 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// Return all the demos inside each folders
 		/// </summary>
 		/// <returns></returns>
-		Task<List<Demo>> GetDemoListAsync();
+		Task<List<Demo>> GetDemoListAsync(bool filterOnSelectedDate = false);
 
 		Task<List<string>> GetPlayersWhitelist();
 

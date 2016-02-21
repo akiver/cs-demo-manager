@@ -127,7 +127,7 @@ namespace CSGO_Demos_Manager.Services.Design
 			return Task.FromResult(true);
 		}
 
-		public Task<List<Demo>> GetDemoListAsync()
+		public Task<List<Demo>> GetDemoListAsync(bool filterOnSelectedDate = false)
 		{
 			return Task.FromResult(new List<Demo>());
 		}
