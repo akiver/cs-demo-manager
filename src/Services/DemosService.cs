@@ -101,6 +101,7 @@ namespace CSGO_Demos_Manager.Services
 						string[] files = Directory.GetFiles(folder, "*.dem");
 						foreach (string file in files)
 						{
+							if (file.Contains("myassignedcase")) continue;
 							var demo = await GetDemoHeaderAsync(file);
 							if (!limit) demo = await GetDemoDataAsync(demo);
 							if (demo != null)
