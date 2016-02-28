@@ -28,6 +28,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "3K", CellType.Numeric },
 				{ "2K", CellType.Numeric },
 				{ "1K", CellType.Numeric },
+				{ "Trade Kill", CellType.Numeric },
+				{ "Trade Death", CellType.Numeric },
 				{ "Team kill", CellType.Numeric },
 				{ "Jump kill", CellType.Numeric },
 				{ "Crouch kill", CellType.Numeric },
@@ -126,6 +128,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 						data[player].OpenKillCount += player.OpeningKills.Count;
 						data[player].OpenKillWinCount += player.OpenKillWinCount;
 						data[player].OpenKillLossCount += player.OpenKillLossCount;
+						data[player].TradeKillCount += player.TradeKillCount;
+						data[player].TradeDeathCount += player.TradeDeathCount;
 					}
 				}
 
@@ -150,6 +154,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ThreeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TwoKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OneKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TradeKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TradeDeathCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.TeamKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.JumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.CrouchKillCount);

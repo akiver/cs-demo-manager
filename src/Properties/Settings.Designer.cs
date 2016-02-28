@@ -1077,5 +1077,29 @@ namespace CSGO_Demos_Manager.Properties {
                 this["DateStatsTo"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTradeKillColumn {
+            get {
+                return ((bool)(this["ShowTradeKillColumn"]));
+            }
+            set {
+                this["ShowTradeKillColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTradeDeathColumn {
+            get {
+                return ((bool)(this["ShowTradeDeathColumn"]));
+            }
+            set {
+                this["ShowTradeDeathColumn"] = value;
+            }
+        }
     }
 }

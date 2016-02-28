@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
-using CSGO_Demos_Manager.Models.Events;
-using DemoInfo;
 using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
@@ -28,6 +26,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "3K", CellType.Numeric },
 				{ "4K", CellType.Numeric },
 				{ "5K", CellType.Numeric },
+				{ "Trade Kill", CellType.Numeric },
 				{ "Jump kills", CellType.Numeric },
 				{ "ADP", CellType.Numeric },
 				{ "TDH", CellType.Numeric },
@@ -84,6 +83,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.ThreeKillCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.FourKillCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.FiveKillCount);
+						SetCellValue(row, columnNumber++, CellType.Numeric, round.TradeKillCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.JumpKillCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.AverageDamage);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageHealthCount);

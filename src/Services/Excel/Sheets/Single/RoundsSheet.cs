@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
-using CSGO_Demos_Manager.Models.Events;
-using DemoInfo;
 using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
@@ -28,6 +25,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "3K", CellType.Numeric },
 				{ "4K", CellType.Numeric },
 				{ "5K", CellType.Numeric },
+				{ "Trade kill", CellType.Numeric },
 				{ "Jump kills", CellType.Numeric },
 				{ "ADP", CellType.Numeric },
 				{ "TDH", CellType.Numeric },
@@ -75,6 +73,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.ThreeKillCount : round.SelectedPlayerThreeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.FourKillCount: round.SelectedPlayerFourKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.FiveKillCount : round.SelectedPlayerFiveKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.TradeKillCount : round.SelectedPlayerTradeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.JumpKillCount : round.SelectedPlayerJumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.AverageDamage : round.SelectedPlayerAverageDamage);
 					SetCellValue(row, columnNumber++, CellType.Numeric, Properties.Settings.Default.SelectedPlayerSteamId == 0 ? round.DamageHealthCount: round.SelectedPlayerDamageHealthCount);

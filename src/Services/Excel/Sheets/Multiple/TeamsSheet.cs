@@ -43,6 +43,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{"3K", CellType.Numeric},
 				{"2K", CellType.Numeric},
 				{"1K", CellType.Numeric},
+				{"Trade kill", CellType.Numeric},
+				{"Trade death", CellType.Numeric},
 				{"Jump kill", CellType.Numeric},
 				{"Crouch kill", CellType.Numeric},
 				{"Flash", CellType.Numeric},
@@ -121,6 +123,8 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.ThreeKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.TwoKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.OneKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeDeathCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.JumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.CrouchKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrownCount);

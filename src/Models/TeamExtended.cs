@@ -64,6 +64,12 @@ namespace CSGO_Demos_Manager.Models
 			.Sum(playerExtended => playerExtended.DecoyThrownCount);
 
 		[JsonIgnore]
+		public int TradeKillCount => Players.Sum(p => p.TradeKillCount);
+
+		[JsonIgnore]
+		public int TradeDeathCount => Players.Sum(p => p.TradeDeathCount);
+
+		[JsonIgnore]
 		public int OpenKillCount
 		{
 			get { return Players.SelectMany(p => p.OpeningKills).Count(); }

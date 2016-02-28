@@ -672,6 +672,27 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
+		public int TradeKillCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+				{
+					return Kills.Count(k => (k.KillerSteamId == Settings.Default.SelectedPlayerSteamId
+					|| k.KilledSteamId == Settings.Default.SelectedPlayerSteamId) && k.IsTradeKill);
+				}
+
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					return Kills.Count(k => (k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID
+					|| k.KilledSteamId == Settings.Default.SelectedStatsAccountSteamID) && k.IsTradeKill);
+				}
+
+				return Kills.Count(k => k.IsTradeKill);
+			}
+		}
+
+		[JsonIgnore]
 		public int BombDefusedCount
 		{
 			get

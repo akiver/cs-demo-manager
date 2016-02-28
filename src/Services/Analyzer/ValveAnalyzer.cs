@@ -326,6 +326,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				if (e.Killer.IsDucking) killer.CrouchKillCount++;
 				if (e.Killer.Velocity.Z > 0) killer.JumpKillCount++;
+				ProcessTradeKill(killEvent);
 			}
 
 			// Human killed human

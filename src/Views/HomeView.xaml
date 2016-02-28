@@ -648,6 +648,11 @@
 									HeaderStyle="{StaticResource KillsHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
+									Header="TK"
+									Binding="{Binding TradeKillCount}"
+									HeaderStyle="{StaticResource TradeKillsHeader}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+				<DataGridTextColumn Width="Auto"
 									Header="JK"
 									Binding="{Binding JumpKillCount}"
 									HeaderStyle="{StaticResource JumpKillsHeader}"

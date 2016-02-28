@@ -50,6 +50,9 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("killer_crouching")]
 		public bool IsKillerCrouching { get; set; }
 
+		[JsonProperty("is_trade_kill")]
+		public bool IsTradeKill { get; set; }
+
 		[JsonIgnore]
 		public override string Message => KillerName + " killed " + KilledName + " with " + Weapon.Name;
 

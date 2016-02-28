@@ -261,6 +261,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Jump kills" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="TradeKillsHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Trade Kill / Death" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="CrouchKillsHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Crouch kills" />
 	</Style>
@@ -313,6 +317,14 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Number of clutch" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="TradeKillHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Trade kill" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="TradeDeathHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Trade death" />
+	</Style>
+	
 	<Style TargetType="DataGridColumnHeader" x:Key="OneKillHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="1 Kill" />
 	</Style>
@@ -354,7 +366,7 @@
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="TeamKillHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-		<Setter Property="ToolTipService.ToolTip" Value="Team Kill" />
+		<Setter Property="ToolTipService.ToolTip" Value="Team Kill (Friendly Fire)" />
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="EntryKillHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">

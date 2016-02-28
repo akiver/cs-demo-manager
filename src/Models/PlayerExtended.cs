@@ -210,6 +210,10 @@ namespace CSGO_Demos_Manager.Models
 
 		private int _winCount = 0;
 
+		private int _tradeKillCount;
+
+		private int _tradeDeathCount;
+
 		/// <summary>
 		/// Number of flashbang thrown by the player
 		/// </summary>
@@ -328,6 +332,20 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _assistCount; }
 			set { Set(() => AssistCount, ref _assistCount, value); }
+		}
+
+		[JsonProperty("trade_kill_count")]
+		public int TradeKillCount
+		{
+			get { return _tradeKillCount; }
+			set { Set(() => TradeKillCount, ref _tradeKillCount, value); }
+		}
+
+		[JsonProperty("trade_death_count")]
+		public int TradeDeathCount
+		{
+			get { return _tradeDeathCount; }
+			set { Set(() => TradeDeathCount, ref _tradeDeathCount, value); }
 		}
 
 		[JsonProperty("bomb_planted_count")]
@@ -921,6 +939,8 @@ namespace CSGO_Demos_Manager.Models
 			EquipementValueRounds.Clear();
 			_flashDurationTemp = 0;
 			CrouchKillCount = 0;
+			_tradeKillCount = 0;
+			_tradeDeathCount = 0;
 		}
 
 		public PlayerExtended Clone()

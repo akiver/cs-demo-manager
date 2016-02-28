@@ -36,6 +36,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "3K", CellType.Numeric },
 				{ "2K", CellType.Numeric },
 				{ "1K", CellType.Numeric },
+				{ "Trade kill", CellType.Numeric },
 				{ "Average Damage Per Round", CellType.Numeric },
 				{ "Total Damage Health", CellType.Numeric },
 				{ "Total Damage Armor", CellType.Numeric },
@@ -91,6 +92,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ThreeKillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TwoKillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.OneKillCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TradeKillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.AverageDamage);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.DamageHealthCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.DamageArmorCount);

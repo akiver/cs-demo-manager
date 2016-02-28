@@ -520,8 +520,7 @@
 									<ColumnDefinition Width="*" />
 								</Grid.ColumnDefinitions>
 
-								<DataGrid x:Name="ListViewTeam1"
-										  Grid.Column="0"
+								<DataGrid Grid.Column="0"
 										  ItemsSource="{Binding PlayersTeam1Collection, IsAsync=True}"
 										  SelectedItem="{Binding SelectedPlayerTeam1}"
 										  Width="Auto"
@@ -535,105 +534,218 @@
 										<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 									</DataGrid.Resources>
 									<DataGrid.Columns>
-										<DataGridTemplateColumn Header="Avatar" Width="Auto" HeaderStyle="{StaticResource PlayerAvatarHeader}">
+										<DataGridTemplateColumn Header="Avatar"
+																Width="Auto"
+																HeaderStyle="{StaticResource PlayerAvatarHeader}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<Image Source="{Binding AvatarUrl}" Height="22" Width="22" />
+													<Image Source="{Binding AvatarUrl}"
+														   Height="22"
+														   Width="22" />
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
-										<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}" x:Name="PlayerRankTeam1Column" Width="Auto" Header="Rank"
-														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
+										<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}"
+																Width="Auto"
+																Header="Rank"
+																Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}" Height="18" Width="45" />
+													<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}"
+														   Height="18"
+														   Width="45" />
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
-										<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerNameTeam1Column" Width="Auto" Header="Name" Binding="{Binding Name}"/>
-										<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountTeam1Column" Width="Auto" Header="K" Binding="{Binding KillsCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource AssistHeader}" x:Name="AssistCountTeam1Column" Width="Auto" Header="A" Binding="{Binding AssistCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource DeathHeader}" x:Name="DeathsCountTeam1Column" Width="Auto" Header="D" Binding="{Binding DeathCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource KDHeader}" x:Name="KillDeathRatioTeam1Column" Width="Auto" Header="K/D" Binding="{Binding KillDeathRatio}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}" x:Name="HeadshotCountTeam1Column" Width="Auto" Header="HS" Binding="{Binding HeadshotCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotPercentHeader}" x:Name="HeadshotPercentTeam1Column" Width="Auto" Header="HS%" Binding="{Binding HeadshotPercent}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}" x:Name="TeamKillCountTeam1Column" Width="Auto" Header="TK" Binding="{Binding TeamKillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource EntryKillHeader}" x:Name="EntryKillCountTeam1Column" Width="Auto" Header="EK" Binding="{Binding EntryKills.Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}" x:Name="BombPlantedTeam1Column" Width="Auto" Header="BP" Binding="{Binding BombPlantedCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource BombDefusedHeader}" x:Name="BombDefusedTeam1Column" Width="Auto" Header="BD" Binding="{Binding BombDefusedCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource MVPHeader}" x:Name="RoundMvpCountTeam1Column" Width="Auto" Header="MVP" Binding="{Binding RoundMvpCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource ScoreHeader}" x:Name="ScoreTeam1Column" Width="Auto" Header="Score" Binding="{Binding Score}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}" x:Name="RatingTeam1Column" Width="Auto" Header="Rating" Binding="{Binding RatingHltv}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
-										<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillsPlayerTeam1Column" Width="Auto" Header="5K" Binding="{Binding FiveKillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}" x:Name="FourKillsPlayerTeam1Column" Width="Auto" Header="4K" Binding="{Binding FourKillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource ThreeKillHeader}" x:Name="ThreeKillsPlayerTeam1Column" Width="Auto" Header="3K" Binding="{Binding ThreekillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TwoKillHeader}" x:Name="TwoKillsPlayerTeam1Column" Width="Auto" Header="2K" Binding="{Binding TwokillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillPlayerTeam1Column" Width="Auto" Header="1K" Binding="{Binding OnekillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource KillPerRoundHeader}" x:Name="KillPerRoundTeam1Column" Width="Auto" Header="KPR" Binding="{Binding KillPerRound}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource AssistPerRoundHeader}" x:Name="AssistPerRoundTeam1Column" Width="Auto" Header="APR" Binding="{Binding AssistPerRound}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource DeathPerRoundHeader}" x:Name="DeathPerRoundTeam1Column" Width="Auto" Header="DPR" Binding="{Binding DeathPerRound}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" x:Name="AverageDamageTeam1Column" Width="Auto" Header="ADR" Binding="{Binding AverageDamageByRoundCount, Converter={StaticResource DoubleToStringConverter}}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthTeam1Column" Width="Auto" Header="TDH" Binding="{Binding TotalDamageHealthCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}" x:Name="TotalDamageArmorTeam1Column" Width="Auto" Header="TDA" Binding="{Binding TotalDamageArmorCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v1Header}" x:Name="Clutch1V1Team1Column" Width="Auto" Header="1V1" Binding="{Binding Clutch1V1Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v2Header}" x:Name="Clutch1V2Team1Column" Width="Auto" Header="1V2" Binding="{Binding Clutch1V2Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v3Header}" x:Name="Clutch1V3Team1Column" Width="Auto" Header="1V3" Binding="{Binding Clutch1V3Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v3Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v4Header}" x:Name="Clutch1V4Team1Column" Width="Auto" Header="1V4" Binding="{Binding Clutch1V4Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v4Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v5Header}" x:Name="Clutch1V5Team1Column" Width="Auto" Header="1V5" Binding="{Binding Clutch1V5Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTemplateColumn x:Name="VacBannedPlayerTeam1Column" Header="VAC" Width="Auto" HeaderStyle="{StaticResource VacPlayerHeader}"
-																	Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
+										<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+															Width="Auto"
+															Header="Name"
+															Binding="{Binding Name}"/>
+										<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}"
+															Width="Auto"
+															Header="K"
+															Binding="{Binding KillsCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource AssistHeader}"
+															Width="Auto"
+															Header="A"
+															Binding="{Binding AssistCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource DeathHeader}"
+															Width="Auto"
+															Header="D"
+															Binding="{Binding DeathCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource KDHeader}"
+															Width="Auto"
+															Header="K/D"
+															Binding="{Binding KillDeathRatio}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}"
+															Width="Auto"
+															Header="HS"
+															Binding="{Binding HeadshotCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotPercentHeader}"
+															Width="Auto"
+															Header="HS%"
+															Binding="{Binding HeadshotPercent}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}"
+															Width="Auto"
+															Header="FF"
+															Binding="{Binding TeamKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource EntryKillHeader}"
+															Width="Auto"
+															Header="EK"
+															Binding="{Binding EntryKills.Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}"
+															Width="Auto"
+															Header="BP"
+															Binding="{Binding BombPlantedCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource BombDefusedHeader}"
+															Width="Auto"
+															Header="BD"
+															Binding="{Binding BombDefusedCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource MVPHeader}"
+															Width="Auto"
+															Header="MVP"
+															Binding="{Binding RoundMvpCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource ScoreHeader}"
+															Width="Auto"
+															Header="Score"
+															Binding="{Binding Score}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}"
+															Width="Auto"
+															Header="Rating"
+															Binding="{Binding RatingHltv}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
+										<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}"
+															Width="Auto"
+															Header="5K"
+															Binding="{Binding FiveKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}"
+															Width="Auto"
+															Header="4K"
+															Binding="{Binding FourKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource ThreeKillHeader}"
+															Width="Auto"
+															Header="3K"
+															Binding="{Binding ThreekillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TwoKillHeader}"
+															Width="Auto"
+															Header="2K"
+															Binding="{Binding TwokillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}"
+															Width="Auto"
+															Header="1K"
+															Binding="{Binding OnekillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TradeKillHeader}"
+															Width="Auto"
+															Header="TK"
+															Binding="{Binding TradeKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TradeDeathHeader}"
+															Width="Auto"
+															Header="TD"
+															Binding="{Binding TradeDeathCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeDeathColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource KillPerRoundHeader}"
+															Width="Auto"
+															Header="KPR"
+															Binding="{Binding KillPerRound}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource AssistPerRoundHeader}"
+															Width="Auto"
+															Header="APR"
+															Binding="{Binding AssistPerRound}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource DeathPerRoundHeader}"
+															Width="Auto"
+															Header="DPR"
+															Binding="{Binding DeathPerRound}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}"
+															Width="Auto"
+															Header="ADR"
+															Binding="{Binding AverageDamageByRoundCount, Converter={StaticResource DoubleToStringConverter}}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}"
+															Width="Auto"
+															Header="TDH"
+															Binding="{Binding TotalDamageHealthCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}"
+															Width="Auto"
+															Header="TDA"
+															Binding="{Binding TotalDamageArmorCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v1Header}"
+															Width="Auto"
+															Header="1V1"
+															Binding="{Binding Clutch1V1Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v2Header}"
+															Width="Auto"
+															Header="1V2"
+															Binding="{Binding Clutch1V2Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v3Header}"
+															Width="Auto"
+															Header="1V3"
+															Binding="{Binding Clutch1V3Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v3Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v4Header}"
+															Width="Auto"
+															Header="1V4"
+															Binding="{Binding Clutch1V4Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v4Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v5Header}"
+															Width="Auto"
+															Header="1V5"
+															Binding="{Binding Clutch1V5Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTemplateColumn Header="VAC"
+																Width="Auto"
+																HeaderStyle="{StaticResource VacPlayerHeader}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<TextBlock Text="Yes" Foreground="{StaticResource LightWhiteBrush}" TextAlignment="Center"
-																   Visibility="{Binding IsVacBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+													<TextBlock Text="Yes"
+															   Foreground="{StaticResource LightWhiteBrush}"
+															   TextAlignment="Center"
+															   Visibility="{Binding IsVacBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
-										<DataGridTemplateColumn x:Name="OverwatchBannedPlayerTeam1Column" Header="OW" Width="Auto" HeaderStyle="{StaticResource OverwatchPlayerHeader}"
-																	Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
+										<DataGridTemplateColumn Header="OW"
+																Width="Auto"
+																HeaderStyle="{StaticResource OverwatchPlayerHeader}"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<TextBlock Text="Yes" Foreground="{StaticResource LightWhiteBrush}" TextAlignment="Center"
-																   Visibility="{Binding IsOverwatchBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+													<TextBlock Text="Yes"
+															   Foreground="{StaticResource LightWhiteBrush}"
+															   TextAlignment="Center"
+															   Visibility="{Binding IsOverwatchBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
 									</DataGrid.Columns>
 								</DataGrid>
 
-
-
-								<DataGrid x:Name="ListViewtTeam2"
-										  Grid.Column="1"
+								<DataGrid Grid.Column="1"
 										  ItemsSource="{Binding PlayersTeam2Collection, IsAsync=True}"
 										  SelectedItem="{Binding SelectedPlayerTeam2}"
 										  CellStyle="{StaticResource DataGridCellStyle}"
@@ -646,95 +758,211 @@
 										<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 									</DataGrid.Resources>
 									<DataGrid.Columns>
-										<DataGridTemplateColumn Header="Avatar" Width="Auto" HeaderStyle="{StaticResource PlayerAvatarHeader}">
+										<DataGridTemplateColumn Header="Avatar"
+																Width="Auto"
+																HeaderStyle="{StaticResource PlayerAvatarHeader}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<Image Source="{Binding AvatarUrl}" Height="22" Width="22" />
+													<Image Source="{Binding AvatarUrl}"
+														   Height="22"
+														   Width="22" />
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
-										<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}" x:Name="PlayerRankTeam2Column" Width="Auto" Header="Rank"
-														Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
+										<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}"
+																Width="Auto"
+																Header="Rank"
+																Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}" Height="18" Width="45" />
+													<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}"
+														   Height="18"
+														   Width="45" />
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
-										<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}" x:Name="PlayerNameTeam2Column" Width="Auto" Header="Name" Binding="{Binding Name}"/>
-										<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}" x:Name="KillsCountTeam2Column" Width="Auto" Header="K" Binding="{Binding KillsCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource AssistHeader}" x:Name="AssistCountTeam2Column" Width="Auto" Header="A" Binding="{Binding AssistCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource DeathHeader}" x:Name="DeathsCountTeam2Column" Width="Auto" Header="D" Binding="{Binding DeathCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource KDHeader}" x:Name="KillDeathRatioTeam2Column" Width="Auto" Header="K/D" Binding="{Binding KillDeathRatio}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}" x:Name="HeadshotCountTeam2Column" Width="Auto" Header="HS" Binding="{Binding HeadshotCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotPercentHeader}" x:Name="HeadshotPercentTeam2Column" Width="Auto" Header="HS%" Binding="{Binding HeadshotPercent}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}" x:Name="TeamKillCountTeam2Column" Width="Auto" Header="TK" Binding="{Binding TeamKillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource EntryKillHeader}" x:Name="EntryKillCountTeam2Column" Width="Auto" Header="EK" Binding="{Binding EntryKills.Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}" x:Name="BombPlantedTeam2Column" Width="Auto" Header="BP" Binding="{Binding BombPlantedCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource BombDefusedHeader}" x:Name="BombDefusedTeam2Column" Width="Auto" Header="BD" Binding="{Binding BombDefusedCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource MVPHeader}" x:Name="RoundMvpCountTeam2Column" Width="Auto" Header="MVP" Binding="{Binding RoundMvpCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource ScoreHeader}" x:Name="ScoreTeam2Column" Width="Auto" Header="Score" Binding="{Binding Score}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}" x:Name="RatingTeam2Column" Width="Auto" Header="Rating" Binding="{Binding RatingHltv}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
-										<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}" x:Name="FiveKillsPlayerTeam2Column" Width="Auto" Header="5K" Binding="{Binding FiveKillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}" x:Name="FourKillsPlayerTeam2Column" Width="Auto" Header="4K" Binding="{Binding FourKillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource ThreeKillHeader}" x:Name="ThreeKillsPlayerTeam2Column" Width="Auto" Header="3K" Binding="{Binding ThreekillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TwoKillHeader}" x:Name="TwoKillsPlayerTeam2Column" Width="Auto" Header="2K" Binding="{Binding TwokillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}" x:Name="OneKillPlayerTeam2Column" Width="Auto" Header="1K" Binding="{Binding OnekillCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource KillPerRoundHeader}" x:Name="KillPerRoundTeam2Column" Width="Auto" Header="KPR" Binding="{Binding KillPerRound}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource AssistPerRoundHeader}" x:Name="AssistPerRoundTeam2Column" Width="Auto" Header="APR" Binding="{Binding AssistPerRound}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource DeathPerRoundHeader}" x:Name="DeathPerRoundTeam2Column" Width="Auto" Header="DPR" Binding="{Binding DeathPerRound}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}" x:Name="AverageDamageTeam2Column" Width="Auto" Header="ADR" Binding="{Binding AverageDamageByRoundCount, Converter={StaticResource DoubleToStringConverter}}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}" x:Name="TotalDamageHealthTeam2Column" Width="Auto" Header="TDH" Binding="{Binding TotalDamageHealthCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}" x:Name="TotalDamageArmorTeam2Column" Width="Auto" Header="TDA" Binding="{Binding TotalDamageArmorCount}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v1Header}" x:Name="Clutch1V1Team2Column" Width="Auto" Header="1V1" Binding="{Binding Clutch1V1Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v2Header}" x:Name="Clutch1V2Team2Column" Width="Auto" Header="1V2" Binding="{Binding Clutch1V2Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v3Header}" x:Name="Clutch1V3Team2Column" Width="Auto" Header="1V3" Binding="{Binding Clutch1V3Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v3Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v4Header}" x:Name="Clutch1V4Team2Column" Width="Auto" Header="1V4" Binding="{Binding Clutch1V4Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v4Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v5Header}" x:Name="Clutch1V5Team2Column" Width="Auto" Header="1V5" Binding="{Binding Clutch1V5Count}"
-																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-										<DataGridTemplateColumn x:Name="VacBannedPlayerTeam2Column" Header="VAC" Width="Auto" HeaderStyle="{StaticResource VacPlayerHeader}"
-																	Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
+										<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+															Width="Auto"
+															Header="Name"
+															Binding="{Binding Name}"/>
+										<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}"
+															Width="Auto"
+															Header="K"
+															Binding="{Binding KillsCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource AssistHeader}"
+															Width="Auto"
+															Header="A"
+															Binding="{Binding AssistCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource DeathHeader}"
+															Width="Auto"
+															Header="D"
+															Binding="{Binding DeathCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource KDHeader}"
+															Width="Auto"
+															Header="K/D"
+															Binding="{Binding KillDeathRatio}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}"
+															Width="Auto"
+															Header="HS"
+															Binding="{Binding HeadshotCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource HeadshotPercentHeader}"
+															Width="Auto"
+															Header="HS%"
+															Binding="{Binding HeadshotPercent}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}"
+															Width="Auto"
+															Header="FF"
+															Binding="{Binding TeamKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource EntryKillHeader}"
+															Width="Auto"
+															Header="EK"
+															Binding="{Binding EntryKills.Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEkColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource BombPlantedHeader}"
+															Width="Auto"
+															Header="BP"
+															Binding="{Binding BombPlantedCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource BombDefusedHeader}"
+															Width="Auto"
+															Header="BD"
+															Binding="{Binding BombDefusedCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource MVPHeader}"
+															Width="Auto"
+															Header="MVP"
+															Binding="{Binding RoundMvpCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource ScoreHeader}"
+															Width="Auto"
+															Header="Score"
+															Binding="{Binding Score}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}"
+															Width="Auto"
+															Header="Rating"
+															Binding="{Binding RatingHltv}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
+										<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}"
+															Width="Auto"
+															Header="5K"
+															Binding="{Binding FiveKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource FourKillHeader}"
+															Width="Auto"
+															Header="4K"
+															Binding="{Binding FourKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource ThreeKillHeader}"
+															Width="Auto"
+															Header="3K"
+															Binding="{Binding ThreekillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TwoKillHeader}"
+															Width="Auto"
+															Header="2K"
+															Binding="{Binding TwokillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource OneKillHeader}"
+															Width="Auto"
+															Header="1K"
+															Binding="{Binding OnekillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TradeKillHeader}"
+															Width="Auto"
+															Header="TK"
+															Binding="{Binding TradeKillCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TradeDeathHeader}"
+															Width="Auto"
+															Header="TD"
+															Binding="{Binding TradeDeathCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeDeathColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource KillPerRoundHeader}"
+															Width="Auto"
+															Header="KPR"
+															Binding="{Binding KillPerRound}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource AssistPerRoundHeader}"
+															Width="Auto"
+															Header="APR"
+															Binding="{Binding AssistPerRound}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource DeathPerRoundHeader}"
+															Width="Auto"
+															Header="DPR"
+															Binding="{Binding DeathPerRound}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource AverageDamagePerRoundHeader}"
+															Width="Auto"
+															Header="ADR"
+															Binding="{Binding AverageDamageByRoundCount, Converter={StaticResource DoubleToStringConverter}}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}"
+															Width="Auto"
+															Header="TDH"
+															Binding="{Binding TotalDamageHealthCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}"
+															Width="Auto"
+															Header="TDA"
+															Binding="{Binding TotalDamageArmorCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v1Header}"
+															Width="Auto"
+															Header="1V1"
+															Binding="{Binding Clutch1V1Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v2Header}"
+															Width="Auto"
+															Header="1V2"
+															Binding="{Binding Clutch1V2Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v3Header}"
+															Width="Auto"
+															Header="1V3"
+															Binding="{Binding Clutch1V3Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v3Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v4Header}"
+															Width="Auto"
+															Header="1V4"
+															Binding="{Binding Clutch1V4Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v4Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource Clutch1v5Header}"
+															Width="Auto"
+															Header="1V5"
+															Binding="{Binding Clutch1V5Count}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTemplateColumn HeaderStyle="{StaticResource VacPlayerHeader}"
+																Width="Auto"
+																Header="VAC"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<TextBlock Text="Yes" Foreground="{StaticResource LightWhiteBrush}" TextAlignment="Center"
-																   Visibility="{Binding IsVacBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+													<TextBlock Text="Yes"
+															   Foreground="{StaticResource LightWhiteBrush}"
+															   TextAlignment="Center"
+															   Visibility="{Binding IsVacBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
-										<DataGridTemplateColumn x:Name="OverwatchBannedPlayerTeam2Column" Header="OW" Width="Auto" HeaderStyle="{StaticResource OverwatchPlayerHeader}"
-																	Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
+										<DataGridTemplateColumn HeaderStyle="{StaticResource OverwatchPlayerHeader}"
+																Width="Auto"
+																Header="OW"
+																Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
 											<DataGridTemplateColumn.CellTemplate>
 												<DataTemplate>
-													<TextBlock Text="Yes" Foreground="{StaticResource LightWhiteBrush}" TextAlignment="Center"
-																   Visibility="{Binding IsOverwatchBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+													<TextBlock Text="Yes"
+															   Foreground="{StaticResource LightWhiteBrush}"
+															   TextAlignment="Center"
+															   Visibility="{Binding IsOverwatchBanned, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 												</DataTemplate>
 											</DataGridTemplateColumn.CellTemplate>
 										</DataGridTemplateColumn>
@@ -833,6 +1061,11 @@
 														Header="5K"
 														Binding="{Binding SelectedPlayerFiveKillCount}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TradeKillsHeader}"
+														Width="Auto"
+														Header="TK"
+														Binding="{Binding SelectedPlayerTradeKillCount}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource JumpKillsHeader}"
 														Width="Auto"
 														Header="JK"

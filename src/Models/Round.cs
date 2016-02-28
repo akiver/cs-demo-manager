@@ -121,8 +121,6 @@ namespace CSGO_Demos_Manager.Models
 
 		private ObservableCollection<SmokeNadeStartedEvent> _smokeStarted = new ObservableCollection<SmokeNadeStartedEvent>();
 
-		private ObservableCollection<MolotovFireEndedEvent> _molotovsThrown = new ObservableCollection<MolotovFireEndedEvent>();
-
 		/// <summary>
 		/// Infos on bomb planted during the round
 		/// </summary>
@@ -315,6 +313,18 @@ namespace CSGO_Demos_Manager.Models
 				}
 
 				return BombPlanted != null ? 1 : 0;
+			}
+		}
+
+		[JsonIgnore]
+		public int TradeKillCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+					return Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedStatsAccountSteamID && k.IsTradeKill);
+				
+				return Kills.Count(k => k.IsTradeKill);
 			}
 		}
 
@@ -981,6 +991,18 @@ namespace CSGO_Demos_Manager.Models
 				return _fivekillCount;
 			}
 			set { Set(() => SelectedPlayerFiveKillCount, ref _fivekillCount, value); }
+		}
+
+		[JsonIgnore]
+		public int SelectedPlayerTradeKillCount
+		{
+			get
+			{
+				if (Settings.Default.SelectedPlayerSteamId != 0)
+					return Kills.Count(k => k.KillerSteamId == Settings.Default.SelectedPlayerSteamId && k.IsTradeKill);
+
+				return Kills.Count(k => k.IsTradeKill);
+			}
 		}
 
 		[JsonIgnore]

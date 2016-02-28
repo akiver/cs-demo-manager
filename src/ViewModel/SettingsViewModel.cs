@@ -104,6 +104,10 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showTickrateColumn = Settings.Default.ShowTickrateColumn;
 
+		private bool _showTradeKillColumn = Settings.Default.ShowTradeKillColumn;
+
+		private bool _showTradeDeathColumn = Settings.Default.ShowTradeDeathColumn;
+
 		private bool _showOneKillColumn = Settings.Default.ShowOneKillColumn;
 
 		private bool _showTwoKillsColumn = Settings.Default.ShowTwoKillsColumn;
@@ -632,6 +636,28 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowCrouchKillsColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowCrouchKillColumn, ref _showCrouchKillColumn, value);
+			}
+		}
+
+		public bool ShowTradeDeathColumn
+		{
+			get { return _showTradeDeathColumn; }
+			set
+			{
+				Settings.Default.ShowTradeDeathColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTradeDeathColumn, ref _showTradeDeathColumn, value);
+			}
+		}
+
+		public bool ShowTradeKillColumn
+		{
+			get { return _showTradeKillColumn; }
+			set
+			{
+				Settings.Default.ShowTradeKillColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTradeKillColumn, ref _showTradeKillColumn, value);
 			}
 		}
 

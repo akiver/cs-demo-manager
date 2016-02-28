@@ -332,6 +332,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				if (e.Killer.IsDucking) killer.CrouchKillCount++;
 				if (e.Killer.Velocity.Z > 0) killer.JumpKillCount++;
+				ProcessTradeKill(killEvent);
 			}
 
 			if (e.Assister != null)
@@ -1368,6 +1369,19 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			double roundsWithMultipleKillsRating = (nKills[0] + 4 * nKills[1] + 9 * nKills[2] + 16 * nKills[3] + 25 * nKills[4]) / (double)roundCount / AVERAGE_RMK;
 
 			return Math.Round((killRating + 0.7 * survivalRating + roundsWithMultipleKillsRating) / 2.7, 3);
+		}
+
+		protected void ProcessTradeKill(KillEvent killEvent)
+		{
+			KillEvent lastKilledEvent = CurrentRound.Kills.LastOrDefault(k => k.KillerSteamId == killEvent.KilledSteamId);
+			if (lastKilledEvent != null && Parser.CurrentTime - lastKilledEvent.Seconds <= 4)
+			{
+				killEvent.IsTradeKill = true;
+				PlayerExtended killer = Demo.Players.FirstOrDefault(p => p.SteamId == killEvent.KillerSteamId);
+				if(killer != null) killer.TradeKillCount++;
+				PlayerExtended killed = Demo.Players.FirstOrDefault(p => p.SteamId == killEvent.KilledSteamId);
+				if (killed != null) killed.TradeDeathCount++;
+			}
 		}
 
 		protected void ProcessOpenAndEntryKills(KillEvent killEvent)

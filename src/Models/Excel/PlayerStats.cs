@@ -76,6 +76,10 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public int OpenKillLossCount { get; set; }
 
+		public int TradeKillCount { get; set; }
+
+		public int TradeDeathCount { get; set; }
+
 		public decimal OpenKillWinPercent => OpenKillCount == 0 ? 0 : Math.Round((decimal)(OpenKillWinCount * 100) / OpenKillCount, 2);
 
 		public decimal KillPerRound => RoundCount == 0 ? 0 : Math.Round((decimal)KillCount / RoundCount, 2);
