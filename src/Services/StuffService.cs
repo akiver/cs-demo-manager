@@ -23,20 +23,26 @@ namespace CSGO_Demos_Manager.Services
 						{
 							List<WeaponFire> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
 							&& e.Weapon.Element == EquipmentElement.Smoke).ToList();
-							for (int i = 0; i < round.SmokeStarted.Count; i++)
+							if (weaponFired.Count == round.SmokeStarted.Count)
 							{
-								Stuff s = new Stuff
+								for (int i = 0; i < round.SmokeStarted.Count; i++)
 								{
-									Tick = weaponFired[i].Tick,
-									RoundNumber = round.Number,
-									Type = StuffType.SMOKE,
-									StartX = weaponFired[i].Point.X,
-									StartY = weaponFired[i].Point.Y,
-									EndX = round.SmokeStarted[i].Point.X,
-									EndY = round.SmokeStarted[i].Point.Y,
-									ThrowerName = weaponFired[i].ShooterName
-								};
-								stuffs.Add(s);
+									if (round.SmokeStarted[i].Point != null)
+									{
+										Stuff s = new Stuff
+										{
+											Tick = weaponFired[i].Tick,
+											RoundNumber = round.Number,
+											Type = StuffType.SMOKE,
+											StartX = weaponFired[i].Point.X,
+											StartY = weaponFired[i].Point.Y,
+											EndX = round.SmokeStarted[i].Point.X,
+											EndY = round.SmokeStarted[i].Point.Y,
+											ThrowerName = weaponFired[i].ShooterName
+										};
+										stuffs.Add(s);
+									}
+								}
 							}
 						}
 						break;
@@ -45,20 +51,26 @@ namespace CSGO_Demos_Manager.Services
 						{
 							List<WeaponFire> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
 							&& e.Weapon.Element == EquipmentElement.Flash).ToList();
-							for (int i = 0; i < round.FlashbangsExploded.Count; i++)
+							if (weaponFired.Count == round.FlashbangsExploded.Count)
 							{
-								Stuff s = new Stuff
+								for (int i = 0; i < round.FlashbangsExploded.Count; i++)
 								{
-									Tick = weaponFired[i].Tick,
-									RoundNumber = round.Number,
-									Type = StuffType.FLASHBANG,
-									StartX = weaponFired[i].Point.X,
-									StartY = weaponFired[i].Point.Y,
-									EndX = round.FlashbangsExploded[i].Point.X,
-									EndY = round.FlashbangsExploded[i].Point.Y,
-									ThrowerName = weaponFired[i].ShooterName
-								};
-								stuffs.Add(s);
+									if (round.FlashbangsExploded[i].Point != null)
+									{
+										Stuff s = new Stuff
+										{
+											Tick = weaponFired[i].Tick,
+											RoundNumber = round.Number,
+											Type = StuffType.FLASHBANG,
+											StartX = weaponFired[i].Point.X,
+											StartY = weaponFired[i].Point.Y,
+											EndX = round.FlashbangsExploded[i].Point.X,
+											EndY = round.FlashbangsExploded[i].Point.Y,
+											ThrowerName = weaponFired[i].ShooterName
+										};
+										stuffs.Add(s);
+									}
+								}
 							}
 						}
 						break;
@@ -67,20 +79,26 @@ namespace CSGO_Demos_Manager.Services
 						{
 							List<WeaponFire> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
 							&& e.Weapon.Element == EquipmentElement.HE).ToList();
-							for (int i = 0; i < round.ExplosiveGrenadesExploded.Count; i++)
+							if (weaponFired.Count == round.ExplosiveGrenadesExploded.Count)
 							{
-								Stuff s = new Stuff
+								for (int i = 0; i < round.ExplosiveGrenadesExploded.Count; i++)
 								{
-									Tick = weaponFired[i].Tick,
-									RoundNumber = round.Number,
-									Type = StuffType.HE,
-									StartX = weaponFired[i].Point.X,
-									StartY = weaponFired[i].Point.Y,
-									EndX = round.ExplosiveGrenadesExploded[i].Point.X,
-									EndY = round.ExplosiveGrenadesExploded[i].Point.Y,
-									ThrowerName = weaponFired[i].ShooterName
-								};
-								stuffs.Add(s);
+									if (round.ExplosiveGrenadesExploded[i].Point != null)
+									{
+										Stuff s = new Stuff
+										{
+											Tick = weaponFired[i].Tick,
+											RoundNumber = round.Number,
+											Type = StuffType.HE,
+											StartX = weaponFired[i].Point.X,
+											StartY = weaponFired[i].Point.Y,
+											EndX = round.ExplosiveGrenadesExploded[i].Point.X,
+											EndY = round.ExplosiveGrenadesExploded[i].Point.Y,
+											ThrowerName = weaponFired[i].ShooterName
+										};
+										stuffs.Add(s);
+									}
+								}
 							}
 						}
 						break;
@@ -91,20 +109,26 @@ namespace CSGO_Demos_Manager.Services
 							List<WeaponFire> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
 							&& (e.Weapon.Element == EquipmentElement.Incendiary || e.Weapon.Element == EquipmentElement.Molotov)).ToList();
 							List<MolotovFireStartedEvent> fireStartedList = demo.MolotovFireStarted.Where(e => e.RoundNumber == round.Number).ToList();
-							for (int i = 0; i < fireStartedList.Count; i++)
+							if (weaponFired.Count == fireStartedList.Count)
 							{
-								Stuff s = new Stuff
+								for (int i = 0; i < fireStartedList.Count; i++)
 								{
-									Tick = weaponFired[i].Tick,
-									RoundNumber = round.Number,
-									Type = StuffType.MOLOTOV,
-									StartX = weaponFired[i].Point.X,
-									StartY = weaponFired[i].Point.Y,
-									EndX = fireStartedList[i].Point.X,
-									EndY = fireStartedList[i].Point.Y,
-									ThrowerName = weaponFired[i].ShooterName
-								};
-								stuffs.Add(s);
+									if (fireStartedList[i].Point != null)
+									{
+										Stuff s = new Stuff
+										{
+											Tick = weaponFired[i].Tick,
+											RoundNumber = round.Number,
+											Type = StuffType.MOLOTOV,
+											StartX = weaponFired[i].Point.X,
+											StartY = weaponFired[i].Point.Y,
+											EndX = fireStartedList[i].Point.X,
+											EndY = fireStartedList[i].Point.Y,
+											ThrowerName = weaponFired[i].ShooterName
+										};
+										stuffs.Add(s);
+									}
+								}
 							}
 						}
 						break;
@@ -114,20 +138,26 @@ namespace CSGO_Demos_Manager.Services
 							List<WeaponFire> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
 							&& e.Weapon.Element == EquipmentElement.Decoy).ToList();
 							List<DecoyStartedEvent> decoyStartedList = demo.DecoyStarted.Where(e => e.RoundNumber == round.Number).ToList();
-							for (int i = 0; i < decoyStartedList.Count; i++)
+							if (weaponFired.Count == decoyStartedList.Count)
 							{
-								Stuff s = new Stuff
+								for (int i = 0; i < decoyStartedList.Count; i++)
 								{
-									Tick = weaponFired[i].Tick,
-									RoundNumber = round.Number,
-									Type = StuffType.DECOY,
-									StartX = weaponFired[i].Point.X,
-									StartY = weaponFired[i].Point.Y,
-									EndX = decoyStartedList[i].Point.X,
-									EndY = decoyStartedList[i].Point.Y,
-									ThrowerName = weaponFired[i].ShooterName
-								};
-								stuffs.Add(s);
+									if (decoyStartedList[i].Point != null)
+									{
+										Stuff s = new Stuff
+										{
+											Tick = weaponFired[i].Tick,
+											RoundNumber = round.Number,
+											Type = StuffType.DECOY,
+											StartX = weaponFired[i].Point.X,
+											StartY = weaponFired[i].Point.Y,
+											EndX = decoyStartedList[i].Point.X,
+											EndY = decoyStartedList[i].Point.Y,
+											ThrowerName = weaponFired[i].ShooterName
+										};
+										stuffs.Add(s);
+									}
+								}
 							}
 						}
 						break;
