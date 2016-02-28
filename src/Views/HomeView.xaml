@@ -618,6 +618,11 @@
 									HeaderStyle="{StaticResource TicksHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTicksColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
+									Header="Rating"
+									Binding="{Binding SelectedAccountHltvRating}"
+									HeaderStyle="{StaticResource RatingHeader}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}" />
+				<DataGridTextColumn Width="Auto"
 									Header="1K"
 									Binding="{Binding OneKillCount}"
 									HeaderStyle="{StaticResource OneKillHeader}"

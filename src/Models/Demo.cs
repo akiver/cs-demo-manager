@@ -912,6 +912,22 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
+		public double SelectedAccountHltvRating
+		{
+			get
+			{
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+					if (player == null) return 0;
+					return Math.Round(player.RatingHltv, 2);
+				}
+
+				return 0;
+			}
+		}
+
 		/// <summary>
 		/// Contains all PositionPoint for overview generation
 		/// </summary>
