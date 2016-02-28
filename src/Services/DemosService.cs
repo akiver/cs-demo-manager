@@ -344,6 +344,7 @@ namespace CSGO_Demos_Manager.Services
 						stats.RoundCount += demo.Rounds.Count;
 						stats.ClutchCount += demo.ClutchCount;
 						stats.ClutchWin += demo.ClutchWinCount;
+						stats.HltvRating += demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RatingHltv;
 						switch (demo.MatchVerdictSelectedAccountCount)
 						{
 							case -1:
@@ -368,6 +369,10 @@ namespace CSGO_Demos_Manager.Services
 				if (stats.KillCount != 0 && stats.HeadshotCount != 0)
 				{
 					stats.HeadshotRatio = Math.Round(((decimal)stats.HeadshotCount * 100) / stats.KillCount, 2);
+				}
+				if (stats.HltvRating > 0)
+				{
+					stats.HltvRating = Math.Round(stats.HltvRating / demosPlayerList.Count, 2);
 				}
 			}
 

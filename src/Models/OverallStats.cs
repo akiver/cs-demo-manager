@@ -52,6 +52,8 @@ namespace CSGO_Demos_Manager.Models
 
 		public int ClutchWin { get; set; } = 0;
 
+		public double HltvRating { get; set; } = 0;
+
 		public double KillPerRoundPercentage
 		{
 			get

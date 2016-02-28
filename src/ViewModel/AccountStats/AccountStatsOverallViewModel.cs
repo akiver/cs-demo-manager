@@ -86,6 +86,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private double _averageDamagesPerRound;
 
+		private double _hltvRating;
+
 		#endregion
 
 		#region Accessors
@@ -252,6 +254,12 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			set { Set(() => AverageDamagesPerRound, ref _averageDamagesPerRound, value); }
 		}
 
+		public double HltvRating
+		{
+			get { return _hltvRating; }
+			set { Set(() => HltvRating, ref _hltvRating, value); }
+		}
+
 		#endregion
 
 		#region Commands
@@ -402,6 +410,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			MvpCount = datas.MvpCount;
 			DamageCount = datas.DamageCount;
 			RoundCount = datas.RoundCount;
+			HltvRating = datas.HltvRating;
 			DatasMatchStats = new List<GenericDoubleChart>
 			{
 				new GenericDoubleChart
