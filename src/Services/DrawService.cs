@@ -310,7 +310,7 @@ namespace CSGO_Demos_Manager.Services
 				case "Flashbang":
 					icon = new Bitmap(Properties.Resources.flashbang);
 					break;
-				case "He grenade":
+				case "He Grenade":
 					icon = new Bitmap(Properties.Resources.hegrenade);
 					break;
 				case "Smoke":
