@@ -16,7 +16,7 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public int HeadshotCount { get; set; }
 
-		public decimal HeadshotPercent => HeadshotCount == 0 ? 0 : Math.Round((decimal)(KillCount * 100) / HeadshotCount, 2);
+		public decimal HeadshotPercent => HeadshotCount == 0 ? 0 : Math.Round(HeadshotCount / (decimal)KillCount * 100, 2);
 
 		public int RoundCount { get; set; }
 
