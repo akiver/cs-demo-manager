@@ -246,6 +246,7 @@
     <Compile Include="Models\Stats\WeaponStats.cs" />
     <Compile Include="Models\Steam\PlayerBan.cs" />
     <Compile Include="Models\Steam\PlayerSummary.cs" />
+    <Compile Include="Models\Stuff.cs" />
     <Compile Include="Models\Suspect.cs" />
     <Compile Include="Models\TeamExtended.cs" />
     <Compile Include="Models\ComboboxSelector.cs" />
@@ -260,6 +261,7 @@
     <Compile Include="Services\Design\DamageServiceDesign.cs" />
     <Compile Include="Services\Design\PlayerServiceDesign.cs" />
     <Compile Include="Services\Design\RoundServiceDesign.cs" />
+    <Compile Include="Services\Design\StuffDesignService.cs" />
     <Compile Include="Services\Excel\AbstractExport.cs" />
     <Compile Include="Services\Excel\MultipleExport.cs" />
     <Compile Include="Services\Excel\Sheets\AbstractSingleSheet.cs" />
@@ -274,6 +276,7 @@
     <Compile Include="Services\Interfaces\IDamageService.cs" />
     <Compile Include="Services\Interfaces\IPlayerService.cs" />
     <Compile Include="Services\Interfaces\IRoundService.cs" />
+    <Compile Include="Services\Interfaces\IStuffService.cs" />
     <Compile Include="Services\KillService.cs" />
     <Compile Include="Services\FlashbangService.cs" />
     <Compile Include="Services\Design\FlashbangServiceDesign.cs" />
@@ -283,11 +286,16 @@
     <Compile Include="Services\Stats\DamageService.cs" />
     <Compile Include="Services\Stats\PlayerService.cs" />
     <Compile Include="Services\Stats\RoundService.cs" />
+    <Compile Include="Services\StuffService.cs" />
     <Compile Include="ViewModel\DemoFlashbangsViewModel.cs" />
+    <Compile Include="ViewModel\DemoStuffsViewModel.cs" />
     <Compile Include="ViewModel\RoundViewModel.cs" />
     <Compile Include="ViewModel\WhitelistViewModel.cs" />
     <Compile Include="Views\DemoFlashbangsView.xaml.cs">
       <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DemoStuffsView.xaml.cs">
+      <DependentUpon>DemoStuffsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RoundView.xaml.cs">
       <DependentUpon>RoundView.xaml</DependentUpon>
@@ -312,6 +320,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DemoFlashbangsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DemoStuffsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -797,6 +809,7 @@
     <Content Include="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\icons\smokegrenade_black.png" />
     <Resource Include="resources\images\logo\popflash.png" />
     <Resource Include="resources\images\avatar.jpg" />
     <Resource Include="resources\images\icons\weapon.png" />

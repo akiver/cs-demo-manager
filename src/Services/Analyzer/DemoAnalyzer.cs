@@ -764,7 +764,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleFireNadeStarted(object sender, FireEventArgs e)
 		{
-			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted) return;
+			if (!AnalyzeHeatmapPoint || !IsMatchStarted) return;
 
 			switch (e.NadeType)
 			{
@@ -878,7 +878,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleExplosiveNadeExploded(object sender, GrenadeEventArgs e)
 		{
-			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
+			if (!AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 			ExplosiveNadeExplodedEvent explosiveEvent = new ExplosiveNadeExplodedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
@@ -982,7 +982,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleSmokeNadeStarted(object sender, SmokeEventArgs e)
 		{
-			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
+			if (!AnalyzeHeatmapPoint || !IsMatchStarted || e.ThrownBy == null) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 
@@ -1002,7 +1002,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				};
 			}
 
-			CurrentRound.SmokesStarted.Add(smokeEvent);
+			CurrentRound.SmokeStarted.Add(smokeEvent);
 
 			if (AnalyzePlayersPosition && thrower != null)
 			{
@@ -1050,7 +1050,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleDecoyNadeStarted(object sender, DecoyEventArgs e)
 		{
-			if (!AnalyzePlayersPosition && !AnalyzeHeatmapPoint || !IsMatchStarted) return;
+			if (!AnalyzeHeatmapPoint || !IsMatchStarted) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 			DecoyStartedEvent decoyStartedEvent = new DecoyStartedEvent(Parser.IngameTick, Parser.CurrentTime)

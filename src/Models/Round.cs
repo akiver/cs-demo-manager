@@ -119,7 +119,7 @@ namespace CSGO_Demos_Manager.Models
 
 		private ObservableCollection<ExplosiveNadeExplodedEvent> _explosiveGrenadesExploded = new ObservableCollection<ExplosiveNadeExplodedEvent>();
 
-		private ObservableCollection<SmokeNadeStartedEvent> _smokeNadeStarted = new ObservableCollection<SmokeNadeStartedEvent>();
+		private ObservableCollection<SmokeNadeStartedEvent> _smokeStarted = new ObservableCollection<SmokeNadeStartedEvent>();
 
 		private ObservableCollection<MolotovFireEndedEvent> _molotovsThrown = new ObservableCollection<MolotovFireEndedEvent>();
 
@@ -744,10 +744,10 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonProperty("smokes_started")]
-		public ObservableCollection<SmokeNadeStartedEvent> SmokesStarted
+		public ObservableCollection<SmokeNadeStartedEvent> SmokeStarted
 		{
-			get { return _smokeNadeStarted; }
-			set { Set(() => SmokesStarted, ref _smokeNadeStarted, value); }
+			get { return _smokeStarted; }
+			set { Set(() => SmokeStarted, ref _smokeStarted, value); }
 		}
 
 		[JsonProperty("he_exploded")]

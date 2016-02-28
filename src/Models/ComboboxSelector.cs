@@ -33,5 +33,26 @@ namespace CSGO_Demos_Manager.Models
 			_id = id;
 			_title = title;
 		}
+
+		public StuffType ToStuffType()
+		{
+			switch (Id)
+			{
+				case "smokes":
+					return StuffType.SMOKE;
+				case "flashbangs":
+					return StuffType.FLASHBANG;
+				case "he":
+					return StuffType.HE;
+				case "molotovs":
+					return StuffType.MOLOTOV;
+				case "incendiary":
+					return StuffType.INCENDIARY;
+				case "decoys":
+					return StuffType.DECOY;
+				default:
+					return StuffType.UNKNOWN;
+			}
+		}
 	}
 }

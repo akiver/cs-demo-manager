@@ -75,6 +75,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Demo> _goToDemoFlashbangsCommand;
 
+		private RelayCommand<Demo> _showDemoStuffsCommand;
+
 		private RelayCommand<string> _saveCommentDemoCommand;
 
 		private RelayCommand<string> _addSuspectCommand;
@@ -361,6 +363,28 @@ namespace CSGO_Demos_Manager.ViewModel
 						DemoFlashbangsView demoFlashbangsView = new DemoFlashbangsView();
 						var mainViewModel = (new ViewModelLocator()).Main;
 						mainViewModel.CurrentPage.ShowPage(demoFlashbangsView);
+					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+			}
+		}
+
+		public RelayCommand<Demo> ShowDemoStuffsCommand
+		{
+			get
+			{
+				return _showDemoStuffsCommand
+					?? (_showDemoStuffsCommand = new RelayCommand<Demo>(
+					async demo =>
+					{
+						if (!_cacheService.HasDemoInCache(demo))
+						{
+							await _dialogService.ShowMessageAsync("You have to analyze this demo first.", MessageDialogStyle.Affirmative);
+							return;
+						}
+						var demoStuffsViewModel = new ViewModelLocator().DemoStuffs;
+						demoStuffsViewModel.CurrentDemo = demo;
+						DemoStuffsView demoStuffsView = new DemoStuffsView();
+						var mainViewModel = (new ViewModelLocator()).Main;
+						mainViewModel.CurrentPage.ShowPage(demoStuffsView);
 					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}

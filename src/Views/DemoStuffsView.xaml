@@ -1,0 +1,144 @@
+﻿<UserControl x:Class="CSGO_Demos_Manager.Views.DemoStuffsView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 mc:Ignorable="d" 
+			 Background="{StaticResource LightGreyBrush}"
+			 DataContext="{Binding DemoStuffs, Source={StaticResource Locator}}"
+			 d:DesignHeight="720 " d:DesignWidth="1280">
+
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}"
+					Gesture="CTRL+B" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+					Command="{Binding BackToDemoDetailsCommand}"
+					CommandParameter="{Binding CurrentDemo}" />
+	</UserControl.InputBindings>
+
+	<Grid>
+		<i:Interaction.Triggers>
+			<i:EventTrigger EventName="Loaded">
+				<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+			</i:EventTrigger>
+		</i:Interaction.Triggers>
+		
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Margin="5">
+			<StackPanel Orientation="Horizontal">
+				<StackPanel Orientation="Horizontal">
+					<Button Margin="10"
+							Style="{StaticResource GeneralButtonStyle}"
+							Width="70"
+							Height="30"
+							Command="{Binding BackToDemoDetailsCommand}"
+							CommandParameter="{Binding CurrentDemo}"
+							ToolTip="Back (CTRL+B)">
+						<StackPanel Orientation="Horizontal"
+									VerticalAlignment="Center">
+							<Rectangle Width="15"
+									   Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+								</Rectangle.Fill>
+							</Rectangle>
+							<TextBlock Text="Back"
+									   Margin="5 0 0 0"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+				</StackPanel>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Type" Style="{StaticResource SmallTitleStyle}"/>
+					<ComboBox ItemsSource="{Binding StuffSelectors}"
+							  SelectedItem="{Binding CurrentStuffSelector}"
+							  DisplayMemberPath ="Title"
+							  SelectedValuePath="Title"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Width="180"
+							  Height="25"
+							  Margin="5 0 0 0">
+						<i:Interaction.Triggers>
+							<i:EventTrigger EventName="SelectionChanged">
+								<i:InvokeCommandAction Command="{Binding StuffTypeChangedCommand}" />
+							</i:EventTrigger>
+						</i:Interaction.Triggers>
+					</ComboBox>
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center"
+							Margin="5 0 0 0">
+					<controls:ProgressRing IsActive="{Binding IsBusy}"
+										   Foreground="{DynamicResource AccentColorBrush}"
+										   Width="40"
+										   Height="40" />
+					<TextBlock Text="{Binding NotificationMessage}"
+							   Style="{StaticResource LabelGeneralInfoDemo}"
+							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="1"
+			  Margin="10"
+			  HorizontalAlignment="Center">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Column="0">
+				<DataGrid x:Name="StuffDataGrid"
+						  ItemsSource="{Binding Stuffs}"
+						  SelectedItem="{Binding SelectedStuff}"
+						  CellStyle="{StaticResource DataGridCellStyle}"
+						  RowStyle="{StaticResource DataGridRowStyle}"
+						  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+						  Style="{StaticResource DataGridStyle}">
+					<DataGrid.Columns>
+						<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}"
+											Width="Auto"
+											Header="Tick"
+											Binding="{Binding Tick}" />
+						<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+											Width="Auto"
+											Header="Round"
+											Binding="{Binding RoundNumber}" />
+						<DataGridTextColumn HeaderStyle="{StaticResource ThrowerNameHeader}"
+											Width="Auto"
+											Header="Thrower"
+											Binding="{Binding ThrowerName}" />
+						<DataGridTemplateColumn Header="Watch">
+							<DataGridTemplateColumn.CellTemplate>
+								<DataTemplate>
+									<Button Command="{Binding Source={StaticResource Locator}, Path=DemoStuffs.WatchStuffCommand}"
+											CommandParameter="{Binding SelectedItem, ElementName=StuffDataGrid}"
+											Style="{StaticResource GeneralButtonStyle}"
+											Content="Watch" />
+								</DataTemplate>
+							</DataGridTemplateColumn.CellTemplate>
+						</DataGridTemplateColumn>
+					</DataGrid.Columns>
+				</DataGrid>
+			</Grid>
+
+			<Grid Grid.Column="1">
+				<Image Source="{Binding OverviewLayer}"
+					   Style="{StaticResource OverviewLayerStyle}"/>
+				<Image Source="{Binding StuffLayer}"
+					   Style="{StaticResource OverviewLayerStyle}"/>
+			</Grid>
+		</Grid>
+	</Grid>
+</UserControl>

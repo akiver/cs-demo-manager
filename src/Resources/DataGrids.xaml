@@ -620,4 +620,8 @@
 		<Setter Property="ContextMenu" Value="{StaticResource RoundRowContextMenu}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="ThrowerNameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Thrower Name" />
+	</Style>
+
 </ResourceDictionary>

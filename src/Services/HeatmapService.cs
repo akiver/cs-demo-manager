@@ -463,7 +463,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			return (from round in _demo.Rounds
 				where _selectedRoundList.Contains(round)
-				from e in round.SmokesStarted
+				from e in round.SmokeStarted
 				where _selectedPlayerList.Contains(_demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
 				|| _selectedSideList.FirstOrDefault(s => s.Id == GetSideFromTeam(e.ThrowerSide)) != null
 				select new HeatmapPoint

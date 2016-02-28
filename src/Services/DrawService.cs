@@ -664,12 +664,15 @@ namespace CSGO_Demos_Manager.Services
 			// Copy the RGB values into the array.
 			Marshal.Copy(ptr, rgbValues, 0, bytes);
 
-			layer.WritePixels(
-				new Int32Rect(0, 0, icon.Width, icon.Height),
-				rgbValues,
-				data.Stride,
-				(int)positionPoint.X - icon.Width / 2,
-				(int)positionPoint.Y - icon.Height / 2);
+			int x = (int)positionPoint.X - icon.Width / 2;
+			int y = (int)positionPoint.Y - icon.Height / 2;
+			int maxX = (int)layer.Width - icon.Width;
+			int maxY = (int)layer.Height - icon.Height;
+
+			if (x > maxX) x = maxX;
+			if (y > maxY) y = maxY;
+
+			layer.WritePixels(new Int32Rect(0, 0, icon.Width, icon.Height), rgbValues, data.Stride, x, y);
 
 			icon.UnlockBits(data);
 		}
@@ -749,6 +752,66 @@ namespace CSGO_Demos_Manager.Services
 			{
 				DrawBombDefused(positionPoint);
 				SoundService.PlayBombDefused();
+			}
+		}
+
+		public void DrawStuff(Stuff stuff)
+		{
+			try
+			{
+				SmokeLayer.Clear();
+				float startX = MapService.CalculatePointToResolutionX(stuff.StartX);
+				float startY = MapService.CalculatePointToResolutionY(stuff.StartY);
+				float endX = MapService.CalculatePointToResolutionX(stuff.EndX);
+				float endY = MapService.CalculatePointToResolutionY(stuff.EndY);
+
+				Bitmap startIcon = null;
+				Bitmap endIcon = null;
+
+				switch (stuff.Type)
+				{
+					case StuffType.SMOKE:
+						startIcon = new Bitmap(Properties.Resources.smokegrenade);
+						endIcon = new Bitmap(Properties.Resources.smoke);
+						break;
+					case StuffType.FLASHBANG:
+						startIcon = new Bitmap(Properties.Resources.flashbang);
+						endIcon = new Bitmap(Properties.Resources.flashbang_exploded);
+						break;
+					case StuffType.HE:
+						startIcon = new Bitmap(Properties.Resources.hegrenade);
+						endIcon = new Bitmap(Properties.Resources.he_exploded);
+						break;
+					case StuffType.MOLOTOV:
+						startIcon = new Bitmap(Properties.Resources.molotov);
+						endIcon = new Bitmap(Properties.Resources.molotov_burning);
+						break;
+					case StuffType.DECOY:
+						startIcon = new Bitmap(Properties.Resources.decoy);
+						endIcon = new Bitmap(Properties.Resources.decoy_screaming);
+						break;
+				}
+
+				if (startIcon == null || endIcon == null) return;
+
+				DrawIcon(SmokeLayer, startIcon, new PositionPoint
+				{
+					X = startX,
+					Y = startY
+				});
+				DrawIcon(SmokeLayer, endIcon, new PositionPoint
+				{
+					X = endX,
+					Y = endY
+				});
+				SmokeLayer.DrawLineAa((int)startX, (int)startY, (int)endX, (int)endY, ColorToInt(_colors[0]));
+
+				startIcon.Dispose();
+				endIcon.Dispose();
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
 			}
 		}
 	}

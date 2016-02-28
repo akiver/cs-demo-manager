@@ -12,4 +12,13 @@
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
+
+	<Style TargetType="Image" x:Key="OverviewLayerStyle">
+		<Setter Property="Width" Value="Auto"/>
+		<Setter Property="Height" Value="Auto"/>
+		<Setter Property="Margin" Value="10"/>
+		<Setter Property="HorizontalAlignment" Value="Stretch"/>
+		<Setter Property="VerticalAlignment" Value="Stretch"/>
+		<Setter Property="Stretch" Value="Uniform"/>
+	</Style>
 </ResourceDictionary>
