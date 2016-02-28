@@ -110,5 +110,15 @@ namespace CSGO_Demos_Manager.Services
 			return await metroWindow.ShowMessageAsync("Analyze", "Do you want to analyze only the selected demos or all the demos within the selected folder?",
 				MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
+
+		public async Task<MessageDialogResult> ShowSteamNotFoundAsync()
+		{
+			string errorMessage = "Steam doesn't seems to be installed." + Environment.NewLine + "Unable to start the game.";
+
+			var metroWindow = Application.Current.MainWindow as MetroWindow;
+			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
+
+			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+		}
 	}
 }

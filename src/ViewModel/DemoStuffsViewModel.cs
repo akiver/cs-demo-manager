@@ -193,9 +193,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								// TODO move to dialog Service
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
 							GameLauncher launcher = new GameLauncher();
