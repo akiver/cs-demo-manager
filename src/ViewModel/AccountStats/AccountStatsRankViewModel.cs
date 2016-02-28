@@ -202,7 +202,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			DispatcherHelper.CheckBeginInvokeOnUI(
 				async () =>
 				{
+					IsBusy = true;
 					Datas = await _demosService.GetRankDateChartDataAsync();
+					IsBusy = false;
 				});
 		}
 

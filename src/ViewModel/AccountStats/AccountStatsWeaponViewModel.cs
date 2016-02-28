@@ -654,11 +654,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					?? (_windowLoadedCommand = new RelayCommand(
 					async () =>
 					{
-						IsBusy = true;
-						NotificationMessage = "Loading...";
 						await LoadDatas();
 						Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-						IsBusy = false;
 					}));
 			}
 		}
@@ -767,6 +764,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private async Task LoadDatas()
 		{
+			IsBusy = true;
+			NotificationMessage = "Loading...";
 			WeaponStats datas = await _demosService.GetWeaponStatsAsync();
 
 			DatasAk47Kill = new List<CategoricalDataPoint>
@@ -1520,6 +1519,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			HeGrenadeThrownCount = datas.HeGrenadeThrownCount;
 			MolotovThrownCount = datas.MolotovThrownCount;
 			IncendiaryThrownCount = datas.IncendiaryThrownCount;
+			IsBusy = false;
 		}
 
 		public AccountStatsWeaponViewModel(IDemosService demoService)

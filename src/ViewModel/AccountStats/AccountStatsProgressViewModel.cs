@@ -243,11 +243,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					?? (_windowLoadedCommand = new RelayCommand(
 					async () =>
 					{
-						IsBusy = true;
-						NotificationMessage = "Loading...";
 						await LoadDatas();
 						Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-						IsBusy = false;
 					}));
 			}
 		}
@@ -509,6 +506,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private async Task LoadDatas()
 		{
+			IsBusy = true;
+			NotificationMessage = "Loading...";
 			ProgressStats datas = await _demosService.GetProgressStatsAsync();
 			DatasWin = datas.Win;
 			DatasDamage = datas.Damage;
@@ -522,6 +521,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			MaximumVelocity = datas.MaximumVelocity + 10;
 			DatasCrouchKill = datas.CrouchKill;
 			CommandManager.InvalidateRequerySuggested();
+			IsBusy = false;
 		}
 
 		public AccountStatsProgressViewModel(IDemosService demoService)

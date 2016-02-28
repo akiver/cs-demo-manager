@@ -272,11 +272,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					?? (_windowLoadedCommand = new RelayCommand(
 					async () =>
 					{
-						IsBusy = true;
-						NotificationMessage = "Loading...";
 						await LoadDatas();
 						Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-						IsBusy = false;
 					}));
 			}
 		}
@@ -385,6 +382,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private async Task LoadDatas()
 		{
+			IsBusy = true;
+			NotificationMessage = "Loading...";
 			OverallStats datas = await _demosService.GetGeneralAccountStatsAsync();
 			MatchCount = datas.MatchCount;
 			KillCount = datas.KillCount;
@@ -429,6 +428,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					Value = datas.MatchDrawCount
 				}
 			};
+			IsBusy = false;
 		}
 
 		public AccountStatsOverallViewModel(IDemosService demoService)

@@ -192,11 +192,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					?? (_windowLoadedCommand = new RelayCommand(
 					async () =>
 					{
-						IsBusy = true;
-						NotificationMessage = "Loading...";
 						await LoadDatas();
 						Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-						IsBusy = false;
 					}));
 			}
 		}
@@ -305,6 +302,8 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 
 		private async Task LoadDatas()
 		{
+			IsBusy = true;
+			NotificationMessage = "Loading...";
 			MapStats datas = await _demosService.GetMapStatsAsync();
 
 			Dust2PieDatas = new List<GenericDoubleChart>
@@ -530,6 +529,7 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 					Value = (float) datas.TrainWinPercentage
 				}
 			};
+			IsBusy = false;
 		}
 
 		public AccountStatsMapViewModel(IDemosService demosService)
