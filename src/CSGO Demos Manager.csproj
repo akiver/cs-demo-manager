@@ -350,7 +350,16 @@
     <None Include="AfxHook.dat">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\black.vmt" />
+    <Resource Include="resources\images\icons\flashbang.png" />
+    <None Include="resources\AfxHookSource\assets\csgo\cfg\afx\updateWorkaround.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\cfg\afx\wh.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\black.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\depth.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -360,14 +369,57 @@
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\invisible.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\white.vmt" />
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\white.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\cable.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\ct.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\level.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\level.vtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\levelLit.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smoke.vtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\t.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods_impactdust.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_smokegrenade.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\weapon.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="resources\AfxHookSource\shaders\afx_line_ps20.fxo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="resources\AfxHookSource\shaders\afx_line_vs20.fxo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <Resource Include="resources\images\icons\flashbang.png" />
     <None Include="resources\images\icons\flashbang_exploded.png" />
     <Resource Include="resources\images\icons\decoy.png" />
     <Resource Include="resources\images\icons\hegrenade.png" />
@@ -811,10 +863,31 @@
     <Content Include="AfxHookSource.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Half.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Iex-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IexMath-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IlmImf-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IlmThread-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imath-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="msvcp100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="msvcr100.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="zlib1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="resources\images\maps\overview\cs_cruise.png" />

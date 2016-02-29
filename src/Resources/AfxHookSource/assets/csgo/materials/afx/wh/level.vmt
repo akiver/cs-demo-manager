@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture" "afx/wh/level"
+	"$translucent" 1
+	"$nofog" "1"
+}

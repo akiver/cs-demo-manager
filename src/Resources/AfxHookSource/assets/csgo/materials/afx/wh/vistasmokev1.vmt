@@ -1,0 +1,8 @@
+"SpriteCard"
+{
+	$basetexture "afx/wh/smoke"
+	$depthblend 1
+	"!srgb?$overbrightfactor" "1.2"
+	$STARTFADESIZE 1
+	$ENDFADESIZE 1.4
+}
