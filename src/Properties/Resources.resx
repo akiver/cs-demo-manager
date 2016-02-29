@@ -403,4 +403,52 @@
   <data name="smokegrenade_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\icons\smokegrenade_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="de_new_nuke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\maps\overview\de_new_nuke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_empire" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\images\maps\overview\de_empire.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="coast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\coast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cruise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\cruise.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="empire" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\empire.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="mikla" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\mikla.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="new_nuke" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\new_nuke.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="royal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\royal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="santorini" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\santorini.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tulip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\preview\tulip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cs_cruise" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\cs_cruise.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_coast" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_coast.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_mikla" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_mikla.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_royal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_royal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_santorini" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_santorini.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="de_tulip" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\images\maps\overview\de_tulip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

@@ -133,7 +133,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						NotificationMessage = "Loading...";
 						IsBusy = true;
 						CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
-						_mapService = MapService.Factory(CurrentDemo.MapName);
+						_mapService = MapService.Factory(CurrentDemo);
 						OverviewLayer = _mapService.GetWriteableImage();
 						_drawService = new DrawService(_mapService);
 						StuffLayer = _drawService.SmokeLayer;

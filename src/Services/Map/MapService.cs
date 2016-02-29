@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Windows.Media.Imaging;
 using CSGO_Demos_Manager.Exceptions.Map;
+using CSGO_Demos_Manager.Models;
 
 namespace CSGO_Demos_Manager.Services.Map
 {
@@ -27,15 +28,16 @@ namespace CSGO_Demos_Manager.Services.Map
 
 		public Image Overview { get; set; }
 
-		public static MapService Factory(string name)
+		public static MapService Factory(Demo demo)
 		{
-			switch (name)
+			switch (demo.MapName)
 			{
 				case "de_dust2":
 					return new Dust2();
 				case "de_inferno":
 					return new Inferno();
 				case "de_nuke":
+					if (demo.Date > new DateTime(2016, 02, 17)) return new NewNuke();
 					return new Nuke();
 				case "de_cache":
 					return new Cache();
@@ -49,6 +51,20 @@ namespace CSGO_Demos_Manager.Services.Map
 					return new Mirage();
 				case "de_train":
 					return new Train();
+				case "de_empire":
+					return new Empire();
+				case "de_santorini":
+					return new Santorini();
+				case "de_tulip":
+					return new Tulip();
+				case "de_royal":
+					return new Royal();
+				case "cs_cruise":
+					return new Cruise();
+				case "de_coast":
+					return new Coast();
+				case "de_mikla":
+					return new Mikla();
 				default:
 					throw new MapUnavailableException();
 			}

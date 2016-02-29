@@ -283,6 +283,14 @@
     <Compile Include="Services\Interfaces\IFlashbangService.cs" />
     <Compile Include="Services\Interfaces\IKillService.cs" />
     <Compile Include="Services\Design\KillServiceDesign.cs" />
+    <Compile Include="Services\Map\Coast.cs" />
+    <Compile Include="Services\Map\Cruise.cs" />
+    <Compile Include="Services\Map\Empire.cs" />
+    <Compile Include="Services\Map\Mikla.cs" />
+    <Compile Include="Services\Map\NewNuke.cs" />
+    <Compile Include="Services\Map\Royal.cs" />
+    <Compile Include="Services\Map\Santorini.cs" />
+    <Compile Include="Services\Map\Tulip.cs" />
     <Compile Include="Services\Stats\DamageService.cs" />
     <Compile Include="Services\Stats\PlayerService.cs" />
     <Compile Include="Services\Stats\RoundService.cs" />
@@ -809,6 +817,22 @@
     <Content Include="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\images\maps\overview\cs_cruise.png" />
+    <Resource Include="resources\images\maps\overview\de_coast.png" />
+    <Resource Include="resources\images\maps\overview\de_mikla.png" />
+    <Resource Include="resources\images\maps\overview\de_royal.png" />
+    <Resource Include="resources\images\maps\overview\de_santorini.png" />
+    <Resource Include="resources\images\maps\overview\de_tulip.png" />
+    <Resource Include="resources\images\maps\preview\coast.png" />
+    <Resource Include="resources\images\maps\preview\cruise.png" />
+    <Resource Include="resources\images\maps\preview\empire.png" />
+    <Resource Include="resources\images\maps\preview\mikla.png" />
+    <Resource Include="resources\images\maps\preview\new_nuke.png" />
+    <Resource Include="resources\images\maps\preview\royal.png" />
+    <Resource Include="resources\images\maps\preview\santorini.png" />
+    <Resource Include="resources\images\maps\preview\tulip.png" />
+    <Resource Include="resources\images\maps\overview\de_empire.png" />
+    <Resource Include="resources\images\maps\overview\de_new_nuke.png" />
     <Resource Include="resources\images\icons\smokegrenade_black.png" />
     <Resource Include="resources\images\logo\popflash.png" />
     <Resource Include="resources\images\avatar.jpg" />

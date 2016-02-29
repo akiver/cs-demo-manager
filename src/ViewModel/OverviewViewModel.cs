@@ -338,7 +338,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							PlayersColor.Clear();
 							Events.Clear();
 
-							MapService mapService = MapService.Factory(CurrentDemo.MapName);
+							MapService mapService = MapService.Factory(CurrentDemo);
 							_drawService = new DrawService(mapService);
 
 							PlayerExtended player = SelectedPlayer;

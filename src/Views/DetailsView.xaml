@@ -341,8 +341,9 @@
 
 						<StackPanel Orientation="Vertical" Grid.Row="0">
 							<Border BorderThickness="1" BorderBrush="{StaticResource LightGreenBrush}">
-								<Image Source="{Binding CurrentDemo.MapName, Converter={StaticResource MapNameToImageConverter}}"
-							   Stretch="Fill" MaxHeight="250"/>
+								<Image Source="{Binding CurrentDemo, Converter={StaticResource MapNameToImageConverter}}"
+									   Stretch="Fill"
+									   MaxHeight="250"/>
 							</Border>
 							<Grid>
 								<Grid.ColumnDefinitions>

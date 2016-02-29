@@ -175,7 +175,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						Players = new MultiSelectCollectionView<PlayerExtended>(CurrentDemo.Players);
 
 						// Get the original overview image
-						_mapService = MapService.Factory(CurrentDemo.MapName);
+						_mapService = MapService.Factory(CurrentDemo);
 						OverviewLayer = _mapService.GetWriteableImage();
 					}));
 			}
