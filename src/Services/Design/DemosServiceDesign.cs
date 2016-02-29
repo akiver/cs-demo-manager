@@ -323,11 +323,6 @@ namespace CSGO_Demos_Manager.Services.Design
 			return Task.FromResult(demo);
 		}
 
-		public Task<Demo> AnalyzeHeatmapPoints(Demo demo, CancellationToken token)
-		{
-			return Task.FromResult(demo);
-		}
-
 		public Task<List<Demo>> GetDemosFromBackup(string jsonFile)
 		{
 			return Task.FromResult(new List<Demo>());

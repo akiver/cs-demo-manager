@@ -311,7 +311,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KilledName = e.Victim.Name,
 				KilledSide = e.Victim.Team,
 				RoundNumber = CurrentRound.Number,
-				IsKillerCrouching = e.Killer?.IsDucking ?? false
+				IsKillerCrouching = e.Killer?.IsDucking ?? false,
+				Point = new KillHeatmapPoint
+				{
+					KillerX = e.Killer?.Position.X ?? 0,
+					KillerY = e.Killer?.Position.Y ?? 0,
+					VictimX = e.Victim.Position.X,
+					VictimY = e.Victim.Position.Y
+				}
 			};
 
 			bool killerIsBot = false;
@@ -411,17 +418,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			ProcessClutches();
-
-			if (AnalyzeHeatmapPoint)
-			{
-				killEvent.Point = new KillHeatmapPoint
-				{
-					KillerX = e.Killer?.Position.X ?? 0,
-					KillerY = e.Killer?.Position.Y ?? 0,
-					VictimX = e.Victim.Position.X,
-					VictimY = e.Victim.Position.Y
-				};
-			}
 
 			Demo.Kills.Add(killEvent);
 			CurrentRound.Kills.Add(killEvent);

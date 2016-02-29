@@ -53,8 +53,6 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 
 		Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token);
 
-		Task<Demo> AnalyzeHeatmapPoints(Demo demo, CancellationToken token);
-
 		Task<List<Demo>> GetDemosFromBackup(string jsonFile);
 
 		Task<Demo> AnalyzeBannedPlayersAsync(Demo demo);

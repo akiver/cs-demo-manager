@@ -142,8 +142,6 @@ namespace CSGO_Demos_Manager.Services
 			}
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
-			// TODO remove AnalyzeHeatmapPoint logic
-			analyzer.AnalyzeHeatmapPoint = true;
 
 			demo = await analyzer.AnalyzeDemoAsync(token);
 
@@ -205,22 +203,6 @@ namespace CSGO_Demos_Manager.Services
 			demo = await analyzer.AnalyzeDemoAsync(token);
 
 			await _cacheService.WriteDemoDataCache(demo);
-
-			return demo;
-		}
-
-		public async Task<Demo> AnalyzeHeatmapPoints(Demo demo, CancellationToken token)
-		{
-			if (!File.Exists(demo.Path))
-			{
-				// Demo may be moved to an other folder, just clear cache
-				await _cacheService.RemoveDemo(demo);
-			}
-
-			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
-			analyzer.AnalyzeHeatmapPoint = true;
-
-			demo = await analyzer.AnalyzeDemoAsync(token);
 
 			return demo;
 		}
