@@ -62,11 +62,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				UpdateKillsCount();
 				UpdatePlayerScore();
 				Demo.Rounds.Add(CurrentRound);
-				if (Demo.Rounds.Count < Parser.CTScore + Parser.TScore)
-				{
-					Demo.ScoreTeam1 = Parser.CTScore;
-					Demo.ScoreTeam2 = Parser.TScore;
-				}
 				if (Demo.Players.Any())
 				{
 					Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
@@ -163,6 +158,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
+			IsRoundEndOccured = true;
 			if (!IsMatchStarted) return;
 
 			CurrentRound.EndReason = e.Reason;

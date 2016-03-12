@@ -33,6 +33,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		public bool IsOvertime { get; set; } = false;
 		public bool IsLastRoundHalf { get; set; }
 		public bool IsSwapTeamRequired { get; set; } = false;
+		public bool IsRoundEndOccured { get; set; }
 		/// <summary>
 		/// Used to detect when the first shot occured to be able to have the right equipement money value
 		/// I use this because the event buytime_ended isn't raised everytime
@@ -409,6 +410,41 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
 		{
 			if (!IsMatchStarted) return;
+
+			// sometimes round_end isn't triggered, I update the score here
+			if (!IsRoundEndOccured)
+			{
+				if (Demo.ScoreTeam1 < Parser.CTScore)
+				{
+					// CT won
+					CurrentRound.WinnerName = Demo.TeamCT.Name;
+					CurrentRound.WinnerSide = Team.CounterTerrorist;
+					Demo.ScoreTeam1++;
+					if (IsOvertime)
+					{
+						CurrentOvertime.ScoreTeam1++;
+					}
+					else
+					{
+						Demo.ScoreFirstHalfTeam1++;
+					}
+				}
+				else
+				{
+					// T won
+					CurrentRound.WinnerName = Demo.TeamT.Name;
+					CurrentRound.WinnerSide = Team.Terrorist;
+					Demo.ScoreTeam2++;
+					if (IsOvertime)
+					{
+						CurrentOvertime.ScoreTeam2++;
+					}
+					else
+					{
+						Demo.ScoreFirstHalfTeam2++;
+					}
+				}
+			}
 
 			CheckForSpecialClutchEnd();
 			UpdateKillsCount();
@@ -1186,6 +1222,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void CreateNewRound()
 		{
+			IsRoundEndOccured = false;
 			CurrentRound = new Round
 			{
 				Tick = Parser.IngameTick,

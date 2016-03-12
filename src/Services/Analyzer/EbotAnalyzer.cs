@@ -333,6 +333,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
+			IsRoundEndOccured = true;
 			if (!IsMatchStarted) return;
 
 			CurrentRound.EndReason = e.Reason;

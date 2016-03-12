@@ -147,6 +147,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
 			_roundStartedCount = 0;
+			IsRoundEndOccured = true;
 
 			if (!IsMatchStarted) return;
 
