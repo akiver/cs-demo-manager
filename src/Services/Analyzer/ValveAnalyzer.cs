@@ -24,6 +24,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected sealed override void RegisterEvents()
 		{
 			Parser.MatchStarted += HandleMatchStarted;
+			Parser.RoundAnnounceMatchStarted += HandleRoundAnnounceMatchStarted;
 			Parser.RoundMVP += HandleRoundMvp;
 			Parser.PlayerKilled += HandlePlayerKilled;
 			Parser.RoundStart += HandleRoundStart;
@@ -123,55 +124,12 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
 		{
 			if (IsMatchStarted) Demo.ResetStats(false);
-			RoundCount = 0;
-			IsMatchStarted = true;
+			StartMatch();
+		}
 
-			if (!string.IsNullOrWhiteSpace(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
-			if (!string.IsNullOrWhiteSpace(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
-
-			// Add all players to our ObservableCollection of PlayerExtended
-			foreach (Player player in Parser.PlayingParticipants)
-			{
-				// don't add bot
-				if (player.SteamID != 0)
-				{
-					PlayerExtended pl = new PlayerExtended
-					{
-						SteamId = player.SteamID,
-						Name = player.Name,
-						Side = player.Team
-					};
-					if (!Demo.Players.Contains(pl))
-					{
-						Application.Current.Dispatcher.Invoke(delegate
-						{
-							Demo.Players.Add(pl);
-							if (pl.Side == Team.CounterTerrorist && !Demo.TeamCT.Players.Contains(pl))
-							{
-								Demo.TeamCT.Players.Add(pl);
-								if (!Demo.TeamCT.Players.Contains(pl))
-								{
-									Demo.TeamCT.Players.Add(pl);
-								}
-								pl.TeamName = Demo.TeamCT.Name;
-							}
-
-							if (pl.Side == Team.Terrorist && !Demo.TeamT.Players.Contains(pl))
-							{
-								Demo.TeamT.Players.Add(pl);
-								if (!Demo.TeamT.Players.Contains(pl))
-								{
-									Demo.TeamT.Players.Add(pl);
-								}
-								pl.TeamName = Demo.TeamT.Name;
-							}
-						});
-					}
-				}
-			}
-
-			// First round handled here because round_start is raised before begin_new_match
-			CreateNewRound();
+		protected void HandleRoundAnnounceMatchStarted(object sender, RoundAnnounceMatchStartedEventArgs e)
+		{
+			if (!IsMatchStarted) StartMatch();
 		}
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
@@ -440,6 +398,59 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		#endregion
 
 		#region Process
+
+		private void StartMatch()
+		{
+			RoundCount = 0;
+			IsMatchStarted = true;
+
+			if (!string.IsNullOrWhiteSpace(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
+			if (!string.IsNullOrWhiteSpace(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
+
+			// Add all players to our ObservableCollection of PlayerExtended
+			foreach (Player player in Parser.PlayingParticipants)
+			{
+				// don't add bot
+				if (player.SteamID != 0)
+				{
+					PlayerExtended pl = new PlayerExtended
+					{
+						SteamId = player.SteamID,
+						Name = player.Name,
+						Side = player.Team
+					};
+					if (!Demo.Players.Contains(pl))
+					{
+						Application.Current.Dispatcher.Invoke(delegate
+						{
+							Demo.Players.Add(pl);
+							if (pl.Side == Team.CounterTerrorist && !Demo.TeamCT.Players.Contains(pl))
+							{
+								Demo.TeamCT.Players.Add(pl);
+								if (!Demo.TeamCT.Players.Contains(pl))
+								{
+									Demo.TeamCT.Players.Add(pl);
+								}
+								pl.TeamName = Demo.TeamCT.Name;
+							}
+
+							if (pl.Side == Team.Terrorist && !Demo.TeamT.Players.Contains(pl))
+							{
+								Demo.TeamT.Players.Add(pl);
+								if (!Demo.TeamT.Players.Contains(pl))
+								{
+									Demo.TeamT.Players.Add(pl);
+								}
+								pl.TeamName = Demo.TeamT.Name;
+							}
+						});
+					}
+				}
+			}
+
+			// First round handled here because round_start is raised before begin_new_match
+			CreateNewRound();
+		}
 
 		/// <summary>
 		/// Set the correct clan name winner

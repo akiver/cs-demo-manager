@@ -109,6 +109,9 @@ namespace DemoInfo.DP.Handler
 			if (eventDescriptor.Name == "begin_new_match")
 				parser.RaiseMatchStarted ();
 
+			if (eventDescriptor.Name == "round_announce_match_start")
+				parser.RaiseRoundAnnounceMatchStarted();
+
 			if (eventDescriptor.Name == "round_freeze_end")
 				parser.RaiseFreezetimeEnded ();
 

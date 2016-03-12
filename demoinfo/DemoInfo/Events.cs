@@ -115,6 +115,10 @@ namespace DemoInfo
 	{
 	}
 
+	public class RoundAnnounceMatchStartedEventArgs : EventArgs
+	{
+	}
+
 	public class RoundEndedEventArgs : EventArgs
 	{
 		public RoundEndReason Reason { get; set; }

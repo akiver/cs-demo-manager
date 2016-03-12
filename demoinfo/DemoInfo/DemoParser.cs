@@ -42,6 +42,11 @@ namespace DemoInfo
 		public event EventHandler<MatchStartedEventArgs> MatchStarted;
 
 		/// <summary>
+		/// Occurs when the first round of a new match start "round_announce_match_start"
+		/// </summary>
+		public event EventHandler<RoundAnnounceMatchStartedEventArgs> RoundAnnounceMatchStarted;
+
+		/// <summary>
 		/// Occurs when round starts, on the round_start event of the demo. Usually the players haven't spawned yet, but have recieved the money for the next round. 
 		/// </summary>
 		public event EventHandler<RoundStartedEventArgs> RoundStart;
@@ -1137,6 +1142,12 @@ namespace DemoInfo
 		{
 			if (MatchStarted != null)
 				MatchStarted(this, new MatchStartedEventArgs());
+		}
+
+		internal void RaiseRoundAnnounceMatchStarted()
+		{
+			if (RoundAnnounceMatchStarted != null)
+				RoundAnnounceMatchStarted(this, new RoundAnnounceMatchStartedEventArgs());
 		}
 
 		internal void RaiseWinPanelMatch()
