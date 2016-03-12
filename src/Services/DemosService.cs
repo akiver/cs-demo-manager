@@ -68,9 +68,12 @@ namespace CSGO_Demos_Manager.Services
 		private static async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
 		{
 			Demo demo = await Task.Run(() => DemoAnalyzer.ParseDemoHeader(demoFilePath));
-			// Update the demo name and path because it may be renamed / moved
-			demo.Name = Path.GetFileName(demoFilePath);
-			demo.Path = demoFilePath;
+			if (demo != null)
+			{
+				// Update the demo name and path because it may be renamed / moved
+				demo.Name = Path.GetFileName(demoFilePath);
+				demo.Path = demoFilePath;
+			}
 
 			return demo;
 		}
@@ -103,12 +106,12 @@ namespace CSGO_Demos_Manager.Services
 						{
 							if (file.Contains("myassignedcase")) continue;
 							var demo = await GetDemoHeaderAsync(file);
-							if (!limit) demo = await GetDemoDataAsync(demo);
 							if (demo != null)
 							{
+								if (!limit) demo = await GetDemoDataAsync(demo);
 								if (currentDemos != null)
 								{
-									if(!currentDemos.Contains(demo)) demos.Add(demo);
+									if (!currentDemos.Contains(demo)) demos.Add(demo);
 								}
 								else
 								{
@@ -757,7 +760,8 @@ namespace CSGO_Demos_Manager.Services
 				result = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
 				for(int i = 0; i < result.Count; i++)
 				{
-					result[i] = await GetDemoHeaderAsync(result[i].Path);
+					Demo demo = await GetDemoHeaderAsync(result[i].Path);
+					if (demo != null) result[i] = demo;
 				}
 			}
 

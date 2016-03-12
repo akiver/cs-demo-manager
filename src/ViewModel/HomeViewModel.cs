@@ -1489,7 +1489,15 @@ namespace CSGO_Demos_Manager.ViewModel
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
-				await RefreshLastRankAccount();
+				try
+				{
+					await RefreshLastRankAccount();
+				}
+				catch (Exception e)
+				{
+					Logger.Instance.Log(e);
+					await _dialogService.ShowErrorAsync("An error occured while refreshing last rank.", MessageDialogStyle.Affirmative);
+				}
 			});
 		}
 
