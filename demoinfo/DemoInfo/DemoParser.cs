@@ -211,6 +211,21 @@ namespace DemoInfo
 		/// Occurs when a player disconnects from the server. 
 		/// </summary>
 		public event EventHandler<PlayerDisconnectEventArgs> PlayerDisconnect;
+
+		/// <summary>
+		/// Occurs when the server uses the "say" command
+		/// </summary>
+		public event EventHandler<SayTextEventArgs> SayText;
+
+		/// <summary>
+		/// Occurs when a player uses the "say" command
+		/// </summary>
+		public event EventHandler<SayText2EventArgs> SayText2;
+
+		/// <summary>
+		/// Occurs when the server reveals players ranks
+		/// </summary>
+		public event EventHandler<ServerRankUpdateEventArgs> ServerRankUpdate;
 		#endregion
 
 		#if SLOW_PROTOBUF
@@ -1321,6 +1336,24 @@ namespace DemoInfo
 		{
 			if (BombAbortDefuse != null)
 				BombAbortDefuse(this, args);
+		}
+
+		internal void RaiseSayText(SayTextEventArgs args)
+		{
+			if (SayText != null)
+				SayText(this, args);
+		}
+
+		internal void RaiseSayText2(SayText2EventArgs args)
+		{
+			if (SayText2 != null)
+				SayText2(this, args);
+		}
+
+		internal void RaiseServerRankUpdate(ServerRankUpdateEventArgs args)
+		{
+			if (ServerRankUpdate != null)
+				ServerRankUpdate(this, args);
 		}
 
 		#endregion

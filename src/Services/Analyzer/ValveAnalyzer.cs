@@ -95,14 +95,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void HandleServerRankUpdate(object sender, ServerRankUpdateEventArgs e)
 		{
-			foreach (ServerRankUpdateEventArgs.RankStruct rankStruct in e.RankStructList)
+			foreach (RankUpdateEventArgs rankUpdate in e.RankUpdateList)
 			{
-				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == rankStruct.SteamId);
+				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == rankUpdate.SteamId);
 				if (player != null)
 				{
-					player.RankNumberOld = rankStruct.Old;
-					player.RankNumberNew = rankStruct.New;
-					player.WinCount = rankStruct.NumWins;
+					player.RankNumberOld = rankUpdate.RankOld;
+					player.RankNumberNew = rankUpdate.RankNew;
+					player.WinCount = rankUpdate.WinCount;
 				}
 			}
 		}

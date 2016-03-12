@@ -341,6 +341,37 @@ namespace DemoInfo
 		public Player Player {get; set; }
 	}
 
+	public class SayTextEventArgs : EventArgs
+	{
+		// should be everytime 0 as it's a message from server
+		public int EntityIndex { get; set; }
+		public string Text { get; set; }
+		public bool IsChat { get; set; }
+		public bool IsChatAll { get; set; }
+	}
+
+	public class SayText2EventArgs : EventArgs
+	{
+		public Player Sender { get; set; }
+		public string Text { get; set; }
+		public bool IsChat { get; set; }
+		public bool IsChatAll { get; set; }
+	}
+
+	public class RankUpdateEventArgs : EventArgs
+	{
+		public long SteamId { get; set; }
+		public int RankOld { get; set; }
+		public int RankNew { get; set; }
+		public int WinCount { get; set; }
+		public float RankChange { get; set; }
+	}
+
+	public class ServerRankUpdateEventArgs : EventArgs
+	{
+		public IList<RankUpdateEventArgs> RankUpdateList { get; set; }
+	}
+
 	public class Equipment
 	{
 		internal int EntityID { get; set; }

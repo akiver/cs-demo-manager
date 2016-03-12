@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using CSGO_Demos_Manager.messages.Protobuf;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
 using DemoInfo;
-using DemoInfo.Messages;
 using ProtoBuf;
 
 namespace CSGO_Demos_Manager.Services.Analyzer
@@ -157,6 +157,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					try
 					{
+						// TODO use the FastNetMessages from DemoInfo to get rid of protobuf-net
 						CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
 						DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 						demo.Date = unixTime.AddSeconds(infoMsg.matchtime);

@@ -20,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SLOW_PROTOBUF</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -30,7 +30,7 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;SLOW_PROTOBUF</DefineConstants>
+    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -66,16 +66,17 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="protobuf-net, Version=2.0.0.668, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\protobuf-net.2.0.0.668\lib\net40\protobuf-net.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DemoParser.cs" />
     <Compile Include="DP\DemoPacketParser.cs" />
     <Compile Include="DP\Entity.cs" />
+    <Compile Include="DP\FastNetmessages\RankUpdate.cs" />
+    <Compile Include="DP\FastNetmessages\SayText.cs" />
+    <Compile Include="DP\FastNetmessages\SayText2.cs" />
+    <Compile Include="DP\FastNetmessages\ServerRankUpdate.cs" />
+    <Compile Include="DP\FastNetmessages\UserMessage.cs" />
     <Compile Include="DP\Handler\GameEventHandler.cs" />
     <Compile Include="DP\Handler\PacketEntitesHandler.cs" />
     <Compile Include="DP\Handler\PropDecoder.cs" />
@@ -117,7 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -132,10 +132,4 @@
   -->
   <ItemGroup />
   <ItemGroup />
-  <PropertyGroup>
-    <PostBuildEvent>cd $(SolutionDir)DemoInfo\bin\Debug
-snremove.exe -r DemoInfo.dll
-cd $(SolutionDir)DemoInfo\bin\Release
-snremove.exe -r DemoInfo.dll</PostBuildEvent>
-  </PropertyGroup>
 </Project>
