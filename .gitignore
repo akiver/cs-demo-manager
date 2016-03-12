@@ -196,3 +196,4 @@ FakesAssemblies/
 *.opt
 CSGO Demos Manager.sln.ide/
 src/CSGO Demos Manager.csproj.DotSettings
+.idea/
