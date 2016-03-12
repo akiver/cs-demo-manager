@@ -113,18 +113,21 @@ namespace CSGO_Demos_Manager.Services
 
 				foreach(PlayerSummary playerSummary in playerSummaryList)
 				{
-					Suspect suspect = new Suspect
+					if (playerSummary != null)
 					{
-						SteamId = playerSummary.SteamId,
-						ProfileUrl = playerSummary.ProfileUrl,
-						Nickname = playerSummary.PersonaName,
-						LastLogOff = playerSummary.LastLogoff,
-						CurrentStatus = playerSummary.PersonaState,
-						ProfileState = playerSummary.ProfileState,
-						AvatarUrl = playerSummary.AvatarFull,
-						CommunityVisibilityState = playerSummary.CommunityVisibilityState
-					};
-					suspects.Add(suspect);
+						Suspect suspect = new Suspect
+						{
+							SteamId = playerSummary.SteamId,
+							ProfileUrl = playerSummary.ProfileUrl,
+							Nickname = playerSummary.PersonaName,
+							LastLogOff = playerSummary.LastLogoff,
+							CurrentStatus = playerSummary.PersonaState,
+							ProfileState = playerSummary.ProfileState,
+							AvatarUrl = playerSummary.AvatarFull,
+							CommunityVisibilityState = playerSummary.CommunityVisibilityState
+						};
+						suspects.Add(suspect);
+					}
 				}
 
 				foreach (PlayerBan playerBan in playerBanList)
