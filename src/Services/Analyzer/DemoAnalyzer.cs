@@ -1058,7 +1058,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleDecoyNadeStarted(object sender, DecoyEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || e.ThrownBy == null) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 			DecoyStartedEvent decoyStartedEvent = new DecoyStartedEvent(Parser.IngameTick, Parser.CurrentTime)
@@ -1093,7 +1093,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void HandleDecoyNadeEnded(object sender, DecoyEventArgs e)
 		{
-			if (!AnalyzePlayersPosition || !IsMatchStarted) return;
+			if (!AnalyzePlayersPosition || !IsMatchStarted || e.ThrownBy == null) return;
 
 			PlayerExtended thrower = Demo.Players.FirstOrDefault(player => player.SteamId == e.ThrownBy.SteamID);
 			DecoyEndedEvent decoyEndedEvent = new DecoyEndedEvent(Parser.IngameTick, Parser.CurrentTime)
