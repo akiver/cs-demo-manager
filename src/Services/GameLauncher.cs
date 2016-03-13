@@ -77,12 +77,20 @@ namespace CSGO_Demos_Manager.Services
 			StartGame();
 		}
 
-		internal void WatchDemoAt(Demo demo, int tick, bool delay = false)
+		internal void WatchDemoAt(Demo demo, int tick, bool delay = false, int playerEntityId = -1)
 		{
 			_arguments.Add("+playdemo");
 			if (delay && tick > 1000) tick -= 1000;
 			_arguments.Add(demo.Path + "@" + tick);
+			if (playerEntityId != -1) GenerateVdmFile(demo, tick, playerEntityId);
 			StartGame();
+		}
+
+		private static void GenerateVdmFile(Demo demo, int tick, int playerEntityId)
+		{
+			string vdmFilePath = demo.Path.Remove(demo.Path.Length - 3) + "vdm";
+			string content = string.Format(Properties.Resources.vdm, tick, playerEntityId);
+			File.WriteAllText(vdmFilePath, content);
 		}
 	}
 }

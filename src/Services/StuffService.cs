@@ -38,7 +38,8 @@ namespace CSGO_Demos_Manager.Services
 											StartY = weaponFired[i].Point.Y,
 											EndX = round.SmokeStarted[i].Point.X,
 											EndY = round.SmokeStarted[i].Point.Y,
-											ThrowerName = weaponFired[i].ShooterName
+											ThrowerName = weaponFired[i].ShooterName,
+											ThrowerEntityId = weaponFired[i].ShooterEntityId
 										};
 										stuffs.Add(s);
 									}
@@ -66,7 +67,8 @@ namespace CSGO_Demos_Manager.Services
 											StartY = weaponFired[i].Point.Y,
 											EndX = round.FlashbangsExploded[i].Point.X,
 											EndY = round.FlashbangsExploded[i].Point.Y,
-											ThrowerName = weaponFired[i].ShooterName
+											ThrowerName = weaponFired[i].ShooterName,
+											ThrowerEntityId = weaponFired[i].ShooterEntityId
 										};
 										stuffs.Add(s);
 									}
@@ -94,7 +96,8 @@ namespace CSGO_Demos_Manager.Services
 											StartY = weaponFired[i].Point.Y,
 											EndX = round.ExplosiveGrenadesExploded[i].Point.X,
 											EndY = round.ExplosiveGrenadesExploded[i].Point.Y,
-											ThrowerName = weaponFired[i].ShooterName
+											ThrowerName = weaponFired[i].ShooterName,
+											ThrowerEntityId = weaponFired[i].ShooterEntityId
 										};
 										stuffs.Add(s);
 									}
@@ -124,7 +127,8 @@ namespace CSGO_Demos_Manager.Services
 											StartY = weaponFired[i].Point.Y,
 											EndX = fireStartedList[i].Point.X,
 											EndY = fireStartedList[i].Point.Y,
-											ThrowerName = weaponFired[i].ShooterName
+											ThrowerName = weaponFired[i].ShooterName,
+											ThrowerEntityId = weaponFired[i].ShooterEntityId
 										};
 										stuffs.Add(s);
 									}
@@ -153,7 +157,8 @@ namespace CSGO_Demos_Manager.Services
 											StartY = weaponFired[i].Point.Y,
 											EndX = decoyStartedList[i].Point.X,
 											EndY = decoyStartedList[i].Point.Y,
-											ThrowerName = weaponFired[i].ShooterName
+											ThrowerName = weaponFired[i].ShooterName,
+											ThrowerEntityId = weaponFired[i].ShooterEntityId
 										};
 										stuffs.Add(s);
 									}

@@ -889,6 +889,7 @@
     <Content Include="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="resources\vdm.txt" />
     <Content Include="zlib1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

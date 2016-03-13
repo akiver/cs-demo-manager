@@ -234,7 +234,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								return;
 							}
 							GameLauncher launcher = new GameLauncher();
-							launcher.WatchDemoAt(CurrentDemo, kill.Tick, true);
+							launcher.WatchDemoAt(CurrentDemo, kill.Tick, true, kill.KillerEntityId);
 						}));
 			}
 		}

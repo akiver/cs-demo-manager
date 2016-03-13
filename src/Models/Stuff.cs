@@ -21,6 +21,8 @@
 
 		public string ThrowerName { get; set; }
 
+		public int ThrowerEntityId { get; set; }
+
 		public float StartX { get; set; }
 
 		public float StartY { get; set; }

@@ -11,6 +11,9 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("shooter_steamid")]
 		public long ShooterSteamId { get; set; }
 
+		[JsonProperty("sshooter_entity_id")]
+		public int ShooterEntityId { get; set; }
+
 		[JsonProperty("shooter_name")]
 		public string ShooterName { get; set; }
 

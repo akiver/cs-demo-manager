@@ -1140,6 +1140,25 @@ namespace CSGO_Demos_Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to demoactions
+        ///{
+        ///	&quot;1&quot;
+        ///	{
+        ///		factory &quot;PlayCommands&quot;
+        ///		name &quot;Commands&quot;
+        ///		starttick &quot;{0}&quot;
+        ///		commands &quot;spec_player_by_name &quot;{1}&quot;&quot;
+        ///	}
+        ///}
+        ///.
+        /// </summary>
+        internal static string vdm {
+            get {
+                return ResourceManager.GetString("vdm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap vertigo {
