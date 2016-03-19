@@ -17,96 +17,6 @@ namespace DemoInfo
 		}
 	}
 
-	#if SLOW_PROTOBUF
-	/// <summary>
-	/// CCSUsrMsg_SayText2 arguments (when a player use the say command)
-	/// Not sure about Chat and TextAllChat
-	/// GOTV doesn't record chat team so this 2 bool are every time true
-	/// </summary>
-	public class SayText2EventArgs : EventArgs
-	{
-		/// <summary>
-		/// The player who sent the message
-		/// </summary>
-		public Player Sender { get; set; }
-
-		/// <summary>
-		/// The message (nickname : message)
-		/// </summary>
-		public string Text { get; set; }
-
-		/// <summary>
-		/// Not sure about it, maybe it's to indicate say_team or say
-		/// </summary>
-		public bool Chat { get; set; }
-
-		/// <summary>
-		/// true if the message is for all players ?
-		/// </summary>
-		public bool TextAllChat { get; set; }
-	}
-
-	/// <summary>
-	/// CCSUsrMsg_SayText arguments (when the server use the say command)
-	/// Not sure about Chat and TextAllChat
-	/// GOTV doesn't record chat team so this 2 bool are every time false
-	/// </summary>
-	public class SayTextEventArgs : EventArgs
-	{
-		/// <summary>
-		/// The player who sent the message
-		/// </summary>
-		public string Text { get; set; }
-
-		/// <summary>
-		/// The message (nickname : message)
-		/// </summary>
-		public bool Chat { get; set; }
-
-		/// <summary>
-		/// true if the message is for all players ?
-		/// </summary>
-		public bool TextAllChat { get; set; }
-	}
-
-	/// <summary>
-	/// CCSUsrMsg_ServerRankUpdate arguments (when players ranks are displayed)
-	/// Only on Valve demos (MM)
-	/// </summary>
-	public class ServerRankUpdateEventArgs : EventArgs
-	{
-		public struct RankStruct
-		{
-			/// <summary>
-			/// Player SteamID
-			/// </summary>
-			public long SteamId { get; set; }
-
-			/// <summary>
-			/// Old rank id
-			/// </summary>
-			public int Old { get; set; }
-
-			/// <summary>
-			/// New rank id
-			/// </summary>
-			public int New { get; set; }
-
-			/// <summary>
-			/// Number of total wins
-			/// </summary>
-			public int NumWins { get; set; }
-
-			/// <summary>
-			/// Gap between the old and new rank
-			/// </summary>
-			public float RankChange { get; set; }
-		}
-
-		public List<RankStruct> RankStructList { get; set; }
-	}
-	#endif
-
 	public class TickDoneEventArgs : EventArgs
 	{
 	}
@@ -345,35 +255,91 @@ namespace DemoInfo
 		public Player Player {get; set; }
 	}
 
+	/// <summary>
+	/// Occurs when the server use the "say" command
+	/// I don't know the purpose of IsChat and IsChatAll because they are everytime false
+	/// </summary>
 	public class SayTextEventArgs : EventArgs
 	{
-		// should be everytime 0 as it's a message from server
+		/// <summary>
+		/// Should be everytime 0 as it's a message from the server
+		/// </summary>
 		public int EntityIndex { get; set; }
+
+		/// <summary>
+		/// Message sent by the server
+		/// </summary>
 		public string Text { get; set; }
+
+		/// <summary>
+		/// Everytime false as the message is public
+		/// </summary>
 		public bool IsChat { get; set; }
+
+		/// <summary>
+		/// Everytime false as the message is public
+		/// </summary>
 		public bool IsChatAll { get; set; }
 	}
 
+	/// <summary>
+	/// Occurs when a player use the say command
+	/// Not sure about IsChat and IsChatAll, GOTV doesn't record chat team so this 2 bool are every time true
+	/// </summary>
 	public class SayText2EventArgs : EventArgs
 	{
+		/// <summary>
+ 		/// The player who sent the message
+ 		/// </summary>
 		public Player Sender { get; set; }
+
+		/// <summary>
+		/// The message sent
+		/// </summary>
 		public string Text { get; set; }
+
+		/// <summary>
+		/// Not sure about it, maybe it's to indicate say_team or say
+		/// </summary>
 		public bool IsChat { get; set; }
+
+		/// <summary>
+		/// true if the message is for all players ?
+		/// </summary>
 		public bool IsChatAll { get; set; }
 	}
 
+	/// <summary>
+	/// Occurs when the server display a player rank
+	/// It occurs only with Valve demos, at the end of a Matchmaking.
+	/// So for a 5v5 match there will be 10 events trigerred
+	/// </summary>
 	public class RankUpdateEventArgs : EventArgs
 	{
+		/// <summary>
+		/// Player's SteamID64
+		/// </summary>
 		public long SteamId { get; set; }
-		public int RankOld { get; set; }
-		public int RankNew { get; set; }
-		public int WinCount { get; set; }
-		public float RankChange { get; set; }
-	}
 
-	public class ServerRankUpdateEventArgs : EventArgs
-	{
-		public IList<RankUpdateEventArgs> RankUpdateList { get; set; }
+		/// <summary>
+		/// Player's rank at the beginning of the match
+		/// </summary>
+		public int RankOld { get; set; }
+
+		/// <summary>
+		/// Player's rank the end of the match
+		/// </summary>
+		public int RankNew { get; set; }
+
+		/// <summary>
+		/// Number of win that the player have
+		/// </summary>
+		public int WinCount { get; set; }
+
+		/// <summary>
+		/// Number of rank the player win / lost between the beggining and the end of the match
+		/// </summary>
+		public float RankChange { get; set; }
 	}
 
 	public class Equipment
@@ -510,6 +476,7 @@ namespace DemoInfo
 					break;
 				case "molotov":
 				case "molotovgrenade":
+				case "molotov_projectile":
 					weapon = EquipmentElement.Molotov;
 					break;
 				case "mp7":

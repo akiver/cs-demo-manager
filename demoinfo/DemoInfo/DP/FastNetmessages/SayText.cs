@@ -5,7 +5,7 @@ namespace DemoInfo.DP.FastNetmessages
 	/// <summary>
 	/// FastNetMessage adaptation of CCSUsrMsg_SayText protobuf message
 	/// </summary>
-	public class SayText
+	public struct SayText
 	{
 		public int EntityIndex;
 		public string Text;

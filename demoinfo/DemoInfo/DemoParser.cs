@@ -228,31 +228,10 @@ namespace DemoInfo
 		public event EventHandler<SayText2EventArgs> SayText2;
 
 		/// <summary>
-		/// Occurs when the server reveals players ranks
+		/// Occurs when the server display a player rank
 		/// </summary>
-		public event EventHandler<ServerRankUpdateEventArgs> ServerRankUpdate;
+		public event EventHandler<RankUpdateEventArgs> RankUpdate;
 		#endregion
-
-		#if SLOW_PROTOBUF
-		#region UserMessage events
-
-		/// <summary>
-		/// Occurs when the server use 'say'
-		/// </summary>
-		public event EventHandler<SayTextEventArgs> SayText;
-
-		/// <summary>
-		/// Occurs when the server use 'say'
-		/// </summary>
-		public event EventHandler<SayText2EventArgs> SayText2;
-
-		/// <summary>
-		/// Occurs when players ranks are displayed (at the end of the match)
-		/// </summary>
-		public event EventHandler<ServerRankUpdateEventArgs> ServerRankUpdate;
-
-		#endregion
-		#endif
 
 		/// <summary>
 		/// The mapname of the Demo. Only avaible after the header is parsed. 
@@ -1361,37 +1340,13 @@ namespace DemoInfo
 				SayText2(this, args);
 		}
 
-		internal void RaiseServerRankUpdate(ServerRankUpdateEventArgs args)
+		internal void RaiseRankUpdate(RankUpdateEventArgs args)
 		{
-			if (ServerRankUpdate != null)
-				ServerRankUpdate(this, args);
+			if (RankUpdate != null)
+				RankUpdate(this, args);
 		}
 
 		#endregion
-
-		#if SLOW_PROTOBUF
-		#region UserMessage event caller
-
-		internal void RaiseSayText(SayTextEventArgs st)
-		{
-			if (SayText != null)
-				SayText(this, st);
-		}
-
-		internal void RaiseSayText2(SayText2EventArgs st)
-		{
-			if (SayText2 != null)
-				SayText2(this, st);
-		}
-
-		internal void RaiseServerRankUpdate(ServerRankUpdateEventArgs sru)
-		{
-			if (ServerRankUpdate != null)
-				ServerRankUpdate(this, sru);
-		}
-
-		#endregion
-		#endif
 
 		/// <summary>
 		/// Releases all resource used by the <see cref="DemoInfo.DemoParser"/> object. This must be called or evil things (memory leaks) happen. 

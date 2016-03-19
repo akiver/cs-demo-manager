@@ -45,6 +45,7 @@ namespace DemoInfo.Messages
 		svc_CmdKeyValues = 34,
 		svc_EncryptedData = 35
 	}
+	#endif
 
 	public enum User_Messages
 	{
@@ -112,6 +113,5 @@ namespace DemoInfo.Messages
 		um_QuestProgress = 66,
 		um_ScoreLeaderboardData = 67
 	}
-	#endif
 }
 

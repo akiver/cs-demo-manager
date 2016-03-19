@@ -6,9 +6,15 @@ namespace DemoInfo.DP.FastNetmessages
 	/// <summary>
 	/// FastNetMessage adaptation of CSVCMsg_UserMessage protobuf message
 	/// </summary>
-	public class UserMessage
+	public struct UserMessage
 	{
+		/// <summary>
+		/// Correspond to User_Messages enum values
+		/// </summary>
 		public int MsgType;
+		/// <summary>
+		/// Don't what is it?
+		/// </summary>
 		public int PassThrough;
 
 		public void Parse(IBitStream bitstream, DemoParser parser)
@@ -33,6 +39,7 @@ namespace DemoInfo.DP.FastNetmessages
 						bitstream.BeginChunk(bitstream.ReadProtobufVarInt() * 8);
 						switch (MsgType)
 						{
+							// This is where you can add others UserMessage parsing logic
 							case (int)User_Messages.um_SayText:
 								new SayText().Parse(bitstream, parser);
 								break;

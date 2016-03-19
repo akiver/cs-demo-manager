@@ -47,7 +47,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.DecoyNadeStarted += HandleDecoyNadeStarted;
 			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 			Parser.PlayerHurt += HandlePlayerHurted;
-			Parser.ServerRankUpdate += HandleServerRankUpdate;
+			Parser.RankUpdate += HandleServerRankUpdate;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 		}
 
@@ -89,17 +89,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		#region Events Handlers
 
-		private void HandleServerRankUpdate(object sender, ServerRankUpdateEventArgs e)
+		private void HandleServerRankUpdate(object sender, RankUpdateEventArgs e)
 		{
-			foreach (RankUpdateEventArgs rankUpdate in e.RankUpdateList)
+			PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.SteamId);
+			if (player != null)
 			{
-				PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == rankUpdate.SteamId);
-				if (player != null)
-				{
-					player.RankNumberOld = rankUpdate.RankOld;
-					player.RankNumberNew = rankUpdate.RankNew;
-					player.WinCount = rankUpdate.WinCount;
-				}
+				player.RankNumberOld = e.RankOld;
+				player.RankNumberNew = e.RankNew;
+				player.WinCount = e.WinCount;
 			}
 		}
 
