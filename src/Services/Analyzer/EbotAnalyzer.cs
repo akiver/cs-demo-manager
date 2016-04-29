@@ -115,6 +115,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					LastPlayersFireEndedMolotov.Clear();
 				}
+				if (Demo.Winner == null)
+				{
+					Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
+				}
 			});
 
 			return Demo;
