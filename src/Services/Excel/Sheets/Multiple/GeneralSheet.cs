@@ -11,6 +11,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 		{
 			Headers = new Dictionary<string, CellType>(){
 				{ "Filename", CellType.String },
+				{ "Date", CellType.String },
 				{ "Type", CellType.String },
 				{ "Source", CellType.String },
 				{ "Map", CellType.String },
@@ -70,6 +71,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					IRow row = Sheet.CreateRow(rowCount++);
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.String, demo.Name);
+					SetCellValue(row, columnNumber++, CellType.String, demo.DateAsString);
 					SetCellValue(row, columnNumber++, CellType.String, demo.Type);
 					SetCellValue(row, columnNumber++, CellType.String, demo.SourceName);
 					SetCellValue(row, columnNumber++, CellType.String, demo.MapName);
