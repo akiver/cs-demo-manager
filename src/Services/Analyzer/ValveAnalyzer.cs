@@ -221,7 +221,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			ProcessPlayersRating();
-			Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
+			Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
 		}
 
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)

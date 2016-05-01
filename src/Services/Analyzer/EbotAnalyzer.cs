@@ -115,10 +115,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					LastPlayersFireEndedMolotov.Clear();
 				}
-				if (Demo.Winner == null)
-				{
-					Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
-				}
+				Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
 			});
 
 			return Demo;
@@ -220,7 +217,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (matchEnd.Success)
 			{
 				IsMatchStarted = false;
-				Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
 				return;
 			}
 

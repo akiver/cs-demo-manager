@@ -36,7 +36,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
+				Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
 				if (Demo.Players.Any())
 				{
 					Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();

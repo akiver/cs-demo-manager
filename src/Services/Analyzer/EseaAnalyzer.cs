@@ -66,7 +66,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				Demo.Winner = Parser.CTScore > Parser.TScore ? Demo.TeamCT : Demo.TeamT;
+				Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
 
 				// As round_officialy_ended isn't raised we add the last round / OT after the analyze
 				if (Demo.Rounds.Count < Demo.ScoreTeam1 + Demo.ScoreTeam2)
