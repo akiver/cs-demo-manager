@@ -429,7 +429,8 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							string steamId = player.SteamId.ToString();
 							GameLauncher launcher = new GameLauncher();
-							launcher.WatchHighlightDemo(CurrentDemo, steamId);
+							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							launcher.WatchHighlightDemo(CurrentDemo, isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						},
 						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
 			}
@@ -451,7 +452,8 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							string steamId = player.SteamId.ToString();
 							GameLauncher launcher = new GameLauncher();
-							launcher.WatchLowlightDemo(CurrentDemo, steamId);
+							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							launcher.WatchLowlightDemo(CurrentDemo, isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						},
 						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
 			}

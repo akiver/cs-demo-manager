@@ -1,0 +1,7 @@
+﻿"{0}"
+	{{
+		factory "SkipAhead"
+		name "SkipAhead{0}"
+		starttick "{1}"
+		skiptotick "{2}"
+	}}

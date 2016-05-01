@@ -1,0 +1,7 @@
+﻿"{0}"
+	{{
+		factory "PlayCommands"
+		name "spec"
+		starttick "{1}"
+		commands "spec_player {2}"
+	}}

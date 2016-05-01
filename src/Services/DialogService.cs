@@ -120,5 +120,18 @@ namespace CSGO_Demos_Manager.Services
 
 			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
 		}
+
+		public async Task<MessageDialogResult> ShowHighLowWatchAsync()
+		{
+			MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;
+			MetroDialogSettings dialogOptions = new MetroDialogSettings
+			{
+				AffirmativeButtonText = "Player POV",
+				NegativeButtonText = "Enemy POV",
+				ColorScheme = MetroDialogColorScheme.Inverted
+			};
+
+			return await metroWindow.ShowMessageAsync("POV", "Which POV (camera perspective) do you want to see?", MessageDialogStyle.AffirmativeAndNegative, dialogOptions);
+		}
 	}
 }

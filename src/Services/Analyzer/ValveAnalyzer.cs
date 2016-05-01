@@ -270,7 +270,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					VictimX = e.Victim.Position.X,
 					VictimY = e.Victim.Position.Y
 				},
-				KillerEntityId = e.Killer?.EntityID ?? -1
+				KillerEntityId = e.Killer?.EntityID ?? -1,
+				KilledEntityId = e.Victim.EntityID
 			};
 
 			bool killerIsBot = false;

@@ -883,9 +883,14 @@
     <Content Include="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="resources\vdm.txt" />
     <Resource Include="resources\WindowsIcons-license.txt" />
     <Resource Include="resources\Entypo-license.txt" />
+    <Resource Include="resources\vdm\main.txt" />
+    <Resource Include="resources\vdm\skip_ahead.txt" />
+    <Resource Include="resources\vdm\spec_player.txt" />
+    <Resource Include="resources\vdm\stop_playback.txt" />
+    <Resource Include="resources\vdm\screen_fade_start.txt" />
+    <Resource Include="resources\vdm\text_message_start.txt" />
     <Content Include="zlib1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

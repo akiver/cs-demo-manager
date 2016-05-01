@@ -451,7 +451,22 @@
   <data name="de_tulip" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\images\maps\overview\de_tulip.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="vdm" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="skip_ahead" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="spec_player" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="stop_playback" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="screen_fade_start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="text_message_start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="main" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

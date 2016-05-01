@@ -1239,7 +1239,8 @@ namespace CSGO_Demos_Manager.ViewModel
 						try
 						{
 							GameLauncher launcher = new GameLauncher();
-							launcher.WatchHighlightDemo(demo);
+							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							launcher.WatchHighlightDemo(demo, isPlayerPerspective == MessageDialogResult.Affirmative);
 						}
 						catch (Exception e)
 						{
@@ -1277,7 +1278,8 @@ namespace CSGO_Demos_Manager.ViewModel
 						try
 						{
 							GameLauncher launcher = new GameLauncher();
-							launcher.WatchLowlightDemo(demo);
+							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							launcher.WatchLowlightDemo(demo, isPlayerPerspective == MessageDialogResult.Affirmative);
 						}
 						catch (Exception e)
 						{
