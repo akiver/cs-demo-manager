@@ -555,6 +555,8 @@ namespace CSGO_Demos_Manager.Models
 						return "CT surrender";
 					case RoundEndReason.TerroristsSurrender:
 						return "T surrender";
+					case RoundEndReason.TargetSaved:
+						return "Time over";
 					default:
 						return "Unknown";
 				}
