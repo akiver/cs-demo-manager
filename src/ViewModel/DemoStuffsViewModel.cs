@@ -36,6 +36,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private Stuff _selectedStuff;
 
+		private PlayerExtended _selectedPlayer;
+
 		private WriteableBitmap _overviewLayer;
 
 		private WriteableBitmap _stuffLayer;
@@ -53,6 +55,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand _windowLoadedCommand;
 
 		private RelayCommand<Stuff> _watchStuffCommand;
+
+		private RelayCommand _watchPlayerStuffCommand;
 
 		#endregion Properties
 
@@ -86,6 +90,12 @@ namespace CSGO_Demos_Manager.ViewModel
 					if (value != null) DrawStuff(value);
 				}
 			}
+		}
+
+		public PlayerExtended SelectedPlayer
+		{
+			get { return _selectedPlayer; }
+			set { Set(() => SelectedPlayer, ref _selectedPlayer, value); }
 		}
 
 		public List<ComboboxSelector> StuffSelectors
@@ -199,6 +209,25 @@ namespace CSGO_Demos_Manager.ViewModel
 							GameLauncher launcher = new GameLauncher();
 							launcher.WatchDemoAt(CurrentDemo, stuff.Tick, true, SelectedStuff.ThrowerEntityId);
 						}));
+			}
+		}
+
+		public RelayCommand WatchPlayerStuffCommand
+		{
+			get
+			{
+				return _watchPlayerStuffCommand
+					?? (_watchPlayerStuffCommand = new RelayCommand(
+						async () =>
+						{
+							if (AppSettings.SteamExePath() == null)
+							{
+								await _dialogService.ShowSteamNotFoundAsync();
+								return;
+							}
+							GameLauncher launcher = new GameLauncher();
+							launcher.WatchPlayerStuff(CurrentDemo, SelectedPlayer, CurrentStuffSelector.Id);
+						}, () => CurrentDemo != null && SelectedPlayer != null));
 			}
 		}
 

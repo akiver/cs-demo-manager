@@ -802,7 +802,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						{
 							X = e.Position.X,
 							Y = e.Position.Y
-						}
+						},
+						RoundNumber = CurrentRound.Number
 					};
 					PlayerExtended thrower = null;
 					
@@ -823,7 +824,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					{
 						molotovEvent.ThrowerSteamId = thrower.SteamId;
 						molotovEvent.ThrowerName = thrower.Name;
-						molotovEvent.RoundNumber = CurrentRound.Number;
 
 						if (AnalyzePlayersPosition)
 						{

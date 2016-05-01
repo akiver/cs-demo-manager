@@ -19,6 +19,8 @@
 		<mouse:MouseBindingExtended Gesture="XButton1"
 					Command="{Binding BackToDemoDetailsCommand}"
 					CommandParameter="{Binding CurrentDemo}" />
+		<KeyBinding Command="{Binding WatchPlayerStuffCommand}"
+					Gesture="CTRL+W" />
 	</UserControl.InputBindings>
 
 	<Grid>
@@ -75,6 +77,35 @@
 						</i:Interaction.Triggers>
 					</ComboBox>
 				</StackPanel>
+
+				<StackPanel Orientation="Vertical">
+					<TextBlock Text="Player" Style="{StaticResource SmallTitleStyle}"/>
+					<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
+							  SelectedItem="{Binding SelectedPlayer}"
+							  DisplayMemberPath ="Name"
+							  SelectedValuePath="Name"
+							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+							  Width="180"
+							  Height="25"
+							  Margin="5 0 0 0"/>
+				</StackPanel>
+				<Button Command="{Binding WatchPlayerStuffCommand}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Watch all stuffs from this player (CTRL+W)"
+						Width="160"
+						Height="30"
+						Margin="10 0 0 0">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_control_play}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Watch player stuffs"
+								   Margin="5 0 0 0"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
 
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center"
