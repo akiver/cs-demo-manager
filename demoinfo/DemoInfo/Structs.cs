@@ -372,7 +372,7 @@ namespace DemoInfo
 		/// <summary>
 		/// Target Successfully Bombed!
 		/// </summary>
-		TargetBombed = 0,        
+		TargetBombed = 1,
 		/// <summary>
 		/// The VIP has escaped.
 		/// </summary>

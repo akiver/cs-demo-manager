@@ -107,6 +107,7 @@ namespace DemoInfo.BitStreamImpl
 					 * as we overran the stream and wanna hit the throw above.
 					 */
 					Offset -= BitsInBuffer + 1;
+					LazyGlobalPosition += BitsInBuffer + 1;
 					*(uint*)PBuffer = 0; // safety
 					BitsInBuffer = 0;
 					continue;
