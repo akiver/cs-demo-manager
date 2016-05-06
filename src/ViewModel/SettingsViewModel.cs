@@ -204,6 +204,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private DateTime _dateStatsTo = Settings.Default.DateStatsTo;
 
+		private List<DemoStatus> _statusList;
+
 		/// <summary>
 		/// List of user's accounts saved
 		/// </summary>
@@ -1094,6 +1096,12 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public List<DemoStatus> StatusList
+		{
+			get { return _statusList; }
+			set { Set(() => StatusList, ref _statusList, value); }
+		}
+
 		#endregion
 
 		#region Commands
@@ -1523,6 +1531,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				List<Account> accounts = await _cacheService.GetAccountListAsync();
 				Accounts = new ObservableCollection<Account>(accounts);
 				SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
+				StatusList = new List<DemoStatus>(AppSettings.DefaultStatus);
 			});
 		}
 

@@ -21,6 +21,7 @@
 			<helpers:ValveDemoToVisibilityConverter x:Key="ValveDemoToVisibilityConverter" />
 			<helpers:RankToImageConverter x:Key="RankToImageConverter" />
 			<helpers:DoubleToStringConverter x:Key="DoubleToStringConverter" />
+			<helpers:StringToDemoStatusConverter x:Key="StringToDemoStatusConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -403,6 +404,22 @@
 
 								<TextBlock Text="Tickrate : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
 								<TextBlock Text="{Binding CurrentDemo.ServerTickrate}" Grid.Column="1" Style="{StaticResource ValueGeneralInfoDemo}"/>
+							</Grid>
+
+							<Grid>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"></ColumnDefinition>
+									<ColumnDefinition Width="Auto"></ColumnDefinition>
+								</Grid.ColumnDefinitions>
+								<TextBlock Grid.Column="0"
+										   Text="Status: "
+										   Style="{StaticResource LabelGeneralInfoDemo}"/>
+								<ComboBox Grid.Column="1"
+										  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+										  ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.StatusList}"
+										  SelectedItem="{Binding CurrentDemo.Status, Converter={StaticResource StringToDemoStatusConverter}}"
+										  DisplayMemberPath="Label"
+										  SelectedValuePath="Name"/>
 							</Grid>
 
 							<Grid>

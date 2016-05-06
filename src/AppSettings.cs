@@ -86,6 +86,25 @@ namespace CSGO_Demos_Manager
 			return GetFolderCachePath() + Path.DirectorySeparatorChar + MATCH_LIST_FILENAME;
 		}
 
+		public static List<DemoStatus> DefaultStatus = new List<DemoStatus>
+		{
+			new DemoStatus
+			{
+				Name = "none",
+				Label = "None"
+			},
+			new DemoStatus
+			{
+				Name = "watched",
+				Label = "Watched"
+			},
+			new DemoStatus
+			{
+				Name = "towatch",
+				Label = "To watch"
+			},
+		}; 
+
 		public static List<Rank> RankList = new List<Rank>
 		{
 			new Rank
