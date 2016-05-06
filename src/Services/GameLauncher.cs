@@ -320,7 +320,7 @@ namespace CSGO_Demos_Manager.Services
 					currentRoundNumber = e.RoundNumber;
 					generated += string.Format(Properties.Resources.text_message_start, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick, message);
 					generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick);
-					generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick + nextActionDelayCount, e.Tick - tickDelayCount);
+					generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.Tick - tickDelayCount);
 					generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.KilledEntityId);
 					lastTick = e.Tick;
 				}
