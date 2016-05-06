@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using GalaSoft.MvvmLight.Threading;
 using CSGO_Demos_Manager.Internals;
 
@@ -14,6 +15,14 @@ namespace CSGO_Demos_Manager
 #endif
 			CSGO_Demos_Manager.Properties.Settings.Default.SelectedPlayerSteamId = 0;
 			CSGO_Demos_Manager.Properties.Settings.Default.DateStatsTo = DateTime.Today;
+			if (CSGO_Demos_Manager.Properties.Settings.Default.DownloadFolder == string.Empty && AppSettings.GetCsgoPath() != null)
+			{
+				string demoFolder = AppSettings.GetCsgoPath() + Path.DirectorySeparatorChar + "replays";
+				if (Directory.Exists(demoFolder))
+				{
+					CSGO_Demos_Manager.Properties.Settings.Default.DownloadFolder = Path.GetFullPath(demoFolder);
+				}
+			}
 			CSGO_Demos_Manager.Properties.Settings.Default.Save();
 		}
 

@@ -872,5 +872,20 @@ namespace CSGO_Demos_Manager.Services.Design
 		{
 			return Task.FromResult(true);
 		}
+
+		public Task<Dictionary<string, string>> GetDemoListUrl()
+		{
+			return Task.FromResult(new Dictionary<string, string>());
+		}
+
+		public Task<bool> DownloadDemo(string url, string location)
+		{
+			return Task.FromResult(true);
+		}
+
+		public Task<bool> DecompressDemoArchive(string demoName)
+		{
+			return Task.FromResult(true);
+		}
 	}
 }

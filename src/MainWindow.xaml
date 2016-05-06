@@ -16,6 +16,7 @@
 		<ResourceDictionary>
 			<helpers:NullableValueConverter
 				x:Key="NullableValue"/>
+			<helpers:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
 		</ResourceDictionary>
 	</controls:MetroWindow.Resources>
 
@@ -32,6 +33,7 @@
 		<controls:WindowCommands>
 			<Button Command="{Binding SettingsFlyoutOpenedCommand}"
 					ToolTip="Display settings"
+					IsEnabled="{Binding Source={StaticResource Locator}, Path=Home.IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 					Content="Settings" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
@@ -403,6 +405,25 @@
 												Style="{StaticResource GeneralButtonStyle}"
 												Margin="10 5 0 0"
 												Content="Sync nicknames" />
+									</StackPanel>
+								</StackPanel>
+
+								<StackPanel Margin="10">
+									<TextBlock Text="Download"
+											   Style="{StaticResource TitleSettingsStyle}" />
+									<StackPanel Orientation="Horizontal">
+										<StackPanel>
+											<StackPanel Orientation="Horizontal">
+												<TextBlock Text="Folder : "
+														   Style="{StaticResource SubTitleSettingsStyle}"/>
+												<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.DownloadFolderPath}"
+														 IsEnabled="False" />
+												<Button Content="Browse"
+														Margin="10 0 0 0"
+														Style="{StaticResource GeneralButtonStyle}"
+														Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectDownloadFolderPathCommand}"/>
+											</StackPanel>
+										</StackPanel>
 									</StackPanel>
 								</StackPanel>
 

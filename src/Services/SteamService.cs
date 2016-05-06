@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
@@ -162,6 +163,27 @@ namespace CSGO_Demos_Manager.Services
 
 				return playerSummaryList;
 			}
+		}
+
+		public int GenerateMatchListFile()
+		{
+			Process[] currentProcess = Process.GetProcessesByName("csgo");
+			if (currentProcess.Length > 0) currentProcess[0].Kill();
+
+			string matchListDataFilePath = "\"" + AppSettings.GetMatchListDataFilePath() + "\"";
+			Process boiler = new Process
+			{
+				StartInfo =
+				{
+					FileName = "boiler.exe",
+					Arguments = matchListDataFilePath,
+					UseShellExecute = false,
+					CreateNoWindow = true
+				}
+			};
+			boiler.Start();
+			boiler.WaitForExit();
+			return boiler.ExitCode;
 		}
 	}
 }

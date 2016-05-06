@@ -119,5 +119,10 @@ namespace CSGO_Demos_Manager.Services.Design
 				}
 			});
 		}
+
+		public int GenerateMatchListFile()
+		{
+			return 1;
+		}
 	}
 }

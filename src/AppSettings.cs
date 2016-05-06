@@ -15,6 +15,7 @@ namespace CSGO_Demos_Manager
 		public static Version APP_VERSION = new Version("2.5.0");
 		// Don't forget to put your Steam API key into the file "steam_api_key.txt"
 		public static string STEAM_API_KEY = Properties.Resources.steam_api_key;
+		private const string MATCH_LIST_FILENAME = "matches.dat";
 
 		/// <summary>
 		/// Return the Steam exe path from the registry
@@ -40,7 +41,9 @@ namespace CSGO_Demos_Manager
 		/// <returns></returns>
 		public static string GetCsgoPath()
 		{
-			return SteamPath() + "/SteamApps/common/Counter-Strike Global Offensive/csgo";
+			string steamPath = SteamPath();
+			if (steamPath == null) return null;
+			return steamPath + "/SteamApps/common/Counter-Strike Global Offensive/csgo";
 		}
 
 		/// <summary>
@@ -66,12 +69,21 @@ namespace CSGO_Demos_Manager
 		/// </summary>
 		/// <returns></returns>
 		[DllImport("wininet.dll")]
-		private extern static bool InternetGetConnectedState(out int description, int reservedValue);
+		private static extern bool InternetGetConnectedState(out int description, int reservedValue);
 
 		public static bool IsInternetConnectionAvailable()
 		{
 			int description;
 			return InternetGetConnectedState(out description, 0);
+		}
+
+		/// <summary>
+		/// Return the file location that boiler.exe has created
+		/// </summary>
+		/// <returns></returns>
+		public static string GetMatchListDataFilePath()
+		{
+			return GetFolderCachePath() + Path.DirectorySeparatorChar + MATCH_LIST_FILENAME;
 		}
 
 		public static List<Rank> RankList = new List<Rank>

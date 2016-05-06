@@ -148,6 +148,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _stopAnalyzeCommand;
 
+		private RelayCommand _downloadDemosCommand;
+
 		private int _newBannedPlayerCount;
 
 		private ObservableCollection<string> _folders;
@@ -1425,6 +1427,83 @@ namespace CSGO_Demos_Manager.ViewModel
 
 						IsBusy = false;
 						HasNotification = false;
+					},
+					() => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command to download last MM demos for the current Steam account
+		/// </summary>
+		public RelayCommand DownloadDemosCommand
+		{
+			get
+			{
+				return _downloadDemosCommand
+					?? (_downloadDemosCommand = new RelayCommand(
+					async () =>
+					{
+						if (!AppSettings.IsInternetConnectionAvailable())
+						{
+							await _dialogService.ShowNoInternetConnectionAsync();
+							return;
+						}
+						if (!Directory.Exists(Properties.Settings.Default.DownloadFolder))
+						{
+							await _dialogService.ShowErrorAsync("You have to select the folder where demos will be saved from settings.", MessageDialogStyle.Affirmative);
+							return;
+						}
+
+						IsBusy = true;
+						HasNotification = true;
+						HasRing = true;
+						NotificationMessage = "Reteiving last matches information...";
+						int result = await Task.Factory.StartNew(() => _steamService.GenerateMatchListFile());
+						switch (result)
+						{
+							case 1:
+								await _dialogService.ShowErrorAsync("boiler.exe not found.", MessageDialogStyle.Affirmative);
+								break;
+							case -2:
+								await _dialogService.ShowErrorAsync("You have to restart Steam.", MessageDialogStyle.Affirmative);
+								break;
+							case -3:
+							case -4:
+								await _dialogService.ShowErrorAsync("Steam is not running or you are not connected to a Steam account.", MessageDialogStyle.Affirmative);
+								break;
+							case -5:
+							case -6:
+							case -7:
+								await _dialogService.ShowErrorAsync("An error occured while retrieving matches information. (" + result + ")", MessageDialogStyle.Affirmative);
+								break;
+							case 0:
+								Dictionary<string, string> demoDownloadList = await _demosService.GetDemoListUrl();
+								if (demoDownloadList.Count > 0)
+								{
+									int demoDownloadedCount = 0;
+									for(int i = 1; i < demoDownloadList.Count + 1; i++)
+									{
+										string demoName = demoDownloadList.ElementAt(i - 1).Key;
+										string demoUrl = demoDownloadList.ElementAt(i - 1).Value;
+										NotificationMessage = "Downloading demo " + i + " / " + demoDownloadList.Count + " ...";
+										await _demosService.DownloadDemo(demoUrl, demoName);
+										NotificationMessage = "Extracting demo " + i + " / " + demoDownloadList.Count + " ...";
+										await _demosService.DecompressDemoArchive(demoName);
+										demoDownloadedCount++;
+									}
+									await _dialogService.ShowMessageAsync(demoDownloadedCount + " demo(s) has been downloaded.", MessageDialogStyle.Affirmative);
+									await LoadDemosHeader();
+								}
+								else
+								{
+									await _dialogService.ShowMessageAsync("No newer demo available.", MessageDialogStyle.Affirmative);
+								}
+								break;
+						}
+						IsBusy = false;
+						HasNotification = false;
+						HasRing = false;
+						CommandManager.InvalidateRequerySuggested();
 					},
 					() => !IsBusy));
 			}

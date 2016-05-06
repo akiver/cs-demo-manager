@@ -19,5 +19,11 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// <param name="users"></param>
 		/// <returns></returns>
 		Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users);
+
+		/// <summary>
+		/// Call boiler.exe which create a file containing the CMsgGCCStrike15_v2_MatchList message data
+		/// </summary>
+		/// <returns></returns>
+		int GenerateMatchListFile();
 	}
 }

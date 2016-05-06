@@ -1101,5 +1101,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowTradeDeathColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DownloadFolder {
+            get {
+                return ((string)(this["DownloadFolder"]));
+            }
+            set {
+                this["DownloadFolder"] = value;
+            }
+        }
     }
 }

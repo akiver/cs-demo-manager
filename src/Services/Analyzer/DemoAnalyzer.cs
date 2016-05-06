@@ -158,7 +158,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				{
 					try
 					{
-						// TODO use the FastNetMessages from DemoInfo to get rid of protobuf-net
 						CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
 						DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
 						demo.Date = unixTime.AddSeconds(infoMsg.matchtime);

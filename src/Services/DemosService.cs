@@ -5,7 +5,10 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading;
+using CSGO_Demos_Manager.Internals;
+using CSGO_Demos_Manager.messages.Protobuf;
 using CSGO_Demos_Manager.Models.Charts;
 using CSGO_Demos_Manager.Models.Events;
 using CSGO_Demos_Manager.Models.Source;
@@ -14,8 +17,10 @@ using CSGO_Demos_Manager.Properties;
 using CSGO_Demos_Manager.Services.Analyzer;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Services.Serialization;
+using ICSharpCode.SharpZipLib.BZip2;
 using MoreLinq;
 using Newtonsoft.Json;
+using ProtoBuf;
 
 namespace CSGO_Demos_Manager.Services
 {
@@ -949,6 +954,177 @@ namespace CSGO_Demos_Manager.Services
 			File.Delete(demo.Path);
 
 			return true;
+		}
+
+		public async Task<bool> DownloadDemo(string url, string demoName)
+		{
+			using (WebClient webClient = new WebClient())
+			{
+				try
+				{
+					string location = Settings.Default.DownloadFolder + Path.DirectorySeparatorChar + demoName + ".bz2";
+					Uri uri = new Uri(url);
+					await Task.Factory.StartNew(() => webClient.DownloadFile(uri, location));
+					return true;
+				}
+				catch (Exception e)
+				{
+					Logger.Instance.Log(e);
+					return false;
+				}
+			}
+		}
+
+		public async Task<bool> DecompressDemoArchive(string demoName)
+		{
+			string archivePath = Settings.Default.DownloadFolder + Path.DirectorySeparatorChar + demoName + ".bz2";
+			string destination = Settings.Default.DownloadFolder + Path.DirectorySeparatorChar + demoName + ".dem";
+			if (!File.Exists(archivePath)) return false;
+			await Task.Factory.StartNew(() => BZip2.Decompress(File.OpenRead(archivePath), File.Create(destination), true));
+			File.Delete(archivePath);
+			return true;
+		}
+
+		public async Task<Dictionary<string, string>> GetDemoListUrl()
+		{
+			Dictionary<string, string> demoUrlList = new Dictionary<string, string>();
+
+			string filePath = AppSettings.GetMatchListDataFilePath();
+			if (File.Exists(filePath))
+			{
+				using (FileStream file = File.OpenRead(filePath))
+				{
+					try
+					{
+						CMsgGCCStrike15_v2_MatchList matchList = Serializer.Deserialize<CMsgGCCStrike15_v2_MatchList>(file);
+						foreach (CDataGCCStrike15_v2_MatchInfo matchInfo in matchList.matches)
+						{
+							// old definition
+							if (matchInfo.roundstats_legacy != null)
+							{
+								CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats = matchInfo.roundstats_legacy;
+								await ProcessRoundStats(matchInfo, roundStats, demoUrlList);
+							}
+							else
+							{
+								// new definition
+								List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats> roundStatsList = matchInfo.roundstatsall;
+								foreach (CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats in roundStatsList)
+								{
+									await ProcessRoundStats(matchInfo, roundStats, demoUrlList);
+								}
+							}
+						}
+					}
+					catch (Exception e)
+					{
+						Logger.Instance.Log(e);
+					}
+				}
+			}
+
+			return demoUrlList;
+		}
+
+		/// <summary>
+		/// Check if the round stats contains useful information and in this case do the work
+		/// 1. Check if the demo archive is still available
+		/// 2. Create the .info file
+		/// 3. Add the demo to the download list
+		/// </summary>
+		/// <param name="matchInfo"></param>
+		/// <param name="roundStats"></param>
+		/// <param name="demoUrlList"></param>
+		/// <returns></returns>
+		private static async Task ProcessRoundStats(CDataGCCStrike15_v2_MatchInfo matchInfo, CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats, Dictionary<string, string> demoUrlList)
+		{
+			string demoName = GetDemoName(matchInfo, roundStats);
+			if (roundStats.reservationid != 0 && roundStats.map != null)
+			{
+				if (await IsDownloadRequired(demoName, roundStats.map))
+				{
+					if (SerializeMatch(matchInfo, demoName))
+					{
+						demoUrlList.Add(demoName, roundStats.map);
+					}
+				}
+			}
+		}
+
+		/// <summary>
+		/// Create the .info file
+		/// </summary>
+		/// <param name="matchInfo"></param>
+		/// <param name="demoName"></param>
+		/// <returns></returns>
+		private static bool SerializeMatch(CDataGCCStrike15_v2_MatchInfo matchInfo, string demoName)
+		{
+			string infoFilePath = Settings.Default.DownloadFolder + Path.DirectorySeparatorChar + demoName + ".info";
+			try
+			{
+				using (FileStream fs = File.Create(infoFilePath))
+				{
+					Serializer.Serialize(fs, matchInfo);
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				return false;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Return the demo name
+		/// </summary>
+		/// <param name="matchInfo"></param>
+		/// <param name="roundStats"></param>
+		/// <returns></returns>
+		private static string GetDemoName(CDataGCCStrike15_v2_MatchInfo matchInfo,
+			CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats)
+		{
+			return "match730_" + string.Format("{0,21:D21}", roundStats.reservationid) + "_"
+				+ string.Format("{0,10:D10}", matchInfo.watchablematchinfo.tv_port) + "_"
+				+ matchInfo.watchablematchinfo.server_ip;
+		}
+
+		/// <summary>
+		/// Check if:
+		/// - The demo archive is still available
+		/// - The .dem and .info files already exists
+		/// </summary>
+		/// <param name="demoName"></param>
+		/// <returns></returns>
+		private static async Task<bool> IsDownloadRequired(string demoName, string demoArchiveUrl)
+		{
+			bool result = await CheckIfArchiveIsAvailable(demoArchiveUrl);
+			string[] fileList = new DirectoryInfo(Settings.Default.DownloadFolder).GetFiles().Select(o => o.Name).ToArray();
+			if (fileList.Contains(demoName + ".dem") && fileList.Contains(demoName + ".info")) result = false;
+
+			return result;
+		}
+
+		/// <summary>
+		/// Check if the URL doesn't return a 404
+		/// </summary>
+		/// <param name="url"></param>
+		/// <returns></returns>
+		private static async Task<bool> CheckIfArchiveIsAvailable(string url)
+		{
+			try
+			{
+				HttpWebRequest request = WebRequest.Create(url) as HttpWebRequest;
+				request.Method = "HEAD";
+				HttpWebResponse response = await request.GetResponseAsync() as HttpWebResponse;
+				response.Close();
+				return response.StatusCode == HttpStatusCode.OK;
+			}
+			catch
+			{
+				return false;
+			}
 		}
 	}
 }

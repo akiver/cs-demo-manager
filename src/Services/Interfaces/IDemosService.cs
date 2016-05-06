@@ -107,5 +107,27 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// <param name="demo"></param>
 		/// <returns></returns>
 		Task<bool> DeleteDemo(Demo demo);
+
+		/// <summary>
+		/// Return the list of demos that need to be downloaded
+		/// demo name => demo URL 
+		/// </summary>
+		/// <returns></returns>
+		Task<Dictionary<string, string>> GetDemoListUrl();
+
+		/// <summary>
+		/// Download the demo archive
+		/// </summary>
+		/// <param name="url">Url of the demo archive</param>
+		/// <param name="location">Location where the archive will be saved</param>
+		/// <returns></returns>
+		Task<bool> DownloadDemo(string url, string location);
+
+		/// <summary>
+		/// Decompress the demo archive
+		/// </summary>
+		/// <param name="demoName"></param>
+		/// <returns></returns>
+		Task<bool> DecompressDemoArchive(string demoName);
 	}
 }

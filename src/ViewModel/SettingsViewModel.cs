@@ -64,6 +64,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _setAsWatchAccountCommand;
 
+		private RelayCommand _selectDownloadFolderPath;
+
 		private readonly ICacheService _cacheService;
 
 		private readonly IDemosService _demosService;
@@ -191,6 +193,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _showTeamTroubleColumn = Settings.Default.ShowTeamTroubleColumn;
 
 		private string _csgoExePath = Settings.Default.CsgoExePath;
+
+		private string _downloadFolderPath = Settings.Default.DownloadFolder;
 
 		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
 
@@ -1024,6 +1028,17 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public string DownloadFolderPath
+		{
+			get { return _downloadFolderPath; }
+			set
+			{
+				Settings.Default.DownloadFolder = value;
+				Settings.Default.Save();
+				Set(() => DownloadFolderPath, ref _downloadFolderPath, value);
+			}
+		}
+
 		public bool EnableMoviemakerMode
 		{
 			get { return _enableMoviemakerMode; }
@@ -1468,6 +1483,29 @@ namespace CSGO_Demos_Manager.ViewModel
 							NotificationMessage = "Settings";
 
 						}, () => Accounts.Any()));
+			}
+		}
+
+		/// <summary>
+		/// Command to select the folder where demos will be saved
+		/// </summary>
+		public RelayCommand SelectDownloadFolderPathCommand
+		{
+			get
+			{
+				return _selectDownloadFolderPath
+					?? (_selectDownloadFolderPath = new RelayCommand(
+					() =>
+					{
+						FolderBrowserDialog folderDialog = new FolderBrowserDialog
+						{
+							SelectedPath = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System))
+						};
+
+						DialogResult result = folderDialog.ShowDialog();
+						if (result != DialogResult.OK) return;
+						DownloadFolderPath = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
+					}));
 			}
 		}
 
