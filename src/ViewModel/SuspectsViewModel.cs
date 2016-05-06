@@ -46,7 +46,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Suspect> _goToSuspectProfileCommand;
 
-		private RelayCommand<Suspect> _displayDemosCommand;
+		private RelayCommand _displayDemosCommand;
 
 		private RelayCommand _refreshSuspectListCommand;
 
@@ -342,19 +342,23 @@ namespace CSGO_Demos_Manager.ViewModel
 		}
 
 		/// <summary>
-		/// Command to display demos within suspect has played
+		/// Command to display demos within suspects has played
 		/// </summary>
-		public RelayCommand<Suspect> DisplayDemosCommand
+		public RelayCommand DisplayDemosCommand
 		{
 			get
 			{
 				return _displayDemosCommand
-					?? (_displayDemosCommand = new RelayCommand<Suspect>(
-						async suspect =>
+					?? (_displayDemosCommand = new RelayCommand(
+						async () =>
 						{
 							IsRefreshing = true;
 							NotificationMessage = "Searching...";
-							List<Demo> demos = await _demosService.GetDemosPlayer(suspect.SteamId);
+							List<Demo> demos = new List<Demo>();
+							foreach (Suspect suspect in SelectedSuspects)
+							{
+								demos = demos.Concat(await _demosService.GetDemosPlayer(suspect.SteamId)).ToList();
+							}
 							IsRefreshing = false;
 							if (!demos.Any())
 							{
@@ -377,7 +381,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							HomeView homeView = new HomeView();
 							mainViewModel.CurrentPage.ShowPage(homeView);
 						},
-						suspect => SelectedSuspect != null));
+						() => SelectedSuspects.Any()));
 			}
 		}
 

@@ -133,18 +133,24 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="5" Style="{StaticResource GeneralButtonStyle}" Width="150" Height="30" Margin="5"
-						ToolTip="Show demos that contains the suspect (CTRL+F)"
-						Command="{Binding DisplayDemosCommand}"
-						CommandParameter="{Binding SelectedSuspect}"
-						IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+			<Button Grid.Column="5"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="160"
+					Height="30"
+					Margin="5"
+					ToolTip="Show demos that contains selected suspect(s) (CTRL+F)"
+					Command="{Binding DisplayDemosCommand}"
+					IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
 					<Rectangle Width="15" Height="15">
 						<Rectangle.Fill>
 							<VisualBrush Visual="{StaticResource appbar_magnify}" />
 						</Rectangle.Fill>
 					</Rectangle>
-					<TextBlock Text="Show suspect demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					<TextBlock Text="Show suspect(s) demos"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
 
