@@ -27,6 +27,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		private bool _isFinalRound = false;
 
 		/// <summary>
+		/// Used to avoid additional score update when a match is over (detected by eBot text)
+		/// </summary>
+		private bool _isMatchEnded = false;
+
+		/// <summary>
 		/// Used to make some specific check on Faceit demos and avoid some on eBot demos
 		/// </summary>
 		private bool _isFaceit = false;
@@ -217,6 +222,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (matchEnd.Success)
 			{
 				IsMatchStarted = false;
+				_isMatchEnded = true;
 				return;
 			}
 
@@ -285,7 +291,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
-			if (_playerTeamCount > 8) IsMatchStarted = true;
+			if (_playerTeamCount > 8 && !_isMatchEnded) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
 			_isRoundOffiallyEndedOccured = false;
 
