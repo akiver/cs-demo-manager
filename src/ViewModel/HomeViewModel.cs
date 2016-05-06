@@ -1557,7 +1557,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				
 				await LoadDemosHeader();
 				await RefreshLastRankAccount();
-				if (!AppSettings.IsInternetConnectionAvailable()) await RefreshBannedPlayerCount();
+				if (AppSettings.IsInternetConnectionAvailable()) await RefreshBannedPlayerCount();
 
 				Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
 				Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
