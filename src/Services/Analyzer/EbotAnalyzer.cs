@@ -315,7 +315,9 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 
 			// Reset until both scores > 0
-			if (Parser.CTScore == 0 && Parser.TScore == 0)
+			// Sometimes parser scores are reseted at the end of the match, check the actual demo scores too
+			if (Parser.CTScore == 0 && Parser.TScore == 0
+				&& Demo.ScoreTeam1 < 16 && Demo.ScoreTeam2 < 16)
 			{
 				Demo.ResetStats(false);
 				RoundCount = 0;
