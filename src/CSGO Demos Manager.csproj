@@ -173,6 +173,7 @@
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Converters\StringToDemoStatusConverter.cs" />
+    <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />

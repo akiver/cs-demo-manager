@@ -70,6 +70,9 @@ namespace CSGO_Demos_Manager.Services
 											ThrowerName = weaponFired[i].ShooterName,
 											ThrowerEntityId = weaponFired[i].ShooterEntityId
 										};
+										List<PlayerExtended> flashedPlayerList = round.FlashbangsExploded[i].FlashedPlayerSteamIdList.Select(
+											steamId => demo.Players.First(p => p.SteamId == steamId)).ToList();
+										s.FlashedPlayers = flashedPlayerList;
 										stuffs.Add(s);
 									}
 								}

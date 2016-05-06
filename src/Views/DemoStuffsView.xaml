@@ -7,11 +7,17 @@
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:mouse="clr-namespace:CSGO_Demos_Manager.Internals.Mouse"
+			 xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
 			 mc:Ignorable="d" 
 			 Background="{StaticResource LightGreyBrush}"
 			 DataContext="{Binding DemoStuffs, Source={StaticResource Locator}}"
 			 d:DesignHeight="720 " d:DesignWidth="1280">
 
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:FlashbangStuffTypeToVisibilityConverter x:Key="FlashbangStuffTypeToVisibilityConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
@@ -127,6 +133,7 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<Grid Grid.Column="0">
@@ -169,6 +176,31 @@
 					   Style="{StaticResource OverviewLayerStyle}"/>
 				<Image Source="{Binding StuffLayer}"
 					   Style="{StaticResource OverviewLayerStyle}"/>
+			</Grid>
+
+			<Grid Grid.Column="2"
+				  Visibility="{Binding CurrentStuffSelector.Id, Converter={StaticResource FlashbangStuffTypeToVisibilityConverter}}">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="Auto"/>
+				</Grid.RowDefinitions>
+				
+				<TextBlock Grid.Row="0"
+						   Text="Flashed players"
+						   Foreground="{StaticResource LightGreenBrush}" />
+				<DataGrid Grid.Row="1"
+						  ItemsSource="{Binding SelectedStuff.FlashedPlayers}"
+						  CellStyle="{StaticResource DataGridCellStyle}"
+						  RowStyle="{StaticResource DataGridRowStyle}"
+						  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+						  Style="{StaticResource DataGridStyle}">
+					<DataGrid.Columns>
+						<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+											Width="Auto"
+											Header="Name"
+											Binding="{Binding Name}" />
+					</DataGrid.Columns>
+				</DataGrid>
 			</Grid>
 		</Grid>
 	</Grid>

@@ -1,4 +1,6 @@
-﻿namespace CSGO_Demos_Manager.Models
+﻿using System.Collections.Generic;
+
+namespace CSGO_Demos_Manager.Models
 {
 	public enum StuffType
 	{
@@ -30,5 +32,7 @@
 		public float EndX { get; set; }
 
 		public float EndY { get; set; }
+
+		public List<PlayerExtended> FlashedPlayers { get; set; }
 	}
 }
