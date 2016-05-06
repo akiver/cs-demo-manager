@@ -19,19 +19,22 @@ Screenshots and video are available at [http://csgo-demos-manager.com](http://cs
 - Display damages by hitbox
 - Watch stats on graphs
 - [HLAE](https://github.com/ripieces/advancedfx/wiki/Half-Life-Advanced-Effects) integration
+- Download your last matchmaking demos
 
 ## Dependencies ##
 
 * Microsoft Visual Studio 2015 (C# 6 is required)
 * [MVVM Light](https://mvvmlight.codeplex.com/)
 * [Mahapps](https://github.com/MahApps/MahApps.Metro)
-* [DemoInfo](https://github.com/EHVAG/demoinfo) (This [branch](https://github.com/akiver/demoinfo/tree/csgodm) is used)
+* [DemoInfo](https://github.com/EHVAG/demoinfo)
 * [Json.net](https://github.com/JamesNK/Newtonsoft.Json)
 * [Steam API](http://steamcommunity.com/dev) (You need a Steam API key to be able to use the "suspects" feature)
 * [NPOI](https://github.com/tonyqus/npoi)
 * [WriteableBitmapEx](http://writeablebitmapex.codeplex.com/)
 * [Telerik](http://www.telerik.com/products/wpf/overview.aspx)
 * [Protobuf-net](https://github.com/mgravell/protobuf-net)
+* [boiler-writter](https://github.com/akiver/boiler-writter)
+* [SharpZipLib](http://icsharpcode.github.io/SharpZipLib/)
 
 ## Build instructructions ##
 
@@ -45,3 +48,11 @@ Screenshots and video are available at [http://csgo-demos-manager.com](http://cs
 * The [DemoInfo](https://github.com/EHVAG/demoinfo) pre-release isn't properly signed. You have to download [snremove](http://www.nirsoft.net/dot_net_tools/strong_name_remove.html) and copy / paste it into the folder "bin/Debug" and "bin/Release" of demoinfo AND CSGO Demos Manager.
 * Select the x86 platform configuration
 * Build and start
+
+## Contribute
+
+You are free to contribuate to the project. Please follow the [AngularJS commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+
+## License
+
+[GPL v2](https://github.com/akiver/CSGO-Demos-Manager/blob/master/LICENSE)
