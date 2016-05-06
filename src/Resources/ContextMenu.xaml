@@ -140,6 +140,9 @@
 		<MenuItem Header="Details"
 				  Command="{Binding Details.ShowRoundCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding Details.SelectedRound.Number, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch"
+				  Command="{Binding Details.WatchRoundCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedRound, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 </ResourceDictionary>
