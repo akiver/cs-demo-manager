@@ -128,7 +128,7 @@ namespace CSGO_Demos_Manager.Services
 			{
 				AffirmativeButtonText = "Player POV",
 				NegativeButtonText = "Enemy POV",
-				ColorScheme = MetroDialogColorScheme.Inverted
+				ColorScheme = MetroDialogColorScheme.Accented
 			};
 
 			return await metroWindow.ShowMessageAsync("POV", "Which POV (camera perspective) do you want to see?", MessageDialogStyle.AffirmativeAndNegative, dialogOptions);
