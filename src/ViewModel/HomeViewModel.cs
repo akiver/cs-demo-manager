@@ -1464,6 +1464,9 @@ namespace CSGO_Demos_Manager.ViewModel
 							case 1:
 								await _dialogService.ShowErrorAsync("boiler.exe not found.", MessageDialogStyle.Affirmative);
 								break;
+							case 2:
+								await _dialogService.ShowErrorAsync("boiler.exe is incorrect.", MessageDialogStyle.Affirmative);
+								break;
 							case -2:
 								await _dialogService.ShowErrorAsync("You have to restart Steam.", MessageDialogStyle.Affirmative);
 								break;

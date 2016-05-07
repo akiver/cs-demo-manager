@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net.Http;
+using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
 using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Steam;
@@ -17,6 +20,8 @@ namespace CSGO_Demos_Manager.Services
 		private const string PLAYERS_SUMMARIES_URL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v1/?key={0}&steamids={1}";
 		private const string STEAM_COMMUNITY_URL_PATTERN = "http://steamcommunity.com/profiles/(?<steamID>\\d*)/?";
 		private readonly Regex _regexSteamCommunityUrl = new Regex(STEAM_COMMUNITY_URL_PATTERN);
+		private const string BOILER_EXE_NAME = "boiler.exe";
+		private const string BOILER_SHA1 = "9F4093CBF678A8D40D57C7AEF361A141DEC509BF";
 
 		/// <summary>
 		/// Return suspect list that have been banned
@@ -167,6 +172,9 @@ namespace CSGO_Demos_Manager.Services
 
 		public int GenerateMatchListFile()
 		{
+			string hash = GetSha1HashFile(BOILER_EXE_NAME);
+			if (!hash.Equals(BOILER_SHA1)) return 2;
+
 			Process[] currentProcess = Process.GetProcessesByName("csgo");
 			if (currentProcess.Length > 0) currentProcess[0].Kill();
 
@@ -175,7 +183,7 @@ namespace CSGO_Demos_Manager.Services
 			{
 				StartInfo =
 				{
-					FileName = "boiler.exe",
+					FileName = BOILER_EXE_NAME,
 					Arguments = matchListDataFilePath,
 					UseShellExecute = false,
 					CreateNoWindow = true
@@ -184,6 +192,16 @@ namespace CSGO_Demos_Manager.Services
 			boiler.Start();
 			boiler.WaitForExit();
 			return boiler.ExitCode;
+		}
+
+		private static string GetSha1HashFile(string filePath)
+		{
+			using (FileStream stream = File.OpenRead(filePath))
+			{
+				SHA1Managed sha = new SHA1Managed();
+				byte[] hash = sha.ComputeHash(stream);
+				return BitConverter.ToString(hash).Replace("-", string.Empty);
+			}
 		}
 	}
 }
