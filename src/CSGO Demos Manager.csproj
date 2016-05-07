@@ -404,9 +404,6 @@
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\levelLit.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smoke.vtf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -422,9 +419,11 @@
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vtf" />
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods_impactdust.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_fire.vmt" />
     <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_smokegrenade.vmt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
