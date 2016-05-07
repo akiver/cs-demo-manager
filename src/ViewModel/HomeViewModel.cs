@@ -1457,7 +1457,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						IsBusy = true;
 						HasNotification = true;
 						HasRing = true;
-						NotificationMessage = "Reteiving last matches information...";
+						NotificationMessage = "Retrieving last matches information...";
 						int result = await Task.Factory.StartNew(() => _steamService.GenerateMatchListFile());
 						switch (result)
 						{
