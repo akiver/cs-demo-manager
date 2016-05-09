@@ -57,6 +57,7 @@ namespace CSGO_Demos_Manager.Services
 		{
 			_arguments.Add("+playdemo");
 			_arguments.Add(demo.Path);
+			DeleteVdmFile(demo);
 			StartGame();
 		}
 
@@ -69,6 +70,12 @@ namespace CSGO_Demos_Manager.Services
 			_arguments.Add(!Properties.Settings.Default.IsFullscreen ? "-windowed" : "-fullscreen");
 		}
 
+		private static void DeleteVdmFile(Demo demo)
+		{
+			string vdmPath = GetVdmFilePath(demo);
+			if (File.Exists(demo.Path)) File.Delete(vdmPath);
+		}
+
 		internal void WatchHighlightDemo(Demo demo, bool fromPlayerPerspective, string steamId = null)
 		{
 			_arguments.Add("+playdemo");
@@ -76,6 +83,7 @@ namespace CSGO_Demos_Manager.Services
 			if (fromPlayerPerspective)
 			{
 				_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
+				DeleteVdmFile(demo);
 			}
 			else
 			{
@@ -96,6 +104,7 @@ namespace CSGO_Demos_Manager.Services
 			{
 				_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
 				_arguments.Add("lowlights");
+				DeleteVdmFile(demo);
 			}
 			StartGame();
 		}
@@ -107,6 +116,7 @@ namespace CSGO_Demos_Manager.Services
 			if (delay && tick > tickDelayCount) tick -= tickDelayCount;
 			_arguments.Add(demo.Path + "@" + tick);
 			if (playerEntityId != -1) GenerateSpecPlayerVdm(demo, tick, playerEntityId);
+			DeleteVdmFile(demo);
 			StartGame();
 		}
 
@@ -354,7 +364,7 @@ namespace CSGO_Demos_Manager.Services
 
 		private static string GetVdmFilePath(Demo demo)
 		{
-			return demo.Path.Remove(demo.Path.Length - 3) + "vdm";
+			return demo.Path.Substring(0, demo.Path.Length - 3) + "vdm";
 		}
 	}
 }
