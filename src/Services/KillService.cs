@@ -29,7 +29,7 @@ namespace CSGO_Demos_Manager.Services
 
 					foreach (KillEvent e in Demo.Kills)
 					{
-						if (player.SteamId == e.KillerSteamId)
+						if (player.SteamId == e.KillerSteamId && e.KilledSteamId != 0)
 						{
 							if (!playerKillStats.ContainsKey(e.KilledSteamId))
 								playerKillStats.Add(e.KilledSteamId, 0);
