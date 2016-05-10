@@ -1113,5 +1113,29 @@ namespace CSGO_Demos_Manager.Properties {
                 this["DownloadFolder"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowEseaRwsColumn {
+            get {
+                return ((bool)(this["ShowEseaRwsColumn"]));
+            }
+            set {
+                this["ShowEseaRwsColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowRoundPlayedColumn {
+            get {
+                return ((bool)(this["ShowRoundPlayedColumn"]));
+            }
+            set {
+                this["ShowRoundPlayedColumn"] = value;
+            }
+        }
     }
 }

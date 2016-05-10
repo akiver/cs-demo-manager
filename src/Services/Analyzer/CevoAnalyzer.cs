@@ -87,6 +87,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.RoundFinal += HandleRoundFinal;
 			Parser.PlayerHurt += HandlePlayerHurted;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
+			Parser.PlayerTeam += HandlePlayerTeam;
 		}
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)

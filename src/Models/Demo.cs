@@ -928,6 +928,22 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
+		[JsonIgnore]
+		public decimal SelectedAccountEseaRws
+		{
+			get
+			{
+				if (Settings.Default.SelectedStatsAccountSteamID != 0)
+				{
+					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
+					if (player == null) return 0;
+					return player.EseaRws;
+				}
+
+				return 0;
+			}
+		}
+
 		/// <summary>
 		/// Contains all PositionPoint for overview generation
 		/// </summary>

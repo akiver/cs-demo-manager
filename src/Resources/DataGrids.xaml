@@ -378,7 +378,11 @@
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="RatingHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-		<Setter Property="ToolTipService.ToolTip" Value="Rating" />
+		<Setter Property="ToolTipService.ToolTip" Value="HLTV Rating" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="EseaRwsHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="ESEA RWS" />
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="AssistHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
@@ -463,6 +467,10 @@
 
 	<Style TargetType="DataGridColumnHeader" x:Key="CommentHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Demo's comment" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="RoundPlayedCountHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Round played" />
 	</Style>
 
 

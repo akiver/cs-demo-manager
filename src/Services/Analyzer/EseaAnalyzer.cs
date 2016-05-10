@@ -56,6 +56,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 			Parser.PlayerHurt += HandlePlayerHurted;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
+			Parser.PlayerTeam += HandlePlayerTeam;
 		}
 
 		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
@@ -160,20 +161,17 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				IsMatchStarted = true;
 			}
 
-			if (IsMatchStarted && CurrentRound.Number == 1)
-			{
-				InitPlayers();
-			}
+			if (CurrentRound.Number == 1) InitPlayers();
 		}
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
 			// Match is really ongoing after a LO3
 			if (!IsOvertime && _matchStartedCount > 1) IsMatchStarted = true;
+			if (Parser.CTScore == 0 && Parser.TScore == 0 && CurrentRound.Number > 15) IsMatchStarted = false;
 			if (!IsMatchStarted) return;
 
 			IsFreezetime = true;
-
 			CreateNewRound();
 		}
 
@@ -238,32 +236,56 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		private void InitPlayers()
 		{
-			// Add all players to our ObservableCollection of PlayerExtended and teams
+			// Add all players to our ObservableCollection of PlayerExtended
 			foreach (Player player in Parser.PlayingParticipants)
 			{
-				PlayerExtended pl = new PlayerExtended
+				if (player.SteamID != 0)
 				{
-					SteamId = player.SteamID,
-					Name = player.Name,
-					Side = player.Team
-				};
-
-				Application.Current.Dispatcher.Invoke(delegate
-				{
-					if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
-
-					if (pl.Side == Team.CounterTerrorist)
+					Application.Current.Dispatcher.Invoke(delegate
 					{
-						pl.TeamName = Demo.TeamCT.Name;
-						if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
-					}
+						PlayerExtended pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+						if (pl == null)
+						{
+							pl = new PlayerExtended
+							{
+								SteamId = player.SteamID,
+								Name = player.Name,
+								Side = player.Team
+							};
+							Demo.Players.Add(pl);
+						}
 
-					if (pl.Side == Team.Terrorist)
-					{
-						pl.TeamName = Demo.TeamT.Name;
-						if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
-					}
-				});
+						if (pl.Side == Team.CounterTerrorist)
+						{
+							pl.TeamName = Demo.TeamCT.Name;
+							// Check swap
+							if (Demo.TeamT.Players.Contains(pl))
+							{
+								Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
+								Demo.TeamT.Players.Remove(pl);
+							}
+							else
+							{
+								if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
+							}
+						}
+
+						if (pl.Side == Team.Terrorist)
+						{
+							pl.TeamName = Demo.TeamT.Name;
+							// Check swap
+							if (Demo.TeamCT.Players.Contains(pl))
+							{
+								Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
+								Demo.TeamCT.Players.Remove(pl);
+							}
+							else
+							{
+								if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
+							}
+						}
+					});
+				}
 			}
 		}
 

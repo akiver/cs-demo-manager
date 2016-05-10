@@ -146,8 +146,15 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			base.HandleWeaponFired(sender, e);
 		}
 
-		protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
+		protected new void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
 		{
+			if (e.Swapped == null || e.Swapped.SteamID == 0) return;
+			PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
+			if (player != null)
+			{
+				player.IsConnected = true;
+				player.Side = e.NewTeam;
+			}
 			if (!IsMatchStarted) return;
 			if (e.Silent) _playerTeamCount++;
 			if (IsOvertime && e.Silent && _playerTeamCount == 10) IsHalfMatch = !IsHalfMatch;

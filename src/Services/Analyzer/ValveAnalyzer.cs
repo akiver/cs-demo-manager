@@ -49,6 +49,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			Parser.PlayerHurt += HandlePlayerHurted;
 			Parser.RankUpdate += HandleServerRankUpdate;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
+			Parser.PlayerTeam += HandlePlayerTeam;
 		}
 
 		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
@@ -346,6 +347,15 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				};
 				Demo.PositionsPoint.Add(positionPoint);
 			}
+		}
+
+		protected new void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
+		{
+			if (e.Swapped == null || e.Swapped.SteamID == 0) return;
+			PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
+			if (player == null) return;
+			player.IsConnected = true;
+			player.Side = e.NewTeam;
 		}
 
 		#endregion

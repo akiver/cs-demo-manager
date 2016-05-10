@@ -435,6 +435,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
 				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
+				ComputeEseaRws();
 			});
 		}
 
@@ -1184,6 +1185,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			PlayerHurtedEvent playerHurtedEvent = new PlayerHurtedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				AttackerSteamId = attacker?.SteamId ?? 0,
+				AttackerSide = e.Attacker?.Team ?? Team.Spectate,
 				HurtedSteamId = hurted.SteamId,
 				ArmorDamage = e.ArmorDamage,
 				HealthDamage = e.HealthDamage,
@@ -1211,6 +1213,34 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			if (playerDisconnected == null) return;
 			playerDisconnected.IsAlive = false;
 			playerDisconnected.Side = Team.Spectate;
+			playerDisconnected.IsConnected = false;
+		}
+
+		protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
+		{
+			if (e.Swapped == null || e.Swapped.SteamID == 0) return;
+			PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
+			if (player == null)
+			{
+				PlayerExtended newPlayer = new PlayerExtended
+				{
+					SteamId = e.Swapped.SteamID,
+					Name = e.Swapped.Name,
+					Side = e.NewTeam
+				};
+				Application.Current.Dispatcher.Invoke(() => Demo.Players.Add(newPlayer));
+				if (e.NewTeam == Team.CounterTerrorist)
+				{
+					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(newPlayer));
+				}
+				else
+				{
+					Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(newPlayer));
+				}
+				return;
+			}
+			player.IsConnected = true;
+			player.Side = e.NewTeam;
 		}
 
 		#endregion
@@ -1298,7 +1328,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Player player = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId);
 				if (player != null)
 				{
-					pl.RoundPlayedCount++;
+					if (pl.IsConnected) pl.RoundPlayedCount++;
 					pl.IsAlive = true;
 					pl.Side = player.Team;
 					if (!pl.StartMoneyRounds.ContainsKey(CurrentRound.Number)) pl.StartMoneyRounds.Add(CurrentRound.Number, player.Money);
@@ -1409,6 +1439,52 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			double roundsWithMultipleKillsRating = (nKills[0] + 4 * nKills[1] + 9 * nKills[2] + 16 * nKills[3] + 25 * nKills[4]) / (double)roundCount / AVERAGE_RMK;
 
 			return Math.Round((killRating + 0.7 * survivalRating + roundsWithMultipleKillsRating) / 2.7, 3);
+		}
+
+		protected void ComputeEseaRws()
+		{
+			int totalDamageWinner = 0;
+			Dictionary<long, int> playerDamages = new Dictionary<long, int>();
+			foreach (PlayerHurtedEvent e in CurrentRound.PlayersHurted.Where(
+				e => e.AttackerSide == CurrentRound.WinnerSide))
+			{
+				if (!playerDamages.ContainsKey(e.AttackerSteamId))
+				{
+					playerDamages.Add(e.AttackerSteamId, e.HealthDamage);
+				}
+				else
+				{
+					playerDamages[e.AttackerSteamId] += e.HealthDamage;
+				}
+					
+				totalDamageWinner += e.HealthDamage;
+			}
+
+			foreach (PlayerExtended player in Demo.Players)
+			{
+				if (player.TeamName == CurrentRound.WinnerName && player.IsConnected)
+				{
+					switch (CurrentRound.EndReason)
+					{
+						case RoundEndReason.CTWin:
+						case RoundEndReason.TerroristWin:
+							if (totalDamageWinner > 0 && playerDamages.ContainsKey(player.SteamId))
+								player.EseaRwsPointCount += (decimal)playerDamages[player.SteamId] / totalDamageWinner * 100;
+							break;
+						case RoundEndReason.BombDefused:
+						case RoundEndReason.TargetBombed:
+							if (CurrentRound.BombDefused != null && CurrentRound.BombDefused.DefuserSteamId == player.SteamId)
+								player.EseaRwsPointCount += 30;
+							if (CurrentRound.BombPlanted != null && CurrentRound.BombPlanted.PlanterSteamId == player.SteamId)
+								player.EseaRwsPointCount += 30;
+							if (totalDamageWinner > 0 && playerDamages.ContainsKey(player.SteamId))
+								player.EseaRwsPointCount += (decimal)playerDamages[player.SteamId] / totalDamageWinner * 70;
+							break;
+					}
+				}
+				if (player.RoundPlayedCount > 0)
+					player.EseaRws = Math.Round(player.EseaRwsPointCount / player.RoundPlayedCount, 2);
+			}
 		}
 
 		protected void ProcessTradeKill(KillEvent killEvent)
@@ -1614,7 +1690,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			}
 		}
 
-		private void UpdatePlayerClutchCount(PlayerExtended player)
+		private static void UpdatePlayerClutchCount(PlayerExtended player)
 		{
 			switch (player.OpponentClutchCount)
 			{

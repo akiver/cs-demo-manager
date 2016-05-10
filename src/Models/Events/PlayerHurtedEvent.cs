@@ -13,6 +13,9 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("attacker_steamid")]
 		public long AttackerSteamId { get; set; }
 
+		[JsonProperty("attacker_side")]
+		public Team AttackerSide { get; set; }
+
 		[JsonProperty("armor_damage")]
 		public int ArmorDamage { get; set; }
 

@@ -144,6 +144,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _showPlayerScoreColumn = Settings.Default.ShowPlayerScoreColumn;
 
+		private bool _showEseaRwsColumn = Settings.Default.ShowEseaRwsColumn;
+
 		private bool _showClutch1v1Column = Settings.Default.ShowClutch1v1Column;
 
 		private bool _showClutch1v2Column = Settings.Default.ShowClutch1v2Column;
@@ -193,6 +195,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private bool _showSideTroubleColumn = Settings.Default.ShowSideTroubleColumn;
 
 		private bool _showTeamTroubleColumn = Settings.Default.ShowTeamTroubleColumn;
+
+		private bool _showRoundPlayedColumn = Settings.Default.ShowRoundPlayedColumn;
 
 		private string _csgoExePath = Settings.Default.CsgoExePath;
 
@@ -823,6 +827,17 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public bool ShowEseaRwsColumn
+		{
+			get { return _showEseaRwsColumn; }
+			set
+			{
+				Settings.Default.ShowEseaRwsColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowEseaRwsColumn, ref _showEseaRwsColumn, value);
+			}
+		}
+
 		public bool ShowClutch1v1Column
 		{
 			get { return _showClutch1v1Column; }
@@ -1018,6 +1033,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.ShowTeamTroubleColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowTeamTroubleColumn, ref _showTeamTroubleColumn, value);
+			}
+		}
+
+		public bool ShowRoundPlayedColumn
+		{
+			get { return _showRoundPlayedColumn; }
+			set
+			{
+				Settings.Default.ShowRoundPlayedColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowRoundPlayedColumn, ref _showRoundPlayedColumn, value);
 			}
 		}
 

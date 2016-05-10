@@ -644,6 +644,11 @@
 															Header="Rating"
 															Binding="{Binding RatingHltv}"
 															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
+										<DataGridTextColumn HeaderStyle="{StaticResource EseaRwsHeader}"
+															Width="Auto"
+															Header="RWS"
+															Binding="{Binding EseaRws}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEseaRwsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 										<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}"
 															Width="Auto"
 															Header="5K"
@@ -734,6 +739,11 @@
 															Header="1V5"
 															Binding="{Binding Clutch1V5Count}"
 															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource RoundPlayedCountHeader}"
+															Width="Auto"
+															Header="RP"
+															Binding="{Binding RoundPlayedCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundPlayedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 										<DataGridTemplateColumn Header="VAC"
 																Width="Auto"
 																HeaderStyle="{StaticResource VacPlayerHeader}"
@@ -868,6 +878,11 @@
 															Header="Rating"
 															Binding="{Binding RatingHltv}"
 															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
+										<DataGridTextColumn HeaderStyle="{StaticResource EseaRwsHeader}"
+															Width="Auto"
+															Header="RWS"
+															Binding="{Binding EseaRws}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEseaRwsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 										<DataGridTextColumn HeaderStyle="{StaticResource FiveKillHeader}"
 															Width="Auto"
 															Header="5K"
@@ -958,6 +973,11 @@
 															Header="1V5"
 															Binding="{Binding Clutch1V5Count}"
 															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
+										<DataGridTextColumn HeaderStyle="{StaticResource RoundPlayedCountHeader}"
+															Width="Auto"
+															Header="RP"
+															Binding="{Binding RoundPlayedCount}"
+															Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundPlayedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 										<DataGridTemplateColumn HeaderStyle="{StaticResource VacPlayerHeader}"
 																Width="Auto"
 																Header="VAC"

@@ -323,8 +323,11 @@
 											<CheckBox Content="MVP"
 													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn}"
 													  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-											<CheckBox Content="Player score"
+											<CheckBox Content="HLTV Rating"
 													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn}"
+													  Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="ESEA RWS"
+													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEseaRwsColumn}"
 													  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 											<CheckBox Content="Winner clan name"
 													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn}"
@@ -375,6 +378,9 @@
 													  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 											<CheckBox Content="Trade death"
 													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeDeathColumn}"
+													  Style="{StaticResource CheckBoxColumnOptionStyle}" />
+											<CheckBox Content="Round played"
+													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundPlayedColumn}"
 													  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 										</StackPanel>
 									</StackPanel>

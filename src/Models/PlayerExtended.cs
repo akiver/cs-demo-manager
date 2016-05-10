@@ -117,6 +117,8 @@ namespace CSGO_Demos_Manager.Models
 		/// </summary>
 		private bool _isAlive = true;
 
+		private bool _isConnected = true;
+
 		/// <summary>
 		/// Player kills / Deaths ratio
 		/// </summary>
@@ -188,6 +190,10 @@ namespace CSGO_Demos_Manager.Models
 		/// Rating based on hltv.org formula that the player made during the match
 		/// </summary>
 		private float _ratingHltv;
+
+		private decimal _eseaRwsPointCount = 0;
+
+		private decimal _eseaRws;
 
 		/// <summary>
 		/// Indicates if the player has the bomb, used for the overview animation
@@ -451,6 +457,20 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => RatingHltv, ref _ratingHltv, value); }
 		}
 
+		[JsonIgnore]
+		public decimal EseaRwsPointCount
+		{
+			get { return _eseaRwsPointCount; }
+			set { Set(() => EseaRwsPointCount, ref _eseaRwsPointCount, value); }
+		}
+
+		[JsonProperty("esea_rws")]
+		public decimal EseaRws
+		{
+			get { return _eseaRws; }
+			set { Set(() => EseaRws, ref _eseaRws, value); }
+		}
+
 		[JsonProperty("1v1_count")]
 		public int Clutch1V1Count
 		{
@@ -681,6 +701,13 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _isAlive; }
 			set { Set(() => IsAlive, ref _isAlive, value); }
+		}
+
+		[JsonIgnore]
+		public bool IsConnected
+		{
+			get { return _isConnected; }
+			set { Set(() => IsConnected, ref _isConnected, value); }
 		}
 
 		[JsonIgnore]
@@ -941,6 +968,8 @@ namespace CSGO_Demos_Manager.Models
 			CrouchKillCount = 0;
 			_tradeKillCount = 0;
 			_tradeDeathCount = 0;
+			EseaRws = 0;
+			EseaRwsPointCount = 0;
 		}
 
 		public PlayerExtended Clone()

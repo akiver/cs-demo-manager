@@ -647,6 +647,11 @@
 									HeaderStyle="{StaticResource RatingHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}" />
 				<DataGridTextColumn Width="Auto"
+									Header="RWS"
+									Binding="{Binding SelectedAccountEseaRws}"
+									HeaderStyle="{StaticResource EseaRwsHeader}"
+									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}" />
+				<DataGridTextColumn Width="Auto"
 									Header="1K"
 									Binding="{Binding OneKillCount}"
 									HeaderStyle="{StaticResource OneKillHeader}"
