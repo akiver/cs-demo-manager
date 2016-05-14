@@ -126,5 +126,11 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		/// <param name="steamId"></param>
 		/// <returns></returns>
 		Task<bool> RemoveRankInfoAsync(long steamId);
+
+		/// <summary>
+		/// Remove all vdm files within all folders
+		/// </summary>
+		/// <returns></returns>
+		Task<bool> DeleteVdmFiles();
 	}
 }

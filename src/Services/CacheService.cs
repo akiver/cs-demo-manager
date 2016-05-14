@@ -808,5 +808,28 @@ namespace CSGO_Demos_Manager.Services
 
 			return true;
 		}
+
+		public async Task<bool> DeleteVdmFiles()
+		{
+			List<string> folders = await GetFoldersAsync();
+			try
+			{
+				foreach (string folderPath in folders)
+				{
+					foreach (string file in Directory.GetFiles(folderPath, "*.vdm").Where(
+						item => item.EndsWith(".vdm")))
+					{
+						File.Delete(file);
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				return false;
+			}
+
+			return true;
+		}
 	}
 }

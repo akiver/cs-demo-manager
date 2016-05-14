@@ -158,6 +158,10 @@
 										Content="Errors log file" />
 								<CheckBox Content="Limit stats to selected folder" Margin="0 5 0 0"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.LimitStatsSelectedFolder}" />
+								<Button Margin="0 5 0 0"
+										Command="{Binding Source={StaticResource Locator}, Path=Settings.DeleteVdmFilesCommand}"
+										Style="{StaticResource GeneralButtonStyle}"
+										Content="Clear VDM files" />
 							</StackPanel>
 						</Grid>
 

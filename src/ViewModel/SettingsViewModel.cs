@@ -66,6 +66,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _selectDownloadFolderPath;
 
+		private RelayCommand _deleteVdmFilesCommand;
+
 		private readonly ICacheService _cacheService;
 
 		private readonly IDemosService _demosService;
@@ -1513,6 +1515,34 @@ namespace CSGO_Demos_Manager.ViewModel
 						DialogResult result = folderDialog.ShowDialog();
 						if (result != DialogResult.OK) return;
 						DownloadFolderPath = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to delete vdm files
+		/// </summary>
+		public RelayCommand DeleteVdmFilesCommand
+		{
+			get
+			{
+				return _deleteVdmFilesCommand
+					?? (_deleteVdmFilesCommand = new RelayCommand(
+					async () =>
+					{
+						var confirm = await _dialogService.ShowMessageAsync("All VDM files within your folders will be deleted, are you sure?", MessageDialogStyle.AffirmativeAndNegative);
+						if (confirm == MessageDialogResult.Affirmative)
+						{
+							bool result = await _cacheService.DeleteVdmFiles();
+							if (!result)
+							{
+								await _dialogService.ShowErrorAsync("An error occured while deleting VDM files.", MessageDialogStyle.Affirmative);
+							}
+							else
+							{
+								await _dialogService.ShowMessageAsync("VDM files deleted.", MessageDialogStyle.Affirmative);
+							}
+						}
 					}));
 			}
 		}

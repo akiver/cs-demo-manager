@@ -214,5 +214,10 @@ namespace CSGO_Demos_Manager.Services.Design
 		{
 			return Task.FromResult(true);
 		}
+
+		public Task<bool> DeleteVdmFiles()
+		{
+			return Task.FromResult(true);
+		}
 	}
 }
