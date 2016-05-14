@@ -11,12 +11,17 @@ namespace CSGO_Demos_Manager.Services
 {
 	public class GameLauncher
 	{
-		private const double MAX_ACTION_INTERVAL_DELAY = 15.625;
-		private const int NEXT_ACTION_DELAY = 2;
-		private const int SWITCH_PLAYER_TICK_DELAY = 10;
-		private const int STUFF_BEGIN_DELAY = 5;
-		private const int STUFF_END_DELAY = 3;
-		private const int MOLOTOV_TIME = 8;
+		private const int PLAYBACK_DELAY = 15; // Seconds before the playback start
+		private const int HIGHLIGHT_DELAY = 4; // Seconds before the playback start and focus on a kill for highlights
+		private const int HIGHLIGHT_MAX_NEXT_KILL_DELAY = 10; // Max seconds a kill has to occurred to prevent fast forwarding (highlights)
+		private const int LOWLIGHT_DELAY = 10; // Seconds before the playback start and focus on a kill for lowlights
+		private const int LOWLIGHT_MAX_NEXT_KILL_DELAY = 15; // Max seconds a kill has to occurred to prevent fast forwarding (lowlights)
+		private const int MAX_NEXT_STUFF_DELAY = 15; // Max seconds a stuff has to be thrown to prevent fast forwarding
+		private const int NEXT_ACTION_DELAY = 2; // Seconds before the playback fast forward to the next kill / action, Fade in / out and messages are displayed during this period
+		private const double SWITCH_PLAYER_DELAY = 0.5; // seconds waited before switching to other player on fast forward
+		private const int STUFF_BEGIN_DELAY = 5; // Seconds before the playback start playing and focus on the player
+		private const int STUFF_END_DELAY = 3; // Seconds before the playback fast forward to the next stuff when the previous one is done
+		private const int MOLOTOV_TIME = 8; // Seconds average waiting time for a molotov end
 		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid"};
 		private readonly Process _process = new Process();
 		private const string ARGUMENT_SEPARATOR = " ";
@@ -112,7 +117,7 @@ namespace CSGO_Demos_Manager.Services
 		internal void WatchDemoAt(Demo demo, int tick, bool delay = false, int playerEntityId = -1)
 		{
 			_arguments.Add("+playdemo");
-			int tickDelayCount = (int)(demo.ServerTickrate * MAX_ACTION_INTERVAL_DELAY);
+			int tickDelayCount = (int)(demo.ServerTickrate * PLAYBACK_DELAY);
 			if (delay && tick > tickDelayCount) tick -= tickDelayCount;
 			_arguments.Add(demo.Path + "@" + tick);
 			if (playerEntityId != -1) GenerateSpecPlayerVdm(demo, tick, playerEntityId);
@@ -157,7 +162,7 @@ namespace CSGO_Demos_Manager.Services
 			int endTickDelayCount = (int)(demo.ServerTickrate * STUFF_END_DELAY);
 			int lastSuffSartedTick = 0;
 			// max delay between 2 stuffs
-			int maxTickDelayCount = (int)(demo.ServerTickrate * MAX_ACTION_INTERVAL_DELAY);
+			int maxTickDelayCount = (int)(demo.ServerTickrate * MAX_NEXT_STUFF_DELAY);
 			int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
 			string message = GetFastForwardMessage(type);
 
@@ -300,7 +305,8 @@ namespace CSGO_Demos_Manager.Services
 			int actionCount = 0;
 			string generated = string.Empty;
 			int currentRoundNumber = 0;
-			int tickDelayCount = (int)(demo.ServerTickrate * MAX_ACTION_INTERVAL_DELAY);
+			int tickDelayCount = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_DELAY);
+			int maxTickCountNextKill = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
 			int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
 			string message = "Fast forwarding to the next kill...";
 
@@ -315,14 +321,15 @@ namespace CSGO_Demos_Manager.Services
 					// check if the player had others kills during the current round
 					if (isHighlight && currentRoundNumber == e.RoundNumber)
 					{
+						startTick = startTick + (int)(demo.ServerTickrate * SWITCH_PLAYER_DELAY);
 						// fast forward if the next kill is far away
-						if (lastTick - e.Tick > tickDelayCount)
+						if (e.Tick - lastTick > maxTickCountNextKill)
 						{
 							generated += string.Format(Properties.Resources.text_message_start, ++actionCount, e.Tick, message);
 							generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, e.Tick);
 							generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick, e.Tick - tickDelayCount);
 						}
-						generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick + SWITCH_PLAYER_TICK_DELAY, e.KilledEntityId);
+						generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick, e.KilledEntityId);
 						lastTick = e.Tick;
 						continue;
 					}
