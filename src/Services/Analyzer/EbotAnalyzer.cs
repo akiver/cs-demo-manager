@@ -339,39 +339,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			_playerTeamCount = 0;
 		}
 
-		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
+		protected new void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
-			IsRoundEndOccured = true;
-			if (!IsMatchStarted) return;
-
-			CurrentRound.EndReason = e.Reason;
-			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
-			UpdateTeamScore(e);
+			base.HandleRoundEnd(sender, e);
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				CurrentRound.WinnerSide = e.Winner;
-				if (CurrentRound.OpenKillEvent != null)
-				{
-					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
-							CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
-					{
-						if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
-							CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
-						{
-							if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
-							if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
-						}
-					}
-				}
-
 				if (IsLastRoundHalf) Demo.Rounds.Add(CurrentRound);
-
-				var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
-				playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
-
-				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
-				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
 			});
 		}
 

@@ -177,44 +177,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CreateNewRound();
 		}
 
-		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
+		protected new void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
 			_matchStartedCount = 0;
-			IsRoundEndOccured = true;
-
-			if (!IsMatchStarted) return;
-
-			CurrentRound.EndReason = e.Reason;
-			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
-			UpdateTeamScore(e);
-
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				CurrentRound.WinnerSide = e.Winner;
-
-				if (CurrentRound.OpenKillEvent != null)
-				{
-					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
-						CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
-					{
-						if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
-						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
-					}
-
-					var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
-					playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
-
-					var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
-					playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
-				}
-			});
+			base.HandleRoundEnd(sender, e);
 
 			// On ESEA demos round_announce_last_round_half isn't raised
-			if (CurrentRound.Number == 15)
-			{
-				IsSwapTeamRequired = true;
-			}
-
+			if (CurrentRound.Number == 15) IsSwapTeamRequired = true;
 		}
 
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)

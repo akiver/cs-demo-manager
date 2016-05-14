@@ -86,7 +86,6 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected abstract void HandleMatchStarted(object sender, MatchStartedEventArgs e);
 		protected abstract void HandleRoundStart(object sender, RoundStartedEventArgs e);
-		protected abstract void HandleRoundEnd(object sender, RoundEndedEventArgs e);
 
 		public static DemoAnalyzer Factory(Demo demo)
 		{
@@ -400,6 +399,43 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				};
 				Demo.PositionsPoint.Add(positionPoint);
 			}
+		}
+
+		protected void HandleRoundEnd(object sender, RoundEndedEventArgs e)
+		{
+			IsRoundEndOccured = true;
+			if (!IsMatchStarted) return;
+
+			CurrentRound.EndReason = e.Reason;
+			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
+			CurrentRound.WinnerSide = e.Winner;
+			UpdateTeamScore(e);
+			if (e.Reason == RoundEndReason.CTSurrender)
+			{
+				Demo.Surrender = IsHalfMatch ? Demo.TeamT : Demo.TeamCT;
+			}
+			else if (e.Reason == RoundEndReason.TerroristsSurrender)
+			{
+				Demo.Surrender = IsHalfMatch ? Demo.TeamCT : Demo.TeamT;
+			}
+
+			Application.Current.Dispatcher.Invoke(delegate
+			{
+				if (CurrentRound.OpenKillEvent != null)
+				{
+					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist
+					|| CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
+					{
+						CurrentRound.OpenKillEvent.HasWin = true;
+						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
+					}
+				}
+				var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
+				playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
+
+				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
+				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
+			});
 		}
 
 		/// <summary>

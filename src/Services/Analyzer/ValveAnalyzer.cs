@@ -153,56 +153,14 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CreateNewRound();
 		}
 
-		protected override void HandleRoundEnd(object sender, RoundEndedEventArgs e)
+		protected new void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
-			IsRoundEndOccured = true;
-			if (!IsMatchStarted) return;
-
-			CurrentRound.EndReason = e.Reason;
-			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
-			UpdateTeamScore(e);
-
-			// some demos return the wrong surrender RoundEndReason, I use the round's winner to detect which team has surrendered
-			if (e.Reason == RoundEndReason.CTSurrender || e.Reason == RoundEndReason.TerroristsSurrender)
-			{
-				if (IsHalfMatch)
-				{
-					Demo.Surrender = e.Winner == Team.CounterTerrorist ? Demo.TeamCT : Demo.TeamT;
-				}
-				else
-				{
-					Demo.Surrender = e.Winner == Team.CounterTerrorist ? Demo.TeamT : Demo.TeamCT;
-				}
-			}
-
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				CurrentRound.WinnerSide = e.Winner;
-				
-
-				if (CurrentRound.OpenKillEvent != null)
-				{
-					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist ||
-					CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
-					{
-						if (CurrentRound.OpenKillEvent != null) CurrentRound.OpenKillEvent.HasWin = true;
-						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
-					}
-					var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
-					playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
-
-					var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
-					playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
-				}
-			});
+			base.HandleRoundEnd(sender, e);
 
 			if (IsLastRoundHalf)
 			{
-				Application.Current.Dispatcher.Invoke(delegate
-				{
-					IsSwapTeamRequired = true;
-					Demo.Rounds.Add(CurrentRound);
-				});
+				IsSwapTeamRequired = true;
+				Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Add(CurrentRound));
 			}
 
 			if (IsOvertime && IsLastRoundHalf) IsHalfMatch = false;
