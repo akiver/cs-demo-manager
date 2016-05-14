@@ -38,6 +38,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private const int MAX_ANALYZE_DEMO_COUNT = 4;
 
+		private const int DEMO_PAGE_COUNT = 50;
+
 		private readonly IDemosService _demosService;
 
 		private readonly DialogService _dialogService;
@@ -431,8 +433,8 @@ namespace CSGO_Demos_Manager.ViewModel
 					async demos =>
 					{
 						Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof (Valve));
-						await RefreshSelectedDemos();
-						if (hasValveDemo != null) await RefreshLastRankAccount();
+						bool result = await RefreshSelectedDemos();
+						if (result && hasValveDemo != null) await RefreshLastRankAccount();
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
@@ -1628,15 +1630,15 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
-		private async Task RefreshSelectedDemos()
+		private async Task<bool> RefreshSelectedDemos()
 		{
-			IsBusy = true;
-			HasRing = true;
-			HasNotification = true;
-			IsCancellable = true;
-			if (SelectedDemos.Count == Demos.Count)
+			if (SelectedDemos.Count == Demos.Count && Demos.Count == DEMO_PAGE_COUNT)
 			{
 				var isAllAnalyze = await _dialogService.ShowAnalyzeAllDemosAsync();
+				if (isAllAnalyze == MessageDialogResult.FirstAuxiliary) return false;
+				IsBusy = true;
+				HasRing = true;
+				HasNotification = true;
 				if (isAllAnalyze == MessageDialogResult.Negative)
 				{
 					NotificationMessage = "Loading all demos...";
@@ -1660,7 +1662,12 @@ namespace CSGO_Demos_Manager.ViewModel
 				}
 			}
 
+			IsBusy = true;
+			HasRing = true;
+			HasNotification = true;
+			IsCancellable = true;
 			NotificationMessage = "Analyzing multiple demos...";
+			CommandManager.InvalidateRequerySuggested();
 			if (SelectedDemos.Count == 1) NotificationMessage = "Analyzing " + SelectedDemos[0].Name + "...";
 
 			List<Demo> demosFailed = new List<Demo>();
@@ -1704,6 +1711,8 @@ namespace CSGO_Demos_Manager.ViewModel
 				if (demosNotFound.Any()) await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
 				if (demosFailed.Any()) await _dialogService.ShowDemosFailedAsync(demosFailed);
 			}
+
+			return true;
 		}
 
 		/// <summary>
