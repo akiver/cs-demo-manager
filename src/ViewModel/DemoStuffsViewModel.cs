@@ -10,7 +10,6 @@ using CSGO_Demos_Manager.Views;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
-using MahApps.Metro.Controls.Dialogs;
 
 namespace CSGO_Demos_Manager.ViewModel
 {
