@@ -119,7 +119,7 @@ namespace CSGO_Demos_Manager.Services
 									if (filterOnSelectedDate)
 									{
 										if(demo.Date >= Properties.Settings.Default.DateStatsFrom
-											&& demo.Date <= Properties.Settings.Default.DateStatsTo) demos.Add(demo);
+											&& demo.Date <= EndOfDay(Properties.Settings.Default.DateStatsTo)) demos.Add(demo);
 									}
 									else
 									{
@@ -151,6 +151,15 @@ namespace CSGO_Demos_Manager.Services
 
 			return demos;
 		}
+
+        /// <summary>
+        /// Returns 23:59:59 of the given date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        private static DateTime EndOfDay(DateTime date) {
+            return date.Date.AddDays(1).AddSeconds(-1);
+        }
 
 		/// <summary>
 		/// Check if the JSON file for the demo exist
