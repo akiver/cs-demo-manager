@@ -1059,7 +1059,7 @@ namespace CSGO_Demos_Manager.Services
 		/// <returns></returns>
 		private static bool SerializeMatch(CDataGCCStrike15_v2_MatchInfo matchInfo, string demoName)
 		{
-			string infoFilePath = Settings.Default.DownloadFolder + Path.DirectorySeparatorChar + demoName + ".info";
+			string infoFilePath = Settings.Default.DownloadFolder + Path.DirectorySeparatorChar + demoName + ".dem.info";
 			try
 			{
 				using (FileStream fs = File.Create(infoFilePath))
