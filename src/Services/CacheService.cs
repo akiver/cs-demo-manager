@@ -119,7 +119,7 @@ namespace CSGO_Demos_Manager.Services
 									if (filterOnSelectedDate)
 									{
 										if(demo.Date >= Properties.Settings.Default.DateStatsFrom
-											&& demo.Date <= Properties.Settings.Default.DateStatsTo) demos.Add(demo);
+											&& demo.Date < Properties.Settings.Default.DateStatsTo.AddDays(1)) demos.Add(demo);
 									}
 									else
 									{
@@ -132,7 +132,7 @@ namespace CSGO_Demos_Manager.Services
 								if (filterOnSelectedDate)
 								{
 									if (demo.Date >= Properties.Settings.Default.DateStatsFrom
-									    && demo.Date <= Properties.Settings.Default.DateStatsTo) demos.Add(demo);
+									    && demo.Date < Properties.Settings.Default.DateStatsTo.AddDays(1)) demos.Add(demo);
 								}
 								else
 								{
