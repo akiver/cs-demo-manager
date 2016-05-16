@@ -158,8 +158,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					try
 					{
 						CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
-						DateTime unixTime = new DateTime(1970, 1, 1, 0, 0, 0, 0);
-						demo.Date = unixTime.AddSeconds(infoMsg.matchtime);
+						DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+						demo.Date = date.AddSeconds(infoMsg.matchtime).ToLocalTime();
 					}
 					catch (Exception)
 					{
