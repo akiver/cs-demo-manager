@@ -114,13 +114,13 @@ namespace CSGO_Demos_Manager.Services
 			StartGame();
 		}
 
-		internal void WatchDemoAt(Demo demo, int tick, bool delay = false, int playerEntityId = -1)
+		internal void WatchDemoAt(Demo demo, int tick, bool delay = false, long steamId = -1)
 		{
 			_arguments.Add("+playdemo");
 			int tickDelayCount = (int)(demo.ServerTickrate * PLAYBACK_DELAY);
 			if (delay && tick > tickDelayCount) tick -= tickDelayCount;
 			_arguments.Add(demo.Path + "@" + tick);
-			if (playerEntityId != -1) GenerateSpecPlayerVdm(demo, tick, playerEntityId);
+			if (steamId != -1) GenerateSpecPlayerVdm(demo, tick, steamId);
 			DeleteVdmFile(demo);
 			StartGame();
 		}
@@ -189,7 +189,7 @@ namespace CSGO_Demos_Manager.Services
 								generated += string.Format(Properties.Resources.text_message_start, ++actionCount, startToTick - nextActionDelayCount, message);
 								generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startToTick - nextActionDelayCount);
 								generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
-								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterEntityId);
+								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
 								
 							}
 
@@ -216,7 +216,7 @@ namespace CSGO_Demos_Manager.Services
 								generated += string.Format(Properties.Resources.text_message_start, ++actionCount, startToTick - nextActionDelayCount, message);
 								generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startToTick - nextActionDelayCount);
 								generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
-								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterEntityId);
+								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
 								// the molotov may have not burned, use time average instead
 								lastSuffSartedTick = e.Tick + (int)(demo.ServerTickrate * MOLOTOV_TIME);
 							}
@@ -231,7 +231,7 @@ namespace CSGO_Demos_Manager.Services
 								generated += string.Format(Properties.Resources.text_message_start, ++actionCount, startToTick - nextActionDelayCount, message);
 								generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startToTick - nextActionDelayCount);
 								generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
-								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterEntityId);
+								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
 							}
 
 							switch (type)
@@ -291,10 +291,10 @@ namespace CSGO_Demos_Manager.Services
 			File.WriteAllText(vdmFilePath, content);
 		}
 
-		private static void GenerateSpecPlayerVdm(Demo demo, int tick, int playerEntityId)
+		private static void GenerateSpecPlayerVdm(Demo demo, int tick, long steamId)
 		{
 			string vdmFilePath = GetVdmFilePath(demo);
-			string generated = string.Format(Properties.Resources.spec_player, 0, tick, playerEntityId);
+			string generated = string.Format(Properties.Resources.spec_player, 0, tick, steamId);
 			string content = string.Format(Properties.Resources.main, generated);
 			File.WriteAllText(vdmFilePath, content);
 		}
@@ -329,7 +329,7 @@ namespace CSGO_Demos_Manager.Services
 							generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, e.Tick);
 							generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick, e.Tick - tickDelayCount);
 						}
-						generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick, e.KilledEntityId);
+						generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick, e.KilledSteamId);
 						lastTick = e.Tick;
 						continue;
 					}
@@ -338,7 +338,7 @@ namespace CSGO_Demos_Manager.Services
 					generated += string.Format(Properties.Resources.text_message_start, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick, message);
 					generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick);
 					generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.Tick - tickDelayCount);
-					generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.KilledEntityId);
+					generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.KilledSteamId);
 					lastTick = e.Tick;
 				}
 			}

@@ -8,12 +8,6 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("killer_steamid")]
 		public long KillerSteamId { get; set; }
 
-		[JsonProperty("killer_entity_id")]
-		public int KillerEntityId { get; set; }
-
-		[JsonProperty("killed_entity_id")]
-		public int KilledEntityId { get; set; }
-
 		[JsonProperty("killed_steamid")]
 		public long KilledSteamId { get; set; }
 

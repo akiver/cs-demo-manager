@@ -42,7 +42,7 @@ namespace CSGO_Demos_Manager.Services
 											EndX = smokeList[i].Point.X,
 											EndY = smokeList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerEntityId = weaponFired[i].ShooterEntityId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId
 										};
 										stuffs.Add(s);
 									}
@@ -74,7 +74,7 @@ namespace CSGO_Demos_Manager.Services
 											EndX = flashList[i].Point.X,
 											EndY = flashList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerEntityId = weaponFired[i].ShooterEntityId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId
 										};
 										List<PlayerExtended> flashedPlayerList = flashList[i].FlashedPlayerSteamIdList.Select(
 											steamId => demo.Players.First(p => p.SteamId == steamId)).ToList();
@@ -109,7 +109,7 @@ namespace CSGO_Demos_Manager.Services
 											EndX = heList[i].Point.X,
 											EndY = heList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerEntityId = weaponFired[i].ShooterEntityId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId
 										};
 										stuffs.Add(s);
 									}
@@ -142,7 +142,7 @@ namespace CSGO_Demos_Manager.Services
 											EndX = fireStartedList[i].Point.X,
 											EndY = fireStartedList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerEntityId = weaponFired[i].ShooterEntityId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId
 										};
 										stuffs.Add(s);
 									}
@@ -174,7 +174,7 @@ namespace CSGO_Demos_Manager.Services
 											EndX = decoyStartedList[i].Point.X,
 											EndY = decoyStartedList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerEntityId = weaponFired[i].ShooterEntityId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId
 										};
 										stuffs.Add(s);
 									}

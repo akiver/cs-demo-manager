@@ -23,7 +23,7 @@ namespace CSGO_Demos_Manager.Models
 
 		public string ThrowerName { get; set; }
 
-		public int ThrowerEntityId { get; set; }
+		public long ThrowerSteamId { get; set; }
 
 		public float StartX { get; set; }
 
