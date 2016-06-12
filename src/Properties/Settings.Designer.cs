@@ -1137,5 +1137,17 @@ namespace CSGO_Demos_Manager.Properties {
                 this["ShowRoundPlayedColumn"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool IgnoreLaterBan {
+            get {
+                return ((bool)(this["IgnoreLaterBan"]));
+            }
+            set {
+                this["IgnoreLaterBan"] = value;
+            }
+        }
     }
 }

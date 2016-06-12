@@ -57,7 +57,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<Grid Grid.Column="0" MaxWidth="200">
+						<Grid Grid.Column="0" MaxWidth="240">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
@@ -158,6 +158,9 @@
 										Content="Errors log file" />
 								<CheckBox Content="Limit stats to selected folder" Margin="0 5 0 0"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.LimitStatsSelectedFolder}" />
+								<CheckBox Content="Ignore ban occured after demo date"
+										  Margin="0 5 0 0"
+										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IgnoreLaterBan}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.DeleteVdmFilesCommand}"
 										Style="{StaticResource GeneralButtonStyle}"

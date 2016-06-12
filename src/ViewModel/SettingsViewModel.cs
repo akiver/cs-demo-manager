@@ -206,6 +206,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private bool _limitStatsSelectedFolder = Settings.Default.LimitStatsFolder;
 
+		private bool _ignoreLaterBan = Settings.Default.IgnoreLaterBan;
+
 		private DateTime _dateStatsFrom = Settings.Default.DateStatsFrom;
 
 		private DateTime _dateStatsTo = Settings.Default.DateStatsTo;
@@ -1088,6 +1090,17 @@ namespace CSGO_Demos_Manager.ViewModel
 				Settings.Default.LimitStatsFolder = value;
 				Settings.Default.Save();
 				Set(() => LimitStatsSelectedFolder, ref _limitStatsSelectedFolder, value);
+			}
+		}
+
+		public bool IgnoreLaterBan
+		{
+			get { return _ignoreLaterBan; }
+			set
+			{
+				Settings.Default.IgnoreLaterBan = value;
+				Settings.Default.Save();
+				Set(() => IgnoreLaterBan, ref _ignoreLaterBan, value);
 			}
 		}
 

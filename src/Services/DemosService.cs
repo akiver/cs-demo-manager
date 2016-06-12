@@ -54,6 +54,8 @@ namespace CSGO_Demos_Manager.Services
 					PlayerExtended cheater = demo.Players.FirstOrDefault(p => p.SteamId.ToString() == suspect.SteamId);
 					if (cheater != null && !whitelistIds.Contains(cheater.SteamId.ToString()))
 					{
+						if (Settings.Default.IgnoreLaterBan && DateTime.Now.AddDays(-suspect.DaySinceLastBanCount) < demo.Date)
+							continue;
 						if (suspect.GameBanCount > 0)
 						{
 							demo.HasCheater = true;
