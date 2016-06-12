@@ -1096,12 +1096,13 @@ namespace CSGO_Demos_Manager.Services
 		/// - The .dem and .info files already exists
 		/// </summary>
 		/// <param name="demoName"></param>
+		/// <param name="demoArchiveUrl"></param>
 		/// <returns></returns>
 		private static async Task<bool> IsDownloadRequired(string demoName, string demoArchiveUrl)
 		{
 			bool result = await CheckIfArchiveIsAvailable(demoArchiveUrl);
 			string[] fileList = new DirectoryInfo(Settings.Default.DownloadFolder).GetFiles().Select(o => o.Name).ToArray();
-			if (fileList.Contains(demoName + ".dem") && fileList.Contains(demoName + ".info")) result = false;
+			if (fileList.Contains(demoName + ".dem") && fileList.Contains(demoName + ".dem.info")) result = false;
 
 			return result;
 		}
