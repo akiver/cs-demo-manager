@@ -114,6 +114,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<Demo> _copyPlaydemoCommand;
 
+		private RelayCommand<ObservableCollection<Demo>> _exportJsonCommand;
+
 		private RelayCommand<Demo> _goToTickCommand;
 
 		private RelayCommand<ObservableCollection<Demo>> _addPlayersToSuspectsListCommand;
@@ -1514,6 +1516,63 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// Command to export demo data to a JSON file
+		/// </summary>
+		public RelayCommand<ObservableCollection<Demo>> ExportJsonCommand
+		{
+			get
+			{
+				return _exportJsonCommand
+					?? (_exportJsonCommand = new RelayCommand<ObservableCollection<Demo>>(
+						async demos =>
+						{
+							FolderBrowserDialog folderDialog = new FolderBrowserDialog
+							{
+								SelectedPath = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System))
+							};
+							DialogResult result = folderDialog.ShowDialog();
+							if (result != DialogResult.OK) return;
+							string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
+
+							try
+							{
+								IsBusy = true;
+								HasRing = true;
+								HasNotification = true;
+								NotificationMessage = "Analyzing demo(s) for json export...";
+								IsCancellable = true;
+								if (_cts == null) _cts = new CancellationTokenSource();
+
+								List<Demo> demoList = demos.ToList();
+								while (demoList.Any() && _cts != null)
+								{
+									Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+									{
+										await AnalyzeDemoAsync(demo, _cts.Token, false);
+										await _cacheService.GenerateJsonAsync(demo, path);
+										demoList.Remove(demo);
+									}).ToArray();
+									await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+								}
+							}
+							catch (Exception e)
+							{
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+							}
+							finally
+							{
+								IsBusy = false;
+								HasRing = false;
+								HasNotification = false;
+								IsCancellable = false;
+							}
+						},
+						demos => SelectedDemos != null && SelectedDemos.Any()));
+			}
+		}
+
 		#endregion
 
 		public HomeViewModel(IDemosService demosService, DialogService dialogService, ISteamService steamService, ICacheService cacheService, ExcelService excelService)
@@ -1721,7 +1780,7 @@ namespace CSGO_Demos_Manager.ViewModel
 		/// <param name="demo"></param>
 		/// /// <param name="token"></param>
 		/// <returns></returns>
-		private async Task<int> AnalyzeDemoAsync(Demo demo, CancellationToken token)
+		private async Task<int> AnalyzeDemoAsync(Demo demo, CancellationToken token, bool writeToCache = true)
 		{
 			if (!File.Exists(demo.Path)) return -2;
 
@@ -1734,9 +1793,12 @@ namespace CSGO_Demos_Manager.ViewModel
 					{
 						await _demosService.AnalyzeBannedPlayersAsync(demo);
 					}
-					
-					await _cacheService.WriteDemoDataCache(demo);
-					await _cacheService.UpdateRankInfoAsync(demo);
+
+					if (writeToCache)
+					{
+						await _cacheService.WriteDemoDataCache(demo);
+						await _cacheService.UpdateRankInfoAsync(demo);
+					}
 				}
 			}
 			catch (Exception e)

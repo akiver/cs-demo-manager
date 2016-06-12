@@ -56,6 +56,14 @@ namespace CSGO_Demos_Manager.Services.Interfaces
 		Task<bool> RemovePlayerFromWhitelist(string steamId);
 
 		/// <summary>
+		/// Export demos to JSON files
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <param name="folderPath"></param>
+		/// <returns></returns>
+		Task<bool> GenerateJsonAsync(Demo demo, string folderPath);
+
+		/// <summary>
 		/// Return the size of the cache folder
 		/// </summary>
 		/// <returns></returns>

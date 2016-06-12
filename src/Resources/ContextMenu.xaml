@@ -65,6 +65,9 @@
 								  Command="{Binding Home.SetDemoSourceCommand, Source={StaticResource Locator}}"
 								  CommandParameter="cevo" />
 		</MenuItem>
+		<MenuItem Header="Export JSON"
+				  Command="{Binding Home.ExportJsonCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Home.SelectedDemos, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="SuspectRowContextMenu">

@@ -147,6 +147,11 @@ namespace CSGO_Demos_Manager.Services.Design
 			return Task.FromResult(true);
 		}
 
+		public Task<bool> GenerateJsonAsync(Demo demo, string folderPath)
+		{
+			return Task.FromResult(true);
+		}
+
 		public Task<long> GetCacheSizeAsync()
 		{
 			return Task.FromResult((long)145214);

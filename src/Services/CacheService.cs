@@ -515,6 +515,22 @@ namespace CSGO_Demos_Manager.Services
 			File.WriteAllText(filePath, jsonBackup);
 		}
 
+		public async Task<bool> GenerateJsonAsync(Demo demo, string folderPath)
+		{
+			JsonSerializerSettings settings = new JsonSerializerSettings
+			{
+				PreserveReferencesHandling = PreserveReferencesHandling.None,
+				NullValueHandling = NullValueHandling.Include,
+				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+				Formatting = Formatting.Indented
+			};
+			string filePath = folderPath + Path.DirectorySeparatorChar + demo.Name + ".json";
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, settings));
+			File.WriteAllText(filePath, json);
+
+			return true;
+		}
+
 		/// <summary>
 		/// Check if there is any demos in the cache folder
 		/// </summary>
