@@ -804,8 +804,8 @@ namespace CSGO_Demos_Manager.ViewModel
 							{
 								try
 								{
-									GameLauncher launcher = new GameLauncher();
-									launcher.WatchDemoAt(SelectedDemo, tick);
+									GameLauncher launcher = new GameLauncher(SelectedDemo);
+									launcher.WatchDemoAt(tick);
 								}
 								catch (Exception e)
 								{
@@ -1206,8 +1206,8 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 						try
 						{
-							GameLauncher launcher = new GameLauncher();
-							launcher.WatchDemo(demo);
+							GameLauncher launcher = new GameLauncher(SelectedDemo);
+							launcher.WatchDemo();
 						}
 						catch (Exception e)
 						{
@@ -1244,9 +1244,9 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 						try
 						{
-							GameLauncher launcher = new GameLauncher();
+							GameLauncher launcher = new GameLauncher(SelectedDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-							launcher.WatchHighlightDemo(demo, isPlayerPerspective == MessageDialogResult.Affirmative);
+							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
 						}
 						catch (Exception e)
 						{
@@ -1283,9 +1283,9 @@ namespace CSGO_Demos_Manager.ViewModel
 						}
 						try
 						{
-							GameLauncher launcher = new GameLauncher();
+							GameLauncher launcher = new GameLauncher(SelectedDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-							launcher.WatchLowlightDemo(demo, isPlayerPerspective == MessageDialogResult.Affirmative);
+							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
 						}
 						catch (Exception e)
 						{

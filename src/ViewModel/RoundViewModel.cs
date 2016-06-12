@@ -152,8 +152,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncher launcher = new GameLauncher();
-						launcher.WatchDemoAt(CurrentDemo, CurrentRound.Tick);
+						GameLauncher launcher = new GameLauncher(CurrentDemo);
+						launcher.WatchDemoAt(CurrentRound.Tick);
 					},
 					() => CurrentRound != null));
 			}
@@ -233,8 +233,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncher launcher = new GameLauncher();
-							launcher.WatchDemoAt(CurrentDemo, kill.Tick, true, kill.KillerSteamId);
+							GameLauncher launcher = new GameLauncher(CurrentDemo);
+							launcher.WatchDemoAt(kill.Tick, true, kill.KillerSteamId);
 						}));
 			}
 		}

@@ -87,6 +87,8 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand<PlayerExtended> _goToSuspectProfileCommand;
 
+		private RelayCommand<PlayerExtended> _watchPlayerCommand;
+
 		private RelayCommand<PlayerExtended> _watchHighlightsCommand;
 
 		private RelayCommand<PlayerExtended> _watchLowlightsCommand;
@@ -413,6 +415,29 @@ namespace CSGO_Demos_Manager.ViewModel
 			}
 		}
 
+		public RelayCommand<PlayerExtended> WatchPlayerCommand
+		{
+			get
+			{
+				return _watchPlayerCommand
+					?? (_watchPlayerCommand = new RelayCommand<PlayerExtended>(
+						async player =>
+						{
+							if (AppSettings.SteamExePath() == null)
+							{
+								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
+									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								return;
+							}
+							Round firstRound = CurrentDemo.Rounds.FirstOrDefault();
+							if (firstRound == null) return;
+							GameLauncher launcher = new GameLauncher(CurrentDemo);
+							launcher.WatchDemoAt(firstRound.Tick, false, player.SteamId);
+						},
+						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+			}
+		}
+
 		public RelayCommand<PlayerExtended> WatchHighlights
 		{
 			get
@@ -428,9 +453,9 @@ namespace CSGO_Demos_Manager.ViewModel
 								return;
 							}
 							string steamId = player.SteamId.ToString();
-							GameLauncher launcher = new GameLauncher();
+							GameLauncher launcher = new GameLauncher(CurrentDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-							launcher.WatchHighlightDemo(CurrentDemo, isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
+							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						},
 						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
 			}
@@ -451,9 +476,9 @@ namespace CSGO_Demos_Manager.ViewModel
 								return;
 							}
 							string steamId = player.SteamId.ToString();
-							GameLauncher launcher = new GameLauncher();
+							GameLauncher launcher = new GameLauncher(CurrentDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-							launcher.WatchLowlightDemo(CurrentDemo, isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
+							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						},
 						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
 			}
@@ -594,8 +619,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncher launcher = new GameLauncher();
-						launcher.WatchDemoAt(CurrentDemo, round.Tick);
+						GameLauncher launcher = new GameLauncher(CurrentDemo);
+						launcher.WatchDemoAt(round.Tick);
 					},
 					round => CurrentDemo != null && SelectedRound != null));
 			}

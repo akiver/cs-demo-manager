@@ -205,8 +205,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncher launcher = new GameLauncher();
-							launcher.WatchDemoAt(CurrentDemo, stuff.Tick, true, SelectedStuff.ThrowerSteamId);
+							GameLauncher launcher = new GameLauncher(CurrentDemo);
+							launcher.WatchDemoAt(stuff.Tick, true, SelectedStuff.ThrowerSteamId);
 						}));
 			}
 		}
@@ -224,8 +224,8 @@ namespace CSGO_Demos_Manager.ViewModel
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncher launcher = new GameLauncher();
-							launcher.WatchPlayerStuff(CurrentDemo, SelectedPlayer, CurrentStuffSelector.Id);
+							GameLauncher launcher = new GameLauncher(CurrentDemo);
+							launcher.WatchPlayerStuff(SelectedPlayer, CurrentStuffSelector.Id);
 						}, () => CurrentDemo != null && SelectedPlayer != null));
 			}
 		}

@@ -25,15 +25,19 @@ namespace CSGO_Demos_Manager.Services
 		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid"};
 		private readonly Process _process = new Process();
 		private const string ARGUMENT_SEPARATOR = " ";
+		private readonly Demo _demo;
 
-		public GameLauncher()
+		public GameLauncher(Demo demo)
 		{
+			_demo = demo;
 			_process.StartInfo.FileName = AppSettings.SteamExePath();
-			SetupResolutionParameters();
+			_arguments.Add("+playdemo");
+			_arguments.Add(demo.Path);
 		}
 
 		public void StartGame()
 		{
+			SetupResolutionParameters();
 			if (Properties.Settings.Default.MoviemakerMode)
 			{
 				if (!File.Exists(Properties.Settings.Default.CsgoExePath))
@@ -58,11 +62,9 @@ namespace CSGO_Demos_Manager.Services
 			}
 		}
 
-		public void WatchDemo(Demo demo)
+		public void WatchDemo()
 		{
-			_arguments.Add("+playdemo");
-			_arguments.Add(demo.Path);
-			DeleteVdmFile(demo);
+			DeleteVdmFile();
 			StartGame();
 		}
 
@@ -75,60 +77,59 @@ namespace CSGO_Demos_Manager.Services
 			_arguments.Add(!Properties.Settings.Default.IsFullscreen ? "-windowed" : "-fullscreen");
 		}
 
-		private static void DeleteVdmFile(Demo demo)
+		private void DeleteVdmFile()
 		{
-			string vdmPath = GetVdmFilePath(demo);
-			if (File.Exists(demo.Path)) File.Delete(vdmPath);
+			string vdmPath = _demo.GetVdmFilePath();
+			if (File.Exists(vdmPath)) File.Delete(vdmPath);
 		}
 
-		internal void WatchHighlightDemo(Demo demo, bool fromPlayerPerspective, string steamId = null)
+		internal void WatchHighlightDemo(bool fromPlayerPerspective, string steamId = null)
 		{
-			_arguments.Add("+playdemo");
-			_arguments.Add(demo.Path);
 			if (fromPlayerPerspective)
 			{
 				_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
-				DeleteVdmFile(demo);
+				DeleteVdmFile();
 			}
 			else
 			{
-				GenerateHighLowVdm(demo, true, steamId);
+				GenerateHighLowVdm(true, steamId);
 			}
 			StartGame();
 		}
 
-		internal void WatchLowlightDemo(Demo demo, bool fromPlayerPerspective, string steamId = null)
+		internal void WatchLowlightDemo(bool fromPlayerPerspective, string steamId = null)
 		{
-			_arguments.Add("+playdemo");
-			_arguments.Add(demo.Path);
 			if (fromPlayerPerspective)
 			{
-				GenerateHighLowVdm(demo, false, steamId);
+				GenerateHighLowVdm(false, steamId);
 			}
 			else
 			{
 				_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
 				_arguments.Add("lowlights");
-				DeleteVdmFile(demo);
+				DeleteVdmFile();
 			}
 			StartGame();
 		}
 
-		internal void WatchDemoAt(Demo demo, int tick, bool delay = false, long steamId = -1)
+		internal void WatchDemoAt(int tick, bool delay = false, long steamId = -1)
 		{
-			_arguments.Add("+playdemo");
-			int tickDelayCount = (int)(demo.ServerTickrate * PLAYBACK_DELAY);
-			if (delay && tick > tickDelayCount) tick -= tickDelayCount;
-			_arguments.Add(demo.Path + "@" + tick);
-			if (steamId != -1) GenerateSpecPlayerVdm(demo, tick, steamId);
-			DeleteVdmFile(demo);
+			DeleteVdmFile();
+			if (delay)
+			{
+				int tickDelayCount = (int)(_demo.ServerTickrate * PLAYBACK_DELAY);
+				if (tick > tickDelayCount) tick -= tickDelayCount;
+			}
+			string generated = string.Empty;
+			generated += string.Format(Properties.Resources.skip_ahead, 1, 1, tick);
+			if (steamId != -1) generated += string.Format(Properties.Resources.spec_player, 2, tick + 1, steamId);
+			string content = string.Format(Properties.Resources.main, generated);
+			File.WriteAllText(_demo.GetVdmFilePath(), content);
 			StartGame();
 		}
 
-		internal void WatchPlayerStuff(Demo demo, PlayerExtended player, string selectedType)
+		internal void WatchPlayerStuff(PlayerExtended player, string selectedType)
 		{
-			_arguments.Add("+playdemo");
-			_arguments.Add(demo.Path);
 			EquipmentElement type = EquipmentElement.Unknown;
 			switch (selectedType)
 			{
@@ -148,25 +149,24 @@ namespace CSGO_Demos_Manager.Services
 					type = EquipmentElement.Decoy;
 					break;
 			}
-			GeneratePlayerStuffVdm(demo, player, type);
+			GeneratePlayerStuffVdm(player, type);
 			StartGame();
 		}
 
-		private static void GeneratePlayerStuffVdm(Demo demo, PlayerExtended player, EquipmentElement type)
+		private void GeneratePlayerStuffVdm(PlayerExtended player, EquipmentElement type)
 		{
-			string vdmFilePath = GetVdmFilePath(demo);
 			string generated = string.Empty;
 			int actionCount = 0;
 			int lastTick = 0;
-			int beginTickDelayCount = (int)(demo.ServerTickrate * STUFF_BEGIN_DELAY);
-			int endTickDelayCount = (int)(demo.ServerTickrate * STUFF_END_DELAY);
+			int beginTickDelayCount = (int)(_demo.ServerTickrate * STUFF_BEGIN_DELAY);
+			int endTickDelayCount = (int)(_demo.ServerTickrate * STUFF_END_DELAY);
 			int lastSuffSartedTick = 0;
 			// max delay between 2 stuffs
-			int maxTickDelayCount = (int)(demo.ServerTickrate * MAX_NEXT_STUFF_DELAY);
-			int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
+			int maxTickDelayCount = (int)(_demo.ServerTickrate * MAX_NEXT_STUFF_DELAY);
+			int nextActionDelayCount = (int)(_demo.ServerTickrate * NEXT_ACTION_DELAY);
 			string message = GetFastForwardMessage(type);
 
-			foreach (WeaponFire e in demo.WeaponFired)
+			foreach (WeaponFire e in _demo.WeaponFired)
 			{
 				// TODO rework weapon type detection and remove strong dependency with demoinfo
 				if (e.ShooterSteamId == player.SteamId && e.Weapon.Element == type
@@ -194,7 +194,7 @@ namespace CSGO_Demos_Manager.Services
 							}
 
 							// find the tick where the smoke popped
-							foreach (Round round in demo.Rounds.Where(round => round.Number == e.RoundNumber))
+							foreach (Round round in _demo.Rounds.Where(round => round.Number == e.RoundNumber))
 							{
 								foreach (
 									SmokeNadeStartedEvent smokeNadeStartedEvent in
@@ -218,7 +218,7 @@ namespace CSGO_Demos_Manager.Services
 								generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
 								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
 								// the molotov may have not burned, use time average instead
-								lastSuffSartedTick = e.Tick + (int)(demo.ServerTickrate * MOLOTOV_TIME);
+								lastSuffSartedTick = e.Tick + (int)(_demo.ServerTickrate * MOLOTOV_TIME);
 							}
 							break;
 						case EquipmentElement.Flash:
@@ -237,7 +237,7 @@ namespace CSGO_Demos_Manager.Services
 							switch (type)
 							{
 								case EquipmentElement.Flash:
-									foreach (Round round in demo.Rounds.Where(round => round.Number == e.RoundNumber))
+									foreach (Round round in _demo.Rounds.Where(round => round.Number == e.RoundNumber))
 									{
 										foreach (
 											FlashbangExplodedEvent flashEvent in
@@ -252,7 +252,7 @@ namespace CSGO_Demos_Manager.Services
 									}
 									break;
 								case EquipmentElement.Decoy:
-									foreach (DecoyStartedEvent decoyEvent in demo.DecoyStarted)
+									foreach (DecoyStartedEvent decoyEvent in _demo.DecoyStarted)
 									{
 										if (decoyEvent.ThrowerSteamId == player.SteamId
 											&& decoyEvent.RoundNumber == e.RoundNumber
@@ -264,7 +264,7 @@ namespace CSGO_Demos_Manager.Services
 									}
 									break;
 								case EquipmentElement.HE:
-									foreach (Round round in demo.Rounds.Where(round => round.Number == e.RoundNumber))
+									foreach (Round round in _demo.Rounds.Where(round => round.Number == e.RoundNumber))
 									{
 										foreach (
 											ExplosiveNadeExplodedEvent heEvent in
@@ -288,29 +288,21 @@ namespace CSGO_Demos_Manager.Services
 
 			generated += string.Format(Properties.Resources.stop_playback, ++actionCount, lastTick + nextActionDelayCount);
 			string content = string.Format(Properties.Resources.main, generated);
-			File.WriteAllText(vdmFilePath, content);
+			File.WriteAllText(_demo.GetVdmFilePath(), content);
 		}
 
-		private static void GenerateSpecPlayerVdm(Demo demo, int tick, long steamId)
-		{
-			string vdmFilePath = GetVdmFilePath(demo);
-			string generated = string.Format(Properties.Resources.spec_player, 0, tick, steamId);
-			string content = string.Format(Properties.Resources.main, generated);
-			File.WriteAllText(vdmFilePath, content);
-		}
-
-		private static void GenerateHighLowVdm(Demo demo, bool isHighlight, string steamId = null)
+		private void GenerateHighLowVdm(bool isHighlight, string steamId = null)
 		{
 			int lastTick = 0;
 			int actionCount = 0;
 			string generated = string.Empty;
 			int currentRoundNumber = 0;
-			int tickDelayCount = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_DELAY);
-			int maxTickCountNextKill = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
-			int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
+			int tickDelayCount = isHighlight ? (int)(_demo.ServerTickrate * HIGHLIGHT_DELAY) : (int)(_demo.ServerTickrate * LOWLIGHT_DELAY);
+			int maxTickCountNextKill = isHighlight ? (int)(_demo.ServerTickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY) : (int)(_demo.ServerTickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
+			int nextActionDelayCount = (int)(_demo.ServerTickrate * NEXT_ACTION_DELAY);
 			string message = "Fast forwarding to the next kill...";
 
-			foreach (KillEvent e in demo.Kills)
+			foreach (KillEvent e in _demo.Kills)
 			{
 				if ((!isHighlight && (e.KilledSteamId == Properties.Settings.Default.WatchAccountSteamId
 					|| (steamId != null && e.KilledSteamId.ToString() == steamId)))
@@ -321,7 +313,7 @@ namespace CSGO_Demos_Manager.Services
 					// check if the player had others kills during the current round
 					if (isHighlight && currentRoundNumber == e.RoundNumber)
 					{
-						startTick = startTick + (int)(demo.ServerTickrate * SWITCH_PLAYER_DELAY);
+						startTick = startTick + (int)(_demo.ServerTickrate * SWITCH_PLAYER_DELAY);
 						// fast forward if the next kill is far away
 						if (e.Tick - lastTick > maxTickCountNextKill)
 						{
@@ -345,8 +337,7 @@ namespace CSGO_Demos_Manager.Services
 
 			generated += string.Format(Properties.Resources.stop_playback, ++actionCount, lastTick + nextActionDelayCount);
 			string content = string.Format(Properties.Resources.main, generated);
-			string vdmFilePath = GetVdmFilePath(demo);
-			File.WriteAllText(vdmFilePath, content);
+			File.WriteAllText(_demo.GetVdmFilePath(), content);
 		}
 
 		private static string GetFastForwardMessage(EquipmentElement type)
@@ -367,11 +358,6 @@ namespace CSGO_Demos_Manager.Services
 				default:
 					return string.Empty;
 			}
-		}
-
-		private static string GetVdmFilePath(Demo demo)
-		{
-			return demo.Path.Substring(0, demo.Path.Length - 3) + "vdm";
 		}
 	}
 }

@@ -1610,6 +1610,11 @@ namespace CSGO_Demos_Manager.Models
 				});
 		}
 
+		public string GetVdmFilePath()
+		{
+			return Path.Substring(0, Path.Length - 3) + "vdm";
+		}
+
 		#region Handler collections changed
 
 		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

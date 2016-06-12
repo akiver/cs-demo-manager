@@ -92,6 +92,9 @@
 		<MenuItem Header="Add to whitelist"
 							  Command="{Binding Details.AddPlayerToWhitelistCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch player"
+				  Command="{Binding Details.WatchPlayerCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Watch highlights"
 							  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
@@ -116,6 +119,9 @@
 		<MenuItem Header="Add to whitelist"
 							  Command="{Binding Details.AddPlayerToWhitelistCommand, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Watch player"
+				  Command="{Binding Details.WatchPlayerCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Watch highlights"
 							  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
 							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
