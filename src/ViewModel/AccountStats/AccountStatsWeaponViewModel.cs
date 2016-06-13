@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using CSGO_Demos_Manager.Messages;
+using CSGO_Demos_Manager.Models;
 using CSGO_Demos_Manager.Models.Stats;
 using CSGO_Demos_Manager.Services.Interfaces;
 using CSGO_Demos_Manager.Views;
@@ -35,6 +36,10 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 		private bool _isBusy;
 
 		private string _notificationMessage;
+
+		private const string KILLS = "Kills";
+
+		private const string DEATHS = "Deaths";
 
 		#region Rifles properties
 		private List<CategoricalDataPoint> _datasAk47Kill;
@@ -772,9 +777,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "AK-47",
+					Category = Weapon.AK_47,
 					Value = datas.KillAk47Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -782,9 +787,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "AK-47",
+					Category = Weapon.AK_47,
 					Value = datas.DeathAk47Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -792,9 +797,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "M4A4",
+					Category = Weapon.M4A4,
 					Value = datas.KillM4A4Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -802,9 +807,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "M4A4",
+					Category = Weapon.M4A4,
 					Value = datas.DeathM4A4Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -812,9 +817,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "M4A1",
+					Category = Weapon.M4A1,
 					Value = datas.KillM4A1Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -822,9 +827,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "M4A1",
+					Category = Weapon.M4A1,
 					Value = datas.DeathM4A1Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -832,9 +837,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "AUG",
+					Category = Weapon.AUG,
 					Value = datas.KillAugCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -842,9 +847,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "AUG",
+					Category = Weapon.AUG,
 					Value = datas.DeathAugCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -852,9 +857,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Galil AR",
+					Category = Weapon.GALIL,
 					Value = datas.KillGalilarCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -862,9 +867,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Galil AR",
+					Category = Weapon.GALIL,
 					Value = datas.DeathGalilarCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -872,9 +877,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "SG 553",
+					Category = Weapon.SG_553,
 					Value = datas.KillSg553Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -882,9 +887,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "SG 553",
+					Category = Weapon.SG_553,
 					Value = datas.DeathSg553Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -892,9 +897,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Famas",
+					Category = Weapon.FAMAS,
 					Value = datas.KillFamasCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -902,9 +907,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Famas",
+					Category = Weapon.FAMAS,
 					Value = datas.DeathFamasCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -913,9 +918,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "AWP",
+					Category = Weapon.AWP,
 					Value = datas.KillAwpCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -923,9 +928,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "AWP",
+					Category = Weapon.AWP,
 					Value = datas.DeathAwpCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -933,9 +938,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "SCAR-20",
+					Category = Weapon.SCAR_20,
 					Value = datas.KillScar20Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -943,9 +948,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "SCAR-20",
+					Category = Weapon.SCAR_20,
 					Value = datas.DeathScar20Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -953,9 +958,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "G3SG1",
+					Category = Weapon.G3SG1,
 					Value = datas.KillG3Sg1Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -963,9 +968,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "G3SG1",
+					Category = Weapon.G3SG1,
 					Value = datas.DeathG3Ssg1Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -973,9 +978,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "SSG 08 (Scout)",
+					Category = Weapon.SSG_08,
 					Value = datas.KillScoutCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -983,9 +988,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "SSG 08 (Scout)",
+					Category = Weapon.SSG_08,
 					Value = datas.DeathScoutCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -994,9 +999,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MP7",
+					Category = Weapon.MP7,
 					Value = datas.KillMp7Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1004,9 +1009,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MP7",
+					Category = Weapon.MP7,
 					Value = datas.DeathMp7Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1014,9 +1019,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MP9",
+					Category = Weapon.MP9,
 					Value = datas.KillMp9Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1024,9 +1029,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MP9",
+					Category = Weapon.MP9,
 					Value = datas.DeathMp9Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1034,9 +1039,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "P90",
+					Category = Weapon.P90,
 					Value = datas.KillP90Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1044,9 +1049,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "P90",
+					Category = Weapon.P90,
 					Value = datas.DeathP90Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1054,9 +1059,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "PP-Bizon",
+					Category = Weapon.PP_BIZON,
 					Value = datas.KillBizonCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1064,9 +1069,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "PP-Bizon",
+					Category = Weapon.PP_BIZON,
 					Value = datas.DeathBizonCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1074,9 +1079,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MAC-10",
+					Category = Weapon.MAC_10,
 					Value = datas.KillMac10Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1084,9 +1089,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MAC-10",
+					Category = Weapon.MAC_10,
 					Value = datas.DeathMac10Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1094,9 +1099,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "UMP-45",
+					Category = Weapon.UMP_45,
 					Value = datas.KillUmp45Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1104,9 +1109,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "UMP-45",
+					Category = Weapon.UMP_45,
 					Value = datas.DeathUmp45Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1115,9 +1120,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Nova",
+					Category = Weapon.NOVA,
 					Value = datas.KillNovaCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1125,9 +1130,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Nova",
+					Category = Weapon.NOVA,
 					Value = datas.DeathNovaCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1135,9 +1140,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "XM1014",
+					Category = Weapon.XM1014,
 					Value = datas.KillXm1014Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1145,9 +1150,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "XM1014",
+					Category = Weapon.XM1014,
 					Value = datas.DeathXm1014Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1155,9 +1160,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MAG-7",
+					Category = Weapon.MAG_7,
 					Value = datas.KillMag7Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1165,9 +1170,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "MAG-7",
+					Category = Weapon.MAG_7,
 					Value = datas.DeathMag7Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1175,9 +1180,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Sawed-Off",
+					Category = Weapon.SAWED_OFF,
 					Value = datas.KillSawedOffCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1185,9 +1190,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Sawed-Off",
+					Category = Weapon.SAWED_OFF,
 					Value = datas.DeathSawedOffCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1195,9 +1200,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "M249",
+					Category = Weapon.M249,
 					Value = datas.KillM249Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1205,9 +1210,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "M249",
+					Category = Weapon.M249,
 					Value = datas.DeathM249Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1215,9 +1220,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Negev",
+					Category = Weapon.NEGEV,
 					Value = datas.KillNegevCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1225,9 +1230,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Negev",
+					Category = Weapon.NEGEV,
 					Value = datas.DeathNegevCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1236,9 +1241,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Glock-18",
+					Category = Weapon.GLOCK,
 					Value = datas.KillGlockCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1246,9 +1251,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Glock-18",
+					Category = Weapon.GLOCK,
 					Value = datas.DeathGlockCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1256,9 +1261,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "USP-S",
+					Category = Weapon.USP,
 					Value = datas.KillUspCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1266,9 +1271,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "USP-S",
+					Category = Weapon.USP,
 					Value = datas.DeathUspCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1276,9 +1281,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "P2000",
+					Category = Weapon.P2000,
 					Value = datas.KillP2000Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1286,9 +1291,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "P2000",
+					Category = Weapon.P2000,
 					Value = datas.DeathP2000Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1296,9 +1301,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "P250",
+					Category = Weapon.P250,
 					Value = datas.KillP250Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1306,9 +1311,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "P250",
+					Category = Weapon.P250,
 					Value = datas.DeathP250Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1316,9 +1321,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Tec-9",
+					Category = Weapon.TEC_9,
 					Value = datas.KillTec9Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1326,9 +1331,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Tec-9",
+					Category = Weapon.TEC_9,
 					Value = datas.DeathTec9Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1336,9 +1341,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Desert Eagle",
+					Category = Weapon.DEAGLE,
 					Value = datas.KillDeagleCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1346,9 +1351,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Desert Eagle",
+					Category = Weapon.DEAGLE,
 					Value = datas.DeathDeagleCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1356,9 +1361,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Five-SeveN",
+					Category = Weapon.FIVE_SEVEN,
 					Value = datas.KillFiveSevenCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1366,9 +1371,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Five-SeveN",
+					Category = Weapon.FIVE_SEVEN,
 					Value = datas.DeathFiveSevenCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1376,9 +1381,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Dual Berettas",
+					Category = Weapon.DUAL_BERETTAS,
 					Value = datas.KillDualEliteCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1386,9 +1391,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Dual Berettas",
+					Category = Weapon.DUAL_BERETTAS,
 					Value = datas.DeathDualEliteCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1396,9 +1401,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "CZ75-Auto",
+					Category = Weapon.CZ75,
 					Value = datas.KillCz75Count,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1406,9 +1411,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "CZ75-Auto",
+					Category = Weapon.CZ75,
 					Value = datas.DeathCz75Count,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1417,9 +1422,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "HE Grenade",
+					Category = Weapon.HE,
 					Value = datas.KillHeGrenadeCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1427,9 +1432,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "HE Grenade",
+					Category = Weapon.HE,
 					Value = datas.DeathHeGrenadeCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1437,9 +1442,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Molotov",
+					Category = Weapon.MOLOTOV,
 					Value = datas.KillMolotovCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1447,9 +1452,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Molotov",
+					Category = Weapon.MOLOTOV,
 					Value = datas.DeathMolotovCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1457,9 +1462,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Incendiary",
+					Category = Weapon.INCENDIARY,
 					Value = datas.KillIncendiaryCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1467,9 +1472,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Incendiary",
+					Category = Weapon.INCENDIARY,
 					Value = datas.DeathIncendiaryCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1477,9 +1482,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Tazer",
+					Category = Weapon.ZEUS,
 					Value = datas.KillTazerCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1487,9 +1492,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Tazer",
+					Category = Weapon.ZEUS,
 					Value = datas.DeathTazerCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 
@@ -1497,9 +1502,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Knife",
+					Category = Weapon.KNIFE,
 					Value = datas.KillKnifeCount,
-					Label = "Kills"
+					Label = KILLS
 				}
 			};
 
@@ -1507,9 +1512,9 @@ namespace CSGO_Demos_Manager.ViewModel.AccountStats
 			{
 				new CategoricalDataPoint
 				{
-					Category = "Knife",
+					Category = Weapon.KNIFE,
 					Value = datas.DeathKnifeCount,
-					Label = "Deaths"
+					Label = DEATHS
 				}
 			};
 

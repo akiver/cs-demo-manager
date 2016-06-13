@@ -18,6 +18,55 @@ namespace CSGO_Demos_Manager.Models
 
 	public class Weapon
 	{
+		public const string AK_47 = "AK-47";
+		public const string AUG = "AUG";
+		public const string M4A4 = "M4A4";
+		public const string FAMAS = "Famas";
+		public const string AWP = "AWP";
+		public const string M4A1 = "M4A1";
+		public const string GLOCK = "Glock-18";
+		public const string USP = "USP-S";
+		public const string DEAGLE = "Desert Eagle";
+		public const string P250 = "P250";
+		public const string GALIL = "Galil AR";
+		public const string SG008 = "SG008";
+		public const string PP_BIZON = "PP-Bizon";
+		public const string C4 = "C4";
+		public const string CZ75 = "CZ75-Auto";
+		public const string DUAL_BERETTAS = "Dual Berettas";
+		public const string FIVE_SEVEN = "Five-SeveN";
+		public const string G3SG1 = "G3SG1";
+		public const string KNIFE = "Knife";
+		public const string M249 = "M249";
+		public const string MP7 = "MP7";
+		public const string MP9 = "MP9";
+		public const string MAC_10 = "MAC-10";
+		public const string NEGEV = "Negev";
+		public const string NOVA = "Nova";
+		public const string XM1014 = "XM1014";
+		public const string P2000 = "P2000";
+		public const string P90 = "P90";
+		public const string SG_553 = "SG 553";
+		public const string SAWED_OFF = "Sawed-Off";
+		public const string SCAR_20 = "Scar-20";
+		public const string SSG_08 = "SSG 08";
+		public const string MAG_7 = "MAG-7";
+		public const string TEC_9 = "Tec-9";
+		public const string UMP_45 = "UMP-45";
+		public const string R8 = "R8 Revolver";
+		public const string ZEUS = "Zeus (Tazer)";
+		public const string FLASHBANG = "Flashbang";
+		public const string HE = "HE Grenade";
+		public const string SMOKE = "Smoke";
+		public const string DECOY = "Decoy";
+		public const string MOLOTOV = "Molotov";
+		public const string INCENDIARY = "Incendiary";
+		public const string KEVLAR = "Kevlar";
+		public const string HELMET = "Helmet";
+		public const string DEFUSE_KIT = "Defuse Kit";
+		public const string WORLD = "World";
+		public const string UNKNOWN = "Unknown";
+
 		[JsonProperty("element")]
 		public EquipmentElement Element { get; set; }
 
@@ -44,282 +93,283 @@ namespace CSGO_Demos_Manager.Models
 			new Weapon
 			{
 				Element = EquipmentElement.AK47,
-				Name = "AK-47",
+				Name = AK_47,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.AUG,
-				Name = "AUG",
+				Name = AUG,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.AWP,
-				Name = "AWP",
+				Name = AWP,
 				Type = WeaponType.Sniper
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Bizon,
-				Name = "PP-Bizon",
+				Name = PP_BIZON,
 				Type = WeaponType.SMG
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Bomb,
-				Name = "C4",
+				Name = C4,
 				Type = WeaponType.Equipment
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.CZ,
-				Name = "CZ75-Auto",
+				Name = CZ75,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Deagle,
-				Name = "Deagle",
+				Name = DEAGLE,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.DualBarettas,
-				Name = "Dual Barettas",
+				Name = DUAL_BERETTAS,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Famas,
-				Name = "Famas",
+				Name = FAMAS,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.FiveSeven,
-				Name = "Five-SeveN",
+				Name = FIVE_SEVEN,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.G3SG1,
-				Name = "G3SG1 (Autonoob)",
+				Name = G3SG1,
 				Type = WeaponType.Sniper
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Gallil,
-				Name = "Galil AR",
+				Name = GALIL,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Glock,
-				Name = "Glock-18",
+				Name = GLOCK,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Knife,
-				Name = "Knife",
+				Name = KNIFE,
 				Type = WeaponType.Equipment
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.M249,
-				Name = "M249",
+				Name = M249,
 				Type = WeaponType.Heavy
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.M4A1,
-				Name = "M4A1",
+				Name = M4A1,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.M4A4,
-				Name = "M4A4",
+				Name = M4A4,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.MP7,
-				Name = "MP7",
+				Name = MP7,
 				Type = WeaponType.SMG
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.MP9,
-				Name = "MP9",
+				Name = MP9,
 				Type = WeaponType.SMG
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Mac10,
-				Name = "MAC-10",
+				Name = MAC_10,
 				Type = WeaponType.SMG
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Negev,
-				Name = "Negev"
+				Name = NEGEV,
+				Type = WeaponType.Heavy
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Nova,
-				Name = "Nova",
+				Name = NOVA,
 				Type = WeaponType.Heavy
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.P2000,
-				Name = "P2000",
+				Name = P2000,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.P250,
-				Name = "P250",
+				Name = P250,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.P90,
-				Name = "P90",
+				Name = P90,
 				Type = WeaponType.SMG
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.SG556,
-				Name = "SG 553",
+				Name = SG_553,
 				Type = WeaponType.Rifle
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.SawedOff,
-				Name = "Sawed-Off",
+				Name = SAWED_OFF,
 				Type = WeaponType.Heavy
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Scar20,
-				Name = "Scar-20 (Autonoob)",
+				Name = SCAR_20,
 				Type = WeaponType.Sniper
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Scout,
-				Name = "SSG 08 (Scout)",
+				Name = SSG_08,
 				Type = WeaponType.Sniper
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Swag7,
-				Name = "MAG-7",
+				Name = MAG_7,
 				Type = WeaponType.Heavy
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Tec9,
-				Name = "Tec-9",
+				Name = TEC_9,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.UMP,
-				Name = "UMP-45",
+				Name = UMP_45,
 				Type = WeaponType.SMG
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.USP,
-				Name = "USP-S",
+				Name = USP,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Revolver,
-				Name = "R8 Revolver",
+				Name = R8,
 				Type = WeaponType.Pistol
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.XM1014,
-				Name = "XM1014",
+				Name = XM1014,
 				Type = WeaponType.Heavy
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Zeus,
-				Name = "Zeus (Tazer)",
+				Name = ZEUS,
 				Type = WeaponType.Equipment 
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Flash,
-				Name = "Flashbang",
+				Name = FLASHBANG,
 				Type = WeaponType.Grenade
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.HE,
-				Name = "HE Grenade",
+				Name = HE,
 				Type = WeaponType.Grenade
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Decoy,
-				Name = "Decoy",
+				Name = DECOY,
 				Type = WeaponType.Grenade
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Smoke,
-				Name = "Smoke",
+				Name = SMOKE,
 				Type = WeaponType.Grenade
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Molotov,
-				Name = "Molotov",
+				Name = MOLOTOV,
 				Type = WeaponType.Grenade
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Incendiary,
-				Name = "Incendiary",
+				Name = INCENDIARY,
 				Type = WeaponType.Grenade
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Kevlar,
-				Name = "Kevlar",
+				Name = KEVLAR,
 				Type = WeaponType.Equipment
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Helmet,
-				Name = "Helmet",
+				Name = HELMET,
 				Type = WeaponType.Equipment
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.DefuseKit,
-				Name = "Defuse Kit",
+				Name = DEFUSE_KIT,
 				Type = WeaponType.Equipment
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.World,
-				Name = "World",
+				Name = WORLD,
 				Type = WeaponType.Unkown
 			},
 			new Weapon
 			{
 				Element = EquipmentElement.Unknown,
-				Name = "Unknown",
+				Name = UNKNOWN,
 				Type = WeaponType.Unkown
 			}
 		};
