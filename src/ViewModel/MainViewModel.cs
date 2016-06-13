@@ -31,7 +31,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private RelayCommand _settingsFlyoutClosedCommand;
 
-		private ObservableCollection<string> _folders;
+		private ObservableCollection<string> _folders = new ObservableCollection<string>();
 
 		private string _selectedFolder;
 

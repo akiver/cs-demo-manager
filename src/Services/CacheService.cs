@@ -596,10 +596,14 @@ namespace CSGO_Demos_Manager.Services
 		/// </summary>
 		private async Task<List<string>> InitCsgoFolders(List<string> folders)
 		{
-			string csgoFolderPath = Path.GetFullPath(AppSettings.GetCsgoPath()).ToLower();
-			if (Directory.Exists(csgoFolderPath)) folders.Add(csgoFolderPath);
-			string replayFolderPath = Path.GetFullPath(csgoFolderPath + "/replays").ToLower();
-			if (Directory.Exists(replayFolderPath)) folders.Add(replayFolderPath);
+			string csgoPath = AppSettings.GetCsgoPath();
+			if (csgoPath != null)
+			{
+				string csgoFolderPath = Path.GetFullPath(csgoPath).ToLower();
+				if (Directory.Exists(csgoFolderPath)) folders.Add(csgoFolderPath);
+				string replayFolderPath = Path.GetFullPath(csgoFolderPath + "/replays").ToLower();
+				if (Directory.Exists(replayFolderPath)) folders.Add(replayFolderPath);
+			}
 
 			if (folders.Any())
 			{
