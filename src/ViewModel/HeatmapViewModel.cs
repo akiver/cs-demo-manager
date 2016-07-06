@@ -164,19 +164,26 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _windowLoadedCommand
 					?? (_windowLoadedCommand = new RelayCommand(
-					() =>
+					async () =>
 					{
-						Sides = new MultiSelectCollectionView<ComboboxSelector>(new List<ComboboxSelector>
+						try
+						{
+							Sides = new MultiSelectCollectionView<ComboboxSelector>(new List<ComboboxSelector>
 						{
 							new ComboboxSelector("CT", "Counter-Terrorists"),
 							new ComboboxSelector("T", "Terrorists")
 						});
-						Rounds = new MultiSelectCollectionView<Round>(CurrentDemo.Rounds);
-						Players = new MultiSelectCollectionView<PlayerExtended>(CurrentDemo.Players);
+							Rounds = new MultiSelectCollectionView<Round>(CurrentDemo.Rounds);
+							Players = new MultiSelectCollectionView<PlayerExtended>(CurrentDemo.Players);
 
-						// Get the original overview image
-						_mapService = MapService.Factory(CurrentDemo);
-						OverviewLayer = _mapService.GetWriteableImage();
+							// Get the original overview image
+							_mapService = MapService.Factory(CurrentDemo);
+							OverviewLayer = _mapService.GetWriteableImage();
+						}
+						catch (Exception e)
+						{
+							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
+						}
 					}));
 			}
 		}

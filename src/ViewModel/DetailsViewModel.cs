@@ -20,6 +20,7 @@ using CSGO_Demos_Manager.Models.Source;
 using CSGO_Demos_Manager.Models.Steam;
 using CSGO_Demos_Manager.Services.Excel;
 using CSGO_Demos_Manager.Services.Interfaces;
+using CSGO_Demos_Manager.Services.Map;
 using GalaSoft.MvvmLight.Messaging;
 using Application = System.Windows.Application;
 
@@ -273,12 +274,17 @@ namespace CSGO_Demos_Manager.ViewModel
 			{
 				return _heatmapCommand
 					?? (_heatmapCommand = new RelayCommand<Demo>(
-					demo =>
+					async demo =>
 					{
-						var heatmapViewModel = (new ViewModelLocator()).Heatmap;
+						if (!MapService.Maps.Contains(demo.MapName))
+						{
+							await _dialogService.ShowErrorAsync("This map doesn't support this feature.", MessageDialogStyle.Affirmative);
+							return;
+						}
+						var heatmapViewModel = new ViewModelLocator().Heatmap;
 						heatmapViewModel.CurrentDemo = demo;
 						HeatmapView heatmapView = new HeatmapView();
-						var mainViewModel = (new ViewModelLocator()).Main;
+						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(heatmapView);
 					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}

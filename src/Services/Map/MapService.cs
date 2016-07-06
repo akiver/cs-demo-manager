@@ -28,42 +28,64 @@ namespace CSGO_Demos_Manager.Services.Map
 
 		public Image Overview { get; set; }
 
+		private const string DUST2 = "de_dust2";
+		private const string INFERNO = "de_inferno";
+		private const string NUKE = "de_nuke";
+		private const string CACHE = "de_cache";
+		private const string SEASON = "de_season";
+		private const string TRAIN = "de_train";
+		private const string CBBLE = "de_cbble";
+		private const string OVERPASS = "de_overpass";
+		private const string MIRAGE = "de_mirage";
+		private const string EMPIRE = "de_empire";
+		private const string SANTORINI = "de_santorini";
+		private const string TULIP = "de_tulip";
+		private const string ROYAL = "de_royal";
+		private const string CRUISE = "cs_cruise";
+		private const string COAST = "de_coast";
+		private const string MIKLA = "de_mikla";
+
+		public static string[] Maps = {
+			DUST2, INFERNO, NUKE, CACHE, SEASON, TRAIN, CBBLE, OVERPASS,
+			MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA
+		};
+
 		public static MapService Factory(Demo demo)
 		{
 			switch (demo.MapName)
 			{
-				case "de_dust2":
+				case DUST2:
 					return new Dust2();
-				case "de_inferno":
+				case INFERNO:
 					return new Inferno();
-				case "de_nuke":
+				case NUKE:
 					if (demo.Date > new DateTime(2016, 02, 17)) return new NewNuke();
 					return new Nuke();
-				case "de_cache":
+				case CACHE:
 					return new Cache();
-				case "de_season":
+				case SEASON:
 					return new Season();
-				case "de_cbble":
+				case CBBLE:
 					return new Cbble();
-				case "de_overpass":
+				case OVERPASS:
 					return new Overpass();
-				case "de_mirage":
+				case MIRAGE:
 					return new Mirage();
-				case "de_train":
+				case TRAIN:
 					return new Train();
-				case "de_empire":
+				case EMPIRE:
 					return new Empire();
-				case "de_santorini":
+				case SANTORINI:
 					return new Santorini();
-				case "de_tulip":
+				case TULIP:
 					return new Tulip();
-				case "de_royal":
+				case ROYAL:
 					return new Royal();
-				case "cs_cruise":
+				case CRUISE:
 					return new Cruise();
-				case "de_coast":
+				case COAST:
 					return new Coast();
-				case "de_mikla":
+				case MIKLA:
 					return new Mikla();
 				default:
 					throw new MapUnavailableException();
