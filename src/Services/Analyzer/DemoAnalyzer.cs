@@ -1169,7 +1169,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// <param name="e"></param>
 		protected void HandlePlayerHurted(object sender, PlayerHurtEventArgs e)
 		{
-			if (!IsMatchStarted || e.Player == null) return;
+			if (!IsMatchStarted || e.Player == null || e.Weapon == null) return;
 
 			// may be a bot on MM demos
 			PlayerExtended hurted = Demo.Players.FirstOrDefault(player => player.SteamId == e.Player.SteamID);
