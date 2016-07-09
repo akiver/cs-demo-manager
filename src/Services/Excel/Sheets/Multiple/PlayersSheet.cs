@@ -39,12 +39,29 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "MVP", CellType.Numeric },
 				{ "Score", CellType.Numeric },
 				{ "Clutch", CellType.Numeric },
+				{ "Clutch won", CellType.Numeric },
 				{ "Clutch lost", CellType.Numeric },
+				{ "Clutch won %", CellType.Numeric },
 				{ "1v1", CellType.Numeric },
+				{ "1v1 won", CellType.Numeric },
+				{ "1v1 loss", CellType.Numeric },
+				{ "1v1 won %", CellType.Numeric },
 				{ "1v2", CellType.Numeric },
+				{ "1v2 won", CellType.Numeric },
+				{ "1v2 loss", CellType.Numeric },
+				{ "1v2 won %", CellType.Numeric },
 				{ "1v3", CellType.Numeric },
+				{ "1v3 won", CellType.Numeric },
+				{ "1v3 loss", CellType.Numeric },
+				{ "1v3 won %", CellType.Numeric },
 				{ "1v4", CellType.Numeric },
+				{ "1v4 won", CellType.Numeric },
+				{ "1v4 loss", CellType.Numeric },
+				{ "1v4 won %", CellType.Numeric },
 				{ "1v5", CellType.Numeric },
+				{ "1v5 won", CellType.Numeric },
+				{ "1v5 loss", CellType.Numeric },
+				{ "1v5 won %", CellType.Numeric },
 				{ "Entry kill", CellType.Numeric },
 				{ "Entry kill win", CellType.Numeric },
 				{ "Entry kill lost", CellType.Numeric },
@@ -99,12 +116,23 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 						data[player].JumpKillCount += player.JumpKillCount;
 						data[player].CrouchKillCount += player.CrouchKillCount;
 						data[player].ClutchCount += player.ClutchCount;
+						data[player].ClutchWonCount += player.ClutchWonCount;
 						data[player].ClutchLostCount += player.ClutchLostCount;
 						data[player].Clutch1V1Count += player.Clutch1V1Count;
 						data[player].Clutch1V2Count += player.Clutch1V2Count;
 						data[player].Clutch1V3Count += player.Clutch1V3Count;
 						data[player].Clutch1V4Count += player.Clutch1V4Count;
 						data[player].Clutch1V5Count += player.Clutch1V5Count;
+						data[player].Clutch1V1WonCount += player.Clutch1V1WonCount;
+						data[player].Clutch1V2WonCount += player.Clutch1V2WonCount;
+						data[player].Clutch1V3WonCount += player.Clutch1V3WonCount;
+						data[player].Clutch1V4WonCount += player.Clutch1V4WonCount;
+						data[player].Clutch1V5WonCount += player.Clutch1V5WonCount;
+						data[player].Clutch1V1LossCount += player.Clutch1V1LossCount;
+						data[player].Clutch1V2LossCount += player.Clutch1V2LossCount;
+						data[player].Clutch1V3LossCount += player.Clutch1V3LossCount;
+						data[player].Clutch1V4LossCount += player.Clutch1V4LossCount;
+						data[player].Clutch1V5LossCount += player.Clutch1V5LossCount;
 						data[player].BombPlantedCount += player.BombPlantedCount;
 						data[player].BombDefusedCount += player.BombDefusedCount;
 						data[player].BombExplodedCount += player.BombExplodedCount;
@@ -165,12 +193,29 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MvpCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ScoreCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ClutchCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ClutchWonCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ClutchLostCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.ClutchWonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V1Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V1WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V1LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V1WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V2Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V2WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V2LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V2WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V3Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V3WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V3LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V3WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V4Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V4WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V4LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V4WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V5Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V5WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V5LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.Clutch1V5WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillWinCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillLossCount);

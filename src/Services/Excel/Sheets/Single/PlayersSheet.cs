@@ -44,10 +44,25 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "Crouch kill", CellType.Numeric },
 				{ "Jump kill", CellType.Numeric },
 				{ "1v1", CellType.Numeric },
+				{ "1v1 won", CellType.Numeric },
+				{ "1v1 loss", CellType.Numeric },
+				{ "1v1 won %", CellType.Numeric },
 				{ "1v2", CellType.Numeric },
+				{ "1v2 won", CellType.Numeric },
+				{ "1v2 loss", CellType.Numeric },
+				{ "1v2 won %", CellType.Numeric },
 				{ "1v3", CellType.Numeric },
+				{ "1v3 won", CellType.Numeric },
+				{ "1v3 loss", CellType.Numeric },
+				{ "1v3 won %", CellType.Numeric },
 				{ "1v4", CellType.Numeric },
+				{ "1v4 won", CellType.Numeric },
+				{ "1v4 loss", CellType.Numeric },
+				{ "1v4 won %", CellType.Numeric },
 				{ "1v5", CellType.Numeric },
+				{ "1v5 won", CellType.Numeric },
+				{ "1v5 loss", CellType.Numeric },
+				{ "1v5 won %", CellType.Numeric },
 				{ "Flashbang", CellType.Numeric },
 				{ "Smoke", CellType.Numeric },
 				{ "HE", CellType.Numeric },
@@ -104,10 +119,25 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Boolean, player.CrouchKillCount);
 					SetCellValue(row, columnNumber++, CellType.Boolean, player.JumpKillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V1Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V1WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V1LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V1WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V2Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V2WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V2LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V2WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V3WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V4WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5WonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5LossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.Clutch1V5WonPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.FlashbangThrownCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.SmokeThrownCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeGrenadeThrownCount);

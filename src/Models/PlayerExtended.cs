@@ -613,19 +613,67 @@ namespace CSGO_Demos_Manager.Models
 		public int ClutchWonCount => Clutches.Count(c => c.HasWon);
 
 		[JsonIgnore]
-		public int Clutch1V1Count => Clutches.Count(c => c.OpponentCount == 1 && c.HasWon);
+		public int Clutch1V1WonCount => Clutches.Count(c => c.OpponentCount == 1 && c.HasWon);
 
 		[JsonIgnore]
-		public int Clutch1V2Count => Clutches.Count(c => c.OpponentCount == 2 && c.HasWon);
+		public int Clutch1V2WonCount => Clutches.Count(c => c.OpponentCount == 2 && c.HasWon);
 
 		[JsonIgnore]
-		public int Clutch1V3Count => Clutches.Count(c => c.OpponentCount == 3 && c.HasWon);
+		public int Clutch1V3WonCount => Clutches.Count(c => c.OpponentCount == 3 && c.HasWon);
 
 		[JsonIgnore]
-		public int Clutch1V4Count => Clutches.Count(c => c.OpponentCount == 4 && c.HasWon);
+		public int Clutch1V4WonCount => Clutches.Count(c => c.OpponentCount == 4 && c.HasWon);
 
 		[JsonIgnore]
-		public int Clutch1V5Count => Clutches.Count(c => c.OpponentCount == 5 && c.HasWon);
+		public int Clutch1V5WonCount => Clutches.Count(c => c.OpponentCount == 5 && c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V1LossCount => Clutches.Count(c => c.OpponentCount == 1 && !c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V2LossCount => Clutches.Count(c => c.OpponentCount == 2 && !c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V3LossCount => Clutches.Count(c => c.OpponentCount == 3 && !c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V4LossCount => Clutches.Count(c => c.OpponentCount == 4 && !c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V5LossCount => Clutches.Count(c => c.OpponentCount == 5 && !c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V1Count => Clutches.Count(c => c.OpponentCount == 1);
+
+		[JsonIgnore]
+		public int Clutch1V2Count => Clutches.Count(c => c.OpponentCount == 2);
+
+		[JsonIgnore]
+		public int Clutch1V3Count => Clutches.Count(c => c.OpponentCount == 3);
+
+		[JsonIgnore]
+		public int Clutch1V4Count => Clutches.Count(c => c.OpponentCount == 4);
+
+		[JsonIgnore]
+		public int Clutch1V5Count => Clutches.Count(c => c.OpponentCount == 5);
+
+		[JsonIgnore]
+		public decimal ClutchWonPercent => ClutchCount == 0 ? 0 : Math.Round((decimal)(ClutchWonCount * 100) / ClutchCount, 2);
+
+		[JsonIgnore]
+		public decimal Clutch1V1WonPercent => Clutch1V1Count == 0 ? 0 : Math.Round((decimal)(Clutch1V1WonCount * 100) / Clutch1V1Count, 2);
+
+		[JsonIgnore]
+		public decimal Clutch1V2WonPercent => Clutch1V2Count == 0 ? 0 : Math.Round((decimal)(Clutch1V2WonCount * 100) / Clutch1V2Count, 2);
+
+		[JsonIgnore]
+		public decimal Clutch1V3WonPercent => Clutch1V3Count == 0 ? 0 : Math.Round((decimal)(Clutch1V3WonCount * 100) / Clutch1V3Count, 2);
+
+		[JsonIgnore]
+		public decimal Clutch1V4WonPercent => Clutch1V1Count == 0 ? 0 : Math.Round((decimal)(Clutch1V4WonCount * 100) / Clutch1V4Count, 2);
+
+		[JsonIgnore]
+		public decimal Clutch1V5WonPercent => Clutch1V5Count == 0 ? 0 : Math.Round((decimal)(Clutch1V5WonCount * 100) / Clutch1V5Count, 2);
 
 		[JsonIgnore]
 		public bool IsControllingBot
@@ -871,6 +919,16 @@ namespace CSGO_Demos_Manager.Models
 			RaisePropertyChanged(() => Clutch1V3Count);
 			RaisePropertyChanged(() => Clutch1V4Count);
 			RaisePropertyChanged(() => Clutch1V5Count);
+			RaisePropertyChanged(() => Clutch1V1WonCount);
+			RaisePropertyChanged(() => Clutch1V2WonCount);
+			RaisePropertyChanged(() => Clutch1V3WonCount);
+			RaisePropertyChanged(() => Clutch1V4WonCount);
+			RaisePropertyChanged(() => Clutch1V5WonCount);
+			RaisePropertyChanged(() => Clutch1V1LossCount);
+			RaisePropertyChanged(() => Clutch1V2LossCount);
+			RaisePropertyChanged(() => Clutch1V3LossCount);
+			RaisePropertyChanged(() => Clutch1V4LossCount);
+			RaisePropertyChanged(() => Clutch1V5LossCount);
 		}
 
 		public void ResetStats()
