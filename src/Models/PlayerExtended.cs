@@ -670,7 +670,7 @@ namespace CSGO_Demos_Manager.Models
 		public decimal Clutch1V3WonPercent => Clutch1V3Count == 0 ? 0 : Math.Round((decimal)(Clutch1V3WonCount * 100) / Clutch1V3Count, 2);
 
 		[JsonIgnore]
-		public decimal Clutch1V4WonPercent => Clutch1V1Count == 0 ? 0 : Math.Round((decimal)(Clutch1V4WonCount * 100) / Clutch1V4Count, 2);
+		public decimal Clutch1V4WonPercent => Clutch1V4Count == 0 ? 0 : Math.Round((decimal)(Clutch1V4WonCount * 100) / Clutch1V4Count, 2);
 
 		[JsonIgnore]
 		public decimal Clutch1V5WonPercent => Clutch1V5Count == 0 ? 0 : Math.Round((decimal)(Clutch1V5WonCount * 100) / Clutch1V5Count, 2);
