@@ -137,14 +137,14 @@ namespace CSGO_Demos_Manager.Models
 		private BombExplodedEvent _bombExploded;
 
 		/// <summary>
-		/// Infos on the round's open kill
-		/// </summary>
-		private OpenKillEvent _openKillEvent;
-
-		/// <summary>
-		/// Infos on the round's entry kill
+		/// Infos on the round's entry kill (first kill as T)
 		/// </summary>
 		private EntryKillEvent _entryKillEvent;
+
+		/// <summary>
+		/// Infos on the round's entry hold (first kill as CT)
+		/// </summary>
+		private EntryHoldKillEvent _entryHoldKillEvent;
 
 		/// <summary>
 		/// Infos on players damages made during the round
@@ -384,18 +384,18 @@ namespace CSGO_Demos_Manager.Models
 			}
 		}
 
-		[JsonProperty("open_kill")]
-		public OpenKillEvent OpenKillEvent
-		{
-			get { return _openKillEvent; }
-			set { Set(() => OpenKillEvent, ref _openKillEvent, value); }
-		}
-
 		[JsonProperty("entry_kill")]
 		public EntryKillEvent EntryKillEvent
 		{
 			get { return _entryKillEvent; }
 			set { Set(() => EntryKillEvent, ref _entryKillEvent, value); }
+		}
+
+		[JsonProperty("entry_hold_kill")]
+		public EntryHoldKillEvent EntryHoldKillEvent
+		{
+			get { return _entryHoldKillEvent; }
+			set { Set(() => EntryHoldKillEvent, ref _entryHoldKillEvent, value); }
 		}
 
 		[JsonProperty("bomb_planted", IsReference = false)]

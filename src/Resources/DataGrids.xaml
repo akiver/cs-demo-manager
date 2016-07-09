@@ -173,6 +173,14 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Win/Lose/Draw" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="ClutchWonHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Has Won Clutch?" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="RoundWonHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Round Won?" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="BannedPlayerHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="VAC / OW ban?" />
 	</Style>
@@ -445,6 +453,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Equipement Value Team 2 ($)" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="ClutchOpponentCountHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="1vX" />
+	</Style>
+	
 	<Style TargetType="DataGridColumnHeader" x:Key="Clutch1v1Header" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="1 versus 1" />
 	</Style>
@@ -540,20 +552,8 @@
 	</Style>
 
 	<!--DataGrid Row style for scoreboard -->
-	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerTeam1Style" BasedOn="{StaticResource DataGridRowStyle}">
-		<Setter Property="ContextMenu" Value="{StaticResource PlayerTeam1RowContextMenu}" />
-		<Style.Triggers>
-			<DataTrigger Binding="{Binding IsVacBanned}" Value="True">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
-			</DataTrigger>
-			<DataTrigger Binding="{Binding IsOverwatchBanned}" Value="True">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
-			</DataTrigger>
-		</Style.Triggers>
-	</Style>
-
-	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerTeam2Style" BasedOn="{StaticResource DataGridRowStyle}">
-		<Setter Property="ContextMenu" Value="{StaticResource PlayerTeam2RowContextMenu}" />
+	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerStyle" BasedOn="{StaticResource DataGridRowStyle}">
+		<Setter Property="ContextMenu" Value="{StaticResource PlayerRowContextMenu}" />
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding IsVacBanned}" Value="True">
 				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
@@ -573,6 +573,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Killer Name" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="KillerSideHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Killer Side" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="KilledNameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Killed Name" />
 	</Style>
@@ -583,6 +587,10 @@
 
 	<Style TargetType="DataGridColumnHeader" x:Key="WeaponNameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Weapon Name" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="DuelResultHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Has Won Duel?" />
 	</Style>
 
 	<Style TargetType="DataGridColumnHeader" x:Key="HasWinHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">

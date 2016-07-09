@@ -15,11 +15,11 @@ namespace CSGO_Demos_Manager.Services.Excel
 
 		private RoundsSheet _roundsSheet;
 
-		private OpenKillsRoundSheet _openKillsRoundSheet;
+		private EntryHoldKillsRoundSheet _entryHoldKillsRoundSheet;
 
-		private OpenKillsPlayerSheet _openKillsPlayerSheet;
+		private EntryHoldKillsPlayerSheet _entryHoldKillsPlayerSheet;
 
-		private OpenKillsTeamSheet _openKillsTeamSheet;
+		private EntryHoldKillsTeamSheet _entryHoldKillsTeamSheet;
 
 		private EntryKillsRoundSheet _entryKillsRoundSheet;
 
@@ -42,12 +42,12 @@ namespace CSGO_Demos_Manager.Services.Excel
 			await _playersSheet.Generate();
 			_roundsSheet = new RoundsSheet(Workbook, _demo);
 			await _roundsSheet.Generate();
-			_openKillsRoundSheet = new OpenKillsRoundSheet(Workbook, _demo);
-			await _openKillsRoundSheet.Generate();
-			_openKillsPlayerSheet = new OpenKillsPlayerSheet(Workbook, _demo);
-			await _openKillsPlayerSheet.Generate();
-			_openKillsTeamSheet = new OpenKillsTeamSheet(Workbook, _demo);
-			await _openKillsTeamSheet.Generate();
+			_entryHoldKillsRoundSheet = new EntryHoldKillsRoundSheet(Workbook, _demo);
+			await _entryHoldKillsRoundSheet.Generate();
+			_entryHoldKillsPlayerSheet = new EntryHoldKillsPlayerSheet(Workbook, _demo);
+			await _entryHoldKillsPlayerSheet.Generate();
+			_entryHoldKillsTeamSheet = new EntryHoldKillsTeamSheet(Workbook, _demo);
+			await _entryHoldKillsTeamSheet.Generate();
 			_entryKillsRoundSheet = new EntryKillsRoundSheet(Workbook, _demo);
 			await _entryKillsRoundSheet.Generate();
 			_entryKillsPlayerSheet = new EntryKillsPlayerSheet(Workbook, _demo);

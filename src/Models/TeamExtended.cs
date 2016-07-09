@@ -22,21 +22,61 @@ namespace CSGO_Demos_Manager.Models
 		public ObservableCollection<PlayerExtended> Players { get; set; }
 
 		[JsonIgnore]
+		public int LossRowCount { get; set; }
+
+		[JsonIgnore]
+		public int EntryHoldKillCount
+		{
+			get { return Players.SelectMany(p => p.EntryHoldKills).Count(); }
+		}
+
+		[JsonIgnore]
 		public int EntryKillCount
 		{
 			get { return Players.SelectMany(p => p.EntryKills).Count(); }
 		}
 
 		[JsonIgnore]
-		public int EntryKillWinCount
+		public int EntryHoldKillWonCount
 		{
-			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin); }
+			get { return Players.SelectMany(p => p.EntryHoldKills).Count(e => e.HasWon); }
+		}
+
+		[JsonIgnore]
+		public int EntryHoldKillLossCount
+		{
+			get { return Players.SelectMany(p => p.EntryHoldKills).Count(e => e.HasWon == false); }
+		}
+
+		[JsonIgnore]
+		public decimal RatioEntryHoldKill
+		{
+			get
+			{
+				int total = Players.SelectMany(p => p.EntryHoldKills).Count();
+				int won = Players.SelectMany(p => p.EntryHoldKills).Count(e => e.HasWon);
+				int loss = Players.SelectMany(p => p.EntryHoldKills).Count(e => e.HasWon == false);
+
+				decimal percent = 0;
+				if (EntryKillWonCount == 0) return percent;
+				if (loss == 0) return 100;
+				percent = won / (decimal)total * 100;
+				percent = Math.Round(percent, 0);
+
+				return percent;
+			}
+		}
+
+		[JsonIgnore]
+		public int EntryKillWonCount
+		{
+			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWon); }
 		}
 
 		[JsonIgnore]
 		public int EntryKillLossCount
 		{
-			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false); }
+			get { return Players.SelectMany(p => p.EntryKills).Count(e => e.HasWon == false); }
 		}
 
 		[JsonIgnore]
@@ -70,34 +110,16 @@ namespace CSGO_Demos_Manager.Models
 		public int TradeDeathCount => Players.Sum(p => p.TradeDeathCount);
 
 		[JsonIgnore]
-		public int OpenKillCount
-		{
-			get { return Players.SelectMany(p => p.OpeningKills).Count(); }
-		}
-
-		[JsonIgnore]
-		public int OpenKillWinCount
-		{
-			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin); }
-		}
-
-		[JsonIgnore]
-		public int OpenKillLossCount
-		{
-			get { return Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false); }
-		}
-
-		[JsonIgnore]
 		public decimal RatioEntryKill
 		{
 			get
 			{
 				int entryKillCount = Players.SelectMany(p => p.EntryKills).Count();
-				int entryKillWin = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin);
-				int entryKillLoss = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWin == false);
+				int entryKillWin = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWon);
+				int entryKillLoss = Players.SelectMany(p => p.EntryKills).Count(e => e.HasWon == false);
 
 				decimal entryKillPercent = 0;
-				if (EntryKillWinCount == 0) return entryKillPercent;
+				if (EntryKillWonCount == 0) return entryKillPercent;
 				if (entryKillLoss == 0) return 100;
 				entryKillPercent = (entryKillWin / (decimal)entryKillCount) * 100;
 				entryKillPercent = Math.Round(entryKillPercent, 0);
@@ -105,31 +127,6 @@ namespace CSGO_Demos_Manager.Models
 				return entryKillPercent;
 			}
 		}
-
-		[JsonIgnore]
-		public string RatioEntryKillAsString => RatioEntryKill + " %";
-
-		[JsonIgnore]
-		public decimal RatioOpenKill
-		{
-			get
-			{
-				int openKillCount = Players.SelectMany(p => p.OpeningKills).Count();
-				int openKillWin = Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin);
-				int openKillLoss = Players.SelectMany(p => p.OpeningKills).Count(e => e.HasWin == false);
-
-				decimal openKillPercent = 0;
-				if (openKillWin == 0) return openKillPercent;
-				if (openKillLoss == 0) return 100;
-				openKillPercent = (openKillWin / (decimal)openKillCount) * 100;
-				openKillPercent = Math.Round(openKillPercent, 0);
-
-				return openKillPercent;
-			}
-		}
-
-		[JsonIgnore]
-		public string RatioOpenKillAsString => RatioOpenKill + " %";
 
 		[JsonIgnore]
 		public int MatchCount { get; set; } = 1;
@@ -240,6 +237,7 @@ namespace CSGO_Demos_Manager.Models
 		public void Clear()
 		{
 			Players.Clear();
+			LossRowCount = 0;
 		}
 
 		public TeamExtended Clone()
@@ -257,7 +255,7 @@ namespace CSGO_Demos_Manager.Models
 					if (player != null)
 					{
 						player.EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
-						player.OpeningKills.CollectionChanged += OnOpenKillsCollectionChanged;
+						player.EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
 					}
 				}
 			}
@@ -266,17 +264,15 @@ namespace CSGO_Demos_Manager.Models
 		private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			RaisePropertyChanged(() => EntryKillCount);
-			RaisePropertyChanged(() => EntryKillWinCount);
+			RaisePropertyChanged(() => EntryKillWonCount);
 			RaisePropertyChanged(() => EntryKillLossCount);
-			RaisePropertyChanged(() => RatioEntryKillAsString);
 		}
 
-		private void OnOpenKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		private void OnEntryHoldKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			RaisePropertyChanged(() => OpenKillCount);
-			RaisePropertyChanged(() => OpenKillWinCount);
-			RaisePropertyChanged(() => OpenKillLossCount);
-			RaisePropertyChanged(() => RatioOpenKillAsString);
+			RaisePropertyChanged(() => EntryHoldKillCount);
+			RaisePropertyChanged(() => EntryHoldKillWonCount);
+			RaisePropertyChanged(() => EntryHoldKillLossCount);
 		}
 	}
 }

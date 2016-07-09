@@ -198,6 +198,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="1" Margin="5 0 5 0" Width="90" Height="30"
@@ -300,6 +301,28 @@
 						</Rectangle.Fill>
 					</Rectangle>
 					<TextBlock Text="Stuffs" Style="{StaticResource ButtonTitleStyle}" Margin="5 0 0 0"/>
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="7"
+					Margin="5 0 5 0"
+					Width="110"
+					Height="30"
+					Command="{Binding ShowPlayerCommand}"
+					CommandParameter="{Binding SelectedPlayer}"
+					Style="{StaticResource GeneralButtonStyle}"
+					ToolTip="Player details (CTRL+P)">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="20"
+							   Height="20">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Player details"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
 		</Grid>
@@ -540,17 +563,23 @@
 
 								<DataGrid Grid.Column="0"
 										  ItemsSource="{Binding PlayersTeam1Collection, IsAsync=True}"
-										  SelectedItem="{Binding SelectedPlayerTeam1}"
+										  SelectedItem="{Binding SelectedPlayer}"
 										  Width="Auto"
 										  Style="{StaticResource DataGridStyle}"
 										  CellStyle="{StaticResource DataGridCellStyle}"
 										  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 										  EnableColumnVirtualization ="True"
 										  EnableRowVirtualization ="True"
-										  RowStyle="{StaticResource DataGridRowPlayerTeam1Style}">
+										  RowStyle="{StaticResource DataGridRowPlayerStyle}">
 									<DataGrid.Resources>
 										<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 									</DataGrid.Resources>
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="MouseDoubleClick">
+											<command:EventToCommand Command="{Binding ShowPlayerCommand, Mode=OneWay}"
+																	CommandParameter="{Binding SelectedPlayer}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
 									<DataGrid.Columns>
 										<DataGridTemplateColumn Header="Avatar"
 																Width="Auto"
@@ -775,9 +804,9 @@
 
 								<DataGrid Grid.Column="1"
 										  ItemsSource="{Binding PlayersTeam2Collection, IsAsync=True}"
-										  SelectedItem="{Binding SelectedPlayerTeam2}"
+										  SelectedItem="{Binding SelectedPlayer}"
 										  CellStyle="{StaticResource DataGridCellStyle}"
-										  RowStyle="{StaticResource DataGridRowPlayerTeam2Style}"
+										  RowStyle="{StaticResource DataGridRowPlayerStyle}"
 										  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 										  EnableColumnVirtualization ="True"
 										  EnableRowVirtualization ="True"
@@ -785,6 +814,12 @@
 									<DataGrid.Resources>
 										<helpers:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 									</DataGrid.Resources>
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="MouseDoubleClick">
+											<command:EventToCommand Command="{Binding ShowPlayerCommand, Mode=OneWay}"
+																	CommandParameter="{Binding SelectedPlayer}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
 									<DataGrid.Columns>
 										<DataGridTemplateColumn Header="Avatar"
 																Width="Auto"

@@ -14,7 +14,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "Total", CellType.Numeric },
 				{ "Win", CellType.Numeric },
 				{ "Loss", CellType.Numeric },
-				{ "Ratio", CellType.String }
+				{ "Rate", CellType.Numeric }
 			};
 			Demo = demo;
 			Sheet = workbook.CreateSheet("Entry Kills Teams");
@@ -28,17 +28,17 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				int columnNumber = 0;
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamCT.Name);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryKillCount);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryKillWinCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryKillWonCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryKillLossCount);
-				SetCellValue(row, columnNumber, CellType.String, Demo.TeamCT.RatioEntryKillAsString);
+				SetCellValue(row, columnNumber, CellType.Numeric, Demo.TeamCT.RatioEntryKill);
 
 				row = Sheet.CreateRow(2);
 				columnNumber = 0;
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamT.Name);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryKillCount);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryKillWinCount);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryKillWonCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryKillLossCount);
-				SetCellValue(row, columnNumber, CellType.String, Demo.TeamT.RatioEntryKillAsString);
+				SetCellValue(row, columnNumber, CellType.Numeric, Demo.TeamT.RatioEntryKill);
 			});
 		}
 	}

@@ -70,17 +70,17 @@ namespace CSGO_Demos_Manager.Models.Excel
 
 		public decimal EntryKillWinPercent => EntryKillCount == 0 ? 0 : Math.Round((decimal)(EntryKillWinCount * 100) / EntryKillCount, 2);
 
-		public int OpenKillCount { get; set; }
+		public int EntryHoldKillCount { get; set; }
 
-		public int OpenKillWinCount { get; set; }
+		public int EntryHoldKillWonCount { get; set; }
 
-		public int OpenKillLossCount { get; set; }
+		public int EntryHoldKillLossCount { get; set; }
 
 		public int TradeKillCount { get; set; }
 
 		public int TradeDeathCount { get; set; }
 
-		public decimal OpenKillWinPercent => OpenKillCount == 0 ? 0 : Math.Round((decimal)(OpenKillWinCount * 100) / OpenKillCount, 2);
+		public decimal EntryHoldKillWinPercent => EntryHoldKillCount == 0 ? 0 : Math.Round((decimal)(EntryHoldKillWonCount * 100) / EntryHoldKillCount, 2);
 
 		public decimal KillPerRound => RoundCount == 0 ? 0 : Math.Round((decimal)KillCount / RoundCount, 2);
 

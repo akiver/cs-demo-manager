@@ -5,9 +5,9 @@ using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 {
-	public class OpenKillsPlayerSheet : AbstractSingleSheet
+	public class EntryHoldKillsPlayerSheet : AbstractSingleSheet
 	{
-		public OpenKillsPlayerSheet(IWorkbook workbook, Demo demo)
+		public EntryHoldKillsPlayerSheet(IWorkbook workbook, Demo demo)
 		{
 			Headers = new Dictionary<string, CellType>(){
 				{ "Name", CellType.String },
@@ -15,10 +15,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 				{ "Total", CellType.Numeric },
 				{ "Win", CellType.Numeric },
 				{ "Loss", CellType.Numeric },
-				{ "Ratio", CellType.String }
+				{ "Ratio", CellType.Numeric }
 			};
 			Demo = demo;
-			Sheet = workbook.CreateSheet("Open Kills Players");
+			Sheet = workbook.CreateSheet("Entry Hold Kills Players");
 		}
 
 		public override async Task GenerateContent()
@@ -33,10 +33,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.String, player.Name);
 					SetCellValue(row, columnNumber++, CellType.String, player.SteamId.ToString());
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OpeningKills.Count);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OpenKillWinCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.OpenKillLossCount);
-					SetCellValue(row, columnNumber, CellType.String, player.RatioOpenKillAsString);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryHoldKills.Count);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryHoldKillWonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryHoldKillLossCount);
+					SetCellValue(row, columnNumber, CellType.Numeric, player.RatioEntryHoldKill);
 
 					rowNumber++;
 				}

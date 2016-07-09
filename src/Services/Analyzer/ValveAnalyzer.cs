@@ -222,6 +222,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KilledSide = e.Victim.Team,
 				RoundNumber = CurrentRound.Number,
 				IsKillerCrouching = e.Killer?.IsDucking ?? false,
+				IsHeadshot = e.Headshot,
 				Point = new KillHeatmapPoint
 				{
 					KillerX = e.Killer?.Position.X ?? 0,
@@ -243,6 +244,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				if (e.Killer.IsDucking) killer.CrouchKillCount++;
 				if (e.Killer.Velocity.Z > 0) killer.JumpKillCount++;
+				if (e.Victim.SteamID != killer.SteamId) killer.RoundsMoneyEarned[CurrentRound.Number] += weapon.KillAward;
 				ProcessTradeKill(killEvent);
 			}
 

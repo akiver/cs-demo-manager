@@ -379,6 +379,11 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.CurrentEquipmentValue);
 					if (!string.IsNullOrEmpty(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
 					if (!string.IsNullOrEmpty(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
+					foreach (PlayerExtended player in Demo.Players)
+					{
+						if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+							player.RoundsMoneyEarned[CurrentRound.Number] = 0;
+					}
 				});
 			}
 

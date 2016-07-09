@@ -25,10 +25,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		public Round CurrentRound { get; set; } = new Round();
 		public Overtime CurrentOvertime { get; set; } = new Overtime();
+		public ClutchEvent CurrentClutch { get; set; }
 
 		public bool IsMatchStarted { get; set; } = false;
-		public bool IsEntryKillDone { get; set; }
-		public bool IsOpeningKillDone { get; set; }
+		public bool IsFirstKillOccured { get; set; }
 		public bool IsHalfMatch { get; set; } = false;
 		public bool IsOvertime { get; set; } = false;
 		public bool IsLastRoundHalf { get; set; }
@@ -61,6 +61,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		const double AVERAGE_KPR = 0.679; // average kills per round
 		const double AVERAGE_SPR = 0.317; // average survived rounds per round
 		const double AVERAGE_RMK = 1.277; // average value calculated from rounds with multiple kills
+
+		// Money awards
+		private const int LOSS_ROW_1 = 1400;
+		private const int LOSS_ROW_2 = 1900;
+		private const int LOSS_ROW_3 = 2400;
+		private const int LOSS_ROW_4 = 2900;
+		private const int LOSS_ROW_5 = 3400;
+		private const int WIN_BOMB_TARGET = 3500;
+		private const int WIN_BOMB_DEFUSED = 3500;
+		private const int WIN_TIME_OVER = 3250;
+		private const int WIN_ELIMINATION = 3250;
+		private const int BOMB_PLANTED_BONUS = 800;
 
 		/// <summary>
 		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who thrown a moloto
@@ -321,6 +333,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				KillerVelocityY = e.Killer?.Velocity.Y ?? 0,
 				KillerVelocityZ = e.Killer?.Velocity.Z ?? 0,
 				RoundNumber = CurrentRound.Number,
+				IsHeadshot = e.Headshot,
 				IsKillerCrouching = e.Killer?.IsDucking ?? false,
 				Point = new KillHeatmapPoint
 				{
@@ -338,6 +351,13 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				if (e.Killer.IsDucking) killer.CrouchKillCount++;
 				if (e.Killer.Velocity.Z > 0) killer.JumpKillCount++;
+				if (e.Victim.SteamID != killer.SteamId)
+				{
+					if (!killer.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						killer.RoundsMoneyEarned[CurrentRound.Number] = weapon.KillAward;
+					else
+						killer.RoundsMoneyEarned[CurrentRound.Number] += weapon.KillAward;
+				}
 				ProcessTradeKill(killEvent);
 			}
 
@@ -408,6 +428,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 			CurrentRound.WinnerSide = e.Winner;
 			UpdateTeamScore(e);
+			ProcessRoundEndReward(e);
 			if (e.Reason == RoundEndReason.CTSurrender)
 			{
 				Demo.Surrender = IsHalfMatch ? Demo.TeamT : Demo.TeamCT;
@@ -419,20 +440,20 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			Application.Current.Dispatcher.Invoke(delegate
 			{
-				if (CurrentRound.OpenKillEvent != null)
+				// update round won status for entry kills / hold kills
+				if (e.Winner == CurrentRound.EntryKillEvent?.KillerSide) CurrentRound.EntryKillEvent.HasWonRound = true;
+				if (e.Winner == CurrentRound.EntryHoldKillEvent?.KillerSide) CurrentRound.EntryHoldKillEvent.HasWonRound = true;
+				List<PlayerExtended> playerWithEntryKill = Demo.Players.Where(p => p.HasEntryKill).ToList();
+				foreach (PlayerExtended player in playerWithEntryKill)
 				{
-					if (CurrentRound.OpenKillEvent.KillerSide == Team.Terrorist && e.Winner == Team.Terrorist
-					|| CurrentRound.OpenKillEvent.KillerSide == Team.CounterTerrorist && e.Winner == Team.CounterTerrorist)
-					{
-						CurrentRound.OpenKillEvent.HasWin = true;
-						if (CurrentRound.EntryKillEvent != null) CurrentRound.EntryKillEvent.HasWin = true;
-					}
+					if (player.Side == e.Winner) player.EntryKills.Last().HasWonRound = true;
 				}
-				var playerWithEntryKill = Demo.Players.FirstOrDefault(p => p.HasEntryKill);
-				playerWithEntryKill?.EntryKills.Add(CurrentRound.EntryKillEvent);
+				List<PlayerExtended> playerWithEntryHoldKill = Demo.Players.Where(p => p.HasEntryHoldKill).ToList();
+				foreach (PlayerExtended player in playerWithEntryHoldKill)
+				{
+					if (player.Side == e.Winner) player.EntryHoldKills.Last().HasWonRound = true;
+				}
 
-				var playerWithOpeningKill = Demo.Players.FirstOrDefault(p => p.HasOpeningKill);
-				playerWithOpeningKill?.OpeningKills.Add(CurrentRound.OpenKillEvent);
 				ComputeEseaRws();
 			});
 		}
@@ -635,10 +656,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				foreach (Player pl in Parser.PlayingParticipants)
 				{
 					PlayerExtended player = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID);
-					if (player != null && !player.EquipementValueRounds.ContainsKey(CurrentRound.Number))
-					{
-						player.EquipementValueRounds.Add(CurrentRound.Number, pl.CurrentEquipmentValue);
-					}
+					if (player != null) player.EquipementValueRounds[CurrentRound.Number] = pl.CurrentEquipmentValue;
 				}
 
 				if (IsHalfMatch)
@@ -921,7 +939,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 							Y = e.Position.Y,
 							PlayerSteamId = thrower.SteamId,
 							PlayerName = thrower.Name,
-							Team = thrower?.Side ?? Team.Spectate,
+							Team = thrower.Side,
 							Event = molotovEvent,
 							RoundNumber = CurrentRound.Number
 						};
@@ -1294,6 +1312,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Number = ++RoundCount,
 				StartTimeSeconds = Parser.CurrentTime
 			};
+			CurrentClutch = null;
 
 			// Sometimes parser return wrong money values on 1st round of side
 			if (CurrentRound.Number == 1 || CurrentRound.Number == 16)
@@ -1307,28 +1326,32 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Team.Terrorist).Sum(a => a.Money);
 			}
 
-			IsEntryKillDone = false;
-			IsOpeningKillDone = false;
+			IsFirstKillOccured = false;
 			IsFirstShotOccured = false;
 			_playerInClutch1 = null;
 			_playerInClutch2 = null;
 
 			KillsThisRound.Clear();
-
 			// Nobody is controlling a BOT at the beginning of a round
 			foreach (PlayerExtended pl in Demo.Players)
 			{
-				pl.OpponentClutchCount = 0;
 				pl.HasEntryKill = false;
-				pl.HasOpeningKill = false;
+				pl.HasEntryHoldKill = false;
 				pl.IsControllingBot = false;
+				if (pl.IsConnected) pl.RoundPlayedCount++;
+				if (!pl.RoundsMoneyEarned.ContainsKey(CurrentRound.Number)) pl.RoundsMoneyEarned.Add(CurrentRound.Number, 0);
+				if (!pl.StartMoneyRounds.ContainsKey(CurrentRound.Number)) pl.StartMoneyRounds.Add(CurrentRound.Number, 0);
+				if (!pl.EquipementValueRounds.ContainsKey(CurrentRound.Number)) pl.EquipementValueRounds.Add(CurrentRound.Number, 0);
 				Player player = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId);
 				if (player != null)
 				{
-					if (pl.IsConnected) pl.RoundPlayedCount++;
-					pl.IsAlive = true;
 					pl.Side = player.Team;
-					if (!pl.StartMoneyRounds.ContainsKey(CurrentRound.Number)) pl.StartMoneyRounds.Add(CurrentRound.Number, player.Money);
+					pl.StartMoneyRounds[CurrentRound.Number] = player.Money;
+					pl.IsAlive = true;
+				}
+				else
+				{
+					pl.IsAlive = false;
 				}
 			}
 		}
@@ -1365,18 +1388,23 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// </summary>
 		protected void ProcessClutches()
 		{
-			int terroristAliveCount = Demo.Players.Count(p => p.Side == Team.Terrorist && p.IsAlive);
-			int counterTerroristAliveCount = Demo.Players.Count(p => p.Side == Team.CounterTerrorist && p.IsAlive);
+			int terroristAliveCount = Parser.PlayingParticipants.Count(p => p.Team == Team.Terrorist && p.IsAlive);
+			int counterTerroristAliveCount = Parser.PlayingParticipants.Count(p => p.Team == Team.CounterTerrorist && p.IsAlive);
 
 			// First dectection of a 1vX situation, a terro is in clutch
 			if (_playerInClutch1 == null && terroristAliveCount == 1)
 			{
 				// Set the number of opponent in his clutch
-				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Side == Team.Terrorist && p.IsAlive);
-				if (_playerInClutch1 != null && _playerInClutch1.OpponentClutchCount == 0)
+				Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.Team == Team.Terrorist && p.IsAlive);
+				if (pl == null) return;
+				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID && p.IsAlive);
+				if (_playerInClutch1 != null)
 				{
-					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Side == Team.CounterTerrorist && p.IsAlive);
-					_playerInClutch1.ClutchCount++;
+					_playerInClutch1.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
+					{
+						RoundNumber = CurrentRound.Number,
+						OpponentCount = counterTerroristAliveCount
+					});
 					return;
 				}
 			}
@@ -1384,11 +1412,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// First dectection of a 1vX situation, a CT is in clutch
 			if (_playerInClutch1 == null && counterTerroristAliveCount == 1)
 			{
-				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.Side == Team.CounterTerrorist && p.IsAlive);
-				if (_playerInClutch1 != null && _playerInClutch1.OpponentClutchCount == 0)
+				Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.Team == Team.CounterTerrorist && p.IsAlive);
+				if (pl == null) return;
+				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID && p.IsAlive);
+				if (_playerInClutch1 != null)
 				{
-					_playerInClutch1.OpponentClutchCount = Demo.Players.Count(p => p.Side == Team.Terrorist && p.IsAlive);
-					_playerInClutch1.ClutchCount++;
+					_playerInClutch1.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
+					{
+						RoundNumber = CurrentRound.Number,
+						OpponentCount = terroristAliveCount
+					});
 					return;
 				}
 			}
@@ -1396,11 +1429,18 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			// 1v1 detection
 			if (counterTerroristAliveCount == 1 && terroristAliveCount == 1 && _playerInClutch1 != null)
 			{
-				Team player2Team = _playerInClutch1.Side == Team.CounterTerrorist ? Team.Terrorist : Team.CounterTerrorist;
-				_playerInClutch2 = Demo.Players.FirstOrDefault(p => p.Side == player2Team && p.IsAlive);
+				Player player1 = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == _playerInClutch1.SteamId);
+				if (player1 == null) return;
+				Team player2Team = player1.Team == Team.CounterTerrorist ? Team.Terrorist : Team.CounterTerrorist;
+				Player player2 = Parser.PlayingParticipants.FirstOrDefault(p => p.Team == player2Team);
+				if (player2 == null) return;
+				_playerInClutch2 = Demo.Players.FirstOrDefault(p => p.SteamId == player2.SteamID && p.IsAlive);
 				if (_playerInClutch2 == null) return;
-				_playerInClutch2.ClutchCount++;
-				_playerInClutch2.OpponentClutchCount = 1;
+				_playerInClutch2.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
+				{
+					RoundNumber = CurrentRound.Number,
+					OpponentCount = 1
+				});
 			}
 		}
 
@@ -1491,7 +1531,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 			{
 				killEvent.IsTradeKill = true;
 				PlayerExtended killer = Demo.Players.FirstOrDefault(p => p.SteamId == killEvent.KillerSteamId);
-				if(killer != null) killer.TradeKillCount++;
+				if (killer != null) killer.TradeKillCount++;
 				PlayerExtended killed = Demo.Players.FirstOrDefault(p => p.SteamId == killEvent.KilledSteamId);
 				if (killed != null) killed.TradeDeathCount++;
 			}
@@ -1499,11 +1539,7 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 		protected void ProcessOpenAndEntryKills(KillEvent killEvent)
 		{
-			if (killEvent.KillerSteamId == 0) return;
-
-			if (IsEntryKillDone) return;
-
-			if (IsOpeningKillDone) return;
+			if (killEvent.KillerSteamId == 0 || IsFirstKillOccured) return;
 
 			PlayerExtended killed = Demo.Players.FirstOrDefault(p => Equals(p.SteamId, killEvent.KilledSteamId));
 			if (killed == null) return;
@@ -1516,10 +1552,10 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 				Application.Current.Dispatcher.Invoke(delegate
 				{
 					killer.HasEntryKill = true;
-					killer.HasOpeningKill = true;
-
-					CurrentRound.EntryKillEvent = new EntryKillEvent(Parser.IngameTick, Parser.CurrentTime)
+					killed.HasEntryKill = true;
+					EntryKillEvent entryKillEvent = new EntryKillEvent(Parser.IngameTick, Parser.CurrentTime)
 					{
+						RoundNumber = CurrentRound.Number,
 						KilledSteamId = killed.SteamId,
 						KilledName = killed.Name,
 						KilledSide = killEvent.KilledSide,
@@ -1528,36 +1564,41 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						KillerSide = killEvent.KillerSide,
 						Weapon = killEvent.Weapon
 					};
-					CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick, Parser.CurrentTime)
-					{
-						KillerSteamId = killer.SteamId,
-						KillerName = killer.Name,
-						KilledSide = killEvent.KilledSide,
-						KilledSteamId = killed.SteamId,
-						KilledName = killed.Name,
-						KillerSide = killEvent.KillerSide,
-						Weapon = killEvent.Weapon
-					};
-					IsEntryKillDone = true;
-					IsOpeningKillDone = true;
+					CurrentRound.EntryKillEvent = entryKillEvent;
+					EntryKillEvent killerEvent = CurrentRound.EntryKillEvent.Clone();
+					killerEvent.HasWon = true;
+					killer.EntryKills.Add(killerEvent);
+					EntryKillEvent killedEvent = CurrentRound.EntryKillEvent.Clone();
+					killedEvent.HasWon = false;
+					killed.EntryKills.Add(killedEvent);
 				});
 			}
 			else
 			{
-				// CT done the kill , it's an open kill
-				CurrentRound.OpenKillEvent = new OpenKillEvent(Parser.IngameTick, Parser.CurrentTime)
+				// CT done the kill , it's an entry hold kill
+				killer.HasEntryHoldKill = true;
+				killed.HasEntryHoldKill = true;
+				EntryHoldKillEvent entryHoldKillEvent = new EntryHoldKillEvent(Parser.IngameTick, Parser.CurrentTime)
 				{
-					KillerSteamId = killer.SteamId,
-					KillerName = killer.Name,
-					KilledSide = killEvent.KilledSide,
+					RoundNumber = CurrentRound.Number,
 					KilledSteamId = killed.SteamId,
 					KilledName = killed.Name,
+					KilledSide = killEvent.KilledSide,
+					KillerSteamId = killer.SteamId,
+					KillerName = killer.Name,
 					KillerSide = killEvent.KillerSide,
 					Weapon = killEvent.Weapon
 				};
-				killer.HasOpeningKill = true;
-				IsOpeningKillDone = true;
+				CurrentRound.EntryHoldKillEvent = entryHoldKillEvent;
+				EntryHoldKillEvent killerEvent = CurrentRound.EntryHoldKillEvent.Clone();
+				killerEvent.HasWon = true;
+				killer.EntryHoldKills.Add(killerEvent);
+				EntryHoldKillEvent killedEvent = CurrentRound.EntryHoldKillEvent.Clone();
+				killedEvent.HasWon = false;
+				killed.EntryHoldKills.Add(killedEvent);
 			}
+
+			IsFirstKillOccured = true;
 		}
 
 		/// <summary>
@@ -1575,12 +1616,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerName = Demo.TeamT.Name;
+						Demo.TeamT.LossRowCount = 0;
+						Demo.TeamCT.LossRowCount++;
 					}
 					else
 					{
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
+						Demo.TeamCT.LossRowCount = 0;
+						Demo.TeamT.LossRowCount++;
 					}
 				}
 				else
@@ -1590,12 +1635,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerName = Demo.TeamT.Name;
+						Demo.TeamT.LossRowCount = 0;
+						Demo.TeamCT.LossRowCount++;
 					}
 					else
 					{
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
+						Demo.TeamCT.LossRowCount = 0;
+						Demo.TeamT.LossRowCount++;
 					}
 				}
 			}
@@ -1608,12 +1657,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
+						Demo.TeamCT.LossRowCount = 0;
+						Demo.TeamT.LossRowCount++;
 					}
 					else
 					{
 						Demo.ScoreSecondHalfTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerName = Demo.TeamT.Name;
+						Demo.TeamT.LossRowCount = 0;
+						Demo.TeamCT.LossRowCount++;
 					}
 				}
 				else
@@ -1623,12 +1676,16 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
+						Demo.TeamCT.LossRowCount = 0;
+						Demo.TeamT.LossRowCount++;
 					}
 					else
 					{
 						Demo.ScoreFirstHalfTeam2++;
 						Demo.ScoreTeam2++;
 						CurrentRound.WinnerName = Demo.TeamT.Name;
+						Demo.TeamT.LossRowCount = 0;
+						Demo.TeamCT.LossRowCount++;
 					}
 				}
 			}
@@ -1640,71 +1697,239 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		/// </summary>
 		protected void CheckForSpecialClutchEnd()
 		{
+			if (_playerInClutch1 == null) return;
+
+			Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == _playerInClutch1.SteamId);
+			if (pl == null) return;
+
 			// 1vX
-			if (_playerInClutch1 != null && _playerInClutch2 == null)
+			if (_playerInClutch2 == null)
 			{
-				if (_playerInClutch1.Side == Team.Terrorist && CurrentRound.WinnerSide == Team.Terrorist
-					|| _playerInClutch1.Side == Team.CounterTerrorist && CurrentRound.WinnerSide == Team.CounterTerrorist)
+				if (pl.Team == Team.Terrorist && CurrentRound.WinnerSide == Team.Terrorist
+					|| pl.Team == Team.CounterTerrorist && CurrentRound.WinnerSide == Team.CounterTerrorist)
 				{
-					// T won the clutch
-					UpdatePlayerClutchCount(_playerInClutch1);
-					if (_playerInClutch2 != null) _playerInClutch2.ClutchLostCount++;
+					_playerInClutch1.Clutches.Last().HasWon = true;
 				}
-			} else if (_playerInClutch1 != null && _playerInClutch2 != null)
+			} else if (_playerInClutch2 != null)
 			{
 				// 1V1
 				switch (CurrentRound.WinnerSide)
 				{
 					case Team.CounterTerrorist:
-						if (_playerInClutch1.Side == Team.CounterTerrorist)
+						if (pl.Team == Team.CounterTerrorist)
 						{
 							// CT won
-							UpdatePlayerClutchCount(_playerInClutch1);
-							_playerInClutch2.ClutchLostCount++;
+							_playerInClutch1.Clutches.Last().HasWon = true;
 						}
 						else
 						{
 							// T won
-							UpdatePlayerClutchCount(_playerInClutch2);
-							_playerInClutch1.ClutchLostCount++;
+							_playerInClutch2.Clutches.Last().HasWon = true;
 						}
 						break;
 					case Team.Terrorist:
-						if (_playerInClutch1.Side == Team.Terrorist)
+						if (pl.Team == Team.Terrorist)
 						{
 							// T won
-							UpdatePlayerClutchCount(_playerInClutch1);
-							_playerInClutch2.ClutchLostCount++;
+							_playerInClutch1.Clutches.Last().HasWon = true;
 						}
 						else
 						{
 							// CT won
-							UpdatePlayerClutchCount(_playerInClutch2);
-							_playerInClutch1.ClutchLostCount++;
+							_playerInClutch2.Clutches.Last().HasWon = true;
 						}
 						break;
 				}
 			}
 		}
 
-		private static void UpdatePlayerClutchCount(PlayerExtended player)
+		protected void ProcessRoundEndReward(RoundEndedEventArgs e)
 		{
-			switch (player.OpponentClutchCount)
+			TeamExtended looser = CurrentRound.WinnerName == Demo.TeamCT.Name ? Demo.TeamT : Demo.TeamCT;
+			foreach (PlayerExtended player in Demo.Players)
+			{
+				switch (e.Reason)
+				{
+					case RoundEndReason.BombDefused:
+						if (player.Side == Team.CounterTerrorist)
+						{
+							if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+								player.RoundsMoneyEarned[CurrentRound.Number] = WIN_BOMB_DEFUSED;
+							else
+								player.RoundsMoneyEarned[CurrentRound.Number] += WIN_BOMB_DEFUSED;
+						}
+						else
+						{
+							switch (looser.LossRowCount)
+							{
+								case 1:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_1 + BOMB_PLANTED_BONUS;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_1 + BOMB_PLANTED_BONUS;
+									break;
+								case 2:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_2 + BOMB_PLANTED_BONUS;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_2 + BOMB_PLANTED_BONUS;
+									break;
+								case 3:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_3 + BOMB_PLANTED_BONUS;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_3 + BOMB_PLANTED_BONUS;
+									break;
+								case 4:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_4 + BOMB_PLANTED_BONUS;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_4 + BOMB_PLANTED_BONUS;
+									break;
+								default:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_5 + BOMB_PLANTED_BONUS;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_5 + BOMB_PLANTED_BONUS;
+									break;
+							}
+						}
+						break;
+					case RoundEndReason.TargetBombed:
+						if (player.Side == Team.Terrorist)
+						{
+							if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+								player.RoundsMoneyEarned[CurrentRound.Number] = WIN_BOMB_TARGET;
+							else
+								player.RoundsMoneyEarned[CurrentRound.Number] += WIN_BOMB_TARGET;
+						}
+						else
+							UpdateLooserMoneyReward(looser, player);
+						break;
+					case RoundEndReason.CTWin:
+						if (player.Side == Team.CounterTerrorist)
+						{
+							if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+								player.RoundsMoneyEarned[CurrentRound.Number] = WIN_ELIMINATION;
+							else
+								player.RoundsMoneyEarned[CurrentRound.Number] += WIN_ELIMINATION;
+						}
+						else
+						{
+							switch (looser.LossRowCount)
+							{
+								case 1:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
+											? LOSS_ROW_1 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_1;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
+											? LOSS_ROW_1 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_1;
+									break;
+								case 2:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
+											? LOSS_ROW_2 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_2;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
+											? LOSS_ROW_2 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_2;
+									break;
+								case 3:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
+											? LOSS_ROW_3 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_3;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
+											? LOSS_ROW_3 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_3;
+									break;
+								case 4:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
+											? LOSS_ROW_4 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_4;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
+											? LOSS_ROW_4 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_4;
+									break;
+								default:
+									if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+										player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
+											? LOSS_ROW_5 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_5;
+									else
+										player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
+											? LOSS_ROW_5 + BOMB_PLANTED_BONUS
+											: LOSS_ROW_5;
+									break;
+							}
+						}
+						break;
+					case RoundEndReason.TerroristWin:
+						if (player.Side == Team.Terrorist)
+						{
+							if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+								player.RoundsMoneyEarned[CurrentRound.Number] = WIN_ELIMINATION;
+							else
+								player.RoundsMoneyEarned[CurrentRound.Number] += WIN_ELIMINATION;
+						}
+						else
+							UpdateLooserMoneyReward(looser, player);
+						break;
+					case RoundEndReason.TargetSaved:
+						if (player.Side == Team.CounterTerrorist)
+						{
+							if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+								player.RoundsMoneyEarned[CurrentRound.Number] = WIN_TIME_OVER;
+							else
+								player.RoundsMoneyEarned[CurrentRound.Number] += WIN_TIME_OVER;
+						}
+						else
+							if (!player.IsAlive) UpdateLooserMoneyReward(looser, player);
+						break;
+				}
+			}
+		}
+
+		private void UpdateLooserMoneyReward(TeamExtended looser, PlayerExtended player)
+		{
+			switch (looser.LossRowCount)
 			{
 				case 1:
-					player.Clutch1V1Count++;
+					if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_1;
+					else
+						player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_1;
 					break;
 				case 2:
-					player.Clutch1V2Count++;
+					if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_2;
+					else
+						player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_2;
 					break;
 				case 3:
-					player.Clutch1V3Count++;
+					if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_3;
+					else
+						player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_3;
 					break;
 				case 4:
-					player.Clutch1V4Count++;
+					if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_4;
+					else
+						player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_4;
 					break;
-				case 5:
-					player.Clutch1V5Count++;
+				default:
+					if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_5;
+					else
+						player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_5;
 					break;
 			}
 		}

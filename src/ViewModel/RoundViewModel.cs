@@ -217,7 +217,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			VisibleStartTime = DateTime.Today.AddSeconds(-5);
 			VisibleEndTime = CurrentRound.EndTickTime.AddSeconds(5);
 			RoundEventList = await _roundService.GetTimeLineEventList(CurrentDemo, CurrentRound);
-			PlayersStats = await _playerService.GetRoundStats(CurrentDemo, CurrentRound);
+			PlayersStats = await _playerService.GetPlayerRoundStatsListAsync(CurrentDemo, CurrentRound);
 		}
 
 		public RelayCommand<KillEvent> WatchKillCommand

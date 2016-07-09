@@ -906,9 +906,7 @@ namespace CSGO_Demos_Manager.Models
 					return player.ClutchCount;
 				}
 
-				return Players.Sum(
-					playerExtended => playerExtended.Clutch1V1Count + playerExtended.Clutch1V2Count
-					+ playerExtended.Clutch1V3Count + playerExtended.Clutch1V4Count + playerExtended.Clutch1V5Count);
+				return Players.Sum(p => p.ClutchCount);
 			}
 		}
 
@@ -1461,7 +1459,7 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public int ClutchWinCount
+		public int ClutchWonCount
 		{
 			get
 			{
@@ -1469,17 +1467,17 @@ namespace CSGO_Demos_Manager.Models
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedPlayerSteamId);
 					if (player == null) return 0;
-					return player.Clutch1V1Count + player.Clutch1V2Count + player.Clutch1V3Count + player.Clutch1V4Count + player.Clutch1V5Count;
+					return player.ClutchWonCount;
 				}
 
 				if (Settings.Default.SelectedStatsAccountSteamID != 0)
 				{
 					PlayerExtended player = Players.FirstOrDefault(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID);
 					if (player == null) return 0;
-					return player.Clutch1V1Count + player.Clutch1V2Count + player.Clutch1V3Count + player.Clutch1V4Count + player.Clutch1V5Count;
+					return player.ClutchWonCount;
 				}
 
-				return Players.Sum(player => player.Clutch1V1Count + player.Clutch1V2Count + player.Clutch1V3Count + player.Clutch1V4Count + player.Clutch1V5Count);
+				return Players.Sum(player => player.ClutchWonCount);
 			}
 		}
 

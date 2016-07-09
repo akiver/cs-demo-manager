@@ -44,9 +44,7 @@ namespace CSGO_Demos_Manager.ViewModel
 
 		private readonly ICacheService _cacheService;
 
-		private PlayerExtended _selectedPlayerTeam1;
-
-		private PlayerExtended _selectedPlayerTeam2;
+		private PlayerExtended _selectedPlayer;
 
 		private bool _isAnalyzing;
 
@@ -65,6 +63,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		private RelayCommand<Demo> _analyzeDemoCommand;
 
 		private RelayCommand<int> _goToRoundCommand;
+
+		private RelayCommand<PlayerExtended> _goToPlayerCommand;
 
 		private RelayCommand<Demo> _heatmapCommand;
 
@@ -126,16 +126,10 @@ namespace CSGO_Demos_Manager.ViewModel
 			set { Set(() => SelectedRound, ref _selectedRound, value); }
 		}
 
-		public PlayerExtended SelectedPlayerTeam1
+		public PlayerExtended SelectedPlayer
 		{
-			get { return _selectedPlayerTeam1; }
-			set { Set(() => SelectedPlayerTeam1, ref _selectedPlayerTeam1, value); }
-		}
-
-		public PlayerExtended SelectedPlayerTeam2
-		{
-			get { return _selectedPlayerTeam2; }
-			set { Set(() => SelectedPlayerTeam2, ref _selectedPlayerTeam2, value); }
+			get { return _selectedPlayer; }
+			set { Set(() => SelectedPlayer, ref _selectedPlayer, value); }
 		}
 
 		public bool IsAnalyzing
@@ -210,7 +204,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
 								foreach (PlayerSummary playerSummary in playerSummaryList)
 								{
-									CurrentDemo.Players.First(p => p.SteamId.ToString() == playerSummary.SteamId).AvatarUrl = playerSummary.AvatarMedium;
+									CurrentDemo.Players.First(p => p.SteamId.ToString() == playerSummary.SteamId).AvatarUrl = playerSummary.AvatarFull;
 								}
 							});
 						}
@@ -262,6 +256,28 @@ namespace CSGO_Demos_Manager.ViewModel
 						mainViewModel.CurrentPage.ShowPage(roundView);
 					}, roundNumber => !IsAnalyzing && CurrentDemo != null
 					&& CurrentDemo.Source.GetType() != typeof(Pov) && SelectedRound != null));
+			}
+		}
+
+		/// <summary>
+		/// Command to go to player control
+		/// </summary>
+		public RelayCommand<PlayerExtended> ShowPlayerCommand
+		{
+			get
+			{
+				return _goToPlayerCommand
+					?? (_goToPlayerCommand = new RelayCommand<PlayerExtended>(
+					player =>
+					{
+						var playerViewModel = new ViewModelLocator().Player;
+						playerViewModel.CurrentPlayer = player;
+						playerViewModel.CurrentDemo = CurrentDemo;
+						PlayerView playerView = new PlayerView();
+						var mainViewModel = new ViewModelLocator().Main;
+						mainViewModel.CurrentPage.ShowPage(playerView);
+					}, player => !IsAnalyzing && CurrentDemo != null
+					&& CurrentDemo.Source.GetType() != typeof(Pov) && SelectedPlayer != null));
 			}
 		}
 
@@ -417,7 +433,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							}
 							
 						},
-						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+						suspect => SelectedPlayer != null));
 			}
 		}
 
@@ -440,7 +456,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							GameLauncher launcher = new GameLauncher(CurrentDemo);
 							launcher.WatchDemoAt(firstRound.Tick, false, player.SteamId);
 						},
-						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+						suspect => SelectedPlayer != null));
 			}
 		}
 
@@ -463,7 +479,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
 							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						},
-						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+						suspect => SelectedPlayer != null));
 			}
 		}
 
@@ -486,7 +502,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
 							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						},
-						suspect => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+						suspect => SelectedPlayer != null));
 			}
 		}
 
@@ -885,7 +901,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							HomeView homeView = new HomeView();
 							mainViewModel.CurrentPage.ShowPage(homeView);
 						},
-						player => SelectedPlayerTeam1 != null || SelectedPlayerTeam2 != null));
+						player => SelectedPlayer != null));
 			}
 		}
 
@@ -921,8 +937,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			base.Cleanup();
 			HasNotification = false;
 			IsAnalyzing = false;
-			SelectedPlayerTeam1 = null;
-			SelectedPlayerTeam2 = null;
+			SelectedPlayer = null;
 			PlayersTeam1Collection = null;
 			PlayersTeam2Collection = null;
 			RoundsCollection = null;

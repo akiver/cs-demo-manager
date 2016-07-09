@@ -336,7 +336,7 @@ namespace CSGO_Demos_Manager.Services
 						stats.DamageCount += demo.DamageHealthCount;
 						stats.RoundCount += demo.Rounds.Count;
 						stats.ClutchCount += demo.ClutchCount;
-						stats.ClutchWin += demo.ClutchWinCount;
+						stats.ClutchWin += demo.ClutchWonCount;
 						stats.HltvRating += demo.Players.First(p => p.SteamId == Settings.Default.SelectedStatsAccountSteamID).RatingHltv;
 						switch (demo.MatchVerdictSelectedAccountCount)
 						{

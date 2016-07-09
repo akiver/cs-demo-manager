@@ -53,11 +53,6 @@ namespace CSGO_Demos_Manager.Services.Design
 						ThreekillCount = random.Next(0, 10),
 						FourKillCount = random.Next(0, 5),
 						FiveKillCount = random.Next(0, 2),
-						Clutch1V1Count = random.Next(1),
-						Clutch1V2Count = random.Next(1),
-						Clutch1V3Count = random.Next(1),
-						Clutch1V4Count = random.Next(1),
-						Clutch1V5Count = random.Next(1),
 						BombDefusedCount = random.Next(0, 2),
 						BombPlantedCount = random.Next(0, 2),
 						EntryKills = entryKills,
@@ -148,11 +143,6 @@ namespace CSGO_Demos_Manager.Services.Design
 					ThreekillCount = random.Next(0, 10),
 					FourKillCount = random.Next(0, 5),
 					FiveKillCount = random.Next(0, 2),
-					Clutch1V1Count = random.Next(1),
-					Clutch1V2Count = random.Next(1),
-					Clutch1V3Count = random.Next(1),
-					Clutch1V4Count = random.Next(1),
-					Clutch1V5Count = random.Next(1),
 					BombDefusedCount = random.Next(0, 2),
 					BombPlantedCount = random.Next(0, 2),
 					DeathCount = random.Next(0, 32),
@@ -176,11 +166,8 @@ namespace CSGO_Demos_Manager.Services.Design
 					HeGrenadeThrownCount = random.Next(20),
 					BombExplodedCount = random.Next(5),
 					AvatarUrl = string.Empty,
-					ClutchCount = random.Next(5),
-					ClutchLostCount = random.Next(5),
 					KillDeathRatio = (decimal)random.NextDouble(),
 					MatchCount = random.Next(100),
-					OpponentClutchCount = random.Next(5),
 					RoundPlayedCount = random.Next(100)
 				};
 
@@ -243,18 +230,7 @@ namespace CSGO_Demos_Manager.Services.Design
 					EndReason = RoundEndReason.CTWin,
 					EntryKillEvent = new EntryKillEvent(random.Next(1, 10000), random.Next(1, 100))
 					{
-						HasWin = random.Next(100) < 50,
-						KillerSteamId = players.ElementAt(random.Next(9)).SteamId,
-						KillerName = players.ElementAt(random.Next(9)).Name,
-						KilledSteamId = players.ElementAt(random.Next(9)).SteamId,
-						KilledName = players.ElementAt(random.Next(9)).Name,
-						Weapon = Weapon.WeaponList.ElementAt(random.Next(44)),
-						KilledSide = Team.CounterTerrorist,
-						KillerSide = Team.Terrorist
-					},
-					OpenKillEvent = new OpenKillEvent(random.Next(1, 10000), random.Next(1, 100))
-					{
-						HasWin = random.Next(100) < 50,
+						HasWon = random.Next(100) < 50,
 						KillerSteamId = players.ElementAt(random.Next(9)).SteamId,
 						KillerName = players.ElementAt(random.Next(9)).Name,
 						KilledSteamId = players.ElementAt(random.Next(9)).SteamId,

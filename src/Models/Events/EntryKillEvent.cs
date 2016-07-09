@@ -5,6 +5,9 @@ namespace CSGO_Demos_Manager.Models.Events
 {
 	public class EntryKillEvent : BaseEvent
 	{
+		[JsonProperty("round_number")]
+		public int RoundNumber { get; set; }
+
 		[JsonProperty("killer_steamid")]
 		public long KillerSteamId { get; set; }
 
@@ -26,22 +29,17 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }
 
-		private bool _hasWin;
+		[JsonProperty("has_won")]
+		public bool HasWon { get; set; }
 
-		[JsonProperty("has_win")]
-		public bool HasWin
-		{
-			get { return _hasWin; }
-			set
-			{
-				_hasWin = value;
-				RaisePropertyChanged(() => Result);
-			}
-		}
-
-		[JsonIgnore]
-		public string Result => HasWin ? "Win" : "Loss";
+		[JsonProperty("has_won_round")]
+		public bool HasWonRound { get; set; }
 
 		public EntryKillEvent(int tick, float seconds) : base(tick, seconds) { }
+
+		public EntryKillEvent Clone()
+		{
+			return (EntryKillEvent)MemberwiseClone();
+		}
 	}
 }

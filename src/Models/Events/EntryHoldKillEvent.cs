@@ -3,8 +3,11 @@ using Newtonsoft.Json;
 
 namespace CSGO_Demos_Manager.Models.Events
 {
-	public class OpenKillEvent : BaseEvent
+	public class EntryHoldKillEvent : BaseEvent
 	{
+		[JsonProperty("round_number")]
+		public int RoundNumber { get; set; }
+
 		[JsonProperty("killer_steamid")]
 		public long KillerSteamId { get; set; }
 
@@ -26,22 +29,17 @@ namespace CSGO_Demos_Manager.Models.Events
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }
 
-		private bool _hasWin;
+		[JsonProperty("has_won")]
+		public bool HasWon { get; set; }
 
-		[JsonProperty("has_win")]
-		public bool HasWin
+		[JsonProperty("has_won_round")]
+		public bool HasWonRound { get; set; }
+
+		public EntryHoldKillEvent(int tick, float seconds) : base(tick, seconds) { }
+
+		public EntryHoldKillEvent Clone()
 		{
-			get { return _hasWin; }
-			set
-			{
-				_hasWin = value;
-				RaisePropertyChanged(() => Result);
-			}
+			return (EntryHoldKillEvent)MemberwiseClone();
 		}
-
-		[JsonIgnore]
-		public string Result => HasWin ? "Win" : "Loss";
-
-		public OpenKillEvent(int tick, float seconds) : base(tick, seconds) { }
 	}
 }

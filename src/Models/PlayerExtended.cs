@@ -108,11 +108,6 @@ namespace CSGO_Demos_Manager.Models
 		private bool _isControllingBot;
 
 		/// <summary>
-		/// Number of opponents if the player is in clutch
-		/// </summary>
-		private int _opponentClutchCount;
-
-		/// <summary>
 		/// Indicate if the player is alive
 		/// </summary>
 		private bool _isAlive = true;
@@ -142,49 +137,14 @@ namespace CSGO_Demos_Manager.Models
 		private string _name = "";
 
 		/// <summary>
-		/// Number of clutch (win and loss) the player has been involved during the match
-		/// </summary>
-		private int _clutchCount;
-
-		/// <summary>
-		/// Number of clutch the player lost during the match
-		/// </summary>
-		private int _clutchLostCount;
-
-		/// <summary>
-		/// Number of 1v1 the player made during the match
-		/// </summary>
-		private int _1V1Count;
-
-		/// <summary>
-		/// Number of 1v2 the player made during the match
-		/// </summary>
-		private int _1V2Count ;
-
-		/// <summary>
-		/// Number of 1v3 the player made during the match
-		/// </summary>
-		private int _1V3Count;
-
-		/// <summary>
-		/// Number of 1v4 the player made during the match
-		/// </summary>
-		private int _1V4Count;
-
-		/// <summary>
-		/// Number of 1v5 the player made during the match
-		/// </summary>
-		private int _1V5Count;
-
-		/// <summary>
 		/// Flag to know if the player had an entry kill during a round
 		/// </summary>
 		private bool _hasEntryKill;
 
 		/// <summary>
-		/// Flag to know if the player had the open kill during a round
+		/// Flag to know if the player had an entry hold kill during a round
 		/// </summary>
-		private bool _hasOpeningKill;
+		private bool _hasEntryHoldKill;
 
 		/// <summary>
 		/// Rating based on hltv.org formula that the player made during the match
@@ -274,6 +234,11 @@ namespace CSGO_Demos_Manager.Models
 		/// Equipement value the player at each round
 		/// </summary>
 		private Dictionary<int, int> _equipementValueRounds = new Dictionary<int, int>();
+
+		/// <summary>
+		/// Money earned at each round
+		/// </summary>
+		private Dictionary<int, int> _roundsMoneyEarned = new Dictionary<int, int>();
 
 		#endregion
 
@@ -471,55 +436,6 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => EseaRws, ref _eseaRws, value); }
 		}
 
-		[JsonProperty("1v1_count")]
-		public int Clutch1V1Count
-		{
-			get { return _1V1Count; }
-			set { Set(() => Clutch1V1Count, ref _1V1Count, value); }
-		}
-
-		[JsonProperty("1v2_count")]
-		public int Clutch1V2Count
-		{
-			get { return _1V2Count; }
-			set { Set(() => Clutch1V2Count, ref _1V2Count, value); }
-		}
-
-		[JsonProperty("1v3_count")]
-		public int Clutch1V3Count
-		{
-			get { return _1V3Count; }
-			set { Set(() => Clutch1V3Count, ref _1V3Count, value); }
-		}
-
-		[JsonProperty("1v4_count")]
-		public int Clutch1V4Count
-		{
-			get { return _1V4Count; }
-			set { Set(() => Clutch1V4Count, ref _1V4Count, value); }
-		}
-
-		[JsonProperty("1v5_count")]
-		public int Clutch1V5Count
-		{
-			get { return _1V5Count; }
-			set { Set(() => Clutch1V5Count, ref _1V5Count, value); }
-		}
-
-		[JsonProperty("clutch_count")]
-		public int ClutchCount
-		{
-			get { return _clutchCount; }
-			set { Set(() => ClutchCount, ref _clutchCount, value); }
-		}
-
-		[JsonProperty("clutch_lost_count")]
-		public int ClutchLostCount
-		{
-			get { return _clutchLostCount; }
-			set { Set(() => ClutchLostCount, ref _clutchLostCount, value); }
-		}
-
 		[JsonProperty("is_vac_banned")]
 		public bool IsVacBanned
 		{
@@ -604,17 +520,27 @@ namespace CSGO_Demos_Manager.Models
 			set { Set(() => EquipementValueRounds, ref _equipementValueRounds, value); }
 		}
 
+		[JsonProperty("rounds_money_earned")]
+		public Dictionary<int, int> RoundsMoneyEarned
+		{
+			get { return _roundsMoneyEarned; }
+			set { Set(() => RoundsMoneyEarned, ref _roundsMoneyEarned, value); }
+		}
+
 		[JsonProperty("entry_kills")]
 		public ObservableCollection<EntryKillEvent> EntryKills { get; set; }
 
-		[JsonProperty("open_kills")]
-		public ObservableCollection<OpenKillEvent> OpeningKills { get; set; }
+		[JsonProperty("entry_hold_kills")]
+		public ObservableCollection<EntryHoldKillEvent> EntryHoldKills { get; set; }
 
 		/// <summary>
 		/// List of PlayerHurtedEvent in which the player is involved
 		/// </summary>
 		[JsonProperty("players_hurted")]
 		public ObservableCollection<PlayerHurtedEvent> PlayersHurted { get; set; }
+
+		[JsonProperty("clutches")]
+		public ObservableCollection<ClutchEvent> Clutches { get; set; }
 
 		[JsonProperty("rank_old")]
 		public int RankNumberOld
@@ -638,27 +564,27 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public int EntryKillWinCount
+		public int EntryKillWonCount
 		{
-			get { return EntryKills.Count(e => e.HasWin); }
+			get { return EntryKills.Count(e => e.HasWon); }
 		}
 
 		[JsonIgnore]
 		public int EntryKillLossCount
 		{
-			get { return EntryKills.Count(e => e.HasWin == false); }
+			get { return EntryKills.Count(e => e.HasWon == false); }
 		}
 
 		[JsonIgnore]
-		public int OpenKillWinCount
+		public int EntryHoldKillWonCount
 		{
-			get { return OpeningKills.Count(e => e.HasWin); }
+			get { return EntryHoldKills.Count(e => e.HasWon); }
 		}
 
 		[JsonIgnore]
-		public int OpenKillLossCount
+		public int EntryHoldKillLossCount
 		{
-			get { return OpeningKills.Count(e => e.HasWin == false); }
+			get { return EntryHoldKills.Count(e => e.HasWon == false); }
 		}
 
 		[JsonIgnore]
@@ -676,11 +602,35 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public bool HasOpeningKill
+		public bool HasEntryHoldKill
 		{
-			get { return _hasOpeningKill; }
-			set { Set(() => HasOpeningKill, ref _hasOpeningKill, value); }
+			get { return _hasEntryHoldKill; }
+			set { Set(() => HasEntryHoldKill, ref _hasEntryHoldKill, value); }
 		}
+
+		[JsonIgnore]
+		public int ClutchCount => Clutches.Count;
+
+		[JsonIgnore]
+		public int ClutchLostCount => Clutches.Count(c => !c.HasWon);
+
+		[JsonIgnore]
+		public int ClutchWonCount => Clutches.Count(c => c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V1Count => Clutches.Count(c => c.OpponentCount == 1 && c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V2Count => Clutches.Count(c => c.OpponentCount == 2 && c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V3Count => Clutches.Count(c => c.OpponentCount == 3 && c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V4Count => Clutches.Count(c => c.OpponentCount == 4 && c.HasWon);
+
+		[JsonIgnore]
+		public int Clutch1V5Count => Clutches.Count(c => c.OpponentCount == 5 && c.HasWon);
 
 		[JsonIgnore]
 		public bool IsControllingBot
@@ -708,13 +658,6 @@ namespace CSGO_Demos_Manager.Models
 		{
 			get { return _isConnected; }
 			set { Set(() => IsConnected, ref _isConnected, value); }
-		}
-
-		[JsonIgnore]
-		public int OpponentClutchCount
-		{
-			get { return _opponentClutchCount; }
-			set { Set(() => OpponentClutchCount, ref _opponentClutchCount, value); }
 		}
 
 		[JsonIgnore]
@@ -803,8 +746,8 @@ namespace CSGO_Demos_Manager.Models
 			get
 			{
 				int entryKillCount = EntryKills.Count();
-				int entryKillWin = EntryKills.Count(e => e.HasWin);
-				int entryKillLoss = EntryKills.Count(e => e.HasWin == false);
+				int entryKillWin = EntryKills.Count(e => e.HasWon);
+				int entryKillLoss = EntryKills.Count(e => e.HasWon == false);
 
 				decimal entryKillPercent = 0;
 				if (entryKillWin == 0) return entryKillPercent;
@@ -817,29 +760,23 @@ namespace CSGO_Demos_Manager.Models
 		}
 
 		[JsonIgnore]
-		public decimal RatioOpenKill
+		public decimal RatioEntryHoldKill
 		{
 			get
 			{
-				int openKillCount = OpeningKills.Count();
-				int openKillWin = OpeningKills.Count(e => e.HasWin);
-				int openKillLoss = OpeningKills.Count(e => e.HasWin == false);
+				int entryHoldKillCount = EntryHoldKills.Count();
+				int entryHoldKillWin = EntryHoldKills.Count(e => e.HasWon);
+				int entryHoldKillLoss = EntryHoldKills.Count(e => e.HasWon == false);
 
-				decimal openKillPercent = 0;
-				if (openKillWin == 0) return openKillPercent;
-				if (openKillLoss == 0) return 100;
-				openKillPercent = (openKillWin / (decimal)openKillCount) * 100;
-				openKillPercent = Math.Round(openKillPercent, 0);
+				decimal entryHoldKillPercent = 0;
+				if (entryHoldKillWin == 0) return entryHoldKillPercent;
+				if (entryHoldKillLoss == 0) return 100;
+				entryHoldKillPercent = entryHoldKillWin / (decimal)entryHoldKillCount * 100;
+				entryHoldKillPercent = Math.Round(entryHoldKillPercent, 0);
 
-				return openKillPercent;
+				return entryHoldKillPercent;
 			}
 		}
-
-		[JsonIgnore]
-		public string RatioEntryKillAsString => RatioEntryKill + " %";
-
-		[JsonIgnore]
-		public string RatioOpenKillAsString => RatioOpenKill + " %";
 
 		[JsonIgnore]
 		public string HeadshotAsString => _headshotCount + " (" + HeadshotPercent + "%)";
@@ -901,11 +838,13 @@ namespace CSGO_Demos_Manager.Models
 		public PlayerExtended()
 		{
 			EntryKills = new ObservableCollection<EntryKillEvent>();
-			OpeningKills = new ObservableCollection<OpenKillEvent>();
+			EntryHoldKills = new ObservableCollection<EntryHoldKillEvent>();
 			PlayersHurted = new ObservableCollection<PlayerHurtedEvent>();
+			Clutches = new ObservableCollection<ClutchEvent>();
 			EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
-			OpeningKills.CollectionChanged += OnOpeningKillsCollectionChanged;
+			EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
 			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
+			Clutches.CollectionChanged += OnClutchesCollectionChanged;
 		}
 
 		private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -918,17 +857,28 @@ namespace CSGO_Demos_Manager.Models
 		private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			RaisePropertyChanged(() => EntryKills);
-			RaisePropertyChanged(() => EntryKillWinCount);
+			RaisePropertyChanged(() => EntryKillWonCount);
 			RaisePropertyChanged(() => EntryKillLossCount);
-			RaisePropertyChanged(() => RatioEntryKillAsString);
+			RaisePropertyChanged(() => RatioEntryKill);
 		}
 
-		private void OnOpeningKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		private void OnEntryHoldKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			RaisePropertyChanged(() => EntryKills);
-			RaisePropertyChanged(() => OpenKillWinCount);
-			RaisePropertyChanged(() => OpenKillLossCount);
-			RaisePropertyChanged(() => RatioOpenKillAsString);
+			RaisePropertyChanged(() => EntryHoldKillWonCount);
+			RaisePropertyChanged(() => EntryHoldKillLossCount);
+			RaisePropertyChanged(() => RatioEntryHoldKill);
+		}
+
+		private void OnClutchesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			RaisePropertyChanged(() => ClutchCount);
+			RaisePropertyChanged(() => ClutchLostCount);
+			RaisePropertyChanged(() => Clutch1V1Count);
+			RaisePropertyChanged(() => Clutch1V2Count);
+			RaisePropertyChanged(() => Clutch1V3Count);
+			RaisePropertyChanged(() => Clutch1V4Count);
+			RaisePropertyChanged(() => Clutch1V5Count);
 		}
 
 		public void ResetStats()
@@ -944,26 +894,20 @@ namespace CSGO_Demos_Manager.Models
 			ThreekillCount = 0;
 			FourKillCount = 0;
 			FiveKillCount = 0;
-			Clutch1V1Count = 0;
-			Clutch1V2Count = 0;
-			Clutch1V3Count = 0;
-			Clutch1V4Count = 0;
-			Clutch1V5Count = 0;
 			BombDefusedCount = 0;
 			BombPlantedCount = 0;
 			Score = 0;
-			OpponentClutchCount = 0;
 			HasEntryKill = false;
-			HasOpeningKill = false;
+			HasEntryHoldKill = false;
 			RatingHltv = 0;
-			OpeningKills.Clear();
 			EntryKills.Clear();
+			EntryHoldKills.Clear();
 			PlayersHurted.Clear();
+			Clutches.Clear();
 			RoundPlayedCount = 0;
-			ClutchCount = 0;
-			ClutchLostCount = 0;
 			StartMoneyRounds.Clear();
 			EquipementValueRounds.Clear();
+			RoundsMoneyEarned.Clear();
 			_flashDurationTemp = 0;
 			CrouchKillCount = 0;
 			_tradeKillCount = 0;

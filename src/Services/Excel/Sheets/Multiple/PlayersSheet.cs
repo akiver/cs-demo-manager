@@ -49,10 +49,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 				{ "Entry kill win", CellType.Numeric },
 				{ "Entry kill lost", CellType.Numeric },
 				{ "Entry kill win %", CellType.Numeric },
-				{ "Open kill", CellType.Numeric },
-				{ "Open kill win", CellType.Numeric },
-				{ "Open kill lost", CellType.Numeric },
-				{ "Open kill win %", CellType.Numeric },
+				{ "Entry hold kill", CellType.Numeric },
+				{ "Entry hold kill win", CellType.Numeric },
+				{ "Entry hold kill lost", CellType.Numeric },
+				{ "Entry hold kill win %", CellType.Numeric },
 				{ "KPR", CellType.Numeric },
 				{ "APR", CellType.Numeric },
 				{ "DPR", CellType.Numeric },
@@ -123,11 +123,11 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 						data[player].DamageHealthCount += player.TotalDamageHealthCount;
 						data[player].DamageArmorCount += player.TotalDamageArmorCount;
 						data[player].EntryKillCount += player.EntryKills.Count;
-						data[player].EntryKillWinCount += player.EntryKillWinCount;
+						data[player].EntryKillWinCount += player.EntryKillWonCount;
 						data[player].EntryKillLossCount += player.EntryKillLossCount;
-						data[player].OpenKillCount += player.OpeningKills.Count;
-						data[player].OpenKillWinCount += player.OpenKillWinCount;
-						data[player].OpenKillLossCount += player.OpenKillLossCount;
+						data[player].EntryHoldKillCount += player.EntryHoldKills.Count;
+						data[player].EntryHoldKillWonCount += player.EntryHoldKillWonCount;
+						data[player].EntryHoldKillLossCount += player.EntryHoldKillLossCount;
 						data[player].TradeKillCount += player.TradeKillCount;
 						data[player].TradeDeathCount += player.TradeDeathCount;
 					}
@@ -175,10 +175,10 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillWinCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillLossCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryKillWinPercent);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillWinCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillLossCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.OpenKillWinPercent);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillWonCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillLossCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillWinPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillPerDeath);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AssistPerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DeathPerRound);

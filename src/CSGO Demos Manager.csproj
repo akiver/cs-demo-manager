@@ -174,6 +174,7 @@
     <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Converters\StringToDemoStatusConverter.cs" />
     <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
+    <Compile Include="Converters\TeamSideToStringConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
@@ -200,6 +201,8 @@
     <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
     <Compile Include="Models\DemoStatus.cs" />
+    <Compile Include="Models\Events\ClutchEvent.cs" />
+    <Compile Include="Models\Events\EntryHoldKillEvent.cs" />
     <Compile Include="Models\Events\PlayerBlindedEvent.cs" />
     <Compile Include="Models\Excel\PlayerStats.cs" />
     <Compile Include="Models\Excel\WeaponsData.cs" />
@@ -224,7 +227,6 @@
     <Compile Include="Models\Events\DecoyStartedEvent.cs" />
     <Compile Include="Models\Events\EntryKillEvent.cs" />
     <Compile Include="Models\Events\MolotovFireStartedEvent.cs" />
-    <Compile Include="Models\Events\OpenKillEvent.cs" />
     <Compile Include="Models\Events\ExplosiveNadeExplodedEvent.cs" />
     <Compile Include="Models\Events\FlashbangExplodedEvent.cs" />
     <Compile Include="Models\Events\KillEvent.cs" />
@@ -306,6 +308,7 @@
     <Compile Include="Services\StuffService.cs" />
     <Compile Include="ViewModel\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\DemoStuffsViewModel.cs" />
+    <Compile Include="ViewModel\PlayerViewModel.cs" />
     <Compile Include="ViewModel\RoundViewModel.cs" />
     <Compile Include="ViewModel\WhitelistViewModel.cs" />
     <Compile Include="Views\DemoFlashbangsView.xaml.cs">
@@ -313,6 +316,24 @@
     </Compile>
     <Compile Include="Views\DemoStuffsView.xaml.cs">
       <DependentUpon>DemoStuffsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PlayerView.xaml.cs">
+      <DependentUpon>PlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player\DamagesView.xaml.cs">
+      <DependentUpon>DamagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player\DuelView.xaml.cs">
+      <DependentUpon>DuelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player\EconomyView.xaml.cs">
+      <DependentUpon>EconomyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player\GeneralView.xaml.cs">
+      <DependentUpon>GeneralView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Player\RoundsView.xaml.cs">
+      <DependentUpon>RoundsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RoundView.xaml.cs">
       <DependentUpon>RoundView.xaml</DependentUpon>
@@ -349,6 +370,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DemoStuffsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\DamagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\DuelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\EconomyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\GeneralView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\RoundsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -469,11 +514,11 @@
     <Compile Include="Services\Excel\Sheets\AbstractSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Single\EnryKillsPlayerSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Single\GeneralSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\Single\OpenKillsPlayerSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\EntryHoldKillsPlayerSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Single\EntryKillsRoundSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\Single\OpenKillsRoundSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\EntryHoldKillsRoundSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Single\EntryKillsTeamSheet.cs" />
-    <Compile Include="Services\Excel\Sheets\Single\OpenKillsTeamSheet.cs" />
+    <Compile Include="Services\Excel\Sheets\Single\EntryHoldKillsTeamSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Single\PlayersSheet.cs" />
     <Compile Include="Services\Excel\Sheets\Single\RoundsSheet.cs" />
     <Compile Include="Services\GameLauncher.cs" />

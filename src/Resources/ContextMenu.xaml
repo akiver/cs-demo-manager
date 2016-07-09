@@ -35,7 +35,7 @@
 							Value="{Binding Home.SaveStatusDemoCommand, Source={StaticResource Locator}}" />
 					<Setter Property="CommandParameter"
 							Value="{Binding Name}"
-							d:DataContext="{d:DesignInstance models:DemoStatus}"/>
+							d:DataContext="{d:DesignInstance d:Type=models:DemoStatus, IsDesignTimeCreatable=True}"/>
 				</Style>
 			</MenuItem.ItemContainerStyle>
 		</MenuItem>
@@ -82,58 +82,31 @@
 							  CommandParameter="{Binding Suspects.SelectedSuspect, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
-	<ContextMenu x:Key="PlayerTeam1RowContextMenu">
+	<ContextMenu x:Key="PlayerRowContextMenu">
 		<MenuItem Header="Profile"
-							  Command="{Binding Details.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Add to suspect list"
-							  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer.SteamId, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Add to whitelist"
-							  Command="{Binding Details.AddPlayerToWhitelistCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.AddPlayerToWhitelistCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer.SteamId, Source={StaticResource Locator}}" />
 		<MenuItem Header="Watch player"
 				  Command="{Binding Details.WatchPlayerCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding Details.SelectedPlayer.SteamId, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Watch highlights"
-							  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Watch lowlights"
-							  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Add to account list"
-							  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1.SteamId, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer.SteamId, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Show player demos"
-							  Command="{Binding Details.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam1, Source={StaticResource Locator}}"/>
-	</ContextMenu>
-
-	<ContextMenu x:Key="PlayerTeam2RowContextMenu">
-		<MenuItem Header="Profile"
-							  Command="{Binding Details.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add to suspect list"
-							  Command="{Binding Details.AddSuspectCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add to whitelist"
-							  Command="{Binding Details.AddPlayerToWhitelistCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Watch player"
-				  Command="{Binding Details.WatchPlayerCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Watch highlights"
-							  Command="{Binding Details.WatchHighlights, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Watch lowlights"
-							  Command="{Binding Details.WatchLowlights, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add to account list"
-							  Command="{Binding Details.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2.SteamId, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Show player demos"
-							  Command="{Binding Details.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Details.SelectedPlayerTeam2, Source={StaticResource Locator}}"/>
+				  Command="{Binding Details.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Details.SelectedPlayer, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="WhitelistRowContextMenu">

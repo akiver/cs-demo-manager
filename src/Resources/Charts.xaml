@@ -24,6 +24,24 @@
 	<telerik:ChartPalette x:Key="MapPercentagePalette">
 		<telerik:ChartPalette.SeriesEntries>
 			<telerik:PaletteEntryCollection SeriesFamily="Bar">
+				<telerik:PaletteEntry Fill="{StaticResource GreenBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource LightBlueBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource Dust2ColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource InfernoColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource MirageColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource CacheColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource OverpassColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource CobblestoneColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource TrainColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+				<telerik:PaletteEntry Fill="{StaticResource NukeColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
+			</telerik:PaletteEntryCollection>
+		</telerik:ChartPalette.SeriesEntries>
+	</telerik:ChartPalette>
+
+	<telerik:ChartPalette x:Key="WeaponKillPalette">
+		<telerik:ChartPalette.SeriesEntries>
+			<telerik:PaletteEntryCollection SeriesFamily="Pie">
 				<telerik:PaletteEntry Fill="{StaticResource Dust2ColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
 				<telerik:PaletteEntry Fill="{StaticResource InfernoColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
 				<telerik:PaletteEntry Fill="{StaticResource MirageColorBrush}" Stroke="{StaticResource LightWhiteBrush}"/>
@@ -97,6 +115,7 @@
 	<Style x:Key="LabelChartStyle" TargetType="{x:Type TextBlock}">
 		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
 		<Setter Property="FontSize" Value="18" />
+		<Setter Property="Margin" Value="0 0 10 0" />
 	</Style>
 
 	<DataTemplate x:Key="PieStatsLabelTemplate">
@@ -121,6 +140,19 @@
 			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
 					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
 					   FontSize="18"
+					   TextAlignment="Center" />
+		</StackPanel>
+	</DataTemplate>
+
+	<DataTemplate x:Key="WeaponKillPieLabelTemplate">
+		<StackPanel Orientation="Vertical">
+			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+					   Text="{Binding DataItem.Label}"
+					   FontSize="12"
+					   TextAlignment="Center" />
+			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
+					   FontSize="12"
 					   TextAlignment="Center" />
 		</StackPanel>
 	</DataTemplate>
@@ -315,4 +347,127 @@
 		</Grid>
 	</DataTemplate>
 
+	<DataTemplate x:Key="PlayerEquipementValueTooltipTemplate">
+		<Grid Background="{StaticResource LightWhiteBrush}">
+			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+					</Grid.RowDefinitions>
+					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
+							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
+					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.Value, StringFormat='{}{0}$'}" 
+							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+				</Grid>
+			</Border>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerEquipementValueTrackBallTemplate">
+		<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
+			<TextBlock Text="{Binding Path=DataPoint.Category, StringFormat='{}Round: {0}'}"
+					   Foreground="{StaticResource LightGreyBrush}"
+					   FontSize="18"/>
+			<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Value: {0}$'}"
+					   FontSize="18"
+					   Foreground="{StaticResource LightGreyBrush}"/>
+		</StackPanel>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerDamageHealthTooltipTemplate">
+		<Grid Background="{StaticResource LightWhiteBrush}">
+			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Damage health: {0}'}"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerDamageArmorTooltipTemplate">
+		<Grid Background="{StaticResource LightWhiteBrush}">
+			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Damage armor: {0}'}"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerTotalDamageHealthTooltipTemplate">
+		<Grid Background="{StaticResource LightWhiteBrush}">
+			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Total damages health: {0}'}"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerTotalDamageArmorTooltipTemplate">
+		<Grid Background="{StaticResource LightWhiteBrush}">
+			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Total damages armor: {0}'}"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}"/>
+				</StackPanel>
+			</Border>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerDamageHealthTrackBallTemplate">
+		<StackPanel Orientation="Vertical">
+			<TextBlock Text="{Binding Path=DataPoint.Category, StringFormat='{}Round: {0}'}"
+					   Foreground="{StaticResource LightGreyBrush}"
+					   FontSize="18"/>
+			<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Damage health: {0}'}"
+					   FontSize="18"
+					   Foreground="{StaticResource LightGreyBrush}"/>
+		</StackPanel>
+	</DataTemplate>
+	
+	<DataTemplate x:Key="PlayerDamageArmorTrackBallTemplate">
+		<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Damage armor: {0}'}"
+				   FontSize="18"
+				   Foreground="{StaticResource LightGreyBrush}"/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="PlayerTotalDamageHealthTrackBallTemplate">
+		<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Total damage health: {0}'}"
+				   FontSize="18"
+				   Foreground="{StaticResource LightGreyBrush}"/>
+	</DataTemplate>
+	
+	<DataTemplate x:Key="PlayerTotalDamageArmorTrackBallTemplate">
+		<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Total damage armor: {0}'}"
+				   FontSize="18"
+				   Foreground="{StaticResource LightGreyBrush}"/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="HorizontalAxisTitleTemplate">
+		<TextBlock Text="{Binding}"
+				   FontSize="18"
+				   Foreground="{StaticResource LightWhiteBrush}"/>
+	</DataTemplate>
+	
 </ResourceDictionary>

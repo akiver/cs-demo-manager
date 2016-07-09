@@ -65,6 +65,7 @@ namespace CSGO_Demos_Manager.ViewModel
 			SimpleIoc.Default.Register<DemoFlashbangsViewModel>();
 			SimpleIoc.Default.Register<RoundViewModel>();
 			SimpleIoc.Default.Register<DemoStuffsViewModel>();
+			SimpleIoc.Default.Register<PlayerViewModel>();
 		}
 
 		public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -102,6 +103,8 @@ namespace CSGO_Demos_Manager.ViewModel
 		public RoundViewModel Round => ServiceLocator.Current.GetInstance<RoundViewModel>();
 
 		public DemoStuffsViewModel DemoStuffs => ServiceLocator.Current.GetInstance<DemoStuffsViewModel>();
+
+		public PlayerViewModel Player => ServiceLocator.Current.GetInstance<PlayerViewModel>();
 
 		public static void Cleanup()
 		{
