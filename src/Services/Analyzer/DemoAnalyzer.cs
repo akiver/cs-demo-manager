@@ -74,6 +74,8 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 		private const int WIN_ELIMINATION = 3250;
 		private const int BOMB_PLANTED_BONUS = 800;
 
+		private const int ESEA_ASSIST_THRESHOLD = 50;
+
 		/// <summary>
 		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who thrown a moloto
 		/// </summary>
@@ -363,12 +365,43 @@ namespace CSGO_Demos_Manager.Services.Analyzer
 
 			if (e.Assister != null)
 			{
-				PlayerExtended assister = Demo.Players.FirstOrDefault(player => player.SteamId == e.Assister.SteamID);
-				if (assister != null)
+				if (e.Killer != null && this is EseaAnalyzer)
 				{
-					assister.AssistCount++;
-					killEvent.AssisterSteamId = assister.SteamId;
-					killEvent.AssisterName = assister.Name;
+					Dictionary<long, int> damagesPerPlayer = new Dictionary<long, int>();
+					foreach (PlayerHurtedEvent hurtedEvent in CurrentRound.PlayersHurted)
+					{
+						if (hurtedEvent.HurtedSteamId == e.Victim.SteamID && hurtedEvent.AttackerSteamId != e.Killer.SteamID)
+						{
+							if (!damagesPerPlayer.ContainsKey(hurtedEvent.AttackerSteamId))
+								damagesPerPlayer[hurtedEvent.AttackerSteamId] = hurtedEvent.HealthDamage;
+							else
+								damagesPerPlayer[hurtedEvent.AttackerSteamId] += hurtedEvent.HealthDamage;
+						}
+					}
+					if (damagesPerPlayer.Any())
+					{
+						KeyValuePair<long, int> higherDamageDone = damagesPerPlayer.FirstOrDefault(d => d.Value == damagesPerPlayer.Values.Max());
+						if (higherDamageDone.Value > ESEA_ASSIST_THRESHOLD)
+						{
+							PlayerExtended assister = Demo.Players.FirstOrDefault(player => player.SteamId == higherDamageDone.Key);
+							if (assister != null)
+							{
+								assister.AssistCount++;
+								killEvent.AssisterSteamId = assister.SteamId;
+								killEvent.AssisterName = assister.Name;
+							}
+						}
+					}
+				}
+				else
+				{
+					PlayerExtended assister = Demo.Players.FirstOrDefault(player => player.SteamId == e.Assister.SteamID);
+					if (assister != null)
+					{
+						assister.AssistCount++;
+						killEvent.AssisterSteamId = assister.SteamId;
+						killEvent.AssisterName = assister.Name;
+					}
 				}
 			}
 
