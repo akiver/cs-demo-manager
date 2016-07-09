@@ -119,6 +119,13 @@
 		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="SectionTitleStyle">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="FontSize" Value="22" />
+	</Style>
+
 	<!-- TextBlock on HomeView -->
 	<Style TargetType="TextBlock" x:Key="WinStatusStyle">
 		<Setter Property="TextAlignment" Value="Center" />

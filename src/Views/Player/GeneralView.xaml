@@ -19,9 +19,9 @@
 
 	<Grid HorizontalAlignment="Center">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition />
+			<ColumnDefinition Width="*"/>
 			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="*" />
+			<ColumnDefinition />
 		</Grid.ColumnDefinitions>
 
 		<StackPanel Grid.Column="0" Orientation="Vertical">
@@ -157,91 +157,42 @@
 			</Border>
 		</Grid>
 
-		<Grid Grid.Column="2" Margin="10 0 0 0">
+		<Grid Grid.Column="2" Margin="10 0 0 0" Width="Auto">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBlock Grid.Row="0"
-					   Text="Clutches"
-					   Foreground="{StaticResource LightGreenBrush}"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center"
-					   FontSize="22"/>
-			<Border Grid.Row="1"
-					BorderBrush="{StaticResource LightWhiteBrush}"
-					BorderThickness="1"
-					Padding="10">
-				<DataGrid Name="ClutchsDataGrid"
-						  ItemsSource="{Binding CurrentPlayer.Clutches}"
-						  Style="{StaticResource DataGridStyle}"
-						  RowStyle="{StaticResource DataGridRowStyle}"
-						  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-						  CellStyle="{StaticResource DataGridCellStyle}"
-						  Width="Auto">
-					<DataGrid.Columns>
-						<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
-											Width="Auto"
-											Header="Round"
-											Binding="{Binding RoundNumber}"/>
-						<DataGridTextColumn HeaderStyle="{StaticResource ClutchOpponentCountHeader}"
-											Width="Auto"
-											Header="1vX"
-											Binding="{Binding OpponentCount}"/>
-						<DataGridTextColumn HeaderStyle="{StaticResource ClutchWonHeader}"
-											Width="Auto"
-											Header="Won"
-											Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
-						<DataGridTemplateColumn Header="Watch">
-							<DataGridTemplateColumn.CellTemplate>
-								<DataTemplate>
-									<Button Command="{Binding Source={StaticResource Locator}, Path=Player.WatchDemoWithoutDelayCommand}"
-											CommandParameter="{Binding SelectedItem.Tick, ElementName=ClutchsDataGrid}"
-											Style="{StaticResource GeneralButtonStyle}"
-											Content="Watch" />
-								</DataTemplate>
-							</DataGridTemplateColumn.CellTemplate>
-						</DataGridTemplateColumn>
-					</DataGrid.Columns>
-				</DataGrid>
-			</Border>
 
-			<Grid Grid.Row="2">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="*" />
-					<RowDefinition Height="*" />
-				</Grid.RowDefinitions>
-				<TextBlock Grid.Row="0"
-						   Text="Weapon Kills"
-						   Foreground="{StaticResource LightGreenBrush}"
-						   HorizontalAlignment="Center"
-						   VerticalAlignment="Bottom"
-						   FontSize="22"/>
-				<telerik:RadPieChart Grid.Row="1"
-									 Palette="{StaticResource WeaponKillPalette}"
-									 TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
-					<telerik:RadPieChart.Series>
-						<telerik:PieSeries ItemsSource="{Binding WeaponKillData}"
-										   ValueBinding="Value"
-										   ShowLabels="True"
-										   DefaultSliceStyle="{StaticResource PieSliceStyle}"
-										   RadiusFactor="0.65" >
-							<telerik:PieSeries.LabelDefinitions>
-								<telerik:ChartSeriesLabelDefinition Margin="-10 0 0 0"
-																	Template="{StaticResource WeaponKillPieLabelTemplate}" />
-							</telerik:PieSeries.LabelDefinitions>
-							<telerik:PieSeries.LabelConnectorsSettings>
-								<telerik:ChartSeriesLabelConnectorsSettings Style="{StaticResource LabelConnectorStyle}" />
-							</telerik:PieSeries.LabelConnectorsSettings>
-						</telerik:PieSeries>
-					</telerik:RadPieChart.Series>
-					<telerik:RadPieChart.Behaviors>
-						<telerik:ChartSelectionBehavior DataPointSelectionMode="Single" />
-						<telerik:ChartTooltipBehavior />
-					</telerik:RadPieChart.Behaviors>
-				</telerik:RadPieChart>
-			</Grid>
+			<TextBlock Grid.Row="0"
+					   Text="Weapon Kills"
+					   VerticalAlignment="Bottom"
+					   Style="{StaticResource SectionTitleStyle}"/>
+			<telerik:RadPieChart Grid.Row="1"
+								 Palette="{StaticResource WeaponKillPalette}"
+								 VerticalAlignment="Top"
+								 MinWidth="250"
+								 MinHeight="250"
+								 TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+				<telerik:RadPieChart.Series>
+					<telerik:PieSeries ItemsSource="{Binding WeaponKillData}"
+									   ValueBinding="Value"
+									   ShowLabels="True"
+									   DefaultSliceStyle="{StaticResource PieSliceStyle}"
+									   RadiusFactor="0.65" >
+						<telerik:PieSeries.LabelDefinitions>
+							<telerik:ChartSeriesLabelDefinition Margin="-10 0 0 0"
+																Template="{StaticResource WeaponKillPieLabelTemplate}" />
+						</telerik:PieSeries.LabelDefinitions>
+						<telerik:PieSeries.LabelConnectorsSettings>
+							<telerik:ChartSeriesLabelConnectorsSettings Style="{StaticResource LabelConnectorStyle}" />
+						</telerik:PieSeries.LabelConnectorsSettings>
+					</telerik:PieSeries>
+				</telerik:RadPieChart.Series>
+				<telerik:RadPieChart.Behaviors>
+					<telerik:ChartSelectionBehavior DataPointSelectionMode="Single" />
+					<telerik:ChartTooltipBehavior />
+				</telerik:RadPieChart.Behaviors>
+			</telerik:RadPieChart>
 		</Grid>
 	</Grid>
 </UserControl>

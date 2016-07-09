@@ -187,6 +187,9 @@
 			<controls:MetroTabItem Header="Rounds">
 				<view:RoundsView />
 			</controls:MetroTabItem>
+			<controls:MetroTabItem Header="Clutches">
+				<view:ClutchesView />
+			</controls:MetroTabItem>
 			<controls:MetroTabItem Header="Duels">
 				<view:DuelView />
 			</controls:MetroTabItem>

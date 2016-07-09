@@ -320,6 +320,9 @@
     <Compile Include="Views\PlayerView.xaml.cs">
       <DependentUpon>PlayerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Player\ClutchesView.xaml.cs">
+      <DependentUpon>ClutchesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Player\DamagesView.xaml.cs">
       <DependentUpon>DamagesView.xaml</DependentUpon>
     </Compile>
@@ -374,6 +377,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Player\ClutchesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
