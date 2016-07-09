@@ -265,7 +265,6 @@ namespace CSGO_Demos_Manager.Models
 			set
 			{
 				RaisePropertyChanged(() => KillDeathRatio);
-				RaisePropertyChanged(() => HeadshotAsString);
 				Set(() => KillsCount, ref _killCount, value);
 			}
 		}
@@ -390,11 +389,7 @@ namespace CSGO_Demos_Manager.Models
 		public int HeadshotCount
 		{
 			get { return _headshotCount; }
-			set
-			{
-				RaisePropertyChanged(() => HeadshotAsString);
-				Set(() => HeadshotCount, ref _headshotCount, value);
-			}
+			set { Set(() => HeadshotCount, ref _headshotCount, value); }
 		}
 
 		[JsonProperty("kd")]
@@ -777,9 +772,6 @@ namespace CSGO_Demos_Manager.Models
 				return entryHoldKillPercent;
 			}
 		}
-
-		[JsonIgnore]
-		public string HeadshotAsString => _headshotCount + " (" + HeadshotPercent + "%)";
 
 		[JsonIgnore]
 		public bool HasBomb

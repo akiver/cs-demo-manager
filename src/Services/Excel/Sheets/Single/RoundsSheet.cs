@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using CSGO_Demos_Manager.Models;
+using DemoInfo;
 using NPOI.SS.UserModel;
 
 namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
@@ -62,7 +63,7 @@ namespace CSGO_Demos_Manager.Services.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Duration);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
-					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSideAsString);
+					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide == Team.CounterTerrorist ? "CT" : "T");
 					SetCellValue(row, columnNumber++, CellType.String, round.EndReasonAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);

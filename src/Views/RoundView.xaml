@@ -6,6 +6,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:command="http://www.galasoft.ch/mvvmlight"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:converters="clr-namespace:CSGO_Demos_Manager.Converters"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding Round, Source={StaticResource Locator}}">
@@ -15,6 +16,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
 			</ResourceDictionary.MergedDictionaries>
+			<converters:TeamSideToStringConverter x:Key="TeamSideToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -131,7 +133,9 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Side : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.WinnerSideAsString}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1"
+								   Text="{Binding CurrentRound.WinnerSide, Converter={StaticResource TeamSideToStringConverter}}"
+								   Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>

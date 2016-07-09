@@ -203,11 +203,7 @@ namespace CSGO_Demos_Manager.Models
 		public Team WinnerSide
 		{
 			get { return _winnerSide; }
-			set
-			{
-				Set(() => WinnerSide, ref _winnerSide, value);
-				RaisePropertyChanged(() => WinnerSideAsString);
-			}
+			set { Set(() => WinnerSide, ref _winnerSide, value); }
 		}
 
 		[JsonProperty("winner_name")]
@@ -591,9 +587,6 @@ namespace CSGO_Demos_Manager.Models
 
 		[JsonIgnore]
 		public DateTime EndTickTime => DateTime.Today.AddSeconds(Duration);
-
-		[JsonIgnore]
-		public string WinnerSideAsString => _winnerSide == Team.CounterTerrorist ? "CT" : "T";
 
 		[JsonIgnore]
 		public int KillCount

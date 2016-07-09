@@ -22,6 +22,7 @@
 			<helpers:RankToImageConverter x:Key="RankToImageConverter" />
 			<helpers:DoubleToStringConverter x:Key="DoubleToStringConverter" />
 			<helpers:StringToDemoStatusConverter x:Key="StringToDemoStatusConverter" />
+			<helpers:TeamSideToStringConverter x:Key="TeamSideToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -1087,7 +1088,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerHeader}"
 														Width="Auto"
 														Header="W"
-														Binding="{Binding WinnerSideAsString}"
+														Binding="{Binding WinnerSide, Converter={StaticResource TeamSideToStringConverter}}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundTypeHeader}"
 														Width="Auto"
