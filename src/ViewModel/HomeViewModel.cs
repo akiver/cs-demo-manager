@@ -434,7 +434,7 @@ namespace CSGO_Demos_Manager.ViewModel
 					?? (_analyzeDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
-						Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof (Valve));
+						Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof(Valve));
 						bool result = await RefreshSelectedDemos();
 						if (result && hasValveDemo != null) await RefreshLastRankAccount();
 					},
@@ -460,7 +460,7 @@ namespace CSGO_Demos_Manager.ViewModel
 						foreach (Demo demo in demos)
 						{
 							bool isDeleted = await _demosService.DeleteDemo(demo);
-							if(!isDeleted) demosNotFound.Add(demo);
+							if (!isDeleted) demosNotFound.Add(demo);
 						}
 
 						if (demosNotFound.Any())
@@ -546,124 +546,127 @@ namespace CSGO_Demos_Manager.ViewModel
 								case MessageDialogResult.FirstAuxiliary:
 									return;
 								case MessageDialogResult.Affirmative:
-								{
-									SaveFileDialog saveExportFileDialog = new SaveFileDialog
 									{
-										FileName = "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx",
-										Filter = "XLSX file (*.xlsx)|*.xlsx"
-									};
-
-									if (saveExportFileDialog.ShowDialog() != DialogResult.OK) return;
-
-									try
-									{
-										IsBusy = true;
-										HasRing = true;
-										HasNotification = true;
-										NotificationMessage = "Analyzing demos for export...";
-										IsCancellable = true;
-										if (_cts == null) _cts = new CancellationTokenSource();
-
-										List<Demo> demoList = demos.ToList();
-										while (demoList.Any() && _cts != null)
+										SaveFileDialog saveExportFileDialog = new SaveFileDialog
 										{
-											Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+											FileName = "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx",
+											Filter = "XLSX file (*.xlsx)|*.xlsx"
+										};
+
+										if (saveExportFileDialog.ShowDialog() != DialogResult.OK) return;
+
+										try
+										{
+											IsBusy = true;
+											HasRing = true;
+											HasNotification = true;
+											NotificationMessage = "Analyzing demos for export...";
+											IsCancellable = true;
+											if (_cts == null) _cts = new CancellationTokenSource();
+
+											List<Demo> demoList = demos.ToList();
+											while (demoList.Any() && _cts != null)
 											{
-												if (!_cacheService.HasDemoInCache(demo))
+												Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
 												{
-													await AnalyzeDemoAsync(demo, _cts.Token);
-												}
-												demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-												demoList.Remove(demo);
-											}).ToArray();
-											await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+													if (!_cacheService.HasDemoInCache(demo))
+													{
+														await AnalyzeDemoAsync(demo, _cts.Token);
+													}
+													demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+													demoList.Remove(demo);
+												}).ToArray();
+												await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+											}
+											if (_cts != null) await _excelService.GenerateXls(SelectedDemos.ToList(), saveExportFileDialog.FileName);
 										}
-										if(_cts != null) await _excelService.GenerateXls(SelectedDemos.ToList(), saveExportFileDialog.FileName);
+										catch (Exception e)
+										{
+											Logger.Instance.Log(e);
+											await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+										}
+										finally
+										{
+											IsBusy = false;
+											HasNotification = false;
+										}
 									}
-									catch (Exception e)
-									{
-										Logger.Instance.Log(e);
-										await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
-									}
-									finally
-									{
-										IsBusy = false;
-										HasNotification = false;
-									}
-								}
 									break;
 								default:
-								{
-									FolderBrowserDialog folderDialog = new FolderBrowserDialog
 									{
-										SelectedPath = Path.GetPathRoot(Environment.GetFolderPath(Environment.SpecialFolder.System))
-									};
-
-									DialogResult result = folderDialog.ShowDialog();
-									if (result != DialogResult.OK) return;
-									string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
-									if (_cts == null) _cts = new CancellationTokenSource();
-
-									try
-									{
-										IsBusy = true;
-										HasRing = true;
-										HasNotification = true;
-										NotificationMessage = "Analyzing demos for export...";
-										IsCancellable = true;
-
-										List<Demo> demoList = demos.ToList();
-										while (demoList.Any() && _cts != null)
+										SaveFileDialog saveExportFolderDialog = new SaveFileDialog
 										{
-											Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
+											FileName = "Save here",
+											OverwritePrompt = false
+										};
+
+										DialogResult result = saveExportFolderDialog.ShowDialog();
+										if (result != DialogResult.OK) return;
+										string directoryPath = Path.GetDirectoryName(saveExportFolderDialog.FileName);
+										if (directoryPath != null)
+										{
+											if (_cts == null) _cts = new CancellationTokenSource();
+
+											try
 											{
-												if (!_cacheService.HasDemoInCache(demo))
+												IsBusy = true;
+												HasRing = true;
+												HasNotification = true;
+												NotificationMessage = "Analyzing demos for export...";
+												IsCancellable = true;
+
+												List<Demo> demoList = demos.ToList();
+												while (demoList.Any() && _cts != null)
 												{
-													int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
-													if (analyzeResult == 1 && _cts != null)
+													Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async (demo) =>
 													{
-														NotificationMessage = "Exporting " + demo.Name + "...";
-														demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-														await _excelService.GenerateXls(demo,
-															path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
-													}
+														string exportFilePath = directoryPath + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx";
+														if (!_cacheService.HasDemoInCache(demo))
+														{
+															int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
+															if (analyzeResult == 1 && _cts != null)
+															{
+																NotificationMessage = "Exporting " + demo.Name + "...";
+																demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+																await _excelService.GenerateXls(demo, exportFilePath);
+															}
+														}
+														else
+														{
+															NotificationMessage = "Exporting " + demo.Name + "...";
+															demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+															await _excelService.GenerateXls(demo, exportFilePath);
+														}
+														demoList.Remove(demo);
+													}).ToArray();
+													await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
 												}
-												else
-												{
-													NotificationMessage = "Exporting " + demo.Name + "...";
-													demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-													await _excelService.GenerateXls(demo,
-														path + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx");
-												}
-												demoList.Remove(demo);
-											}).ToArray();
-											await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+											}
+											catch (Exception e)
+											{
+												Logger.Instance.Log(e);
+												await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+											}
+											finally
+											{
+												IsBusy = false;
+												HasNotification = false;
+												IsCancellable = false;
+											}
 										}
 									}
-									catch (Exception e)
-									{
-										Logger.Instance.Log(e);
-										await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
-									}
-									finally
-									{
-										IsBusy = false;
-										HasNotification = false;
-										IsCancellable = false;
-									}
-								}
 									break;
 							}
 						}
 						else
 						{
-							SaveFileDialog saveHeatmapDialog = new SaveFileDialog
+							SaveFileDialog saveExportDialog = new SaveFileDialog
 							{
 								FileName = SelectedDemo.Name.Substring(0, SelectedDemo.Name.Length - 4) + "-export.xlsx",
 								Filter = "XLSX file (*.xlsx)|*.xlsx"
 							};
 
-							if (saveHeatmapDialog.ShowDialog() == DialogResult.OK)
+							if (saveExportDialog.ShowDialog() == DialogResult.OK)
 							{
 								try
 								{
@@ -680,7 +683,7 @@ namespace CSGO_Demos_Manager.ViewModel
 									if (_cts != null)
 									{
 										NotificationMessage = "Exporting " + SelectedDemo.Name + "...";
-										await _excelService.GenerateXls(SelectedDemo, saveHeatmapDialog.FileName);
+										await _excelService.GenerateXls(SelectedDemo, saveExportDialog.FileName);
 									}
 								}
 								catch (Exception e)
@@ -696,6 +699,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								}
 							}
 						}
+						CommandManager.InvalidateRequerySuggested();
 					},
 					demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
 			}
@@ -750,7 +754,7 @@ namespace CSGO_Demos_Manager.ViewModel
 							var mainViewModel = (new ViewModelLocator()).Main;
 							OverallView overallView = new OverallView();
 							mainViewModel.CurrentPage.ShowPage(overallView);
-						},() => !IsBusy));
+						}, () => !IsBusy));
 			}
 		}
 
@@ -1488,7 +1492,7 @@ namespace CSGO_Demos_Manager.ViewModel
 								if (demoDownloadList.Count > 0)
 								{
 									int demoDownloadedCount = 0;
-									for(int i = 1; i < demoDownloadList.Count + 1; i++)
+									for (int i = 1; i < demoDownloadList.Count + 1; i++)
 									{
 										string demoName = demoDownloadList.ElementAt(i - 1).Key;
 										string demoUrl = demoDownloadList.ElementAt(i - 1).Value;
@@ -1618,7 +1622,7 @@ namespace CSGO_Demos_Manager.ViewModel
 				{
 					SelectedFolder = Folders.ElementAt(0);
 				}
-				
+
 				await LoadDemosHeader();
 				await RefreshLastRankAccount();
 				if (AppSettings.IsInternetConnectionAvailable()) await RefreshBannedPlayerCount();
