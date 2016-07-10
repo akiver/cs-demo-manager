@@ -200,6 +200,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="1" Margin="5 0 5 0" Width="90" Height="30"
@@ -273,20 +274,6 @@
 					<TextBlock Text="Flashbangs" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
-			<Button Grid.Column="6" Margin="5 0 5 0" Width="110" Height="30"
-						Command="{Binding ShowRoundCommand}"
-						CommandParameter="{Binding SelectedRound.Number}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Round details (CTRL+R)">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<Rectangle Width="15" Height="20">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_page_text}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Round details" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
 
 			<Button Grid.Column="7"
 					Margin="5 0 5 0"
@@ -304,8 +291,23 @@
 					<TextBlock Text="Stuffs" Style="{StaticResource ButtonTitleStyle}" Margin="5 0 0 0"/>
 				</StackPanel>
 			</Button>
+			
+			<Button Grid.Column="8" Margin="5 0 5 0" Width="110" Height="30"
+						Command="{Binding ShowRoundCommand}"
+						CommandParameter="{Binding SelectedRound.Number}"
+						Style="{StaticResource GeneralButtonStyle}"
+						ToolTip="Round details (CTRL+R)">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="20">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_page_text}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Round details" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
 
-			<Button Grid.Column="7"
+			<Button Grid.Column="9"
 					Margin="5 0 5 0"
 					Width="110"
 					Height="30"
