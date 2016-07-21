@@ -671,6 +671,9 @@ namespace Services.Concrete
 			// Check if he is already in the whitelist
 			if (ids.Contains(suspectSteamCommunityId)) return false;
 
+			// remove from suspects list
+			await RemoveSuspectFromCache(suspectSteamCommunityId);
+
 			ids.Add(suspectSteamCommunityId);
 
 			string json;
