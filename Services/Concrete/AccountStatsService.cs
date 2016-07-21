@@ -46,6 +46,7 @@ namespace Services.Concrete
 				demo.AverageHealthDamage = player.AverageHealthDamage;
 				demo.AverageHltvRating = player.RatingHltv;
 				demo.AverageEseaRws = player.EseaRws;
+				demo.ClutchWonCount = player.ClutchWonCount;
 			}
 
 			return Task.FromResult(demo);

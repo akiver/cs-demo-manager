@@ -726,8 +726,8 @@
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
 									Header="Clutchs"
-									Binding="{Binding ClutchCount}"
-									HeaderStyle="{StaticResource ClutchCountHeader}"
+									Binding="{Binding ClutchWonCount}"
+									HeaderStyle="{StaticResource ClutchWonCountHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
 									Header="BD"

@@ -325,6 +325,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="Number of clutch" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="ClutchWonCountHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="Number of clutch won" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="TradeKillHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="Trade kill" />
 	</Style>
