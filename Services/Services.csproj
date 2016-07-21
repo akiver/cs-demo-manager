@@ -153,6 +153,7 @@
     <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Interfaces\IAccountStatsService.cs" />
     <Compile Include="Interfaces\ICacheService.cs" />
     <Compile Include="Interfaces\IDamageService.cs" />

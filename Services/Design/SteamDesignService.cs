@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Steam;
@@ -117,9 +118,9 @@ namespace Services.Design
 			});
 		}
 
-		public int GenerateMatchListFile()
+		public Task<int> GenerateMatchListFile(CancellationToken ct)
 		{
-			return 1;
+			return Task.FromResult(1);
 		}
 	}
 }

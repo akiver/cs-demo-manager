@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Steam;
@@ -23,7 +24,8 @@ namespace Services.Interfaces
 		/// <summary>
 		/// Call boiler.exe which create a file containing the CMsgGCCStrike15_v2_MatchList message data
 		/// </summary>
+		/// <param name="ct"></param>
 		/// <returns></returns>
-		int GenerateMatchListFile();
+		Task<int> GenerateMatchListFile(CancellationToken ct);
 	}
 }

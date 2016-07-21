@@ -1403,6 +1403,8 @@ namespace Manager.ViewModel.Demos
 							{
 								_cts.Cancel();
 								_cts = null;
+								NotificationMessage = "Cancelling...";
+								IsCancellable = false;
 							}
 						}, () => IsBusy));
 			}
@@ -1466,60 +1468,59 @@ namespace Manager.ViewModel.Demos
 							return;
 						}
 
-						IsBusy = true;
-						HasNotification = true;
-						HasRing = true;
-						NotificationMessage = "Retrieving last matches information...";
-						int result = await Task.Factory.StartNew(() => _steamService.GenerateMatchListFile());
-						switch (result)
+						try
 						{
-							case 1:
-								await _dialogService.ShowErrorAsync("boiler.exe not found.", MessageDialogStyle.Affirmative);
-								break;
-							case 2:
-								await _dialogService.ShowErrorAsync("boiler.exe is incorrect.", MessageDialogStyle.Affirmative);
-								break;
-							case -2:
-								await _dialogService.ShowErrorAsync("You have to restart Steam.", MessageDialogStyle.Affirmative);
-								break;
-							case -3:
-							case -4:
-								await _dialogService.ShowErrorAsync("Steam is not running or you are not connected to a Steam account.", MessageDialogStyle.Affirmative);
-								break;
-							case -5:
-							case -6:
-							case -7:
-								await _dialogService.ShowErrorAsync("An error occured while retrieving matches information. (" + result + ")", MessageDialogStyle.Affirmative);
-								break;
-							case 0:
-								_demosService.DownloadFolderPath = Properties.Settings.Default.DownloadFolder;
-								Dictionary<string, string> demoDownloadList = await _demosService.GetDemoListUrl();
-								if (demoDownloadList.Count > 0)
-								{
-									int demoDownloadedCount = 0;
-									for (int i = 1; i < demoDownloadList.Count + 1; i++)
-									{
-										string demoName = demoDownloadList.ElementAt(i - 1).Key;
-										string demoUrl = demoDownloadList.ElementAt(i - 1).Value;
-										NotificationMessage = "Downloading demo " + i + " / " + demoDownloadList.Count + " ...";
-										await _demosService.DownloadDemo(demoUrl, demoName);
-										NotificationMessage = "Extracting demo " + i + " / " + demoDownloadList.Count + " ...";
-										await _demosService.DecompressDemoArchive(demoName);
-										demoDownloadedCount++;
-									}
-									await _dialogService.ShowMessageAsync(demoDownloadedCount + " demo(s) has been downloaded.", MessageDialogStyle.Affirmative);
-									await LoadDemosHeader();
-								}
-								else
-								{
-									await _dialogService.ShowMessageAsync("No newer demo available.", MessageDialogStyle.Affirmative);
-								}
-								break;
+							IsBusy = true;
+							HasNotification = true;
+							HasRing = true;
+							IsCancellable = true;
+							NotificationMessage = "Retrieving last matches information...";
+							if (_cts == null) _cts = new CancellationTokenSource();
+							int result = await _steamService.GenerateMatchListFile(_cts.Token);
+							switch (result)
+							{
+								case 1:
+									await _dialogService.ShowErrorAsync("boiler.exe not found.", MessageDialogStyle.Affirmative);
+									break;
+								case 2:
+									await _dialogService.ShowErrorAsync("boiler.exe is incorrect.", MessageDialogStyle.Affirmative);
+									break;
+								case -2:
+									await _dialogService.ShowErrorAsync("You have to restart Steam.", MessageDialogStyle.Affirmative);
+									break;
+								case -3:
+								case -4:
+									await
+										_dialogService.ShowErrorAsync("Steam is not running or you are not connected to a Steam account.",
+											MessageDialogStyle.Affirmative);
+									break;
+								case -5:
+								case -6:
+								case -7:
+									await
+										_dialogService.ShowErrorAsync("An error occured while retrieving matches information. (" + result + ")",
+											MessageDialogStyle.Affirmative);
+									break;
+								case 0:
+									await ProcessDemosDownloaded();
+									break;
+							}
 						}
-						IsBusy = false;
-						HasNotification = false;
-						HasRing = false;
-						CommandManager.InvalidateRequerySuggested();
+						catch (Exception e)
+						{
+							if (!(e is TaskCanceledException))
+							{
+								Logger.Instance.Log(e);
+							}
+						}
+						finally
+						{
+							IsBusy = false;
+							HasNotification = false;
+							HasRing = false;
+							IsCancellable = false;
+							CommandManager.InvalidateRequerySuggested();
+						}
 					},
 					() => !IsBusy));
 			}
@@ -1954,6 +1955,50 @@ namespace Manager.ViewModel.Demos
 				IsBusy = false;
 				HasNotification = false;
 				HasRing = false;
+			}
+		}
+
+		private async Task ProcessDemosDownloaded()
+		{
+			_cts = new CancellationTokenSource();
+			CancellationToken ct = _cts.Token;
+			int demoDownloadedCount = 0;
+			try
+			{
+				_demosService.DownloadFolderPath = Properties.Settings.Default.DownloadFolder;
+				Dictionary<string, string> demoDownloadList = await _demosService.GetDemoListUrl();
+				if (ct.IsCancellationRequested) return;
+				if (demoDownloadList.Count > 0)
+				{
+					for (int i = 1; i < demoDownloadList.Count + 1; i++)
+					{
+						string demoName = demoDownloadList.ElementAt(i - 1).Key;
+						string demoUrl = demoDownloadList.ElementAt(i - 1).Value;
+						NotificationMessage = "Downloading demo " + i + " / " + demoDownloadList.Count + " ...";
+						await _demosService.DownloadDemo(demoUrl, demoName);
+						if (ct.IsCancellationRequested) return;
+						NotificationMessage = "Extracting demo " + i + " / " + demoDownloadList.Count + " ...";
+						await _demosService.DecompressDemoArchive(demoName);
+						demoDownloadedCount++;
+						if (ct.IsCancellationRequested) return;
+					}
+				}
+				else
+				{
+					await _dialogService.ShowMessageAsync("No newer demo available.", MessageDialogStyle.Affirmative);
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+			finally
+			{
+				if (demoDownloadedCount > 0)
+				{
+					await _dialogService.ShowMessageAsync(demoDownloadedCount + " demo(s) has been downloaded.", MessageDialogStyle.Affirmative);
+					await LoadDemosHeader();
+				}
 			}
 		}
 

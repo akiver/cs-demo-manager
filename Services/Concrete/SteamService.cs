@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
+using System.Threading;
 using Core;
 using Core.Models;
 using Core.Models.Steam;
@@ -169,8 +170,9 @@ namespace Services.Concrete
 			}
 		}
 
-		public int GenerateMatchListFile()
+		public async Task<int> GenerateMatchListFile(CancellationToken ct)
 		{
+			ct.ThrowIfCancellationRequested();
 			string hash = GetSha1HashFile(BOILER_EXE_NAME);
 			if (!hash.Equals(BOILER_SHA1)) return 2;
 
@@ -189,7 +191,8 @@ namespace Services.Concrete
 				}
 			};
 			boiler.Start();
-			boiler.WaitForExit();
+			await boiler.WaitForExitAsync(ct);
+
 			return boiler.ExitCode;
 		}
 
