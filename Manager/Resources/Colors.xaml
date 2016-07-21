@@ -41,6 +41,8 @@
 	<SolidColorBrush x:Key="NukeColorBrush" Color="{StaticResource NukeColor}" />
 	<SolidColorBrush x:Key="TrainColorBrush" Color="{StaticResource TrainColor}" />
 
+	<SolidColorBrush x:Key="RedColorSemiOpaqueBrush" Color="{StaticResource Red}" Opacity="0.5"/>
+
 	<!--Override MahApps-->
 	<SolidColorBrush x:Key="RightArrowFill" Color="{StaticResource LightGrey}" />
 </ResourceDictionary>

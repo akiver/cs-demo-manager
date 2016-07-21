@@ -497,13 +497,14 @@
 		</Style.Resources>
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding VacBanned}" Value="true">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+				<Setter Property="Background" Value="{StaticResource RedColorSemiOpaqueBrush}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding GameBanCount, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=GameBanCount}" Value="true">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+				<Setter Property="Background" Value="{StaticResource RedColorSemiOpaqueBrush}"/>
 			</DataTrigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource SuspectRowContextMenu}" />
+		<Setter Property="Margin" Value="0 2 2 0" />
 	</Style>
 
 	<!-- Supects view header -->
@@ -628,13 +629,14 @@
 		</Style.Resources>
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding VacBanned}" Value="true">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+				<Setter Property="Background" Value="{StaticResource RedColorSemiOpaqueBrush}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding GameBanCount, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=GameBanCount}" Value="true">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+				<Setter Property="Background" Value="{StaticResource RedColorSemiOpaqueBrush}"/>
 			</DataTrigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource WhitelistRowContextMenu}" />
+		<Setter Property="Margin" Value="0 2 2 0" />
 	</Style>
 	<!-- End Whitelist -->
 
