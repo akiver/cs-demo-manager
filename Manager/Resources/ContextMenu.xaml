@@ -98,7 +98,7 @@
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}" />
 		<MenuItem Header="Watch player"
 				  Command="{Binding DemoDetails.WatchPlayerCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Watch highlights"
 				  Command="{Binding DemoDetails.WatchHighlights, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
