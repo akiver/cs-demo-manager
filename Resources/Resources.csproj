@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Resources</RootNamespace>
+    <AssemblyName>csgodm.resources</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Manager\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\Manager\bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\dust2.png" />
+    <Resource Include="images\maps\preview\empire.png" />
+    <Resource Include="images\maps\preview\facade.png" />
+    <Resource Include="images\maps\preview\favela.png" />
+    <Resource Include="images\maps\preview\fire.png" />
+    <Resource Include="images\maps\preview\gwalior.png" />
+    <Resource Include="images\maps\preview\inferno.png" />
+    <Resource Include="images\maps\preview\inferno_ce.png" />
+    <Resource Include="images\maps\preview\log.png" />
+    <Resource Include="images\maps\preview\marquis.png" />
+    <Resource Include="images\maps\preview\mikla.png" />
+    <Resource Include="images\maps\preview\mirage.png" />
+    <Resource Include="images\maps\preview\mist.png" />
+    <Resource Include="images\maps\preview\new_nuke.png" />
+    <Resource Include="images\maps\preview\nuke.png" />
+    <Resource Include="images\maps\preview\overgrown.png" />
+    <Resource Include="images\maps\preview\overpass.png" />
+    <Resource Include="images\maps\preview\print.png" />
+    <Resource Include="images\maps\preview\rails.png" />
+    <Resource Include="images\maps\preview\resort.png" />
+    <Resource Include="images\maps\preview\royal.png" />
+    <Resource Include="images\maps\preview\ruins.png" />
+    <Resource Include="images\maps\preview\santorini.png" />
+    <Resource Include="images\maps\preview\seaside.png" />
+    <Resource Include="images\maps\preview\season.png" />
+    <Resource Include="images\maps\preview\train.png" />
+    <Resource Include="images\maps\preview\tulip.png" />
+    <Resource Include="images\maps\preview\tuscan.png" />
+    <Resource Include="images\maps\preview\unknown.png" />
+    <Resource Include="images\maps\preview\vertigo.png" />
+    <Resource Include="images\maps\preview\zoo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\cs_cruise.png" />
+    <Resource Include="images\maps\overview\de_cache.png" />
+    <Resource Include="images\maps\overview\de_cbble.png" />
+    <Resource Include="images\maps\overview\de_coast.png" />
+    <Resource Include="images\maps\overview\de_dust2.png" />
+    <Resource Include="images\maps\overview\de_empire.png" />
+    <Resource Include="images\maps\overview\de_inferno.png" />
+    <Resource Include="images\maps\overview\de_mikla.png" />
+    <Resource Include="images\maps\overview\de_mirage.png" />
+    <Resource Include="images\maps\overview\de_new_nuke.png" />
+    <Resource Include="images\maps\overview\de_nuke.png" />
+    <Resource Include="images\maps\overview\de_overpass.png" />
+    <Resource Include="images\maps\overview\de_royal.png" />
+    <Resource Include="images\maps\overview\de_santorini.png" />
+    <Resource Include="images\maps\overview\de_season.png" />
+    <Resource Include="images\maps\overview\de_train.png" />
+    <Resource Include="images\maps\overview\de_tulip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\ali.png" />
+    <Resource Include="images\maps\preview\aztec.png" />
+    <Resource Include="images\maps\preview\bazaar.png" />
+    <Resource Include="images\maps\preview\black_gold.png" />
+    <Resource Include="images\maps\preview\cache.png" />
+    <Resource Include="images\maps\preview\castle.png" />
+    <Resource Include="images\maps\preview\chinatown.png" />
+    <Resource Include="images\maps\preview\coast.png" />
+    <Resource Include="images\maps\preview\cobblestone.png" />
+    <Resource Include="images\maps\preview\contra.png" />
+    <Resource Include="images\maps\preview\crown.png" />
+    <Resource Include="images\maps\preview\cruise.png" />
+    <Resource Include="images\maps\preview\dust.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\bomb.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\bomb_exploded.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\bomb_overview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\decoy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\decoy_exploded.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\decoy_screaming.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\defuser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\flashbang.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\flashbang_exploded.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\he_exploded.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\hegrenade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\incendiary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\kill.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\molotov.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\molotov_burning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\smoke.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\smoke_start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\smokegrenade.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\smokegrenade_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\weapon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
+snremove.exe -r DemoInfo.dll
+cd $(SolutionDir)Manager\bin\x86\Release
+snremove.exe -r DemoInfo.dll</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,657 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D6D9598-4348-4444-A8DF-A634CA0D371B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Manager</RootNamespace>
+    <AssemblyName>CSGODemosManager</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <ExpressionBlendVersion>12.0.51020.0</ExpressionBlendVersion>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>3</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>app.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AfxCppCli, Version=1.0.5707.30208, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Downloads\Compressed\advancedfx-master\AfxGui\Resources\AfxCppCli.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.2.4.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.2.4.0\lib\net45\MahApps.Metro.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment, Version=3.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Nito.AsyncEx.3.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls, Version=2016.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2016.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2016.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2016.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2016.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2016.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Converters\BindingProxy.cs" />
+    <Compile Include="Converters\BooleanConverter.cs" />
+    <Compile Include="Converters\BooleanInvertedConverter.cs" />
+    <Compile Include="Converters\BooleanMultipleConverter.cs" />
+    <Compile Include="Converters\BooleanToStringConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\BooleanToVisibilityInvertedConverter.cs" />
+    <Compile Include="Converters\DoubleToStringConverter.cs" />
+    <Compile Include="Converters\DoubleToVisibilityConverter.cs" />
+    <Compile Include="Converters\EventToVisibilityConverter.cs" />
+    <Compile Include="Converters\ImageToSourceConverter.cs" />
+    <Compile Include="Converters\IntToBooleanConverter.cs" />
+    <Compile Include="Converters\MapNameToImageConverter.cs" />
+    <Compile Include="Converters\MouseGestureExtendedConverter.cs" />
+    <Compile Include="Converters\NullableValueConverter.cs" />
+    <Compile Include="Converters\RankToImageConverter.cs" />
+    <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
+    <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
+    <Compile Include="Converters\StringToDateConverter.cs" />
+    <Compile Include="Converters\StringToDemoStatusConverter.cs" />
+    <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
+    <Compile Include="Converters\TeamSideToStringConverter.cs" />
+    <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
+    <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
+    <Compile Include="Internals\Extensions.cs" />
+    <Compile Include="Internals\MultiSelect\IMultiSelectCollectionView.cs" />
+    <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
+    <Compile Include="Internals\MultiSelect\MultiSelect.cs" />
+    <Compile Include="Internals\MultiSelect\MultiSelectCollectionView.cs" />
+    <Compile Include="Messages\LoadSuspectListMessage.cs" />
+    <Compile Include="Messages\MainWindowLoadedMessage.cs" />
+    <Compile Include="Messages\NavigateToSuspectsViewMessage.cs" />
+    <Compile Include="Messages\SettingsFlyoutClosed.cs" />
+    <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
+    <Compile Include="Messages\UpdateSuspectBannedCountMessage.cs" />
+    <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
+    <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />
+    <Compile Include="Models\Selectors\RoundTimelineTemplateSelector.cs" />
+    <Compile Include="Models\PlayerColor.cs" />
+    <Compile Include="Models\ComboboxSelector.cs" />
+    <Compile Include="Internals\Mouse\MouseBindingExtended.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
+    <Compile Include="ViewModel\Players\PlayerDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Rounds\RoundDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Suspects\WhitelistViewModel.cs" />
+    <Compile Include="Views\Demos\DemoFlashbangsView.xaml.cs">
+      <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoStuffsView.xaml.cs">
+      <DependentUpon>DemoStuffsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerDetailsView.xaml.cs">
+      <DependentUpon>PlayerDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerClutchesView.xaml.cs">
+      <DependentUpon>PlayerClutchesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerDamagesView.xaml.cs">
+      <DependentUpon>PlayerDamagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerDuelView.xaml.cs">
+      <DependentUpon>PlayerDuelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerEconomyView.xaml.cs">
+      <DependentUpon>PlayerEconomyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerGeneralView.xaml.cs">
+      <DependentUpon>PlayerGeneralView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Players\PlayerRoundsView.xaml.cs">
+      <DependentUpon>PlayerRoundsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Rounds\RoundDetailsView.xaml.cs">
+      <DependentUpon>RoundDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suspects\WhitelistView.xaml.cs">
+      <DependentUpon>WhitelistView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="resources\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Heatmaps.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Icons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="resources\IconsNonShared.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="resources\ListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Timelines.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoFlashbangsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoStuffsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerClutchesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerDamagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerDuelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerEconomyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerGeneralView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Players\PlayerRoundsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Rounds\RoundDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Suspects\WhitelistView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <None Include="AfxHook.dat">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\cfg\afx\updateWorkaround.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\cfg\afx\wh.cfg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\black.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\depth.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\greenmatte.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\invisible.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\white.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\cable.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\ct.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\level.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\level.vtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\levelLit.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vtf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\t.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vtf" />
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods_impactdust.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_fire.vmt" />
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_smokegrenade.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\weapon.vmt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\shaders\afx_line_ps20.fxo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="resources\AfxHookSource\shaders\afx_line_vs20.fxo">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Resource Include="resources\Entypo.ttf" />
+    <Compile Include="Services\DialogService.cs" />
+    <Compile Include="Services\GameLauncher.cs" />
+    <Compile Include="ViewModel\Accounts\AccountOverallViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\AccountMapsViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\AccountProgressViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\AccountRankViewModel.cs" />
+    <Compile Include="ViewModel\Accounts\AccountWeaponsViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoDamagesViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoKillsViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoHeatmapViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoListViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoOverviewViewModel.cs" />
+    <Compile Include="ViewModel\Suspects\SuspectListViewModel.cs" />
+    <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Compile Include="Views\Accounts\AccountMapsView.xaml.cs">
+      <DependentUpon>AccountMapsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountOverallView.xaml.cs">
+      <DependentUpon>AccountOverallView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountProgressView.xaml.cs">
+      <DependentUpon>AccountProgressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountRankView.xaml.cs">
+      <DependentUpon>AccountRankView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Accounts\AccountWeaponsView.xaml.cs">
+      <DependentUpon>AccountWeaponsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoDamagesView.xaml.cs">
+      <DependentUpon>DemoDamagesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoDetailsView.xaml.cs">
+      <DependentUpon>DemoDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoKillsView.xaml.cs">
+      <DependentUpon>DemoKillsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoHeatmapView.xaml.cs">
+      <DependentUpon>DemoHeatmapView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoListView.xaml.cs">
+      <DependentUpon>DemoListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoOverviewView.xaml.cs">
+      <DependentUpon>DemoOverviewView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Suspects\SuspectListView.xaml.cs">
+      <DependentUpon>SuspectListView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="resources\Charts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\CheckBoxs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ComboBoxs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ContextMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\DataGrids.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Images.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\Textblocks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accounts\AccountMapsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accounts\AccountOverallView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accounts\AccountProgressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accounts\AccountRankView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Accounts\AccountWeaponsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoDamagesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoKillsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoHeatmapView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoOverviewView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Suspects\SuspectListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{4180e444-4aa1-4564-9296-50323fe504fe}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bot\Bot.csproj">
+      <Project>{9e6e1490-43bd-4925-8a3f-84b962828208}</Project>
+      <Name>Bot</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\demoinfo\DemoInfo\DemoInfo.csproj">
+      <Project>{22d4cfc7-6810-4c18-a353-71a49782394f}</Project>
+      <Name>DemoInfo</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Resources\Resources.csproj">
+      <Project>{496a0714-9adf-4c56-8e93-3dfa0eba89d1}</Project>
+      <Name>Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\Services.csproj">
+      <Project>{b0b2f0b5-4e7f-41ae-817f-9c0f30da5367}</Project>
+      <Name>Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WpfPageTransitions\WpfPageTransitions.csproj">
+      <Project>{22a46d61-1d40-43a9-802c-b9d43dadd9ec}</Project>
+      <Name>WpfPageTransitions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\suicide-black.png" />
+    <Resource Include="resources\images\suicide.png" />
+    <Resource Include="resources\images\deagle.png" />
+    <Resource Include="resources\images\bomb.png" />
+    <Resource Include="resources\images\headshot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\bullet.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\model.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AfxCppCli.dll" />
+    <Content Include="AfxHookSource.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="app.ico" />
+    <Content Include="boiler.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Half.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Iex-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IexMath-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IlmImf-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IlmThread-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imath-2_2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcp100.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcp140.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="msvcr100.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="resources\vdm\main.txt" />
+    <Resource Include="resources\vdm\skip_ahead.txt" />
+    <Resource Include="resources\vdm\spec_player.txt" />
+    <Resource Include="resources\vdm\stop_playback.txt" />
+    <Resource Include="resources\vdm\screen_fade_start.txt" />
+    <Resource Include="resources\vdm\text_message_start.txt" />
+    <Resource Include="resources\WindowsIcons-license.txt" />
+    <Resource Include="resources\Entypo-license.txt" />
+    <Content Include="steam_api.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="steam_appid.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="vcruntime140.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="zlib1.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
+snremove.exe -r DemoInfo.dll
+cd $(SolutionDir)Manager\bin\x86\Release
+snremove.exe -r DemoInfo.dll</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

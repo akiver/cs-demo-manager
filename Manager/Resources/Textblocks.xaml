@@ -1,0 +1,222 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					mc:Ignorable="d"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:models="clr-namespace:Core.Models;assembly=csgodm.core">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary>
+			<models:Demo x:Key="Demo" />
+		</ResourceDictionary>
+	</ResourceDictionary.MergedDictionaries>
+	
+	<Style TargetType="TextBlock" x:Key="ButtonTitleStyle">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreyBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="TitleSettingsStyle">
+		<Setter Property="FontSize" Value="22" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="Margin" Value="0 0 0 10" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="SubTitleSettingsStyle">
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="Foreground" Value="{StaticResource WhiteBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="CreditsTextStyle">
+		<Setter Property="FontSize" Value="18" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Right" />
+		<Setter Property="Margin" Value="10" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="TeamTitleScoreboard">
+		<Setter Property="FontSize" Value="22" />
+		<Setter Property="Margin" Value="5 0 5 0" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="TeamScoreScoreboard">
+		<Setter Property="FontSize" Value="38" />
+		<Setter Property="Margin" Value="5 0 5 0" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="HalfScoreScoreboard">
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="Margin" Value="0" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="LabelGeneralInfoDemo">
+		<Setter Property="FontSize" Value="18" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="ValueGeneralInfoDemo">
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Left" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="BigTitleStyle">
+		<Setter Property="FontSize" Value="28" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="SmallTitleStyle">
+		<Setter Property="FontSize" Value="20" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="CurrentFolderStyle">
+		<Setter Property="Margin" Value="5 0 0 0" />
+		<Setter Property="FontSize" Value="16" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="DamageValueStyle">
+		<Setter Property="FontSize" Value="30" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="StatsTitleStyle">
+		<Setter Property="FontSize" Value="24" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+	
+	<Style TargetType="TextBlock" x:Key="StatsValueStyle">
+		<Setter Property="FontSize" Value="26" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+	</Style>
+
+	<Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="FontSize" Value="14" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="WhiteTitle">
+		<Setter Property="FontSize" Value="22" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="SectionTitleStyle">
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="FontSize" Value="22" />
+	</Style>
+
+	<!-- TextBlock on HomeView -->
+	<Style TargetType="TextBlock" x:Key="WinStatusStyle">
+		<Setter Property="TextAlignment" Value="Center" />
+		<Setter Property="FontWeight" Value="DemiBold" />
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding WinStatus}"
+						 Value="won">
+				<Setter Property="Background"
+						Value="{StaticResource GreenBrush}" />
+				<Setter Property="Text"
+						Value="Win" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding WinStatus}"
+						 Value="won-s">
+				<Setter Property="Background"
+						Value="{StaticResource GreenBrush}" />
+				<Setter Property="Text"
+						Value="Win (S)" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding WinStatus}"
+						 Value="lost">
+				<Setter Property="Background"
+						Value="{StaticResource RedColorBrush}" />
+				<Setter Property="Text"
+						Value="Lost" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding WinStatus}"
+						 Value="lost-s">
+				<Setter Property="Background"
+						Value="{StaticResource RedColorBrush}" />
+				<Setter Property="Text"
+						Value="Lost (S)" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding WinStatus}"
+						 Value="draw">
+				<Setter Property="Background"
+						Value="{StaticResource LightBlueBrush}" />
+				<Setter Property="Text"
+						Value="Draw" />
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+	<!-- End TextBlock on HomeView -->
+
+	<!-- Charts TextBlock -->
+	<Style TargetType="TextBlock" x:Key="MapTitleStatsStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}"/>
+		<Setter Property="FontSize" Value="22"/>
+		<Setter Property="HorizontalAlignment" Value="Center"/>
+	</Style>
+	<!-- End Charts TextBlock -->
+	
+	<!-- Heatmaps TextBlock -->
+	<Style TargetType="TextBlock" x:Key="ToolTipPlayerHeatmapStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="ToolTipLabelHeatmapStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="LabelHeatmapStyle">
+		<Setter Property="Margin" Value="0 0 0 5" />
+		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="DescriptionLabelHeatmapStyle">
+		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="FontSize" Value="12" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+
+	<Style TargetType="TextBlock" x:Key="LabelHeatmapInvisibleStyle">
+		<Setter Property="Visibility" Value="Hidden" />
+	</Style>
+	<!-- End heatmaps TextBlock -->
+
+</ResourceDictionary>

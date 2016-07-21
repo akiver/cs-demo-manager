@@ -1,0 +1,335 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Services</RootNamespace>
+    <AssemblyName>csgodm.services</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Manager\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\Manager\bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=669f0b5e8f868abf, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.2.1.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.2.1\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="protobuf-net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.1.0\lib\net45\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WriteableBitmapEx.Wpf, Version=1.5.0.0, Culture=neutral, PublicKeyToken=50375ca6144f1c69, processorArchitecture=MSIL">
+      <HintPath>..\packages\WriteableBitmapEx.1.5.0.0\lib\net40\WriteableBitmapEx.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Concrete\AccountStatsService.cs" />
+    <Compile Include="Concrete\Analyzer\CevoAnalyzer.cs" />
+    <Compile Include="Concrete\Analyzer\DemoAnalyzer.cs" />
+    <Compile Include="Concrete\Analyzer\EbotAnalyzer.cs" />
+    <Compile Include="Concrete\Analyzer\EseaAnalyzer.cs" />
+    <Compile Include="Concrete\Analyzer\ValveAnalyzer.cs" />
+    <Compile Include="Concrete\CacheService.cs" />
+    <Compile Include="Concrete\DamageService.cs" />
+    <Compile Include="Concrete\DemosService.cs" />
+    <Compile Include="Concrete\DrawService.cs" />
+    <Compile Include="Concrete\Excel\AbstractExport.cs" />
+    <Compile Include="Concrete\Excel\ExcelService.cs" />
+    <Compile Include="Concrete\Excel\MultipleExport.cs" />
+    <Compile Include="Concrete\Excel\Sheets\AbstractMultipleSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\AbstractSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\AbstractSingleSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\GeneralSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\MapsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\PlayersSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\RoundsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\TeamsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\WeaponsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\EnryKillsPlayerSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\EntryHoldKillsPlayerSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\EntryHoldKillsRoundSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\EntryHoldKillsTeamSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\EntryKillsRoundSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\EntryKillsTeamSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\GeneralSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\PlayersSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\RoundsSheet.cs" />
+    <Compile Include="Concrete\Excel\SingleExport.cs" />
+    <Compile Include="Concrete\FlashbangService.cs" />
+    <Compile Include="Concrete\HeatmapService.cs" />
+    <Compile Include="Concrete\KillService.cs" />
+    <Compile Include="Concrete\Maps\MapService.cs" />
+    <Compile Include="Concrete\PlayerService.cs" />
+    <Compile Include="Concrete\RoundService.cs" />
+    <Compile Include="Concrete\SoundService.cs" />
+    <Compile Include="Concrete\StuffService.cs" />
+    <Compile Include="Design\AccountStatsDesignService.cs" />
+    <Compile Include="Design\CacheDesignService.cs" />
+    <Compile Include="Design\DamageDesignService.cs" />
+    <Compile Include="Design\DemosDesignService.cs" />
+    <Compile Include="Design\FlashbangDesignService.cs" />
+    <Compile Include="Design\KillDesignService.cs" />
+    <Compile Include="Design\MapDesignService.cs" />
+    <Compile Include="Design\PlayerDesignService.cs" />
+    <Compile Include="Design\RoundDesignService.cs" />
+    <Compile Include="Design\SteamDesignService.cs" />
+    <Compile Include="Design\StuffDesignService.cs" />
+    <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
+    <Compile Include="Exceptions\Map\MapException.cs" />
+    <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
+    <Compile Include="Interfaces\IAccountStatsService.cs" />
+    <Compile Include="Interfaces\ICacheService.cs" />
+    <Compile Include="Interfaces\IDamageService.cs" />
+    <Compile Include="Interfaces\IDemosService.cs" />
+    <Compile Include="Interfaces\IFlashbangService.cs" />
+    <Compile Include="Interfaces\IKillService.cs" />
+    <Compile Include="Interfaces\IMapService.cs" />
+    <Compile Include="Interfaces\IPlayerService.cs" />
+    <Compile Include="Interfaces\IRoundService.cs" />
+    <Compile Include="Interfaces\ISteamService.cs" />
+    <Compile Include="Interfaces\IStuffService.cs" />
+    <Compile Include="Models\Charts\CrouchKillDateChart.cs" />
+    <Compile Include="Models\Charts\DamageDateChart.cs" />
+    <Compile Include="Models\Charts\GenericDoubleChart.cs" />
+    <Compile Include="Models\Charts\HeadshotDateChart.cs" />
+    <Compile Include="Models\Charts\KillDateChart.cs" />
+    <Compile Include="Models\Charts\KillVelocityChart.cs" />
+    <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
+    <Compile Include="Models\Charts\RankDateChart.cs" />
+    <Compile Include="Models\Charts\WinDateChart.cs" />
+    <Compile Include="Models\Excel\PlayerStats.cs" />
+    <Compile Include="Models\Excel\WeaponsData.cs" />
+    <Compile Include="Models\Heatmap\HeatmapConfiguration.cs" />
+    <Compile Include="Models\Heatmap\HeatmapPointComparer.cs" />
+    <Compile Include="Models\Stats\FlashbangDataPoint.cs" />
+    <Compile Include="Models\Stats\KillDataPoint.cs" />
+    <Compile Include="Models\Stats\MapStats.cs" />
+    <Compile Include="Models\Stats\OverallStats.cs" />
+    <Compile Include="Models\Stats\PlayerRoundStats.cs" />
+    <Compile Include="Models\Stats\ProgressStats.cs" />
+    <Compile Include="Models\Stats\WeaponStats.cs" />
+    <Compile Include="Models\Timelines\RoundEvent.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Concrete\SteamService.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{4180e444-4aa1-4564-9296-50323fe504fe}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\demoinfo\DemoInfo\DemoInfo.csproj">
+      <Project>{22d4cfc7-6810-4c18-a353-71a49782394f}</Project>
+      <Name>DemoInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\bomb_defused.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\bomb_exploded.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\bomb_planted.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\ct_death.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\ct_decoy.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\ct_flashbang.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\ct_grenade.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\ct_molotov.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\ct_smoke.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\flashbang_explode.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\he_explode.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\inc_grenade_detonate.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\molotov_detonate.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\smoke_explode.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\t_death.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\t_decoy.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\t_flashbang.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\t_grenade.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\t_molotov.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\sounds\t_smoke.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\images\colors.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\steam_api_key.txt" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
+snremove.exe -r DemoInfo.dll
+cd $(SolutionDir)Manager\bin\x86\Release
+snremove.exe -r DemoInfo.dll</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

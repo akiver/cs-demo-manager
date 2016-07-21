@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4180E444-4AA1-4564-9296-50323FE504FE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Core</RootNamespace>
+    <AssemblyName>csgodm.core</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\Manager\bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>..\Manager\bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="protobuf-net, Version=2.1.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <HintPath>..\packages\protobuf-net.2.1.0\lib\net45\protobuf-net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppSettings.cs" />
+    <Compile Include="Logger.cs" />
+    <Compile Include="Models\Map.cs" />
+    <Compile Include="Models\Maps\Cache.cs" />
+    <Compile Include="Models\Maps\Cbble.cs" />
+    <Compile Include="Models\Maps\Coast.cs" />
+    <Compile Include="Models\Maps\Cruise.cs" />
+    <Compile Include="Models\Maps\Dust2.cs" />
+    <Compile Include="Models\Maps\Empire.cs" />
+    <Compile Include="Models\Maps\Inferno.cs" />
+    <Compile Include="Models\Maps\Mikla.cs" />
+    <Compile Include="Models\Maps\Mirage.cs" />
+    <Compile Include="Models\Maps\NewNuke.cs" />
+    <Compile Include="Models\Maps\Nuke.cs" />
+    <Compile Include="Models\Maps\Overpass.cs" />
+    <Compile Include="Models\Maps\Royal.cs" />
+    <Compile Include="Models\Maps\Santorini.cs" />
+    <Compile Include="Models\Maps\Season.cs" />
+    <Compile Include="Models\Maps\Train.cs" />
+    <Compile Include="Models\Maps\Tulip.cs" />
+    <Compile Include="Models\protobuf\GCMessages.cs" />
+    <Compile Include="Models\protobuf\SteamMessages.cs" />
+    <Compile Include="Models\Stuff.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Win32Utils.cs" />
+    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Demo.cs" />
+    <Compile Include="Models\DemoStatus.cs" />
+    <Compile Include="Models\Events\BaseEvent.cs" />
+    <Compile Include="Models\Events\BombDefusedEvent.cs" />
+    <Compile Include="Models\Events\BombExplodedEvent.cs" />
+    <Compile Include="Models\Events\BombPlantedEvent.cs" />
+    <Compile Include="Models\Events\ClutchEvent.cs" />
+    <Compile Include="Models\Events\DecoyEndedEvent.cs" />
+    <Compile Include="Models\Events\DecoyStartedEvent.cs" />
+    <Compile Include="Models\Events\EntryHoldKillEvent.cs" />
+    <Compile Include="Models\Events\EntryKillEvent.cs" />
+    <Compile Include="Models\Events\ExplosiveNadeExplodedEvent.cs" />
+    <Compile Include="Models\Events\FlashbangExplodedEvent.cs" />
+    <Compile Include="Models\Events\KillEvent.cs" />
+    <Compile Include="Models\Events\MolotovFireEndedEvent.cs" />
+    <Compile Include="Models\Events\MolotovFireStartedEvent.cs" />
+    <Compile Include="Models\Events\NadeBaseEvent.cs" />
+    <Compile Include="Models\Events\PlayerBlindedEvent.cs" />
+    <Compile Include="Models\Events\PlayerHurtedEvent.cs" />
+    <Compile Include="Models\Events\SmokeNadeEndedEvent.cs" />
+    <Compile Include="Models\Events\SmokeNadeStartedEvent.cs" />
+    <Compile Include="Models\Events\WeaponFireEvent.cs" />
+    <Compile Include="Models\HeatmapPoint.cs" />
+    <Compile Include="Models\KillHeatmapPoint.cs" />
+    <Compile Include="Models\MapPoint.cs" />
+    <Compile Include="Models\Overtime.cs" />
+    <Compile Include="Models\Player.cs" />
+    <Compile Include="Models\PositionPoint.cs" />
+    <Compile Include="Models\Rank.cs" />
+    <Compile Include="Models\RankInfo.cs" />
+    <Compile Include="Models\Round.cs" />
+    <Compile Include="Models\Serialization\DemoListBackupConverter.cs" />
+    <Compile Include="Models\Source\Cevo.cs" />
+    <Compile Include="Models\Source\Ebot.cs" />
+    <Compile Include="Models\Source\Esea.cs" />
+    <Compile Include="Models\Source\Faceit.cs" />
+    <Compile Include="Models\Source\PopFlash.cs" />
+    <Compile Include="Models\Source\Pov.cs" />
+    <Compile Include="Models\Source\Source.cs" />
+    <Compile Include="Models\Source\Valve.cs" />
+    <Compile Include="Models\Steam\PlayerBan.cs" />
+    <Compile Include="Models\Steam\PlayerSummary.cs" />
+    <Compile Include="Models\Suspect.cs" />
+    <Compile Include="Models\Team.cs" />
+    <Compile Include="Models\Weapon.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo01.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo02.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo04.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo05.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo06.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo07.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo08.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo09.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo10.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo11.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo12.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo13.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo14.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo15.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo17.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\elo18.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Ranks\no_rank.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\demoinfo\DemoInfo\DemoInfo.csproj">
+      <Project>{22d4cfc7-6810-4c18-a353-71a49782394f}</Project>
+      <Name>DemoInfo</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\cevo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\ebot.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\esea.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\faceit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\popflash.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\pov.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Logos\valve.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="app.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\avatar.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
+snremove.exe -r DemoInfo.dll
+cd $(SolutionDir)Manager\bin\x86\Release
+snremove.exe -r DemoInfo.dll</PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

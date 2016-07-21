@@ -1,0 +1,278 @@
+﻿<UserControl x:Class="Manager.Views.Suspects.WhitelistView"
+			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+			 xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 Background="{StaticResource LightGreyBrush}"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720"
+			 d:DesignWidth="1280"
+			 DataContext="{Binding Whitelist, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:RowSuspectDoubleClickedToProfileConverter x:Key="RowSuspectDoubleClickedToProfile" />
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
+			<converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding GoToSuspectsCommand}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding RefreshPlayerListCommand}"
+					Gesture="CTRL+R" />
+		<KeyBinding Command="{Binding DisplayDemosCommand}"
+					CommandParameter="{Binding SelectedSuspect}"
+					Gesture="CTRL+F" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+									Command="{Binding GoToSuspectsCommand}" />
+	</UserControl.InputBindings>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<mvvm:EventToCommand Command="{Binding RefreshPlayerListCommand, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0" Margin="0 5 0 0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="0"
+					Margin="5"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="70"
+					Height="30"
+					Command="{Binding GoToSuspectsCommand}">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Back"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="1"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="60"
+					Height="30"
+					Margin="5"
+					Command="{Binding AddPlayerCommand}">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user_add}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Add"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="2"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="80"
+					Height="30"
+					Margin="5"
+					Command="{Binding RemoveSelectedPlayersCommand}"
+					CommandParameter="{Binding SelectedSuspects}">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user_delete}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Remove"
+							   Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="3"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="80"
+					Height="30"
+					Margin="5"
+					Command="{Binding GoToPlayerProfileCommand}"
+					CommandParameter="{Binding SelectedSuspect}">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Profile"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="4"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="80"
+					Height="30"
+					Margin="5"
+					ToolTip="Refresh list (CTRL+R)"
+					Command="{Binding RefreshPlayerListCommand}">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_refresh}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="5"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="150"
+					Height="30"
+					Margin="5"
+					ToolTip="Show demos that contains the player (CTRL+F)"
+					Command="{Binding DisplayDemosCommand}"
+					CommandParameter="{Binding SelectedSuspect}"
+					IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_magnify}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Show player demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+		</Grid>
+
+		<Grid Grid.Row="1"
+			  Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Center"
+						Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+				<controls:ProgressRing IsActive="{Binding IsBusy}"
+									   Foreground="{DynamicResource AccentColorBrush}"
+									   Width="40" Height="40" />
+				<TextBlock Text="{Binding NotificationMessage}"
+						   Style="{StaticResource LabelGeneralInfoDemo}" />
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="2">
+			<TextBlock Text="Players listed below will not be checked for ban when analyzing a demo."
+					   Style="{StaticResource TitleSettingsStyle }"
+					   HorizontalAlignment="Center" />
+		</Grid>
+
+		<DataGrid Grid.Row="3"
+				  x:Name="DataGridSuspects"
+				  Margin="0 5 0 0"
+				  ItemsSource="{Binding Suspects, IsAsync=True}"
+				  SelectedItem="{Binding SelectedSuspect}"
+				  CellStyle="{StaticResource DataGridCellStyle}"
+				  RowStyle="{StaticResource DataGridRowPlayerWhitelistStyle}"
+				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+				  EnableColumnVirtualization ="True"
+				  EnableRowVirtualization ="True"
+				  Style="{StaticResource DataGridStyle}">
+
+			<i:Interaction.Triggers>
+				<i:EventTrigger EventName="MouseDoubleClick">
+					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=SuspectList.GoToSuspectProfileCommand}"
+										 PassEventArgsToCommand="True"
+										 EventArgsConverter="{StaticResource RowSuspectDoubleClickedToProfile}"
+										 EventArgsConverterParameter="{Binding SelectedSuspect}"/>
+				</i:EventTrigger>
+				<i:EventTrigger EventName="SelectionChanged">
+					<mvvm:EventToCommand Command="{Binding PlayersSelectionChangedCommand}"
+										 CommandParameter="{Binding SelectedItems, ElementName=DataGridSuspects}" />
+				</i:EventTrigger>
+			</i:Interaction.Triggers>
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Header="Avatar"
+										Width="Auto"
+										HeaderStyle="{StaticResource PlayerAvatarHeader}">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<Image Source="{Binding AvatarUrl}" Height="42" Width="42" />
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn Width="Auto"
+									Header="Nickname"
+									Binding="{Binding Nickname}"
+									HeaderStyle="{StaticResource NicknameHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Profile"
+									Binding="{Binding ProfileUrl}"
+									HeaderStyle="{StaticResource ProfileUrlHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Status"
+									Binding="{Binding CurrentStatusString}"
+									HeaderStyle="{StaticResource CurrentStatusHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Profile Visibility"
+									Binding="{Binding PublicProfile}"
+									HeaderStyle="{StaticResource PublicProfileHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Last Connection"
+									Binding="{Binding LastLogOffDate}"
+									HeaderStyle="{StaticResource LastLogOffHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Profile setup"
+									Binding="{Binding ProfileStateString}"
+									HeaderStyle="{StaticResource ProfileStateHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="VAC Banned"
+									Binding="{Binding VacBanned, Converter={StaticResource BooleanToStringConverter}}"
+									HeaderStyle="{StaticResource VacBannedHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Game ban"
+									Binding="{Binding GameBanCount}"
+									HeaderStyle="{StaticResource GameBanCountHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Ban Count"
+									Binding="{Binding BanCount}"
+									HeaderStyle="{StaticResource BanCountHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="DSLB"
+									Binding="{Binding DaySinceLastBanCount}"
+									HeaderStyle="{StaticResource DaySinceLastBanHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Community Banned"
+									Binding="{Binding CommunityBanned, Converter={StaticResource BooleanToStringConverter}}"
+									HeaderStyle="{StaticResource CommunityBannedHeader}" />
+				<DataGridTextColumn Width="Auto"
+									Header="Economy Banned"
+									Binding="{Binding EconomyBan}"
+									HeaderStyle="{StaticResource EconomyBanHeader}" />
+			</DataGrid.Columns>
+		</DataGrid>
+	</Grid>
+</UserControl>

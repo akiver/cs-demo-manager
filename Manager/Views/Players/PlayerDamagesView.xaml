@@ -1,0 +1,135 @@
+﻿<UserControl x:Class="Manager.Views.Players.PlayerDamagesView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720" d:DesignWidth="1280"
+			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+		<TextBlock Grid.Row="0"
+				   Style="{StaticResource LabelChartStyle}"
+				   Text="Damages"/>
+		<telerik:RadCartesianChart Grid.Row="1"
+								   ClipToBounds="False">
+			<telerik:RadCartesianChart.Resources>
+				<telerik:LinearAxis x:Key="TotalDamageAxis"
+									Minimum="0"
+									HorizontalLocation="Right"
+									LabelStyle="{StaticResource LabelChartStyle}"
+									Title="Total damages"
+									LabelRotationAngle="45"
+									LabelFitMode="Rotate"
+									TitleTemplate="{StaticResource TitleChartTemplate}" />
+				<telerik:LinearAxis x:Key="DamagePerRoundAxis"
+									RangeExtendDirection="Both"
+									Minimum="0"
+									LabelStyle="{StaticResource LabelChartStyle}"
+									Title="Damages per round"
+									LabelRotationAngle="45"
+									LabelFitMode="Rotate"
+									TitleTemplate="{StaticResource TitleChartTemplate}"/>
+			</telerik:RadCartesianChart.Resources>
+
+			<telerik:RadCartesianChart.HorizontalAxis>
+				<telerik:DateTimeCategoricalAxis LabelStyle="{StaticResource LabelChartStyle}"
+												 Title="Round"
+												 TitleTemplate="{StaticResource HorizontalAxisTitleTemplate}" />
+			</telerik:RadCartesianChart.HorizontalAxis>
+			<telerik:RadCartesianChart.Behaviors>
+				<telerik:ChartPanAndZoomBehavior PanMode="Horizontal"
+												 ZoomMode="Horizontal"
+												 DragMode="Pan" />
+				<telerik:ChartTrackBallBehavior />
+				<telerik:ChartTooltipBehavior />
+			</telerik:RadCartesianChart.Behaviors>
+			<telerik:LineSeries ItemsSource="{Binding DamageHealthData}"
+								CategoryBinding="Label"
+								ValueBinding="Value"
+								StrokeThickness="3"
+								TrackBallInfoTemplate="{StaticResource PlayerDamageHealthTrackBallTemplate}"
+								Stroke="{StaticResource LightBlueBrush}"
+								TooltipTemplate="{StaticResource PlayerDamageHealthTooltipTemplate}"
+								VerticalAxis="{StaticResource DamagePerRoundAxis}">
+				<telerik:LineSeries.PointTemplate>
+					<DataTemplate>
+						<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+					</DataTemplate>
+				</telerik:LineSeries.PointTemplate>
+			</telerik:LineSeries>
+			<telerik:LineSeries ItemsSource="{Binding DamageArmorData}"
+								CategoryBinding="Label"
+								ValueBinding="Value"
+								StrokeThickness="3"
+								TrackBallInfoTemplate="{StaticResource PlayerDamageArmorTrackBallTemplate}"
+								Stroke="{StaticResource GreenBrush}"
+								TooltipTemplate="{StaticResource PlayerDamageArmorTooltipTemplate}"
+								VerticalAxis="{StaticResource DamagePerRoundAxis}">
+				<telerik:LineSeries.PointTemplate>
+					<DataTemplate>
+						<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+					</DataTemplate>
+				</telerik:LineSeries.PointTemplate>
+			</telerik:LineSeries>
+
+			<telerik:LineSeries ItemsSource="{Binding TotalDamageHealthData}"
+								CategoryBinding="Label"
+								ValueBinding="Value"
+								StrokeThickness="3"
+								TrackBallInfoTemplate="{StaticResource PlayerTotalDamageHealthTrackBallTemplate}"
+								Stroke="{StaticResource OrangeBrush}"
+								TooltipTemplate="{StaticResource PlayerTotalDamageHealthTooltipTemplate}"
+								VerticalAxis="{StaticResource TotalDamageAxis}">
+				<telerik:LineSeries.PointTemplate>
+					<DataTemplate>
+						<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+					</DataTemplate>
+				</telerik:LineSeries.PointTemplate>
+			</telerik:LineSeries>
+
+			<telerik:LineSeries ItemsSource="{Binding TotalDamageArmorData}"
+								CategoryBinding="Label"
+								ValueBinding="Value"
+								StrokeThickness="3"
+								TrackBallInfoTemplate="{StaticResource PlayerTotalDamageArmorTrackBallTemplate}"
+								Stroke="{StaticResource RedColorBrush}"
+								TooltipTemplate="{StaticResource PlayerTotalDamageArmorTooltipTemplate}"
+								VerticalAxis="{StaticResource TotalDamageAxis}">
+				<telerik:LineSeries.PointTemplate>
+					<DataTemplate>
+						<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+					</DataTemplate>
+				</telerik:LineSeries.PointTemplate>
+			</telerik:LineSeries>
+
+			<telerik:RadCartesianChart.Grid>
+				<telerik:CartesianChartGrid MajorLinesVisibility="X" />
+			</telerik:RadCartesianChart.Grid>
+		</telerik:RadCartesianChart>
+		<telerik:RadLegend Grid.Row="2"
+						   VerticalAlignment="Bottom"
+						   HorizontalAlignment="Center"
+						   Foreground="{StaticResource LightWhiteBrush}">
+			<telerik:RadLegend.ItemsPanel>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</telerik:RadLegend.ItemsPanel>
+			<telerik:RadLegend.Items>
+				<telerik:LegendItemCollection>
+					<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}" Title="Health Damage" />
+					<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Armor Damage"/>
+					<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}" Title="Total Health Damage" />
+					<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Total Armor Damage" />
+				</telerik:LegendItemCollection>
+			</telerik:RadLegend.Items>
+		</telerik:RadLegend>
+	</Grid>
+</UserControl>

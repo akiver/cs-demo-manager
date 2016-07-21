@@ -1,0 +1,395 @@
+﻿<UserControl x:Class="Manager.Views.Players.PlayerClutchesView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:converters="clr-namespace:Manager.Converters"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720"
+			 d:DesignWidth="1280"
+			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Grid HorizontalAlignment="Center">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<Grid Grid.Column="0">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Text="Total"
+							   Style="{StaticResource SectionTitleStyle}"/>
+					<Border Grid.Column="0"
+							Grid.Row="1"
+							BorderBrush="{StaticResource LightWhiteBrush}"
+							BorderThickness="1"
+							Margin="5"
+							Padding="10">
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="Clutches "
+									   FontSize="18"
+									   ToolTip="Total clutches"
+									   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+							<TextBlock Text="Clutches won "
+									   FontSize="18"
+									   ToolTip="Total clutches won"
+									   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchWonCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+							<TextBlock Text="Clutches loss "
+									   FontSize="18"
+									   ToolTip="Total clutches loss"
+									   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchLostCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+							<TextBlock Text="Clutches won % "
+									   FontSize="18"
+									   ToolTip="Clutches won %"
+									   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchWonPercent}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						</StackPanel>
+					</Border>
+				</Grid>
+
+				<Grid Grid.Column="1">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Text="1V1"
+							   Style="{StaticResource SectionTitleStyle}"/>
+					<Border Grid.Column="0"
+							Grid.Row="1"
+							BorderBrush="{StaticResource LightWhiteBrush}"
+							BorderThickness="1"
+							Margin="5"
+							Padding="10">
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="1V1 "
+									   FontSize="18"
+									   ToolTip="1V1"
+									   Foreground="{StaticResource LightWhiteBrush}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1Count}"
+								   FontSize="20"
+								   Foreground="{StaticResource LightGreenBrush}"/>
+					</TextBlock>
+							<TextBlock Text="1V1 won "
+									   FontSize="18"
+									   ToolTip="Total 1V1 won"
+									   Foreground="{StaticResource LightWhiteBrush}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1WonCount}"
+								   FontSize="20"
+								   Foreground="{StaticResource LightGreenBrush}"/>
+					</TextBlock>
+							<TextBlock Text="1V1 loss "
+									   FontSize="18"
+									   ToolTip="Total 1V1 loss"
+									   Foreground="{StaticResource LightWhiteBrush}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1LossCount}"
+								   FontSize="20"
+								   Foreground="{StaticResource LightGreenBrush}"/>
+					</TextBlock>
+							<TextBlock Text="1V1 won % "
+									   FontSize="18"
+									   ToolTip="1V1 won %"
+									   Foreground="{StaticResource LightWhiteBrush}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1WonPercent}"
+								   FontSize="20"
+								   Foreground="{StaticResource LightGreenBrush}"/>
+					</TextBlock>
+						</StackPanel>
+					</Border>
+				</Grid>
+
+				<Grid Grid.Column="2">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Text="1V2"
+							   Style="{StaticResource SectionTitleStyle}"/>
+					<Border Grid.Column="0"
+							Grid.Row="1"
+							BorderBrush="{StaticResource LightWhiteBrush}"
+							BorderThickness="1"
+							Margin="5"
+							Padding="10">
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="1V2 "
+									   FontSize="18"
+									   ToolTip="1V2"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2Count}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V2 won "
+								   FontSize="18"
+								   ToolTip="Total 1V2 won"
+								   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V2 loss "
+									   FontSize="18"
+									   ToolTip="Total 1V2 loss"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2LossCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V2 won % "
+									   FontSize="18"
+									   ToolTip="1V2 won %"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonPercent}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</Grid>
+
+			<Grid Grid.Row="1">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+
+				<Grid Grid.Column="0">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Text="1V3"
+							   Style="{StaticResource SectionTitleStyle}"/>
+					<Border Grid.Column="0"
+							Grid.Row="1"
+							BorderBrush="{StaticResource LightWhiteBrush}"
+							BorderThickness="1"
+							Margin="5"
+							Padding="10">
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="1V3 "
+									   FontSize="18"
+									   ToolTip="1V3"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3Count}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V3 won "
+									   FontSize="18"
+									   ToolTip="Total 1V3 won"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3WonCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V3 loss "
+									   FontSize="18"
+									   ToolTip="Total 1V3 loss"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3LossCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V3 won % "
+									   FontSize="18"
+									   ToolTip="1V3 won %"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3WonPercent}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+						</StackPanel>
+					</Border>
+				</Grid>
+
+				<Grid Grid.Column="1">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Text="1V4"
+							   Style="{StaticResource SectionTitleStyle}"/>
+					<Border Grid.Column="0"
+							Grid.Row="1"
+							BorderBrush="{StaticResource LightWhiteBrush}"
+							BorderThickness="1"
+							Margin="5"
+							Padding="10">
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="1V4 "
+									   FontSize="18"
+									   ToolTip="1V4"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4Count}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V4 won "
+									   FontSize="18"
+									   ToolTip="Total 1V4 won"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4WonCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V4 loss "
+									   FontSize="18"
+									   ToolTip="Total 1V4 loss"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4LossCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V4 won % "
+									   FontSize="18"
+									   ToolTip="1V4 won %"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4WonPercent}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+						</StackPanel>
+					</Border>
+				</Grid>
+
+				<Grid Grid.Column="2">
+					<Grid.RowDefinitions>
+						<RowDefinition/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+
+					<TextBlock Grid.Row="0"
+							   Text="1V5"
+							   Style="{StaticResource SectionTitleStyle}"/>
+					<Border Grid.Column="0"
+							Grid.Row="1"
+							BorderBrush="{StaticResource LightWhiteBrush}"
+							BorderThickness="1"
+							Margin="5"
+							Padding="10">
+						<StackPanel Orientation="Vertical">
+							<TextBlock Text="1V5 "
+									   FontSize="18"
+									   ToolTip="1V5"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5Count}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V5 won "
+									   FontSize="18"
+									   ToolTip="Total 1V5 won"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5WonCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V5 loss "
+									   FontSize="18"
+									   ToolTip="Total 1V5 loss"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5LossCount}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+							<TextBlock Text="1V5 won % "
+									   FontSize="18"
+									   ToolTip="1V5 won %"
+									   Foreground="{StaticResource LightWhiteBrush}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5WonPercent}"
+										   FontSize="20"
+										   Foreground="{StaticResource LightGreenBrush}"/>
+							</TextBlock>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</Grid>
+		</Grid>
+
+		<Grid Grid.Row="1" HorizontalAlignment="Center">
+			<DataGrid Name="ClutchsDataGrid"
+					  ItemsSource="{Binding CurrentPlayer.Clutches}"
+					  Style="{StaticResource DataGridStyle}"
+					  RowStyle="{StaticResource DataGridRowStyle}"
+					  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+					  CellStyle="{StaticResource DataGridCellStyle}"
+					  Margin="0 10 0 0"
+					  Width="Auto">
+				<DataGrid.Columns>
+					<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+										Width="Auto"
+										Header="Round"
+										Binding="{Binding RoundNumber}"/>
+					<DataGridTextColumn HeaderStyle="{StaticResource ClutchOpponentCountHeader}"
+										Width="Auto"
+										Header="1vX"
+										Binding="{Binding OpponentCount}"/>
+					<DataGridTextColumn HeaderStyle="{StaticResource ClutchWonHeader}"
+										Width="Auto"
+										Header="Won"
+										Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
+					<DataGridTemplateColumn Header="Watch">
+						<DataGridTemplateColumn.CellTemplate>
+							<DataTemplate>
+								<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithoutDelayCommand}"
+										CommandParameter="{Binding SelectedItem.Tick, ElementName=ClutchsDataGrid}"
+										Style="{StaticResource GeneralButtonStyle}"
+										Content="Watch" />
+							</DataTemplate>
+						</DataGridTemplateColumn.CellTemplate>
+					</DataGridTemplateColumn>
+				</DataGrid.Columns>
+			</DataGrid>
+		</Grid>
+	</Grid>
+</UserControl>

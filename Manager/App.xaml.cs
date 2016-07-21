@@ -1,0 +1,102 @@
+﻿using System;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.Runtime.InteropServices;
+using System.Threading;
+using System.Windows;
+using Core;
+using GalaSoft.MvvmLight.Threading;
+using Manager.Properties;
+
+namespace Manager
+{
+	public partial class App : IDisposable
+	{
+		private readonly Mutex _instance;
+		public static string StartUpWindow { get; set; } = "demos";
+
+		public App()
+		{
+			bool createdNew;
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			GuidAttribute attribute = (GuidAttribute)assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0];
+			string appGuid = attribute.Value;
+			_instance = new Mutex(true, @"Global\" + appGuid, out createdNew);
+			if (!createdNew)
+			{
+				_instance = null;
+				Current.Shutdown();
+				return;
+			}
+
+			DispatcherHelper.Initialize();
+#if RELEASE
+			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainUnhandleException;
+#endif
+		}
+
+		private static void HandleAppDomainUnhandleException(object sender, UnhandledExceptionEventArgs args)
+		{
+			Exception e = (Exception)args.ExceptionObject;
+			Logger.Instance.Log(e);
+			MessageBox.Show("An unexpected error occured. Please send the 'errors.log' file accessible from settings." + Environment.NewLine
+				+ "Message Error : " + Environment.NewLine + e.Message, "Error");
+		}
+
+		private void Application_Startup(object sender, StartupEventArgs e)
+		{
+			if (Settings.Default.StartBotOnLaunch)
+			{
+				if (File.Exists(AppSettings.BOT_PROCESS_NAME + ".exe")
+					&& !AppSettings.IsBotRunning())
+				{
+					Process.Start(AppSettings.BOT_PROCESS_NAME);
+				}
+			}
+
+			for (int i = 0; i != e.Args.Length; ++i)
+			{
+				// Start the app on Suspects view
+				if (e.Args[i] == "/suspects")
+				{
+					StartUpWindow = "suspects";
+				}
+			}
+
+			Settings.Default.DateStatsTo = DateTime.Today;
+			if (Settings.Default.DownloadFolder == string.Empty && AppSettings.GetCsgoPath() != null)
+			{
+				string demoFolder = AppSettings.GetCsgoPath() + Path.DirectorySeparatorChar + "replays";
+				if (Directory.Exists(demoFolder))
+				{
+					Settings.Default.DownloadFolder = Path.GetFullPath(demoFolder);
+				}
+			}
+			Settings.Default.Save();
+		}
+
+		private void Application_Exit(object sender, ExitEventArgs e)
+		{
+			if (Settings.Default.CloseBotOnExit)
+			{
+				Win32Utils.SendMessageToBot(Win32Utils.WM_CLOSE);
+			}
+			else
+			{
+				Win32Utils.SendMessageToBot(Win32Utils.WM_CSGO_DM_CLOSED);
+			}
+		}
+
+		protected override void OnExit(ExitEventArgs e)
+		{
+			_instance?.ReleaseMutex();
+			base.OnExit(e);
+		}
+
+		public void Dispose()
+		{
+			_instance.Dispose();
+		}
+	}
+}

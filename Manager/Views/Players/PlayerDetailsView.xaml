@@ -1,0 +1,204 @@
+﻿<UserControl x:Class="Manager.Views.Players.PlayerDetailsView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 mc:Ignorable="d"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:player="clr-namespace:Manager.Views.Players"
+			 Background="{StaticResource LightGreyBrush}"
+			 d:DesignHeight="720"
+			 d:DesignWidth="1280"
+			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding BackToDetailsCommand}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding WatchHighlightsCommand}"
+					Gesture="CTRL+H" />
+		<KeyBinding Command="{Binding WatchLowlightsCommand}"
+					Gesture="CTRL+L" />
+		<KeyBinding Command="{Binding AddPlayerToSuspectsListCommand}"
+					Gesture="CTRL+S" />
+		<KeyBinding Command="{Binding AddPlayerToWhitelistCommand}"
+					Gesture="CTRL+W" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+									Command="{Binding BackToDetailsCommand}"/>
+	</UserControl.InputBindings>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- Action bar -->
+		<Grid Grid.Row="0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+			</Grid.ColumnDefinitions>
+
+			<Button Grid.Column="0"
+					Margin="5"
+					Width="70"
+					Height="30"
+					Style="{StaticResource GeneralButtonStyle}"
+					ToolTip="Back (CTRL+B)"
+					Command="{Binding BackToDetailsCommand}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15"
+							   Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Back"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="1"
+					Margin="5"
+					Width="130"
+					Height="30"
+					Style="{StaticResource GeneralButtonStyle}"
+					ToolTip="Watch highlights (CTRL+H)"
+					Command="{Binding WatchHighlightsCommand}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15"
+							   Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_thumbs_up}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Watch highlights"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="2"
+					Margin="5"
+					Width="130"
+					Height="30"
+					Style="{StaticResource GeneralButtonStyle}"
+					ToolTip="Watch lowlights (CTRL+L)"
+					Command="{Binding WatchLowlightsCommand}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15"
+							   Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_thumbs_down}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Watch lowlights"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="3"
+					Margin="5"
+					Width="140"
+					Height="30"
+					Style="{StaticResource GeneralButtonStyle}"
+					ToolTip="Add player to suspects list (CTRL+S)"
+					Command="{Binding AddPlayerToSuspectsListCommand}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15"
+							   Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user_add}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Add to suspects list"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="4"
+					Margin="5"
+					Width="130"
+					Height="30"
+					Style="{StaticResource GeneralButtonStyle}"
+					ToolTip="Add player to whitelist (CTRL+W)"
+					Command="{Binding AddPlayerToWhitelistCommand}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15"
+							   Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_user_add}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Add to whitelist"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<StackPanel Grid.Column="5"
+						Orientation="Horizontal"
+						HorizontalAlignment="Center"
+						Margin="2">
+				<controls:ProgressRing IsActive="{Binding IsBusy}"
+									   Foreground="{DynamicResource AccentColorBrush}"
+									   Width="40"
+									   Height="40" />
+				<TextBlock Text="{Binding NotificationMessage}"
+						   Style="{StaticResource LabelGeneralInfoDemo}"
+						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+			</StackPanel>
+		</Grid>
+
+		<TabControl Grid.Row="1"
+					Margin="10"
+					controls:TabControlHelper.IsUnderlined="True">
+			<controls:MetroTabItem Header="General">
+				<player:PlayerGeneralView />
+			</controls:MetroTabItem>
+			<controls:MetroTabItem Header="Rounds">
+				<player:PlayerRoundsView />
+			</controls:MetroTabItem>
+			<controls:MetroTabItem Header="Clutches">
+				<player:PlayerClutchesView />
+			</controls:MetroTabItem>
+			<controls:MetroTabItem Header="Duels">
+				<player:PlayerDuelView />
+			</controls:MetroTabItem>
+			<controls:MetroTabItem Header="Economy">
+				<player:PlayerEconomyView />
+			</controls:MetroTabItem>
+			<controls:MetroTabItem Header="Damages">
+				<player:PlayerDamagesView />
+			</controls:MetroTabItem>
+		</TabControl>
+	</Grid>
+</UserControl>

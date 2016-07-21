@@ -1,0 +1,484 @@
+﻿<UserControl x:Class="Manager.Views.Accounts.AccountProgressView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+			 xmlns:command="http://www.galasoft.ch/mvvmlight"
+			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720"
+			 d:DesignWidth="1280"
+			 DataContext="{Binding AccountProgress, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<UserControl.InputBindings>
+		<KeyBinding Command="{Binding BackToHomeCommand}"
+					Gesture="CTRL+B" />
+		<KeyBinding Command="{Binding GoToOverallCommand}"
+					Gesture="CTRL+O" />
+		<KeyBinding Command="{Binding GoToMapCommand}"
+					Gesture="CTRL+M" />
+		<KeyBinding Command="{Binding GoToWeaponCommand}"
+					Gesture="CTRL+W" />
+		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
+	</UserControl.InputBindings>
+
+	<i:Interaction.Triggers>
+		<i:EventTrigger EventName="Loaded">
+			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+		</i:EventTrigger>
+	</i:Interaction.Triggers>
+
+	<Grid>
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+		</Grid.RowDefinitions>
+
+		<Grid Grid.Row="0">
+			<StackPanel Orientation="Horizontal">
+				<Button Margin="10" Width="70" Height="30"
+					Style="{StaticResource GeneralButtonStyle}"
+						Command="{Binding BackToHomeCommand}"
+						ToolTip="Back (CTRL+B)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10"
+					Style="{StaticResource GeneralButtonStyle}"
+					Command="{Binding GoToOverallCommand}"
+					Width="80" Height="30" ToolTip="Overall (CTRL+O)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_globe_wire}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Overall" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="70" Height="30"
+						Style="{StaticResource GeneralButtonStyle}"
+						Command="{Binding GoToRankCommand}"
+						ToolTip="Rank (CTRL+R)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_arrow_up_down}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Rank" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="70" Height="30"
+						Style="{StaticResource GeneralButtonStyle}"
+						Command="{Binding GoToMapCommand}"
+						ToolTip="Maps (CTRL+M)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_map}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Maps" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="90" Height="30"
+						Style="{StaticResource GeneralButtonStyle}"
+						Command="{Binding GoToWeaponCommand}"
+						ToolTip="Weapons (CTRL+W)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
+							   Width="15"
+							   Height="15"/>
+						<TextBlock Text="Weapons" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Margin="10" Width="110" Height="30"
+						Style="{StaticResource GeneralButtonStyle}"
+						IsEnabled="False"
+						ToolTip="Progression (CTRL+P)">
+					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+						<Rectangle Width="15" Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_graph_line_up}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Progression" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
+					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+
+		<Grid Grid.Row="1">
+			<TabControl controls:TabControlHelper.IsUnderlined="True">
+				<controls:MetroTabItem Header="Percentage">
+					<Grid Margin="10">
+
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+
+						<Grid Grid.Row="0">
+							<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+								<CheckBox x:Name="CheckBoxShowWinChart"
+										  Content="Win %"
+										  IsChecked="{Binding IsWinChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleWinChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowWinChart}"/>
+								<CheckBox x:Name="CheckBoxShowDamageChart"
+										  Content="Damage value"
+										  IsChecked="{Binding IsDamageChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleDamageChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowDamageChart}"/>
+								<CheckBox x:Name="CheckBoxShowHeadshotChart"
+										  Content="Headshot %"
+										  IsChecked="{Binding IsHeadshotChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleHeadshotChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowHeadshotChart}"/>
+								<CheckBox x:Name="CheckBoxShowCrouchKillChart"
+										  Content="Crouch kill %"
+										  IsChecked="{Binding IsCrouchKillChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleCrouchKillChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowCrouchKillChart}"/>
+							</StackPanel>
+						</Grid>
+
+						<Grid Grid.Row="1">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*"/>
+								<RowDefinition Height="Auto"/>
+							</Grid.RowDefinitions>
+							<telerik:RadCartesianChart Grid.Row="0" ClipToBounds="False">
+								<telerik:RadCartesianChart.Resources>
+									<telerik:LinearAxis x:Key="DamageAxisAxis"
+									Minimum="0" HorizontalLocation="Right" LabelStyle="{StaticResource LabelChartStyle}" Title="Damage per game value" TitleTemplate="{StaticResource TitleChartTemplate}"
+											Visibility="{Binding IsDamageChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+									</telerik:LinearAxis>
+								</telerik:RadCartesianChart.Resources>
+								<telerik:RadCartesianChart.VerticalAxis>
+									<telerik:LinearAxis MajorStep="10" RangeExtendDirection="Both" Minimum="0" Maximum="110" LastLabelVisibility="Hidden" LabelStyle="{StaticResource LabelChartStyle}" Title="% weekly" TitleTemplate="{StaticResource TitleChartTemplate}"/>
+								</telerik:RadCartesianChart.VerticalAxis>
+								<telerik:RadCartesianChart.HorizontalAxis>
+									<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" LabelInterval="1" />
+								</telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:RadCartesianChart.Behaviors>
+									<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
+									<telerik:ChartTooltipBehavior />
+								</telerik:RadCartesianChart.Behaviors>
+								<telerik:LineSeries ItemsSource="{Binding DatasWin}"
+													CategoryBinding="Date"
+													ValueBinding="WinPercentage"
+													StrokeThickness="3"
+													Stroke="{StaticResource LightGreenBrush}"
+													TooltipTemplate="{StaticResource WinTooltipTemplate}"
+													Visibility="{Binding IsWinChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+									<telerik:LineSeries.PointTemplate>
+										<DataTemplate>
+											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+										</DataTemplate>
+									</telerik:LineSeries.PointTemplate>
+								</telerik:LineSeries>
+								<telerik:LineSeries ItemsSource="{Binding DatasDamage}"
+													CategoryBinding="Date"
+													ValueBinding="DamageCount"
+													StrokeThickness="3"
+													Stroke="{StaticResource LightBlueBrush}"
+													Visibility="{Binding IsDamageChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+													VerticalAxis="{StaticResource DamageAxisAxis}"
+													TooltipTemplate="{StaticResource DamageTooltipTemplate}">
+									<telerik:LineSeries.PointTemplate>
+										<DataTemplate>
+											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+										</DataTemplate>
+									</telerik:LineSeries.PointTemplate>
+								</telerik:LineSeries>
+								<telerik:LineSeries ItemsSource="{Binding DatasHeadshot}"
+													CategoryBinding="Date"
+													ValueBinding="HeadshotPercentage"
+													StrokeThickness="3"
+													Stroke="{StaticResource GreenBrush}"
+													Visibility="{Binding IsHeadshotChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+													TooltipTemplate="{StaticResource HeadshotTooltipTemplate}">
+									<telerik:LineSeries.PointTemplate>
+										<DataTemplate>
+											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+										</DataTemplate>
+									</telerik:LineSeries.PointTemplate>
+								</telerik:LineSeries>
+								<telerik:LineSeries ItemsSource="{Binding DatasCrouchKill}"
+													CategoryBinding="Date"
+													ValueBinding="CrouchKillPercentage"
+													StrokeThickness="3"
+													Stroke="{StaticResource OrangeBrush}"
+													Visibility="{Binding IsCrouchKillChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
+													TooltipTemplate="{StaticResource CrouchKillTooltipTemplate}">
+									<telerik:LineSeries.PointTemplate>
+										<DataTemplate>
+											<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+										</DataTemplate>
+									</telerik:LineSeries.PointTemplate>
+								</telerik:LineSeries>
+								<telerik:RadCartesianChart.Grid>
+									<telerik:CartesianChartGrid MajorLinesVisibility="X" />
+								</telerik:RadCartesianChart.Grid>
+							</telerik:RadCartesianChart>
+
+							<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+								<telerik:RadLegend.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Horizontal" />
+									</ItemsPanelTemplate>
+								</telerik:RadLegend.ItemsPanel>
+								<telerik:RadLegend.Items>
+									<telerik:LegendItemCollection>
+										<telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}" Title="Win %"/>
+										<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Headshot %" />
+										<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}" Title="Damage value" />
+										<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}" Title="Crouch kill %" />
+									</telerik:LegendItemCollection>
+								</telerik:RadLegend.Items>
+							</telerik:RadLegend>
+						</Grid>
+					</Grid>
+				</controls:MetroTabItem>
+
+				<controls:MetroTabItem Header="Kill">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+						<telerik:RadCartesianChart Grid.Row="0" ClipToBounds="False">
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis RangeExtendDirection="Both" Minimum="0" LastLabelVisibility="Hidden" LabelStyle="{StaticResource LabelChartStyle}" Title="Average value" TitleTemplate="{StaticResource TitleChartTemplate}"/>
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" LabelInterval="1" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:LineSeries ItemsSource="{Binding DatasKill}" CategoryBinding="Date" ValueBinding="KillAverage"
+									StrokeThickness="3" Stroke="{StaticResource LightGreenBrush}"
+									TooltipTemplate="{StaticResource KillTooltipTemplate}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:LineSeries ItemsSource="{Binding DatasKill}" CategoryBinding="Date" ValueBinding="DeathAverage"
+									StrokeThickness="3" Stroke="{StaticResource LightRedColorBrush}" TooltipTemplate="{StaticResource DeathTooltipTemplate}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="X" />
+							</telerik:RadCartesianChart.Grid>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}" Title="Kill"/>
+									<telerik:LegendItem MarkerFill="{StaticResource LightRedColorBrush}" Title="Death" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+					</Grid>
+				</controls:MetroTabItem>
+				<controls:MetroTabItem Header="Kill velocity">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+						</Grid.RowDefinitions>
+
+						<Grid Grid.Row="0">
+							<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
+								<CheckBox x:Name="CheckBoxShowPistoles" Content="Pistol"
+										  IsChecked="{Binding IsVelocityPistolChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleVelocityPistolChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPistoles}"/>
+								<CheckBox x:Name="CheckBoxShowRifle" Content="Rifle"
+										  IsChecked="{Binding IsVelocityRifleChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleVelocityRifleChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowRifle}"/>
+								<CheckBox x:Name="CheckBoxShowSniper" Content="Sniper"
+										  IsChecked="{Binding IsVelocitySniperChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleVelocitySniperChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowSniper}"/>
+								<CheckBox x:Name="CheckBoxShowHeavy" Content="Heavy"
+										  IsChecked="{Binding IsVelocityHeavyChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleVelocityHeavyChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowHeavy}"/>
+								<CheckBox x:Name="CheckBoxShowSmg" Content="SMG"
+										  IsChecked="{Binding IsVelocitySmgChartEnabled}"
+										  Style="{StaticResource CheckBoxFilterStyle}"
+										  Command="{Binding ToggleVelocitySmgChartCommand}"
+										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowSmg}"/>
+								<TextBlock Text="Information : The maximum velocity while running is 250 unit/s"
+										   Style="{StaticResource LabelGeneralInfoDemo}"
+										   Margin="20 0 0 0"/>
+							</StackPanel>
+						</Grid>
+						<telerik:RadCartesianChart Grid.Row="1" ClipToBounds="False">
+							<telerik:RadCartesianChart.VerticalAxis>
+								<telerik:LinearAxis RangeExtendDirection="Both" Minimum="0" Maximum="{Binding MaximumVelocity}" LastLabelVisibility="Visible"
+													LabelStyle="{StaticResource LabelChartStyle}"
+													Title="Average velocity"
+													TitleTemplate="{StaticResource TitleChartTemplate}"/>
+							</telerik:RadCartesianChart.VerticalAxis>
+							<telerik:RadCartesianChart.HorizontalAxis>
+								<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy" LabelStyle="{StaticResource LabelChartStyle}"
+																 LabelRotationAngle="45" LabelFitMode="Rotate" LabelInterval="1" />
+							</telerik:RadCartesianChart.HorizontalAxis>
+							<telerik:RadCartesianChart.Behaviors>
+								<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
+								<telerik:ChartTooltipBehavior />
+							</telerik:RadCartesianChart.Behaviors>
+							<telerik:LineSeries ItemsSource="{Binding VelocityRifle}"
+												CategoryBinding="Date"
+												ValueBinding="VelocityAverage"
+												StrokeThickness="3"
+												Stroke="{StaticResource GreenBrush}"
+												TooltipTemplate="{StaticResource VelocityTooltipTemplate}"
+												Visibility="{Binding IsVelocityRifleChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:LineSeries ItemsSource="{Binding VelocityPistol}"
+												CategoryBinding="Date"
+												ValueBinding="VelocityAverage"
+												StrokeThickness="3"
+												Stroke="{StaticResource LightBlueBrush}"
+												TooltipTemplate="{StaticResource VelocityTooltipTemplate}"
+												Visibility="{Binding IsVelocityPistolChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:LineSeries ItemsSource="{Binding VelocitySniper}"
+												CategoryBinding="Date"
+												ValueBinding="VelocityAverage"
+												StrokeThickness="3"
+												Stroke="{StaticResource OrangeBrush}"
+												TooltipTemplate="{StaticResource VelocityTooltipTemplate}"
+												Visibility="{Binding IsVelocitySniperChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:LineSeries ItemsSource="{Binding VelocitySmg}"
+												CategoryBinding="Date"
+												ValueBinding="VelocityAverage"
+												StrokeThickness="3"
+												Stroke="{StaticResource CobblestoneColorBrush}"
+												TooltipTemplate="{StaticResource VelocityTooltipTemplate}"
+												Visibility="{Binding IsVelocitySmgChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:LineSeries ItemsSource="{Binding VelocityHeavy}"
+												CategoryBinding="Date"
+												ValueBinding="VelocityAverage"
+												StrokeThickness="3"
+												Stroke="{StaticResource RedColorBrush}"
+												TooltipTemplate="{StaticResource VelocityTooltipTemplate}"
+												Visibility="{Binding IsVelocityHeavyChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<telerik:LineSeries.PointTemplate>
+									<DataTemplate>
+										<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+									</DataTemplate>
+								</telerik:LineSeries.PointTemplate>
+							</telerik:LineSeries>
+							<telerik:RadCartesianChart.Grid>
+								<telerik:CartesianChartGrid MajorLinesVisibility="X" />
+							</telerik:RadCartesianChart.Grid>
+						</telerik:RadCartesianChart>
+
+						<telerik:RadLegend Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+							<telerik:RadLegend.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Orientation="Horizontal" />
+								</ItemsPanelTemplate>
+							</telerik:RadLegend.ItemsPanel>
+							<telerik:RadLegend.Items>
+								<telerik:LegendItemCollection>
+									<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}" Title="Pistoles" />
+									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Rifles"/>
+									<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}" Title="Snipers" />
+									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Heavy" />
+									<telerik:LegendItem MarkerFill="{StaticResource CobblestoneColorBrush}" Title="SMGs" />
+								</telerik:LegendItemCollection>
+							</telerik:RadLegend.Items>
+						</telerik:RadLegend>
+						<TextBlock Grid.Row="3" Text="This graph displays your average velocity when you killed someone by weapon group"
+								   Style="{StaticResource LabelChartStyle}"
+								   HorizontalAlignment="Center"/>
+					</Grid>
+				</controls:MetroTabItem>
+			</TabControl>
+		</Grid>
+
+	</Grid>
+
+</UserControl>

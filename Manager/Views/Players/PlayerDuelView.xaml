@@ -1,0 +1,306 @@
+﻿<UserControl x:Class="Manager.Views.Players.PlayerDuelView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:converters="clr-namespace:Manager.Converters"
+			 mc:Ignorable="d"
+			 d:DesignHeight="720"
+			 d:DesignWidth="1280"
+			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:TeamSideToStringConverter x:Key="TeamSideToStringConverter" />
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid HorizontalAlignment="Center">
+			<Grid.RowDefinitions>
+				<RowDefinition />
+				<RowDefinition />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+
+			<Grid Grid.Row="0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Horizontal"
+							Margin="5"
+							Grid.Row="0">
+					<TextBlock Text="Entry Kills"
+							   Foreground="{StaticResource LightGreenBrush}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   FontSize="22"/>
+					<TextBlock Text="(First kill as T)"
+							   Foreground="{StaticResource LightGreenBrush}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Margin="5 0 0 0"
+							   FontSize="16"/>
+				</StackPanel>
+				<Border Grid.Row="1"
+						BorderBrush="{StaticResource LightWhiteBrush}"
+						BorderThickness="1"
+						Padding="10">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0"
+								   Text="Attempt "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.EntryKills.Count}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Grid.Row="1"
+								   Text="Won "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.EntryKillWonCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Grid.Row="2"
+								   Text="Loss "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.EntryKillLossCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Grid.Row="3"
+								   Text="Won rate"
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding Path=CurrentPlayer.RatioEntryKill, StringFormat='{} {0}%'}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"
+									   Margin="0 0 0 10"/>
+						</TextBlock>
+						<DataGrid Grid.Row="4"
+								  Name="EntryKillsDataGrid"
+								  ItemsSource="{Binding CurrentPlayer.EntryKills}"
+								  Style="{StaticResource DataGridStyle}"
+								  RowStyle="{StaticResource DataGridRowStyle}"
+								  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+								  CellStyle="{StaticResource DataGridCellStyle}"
+								  Width="Auto">
+							<DataGrid.Columns>
+								<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+													Width="Auto"
+													Header="Round"
+													Binding="{Binding RoundNumber}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
+													Width="Auto"
+													Header="Killer"
+													Binding="{Binding KillerName}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource KillerSideHeader}"
+													Width="Auto"
+													Header="Killer Side"
+													Binding="{Binding KillerSide, Converter={StaticResource TeamSideToStringConverter}}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
+													Width="Auto"
+													Header="Killed"
+													Binding="{Binding KilledName}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
+													Width="Auto"
+													Header="Weapon"
+													Binding="{Binding Weapon.Name}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource DuelResultHeader}"
+													Width="Auto"
+													Header="Won"
+													Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+													Width="Auto"
+													Header="Round Won"
+													Binding="{Binding HasWonRound, Converter={StaticResource BooleanToStringConverter}}"/>
+								<DataGridTemplateColumn Header="Watch">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
+													CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryKillsDataGrid}"
+													Style="{StaticResource GeneralButtonStyle}"
+													Content="Watch"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Grid>
+				</Border>
+			</Grid>
+			<Grid Grid.Row="1">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Horizontal"
+							Margin="5"
+							Grid.Row="0">
+					<TextBlock Text="Entry Hold Kills"
+							   Foreground="{StaticResource LightGreenBrush}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   FontSize="22"/>
+					<TextBlock Text="(First kill as CT)"
+							   Foreground="{StaticResource LightGreenBrush}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Margin="5 0 0 0"
+							   FontSize="16"/>
+				</StackPanel>
+				<Border Grid.Row="1"
+						BorderBrush="{StaticResource LightWhiteBrush}"
+						BorderThickness="1"
+						Padding="10">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="Auto"/>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<TextBlock Grid.Row="0"
+								   Text="Attempt "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKills.Count}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Grid.Row="1"
+								   Text="Won "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillWonCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Grid.Row="2"
+								   Text="Loss "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillLossCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Grid.Row="3"
+								   Text="Won rate"
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding Path=CurrentPlayer.RatioEntryHoldKill, StringFormat='{} {0}%'}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"
+									   Margin="0 0 0 10"/>
+						</TextBlock>
+						<DataGrid Grid.Row="4"
+								  Name="EntryHoldKillsDataGrid"
+								  ItemsSource="{Binding CurrentPlayer.EntryHoldKills}"
+								  Style="{StaticResource DataGridStyle}"
+								  RowStyle="{StaticResource DataGridRowStyle}"
+								  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+								  CellStyle="{StaticResource DataGridCellStyle}"
+								  Width="Auto">
+							<DataGrid.Columns>
+								<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+													Width="Auto"
+													Header="Round"
+													Binding="{Binding RoundNumber}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
+													Width="Auto"
+													Header="Killer"
+													Binding="{Binding KillerName}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource KillerSideHeader}"
+													Width="Auto"
+													Header="Killer Side"
+													Binding="{Binding KillerSide, Converter={StaticResource TeamSideToStringConverter}}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
+													Width="Auto"
+													Header="Killed"
+													Binding="{Binding KilledName}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
+													Width="Auto"
+													Header="Weapon"
+													Binding="{Binding Weapon.Name}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource DuelResultHeader}"
+													Width="Auto"
+													Header="Has Won"
+													Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
+								<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+													Width="Auto"
+													Header="Round Won"
+													Binding="{Binding HasWonRound, Converter={StaticResource BooleanToStringConverter}}"/>
+								<DataGridTemplateColumn Header="Watch">
+									<DataGridTemplateColumn.CellTemplate>
+										<DataTemplate>
+											<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
+													CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryHoldKillsDataGrid}"
+													Style="{StaticResource GeneralButtonStyle}"
+													Content="Watch"/>
+										</DataTemplate>
+									</DataGridTemplateColumn.CellTemplate>
+								</DataGridTemplateColumn>
+							</DataGrid.Columns>
+						</DataGrid>
+					</Grid>
+				</Border>
+			</Grid>
+
+			<Grid Grid.Row="2">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+				<StackPanel Orientation="Horizontal"
+							Margin="5"
+							Grid.Row="0">
+					<TextBlock Text="Trade Kills / Deaths"
+							   Foreground="{StaticResource LightGreenBrush}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   FontSize="22"/>
+					<TextBlock Text="(Kill revenge occured maximum 4s after the initial kill)"
+							   Foreground="{StaticResource LightGreenBrush}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Center"
+							   Margin="5 0 0 0"
+							   FontSize="16"/>
+				</StackPanel>
+				<Border Grid.Row="1"
+						BorderBrush="{StaticResource LightWhiteBrush}"
+						BorderThickness="1"
+						Padding="10">
+					<StackPanel Orientation="Vertical">
+						<TextBlock Text="Trade kill "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.TradeKillCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+						<TextBlock Text="Trade death "
+								   FontSize="18"
+								   Foreground="{StaticResource LightWhiteBrush}">
+							<TextBlock Text="{Binding CurrentPlayer.TradeDeathCount}"
+									   FontSize="20"
+									   Foreground="{StaticResource LightGreenBrush}"/>
+						</TextBlock>
+					</StackPanel>
+				</Border>
+			</Grid>
+		</Grid>
+	</ScrollViewer>
+</UserControl>

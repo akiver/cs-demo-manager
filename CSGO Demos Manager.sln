@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSGO Demos Manager", "src\CSGO Demos Manager.csproj", "{1D6D9598-4348-4444-A8DF-A634CA0D371B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager", "Manager\Manager.csproj", "{1D6D9598-4348-4444-A8DF-A634CA0D371B}"
 	ProjectSection(ProjectDependencies) = postProject
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1} = {496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}
+		{4180E444-4AA1-4564-9296-50323FE504FE} = {4180E444-4AA1-4564-9296-50323FE504FE}
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC} = {22A46D61-1D40-43A9-802C-B9D43DADD9EC}
+		{9E6E1490-43BD-4925-8A3F-84B962828208} = {9E6E1490-43BD-4925-8A3F-84B962828208}
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367} = {B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}
 		{22D4CFC7-6810-4C18-A353-71A49782394F} = {22D4CFC7-6810-4C18-A353-71A49782394F}
 	EndProjectSection
 EndProject
@@ -13,76 +17,104 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfPageTransitions", "WpfPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoInfo", "demoinfo\DemoInfo\DemoInfo.csproj", "{22D4CFC7-6810-4C18-A353-71A49782394F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bot", "Bot\Bot.csproj", "{9E6E1490-43BD-4925-8A3F-84B962828208}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4180E444-4AA1-4564-9296-50323FE504FE} = {4180E444-4AA1-4564-9296-50323FE504FE}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{4180E444-4AA1-4564-9296-50323FE504FE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{22D4CFC7-6810-4C18-A353-71A49782394F} = {22D4CFC7-6810-4C18-A353-71A49782394F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}"
+	ProjectSection(ProjectDependencies) = postProject
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1} = {496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}
+		{4180E444-4AA1-4564-9296-50323FE504FE} = {4180E444-4AA1-4564-9296-50323FE504FE}
+		{22D4CFC7-6810-4C18-A353-71A49782394F} = {22D4CFC7-6810-4C18-A353-71A49782394F}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resources", "Resources\Resources.csproj", "{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Bitstream-Debugging|Any CPU = Bitstream-Debugging|Any CPU
 		Bitstream-Debugging|x86 = Bitstream-Debugging|x86
-		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
-		Release|Any CPU = Release|Any CPU
 		Release|x86 = Release|x86
-		SavePropValues|Any CPU = SavePropValues|Any CPU
 		SavePropValues|x86 = SavePropValues|x86
-		YoloDebug|Any CPU = YoloDebug|Any CPU
 		YoloDebug|x86 = YoloDebug|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Bitstream-Debugging|Any CPU.ActiveCfg = Release|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Bitstream-Debugging|Any CPU.Build.0 = Release|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Bitstream-Debugging|x86.Build.0 = Debug|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Debug|x86.ActiveCfg = Debug|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Debug|x86.Build.0 = Debug|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Release|Any CPU.ActiveCfg = Release|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Release|x86.ActiveCfg = Release|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.Release|x86.Build.0 = Release|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.SavePropValues|Any CPU.ActiveCfg = Release|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.SavePropValues|Any CPU.Build.0 = Release|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.SavePropValues|x86.ActiveCfg = Release|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.SavePropValues|x86.Build.0 = Release|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.YoloDebug|Any CPU.ActiveCfg = Release|x86
-		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.YoloDebug|Any CPU.Build.0 = Release|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.YoloDebug|x86.ActiveCfg = Debug|x86
 		{1D6D9598-4348-4444-A8DF-A634CA0D371B}.YoloDebug|x86.Build.0 = Debug|x86
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Bitstream-Debugging|Any CPU.ActiveCfg = Release|x64
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Bitstream-Debugging|Any CPU.Build.0 = Release|x64
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Bitstream-Debugging|x86.Build.0 = Debug|x86
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Debug|x86.ActiveCfg = Debug|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Debug|x86.Build.0 = Debug|x86
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Release|Any CPU.ActiveCfg = Release|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Release|x86.ActiveCfg = Release|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.Release|x86.Build.0 = Release|x86
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.SavePropValues|Any CPU.ActiveCfg = Release|x64
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.SavePropValues|Any CPU.Build.0 = Release|x64
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.SavePropValues|x86.ActiveCfg = Release|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.SavePropValues|x86.Build.0 = Release|x86
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.YoloDebug|Any CPU.ActiveCfg = Release|x64
-		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.YoloDebug|Any CPU.Build.0 = Release|x64
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.YoloDebug|x86.ActiveCfg = Debug|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.YoloDebug|x86.Build.0 = Debug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|Any CPU.ActiveCfg = Bitstream-Debugging|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|Any CPU.Build.0 = Bitstream-Debugging|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.ActiveCfg = Bitstream-Debugging|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.Build.0 = Bitstream-Debugging|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.Build.0 = Debug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.ActiveCfg = Release|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.Build.0 = Release|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|Any CPU.ActiveCfg = SavePropValues|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|Any CPU.Build.0 = SavePropValues|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.ActiveCfg = SavePropValues|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.Build.0 = SavePropValues|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|Any CPU.ActiveCfg = YoloDebug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|Any CPU.Build.0 = YoloDebug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.ActiveCfg = YoloDebug|Any CPU
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.Build.0 = YoloDebug|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.Build.0 = Debug|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.ActiveCfg = Debug|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.Build.0 = Debug|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.ActiveCfg = Release|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.Build.0 = Release|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.ActiveCfg = SavePropValues|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.Build.0 = SavePropValues|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.ActiveCfg = YoloDebug|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.Build.0 = YoloDebug|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.Bitstream-Debugging|x86.Build.0 = Debug|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.Debug|x86.ActiveCfg = Debug|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.Debug|x86.Build.0 = Debug|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.Release|x86.ActiveCfg = Release|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.Release|x86.Build.0 = Release|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.SavePropValues|x86.ActiveCfg = Release|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.SavePropValues|x86.Build.0 = Release|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.YoloDebug|x86.ActiveCfg = Debug|x86
+		{9E6E1490-43BD-4925-8A3F-84B962828208}.YoloDebug|x86.Build.0 = Debug|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.Bitstream-Debugging|x86.Build.0 = Debug|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.Debug|x86.ActiveCfg = Debug|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.Debug|x86.Build.0 = Debug|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.Release|x86.ActiveCfg = Release|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.Release|x86.Build.0 = Release|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.SavePropValues|x86.ActiveCfg = Release|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.SavePropValues|x86.Build.0 = Release|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.YoloDebug|x86.ActiveCfg = Debug|x86
+		{4180E444-4AA1-4564-9296-50323FE504FE}.YoloDebug|x86.Build.0 = Debug|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.Bitstream-Debugging|x86.Build.0 = Debug|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.Debug|x86.ActiveCfg = Debug|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.Debug|x86.Build.0 = Debug|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.Release|x86.ActiveCfg = Release|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.Release|x86.Build.0 = Release|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.SavePropValues|x86.ActiveCfg = Release|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.SavePropValues|x86.Build.0 = Release|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.YoloDebug|x86.ActiveCfg = Debug|x86
+		{B0B2F0B5-4E7F-41AE-817F-9C0F30DA5367}.YoloDebug|x86.Build.0 = Debug|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.Bitstream-Debugging|x86.Build.0 = Debug|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.Debug|x86.ActiveCfg = Debug|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.Debug|x86.Build.0 = Debug|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.Release|x86.ActiveCfg = Release|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.Release|x86.Build.0 = Release|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.SavePropValues|x86.ActiveCfg = Release|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.SavePropValues|x86.Build.0 = Release|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.YoloDebug|x86.ActiveCfg = Debug|x86
+		{496A0714-9ADF-4C56-8E93-3DFA0EBA89D1}.YoloDebug|x86.Build.0 = Debug|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
