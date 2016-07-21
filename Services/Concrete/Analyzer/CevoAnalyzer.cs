@@ -19,6 +19,12 @@ namespace Services.Concrete.Analyzer
 		// First LO3 has 3 round_start event, the next LO3 have 4, we use this to detect if the first LO3 happened
 		private bool _firstLo3Occured;
 
+		/// <summary>
+		/// Used to detect RS between the begin_new_match event and next round_start events
+		/// After begin_new_match, there are 2 round_start before the 1st round start for real
+		/// </summary>
+		private bool _isBeginMatchAnnounced = false;
+
 		public CevoAnalyzer(Demo demo)
 		{
 			Parser = new DemoParser(File.OpenRead(demo.Path));
@@ -96,6 +102,9 @@ namespace Services.Concrete.Analyzer
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
 		{
+			_isBeginMatchAnnounced = true;
+			// force the round start counter to reset to 1 to have the right RS count
+			_roundStartedCount = 1;
 			AddTeams();
 		}
 
@@ -107,7 +116,7 @@ namespace Services.Concrete.Analyzer
 			if (Parser.TScore == 0 && Parser.CTScore == 0) AddTeams();
 
 			// Check for the first LO3
-			if (!IsOvertime && !_firstLo3Occured && !IsHalfMatch && _roundStartedCount >= 3)
+			if (!IsOvertime && !_firstLo3Occured && !IsHalfMatch && _roundStartedCount == 3)
 			{
 				_firstLo3Occured = true;
 				IsMatchStarted = true;
