@@ -233,6 +233,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="resources\Separators.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\Timelines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

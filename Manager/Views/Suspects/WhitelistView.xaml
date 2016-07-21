@@ -57,6 +57,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0"
@@ -100,9 +101,30 @@
 					Width="80"
 					Height="30"
 					Margin="5"
+					ToolTip="Refresh list (CTRL+R)"
+					Command="{Binding RefreshPlayerListCommand}">
+				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_refresh}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+			
+			<Separator Grid.Column="3"
+					   Style="{StaticResource VerticalSeparatorStyle}"/>
+
+			<Button Grid.Column="4"
+					Style="{StaticResource GeneralButtonStyle}"
+					Width="80"
+					Height="30"
+					Margin="5"
 					Command="{Binding RemoveSelectedPlayersCommand}"
 					CommandParameter="{Binding SelectedSuspects}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
 					<Rectangle Width="15" Height="15">
 						<Rectangle.Fill>
 							<VisualBrush Visual="{StaticResource appbar_user_delete}" />
@@ -113,7 +135,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="3"
+			<Button Grid.Column="5"
 					Style="{StaticResource GeneralButtonStyle}"
 					Width="80"
 					Height="30"
@@ -132,24 +154,7 @@
 				</StackPanel>
 			</Button>
 
-			<Button Grid.Column="4"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="80"
-					Height="30"
-					Margin="5"
-					ToolTip="Refresh list (CTRL+R)"
-					Command="{Binding RefreshPlayerListCommand}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_refresh}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
-
-			<Button Grid.Column="5"
+			<Button Grid.Column="6"
 					Style="{StaticResource GeneralButtonStyle}"
 					Width="150"
 					Height="30"
