@@ -560,7 +560,10 @@ namespace Manager.ViewModel.Suspects
 					foreach (IEnumerable<string> idList in ids)
 					{
 						List<Suspect> suspects = await _steamService.GetBanStatusForUserList(idList.ToList());
-						UpdateSuspectList(suspects);
+						foreach (Suspect s in suspects)
+						{
+							Suspects.Add(s);
+						}
 					}
 				}
 				catch (Exception e)
