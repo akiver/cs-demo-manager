@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 using Core;
 using Core.Models;
@@ -55,6 +57,10 @@ namespace Manager.ViewModel.Suspects
 
 		private RelayCommand<IList> _playersSelectionChangedCommand;
 
+		private ICollectionView _dataGridPlayerCollection;
+
+		private string _filterText;
+
 		#endregion
 
 		#region Accessors
@@ -77,6 +83,12 @@ namespace Manager.ViewModel.Suspects
 			set { Set(() => SelectedSuspects, ref _selectedsuspects, value); }
 		}
 
+		public ICollectionView DataGridPlayerCollection
+		{
+			get { return _dataGridPlayerCollection; }
+			set { Set(() => DataGridPlayerCollection, ref _dataGridPlayerCollection, value); }
+		}
+
 		public string NotificationMessage
 		{
 			get { return _notificationMessage; }
@@ -89,8 +101,37 @@ namespace Manager.ViewModel.Suspects
 			set { Set(() => IsBusy, ref _isBusy, value); }
 		}
 
+		public string FilterText
+		{
+			get { return _filterText; }
+			set
+			{
+				Set(() => FilterText, ref _filterText, value);
+				_dataGridPlayerCollection?.Refresh();
+			}
+		}
+
 		#endregion
 
+		#region Filters
+
+		public bool Filter(object obj)
+		{
+			var data = obj as Suspect;
+			if (data != null)
+			{
+				if (!string.IsNullOrEmpty(_filterText))
+				{
+					return data.Nickname.Contains(_filterText, StringComparison.OrdinalIgnoreCase);
+				}
+
+				return true;
+			}
+
+			return true;
+		}
+
+		#endregion
 		#region Commands
 
 		/// <summary>
@@ -319,6 +360,9 @@ namespace Manager.ViewModel.Suspects
 
 			Suspects = new ObservableCollection<Suspect>();
 			SelectedSuspects = new ObservableCollection<Suspect>();
+			DataGridPlayerCollection = CollectionViewSource.GetDefaultView(Suspects);
+			DataGridPlayerCollection.SortDescriptions.Add(new SortDescription("Nickname", ListSortDirection.Ascending));
+			DataGridPlayerCollection.Filter = Filter;
 		}
 
 

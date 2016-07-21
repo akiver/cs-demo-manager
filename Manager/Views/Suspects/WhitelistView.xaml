@@ -58,6 +58,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0"
@@ -173,6 +174,17 @@
 					<TextBlock Text="Show player demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
+
+			<Grid Grid.Column="7" Margin="5 0 0 0">
+				<TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+						 Height="20"
+						 Width="160"
+						 controls:TextBoxHelper.Watermark="Search..."
+						 controls:TextBoxHelper.ClearTextButton="True"
+						 Margin="0 0 10 0"
+						 VerticalAlignment="Center"
+						 HorizontalAlignment="Right" />
+			</Grid>
 
 		</Grid>
 
