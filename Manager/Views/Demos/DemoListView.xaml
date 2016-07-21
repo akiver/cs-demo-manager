@@ -574,6 +574,7 @@
 				<DataGridTemplateColumn Header="Status"
 										Width="Auto"
 										HeaderStyle="{StaticResource WinStatusHeader}"
+										Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
 										SortMemberPath="WinStatus">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
