@@ -483,7 +483,7 @@
 			</Grid>
 		</Grid>
 
-		<Grid Grid.Row="2" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+		<Grid Grid.Row="2" Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}">
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 				<controls:ProgressRing IsActive="{Binding HasRing}"
 									   Foreground="{DynamicResource AccentColorBrush}"

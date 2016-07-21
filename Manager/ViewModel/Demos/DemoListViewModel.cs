@@ -960,7 +960,6 @@ namespace Manager.ViewModel.Demos
 							HasRing = true;
 							IsCancellable = false;
 							NotificationMessage = "Loading...";
-							//DataGridDemosCollection.Refresh();
 							await LoadDemosHeader();
 
 							IsBusy = false;
@@ -1324,7 +1323,6 @@ namespace Manager.ViewModel.Demos
 						{
 							await _demosService.SaveStatus(demo, status);
 						}
-						DataGridDemosCollection.Refresh();
 					},
 					status => SelectedDemos != null && SelectedDemos.Count > 0));
 			}
@@ -1438,8 +1436,6 @@ namespace Manager.ViewModel.Demos
 						{
 							Demos.Add(demo);
 						}
-
-						DataGridDemosCollection.Refresh();
 
 						IsBusy = false;
 						HasNotification = false;
@@ -1726,11 +1722,9 @@ namespace Manager.ViewModel.Demos
 				{
 					LastRankAccountStats = lastRank;
 				}
-				DataGridDemosCollection.Refresh();
-				IsBusy = false;
-				HasNotification = false;
-				CommandManager.InvalidateRequerySuggested();
+				UpdateNotificationStatus();
 			}
+			CommandManager.InvalidateRequerySuggested();
 		}
 
 		private async Task<bool> RefreshSelectedDemos()
@@ -1897,6 +1891,7 @@ namespace Manager.ViewModel.Demos
 			{
 				HasNotification = false;
 				IsBusy = false;
+				CommandManager.InvalidateRequerySuggested();
 			}
 		}
 
@@ -1933,8 +1928,6 @@ namespace Manager.ViewModel.Demos
 					}
 					Demos.Add(demo);
 				}
-
-				DataGridDemosCollection.Refresh();
 			}
 			catch (Exception e)
 			{
@@ -1942,8 +1935,25 @@ namespace Manager.ViewModel.Demos
 			}
 			finally
 			{
+				UpdateNotificationStatus();
+			}
+		}
+
+		private void UpdateNotificationStatus()
+		{
+			if (Demos.Count == 0)
+			{
+				HasNotification = true;
+				IsBusy = false;
+				HasRing = false;
+				NotificationMessage = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+					? "No demos found for this account" : "No demos found";
+			}
+			else
+			{
 				IsBusy = false;
 				HasNotification = false;
+				HasRing = false;
 			}
 		}
 
