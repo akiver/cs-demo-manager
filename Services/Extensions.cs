@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -22,6 +23,12 @@ namespace Services
 				cancellationToken.Register(tcs.SetCanceled);
 
 			return tcs.Task;
+		}
+
+
+		public static bool Contains(this string source, string toCheck, StringComparison comp)
+		{
+			return source.IndexOf(toCheck, comp) >= 0;
 		}
 	}
 }

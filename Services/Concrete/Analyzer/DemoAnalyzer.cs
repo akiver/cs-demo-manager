@@ -201,7 +201,7 @@ namespace Services.Concrete.Analyzer
 			}
 
 			// Check for esea demos, appart the filename there is no magic to detect it
-			if (demo.Name.Contains("esea"))
+			if (demo.Name.Contains("esea", StringComparison.OrdinalIgnoreCase))
 			{
 				return Source.Factory("esea");
 			}
@@ -209,25 +209,27 @@ namespace Services.Concrete.Analyzer
 			// Check for faceit demos
 			// (Before May 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
 			// (May 2015) Faceit : uses hostname
-			if (demo.Hostname.Contains("FACEIT.com") || FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
+			if (demo.Hostname.Contains("faceit", StringComparison.OrdinalIgnoreCase)
+				|| FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
 			{
 				return Source.Factory("faceit");
 			}
 
 			// Check for cevo demos
-			if (demo.Hostname.Contains("CEVO.com"))
+			if (demo.Hostname.Contains("cevo", StringComparison.OrdinalIgnoreCase))
 			{
 				return Source.Factory("cevo");
 			}
 
 			// Check for ebot demos
-			if (demo.Hostname.Contains("eBot") || FILENAME_EBOT_REGEX.Match(demo.Name).Success)
+			if (demo.Hostname.Contains("ebot", StringComparison.OrdinalIgnoreCase)
+				|| FILENAME_EBOT_REGEX.Match(demo.Name).Success)
 			{
 				return Source.Factory("ebot");
 			}
 
-			if (demo.Name.IndexOf("popflash", StringComparison.OrdinalIgnoreCase) >= 0 ||
-				demo.Hostname.IndexOf("popflash", StringComparison.OrdinalIgnoreCase) >= 0)
+			if (demo.Name.Contains("popflash", StringComparison.OrdinalIgnoreCase)
+				|| demo.Hostname.Contains("popflash", StringComparison.OrdinalIgnoreCase))
 			{
 				return Source.Factory("popflash");
 			}

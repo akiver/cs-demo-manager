@@ -23,6 +23,7 @@ using Manager.Messages;
 using Manager.Services;
 using Manager.Views.Demos;
 using Manager.Views.Suspects;
+using Services;
 using Services.Interfaces;
 
 namespace Manager.ViewModel.Suspects

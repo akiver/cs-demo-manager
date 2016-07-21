@@ -12,10 +12,5 @@ namespace Manager.Internals
 				.GroupBy(x => x.inx / maxItems)
 				.Select(g => g.Select(x => x.item));
 		}
-
-		public static bool Contains(this string source, string toCheck, StringComparison comp)
-		{
-			return source.IndexOf(toCheck, comp) >= 0;
-		}
 	}
 }
