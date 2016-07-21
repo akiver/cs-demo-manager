@@ -85,6 +85,8 @@ namespace Manager.ViewModel.Suspects
 
 		public bool IsLoadSuspects = true;
 
+		private string _filterText;
+
 		#endregion
 
 		#region Accessors
@@ -131,6 +133,16 @@ namespace Manager.ViewModel.Suspects
 			set { Set(() => IsAnalyzing, ref _isAnalyzing, value); }
 		}
 
+		public string FilterText
+		{
+			get { return _filterText; }
+			set
+			{
+				Set(() => FilterText, ref _filterText, value);
+				_dataGridSuspectsCollection?.Refresh();
+			}
+		}
+
 		public string NotificationMessage
 		{
 			get { return _notificationMessage; }
@@ -141,6 +153,36 @@ namespace Manager.ViewModel.Suspects
 		{
 			get { return _isShowOnlyBannedSuspects; }
 			set { Set(() => IsShowOnlyBannedSuspects, ref _isShowOnlyBannedSuspects, value); }
+		}
+
+		#endregion
+
+		#region Filters
+
+		public bool Filter(object obj)
+		{
+			var data = obj as Suspect;
+			if (data != null)
+			{
+				bool isBanned = data.VacBanned || data.GameBanCount != 0;
+				if (IsShowOnlyBannedSuspects)
+				{
+					if (!string.IsNullOrEmpty(_filterText))
+					{
+						return isBanned && data.Nickname.Contains(_filterText, StringComparison.OrdinalIgnoreCase);
+					}
+					return isBanned;
+				}
+
+				if (!string.IsNullOrEmpty(_filterText))
+				{
+					return data.Nickname.Contains(_filterText, StringComparison.OrdinalIgnoreCase);
+				}
+
+				return true;
+			}
+
+			return true;
 		}
 
 		#endregion
@@ -519,23 +561,6 @@ namespace Manager.ViewModel.Suspects
 			DataGridSuspectsCollection.SortDescriptions.Add(new SortDescription("DaySinceLastBanCount", ListSortDirection.Ascending));
 			DataGridSuspectsCollection.Filter = Filter;
 			Messenger.Default.Register<LoadSuspectListMessage>(this, HandleLoadSuspectListMessage);
-		}
-
-		public bool Filter(object obj)
-		{
-			var data = obj as Suspect;
-			if (data != null)
-			{
-				if (IsShowOnlyBannedSuspects)
-				{
-					if (data.VacBanned || data.GameBanCount != 0 ) return true;
-					return false;
-				}
-
-				return true;
-			}
-
-			return true;
 		}
 
 		private async Task LoadSuspects()

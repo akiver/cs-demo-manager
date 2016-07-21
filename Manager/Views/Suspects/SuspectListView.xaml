@@ -63,6 +63,7 @@
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0" Margin="5"
@@ -215,6 +216,17 @@
 					  Style="{StaticResource CheckBoxFilterStyle}"
 					  Command="{Binding ShowOnlyBannedSuspectCommand}"
 					  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyBannedSuspects}"/>
+
+			<Grid Grid.Column="10" Margin="5 0 0 0">
+				<TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
+						 Height="20"
+						 Width="160"
+						 controls:TextBoxHelper.Watermark="Search..."
+						 controls:TextBoxHelper.ClearTextButton="True"
+						 Margin="0 0 10 0"
+						 VerticalAlignment="Center"
+						 HorizontalAlignment="Right" />
+			</Grid>
 		</Grid>
 
 		<Grid Grid.Row="1" Visibility="{Binding IsRefreshing, Converter={StaticResource BooleanToVisibilityConverter}}">
