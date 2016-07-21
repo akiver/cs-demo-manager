@@ -32,7 +32,6 @@
 		<KeyBinding Command="{Binding StopCommand}"
 					Gesture="CTRL+S" />
 		<KeyBinding Command="{Binding DisplayDemosCommand}"
-					CommandParameter="{Binding SelectedSuspect}"
 					Gesture="CTRL+F" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 									Command="{Binding BackToHomeCommand}" />
@@ -53,6 +52,7 @@
 
 		<Grid Grid.Row="0" Margin="0 5 0 0">
 			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
@@ -161,9 +161,11 @@
 
 			<Separator Grid.Column="5" Style="{StaticResource VerticalSeparatorStyle}" />
 
-			<Button Grid.Column="6" Style="{StaticResource GeneralButtonStyle}" Width="80" Height="30" Margin="5"
-						Command="{Binding RemoveSuspectCommand}"
-						CommandParameter="{Binding SelectedSuspect}">
+			<Button Grid.Column="6" Style="{StaticResource GeneralButtonStyle}"
+					Width="80"
+					Height="30"
+					Margin="5"
+					Command="{Binding RemoveSuspectCommand}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 					<Rectangle Width="15" Height="15">
 						<Rectangle.Fill>
@@ -189,6 +191,27 @@
 
 			<Button Grid.Column="8"
 					Style="{StaticResource GeneralButtonStyle}"
+					Width="130"
+					Height="30"
+					Margin="5"
+					ToolTip="Move suspect(s) to whitelist (CTRL+M)"
+					Command="{Binding MoveToWhitelistCommand}"
+					IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center">
+					<Rectangle Width="15" Height="15">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{StaticResource appbar_people_right}" />
+						</Rectangle.Fill>
+					</Rectangle>
+					<TextBlock Text="Move to whitelist"
+							   Margin="5 0 0 0"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+
+			<Button Grid.Column="9"
+					Style="{StaticResource GeneralButtonStyle}"
 					Width="160"
 					Height="30"
 					Margin="5"
@@ -208,7 +231,7 @@
 				</StackPanel>
 			</Button>
 
-			<CheckBox Grid.Column="9"
+			<CheckBox Grid.Column="10"
 					  x:Name="CheckBoxShowOnlyBannedSuspects"
 					  Content="Show only banned"
 					  Margin="5 0 0 0"
@@ -217,7 +240,7 @@
 					  Command="{Binding ShowOnlyBannedSuspectCommand}"
 					  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOnlyBannedSuspects}"/>
 
-			<Grid Grid.Column="10" Margin="5 0 0 0">
+			<Grid Grid.Column="11" Margin="5 0 0 0">
 				<TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
 						 Height="20"
 						 Width="160"

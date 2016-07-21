@@ -75,14 +75,15 @@
 
 	<ContextMenu x:Key="SuspectRowContextMenu">
 		<MenuItem Header="Profile"
-							  Command="{Binding SuspectList.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
+				  Command="{Binding SuspectList.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Show suspect demos"
-							  Command="{Binding SuspectList.DisplayDemosCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
+				  Command="{Binding SuspectList.DisplayDemosCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
+		<MenuItem Header="Move to whitelist"
+				  Command="{Binding SuspectList.MoveToWhitelistCommand, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Remove"
-							  Command="{Binding SuspectList.RemoveSuspectCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
+				  Command="{Binding SuspectList.RemoveSuspectCommand, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="PlayerRowContextMenu">

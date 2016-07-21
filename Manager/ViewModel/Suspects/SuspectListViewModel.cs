@@ -53,6 +53,8 @@ namespace Manager.ViewModel.Suspects
 
 		private RelayCommand _displayDemosCommand;
 
+		private RelayCommand _moveToWhitelistCommand;
+
 		private RelayCommand _refreshSuspectListCommand;
 
 		private RelayCommand _addAllPlayerToListCommand;
@@ -309,21 +311,20 @@ namespace Manager.ViewModel.Suspects
 					?? (_removeSelectedSuspectsCommand = new RelayCommand(
 						async () =>
 						{
-							for (int i = SelectedSuspects.Count - 1; i >= 0; i--)
+							foreach (Suspect suspect in SelectedSuspects.ToList())
 							{
-								bool removed = await _cacheService.RemoveSuspectFromCache(SelectedSuspects[i].SteamId);
+								bool removed = await _cacheService.RemoveSuspectFromCache(suspect.SteamId);
 								if (!removed)
 								{
 									await _dialogService.ShowErrorAsync("Error while deleting suspect.", MessageDialogStyle.Affirmative);
 								}
 								else
 								{
-									Suspects.Remove(SelectedSuspects[i]);
+									Suspects.Remove(suspect);
 								}
 							}
 
 							SelectedSuspects.Clear();
-							DataGridSuspectsCollection.Refresh();
 							IsRefreshing = false;
 						},
 						() => SelectedSuspects.Any()));
@@ -537,6 +538,35 @@ namespace Manager.ViewModel.Suspects
 							WhitelistView whitelistView = new WhitelistView();
 							mainViewModel.CurrentPage.ShowPage(whitelistView);
 						}));
+			}
+		}
+
+		public RelayCommand MoveToWhitelistCommand
+		{
+			get
+			{
+				return _moveToWhitelistCommand
+					?? (_moveToWhitelistCommand = new RelayCommand(
+						async () =>
+						{
+							IsRefreshing = true;
+							NotificationMessage = "Moving suspect(s) to whitelist...";
+							foreach (Suspect suspect in SelectedSuspects.ToList())
+							{
+								bool hasMoved = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
+								if (!hasMoved)
+								{
+									await _dialogService.ShowErrorAsync("Error while moving suspect(s).", MessageDialogStyle.Affirmative);
+								}
+								else
+								{
+									Suspects.Remove(suspect);
+								}
+							}
+							SelectedSuspects.Clear();
+							IsRefreshing = false;
+						},
+						() => SelectedSuspects.Any()));
 			}
 		}
 
