@@ -36,6 +36,16 @@ namespace Core.Models
 
 		public float EndY { get; set; }
 
+		public float ShooterPosX { get; set; }
+
+		public float ShooterPosY { get; set; }
+
+		public float ShooterPosZ { get; set; }
+
+		public float ShooterAnglePitch { get; set; }
+
+		public float ShooterAngleYaw { get; set; }
+
 		public List<Player> FlashedPlayers { get; set; }
 	}
 }

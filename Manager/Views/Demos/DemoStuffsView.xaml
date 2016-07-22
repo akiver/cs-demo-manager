@@ -17,6 +17,8 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<converters:FlashbangStuffTypeToVisibilityConverter x:Key="FlashbangStuffTypeToVisibilityConverter" />
+			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+			<converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -114,6 +116,26 @@
 					</StackPanel>
 				</Button>
 
+				<Button Margin="10"
+						Style="{StaticResource GeneralButtonStyle}"
+						Width="110"
+						Height="30"
+						Command="{Binding CopySetPosCommand}"
+						ToolTip="Copy setpos command">
+					<StackPanel Orientation="Horizontal"
+								VerticalAlignment="Center">
+						<Rectangle Width="15"
+								   Height="15">
+							<Rectangle.Fill>
+								<VisualBrush Visual="{StaticResource appbar_location_round}" />
+							</Rectangle.Fill>
+						</Rectangle>
+						<TextBlock Text="Copy setpos"
+								   Margin="5 0 0 0"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center"
 							Margin="5 0 0 0">
@@ -123,7 +145,7 @@
 										   Height="40" />
 					<TextBlock Text="{Binding NotificationMessage}"
 							   Style="{StaticResource LabelGeneralInfoDemo}"
-							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+							   Visibility="{Binding HasNotificationMessage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>

@@ -31,6 +31,21 @@ namespace Core.Models.Events
 		[JsonProperty("shooter_vel_z")]
 		public float ShooterVelocityZ { get; set; }
 
+		[JsonProperty("shooter_pos_x")]
+		public float ShooterPosX { get; set; }
+
+		[JsonProperty("shooter_pos_y")]
+		public float ShooterPosY { get; set; }
+
+		[JsonProperty("shooter_pos_z")]
+		public float ShooterPosZ { get; set; }
+
+		[JsonProperty("shooter_angle_pitch")]
+		public float ShooterAnglePitch { get; set; }
+
+		[JsonProperty("shooter_angle_yaw")]
+		public float ShooterAngleYaw { get; set; }
+
 		[JsonIgnore]
 		public override string Message => ShooterName + " thrown " + Weapon.Name;
 

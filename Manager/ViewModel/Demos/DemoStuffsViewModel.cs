@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using Core;
 using Core.Models;
@@ -33,6 +34,8 @@ namespace Manager.ViewModel.Demos
 
 		private bool _isBusy;
 
+		private bool _hasNotificationMessage;
+
 		private string _notificationMessage;
 
 		private Stuff _selectedStuff;
@@ -59,6 +62,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _watchPlayerStuffCommand;
 
+		private RelayCommand _copySetPosCommand;
+
 		#endregion Properties
 
 		#region Accessors
@@ -67,6 +72,12 @@ namespace Manager.ViewModel.Demos
 		{
 			get { return _isBusy; }
 			set { Set(() => IsBusy, ref _isBusy, value); }
+		}
+
+		public bool HasNotificationMessage
+		{
+			get { return _hasNotificationMessage; }
+			set { Set(() => HasNotificationMessage, ref _hasNotificationMessage, value); }
 		}
 
 		public string NotificationMessage
@@ -224,6 +235,27 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
+		public RelayCommand CopySetPosCommand
+		{
+			get
+			{
+				return _copySetPosCommand
+					?? (_copySetPosCommand = new RelayCommand(
+						async () =>
+						{
+							string command = "setpos " + SelectedStuff.ShooterPosX
+							+ " " + SelectedStuff.ShooterPosY + " " + SelectedStuff.ShooterPosZ
+							+ " ;setang " + SelectedStuff.ShooterAnglePitch + " " + SelectedStuff.ShooterAngleYaw;
+							Clipboard.SetText(command);
+							HasNotificationMessage = true;
+							NotificationMessage = "setpos command copied to clipboard";
+							await Task.Delay(5000);
+							HasNotificationMessage = false;
+						},
+						() => SelectedStuff != null));
+			}
+		}
+
 		#endregion
 
 		private void DrawStuff(Stuff stuff)
@@ -269,6 +301,7 @@ namespace Manager.ViewModel.Demos
 		{
 			NotificationMessage = "Loading...";
 			IsBusy = true;
+			HasNotificationMessage = true;
 			if (IsInDesignMode)
 			{
 				CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
@@ -280,6 +313,7 @@ namespace Manager.ViewModel.Demos
 			StuffLayer = _drawService.SmokeLayer;
 			await LoadStuffs();
 			IsBusy = false;
+			HasNotificationMessage = false;
 		}
 
 		public override void Cleanup()

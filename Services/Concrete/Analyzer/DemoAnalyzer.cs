@@ -805,7 +805,12 @@ namespace Services.Concrete.Analyzer
 				{
 					X = e.Shooter.Position.X,
 					Y = e.Shooter.Position.Y
-				}
+				},
+				ShooterPosX = e.Shooter.Position.X,
+				ShooterPosY = e.Shooter.Position.Y,
+				ShooterPosZ = e.Shooter.Position.Z,
+				ShooterAnglePitch = e.Shooter.ViewDirectionY,
+				ShooterAngleYaw = e.Shooter.ViewDirectionX
 			};
 
 			if (e.Weapon.Class == EquipmentClass.Grenade)

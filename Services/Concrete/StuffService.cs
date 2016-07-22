@@ -43,7 +43,12 @@ namespace Services.Concrete
 											EndX = smokeList[i].Point.X,
 											EndY = smokeList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerSteamId = weaponFired[i].ShooterSteamId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId,
+											ShooterPosX = weaponFired[i].ShooterPosX,
+											ShooterPosY = weaponFired[i].ShooterPosY,
+											ShooterPosZ = weaponFired[i].ShooterPosZ,
+											ShooterAnglePitch = weaponFired[i].ShooterAnglePitch,
+											ShooterAngleYaw = weaponFired[i].ShooterAngleYaw
 										};
 										stuffs.Add(s);
 									}
@@ -75,7 +80,12 @@ namespace Services.Concrete
 											EndX = flashList[i].Point.X,
 											EndY = flashList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerSteamId = weaponFired[i].ShooterSteamId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId,
+											ShooterPosX = weaponFired[i].ShooterPosX,
+											ShooterPosY = weaponFired[i].ShooterPosY,
+											ShooterPosZ = weaponFired[i].ShooterPosZ,
+											ShooterAnglePitch = weaponFired[i].ShooterAnglePitch,
+											ShooterAngleYaw = weaponFired[i].ShooterAngleYaw
 										};
 										List<Player> flashedPlayerList = flashList[i].FlashedPlayerSteamIdList.Select(
 											steamId => demo.Players.First(p => p.SteamId == steamId)).ToList();
@@ -110,7 +120,12 @@ namespace Services.Concrete
 											EndX = heList[i].Point.X,
 											EndY = heList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerSteamId = weaponFired[i].ShooterSteamId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId,
+											ShooterPosX = weaponFired[i].ShooterPosX,
+											ShooterPosY = weaponFired[i].ShooterPosY,
+											ShooterPosZ = weaponFired[i].ShooterPosZ,
+											ShooterAnglePitch = weaponFired[i].ShooterAnglePitch,
+											ShooterAngleYaw = weaponFired[i].ShooterAngleYaw
 										};
 										stuffs.Add(s);
 									}
@@ -143,7 +158,12 @@ namespace Services.Concrete
 											EndX = fireStartedList[i].Point.X,
 											EndY = fireStartedList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerSteamId = weaponFired[i].ShooterSteamId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId,
+											ShooterPosX = weaponFired[i].ShooterPosX,
+											ShooterPosY = weaponFired[i].ShooterPosY,
+											ShooterPosZ = weaponFired[i].ShooterPosZ,
+											ShooterAnglePitch = weaponFired[i].ShooterAnglePitch,
+											ShooterAngleYaw = weaponFired[i].ShooterAngleYaw
 										};
 										stuffs.Add(s);
 									}
@@ -175,7 +195,12 @@ namespace Services.Concrete
 											EndX = decoyStartedList[i].Point.X,
 											EndY = decoyStartedList[i].Point.Y,
 											ThrowerName = weaponFired[i].ShooterName,
-											ThrowerSteamId = weaponFired[i].ShooterSteamId
+											ThrowerSteamId = weaponFired[i].ShooterSteamId,
+											ShooterPosX = weaponFired[i].ShooterPosX,
+											ShooterPosY = weaponFired[i].ShooterPosY,
+											ShooterPosZ = weaponFired[i].ShooterPosZ,
+											ShooterAnglePitch = weaponFired[i].ShooterAnglePitch,
+											ShooterAngleYaw = weaponFired[i].ShooterAngleYaw
 										};
 										stuffs.Add(s);
 									}
