@@ -132,6 +132,7 @@ namespace SuspectsBot
 			{
 				return new DelegateCommand
 				{
+					CanExecuteFunc = param => AppSettings.IsInternetConnectionAvailable(),
 					CommandAction = async param =>
 					{
 						bool hasNewSuspect = await _bot.Check();
