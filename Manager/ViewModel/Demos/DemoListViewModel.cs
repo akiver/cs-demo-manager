@@ -1432,7 +1432,7 @@ namespace Manager.ViewModel.Demos
 							folders = Folders.ToList();
 						}
 
-						var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
+						var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true, Properties.Settings.Default.SelectedStatsAccountSteamID);
 
 						foreach (var demo in demos)
 						{
@@ -1441,6 +1441,7 @@ namespace Manager.ViewModel.Demos
 
 						IsBusy = false;
 						HasNotification = false;
+						CommandManager.InvalidateRequerySuggested();
 					},
 					() => !IsBusy));
 			}
