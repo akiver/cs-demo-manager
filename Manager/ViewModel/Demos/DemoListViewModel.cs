@@ -1950,6 +1950,7 @@ namespace Manager.ViewModel.Demos
 				HasRing = false;
 				NotificationMessage = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
 					? "No demos found for this account" : "No demos found";
+				if (!string.IsNullOrEmpty(Properties.Settings.Default.LastFolder)) NotificationMessage += " in this folder";
 			}
 			else
 			{
