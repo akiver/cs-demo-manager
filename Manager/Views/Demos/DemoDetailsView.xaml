@@ -332,10 +332,17 @@
 		</Grid>
 		<!-- end action bar -->
 
-		<Grid Grid.Row="2" Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
-				<controls:ProgressRing IsActive="{Binding IsAnalyzing}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
-				<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+		<Grid Grid.Row="2"
+			  Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Center"
+						Margin="2">
+				<controls:ProgressRing IsActive="{Binding IsAnalyzing}"
+									   Foreground="{DynamicResource AccentColorBrush}"
+									   Width="40"
+									   Height="40" />
+				<TextBlock Text="{Binding NotificationMessage}"
+						   Style="{StaticResource LabelGeneralInfoDemo}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			</StackPanel>
 		</Grid>

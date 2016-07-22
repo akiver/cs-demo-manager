@@ -445,19 +445,9 @@ namespace Manager.ViewModel.Demos
 			{
 				return _goToSuspectProfileCommand
 					?? (_goToSuspectProfileCommand = new RelayCommand<Player>(
-						async player =>
+						player =>
 						{
-							try
-							{
-								Suspect suspect = await _steamService.GetBanStatusForUser(player.SteamId.ToString());
-								Process.Start(suspect.ProfileUrl);
-							}
-							catch (Exception e)
-							{
-								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
-							}
-							
+							Process.Start("http://steamcommunity.com/profiles/" + player.SteamId);
 						},
 						suspect => SelectedPlayer != null));
 			}
@@ -682,47 +672,22 @@ namespace Manager.ViewModel.Demos
 			{
 				return _addSuspectCommand
 					?? (_addSuspectCommand = new RelayCommand<string>(
-						async steamCommunityUrl =>
+						async steamId =>
 						{
-							if (!AppSettings.IsInternetConnectionAvailable())
-							{
-								await _dialogService.ShowNoInternetConnectionAsync();
-								return;
-							}
-
 							NotificationMessage = "Adding player to suspects list...";
 							HasNotification = true;
 							IsAnalyzing = true;
 
-							try
-							{
-								Suspect suspect = await _steamService.GetBanStatusForUser(steamCommunityUrl);
-
-								if (suspect == null)
-								{
-									HasNotification = false;
-									IsAnalyzing = false;
-									await _dialogService.ShowErrorAsync("User not found", MessageDialogStyle.Affirmative);
-									return;
-								}
-
-								bool added = await _cacheService.AddSuspectToCache(suspect.SteamId);
-								IsAnalyzing = false;
-								if (!added)
-								{
-									await _dialogService.ShowMessageAsync("This player is already in your suspect or he is in your account list." + Environment.NewLine
-											+ "You have to remove it from your account list to be able to add him in your supect list.",
-											MessageDialogStyle.Affirmative);
-								}
-								HasNotification = false;
-							}
-							catch (Exception e)
-							{
-								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
-							}
-
+							bool added = await _cacheService.AddSuspectToCache(steamId);
 							IsAnalyzing = false;
+							if (!added)
+							{
+								HasNotification = false;
+								await _dialogService.ShowMessageAsync("This player is already in your suspect or he is in your account list." + Environment.NewLine
+										+ "You have to remove it from your account list to be able to add him in your supect list.",
+										MessageDialogStyle.Affirmative);
+							}
+							
 							NotificationMessage = "Player added to suspects list.";
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
@@ -740,47 +705,22 @@ namespace Manager.ViewModel.Demos
 			{
 				return _addPlayerToWhitelistCommand
 					?? (_addPlayerToWhitelistCommand = new RelayCommand<string>(
-						async steamCommunityUrl =>
+						async steamId =>
 						{
-							if (!AppSettings.IsInternetConnectionAvailable())
-							{
-								await _dialogService.ShowNoInternetConnectionAsync();
-								return;
-							}
-
-							NotificationMessage = "Adding player to whitelist...";
 							HasNotification = true;
 							IsAnalyzing = true;
+							NotificationMessage = "Adding player to whitelist...";
 
-							try
-							{
-								Suspect suspect = await _steamService.GetBanStatusForUser(steamCommunityUrl);
-
-								if (suspect == null)
-								{
-									HasNotification = false;
-									IsAnalyzing = false;
-									await _dialogService.ShowErrorAsync("User not found", MessageDialogStyle.Affirmative);
-									return;
-								}
-
-								bool added = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
-								IsAnalyzing = false;
-								if (!added)
-								{
-									await _dialogService.ShowMessageAsync("This player is already in your whitelist or he is in your account list." + Environment.NewLine
-											+ "You have to remove it from your account list to be able to add him in your whitelist.",
-											MessageDialogStyle.Affirmative);
-								}
-								HasNotification = false;
-							}
-							catch (Exception e)
-							{
-								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
-							}
-
+							bool added = await _cacheService.AddPlayerToWhitelist(steamId);
 							IsAnalyzing = false;
+							if (!added)
+							{
+								HasNotification = false;
+								await _dialogService.ShowMessageAsync("This player is already in your whitelist or he is in your account list." + Environment.NewLine
+										+ "You have to remove it from your account list to be able to add him in your whitelist.",
+										MessageDialogStyle.Affirmative);
+							}
+
 							NotificationMessage = "Player added to whitelist.";
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
@@ -853,7 +793,7 @@ namespace Manager.ViewModel.Demos
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
 								Suspect player = await _steamService.GetBanStatusForUser(steamId);
-								account.Name = player.Nickname;
+								account.Name = player != null ? player.Nickname : steamId;
 							}
 							else
 							{
@@ -861,10 +801,11 @@ namespace Manager.ViewModel.Demos
 							}
 
 							added = await _cacheService.AddAccountAsync(account);
+							IsAnalyzing = false;
 							if (!added)
 							{
-								await
-									_dialogService.ShowErrorAsync("This player is already in your account list.", MessageDialogStyle.Affirmative);
+								HasNotification = false;
+								await _dialogService.ShowErrorAsync("This player is already in your account list.", MessageDialogStyle.Affirmative);
 							}
 							else
 							{
@@ -878,10 +819,9 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
 						}
 
-						IsAnalyzing = false;
-						if(added) NotificationMessage = "Player added to the account list.";
+						if (added) NotificationMessage = "Player added to the account list.";
 						CommandManager.InvalidateRequerySuggested();
-						if(added) await Task.Delay(5000);
+						if (added) await Task.Delay(5000);
 						HasNotification = false;
 					}));
 			}
