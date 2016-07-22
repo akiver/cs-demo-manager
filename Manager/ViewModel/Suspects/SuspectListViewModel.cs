@@ -240,6 +240,12 @@ namespace Manager.ViewModel.Suspects
 					?? (_addSuspectCommand = new RelayCommand(
 						async () =>
 						{
+							if (!AppSettings.IsInternetConnectionAvailable())
+							{
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
+							}
+
 							var steamIdOrUrl = await _dialogService.ShowInputAsync("Add a suspect", "Enter the SteamID 64 or the Steam community URL.");
 							if (string.IsNullOrEmpty(steamIdOrUrl)) return;
 
@@ -299,8 +305,7 @@ namespace Manager.ViewModel.Suspects
 							}
 
 							CommandManager.InvalidateRequerySuggested();
-						},
-						AppSettings.IsInternetConnectionAvailable));
+						}));
 			}
 		}
 
