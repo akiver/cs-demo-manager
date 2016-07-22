@@ -122,6 +122,7 @@
 					Width="80"
 					Height="30"
 					Margin="5"
+					ToolTip="Remove player(s) from whitelist (DEL)"
 					Command="{Binding RemoveSelectedPlayersCommand}"
 					CommandParameter="{Binding SelectedSuspects}">
 				<StackPanel Orientation="Horizontal"
@@ -141,6 +142,7 @@
 					Width="80"
 					Height="30"
 					Margin="5"
+					ToolTip="Go to player profile (CTRL+P)"
 					Command="{Binding GoToPlayerProfileCommand}"
 					CommandParameter="{Binding SelectedSuspect}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -218,7 +220,6 @@
 				  EnableColumnVirtualization ="True"
 				  EnableRowVirtualization ="True"
 				  Style="{StaticResource DataGridStyle}">
-
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=SuspectList.GoToSuspectProfileCommand}"
@@ -231,6 +232,13 @@
 										 CommandParameter="{Binding SelectedItems, ElementName=DataGridSuspects}" />
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
+			<DataGrid.InputBindings>
+				<KeyBinding Command="{Binding RemoveSelectedPlayersCommand}"
+							Gesture="DELETE" />
+				<KeyBinding Command="{Binding GoToPlayerProfileCommand}"
+							CommandParameter="{Binding SelectedSuspect}"
+							Gesture="CTRL+P" />
+			</DataGrid.InputBindings>
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Header="Avatar"
 										Width="Auto"

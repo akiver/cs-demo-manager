@@ -165,6 +165,7 @@
 					Width="80"
 					Height="30"
 					Margin="5"
+					ToolTip="Remove suspect(s) (DEL)"
 					Command="{Binding RemoveSuspectCommand}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 					<Rectangle Width="15" Height="15">
@@ -178,6 +179,7 @@
 
 			<Button Grid.Column="7" Style="{StaticResource GeneralButtonStyle}" Width="80" Height="30" Margin="5"
 						Command="{Binding GoToSuspectProfileCommand}"
+						ToolTip="Go to suspect profile (CTRL+P)"
 						CommandParameter="{Binding SelectedSuspect}">
 				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 					<Rectangle Width="15" Height="15">
@@ -301,6 +303,13 @@
 						CommandParameter="{Binding SelectedItems, ElementName=DataGridSuspects}" />
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
+			<DataGrid.InputBindings>
+				<KeyBinding Command="{Binding RemoveSuspectCommand}"
+							Gesture="DELETE" />
+				<KeyBinding Command="{Binding GoToSuspectProfileCommand}"
+							CommandParameter="{Binding SelectedSuspect}"
+							Gesture="CTRL+P" />
+			</DataGrid.InputBindings>
 			<DataGrid.Columns>
 				<DataGridTemplateColumn Header="Avatar" Width="Auto" HeaderStyle="{StaticResource PlayerAvatarHeader}">
 					<DataGridTemplateColumn.CellTemplate>
