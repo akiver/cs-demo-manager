@@ -108,6 +108,10 @@ namespace SuspectsBot
 
 		private bool ShouldCheck()
 		{
+			if (!AppSettings.IsInternetConnectionAvailable())
+			{
+				return false;
+			}
 			if ((DateTime.Now - _lastCheckDate).TotalMinutes < Properties.Settings.Default.CheckDelayMinutes)
 			{
 				return false;
