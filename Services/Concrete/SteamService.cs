@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using System.Net.Http;
 using System.Security.Cryptography;
@@ -49,125 +50,166 @@ namespace Services.Concrete
 
 		public async Task<Suspect> GetBanStatusForUser(string steamId)
 		{
-			Match match = _regexSteamCommunityUrl.Match(steamId);
-			if(match.Success)
+			Suspect suspect = new Suspect();
+			try
 			{
-				steamId = match.Groups["steamID"].Value;
-			}
-			
-			using (var httpClient = new HttpClient())
-			{
-				//  Grab general infos from user
-				string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, steamId);
-				HttpResponseMessage result = await httpClient.GetAsync(url);
-				string json = await result.Content.ReadAsStringAsync();
-				JObject o = JObject.Parse(json);
-				var playerSummary = o.SelectToken("response.players.player[0]").ToObject<PlayerSummary>();
-				if (playerSummary == null) return null;
-
-				// Grab VAC ban infos from user
-				url = string.Format(PLAYERS_BAN_URL, Properties.Resources.steam_api_key, steamId);
-				result = await httpClient.GetAsync(url);
-				json = await result.Content.ReadAsStringAsync();
-				o = JObject.Parse(json);
-				var playerBan = o.SelectToken("players[0]").ToObject<PlayerBan>();
-				if (playerBan == null) return null;
-
-				Suspect suspect = new Suspect
+				Match match = _regexSteamCommunityUrl.Match(steamId);
+				if (match.Success)
 				{
-					SteamId = playerSummary.SteamId,
-					ProfileUrl = playerSummary.ProfileUrl,
-					Nickname = playerSummary.PersonaName,
-					LastLogOff = playerSummary.LastLogoff,
-					CurrentStatus = playerSummary.PersonaState,
-					ProfileState = playerSummary.ProfileState,
-					AvatarUrl = playerSummary.AvatarFull,
-					CommunityVisibilityState = playerSummary.CommunityVisibilityState,
-					DaySinceLastBanCount = playerBan.DaysSinceLastBan,
-					BanCount = playerBan.NumberOfVacBans,
-					VacBanned = playerBan.VacBanned,
-					CommunityBanned = playerBan.CommunityBanned,
-					EconomyBan = playerBan.EconomyBan,
-					GameBanCount = playerBan.NumberOfGameBans
-				};
+					steamId = match.Groups["steamID"].Value;
+				}
 
-				return suspect;
+				using (var httpClient = new HttpClient())
+				{
+					//  Grab general infos from user
+					string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, steamId);
+					HttpResponseMessage result = await httpClient.GetAsync(url);
+					if (result.StatusCode == HttpStatusCode.OK)
+					{
+						string json = await result.Content.ReadAsStringAsync();
+						JObject o = JObject.Parse(json);
+						var playerSummary = o.SelectToken("response.players.player[0]").ToObject<PlayerSummary>();
+						if (playerSummary == null) return null;
+
+						// Grab VAC ban infos from user
+						url = string.Format(PLAYERS_BAN_URL, Properties.Resources.steam_api_key, steamId);
+						result = await httpClient.GetAsync(url);
+						if (result.StatusCode == HttpStatusCode.OK)
+						{
+							json = await result.Content.ReadAsStringAsync();
+							o = JObject.Parse(json);
+							var playerBan = o.SelectToken("players[0]").ToObject<PlayerBan>();
+							if (playerBan == null) return null;
+
+							suspect = new Suspect
+							{
+								SteamId = playerSummary.SteamId,
+								ProfileUrl = playerSummary.ProfileUrl,
+								Nickname = playerSummary.PersonaName,
+								LastLogOff = playerSummary.LastLogoff,
+								CurrentStatus = playerSummary.PersonaState,
+								ProfileState = playerSummary.ProfileState,
+								AvatarUrl = playerSummary.AvatarFull,
+								CommunityVisibilityState = playerSummary.CommunityVisibilityState,
+								DaySinceLastBanCount = playerBan.DaysSinceLastBan,
+								BanCount = playerBan.NumberOfVacBans,
+								VacBanned = playerBan.VacBanned,
+								CommunityBanned = playerBan.CommunityBanned,
+								EconomyBan = playerBan.EconomyBan,
+								GameBanCount = playerBan.NumberOfGameBans
+							};
+
+							return suspect;
+						}
+
+						return null;
+					}
+
+					return null;
+				}
 			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+
+			return suspect;
 		}
 
 		public async Task<List<Suspect>> GetBanStatusForUserList(List<string> users)
 		{
-			using (var httpClient = new HttpClient())
+			List<Suspect> suspects = new List<Suspect>();
+			try
 			{
-				string ids = string.Join(",", users.ToArray());
-
-				//  Grab general infos from user
-				string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
-				HttpResponseMessage result = await httpClient.GetAsync(url);
-				string json = await result.Content.ReadAsStringAsync();
-				JObject o = JObject.Parse(json);
-				var playerSummaryList = o.SelectToken("response.players.player").ToObject<List<PlayerSummary>>();
-				if (playerSummaryList == null) return null;
-
-				// Grab VAC ban infos from user
-				url = string.Format(PLAYERS_BAN_URL, Properties.Resources.steam_api_key, ids);
-				result = await httpClient.GetAsync(url);
-				json = await result.Content.ReadAsStringAsync();
-				o = JObject.Parse(json);
-				var playerBanList = o.SelectToken("players").ToObject<List<PlayerBan>>();
-				if (playerBanList == null) return null;
-
-				List<Suspect> suspects = new List<Suspect>();
-
-				foreach(PlayerSummary playerSummary in playerSummaryList)
+				using (var httpClient = new HttpClient())
 				{
-					if (playerSummary != null)
+					string ids = string.Join(",", users.ToArray());
+					//  Grab general infos from user
+					string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
+					HttpResponseMessage result = await httpClient.GetAsync(url);
+					if (result.StatusCode == HttpStatusCode.OK)
 					{
-						Suspect suspect = new Suspect
+						string json = await result.Content.ReadAsStringAsync();
+						JObject o = JObject.Parse(json);
+						var playerSummaryList = o.SelectToken("response.players.player").ToObject<List<PlayerSummary>>();
+						if (playerSummaryList == null) return null;
+
+						// Grab VAC ban infos from user
+						url = string.Format(PLAYERS_BAN_URL, Properties.Resources.steam_api_key, ids);
+						result = await httpClient.GetAsync(url);
+						if (result.StatusCode == HttpStatusCode.OK)
 						{
-							SteamId = playerSummary.SteamId,
-							ProfileUrl = playerSummary.ProfileUrl,
-							Nickname = playerSummary.PersonaName,
-							LastLogOff = playerSummary.LastLogoff,
-							CurrentStatus = playerSummary.PersonaState,
-							ProfileState = playerSummary.ProfileState,
-							AvatarUrl = playerSummary.AvatarFull,
-							CommunityVisibilityState = playerSummary.CommunityVisibilityState
-						};
-						suspects.Add(suspect);
+							json = await result.Content.ReadAsStringAsync();
+							o = JObject.Parse(json);
+							var playerBanList = o.SelectToken("players").ToObject<List<PlayerBan>>();
+							if (playerBanList == null) return null;
+
+							foreach (PlayerSummary playerSummary in playerSummaryList)
+							{
+								if (playerSummary != null)
+								{
+									Suspect suspect = new Suspect
+									{
+										SteamId = playerSummary.SteamId,
+										ProfileUrl = playerSummary.ProfileUrl,
+										Nickname = playerSummary.PersonaName,
+										LastLogOff = playerSummary.LastLogoff,
+										CurrentStatus = playerSummary.PersonaState,
+										ProfileState = playerSummary.ProfileState,
+										AvatarUrl = playerSummary.AvatarFull,
+										CommunityVisibilityState = playerSummary.CommunityVisibilityState
+									};
+									suspects.Add(suspect);
+								}
+							}
+
+							foreach (PlayerBan playerBan in playerBanList)
+							{
+								suspects.First(pl => pl.SteamId == playerBan.SteamId).DaySinceLastBanCount = playerBan.DaysSinceLastBan;
+								suspects.First(pl => pl.SteamId == playerBan.SteamId).BanCount = playerBan.NumberOfVacBans;
+								suspects.First(pl => pl.SteamId == playerBan.SteamId).VacBanned = playerBan.VacBanned;
+								suspects.First(pl => pl.SteamId == playerBan.SteamId).CommunityBanned = playerBan.CommunityBanned;
+								suspects.First(pl => pl.SteamId == playerBan.SteamId).EconomyBan = playerBan.EconomyBan;
+								suspects.First(pl => pl.SteamId == playerBan.SteamId).GameBanCount = playerBan.NumberOfGameBans;
+							}
+						}
 					}
 				}
-
-				foreach (PlayerBan playerBan in playerBanList)
-				{
-					suspects.First(pl => pl.SteamId == playerBan.SteamId).DaySinceLastBanCount = playerBan.DaysSinceLastBan;
-					suspects.First(pl => pl.SteamId == playerBan.SteamId).BanCount = playerBan.NumberOfVacBans;
-					suspects.First(pl => pl.SteamId == playerBan.SteamId).VacBanned = playerBan.VacBanned;
-					suspects.First(pl => pl.SteamId == playerBan.SteamId).CommunityBanned = playerBan.CommunityBanned;
-					suspects.First(pl => pl.SteamId == playerBan.SteamId).EconomyBan = playerBan.EconomyBan;
-					suspects.First(pl => pl.SteamId == playerBan.SteamId).GameBanCount = playerBan.NumberOfGameBans;
-				}
-
-				return suspects;
 			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+
+			return suspects;
 		}
 
 		public async Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users)
 		{
-			using (var httpClient = new HttpClient())
+			List<PlayerSummary> playerSummaryList = new List<PlayerSummary>();
+			try
 			{
-				string ids = string.Join(",", users.ToArray());
-
-				//  Grab general infos from user
-				string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
-				HttpResponseMessage result = await httpClient.GetAsync(url);
-				string json = await result.Content.ReadAsStringAsync();
-				JObject o = JObject.Parse(json);
-				var playerSummaryList = o.SelectToken("response.players.player").ToObject<List<PlayerSummary>>();
-				if (playerSummaryList == null) return null;
-
-				return playerSummaryList;
+				using (var httpClient = new HttpClient())
+				{
+					string ids = string.Join(",", users.ToArray());
+					//  Grab general infos from user
+					string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
+					HttpResponseMessage result = await httpClient.GetAsync(url);
+					if (result.StatusCode == HttpStatusCode.OK)
+					{
+						string json = await result.Content.ReadAsStringAsync();
+						JObject o = JObject.Parse(json);
+						playerSummaryList = o.SelectToken("response.players.player").ToObject<List<PlayerSummary>>();
+						if (playerSummaryList == null) return new List<PlayerSummary>();
+					}
+				}
 			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+
+			return playerSummaryList;
 		}
 
 		public async Task<int> GenerateMatchListFile(CancellationToken ct)
