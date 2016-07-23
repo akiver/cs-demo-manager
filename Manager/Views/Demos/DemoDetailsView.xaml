@@ -66,6 +66,12 @@
 		<KeyBinding Command="{Binding ShowDemoStuffsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+G" />
+		<KeyBinding Command="{Binding GoToPreviousDemoCommand}"
+					CommandParameter="{Binding GoToPreviousDemoCommand}"
+					Gesture="CTRL+LEFT" />
+		<KeyBinding Command="{Binding GoToNextDemoCommand}"
+					CommandParameter="{Binding GoToNextDemoCommand}"
+					Gesture="CTRL+RIGHT" />
 		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}"/>
 		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DetailsUserControl}"/>
@@ -88,6 +94,8 @@
 			
 			<Grid Grid.Row="0">
 				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="Auto"/>
+					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
 					<ColumnDefinition Width="Auto"/>
@@ -187,6 +195,47 @@
 							  Style="{StaticResource CheckBoxFilterStyle}"
 							  Command="{Binding ShowAllPlayersCommand}"
 							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllPlayers}"/>
+				</Grid>
+
+				<Grid Grid.Column="6" HorizontalAlignment="Right">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+					</Grid.ColumnDefinitions>
+					
+					<Button Grid.Column="0"
+							Style="{StaticResource GeneralButtonStyle}"
+							Height="30"
+							Margin="10"
+							Width="60"
+							ToolTip="Previous demo (CTRL+LEFT)"
+							Command="{Binding GoToPreviousDemoCommand}">
+						<StackPanel Orientation="Horizontal"
+									VerticalAlignment="Center">
+							<Rectangle Width="15"
+									   Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
+								</Rectangle.Fill>
+							</Rectangle>
+						</StackPanel>
+					</Button>
+					
+					<Button Grid.Column="1"
+							Style="{StaticResource GeneralButtonStyle}"
+							Height="30"
+							Margin="10"
+							Width="60"
+							ToolTip="Next demo (CTRL+RIGHT)"
+							Command="{Binding GoToNextDemoCommand}">
+						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+							<Rectangle Width="15" Height="15">
+								<Rectangle.Fill>
+									<VisualBrush Visual="{StaticResource appbar_arrow_right}" />
+								</Rectangle.Fill>
+							</Rectangle>
+						</StackPanel>
+					</Button>
 				</Grid>
 			</Grid>
 		</Grid>

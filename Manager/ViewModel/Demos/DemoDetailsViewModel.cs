@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -34,6 +35,10 @@ namespace Manager.ViewModel.Demos
 		#region Properties
 
 		private Demo _currentDemo;
+
+		private Demo _previousDemo;
+
+		private Demo _nextDemo;
 
 		private Round _selectedRound;
 
@@ -113,6 +118,10 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand<Player> _showPlayerDemosCommand;
 
+		private RelayCommand _goToPreviousDemoCommand;
+
+		private RelayCommand _goToNextDemoCommand;
+
 		private ICollectionView _playersTeam1Collection;
 
 		private ICollectionView _playersTeam2Collection;
@@ -127,6 +136,18 @@ namespace Manager.ViewModel.Demos
 		{
 			get { return _currentDemo; }
 			set { Set(() => CurrentDemo, ref _currentDemo, value); }
+		}
+
+		public Demo PreviousDemo
+		{
+			get { return _previousDemo; }
+			set { Set(() => PreviousDemo, ref _previousDemo, value); }
+		}
+
+		public Demo NextDemo
+		{
+			get { return _nextDemo; }
+			set { Set(() => NextDemo, ref _nextDemo, value); }
 		}
 
 		public Round SelectedRound
@@ -217,23 +238,7 @@ namespace Manager.ViewModel.Demos
 						// reload whole demo data if an account was selected and the current page was the demos list
 						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView)
 							_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
-						PlayersTeam1Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamCT.Players);
-						PlayersTeam2Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamT.Players);
-						PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
-						PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
-						RoundsCollection = CollectionViewSource.GetDefaultView(CurrentDemo.Rounds);
-						if (AppSettings.IsInternetConnectionAvailable() && CurrentDemo.Players.Any())
-						{
-							IEnumerable<string> steamIdList = CurrentDemo.Players.Select(p => p.SteamId.ToString()).Distinct();
-							List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
-							foreach (PlayerSummary playerSummary in playerSummaryList)
-							{
-								CurrentDemo.Players.First(p => p.SteamId.ToString() == playerSummary.SteamId).AvatarUrl = playerSummary.AvatarFull;
-							}
-						}
-						new ViewModelLocator().Settings.IsShowAllPlayers = true;
-						IsAnalyzing = false;
-						HasNotification = false;
+						await LoadData();
 					}));
 			}
 		}
@@ -869,6 +874,38 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
+		public RelayCommand GoToPreviousDemoCommand
+		{
+			get
+			{
+				return _goToPreviousDemoCommand
+					?? (_goToPreviousDemoCommand = new RelayCommand(
+						async () =>
+						{
+							CurrentDemo = PreviousDemo;
+							SelectedPlayerStats = null;
+							await LoadData();
+						},
+						() => PreviousDemo != null && !IsAnalyzing));
+			}
+		}
+
+		public RelayCommand GoToNextDemoCommand
+		{
+			get
+			{
+				return _goToNextDemoCommand
+					?? (_goToNextDemoCommand = new RelayCommand(
+						async () =>
+						{
+							CurrentDemo = NextDemo;
+							SelectedPlayerStats = null;
+							await LoadData();
+						},
+						() => NextDemo != null && !IsAnalyzing));
+			}
+		}
+
 		#endregion
 
 		public DemoDetailsViewModel(
@@ -931,6 +968,42 @@ namespace Manager.ViewModel.Demos
 			}
 			HasNotification = false;
 			IsAnalyzing = false;
+		}
+
+		private void UpdateDemosPagination()
+		{
+			ObservableCollection<Demo> demos = new ViewModelLocator().DemoList.Demos;
+			int demoIndex = demos.IndexOf(CurrentDemo);
+			int indexPrevious = demoIndex - 1;
+			int indexNext = demoIndex + 1;
+			PreviousDemo = demos.ElementAtOrDefault(indexPrevious);
+			NextDemo = demos.ElementAtOrDefault(indexNext);
+		}
+
+		private async Task LoadData()
+		{
+			IsAnalyzing = true;
+			HasNotification = true;
+			NotificationMessage = "Loading...";
+			PlayersTeam1Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamCT.Players);
+			PlayersTeam2Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamT.Players);
+			PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+			PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+			RoundsCollection = CollectionViewSource.GetDefaultView(CurrentDemo.Rounds);
+			if (AppSettings.IsInternetConnectionAvailable() && CurrentDemo.Players.Any())
+			{
+				IEnumerable<string> steamIdList = CurrentDemo.Players.Select(p => p.SteamId.ToString()).Distinct();
+				List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
+				foreach (PlayerSummary playerSummary in playerSummaryList)
+				{
+					Player player = CurrentDemo.Players.FirstOrDefault(p => p.SteamId.ToString() == playerSummary.SteamId);
+					if(player != null) player.AvatarUrl = playerSummary.AvatarFull;
+				}
+			}
+			new ViewModelLocator().Settings.IsShowAllPlayers = true;
+			UpdateDemosPagination();
+			IsAnalyzing = false;
+			HasNotification = false;
 		}
 	}
 }

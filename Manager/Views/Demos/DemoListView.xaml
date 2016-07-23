@@ -512,7 +512,7 @@
 
 		<DataGrid Grid.Row="3"
 				  x:Name="DataGridDemos"
-				  ItemsSource="{Binding Demos}"
+				  ItemsSource="{Binding Demos, IsAsync=True}"
 				  SelectedItem="{Binding SelectedDemo}"
 				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}"
