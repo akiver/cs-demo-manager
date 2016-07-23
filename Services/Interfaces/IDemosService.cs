@@ -19,6 +19,13 @@ namespace Services.Interfaces
 		bool IgnoreLaterBan { get; set; }
 
 		/// <summary>
+		/// Return demo's header
+		/// </summary>
+		/// <param name="demoFilePath"></param>
+		/// <returns></returns>
+		Task<Demo> GetDemoHeaderAsync(string demoFilePath);
+
+		/// <summary>
 		/// Return only demos header
 		/// </summary>
 		/// <param name="folders"></param>

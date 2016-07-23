@@ -75,7 +75,7 @@ namespace Services.Concrete
 			return demo;
 		}
 
-		private static async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
+		public async Task<Demo> GetDemoHeaderAsync(string demoFilePath)
 		{
 			Demo demo = await Task.Run(() => DemoAnalyzer.ParseDemoHeader(demoFilePath));
 			if (demo != null)

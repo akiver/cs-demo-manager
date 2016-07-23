@@ -13,23 +13,12 @@ namespace Manager
 {
 	public partial class App : IDisposable
 	{
-		private readonly Mutex _instance;
+		private Mutex _instance;
 		public static string StartUpWindow { get; set; } = "demos";
+		public static string DemoFilePath { get; set; }
 
 		public App()
 		{
-			bool createdNew;
-			Assembly assembly = Assembly.GetExecutingAssembly();
-			GuidAttribute attribute = (GuidAttribute)assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0];
-			string appGuid = attribute.Value;
-			_instance = new Mutex(true, @"Global\" + appGuid, out createdNew);
-			if (!createdNew)
-			{
-				_instance = null;
-				Current.Shutdown();
-				return;
-			}
-
 			DispatcherHelper.Initialize();
 #if RELEASE
 			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainUnhandleException;
@@ -46,6 +35,29 @@ namespace Manager
 
 		private void Application_Startup(object sender, StartupEventArgs e)
 		{
+			bool createdNew;
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			GuidAttribute attribute = (GuidAttribute)assembly.GetCustomAttributes(typeof(GuidAttribute), true)[0];
+			string appGuid = attribute.Value;
+			_instance = new Mutex(true, @"Global\" + appGuid, out createdNew);
+			if (!createdNew)
+			{
+				// Send a message if it's a .dem provided as argument
+				if (e.Args.Length > 0 && e.Args[0].EndsWith(".dem"))
+				{
+					// send a message to display the demo's details
+					Process[] processes = Process.GetProcessesByName(AppSettings.PROCESS_NAME);
+					foreach (Process process in processes)
+					{
+						Win32Utils.SendWindowStringMessage(process.MainWindowHandle, Win32Utils.WM_LOAD_DEMO, 0, e.Args[0]);
+					}
+				}
+				// shutdown as there is already an instance
+				_instance = null;
+				Current.Shutdown();
+				return;
+			}
+
 			if (Settings.Default.StartBotOnLaunch)
 			{
 				if (File.Exists(AppSettings.BOT_PROCESS_NAME + ".exe")
@@ -61,6 +73,13 @@ namespace Manager
 				if (e.Args[i] == "/suspects")
 				{
 					StartUpWindow = "suspects";
+				}
+				// this case is when no app instance exists and a .dem is provided as argument
+				if (e.Args[i].EndsWith(".dem") && File.Exists(e.Args[i]))
+				{
+					// change the default startup window and set the demo path to display
+					StartUpWindow = "demo";
+					DemoFilePath = e.Args[0];
 				}
 			}
 
@@ -78,7 +97,7 @@ namespace Manager
 
 		private void Application_Exit(object sender, ExitEventArgs e)
 		{
-			if (Settings.Default.CloseBotOnExit)
+			if (Settings.Default.CloseBotOnExit && _instance != null)
 			{
 				Win32Utils.SendMessageToBot(Win32Utils.WM_CLOSE);
 			}

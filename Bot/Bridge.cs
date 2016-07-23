@@ -75,7 +75,7 @@ namespace SuspectsBot
 					steamIdLongList[i] = 0;
 				}
 			}
-			Win32Utils.SendWindowLongArrayMessage(_csgoDmProcess.MainWindowHandle, Win32Utils.WM_COPYDATA, 0, steamIdLongList);
+			Win32Utils.SendWindowLongArrayMessage(_csgoDmProcess.MainWindowHandle, Win32Utils.WM_SUSPECTS, 0, steamIdLongList);
 		}
 	}
 }

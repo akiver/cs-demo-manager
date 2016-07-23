@@ -62,6 +62,11 @@ namespace Core
 		/// </summary>
 		public const int WM_CSGO_DM_CLOSED = 0X5591;
 
+		/// <summary>
+		/// Sent to load a demo passed as argument
+		/// </summary>
+		public const int WM_LOAD_DEMO = 0XFF30;
+
 		public const int WM_CLOSE = 0x0010;
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]
@@ -77,6 +82,32 @@ namespace Core
 			public IntPtr dwData;
 			public int cbData;
 			public IntPtr lpData;
+		}
+
+		public static int SendWindowStringMessage(IntPtr hWnd, int msgCode, int wParam, string msg)
+		{
+			int result = 0;
+			COPYDATASTRUCT cds = new COPYDATASTRUCT
+			{
+				dwData = (IntPtr)msgCode,
+				cbData = msg.Length,
+				lpData = Marshal.StringToCoTaskMemAnsi(msg)
+			};
+
+			try
+			{
+				result = SendMessage(hWnd, WM_COPYDATA, wParam, ref cds);
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+			finally
+			{
+				Marshal.FreeHGlobal(cds.lpData);
+			}
+
+			return result;
 		}
 
 		public static int SendWindowLongArrayMessage(IntPtr hWnd, int msgCode, int wParam, long[] msg)

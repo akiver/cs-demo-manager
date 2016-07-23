@@ -24,6 +24,11 @@ namespace Services.Design
 		public long SelectedStatsAccountSteamId { get; set; }
 		public bool IgnoreLaterBan { get; set; }
 
+		public Task<Demo> GetDemoHeaderAsync(string demoFilePath)
+		{
+			return Task.FromResult(new Demo());
+		}
+
 		public Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false, long accountSteamId = 0)
 		{
 			List<Demo> demos = new List<Demo>();

@@ -39,24 +39,43 @@ namespace Manager
 			if (msg == Win32Utils.WM_COPYDATA)
 			{
 				Win32Utils.COPYDATASTRUCT cps = (Win32Utils.COPYDATASTRUCT)Marshal.PtrToStructure(lParam, typeof(Win32Utils.COPYDATASTRUCT));
-				if (cps.cbData == Marshal.SizeOf(typeof(Win32Utils.SteamIdListStruct)))
+				if ((int)cps.dwData == Win32Utils.WM_SUSPECTS)
 				{
-					Win32Utils.SteamIdListStruct myStruct = (Win32Utils.SteamIdListStruct)Marshal.PtrToStructure(cps.lpData, typeof(Win32Utils.SteamIdListStruct));
-					List<string> steamIdList = new List<string>();
-
-					for (int i = 0; i < 100; ++i)
+					if (cps.cbData == Marshal.SizeOf(typeof(Win32Utils.SteamIdListStruct)))
 					{
-						if (myStruct.SteamIdList[i] != 0)
-							steamIdList.Add(myStruct.SteamIdList[i].ToString());
+						Win32Utils.SteamIdListStruct myStruct = (Win32Utils.SteamIdListStruct)Marshal.PtrToStructure(cps.lpData, typeof(Win32Utils.SteamIdListStruct));
+						List<string> steamIdList = new List<string>();
+
+						for (int i = 0; i < 100; ++i)
+						{
+							if (myStruct.SteamIdList[i] != 0)
+								steamIdList.Add(myStruct.SteamIdList[i].ToString());
+						}
+
+						// send msg to view model
+						LoadSuspectListMessage loadSuspectListMsg = new LoadSuspectListMessage
+						{
+							SteamIdList = steamIdList
+						};
+						Messenger.Default.Send(loadSuspectListMsg);
+						handled = true;
 					}
+				}
 
-					// send msg to view model
-					LoadSuspectListMessage loadSuspectListMsg = new LoadSuspectListMessage
+				if ((int)cps.dwData == Win32Utils.WM_LOAD_DEMO)
+				{
+					try
 					{
-						SteamIdList = steamIdList
-					};
-					Messenger.Default.Send(loadSuspectListMsg);
-					handled = true;
+						string demoPath = Marshal.PtrToStringAnsi(cps.lpData, cps.cbData);
+						App.DemoFilePath = demoPath;
+						LoadDemoFromAppArgument loadDemoMessage = new LoadDemoFromAppArgument();
+						Messenger.Default.Send(loadDemoMessage);
+						handled = true;
+					}
+					catch (Exception e)
+					{
+						Logger.Instance.Log(e);
+					}
 				}
 			}
 

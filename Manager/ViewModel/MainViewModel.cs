@@ -168,7 +168,23 @@ namespace Manager.ViewModel
 							}
 						}
 
-						// Notify the HomeViewModel that it can now load demos data
+						switch (App.StartUpWindow)
+						{
+							case "suspects":
+								SuspectListView suspectsView = new SuspectListView();
+								CurrentPage.ShowPage(suspectsView);
+								break;
+							case "demo":
+								DemoDetailsView demoDetails = new DemoDetailsView();
+								CurrentPage.ShowPage(demoDetails);
+								break;
+							default:
+								DemoListView demoListView = new DemoListView();
+								CurrentPage.ShowPage(demoListView);
+								break;
+						}
+
+						// Notify the DemoListViewModel that it can now load demos data
 						MainWindowLoadedMessage msg = new MainWindowLoadedMessage();
 						Messenger.Default.Send(msg);
 					}));
@@ -287,26 +303,21 @@ namespace Manager.ViewModel
 			_cacheService = cacheService;
 
 			CurrentPage = new PageTransition();
-			switch (App.StartUpWindow)
-			{
-				case "suspects":
-					SuspectListView suspectsView = new SuspectListView();
-					CurrentPage.ShowPage(suspectsView);
-					break;
-				default:
-					DemoListView demoListView = new DemoListView();
-					CurrentPage.ShowPage(demoListView);
-					break;
-			}
-
 			Messenger.Default.Register<NavigateToSuspectsViewMessage>(this, HandleNavigateToSuspectsMessage);
 			Messenger.Default.Register<LoadSuspectListMessage>(this, HandleLoadSuspectListMessage);
+			Messenger.Default.Register<LoadDemoFromAppArgument>(this, HandleLoadFromArgumentMessage);
 
 			Task.Run(async () =>
 			{
 				List<string> folders = await _cacheService.GetFoldersAsync();
 				Folders = new ObservableCollection<string>(folders);
 			});
+		}
+
+		private void HandleLoadFromArgumentMessage(LoadDemoFromAppArgument m)
+		{
+			DemoDetailsView detailsView = new DemoDetailsView();
+			CurrentPage.ShowPage(detailsView);
 		}
 
 		private static void HandleLoadSuspectListMessage(LoadSuspectListMessage obj)

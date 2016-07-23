@@ -15,8 +15,10 @@ using Core.Models.Source;
 using Core.Models.Steam;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Messages;
 using Manager.Properties;
 using Manager.Services;
 using Manager.Views.Demos;
@@ -238,6 +240,7 @@ namespace Manager.ViewModel.Demos
 						// reload whole demo data if an account was selected and the current page was the demos list
 						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView)
 							_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
+						await UpdateDemoFromAppArgument();
 						await LoadData();
 					}));
 			}
@@ -752,7 +755,7 @@ namespace Manager.ViewModel.Demos
 								SelectedPlayerStats = null;
 							settingsViewModel.IsShowAllPlayers = isChecked;
 						},
-						isChecked => !IsAnalyzing && CurrentDemo.Players.Any()));
+						isChecked => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Players.Any()));
 			}
 		}
 
@@ -929,6 +932,13 @@ namespace Manager.ViewModel.Demos
 					RoundsCollection = CollectionViewSource.GetDefaultView(CurrentDemo.Rounds);
 				});
 			}
+
+			Messenger.Default.Register<LoadDemoFromAppArgument>(this, HandleLoadFromArgumentMessage);
+		}
+
+		private async void HandleLoadFromArgumentMessage(LoadDemoFromAppArgument m)
+		{
+			await UpdateDemoFromAppArgument();
 		}
 
 		public override void Cleanup()
@@ -1004,6 +1014,24 @@ namespace Manager.ViewModel.Demos
 			UpdateDemosPagination();
 			IsAnalyzing = false;
 			HasNotification = false;
+		}
+
+		/// <summary>
+		/// Handle the demo path provided as argument
+		/// If a .dem file is added to the application arguments, it should be triggered to update the current demo displayed
+		/// </summary>
+		/// <returns></returns>
+		private async Task UpdateDemoFromAppArgument()
+		{
+			if (!string.IsNullOrEmpty(App.DemoFilePath))
+			{
+				CurrentDemo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
+				if (_cacheService.HasDemoInCache(CurrentDemo))
+				{
+					_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
+					RaisePropertyChanged(() => CurrentDemo);
+				}
+			}
 		}
 	}
 }
