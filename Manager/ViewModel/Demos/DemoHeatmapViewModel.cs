@@ -405,7 +405,7 @@ namespace Manager.ViewModel.Demos
 			if (IsInDesignMode)
 			{
 				DispatcherHelper.Initialize();
-				CurrentDemo = await _cacheService.GetDemoDataFromCache("123");
+				CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
 			}
 
 			Rounds = new MultiSelectCollectionView<Round>(CurrentDemo.Rounds);

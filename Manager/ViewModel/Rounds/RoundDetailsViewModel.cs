@@ -251,7 +251,7 @@ namespace Manager.ViewModel.Rounds
 				DispatcherHelper.Initialize();
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
-					CurrentDemo = await _cacheService.GetDemoDataFromCache("123");
+					CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
 					RoundNumber = 10;
 					await LoadDatas();
 				});
