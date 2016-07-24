@@ -122,6 +122,14 @@
 					</StackPanel>
 				</Button>
 
+				<TextBlock Text="Scale: " Style="{StaticResource CurrentFolderStyle}"/>
+				<ComboBox ItemsSource="{Binding ScaleList}"
+						  SelectedItem="{Binding SelectedScale}"
+						  DisplayMemberPath ="Title"
+						  SelectedValuePath="Id"
+						  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
+						  Style="{StaticResource ComboBoxAccountsStyle}" />
+
 				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
 					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
 					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
@@ -136,18 +144,28 @@
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
 			
-			<telerik:RadCartesianChart Grid.Row="0" TooltipTemplate="{StaticResource RankToolTipTemplate}" ClipToBounds="False">
+			<telerik:RadCartesianChart Grid.Row="0"
+									   TooltipTemplate="{StaticResource RankToolTipTemplate}" ClipToBounds="False">
 				<telerik:RadCartesianChart.VerticalAxis>
-					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}" MajorStep="1" RangeExtendDirection="Both"/>
+					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}"
+										MajorStep="1"
+										RangeExtendDirection="Both"/>
 				</telerik:RadCartesianChart.VerticalAxis>
 				<telerik:RadCartesianChart.HorizontalAxis>
-					<telerik:DateTimeCategoricalAxis LabelFormat="d" LabelStyle="{StaticResource LabelChartStyle}" LabelRotationAngle="45" LabelFitMode="Rotate" />
+					<telerik:DateTimeCategoricalAxis LabelFormat="d"
+													 LabelStyle="{StaticResource LabelChartStyle}"
+													 LabelRotationAngle="45"
+													 LabelFitMode="Rotate" />
 				</telerik:RadCartesianChart.HorizontalAxis>
 				<telerik:RadCartesianChart.Behaviors>
-					<telerik:ChartPanAndZoomBehavior PanMode="Horizontal" ZoomMode="Horizontal" DragMode="Pan" />
+					<telerik:ChartPanAndZoomBehavior PanMode="Horizontal"
+													 ZoomMode="Horizontal"
+													 DragMode="Pan" />
 					<telerik:ChartTooltipBehavior />
 				</telerik:RadCartesianChart.Behaviors>
-				<telerik:LineSeries ItemsSource="{Binding Datas}" CategoryBinding="Date" ValueBinding="NewRank"
+				<telerik:LineSeries ItemsSource="{Binding Datas}"
+									CategoryBinding="Date"
+									ValueBinding="NewRank"
 									StrokeThickness="3"
 									Stroke="{StaticResource LightGreenBrush}"
 									PointTemplateSelector="{StaticResource RankPointTemplateSelector}">

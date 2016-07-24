@@ -17,7 +17,7 @@ namespace Services.Design
 			return Task.FromResult(demo);
 		}
 
-		public Task<List<RankDateChart>> GetRankDateChartDataAsync()
+		public Task<List<RankDateChart>> GetRankDateChartDataAsync(string scale)
 		{
 			Random ran = new Random();
 			return Task.FromResult(new List<RankDateChart>

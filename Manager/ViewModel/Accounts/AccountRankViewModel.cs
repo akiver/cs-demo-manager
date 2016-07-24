@@ -1,10 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
+using Manager.Models;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Services.Interfaces;
@@ -36,6 +38,10 @@ namespace Manager.ViewModel.Accounts
 
 		private RelayCommand _goToProgressCommand;
 
+		private ComboboxSelector _selectedScale;
+
+		private List<ComboboxSelector> _scaleList; 
+
 		#endregion
 
 		#region Accessors
@@ -58,6 +64,22 @@ namespace Manager.ViewModel.Accounts
 			set { Set(() => Datas, ref _datas, value); }
 		}
 
+		public List<ComboboxSelector> ScaleList
+		{
+			get { return _scaleList; }
+			set { Set(() => ScaleList, ref _scaleList, value); }
+		}
+
+		public ComboboxSelector SelectedScale
+		{
+			get { return _selectedScale; }
+			set
+			{
+				Set(() => SelectedScale, ref _selectedScale, value);
+				Task.Run(async () => await LoadData());
+			}
+		}
+
 		#endregion
 
 		#region Commands
@@ -70,11 +92,7 @@ namespace Manager.ViewModel.Accounts
 					?? (_windowLoadedCommand = new RelayCommand(
 					async () =>
 					{
-						IsBusy = true;
-						NotificationMessage = "Loading...";
-						Datas = await _accountStatsService.GetRankDateChartDataAsync();
-						Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-						IsBusy = false;
+						await LoadData();
 					}));
 			}
 		}
@@ -184,6 +202,13 @@ namespace Manager.ViewModel.Accounts
 		public AccountRankViewModel(IAccountStatsService accountStatsService)
 		{
 			_accountStatsService = accountStatsService;
+			ScaleList = new List<ComboboxSelector>
+			{
+				new ComboboxSelector("none", "None"),
+				new ComboboxSelector("day", "Day"),
+				new ComboboxSelector("month", "Month")
+			};
+			SelectedScale = ScaleList[0];
 
 			if (IsInDesignMode)
 			{
@@ -192,7 +217,7 @@ namespace Manager.ViewModel.Accounts
 				IsBusy = true;
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
-					Datas = await _accountStatsService.GetRankDateChartDataAsync();
+					Datas = await _accountStatsService.GetRankDateChartDataAsync(SelectedScale.Id);
 				});
 			}
 		}
@@ -202,9 +227,7 @@ namespace Manager.ViewModel.Accounts
 			DispatcherHelper.CheckBeginInvokeOnUI(
 				async () =>
 				{
-					IsBusy = true;
-					Datas = await _accountStatsService.GetRankDateChartDataAsync();
-					IsBusy = false;
+					await LoadData();
 				});
 		}
 
@@ -212,6 +235,15 @@ namespace Manager.ViewModel.Accounts
 		{
 			base.Cleanup();
 			Datas = null;
+		}
+
+		private async Task LoadData()
+		{
+			IsBusy = true;
+			NotificationMessage = "Loading...";
+			Datas = await _accountStatsService.GetRankDateChartDataAsync(SelectedScale.Id);
+			Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
+			IsBusy = false;
 		}
 	}
 }

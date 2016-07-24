@@ -23,7 +23,7 @@ namespace Services.Interfaces
 		/// Return Rank model evolution for the rank chart
 		/// </summary>
 		/// <returns></returns>
-		Task<List<RankDateChart>> GetRankDateChartDataAsync();
+		Task<List<RankDateChart>> GetRankDateChartDataAsync(string scale);
 
 		/// <summary>
 		/// Return overall stats for the selected account

@@ -505,7 +505,7 @@ namespace Services.Concrete
 			return stats;
 		}
 
-		public async Task<List<RankDateChart>> GetRankDateChartDataAsync()
+		public async Task<List<RankDateChart>> GetRankDateChartDataAsync(string scale = "none")
 		{
 			List<RankDateChart> datas = new List<RankDateChart>();
 			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
@@ -517,22 +517,59 @@ namespace Services.Concrete
 				{
 					// Sort by date
 					demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
-					foreach (Demo demo in demosPlayerList)
+					for (int i = 0; i < demosPlayerList.Count; i++)
 					{
+						Demo currentDemo = demosPlayerList[i];
+						Demo nextDemo = demosPlayerList.ElementAtOrDefault(i + 1);
 						// Ignore demos where all players have no rank, sometimes CCSUsrMsg_ServerRankUpdate isn't raised
-						if (demo.Players.All(p => p.RankNumberOld != 0))
+						if (currentDemo.Players.All(p => p.RankNumberOld != 0))
 						{
-							int newRankNumber = demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberNew;
-							int oldRankNumber = demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberOld;
-							int winCount = demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).WinCount;
-							datas.Add(new RankDateChart
+							int newRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberNew;
+							int oldRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberOld;
+							int winCount = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).WinCount;
+							switch (scale)
 							{
-								Date = demo.Date,
-								OldRank = oldRankNumber,
-								NewRank = newRankNumber,
-								WinCount = winCount,
-								WinStatus = GetWinStatusCode(demo, SelectedStatsAccountSteamId)
-							});
+								case "none":
+									datas.Add(new RankDateChart
+									{
+										Date = currentDemo.Date,
+										OldRank = oldRankNumber,
+										NewRank = newRankNumber,
+										WinCount = winCount,
+										WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
+									});
+									break;
+								case "day":
+									if (nextDemo == null || nextDemo.Date.Day != currentDemo.Date.Day)
+									{
+										RankDateChart previousData = datas.LastOrDefault();
+										oldRankNumber = previousData != null ? (int)previousData.NewRank : oldRankNumber;
+										datas.Add(new RankDateChart
+										{
+											Date = currentDemo.Date,
+											OldRank = oldRankNumber,
+											NewRank = newRankNumber,
+											WinCount = winCount,
+											WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
+										});
+									}
+									break;
+								case "month":
+									if (nextDemo == null || nextDemo.Date.Month != currentDemo.Date.Month)
+									{
+										RankDateChart previousData = datas.LastOrDefault();
+										oldRankNumber = previousData != null ? (int)previousData.NewRank : oldRankNumber;
+										datas.Add(new RankDateChart
+										{
+											Date = currentDemo.Date,
+											OldRank = oldRankNumber,
+											NewRank = newRankNumber,
+											WinCount = winCount,
+											WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
+										});
+									}
+									break;
+							}
 						}
 					}
 				}
