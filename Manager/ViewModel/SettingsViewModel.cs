@@ -32,6 +32,8 @@ namespace Manager.ViewModel
 
 		private bool _isShowAllAccounts = Settings.Default.IsShowAllAccounts;
 
+		private bool _isShowOnlyAccountDemos = Settings.Default.ShowOnlyAccountDemos;
+
 		private bool _isShowAllPlayers = Settings.Default.IsShowAllPlayers;
 
 		private string _launchParameters = Settings.Default.LaunchParameters;
@@ -302,6 +304,17 @@ namespace Manager.ViewModel
 				Settings.Default.Save();
 				if (value && SelectedStatsAccount != null) SelectedStatsAccount = null;
 				Set(() => IsShowAllAccounts, ref _isShowAllAccounts, value);
+			}
+		}
+
+		public bool IsShowOnlyAccountDemos
+		{
+			get { return _isShowOnlyAccountDemos; }
+			set
+			{
+				Settings.Default.ShowOnlyAccountDemos = value;
+				Settings.Default.Save();
+				Set(() => IsShowOnlyAccountDemos, ref _isShowOnlyAccountDemos, value);
 			}
 		}
 

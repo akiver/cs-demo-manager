@@ -96,6 +96,7 @@
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
 					<Button Grid.Column="0" Command="{Binding AnalyzeDemosCommand}"
@@ -217,13 +218,23 @@
 							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
 							  Style="{StaticResource ComboBoxAccountsStyle}" />
 
-					<CheckBox Grid.Column="9" x:Name="CheckBoxShowAllAccounts" Content="Show all"
-						  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
-						  Command="{Binding ShowAllAccountsCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
+					<CheckBox Grid.Column="9"
+							  x:Name="CheckBoxShowAllAccounts"
+							  Content="Show all"
+							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
+							  Style="{StaticResource CheckBoxFilterStyle}"
+							  Command="{Binding ShowAllAccountsCommand}"
+							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
 
-					<Image Grid.Column="10"
+					<CheckBox Grid.Column="10"
+							  x:Name="CheckBoxShowAllAccountDemos"
+							  Content="Show only account demos"
+							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowOnlyAccountDemos}"
+							  Style="{StaticResource CheckBoxFilterStyle}"
+							  Command="{Binding ShowOnlyAccountDemos}"
+							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccountDemos}"/>
+
+					<Image Grid.Column="11"
 						   Style="{StaticResource RankStyle}"
 						   Source="{Binding LastRankAccountStats.Logo}"
 						   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>

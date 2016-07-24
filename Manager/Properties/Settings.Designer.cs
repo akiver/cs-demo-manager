@@ -1149,5 +1149,17 @@ namespace Manager.Properties {
                 this["StartBotOnLaunch"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowOnlyAccountDemos {
+            get {
+                return ((bool)(this["ShowOnlyAccountDemos"]));
+            }
+            set {
+                this["ShowOnlyAccountDemos"] = value;
+            }
+        }
     }
 }

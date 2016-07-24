@@ -145,6 +145,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand<bool> _showAllAccountsCommand;
 
+		private RelayCommand<bool> _showOnlyAccountDemos;
+
 		private RelayCommand _showSuspectsCommand;
 
 		private RelayCommand _refreshListCommand;
@@ -962,6 +964,30 @@ namespace Manager.ViewModel.Demos
 							NotificationMessage = "Loading...";
 							await LoadDemosHeader();
 
+							IsBusy = false;
+							HasRing = false;
+						},
+						isChecked => !IsBusy && new ViewModelLocator().Settings.Accounts.Any()));
+			}
+		}
+
+		/// <summary>
+		/// Command to show / hide only the demos for the selected account
+		/// </summary>
+		public RelayCommand<bool> ShowOnlyAccountDemos
+		{
+			get
+			{
+				return _showOnlyAccountDemos
+					?? (_showOnlyAccountDemos = new RelayCommand<bool>(
+						async isChecked =>
+						{
+							new ViewModelLocator().Settings.IsShowOnlyAccountDemos = isChecked;
+							IsBusy = true;
+							HasRing = true;
+							IsCancellable = false;
+							NotificationMessage = "Loading...";
+							await LoadDemosHeader();
 							IsBusy = false;
 							HasRing = false;
 						},
@@ -1920,7 +1946,7 @@ namespace Manager.ViewModel.Demos
 
 				Demos.Clear();
 
-				long accountId = Properties.Settings.Default.SelectedStatsAccountSteamID;
+				long accountId = Properties.Settings.Default.ShowOnlyAccountDemos ? Properties.Settings.Default.SelectedStatsAccountSteamID : 0;
 				var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true, accountId);
 				foreach (var demo in demos)
 				{
