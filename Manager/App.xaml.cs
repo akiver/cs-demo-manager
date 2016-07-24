@@ -50,6 +50,7 @@ namespace Manager
 					foreach (Process process in processes)
 					{
 						Win32Utils.SendWindowStringMessage(process.MainWindowHandle, Win32Utils.WM_LOAD_DEMO, 0, e.Args[0]);
+						Win32Utils.SetForegroundWindow(process.MainWindowHandle);
 					}
 				}
 				// shutdown as there is already an instance
