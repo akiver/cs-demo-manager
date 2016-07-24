@@ -47,6 +47,7 @@ namespace Services.Concrete
 				demo.AverageHltvRating = player.RatingHltv;
 				demo.AverageEseaRws = player.EseaRws;
 				demo.ClutchWonCount = player.ClutchWonCount;
+				demo.WinStatus = GetWinStatus(demo, accountSteamId);
 			}
 
 			return Task.FromResult(demo);

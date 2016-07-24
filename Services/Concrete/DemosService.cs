@@ -108,7 +108,7 @@ namespace Services.Concrete
 			// get all demos
 			// filter on account if needed
 			// sort by date
-			// kepp the 50 if limit
+			// keep the 50 if limit
 
 			if (folders.Count > 0)
 			{

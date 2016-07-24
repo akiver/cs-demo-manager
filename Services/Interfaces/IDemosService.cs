@@ -31,7 +31,7 @@ namespace Services.Interfaces
 		/// <param name="folders"></param>
 		/// <param name="currentDemos"></param>
 		/// <param name="limit"></param>
-		/// /// <param name="accountSteamId"></param>
+		/// <param name="accountSteamId"></param>
 		/// <returns></returns>
 		Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false, long accountSteamId = 0);
 

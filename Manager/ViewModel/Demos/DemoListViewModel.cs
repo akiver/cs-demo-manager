@@ -951,21 +951,13 @@ namespace Manager.ViewModel.Demos
 			{
 				return _showAllAccountsCommand
 					?? (_showAllAccountsCommand = new RelayCommand<bool>(
-						async isChecked =>
+						isChecked =>
 						{
 							var settingsViewModel = new ViewModelLocator().Settings;
 							if (!isChecked)
 							{
 								settingsViewModel.SelectedStatsAccount = settingsViewModel.Accounts[0];
 							}
-							IsBusy = true;
-							HasRing = true;
-							IsCancellable = false;
-							NotificationMessage = "Loading...";
-							await LoadDemosHeader();
-
-							IsBusy = false;
-							HasRing = false;
 						},
 						isChecked => !IsBusy && new ViewModelLocator().Settings.Accounts.Any()));
 			}
@@ -991,7 +983,7 @@ namespace Manager.ViewModel.Demos
 							IsBusy = false;
 							HasRing = false;
 						},
-						isChecked => !IsBusy && new ViewModelLocator().Settings.Accounts.Any()));
+						isChecked => !IsBusy && new ViewModelLocator().Settings.SelectedStatsAccount != null));
 			}
 		}
 
@@ -1946,8 +1938,17 @@ namespace Manager.ViewModel.Demos
 
 				Demos.Clear();
 
-				long accountId = Properties.Settings.Default.ShowOnlyAccountDemos ? Properties.Settings.Default.SelectedStatsAccountSteamID : 0;
-				var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true, accountId);
+				long accountId = Properties.Settings.Default.SelectedStatsAccountSteamID;
+				List<Demo> demos;
+				if (!Properties.Settings.Default.ShowOnlyAccountDemos)
+				{
+					demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
+				}
+				else
+				{
+					demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true, accountId);
+				}
+				
 				foreach (var demo in demos)
 				{
 					if (accountId != 0)

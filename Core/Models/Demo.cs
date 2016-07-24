@@ -92,6 +92,11 @@ namespace Core.Models
 		private bool _hasCheater;
 
 		/// <summary>
+		/// Win status for the selected account
+		/// </summary>
+		private string _winStatus;
+
+		/// <summary>
 		/// Total kill
 		/// </summary>
 		private int _killCount;
@@ -858,7 +863,11 @@ namespace Core.Models
 		}
 
 		[JsonIgnore]
-		public string WinStatus { get; set; }
+		public string WinStatus
+		{
+			get { return _winStatus; }
+			set { Set(() => WinStatus, ref _winStatus, value); }
+		}
 
 		[JsonIgnore]
 		public ObservableCollection<PositionPoint> PositionPoints
