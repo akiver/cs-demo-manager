@@ -112,47 +112,37 @@ namespace Manager.ViewModel
 							await _dialogService.ShowMessageAsync("It seems that CSGO is not installed on your main hard drive. The defaults \"csgo\" and \"replays\" can not be found. Please add folders from the settings.", MessageDialogStyle.Affirmative);
 						}
 
-						// Check for 1st launch or upgrade that required cache clear (when app major / minor version > major / minor config version)
-						if (_cacheService.ContainsDemos())
+						// Check if the dummy file created from the installer exists
+						// If it's the case it means it's the first time that the app is launched and a cache clear is required
+						if (_cacheService.ContainsDemos() && File.Exists(AppSettings.DUMMY_CACHE_FILENAME))
 						{
-							if (string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
-								|| !string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
-								&& new Version(Properties.Settings.Default.ApplicationVersion).Major.CompareTo(AppSettings.APP_VERSION.Major) < 0
-								|| (!string.IsNullOrEmpty(Properties.Settings.Default.ApplicationVersion)
-								&& new Version(Properties.Settings.Default.ApplicationVersion).Major.CompareTo(AppSettings.APP_VERSION.Major) == 0
-								&& new Version(Properties.Settings.Default.ApplicationVersion).Minor.CompareTo(AppSettings.APP_VERSION.Minor) < 0))
+							var saveCustomData = await _dialogService.ShowMessageAsync("This update requires to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
+							if (saveCustomData == MessageDialogResult.Affirmative)
 							{
-								var saveCustomData = await _dialogService.ShowMessageAsync("This update required to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
-								if (saveCustomData == MessageDialogResult.Affirmative)
+								SaveFileDialog saveCustomDataDialog = new SaveFileDialog
 								{
-									SaveFileDialog saveCustomDataDialog = new SaveFileDialog
-									{
-										FileName = "backup.json",
-										Filter = "JSON file (*.json)|*.json"
-									};
+									FileName = "backup.json",
+									Filter = "JSON file (*.json)|*.json"
+								};
 
-									if (saveCustomDataDialog.ShowDialog() == DialogResult.OK)
+								if (saveCustomDataDialog.ShowDialog() == DialogResult.OK)
+								{
+									try
 									{
-										try
-										{
-											await _cacheService.CreateBackupCustomDataFile(saveCustomDataDialog.FileName);
-											await _dialogService.ShowMessageAsync("The backup file has been created, you have to re-import your custom data from settings.", MessageDialogStyle.Affirmative);
-										}
-										catch (Exception e)
-										{
-											Logger.Instance.Log(e);
-											await _dialogService.ShowErrorAsync("An error occured while exporting custom data.", MessageDialogStyle.Affirmative);
-										}
+										await _cacheService.CreateBackupCustomDataFile(saveCustomDataDialog.FileName);
+										await _dialogService.ShowMessageAsync("The backup file has been created, you have to re-import your custom data from settings.", MessageDialogStyle.Affirmative);
+									}
+									catch (Exception e)
+									{
+										Logger.Instance.Log(e);
+										await _dialogService.ShowErrorAsync("An error occured while exporting custom data.", MessageDialogStyle.Affirmative);
 									}
 								}
-								// Clear cache even if user didn't want to backup his custom data
-								await _cacheService.ClearDemosFile();
 							}
+							// Clear cache even if user didn't want to backup his custom data
+							await _cacheService.ClearDemosFile();
+							File.Delete(AppSettings.DUMMY_CACHE_FILENAME);
 						}
-
-						// Update the user version
-						Properties.Settings.Default.ApplicationVersion = AppSettings.APP_VERSION.ToString();
-						Properties.Settings.Default.Save();
 
 						// Check for update
 						if (AppSettings.IsInternetConnectionAvailable() && Properties.Settings.Default.EnableCheckUpdate)

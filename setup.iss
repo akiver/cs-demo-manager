@@ -2,6 +2,8 @@
 #define AppName "CSGO Demos Manager"
 #define ExeName "CSGODemosManager.exe"
 #define AppWebsite "http://www.csgo-demos-manager.com"
+; Set it to 1 to clear the cache at startup
+#define ClearCache 1
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
@@ -74,12 +76,21 @@ end;
 
 /////////////////////////////////////////////////////////////////////
 procedure CurStepChanged(CurStep: TSetupStep);
+var clearCache : Integer;
 begin
   if (CurStep=ssInstall) then
   begin
     if (IsUpgrade()) then
     begin
       UnInstallOldVersion();
+    end;
+  end;
+  if (CurStep=ssDone) then
+  clearCache := {#ClearCache};
+  begin
+    if (clearCache = 1) then
+    begin
+       SaveStringToFile(ExpandConstant('{app}') + '\\cache', 'clear', False);
     end;
   end;
 end;
