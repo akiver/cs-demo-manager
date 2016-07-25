@@ -475,7 +475,7 @@ namespace Core.Models
 			}
 		}
 
-		[JsonIgnore]
+		[JsonProperty("type")]
 		public RoundType Type
 		{
 			get { return _type; }
@@ -599,7 +599,7 @@ namespace Core.Models
 		[JsonIgnore]
 		public DateTime EndTickTime => DateTime.Today.AddSeconds(Duration);
 
-		[JsonProperty("type")]
+		[JsonProperty("type_as_string")]
 		public string RoundTypeAsString
 		{
 			get
