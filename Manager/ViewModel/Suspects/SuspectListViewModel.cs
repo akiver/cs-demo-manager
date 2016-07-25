@@ -607,17 +607,17 @@ namespace Manager.ViewModel.Suspects
 				return;
 			}
 
-			Suspects.Clear();
-			SelectedSuspects.Clear();
-
-			List<string> suspectsIdList = await _cacheService.GetSuspectsListFromCache();
-
-			if (suspectsIdList.Any())
+			try
 			{
-				// Split list to 100 elements as Steam API allow to request by 100 SteamID maximum
-				IEnumerable<IEnumerable<string>> ids = suspectsIdList.Batch(100);
-				try
+				Suspects.Clear();
+				SelectedSuspects.Clear();
+
+				List<string> suspectsIdList = await _cacheService.GetSuspectsListFromCache();
+
+				if (suspectsIdList.Any())
 				{
+					// Split list to 100 elements as Steam API allow to request by 100 SteamID maximum
+					IEnumerable<IEnumerable<string>> ids = suspectsIdList.Batch(100);
 					foreach (IEnumerable<string> idList in ids)
 					{
 						List<Suspect> suspects = await _steamService.GetBanStatusForUserList(idList.ToList());
@@ -627,11 +627,11 @@ namespace Manager.ViewModel.Suspects
 						}
 					}
 				}
-				catch (Exception e)
-				{
-					Logger.Instance.Log(e);
-					await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
-				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
 			}
 		}
 
