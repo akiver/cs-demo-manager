@@ -604,7 +604,7 @@ namespace Manager.ViewModel.Demos
 								_cts = new CancellationTokenSource();
 							}
 
-							CurrentDemo = await _demosService.AnalyzeDemo(demo, _cts.Token);
+							_currentDemo = await _demosService.AnalyzeDemo(demo, _cts.Token);
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
 								await _demosService.AnalyzeBannedPlayersAsync(demo);

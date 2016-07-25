@@ -81,8 +81,6 @@ namespace Services.Interfaces
 		/// <returns></returns>
 		Task<Rank> GetLastRankAccountStatsAsync(long steamId);
 
-		
-
 		/// <summary>
 		/// Return demos that contains the SteamID
 		/// </summary>
