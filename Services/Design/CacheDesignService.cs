@@ -319,6 +319,15 @@ namespace Services.Design
 			return Task.FromResult(true);
 		}
 
+		public bool HasDummyCacheFile()
+		{
+			return true;
+		}
+
+		public void DeleteDummyCacheFile()
+		{
+		}
+
 		public Task<List<Demo>> GetDemoListAsync(bool isShowAllFolders, bool limitStatsFolder, string lastFolder)
 		{
 			List<Demo> demos = new List<Demo>();

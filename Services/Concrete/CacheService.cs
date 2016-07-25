@@ -882,5 +882,16 @@ namespace Services.Concrete
 
 			return true;
 		}
+
+		public bool HasDummyCacheFile()
+		{
+			return File.Exists(_pathFolderCache + Path.DirectorySeparatorChar +  AppSettings.DUMMY_CACHE_FILENAME);
+		}
+
+		public void DeleteDummyCacheFile()
+		{
+			string filePath = _pathFolderCache + Path.DirectorySeparatorChar + AppSettings.DUMMY_CACHE_FILENAME;
+			if (File.Exists(filePath)) File.Delete(filePath); 
+		}
 	}
 }

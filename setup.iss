@@ -26,6 +26,9 @@ OutputBaseFilename=csgo-demos-manager-{#AppVer}
 SolidCompression=yes
 UninstallDisplayIcon={app}\{#ExeName}
 
+[Dirs]
+Name: "{userappdata}\{#emit SetupSetting("AppPublisher")}\{#emit SetupSetting("AppName")}"
+
 [code]
 /////////////////////////////////////////////////////////////////////
 function GetUninstallString(): String;
@@ -85,12 +88,12 @@ begin
       UnInstallOldVersion();
     end;
   end;
-  if (CurStep=ssDone) then
+  if (CurStep=ssPostInstall) then
   clearCache := {#ClearCache};
   begin
     if (clearCache = 1) then
     begin
-       SaveStringToFile(ExpandConstant('{app}') + '\\cache', 'clear', False);
+       SaveStringToFile(ExpandConstant('{userappdata}') + '\\AkiVer\\CSGO Demos Manager\\cache', 'clear', False);
     end;
   end;
 end;

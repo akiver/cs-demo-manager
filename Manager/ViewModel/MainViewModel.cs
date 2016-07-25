@@ -114,7 +114,7 @@ namespace Manager.ViewModel
 
 						// Check if the dummy file created from the installer exists
 						// If it's the case it means it's the first time that the app is launched and a cache clear is required
-						if (_cacheService.ContainsDemos() && File.Exists(AppSettings.DUMMY_CACHE_FILENAME))
+						if (_cacheService.ContainsDemos() && _cacheService.HasDummyCacheFile())
 						{
 							var saveCustomData = await _dialogService.ShowMessageAsync("This update requires to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
 							if (saveCustomData == MessageDialogResult.Affirmative)
@@ -141,8 +141,9 @@ namespace Manager.ViewModel
 							}
 							// Clear cache even if user didn't want to backup his custom data
 							await _cacheService.ClearDemosFile();
-							File.Delete(AppSettings.DUMMY_CACHE_FILENAME);
+							_cacheService.DeleteDummyCacheFile();
 						}
+						if (_cacheService.HasDummyCacheFile()) _cacheService.DeleteDummyCacheFile();
 
 						// Check for update
 						if (AppSettings.IsInternetConnectionAvailable() && Properties.Settings.Default.EnableCheckUpdate)

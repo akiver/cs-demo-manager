@@ -145,5 +145,17 @@ namespace Services.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		Task<bool> DeleteVdmFiles();
+
+		/// <summary>
+		/// Check if the dummy cache file exists
+		/// </summary>
+		/// <returns></returns>
+		bool HasDummyCacheFile();
+
+		/// <summary>
+		/// Delete the dummy cache file
+		/// </summary>
+		/// <returns></returns>
+		void DeleteDummyCacheFile();
 	}
 }
