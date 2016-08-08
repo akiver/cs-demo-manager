@@ -1235,7 +1235,7 @@ namespace Services.Concrete.Analyzer
 				AttackerSide = e.Attacker?.Team ?? Side.Spectate,
 				HurtedSteamId = hurted.SteamId,
 				ArmorDamage = e.ArmorDamage,
-				HealthDamage = e.HealthDamage,
+				HealthDamage = e.Player.HP < e.HealthDamage ? e.Player.HP : e.HealthDamage,
 				HitGroup = e.Hitgroup,
 				Weapon = weapon,
 				RoundNumber = CurrentRound.Number
