@@ -1279,10 +1279,12 @@ namespace Services.Concrete.Analyzer
 				if (e.NewTeam == Side.CounterTerrorist)
 				{
 					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(newPlayer));
+					newPlayer.TeamName = Demo.TeamCT.Name;
 				}
 				else
 				{
 					Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(newPlayer));
+					newPlayer.TeamName = Demo.TeamT.Name;
 				}
 				return;
 			}
