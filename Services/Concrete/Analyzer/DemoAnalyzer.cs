@@ -535,7 +535,7 @@ namespace Services.Concrete.Analyzer
 			UpdatePlayerScore();
 			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 
-			if (!IsLastRoundHalf)
+			if (!IsLastRoundHalf || !IsRoundEndOccured)
 			{
 				Application.Current.Dispatcher.Invoke(delegate
 				{
