@@ -818,10 +818,9 @@ namespace Services.Concrete
 		public async Task<bool> UpdateRankInfoAsync(Demo demo, long steamId)
 		{
 			// We don't care about no valve demos
-			if (demo.SourceName != "valve") return false;
+			if (demo.SourceName != "valve" || steamId == 0) return false;
 			// Check if the player is in the demo
-			Player player = demo.Players
-				.FirstOrDefault(p => p.SteamId == steamId);
+			Player player = demo.Players.FirstOrDefault(p => p.SteamId == steamId);
 			if (player == null) return false;
 			// Don't update if demo's date is higher than the known last rank date detected
 			RankInfo lastRankInfo = await GetLastRankInfoAsync();

@@ -1856,7 +1856,7 @@ namespace Manager.ViewModel.Demos
 					if (writeToCache)
 					{
 						await _cacheService.WriteDemoDataCache(demo);
-						await _cacheService.UpdateRankInfoAsync(demo, 0);
+						await _cacheService.UpdateRankInfoAsync(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 					}
 				}
 			}
