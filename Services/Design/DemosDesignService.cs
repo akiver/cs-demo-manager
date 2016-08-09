@@ -21,7 +21,11 @@ namespace Services.Design
 	public class DemosDesignService : IDemosService
 	{
 		public string DownloadFolderPath { get; set; }
+
 		public long SelectedStatsAccountSteamId { get; set; }
+
+		public bool ShowOnlyAccountDemos { get; set; }
+
 		public bool IgnoreLaterBan { get; set; }
 
 		public Task<Demo> GetDemoHeaderAsync(string demoFilePath)
@@ -29,7 +33,7 @@ namespace Services.Design
 			return Task.FromResult(new Demo());
 		}
 
-		public Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false, long accountSteamId = 0)
+		public Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
 		{
 			List<Demo> demos = new List<Demo>();
 

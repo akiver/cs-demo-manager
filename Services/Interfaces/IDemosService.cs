@@ -14,7 +14,15 @@ namespace Services.Interfaces
 		/// </summary>
 		string DownloadFolderPath { get; set; }
 
+		/// <summary>
+		/// Selected account SteamID to focus on
+		/// </summary>
 		long SelectedStatsAccountSteamId { get; set; }
+
+		/// <summary>
+		/// Flag to focus on selected SteamID
+		/// </summary>
+		bool ShowOnlyAccountDemos { get; set; }
 
 		bool IgnoreLaterBan { get; set; }
 
@@ -31,9 +39,8 @@ namespace Services.Interfaces
 		/// <param name="folders"></param>
 		/// <param name="currentDemos"></param>
 		/// <param name="limit"></param>
-		/// <param name="accountSteamId"></param>
 		/// <returns></returns>
-		Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false, long accountSteamId = 0);
+		Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false);
 
 		/// <summary>
 		/// Return the whole demo

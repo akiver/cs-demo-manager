@@ -20,6 +20,7 @@ namespace Services.Concrete
 
 		public Task<Demo> MapSelectedAccountValues(Demo demo, long accountSteamId = 0)
 		{
+			if (accountSteamId == 0) return Task.FromResult(demo);
 			demo.WinStatus = GetWinStatus(demo, accountSteamId);
 
 			Player player = demo.Players.FirstOrDefault(p => p.SteamId == accountSteamId);

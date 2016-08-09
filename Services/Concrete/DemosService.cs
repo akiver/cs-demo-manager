@@ -27,6 +27,8 @@ namespace Services.Concrete
 
 		public long SelectedStatsAccountSteamId { get; set; }
 
+		public bool ShowOnlyAccountDemos { get; set; } = false;
+
 		public bool IgnoreLaterBan { get; set; }
 
 		private readonly CacheService _cacheService = new CacheService();
@@ -100,15 +102,10 @@ namespace Services.Concrete
 			return demo;
 		}
 
-		public async Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false, long accountSteamId = 0)
+		public async Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
 		{
 			List<Demo> demos = new List<Demo>();
 			List<Demo> demoKeeped = new List<Demo>();
-
-			// get all demos
-			// filter on account if needed
-			// sort by date
-			// keep the 50 if limit
 
 			if (folders.Count > 0)
 			{
@@ -120,29 +117,29 @@ namespace Services.Concrete
 						foreach (string file in files)
 						{
 							if (file.Contains("myassignedcase")) continue;
-							var demo = await GetDemoHeaderAsync(file);
+							Demo demo = await GetDemoHeaderAsync(file);
 							if (demo != null)
 							{
-								if (!limit || accountSteamId != 0) demo = await GetDemoDataAsync(demo);
-								if (currentDemos != null)
+								if (currentDemos != null && currentDemos.Contains(demo))
+									continue;
+
+								demo = await GetDemoDataAsync(demo);
+
+								if (ShowOnlyAccountDemos && SelectedStatsAccountSteamId != 0 && demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) == null)
+									continue;
+
+								if (currentDemos == null || !currentDemos.Contains(demo))
 								{
-									if (accountSteamId != 0 && demo.Players.FirstOrDefault(p => p.SteamId == accountSteamId) == null)
-										continue;
-									if (!currentDemos.Contains(demo)) demos.Add(demo);
-								}
-								else
-								{
-									if (accountSteamId != 0 && demo.Players.FirstOrDefault(p => p.SteamId == accountSteamId) == null)
-										continue;
-									if (!demos.Contains(demo)) demos.Add(demo);
+									demos.Add(demo);
 								}
 							}
 						}
+						// sort by date
+						demos.Sort((d1, d2) => d2.Date.CompareTo(d1.Date));
 						if (limit)
 						{
-							// sort by date and keep the 50 first
-							demos.Sort((d1, d2) => d2.Date.CompareTo(d1.Date));
-							demoKeeped = demos.Take(50).ToList();
+							// keep the 50 first
+							demoKeeped = demos.Take(AppSettings.DEMO_PAGE_COUNT).ToList();
 							for (int i = 0; i < demoKeeped.Count; i++)
 							{
 								demoKeeped[i] = await GetDemoDataAsync(demoKeeped[i]);

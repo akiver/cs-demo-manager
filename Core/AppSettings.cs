@@ -21,6 +21,10 @@ namespace Core
 		public const string CORE_URI = "pack://application:,,,/csgodm.core;component/";
 		// Dummy file name created from the installer to clear data cache at the 1st start of the app
 		public const string DUMMY_CACHE_FILENAME = "cache";
+		/// <summary>
+		/// Number of demos displayed by page
+		/// </summary>
+		public const int DEMO_PAGE_COUNT = 50;
 
 		/// <summary>
 		/// Return the Steam exe path from the registry

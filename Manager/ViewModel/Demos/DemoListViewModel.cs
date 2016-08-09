@@ -41,8 +41,6 @@ namespace Manager.ViewModel.Demos
 
 		private const int MAX_ANALYZE_DEMO_COUNT = 4;
 
-		private const int DEMO_PAGE_COUNT = 50;
-
 		private readonly IDemosService _demosService;
 
 		private readonly DialogService _dialogService;
@@ -975,6 +973,7 @@ namespace Manager.ViewModel.Demos
 						async isChecked =>
 						{
 							new ViewModelLocator().Settings.IsShowOnlyAccountDemos = isChecked;
+							_demosService.ShowOnlyAccountDemos = isChecked;
 							IsBusy = true;
 							HasRing = true;
 							IsCancellable = false;
@@ -1450,10 +1449,11 @@ namespace Manager.ViewModel.Demos
 							folders = Folders.ToList();
 						}
 
-						var demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true, Properties.Settings.Default.SelectedStatsAccountSteamID);
+						List<Demo> demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
 
-						foreach (var demo in demos)
+						foreach (Demo demo in demos)
 						{
+							await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 							Demos.Add(demo);
 						}
 
@@ -1614,6 +1614,7 @@ namespace Manager.ViewModel.Demos
 			_cacheService = cacheService;
 			_excelService = excelService;
 			_accountStatsService = accountStatsService;
+			_demosService.ShowOnlyAccountDemos = Properties.Settings.Default.ShowOnlyAccountDemos;
 
 			if (IsInDesignModeStatic)
 			{
@@ -1749,7 +1750,7 @@ namespace Manager.ViewModel.Demos
 
 		private async Task<bool> RefreshSelectedDemos()
 		{
-			if (SelectedDemos.Count == Demos.Count && Demos.Count == DEMO_PAGE_COUNT)
+			if (SelectedDemos.Count == Demos.Count && Demos.Count == AppSettings.DEMO_PAGE_COUNT)
 			{
 				var isAllAnalyze = await _dialogService.ShowAnalyzeAllDemosAsync();
 				if (isAllAnalyze == MessageDialogResult.FirstAuxiliary) return false;
@@ -1846,6 +1847,7 @@ namespace Manager.ViewModel.Demos
 			try
 			{
 				await _demosService.AnalyzeDemo(demo, token);
+				await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 				if (_cts != null)
 				{
 					if (AppSettings.IsInternetConnectionAvailable())
@@ -1938,23 +1940,10 @@ namespace Manager.ViewModel.Demos
 
 				Demos.Clear();
 
-				long accountId = Properties.Settings.Default.SelectedStatsAccountSteamID;
-				List<Demo> demos;
-				if (!Properties.Settings.Default.ShowOnlyAccountDemos)
+				List<Demo> demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
+				foreach (Demo demo in demos)
 				{
-					demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
-				}
-				else
-				{
-					demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true, accountId);
-				}
-				
-				foreach (var demo in demos)
-				{
-					if (accountId != 0)
-					{
-						await _accountStatsService.MapSelectedAccountValues(demo, accountId);
-					}
+					await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 					Demos.Add(demo);
 				}
 			}
