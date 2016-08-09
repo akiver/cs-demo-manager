@@ -43,7 +43,6 @@
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+K" />
 		<KeyBinding Command="{Binding AnalyzeDemoCommand}"
-					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+S" />
 		<KeyBinding Command="{Binding DemoList.WatchDemoCommand, Source={StaticResource Locator}}"
 					CommandParameter="{Binding CurrentDemo}"
@@ -119,7 +118,6 @@
 				</Button>
 				<Button Grid.Column="1" Margin="5" Width="90" Height="30"
 						Command="{Binding AnalyzeDemoCommand}"
-						CommandParameter="{Binding CurrentDemo}"
 						Style="{StaticResource GeneralButtonStyle}"
 						ToolTip="Analyze (CTRL+S)">
 					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">

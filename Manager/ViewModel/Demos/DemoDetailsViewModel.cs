@@ -76,7 +76,7 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _backToHomeCommand;
 
-		private RelayCommand<Demo> _analyzeDemoCommand;
+		private RelayCommand _analyzeDemoCommand;
 
 		private RelayCommand<int> _goToRoundCommand;
 
@@ -584,13 +584,13 @@ namespace Manager.ViewModel.Demos
 		/// <summary>
 		/// Command to start current demo analysis
 		/// </summary>
-		public RelayCommand<Demo> AnalyzeDemoCommand
+		public RelayCommand AnalyzeDemoCommand
 		{
 			get
 			{
 				return _analyzeDemoCommand
-					?? (_analyzeDemoCommand = new RelayCommand<Demo>(
-					async demo =>
+					?? (_analyzeDemoCommand = new RelayCommand(
+					async () =>
 					{
 						NotificationMessage = "Analyzing...";
 						IsAnalyzing = true;
@@ -604,17 +604,17 @@ namespace Manager.ViewModel.Demos
 								_cts = new CancellationTokenSource();
 							}
 
-							_currentDemo = await _demosService.AnalyzeDemo(demo, _cts.Token);
+							CurrentDemo = await _demosService.AnalyzeDemo(CurrentDemo, _cts.Token);
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
-								await _demosService.AnalyzeBannedPlayersAsync(demo);
+								await _demosService.AnalyzeBannedPlayersAsync(CurrentDemo);
 							}
-							await _cacheService.WriteDemoDataCache(demo);
+							await _cacheService.WriteDemoDataCache(CurrentDemo);
 						}
 						catch (Exception e)
 						{
 							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync("An error occured while analyzing the demo " + demo.Name + "." +
+							await _dialogService.ShowErrorAsync("An error occured while analyzing the demo " + CurrentDemo.Name + "." +
 																"The demo may be too old, if not please send an email with the attached demo." +
 																"You can find more information on http://csgo-demos-manager.com.", MessageDialogStyle.Affirmative);
 						}
@@ -623,7 +623,7 @@ namespace Manager.ViewModel.Demos
 						HasNotification = false;
 						CommandManager.InvalidateRequerySuggested();
 					},
-					demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					() => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
