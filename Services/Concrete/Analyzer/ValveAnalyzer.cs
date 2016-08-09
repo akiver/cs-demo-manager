@@ -306,6 +306,14 @@ namespace Services.Concrete.Analyzer
 			if (player == null) return;
 			player.IsConnected = true;
 			player.Side = e.NewTeam;
+			// add the player to its team if he is not
+			if (!Demo.TeamCT.Players.Contains(player) && !Demo.TeamT.Players.Contains(player))
+			{
+				if (e.NewTeam == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(player))
+					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(player));
+				if (e.NewTeam == Side.Terrorist && !Demo.TeamT.Players.Contains(player))
+					Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(player));
+			}
 		}
 
 		#endregion
