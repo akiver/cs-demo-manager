@@ -1979,7 +1979,8 @@ namespace Services.Concrete.Analyzer
 				if (IsOvertime) Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
 			}
 
-			Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
+			if (Parser.TScore != Parser.CTScore)
+				Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
 
 			if (Demo.Players.Any())
 			{

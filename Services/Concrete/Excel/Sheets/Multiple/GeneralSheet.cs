@@ -91,7 +91,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeam2);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeam1);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeam2);
-					SetCellValue(row, columnNumber++, CellType.String, demo.Winner.Name);
+					SetCellValue(row, columnNumber++, CellType.String, demo.Winner != null ? demo.Winner.Name : string.Empty);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.KillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.AssistCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, demo.FiveKillCount);

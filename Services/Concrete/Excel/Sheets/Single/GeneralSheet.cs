@@ -88,7 +88,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreFirstHalfTeam2);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeam1);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeam2);
-				SetCellValue(row, columnNumber++, CellType.String, Demo.Winner.Name);
+				SetCellValue(row, columnNumber++, CellType.String, Demo.Winner != null ? Demo.Winner.Name : string.Empty);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.KillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.AssistCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.FiveKillCount);

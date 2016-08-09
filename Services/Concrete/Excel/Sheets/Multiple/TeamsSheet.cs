@@ -171,6 +171,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 
 		private static void UpdateWinner(Demo demo, Team team)
 		{
+			if (demo.Winner == null) return;
 			if (demo.Winner.Equals(team))
 			{
 				team.WinCount++;
