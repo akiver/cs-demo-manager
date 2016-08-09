@@ -1,4 +1,5 @@
-﻿using DemoInfo;
+﻿using Core.Models.Serialization;
+using DemoInfo;
 using Newtonsoft.Json;
 
 namespace Core.Models.Events
@@ -8,9 +9,11 @@ namespace Core.Models.Events
 		public PlayerHurtedEvent(int tick, float seconds) : base(tick, seconds) { }
 
 		[JsonProperty("hurted_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long HurtedSteamId { get; set; }
 
 		[JsonProperty("attacker_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long AttackerSteamId { get; set; }
 
 		[JsonProperty("attacker_side")]

@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
 	public class BombDefusedEvent : BaseEvent
 	{
 		[JsonProperty("defuser_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long DefuserSteamId { get; set; }
 
 		[JsonProperty("defuser_name")]

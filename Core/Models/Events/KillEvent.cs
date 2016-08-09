@@ -1,16 +1,20 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
 	public class KillEvent : BaseEvent
 	{
 		[JsonProperty("killer_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long KillerSteamId { get; set; }
 
 		[JsonProperty("killed_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long KilledSteamId { get; set; }
 
 		[JsonProperty("assister_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long AssisterSteamId { get; set; }
 
 		[JsonProperty("weapon")]

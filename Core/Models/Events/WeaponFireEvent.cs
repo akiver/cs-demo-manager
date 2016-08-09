@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
@@ -8,6 +9,7 @@ namespace Core.Models.Events
 		public HeatmapPoint Point { get; set; }
 
 		[JsonProperty("shooter_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long ShooterSteamId { get; set; }
 
 		[JsonProperty("shooter_name")]

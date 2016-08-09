@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using Core.Models.Events;
+using Core.Models.Serialization;
 
 namespace Core.Models
 {
@@ -306,6 +307,7 @@ namespace Core.Models
 		#region Accessors
 
 		[JsonProperty("steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long SteamId
 		{
 			get { return _steamId; }

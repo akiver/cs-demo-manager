@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
 	public class NadeBaseEvent : BaseEvent
 	{
 		[JsonProperty("thrower_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long ThrowerSteamId { get; set; }
 
 		[JsonProperty("thrower_name")]

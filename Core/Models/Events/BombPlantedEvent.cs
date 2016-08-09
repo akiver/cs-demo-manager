@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
 	public class BombPlantedEvent : BaseEvent
 	{
 		[JsonProperty("planter_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long PlanterSteamId { get; set; }
 
 		[JsonProperty("planter_name")]

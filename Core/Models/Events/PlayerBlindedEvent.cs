@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
 	public class PlayerBlindedEvent : BaseEvent
 	{
 		[JsonProperty("thrower_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long ThrowerSteamId { get; set; }
 
 		[JsonProperty("thrower_name")]
@@ -14,6 +16,7 @@ namespace Core.Models.Events
 		public string ThrowerTeamName { get; set; }
 
 		[JsonProperty("victim_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long VictimSteamId { get; set; }
 
 		[JsonProperty("victim_name")]

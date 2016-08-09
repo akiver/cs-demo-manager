@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
@@ -8,6 +9,7 @@ namespace Core.Models.Events
 		public string Site { get; set; }
 
 		[JsonProperty("planter_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long PlanterSteamId { get; set; }
 
 		[JsonProperty("planter_name")]

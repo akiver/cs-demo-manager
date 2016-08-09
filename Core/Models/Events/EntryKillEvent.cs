@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Core.Models.Serialization;
+using Newtonsoft.Json;
 
 namespace Core.Models.Events
 {
@@ -8,6 +9,7 @@ namespace Core.Models.Events
 		public int RoundNumber { get; set; }
 
 		[JsonProperty("killer_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long KillerSteamId { get; set; }
 
 		[JsonProperty("killer_name")]
@@ -17,6 +19,7 @@ namespace Core.Models.Events
 		public DemoInfo.Team KillerSide { get; set; }
 
 		[JsonProperty("killed_steamid")]
+		[JsonConverter(typeof(LongToStringConverter))]
 		public long KilledSteamId { get; set; }
 
 		[JsonProperty("killed_name")]

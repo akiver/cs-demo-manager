@@ -77,6 +77,8 @@
     <Compile Include="Models\Maps\Tulip.cs" />
     <Compile Include="Models\protobuf\GCMessages.cs" />
     <Compile Include="Models\protobuf\SteamMessages.cs" />
+    <Compile Include="Models\Serialization\LongListToStringListConverter.cs" />
+    <Compile Include="Models\Serialization\LongToStringConverter.cs" />
     <Compile Include="Models\Stuff.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
