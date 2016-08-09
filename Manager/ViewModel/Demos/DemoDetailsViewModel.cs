@@ -238,7 +238,7 @@ namespace Manager.ViewModel.Demos
 						NotificationMessage = "Loading...";
 						HasNotification = true;
 						// reload whole demo data if an account was selected and the current page was the demos list
-						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView)
+						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(CurrentDemo))
 							_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 						await UpdateDemoFromAppArgument();
 						await LoadData();
