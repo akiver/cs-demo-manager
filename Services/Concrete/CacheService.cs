@@ -73,6 +73,11 @@ namespace Services.Concrete
 		/// </summary>
 		private const string PLAYER_BLINDED_FILE_SUFFIX = "_players_blinded.json";
 
+		/// <summary>
+		/// Filename containing demos basic data
+		/// </summary>
+		private const string FILENAME_DEMOS_BASIC_DATA = "demos.json";
+
 		#endregion
 
 		public CacheService()
@@ -86,6 +91,8 @@ namespace Services.Concrete
 				File.Create(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME);
 			if (!File.Exists(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME))
 				File.Create(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME);
+			string demoBasicDataFilePath = GetDemoBasicFilePath();
+			if (!File.Exists(demoBasicDataFilePath)) File.Create(demoBasicDataFilePath);
 #if DEBUG
 
 			_settingsJson.Formatting = Formatting.Indented;
@@ -182,11 +189,11 @@ namespace Services.Concrete
 		/// <summary>
 		/// Check if the JSON file for the demo exist
 		/// </summary>
-		/// <param name="demo"></param>
+		/// <param name="demoId"></param>
 		/// <returns></returns>
-		public bool HasDemoInCache(Demo demo)
+		public bool HasDemoInCache(string demoId)
 		{
-			string pathDemoFileJson = GetDemoFilePath(demo.Id);
+			string pathDemoFileJson = GetDemoFilePath(demoId);
 			return File.Exists(pathDemoFileJson);
 		}
 
@@ -238,6 +245,8 @@ namespace Services.Concrete
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.PlayerBlinded, _settingsJson));
 				File.WriteAllText(pathDemoPlayerBlindedFileJson, json);
 				demo.PlayerBlinded.Clear();
+				// save basic demo data
+				await AddDemoBasicDataAsync(demo);
 
 				// Save general demo's data
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, _settingsJson));
@@ -891,6 +900,47 @@ namespace Services.Concrete
 		{
 			string filePath = _pathFolderCache + Path.DirectorySeparatorChar + AppSettings.DUMMY_CACHE_FILENAME;
 			if (File.Exists(filePath)) File.Delete(filePath); 
+		}
+
+		public async Task<DemoBasicData> AddDemoBasicDataAsync(Demo demo)
+		{
+			string filePath = GetDemoBasicFilePath();
+			List<DemoBasicData> data = await GetDemoBasicDataAsync();
+			DemoBasicData demoData = new DemoBasicData
+			{
+				Id = demo.Id,
+				Date = demo.Date,
+				SteamIdList = demo.Players.Select(player => player.SteamId).ToList()
+			};
+			if (data.Contains(demoData)) data.Remove(demoData);
+			data.Add(demoData);
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(data));
+			File.WriteAllText(filePath, json);
+
+			return demoData;
+		}
+
+		public async Task<List<DemoBasicData>> GetDemoBasicDataAsync()
+		{
+			List<DemoBasicData> data = new List<DemoBasicData>();
+			string filePath = GetDemoBasicFilePath();
+			if (!File.Exists(filePath)) return data;
+			string json = File.ReadAllText(filePath);
+			try
+			{
+				data = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<DemoBasicData>>(json));
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+			
+			return data ?? new List<DemoBasicData>();
+		}
+
+		private string GetDemoBasicFilePath()
+		{
+			return _pathFolderCache + Path.DirectorySeparatorChar + FILENAME_DEMOS_BASIC_DATA;
 		}
 	}
 }

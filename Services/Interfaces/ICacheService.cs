@@ -9,7 +9,7 @@ namespace Services.Interfaces
 {
 	public interface ICacheService
 	{
-		bool HasDemoInCache(Demo demo);
+		bool HasDemoInCache(string demoId);
 
 		Task<Demo> GetDemoDataFromCache(string demoId);
 
@@ -157,5 +157,18 @@ namespace Services.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		void DeleteDummyCacheFile();
+
+		/// <summary>
+		/// Add DemoBasicData to cache
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<DemoBasicData> AddDemoBasicDataAsync(Demo demo);
+
+		/// <summary>
+		/// Return DemoBasicData demos list
+		/// </summary>
+		/// <returns></returns>
+		Task<List<DemoBasicData>> GetDemoBasicDataAsync();
 	}
 }

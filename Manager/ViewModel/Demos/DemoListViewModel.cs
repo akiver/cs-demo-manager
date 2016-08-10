@@ -574,7 +574,7 @@ namespace Manager.ViewModel.Demos
 											{
 												Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async demo =>
 												{
-													if (!_cacheService.HasDemoInCache(demo))
+													if (!_cacheService.HasDemoInCache(demo.Id))
 													{
 														await AnalyzeDemoAsync(demo, _cts.Token);
 													}
@@ -626,7 +626,7 @@ namespace Manager.ViewModel.Demos
 													Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async demo =>
 													{
 														string exportFilePath = directoryPath + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx";
-														if (!_cacheService.HasDemoInCache(demo))
+														if (!_cacheService.HasDemoInCache(demo.Id))
 														{
 															int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
 															if (analyzeResult == 1 && _cts != null)
@@ -678,7 +678,7 @@ namespace Manager.ViewModel.Demos
 									IsBusy = true;
 									HasRing = true;
 									HasNotification = true;
-									if (!_cacheService.HasDemoInCache(SelectedDemo))
+									if (!_cacheService.HasDemoInCache(SelectedDemo.Id))
 									{
 										NotificationMessage = "Analyzing " + SelectedDemo.Name + "for export...";
 										IsCancellable = true;
@@ -952,10 +952,7 @@ namespace Manager.ViewModel.Demos
 						isChecked =>
 						{
 							var settingsViewModel = new ViewModelLocator().Settings;
-							if (!isChecked)
-							{
-								settingsViewModel.SelectedStatsAccount = settingsViewModel.Accounts[0];
-							}
+							settingsViewModel.SelectedStatsAccount = !isChecked ? settingsViewModel.Accounts[0] : null;
 						},
 						isChecked => !IsBusy && new ViewModelLocator().Settings.Accounts.Any()));
 			}

@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="AppSettings.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Models\DemoBasicData.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Maps\Cache.cs" />
     <Compile Include="Models\Maps\Cbble.cs" />

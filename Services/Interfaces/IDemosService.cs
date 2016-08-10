@@ -50,6 +50,13 @@ namespace Services.Interfaces
 		Task<Demo> GetDemoDataAsync(Demo demo);
 
 		/// <summary>
+		/// Retrurn demo's data by demo's ID
+		/// </summary>
+		/// <param name="demoId"></param>
+		/// <returns></returns>
+		Task<Demo> GetDemoDataByIdAsync(string demoId);
+
+		/// <summary>
 		/// Analyze the demo passed on parameter
 		/// </summary>
 		/// <param name="demo"></param>

@@ -271,7 +271,6 @@ namespace Manager.ViewModel
 				if (value == null)
 				{
 					Settings.Default.SelectedStatsAccountSteamID = 0;
-					Settings.Default.Save();
 					_demosService.SelectedStatsAccountSteamId = 0;
 					_accountStatsService.SelectedStatsAccountSteamId = 0;
 				}
@@ -280,10 +279,10 @@ namespace Manager.ViewModel
 					long steamId;
 					long.TryParse(value.SteamId, out steamId);
 					Settings.Default.SelectedStatsAccountSteamID = steamId;
-					Settings.Default.Save();
 					_demosService.SelectedStatsAccountSteamId = steamId;
 					_accountStatsService.SelectedStatsAccountSteamId = steamId;
 				}
+				Settings.Default.Save();
 				RaisePropertyChanged(() => ShowOnlyAccountStats);
 				Messenger.Default.Send(new SelectedAccountChangedMessage());
 			}

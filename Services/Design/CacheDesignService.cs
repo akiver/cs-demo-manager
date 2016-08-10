@@ -13,7 +13,7 @@ namespace Services.Design
 {
 	public class CacheDesignService : ICacheService
 	{
-		public bool HasDemoInCache(Demo demo)
+		public bool HasDemoInCache(string demoId)
 		{
 			return true;
 		}
@@ -326,6 +326,16 @@ namespace Services.Design
 
 		public void DeleteDummyCacheFile()
 		{
+		}
+
+		public Task<DemoBasicData> AddDemoBasicDataAsync(Demo demo)
+		{
+			return Task.FromResult(new DemoBasicData());
+		}
+
+		public Task<List<DemoBasicData>> GetDemoBasicDataAsync()
+		{
+			return Task.FromResult(new List<DemoBasicData>());
 		}
 
 		public Task<List<Demo>> GetDemoListAsync(bool isShowAllFolders, bool limitStatsFolder, string lastFolder)

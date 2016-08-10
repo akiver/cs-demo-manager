@@ -238,7 +238,7 @@ namespace Manager.ViewModel.Demos
 						NotificationMessage = "Loading...";
 						HasNotification = true;
 						// reload whole demo data if an account was selected and the current page was the demos list
-						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(CurrentDemo))
+						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(CurrentDemo.Id))
 							_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 						await UpdateDemoFromAppArgument();
 						await LoadData();
@@ -411,7 +411,7 @@ namespace Manager.ViewModel.Demos
 					?? (_goToDemoFlashbangsCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (!_cacheService.HasDemoInCache(demo))
+						if (!_cacheService.HasDemoInCache(demo.Id))
 						{
 							await _dialogService.ShowMessageAsync("You have to analyze this demo first.", MessageDialogStyle.Affirmative);
 							return;
@@ -433,7 +433,7 @@ namespace Manager.ViewModel.Demos
 					?? (_showDemoStuffsCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (!_cacheService.HasDemoInCache(demo))
+						if (!_cacheService.HasDemoInCache(demo.Id))
 						{
 							await _dialogService.ShowMessageAsync("You have to analyze this demo first.", MessageDialogStyle.Affirmative);
 							return;
@@ -554,7 +554,7 @@ namespace Manager.ViewModel.Demos
 							{
 								try
 								{
-									if (!_cacheService.HasDemoInCache(CurrentDemo))
+									if (!_cacheService.HasDemoInCache(CurrentDemo.Id))
 									{
 										IsAnalyzing = true;
 										HasNotification = true;
@@ -960,7 +960,7 @@ namespace Manager.ViewModel.Demos
 			HasNotification = true;
 			IsAnalyzing = true;
 			NotificationMessage = "Loading...";
-			if (SelectedPlayerStats == null && _cacheService.HasDemoInCache(CurrentDemo))
+			if (SelectedPlayerStats == null && _cacheService.HasDemoInCache(CurrentDemo.Id))
 			{
 				Demo demo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 				CurrentDemo.Rounds.Clear();
@@ -1026,7 +1026,7 @@ namespace Manager.ViewModel.Demos
 			if (!string.IsNullOrEmpty(App.DemoFilePath))
 			{
 				CurrentDemo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
-				if (_cacheService.HasDemoInCache(CurrentDemo))
+				if (_cacheService.HasDemoInCache(CurrentDemo.Id))
 				{
 					_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 					RaisePropertyChanged(() => CurrentDemo);

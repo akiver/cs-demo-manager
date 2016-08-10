@@ -144,6 +144,11 @@ namespace Services.Design
 			return Task.FromResult(newDemo);
 		}
 
+		public Task<Demo> GetDemoDataByIdAsync(string demoId)
+		{
+			return Task.FromResult(new Demo());
+		}
+
 		public Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)
 		{
 			Random random = new Random();

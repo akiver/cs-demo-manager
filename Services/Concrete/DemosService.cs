@@ -93,22 +93,44 @@ namespace Services.Concrete
 		public async Task<Demo> GetDemoDataAsync(Demo demo)
 		{
 			// If demo is in cache we retrieve its data
-			bool demosIsCached = _cacheService.HasDemoInCache(demo);
+			bool demosIsCached = _cacheService.HasDemoInCache(demo.Id);
 			if (demosIsCached)
 			{
 				demo = await _cacheService.GetDemoDataFromCache(demo.Id);
 				demo.Source = Source.Factory(demo.SourceName);
 			}
+
+			return demo;
+		}
+
+		public async Task<Demo> GetDemoDataByIdAsync(string demoId)
+		{
+			Demo demo = new Demo
+			{
+				Id = demoId
+			};
+			bool demosIsCached = _cacheService.HasDemoInCache(demoId);
+			if (demosIsCached)
+			{
+				demo = await _cacheService.GetDemoDataFromCache(demoId);
+				demo.Source = Source.Factory(demo.SourceName);
+			}
+
 			return demo;
 		}
 
 		public async Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
 		{
+			// Demos list returned
 			List<Demo> demos = new List<Demo>();
-			List<Demo> demoKeeped = new List<Demo>();
-
+			// Contains all demos header data
+			List<Demo> demoHeaderList = new List<Demo>();
 			if (folders.Count > 0)
 			{
+				// retrieve basic demos data
+				List<DemoBasicData> demoBasicDataList = await _cacheService.GetDemoBasicDataAsync();
+				// contains possible DemoBasicData that will be keeped
+				List<DemoBasicData> tempDemoBasicDataList = new List<DemoBasicData>();
 				foreach (string folder in folders)
 				{
 					if (Directory.Exists(folder))
@@ -120,36 +142,57 @@ namespace Services.Concrete
 							Demo demo = await GetDemoHeaderAsync(file);
 							if (demo != null)
 							{
+								// Skip if the demo is already in the current demos list
 								if (currentDemos != null && currentDemos.Contains(demo))
 									continue;
-
-								demo = await GetDemoDataAsync(demo);
-
-								if (ShowOnlyAccountDemos && SelectedStatsAccountSteamId != 0 && demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) == null)
-									continue;
-
-								if (currentDemos == null || !currentDemos.Contains(demo))
-								{
-									demos.Add(demo);
-								}
-							}
-						}
-						// sort by date
-						demos.Sort((d1, d2) => d2.Date.CompareTo(d1.Date));
-						if (limit)
-						{
-							// keep the 50 first
-							demoKeeped = demos.Take(AppSettings.DEMO_PAGE_COUNT).ToList();
-							for (int i = 0; i < demoKeeped.Count; i++)
-							{
-								demoKeeped[i] = await GetDemoDataAsync(demoKeeped[i]);
+								demoHeaderList.Add(demo);
 							}
 						}
 					}
 				}
+
+				// Process each demo header
+				foreach (Demo demo in demoHeaderList)
+				{
+					// retrieve basic demo data
+					DemoBasicData demoData = demoBasicDataList.FirstOrDefault(d => d.Id == demo.Id);
+					if (demoData == null)
+					{
+						// if basic data are not found, add it to cache
+						demoData = await _cacheService.AddDemoBasicDataAsync(demo);
+					}
+					// Skip if the player isn't in the demo
+					if (ShowOnlyAccountDemos && SelectedStatsAccountSteamId != 0
+					    && !demoData.SteamIdList.Contains(SelectedStatsAccountSteamId))
+						continue;
+
+					// store basic data to filter on date quickly
+					tempDemoBasicDataList.Add(demoData);
+				}
+
+				tempDemoBasicDataList.Sort((d1, d2) => d2.Date.CompareTo(d1.Date));
+				if (limit) tempDemoBasicDataList = tempDemoBasicDataList.Take(AppSettings.DEMO_PAGE_COUNT).ToList();
+
+				foreach (DemoBasicData basicData in tempDemoBasicDataList)
+				{
+					Demo demo;
+					bool hasDemoInCache = _cacheService.HasDemoInCache(basicData.Id);
+					if (hasDemoInCache)
+					{
+						demo = await GetDemoDataByIdAsync(basicData.Id);
+					}
+					else
+					{
+						demo = demoHeaderList.First(d => d.Id == basicData.Id);
+					}
+					if (currentDemos == null || !currentDemos.Contains(demo))
+					{
+						demos.Add(demo);
+					}
+				}
 			}
 
-			return limit ? demoKeeped : demos;
+			return demos;
 		}
 
 		public async Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)
