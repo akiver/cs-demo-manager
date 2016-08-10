@@ -19,6 +19,32 @@ namespace Core.Models
 		PISTOL_ROUND = 4
 	}
 
+	public static class RoundExtenstions
+	{
+		public static string AsString(this RoundEndReason reason)
+		{
+			switch (reason)
+			{
+				case RoundEndReason.CTWin:
+					return AppSettings.CT_WIN;
+				case RoundEndReason.TerroristWin:
+					return AppSettings.T_WIN;
+				case RoundEndReason.TargetBombed:
+					return AppSettings.BOMB_EXPLODED;
+				case RoundEndReason.BombDefused:
+					return AppSettings.BOMB_DEFUSED;
+				case RoundEndReason.CTSurrender:
+					return AppSettings.CT_SURRENDER;
+				case RoundEndReason.TerroristsSurrender:
+					return AppSettings.T_SURRENDER;
+				case RoundEndReason.TargetSaved:
+					return AppSettings.TARGET_SAVED;
+				default:
+					return AppSettings.UNKNOWN;
+			}
+		}
+	}
+
 	public class Round : ObservableObject
 	{
 		#region Properties
@@ -285,15 +311,12 @@ namespace Core.Models
 			set { Set(() => EndTimeSeconds, ref _timeEndSeconds, value); }
 		}
 
-		[JsonIgnore]
+		[JsonProperty("end_reason")]
+		[JsonConverter(typeof(EndReasonToStringConverter))]
 		public RoundEndReason EndReason
 		{
 			get { return _endReason; }
-			set
-			{
-				Set(() => EndReason, ref _endReason, value);
-				RaisePropertyChanged(() => EndReasonAsString);
-			}
+			set { Set(() => EndReason, ref _endReason, value); }
 		}
 
 		[JsonProperty("kills", IsReference = false)]
@@ -543,33 +566,6 @@ namespace Core.Models
 		{
 			get { return _incendiaryThrownCount; }
 			set { Set(() => IncendiaryThrownCount, ref _incendiaryThrownCount, value); }
-		}
-
-		[JsonProperty("end_reason")]
-		public string EndReasonAsString
-		{
-			get
-			{
-				switch (EndReason)
-				{
-					case RoundEndReason.CTWin:
-						return "Counter-Terrorists win";
-					case RoundEndReason.TerroristWin:
-						return "Terrorists win";
-					case RoundEndReason.TargetBombed:
-						return "Bomb exploded";
-					case RoundEndReason.BombDefused:
-						return "Bomb defused";
-					case RoundEndReason.CTSurrender:
-						return "CT surrender";
-					case RoundEndReason.TerroristsSurrender:
-						return "T surrender";
-					case RoundEndReason.TargetSaved:
-						return "Time over";
-					default:
-						return "Unknown";
-				}
-			}
 		}
 
 		[JsonProperty("players_hurted", IsReference = false)]

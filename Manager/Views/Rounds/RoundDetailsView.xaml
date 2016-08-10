@@ -18,6 +18,7 @@
 				<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<converters:SideToStringConverter x:Key="SideToStringConverter" />
+			<converters:RoundEndReasonToStringConverter x:Key="RoundEndReasonToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -143,8 +144,12 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Reason : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
-						<TextBlock Grid.Column="1" Text="{Binding CurrentRound.EndReasonAsString}" Style="{StaticResource ValueGeneralInfoDemo}"/>
+						<TextBlock Text="Reason : "
+								   Grid.Column="0"
+								   Style="{StaticResource LabelGeneralInfoDemo}"/>
+						<TextBlock Grid.Column="1"
+								   Text="{Binding CurrentRound.EndReason, Converter={StaticResource RoundEndReasonToStringConverter}}"
+								   Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>

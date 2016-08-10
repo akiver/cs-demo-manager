@@ -145,6 +145,7 @@
     <Compile Include="Converters\MouseGestureExtendedConverter.cs" />
     <Compile Include="Converters\NullableValueConverter.cs" />
     <Compile Include="Converters\RankToImageConverter.cs" />
+    <Compile Include="Converters\RoundEndReasonToStringConverter.cs" />
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\SideToStringConverter.cs" />

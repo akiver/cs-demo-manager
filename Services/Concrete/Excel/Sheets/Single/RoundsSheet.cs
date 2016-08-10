@@ -70,7 +70,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Duration);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide.AsString());
-					SetCellValue(row, columnNumber++, CellType.String, round.EndReasonAsString);
+					SetCellValue(row, columnNumber++, CellType.String, round.EndReason.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.SideTrouble.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);

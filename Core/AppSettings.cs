@@ -26,6 +26,16 @@ namespace Core
 		/// </summary>
 		public const int DEMO_PAGE_COUNT = 50;
 
+		// Round end reason strings
+		public const string CT_WIN = "Counter-Terrorists win";
+		public const string T_WIN = "Terrorists win";
+		public const string BOMB_EXPLODED = "Bomb exploded";
+		public const string BOMB_DEFUSED = "Bomb defused";
+		public const string CT_SURRENDER = "CT surrender";
+		public const string T_SURRENDER = "T surrender";
+		public const string TARGET_SAVED = "Time over";
+		public const string UNKNOWN = "Unknown";
+
 		/// <summary>
 		/// Return the Steam exe path from the registry
 		/// </summary>
