@@ -357,7 +357,7 @@ namespace Services.Concrete
 			{
 				try
 				{
-					string location = DownloadFolderPath + Path.DirectorySeparatorChar + demoName + ".bz2";
+					string location = AppSettings.GetFolderCachePath() + Path.DirectorySeparatorChar + demoName + ".bz2";
 					Uri uri = new Uri(url);
 					await Task.Factory.StartNew(() => webClient.DownloadFile(uri, location));
 					return true;
@@ -372,7 +372,7 @@ namespace Services.Concrete
 
 		public async Task<bool> DecompressDemoArchive(string demoName)
 		{
-			string archivePath = DownloadFolderPath + Path.DirectorySeparatorChar + demoName + ".bz2";
+			string archivePath = AppSettings.GetFolderCachePath() + Path.DirectorySeparatorChar + demoName + ".bz2";
 			string destination = DownloadFolderPath + Path.DirectorySeparatorChar + demoName + ".dem";
 			if (!File.Exists(archivePath)) return false;
 			await Task.Factory.StartNew(() => BZip2.Decompress(File.OpenRead(archivePath), File.Create(destination), true));
