@@ -343,8 +343,10 @@ namespace Services.Concrete
 		{
 			if (!File.Exists(demo.Path)) return false;
 			await _cacheService.RemoveDemo(demo);
-			if (File.Exists(demo.Path + ".info")) File.Delete(demo.Path + ".info");
-			File.Delete(demo.Path);
+			string infoFilePath = demo.Path + ".info";
+			if (File.Exists(infoFilePath))
+				FileOperationApiWrapper.Send(infoFilePath, FileOperationApiWrapper.FileOperationFlags.FOF_SILENT);
+			FileOperationApiWrapper.Send(demo.Path, FileOperationApiWrapper.FileOperationFlags.FOF_SILENT);
 
 			return true;
 		}

@@ -458,7 +458,7 @@ namespace Manager.ViewModel.Demos
 					?? (_deleteDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
-						var delete = await _dialogService.ShowMessageAsync("Are you sure you want to delete permanently this demo(s)?", MessageDialogStyle.AffirmativeAndNegative);
+						var delete = await _dialogService.ShowMessageAsync("Are you sure you want to send this demo(s) to Recycle Bin?", MessageDialogStyle.AffirmativeAndNegative);
 						if (delete == MessageDialogResult.Negative) return;
 
 						List<Demo> demosNotFound = new List<Demo>();
@@ -474,7 +474,7 @@ namespace Manager.ViewModel.Demos
 						}
 						else
 						{
-							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) deleted.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) sent to Recycle Bin.", MessageDialogStyle.Affirmative);
 						}
 
 						DispatcherHelper.CheckBeginInvokeOnUI(
