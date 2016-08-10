@@ -894,10 +894,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowDemosFailedAsync(demosFailed);
 							}
 
-							NotificationMessage = "Refreshing suspects list...";
 							await RefreshBannedPlayerCount();
-							IsBusy = false;
-							HasNotification = false;
 						},
 						demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
@@ -1908,8 +1905,7 @@ namespace Manager.ViewModel.Demos
 			}
 			finally
 			{
-				HasNotification = false;
-				IsBusy = false;
+				UpdateNotificationStatus();
 				CommandManager.InvalidateRequerySuggested();
 			}
 		}
