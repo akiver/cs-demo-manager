@@ -1,25 +1,26 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using DemoInfo;
+using Core.Models;
 
 namespace Manager.Converters
 {
-	public class TeamSideToStringConverter : IValueConverter
+	public class SideToStringConverter : IValueConverter
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-			Team type = (Team)value;
-			switch (type)
+			Side side = (Side)value;
+			switch (side)
 			{
-				case Team.CounterTerrorist:
+				case Side.CounterTerrorist:
 					return "CT";
-				case Team.Terrorist:
+				case Side.Terrorist:
 					return "T";
-				case Team.Spectate:
+				case Side.Spectate:
 					return "SPEC";
+				default:
+					return string.Empty;
 			}
-			return "Unknown";
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

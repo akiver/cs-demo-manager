@@ -71,12 +71,12 @@ namespace Core.Models
 		/// <summary>
 		/// Round's side winner
 		/// </summary>
-		private DemoInfo.Team _winnerSide;
+		private Side _winnerSide;
 
 		/// <summary>
 		/// Refers to the side currently on eco / semi-eco or force buy
 		/// </summary>
-		private DemoInfo.Team _sideTrouble;
+		private Side _sideTrouble;
 
 		/// <summary>
 		/// Round's type (pistol round, eco...)
@@ -305,7 +305,7 @@ namespace Core.Models
 
 		[JsonProperty("winner_side")]
 		[JsonConverter(typeof(SideToStringConverter))]
-		public DemoInfo.Team WinnerSide
+		public Side WinnerSide
 		{
 			get { return _winnerSide; }
 			set { Set(() => WinnerSide, ref _winnerSide, value); }
@@ -495,15 +495,12 @@ namespace Core.Models
 			set { Set(() => TeamTroubleName, ref _teamTroubleName, value); }
 		}
 
-		[JsonIgnore]
-		public DemoInfo.Team SideTrouble
+		[JsonProperty("side_trouble")]
+		[JsonConverter(typeof(SideToStringConverter))]
+		public Side SideTrouble
 		{
 			get { return _sideTrouble; }
-			set
-			{
-				Set(() => SideTrouble, ref _sideTrouble, value);
-				RaisePropertyChanged(() => SideTroubleAsString);
-			}
+			set { Set(() => SideTrouble, ref _sideTrouble, value); }
 		}
 
 		[JsonProperty("flashbang_thrown_count")]
@@ -618,23 +615,6 @@ namespace Core.Models
 						return "Pistol round";
 					default:
 						return "Normal";
-				}
-			}
-		}
-
-		[JsonProperty("side_trouble")]
-		public string SideTroubleAsString
-		{
-			get
-			{
-				switch (SideTrouble)
-				{
-					case DemoInfo.Team.CounterTerrorist:
-						return "CT";
-					case DemoInfo.Team.Terrorist:
-						return "T";
-					default:
-						return string.Empty;
 				}
 			}
 		}

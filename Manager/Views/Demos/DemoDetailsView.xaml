@@ -23,7 +23,7 @@
 			<converters:RankToImageConverter x:Key="RankToImageConverter" />
 			<converters:DoubleToStringConverter x:Key="DoubleToStringConverter" />
 			<converters:StringToDemoStatusConverter x:Key="StringToDemoStatusConverter" />
-			<converters:TeamSideToStringConverter x:Key="TeamSideToStringConverter" />
+			<converters:SideToStringConverter x:Key="SideToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -1145,7 +1145,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerHeader}"
 														Width="Auto"
 														Header="W"
-														Binding="{Binding WinnerSide, Converter={StaticResource TeamSideToStringConverter}}"
+														Binding="{Binding WinnerSide, Converter={StaticResource SideToStringConverter}}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundTypeHeader}"
 														Width="Auto"
@@ -1155,7 +1155,7 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource SideTroubleHeader}"
 														Width="Auto"
 														Header="Side"
-														Binding="{Binding SideTroubleAsString}"
+														Binding="{Binding SideTrouble, Converter={StaticResource SideToStringConverter}}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowSideTroubleColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamTroubleHeader}"
 														Width="Auto"

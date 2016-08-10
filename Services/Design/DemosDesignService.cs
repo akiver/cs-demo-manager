@@ -14,7 +14,6 @@ using Demo = Core.Models.Demo;
 using Player = Core.Models.Player;
 using Round = Core.Models.Round;
 using Team = Core.Models.Team;
-using Side = DemoInfo.Team;
 
 namespace Services.Design
 {
@@ -261,7 +260,7 @@ namespace Services.Design
 						KilledSide = Side.CounterTerrorist,
 						KillerSide = Side.Terrorist
 					},
-					SideTrouble = Side.Spectate,
+					SideTrouble = Side.None,
 					Kills = kills
 				};
 				rounds.Add(round);

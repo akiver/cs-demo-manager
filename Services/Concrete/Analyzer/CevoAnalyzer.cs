@@ -5,7 +5,6 @@ using System.Windows;
 using Core.Models;
 using DemoInfo;
 using Player = Core.Models.Player;
-using Team = DemoInfo.Team;
 
 namespace Services.Concrete.Analyzer
 {
@@ -208,20 +207,20 @@ namespace Services.Concrete.Analyzer
 				{
 					SteamId = player.SteamID,
 					Name = player.Name,
-					Side = player.Team
+					Side = player.Team.ToSide()
 				};
 
 				Application.Current.Dispatcher.Invoke(delegate
 				{
 					if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
 
-					if (pl.Side == Team.CounterTerrorist)
+					if (pl.Side == Side.CounterTerrorist)
 					{
 						pl.TeamName = Demo.TeamCT.Name;
 						if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
 					}
 
-					if (pl.Side == Team.Terrorist)
+					if (pl.Side == Side.Terrorist)
 					{
 						pl.TeamName = Demo.TeamT.Name;
 						if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);

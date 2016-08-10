@@ -147,10 +147,10 @@
     <Compile Include="Converters\RankToImageConverter.cs" />
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
+    <Compile Include="Converters\SideToStringConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Converters\StringToDemoStatusConverter.cs" />
     <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
-    <Compile Include="Converters\TeamSideToStringConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Internals\Extensions.cs" />

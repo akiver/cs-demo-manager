@@ -12,7 +12,7 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
-			<converters:TeamSideToStringConverter x:Key="TeamSideToStringConverter" />
+			<converters:SideToStringConverter x:Key="SideToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -109,7 +109,7 @@
 								<DataGridTextColumn HeaderStyle="{StaticResource KillerSideHeader}"
 													Width="Auto"
 													Header="Killer Side"
-													Binding="{Binding KillerSide, Converter={StaticResource TeamSideToStringConverter}}"/>
+													Binding="{Binding KillerSide, Converter={StaticResource SideToStringConverter}}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 													Width="Auto"
 													Header="Killed"
@@ -226,7 +226,7 @@
 								<DataGridTextColumn HeaderStyle="{StaticResource KillerSideHeader}"
 													Width="Auto"
 													Header="Killer Side"
-													Binding="{Binding KillerSide, Converter={StaticResource TeamSideToStringConverter}}"/>
+													Binding="{Binding KillerSide, Converter={StaticResource SideToStringConverter}}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 													Width="Auto"
 													Header="Killed"

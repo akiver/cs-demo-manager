@@ -8,7 +8,6 @@ using System.Windows;
 using Core.Models;
 using DemoInfo;
 using Player = Core.Models.Player;
-using Side = DemoInfo.Team;
 using Team = Core.Models.Team;
 
 namespace Services.Concrete.Analyzer
@@ -132,7 +131,7 @@ namespace Services.Concrete.Analyzer
 			if (player != null)
 			{
 				player.IsConnected = true;
-				player.Side = e.NewTeam;
+				player.Side = e.NewTeam.ToSide();
 			}
 			if (!IsMatchStarted) return;
 			if (e.Silent) _playerTeamCount++;
@@ -354,8 +353,8 @@ namespace Services.Concrete.Analyzer
 					Demo.Rounds.Clear();
 					RoundCount = 0;
 					CreateNewRound();
-					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
 					if (!string.IsNullOrEmpty(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
 					if (!string.IsNullOrEmpty(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
 					foreach (Player player in Demo.Players)
@@ -388,7 +387,7 @@ namespace Services.Concrete.Analyzer
 					{
 						SteamId = player.SteamID,
 						Name = player.Name,
-						Side = player.Team
+						Side = player.Team.ToSide()
 					};
 
 					Application.Current.Dispatcher.Invoke(delegate
@@ -433,12 +432,12 @@ namespace Services.Concrete.Analyzer
 		/// Update team score
 		/// TODO Move to DemoAnalyzer
 		/// </summary>
-		/// <param name="roundEndedEventArgs"></param>
-		protected new void UpdateTeamScore(RoundEndedEventArgs roundEndedEventArgs)
+		/// <param name="e"></param>
+		protected new void UpdateTeamScore(RoundEndedEventArgs e)
 		{
 			if (IsHalfMatch)
 			{
-				if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+				if (e.Winner.ToSide() == Side.CounterTerrorist)
 				{
 					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
 					if (!IsOvertime) Demo.ScoreSecondHalfTeam2++;
@@ -455,7 +454,7 @@ namespace Services.Concrete.Analyzer
 			}
 			else
 			{
-				if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+				if (e.Winner.ToSide() == Side.CounterTerrorist)
 				{
 					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
 					if (!IsOvertime) Demo.ScoreFirstHalfTeam1++;

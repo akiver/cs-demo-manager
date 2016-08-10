@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
-using Team = DemoInfo.Team;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
@@ -55,6 +54,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 
 			await Task.Factory.StartNew(() =>
 			{
+				// TODO fix it
 				RoundService roundService = new RoundService();
 				foreach (Round round in Demo.Rounds)
 				{
@@ -69,10 +69,10 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.Duration);
 					SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
-					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide == Team.CounterTerrorist ? "CT" : "T");
+					SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, round.EndReasonAsString);
 					SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
-					SetCellValue(row, columnNumber++, CellType.String, round.SideTroubleAsString);
+					SetCellValue(row, columnNumber++, CellType.String, round.SideTrouble.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.KillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);

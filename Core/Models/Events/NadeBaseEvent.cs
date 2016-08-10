@@ -13,7 +13,8 @@ namespace Core.Models.Events
 		public string ThrowerName { get; set; }
 
 		[JsonProperty("thrower_side")]
-		public DemoInfo.Team ThrowerSide { get; set; }
+		[JsonConverter(typeof(SideToStringConverter))]
+		public Side ThrowerSide { get; set; }
 
 		[JsonProperty("heatmap_point")]
 		public HeatmapPoint Point { get; set; }

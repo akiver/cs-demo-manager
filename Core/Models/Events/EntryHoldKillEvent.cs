@@ -16,7 +16,8 @@ namespace Core.Models.Events
 		public string KillerName { get; set; }
 
 		[JsonProperty("killer_side")]
-		public DemoInfo.Team KillerSide { get; set; }
+		[JsonConverter(typeof(SideToStringConverter))]
+		public Side KillerSide { get; set; }
 
 		[JsonProperty("killed_steamid")]
 		[JsonConverter(typeof(LongToStringConverter))]
@@ -26,7 +27,8 @@ namespace Core.Models.Events
 		public string KilledName { get; set; }
 
 		[JsonProperty("killed_side")]
-		public DemoInfo.Team KilledSide { get; set; }
+		[JsonConverter(typeof(SideToStringConverter))]
+		public Side KilledSide { get; set; }
 
 		[JsonProperty("weapon")]
 		public Weapon Weapon { get; set; }

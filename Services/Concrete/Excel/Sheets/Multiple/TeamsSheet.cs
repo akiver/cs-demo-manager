@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
-using Side = DemoInfo.Team;
 using Team = Core.Models.Team;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
@@ -197,7 +196,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 					{
 						team.WinRoundTCount++;
 					}
-					if (round.SideTrouble != Side.Spectate)
+					if (round.SideTrouble != Side.None)
 					{
 						switch (round.Type)
 						{

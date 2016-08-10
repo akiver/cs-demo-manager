@@ -103,7 +103,7 @@ namespace Services.Design
 				round.ThreeKillCount = r.Next(2);
 				round.TwoKillCount = r.Next(3);
 				round.OneKillCount = r.Next(5);
-				//round.WinnerSide = r.Next(100) < 50 ? DemoInfo.Team.CounterTerrorist : DemoInfo.Team.Terrorist;
+				round.WinnerSide = r.Next(100) < 50 ? Side.CounterTerrorist : Side.Terrorist;
 				round.WinnerName = r.Next(100) < 50 ? teamCt.Name : teamT.Name;
 				round.CrouchKillCount = r.Next(8);
 				round.JumpKillCount = r.Next(1);

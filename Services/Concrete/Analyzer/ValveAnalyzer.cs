@@ -7,7 +7,6 @@ using Core.Models;
 using Core.Models.Events;
 using DemoInfo;
 using Player = Core.Models.Player;
-using Side = DemoInfo.Team;
 
 namespace Services.Concrete.Analyzer
 {
@@ -117,7 +116,7 @@ namespace Services.Concrete.Analyzer
 						{
 							SteamId = player.SteamID,
 							Name = player.Name,
-							Side = player.Team
+							Side = player.Team.ToSide()
 						};
 						Application.Current.Dispatcher.Invoke(delegate
 						{
@@ -182,14 +181,14 @@ namespace Services.Concrete.Analyzer
 			{
 				KillerSteamId = e.Killer?.SteamID ?? 0,
 				KillerName = e.Killer?.Name ?? "World",
-				KillerSide = e.Killer?.Team ?? Side.Spectate,
+				KillerSide = e.Killer?.Team.ToSide() ?? Side.None,
 				Weapon = weapon,
 				KillerVelocityX = e.Killer?.Velocity.X ?? 0,
 				KillerVelocityY = e.Killer?.Velocity.Y ?? 0,
 				KillerVelocityZ = e.Killer?.Velocity.Z ?? 0,
 				KilledSteamId = e.Victim.SteamID,
 				KilledName = e.Victim.Name,
-				KilledSide = e.Victim.Team,
+				KilledSide = e.Victim.Team.ToSide(),
 				RoundNumber = CurrentRound.Number,
 				IsKillerCrouching = e.Killer?.IsDucking ?? false,
 				IsHeadshot = e.Headshot,
@@ -291,7 +290,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Victim.Position.Y,
 					PlayerSteamId = e.Killer?.SteamID ?? 0,
 					PlayerName = e.Killer?.Name ?? string.Empty,
-					Team = e.Killer?.Team ?? Side.Spectate,
+					Team = e.Killer?.Team.ToSide() ?? Side.None,
 					Event = killEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -305,13 +304,13 @@ namespace Services.Concrete.Analyzer
 			Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
 			if (player == null) return;
 			player.IsConnected = true;
-			player.Side = e.NewTeam;
+			player.Side = e.NewTeam.ToSide();
 			// add the player to its team if he is not
 			if (!Demo.TeamCT.Players.Contains(player) && !Demo.TeamT.Players.Contains(player))
 			{
-				if (e.NewTeam == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(player))
+				if (e.NewTeam.ToSide() == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(player))
 					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(player));
-				if (e.NewTeam == Side.Terrorist && !Demo.TeamT.Players.Contains(player))
+				if (e.NewTeam.ToSide() == Side.Terrorist && !Demo.TeamT.Players.Contains(player))
 					Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(player));
 			}
 		}
@@ -338,7 +337,7 @@ namespace Services.Concrete.Analyzer
 					{
 						SteamId = player.SteamID,
 						Name = player.Name,
-						Side = player.Team
+						Side = player.Team.ToSide()
 					};
 					if (!Demo.Players.Contains(pl))
 					{
@@ -376,14 +375,14 @@ namespace Services.Concrete.Analyzer
 		/// <summary>
 		/// Set the correct clan name winner
 		/// </summary>
-		/// <param name="roundEndedEventArgs"></param>
-		protected new void UpdateTeamScore(RoundEndedEventArgs roundEndedEventArgs)
+		/// <param name="e"></param>
+		protected new void UpdateTeamScore(RoundEndedEventArgs e)
 		{
 			if (IsOvertime)
 			{
 				if (IsHalfMatch)
 				{
-					if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+					if (e.Winner.ToSide() == Side.CounterTerrorist)
 					{
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						CurrentOvertime.ScoreTeam2++;
@@ -398,7 +397,7 @@ namespace Services.Concrete.Analyzer
 				}
 				else
 				{
-					if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+					if (e.Winner.ToSide() == Side.CounterTerrorist)
 					{
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						CurrentOvertime.ScoreTeam1++;
@@ -416,7 +415,7 @@ namespace Services.Concrete.Analyzer
 			{
 				if (IsHalfMatch)
 				{
-					if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+					if (e.Winner.ToSide() == Side.CounterTerrorist)
 					{
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.ScoreSecondHalfTeam2++;
@@ -431,7 +430,7 @@ namespace Services.Concrete.Analyzer
 				}
 				else
 				{
-					if (roundEndedEventArgs.Winner == Side.Terrorist)
+					if (e.Winner.ToSide() == Side.Terrorist)
 					{
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.ScoreFirstHalfTeam2++;

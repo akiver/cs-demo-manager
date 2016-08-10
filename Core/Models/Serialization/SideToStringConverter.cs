@@ -8,15 +8,18 @@ namespace Core.Models.Serialization
 	{
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			DemoInfo.Team side = (DemoInfo.Team)value;
-			string sideAsString = "Unknown";
+			string sideAsString = string.Empty;
+			Side side = (Side)value;
 			switch (side)
 			{
-				case DemoInfo.Team.CounterTerrorist:
+				case Side.CounterTerrorist:
 					sideAsString = "CT";
 					break;
-				case DemoInfo.Team.Terrorist:
+				case Side.Terrorist:
 					sideAsString = "T";
+					break;
+				case Side.Spectate:
+					sideAsString = "SPEC";
 					break;
 			}
 			serializer.Serialize(writer, sideAsString);
@@ -28,17 +31,19 @@ namespace Core.Models.Serialization
 			switch ((string)jt)
 			{
 				case "CT":
-					return DemoInfo.Team.CounterTerrorist;
+					return Side.CounterTerrorist;
 				case "T":
-					return DemoInfo.Team.Terrorist;
+					return Side.Terrorist;
+				case "SPEC":
+					return Side.Spectate;
 				default:
-					return DemoInfo.Team.Spectate;
+					return Side.None;
 			}
 		}
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(DemoInfo.Team) == objectType;
+			return typeof(Side) == objectType;
 		}
 	}
 }

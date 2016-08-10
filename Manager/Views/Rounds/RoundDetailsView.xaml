@@ -17,7 +17,7 @@
 			<ResourceDictionary.MergedDictionaries>
 				<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
 			</ResourceDictionary.MergedDictionaries>
-			<converters:TeamSideToStringConverter x:Key="TeamSideToStringConverter" />
+			<converters:SideToStringConverter x:Key="SideToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -135,7 +135,7 @@
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Side : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.WinnerSide}"
+								   Text="{Binding CurrentRound.WinnerSide, Converter={StaticResource SideToStringConverter}}"
 								   Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>

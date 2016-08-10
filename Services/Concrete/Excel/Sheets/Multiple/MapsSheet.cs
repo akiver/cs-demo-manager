@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
-using Side = DemoInfo.Team;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
@@ -100,7 +99,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 
 				if (round.WinnerSide == Side.CounterTerrorist) map.WinCounterTerroritsCount++;
 				if (round.WinnerSide == Side.Terrorist) map.WinTerroristCount++;
-				if (round.SideTrouble != Side.Spectate)
+				if (round.SideTrouble != Side.None)
 				{
 					switch (round.Type)
 					{

@@ -12,7 +12,6 @@ using Core.Models.protobuf;
 using Core.Models.Source;
 using DemoInfo;
 using ProtoBuf;
-using Side = DemoInfo.Team;
 using Player = Core.Models.Player;
 using Team = Core.Models.Team;
 
@@ -300,7 +299,7 @@ namespace Services.Concrete.Analyzer
 							X = player.Position.X,
 							Y = player.Position.Y,
 							RoundNumber = CurrentRound.Number,
-							Team = player.Team,
+							Team = player.Team.ToSide(),
 							PlayerName = player.Name,
 							PlayerSteamId = player.SteamID,
 							PlayerHasBomb = pl.HasBomb
@@ -334,8 +333,8 @@ namespace Services.Concrete.Analyzer
 				Weapon = weapon,
 				KillerSteamId = e.Killer?.SteamID ?? 0,
 				KillerName = e.Killer?.Name ?? string.Empty,
-				KillerSide = e.Killer?.Team ?? Side.Spectate,
-				KilledSide = e.Victim.Team,
+				KillerSide = e.Killer?.Team.ToSide() ?? Side.None,
+				KilledSide = e.Victim.Team.ToSide(),
 				KilledSteamId = e.Victim.SteamID,
 				KilledName = e.Victim.Name,
 				KillerVelocityX = e.Killer?.Velocity.X ?? 0,
@@ -438,7 +437,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Victim.Position.Y,
 					PlayerName = e.Killer?.Name ?? string.Empty,
 					PlayerSteamId = e.Killer?.SteamID ?? 0,
-					Team = e.Killer?.Team ?? Side.Spectate,
+					Team = e.Killer?.Team.ToSide() ?? Side.None,
 					Event = killEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -453,7 +452,7 @@ namespace Services.Concrete.Analyzer
 
 			CurrentRound.EndReason = e.Reason;
 			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
-			CurrentRound.WinnerSide = e.Winner;
+			CurrentRound.WinnerSide = e.Winner.ToSide();
 			UpdateTeamScore(e);
 			ProcessRoundEndReward(e);
 			if (e.Reason == RoundEndReason.CTSurrender)
@@ -468,17 +467,17 @@ namespace Services.Concrete.Analyzer
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				// update round won status for entry kills / hold kills
-				if (e.Winner == CurrentRound.EntryKillEvent?.KillerSide) CurrentRound.EntryKillEvent.HasWonRound = true;
-				if (e.Winner == CurrentRound.EntryHoldKillEvent?.KillerSide) CurrentRound.EntryHoldKillEvent.HasWonRound = true;
+				if (e.Winner.ToSide() == CurrentRound.EntryKillEvent?.KillerSide) CurrentRound.EntryKillEvent.HasWonRound = true;
+				if (e.Winner.ToSide() == CurrentRound.EntryHoldKillEvent?.KillerSide) CurrentRound.EntryHoldKillEvent.HasWonRound = true;
 				List<Player> playerWithEntryKill = Demo.Players.Where(p => p.HasEntryKill).ToList();
 				foreach (Player player in playerWithEntryKill)
 				{
-					if (player.Side == e.Winner) player.EntryKills.Last().HasWonRound = true;
+					if (player.Side == e.Winner.ToSide()) player.EntryKills.Last().HasWonRound = true;
 				}
 				List<Player> playerWithEntryHoldKill = Demo.Players.Where(p => p.HasEntryHoldKill).ToList();
 				foreach (Player player in playerWithEntryHoldKill)
 				{
-					if (player.Side == e.Winner) player.EntryHoldKills.Last().HasWonRound = true;
+					if (player.Side == e.Winner.ToSide()) player.EntryHoldKills.Last().HasWonRound = true;
 				}
 
 				ComputeEseaRws();
@@ -596,7 +595,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Player.Position.Y,
 					PlayerSteamId = e.Player.SteamID,
 					PlayerName = e.Player.Name,
-					Team = e.Player.Team,
+					Team = e.Player.Team.ToSide(),
 					Event = bombPlantedEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -631,7 +630,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Player.Position.Y,
 					PlayerSteamId = e.Player.SteamID,
 					PlayerName = e.Player.Name,
-					Team = e.Player.Team,
+					Team = e.Player.Team.ToSide(),
 					Event = bombDefusedEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -664,7 +663,7 @@ namespace Services.Concrete.Analyzer
 					Y = Demo.BombPlanted.Last().Y,
 					PlayerSteamId = e.Player.SteamID,
 					PlayerName = e.Player.Name,
-					Team = e.Player.Team,
+					Team = e.Player.Team.ToSide(),
 					Event = bombExplodedEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -688,13 +687,13 @@ namespace Services.Concrete.Analyzer
 
 				if (IsHalfMatch)
 				{
-					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
-					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
 				}
 				else
 				{
-					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
 				}
 
 				// Not 100% accurate maybe improved it with current equipement...
@@ -800,7 +799,7 @@ namespace Services.Concrete.Analyzer
 				ShooterVelocityX = e.Shooter.Velocity.X,
 				ShooterVelocityY = e.Shooter.Velocity.Y,
 				ShooterVelocityZ = e.Shooter.Velocity.Z,
-				ShooterSide = e.Shooter.Team,
+				ShooterSide = e.Shooter.Team.ToSide(),
 				Point = new HeatmapPoint
 				{
 					X = e.Shooter.Position.X,
@@ -862,7 +861,7 @@ namespace Services.Concrete.Analyzer
 						Y = e.Shooter.Position.Y,
 						PlayerSteamId = e.Shooter.SteamID,
 						PlayerName = e.Shooter.Name,
-						Team = e.Shooter.Team,
+						Team = e.Shooter.Team.ToSide(),
 						Event = shoot,
 						RoundNumber = CurrentRound.Number
 					};
@@ -893,7 +892,7 @@ namespace Services.Concrete.Analyzer
 					if (e.ThrownBy != null)
 					{
 						thrower = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID);
-						molotovEvent.ThrowerSide = e.ThrownBy.Team;
+						molotovEvent.ThrowerSide = e.ThrownBy.Team.ToSide();
 					}
 
 					if (LastPlayersThrownMolotov.Any())
@@ -990,7 +989,7 @@ namespace Services.Concrete.Analyzer
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name,
-				ThrowerSide = e.ThrownBy.Team,
+				ThrowerSide = e.ThrownBy.Team.ToSide(),
 				Point = new HeatmapPoint
 				{
 					X = e.Position.X,
@@ -1008,7 +1007,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Position.Y,
 					PlayerSteamId = e.ThrownBy.SteamID,
 					PlayerName = e.ThrownBy.Name,
-					Team = e.ThrownBy.Team,
+					Team = e.ThrownBy.Team.ToSide(),
 					Event = explosiveEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -1038,7 +1037,7 @@ namespace Services.Concrete.Analyzer
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name,
-				ThrowerSide = e.ThrownBy.Team,
+				ThrowerSide = e.ThrownBy.Team.ToSide(),
 				Point = new HeatmapPoint
 				{
 					X = e.Position.X,
@@ -1068,7 +1067,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Position.Y,
 					PlayerSteamId = e.ThrownBy.SteamID,
 					PlayerName = e.ThrownBy.Name,
-					Team = e.ThrownBy.Team,
+					Team = e.ThrownBy.Team.ToSide(),
 					RoundNumber = CurrentRound.Number,
 					Event = flashbangEvent
 				};
@@ -1086,7 +1085,7 @@ namespace Services.Concrete.Analyzer
 			{
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name,
-				ThrowerSide = e.ThrownBy.Team,
+				ThrowerSide = e.ThrownBy.Team.ToSide(),
 				Point = new HeatmapPoint
 				{
 					X = e.Position.X,
@@ -1104,7 +1103,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Position.Y,
 					PlayerSteamId = e.ThrownBy.SteamID,
 					PlayerName = e.ThrownBy.Name,
-					Team = e.ThrownBy.Team,
+					Team = e.ThrownBy.Team.ToSide(),
 					Event = smokeEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -1132,7 +1131,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Position.Y,
 					PlayerName = e.ThrownBy.Name,
 					PlayerSteamId = e.ThrownBy.SteamID,
-					Team = e.ThrownBy.Team,
+					Team = e.ThrownBy.Team.ToSide(),
 					Event = smokeEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -1150,7 +1149,7 @@ namespace Services.Concrete.Analyzer
 				ThrowerSteamId = thrower?.SteamId ?? 0,
 				ThrowerName = thrower == null ? string.Empty : thrower.Name,
 				RoundNumber = CurrentRound.Number,
-				ThrowerSide = e.ThrownBy.Team,
+				ThrowerSide = e.ThrownBy.Team.ToSide(),
 				Point = new HeatmapPoint
 				{
 					X = e.Position.X,
@@ -1167,7 +1166,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Position.Y,
 					PlayerSteamId = e.ThrownBy.SteamID,
 					PlayerName = e.ThrownBy.Name,
-					Team = e.ThrownBy.Team,
+					Team = e.ThrownBy.Team.ToSide(),
 					Event = decoyStartedEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -1194,7 +1193,7 @@ namespace Services.Concrete.Analyzer
 					Y = e.Position.Y,
 					PlayerSteamId = e.ThrownBy.SteamID,
 					PlayerName = e.ThrownBy.Name,
-					Team = e.ThrownBy.Team,
+					Team = e.ThrownBy.Team.ToSide(),
 					Event = decoyEndedEvent,
 					RoundNumber = CurrentRound.Number
 				};
@@ -1232,7 +1231,7 @@ namespace Services.Concrete.Analyzer
 			PlayerHurtedEvent playerHurtedEvent = new PlayerHurtedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
 				AttackerSteamId = attacker?.SteamId ?? 0,
-				AttackerSide = e.Attacker?.Team ?? Side.Spectate,
+				AttackerSide = e.Attacker?.Team.ToSide() ?? Side.None,
 				HurtedSteamId = hurted.SteamId,
 				ArmorDamage = e.ArmorDamage,
 				HealthDamage = e.Player.HP < e.HealthDamage ? e.Player.HP : e.HealthDamage,
@@ -1259,7 +1258,7 @@ namespace Services.Concrete.Analyzer
 			Player playerDisconnected = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
 			if (playerDisconnected == null) return;
 			playerDisconnected.IsAlive = false;
-			playerDisconnected.Side = Side.Spectate;
+			playerDisconnected.Side = Side.None;
 			playerDisconnected.IsConnected = false;
 		}
 
@@ -1273,10 +1272,10 @@ namespace Services.Concrete.Analyzer
 				{
 					SteamId = e.Swapped.SteamID,
 					Name = e.Swapped.Name,
-					Side = e.NewTeam
+					Side = e.NewTeam.ToSide()
 				};
 				Application.Current.Dispatcher.Invoke(() => Demo.Players.Add(newPlayer));
-				if (e.NewTeam == Side.CounterTerrorist)
+				if (e.NewTeam.ToSide() == Side.CounterTerrorist)
 				{
 					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(newPlayer));
 					newPlayer.TeamName = Demo.TeamCT.Name;
@@ -1289,7 +1288,7 @@ namespace Services.Concrete.Analyzer
 				return;
 			}
 			player.IsConnected = true;
-			player.Side = e.NewTeam;
+			player.Side = e.NewTeam.ToSide();
 		}
 
 		#endregion
@@ -1344,7 +1343,9 @@ namespace Services.Concrete.Analyzer
 			{
 				Tick = Parser.IngameTick,
 				Number = ++RoundCount,
-				StartTimeSeconds = Parser.CurrentTime
+				StartTimeSeconds = Parser.CurrentTime,
+				SideTrouble = Side.None,
+				WinnerSide = Side.None
 			};
 			CurrentClutch = null;
 
@@ -1357,8 +1358,8 @@ namespace Services.Concrete.Analyzer
 			}
 			else
 			{
-				CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team == Side.CounterTerrorist).Sum(a => a.Money);
-				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team == Side.Terrorist).Sum(a => a.Money);
+				CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.Money);
+				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.Money);
 			}
 
 			IsFirstKillOccured = false;
@@ -1379,7 +1380,7 @@ namespace Services.Concrete.Analyzer
 				DemoInfo.Player player = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId);
 				if (player != null)
 				{
-					pl.Side = player.Team;
+					pl.Side = player.Team.ToSide();
 					pl.StartMoneyRounds[CurrentRound.Number] = player.Money;
 					pl.IsAlive = true;
 				}
@@ -1422,14 +1423,14 @@ namespace Services.Concrete.Analyzer
 		/// </summary>
 		protected void ProcessClutches()
 		{
-			int terroristAliveCount = Parser.PlayingParticipants.Count(p => p.Team == Side.Terrorist && p.IsAlive);
-			int counterTerroristAliveCount = Parser.PlayingParticipants.Count(p => p.Team == Side.CounterTerrorist && p.IsAlive);
+			int terroristAliveCount = Parser.PlayingParticipants.Count(p => p.Team.ToSide() == Side.Terrorist && p.IsAlive);
+			int counterTerroristAliveCount = Parser.PlayingParticipants.Count(p => p.Team.ToSide() == Side.CounterTerrorist && p.IsAlive);
 
 			// First dectection of a 1vX situation, a terro is in clutch
 			if (_playerInClutch1 == null && terroristAliveCount == 1)
 			{
 				// Set the number of opponent in his clutch
-				DemoInfo.Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.Team == Side.Terrorist && p.IsAlive);
+				DemoInfo.Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.Team.ToSide() == Side.Terrorist && p.IsAlive);
 				if (pl == null) return;
 				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID && p.IsAlive);
 				if (_playerInClutch1 != null)
@@ -1446,7 +1447,7 @@ namespace Services.Concrete.Analyzer
 			// First dectection of a 1vX situation, a CT is in clutch
 			if (_playerInClutch1 == null && counterTerroristAliveCount == 1)
 			{
-				DemoInfo.Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.Team == Side.CounterTerrorist && p.IsAlive);
+				DemoInfo.Player pl = Parser.PlayingParticipants.FirstOrDefault(p => p.Team.ToSide() == Side.CounterTerrorist && p.IsAlive);
 				if (pl == null) return;
 				_playerInClutch1 = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID && p.IsAlive);
 				if (_playerInClutch1 != null)
@@ -1465,8 +1466,8 @@ namespace Services.Concrete.Analyzer
 			{
 				DemoInfo.Player player1 = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == _playerInClutch1.SteamId);
 				if (player1 == null) return;
-				Side player2Team = player1.Team == Side.CounterTerrorist ? Side.Terrorist : Side.CounterTerrorist;
-				DemoInfo.Player player2 = Parser.PlayingParticipants.FirstOrDefault(p => p.Team == player2Team);
+				Side player2Team = player1.Team.ToSide() == Side.CounterTerrorist ? Side.Terrorist : Side.CounterTerrorist;
+				DemoInfo.Player player2 = Parser.PlayingParticipants.FirstOrDefault(p => p.Team.ToSide() == player2Team);
 				if (player2 == null) return;
 				_playerInClutch2 = Demo.Players.FirstOrDefault(p => p.SteamId == player2.SteamID && p.IsAlive);
 				if (_playerInClutch2 == null) return;
@@ -1638,14 +1639,14 @@ namespace Services.Concrete.Analyzer
 		/// <summary>
 		/// Update the teams score and current round name
 		/// </summary>
-		/// <param name="roundEndedEventArgs"></param>
-		protected void UpdateTeamScore(RoundEndedEventArgs roundEndedEventArgs)
+		/// <param name="e"></param>
+		protected void UpdateTeamScore(RoundEndedEventArgs e)
 		{
 			if (IsOvertime)
 			{
 				if (IsHalfMatch)
 				{
-					if (roundEndedEventArgs.Winner == Side.Terrorist)
+					if (e.Winner.ToSide() == Side.Terrorist)
 					{
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
@@ -1664,7 +1665,7 @@ namespace Services.Concrete.Analyzer
 				}
 				else
 				{
-					if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+					if (e.Winner.ToSide() == Side.CounterTerrorist)
 					{
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
@@ -1686,7 +1687,7 @@ namespace Services.Concrete.Analyzer
 			{
 				if (IsHalfMatch)
 				{
-					if (roundEndedEventArgs.Winner == Side.Terrorist)
+					if (e.Winner.ToSide() == Side.Terrorist)
 					{
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
@@ -1705,7 +1706,7 @@ namespace Services.Concrete.Analyzer
 				}
 				else
 				{
-					if (roundEndedEventArgs.Winner == Side.CounterTerrorist)
+					if (e.Winner.ToSide() == Side.CounterTerrorist)
 					{
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;
@@ -1739,8 +1740,8 @@ namespace Services.Concrete.Analyzer
 			// 1vX
 			if (_playerInClutch2 == null)
 			{
-				if (pl.Team == Side.Terrorist && CurrentRound.WinnerSide == Side.Terrorist
-					|| pl.Team == Side.CounterTerrorist && CurrentRound.WinnerSide == Side.CounterTerrorist)
+				if (pl.Team.ToSide() == Side.Terrorist && CurrentRound.WinnerSide == Side.Terrorist
+					|| pl.Team.ToSide() == Side.CounterTerrorist && CurrentRound.WinnerSide == Side.CounterTerrorist)
 				{
 					_playerInClutch1.Clutches.Last().HasWon = true;
 				}
@@ -1750,7 +1751,7 @@ namespace Services.Concrete.Analyzer
 				switch (CurrentRound.WinnerSide)
 				{
 					case Side.CounterTerrorist:
-						if (pl.Team == Side.CounterTerrorist)
+						if (pl.Team.ToSide() == Side.CounterTerrorist)
 						{
 							// CT won
 							_playerInClutch1.Clutches.Last().HasWon = true;
@@ -1762,7 +1763,7 @@ namespace Services.Concrete.Analyzer
 						}
 						break;
 					case Side.Terrorist:
-						if (pl.Team == Side.Terrorist)
+						if (pl.Team.ToSide() == Side.Terrorist)
 						{
 							// T won
 							_playerInClutch1.Clutches.Last().HasWon = true;

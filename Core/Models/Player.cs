@@ -125,7 +125,7 @@ namespace Core.Models
 		/// <summary>
 		/// Player's current team side (change when half side is over)
 		/// </summary>
-		private DemoInfo.Team _side;
+		private Side _side;
 
 		/// <summary>
 		/// Player's team name
@@ -915,7 +915,7 @@ namespace Core.Models
 		}
 
 		[JsonIgnore]
-		public DemoInfo.Team Side
+		public Side Side
 		{
 			get { return _side; }
 			set { Set(() => Side, ref _side, value); }
@@ -996,6 +996,7 @@ namespace Core.Models
 			EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
 			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
 			Clutches.CollectionChanged += OnClutchesCollectionChanged;
+			Side = Side.None;
 		}
 
 		private void OnAssistsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

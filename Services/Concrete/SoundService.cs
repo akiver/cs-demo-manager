@@ -2,8 +2,8 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using Core.Models;
 using Core.Models.Events;
-using DemoInfo;
 
 namespace Services.Concrete
 {
@@ -44,9 +44,9 @@ namespace Services.Concrete
 			PlaySound("smoke_explode.wav");
 		}
 
-		public static void PlayMolotovThrown(Team team)
+		public static void PlayMolotovThrown(Side side)
 		{
-			if (team == Team.CounterTerrorist)
+			if (side == Side.CounterTerrorist)
 			{
 				PlaySound("ct_molotov.wav");
 				return;
@@ -54,9 +54,9 @@ namespace Services.Concrete
 			PlaySound("t_molotov.wav");
 		}
 
-		public static void PlayFlashbangThrown(Team team)
+		public static void PlayFlashbangThrown(Side side)
 		{
-			if (team == Team.CounterTerrorist)
+			if (side == Side.CounterTerrorist)
 			{
 				PlaySound("ct_flashbang.wav");
 				return;
@@ -64,9 +64,9 @@ namespace Services.Concrete
 			PlaySound("t_flashbang.wav");
 		}
 
-		public static void PlayHeGrenadeThrown(Team team)
+		public static void PlayHeGrenadeThrown(Side side)
 		{
-			if (team == Team.CounterTerrorist)
+			if (side == Side.CounterTerrorist)
 			{
 				PlaySound("ct_grenade.wav");
 				return;
@@ -74,9 +74,9 @@ namespace Services.Concrete
 			PlaySound("t_grenade.wav");
 		}
 
-		public static void PlayDecoyThrown(Team team)
+		public static void PlayDecoyThrown(Side side)
 		{
-			if (team == Team.CounterTerrorist)
+			if (side == Side.CounterTerrorist)
 			{
 				PlaySound("ct_decoy.wav");
 				return;
@@ -84,9 +84,9 @@ namespace Services.Concrete
 			PlaySound("t_decoy.wav");
 		}
 
-		public static void PlaySmokeThrown(Team team)
+		public static void PlaySmokeThrown(Side side)
 		{
-			if (team == Team.CounterTerrorist)
+			if (side == Side.CounterTerrorist)
 			{
 				PlaySound("ct_smoke.wav");
 				return;
@@ -114,9 +114,9 @@ namespace Services.Concrete
 			PlaySound("bomb_exploded.wav");
 		}
 
-		public static void PlayPlayerKilled(Team team)
+		public static void PlayPlayerKilled(Side side)
 		{
-			if (team == Team.CounterTerrorist)
+			if (side == Side.CounterTerrorist)
 			{
 				PlaySound("ct_death.wav");
 				return;
@@ -124,25 +124,25 @@ namespace Services.Concrete
 			PlaySound("t_death.wav");
 		}
 
-		public static void PlayWeaponFired(Team team, WeaponFireEvent weapon)
+		public static void PlayWeaponFired(Side side, WeaponFireEvent weapon)
 		{
 			switch (weapon.Weapon.Name)
 			{
 				case "Flashbang":
-					PlayFlashbangThrown(team);
+					PlayFlashbangThrown(side);
 					break;
 				case "Smoke":
-					PlaySmokeThrown(team);
+					PlaySmokeThrown(side);
 					break;
 				case "He Grenade":
-					PlayHeGrenadeThrown(team);
+					PlayHeGrenadeThrown(side);
 					break;
 				case "Decoy":
-					PlayDecoyThrown(team);
+					PlayDecoyThrown(side);
 					break;
 				case "Molotov":
 				case "Incendiary":
-					PlayMolotovThrown(team);
+					PlayMolotovThrown(side);
 					break;
 			}
 		}

@@ -18,7 +18,6 @@ using Color = System.Windows.Media.Color;
 using Demo = Core.Models.Demo;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Round = Core.Models.Round;
-using Team = DemoInfo.Team;
 
 namespace Services.Concrete
 {
@@ -101,7 +100,7 @@ namespace Services.Concrete
 
 								// Keep kills from terrorists
 								if (demo.PositionPoints[i].Event != null
-									&& demo.PositionPoints[i].Team == Team.Terrorist
+									&& demo.PositionPoints[i].Team == Side.Terrorist
 									&& demo.PositionPoints[i].Event.GetType() == typeof(KillEvent))
 								{
 									KillEvent e = (KillEvent)demo.PositionPoints[i].Event;
@@ -113,7 +112,7 @@ namespace Services.Concrete
 									}
 								}
 
-								if (demo.PositionPoints[i].Team != Team.CounterTerrorist) continue;
+								if (demo.PositionPoints[i].Team != Side.CounterTerrorist) continue;
 
 								// Molotov started
 								if (demo.PositionPoints[i].Event != null
@@ -164,7 +163,7 @@ namespace Services.Concrete
 
 								// Keep kills from CT
 								if (demo.PositionPoints[i].Event != null
-									&& demo.PositionPoints[i].Team == Team.CounterTerrorist
+									&& demo.PositionPoints[i].Team == Side.CounterTerrorist
 									&& demo.PositionPoints[i].Event.GetType() == typeof(KillEvent))
 								{
 									KillEvent e = (KillEvent)demo.PositionPoints[i].Event;
@@ -176,7 +175,7 @@ namespace Services.Concrete
 									}
 								}
 
-								if (demo.PositionPoints[i].Team != Team.Terrorist) continue;
+								if (demo.PositionPoints[i].Team != Side.Terrorist) continue;
 
 								// Molotov started
 								if (demo.PositionPoints[i].Event != null

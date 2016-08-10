@@ -16,7 +16,6 @@ using Services.Models.Heatmap;
 using Color = System.Drawing.Color;
 using PixelFormat = System.Drawing.Imaging.PixelFormat;
 using Point = System.Drawing.Point;
-using Team = DemoInfo.Team;
 
 namespace Services.Concrete
 {
@@ -390,7 +389,7 @@ namespace Services.Concrete
 			return (from e in _configuration.Demo.Kills
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.KillerSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.KillerSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.KillerSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.KillerX, Y = e.Point.KillerY,
@@ -402,7 +401,7 @@ namespace Services.Concrete
 			return (from e in _configuration.Demo.Kills
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.KilledSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.KilledSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.KilledSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.VictimX, Y = e.Point.VictimY,
@@ -414,7 +413,7 @@ namespace Services.Concrete
 			return (from e in _configuration.Demo.WeaponFired
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ShooterSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.ShooterSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ShooterSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.X, Y = e.Point.Y,
@@ -427,7 +426,7 @@ namespace Services.Concrete
 				where _configuration.SelectedRoundList.Contains(round)
 				from e in round.ExplosiveGrenadesExploded
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.ThrowerSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.X, Y = e.Point.Y,
@@ -440,7 +439,7 @@ namespace Services.Concrete
 				where _configuration.SelectedRoundList.Contains(round)
 				from e in round.FlashbangsExploded
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.ThrowerSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.X, Y = e.Point.Y,
@@ -453,7 +452,7 @@ namespace Services.Concrete
 				where _configuration.SelectedRoundList.Contains(round)
 				from e in round.SmokeStarted
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.ThrowerSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.X, Y = e.Point.Y,
@@ -465,7 +464,7 @@ namespace Services.Concrete
 			return (from e in _configuration.Demo.MolotovsFireStarted
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.ThrowerSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.X, Y = e.Point.Y,
@@ -477,17 +476,11 @@ namespace Services.Concrete
 			return (from e in _configuration.Demo.DecoyStarted
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
 				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-				|| _configuration.SelectedSideList.FirstOrDefault(s => s == GetSideFromTeam(e.ThrowerSide)) != null
+				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
 				select new HeatmapPoint
 				{
 					X = e.Point.X, Y = e.Point.Y,
 				}).ToList();
-		}
-
-		private static string GetSideFromTeam(Team team)
-		{
-			if (team == Team.CounterTerrorist) return "CT";
-			return "T";
 		}
 
 		#endregion

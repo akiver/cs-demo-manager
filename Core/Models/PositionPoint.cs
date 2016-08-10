@@ -8,7 +8,7 @@ namespace Core.Models
 
 		public int Color { get; set; }
 
-		public DemoInfo.Team Team { get; set; }
+		public Side Team { get; set; }
 
 		public long PlayerSteamId { get; set; }
 
