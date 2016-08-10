@@ -1248,7 +1248,7 @@ namespace Core.Models
 				float totalHltv = Players.Sum(player => player.RatingHltv);
 				AverageHltvRating = totalHltv / Players.Count;
 				decimal totalEseaRws = Players.Sum(player => player.EseaRws);
-				AverageEseaRws = totalEseaRws / Players.Count;
+				AverageEseaRws = Math.Round(totalEseaRws / Players.Count, 2);
 			}
 		}
 
