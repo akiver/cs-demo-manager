@@ -50,8 +50,6 @@ namespace Manager.ViewModel
 
 		private readonly ICacheService _cacheService;
 
-		private long _cacheSize;
-
 		#endregion
 
 		#region Accessors
@@ -79,18 +77,6 @@ namespace Manager.ViewModel
 			get { return _folders; }
 			set { Set(() => Folders, ref _folders, value); }
 		}
-
-		public long CacheSize
-		{
-			get { return _cacheSize; }
-			set
-			{
-				Set(() => CacheSize, ref _cacheSize, value);
-				RaisePropertyChanged(() => CacheSizeAsString);
-			}
-		}
-
-		public string CacheSizeAsString => "Size : ~ " + Math.Round(_cacheSize / 1024f / 1024f) + "MB";
 
 		#endregion
 
@@ -255,10 +241,11 @@ namespace Manager.ViewModel
 			{
 				return _settingsFlyoutOpendedCommand
 					?? (_settingsFlyoutOpendedCommand = new RelayCommand(
-					async () =>
+					() =>
 					{
 						IsSettingsOpen = true;
-						CacheSize = await _cacheService.GetCacheSizeAsync();
+						SettingsFlyoutOpenedMessage msg = new SettingsFlyoutOpenedMessage();
+						Messenger.Default.Send(msg);
 					},
 					() => IsSettingsOpen == false));
 			}

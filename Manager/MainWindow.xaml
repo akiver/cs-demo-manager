@@ -55,10 +55,12 @@
 	<controls:MetroWindow.Flyouts>
 		<controls:FlyoutsControl>
 			<controls:Flyout
-				x:Name="SettingsFlyout" Position="Right"
+				x:Name="SettingsFlyout"
+				Position="Right"
 				Header="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
 				Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
-				IsOpen="{Binding IsSettingsOpen}" CloseCommand="{Binding SettingsFlyoutClosedCommand}">
+				IsOpen="{Binding IsSettingsOpen}"
+				CloseCommand="{Binding SettingsFlyoutClosedCommand}">
 
 				<ScrollViewer>
 					<Grid Margin="20 0 0 0">
@@ -160,7 +162,7 @@
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
 										Style="{StaticResource GeneralButtonStyle}"
 										Content="Clear demos data" />
-								<TextBlock Text="{Binding CacheSizeAsString}"
+								<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.CacheSizeAsString}"
 										   Style="{StaticResource LabelChartStyle}"
 										   FontSize="12" />
 								<Button Margin="0 5 0 0"

@@ -164,6 +164,7 @@
     <Compile Include="Messages\NavigateToSuspectsViewMessage.cs" />
     <Compile Include="Messages\SettingsFlyoutClosed.cs" />
     <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
+    <Compile Include="Messages\SettingsFlyoutOpenedMessage.cs" />
     <Compile Include="Messages\UpdateSuspectBannedCountMessage.cs" />
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />

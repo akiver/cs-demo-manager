@@ -252,6 +252,11 @@ namespace Manager.ViewModel
 		/// </summary>
 		public bool ShowOnlyAccountStats => Settings.Default.SelectedStatsAccountSteamID != 0;
 
+		/// <summary>
+		/// Demos cache size
+		/// </summary>
+		private long _cacheSize;
+
 		#endregion
 
 		#region Accessors
@@ -1171,6 +1176,18 @@ namespace Manager.ViewModel
 			}
 		}
 
+		public long CacheSize
+		{
+			get { return _cacheSize; }
+			set
+			{
+				Set(() => CacheSize, ref _cacheSize, value);
+				RaisePropertyChanged(() => CacheSizeAsString);
+			}
+		}
+
+		public string CacheSizeAsString => "Size : ~ " + Math.Round(_cacheSize / 1024f / 1024f) + "MB";
+
 		#endregion
 
 		#region Commands
@@ -1355,6 +1372,7 @@ namespace Manager.ViewModel
 						if (result == MessageDialogResult.Negative) return;
 						await _cacheService.ClearDemosFile();
 						await _cacheService.ClearRankInfoAsync();
+						CacheSize = await _cacheService.GetCacheSizeAsync();
 						await _dialogService.ShowMessageAsync("Demos data cleared.", MessageDialogStyle.Affirmative);
 					}));
 			}
@@ -1638,7 +1656,15 @@ namespace Manager.ViewModel
 				SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
 				DownloadFolderPath = Settings.Default.DownloadFolder;
 				IgnoreLaterBan = Settings.Default.IgnoreLaterBan;
+				CacheSize = await _cacheService.GetCacheSizeAsync();
 			});
+
+			Messenger.Default.Register<SettingsFlyoutOpenedMessage>(this, HandleSettingsFlyoutOpenedMessage);
+		}
+
+		private async void HandleSettingsFlyoutOpenedMessage(SettingsFlyoutOpenedMessage msg)
+		{
+			CacheSize = await _cacheService.GetCacheSizeAsync();
 		}
 
 		/// <summary>
