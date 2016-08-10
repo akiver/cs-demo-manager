@@ -1967,6 +1967,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = false;
 				HasRing = false;
 			}
+			CommandManager.InvalidateRequerySuggested();
 		}
 
 		private async Task ProcessDemosDownloaded()
