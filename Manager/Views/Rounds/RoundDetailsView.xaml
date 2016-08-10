@@ -135,7 +135,7 @@
 						</Grid.ColumnDefinitions>
 						<TextBlock Text="Side : " Grid.Column="0" Style="{StaticResource LabelGeneralInfoDemo}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.WinnerSide, Converter={StaticResource TeamSideToStringConverter}}"
+								   Text="{Binding CurrentRound.WinnerSide}"
 								   Style="{StaticResource ValueGeneralInfoDemo}"/>
 					</Grid>
 					<Grid>
