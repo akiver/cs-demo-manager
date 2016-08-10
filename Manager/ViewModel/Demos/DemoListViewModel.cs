@@ -1841,7 +1841,6 @@ namespace Manager.ViewModel.Demos
 			try
 			{
 				await _demosService.AnalyzeDemo(demo, token);
-				await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 				if (_cts != null)
 				{
 					if (AppSettings.IsInternetConnectionAvailable())
@@ -1854,6 +1853,7 @@ namespace Manager.ViewModel.Demos
 						await _cacheService.WriteDemoDataCache(demo);
 						await _cacheService.UpdateRankInfoAsync(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 					}
+					await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 				}
 			}
 			catch (Exception e)
