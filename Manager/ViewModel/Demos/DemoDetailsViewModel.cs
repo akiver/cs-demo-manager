@@ -170,7 +170,7 @@ namespace Manager.ViewModel.Demos
 			set
 			{
 				Set(() => SelectedPlayerStats, ref _selectedPlayerStats, value);
-				UpdateRoundListStats();
+				if (value != null) UpdateRoundListStats();
 			}
 		}
 
