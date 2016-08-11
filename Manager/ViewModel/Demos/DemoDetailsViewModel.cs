@@ -610,6 +610,7 @@ namespace Manager.ViewModel.Demos
 								await _demosService.AnalyzeBannedPlayersAsync(CurrentDemo);
 							}
 							await _cacheService.WriteDemoDataCache(CurrentDemo);
+							await _cacheService.UpdateRankInfoAsync(CurrentDemo, Settings.Default.SelectedStatsAccountSteamID);
 						}
 						catch (Exception e)
 						{
