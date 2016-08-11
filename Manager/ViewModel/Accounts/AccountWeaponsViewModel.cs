@@ -21,6 +21,8 @@ namespace Manager.ViewModel.Accounts
 
 		private readonly IAccountStatsService _accountStatsService;
 
+		private readonly ICacheService _cacheService;
+
 		private RelayCommand _windowLoadedCommand;
 
 		private RelayCommand _goToOverallCommand;
@@ -771,7 +773,8 @@ namespace Manager.ViewModel.Accounts
 		{
 			IsBusy = true;
 			NotificationMessage = "Loading...";
-			WeaponStats datas = await _accountStatsService.GetWeaponStatsAsync();
+			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
+			WeaponStats datas = await _accountStatsService.GetWeaponStatsAsync(demos);
 
 			DatasAk47Kill = new List<CategoricalDataPoint>
 			{
@@ -1527,9 +1530,10 @@ namespace Manager.ViewModel.Accounts
 			IsBusy = false;
 		}
 
-		public AccountWeaponsViewModel(IAccountStatsService accountStatsService)
+		public AccountWeaponsViewModel(IAccountStatsService accountStatsService, ICacheService cacheService)
 		{
 			_accountStatsService = accountStatsService;
+			_cacheService = cacheService;
 
 			if (IsInDesignMode)
 			{

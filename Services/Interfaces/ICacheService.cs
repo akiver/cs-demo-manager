@@ -4,11 +4,17 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
+using Services.Models;
 
 namespace Services.Interfaces
 {
 	public interface ICacheService
 	{
+		/// <summary>
+		/// Filter used to get only demos for specific player, date and folder
+		/// </summary>
+		DemoFilter Filter { get; set; }
+
 		bool HasDemoInCache(string demoId);
 
 		Task<Demo> GetDemoDataFromCache(string demoId);
@@ -49,9 +55,13 @@ namespace Services.Interfaces
 		/// Return all the demos inside each folders
 		/// </summary>
 		/// <returns></returns>
-		Task<List<Demo>> GetDemoListAsync(bool isShowAllFolders, bool limitStatsFolder, string lastFolder);
+		Task<List<Demo>> GetDemoListAsync();
 
-		Task<List<Demo>> GetFilteredDemoListAsync(DateTime dateFrom, DateTime dateTo, bool isShowAllFolders, bool limitStatsFolder, string lastFolder);
+		/// <summary>
+		/// Return filtered demos
+		/// </summary>
+		/// <returns></returns>
+		Task<List<Demo>> GetFilteredDemoListAsync();
 
 		Task<List<string>> GetPlayersWhitelist();
 
@@ -76,9 +86,9 @@ namespace Services.Interfaces
 		/// <summary>
 		/// Remove demo from cache
 		/// </summary>
-		/// <param name="demo"></param>
+		/// <param name="demoId"></param>
 		/// <returns></returns>
-		Task<bool> RemoveDemo(Demo demo);
+		Task<bool> RemoveDemo(string demoId);
 
 		/// <summary>
 		/// Return the list of WeaponFire events of the demo
@@ -170,5 +180,11 @@ namespace Services.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		Task<List<DemoBasicData>> GetDemoBasicDataAsync();
+
+		/// <summary>
+		/// Clean up possible missing demos from cache
+		/// </summary>
+		/// <returns></returns>
+		Task<bool> InitDemoBasicDataList();
 	}
 }

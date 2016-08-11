@@ -12,6 +12,9 @@ namespace Core.Models
 		[JsonProperty("id")]
 		public string Id { get; set; }
 
+		[JsonProperty("path")]
+		public string Path { get; set; }
+
 		[JsonProperty("date")]
 		public DateTime Date { get; set; }
 

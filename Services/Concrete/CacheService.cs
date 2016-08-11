@@ -12,6 +12,7 @@ using Core.Models.Events;
 using Core.Models.Serialization;
 using Core.Models.Source;
 using Services.Interfaces;
+using Services.Models;
 
 namespace Services.Concrete
 {
@@ -78,6 +79,8 @@ namespace Services.Concrete
 		/// </summary>
 		private const string FILENAME_DEMOS_BASIC_DATA = "demos.json";
 
+		public DemoFilter Filter { get; set; }
+
 		#endregion
 
 		public CacheService()
@@ -93,6 +96,7 @@ namespace Services.Concrete
 				File.Create(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME);
 			string demoBasicDataFilePath = GetDemoBasicFilePath();
 			if (!File.Exists(demoBasicDataFilePath)) File.Create(demoBasicDataFilePath);
+			Filter = new DemoFilter();
 #if DEBUG
 
 			_settingsJson.Formatting = Formatting.Indented;
@@ -102,7 +106,7 @@ namespace Services.Concrete
 			_settingsJson.NullValueHandling = NullValueHandling.Include;
 		}
 
-		public async Task<List<Demo>> GetDemoListAsync(bool isShowAllFolders = true, bool limitStatsFolder = false, string lastFolder = null)
+		public async Task<List<Demo>> GetDemoListAsync()
 		{
 			List<Demo> demos = new List<Demo>();
 			string[] fileList = Directory.GetFiles(_pathFolderCache);
@@ -118,18 +122,7 @@ namespace Services.Concrete
 						try
 						{
 							Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJson));
-							if (!isShowAllFolders && limitStatsFolder && !string.IsNullOrEmpty(lastFolder))
-							{
-								string demoDirectory = Path.GetDirectoryName(demo.Path);
-								if (lastFolder.Equals(demoDirectory))
-								{
-									demos.Add(demo);
-								}
-							}
-							else
-							{
-								demos.Add(demo);
-							}
+							demos.Add(demo);
 						}
 						catch (Exception e)
 						{
@@ -143,47 +136,47 @@ namespace Services.Concrete
 			return demos;
 		}
 
-		public async Task<List<Demo>> GetFilteredDemoListAsync(DateTime dateFrom, DateTime dateTo, bool isShowAllFolders = true, bool limitStatsFolder = false, string lastFolder = null)
+		public async Task<List<Demo>> GetFilteredDemoListAsync()
 		{
 			List<Demo> demos = new List<Demo>();
-			string[] fileList = Directory.GetFiles(_pathFolderCache);
-
-			foreach (string file in fileList)
+			try
 			{
-				if (File.Exists(file))
+				if (Filter == null) return await GetDemoListAsync();
+				// get basic demos data
+				List<DemoBasicData> demoBasicDataList = await GetDemoBasicDataAsync();
+				List<string> demoIdList = new List<string>();
+				foreach (DemoBasicData basicData in demoBasicDataList)
 				{
-					Match match = _demoFilePattern.Match(file);
-					if (match.Success)
-					{
-						string json = File.ReadAllText(file);
-						try
-						{
-							Demo demo = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Demo>(json, _settingsJson));
-							if (!isShowAllFolders && limitStatsFolder && !string.IsNullOrEmpty(lastFolder))
-							{
-								string demoDirectory = Path.GetDirectoryName(demo.Path);
-								if (lastFolder.Equals(demoDirectory))
-								{
-									if (demo.Date >= dateFrom && demo.Date < dateTo.AddDays(1))
-										demos.Add(demo);
-								}
-							}
-							else
-							{
-								if (demo.Date >= dateFrom && demo.Date < dateTo.AddDays(1))
-									demos.Add(demo);
-							}
-						}
-						catch (Exception e)
-						{
-							Logger.Instance.Log(e);
-							throw;
-						}
-					}
+					// skip if the player isn't in the demo
+					if (Filter.SteamId != 0 && !basicData.SteamIdList.Contains(Filter.SteamId))
+						continue;
+
+					// Skip if the demo's date isn't in the dates interval
+					if (basicData.Date < Filter.From || basicData.Date > Filter.To.AddDays(1))
+						continue;
+
+					// skip if the demo is not in the selected folder
+					if (!string.IsNullOrEmpty(Filter.Folder) && Path.GetDirectoryName(basicData.Path) != Filter.Folder || !File.Exists(basicData.Path))
+						continue;
+
+					// don't add it if its not cached
+					if (!HasDemoInCache(basicData.Id)) continue;
+
+					demoIdList.Add(basicData.Id);
+				}
+
+				foreach (string demoId in demoIdList)
+				{
+					Demo demo = await GetDemoDataFromCache(demoId);
+					demos.Add(demo);
 				}
 			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
 
-			return demos.Cast<Demo>().ToList();
+			return demos;
 		}
 
 		/// <summary>
@@ -232,8 +225,8 @@ namespace Services.Concrete
 		public async Task WriteDemoDataCache(Demo demo)
 		{
 			string pathDemoFileJson = GetDemoFilePath(demo.Id);
-			string pathDemoWeaponFiredFileJson = GetWeaponFiredFilePath(demo);
-			string pathDemoPlayerBlindedFileJson = GetPlayerBlindedFilePath(demo);
+			string pathDemoWeaponFiredFileJson = GetWeaponFiredFilePath(demo.Id);
+			string pathDemoPlayerBlindedFileJson = GetPlayerBlindedFilePath(demo.Id);
 
 			try
 			{
@@ -465,12 +458,12 @@ namespace Services.Concrete
 		/// Remove a specific demo from cache
 		/// </summary>
 		/// <returns></returns>
-		public Task<bool> RemoveDemo(Demo demo)
+		public Task<bool> RemoveDemo(string demoId)
 		{
 			bool isDeleted = false;
-			string demoFilePath = GetDemoFilePath(demo.Id);
-			string weaponFiredFilePath = GetWeaponFiredFilePath(demo);
-			string playerBlindedFilePath = GetPlayerBlindedFilePath(demo);
+			string demoFilePath = GetDemoFilePath(demoId);
+			string weaponFiredFilePath = GetWeaponFiredFilePath(demoId);
+			string playerBlindedFilePath = GetPlayerBlindedFilePath(demoId);
 			if (File.Exists(demoFilePath))
 			{
 				File.Delete(demoFilePath);
@@ -483,7 +476,7 @@ namespace Services.Concrete
 
 		public async Task<ObservableCollection<WeaponFireEvent>> GetDemoWeaponFiredAsync(Demo demo)
 		{
-			string pathDemoFileJson = GetWeaponFiredFilePath(demo);
+			string pathDemoFileJson = GetWeaponFiredFilePath(demo.Id);
 			string json = File.ReadAllText(pathDemoFileJson);
 
 			ObservableCollection<WeaponFireEvent> weaponFiredList;
@@ -502,7 +495,7 @@ namespace Services.Concrete
 
 		public async Task<ObservableCollection<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo)
 		{
-			string pathFile = GetPlayerBlindedFilePath(demo);
+			string pathFile = GetPlayerBlindedFilePath(demo.Id);
 			string json = File.ReadAllText(pathFile);
 
 			ObservableCollection<PlayerBlindedEvent> playerBlindedList;
@@ -746,14 +739,14 @@ namespace Services.Concrete
 			return _pathFolderCache + Path.DirectorySeparatorChar + demoId + ".json";
 		}
 
-		private string GetWeaponFiredFilePath(Demo demo)
+		private string GetWeaponFiredFilePath(string demoId)
 		{
-			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + WEAPON_FIRED_FILE_SUFFIX;
+			return _pathFolderCache + Path.DirectorySeparatorChar + demoId + WEAPON_FIRED_FILE_SUFFIX;
 		}
 
-		private string GetPlayerBlindedFilePath(Demo demo)
+		private string GetPlayerBlindedFilePath(string demoId)
 		{
-			return _pathFolderCache + Path.DirectorySeparatorChar + demo.Id + PLAYER_BLINDED_FILE_SUFFIX;
+			return _pathFolderCache + Path.DirectorySeparatorChar + demoId + PLAYER_BLINDED_FILE_SUFFIX;
 		}
 
 		public async Task<List<RankInfo>> GetRankInfoListAsync()
@@ -910,7 +903,8 @@ namespace Services.Concrete
 			{
 				Id = demo.Id,
 				Date = demo.Date,
-				SteamIdList = demo.Players.Select(player => player.SteamId).ToList()
+				SteamIdList = demo.Players.Select(player => player.SteamId).ToList(),
+				Path = demo.Path
 			};
 			if (data.Contains(demoData)) data.Remove(demoData);
 			data.Add(demoData);
@@ -936,6 +930,31 @@ namespace Services.Concrete
 			}
 			
 			return data ?? new List<DemoBasicData>();
+		}
+
+		public async Task<bool> InitDemoBasicDataList()
+		{
+			bool hasUpdated = false;
+			List<DemoBasicData> data = await GetDemoBasicDataAsync();
+			for (int i = 0; i < data.Count; i++)
+			{
+				// demo has been moved / removed, remove it from cache
+				if (!string.IsNullOrEmpty(data[i].Path) && !File.Exists(data[i].Path))
+				{
+					await RemoveDemo(data[i].Id);
+					data.RemoveAt(i);
+					hasUpdated = true;
+				}
+			}
+
+			if (hasUpdated)
+			{
+				string filePath = GetDemoBasicFilePath();
+				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(data));
+				File.WriteAllText(filePath, json);
+			}
+
+			return hasUpdated;
 		}
 
 		private string GetDemoBasicFilePath()

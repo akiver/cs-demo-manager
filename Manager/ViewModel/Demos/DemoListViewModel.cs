@@ -345,15 +345,9 @@ namespace Manager.ViewModel.Demos
 			set
 			{
 				Set(() => SelectedFolder, ref _selectedFolder, value);
-				if (!string.IsNullOrWhiteSpace(value))
-				{
-					Properties.Settings.Default.LastFolder = value;
-				}
-				else
-				{
-					Properties.Settings.Default.LastFolder = string.Empty;
-				}
+				Properties.Settings.Default.LastFolder = value;
 				Properties.Settings.Default.Save();
+				if (Properties.Settings.Default.LimitStatsFolder) _cacheService.Filter.Folder = value;
 				if (_isMainWindowLoaded)
 				{
 					DispatcherHelper.CheckBeginInvokeOnUI(
@@ -505,7 +499,7 @@ namespace Manager.ViewModel.Demos
 						List<Demo> demosNotFound = new List<Demo>();
 						foreach (Demo demo in demos)
 						{
-							bool isDeleted = await _cacheService.RemoveDemo(demo);
+							bool isDeleted = await _cacheService.RemoveDemo(demo.Id);
 							if (!isDeleted) demosNotFound.Add(demo);
 						}
 
@@ -1629,6 +1623,14 @@ namespace Manager.ViewModel.Demos
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
+				HasNotification = true;
+				IsBusy = true;
+				HasRing = true;
+				NotificationMessage = "Initializing cache...";
+				await _cacheService.InitDemoBasicDataList();
+				HasNotification = false;
+				IsBusy = false;
+				HasRing = false;
 				await RefreshFolders();
 
 				IsShowAllFolders = Properties.Settings.Default.ShowAllFolders;

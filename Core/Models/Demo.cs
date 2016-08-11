@@ -544,7 +544,6 @@ namespace Core.Models
 			set { Set(() => Path, ref _path, value); }
 		}
 
-
 		[JsonProperty("has_cheater")]
 		public bool HasCheater
 		{

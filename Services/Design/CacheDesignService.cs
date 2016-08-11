@@ -8,11 +8,14 @@ using Core.Models;
 using Core.Models.Events;
 using Core.Models.Source;
 using Services.Interfaces;
+using Services.Models;
 
 namespace Services.Design
 {
 	public class CacheDesignService : ICacheService
 	{
+		public DemoFilter Filter { get; set; }
+
 		public bool HasDemoInCache(string demoId)
 		{
 			return true;
@@ -240,7 +243,7 @@ namespace Services.Design
 			return Task.FromResult((long)145214);
 		}
 
-		public Task<bool> RemoveDemo(Demo demo)
+		public Task<bool> RemoveDemo(string demoId)
 		{
 			return Task.FromResult(true);
 		}
@@ -338,19 +341,21 @@ namespace Services.Design
 			return Task.FromResult(new List<DemoBasicData>());
 		}
 
-		public Task<List<Demo>> GetDemoListAsync(bool isShowAllFolders, bool limitStatsFolder, string lastFolder)
+		public Task<bool> InitDemoBasicDataList()
 		{
-			List<Demo> demos = new List<Demo>();
-			List<Demo> Demos = demos.Cast<Demo>().ToList();
-			return Task.FromResult(Demos);
+			return Task.FromResult(false);
 		}
 
-		public Task<List<Demo>> GetFilteredDemoListAsync(DateTime dateFrom, DateTime dateTo, bool isShowAllFolders, bool limitStatsFolder,
-			string lastFolder)
+		public Task<List<Demo>> GetDemoListAsync()
 		{
 			List<Demo> demos = new List<Demo>();
-			List<Demo> Demos = demos.Cast<Demo>().ToList();
-			return Task.FromResult(Demos);
+			return Task.FromResult(demos);
+		}
+
+		public Task<List<Demo>> GetFilteredDemoListAsync()
+		{
+			List<Demo> demos = new List<Demo>();
+			return Task.FromResult(demos);
 		}
 	}
 }

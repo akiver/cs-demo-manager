@@ -278,6 +278,7 @@ namespace Manager.ViewModel
 					Settings.Default.SelectedStatsAccountSteamID = 0;
 					_demosService.SelectedStatsAccountSteamId = 0;
 					_accountStatsService.SelectedStatsAccountSteamId = 0;
+					_cacheService.Filter.SteamId = 0;
 				}
 				else
 				{
@@ -286,6 +287,7 @@ namespace Manager.ViewModel
 					Settings.Default.SelectedStatsAccountSteamID = steamId;
 					_demosService.SelectedStatsAccountSteamId = steamId;
 					_accountStatsService.SelectedStatsAccountSteamId = steamId;
+					_cacheService.Filter.SteamId = steamId;
 				}
 				Settings.Default.Save();
 				RaisePropertyChanged(() => ShowOnlyAccountStats);
@@ -1099,6 +1101,7 @@ namespace Manager.ViewModel
 			{
 				Settings.Default.LimitStatsFolder = value;
 				Settings.Default.Save();
+				_cacheService.Filter.Folder = Settings.Default.LimitStatsFolder ? Settings.Default.LastFolder : null;
 				Set(() => LimitStatsSelectedFolder, ref _limitStatsSelectedFolder, value);
 			}
 		}
@@ -1133,6 +1136,7 @@ namespace Manager.ViewModel
 			{
 				Settings.Default.DateStatsFrom = value;
 				Settings.Default.Save();
+				_cacheService.Filter.From = value;
 				Set(() => DateStatsFrom, ref _dateStatsFrom, value);
 			}
 		}
@@ -1144,6 +1148,7 @@ namespace Manager.ViewModel
 			{
 				Settings.Default.DateStatsTo = value;
 				Settings.Default.Save();
+				_cacheService.Filter.To = value;
 				Set(() => DateStatsTo, ref _dateStatsTo, value);
 			}
 		}
@@ -1657,6 +1662,9 @@ namespace Manager.ViewModel
 				DownloadFolderPath = Settings.Default.DownloadFolder;
 				IgnoreLaterBan = Settings.Default.IgnoreLaterBan;
 				CacheSize = await _cacheService.GetCacheSizeAsync();
+				_cacheService.Filter.From = Settings.Default.DateStatsFrom;
+				_cacheService.Filter.To = Settings.Default.DateStatsTo;
+				_cacheService.Filter.Folder = Settings.Default.LimitStatsFolder ? Settings.Default.LastFolder : null;
 			});
 
 			Messenger.Default.Register<SettingsFlyoutOpenedMessage>(this, HandleSettingsFlyoutOpenedMessage);

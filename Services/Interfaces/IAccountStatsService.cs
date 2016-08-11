@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
 using Services.Models.Charts;
@@ -22,31 +23,36 @@ namespace Services.Interfaces
 		/// <summary>
 		/// Return Rank model evolution for the rank chart
 		/// </summary>
+		/// <param name="demos"></param>
+		/// <param name="scale"></param>
 		/// <returns></returns>
-		Task<List<RankDateChart>> GetRankDateChartDataAsync(string scale);
+		Task<List<RankDateChart>> GetRankDateChartDataAsync(List<Demo> demos, string scale);
 
 		/// <summary>
 		/// Return overall stats for the selected account
 		/// </summary>
+		/// <param name="demos"></param>
 		/// <returns></returns>
-		Task<OverallStats> GetGeneralAccountStatsAsync();
+		Task<OverallStats> GetGeneralAccountStatsAsync(List<Demo> demos);
 
 		/// <summary>
 		/// Return stats for the map stats view
 		/// </summary>
+		/// <param name="demos"></param>
 		/// <returns></returns>
-		Task<MapStats> GetMapStatsAsync();
+		Task<MapStats> GetMapStatsAsync(List<Demo> demos);
 
 		/// <summary>
 		/// Return stats for the weapon stats view
 		/// </summary>
 		/// <returns></returns>
-		Task<WeaponStats> GetWeaponStatsAsync();
+		Task<WeaponStats> GetWeaponStatsAsync(List<Demo> demos);
 
 		/// <summary>
 		/// Return stats for the progression stats view
 		/// </summary>
+		/// <param name="demos"></param>
 		/// <returns></returns>
-		Task<ProgressStats> GetProgressStatsAsync();
+		Task<ProgressStats> GetProgressStatsAsync(List<Demo> demos);
 	}
 }

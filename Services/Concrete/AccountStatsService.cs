@@ -16,8 +16,6 @@ namespace Services.Concrete
 	{
 		public long SelectedStatsAccountSteamId { get; set; }
 
-		private readonly CacheService _cacheService = new CacheService();
-
 		public Task<Demo> MapSelectedAccountValues(Demo demo, long accountSteamId = 0)
 		{
 			if (accountSteamId == 0) return Task.FromResult(demo);
@@ -54,39 +52,38 @@ namespace Services.Concrete
 			return Task.FromResult(demo);
 		}
 
-		public async Task<OverallStats> GetGeneralAccountStatsAsync()
+		public async Task<OverallStats> GetGeneralAccountStatsAsync(List<Demo> demos)
 		{
 			OverallStats stats = new OverallStats();
+			if (SelectedStatsAccountSteamId == 0) return stats;
 
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
-
-			if (demos.Any())
+			await Task.Run(() =>
 			{
-				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
-				if (demosPlayerList.Any())
+				foreach (Demo demo in demos)
 				{
-					stats.MatchCount = demosPlayerList.Count;
-					foreach (Demo demo in demosPlayerList)
+					Player player = demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId);
+					if (player != null)
 					{
-						stats.KillCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).KillCount;
-						stats.AssistCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).AssistCount;
-						stats.DeathCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).DeathCount;
+						stats.MatchCount++;
+						stats.KillCount += player.KillCount;
+						stats.AssistCount += player.AssistCount;
+						stats.DeathCount += player.DeathCount;
 						stats.KnifeKillCount += demo.Kills.Count(k => k.KillerSteamId == SelectedStatsAccountSteamId && k.Weapon.Element == EquipmentElement.Knife);
-						stats.EntryKillCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).EntryKills.Count;
-						stats.FiveKillCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).FiveKillCount;
-						stats.FourKillCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).FourKillCount;
-						stats.ThreeKillCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).ThreeKillCount;
-						stats.TwoKillCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).TwoKillCount;
-						stats.HeadshotCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).HeadshotCount;
-						stats.BombDefusedCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).BombDefusedCount;
-						stats.BombExplodedCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).BombExplodedCount;
-						stats.BombPlantedCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).BombPlantedCount;
-						stats.MvpCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RoundMvpCount;
-						stats.DamageCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).TotalDamageHealthCount;
-						stats.RoundCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RoundPlayedCount;
-						stats.ClutchCount += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).ClutchCount;
-						stats.ClutchWin += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).ClutchWonCount;
-						stats.HltvRating += demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RatingHltv;
+						stats.EntryKillCount += player.EntryKills.Count;
+						stats.FiveKillCount += player.FiveKillCount;
+						stats.FourKillCount += player.FourKillCount;
+						stats.ThreeKillCount += player.ThreeKillCount;
+						stats.TwoKillCount += player.TwoKillCount;
+						stats.HeadshotCount += player.HeadshotCount;
+						stats.BombDefusedCount += player.BombDefusedCount;
+						stats.BombExplodedCount += player.BombExplodedCount;
+						stats.BombPlantedCount += player.BombPlantedCount;
+						stats.MvpCount += player.RoundMvpCount;
+						stats.DamageCount += player.TotalDamageHealthCount;
+						stats.RoundCount += player.RoundPlayedCount;
+						stats.ClutchCount += player.ClutchCount;
+						stats.ClutchWin += player.ClutchWonCount;
+						stats.HltvRating += player.RatingHltv;
 						switch (GetWinStatus(demo, SelectedStatsAccountSteamId))
 						{
 							case "lost":
@@ -114,108 +111,109 @@ namespace Services.Concrete
 				}
 				if (stats.HltvRating > 0)
 				{
-					stats.HltvRating = Math.Round(stats.HltvRating / demosPlayerList.Count, 2);
+					stats.HltvRating = Math.Round(stats.HltvRating / stats.MatchCount, 2);
 				}
-			}
+			});
 
 			return stats;
 		}
 
-		public async Task<MapStats> GetMapStatsAsync()
+		public async Task<MapStats> GetMapStatsAsync(List<Demo> demos)
 		{
 			MapStats stats = new MapStats();
+			if (SelectedStatsAccountSteamId == 0) return stats;
 
-			List<Demo> demos = await _cacheService.GetDemoListAsync();
-
-			if (demos.Any())
+			await Task.Run(() =>
 			{
-				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
-				if (demosPlayerList.Any())
+				if (demos.Any())
 				{
-					stats.Dust2WinCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.Dust2LossCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.Dust2DrawCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					int matchCount = stats.Dust2WinCount + stats.Dust2LossCount + stats.Dust2DrawCount;
-					if (matchCount > 0)
+					List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
+					if (demosPlayerList.Any())
 					{
-						stats.Dust2WinPercentage = Math.Round((stats.Dust2WinCount / (double)matchCount * 100), 2);
-					}
+						stats.Dust2WinCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.Dust2LossCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.Dust2DrawCount = demosPlayerList.Count(d => d.MapName == "de_dust2" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						int matchCount = stats.Dust2WinCount + stats.Dust2LossCount + stats.Dust2DrawCount;
+						if (matchCount > 0)
+						{
+							stats.Dust2WinPercentage = Math.Round((stats.Dust2WinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.MirageWinCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.MirageLossCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.MirageDrawCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.MirageWinCount + stats.MirageLossCount + stats.MirageDrawCount;
-					if (matchCount > 0)
-					{
-						stats.MirageWinPercentage = Math.Round((stats.MirageWinCount / (double)matchCount * 100), 2);
-					}
+						stats.MirageWinCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.MirageLossCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.MirageDrawCount = demosPlayerList.Count(d => d.MapName == "de_mirage" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.MirageWinCount + stats.MirageLossCount + stats.MirageDrawCount;
+						if (matchCount > 0)
+						{
+							stats.MirageWinPercentage = Math.Round((stats.MirageWinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.InfernoWinCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.InfernoLossCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.InfernoDrawCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.InfernoWinCount + stats.InfernoLossCount + stats.InfernoDrawCount;
-					if (matchCount > 0)
-					{
-						stats.InfernoWinPercentage = Math.Round((stats.InfernoWinCount / (double)matchCount * 100), 2);
-					}
+						stats.InfernoWinCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.InfernoLossCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.InfernoDrawCount = demosPlayerList.Count(d => d.MapName == "de_inferno" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.InfernoWinCount + stats.InfernoLossCount + stats.InfernoDrawCount;
+						if (matchCount > 0)
+						{
+							stats.InfernoWinPercentage = Math.Round((stats.InfernoWinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.TrainWinCount = demosPlayerList.Count(d => d.MapName == "de_train" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.TrainLossCount = demosPlayerList.Count(d => d.MapName == "de_train" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.TrainDrawCount = demosPlayerList.Count(d => d.MapName == "de_train" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.TrainWinCount + stats.TrainLossCount + stats.TrainDrawCount;
-					if (matchCount > 0)
-					{
-						stats.TrainWinPercentage = Math.Round((stats.TrainWinCount / (double)matchCount * 100), 2);
-					}
+						stats.TrainWinCount = demosPlayerList.Count(d => d.MapName == "de_train" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.TrainLossCount = demosPlayerList.Count(d => d.MapName == "de_train" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.TrainDrawCount = demosPlayerList.Count(d => d.MapName == "de_train" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.TrainWinCount + stats.TrainLossCount + stats.TrainDrawCount;
+						if (matchCount > 0)
+						{
+							stats.TrainWinPercentage = Math.Round((stats.TrainWinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.OverpassWinCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.OverpassLossCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.OverpassDrawCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.OverpassWinCount + stats.OverpassLossCount + stats.OverpassDrawCount;
-					if (matchCount > 0)
-					{
-						stats.OverpassWinPercentage = Math.Round((stats.OverpassWinCount / (double)matchCount * 100), 2);
-					}
+						stats.OverpassWinCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.OverpassLossCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.OverpassDrawCount = demosPlayerList.Count(d => d.MapName == "de_overpass" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.OverpassWinCount + stats.OverpassLossCount + stats.OverpassDrawCount;
+						if (matchCount > 0)
+						{
+							stats.OverpassWinPercentage = Math.Round((stats.OverpassWinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.CacheWinCount = demosPlayerList.Count(d => d.MapName == "de_cache" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.CacheLossCount = demosPlayerList.Count(d => d.MapName == "de_cache" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.CacheDrawCount = demosPlayerList.Count(d => d.MapName == "de_cache" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.CacheWinCount + stats.CacheLossCount + stats.CacheDrawCount;
-					if (matchCount > 0)
-					{
-						stats.CacheWinPercentage = Math.Round((stats.CacheWinCount / (double)matchCount * 100), 2);
-					}
+						stats.CacheWinCount = demosPlayerList.Count(d => d.MapName == "de_cache" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.CacheLossCount = demosPlayerList.Count(d => d.MapName == "de_cache" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.CacheDrawCount = demosPlayerList.Count(d => d.MapName == "de_cache" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.CacheWinCount + stats.CacheLossCount + stats.CacheDrawCount;
+						if (matchCount > 0)
+						{
+							stats.CacheWinPercentage = Math.Round((stats.CacheWinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.CobblestoneWinCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.CobblestoneLossCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.CobblestoneDrawCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.CobblestoneWinCount + stats.CobblestoneLossCount + stats.CobblestoneDrawCount;
-					if (matchCount > 0)
-					{
-						stats.CobblestoneWinPercentage = Math.Round((stats.CobblestoneWinCount / (double)matchCount * 100), 2);
-					}
+						stats.CobblestoneWinCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.CobblestoneLossCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.CobblestoneDrawCount = demosPlayerList.Count(d => d.MapName == "de_cbble" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.CobblestoneWinCount + stats.CobblestoneLossCount + stats.CobblestoneDrawCount;
+						if (matchCount > 0)
+						{
+							stats.CobblestoneWinPercentage = Math.Round((stats.CobblestoneWinCount / (double)matchCount * 100), 2);
+						}
 
-					stats.NukeWinCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
-					stats.NukeLossCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
-					stats.NukeDrawCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
-					matchCount = stats.NukeWinCount + stats.NukeLossCount + stats.NukeDrawCount;
-					if (matchCount > 0)
-					{
-						stats.NukeWinPercentage = Math.Round((stats.NukeWinCount / (double)matchCount * 100), 2);
+						stats.NukeWinCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.NukeLossCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.NukeDrawCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.NukeWinCount + stats.NukeLossCount + stats.NukeDrawCount;
+						if (matchCount > 0)
+						{
+							stats.NukeWinPercentage = Math.Round((stats.NukeWinCount / (double)matchCount * 100), 2);
+						}
 					}
 				}
-			}
+			});
 
 			return stats;
 		}
 
-		public async Task<WeaponStats> GetWeaponStatsAsync()
+		public async Task<WeaponStats> GetWeaponStatsAsync(List<Demo> demos)
 		{
 			WeaponStats stats = new WeaponStats();
+			if (SelectedStatsAccountSteamId == 0) return stats;
 
-			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
-
-			if (demos.Any())
+			await Task.Run(() =>
 			{
 				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
 				if (demosPlayerList.Any())
@@ -501,50 +499,36 @@ namespace Services.Concrete
 							demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).IncendiaryThrownCount;
 					}
 				}
-			}
+			});
 
 			return stats;
 		}
 
-		public async Task<List<RankDateChart>> GetRankDateChartDataAsync(string scale = "none")
+		public async Task<List<RankDateChart>> GetRankDateChartDataAsync(List<Demo> demos, string scale = "none")
 		{
 			List<RankDateChart> datas = new List<RankDateChart>();
-			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
-
-			if (demos.Any())
+			await Task.Run(() =>
 			{
-				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
-				if (demosPlayerList.Any())
+				if (demos.Any())
 				{
-					// Sort by date
-					demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
-					for (int i = 0; i < demosPlayerList.Count; i++)
+					List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
+					if (demosPlayerList.Any())
 					{
-						Demo currentDemo = demosPlayerList[i];
-						Demo nextDemo = demosPlayerList.ElementAtOrDefault(i + 1);
-						// Ignore demos where all players have no rank, sometimes CCSUsrMsg_ServerRankUpdate isn't raised
-						if (currentDemo.Players.All(p => p.RankNumberOld != 0))
+						// Sort by date
+						demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
+						for (int i = 0; i < demosPlayerList.Count; i++)
 						{
-							int newRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberNew;
-							int oldRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberOld;
-							int winCount = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).WinCount;
-							switch (scale)
+							Demo currentDemo = demosPlayerList[i];
+							Demo nextDemo = demosPlayerList.ElementAtOrDefault(i + 1);
+							// Ignore demos where all players have no rank, sometimes CCSUsrMsg_ServerRankUpdate isn't raised
+							if (currentDemo.Players.All(p => p.RankNumberOld != 0))
 							{
-								case "none":
-									datas.Add(new RankDateChart
-									{
-										Date = currentDemo.Date,
-										OldRank = oldRankNumber,
-										NewRank = newRankNumber,
-										WinCount = winCount,
-										WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
-									});
-									break;
-								case "day":
-									if (nextDemo == null || nextDemo.Date.Day != currentDemo.Date.Day)
-									{
-										RankDateChart previousData = datas.LastOrDefault();
-										oldRankNumber = previousData != null ? (int)previousData.NewRank : oldRankNumber;
+								int newRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberNew;
+								int oldRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberOld;
+								int winCount = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).WinCount;
+								switch (scale)
+								{
+									case "none":
 										datas.Add(new RankDateChart
 										{
 											Date = currentDemo.Date,
@@ -553,201 +537,217 @@ namespace Services.Concrete
 											WinCount = winCount,
 											WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
 										});
-									}
-									break;
-								case "month":
-									if (nextDemo == null || nextDemo.Date.Month != currentDemo.Date.Month)
-									{
-										RankDateChart previousData = datas.LastOrDefault();
-										oldRankNumber = previousData != null ? (int)previousData.NewRank : oldRankNumber;
-										datas.Add(new RankDateChart
+										break;
+									case "day":
+										if (nextDemo == null || nextDemo.Date.Day != currentDemo.Date.Day)
 										{
-											Date = currentDemo.Date,
-											OldRank = oldRankNumber,
-											NewRank = newRankNumber,
-											WinCount = winCount,
-											WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
-										});
-									}
-									break;
+											RankDateChart previousData = datas.LastOrDefault();
+											oldRankNumber = previousData != null ? (int)previousData.NewRank : oldRankNumber;
+											datas.Add(new RankDateChart
+											{
+												Date = currentDemo.Date,
+												OldRank = oldRankNumber,
+												NewRank = newRankNumber,
+												WinCount = winCount,
+												WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
+											});
+										}
+										break;
+									case "month":
+										if (nextDemo == null || nextDemo.Date.Month != currentDemo.Date.Month)
+										{
+											RankDateChart previousData = datas.LastOrDefault();
+											oldRankNumber = previousData != null ? (int)previousData.NewRank : oldRankNumber;
+											datas.Add(new RankDateChart
+											{
+												Date = currentDemo.Date,
+												OldRank = oldRankNumber,
+												NewRank = newRankNumber,
+												WinCount = winCount,
+												WinStatus = GetWinStatusCode(currentDemo, SelectedStatsAccountSteamId)
+											});
+										}
+										break;
+								}
 							}
 						}
 					}
 				}
-			}
+			});
 
 			return datas;
 		}
 
-		public async Task<ProgressStats> GetProgressStatsAsync()
+		public async Task<ProgressStats> GetProgressStatsAsync(List<Demo> demos)
 		{
 			ProgressStats stats = new ProgressStats();
-			List<Demo> demos = await _cacheService.GetDemoListAsync(true);
-
-			if (demos.Any())
+			await Task.Run(() =>
 			{
-				List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
-				if (demosPlayerList.Any())
+				if (demos.Any())
 				{
-					double maximumVelocity = 0;
-					demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
-					DateTime currentDate = new DateTime(demosPlayerList[0].Date.Year, demosPlayerList[0].Date.Month, demosPlayerList[0].Date.Day);
-					int matchCount = 0;
-					int winCount = 0;
-					int headshotCount = 0;
-					int killCount = 0;
-					int deathCount = 0;
-					int damageCount = 0;
-					int rifleKillCount = 0;
-					int heavyKillCount = 0;
-					int sniperKillCount = 0;
-					int pistolKillCount = 0;
-					int smgKillCount = 0;
-					int crouchKillCount = 0;
-					Dictionary<WeaponType, double> velocityStats = new Dictionary<WeaponType, double>();
-					foreach (Demo demo in demosPlayerList)
+					List<Demo> demosPlayerList = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId == SelectedStatsAccountSteamId) != null).ToList();
+					if (demosPlayerList.Any())
 					{
-						matchCount++;
-						DateTime demoDate = new DateTime(demo.Date.Year, demo.Date.Month, demo.Date.Day);
-						if (demo.Equals(demosPlayerList.First()) || demo.Equals(demosPlayerList.Last())
-							|| demoDate >= currentDate.AddDays(7))
+						double maximumVelocity = 0;
+						demosPlayerList.Sort((d1, d2) => d1.Date.CompareTo(d2.Date));
+						DateTime currentDate = new DateTime(demosPlayerList[0].Date.Year, demosPlayerList[0].Date.Month, demosPlayerList[0].Date.Day);
+						int matchCount = 0;
+						int winCount = 0;
+						int headshotCount = 0;
+						int killCount = 0;
+						int deathCount = 0;
+						int damageCount = 0;
+						int rifleKillCount = 0;
+						int heavyKillCount = 0;
+						int sniperKillCount = 0;
+						int pistolKillCount = 0;
+						int smgKillCount = 0;
+						int crouchKillCount = 0;
+						Dictionary<WeaponType, double> velocityStats = new Dictionary<WeaponType, double>();
+						foreach (Demo demo in demosPlayerList)
 						{
-							stats.Win.Add(new WinDateChart
+							matchCount++;
+							DateTime demoDate = new DateTime(demo.Date.Year, demo.Date.Month, demo.Date.Day);
+							if (demo.Equals(demosPlayerList.First()) || demo.Equals(demosPlayerList.Last())
+								|| demoDate >= currentDate.AddDays(7))
 							{
-								Date = demoDate,
-								WinPercentage = 0
-							});
-							stats.HeadshotRatio.Add(new HeadshotDateChart
-							{
-								Date = demoDate,
-								HeadshotPercentage = 0
-							});
-							stats.Damage.Add(new DamageDateChart
-							{
-								Date = demoDate,
-								DamageCount = 0
-							});
-							stats.Kill.Add(new KillDateChart
-							{
-								Date = demoDate,
-								KillAverage = 0,
-								DeathAverage = 0
-							});
-							stats.KillVelocityRifle.Add(new KillVelocityChart
-							{
-								Date = demoDate,
-								VelocityAverage = 0
-							});
-							stats.KillVelocityPistol.Add(new KillVelocityChart
-							{
-								Date = demoDate,
-								VelocityAverage = 0
-							});
-							stats.KillVelocitySmg.Add(new KillVelocityChart
-							{
-								Date = demoDate,
-								VelocityAverage = 0
-							});
-							stats.KillVelocitySniper.Add(new KillVelocityChart
-							{
-								Date = demoDate,
-								VelocityAverage = 0
-							});
-							stats.KillVelocityHeavy.Add(new KillVelocityChart
-							{
-								Date = demoDate,
-								VelocityAverage = 0
-							});
-							stats.CrouchKill.Add(new CrouchKillDateChart
-							{
-								Date = demoDate,
-								CrouchKillPercentage = 0
-							});
-
-							currentDate = demoDate;
-							matchCount = 1;
-							winCount = 0;
-							headshotCount = 0;
-							killCount = 0;
-							deathCount = 0;
-							damageCount = 0;
-							rifleKillCount = 0;
-							heavyKillCount = 0;
-							sniperKillCount = 0;
-							pistolKillCount = 0;
-							smgKillCount = 0;
-							crouchKillCount = 0;
-							velocityStats.Clear();
-						}
-
-						if (GetWinStatusCode(demo, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(demo, SelectedStatsAccountSteamId) == 2) winCount++;
-						if (winCount > 0) stats.Win.Last().WinPercentage = Math.Round((winCount / (double)matchCount * 100), 2);
-						headshotCount += demo.HeadshotCount;
-						killCount += demo.KillCount;
-						deathCount += demo.DeathCount;
-						damageCount += demo.DamageHealthCount;
-						crouchKillCount += demo.CrouchKillCount;
-
-						if (killCount > 0)
-						{
-							stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
-							stats.CrouchKill.Last().CrouchKillPercentage = Math.Round((crouchKillCount / (double)killCount * 100), 2);
-						}
-						stats.Damage.Last().DamageCount = Math.Round((double)damageCount / matchCount, 2);
-						stats.Kill.Last().KillAverage = Math.Round((double)killCount / matchCount, 1);
-						stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
-
-						foreach (KillEvent e in demo.Kills)
-						{
-							if (e.KillerSteamId == SelectedStatsAccountSteamId)
-							{
-								if (!velocityStats.ContainsKey(e.Weapon.Type)) velocityStats.Add(e.Weapon.Type, 0);
-								switch (e.Weapon.Type)
+								stats.Win.Add(new WinDateChart
 								{
-									case WeaponType.Rifle:
-										rifleKillCount++;
-										break;
-									case WeaponType.Heavy:
-										heavyKillCount++;
-										break;
-									case WeaponType.Pistol:
-										pistolKillCount++;
-										break;
-									case WeaponType.SMG:
-										smgKillCount++;
-										break;
-									case WeaponType.Sniper:
-										sniperKillCount++;
-										break;
-								}
-								velocityStats[e.Weapon.Type] += Math.Abs(e.KillerVelocityY + e.KillerVelocityX + e.KillerVelocityZ);
-							}
-						}
+									Date = demoDate,
+									WinPercentage = 0
+								});
+								stats.HeadshotRatio.Add(new HeadshotDateChart
+								{
+									Date = demoDate,
+									HeadshotPercentage = 0
+								});
+								stats.Damage.Add(new DamageDateChart
+								{
+									Date = demoDate,
+									DamageCount = 0
+								});
+								stats.Kill.Add(new KillDateChart
+								{
+									Date = demoDate,
+									KillAverage = 0,
+									DeathAverage = 0
+								});
+								stats.KillVelocityRifle.Add(new KillVelocityChart
+								{
+									Date = demoDate,
+									VelocityAverage = 0
+								});
+								stats.KillVelocityPistol.Add(new KillVelocityChart
+								{
+									Date = demoDate,
+									VelocityAverage = 0
+								});
+								stats.KillVelocitySmg.Add(new KillVelocityChart
+								{
+									Date = demoDate,
+									VelocityAverage = 0
+								});
+								stats.KillVelocitySniper.Add(new KillVelocityChart
+								{
+									Date = demoDate,
+									VelocityAverage = 0
+								});
+								stats.KillVelocityHeavy.Add(new KillVelocityChart
+								{
+									Date = demoDate,
+									VelocityAverage = 0
+								});
+								stats.CrouchKill.Add(new CrouchKillDateChart
+								{
+									Date = demoDate,
+									CrouchKillPercentage = 0
+								});
 
-						if (velocityStats.ContainsKey(WeaponType.Rifle))
-							stats.KillVelocityRifle.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Rifle] / rifleKillCount, 1);
-						if (velocityStats.ContainsKey(WeaponType.Pistol))
-							stats.KillVelocityPistol.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Pistol] / pistolKillCount, 1);
-						if (velocityStats.ContainsKey(WeaponType.Sniper))
-							stats.KillVelocitySniper.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Sniper] / sniperKillCount, 1);
-						if (velocityStats.ContainsKey(WeaponType.SMG))
-							stats.KillVelocitySmg.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.SMG] / smgKillCount, 1);
-						if (velocityStats.ContainsKey(WeaponType.Heavy))
-							stats.KillVelocityHeavy.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Heavy] / heavyKillCount, 1);
+								currentDate = demoDate;
+								matchCount = 1;
+								winCount = 0;
+								headshotCount = 0;
+								killCount = 0;
+								deathCount = 0;
+								damageCount = 0;
+								rifleKillCount = 0;
+								heavyKillCount = 0;
+								sniperKillCount = 0;
+								pistolKillCount = 0;
+								smgKillCount = 0;
+								crouchKillCount = 0;
+								velocityStats.Clear();
+							}
+
+							if (GetWinStatusCode(demo, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(demo, SelectedStatsAccountSteamId) == 2) winCount++;
+							if (winCount > 0) stats.Win.Last().WinPercentage = Math.Round((winCount / (double)matchCount * 100), 2);
+							headshotCount += demo.HeadshotCount;
+							killCount += demo.KillCount;
+							deathCount += demo.DeathCount;
+							damageCount += demo.DamageHealthCount;
+							crouchKillCount += demo.CrouchKillCount;
+
+							if (killCount > 0)
+							{
+								stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
+								stats.CrouchKill.Last().CrouchKillPercentage = Math.Round((crouchKillCount / (double)killCount * 100), 2);
+							}
+							stats.Damage.Last().DamageCount = Math.Round((double)damageCount / matchCount, 2);
+							stats.Kill.Last().KillAverage = Math.Round((double)killCount / matchCount, 1);
+							stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
+
+							foreach (KillEvent e in demo.Kills)
+							{
+								if (e.KillerSteamId == SelectedStatsAccountSteamId)
+								{
+									if (!velocityStats.ContainsKey(e.Weapon.Type)) velocityStats.Add(e.Weapon.Type, 0);
+									switch (e.Weapon.Type)
+									{
+										case WeaponType.Rifle:
+											rifleKillCount++;
+											break;
+										case WeaponType.Heavy:
+											heavyKillCount++;
+											break;
+										case WeaponType.Pistol:
+											pistolKillCount++;
+											break;
+										case WeaponType.SMG:
+											smgKillCount++;
+											break;
+										case WeaponType.Sniper:
+											sniperKillCount++;
+											break;
+									}
+									velocityStats[e.Weapon.Type] += Math.Abs(e.KillerVelocityY + e.KillerVelocityX + e.KillerVelocityZ);
+								}
+							}
+
+							if (velocityStats.ContainsKey(WeaponType.Rifle))
+								stats.KillVelocityRifle.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Rifle] / rifleKillCount, 1);
+							if (velocityStats.ContainsKey(WeaponType.Pistol))
+								stats.KillVelocityPistol.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Pistol] / pistolKillCount, 1);
+							if (velocityStats.ContainsKey(WeaponType.Sniper))
+								stats.KillVelocitySniper.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Sniper] / sniperKillCount, 1);
+							if (velocityStats.ContainsKey(WeaponType.SMG))
+								stats.KillVelocitySmg.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.SMG] / smgKillCount, 1);
+							if (velocityStats.ContainsKey(WeaponType.Heavy))
+								stats.KillVelocityHeavy.Last().VelocityAverage = Math.Round(velocityStats[WeaponType.Heavy] / heavyKillCount, 1);
+						}
+						maximumVelocity = stats.KillVelocityPistol.Select(k
+							=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+						maximumVelocity = stats.KillVelocityRifle.Select(k
+							=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+						maximumVelocity = stats.KillVelocityHeavy.Select(k
+							=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+						maximumVelocity = stats.KillVelocitySmg.Select(k
+							=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+						maximumVelocity = stats.KillVelocitySniper.Select(k
+							=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
+						stats.MaximumVelocity = maximumVelocity;
 					}
-					maximumVelocity = stats.KillVelocityPistol.Select(k
-						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
-					maximumVelocity = stats.KillVelocityRifle.Select(k
-						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
-					maximumVelocity = stats.KillVelocityHeavy.Select(k
-						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
-					maximumVelocity = stats.KillVelocitySmg.Select(k
-						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
-					maximumVelocity = stats.KillVelocitySniper.Select(k
-						=> k.VelocityAverage).Concat(new[] { maximumVelocity }).Max();
-					stats.MaximumVelocity = maximumVelocity;
 				}
-			}
+			});
 
 			return stats;
 		}

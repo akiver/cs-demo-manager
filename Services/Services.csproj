@@ -175,6 +175,7 @@
     <Compile Include="Models\Charts\MapPercentageWinChart.cs" />
     <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
+    <Compile Include="Models\DemoFilter.cs" />
     <Compile Include="Models\Excel\PlayerStats.cs" />
     <Compile Include="Models\Excel\WeaponsData.cs" />
     <Compile Include="Models\Heatmap\HeatmapConfiguration.cs" />

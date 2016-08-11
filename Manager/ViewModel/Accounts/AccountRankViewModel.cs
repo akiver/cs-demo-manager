@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using Core.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -19,6 +20,8 @@ namespace Manager.ViewModel.Accounts
 		#region Properties
 
 		private readonly IAccountStatsService _accountStatsService;
+
+		private readonly ICacheService _cacheService;
 
 		private bool _isBusy;
 
@@ -199,9 +202,10 @@ namespace Manager.ViewModel.Accounts
 
 		#endregion
 
-		public AccountRankViewModel(IAccountStatsService accountStatsService)
+		public AccountRankViewModel(IAccountStatsService accountStatsService, ICacheService cacheService)
 		{
 			_accountStatsService = accountStatsService;
+			_cacheService = cacheService;
 			ScaleList = new List<ComboboxSelector>
 			{
 				new ComboboxSelector("none", "None"),
@@ -217,7 +221,7 @@ namespace Manager.ViewModel.Accounts
 				IsBusy = true;
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
-					Datas = await _accountStatsService.GetRankDateChartDataAsync(SelectedScale.Id);
+					Datas = await _accountStatsService.GetRankDateChartDataAsync(new List<Demo>(), SelectedScale.Id);
 				});
 			}
 		}
@@ -241,7 +245,8 @@ namespace Manager.ViewModel.Accounts
 		{
 			IsBusy = true;
 			NotificationMessage = "Loading...";
-			Datas = await _accountStatsService.GetRankDateChartDataAsync(SelectedScale.Id);
+			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
+			Datas = await _accountStatsService.GetRankDateChartDataAsync(demos, SelectedScale.Id);
 			Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
 			IsBusy = false;
 		}

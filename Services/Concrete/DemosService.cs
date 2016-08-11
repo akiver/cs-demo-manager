@@ -200,7 +200,7 @@ namespace Services.Concrete
 			if (!File.Exists(demo.Path))
 			{
 				// Demo may be moved to an other folder, just clear cache
-				await _cacheService.RemoveDemo(demo);
+				await _cacheService.RemoveDemo(demo.Id);
 			}
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
@@ -256,7 +256,7 @@ namespace Services.Concrete
 			if (!File.Exists(demo.Path))
 			{
 				// Demo may be moved to an other folder, just clear cache
-				await _cacheService.RemoveDemo(demo);
+				await _cacheService.RemoveDemo(demo.Id);
 			}
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
@@ -342,7 +342,7 @@ namespace Services.Concrete
 		public async Task<bool> DeleteDemo(Demo demo)
 		{
 			if (!File.Exists(demo.Path)) return false;
-			await _cacheService.RemoveDemo(demo);
+			await _cacheService.RemoveDemo(demo.Id);
 			string infoFilePath = demo.Path + ".info";
 			if (File.Exists(infoFilePath))
 				FileOperationApiWrapper.Send(infoFilePath, FileOperationApiWrapper.FileOperationFlags.FOF_SILENT);

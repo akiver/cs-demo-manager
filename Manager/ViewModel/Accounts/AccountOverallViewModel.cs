@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
+using Core.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -19,6 +20,8 @@ namespace Manager.ViewModel.Accounts
 		#region Properties
 
 		private readonly IAccountStatsService _accountStatsService;
+
+		private readonly ICacheService _cacheService;
 
 		private RelayCommand _windowLoadedCommand;
 
@@ -384,7 +387,8 @@ namespace Manager.ViewModel.Accounts
 		{
 			IsBusy = true;
 			NotificationMessage = "Loading...";
-			OverallStats datas = await _accountStatsService.GetGeneralAccountStatsAsync();
+			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
+			OverallStats datas = await _accountStatsService.GetGeneralAccountStatsAsync(demos);
 			MatchCount = datas.MatchCount;
 			KillCount = datas.KillCount;
 			AssistCount = datas.AssistCount;
@@ -431,9 +435,10 @@ namespace Manager.ViewModel.Accounts
 			IsBusy = false;
 		}
 
-		public AccountOverallViewModel(IAccountStatsService accountStatsService)
+		public AccountOverallViewModel(IAccountStatsService accountStatsService, ICacheService cacherService)
 		{
 			_accountStatsService = accountStatsService;
+			_cacheService = cacherService;
 
 			if (IsInDesignMode)
 			{

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Core.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
@@ -20,6 +21,8 @@ namespace Manager.ViewModel.Accounts
 		#region Properties
 
 		private readonly IAccountStatsService _accountStatsService;
+
+		private readonly ICacheService _cacheService;
 
 		private bool _isBusy;
 
@@ -508,7 +511,8 @@ namespace Manager.ViewModel.Accounts
 		{
 			IsBusy = true;
 			NotificationMessage = "Loading...";
-			ProgressStats datas = await _accountStatsService.GetProgressStatsAsync();
+			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
+			ProgressStats datas = await _accountStatsService.GetProgressStatsAsync(demos);
 			DatasWin = datas.Win;
 			DatasDamage = datas.Damage;
 			DatasHeadshot = datas.HeadshotRatio;
@@ -524,9 +528,10 @@ namespace Manager.ViewModel.Accounts
 			IsBusy = false;
 		}
 
-		public AccountProgressViewModel(IAccountStatsService accountStatsService)
+		public AccountProgressViewModel(IAccountStatsService accountStatsService, ICacheService cacheService)
 		{
 			_accountStatsService = accountStatsService;
+			_cacheService = cacheService;
 
 			if (IsInDesignMode)
 			{

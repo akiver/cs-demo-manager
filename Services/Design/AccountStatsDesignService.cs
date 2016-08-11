@@ -17,7 +17,7 @@ namespace Services.Design
 			return Task.FromResult(demo);
 		}
 
-		public Task<List<RankDateChart>> GetRankDateChartDataAsync(string scale)
+		public Task<List<RankDateChart>> GetRankDateChartDataAsync(List<Demo> demos, string scale)
 		{
 			Random ran = new Random();
 			return Task.FromResult(new List<RankDateChart>
@@ -187,7 +187,7 @@ namespace Services.Design
 			});
 		}
 
-		public Task<OverallStats> GetGeneralAccountStatsAsync()
+		public Task<OverallStats> GetGeneralAccountStatsAsync(List<Demo> demos)
 		{
 			return Task.FromResult(new OverallStats
 			{
@@ -218,7 +218,7 @@ namespace Services.Design
 			});
 		}
 
-		public Task<MapStats> GetMapStatsAsync()
+		public Task<MapStats> GetMapStatsAsync(List<Demo> demos)
 		{
 			return Task.FromResult(new MapStats
 			{
@@ -257,7 +257,7 @@ namespace Services.Design
 			});
 		}
 
-		public Task<WeaponStats> GetWeaponStatsAsync()
+		public Task<WeaponStats> GetWeaponStatsAsync(List<Demo> demos)
 		{
 			return Task.FromResult(new WeaponStats
 			{
@@ -344,7 +344,7 @@ namespace Services.Design
 			});
 		}
 
-		public Task<ProgressStats> GetProgressStatsAsync()
+		public Task<ProgressStats> GetProgressStatsAsync(List<Demo> demos)
 		{
 			return Task.FromResult(new ProgressStats
 			{
