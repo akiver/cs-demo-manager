@@ -29,6 +29,8 @@ namespace Core.Models.Source
 					return new Cevo();
 				case "popflash":
 					return new PopFlash();
+				case "esl":
+					return new Esl();
 				default:
 					return null;
 			}

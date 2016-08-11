@@ -115,6 +115,7 @@ namespace Services.Concrete.Analyzer
 					return new EseaAnalyzer(demo);
 				case "ebot":
 				case "faceit":
+				case "esl":
 					return new EbotAnalyzer(demo);
 				case "cevo":
 					return new CevoAnalyzer(demo);
@@ -231,6 +232,12 @@ namespace Services.Concrete.Analyzer
 				|| demo.Hostname.Contains("popflash", StringComparison.OrdinalIgnoreCase))
 			{
 				return Source.Factory("popflash");
+			}
+
+			// Check for ESL demos
+			if (demo.Hostname.Contains("esl", StringComparison.OrdinalIgnoreCase))
+			{
+				return Source.Factory("esl");
 			}
 
 			// If none of the previous checks matched, we use ValveAnalyzer

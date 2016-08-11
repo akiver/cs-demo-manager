@@ -293,6 +293,16 @@ namespace Core.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap esl {
+            get {
+                object obj = ResourceManager.GetObject("esl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap faceit {
             get {
                 object obj = ResourceManager.GetObject("faceit", resourceCulture);

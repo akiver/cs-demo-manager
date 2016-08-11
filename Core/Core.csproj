@@ -83,6 +83,7 @@
     <Compile Include="Models\Serialization\LongToStringConverter.cs" />
     <Compile Include="Models\Serialization\SideToStringConverter.cs" />
     <Compile Include="Models\Side.cs" />
+    <Compile Include="Models\Source\Esl.cs" />
     <Compile Include="Models\Stuff.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -238,6 +239,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\avatar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Images\Logos\esl.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
