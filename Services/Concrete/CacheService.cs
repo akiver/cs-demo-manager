@@ -825,7 +825,7 @@ namespace Services.Concrete
 			Player player = demo.Players.FirstOrDefault(p => p.SteamId == steamId);
 			if (player == null) return false;
 			// Don't update if demo's date is higher than the known last rank date detected
-			RankInfo lastRankInfo = await GetLastRankInfoAsync();
+			RankInfo lastRankInfo = await GetLastRankInfoAsync(steamId);
 			if (lastRankInfo != null && lastRankInfo.LastDate > demo.Date) return false;
 			lastRankInfo = new RankInfo
 			{
