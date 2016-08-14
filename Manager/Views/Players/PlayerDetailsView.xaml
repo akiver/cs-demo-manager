@@ -10,7 +10,6 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 xmlns:player="clr-namespace:Manager.Views.Players"
-			 Background="{StaticResource LightGreyBrush}"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
 			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
@@ -63,16 +62,18 @@
 					Margin="5"
 					Width="70"
 					Height="30"
-					Style="{StaticResource GeneralButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Back (CTRL+B)"
 					Command="{Binding BackToDetailsCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<Rectangle Width="15"
-							   Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-						</Rectangle.Fill>
+							   Height="15"
+							   Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+										 Stretch="Fill" />
+						</Rectangle.OpacityMask>
 					</Rectangle>
 					<TextBlock Text="Back"
 							   Margin="5 0 0 0"
@@ -84,16 +85,18 @@
 					Margin="5"
 					Width="130"
 					Height="30"
-					Style="{StaticResource GeneralButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Watch highlights (CTRL+H)"
 					Command="{Binding WatchHighlightsCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<Rectangle Width="15"
-							   Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_thumbs_up}" />
-						</Rectangle.Fill>
+							   Height="15"
+							   Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_thumbs_up}"
+										 Stretch="Fill" />
+						</Rectangle.OpacityMask>
 					</Rectangle>
 					<TextBlock Text="Watch highlights"
 							   Margin="5 0 0 0"
@@ -105,16 +108,18 @@
 					Margin="5"
 					Width="130"
 					Height="30"
-					Style="{StaticResource GeneralButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Watch lowlights (CTRL+L)"
 					Command="{Binding WatchLowlightsCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<Rectangle Width="15"
-							   Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_thumbs_down}" />
-						</Rectangle.Fill>
+							   Height="15"
+							   Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_thumbs_down}"
+										 Stretch="Fill" />
+						</Rectangle.OpacityMask>
 					</Rectangle>
 					<TextBlock Text="Watch lowlights"
 							   Margin="5 0 0 0"
@@ -126,16 +131,18 @@
 					Margin="5"
 					Width="140"
 					Height="30"
-					Style="{StaticResource GeneralButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Add player to suspects list (CTRL+S)"
 					Command="{Binding AddPlayerToSuspectsListCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<Rectangle Width="15"
-							   Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_user_add}" />
-						</Rectangle.Fill>
+							   Height="15"
+							   Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_user_add}"
+										 Stretch="Fill" />
+						</Rectangle.OpacityMask>
 					</Rectangle>
 					<TextBlock Text="Add to suspects list"
 							   Margin="5 0 0 0"
@@ -147,16 +154,18 @@
 					Margin="5"
 					Width="130"
 					Height="30"
-					Style="{StaticResource GeneralButtonStyle}"
+					Style="{DynamicResource AccentedSquareButtonStyle}"
 					ToolTip="Add player to whitelist (CTRL+W)"
 					Command="{Binding AddPlayerToWhitelistCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
 					<Rectangle Width="15"
-							   Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_user_add}" />
-						</Rectangle.Fill>
+							   Height="15"
+							   Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_user_add}"
+										 Stretch="Fill" />
+						</Rectangle.OpacityMask>
 					</Rectangle>
 					<TextBlock Text="Add to whitelist"
 							   Margin="5 0 0 0"
@@ -169,11 +178,11 @@
 						HorizontalAlignment="Center"
 						Margin="2">
 				<controls:ProgressRing IsActive="{Binding IsBusy}"
-									   Foreground="{DynamicResource AccentColorBrush}"
+									   Foreground="{DynamicResource BlackColorBrush}"
 									   Width="40"
 									   Height="40" />
 				<TextBlock Text="{Binding NotificationMessage}"
-						   Style="{StaticResource LabelGeneralInfoDemo}"
+						   Style="{StaticResource NotificationMessageStyle}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			</StackPanel>
 		</Grid>

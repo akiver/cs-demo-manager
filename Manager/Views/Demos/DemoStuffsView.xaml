@@ -9,7 +9,6 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 mc:Ignorable="d"
-			 Background="{StaticResource LightGreyBrush}"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
 			 DataContext="{Binding DemoStuffs, Source={StaticResource Locator}}">
@@ -26,8 +25,8 @@
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+B" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}" />
+									Command="{Binding BackToDemoDetailsCommand}"
+									CommandParameter="{Binding CurrentDemo}" />
 		<KeyBinding Command="{Binding WatchPlayerStuffCommand}"
 					Gesture="CTRL+W" />
 	</UserControl.InputBindings>
@@ -44,107 +43,88 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Margin="5">
+		<Grid Grid.Row="0"
+			  Height="40">
 			<StackPanel Orientation="Horizontal">
-				<StackPanel Orientation="Horizontal">
-					<Button Margin="10"
-							Style="{StaticResource GeneralButtonStyle}"
-							Width="70"
-							Height="30"
-							Command="{Binding BackToDemoDetailsCommand}"
-							CommandParameter="{Binding CurrentDemo}"
-							ToolTip="Back (CTRL+B)">
-						<StackPanel Orientation="Horizontal"
-									VerticalAlignment="Center">
-							<Rectangle Width="15"
-									   Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-								</Rectangle.Fill>
-							</Rectangle>
-							<TextBlock Text="Back"
-									   Margin="5 0 0 0"
-									   Style="{StaticResource ButtonTitleStyle}" />
-						</StackPanel>
-					</Button>
-				</StackPanel>
-
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Type" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox ItemsSource="{Binding StuffSelectors}"
-							  SelectedItem="{Binding CurrentStuffSelector}"
-							  DisplayMemberPath ="Title"
-							  SelectedValuePath="Title"
-							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-							  Width="180"
-							  Height="25"
-							  Margin="5 0 0 0">
-						<i:Interaction.Triggers>
-							<i:EventTrigger EventName="SelectionChanged">
-								<i:InvokeCommandAction Command="{Binding StuffTypeChangedCommand}" />
-							</i:EventTrigger>
-						</i:Interaction.Triggers>
-					</ComboBox>
-				</StackPanel>
-
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Player" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
-							  SelectedItem="{Binding SelectedPlayer}"
-							  DisplayMemberPath ="Name"
-							  SelectedValuePath="Name"
-							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-							  Width="180"
-							  Height="25"
-							  Margin="5 0 0 0"/>
-				</StackPanel>
-				<Button Command="{Binding WatchPlayerStuffCommand}"
-						Style="{StaticResource GeneralButtonStyle}"
-						ToolTip="Watch all stuffs from this player (CTRL+W)"
-						Width="160"
-						Height="30"
-						Margin="10 0 0 0">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_control_play}" />
-							</Rectangle.Fill>
+				<Button Style="{DynamicResource GeneralButton}"
+						Command="{Binding BackToDemoDetailsCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						ToolTip="Back (CTRL+B)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Watch player stuffs"
-								   Margin="5 0 0 0"
+						<TextBlock Text="Back"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-						Style="{StaticResource GeneralButtonStyle}"
-						Width="110"
-						Height="30"
+				<ComboBox ItemsSource="{Binding StuffSelectors}"
+						  SelectedItem="{Binding CurrentStuffSelector}"
+						  DisplayMemberPath ="Title"
+						  SelectedValuePath="Title"
+						  Margin="5">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="SelectionChanged">
+							<i:InvokeCommandAction Command="{Binding StuffTypeChangedCommand}" />
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+				</ComboBox>
+
+				<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
+						  SelectedItem="{Binding SelectedPlayer}"
+						  DisplayMemberPath ="Name"
+						  SelectedValuePath="Name"
+						  Margin="5"/>
+				
+				<Button Command="{Binding WatchPlayerStuffCommand}"
+						Style="{DynamicResource GeneralButton}"
+						ToolTip="Watch all stuffs from this player (CTRL+W)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15" 
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_control_play}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Watch player stuffs"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding CopySetPosCommand}"
 						ToolTip="Copy setpos command">
-					<StackPanel Orientation="Horizontal"
-								VerticalAlignment="Center">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
-								   Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_location_round}" />
-							</Rectangle.Fill>
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_location_round}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
 						<TextBlock Text="Copy setpos"
-								   Margin="5 0 0 0"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center"
-							Margin="5 0 0 0">
+							Margin="5">
 					<controls:ProgressRing IsActive="{Binding IsBusy}"
-										   Foreground="{DynamicResource AccentColorBrush}"
-										   Width="40"
-										   Height="40" />
+										   Foreground="{DynamicResource BlackColorBrush}"
+										   Width="30"
+										   Height="30" />
 					<TextBlock Text="{Binding NotificationMessage}"
-							   Style="{StaticResource LabelGeneralInfoDemo}"
+							   Style="{StaticResource NotificationMessageStyle}"
 							   Visibility="{Binding HasNotificationMessage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>
@@ -163,9 +143,6 @@
 				<DataGrid x:Name="StuffDataGrid"
 						  ItemsSource="{Binding Stuffs}"
 						  SelectedItem="{Binding SelectedStuff}"
-						  CellStyle="{StaticResource DataGridCellStyle}"
-						  RowStyle="{StaticResource DataGridRowStyle}"
-						  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 						  Style="{StaticResource DataGridStyle}">
 					<DataGrid.Columns>
 						<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}"
@@ -185,7 +162,7 @@
 								<DataTemplate>
 									<Button Command="{Binding Source={StaticResource Locator}, Path=DemoStuffs.WatchStuffCommand}"
 											CommandParameter="{Binding SelectedItem, ElementName=StuffDataGrid}"
-											Style="{StaticResource GeneralButtonStyle}"
+											Style="{DynamicResource AccentedSquareButtonStyle}"
 											Content="Watch" />
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -210,12 +187,9 @@
 				
 				<TextBlock Grid.Row="0"
 						   Text="Flashed players"
-						   Foreground="{StaticResource LightGreenBrush}" />
+						   Style="{StaticResource TextBlockStandard}"/>
 				<DataGrid Grid.Row="1"
 						  ItemsSource="{Binding SelectedStuff.FlashedPlayers}"
-						  CellStyle="{StaticResource DataGridCellStyle}"
-						  RowStyle="{StaticResource DataGridRowStyle}"
-						  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
 						  Style="{StaticResource DataGridStyle}">
 					<DataGrid.Columns>
 						<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"

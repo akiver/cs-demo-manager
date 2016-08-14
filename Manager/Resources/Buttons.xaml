@@ -2,13 +2,25 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.buttons.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<Style x:Key="GeneralButtonStackPanel" TargetType="{x:Type StackPanel}">
+		<Setter Property="Orientation" Value="Horizontal" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="Margin" Value="5 0 5 0" />
+	</Style>
+	
+	<Style x:Key="GeneralButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AccentedSquareButtonStyle}">
+		<Setter Property="Margin" Value="5" />
+	</Style>
+	
 	<Style x:Key="GeneralButtonStyle" TargetType="{x:Type Button}">
 		<Setter Property="MinHeight" Value="25" />
 		<Setter Property="FontFamily" Value="{DynamicResource DefaultFont}" />
 		<Setter Property="FontWeight" Value="SemiBold" />
-		<Setter Property="Background" Value="{StaticResource LightGreenBrush}" />
 		<Setter Property="BorderBrush" Value="Black" />
-		<Setter Property="Foreground" Value="{StaticResource LightGreyBrush}" />
 		<Setter Property="Padding" Value="5 6" />
 		<Setter Property="BorderThickness" Value="2" />
 		<Setter Property="SnapsToDevicePixels" Value="True" />

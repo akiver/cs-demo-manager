@@ -9,7 +9,6 @@
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -42,23 +41,24 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Margin="5">
+		<Grid Grid.Row="0"
+			  Height="40">
 			<StackPanel Orientation="Horizontal">
-
-				<Button Margin="10"
-					Style="{StaticResource GeneralButtonStyle}"
-					ToolTip="Back (CTRL+B)"
-					Width="70"
-					Height="30"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-							</Rectangle.Fill>
+				<Button Style="{DynamicResource GeneralButton}"
+						ToolTip="Back (CTRL+B)"
+						Command="{Binding BackToDemoDetailsCommand}"
+						CommandParameter="{Binding CurrentDemo}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Back"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 			</StackPanel>
@@ -74,7 +74,7 @@
 						</Grid.ColumnDefinitions>
 
 						<Border Grid.Column="0"
-								BorderBrush="{StaticResource LightGreenBrush}"
+								BorderBrush="{StaticResource HighlightBrush}"
 								BorderThickness="1" >
 							<Grid Margin="5 0 5 5">
 								<Grid.RowDefinitions>
@@ -113,13 +113,9 @@
 												   Style="{StaticResource SmallTitleStyle}"
 												   Grid.ColumnSpan="2"/>
 										<DataGrid Grid.Row="1"
-												  Width="Auto"
 												  Grid.Column="0"
 												  ItemsSource="{Binding CurrentDemo.Rounds, IsAsync=True}"
 												  Style="{StaticResource DataGridStyle}"
-												  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-												  CellStyle="{StaticResource DataGridCellStyle}"
-												  RowStyle="{StaticResource DataGridRowStyle}"
 												  Grid.ColumnSpan="2">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
@@ -158,12 +154,7 @@
 												   Style="{StaticResource SmallTitleStyle}"/>
 										<DataGrid Grid.Row="1"
 												  ItemsSource="{Binding CurrentDemo.Players}"
-												  Style="{StaticResource DataGridStyle}"
-												  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-												  RowStyle="{StaticResource DataGridRowStyle}"
-												  EnableColumnVirtualization ="True"
-												  EnableRowVirtualization ="True"
-												  CellStyle="{StaticResource DataGridCellStyle}">
+												  Style="{StaticResource DataGridStyle}">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 																	Width="Auto"
@@ -199,10 +190,7 @@
 													   Style="{StaticResource SmallTitleStyle}"/>
 											<DataGrid Grid.Row="1"
 													  ItemsSource="{Binding Teams}"
-													  Style="{StaticResource DataGridStyle}"
-													  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-													  RowStyle="{StaticResource DataGridRowStyle}"
-													  CellStyle="{StaticResource DataGridCellStyle}">
+													  Style="{StaticResource DataGridStyle}">
 												<DataGrid.Columns>
 													<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
 																		Width="Auto"
@@ -234,7 +222,7 @@
 
 
 						<Border Grid.Column="1"
-								BorderBrush="{StaticResource LightGreenBrush}"
+								BorderBrush="{DynamicResource HighlightBrush}"
 								BorderThickness="1"
 								Margin="5 0 0 0">
 							<Grid Margin="5 0 5 5">
@@ -260,7 +248,8 @@
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
 
-									<Grid Grid.Column="0" Margin="5">
+									<Grid Grid.Column="0"
+										  Margin="5">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="*"/>
 											<ColumnDefinition Width="*"/>
@@ -277,11 +266,7 @@
 										<DataGrid Grid.Column="0"
 												  Grid.Row="1"
 												  ItemsSource="{Binding CurrentDemo.Rounds}"
-												  Width="Auto"
 												  Style="{StaticResource DataGridStyle}"
-												  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-												  RowStyle="{StaticResource DataGridRowStyle}"
-												  CellStyle="{StaticResource DataGridCellStyle}"
 												  Grid.ColumnSpan="2">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
@@ -308,7 +293,8 @@
 										</DataGrid>
 									</Grid>
 
-									<Grid Grid.Column="1" Margin="5">
+									<Grid Grid.Column="1"
+										  Margin="5">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="Auto" />
@@ -319,12 +305,8 @@
 												   Text="Players"
 												   Style="{StaticResource SmallTitleStyle}"/>
 										<DataGrid Grid.Row="1"
-												  Width="Auto"
 												  ItemsSource="{Binding CurrentDemo.Players}"
-												  Style="{StaticResource DataGridStyle}"
-												  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-												  RowStyle="{StaticResource DataGridRowStyle}"
-												  CellStyle="{StaticResource DataGridCellStyle}">
+												  Style="{StaticResource DataGridStyle}">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 																	Width="Auto"
@@ -349,7 +331,8 @@
 											</DataGrid.Columns>
 										</DataGrid>
 
-										<Grid Grid.Row="2" Margin="5">
+										<Grid Grid.Row="2"
+											  Margin="5">
 											<Grid.RowDefinitions>
 												<RowDefinition Height="Auto" />
 												<RowDefinition Height="*" />
@@ -359,14 +342,8 @@
 													   Text="Teams"
 													   Style="{StaticResource SmallTitleStyle}"/>
 											<DataGrid Grid.Row="1"
-													  Width="Auto"
 													  ItemsSource="{Binding Teams}"
-													  Style="{StaticResource DataGridStyle}"
-													  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-													  RowStyle="{StaticResource DataGridRowStyle}"
-													  EnableColumnVirtualization ="True"
-													  EnableRowVirtualization ="True"
-													  CellStyle="{StaticResource DataGridCellStyle}">
+													  Style="{StaticResource DataGridStyle}">
 												<DataGrid.Columns>
 													<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
 																		Width="Auto"
@@ -409,15 +386,18 @@
 								<telerik:CategoricalDefinition.Colorizer>
 									<telerik:HeatMapValueGradientColorizer RangeMinimum="0"
 																		   RangeMaximum="{Binding MaxPlayerKillCount}">
-										<GradientStop Offset="0.0" Color="{StaticResource LightWhite}" />
-										<GradientStop Offset="0.5" Color="{StaticResource Orange}" />
-										<GradientStop Offset="1.0" Color="{StaticResource Red}" />
+										<GradientStop Offset="0.0"
+													  Color="{StaticResource LightWhite}" />
+										<GradientStop Offset="0.5"
+													  Color="{StaticResource Orange}" />
+										<GradientStop Offset="1.0"
+													  Color="{StaticResource Red}" />
 									</telerik:HeatMapValueGradientColorizer>
 								</telerik:CategoricalDefinition.Colorizer>
 							</telerik:CategoricalDefinition>
 						</telerik:RadHeatMap.Definition>
 						<telerik:RadHeatMap.CellLabelSettings>
-							<telerik:HeatMapCellLabelSettings />
+							<telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
 						</telerik:RadHeatMap.CellLabelSettings>
 						<telerik:RadHeatMap.ColumnHeaderSettings>
 							<telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"

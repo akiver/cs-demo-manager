@@ -6,8 +6,7 @@
 					  xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
 					  xmlns:command="http://www.galasoft.ch/mvvmlight"
 					  xmlns:converters="clr-namespace:Manager.Converters"
-					  Background="{StaticResource LightGreyBrush}"
-					  GlowBrush="{StaticResource LightGreenBrush}"
+					  GlowBrush="{StaticResource HighlightBrush}"
 					  Title="CSGO Demos Manager"
 					  SaveWindowPosition="True"
 					  DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -49,7 +48,8 @@
 	</controls:MetroWindow.RightWindowCommands>
 
 	<Grid>
-		<pageTransitions:PageTransition Content="{Binding CurrentPage }" TransitionType="SlideAndFade" />
+		<pageTransitions:PageTransition Content="{Binding CurrentPage}"
+										TransitionType="SlideAndFade" />
 	</Grid>
 
 	<controls:MetroWindow.Flyouts>
@@ -57,6 +57,7 @@
 			<controls:Flyout
 				x:Name="SettingsFlyout"
 				Position="Right"
+				Theme="Adapt"
 				Header="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
 				Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
 				IsOpen="{Binding IsSettingsOpen}"
@@ -80,32 +81,37 @@
 							</Grid.RowDefinitions>
 
 							<StackPanel Margin="10" Grid.Row="0">
-								<TextBlock Text="Stats date" Style="{StaticResource TitleSettingsStyle}" />
+								<TextBlock Text="Stats date"
+										   Style="{StaticResource TitleSettingsStyle}" />
 								<TextBlock Text="From :"
 										   Style="{StaticResource LabelStyle}" />
 								<DatePicker IsTodayHighlighted="True"
 											Focusable="False"
 											DisplayDateStart="2011-11-30"
 											SelectedDate="{Binding Source={StaticResource Locator}, Path=Settings.DateStatsFrom}"/>
-								<TextBlock Text="To :" Style="{StaticResource LabelStyle}" />
+								<TextBlock Text="To :"
+										   Style="{StaticResource LabelStyle}" />
 								<DatePicker IsTodayHighlighted="True"
 											Focusable="False"
 											SelectedDate="{Binding Source={StaticResource Locator}, Path=Settings.DateStatsTo}" />
 							</StackPanel>
 
-							<StackPanel Margin="10" Grid.Row="1">
-								<TextBlock Text="Launch Options" Style="{StaticResource TitleSettingsStyle}" />
+							<StackPanel Margin="10"
+										Grid.Row="1">
+								<TextBlock Text="Launch Options"
+										   Style="{StaticResource TitleSettingsStyle}" />
 								<StackPanel Orientation="Vertical">
 									<CheckBox Content="Fullscreen"
-										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionFullscreen}" />
+											  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionFullscreen}" />
 
 									<Label Target="{Binding ElementName=ResolutionWidthTextBox}">Width:</Label>
-									<TextBox x:Name="ResolutionWidthTextBox" PreviewTextInput="NumberPreviewTextInput"
-											Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth, Converter={StaticResource NullableValue}}">
+									<TextBox x:Name="ResolutionWidthTextBox"
+											 PreviewTextInput="NumberPreviewTextInput"
+											 Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth, Converter={StaticResource NullableValue}}">
 										<i:Interaction.Triggers>
 											<i:EventTrigger EventName="LostFocus">
 												<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveResolutionWidthCommand}"
-																	CommandParameter="{Binding Path=Text, ElementName=ResolutionWidthTextBox}"/>
+																	   CommandParameter="{Binding Path=Text, ElementName=ResolutionWidthTextBox}"/>
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
 									</TextBox>
@@ -117,18 +123,18 @@
 										<i:Interaction.Triggers>
 											<i:EventTrigger EventName="LostFocus">
 												<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveResolutionHeightCommand}"
-																	CommandParameter="{Binding Path=Text, ElementName=ResolutionHeightTextBox}"/>
+																	   CommandParameter="{Binding Path=Text, ElementName=ResolutionHeightTextBox}"/>
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
 									</TextBox>
 
 									<Label Target="{Binding ElementName=LaunchParametersTextBox}">Additionals parameters:</Label>
 									<TextBox x:Name="LaunchParametersTextBox"
-											Text="{Binding Source={StaticResource Locator}, Path=Settings.LaunchParameters}">
+											 Text="{Binding Source={StaticResource Locator}, Path=Settings.LaunchParameters}">
 										<i:Interaction.Triggers>
 											<i:EventTrigger EventName="LostFocus">
 												<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveLaunchParametersCommand}"
-																	CommandParameter="{Binding Path=Text, ElementName=LaunchParametersTextBox}"/>
+																	   CommandParameter="{Binding Path=Text, ElementName=LaunchParametersTextBox}"/>
 											</i:EventTrigger>
 										</i:Interaction.Triggers>
 									</TextBox>
@@ -156,22 +162,24 @@
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.CloseBotOnExit}" />
 							</StackPanel>
 
-							<StackPanel Margin="10" Grid.Row="4">
-								<TextBlock Text="Data" Style="{StaticResource TitleSettingsStyle}" />
+							<StackPanel Margin="10"
+										Grid.Row="4">
+								<TextBlock Text="Data"
+										   Style="{StaticResource TitleSettingsStyle}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
-										Style="{StaticResource GeneralButtonStyle}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Clear demos data" />
 								<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.CacheSizeAsString}"
 										   Style="{StaticResource LabelChartStyle}"
 										   FontSize="12" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ExportCustomDataCacheCommand}"
-										Style="{StaticResource GeneralButtonStyle}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Export custom data" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.ImportCustomDataCacheCommand}"
-										Style="{StaticResource GeneralButtonStyle}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Import custom data" />
 							</StackPanel>
 
@@ -179,7 +187,7 @@
 								<TextBlock Text="Miscellaneous" Style="{StaticResource TitleSettingsStyle}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.NavigateToLogFile}"
-										Style="{StaticResource GeneralButtonStyle}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Errors log file" />
 								<CheckBox Content="Limit stats to selected folder" Margin="0 5 0 0"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.LimitStatsSelectedFolder}" />
@@ -188,8 +196,15 @@
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IgnoreLaterBan}" />
 								<Button Margin="0 5 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.DeleteVdmFilesCommand}"
-										Style="{StaticResource GeneralButtonStyle}"
+										Style="{DynamicResource AccentedSquareButtonStyle}"
 										Content="Clear VDM files" />
+
+								<TextBlock Text="Theme"
+										   Style="{StaticResource TitleSettingsStyle}" />
+								<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Themes}"
+										  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedTheme}"
+										  DisplayMemberPath="Title"
+										  SelectedValuePath="Id" />
 							</StackPanel>
 						</Grid>
 
@@ -202,16 +217,18 @@
 
 							<Grid Grid.Row="0">
 								<StackPanel Margin="10">
-									<TextBlock Text="Folders options" Style="{StaticResource TitleSettingsStyle}" />
-									<ListView ItemsSource="{Binding Folders}" SelectedItem="{Binding SelectedFolder}"/>
+									<TextBlock Text="Folders options"
+											   Style="{StaticResource TitleSettingsStyle}" />
+									<ListView ItemsSource="{Binding Folders}"
+											  SelectedItem="{Binding SelectedFolder}"/>
 									<StackPanel Orientation="Horizontal">
 										<Button Command="{Binding AddFolderCommand}"
-												Style="{StaticResource GeneralButtonStyle}"
+												Style="{DynamicResource AccentedSquareButtonStyle}"
 												Margin="0 5 0 0"
 												Content="Add folder" />
 										<Button Command="{Binding RemoveFolderCommand}"
 												CommandParameter="{Binding Path=SelectedFolder}"
-												Style="{StaticResource GeneralButtonStyle}"
+												Style="{DynamicResource AccentedSquareButtonStyle}"
 												Margin="10 5 0 0"
 												Content="Remove folder" />
 									</StackPanel>
@@ -415,32 +432,35 @@
 								</StackPanel>
 
 								<StackPanel Margin="10">
-									<TextBlock Text="Accounts" Style="{StaticResource TitleSettingsStyle}" />
+									<TextBlock Text="Accounts"
+											   Style="{StaticResource TitleSettingsStyle}" />
 									<ListView ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
-										  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"/>
+											  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"/>
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Style="{StaticResource TitleSettingsStyle}" FontSize="18"
+										<TextBlock Style="{StaticResource TitleSettingsStyle}"
+												   FontSize="18"
 												   Text="Current account used for watch (lowlights / highlights) : " />
 										<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.SelectedWatchAccount}"
-												   Style="{StaticResource TitleSettingsStyle}" FontSize="18" Foreground="{StaticResource LightWhiteBrush}" />
+												   Style="{StaticResource TitleSettingsStyle}"
+												   FontSize="18" />
 									</StackPanel>
 									<StackPanel Orientation="Horizontal">
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.AddAccountCommand}"
-												Style="{StaticResource GeneralButtonStyle}"
+												Style="{DynamicResource AccentedSquareButtonStyle}"
 												Margin="0 5 0 0"
 												Content="Add an account" />
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.RemoveAccountCommand}"
 												CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"
-												Style="{StaticResource GeneralButtonStyle}"
+												Style="{DynamicResource AccentedSquareButtonStyle}"
 												Margin="10 5 0 0"
 												Content="Remove account" />
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.SetAsWatchAccountCommand}"
 												CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedWatchAccount}"
-												Style="{StaticResource GeneralButtonStyle}"
+												Style="{DynamicResource AccentedSquareButtonStyle}"
 												Margin="10 5 0 0"
 												Content="Use this account for watch" />
 										<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.SyncAccountsNickname}"
-												Style="{StaticResource GeneralButtonStyle}"
+												Style="{DynamicResource AccentedSquareButtonStyle}"
 												Margin="10 5 0 0"
 												Content="Sync nicknames" />
 									</StackPanel>
@@ -458,7 +478,7 @@
 														 IsEnabled="False" />
 												<Button Content="Browse"
 														Margin="10 0 0 0"
-														Style="{StaticResource GeneralButtonStyle}"
+														Style="{DynamicResource AccentedSquareButtonStyle}"
 														Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectDownloadFolderPathCommand}"/>
 											</StackPanel>
 										</StackPanel>
@@ -466,29 +486,35 @@
 								</StackPanel>
 
 								<StackPanel Margin="10">
-									<TextBlock Text="Moviemaking" Style="{StaticResource TitleSettingsStyle}" />
+									<TextBlock Text="Moviemaking"
+											   Style="{StaticResource TitleSettingsStyle}" />
 									<StackPanel Orientation="Horizontal">
 										<Grid>
 											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto"></RowDefinition>
-												<RowDefinition Height="Auto"></RowDefinition>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
 											</Grid.RowDefinitions>
-											<CheckBox x:Name="EnableMoviemakerModeCheckbox" Grid.Row="0" Content="Enable moviemaker mode"
-										IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
-										Style="{StaticResource CheckBoxColumnOptionStyle}">
+											<CheckBox x:Name="EnableMoviemakerModeCheckbox"
+													  Grid.Row="0"
+													  Content="Enable moviemaker mode"
+													  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
+													  Style="{StaticResource CheckBoxColumnOptionStyle}">
 												<i:Interaction.Triggers>
 													<i:EventTrigger EventName="Checked">
 														<command:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerModeCommand, Mode=OneWay}"
-																		CommandParameter="{Binding IsChecked, ElementName=EnableMoviemakerModeCheckbox}" />
+																				CommandParameter="{Binding IsChecked, ElementName=EnableMoviemakerModeCheckbox}" />
 													</i:EventTrigger>
 												</i:Interaction.Triggers>
 											</CheckBox>
 											<StackPanel Grid.Row="1">
 												<StackPanel Orientation="Horizontal">
-													<TextBlock Text="csgo.exe path : " Style="{StaticResource SubTitleSettingsStyle}"/>
-													<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.CsgoExePath}" IsEnabled="False" />
-													<Button Content="Browse" Margin="10 0 0 0"
-															Style="{StaticResource GeneralButtonStyle}"
+													<TextBlock Text="csgo.exe path : "
+															   Style="{StaticResource SubTitleSettingsStyle}"/>
+													<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.CsgoExePath}"
+															 IsEnabled="False" />
+													<Button Content="Browse"
+															Margin="10 0 0 0"
+															Style="{DynamicResource AccentedSquareButtonStyle}"
 															IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
 															Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}"/>
 												</StackPanel>
@@ -498,7 +524,8 @@
 								</StackPanel>
 							</StackPanel>
 							<Grid Grid.Row="2">
-								<TextBlock Text="{Binding CreditsText}" Style="{StaticResource CreditsTextStyle}"/>
+								<TextBlock Text="{Binding CreditsText}"
+										   Style="{StaticResource CreditsTextStyle}"/>
 							</Grid>
 						</Grid>
 					</Grid>

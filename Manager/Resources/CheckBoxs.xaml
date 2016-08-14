@@ -4,9 +4,8 @@
   <ResourceDictionary.MergedDictionaries>
     <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.checkbox.xaml" />
   </ResourceDictionary.MergedDictionaries>
-  
+
 	<Style x:Key="CheckBoxFilterStyle" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource MetroCheckBox}">
-		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}"/>
 		<Setter Property="Margin" Value="0 0 5 0" />
 	</Style>
 

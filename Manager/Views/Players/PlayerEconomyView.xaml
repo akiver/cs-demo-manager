@@ -44,11 +44,11 @@
 								ValueBinding="Value"
 								StrokeThickness="3"
 								TrackBallInfoTemplate="{StaticResource PlayerEquipementValueTrackBallTemplate}"
-								Stroke="{StaticResource LightGreenBrush}"
+								Stroke="{StaticResource HighlightBrush}"
 								TooltipTemplate="{StaticResource PlayerEquipementValueTooltipTemplate}">
 				<telerik:LineSeries.PointTemplate>
 					<DataTemplate>
-						<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+						<Ellipse Width="10" Height="10" Fill="{DynamicResource BlackColorBrush}" />
 					</DataTemplate>
 				</telerik:LineSeries.PointTemplate>
 			</telerik:LineSeries>
@@ -85,11 +85,11 @@
 								ValueBinding="Value"
 								StrokeThickness="3"
 								TrackBallInfoTemplate="{StaticResource PlayerEquipementValueTrackBallTemplate}"
-								Stroke="{StaticResource LightGreenBrush}"
+								Stroke="{StaticResource HighlightBrush}"
 								TooltipTemplate="{StaticResource PlayerEquipementValueTooltipTemplate}">
 				<telerik:LineSeries.PointTemplate>
 					<DataTemplate>
-						<Ellipse Width="10" Height="10" Fill="{StaticResource LightWhiteBrush}" />
+						<Ellipse Width="10" Height="10" Fill="{DynamicResource BlackColorBrush}" />
 					</DataTemplate>
 				</telerik:LineSeries.PointTemplate>
 			</telerik:LineSeries>

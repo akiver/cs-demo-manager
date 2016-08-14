@@ -33,16 +33,10 @@
 							Margin="5"
 							Grid.Row="0">
 					<TextBlock Text="Entry Kills"
-							   Foreground="{StaticResource LightGreenBrush}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   FontSize="22"/>
+							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<TextBlock Text="(First kill as T)"
-							   Foreground="{StaticResource LightGreenBrush}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   Margin="5 0 0 0"
-							   FontSize="16"/>
+							   Style="{StaticResource TextBlockSectionSubTitle}"
+							   Margin="5 0 0 0"/>
 				</StackPanel>
 				<Border Grid.Row="1"
 						BorderBrush="{StaticResource LightWhiteBrush}"
@@ -58,45 +52,33 @@
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0"
 								   Text="Attempt "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.EntryKills.Count}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="1"
 								   Text="Won "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.EntryKillWonCount}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="2"
 								   Text="Loss "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.EntryKillLossCount}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="3"
 								   Text="Won rate"
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding Path=CurrentPlayer.RatioEntryKill, StringFormat='{} {0}%'}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"
+									   Style="{StaticResource TextBlockHighlightBig}"
 									   Margin="0 0 0 10"/>
 						</TextBlock>
 						<DataGrid Grid.Row="4"
 								  Name="EntryKillsDataGrid"
 								  ItemsSource="{Binding CurrentPlayer.EntryKills}"
-								  Style="{StaticResource DataGridStyle}"
-								  RowStyle="{StaticResource DataGridRowStyle}"
-								  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-								  CellStyle="{StaticResource DataGridCellStyle}"
-								  Width="Auto">
+								  Style="{StaticResource DataGridStyle}">
 							<DataGrid.Columns>
 								<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 													Width="Auto"
@@ -131,7 +113,7 @@
 										<DataTemplate>
 											<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
 													CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryKillsDataGrid}"
-													Style="{StaticResource GeneralButtonStyle}"
+													Style="{DynamicResource AccentedSquareButtonStyle}"
 													Content="Watch"/>
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
@@ -150,16 +132,10 @@
 							Margin="5"
 							Grid.Row="0">
 					<TextBlock Text="Entry Hold Kills"
-							   Foreground="{StaticResource LightGreenBrush}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   FontSize="22"/>
+							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<TextBlock Text="(First kill as CT)"
-							   Foreground="{StaticResource LightGreenBrush}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   Margin="5 0 0 0"
-							   FontSize="16"/>
+							   Style="{StaticResource TextBlockSectionSubTitle}"
+							   Margin="5 0 0 0"/>
 				</StackPanel>
 				<Border Grid.Row="1"
 						BorderBrush="{StaticResource LightWhiteBrush}"
@@ -175,45 +151,34 @@
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0"
 								   Text="Attempt "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKills.Count}"
 									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="1"
 								   Text="Won "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillWonCount}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="2"
 								   Text="Loss "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillLossCount}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="3"
 								   Text="Won rate"
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding Path=CurrentPlayer.RatioEntryHoldKill, StringFormat='{} {0}%'}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"
+									   Style="{StaticResource TextBlockHighlightBig}"
 									   Margin="0 0 0 10"/>
 						</TextBlock>
 						<DataGrid Grid.Row="4"
 								  Name="EntryHoldKillsDataGrid"
 								  ItemsSource="{Binding CurrentPlayer.EntryHoldKills}"
-								  Style="{StaticResource DataGridStyle}"
-								  RowStyle="{StaticResource DataGridRowStyle}"
-								  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-								  CellStyle="{StaticResource DataGridCellStyle}"
-								  Width="Auto">
+								  Style="{StaticResource DataGridStyle}">
 							<DataGrid.Columns>
 								<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 													Width="Auto"
@@ -248,7 +213,7 @@
 										<DataTemplate>
 											<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
 													CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryHoldKillsDataGrid}"
-													Style="{StaticResource GeneralButtonStyle}"
+													Style="{DynamicResource AccentedSquareButtonStyle}"
 													Content="Watch"/>
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
@@ -268,16 +233,10 @@
 							Margin="5"
 							Grid.Row="0">
 					<TextBlock Text="Trade Kills / Deaths"
-							   Foreground="{StaticResource LightGreenBrush}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
-							   FontSize="22"/>
+							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<TextBlock Text="(Kill revenge occured maximum 4s after the initial kill)"
-							   Foreground="{StaticResource LightGreenBrush}"
-							   HorizontalAlignment="Center"
-							   VerticalAlignment="Center"
 							   Margin="5 0 0 0"
-							   FontSize="16"/>
+							   Style="{StaticResource TextBlockSectionSubTitle}"/>
 				</StackPanel>
 				<Border Grid.Row="1"
 						BorderBrush="{StaticResource LightWhiteBrush}"
@@ -285,18 +244,14 @@
 						Padding="10">
 					<StackPanel Orientation="Vertical">
 						<TextBlock Text="Trade kill "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.TradeKillCount}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Text="Trade death "
-								   FontSize="18"
-								   Foreground="{StaticResource LightWhiteBrush}">
+								   FontSize="18">
 							<TextBlock Text="{Binding CurrentPlayer.TradeDeathCount}"
-									   FontSize="20"
-									   Foreground="{StaticResource LightGreenBrush}"/>
+									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 					</StackPanel>
 				</Border>

@@ -11,11 +11,14 @@ using Core.Models;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
+using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Messages;
+using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
 using Services.Interfaces;
+using Application = System.Windows.Application;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace Manager.ViewModel
@@ -79,6 +82,10 @@ namespace Manager.ViewModel
 		private readonly ISteamService _steamService;
 
 		private readonly IAccountStatsService _accountStatsService;
+
+		private List<ComboboxSelector> _themes;
+
+		private ComboboxSelector _selectedTheme;
 
 		private bool _showDateColumn = Settings.Default.ShowDateColumn;
 
@@ -260,6 +267,26 @@ namespace Manager.ViewModel
 		#endregion
 
 		#region Accessors
+
+		public List<ComboboxSelector> Themes
+		{
+			get { return _themes; }
+			set { Set(() => Themes, ref _themes, value); }
+		}
+
+		public ComboboxSelector SelectedTheme
+		{
+			get { return _selectedTheme; }
+			set
+			{
+				Set(() => SelectedTheme, ref _selectedTheme, value);
+				Settings.Default.Theme = value.Id;
+				Settings.Default.Save();
+				Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
+				AppTheme theme = ThemeManager.GetAppTheme(SelectedTheme.Id);
+				ThemeManager.ChangeAppStyle(Application.Current, appStyle.Item2, theme);
+			}
+		}
 
 		public Account SelectedAccount
 		{
@@ -1653,7 +1680,14 @@ namespace Manager.ViewModel
 				_dateStatsTo = DateTime.Today.AddDays(30);
 			}
 
-			System.Windows.Application.Current.Dispatcher.Invoke(async () =>
+			Themes = new List<ComboboxSelector>
+			{
+				new ComboboxSelector("Dark", "Dark"),
+				new ComboboxSelector("Light", "Light")
+			};
+			SelectedTheme = Themes.First(t => t.Id == Settings.Default.Theme);
+
+			Application.Current.Dispatcher.Invoke(async () =>
 			{
 				List<Account> accounts = await _cacheService.GetAccountListAsync();
 				Accounts = new ObservableCollection<Account>(accounts);

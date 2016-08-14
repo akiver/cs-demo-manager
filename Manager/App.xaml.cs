@@ -7,6 +7,7 @@ using System.Threading;
 using System.Windows;
 using Core;
 using GalaSoft.MvvmLight.Threading;
+using MahApps.Metro;
 using Manager.Properties;
 
 namespace Manager
@@ -106,6 +107,17 @@ namespace Manager
 			{
 				Win32Utils.SendMessageToBot(Win32Utils.WM_CSGO_DM_CLOSED);
 			}
+		}
+
+		protected override void OnStartup(StartupEventArgs e)
+		{
+			ThemeManager.AddAccent("CustomLime", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/CustomLime.xaml"));
+			ThemeManager.AddAppTheme("Dark", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeDark.xaml"));
+			ThemeManager.AddAppTheme("Light", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeLight.xaml"));
+			Accent accent = ThemeManager.GetAccent("CustomLime");
+			AppTheme theme = ThemeManager.GetAppTheme(Settings.Default.Theme);
+			ThemeManager.ChangeAppStyle(Current, accent, theme);
+			base.OnStartup(e);
 		}
 
 		protected override void OnExit(ExitEventArgs e)

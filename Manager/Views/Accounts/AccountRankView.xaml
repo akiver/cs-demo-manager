@@ -24,7 +24,8 @@
 					Gesture="CTRL+W" />
 		<KeyBinding Command="{Binding GoToProgressCommand}"
 					Gesture="CTRL+P" />
-		<mouse:MouseBindingExtended Gesture="XButton1" Command="{Binding BackToHomeCommand}" />
+		<mouse:MouseBindingExtended Gesture="XButton1"
+									Command="{Binding BackToHomeCommand}" />
 	</UserControl.InputBindings>
 
 	<i:Interaction.Triggers>
@@ -41,98 +42,111 @@
 
 		<Grid Grid.Row="0">
 			<StackPanel Orientation="Horizontal">
-				<Button Margin="10" Width="70" Height="30"
-					Style="{StaticResource GeneralButtonStyle}"
+				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToHomeCommand}"
 						ToolTip="Back (CTRL+B)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-							</Rectangle.Fill>
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Back"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10"
-					Style="{StaticResource GeneralButtonStyle}"
-					Command="{Binding GoToOverallCommand}"
-					Width="80" Height="30" ToolTip="Overall (CTRL+O)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_globe_wire}" />
-							</Rectangle.Fill>
+				<Button Style="{DynamicResource GeneralButton}"
+						Command="{Binding GoToOverallCommand}"
+						ToolTip="Overall (CTRL+O)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_globe_wire}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Overall" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Overall"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10" Width="70" Height="30"
-						Style="{StaticResource GeneralButtonStyle}"
-						IsEnabled="False" ToolTip="Rank (CTRL+R)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_arrow_up_down}" />
-							</Rectangle.Fill>
+				<Button Style="{DynamicResource GeneralButton}"
+						IsEnabled="False"
+						ToolTip="Rank (CTRL+R)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Rank" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Rank"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10" Width="70" Height="30"
-						Style="{StaticResource GeneralButtonStyle}"
+				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToMapCommand}"
 						ToolTip="Maps (CTRL+M)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_map}" />
-							</Rectangle.Fill>
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_map}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Maps" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Maps"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10" Width="90" Height="30"
-						Style="{StaticResource GeneralButtonStyle}"
+				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToWeaponCommand}"
 						ToolTip="Weapons (CTRL+W)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
 							   Width="15"
 							   Height="15"/>
-						<TextBlock Text="Weapons" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Weapons"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<Button Margin="10" Width="110" Height="30"
-						Style="{StaticResource GeneralButtonStyle}"
+				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToProgressCommand}"
 						ToolTip="Progression (CTRL+P)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_graph_line_up}" />
-							</Rectangle.Fill>
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_graph_line_up}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Progression" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Progression"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<TextBlock Text="Scale: " Style="{StaticResource CurrentFolderStyle}"/>
-				<ComboBox ItemsSource="{Binding ScaleList}"
-						  SelectedItem="{Binding SelectedScale}"
-						  DisplayMemberPath ="Title"
-						  SelectedValuePath="Id"
-						  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-						  Style="{StaticResource ComboBoxAccountsStyle}" />
-
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
-					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
-					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center">
+					<controls:ProgressRing IsActive="{Binding IsBusy}"
+										   Foreground="{DynamicResource BlackColorBrush}"
+										   Width="30"
+										   Height="30" />
+					<TextBlock Text="{Binding NotificationMessage}"
+							   Style="{StaticResource NotificationMessageStyle}"
 							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>

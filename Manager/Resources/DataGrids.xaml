@@ -7,128 +7,22 @@
 		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.datagrid.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" >
-		<Setter Property="BorderBrush" Value="{StaticResource LightGreenBrush}" />
-		<Setter Property="Background" Value="{StaticResource LightGreyBrush}"/>
-		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}"/>
-		<Setter Property="SnapsToDevicePixels" Value="True" />
-		<Setter Property="FontWeight" Value="Bold" />
-		<Setter Property="MinWidth" Value="0" />
-		<Setter Property="MinHeight" Value="25" />
-		<Setter Property="Cursor" Value="Hand" />
-		<Setter Property="HorizontalContentAlignment" Value="Left" />
-		<Setter Property="VerticalContentAlignment" Value="Center" />
-		<Setter Property="Padding" Value="10 4 4 7" />
-		<Setter Property="Margin" Value="0" />
-		<Setter Property="BorderThickness" Value="0 1 0 0" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<Border x:Name="BackgroundBorder"
-								BorderThickness="{TemplateBinding BorderThickness}"
-								Grid.ColumnSpan="2"
-								Background="{TemplateBinding Background}"
-								BorderBrush="{TemplateBinding BorderBrush}" />
-
-						<controls:ContentControlEx x:Name="HeaderContent"
-												   Content="{TemplateBinding Content}"
-												   ContentStringFormat="{TemplateBinding ContentStringFormat}"
-												   ContentTemplate="{TemplateBinding ContentTemplate}"
-												   ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-												   SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-												   HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-												   Padding="{TemplateBinding Padding}"
-												   VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-												   RecognizesAccessKey="True"
-												   ContentCharacterCasing="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(controls:ControlsHelper.ContentCharacterCasing)}" />
-
-						<Path x:Name="SortArrow"
-							  Visibility="Collapsed"
-							  Stretch="Fill"
-							  Grid.Column="1"
-							  Width="8"
-							  Height="10"
-							  Margin="0 0 8 2"
-							  VerticalAlignment="Center"
-							  RenderTransformOrigin="0.5 0.5"
-							  Fill="{DynamicResource LightWhiteBrush}" />
-
-						<Thumb x:Name="PART_LeftHeaderGripper"
-							   HorizontalAlignment="Left"
-							   HorizontalContentAlignment="Left"
-							   Background="Transparent"
-							   Style="{StaticResource MetroColumnHeaderGripperStyle}" />
-
-						<Thumb x:Name="PART_RightHeaderGripper"
-							   HorizontalAlignment="Right"
-							   HorizontalContentAlignment="Right"
-							   Style="{StaticResource MetroColumnHeaderGripperStyle}"
-							   Grid.Column="1" />
-					</Grid>
-					<ControlTemplate.Triggers>
-						<Trigger Property="SortDirection"
-								 Value="{x:Null}">
-							<Setter TargetName="BackgroundBorder"
-									Property="Background"
-									Value="{DynamicResource LightGreyBrush}" />
-						</Trigger>
-						<Trigger Property="SortDirection"
-								 Value="Ascending">
-							<Setter TargetName="SortArrow"
-									Property="Visibility"
-									Value="Visible" />
-							<Setter TargetName="SortArrow"
-									Property="Data"
-									Value="F1 M 34,57L 42,57L 42,32.25L 52,42.25L 52,31.75L 38,17.75L 24,31.75L 24,42.25L 34,32.25L 34,57 Z " />
-						</Trigger>
-						<Trigger Property="SortDirection"
-								 Value="Descending">
-							<Setter TargetName="SortArrow"
-									Property="Visibility"
-									Value="Visible" />
-							<Setter TargetName="SortArrow"
-									Property="Data"
-									Value="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z " />
-							<Setter TargetName="SortArrow"
-									Property="Margin"
-									Value="0 0 8 0" />
-						</Trigger>
-						<Trigger Property="DisplayIndex"
-								 Value="0">
-							<Setter Property="Visibility"
-									Value="Collapsed"
-									TargetName="PART_LeftHeaderGripper" />
-						</Trigger>
-						<Trigger Property="IsEnabled"
-								 Value="False">
-							<Setter Property="Foreground"
-									Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+	<Style x:Key="DataGridColumnHeaderStyle" TargetType="DataGridColumnHeader" BasedOn="{StaticResource MetroDataGridColumnHeader}" >
+		<Setter Property="Width" Value="Auto" />
 	</Style>
 
 	<Style x:Key="DataGridStyle" TargetType="DataGrid" BasedOn="{StaticResource MetroDataGrid}">
-		<Setter Property="Background" Value="{StaticResource LightGreyBrush}" />
 		<Setter Property="IsReadOnly" Value="True" />
 		<Setter Property="GridLinesVisibility" Value="None" />
 		<Setter Property="AutoGenerateColumns" Value="False" />
 		<Setter Property="FontSize" Value="13" />
 		<Setter Property="ClipToBounds" Value="True" />
 		<Setter Property="SnapsToDevicePixels" Value="True" />
-		<Setter Property="RowBackground" Value="{StaticResource LightGreyBrush}" />
-		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
-		<Setter Property="HorizontalGridLinesBrush" Value="{StaticResource LightGreenBrush}" />
 		<Setter Property="HeadersVisibility" Value="Column" />
 		<Setter Property="RenderOptions.ClearTypeHint" Value="Enabled"/>
 		<Setter Property="TextOptions.TextFormattingMode" Value="Display"/>
+		<Setter Property="Width" Value="Auto"/>
+		<Setter Property="AlternatingRowBackground" Value="{DynamicResource GrayBrush10}"/>
 	</Style>
 
 	<Style TargetType="DataGridCell" x:Key="DataGridCellStyle" BasedOn="{StaticResource MetroDataGridCell}">
@@ -141,21 +35,11 @@
 
 	<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource LightGrey}"/>
 
-
-	<Style TargetType="DataGridRow" x:Key="DataGridRowStyle" BasedOn="{StaticResource MetroDataGridRow}">
-		<Style.Triggers>
-			<Trigger Property="IsSelected" Value="True">
-				<Setter Property="Background" Value="{StaticResource LightGreenBrush}" />
-				<Setter Property="Foreground" Value="{StaticResource LightGreyBrush}" />
-			</Trigger>
-		</Style.Triggers>
-	</Style>
-
 	<!--DataGrid Row for Demos main list-->
-	<Style TargetType="DataGridRow" x:Key="DataGridRowMainListDemosStyle" BasedOn="{StaticResource DataGridRowStyle}">
+	<Style TargetType="DataGridRow" x:Key="DataGridRowMainListDemosStyle" BasedOn="{StaticResource MetroDataGridRow}">
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding Status}" Value="towatch">
-				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
+				<Setter Property="Background" Value="{StaticResource GreenBrush}"/>
 			</DataTrigger>
 
 			<DataTrigger Binding="{Binding Status}" Value="watched">
@@ -491,20 +375,23 @@
 
 
 	<!--DataGrid for suspects list style -->
-	<Style TargetType="DataGridRow" x:Key="DataGridRowSuspectsListStyle" BasedOn="{StaticResource DataGridRowStyle}">
+	<Style TargetType="DataGridRow" x:Key="DataGridRowSuspectsListStyle" BasedOn="{StaticResource MetroDataGridRow}">
 		<Style.Resources>
 			<converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
 		</Style.Resources>
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding VacBanned}" Value="true">
-				<Setter Property="Background" Value="{StaticResource RedColorSemiOpaqueBrush}"/>
+			<DataTrigger Binding="{Binding VacBanned}"
+						 Value="true">
+				<Setter Property="Background"
+						Value="{StaticResource RedColorSemiOpaqueBrush}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding GameBanCount, Converter={StaticResource IntToBooleanConverter}, ConverterParameter=GameBanCount}" Value="true">
-				<Setter Property="Background" Value="{StaticResource RedColorSemiOpaqueBrush}"/>
+				<Setter Property="Background"
+						Value="{StaticResource RedColorSemiOpaqueBrush}"/>
 			</DataTrigger>
 		</Style.Triggers>
-		<Setter Property="ContextMenu" Value="{StaticResource SuspectRowContextMenu}" />
-		<Setter Property="Margin" Value="0 2 2 0" />
+		<Setter Property="ContextMenu"
+				Value="{StaticResource SuspectRowContextMenu}" />
 	</Style>
 
 	<!-- Supects view header -->
@@ -557,7 +444,7 @@
 	</Style>
 
 	<!--DataGrid Row style for scoreboard -->
-	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerStyle" BasedOn="{StaticResource DataGridRowStyle}">
+	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerStyle" BasedOn="{StaticResource MetroDataGridRow}">
 		<Setter Property="ContextMenu" Value="{StaticResource PlayerRowContextMenu}" />
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding IsVacBanned}" Value="True">
@@ -623,7 +510,7 @@
 	</Style>
 
 	<!-- Whitelist -->
-	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerWhitelistStyle" BasedOn="{StaticResource DataGridRowStyle}">
+	<Style TargetType="DataGridRow" x:Key="DataGridRowPlayerWhitelistStyle" BasedOn="{StaticResource MetroDataGridRow}">
 		<Style.Resources>
 			<converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
 		</Style.Resources>
@@ -636,7 +523,6 @@
 			</DataTrigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource WhitelistRowContextMenu}" />
-		<Setter Property="Margin" Value="0 2 2 0" />
 	</Style>
 	<!-- End Whitelist -->
 
@@ -650,7 +536,7 @@
 	</Style>
 	<!-- End Flashbangs view -->
 
-	<Style TargetType="DataGridRow" x:Key="DataGridRowRoundListStyle" BasedOn="{StaticResource DataGridRowStyle}">
+	<Style TargetType="DataGridRow" x:Key="DataGridRowRoundListStyle" BasedOn="{StaticResource MetroDataGridRow}">
 		<Setter Property="ContextMenu" Value="{StaticResource RoundRowContextMenu}" />
 	</Style>
 

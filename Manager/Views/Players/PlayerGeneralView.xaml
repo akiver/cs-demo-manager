@@ -35,67 +35,51 @@
 				   Height="40"/>
 			<TextBlock Text="Kills "
 					   FontSize="18"
-					   ToolTip="Kills"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Kills">
 				<TextBlock Text="{Binding CurrentPlayer.KillCount}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="Assists "
 					   FontSize="18"
-					   ToolTip="Assists"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Assists">
 				<TextBlock Text="{Binding CurrentPlayer.AssistCount}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="Deaths "
 					   FontSize="18"
-					   ToolTip="Deaths"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Deaths">
 				<TextBlock Text="{Binding CurrentPlayer.DeathCount}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="Headshots "
 					   FontSize="18"
-					   ToolTip="Headshots"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Headshots">
 				<TextBlock Text="{Binding CurrentPlayer.HeadshotCount}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="Headshots %"
 					   FontSize="18"
-					   ToolTip="Headshots %"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Headshots %">
 				<TextBlock Text="{Binding CurrentPlayer.HeadshotPercent, StringFormat='{} {0}%'}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="ADR "
 					   FontSize="18"
-					   ToolTip="Average Damage Per Round"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Average Damage Per Round">
 				<TextBlock Text="{Binding CurrentPlayer.AverageHealthDamage}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="HLTV rating "
 					   FontSize="18"
-					   ToolTip="HLTV Rating"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="HLTV Rating">
 				<TextBlock Text="{Binding CurrentPlayer.RatingHltv}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 			<TextBlock Text="RWS "
 					   FontSize="18"
-					   ToolTip="Round Win Share (ESEA)"
-					   Foreground="{StaticResource LightWhiteBrush}">
+					   ToolTip="Round Win Share (ESEA)">
 				<TextBlock Text="{Binding CurrentPlayer.EseaRws}"
-						   FontSize="20"
-						   Foreground="{StaticResource LightGreenBrush}"/>
+						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 		</StackPanel>
 
@@ -106,21 +90,14 @@
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"
 					   Text="Kills"
-					   Foreground="{StaticResource LightGreenBrush}"
-					   HorizontalAlignment="Center"
-					   VerticalAlignment="Center"
-					   FontSize="22"/>
+					   Style="{StaticResource TextBlockSectionTitle}"/>
 			<Border Grid.Row="1"
 					BorderBrush="{StaticResource LightWhiteBrush}"
 					BorderThickness="1"
 					Padding="10">
 				<DataGrid Name="KillsDataGrid"
 						  ItemsSource="{Binding Kills}"
-						  Style="{StaticResource DataGridStyle}"
-						  RowStyle="{StaticResource DataGridRowStyle}"
-						  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-						  CellStyle="{StaticResource DataGridCellStyle}"
-						  Width="Auto">
+						  Style="{StaticResource DataGridStyle}">
 					<DataGrid.Columns>
 						<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 											Width="Auto"
@@ -147,7 +124,7 @@
 								<DataTemplate>
 									<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
 											CommandParameter="{Binding SelectedItem.Tick, ElementName=KillsDataGrid}"
-											Style="{StaticResource GeneralButtonStyle}"
+											Style="{DynamicResource AccentedSquareButtonStyle}"
 											Content="Watch" />
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
@@ -157,7 +134,9 @@
 			</Border>
 		</Grid>
 
-		<Grid Grid.Column="2" Margin="10 0 0 0" Width="Auto">
+		<Grid Grid.Column="2"
+			  Margin="10 0 0 0"
+			  Width="Auto">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*"/>
@@ -166,7 +145,7 @@
 			<TextBlock Grid.Row="0"
 					   Text="Weapon Kills"
 					   VerticalAlignment="Bottom"
-					   Style="{StaticResource SectionTitleStyle}"/>
+					   Style="{StaticResource TextBlockSectionTitle}"/>
 			<telerik:RadPieChart Grid.Row="1"
 								 Palette="{StaticResource WeaponKillPalette}"
 								 VerticalAlignment="Top"
@@ -177,8 +156,7 @@
 					<telerik:PieSeries ItemsSource="{Binding WeaponKillData}"
 									   ValueBinding="Value"
 									   ShowLabels="True"
-									   DefaultSliceStyle="{StaticResource PieSliceStyle}"
-									   RadiusFactor="0.65" >
+									   RadiusFactor="0.65">
 						<telerik:PieSeries.LabelDefinitions>
 							<telerik:ChartSeriesLabelDefinition Margin="-10 0 0 0"
 																Template="{StaticResource WeaponKillPieLabelTemplate}" />

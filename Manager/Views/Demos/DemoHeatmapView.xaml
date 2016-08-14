@@ -9,7 +9,6 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 xmlns:multiSelect="clr-namespace:Manager.Internals.MultiSelect"
-			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -31,8 +30,8 @@
 		<KeyBinding Command="{Binding ExportCommand}"
 					Gesture="CTRL+S" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}" />
+									Command="{Binding BackToDemoDetailsCommand}"
+									CommandParameter="{Binding CurrentDemo}" />
 	</UserControl.InputBindings>
 
 	<i:Interaction.Triggers>
@@ -48,96 +47,97 @@
 		</Grid.RowDefinitions>
 
 		<!-- ActionBar-->
-		<Grid Grid.Row="0" Margin="5">
+		<Grid Grid.Row="0"
+			  Height="40">
 			<StackPanel Orientation="Horizontal">
-
-				<Button Margin="10"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="70"
-					Height="30"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
-					ToolTip="Back (CTRL+B)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-							</Rectangle.Fill>
+				<Button Style="{DynamicResource GeneralButton}"
+						Command="{Binding BackToDemoDetailsCommand}"
+						CommandParameter="{Binding CurrentDemo}"
+						ToolTip="Back (CTRL+B)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Back"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Event" Style="{StaticResource SmallTitleStyle}"/>
-					<ComboBox ItemsSource="{Binding EventSelectors}"
-							  SelectedItem="{Binding CurrentEventSelector}"
-							  DisplayMemberPath ="Title"
-							  SelectedValuePath="Title"
-							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-							  Width="180"
-							  Height="25"
-							  Margin="5 0 0 0"
-							  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
-				</StackPanel>
-
+				<ComboBox ItemsSource="{Binding EventSelectors}"
+						  SelectedItem="{Binding CurrentEventSelector}"
+						  DisplayMemberPath ="Title"
+						  SelectedValuePath="Title"
+						  Margin="5"
+						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 				<Button Command="{Binding GenerateCommand}"
-					Style="{StaticResource GeneralButtonStyle}"
-					ToolTip="Generate heatmap (CTRL+G)"
-					Width="90"
-					Height="30" Margin="10 0 0 0">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_draw_pixel_fill_grid}" />
-							</Rectangle.Fill>
+						Style="{DynamicResource GeneralButton}"
+						ToolTip="Generate heatmap (CTRL+G)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_draw_pixel_fill_grid}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Generate" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Generate"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-
 				<Button Command="{Binding ExportCommand}"
-					Style="{StaticResource GeneralButtonStyle}"
-					ToolTip="Save as PNG (CTRL+S)"
-					Width="80"
-					Height="30" Margin="10 0 0 0">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_page_png}" />
-							</Rectangle.Fill>
+						Style="{DynamicResource GeneralButton}"
+						ToolTip="Save as PNG (CTRL+S)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_page_png}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Export" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Export"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
-				<StackPanel Orientation="Vertical">
-					<TextBlock Text="Opacity:" Style="{StaticResource SmallTitleStyle}"/>
-					<Slider x:Name="SliderOpacity"
-					Minimum="0"
-					Maximum="255"
-					LargeChange="1"
-					SmallChange="1"
-					Width="150"
-					Margin="5 0 0 0"
-					Value="{Binding Opacity}"
-					IsEnabled="{Binding HasGeneratedHeatmap}"/>
+				<StackPanel Orientation="Horizontal">
+					<TextBlock Text="Opacity:"
+							   Style="{StaticResource TextBlockStandard}"
+							   Margin="5"/>
+					<Slider Minimum="0"
+							Maximum="255"
+							LargeChange="1"
+							SmallChange="1"
+							Width="150"
+							Margin="5 0 0 0"
+							VerticalAlignment="Center"
+							Value="{Binding Opacity}"
+							IsEnabled="{Binding HasGeneratedHeatmap}"/>
 				</StackPanel>
 
-				<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-					<controls:ProgressRing
-						IsActive="{Binding IsGenerating}"
-						Foreground="{DynamicResource AccentColorBrush}"
-						Width="40" Height="40" />
+				<StackPanel Orientation="Horizontal"
+							VerticalAlignment="Center"
+							Margin="5">
+					<controls:ProgressRing IsActive="{Binding IsGenerating}"
+										   Foreground="{DynamicResource BlackColorBrush}"
+										   Width="30"
+										   Height="30" />
 					<TextBlock Text="Generating..."
-								 Style="{StaticResource LabelGeneralInfoDemo}"
-								 Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+							   Style="{StaticResource NotificationMessageStyle}"
+							   Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="1"
+			  HorizontalAlignment="Center">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto" />
@@ -152,17 +152,17 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
-				<StackPanel Orientation="Horizontal" Grid.Row="0">
-					<TextBlock
-						   Text="Sides"
-						   Style="{StaticResource SmallTitleStyle}"/>
+				<StackPanel Orientation="Horizontal"
+							Grid.Row="0">
+					<TextBlock Text="Sides"
+							   Style="{StaticResource TextBlockStandard}"/>
 					<Button Content="All"
 							Command="{Binding SelectAllSideCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							Margin="5 0 0 0" />
 					<Button Content="Clear"
 							Command="{Binding ClearSelectedSideCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							Margin="5 0 0 0" />
 				</StackPanel>
 				<ListBox Name="SideListBox"
@@ -170,21 +170,20 @@
 						 Margin="10"
 						 ItemsSource="{Binding Sides}"
 						 SelectionMode="Extended"
-						 ItemContainerStyle="{StaticResource ListBoxItemStyle}"
 						 multiSelect:MultiSelect.IsEnabled="True"
 						 DisplayMemberPath="Title"
 						 SelectedValuePath="Title"/>
-
-				<StackPanel Orientation="Horizontal" Grid.Row="2">
+				<StackPanel Orientation="Horizontal"
+							Grid.Row="2">
 					<TextBlock Text="Players"
-							   Style="{StaticResource SmallTitleStyle}"/>
+							   Style="{StaticResource TextBlockStandard}"/>
 					<Button Content="All"
 							Command="{Binding SelectAllPlayerCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							Margin="5 0 0 0" />
 					<Button Content="Clear"
 							Command="{Binding ClearSelectedPlayerCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							Margin="5 0 0 0"/>
 				</StackPanel>
 				<ListBox Name="PlayerListBox"
@@ -192,7 +191,6 @@
 						 Grid.Row="3"
 						 ItemsSource="{Binding Players}"
 						 SelectionMode="Extended"
-						 ItemContainerStyle="{StaticResource ListBoxItemStyle}"
 						 multiSelect:MultiSelect.IsEnabled="True"
 						 DisplayMemberPath="Name"
 						 SelectedValuePath="Name"/>
@@ -204,17 +202,17 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				
-				<StackPanel Orientation="Horizontal" Grid.Row="0">
-					<TextBlock
-						   Text="Rounds"
-						   Style="{StaticResource SmallTitleStyle}"/>
+				<StackPanel Orientation="Horizontal"
+							Grid.Row="0">
+					<TextBlock Text="Rounds"
+							   Style="{StaticResource TextBlockStandard}"/>
 					<Button Content="All"
 							Command="{Binding SelectAllRoundCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							Margin="5 0 0 0" />
 					<Button Content="Clear"
 							Command="{Binding ClearSelectedRoundCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							Margin="5 0 0 0" />
 				</StackPanel>
 
@@ -226,7 +224,6 @@
 								multiSelect:MultiSelect.IsEnabled="True"
 								DisplayMemberPath="Number"
 								ScrollViewer.VerticalScrollBarVisibility="Visible"
-								ItemContainerStyle="{StaticResource ListBoxItemStyle}"
 								SelectedValuePath="Number"/>
 				</Grid>
 				

@@ -14,25 +14,19 @@ namespace Manager.Services
 		public async Task<MessageDialogResult> ShowMessageAsync(string message, MessageDialogStyle dialogStyle)
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowMessageAsync("Information", message, dialogStyle, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowMessageAsync("Information", message, dialogStyle);
 		}
 
 		public async Task<MessageDialogResult> ShowErrorAsync(string message, MessageDialogStyle dialogStyle)
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowMessageAsync("Error", message, dialogStyle, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowMessageAsync("Error", message, dialogStyle);
 		}
 
 		public async Task<string> ShowInputAsync(string title, string message)
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowInputAsync(title, message, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowInputAsync(title, message);
 		}
 
 		public async Task<MessageDialogResult> ShowDemosFailedAsync(List<Demo> demosFailed)
@@ -43,17 +37,13 @@ namespace Manager.Services
 				"You can find more information on http://csgo-demos-manager.com.";
 
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowMessageAsync("Error", errorMessage);
 		}
 
 		public async Task<MessageDialogResult> ShowNoInternetConnectionAsync()
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowMessageAsync("No Internet Connection", "No Internet connection detected, you can't use this feature.", MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowMessageAsync("No Internet Connection", "No Internet connection detected, you can't use this feature.");
 		}
 
 		public async Task<MessageDialogResult> ShowDemosNotFoundAsync(List<Demo> demosNotFound)
@@ -62,9 +52,7 @@ namespace Manager.Services
 			errorMessage = demosNotFound.Aggregate(errorMessage, (current, demoNotFound) => current + (demoNotFound.Name + Environment.NewLine));
 
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowMessageAsync("Error", errorMessage);
 		}
 
 		public async Task<MessageDialogResult> ShowExportDemosAsync()
@@ -74,8 +62,7 @@ namespace Manager.Services
 			{
 				AffirmativeButtonText = "Single",
 				NegativeButtonText = "Multiple",
-				FirstAuxiliaryButtonText = "Cancel",
-				ColorScheme = MetroDialogColorScheme.Accented
+				FirstAuxiliaryButtonText = "Cancel"
 			};
 
 			return await metroWindow.ShowMessageAsync("Export", "Do you want to export data into a single file or in multiple files?",
@@ -88,8 +75,7 @@ namespace Manager.Services
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
 				AffirmativeButtonText = "OK",
-				NegativeButtonText = "Cancel",
-				ColorScheme = MetroDialogColorScheme.Accented
+				NegativeButtonText = "Cancel"
 			};
 
 			return await metroWindow.ShowMessageAsync("Export", "You are going to export data for the player \"" + playerName
@@ -103,8 +89,7 @@ namespace Manager.Services
 			{
 				AffirmativeButtonText = "Selection",
 				NegativeButtonText = "All",
-				FirstAuxiliaryButtonText = "Cancel",
-				ColorScheme = MetroDialogColorScheme.Accented
+				FirstAuxiliaryButtonText = "Cancel"
 			};
 
 			return await metroWindow.ShowMessageAsync("Analyze", "Do you want to analyze only the selected demos or all the demos within the selected folder?",
@@ -116,9 +101,7 @@ namespace Manager.Services
 			string errorMessage = "Steam doesn't seems to be installed." + Environment.NewLine + "Unable to start the game.";
 
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-
-			return await metroWindow.ShowMessageAsync("Error", errorMessage, MessageDialogStyle.Affirmative, metroWindow.MetroDialogOptions);
+			return await metroWindow.ShowMessageAsync("Error", errorMessage);
 		}
 
 		public async Task<MessageDialogResult> ShowHighLowWatchAsync()
@@ -127,8 +110,7 @@ namespace Manager.Services
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
 				AffirmativeButtonText = "Player POV",
-				NegativeButtonText = "Enemy POV",
-				ColorScheme = MetroDialogColorScheme.Accented
+				NegativeButtonText = "Enemy POV"
 			};
 
 			return await metroWindow.ShowMessageAsync("POV", "Which POV (camera perspective) do you want to see?", MessageDialogStyle.AffirmativeAndNegative, dialogOptions);

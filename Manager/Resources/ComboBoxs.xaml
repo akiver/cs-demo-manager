@@ -8,8 +8,6 @@
 	<Style TargetType="ComboBoxItem"
 		   x:Key="ComboBoxItemStyle"
 		   BasedOn="{StaticResource MetroComboBoxItem}">
-		<Setter Property="Foreground"
-				Value="{DynamicResource TextBrush}" />
 		<Setter Property="Padding"
 				Value="2" />
 		<Setter Property="HorizontalContentAlignment"
@@ -18,8 +16,6 @@
 				Value="Top" />
 		<Setter Property="RenderOptions.ClearTypeHint"
 				Value="Enabled" />
-		<Setter Property="Background"
-				Value="{DynamicResource WhiteBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0" />
 		<Setter Property="Template">
@@ -79,7 +75,7 @@
 	</Style>
 
 	<Style x:Key="ComboBoxFoldersStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}">
-		<Setter Property="Margin" Value="5"></Setter>
+		<Setter Property="Margin" Value="5"/>
 	</Style>
 
 	<Style x:Key="ComboBoxAccountsStyle" TargetType="{x:Type ComboBox}" BasedOn="{StaticResource MetroComboBox}">

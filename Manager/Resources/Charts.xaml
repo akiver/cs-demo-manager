@@ -113,18 +113,18 @@
 										 DrawTemplate="{StaticResource DrawPointTemplate}"/>
 
 	<Style x:Key="LabelChartStyle" TargetType="{x:Type TextBlock}">
-		<Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="Foreground" Value="{DynamicResource BlackColorBrush}" />
 		<Setter Property="FontSize" Value="18" />
 		<Setter Property="Margin" Value="0 0 10 0" />
 	</Style>
 
 	<DataTemplate x:Key="PieStatsLabelTemplate">
 		<StackPanel Orientation="Vertical">
-			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Label}"
 					   FontSize="18"
 					   TextAlignment="Center" />
-			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Value, StringFormat= '(\{0\}%)'}"
 					   FontSize="18"
 					   TextAlignment="Center" />
@@ -133,11 +133,11 @@
 
 	<DataTemplate x:Key="PieCountLabelTemplate">
 		<StackPanel Orientation="Vertical">
-			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Label}"
 					   FontSize="18"
 					   TextAlignment="Center" />
-			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
 					   FontSize="18"
 					   TextAlignment="Center" />
@@ -146,11 +146,11 @@
 
 	<DataTemplate x:Key="WeaponKillPieLabelTemplate">
 		<StackPanel Orientation="Vertical">
-			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Label}"
 					   FontSize="12"
 					   TextAlignment="Center" />
-			<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
 					   FontSize="12"
 					   TextAlignment="Center" />
@@ -158,25 +158,23 @@
 	</DataTemplate>
 
 	<DataTemplate x:Key="PieMatchWinStatsLabelTemplate">
-		<TextBlock Foreground="{StaticResource LightWhiteBrush}"
+		<TextBlock Foreground="{DynamicResource BlackColorBrush}"
 					   Text="{Binding DataItem.Value}"
 					   FontSize="18"
 					   TextAlignment="Center" />
 	</DataTemplate>
 
 	<Style TargetType="Path" x:Key="LabelConnectorStyle">
-		<Setter Property="Stroke" Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="Stroke" Value="{DynamicResource BlackColorBrush}" />
 		<Setter Property="StrokeThickness" Value="2" />
 	</Style>
 
-	<Style TargetType="Path" x:Key="PieSliceStyle">
-		<Setter Property="Fill" Value="{StaticResource LightWhiteBrush}" />
-		<Setter Property="StrokeLineJoin" Value="Bevel" />
-		<Setter Property="Stroke" Value="White" />
-	</Style>
-
 	<DataTemplate x:Key="TooltipPercentageChartTemplate">
-		<Border BorderThickness="1" BorderBrush="{StaticResource LightGreyBrush}" CornerRadius="5" Padding="2" Background="{StaticResource LightWhiteBrush}">
+		<Border BorderThickness="1"
+				BorderBrush="{StaticResource LightGreyBrush}"
+				CornerRadius="5"
+				Padding="2"
+				Background="{StaticResource LightWhiteBrush}">
 			<TextBlock Foreground="{StaticResource LightGreyBrush}" FontSize="18">
 				<Run Text="{Binding Path=DataItem.Label, StringFormat= '\{0\} : '}" />
 				<Run Text="{Binding Path=DataItem.Value, StringFormat= '\{0\}%'}" />
@@ -225,7 +223,7 @@
 	</DataTemplate>
 
 	<DataTemplate x:Key="TitleChartTemplate">
-		<TextBlock Text="{Binding}" Foreground="{StaticResource LightWhiteBrush}" FontSize="18" />
+		<TextBlock Text="{Binding}" Foreground="{DynamicResource BlackColorBrush}" FontSize="18" />
 	</DataTemplate>
 
 	<DataTemplate x:Key="DamageTooltipTemplate">
@@ -467,7 +465,7 @@
 	<DataTemplate x:Key="HorizontalAxisTitleTemplate">
 		<TextBlock Text="{Binding}"
 				   FontSize="18"
-				   Foreground="{StaticResource LightWhiteBrush}"/>
+				   Foreground="{DynamicResource BlackColorBrush}"/>
 	</DataTemplate>
 	
 </ResourceDictionary>

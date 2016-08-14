@@ -8,7 +8,6 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 Background="{StaticResource LightGreyBrush}"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -49,157 +48,137 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Margin="0 5 0 0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-			</Grid.ColumnDefinitions>
+		<Grid Grid.Row="0"
+			  Height="40">
+			<StackPanel Orientation="Horizontal">
+				<Button Style="{DynamicResource GeneralButton}"
+						Command="{Binding GoToSuspectsCommand}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Back"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
 
-			<Button Grid.Column="0"
-					Margin="5"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="70"
-					Height="30"
-					Command="{Binding GoToSuspectsCommand}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Back"
-							   Margin="5 0 0 0"
+				<Button Style="{DynamicResource GeneralButton}"
+						Command="{Binding AddPlayerCommand}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_user_add}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Add"
 							   Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
+					</StackPanel>
+				</Button>
 
-			<Button Grid.Column="1"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="60"
-					Height="30"
-					Margin="5"
-					Command="{Binding AddPlayerCommand}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_user_add}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Add"
-							   Margin="5 0 0 0"
+				<Button Style="{DynamicResource GeneralButton}"
+						ToolTip="Refresh list (CTRL+R)"
+						Command="{Binding RefreshPlayerListCommand}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_refresh}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Refresh"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Separator Style="{StaticResource VerticalSeparatorStyle}"/>
+
+				<Button Style="{DynamicResource GeneralButton}"
+						ToolTip="Remove player(s) from whitelist (DEL)"
+						Command="{Binding RemoveSelectedPlayersCommand}"
+						CommandParameter="{Binding SelectedSuspects}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_user_delete}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Remove"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+
+				<Button Style="{DynamicResource GeneralButton}"
+						ToolTip="Go to player profile (CTRL+P)"
+						Command="{Binding GoToPlayerProfileCommand}"
+						CommandParameter="{Binding SelectedSuspect}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_user}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Profile"
 							   Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
+					</StackPanel>
+				</Button>
 
-			<Button Grid.Column="2"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="80"
-					Height="30"
-					Margin="5"
-					ToolTip="Refresh list (CTRL+R)"
-					Command="{Binding RefreshPlayerListCommand}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_refresh}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
-			
-			<Separator Grid.Column="3"
-					   Style="{StaticResource VerticalSeparatorStyle}"/>
+				<Button Style="{DynamicResource GeneralButton}"
+						ToolTip="Show demos that contains the player (CTRL+F)"
+						Command="{Binding DisplayDemosCommand}"
+						CommandParameter="{Binding SelectedSuspect}"
+						IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_magnify}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Show player demos"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
 
-			<Button Grid.Column="4"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="80"
-					Height="30"
-					Margin="5"
-					ToolTip="Remove player(s) from whitelist (DEL)"
-					Command="{Binding RemoveSelectedPlayersCommand}"
-					CommandParameter="{Binding SelectedSuspects}">
-				<StackPanel Orientation="Horizontal"
-							VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_user_delete}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Remove"
-							   Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
-
-			<Button Grid.Column="5"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="80"
-					Height="30"
-					Margin="5"
-					ToolTip="Go to player profile (CTRL+P)"
-					Command="{Binding GoToPlayerProfileCommand}"
-					CommandParameter="{Binding SelectedSuspect}">
-				<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_user}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Profile"
-							   Margin="5 0 0 0"
-							   Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
-
-			<Button Grid.Column="6"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="150"
-					Height="30"
-					Margin="5"
-					ToolTip="Show demos that contains the player (CTRL+F)"
-					Command="{Binding DisplayDemosCommand}"
-					CommandParameter="{Binding SelectedSuspect}"
-					IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}">
-				<StackPanel Orientation="Horizontal"
-							VerticalAlignment="Center">
-					<Rectangle Width="15" Height="15">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{StaticResource appbar_magnify}" />
-						</Rectangle.Fill>
-					</Rectangle>
-					<TextBlock Text="Show player demos" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-				</StackPanel>
-			</Button>
-
-			<Grid Grid.Column="7" Margin="5 0 0 0">
 				<TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
-						 Height="20"
-						 Width="160"
+						 MinWidth="150"
 						 controls:TextBoxHelper.Watermark="Search..."
 						 controls:TextBoxHelper.ClearTextButton="True"
-						 Margin="0 0 10 0"
+						 Margin="5"
 						 VerticalAlignment="Center"
 						 HorizontalAlignment="Right" />
-			</Grid>
-
+			</StackPanel>
 		</Grid>
 
 		<Grid Grid.Row="1"
 			  Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
 			<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Center"
+						Margin="5"
 						Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
 				<controls:ProgressRing IsActive="{Binding IsBusy}"
 									   Foreground="{DynamicResource AccentColorBrush}"
-									   Width="40" Height="40" />
+									   Width="40"
+									   Height="40" />
 				<TextBlock Text="{Binding NotificationMessage}"
-						   Style="{StaticResource LabelGeneralInfoDemo}" />
+						   Style="{StaticResource NotificationMessageStyle}" />
 			</StackPanel>
 		</Grid>
 
@@ -211,14 +190,10 @@
 
 		<DataGrid Grid.Row="3"
 				  x:Name="DataGridSuspects"
-				  Margin="0 5 0 0"
+				  Margin="5"
 				  ItemsSource="{Binding Suspects, IsAsync=True}"
 				  SelectedItem="{Binding SelectedSuspect}"
-				  CellStyle="{StaticResource DataGridCellStyle}"
 				  RowStyle="{StaticResource DataGridRowPlayerWhitelistStyle}"
-				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-				  EnableColumnVirtualization ="True"
-				  EnableRowVirtualization ="True"
 				  Style="{StaticResource DataGridStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
@@ -245,7 +220,9 @@
 										HeaderStyle="{StaticResource PlayerAvatarHeader}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<Image Source="{Binding AvatarUrl}" Height="42" Width="42" />
+							<Image Source="{Binding AvatarUrl}"
+								   Height="42"
+								   Width="42" />
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>

@@ -55,7 +55,8 @@
 					Gesture="CTRL+H" />
 		<KeyBinding Command="{Binding RefreshListCommand}"
 					Gesture="F5" />
-		<mouse:MouseBindingExtended Gesture="XButton2" Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
+		<mouse:MouseBindingExtended Gesture="XButton2"
+									Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DemoListUserControl}"/>
 	</UserControl.InputBindings>
 
@@ -77,445 +78,409 @@
 			</Grid.RowDefinitions>
 
 			<!-- Action bar 1st row -->
-			<Grid Grid.Row="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto" />
-					<ColumnDefinition Width="*" />
-				</Grid.ColumnDefinitions>
-
-				<Grid Grid.Row="0">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-						<ColumnDefinition Width="Auto"/>
-					</Grid.ColumnDefinitions>
-
-					<Button Grid.Column="0" Command="{Binding AnalyzeDemosCommand}"
-						CommandParameter="{Binding SelectedDemos}"
-						Margin="5"
-						ToolTip="Analyze selected demos (CTRL+S)"
-						Style="{StaticResource GeneralButtonStyle}" Width="90" Height="30">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="25" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_social_twitter_retweet}" />
-								</Rectangle.Fill>
+			<Grid Grid.Row="0"
+				  Height="40">
+				<StackPanel Orientation="Horizontal">
+					<Button Command="{Binding AnalyzeDemosCommand}"
+							CommandParameter="{Binding SelectedDemos}"
+							ToolTip="Analyze selected demos (CTRL+S)"
+							Style="{DynamicResource GeneralButton}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{DynamicResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_magnify}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Analyze" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Analyze"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<Button Grid.Column="1" Margin="5"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="80"
-					Height="30"
-					ToolTip="Demo's details (CTRL+D)"
-					Command="{Binding ShowDemoDetailsCommand}"
-					CommandParameter="{Binding SelectedDemo}">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_page_text}" />
-								</Rectangle.Fill>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Demo's details (CTRL+D)"
+							Command="{Binding ShowDemoDetailsCommand}"
+							CommandParameter="{Binding SelectedDemo}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_page_text}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Details" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Details"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<Button Grid.Column="2" Command="{Binding RefreshListCommand}"
-					Style="{StaticResource GeneralButtonStyle}"
-					Margin="5"
-					ToolTip="Refresh demos list (CTRL+R | F5)"
-					Width="90"
-					Height="30">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_refresh}" />
-								</Rectangle.Fill>
+					<Button Command="{Binding RefreshListCommand}"
+							Style="{DynamicResource GeneralButton}"
+							ToolTip="Refresh demos list (CTRL+R | F5)">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_refresh}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Refresh" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Refresh"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<Button Grid.Column="3"
-							Command="{Binding BrowseToDemoCommand}"
+					<Button Command="{Binding BrowseToDemoCommand}"
 							CommandParameter="{Binding SelectedDemo}"
-					Style="{StaticResource GeneralButtonStyle}"
-					Margin="5"
-					ToolTip="Browse to demo (CTRL+B)"
-					Width="90"
-					Height="30">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_magnify_browse}" />
-								</Rectangle.Fill>
+							Style="{DynamicResource GeneralButton}"
+							ToolTip="Browse to demo (CTRL+B)">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_magnify_browse}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Browse" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Browse"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<Button Grid.Column="4" Margin="5" Width="80" Height="30"
-							Command="{Binding DeleteDemosCommand}"
+					<Button Command="{Binding DeleteDemosCommand}"
 							CommandParameter="{Binding SelectedDemos}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							ToolTip="Delete (CTRL+D)">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_delete}" />
-								</Rectangle.Fill>
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_delete}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Delete" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Delete"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
-					
-					<Button Grid.Column="5" Margin="5" Width="90" Height="30"
-							Command="{Binding GoToAccountStatsCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
+
+					<Button Command="{Binding GoToAccountStatsCommand}"
+							Style="{DynamicResource GeneralButton}"
 							ToolTip="Account stats (CTRL+E)">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_database}" />
-								</Rectangle.Fill>
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_database}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Stats" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Stats"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<Button Grid.Column="6" Margin="5" Width="90" Height="30"
-							Command="{Binding ExportExcelCommand}"
+					<Button Command="{Binding ExportExcelCommand}"
 							CommandParameter="{Binding SelectedDemos}"
-							Style="{StaticResource GeneralButtonStyle}"
+							Style="{DynamicResource GeneralButton}"
 							ToolTip="Export as XLS (CTRL+X)">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_office_excel}" />
-								</Rectangle.Fill>
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_office_excel}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Export" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="Export"
+									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<TextBlock Grid.Column="7" Text="Account stats: " Style="{StaticResource CurrentFolderStyle}"/>
-					<ComboBox Grid.Column="8"
-							  ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
+					<TextBlock Text="Account stats: "
+							   Style="{StaticResource CurrentFolderStyle}"/>
+					<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
 							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
 							  DisplayMemberPath ="Name"
 							  SelectedValuePath="SteamId"
 							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-							  Style="{StaticResource ComboBoxAccountsStyle}" />
+							  Margin="5" />
 
-					<CheckBox Grid.Column="9"
-							  x:Name="CheckBoxShowAllAccounts"
+					<CheckBox x:Name="CheckBoxShowAllAccounts"
 							  Content="Show all"
 							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
-							  Style="{StaticResource CheckBoxFilterStyle}"
+							  Margin="5"
 							  Command="{Binding ShowAllAccountsCommand}"
 							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
 
-					<CheckBox Grid.Column="10"
-							  x:Name="CheckBoxShowAllAccountDemos"
+					<CheckBox x:Name="CheckBoxShowAllAccountDemos"
 							  Content="Show only account demos"
 							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowOnlyAccountDemos}"
-							  Style="{StaticResource CheckBoxFilterStyle}"
+							  Margin="5"
 							  Command="{Binding ShowOnlyAccountDemos}"
 							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccountDemos}"/>
 
-					<Image Grid.Column="11"
-						   Style="{StaticResource RankStyle}"
+					<Image Style="{StaticResource RankStyle}"
 						   Source="{Binding LastRankAccountStats.Logo}"
 						   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
-				</Grid>
+					
+				</StackPanel>
 			</Grid>
 			<!--end action bar 1st row -->
 
 			<!-- Action bar 2nd row -->
 			<Grid Grid.Row="1">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
+				<StackPanel Orientation="Horizontal">
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Watch selected demo (CTRL+W)"
+							Command="{Binding WatchDemoCommand}"
+							CommandParameter="{Binding SelectedDemo}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_control_play}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Watch"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 
-				<Button Grid.Column="0" Margin="5 0 5 0"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="70"
-					Height="30"
-					ToolTip="Watch selected demo (CTRL+W)"
-					Command="{Binding WatchDemoCommand}"
-					CommandParameter="{Binding SelectedDemo}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_control_play}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Watch" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Start watching selected demo at specific tick (CTRL+G)"
+							Command="{Binding GoToTickCommand}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_debug_step_into}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Goto Tick"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 
-				<Button Grid.Column="1" Margin="5 0 5 0"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="100"
-					Height="30"
-					ToolTip="Start watching selected demo at specific tick (CTRL+G)"
-					Command="{Binding GoToTickCommand}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_debug_step_into}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Goto Tick" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Watch your best actions."
+							Command="{Binding WatchHighlightCommand}"
+							CommandParameter="{Binding SelectedDemo}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_thumbs_up}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Watch highlights"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 
-				<Button Grid.Column="2" Margin="5 0 5 0"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="130"
-					Height="30"
-					ToolTip="Watch your best actions."
-					Command="{Binding WatchHighlightCommand}"
-					CommandParameter="{Binding SelectedDemo}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_thumbs_up}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Watch highlights" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Watch your mistakes."
+							Command="{Binding WatchLowlightCommand}"
+							CommandParameter="{Binding SelectedDemo}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_thumbs_down}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Watch lowlights"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 
-				<Button Grid.Column="3" Margin="5 0 5 0"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="120"
-					Height="30"
-					ToolTip="Watch your mistakes."
-					Command="{Binding WatchLowlightCommand}"
-					CommandParameter="{Binding SelectedDemo}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_thumbs_down}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Watch lowlights" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Add players to suspects list (CTRL+W)"
+							Command="{Binding AddPlayersToSuspectsListCommand}"
+							CommandParameter="{Binding SelectedDemos}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_group_add}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Add to suspects"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 
-				<Button Grid.Column="4" Margin="5 0 5 0"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="120"
-					Height="30"
-					ToolTip="Add players to suspects list (CTRL+W)"
-					Command="{Binding AddPlayersToSuspectsListCommand}"
-					CommandParameter="{Binding SelectedDemos}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_group_add}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Add to suspects" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Go to suspects view (CTRL+F)"
+							Command="{Binding ShowSuspectsCommand}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_people_profile}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Suspects "
+									   Style="{StaticResource ButtonTitleStyle}" />
+							<TextBlock Text="{Binding NewBannedPlayerCountAsString}" />
+						</StackPanel>
+					</Button>
 
-				<Button Grid.Column="5" Margin="5 0 5 0"
-					Style="{StaticResource GeneralButtonStyle}"
-					Width="100"
-					Height="30"
-					ToolTip="Go to suspects view (CTRL+F)"
-					Command="{Binding ShowSuspectsCommand}">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_people_profile}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Suspects " Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-						<TextBlock Text="{Binding NewBannedPlayerCountAsString}" Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-
-				<Button Grid.Column="6"
-						Margin="5 0 5 0"
-						Style="{StaticResource GeneralButtonStyle}"
-						Width="160"
-						Height="30"
-						ToolTip="Download last MM demos available for the current logged Steam account (CTRL+H)"
-						Command="{Binding DownloadDemosCommand}">
-					<StackPanel Orientation="Horizontal"
-								VerticalAlignment="Center">
-						<Rectangle Width="15"
-								   Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_download}" />
-							</Rectangle.Fill>
-						</Rectangle>
-						<TextBlock Text="Download MM Demos"
-								   Margin="5 0 0 0"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="Download last MM demos available for the current logged Steam account (CTRL+H)"
+							Command="{Binding DownloadDemosCommand}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_download}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Download MM Demos"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+				</StackPanel>
 			</Grid>
 		</Grid>
 		<!-- end action bar 2nd row -->
 
 		<Grid Grid.Row="1">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-
-			<Grid Grid.Column="0">
-				<TextBlock Text="Folder: " Style="{StaticResource CurrentFolderStyle}"/>
-			</Grid>
-
-			<ComboBox Grid.Column="1" ItemsSource="{Binding Folders, Mode=TwoWay}"
+			
+			<ComboBox Grid.Column="0"
+					  ItemsSource="{Binding Folders, Mode=TwoWay}"
 					  Style="{StaticResource ComboBoxFoldersStyle}"
-					  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
-					  SelectedItem="{Binding SelectedFolder}">
+					  SelectedItem="{Binding SelectedFolder}"
+					  controls:TextBoxHelper.Watermark="Current folder">
 				<ComboBox.IsEnabled>
 					<MultiBinding Converter="{StaticResource BooleanMultipleConverter}">
-						<Binding Path="IsShowAllFolders" Converter="{StaticResource BooleanInvertedConverter}" />
-						<Binding Path="IsBusy" Converter="{StaticResource BooleanInvertedConverter}" />
+						<Binding Path="IsShowAllFolders"
+									 Converter="{StaticResource BooleanInvertedConverter}" />
+						<Binding Path="IsBusy"
+									 Converter="{StaticResource BooleanInvertedConverter}" />
 					</MultiBinding>
 				</ComboBox.IsEnabled>
 			</ComboBox>
-
-			<Grid Grid.Column="2">
-				<CheckBox x:Name="CheckBoxShowAllFolders" Content="Show all folders"
+			<StackPanel Orientation="Horizontal"
+						Grid.Column="1">
+				<CheckBox x:Name="CheckBoxShowAllFolders"
+						  Content="Show all folders"
 						  IsChecked="{Binding IsShowAllFolders}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowAllFoldersCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllFolders}"/>
-			</Grid>
-
-			<Grid Grid.Column="3">
-				<CheckBox x:Name="CheckBoxShowPov" Content="POV"
+				<CheckBox x:Name="CheckBoxShowPov"
+						  Content="POV"
 						  IsChecked="{Binding IsShowPovDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowPovDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPov}"/>
-			</Grid>
-
-			<Grid Grid.Column="4">
-				<CheckBox x:Name="CheckBoxShowValve" Content="Valve"
+				<CheckBox x:Name="CheckBoxShowValve"
+						  Content="Valve"
 						  IsChecked="{Binding IsShowValveDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowValveDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowValve}"/>
-			</Grid>
-
-			<Grid Grid.Column="5">
-				<CheckBox x:Name="CheckBoxShowEbot" Content="eBot"
+				<CheckBox x:Name="CheckBoxShowEbot"
+						  Content="eBot"
 						  IsChecked="{Binding IsShowEbotDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowEbotDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowEbot}"/>
-			</Grid>
-
-			<Grid Grid.Column="6">
-				<CheckBox x:Name="CheckBoxShowFaceit" Content="Faceit"
+				<CheckBox x:Name="CheckBoxShowFaceit"
+						  Content="Faceit"
 						  IsChecked="{Binding IsShowFaceitDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowFaceitDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowFaceit}"/>
-			</Grid>
-
-			<Grid Grid.Column="7">
-				<CheckBox x:Name="CheckBoxShowEsea" Content="ESEA"
+				<CheckBox x:Name="CheckBoxShowEsea"
+						  Content="ESEA"
 						  IsChecked="{Binding IsShowEseaDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowEseaDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowEsea}"/>
-			</Grid>
-
-			<Grid Grid.Column="8">
-				<CheckBox x:Name="CheckBoxShowCevo" Content="CEVO"
+				<CheckBox x:Name="CheckBoxShowCevo"
+						  Content="CEVO"
 						  IsChecked="{Binding IsShowCevoDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowCevoDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowCevo}"/>
-			</Grid>
-
-			<Grid Grid.Column="9">
-				<CheckBox x:Name="CheckBoxShowPopFlash" Content="PopFlash"
+				<CheckBox x:Name="CheckBoxShowPopFlash"
+						  Content="PopFlash"
 						  IsChecked="{Binding IsShowPopFlashDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowPopFlashDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPopFlash}"/>
-			</Grid>
-
-			<Grid Grid.Column="10">
-				<CheckBox x:Name="CheckBoxShowOldDemos" Content="No analyzable demos"
+				<CheckBox x:Name="CheckBoxShowOldDemos"
+						  Content="No analyzable demos"
 						  IsChecked="{Binding IsShowOldDemos}"
-						  Style="{StaticResource CheckBoxFilterStyle}"
+						  Margin="5"
 						  Command="{Binding ShowOldDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOldDemos}"/>
-			</Grid>
-
-			<Grid Grid.Column="11">
 				<TextBox Text="{Binding FilterDemoText, UpdateSourceTrigger=PropertyChanged}"
-					 Height="20" Width="160"
-					 controls:TextBoxHelper.Watermark="Filter..."
-					 controls:TextBoxHelper.ClearTextButton="True"
-					 Margin="0 0 10 0"
-					 VerticalAlignment="Center"
-					 HorizontalAlignment="Right" />
-			</Grid>
+						 controls:TextBoxHelper.Watermark="Filter..."
+						 controls:TextBoxHelper.ClearTextButton="True"
+						 Margin="5"
+						 MinWidth="100"
+						 VerticalAlignment="Center"
+						 HorizontalAlignment="Right" />
+			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Row="2" Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}">
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="2">
+		<Grid Grid.Row="2"
+			  Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}">
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Center"
+						Margin="5">
 				<controls:ProgressRing IsActive="{Binding HasRing}"
-									   Foreground="{DynamicResource AccentColorBrush}"
+									   Foreground="{DynamicResource BlackColorBrush}"
 									   Width="40"
 									   Height="40" />
 				<TextBlock Name="NotificationText"
 						   Text="{Binding NotificationMessage}"
-						   Style="{StaticResource LabelGeneralInfoDemo}"
+						   Style="{StaticResource NotificationMessageStyle}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				<Button Margin="20 0 0 0" Width="70" Height="30"
-							Command="{Binding StopAnalyzeCommand}"
-							Style="{StaticResource GeneralButtonStyle}"
-							Visibility="{Binding IsCancellable, Converter={StaticResource BooleanToVisibilityConverter}}"
-							ToolTip="Stop (CTRL+S)">
-					<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-						<Rectangle Width="15" Height="15">
-							<Rectangle.Fill>
-								<VisualBrush Visual="{StaticResource appbar_control_stop}" />
-							</Rectangle.Fill>
+				<Button Command="{Binding StopAnalyzeCommand}"
+						Style="{DynamicResource GeneralButton}"
+						Visibility="{Binding IsCancellable, Converter={StaticResource BooleanToVisibilityConverter}}"
+						ToolTip="Stop (CTRL+S)">
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_control_stop}"
+											 Stretch="Fill" />
+							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Stop" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
+						<TextBlock Text="Stop"
+								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 			</StackPanel>
@@ -523,20 +488,16 @@
 
 		<DataGrid Grid.Row="3"
 				  x:Name="DataGridDemos"
+				  Style="{StaticResource DataGridStyle}"
 				  ItemsSource="{Binding Demos, IsAsync=True}"
 				  SelectedItem="{Binding SelectedDemo}"
-				  CellStyle="{StaticResource DataGridCellStyle}"
-				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}"
-				  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-				  EnableColumnVirtualization ="True"
-				  EnableRowVirtualization ="True"
-				  Style="{StaticResource DataGridStyle}">
+				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
-														 PassEventArgsToCommand="True"
-														 EventArgsConverter="{StaticResource RowDemoDoubleClickedToDemoDetails}"
-														 EventArgsConverterParameter="{Binding SelectedDemo}"/>
+										 PassEventArgsToCommand="True"
+										 EventArgsConverter="{StaticResource RowDemoDoubleClickedToDemoDetails}"
+										 EventArgsConverterParameter="{Binding SelectedDemo}"/>
 				</i:EventTrigger>
 				<i:EventTrigger EventName="SelectionChanged">
 					<mvvm:EventToCommand
@@ -545,14 +506,14 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn
-					Header="Source"
-					Width="Auto"
-					SortMemberPath="Source.Name">
+				<DataGridTemplateColumn Header="Source"
+										Width="Auto"
+										SortMemberPath="Source.Name">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding Path=Source.Logo, Converter={StaticResource ImageToSourceConverter}}"
-								   Height="20" Width="40"/>
+								   Height="20"
+								   Width="40"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
@@ -773,7 +734,7 @@
 			<Button Content="Show more demos"
 					Grid.Column="0"
 					Margin="10 5 0 0"
-					Style="{StaticResource GeneralButtonStyle}"
+					Style="{DynamicResource GeneralButton}"
 					Command="{Binding ShowMoreDemosCommand}"/>
 			<TextBlock Grid.Column="1"
 					   Style="{StaticResource SmallTitleStyle}"
@@ -783,30 +744,43 @@
 		</Grid>
 
 		<Grid Grid.Row="5">
-			<Grid Background="{StaticResource LightGreyBrush}">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
-				<StackPanel Grid.Column="0" Orientation="Horizontal">
-					<TextBlock Text="Comment : " Style="{StaticResource CurrentFolderStyle}" />
-					<TextBlock Text="{Binding SelectedDemo.Comment}" Style="{StaticResource ValueGeneralInfoDemo}" />
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<StackPanel Grid.Column="0"
+						Orientation="Horizontal">
+				<TextBlock Text="Comment : "
+						   Style="{StaticResource CurrentFolderStyle}" />
+				<TextBlock Text="{Binding SelectedDemo.Comment}"
+						   Style="{StaticResource TextBlockSmall}" />
+			</StackPanel>
+			<StackPanel Grid.Column="1"
+						Orientation="Horizontal">
+				<StackPanel Orientation="Horizontal">
+					<Rectangle Width="10"
+							   Height="10"
+							   Fill="{StaticResource GreenBrush}" />
+					<TextBlock Text="To watch"
+							   Style="{StaticResource CurrentFolderStyle}" />
 				</StackPanel>
-				<StackPanel Grid.Column="1" Orientation="Horizontal">
-					<StackPanel Orientation="Horizontal">
-						<Rectangle Width="10" Height="10" Fill="{StaticResource LightRedColorBrush}" />
-						<TextBlock Text="To watch" Style="{StaticResource CurrentFolderStyle}" />
-					</StackPanel>
-					<StackPanel Orientation="Horizontal" Margin="5 0 0 0">
-						<Rectangle Width="10" Height="10" Fill="{StaticResource LightBlueBrush}" />
-						<TextBlock Text="Watched" Style="{StaticResource CurrentFolderStyle}" />
-					</StackPanel>
-					<StackPanel Orientation="Horizontal" Margin="5 0 5 0">
-						<Rectangle Width="10" Height="10" Fill="{StaticResource RedColorBrush}" />
-						<TextBlock Text="Not analyzable" Style="{StaticResource CurrentFolderStyle}" />
-					</StackPanel>
+				<StackPanel Orientation="Horizontal"
+							Margin="5 0 0 0">
+					<Rectangle Width="10"
+							   Height="10"
+							   Fill="{StaticResource LightBlueBrush}" />
+					<TextBlock Text="Watched"
+							   Style="{StaticResource CurrentFolderStyle}" />
 				</StackPanel>
-			</Grid>
+				<StackPanel Orientation="Horizontal"
+							Margin="5 0 5 0">
+					<Rectangle Width="10"
+							   Height="10"
+							   Fill="{StaticResource RedColorBrush}" />
+					<TextBlock Text="Not analyzable"
+							   Style="{StaticResource CurrentFolderStyle}" />
+				</StackPanel>
+			</StackPanel>
 		</Grid>
 	</Grid>
 </UserControl>

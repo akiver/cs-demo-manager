@@ -10,9 +10,8 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 mc:Ignorable="d"
-			 Background="{StaticResource LightGreyBrush}"
 			 DataContext="{Binding DemoFlashbangs, Source={StaticResource Locator}}"
-			 d:DesignHeight="720 "
+			 d:DesignHeight="720"
 			 d:DesignWidth="1280">
 
 	<UserControl.Resources>
@@ -27,8 +26,8 @@
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+B" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}" />
+									Command="{Binding BackToDemoDetailsCommand}"
+									CommandParameter="{Binding CurrentDemo}" />
 	</UserControl.InputBindings>
 
 	<i:Interaction.Triggers>
@@ -43,36 +42,45 @@
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 
-		<Grid Grid.Row="0" Margin="5">
+		<Grid Grid.Row="0"
+			  Height="40">
 			<StackPanel Orientation="Horizontal">
-				<StackPanel Orientation="Horizontal">
-					<Button Margin="10"
-						Style="{StaticResource GeneralButtonStyle}"
-						Width="70"
-						Height="30"
+				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}"
 						ToolTip="Back (CTRL+B)">
-						<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-							<Rectangle Width="15" Height="15">
-								<Rectangle.Fill>
-									<VisualBrush Visual="{StaticResource appbar_arrow_left}" />
-								</Rectangle.Fill>
-							</Rectangle>
-							<TextBlock Text="Back" Margin="5 0 0 0" Style="{StaticResource ButtonTitleStyle}" />
-						</StackPanel>
-					</Button>
-				</StackPanel>
+					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+						<Rectangle Width="15"
+								   Height="15"
+								   Fill="{StaticResource IdealForegroundColorBrush}">
+							<Rectangle.OpacityMask>
+								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+											Stretch="Fill" />
+							</Rectangle.OpacityMask>
+						</Rectangle>
+						<TextBlock Text="Back"
+								   Style="{StaticResource ButtonTitleStyle}" />
+					</StackPanel>
+				</Button>
+			
 
-				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="5 0 0 0">
-					<controls:ProgressRing IsActive="{Binding IsBusy}" Foreground="{DynamicResource AccentColorBrush}" Width="40" Height="40" />
-					<TextBlock Text="{Binding NotificationMessage}" Style="{StaticResource LabelGeneralInfoDemo}"
-						   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center"
+							Margin="5">
+					<controls:ProgressRing IsActive="{Binding IsBusy}"
+										   Foreground="{DynamicResource BlackColorBrush}"
+										   Width="30"
+										   Height="30" />
+					<TextBlock Text="{Binding NotificationMessage}"
+							   Style="{StaticResource NotificationMessageStyle}"
+							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>
 
-		<Grid Grid.Row="1" Margin="10" Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
+		<Grid Grid.Row="1"
+			  Margin="10"
+			  Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
 
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="*"/>
@@ -80,36 +88,45 @@
 			</Grid.ColumnDefinitions>
 
 			<Grid Grid.Column="0">
-				<telerik:RadHeatMap ShowToolTips="True" CellBorderThickness="1">
+				<telerik:RadHeatMap ShowToolTips="True"
+									CellBorderThickness="1">
 					<telerik:RadHeatMap.Definition>
 						<telerik:CategoricalDefinition RowGroupMemberPath="Flasher"
-											   ColumnGroupMemberPath="Flashed"
-											   ValuePath="Duration"
-											   ItemsSource="{Binding PlayersFlashTimes}">
+													   ColumnGroupMemberPath="Flashed"
+													   ValuePath="Duration"
+													   ItemsSource="{Binding PlayersFlashTimes}">
 							<telerik:CategoricalDefinition.Colorizer>
-								<telerik:HeatMapValueGradientColorizer RangeMinimum="0" RangeMaximum="{Binding MaxDurationPlayer}">
-									<GradientStop Offset="0.0" Color="{StaticResource LightWhite}" />
-									<GradientStop Offset="0.5" Color="{StaticResource Orange}" />
-									<GradientStop Offset="1.0" Color="{StaticResource Red}" />
+								<telerik:HeatMapValueGradientColorizer RangeMinimum="0"
+																	   RangeMaximum="{Binding MaxDurationPlayer}">
+									<GradientStop Offset="0.0"
+												  Color="{StaticResource LightWhite}" />
+									<GradientStop Offset="0.5"
+												  Color="{StaticResource Orange}" />
+									<GradientStop Offset="1.0"
+												  Color="{StaticResource Red}" />
 								</telerik:HeatMapValueGradientColorizer>
 							</telerik:CategoricalDefinition.Colorizer>
 						</telerik:CategoricalDefinition>
 					</telerik:RadHeatMap.Definition>
 					<telerik:RadHeatMap.CellLabelSettings>
-						<telerik:HeatMapCellLabelSettings />
+						<telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
 					</telerik:RadHeatMap.CellLabelSettings>
 					<telerik:RadHeatMap.ColumnHeaderSettings>
-						<telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center" LabelStyle="{StaticResource LabelHeatmapStyle}" LabelRotationAngle="90"/>
+						<telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
+															 LabelStyle="{StaticResource LabelHeatmapStyle}"
+															 LabelRotationAngle="90"/>
 					</telerik:RadHeatMap.ColumnHeaderSettings>
 					<telerik:RadHeatMap.RowHeaderSettings>
-						<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center" LabelStyle="{StaticResource LabelHeatmapStyle}" />
+						<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center"
+														  LabelStyle="{StaticResource LabelHeatmapStyle}" />
 					</telerik:RadHeatMap.RowHeaderSettings>
 					<telerik:RadHeatMap.ToolTipSettings>
 						<telerik:HeatMapToolTipSettings ToolTipTemplate="{StaticResource FlashbangPlayerToolTipTemplate}" />
 					</telerik:RadHeatMap.ToolTipSettings>
 					<telerik:RadHeatMap.DescriptionContent>
 						<Grid>
-							<TextBlock Text="Flasher \ Flashed" Style="{StaticResource DescriptionLabelHeatmapStyle}" />
+							<TextBlock Text="Flasher \ Flashed"
+									   Style="{StaticResource DescriptionLabelHeatmapStyle}" />
 						</Grid>
 					</telerik:RadHeatMap.DescriptionContent>
 				</telerik:RadHeatMap>
@@ -117,42 +134,50 @@
 
 			<Grid Grid.Column="1">
 				<Grid.RowDefinitions>
-					<RowDefinition Height="*"></RowDefinition>
-					<RowDefinition Height="*"></RowDefinition>
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 
 				<!-- Heatmap by team -->
 				<Grid Grid.Row="0">
-					<telerik:RadHeatMap ShowToolTips="True" CellBorderThickness="1">
+					<telerik:RadHeatMap ShowToolTips="True"
+										CellBorderThickness="1">
 						<telerik:RadHeatMap.Definition>
 							<telerik:CategoricalDefinition RowGroupMemberPath="Flasher"
-											   ColumnGroupMemberPath="Flashed"
-											   ValuePath="Duration"
-											   ItemsSource="{Binding TeamsFlashTimes}">
+														   ColumnGroupMemberPath="Flashed"
+														   ValuePath="Duration"
+														   ItemsSource="{Binding TeamsFlashTimes}">
 								<telerik:CategoricalDefinition.Colorizer>
-									<telerik:HeatMapValueGradientColorizer RangeMinimum="0" RangeMaximum="{Binding MaxDurationTeam}">
-										<GradientStop Offset="0.0" Color="{StaticResource LightWhite}" />
-										<GradientStop Offset="0.5" Color="{StaticResource Orange}" />
-										<GradientStop Offset="1.0" Color="{StaticResource Red}" />
+									<telerik:HeatMapValueGradientColorizer RangeMinimum="0"
+																		   RangeMaximum="{Binding MaxDurationTeam}">
+										<GradientStop Offset="0.0"
+													  Color="{StaticResource LightWhite}" />
+										<GradientStop Offset="0.5"
+													  Color="{StaticResource Orange}" />
+										<GradientStop Offset="1.0"
+													  Color="{StaticResource Red}" />
 									</telerik:HeatMapValueGradientColorizer>
 								</telerik:CategoricalDefinition.Colorizer>
 							</telerik:CategoricalDefinition>
 						</telerik:RadHeatMap.Definition>
 						<telerik:RadHeatMap.CellLabelSettings>
-							<telerik:HeatMapCellLabelSettings />
+							<telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
 						</telerik:RadHeatMap.CellLabelSettings>
 						<telerik:RadHeatMap.ColumnHeaderSettings>
-							<telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center" LabelStyle="{StaticResource LabelHeatmapStyle}" />
+							<telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
+																 LabelStyle="{StaticResource LabelHeatmapStyle}" />
 						</telerik:RadHeatMap.ColumnHeaderSettings>
 						<telerik:RadHeatMap.RowHeaderSettings>
-							<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center" LabelStyle="{StaticResource LabelHeatmapStyle}" />
+							<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center"
+															  LabelStyle="{StaticResource LabelHeatmapStyle}" />
 						</telerik:RadHeatMap.RowHeaderSettings>
 						<telerik:RadHeatMap.ToolTipSettings>
 							<telerik:HeatMapToolTipSettings ToolTipTemplate="{StaticResource FlashbangPlayerToolTipTemplate}" />
 						</telerik:RadHeatMap.ToolTipSettings>
 						<telerik:RadHeatMap.DescriptionContent>
 							<Grid>
-								<TextBlock Text="Flasher \ Flashed" Style="{StaticResource DescriptionLabelHeatmapStyle}" />
+								<TextBlock Text="Flasher \ Flashed"
+										   Style="{StaticResource DescriptionLabelHeatmapStyle}" />
 							</Grid>
 						</telerik:RadHeatMap.DescriptionContent>
 					</telerik:RadHeatMap>
@@ -165,29 +190,35 @@
 					</Grid.ColumnDefinitions>
 					<Grid Grid.Column="0">
 						<!-- Heatmap average by players -->
-						<telerik:RadHeatMap ShowToolTips="True" CellBorderThickness="1">
+						<telerik:RadHeatMap ShowToolTips="True"
+											CellBorderThickness="1">
 							<telerik:RadHeatMap.Definition>
 								<telerik:CategoricalDefinition RowGroupMemberPath="Flasher"
-											   ColumnGroupMemberPath="Flashed"
-											   ValuePath="Duration"
-											   ItemsSource="{Binding AverageFlashTimesPlayers}">
+															   ColumnGroupMemberPath="Flashed"
+															   ValuePath="Duration"
+															   ItemsSource="{Binding AverageFlashTimesPlayers}">
 									<telerik:CategoricalDefinition.Colorizer>
-										<telerik:HeatMapValueGradientColorizer RangeMinimum="0" RangeMaximum="{Binding MaxDurationAveragePlayer}">
-											<GradientStop Offset="0.0" Color="{StaticResource LightWhite}" />
-											<GradientStop Offset="0.5" Color="{StaticResource Orange}" />
-											<GradientStop Offset="1.0" Color="{StaticResource Red}" />
+										<telerik:HeatMapValueGradientColorizer RangeMinimum="0"
+																			   RangeMaximum="{Binding MaxDurationAveragePlayer}">
+											<GradientStop Offset="0.0"
+														  Color="{StaticResource LightWhite}" />
+											<GradientStop Offset="0.5"
+														  Color="{StaticResource Orange}" />
+											<GradientStop Offset="1.0"
+														  Color="{StaticResource Red}" />
 										</telerik:HeatMapValueGradientColorizer>
 									</telerik:CategoricalDefinition.Colorizer>
 								</telerik:CategoricalDefinition>
 							</telerik:RadHeatMap.Definition>
 							<telerik:RadHeatMap.CellLabelSettings>
-								<telerik:HeatMapCellLabelSettings />
+								<telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
 							</telerik:RadHeatMap.CellLabelSettings>
 							<telerik:RadHeatMap.ColumnHeaderSettings>
 								<telerik:HeatMapColumnHeaderSettings LabelStyle="{StaticResource LabelHeatmapInvisibleStyle}" />
 							</telerik:RadHeatMap.ColumnHeaderSettings>
 							<telerik:RadHeatMap.RowHeaderSettings>
-								<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center" LabelStyle="{StaticResource LabelHeatmapStyle}" />
+								<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center"
+																  LabelStyle="{StaticResource LabelHeatmapStyle}" />
 							</telerik:RadHeatMap.RowHeaderSettings>
 							<telerik:RadHeatMap.ToolTipSettings>
 								<telerik:HeatMapToolTipSettings ToolTipTemplate="{StaticResource FlashbangAveragePlayerToolTipTemplate}" />
@@ -200,40 +231,42 @@
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0">
-							<TextBlock Text="Total flashbang thrown" Style="{StaticResource SmallTitleStyle}"/>
+							<TextBlock Text="Total flashbang thrown"
+									   Style="{StaticResource SmallTitleStyle}"/>
 						</Grid>
 						<Grid Grid.Row="1">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*"/>
 								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
-							<DataGrid Grid.Column="0" Margin="5 0 0 0"
+							<DataGrid Grid.Column="0"
+									  Margin="5 0 0 0"
 									  ItemsSource="{Binding CurrentDemo.Players, IsAsync=True}"
-									  Style="{StaticResource DataGridStyle}"
-									  RowStyle="{StaticResource DataGridRowStyle}"
-									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-									  EnableColumnVirtualization ="True"
-									  EnableRowVirtualization ="True"
-									  CellStyle="{StaticResource DataGridCellStyle}" Width="Auto">
+									  Style="{StaticResource DataGridStyle}">
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
-														Width="Auto" Header="Player Name" Binding="{Binding Name}"/>
+														Width="Auto"
+														Header="Player Name"
+														Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalPlayerFlashbangThrownHeader}"
-														Width="Auto" Header="Total" Binding="{Binding FlashbangThrownCount}" />
+														Width="Auto"
+														Header="Total"
+														Binding="{Binding FlashbangThrownCount}" />
 								</DataGrid.Columns>
 							</DataGrid>
-							<DataGrid Grid.Column="1" Margin="5 0 0 0"
+							<DataGrid Grid.Column="1"
+									  Margin="5 0 0 0"
 									  ItemsSource="{Binding Teams, IsAsync=True}"
-									  Style="{StaticResource DataGridStyle}"
-									  ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-									  RowStyle="{StaticResource DataGridRowStyle}"
-									  EnableColumnVirtualization ="True"
-									  EnableRowVirtualization ="True"
-									  CellStyle="{StaticResource DataGridCellStyle}"
-									  Width="Auto">
+									  Style="{StaticResource DataGridStyle}">
 								<DataGrid.Columns>
-									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}" Width="Auto" Header="Team Name" Binding="{Binding Name}"/>
-									<DataGridTextColumn HeaderStyle="{StaticResource TotalTeamFlashbangThrownHeader}"  Width="Auto" Header="Total" Binding="{Binding FlashbangThrownCount}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
+														Width="Auto"
+														Header="Team Name"
+														Binding="{Binding Name}"/>
+									<DataGridTextColumn HeaderStyle="{StaticResource TotalTeamFlashbangThrownHeader}"
+														Width="Auto"
+														Header="Total"
+														Binding="{Binding FlashbangThrownCount}" />
 								</DataGrid.Columns>
 							</DataGrid>
 						</Grid>
