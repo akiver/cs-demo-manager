@@ -51,7 +51,7 @@ Screenshots and video are available at [http://csgo-demos-manager.com](http://cs
 
 ## Contribute
 
-You are free to contribuate to the project. Please follow the [AngularJS commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+You are free to contribute to the project. Please follow the [AngularJS commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
 
 ## License
 
