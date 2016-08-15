@@ -61,8 +61,8 @@
 							 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
 							 IsOpen="{Binding IsSettingsOpen}"
 							 CloseCommand="{Binding SettingsFlyoutClosedCommand}">
-
 				<TabControl controls:TabControlHelper.IsUnderlined="True"
+							Margin="15 0 0 0"
 							TabStripPlacement="Left">
 					<controls:MetroTabItem Header="Stats">
 						<StackPanel Orientation="Vertical"
