@@ -25,14 +25,6 @@
 		<Setter Property="AlternatingRowBackground" Value="{DynamicResource GrayBrush10}"/>
 	</Style>
 
-	<Style TargetType="DataGridCell" x:Key="DataGridCellStyle" BasedOn="{StaticResource MetroDataGridCell}">
-		<Style.Triggers>
-			<Trigger Property="IsSelected" Value="True">
-				<Setter Property="Foreground" Value="{StaticResource LightGreyBrush}" />
-			</Trigger>
-		</Style.Triggers>
-	</Style>
-
 	<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource LightGrey}"/>
 
 	<!--DataGrid Row for Demos main list-->

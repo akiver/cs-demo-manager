@@ -244,10 +244,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="resources\ListBox.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="resources\Separators.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

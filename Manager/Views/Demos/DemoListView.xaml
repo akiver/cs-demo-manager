@@ -211,7 +211,6 @@
 							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
 							  DisplayMemberPath ="Name"
 							  SelectedValuePath="SteamId"
-							  ItemContainerStyle="{StaticResource ComboBoxItemStyle}"
 							  Margin="5" />
 
 					<CheckBox x:Name="CheckBoxShowAllAccounts"

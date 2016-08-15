@@ -17,17 +17,17 @@
 
 	<ContextMenu x:Key="DemoRowContextMenu">
 		<MenuItem Header="Details"
-							  Command="{Binding DemoList.ShowDemoDetailsCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.ShowDemoDetailsCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Analyze"
-							  Command="{Binding DemoList.AnalyzeDemosCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.AnalyzeDemosCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Browse"
-							  Command="{Binding DemoList.BrowseToDemoCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.BrowseToDemoCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Copy playdemo command"
-							  Command="{Binding DemoList.CopyPlaydemoCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.CopyPlaydemoCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Status"
 				  ItemsSource="{Binding Settings.StatusList, Source={StaticResource Locator}}"
 				  DataContext="{StaticResource DemoStatus}"
@@ -43,30 +43,30 @@
 			</MenuItem.ItemContainerStyle>
 		</MenuItem>
 		<MenuItem Header="Delete"
-							  Command="{Binding DemoList.DeleteDemosCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.DeleteDemosCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Remove from cache"
-							  Command="{Binding DemoList.RemoveDemosFromCacheCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.RemoveDemosFromCacheCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Add players to suspects list"
-							  Command="{Binding DemoList.AddPlayersToSuspectsListCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.AddPlayersToSuspectsListCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Source">
 			<MenuItem Header="Valve"
-								  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
-								  CommandParameter="valve" />
+					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
+					  CommandParameter="valve" />
 			<MenuItem Header="ESEA"
-								  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
-								  CommandParameter="esea" />
+					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
+					  CommandParameter="esea" />
 			<MenuItem Header="eBot"
-								  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
-								  CommandParameter="ebot" />
+					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
+					  CommandParameter="ebot" />
 			<MenuItem Header="Faceit"
-								  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
-								  CommandParameter="faceit" />
+					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
+					  CommandParameter="faceit" />
 			<MenuItem Header="CEVO"
-								  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
-								  CommandParameter="cevo" />
+					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
+					  CommandParameter="cevo" />
 		</MenuItem>
 		<MenuItem Header="Export JSON"
 				  Command="{Binding DemoList.ExportJsonCommand, Source={StaticResource Locator}}"
@@ -115,11 +115,11 @@
 
 	<ContextMenu x:Key="WhitelistRowContextMenu">
 		<MenuItem Header="Profile"
-							  Command="{Binding Whitelist.GoToPlayerProfileCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
+				  Command="{Binding Whitelist.GoToPlayerProfileCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
 		<MenuItem Header="Remove"
-							  Command="{Binding Whitelist.RemoveSelectedPlayersCommand, Source={StaticResource Locator}}"
-							  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
+				  Command="{Binding Whitelist.RemoveSelectedPlayersCommand, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="RoundRowContextMenu">
