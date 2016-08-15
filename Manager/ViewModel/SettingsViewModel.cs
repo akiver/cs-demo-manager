@@ -1218,7 +1218,7 @@ namespace Manager.ViewModel
 			}
 		}
 
-		public string CacheSizeAsString => "Size : ~ " + Math.Round(_cacheSize / 1024f / 1024f) + "MB";
+		public string CacheSizeAsString => "Cache size : ~ " + Math.Round(_cacheSize / 1024f / 1024f) + "MB";
 
 		#endregion
 

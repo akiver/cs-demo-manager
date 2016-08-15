@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -47,6 +48,10 @@ namespace Manager.ViewModel
 		private RelayCommand _windowLoadedCommand;
 
 		private RelayCommand _windowClosedCommand;
+
+		private RelayCommand<string> _handleHyperLinkCommand;
+
+		private RelayCommand<string> _copyTextCommand;
 
 		private readonly ICacheService _cacheService;
 
@@ -269,6 +274,25 @@ namespace Manager.ViewModel
 						Folders = new ObservableCollection<string>(folders);
 						SettingsFlyoutClosed msg = new SettingsFlyoutClosed();
 						Messenger.Default.Send(msg);
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to copy text to clipboard
+		/// </summary>
+		public RelayCommand<string> CopyTextCommand => _copyTextCommand
+			?? (_copyTextCommand = new RelayCommand<string>(Clipboard.SetText));
+
+		public RelayCommand<string> HandleHyperLinkCommand
+		{
+			get
+			{
+				return _handleHyperLinkCommand
+					?? (_handleHyperLinkCommand = new RelayCommand<string>(
+					link =>
+					{
+						Process.Start(link);
 					}));
 			}
 		}
