@@ -776,6 +776,7 @@ namespace Manager.ViewModel.Demos
 							await Task.Delay(3000);
 							HasNotification = false;
 							IsBusy = false;
+							CommandManager.InvalidateRequerySuggested();
 						},
 						demo => SelectedDemo != null));
 			}
