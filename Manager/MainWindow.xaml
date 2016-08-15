@@ -128,7 +128,9 @@
 									</i:EventTrigger>
 								</i:Interaction.Triggers>
 							</TextBox>
-
+							<CheckBox Content="Use custom highlights / lowlights generation"
+									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsUseCustomActionGeneration}"
+									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							<CheckBox x:Name="EnableMoviemakerModeCheckbox"
 									  Content="Enable moviemaker mode"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"

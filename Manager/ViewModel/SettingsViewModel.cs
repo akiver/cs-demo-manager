@@ -87,6 +87,8 @@ namespace Manager.ViewModel
 
 		private ComboboxSelector _selectedTheme;
 
+		private bool _isUseCustomActionGeneration = Settings.Default.UseCustomActionsGeneration;
+
 		private bool _showDateColumn = Settings.Default.ShowDateColumn;
 
 		private bool _showBombPlantedColumn = Settings.Default.ShowBombPlantedColumn;
@@ -378,6 +380,17 @@ namespace Manager.ViewModel
 				Set(() => IsShowAllPlayers, ref _isShowAllPlayers, value);
 				Settings.Default.IsShowAllPlayers = value;
 				Settings.Default.Save();
+			}
+		}
+
+		public bool IsUseCustomActionGeneration
+		{
+			get { return _isUseCustomActionGeneration; }
+			set
+			{
+				Settings.Default.UseCustomActionsGeneration = value;
+				Settings.Default.Save();
+				Set(() => IsUseCustomActionGeneration, ref _isUseCustomActionGeneration, value);
 			}
 		}
 

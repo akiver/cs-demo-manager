@@ -88,29 +88,43 @@ namespace Manager.Services
 
 		internal void WatchHighlightDemo(bool fromPlayerPerspective, string steamId = null)
 		{
-			if (fromPlayerPerspective)
+			if (Properties.Settings.Default.UseCustomActionsGeneration)
 			{
-				_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
-				DeleteVdmFile();
+				GenerateHighLowVdm(true, fromPlayerPerspective, steamId);
 			}
 			else
 			{
-				GenerateHighLowVdm(true, steamId);
+				if (fromPlayerPerspective)
+				{
+					_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
+					DeleteVdmFile();
+				}
+				else
+				{
+					GenerateHighLowVdm(true, false, steamId);
+				}
 			}
 			StartGame();
 		}
 
 		internal void WatchLowlightDemo(bool fromPlayerPerspective, string steamId = null)
 		{
-			if (fromPlayerPerspective)
+			if (Properties.Settings.Default.UseCustomActionsGeneration)
 			{
-				GenerateHighLowVdm(false, steamId);
+				GenerateHighLowVdm(false, fromPlayerPerspective, steamId);
 			}
 			else
 			{
-				_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
-				_arguments.Add("lowlights");
-				DeleteVdmFile();
+				if (fromPlayerPerspective)
+				{
+					GenerateHighLowVdm(false, true, steamId);
+				}
+				else
+				{
+					_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
+					_arguments.Add("lowlights");
+					DeleteVdmFile();
+				}
 			}
 			StartGame();
 		}
@@ -293,7 +307,7 @@ namespace Manager.Services
 			File.WriteAllText(_demo.GetVdmFilePath(), content);
 		}
 
-		private void GenerateHighLowVdm(bool isHighlight, string steamId = null)
+		private void GenerateHighLowVdm(bool isHighlight, bool isFromPlayerPerspective = true, string steamId = null)
 		{
 			int lastTick = 0;
 			int actionCount = 0;
@@ -323,7 +337,10 @@ namespace Manager.Services
 							generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, e.Tick);
 							generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick, e.Tick - tickDelayCount);
 						}
-						generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick, e.KilledSteamId);
+						if (isFromPlayerPerspective)
+							generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick, e.KillerSteamId);
+						else
+							generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick, e.KilledSteamId);
 						lastTick = e.Tick;
 						continue;
 					}
@@ -332,7 +349,12 @@ namespace Manager.Services
 					generated += string.Format(Properties.Resources.text_message_start, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick, message);
 					generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick);
 					generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.Tick - tickDelayCount);
-					generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, e.KilledSteamId);
+					long specSteamId;
+					if (isHighlight)
+						specSteamId = isFromPlayerPerspective ? e.KillerSteamId : e.KilledSteamId;
+					else
+						specSteamId = isFromPlayerPerspective ? e.KilledSteamId : e.KillerSteamId;
+					generated += string.Format(Properties.Resources.spec_player, ++actionCount, startTick < nextActionDelayCount ? 0 : startTick + nextActionDelayCount, specSteamId);
 					lastTick = e.Tick;
 				}
 			}

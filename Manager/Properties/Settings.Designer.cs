@@ -1173,5 +1173,17 @@ namespace Manager.Properties {
                 this["Theme"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseCustomActionsGeneration {
+            get {
+                return ((bool)(this["UseCustomActionsGeneration"]));
+            }
+            set {
+                this["UseCustomActionsGeneration"] = value;
+            }
+        }
     }
 }
