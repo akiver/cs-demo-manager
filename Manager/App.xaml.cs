@@ -60,6 +60,14 @@ namespace Manager
 				return;
 			}
 
+			// upgrade user settings
+			if (Settings.Default.UpgradeRequired)
+			{
+				Settings.Default.Upgrade();
+				Settings.Default.UpgradeRequired = false;
+				Settings.Default.Save();
+			}
+
 			if (Settings.Default.StartBotOnLaunch)
 			{
 				if (File.Exists(AppSettings.BOT_PROCESS_NAME + ".exe")
