@@ -209,6 +209,7 @@
 							   Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
 							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
+							  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 							  DisplayMemberPath ="Name"
 							  SelectedValuePath="SteamId"
 							  Margin="5" />

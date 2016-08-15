@@ -1690,6 +1690,7 @@ namespace Manager.ViewModel.Demos
 
 		private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)
 		{
+			if (IsBusy) return;
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
@@ -1708,6 +1709,7 @@ namespace Manager.ViewModel.Demos
 
 		private void HandleSettingsFlyoutClosedMessage(SettingsFlyoutClosed msg)
 		{
+			if (IsBusy) return;
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{

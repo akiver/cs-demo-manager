@@ -1610,6 +1610,7 @@ namespace Manager.ViewModel
 							NotificationMessage = "Syncing accounts nickname...";
 							List<string> steamIdList = Accounts.Select(a => a.SteamId.ToString()).ToList();
 							IEnumerable<Suspect> players = await _steamService.GetBanStatusForUserList(steamIdList);
+							long currentAccountSteamId = Settings.Default.SelectedStatsAccountSteamID;
 							Accounts.Clear();
 							foreach (Suspect player in players)
 							{
@@ -1619,6 +1620,7 @@ namespace Manager.ViewModel
 									Name = player.Nickname
 								});
 							}
+							SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == currentAccountSteamId.ToString());
 
 							NotificationMessage = "Settings";
 
