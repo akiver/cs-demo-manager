@@ -110,10 +110,11 @@ namespace Manager.Services
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
 				AffirmativeButtonText = "Player POV",
-				NegativeButtonText = "Enemy POV"
+				NegativeButtonText = "Enemy POV",
+				FirstAuxiliaryButtonText = "Cancel"
 			};
 
-			return await metroWindow.ShowMessageAsync("POV", "Which POV (camera perspective) do you want to see?", MessageDialogStyle.AffirmativeAndNegative, dialogOptions);
+			return await metroWindow.ShowMessageAsync("POV", "Which POV (camera perspective) do you want to see?", MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
 	}
 }

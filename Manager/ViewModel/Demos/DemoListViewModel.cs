@@ -1262,6 +1262,7 @@ namespace Manager.ViewModel.Demos
 						{
 							GameLauncher launcher = new GameLauncher(SelectedDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
 							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
 						}
 						catch (Exception e)
@@ -1301,6 +1302,7 @@ namespace Manager.ViewModel.Demos
 						{
 							GameLauncher launcher = new GameLauncher(SelectedDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
 							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
 						}
 						catch (Exception e)

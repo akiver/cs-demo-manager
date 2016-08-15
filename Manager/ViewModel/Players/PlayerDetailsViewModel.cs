@@ -242,6 +242,7 @@ namespace Manager.ViewModel.Players
 							string steamId = CurrentPlayer.SteamId.ToString();
 							GameLauncher launcher = new GameLauncher(CurrentDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
 							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						}));
 			}
@@ -264,6 +265,7 @@ namespace Manager.ViewModel.Players
 							string steamId = CurrentPlayer.SteamId.ToString();
 							GameLauncher launcher = new GameLauncher(CurrentDemo);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
 							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
 						}));
 			}
