@@ -1,4 +1,4 @@
-#define AppVer "2.8.1"
+#define AppVer "2.9.0"
 #define AppName "CSGO Demos Manager"
 #define ExeName "CSGODemosManager.exe"
 #define AppWebsite "http://www.csgo-demos-manager.com"
@@ -166,12 +166,6 @@ Source: "Manager\bin\x86\Release\WpfPageTransitions.dll"; DestDir: "{app}"; Flag
 Source: "Manager\bin\x86\Release\WriteableBitmapEx.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Manager\bin\x86\Release\de\*"; DestDir: "{app}\de"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Manager\bin\x86\Release\es\*"; DestDir: "{app}\es"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Manager\bin\x86\Release\fr\*"; DestDir: "{app}\fr"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Manager\bin\x86\Release\it\*"; DestDir: "{app}\it"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Manager\bin\x86\Release\nl\*"; DestDir: "{app}\nl"; Flags: ignoreversion recursesubdirs createallsubdirs
-Source: "Manager\bin\x86\Release\tr\*"; DestDir: "{app}\tr"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
