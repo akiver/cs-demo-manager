@@ -1631,6 +1631,7 @@ namespace Manager.ViewModel.Demos
 				HasRing = true;
 				NotificationMessage = "Initializing cache...";
 				await _cacheService.InitDemoBasicDataList();
+				await _cacheService.InitDemoCache();
 				HasNotification = false;
 				IsBusy = false;
 				HasRing = false;
