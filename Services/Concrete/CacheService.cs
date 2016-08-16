@@ -168,16 +168,8 @@ namespace Services.Concrete
 
 					demoIdList.Add(basicData.Id);
 				}
-
-				if (_demoCache.Count == 0)
-					await RefreshDemoCache();
 				var demoIds = _demoCache.Select(a => a.Id);
 				return _demoCache.Where(a => demoIds.Contains(a.Id)).ToList();
-				//foreach (string demoId in demoIdList)
-				//{
-				//	Demo demo = await GetDemoDataFromCache(demoId);
-				//	demos.Add(demo);
-				//}
 			}
 			catch (Exception e)
 			{
