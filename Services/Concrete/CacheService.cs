@@ -626,7 +626,7 @@ namespace Services.Concrete
 		/// </summary>
 		private async Task<List<string>> InitCsgoFolders(List<string> folders)
 		{
-			string csgoPath = AppSettings.GetCsgoPath();
+			string csgoPath = GetCSGODir();
 			if (csgoPath != null)
 			{
 				string csgoFolderPath = Path.GetFullPath(csgoPath).ToLower();
@@ -643,6 +643,50 @@ namespace Services.Concrete
 			}
 
 			return folders;
+		}
+
+		/// <summary>
+		/// Gets the directory where CS:GO is installed
+		/// </summary>
+		/// <returns></returns>
+		private string GetCSGODir()
+		{
+			string steamPath = (string)Microsoft.Win32.Registry.GetValue("HKEY_CURRENT_USER\\Software\\Valve\\Steam", "SteamPath", "");
+
+			string pathsFile = Path.Combine(steamPath, "steamapps", "libraryfolders.vdf");
+
+			if (!File.Exists(pathsFile))
+				return null;
+
+			List<string> libraries = new List<string>();
+			libraries.Add(Path.Combine(steamPath));
+
+			var pathVDF = File.ReadAllLines(pathsFile);
+
+
+			// This is not a full vdf-parser, but it seems to work pretty much, since the vdf-grammar
+			// is pretty easy. Hopefully it never breaks. It should be replaced with a full vdf-parser
+			Regex pathRegex = new Regex(@"\""(([^\""]*):\\([^\""]*))\""");
+			foreach (var line in pathVDF)
+			{
+				if (pathRegex.IsMatch(line))
+				{
+					string match = pathRegex.Matches(line)[0].Groups[1].Value;
+
+					// De-Escape vdf-string
+					libraries.Add(match.Replace("\\\\", "\\"));
+				}
+			}
+
+			foreach (var library in libraries)
+			{
+				string csgoPath = Path.Combine(library, @"steamapps\common\Counter-Strike Global Offensive\csgo");
+				if (Directory.Exists(csgoPath) && File.Exists(Path.Combine(csgoPath, "pak01_000.vpk")))
+					return csgoPath;
+			}
+
+
+			return null;
 		}
 
 		/// <summary>
