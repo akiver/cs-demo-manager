@@ -13,7 +13,7 @@ More screenshots and video are available at [http://csgo-demos-manager.com](http
 - Watch demos (Highlights / Lowlights from any perspective, rounds, stuffs...)
 - Export data to Excel
 - Comment your demos
-- Generate heatmaps (Kills, shots, smokes...) 
+- Generate heatmaps (Kills, shots, smokes...)
 - Track VAC ban (A BOT send Windows notifications in background)
 - Manage demos location
 - Watch rounds from an animated map overview
@@ -25,6 +25,7 @@ More screenshots and video are available at [http://csgo-demos-manager.com](http
 ## Dependencies ##
 
 * Microsoft Visual Studio 2015 (C# 6 is required)
+* [Multilingual App Toolkit v4](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520) (required to handle app translations)
 * [MVVM Light](https://mvvmlight.codeplex.com/)
 * [Mahapps](https://github.com/MahApps/MahApps.Metro)
 * [DemoInfo](https://github.com/EHVAG/demoinfo)
@@ -53,6 +54,67 @@ More screenshots and video are available at [http://csgo-demos-manager.com](http
 ## Contribute
 
 You are free to contribute to the project. Please follow the [AngularJS commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+
+## Translations
+
+#### Overview
+
+The application translation is done with the resources based system [Microsoft Multilingual App Toolkit](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520).
+
+To translate the application in a specific language, the only files that you have to edit are XLIFF files (.xlf). These files are located in the folder **"MultilingualResources"** of each project.
+
+The following projects have their own translations files:
+- Core
+- Bot
+- Manager
+- Services
+
+For example, if you want to translate the app in Spanish, you will have to edit the following files:
+- Core.es.xlf (from Core project)
+- Services.es.xlf (from Services project)
+- Manager.es.xlf (from Manager project)
+- Bot.es.xlf (from Bot project)
+
+#### How-to translate step by step
+
+*I assume you have some basic knowledge of Git / GitHub.*
+
+1. Install [Git](https://git-scm.com/)
+2. Install [Multilingual App Toolkit v4](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520) or the XLIFF files editor of your choice
+3. Fork the repository and [clone](https://help.github.com/articles/cloning-a-repository/) it on your computer
+4. Edit the .xlf files of your language
+5. (Optional) Test your translations by building the app
+6. (Optional) Add your nickname to the translators array in the [app.cs](https://github.com/akiver/CSGO-Demos-Manager/blob/master/Manager/App.xaml.cs#L28) file. I will do it for you if you are not sure how to do it.
+7. Commit your changes
+    - `git commit . -m "feat(locales): add mycountry translation"`
+
+    or if it's for typo fixes:
+
+    - ``git commit . -m "fix(locales): typo mycountry"``
+8. Push you changes to your repository
+
+    ``git push origin master`` (I assume that you are on the master branch)
+9. Create a [pull request](https://help.github.com/articles/creating-a-pull-request/)
+
+#### Notes
+
+**If your language files are missing, please create an issue, I will add all necessary files.**
+
+If you want to test your translations before commiting files, you have to setup your system to be able to build the application by yourself.
+Please follow the build instructions from the readme file.
+
+Sometimes it's not easy to guess exactly where a string is used, I added some comments visible from the xlf editor to help you.
+
+Some strings contains characters such as **"{0}"** or **"{1}"**.
+These are placeholder for variables.
+
+*Example:*
+
+The string resource **"DialogDemosHaveBeenDownloaded"** is in English **"{0} demo(s) have been downloaded."**.
+It means that **{0}** will be replaced by the number of demos downloaded.
+For example **"8 demo(s) have been downloaded."**
+
+XLIFF files have the ability to set a "status" to strings. By default the status is "New", when you are sure about your translation, you can change the status to "Final". If you are not sure, please set the status to "Needs Review".
 
 ## License
 
