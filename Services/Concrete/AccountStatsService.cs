@@ -681,20 +681,12 @@ namespace Services.Concrete
 
 							if (GetWinStatusCode(demo, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(demo, SelectedStatsAccountSteamId) == 2) winCount++;
 							if (winCount > 0) stats.Win.Last().WinPercentage = Math.Round((winCount / (double)matchCount * 100), 2);
-							headshotCount += demo.HeadshotCount;
-							killCount += demo.KillCount;
-							deathCount += demo.DeathCount;
-							damageCount += demo.DamageHealthCount;
-							crouchKillCount += demo.CrouchKillCount;
-
-							if (killCount > 0)
-							{
-								stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
-								stats.CrouchKill.Last().CrouchKillPercentage = Math.Round((crouchKillCount / (double)killCount * 100), 2);
-							}
-							stats.Damage.Last().DamageCount = Math.Round((double)damageCount / matchCount, 2);
-							stats.Kill.Last().KillAverage = Math.Round((double)killCount / matchCount, 1);
-							stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
+							Player player = demo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId);
+							damageCount += player.TotalDamageHealthCount;
+							killCount += player.KillCount;
+							deathCount += player.DeathCount;
+							headshotCount += player.HeadshotCount;
+							crouchKillCount += player.CrouchKillCount;
 
 							foreach (KillEvent e in demo.Kills)
 							{
@@ -721,6 +713,15 @@ namespace Services.Concrete
 									}
 									velocityStats[e.Weapon.Type] += Math.Abs(e.KillerVelocityY + e.KillerVelocityX + e.KillerVelocityZ);
 								}
+							}
+
+							stats.Damage.Last().DamageCount = Math.Round((double)damageCount / matchCount, 2);
+							stats.Kill.Last().KillAverage = Math.Round((double)killCount / matchCount, 1);
+							stats.Kill.Last().DeathAverage = Math.Round((double)deathCount / matchCount, 1);
+							if (killCount > 0)
+							{
+								stats.HeadshotRatio.Last().HeadshotPercentage = Math.Round((headshotCount / (double)killCount * 100), 2);
+								stats.CrouchKill.Last().CrouchKillPercentage = Math.Round((crouchKillCount / (double)killCount * 100), 2);
 							}
 
 							if (velocityStats.ContainsKey(WeaponType.Rifle))
