@@ -486,48 +486,32 @@ namespace Core.Models
 			set { Set(() => EntryHoldKillEvent, ref _entryHoldKillEvent, value); }
 		}
 
-		[JsonProperty("bomb_planted", IsReference = false)]
+		[JsonProperty("bomb_planted")]
 		public BombPlantedEvent BombPlanted
 		{
 			get { return _bombPlanted; }
-			set
-			{
-				Set(() => BombPlanted, ref _bombPlanted, value);
-				BombPlantedCount++;
-			}
+			set { Set(() => BombPlanted, ref _bombPlanted, value); }
 		}
 
-		[JsonProperty("bomb_defused", IsReference = false)]
+		[JsonProperty("bomb_defused")]
 		public BombDefusedEvent BombDefused
 		{
 			get { return _bombDefused; }
-			set
-			{
-				Set(() => BombDefused, ref _bombDefused, value);
-				BombDefusedCount++;
-			}
+			set { Set(() => BombDefused, ref _bombDefused, value); }
 		}
 
-		[JsonProperty("bomb_exploded", IsReference = false)]
+		[JsonProperty("bomb_exploded")]
 		public BombExplodedEvent BombExploded
 		{
 			get { return _bombExploded; }
-			set
-			{
-				Set(() => BombExploded, ref _bombExploded, value);
-				BombExplodedCount++;
-			}
+			set { Set(() => BombExploded, ref _bombExploded, value); }
 		}
 
 		[JsonProperty("type")]
 		public RoundType Type
 		{
 			get { return _type; }
-			set
-			{
-				Set(() => Type, ref _type, value);
-				RaisePropertyChanged(() => RoundTypeAsString);
-			}
+			set { Set(() => Type, ref _type, value); }
 		}
 
 		[JsonProperty("team_trouble_name")]

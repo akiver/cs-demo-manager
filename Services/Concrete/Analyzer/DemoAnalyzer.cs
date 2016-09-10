@@ -590,7 +590,8 @@ namespace Services.Concrete.Analyzer
 				Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
 				if (player != null) player.BombPlantedCount++;
 			}
-
+			Demo.BombPlantedCount++;
+			CurrentRound.BombPlantedCount++;
 			Demo.BombPlanted.Add(bombPlantedEvent);
 			CurrentRound.BombPlanted = bombPlantedEvent;
 
@@ -626,6 +627,8 @@ namespace Services.Concrete.Analyzer
 				Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
 				if (player != null) player.BombDefusedCount++;
 			}
+			Demo.BombDefusedCount++;
+			CurrentRound.BombDefusedCount++;
 			Demo.BombDefused.Add(bombDefusedEvent);
 			CurrentRound.BombDefused = bombDefusedEvent;
 
@@ -658,7 +661,8 @@ namespace Services.Concrete.Analyzer
 
 			Player planter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Player.SteamID);
 			if (planter != null) planter.BombExplodedCount++;
-
+			Demo.BombExplodedCount++;
+			CurrentRound.BombExplodedCount++;
 			Demo.BombExploded.Add(bombExplodedEvent);
 			CurrentRound.BombExploded = bombExplodedEvent;
 
