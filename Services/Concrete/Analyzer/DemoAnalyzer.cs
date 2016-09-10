@@ -684,7 +684,7 @@ namespace Services.Concrete.Analyzer
 
 		protected void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
 		{
-			if (!IsMatchStarted || e.Shooter == null) return;
+			if (!IsMatchStarted || e.Shooter == null || e.Weapon == null) return;
 
 			if (!IsFirstShotOccured)
 			{
