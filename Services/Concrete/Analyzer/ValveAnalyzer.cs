@@ -208,7 +208,13 @@ namespace Services.Concrete.Analyzer
 			if (e.Killer != null) killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
 			if (killer != null)
 			{
-				if (e.Victim.SteamID != killer.SteamId) killer.RoundsMoneyEarned[CurrentRound.Number] += weapon.KillAward;
+				if (e.Victim.SteamID != killer.SteamId)
+				{
+					if (!killer.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+						killer.RoundsMoneyEarned[CurrentRound.Number] = weapon.KillAward;
+					else
+						killer.RoundsMoneyEarned[CurrentRound.Number] += weapon.KillAward;
+				}
 
 				ProcessTradeKill(killEvent);
 			}
