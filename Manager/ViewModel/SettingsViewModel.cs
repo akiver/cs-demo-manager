@@ -41,7 +41,7 @@ namespace Manager.ViewModel
 
 		private string _launchParameters = Settings.Default.LaunchParameters;
 
-		private string _notificationMessage = "Settings";
+		private string _notificationMessage = Properties.Resources.Settings;
 
 		private RelayCommand<string> _saveResolutionWidthCommand;
 
@@ -86,6 +86,10 @@ namespace Manager.ViewModel
 		private List<ComboboxSelector> _themes;
 
 		private ComboboxSelector _selectedTheme;
+
+		private List<ComboboxSelector> _languages;
+
+		private ComboboxSelector _selectedLanguage;
 
 		private bool _isUseCustomActionGeneration = Settings.Default.UseCustomActionsGeneration;
 
@@ -269,6 +273,28 @@ namespace Manager.ViewModel
 		#endregion
 
 		#region Accessors
+
+		public List<ComboboxSelector> Languages
+		{
+			get { return _languages; }
+			set { Set(() => Languages, ref _languages, value); }
+		}
+
+		public ComboboxSelector SelectedLanguage
+		{
+			get { return _selectedLanguage; }
+			set
+			{
+				Set(() => SelectedLanguage, ref _selectedLanguage, value);
+				if (!string.IsNullOrEmpty(value.Id) && value.Id != Settings.Default.Language)
+				{
+					Settings.Default.Language = value.Id;
+					Settings.Default.Save();
+					Process.Start(Application.ResourceAssembly.Location);
+					Application.Current.Shutdown();
+				}
+			}
+		}
 
 		public List<ComboboxSelector> Themes
 		{
@@ -1231,7 +1257,7 @@ namespace Manager.ViewModel
 			}
 		}
 
-		public string CacheSizeAsString => "Cache size : ~ " + Math.Round(_cacheSize / 1024f / 1024f) + "MB";
+		public string CacheSizeAsString => Properties.Resources.CacheSize + ": ~ " + Math.Round(_cacheSize / 1024f / 1024f) + Properties.Resources.MegaByte;
 
 		#endregion
 
@@ -1248,10 +1274,10 @@ namespace Manager.ViewModel
 					?? (_addAccountCommand = new RelayCommand(
 						async () =>
 						{
-							var steamId = await _dialogService.ShowInputAsync("Add an account", "Enter the SteamID 64 or the Steam community URL.");
+							var steamId = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddAnAccount, Properties.Resources.DialogEnterSteamId);
 							if (string.IsNullOrEmpty(steamId)) return;
 
-							NotificationMessage = "Adding account...";
+							NotificationMessage = Properties.Resources.NotificationAddingAccount;
 
 							long steamIdAsLong;
 							bool isLong = long.TryParse(steamId, out steamIdAsLong);
@@ -1279,8 +1305,8 @@ namespace Manager.ViewModel
 									bool added = await _cacheService.AddAccountAsync(account);
 									if (!added)
 									{
-										await _dialogService.ShowErrorAsync("This player is already in your accounts list.", MessageDialogStyle.Affirmative);
-										NotificationMessage = "Settings";
+										await _dialogService.ShowErrorAsync(Properties.Resources.DialogAccountAlreadyInList, MessageDialogStyle.Affirmative);
+										NotificationMessage = Properties.Resources.Settings;
 										return;
 									}
 
@@ -1289,14 +1315,14 @@ namespace Manager.ViewModel
 								catch (Exception e)
 								{
 									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation, MessageDialogStyle.Affirmative);
 								}
 							}
 							else
 							{
-								await _dialogService.ShowErrorAsync("Invalid SteamID 64 or Steam community URL.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
 							}
-							NotificationMessage = "Settings";
+							NotificationMessage = Properties.Resources.Settings;
 						}));
 			}
 		}
@@ -1315,7 +1341,7 @@ namespace Manager.ViewModel
 							bool removed = await _cacheService.RemoveAccountAsync(account);
 							if (!removed)
 							{
-								await _dialogService.ShowErrorAsync("An error occured while removing the account.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorRemovingAccount, MessageDialogStyle.Affirmative);
 								return;
 							}
 							// if there is no more accounts or the current stats account is removed, we show stats from all accounts
@@ -1341,7 +1367,7 @@ namespace Manager.ViewModel
 						{
 							if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + Logger.LOG_FILENAME))
 							{
-								await _dialogService.ShowErrorAsync("There is no errors log file.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogNoErrorsFile, MessageDialogStyle.Affirmative);
 								return;
 							}
 							string argument = "/select, \"" + AppDomain.CurrentDomain.BaseDirectory + Logger.LOG_FILENAME + "\"";
@@ -1413,12 +1439,12 @@ namespace Manager.ViewModel
 					?? (_clearDemosDataCacheCommand = new RelayCommand(
 					async () =>
 					{
-						var result = await _dialogService.ShowMessageAsync("Demos data will be deleted! Are you sure?", MessageDialogStyle.AffirmativeAndNegative);
+						var result = await _dialogService.ShowMessageAsync(Properties.Resources.DialogConfirmDeleteDemosData, MessageDialogStyle.AffirmativeAndNegative);
 						if (result == MessageDialogResult.Negative) return;
 						await _cacheService.ClearDemosFile();
 						await _cacheService.ClearRankInfoAsync();
 						CacheSize = await _cacheService.GetCacheSizeAsync();
-						await _dialogService.ShowMessageAsync("Demos data cleared.", MessageDialogStyle.Affirmative);
+						await _dialogService.ShowMessageAsync(Properties.Resources.DialogDemosDataCleared, MessageDialogStyle.Affirmative);
 					}));
 			}
 		}
@@ -1445,12 +1471,12 @@ namespace Manager.ViewModel
 							try
 							{
 								await _cacheService.CreateBackupCustomDataFile(saveCustomDataDialog.FileName);
-								await _dialogService.ShowMessageAsync("The backup file has been created, you can re-import it from settings.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogBackupCreated, MessageDialogStyle.Affirmative);
 							}
 							catch (Exception e)
 							{
 								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("An error occured while exporting custom data.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorCreatingBackupFile, MessageDialogStyle.Affirmative);
 							}
 						}
 					}));
@@ -1505,12 +1531,12 @@ namespace Manager.ViewModel
 									}
 								}
 
-								await _dialogService.ShowMessageAsync("Custom data has been imported.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogCustomDataImported, MessageDialogStyle.Affirmative);
 							}
 							catch (Exception e)
 							{
 								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("An error occured while importing custom data. The backup file may be corrupt.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorImportingCustomData, MessageDialogStyle.Affirmative);
 							}
 						}
 					}));
@@ -1528,16 +1554,11 @@ namespace Manager.ViewModel
 					?? (_enableMoviemakerModeCommand = new RelayCommand(
 					async () =>
 					{
-						string warningMessage =
-							"Enabling moviemaker mode change the way the game is started (when you click on all \"Watch\" buttons."
-							+ Environment.NewLine + "It will use the tool \"Half-Life Advanced Effects\" (HLAE) which is technically a hack."
-							+ Environment.NewLine + "You should use it ONLY if you know what you are doing AND to make moviemaking related stuff."
-							+ Environment.NewLine + "If you don't know what is this or you are not planning to make movies just click on cancel."
-							+ Environment.NewLine + "If you enable it, the game is launched with the \"-insecure\" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.";
+						string warningMessage = Properties.Resources.DialogEnableMoviemakerModeWarning;
 
 						if (Settings.Default.CsgoExePath == string.Empty)
 						{
-							warningMessage += Environment.NewLine + "Please select the csgo.exe file location to enable it.";
+							warningMessage += Environment.NewLine + Properties.Resources.DialogSelectCsgoPath;
 						}
 
 						var enable = await _dialogService.ShowMessageAsync(warningMessage, MessageDialogStyle.AffirmativeAndNegative);
@@ -1607,7 +1628,7 @@ namespace Manager.ViewModel
 								return;
 							}
 
-							NotificationMessage = "Syncing accounts nickname...";
+							NotificationMessage = Properties.Resources.NotificationSyncingAccountsNickname;
 							List<string> steamIdList = Accounts.Select(a => a.SteamId.ToString()).ToList();
 							IEnumerable<Suspect> players = await _steamService.GetBanStatusForUserList(steamIdList);
 							long currentAccountSteamId = Settings.Default.SelectedStatsAccountSteamID;
@@ -1622,7 +1643,7 @@ namespace Manager.ViewModel
 							}
 							SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == currentAccountSteamId.ToString());
 
-							NotificationMessage = "Settings";
+							NotificationMessage = Properties.Resources.Settings;
 
 						}, () => Accounts.Any()));
 			}
@@ -1662,17 +1683,17 @@ namespace Manager.ViewModel
 					?? (_deleteVdmFilesCommand = new RelayCommand(
 					async () =>
 					{
-						var confirm = await _dialogService.ShowMessageAsync("All VDM files within your folders will be deleted, are you sure?", MessageDialogStyle.AffirmativeAndNegative);
+						var confirm = await _dialogService.ShowMessageAsync(Properties.Resources.DialogDeleteVdmFilesConfirmation, MessageDialogStyle.AffirmativeAndNegative);
 						if (confirm == MessageDialogResult.Affirmative)
 						{
 							bool result = await _cacheService.DeleteVdmFiles();
 							if (!result)
 							{
-								await _dialogService.ShowErrorAsync("An error occured while deleting VDM files.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorDeletingVdmFiles, MessageDialogStyle.Affirmative);
 							}
 							else
 							{
-								await _dialogService.ShowMessageAsync("VDM files deleted.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogVdmFilesDeleted, MessageDialogStyle.Affirmative);
 							}
 						}
 					}));
@@ -1697,10 +1718,18 @@ namespace Manager.ViewModel
 
 			Themes = new List<ComboboxSelector>
 			{
-				new ComboboxSelector("Dark", "Dark"),
-				new ComboboxSelector("Light", "Light")
+				new ComboboxSelector("Dark", Properties.Resources.Dark),
+				new ComboboxSelector("Light", Properties.Resources.Light)
 			};
 			SelectedTheme = Themes.First(t => t.Id == Settings.Default.Theme);
+
+			Languages = new List<ComboboxSelector>();
+			foreach (Language language in AppSettings.LANGUAGES)
+			{
+				ComboboxSelector newLanguage = new ComboboxSelector(language.Key, language.Name);
+				if (language.Key == Settings.Default.Language) SelectedLanguage = newLanguage;
+				Languages.Add(newLanguage);
+			}
 
 			Application.Current.Dispatcher.Invoke(async () =>
 			{

@@ -5,6 +5,7 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -12,7 +13,9 @@
 
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
+												 True="{x:Static properties:Resources.Yes}"
+												 False="{x:Static properties:Resources.No}"/>
 			<converters:RankToImageConverter x:Key="RankToImageConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -33,52 +36,52 @@
 			<Image Source="{Binding CurrentPlayer.RankNumberOld, Converter={StaticResource RankToImageConverter}}"
 				   Width="100"
 				   Height="40"/>
-			<TextBlock Text="Kills "
+			<TextBlock Text="{x:Static properties:Resources.Kills}"
 					   FontSize="18"
-					   ToolTip="Kills">
-				<TextBlock Text="{Binding CurrentPlayer.KillCount}"
+					   ToolTip="{x:Static properties:Resources.Kills}">
+				<TextBlock Text="{Binding CurrentPlayer.KillCount, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="Assists "
+			<TextBlock Text="{x:Static properties:Resources.Assists}"
 					   FontSize="18"
-					   ToolTip="Assists">
-				<TextBlock Text="{Binding CurrentPlayer.AssistCount}"
+					   ToolTip="{x:Static properties:Resources.Assists}">
+				<TextBlock Text="{Binding CurrentPlayer.AssistCount, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="Deaths "
+			<TextBlock Text="{x:Static properties:Resources.Deaths}"
 					   FontSize="18"
-					   ToolTip="Deaths">
-				<TextBlock Text="{Binding CurrentPlayer.DeathCount}"
+					   ToolTip="{x:Static properties:Resources.Deaths}">
+				<TextBlock Text="{Binding CurrentPlayer.DeathCount, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="Headshots "
+			<TextBlock Text="{x:Static properties:Resources.Headshots}"
 					   FontSize="18"
-					   ToolTip="Headshots">
-				<TextBlock Text="{Binding CurrentPlayer.HeadshotCount}"
+					   ToolTip="{x:Static properties:Resources.Headshots}">
+				<TextBlock Text="{Binding CurrentPlayer.HeadshotCount, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="Headshots %"
+			<TextBlock Text="{x:Static properties:Resources.HeadshotsPercent}"
 					   FontSize="18"
-					   ToolTip="Headshots %">
+					   ToolTip="{x:Static properties:Resources.HeadshotsPercent}">
 				<TextBlock Text="{Binding CurrentPlayer.HeadshotPercent, StringFormat='{} {0}%'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="ADR "
+			<TextBlock Text="{x:Static properties:Resources.HeaderAverageDamagesPerRound}"
 					   FontSize="18"
-					   ToolTip="Average Damage Per Round">
-				<TextBlock Text="{Binding CurrentPlayer.AverageHealthDamage}"
+					   ToolTip="{x:Static properties:Resources.HeaderToolTipAverageDamagePerRound}">
+				<TextBlock Text="{Binding CurrentPlayer.AverageHealthDamage, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="HLTV rating "
+			<TextBlock Text="{x:Static properties:Resources.HeaderToolTipHltvRating}"
 					   FontSize="18"
-					   ToolTip="HLTV Rating">
-				<TextBlock Text="{Binding CurrentPlayer.RatingHltv}"
+					   ToolTip="{x:Static properties:Resources.HeaderToolTipHltvRating}">
+				<TextBlock Text="{Binding CurrentPlayer.RatingHltv, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
-			<TextBlock Text="RWS "
+			<TextBlock Text="{x:Static properties:Resources.RWS}"
 					   FontSize="18"
-					   ToolTip="Round Win Share (ESEA)">
-				<TextBlock Text="{Binding CurrentPlayer.EseaRws}"
+					   ToolTip="{x:Static properties:Resources.EseaRwsFull}">
+				<TextBlock Text="{Binding CurrentPlayer.EseaRws, StringFormat='{} {0}'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 		</StackPanel>
@@ -89,7 +92,7 @@
 				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
 			<TextBlock Grid.Row="0"
-					   Text="Kills"
+					   Text="{x:Static properties:Resources.Kills}"
 					   Style="{StaticResource TextBlockSectionTitle}"/>
 			<Border Grid.Row="1"
 					BorderBrush="{StaticResource LightWhiteBrush}"
@@ -101,31 +104,31 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 											Width="Auto"
-											Header="Round"
+											Header="{x:Static properties:Resources.Round}"
 											Binding="{Binding RoundNumber}"/>
 						<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 											Width="Auto"
-											Header="Killed"
+											Header="{x:Static properties:Resources.HeaderVictim}"
 											Binding="{Binding KilledName}"/>
 						<DataGridTextColumn HeaderStyle="{StaticResource AssisterNameHeader}"
 											Width="Auto"
-											Header="Assister"
+											Header="{x:Static properties:Resources.HeaderAssister}"
 											Binding="{Binding AssisterName}"/>
 						<DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}"
 											Width="Auto"
-											Header="HS"
+											Header="{x:Static properties:Resources.HeaderHeadshots}"
 											Binding="{Binding IsHeadshot, Converter={StaticResource BooleanToStringConverter}}"/>
 						<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
 											Width="Auto"
-											Header="Weapon"
+											Header="{x:Static properties:Resources.HeaderWeapon}"
 											Binding="{Binding Weapon.Name}"/>
-						<DataGridTemplateColumn Header="Watch">
+						<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
 											CommandParameter="{Binding SelectedItem.Tick, ElementName=KillsDataGrid}"
 											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Content="Watch" />
+											Content="{x:Static properties:Resources.Watch}" />
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
@@ -143,7 +146,7 @@
 			</Grid.RowDefinitions>
 
 			<TextBlock Grid.Row="0"
-					   Text="Weapon Kills"
+					   Text="{x:Static properties:Resources.WeaponKills}"
 					   VerticalAlignment="Bottom"
 					   Style="{StaticResource TextBlockSectionTitle}"/>
 			<telerik:RadPieChart Grid.Row="1"

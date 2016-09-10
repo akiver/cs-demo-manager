@@ -8,6 +8,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -16,9 +17,15 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<converters:RowSuspectDoubleClickedToProfileConverter x:Key="RowSuspectDoubleClickedToProfile" />
-			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
+												 True="{x:Static properties:Resources.Yes}"
+												 False="{x:Static properties:Resources.No}"/>
 			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
 			<converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+			<converters:IntToStringConverter x:Key="IntToStringConverter" />
+			<converters:SteamAccountStatusToStringConverter x:Key="SteamAccountStatusToStringConverter" />
+			<converters:SteamAccountVisibilityToStringConverter x:Key="SteamAccountVisibilityToStringConverter" />
+			<converters:SteamEconomyBanStatusToStringConverter x:Key="SteamEconomyBanStatusToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -54,7 +61,8 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}"
-						Command="{Binding BackToHomeCommand}">
+						Command="{Binding BackToHomeCommand}"
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -64,13 +72,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Whitelist (CTRL+W)"
+						ToolTip="{x:Static properties:Resources.ToolTipWhitelist}"
 						Command="{Binding GoToWhitelistCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -81,7 +89,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Whitelist"
+						<TextBlock Text="{x:Static properties:Resources.Whitelist}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -97,13 +105,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Add"
+						<TextBlock Text="{x:Static properties:Resources.Add}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Add all players seen to list (CTRL+G)"
+						ToolTip="{x:Static properties:Resources.ToolTipAddAllPlayersSeen}"
 						Command="{Binding AddAllPlayerToListCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -114,13 +122,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Add all players seen"
+						<TextBlock Text="{x:Static properties:Resources.AddAllPlayersSeen}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Refresh list (CTRL+R)"
+						ToolTip="{x:Static properties:Resources.ToolTipRefreshList}"
 						Command="{Binding RefreshSuspectListCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -131,7 +139,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Refresh"
+						<TextBlock Text="{x:Static properties:Resources.Refresh}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -139,7 +147,7 @@
 				<Separator Style="{StaticResource VerticalSeparatorStyle}" />
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Remove suspect(s) (DEL)"
+						ToolTip="{x:Static properties:Resources.ToolTipRemoveSuspect}"
 						Command="{Binding RemoveSuspectCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -150,14 +158,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Remove"
+						<TextBlock Text="{x:Static properties:Resources.Remove}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToSuspectProfileCommand}"
-						ToolTip="Go to suspect profile (CTRL+P)"
+						ToolTip="{x:Static properties:Resources.ToolTipGoToSuspectProfile}"
 						CommandParameter="{Binding SelectedSuspect}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -168,13 +176,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Profile"
+						<TextBlock Text="{x:Static properties:Resources.Profile}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Move suspect(s) to whitelist (CTRL+M)"
+						ToolTip="{x:Static properties:Resources.ToolTipMoveSuspectToWhitelist}"
 						Command="{Binding MoveToWhitelistCommand}"
 						IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -186,13 +194,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Move to whitelist"
+						<TextBlock Text="{x:Static properties:Resources.MoveToWhitelist}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Show demos that contains selected suspect(s) (CTRL+F)"
+						ToolTip="{x:Static properties:Resources.ToolTIpShowOnlySuspectDemos}"
 						Command="{Binding DisplayDemosCommand}"
 						IsEnabled="{Binding IsRefreshing, Converter={StaticResource BooleanInvertedConverter}}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -204,13 +212,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Show suspect(s) demos"
+						<TextBlock Text="{x:Static properties:Resources.ShowSuspectsDemos}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<CheckBox x:Name="CheckBoxShowOnlyBannedSuspects"
-						  Content="Show only banned"
+						  Content="{x:Static properties:Resources.ShowOnlyBanned}"
 						  Margin="5"
 						  IsChecked="{Binding IsShowOnlyBannedSuspects}"
 						  Command="{Binding ShowOnlyBannedSuspectCommand}"
@@ -218,7 +226,7 @@
 
 				<TextBox Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}"
 						 MinWidth="150"
-						 controls:TextBoxHelper.Watermark="Search..."
+						 controls:TextBoxHelper.Watermark="{x:Static properties:Resources.WatermarkSearch}"
 						 controls:TextBoxHelper.ClearTextButton="True"
 						 Margin="5"
 						 VerticalAlignment="Center"
@@ -239,7 +247,7 @@
 				<TextBlock Text="{Binding NotificationMessage}"
 						   Style="{StaticResource NotificationMessageStyle}" />
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Stop (CTRL+S)"
+						ToolTip="{x:Static properties:Resources.ToolTipStop}"
 						Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}"
 						Command="{Binding StopCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -251,7 +259,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Stop"
+						<TextBlock Text="{x:Static properties:Resources.Stop}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -284,7 +292,7 @@
 							Gesture="CTRL+P" />
 			</DataGrid.InputBindings>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="Avatar"
+				<DataGridTemplateColumn Header="{x:Static properties:Resources.HeaderToolTipPlayerAvatar}"
 										Width="Auto"
 										HeaderStyle="{StaticResource PlayerAvatarHeader}">
 					<DataGridTemplateColumn.CellTemplate>
@@ -297,61 +305,63 @@
 				</DataGridTemplateColumn>
 				<DataGridTextColumn x:Name="NicknameColumn"
 									Width="Auto"
-									Header="Nickname"
+									Header="{x:Static properties:Resources.HeaderNickname}"
 									Binding="{Binding Nickname}"
 									HeaderStyle="{StaticResource NicknameHeader}" />
 				<DataGridTextColumn x:Name="ProfileColumn"
 									Width="Auto"
-									Header="Profile"
+									Header="{x:Static properties:Resources.Profile}"
 									Binding="{Binding ProfileUrl}"
 									HeaderStyle="{StaticResource ProfileUrlHeader}" />
 				<DataGridTextColumn x:Name="StatusColumn"
 									Width="Auto"
-									Header="Status"
-									Binding="{Binding CurrentStatusString}"
+									Header="{x:Static properties:Resources.Status}"
+									Binding="{Binding CurrentStatus, Converter={StaticResource SteamAccountStatusToStringConverter}}"
 									HeaderStyle="{StaticResource CurrentStatusHeader}" />
 				<DataGridTextColumn x:Name="PublicProfileColumn"
 									Width="Auto"
-									Header="Profile Visibility"
-									Binding="{Binding PublicProfile}"
+									Header="{x:Static properties:Resources.HeaderAccountVisibility}"
+									Binding="{Binding CommunityVisibilityState, Converter={StaticResource SteamAccountVisibilityToStringConverter}}"
 									HeaderStyle="{StaticResource PublicProfileHeader}" />
 				<DataGridTextColumn x:Name="LastLogOffColumn"
 									Width="Auto"
-									Header="Last Connection"
+									Header="{x:Static properties:Resources.HeaderLastConnection}"
 									Binding="{Binding LastLogOffDate}"
 									HeaderStyle="{StaticResource LastLogOffHeader}" />
 				<DataGridTextColumn x:Name="ProfileConfiguredColumn"
 									Width="Auto"
-									Header="Profile setup"
-									Binding="{Binding ProfileStateString}"
+									Header="{x:Static properties:Resources.HeaderProfileSetup}"
+									Binding="{Binding ProfileState, Converter={StaticResource IntToStringConverter}}"
 									HeaderStyle="{StaticResource ProfileStateHeader}" />
 				<DataGridTextColumn x:Name="VacBannedColumn"
 									Width="Auto"
-									Header="VAC Banned"
-									Binding="{Binding VacBanned, Converter={StaticResource BooleanToStringConverter}}" HeaderStyle="{StaticResource VacBannedHeader}" />
+									Header="{x:Static properties:Resources.HeaderToolTipIsVacBanned}"
+									Binding="{Binding VacBanned, Converter={StaticResource BooleanToStringConverter}}"
+									HeaderStyle="{StaticResource VacBannedHeader}" />
 				<DataGridTextColumn x:Name="GameBanCountColumn"
 									Width="Auto"
-									Header="Game ban"
+									Header="{x:Static properties:Resources.HeaderGameBan}"
 									Binding="{Binding GameBanCount}"
 									HeaderStyle="{StaticResource GameBanCountHeader}" />
 				<DataGridTextColumn x:Name="BanCountColumn"
 									Width="Auto"
-									Header="Ban Count"
+									Header="{x:Static properties:Resources.HeaderBanCount}"
 									Binding="{Binding BanCount}"
 									HeaderStyle="{StaticResource BanCountHeader}" />
 				<DataGridTextColumn x:Name="DaySinceLastBanCountColumn"
 									Width="Auto"
-									Header="DSLB"
+									Header="{x:Static properties:Resources.HeaderDaysSinceLastBan}"
 									Binding="{Binding DaySinceLastBanCount}"
 									HeaderStyle="{StaticResource DaySinceLastBanHeader}" />
 				<DataGridTextColumn x:Name="CommunityBannedColumn"
 									Width="Auto"
-									Header="Community Banned"
-									Binding="{Binding CommunityBanned, Converter={StaticResource BooleanToStringConverter}}" HeaderStyle="{StaticResource CommunityBannedHeader}" />
+									Header="{x:Static properties:Resources.HeaderCommunityBanned}"
+									Binding="{Binding CommunityBanned, Converter={StaticResource BooleanToStringConverter}}"
+									HeaderStyle="{StaticResource CommunityBannedHeader}" />
 				<DataGridTextColumn x:Name="EconomyBannedColumn"
 									Width="Auto"
-									Header="Economy Banned"
-									Binding="{Binding EconomyBan}"
+									Header="{x:Static properties:Resources.HeaderEconomyBanned}"
+									Binding="{Binding EconomyBan, Converter={StaticResource SteamEconomyBanStatusToStringConverter}}"
 									HeaderStyle="{StaticResource EconomyBanHeader}" />
 			</DataGrid.Columns>
 		</DataGrid>

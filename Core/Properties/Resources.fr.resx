@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Rank0" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="Rank1" xml:space="preserve">
+    <value>Argent I</value>
+  </data>
+  <data name="Rank10" xml:space="preserve">
+    <value>Maître nova d'or</value>
+  </data>
+  <data name="Rank11" xml:space="preserve">
+    <value>Maître gardien I</value>
+  </data>
+  <data name="Rank12" xml:space="preserve">
+    <value>Maître gardien II</value>
+  </data>
+  <data name="Rank13" xml:space="preserve">
+    <value>Maître gardien d'élite</value>
+  </data>
+  <data name="Rank14" xml:space="preserve">
+    <value>Maître gardien distingué</value>
+  </data>
+  <data name="Rank15" xml:space="preserve">
+    <value>Aigle légendaire</value>
+  </data>
+  <data name="Rank16" xml:space="preserve">
+    <value>Maître aigle légendaire</value>
+  </data>
+  <data name="Rank17" xml:space="preserve">
+    <value>Maître suprême de première classe</value>
+  </data>
+  <data name="Rank18" xml:space="preserve">
+    <value>L'élite mondiale</value>
+  </data>
+  <data name="Rank2" xml:space="preserve">
+    <value>Argent II</value>
+  </data>
+  <data name="Rank3" xml:space="preserve">
+    <value>Argent III</value>
+  </data>
+  <data name="Rank4" xml:space="preserve">
+    <value>Argent IV</value>
+  </data>
+  <data name="Rank5" xml:space="preserve">
+    <value>Élite d'argent</value>
+  </data>
+  <data name="Rank6" xml:space="preserve">
+    <value>Maître élite d'argent</value>
+  </data>
+  <data name="Rank7" xml:space="preserve">
+    <value>Nova d'or I</value>
+  </data>
+  <data name="Rank8" xml:space="preserve">
+    <value>Nova d'or II</value>
+  </data>
+  <data name="Rank9" xml:space="preserve">
+    <value>Nova d'or III</value>
+  </data>
+  <data name="StatusNone" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="StatusToWatch" xml:space="preserve">
+    <value>A regarder</value>
+  </data>
+  <data name="StatusWatched" xml:space="preserve">
+    <value>Regardée</value>
+  </data>
+</root>

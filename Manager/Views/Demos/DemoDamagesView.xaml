@@ -4,6 +4,7 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 DataContext="{Binding DemoDamages, Source={StaticResource Locator}}">
 
 	<UserControl.Resources>
@@ -36,7 +37,7 @@
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -46,7 +47,7 @@
 											Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -54,7 +55,7 @@
 				<ComboBox ItemsSource="{Binding TeamSelectors}"
 						  SelectedItem="{Binding SelectedTeam}"
 						  DisplayMemberPath ="Title"
-						  controls:TextBoxHelper.Watermark="Team"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Team}"
 						  SelectedValuePath="Title"
 						  Margin="5"
 						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
@@ -63,11 +64,11 @@
 						  SelectedItem="{Binding SelectedPlayer}"
 						  DisplayMemberPath ="Name"
 						  SelectedValuePath="Name"
-						  controls:TextBoxHelper.Watermark="Player"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
 						  Margin="5"
 						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
 
-				<CheckBox Content="All players"
+				<CheckBox Content="{x:Static properties:Resources.AllPlayers}"
 						  IsChecked="{Binding SelectAllPlayers}"
 						  IsEnabled="{Binding IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"
 						  Margin="5"
@@ -77,17 +78,17 @@
 						  SelectedItem="{Binding SelectedRound}"
 						  DisplayMemberPath ="Number"
 						  SelectedValuePath="Number"
-						  controls:TextBoxHelper.Watermark="Round"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
 						  Margin="5"
 						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
-				<CheckBox Content="All rounds"
+				<CheckBox Content="{x:Static properties:Resources.AllRounds}"
 						  IsChecked="{Binding SelectAllRounds}"
 						  IsEnabled="{Binding IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"
 						  Margin="5"
 						  VerticalAlignment="Center" />
 				<Button Command="{Binding UpdateCommand}"
 						Style="{DynamicResource GeneralButton}"
-						ToolTip="Update (CTRL+R)">
+						ToolTip="{x:Static properties:Resources.ToolTipUpdate}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -97,7 +98,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Update"
+						<TextBlock Text="{x:Static properties:Resources.Update}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -108,7 +109,7 @@
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
-					<TextBlock Text="Updating..."
+					<TextBlock Text="{x:Static properties:Resources.NotificationUpdating}"
 							   Style="{StaticResource NotificationMessageStyle}"
 							   Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
@@ -117,72 +118,107 @@
 
 		<Grid Grid.Row="1">
 			<Canvas Width="800">
-				<TextBlock x:Name="DamageHeadValue"
-						   Canvas.Left="440"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageHeadValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentHead}"/>
-					<Run Text="%)"/>
-				</TextBlock>
-				<TextBlock x:Name="DamageChestValue"
-						   Canvas.Left="210"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageChestValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentChest}"/>
-					<Run Text="%)"/>
-				</TextBlock>
-				<TextBlock x:Name="DamageLeftArmValue"
-						   Canvas.Left="620"
-						   Canvas.Top="120"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageLeftArmValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentLeftArm}"/>
-					<Run Text="%)"/>
-				</TextBlock>
-				<TextBlock x:Name="DamageRightArmValue"
-						   Canvas.Left="10"
-						   Canvas.Top="140"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageRightArmValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentRightArm}"/>
-					<Run Text="%)"/>
-				</TextBlock>
-				<TextBlock x:Name="DamageRightLegValue"
-						   Canvas.Left="10"
-						   Canvas.Top="520"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageRightLegValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentRightLeg}"/>
-					<Run Text="%)"/>
-				</TextBlock>
-				<TextBlock x:Name="DamageLeftLegValue"
-						   Canvas.Left="620"
-						   Canvas.Top="525"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageLeftLegValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentLeftLeg}"/>
-					<Run Text="%)"/>
-				</TextBlock>
-				<TextBlock x:Name="DamageStomachValue"
-						   Canvas.Left="620"
-						   Canvas.Top="340"
-						   Style="{StaticResource DamageValueStyle}">
-					<Run Text="{Binding DamageStomachValue}"/>
-					<Run Text="("/>
-					<Run Text="{Binding DamagePercentStomach}"/>
-					<Run Text="%)"/>
-				</TextBlock>
+				<StackPanel x:Name="DamageHeadValue"
+							Canvas.Left="440">
+					<TextBlock Text="{x:Static properties:Resources.Head}"
+							   Style="{StaticResource DamageLabelStyle}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageHeadValue" />
+								<Binding Path="DamagePercentHead" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="DamageChestValue"
+							Canvas.Left="230">
+					<TextBlock Style="{StaticResource DamageLabelStyle}"
+							   Text="{x:Static properties:Resources.Chest}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageChestValue" />
+								<Binding Path="DamagePercentChest" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="DamageLeftArmValue"
+							Canvas.Left="620"
+							Canvas.Top="120">
+					<TextBlock Style="{StaticResource DamageLabelStyle}"
+							   Text="{x:Static properties:Resources.LeftArm}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageLeftArmValue" />
+								<Binding Path="DamagePercentLeftArm" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="DamageRightArmValue"
+							Canvas.Left="30"
+							Canvas.Top="160">
+					<TextBlock Style="{StaticResource DamageLabelStyle}"
+							   Text="{x:Static properties:Resources.RightArm}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageRightArmValue" />
+								<Binding Path="DamagePercentRightArm" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="DamageRightLegValue"
+							Canvas.Left="30"
+							Canvas.Top="550">
+					<TextBlock Style="{StaticResource DamageLabelStyle}"
+							   Text="{x:Static properties:Resources.RightLeg}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageRightLegValue" />
+								<Binding Path="DamagePercentRightLeg" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="DamageLeftLegValue"
+							Canvas.Left="630"
+							Canvas.Top="555">
+					<TextBlock Style="{StaticResource DamageLabelStyle}"
+							   Text="{x:Static properties:Resources.LeftLeg}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageLeftLegValue" />
+								<Binding Path="DamagePercentLeftLeg" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
+				<StackPanel x:Name="DamageStomachValue"
+							Canvas.Left="640"
+							Canvas.Top="370">
+					<TextBlock Style="{StaticResource DamageLabelStyle}"
+							   Text="{x:Static properties:Resources.Stomach}"/>
+					<TextBlock Style="{StaticResource DamageValueStyle}">
+						<TextBlock.Text>
+							<MultiBinding StringFormat="{}{0} ({1}%)">
+								<Binding Path="DamageStomachValue" />
+								<Binding Path="DamagePercentStomach" />
+							</MultiBinding>
+						</TextBlock.Text>
+					</TextBlock>
+				</StackPanel>
 				<Image Source="/Resources/images/model.png"
 					   Height="600"
 					   Width="425"
 					   Canvas.Left="190"
-					   Canvas.Top="40"/>
+					   Canvas.Top="90"/>
 			</Canvas>
 		</Grid>
 	</Grid>

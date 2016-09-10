@@ -235,8 +235,7 @@ namespace Manager.ViewModel.Players
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 							string steamId = CurrentPlayer.SteamId.ToString();
@@ -258,8 +257,7 @@ namespace Manager.ViewModel.Players
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 							string steamId = CurrentPlayer.SteamId.ToString();
@@ -279,7 +277,7 @@ namespace Manager.ViewModel.Players
 					?? (_addPlayerToSuspectListCommand = new RelayCommand(
 						async () =>
 						{
-							NotificationMessage = "Adding player to suspects list...";
+							NotificationMessage = Properties.Resources.NotificationAddingPlayerToSuspectsList;
 							HasNotification = true;
 							IsBusy = true;
 
@@ -290,15 +288,12 @@ namespace Manager.ViewModel.Players
 								{
 									IsBusy = false;
 									HasNotification = false;
-									await _dialogService.ShowMessageAsync(
-										"This player is already in your suspect or he is in your account list." + Environment.NewLine
-											+ "You have to remove it from your account list to be able to add him in your supect list.",
-											MessageDialogStyle.Affirmative);
+									await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInAccountsList, MessageDialogStyle.Affirmative);
 								}
 								else
 								{
 									IsBusy = false;
-									NotificationMessage = "Player added to suspects list.";
+									NotificationMessage = Properties.Resources.NotificationPlayedAddedToSuspectsList;
 									await Task.Delay(5000);
 									HasNotification = false;
 								}
@@ -309,7 +304,7 @@ namespace Manager.ViewModel.Players
 								IsBusy = false;
 								HasNotification = false;
 								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while adding player to suspects list.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileAddingPlayerToSuspectsList, MessageDialogStyle.Affirmative);
 							}
 						}));
 			}
@@ -323,7 +318,7 @@ namespace Manager.ViewModel.Players
 					?? (_addPlayerToWhitelistCommand = new RelayCommand(
 						async () =>
 						{
-							NotificationMessage = "Adding player to whitelist...";
+							NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
 							HasNotification = true;
 							IsBusy = true;
 
@@ -334,14 +329,12 @@ namespace Manager.ViewModel.Players
 								{
 									IsBusy = false;
 									HasNotification = false;
-									await _dialogService.ShowMessageAsync("This player is already in your whitelist or he is in your account list." + Environment.NewLine
-											+ "You have to remove it from your account list to be able to add him in your whitelist.",
-											MessageDialogStyle.Affirmative);
+									await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInWhitelist, MessageDialogStyle.Affirmative);
 								}
 								else
 								{
 									IsBusy = false;
-									NotificationMessage = "Player added to whitelist.";
+									NotificationMessage = Properties.Resources.NotificationPlayerAddedToWhitelist;
 									await Task.Delay(5000);
 									HasNotification = false;
 								}
@@ -352,7 +345,7 @@ namespace Manager.ViewModel.Players
 								IsBusy = false;
 								HasNotification = false;
 								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("Error while adding player to whitelist.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileAddingPlayerToWhitelist, MessageDialogStyle.Affirmative);
 							}
 						}));
 			}
@@ -371,7 +364,7 @@ namespace Manager.ViewModel.Players
 		{
 			IsBusy = true;
 			HasNotification = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			Rounds = await _playerService.GetRoundListStatsAsync(CurrentDemo, CurrentPlayer);
 			EquipmentValueData = await _playerService.GetEquipmentValueChartAsync(CurrentDemo, CurrentPlayer);
 			MoneyEarnedData = await _playerService.GetCashEarnedChartAsync(CurrentDemo, CurrentPlayer);

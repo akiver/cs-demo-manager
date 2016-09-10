@@ -43,6 +43,25 @@ namespace Core.Models
 					return AppSettings.UNKNOWN;
 			}
 		}
+
+		public static string AsString(this RoundType type)
+		{
+			switch (type)
+			{
+				case RoundType.ECO:
+					return AppSettings.ECO;
+				case RoundType.SEMI_ECO:
+					return AppSettings.SEMI_ECO;
+				case RoundType.FORCE_BUY:
+					return AppSettings.FORCE_BUY;
+				case RoundType.NORMAL:
+					return AppSettings.NORMAL;
+				case RoundType.PISTOL_ROUND:
+					return AppSettings.PISTOL_ROUND;
+				default:
+					return AppSettings.UNKNOWN;
+			}
+		}
 	}
 
 	public class Round : ObservableObject
@@ -593,27 +612,6 @@ namespace Core.Models
 
 		[JsonIgnore]
 		public DateTime EndTickTime => DateTime.Today.AddSeconds(Duration);
-
-		[JsonProperty("type_as_string")]
-		public string RoundTypeAsString
-		{
-			get
-			{
-				switch (Type)
-				{
-					case RoundType.ECO:
-						return "Eco";
-					case RoundType.FORCE_BUY:
-						return "Force buy";
-					case RoundType.SEMI_ECO:
-						return "Semi-Eco";
-					case RoundType.PISTOL_ROUND:
-						return "Pistol round";
-					default:
-						return "Normal";
-				}
-			}
-		}
 
 		[JsonProperty("damage_health_count")]
 		public int DamageHealthCount

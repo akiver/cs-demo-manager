@@ -26,7 +26,7 @@ namespace Core
 		/// </summary>
 		public const int DEMO_PAGE_COUNT = 50;
 
-		// Round end reason strings
+		// Round end reason strings for serialization
 		public const string CT_WIN = "Counter-Terrorists win";
 		public const string T_WIN = "Terrorists win";
 		public const string BOMB_EXPLODED = "Bomb exploded";
@@ -34,7 +34,55 @@ namespace Core
 		public const string CT_SURRENDER = "CT surrender";
 		public const string T_SURRENDER = "T surrender";
 		public const string TARGET_SAVED = "Time over";
+
+		// Round type strings for serialization
+		public const string ECO = "Eco";
+		public const string SEMI_ECO = "Semi-Eco";
+		public const string NORMAL = "Normal";
+		public const string PISTOL_ROUND = "Pistol round";
+		public const string FORCE_BUY = "Force buy";
+
+		// Unknown string for serialization
 		public const string UNKNOWN = "Unknown";
+
+		public static List<Language> LANGUAGES = new List<Language>()
+		{
+			new Language
+			{
+				Key = "en-US",
+				Name = "English"
+			},
+			new Language
+			{
+				Key = "fr-FR",
+				Name = "French"
+			},
+			new Language
+			{
+				Key = "de-DE",
+				Name = "German"
+			},
+			new Language
+			{
+				Key = "it-IT",
+				Name = "Italian"
+			},
+			new Language
+			{
+				Key = "ja-JP",
+				Name = "Japanese"
+			},
+			new Language
+			{
+				Key = "pt-PT",
+				Name = "Portuguese"
+			},
+			new Language
+			{
+				Key = "ru-RU",
+				Name = "Russian"
+			}
+		};
 
 		/// <summary>
 		/// Return the Steam exe path from the registry
@@ -120,17 +168,17 @@ namespace Core
 			new DemoStatus
 			{
 				Name = "none",
-				Label = "None"
+				Label = Properties.Resources.StatusNone
 			},
 			new DemoStatus
 			{
 				Name = "watched",
-				Label = "Watched"
+				Label = Properties.Resources.StatusWatched
 			},
 			new DemoStatus
 			{
 				Name = "towatch",
-				Label = "To watch"
+				Label = Properties.Resources.StatusToWatch
 			}
 		};
 
@@ -139,115 +187,115 @@ namespace Core
 			new Rank
 			{
 				Number = 0,
-				Name = "None",
+				Name = Properties.Resources.Rank0,
 				Logo = CORE_URI + "Resources/Images/ranks/no_rank.png"
 			},
 			new Rank
 			{
 				Number = 1,
-				Name = "Silver I",
+				Name = Properties.Resources.Rank1,
 				Logo = CORE_URI + "Resources/Images/ranks/elo01.png"
 			},
 			new Rank
 			{
 				Number = 2,
-				Name = "Silver II",
+				Name = Properties.Resources.Rank2,
 				Logo = CORE_URI + "Resources/Images/ranks/elo02.png"
 			},
 			new Rank
 			{
 				Number = 3,
-				Name = "Silver III",
+				Name = Properties.Resources.Rank3,
 				Logo = CORE_URI + "Resources/Images/ranks/elo03.png"
 			},
 			new Rank
 			{
 				Number = 4,
-				Name = "Silver IV",
+				Name = Properties.Resources.Rank4,
 				Logo = CORE_URI + "Resources/Images/ranks/elo04.png"
 			},
 			new Rank
 			{
 				Number = 5,
-				Name = "Silver Elite",
+				Name = Properties.Resources.Rank5,
 				Logo = CORE_URI + "Resources/Images/ranks/elo05.png"
 			},
 			new Rank
 			{
 				Number = 6,
-				Name = "Silver Elite Master",
+				Name = Properties.Resources.Rank6,
 				Logo = CORE_URI + "Resources/Images/ranks/elo06.png"
 			},
 			new Rank
 			{
 				Number = 7,
-				Name = "Gold Nova I",
+				Name = Properties.Resources.Rank7,
 				Logo = CORE_URI + "Resources/Images/ranks/elo07.png"
 			},
 			new Rank
 			{
 				Number = 8,
-				Name = "Gold Nova II",
+				Name = Properties.Resources.Rank8,
 				Logo = CORE_URI + "Resources/Images/ranks/elo8.png"
 			},
 			new Rank
 			{
 				Number = 9,
-				Name = "Gold Nova III",
+				Name = Properties.Resources.Rank9,
 				Logo = CORE_URI + "Resources/Images/ranks/elo09.png"
 			},
 			new Rank
 			{
 				Number = 10,
-				Name = "Gold Nova Master",
+				Name = Properties.Resources.Rank10,
 				Logo = CORE_URI + "Resources/Images/ranks/elo10.png"
 			},
 			new Rank
 			{
 				Number = 11,
-				Name = "Master Guardian I",
+				Name = Properties.Resources.Rank11,
 				Logo = CORE_URI + "Resources/Images/ranks/elo11.png"
 			},
 			new Rank
 			{
 				Number = 12,
-				Name = "Master Guardian II",
+				Name = Properties.Resources.Rank12,
 				Logo = CORE_URI + "Resources/Images/ranks/elo12.png"
 			},
 			new Rank
 			{
 				Number = 13,
-				Name = "Master Guardian Elite",
+				Name = Properties.Resources.Rank13,
 				Logo = CORE_URI + "Resources/Images/ranks/elo13.png"
 			},
 			new Rank
 			{
 				Number = 14,
-				Name = "Distinguished Master Guardian",
+				Name = Properties.Resources.Rank14,
 				Logo = CORE_URI + "Resources/Images/ranks/elo14.png"
 			},
 			new Rank
 			{
 				Number = 15,
-				Name = "Legendary Eagle",
+				Name = Properties.Resources.Rank15,
 				Logo = CORE_URI + "Resources/Images/ranks/elo15.png"
 			},
 			new Rank
 			{
 				Number = 16,
-				Name = "Legendary Eagle Master",
+				Name = Properties.Resources.Rank16,
 				Logo = CORE_URI + "Resources/Images/ranks/elo16.png"
 			},
 			new Rank
 			{
 				Number = 17,
-				Name = "Supreme Master First Class",
+				Name = Properties.Resources.Rank17,
 				Logo = CORE_URI + "Resources/Images/ranks/elo17.png"
 			},
 			new Rank
 			{
 				Number = 18,
-				Name = "Global Elite",
+				Name = Properties.Resources.Rank18,
 				Logo = CORE_URI + "Resources/Images/ranks/elo18.png"
 			}
 		};

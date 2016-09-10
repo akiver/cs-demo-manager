@@ -189,7 +189,7 @@ namespace Manager.ViewModel.Demos
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			CurrentDemo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(CurrentDemo);
 			_flashbangService.Demo = CurrentDemo;
 			PlayersFlashTimes = await _flashbangService.GetPlayersFlashTimesData();

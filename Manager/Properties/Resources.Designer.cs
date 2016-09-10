@@ -22,7 +22,7 @@ namespace Manager.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Manager.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Manager.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Manager.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,12 +61,4217 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accounts.
+        /// </summary>
+        public static string Accounts {
+            get {
+                return ResourceManager.GetString("Accounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Stats.
+        /// </summary>
+        public static string AccountStats {
+            get {
+                return ResourceManager.GetString("AccountStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string Add {
+            get {
+                return ResourceManager.GetString("Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add account.
+        /// </summary>
+        public static string AddAccount {
+            get {
+                return ResourceManager.GetString("AddAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add all players seen.
+        /// </summary>
+        public static string AddAllPlayersSeen {
+            get {
+                return ResourceManager.GetString("AddAllPlayersSeen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add folder.
+        /// </summary>
+        public static string AddFolder {
+            get {
+                return ResourceManager.GetString("AddFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additionals parameters.
+        /// </summary>
+        public static string AdditionalsParametersLabel {
+            get {
+                return ResourceManager.GetString("AdditionalsParametersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add players to suspects list.
+        /// </summary>
+        public static string AddPlayersToSuspects {
+            get {
+                return ResourceManager.GetString("AddPlayersToSuspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to account list.
+        /// </summary>
+        public static string AddToAccountList {
+            get {
+                return ResourceManager.GetString("AddToAccountList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to suspects.
+        /// </summary>
+        public static string AddToSuspects {
+            get {
+                return ResourceManager.GetString("AddToSuspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to whitelist.
+        /// </summary>
+        public static string AddToWhitelist {
+            get {
+                return ResourceManager.GetString("AddToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ADR (Average Damage Per Round).
+        /// </summary>
+        public static string AdrFull {
+            get {
+                return ResourceManager.GetString("AdrFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        public static string AllFemale {
+            get {
+                return ResourceManager.GetString("AllFemale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All players.
+        /// </summary>
+        public static string AllPlayers {
+            get {
+                return ResourceManager.GetString("AllPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All rounds.
+        /// </summary>
+        public static string AllRounds {
+            get {
+                return ResourceManager.GetString("AllRounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Always download the application installer from the official website.
+        /// </summary>
+        public static string AlwaysDownload {
+            get {
+                return ResourceManager.GetString("AlwaysDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount ($).
+        /// </summary>
+        public static string AmountDollar {
+            get {
+                return ResourceManager.GetString("AmountDollar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze.
+        /// </summary>
+        public static string Analyze {
+            get {
+                return ResourceManager.GetString("Analyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to APR (Assist Per Round).
+        /// </summary>
+        public static string AprFull {
+            get {
+                return ResourceManager.GetString("AprFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Armor damages.
+        /// </summary>
+        public static string ArmorDamages {
+            get {
+                return ResourceManager.GetString("ArmorDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assists.
+        /// </summary>
+        public static string Assists {
+            get {
+                return ResourceManager.GetString("Assists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A (Assits).
+        /// </summary>
+        public static string AssistsFull {
+            get {
+                return ResourceManager.GetString("AssistsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Attempts.
+        /// </summary>
+        public static string Attempts {
+            get {
+                return ResourceManager.GetString("Attempts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Avatar.
+        /// </summary>
+        public static string Avatar {
+            get {
+                return ResourceManager.GetString("Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average value.
+        /// </summary>
+        public static string AverageValue {
+            get {
+                return ResourceManager.GetString("AverageValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Away.
+        /// </summary>
+        public static string Away {
+            get {
+                return ResourceManager.GetString("Away", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string Back {
+            get {
+                return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ban.
+        /// </summary>
+        public static string Ban {
+            get {
+                return ResourceManager.GetString("Ban", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ban (VAC / OW).
+        /// </summary>
+        public static string BanFull {
+            get {
+                return ResourceManager.GetString("BanFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Banned.
+        /// </summary>
+        public static string Banned {
+            get {
+                return ResourceManager.GetString("Banned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb defused.
+        /// </summary>
+        public static string BombDefused {
+            get {
+                return ResourceManager.GetString("BombDefused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BD (Bomb Defused).
+        /// </summary>
+        public static string BombDefusedFull {
+            get {
+                return ResourceManager.GetString("BombDefusedFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb exploded.
+        /// </summary>
+        public static string BombExploded {
+            get {
+                return ResourceManager.GetString("BombExploded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BE (Bomb Exploded).
+        /// </summary>
+        public static string BombExplodedFull {
+            get {
+                return ResourceManager.GetString("BombExplodedFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb planted.
+        /// </summary>
+        public static string BombPlanted {
+            get {
+                return ResourceManager.GetString("BombPlanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BP (Bomb Planted).
+        /// </summary>
+        public static string BombPlantedFull {
+            get {
+                return ResourceManager.GetString("BombPlantedFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both.
+        /// </summary>
+        public static string Both {
+            get {
+                return ResourceManager.GetString("Both", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse.
+        /// </summary>
+        public static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to errors file.
+        /// </summary>
+        public static string BrowseToErrorsFile {
+            get {
+                return ResourceManager.GetString("BrowseToErrorsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap bullet {
+        public static System.Drawing.Bitmap bullet {
             get {
                 object obj = ResourceManager.GetObject("bullet", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Busy.
+        /// </summary>
+        public static string Busy {
+            get {
+                return ResourceManager.GetString("Busy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to by.
+        /// </summary>
+        public static string By {
+            get {
+                return ResourceManager.GetString("By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cache size.
+        /// </summary>
+        public static string CacheSize {
+            get {
+                return ResourceManager.GetString("CacheSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chest.
+        /// </summary>
+        public static string Chest {
+            get {
+                return ResourceManager.GetString("Chest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear demos data.
+        /// </summary>
+        public static string ClearDemosData {
+            get {
+                return ResourceManager.GetString("ClearDemosData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear VDM files.
+        /// </summary>
+        public static string ClearVdmFiles {
+            get {
+                return ResourceManager.GetString("ClearVdmFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Client.
+        /// </summary>
+        public static string ClientName {
+            get {
+                return ResourceManager.GetString("ClientName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close BOT on exit.
+        /// </summary>
+        public static string CloseBotOnExit {
+            get {
+                return ResourceManager.GetString("CloseBotOnExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clutch.
+        /// </summary>
+        public static string Clutch {
+            get {
+                return ResourceManager.GetString("Clutch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clutches.
+        /// </summary>
+        public static string Clutches {
+            get {
+                return ResourceManager.GetString("Clutches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clutches loss.
+        /// </summary>
+        public static string ClutchesLoss {
+            get {
+                return ResourceManager.GetString("ClutchesLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clutches won.
+        /// </summary>
+        public static string ClutchesWon {
+            get {
+                return ResourceManager.GetString("ClutchesWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clutches won %.
+        /// </summary>
+        public static string ClutchesWonPercent {
+            get {
+                return ResourceManager.GetString("ClutchesWonPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C (Clutchs).
+        /// </summary>
+        public static string ClutchsFull {
+            get {
+                return ResourceManager.GetString("ClutchsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Columns.
+        /// </summary>
+        public static string Columns {
+            get {
+                return ResourceManager.GetString("Columns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string CommentLabel {
+            get {
+                return ResourceManager.GetString("CommentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to competitives wins.
+        /// </summary>
+        public static string CompetitivesWins {
+            get {
+                return ResourceManager.GetString("CompetitivesWins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contributors.
+        /// </summary>
+        public static string Contributors {
+            get {
+                return ResourceManager.GetString("Contributors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy email address.
+        /// </summary>
+        public static string CopyEmailAddress {
+            get {
+                return ResourceManager.GetString("CopyEmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy playdemo command.
+        /// </summary>
+        public static string CopyPlayDemoCommand {
+            get {
+                return ResourceManager.GetString("CopyPlayDemoCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy setpos.
+        /// </summary>
+        public static string CopySetpos {
+            get {
+                return ResourceManager.GetString("CopySetpos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counter-Terrorists.
+        /// </summary>
+        public static string CounterTerrorists {
+            get {
+                return ResourceManager.GetString("CounterTerrorists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crouch kill %.
+        /// </summary>
+        public static string CrouchKillPercent {
+            get {
+                return ResourceManager.GetString("CrouchKillPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crouch kill % per match.
+        /// </summary>
+        public static string CrouchKillPercentPerMatch {
+            get {
+                return ResourceManager.GetString("CrouchKillPercentPerMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crouch kills.
+        /// </summary>
+        public static string CrouchKills {
+            get {
+                return ResourceManager.GetString("CrouchKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CK (Crouch Kills).
+        /// </summary>
+        public static string CrouchKillsFull {
+            get {
+                return ResourceManager.GetString("CrouchKillsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to csgo.exe path.
+        /// </summary>
+        public static string CsgoExePath {
+            get {
+                return ResourceManager.GetString("CsgoExePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CT.
+        /// </summary>
+        public static string CT {
+            get {
+                return ResourceManager.GetString("CT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current account used for watch (highlights / lowlights).
+        /// </summary>
+        public static string CurrentAccountWatch {
+            get {
+                return ResourceManager.GetString("CurrentAccountWatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current folder.
+        /// </summary>
+        public static string CurrentFolder {
+            get {
+                return ResourceManager.GetString("CurrentFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damage per game value.
+        /// </summary>
+        public static string DamagePerGameValue {
+            get {
+                return ResourceManager.GetString("DamagePerGameValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damages.
+        /// </summary>
+        public static string Damages {
+            get {
+                return ResourceManager.GetString("Damages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damages per round.
+        /// </summary>
+        public static string DamagesPerRound {
+            get {
+                return ResourceManager.GetString("DamagesPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dark.
+        /// </summary>
+        public static string Dark {
+            get {
+                return ResourceManager.GetString("Dark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cache.
+        /// </summary>
+        public static string DataCache {
+            get {
+                return ResourceManager.GetString("DataCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date Format.
+        /// </summary>
+        public static string DateFormat {
+            get {
+                return ResourceManager.GetString("DateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Death.
+        /// </summary>
+        public static string Death {
+            get {
+                return ResourceManager.GetString("Death", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Death average.
+        /// </summary>
+        public static string DeathAverage {
+            get {
+                return ResourceManager.GetString("DeathAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deaths.
+        /// </summary>
+        public static string Deaths {
+            get {
+                return ResourceManager.GetString("Deaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D (Deaths).
+        /// </summary>
+        public static string DeathsFull {
+            get {
+                return ResourceManager.GetString("DeathsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decoys.
+        /// </summary>
+        public static string Decoys {
+            get {
+                return ResourceManager.GetString("Decoys", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo.
+        /// </summary>
+        public static string Demo {
+            get {
+                return ResourceManager.GetString("Demo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo name.
+        /// </summary>
+        public static string DemoName {
+            get {
+                return ResourceManager.GetString("DemoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo(s).
+        /// </summary>
+        public static string Demos {
+            get {
+                return ResourceManager.GetString("Demos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo type.
+        /// </summary>
+        public static string DemoType {
+            get {
+                return ResourceManager.GetString("DemoType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (First kill by a CT).
+        /// </summary>
+        public static string DescriptionEntryHoldKills {
+            get {
+                return ResourceManager.GetString("DescriptionEntryHoldKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (First kill by a T).
+        /// </summary>
+        public static string DescriptionEntryKills {
+            get {
+                return ResourceManager.GetString("DescriptionEntryKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Destination folder.
+        /// </summary>
+        public static string DestinationFolderLabel {
+            get {
+                return ResourceManager.GetString("DestinationFolderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string Details {
+            get {
+                return ResourceManager.GetString("Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is already in your accounts list..
+        /// </summary>
+        public static string DialogAccountAlreadyInList {
+            get {
+                return ResourceManager.GetString("DialogAccountAlreadyInList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an account.
+        /// </summary>
+        public static string DialogAddAnAccount {
+            get {
+                return ResourceManager.GetString("DialogAddAnAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a player to whitelist.
+        /// </summary>
+        public static string DialogAddPlayerToWhitelist {
+            get {
+                return ResourceManager.GetString("DialogAddPlayerToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a suspect.
+        /// </summary>
+        public static string DialogAddSuspect {
+            get {
+                return ResourceManager.GetString("DialogAddSuspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to analyze only the selected demos or all the demos within the selected folder?.
+        /// </summary>
+        public static string DialogAnalyzeAllDemosConfirmation {
+            get {
+                return ResourceManager.GetString("DialogAnalyzeAllDemosConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to analyze this demo first..
+        /// </summary>
+        public static string DialogAnalyzeRequired {
+            get {
+                return ResourceManager.GetString("DialogAnalyzeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The backup file has been created, you can re-import it from settings..
+        /// </summary>
+        public static string DialogBackupCreated {
+            get {
+                return ResourceManager.GetString("DialogBackupCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to boiler.exe is incorrect..
+        /// </summary>
+        public static string DialogBoilerIncorrect {
+            get {
+                return ResourceManager.GetString("DialogBoilerIncorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to boiler.exe not found..
+        /// </summary>
+        public static string DialogBoilerNotFound {
+            get {
+                return ResourceManager.GetString("DialogBoilerNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demos data will be deleted! Are you sure?.
+        /// </summary>
+        public static string DialogConfirmDeleteDemosData {
+            get {
+                return ResourceManager.GetString("DialogConfirmDeleteDemosData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It seems that CSGO is not installed on your main hard drive.
+        ///The defaults &quot;csgo&quot; and &quot;replays&quot; can not be found. Please add folders from the settings..
+        /// </summary>
+        public static string DialogCsgoNotDetected {
+            get {
+                return ResourceManager.GetString("DialogCsgoNotDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom data has been imported..
+        /// </summary>
+        public static string DialogCustomDataImported {
+            get {
+                return ResourceManager.GetString("DialogCustomDataImported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All VDM files within your folders will be deleted, are you sure?.
+        /// </summary>
+        public static string DialogDeleteVdmFilesConfirmation {
+            get {
+                return ResourceManager.GetString("DialogDeleteVdmFilesConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo not found..
+        /// </summary>
+        public static string DialogDemoNotFound {
+            get {
+                return ResourceManager.GetString("DialogDemoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demos data cleared..
+        /// </summary>
+        public static string DialogDemosDataCleared {
+            get {
+                return ResourceManager.GetString("DialogDemosDataCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} demo(s) have been downloaded..
+        /// </summary>
+        public static string DialogDemosHaveBeenDownloaded {
+            get {
+                return ResourceManager.GetString("DialogDemosHaveBeenDownloaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This demos may be too old, if not please send an email with the attached demos.
+        ///You can find more information on {0}..
+        /// </summary>
+        public static string DialogDemosMayBeTooOld {
+            get {
+                return ResourceManager.GetString("DialogDemosMayBeTooOld", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following demos have not been found:.
+        /// </summary>
+        public static string DialogDemosNotFound {
+            get {
+                return ResourceManager.GetString("DialogDemosNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} demo(s) deleted from data cache..
+        /// </summary>
+        public static string DialogDemosRemovedFromCache {
+            get {
+                return ResourceManager.GetString("DialogDemosRemovedFromCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} demo(s) sent to Recycle Bin..
+        /// </summary>
+        public static string DialogDemosSentToRecycleBin {
+            get {
+                return ResourceManager.GetString("DialogDemosSentToRecycleBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enabling moviemaker mode change the way the game is started (when you click on all &quot;Watch&quot; buttons).
+        ///It will use the tool &quot;Half-Life Advanced Effects&quot; (HLAE) which is technically a hack.
+        ///You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
+        ///If you don&apos;t know what is this or you are not planning to make movies just click on cancel.
+        ///If you enable it, the game is launched with the &quot;-insecure&quot; parameter (everytime), which means that you will not be able to join server  [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string DialogEnableMoviemakerModeWarning {
+            get {
+                return ResourceManager.GetString("DialogEnableMoviemakerModeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the SteamID 64 or the Steam community URL..
+        /// </summary>
+        public static string DialogEnterSteamId {
+            get {
+                return ResourceManager.GetString("DialogEnterSteamId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the tick..
+        /// </summary>
+        public static string DialogEnterTick {
+            get {
+                return ResourceManager.GetString("DialogEnterTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while analyzing demos:.
+        /// </summary>
+        public static string DialogErrorAnalyzingDemos {
+            get {
+                return ResourceManager.GetString("DialogErrorAnalyzingDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting custom data..
+        /// </summary>
+        public static string DialogErrorCreatingBackupFile {
+            get {
+                return ResourceManager.GetString("DialogErrorCreatingBackupFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while deleting VDM files..
+        /// </summary>
+        public static string DialogErrorDeletingVdmFiles {
+            get {
+                return ResourceManager.GetString("DialogErrorDeletingVdmFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo {0} not found..
+        /// </summary>
+        public static string DialogErrorDemoNotFound {
+            get {
+                return ResourceManager.GetString("DialogErrorDemoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting heatmap to PNG..
+        /// </summary>
+        public static string DialogErrorExportingHeatmap {
+            get {
+                return ResourceManager.GetString("DialogErrorExportingHeatmap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while trying to get suspects information..
+        /// </summary>
+        public static string DialogErrorGettingSuspectsData {
+            get {
+                return ResourceManager.GetString("DialogErrorGettingSuspectsData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while importing custom data. The backup file may be corrupt..
+        /// </summary>
+        public static string DialogErrorImportingCustomData {
+            get {
+                return ResourceManager.GetString("DialogErrorImportingCustomData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid SteamID 64 or Steam community URL..
+        /// </summary>
+        public static string DialogErrorInvalidSteamId {
+            get {
+                return ResourceManager.GetString("DialogErrorInvalidSteamId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while removing the account..
+        /// </summary>
+        public static string DialogErrorRemovingAccount {
+            get {
+                return ResourceManager.GetString("DialogErrorRemovingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while adding player to suspects list..
+        /// </summary>
+        public static string DialogErrorWhileAddingPlayerToSuspectsList {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileAddingPlayerToSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while adding player to whitelist..
+        /// </summary>
+        public static string DialogErrorWhileAddingPlayerToWhitelist {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileAddingPlayerToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while analyzing the demo {0}.
+        ///The demo may be too old, if not please send an email with the attached demo.
+        ///You can find more information on http://csgo-demos-manager.com..
+        /// </summary>
+        public static string DialogErrorWhileAnalyzingDemo {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileAnalyzingDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while deleting player..
+        /// </summary>
+        public static string DialogErrorWhileDeletingPlayer {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileDeletingPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while deleting suspect..
+        /// </summary>
+        public static string DialogErrorWhileDeletingSuspect {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileDeletingSuspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting custom data..
+        /// </summary>
+        public static string DialogErrorWhileExportingCustomData {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileExportingCustomData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting the demo..
+        /// </summary>
+        public static string DialogErrorWhileExportingDemo {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileExportingDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting demos..
+        /// </summary>
+        public static string DialogErrorWhileExportingDemos {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileExportingDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while moving suspect(s)..
+        /// </summary>
+        public static string DialogErrorWhileMovingSuspects {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileMovingSuspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while refreshing last rank..
+        /// </summary>
+        public static string DialogErrorWhileRefreshingLastRank {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRefreshingLastRank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while retrieving matches information ({0})..
+        /// </summary>
+        public static string DialogErrorWhileRetrievingMatchesData {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRetrievingMatchesData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while trying to get player information..
+        /// </summary>
+        public static string DialogErrorWhileRetrievingPlayerInformation {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRetrievingPlayerInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while trying to get players information..
+        /// </summary>
+        public static string DialogErrorWhileRetrievingPlayersInformation {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRetrievingPlayersInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while trying to get suspect information..
+        /// </summary>
+        public static string DialogErrorWhileRetrievingSuspectInformation {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRetrievingSuspectInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error while trying to get suspects information..
+        /// </summary>
+        public static string DialogErrorWhileRetrievingSuspectsInformation {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRetrievingSuspectsInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to export data into a single file or in multiple files?.
+        /// </summary>
+        public static string DialogExportMultipleOrSingle {
+            get {
+                return ResourceManager.GetString("DialogExportMultipleOrSingle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are going to export data for the player &quot;{0}&quot;.
+        ///Do you want to continue?.
+        /// </summary>
+        public static string DialogExportPlayer {
+            get {
+                return ResourceManager.GetString("DialogExportPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goto Tick.
+        /// </summary>
+        public static string DialogGoToTick {
+            get {
+                return ResourceManager.GetString("DialogGoToTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid tick..
+        /// </summary>
+        public static string DialogInvalidTick {
+            get {
+                return ResourceManager.GetString("DialogInvalidTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This map doesn&apos;t support this feature..
+        /// </summary>
+        public static string DialogMapNotSupported {
+            get {
+                return ResourceManager.GetString("DialogMapNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new version is available.
+        ///Do you want to download it?.
+        /// </summary>
+        public static string DialogNewVersionAvailable {
+            get {
+                return ResourceManager.GetString("DialogNewVersionAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Internet Connection.
+        /// </summary>
+        public static string DialogNoConnexionDetected {
+            get {
+                return ResourceManager.GetString("DialogNoConnexionDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No Internet connection detected, you can&apos;t use this feature..
+        /// </summary>
+        public static string DialogNoConnexionNoFeature {
+            get {
+                return ResourceManager.GetString("DialogNoConnexionNoFeature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No damages data found.
+        ///The demo is too old or you didn&apos;t analyze it..
+        /// </summary>
+        public static string DialogNoDamagesDataFound {
+            get {
+                return ResourceManager.GetString("DialogNoDamagesDataFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No demos found for this player.
+        ///Demos with this player might not have been analyzed..
+        /// </summary>
+        public static string DialogNoDemosFoundForPlayer {
+            get {
+                return ResourceManager.GetString("DialogNoDemosFoundForPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No demos found for this player.
+        ///Demos with this player might not have been analyzed..
+        /// </summary>
+        public static string DialogNoDemosPlayerFound {
+            get {
+                return ResourceManager.GetString("DialogNoDemosPlayerFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No demos found for this suspect.
+        ///Demos with this suspect might not have been analyzed..
+        /// </summary>
+        public static string DialogNoDemosSuspectFound {
+            get {
+                return ResourceManager.GetString("DialogNoDemosSuspectFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no errors log file..
+        /// </summary>
+        public static string DialogNoErrorsFile {
+            get {
+                return ResourceManager.GetString("DialogNoErrorsFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No newer demo available..
+        /// </summary>
+        public static string DialogNoNewerDemo {
+            get {
+                return ResourceManager.GetString("DialogNoNewerDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No points found. You may have to analyze this demo..
+        /// </summary>
+        public static string DialogNoPointsFound {
+            get {
+                return ResourceManager.GetString("DialogNoPointsFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is already in your account list..
+        /// </summary>
+        public static string DialogPlayerAlreadyInAccountsList {
+            get {
+                return ResourceManager.GetString("DialogPlayerAlreadyInAccountsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is already in your suspect or he is in your account list.
+        ///You have to remove it from your account list to be able to add him in your supect list..
+        /// </summary>
+        public static string DialogPlayerAlreadyInSuspectsList {
+            get {
+                return ResourceManager.GetString("DialogPlayerAlreadyInSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is in your suspect / white / account list.
+        ///You have to remove it from your account and white list to be able to add him in your supect list..
+        /// </summary>
+        public static string DialogPlayerAlreadyInSuspectWhitelist {
+            get {
+                return ResourceManager.GetString("DialogPlayerAlreadyInSuspectWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This player is already in your whitelist or he is in your account list.
+        ///You have to remove it from your account list to be able to add him in your whitelist..
+        /// </summary>
+        public static string DialogPlayerAlreadyInWhitelist {
+            get {
+                return ResourceManager.GetString("DialogPlayerAlreadyInWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player not found..
+        /// </summary>
+        public static string DialogPlayerNotFound {
+            get {
+                return ResourceManager.GetString("DialogPlayerNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which POV (camera perspective) do you want to see?.
+        /// </summary>
+        public static string DialogPovSelection {
+            get {
+                return ResourceManager.GetString("DialogPovSelection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this demo(s) from data cache?
+        ///This will not delete this demo(s) from your HDD..
+        /// </summary>
+        public static string DialogRemoveDemosFromCacheConfirmation {
+            get {
+                return ResourceManager.GetString("DialogRemoveDemosFromCacheConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to restart Steam..
+        /// </summary>
+        public static string DialogRestartSteam {
+            get {
+                return ResourceManager.GetString("DialogRestartSteam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to select an account first..
+        /// </summary>
+        public static string DialogSelectAccountFirst {
+            get {
+                return ResourceManager.GetString("DialogSelectAccountFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the csgo.exe file location to enable it..
+        /// </summary>
+        public static string DialogSelectCsgoPath {
+            get {
+                return ResourceManager.GetString("DialogSelectCsgoPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to send this demo(s) to Recycle Bin?.
+        /// </summary>
+        public static string DialogSendToRecycleBinConfimation {
+            get {
+                return ResourceManager.GetString("DialogSendToRecycleBinConfimation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to set the account that you want to focus from settings to be able to use this feature..
+        /// </summary>
+        public static string DialogSetAccountToFocus {
+            get {
+                return ResourceManager.GetString("DialogSetAccountToFocus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have to select the folder where demos will be saved from settings..
+        /// </summary>
+        public static string DialogSetFolderForDownload {
+            get {
+                return ResourceManager.GetString("DialogSetFolderForDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam doesn&apos;t seems to be installed.
+        ///Unable to start the game..
+        /// </summary>
+        public static string DialogSteamNotFound {
+            get {
+                return ResourceManager.GetString("DialogSteamNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam is not running or you are not connected to a Steam account..
+        /// </summary>
+        public static string DialogSteamNotRunningOrNotLoggedIn {
+            get {
+                return ResourceManager.GetString("DialogSteamNotRunningOrNotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This update requires to clear custom data from cache (your suspects list will not be removed).
+        ///Do you want to save your custom data?.
+        /// </summary>
+        public static string DialogUpdateRequireClearCache {
+            get {
+                return ResourceManager.GetString("DialogUpdateRequireClearCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VDM files deleted..
+        /// </summary>
+        public static string DialogVdmFilesDeleted {
+            get {
+                return ResourceManager.GetString("DialogVdmFilesDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to donation.
+        /// </summary>
+        public static string Donation {
+            get {
+                return ResourceManager.GetString("Donation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download MM Demos.
+        /// </summary>
+        public static string DownloadMatchMakingDemos {
+            get {
+                return ResourceManager.GetString("DownloadMatchMakingDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DPR (Death Per Round).
+        /// </summary>
+        public static string DprFull {
+            get {
+                return ResourceManager.GetString("DprFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Draw.
+        /// </summary>
+        public static string Draw {
+            get {
+                return ResourceManager.GetString("Draw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duels.
+        /// </summary>
+        public static string Duels {
+            get {
+                return ResourceManager.GetString("Duels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string Duration {
+            get {
+                return ResourceManager.GetString("Duration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Economy.
+        /// </summary>
+        public static string Economy {
+            get {
+                return ResourceManager.GetString("Economy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable moviemaker mode.
+        /// </summary>
+        public static string EnableMoviemakerMode {
+            get {
+                return ResourceManager.GetString("EnableMoviemakerMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you encountered a bug or have any suggestions, feel free to open an issue on.
+        /// </summary>
+        public static string EncounteredBug {
+            get {
+                return ResourceManager.GetString("EncounteredBug", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb defused.
+        /// </summary>
+        public static string EndReasonBombDefused {
+            get {
+                return ResourceManager.GetString("EndReasonBombDefused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb exploded.
+        /// </summary>
+        public static string EndReasonBombExploded {
+            get {
+                return ResourceManager.GetString("EndReasonBombExploded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CT surrender.
+        /// </summary>
+        public static string EndReasonCtSurrender {
+            get {
+                return ResourceManager.GetString("EndReasonCtSurrender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counter-Terrorists win.
+        /// </summary>
+        public static string EndReasonCtWin {
+            get {
+                return ResourceManager.GetString("EndReasonCtWin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time over.
+        /// </summary>
+        public static string EndReasonTargetSaved {
+            get {
+                return ResourceManager.GetString("EndReasonTargetSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T surrender.
+        /// </summary>
+        public static string EndReasonTsurrender {
+            get {
+                return ResourceManager.GetString("EndReasonTsurrender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terrorists win.
+        /// </summary>
+        public static string EndReasonTwin {
+            get {
+                return ResourceManager.GetString("EndReasonTwin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string EndReasonUnknown {
+            get {
+                return ResourceManager.GetString("EndReasonUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enemy POV.
+        /// </summary>
+        public static string EnemyPov {
+            get {
+                return ResourceManager.GetString("EnemyPov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entry hold kills.
+        /// </summary>
+        public static string EntryHoldKills {
+            get {
+                return ResourceManager.GetString("EntryHoldKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (First kill as CT).
+        /// </summary>
+        public static string EntryHoldKillsDescription {
+            get {
+                return ResourceManager.GetString("EntryHoldKillsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (First kill as T).
+        /// </summary>
+        public static string EntryKillDescription {
+            get {
+                return ResourceManager.GetString("EntryKillDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entry kills.
+        /// </summary>
+        public static string EntryKills {
+            get {
+                return ResourceManager.GetString("EntryKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EK (Entry Kills).
+        /// </summary>
+        public static string EntryKillsFull {
+            get {
+                return ResourceManager.GetString("EntryKillsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipement.
+        /// </summary>
+        public static string Equipment {
+            get {
+                return ResourceManager.GetString("Equipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment value ($).
+        /// </summary>
+        public static string EquipmentValue {
+            get {
+                return ResourceManager.GetString("EquipmentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment value per round ($).
+        /// </summary>
+        public static string EquipmentValuePerRound {
+            get {
+                return ResourceManager.GetString("EquipmentValuePerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment value team 1.
+        /// </summary>
+        public static string EquipmentValueTeam1 {
+            get {
+                return ResourceManager.GetString("EquipmentValueTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EVT1 (Equipment Value Team 1 ($)).
+        /// </summary>
+        public static string EquipmentValueTeam1Full {
+            get {
+                return ResourceManager.GetString("EquipmentValueTeam1Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment value team 2.
+        /// </summary>
+        public static string EquipmentValueTeam2 {
+            get {
+                return ResourceManager.GetString("EquipmentValueTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EVT2 (Equipment Value Team 2 ($)).
+        /// </summary>
+        public static string EquipmentValueTeam2Full {
+            get {
+                return ResourceManager.GetString("EquipmentValueTeam2Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RWS (ESEA Round Win Share).
+        /// </summary>
+        public static string EseaRwsFull {
+            get {
+                return ResourceManager.GetString("EseaRwsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export as XLS.
+        /// </summary>
+        public static string ExportAsXls {
+            get {
+                return ResourceManager.GetString("ExportAsXls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export custom data.
+        /// </summary>
+        public static string ExportCustomData {
+            get {
+                return ResourceManager.GetString("ExportCustomData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export JSON.
+        /// </summary>
+        public static string ExportJson {
+            get {
+                return ResourceManager.GetString("ExportJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter....
+        /// </summary>
+        public static string FilterEtc {
+            get {
+                return ResourceManager.GetString("FilterEtc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashbangs.
+        /// </summary>
+        public static string Flashbangs {
+            get {
+                return ResourceManager.GetString("Flashbangs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashed players.
+        /// </summary>
+        public static string FlashedPlayers {
+            get {
+                return ResourceManager.GetString("FlashedPlayers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folders.
+        /// </summary>
+        public static string Folders {
+            get {
+                return ResourceManager.GetString("Folders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Framerate.
+        /// </summary>
+        public static string Framerate {
+            get {
+                return ResourceManager.GetString("Framerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FR (Framerate).
+        /// </summary>
+        public static string FramerateFull {
+            get {
+                return ResourceManager.GetString("FramerateFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSGO Demos Manager is a free open source software and will always be..
+        /// </summary>
+        public static string FreeSoftware {
+            get {
+                return ResourceManager.GetString("FreeSoftware", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fullscreen.
+        /// </summary>
+        public static string Fullscreen {
+            get {
+                return ResourceManager.GetString("Fullscreen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        public static string General {
+            get {
+                return ResourceManager.GetString("General", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate.
+        /// </summary>
+        public static string Generate {
+            get {
+                return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Goto Tick.
+        /// </summary>
+        public static string GotoTick {
+            get {
+                return ResourceManager.GetString("GotoTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Head.
+        /// </summary>
+        public static string Head {
+            get {
+                return ResourceManager.GetString("Head", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account visibility.
+        /// </summary>
+        public static string HeaderAccountVisibility {
+            get {
+                return ResourceManager.GetString("HeaderAccountVisibility", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assister.
+        /// </summary>
+        public static string HeaderAssister {
+            get {
+                return ResourceManager.GetString("HeaderAssister", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A.
+        /// </summary>
+        public static string HeaderAssists {
+            get {
+                return ResourceManager.GetString("HeaderAssists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to APR.
+        /// </summary>
+        public static string HeaderAssistsPerRound {
+            get {
+                return ResourceManager.GetString("HeaderAssistsPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ADP.
+        /// </summary>
+        public static string HeaderAvarageDamagesPerPlayer {
+            get {
+                return ResourceManager.GetString("HeaderAvarageDamagesPerPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ADR.
+        /// </summary>
+        public static string HeaderAverageDamagesPerRound {
+            get {
+                return ResourceManager.GetString("HeaderAverageDamagesPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ban Count.
+        /// </summary>
+        public static string HeaderBanCount {
+            get {
+                return ResourceManager.GetString("HeaderBanCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BD.
+        /// </summary>
+        public static string HeaderBombDefused {
+            get {
+                return ResourceManager.GetString("HeaderBombDefused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BE.
+        /// </summary>
+        public static string HeaderBombExploded {
+            get {
+                return ResourceManager.GetString("HeaderBombExploded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BP.
+        /// </summary>
+        public static string HeaderBombPlanted {
+            get {
+                return ResourceManager.GetString("HeaderBombPlanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to C.
+        /// </summary>
+        public static string HeaderClutchs {
+            get {
+                return ResourceManager.GetString("HeaderClutchs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community Banned.
+        /// </summary>
+        public static string HeaderCommunityBanned {
+            get {
+                return ResourceManager.GetString("HeaderCommunityBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CK.
+        /// </summary>
+        public static string HeaderCrouchKills {
+            get {
+                return ResourceManager.GetString("HeaderCrouchKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DSLB.
+        /// </summary>
+        public static string HeaderDaysSinceLastBan {
+            get {
+                return ResourceManager.GetString("HeaderDaysSinceLastBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DPR.
+        /// </summary>
+        public static string HeaderDeathPerRound {
+            get {
+                return ResourceManager.GetString("HeaderDeathPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to D.
+        /// </summary>
+        public static string HeaderDeaths {
+            get {
+                return ResourceManager.GetString("HeaderDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Economy Banned.
+        /// </summary>
+        public static string HeaderEconomyBanned {
+            get {
+                return ResourceManager.GetString("HeaderEconomyBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EK.
+        /// </summary>
+        public static string HeaderEntryKills {
+            get {
+                return ResourceManager.GetString("HeaderEntryKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EV Team 1 ($).
+        /// </summary>
+        public static string HeaderEquipementValueTeam1 {
+            get {
+                return ResourceManager.GetString("HeaderEquipementValueTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EV Team 2 ($).
+        /// </summary>
+        public static string HeaderEquipementValueTeam2 {
+            get {
+                return ResourceManager.GetString("HeaderEquipementValueTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EV ($).
+        /// </summary>
+        public static string HeaderEquipmentValuePlayer {
+            get {
+                return ResourceManager.GetString("HeaderEquipmentValuePlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5K.
+        /// </summary>
+        public static string HeaderFiveKills {
+            get {
+                return ResourceManager.GetString("HeaderFiveKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flasher \ Flashed.
+        /// </summary>
+        public static string HeaderFlasherFlashed {
+            get {
+                return ResourceManager.GetString("HeaderFlasherFlashed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4K.
+        /// </summary>
+        public static string HeaderFourKills {
+            get {
+                return ResourceManager.GetString("HeaderFourKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FR.
+        /// </summary>
+        public static string HeaderFramerate {
+            get {
+                return ResourceManager.GetString("HeaderFramerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Game ban.
+        /// </summary>
+        public static string HeaderGameBan {
+            get {
+                return ResourceManager.GetString("HeaderGameBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HS.
+        /// </summary>
+        public static string HeaderHeadshots {
+            get {
+                return ResourceManager.GetString("HeaderHeadshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HS %.
+        /// </summary>
+        public static string HeaderHeadshotsPercent {
+            get {
+                return ResourceManager.GetString("HeaderHeadshotsPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hits.
+        /// </summary>
+        public static string HeaderHits {
+            get {
+                return ResourceManager.GetString("HeaderHits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLTV.
+        /// </summary>
+        public static string HeaderHltvRating {
+            get {
+                return ResourceManager.GetString("HeaderHltvRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HS%.
+        /// </summary>
+        public static string HeaderHsPercent {
+            get {
+                return ResourceManager.GetString("HeaderHsPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JK.
+        /// </summary>
+        public static string HeaderJumpKills {
+            get {
+                return ResourceManager.GetString("HeaderJumpKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K/D.
+        /// </summary>
+        public static string HeaderKillDeathRatio {
+            get {
+                return ResourceManager.GetString("HeaderKillDeathRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Killer.
+        /// </summary>
+        public static string HeaderKiller {
+            get {
+                return ResourceManager.GetString("HeaderKiller", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KS.
+        /// </summary>
+        public static string HeaderKillerSide {
+            get {
+                return ResourceManager.GetString("HeaderKillerSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K.
+        /// </summary>
+        public static string HeaderKills {
+            get {
+                return ResourceManager.GetString("HeaderKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KPR.
+        /// </summary>
+        public static string HeaderKillsPerRound {
+            get {
+                return ResourceManager.GetString("HeaderKillsPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KK.
+        /// </summary>
+        public static string HeaderKnifeKills {
+            get {
+                return ResourceManager.GetString("HeaderKnifeKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last connection.
+        /// </summary>
+        public static string HeaderLastConnection {
+            get {
+                return ResourceManager.GetString("HeaderLastConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Killer \ Victim.
+        /// </summary>
+        public static string HeaderMatrixKillerVictim {
+            get {
+                return ResourceManager.GetString("HeaderMatrixKillerVictim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nickname.
+        /// </summary>
+        public static string HeaderNickname {
+            get {
+                return ResourceManager.GetString("HeaderNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1K.
+        /// </summary>
+        public static string HeaderOneKill {
+            get {
+                return ResourceManager.GetString("HeaderOneKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1VX.
+        /// </summary>
+        public static string HeaderOneVersusX {
+            get {
+                return ResourceManager.GetString("HeaderOneVersusX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OW.
+        /// </summary>
+        public static string HeaderOverwatch {
+            get {
+                return ResourceManager.GetString("HeaderOverwatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player name.
+        /// </summary>
+        public static string HeaderPlayerName {
+            get {
+                return ResourceManager.GetString("HeaderPlayerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile setup.
+        /// </summary>
+        public static string HeaderProfileSetup {
+            get {
+                return ResourceManager.GetString("HeaderProfileSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round.
+        /// </summary>
+        public static string HeaderRound {
+            get {
+                return ResourceManager.GetString("HeaderRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RL.
+        /// </summary>
+        public static string HeaderRoundLost {
+            get {
+                return ResourceManager.GetString("HeaderRoundLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RP.
+        /// </summary>
+        public static string HeaderRoundPlayed {
+            get {
+                return ResourceManager.GetString("HeaderRoundPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RW.
+        /// </summary>
+        public static string HeaderRoundWon {
+            get {
+                return ResourceManager.GetString("HeaderRoundWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ST1.
+        /// </summary>
+        public static string HeaderScoreTeam1 {
+            get {
+                return ResourceManager.GetString("HeaderScoreTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ST2.
+        /// </summary>
+        public static string HeaderScoreTeam2 {
+            get {
+                return ResourceManager.GetString("HeaderScoreTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shots.
+        /// </summary>
+        public static string HeaderShots {
+            get {
+                return ResourceManager.GetString("HeaderShots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ST.
+        /// </summary>
+        public static string HeaderSideTrouble {
+            get {
+                return ResourceManager.GetString("HeaderSideTrouble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SM ($).
+        /// </summary>
+        public static string HeaderStartMoneyPlayer {
+            get {
+                return ResourceManager.GetString("HeaderStartMoneyPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SM Team 1 ($).
+        /// </summary>
+        public static string HeaderStartMoneyTeam1 {
+            get {
+                return ResourceManager.GetString("HeaderStartMoneyTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SM Team 2 ($).
+        /// </summary>
+        public static string HeaderStartMoneyTeam2 {
+            get {
+                return ResourceManager.GetString("HeaderStartMoneyTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FF.
+        /// </summary>
+        public static string HeaderTeamKill {
+            get {
+                return ResourceManager.GetString("HeaderTeamKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team name.
+        /// </summary>
+        public static string HeaderTeamName {
+            get {
+                return ResourceManager.GetString("HeaderTeamName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TT.
+        /// </summary>
+        public static string HeaderTeamTrouble {
+            get {
+                return ResourceManager.GetString("HeaderTeamTrouble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3K.
+        /// </summary>
+        public static string HeaderThreeKills {
+            get {
+                return ResourceManager.GetString("HeaderThreeKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thrower.
+        /// </summary>
+        public static string HeaderThrower {
+            get {
+                return ResourceManager.GetString("HeaderThrower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TR.
+        /// </summary>
+        public static string HeaderTickrate {
+            get {
+                return ResourceManager.GetString("HeaderTickrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account&apos;s Nickname.
+        /// </summary>
+        public static string HeaderToolTipAccountNickname {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAccountNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account&apos;s Profile URL.
+        /// </summary>
+        public static string HeaderToolTipAccountProfileUrl {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAccountProfileUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account&apos;s Status (offline, online...).
+        /// </summary>
+        public static string HeaderToolTipAccountStatus {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAccountStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account VAC Banned.
+        /// </summary>
+        public static string HeaderToolTipAccountVacBanned {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAccountVacBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account&apos;s Visibility Status.
+        /// </summary>
+        public static string HeaderToolTipAccountVisibilityStatus {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAccountVisibilityStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assister Name.
+        /// </summary>
+        public static string HeaderToolTipAssisterName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAssisterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assists.
+        /// </summary>
+        public static string HeaderToolTipAssists {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAssists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assist Per Round.
+        /// </summary>
+        public static string HeaderToolTipAssistsPerRound {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAssistsPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Damage Per Player.
+        /// </summary>
+        public static string HeaderToolTipAverageDamagePerPlayer {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAverageDamagePerPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Damage Per Round.
+        /// </summary>
+        public static string HeaderToolTipAverageDamagePerRound {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAverageDamagePerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb Defused.
+        /// </summary>
+        public static string HeaderToolTipBombDefused {
+            get {
+                return ResourceManager.GetString("HeaderToolTipBombDefused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb Exploded.
+        /// </summary>
+        public static string HeaderToolTipBombExploded {
+            get {
+                return ResourceManager.GetString("HeaderToolTipBombExploded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bomb Planted.
+        /// </summary>
+        public static string HeaderToolTipBombPlanted {
+            get {
+                return ResourceManager.GetString("HeaderToolTipBombPlanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of clutch.
+        /// </summary>
+        public static string HeaderToolTipClutchCount {
+            get {
+                return ResourceManager.GetString("HeaderToolTipClutchCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of clutch won.
+        /// </summary>
+        public static string HeaderToolTipClutchWonCount {
+            get {
+                return ResourceManager.GetString("HeaderToolTipClutchWonCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community Banned.
+        /// </summary>
+        public static string HeaderToolTipCommunityBanned {
+            get {
+                return ResourceManager.GetString("HeaderToolTipCommunityBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Community Profile Configured.
+        /// </summary>
+        public static string HeaderToolTipCommunityProfileConfigured {
+            get {
+                return ResourceManager.GetString("HeaderToolTipCommunityProfileConfigured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Crouch kills.
+        /// </summary>
+        public static string HeaderToolTipCrouchKills {
+            get {
+                return ResourceManager.GetString("HeaderToolTipCrouchKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days Since Last Ban.
+        /// </summary>
+        public static string HeaderToolTipDaysSinceLastBan {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDaysSinceLastBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deaths.
+        /// </summary>
+        public static string HeaderToolTipDeaths {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Death Per Round.
+        /// </summary>
+        public static string HeaderToolTipDeathsPerRound {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDeathsPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s clientname.
+        /// </summary>
+        public static string HeaderToolTipDemoClientname {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoClientname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s comment.
+        /// </summary>
+        public static string HeaderToolTipDemoComment {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s date.
+        /// </summary>
+        public static string HeaderToolTipDemoDate {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s duration.
+        /// </summary>
+        public static string HeaderToolTipDemoDuration {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s framerate.
+        /// </summary>
+        public static string HeaderToolTipDemoFramerate {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoFramerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s hostname.
+        /// </summary>
+        public static string HeaderToolTipDemoHostname {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoHostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s name.
+        /// </summary>
+        public static string HeaderToolTipDemoName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s source.
+        /// </summary>
+        public static string HeaderToolTipDemoSource {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s ticks.
+        /// </summary>
+        public static string HeaderToolTipDemoTicks {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoTicks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s type.
+        /// </summary>
+        public static string HeaderToolTipDemoType {
+            get {
+                return ResourceManager.GetString("HeaderToolTipDemoType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Entry Kill.
+        /// </summary>
+        public static string HeaderToolTipEntryKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipEntryKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipment Value.
+        /// </summary>
+        public static string HeaderToolTipEquipmentValue {
+            get {
+                return ResourceManager.GetString("HeaderToolTipEquipmentValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipement Value Team 1 ($).
+        /// </summary>
+        public static string HeaderToolTipEquipmentValueTeam1 {
+            get {
+                return ResourceManager.GetString("HeaderToolTipEquipmentValueTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Equipement Value Team 2 ($).
+        /// </summary>
+        public static string HeaderToolTipEquipmentValueTeam2 {
+            get {
+                return ResourceManager.GetString("HeaderToolTipEquipmentValueTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 Kills.
+        /// </summary>
+        public static string HeaderToolTipFiveKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipFiveKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 Kills.
+        /// </summary>
+        public static string HeaderToolTipFourKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipFourKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAC / OW ban?.
+        /// </summary>
+        public static string HeaderToolTipHasVacOwBan {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHasVacOwBan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has Won Clutch?.
+        /// </summary>
+        public static string HeaderToolTipHasWonClutch {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHasWonClutch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Has Won Duel?.
+        /// </summary>
+        public static string HeaderToolTipHasWonDuel {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHasWonDuel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headshot percent.
+        /// </summary>
+        public static string HeaderToolTipHeadshotPercent {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHeadshotPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headshots.
+        /// </summary>
+        public static string HeaderToolTipHeadshots {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHeadshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hits.
+        /// </summary>
+        public static string HeaderToolTipHits {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLTV Rating.
+        /// </summary>
+        public static string HeaderToolTipHltvRating {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHltvRating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overwatch banned?.
+        /// </summary>
+        public static string HeaderToolTipIsOwBanned {
+            get {
+                return ResourceManager.GetString("HeaderToolTipIsOwBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VAC banned?.
+        /// </summary>
+        public static string HeaderToolTipIsVacBanned {
+            get {
+                return ResourceManager.GetString("HeaderToolTipIsVacBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jump Kills.
+        /// </summary>
+        public static string HeaderToolTipJumpKills {
+            get {
+                return ResourceManager.GetString("HeaderToolTipJumpKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Killer Name.
+        /// </summary>
+        public static string HeaderToolTipKillerName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKillerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Killer Side.
+        /// </summary>
+        public static string HeaderToolTipKillerSide {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKillerSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kill Per Round.
+        /// </summary>
+        public static string HeaderToolTipKillPerRound {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKillPerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kills.
+        /// </summary>
+        public static string HeaderToolTipKills {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kills Per Deaths.
+        /// </summary>
+        public static string HeaderToolTipKillsPerDeaths {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKillsPerDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Knife Kills.
+        /// </summary>
+        public static string HeaderToolTipKnifeKills {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKnifeKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last online.
+        /// </summary>
+        public static string HeaderToolTipLastConnexion {
+            get {
+                return ResourceManager.GetString("HeaderToolTipLastConnexion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map&apos;s name.
+        /// </summary>
+        public static string HeaderToolTipMapName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipMapName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Market Banned.
+        /// </summary>
+        public static string HeaderToolTipMarketBanned {
+            get {
+                return ResourceManager.GetString("HeaderToolTipMarketBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most Valuable Player.
+        /// </summary>
+        public static string HeaderToolTipMvp {
+            get {
+                return ResourceManager.GetString("HeaderToolTipMvp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number.
+        /// </summary>
+        public static string HeaderToolTipNumber {
+            get {
+                return ResourceManager.GetString("HeaderToolTipNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Kill.
+        /// </summary>
+        public static string HeaderToolTipOneKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 versus 5.
+        /// </summary>
+        public static string HeaderToolTipOneVersusFive {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneVersusFive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 versus 4.
+        /// </summary>
+        public static string HeaderToolTipOneVersusFour {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneVersusFour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 versus 1.
+        /// </summary>
+        public static string HeaderToolTipOneVersusOne {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneVersusOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 versus 3.
+        /// </summary>
+        public static string HeaderToolTipOneVersusThree {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneVersusThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 versus 2.
+        /// </summary>
+        public static string HeaderToolTipOneVersusTwo {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneVersusTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1vX.
+        /// </summary>
+        public static string HeaderToolTipOneVersusX {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOneVersusX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of overwatch ban.
+        /// </summary>
+        public static string HeaderToolTipOverwatchGameBanCount {
+            get {
+                return ResourceManager.GetString("HeaderToolTipOverwatchGameBanCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player&apos;s avatar.
+        /// </summary>
+        public static string HeaderToolTipPlayerAvatar {
+            get {
+                return ResourceManager.GetString("HeaderToolTipPlayerAvatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total flashbang thrown by the player.
+        /// </summary>
+        public static string HeaderToolTipPlayerFlashbangThrown {
+            get {
+                return ResourceManager.GetString("HeaderToolTipPlayerFlashbangThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player&apos;s name.
+        /// </summary>
+        public static string HeaderToolTipPlayerName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipPlayerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player&apos;s rank.
+        /// </summary>
+        public static string HeaderToolTipPlayerRank {
+            get {
+                return ResourceManager.GetString("HeaderToolTipPlayerRank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ratio.
+        /// </summary>
+        public static string HeaderToolTipRatio {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRatio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Result.
+        /// </summary>
+        public static string HeaderToolTipResult {
+            get {
+                return ResourceManager.GetString("HeaderToolTipResult", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round Lost.
+        /// </summary>
+        public static string HeaderToolTipRoundLost {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRoundLost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round Number.
+        /// </summary>
+        public static string HeaderToolTipRoundNumber {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRoundNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round Played.
+        /// </summary>
+        public static string HeaderToolTipRoundPlayed {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRoundPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round Type (normal / eco / force buy / semi-eco).
+        /// </summary>
+        public static string HeaderToolTipRoundType {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRoundType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round Won.
+        /// </summary>
+        public static string HeaderToolTipRoundWon {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRoundWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ESEA RWS (Round Win Share).
+        /// </summary>
+        public static string HeaderToolTipRws {
+            get {
+                return ResourceManager.GetString("HeaderToolTipRws", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        public static string HeaderToolTipScore {
+            get {
+                return ResourceManager.GetString("HeaderToolTipScore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score Team 1.
+        /// </summary>
+        public static string HeaderToolTipScoreTeam1 {
+            get {
+                return ResourceManager.GetString("HeaderToolTipScoreTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score Team 2.
+        /// </summary>
+        public static string HeaderToolTipScoreTeam2 {
+            get {
+                return ResourceManager.GetString("HeaderToolTipScoreTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server tickrate.
+        /// </summary>
+        public static string HeaderToolTipServerTickrate {
+            get {
+                return ResourceManager.GetString("HeaderToolTipServerTickrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shots fired.
+        /// </summary>
+        public static string HeaderToolTipShotsFired {
+            get {
+                return ResourceManager.GetString("HeaderToolTipShotsFired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Side on eco / force buy or semi-eco.
+        /// </summary>
+        public static string HeaderToolTipSideTrouble {
+            get {
+                return ResourceManager.GetString("HeaderToolTipSideTrouble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Money.
+        /// </summary>
+        public static string HeaderToolTipStartMoney {
+            get {
+                return ResourceManager.GetString("HeaderToolTipStartMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Money Team 1 ($).
+        /// </summary>
+        public static string HeaderToolTipStartMoneyTeam1 {
+            get {
+                return ResourceManager.GetString("HeaderToolTipStartMoneyTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Money Team 2 ($).
+        /// </summary>
+        public static string HeaderToolTipStartMoneyTeam2 {
+            get {
+                return ResourceManager.GetString("HeaderToolTipStartMoneyTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team 1 name.
+        /// </summary>
+        public static string HeaderToolTipTeam1Name {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTeam1Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team 2 name.
+        /// </summary>
+        public static string HeaderToolTipTeam2Name {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTeam2Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total flashbang thrown by the team.
+        /// </summary>
+        public static string HeaderToolTipTeamFlashbangThrown {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTeamFlashbangThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team Kill (Friendly Fire).
+        /// </summary>
+        public static string HeaderToolTipTeamKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTeamKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team Name.
+        /// </summary>
+        public static string HeaderToolTipTeamName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTeamName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team&apos;s mame on eco / force buy or semi-eco.
+        /// </summary>
+        public static string HeaderToolTipTeamNameTrouble {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTeamNameTrouble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 Kills.
+        /// </summary>
+        public static string HeaderToolTipThreeKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipThreeKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thrower Name.
+        /// </summary>
+        public static string HeaderToolTipThrowerName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipThrowerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tick.
+        /// </summary>
+        public static string HeaderToolTipTick {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Damage Armor.
+        /// </summary>
+        public static string HeaderToolTipTotalDamageArmor {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTotalDamageArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Damage Health.
+        /// </summary>
+        public static string HeaderToolTipTotalDamageHealth {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTotalDamageHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Entry Kill.
+        /// </summary>
+        public static string HeaderToolTipTotalEntryKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTotalEntryKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade death.
+        /// </summary>
+        public static string HeaderToolTipTradeDeath {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTradeDeath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade kill.
+        /// </summary>
+        public static string HeaderToolTipTradeKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTradeKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade Kill / Death.
+        /// </summary>
+        public static string HeaderToolTipTradeKillsDeaths {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTradeKillsDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 Kills.
+        /// </summary>
+        public static string HeaderToolTipTwoKill {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTwoKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of VAC ban.
+        /// </summary>
+        public static string HeaderToolTipVacBanCount {
+            get {
+                return ResourceManager.GetString("HeaderToolTipVacBanCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Victim Name.
+        /// </summary>
+        public static string HeaderToolTipVictimName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipVictimName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapon&apos;s name.
+        /// </summary>
+        public static string HeaderToolTipWeaponName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipWeaponName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winner.
+        /// </summary>
+        public static string HeaderToolTipWinner {
+            get {
+                return ResourceManager.GetString("HeaderToolTipWinner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winner Team Name.
+        /// </summary>
+        public static string HeaderToolTipWinnerTeamName {
+            get {
+                return ResourceManager.GetString("HeaderToolTipWinnerTeamName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win/Lose/Draw.
+        /// </summary>
+        public static string HeaderToolTipWinStatus {
+            get {
+                return ResourceManager.GetString("HeaderToolTipWinStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round Won?.
+        /// </summary>
+        public static string HeaderToolTipWonRound {
+            get {
+                return ResourceManager.GetString("HeaderToolTipWonRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TDA.
+        /// </summary>
+        public static string HeaderTotalDamagesArmor {
+            get {
+                return ResourceManager.GetString("HeaderTotalDamagesArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TDH.
+        /// </summary>
+        public static string HeaderTotalDamagesHealth {
+            get {
+                return ResourceManager.GetString("HeaderTotalDamagesHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TD.
+        /// </summary>
+        public static string HeaderTradeDeaths {
+            get {
+                return ResourceManager.GetString("HeaderTradeDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TK.
+        /// </summary>
+        public static string HeaderTradeKills {
+            get {
+                return ResourceManager.GetString("HeaderTradeKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2K.
+        /// </summary>
+        public static string HeaderTwoKills {
+            get {
+                return ResourceManager.GetString("HeaderTwoKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Victim.
+        /// </summary>
+        public static string HeaderVictim {
+            get {
+                return ResourceManager.GetString("HeaderVictim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapon.
+        /// </summary>
+        public static string HeaderWeapon {
+            get {
+                return ResourceManager.GetString("HeaderWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WS.
+        /// </summary>
+        public static string HeaderWinnerSide {
+            get {
+                return ResourceManager.GetString("HeaderWinnerSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WTN.
+        /// </summary>
+        public static string HeaderWinnerTeamName {
+            get {
+                return ResourceManager.GetString("HeaderWinnerTeamName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Won.
+        /// </summary>
+        public static string HeaderWon {
+            get {
+                return ResourceManager.GetString("HeaderWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headshot % per match.
+        /// </summary>
+        public static string HeadshotPercentPerMatch {
+            get {
+                return ResourceManager.GetString("HeadshotPercentPerMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headshots.
+        /// </summary>
+        public static string Headshots {
+            get {
+                return ResourceManager.GetString("Headshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HS (Headshots).
+        /// </summary>
+        public static string HeadshotsFull {
+            get {
+                return ResourceManager.GetString("HeadshotsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headshots %.
+        /// </summary>
+        public static string HeadshotsPercent {
+            get {
+                return ResourceManager.GetString("HeadshotsPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Health damages.
+        /// </summary>
+        public static string HealthDamages {
+            get {
+                return ResourceManager.GetString("HealthDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heatmap.
+        /// </summary>
+        public static string Heatmap {
+            get {
+                return ResourceManager.GetString("Heatmap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heavy.
+        /// </summary>
+        public static string Heavy {
+            get {
+                return ResourceManager.GetString("Heavy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HE Grenades.
+        /// </summary>
+        public static string HeGrenades {
+            get {
+                return ResourceManager.GetString("HeGrenades", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height.
+        /// </summary>
+        public static string Height {
+            get {
+                return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLTV (HLTV Rating).
+        /// </summary>
+        public static string HltvFull {
+            get {
+                return ResourceManager.GetString("HltvFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hostname.
+        /// </summary>
+        public static string Hostname {
+            get {
+                return ResourceManager.GetString("Hostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ignore ban occured after demo date.
+        /// </summary>
+        public static string IgnoreBanOccuredAfterDemoDate {
+            get {
+                return ResourceManager.GetString("IgnoreBanOccuredAfterDemoDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import custom data.
+        /// </summary>
+        public static string ImportCustomData {
+            get {
+                return ResourceManager.GetString("ImportCustomData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Incendiaries.
+        /// </summary>
+        public static string Incendiaries {
+            get {
+                return ResourceManager.GetString("Incendiaries", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are free to help translating the app, more information on.
+        /// </summary>
+        public static string InfomationHelpTranslatingApp {
+            get {
+                return ResourceManager.GetString("InfomationHelpTranslatingApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string Information {
+            get {
+                return ResourceManager.GetString("Information", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the app is still in english after changing the language, it means that the translation has not been done or is incomplete..
+        /// </summary>
+        public static string InformationTranslateIncomplete {
+            get {
+                return ResourceManager.GetString("InformationTranslateIncomplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Jump kills.
+        /// </summary>
+        public static string JumpKills {
+            get {
+                return ResourceManager.GetString("JumpKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to JK (Jump Kills).
+        /// </summary>
+        public static string JumpKillsFull {
+            get {
+                return ResourceManager.GetString("JumpKillsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kill.
+        /// </summary>
+        public static string Kill {
+            get {
+                return ResourceManager.GetString("Kill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kill average.
+        /// </summary>
+        public static string KillAverage {
+            get {
+                return ResourceManager.GetString("KillAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kills.
+        /// </summary>
+        public static string Kills {
+            get {
+                return ResourceManager.GetString("Kills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K/D (Kills per Deaths).
+        /// </summary>
+        public static string KillsDeathsRatioFull {
+            get {
+                return ResourceManager.GetString("KillsDeathsRatioFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to K (Kills).
+        /// </summary>
+        public static string KillsFull {
+            get {
+                return ResourceManager.GetString("KillsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KPR (Kills Per Round).
+        /// </summary>
+        public static string KillsPerRoundFull {
+            get {
+                return ResourceManager.GetString("KillsPerRoundFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kill velocity.
+        /// </summary>
+        public static string KillVelocity {
+            get {
+                return ResourceManager.GetString("KillVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clientname.
+        /// </summary>
+        public static string LabelClientname {
+            get {
+                return ResourceManager.GetString("LabelClientname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filename.
+        /// </summary>
+        public static string LabelFilename {
+            get {
+                return ResourceManager.GetString("LabelFilename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hostname.
+        /// </summary>
+        public static string LabelHostname {
+            get {
+                return ResourceManager.GetString("LabelHostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string LabelMap {
+            get {
+                return ResourceManager.GetString("LabelMap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most Bomb plants.
+        /// </summary>
+        public static string LabelMostBombPlanted {
+            get {
+                return ResourceManager.GetString("LabelMostBombPlanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most damaging weapon.
+        /// </summary>
+        public static string LabelMostDamagingWeapon {
+            get {
+                return ResourceManager.GetString("LabelMostDamagingWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most Entry Kill.
+        /// </summary>
+        public static string LabelMostEntryKills {
+            get {
+                return ResourceManager.GetString("LabelMostEntryKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most Headshots %.
+        /// </summary>
+        public static string LabelMostHsPercent {
+            get {
+                return ResourceManager.GetString("LabelMostHsPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Most killing weapon.
+        /// </summary>
+        public static string LabelMostKillingWeapon {
+            get {
+                return ResourceManager.GetString("LabelMostKillingWeapon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player stats.
+        /// </summary>
+        public static string LabelPlayerStats {
+            get {
+                return ResourceManager.GetString("LabelPlayerStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scale.
+        /// </summary>
+        public static string LabelScale {
+            get {
+                return ResourceManager.GetString("LabelScale", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Speed.
+        /// </summary>
+        public static string LabelSpeed {
+            get {
+                return ResourceManager.GetString("LabelSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string LabelStatus {
+            get {
+                return ResourceManager.GetString("LabelStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickrate.
+        /// </summary>
+        public static string LabelTickrate {
+            get {
+                return ResourceManager.GetString("LabelTickrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string LabelType {
+            get {
+                return ResourceManager.GetString("LabelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        public static string LabelVolume {
+            get {
+                return ResourceManager.GetString("LabelVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winner side.
+        /// </summary>
+        public static string LabelWinnerSide {
+            get {
+                return ResourceManager.GetString("LabelWinnerSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last rank detected.
+        /// </summary>
+        public static string LastRankDetected {
+            get {
+                return ResourceManager.GetString("LastRankDetected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Launch Options.
+        /// </summary>
+        public static string LaunchOptions {
+            get {
+                return ResourceManager.GetString("LaunchOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left arm.
+        /// </summary>
+        public static string LeftArm {
+            get {
+                return ResourceManager.GetString("LeftArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Left leg.
+        /// </summary>
+        public static string LeftLeg {
+            get {
+                return ResourceManager.GetString("LeftLeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Light.
+        /// </summary>
+        public static string Light {
+            get {
+                return ResourceManager.GetString("Light", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Limit stats to selected folder.
+        /// </summary>
+        public static string LimitStatsToSelectedFolder {
+            get {
+                return ResourceManager.GetString("LimitStatsToSelectedFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log only kills.
+        /// </summary>
+        public static string LogOnlyKills {
+            get {
+                return ResourceManager.GetString("LogOnlyKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking to play.
+        /// </summary>
+        public static string LookingToPlay {
+            get {
+                return ResourceManager.GetString("LookingToPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Looking to trade.
+        /// </summary>
+        public static string LookingToTrade {
+            get {
+                return ResourceManager.GetString("LookingToTrade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loss.
+        /// </summary>
+        public static string Loss {
+            get {
+                return ResourceManager.GetString("Loss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lost.
+        /// </summary>
+        public static string Lost {
+            get {
+                return ResourceManager.GetString("Lost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lost (S).
+        /// </summary>
+        public static string LostSurrender {
+            get {
+                return ResourceManager.GetString("LostSurrender", resourceCulture);
             }
         }
         
@@ -77,19 +4282,1261 @@ namespace Manager.Properties {
         ///	{0}
         ///}}.
         /// </summary>
-        internal static string main {
+        public static string main {
             get {
                 return ResourceManager.GetString("main", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Map.
+        /// </summary>
+        public static string Map {
+            get {
+                return ResourceManager.GetString("Map", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Map name.
+        /// </summary>
+        public static string MapName {
+            get {
+                return ResourceManager.GetString("MapName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maps.
+        /// </summary>
+        public static string Maps {
+            get {
+                return ResourceManager.GetString("Maps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches.
+        /// </summary>
+        public static string Matches {
+            get {
+                return ResourceManager.GetString("Matches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches stats.
+        /// </summary>
+        public static string MatchesStats {
+            get {
+                return ResourceManager.GetString("MatchesStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matrix.
+        /// </summary>
+        public static string Matrix {
+            get {
+                return ResourceManager.GetString("Matrix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MB.
+        /// </summary>
+        public static string MegaByte {
+            get {
+                return ResourceManager.GetString("MegaByte", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Misc.
+        /// </summary>
+        public static string Misc {
+            get {
+                return ResourceManager.GetString("Misc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap model {
+        public static System.Drawing.Bitmap model {
             get {
                 object obj = ResourceManager.GetObject("model", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Molotovs.
+        /// </summary>
+        public static string Molotovs {
+            get {
+                return ResourceManager.GetString("Molotovs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move to whitelist.
+        /// </summary>
+        public static string MoveToWhitelist {
+            get {
+                return ResourceManager.GetString("MoveToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Multiple.
+        /// </summary>
+        public static string Multiple {
+            get {
+                return ResourceManager.GetString("Multiple", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MVP.
+        /// </summary>
+        public static string MVP {
+            get {
+                return ResourceManager.GetString("MVP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MVP (Most Valuable Player).
+        /// </summary>
+        public static string MvpFull {
+            get {
+                return ResourceManager.GetString("MvpFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No analyzable demos.
+        /// </summary>
+        public static string NoAnalyzableDemos {
+            get {
+                return ResourceManager.GetString("NoAnalyzableDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not analyzable.
+        /// </summary>
+        public static string NotAnalyzable {
+            get {
+                return ResourceManager.GetString("NotAnalyzable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding account....
+        /// </summary>
+        public static string NotificationAddingAccount {
+            get {
+                return ResourceManager.GetString("NotificationAddingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding player to the account list....
+        /// </summary>
+        public static string NotificationAddingPlayerToAccountsList {
+            get {
+                return ResourceManager.GetString("NotificationAddingPlayerToAccountsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding player to suspects list....
+        /// </summary>
+        public static string NotificationAddingPlayerToSuspectsList {
+            get {
+                return ResourceManager.GetString("NotificationAddingPlayerToSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding player to whitelist....
+        /// </summary>
+        public static string NotificationAddingPlayerToWhitelist {
+            get {
+                return ResourceManager.GetString("NotificationAddingPlayerToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding suspect....
+        /// </summary>
+        public static string NotificationAddingSuspect {
+            get {
+                return ResourceManager.GetString("NotificationAddingSuspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding suspects....
+        /// </summary>
+        public static string NotificationAddingSuspects {
+            get {
+                return ResourceManager.GetString("NotificationAddingSuspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing....
+        /// </summary>
+        public static string NotificationAnalyzing {
+            get {
+                return ResourceManager.GetString("NotificationAnalyzing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing demo {0}....
+        /// </summary>
+        public static string NotificationAnalyzingDemo {
+            get {
+                return ResourceManager.GetString("NotificationAnalyzingDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing demo {0} for export....
+        /// </summary>
+        public static string NotificationAnalyzingDemoForExport {
+            get {
+                return ResourceManager.GetString("NotificationAnalyzingDemoForExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing demos for export....
+        /// </summary>
+        public static string NotificationAnalyzingDemosForExport {
+            get {
+                return ResourceManager.GetString("NotificationAnalyzingDemosForExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing demo(s) for json export....
+        /// </summary>
+        public static string NotificationAnalyzingForJsonExport {
+            get {
+                return ResourceManager.GetString("NotificationAnalyzingForJsonExport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyzing multiple demos....
+        /// </summary>
+        public static string NotificationAnalyzingMultipleDemos {
+            get {
+                return ResourceManager.GetString("NotificationAnalyzingMultipleDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelling....
+        /// </summary>
+        public static string NotificationCancelling {
+            get {
+                return ResourceManager.GetString("NotificationCancelling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for new banned suspects....
+        /// </summary>
+        public static string NotificationCheckingNewBanned {
+            get {
+                return ResourceManager.GetString("NotificationCheckingNewBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment saved..
+        /// </summary>
+        public static string NotificationCommentSaved {
+            get {
+                return ResourceManager.GetString("NotificationCommentSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloading demo {0}/{1}....
+        /// </summary>
+        public static string NotificationDownloadingDemo {
+            get {
+                return ResourceManager.GetString("NotificationDownloadingDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporting demo {0}....
+        /// </summary>
+        public static string NotificationExportingDemo {
+            get {
+                return ResourceManager.GetString("NotificationExportingDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extracting demo {0}/{1}....
+        /// </summary>
+        public static string NotificationExtractingDemo {
+            get {
+                return ResourceManager.GetString("NotificationExtractingDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generating....
+        /// </summary>
+        public static string NotificationGenerating {
+            get {
+                return ResourceManager.GetString("NotificationGenerating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generating data....
+        /// </summary>
+        public static string NotificationGeneratingData {
+            get {
+                return ResourceManager.GetString("NotificationGeneratingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Initializing cache....
+        /// </summary>
+        public static string NotificationInitCache {
+            get {
+                return ResourceManager.GetString("NotificationInitCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to in this folder.
+        /// </summary>
+        public static string NotificationInThisFolder {
+            get {
+                return ResourceManager.GetString("NotificationInThisFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        public static string NotificationLoading {
+            get {
+                return ResourceManager.GetString("NotificationLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading all demos....
+        /// </summary>
+        public static string NotificationLoadingAllDemos {
+            get {
+                return ResourceManager.GetString("NotificationLoadingAllDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading demos....
+        /// </summary>
+        public static string NotificationLoadingDemos {
+            get {
+                return ResourceManager.GetString("NotificationLoadingDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading more demos....
+        /// </summary>
+        public static string NotificationLoadingMoreDemos {
+            get {
+                return ResourceManager.GetString("NotificationLoadingMoreDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Moving suspect(s) to whitelist....
+        /// </summary>
+        public static string NotificationMovingSuspectsToWhitelist {
+            get {
+                return ResourceManager.GetString("NotificationMovingSuspectsToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No demos found.
+        /// </summary>
+        public static string NotificationNoDemosFound {
+            get {
+                return ResourceManager.GetString("NotificationNoDemosFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No demos found for this account.
+        /// </summary>
+        public static string NotificationNoDemosFoundForAccount {
+            get {
+                return ResourceManager.GetString("NotificationNoDemosFoundForAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Paused.
+        /// </summary>
+        public static string NotificationPaused {
+            get {
+                return ResourceManager.GetString("NotificationPaused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playdemo command copied to clipboard.
+        /// </summary>
+        public static string NotificationPlayDemoCommandCopied {
+            get {
+                return ResourceManager.GetString("NotificationPlayDemoCommandCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player added to suspects list..
+        /// </summary>
+        public static string NotificationPlayedAddedToSuspectsList {
+            get {
+                return ResourceManager.GetString("NotificationPlayedAddedToSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player added to the account list..
+        /// </summary>
+        public static string NotificationPlayerAddedToAccountsList {
+            get {
+                return ResourceManager.GetString("NotificationPlayerAddedToAccountsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player added to whitelist..
+        /// </summary>
+        public static string NotificationPlayerAddedToWhitelist {
+            get {
+                return ResourceManager.GetString("NotificationPlayerAddedToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player already in your whitelist..
+        /// </summary>
+        public static string NotificationPlayerAlreadyInWhitelist {
+            get {
+                return ResourceManager.GetString("NotificationPlayerAlreadyInWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Playing....
+        /// </summary>
+        public static string NotificationPlaying {
+            get {
+                return ResourceManager.GetString("NotificationPlaying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refreshing....
+        /// </summary>
+        public static string NotificationRefreshing {
+            get {
+                return ResourceManager.GetString("NotificationRefreshing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Retrieving last matches information....
+        /// </summary>
+        public static string NotificationRetrievingMatchesData {
+            get {
+                return ResourceManager.GetString("NotificationRetrievingMatchesData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching....
+        /// </summary>
+        public static string NotificationSearching {
+            get {
+                return ResourceManager.GetString("NotificationSearching", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching demos for this player....
+        /// </summary>
+        public static string NotificationSearchingDemosForPlayer {
+            get {
+                return ResourceManager.GetString("NotificationSearchingDemosForPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching account&apos;s last rank....
+        /// </summary>
+        public static string NotificationSearchingLastRank {
+            get {
+                return ResourceManager.GetString("NotificationSearchingLastRank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to setpos command copied to clipboard.
+        /// </summary>
+        public static string NotificationSetposCommandCopied {
+            get {
+                return ResourceManager.GetString("NotificationSetposCommandCopied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping analyze....
+        /// </summary>
+        public static string NotificationStoppingAnalyze {
+            get {
+                return ResourceManager.GetString("NotificationStoppingAnalyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} suspect(s) have been banned!.
+        /// </summary>
+        public static string NotificationSuspectsHaveBeenBanned {
+            get {
+                return ResourceManager.GetString("NotificationSuspectsHaveBeenBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Syncing accounts nickname....
+        /// </summary>
+        public static string NotificationSyncingAccountsNickname {
+            get {
+                return ResourceManager.GetString("NotificationSyncingAccountsNickname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating....
+        /// </summary>
+        public static string NotificationUpdating {
+            get {
+                return ResourceManager.GetString("NotificationUpdating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        public static string Offline {
+            get {
+                return ResourceManager.GetString("Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OK.
+        /// </summary>
+        public static string Ok {
+            get {
+                return ResourceManager.GetString("Ok", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V5.
+        /// </summary>
+        public static string OneVersusFive {
+            get {
+                return ResourceManager.GetString("OneVersusFive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V5 loss.
+        /// </summary>
+        public static string OneVersusFiveLoss {
+            get {
+                return ResourceManager.GetString("OneVersusFiveLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V5 won.
+        /// </summary>
+        public static string OneVersusFiveWon {
+            get {
+                return ResourceManager.GetString("OneVersusFiveWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V5 won %.
+        /// </summary>
+        public static string OneVersusFiveWonPercent {
+            get {
+                return ResourceManager.GetString("OneVersusFiveWonPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V4.
+        /// </summary>
+        public static string OneVersusFour {
+            get {
+                return ResourceManager.GetString("OneVersusFour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V4 loss.
+        /// </summary>
+        public static string OneVersusFourLoss {
+            get {
+                return ResourceManager.GetString("OneVersusFourLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V4 won.
+        /// </summary>
+        public static string OneVersusFourWon {
+            get {
+                return ResourceManager.GetString("OneVersusFourWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V4 won %.
+        /// </summary>
+        public static string OneVersusFourWonPercent {
+            get {
+                return ResourceManager.GetString("OneVersusFourWonPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V1.
+        /// </summary>
+        public static string OneVersusOne {
+            get {
+                return ResourceManager.GetString("OneVersusOne", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V1 loss.
+        /// </summary>
+        public static string OneVersusOneLoss {
+            get {
+                return ResourceManager.GetString("OneVersusOneLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V1 won.
+        /// </summary>
+        public static string OneVersusOneWon {
+            get {
+                return ResourceManager.GetString("OneVersusOneWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V1 won %.
+        /// </summary>
+        public static string OneVersusOneWonPercent {
+            get {
+                return ResourceManager.GetString("OneVersusOneWonPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V3.
+        /// </summary>
+        public static string OneVersusThree {
+            get {
+                return ResourceManager.GetString("OneVersusThree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V3 loss.
+        /// </summary>
+        public static string OneVersusThreeLoss {
+            get {
+                return ResourceManager.GetString("OneVersusThreeLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V3 won.
+        /// </summary>
+        public static string OneVersusThreeWon {
+            get {
+                return ResourceManager.GetString("OneVersusThreeWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V3 won %.
+        /// </summary>
+        public static string OneVersusThreeWonPercent {
+            get {
+                return ResourceManager.GetString("OneVersusThreeWonPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V2.
+        /// </summary>
+        public static string OneVersusTwo {
+            get {
+                return ResourceManager.GetString("OneVersusTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V2 loss.
+        /// </summary>
+        public static string OneVersusTwoLoss {
+            get {
+                return ResourceManager.GetString("OneVersusTwoLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V2 won.
+        /// </summary>
+        public static string OneVersusTwoWon {
+            get {
+                return ResourceManager.GetString("OneVersusTwoWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1V2 won %.
+        /// </summary>
+        public static string OneVersusTwoWonPercent {
+            get {
+                return ResourceManager.GetString("OneVersusTwoWonPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        public static string Online {
+            get {
+                return ResourceManager.GetString("Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Opacity.
+        /// </summary>
+        public static string Opacity {
+            get {
+                return ResourceManager.GetString("Opacity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or send an.
+        /// </summary>
+        public static string OrSendAn {
+            get {
+                return ResourceManager.GetString("OrSendAn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overall.
+        /// </summary>
+        public static string Overall {
+            get {
+                return ResourceManager.GetString("Overall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overview.
+        /// </summary>
+        public static string Overview {
+            get {
+                return ResourceManager.GetString("Overview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause.
+        /// </summary>
+        public static string Pause {
+            get {
+                return ResourceManager.GetString("Pause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percentage.
+        /// </summary>
+        public static string Percentage {
+            get {
+                return ResourceManager.GetString("Percentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pistol.
+        /// </summary>
+        public static string Pistol {
+            get {
+                return ResourceManager.GetString("Pistol", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pistoles.
+        /// </summary>
+        public static string Pistoles {
+            get {
+                return ResourceManager.GetString("Pistoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play.
+        /// </summary>
+        public static string Play {
+            get {
+                return ResourceManager.GetString("Play", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player.
+        /// </summary>
+        public static string Player {
+            get {
+                return ResourceManager.GetString("Player", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player details.
+        /// </summary>
+        public static string PlayerDetails {
+            get {
+                return ResourceManager.GetString("PlayerDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player POV.
+        /// </summary>
+        public static string PlayerPov {
+            get {
+                return ResourceManager.GetString("PlayerPov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players.
+        /// </summary>
+        public static string Players {
+            get {
+                return ResourceManager.GetString("Players", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to POV.
+        /// </summary>
+        public static string Pov {
+            get {
+                return ResourceManager.GetString("Pov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        public static string Private {
+            get {
+                return ResourceManager.GetString("Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Probation.
+        /// </summary>
+        public static string Probation {
+            get {
+                return ResourceManager.GetString("Probation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string Profile {
+            get {
+                return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Progression.
+        /// </summary>
+        public static string Progression {
+            get {
+                return ResourceManager.GetString("Progression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public.
+        /// </summary>
+        public static string Public {
+            get {
+                return ResourceManager.GetString("Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank.
+        /// </summary>
+        public static string Rank {
+            get {
+                return ResourceManager.GetString("Rank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ratio.
+        /// </summary>
+        public static string Ratio {
+            get {
+                return ResourceManager.GetString("Ratio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason.
+        /// </summary>
+        public static string Reason {
+            get {
+                return ResourceManager.GetString("Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh.
+        /// </summary>
+        public static string Refresh {
+            get {
+                return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove account.
+        /// </summary>
+        public static string RemoveAccount {
+            get {
+                return ResourceManager.GetString("RemoveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove folder.
+        /// </summary>
+        public static string RemoveFolder {
+            get {
+                return ResourceManager.GetString("RemoveFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove from cache.
+        /// </summary>
+        public static string RemoveFromCache {
+            get {
+                return ResourceManager.GetString("RemoveFromCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rifle.
+        /// </summary>
+        public static string Rifle {
+            get {
+                return ResourceManager.GetString("Rifle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rifles.
+        /// </summary>
+        public static string Rifles {
+            get {
+                return ResourceManager.GetString("Rifles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right arm.
+        /// </summary>
+        public static string RightArm {
+            get {
+                return ResourceManager.GetString("RightArm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Right leg.
+        /// </summary>
+        public static string RightLeg {
+            get {
+                return ResourceManager.GetString("RightLeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round.
+        /// </summary>
+        public static string Round {
+            get {
+                return ResourceManager.GetString("Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round details.
+        /// </summary>
+        public static string RoundDetails {
+            get {
+                return ResourceManager.GetString("RoundDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round played.
+        /// </summary>
+        public static string RoundPlayed {
+            get {
+                return ResourceManager.GetString("RoundPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RP (Round Played).
+        /// </summary>
+        public static string RoundPlayedFull {
+            get {
+                return ResourceManager.GetString("RoundPlayedFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rounds.
+        /// </summary>
+        public static string Rounds {
+            get {
+                return ResourceManager.GetString("Rounds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round type.
+        /// </summary>
+        public static string RoundType {
+            get {
+                return ResourceManager.GetString("RoundType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Eco.
+        /// </summary>
+        public static string RoundTypeEco {
+            get {
+                return ResourceManager.GetString("RoundTypeEco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Force buy.
+        /// </summary>
+        public static string RoundTypeForceBuy {
+            get {
+                return ResourceManager.GetString("RoundTypeForceBuy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        public static string RoundTypeNormal {
+            get {
+                return ResourceManager.GetString("RoundTypeNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pistol round.
+        /// </summary>
+        public static string RoundTypePistolRound {
+            get {
+                return ResourceManager.GetString("RoundTypePistolRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Semi-Eco.
+        /// </summary>
+        public static string RoundTypeSemiEco {
+            get {
+                return ResourceManager.GetString("RoundTypeSemiEco", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RWS.
+        /// </summary>
+        public static string RWS {
+            get {
+                return ResourceManager.GetString("RWS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save comment.
+        /// </summary>
+        public static string SaveComment {
+            get {
+                return ResourceManager.GetString("SaveComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save here.
+        /// </summary>
+        public static string SaveHere {
+            get {
+                return ResourceManager.GetString("SaveHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score.
+        /// </summary>
+        public static string Score {
+            get {
+                return ResourceManager.GetString("Score", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score team 1.
+        /// </summary>
+        public static string ScoreTeam1 {
+            get {
+                return ResourceManager.GetString("ScoreTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ST1 (Score Team 1).
+        /// </summary>
+        public static string ScoreTeam1Full {
+            get {
+                return ResourceManager.GetString("ScoreTeam1Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Score team 2.
+        /// </summary>
+        public static string ScoreTeam2 {
+            get {
+                return ResourceManager.GetString("ScoreTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ST2 (Score Team 2).
+        /// </summary>
+        public static string ScoreTeam2Full {
+            get {
+                return ResourceManager.GetString("ScoreTeam2Full", resourceCulture);
             }
         }
         
@@ -109,9 +5556,153 @@ namespace Manager.Properties {
         ///		a &quot;255&quot;
         ///	}}.
         /// </summary>
-        internal static string screen_fade_start {
+        public static string screen_fade_start {
             get {
                 return ResourceManager.GetString("screen_fade_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection.
+        /// </summary>
+        public static string Selection {
+            get {
+                return ResourceManager.GetString("Selection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shots fired.
+        /// </summary>
+        public static string ShotsFired {
+            get {
+                return ResourceManager.GetString("ShotsFired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show All.
+        /// </summary>
+        public static string ShowAll {
+            get {
+                return ResourceManager.GetString("ShowAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all folders.
+        /// </summary>
+        public static string ShowAllFolders {
+            get {
+                return ResourceManager.GetString("ShowAllFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show More Demos.
+        /// </summary>
+        public static string ShowMoreDemos {
+            get {
+                return ResourceManager.GetString("ShowMoreDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Only Account Demos.
+        /// </summary>
+        public static string ShowOnlyAccountDemos {
+            get {
+                return ResourceManager.GetString("ShowOnlyAccountDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show only banned.
+        /// </summary>
+        public static string ShowOnlyBanned {
+            get {
+                return ResourceManager.GetString("ShowOnlyBanned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show player demos.
+        /// </summary>
+        public static string ShowPlayerDemos {
+            get {
+                return ResourceManager.GetString("ShowPlayerDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show suspect demos.
+        /// </summary>
+        public static string ShowSuspectDemos {
+            get {
+                return ResourceManager.GetString("ShowSuspectDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show suspect(s) demos.
+        /// </summary>
+        public static string ShowSuspectsDemos {
+            get {
+                return ResourceManager.GetString("ShowSuspectsDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Side.
+        /// </summary>
+        public static string Side {
+            get {
+                return ResourceManager.GetString("Side", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sides.
+        /// </summary>
+        public static string Sides {
+            get {
+                return ResourceManager.GetString("Sides", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Side trouble.
+        /// </summary>
+        public static string SideTrouble {
+            get {
+                return ResourceManager.GetString("SideTrouble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ST (Side Trouble).
+        /// </summary>
+        public static string SideTroubleFull {
+            get {
+                return ResourceManager.GetString("SideTroubleFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single.
+        /// </summary>
+        public static string Single {
+            get {
+                return ResourceManager.GetString("Single", resourceCulture);
             }
         }
         
@@ -124,9 +5715,99 @@ namespace Manager.Properties {
         ///		skiptotick &quot;{2}&quot;
         ///	}}.
         /// </summary>
-        internal static string skip_ahead {
+        public static string skip_ahead {
             get {
                 return ResourceManager.GetString("skip_ahead", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMG.
+        /// </summary>
+        public static string Smg {
+            get {
+                return ResourceManager.GetString("Smg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMGs.
+        /// </summary>
+        public static string Smgs {
+            get {
+                return ResourceManager.GetString("Smgs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smoke.
+        /// </summary>
+        public static string Smoke {
+            get {
+                return ResourceManager.GetString("Smoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smokes.
+        /// </summary>
+        public static string Smokes {
+            get {
+                return ResourceManager.GetString("Smokes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sniper.
+        /// </summary>
+        public static string Sniper {
+            get {
+                return ResourceManager.GetString("Sniper", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snipers.
+        /// </summary>
+        public static string Snipers {
+            get {
+                return ResourceManager.GetString("Snipers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Snooze.
+        /// </summary>
+        public static string Snooze {
+            get {
+                return ResourceManager.GetString("Snooze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source.
+        /// </summary>
+        public static string Source {
+            get {
+                return ResourceManager.GetString("Source", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Source code is available on.
+        /// </summary>
+        public static string SourceCodeAvailable {
+            get {
+                return ResourceManager.GetString("SourceCodeAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SPEC.
+        /// </summary>
+        public static string Spec {
+            get {
+                return ResourceManager.GetString("Spec", resourceCulture);
             }
         }
         
@@ -139,9 +5820,99 @@ namespace Manager.Properties {
         ///		commands &quot;spec_player_by_accountid {2}&quot;
         ///	}}.
         /// </summary>
-        internal static string spec_player {
+        public static string spec_player {
             get {
                 return ResourceManager.GetString("spec_player", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start BOT on launch.
+        /// </summary>
+        public static string StartBotOnLaunch {
+            get {
+                return ResourceManager.GetString("StartBotOnLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start money.
+        /// </summary>
+        public static string StartMoney {
+            get {
+                return ResourceManager.GetString("StartMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start money team 1.
+        /// </summary>
+        public static string StartMoneyTeam1 {
+            get {
+                return ResourceManager.GetString("StartMoneyTeam1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMT1 (Start Money Team 1 ($)).
+        /// </summary>
+        public static string StartMoneyTeam1Full {
+            get {
+                return ResourceManager.GetString("StartMoneyTeam1Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start money team 2.
+        /// </summary>
+        public static string StartMoneyTeam2 {
+            get {
+                return ResourceManager.GetString("StartMoneyTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SMT2 (Start Money Team 2 ($)).
+        /// </summary>
+        public static string StartMoneyTeam2Full {
+            get {
+                return ResourceManager.GetString("StartMoneyTeam2Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stats.
+        /// </summary>
+        public static string Stats {
+            get {
+                return ResourceManager.GetString("Stats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string Status {
+            get {
+                return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stomach.
+        /// </summary>
+        public static string Stomach {
+            get {
+                return ResourceManager.GetString("Stomach", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop.
+        /// </summary>
+        public static string Stop {
+            get {
+                return ResourceManager.GetString("Stop", resourceCulture);
             }
         }
         
@@ -153,9 +5924,135 @@ namespace Manager.Properties {
         ///		starttick &quot;{1}&quot;
         ///	}}.
         /// </summary>
-        internal static string stop_playback {
+        public static string stop_playback {
             get {
                 return ResourceManager.GetString("stop_playback", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stuffs.
+        /// </summary>
+        public static string Stuffs {
+            get {
+                return ResourceManager.GetString("Stuffs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stuffs Thrown.
+        /// </summary>
+        public static string StuffsThrown {
+            get {
+                return ResourceManager.GetString("StuffsThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Suspects.
+        /// </summary>
+        public static string Suspects {
+            get {
+                return ResourceManager.GetString("Suspects", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sync nicknames.
+        /// </summary>
+        public static string SyncNicknames {
+            get {
+                return ResourceManager.GetString("SyncNicknames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to T.
+        /// </summary>
+        public static string T {
+            get {
+                return ResourceManager.GetString("T", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team.
+        /// </summary>
+        public static string Team {
+            get {
+                return ResourceManager.GetString("Team", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team 1.
+        /// </summary>
+        public static string Team1 {
+            get {
+                return ResourceManager.GetString("Team1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team 1 name.
+        /// </summary>
+        public static string Team1Name {
+            get {
+                return ResourceManager.GetString("Team1Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team 2.
+        /// </summary>
+        public static string Team2 {
+            get {
+                return ResourceManager.GetString("Team2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team 2 name.
+        /// </summary>
+        public static string Team2Name {
+            get {
+                return ResourceManager.GetString("Team2Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TNT (Team Name Trouble).
+        /// </summary>
+        public static string TeamNameTroubleFull {
+            get {
+                return ResourceManager.GetString("TeamNameTroubleFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teams.
+        /// </summary>
+        public static string Teams {
+            get {
+                return ResourceManager.GetString("Teams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Team trouble.
+        /// </summary>
+        public static string TeamTrouble {
+            get {
+                return ResourceManager.GetString("TeamTrouble", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Terrorists.
+        /// </summary>
+        public static string Terrorists {
+            get {
+                return ResourceManager.GetString("Terrorists", resourceCulture);
             }
         }
         
@@ -184,9 +6081,1361 @@ namespace Manager.Properties {
         ///		a2 &quot;0&quot;
         ///	}}.
         /// </summary>
-        internal static string text_message_start {
+        public static string text_message_start {
             get {
                 return ResourceManager.GetString("text_message_start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string Theme {
+            get {
+                return ResourceManager.GetString("Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tick.
+        /// </summary>
+        public static string Tick {
+            get {
+                return ResourceManager.GetString("Tick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickrate.
+        /// </summary>
+        public static string Tickrate {
+            get {
+                return ResourceManager.GetString("Tickrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TR (Tickrate).
+        /// </summary>
+        public static string TickrateFull {
+            get {
+                return ResourceManager.GetString("TickrateFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticks.
+        /// </summary>
+        public static string Ticks {
+            get {
+                return ResourceManager.GetString("Ticks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline.
+        /// </summary>
+        public static string Timeline {
+            get {
+                return ResourceManager.GetString("Timeline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This graph displays your average velocity when you killed someone by weapon group.
+        /// </summary>
+        public static string TipsGraphAverageKillVelocity {
+            get {
+                return ResourceManager.GetString("TipsGraphAverageKillVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information : The maximum velocity while running is 250 unit/s.
+        /// </summary>
+        public static string TipsMaximumVelocity {
+            get {
+                return ResourceManager.GetString("TipsMaximumVelocity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TK (Team Kill).
+        /// </summary>
+        public static string TkFull {
+            get {
+                return ResourceManager.GetString("TkFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to about.
+        /// </summary>
+        public static string ToolTipAbout {
+            get {
+                return ResourceManager.GetString("ToolTipAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account stats (CTRL+E).
+        /// </summary>
+        public static string ToolTipAccountStats {
+            get {
+                return ResourceManager.GetString("ToolTipAccountStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add all players seen to list (CTRL+G).
+        /// </summary>
+        public static string ToolTipAddAllPlayersSeen {
+            get {
+                return ResourceManager.GetString("ToolTipAddAllPlayersSeen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add player to suspects list (CTRL+S).
+        /// </summary>
+        public static string ToolTipAddPlayerToSuspectsList {
+            get {
+                return ResourceManager.GetString("ToolTipAddPlayerToSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add player to whitelist (CTRL+W).
+        /// </summary>
+        public static string ToolTipAddPlayerToWhiteList {
+            get {
+                return ResourceManager.GetString("ToolTipAddPlayerToWhiteList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add players to suspects list (CTRL+W).
+        /// </summary>
+        public static string ToolTipAddToSuspectsList {
+            get {
+                return ResourceManager.GetString("ToolTipAddToSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add an account to whitelist.
+        /// </summary>
+        public static string ToolTipAddToWhitelist {
+            get {
+                return ResourceManager.GetString("ToolTipAddToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze (CTRL+S).
+        /// </summary>
+        public static string ToolTipAnalyze {
+            get {
+                return ResourceManager.GetString("ToolTipAnalyze", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Analyze selected demo(s) (CTRL+S).
+        /// </summary>
+        public static string ToolTipAnalyzeSelectedDemos {
+            get {
+                return ResourceManager.GetString("ToolTipAnalyzeSelectedDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back (CTRL+B).
+        /// </summary>
+        public static string ToolTipBack {
+            get {
+                return ResourceManager.GetString("ToolTipBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to blinded.
+        /// </summary>
+        public static string ToolTipBlinded {
+            get {
+                return ResourceManager.GetString("ToolTipBlinded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to blinded others players for.
+        /// </summary>
+        public static string ToolTipBlindedOthersPlayersFor {
+            get {
+                return ResourceManager.GetString("ToolTipBlindedOthersPlayersFor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Browse to demo (CTRL+B).
+        /// </summary>
+        public static string ToolTipBrowseToDemo {
+            get {
+                return ResourceManager.GetString("ToolTipBrowseToDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy setpos command (CTRL+C).
+        /// </summary>
+        public static string ToolTipCopySetposCommand {
+            get {
+                return ResourceManager.GetString("ToolTipCopySetposCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damages (CTRL+D).
+        /// </summary>
+        public static string ToolTipDamages {
+            get {
+                return ResourceManager.GetString("ToolTipDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete selected demo(s) (CTRL+D).
+        /// </summary>
+        public static string ToolTipDeleteDemo {
+            get {
+                return ResourceManager.GetString("ToolTipDeleteDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Demo&apos;s details (CTRL+D).
+        /// </summary>
+        public static string ToolTipDemoDetails {
+            get {
+                return ResourceManager.GetString("ToolTipDemoDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display settings.
+        /// </summary>
+        public static string ToolTipDisplaySettings {
+            get {
+                return ResourceManager.GetString("ToolTipDisplaySettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download last MM demos available for the current logged Steam account (CTRL+H).
+        /// </summary>
+        public static string ToolTipDownloadDemos {
+            get {
+                return ResourceManager.GetString("ToolTipDownloadDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export as XLS (CTRL+X).
+        /// </summary>
+        public static string ToolTipExportXls {
+            get {
+                return ResourceManager.GetString("ToolTipExportXls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashbangs (CTRL+F).
+        /// </summary>
+        public static string ToolTipFlashbangs {
+            get {
+                return ResourceManager.GetString("ToolTipFlashbangs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate heatmap (CTRL+G).
+        /// </summary>
+        public static string ToolTipGenerateHeatmap {
+            get {
+                return ResourceManager.GetString("ToolTipGenerateHeatmap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to player profile (CTRL+P).
+        /// </summary>
+        public static string ToolTipGoToPlayerProfile {
+            get {
+                return ResourceManager.GetString("ToolTipGoToPlayerProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to suspect profile (CTRL+P).
+        /// </summary>
+        public static string ToolTipGoToSuspectProfile {
+            get {
+                return ResourceManager.GetString("ToolTipGoToSuspectProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to suspects list (CTRL+F).
+        /// </summary>
+        public static string ToolTipGoToSuspectsList {
+            get {
+                return ResourceManager.GetString("ToolTipGoToSuspectsList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start watching selected demo at specific tick (CTRL+G).
+        /// </summary>
+        public static string ToolTipGotoTick {
+            get {
+                return ResourceManager.GetString("ToolTipGotoTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Heatmap generator (CTRL+H).
+        /// </summary>
+        public static string ToolTipHeatmap {
+            get {
+                return ResourceManager.GetString("ToolTipHeatmap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to killed.
+        /// </summary>
+        public static string ToolTipKilled {
+            get {
+                return ResourceManager.GetString("ToolTipKilled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kills details (CTRL+K).
+        /// </summary>
+        public static string ToolTipKillsDetails {
+            get {
+                return ResourceManager.GetString("ToolTipKillsDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maps (CTRL+M).
+        /// </summary>
+        public static string ToolTipMaps {
+            get {
+                return ResourceManager.GetString("ToolTipMaps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Matches played.
+        /// </summary>
+        public static string ToolTipMatchesPlayed {
+            get {
+                return ResourceManager.GetString("ToolTipMatchesPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move suspect(s) to whitelist (CTRL+M).
+        /// </summary>
+        public static string ToolTipMoveSuspectToWhitelist {
+            get {
+                return ResourceManager.GetString("ToolTipMoveSuspectToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next demo (CTRL+RIGHT).
+        /// </summary>
+        public static string ToolTipNextDemo {
+            get {
+                return ResourceManager.GetString("ToolTipNextDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next round.
+        /// </summary>
+        public static string ToolTipNextRound {
+            get {
+                return ResourceManager.GetString("ToolTipNextRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to One single flash from.
+        /// </summary>
+        public static string ToolTipOneSingleFlashFrom {
+            get {
+                return ResourceManager.GetString("ToolTipOneSingleFlashFrom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overall (CTRL+O).
+        /// </summary>
+        public static string ToolTipOverall {
+            get {
+                return ResourceManager.GetString("ToolTipOverall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Overview (CTRL+O).
+        /// </summary>
+        public static string ToolTipOverview {
+            get {
+                return ResourceManager.GetString("ToolTipOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause (CTRL+O).
+        /// </summary>
+        public static string ToolTipPause {
+            get {
+                return ResourceManager.GetString("ToolTipPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play (CTRL+P).
+        /// </summary>
+        public static string ToolTipPlay {
+            get {
+                return ResourceManager.GetString("ToolTipPlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Player details (CTRL+P).
+        /// </summary>
+        public static string ToolTipPlayerDetails {
+            get {
+                return ResourceManager.GetString("ToolTipPlayerDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous demo (CTRL+LEFT).
+        /// </summary>
+        public static string ToolTipPreviousDemo {
+            get {
+                return ResourceManager.GetString("ToolTipPreviousDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Previous round.
+        /// </summary>
+        public static string ToolTipPreviousRound {
+            get {
+                return ResourceManager.GetString("ToolTipPreviousRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Progression (CTRL+P).
+        /// </summary>
+        public static string ToolTipProgression {
+            get {
+                return ResourceManager.GetString("ToolTipProgression", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rank (CTRL+R).
+        /// </summary>
+        public static string ToolTipRank {
+            get {
+                return ResourceManager.GetString("ToolTipRank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh demos list (CTRL+R | F5).
+        /// </summary>
+        public static string ToolTipRefreshDemosList {
+            get {
+                return ResourceManager.GetString("ToolTipRefreshDemosList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Refresh list (CTRL+R).
+        /// </summary>
+        public static string ToolTipRefreshList {
+            get {
+                return ResourceManager.GetString("ToolTipRefreshList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove player(s) from whitelist (DEL).
+        /// </summary>
+        public static string ToolTipRemovePlayersFromWhitelist {
+            get {
+                return ResourceManager.GetString("ToolTipRemovePlayersFromWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove suspect(s) (DEL).
+        /// </summary>
+        public static string ToolTipRemoveSuspect {
+            get {
+                return ResourceManager.GetString("ToolTipRemoveSuspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round details (CTRL+R).
+        /// </summary>
+        public static string ToolTipRoundDetails {
+            get {
+                return ResourceManager.GetString("ToolTipRoundDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as PNG (CTRL+S).
+        /// </summary>
+        public static string ToolTipSaveAsPng {
+            get {
+                return ResourceManager.GetString("ToolTipSaveAsPng", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to second(s).
+        /// </summary>
+        public static string ToolTipSeconds {
+            get {
+                return ResourceManager.GetString("ToolTipSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to second(s) on average.
+        /// </summary>
+        public static string ToolTipSecondsOnAverage {
+            get {
+                return ResourceManager.GetString("ToolTipSecondsOnAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show demos that contains selected suspect(s) (CTRL+F).
+        /// </summary>
+        public static string ToolTIpShowOnlySuspectDemos {
+            get {
+                return ResourceManager.GetString("ToolTIpShowOnlySuspectDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show demos that contains the player (CTRL+F).
+        /// </summary>
+        public static string ToolTipShowPlayerDemos {
+            get {
+                return ResourceManager.GetString("ToolTipShowPlayerDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop (CTRL+S).
+        /// </summary>
+        public static string ToolTipStop {
+            get {
+                return ResourceManager.GetString("ToolTipStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stuffs (CTRL+G).
+        /// </summary>
+        public static string ToolTipStuffs {
+            get {
+                return ResourceManager.GetString("ToolTipStuffs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to time(s).
+        /// </summary>
+        public static string ToolTipTimes {
+            get {
+                return ResourceManager.GetString("ToolTipTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total assists.
+        /// </summary>
+        public static string ToolTipTotalAssists {
+            get {
+                return ResourceManager.GetString("ToolTipTotalAssists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total bomb defused.
+        /// </summary>
+        public static string ToolTipTotalBombDefused {
+            get {
+                return ResourceManager.GetString("ToolTipTotalBombDefused", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total bomb exploded.
+        /// </summary>
+        public static string ToolTipTotalBombExploded {
+            get {
+                return ResourceManager.GetString("ToolTipTotalBombExploded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total bomb planted.
+        /// </summary>
+        public static string ToolTipTotalBombPlanted {
+            get {
+                return ResourceManager.GetString("ToolTipTotalBombPlanted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total damages.
+        /// </summary>
+        public static string ToolTipTotalDamages {
+            get {
+                return ResourceManager.GetString("ToolTipTotalDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total deaths.
+        /// </summary>
+        public static string ToolTipTotalDeaths {
+            get {
+                return ResourceManager.GetString("ToolTipTotalDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total headshots.
+        /// </summary>
+        public static string ToolTipTotalHeadshots {
+            get {
+                return ResourceManager.GetString("ToolTipTotalHeadshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total MVP.
+        /// </summary>
+        public static string ToolTipTotalMvp {
+            get {
+                return ResourceManager.GetString("ToolTipTotalMvp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total rounds played.
+        /// </summary>
+        public static string ToolTipTotalRoundPlayed {
+            get {
+                return ResourceManager.GetString("ToolTipTotalRoundPlayed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update (CTRL+R).
+        /// </summary>
+        public static string ToolTipUpdate {
+            get {
+                return ResourceManager.GetString("ToolTipUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch all stuffs from this player (CTRL+W).
+        /// </summary>
+        public static string ToolTipWatchAllStuffsFromPlayer {
+            get {
+                return ResourceManager.GetString("ToolTipWatchAllStuffsFromPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch demo (CTRL+W).
+        /// </summary>
+        public static string ToolTipWatchDemo {
+            get {
+                return ResourceManager.GetString("ToolTipWatchDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch your highlights (CTRL+H).
+        /// </summary>
+        public static string ToolTipWatchHighlights {
+            get {
+                return ResourceManager.GetString("ToolTipWatchHighlights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch your lowlights (CTRL+L).
+        /// </summary>
+        public static string ToolTipWatchLowlights {
+            get {
+                return ResourceManager.GetString("ToolTipWatchLowlights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch round.
+        /// </summary>
+        public static string ToolTipWatchRound {
+            get {
+                return ResourceManager.GetString("ToolTipWatchRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapons (CTRL+W).
+        /// </summary>
+        public static string ToolTipWeapons {
+            get {
+                return ResourceManager.GetString("ToolTipWeapons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whitelist (CTRL+W).
+        /// </summary>
+        public static string ToolTipWhitelist {
+            get {
+                return ResourceManager.GetString("ToolTipWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total.
+        /// </summary>
+        public static string Total {
+            get {
+                return ResourceManager.GetString("Total", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total armor damages.
+        /// </summary>
+        public static string TotalArmorDamages {
+            get {
+                return ResourceManager.GetString("TotalArmorDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Cash Earned ($).
+        /// </summary>
+        public static string TotalCashEarned {
+            get {
+                return ResourceManager.GetString("TotalCashEarned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total clutches.
+        /// </summary>
+        public static string TotalClutches {
+            get {
+                return ResourceManager.GetString("TotalClutches", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total clutches loss.
+        /// </summary>
+        public static string TotalClutchesLoss {
+            get {
+                return ResourceManager.GetString("TotalClutchesLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total clutches won.
+        /// </summary>
+        public static string TotalClutchesWon {
+            get {
+                return ResourceManager.GetString("TotalClutchesWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total damage armor.
+        /// </summary>
+        public static string TotalDamageArmor {
+            get {
+                return ResourceManager.GetString("TotalDamageArmor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total damage health.
+        /// </summary>
+        public static string TotalDamageHealth {
+            get {
+                return ResourceManager.GetString("TotalDamageHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total damages.
+        /// </summary>
+        public static string TotalDamages {
+            get {
+                return ResourceManager.GetString("TotalDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TDA (Total Damages Armor).
+        /// </summary>
+        public static string TotalDamagesArmorFull {
+            get {
+                return ResourceManager.GetString("TotalDamagesArmorFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TDH (Total Damages Health).
+        /// </summary>
+        public static string TotalDamagesHealthFull {
+            get {
+                return ResourceManager.GetString("TotalDamagesHealthFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total flashbang thrown.
+        /// </summary>
+        public static string TotalFlashbangsThrown {
+            get {
+                return ResourceManager.GetString("TotalFlashbangsThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total health damages.
+        /// </summary>
+        public static string TotalHealthDamages {
+            get {
+                return ResourceManager.GetString("TotalHealthDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total kills.
+        /// </summary>
+        public static string TotalKills {
+            get {
+                return ResourceManager.GetString("TotalKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V5 loss.
+        /// </summary>
+        public static string TotalOneVersusFiveLoss {
+            get {
+                return ResourceManager.GetString("TotalOneVersusFiveLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V5 won.
+        /// </summary>
+        public static string TotalOneVersusFiveWon {
+            get {
+                return ResourceManager.GetString("TotalOneVersusFiveWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V4 loss.
+        /// </summary>
+        public static string TotalOneVersusFourLoss {
+            get {
+                return ResourceManager.GetString("TotalOneVersusFourLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V4 won.
+        /// </summary>
+        public static string TotalOneVersusFourWon {
+            get {
+                return ResourceManager.GetString("TotalOneVersusFourWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V1 loss.
+        /// </summary>
+        public static string TotalOneVersusOneLoss {
+            get {
+                return ResourceManager.GetString("TotalOneVersusOneLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V1 won.
+        /// </summary>
+        public static string TotalOneVersusOneWon {
+            get {
+                return ResourceManager.GetString("TotalOneVersusOneWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V3 loss.
+        /// </summary>
+        public static string TotalOneVersusThreeLoss {
+            get {
+                return ResourceManager.GetString("TotalOneVersusThreeLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V3 won.
+        /// </summary>
+        public static string TotalOneVersusThreeWon {
+            get {
+                return ResourceManager.GetString("TotalOneVersusThreeWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V2 loss.
+        /// </summary>
+        public static string TotalOneVersusTwoLoss {
+            get {
+                return ResourceManager.GetString("TotalOneVersusTwoLoss", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total 1V2 won.
+        /// </summary>
+        public static string TotalOneVersusTwoWon {
+            get {
+                return ResourceManager.GetString("TotalOneVersusTwoWon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To watch.
+        /// </summary>
+        public static string ToWatch {
+            get {
+                return ResourceManager.GetString("ToWatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade death.
+        /// </summary>
+        public static string TradeDeath {
+            get {
+                return ResourceManager.GetString("TradeDeath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TD (Trade Deaths).
+        /// </summary>
+        public static string TradeDeathsFull {
+            get {
+                return ResourceManager.GetString("TradeDeathsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade kill.
+        /// </summary>
+        public static string TradeKill {
+            get {
+                return ResourceManager.GetString("TradeKill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade kills / deaths.
+        /// </summary>
+        public static string TradeKillsDeaths {
+            get {
+                return ResourceManager.GetString("TradeKillsDeaths", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Kill revenge occured maximum 4s after the initial kill).
+        /// </summary>
+        public static string TradeKillsDeathsDescription {
+            get {
+                return ResourceManager.GetString("TradeKillsDeathsDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TK (Trade Kills).
+        /// </summary>
+        public static string TradeKillsFull {
+            get {
+                return ResourceManager.GetString("TradeKillsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Translators.
+        /// </summary>
+        public static string Translators {
+            get {
+                return ResourceManager.GetString("Translators", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unexpected error occured. Please send the &apos;errors.log&apos; file accessible from settings.
+        ///Message Error :
+        ///{0}.
+        /// </summary>
+        public static string UnexpectedErrorOccured {
+            get {
+                return ResourceManager.GetString("UnexpectedErrorOccured", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown.
+        /// </summary>
+        public static string Unknown {
+            get {
+                return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use this account for watch.
+        /// </summary>
+        public static string UseAccountForWatch {
+            get {
+                return ResourceManager.GetString("UseAccountForWatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use custom highlights / lowlights generation.
+        /// </summary>
+        public static string UseCutomLowlightHighlight {
+            get {
+                return ResourceManager.GetString("UseCutomLowlightHighlight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string Value {
+            get {
+                return ResourceManager.GetString("Value", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Velocity average.
+        /// </summary>
+        public static string VelocityAverage {
+            get {
+                return ResourceManager.GetString("VelocityAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you want to say thank you, please feel free to make a.
+        /// </summary>
+        public static string WantSayThank {
+            get {
+                return ResourceManager.GetString("WantSayThank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch.
+        /// </summary>
+        public static string Watch {
+            get {
+                return ResourceManager.GetString("Watch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watched.
+        /// </summary>
+        public static string Watched {
+            get {
+                return ResourceManager.GetString("Watched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch highlights.
+        /// </summary>
+        public static string WatchHighlights {
+            get {
+                return ResourceManager.GetString("WatchHighlights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch lowlights.
+        /// </summary>
+        public static string WatchLowlights {
+            get {
+                return ResourceManager.GetString("WatchLowlights", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch player.
+        /// </summary>
+        public static string WatchPlayer {
+            get {
+                return ResourceManager.GetString("WatchPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch player stuffs.
+        /// </summary>
+        public static string WatchPlayerStuffs {
+            get {
+                return ResourceManager.GetString("WatchPlayerStuffs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watch round.
+        /// </summary>
+        public static string WatchRound {
+            get {
+                return ResourceManager.GetString("WatchRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search....
+        /// </summary>
+        public static string WatermarkSearch {
+            get {
+                return ResourceManager.GetString("WatermarkSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapon Kills.
+        /// </summary>
+        public static string WeaponKills {
+            get {
+                return ResourceManager.GetString("WeaponKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weapons.
+        /// </summary>
+        public static string Weapons {
+            get {
+                return ResourceManager.GetString("Weapons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Weekly %.
+        /// </summary>
+        public static string WeeklyPercent {
+            get {
+                return ResourceManager.GetString("WeeklyPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whitelist.
+        /// </summary>
+        public static string Whitelist {
+            get {
+                return ResourceManager.GetString("Whitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Players listed below will not be checked for ban when analyzing a demo..
+        /// </summary>
+        public static string WhitelistInformation {
+            get {
+                return ResourceManager.GetString("WhitelistInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width.
+        /// </summary>
+        public static string Width {
+            get {
+                return ResourceManager.GetString("Width", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win.
+        /// </summary>
+        public static string Win {
+            get {
+                return ResourceManager.GetString("Win", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WS.
+        /// </summary>
+        public static string WinnerSide {
+            get {
+                return ResourceManager.GetString("WinnerSide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WS (Winner Side).
+        /// </summary>
+        public static string WinnerSideFull {
+            get {
+                return ResourceManager.GetString("WinnerSideFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Winner team name.
+        /// </summary>
+        public static string WinnerTeamName {
+            get {
+                return ResourceManager.GetString("WinnerTeamName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WTN (Winner Team Name).
+        /// </summary>
+        public static string WinnerTeamNameFull {
+            get {
+                return ResourceManager.GetString("WinnerTeamNameFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win percentage.
+        /// </summary>
+        public static string WinPercent {
+            get {
+                return ResourceManager.GetString("WinPercent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win percentage.
+        /// </summary>
+        public static string WinPercentage {
+            get {
+                return ResourceManager.GetString("WinPercentage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Win (S).
+        /// </summary>
+        public static string WinSurrender {
+            get {
+                return ResourceManager.GetString("WinSurrender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Won.
+        /// </summary>
+        public static string Won {
+            get {
+                return ResourceManager.GetString("Won", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Won rate.
+        /// </summary>
+        public static string WonRate {
+            get {
+                return ResourceManager.GetString("WonRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

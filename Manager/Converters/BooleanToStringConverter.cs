@@ -3,7 +3,7 @@
 	class BooleanToStringConverter : BooleanConverter<string>
 	{
 		public BooleanToStringConverter() :
-				base("Yes", "No")
+				base(Properties.Resources.Yes, Properties.Resources.No)
 		{
 		}
 	}

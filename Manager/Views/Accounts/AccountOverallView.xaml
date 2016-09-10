@@ -8,6 +8,7 @@
 			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -45,7 +46,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToHomeCommand}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -55,14 +56,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						IsEnabled="False"
-						ToolTip="Overall (CTRL+O)">
+						ToolTip="{x:Static properties:Resources.ToolTipOverall}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -72,14 +73,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Overall"
+						<TextBlock Text="{x:Static properties:Resources.Overall}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToRankCommand}"
-						ToolTip="Rank (CTRL+R)">
+						ToolTip="{x:Static properties:Resources.ToolTipRank}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -89,14 +90,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Rank"
+						<TextBlock Text="{x:Static properties:Resources.Rank}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToMapCommand}"
-						ToolTip="Maps (CTRL+M)">
+						ToolTip="{x:Static properties:Resources.ToolTipMaps}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -106,26 +107,26 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Maps"
+						<TextBlock Text="{x:Static properties:Resources.Maps}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToWeaponCommand}"
-						ToolTip="Weapons (CTRL+W)">
+						ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
 							   Width="15"
 							   Height="15"/>
-						<TextBlock Text="Weapons"
+						<TextBlock Text="{x:Static properties:Resources.Weapons}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToProgressCommand}"
-						ToolTip="Progression (CTRL+P)">
+						ToolTip="{x:Static properties:Resources.ToolTipProgression}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -135,7 +136,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Progression"
+						<TextBlock Text="{x:Static properties:Resources.Progression}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -179,12 +180,12 @@
 
 					<Grid Grid.Column="0"
 						  Margin="10"
-						  ToolTip="Total matches played">
+						  ToolTip="{x:Static properties:Resources.ToolTipMatchesPlayed}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Matches"
+								<TextBlock Text="{x:Static properties:Resources.Matches}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding MatchCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -194,12 +195,12 @@
 
 					<Grid Grid.Column="1"
 						  Margin="10"
-						  ToolTip="Total kills done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipKills}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Kills"
+								<TextBlock Text="{x:Static properties:Resources.HeaderKills}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding KillCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -209,12 +210,12 @@
 
 					<Grid Grid.Column="2"
 						  Margin="10"
-						  ToolTip="Total assists done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipAssists}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Assists"
+								<TextBlock Text="{x:Static properties:Resources.HeaderAssists}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding AssistCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -224,12 +225,12 @@
 
 					<Grid Grid.Column="3"
 						  Margin="10"
-						  ToolTip="Total deaths you had">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipDeaths}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Deaths"
+								<TextBlock Text="{x:Static properties:Resources.HeaderDeaths}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding DeathCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -239,12 +240,12 @@
 
 					<Grid Grid.Column="4"
 						  Margin="10"
-						  ToolTip="Kill / Death ratio">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipKillsPerDeaths}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="K/D"
+								<TextBlock Text="{x:Static properties:Resources.HeaderKillDeathRatio}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding KillDeathRatio}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -254,12 +255,12 @@
 
 					<Grid Grid.Column="5"
 						  Margin="10"
-						  ToolTip="Total headshot kill done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipHeadshots}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Headshot"
+								<TextBlock Text="{x:Static properties:Resources.HeaderHeadshots}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding HeadshotCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -269,12 +270,12 @@
 
 					<Grid Grid.Column="6"
 						  Margin="10"
-						  ToolTip="Headshot %">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipHeadshotPercent}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Headshot %"
+								<TextBlock Text="{x:Static properties:Resources.HeaderHeadshotsPercent}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding HeadshotRatio}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -284,12 +285,12 @@
 
 					<Grid Grid.Column="7"
 						  Margin="10"
-						  ToolTip="Total 5 kills done (ace)">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipFiveKill}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="5K"
+								<TextBlock Text="{x:Static properties:Resources.HeaderFiveKills}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding FiveKillCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -299,12 +300,12 @@
 
 					<Grid Grid.Column="8"
 						  Margin="10"
-						  ToolTip="Total 4 kills done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipFourKill}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="4K"
+								<TextBlock Text="{x:Static properties:Resources.HeaderFourKills}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding FourKillCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -314,12 +315,12 @@
 
 					<Grid Grid.Column="9"
 						  Margin="10"
-						  ToolTip="Total 3 kills done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipThreeKill}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="3K"
+								<TextBlock Text="{x:Static properties:Resources.HeaderThreeKills}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding ThreeKillCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -329,12 +330,12 @@
 
 					<Grid Grid.Column="10"
 						  Margin="10"
-						  ToolTip="Total 2 kills done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipTwoKill}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="2K"
+								<TextBlock Text="{x:Static properties:Resources.HeaderTwoKills}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding TwoKillCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -343,7 +344,8 @@
 					</Grid>
 				</Grid>
 
-				<Grid Grid.Row="1" HorizontalAlignment="Center">
+				<Grid Grid.Row="1"
+					  HorizontalAlignment="Center">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
@@ -355,12 +357,12 @@
 
 					<Grid Grid.Column="0"
 						  Margin="10"
-						  ToolTip="Number of knife kills">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipKnifeKills}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Knife kills"
+								<TextBlock Text="{x:Static properties:Resources.HeaderKnifeKills}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding KnifeKillCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -370,12 +372,12 @@
 
 					<Grid Grid.Column="1"
 						  Margin="10"
-						  ToolTip="Number of bomb planted">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipBombPlanted}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Bomb planted"
+								<TextBlock Text="{x:Static properties:Resources.HeaderBombPlanted}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding BombPlantedCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -385,12 +387,12 @@
 
 					<Grid Grid.Column="2"
 						  Margin="10"
-						  ToolTip="Number of bomb defused">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipBombDefused}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Bomb Defused"
+								<TextBlock Text="{x:Static properties:Resources.HeaderBombDefused}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding BombDefusedCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -400,12 +402,12 @@
 
 					<Grid Grid.Column="3"
 						  Margin="10"
-						  ToolTip="Number of bomb exploded">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipBombExploded}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Bomb Exploded"
+								<TextBlock Text="{x:Static properties:Resources.HeaderBombExploded}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding BombExplodedCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -415,12 +417,12 @@
 
 					<Grid Grid.Column="4"
 						  Margin="10"
-						  ToolTip="Number of MVP">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipMvp}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="MVP"
+								<TextBlock Text="{x:Static properties:Resources.MVP}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding MvpCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -430,12 +432,12 @@
 
 					<Grid Grid.Column="5"
 						  Margin="10"
-						  ToolTip="Total damage done">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipTotalDamageHealth}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Total Damage"
+								<TextBlock Text="{x:Static properties:Resources.HeaderTotalDamagesHealth}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding DamageCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -444,7 +446,8 @@
 					</Grid>
 				</Grid>
 
-				<Grid Grid.Row="2" HorizontalAlignment="Center">
+				<Grid Grid.Row="2"
+					  HorizontalAlignment="Center">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
@@ -457,12 +460,12 @@
 
 					<Grid Grid.Column="0"
 						  Margin="10"
-						  ToolTip="Number of round played">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipRoundPlayed}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Rounds"
+								<TextBlock Text="{x:Static properties:Resources.HeaderRoundPlayed}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding RoundCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -472,12 +475,12 @@
 
 					<Grid Grid.Column="1"
 						  Margin="10"
-						  ToolTip="Kill Per Round %">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipKillPerRound}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="KPR %"
+								<TextBlock Text="{x:Static properties:Resources.HeaderKillsPerRound}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding KillPerRoundPercentage}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -487,12 +490,12 @@
 
 					<Grid Grid.Column="2"
 						  Margin="10"
-						  ToolTip="Assist Per Round %">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipAssistsPerRound}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="APR %"
+								<TextBlock Text="{x:Static properties:Resources.HeaderAssistsPerRound}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding AssistPerRoundPercentage}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -502,12 +505,12 @@
 
 					<Grid Grid.Column="3"
 						  Margin="10"
-						  ToolTip="Death Per Round %">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipDeathsPerRound}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="DPR %"
+								<TextBlock Text="{x:Static properties:Resources.HeaderDeathPerRound}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding DeathPerRoundPercentage}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -517,12 +520,12 @@
 
 					<Grid Grid.Column="4"
 						  Margin="10"
-						  ToolTip="Average Damages Per Round">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipAverageDamagePerRound}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="ADR"
+								<TextBlock Text="{x:Static properties:Resources.HeaderAverageDamagesPerRound}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding AverageDamagesPerRound}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -532,12 +535,12 @@
 
 					<Grid Grid.Column="5"
 						  Margin="10"
-						  ToolTip="Clutch won %">
+						  ToolTip="{x:Static properties:Resources.ClutchesWonPercent}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="Clutch %"
+								<TextBlock Text="{x:Static properties:Resources.ClutchesWonPercent}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding ClutchWinPercentage}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -547,12 +550,12 @@
 
 					<Grid Grid.Column="6"
 						  Margin="10"
-						  ToolTip="HLTV Rating">
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipHltvRating}">
 						<Border BorderBrush="{StaticResource LightWhiteBrush}"
 								BorderThickness="1">
 							<StackPanel Orientation="Vertical"
 										Margin="5">
-								<TextBlock Text="HLTV Rating"
+								<TextBlock Text="{x:Static properties:Resources.HeaderHltvRating}"
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding HltvRating}"
 										   Style="{StaticResource StatsValueStyle}"/>
@@ -601,11 +604,11 @@
 						<telerik:RadLegend.Items>
 							<telerik:LegendItemCollection>
 								<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
-													Title="Win"/>
+													Title="{x:Static properties:Resources.Win}"/>
 								<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
-													Title="Loss" />
+													Title="{x:Static properties:Resources.Loss}" />
 								<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}"
-													Title="Draw" />
+													Title="{x:Static properties:Resources.Draw}" />
 							</telerik:LegendItemCollection>
 						</telerik:RadLegend.Items>
 					</telerik:RadLegend>

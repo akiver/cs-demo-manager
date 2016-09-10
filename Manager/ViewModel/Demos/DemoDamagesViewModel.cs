@@ -282,8 +282,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (!CurrentDemo.PlayersHurted.Any())
 						{
-							await _dialogService.ShowMessageAsync("No damages data found. The demo is too old or you didn't analyze it.",
-									MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoDamagesDataFound, MessageDialogStyle.Affirmative);
 							IsGenerating = false;
 							return;
 						}
@@ -337,8 +336,8 @@ namespace Manager.ViewModel.Demos
 			_dialogService = dialogService;
 			_damageService = damageService;
 
-			TeamSelectors.Add(new ComboboxSelector("CT", "Counter-Terrorists"));
-			TeamSelectors.Add(new ComboboxSelector("T", "Terrorists"));
+			TeamSelectors.Add(new ComboboxSelector("CT", Properties.Resources.CounterTerrorists));
+			TeamSelectors.Add(new ComboboxSelector("T", Properties.Resources.Terrorists));
 
 			if (IsInDesignMode)
 			{

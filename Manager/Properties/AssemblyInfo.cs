@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 
@@ -52,4 +53,5 @@ using System.Windows;
 [assembly: AssemblyVersion("2.9.0.0")]
 [assembly: AssemblyFileVersion("2.9.0.0")]
 [assembly: Guid("11a35f95-5f2e-4781-964e-94d624fff358")]
+[assembly: NeutralResourcesLanguage("en-US")]
 

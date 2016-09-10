@@ -339,7 +339,7 @@ namespace Manager.ViewModel.Demos
 						catch (Exception e)
 						{
 							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync("An error occured while exporting heatmap to PNG.", MessageDialogStyle.Affirmative).ConfigureAwait(false);
+							await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorExportingHeatmap, MessageDialogStyle.Affirmative).ConfigureAwait(false);
 						}
 
 					}, () => HasGeneratedHeatmap && !IsGenerating));
@@ -375,14 +375,14 @@ namespace Manager.ViewModel.Demos
 			_dialogService = dialogService;
 			_cacheService = cacheService;
 			_mapService = mapService;
-			EventSelectors.Add(new ComboboxSelector("kills", "Kills"));
-			EventSelectors.Add(new ComboboxSelector("deaths", "Deaths"));
-			EventSelectors.Add(new ComboboxSelector("shots", "Shots fired"));
-			EventSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
-			EventSelectors.Add(new ComboboxSelector("he", "HE Grenades"));
-			EventSelectors.Add(new ComboboxSelector("smokes", "Smokes"));
-			EventSelectors.Add(new ComboboxSelector("molotovs", "Molotovs"));
-			EventSelectors.Add(new ComboboxSelector("decoys", "Decoy"));
+			EventSelectors.Add(new ComboboxSelector("kills", Properties.Resources.Kills));
+			EventSelectors.Add(new ComboboxSelector("deaths", Properties.Resources.Deaths));
+			EventSelectors.Add(new ComboboxSelector("shots", Properties.Resources.ShotsFired));
+			EventSelectors.Add(new ComboboxSelector("flashbangs", Properties.Resources.Flashbangs));
+			EventSelectors.Add(new ComboboxSelector("he", Properties.Resources.HeGrenades));
+			EventSelectors.Add(new ComboboxSelector("smokes", Properties.Resources.Smokes));
+			EventSelectors.Add(new ComboboxSelector("molotovs", Properties.Resources.Molotovs));
+			EventSelectors.Add(new ComboboxSelector("decoys", Properties.Resources.Decoys));
 			CurrentEventSelector = EventSelectors[0];
 
 			if (IsInDesignMode)
@@ -399,8 +399,8 @@ namespace Manager.ViewModel.Demos
 		{
 			Sides = new MultiSelectCollectionView<ComboboxSelector>(new List<ComboboxSelector>
 				{
-					new ComboboxSelector("CT", "Counter-Terrorists"),
-					new ComboboxSelector("T", "Terrorists")
+					new ComboboxSelector("CT", Properties.Resources.CounterTerrorists),
+					new ComboboxSelector("T", Properties.Resources.Terrorists)
 				});
 			if (IsInDesignMode)
 			{

@@ -10,6 +10,7 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 xmlns:player="clr-namespace:Manager.Views.Players"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
 			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
@@ -48,7 +49,8 @@
 		</Grid.RowDefinitions>
 
 		<!-- Action bar -->
-		<Grid Grid.Row="0">
+		<Grid Grid.Row="0"
+			  Height="40">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="Auto"/>
@@ -59,11 +61,8 @@
 			</Grid.ColumnDefinitions>
 
 			<Button Grid.Column="0"
-					Margin="5"
-					Width="70"
-					Height="30"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Back (CTRL+B)"
+					Style="{DynamicResource GeneralButton}"
+					ToolTip="{x:Static properties:Resources.ToolTipBack}"
 					Command="{Binding BackToDetailsCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
@@ -75,18 +74,14 @@
 										 Stretch="Fill" />
 						</Rectangle.OpacityMask>
 					</Rectangle>
-					<TextBlock Text="Back"
-							   Margin="5 0 0 0"
+					<TextBlock Text="{x:Static properties:Resources.Back}"
 							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
 
 			<Button Grid.Column="1"
-					Margin="5"
-					Width="130"
-					Height="30"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Watch highlights (CTRL+H)"
+					Style="{DynamicResource GeneralButton}"
+					ToolTip="{x:Static properties:Resources.ToolTipWatchHighlights}"
 					Command="{Binding WatchHighlightsCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
@@ -98,18 +93,14 @@
 										 Stretch="Fill" />
 						</Rectangle.OpacityMask>
 					</Rectangle>
-					<TextBlock Text="Watch highlights"
-							   Margin="5 0 0 0"
+					<TextBlock Text="{x:Static properties:Resources.WatchHighlights}"
 							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
 
 			<Button Grid.Column="2"
-					Margin="5"
-					Width="130"
-					Height="30"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Watch lowlights (CTRL+L)"
+					Style="{DynamicResource GeneralButton}"
+					ToolTip="{x:Static properties:Resources.ToolTipWatchLowlights}"
 					Command="{Binding WatchLowlightsCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
@@ -121,18 +112,14 @@
 										 Stretch="Fill" />
 						</Rectangle.OpacityMask>
 					</Rectangle>
-					<TextBlock Text="Watch lowlights"
-							   Margin="5 0 0 0"
+					<TextBlock Text="{x:Static properties:Resources.WatchLowlights}"
 							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
 
 			<Button Grid.Column="3"
-					Margin="5"
-					Width="140"
-					Height="30"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Add player to suspects list (CTRL+S)"
+					Style="{DynamicResource GeneralButton}"
+					ToolTip="{x:Static properties:Resources.ToolTipAddPlayerToSuspectsList}"
 					Command="{Binding AddPlayerToSuspectsListCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
@@ -144,18 +131,14 @@
 										 Stretch="Fill" />
 						</Rectangle.OpacityMask>
 					</Rectangle>
-					<TextBlock Text="Add to suspects list"
-							   Margin="5 0 0 0"
+					<TextBlock Text="{x:Static properties:Resources.AddToSuspects}"
 							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
 
 			<Button Grid.Column="4"
-					Margin="5"
-					Width="130"
-					Height="30"
-					Style="{DynamicResource AccentedSquareButtonStyle}"
-					ToolTip="Add player to whitelist (CTRL+W)"
+					Style="{DynamicResource GeneralButton}"
+					ToolTip="{x:Static properties:Resources.ToolTipAddPlayerToWhiteList}"
 					Command="{Binding AddPlayerToWhitelistCommand}">
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center">
@@ -167,8 +150,7 @@
 										 Stretch="Fill" />
 						</Rectangle.OpacityMask>
 					</Rectangle>
-					<TextBlock Text="Add to whitelist"
-							   Margin="5 0 0 0"
+					<TextBlock Text="{x:Static properties:Resources.AddToWhitelist}"
 							   Style="{StaticResource ButtonTitleStyle}" />
 				</StackPanel>
 			</Button>
@@ -190,22 +172,22 @@
 		<TabControl Grid.Row="1"
 					Margin="10"
 					controls:TabControlHelper.IsUnderlined="True">
-			<controls:MetroTabItem Header="General">
+			<controls:MetroTabItem Header="{x:Static properties:Resources.General}">
 				<player:PlayerGeneralView />
 			</controls:MetroTabItem>
-			<controls:MetroTabItem Header="Rounds">
+			<controls:MetroTabItem Header="{x:Static properties:Resources.Rounds}">
 				<player:PlayerRoundsView />
 			</controls:MetroTabItem>
-			<controls:MetroTabItem Header="Clutches">
+			<controls:MetroTabItem Header="{x:Static properties:Resources.Clutches}">
 				<player:PlayerClutchesView />
 			</controls:MetroTabItem>
-			<controls:MetroTabItem Header="Duels">
+			<controls:MetroTabItem Header="{x:Static properties:Resources.Duels}">
 				<player:PlayerDuelView />
 			</controls:MetroTabItem>
-			<controls:MetroTabItem Header="Economy">
+			<controls:MetroTabItem Header="{x:Static properties:Resources.Economy}">
 				<player:PlayerEconomyView />
 			</controls:MetroTabItem>
-			<controls:MetroTabItem Header="Damages">
+			<controls:MetroTabItem Header="{x:Static properties:Resources.Damages}">
 				<player:PlayerDamagesView />
 			</controls:MetroTabItem>
 		</TabControl>

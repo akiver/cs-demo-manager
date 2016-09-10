@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using Core;
 using DemoInfo;
 
 namespace Manager.Converters
@@ -14,21 +13,21 @@ namespace Manager.Converters
 			switch (reason)
 			{
 				case RoundEndReason.CTWin:
-					return AppSettings.CT_WIN;
+					return Properties.Resources.EndReasonCtWin;
 				case RoundEndReason.TerroristWin:
-					return AppSettings.T_WIN;
+					return Properties.Resources.EndReasonTwin;
 				case RoundEndReason.TargetBombed:
-					return AppSettings.BOMB_EXPLODED;
+					return Properties.Resources.EndReasonBombExploded;
 				case RoundEndReason.BombDefused:
-					return AppSettings.BOMB_DEFUSED;
+					return Properties.Resources.EndReasonBombDefused;
 				case RoundEndReason.CTSurrender:
-					return AppSettings.CT_SURRENDER;
+					return Properties.Resources.EndReasonCtSurrender;
 				case RoundEndReason.TerroristsSurrender:
-					return AppSettings.T_SURRENDER;
+					return Properties.Resources.EndReasonTsurrender;
 				case RoundEndReason.TargetSaved:
-					return AppSettings.TARGET_SAVED;
+					return Properties.Resources.EndReasonTargetSaved;
 				default:
-					return AppSettings.UNKNOWN;
+					return Properties.Resources.EndReasonUnknown;
 			}
 		}
 

@@ -321,7 +321,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (IsPaused)
 						{
-							MessageNotification = "Playing...";
+							MessageNotification = Properties.Resources.NotificationPlaying;
 							IsPlaying = true;
 							IsPaused = false;
 
@@ -331,7 +331,7 @@ namespace Manager.ViewModel.Demos
 						}
 
 						IsBusy = true;
-						MessageNotification = "Generating data...";
+						MessageNotification = Properties.Resources.NotificationGeneratingData;
 
 						try
 						{
@@ -373,14 +373,14 @@ namespace Manager.ViewModel.Demos
 
 							if (!Points.Any())
 							{
-								await _dialogService.ShowMessageAsync("No points found. You may have to analyze this demo.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoPointsFound, MessageDialogStyle.Affirmative);
 								IsBusy = false;
 								return;
 							}
 
 							InitLayers();
 
-							MessageNotification = "Playing...";
+							MessageNotification = Properties.Resources.NotificationPlaying;
 							IsPlaying = true;
 
 							CommandManager.InvalidateRequerySuggested();
@@ -436,7 +436,7 @@ namespace Manager.ViewModel.Demos
 					?? (_pauseCommand = new RelayCommand(
 					() =>
 					{
-						MessageNotification = "Paused";
+						MessageNotification = Properties.Resources.NotificationPaused;
 						IsPlaying = false;
 						IsPaused = true;
 						CompositionTarget.Rendering -= CompositionTarget_Rendering;
@@ -473,9 +473,9 @@ namespace Manager.ViewModel.Demos
 			_dialogService = dialogService;
 			_demoService = demoService;
 			_mapService = mapService;
-			TeamSelectors.Add(new ComboboxSelector("CT", "Counter-Terrorists"));
-			TeamSelectors.Add(new ComboboxSelector("T", "Terrorists"));
-			TeamSelectors.Add(new ComboboxSelector("BOTH", "Both"));
+			TeamSelectors.Add(new ComboboxSelector("CT", Properties.Resources.CounterTerrorists));
+			TeamSelectors.Add(new ComboboxSelector("T", Properties.Resources.Terrorists));
+			TeamSelectors.Add(new ComboboxSelector("BOTH", Properties.Resources.Both));
 		}
 
 		/// <summary>

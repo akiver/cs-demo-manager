@@ -62,6 +62,10 @@
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="AfxCppCli, Version=1.0.5707.30208, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -141,17 +145,24 @@
     <Compile Include="Converters\EventToVisibilityConverter.cs" />
     <Compile Include="Converters\ImageToSourceConverter.cs" />
     <Compile Include="Converters\IntToBooleanConverter.cs" />
+    <Compile Include="Converters\IntToStringConverter.cs" />
+    <Compile Include="Converters\LowerCaseConverter.cs" />
     <Compile Include="Converters\MapNameToImageConverter.cs" />
     <Compile Include="Converters\MouseGestureExtendedConverter.cs" />
     <Compile Include="Converters\NullableValueConverter.cs" />
     <Compile Include="Converters\RankToImageConverter.cs" />
     <Compile Include="Converters\RoundEndReasonToStringConverter.cs" />
+    <Compile Include="Converters\RoundTypeToStringConverter.cs" />
     <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
     <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\SideToStringConverter.cs" />
+    <Compile Include="Converters\SteamAccountStatusToStringConverter.cs" />
+    <Compile Include="Converters\SteamAccountVisibilityToStringConverter.cs" />
+    <Compile Include="Converters\SteamEconomyBanStatusToStringConverter.cs" />
     <Compile Include="Converters\StringToDateConverter.cs" />
     <Compile Include="Converters\StringToDemoStatusConverter.cs" />
     <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
+    <Compile Include="Converters\StringToMinimalDateConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Internals\Extensions.cs" />
@@ -527,11 +538,18 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <EmbeddedResource Include="Properties\Resources.es.resx" />
+    <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.it.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -650,8 +668,20 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\Manager.de.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.es.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.fr.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.it.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.pt.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.ru.xlf" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
 snremove.exe -r DemoInfo.dll

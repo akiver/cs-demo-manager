@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
@@ -13,6 +14,19 @@ namespace SuspectsBot
 	{
 		private Mutex _instance;
 		public static TaskbarIcon NotifyIcon;
+
+		public App()
+		{
+			CultureInfo ci = CultureInfo.InstalledUICulture;
+			if (string.IsNullOrEmpty(SuspectsBot.Properties.Settings.Default.Language))
+			{
+				SuspectsBot.Properties.Settings.Default.Language = ci.Name;
+				SuspectsBot.Properties.Settings.Default.Save();
+			}
+			CultureInfo culture = new CultureInfo(SuspectsBot.Properties.Settings.Default.Language);
+			CultureInfo.DefaultThreadCurrentCulture = culture;
+			CultureInfo.DefaultThreadCurrentUICulture = culture;
+		}
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
@@ -40,7 +54,7 @@ namespace SuspectsBot
 			catch (Exception ex)
 			{
 				Logger.Instance.Log(ex);
-				MessageBox.Show("Unable to start the BOT.", "Error");
+				MessageBox.Show(SuspectsBot.Properties.Resources.UnableToStartBot, SuspectsBot.Properties.Resources.Error);
 			}
 		}
 

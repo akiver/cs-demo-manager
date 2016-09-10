@@ -4,6 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -11,7 +12,9 @@
 
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
+												 True="{x:Static properties:Resources.Yes}"
+												 False="{x:Static properties:Resources.No}"/>
 			<converters:SideToStringConverter x:Key="SideToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -32,9 +35,9 @@
 				<StackPanel Orientation="Horizontal"
 							Margin="5"
 							Grid.Row="0">
-					<TextBlock Text="Entry Kills"
+					<TextBlock Text="{x:Static properties:Resources.EntryKills}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
-					<TextBlock Text="(First kill as T)"
+					<TextBlock Text="{x:Static properties:Resources.EntryKillDescription}"
 							   Style="{StaticResource TextBlockSectionSubTitle}"
 							   Margin="5 0 0 0"/>
 				</StackPanel>
@@ -51,25 +54,25 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0"
-								   Text="Attempt "
+								   Text="{x:Static properties:Resources.Attempts}"
 								   FontSize="18">
-							<TextBlock Text="{Binding CurrentPlayer.EntryKills.Count}"
+							<TextBlock Text="{Binding CurrentPlayer.EntryKills.Count, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="1"
-								   Text="Won "
+								   Text="{x:Static properties:Resources.Won}"
 								   FontSize="18">
-							<TextBlock Text="{Binding CurrentPlayer.EntryKillWonCount}"
+							<TextBlock Text="{Binding CurrentPlayer.EntryKillWonCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="2"
-								   Text="Loss "
+								   Text="{x:Static properties:Resources.Loss}"
 								   FontSize="18">
-							<TextBlock Text="{Binding CurrentPlayer.EntryKillLossCount}"
+							<TextBlock Text="{Binding CurrentPlayer.EntryKillLossCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="3"
-								   Text="Won rate"
+								   Text="{x:Static properties:Resources.WonRate}"
 								   FontSize="18">
 							<TextBlock Text="{Binding Path=CurrentPlayer.RatioEntryKill, StringFormat='{} {0}%'}"
 									   Style="{StaticResource TextBlockHighlightBig}"
@@ -82,39 +85,39 @@
 							<DataGrid.Columns>
 								<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 													Width="Auto"
-													Header="Round"
+													Header="{x:Static properties:Resources.HeaderRound}"
 													Binding="{Binding RoundNumber}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
 													Width="Auto"
-													Header="Killer"
+													Header="{x:Static properties:Resources.HeaderKiller}"
 													Binding="{Binding KillerName}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KillerSideHeader}"
 													Width="Auto"
-													Header="Killer Side"
+													Header="{x:Static properties:Resources.HeaderKillerSide}"
 													Binding="{Binding KillerSide, Converter={StaticResource SideToStringConverter}}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 													Width="Auto"
-													Header="Killed"
+													Header="{x:Static properties:Resources.HeaderVictim}"
 													Binding="{Binding KilledName}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
 													Width="Auto"
-													Header="Weapon"
+													Header="{x:Static properties:Resources.HeaderWeapon}"
 													Binding="{Binding Weapon.Name}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource DuelResultHeader}"
 													Width="Auto"
-													Header="Won"
+													Header="{x:Static properties:Resources.HeaderWon}"
 													Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 													Width="Auto"
-													Header="Round Won"
+													Header="{x:Static properties:Resources.HeaderRoundWon}"
 													Binding="{Binding HasWonRound, Converter={StaticResource BooleanToStringConverter}}"/>
-								<DataGridTemplateColumn Header="Watch">
+								<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
 													CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryKillsDataGrid}"
 													Style="{DynamicResource AccentedSquareButtonStyle}"
-													Content="Watch"/>
+													Content="{x:Static properties:Resources.Watch}"/>
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
@@ -131,9 +134,9 @@
 				<StackPanel Orientation="Horizontal"
 							Margin="5"
 							Grid.Row="0">
-					<TextBlock Text="Entry Hold Kills"
+					<TextBlock Text="{x:Static properties:Resources.EntryHoldKills}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
-					<TextBlock Text="(First kill as CT)"
+					<TextBlock Text="{x:Static properties:Resources.EntryHoldKillsDescription}"
 							   Style="{StaticResource TextBlockSectionSubTitle}"
 							   Margin="5 0 0 0"/>
 				</StackPanel>
@@ -150,26 +153,25 @@
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
 						<TextBlock Grid.Row="0"
-								   Text="Attempt "
+								   Text="{x:Static properties:Resources.Attempts}"
 								   FontSize="18">
-							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKills.Count}"
-									   FontSize="20"
+							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKills.Count, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="1"
-								   Text="Won "
+								   Text="{x:Static properties:Resources.Won}"
 								   FontSize="18">
-							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillWonCount}"
+							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillWonCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="2"
-								   Text="Loss "
+								   Text="{x:Static properties:Resources.Loss}"
 								   FontSize="18">
-							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillLossCount}"
+							<TextBlock Text="{Binding CurrentPlayer.EntryHoldKillLossCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						<TextBlock Grid.Row="3"
-								   Text="Won rate"
+								   Text="{x:Static properties:Resources.WonRate}"
 								   FontSize="18">
 							<TextBlock Text="{Binding Path=CurrentPlayer.RatioEntryHoldKill, StringFormat='{} {0}%'}"
 									   Style="{StaticResource TextBlockHighlightBig}"
@@ -182,39 +184,39 @@
 							<DataGrid.Columns>
 								<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 													Width="Auto"
-													Header="Round"
+													Header="{x:Static properties:Resources.HeaderRound}"
 													Binding="{Binding RoundNumber}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
 													Width="Auto"
-													Header="Killer"
+													Header="{x:Static properties:Resources.HeaderKiller}"
 													Binding="{Binding KillerName}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KillerSideHeader}"
 													Width="Auto"
-													Header="Killer Side"
+													Header="{x:Static properties:Resources.HeaderKillerSide}"
 													Binding="{Binding KillerSide, Converter={StaticResource SideToStringConverter}}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 													Width="Auto"
-													Header="Killed"
+													Header="{x:Static properties:Resources.HeaderVictim}"
 													Binding="{Binding KilledName}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
 													Width="Auto"
-													Header="Weapon"
+													Header="{x:Static properties:Resources.HeaderWeapon}"
 													Binding="{Binding Weapon.Name}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource DuelResultHeader}"
 													Width="Auto"
-													Header="Has Won"
+													Header="{x:Static properties:Resources.HeaderWon}"
 													Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
 								<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 													Width="Auto"
-													Header="Round Won"
+													Header="{x:Static properties:Resources.HeaderRoundWon}"
 													Binding="{Binding HasWonRound, Converter={StaticResource BooleanToStringConverter}}"/>
-								<DataGridTemplateColumn Header="Watch">
+								<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 									<DataGridTemplateColumn.CellTemplate>
 										<DataTemplate>
 											<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
 													CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryHoldKillsDataGrid}"
 													Style="{DynamicResource AccentedSquareButtonStyle}"
-													Content="Watch"/>
+													Content="{x:Static properties:Resources.Watch}"/>
 										</DataTemplate>
 									</DataGridTemplateColumn.CellTemplate>
 								</DataGridTemplateColumn>
@@ -232,9 +234,9 @@
 				<StackPanel Orientation="Horizontal"
 							Margin="5"
 							Grid.Row="0">
-					<TextBlock Text="Trade Kills / Deaths"
+					<TextBlock Text="{x:Static properties:Resources.TradeKillsDeaths}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
-					<TextBlock Text="(Kill revenge occured maximum 4s after the initial kill)"
+					<TextBlock Text="{x:Static properties:Resources.TradeKillsDeathsDescription}"
 							   Margin="5 0 0 0"
 							   Style="{StaticResource TextBlockSectionSubTitle}"/>
 				</StackPanel>
@@ -243,13 +245,15 @@
 						BorderThickness="1"
 						Padding="10">
 					<StackPanel Orientation="Vertical">
-						<TextBlock Text="Trade kill "
+						<TextBlock Text="{x:Static properties:Resources.TradeKill}"
 								   FontSize="18">
+							<Run Text=""/>
 							<TextBlock Text="{Binding CurrentPlayer.TradeKillCount}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
-						<TextBlock Text="Trade death "
+						<TextBlock Text="{x:Static properties:Resources.TradeDeath}"
 								   FontSize="18">
+							<Run Text=""/>
 							<TextBlock Text="{Binding CurrentPlayer.TradeDeathCount}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>

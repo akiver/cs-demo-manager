@@ -341,6 +341,204 @@ namespace Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string Rank0 {
+            get {
+                return ResourceManager.GetString("Rank0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver I.
+        /// </summary>
+        internal static string Rank1 {
+            get {
+                return ResourceManager.GetString("Rank1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Nova Master.
+        /// </summary>
+        internal static string Rank10 {
+            get {
+                return ResourceManager.GetString("Rank10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Guardian I.
+        /// </summary>
+        internal static string Rank11 {
+            get {
+                return ResourceManager.GetString("Rank11", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Guardian II.
+        /// </summary>
+        internal static string Rank12 {
+            get {
+                return ResourceManager.GetString("Rank12", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Master Guardian Elite.
+        /// </summary>
+        internal static string Rank13 {
+            get {
+                return ResourceManager.GetString("Rank13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Distinguished Master Guardian.
+        /// </summary>
+        internal static string Rank14 {
+            get {
+                return ResourceManager.GetString("Rank14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legendary Eagle.
+        /// </summary>
+        internal static string Rank15 {
+            get {
+                return ResourceManager.GetString("Rank15", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Legendary Eagle Master.
+        /// </summary>
+        internal static string Rank16 {
+            get {
+                return ResourceManager.GetString("Rank16", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Supreme Master First Class.
+        /// </summary>
+        internal static string Rank17 {
+            get {
+                return ResourceManager.GetString("Rank17", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global Elite.
+        /// </summary>
+        internal static string Rank18 {
+            get {
+                return ResourceManager.GetString("Rank18", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver II.
+        /// </summary>
+        internal static string Rank2 {
+            get {
+                return ResourceManager.GetString("Rank2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver III.
+        /// </summary>
+        internal static string Rank3 {
+            get {
+                return ResourceManager.GetString("Rank3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver IV.
+        /// </summary>
+        internal static string Rank4 {
+            get {
+                return ResourceManager.GetString("Rank4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver Elite.
+        /// </summary>
+        internal static string Rank5 {
+            get {
+                return ResourceManager.GetString("Rank5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Silver Elite Master.
+        /// </summary>
+        internal static string Rank6 {
+            get {
+                return ResourceManager.GetString("Rank6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Nova I.
+        /// </summary>
+        internal static string Rank7 {
+            get {
+                return ResourceManager.GetString("Rank7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Nova II.
+        /// </summary>
+        internal static string Rank8 {
+            get {
+                return ResourceManager.GetString("Rank8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gold Nova III.
+        /// </summary>
+        internal static string Rank9 {
+            get {
+                return ResourceManager.GetString("Rank9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        internal static string StatusNone {
+            get {
+                return ResourceManager.GetString("StatusNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To watch.
+        /// </summary>
+        internal static string StatusToWatch {
+            get {
+                return ResourceManager.GetString("StatusToWatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watched.
+        /// </summary>
+        internal static string StatusWatched {
+            get {
+                return ResourceManager.GetString("StatusWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap valve {

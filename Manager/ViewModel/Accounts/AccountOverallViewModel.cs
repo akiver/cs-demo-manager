@@ -386,7 +386,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			OverallStats datas = await _accountStatsService.GetGeneralAccountStatsAsync(demos);
 			MatchCount = datas.MatchCount;
@@ -418,17 +418,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.MatchWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.MatchLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.MatchDrawCount
 				}
 			};

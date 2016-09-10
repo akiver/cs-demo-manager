@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BalloonNoNewSuspectsFound" xml:space="preserve">
+    <value>Aucun nouveau suspect banni détecté.</value>
+  </data>
+  <data name="CheckEvery" xml:space="preserve">
+    <value>Vérifier toutes les</value>
+  </data>
+  <data name="CheckNow" xml:space="preserve">
+    <value>Vérifier maintenant</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="IsNotRunning" xml:space="preserve">
+    <value>est inactif</value>
+  </data>
+  <data name="IsRunning" xml:space="preserve">
+    <value>est actif</value>
+  </data>
+  <data name="LaunchAtStartup" xml:space="preserve">
+    <value>Lancer au démarrage</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Quitter</value>
+  </data>
+  <data name="ShowCsgoDm" xml:space="preserve">
+    <value>Lancer CSGO-DM</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Démarrer</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Arrêter</value>
+  </data>
+  <data name="SuspectsList" xml:space="preserve">
+    <value>Liste des suspects</value>
+  </data>
+  <data name="UnableToStartBot" xml:space="preserve">
+    <value>Impossible de démarrer le BOT.</value>
+  </data>
+  <data name="Xhour" xml:space="preserve">
+    <value>{0} heure</value>
+  </data>
+  <data name="Xhours" xml:space="preserve">
+    <value>{0} heures</value>
+  </data>
+  <data name="Xminutes" xml:space="preserve">
+    <value>{0} minutes</value>
+  </data>
+  <data name="XsuspectsHaveBeenBanned" xml:space="preserve">
+    <value>{0} suspect(s) ont été banni(s).</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Langage</value>
+  </data>
+</root>

@@ -5,6 +5,7 @@
 					  xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
 					  xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
 					  xmlns:command="http://www.galasoft.ch/mvvmlight"
+					  xmlns:properties="clr-namespace:Manager.Properties"
 					  xmlns:converters="clr-namespace:Manager.Converters"
 					  GlowBrush="{StaticResource HighlightBrush}"
 					  Title="CSGO Demos Manager"
@@ -41,9 +42,9 @@
 	<controls:MetroWindow.RightWindowCommands>
 		<controls:WindowCommands>
 			<Button Command="{Binding SettingsFlyoutOpenedCommand}"
-					ToolTip="Display settings"
+					ToolTip="{x:Static properties:Resources.ToolTipDisplaySettings}"
 					IsEnabled="{Binding Source={StaticResource Locator}, Path=DemoList.IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-					Content="Settings" />
+					Content="{x:Static properties:Resources.Settings}" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
 
@@ -64,37 +65,38 @@
 				<TabControl controls:TabControlHelper.IsUnderlined="True"
 							Margin="15 0 0 0"
 							TabStripPlacement="Left">
-					<controls:MetroTabItem Header="Stats">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Stats}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="Date"
+							<TextBlock Text="{x:Static properties:Resources.Date}"
 									   Style="{StaticResource TitleSettingsStyle}" />
-							<TextBlock Text="From :"
+							<TextBlock Text="{x:Static properties:Resources.From}"
 									   Style="{StaticResource LabelStyle}" />
 							<DatePicker IsTodayHighlighted="True"
 										Focusable="False"
 										DisplayDateStart="2011-11-30"
 										SelectedDate="{Binding Source={StaticResource Locator}, Path=Settings.DateStatsFrom}"/>
-							<TextBlock Text="To :"
+							<TextBlock Text="{x:Static properties:Resources.To}"
 									   Style="{StaticResource LabelStyle}" />
 							<DatePicker IsTodayHighlighted="True"
 										Focusable="False"
 										SelectedDate="{Binding Source={StaticResource Locator}, Path=Settings.DateStatsTo}"/>
-							<CheckBox Content="Limit stats to selected folder"
+							<CheckBox Content="{x:Static properties:Resources.LimitStatsToSelectedFolder}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.LimitStatsSelectedFolder}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}"/>
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Watch">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Watch}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="Launch Options"
+							<TextBlock Text="{x:Static properties:Resources.LaunchOptions}"
 									   Style="{StaticResource TitleSettingsStyle}" />
-							<CheckBox Content="Fullscreen"
+							<CheckBox Content="{x:Static properties:Resources.Fullscreen}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionFullscreen}" />
-							<Label Target="{Binding ElementName=ResolutionWidthTextBox}">Width:</Label>
+							<Label Target="{Binding ElementName=ResolutionWidthTextBox}"
+								   Content="{x:Static properties:Resources.Width}" />
 							<TextBox x:Name="ResolutionWidthTextBox"
 									 PreviewTextInput="NumberPreviewTextInput"
 									 Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth, Converter={StaticResource NullableValue}}">
@@ -106,7 +108,8 @@
 								</i:Interaction.Triggers>
 							</TextBox>
 
-							<Label Target="{Binding ElementName=ResolutionHeightTextBox}">Height:</Label>
+							<Label Target="{Binding ElementName=ResolutionHeightTextBox}"
+								   Content="{x:Static properties:Resources.Height}" />
 							<TextBox x:Name="ResolutionHeightTextBox"
 									 PreviewTextInput="NumberPreviewTextInput"
 									 Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionHeight, Converter={StaticResource NullableValue}}">
@@ -118,7 +121,8 @@
 								</i:Interaction.Triggers>
 							</TextBox>
 
-							<Label Target="{Binding ElementName=LaunchParametersTextBox}">Additionals parameters:</Label>
+							<Label Target="{Binding ElementName=LaunchParametersTextBox}"
+								   Content="{x:Static properties:Resources.AdditionalsParametersLabel}"/>
 							<TextBox x:Name="LaunchParametersTextBox"
 									 Text="{Binding Source={StaticResource Locator}, Path=Settings.LaunchParameters}">
 								<i:Interaction.Triggers>
@@ -128,11 +132,11 @@
 									</i:EventTrigger>
 								</i:Interaction.Triggers>
 							</TextBox>
-							<CheckBox Content="Use custom highlights / lowlights generation"
+							<CheckBox Content="{x:Static properties:Resources.UseCutomLowlightHighlight}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsUseCustomActionGeneration}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							<CheckBox x:Name="EnableMoviemakerModeCheckbox"
-									  Content="Enable moviemaker mode"
+									  Content="{x:Static properties:Resources.EnableMoviemakerMode}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}">
 								<i:Interaction.Triggers>
@@ -143,42 +147,42 @@
 								</i:Interaction.Triggers>
 							</CheckBox>
 							<StackPanel Orientation="Horizontal">
-								<TextBlock Text="csgo.exe path : "
+								<TextBlock Text="{x:Static properties:Resources.CsgoExePath}"
 										   Style="{StaticResource SubTitleSettingsStyle}"/>
 								<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.CsgoExePath}"
 										 IsEnabled="False" />
-								<Button Content="Browse"
-										Margin="5 0 0 0"
+								<Button Content="{x:Static properties:Resources.Browse}"
+										Margin="5 0 0 5"
 										Style="{DynamicResource GeneralButton}"
 										IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}"/>
 							</StackPanel>
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Accounts">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Accounts}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
 							<StackPanel Orientation="Horizontal">
 								<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.AddAccountCommand}"
 										Style="{DynamicResource SettingsButton}"
-										Content="Add an account" />
+										Content="{x:Static properties:Resources.AddAccount}" />
 								<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.RemoveAccountCommand}"
 										CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"
 										Style="{DynamicResource GeneralButton}"
-										Content="Remove account" />
+										Content="{x:Static properties:Resources.RemoveAccount}" />
 								<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.SetAsWatchAccountCommand}"
 										CommandParameter="{Binding Source={StaticResource Locator}, Path=Settings.SelectedWatchAccount}"
 										Style="{DynamicResource GeneralButton}"
-										Content="Use this account for watch" />
+										Content="{x:Static properties:Resources.UseAccountForWatch}" />
 								<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.SyncAccountsNickname}"
 										Style="{DynamicResource GeneralButton}"
-										Content="Sync nicknames" />
+										Content="{x:Static properties:Resources.SyncNicknames}" />
 							</StackPanel>
 							<StackPanel Orientation="Horizontal"
 										Margin="0 5 0 10">
 								<TextBlock FontSize="18"
-										   Text="Current account used for watch (lowlights / highlights) : " />
+										   Text="{x:Static properties:Resources.CurrentAccountWatch}" />
 								<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.SelectedWatchAccount}"
 										   FontSize="18" />
 							</StackPanel>
@@ -186,40 +190,40 @@
 									  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"/>
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Folders">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Folders}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
 							<StackPanel Orientation="Horizontal">
 								<Button Command="{Binding AddFolderCommand}"
 										Style="{DynamicResource SettingsButton}"
-										Content="Add folder" />
+										Content="{x:Static properties:Resources.AddFolder}" />
 								<Button Command="{Binding RemoveFolderCommand}"
 										CommandParameter="{Binding Path=SelectedFolder}"
 										Style="{DynamicResource GeneralButton}"
-										Content="Remove folder" />
+										Content="{x:Static properties:Resources.RemoveFolder}" />
 							</StackPanel>
 							<ListView ItemsSource="{Binding Folders}"
 									  SelectedItem="{Binding SelectedFolder}"/>
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Download">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Download}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="Destination folder : "
+							<TextBlock Text="{x:Static properties:Resources.DestinationFolderLabel}"
 									   Style="{StaticResource SubTitleSettingsStyle}" />
 							<StackPanel Orientation="Horizontal">
 								<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.DownloadFolderPath}"
 										 IsEnabled="False" />
-								<Button Content="Browse"
+								<Button Content="{x:Static properties:Resources.Browse}"
 										Style="{DynamicResource GeneralButton}"
 										Margin="5 0 0 0"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectDownloadFolderPathCommand}"/>
 							</StackPanel>
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Columns">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Columns}">
 						<Grid Margin="10"
 							  HorizontalAlignment="Left">
 							<Grid.ColumnDefinitions>
@@ -229,303 +233,333 @@
 							</Grid.ColumnDefinitions>
 							<StackPanel Orientation="Vertical"
 										Grid.Column="0">
-								<CheckBox Content="1K"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipOneKill}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="2K"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipTwoKill}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="3K"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipThreeKill}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="4K"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipFourKill}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="5K"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipFiveKill}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="1v1"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipOneVersusOne}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v1Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="1v2"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipOneVersusTwo}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v2Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="1v3"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipOneVersusThree}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v3Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="1v4"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipOneVersusFour}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v4Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="1v5"
+								<CheckBox Content="{x:Static properties:Resources.HeaderToolTipOneVersusFive}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutch1v5Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="ADR (Average Damage Per Round)"
+								<CheckBox Content="{x:Static properties:Resources.AdrFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAverageDamageColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="APR (Assist Per Round)"
+								<CheckBox Content="{x:Static properties:Resources.AprFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Assists"
+								<CheckBox Content="{x:Static properties:Resources.AssistsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Ban (VAC / OW)"
+								<CheckBox Content="{x:Static properties:Resources.BanFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Bomb defused"
+								<CheckBox Content="{x:Static properties:Resources.BombDefusedFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Bomb exploded"
+								<CheckBox Content="{x:Static properties:Resources.BombExplodedFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Bomb planted"
+								<CheckBox Content="{x:Static properties:Resources.BombPlantedFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Clientname"
+								<CheckBox Content="{x:Static properties:Resources.ClientName}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClientnameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Clutch"
+								<CheckBox Content="{x:Static properties:Resources.ClutchsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Crouch kills"
+								<CheckBox Content="{x:Static properties:Resources.CrouchKillsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowCrouchKillColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							</StackPanel>
 							<StackPanel Orientation="Vertical"
 										Grid.Column="1">
-								<CheckBox Content="Comment"
+								<CheckBox Content="{x:Static properties:Resources.Comment}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowCommentColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Date"
+								<CheckBox Content="{x:Static properties:Resources.Date}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Deaths"
+								<CheckBox Content="{x:Static properties:Resources.DeathsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Demo name"
+								<CheckBox Content="{x:Static properties:Resources.DemoName}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Demo type"
+								<CheckBox Content="{x:Static properties:Resources.DemoType}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoTypeColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="DPR (Death Per Round)"
+								<CheckBox Content="{x:Static properties:Resources.DprFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Duration"
+								<CheckBox Content="{x:Static properties:Resources.Duration}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowDurationColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Entry kills"
+								<CheckBox Content="{x:Static properties:Resources.EntryKillsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEkColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Equipement value team 1"
+								<CheckBox Content="{x:Static properties:Resources.EquipmentValueTeam1Full}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam1Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Equipement value team 2"
+								<CheckBox Content="{x:Static properties:Resources.EquipmentValueTeam2Full}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam2Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="ESEA RWS"
+								<CheckBox Content="{x:Static properties:Resources.EseaRwsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowEseaRwsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Framerate"
+								<CheckBox Content="{x:Static properties:Resources.FramerateFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowFramerateColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="HLTV Rating"
+								<CheckBox Content="{x:Static properties:Resources.HltvFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Hostname"
+								<CheckBox Content="{x:Static properties:Resources.Hostname}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowHostnameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="HS"
+								<CheckBox Content="{x:Static properties:Resources.HeadshotsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Jump kills"
+								<CheckBox Content="{x:Static properties:Resources.JumpKillsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowJumpKillColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="K/D"
+								<CheckBox Content="{x:Static properties:Resources.KillsDeathsRatioFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowKdColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="KPR"
+								<CheckBox Content="{x:Static properties:Resources.KillsPerRoundFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Map name"
+								<CheckBox Content="{x:Static properties:Resources.MapName}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowMapNameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="MVP"
+								<CheckBox Content="{x:Static properties:Resources.MvpFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowMvpColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							</StackPanel>
 							<StackPanel Orientation="Vertical"
 										Grid.Column="2">
-								<CheckBox Content="Round played"
+								<CheckBox Content="{x:Static properties:Resources.RoundPlayedFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundPlayedColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Round type"
+								<CheckBox Content="{x:Static properties:Resources.RoundType}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowRoundTypeColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Score team 1"
+								<CheckBox Content="{x:Static properties:Resources.ScoreTeam1Full}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Score team 2"
+								<CheckBox Content="{x:Static properties:Resources.ScoreTeam2Full}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam2Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Side trouble"
+								<CheckBox Content="{x:Static properties:Resources.SideTroubleFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowSideTroubleColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Start money team 1"
+								<CheckBox Content="{x:Static properties:Resources.StartMoneyTeam1Full}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam1Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Start money team 2"
+								<CheckBox Content="{x:Static properties:Resources.StartMoneyTeam2Full}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam2Column}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Team 1 name"
+								<CheckBox Content="{x:Static properties:Resources.Team1Name}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Team 2 name"
+								<CheckBox Content="{x:Static properties:Resources.Team2Name}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Team trouble"
+								<CheckBox Content="{x:Static properties:Resources.TeamNameTroubleFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Tickrate"
+								<CheckBox Content="{x:Static properties:Resources.TickrateFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Ticks"
+								<CheckBox Content="{x:Static properties:Resources.Ticks}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTicksColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="TK (Team Kill)"
+								<CheckBox Content="{x:Static properties:Resources.TkFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTkColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Total damage health"
+								<CheckBox Content="{x:Static properties:Resources.TotalDamagesHealthFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Total damage armor"
+								<CheckBox Content="{x:Static properties:Resources.TotalDamagesArmorFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Total kills"
+								<CheckBox Content="{x:Static properties:Resources.KillsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Trade death"
+								<CheckBox Content="{x:Static properties:Resources.TradeDeathsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeDeathColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Trade kill"
+								<CheckBox Content="{x:Static properties:Resources.TradeKillsFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Winner clan name"
+								<CheckBox Content="{x:Static properties:Resources.WinnerTeamNameFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-								<CheckBox Content="Winner side"
+								<CheckBox Content="{x:Static properties:Resources.WinnerSideFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							</StackPanel>
 						</Grid>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Suspects">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Suspects}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<CheckBox Content="Ignore ban occured after demo date"
+							<CheckBox Content="{x:Static properties:Resources.IgnoreBanOccuredAfterDemoDate}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IgnoreLaterBan}" />
-							<CheckBox Content="Start BOT on launch"
+							<CheckBox Content="{x:Static properties:Resources.StartBotOnLaunch}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.StartBotOnLaunch}" />
-							<CheckBox Content="Close BOT on exit"
+							<CheckBox Content="{x:Static properties:Resources.CloseBotOnExit}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.CloseBotOnExit}" />
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Data cache">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.DataCache}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
 							<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
 									Style="{DynamicResource SettingsButton}"
-									Content="Clear demos data" />
+									Content="{x:Static properties:Resources.ClearDemosData}" />
 							<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.ExportCustomDataCacheCommand}"
 									Style="{DynamicResource SettingsButton}"
-									Content="Export custom data" />
+									Content="{x:Static properties:Resources.ExportCustomData}" />
 							<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.ImportCustomDataCacheCommand}"
 									Style="{DynamicResource SettingsButton}"
-									Content="Import custom data" />
+									Content="{x:Static properties:Resources.ImportCustomData}" />
 							<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.DeleteVdmFilesCommand}"
 									Style="{DynamicResource SettingsButton}"
-									Content="Clear VDM files" />
+									Content="{x:Static properties:Resources.ClearVdmFiles}" />
 							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.CacheSizeAsString}"
 									   Style="{StaticResource SubTitleSettingsStyle}"/>
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="Misc">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.Misc}">
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="Date Format"
+							<TextBlock Text="{x:Static properties:Resources.DateFormat}"
 									   Style="{StaticResource TitleSettingsStyle}" />
 							<CheckBox Content="dd/mm/yyyy"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.DateFormatUsa}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-							<TextBlock Text="Theme"
+							<TextBlock Text="{x:Static properties:Resources.Theme}"
 									   Style="{StaticResource TitleSettingsStyle}" />
 							<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Themes}"
 									  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedTheme}"
 									  DisplayMemberPath="Title"
 									  SelectedValuePath="Id" />
+							<TextBlock Text="{x:Static properties:Resources.Language}"
+									   Style="{StaticResource TitleSettingsStyle}" />
+							<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Languages}"
+									  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedLanguage}"
+									  DisplayMemberPath="Title"
+									  SelectedValuePath="Id" />
+							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
+									   Foreground="{StaticResource LightRedColorBrush}"
+									   Text="{x:Static properties:Resources.InformationTranslateIncomplete}">
+							</TextBlock>
+							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
+									   Foreground="{StaticResource OrangeBrush}">
+								<Run Text="{x:Static properties:Resources.InfomationHelpTranslatingApp}" />
+									<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+										   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
+										GitHub
+									</Hyperlink>
+								<Run Text="."/>
+							</TextBlock>
 							<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.NavigateToLogFile}"
 									Style="{DynamicResource SettingsButton}"
-									Content="Browse to errors file" />
+									Content="{x:Static properties:Resources.BrowseToErrorsFile}" />
 						</StackPanel>
 					</controls:MetroTabItem>
-					<controls:MetroTabItem Header="About">
+					<controls:MetroTabItem Header="{x:Static properties:Resources.About}">
 						<StackPanel Orientation="Vertical"
 									Margin="10">
 							<TextBlock Text="{Binding CreditsText}"
 									   Style="{StaticResource TitleSettingsStyle}"
 									   Foreground="{StaticResource HighlightBrush}"/>
+							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
+									   Text="{x:Static properties:Resources.FreeSoftware}"/>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
-								CSGO Demos Manager is a free open source software and will always be.
-							</TextBlock>
-							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
-								Source code is available on
+								<Run Text="{x:Static properties:Resources.SourceCodeAvailable}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
 									GitHub
-								</Hyperlink>.
+								</Hyperlink><Run Text="."/>
 								<LineBreak />
 							</TextBlock>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
-								If you encountered a bug or have any suggestions, feel free to open an issue on
+								<Run Text="{x:Static properties:Resources.EncounteredBug}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager/issues">
-									GitHub 
+									 GitHub 
 								</Hyperlink>
-								or send an
+								<Run Text="{x:Static properties:Resources.OrSendAn}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="mailto:ys.renaud@gmail.com">
-									email
+									<Run Text="{x:Static properties:Resources.Email}" />
 									<Hyperlink.ContextMenu>
 										<ContextMenu>
-											<MenuItem Header="Copy email address"
+											<MenuItem Header="{x:Static properties:Resources.CopyEmailAddress}"
 															   Command="{Binding CopyTextCommand}"
 															   CommandParameter="ys.renaud@gmail.com">
 											</MenuItem>
 										</ContextMenu>
 									</Hyperlink.ContextMenu>
-								</Hyperlink>.
+								</Hyperlink><Run Text="."/>
 							</TextBlock>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
-								If you want to say thank you, please feel free to make a
+								<Run Text="{x:Static properties:Resources.WantSayThank}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="http://csgo-demos-manager.com/donate">
-									donation
-								</Hyperlink>.
+									<Run Text="{x:Static properties:Resources.Donation}" />
+								</Hyperlink><Run Text="."/>
 								<LineBreak />
 							</TextBlock>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
 									   Foreground="{StaticResource LightRedColorBrush}">
-								Always download the application installer from the official website
+								<Run Text="{x:Static properties:Resources.AlwaysDownload}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="http://csgo-demos-manager.com">
-									http://csgo-demos-manager.com
-								</Hyperlink>.
+									 http://csgo-demos-manager.com
+								</Hyperlink><Run Text="." />
 							</TextBlock>
+							<TextBlock Text="{x:Static properties:Resources.Contributors}"
+									   Style="{StaticResource TitleSettingsStyle}"
+									   Foreground="{StaticResource HighlightBrush}"/>
+							<TextBlock Text="{Binding Contributors}"
+									   Style="{StaticResource SubTitleSettingsStyle}"
+									   TextWrapping="Wrap"/>
+							<TextBlock Text="{x:Static properties:Resources.Translators}"
+									   Style="{StaticResource TitleSettingsStyle}"
+									   Foreground="{StaticResource HighlightBrush}"/>
+							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
+									   Text="{Binding Translators}"
+									   TextWrapping="Wrap"/>
 						</StackPanel>
 					</controls:MetroTabItem>
 				</TabControl>

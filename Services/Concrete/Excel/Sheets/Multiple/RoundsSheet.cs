@@ -74,7 +74,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 						SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
 						SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide.AsString());
 						SetCellValue(row, columnNumber++, CellType.String, round.EndReason.AsString());
-						SetCellValue(row, columnNumber++, CellType.String, round.RoundTypeAsString);
+						SetCellValue(row, columnNumber++, CellType.String, round.Type.AsString());
 						SetCellValue(row, columnNumber++, CellType.String, round.SideTrouble.AsString());
 						SetCellValue(row, columnNumber++, CellType.String, round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.KillCount);

@@ -3,12 +3,14 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					mc:Ignorable="d"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:models="clr-namespace:Core.Models;assembly=csgodm.core">
+					xmlns:models="clr-namespace:Core.Models;assembly=csgodm.core"
+					xmlns:properties="clr-namespace:Manager.Properties">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary>
 			<models:Demo x:Key="Demo" />
 		</ResourceDictionary>
+		<ResourceDictionary Source="Accents/CustomLime.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 	
 	<Style TargetType="TextBlock" x:Key="ButtonTitleStyle">
@@ -98,8 +100,15 @@
 		<Setter Property="VerticalAlignment" Value="Center" />
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="DamageLabelStyle">
+		<Setter Property="FontSize" Value="26" />
+		<Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+	</Style>
+	
 	<Style TargetType="TextBlock" x:Key="DamageValueStyle">
 		<Setter Property="FontSize" Value="30" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
 	</Style>
 
 	<Style TargetType="TextBlock" x:Key="StatsTitleStyle">
@@ -147,35 +156,35 @@
 				<Setter Property="Background"
 						Value="{StaticResource GreenBrush}" />
 				<Setter Property="Text"
-						Value="Win" />
+						Value="{x:Static properties:Resources.Win}" />
 			</DataTrigger>
 			<DataTrigger Binding="{Binding WinStatus}"
 						 Value="won-s">
 				<Setter Property="Background"
 						Value="{StaticResource GreenBrush}" />
 				<Setter Property="Text"
-						Value="Win (S)" />
+						Value="{x:Static properties:Resources.WinSurrender}" />
 			</DataTrigger>
 			<DataTrigger Binding="{Binding WinStatus}"
 						 Value="lost">
 				<Setter Property="Background"
 						Value="{StaticResource RedColorBrush}" />
 				<Setter Property="Text"
-						Value="Lost" />
+						Value="{x:Static properties:Resources.Lost}" />
 			</DataTrigger>
 			<DataTrigger Binding="{Binding WinStatus}"
 						 Value="lost-s">
 				<Setter Property="Background"
 						Value="{StaticResource RedColorBrush}" />
 				<Setter Property="Text"
-						Value="Lost (S)" />
+						Value="{x:Static properties:Resources.LostSurrender}" />
 			</DataTrigger>
 			<DataTrigger Binding="{Binding WinStatus}"
 						 Value="draw">
 				<Setter Property="Background"
 						Value="{StaticResource LightBlueBrush}" />
 				<Setter Property="Text"
-						Value="Draw" />
+						Value="{x:Static properties:Resources.Draw}" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
@@ -190,7 +199,7 @@
 	
 	<!-- Heatmaps TextBlock -->
 	<Style TargetType="TextBlock" x:Key="ToolTipPlayerHeatmapStyle">
-		<Setter Property="Foreground" Value="{StaticResource LightGreenBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
 		<Setter Property="FontSize" Value="14" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="HorizontalAlignment" Value="Center" />

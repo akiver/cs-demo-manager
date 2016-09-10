@@ -248,7 +248,7 @@ namespace Manager.ViewModel.Demos
 							+ " ;setang " + SelectedStuff.ShooterAnglePitch + " " + SelectedStuff.ShooterAngleYaw;
 							Clipboard.SetText(command);
 							HasNotificationMessage = true;
-							NotificationMessage = "setpos command copied to clipboard";
+							NotificationMessage = Properties.Resources.NotificationSetposCommandCopied;
 							await Task.Delay(5000);
 							HasNotificationMessage = false;
 						},
@@ -279,11 +279,11 @@ namespace Manager.ViewModel.Demos
 			_stuffService = stuffService;
 			_mapService = mapService;
 
-			StuffSelectors.Add(new ComboboxSelector("smokes", "Smokes"));
-			StuffSelectors.Add(new ComboboxSelector("flashbangs", "Flashbangs"));
-			StuffSelectors.Add(new ComboboxSelector("he", "HE Grenades"));
-			StuffSelectors.Add(new ComboboxSelector("molotovs", "Molotovs"));
-			StuffSelectors.Add(new ComboboxSelector("decoys", "Decoys"));
+			StuffSelectors.Add(new ComboboxSelector("smokes", Properties.Resources.Smokes));
+			StuffSelectors.Add(new ComboboxSelector("flashbangs", Properties.Resources.Flashbangs));
+			StuffSelectors.Add(new ComboboxSelector("he", Properties.Resources.HeGrenades));
+			StuffSelectors.Add(new ComboboxSelector("molotovs", Properties.Resources.Molotovs));
+			StuffSelectors.Add(new ComboboxSelector("decoys", Properties.Resources.Decoys));
 			CurrentStuffSelector = StuffSelectors[0];
 
 			if (IsInDesignMode)
@@ -299,7 +299,7 @@ namespace Manager.ViewModel.Demos
 
 		private async Task LoadData()
 		{
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			IsBusy = true;
 			HasNotificationMessage = true;
 			if (IsInDesignMode)

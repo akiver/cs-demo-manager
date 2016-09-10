@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="fr" original="CORE/PROPERTIES/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="CORE/PROPERTIES/RESOURCES.RESX" datatype="resx">
+        <trans-unit id="app" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\app.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\app.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="avatar" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\avatar.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="cevo" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\cevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\cevo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="ebot" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\ebot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\ebot.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo01" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo01.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo02" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo02.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo03" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo03.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo04" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo04.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo04.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo05" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo05.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo06" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo06.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo06.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo07" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo07.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo07.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo08" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo08.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo08.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo09" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo09.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo09.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo10" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo10.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo11" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo11.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo12" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo12.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo13" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo13.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo14" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo14.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo15" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo15.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo16" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo16.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo17" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo17.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="elo18" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\elo18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\elo18.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="esea" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\esea.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\esea.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="esl" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\esl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\esl.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="faceit" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\faceit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\faceit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="no_rank" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Ranks\no_rank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Ranks\no_rank.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="popflash" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\popflash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\popflash.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="pov" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\pov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\pov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="Rank0" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="final">Aucun</target>
+        </trans-unit>
+        <trans-unit id="Rank1" translate="yes" xml:space="preserve">
+          <source>Silver I</source>
+          <target state="final">Argent I</target>
+        </trans-unit>
+        <trans-unit id="Rank10" translate="yes" xml:space="preserve">
+          <source>Gold Nova Master</source>
+          <target state="final">Maître nova d'or</target>
+        </trans-unit>
+        <trans-unit id="Rank11" translate="yes" xml:space="preserve">
+          <source>Master Guardian I</source>
+          <target state="final">Maître gardien I</target>
+        </trans-unit>
+        <trans-unit id="Rank12" translate="yes" xml:space="preserve">
+          <source>Master Guardian II</source>
+          <target state="final">Maître gardien II</target>
+        </trans-unit>
+        <trans-unit id="Rank13" translate="yes" xml:space="preserve">
+          <source>Master Guardian Elite</source>
+          <target state="final">Maître gardien d'élite</target>
+        </trans-unit>
+        <trans-unit id="Rank14" translate="yes" xml:space="preserve">
+          <source>Distinguished Master Guardian</source>
+          <target state="final">Maître gardien distingué</target>
+        </trans-unit>
+        <trans-unit id="Rank15" translate="yes" xml:space="preserve">
+          <source>Legendary Eagle</source>
+          <target state="final">Aigle légendaire</target>
+        </trans-unit>
+        <trans-unit id="Rank16" translate="yes" xml:space="preserve">
+          <source>Legendary Eagle Master</source>
+          <target state="final">Maître aigle légendaire</target>
+        </trans-unit>
+        <trans-unit id="Rank17" translate="yes" xml:space="preserve">
+          <source>Supreme Master First Class</source>
+          <target state="final">Maître suprême de première classe</target>
+        </trans-unit>
+        <trans-unit id="Rank18" translate="yes" xml:space="preserve">
+          <source>Global Elite</source>
+          <target state="final">L'élite mondiale</target>
+        </trans-unit>
+        <trans-unit id="Rank2" translate="yes" xml:space="preserve">
+          <source>Silver II</source>
+          <target state="final">Argent II</target>
+        </trans-unit>
+        <trans-unit id="Rank3" translate="yes" xml:space="preserve">
+          <source>Silver III</source>
+          <target state="final">Argent III</target>
+        </trans-unit>
+        <trans-unit id="Rank4" translate="yes" xml:space="preserve">
+          <source>Silver IV</source>
+          <target state="final">Argent IV</target>
+        </trans-unit>
+        <trans-unit id="Rank5" translate="yes" xml:space="preserve">
+          <source>Silver Elite</source>
+          <target state="final">Élite d'argent</target>
+        </trans-unit>
+        <trans-unit id="Rank6" translate="yes" xml:space="preserve">
+          <source>Silver Elite Master</source>
+          <target state="final">Maître élite d'argent</target>
+        </trans-unit>
+        <trans-unit id="Rank7" translate="yes" xml:space="preserve">
+          <source>Gold Nova I</source>
+          <target state="final">Nova d'or I</target>
+        </trans-unit>
+        <trans-unit id="Rank8" translate="yes" xml:space="preserve">
+          <source>Gold Nova II</source>
+          <target state="final">Nova d'or II</target>
+        </trans-unit>
+        <trans-unit id="Rank9" translate="yes" xml:space="preserve">
+          <source>Gold Nova III</source>
+          <target state="final">Nova d'or III</target>
+        </trans-unit>
+        <trans-unit id="StatusNone" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="final">Aucun</target>
+        </trans-unit>
+        <trans-unit id="StatusToWatch" translate="yes" xml:space="preserve">
+          <source>To watch</source>
+          <target state="final">A regarder</target>
+        </trans-unit>
+        <trans-unit id="StatusWatched" translate="yes" xml:space="preserve">
+          <source>Watched</source>
+          <target state="final">Regardée</target>
+        </trans-unit>
+        <trans-unit id="valve" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\Images\Logos\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="final">..\Resources\Images\Logos\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

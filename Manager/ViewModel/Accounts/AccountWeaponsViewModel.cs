@@ -39,9 +39,9 @@ namespace Manager.ViewModel.Accounts
 
 		private string _notificationMessage;
 
-		private const string KILLS = "Kills";
+		private readonly string _killsLabel = Properties.Resources.Kills;
 
-		private const string DEATHS = "Deaths";
+		private readonly string _deathsLabel = Properties.Resources.Deaths;
 
 		#region Rifles properties
 		private List<CategoricalDataPoint> _datasAk47Kill;
@@ -772,7 +772,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			WeaponStats datas = await _accountStatsService.GetWeaponStatsAsync(demos);
 
@@ -782,7 +782,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.AK_47,
 					Value = datas.KillAk47Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -792,7 +792,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.AK_47,
 					Value = datas.DeathAk47Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -802,7 +802,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.M4A4,
 					Value = datas.KillM4A4Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -812,7 +812,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.M4A4,
 					Value = datas.DeathM4A4Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -822,7 +822,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.M4A1,
 					Value = datas.KillM4A1Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -832,7 +832,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.M4A1,
 					Value = datas.DeathM4A1Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -842,7 +842,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.AUG,
 					Value = datas.KillAugCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -852,7 +852,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.AUG,
 					Value = datas.DeathAugCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -862,7 +862,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.GALIL,
 					Value = datas.KillGalilarCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -872,7 +872,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.GALIL,
 					Value = datas.DeathGalilarCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -882,7 +882,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SG_553,
 					Value = datas.KillSg553Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -892,7 +892,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SG_553,
 					Value = datas.DeathSg553Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -902,7 +902,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.FAMAS,
 					Value = datas.KillFamasCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -912,7 +912,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.FAMAS,
 					Value = datas.DeathFamasCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -923,7 +923,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.AWP,
 					Value = datas.KillAwpCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -933,7 +933,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.AWP,
 					Value = datas.DeathAwpCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -943,7 +943,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SCAR_20,
 					Value = datas.KillScar20Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -953,7 +953,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SCAR_20,
 					Value = datas.DeathScar20Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -963,7 +963,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.G3SG1,
 					Value = datas.KillG3Sg1Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -973,7 +973,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.G3SG1,
 					Value = datas.DeathG3Ssg1Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -983,7 +983,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SSG_08,
 					Value = datas.KillScoutCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -993,7 +993,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SSG_08,
 					Value = datas.DeathScoutCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1004,7 +1004,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MP7,
 					Value = datas.KillMp7Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1014,7 +1014,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MP7,
 					Value = datas.DeathMp7Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1024,7 +1024,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MP9,
 					Value = datas.KillMp9Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1034,7 +1034,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MP9,
 					Value = datas.DeathMp9Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1044,7 +1044,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.P90,
 					Value = datas.KillP90Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1054,7 +1054,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.P90,
 					Value = datas.DeathP90Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1064,7 +1064,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.PP_BIZON,
 					Value = datas.KillBizonCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1074,7 +1074,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.PP_BIZON,
 					Value = datas.DeathBizonCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1084,7 +1084,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MAC_10,
 					Value = datas.KillMac10Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1094,7 +1094,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MAC_10,
 					Value = datas.DeathMac10Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1104,7 +1104,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.UMP_45,
 					Value = datas.KillUmp45Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1114,7 +1114,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.UMP_45,
 					Value = datas.DeathUmp45Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1125,7 +1125,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.NOVA,
 					Value = datas.KillNovaCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1135,7 +1135,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.NOVA,
 					Value = datas.DeathNovaCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1145,7 +1145,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.XM1014,
 					Value = datas.KillXm1014Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1155,7 +1155,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.XM1014,
 					Value = datas.DeathXm1014Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1165,7 +1165,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MAG_7,
 					Value = datas.KillMag7Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1175,7 +1175,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MAG_7,
 					Value = datas.DeathMag7Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1185,7 +1185,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SAWED_OFF,
 					Value = datas.KillSawedOffCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1195,7 +1195,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.SAWED_OFF,
 					Value = datas.DeathSawedOffCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1205,7 +1205,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.M249,
 					Value = datas.KillM249Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1215,7 +1215,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.M249,
 					Value = datas.DeathM249Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1225,7 +1225,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.NEGEV,
 					Value = datas.KillNegevCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1235,7 +1235,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.NEGEV,
 					Value = datas.DeathNegevCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1246,7 +1246,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.GLOCK,
 					Value = datas.KillGlockCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1256,7 +1256,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.GLOCK,
 					Value = datas.DeathGlockCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1266,7 +1266,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.USP,
 					Value = datas.KillUspCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1276,7 +1276,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.USP,
 					Value = datas.DeathUspCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1286,7 +1286,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.P2000,
 					Value = datas.KillP2000Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1296,7 +1296,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.P2000,
 					Value = datas.DeathP2000Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1306,7 +1306,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.P250,
 					Value = datas.KillP250Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1316,7 +1316,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.P250,
 					Value = datas.DeathP250Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1326,7 +1326,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.TEC_9,
 					Value = datas.KillTec9Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1336,7 +1336,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.TEC_9,
 					Value = datas.DeathTec9Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1346,7 +1346,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.DEAGLE,
 					Value = datas.KillDeagleCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1356,7 +1356,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.DEAGLE,
 					Value = datas.DeathDeagleCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1366,7 +1366,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.FIVE_SEVEN,
 					Value = datas.KillFiveSevenCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1376,7 +1376,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.FIVE_SEVEN,
 					Value = datas.DeathFiveSevenCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1386,7 +1386,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.DUAL_BERETTAS,
 					Value = datas.KillDualEliteCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1396,7 +1396,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.DUAL_BERETTAS,
 					Value = datas.DeathDualEliteCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1406,7 +1406,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.CZ75,
 					Value = datas.KillCz75Count,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1416,7 +1416,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.CZ75,
 					Value = datas.DeathCz75Count,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1427,7 +1427,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.HE,
 					Value = datas.KillHeGrenadeCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1437,7 +1437,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.HE,
 					Value = datas.DeathHeGrenadeCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1447,7 +1447,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MOLOTOV,
 					Value = datas.KillMolotovCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1457,7 +1457,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.MOLOTOV,
 					Value = datas.DeathMolotovCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1467,7 +1467,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.INCENDIARY,
 					Value = datas.KillIncendiaryCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1477,7 +1477,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.INCENDIARY,
 					Value = datas.DeathIncendiaryCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1487,7 +1487,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.ZEUS,
 					Value = datas.KillTazerCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1497,7 +1497,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.ZEUS,
 					Value = datas.DeathTazerCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 
@@ -1507,7 +1507,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.KNIFE,
 					Value = datas.KillKnifeCount,
-					Label = KILLS
+					Label = _killsLabel
 				}
 			};
 
@@ -1517,7 +1517,7 @@ namespace Manager.ViewModel.Accounts
 				{
 					Category = Weapon.KNIFE,
 					Value = datas.DeathKnifeCount,
-					Label = DEATHS
+					Label = _deathsLabel
 				}
 			};
 

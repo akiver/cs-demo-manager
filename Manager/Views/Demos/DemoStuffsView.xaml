@@ -3,11 +3,12 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -17,7 +18,6 @@
 		<ResourceDictionary>
 			<converters:FlashbangStuffTypeToVisibilityConverter x:Key="FlashbangStuffTypeToVisibilityConverter" />
 			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-			<converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -49,7 +49,7 @@
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -59,7 +59,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -80,11 +80,12 @@
 						  SelectedItem="{Binding SelectedPlayer}"
 						  DisplayMemberPath ="Name"
 						  SelectedValuePath="Name"
-						  Margin="5"/>
+						  Margin="5"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"/>
 				
 				<Button Command="{Binding WatchPlayerStuffCommand}"
 						Style="{DynamicResource GeneralButton}"
-						ToolTip="Watch all stuffs from this player (CTRL+W)">
+						ToolTip="{x:Static properties:Resources.ToolTipWatchAllStuffsFromPlayer}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15" 
 								   Height="15"
@@ -94,14 +95,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Watch player stuffs"
+						<TextBlock Text="{x:Static properties:Resources.WatchPlayerStuffs}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding CopySetPosCommand}"
-						ToolTip="Copy setpos command">
+						ToolTip="{x:Static properties:Resources.ToolTipCopySetposCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -111,7 +112,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Copy setpos"
+						<TextBlock Text="{x:Static properties:Resources.CopySetpos}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -144,26 +145,30 @@
 						  ItemsSource="{Binding Stuffs}"
 						  SelectedItem="{Binding SelectedStuff}"
 						  Style="{StaticResource DataGridStyle}">
+					<DataGrid.InputBindings>
+						<KeyBinding Command="{Binding CopySetPosCommand}"
+							Gesture="CTRL+C" />
+					</DataGrid.InputBindings>
 					<DataGrid.Columns>
 						<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}"
 											Width="Auto"
-											Header="Tick"
+											Header="{x:Static properties:Resources.Tick}"
 											Binding="{Binding Tick}" />
 						<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 											Width="Auto"
-											Header="Round"
+											Header="{x:Static properties:Resources.Round}"
 											Binding="{Binding RoundNumber}" />
 						<DataGridTextColumn HeaderStyle="{StaticResource ThrowerNameHeader}"
 											Width="Auto"
-											Header="Thrower"
+											Header="{x:Static properties:Resources.HeaderThrower}"
 											Binding="{Binding ThrowerName}" />
-						<DataGridTemplateColumn Header="Watch">
+						<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
 									<Button Command="{Binding Source={StaticResource Locator}, Path=DemoStuffs.WatchStuffCommand}"
 											CommandParameter="{Binding SelectedItem, ElementName=StuffDataGrid}"
 											Style="{DynamicResource AccentedSquareButtonStyle}"
-											Content="Watch" />
+											Content="{x:Static properties:Resources.Watch}" />
 								</DataTemplate>
 							</DataGridTemplateColumn.CellTemplate>
 						</DataGridTemplateColumn>
@@ -186,7 +191,7 @@
 				</Grid.RowDefinitions>
 				
 				<TextBlock Grid.Row="0"
-						   Text="Flashed players"
+						   Text="{x:Static properties:Resources.FlashedPlayers}"
 						   Style="{StaticResource TextBlockStandard}"/>
 				<DataGrid Grid.Row="1"
 						  ItemsSource="{Binding SelectedStuff.FlashedPlayers}"
@@ -194,7 +199,7 @@
 					<DataGrid.Columns>
 						<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 											Width="Auto"
-											Header="Name"
+											Header="{x:Static properties:Resources.Name}"
 											Binding="{Binding Name}" />
 					</DataGrid.Columns>
 				</DataGrid>

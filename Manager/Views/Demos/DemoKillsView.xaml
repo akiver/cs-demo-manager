@@ -9,6 +9,7 @@
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -16,7 +17,9 @@
 	
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
+												 True="{x:Static properties:Resources.Yes}"
+												 False="{x:Static properties:Resources.No}"/>
 		</ResourceDictionary>
 	</UserControl.Resources>
 	
@@ -45,7 +48,7 @@
 			  Height="40">
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Back (CTRL+B)"
+						ToolTip="{x:Static properties:Resources.ToolTipBack}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -57,7 +60,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -66,7 +69,7 @@
 
 		<Grid Grid.Row="1">
 			<TabControl controls:TabControlHelper.IsUnderlined="True">
-				<controls:MetroTabItem Header="Entry Kills">
+				<controls:MetroTabItem Header="{x:Static properties:Resources.EntryKills}">
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
@@ -85,9 +88,11 @@
 								<Grid Grid.Row="0">
 									<StackPanel Orientation="Horizontal"
 												HorizontalAlignment="Center">
-										<TextBlock Text="Entry Hold Kills "
-												   Style="{StaticResource BigTitleStyle}" />
-										<TextBlock Text="(First kill by a CT)"
+										<TextBlock Text="{x:Static properties:Resources.EntryHoldKills}"
+												   Style="{StaticResource BigTitleStyle}">
+											<Run Text=" "/>
+										</TextBlock>
+										<TextBlock Text="{x:Static properties:Resources.DescriptionEntryHoldKills}"
 												   Style="{StaticResource SmallTitleStyle}" />
 									</StackPanel>
 								</Grid>
@@ -109,7 +114,7 @@
 										</Grid.RowDefinitions>
 
 										<TextBlock Grid.Row="0"
-												   Text="Rounds"
+												   Text="{x:Static properties:Resources.Rounds}"
 												   Style="{StaticResource SmallTitleStyle}"
 												   Grid.ColumnSpan="2"/>
 										<DataGrid Grid.Row="1"
@@ -124,25 +129,26 @@
 																	Binding="{Binding Number}"/>
 												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
 																	Width="Auto"
-																	Header="Killer Name"
+																	Header="{x:Static properties:Resources.HeaderKiller}"
 																	Binding="{Binding EntryHoldKillEvent.KillerName}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 																	Width="Auto"
-																	Header="Killed Name"
+																	Header="{x:Static properties:Resources.HeaderVictim}"
 																	Binding="{Binding EntryHoldKillEvent.KilledName}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
 																	Width="Auto"
-																	Header="Weapon"
+																	Header="{x:Static properties:Resources.HeaderWeapon}"
 																	Binding="{Binding EntryHoldKillEvent.Weapon.Name}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 																	Width="Auto"
-																	Header="Round Won"
+																	Header="{x:Static properties:Resources.HeaderRoundWon}"
 																	Binding="{Binding EntryHoldKillEvent.HasWonRound, Converter={StaticResource BooleanToStringConverter}}" />
 											</DataGrid.Columns>
 										</DataGrid>
 									</Grid>
 
-									<Grid Grid.Column="1" Margin="5">
+									<Grid Grid.Column="1"
+										  Margin="5">
 										<Grid.RowDefinitions>
 											<RowDefinition Height="Auto" />
 											<RowDefinition Height="*" />
@@ -150,7 +156,7 @@
 										</Grid.RowDefinitions>
 
 										<TextBlock Grid.Row="0"
-												   Text="Players"
+												   Text="{x:Static properties:Resources.Players}"
 												   Style="{StaticResource SmallTitleStyle}"/>
 										<DataGrid Grid.Row="1"
 												  ItemsSource="{Binding CurrentDemo.Players}"
@@ -158,35 +164,36 @@
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 																	Width="Auto"
-																	Header="Name"
+																	Header="{x:Static properties:Resources.Name}"
 																	Binding="{Binding Name}"/>
 												<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
 																	Width="Auto"
-																	Header="Total"
+																	Header="{x:Static properties:Resources.Total}"
 																	Binding="{Binding EntryHoldKills.Count}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}"
+												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 																	Width="Auto"
-																	Header="Win"
+																	Header="{x:Static properties:Resources.HeaderRoundWon}"
 																	Binding="{Binding EntryHoldKillWonCount}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundLossHeader}"
+												<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
 																	Width="Auto"
-																	Header="Loss"
+																	Header="{x:Static properties:Resources.HeaderRoundLost}"
 																	Binding="{Binding EntryHoldKillLossCount}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
 																	Width="Auto"
-																	Header="Ratio"
+																	Header="{x:Static properties:Resources.Ratio}"
 																	Binding="{Binding RatioEntryHoldKill, StringFormat='{}{0}%'}" />
 											</DataGrid.Columns>
 										</DataGrid>
 
-										<Grid Grid.Row="2" Margin="5">
+										<Grid Grid.Row="2"
+											  Margin="5">
 											<Grid.RowDefinitions>
 												<RowDefinition Height="Auto" />
 												<RowDefinition Height="*" />
 											</Grid.RowDefinitions>
 
 											<TextBlock Grid.Row="0"
-													   Text="Teams"
+													   Text="{x:Static properties:Resources.Teams}"
 													   Style="{StaticResource SmallTitleStyle}"/>
 											<DataGrid Grid.Row="1"
 													  ItemsSource="{Binding Teams}"
@@ -194,23 +201,23 @@
 												<DataGrid.Columns>
 													<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
 																		Width="Auto"
-																		Header="Name"
+																		Header="{x:Static properties:Resources.Name}"
 																		Binding="{Binding Name}"/>
 													<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
 																		Width="Auto"
-																		Header="Total"
+																		Header="{x:Static properties:Resources.Total}"
 																		Binding="{Binding EntryHoldKillCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}"
+													<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 																		Width="Auto"
-																		Header="Win"
+																		Header="{x:Static properties:Resources.HeaderRoundWon}"
 																		Binding="{Binding EntryHoldKillWonCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundLossHeader}"
+													<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
 																		Width="Auto"
-																		Header="Loss"
+																		Header="{x:Static properties:Resources.HeaderRoundLost}"
 																		Binding="{Binding EntryHoldKillLossCount}" />
 													<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
 																		Width="Auto"
-																		Header="Ratio"
+																		Header="{x:Static properties:Resources.Ratio}"
 																		Binding="{Binding RatioEntryHoldKill, StringFormat='{}{0}%'}" />
 												</DataGrid.Columns>
 											</DataGrid>
@@ -235,9 +242,11 @@
 								<Grid Grid.Row="0">
 									<StackPanel Orientation="Horizontal"
 												HorizontalAlignment="Center">
-										<TextBlock Text="Entry Kills "
-												   Style="{StaticResource BigTitleStyle}" />
-										<TextBlock Text="(First kill by a T)"
+										<TextBlock Text="{x:Static properties:Resources.EntryKills}"
+												   Style="{StaticResource BigTitleStyle}">
+											<Run Text=" " />
+										</TextBlock>
+										<TextBlock Text="{x:Static properties:Resources.DescriptionEntryKills}"
 												   Style="{StaticResource SmallTitleStyle}" />
 									</StackPanel>
 								</Grid>
@@ -260,7 +269,7 @@
 										</Grid.RowDefinitions>
 
 										<TextBlock Grid.Row="0"
-												   Text="Rounds"
+												   Text="{x:Static properties:Resources.Rounds}"
 												   Style="{StaticResource SmallTitleStyle}"
 												   Grid.ColumnSpan="2"/>
 										<DataGrid Grid.Column="0"
@@ -275,19 +284,19 @@
 																	Binding="{Binding Number}"/>
 												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
 																	Width="Auto"
-																	Header="Killer Name"
+																	Header="{x:Static properties:Resources.HeaderKiller}"
 																	Binding="{Binding EntryKillEvent.KillerName}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 																	Width="Auto"
-																	Header="Killed Name"
+																	Header="{x:Static properties:Resources.HeaderVictim}"
 																	Binding="{Binding EntryKillEvent.KilledName}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
 																	Width="Auto"
-																	Header="Weapon"
+																	Header="{x:Static properties:Resources.HeaderWeapon}"
 																	Binding="{Binding EntryKillEvent.Weapon.Name}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 																	Width="Auto"
-																	Header="Round Won"
+																	Header="{x:Static properties:Resources.HeaderRoundWon}"
 																	Binding="{Binding EntryKillEvent.HasWonRound, Converter={StaticResource BooleanToStringConverter}}" />
 											</DataGrid.Columns>
 										</DataGrid>
@@ -302,7 +311,7 @@
 										</Grid.RowDefinitions>
 
 										<TextBlock Grid.Row="0"
-												   Text="Players"
+												   Text="{x:Static properties:Resources.Players}"
 												   Style="{StaticResource SmallTitleStyle}"/>
 										<DataGrid Grid.Row="1"
 												  ItemsSource="{Binding CurrentDemo.Players}"
@@ -310,23 +319,23 @@
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 																	Width="Auto"
-																	Header="Name"
+																	Header="{x:Static properties:Resources.Name}"
 																	Binding="{Binding Name}"/>
 												<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
 																	Width="Auto"
-																	Header="Total"
+																	Header="{x:Static properties:Resources.Total}"
 																	Binding="{Binding EntryKills.Count}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}"
+												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 																	Width="Auto"
-																	Header="Win"
+																	Header="{x:Static properties:Resources.HeaderRoundWon}"
 																	Binding="{Binding EntryKillWonCount}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundLossHeader}"
+												<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
 																	Width="Auto"
-																	Header="Loss"
+																	Header="{x:Static properties:Resources.HeaderRoundLost}"
 																	Binding="{Binding EntryKillLossCount}" />
 												<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
 																	Width="Auto"
-																	Header="Ratio"
+																	Header="{x:Static properties:Resources.Ratio}"
 																	Binding="{Binding RatioEntryKill, StringFormat='{}{0}%'}" />
 											</DataGrid.Columns>
 										</DataGrid>
@@ -339,7 +348,7 @@
 											</Grid.RowDefinitions>
 
 											<TextBlock Grid.Row="0"
-													   Text="Teams"
+													   Text="{x:Static properties:Resources.Teams}"
 													   Style="{StaticResource SmallTitleStyle}"/>
 											<DataGrid Grid.Row="1"
 													  ItemsSource="{Binding Teams}"
@@ -347,23 +356,23 @@
 												<DataGrid.Columns>
 													<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
 																		Width="Auto"
-																		Header="Name"
+																		Header="{x:Static properties:Resources.Name}"
 																		Binding="{Binding Name}"/>
 													<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
 																		Width="Auto"
-																		Header="Total"
+																		Header="{x:Static properties:Resources.Total}"
 																		Binding="{Binding EntryKillCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundWinHeader}"
+													<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
 																		Width="Auto"
-																		Header="Win"
+																		Header="{x:Static properties:Resources.HeaderRoundWon}"
 																		Binding="{Binding EntryKillWonCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundLossHeader}"
+													<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
 																		Width="Auto"
-																		Header="Loss"
+																		Header="{x:Static properties:Resources.HeaderRoundLost}"
 																		Binding="{Binding EntryKillLossCount}" />
 													<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
 																		Width="Auto"
-																		Header="Ratio"
+																		Header="{x:Static properties:Resources.Ratio}"
 																		Binding="{Binding RatioEntryKill, StringFormat='{}{0}%'}" />
 												</DataGrid.Columns>
 											</DataGrid>
@@ -374,7 +383,7 @@
 						</Border>
 					</Grid>
 				</controls:MetroTabItem>
-				<controls:MetroTabItem Header="Matrix">
+				<controls:MetroTabItem Header="{x:Static properties:Resources.Matrix}">
 					<telerik:RadHeatMap ShowToolTips="True"
 										CellBorderThickness="1"
 										Margin="10">
@@ -413,7 +422,7 @@
 						</telerik:RadHeatMap.ToolTipSettings>
 						<telerik:RadHeatMap.DescriptionContent>
 							<Grid>
-								<TextBlock Text="Killer \ Victim"
+								<TextBlock Text="{x:Static properties:Resources.HeaderMatrixKillerVictim}"
 										   Style="{StaticResource DescriptionLabelHeatmapStyle}" />
 							</Grid>
 						</telerik:RadHeatMap.DescriptionContent>

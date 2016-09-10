@@ -8,6 +8,7 @@
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -44,7 +45,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToHomeCommand}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -54,14 +55,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToOverallCommand}"
-						ToolTip="Overall (CTRL+O)">
+						ToolTip="{x:Static properties:Resources.ToolTipOverall}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -71,14 +72,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Overall"
+						<TextBlock Text="{x:Static properties:Resources.Overall}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						IsEnabled="False"
-						ToolTip="Rank (CTRL+R)">
+						ToolTip="{x:Static properties:Resources.ToolTipRank}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -88,14 +89,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Rank"
+						<TextBlock Text="{x:Static properties:Resources.Rank}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToMapCommand}"
-						ToolTip="Maps (CTRL+M)">
+						ToolTip="{x:Static properties:Resources.ToolTipMaps}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -105,26 +106,26 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Maps"
+						<TextBlock Text="{x:Static properties:Resources.Maps}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToWeaponCommand}"
-						ToolTip="Weapons (CTRL+W)">
+						ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
 							   Width="15"
 							   Height="15"/>
-						<TextBlock Text="Weapons"
+						<TextBlock Text="{x:Static properties:Resources.Weapons}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToProgressCommand}"
-						ToolTip="Progression (CTRL+P)">
+						ToolTip="{x:Static properties:Resources.ToolTipProgression}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -134,10 +135,18 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Progression"
+						<TextBlock Text="{x:Static properties:Resources.Progression}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
+
+				<TextBlock Text="{x:Static properties:Resources.LabelScale}"
+						   Style="{StaticResource TextBlockStandard}"/>
+				<ComboBox ItemsSource="{Binding ScaleList}"
+						  SelectedItem="{Binding SelectedScale}"
+						  DisplayMemberPath ="Title"
+						  SelectedValuePath="Id"
+						  Margin="5" />
 
 				<StackPanel Orientation="Horizontal"
 							HorizontalAlignment="Center">
@@ -159,7 +168,8 @@
 			</Grid.RowDefinitions>
 			
 			<telerik:RadCartesianChart Grid.Row="0"
-									   TooltipTemplate="{StaticResource RankToolTipTemplate}" ClipToBounds="False">
+									   TooltipTemplate="{StaticResource RankToolTipTemplate}"
+									   ClipToBounds="False">
 				<telerik:RadCartesianChart.VerticalAxis>
 					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}"
 										MajorStep="1"
@@ -189,7 +199,9 @@
 				</telerik:RadCartesianChart.Grid>
 			</telerik:RadCartesianChart>
 			
-			<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Foreground="{StaticResource LightWhiteBrush}">
+			<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom"
+							   HorizontalAlignment="Center"
+							   Foreground="{StaticResource LightWhiteBrush}">
 				<telerik:RadLegend.ItemsPanel>
 					<ItemsPanelTemplate>
 						<StackPanel Orientation="Horizontal" />
@@ -197,9 +209,12 @@
 				</telerik:RadLegend.ItemsPanel>
 				<telerik:RadLegend.Items>
 					<telerik:LegendItemCollection>
-						<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Win" />
-						<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Lost" />
-						<telerik:LegendItem MarkerFill="{StaticResource BlueBrush}" Title="Draw" />
+						<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
+											Title="{x:Static properties:Resources.Win}" />
+						<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
+											Title="{x:Static properties:Resources.Loss}" />
+						<telerik:LegendItem MarkerFill="{StaticResource BlueBrush}"
+											Title="{x:Static properties:Resources.Draw}" />
 					</telerik:LegendItemCollection>
 				</telerik:RadLegend.Items>
 			</telerik:RadLegend>

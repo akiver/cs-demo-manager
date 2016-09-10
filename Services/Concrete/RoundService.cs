@@ -25,8 +25,8 @@ namespace Services.Concrete
 						{
 							StartTime = DateTime.Today.AddSeconds(e.Seconds - round.StartTimeSeconds),
 							EndTime = DateTime.Today.AddSeconds(e.Seconds - round.StartTimeSeconds + 1),
-							Category = "Kills",
-							Message = e.KillerName + " killed " + e.KilledName,
+							Category = Properties.Resources.Kills,
+							Message = string.Format(Properties.Resources.Killed, e.KillerName, e.KilledName),
 							Type = "kill"
 						});
 					}
@@ -42,33 +42,33 @@ namespace Services.Concrete
 						{
 							case EquipmentElement.Flash:
 								type = "flash";
-								category = "Flashbang";
-								message = e.ShooterName + " thrown a flashbang";
+								category = Properties.Resources.Flashbang;
+								message = string.Format(Properties.Resources.ThrownFlashbang, e.ShooterName);
 								break;
 							case EquipmentElement.Smoke:
 								type = "smoke";
-								category = "Smoke";
-								message = e.ShooterName + " thrown a smoke";
+								category = Properties.Resources.Smoke;
+								message = string.Format(Properties.Resources.ThrownSmoke, e.ShooterName);
 								break;
 							case EquipmentElement.Decoy:
 								type = "decoy";
-								category = "Decoy";
-								message = e.ShooterName + " thrown a decoy";
+								category = Properties.Resources.Decoy;
+								message = string.Format(Properties.Resources.ThrownDecoy, e.ShooterName);
 								break;
 							case EquipmentElement.HE:
 								type = "he";
-								category = "HE";
-								message = e.ShooterName + " thrown a HE grenade";
+								category = Properties.Resources.HE;
+								message = string.Format(Properties.Resources.ThrownHeGrenade, e.ShooterName);
 								break;
 							case EquipmentElement.Molotov:
 								type = "molotov";
-								category = "Molotov";
-								message = e.ShooterName + " thrown a molotov";
+								category = Properties.Resources.Molotov;
+								message = string.Format(Properties.Resources.ThrownMolotov, e.ShooterName);
 								break;
 							case EquipmentElement.Incendiary:
 								type = "incendiary";
-								category = "Molotov";
-								message = e.ShooterName + " thrown an incendiary";
+								category = Properties.Resources.Molotov;
+								message = string.Format(Properties.Resources.ThrownIncendiary, e.ShooterName);
 								break;
 						}
 
@@ -92,8 +92,8 @@ namespace Services.Concrete
 					{
 						StartTime = DateTime.Today.AddSeconds(round.BombPlanted.Seconds - round.StartTimeSeconds),
 						EndTime = DateTime.Today.AddSeconds(round.BombPlanted.Seconds - round.StartTimeSeconds + 1),
-						Category = "Bomb",
-						Message = round.BombPlanted.PlanterName + " planted the bomb on bomb site " + round.BombPlanted.Site,
+						Category = Properties.Resources.Bomb,
+						Message = string.Format(Properties.Resources.PlantedTheBombOnBombSite, round.BombPlanted.PlanterName, round.BombPlanted.Site),
 						Type = "bomb_planted"
 					});
 				}
@@ -104,8 +104,8 @@ namespace Services.Concrete
 					{
 						StartTime = DateTime.Today.AddSeconds(round.BombDefused.Seconds - round.StartTimeSeconds),
 						EndTime = DateTime.Today.AddSeconds(round.BombDefused.Seconds - round.StartTimeSeconds + 1),
-						Category = "Bomb",
-						Message = round.BombDefused.DefuserName + " defused the bomb on bomb site " + round.BombDefused.Site,
+						Category = Properties.Resources.Bomb,
+						Message = string.Format(Properties.Resources.DefusedTheBombOnBombSite, round.BombDefused.DefuserName, round.BombDefused.Site),
 						Type = "bomb_defused"
 					});
 				}
@@ -115,12 +115,13 @@ namespace Services.Concrete
 					{
 						StartTime = DateTime.Today.AddSeconds(round.BombExploded.Seconds - round.StartTimeSeconds),
 						EndTime = DateTime.Today.AddSeconds(round.BombExploded.Seconds - round.StartTimeSeconds + 1),
-						Category = "Bomb",
-						Message = "The bomb exploded on bomb site " + round.BombExploded.Site,
+						Category = Properties.Resources.Bomb,
+						Message = string.Format(Properties.Resources.TheBombExplodedOnBombSite, round.BombExploded.Site),
 						Type = "bomb_exploded"
 					});
 				}
 			});
+
 			return roundEventList;
 		}
 

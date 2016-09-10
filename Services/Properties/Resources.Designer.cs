@@ -22,7 +22,7 @@ namespace Services.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Resources {
+    public class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Services.Properties {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Services.Properties.Resources", typeof(Resources).Assembly);
@@ -51,7 +51,7 @@ namespace Services.Properties {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,21 +61,174 @@ namespace Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bomb.
+        /// </summary>
+        public static string Bomb {
+            get {
+                return ResourceManager.GetString("Bomb", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap colors {
+        public static System.Drawing.Bitmap colors {
             get {
                 object obj = ResourceManager.GetObject("colors", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
-
-		/// <summary>
-		///   Looks up a localized string similar to YOUR STEAM API KEY GOES HERE.
-		/// </summary>
-		internal static string steam_api_key {
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decoy.
+        /// </summary>
+        public static string Decoy {
+            get {
+                return ResourceManager.GetString("Decoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} defused the bomb on bomb site {1}.
+        /// </summary>
+        public static string DefusedTheBombOnBombSite {
+            get {
+                return ResourceManager.GetString("DefusedTheBombOnBombSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flashbang.
+        /// </summary>
+        public static string Flashbang {
+            get {
+                return ResourceManager.GetString("Flashbang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HE.
+        /// </summary>
+        public static string HE {
+            get {
+                return ResourceManager.GetString("HE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} killed {1}.
+        /// </summary>
+        public static string Killed {
+            get {
+                return ResourceManager.GetString("Killed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kills.
+        /// </summary>
+        public static string Kills {
+            get {
+                return ResourceManager.GetString("Kills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Molotov.
+        /// </summary>
+        public static string Molotov {
+            get {
+                return ResourceManager.GetString("Molotov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} planted the bomb on bomb site {1}.
+        /// </summary>
+        public static string PlantedTheBombOnBombSite {
+            get {
+                return ResourceManager.GetString("PlantedTheBombOnBombSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smoke.
+        /// </summary>
+        public static string Smoke {
+            get {
+                return ResourceManager.GetString("Smoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YOUR STEAM API GOES HERE.
+        /// </summary>
+        public static string steam_api_key {
             get {
                 return ResourceManager.GetString("steam_api_key", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bomb exploded on bomb site {0}.
+        /// </summary>
+        public static string TheBombExplodedOnBombSite {
+            get {
+                return ResourceManager.GetString("TheBombExplodedOnBombSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} thrown a decoy.
+        /// </summary>
+        public static string ThrownDecoy {
+            get {
+                return ResourceManager.GetString("ThrownDecoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} thrown a flashbang.
+        /// </summary>
+        public static string ThrownFlashbang {
+            get {
+                return ResourceManager.GetString("ThrownFlashbang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} thrown a HE grenade.
+        /// </summary>
+        public static string ThrownHeGrenade {
+            get {
+                return ResourceManager.GetString("ThrownHeGrenade", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} thrown an incendiary.
+        /// </summary>
+        public static string ThrownIncendiary {
+            get {
+                return ResourceManager.GetString("ThrownIncendiary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} thrown a molotov.
+        /// </summary>
+        public static string ThrownMolotov {
+            get {
+                return ResourceManager.GetString("ThrownMolotov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} thrown a smoke.
+        /// </summary>
+        public static string ThrownSmoke {
+            get {
+                return ResourceManager.GetString("ThrownSmoke", resourceCulture);
             }
         }
     }

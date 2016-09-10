@@ -4,6 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720" d:DesignWidth="1280"
 			 DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
@@ -16,7 +17,7 @@
 		</Grid.RowDefinitions>
 		<TextBlock Grid.Row="0"
 				   Style="{StaticResource LabelChartStyle}"
-				   Text="Damages"/>
+				   Text="{x:Static properties:Resources.Damages}"/>
 		<telerik:RadCartesianChart Grid.Row="1"
 								   ClipToBounds="False">
 			<telerik:RadCartesianChart.Resources>
@@ -24,7 +25,7 @@
 									Minimum="0"
 									HorizontalLocation="Right"
 									LabelStyle="{StaticResource LabelChartStyle}"
-									Title="Total damages"
+									Title="{x:Static properties:Resources.TotalDamages}"
 									LabelRotationAngle="45"
 									LabelFitMode="Rotate"
 									TitleTemplate="{StaticResource TitleChartTemplate}" />
@@ -32,7 +33,7 @@
 									RangeExtendDirection="Both"
 									Minimum="0"
 									LabelStyle="{StaticResource LabelChartStyle}"
-									Title="Damages per round"
+									Title="{x:Static properties:Resources.DamagesPerRound}"
 									LabelRotationAngle="45"
 									LabelFitMode="Rotate"
 									TitleTemplate="{StaticResource TitleChartTemplate}"/>
@@ -40,7 +41,7 @@
 
 			<telerik:RadCartesianChart.HorizontalAxis>
 				<telerik:DateTimeCategoricalAxis LabelStyle="{StaticResource LabelChartStyle}"
-												 Title="Round"
+												 Title="{x:Static properties:Resources.Round}"
 												 TitleTemplate="{StaticResource HorizontalAxisTitleTemplate}" />
 			</telerik:RadCartesianChart.HorizontalAxis>
 			<telerik:RadCartesianChart.Behaviors>
@@ -110,7 +111,9 @@
 								VerticalAxis="{StaticResource TotalDamageAxis}">
 				<telerik:LineSeries.PointTemplate>
 					<DataTemplate>
-						<Ellipse Width="10" Height="10" Fill="{DynamicResource BlackColorBrush}" />
+						<Ellipse Width="10"
+								 Height="10"
+								 Fill="{DynamicResource BlackColorBrush}" />
 					</DataTemplate>
 				</telerik:LineSeries.PointTemplate>
 			</telerik:LineSeries>
@@ -130,10 +133,14 @@
 			</telerik:RadLegend.ItemsPanel>
 			<telerik:RadLegend.Items>
 				<telerik:LegendItemCollection>
-					<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}" Title="Health Damage" />
-					<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}" Title="Armor Damage"/>
-					<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}" Title="Total Health Damage" />
-					<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}" Title="Total Armor Damage" />
+					<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}"
+										Title="{x:Static properties:Resources.HealthDamages}" />
+					<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
+										Title="{x:Static properties:Resources.ArmorDamages}"/>
+					<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}"
+										Title="{x:Static properties:Resources.TotalHealthDamages}" />
+					<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
+										Title="{x:Static properties:Resources.TotalArmorDamages}" />
 				</telerik:LegendItemCollection>
 			</telerik:RadLegend.Items>
 		</telerik:RadLegend>

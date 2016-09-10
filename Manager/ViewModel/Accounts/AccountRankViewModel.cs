@@ -208,16 +208,16 @@ namespace Manager.ViewModel.Accounts
 			_cacheService = cacheService;
 			ScaleList = new List<ComboboxSelector>
 			{
-				new ComboboxSelector("none", "None"),
-				new ComboboxSelector("day", "Day"),
-				new ComboboxSelector("month", "Month")
+				new ComboboxSelector("none", Properties.Resources.None),
+				new ComboboxSelector("day", Properties.Resources.Day),
+				new ComboboxSelector("month", Properties.Resources.Month)
 			};
 			SelectedScale = ScaleList[0];
 
 			if (IsInDesignMode)
 			{
 				DispatcherHelper.Initialize();
-				NotificationMessage = "Loading...";
+				NotificationMessage = Properties.Resources.NotificationLoading;
 				IsBusy = true;
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
@@ -244,8 +244,8 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadData()
 		{
 			IsBusy = true;
-			NotificationMessage = "Loading...";
-			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
+			NotificationMessage = Properties.Resources.NotificationLoading;
+			List <Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			Datas = await _accountStatsService.GetRankDateChartDataAsync(demos, SelectedScale.Id);
 			Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
 			IsBusy = false;

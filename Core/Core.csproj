@@ -30,6 +30,10 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup Label="MultilingualAppToolkit">
+    <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
+    <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -58,6 +62,7 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Models\DemoBasicData.cs" />
+    <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Maps\Cache.cs" />
     <Compile Include="Models\Maps\Cbble.cs" />
@@ -143,10 +148,17 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <EmbeddedResource Include="Properties\Resources.es.resx" />
+    <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.it.resx" />
+    <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.ru.resx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Ranks\elo01.png" />
@@ -243,7 +255,20 @@
   <ItemGroup>
     <Content Include="Resources\Images\Logos\esl.png" />
   </ItemGroup>
+  <ItemGroup>
+    <XliffResource Include="MultilingualResources\Core.de.xlf" />
+    <XliffResource Include="MultilingualResources\Core.es.xlf" />
+    <XliffResource Include="MultilingualResources\Core.fr.xlf" />
+    <XliffResource Include="MultilingualResources\Core.it.xlf" />
+    <XliffResource Include="MultilingualResources\Core.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Core.pt.xlf" />
+    <XliffResource Include="MultilingualResources\Core.ru.xlf" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
+  <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">
+    <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
+  </Target>
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
 snremove.exe -r DemoInfo.dll

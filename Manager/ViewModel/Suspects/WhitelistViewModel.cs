@@ -133,6 +133,7 @@ namespace Manager.ViewModel.Suspects
 		}
 
 		#endregion
+
 		#region Commands
 
 		/// <summary>
@@ -164,7 +165,7 @@ namespace Manager.ViewModel.Suspects
 					?? (_addPlayerCommand = new RelayCommand(
 						async () =>
 						{
-							var steamIdOrUrl = await _dialogService.ShowInputAsync("Add a player to whitelist", "Enter the SteamID 64 or the Steam community URL.");
+							var steamIdOrUrl = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddPlayerToWhitelist, Properties.Resources.DialogEnterSteamId);
 							if (string.IsNullOrEmpty(steamIdOrUrl)) return;
 
 							long steamIdAsLong;
@@ -180,14 +181,14 @@ namespace Manager.ViewModel.Suspects
 							{
 								try
 								{
-									NotificationMessage = "Adding player to whitelist...";
+									NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
 									IsBusy = true;
 
 									Suspect suspect = await _steamService.GetBanStatusForUser(steamIdOrUrl);
 
 									if (suspect == null)
 									{
-										await _dialogService.ShowErrorAsync("User not found.", MessageDialogStyle.Affirmative);
+										await _dialogService.ShowErrorAsync(Properties.Resources.DialogPlayerNotFound, MessageDialogStyle.Affirmative);
 										IsBusy = false;
 										return;
 									}
@@ -200,7 +201,7 @@ namespace Manager.ViewModel.Suspects
 									}
 									else
 									{
-										NotificationMessage = "Player already in your whitelist.";
+										NotificationMessage = Properties.Resources.NotificationPlayerAlreadyInWhitelist;
 										await Task.Delay(3000);
 									}
 
@@ -209,12 +210,12 @@ namespace Manager.ViewModel.Suspects
 								catch (Exception e)
 								{
 									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation, MessageDialogStyle.Affirmative);
 								}
 							}
 							else
 							{
-								await _dialogService.ShowErrorAsync("Invalid SteamID 64 or Steam community URL.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
 							}
 
 							CommandManager.InvalidateRequerySuggested();
@@ -239,7 +240,7 @@ namespace Manager.ViewModel.Suspects
 								bool removed = await _cacheService.RemovePlayerFromWhitelist(SelectedSuspects[i].SteamId);
 								if (!removed)
 								{
-									await _dialogService.ShowErrorAsync("Error while deleting player.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileDeletingPlayer, MessageDialogStyle.Affirmative);
 								}
 								else
 								{
@@ -283,13 +284,12 @@ namespace Manager.ViewModel.Suspects
 						async suspect =>
 						{
 							IsBusy = true;
-							NotificationMessage = "Searching...";
+							NotificationMessage = Properties.Resources.NotificationSearching;
 							List<Demo> demos = await _demosService.GetDemosPlayer(suspect.SteamId);
 							IsBusy = false;
 							if (!demos.Any())
 							{
-								await _dialogService.ShowMessageAsync("No demos found for this player." + Environment.NewLine
-									+ "Demos with this player might not have been analyzed.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoDemosPlayerFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 
@@ -320,7 +320,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsBusy = true;
-							NotificationMessage = "Refreshing...";
+							NotificationMessage = Properties.Resources.NotificationRefreshing;
 							await LoadPlayers();
 							IsBusy = false;
 							CommandManager.InvalidateRequerySuggested();
@@ -398,7 +398,7 @@ namespace Manager.ViewModel.Suspects
 				catch (Exception e)
 				{
 					Logger.Instance.Log(e);
-					await _dialogService.ShowErrorAsync("Error while trying to get players information.", MessageDialogStyle.Affirmative);
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayersInformation, MessageDialogStyle.Affirmative);
 				}
 			}
 		}

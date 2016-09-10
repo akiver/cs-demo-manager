@@ -13,11 +13,11 @@ namespace Manager.Converters
 			switch (side)
 			{
 				case Side.CounterTerrorist:
-					return "CT";
+					return Properties.Resources.CT;
 				case Side.Terrorist:
-					return "T";
+					return Properties.Resources.T;
 				case Side.Spectate:
-					return "SPEC";
+					return Properties.Resources.Spec;
 				default:
 					return string.Empty;
 			}

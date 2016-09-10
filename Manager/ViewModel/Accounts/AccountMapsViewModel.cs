@@ -306,7 +306,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			MapStats datas = await _accountStatsService.GetMapStatsAsync(demos);
 
@@ -314,17 +314,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.Dust2WinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.Dust2LossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.Dust2DrawCount
 				}
 			};
@@ -333,17 +333,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.InfernoWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.InfernoLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.InfernoDrawCount
 				}
 			};
@@ -352,17 +352,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.MirageWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.MirageLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.MirageDrawCount
 				}
 			};
@@ -371,17 +371,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.NukeWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.NukeLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.NukeDrawCount
 				}
 			};
@@ -390,17 +390,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.TrainWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.TrainLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.TrainDrawCount
 				}
 			};
@@ -409,17 +409,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.OverpassWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.OverpassLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.OverpassDrawCount
 				}
 			};
@@ -428,17 +428,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.CacheWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.CacheLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.CacheDrawCount
 				}
 			};
@@ -447,17 +447,17 @@ namespace Manager.ViewModel.Accounts
 			{
 				new GenericDoubleChart
 				{
-					Label = "Win",
+					Label = Properties.Resources.Win,
 					Value = datas.CobblestoneWinCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Loss",
+					Label = Properties.Resources.Loss,
 					Value = datas.CobblestoneLossCount
 				},
 				new GenericDoubleChart
 				{
-					Label = "Draw",
+					Label = Properties.Resources.Draw,
 					Value = datas.CobblestoneDrawCount
 				}
 			};

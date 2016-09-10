@@ -203,7 +203,7 @@ namespace Manager.ViewModel.Suspects
 						if (IsLoadSuspects)
 						{
 							IsRefreshing = true;
-							NotificationMessage = "Refreshing...";
+							NotificationMessage = Properties.Resources.NotificationRefreshing;
 							await LoadSuspects();
 							if (!IsInDesignMode) IsRefreshing = false;
 							CommandManager.InvalidateRequerySuggested();
@@ -246,7 +246,7 @@ namespace Manager.ViewModel.Suspects
 								return;
 							}
 
-							var steamIdOrUrl = await _dialogService.ShowInputAsync("Add a suspect", "Enter the SteamID 64 or the Steam community URL.");
+							var steamIdOrUrl = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddSuspect, Properties.Resources.DialogEnterSteamId);
 							if (string.IsNullOrEmpty(steamIdOrUrl)) return;
 
 							long steamIdAsLong;
@@ -262,14 +262,14 @@ namespace Manager.ViewModel.Suspects
 							{
 								try
 								{
-									NotificationMessage = "Adding suspect...";
+									NotificationMessage = Properties.Resources.NotificationAddingSuspect;
 									IsRefreshing = true;
 
 									Suspect suspect = await _steamService.GetBanStatusForUser(steamIdOrUrl);
 
 									if (suspect == null)
 									{
-										await _dialogService.ShowErrorAsync("User not found.", MessageDialogStyle.Affirmative);
+										await _dialogService.ShowErrorAsync(Properties.Resources.DialogPlayerNotFound, MessageDialogStyle.Affirmative);
 										IsRefreshing = false;
 										return;
 									}
@@ -286,9 +286,7 @@ namespace Manager.ViewModel.Suspects
 									else
 									{
 										await
-											_dialogService.ShowMessageAsync( "This player is in your suspect / white / account list." + Environment.NewLine
-											+ "You have to remove it from your account and white list to be able to add him in your supect list.",
-											MessageDialogStyle.Affirmative);
+											_dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectWhitelist, MessageDialogStyle.Affirmative);
 									}
 
 									IsRefreshing = false;
@@ -296,12 +294,12 @@ namespace Manager.ViewModel.Suspects
 								catch (Exception e)
 								{
 									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync("Error while trying to get suspect information.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingSuspectInformation, MessageDialogStyle.Affirmative);
 								}
 							}
 							else
 							{
-								await _dialogService.ShowErrorAsync("Invalid SteamID 64 or Steam community URL.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
 							}
 
 							CommandManager.InvalidateRequerySuggested();
@@ -322,7 +320,7 @@ namespace Manager.ViewModel.Suspects
 								bool removed = await _cacheService.RemoveSuspectFromCache(suspect.SteamId);
 								if (!removed)
 								{
-									await _dialogService.ShowErrorAsync("Error while deleting suspect.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileDeletingSuspect, MessageDialogStyle.Affirmative);
 								}
 								else
 								{
@@ -367,14 +365,14 @@ namespace Manager.ViewModel.Suspects
 											_cts = new CancellationTokenSource();
 										}
 
-										NotificationMessage = "Analyzing " + demos[i].Name + "...";
+										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
 										demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
 										await _cacheService.WriteDemoDataCache(demos[i]);
 										if (demos[i].Players.Any())
 										{
 											foreach (Player playerExtended in demos[i].Players)
 											{
-												NotificationMessage = "Adding suspects...";
+												NotificationMessage = Properties.Resources.NotificationAddingSuspects;
 												await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
 											}
 										}
@@ -394,7 +392,7 @@ namespace Manager.ViewModel.Suspects
 								await _dialogService.ShowDemosFailedAsync(demosFailed);
 							}
 
-							NotificationMessage = "Refreshing...";
+							NotificationMessage = Properties.Resources.NotificationRefreshing;
 							await LoadSuspects();
 							CommandManager.InvalidateRequerySuggested();
 							IsRefreshing = false;
@@ -430,7 +428,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsRefreshing = true;
-							NotificationMessage = "Searching...";
+							NotificationMessage = Properties.Resources.NotificationSearching;
 							List<Demo> demos = new List<Demo>();
 							foreach (Suspect suspect in SelectedSuspects)
 							{
@@ -439,8 +437,7 @@ namespace Manager.ViewModel.Suspects
 							IsRefreshing = false;
 							if (!demos.Any())
 							{
-								await _dialogService.ShowMessageAsync("No demos found for this suspect." + Environment.NewLine
-									+ "Demos with this suspect might not have been analyzed.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoDemosSuspectFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 
@@ -471,7 +468,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsRefreshing = true;
-							NotificationMessage = "Refreshing...";
+							NotificationMessage = Properties.Resources.NotificationRefreshing;
 							await LoadSuspects();
 							IsRefreshing = false;
 							CommandManager.InvalidateRequerySuggested();
@@ -510,7 +507,7 @@ namespace Manager.ViewModel.Suspects
 						() =>
 						{
 							IsAnalyzing = false;
-							NotificationMessage = "Stopping analyze...";
+							NotificationMessage = Properties.Resources.NotificationStoppingAnalyze;
 						},
 						() => IsRefreshing));
 			}
@@ -556,13 +553,13 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsRefreshing = true;
-							NotificationMessage = "Moving suspect(s) to whitelist...";
+							NotificationMessage = Properties.Resources.NotificationMovingSuspectsToWhitelist;
 							foreach (Suspect suspect in SelectedSuspects.ToList())
 							{
 								bool hasMoved = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
 								if (!hasMoved)
 								{
-									await _dialogService.ShowErrorAsync("Error while moving suspect(s).", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileMovingSuspects, MessageDialogStyle.Affirmative);
 								}
 								else
 								{
@@ -631,7 +628,7 @@ namespace Manager.ViewModel.Suspects
 			catch (Exception e)
 			{
 				Logger.Instance.Log(e);
-				await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
+				await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingSuspectsInformation, MessageDialogStyle.Affirmative);
 			}
 		}
 

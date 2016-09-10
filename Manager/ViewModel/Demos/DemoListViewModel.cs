@@ -285,7 +285,7 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
-		public string NewBannedPlayerCountAsString => string.Format("({0})", _newBannedPlayerCount);
+		public string NewBannedPlayerCountAsString => string.Format(" ({0})", _newBannedPlayerCount);
 
 		public bool HasNotification
 		{
@@ -452,7 +452,7 @@ namespace Manager.ViewModel.Demos
 					?? (_deleteDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
-						var delete = await _dialogService.ShowMessageAsync("Are you sure you want to send this demo(s) to Recycle Bin?", MessageDialogStyle.AffirmativeAndNegative);
+						var delete = await _dialogService.ShowMessageAsync(Properties.Resources.DialogSendToRecycleBinConfimation, MessageDialogStyle.AffirmativeAndNegative);
 						if (delete == MessageDialogResult.Negative) return;
 
 						List<Demo> demosNotFound = new List<Demo>();
@@ -468,7 +468,7 @@ namespace Manager.ViewModel.Demos
 						}
 						else
 						{
-							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) sent to Recycle Bin.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(string.Format(Properties.Resources.DialogDemosSentToRecycleBin, demos.Count), MessageDialogStyle.Affirmative);
 						}
 
 						DispatcherHelper.CheckBeginInvokeOnUI(
@@ -492,8 +492,7 @@ namespace Manager.ViewModel.Demos
 					?? (_removeDemosFromCacheCommand = new RelayCommand<ObservableCollection<Demo>>(
 					async demos =>
 					{
-						var delete = await _dialogService.ShowMessageAsync("Are you sure you want to delete this demo(s) from data cache?"
-							+ Environment.NewLine + "This will not delete this demo(s) from your HDD.", MessageDialogStyle.AffirmativeAndNegative);
+						var delete = await _dialogService.ShowMessageAsync(Properties.Resources.DialogRemoveDemosFromCacheConfirmation, MessageDialogStyle.AffirmativeAndNegative);
 						if (delete == MessageDialogResult.Negative) return;
 
 						List<Demo> demosNotFound = new List<Demo>();
@@ -509,7 +508,7 @@ namespace Manager.ViewModel.Demos
 						}
 						else
 						{
-							await _dialogService.ShowMessageAsync(demos.Count + " demo(s) deleted from data cache.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(string.Format(Properties.Resources.DialogDemosRemovedFromCache, demos.Count), MessageDialogStyle.Affirmative);
 						}
 
 						DispatcherHelper.CheckBeginInvokeOnUI(
@@ -559,7 +558,7 @@ namespace Manager.ViewModel.Demos
 											IsBusy = true;
 											HasRing = true;
 											HasNotification = true;
-											NotificationMessage = "Analyzing demos for export...";
+											NotificationMessage = Properties.Resources.NotificationAnalyzingDemosForExport;
 											IsCancellable = true;
 											if (_cts == null) _cts = new CancellationTokenSource();
 
@@ -582,7 +581,7 @@ namespace Manager.ViewModel.Demos
 										catch (Exception e)
 										{
 											Logger.Instance.Log(e);
-											await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+											await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos, MessageDialogStyle.Affirmative);
 										}
 										finally
 										{
@@ -595,7 +594,7 @@ namespace Manager.ViewModel.Demos
 									{
 										SaveFileDialog saveExportFolderDialog = new SaveFileDialog
 										{
-											FileName = "Save here",
+											FileName = Properties.Resources.SaveHere,
 											OverwritePrompt = false
 										};
 
@@ -611,7 +610,7 @@ namespace Manager.ViewModel.Demos
 												IsBusy = true;
 												HasRing = true;
 												HasNotification = true;
-												NotificationMessage = "Analyzing demos for export...";
+												NotificationMessage = Properties.Resources.NotificationAnalyzingDemosForExport;
 												IsCancellable = true;
 
 												List<Demo> demoList = demos.ToList();
@@ -625,14 +624,14 @@ namespace Manager.ViewModel.Demos
 															int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
 															if (analyzeResult == 1 && _cts != null)
 															{
-																NotificationMessage = "Exporting " + demo.Name + "...";
+																NotificationMessage = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
 																demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 																await _excelService.GenerateXls(demo, exportFilePath);
 															}
 														}
 														else
 														{
-															NotificationMessage = "Exporting " + demo.Name + "...";
+															NotificationMessage = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
 															demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 															await _excelService.GenerateXls(demo, exportFilePath);
 														}
@@ -644,7 +643,7 @@ namespace Manager.ViewModel.Demos
 											catch (Exception e)
 											{
 												Logger.Instance.Log(e);
-												await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+												await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos, MessageDialogStyle.Affirmative);
 											}
 											finally
 											{
@@ -674,21 +673,21 @@ namespace Manager.ViewModel.Demos
 									HasNotification = true;
 									if (!_cacheService.HasDemoInCache(SelectedDemo.Id))
 									{
-										NotificationMessage = "Analyzing " + SelectedDemo.Name + "for export...";
+										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
 										IsCancellable = true;
 										if (_cts == null) _cts = new CancellationTokenSource();
 										await AnalyzeDemoAsync(SelectedDemo, _cts.Token);
 									}
 									if (_cts != null)
 									{
-										NotificationMessage = "Exporting " + SelectedDemo.Name + "...";
+										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
 										await _excelService.GenerateXls(SelectedDemo, saveExportDialog.FileName);
 									}
 								}
 								catch (Exception e)
 								{
 									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync("An error occured while exporting the demo.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
 								}
 								finally
 								{
@@ -717,7 +716,7 @@ namespace Manager.ViewModel.Demos
 						{
 							if (!File.Exists(demo.Path))
 							{
-								await _dialogService.ShowErrorAsync("Demo " + demo.Name + " not found.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorDemoNotFound, demo.Name), MessageDialogStyle.Affirmative);
 								return;
 							}
 
@@ -747,7 +746,7 @@ namespace Manager.ViewModel.Demos
 						{
 							if (Properties.Settings.Default.SelectedStatsAccountSteamID == 0)
 							{
-								await _dialogService.ShowErrorAsync("You have to select an account first.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogSelectAccountFirst, MessageDialogStyle.Affirmative);
 								return;
 							}
 							var mainViewModel = new ViewModelLocator().Main;
@@ -772,7 +771,7 @@ namespace Manager.ViewModel.Demos
 							IsBusy = true;
 							HasRing = false;
 							HasNotification = true;
-							NotificationMessage = "Playdemo command copied to clipboard";
+							NotificationMessage = Properties.Resources.NotificationPlayDemoCommandCopied;
 							await Task.Delay(3000);
 							HasNotification = false;
 							IsBusy = false;
@@ -795,11 +794,10 @@ namespace Manager.ViewModel.Demos
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							var result = await _dialogService.ShowInputAsync("Goto Tick", "Enter the tick.");
+							var result = await _dialogService.ShowInputAsync(Properties.Resources.DialogGoToTick, Properties.Resources.DialogEnterTick);
 							if (string.IsNullOrEmpty(result)) return;
 							int tick;
 							bool isInt = int.TryParse(result, out tick);
@@ -819,7 +817,7 @@ namespace Manager.ViewModel.Demos
 							}
 							else
 							{
-								await _dialogService.ShowErrorAsync("Invalid tick.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogInvalidTick, MessageDialogStyle.Affirmative);
 							}
 						},
 						demo => SelectedDemo != null));
@@ -857,7 +855,7 @@ namespace Manager.ViewModel.Demos
 										{
 											_cts = new CancellationTokenSource();
 										}
-										NotificationMessage = "Analyzing " + demos[i].Name + "...";
+										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
 										demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
 										if (AppSettings.IsInternetConnectionAvailable())
 										{
@@ -878,7 +876,7 @@ namespace Manager.ViewModel.Demos
 								{
 									foreach (Player playerExtended in demos[i].Players)
 									{
-										NotificationMessage = "Adding suspects...";
+										NotificationMessage = Properties.Resources.NotificationAddingSuspects;
 										await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
 									}
 								}
@@ -966,7 +964,7 @@ namespace Manager.ViewModel.Demos
 							IsBusy = true;
 							HasRing = true;
 							IsCancellable = false;
-							NotificationMessage = "Loading...";
+							NotificationMessage = Properties.Resources.NotificationLoading;
 							await LoadDemosHeader();
 							IsBusy = false;
 							HasRing = false;
@@ -1148,7 +1146,7 @@ namespace Manager.ViewModel.Demos
 						{
 							if (!File.Exists(demo.Path))
 							{
-								await _dialogService.ShowErrorAsync("Demo not found.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 
@@ -1217,8 +1215,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
 						try
@@ -1249,14 +1246,12 @@ namespace Manager.ViewModel.Demos
 					{
 						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
 						if (Properties.Settings.Default.WatchAccountSteamId == 0)
 						{
-							await _dialogService.ShowMessageAsync("You have to set the account that you want to focus from settings to be able to use this feature.",
-										MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSetAccountToFocus, MessageDialogStyle.Affirmative);
 							return;
 						}
 						try
@@ -1289,14 +1284,12 @@ namespace Manager.ViewModel.Demos
 					{
 						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
 						if (Properties.Settings.Default.WatchAccountSteamId == 0)
 						{
-							await _dialogService.ShowMessageAsync("You have to set the account that you want to focus from settings to be able to use this feature.",
-										MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSetAccountToFocus, MessageDialogStyle.Affirmative);
 							return;
 						}
 						try
@@ -1411,7 +1404,7 @@ namespace Manager.ViewModel.Demos
 							{
 								_cts.Cancel();
 								_cts = null;
-								NotificationMessage = "Cancelling...";
+								NotificationMessage = Properties.Resources.NotificationCancelling;
 								IsCancellable = false;
 							}
 						}, () => IsBusy));
@@ -1426,7 +1419,7 @@ namespace Manager.ViewModel.Demos
 					?? (_showMoreDemosCommand = new RelayCommand(
 					async () =>
 					{
-						NotificationMessage = "Loading more demos...";
+						NotificationMessage = Properties.Resources.NotificationLoadingMoreDemos;
 						IsBusy = true;
 						HasRing = true;
 						HasNotification = true;
@@ -1474,7 +1467,7 @@ namespace Manager.ViewModel.Demos
 						}
 						if (!Directory.Exists(Properties.Settings.Default.DownloadFolder))
 						{
-							await _dialogService.ShowErrorAsync("You have to select the folder where demos will be saved from settings.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowErrorAsync(Properties.Resources.DialogSetFolderForDownload, MessageDialogStyle.Affirmative);
 							return;
 						}
 
@@ -1484,32 +1477,30 @@ namespace Manager.ViewModel.Demos
 							HasNotification = true;
 							HasRing = true;
 							IsCancellable = true;
-							NotificationMessage = "Retrieving last matches information...";
+							NotificationMessage = Properties.Resources.NotificationRetrievingMatchesData;
 							if (_cts == null) _cts = new CancellationTokenSource();
 							int result = await _steamService.GenerateMatchListFile(_cts.Token);
 							switch (result)
 							{
 								case 1:
-									await _dialogService.ShowErrorAsync("boiler.exe not found.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerNotFound, MessageDialogStyle.Affirmative);
 									break;
 								case 2:
-									await _dialogService.ShowErrorAsync("boiler.exe is incorrect.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerIncorrect, MessageDialogStyle.Affirmative);
 									break;
 								case -2:
-									await _dialogService.ShowErrorAsync("You have to restart Steam.", MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogRestartSteam, MessageDialogStyle.Affirmative);
 									break;
 								case -3:
 								case -4:
 									await
-										_dialogService.ShowErrorAsync("Steam is not running or you are not connected to a Steam account.",
-											MessageDialogStyle.Affirmative);
+										_dialogService.ShowErrorAsync(Properties.Resources.DialogSteamNotRunningOrNotLoggedIn, MessageDialogStyle.Affirmative);
 									break;
 								case -5:
 								case -6:
 								case -7:
 									await
-										_dialogService.ShowErrorAsync("An error occured while retrieving matches information. (" + result + ")",
-											MessageDialogStyle.Affirmative);
+										_dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileRetrievingMatchesData, result), MessageDialogStyle.Affirmative);
 									break;
 								case 0:
 									await ProcessDemosDownloaded();
@@ -1560,7 +1551,7 @@ namespace Manager.ViewModel.Demos
 								IsBusy = true;
 								HasRing = true;
 								HasNotification = true;
-								NotificationMessage = "Analyzing demo(s) for json export...";
+								NotificationMessage = Properties.Resources.NotificationAnalyzingForJsonExport;
 								IsCancellable = true;
 								if (_cts == null) _cts = new CancellationTokenSource();
 
@@ -1579,7 +1570,7 @@ namespace Manager.ViewModel.Demos
 							catch (Exception e)
 							{
 								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync("An error occured while exporting demos.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos, MessageDialogStyle.Affirmative);
 							}
 							finally
 							{
@@ -1629,7 +1620,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				IsBusy = true;
 				HasRing = true;
-				NotificationMessage = "Initializing cache...";
+				NotificationMessage = Properties.Resources.NotificationInitCache;
 				await _cacheService.InitDemoBasicDataList();
 				HasNotification = false;
 				IsBusy = false;
@@ -1682,7 +1673,7 @@ namespace Manager.ViewModel.Demos
 			HasRing = false;
 			IsBusy = true;
 			NewBannedPlayerCount += count;
-			NotificationMessage = NewBannedPlayerCount + " suspect(s) have been banned!";
+			NotificationMessage = string.Format(Properties.Resources.NotificationSuspectsHaveBeenBanned, NewBannedPlayerCount);
 			await Task.Delay(5000);
 			HasNotification = false;
 			IsBusy = false;
@@ -1702,7 +1693,7 @@ namespace Manager.ViewModel.Demos
 				catch (Exception e)
 				{
 					Logger.Instance.Log(e);
-					await _dialogService.ShowErrorAsync("An error occured while refreshing last rank.", MessageDialogStyle.Affirmative);
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRefreshingLastRank, MessageDialogStyle.Affirmative);
 				}
 			});
 		}
@@ -1732,7 +1723,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				IsBusy = true;
 				HasRing = true;
-				NotificationMessage = "Searching account's last rank...";
+				NotificationMessage = Properties.Resources.NotificationSearchingLastRank;
 				long steamId = Properties.Settings.Default.SelectedStatsAccountSteamID;
 				Rank lastRank = await _cacheService.GetLastRankAsync(steamId);
 				if (lastRank == null)
@@ -1760,7 +1751,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				if (isAllAnalyze == MessageDialogResult.Negative)
 				{
-					NotificationMessage = "Loading all demos...";
+					NotificationMessage = Properties.Resources.NotificationLoadingAllDemos;
 					List<string> folders = new List<string>();
 					if (SelectedFolder != null)
 					{
@@ -1785,9 +1776,9 @@ namespace Manager.ViewModel.Demos
 			HasRing = true;
 			HasNotification = true;
 			IsCancellable = true;
-			NotificationMessage = "Analyzing multiple demos...";
+			NotificationMessage = Properties.Resources.NotificationAnalyzingMultipleDemos;
 			CommandManager.InvalidateRequerySuggested();
-			if (SelectedDemos.Count == 1) NotificationMessage = "Analyzing " + SelectedDemos[0].Name + "...";
+			if (SelectedDemos.Count == 1) NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, SelectedDemos[0].Name);
 
 			List<Demo> demosFailed = new List<Demo>();
 			List<Demo> demosNotFound = new List<Demo>();
@@ -1819,7 +1810,7 @@ namespace Manager.ViewModel.Demos
 			catch (Exception e)
 			{
 				Logger.Instance.Log(e);
-				await _dialogService.ShowErrorAsync("An error occured while anylizing demos.", MessageDialogStyle.Affirmative);
+				await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorAnalyzingDemos, MessageDialogStyle.Affirmative);
 			}
 			finally
 			{
@@ -1875,7 +1866,7 @@ namespace Manager.ViewModel.Demos
 			{
 				if (_cts != null && demo.Status == "old")
 				{
-					demo.Status = "None";
+					demo.Status = "none";
 					await _cacheService.WriteDemoDataCache(demo);
 				}
 			}
@@ -1891,7 +1882,7 @@ namespace Manager.ViewModel.Demos
 				IsBusy = true;
 				HasRing = true;
 				IsCancellable = false;
-				NotificationMessage = "Checking for new banned suspects...";
+				NotificationMessage = Properties.Resources.NotificationCheckingNewBanned;
 				List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
 				List<string> bannedIdList = await _cacheService.GetSuspectsBannedList();
 				List<Suspect> newSuspectBannedList = await _steamService.GetNewSuspectBannedList(suspectIdList, bannedIdList);
@@ -1907,7 +1898,7 @@ namespace Manager.ViewModel.Demos
 			}
 			catch (Exception e)
 			{
-				await _dialogService.ShowErrorAsync("Error while trying to get suspects information.", MessageDialogStyle.Affirmative);
+				await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorGettingSuspectsData, MessageDialogStyle.Affirmative);
 				Logger.Instance.Log(e);
 			}
 			finally
@@ -1921,7 +1912,7 @@ namespace Manager.ViewModel.Demos
 		{
 			try
 			{
-				NotificationMessage = "Loading demos...";
+				NotificationMessage = Properties.Resources.NotificationLoadingDemos;
 				IsBusy = true;
 				HasRing = true;
 				HasNotification = true;
@@ -1965,8 +1956,9 @@ namespace Manager.ViewModel.Demos
 				IsBusy = false;
 				HasRing = false;
 				NotificationMessage = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
-					? "No demos found for this account" : "No demos found";
-				if (!string.IsNullOrEmpty(Properties.Settings.Default.LastFolder)) NotificationMessage += " in this folder";
+					? Properties.Resources.NotificationNoDemosFoundForAccount
+					: Properties.Resources.NotificationNoDemosFound;
+				if (!string.IsNullOrEmpty(Properties.Settings.Default.LastFolder)) NotificationMessage += " " + Properties.Resources.NotificationInThisFolder;
 			}
 			else
 			{
@@ -1993,10 +1985,10 @@ namespace Manager.ViewModel.Demos
 					{
 						string demoName = demoDownloadList.ElementAt(i - 1).Key;
 						string demoUrl = demoDownloadList.ElementAt(i - 1).Value;
-						NotificationMessage = "Downloading demo " + i + " / " + demoDownloadList.Count + " ...";
+						NotificationMessage = string.Format(Properties.Resources.NotificationDownloadingDemo, i, demoDownloadList.Count);
 						await _demosService.DownloadDemo(demoUrl, demoName);
 						if (ct.IsCancellationRequested) return;
-						NotificationMessage = "Extracting demo " + i + " / " + demoDownloadList.Count + " ...";
+						NotificationMessage = string.Format(Properties.Resources.NotificationExtractingDemo, i, demoDownloadList.Count);
 						await _demosService.DecompressDemoArchive(demoName);
 						demoDownloadedCount++;
 						if (ct.IsCancellationRequested) return;
@@ -2004,7 +1996,7 @@ namespace Manager.ViewModel.Demos
 				}
 				else
 				{
-					await _dialogService.ShowMessageAsync("No newer demo available.", MessageDialogStyle.Affirmative);
+					await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoNewerDemo, MessageDialogStyle.Affirmative);
 				}
 			}
 			catch (Exception e)
@@ -2015,7 +2007,7 @@ namespace Manager.ViewModel.Demos
 			{
 				if (demoDownloadedCount > 0)
 				{
-					await _dialogService.ShowMessageAsync(demoDownloadedCount + " demo(s) has been downloaded.", MessageDialogStyle.Affirmative);
+					await _dialogService.ShowMessageAsync(string.Format(Properties.Resources.DialogDemosHaveBeenDownloaded, demoDownloadedCount), MessageDialogStyle.Affirmative);
 					await LoadDemosHeader();
 				}
 			}

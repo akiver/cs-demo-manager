@@ -202,6 +202,72 @@
   <data name="pov" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Logos\pov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Rank0" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="Rank1" xml:space="preserve">
+    <value>Silver I</value>
+  </data>
+  <data name="Rank10" xml:space="preserve">
+    <value>Gold Nova Master</value>
+  </data>
+  <data name="Rank11" xml:space="preserve">
+    <value>Master Guardian I</value>
+  </data>
+  <data name="Rank12" xml:space="preserve">
+    <value>Master Guardian II</value>
+  </data>
+  <data name="Rank13" xml:space="preserve">
+    <value>Master Guardian Elite</value>
+  </data>
+  <data name="Rank14" xml:space="preserve">
+    <value>Distinguished Master Guardian</value>
+  </data>
+  <data name="Rank15" xml:space="preserve">
+    <value>Legendary Eagle</value>
+  </data>
+  <data name="Rank16" xml:space="preserve">
+    <value>Legendary Eagle Master</value>
+  </data>
+  <data name="Rank17" xml:space="preserve">
+    <value>Supreme Master First Class</value>
+  </data>
+  <data name="Rank18" xml:space="preserve">
+    <value>Global Elite</value>
+  </data>
+  <data name="Rank2" xml:space="preserve">
+    <value>Silver II</value>
+  </data>
+  <data name="Rank3" xml:space="preserve">
+    <value>Silver III</value>
+  </data>
+  <data name="Rank4" xml:space="preserve">
+    <value>Silver IV</value>
+  </data>
+  <data name="Rank5" xml:space="preserve">
+    <value>Silver Elite</value>
+  </data>
+  <data name="Rank6" xml:space="preserve">
+    <value>Silver Elite Master</value>
+  </data>
+  <data name="Rank7" xml:space="preserve">
+    <value>Gold Nova I</value>
+  </data>
+  <data name="Rank8" xml:space="preserve">
+    <value>Gold Nova II</value>
+  </data>
+  <data name="Rank9" xml:space="preserve">
+    <value>Gold Nova III</value>
+  </data>
+  <data name="StatusNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="StatusToWatch" xml:space="preserve">
+    <value>To watch</value>
+  </data>
+  <data name="StatusWatched" xml:space="preserve">
+    <value>Watched</value>
+  </data>
   <data name="valve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Logos\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

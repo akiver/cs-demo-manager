@@ -41,7 +41,7 @@ namespace Manager.ViewModel
 
 		private RelayCommand<string> _removeFolderCommand;
 
-		public string CreditsText => AppSettings.APP_NAME + " " + AppSettings.APP_VERSION + " by " + AppSettings.AUTHOR;
+		public string CreditsText => AppSettings.APP_NAME + " " + AppSettings.APP_VERSION + " " + Properties.Resources.By + " " + AppSettings.AUTHOR;
 
 		private readonly DialogService _dialogService;
 
@@ -54,6 +54,10 @@ namespace Manager.ViewModel
 		private RelayCommand<string> _copyTextCommand;
 
 		private readonly ICacheService _cacheService;
+
+		public string Contributors => string.Join(" / ", App.Contributors);
+
+		public string Translators => string.Join(" / ", App.Translators);
 
 		#endregion
 
@@ -100,14 +104,14 @@ namespace Manager.ViewModel
 					{
 						if (Folders.Count == 0)
 						{
-							await _dialogService.ShowMessageAsync("It seems that CSGO is not installed on your main hard drive. The defaults \"csgo\" and \"replays\" can not be found. Please add folders from the settings.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogCsgoNotDetected, MessageDialogStyle.Affirmative);
 						}
 
 						// Check if the dummy file created from the installer exists
 						// If it's the case it means it's the first time that the app is launched and a cache clear is required
 						if (_cacheService.ContainsDemos() && _cacheService.HasDummyCacheFile())
 						{
-							var saveCustomData = await _dialogService.ShowMessageAsync("This update requires to clear custom data from cache (your suspects list will not be removed). Do you want to save your custom data? ", MessageDialogStyle.AffirmativeAndNegative);
+							var saveCustomData = await _dialogService.ShowMessageAsync(Properties.Resources.DialogUpdateRequireClearCache, MessageDialogStyle.AffirmativeAndNegative);
 							if (saveCustomData == MessageDialogResult.Affirmative)
 							{
 								SaveFileDialog saveCustomDataDialog = new SaveFileDialog
@@ -121,12 +125,12 @@ namespace Manager.ViewModel
 									try
 									{
 										await _cacheService.CreateBackupCustomDataFile(saveCustomDataDialog.FileName);
-										await _dialogService.ShowMessageAsync("The backup file has been created, you have to re-import your custom data from settings.", MessageDialogStyle.Affirmative);
+										await _dialogService.ShowMessageAsync(Properties.Resources.DialogBackupCreated, MessageDialogStyle.Affirmative);
 									}
 									catch (Exception e)
 									{
 										Logger.Instance.Log(e);
-										await _dialogService.ShowErrorAsync("An error occured while exporting custom data.", MessageDialogStyle.Affirmative);
+										await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingCustomData, MessageDialogStyle.Affirmative);
 									}
 								}
 							}
@@ -142,7 +146,7 @@ namespace Manager.ViewModel
 							bool isUpdateAvailable = await CheckUpdate();
 							if (isUpdateAvailable)
 							{
-								var download = await _dialogService.ShowMessageAsync("A new version is available. Do you want to download it?", MessageDialogStyle.AffirmativeAndNegative);
+								var download = await _dialogService.ShowMessageAsync(Properties.Resources.DialogNewVersionAvailable, MessageDialogStyle.AffirmativeAndNegative);
 								if (download == MessageDialogResult.Affirmative)
 								{
 									System.Diagnostics.Process.Start(AppSettings.APP_WEBSITE);

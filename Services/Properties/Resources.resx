@@ -117,11 +117,62 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bomb" xml:space="preserve">
+    <value>Bomb</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="colors" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Decoy" xml:space="preserve">
+    <value>Decoy</value>
+  </data>
+  <data name="DefusedTheBombOnBombSite" xml:space="preserve">
+    <value>{0} defused the bomb on bomb site {1}</value>
+  </data>
+  <data name="Flashbang" xml:space="preserve">
+    <value>Flashbang</value>
+  </data>
+  <data name="HE" xml:space="preserve">
+    <value>HE</value>
+  </data>
+  <data name="Killed" xml:space="preserve">
+    <value>{0} killed {1}</value>
+  </data>
+  <data name="Kills" xml:space="preserve">
+    <value>Kills</value>
+  </data>
+  <data name="Molotov" xml:space="preserve">
+    <value>Molotov</value>
+  </data>
+  <data name="PlantedTheBombOnBombSite" xml:space="preserve">
+    <value>{0} planted the bomb on bomb site {1}</value>
+  </data>
+  <data name="Smoke" xml:space="preserve">
+    <value>Smoke</value>
+  </data>
   <data name="steam_api_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="TheBombExplodedOnBombSite" xml:space="preserve">
+    <value>The bomb exploded on bomb site {0}</value>
+  </data>
+  <data name="ThrownDecoy" xml:space="preserve">
+    <value>{0} thrown a decoy</value>
+  </data>
+  <data name="ThrownFlashbang" xml:space="preserve">
+    <value>{0} thrown a flashbang</value>
+  </data>
+  <data name="ThrownHeGrenade" xml:space="preserve">
+    <value>{0} thrown a HE grenade</value>
+  </data>
+  <data name="ThrownIncendiary" xml:space="preserve">
+    <value>{0} thrown an incendiary</value>
+  </data>
+  <data name="ThrownMolotov" xml:space="preserve">
+    <value>{0} thrown a molotov</value>
+  </data>
+  <data name="ThrownSmoke" xml:space="preserve">
+    <value>{0} thrown a smoke</value>
   </data>
 </root>

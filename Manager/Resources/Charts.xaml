@@ -1,13 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-                    xmlns:converters="clr-namespace:Manager.Converters"
-                    xmlns:selectors="clr-namespace:Manager.Models.Selectors">
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+					xmlns:converters="clr-namespace:Manager.Converters"
+					xmlns:selectors="clr-namespace:Manager.Models.Selectors"
+					xmlns:properties="clr-namespace:Manager.Properties">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary>
 			<converters:RankToImageConverter x:Key="RankToImageConverter" />
 			<converters:DoubleToVisibilityConverter x:Key="DoubleToVisibilityConverter" />
+			<converters:StringToMinimalDateConverter x:Key="StringToMinimalDateConverter" />
+			<converters:StringToDateConverter x:Key="StringToDateConverter" />
 		</ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
 
@@ -65,27 +68,42 @@
 
 	<DataTemplate x:Key="RankToolTipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
+					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
 					<Grid Grid.Row="1">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
-						<Image Grid.Column="0" Source="{Binding Path=DataItem.OldRank, Converter={StaticResource RankToImageConverter}}" Height="32"/>
-						<TextBlock Grid.Column="1" Text="=>" FontSize="26" VerticalAlignment="Center" Foreground="{StaticResource LightGreyBrush}"/>
-						<Image Grid.Column="2" Source="{Binding Path=DataItem.NewRank, Converter={StaticResource RankToImageConverter}}" Height="32"/>
+						<Image Grid.Column="0"
+							   Source="{Binding Path=DataItem.OldRank, Converter={StaticResource RankToImageConverter}}"
+							   Height="32"/>
+						<TextBlock Grid.Column="1"
+								   Text="=>"
+								   FontSize="26"
+								   VerticalAlignment="Center"
+								   Foreground="{StaticResource LightGreyBrush}"/>
+						<Image Grid.Column="2"
+							   Source="{Binding Path=DataItem.NewRank, Converter={StaticResource RankToImageConverter}}"
+							   Height="32"/>
 					</Grid>
-					<TextBlock Grid.Row="2" Text="{Binding Path=DataItem.WinCount, StringFormat= '\{0\} competitives wins'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="2"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{Binding Path=DataItem.WinCount, StringFormat='{}{0}'}" />
+						<Run Text="{x:Static properties:Resources.CompetitivesWins}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -125,7 +143,7 @@
 					   FontSize="18"
 					   TextAlignment="Center" />
 			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
-					   Text="{Binding DataItem.Value, StringFormat= '(\{0\}%)'}"
+					   Text="{Binding DataItem.Value, StringFormat= '{}({0}%)'}"
 					   FontSize="18"
 					   TextAlignment="Center" />
 		</StackPanel>
@@ -138,7 +156,7 @@
 					   FontSize="18"
 					   TextAlignment="Center" />
 			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
-					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
+					   Text="{Binding DataItem.Value, StringFormat= '{}{0}'}"
 					   FontSize="18"
 					   TextAlignment="Center" />
 		</StackPanel>
@@ -151,7 +169,7 @@
 					   FontSize="12"
 					   TextAlignment="Center" />
 			<TextBlock Foreground="{DynamicResource BlackColorBrush}"
-					   Text="{Binding DataItem.Value, StringFormat= '\{0\}'}"
+					   Text="{Binding DataItem.Value, StringFormat= '{}{0}'}"
 					   FontSize="12"
 					   TextAlignment="Center" />
 		</StackPanel>
@@ -159,9 +177,9 @@
 
 	<DataTemplate x:Key="PieMatchWinStatsLabelTemplate">
 		<TextBlock Foreground="{DynamicResource BlackColorBrush}"
-					   Text="{Binding DataItem.Value}"
-					   FontSize="18"
-					   TextAlignment="Center" />
+				   Text="{Binding DataItem.Value}"
+				   FontSize="18"
+				   TextAlignment="Center" />
 	</DataTemplate>
 
 	<Style TargetType="Path" x:Key="LabelConnectorStyle">
@@ -176,68 +194,72 @@
 				Padding="2"
 				Background="{StaticResource LightWhiteBrush}">
 			<TextBlock Foreground="{StaticResource LightGreyBrush}" FontSize="18">
-				<Run Text="{Binding Path=DataItem.Label, StringFormat= '\{0\} : '}" />
-				<Run Text="{Binding Path=DataItem.Value, StringFormat= '\{0\}%'}" />
+				<Run Text="{Binding Path=DataItem.Label, StringFormat= '{}{0} : '}" />
+				<Run Text="{Binding Path=DataItem.Value, StringFormat= '{}{0}%'}" />
 			</TextBlock>
 		</Border>
 	</DataTemplate>
 
 	<DataTemplate x:Key="TooltipCountPieTemplate">
-		<Border BorderThickness="1" BorderBrush="{StaticResource LightGreyBrush}" CornerRadius="5" Padding="2" Background="{StaticResource LightWhiteBrush}">
-			<TextBlock Foreground="{StaticResource LightGreyBrush}" FontSize="18">
-				<Run Text="{Binding Path=DataItem.Label, StringFormat= '\{0\} : '}" />
-				<Run Text="{Binding Path=DataItem.Value, StringFormat= '\{0\}'}" />
+		<Border BorderThickness="1"
+				BorderBrush="{StaticResource LightGreyBrush}"
+				CornerRadius="5"
+				Padding="2"
+				Background="{StaticResource LightWhiteBrush}">
+			<TextBlock Foreground="{StaticResource LightGreyBrush}"
+					   FontSize="18">
+				<Run Text="{Binding Path=DataItem.Label, StringFormat= '{}{0} : '}" />
+				<Run Text="{Binding Path=DataItem.Value, StringFormat= '{}{0}'}" />
 			</TextBlock>
 		</Border>
 	</DataTemplate>
 
 	<DataTemplate x:Key="TooltipMapPercentageChartTemplate">
-		<Border BorderThickness="1" BorderBrush="{StaticResource LightGreyBrush}" CornerRadius="5" Padding="2" Background="{StaticResource LightWhiteBrush}">
-			<TextBlock Foreground="{StaticResource LightGreyBrush}" FontSize="18">
-				<Run Text="{Binding Path=DataItem.Label, StringFormat= '\{0\} : '}" />
-				<Run Text="{Binding Path=DataItem.Value, StringFormat= '\{0\}%'}" />
+		<Border BorderThickness="1"
+				BorderBrush="{StaticResource LightGreyBrush}"
+				CornerRadius="5"
+				Padding="2"
+				Background="{StaticResource LightWhiteBrush}">
+			<TextBlock Foreground="{StaticResource LightGreyBrush}"
+					   FontSize="18">
+				<Run Text="{Binding Path=DataItem.Label, StringFormat= '{}{0} : '}" />
+				<Run Text="{Binding Path=DataItem.Value, StringFormat= '{}{0}%'}" />
 			</TextBlock>
 		</Border>
 	</DataTemplate>
 
 	<DataTemplate x:Key="LabelWeaponStatsTemplate">
-		<TextBlock Text="{Binding Path=DataItem.Value}"  Visibility="{Binding Path=DataItem.Value, Converter={StaticResource DoubleToVisibilityConverter}}"
+		<TextBlock Text="{Binding Path=DataItem.Value}"
+				   Visibility="{Binding Path=DataItem.Value, Converter={StaticResource DoubleToVisibilityConverter}}"
 				   Style="{StaticResource StatsTitleStyle}"/>
 	</DataTemplate>
 
-	<DataTemplate x:Key="WinToolTipTemplate">
-		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
-				<Grid>
-					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto"/>
-						<RowDefinition Height="Auto"/>
-					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy HH:mm:ss}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.WinPercentage, StringFormat= '\{0\}%'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
-				</Grid>
-			</Border>
-		</Grid>
-	</DataTemplate>
-
 	<DataTemplate x:Key="TitleChartTemplate">
-		<TextBlock Text="{Binding}" Foreground="{DynamicResource BlackColorBrush}" FontSize="18" />
+		<TextBlock Text="{Binding}"
+				   Foreground="{DynamicResource BlackColorBrush}"
+				   FontSize="18" />
 	</DataTemplate>
 
 	<DataTemplate x:Key="DamageTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.DamageCount, StringFormat='{}Damage per match : {0}'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.DamagesPerRound}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.DamageCount, StringFormat=' {0}'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -245,16 +267,24 @@
 
 	<DataTemplate x:Key="KillTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.KillAverage, StringFormat='{}Kill average: {0}'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.KillAverage}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.KillAverage, StringFormat=' {0}'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -262,33 +292,49 @@
 
 	<DataTemplate x:Key="DeathTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.DeathAverage, StringFormat='{}Death average: {0}'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.DeathAverage}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.DeathAverage, StringFormat=' {0}'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
 	</DataTemplate>
 
-	<DataTemplate x:Key="WinTooltipTemplate">
+	<DataTemplate x:Key="WinToolTipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.WinPercentage, StringFormat='{}Win percentage: {0}%'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.WinPercent}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.WinPercentage, StringFormat=' {0}%'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -296,16 +342,24 @@
 
 	<DataTemplate x:Key="HeadshotTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.HeadshotPercentage, StringFormat='{}Headshot % per match : {0}%'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.HeadshotPercentPerMatch}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.HeadshotPercentage, StringFormat=' {0}%'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -313,16 +367,24 @@
 
 	<DataTemplate x:Key="CrouchKillTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.CrouchKillPercentage, StringFormat='{}Crouch kill % per match : {0}%'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.CrouchKillPercentPerMatch}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.CrouchKillPercentage, StringFormat=' {0}%'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -330,16 +392,24 @@
 
 	<DataTemplate x:Key="VelocityTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, StringFormat='{}{0:dd/MM/yyyy}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.VelocityAverage, StringFormat='{}Velocity average: {0}'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18"/>
+					<TextBlock Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.VelocityAverage}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.VelocityAverage, StringFormat=' {0}'}" />
+					</TextBlock>
 				</Grid>
 			</Border>
 		</Grid>
@@ -347,42 +417,61 @@
 
 	<DataTemplate x:Key="PlayerEquipementValueTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
 				<Grid>
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
-					<TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
-							   Foreground="{StaticResource LightGreyBrush}" FontSize="18"/>
-					<TextBlock Grid.Row="1" Text="{Binding Path=DataItem.Value, StringFormat='{}{0}$'}" 
-							   HorizontalAlignment="Center" FontSize="18" Foreground="{StaticResource LightGreyBrush}"/>
+					<TextBlock Grid.Row="0"
+							   Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18">
+						<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Label}" />
+					</TextBlock>
+					<TextBlock Grid.Row="1"
+							   Text="{Binding Path=DataItem.Value, StringFormat='{}{0}$'}" 
+							   HorizontalAlignment="Center"
+							   FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}"/>
 				</Grid>
 			</Border>
 		</Grid>
 	</DataTemplate>
 
 	<DataTemplate x:Key="PlayerEquipementValueTrackBallTemplate">
-		<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
-			<TextBlock Text="{Binding Path=DataPoint.Category, StringFormat='{}Round: {0}'}"
-					   Foreground="{StaticResource LightGreyBrush}"
-					   FontSize="18"/>
-			<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Value: {0}$'}"
-					   FontSize="18"
-					   Foreground="{StaticResource LightGreyBrush}"/>
+		<StackPanel Orientation="Vertical"
+					Background="{StaticResource LightWhiteBrush}">
+			<TextBlock Foreground="{StaticResource LightGreyBrush}"
+					   FontSize="18">
+				<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+				<Run Text="{Binding Path=DataPoint.Category}" />
+			</TextBlock>
+			<TextBlock FontSize="18"
+					   Foreground="{StaticResource LightGreyBrush}">
+				<Run Text="{x:Static properties:Resources.Value}" /><Run Text=":" />
+				<Run Text="{Binding Path=DataPoint.Value, StringFormat='{}{0}$'}" />
+			</TextBlock>
 		</StackPanel>
 	</DataTemplate>
 
 	<DataTemplate x:Key="PlayerDamageHealthTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
-				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
-					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
-							   Foreground="{StaticResource LightGreyBrush}"
-							   FontSize="18"/>
-					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Damage health: {0}'}"
-							   FontSize="18"
-							   Foreground="{StaticResource LightGreyBrush}"/>
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical"
+							Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18">
+						<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Label}" />
+					</TextBlock>
+					<TextBlock FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.HealthDamages}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Value}" />
+					</TextBlock>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -390,14 +479,20 @@
 
 	<DataTemplate x:Key="PlayerDamageArmorTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
-				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
-					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
-							   Foreground="{StaticResource LightGreyBrush}"
-							   FontSize="18"/>
-					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Damage armor: {0}'}"
-							   FontSize="18"
-							   Foreground="{StaticResource LightGreyBrush}"/>
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical"
+							Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18">
+						<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Label}" />
+					</TextBlock>
+					<TextBlock FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.ArmorDamages}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Value}" />
+					</TextBlock>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -405,14 +500,20 @@
 
 	<DataTemplate x:Key="PlayerTotalDamageHealthTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
-				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
-					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
-							   Foreground="{StaticResource LightGreyBrush}"
-							   FontSize="18"/>
-					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Total damages health: {0}'}"
-							   FontSize="18"
-							   Foreground="{StaticResource LightGreyBrush}"/>
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical"
+							Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18">
+						<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Label}" />
+					</TextBlock>
+					<TextBlock FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.TotalDamageHealth}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Value}" />
+					</TextBlock>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -420,14 +521,20 @@
 
 	<DataTemplate x:Key="PlayerTotalDamageArmorTooltipTemplate">
 		<Grid Background="{StaticResource LightWhiteBrush}">
-			<Border BorderThickness="2" BorderBrush="{StaticResource LightGreenBrush}">
-				<StackPanel Orientation="Vertical" Background="{StaticResource LightWhiteBrush}">
-					<TextBlock Text="{Binding Path=DataItem.Label, StringFormat='{}Round: {0}'}"
-							   Foreground="{StaticResource LightGreyBrush}"
-							   FontSize="18"/>
-					<TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}Total damages armor: {0}'}"
-							   FontSize="18"
-							   Foreground="{StaticResource LightGreyBrush}"/>
+			<Border BorderThickness="2"
+					BorderBrush="{StaticResource LightGreenBrush}">
+				<StackPanel Orientation="Vertical"
+							Background="{StaticResource LightWhiteBrush}">
+					<TextBlock Foreground="{StaticResource LightGreyBrush}"
+							   FontSize="18">
+						<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Label}" />
+					</TextBlock>
+					<TextBlock FontSize="18"
+							   Foreground="{StaticResource LightGreyBrush}">
+						<Run Text="{x:Static properties:Resources.TotalDamageArmor}" /><Run Text=":" />
+						<Run Text="{Binding Path=DataItem.Value}" />
+					</TextBlock>
 				</StackPanel>
 			</Border>
 		</Grid>
@@ -435,31 +542,41 @@
 
 	<DataTemplate x:Key="PlayerDamageHealthTrackBallTemplate">
 		<StackPanel Orientation="Vertical">
-			<TextBlock Text="{Binding Path=DataPoint.Category, StringFormat='{}Round: {0}'}"
-					   Foreground="{StaticResource LightGreyBrush}"
-					   FontSize="18"/>
-			<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Damage health: {0}'}"
-					   FontSize="18"
-					   Foreground="{StaticResource LightGreyBrush}"/>
+			<TextBlock Foreground="{StaticResource LightGreyBrush}"
+					   FontSize="18">
+				<Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
+				<Run Text="{Binding Path=DataPoint.Category}" />
+			</TextBlock>
+			<TextBlock FontSize="18"
+					   Foreground="{StaticResource LightGreyBrush}">
+				<Run Text="{x:Static properties:Resources.HealthDamages}" /><Run Text=":" />
+				<Run Text="{Binding Path=DataPoint.Value}" />
+			</TextBlock>
 		</StackPanel>
 	</DataTemplate>
 	
 	<DataTemplate x:Key="PlayerDamageArmorTrackBallTemplate">
-		<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Damage armor: {0}'}"
-				   FontSize="18"
-				   Foreground="{StaticResource LightGreyBrush}"/>
+		<TextBlock FontSize="18"
+				   Foreground="{StaticResource LightGreyBrush}">
+			<Run Text="{x:Static properties:Resources.ArmorDamages}" /><Run Text=":" />
+			<Run Text="{Binding Path=DataPoint.Value}" />
+		</TextBlock>
 	</DataTemplate>
 
 	<DataTemplate x:Key="PlayerTotalDamageHealthTrackBallTemplate">
-		<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Total damage health: {0}'}"
-				   FontSize="18"
-				   Foreground="{StaticResource LightGreyBrush}"/>
+		<TextBlock FontSize="18"
+				   Foreground="{StaticResource LightGreyBrush}">
+			<Run Text="{x:Static properties:Resources.TotalHealthDamages}" /><Run Text=":" />
+			<Run Text="{Binding Path=DataPoint.Value}" />
+		</TextBlock>
 	</DataTemplate>
 	
 	<DataTemplate x:Key="PlayerTotalDamageArmorTrackBallTemplate">
-		<TextBlock Text="{Binding Path=DataPoint.Value, StringFormat='{}Total damage armor: {0}'}"
-				   FontSize="18"
-				   Foreground="{StaticResource LightGreyBrush}"/>
+		<TextBlock FontSize="18"
+				   Foreground="{StaticResource LightGreyBrush}">
+			<Run Text="{x:Static properties:Resources.TotalArmorDamages}" /><Run Text=":" />
+			<Run Text="{Binding Path=DataPoint.Value}" />
+		</TextBlock>
 	</DataTemplate>
 
 	<DataTemplate x:Key="HorizontalAxisTitleTemplate">

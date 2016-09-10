@@ -4,6 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -17,14 +18,14 @@
 		</Grid.RowDefinitions>
 		<TextBlock Grid.Row="0"
 				   Style="{StaticResource LabelChartStyle}"
-				   Text="Equipment value per round ($)"/>
+				   Text="{x:Static properties:Resources.EquipmentValuePerRound}"/>
 		<telerik:RadCartesianChart Grid.Row="1"
 								   ClipToBounds="False">
 			<telerik:RadCartesianChart.VerticalAxis>
 				<telerik:LinearAxis RangeExtendDirection="Both"
 									Minimum="0"
 									LabelStyle="{StaticResource LabelChartStyle}"
-									Title="Equipment value ($)"
+									Title="{x:Static properties:Resources.EquipmentValue}"
 									LabelRotationAngle="45"
 									LabelFitMode="Rotate"
 									TitleTemplate="{StaticResource TitleChartTemplate}"/>
@@ -48,7 +49,9 @@
 								TooltipTemplate="{StaticResource PlayerEquipementValueTooltipTemplate}">
 				<telerik:LineSeries.PointTemplate>
 					<DataTemplate>
-						<Ellipse Width="10" Height="10" Fill="{DynamicResource BlackColorBrush}" />
+						<Ellipse Width="10"
+								 Height="10"
+								 Fill="{DynamicResource BlackColorBrush}" />
 					</DataTemplate>
 				</telerik:LineSeries.PointTemplate>
 			</telerik:LineSeries>
@@ -59,13 +62,13 @@
 
 		<TextBlock Grid.Row="2"
 				   Style="{StaticResource LabelChartStyle}"
-				   Text="Total Cash Earned ($)"/>
+				   Text="{x:Static properties:Resources.TotalCashEarned}"/>
 		<telerik:RadCartesianChart Grid.Row="3"
 								   ClipToBounds="False">
 			<telerik:RadCartesianChart.VerticalAxis>
 				<telerik:LinearAxis RangeExtendDirection="Both"
 									LabelStyle="{StaticResource LabelChartStyle}"
-									Title="Value ($)"
+									Title="{x:Static properties:Resources.AmountDollar}"
 									LabelRotationAngle="45"
 									LabelFitMode="Rotate"
 									TitleTemplate="{StaticResource TitleChartTemplate}"/>
@@ -89,7 +92,9 @@
 								TooltipTemplate="{StaticResource PlayerEquipementValueTooltipTemplate}">
 				<telerik:LineSeries.PointTemplate>
 					<DataTemplate>
-						<Ellipse Width="10" Height="10" Fill="{DynamicResource BlackColorBrush}" />
+						<Ellipse Width="10"
+								 Height="10"
+								 Fill="{DynamicResource BlackColorBrush}" />
 					</DataTemplate>
 				</telerik:LineSeries.PointTemplate>
 			</telerik:LineSeries>

@@ -9,6 +9,7 @@
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -51,7 +52,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToHomeCommand}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -61,14 +62,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToOverallCommand}"
-						ToolTip="Overall (CTRL+O)">
+						ToolTip="{x:Static properties:Resources.ToolTipOverall}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -78,14 +79,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Overall"
+						<TextBlock Text="{x:Static properties:Resources.Overall}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToRankCommand}"
-						ToolTip="Rank (CTRL+R)">
+						ToolTip="{x:Static properties:Resources.ToolTipRank}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -95,14 +96,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Rank"
+						<TextBlock Text="{x:Static properties:Resources.Rank}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToMapCommand}"
-						ToolTip="Maps (CTRL+M)">
+						ToolTip="{x:Static properties:Resources.ToolTipMaps}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -112,26 +113,26 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Maps"
+						<TextBlock Text="{x:Static properties:Resources.Maps}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GoToWeaponCommand}"
-						ToolTip="Weapons (CTRL+W)">
+						ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
 							   Width="15"
 							   Height="15"/>
-						<TextBlock Text="Weapons"
+						<TextBlock Text="{x:Static properties:Resources.Weapons}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
 						IsEnabled="False"
-						ToolTip="Progression (CTRL+P)">
+						ToolTip="{x:Static properties:Resources.ToolTipProgression}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -141,7 +142,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Progression"
+						<TextBlock Text="{x:Static properties:Resources.Progression}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -161,7 +162,7 @@
 
 		<Grid Grid.Row="1">
 			<TabControl controls:TabControlHelper.IsUnderlined="True">
-				<controls:MetroTabItem Header="Percentage">
+				<controls:MetroTabItem Header="{x:Static properties:Resources.Percentage}">
 					<Grid Margin="10">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
@@ -171,25 +172,25 @@
 							<StackPanel Orientation="Horizontal"
 										Margin="5 0 0 0">
 								<CheckBox x:Name="CheckBoxShowWinChart"
-										  Content="Win %"
+										  Content="{x:Static properties:Resources.WinPercent}"
 										  IsChecked="{Binding IsWinChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleWinChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowWinChart}"/>
 								<CheckBox x:Name="CheckBoxShowDamageChart"
-										  Content="Damage value"
+										  Content="{x:Static properties:Resources.Damages}"
 										  IsChecked="{Binding IsDamageChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleDamageChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowDamageChart}"/>
 								<CheckBox x:Name="CheckBoxShowHeadshotChart"
-										  Content="Headshot %"
+										  Content="{x:Static properties:Resources.HeadshotsPercent}"
 										  IsChecked="{Binding IsHeadshotChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleHeadshotChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowHeadshotChart}"/>
 								<CheckBox x:Name="CheckBoxShowCrouchKillChart"
-										  Content="Crouch kill %"
+										  Content="{x:Static properties:Resources.CrouchKillPercent}"
 										  IsChecked="{Binding IsCrouchKillChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleCrouchKillChartCommand}"
@@ -209,7 +210,7 @@
 														Minimum="0"
 														HorizontalLocation="Right"
 														LabelStyle="{StaticResource LabelChartStyle}"
-														Title="Damage per game value"
+														Title="{x:Static properties:Resources.DamagePerGameValue}"
 														TitleTemplate="{StaticResource TitleChartTemplate}"
 														Visibility="{Binding IsDamageChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
 									</telerik:LinearAxis>
@@ -221,11 +222,11 @@
 														Maximum="110"
 														LastLabelVisibility="Hidden"
 														LabelStyle="{StaticResource LabelChartStyle}"
-														Title="% weekly"
+														Title="{x:Static properties:Resources.WeeklyPercent}"
 														TitleTemplate="{StaticResource TitleChartTemplate}"/>
 								</telerik:RadCartesianChart.VerticalAxis>
 								<telerik:RadCartesianChart.HorizontalAxis>
-									<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy"
+									<telerik:DateTimeCategoricalAxis LabelFormat="{Binding DateFormat}"
 																	 LabelStyle="{StaticResource LabelChartStyle}"
 																	 LabelRotationAngle="45"
 																	 LabelFitMode="Rotate"
@@ -242,7 +243,7 @@
 													ValueBinding="WinPercentage"
 													StrokeThickness="3"
 													Stroke="{StaticResource LightGreenBrush}"
-													TooltipTemplate="{StaticResource WinTooltipTemplate}"
+													TooltipTemplate="{StaticResource WinToolTipTemplate}"
 													Visibility="{Binding IsWinChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
 									<telerik:LineSeries.PointTemplate>
 										<DataTemplate>
@@ -314,13 +315,13 @@
 								<telerik:RadLegend.Items>
 									<telerik:LegendItemCollection>
 										<telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}"
-															Title="Win %"/>
+															Title="{x:Static properties:Resources.WinPercent}"/>
 										<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
-															Title="Headshot %" />
+															Title="{x:Static properties:Resources.HeadshotsPercent}" />
 										<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}"
-															Title="Damage value" />
+															Title="{x:Static properties:Resources.Damages}" />
 										<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}"
-															Title="Crouch kill %" />
+															Title="{x:Static properties:Resources.CrouchKillPercent}" />
 									</telerik:LegendItemCollection>
 								</telerik:RadLegend.Items>
 							</telerik:RadLegend>
@@ -328,7 +329,7 @@
 					</Grid>
 				</controls:MetroTabItem>
 
-				<controls:MetroTabItem Header="Kill">
+				<controls:MetroTabItem Header="{x:Static properties:Resources.Kills}">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*"/>
@@ -341,11 +342,11 @@
 													Minimum="0"
 													LastLabelVisibility="Hidden"
 													LabelStyle="{StaticResource LabelChartStyle}"
-													Title="Average value"
+													Title="{x:Static properties:Resources.AverageValue}"
 													TitleTemplate="{StaticResource TitleChartTemplate}"/>
 							</telerik:RadCartesianChart.VerticalAxis>
 							<telerik:RadCartesianChart.HorizontalAxis>
-								<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy"
+								<telerik:DateTimeCategoricalAxis LabelFormat="{Binding DateFormat}"
 																 LabelStyle="{StaticResource LabelChartStyle}"
 																 LabelRotationAngle="45"
 																 LabelFitMode="Rotate"
@@ -401,15 +402,15 @@
 							<telerik:RadLegend.Items>
 								<telerik:LegendItemCollection>
 									<telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}"
-														Title="Kill"/>
+														Title="{x:Static properties:Resources.Kill}"/>
 									<telerik:LegendItem MarkerFill="{StaticResource LightRedColorBrush}"
-														Title="Death" />
+														Title="{x:Static properties:Resources.Death}" />
 								</telerik:LegendItemCollection>
 							</telerik:RadLegend.Items>
 						</telerik:RadLegend>
 					</Grid>
 				</controls:MetroTabItem>
-				<controls:MetroTabItem Header="Kill velocity">
+				<controls:MetroTabItem Header="{x:Static properties:Resources.KillVelocity}">
 					<Grid>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto"/>
@@ -422,35 +423,36 @@
 							<StackPanel Orientation="Horizontal"
 										Margin="5 0 0 0">
 								<CheckBox x:Name="CheckBoxShowPistoles"
-										  Content="Pistol"
+										  Content="{x:Static properties:Resources.Pistol}"
 										  IsChecked="{Binding IsVelocityPistolChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleVelocityPistolChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPistoles}"/>
-								<CheckBox x:Name="CheckBoxShowRifle" Content="Rifle"
+								<CheckBox x:Name="CheckBoxShowRifle"
+										  Content="{x:Static properties:Resources.Rifle}"
 										  IsChecked="{Binding IsVelocityRifleChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleVelocityRifleChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowRifle}"/>
 								<CheckBox x:Name="CheckBoxShowSniper"
-										  Content="Sniper"
+										  Content="{x:Static properties:Resources.Sniper}"
 										  IsChecked="{Binding IsVelocitySniperChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleVelocitySniperChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowSniper}"/>
 								<CheckBox x:Name="CheckBoxShowHeavy"
-										  Content="Heavy"
+										  Content="{x:Static properties:Resources.Heavy}"
 										  IsChecked="{Binding IsVelocityHeavyChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleVelocityHeavyChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowHeavy}"/>
 								<CheckBox x:Name="CheckBoxShowSmg"
-										  Content="SMG"
+										  Content="{x:Static properties:Resources.Smg}"
 										  IsChecked="{Binding IsVelocitySmgChartEnabled}"
 										  Style="{StaticResource CheckBoxFilterStyle}"
 										  Command="{Binding ToggleVelocitySmgChartCommand}"
 										  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowSmg}"/>
-								<TextBlock Text="Information : The maximum velocity while running is 250 unit/s"
+								<TextBlock Text="{x:Static properties:Resources.TipsMaximumVelocity}"
 										   Style="{StaticResource TextBlockStandard}"
 										   Margin="20 0 0 0"/>
 							</StackPanel>
@@ -463,11 +465,11 @@
 													Maximum="{Binding MaximumVelocity}"
 													LastLabelVisibility="Visible"
 													LabelStyle="{StaticResource LabelChartStyle}"
-													Title="Average velocity"
+													Title="{x:Static properties:Resources.VelocityAverage}"
 													TitleTemplate="{StaticResource TitleChartTemplate}"/>
 							</telerik:RadCartesianChart.VerticalAxis>
 							<telerik:RadCartesianChart.HorizontalAxis>
-								<telerik:DateTimeCategoricalAxis LabelFormat="dd MMM yyyy"
+								<telerik:DateTimeCategoricalAxis LabelFormat="{Binding DateFormat}"
 																 LabelStyle="{StaticResource LabelChartStyle}"
 																 LabelRotationAngle="45"
 																 LabelFitMode="Rotate"
@@ -570,20 +572,20 @@
 							<telerik:RadLegend.Items>
 								<telerik:LegendItemCollection>
 									<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}"
-														Title="Pistoles" />
+														Title="{x:Static properties:Resources.Pistoles}" />
 									<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
-														Title="Rifles"/>
+														Title="{x:Static properties:Resources.Rifles}"/>
 									<telerik:LegendItem MarkerFill="{StaticResource OrangeBrush}"
-														Title="Snipers" />
+														Title="{x:Static properties:Resources.Snipers}" />
 									<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
-														Title="Heavy" />
+														Title="{x:Static properties:Resources.Heavy}" />
 									<telerik:LegendItem MarkerFill="{StaticResource CobblestoneColorBrush}"
-														Title="SMGs" />
+														Title="{x:Static properties:Resources.Smgs}" />
 								</telerik:LegendItemCollection>
 							</telerik:RadLegend.Items>
 						</telerik:RadLegend>
 						<TextBlock Grid.Row="3"
-								   Text="This graph displays your average velocity when you killed someone by weapon group"
+								   Text="{x:Static properties:Resources.TipsGraphAverageKillVelocity}"
 								   Style="{StaticResource LabelChartStyle}"
 								   HorizontalAlignment="Center"/>
 					</Grid>

@@ -8,6 +8,7 @@
 			 xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 Name="DemoListUserControl"
 			 d:DesignHeight="720"
@@ -55,6 +56,12 @@
 					Gesture="CTRL+H" />
 		<KeyBinding Command="{Binding RefreshListCommand}"
 					Gesture="F5" />
+		<KeyBinding Command="{Binding WatchHighlightCommand}"
+					CommandParameter="{Binding SelectedDemo}"
+					Gesture="CTRL+H" />
+		<KeyBinding Command="{Binding WatchLowlightCommand}"
+					CommandParameter="{Binding SelectedDemo}"
+					Gesture="CTRL+L" />
 		<mouse:MouseBindingExtended Gesture="XButton2"
 									Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
 									CommandParameter="{Binding ElementName=DemoListUserControl}"/>
@@ -83,7 +90,7 @@
 				<StackPanel Orientation="Horizontal">
 					<Button Command="{Binding AnalyzeDemosCommand}"
 							CommandParameter="{Binding SelectedDemos}"
-							ToolTip="Analyze selected demos (CTRL+S)"
+							ToolTip="{x:Static properties:Resources.ToolTipAnalyzeSelectedDemos}"
 							Style="{DynamicResource GeneralButton}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
@@ -94,13 +101,13 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Analyze"
+							<TextBlock Text="{x:Static properties:Resources.Analyze}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Demo's details (CTRL+D)"
+							ToolTip="{x:Static properties:Resources.ToolTipDemoDetails}"
 							Command="{Binding ShowDemoDetailsCommand}"
 							CommandParameter="{Binding SelectedDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -112,14 +119,14 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Details"
+							<TextBlock Text="{x:Static properties:Resources.Details}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Command="{Binding RefreshListCommand}"
 							Style="{DynamicResource GeneralButton}"
-							ToolTip="Refresh demos list (CTRL+R | F5)">
+							ToolTip="{x:Static properties:Resources.ToolTipRefreshDemosList}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -129,7 +136,7 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Refresh"
+							<TextBlock Text="{x:Static properties:Resources.Refresh}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
@@ -137,7 +144,7 @@
 					<Button Command="{Binding BrowseToDemoCommand}"
 							CommandParameter="{Binding SelectedDemo}"
 							Style="{DynamicResource GeneralButton}"
-							ToolTip="Browse to demo (CTRL+B)">
+							ToolTip="{x:Static properties:Resources.ToolTipBrowseToDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -147,7 +154,7 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Browse"
+							<TextBlock Text="{x:Static properties:Resources.Browse}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
@@ -155,7 +162,7 @@
 					<Button Command="{Binding DeleteDemosCommand}"
 							CommandParameter="{Binding SelectedDemos}"
 							Style="{DynamicResource GeneralButton}"
-							ToolTip="Delete (CTRL+D)">
+							ToolTip="{x:Static properties:Resources.ToolTipDeleteDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -165,14 +172,14 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Delete"
+							<TextBlock Text="{x:Static properties:Resources.Delete}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Command="{Binding GoToAccountStatsCommand}"
 							Style="{DynamicResource GeneralButton}"
-							ToolTip="Account stats (CTRL+E)">
+							ToolTip="{x:Static properties:Resources.ToolTipAccountStats}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -182,7 +189,7 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Stats"
+							<TextBlock Text="{x:Static properties:Resources.Stats}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
@@ -190,7 +197,7 @@
 					<Button Command="{Binding ExportExcelCommand}"
 							CommandParameter="{Binding SelectedDemos}"
 							Style="{DynamicResource GeneralButton}"
-							ToolTip="Export as XLS (CTRL+X)">
+							ToolTip="{x:Static properties:Resources.ToolTipExportXls}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -200,12 +207,12 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Export"
+							<TextBlock Text="{x:Static properties:Resources.ExportAsXls}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
-					<TextBlock Text="Account stats: "
+					<TextBlock Text="{x:Static properties:Resources.AccountStats}"
 							   Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
 							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
@@ -215,14 +222,14 @@
 							  Margin="5" />
 
 					<CheckBox x:Name="CheckBoxShowAllAccounts"
-							  Content="Show all"
+							  Content="{x:Static properties:Resources.ShowAll}"
 							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts}"
 							  Margin="5"
 							  Command="{Binding ShowAllAccountsCommand}"
 							  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllAccounts}"/>
 
 					<CheckBox x:Name="CheckBoxShowAllAccountDemos"
-							  Content="Show only account demos"
+							  Content="{x:Static properties:Resources.ShowOnlyAccountDemos}"
 							  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsShowOnlyAccountDemos}"
 							  Margin="5"
 							  Command="{Binding ShowOnlyAccountDemos}"
@@ -240,7 +247,7 @@
 			<Grid Grid.Row="1">
 				<StackPanel Orientation="Horizontal">
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Watch selected demo (CTRL+W)"
+							ToolTip="{x:Static properties:Resources.ToolTipWatchDemo}"
 							Command="{Binding WatchDemoCommand}"
 							CommandParameter="{Binding SelectedDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -252,13 +259,13 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Watch"
+							<TextBlock Text="{x:Static properties:Resources.Watch}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Start watching selected demo at specific tick (CTRL+G)"
+							ToolTip="{x:Static properties:Resources.ToolTipGotoTick}"
 							Command="{Binding GoToTickCommand}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
@@ -269,13 +276,13 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Goto Tick"
+							<TextBlock Text="{x:Static properties:Resources.GotoTick}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Watch your best actions."
+							ToolTip="{x:Static properties:Resources.ToolTipWatchHighlights}"
 							Command="{Binding WatchHighlightCommand}"
 							CommandParameter="{Binding SelectedDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -287,13 +294,13 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Watch highlights"
+							<TextBlock Text="{x:Static properties:Resources.WatchHighlights}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Watch your mistakes."
+							ToolTip="{x:Static properties:Resources.ToolTipWatchLowlights}"
 							Command="{Binding WatchLowlightCommand}"
 							CommandParameter="{Binding SelectedDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -305,13 +312,13 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Watch lowlights"
+							<TextBlock Text="{x:Static properties:Resources.WatchLowlights}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Add players to suspects list (CTRL+W)"
+							ToolTip="{x:Static properties:Resources.ToolTipAddToSuspectsList}"
 							Command="{Binding AddPlayersToSuspectsListCommand}"
 							CommandParameter="{Binding SelectedDemos}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -323,13 +330,13 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Add to suspects"
+							<TextBlock Text="{x:Static properties:Resources.AddToSuspects}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Go to suspects view (CTRL+F)"
+							ToolTip="{x:Static properties:Resources.ToolTipGoToSuspectsList}"
 							Command="{Binding ShowSuspectsCommand}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
@@ -340,14 +347,14 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Suspects "
+							<TextBlock Text="{x:Static properties:Resources.Suspects}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 							<TextBlock Text="{Binding NewBannedPlayerCountAsString}" />
 						</StackPanel>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="Download last MM demos available for the current logged Steam account (CTRL+H)"
+							ToolTip="{x:Static properties:Resources.ToolTipDownloadDemos}"
 							Command="{Binding DownloadDemosCommand}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
@@ -358,7 +365,7 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Download MM Demos"
+							<TextBlock Text="{x:Static properties:Resources.DownloadMatchMakingDemos}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
@@ -377,7 +384,7 @@
 					  ItemsSource="{Binding Folders, Mode=TwoWay}"
 					  Style="{StaticResource ComboBoxFoldersStyle}"
 					  SelectedItem="{Binding SelectedFolder}"
-					  controls:TextBoxHelper.Watermark="Current folder">
+					  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.CurrentFolder}">
 				<ComboBox.IsEnabled>
 					<MultiBinding Converter="{StaticResource BooleanMultipleConverter}">
 						<Binding Path="IsShowAllFolders"
@@ -390,7 +397,7 @@
 			<StackPanel Orientation="Horizontal"
 						Grid.Column="1">
 				<CheckBox x:Name="CheckBoxShowAllFolders"
-						  Content="Show all folders"
+						  Content="{x:Static properties:Resources.ShowAllFolders}"
 						  IsChecked="{Binding IsShowAllFolders}"
 						  Margin="5"
 						  Command="{Binding ShowAllFoldersCommand}"
@@ -438,13 +445,13 @@
 						  Command="{Binding ShowPopFlashDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowPopFlash}"/>
 				<CheckBox x:Name="CheckBoxShowOldDemos"
-						  Content="No analyzable demos"
+						  Content="{x:Static properties:Resources.NoAnalyzableDemos}"
 						  IsChecked="{Binding IsShowOldDemos}"
 						  Margin="5"
 						  Command="{Binding ShowOldDemosCommand}"
 						  CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowOldDemos}"/>
 				<TextBox Text="{Binding FilterDemoText, UpdateSourceTrigger=PropertyChanged}"
-						 controls:TextBoxHelper.Watermark="Filter..."
+						 controls:TextBoxHelper.Watermark="{x:Static properties:Resources.FilterEtc}"
 						 controls:TextBoxHelper.ClearTextButton="True"
 						 Margin="5"
 						 MinWidth="100"
@@ -469,7 +476,7 @@
 				<Button Command="{Binding StopAnalyzeCommand}"
 						Style="{DynamicResource GeneralButton}"
 						Visibility="{Binding IsCancellable, Converter={StaticResource BooleanToVisibilityConverter}}"
-						ToolTip="Stop (CTRL+S)">
+						ToolTip="{x:Static properties:Resources.ToolTipStop}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -479,7 +486,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Stop"
+						<TextBlock Text="{x:Static properties:Resources.Stop}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -506,9 +513,10 @@
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 			<DataGrid.Columns>
-				<DataGridTemplateColumn Header="Source"
+				<DataGridTemplateColumn Header="{x:Static properties:Resources.Source}"
 										Width="Auto"
-										SortMemberPath="Source.Name">
+										SortMemberPath="Source.Name"
+										HeaderStyle="{StaticResource DemoSourceHeader}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
 							<Image Source="{Binding Path=Source.Logo, Converter={StaticResource ImageToSourceConverter}}"
@@ -518,32 +526,32 @@
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridTextColumn Width="Auto"
-									Header="Date"
+									Header="{x:Static properties:Resources.Date}"
 									Binding="{Binding DateAsString, Converter={StaticResource StringToDateConverter}}"
 									HeaderStyle="{StaticResource DemoDateHeader}"
 									SortDirection="Descending"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Name"
+									Header="{x:Static properties:Resources.Name}"
 									Binding="{Binding Name}"
 									HeaderStyle="{StaticResource DemoNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Map"
+									Header="{x:Static properties:Resources.Map}"
 									Binding="{Binding MapName}"
 									HeaderStyle="{StaticResource MapNameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowMapNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Team 1"
+									Header="{x:Static properties:Resources.Team1}"
 									Binding="{Binding TeamCT.Name}"
 									HeaderStyle="{StaticResource Team1NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam1NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Team 2"
+									Header="{x:Static properties:Resources.Team2}"
 									Binding="{Binding TeamT.Name}"
 									HeaderStyle="{StaticResource Team2NameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-				<DataGridTemplateColumn Header="Status"
+				<DataGridTemplateColumn Header="{x:Static properties:Resources.Status}"
 										Width="Auto"
 										HeaderStyle="{StaticResource WinStatusHeader}"
 										Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
@@ -555,22 +563,22 @@
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridTextColumn Width="Auto"
-									Header="ST1"
+									Header="{x:Static properties:Resources.HeaderScoreTeam1}"
 									Binding="{Binding ScoreTeam1}"
 									HeaderStyle="{StaticResource ScoreTeam1Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="ST2"
+									Header="{x:Static properties:Resources.HeaderScoreTeam2}"
 									Binding="{Binding ScoreTeam2}"
 									HeaderStyle="{StaticResource ScoreTeam2Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
-				<DataGridTemplateColumn Header="Ban"
+				<DataGridTemplateColumn Header="{x:Static properties:Resources.Ban}"
 										Width="Auto"
 										HeaderStyle="{StaticResource BannedPlayerHeader}"
 										Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="Yes"
+							<TextBlock Text="{x:Static properties:Resources.Yes}"
 									   Background="{StaticResource RedColorBrush}"
 									   TextAlignment="Center"
 									   Visibility="{Binding HasCheater, Converter={StaticResource BooleanToVisibilityConverter}}"/>
@@ -578,147 +586,147 @@
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
 				<DataGridTextColumn Width="Auto"
-									Header="Duration"
+									Header="{x:Static properties:Resources.Duration}"
 									Binding="{Binding DurationTime}"
 									HeaderStyle="{StaticResource DurationHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDurationColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Hostname"
+									Header="{x:Static properties:Resources.Hostname}"
 									Binding="{Binding Hostname}"
 									HeaderStyle="{StaticResource HostnameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHostnameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Client"
+									Header="{x:Static properties:Resources.ClientName}"
 									Binding="{Binding ClientName}"
 									HeaderStyle="{StaticResource ClientnameHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClientnameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Type"
+									Header="{x:Static properties:Resources.Type}"
 									Binding="{Binding Type}"
 									HeaderStyle="{StaticResource DemoTypeHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoTypeColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Tickrate"
+									Header="{x:Static properties:Resources.HeaderTickrate}"
 									Binding="{Binding ServerTickrate}"
 									HeaderStyle="{StaticResource TickrateHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Framerate"
+									Header="{x:Static properties:Resources.HeaderFramerate}"
 									Binding="{Binding Tickrate}"
 									HeaderStyle="{StaticResource FramerateHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFramerateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Ticks"
+									Header="{x:Static properties:Resources.Ticks}"
 									Binding="{Binding Ticks}"
 									HeaderStyle="{StaticResource TicksHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTicksColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Rating"
+									Header="{x:Static properties:Resources.HeaderHltvRating}"
 									Binding="{Binding AverageHltvRating}"
 									HeaderStyle="{StaticResource RatingHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="RWS"
+									Header="{x:Static properties:Resources.RWS}"
 									Binding="{Binding AverageEseaRws}"
 									HeaderStyle="{StaticResource EseaRwsHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="1K"
+									Header="{x:Static properties:Resources.HeaderOneKill}"
 									Binding="{Binding OneKillCount}"
 									HeaderStyle="{StaticResource OneKillHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowOneKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="2K"
+									Header="{x:Static properties:Resources.HeaderTwoKills}"
 									Binding="{Binding TwoKillCount}"
 									HeaderStyle="{StaticResource TwoKillHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTwoKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="3K"
+									Header="{x:Static properties:Resources.HeaderThreeKills}"
 									Binding="{Binding ThreeKillCount}"
 									HeaderStyle="{StaticResource ThreeKillHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowThreeKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="4K"
+									Header="{x:Static properties:Resources.HeaderFourKills}"
 									Binding="{Binding FourKillCount}"
 									HeaderStyle="{StaticResource FourKillHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFourKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="5K"
+									Header="{x:Static properties:Resources.HeaderFiveKills}"
 									Binding="{Binding FiveKillCount}"
 									HeaderStyle="{StaticResource FiveKillHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFiveKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Kills"
+									Header="{x:Static properties:Resources.HeaderKills}"
 									Binding="{Binding KillCount}"
 									HeaderStyle="{StaticResource KillsHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalKillsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="TK"
+									Header="{x:Static properties:Resources.HeaderTradeKills}"
 									Binding="{Binding TradeKillCount}"
 									HeaderStyle="{StaticResource TradeKillsHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="JK"
+									Header="{x:Static properties:Resources.HeaderJumpKills}"
 									Binding="{Binding JumpKillCount}"
 									HeaderStyle="{StaticResource JumpKillsHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowJumpKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="CK"
+									Header="{x:Static properties:Resources.HeaderCrouchKills}"
 									Binding="{Binding CrouchKillCount}"
 									HeaderStyle="{StaticResource CrouchKillsHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowCrouchKillColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="ADR"
+									Header="{x:Static properties:Resources.HeaderAverageDamagesPerRound}"
 									Binding="{Binding AverageHealthDamage}"
 									HeaderStyle="{StaticResource AverageDamagePerRoundHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="KPR"
+									Header="{x:Static properties:Resources.HeaderKillsPerRound}"
 									HeaderStyle="{StaticResource KillPerRoundHeader}"
 									Binding="{Binding KillPerRound}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKillPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="DPR"
+									Header="{x:Static properties:Resources.HeaderDeathPerRound}"
 									HeaderStyle="{StaticResource DeathPerRoundHeader}"
 									Binding="{Binding DeathPerRound}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDeathPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="APR"
+									Header="{x:Static properties:Resources.HeaderAssistsPerRound}"
 									Binding="{Binding AssistPerRound}"
 									HeaderStyle="{StaticResource AssistPerRoundHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowAssistPerRoundColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="TDH"
+									Header="{x:Static properties:Resources.HeaderTotalDamagesHealth}"
 									Binding="{Binding DamageHealthCount}"
 									HeaderStyle="{StaticResource TotalDamageHealthHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageHealthColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="TDA"
+									Header="{x:Static properties:Resources.HeaderTotalDamagesArmor}"
 									Binding="{Binding DamageArmorCount}"
 									HeaderStyle="{StaticResource TotalDamageArmorHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTotalDamageArmorColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Clutchs"
+									Header="{x:Static properties:Resources.HeaderClutchs}"
 									Binding="{Binding ClutchWonCount}"
 									HeaderStyle="{StaticResource ClutchWonCountHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowClutchCountColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="BD"
+									Header="{x:Static properties:Resources.HeaderBombDefused}"
 									Binding="{Binding BombDefusedCount}"
 									HeaderStyle="{StaticResource BombDefusedHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="BE"
+									Header="{x:Static properties:Resources.HeaderBombExploded}"
 									Binding="{Binding BombExplodedCount}"
 									HeaderStyle="{StaticResource BombExplodedHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombExplodedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="BP"
+									Header="{x:Static properties:Resources.HeaderBombPlanted}"
 									Binding="{Binding BombPlantedCount}"
 									HeaderStyle="{StaticResource BombPlantedHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
-									Header="Comment"
+									Header="{x:Static properties:Resources.Comment}"
 									Binding="{Binding Comment}"
 									HeaderStyle="{StaticResource CommentHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowCommentColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -731,7 +739,7 @@
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
 
-			<Button Content="Show more demos"
+			<Button Content="{x:Static properties:Resources.ShowMoreDemos}"
 					Grid.Column="0"
 					Margin="10 5 0 0"
 					Style="{DynamicResource GeneralButton}"
@@ -739,8 +747,15 @@
 			<TextBlock Grid.Column="1"
 					   Style="{StaticResource SmallTitleStyle}"
 					   TextAlignment="Right"
-					   Margin="10 0 5 0"
-					   Text="{Binding Demos.Count, StringFormat='{}{0} demo(s)'}"/>
+					   Margin="10 0 5 0">
+				<TextBlock.Text>
+					<MultiBinding StringFormat="{}{0} {1}">
+						<Binding Source="{StaticResource Locator}"
+								 Path="DemoList.Demos.Count" />
+						<Binding Source="{x:Static properties:Resources.Demos}" />
+					</MultiBinding>
+				</TextBlock.Text>
+			</TextBlock>
 		</Grid>
 
 		<Grid Grid.Row="5">
@@ -750,7 +765,7 @@
 			</Grid.ColumnDefinitions>
 			<StackPanel Grid.Column="0"
 						Orientation="Horizontal">
-				<TextBlock Text="Comment : "
+				<TextBlock Text="{x:Static properties:Resources.CommentLabel}"
 						   Style="{StaticResource CurrentFolderStyle}" />
 				<TextBlock Text="{Binding SelectedDemo.Comment}"
 						   Style="{StaticResource TextBlockSmall}" />
@@ -761,7 +776,7 @@
 					<Rectangle Width="10"
 							   Height="10"
 							   Fill="{StaticResource GreenBrush}" />
-					<TextBlock Text="To watch"
+					<TextBlock Text="{x:Static properties:Resources.ToWatch}"
 							   Style="{StaticResource CurrentFolderStyle}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal"
@@ -769,7 +784,7 @@
 					<Rectangle Width="10"
 							   Height="10"
 							   Fill="{StaticResource LightBlueBrush}" />
-					<TextBlock Text="Watched"
+					<TextBlock Text="{x:Static properties:Resources.Watched}"
 							   Style="{StaticResource CurrentFolderStyle}" />
 				</StackPanel>
 				<StackPanel Orientation="Horizontal"
@@ -777,7 +792,7 @@
 					<Rectangle Width="10"
 							   Height="10"
 							   Fill="{StaticResource RedColorBrush}" />
-					<TextBlock Text="Not analyzable"
+					<TextBlock Text="{x:Static properties:Resources.NotAnalyzable}"
 							   Style="{StaticResource CurrentFolderStyle}" />
 				</StackPanel>
 			</StackPanel>

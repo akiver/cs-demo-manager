@@ -4,7 +4,8 @@
 					mc:Ignorable="d"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:viewModel="clr-namespace:Manager.ViewModel"
-					xmlns:models="clr-namespace:Core.Models;assembly=csgodm.core">
+					xmlns:models="clr-namespace:Core.Models;assembly=csgodm.core"
+					xmlns:properties="clr-namespace:Manager.Properties">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.contextmenu.xaml" />
@@ -16,19 +17,19 @@
 	<viewModel:ViewModelLocator x:Key="Locator" />
 
 	<ContextMenu x:Key="DemoRowContextMenu">
-		<MenuItem Header="Details"
+		<MenuItem Header="{x:Static properties:Resources.Details}"
 				  Command="{Binding DemoList.ShowDemoDetailsCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Analyze"
+		<MenuItem Header="{x:Static properties:Resources.Analyze}"
 				  Command="{Binding DemoList.AnalyzeDemosCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Browse"
+		<MenuItem Header="{x:Static properties:Resources.Browse}"
 				  Command="{Binding DemoList.BrowseToDemoCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Copy playdemo command"
+		<MenuItem Header="{x:Static properties:Resources.CopyPlayDemoCommand}"
 				  Command="{Binding DemoList.CopyPlaydemoCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Status"
+		<MenuItem Header="{x:Static properties:Resources.Status}"
 				  ItemsSource="{Binding Settings.StatusList, Source={StaticResource Locator}}"
 				  DataContext="{StaticResource DemoStatus}"
 				  DisplayMemberPath="Label">
@@ -42,16 +43,16 @@
 				</Style>
 			</MenuItem.ItemContainerStyle>
 		</MenuItem>
-		<MenuItem Header="Delete"
+		<MenuItem Header="{x:Static properties:Resources.Delete}"
 				  Command="{Binding DemoList.DeleteDemosCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Remove from cache"
+		<MenuItem Header="{x:Static properties:Resources.RemoveFromCache}"
 				  Command="{Binding DemoList.RemoveDemosFromCacheCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add players to suspects list"
+		<MenuItem Header="{x:Static properties:Resources.AddPlayersToSuspects}"
 				  Command="{Binding DemoList.AddPlayersToSuspectsListCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Source">
+		<MenuItem Header="{x:Static properties:Resources.Source}">
 			<MenuItem Header="Valve"
 					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
 					  CommandParameter="valve" />
@@ -68,65 +69,65 @@
 					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
 					  CommandParameter="cevo" />
 		</MenuItem>
-		<MenuItem Header="Export JSON"
+		<MenuItem Header="{x:Static properties:Resources.ExportJson}"
 				  Command="{Binding DemoList.ExportJsonCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="SuspectRowContextMenu">
-		<MenuItem Header="Profile"
+		<MenuItem Header="{x:Static properties:Resources.Profile}"
 				  Command="{Binding SuspectList.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Show suspect demos"
+		<MenuItem Header="{x:Static properties:Resources.ShowSuspectDemos}"
 				  Command="{Binding SuspectList.DisplayDemosCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding SuspectList.SelectedSuspect, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Move to whitelist"
+		<MenuItem Header="{x:Static properties:Resources.MoveToWhitelist}"
 				  Command="{Binding SuspectList.MoveToWhitelistCommand, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Remove"
+		<MenuItem Header="{x:Static properties:Resources.Remove}"
 				  Command="{Binding SuspectList.RemoveSuspectCommand, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="PlayerRowContextMenu">
-		<MenuItem Header="Profile"
+		<MenuItem Header="{x:Static properties:Resources.Profile}"
 				  Command="{Binding DemoDetails.GoToSuspectProfileCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add to suspect list"
+		<MenuItem Header="{x:Static properties:Resources.AddToSuspects}"
 				  Command="{Binding DemoDetails.AddSuspectCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add to whitelist"
+		<MenuItem Header="{x:Static properties:Resources.AddToWhitelist}"
 				  Command="{Binding DemoDetails.AddPlayerToWhitelistCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}" />
-		<MenuItem Header="Watch player"
+		<MenuItem Header="{x:Static properties:Resources.WatchPlayer}"
 				  Command="{Binding DemoDetails.WatchPlayerCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Watch highlights"
+		<MenuItem Header="{x:Static properties:Resources.WatchHighlights}"
 				  Command="{Binding DemoDetails.WatchHighlights, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Watch lowlights"
+		<MenuItem Header="{x:Static properties:Resources.WatchLowlights}"
 				  Command="{Binding DemoDetails.WatchLowlights, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Add to account list"
+		<MenuItem Header="{x:Static properties:Resources.AddToAccountList}"
 				  Command="{Binding DemoDetails.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Show player demos"
+		<MenuItem Header="{x:Static properties:Resources.ShowPlayerDemos}"
 				  Command="{Binding DemoDetails.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="WhitelistRowContextMenu">
-		<MenuItem Header="Profile"
+		<MenuItem Header="{x:Static properties:Resources.Profile}"
 				  Command="{Binding Whitelist.GoToPlayerProfileCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Remove"
+		<MenuItem Header="{x:Static properties:Resources.Remove}"
 				  Command="{Binding Whitelist.RemoveSelectedPlayersCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding Whitelist.SelectedSuspect, Source={StaticResource Locator}}"/>
 	</ContextMenu>
 
 	<ContextMenu x:Key="RoundRowContextMenu">
-		<MenuItem Header="Details"
+		<MenuItem Header="{x:Static properties:Resources.Details}"
 				  Command="{Binding DemoDetails.ShowRoundCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedRound.Number, Source={StaticResource Locator}}"/>
-		<MenuItem Header="Watch"
+		<MenuItem Header="{x:Static properties:Resources.Watch}"
 				  Command="{Binding DemoDetails.WatchRoundCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedRound, Source={StaticResource Locator}}"/>
 	</ContextMenu>

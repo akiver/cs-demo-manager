@@ -4,6 +4,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -11,7 +12,9 @@
 
 	<UserControl.Resources>
 		<ResourceDictionary>
-			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter" True="Yes" False="No"/>
+			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
+												 True="{x:Static properties:Resources.Yes}"
+												 False="{x:Static properties:Resources.No}"/>
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -41,7 +44,7 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Row="0"
-							   Text="Total"
+							   Text="{x:Static properties:Resources.Total}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<Border Grid.Column="0"
 							Grid.Row="1"
@@ -50,28 +53,28 @@
 							Margin="5"
 							Padding="10">
 						<StackPanel Orientation="Vertical">
-							<TextBlock Text="Clutches "
+							<TextBlock Text="{x:Static properties:Resources.Clutches}"
 									   FontSize="18"
-									   ToolTip="Total clutches">
-							<TextBlock Text="{Binding CurrentPlayer.ClutchCount}"
+									   ToolTip="{x:Static properties:Resources.TotalClutches}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
-							<TextBlock Text="Clutches won "
+							<TextBlock Text="{x:Static properties:Resources.ClutchesWon}"
 									   FontSize="18"
-									   ToolTip="Total clutches won">
-							<TextBlock Text="{Binding CurrentPlayer.ClutchWonCount}"
+									   ToolTip="{x:Static properties:Resources.TotalClutchesWon}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchWonCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
-							<TextBlock Text="Clutches loss "
+							<TextBlock Text="{x:Static properties:Resources.ClutchesLoss}"
 									   FontSize="18"
-									   ToolTip="Total clutches loss">
-							<TextBlock Text="{Binding CurrentPlayer.ClutchLostCount}"
+									   ToolTip="{x:Static properties:Resources.TotalClutchesLoss}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchLostCount, StringFormat='{} {0}'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
-							<TextBlock Text="Clutches won % "
+							<TextBlock Text="{x:Static properties:Resources.ClutchesWonPercent}"
 									   FontSize="18"
-									   ToolTip="Clutches won %">
-							<TextBlock Text="{Binding CurrentPlayer.ClutchWonPercent}"
+									   ToolTip="{x:Static properties:Resources.ClutchesWonPercent}">
+							<TextBlock Text="{Binding CurrentPlayer.ClutchWonPercent, StringFormat='{} {0}%'}"
 									   Style="{StaticResource TextBlockHighlightBig}"/>
 						</TextBlock>
 						</StackPanel>
@@ -85,7 +88,7 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Row="0"
-							   Text="1V1"
+							   Text="{x:Static properties:Resources.OneVersusOne}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<Border Grid.Column="0"
 							Grid.Row="1"
@@ -94,28 +97,28 @@
 							Margin="5"
 							Padding="10">
 						<StackPanel Orientation="Vertical">
-							<TextBlock Text="1V1 "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusOne}"
 									   FontSize="18"
-									   ToolTip="1V1">
-						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1Count}"
+									   ToolTip="{x:Static properties:Resources.HeaderToolTipOneVersusOne}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1Count, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockHighlightBig}"/>
 					</TextBlock>
-							<TextBlock Text="1V1 won "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusOneWon}"
 									   FontSize="18"
-									   ToolTip="Total 1V1 won">
-						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1WonCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusOneWon}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1WonCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockHighlightBig}"/>
 					</TextBlock>
-							<TextBlock Text="1V1 loss "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusOneLoss}"
 									   FontSize="18"
-									   ToolTip="Total 1V1 loss">
-						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1LossCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusOneLoss}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1LossCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockHighlightBig}"/>
 					</TextBlock>
-							<TextBlock Text="1V1 won % "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusOneWonPercent}"
 									   FontSize="18"
-									   ToolTip="1V1 won %">
-						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1WonPercent}"
+									   ToolTip="{x:Static properties:Resources.OneVersusOneWonPercent}">
+						<TextBlock Text="{Binding CurrentPlayer.Clutch1V1WonPercent, StringFormat='{} {0}%'}"
 								   Style="{StaticResource TextBlockHighlightBig}"/>
 					</TextBlock>
 						</StackPanel>
@@ -129,7 +132,7 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Row="0"
-							   Text="1V2"
+							   Text="{x:Static properties:Resources.OneVersusTwo}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<Border Grid.Column="0"
 							Grid.Row="1"
@@ -138,28 +141,28 @@
 							Margin="5"
 							Padding="10">
 						<StackPanel Orientation="Vertical">
-							<TextBlock Text="1V2 "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusTwo}"
 									   FontSize="18"
-									   ToolTip="1V2">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2Count}"
+									   ToolTip="{x:Static properties:Resources.HeaderToolTipOneVersusTwo}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2Count, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V2 won "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusTwoWon}"
 								   FontSize="18"
-								   ToolTip="Total 1V2 won">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonCount}"
+								   ToolTip="{x:Static properties:Resources.TotalOneVersusTwoWon}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
 							<TextBlock Text="1V2 loss "
 									   FontSize="18"
-									   ToolTip="Total 1V2 loss">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2LossCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusTwoLoss}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2LossCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V2 won % "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusTwoWonPercent}"
 									   FontSize="18"
-									   ToolTip="1V2 won %">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonPercent}"
+									   ToolTip="{x:Static properties:Resources.OneVersusTwoWonPercent}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonPercent, StringFormat='{} {0}%'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
 						</StackPanel>
@@ -181,7 +184,7 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Row="0"
-							   Text="1V3"
+							   Text="{x:Static properties:Resources.OneVersusThree}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<Border Grid.Column="0"
 							Grid.Row="1"
@@ -190,28 +193,28 @@
 							Margin="5"
 							Padding="10">
 						<StackPanel Orientation="Vertical">
-							<TextBlock Text="1V3 "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusThree}"
 									   FontSize="18"
-									   ToolTip="1V3">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3Count}"
+									   ToolTip="{x:Static properties:Resources.HeaderToolTipOneVersusThree}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3Count, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V3 won "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusThreeWon}"
 									   FontSize="18"
-									   ToolTip="Total 1V3 won">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3WonCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusThreeWon}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3WonCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V3 loss "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusThreeLoss}"
 									   FontSize="18"
-									   ToolTip="Total 1V3 loss">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3LossCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusThreeLoss}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3LossCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V3 won % "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusThreeWonPercent}"
 									   FontSize="18"
-									   ToolTip="1V3 won %">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3WonPercent}"
+									   ToolTip="{x:Static properties:Resources.OneVersusThreeWonPercent}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V3WonPercent, StringFormat='{} {0}%'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
 						</StackPanel>
@@ -225,7 +228,7 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Row="0"
-							   Text="1V4"
+							   Text="{x:Static properties:Resources.OneVersusFour}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<Border Grid.Column="0"
 							Grid.Row="1"
@@ -234,28 +237,28 @@
 							Margin="5"
 							Padding="10">
 						<StackPanel Orientation="Vertical">
-							<TextBlock Text="1V4 "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFour}"
 									   FontSize="18"
-									   ToolTip="1V4">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4Count}"
+									   ToolTip="{x:Static properties:Resources.HeaderToolTipOneVersusFour}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4Count, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V4 won "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFourWon}"
 									   FontSize="18"
-									   ToolTip="Total 1V4 won">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4WonCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusFourWon}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4WonCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V4 loss "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFourLoss}"
 									   FontSize="18"
-									   ToolTip="Total 1V4 loss">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4LossCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusFourLoss}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4LossCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V4 won % "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFourWonPercent}"
 									   FontSize="18"
-									   ToolTip="1V4 won %">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4WonPercent}"
+									   ToolTip="{x:Static properties:Resources.OneVersusFourWonPercent}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V4WonPercent, StringFormat='{} {0}%'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
 						</StackPanel>
@@ -269,7 +272,7 @@
 					</Grid.RowDefinitions>
 
 					<TextBlock Grid.Row="0"
-							   Text="1V5"
+							   Text="{x:Static properties:Resources.OneVersusFive}"
 							   Style="{StaticResource TextBlockSectionTitle}"/>
 					<Border Grid.Column="0"
 							Grid.Row="1"
@@ -278,28 +281,28 @@
 							Margin="5"
 							Padding="10">
 						<StackPanel Orientation="Vertical">
-							<TextBlock Text="1V5 "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFive}"
 									   FontSize="18"
-									   ToolTip="1V5">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5Count}"
+									   ToolTip="{x:Static properties:Resources.HeaderToolTipOneVersusFive}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5Count, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V5 won "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFiveWon}"
 									   FontSize="18"
-									   ToolTip="Total 1V5 won">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5WonCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusFiveWon}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5WonCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V5 loss "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFiveLoss}"
 									   FontSize="18"
-									   ToolTip="Total 1V5 loss">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5LossCount}"
+									   ToolTip="{x:Static properties:Resources.TotalOneVersusFiveLoss}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5LossCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V5 won % "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusFiveWonPercent}"
 									   FontSize="18"
-									   ToolTip="1V5 won %">
-								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5WonPercent}"
+									   ToolTip="{x:Static properties:Resources.OneVersusFiveWonPercent}">
+								<TextBlock Text="{Binding CurrentPlayer.Clutch1V5WonPercent, StringFormat='{} {0}%'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
 						</StackPanel>
@@ -316,23 +319,23 @@
 				<DataGrid.Columns>
 					<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
 										Width="Auto"
-										Header="Round"
+										Header="{x:Static properties:Resources.Round}"
 										Binding="{Binding RoundNumber}"/>
 					<DataGridTextColumn HeaderStyle="{StaticResource ClutchOpponentCountHeader}"
 										Width="Auto"
-										Header="1vX"
+										Header="{x:Static properties:Resources.HeaderOneVersusX}"
 										Binding="{Binding OpponentCount}"/>
 					<DataGridTextColumn HeaderStyle="{StaticResource ClutchWonHeader}"
 										Width="Auto"
-										Header="Won"
+										Header="{x:Static properties:Resources.HeaderWon}"
 										Binding="{Binding HasWon, Converter={StaticResource BooleanToStringConverter}}"/>
-					<DataGridTemplateColumn Header="Watch">
+					<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 						<DataGridTemplateColumn.CellTemplate>
 							<DataTemplate>
 								<Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithoutDelayCommand}"
 										CommandParameter="{Binding SelectedItem.Tick, ElementName=ClutchsDataGrid}"
 										Style="{DynamicResource AccentedSquareButtonStyle}"
-										Content="Watch" />
+										Content="{x:Static properties:Resources.Watch}" />
 							</DataTemplate>
 						</DataGridTemplateColumn.CellTemplate>
 					</DataGridTemplateColumn>

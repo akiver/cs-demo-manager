@@ -9,6 +9,7 @@
 			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 DataContext="{Binding DemoFlashbangs, Source={StaticResource Locator}}"
 			 d:DesignHeight="720"
@@ -48,7 +49,7 @@
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -58,7 +59,7 @@
 											Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -125,7 +126,7 @@
 					</telerik:RadHeatMap.ToolTipSettings>
 					<telerik:RadHeatMap.DescriptionContent>
 						<Grid>
-							<TextBlock Text="Flasher \ Flashed"
+							<TextBlock Text="{x:Static properties:Resources.HeaderFlasherFlashed}"
 									   Style="{StaticResource DescriptionLabelHeatmapStyle}" />
 						</Grid>
 					</telerik:RadHeatMap.DescriptionContent>
@@ -176,7 +177,7 @@
 						</telerik:RadHeatMap.ToolTipSettings>
 						<telerik:RadHeatMap.DescriptionContent>
 							<Grid>
-								<TextBlock Text="Flasher \ Flashed"
+								<TextBlock Text="{x:Static properties:Resources.HeaderFlasherFlashed}"
 										   Style="{StaticResource DescriptionLabelHeatmapStyle}" />
 							</Grid>
 						</telerik:RadHeatMap.DescriptionContent>
@@ -231,7 +232,7 @@
 							<RowDefinition Height="Auto"/>
 						</Grid.RowDefinitions>
 						<Grid Grid.Row="0">
-							<TextBlock Text="Total flashbang thrown"
+							<TextBlock Text="{x:Static properties:Resources.TotalFlashbangsThrown}"
 									   Style="{StaticResource SmallTitleStyle}"/>
 						</Grid>
 						<Grid Grid.Row="1">
@@ -246,11 +247,11 @@
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 														Width="Auto"
-														Header="Player Name"
+														Header="{x:Static properties:Resources.HeaderPlayerName}"
 														Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalPlayerFlashbangThrownHeader}"
 														Width="Auto"
-														Header="Total"
+														Header="{x:Static properties:Resources.Total}"
 														Binding="{Binding FlashbangThrownCount}" />
 								</DataGrid.Columns>
 							</DataGrid>
@@ -261,11 +262,11 @@
 								<DataGrid.Columns>
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
 														Width="Auto"
-														Header="Team Name"
+														Header="{x:Static properties:Resources.HeaderTeamName}"
 														Binding="{Binding Name}"/>
 									<DataGridTextColumn HeaderStyle="{StaticResource TotalTeamFlashbangThrownHeader}"
 														Width="Auto"
-														Header="Total"
+														Header="{x:Static properties:Resources.Total}"
 														Binding="{Binding FlashbangThrownCount}" />
 								</DataGrid.Columns>
 							</DataGrid>

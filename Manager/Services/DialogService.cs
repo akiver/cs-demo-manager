@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using Core;
 using Core.Models;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
@@ -14,13 +15,13 @@ namespace Manager.Services
 		public async Task<MessageDialogResult> ShowMessageAsync(string message, MessageDialogStyle dialogStyle)
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			return await metroWindow.ShowMessageAsync("Information", message, dialogStyle);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Information, message, dialogStyle);
 		}
 
 		public async Task<MessageDialogResult> ShowErrorAsync(string message, MessageDialogStyle dialogStyle)
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			return await metroWindow.ShowMessageAsync("Error", message, dialogStyle);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Error, message, dialogStyle);
 		}
 
 		public async Task<string> ShowInputAsync(string title, string message)
@@ -31,28 +32,27 @@ namespace Manager.Services
 
 		public async Task<MessageDialogResult> ShowDemosFailedAsync(List<Demo> demosFailed)
 		{
-			string errorMessage = "An error occured while analyzing the following demos : " + Environment.NewLine;
+			string errorMessage = Properties.Resources.DialogErrorAnalyzingDemos + Environment.NewLine;
 			errorMessage = demosFailed.Aggregate(errorMessage, (current, demoFailed) => current + (demoFailed.Name + Environment.NewLine));
-			errorMessage += "This demos may be too old, if not please send an email with the attached demos." +
-				"You can find more information on http://csgo-demos-manager.com.";
+			errorMessage += string.Format(Properties.Resources.DialogDemosMayBeTooOld, AppSettings.APP_WEBSITE);
 
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			return await metroWindow.ShowMessageAsync("Error", errorMessage);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Error, errorMessage);
 		}
 
 		public async Task<MessageDialogResult> ShowNoInternetConnectionAsync()
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			return await metroWindow.ShowMessageAsync("No Internet Connection", "No Internet connection detected, you can't use this feature.");
+			return await metroWindow.ShowMessageAsync(Properties.Resources.DialogNoConnexionDetected, Properties.Resources.DialogNoConnexionNoFeature);
 		}
 
 		public async Task<MessageDialogResult> ShowDemosNotFoundAsync(List<Demo> demosNotFound)
 		{
-			string errorMessage = "The following demos have not been found : " + Environment.NewLine;
+			string errorMessage = Properties.Resources.DialogDemosNotFound + Environment.NewLine;
 			errorMessage = demosNotFound.Aggregate(errorMessage, (current, demoNotFound) => current + (demoNotFound.Name + Environment.NewLine));
 
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			return await metroWindow.ShowMessageAsync("Error", errorMessage);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Error, errorMessage);
 		}
 
 		public async Task<MessageDialogResult> ShowExportDemosAsync()
@@ -60,12 +60,12 @@ namespace Manager.Services
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
-				AffirmativeButtonText = "Single",
-				NegativeButtonText = "Multiple",
-				FirstAuxiliaryButtonText = "Cancel"
+				AffirmativeButtonText = Properties.Resources.Single,
+				NegativeButtonText = Properties.Resources.Multiple,
+				FirstAuxiliaryButtonText = Properties.Resources.Cancel
 			};
 
-			return await metroWindow.ShowMessageAsync("Export", "Do you want to export data into a single file or in multiple files?",
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Export, Properties.Resources.DialogExportMultipleOrSingle,
 				MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
 
@@ -74,12 +74,11 @@ namespace Manager.Services
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
-				AffirmativeButtonText = "OK",
-				NegativeButtonText = "Cancel"
+				AffirmativeButtonText = Properties.Resources.Ok,
+				NegativeButtonText = Properties.Resources.Cancel
 			};
 
-			return await metroWindow.ShowMessageAsync("Export", "You are going to export data for the player \"" + playerName
-				+ "\" Do you want to continue?", MessageDialogStyle.AffirmativeAndNegative, dialogOptions);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Export, string.Format(Properties.Resources.DialogExportPlayer, playerName), MessageDialogStyle.AffirmativeAndNegative, dialogOptions);
 		}
 
 		public async Task<MessageDialogResult> ShowAnalyzeAllDemosAsync()
@@ -87,21 +86,20 @@ namespace Manager.Services
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
-				AffirmativeButtonText = "Selection",
-				NegativeButtonText = "All",
-				FirstAuxiliaryButtonText = "Cancel"
+				AffirmativeButtonText = Properties.Resources.Selection,
+				NegativeButtonText = Properties.Resources.AllFemale,
+				FirstAuxiliaryButtonText = Properties.Resources.Cancel
 			};
 
-			return await metroWindow.ShowMessageAsync("Analyze", "Do you want to analyze only the selected demos or all the demos within the selected folder?",
-				MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Analyze, Properties.Resources.DialogAnalyzeAllDemosConfirmation, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
 
 		public async Task<MessageDialogResult> ShowSteamNotFoundAsync()
 		{
-			string errorMessage = "Steam doesn't seems to be installed." + Environment.NewLine + "Unable to start the game.";
+			string errorMessage = Properties.Resources.DialogSteamNotFound;
 
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
-			return await metroWindow.ShowMessageAsync("Error", errorMessage);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Error, errorMessage);
 		}
 
 		public async Task<MessageDialogResult> ShowHighLowWatchAsync()
@@ -109,12 +107,12 @@ namespace Manager.Services
 			MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;
 			MetroDialogSettings dialogOptions = new MetroDialogSettings
 			{
-				AffirmativeButtonText = "Player POV",
-				NegativeButtonText = "Enemy POV",
-				FirstAuxiliaryButtonText = "Cancel"
+				AffirmativeButtonText = Properties.Resources.PlayerPov,
+				NegativeButtonText = Properties.Resources.EnemyPov,
+				FirstAuxiliaryButtonText = Properties.Resources.Cancel
 			};
 
-			return await metroWindow.ShowMessageAsync("POV", "Which POV (camera perspective) do you want to see?", MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Pov, Properties.Resources.DialogPovSelection, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
 	}
 }

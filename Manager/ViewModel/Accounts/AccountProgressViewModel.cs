@@ -234,6 +234,8 @@ namespace Manager.ViewModel.Accounts
 			set { Set(() => VelocitySmg, ref _velocitySmg, value); }
 		}
 
+		public string DateFormat => Properties.Settings.Default.DateFormatEuropean ? "dd MMM yyyy" : "yyyy MMM dd";
+
 		#endregion
 
 		#region Commands

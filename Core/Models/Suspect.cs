@@ -121,22 +121,6 @@ namespace Core.Models
 			set { Set(() => CommunityVisibilityState, ref _communityVisibilityState, value); }
 		}
 
-		public string PublicProfile
-		{
-			get
-			{
-				switch(_communityVisibilityState)
-				{
-					case 1:
-						return "Private";
-					case 3:
-						return "Public";
-					default:
-						return "Unknow";
-				}
-			}
-		}
-
 		public string LastLogOffDate
 		{
 			get
@@ -158,8 +142,6 @@ namespace Core.Models
 			get { return _profileState; }
 			set { Set(() => ProfileState, ref _profileState, value); }
 		}
-
-		public string ProfileStateString => _profileState == 0 ? "No" : "Yes";
 
 		public string ProfileUrl
 		{
@@ -201,32 +183,6 @@ namespace Core.Models
 		{
 			get { return _economyBan; }
 			set { Set(() => EconomyBan, ref _economyBan, value); }
-		}
-
-		public string CurrentStatusString
-		{
-			get
-			{
-				switch(_currentStatus)
-				{
-					case 0:
-						return "Offline";
-					case 1:
-						return "Online";
-					case 2:
-						return "Busy";
-					case 3:
-						return "Away";
-					case 4:
-						return "Snooze";
-					case 5:
-						return "Looking to trade";
-					case 6:
-						return "Looking to play";
-					default:
-						return "Unknow";
-				}
-			}
 		}
 
 		#endregion

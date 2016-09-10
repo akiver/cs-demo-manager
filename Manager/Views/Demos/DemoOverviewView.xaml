@@ -6,6 +6,7 @@
 			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -22,6 +23,8 @@
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding PlayCommand}"
 					Gesture="CTRL+P" />
+		<KeyBinding Command="{Binding PauseCommand}"
+					Gesture="CTRL+O" />
 		<KeyBinding Command="{Binding StopCommand}"
 					Gesture="CTRL+S" />
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
@@ -45,7 +48,7 @@
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}"
-						ToolTip="Back (CTRL+B)">
+						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -55,7 +58,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -65,7 +68,7 @@
 						  DisplayMemberPath ="Title"
 						  SelectedValuePath="Title"
 						  Margin="5"
-						  controls:TextBoxHelper.Watermark="Team"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Side}"
 						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
 				<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
@@ -73,7 +76,7 @@
 						  DisplayMemberPath ="Name"
 						  SelectedValuePath="Name"
 						  Margin="5"
-						  controls:TextBoxHelper.Watermark="Player"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
 						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
 				<ComboBox ItemsSource="{Binding CurrentDemo.Rounds}"
@@ -81,12 +84,12 @@
 						  DisplayMemberPath ="Number"
 						  SelectedValuePath="Number"
 						  Margin="5"
-						  controls:TextBoxHelper.Watermark="Round"
+						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
 						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
 				<Button Command="{Binding PlayCommand}"
 						Style="{DynamicResource GeneralButton}"
-						ToolTip="Play (CTRL+P)">
+						ToolTip="{x:Static properties:Resources.ToolTipPlay}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -96,14 +99,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Play"
+						<TextBlock Text="{x:Static properties:Resources.Play}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Command="{Binding PauseCommand}"
 						Style="{DynamicResource GeneralButton}"
-						ToolTip="Pause (CTRL+P)">
+						ToolTip="{x:Static properties:Resources.ToolTipPause}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -113,14 +116,14 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Pause"
+						<TextBlock Text="{x:Static properties:Resources.Pause}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Command="{Binding StopCommand}"
 						Style="{DynamicResource GeneralButton}"
-						ToolTip="Stop (CTRL+S)">
+						ToolTip="{x:Static properties:Resources.ToolTipStop}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -130,7 +133,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Stop"
+						<TextBlock Text="{x:Static properties:Resources.Stop}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -138,7 +141,7 @@
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center"
 							Margin="5">
-					<TextBlock Text="Volume:"
+					<TextBlock Text="{x:Static properties:Resources.LabelVolume}"
 							   Style="{StaticResource TextBlockStandard}"/>
 					<Slider Minimum="0"
 							Maximum="10"
@@ -153,7 +156,7 @@
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center"
 							Margin="5">
-					<TextBlock Text="Speed:"
+					<TextBlock Text="{x:Static properties:Resources.LabelSpeed}"
 							   Style="{StaticResource TextBlockStandard}"/>
 					<Slider Minimum="1"
 							Maximum="5"
@@ -164,7 +167,7 @@
 				</StackPanel>
 
 				<CheckBox x:Name="CbLogOnlyKills"
-						  Content="Log only kills"
+						  Content="{x:Static properties:Resources.LogOnlyKills}"
 						  IsChecked="{Binding IsLogOnlyKills}"
 						  VerticalAlignment="Center"
 						  Margin="5"

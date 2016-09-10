@@ -148,8 +148,7 @@ namespace Manager.ViewModel.Rounds
 					{
 						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
 						GameLauncher launcher = new GameLauncher(CurrentDemo);

@@ -7,6 +7,7 @@
 			 xmlns:command="http://www.galasoft.ch/mvvmlight"
 			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
 			 xmlns:converters="clr-namespace:Manager.Converters"
+			 xmlns:properties="clr-namespace:Manager.Properties"
 			 mc:Ignorable="d"
 			 d:DesignHeight="720"
 			 d:DesignWidth="1280"
@@ -19,6 +20,7 @@
 			</ResourceDictionary.MergedDictionaries>
 			<converters:SideToStringConverter x:Key="SideToStringConverter" />
 			<converters:RoundEndReasonToStringConverter x:Key="RoundEndReasonToStringConverter" />
+			<converters:RoundTypeToStringConverter x:Key="RoundTypeToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
@@ -46,7 +48,7 @@
 			  Height="40">
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Back (CTRL+B)"
+						ToolTip="{x:Static properties:Resources.ToolTipBack}"
 						Command="{Binding BackToDemoDetailsCommand}"
 						CommandParameter="{Binding CurrentDemo}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -58,13 +60,13 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Back"
+						<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
 
 				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="Watch (CTRL+W)"
+						ToolTip="{x:Static properties:Resources.ToolTipWatchRound}"
 						Command="{Binding WatchRoundCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -75,7 +77,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Watch"
+						<TextBlock Text="{x:Static properties:Resources.Watch}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -89,7 +91,8 @@
 				</Grid.ColumnDefinitions>
 				<Button Grid.Column="0"
 						Style="{DynamicResource GeneralButton}"
-						Command="{Binding GoToPreviousRoundCommand}">
+						Command="{Binding GoToPreviousRoundCommand}"
+						ToolTip="{x:Static properties:Resources.ToolTipPreviousRound}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -102,11 +105,18 @@
 					</StackPanel>
 				</Button>
 				<TextBlock Grid.Column="1"
-						   Text="{Binding Path=CurrentRound.Number, StringFormat=Round #{0}}"
-						   Style="{StaticResource BigTitleStyle}"/>
+						   Style="{StaticResource BigTitleStyle}">
+					<TextBlock.Text>
+						<MultiBinding StringFormat="'{0} #{1}}'">
+							<Binding Source="{x:Static properties:Resources.Round}"/>
+							<Binding Path="CurrentRound.Number"/>
+						</MultiBinding>
+					</TextBlock.Text>
+				</TextBlock>
 				<Button Grid.Column="2"
 						Style="{DynamicResource GeneralButton}"
-						Command="{Binding GoToNextRoundCommand}">
+						Command="{Binding GoToNextRoundCommand}"
+						ToolTip="{x:Static properties:Resources.ToolTipNextRound}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -141,11 +151,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Winner : "
+						<TextBlock Text="{x:Static properties:Resources.WinnerTeamName}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.WinnerName}"
+								   Text="{Binding CurrentRound.WinnerName, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -153,11 +163,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Side : "
+						<TextBlock Text="{x:Static properties:Resources.LabelWinnerSide}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.WinnerSide, Converter={StaticResource SideToStringConverter}}"
+								   Text="{Binding CurrentRound.WinnerSide, Converter={StaticResource SideToStringConverter}, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -165,11 +175,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Reason : "
+						<TextBlock Text="{x:Static properties:Resources.Reason}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.EndReason, Converter={StaticResource RoundEndReasonToStringConverter}}"
+								   Text="{Binding CurrentRound.EndReason, Converter={StaticResource RoundEndReasonToStringConverter}, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -179,25 +189,25 @@
 						</Grid.ColumnDefinitions>
 						<TextBlock Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}">
-							<Run Text="Start money" />
+							<Run Text="{x:Static properties:Resources.StartMoney}" />
 							<Run Text="{Binding CurrentDemo.TeamCT.Name}" />
-							<Run Text=": "/>
 						</TextBlock>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.StartMoneyTeam1, StringFormat=\{0\}$}" Style="{StaticResource TextBlockStandard}"/>
+								   Text="{Binding CurrentRound.StartMoneyTeam1, StringFormat='{} {0}$'}"
+								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Grid.Column="0" Style="{StaticResource TextBlockHighlight}">
-							<Run Text="Start money " />
+						<TextBlock Grid.Column="0"
+								   Style="{StaticResource TextBlockHighlight}">
+							<Run Text="{x:Static properties:Resources.StartMoney}" />
 							<Run Text="{Binding CurrentDemo.TeamT.Name}" />
-							<Run Text=" : "/>
 						</TextBlock>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.StartMoneyTeam2, StringFormat=\{0\}$}"
+								   Text="{Binding CurrentRound.StartMoneyTeam2, StringFormat='{} {0}$'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -205,11 +215,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Type : "
+						<TextBlock Text="{x:Static properties:Resources.Type}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.RoundTypeAsString}"
+								   Text="{Binding CurrentRound.Type, Converter={StaticResource RoundTypeToStringConverter}, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -217,11 +227,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Bomb planted : "
+						<TextBlock Text="{x:Static properties:Resources.BombPlanted}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.BombPlantedCount}"
+								   Text="{Binding CurrentRound.BombPlantedCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -229,11 +239,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Bomb exploded : "
+						<TextBlock Text="{x:Static properties:Resources.BombExploded}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.BombExplodedCount}"
+								   Text="{Binding CurrentRound.BombExplodedCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -241,11 +251,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Bomb defused : "
+						<TextBlock Text="{x:Static properties:Resources.BombDefused}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.BombDefusedCount}"
+								   Text="{Binding CurrentRound.BombDefusedCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -253,11 +263,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Flasbang : "
+						<TextBlock Text="{x:Static properties:Resources.Flashbangs}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.FlashbangThrownCount}"
+								   Text="{Binding CurrentRound.FlashbangThrownCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -265,11 +275,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Smoke : "
+						<TextBlock Text="{x:Static properties:Resources.Smoke}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.SmokeThrownCount}"
+								   Text="{Binding CurrentRound.SmokeThrownCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -277,11 +287,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="HE Grenade : "
+						<TextBlock Text="{x:Static properties:Resources.HeGrenades}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.HeGrenadeThrownCount}"
+								   Text="{Binding CurrentRound.HeGrenadeThrownCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -289,11 +299,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Molotov : "
+						<TextBlock Text="{x:Static properties:Resources.Molotovs}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.MolotovThrownCount}"
+								   Text="{Binding CurrentRound.MolotovThrownCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -301,11 +311,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Incendiary : "
+						<TextBlock Text="{x:Static properties:Resources.Incendiaries}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.IncendiaryThrownCount}"
+								   Text="{Binding CurrentRound.IncendiaryThrownCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -313,11 +323,11 @@
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
-						<TextBlock Text="Decoy : "
+						<TextBlock Text="{x:Static properties:Resources.Decoys}"
 								   Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}"/>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.DecoyThrownCount}"
+								   Text="{Binding CurrentRound.DecoyThrownCount, StringFormat='{} {0}'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 				</StackPanel>
@@ -328,7 +338,7 @@
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 					<TextBlock Grid.Row="0"
-							   Text="Kills"
+							   Text="{x:Static properties:Resources.Kills}"
 							   Style="{StaticResource TitleSettingsStyle}"
 							   HorizontalAlignment="Center"/>
 					<DataGrid Grid.Row="1"
@@ -340,31 +350,31 @@
 						<DataGrid.Columns>
 							<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}"
 												Width="Auto"
-												Header="Tick"
+												Header="{x:Static properties:Resources.Tick}"
 												Binding="{Binding Tick}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
 												Width="Auto"
-												Header="Killer"
+												Header="{x:Static properties:Resources.HeaderKiller}"
 												Binding="{Binding KillerName}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
 												Width="Auto"
-												Header="Killed"
+												Header="{x:Static properties:Resources.HeaderVictim}"
 												Binding="{Binding KilledName}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource AssisterNameHeader}"
 												Width="Auto"
-												Header="Assister"
+												Header="{x:Static properties:Resources.HeaderAssister}"
 												Binding="{Binding AssisterName}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
 												Width="Auto"
-												Header="Weapon"
+												Header="{x:Static properties:Resources.HeaderWeapon}"
 												Binding="{Binding Weapon.Name}" />
-							<DataGridTemplateColumn Header="Watch">
+							<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 								<DataGridTemplateColumn.CellTemplate>
 									<DataTemplate>
 										<Button Command="{Binding Source={StaticResource Locator}, Path=RoundDetails.WatchKillCommand}"
 												CommandParameter="{Binding SelectedItem, ElementName=KillsDataGrid}"
 												Style="{DynamicResource AccentedSquareButtonStyle}"
-												Content="Watch" />
+												Content="{x:Static properties:Resources.Watch}"/>
 									</DataTemplate>
 								</DataGridTemplateColumn.CellTemplate>
 							</DataGridTemplateColumn>
@@ -377,7 +387,7 @@
 						<RowDefinition Height="Auto"/>
 					</Grid.RowDefinitions>
 					<TextBlock Grid.Row="0"
-							   Text="Players"
+							   Text="{x:Static properties:Resources.Players}"
 							   Style="{StaticResource TitleSettingsStyle}"
 							   HorizontalAlignment="Center"/>
 					<DataGrid Grid.Row="1"
@@ -388,39 +398,39 @@
 						<DataGrid.Columns>
 							<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
 												Width="Auto"
-												Header="Name"
+												Header="{x:Static properties:Resources.Name}"
 												Binding="{Binding Name}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}"
 												Width="Auto"
-												Header="Kills"
+												Header="{x:Static properties:Resources.HeaderKills}"
 												Binding="{Binding KillCount}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource JumpKillsHeader}"
 												Width="Auto"
-												Header="JK"
+												Header="{x:Static properties:Resources.HeaderJumpKills}"
 												Binding="{Binding JumpKillCount}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource ShotsHeader}"
 												Width="Auto"
-												Header="Shots"
+												Header="{x:Static properties:Resources.HeaderShots}"
 												Binding="{Binding ShotCount}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource HitsHeader}"
 												Width="Auto"
-												Header="Hits"
+												Header="{x:Static properties:Resources.HeaderHits}"
 												Binding="{Binding HitCount}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}"
 												Width="Auto"
-												Header="TDH"
+												Header="{x:Static properties:Resources.HeaderTotalDamagesHealth}"
 												Binding="{Binding DamageHealthCount}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageArmorHeader}"
 												Width="Auto"
-												Header="TDA"
+												Header="{x:Static properties:Resources.HeaderTotalDamagesArmor}"
 												Binding="{Binding DamageArmorCount}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource StartMoneyHeader}"
 												Width="Auto"
-												Header="SM ($)"
+												Header="{x:Static properties:Resources.HeaderStartMoneyPlayer}"
 												Binding="{Binding StartMoneyValue}" />
 							<DataGridTextColumn HeaderStyle="{StaticResource EquipementValueHeader}"
 												Width="Auto"
-												Header="EV ($)"
+												Header="{x:Static properties:Resources.HeaderEquipmentValuePlayer}"
 												Binding="{Binding EquipementValue}" />
 						</DataGrid.Columns>
 					</DataGrid>
@@ -434,7 +444,7 @@
 					<RowDefinition Height="*"/>
 				</Grid.RowDefinitions>
 				<TextBlock Grid.Row="0"
-						   Text="Timeline"
+						   Text="{x:Static properties:Resources.Timeline}"
 						   Style="{StaticResource TitleSettingsStyle}"
 						   HorizontalAlignment="Center"/>
 				<Border Grid.Row="1"

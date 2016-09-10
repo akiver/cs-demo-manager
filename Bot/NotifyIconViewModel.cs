@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Input;
 using Core;
+using Core.Models;
 using Hardcodet.Wpf.TaskbarNotification;
 
 namespace SuspectsBot
@@ -21,12 +22,14 @@ namespace SuspectsBot
 
 		public ObservableCollection<Delay> Delays { get; set; }
 
+		public ObservableCollection<Language> Languages { get; set; }
+
 		public string IconToolTipText
 		{
 			get
 			{
 				string text = "CSGO Suspects BOT ";
-				text += _bot.IsRunning ? "is running" : "is not running";
+				text += _bot.IsRunning ? Properties.Resources.IsRunning : Properties.Resources.IsNotRunning;
 				return text;
 			}
 		}
@@ -138,7 +141,7 @@ namespace SuspectsBot
 						bool hasNewSuspect = await _bot.Check();
 						if (!hasNewSuspect)
 						{
-							App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, "No new suspects banned found.", BalloonIcon.Info);
+							App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, Properties.Resources.BalloonNoNewSuspectsFound, BalloonIcon.Info);
 						}
 					}
 				};
@@ -165,6 +168,32 @@ namespace SuspectsBot
 			}
 		}
 
+		public ICommand ChangeLanguageCommand
+		{
+			get
+			{
+				return new DelegateCommand
+				{
+					CanExecuteFunc = param =>
+					{
+						Language language = param as Language;
+						return language != null && language.Key != Properties.Settings.Default.Language;
+					},
+					CommandAction = param =>
+					{
+						Language language = param as Language;
+						if (language != null)
+						{
+							Properties.Settings.Default.Language = language.Key;
+							Properties.Settings.Default.Save();
+							System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+							Application.Current.Shutdown();
+						}
+					}
+				};
+			}
+		}
+
 		public NotifyIconViewModel()
 		{
 			_bot = new Bot();
@@ -176,34 +205,42 @@ namespace SuspectsBot
 				new Delay
 				{
 					Value = 30,
-					Title = "30 minutes",
+					Title = string.Format(Properties.Resources.Xminutes, 30),
 					IsChecked = Properties.Settings.Default.CheckDelayMinutes == 30
 				},
 				new Delay
 				{
 					Value = 60,
-					Title = "1 hour",
+					Title = string.Format(Properties.Resources.Xhour, "1"),
 					IsChecked = Properties.Settings.Default.CheckDelayMinutes == 60
 				},
 				new Delay
 				{
 					Value = 360,
-					Title = "6 hours",
+					Title = string.Format(Properties.Resources.Xhours, 6),
 					IsChecked = Properties.Settings.Default.CheckDelayMinutes == 360
 				},
 				new Delay
 				{
 					Value = 720,
-					Title = "12 hours",
+					Title = string.Format(Properties.Resources.Xhours, 12),
 					IsChecked = Properties.Settings.Default.CheckDelayMinutes == 720
 				},
 				new Delay
 				{
 					Value = 1440,
-					Title = "24 hours",
+					Title = string.Format(Properties.Resources.Xhours, 24),
 					IsChecked = Properties.Settings.Default.CheckDelayMinutes == 1440
 				}
 			};
+			Languages = new ObservableCollection<Language>(AppSettings.LANGUAGES);
+			foreach (Language language in Languages)
+			{
+				if (Properties.Settings.Default.Language == language.Key)
+				{
+					language.IsSelected = true;
+				}
+			}
 		}
 
 		public void UpdateCsgoDmStatus(bool isRunning)
@@ -223,7 +260,7 @@ namespace SuspectsBot
 					if (!_bannedSteamIdList.Contains(steamId))
 						_bannedSteamIdList.Add(steamId);
 				}
-				App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, _bannedSteamIdList.Count + " suspect(s) has been banned.", BalloonIcon.Warning);
+				App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, string.Format(Properties.Resources.XsuspectsHaveBeenBanned, _bannedSteamIdList.Count), BalloonIcon.Warning);
 				App.NotifyIcon.TrayBalloonTipClicked += NewSuspectsBalloonClicked;
 			}
 		}

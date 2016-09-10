@@ -235,7 +235,7 @@ namespace Manager.ViewModel.Demos
 					{
 						var currentPage = new ViewModelLocator().Main.CurrentPage.CurrentPage;
 						IsAnalyzing = true;
-						NotificationMessage = "Loading...";
+						NotificationMessage = Properties.Resources.NotificationLoading;
 						HasNotification = true;
 						// reload whole demo data if an account was selected and the current page was the demos list
 						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(CurrentDemo.Id))
@@ -328,7 +328,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (!MapService.Maps.Contains(demo.MapName))
 						{
-							await _dialogService.ShowErrorAsync("This map doesn't support this feature.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowErrorAsync(Properties.Resources.DialogMapNotSupported, MessageDialogStyle.Affirmative);
 							return;
 						}
 						var heatmapViewModel = new ViewModelLocator().DemoHeatmap;
@@ -413,7 +413,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (!_cacheService.HasDemoInCache(demo.Id))
 						{
-							await _dialogService.ShowMessageAsync("You have to analyze this demo first.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogAnalyzeRequired, MessageDialogStyle.Affirmative);
 							return;
 						}
 						var demoFlashbangsViewModel = new ViewModelLocator().DemoFlashbangs;
@@ -435,7 +435,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (!_cacheService.HasDemoInCache(demo.Id))
 						{
-							await _dialogService.ShowMessageAsync("You have to analyze this demo first.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogAnalyzeRequired, MessageDialogStyle.Affirmative);
 							return;
 						}
 						var demoStuffsViewModel = new ViewModelLocator().DemoStuffs;
@@ -471,8 +471,7 @@ namespace Manager.ViewModel.Demos
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 							Round firstRound = CurrentDemo.Rounds.FirstOrDefault();
@@ -494,8 +493,7 @@ namespace Manager.ViewModel.Demos
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 							string steamId = player.SteamId.ToString();
@@ -518,8 +516,7 @@ namespace Manager.ViewModel.Demos
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
-								await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-									+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
 							string steamId = player.SteamId.ToString();
@@ -560,7 +557,7 @@ namespace Manager.ViewModel.Demos
 									{
 										IsAnalyzing = true;
 										HasNotification = true;
-										NotificationMessage = "Analyzing " + CurrentDemo.Name + " for export...";
+										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, CurrentDemo.Name);
 										await _demosService.AnalyzeDemo(CurrentDemo, CancellationToken.None);
 									}
 									await _excelService.GenerateXls(CurrentDemo, exportDialog.FileName);
@@ -568,8 +565,7 @@ namespace Manager.ViewModel.Demos
 								catch (Exception e)
 								{
 									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync("An error occured while exporting the demo.",
-										MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
 								}
 								finally
 								{
@@ -594,7 +590,7 @@ namespace Manager.ViewModel.Demos
 					?? (_analyzeDemoCommand = new RelayCommand(
 					async () =>
 					{
-						NotificationMessage = "Analyzing...";
+						NotificationMessage = Properties.Resources.NotificationAnalyzing;
 						IsAnalyzing = true;
 						HasNotification = true;
 						new ViewModelLocator().Settings.IsShowAllPlayers = true;
@@ -617,9 +613,7 @@ namespace Manager.ViewModel.Demos
 						catch (Exception e)
 						{
 							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync("An error occured while analyzing the demo " + CurrentDemo.Name + "." +
-																"The demo may be too old, if not please send an email with the attached demo." +
-																"You can find more information on http://csgo-demos-manager.com.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
 						}
 						
 						IsAnalyzing = false;
@@ -643,7 +637,7 @@ namespace Manager.ViewModel.Demos
 					{
 						await _demosService.SaveComment(CurrentDemo, comment);
 						HasNotification = true;
-						NotificationMessage = "Comment saved.";
+						NotificationMessage = Properties.Resources.NotificationCommentSaved;
 						await Task.Delay(5000);
 						HasNotification = false;
 					}));
@@ -663,8 +657,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (AppSettings.SteamExePath() == null)
 						{
-							await _dialogService.ShowMessageAsync("Steam doesn't seems to be installed." + Environment.NewLine
-								+ "Unable to start the game.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
 						GameLauncher launcher = new GameLauncher(CurrentDemo);
@@ -685,7 +678,7 @@ namespace Manager.ViewModel.Demos
 					?? (_addSuspectCommand = new RelayCommand<string>(
 						async steamId =>
 						{
-							NotificationMessage = "Adding player to suspects list...";
+							NotificationMessage = Properties.Resources.NotificationAddingPlayerToSuspectsList;
 							HasNotification = true;
 							IsAnalyzing = true;
 
@@ -694,12 +687,10 @@ namespace Manager.ViewModel.Demos
 							if (!added)
 							{
 								HasNotification = false;
-								await _dialogService.ShowMessageAsync("This player is already in your suspect or he is in your account list." + Environment.NewLine
-										+ "You have to remove it from your account list to be able to add him in your supect list.",
-										MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectsList, MessageDialogStyle.Affirmative);
 							}
 							
-							NotificationMessage = "Player added to suspects list.";
+							NotificationMessage = Properties.Resources.NotificationPlayedAddedToSuspectsList;
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
 							HasNotification = false;
@@ -720,19 +711,17 @@ namespace Manager.ViewModel.Demos
 						{
 							HasNotification = true;
 							IsAnalyzing = true;
-							NotificationMessage = "Adding player to whitelist...";
+							NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
 
 							bool added = await _cacheService.AddPlayerToWhitelist(steamId);
 							IsAnalyzing = false;
 							if (!added)
 							{
 								HasNotification = false;
-								await _dialogService.ShowMessageAsync("This player is already in your whitelist or he is in your account list." + Environment.NewLine
-										+ "You have to remove it from your account list to be able to add him in your whitelist.",
-										MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectWhitelist, MessageDialogStyle.Affirmative);
 							}
 
-							NotificationMessage = "Player added to whitelist.";
+							NotificationMessage = Properties.Resources.NotificationPlayerAddedToWhitelist;
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
 							HasNotification = false;
@@ -789,7 +778,7 @@ namespace Manager.ViewModel.Demos
 					?? (_addPlayerToAccountListCommand = new RelayCommand<string>(
 					async steamId =>
 					{
-						NotificationMessage = "Adding player to the account list...";
+						NotificationMessage = Properties.Resources.NotificationAddingPlayerToAccountsList;
 						HasNotification = true;
 						IsAnalyzing = true;
 
@@ -816,7 +805,7 @@ namespace Manager.ViewModel.Demos
 							if (!added)
 							{
 								HasNotification = false;
-								await _dialogService.ShowErrorAsync("This player is already in your account list.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogPlayerAlreadyInAccountsList, MessageDialogStyle.Affirmative);
 							}
 							else
 							{
@@ -827,10 +816,10 @@ namespace Manager.ViewModel.Demos
 						catch (Exception e)
 						{
 							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync("Error while trying to get player information.", MessageDialogStyle.Affirmative);
+							await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation, MessageDialogStyle.Affirmative);
 						}
 
-						if (added) NotificationMessage = "Player added to the account list.";
+						if (added) NotificationMessage = Properties.Resources.NotificationPlayerAddedToAccountsList;
 						CommandManager.InvalidateRequerySuggested();
 						if (added) await Task.Delay(5000);
 						HasNotification = false;
@@ -851,14 +840,13 @@ namespace Manager.ViewModel.Demos
 						{
 							IsAnalyzing = true;
 							HasNotification = true;
-							NotificationMessage = "Searching demos with this player...";
+							NotificationMessage = Properties.Resources.NotificationSearchingDemosForPlayer;
 							List<Demo> demos = await _demosService.GetDemosPlayer(player.SteamId.ToString());
 							IsAnalyzing = false;
 							HasNotification = false;
 							if (!demos.Any())
 							{
-								await _dialogService.ShowMessageAsync("No demos found for this player." + Environment.NewLine
-									+ "Demos with this player might not have been analyzed.", MessageDialogStyle.Affirmative);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoDemosFoundForPlayer, MessageDialogStyle.Affirmative);
 								return;
 							}
 
@@ -962,7 +950,7 @@ namespace Manager.ViewModel.Demos
 		{
 			HasNotification = true;
 			IsAnalyzing = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			if (SelectedPlayerStats == null && _cacheService.HasDemoInCache(CurrentDemo.Id))
 			{
 				Demo demo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
@@ -997,7 +985,7 @@ namespace Manager.ViewModel.Demos
 		{
 			IsAnalyzing = true;
 			HasNotification = true;
-			NotificationMessage = "Loading...";
+			NotificationMessage = Properties.Resources.NotificationLoading;
 			PlayersTeam1Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamCT.Players);
 			PlayersTeam2Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamT.Players);
 			PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
