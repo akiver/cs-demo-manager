@@ -100,16 +100,16 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 
 #### Notes
 
-**If your language files are missing, please create an issue, I will add all necessary files.**
+- **If your language files are missing, please create an issue, I will add all necessary files.**
 
-Some resources are displayed in the xlf editor but are not translatable. You can use the editor filter to hide it.
+- Some resources are displayed in the xlf editor but are not translatable. You can use the editor filter to hide it.
 
-If you want to test your translations before commiting files, you have to setup your system to be able to build the application by yourself.
+- If you want to test your translations before commiting files, you have to setup your system to be able to build the application by yourself.
 Please follow the build instructions from the readme file.
 
-Sometimes it's not easy to guess exactly where a string is used, I added some comments visible from the xlf editor to help you.
+- Sometimes it's not easy to guess exactly where a string is used, I added some comments visible from the xlf editor to help you.
 
-Some strings contains characters such as **"{0}"** or **"{1}"**.
+- Some strings contains characters such as **"{0}"** or **"{1}"**.
 These are placeholder for variables.
 
 *Example:*
@@ -118,9 +118,9 @@ The string resource **"DialogDemosHaveBeenDownloaded"** is in English **"{0} dem
 It means that **{0}** will be replaced by the number of demos downloaded.
 For example **"8 demo(s) have been downloaded."**
 
-XLIFF files have the ability to set a "status" to strings. By default the status is "New", when you are sure about your translation, you can change the status to "Final". If you are not sure, please set the status to "Needs Review".
+- XLIFF files have the ability to set a "status" to strings. By default the status is "New", when you are sure about your translation, you can change the status to "Final". If you are not sure, please set the status to "Needs Review".
 
-Since English is the fallback language, if an existing resource from the English files changed, all others resources languages files are updated and the changed resources are set to "Needs review". You are free to check if some resources of your language have the status "Needs review" and create a pull request with the final translation.
+- Since English is the fallback language, if an existing resource from the English files changed, all others resources languages files are updated and the changed resources are set to "Needs review". You are free to check if some resources of your language have the status "Needs review" and create a pull request with the final translation.
 
 ## License
 
