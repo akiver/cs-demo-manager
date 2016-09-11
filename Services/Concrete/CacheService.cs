@@ -588,6 +588,7 @@ namespace Services.Concrete
 			{
 				string json = File.ReadAllText(pathFoldersFileJson);
 				folders = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
+				if (folders == null) return new List<string>();
 				if (!folders.Any())
 				{
 					folders = await InitCsgoFolders(folders);
