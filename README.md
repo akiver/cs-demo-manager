@@ -77,12 +77,14 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 
 #### How-to translate step by step
 
+**Please check issues to see if someone is already translating the app in your language and if it's not the case, create an issue to inform that you are working on it.**
+
 *I assume you have some basic knowledge of Git / GitHub.*
 
 1. Install [Git](https://git-scm.com/)
 2. Install [Multilingual App Toolkit v4](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520) or the XLIFF files editor of your choice
 3. Fork the repository and [clone](https://help.github.com/articles/cloning-a-repository/) it on your computer
-4. Edit the .xlf files of your language
+4. Edit the .xlf files of your language (don't forget to update resources status: "Needs review" if you are not sure, "Final" otherwise)
 5. (Optional) Test your translations by building the app
 6. (Optional) Add your nickname to the translators array in the [app.cs](https://github.com/akiver/CSGO-Demos-Manager/blob/master/Manager/App.xaml.cs#L28) file. I will do it for you if you are not sure how to do it.
 7. Commit your changes
@@ -100,6 +102,8 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 
 **If your language files are missing, please create an issue, I will add all necessary files.**
 
+Some resources are displayed in the xlf editor but are not translatable. You can use the editor filter to hide it.
+
 If you want to test your translations before commiting files, you have to setup your system to be able to build the application by yourself.
 Please follow the build instructions from the readme file.
 
@@ -115,6 +119,8 @@ It means that **{0}** will be replaced by the number of demos downloaded.
 For example **"8 demo(s) have been downloaded."**
 
 XLIFF files have the ability to set a "status" to strings. By default the status is "New", when you are sure about your translation, you can change the status to "Final". If you are not sure, please set the status to "Needs Review".
+
+Since English is the fallback language, if an existing resource from the English files changed, all others resources languages files are updated and the changed resources are set to "Needs review". You are free to check if some resources of your language have the status "Needs review" and create a pull request with the final translation.
 
 ## License
 
