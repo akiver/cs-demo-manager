@@ -160,6 +160,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\Ranks\elo01.png" />
@@ -264,6 +266,8 @@
     <XliffResource Include="MultilingualResources\Core.ja.xlf" />
     <XliffResource Include="MultilingualResources\Core.pt.xlf" />
     <XliffResource Include="MultilingualResources\Core.ru.xlf" />
+    <XliffResource Include="MultilingualResources\Core.zh-Hans.xlf" />
+    <XliffResource Include="MultilingualResources\Core.zh-Hant.xlf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />

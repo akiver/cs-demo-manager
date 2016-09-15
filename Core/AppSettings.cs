@@ -53,6 +53,16 @@ namespace Core
 		{
 			new Language
 			{
+				Key = "zh-Hans",
+				Name = "Chinese (Simplified)"
+			},
+			new Language
+			{
+				Key = "zh-Hant",
+				Name = "Chinese (Traditional)"
+			},
+			new Language
+			{
 				Key = "en-US",
 				Name = "English"
 			},

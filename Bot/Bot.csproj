@@ -119,6 +119,8 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
+    <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -183,6 +185,8 @@
     <XliffResource Include="MultilingualResources\Bot.ja.xlf" />
     <XliffResource Include="MultilingualResources\Bot.pt.xlf" />
     <XliffResource Include="MultilingualResources\Bot.ru.xlf" />
+    <XliffResource Include="MultilingualResources\Bot.zh-Hans.xlf" />
+    <XliffResource Include="MultilingualResources\Bot.zh-Hant.xlf" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
