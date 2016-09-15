@@ -27,5 +27,21 @@ namespace Services.Interfaces
 		/// <param name="ct"></param>
 		/// <returns></returns>
 		Task<int> GenerateMatchListFile(CancellationToken ct);
+
+		/// <summary>
+		/// Return the SteamID for the given username
+		/// see https://wiki.teamfortress.com/wiki/WebAPI/ResolveVanityURL
+		/// </summary>
+		/// <param name="username"></param>
+		/// <returns></returns>
+		Task<string> GetSteamIdFromSteamProfileUsername(string username);
+
+		/// <summary>
+		/// Return the SteamID from the Steam community URL
+		/// If steamUrlOrSteamId is already a SteamID it's symply returned as string
+		/// </summary>
+		/// <param name="steamUrlOrSteamId"></param>
+		/// <returns></returns>
+		Task<string> GetSteamIdFromUrlOrSteamId(string steamUrlOrSteamId);
 	}
 }

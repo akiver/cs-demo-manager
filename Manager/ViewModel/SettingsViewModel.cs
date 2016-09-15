@@ -1274,23 +1274,20 @@ namespace Manager.ViewModel
 					?? (_addAccountCommand = new RelayCommand(
 						async () =>
 						{
-							var steamId = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddAnAccount, Properties.Resources.DialogEnterSteamId);
-							if (string.IsNullOrEmpty(steamId)) return;
+							// steamid or steam community url link
+							var steamInput = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddAnAccount, Properties.Resources.DialogEnterSteamId);
+							if (string.IsNullOrEmpty(steamInput)) return;
 
 							NotificationMessage = Properties.Resources.NotificationAddingAccount;
 
-							long steamIdAsLong;
-							bool isLong = long.TryParse(steamId, out steamIdAsLong);
-							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/?");
-							Match match = regexSteamCommunity.Match(steamId);
-
-							if (isLong || match.Success)
+							try
 							{
-								try
+								string steamId = await _steamService.GetSteamIdFromUrlOrSteamId(steamInput);
+								if (!string.IsNullOrEmpty(steamId))
 								{
 									Account account = new Account
 									{
-										SteamId = match.Success ? match.Groups["steamID"].Value : steamId
+										SteamId = steamId
 									};
 									if (AppSettings.IsInternetConnectionAvailable())
 									{
@@ -1299,30 +1296,37 @@ namespace Manager.ViewModel
 									}
 									else
 									{
-										account.Name = match.Success ? match.Groups["steamID"].Value : steamId;
+										account.Name = steamId;
 									}
 
 									bool added = await _cacheService.AddAccountAsync(account);
-									if (!added)
+									if (added)
 									{
-										await _dialogService.ShowErrorAsync(Properties.Resources.DialogAccountAlreadyInList, MessageDialogStyle.Affirmative);
-										NotificationMessage = Properties.Resources.Settings;
-										return;
+										Accounts.Add(account);
 									}
-
-									Accounts.Add(account);
+									else
+									{
+										await
+											_dialogService.ShowErrorAsync(Properties.Resources.DialogAccountAlreadyInList, MessageDialogStyle.Affirmative);
+									}
 								}
-								catch (Exception e)
+								else
 								{
-									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation, MessageDialogStyle.Affirmative);
+									await
+										_dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
 								}
 							}
-							else
+							catch (Exception e)
 							{
-								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
+								Logger.Instance.Log(e);
+								await
+									_dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation,
+										MessageDialogStyle.Affirmative);
 							}
-							NotificationMessage = Properties.Resources.Settings;
+							finally
+							{
+								NotificationMessage = Properties.Resources.Settings;
+							}
 						}));
 			}
 		}

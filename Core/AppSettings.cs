@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using Core.Models;
 using Microsoft.Win32;
 
@@ -44,6 +45,9 @@ namespace Core
 
 		// Unknown string for serialization
 		public const string UNKNOWN = "Unknown";
+
+		public static Regex STEAM_COMMUNITY_URL_REGEX = new Regex("(?:https?:\\/\\/)?steamcommunity\\.com\\/(?:profiles|id)\\/(?<steamID>[a-zA-Z0-9]+)");
+		public const string STEAM_COMMUNITY_URL = "https://steamcommunity.com/profiles/{0}";
 
 		public static List<Language> LANGUAGES = new List<Language>()
 		{

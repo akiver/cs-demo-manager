@@ -165,60 +165,61 @@ namespace Manager.ViewModel.Suspects
 					?? (_addPlayerCommand = new RelayCommand(
 						async () =>
 						{
-							var steamIdOrUrl = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddPlayerToWhitelist, Properties.Resources.DialogEnterSteamId);
-							if (string.IsNullOrEmpty(steamIdOrUrl)) return;
-
-							long steamIdAsLong;
-							bool isLong = long.TryParse(steamIdOrUrl, out steamIdAsLong);
-							if (isLong)
+							if (!AppSettings.IsInternetConnectionAvailable())
 							{
-								steamIdOrUrl = "http://steamcommunity.com/profiles/" + steamIdAsLong + "/";
+								await _dialogService.ShowNoInternetConnectionAsync();
+								return;
 							}
-							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/?");
-							Match match = regexSteamCommunity.Match(steamIdOrUrl);
 
-							if (match.Success)
+							try
 							{
-								try
+								string steamInput = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddPlayerToWhitelist, Properties.Resources.DialogEnterSteamId);
+								if (string.IsNullOrEmpty(steamInput)) return;
+
+								NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
+								IsBusy = true;
+
+								string steamId = await _steamService.GetSteamIdFromUrlOrSteamId(steamInput);
+								if (!string.IsNullOrEmpty(steamId))
 								{
-									NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
-									IsBusy = true;
-
-									Suspect suspect = await _steamService.GetBanStatusForUser(steamIdOrUrl);
-
+									Suspect suspect = await _steamService.GetBanStatusForUser(steamId);
 									if (suspect == null)
 									{
 										await _dialogService.ShowErrorAsync(Properties.Resources.DialogPlayerNotFound, MessageDialogStyle.Affirmative);
-										IsBusy = false;
-										return;
-									}
-
-									bool added = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
-									if (added)
-									{
-										Suspects.Add(suspect);
-										await _cacheService.RemoveSuspectFromCache(suspect.SteamId);
 									}
 									else
 									{
-										NotificationMessage = Properties.Resources.NotificationPlayerAlreadyInWhitelist;
-										await Task.Delay(3000);
+										bool added = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
+										if (added)
+										{
+											Suspects.Add(suspect);
+											await _cacheService.RemoveSuspectFromCache(suspect.SteamId);
+										}
+										else
+										{
+											NotificationMessage = Properties.Resources.NotificationPlayerAlreadyInWhitelist;
+											await Task.Delay(3000);
+										}
 									}
-
-									IsBusy = false;
 								}
-								catch (Exception e)
+								else
 								{
-									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation, MessageDialogStyle.Affirmative);
+									await
+										_dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
 								}
 							}
-							else
+							catch (Exception e)
 							{
-								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
+								Logger.Instance.Log(e);
+								await
+									_dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation,
+										MessageDialogStyle.Affirmative);
 							}
-
-							CommandManager.InvalidateRequerySuggested();
+							finally
+							{
+								IsBusy = false;
+								CommandManager.InvalidateRequerySuggested();
+							}
 						},
 						AppSettings.IsInternetConnectionAvailable));
 			}

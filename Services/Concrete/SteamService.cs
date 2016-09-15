@@ -13,6 +13,7 @@ using System.Threading;
 using Core;
 using Core.Models;
 using Core.Models.Steam;
+using Newtonsoft.Json;
 using Services.Interfaces;
 
 namespace Services.Concrete
@@ -22,6 +23,7 @@ namespace Services.Concrete
 		private const string PLAYERS_BAN_URL = "http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={0}&steamids={1}";
 		private const string PLAYERS_SUMMARIES_URL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v1/?key={0}&steamids={1}";
 		private const string STEAM_COMMUNITY_URL_PATTERN = "http://steamcommunity.com/profiles/(?<steamID>\\d*)/?";
+		private const string STEAM_RESOLVE_VANITY_URL = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key={0}&vanityurl={1}";
 		private readonly Regex _regexSteamCommunityUrl = new Regex(STEAM_COMMUNITY_URL_PATTERN);
 		private const string BOILER_EXE_NAME = "boiler.exe";
 		private const string BOILER_SHA1 = "9F4093CBF678A8D40D57C7AEF361A141DEC509BF";
@@ -53,12 +55,6 @@ namespace Services.Concrete
 			Suspect suspect = new Suspect();
 			try
 			{
-				Match match = _regexSteamCommunityUrl.Match(steamId);
-				if (match.Success)
-				{
-					steamId = match.Groups["steamID"].Value;
-				}
-
 				using (var httpClient = new HttpClient())
 				{
 					//  Grab general infos from user
@@ -236,6 +232,53 @@ namespace Services.Concrete
 			await boiler.WaitForExitAsync(ct);
 
 			return boiler.ExitCode;
+		}
+
+		public async Task<string> GetSteamIdFromSteamProfileUsername(string username)
+		{
+			try
+			{
+				using (var httpClient = new HttpClient())
+				{
+					string url = string.Format(STEAM_RESOLVE_VANITY_URL, Properties.Resources.steam_api_key, username);
+					HttpResponseMessage result = await httpClient.GetAsync(url);
+					if (result.StatusCode == HttpStatusCode.OK)
+					{
+						string json = await result.Content.ReadAsStringAsync();
+						VanityUrlResponse obj = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<VanityUrlResponse>(json));
+						if (obj?.Response != null && obj.Response.Success == 1)
+						{
+							return obj.Response.SteamId;
+						}
+					}
+				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+			}
+
+			return string.Empty;
+		}
+
+		public async Task<string> GetSteamIdFromUrlOrSteamId(string urlOrSteamId)
+		{
+			long steamInputAsLong;
+			bool isSteamInputLong = long.TryParse(urlOrSteamId, out steamInputAsLong);
+			if (isSteamInputLong) return urlOrSteamId;
+			Match match = AppSettings.STEAM_COMMUNITY_URL_REGEX.Match(urlOrSteamId);
+			if (match.Success)
+			{
+				string value = match.Groups["steamID"].Value;
+				long steamUrl;
+				bool isLongSteam = long.TryParse(value, out steamUrl);
+				if (isLongSteam) return value;
+				// value is player's username
+				string steamId = await GetSteamIdFromSteamProfileUsername(value);
+				return steamId;
+			}
+
+			return string.Empty;
 		}
 
 		private static string GetSha1HashFile(string filePath)

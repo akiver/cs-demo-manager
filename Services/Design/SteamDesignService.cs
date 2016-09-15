@@ -122,5 +122,15 @@ namespace Services.Design
 		{
 			return Task.FromResult(1);
 		}
+
+		public Task<string> GetSteamIdFromSteamProfileUsername(string username)
+		{
+			return Task.FromResult("12345");
+		}
+
+		public Task<string> GetSteamIdFromUrlOrSteamId(string steamUrl)
+		{
+			return Task.FromResult("12345");
+		}
 	}
 }

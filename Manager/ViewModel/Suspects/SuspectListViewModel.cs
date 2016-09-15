@@ -246,63 +246,56 @@ namespace Manager.ViewModel.Suspects
 								return;
 							}
 
-							var steamIdOrUrl = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddSuspect, Properties.Resources.DialogEnterSteamId);
-							if (string.IsNullOrEmpty(steamIdOrUrl)) return;
-
-							long steamIdAsLong;
-							bool isLong = long.TryParse(steamIdOrUrl, out steamIdAsLong);
-							if (isLong)
+							try
 							{
-								steamIdOrUrl = "http://steamcommunity.com/profiles/" + steamIdAsLong + "/";
-							}
-							Regex regexSteamCommunity = new Regex("http://steamcommunity.com/profiles/(?<steamID>\\d*)/?");
-							Match match = regexSteamCommunity.Match(steamIdOrUrl);
+								string steamInput = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddSuspect, Properties.Resources.DialogEnterSteamId);
+								if (string.IsNullOrEmpty(steamInput)) return;
 
-							if (match.Success)
-							{
-								try
+								NotificationMessage = Properties.Resources.NotificationAddingSuspect;
+								IsRefreshing = true;
+
+								string steamId = await _steamService.GetSteamIdFromUrlOrSteamId(steamInput);
+								if (!string.IsNullOrEmpty(steamId))
 								{
-									NotificationMessage = Properties.Resources.NotificationAddingSuspect;
-									IsRefreshing = true;
-
-									Suspect suspect = await _steamService.GetBanStatusForUser(steamIdOrUrl);
-
+									Suspect suspect = await _steamService.GetBanStatusForUser(steamId);
 									if (suspect == null)
 									{
 										await _dialogService.ShowErrorAsync(Properties.Resources.DialogPlayerNotFound, MessageDialogStyle.Affirmative);
-										IsRefreshing = false;
-										return;
-									}
-
-									bool added = await _cacheService.AddSuspectToCache(suspect.SteamId);
-									if (added)
-									{
-										Suspects.Add(suspect);
-										if (suspect.VacBanned || suspect.GameBanCount > 0)
-										{
-											await _cacheService.AddSteamIdToBannedList(suspect.SteamId);
-										}
 									}
 									else
 									{
-										await
-											_dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectWhitelist, MessageDialogStyle.Affirmative);
+										bool added = await _cacheService.AddSuspectToCache(suspect.SteamId);
+										if (added)
+										{
+											Suspects.Add(suspect);
+											if (suspect.VacBanned || suspect.GameBanCount > 0)
+											{
+												await _cacheService.AddSteamIdToBannedList(suspect.SteamId);
+											}
+										}
+										else
+										{
+											await
+												_dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectWhitelist,
+													MessageDialogStyle.Affirmative);
+										}
 									}
-
-									IsRefreshing = false;
 								}
-								catch (Exception e)
+								else
 								{
-									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingSuspectInformation, MessageDialogStyle.Affirmative);
+									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
 								}
 							}
-							else
+							catch (Exception e)
 							{
-								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidSteamId, MessageDialogStyle.Affirmative);
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingSuspectInformation, MessageDialogStyle.Affirmative);
 							}
-
-							CommandManager.InvalidateRequerySuggested();
+							finally
+							{
+								IsRefreshing = false;
+								CommandManager.InvalidateRequerySuggested();
+							}
 						}));
 			}
 		}

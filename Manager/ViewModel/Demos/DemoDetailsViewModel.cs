@@ -455,7 +455,7 @@ namespace Manager.ViewModel.Demos
 					?? (_goToSuspectProfileCommand = new RelayCommand<Player>(
 						player =>
 						{
-							Process.Start("http://steamcommunity.com/profiles/" + player.SteamId);
+							Process.Start(string.Format(AppSettings.STEAM_COMMUNITY_URL, player.SteamId));
 						},
 						suspect => SelectedPlayer != null));
 			}
