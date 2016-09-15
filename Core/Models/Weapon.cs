@@ -23,7 +23,7 @@ namespace Core.Models
 		public const string M4A4 = "M4A4";
 		public const string FAMAS = "Famas";
 		public const string AWP = "AWP";
-		public const string M4A1 = "M4A1";
+		public const string M4A1_S = "M4A1-S";
 		public const string GLOCK = "Glock-18";
 		public const string USP = "USP-S";
 		public const string DEAGLE = "Desert Eagle";
@@ -201,7 +201,7 @@ namespace Core.Models
 			new Weapon
 			{
 				Element = EquipmentElement.M4A1,
-				Name = M4A1,
+				Name = M4A1_S,
 				Type = WeaponType.Rifle,
 				KillAward = 300
 			},

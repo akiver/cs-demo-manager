@@ -820,7 +820,7 @@ namespace Manager.ViewModel.Accounts
 			{
 				new CategoricalDataPoint
 				{
-					Category = Weapon.M4A1,
+					Category = Weapon.M4A1_S,
 					Value = datas.KillM4A1Count,
 					Label = _killsLabel
 				}
@@ -830,7 +830,7 @@ namespace Manager.ViewModel.Accounts
 			{
 				new CategoricalDataPoint
 				{
-					Category = Weapon.M4A1,
+					Category = Weapon.M4A1_S,
 					Value = datas.DeathM4A1Count,
 					Label = _deathsLabel
 				}
