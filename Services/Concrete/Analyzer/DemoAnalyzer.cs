@@ -1998,6 +1998,7 @@ namespace Services.Concrete.Analyzer
 			{
 				UpdatePlayerScore();
 				ProcessPlayersRating();
+				CheckForSpecialClutchEnd();
 				Demo.MostHeadshotPlayer = Demo.Players.OrderByDescending(x => x.HeadshotPercent).First();
 				Demo.MostBombPlantedPlayer = Demo.Players.OrderByDescending(x => x.BombPlantedCount).First();
 				Demo.MostEntryKillPlayer = Demo.Players.OrderByDescending(x => x.EntryKills.Count).First();
