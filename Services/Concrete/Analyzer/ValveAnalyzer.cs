@@ -314,10 +314,10 @@ namespace Services.Concrete.Analyzer
 			// add the player to its team if he is not
 			if (!Demo.TeamCT.Players.Contains(player) && !Demo.TeamT.Players.Contains(player))
 			{
-				if (e.NewTeam.ToSide() == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(player))
-					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(player));
-				if (e.NewTeam.ToSide() == Side.Terrorist && !Demo.TeamT.Players.Contains(player))
+				if (Demo.TeamCT.Players.Count > Demo.TeamT.Players.Count)
 					Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(player));
+				else
+					Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(player));
 			}
 		}
 
