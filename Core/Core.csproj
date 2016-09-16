@@ -149,17 +149,22 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ar.resx" />
+    <EmbeddedResource Include="Properties\Resources.da.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.hr.resx" />
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
   </ItemGroup>
@@ -259,13 +264,18 @@
     <Content Include="Resources\Images\Logos\esl.png" />
   </ItemGroup>
   <ItemGroup>
+    <XliffResource Include="MultilingualResources\Core.ar.xlf" />
+    <XliffResource Include="MultilingualResources\Core.da.xlf" />
     <XliffResource Include="MultilingualResources\Core.de.xlf" />
     <XliffResource Include="MultilingualResources\Core.es.xlf" />
     <XliffResource Include="MultilingualResources\Core.fr.xlf" />
+    <XliffResource Include="MultilingualResources\Core.hr.xlf" />
     <XliffResource Include="MultilingualResources\Core.it.xlf" />
     <XliffResource Include="MultilingualResources\Core.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Core.pl.xlf" />
     <XliffResource Include="MultilingualResources\Core.pt.xlf" />
     <XliffResource Include="MultilingualResources\Core.ru.xlf" />
+    <XliffResource Include="MultilingualResources\Core.sr-Cyrl.xlf" />
     <XliffResource Include="MultilingualResources\Core.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Core.zh-Hant.xlf" />
   </ItemGroup>

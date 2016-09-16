@@ -53,6 +53,12 @@ namespace Core
 		{
 			new Language
 			{
+				Key = "ar-EG",
+				Name = "Arabic",
+				IsEnabled = false
+			},
+			new Language
+			{
 				Key = "zh-Hans",
 				Name = "Chinese (Simplified)",
 				IsEnabled = false
@@ -61,6 +67,18 @@ namespace Core
 			{
 				Key = "zh-Hant",
 				Name = "Chinese (Traditional)",
+				IsEnabled = false
+			},
+			new Language
+			{
+				Key = "hr-Hr",
+				Name = "Crotian",
+				IsEnabled = false
+			},
+			new Language
+			{
+				Key = "da-DK",
+				Name = "Danish",
 				IsEnabled = false
 			},
 			new Language
@@ -95,6 +113,12 @@ namespace Core
 			},
 			new Language
 			{
+				Key = "pl-PL",
+				Name = "Polish",
+				IsEnabled = false
+			},
+			new Language
+			{
 				Key = "pt-PT",
 				Name = "Portuguese",
 				IsEnabled = false
@@ -104,7 +128,13 @@ namespace Core
 				Key = "ru-RU",
 				Name = "Russian",
 				IsEnabled = false
-			}
+			},
+			new Language
+			{
+				Key = "sr-Cyrl",
+				Name = "Serbian",
+				IsEnabled = false
+			},
 		};
 
 		/// <summary>

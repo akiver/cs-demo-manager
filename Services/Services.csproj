@@ -317,17 +317,22 @@
     <Resource Include="resources\images\colors.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.ar.resx" />
+    <EmbeddedResource Include="Properties\Resources.da.resx" />
     <EmbeddedResource Include="Properties\Resources.de.resx" />
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
+    <EmbeddedResource Include="Properties\Resources.hr.resx" />
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
+    <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
   </ItemGroup>
@@ -335,13 +340,18 @@
     <Resource Include="resources\steam_api_key.txt" />
   </ItemGroup>
   <ItemGroup>
+    <XliffResource Include="MultilingualResources\Services.ar.xlf" />
+    <XliffResource Include="MultilingualResources\Services.da.xlf" />
     <XliffResource Include="MultilingualResources\Services.de.xlf" />
     <XliffResource Include="MultilingualResources\Services.es.xlf" />
     <XliffResource Include="MultilingualResources\Services.fr.xlf" />
+    <XliffResource Include="MultilingualResources\Services.hr.xlf" />
     <XliffResource Include="MultilingualResources\Services.it.xlf" />
     <XliffResource Include="MultilingualResources\Services.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Services.pl.xlf" />
     <XliffResource Include="MultilingualResources\Services.pt.xlf" />
     <XliffResource Include="MultilingualResources\Services.ru.xlf" />
+    <XliffResource Include="MultilingualResources\Services.sr-Cyrl.xlf" />
     <XliffResource Include="MultilingualResources\Services.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Services.zh-Hant.xlf" />
   </ItemGroup>

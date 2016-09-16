@@ -1,0 +1,3346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="ar" original="MANAGER/PROPERTIES/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.1605.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="MANAGER/PROPERTIES/RESOURCES.RESX" datatype="resx">
+        <trans-unit id="bullet" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\images\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="needs-review-translation">..\Resources\images\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="model" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="needs-review-translation">..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="skip_ahead" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="spec_player" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="stop_playback" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="screen_fade_start" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="text_message_start" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="main" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="Analyze" translate="yes" xml:space="preserve">
+          <source>Analyze</source>
+          <target state="new">Analyze</target>
+        </trans-unit>
+        <trans-unit id="Back" translate="yes" xml:space="preserve">
+          <source>Back</source>
+          <target state="new">Back</target>
+        </trans-unit>
+        <trans-unit id="Details" translate="yes" xml:space="preserve">
+          <source>Details</source>
+          <target state="new">Details</target>
+        </trans-unit>
+        <trans-unit id="AccountStats" translate="yes" xml:space="preserve">
+          <source>Account Stats</source>
+          <target state="new">Account Stats</target>
+        </trans-unit>
+        <trans-unit id="AddToSuspects" translate="yes" xml:space="preserve">
+          <source>Add to suspects</source>
+          <target state="new">Add to suspects</target>
+        </trans-unit>
+        <trans-unit id="Browse" translate="yes" xml:space="preserve">
+          <source>Browse</source>
+          <target state="new">Browse</target>
+        </trans-unit>
+        <trans-unit id="Delete" translate="yes" xml:space="preserve">
+          <source>Delete</source>
+          <target state="new">Delete</target>
+        </trans-unit>
+        <trans-unit id="DownloadMatchMakingDemos" translate="yes" xml:space="preserve">
+          <source>Download MM Demos</source>
+          <target state="new">Download MM Demos</target>
+        </trans-unit>
+        <trans-unit id="ExportAsXls" translate="yes" xml:space="preserve">
+          <source>Export as XLS</source>
+          <target state="new">Export as XLS</target>
+        </trans-unit>
+        <trans-unit id="GotoTick" translate="yes" xml:space="preserve">
+          <source>Goto Tick</source>
+          <target state="new">Goto Tick</target>
+        </trans-unit>
+        <trans-unit id="Information" translate="yes" xml:space="preserve">
+          <source>Information</source>
+          <target state="new">Information</target>
+        </trans-unit>
+        <trans-unit id="Refresh" translate="yes" xml:space="preserve">
+          <source>Refresh</source>
+          <target state="new">Refresh</target>
+        </trans-unit>
+        <trans-unit id="ShowAll" translate="yes" xml:space="preserve">
+          <source>Show All</source>
+          <target state="new">Show All</target>
+        </trans-unit>
+        <trans-unit id="ShowOnlyAccountDemos" translate="yes" xml:space="preserve">
+          <source>Show Only Account Demos</source>
+          <target state="new">Show Only Account Demos</target>
+        </trans-unit>
+        <trans-unit id="Stats" translate="yes" xml:space="preserve">
+          <source>Stats</source>
+          <target state="new">Stats</target>
+        </trans-unit>
+        <trans-unit id="Suspects" translate="yes" xml:space="preserve">
+          <source>Suspects</source>
+          <target state="new">Suspects</target>
+        </trans-unit>
+        <trans-unit id="Watch" translate="yes" xml:space="preserve">
+          <source>Watch</source>
+          <target state="new">Watch</target>
+        </trans-unit>
+        <trans-unit id="WatchHighlights" translate="yes" xml:space="preserve">
+          <source>Watch highlights</source>
+          <target state="new">Watch highlights</target>
+        </trans-unit>
+        <trans-unit id="WatchLowlights" translate="yes" xml:space="preserve">
+          <source>Watch lowlights</source>
+          <target state="new">Watch lowlights</target>
+        </trans-unit>
+        <trans-unit id="About" translate="yes" xml:space="preserve">
+          <source>About</source>
+          <target state="new">About</target>
+        </trans-unit>
+        <trans-unit id="FreeSoftware" translate="yes" xml:space="preserve">
+          <source>CSGO Demos Manager is a free open source software and will always be.</source>
+          <target state="new">CSGO Demos Manager is a free open source software and will always be.</target>
+        </trans-unit>
+        <trans-unit id="SourceCodeAvailable" translate="yes" xml:space="preserve">
+          <source>Source code is available on</source>
+          <target state="new">Source code is available on</target>
+        </trans-unit>
+        <trans-unit id="EncounteredBug" translate="yes" xml:space="preserve">
+          <source>If you encountered a bug or have any suggestions, feel free to open an issue on</source>
+          <target state="new">If you encountered a bug or have any suggestions, feel free to open an issue on</target>
+        </trans-unit>
+        <trans-unit id="OrSendAn" translate="yes" xml:space="preserve">
+          <source>or send an</source>
+          <target state="new">or send an</target>
+        </trans-unit>
+        <trans-unit id="WantSayThank" translate="yes" xml:space="preserve">
+          <source>If you want to say thank you, please feel free to make a</source>
+          <target state="new">If you want to say thank you, please feel free to make a</target>
+        </trans-unit>
+        <trans-unit id="AlwaysDownload" translate="yes" xml:space="preserve">
+          <source>Always download the application installer from the official website</source>
+          <target state="new">Always download the application installer from the official website</target>
+        </trans-unit>
+        <trans-unit id="Accounts" translate="yes" xml:space="preserve">
+          <source>Accounts</source>
+          <target state="new">Accounts</target>
+        </trans-unit>
+        <trans-unit id="AddAccount" translate="yes" xml:space="preserve">
+          <source>Add account</source>
+          <target state="new">Add account</target>
+        </trans-unit>
+        <trans-unit id="AddFolder" translate="yes" xml:space="preserve">
+          <source>Add folder</source>
+          <target state="new">Add folder</target>
+        </trans-unit>
+        <trans-unit id="AdditionalsParametersLabel" translate="yes" xml:space="preserve">
+          <source>Additionals parameters</source>
+          <target state="new">Additionals parameters</target>
+        </trans-unit>
+        <trans-unit id="HeaderAverageDamagesPerRound" translate="yes" xml:space="preserve">
+          <source>ADR</source>
+          <target state="new">ADR</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Average Damage Per Round</note>
+        </trans-unit>
+        <trans-unit id="AdrFull" translate="yes" xml:space="preserve">
+          <source>ADR (Average Damage Per Round)</source>
+          <target state="new">ADR (Average Damage Per Round)</target>
+        </trans-unit>
+        <trans-unit id="AprFull" translate="yes" xml:space="preserve">
+          <source>APR (Assist Per Round)</source>
+          <target state="new">APR (Assist Per Round)</target>
+        </trans-unit>
+        <trans-unit id="Assists" translate="yes" xml:space="preserve">
+          <source>Assists</source>
+          <target state="new">Assists</target>
+        </trans-unit>
+        <trans-unit id="Ban" translate="yes" xml:space="preserve">
+          <source>Ban</source>
+          <target state="new">Ban</target>
+        </trans-unit>
+        <trans-unit id="BanFull" translate="yes" xml:space="preserve">
+          <source>Ban (VAC / OW)</source>
+          <target state="new">Ban (VAC / OW)</target>
+        </trans-unit>
+        <trans-unit id="HeaderBombDefused" translate="yes" xml:space="preserve">
+          <source>BD</source>
+          <target state="new">BD</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Bomb Defused</note>
+        </trans-unit>
+        <trans-unit id="HeaderBombExploded" translate="yes" xml:space="preserve">
+          <source>BE</source>
+          <target state="new">BE</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Bomb Exploded</note>
+        </trans-unit>
+        <trans-unit id="BombDefused" translate="yes" xml:space="preserve">
+          <source>Bomb defused</source>
+          <target state="new">Bomb defused</target>
+        </trans-unit>
+        <trans-unit id="BombExploded" translate="yes" xml:space="preserve">
+          <source>Bomb exploded</source>
+          <target state="new">Bomb exploded</target>
+        </trans-unit>
+        <trans-unit id="BombPlanted" translate="yes" xml:space="preserve">
+          <source>Bomb planted</source>
+          <target state="new">Bomb planted</target>
+        </trans-unit>
+        <trans-unit id="HeaderBombPlanted" translate="yes" xml:space="preserve">
+          <source>BP</source>
+          <target state="new">BP</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Bomb Planted</note>
+        </trans-unit>
+        <trans-unit id="BrowseToErrorsFile" translate="yes" xml:space="preserve">
+          <source>Browse to errors file</source>
+          <target state="new">Browse to errors file</target>
+        </trans-unit>
+        <trans-unit id="HeaderCrouchKills" translate="yes" xml:space="preserve">
+          <source>CK</source>
+          <target state="new">CK</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Crouch Kill</note>
+        </trans-unit>
+        <trans-unit id="ClearDemosData" translate="yes" xml:space="preserve">
+          <source>Clear demos data</source>
+          <target state="new">Clear demos data</target>
+        </trans-unit>
+        <trans-unit id="ClearVdmFiles" translate="yes" xml:space="preserve">
+          <source>Clear VDM files</source>
+          <target state="new">Clear VDM files</target>
+        </trans-unit>
+        <trans-unit id="ClientName" translate="yes" xml:space="preserve">
+          <source>Client</source>
+          <target state="new">Client</target>
+        </trans-unit>
+        <trans-unit id="CloseBotOnExit" translate="yes" xml:space="preserve">
+          <source>Close BOT on exit</source>
+          <target state="new">Close BOT on exit</target>
+        </trans-unit>
+        <trans-unit id="Clutch" translate="yes" xml:space="preserve">
+          <source>Clutch</source>
+          <target state="new">Clutch</target>
+        </trans-unit>
+        <trans-unit id="Clutches" translate="yes" xml:space="preserve">
+          <source>Clutches</source>
+          <target state="new">Clutches</target>
+        </trans-unit>
+        <trans-unit id="Columns" translate="yes" xml:space="preserve">
+          <source>Columns</source>
+          <target state="new">Columns</target>
+        </trans-unit>
+        <trans-unit id="Comment" translate="yes" xml:space="preserve">
+          <source>Comment</source>
+          <target state="new">Comment</target>
+        </trans-unit>
+        <trans-unit id="CommentLabel" translate="yes" xml:space="preserve">
+          <source>Comment</source>
+          <target state="new">Comment</target>
+        </trans-unit>
+        <trans-unit id="CrouchKills" translate="yes" xml:space="preserve">
+          <source>Crouch kills</source>
+          <target state="new">Crouch kills</target>
+        </trans-unit>
+        <trans-unit id="CsgoExePath" translate="yes" xml:space="preserve">
+          <source>csgo.exe path</source>
+          <target state="new">csgo.exe path</target>
+        </trans-unit>
+        <trans-unit id="CurrentAccountWatch" translate="yes" xml:space="preserve">
+          <source>Current account used for watch (highlights / lowlights)</source>
+          <target state="new">Current account used for watch (highlights / lowlights)</target>
+        </trans-unit>
+        <trans-unit id="CurrentFolder" translate="yes" xml:space="preserve">
+          <source>Current folder</source>
+          <target state="new">Current folder</target>
+        </trans-unit>
+        <trans-unit id="DataCache" translate="yes" xml:space="preserve">
+          <source>Cache</source>
+          <target state="new">Cache</target>
+        </trans-unit>
+        <trans-unit id="Date" translate="yes" xml:space="preserve">
+          <source>Date</source>
+          <target state="new">Date</target>
+        </trans-unit>
+        <trans-unit id="DateFormat" translate="yes" xml:space="preserve">
+          <source>Date Format</source>
+          <target state="new">Date Format</target>
+        </trans-unit>
+        <trans-unit id="Deaths" translate="yes" xml:space="preserve">
+          <source>Deaths</source>
+          <target state="new">Deaths</target>
+        </trans-unit>
+        <trans-unit id="DemoName" translate="yes" xml:space="preserve">
+          <source>Demo name</source>
+          <target state="new">Demo name</target>
+        </trans-unit>
+        <trans-unit id="Demos" translate="yes" xml:space="preserve">
+          <source>Demo(s)</source>
+          <target state="new">Demo(s)</target>
+        </trans-unit>
+        <trans-unit id="DemoType" translate="yes" xml:space="preserve">
+          <source>Demo type</source>
+          <target state="new">Demo type</target>
+        </trans-unit>
+        <trans-unit id="DestinationFolderLabel" translate="yes" xml:space="preserve">
+          <source>Destination folder</source>
+          <target state="new">Destination folder</target>
+        </trans-unit>
+        <trans-unit id="Donation" translate="yes" xml:space="preserve">
+          <source>donation</source>
+          <target state="new">donation</target>
+        </trans-unit>
+        <trans-unit id="Download" translate="yes" xml:space="preserve">
+          <source>Download</source>
+          <target state="new">Download</target>
+        </trans-unit>
+        <trans-unit id="HeaderDeathPerRound" translate="yes" xml:space="preserve">
+          <source>DPR</source>
+          <target state="new">DPR</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Death Per Round</note>
+        </trans-unit>
+        <trans-unit id="DprFull" translate="yes" xml:space="preserve">
+          <source>DPR (Death Per Round)</source>
+          <target state="new">DPR (Death Per Round)</target>
+        </trans-unit>
+        <trans-unit id="Duration" translate="yes" xml:space="preserve">
+          <source>Duration</source>
+          <target state="new">Duration</target>
+        </trans-unit>
+        <trans-unit id="Email" translate="yes" xml:space="preserve">
+          <source>email</source>
+          <target state="new">email</target>
+        </trans-unit>
+        <trans-unit id="EnableMoviemakerMode" translate="yes" xml:space="preserve">
+          <source>Enable moviemaker mode</source>
+          <target state="new">Enable moviemaker mode</target>
+        </trans-unit>
+        <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
+          <source>Entry kills</source>
+          <target state="new">Entry kills</target>
+        </trans-unit>
+        <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
+          <source>Equipment value team 1</source>
+          <target state="new">Equipment value team 1</target>
+        </trans-unit>
+        <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
+          <source>Equipment value team 2</source>
+          <target state="new">Equipment value team 2</target>
+        </trans-unit>
+        <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
+          <source>Export custom data</source>
+          <target state="new">Export custom data</target>
+        </trans-unit>
+        <trans-unit id="FilterEtc" translate="yes" xml:space="preserve">
+          <source>Filter...</source>
+          <target state="new">Filter...</target>
+        </trans-unit>
+        <trans-unit id="HeaderFiveKills" translate="yes" xml:space="preserve">
+          <source>5K</source>
+          <target state="new">5K</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">5 Kills</note>
+        </trans-unit>
+        <trans-unit id="Folders" translate="yes" xml:space="preserve">
+          <source>Folders</source>
+          <target state="new">Folders</target>
+        </trans-unit>
+        <trans-unit id="HeaderFourKills" translate="yes" xml:space="preserve">
+          <source>4K</source>
+          <target state="new">4K</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">4 Kills</note>
+        </trans-unit>
+        <trans-unit id="HeaderFramerate" translate="yes" xml:space="preserve">
+          <source>FR</source>
+          <target state="new">FR</target>
+        </trans-unit>
+        <trans-unit id="From" translate="yes" xml:space="preserve">
+          <source>From</source>
+          <target state="new">From</target>
+        </trans-unit>
+        <trans-unit id="Fullscreen" translate="yes" xml:space="preserve">
+          <source>Fullscreen</source>
+          <target state="new">Fullscreen</target>
+        </trans-unit>
+        <trans-unit id="Height" translate="yes" xml:space="preserve">
+          <source>Height</source>
+          <target state="new">Height</target>
+        </trans-unit>
+        <trans-unit id="HeaderHltvRating" translate="yes" xml:space="preserve">
+          <source>HLTV</source>
+          <target state="new">HLTV</target>
+        </trans-unit>
+        <trans-unit id="Hostname" translate="yes" xml:space="preserve">
+          <source>Hostname</source>
+          <target state="new">Hostname</target>
+        </trans-unit>
+        <trans-unit id="HeaderHeadshots" translate="yes" xml:space="preserve">
+          <source>HS</source>
+          <target state="new">HS</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">HeadShot</note>
+        </trans-unit>
+        <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
+          <source>Ignore ban occured after demo date</source>
+          <target state="new">Ignore ban occured after demo date</target>
+        </trans-unit>
+        <trans-unit id="ImportCustomData" translate="yes" xml:space="preserve">
+          <source>Import custom data</source>
+          <target state="new">Import custom data</target>
+        </trans-unit>
+        <trans-unit id="HeaderJumpKills" translate="yes" xml:space="preserve">
+          <source>JK</source>
+          <target state="new">JK</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Jump Kill</note>
+        </trans-unit>
+        <trans-unit id="JumpKills" translate="yes" xml:space="preserve">
+          <source>Jump kills</source>
+          <target state="new">Jump kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderKillDeathRatio" translate="yes" xml:space="preserve">
+          <source>K/D</source>
+          <target state="new">K/D</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Kills Per Deaths</note>
+        </trans-unit>
+        <trans-unit id="Kills" translate="yes" xml:space="preserve">
+          <source>Kills</source>
+          <target state="new">Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderKillsPerRound" translate="yes" xml:space="preserve">
+          <source>KPR</source>
+          <target state="new">KPR</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Kill Per Round</note>
+        </trans-unit>
+        <trans-unit id="LaunchOptions" translate="yes" xml:space="preserve">
+          <source>Launch Options</source>
+          <target state="new">Launch Options</target>
+        </trans-unit>
+        <trans-unit id="LimitStatsToSelectedFolder" translate="yes" xml:space="preserve">
+          <source>Limit stats to selected folder</source>
+          <target state="new">Limit stats to selected folder</target>
+        </trans-unit>
+        <trans-unit id="Map" translate="yes" xml:space="preserve">
+          <source>Map</source>
+          <target state="new">Map</target>
+        </trans-unit>
+        <trans-unit id="MapName" translate="yes" xml:space="preserve">
+          <source>Map name</source>
+          <target state="new">Map name</target>
+        </trans-unit>
+        <trans-unit id="Misc" translate="yes" xml:space="preserve">
+          <source>Misc</source>
+          <target state="new">Misc</target>
+        </trans-unit>
+        <trans-unit id="MVP" translate="yes" xml:space="preserve">
+          <source>MVP</source>
+          <target state="new">MVP</target>
+        </trans-unit>
+        <trans-unit id="Name" translate="yes" xml:space="preserve">
+          <source>Name</source>
+          <target state="new">Name</target>
+        </trans-unit>
+        <trans-unit id="NoAnalyzableDemos" translate="yes" xml:space="preserve">
+          <source>No analyzable demos</source>
+          <target state="new">No analyzable demos</target>
+        </trans-unit>
+        <trans-unit id="NotAnalyzable" translate="yes" xml:space="preserve">
+          <source>Not analyzable</source>
+          <target state="new">Not analyzable</target>
+        </trans-unit>
+        <trans-unit id="HeaderOneKill" translate="yes" xml:space="preserve">
+          <source>1K</source>
+          <target state="new">1K</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">1 Kill</note>
+        </trans-unit>
+        <trans-unit id="RemoveAccount" translate="yes" xml:space="preserve">
+          <source>Remove account</source>
+          <target state="new">Remove account</target>
+        </trans-unit>
+        <trans-unit id="RemoveFolder" translate="yes" xml:space="preserve">
+          <source>Remove folder</source>
+          <target state="new">Remove folder</target>
+        </trans-unit>
+        <trans-unit id="RoundPlayed" translate="yes" xml:space="preserve">
+          <source>Round played</source>
+          <target state="new">Round played</target>
+        </trans-unit>
+        <trans-unit id="RoundType" translate="yes" xml:space="preserve">
+          <source>Round type</source>
+          <target state="new">Round type</target>
+        </trans-unit>
+        <trans-unit id="HeaderRoundPlayed" translate="yes" xml:space="preserve">
+          <source>RP</source>
+          <target state="new">RP</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Round Played</note>
+        </trans-unit>
+        <trans-unit id="RWS" translate="yes" xml:space="preserve">
+          <source>RWS</source>
+          <target state="new">RWS</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Round Win Share</note>
+        </trans-unit>
+        <trans-unit id="ScoreTeam1" translate="yes" xml:space="preserve">
+          <source>Score team 1</source>
+          <target state="new">Score team 1</target>
+        </trans-unit>
+        <trans-unit id="ScoreTeam2" translate="yes" xml:space="preserve">
+          <source>Score team 2</source>
+          <target state="new">Score team 2</target>
+        </trans-unit>
+        <trans-unit id="Settings" translate="yes" xml:space="preserve">
+          <source>Settings</source>
+          <target state="new">Settings</target>
+        </trans-unit>
+        <trans-unit id="ShowAllFolders" translate="yes" xml:space="preserve">
+          <source>Show all folders</source>
+          <target state="new">Show all folders</target>
+        </trans-unit>
+        <trans-unit id="ShowMoreDemos" translate="yes" xml:space="preserve">
+          <source>Show More Demos</source>
+          <target state="new">Show More Demos</target>
+        </trans-unit>
+        <trans-unit id="SideTrouble" translate="yes" xml:space="preserve">
+          <source>Side trouble</source>
+          <target state="new">Side trouble</target>
+        </trans-unit>
+        <trans-unit id="Source" translate="yes" xml:space="preserve">
+          <source>Source</source>
+          <target state="new">Source</target>
+        </trans-unit>
+        <trans-unit id="HeaderScoreTeam1" translate="yes" xml:space="preserve">
+          <source>ST1</source>
+          <target state="new">ST1</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Score Team 1</note>
+        </trans-unit>
+        <trans-unit id="HeaderScoreTeam2" translate="yes" xml:space="preserve">
+          <source>ST2</source>
+          <target state="new">ST2</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Score Team 2</note>
+        </trans-unit>
+        <trans-unit id="StartBotOnLaunch" translate="yes" xml:space="preserve">
+          <source>Start BOT on launch</source>
+          <target state="new">Start BOT on launch</target>
+        </trans-unit>
+        <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
+          <source>Start money team 1</source>
+          <target state="new">Start money team 1</target>
+        </trans-unit>
+        <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
+          <source>Start money team 2</source>
+          <target state="new">Start money team 2</target>
+        </trans-unit>
+        <trans-unit id="Status" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <target state="new">Status</target>
+        </trans-unit>
+        <trans-unit id="Stop" translate="yes" xml:space="preserve">
+          <source>Stop</source>
+          <target state="new">Stop</target>
+        </trans-unit>
+        <trans-unit id="SyncNicknames" translate="yes" xml:space="preserve">
+          <source>Sync nicknames</source>
+          <target state="new">Sync nicknames</target>
+        </trans-unit>
+        <trans-unit id="HeaderTotalDamagesArmor" translate="yes" xml:space="preserve">
+          <source>TDA</source>
+          <target state="new">TDA</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Total Damage Armor</note>
+        </trans-unit>
+        <trans-unit id="HeaderTotalDamagesHealth" translate="yes" xml:space="preserve">
+          <source>TDH</source>
+          <target state="new">TDH</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Total Damage Health</note>
+        </trans-unit>
+        <trans-unit id="Team1" translate="yes" xml:space="preserve">
+          <source>Team 1</source>
+          <target state="new">Team 1</target>
+        </trans-unit>
+        <trans-unit id="Team1Name" translate="yes" xml:space="preserve">
+          <source>Team 1 name</source>
+          <target state="new">Team 1 name</target>
+        </trans-unit>
+        <trans-unit id="Team2" translate="yes" xml:space="preserve">
+          <source>Team 2</source>
+          <target state="new">Team 2</target>
+        </trans-unit>
+        <trans-unit id="Team2Name" translate="yes" xml:space="preserve">
+          <source>Team 2 name</source>
+          <target state="new">Team 2 name</target>
+        </trans-unit>
+        <trans-unit id="TeamTrouble" translate="yes" xml:space="preserve">
+          <source>Team trouble</source>
+          <target state="new">Team trouble</target>
+        </trans-unit>
+        <trans-unit id="Theme" translate="yes" xml:space="preserve">
+          <source>Theme</source>
+          <target state="new">Theme</target>
+        </trans-unit>
+        <trans-unit id="HeaderThreeKills" translate="yes" xml:space="preserve">
+          <source>3K</source>
+          <target state="new">3K</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">3 Kills</note>
+        </trans-unit>
+        <trans-unit id="HeaderTickrate" translate="yes" xml:space="preserve">
+          <source>TR</source>
+          <target state="new">TR</target>
+        </trans-unit>
+        <trans-unit id="Ticks" translate="yes" xml:space="preserve">
+          <source>Ticks</source>
+          <target state="new">Ticks</target>
+        </trans-unit>
+        <trans-unit id="TkFull" translate="yes" xml:space="preserve">
+          <source>TK (Team Kill)</source>
+          <target state="new">TK (Team Kill)</target>
+        </trans-unit>
+        <trans-unit id="To" translate="yes" xml:space="preserve">
+          <source>To</source>
+          <target state="new">To</target>
+        </trans-unit>
+        <trans-unit id="TotalDamageArmor" translate="yes" xml:space="preserve">
+          <source>Total damage armor</source>
+          <target state="new">Total damage armor</target>
+        </trans-unit>
+        <trans-unit id="TotalDamageHealth" translate="yes" xml:space="preserve">
+          <source>Total damage health</source>
+          <target state="new">Total damage health</target>
+        </trans-unit>
+        <trans-unit id="TotalKills" translate="yes" xml:space="preserve">
+          <source>Total kills</source>
+          <target state="new">Total kills</target>
+        </trans-unit>
+        <trans-unit id="ToWatch" translate="yes" xml:space="preserve">
+          <source>To watch</source>
+          <target state="new">To watch</target>
+        </trans-unit>
+        <trans-unit id="TradeDeath" translate="yes" xml:space="preserve">
+          <source>Trade death</source>
+          <target state="new">Trade death</target>
+        </trans-unit>
+        <trans-unit id="TradeKill" translate="yes" xml:space="preserve">
+          <source>Trade kill</source>
+          <target state="new">Trade kill</target>
+        </trans-unit>
+        <trans-unit id="HeaderTwoKills" translate="yes" xml:space="preserve">
+          <source>2K</source>
+          <target state="new">2K</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">2 Kills</note>
+        </trans-unit>
+        <trans-unit id="Type" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target state="new">Type</target>
+        </trans-unit>
+        <trans-unit id="UseAccountForWatch" translate="yes" xml:space="preserve">
+          <source>Use this account for watch</source>
+          <target state="new">Use this account for watch</target>
+        </trans-unit>
+        <trans-unit id="UseCutomLowlightHighlight" translate="yes" xml:space="preserve">
+          <source>Use custom highlights / lowlights generation</source>
+          <target state="new">Use custom highlights / lowlights generation</target>
+        </trans-unit>
+        <trans-unit id="Watched" translate="yes" xml:space="preserve">
+          <source>Watched</source>
+          <target state="new">Watched</target>
+        </trans-unit>
+        <trans-unit id="Width" translate="yes" xml:space="preserve">
+          <source>Width</source>
+          <target state="new">Width</target>
+        </trans-unit>
+        <trans-unit id="WinnerTeamName" translate="yes" xml:space="preserve">
+          <source>Winner team name</source>
+          <target state="new">Winner team name</target>
+        </trans-unit>
+        <trans-unit id="WinnerSide" translate="yes" xml:space="preserve">
+          <source>WS</source>
+          <target state="new">WS</target>
+        </trans-unit>
+        <trans-unit id="Yes" translate="yes" xml:space="preserve">
+          <source>Yes</source>
+          <target state="new">Yes</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAccountStats" translate="yes" xml:space="preserve">
+          <source>Account stats (CTRL+E)</source>
+          <target state="new">Account stats (CTRL+E)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAddToSuspectsList" translate="yes" xml:space="preserve">
+          <source>Add players to suspects list (CTRL+W)</source>
+          <target state="new">Add players to suspects list (CTRL+W)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAnalyzeSelectedDemos" translate="yes" xml:space="preserve">
+          <source>Analyze selected demo(s) (CTRL+S)</source>
+          <target state="new">Analyze selected demo(s) (CTRL+S)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBrowseToDemo" translate="yes" xml:space="preserve">
+          <source>Browse to demo (CTRL+B)</source>
+          <target state="new">Browse to demo (CTRL+B)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDeleteDemo" translate="yes" xml:space="preserve">
+          <source>Delete selected demo(s) (CTRL+D)</source>
+          <target state="new">Delete selected demo(s) (CTRL+D)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDemoDetails" translate="yes" xml:space="preserve">
+          <source>Demo's details (CTRL+D)</source>
+          <target state="new">Demo's details (CTRL+D)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDownloadDemos" translate="yes" xml:space="preserve">
+          <source>Download last MM demos available for the current logged Steam account (CTRL+H)</source>
+          <target state="new">Download last MM demos available for the current logged Steam account (CTRL+H)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipExportXls" translate="yes" xml:space="preserve">
+          <source>Export as XLS (CTRL+X)</source>
+          <target state="new">Export as XLS (CTRL+X)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipGoToSuspectsList" translate="yes" xml:space="preserve">
+          <source>Go to suspects list (CTRL+F)</source>
+          <target state="new">Go to suspects list (CTRL+F)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipGotoTick" translate="yes" xml:space="preserve">
+          <source>Start watching selected demo at specific tick (CTRL+G)</source>
+          <target state="new">Start watching selected demo at specific tick (CTRL+G)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipRefreshDemosList" translate="yes" xml:space="preserve">
+          <source>Refresh demos list (CTRL+R | F5)</source>
+          <target state="new">Refresh demos list (CTRL+R | F5)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipStop" translate="yes" xml:space="preserve">
+          <source>Stop (CTRL+S)</source>
+          <target state="new">Stop (CTRL+S)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWatchDemo" translate="yes" xml:space="preserve">
+          <source>Watch demo (CTRL+W)</source>
+          <target state="new">Watch demo (CTRL+W)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWatchHighlights" translate="yes" xml:space="preserve">
+          <source>Watch your highlights (CTRL+H)</source>
+          <target state="new">Watch your highlights (CTRL+H)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWatchLowlights" translate="yes" xml:space="preserve">
+          <source>Watch your lowlights (CTRL+L)</source>
+          <target state="new">Watch your lowlights (CTRL+L)</target>
+        </trans-unit>
+        <trans-unit id="Avatar" translate="yes" xml:space="preserve">
+          <source>Avatar</source>
+          <target state="new">Avatar</target>
+        </trans-unit>
+        <trans-unit id="By" translate="yes" xml:space="preserve">
+          <source>by</source>
+          <target state="new">by</target>
+        </trans-unit>
+        <trans-unit id="CopyEmailAddress" translate="yes" xml:space="preserve">
+          <source>Copy email address</source>
+          <target state="new">Copy email address</target>
+        </trans-unit>
+        <trans-unit id="Damages" translate="yes" xml:space="preserve">
+          <source>Damages</source>
+          <target state="new">Damages</target>
+        </trans-unit>
+        <trans-unit id="Flashbangs" translate="yes" xml:space="preserve">
+          <source>Flashbangs</source>
+          <target state="new">Flashbangs</target>
+        </trans-unit>
+        <trans-unit id="Heatmap" translate="yes" xml:space="preserve">
+          <source>Heatmap</source>
+          <target state="new">Heatmap</target>
+        </trans-unit>
+        <trans-unit id="LabelClientname" translate="yes" xml:space="preserve">
+          <source>Clientname</source>
+          <target state="new">Clientname</target>
+        </trans-unit>
+        <trans-unit id="LabelFilename" translate="yes" xml:space="preserve">
+          <source>Filename</source>
+          <target state="new">Filename</target>
+        </trans-unit>
+        <trans-unit id="LabelHostname" translate="yes" xml:space="preserve">
+          <source>Hostname</source>
+          <target state="new">Hostname</target>
+        </trans-unit>
+        <trans-unit id="LabelMostHsPercent" translate="yes" xml:space="preserve">
+          <source>Most Headshots %</source>
+          <target state="new">Most Headshots %</target>
+        </trans-unit>
+        <trans-unit id="LabelMap" translate="yes" xml:space="preserve">
+          <source>Map</source>
+          <target state="new">Map</target>
+        </trans-unit>
+        <trans-unit id="LabelMostBombPlanted" translate="yes" xml:space="preserve">
+          <source>Most Bomb plants</source>
+          <target state="new">Most Bomb plants</target>
+        </trans-unit>
+        <trans-unit id="LabelMostDamagingWeapon" translate="yes" xml:space="preserve">
+          <source>Most damaging weapon</source>
+          <target state="new">Most damaging weapon</target>
+        </trans-unit>
+        <trans-unit id="LabelMostEntryKills" translate="yes" xml:space="preserve">
+          <source>Most Entry Kill</source>
+          <target state="new">Most Entry Kill</target>
+        </trans-unit>
+        <trans-unit id="LabelMostKillingWeapon" translate="yes" xml:space="preserve">
+          <source>Most killing weapon</source>
+          <target state="new">Most killing weapon</target>
+        </trans-unit>
+        <trans-unit id="LabelPlayerStats" translate="yes" xml:space="preserve">
+          <source>Player stats</source>
+          <target state="new">Player stats</target>
+        </trans-unit>
+        <trans-unit id="LabelStatus" translate="yes" xml:space="preserve">
+          <source>Status</source>
+          <target state="new">Status</target>
+        </trans-unit>
+        <trans-unit id="LabelTickrate" translate="yes" xml:space="preserve">
+          <source>Tickrate</source>
+          <target state="new">Tickrate</target>
+        </trans-unit>
+        <trans-unit id="LabelType" translate="yes" xml:space="preserve">
+          <source>Type</source>
+          <target state="new">Type</target>
+        </trans-unit>
+        <trans-unit id="Overview" translate="yes" xml:space="preserve">
+          <source>Overview</source>
+          <target state="new">Overview</target>
+        </trans-unit>
+        <trans-unit id="PlayerDetails" translate="yes" xml:space="preserve">
+          <source>Player details</source>
+          <target state="new">Player details</target>
+        </trans-unit>
+        <trans-unit id="Rank" translate="yes" xml:space="preserve">
+          <source>Rank</source>
+          <target state="new">Rank</target>
+        </trans-unit>
+        <trans-unit id="RoundDetails" translate="yes" xml:space="preserve">
+          <source>Round details</source>
+          <target state="new">Round details</target>
+        </trans-unit>
+        <trans-unit id="SaveComment" translate="yes" xml:space="preserve">
+          <source>Save comment</source>
+          <target state="new">Save comment</target>
+        </trans-unit>
+        <trans-unit id="Score" translate="yes" xml:space="preserve">
+          <source>Score</source>
+          <target state="new">Score</target>
+        </trans-unit>
+        <trans-unit id="Stuffs" translate="yes" xml:space="preserve">
+          <source>Stuffs</source>
+          <target state="new">Stuffs</target>
+        </trans-unit>
+        <trans-unit id="Tick" translate="yes" xml:space="preserve">
+          <source>Tick</source>
+          <target state="new">Tick</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAnalyze" translate="yes" xml:space="preserve">
+          <source>Analyze (CTRL+S)</source>
+          <target state="new">Analyze (CTRL+S)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBack" translate="yes" xml:space="preserve">
+          <source>Back (CTRL+B)</source>
+          <target state="new">Back (CTRL+B)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDamages" translate="yes" xml:space="preserve">
+          <source>Damages (CTRL+D)</source>
+          <target state="new">Damages (CTRL+D)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipFlashbangs" translate="yes" xml:space="preserve">
+          <source>Flashbangs (CTRL+F)</source>
+          <target state="new">Flashbangs (CTRL+F)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipHeatmap" translate="yes" xml:space="preserve">
+          <source>Heatmap generator (CTRL+H)</source>
+          <target state="new">Heatmap generator (CTRL+H)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipKillsDetails" translate="yes" xml:space="preserve">
+          <source>Kills details (CTRL+K)</source>
+          <target state="new">Kills details (CTRL+K)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipNextDemo" translate="yes" xml:space="preserve">
+          <source>Next demo (CTRL+RIGHT)</source>
+          <target state="new">Next demo (CTRL+RIGHT)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipOverview" translate="yes" xml:space="preserve">
+          <source>Overview (CTRL+O)</source>
+          <target state="new">Overview (CTRL+O)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipPlayerDetails" translate="yes" xml:space="preserve">
+          <source>Player details (CTRL+P)</source>
+          <target state="new">Player details (CTRL+P)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipPreviousDemo" translate="yes" xml:space="preserve">
+          <source>Previous demo (CTRL+LEFT)</source>
+          <target state="new">Previous demo (CTRL+LEFT)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipRoundDetails" translate="yes" xml:space="preserve">
+          <source>Round details (CTRL+R)</source>
+          <target state="new">Round details (CTRL+R)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipStuffs" translate="yes" xml:space="preserve">
+          <source>Stuffs (CTRL+G)</source>
+          <target state="new">Stuffs (CTRL+G)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWatchRound" translate="yes" xml:space="preserve">
+          <source>Watch round</source>
+          <target state="new">Watch round</target>
+        </trans-unit>
+        <trans-unit id="WatchRound" translate="yes" xml:space="preserve">
+          <source>Watch round</source>
+          <target state="new">Watch round</target>
+        </trans-unit>
+        <trans-unit id="HeaderAssists" translate="yes" xml:space="preserve">
+          <source>A</source>
+          <target state="new">A</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Assists</note>
+        </trans-unit>
+        <trans-unit id="HeaderAssistsPerRound" translate="yes" xml:space="preserve">
+          <source>APR</source>
+          <target state="new">APR</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Assists Per Round</note>
+        </trans-unit>
+        <trans-unit id="HeaderAvarageDamagesPerPlayer" translate="yes" xml:space="preserve">
+          <source>ADP</source>
+          <target state="new">ADP</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Average Damages Per Player</note>
+        </trans-unit>
+        <trans-unit id="HeaderDeaths" translate="yes" xml:space="preserve">
+          <source>D</source>
+          <target state="new">D</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Deaths</note>
+        </trans-unit>
+        <trans-unit id="HeaderEntryKills" translate="yes" xml:space="preserve">
+          <source>EK</source>
+          <target state="new">EK</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Entry Kills</note>
+        </trans-unit>
+        <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
+          <source>EV Team 1 ($)</source>
+          <target state="new">EV Team 1 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
+          <source>EV Team 2 ($)</source>
+          <target state="new">EV Team 2 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderHsPercent" translate="yes" xml:space="preserve">
+          <source>HS%</source>
+          <target state="new">HS%</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">% headshot</note>
+        </trans-unit>
+        <trans-unit id="HeaderKills" translate="yes" xml:space="preserve">
+          <source>K</source>
+          <target state="new">K</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Kills</note>
+        </trans-unit>
+        <trans-unit id="HeaderOverwatch" translate="yes" xml:space="preserve">
+          <source>OW</source>
+          <target state="new">OW</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Overwatch</note>
+        </trans-unit>
+        <trans-unit id="HeaderSideTrouble" translate="yes" xml:space="preserve">
+          <source>ST</source>
+          <target state="new">ST</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Side Trouble</note>
+        </trans-unit>
+        <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
+          <source>SM Team 1 ($)</source>
+          <target state="new">SM Team 1 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
+          <source>SM Team 2 ($)</source>
+          <target state="new">SM Team 2 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderTeamKill" translate="yes" xml:space="preserve">
+          <source>FF</source>
+          <target state="new">FF</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Team Kill</note>
+        </trans-unit>
+        <trans-unit id="HeaderTeamTrouble" translate="yes" xml:space="preserve">
+          <source>TT</source>
+          <target state="new">TT</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Team Trouble</note>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccountNickname" translate="yes" xml:space="preserve">
+          <source>Account's Nickname</source>
+          <target state="new">Account's Nickname</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccountProfileUrl" translate="yes" xml:space="preserve">
+          <source>Account's Profile URL</source>
+          <target state="new">Account's Profile URL</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccountStatus" translate="yes" xml:space="preserve">
+          <source>Account's Status (offline, online...)</source>
+          <target state="new">Account's Status (offline, online...)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccountVacBanned" translate="yes" xml:space="preserve">
+          <source>Account VAC Banned</source>
+          <target state="new">Account VAC Banned</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccountVisibilityStatus" translate="yes" xml:space="preserve">
+          <source>Account's Visibility Status</source>
+          <target state="new">Account's Visibility Status</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAssisterName" translate="yes" xml:space="preserve">
+          <source>Assister Name</source>
+          <target state="new">Assister Name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAssists" translate="yes" xml:space="preserve">
+          <source>Assists</source>
+          <target state="new">Assists</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAssistsPerRound" translate="yes" xml:space="preserve">
+          <source>Assist Per Round</source>
+          <target state="new">Assist Per Round</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAverageDamagePerPlayer" translate="yes" xml:space="preserve">
+          <source>Average Damage Per Player</source>
+          <target state="new">Average Damage Per Player</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAverageDamagePerRound" translate="yes" xml:space="preserve">
+          <source>Average Damage Per Round</source>
+          <target state="new">Average Damage Per Round</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipBombDefused" translate="yes" xml:space="preserve">
+          <source>Bomb Defused</source>
+          <target state="new">Bomb Defused</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipBombExploded" translate="yes" xml:space="preserve">
+          <source>Bomb Exploded</source>
+          <target state="new">Bomb Exploded</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipBombPlanted" translate="yes" xml:space="preserve">
+          <source>Bomb Planted</source>
+          <target state="new">Bomb Planted</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipClutchCount" translate="yes" xml:space="preserve">
+          <source>Number of clutch</source>
+          <target state="new">Number of clutch</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipClutchWonCount" translate="yes" xml:space="preserve">
+          <source>Number of clutch won</source>
+          <target state="new">Number of clutch won</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipCommunityBanned" translate="yes" xml:space="preserve">
+          <source>Community Banned</source>
+          <target state="new">Community Banned</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipCommunityProfileConfigured" translate="yes" xml:space="preserve">
+          <source>Community Profile Configured</source>
+          <target state="new">Community Profile Configured</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipCrouchKills" translate="yes" xml:space="preserve">
+          <source>Crouch kills</source>
+          <target state="new">Crouch kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDaysSinceLastBan" translate="yes" xml:space="preserve">
+          <source>Days Since Last Ban</source>
+          <target state="new">Days Since Last Ban</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDeaths" translate="yes" xml:space="preserve">
+          <source>Deaths</source>
+          <target state="new">Deaths</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDeathsPerRound" translate="yes" xml:space="preserve">
+          <source>Death Per Round</source>
+          <target state="new">Death Per Round</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoClientname" translate="yes" xml:space="preserve">
+          <source>Demo's clientname</source>
+          <target state="new">Demo's clientname</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoComment" translate="yes" xml:space="preserve">
+          <source>Demo's comment</source>
+          <target state="new">Demo's comment</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoDate" translate="yes" xml:space="preserve">
+          <source>Demo's date</source>
+          <target state="new">Demo's date</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoDuration" translate="yes" xml:space="preserve">
+          <source>Demo's duration</source>
+          <target state="new">Demo's duration</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoFramerate" translate="yes" xml:space="preserve">
+          <source>Demo's framerate</source>
+          <target state="new">Demo's framerate</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoHostname" translate="yes" xml:space="preserve">
+          <source>Demo's hostname</source>
+          <target state="new">Demo's hostname</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoName" translate="yes" xml:space="preserve">
+          <source>Demo's name</source>
+          <target state="new">Demo's name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoSource" translate="yes" xml:space="preserve">
+          <source>Demo's source</source>
+          <target state="new">Demo's source</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoTicks" translate="yes" xml:space="preserve">
+          <source>Demo's ticks</source>
+          <target state="new">Demo's ticks</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipDemoType" translate="yes" xml:space="preserve">
+          <source>Demo's type</source>
+          <target state="new">Demo's type</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipEntryKill" translate="yes" xml:space="preserve">
+          <source>Entry Kill</source>
+          <target state="new">Entry Kill</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipEquipmentValue" translate="yes" xml:space="preserve">
+          <source>Equipment Value</source>
+          <target state="new">Equipment Value</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
+          <source>Equipement Value Team 1 ($)</source>
+          <target state="new">Equipement Value Team 1 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
+          <source>Equipement Value Team 2 ($)</source>
+          <target state="new">Equipement Value Team 2 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
+          <source>5 Kills</source>
+          <target state="new">5 Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipFourKill" translate="yes" xml:space="preserve">
+          <source>4 Kills</source>
+          <target state="new">4 Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHasVacOwBan" translate="yes" xml:space="preserve">
+          <source>VAC / OW ban?</source>
+          <target state="new">VAC / OW ban?</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHasWonClutch" translate="yes" xml:space="preserve">
+          <source>Has Won Clutch?</source>
+          <target state="new">Has Won Clutch?</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHasWonDuel" translate="yes" xml:space="preserve">
+          <source>Has Won Duel?</source>
+          <target state="new">Has Won Duel?</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHeadshotPercent" translate="yes" xml:space="preserve">
+          <source>Headshot percent</source>
+          <target state="new">Headshot percent</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHeadshots" translate="yes" xml:space="preserve">
+          <source>Headshots</source>
+          <target state="new">Headshots</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHits" translate="yes" xml:space="preserve">
+          <source>Hits</source>
+          <target state="new">Hits</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHltvRating" translate="yes" xml:space="preserve">
+          <source>HLTV Rating</source>
+          <target state="new">HLTV Rating</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipIsOwBanned" translate="yes" xml:space="preserve">
+          <source>Overwatch banned?</source>
+          <target state="new">Overwatch banned?</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipIsVacBanned" translate="yes" xml:space="preserve">
+          <source>VAC banned?</source>
+          <target state="new">VAC banned?</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipJumpKills" translate="yes" xml:space="preserve">
+          <source>Jump Kills</source>
+          <target state="new">Jump Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKillerName" translate="yes" xml:space="preserve">
+          <source>Killer Name</source>
+          <target state="new">Killer Name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKillerSide" translate="yes" xml:space="preserve">
+          <source>Killer Side</source>
+          <target state="new">Killer Side</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKillPerRound" translate="yes" xml:space="preserve">
+          <source>Kill Per Round</source>
+          <target state="new">Kill Per Round</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKills" translate="yes" xml:space="preserve">
+          <source>Kills</source>
+          <target state="new">Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKillsPerDeaths" translate="yes" xml:space="preserve">
+          <source>Kills Per Deaths</source>
+          <target state="new">Kills Per Deaths</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
+          <source>Last online</source>
+          <target state="new">Last online</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipMapName" translate="yes" xml:space="preserve">
+          <source>Map's name</source>
+          <target state="new">Map's name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipMarketBanned" translate="yes" xml:space="preserve">
+          <source>Market Banned</source>
+          <target state="new">Market Banned</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipMvp" translate="yes" xml:space="preserve">
+          <source>Most Valuable Player</source>
+          <target state="new">Most Valuable Player</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipNumber" translate="yes" xml:space="preserve">
+          <source>Number</source>
+          <target state="new">Number</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneKill" translate="yes" xml:space="preserve">
+          <source>1 Kill</source>
+          <target state="new">1 Kill</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneVersusFive" translate="yes" xml:space="preserve">
+          <source>1 versus 5</source>
+          <target state="new">1 versus 5</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneVersusFour" translate="yes" xml:space="preserve">
+          <source>1 versus 4</source>
+          <target state="new">1 versus 4</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneVersusOne" translate="yes" xml:space="preserve">
+          <source>1 versus 1</source>
+          <target state="new">1 versus 1</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneVersusThree" translate="yes" xml:space="preserve">
+          <source>1 versus 3</source>
+          <target state="new">1 versus 3</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneVersusTwo" translate="yes" xml:space="preserve">
+          <source>1 versus 2</source>
+          <target state="new">1 versus 2</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOneVersusX" translate="yes" xml:space="preserve">
+          <source>1vX</source>
+          <target state="new">1vX</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipOverwatchGameBanCount" translate="yes" xml:space="preserve">
+          <source>Number of overwatch ban</source>
+          <target state="new">Number of overwatch ban</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipPlayerAvatar" translate="yes" xml:space="preserve">
+          <source>Player's avatar</source>
+          <target state="new">Player's avatar</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipPlayerFlashbangThrown" translate="yes" xml:space="preserve">
+          <source>Total flashbang thrown by the player</source>
+          <target state="new">Total flashbang thrown by the player</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipPlayerName" translate="yes" xml:space="preserve">
+          <source>Player's name</source>
+          <target state="new">Player's name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipPlayerRank" translate="yes" xml:space="preserve">
+          <source>Player's rank</source>
+          <target state="new">Player's rank</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRatio" translate="yes" xml:space="preserve">
+          <source>Ratio</source>
+          <target state="new">Ratio</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipResult" translate="yes" xml:space="preserve">
+          <source>Result</source>
+          <target state="new">Result</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRoundLost" translate="yes" xml:space="preserve">
+          <source>Round Lost</source>
+          <target state="new">Round Lost</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRoundNumber" translate="yes" xml:space="preserve">
+          <source>Round Number</source>
+          <target state="new">Round Number</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRoundPlayed" translate="yes" xml:space="preserve">
+          <source>Round Played</source>
+          <target state="new">Round Played</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRoundType" translate="yes" xml:space="preserve">
+          <source>Round Type (normal / eco / force buy / semi-eco)</source>
+          <target state="new">Round Type (normal / eco / force buy / semi-eco)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRoundWon" translate="yes" xml:space="preserve">
+          <source>Round Won</source>
+          <target state="new">Round Won</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipRws" translate="yes" xml:space="preserve">
+          <source>ESEA RWS (Round Win Share)</source>
+          <target state="new">ESEA RWS (Round Win Share)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipScore" translate="yes" xml:space="preserve">
+          <source>Score</source>
+          <target state="new">Score</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipScoreTeam1" translate="yes" xml:space="preserve">
+          <source>Score Team 1</source>
+          <target state="new">Score Team 1</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipScoreTeam2" translate="yes" xml:space="preserve">
+          <source>Score Team 2</source>
+          <target state="new">Score Team 2</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipServerTickrate" translate="yes" xml:space="preserve">
+          <source>Server tickrate</source>
+          <target state="new">Server tickrate</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipShotsFired" translate="yes" xml:space="preserve">
+          <source>Shots fired</source>
+          <target state="new">Shots fired</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipSideTrouble" translate="yes" xml:space="preserve">
+          <source>Side on eco / force buy or semi-eco</source>
+          <target state="new">Side on eco / force buy or semi-eco</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipStartMoney" translate="yes" xml:space="preserve">
+          <source>Start Money</source>
+          <target state="new">Start Money</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
+          <source>Start Money Team 1 ($)</source>
+          <target state="new">Start Money Team 1 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
+          <source>Start Money Team 2 ($)</source>
+          <target state="new">Start Money Team 2 ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
+          <source>Team 1 name</source>
+          <target state="new">Team 1 name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTeam2Name" translate="yes" xml:space="preserve">
+          <source>Team 2 name</source>
+          <target state="new">Team 2 name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTeamFlashbangThrown" translate="yes" xml:space="preserve">
+          <source>Total flashbang thrown by the team</source>
+          <target state="new">Total flashbang thrown by the team</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTeamKill" translate="yes" xml:space="preserve">
+          <source>Team Kill (Friendly Fire)</source>
+          <target state="new">Team Kill (Friendly Fire)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTeamName" translate="yes" xml:space="preserve">
+          <source>Team Name</source>
+          <target state="new">Team Name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTeamNameTrouble" translate="yes" xml:space="preserve">
+          <source>Team's mame on eco / force buy or semi-eco</source>
+          <target state="new">Team's mame on eco / force buy or semi-eco</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
+          <source>3 Kills</source>
+          <target state="new">3 Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipThrowerName" translate="yes" xml:space="preserve">
+          <source>Thrower Name</source>
+          <target state="new">Thrower Name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTick" translate="yes" xml:space="preserve">
+          <source>Tick</source>
+          <target state="new">Tick</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTotalDamageArmor" translate="yes" xml:space="preserve">
+          <source>Total Damage Armor</source>
+          <target state="new">Total Damage Armor</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTotalDamageHealth" translate="yes" xml:space="preserve">
+          <source>Total Damage Health</source>
+          <target state="new">Total Damage Health</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTotalEntryKill" translate="yes" xml:space="preserve">
+          <source>Total Entry Kill</source>
+          <target state="new">Total Entry Kill</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTradeDeath" translate="yes" xml:space="preserve">
+          <source>Trade death</source>
+          <target state="new">Trade death</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTradeKill" translate="yes" xml:space="preserve">
+          <source>Trade kill</source>
+          <target state="new">Trade kill</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTradeKillsDeaths" translate="yes" xml:space="preserve">
+          <source>Trade Kill / Death</source>
+          <target state="new">Trade Kill / Death</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTwoKill" translate="yes" xml:space="preserve">
+          <source>2 Kills</source>
+          <target state="new">2 Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipVacBanCount" translate="yes" xml:space="preserve">
+          <source>Number of VAC ban</source>
+          <target state="new">Number of VAC ban</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipVictimName" translate="yes" xml:space="preserve">
+          <source>Victim Name</source>
+          <target state="new">Victim Name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipWeaponName" translate="yes" xml:space="preserve">
+          <source>Weapon's name</source>
+          <target state="new">Weapon's name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipWinner" translate="yes" xml:space="preserve">
+          <source>Winner</source>
+          <target state="new">Winner</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipWinnerTeamName" translate="yes" xml:space="preserve">
+          <source>Winner Team Name</source>
+          <target state="new">Winner Team Name</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipWinStatus" translate="yes" xml:space="preserve">
+          <source>Win/Lose/Draw</source>
+          <target state="new">Win/Lose/Draw</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipWonRound" translate="yes" xml:space="preserve">
+          <source>Round Won?</source>
+          <target state="new">Round Won?</target>
+        </trans-unit>
+        <trans-unit id="HeaderTradeDeaths" translate="yes" xml:space="preserve">
+          <source>TD</source>
+          <target state="new">TD</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Trade Deaths</note>
+        </trans-unit>
+        <trans-unit id="HeaderTradeKills" translate="yes" xml:space="preserve">
+          <source>TK</source>
+          <target state="new">TK</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Trade Kills</note>
+        </trans-unit>
+        <trans-unit id="HeaderWinnerSide" translate="yes" xml:space="preserve">
+          <source>WS</source>
+          <target state="new">WS</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Winner Side</note>
+        </trans-unit>
+        <trans-unit id="HeaderWinnerTeamName" translate="yes" xml:space="preserve">
+          <source>WTN</source>
+          <target state="new">WTN</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Winner Team Name</note>
+        </trans-unit>
+        <trans-unit id="OneVersusFive" translate="yes" xml:space="preserve">
+          <source>1V5</source>
+          <target state="new">1V5</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFour" translate="yes" xml:space="preserve">
+          <source>1V4</source>
+          <target state="new">1V4</target>
+        </trans-unit>
+        <trans-unit id="OneVersusOne" translate="yes" xml:space="preserve">
+          <source>1V1</source>
+          <target state="new">1V1</target>
+        </trans-unit>
+        <trans-unit id="OneVersusThree" translate="yes" xml:space="preserve">
+          <source>1V3</source>
+          <target state="new">1V3</target>
+        </trans-unit>
+        <trans-unit id="OneVersusTwo" translate="yes" xml:space="preserve">
+          <source>1V2</source>
+          <target state="new">1V2</target>
+        </trans-unit>
+        <trans-unit id="Player" translate="yes" xml:space="preserve">
+          <source>Player</source>
+          <target state="new">Player</target>
+        </trans-unit>
+        <trans-unit id="HeaderClutchs" translate="yes" xml:space="preserve">
+          <source>C</source>
+          <target state="new">C</target>
+        </trans-unit>
+        <trans-unit id="AddPlayersToSuspects" translate="yes" xml:space="preserve">
+          <source>Add players to suspects list</source>
+          <target state="new">Add players to suspects list</target>
+        </trans-unit>
+        <trans-unit id="AddToAccountList" translate="yes" xml:space="preserve">
+          <source>Add to account list</source>
+          <target state="new">Add to account list</target>
+        </trans-unit>
+        <trans-unit id="AddToWhitelist" translate="yes" xml:space="preserve">
+          <source>Add to whitelist</source>
+          <target state="new">Add to whitelist</target>
+        </trans-unit>
+        <trans-unit id="AssistsFull" translate="yes" xml:space="preserve">
+          <source>A (Assits)</source>
+          <target state="new">A (Assits)</target>
+        </trans-unit>
+        <trans-unit id="BombDefusedFull" translate="yes" xml:space="preserve">
+          <source>BD (Bomb Defused)</source>
+          <target state="new">BD (Bomb Defused)</target>
+        </trans-unit>
+        <trans-unit id="BombExplodedFull" translate="yes" xml:space="preserve">
+          <source>BE (Bomb Exploded)</source>
+          <target state="new">BE (Bomb Exploded)</target>
+        </trans-unit>
+        <trans-unit id="BombPlantedFull" translate="yes" xml:space="preserve">
+          <source>BP (Bomb Planted)</source>
+          <target state="new">BP (Bomb Planted)</target>
+        </trans-unit>
+        <trans-unit id="ClutchsFull" translate="yes" xml:space="preserve">
+          <source>C (Clutchs)</source>
+          <target state="new">C (Clutchs)</target>
+        </trans-unit>
+        <trans-unit id="CopyPlayDemoCommand" translate="yes" xml:space="preserve">
+          <source>Copy playdemo command</source>
+          <target state="new">Copy playdemo command</target>
+        </trans-unit>
+        <trans-unit id="CrouchKillsFull" translate="yes" xml:space="preserve">
+          <source>CK (Crouch Kills)</source>
+          <target state="new">CK (Crouch Kills)</target>
+        </trans-unit>
+        <trans-unit id="DeathsFull" translate="yes" xml:space="preserve">
+          <source>D (Deaths)</source>
+          <target state="new">D (Deaths)</target>
+        </trans-unit>
+        <trans-unit id="EntryKillsFull" translate="yes" xml:space="preserve">
+          <source>EK (Entry Kills)</source>
+          <target state="new">EK (Entry Kills)</target>
+        </trans-unit>
+        <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
+          <source>EVT1 (Equipment Value Team 1 ($))</source>
+          <target state="new">EVT1 (Equipment Value Team 1 ($))</target>
+        </trans-unit>
+        <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
+          <source>EVT2 (Equipment Value Team 2 ($))</source>
+          <target state="new">EVT2 (Equipment Value Team 2 ($))</target>
+        </trans-unit>
+        <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
+          <source>RWS (ESEA Round Win Share)</source>
+          <target state="new">RWS (ESEA Round Win Share)</target>
+        </trans-unit>
+        <trans-unit id="ExportJson" translate="yes" xml:space="preserve">
+          <source>Export JSON</source>
+          <target state="new">Export JSON</target>
+        </trans-unit>
+        <trans-unit id="Framerate" translate="yes" xml:space="preserve">
+          <source>Framerate</source>
+          <target state="new">Framerate</target>
+        </trans-unit>
+        <trans-unit id="FramerateFull" translate="yes" xml:space="preserve">
+          <source>FR (Framerate)</source>
+          <target state="new">FR (Framerate)</target>
+        </trans-unit>
+        <trans-unit id="HeadshotsFull" translate="yes" xml:space="preserve">
+          <source>HS (Headshots)</source>
+          <target state="new">HS (Headshots)</target>
+        </trans-unit>
+        <trans-unit id="HltvFull" translate="yes" xml:space="preserve">
+          <source>HLTV (HLTV Rating)</source>
+          <target state="new">HLTV (HLTV Rating)</target>
+        </trans-unit>
+        <trans-unit id="JumpKillsFull" translate="yes" xml:space="preserve">
+          <source>JK (Jump Kills)</source>
+          <target state="new">JK (Jump Kills)</target>
+        </trans-unit>
+        <trans-unit id="KillsDeathsRatioFull" translate="yes" xml:space="preserve">
+          <source>K/D (Kills per Deaths)</source>
+          <target state="new">K/D (Kills per Deaths)</target>
+        </trans-unit>
+        <trans-unit id="KillsFull" translate="yes" xml:space="preserve">
+          <source>K (Kills)</source>
+          <target state="new">K (Kills)</target>
+        </trans-unit>
+        <trans-unit id="LastRankDetected" translate="yes" xml:space="preserve">
+          <source>Last rank detected</source>
+          <target state="new">Last rank detected</target>
+        </trans-unit>
+        <trans-unit id="MoveToWhitelist" translate="yes" xml:space="preserve">
+          <source>Move to whitelist</source>
+          <target state="new">Move to whitelist</target>
+        </trans-unit>
+        <trans-unit id="MvpFull" translate="yes" xml:space="preserve">
+          <source>MVP (Most Valuable Player)</source>
+          <target state="new">MVP (Most Valuable Player)</target>
+        </trans-unit>
+        <trans-unit id="Profile" translate="yes" xml:space="preserve">
+          <source>Profile</source>
+          <target state="new">Profile</target>
+        </trans-unit>
+        <trans-unit id="Remove" translate="yes" xml:space="preserve">
+          <source>Remove</source>
+          <target state="new">Remove</target>
+        </trans-unit>
+        <trans-unit id="RemoveFromCache" translate="yes" xml:space="preserve">
+          <source>Remove from cache</source>
+          <target state="new">Remove from cache</target>
+        </trans-unit>
+        <trans-unit id="RoundPlayedFull" translate="yes" xml:space="preserve">
+          <source>RP (Round Played)</source>
+          <target state="new">RP (Round Played)</target>
+        </trans-unit>
+        <trans-unit id="ScoreTeam1Full" translate="yes" xml:space="preserve">
+          <source>ST1 (Score Team 1)</source>
+          <target state="new">ST1 (Score Team 1)</target>
+        </trans-unit>
+        <trans-unit id="ScoreTeam2Full" translate="yes" xml:space="preserve">
+          <source>ST2 (Score Team 2)</source>
+          <target state="new">ST2 (Score Team 2)</target>
+        </trans-unit>
+        <trans-unit id="ShowPlayerDemos" translate="yes" xml:space="preserve">
+          <source>Show player demos</source>
+          <target state="new">Show player demos</target>
+        </trans-unit>
+        <trans-unit id="ShowSuspectDemos" translate="yes" xml:space="preserve">
+          <source>Show suspect demos</source>
+          <target state="new">Show suspect demos</target>
+        </trans-unit>
+        <trans-unit id="SideTroubleFull" translate="yes" xml:space="preserve">
+          <source>ST (Side Trouble)</source>
+          <target state="new">ST (Side Trouble)</target>
+        </trans-unit>
+        <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
+          <source>SMT1 (Start Money Team 1 ($))</source>
+          <target state="new">SMT1 (Start Money Team 1 ($))</target>
+        </trans-unit>
+        <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
+          <source>SMT2 (Start Money Team 2 ($))</source>
+          <target state="new">SMT2 (Start Money Team 2 ($))</target>
+        </trans-unit>
+        <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
+          <source>TNT (Team Name Trouble)</source>
+          <target state="new">TNT (Team Name Trouble)</target>
+        </trans-unit>
+        <trans-unit id="Tickrate" translate="yes" xml:space="preserve">
+          <source>Tickrate</source>
+          <target state="new">Tickrate</target>
+        </trans-unit>
+        <trans-unit id="TickrateFull" translate="yes" xml:space="preserve">
+          <source>TR (Tickrate)</source>
+          <target state="new">TR (Tickrate)</target>
+        </trans-unit>
+        <trans-unit id="TotalDamagesArmorFull" translate="yes" xml:space="preserve">
+          <source>TDA (Total Damages Armor)</source>
+          <target state="new">TDA (Total Damages Armor)</target>
+        </trans-unit>
+        <trans-unit id="TotalDamagesHealthFull" translate="yes" xml:space="preserve">
+          <source>TDH (Total Damages Health)</source>
+          <target state="new">TDH (Total Damages Health)</target>
+        </trans-unit>
+        <trans-unit id="TradeDeathsFull" translate="yes" xml:space="preserve">
+          <source>TD (Trade Deaths)</source>
+          <target state="new">TD (Trade Deaths)</target>
+        </trans-unit>
+        <trans-unit id="TradeKillsFull" translate="yes" xml:space="preserve">
+          <source>TK (Trade Kills)</source>
+          <target state="new">TK (Trade Kills)</target>
+        </trans-unit>
+        <trans-unit id="WatchPlayer" translate="yes" xml:space="preserve">
+          <source>Watch player</source>
+          <target state="new">Watch player</target>
+        </trans-unit>
+        <trans-unit id="WinnerSideFull" translate="yes" xml:space="preserve">
+          <source>WS (Winner Side)</source>
+          <target state="new">WS (Winner Side)</target>
+        </trans-unit>
+        <trans-unit id="WinnerTeamNameFull" translate="yes" xml:space="preserve">
+          <source>WTN (Winner Team Name)</source>
+          <target state="new">WTN (Winner Team Name)</target>
+        </trans-unit>
+        <trans-unit id="Decoys" translate="yes" xml:space="preserve">
+          <source>Decoys</source>
+          <target state="new">Decoys</target>
+        </trans-unit>
+        <trans-unit id="EndReasonBombDefused" translate="yes" xml:space="preserve">
+          <source>Bomb defused</source>
+          <target state="new">Bomb defused</target>
+        </trans-unit>
+        <trans-unit id="EndReasonBombExploded" translate="yes" xml:space="preserve">
+          <source>Bomb exploded</source>
+          <target state="new">Bomb exploded</target>
+        </trans-unit>
+        <trans-unit id="EndReasonCtSurrender" translate="yes" xml:space="preserve">
+          <source>CT surrender</source>
+          <target state="new">CT surrender</target>
+        </trans-unit>
+        <trans-unit id="EndReasonCtWin" translate="yes" xml:space="preserve">
+          <source>Counter-Terrorists win</source>
+          <target state="new">Counter-Terrorists win</target>
+        </trans-unit>
+        <trans-unit id="EndReasonTargetSaved" translate="yes" xml:space="preserve">
+          <source>Time over</source>
+          <target state="new">Time over</target>
+        </trans-unit>
+        <trans-unit id="EndReasonTsurrender" translate="yes" xml:space="preserve">
+          <source>T surrender</source>
+          <target state="new">T surrender</target>
+        </trans-unit>
+        <trans-unit id="EndReasonTwin" translate="yes" xml:space="preserve">
+          <source>Terrorists win</source>
+          <target state="new">Terrorists win</target>
+        </trans-unit>
+        <trans-unit id="EndReasonUnknown" translate="yes" xml:space="preserve">
+          <source>Unknown</source>
+          <target state="new">Unknown</target>
+        </trans-unit>
+        <trans-unit id="HeaderAssister" translate="yes" xml:space="preserve">
+          <source>Assister</source>
+          <target state="new">Assister</target>
+        </trans-unit>
+        <trans-unit id="HeaderEquipmentValuePlayer" translate="yes" xml:space="preserve">
+          <source>EV ($)</source>
+          <target state="new">EV ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderHits" translate="yes" xml:space="preserve">
+          <source>Hits</source>
+          <target state="new">Hits</target>
+        </trans-unit>
+        <trans-unit id="HeaderKiller" translate="yes" xml:space="preserve">
+          <source>Killer</source>
+          <target state="new">Killer</target>
+        </trans-unit>
+        <trans-unit id="HeaderShots" translate="yes" xml:space="preserve">
+          <source>Shots</source>
+          <target state="new">Shots</target>
+        </trans-unit>
+        <trans-unit id="HeaderStartMoneyPlayer" translate="yes" xml:space="preserve">
+          <source>SM ($)</source>
+          <target state="new">SM ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderVictim" translate="yes" xml:space="preserve">
+          <source>Victim</source>
+          <target state="new">Victim</target>
+        </trans-unit>
+        <trans-unit id="HeaderWeapon" translate="yes" xml:space="preserve">
+          <source>Weapon</source>
+          <target state="new">Weapon</target>
+        </trans-unit>
+        <trans-unit id="HeGrenades" translate="yes" xml:space="preserve">
+          <source>HE Grenades</source>
+          <target state="new">HE Grenades</target>
+        </trans-unit>
+        <trans-unit id="Incendiaries" translate="yes" xml:space="preserve">
+          <source>Incendiaries</source>
+          <target state="new">Incendiaries</target>
+        </trans-unit>
+        <trans-unit id="LabelWinnerSide" translate="yes" xml:space="preserve">
+          <source>Winner side</source>
+          <target state="new">Winner side</target>
+        </trans-unit>
+        <trans-unit id="Molotovs" translate="yes" xml:space="preserve">
+          <source>Molotovs</source>
+          <target state="new">Molotovs</target>
+        </trans-unit>
+        <trans-unit id="Players" translate="yes" xml:space="preserve">
+          <source>Players</source>
+          <target state="new">Players</target>
+        </trans-unit>
+        <trans-unit id="Reason" translate="yes" xml:space="preserve">
+          <source>Reason</source>
+          <target state="new">Reason</target>
+        </trans-unit>
+        <trans-unit id="Smoke" translate="yes" xml:space="preserve">
+          <source>Smoke</source>
+          <target state="new">Smoke</target>
+        </trans-unit>
+        <trans-unit id="StartMoney" translate="yes" xml:space="preserve">
+          <source>Start money</source>
+          <target state="new">Start money</target>
+        </trans-unit>
+        <trans-unit id="Timeline" translate="yes" xml:space="preserve">
+          <source>Timeline</source>
+          <target state="new">Timeline</target>
+        </trans-unit>
+        <trans-unit id="ToolTipNextRound" translate="yes" xml:space="preserve">
+          <source>Next round</source>
+          <target state="new">Next round</target>
+        </trans-unit>
+        <trans-unit id="ToolTipPreviousRound" translate="yes" xml:space="preserve">
+          <source>Previous round</source>
+          <target state="new">Previous round</target>
+        </trans-unit>
+        <trans-unit id="Unknown" translate="yes" xml:space="preserve">
+          <source>Unknown</source>
+          <target state="new">Unknown</target>
+        </trans-unit>
+        <trans-unit id="ArmorDamages" translate="yes" xml:space="preserve">
+          <source>Armor damages</source>
+          <target state="new">Armor damages</target>
+        </trans-unit>
+        <trans-unit id="Attempts" translate="yes" xml:space="preserve">
+          <source>Attempts</source>
+          <target state="new">Attempts</target>
+        </trans-unit>
+        <trans-unit id="ClutchesLoss" translate="yes" xml:space="preserve">
+          <source>Clutches loss</source>
+          <target state="new">Clutches loss</target>
+        </trans-unit>
+        <trans-unit id="ClutchesWon" translate="yes" xml:space="preserve">
+          <source>Clutches won</source>
+          <target state="new">Clutches won</target>
+        </trans-unit>
+        <trans-unit id="ClutchesWonPercent" translate="yes" xml:space="preserve">
+          <source>Clutches won %</source>
+          <target state="new">Clutches won %</target>
+        </trans-unit>
+        <trans-unit id="DamagesPerRound" translate="yes" xml:space="preserve">
+          <source>Damages per round</source>
+          <target state="new">Damages per round</target>
+        </trans-unit>
+        <trans-unit id="EntryHoldKills" translate="yes" xml:space="preserve">
+          <source>Entry hold kills</source>
+          <target state="new">Entry hold kills</target>
+        </trans-unit>
+        <trans-unit id="EntryHoldKillsDescription" translate="yes" xml:space="preserve">
+          <source>(First kill as CT)</source>
+          <target state="new">(First kill as CT)</target>
+        </trans-unit>
+        <trans-unit id="EntryKillDescription" translate="yes" xml:space="preserve">
+          <source>(First kill as T)</source>
+          <target state="new">(First kill as T)</target>
+        </trans-unit>
+        <trans-unit id="EquipmentValue" translate="yes" xml:space="preserve">
+          <source>Equipment value ($)</source>
+          <target state="new">Equipment value ($)</target>
+        </trans-unit>
+        <trans-unit id="EquipmentValuePerRound" translate="yes" xml:space="preserve">
+          <source>Equipment value per round ($)</source>
+          <target state="new">Equipment value per round ($)</target>
+        </trans-unit>
+        <trans-unit id="HeaderKillerSide" translate="yes" xml:space="preserve">
+          <source>KS</source>
+          <target state="new">KS</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Killer Side</note>
+        </trans-unit>
+        <trans-unit id="HeaderRound" translate="yes" xml:space="preserve">
+          <source>Round</source>
+          <target state="new">Round</target>
+        </trans-unit>
+        <trans-unit id="HeaderRoundWon" translate="yes" xml:space="preserve">
+          <source>RW</source>
+          <target state="new">RW</target>
+        </trans-unit>
+        <trans-unit id="HeaderWon" translate="yes" xml:space="preserve">
+          <source>Won</source>
+          <target state="new">Won</target>
+        </trans-unit>
+        <trans-unit id="HealthDamages" translate="yes" xml:space="preserve">
+          <source>Health damages</source>
+          <target state="new">Health damages</target>
+        </trans-unit>
+        <trans-unit id="Loss" translate="yes" xml:space="preserve">
+          <source>Loss</source>
+          <target state="new">Loss</target>
+        </trans-unit>
+        <trans-unit id="No" translate="yes" xml:space="preserve">
+          <source>No</source>
+          <target state="new">No</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFiveLoss" translate="yes" xml:space="preserve">
+          <source>1V5 loss</source>
+          <target state="new">1V5 loss</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFiveWon" translate="yes" xml:space="preserve">
+          <source>1V5 won</source>
+          <target state="new">1V5 won</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFiveWonPercent" translate="yes" xml:space="preserve">
+          <source>1V5 won %</source>
+          <target state="new">1V5 won %</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFourLoss" translate="yes" xml:space="preserve">
+          <source>1V4 loss</source>
+          <target state="new">1V4 loss</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFourWon" translate="yes" xml:space="preserve">
+          <source>1V4 won</source>
+          <target state="new">1V4 won</target>
+        </trans-unit>
+        <trans-unit id="OneVersusFourWonPercent" translate="yes" xml:space="preserve">
+          <source>1V4 won %</source>
+          <target state="new">1V4 won %</target>
+        </trans-unit>
+        <trans-unit id="OneVersusOneLoss" translate="yes" xml:space="preserve">
+          <source>1V1 loss</source>
+          <target state="new">1V1 loss</target>
+        </trans-unit>
+        <trans-unit id="OneVersusOneWon" translate="yes" xml:space="preserve">
+          <source>1V1 won</source>
+          <target state="new">1V1 won</target>
+        </trans-unit>
+        <trans-unit id="OneVersusOneWonPercent" translate="yes" xml:space="preserve">
+          <source>1V1 won %</source>
+          <target state="new">1V1 won %</target>
+        </trans-unit>
+        <trans-unit id="OneVersusThreeLoss" translate="yes" xml:space="preserve">
+          <source>1V3 loss</source>
+          <target state="new">1V3 loss</target>
+        </trans-unit>
+        <trans-unit id="OneVersusThreeWon" translate="yes" xml:space="preserve">
+          <source>1V3 won</source>
+          <target state="new">1V3 won</target>
+        </trans-unit>
+        <trans-unit id="OneVersusThreeWonPercent" translate="yes" xml:space="preserve">
+          <source>1V3 won %</source>
+          <target state="new">1V3 won %</target>
+        </trans-unit>
+        <trans-unit id="OneVersusTwoLoss" translate="yes" xml:space="preserve">
+          <source>1V2 loss</source>
+          <target state="new">1V2 loss</target>
+        </trans-unit>
+        <trans-unit id="OneVersusTwoWon" translate="yes" xml:space="preserve">
+          <source>1V2 won</source>
+          <target state="new">1V2 won</target>
+        </trans-unit>
+        <trans-unit id="OneVersusTwoWonPercent" translate="yes" xml:space="preserve">
+          <source>1V2 won %</source>
+          <target state="new">1V2 won %</target>
+        </trans-unit>
+        <trans-unit id="Round" translate="yes" xml:space="preserve">
+          <source>Round</source>
+          <target state="new">Round</target>
+        </trans-unit>
+        <trans-unit id="RoundTypeEco" translate="yes" xml:space="preserve">
+          <source>Eco</source>
+          <target state="new">Eco</target>
+        </trans-unit>
+        <trans-unit id="RoundTypeForceBuy" translate="yes" xml:space="preserve">
+          <source>Force buy</source>
+          <target state="new">Force buy</target>
+        </trans-unit>
+        <trans-unit id="RoundTypeNormal" translate="yes" xml:space="preserve">
+          <source>Normal</source>
+          <target state="new">Normal</target>
+        </trans-unit>
+        <trans-unit id="RoundTypePistolRound" translate="yes" xml:space="preserve">
+          <source>Pistol round</source>
+          <target state="new">Pistol round</target>
+        </trans-unit>
+        <trans-unit id="RoundTypeSemiEco" translate="yes" xml:space="preserve">
+          <source>Semi-Eco</source>
+          <target state="new">Semi-Eco</target>
+        </trans-unit>
+        <trans-unit id="Total" translate="yes" xml:space="preserve">
+          <source>Total</source>
+          <target state="new">Total</target>
+        </trans-unit>
+        <trans-unit id="TotalArmorDamages" translate="yes" xml:space="preserve">
+          <source>Total armor damages</source>
+          <target state="new">Total armor damages</target>
+        </trans-unit>
+        <trans-unit id="TotalClutches" translate="yes" xml:space="preserve">
+          <source>Total clutches</source>
+          <target state="new">Total clutches</target>
+        </trans-unit>
+        <trans-unit id="TotalClutchesLoss" translate="yes" xml:space="preserve">
+          <source>Total clutches loss</source>
+          <target state="new">Total clutches loss</target>
+        </trans-unit>
+        <trans-unit id="TotalClutchesWon" translate="yes" xml:space="preserve">
+          <source>Total clutches won</source>
+          <target state="new">Total clutches won</target>
+        </trans-unit>
+        <trans-unit id="TotalDamages" translate="yes" xml:space="preserve">
+          <source>Total damages</source>
+          <target state="new">Total damages</target>
+        </trans-unit>
+        <trans-unit id="TotalHealthDamages" translate="yes" xml:space="preserve">
+          <source>Total health damages</source>
+          <target state="new">Total health damages</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusFiveLoss" translate="yes" xml:space="preserve">
+          <source>Total 1V5 loss</source>
+          <target state="new">Total 1V5 loss</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusFiveWon" translate="yes" xml:space="preserve">
+          <source>Total 1V5 won</source>
+          <target state="new">Total 1V5 won</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusFourLoss" translate="yes" xml:space="preserve">
+          <source>Total 1V4 loss</source>
+          <target state="new">Total 1V4 loss</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusFourWon" translate="yes" xml:space="preserve">
+          <source>Total 1V4 won</source>
+          <target state="new">Total 1V4 won</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusOneLoss" translate="yes" xml:space="preserve">
+          <source>Total 1V1 loss</source>
+          <target state="new">Total 1V1 loss</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusOneWon" translate="yes" xml:space="preserve">
+          <source>Total 1V1 won</source>
+          <target state="new">Total 1V1 won</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusThreeLoss" translate="yes" xml:space="preserve">
+          <source>Total 1V3 loss</source>
+          <target state="new">Total 1V3 loss</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusThreeWon" translate="yes" xml:space="preserve">
+          <source>Total 1V3 won</source>
+          <target state="new">Total 1V3 won</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusTwoLoss" translate="yes" xml:space="preserve">
+          <source>Total 1V2 loss</source>
+          <target state="new">Total 1V2 loss</target>
+        </trans-unit>
+        <trans-unit id="TotalOneVersusTwoWon" translate="yes" xml:space="preserve">
+          <source>Total 1V2 won</source>
+          <target state="new">Total 1V2 won</target>
+        </trans-unit>
+        <trans-unit id="TradeKillsDeaths" translate="yes" xml:space="preserve">
+          <source>Trade kills / deaths</source>
+          <target state="new">Trade kills / deaths</target>
+        </trans-unit>
+        <trans-unit id="TradeKillsDeathsDescription" translate="yes" xml:space="preserve">
+          <source>(Kill revenge occured maximum 4s after the initial kill)</source>
+          <target state="new">(Kill revenge occured maximum 4s after the initial kill)</target>
+        </trans-unit>
+        <trans-unit id="Value" translate="yes" xml:space="preserve">
+          <source>Value</source>
+          <target state="new">Value</target>
+        </trans-unit>
+        <trans-unit id="Won" translate="yes" xml:space="preserve">
+          <source>Won</source>
+          <target state="new">Won</target>
+        </trans-unit>
+        <trans-unit id="WonRate" translate="yes" xml:space="preserve">
+          <source>Won rate</source>
+          <target state="new">Won rate</target>
+        </trans-unit>
+        <trans-unit id="HeaderOneVersusX" translate="yes" xml:space="preserve">
+          <source>1VX</source>
+          <target state="new">1VX</target>
+        </trans-unit>
+        <trans-unit id="Headshots" translate="yes" xml:space="preserve">
+          <source>Headshots</source>
+          <target state="new">Headshots</target>
+        </trans-unit>
+        <trans-unit id="HeaderHeadshotsPercent" translate="yes" xml:space="preserve">
+          <source>HS %</source>
+          <target state="new">HS %</target>
+        </trans-unit>
+        <trans-unit id="AverageValue" translate="yes" xml:space="preserve">
+          <source>Average value</source>
+          <target state="new">Average value</target>
+        </trans-unit>
+        <trans-unit id="CrouchKillPercent" translate="yes" xml:space="preserve">
+          <source>Crouch kill %</source>
+          <target state="new">Crouch kill %</target>
+        </trans-unit>
+        <trans-unit id="CrouchKillPercentPerMatch" translate="yes" xml:space="preserve">
+          <source>Crouch kill % per match</source>
+          <target state="new">Crouch kill % per match</target>
+        </trans-unit>
+        <trans-unit id="DamagePerGameValue" translate="yes" xml:space="preserve">
+          <source>Damage per game value</source>
+          <target state="new">Damage per game value</target>
+        </trans-unit>
+        <trans-unit id="Death" translate="yes" xml:space="preserve">
+          <source>Death</source>
+          <target state="new">Death</target>
+        </trans-unit>
+        <trans-unit id="DeathAverage" translate="yes" xml:space="preserve">
+          <source>Death average</source>
+          <target state="new">Death average</target>
+        </trans-unit>
+        <trans-unit id="Draw" translate="yes" xml:space="preserve">
+          <source>Draw</source>
+          <target state="new">Draw</target>
+        </trans-unit>
+        <trans-unit id="Duels" translate="yes" xml:space="preserve">
+          <source>Duels</source>
+          <target state="new">Duels</target>
+        </trans-unit>
+        <trans-unit id="Economy" translate="yes" xml:space="preserve">
+          <source>Economy</source>
+          <target state="new">Economy</target>
+        </trans-unit>
+        <trans-unit id="General" translate="yes" xml:space="preserve">
+          <source>General</source>
+          <target state="new">General</target>
+        </trans-unit>
+        <trans-unit id="HeadshotPercentPerMatch" translate="yes" xml:space="preserve">
+          <source>Headshot % per match</source>
+          <target state="new">Headshot % per match</target>
+        </trans-unit>
+        <trans-unit id="Heavy" translate="yes" xml:space="preserve">
+          <source>Heavy</source>
+          <target state="new">Heavy</target>
+        </trans-unit>
+        <trans-unit id="Kill" translate="yes" xml:space="preserve">
+          <source>Kill</source>
+          <target state="new">Kill</target>
+        </trans-unit>
+        <trans-unit id="KillAverage" translate="yes" xml:space="preserve">
+          <source>Kill average</source>
+          <target state="new">Kill average</target>
+        </trans-unit>
+        <trans-unit id="KillVelocity" translate="yes" xml:space="preserve">
+          <source>Kill velocity</source>
+          <target state="new">Kill velocity</target>
+        </trans-unit>
+        <trans-unit id="HeaderKnifeKills" translate="yes" xml:space="preserve">
+          <source>KK</source>
+          <target state="new">KK</target>
+        </trans-unit>
+        <trans-unit id="Maps" translate="yes" xml:space="preserve">
+          <source>Maps</source>
+          <target state="new">Maps</target>
+        </trans-unit>
+        <trans-unit id="Matches" translate="yes" xml:space="preserve">
+          <source>Matches</source>
+          <target state="new">Matches</target>
+        </trans-unit>
+        <trans-unit id="MatchesStats" translate="yes" xml:space="preserve">
+          <source>Matches stats</source>
+          <target state="new">Matches stats</target>
+        </trans-unit>
+        <trans-unit id="Overall" translate="yes" xml:space="preserve">
+          <source>Overall</source>
+          <target state="new">Overall</target>
+        </trans-unit>
+        <trans-unit id="Percentage" translate="yes" xml:space="preserve">
+          <source>Percentage</source>
+          <target state="new">Percentage</target>
+        </trans-unit>
+        <trans-unit id="Pistol" translate="yes" xml:space="preserve">
+          <source>Pistol</source>
+          <target state="new">Pistol</target>
+        </trans-unit>
+        <trans-unit id="Pistoles" translate="yes" xml:space="preserve">
+          <source>Pistoles</source>
+          <target state="new">Pistoles</target>
+        </trans-unit>
+        <trans-unit id="Progression" translate="yes" xml:space="preserve">
+          <source>Progression</source>
+          <target state="new">Progression</target>
+        </trans-unit>
+        <trans-unit id="Rifle" translate="yes" xml:space="preserve">
+          <source>Rifle</source>
+          <target state="new">Rifle</target>
+        </trans-unit>
+        <trans-unit id="Rifles" translate="yes" xml:space="preserve">
+          <source>Rifles</source>
+          <target state="new">Rifles</target>
+        </trans-unit>
+        <trans-unit id="Rounds" translate="yes" xml:space="preserve">
+          <source>Rounds</source>
+          <target state="new">Rounds</target>
+        </trans-unit>
+        <trans-unit id="Smg" translate="yes" xml:space="preserve">
+          <source>SMG</source>
+          <target state="new">SMG</target>
+        </trans-unit>
+        <trans-unit id="Smgs" translate="yes" xml:space="preserve">
+          <source>SMGs</source>
+          <target state="new">SMGs</target>
+        </trans-unit>
+        <trans-unit id="Sniper" translate="yes" xml:space="preserve">
+          <source>Sniper</source>
+          <target state="new">Sniper</target>
+        </trans-unit>
+        <trans-unit id="Snipers" translate="yes" xml:space="preserve">
+          <source>Snipers</source>
+          <target state="new">Snipers</target>
+        </trans-unit>
+        <trans-unit id="TipsGraphAverageKillVelocity" translate="yes" xml:space="preserve">
+          <source>This graph displays your average velocity when you killed someone by weapon group</source>
+          <target state="new">This graph displays your average velocity when you killed someone by weapon group</target>
+        </trans-unit>
+        <trans-unit id="TipsMaximumVelocity" translate="yes" xml:space="preserve">
+          <source>Information : The maximum velocity while running is 250 unit/s</source>
+          <target state="new">Information : The maximum velocity while running is 250 unit/s</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAddPlayerToSuspectsList" translate="yes" xml:space="preserve">
+          <source>Add player to suspects list (CTRL+S)</source>
+          <target state="new">Add player to suspects list (CTRL+S)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAddPlayerToWhiteList" translate="yes" xml:space="preserve">
+          <source>Add player to whitelist (CTRL+W)</source>
+          <target state="new">Add player to whitelist (CTRL+W)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipMaps" translate="yes" xml:space="preserve">
+          <source>Maps (CTRL+M)</source>
+          <target state="new">Maps (CTRL+M)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipMatchesPlayed" translate="yes" xml:space="preserve">
+          <source>Matches played</source>
+          <target state="new">Matches played</target>
+        </trans-unit>
+        <trans-unit id="ToolTipOverall" translate="yes" xml:space="preserve">
+          <source>Overall (CTRL+O)</source>
+          <target state="new">Overall (CTRL+O)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipProgression" translate="yes" xml:space="preserve">
+          <source>Progression (CTRL+P)</source>
+          <target state="new">Progression (CTRL+P)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipRank" translate="yes" xml:space="preserve">
+          <source>Rank (CTRL+R)</source>
+          <target state="new">Rank (CTRL+R)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalAssists" translate="yes" xml:space="preserve">
+          <source>Total assists</source>
+          <target state="new">Total assists</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalBombDefused" translate="yes" xml:space="preserve">
+          <source>Total bomb defused</source>
+          <target state="new">Total bomb defused</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalBombExploded" translate="yes" xml:space="preserve">
+          <source>Total bomb exploded</source>
+          <target state="new">Total bomb exploded</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalBombPlanted" translate="yes" xml:space="preserve">
+          <source>Total bomb planted</source>
+          <target state="new">Total bomb planted</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalDamages" translate="yes" xml:space="preserve">
+          <source>Total damages</source>
+          <target state="new">Total damages</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalDeaths" translate="yes" xml:space="preserve">
+          <source>Total deaths</source>
+          <target state="new">Total deaths</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalHeadshots" translate="yes" xml:space="preserve">
+          <source>Total headshots</source>
+          <target state="new">Total headshots</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalMvp" translate="yes" xml:space="preserve">
+          <source>Total MVP</source>
+          <target state="new">Total MVP</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTotalRoundPlayed" translate="yes" xml:space="preserve">
+          <source>Total rounds played</source>
+          <target state="new">Total rounds played</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWeapons" translate="yes" xml:space="preserve">
+          <source>Weapons (CTRL+W)</source>
+          <target state="new">Weapons (CTRL+W)</target>
+        </trans-unit>
+        <trans-unit id="VelocityAverage" translate="yes" xml:space="preserve">
+          <source>Velocity average</source>
+          <target state="new">Velocity average</target>
+        </trans-unit>
+        <trans-unit id="WeaponKills" translate="yes" xml:space="preserve">
+          <source>Weapon Kills</source>
+          <target state="new">Weapon Kills</target>
+        </trans-unit>
+        <trans-unit id="Weapons" translate="yes" xml:space="preserve">
+          <source>Weapons</source>
+          <target state="new">Weapons</target>
+        </trans-unit>
+        <trans-unit id="WeeklyPercent" translate="yes" xml:space="preserve">
+          <source>Weekly %</source>
+          <target state="new">Weekly %</target>
+        </trans-unit>
+        <trans-unit id="Win" translate="yes" xml:space="preserve">
+          <source>Win</source>
+          <target state="new">Win</target>
+        </trans-unit>
+        <trans-unit id="WinPercent" translate="yes" xml:space="preserve">
+          <source>Win percentage</source>
+          <target state="new">Win percentage</target>
+        </trans-unit>
+        <trans-unit id="Cancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="new">Cancel</target>
+        </trans-unit>
+        <trans-unit id="CompetitivesWins" translate="yes" xml:space="preserve">
+          <source>competitives wins</source>
+          <target state="new">competitives wins</target>
+        </trans-unit>
+        <trans-unit id="Demo" translate="yes" xml:space="preserve">
+          <source>Demo</source>
+          <target state="new">Demo</target>
+        </trans-unit>
+        <trans-unit id="DialogDemoNotFound" translate="yes" xml:space="preserve">
+          <source>Demo not found.</source>
+          <target state="new">Demo not found.</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosHaveBeenDownloaded" translate="yes" xml:space="preserve">
+          <source>{0} demo(s) have been downloaded.</source>
+          <target state="new">{0} demo(s) have been downloaded.</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosRemovedFromCache" translate="yes" xml:space="preserve">
+          <source>{0} demo(s) deleted from data cache.</source>
+          <target state="new">{0} demo(s) deleted from data cache.</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosSentToRecycleBin" translate="yes" xml:space="preserve">
+          <source>{0} demo(s) sent to Recycle Bin.</source>
+          <target state="new">{0} demo(s) sent to Recycle Bin.</target>
+        </trans-unit>
+        <trans-unit id="DialogEnterTick" translate="yes" xml:space="preserve">
+          <source>Enter the tick.</source>
+          <target state="new">Enter the tick.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorAnalyzingDemos" translate="yes" xml:space="preserve">
+          <source>An error occured while analyzing demos:</source>
+          <target state="new">An error occured while analyzing demos:</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorGettingSuspectsData" translate="yes" xml:space="preserve">
+          <source>Error while trying to get suspects information.</source>
+          <target state="new">Error while trying to get suspects information.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileExportingDemo" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting the demo.</source>
+          <target state="new">An error occured while exporting the demo.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileExportingDemos" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting demos.</source>
+          <target state="new">An error occured while exporting demos.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRefreshingLastRank" translate="yes" xml:space="preserve">
+          <source>An error occured while refreshing last rank.</source>
+          <target state="new">An error occured while refreshing last rank.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingMatchesData" translate="yes" xml:space="preserve">
+          <source>An error occured while retrieving matches information ({0}).</source>
+          <target state="new">An error occured while retrieving matches information ({0}).</target>
+        </trans-unit>
+        <trans-unit id="DialogExportMultipleOrSingle" translate="yes" xml:space="preserve">
+          <source>Do you want to export data into a single file or in multiple files?</source>
+          <target state="new">Do you want to export data into a single file or in multiple files?</target>
+        </trans-unit>
+        <trans-unit id="DialogExportPlayer" translate="yes" xml:space="preserve">
+          <source>You are going to export data for the player "{0}".
+Do you want to continue?</source>
+          <target state="new">You are going to export data for the player "{0}".
+Do you want to continue?</target>
+        </trans-unit>
+        <trans-unit id="DialogGoToTick" translate="yes" xml:space="preserve">
+          <source>Goto Tick</source>
+          <target state="new">Goto Tick</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidTick" translate="yes" xml:space="preserve">
+          <source>Invalid tick.</source>
+          <target state="new">Invalid tick.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoNewerDemo" translate="yes" xml:space="preserve">
+          <source>No newer demo available.</source>
+          <target state="new">No newer demo available.</target>
+        </trans-unit>
+        <trans-unit id="DialogRemoveDemosFromCacheConfirmation" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to delete this demo(s) from data cache?
+This will not delete this demo(s) from your HDD.</source>
+          <target state="new">Are you sure you want to delete this demo(s) from data cache?
+This will not delete this demo(s) from your HDD.</target>
+        </trans-unit>
+        <trans-unit id="DialogRestartSteam" translate="yes" xml:space="preserve">
+          <source>You have to restart Steam.</source>
+          <target state="new">You have to restart Steam.</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectAccountFirst" translate="yes" xml:space="preserve">
+          <source>You have to select an account first.</source>
+          <target state="new">You have to select an account first.</target>
+        </trans-unit>
+        <trans-unit id="DialogSendToRecycleBinConfimation" translate="yes" xml:space="preserve">
+          <source>Are you sure you want to send this demo(s) to Recycle Bin?</source>
+          <target state="new">Are you sure you want to send this demo(s) to Recycle Bin?</target>
+        </trans-unit>
+        <trans-unit id="DialogSetAccountToFocus" translate="yes" xml:space="preserve">
+          <source>You have to set the account that you want to focus from settings to be able to use this feature.</source>
+          <target state="new">You have to set the account that you want to focus from settings to be able to use this feature.</target>
+        </trans-unit>
+        <trans-unit id="DialogSetFolderForDownload" translate="yes" xml:space="preserve">
+          <source>You have to select the folder where demos will be saved from settings.</source>
+          <target state="new">You have to select the folder where demos will be saved from settings.</target>
+        </trans-unit>
+        <trans-unit id="DialogSteamNotFound" translate="yes" xml:space="preserve">
+          <source>Steam doesn't seems to be installed.
+Unable to start the game.</source>
+          <target state="new">Steam doesn't seems to be installed.
+Unable to start the game.</target>
+        </trans-unit>
+        <trans-unit id="DialogSteamNotRunningOrNotLoggedIn" translate="yes" xml:space="preserve">
+          <source>Steam is not running or you are not connected to a Steam account.</source>
+          <target state="new">Steam is not running or you are not connected to a Steam account.</target>
+        </trans-unit>
+        <trans-unit id="Error" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="new">Error</target>
+        </trans-unit>
+        <trans-unit id="Export" translate="yes" xml:space="preserve">
+          <source>Export</source>
+          <target state="new">Export</target>
+        </trans-unit>
+        <trans-unit id="Multiple" translate="yes" xml:space="preserve">
+          <source>Multiple</source>
+          <target state="new">Multiple</target>
+        </trans-unit>
+        <trans-unit id="NotificationAddingSuspects" translate="yes" xml:space="preserve">
+          <source>Adding suspects...</source>
+          <target state="new">Adding suspects...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAnalyzingDemosForExport" translate="yes" xml:space="preserve">
+          <source>Analyzing demos for export...</source>
+          <target state="new">Analyzing demos for export...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAnalyzingForJsonExport" translate="yes" xml:space="preserve">
+          <source>Analyzing demo(s) for json export...</source>
+          <target state="new">Analyzing demo(s) for json export...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAnalyzingMultipleDemos" translate="yes" xml:space="preserve">
+          <source>Analyzing multiple demos...</source>
+          <target state="new">Analyzing multiple demos...</target>
+        </trans-unit>
+        <trans-unit id="NotificationCancelling" translate="yes" xml:space="preserve">
+          <source>Cancelling...</source>
+          <target state="new">Cancelling...</target>
+        </trans-unit>
+        <trans-unit id="NotificationCheckingNewBanned" translate="yes" xml:space="preserve">
+          <source>Checking for new banned suspects...</source>
+          <target state="new">Checking for new banned suspects...</target>
+        </trans-unit>
+        <trans-unit id="NotificationDownloadingDemo" translate="yes" xml:space="preserve">
+          <source>Downloading demo {0}/{1}...</source>
+          <target state="new">Downloading demo {0}/{1}...</target>
+        </trans-unit>
+        <trans-unit id="NotificationExportingDemo" translate="yes" xml:space="preserve">
+          <source>Exporting demo {0}...</source>
+          <target state="new">Exporting demo {0}...</target>
+        </trans-unit>
+        <trans-unit id="NotificationExtractingDemo" translate="yes" xml:space="preserve">
+          <source>Extracting demo {0}/{1}...</source>
+          <target state="new">Extracting demo {0}/{1}...</target>
+        </trans-unit>
+        <trans-unit id="NotificationInitCache" translate="yes" xml:space="preserve">
+          <source>Initializing cache...</source>
+          <target state="new">Initializing cache...</target>
+        </trans-unit>
+        <trans-unit id="NotificationInThisFolder" translate="yes" xml:space="preserve">
+          <source>in this folder</source>
+          <target state="new">in this folder</target>
+        </trans-unit>
+        <trans-unit id="NotificationLoading" translate="yes" xml:space="preserve">
+          <source>Loading...</source>
+          <target state="new">Loading...</target>
+        </trans-unit>
+        <trans-unit id="NotificationLoadingAllDemos" translate="yes" xml:space="preserve">
+          <source>Loading all demos...</source>
+          <target state="new">Loading all demos...</target>
+        </trans-unit>
+        <trans-unit id="NotificationLoadingDemos" translate="yes" xml:space="preserve">
+          <source>Loading demos...</source>
+          <target state="new">Loading demos...</target>
+        </trans-unit>
+        <trans-unit id="NotificationLoadingMoreDemos" translate="yes" xml:space="preserve">
+          <source>Loading more demos...</source>
+          <target state="new">Loading more demos...</target>
+        </trans-unit>
+        <trans-unit id="NotificationNoDemosFound" translate="yes" xml:space="preserve">
+          <source>No demos found</source>
+          <target state="new">No demos found</target>
+        </trans-unit>
+        <trans-unit id="NotificationNoDemosFoundForAccount" translate="yes" xml:space="preserve">
+          <source>No demos found for this account</source>
+          <target state="new">No demos found for this account</target>
+        </trans-unit>
+        <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
+          <source>Playdemo command copied to clipboard</source>
+          <target state="new">Playdemo command copied to clipboard</target>
+        </trans-unit>
+        <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
+          <source>Retrieving last matches information...</source>
+          <target state="new">Retrieving last matches information...</target>
+        </trans-unit>
+        <trans-unit id="NotificationSearchingLastRank" translate="yes" xml:space="preserve">
+          <source>Searching account's last rank...</source>
+          <target state="new">Searching account's last rank...</target>
+        </trans-unit>
+        <trans-unit id="NotificationSuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
+          <source>{0} suspect(s) have been banned!</source>
+          <target state="new">{0} suspect(s) have been banned!</target>
+        </trans-unit>
+        <trans-unit id="Ok" translate="yes" xml:space="preserve">
+          <source>OK</source>
+          <target state="new">OK</target>
+        </trans-unit>
+        <trans-unit id="SaveHere" translate="yes" xml:space="preserve">
+          <source>Save here</source>
+          <target state="new">Save here</target>
+        </trans-unit>
+        <trans-unit id="Single" translate="yes" xml:space="preserve">
+          <source>Single</source>
+          <target state="new">Single</target>
+        </trans-unit>
+        <trans-unit id="WinPercentage" translate="yes" xml:space="preserve">
+          <source>Win percentage</source>
+          <target state="new">Win percentage</target>
+        </trans-unit>
+        <trans-unit id="AllFemale" translate="yes" xml:space="preserve">
+          <source>All</source>
+          <target state="new">All</target>
+        </trans-unit>
+        <trans-unit id="CacheSize" translate="yes" xml:space="preserve">
+          <source>Cache size</source>
+          <target state="new">Cache size</target>
+        </trans-unit>
+        <trans-unit id="DialogAccountAlreadyInList" translate="yes" xml:space="preserve">
+          <source>This player is already in your accounts list.</source>
+          <target state="new">This player is already in your accounts list.</target>
+        </trans-unit>
+        <trans-unit id="DialogAddAnAccount" translate="yes" xml:space="preserve">
+          <source>Add an account</source>
+          <target state="new">Add an account</target>
+        </trans-unit>
+        <trans-unit id="DialogAnalyzeAllDemosConfirmation" translate="yes" xml:space="preserve">
+          <source>Do you want to analyze only the selected demos or all the demos within the selected folder?</source>
+          <target state="new">Do you want to analyze only the selected demos or all the demos within the selected folder?</target>
+        </trans-unit>
+        <trans-unit id="DialogBackupCreated" translate="yes" xml:space="preserve">
+          <source>The backup file has been created, you can re-import it from settings.</source>
+          <target state="new">The backup file has been created, you can re-import it from settings.</target>
+        </trans-unit>
+        <trans-unit id="DialogConfirmDeleteDemosData" translate="yes" xml:space="preserve">
+          <source>Demos data will be deleted! Are you sure?</source>
+          <target state="new">Demos data will be deleted! Are you sure?</target>
+        </trans-unit>
+        <trans-unit id="DialogCustomDataImported" translate="yes" xml:space="preserve">
+          <source>Custom data has been imported.</source>
+          <target state="new">Custom data has been imported.</target>
+        </trans-unit>
+        <trans-unit id="DialogDeleteVdmFilesConfirmation" translate="yes" xml:space="preserve">
+          <source>All VDM files within your folders will be deleted, are you sure?</source>
+          <target state="new">All VDM files within your folders will be deleted, are you sure?</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosDataCleared" translate="yes" xml:space="preserve">
+          <source>Demos data cleared.</source>
+          <target state="new">Demos data cleared.</target>
+        </trans-unit>
+        <trans-unit id="DialogEnableMoviemakerModeWarning" translate="yes" xml:space="preserve">
+          <source>Enabling moviemaker mode change the way the game is started (when you click on all "Watch" buttons).
+It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
+You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
+If you don't know what is this or you are not planning to make movies just click on cancel.
+If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
+          <target state="new">Enabling moviemaker mode change the way the game is started (when you click on all "Watch" buttons).
+It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
+You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
+If you don't know what is this or you are not planning to make movies just click on cancel.
+If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</target>
+        </trans-unit>
+        <trans-unit id="DialogEnterSteamId" translate="yes" xml:space="preserve">
+          <source>Enter the SteamID 64 or the Steam community URL.</source>
+          <target state="new">Enter the SteamID 64 or the Steam community URL.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorCreatingBackupFile" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting custom data.</source>
+          <target state="new">An error occured while exporting custom data.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorDeletingVdmFiles" translate="yes" xml:space="preserve">
+          <source>An error occured while deleting VDM files.</source>
+          <target state="new">An error occured while deleting VDM files.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorImportingCustomData" translate="yes" xml:space="preserve">
+          <source>An error occured while importing custom data. The backup file may be corrupt.</source>
+          <target state="new">An error occured while importing custom data. The backup file may be corrupt.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorInvalidSteamId" translate="yes" xml:space="preserve">
+          <source>Invalid SteamID 64 or Steam community URL.</source>
+          <target state="new">Invalid SteamID 64 or Steam community URL.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorRemovingAccount" translate="yes" xml:space="preserve">
+          <source>An error occured while removing the account.</source>
+          <target state="new">An error occured while removing the account.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingPlayerInformation" translate="yes" xml:space="preserve">
+          <source>Error while trying to get player information.</source>
+          <target state="new">Error while trying to get player information.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoErrorsFile" translate="yes" xml:space="preserve">
+          <source>There is no errors log file.</source>
+          <target state="new">There is no errors log file.</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectCsgoPath" translate="yes" xml:space="preserve">
+          <source>Please select the csgo.exe file location to enable it.</source>
+          <target state="new">Please select the csgo.exe file location to enable it.</target>
+        </trans-unit>
+        <trans-unit id="DialogVdmFilesDeleted" translate="yes" xml:space="preserve">
+          <source>VDM files deleted.</source>
+          <target state="new">VDM files deleted.</target>
+        </trans-unit>
+        <trans-unit id="MegaByte" translate="yes" xml:space="preserve">
+          <source>MB</source>
+          <target state="new">MB</target>
+        </trans-unit>
+        <trans-unit id="NotificationAddingAccount" translate="yes" xml:space="preserve">
+          <source>Adding account...</source>
+          <target state="new">Adding account...</target>
+        </trans-unit>
+        <trans-unit id="NotificationSyncingAccountsNickname" translate="yes" xml:space="preserve">
+          <source>Syncing accounts nickname...</source>
+          <target state="new">Syncing accounts nickname...</target>
+        </trans-unit>
+        <trans-unit id="PlayerPov" translate="yes" xml:space="preserve">
+          <source>Player POV</source>
+          <target state="new">Player POV</target>
+        </trans-unit>
+        <trans-unit id="Selection" translate="yes" xml:space="preserve">
+          <source>Selection</source>
+          <target state="new">Selection</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDisplaySettings" translate="yes" xml:space="preserve">
+          <source>Display settings</source>
+          <target state="new">Display settings</target>
+        </trans-unit>
+        <trans-unit id="DialogAnalyzeRequired" translate="yes" xml:space="preserve">
+          <source>You have to analyze this demo first.</source>
+          <target state="new">You have to analyze this demo first.</target>
+        </trans-unit>
+        <trans-unit id="DialogBoilerIncorrect" translate="yes" xml:space="preserve">
+          <source>boiler.exe is incorrect.</source>
+          <target state="new">boiler.exe is incorrect.</target>
+        </trans-unit>
+        <trans-unit id="DialogBoilerNotFound" translate="yes" xml:space="preserve">
+          <source>boiler.exe not found.</source>
+          <target state="new">boiler.exe not found.</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosMayBeTooOld" translate="yes" xml:space="preserve">
+          <source>This demos may be too old, if not please send an email with the attached demos.
+You can find more information on {0}.</source>
+          <target state="new">This demos may be too old, if not please send an email with the attached demos.
+You can find more information on {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosNotFound" translate="yes" xml:space="preserve">
+          <source>The following demos have not been found:</source>
+          <target state="new">The following demos have not been found:</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorDemoNotFound" translate="yes" xml:space="preserve">
+          <source>Demo {0} not found.</source>
+          <target state="new">Demo {0} not found.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileAnalyzingDemo" translate="yes" xml:space="preserve">
+          <source>An error occured while analyzing the demo {0}.
+The demo may be too old, if not please send an email with the attached demo.
+You can find more information on http://csgo-demos-manager.com.</source>
+          <target state="new">An error occured while analyzing the demo {0}.
+The demo may be too old, if not please send an email with the attached demo.
+You can find more information on http://csgo-demos-manager.com.</target>
+        </trans-unit>
+        <trans-unit id="DialogMapNotSupported" translate="yes" xml:space="preserve">
+          <source>This map doesn't support this feature.</source>
+          <target state="new">This map doesn't support this feature.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoConnexionDetected" translate="yes" xml:space="preserve">
+          <source>No Internet Connection</source>
+          <target state="new">No Internet Connection</target>
+        </trans-unit>
+        <trans-unit id="DialogNoConnexionNoFeature" translate="yes" xml:space="preserve">
+          <source>No Internet connection detected, you can't use this feature.</source>
+          <target state="new">No Internet connection detected, you can't use this feature.</target>
+        </trans-unit>
+        <trans-unit id="DialogPovSelection" translate="yes" xml:space="preserve">
+          <source>Which POV (camera perspective) do you want to see?</source>
+          <target state="new">Which POV (camera perspective) do you want to see?</target>
+        </trans-unit>
+        <trans-unit id="EnemyPov" translate="yes" xml:space="preserve">
+          <source>Enemy POV</source>
+          <target state="new">Enemy POV</target>
+        </trans-unit>
+        <trans-unit id="NotificationAnalyzing" translate="yes" xml:space="preserve">
+          <source>Analyzing...</source>
+          <target state="new">Analyzing...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
+          <source>Analyzing demo {0}...</source>
+          <target state="new">Analyzing demo {0}...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAnalyzingDemoForExport" translate="yes" xml:space="preserve">
+          <source>Analyzing demo {0} for export...</source>
+          <target state="new">Analyzing demo {0} for export...</target>
+        </trans-unit>
+        <trans-unit id="Pov" translate="yes" xml:space="preserve">
+          <source>POV</source>
+          <target state="new">POV</target>
+        </trans-unit>
+        <trans-unit id="Add" translate="yes" xml:space="preserve">
+          <source>Add</source>
+          <target state="new">Add</target>
+        </trans-unit>
+        <trans-unit id="AddAllPlayersSeen" translate="yes" xml:space="preserve">
+          <source>Add all players seen</source>
+          <target state="new">Add all players seen</target>
+        </trans-unit>
+        <trans-unit id="Both" translate="yes" xml:space="preserve">
+          <source>Both</source>
+          <target state="new">Both</target>
+        </trans-unit>
+        <trans-unit id="CounterTerrorists" translate="yes" xml:space="preserve">
+          <source>Counter-Terrorists</source>
+          <target state="new">Counter-Terrorists</target>
+        </trans-unit>
+        <trans-unit id="DialogNoPointsFound" translate="yes" xml:space="preserve">
+          <source>No points found. You may have to analyze this demo.</source>
+          <target state="new">No points found. You may have to analyze this demo.</target>
+        </trans-unit>
+        <trans-unit id="Equipment" translate="yes" xml:space="preserve">
+          <source>Equipement</source>
+          <target state="new">Equipement</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
+          <source>Knife Kills</source>
+          <target state="new">Knife Kills</target>
+        </trans-unit>
+        <trans-unit id="HeadshotsPercent" translate="yes" xml:space="preserve">
+          <source>Headshots %</source>
+          <target state="new">Headshots %</target>
+        </trans-unit>
+        <trans-unit id="LabelScale" translate="yes" xml:space="preserve">
+          <source>Scale</source>
+          <target state="new">Scale</target>
+        </trans-unit>
+        <trans-unit id="LabelSpeed" translate="yes" xml:space="preserve">
+          <source>Speed</source>
+          <target state="new">Speed</target>
+        </trans-unit>
+        <trans-unit id="LabelVolume" translate="yes" xml:space="preserve">
+          <source>Volume</source>
+          <target state="new">Volume</target>
+        </trans-unit>
+        <trans-unit id="LogOnlyKills" translate="yes" xml:space="preserve">
+          <source>Log only kills</source>
+          <target state="new">Log only kills</target>
+        </trans-unit>
+        <trans-unit id="NotificationGeneratingData" translate="yes" xml:space="preserve">
+          <source>Generating data...</source>
+          <target state="new">Generating data...</target>
+        </trans-unit>
+        <trans-unit id="NotificationPaused" translate="yes" xml:space="preserve">
+          <source>Paused</source>
+          <target state="new">Paused</target>
+        </trans-unit>
+        <trans-unit id="NotificationPlaying" translate="yes" xml:space="preserve">
+          <source>Playing...</source>
+          <target state="new">Playing...</target>
+        </trans-unit>
+        <trans-unit id="Pause" translate="yes" xml:space="preserve">
+          <source>Pause</source>
+          <target state="new">Pause</target>
+        </trans-unit>
+        <trans-unit id="Play" translate="yes" xml:space="preserve">
+          <source>Play</source>
+          <target state="new">Play</target>
+        </trans-unit>
+        <trans-unit id="ShowOnlyBanned" translate="yes" xml:space="preserve">
+          <source>Show only banned</source>
+          <target state="new">Show only banned</target>
+        </trans-unit>
+        <trans-unit id="ShowSuspectsDemos" translate="yes" xml:space="preserve">
+          <source>Show suspect(s) demos</source>
+          <target state="new">Show suspect(s) demos</target>
+        </trans-unit>
+        <trans-unit id="Side" translate="yes" xml:space="preserve">
+          <source>Side</source>
+          <target state="new">Side</target>
+        </trans-unit>
+        <trans-unit id="StuffsThrown" translate="yes" xml:space="preserve">
+          <source>Stuffs Thrown</source>
+          <target state="new">Stuffs Thrown</target>
+        </trans-unit>
+        <trans-unit id="Terrorists" translate="yes" xml:space="preserve">
+          <source>Terrorists</source>
+          <target state="new">Terrorists</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAddAllPlayersSeen" translate="yes" xml:space="preserve">
+          <source>Add all players seen to list (CTRL+G)</source>
+          <target state="new">Add all players seen to list (CTRL+G)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipGoToSuspectProfile" translate="yes" xml:space="preserve">
+          <source>Go to suspect profile (CTRL+P)</source>
+          <target state="new">Go to suspect profile (CTRL+P)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipMoveSuspectToWhitelist" translate="yes" xml:space="preserve">
+          <source>Move suspect(s) to whitelist (CTRL+M)</source>
+          <target state="new">Move suspect(s) to whitelist (CTRL+M)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipPause" translate="yes" xml:space="preserve">
+          <source>Pause (CTRL+O)</source>
+          <target state="new">Pause (CTRL+O)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipPlay" translate="yes" xml:space="preserve">
+          <source>Play (CTRL+P)</source>
+          <target state="new">Play (CTRL+P)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipRefreshList" translate="yes" xml:space="preserve">
+          <source>Refresh list (CTRL+R)</source>
+          <target state="new">Refresh list (CTRL+R)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipRemoveSuspect" translate="yes" xml:space="preserve">
+          <source>Remove suspect(s) (DEL)</source>
+          <target state="new">Remove suspect(s) (DEL)</target>
+        </trans-unit>
+        <trans-unit id="ToolTIpShowOnlySuspectDemos" translate="yes" xml:space="preserve">
+          <source>Show demos that contains selected suspect(s) (CTRL+F)</source>
+          <target state="new">Show demos that contains selected suspect(s) (CTRL+F)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWhitelist" translate="yes" xml:space="preserve">
+          <source>Whitelist (CTRL+W)</source>
+          <target state="new">Whitelist (CTRL+W)</target>
+        </trans-unit>
+        <trans-unit id="WatermarkSearch" translate="yes" xml:space="preserve">
+          <source>Search...</source>
+          <target state="new">Search...</target>
+        </trans-unit>
+        <trans-unit id="Whitelist" translate="yes" xml:space="preserve">
+          <source>Whitelist</source>
+          <target state="new">Whitelist</target>
+        </trans-unit>
+        <trans-unit id="DialogAddPlayerToWhitelist" translate="yes" xml:space="preserve">
+          <source>Add a player to whitelist</source>
+          <target state="new">Add a player to whitelist</target>
+        </trans-unit>
+        <trans-unit id="DialogAddSuspect" translate="yes" xml:space="preserve">
+          <source>Add a suspect</source>
+          <target state="new">Add a suspect</target>
+        </trans-unit>
+        <trans-unit id="DialogCsgoNotDetected" translate="yes" xml:space="preserve">
+          <source>It seems that CSGO is not installed on your main hard drive.
+The defaults "csgo" and "replays" can not be found. Please add folders from the settings.</source>
+          <target state="new">It seems that CSGO is not installed on your main hard drive.
+The defaults "csgo" and "replays" can not be found. Please add folders from the settings.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileDeletingPlayer" translate="yes" xml:space="preserve">
+          <source>Error while deleting player.</source>
+          <target state="new">Error while deleting player.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileDeletingSuspect" translate="yes" xml:space="preserve">
+          <source>Error while deleting suspect.</source>
+          <target state="new">Error while deleting suspect.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileExportingCustomData" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting custom data.</source>
+          <target state="new">An error occured while exporting custom data.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileMovingSuspects" translate="yes" xml:space="preserve">
+          <source>Error while moving suspect(s).</source>
+          <target state="new">Error while moving suspect(s).</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingPlayersInformation" translate="yes" xml:space="preserve">
+          <source>Error while trying to get players information.</source>
+          <target state="new">Error while trying to get players information.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingSuspectInformation" translate="yes" xml:space="preserve">
+          <source>Error while trying to get suspect information.</source>
+          <target state="new">Error while trying to get suspect information.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingSuspectsInformation" translate="yes" xml:space="preserve">
+          <source>Error while trying to get suspects information.</source>
+          <target state="new">Error while trying to get suspects information.</target>
+        </trans-unit>
+        <trans-unit id="DialogNewVersionAvailable" translate="yes" xml:space="preserve">
+          <source>A new version is available.
+Do you want to download it?</source>
+          <target state="new">A new version is available.
+Do you want to download it?</target>
+        </trans-unit>
+        <trans-unit id="DialogNoDemosPlayerFound" translate="yes" xml:space="preserve">
+          <source>No demos found for this player.
+Demos with this player might not have been analyzed.</source>
+          <target state="new">No demos found for this player.
+Demos with this player might not have been analyzed.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoDemosSuspectFound" translate="yes" xml:space="preserve">
+          <source>No demos found for this suspect.
+Demos with this suspect might not have been analyzed.</source>
+          <target state="new">No demos found for this suspect.
+Demos with this suspect might not have been analyzed.</target>
+        </trans-unit>
+        <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
+          <source>This player is in your suspect / white / account list.
+You have to remove it from your account and white list to be able to add him in your supect list.</source>
+          <target state="new">This player is in your suspect / white / account list.
+You have to remove it from your account and white list to be able to add him in your supect list.</target>
+        </trans-unit>
+        <trans-unit id="DialogUpdateRequireClearCache" translate="yes" xml:space="preserve">
+          <source>This update requires to clear custom data from cache (your suspects list will not be removed).
+Do you want to save your custom data?</source>
+          <target state="new">This update requires to clear custom data from cache (your suspects list will not be removed).
+Do you want to save your custom data?</target>
+        </trans-unit>
+        <trans-unit id="DialogPlayerNotFound" translate="yes" xml:space="preserve">
+          <source>Player not found.</source>
+          <target state="new">Player not found.</target>
+        </trans-unit>
+        <trans-unit id="HeaderAccountVisibility" translate="yes" xml:space="preserve">
+          <source>Account visibility</source>
+          <target state="new">Account visibility</target>
+        </trans-unit>
+        <trans-unit id="HeaderBanCount" translate="yes" xml:space="preserve">
+          <source>Ban Count</source>
+          <target state="new">Ban Count</target>
+        </trans-unit>
+        <trans-unit id="HeaderCommunityBanned" translate="yes" xml:space="preserve">
+          <source>Community Banned</source>
+          <target state="new">Community Banned</target>
+        </trans-unit>
+        <trans-unit id="HeaderDaysSinceLastBan" translate="yes" xml:space="preserve">
+          <source>DSLB</source>
+          <target state="new">DSLB</target>
+        </trans-unit>
+        <trans-unit id="HeaderEconomyBanned" translate="yes" xml:space="preserve">
+          <source>Economy Banned</source>
+          <target state="new">Economy Banned</target>
+        </trans-unit>
+        <trans-unit id="HeaderGameBan" translate="yes" xml:space="preserve">
+          <source>Game ban</source>
+          <target state="new">Game ban</target>
+        </trans-unit>
+        <trans-unit id="HeaderLastConnection" translate="yes" xml:space="preserve">
+          <source>Last connection</source>
+          <target state="new">Last connection</target>
+        </trans-unit>
+        <trans-unit id="HeaderNickname" translate="yes" xml:space="preserve">
+          <source>Nickname</source>
+          <target state="new">Nickname</target>
+        </trans-unit>
+        <trans-unit id="HeaderProfileSetup" translate="yes" xml:space="preserve">
+          <source>Profile setup</source>
+          <target state="new">Profile setup</target>
+        </trans-unit>
+        <trans-unit id="NotificationAddingPlayerToWhitelist" translate="yes" xml:space="preserve">
+          <source>Adding player to whitelist...</source>
+          <target state="new">Adding player to whitelist...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAddingSuspect" translate="yes" xml:space="preserve">
+          <source>Adding suspect...</source>
+          <target state="new">Adding suspect...</target>
+        </trans-unit>
+        <trans-unit id="NotificationMovingSuspectsToWhitelist" translate="yes" xml:space="preserve">
+          <source>Moving suspect(s) to whitelist...</source>
+          <target state="new">Moving suspect(s) to whitelist...</target>
+        </trans-unit>
+        <trans-unit id="NotificationPlayerAlreadyInWhitelist" translate="yes" xml:space="preserve">
+          <source>Player already in your whitelist.</source>
+          <target state="new">Player already in your whitelist.</target>
+        </trans-unit>
+        <trans-unit id="NotificationRefreshing" translate="yes" xml:space="preserve">
+          <source>Refreshing...</source>
+          <target state="new">Refreshing...</target>
+        </trans-unit>
+        <trans-unit id="NotificationSearching" translate="yes" xml:space="preserve">
+          <source>Searching...</source>
+          <target state="new">Searching...</target>
+        </trans-unit>
+        <trans-unit id="NotificationStoppingAnalyze" translate="yes" xml:space="preserve">
+          <source>Stopping analyze...</source>
+          <target state="new">Stopping analyze...</target>
+        </trans-unit>
+        <trans-unit id="Dark" translate="yes" xml:space="preserve">
+          <source>Dark</source>
+          <target state="new">Dark</target>
+        </trans-unit>
+        <trans-unit id="Day" translate="yes" xml:space="preserve">
+          <source>Day</source>
+          <target state="new">Day</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorExportingHeatmap" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting heatmap to PNG.</source>
+          <target state="new">An error occured while exporting heatmap to PNG.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileAddingPlayerToSuspectsList" translate="yes" xml:space="preserve">
+          <source>Error while adding player to suspects list.</source>
+          <target state="new">Error while adding player to suspects list.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileAddingPlayerToWhitelist" translate="yes" xml:space="preserve">
+          <source>Error while adding player to whitelist.</source>
+          <target state="new">Error while adding player to whitelist.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoDamagesDataFound" translate="yes" xml:space="preserve">
+          <source>No damages data found.
+The demo is too old or you didn't analyze it.</source>
+          <target state="new">No damages data found.
+The demo is too old or you didn't analyze it.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoDemosFoundForPlayer" translate="yes" xml:space="preserve">
+          <source>No demos found for this player.
+Demos with this player might not have been analyzed.</source>
+          <target state="new">No demos found for this player.
+Demos with this player might not have been analyzed.</target>
+        </trans-unit>
+        <trans-unit id="DialogPlayerAlreadyInAccountsList" translate="yes" xml:space="preserve">
+          <source>This player is already in your account list.</source>
+          <target state="new">This player is already in your account list.</target>
+        </trans-unit>
+        <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
+          <source>This player is already in your suspect or he is in your account list.
+You have to remove it from your account list to be able to add him in your supect list.</source>
+          <target state="new">This player is already in your suspect or he is in your account list.
+You have to remove it from your account list to be able to add him in your supect list.</target>
+        </trans-unit>
+        <trans-unit id="DialogPlayerAlreadyInWhitelist" translate="yes" xml:space="preserve">
+          <source>This player is already in your whitelist or he is in your account list.
+You have to remove it from your account list to be able to add him in your whitelist.</source>
+          <target state="new">This player is already in your whitelist or he is in your account list.
+You have to remove it from your account list to be able to add him in your whitelist.</target>
+        </trans-unit>
+        <trans-unit id="Light" translate="yes" xml:space="preserve">
+          <source>Light</source>
+          <target state="new">Light</target>
+        </trans-unit>
+        <trans-unit id="Month" translate="yes" xml:space="preserve">
+          <source>Month</source>
+          <target state="new">Month</target>
+        </trans-unit>
+        <trans-unit id="None" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="new">None</target>
+        </trans-unit>
+        <trans-unit id="NotificationAddingPlayerToAccountsList" translate="yes" xml:space="preserve">
+          <source>Adding player to the account list...</source>
+          <target state="new">Adding player to the account list...</target>
+        </trans-unit>
+        <trans-unit id="NotificationAddingPlayerToSuspectsList" translate="yes" xml:space="preserve">
+          <source>Adding player to suspects list...</source>
+          <target state="new">Adding player to suspects list...</target>
+        </trans-unit>
+        <trans-unit id="NotificationCommentSaved" translate="yes" xml:space="preserve">
+          <source>Comment saved.</source>
+          <target state="new">Comment saved.</target>
+        </trans-unit>
+        <trans-unit id="NotificationPlayedAddedToSuspectsList" translate="yes" xml:space="preserve">
+          <source>Player added to suspects list.</source>
+          <target state="new">Player added to suspects list.</target>
+        </trans-unit>
+        <trans-unit id="NotificationPlayerAddedToAccountsList" translate="yes" xml:space="preserve">
+          <source>Player added to the account list.</source>
+          <target state="new">Player added to the account list.</target>
+        </trans-unit>
+        <trans-unit id="NotificationPlayerAddedToWhitelist" translate="yes" xml:space="preserve">
+          <source>Player added to whitelist.</source>
+          <target state="new">Player added to whitelist.</target>
+        </trans-unit>
+        <trans-unit id="NotificationSearchingDemosForPlayer" translate="yes" xml:space="preserve">
+          <source>Searching demos for this player...</source>
+          <target state="new">Searching demos for this player...</target>
+        </trans-unit>
+        <trans-unit id="NotificationSetposCommandCopied" translate="yes" xml:space="preserve">
+          <source>setpos command copied to clipboard</source>
+          <target state="new">setpos command copied to clipboard</target>
+        </trans-unit>
+        <trans-unit id="ShotsFired" translate="yes" xml:space="preserve">
+          <source>Shots fired</source>
+          <target state="new">Shots fired</target>
+        </trans-unit>
+        <trans-unit id="Smokes" translate="yes" xml:space="preserve">
+          <source>Smokes</source>
+          <target state="new">Smokes</target>
+        </trans-unit>
+        <trans-unit id="CT" translate="yes" xml:space="preserve">
+          <source>CT</source>
+          <target state="new">CT</target>
+        </trans-unit>
+        <trans-unit id="Spec" translate="yes" xml:space="preserve">
+          <source>SPEC</source>
+          <target state="new">SPEC</target>
+        </trans-unit>
+        <trans-unit id="T" translate="yes" xml:space="preserve">
+          <source>T</source>
+          <target state="new">T</target>
+        </trans-unit>
+        <trans-unit id="Lost" translate="yes" xml:space="preserve">
+          <source>Lost</source>
+          <target state="new">Lost</target>
+        </trans-unit>
+        <trans-unit id="LostSurrender" translate="yes" xml:space="preserve">
+          <source>Lost (S)</source>
+          <target state="new">Lost (S)</target>
+        </trans-unit>
+        <trans-unit id="WinSurrender" translate="yes" xml:space="preserve">
+          <source>Win (S)</source>
+          <target state="new">Win (S)</target>
+        </trans-unit>
+        <trans-unit id="Away" translate="yes" xml:space="preserve">
+          <source>Away</source>
+          <target state="new">Away</target>
+        </trans-unit>
+        <trans-unit id="Busy" translate="yes" xml:space="preserve">
+          <source>Busy</source>
+          <target state="new">Busy</target>
+        </trans-unit>
+        <trans-unit id="LookingToPlay" translate="yes" xml:space="preserve">
+          <source>Looking to play</source>
+          <target state="new">Looking to play</target>
+        </trans-unit>
+        <trans-unit id="LookingToTrade" translate="yes" xml:space="preserve">
+          <source>Looking to trade</source>
+          <target state="new">Looking to trade</target>
+        </trans-unit>
+        <trans-unit id="Offline" translate="yes" xml:space="preserve">
+          <source>Offline</source>
+          <target state="new">Offline</target>
+        </trans-unit>
+        <trans-unit id="Online" translate="yes" xml:space="preserve">
+          <source>Online</source>
+          <target state="new">Online</target>
+        </trans-unit>
+        <trans-unit id="Private" translate="yes" xml:space="preserve">
+          <source>Private</source>
+          <target state="new">Private</target>
+        </trans-unit>
+        <trans-unit id="Public" translate="yes" xml:space="preserve">
+          <source>Public</source>
+          <target state="new">Public</target>
+        </trans-unit>
+        <trans-unit id="Snooze" translate="yes" xml:space="preserve">
+          <source>Snooze</source>
+          <target state="new">Snooze</target>
+        </trans-unit>
+        <trans-unit id="ToolTipAbout" translate="yes" xml:space="preserve">
+          <source>about</source>
+          <target state="new">about</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip (about x seconds)</note>
+        </trans-unit>
+        <trans-unit id="ToolTipAddToWhitelist" translate="yes" xml:space="preserve">
+          <source>Add an account to whitelist</source>
+          <target state="new">Add an account to whitelist</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBlinded" translate="yes" xml:space="preserve">
+          <source>blinded</source>
+          <target state="new">blinded</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip (player1 blinded player2)</note>
+        </trans-unit>
+        <trans-unit id="ToolTipBlindedOthersPlayersFor" translate="yes" xml:space="preserve">
+          <source>blinded others players for</source>
+          <target state="new">blinded others players for</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip</note>
+        </trans-unit>
+        <trans-unit id="ToolTipGoToPlayerProfile" translate="yes" xml:space="preserve">
+          <source>Go to player profile (CTRL+P)</source>
+          <target state="new">Go to player profile (CTRL+P)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipKilled" translate="yes" xml:space="preserve">
+          <source>killed</source>
+          <target state="new">killed</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip</note>
+        </trans-unit>
+        <trans-unit id="ToolTipOneSingleFlashFrom" translate="yes" xml:space="preserve">
+          <source>One single flash from</source>
+          <target state="new">One single flash from</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip</note>
+        </trans-unit>
+        <trans-unit id="ToolTipRemovePlayersFromWhitelist" translate="yes" xml:space="preserve">
+          <source>Remove player(s) from whitelist (DEL)</source>
+          <target state="new">Remove player(s) from whitelist (DEL)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipSeconds" translate="yes" xml:space="preserve">
+          <source>second(s)</source>
+          <target state="new">second(s)</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip</note>
+        </trans-unit>
+        <trans-unit id="ToolTipSecondsOnAverage" translate="yes" xml:space="preserve">
+          <source>second(s) on average</source>
+          <target state="new">second(s) on average</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip</note>
+        </trans-unit>
+        <trans-unit id="ToolTipShowPlayerDemos" translate="yes" xml:space="preserve">
+          <source>Show demos that contains the player (CTRL+F)</source>
+          <target state="new">Show demos that contains the player (CTRL+F)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipTimes" translate="yes" xml:space="preserve">
+          <source>time(s)</source>
+          <target state="new">time(s)</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">used for heatmap flashbang tooltip</note>
+        </trans-unit>
+        <trans-unit id="WhitelistInformation" translate="yes" xml:space="preserve">
+          <source>Players listed below will not be checked for ban when analyzing a demo.</source>
+          <target state="new">Players listed below will not be checked for ban when analyzing a demo.</target>
+        </trans-unit>
+        <trans-unit id="All" translate="yes" xml:space="preserve">
+          <source>All</source>
+          <target state="new">All</target>
+        </trans-unit>
+        <trans-unit id="AllPlayers" translate="yes" xml:space="preserve">
+          <source>All players</source>
+          <target state="new">All players</target>
+        </trans-unit>
+        <trans-unit id="AllRounds" translate="yes" xml:space="preserve">
+          <source>All rounds</source>
+          <target state="new">All rounds</target>
+        </trans-unit>
+        <trans-unit id="AmountDollar" translate="yes" xml:space="preserve">
+          <source>Amount ($)</source>
+          <target state="new">Amount ($)</target>
+        </trans-unit>
+        <trans-unit id="Chest" translate="yes" xml:space="preserve">
+          <source>Chest</source>
+          <target state="new">Chest</target>
+        </trans-unit>
+        <trans-unit id="Clear" translate="yes" xml:space="preserve">
+          <source>Clear</source>
+          <target state="new">Clear</target>
+        </trans-unit>
+        <trans-unit id="CopySetpos" translate="yes" xml:space="preserve">
+          <source>Copy setpos</source>
+          <target state="new">Copy setpos</target>
+        </trans-unit>
+        <trans-unit id="FlashedPlayers" translate="yes" xml:space="preserve">
+          <source>Flashed players</source>
+          <target state="new">Flashed players</target>
+        </trans-unit>
+        <trans-unit id="Generate" translate="yes" xml:space="preserve">
+          <source>Generate</source>
+          <target state="new">Generate</target>
+        </trans-unit>
+        <trans-unit id="Head" translate="yes" xml:space="preserve">
+          <source>Head</source>
+          <target state="new">Head</target>
+        </trans-unit>
+        <trans-unit id="HeaderFlasherFlashed" translate="yes" xml:space="preserve">
+          <source>Flasher \ Flashed</source>
+          <target state="new">Flasher \ Flashed</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Used for flashbangs heatmap chart</note>
+        </trans-unit>
+        <trans-unit id="HeaderPlayerName" translate="yes" xml:space="preserve">
+          <source>Player name</source>
+          <target state="new">Player name</target>
+        </trans-unit>
+        <trans-unit id="HeaderTeamName" translate="yes" xml:space="preserve">
+          <source>Team name</source>
+          <target state="new">Team name</target>
+        </trans-unit>
+        <trans-unit id="HeaderThrower" translate="yes" xml:space="preserve">
+          <source>Thrower</source>
+          <target state="new">Thrower</target>
+        </trans-unit>
+        <trans-unit id="KillsPerRoundFull" translate="yes" xml:space="preserve">
+          <source>KPR (Kills Per Round)</source>
+          <target state="new">KPR (Kills Per Round)</target>
+        </trans-unit>
+        <trans-unit id="LeftArm" translate="yes" xml:space="preserve">
+          <source>Left arm</source>
+          <target state="new">Left arm</target>
+        </trans-unit>
+        <trans-unit id="LeftLeg" translate="yes" xml:space="preserve">
+          <source>Left leg</source>
+          <target state="new">Left leg</target>
+        </trans-unit>
+        <trans-unit id="NotificationGenerating" translate="yes" xml:space="preserve">
+          <source>Generating...</source>
+          <target state="new">Generating...</target>
+        </trans-unit>
+        <trans-unit id="NotificationUpdating" translate="yes" xml:space="preserve">
+          <source>Updating...</source>
+          <target state="new">Updating...</target>
+        </trans-unit>
+        <trans-unit id="Opacity" translate="yes" xml:space="preserve">
+          <source>Opacity</source>
+          <target state="new">Opacity</target>
+        </trans-unit>
+        <trans-unit id="RightArm" translate="yes" xml:space="preserve">
+          <source>Right arm</source>
+          <target state="new">Right arm</target>
+        </trans-unit>
+        <trans-unit id="RightLeg" translate="yes" xml:space="preserve">
+          <source>Right leg</source>
+          <target state="new">Right leg</target>
+        </trans-unit>
+        <trans-unit id="Sides" translate="yes" xml:space="preserve">
+          <source>Sides</source>
+          <target state="new">Sides</target>
+        </trans-unit>
+        <trans-unit id="Stomach" translate="yes" xml:space="preserve">
+          <source>Stomach</source>
+          <target state="new">Stomach</target>
+        </trans-unit>
+        <trans-unit id="Team" translate="yes" xml:space="preserve">
+          <source>Team</source>
+          <target state="new">Team</target>
+        </trans-unit>
+        <trans-unit id="ToolTipCopySetposCommand" translate="yes" xml:space="preserve">
+          <source>Copy setpos command (CTRL+C)</source>
+          <target state="new">Copy setpos command (CTRL+C)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipGenerateHeatmap" translate="yes" xml:space="preserve">
+          <source>Generate heatmap (CTRL+G)</source>
+          <target state="new">Generate heatmap (CTRL+G)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipSaveAsPng" translate="yes" xml:space="preserve">
+          <source>Save as PNG (CTRL+S)</source>
+          <target state="new">Save as PNG (CTRL+S)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipUpdate" translate="yes" xml:space="preserve">
+          <source>Update (CTRL+R)</source>
+          <target state="new">Update (CTRL+R)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipWatchAllStuffsFromPlayer" translate="yes" xml:space="preserve">
+          <source>Watch all stuffs from this player (CTRL+W)</source>
+          <target state="new">Watch all stuffs from this player (CTRL+W)</target>
+        </trans-unit>
+        <trans-unit id="TotalCashEarned" translate="yes" xml:space="preserve">
+          <source>Total Cash Earned ($)</source>
+          <target state="new">Total Cash Earned ($)</target>
+        </trans-unit>
+        <trans-unit id="TotalFlashbangsThrown" translate="yes" xml:space="preserve">
+          <source>Total flashbang thrown</source>
+          <target state="new">Total flashbang thrown</target>
+        </trans-unit>
+        <trans-unit id="Update" translate="yes" xml:space="preserve">
+          <source>Update</source>
+          <target state="new">Update</target>
+        </trans-unit>
+        <trans-unit id="WatchPlayerStuffs" translate="yes" xml:space="preserve">
+          <source>Watch player stuffs</source>
+          <target state="new">Watch player stuffs</target>
+        </trans-unit>
+        <trans-unit id="DescriptionEntryHoldKills" translate="yes" xml:space="preserve">
+          <source>(First kill by a CT)</source>
+          <target state="new">(First kill by a CT)</target>
+        </trans-unit>
+        <trans-unit id="DescriptionEntryKills" translate="yes" xml:space="preserve">
+          <source>(First kill by a T)</source>
+          <target state="new">(First kill by a T)</target>
+        </trans-unit>
+        <trans-unit id="HeaderMatrixKillerVictim" translate="yes" xml:space="preserve">
+          <source>Killer \ Victim</source>
+          <target state="new">Killer \ Victim</target>
+        </trans-unit>
+        <trans-unit id="HeaderRoundLost" translate="yes" xml:space="preserve">
+          <source>RL</source>
+          <target state="new">RL</target>
+        </trans-unit>
+        <trans-unit id="Matrix" translate="yes" xml:space="preserve">
+          <source>Matrix</source>
+          <target state="new">Matrix</target>
+        </trans-unit>
+        <trans-unit id="Ratio" translate="yes" xml:space="preserve">
+          <source>Ratio</source>
+          <target state="new">Ratio</target>
+        </trans-unit>
+        <trans-unit id="Teams" translate="yes" xml:space="preserve">
+          <source>Teams</source>
+          <target state="new">Teams</target>
+        </trans-unit>
+        <trans-unit id="Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="new">Language</target>
+        </trans-unit>
+        <trans-unit id="UnexpectedErrorOccured" translate="yes" xml:space="preserve">
+          <source>An unexpected error occured. Please send the 'errors.log' file accessible from settings.
+Message Error :
+{0}</source>
+          <target state="new">An unexpected error occured. Please send the 'errors.log' file accessible from settings.
+Message Error :
+{0}</target>
+        </trans-unit>
+        <trans-unit id="Banned" translate="yes" xml:space="preserve">
+          <source>Banned</source>
+          <target state="new">Banned</target>
+        </trans-unit>
+        <trans-unit id="Contributors" translate="yes" xml:space="preserve">
+          <source>Contributors</source>
+          <target state="new">Contributors</target>
+        </trans-unit>
+        <trans-unit id="InfomationHelpTranslatingApp" translate="yes" xml:space="preserve">
+          <source>You are free to help translating the app, more information on</source>
+          <target state="new">You are free to help translating the app, more information on</target>
+        </trans-unit>
+        <trans-unit id="InformationTranslateIncomplete" translate="yes" xml:space="preserve">
+          <source>If the app is still in english after changing the language, it means that the translation has not been done or is incomplete.</source>
+          <target state="new">If the app is still in english after changing the language, it means that the translation has not been done or is incomplete.</target>
+        </trans-unit>
+        <trans-unit id="Probation" translate="yes" xml:space="preserve">
+          <source>Probation</source>
+          <target state="new">Probation</target>
+        </trans-unit>
+        <trans-unit id="Translators" translate="yes" xml:space="preserve">
+          <source>Translators</source>
+          <target state="new">Translators</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>
