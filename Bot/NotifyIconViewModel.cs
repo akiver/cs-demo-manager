@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using Core;
@@ -233,7 +234,7 @@ namespace SuspectsBot
 					IsChecked = Properties.Settings.Default.CheckDelayMinutes == 1440
 				}
 			};
-			Languages = new ObservableCollection<Language>(AppSettings.LANGUAGES);
+			Languages = new ObservableCollection<Language>(AppSettings.LANGUAGES.Where(l => l.IsEnabled));
 			foreach (Language language in Languages)
 			{
 				if (Properties.Settings.Default.Language == language.Key)

@@ -54,47 +54,56 @@ namespace Core
 			new Language
 			{
 				Key = "zh-Hans",
-				Name = "Chinese (Simplified)"
+				Name = "Chinese (Simplified)",
+				IsEnabled = false
 			},
 			new Language
 			{
 				Key = "zh-Hant",
-				Name = "Chinese (Traditional)"
+				Name = "Chinese (Traditional)",
+				IsEnabled = false
 			},
 			new Language
 			{
 				Key = "en-US",
-				Name = "English"
+				Name = "English",
+				IsEnabled = true
 			},
 			new Language
 			{
 				Key = "fr-FR",
-				Name = "French"
+				Name = "French",
+				IsEnabled = true
 			},
 			new Language
 			{
 				Key = "de-DE",
-				Name = "German"
+				Name = "German",
+				IsEnabled = false
 			},
 			new Language
 			{
 				Key = "it-IT",
-				Name = "Italian"
+				Name = "Italian",
+				IsEnabled = false
 			},
 			new Language
 			{
 				Key = "ja-JP",
-				Name = "Japanese"
+				Name = "Japanese",
+				IsEnabled = false
 			},
 			new Language
 			{
 				Key = "pt-PT",
-				Name = "Portuguese"
+				Name = "Portuguese",
+				IsEnabled = false
 			},
 			new Language
 			{
 				Key = "ru-RU",
-				Name = "Russian"
+				Name = "Russian",
+				IsEnabled = false
 			}
 		};
 

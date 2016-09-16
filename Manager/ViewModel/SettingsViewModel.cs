@@ -1728,7 +1728,7 @@ namespace Manager.ViewModel
 			SelectedTheme = Themes.First(t => t.Id == Settings.Default.Theme);
 
 			Languages = new List<ComboboxSelector>();
-			foreach (Language language in AppSettings.LANGUAGES)
+			foreach (Language language in AppSettings.LANGUAGES.Where(l => l.IsEnabled))
 			{
 				ComboboxSelector newLanguage = new ComboboxSelector(language.Key, language.Name);
 				if (language.Key == Settings.Default.Language) SelectedLanguage = newLanguage;
