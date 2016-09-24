@@ -810,16 +810,11 @@ namespace Core.Models
 
 				if (PlayersHurted.Any())
 				{
-					int roundNumber = 1;
-					foreach (PlayerHurtedEvent playerHurtedEvent in PlayersHurted.ToList().Where(
-						playerHurtedEvent => playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == SteamId))
-					{
-						total += playerHurtedEvent.HealthDamage;
-						roundNumber = playerHurtedEvent.RoundNumber;
-					}
+					total = PlayersHurted.ToList().Where(playerHurtedEvent => playerHurtedEvent != null && playerHurtedEvent.AttackerSteamId == SteamId)
+						.Aggregate(total, (current, playerHurtedEvent) => current + playerHurtedEvent.HealthDamage);
 					if (Math.Abs(total) < 0.1) return total;
-					total = Math.Round(total / roundNumber, 1);
 				}
+				if (RoundPlayedCount > 0) total = Math.Round(total / RoundPlayedCount, 1);
 
 				return total;
 			}
