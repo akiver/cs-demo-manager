@@ -75,6 +75,15 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 - Manager.es.xlf (from Manager project)
 - Bot.es.xlf (from Bot project)
 
+#### How-to translate step by step (no Git required)
+
+[Watch the how-to video](https://www.youtube.com/watch?v=HszGeLVEZ-w&feature=youtu.be)
+
+1. Install
+2. Download the zip
+3. Edit the .xlf files of your language ()
+4. Send me the .xlf files at ys.renaud@gmail.com
+
 #### How-to translate step by step
 
 **Please check issues to see if someone is already translating the app in your language and if it's not the case, create an issue to inform that you are working on it.**
