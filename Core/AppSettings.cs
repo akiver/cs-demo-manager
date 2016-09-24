@@ -135,6 +135,12 @@ namespace Core
 				Name = "Serbian",
 				IsEnabled = false
 			},
+			new Language
+			{
+				Key = "es-ES",
+				Name = "Spanish",
+				IsEnabled = false
+			},
 		};
 
 		/// <summary>
