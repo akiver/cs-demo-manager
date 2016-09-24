@@ -10,9 +10,9 @@
           <source>Bomb</source>
           <target state="new">Bomb</target>
         </trans-unit>
-        <trans-unit id="colors" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="colors" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
-          <target state="needs-review-translation">..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+          <target state="final">..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
         </trans-unit>
         <trans-unit id="Decoy" translate="yes" xml:space="preserve">
           <source>Decoy</source>
@@ -50,9 +50,9 @@
           <source>Smoke</source>
           <target state="new">Smoke</target>
         </trans-unit>
-        <trans-unit id="steam_api_key" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="steam_api_key" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
         <trans-unit id="TheBombExplodedOnBombSite" translate="yes" xml:space="preserve">
           <source>The bomb exploded on bomb site {0}</source>
