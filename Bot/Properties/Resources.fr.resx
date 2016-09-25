@@ -66,4 +66,10 @@
   <data name="Language" xml:space="preserve">
     <value>Langage</value>
   </data>
+  <data name="DownloadDemos" xml:space="preserve">
+    <value>Cliquez ici pour télécharger vos dernières démos matchmaking.</value>
+  </data>
+  <data name="SendDownloadNotification" xml:space="preserve">
+    <value>Envoyer notifications pour télécharger les démos</value>
+  </data>
 </root>
