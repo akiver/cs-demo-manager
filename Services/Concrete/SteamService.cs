@@ -22,9 +22,7 @@ namespace Services.Concrete
 	{
 		private const string PLAYERS_BAN_URL = "http://api.steampowered.com/ISteamUser/GetPlayerBans/v1/?key={0}&steamids={1}";
 		private const string PLAYERS_SUMMARIES_URL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v1/?key={0}&steamids={1}";
-		private const string STEAM_COMMUNITY_URL_PATTERN = "http://steamcommunity.com/profiles/(?<steamID>\\d*)/?";
 		private const string STEAM_RESOLVE_VANITY_URL = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key={0}&vanityurl={1}";
-		private readonly Regex _regexSteamCommunityUrl = new Regex(STEAM_COMMUNITY_URL_PATTERN);
 		private const string BOILER_EXE_NAME = "boiler.exe";
 		private const string BOILER_SHA1 = "9F4093CBF678A8D40D57C7AEF361A141DEC509BF";
 
