@@ -96,6 +96,13 @@ namespace Manager
 				handled = true;
 			}
 
+			if (msg == Win32Utils.WM_DOWNLOAD_DEMOS)
+			{
+				DownloadDemosMessage downloadDemosMessage = new DownloadDemosMessage();
+				Messenger.Default.Send(downloadDemosMessage);
+				handled = true;
+			}
+
 			return IntPtr.Zero;
 		}
 	}

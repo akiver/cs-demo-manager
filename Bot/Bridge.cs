@@ -77,5 +77,30 @@ namespace SuspectsBot
 			}
 			Win32Utils.SendWindowLongArrayMessage(_csgoDmProcess.MainWindowHandle, Win32Utils.WM_SUSPECTS, 0, steamIdLongList);
 		}
+
+		public bool DownloadDemos()
+		{
+			Process[] processes = Process.GetProcessesByName(AppSettings.PROCESS_NAME);
+			if (processes.Length > 0)
+			{
+				_csgoDmProcess = processes[0];
+				Win32Utils.SetForegroundWindow(_csgoDmProcess.MainWindowHandle);
+				Win32Utils.SendMessage(_csgoDmProcess.MainWindowHandle, Win32Utils.WM_DOWNLOAD_DEMOS, IntPtr.Zero, IntPtr.Zero);
+
+				return true;
+			}
+
+			_csgoDmProcess = new Process
+			{
+				StartInfo =
+					{
+						FileName = AppSettings.PROCESS_NAME,
+						Arguments = "/download"
+					}
+			};
+			_csgoDmProcess.Start();
+
+			return true;
+		}
 	}
 }

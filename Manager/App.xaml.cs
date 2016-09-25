@@ -103,6 +103,11 @@ namespace Manager
 					{
 						StartUpWindow = "suspects";
 					}
+					// Start demos download
+					if (e.Args[i] == "/download")
+					{
+						StartUpWindow = "download";
+					}
 					// this case is when no app instance exists and a .dem is provided as argument
 					if (e.Args[i].EndsWith(".dem") && File.Exists(e.Args[i]))
 					{

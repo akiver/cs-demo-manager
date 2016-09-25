@@ -1654,12 +1654,22 @@ namespace Manager.ViewModel.Demos
 				Messenger.Default.Register<SelectedAccountChangedMessage>(this, HandleSelectedAccountChangedMessage);
 				Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
 				Messenger.Default.Register<UpdateSuspectBannedCountMessage>(this, HandleUpdateSuspectBannedCountMessage);
+				Messenger.Default.Register<DownloadDemosMessage>(this, HandleDownloadDemosMessage);
 
 				// Notify the bot that the app is loaded
 				Win32Utils.SendMessageToBot(Win32Utils.WM_CSGO_DM_LOADED);
 
+				// Start downloading demos if the app has been started with "download" argument
+				if (App.StartUpWindow == "download")
+					DownloadDemosCommand.Execute(null);
+
 				_isMainWindowLoaded = true;
 			});
+		}
+
+		private void HandleDownloadDemosMessage(DownloadDemosMessage obj)
+		{
+			DownloadDemosCommand.Execute(null);
 		}
 
 		private void HandleUpdateSuspectBannedCountMessage(UpdateSuspectBannedCountMessage m)

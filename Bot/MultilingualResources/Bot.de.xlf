@@ -78,6 +78,14 @@
           <source>{0} suspect(s) has been banned.</source>
           <target state="new">{0} suspect(s) has been banned.</target>
         </trans-unit>
+        <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
+          <source>Click here to download your last matchmaking demos.</source>
+          <target state="new">Click here to download your last matchmaking demos.</target>
+        </trans-unit>
+        <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
+          <source>Send download demos notifications</source>
+          <target state="new">Send download demos notifications</target>
+        </trans-unit>
       </group>
     </body>
   </file>

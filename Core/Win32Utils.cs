@@ -67,6 +67,11 @@ namespace Core
 		/// </summary>
 		public const int WM_LOAD_DEMO = 0XFF30;
 
+		/// <summary>
+		/// Sent to download last demos
+		/// </summary>
+		public const int WM_DOWNLOAD_DEMOS = 0X585F;
+
 		public const int WM_CLOSE = 0x0010;
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

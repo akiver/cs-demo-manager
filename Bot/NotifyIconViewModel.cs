@@ -37,6 +37,8 @@ namespace SuspectsBot
 
 		public bool IsLaunchAtStartup => Properties.Settings.Default.LaunchAtStartup;
 
+		public bool SendDownloadNotifications => Properties.Settings.Default.SendDownloadNotifications;
+
 		public ICommand ShowAppCommand
 		{
 			get
@@ -169,6 +171,22 @@ namespace SuspectsBot
 			}
 		}
 
+		public ICommand ToggleSendDownloadNotificationsCommand
+		{
+			get
+			{
+				return new DelegateCommand
+				{
+					CommandAction = param =>
+					{
+						Properties.Settings.Default.SendDownloadNotifications = !Properties.Settings.Default.SendDownloadNotifications;
+						Properties.Settings.Default.Save();
+						OnPropertyChanged("SendDownloadNotifications");
+					}
+				};
+			}
+		}
+
 		public ICommand ChangeLanguageCommand
 		{
 			get
@@ -201,6 +219,7 @@ namespace SuspectsBot
 			_bridge = new Bridge();
 			_bannedSteamIdList = new List<string>();
 			_bot.SuspectBanned += HandleSuspectBanned;
+			_bot.CsgoClosed += HandleCsgoClosed;
 			Delays = new ObservableCollection<Delay>
 			{
 				new Delay
@@ -271,6 +290,18 @@ namespace SuspectsBot
 			bool isStarted = _bridge.ShowSuspectsList();
 			if (isStarted) _bridge.SendSteamIdList(_bannedSteamIdList);
 			App.NotifyIcon.TrayBalloonTipClicked -= NewSuspectsBalloonClicked;
+		}
+
+		private void HandleCsgoClosed(object sender, CsgoClosedEvent args)
+		{
+			App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, Properties.Resources.DownloadDemos, BalloonIcon.Info);
+			App.NotifyIcon.TrayBalloonTipClicked += CsgoClosedBalloonClicked;
+		}
+
+		private void CsgoClosedBalloonClicked(object sender, RoutedEventArgs routedEventArgs)
+		{
+			_bridge.DownloadDemos();
+			App.NotifyIcon.TrayBalloonTipClicked -= CsgoClosedBalloonClicked;
 		}
 
 		public event PropertyChangedEventHandler PropertyChanged;

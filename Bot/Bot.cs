@@ -23,6 +23,8 @@ namespace SuspectsBot
 
 		private CancellationTokenSource _cts;
 
+		private Process _csgoProcess;
+
 		public bool IsCsgoDmLoaded
 		{
 			get { return _isCsgoDmLoaded; }
@@ -40,6 +42,8 @@ namespace SuspectsBot
 		private DateTime _lastCheckDate;
 
 		public event EventHandler<SuspectBannedEventArgs> SuspectBanned;
+
+		public event EventHandler<CsgoClosedEvent> CsgoClosed;
 
 		public async Task<bool> Check()
 		{
@@ -85,6 +89,13 @@ namespace SuspectsBot
 					try
 					{
 						if (ShouldCheck()) await Check();
+						if (Properties.Settings.Default.SendDownloadNotifications && _csgoProcess == null && AppSettings.IsCsgoRunning())
+						{
+							Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
+							_csgoProcess = processes[0];
+							_csgoProcess.EnableRaisingEvents = true;
+							_csgoProcess.Exited += OnCsgoExited;
+						}
 						await Task.Delay(60000, _cts.Token);
 					}
 					catch (Exception e)
@@ -96,6 +107,12 @@ namespace SuspectsBot
 					}
 				}
 			});
+		}
+
+		private void OnCsgoExited(object sender, EventArgs eventArgs)
+		{
+			CsgoClosed?.Invoke(this, new CsgoClosedEvent());
+			_csgoProcess = null;
 		}
 
 		public void Stop()
@@ -120,7 +137,7 @@ namespace SuspectsBot
 			{
 				return false;
 			}
-			if (Process.GetProcessesByName("csgo").Length > 0)
+			if (AppSettings.IsCsgoRunning())
 			{
 				return false;
 			}
@@ -137,5 +154,9 @@ namespace SuspectsBot
 	public class SuspectBannedEventArgs : EventArgs
 	{
 		public List<string> SteamIdList { get; set; }
+	}
+
+	public class CsgoClosedEvent : EventArgs
+	{
 	}
 }

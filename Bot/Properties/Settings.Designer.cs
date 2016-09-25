@@ -58,5 +58,17 @@ namespace SuspectsBot.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SendDownloadNotifications {
+            get {
+                return ((bool)(this["SendDownloadNotifications"]));
+            }
+            set {
+                this["SendDownloadNotifications"] = value;
+            }
+        }
     }
 }

@@ -17,6 +17,7 @@ namespace Core
 		public static Version APP_VERSION = new Version("2.9.0");
 		private const string MATCH_LIST_FILENAME = "matches.dat";
 		public const string PROCESS_NAME = "CSGODemosManager";
+		public const string CSGO_PROCESS_NAME = "csgo";
 		public const string BOT_PROCESS_NAME = "CSGOSuspectsBot";
 		public const string RESOURCES_URI = "pack://application:,,,/csgodm.resources;component/";
 		public const string CORE_URI = "pack://application:,,,/csgodm.core;component/";
@@ -211,6 +212,11 @@ namespace Core
 		public static bool IsBotRunning()
 		{
 			return Process.GetProcessesByName(BOT_PROCESS_NAME).Length > 0;
+		}
+
+		public static bool IsCsgoRunning()
+		{
+			return Process.GetProcessesByName(CSGO_PROCESS_NAME).Length > 0;
 		}
 
 		/// <summary>

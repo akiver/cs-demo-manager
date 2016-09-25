@@ -126,6 +126,9 @@
   <data name="CheckNow" xml:space="preserve">
     <value>Check now</value>
   </data>
+  <data name="DownloadDemos" xml:space="preserve">
+    <value>Click here to download your last matchmaking demos.</value>
+  </data>
   <data name="Error" xml:space="preserve">
     <value>Error</value>
   </data>
@@ -143,6 +146,9 @@
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Quit</value>
+  </data>
+  <data name="SendDownloadNotification" xml:space="preserve">
+    <value>Send download demos notifications</value>
   </data>
   <data name="ShowCsgoDm" xml:space="preserve">
     <value>Show CSGO-DM</value>

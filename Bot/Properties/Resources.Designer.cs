@@ -88,6 +88,15 @@ namespace SuspectsBot.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click here to download your last matchmaking demos..
+        /// </summary>
+        public static string DownloadDemos {
+            get {
+                return ResourceManager.GetString("DownloadDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error.
         /// </summary>
         public static string Error {
@@ -138,6 +147,15 @@ namespace SuspectsBot.Properties {
         public static string Quit {
             get {
                 return ResourceManager.GetString("Quit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send download demos notifications.
+        /// </summary>
+        public static string SendDownloadNotification {
+            get {
+                return ResourceManager.GetString("SendDownloadNotification", resourceCulture);
             }
         }
         

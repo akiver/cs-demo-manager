@@ -51,6 +51,10 @@
 				</Style>
 			</MenuItem.ItemContainerStyle>
 		</MenuItem>
+		<MenuItem Header="{x:Static properties:Resources.SendDownloadNotification}"
+				  IsCheckable="True"
+				  IsChecked="{Binding SendDownloadNotifications, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+				  Command="{Binding ToggleSendDownloadNotificationsCommand}"/>
 		<Separator />
 		<MenuItem Header="{x:Static properties:Resources.Language}"
 				  ItemsSource="{Binding RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}, Path=DataContext.Languages}"

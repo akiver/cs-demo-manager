@@ -312,12 +312,19 @@ namespace Manager.ViewModel
 			Messenger.Default.Register<NavigateToSuspectsViewMessage>(this, HandleNavigateToSuspectsMessage);
 			Messenger.Default.Register<LoadSuspectListMessage>(this, HandleLoadSuspectListMessage);
 			Messenger.Default.Register<LoadDemoFromAppArgument>(this, HandleLoadFromArgumentMessage);
+			Messenger.Default.Register<DownloadDemosMessage>(this, HandleDownloadDemosMessage);
 
 			Task.Run(async () =>
 			{
 				List<string> folders = await _cacheService.GetFoldersAsync();
 				Folders = new ObservableCollection<string>(folders);
 			});
+		}
+
+		private void HandleDownloadDemosMessage(DownloadDemosMessage obj)
+		{
+			DemoListView dmoListView = new DemoListView();
+			CurrentPage.ShowPage(dmoListView);
 		}
 
 		private void HandleLoadFromArgumentMessage(LoadDemoFromAppArgument m)
