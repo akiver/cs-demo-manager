@@ -12,4 +12,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Rank0" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="Rank1" xml:space="preserve">
+    <value>白银-I</value>
+  </data>
+  <data name="Rank10" xml:space="preserve">
+    <value>黄金新星-大师级</value>
+  </data>
+  <data name="Rank11" xml:space="preserve">
+    <value>大师级守护者-I</value>
+  </data>
+  <data name="Rank12" xml:space="preserve">
+    <value>大师级守护者-II</value>
+  </data>
+  <data name="Rank13" xml:space="preserve">
+    <value>大师级守护者-精英</value>
+  </data>
+  <data name="Rank14" xml:space="preserve">
+    <value>大师级守护者-卓越</value>
+  </data>
+  <data name="Rank15" xml:space="preserve">
+    <value>传奇之鹰</value>
+  </data>
+  <data name="Rank16" xml:space="preserve">
+    <value>传奇之鹰-大师级</value>
+  </data>
+  <data name="Rank17" xml:space="preserve">
+    <value>无上之首席大师</value>
+  </data>
+  <data name="Rank18" xml:space="preserve">
+    <value>全球精英</value>
+  </data>
+  <data name="Rank2" xml:space="preserve">
+    <value>白银-II</value>
+  </data>
+  <data name="Rank3" xml:space="preserve">
+    <value>白银-III</value>
+  </data>
+  <data name="Rank4" xml:space="preserve">
+    <value>白银-IV</value>
+  </data>
+  <data name="Rank5" xml:space="preserve">
+    <value>白银-精英</value>
+  </data>
+  <data name="Rank6" xml:space="preserve">
+    <value>白银-大师级精英</value>
+  </data>
+  <data name="Rank7" xml:space="preserve">
+    <value>黄金新星-I</value>
+  </data>
+  <data name="Rank8" xml:space="preserve">
+    <value>黄金新星-II</value>
+  </data>
+  <data name="Rank9" xml:space="preserve">
+    <value>黄金新星-III</value>
+  </data>
+  <data name="StatusNone" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="StatusToWatch" xml:space="preserve">
+    <value>观看</value>
+  </data>
+  <data name="StatusWatched" xml:space="preserve">
+    <value>已观看</value>
+  </data>
 </root>

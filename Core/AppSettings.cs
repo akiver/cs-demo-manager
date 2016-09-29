@@ -62,7 +62,7 @@ namespace Core
 			{
 				Key = "zh-Hans",
 				Name = "Chinese (Simplified)",
-				IsEnabled = false
+				IsEnabled = true
 			},
 			new Language
 			{

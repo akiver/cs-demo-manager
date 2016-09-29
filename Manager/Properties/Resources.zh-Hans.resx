@@ -12,4 +12,2481 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Analyze" xml:space="preserve">
+    <value>分析</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>后退</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>详情</value>
+  </data>
+  <data name="AccountStats" xml:space="preserve">
+    <value>账号信息</value>
+  </data>
+  <data name="AddToSuspects" xml:space="preserve">
+    <value>添加到嫌疑人列表</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>浏览</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="DownloadMatchMakingDemos" xml:space="preserve">
+    <value>下载官匹DEMO</value>
+  </data>
+  <data name="ExportAsXls" xml:space="preserve">
+    <value>导出为XLS文件</value>
+  </data>
+  <data name="GotoTick" xml:space="preserve">
+    <value>前往Tick</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>刷新</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>显示全部</value>
+  </data>
+  <data name="ShowOnlyAccountDemos" xml:space="preserve">
+    <value>只显示此账户的DEMO</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>数据</value>
+  </data>
+  <data name="Suspects" xml:space="preserve">
+    <value>嫌疑人</value>
+  </data>
+  <data name="Watch" xml:space="preserve">
+    <value>观看</value>
+  </data>
+  <data name="WatchHighlights" xml:space="preserve">
+    <value>观看高潮</value>
+  </data>
+  <data name="WatchLowlights" xml:space="preserve">
+    <value>观看低谷</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="FreeSoftware" xml:space="preserve">
+    <value>CSGO Demos Manager将永远是一个免费开源软件。</value>
+  </data>
+  <data name="SourceCodeAvailable" xml:space="preserve">
+    <value>源代码可以找到在</value>
+  </data>
+  <data name="EncounteredBug" xml:space="preserve">
+    <value>如果你遇到一个问题或者有任何建议，新建一个问题在</value>
+  </data>
+  <data name="OrSendAn" xml:space="preserve">
+    <value>或者发一个</value>
+  </data>
+  <data name="WantSayThank" xml:space="preserve">
+    <value>如果你想表达感谢，请</value>
+  </data>
+  <data name="AlwaysDownload" xml:space="preserve">
+    <value>每次都从官方网站下载应用程序</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>账户</value>
+  </data>
+  <data name="AddAccount" xml:space="preserve">
+    <value>添加账户</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>添加文件夹</value>
+  </data>
+  <data name="AdditionalsParametersLabel" xml:space="preserve">
+    <value>其它参数</value>
+  </data>
+  <data name="HeaderAverageDamagesPerRound" xml:space="preserve">
+    <value>ADR </value>
+    <comment>Average Damage Per Round</comment>
+  </data>
+  <data name="AdrFull" xml:space="preserve">
+    <value>ADR (每回合平均伤害)</value>
+  </data>
+  <data name="AprFull" xml:space="preserve">
+    <value>APR (每回合助攻)</value>
+  </data>
+  <data name="Assists" xml:space="preserve">
+    <value>助攻</value>
+  </data>
+  <data name="Ban" xml:space="preserve">
+    <value>封禁</value>
+  </data>
+  <data name="BanFull" xml:space="preserve">
+    <value>封禁 (VAC / OW)</value>
+  </data>
+  <data name="HeaderBombDefused" xml:space="preserve">
+    <value>BD</value>
+    <comment>Bomb Defused</comment>
+  </data>
+  <data name="HeaderBombExploded" xml:space="preserve">
+    <value>BE</value>
+    <comment>Bomb Exploded</comment>
+  </data>
+  <data name="BombDefused" xml:space="preserve">
+    <value>炸弹拆除</value>
+  </data>
+  <data name="BombExploded" xml:space="preserve">
+    <value>炸弹爆炸</value>
+  </data>
+  <data name="BombPlanted" xml:space="preserve">
+    <value>炸弹安放</value>
+  </data>
+  <data name="HeaderBombPlanted" xml:space="preserve">
+    <value>BP</value>
+    <comment>Bomb Planted</comment>
+  </data>
+  <data name="BrowseToErrorsFile" xml:space="preserve">
+    <value>浏览错误文档目录</value>
+  </data>
+  <data name="HeaderCrouchKills" xml:space="preserve">
+    <value>CK</value>
+    <comment>Crouch Kill</comment>
+  </data>
+  <data name="ClearDemosData" xml:space="preserve">
+    <value>清除DEMO数据</value>
+  </data>
+  <data name="ClearVdmFiles" xml:space="preserve">
+    <value>清除VDM文件</value>
+  </data>
+  <data name="ClientName" xml:space="preserve">
+    <value>客户端</value>
+  </data>
+  <data name="CloseBotOnExit" xml:space="preserve">
+    <value>退出时关闭BOT</value>
+  </data>
+  <data name="Clutch" xml:space="preserve">
+    <value>灭队</value>
+  </data>
+  <data name="Clutches" xml:space="preserve">
+    <value>灭队</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>列表信息</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="CommentLabel" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="CrouchKills" xml:space="preserve">
+    <value>下蹲杀敌</value>
+  </data>
+  <data name="CsgoExePath" xml:space="preserve">
+    <value>csgo.exe路径</value>
+  </data>
+  <data name="CurrentAccountWatch" xml:space="preserve">
+    <value>当前被选定观看（高潮/低谷）的账户</value>
+  </data>
+  <data name="CurrentFolder" xml:space="preserve">
+    <value>当前文件夹</value>
+  </data>
+  <data name="DataCache" xml:space="preserve">
+    <value>缓存</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>日期</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>日期格式</value>
+  </data>
+  <data name="Deaths" xml:space="preserve">
+    <value>死亡</value>
+  </data>
+  <data name="DemoName" xml:space="preserve">
+    <value>Demo文件名</value>
+  </data>
+  <data name="Demos" xml:space="preserve">
+    <value>Demo</value>
+  </data>
+  <data name="DemoType" xml:space="preserve">
+    <value>Demo类型</value>
+  </data>
+  <data name="DestinationFolderLabel" xml:space="preserve">
+    <value>目标文件夹</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>捐赠</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>下载</value>
+  </data>
+  <data name="HeaderDeathPerRound" xml:space="preserve">
+    <value>DPR</value>
+    <comment>Death Per Round</comment>
+  </data>
+  <data name="DprFull" xml:space="preserve">
+    <value>DPR (每回合死亡)</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>持续</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="EnableMoviemakerMode" xml:space="preserve">
+    <value>打开视频作者模式</value>
+  </data>
+  <data name="EntryKills" xml:space="preserve">
+    <value>破点杀敌</value>
+  </data>
+  <data name="EquipmentValueTeam1" xml:space="preserve">
+    <value>1队装备价值</value>
+  </data>
+  <data name="EquipmentValueTeam2" xml:space="preserve">
+    <value>2队装备价值</value>
+  </data>
+  <data name="ExportCustomData" xml:space="preserve">
+    <value>导出自定义数据</value>
+  </data>
+  <data name="FilterEtc" xml:space="preserve">
+    <value>搜索...</value>
+  </data>
+  <data name="HeaderFiveKills" xml:space="preserve">
+    <value>5K</value>
+    <comment>5 Kills</comment>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>文件夹</value>
+  </data>
+  <data name="HeaderFourKills" xml:space="preserve">
+    <value>4K</value>
+    <comment>4 Kills</comment>
+  </data>
+  <data name="HeaderFramerate" xml:space="preserve">
+    <value>FR</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>从</value>
+  </data>
+  <data name="Fullscreen" xml:space="preserve">
+    <value>全屏</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>高度</value>
+  </data>
+  <data name="HeaderHltvRating" xml:space="preserve">
+    <value>HLTV</value>
+  </data>
+  <data name="Hostname" xml:space="preserve">
+    <value>服务器</value>
+  </data>
+  <data name="HeaderHeadshots" xml:space="preserve">
+    <value>HS</value>
+    <comment>HeadShot</comment>
+  </data>
+  <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
+    <value>忽略封禁产生在DEMO日期后</value>
+  </data>
+  <data name="ImportCustomData" xml:space="preserve">
+    <value>导入自定义数据</value>
+  </data>
+  <data name="HeaderJumpKills" xml:space="preserve">
+    <value>JK</value>
+    <comment>Jump Kill</comment>
+  </data>
+  <data name="JumpKills" xml:space="preserve">
+    <value>跳起杀敌</value>
+  </data>
+  <data name="HeaderKillDeathRatio" xml:space="preserve">
+    <value>K/D</value>
+    <comment>Kills Per Deaths</comment>
+  </data>
+  <data name="Kills" xml:space="preserve">
+    <value>杀敌</value>
+  </data>
+  <data name="HeaderKillsPerRound" xml:space="preserve">
+    <value>KPR</value>
+    <comment>Kill Per Round</comment>
+  </data>
+  <data name="LaunchOptions" xml:space="preserve">
+    <value>启动选项</value>
+  </data>
+  <data name="LimitStatsToSelectedFolder" xml:space="preserve">
+    <value>有限统计选定文件夹</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>地图</value>
+  </data>
+  <data name="MapName" xml:space="preserve">
+    <value>地图名</value>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>杂项</value>
+  </data>
+  <data name="MVP" xml:space="preserve">
+    <value>MVP</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="NoAnalyzableDemos" xml:space="preserve">
+    <value>没有可分析的DEMO</value>
+  </data>
+  <data name="NotAnalyzable" xml:space="preserve">
+    <value>不能分析</value>
+  </data>
+  <data name="HeaderOneKill" xml:space="preserve">
+    <value>1K</value>
+    <comment>1 Kill</comment>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>移除账户</value>
+  </data>
+  <data name="RemoveFolder" xml:space="preserve">
+    <value>移除文件夹</value>
+  </data>
+  <data name="RoundPlayed" xml:space="preserve">
+    <value>游戏回合</value>
+  </data>
+  <data name="RoundType" xml:space="preserve">
+    <value>回合类型</value>
+  </data>
+  <data name="HeaderRoundPlayed" xml:space="preserve">
+    <value>RP</value>
+    <comment>Round Played</comment>
+  </data>
+  <data name="RWS" xml:space="preserve">
+    <value>RWS</value>
+    <comment>Round Win Share</comment>
+  </data>
+  <data name="ScoreTeam1" xml:space="preserve">
+    <value>1队分数</value>
+  </data>
+  <data name="ScoreTeam2" xml:space="preserve">
+    <value>2队分数</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="ShowAllFolders" xml:space="preserve">
+    <value>显示所有文件夹</value>
+  </data>
+  <data name="ShowMoreDemos" xml:space="preserve">
+    <value>显示更多DEMO</value>
+  </data>
+  <data name="SideTrouble" xml:space="preserve">
+    <value>阵营麻烦</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>来源</value>
+  </data>
+  <data name="HeaderScoreTeam1" xml:space="preserve">
+    <value>ST1</value>
+    <comment>Score Team 1</comment>
+  </data>
+  <data name="HeaderScoreTeam2" xml:space="preserve">
+    <value>ST2</value>
+    <comment>Score Team 2</comment>
+  </data>
+  <data name="StartBotOnLaunch" xml:space="preserve">
+    <value>启动时开启BOT</value>
+  </data>
+  <data name="StartMoneyTeam1" xml:space="preserve">
+    <value>1队开局经济</value>
+  </data>
+  <data name="StartMoneyTeam2" xml:space="preserve">
+    <value>2队开局经济</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>停止</value>
+  </data>
+  <data name="SyncNicknames" xml:space="preserve">
+    <value>同步昵称</value>
+  </data>
+  <data name="HeaderTotalDamagesArmor" xml:space="preserve">
+    <value>TDA</value>
+    <comment>Total Damage Armor</comment>
+  </data>
+  <data name="HeaderTotalDamagesHealth" xml:space="preserve">
+    <value>TDH</value>
+    <comment>Total Damage Health</comment>
+  </data>
+  <data name="Team1" xml:space="preserve">
+    <value>1队</value>
+  </data>
+  <data name="Team1Name" xml:space="preserve">
+    <value>1队名</value>
+  </data>
+  <data name="Team2" xml:space="preserve">
+    <value>2队</value>
+  </data>
+  <data name="Team2Name" xml:space="preserve">
+    <value>2队名</value>
+  </data>
+  <data name="TeamTrouble" xml:space="preserve">
+    <value>队伍麻烦</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="HeaderThreeKills" xml:space="preserve">
+    <value>3K</value>
+    <comment>3 Kills</comment>
+  </data>
+  <data name="HeaderTickrate" xml:space="preserve">
+    <value>TR</value>
+  </data>
+  <data name="Ticks" xml:space="preserve">
+    <value>Ticks</value>
+  </data>
+  <data name="TkFull" xml:space="preserve">
+    <value>TK (误杀)</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>到</value>
+  </data>
+  <data name="TotalDamageArmor" xml:space="preserve">
+    <value>总计伤害防弹衣</value>
+  </data>
+  <data name="TotalDamageHealth" xml:space="preserve">
+    <value>总计伤害血量</value>
+  </data>
+  <data name="TotalKills" xml:space="preserve">
+    <value>总计杀敌</value>
+  </data>
+  <data name="ToWatch" xml:space="preserve">
+    <value>将要观看</value>
+  </data>
+  <data name="TradeDeath" xml:space="preserve">
+    <value>补枪死亡</value>
+  </data>
+  <data name="TradeKill" xml:space="preserve">
+    <value>补枪杀敌</value>
+  </data>
+  <data name="HeaderTwoKills" xml:space="preserve">
+    <value>2K</value>
+    <comment>2 Kills</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="UseAccountForWatch" xml:space="preserve">
+    <value>用这个账户观看</value>
+  </data>
+  <data name="UseCutomLowlightHighlight" xml:space="preserve">
+    <value>使用自定义 高潮/低谷 生成</value>
+  </data>
+  <data name="Watched" xml:space="preserve">
+    <value>已观看</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>宽度</value>
+  </data>
+  <data name="WinnerTeamName" xml:space="preserve">
+    <value>胜利队名</value>
+  </data>
+  <data name="WinnerSide" xml:space="preserve">
+    <value>WS</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>是</value>
+  </data>
+  <data name="ToolTipAccountStats" xml:space="preserve">
+    <value>账号信息 (CTRL+E)</value>
+  </data>
+  <data name="ToolTipAddToSuspectsList" xml:space="preserve">
+    <value>添加玩家到嫌疑人列表 (CTRL+W)</value>
+  </data>
+  <data name="ToolTipAnalyzeSelectedDemos" xml:space="preserve">
+    <value>分析选定的demo (CTRL+S)</value>
+  </data>
+  <data name="ToolTipBrowseToDemo" xml:space="preserve">
+    <value>浏览demo所在目录 (CTRL+B)</value>
+  </data>
+  <data name="ToolTipDeleteDemo" xml:space="preserve">
+    <value>删除选定demo (CTRL+D)</value>
+  </data>
+  <data name="ToolTipDemoDetails" xml:space="preserve">
+    <value>Demo详情(CTRL+D)</value>
+  </data>
+  <data name="ToolTipDownloadDemos" xml:space="preserve">
+    <value>从目前登录的Steam账户 下载最近的官匹demo (CTRL+H)</value>
+  </data>
+  <data name="ToolTipExportXls" xml:space="preserve">
+    <value>导出为XLS文件(CTRL+X)</value>
+  </data>
+  <data name="ToolTipGoToSuspectsList" xml:space="preserve">
+    <value>前往嫌疑人列表(CTRL+F)</value>
+  </data>
+  <data name="ToolTipGotoTick" xml:space="preserve">
+    <value>在指定的tick观看DEMO (CTRL+G)</value>
+  </data>
+  <data name="ToolTipRefreshDemosList" xml:space="preserve">
+    <value>刷新demo列表(CTRL+R | F5)</value>
+  </data>
+  <data name="ToolTipStop" xml:space="preserve">
+    <value>停止 (CTRL+S)</value>
+  </data>
+  <data name="ToolTipWatchDemo" xml:space="preserve">
+    <value>观看demo (CTRL+W)</value>
+  </data>
+  <data name="ToolTipWatchHighlights" xml:space="preserve">
+    <value>观看你的高潮 (CTRL+H)</value>
+  </data>
+  <data name="ToolTipWatchLowlights" xml:space="preserve">
+    <value>观看你的低谷 (CTRL+L)</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>头像</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>by</value>
+  </data>
+  <data name="CopyEmailAddress" xml:space="preserve">
+    <value>复制email地址</value>
+  </data>
+  <data name="Damages" xml:space="preserve">
+    <value>伤害</value>
+  </data>
+  <data name="Flashbangs" xml:space="preserve">
+    <value>闪光弹</value>
+  </data>
+  <data name="Heatmap" xml:space="preserve">
+    <value>热点地图</value>
+  </data>
+  <data name="LabelClientname" xml:space="preserve">
+    <value>客户端名</value>
+  </data>
+  <data name="LabelFilename" xml:space="preserve">
+    <value>文件名</value>
+  </data>
+  <data name="LabelHostname" xml:space="preserve">
+    <value>服务器</value>
+  </data>
+  <data name="LabelMostHsPercent" xml:space="preserve">
+    <value>最高爆头率 %</value>
+  </data>
+  <data name="LabelMap" xml:space="preserve">
+    <value>地图</value>
+  </data>
+  <data name="LabelMostBombPlanted" xml:space="preserve">
+    <value>最多炸弹安放</value>
+  </data>
+  <data name="LabelMostDamagingWeapon" xml:space="preserve">
+    <value>最多伤害造成武器</value>
+  </data>
+  <data name="LabelMostEntryKills" xml:space="preserve">
+    <value>最多破点击杀</value>
+  </data>
+  <data name="LabelMostKillingWeapon" xml:space="preserve">
+    <value>最多杀敌造成武器</value>
+  </data>
+  <data name="LabelPlayerStats" xml:space="preserve">
+    <value>玩家数据</value>
+  </data>
+  <data name="LabelStatus" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="LabelTickrate" xml:space="preserve">
+    <value>Tickrate</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>类型</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>总览</value>
+  </data>
+  <data name="PlayerDetails" xml:space="preserve">
+    <value>玩家详情</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>段位</value>
+  </data>
+  <data name="RoundDetails" xml:space="preserve">
+    <value>回合详情</value>
+  </data>
+  <data name="SaveComment" xml:space="preserve">
+    <value>保存注释</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>分数</value>
+  </data>
+  <data name="Stuffs" xml:space="preserve">
+    <value>道具</value>
+  </data>
+  <data name="Tick" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="ToolTipAnalyze" xml:space="preserve">
+    <value>分析 (CTRL+S)</value>
+  </data>
+  <data name="ToolTipBack" xml:space="preserve">
+    <value>后退 (CTRL+B)</value>
+  </data>
+  <data name="ToolTipDamages" xml:space="preserve">
+    <value>伤害 (CTRL+D)</value>
+  </data>
+  <data name="ToolTipFlashbangs" xml:space="preserve">
+    <value>闪光弹 (CTRL+F)</value>
+  </data>
+  <data name="ToolTipHeatmap" xml:space="preserve">
+    <value>热点地图生成 (CTRL+H)</value>
+  </data>
+  <data name="ToolTipKillsDetails" xml:space="preserve">
+    <value>杀敌详情 (CTRL+K)</value>
+  </data>
+  <data name="ToolTipNextDemo" xml:space="preserve">
+    <value>下一个demo (CTRL+RIGHT)</value>
+  </data>
+  <data name="ToolTipOverview" xml:space="preserve">
+    <value>总览 (CTRL+O)</value>
+  </data>
+  <data name="ToolTipPlayerDetails" xml:space="preserve">
+    <value>玩家详情 (CTRL+P)</value>
+  </data>
+  <data name="ToolTipPreviousDemo" xml:space="preserve">
+    <value>上一个demo (CTRL+LEFT)</value>
+  </data>
+  <data name="ToolTipRoundDetails" xml:space="preserve">
+    <value>回合详情 (CTRL+R)</value>
+  </data>
+  <data name="ToolTipStuffs" xml:space="preserve">
+    <value>道具 (CTRL+G)</value>
+  </data>
+  <data name="ToolTipWatchRound" xml:space="preserve">
+    <value>观看回合</value>
+  </data>
+  <data name="WatchRound" xml:space="preserve">
+    <value>观看回合</value>
+  </data>
+  <data name="HeaderAssists" xml:space="preserve">
+    <value>A</value>
+    <comment>Assists</comment>
+  </data>
+  <data name="HeaderAssistsPerRound" xml:space="preserve">
+    <value>APR</value>
+    <comment>Assists Per Round</comment>
+  </data>
+  <data name="HeaderAvarageDamagesPerPlayer" xml:space="preserve">
+    <value>ADP</value>
+    <comment>Average Damages Per Player</comment>
+  </data>
+  <data name="HeaderDeaths" xml:space="preserve">
+    <value>D</value>
+    <comment>Deaths</comment>
+  </data>
+  <data name="HeaderEntryKills" xml:space="preserve">
+    <value>EK</value>
+    <comment>Entry Kills</comment>
+  </data>
+  <data name="HeaderEquipementValueTeam1" xml:space="preserve">
+    <value>1队EV ($)</value>
+  </data>
+  <data name="HeaderEquipementValueTeam2" xml:space="preserve">
+    <value>2队EV ($)</value>
+  </data>
+  <data name="HeaderHsPercent" xml:space="preserve">
+    <value>HS%</value>
+    <comment>% headshot</comment>
+  </data>
+  <data name="HeaderKills" xml:space="preserve">
+    <value>K</value>
+    <comment>Kills</comment>
+  </data>
+  <data name="HeaderOverwatch" xml:space="preserve">
+    <value>OW</value>
+    <comment>Overwatch</comment>
+  </data>
+  <data name="HeaderSideTrouble" xml:space="preserve">
+    <value>ST</value>
+    <comment>Side Trouble</comment>
+  </data>
+  <data name="HeaderStartMoneyTeam1" xml:space="preserve">
+    <value>1队SM ($)</value>
+  </data>
+  <data name="HeaderStartMoneyTeam2" xml:space="preserve">
+    <value>2队SM ($)</value>
+  </data>
+  <data name="HeaderTeamKill" xml:space="preserve">
+    <value>FF</value>
+    <comment>Team Kill</comment>
+  </data>
+  <data name="HeaderTeamTrouble" xml:space="preserve">
+    <value>TT</value>
+    <comment>Team Trouble</comment>
+  </data>
+  <data name="HeaderToolTipAccountNickname" xml:space="preserve">
+    <value>账号昵称</value>
+  </data>
+  <data name="HeaderToolTipAccountProfileUrl" xml:space="preserve">
+    <value>账号资料链接</value>
+  </data>
+  <data name="HeaderToolTipAccountStatus" xml:space="preserve">
+    <value>账号状态 (离线, 在线...)</value>
+  </data>
+  <data name="HeaderToolTipAccountVacBanned" xml:space="preserve">
+    <value>账号被VAC封禁</value>
+  </data>
+  <data name="HeaderToolTipAccountVisibilityStatus" xml:space="preserve">
+    <value>账号可视状态</value>
+  </data>
+  <data name="HeaderToolTipAssisterName" xml:space="preserve">
+    <value>助攻玩家</value>
+  </data>
+  <data name="HeaderToolTipAssists" xml:space="preserve">
+    <value>助攻</value>
+  </data>
+  <data name="HeaderToolTipAssistsPerRound" xml:space="preserve">
+    <value>每回合助攻</value>
+  </data>
+  <data name="HeaderToolTipAverageDamagePerPlayer" xml:space="preserve">
+    <value>每个玩家平均伤害</value>
+  </data>
+  <data name="HeaderToolTipAverageDamagePerRound" xml:space="preserve">
+    <value>每回合平均伤害</value>
+  </data>
+  <data name="HeaderToolTipBombDefused" xml:space="preserve">
+    <value>炸弹拆除</value>
+  </data>
+  <data name="HeaderToolTipBombExploded" xml:space="preserve">
+    <value>炸弹爆炸</value>
+  </data>
+  <data name="HeaderToolTipBombPlanted" xml:space="preserve">
+    <value>炸弹安放</value>
+  </data>
+  <data name="HeaderToolTipClutchCount" xml:space="preserve">
+    <value>灭队次数</value>
+  </data>
+  <data name="HeaderToolTipClutchWonCount" xml:space="preserve">
+    <value>灭队胜利回合次数</value>
+  </data>
+  <data name="HeaderToolTipCommunityBanned" xml:space="preserve">
+    <value>社区封禁</value>
+  </data>
+  <data name="HeaderToolTipCommunityProfileConfigured" xml:space="preserve">
+    <value>社区资料配置</value>
+  </data>
+  <data name="HeaderToolTipCrouchKills" xml:space="preserve">
+    <value>下蹲杀敌</value>
+  </data>
+  <data name="HeaderToolTipDaysSinceLastBan" xml:space="preserve">
+    <value>天自从上次封禁</value>
+  </data>
+  <data name="HeaderToolTipDeaths" xml:space="preserve">
+    <value>死亡</value>
+  </data>
+  <data name="HeaderToolTipDeathsPerRound" xml:space="preserve">
+    <value>每回合死亡</value>
+  </data>
+  <data name="HeaderToolTipDemoClientname" xml:space="preserve">
+    <value>Demo客户端名</value>
+  </data>
+  <data name="HeaderToolTipDemoComment" xml:space="preserve">
+    <value>Demo注释</value>
+  </data>
+  <data name="HeaderToolTipDemoDate" xml:space="preserve">
+    <value>Demo日期</value>
+  </data>
+  <data name="HeaderToolTipDemoDuration" xml:space="preserve">
+    <value>Demo时长</value>
+  </data>
+  <data name="HeaderToolTipDemoFramerate" xml:space="preserve">
+    <value>Demo帧率</value>
+  </data>
+  <data name="HeaderToolTipDemoHostname" xml:space="preserve">
+    <value>Demo服务器</value>
+  </data>
+  <data name="HeaderToolTipDemoName" xml:space="preserve">
+    <value>Demo文件名</value>
+  </data>
+  <data name="HeaderToolTipDemoSource" xml:space="preserve">
+    <value>Demo来源</value>
+  </data>
+  <data name="HeaderToolTipDemoTicks" xml:space="preserve">
+    <value>Demo总共tick</value>
+  </data>
+  <data name="HeaderToolTipDemoType" xml:space="preserve">
+    <value>Demo类型</value>
+  </data>
+  <data name="HeaderToolTipEntryKill" xml:space="preserve">
+    <value>破点杀敌</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValue" xml:space="preserve">
+    <value>装备价值</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
+    <value>1队装备价值 ($)</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValueTeam2" xml:space="preserve">
+    <value>2队装备价值 ($)</value>
+  </data>
+  <data name="HeaderToolTipFiveKill" xml:space="preserve">
+    <value>5杀</value>
+  </data>
+  <data name="HeaderToolTipFourKill" xml:space="preserve">
+    <value>4杀</value>
+  </data>
+  <data name="HeaderToolTipHasVacOwBan" xml:space="preserve">
+    <value>VAC / OW 封禁?</value>
+  </data>
+  <data name="HeaderToolTipHasWonClutch" xml:space="preserve">
+    <value>灭队胜利?</value>
+  </data>
+  <data name="HeaderToolTipHasWonDuel" xml:space="preserve">
+    <value>单挑胜利?</value>
+  </data>
+  <data name="HeaderToolTipHeadshotPercent" xml:space="preserve">
+    <value>爆头率</value>
+  </data>
+  <data name="HeaderToolTipHeadshots" xml:space="preserve">
+    <value>爆头</value>
+  </data>
+  <data name="HeaderToolTipHits" xml:space="preserve">
+    <value>命中</value>
+  </data>
+  <data name="HeaderToolTipHltvRating" xml:space="preserve">
+    <value>HLTV评分</value>
+  </data>
+  <data name="HeaderToolTipIsOwBanned" xml:space="preserve">
+    <value>Overwatch封禁?</value>
+  </data>
+  <data name="HeaderToolTipIsVacBanned" xml:space="preserve">
+    <value>VAC封禁?</value>
+  </data>
+  <data name="HeaderToolTipJumpKills" xml:space="preserve">
+    <value>跳起杀敌</value>
+  </data>
+  <data name="HeaderToolTipKillerName" xml:space="preserve">
+    <value>杀敌玩家</value>
+  </data>
+  <data name="HeaderToolTipKillerSide" xml:space="preserve">
+    <value>杀敌玩家阵营</value>
+  </data>
+  <data name="HeaderToolTipKillPerRound" xml:space="preserve">
+    <value>每回合杀敌</value>
+  </data>
+  <data name="HeaderToolTipKills" xml:space="preserve">
+    <value>杀敌</value>
+  </data>
+  <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
+    <value>杀敌死亡比</value>
+  </data>
+  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
+    <value>上次在线</value>
+  </data>
+  <data name="HeaderToolTipMapName" xml:space="preserve">
+    <value>地图名</value>
+  </data>
+  <data name="HeaderToolTipMarketBanned" xml:space="preserve">
+    <value>市场封禁</value>
+  </data>
+  <data name="HeaderToolTipMvp" xml:space="preserve">
+    <value>最有价值玩家</value>
+  </data>
+  <data name="HeaderToolTipNumber" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="HeaderToolTipOneKill" xml:space="preserve">
+    <value>1杀</value>
+  </data>
+  <data name="HeaderToolTipOneVersusFive" xml:space="preserve">
+    <value>1V5</value>
+  </data>
+  <data name="HeaderToolTipOneVersusFour" xml:space="preserve">
+    <value>1V4</value>
+  </data>
+  <data name="HeaderToolTipOneVersusOne" xml:space="preserve">
+    <value>1V1</value>
+  </data>
+  <data name="HeaderToolTipOneVersusThree" xml:space="preserve">
+    <value>1V3</value>
+  </data>
+  <data name="HeaderToolTipOneVersusTwo" xml:space="preserve">
+    <value>1V2</value>
+  </data>
+  <data name="HeaderToolTipOneVersusX" xml:space="preserve">
+    <value>1VX</value>
+  </data>
+  <data name="HeaderToolTipOverwatchGameBanCount" xml:space="preserve">
+    <value>Overwatch封禁次数</value>
+  </data>
+  <data name="HeaderToolTipPlayerAvatar" xml:space="preserve">
+    <value>玩家头像</value>
+  </data>
+  <data name="HeaderToolTipPlayerFlashbangThrown" xml:space="preserve">
+    <value>玩家闪光弹投掷总数</value>
+  </data>
+  <data name="HeaderToolTipPlayerName" xml:space="preserve">
+    <value>玩家名</value>
+  </data>
+  <data name="HeaderToolTipPlayerRank" xml:space="preserve">
+    <value>玩家段位</value>
+  </data>
+  <data name="HeaderToolTipRatio" xml:space="preserve">
+    <value>比例</value>
+  </data>
+  <data name="HeaderToolTipResult" xml:space="preserve">
+    <value>结果</value>
+  </data>
+  <data name="HeaderToolTipRoundLost" xml:space="preserve">
+    <value>回合失败</value>
+  </data>
+  <data name="HeaderToolTipRoundNumber" xml:space="preserve">
+    <value>回合数</value>
+  </data>
+  <data name="HeaderToolTipRoundPlayed" xml:space="preserve">
+    <value>游戏回合</value>
+  </data>
+  <data name="HeaderToolTipRoundType" xml:space="preserve">
+    <value>回合类型(正常 / 经济局 / 强起 / 半经济局)</value>
+  </data>
+  <data name="HeaderToolTipRoundWon" xml:space="preserve">
+    <value>回合胜利</value>
+  </data>
+  <data name="HeaderToolTipRws" xml:space="preserve">
+    <value>ESEA RWS (Round Win Share)</value>
+  </data>
+  <data name="HeaderToolTipScore" xml:space="preserve">
+    <value>分数</value>
+  </data>
+  <data name="HeaderToolTipScoreTeam1" xml:space="preserve">
+    <value>1队分数</value>
+  </data>
+  <data name="HeaderToolTipScoreTeam2" xml:space="preserve">
+    <value>2队分数</value>
+  </data>
+  <data name="HeaderToolTipServerTickrate" xml:space="preserve">
+    <value>服务器tickrate</value>
+  </data>
+  <data name="HeaderToolTipShotsFired" xml:space="preserve">
+    <value>开火</value>
+  </data>
+  <data name="HeaderToolTipSideTrouble" xml:space="preserve">
+    <value>经济 / 强起 / 半经济阵营</value>
+  </data>
+  <data name="HeaderToolTipStartMoney" xml:space="preserve">
+    <value>开局经济</value>
+  </data>
+  <data name="HeaderToolTipStartMoneyTeam1" xml:space="preserve">
+    <value>1队开局经济 ($)</value>
+  </data>
+  <data name="HeaderToolTipStartMoneyTeam2" xml:space="preserve">
+    <value>2队开局经济 ($)</value>
+  </data>
+  <data name="HeaderToolTipTeam1Name" xml:space="preserve">
+    <value>1队名</value>
+  </data>
+  <data name="HeaderToolTipTeam2Name" xml:space="preserve">
+    <value>2队名</value>
+  </data>
+  <data name="HeaderToolTipTeamFlashbangThrown" xml:space="preserve">
+    <value>全队闪光弹投掷总数</value>
+  </data>
+  <data name="HeaderToolTipTeamKill" xml:space="preserve">
+    <value>Team Kill (误杀)</value>
+  </data>
+  <data name="HeaderToolTipTeamName" xml:space="preserve">
+    <value>队名</value>
+  </data>
+  <data name="HeaderToolTipTeamNameTrouble" xml:space="preserve">
+    <value>经济 / 强起 / 半经济队名</value>
+  </data>
+  <data name="HeaderToolTipThreeKill" xml:space="preserve">
+    <value>3杀</value>
+  </data>
+  <data name="HeaderToolTipThrowerName" xml:space="preserve">
+    <value>投掷玩家</value>
+  </data>
+  <data name="HeaderToolTipTick" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="HeaderToolTipTotalDamageArmor" xml:space="preserve">
+    <value>总计伤害防弹衣</value>
+  </data>
+  <data name="HeaderToolTipTotalDamageHealth" xml:space="preserve">
+    <value>总计伤害血量</value>
+  </data>
+  <data name="HeaderToolTipTotalEntryKill" xml:space="preserve">
+    <value>总计破点杀敌</value>
+  </data>
+  <data name="HeaderToolTipTradeDeath" xml:space="preserve">
+    <value>补枪死亡</value>
+  </data>
+  <data name="HeaderToolTipTradeKill" xml:space="preserve">
+    <value>补枪杀敌</value>
+  </data>
+  <data name="HeaderToolTipTradeKillsDeaths" xml:space="preserve">
+    <value>补枪K/D</value>
+  </data>
+  <data name="HeaderToolTipTwoKill" xml:space="preserve">
+    <value>2杀</value>
+  </data>
+  <data name="HeaderToolTipVacBanCount" xml:space="preserve">
+    <value>VAC封禁次数</value>
+  </data>
+  <data name="HeaderToolTipVictimName" xml:space="preserve">
+    <value>被杀玩家</value>
+  </data>
+  <data name="HeaderToolTipWeaponName" xml:space="preserve">
+    <value>武器名</value>
+  </data>
+  <data name="HeaderToolTipWinner" xml:space="preserve">
+    <value>胜利方</value>
+  </data>
+  <data name="HeaderToolTipWinnerTeamName" xml:space="preserve">
+    <value>胜利队伍</value>
+  </data>
+  <data name="HeaderToolTipWinStatus" xml:space="preserve">
+    <value>胜利/失败/平局</value>
+  </data>
+  <data name="HeaderToolTipWonRound" xml:space="preserve">
+    <value>回合胜利?</value>
+  </data>
+  <data name="HeaderTradeDeaths" xml:space="preserve">
+    <value>TD</value>
+    <comment>Trade Deaths</comment>
+  </data>
+  <data name="HeaderTradeKills" xml:space="preserve">
+    <value>TK</value>
+    <comment>Trade Kills</comment>
+  </data>
+  <data name="HeaderWinnerSide" xml:space="preserve">
+    <value>WS</value>
+    <comment>Winner Side</comment>
+  </data>
+  <data name="HeaderWinnerTeamName" xml:space="preserve">
+    <value>WTN</value>
+    <comment>Winner Team Name</comment>
+  </data>
+  <data name="OneVersusFive" xml:space="preserve">
+    <value>1V5</value>
+  </data>
+  <data name="OneVersusFour" xml:space="preserve">
+    <value>1V4</value>
+  </data>
+  <data name="OneVersusOne" xml:space="preserve">
+    <value>1V1</value>
+  </data>
+  <data name="OneVersusThree" xml:space="preserve">
+    <value>1V3</value>
+  </data>
+  <data name="OneVersusTwo" xml:space="preserve">
+    <value>1V2</value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="HeaderClutchs" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="AddPlayersToSuspects" xml:space="preserve">
+    <value>添加玩家到嫌疑人列表</value>
+  </data>
+  <data name="AddToAccountList" xml:space="preserve">
+    <value>添加到账户列表</value>
+  </data>
+  <data name="AddToWhitelist" xml:space="preserve">
+    <value>添加到白名单</value>
+  </data>
+  <data name="AssistsFull" xml:space="preserve">
+    <value>A (助攻)</value>
+  </data>
+  <data name="BombDefusedFull" xml:space="preserve">
+    <value>BD (炸弹拆除)</value>
+  </data>
+  <data name="BombExplodedFull" xml:space="preserve">
+    <value>BE (炸弹爆炸)</value>
+  </data>
+  <data name="BombPlantedFull" xml:space="preserve">
+    <value>BP (炸弹安放)</value>
+  </data>
+  <data name="ClutchsFull" xml:space="preserve">
+    <value>C (灭队)</value>
+  </data>
+  <data name="CopyPlayDemoCommand" xml:space="preserve">
+    <value>复制playdemo命令</value>
+  </data>
+  <data name="CrouchKillsFull" xml:space="preserve">
+    <value>CK (下蹲杀敌)</value>
+  </data>
+  <data name="DeathsFull" xml:space="preserve">
+    <value>D (死亡)</value>
+  </data>
+  <data name="EntryKillsFull" xml:space="preserve">
+    <value>EK (破点杀敌)</value>
+  </data>
+  <data name="EquipmentValueTeam1Full" xml:space="preserve">
+    <value>EVT1 (1队装备价值 ($))</value>
+  </data>
+  <data name="EquipmentValueTeam2Full" xml:space="preserve">
+    <value>EVT2 (2队装备价值  ($))</value>
+  </data>
+  <data name="EseaRwsFull" xml:space="preserve">
+    <value>RWS (ESEA Round Win Share)</value>
+  </data>
+  <data name="ExportJson" xml:space="preserve">
+    <value>导出JSON文件</value>
+  </data>
+  <data name="Framerate" xml:space="preserve">
+    <value>帧率</value>
+  </data>
+  <data name="FramerateFull" xml:space="preserve">
+    <value>FR (帧率)</value>
+  </data>
+  <data name="HeadshotsFull" xml:space="preserve">
+    <value>HS (爆头)</value>
+  </data>
+  <data name="HltvFull" xml:space="preserve">
+    <value>HLTV (HLTV评分)</value>
+  </data>
+  <data name="JumpKillsFull" xml:space="preserve">
+    <value>JK (跳起杀敌)</value>
+  </data>
+  <data name="KillsDeathsRatioFull" xml:space="preserve">
+    <value>K/D (杀敌死亡比)</value>
+  </data>
+  <data name="KillsFull" xml:space="preserve">
+    <value>K (杀敌)</value>
+  </data>
+  <data name="LastRankDetected" xml:space="preserve">
+    <value>最后检测到段位</value>
+  </data>
+  <data name="MoveToWhitelist" xml:space="preserve">
+    <value>移动到白名单</value>
+  </data>
+  <data name="MvpFull" xml:space="preserve">
+    <value>MVP (最有价值玩家)</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>资料</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="RemoveFromCache" xml:space="preserve">
+    <value>从缓存移除</value>
+  </data>
+  <data name="RoundPlayedFull" xml:space="preserve">
+    <value>RP (游戏回合)</value>
+  </data>
+  <data name="ScoreTeam1Full" xml:space="preserve">
+    <value>ST1 (1队分数)</value>
+  </data>
+  <data name="ScoreTeam2Full" xml:space="preserve">
+    <value>ST2 (2队分数)</value>
+  </data>
+  <data name="ShowPlayerDemos" xml:space="preserve">
+    <value>显示玩家demo</value>
+  </data>
+  <data name="ShowSuspectDemos" xml:space="preserve">
+    <value>显示嫌疑人demo</value>
+  </data>
+  <data name="SideTroubleFull" xml:space="preserve">
+    <value>ST (阵营麻烦)</value>
+  </data>
+  <data name="StartMoneyTeam1Full" xml:space="preserve">
+    <value>SMT1 (1队开局经济 ($))</value>
+  </data>
+  <data name="StartMoneyTeam2Full" xml:space="preserve">
+    <value>SMT2 (2队开局经济  ($))</value>
+  </data>
+  <data name="TeamNameTroubleFull" xml:space="preserve">
+    <value>TNT (队伍麻烦)</value>
+  </data>
+  <data name="Tickrate" xml:space="preserve">
+    <value>Tickrate</value>
+  </data>
+  <data name="TickrateFull" xml:space="preserve">
+    <value>TR (Tickrate)</value>
+  </data>
+  <data name="TotalDamagesArmorFull" xml:space="preserve">
+    <value>TDA (总计伤害防弹衣)</value>
+  </data>
+  <data name="TotalDamagesHealthFull" xml:space="preserve">
+    <value>TDH (总计伤害血量)</value>
+  </data>
+  <data name="TradeDeathsFull" xml:space="preserve">
+    <value>TD (补枪死亡)</value>
+  </data>
+  <data name="TradeKillsFull" xml:space="preserve">
+    <value>TK (补枪杀敌)</value>
+  </data>
+  <data name="WatchPlayer" xml:space="preserve">
+    <value>观看玩家</value>
+  </data>
+  <data name="WinnerSideFull" xml:space="preserve">
+    <value>WS (获胜方)</value>
+  </data>
+  <data name="WinnerTeamNameFull" xml:space="preserve">
+    <value>WTN (获胜队名)</value>
+  </data>
+  <data name="Decoys" xml:space="preserve">
+    <value>诱饵弹</value>
+  </data>
+  <data name="EndReasonBombDefused" xml:space="preserve">
+    <value>炸弹拆除</value>
+  </data>
+  <data name="EndReasonBombExploded" xml:space="preserve">
+    <value>炸弹爆炸</value>
+  </data>
+  <data name="EndReasonCtSurrender" xml:space="preserve">
+    <value>反恐精英投降</value>
+  </data>
+  <data name="EndReasonCtWin" xml:space="preserve">
+    <value>反恐精英获胜</value>
+  </data>
+  <data name="EndReasonTargetSaved" xml:space="preserve">
+    <value>时间结束</value>
+  </data>
+  <data name="EndReasonTsurrender" xml:space="preserve">
+    <value>恐怖分子投降</value>
+  </data>
+  <data name="EndReasonTwin" xml:space="preserve">
+    <value>恐怖分子获胜</value>
+  </data>
+  <data name="EndReasonUnknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="HeaderAssister" xml:space="preserve">
+    <value>助攻玩家</value>
+  </data>
+  <data name="HeaderEquipmentValuePlayer" xml:space="preserve">
+    <value>EV ($)</value>
+  </data>
+  <data name="HeaderHits" xml:space="preserve">
+    <value>命中</value>
+  </data>
+  <data name="HeaderKiller" xml:space="preserve">
+    <value>杀敌玩家</value>
+  </data>
+  <data name="HeaderShots" xml:space="preserve">
+    <value>开枪</value>
+  </data>
+  <data name="HeaderStartMoneyPlayer" xml:space="preserve">
+    <value>SM ($)</value>
+  </data>
+  <data name="HeaderVictim" xml:space="preserve">
+    <value>被杀玩家</value>
+  </data>
+  <data name="HeaderWeapon" xml:space="preserve">
+    <value>武器</value>
+  </data>
+  <data name="HeGrenades" xml:space="preserve">
+    <value>手雷</value>
+  </data>
+  <data name="Incendiaries" xml:space="preserve">
+    <value>燃烧弹-CT</value>
+  </data>
+  <data name="LabelWinnerSide" xml:space="preserve">
+    <value>获胜方</value>
+  </data>
+  <data name="Molotovs" xml:space="preserve">
+    <value>燃烧弹-T</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>玩家</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>原因</value>
+  </data>
+  <data name="Smoke" xml:space="preserve">
+    <value>烟雾弹</value>
+  </data>
+  <data name="StartMoney" xml:space="preserve">
+    <value>开局经济</value>
+  </data>
+  <data name="Timeline" xml:space="preserve">
+    <value>时间线</value>
+  </data>
+  <data name="ToolTipNextRound" xml:space="preserve">
+    <value>下一回合</value>
+  </data>
+  <data name="ToolTipPreviousRound" xml:space="preserve">
+    <value>上一回合</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>未知</value>
+  </data>
+  <data name="ArmorDamages" xml:space="preserve">
+    <value>防弹衣伤害</value>
+  </data>
+  <data name="Attempts" xml:space="preserve">
+    <value>试图</value>
+  </data>
+  <data name="ClutchesLoss" xml:space="preserve">
+    <value>灭队失败</value>
+  </data>
+  <data name="ClutchesWon" xml:space="preserve">
+    <value>灭队胜利</value>
+  </data>
+  <data name="ClutchesWonPercent" xml:space="preserve">
+    <value>灭队胜利 %</value>
+  </data>
+  <data name="DamagesPerRound" xml:space="preserve">
+    <value>每回合伤害</value>
+  </data>
+  <data name="EntryHoldKills" xml:space="preserve">
+    <value>守点杀敌</value>
+  </data>
+  <data name="EntryHoldKillsDescription" xml:space="preserve">
+    <value>(作为CT首杀)</value>
+  </data>
+  <data name="EntryKillDescription" xml:space="preserve">
+    <value>(作为T首杀)</value>
+  </data>
+  <data name="EquipmentValue" xml:space="preserve">
+    <value>装备价值 ($)</value>
+  </data>
+  <data name="EquipmentValuePerRound" xml:space="preserve">
+    <value>每回合装备价值 ($)</value>
+  </data>
+  <data name="HeaderKillerSide" xml:space="preserve">
+    <value>KS</value>
+    <comment>Killer Side</comment>
+  </data>
+  <data name="HeaderRound" xml:space="preserve">
+    <value>回合</value>
+  </data>
+  <data name="HeaderRoundWon" xml:space="preserve">
+    <value>RW</value>
+  </data>
+  <data name="HeaderWon" xml:space="preserve">
+    <value>胜利</value>
+  </data>
+  <data name="HealthDamages" xml:space="preserve">
+    <value>伤害血量</value>
+  </data>
+  <data name="Loss" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="OneVersusFiveLoss" xml:space="preserve">
+    <value>1V5失败</value>
+  </data>
+  <data name="OneVersusFiveWon" xml:space="preserve">
+    <value>1V5胜利</value>
+  </data>
+  <data name="OneVersusFiveWonPercent" xml:space="preserve">
+    <value>1V5胜利 %</value>
+  </data>
+  <data name="OneVersusFourLoss" xml:space="preserve">
+    <value>1V4失败</value>
+  </data>
+  <data name="OneVersusFourWon" xml:space="preserve">
+    <value>1V4胜利</value>
+  </data>
+  <data name="OneVersusFourWonPercent" xml:space="preserve">
+    <value>1V4胜利 %</value>
+  </data>
+  <data name="OneVersusOneLoss" xml:space="preserve">
+    <value>1V1失败</value>
+  </data>
+  <data name="OneVersusOneWon" xml:space="preserve">
+    <value>1V1胜利</value>
+  </data>
+  <data name="OneVersusOneWonPercent" xml:space="preserve">
+    <value>1V1胜利 %</value>
+  </data>
+  <data name="OneVersusThreeLoss" xml:space="preserve">
+    <value>1V3失败</value>
+  </data>
+  <data name="OneVersusThreeWon" xml:space="preserve">
+    <value>1V3胜利</value>
+  </data>
+  <data name="OneVersusThreeWonPercent" xml:space="preserve">
+    <value>1V3胜利 %</value>
+  </data>
+  <data name="OneVersusTwoLoss" xml:space="preserve">
+    <value>1V2失败</value>
+  </data>
+  <data name="OneVersusTwoWon" xml:space="preserve">
+    <value>1V2胜利</value>
+  </data>
+  <data name="OneVersusTwoWonPercent" xml:space="preserve">
+    <value>1V2胜利 %</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>回合</value>
+  </data>
+  <data name="RoundTypeEco" xml:space="preserve">
+    <value>经济</value>
+  </data>
+  <data name="RoundTypeForceBuy" xml:space="preserve">
+    <value>强起</value>
+  </data>
+  <data name="RoundTypeNormal" xml:space="preserve">
+    <value>正常</value>
+  </data>
+  <data name="RoundTypePistolRound" xml:space="preserve">
+    <value>手枪</value>
+  </data>
+  <data name="RoundTypeSemiEco" xml:space="preserve">
+    <value>半经济</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>总计</value>
+  </data>
+  <data name="TotalArmorDamages" xml:space="preserve">
+    <value>总计防弹衣伤害</value>
+  </data>
+  <data name="TotalClutches" xml:space="preserve">
+    <value>总计灭队</value>
+  </data>
+  <data name="TotalClutchesLoss" xml:space="preserve">
+    <value>总计灭队失败</value>
+  </data>
+  <data name="TotalClutchesWon" xml:space="preserve">
+    <value>总计灭队成功</value>
+  </data>
+  <data name="TotalDamages" xml:space="preserve">
+    <value>总计伤害</value>
+  </data>
+  <data name="TotalHealthDamages" xml:space="preserve">
+    <value>总计血量伤害</value>
+  </data>
+  <data name="TotalOneVersusFiveLoss" xml:space="preserve">
+    <value>总计1V5失败</value>
+  </data>
+  <data name="TotalOneVersusFiveWon" xml:space="preserve">
+    <value>总计1V5胜利</value>
+  </data>
+  <data name="TotalOneVersusFourLoss" xml:space="preserve">
+    <value>总计1V4失败</value>
+  </data>
+  <data name="TotalOneVersusFourWon" xml:space="preserve">
+    <value>总计1V4胜利</value>
+  </data>
+  <data name="TotalOneVersusOneLoss" xml:space="preserve">
+    <value>总计1V1失败</value>
+  </data>
+  <data name="TotalOneVersusOneWon" xml:space="preserve">
+    <value>总计1V1胜利</value>
+  </data>
+  <data name="TotalOneVersusThreeLoss" xml:space="preserve">
+    <value>总计1V3失败</value>
+  </data>
+  <data name="TotalOneVersusThreeWon" xml:space="preserve">
+    <value>总计1V3胜利</value>
+  </data>
+  <data name="TotalOneVersusTwoLoss" xml:space="preserve">
+    <value>总计1V2失败</value>
+  </data>
+  <data name="TotalOneVersusTwoWon" xml:space="preserve">
+    <value>总计1V2胜利</value>
+  </data>
+  <data name="TradeKillsDeaths" xml:space="preserve">
+    <value>补枪k/d</value>
+  </data>
+  <data name="TradeKillsDeathsDescription" xml:space="preserve">
+    <value>(复仇杀敌最多4秒发生在首杀后)</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>价值</value>
+  </data>
+  <data name="Won" xml:space="preserve">
+    <value>胜利</value>
+  </data>
+  <data name="WonRate" xml:space="preserve">
+    <value>胜率</value>
+  </data>
+  <data name="HeaderOneVersusX" xml:space="preserve">
+    <value>1VX</value>
+  </data>
+  <data name="Headshots" xml:space="preserve">
+    <value>爆头</value>
+  </data>
+  <data name="HeaderHeadshotsPercent" xml:space="preserve">
+    <value>爆头率 %</value>
+  </data>
+  <data name="AverageValue" xml:space="preserve">
+    <value>平均价值</value>
+  </data>
+  <data name="CrouchKillPercent" xml:space="preserve">
+    <value>蹲下杀敌 %</value>
+  </data>
+  <data name="CrouchKillPercentPerMatch" xml:space="preserve">
+    <value>每场比赛蹲下杀敌 %</value>
+  </data>
+  <data name="DamagePerGameValue" xml:space="preserve">
+    <value>每场比赛伤害价值</value>
+  </data>
+  <data name="Death" xml:space="preserve">
+    <value>死亡</value>
+  </data>
+  <data name="DeathAverage" xml:space="preserve">
+    <value>平均死亡</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>平局</value>
+  </data>
+  <data name="Duels" xml:space="preserve">
+    <value>单挑</value>
+  </data>
+  <data name="Economy" xml:space="preserve">
+    <value>经济</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>综述</value>
+  </data>
+  <data name="HeadshotPercentPerMatch" xml:space="preserve">
+    <value>每场比赛爆头率 %</value>
+  </data>
+  <data name="Heavy" xml:space="preserve">
+    <value>重型武器</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>杀敌</value>
+  </data>
+  <data name="KillAverage" xml:space="preserve">
+    <value>平均杀敌</value>
+  </data>
+  <data name="KillVelocity" xml:space="preserve">
+    <value>杀敌速率</value>
+  </data>
+  <data name="HeaderKnifeKills" xml:space="preserve">
+    <value>KK</value>
+  </data>
+  <data name="Maps" xml:space="preserve">
+    <value>地图</value>
+  </data>
+  <data name="Matches" xml:space="preserve">
+    <value>比赛</value>
+  </data>
+  <data name="MatchesStats" xml:space="preserve">
+    <value>比赛统计</value>
+  </data>
+  <data name="Overall" xml:space="preserve">
+    <value>总览</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>百分比</value>
+  </data>
+  <data name="Pistol" xml:space="preserve">
+    <value>手枪</value>
+  </data>
+  <data name="Pistoles" xml:space="preserve">
+    <value>手枪</value>
+  </data>
+  <data name="Progression" xml:space="preserve">
+    <value>进度</value>
+  </data>
+  <data name="Rifle" xml:space="preserve">
+    <value>步枪</value>
+  </data>
+  <data name="Rifles" xml:space="preserve">
+    <value>步枪</value>
+  </data>
+  <data name="Rounds" xml:space="preserve">
+    <value>回合</value>
+  </data>
+  <data name="Smg" xml:space="preserve">
+    <value>冲锋枪</value>
+  </data>
+  <data name="Smgs" xml:space="preserve">
+    <value>冲锋枪</value>
+  </data>
+  <data name="Sniper" xml:space="preserve">
+    <value>狙击枪</value>
+  </data>
+  <data name="Snipers" xml:space="preserve">
+    <value>狙击枪</value>
+  </data>
+  <data name="TipsGraphAverageKillVelocity" xml:space="preserve">
+    <value>这个图表显示了你的平均杀敌速率当你组武器击杀某人</value>
+  </data>
+  <data name="TipsMaximumVelocity" xml:space="preserve">
+    <value>信息: 跑动时最大速率250 unit/s</value>
+  </data>
+  <data name="ToolTipAddPlayerToSuspectsList" xml:space="preserve">
+    <value>添加玩家到嫌疑人列表 (CTRL+S)</value>
+  </data>
+  <data name="ToolTipAddPlayerToWhiteList" xml:space="preserve">
+    <value>添加玩家到白名单 (CTRL+W)</value>
+  </data>
+  <data name="ToolTipMaps" xml:space="preserve">
+    <value>地图 (CTRL+M)</value>
+  </data>
+  <data name="ToolTipMatchesPlayed" xml:space="preserve">
+    <value>游戏比赛</value>
+  </data>
+  <data name="ToolTipOverall" xml:space="preserve">
+    <value>总计 (CTRL+O)</value>
+  </data>
+  <data name="ToolTipProgression" xml:space="preserve">
+    <value>进度 (CTRL+P)</value>
+  </data>
+  <data name="ToolTipRank" xml:space="preserve">
+    <value>段位 (CTRL+R)</value>
+  </data>
+  <data name="ToolTipTotalAssists" xml:space="preserve">
+    <value>总计助攻</value>
+  </data>
+  <data name="ToolTipTotalBombDefused" xml:space="preserve">
+    <value>总计炸弹拆除</value>
+  </data>
+  <data name="ToolTipTotalBombExploded" xml:space="preserve">
+    <value>总计炸弹爆炸</value>
+  </data>
+  <data name="ToolTipTotalBombPlanted" xml:space="preserve">
+    <value>总计炸弹安放</value>
+  </data>
+  <data name="ToolTipTotalDamages" xml:space="preserve">
+    <value>总计伤害</value>
+  </data>
+  <data name="ToolTipTotalDeaths" xml:space="preserve">
+    <value>总计死亡</value>
+  </data>
+  <data name="ToolTipTotalHeadshots" xml:space="preserve">
+    <value>总计爆头</value>
+  </data>
+  <data name="ToolTipTotalMvp" xml:space="preserve">
+    <value>总计MVP</value>
+  </data>
+  <data name="ToolTipTotalRoundPlayed" xml:space="preserve">
+    <value>总计游戏回合</value>
+  </data>
+  <data name="ToolTipWeapons" xml:space="preserve">
+    <value>武器 (CTRL+W)</value>
+  </data>
+  <data name="VelocityAverage" xml:space="preserve">
+    <value>平均速率</value>
+  </data>
+  <data name="WeaponKills" xml:space="preserve">
+    <value>武器杀敌</value>
+  </data>
+  <data name="Weapons" xml:space="preserve">
+    <value>武器</value>
+  </data>
+  <data name="WeeklyPercent" xml:space="preserve">
+    <value>每星期 %</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>胜利</value>
+  </data>
+  <data name="WinPercent" xml:space="preserve">
+    <value>胜率</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="CompetitivesWins" xml:space="preserve">
+    <value>竞技胜利</value>
+  </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Demo</value>
+  </data>
+  <data name="DialogDemoNotFound" xml:space="preserve">
+    <value>没有找到Demo</value>
+  </data>
+  <data name="DialogDemosHaveBeenDownloaded" xml:space="preserve">
+    <value>{0} demo被下载</value>
+  </data>
+  <data name="DialogDemosRemovedFromCache" xml:space="preserve">
+    <value>{0} demo从数据缓存删除</value>
+  </data>
+  <data name="DialogDemosSentToRecycleBin" xml:space="preserve">
+    <value>{0} demo送到回收站</value>
+  </data>
+  <data name="DialogEnterTick" xml:space="preserve">
+    <value>输入tick</value>
+  </data>
+  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
+    <value>产生了一个错误-当分析demo时</value>
+  </data>
+  <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
+    <value>错误-当试图获得嫌疑人信息</value>
+  </data>
+  <data name="DialogErrorWhileExportingDemo" xml:space="preserve">
+    <value>产生了一个错误-当导出demo时</value>
+  </data>
+  <data name="DialogErrorWhileExportingDemos" xml:space="preserve">
+    <value>产生了一个错误-当导出demo时</value>
+  </data>
+  <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
+    <value>产生了一个错误-当刷新最近段位时</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
+    <value>产生了一个错误-当检索比赛信息 ({0})</value>
+  </data>
+  <data name="DialogExportMultipleOrSingle" xml:space="preserve">
+    <value>导出数据到单一文件或者多个文件?</value>
+  </data>
+  <data name="DialogExportPlayer" xml:space="preserve">
+    <value>为玩家 "{0}" 导出数据
+是否继续?</value>
+  </data>
+  <data name="DialogGoToTick" xml:space="preserve">
+    <value>到Tick</value>
+  </data>
+  <data name="DialogInvalidTick" xml:space="preserve">
+    <value>不正确的tick.</value>
+  </data>
+  <data name="DialogNoNewerDemo" xml:space="preserve">
+    <value>没有新的可用demo</value>
+  </data>
+  <data name="DialogRemoveDemosFromCacheConfirmation" xml:space="preserve">
+    <value>是否从缓存删除这个demo?
+这将不会从你的HDD删除这个demo</value>
+  </data>
+  <data name="DialogRestartSteam" xml:space="preserve">
+    <value>你必须重启Steam</value>
+  </data>
+  <data name="DialogSelectAccountFirst" xml:space="preserve">
+    <value>你必须先选择账户</value>
+  </data>
+  <data name="DialogSendToRecycleBinConfimation" xml:space="preserve">
+    <value>你确定是否要将这个demo送到回收站?</value>
+  </data>
+  <data name="DialogSetAccountToFocus" xml:space="preserve">
+    <value>你必须设置想关注的账户以使用这个功能</value>
+  </data>
+  <data name="DialogSetFolderForDownload" xml:space="preserve">
+    <value>你必须选定从设置保存的demo文件夹</value>
+  </data>
+  <data name="DialogSteamNotFound" xml:space="preserve">
+    <value>Steam未安装
+无法开始游戏</value>
+  </data>
+  <data name="DialogSteamNotRunningOrNotLoggedIn" xml:space="preserve">
+    <value>Steam未运行或未登录</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>多次</value>
+  </data>
+  <data name="NotificationAddingSuspects" xml:space="preserve">
+    <value>正在添加嫌疑人...</value>
+  </data>
+  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
+    <value>正在分析demo为了导出...</value>
+  </data>
+  <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
+    <value>正在分析demo为了导出json文件...</value>
+  </data>
+  <data name="NotificationAnalyzingMultipleDemos" xml:space="preserve">
+    <value>正在分析多个demo...</value>
+  </data>
+  <data name="NotificationCancelling" xml:space="preserve">
+    <value>正在取消...</value>
+  </data>
+  <data name="NotificationCheckingNewBanned" xml:space="preserve">
+    <value>正在检查新的嫌疑人封禁...</value>
+  </data>
+  <data name="NotificationDownloadingDemo" xml:space="preserve">
+    <value>正在下载demo {0}/{1}...</value>
+  </data>
+  <data name="NotificationExportingDemo" xml:space="preserve">
+    <value>正在导出demo {0}...</value>
+  </data>
+  <data name="NotificationExtractingDemo" xml:space="preserve">
+    <value>正在提取 demo {0}/{1}...</value>
+  </data>
+  <data name="NotificationInitCache" xml:space="preserve">
+    <value>正在初始化缓存...</value>
+  </data>
+  <data name="NotificationInThisFolder" xml:space="preserve">
+    <value>在这个文件夹</value>
+  </data>
+  <data name="NotificationLoading" xml:space="preserve">
+    <value>正在加载...</value>
+  </data>
+  <data name="NotificationLoadingAllDemos" xml:space="preserve">
+    <value>正在加载全部demo...</value>
+  </data>
+  <data name="NotificationLoadingDemos" xml:space="preserve">
+    <value>正在加载demo...</value>
+  </data>
+  <data name="NotificationLoadingMoreDemos" xml:space="preserve">
+    <value>正在加载更多demo...</value>
+  </data>
+  <data name="NotificationNoDemosFound" xml:space="preserve">
+    <value>未找到demo</value>
+  </data>
+  <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
+    <value>未找到该账户的demo</value>
+  </data>
+  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
+    <value>Playdemo命令已复制到剪贴板</value>
+  </data>
+  <data name="NotificationRetrievingMatchesData" xml:space="preserve">
+    <value>正在获取最近比赛信息...</value>
+  </data>
+  <data name="NotificationSearchingLastRank" xml:space="preserve">
+    <value>正在搜索账号的最后段位...</value>
+  </data>
+  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
+    <value>{0} 嫌疑人已被封禁!</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>确定</value>
+  </data>
+  <data name="SaveHere" xml:space="preserve">
+    <value>在这里保存</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>单人</value>
+  </data>
+  <data name="WinPercentage" xml:space="preserve">
+    <value>胜率</value>
+  </data>
+  <data name="AllFemale" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="CacheSize" xml:space="preserve">
+    <value>缓存大小</value>
+  </data>
+  <data name="DialogAccountAlreadyInList" xml:space="preserve">
+    <value>该玩家已在你的帐户列表</value>
+  </data>
+  <data name="DialogAddAnAccount" xml:space="preserve">
+    <value>添加一个账户</value>
+  </data>
+  <data name="DialogAnalyzeAllDemosConfirmation" xml:space="preserve">
+    <value>只分析被选中的demo或者分析全部在选中文件夹的demo?</value>
+  </data>
+  <data name="DialogBackupCreated" xml:space="preserve">
+    <value>备份文件已建立, 你可以从设置重新导入备份</value>
+  </data>
+  <data name="DialogConfirmDeleteDemosData" xml:space="preserve">
+    <value>Demo数据将被删除! 确定?</value>
+  </data>
+  <data name="DialogCustomDataImported" xml:space="preserve">
+    <value>自定义数据已被导入</value>
+  </data>
+  <data name="DialogDeleteVdmFilesConfirmation" xml:space="preserve">
+    <value>所有VDM文件将被删除, 确定?</value>
+  </data>
+  <data name="DialogDemosDataCleared" xml:space="preserve">
+    <value>Demo数据已清除</value>
+  </data>
+  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
+    <value>开启视频作者模式将改变游戏启动方式(当你点击所有"观看"按钮)
+这将使用HLACE工具
+只有当你知道你在干什么或者做视频时才打开它
+如果你不了解这个或者不打算做视频，点击取消
+如果你开启了它，游戏每次启动时会伴随"-insucre"启动项，这意味着你将保护你不被VAC封禁并且不能进入VAC保护的服务器</value>
+  </data>
+  <data name="DialogEnterSteamId" xml:space="preserve">
+    <value>输入Steam64位ID或Steam社区连接</value>
+  </data>
+  <data name="DialogErrorCreatingBackupFile" xml:space="preserve">
+    <value>产生了一个错误-当导出自定义数据时</value>
+  </data>
+  <data name="DialogErrorDeletingVdmFiles" xml:space="preserve">
+    <value>产生了一个错误-当检测VDM文件时</value>
+  </data>
+  <data name="DialogErrorImportingCustomData" xml:space="preserve">
+    <value>产生了一个错误-当导入自定义数据时 备份文件可能损坏</value>
+  </data>
+  <data name="DialogErrorInvalidSteamId" xml:space="preserve">
+    <value>不正确的Steam64位ID或Steam社区连接</value>
+  </data>
+  <data name="DialogErrorRemovingAccount" xml:space="preserve">
+    <value>产生了一个错误-当试图移除账户时</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingPlayerInformation" xml:space="preserve">
+    <value>错误-当试图获取玩家信息时</value>
+  </data>
+  <data name="DialogNoErrorsFile" xml:space="preserve">
+    <value>没有错误记录文件</value>
+  </data>
+  <data name="DialogSelectCsgoPath" xml:space="preserve">
+    <value>请选择csgo.exe文件目录来开启它</value>
+  </data>
+  <data name="DialogVdmFilesDeleted" xml:space="preserve">
+    <value>VDM文件发现.</value>
+  </data>
+  <data name="MegaByte" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="NotificationAddingAccount" xml:space="preserve">
+    <value>正在添加账户...</value>
+  </data>
+  <data name="NotificationSyncingAccountsNickname" xml:space="preserve">
+    <value>正在同步账户昵称...</value>
+  </data>
+  <data name="PlayerPov" xml:space="preserve">
+    <value>玩家POV</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>选择</value>
+  </data>
+  <data name="ToolTipDisplaySettings" xml:space="preserve">
+    <value>显示设置</value>
+  </data>
+  <data name="DialogAnalyzeRequired" xml:space="preserve">
+    <value>你必须先分析这个demo</value>
+  </data>
+  <data name="DialogBoilerIncorrect" xml:space="preserve">
+    <value>boiler.exe不正确</value>
+  </data>
+  <data name="DialogBoilerNotFound" xml:space="preserve">
+    <value>boiler.exe 未找到.</value>
+  </data>
+  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
+    <value>这个demo可能太旧了。如果不是请邮件附件发送demo
+你可以在{0}找到更多信息</value>
+  </data>
+  <data name="DialogDemosNotFound" xml:space="preserve">
+    <value>下列demo未找到:</value>
+  </data>
+  <data name="DialogErrorDemoNotFound" xml:space="preserve">
+    <value>Demo {0} 未找到.</value>
+  </data>
+  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
+    <value>产生了一个错误-当分析demo {0}时
+这个demo可能太旧了。如果不是请邮件附件发送demo
+你可以在http://csgo-demos-manager.com.找到更多信息</value>
+  </data>
+  <data name="DialogMapNotSupported" xml:space="preserve">
+    <value>这个地图不支持该功能</value>
+  </data>
+  <data name="DialogNoConnexionDetected" xml:space="preserve">
+    <value>没有网络连接</value>
+  </data>
+  <data name="DialogNoConnexionNoFeature" xml:space="preserve">
+    <value>没有找到网络连接 你不能使用这个功能</value>
+  </data>
+  <data name="DialogPovSelection" xml:space="preserve">
+    <value>想看哪个 POV (镜头视角) ?</value>
+  </data>
+  <data name="EnemyPov" xml:space="preserve">
+    <value>敌方 POV</value>
+  </data>
+  <data name="NotificationAnalyzing" xml:space="preserve">
+    <value>正在分析...</value>
+  </data>
+  <data name="NotificationAnalyzingDemo" xml:space="preserve">
+    <value>正在分析demo {0}...</value>
+  </data>
+  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
+    <value>正在分析 demo {0} 为了导出...</value>
+  </data>
+  <data name="Pov" xml:space="preserve">
+    <value>POV</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>添加</value>
+  </data>
+  <data name="AddAllPlayersSeen" xml:space="preserve">
+    <value>添加所有看到的玩家</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>双方</value>
+  </data>
+  <data name="CounterTerrorists" xml:space="preserve">
+    <value>反恐精英</value>
+  </data>
+  <data name="DialogNoPointsFound" xml:space="preserve">
+    <value>没找到点 你也许要分析这个demo</value>
+  </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>装备</value>
+  </data>
+  <data name="HeaderToolTipKnifeKills" xml:space="preserve">
+    <value>刀杀</value>
+  </data>
+  <data name="HeadshotsPercent" xml:space="preserve">
+    <value>爆头率 %</value>
+  </data>
+  <data name="LabelScale" xml:space="preserve">
+    <value>比例</value>
+  </data>
+  <data name="LabelSpeed" xml:space="preserve">
+    <value>速度</value>
+  </data>
+  <data name="LabelVolume" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="LogOnlyKills" xml:space="preserve">
+    <value>只记录杀敌</value>
+  </data>
+  <data name="NotificationGeneratingData" xml:space="preserve">
+    <value>正在生成数据...</value>
+  </data>
+  <data name="NotificationPaused" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="NotificationPlaying" xml:space="preserve">
+    <value>正在播放...</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>暂停</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>播放</value>
+  </data>
+  <data name="ShowOnlyBanned" xml:space="preserve">
+    <value>只显示封禁</value>
+  </data>
+  <data name="ShowSuspectsDemos" xml:space="preserve">
+    <value>显示嫌疑人的demo</value>
+  </data>
+  <data name="Side" xml:space="preserve">
+    <value>阵营</value>
+  </data>
+  <data name="StuffsThrown" xml:space="preserve">
+    <value>道具投掷</value>
+  </data>
+  <data name="Terrorists" xml:space="preserve">
+    <value>恐怖分子</value>
+  </data>
+  <data name="ToolTipAddAllPlayersSeen" xml:space="preserve">
+    <value>添加所有看到的玩家到列表 (CTRL+G)</value>
+  </data>
+  <data name="ToolTipGoToSuspectProfile" xml:space="preserve">
+    <value>前往嫌疑人资料 (CTRL+P)</value>
+  </data>
+  <data name="ToolTipMoveSuspectToWhitelist" xml:space="preserve">
+    <value>移动嫌疑人到白名单 (CTRL+M)</value>
+  </data>
+  <data name="ToolTipPause" xml:space="preserve">
+    <value>暂停 (CTRL+O)</value>
+  </data>
+  <data name="ToolTipPlay" xml:space="preserve">
+    <value>播放 (CTRL+P)</value>
+  </data>
+  <data name="ToolTipRefreshList" xml:space="preserve">
+    <value>搜索列表 (CTRL+R)</value>
+  </data>
+  <data name="ToolTipRemoveSuspect" xml:space="preserve">
+    <value>移除嫌疑人 (DEL)</value>
+  </data>
+  <data name="ToolTIpShowOnlySuspectDemos" xml:space="preserve">
+    <value>显示包含选定嫌疑人的demo (CTRL+F)</value>
+  </data>
+  <data name="ToolTipWhitelist" xml:space="preserve">
+    <value>白名单 (CTRL+W)</value>
+  </data>
+  <data name="WatermarkSearch" xml:space="preserve">
+    <value>搜索...</value>
+  </data>
+  <data name="Whitelist" xml:space="preserve">
+    <value>白名单</value>
+  </data>
+  <data name="DialogAddPlayerToWhitelist" xml:space="preserve">
+    <value>添加一个玩家到白名单</value>
+  </data>
+  <data name="DialogAddSuspect" xml:space="preserve">
+    <value>添加一个嫌疑人</value>
+  </data>
+  <data name="DialogCsgoNotDetected" xml:space="preserve">
+    <value>看起来CSGO没有安装在默认位置
+找不到默认的"csgo"和"replays"文件夹。请到设置添加它们</value>
+  </data>
+  <data name="DialogErrorWhileDeletingPlayer" xml:space="preserve">
+    <value>错误-当删除玩家时</value>
+  </data>
+  <data name="DialogErrorWhileDeletingSuspect" xml:space="preserve">
+    <value>错误-当删除嫌疑人时</value>
+  </data>
+  <data name="DialogErrorWhileExportingCustomData" xml:space="preserve">
+    <value>产生了一个错误-当导出自定义数据时</value>
+  </data>
+  <data name="DialogErrorWhileMovingSuspects" xml:space="preserve">
+    <value>错误-当移动嫌疑人时</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingPlayersInformation" xml:space="preserve">
+    <value>错误-当试图获取玩家信息时</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingSuspectInformation" xml:space="preserve">
+    <value>错误-当试图获取嫌疑人信息时</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingSuspectsInformation" xml:space="preserve">
+    <value>错误-当试图获取嫌疑人信息时</value>
+  </data>
+  <data name="DialogNewVersionAvailable" xml:space="preserve">
+    <value>有可用的新版本
+是否下载?</value>
+  </data>
+  <data name="DialogNoDemosPlayerFound" xml:space="preserve">
+    <value>没有找到该玩家的demo
+该玩家的demo可能未被分析.</value>
+  </data>
+  <data name="DialogNoDemosSuspectFound" xml:space="preserve">
+    <value>没有找到该嫌疑人的demo
+该嫌疑人的demo可能未被分析.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInSuspectWhitelist" xml:space="preserve">
+    <value>该玩家在你的嫌疑人列表 / 白名单 / 账户列表 
+你必须将他从账户列表 / 白名单移除才能添加到嫌疑人列表</value>
+  </data>
+  <data name="DialogUpdateRequireClearCache" xml:space="preserve">
+    <value>这个更新要求从缓存清除自定义数据 （你的嫌疑人列表不会被移除）
+是否保存自定义数据?</value>
+  </data>
+  <data name="DialogPlayerNotFound" xml:space="preserve">
+    <value>未找到玩家</value>
+  </data>
+  <data name="HeaderAccountVisibility" xml:space="preserve">
+    <value>账号可视度</value>
+  </data>
+  <data name="HeaderBanCount" xml:space="preserve">
+    <value>封禁次数</value>
+  </data>
+  <data name="HeaderCommunityBanned" xml:space="preserve">
+    <value>社区封禁</value>
+  </data>
+  <data name="HeaderDaysSinceLastBan" xml:space="preserve">
+    <value>DSLB</value>
+  </data>
+  <data name="HeaderEconomyBanned" xml:space="preserve">
+    <value>Economy封禁</value>
+  </data>
+  <data name="HeaderGameBan" xml:space="preserve">
+    <value>游戏内封禁</value>
+  </data>
+  <data name="HeaderLastConnection" xml:space="preserve">
+    <value>最后在线</value>
+  </data>
+  <data name="HeaderNickname" xml:space="preserve">
+    <value>昵称</value>
+  </data>
+  <data name="HeaderProfileSetup" xml:space="preserve">
+    <value>资料设置</value>
+  </data>
+  <data name="NotificationAddingPlayerToWhitelist" xml:space="preserve">
+    <value>正在添加玩家到白名单...</value>
+  </data>
+  <data name="NotificationAddingSuspect" xml:space="preserve">
+    <value>正在添加嫌疑人...</value>
+  </data>
+  <data name="NotificationMovingSuspectsToWhitelist" xml:space="preserve">
+    <value>移动嫌疑人到白名单...</value>
+  </data>
+  <data name="NotificationPlayerAlreadyInWhitelist" xml:space="preserve">
+    <value>玩家已在白名单</value>
+  </data>
+  <data name="NotificationRefreshing" xml:space="preserve">
+    <value>正在刷新...</value>
+  </data>
+  <data name="NotificationSearching" xml:space="preserve">
+    <value>正在搜索...</value>
+  </data>
+  <data name="NotificationStoppingAnalyze" xml:space="preserve">
+    <value>正在停止分析...</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>黑暗</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>天</value>
+  </data>
+  <data name="DialogErrorExportingHeatmap" xml:space="preserve">
+    <value>产生了一个错误-当导出热点地图到PNG图片时</value>
+  </data>
+  <data name="DialogErrorWhileAddingPlayerToSuspectsList" xml:space="preserve">
+    <value>错误-当添加玩家到嫌疑人列表时</value>
+  </data>
+  <data name="DialogErrorWhileAddingPlayerToWhitelist" xml:space="preserve">
+    <value>错误-当添加玩家到白名单时</value>
+  </data>
+  <data name="DialogNoDamagesDataFound" xml:space="preserve">
+    <value>没有找到demo数据.
+这个demo可能太旧所以不能被分析.</value>
+  </data>
+  <data name="DialogNoDemosFoundForPlayer" xml:space="preserve">
+    <value>没有找到该玩家的demo
+该玩家的demo可能未被分析.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInAccountsList" xml:space="preserve">
+    <value>该玩家已经在账户列表</value>
+  </data>
+  <data name="DialogPlayerAlreadyInSuspectsList" xml:space="preserve">
+    <value>该玩家已经在你的嫌疑人列表或账号列表
+你必须将他从你的账户列表移除才能添加到嫌疑人列表</value>
+  </data>
+  <data name="DialogPlayerAlreadyInWhitelist" xml:space="preserve">
+    <value>该玩家已经在你的白名单或账号列表
+你必须将他从你的账户列表移除才能添加到白名单</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>明亮</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>月</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="NotificationAddingPlayerToAccountsList" xml:space="preserve">
+    <value>正在添加玩家到账户列表...</value>
+  </data>
+  <data name="NotificationAddingPlayerToSuspectsList" xml:space="preserve">
+    <value>正在添加玩家到嫌疑人列表...</value>
+  </data>
+  <data name="NotificationCommentSaved" xml:space="preserve">
+    <value>命令保存</value>
+  </data>
+  <data name="NotificationPlayedAddedToSuspectsList" xml:space="preserve">
+    <value>已添加玩家到嫌疑人列表</value>
+  </data>
+  <data name="NotificationPlayerAddedToAccountsList" xml:space="preserve">
+    <value>已添加玩家到账户列表</value>
+  </data>
+  <data name="NotificationPlayerAddedToWhitelist" xml:space="preserve">
+    <value>已添加玩家到白名单</value>
+  </data>
+  <data name="NotificationSearchingDemosForPlayer" xml:space="preserve">
+    <value>正在搜索该玩家的demo...</value>
+  </data>
+  <data name="NotificationSetposCommandCopied" xml:space="preserve">
+    <value>复制setpos命令到剪贴板</value>
+  </data>
+  <data name="ShotsFired" xml:space="preserve">
+    <value>开火</value>
+  </data>
+  <data name="Smokes" xml:space="preserve">
+    <value>烟雾弹</value>
+  </data>
+  <data name="CT" xml:space="preserve">
+    <value>CT</value>
+  </data>
+  <data name="Spec" xml:space="preserve">
+    <value>观察者</value>
+  </data>
+  <data name="T" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="Lost" xml:space="preserve">
+    <value>失败</value>
+  </data>
+  <data name="LostSurrender" xml:space="preserve">
+    <value>失败次数</value>
+  </data>
+  <data name="WinSurrender" xml:space="preserve">
+    <value>胜利次数</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>离开</value>
+  </data>
+  <data name="Busy" xml:space="preserve">
+    <value>忙碌</value>
+  </data>
+  <data name="LookingToPlay" xml:space="preserve">
+    <value>想玩游戏</value>
+  </data>
+  <data name="LookingToTrade" xml:space="preserve">
+    <value>想交易</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>离线</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>在线</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>私密</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>公开</value>
+  </data>
+  <data name="Snooze" xml:space="preserve">
+    <value>打盹</value>
+  </data>
+  <data name="ToolTipAbout" xml:space="preserve">
+    <value>关于</value>
+    <comment>used for heatmap flashbang tooltip (about x seconds)</comment>
+  </data>
+  <data name="ToolTipAddToWhitelist" xml:space="preserve">
+    <value>添加一个帐户到白名单</value>
+  </data>
+  <data name="ToolTipBlinded" xml:space="preserve">
+    <value>致盲</value>
+    <comment>used for heatmap flashbang tooltip (player1 blinded player2)</comment>
+  </data>
+  <data name="ToolTipBlindedOthersPlayersFor" xml:space="preserve">
+    <value>致盲的其他玩家</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipGoToPlayerProfile" xml:space="preserve">
+    <value>前往玩家资料 (CTRL+P)</value>
+  </data>
+  <data name="ToolTipKilled" xml:space="preserve">
+    <value>被杀</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipOneSingleFlashFrom" xml:space="preserve">
+    <value>一个闪光来自</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipRemovePlayersFromWhitelist" xml:space="preserve">
+    <value>从白名单移除玩家</value>
+  </data>
+  <data name="ToolTipSeconds" xml:space="preserve">
+    <value>秒</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipSecondsOnAverage" xml:space="preserve">
+    <value>秒(平均每次)</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipShowPlayerDemos" xml:space="preserve">
+    <value>显示包含玩家的demo (CTRL+F)</value>
+  </data>
+  <data name="ToolTipTimes" xml:space="preserve">
+    <value>次(s)</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="WhitelistInformation" xml:space="preserve">
+    <value>分析demo时下列玩家将不会被检测封禁</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>全部</value>
+  </data>
+  <data name="AllPlayers" xml:space="preserve">
+    <value>全部玩家</value>
+  </data>
+  <data name="AllRounds" xml:space="preserve">
+    <value>全部回合</value>
+  </data>
+  <data name="AmountDollar" xml:space="preserve">
+    <value>数量 ($)</value>
+  </data>
+  <data name="Chest" xml:space="preserve">
+    <value>胸部</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="CopySetpos" xml:space="preserve">
+    <value>复制setpos命令</value>
+  </data>
+  <data name="FlashedPlayers" xml:space="preserve">
+    <value>致盲玩家</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>生成</value>
+  </data>
+  <data name="Head" xml:space="preserve">
+    <value>头部</value>
+  </data>
+  <data name="HeaderFlasherFlashed" xml:space="preserve">
+    <value>投掷玩家 \ 致盲玩家 </value>
+    <comment>Used for flashbangs heatmap chart</comment>
+  </data>
+  <data name="HeaderPlayerName" xml:space="preserve">
+    <value>玩家名</value>
+  </data>
+  <data name="HeaderTeamName" xml:space="preserve">
+    <value>队名</value>
+  </data>
+  <data name="HeaderThrower" xml:space="preserve">
+    <value>投掷玩家</value>
+  </data>
+  <data name="KillsPerRoundFull" xml:space="preserve">
+    <value>KPR (每回合杀敌)</value>
+  </data>
+  <data name="LeftArm" xml:space="preserve">
+    <value>左臂</value>
+  </data>
+  <data name="LeftLeg" xml:space="preserve">
+    <value>左腿</value>
+  </data>
+  <data name="NotificationGenerating" xml:space="preserve">
+    <value>正在生成...</value>
+  </data>
+  <data name="NotificationUpdating" xml:space="preserve">
+    <value>正在升级...</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>不透明度</value>
+  </data>
+  <data name="RightArm" xml:space="preserve">
+    <value>右臂</value>
+  </data>
+  <data name="RightLeg" xml:space="preserve">
+    <value>右腿</value>
+  </data>
+  <data name="Sides" xml:space="preserve">
+    <value>阵营</value>
+  </data>
+  <data name="Stomach" xml:space="preserve">
+    <value>腹部</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>队伍</value>
+  </data>
+  <data name="ToolTipCopySetposCommand" xml:space="preserve">
+    <value>复制setpos命令 (CTRL+C)</value>
+  </data>
+  <data name="ToolTipGenerateHeatmap" xml:space="preserve">
+    <value>生成热点地图 (CTRL+G)</value>
+  </data>
+  <data name="ToolTipSaveAsPng" xml:space="preserve">
+    <value>保存为PNG格式 (CTRL+S)</value>
+  </data>
+  <data name="ToolTipUpdate" xml:space="preserve">
+    <value>升级 (CTRL+R)</value>
+  </data>
+  <data name="ToolTipWatchAllStuffsFromPlayer" xml:space="preserve">
+    <value>观看所有该玩家投掷的道具 (CTRL+W)</value>
+  </data>
+  <data name="TotalCashEarned" xml:space="preserve">
+    <value>全部金钱获得 ($)</value>
+  </data>
+  <data name="TotalFlashbangsThrown" xml:space="preserve">
+    <value>全部闪光弹投掷</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>升级</value>
+  </data>
+  <data name="WatchPlayerStuffs" xml:space="preserve">
+    <value>观看玩家道具投掷</value>
+  </data>
+  <data name="DescriptionEntryHoldKills" xml:space="preserve">
+    <value>(CT方首杀)</value>
+  </data>
+  <data name="DescriptionEntryKills" xml:space="preserve">
+    <value>(T方首杀)</value>
+  </data>
+  <data name="HeaderMatrixKillerVictim" xml:space="preserve">
+    <value>杀敌玩家 \ 被杀玩家</value>
+  </data>
+  <data name="HeaderRoundLost" xml:space="preserve">
+    <value>RL</value>
+  </data>
+  <data name="Matrix" xml:space="preserve">
+    <value>矩阵</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>比例</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>队伍</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="UnexpectedErrorOccured" xml:space="preserve">
+    <value>产生了一个错误. 请从设置找到'errors.log' 文件并发送。
+错误信息:
+{0}</value>
+  </data>
+  <data name="Banned" xml:space="preserve">
+    <value>封禁</value>
+  </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>参与人员</value>
+  </data>
+  <data name="InfomationHelpTranslatingApp" xml:space="preserve">
+    <value>你可以免费帮助翻译应用，更多信息在</value>
+  </data>
+  <data name="InformationTranslateIncomplete" xml:space="preserve">
+    <value>如果更改语言后依然显示英语，说明翻译不完整或未翻译。</value>
+  </data>
+  <data name="Probation" xml:space="preserve">
+    <value>试用</value>
+  </data>
+  <data name="Translators" xml:space="preserve">
+    <value>翻译</value>
+  </data>
 </root>
