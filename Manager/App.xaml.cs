@@ -26,6 +26,7 @@ namespace Manager
 			"thedudeguy1"
 		};
 		public static string[] Translators = {
+			"FisherMan aka. deathles乃夫 (Chinese simplified)"
 		};
 
 		public App()
