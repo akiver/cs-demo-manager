@@ -548,6 +548,7 @@
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
+    <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.pt.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -686,6 +687,7 @@
     <XliffResource Include="MultilingualResources\Manager.it.xlf" />
     <XliffResource Include="MultilingualResources\Manager.ja.xlf" />
     <XliffResource Include="MultilingualResources\Manager.pl.xlf" />
+    <XliffResource Include="MultilingualResources\Manager.pt-BR.xlf" />
     <XliffResource Include="MultilingualResources\Manager.pt.xlf" />
     <XliffResource Include="MultilingualResources\Manager.ru.xlf" />
     <XliffResource Include="MultilingualResources\Manager.sr-Cyrl.xlf" />

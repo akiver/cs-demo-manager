@@ -60,6 +60,12 @@ namespace Core
 			},
 			new Language
 			{
+				Key = "pt-BR",
+				Name = "Brazilian",
+				IsEnabled = false
+			},
+			new Language
+			{
 				Key = "zh-Hans",
 				Name = "Chinese (Simplified)",
 				IsEnabled = true
