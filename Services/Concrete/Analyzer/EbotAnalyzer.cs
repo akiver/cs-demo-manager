@@ -443,6 +443,8 @@ namespace Services.Concrete.Analyzer
 					if (!IsOvertime) Demo.ScoreSecondHalfTeam2++;
 					Demo.ScoreTeam2++;
 					CurrentRound.WinnerName = Demo.TeamT.Name;
+					CurrentRound.TeamTname = Demo.TeamCT.Name;
+					CurrentRound.TeamCtName = Demo.TeamT.Name;
 				}
 				else
 				{
@@ -450,6 +452,8 @@ namespace Services.Concrete.Analyzer
 					if (!IsOvertime) Demo.ScoreSecondHalfTeam1++;
 					Demo.ScoreTeam1++;
 					CurrentRound.WinnerName = Demo.TeamCT.Name;
+					CurrentRound.TeamTname = Demo.TeamT.Name;
+					CurrentRound.TeamCtName = Demo.TeamCT.Name;
 				}
 			}
 			else
@@ -460,6 +464,8 @@ namespace Services.Concrete.Analyzer
 					if (!IsOvertime) Demo.ScoreFirstHalfTeam1++;
 					Demo.ScoreTeam1++;
 					CurrentRound.WinnerName = Demo.TeamCT.Name;
+					CurrentRound.TeamTname = Demo.TeamT.Name;
+					CurrentRound.TeamCtName = Demo.TeamCT.Name;
 				}
 				else
 				{
@@ -467,6 +473,8 @@ namespace Services.Concrete.Analyzer
 					if (!IsOvertime) Demo.ScoreFirstHalfTeam2++;
 					Demo.ScoreTeam2++;
 					CurrentRound.WinnerName = Demo.TeamT.Name;
+					CurrentRound.TeamTname = Demo.TeamCT.Name;
+					CurrentRound.TeamCtName = Demo.TeamT.Name;
 				}
 			}
 		}

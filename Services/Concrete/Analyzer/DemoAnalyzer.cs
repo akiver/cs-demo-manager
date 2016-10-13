@@ -1664,6 +1664,7 @@ namespace Services.Concrete.Analyzer
 
 		/// <summary>
 		/// Update the teams score and current round name
+		/// TODO rework teams side detection
 		/// </summary>
 		/// <param name="e"></param>
 		protected void UpdateTeamScore(RoundEndedEventArgs e)
@@ -1679,6 +1680,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.TeamT.LossRowCount = 0;
 						Demo.TeamCT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 					else
 					{
@@ -1687,6 +1690,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						Demo.TeamCT.LossRowCount = 0;
 						Demo.TeamT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 				}
 				else
@@ -1698,6 +1703,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.TeamT.LossRowCount = 0;
 						Demo.TeamCT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 					else
 					{
@@ -1706,6 +1713,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						Demo.TeamCT.LossRowCount = 0;
 						Demo.TeamT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 				}
 			}
@@ -1720,6 +1729,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						Demo.TeamCT.LossRowCount = 0;
 						Demo.TeamT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 					else
 					{
@@ -1728,6 +1739,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.TeamT.LossRowCount = 0;
 						Demo.TeamCT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 				}
 				else
@@ -1739,6 +1752,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						Demo.TeamCT.LossRowCount = 0;
 						Demo.TeamT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 					else
 					{
@@ -1747,6 +1762,8 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.TeamT.LossRowCount = 0;
 						Demo.TeamCT.LossRowCount++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 				}
 			}

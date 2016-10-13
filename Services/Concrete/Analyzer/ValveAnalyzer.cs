@@ -395,12 +395,16 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 					else
 					{
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 				}
 				else
@@ -410,12 +414,16 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						CurrentOvertime.ScoreTeam1++;
 						Demo.ScoreTeam1++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 					else
 					{
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						CurrentOvertime.ScoreTeam2++;
 						Demo.ScoreTeam2++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 				}
 			}
@@ -428,12 +436,16 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.ScoreSecondHalfTeam2++;
 						Demo.ScoreTeam2++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 					else
 					{
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						Demo.ScoreSecondHalfTeam1++;
 						Demo.ScoreTeam1++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 				}
 				else
@@ -443,12 +455,16 @@ namespace Services.Concrete.Analyzer
 						CurrentRound.WinnerName = Demo.TeamT.Name;
 						Demo.ScoreFirstHalfTeam2++;
 						Demo.ScoreTeam2++;
+						CurrentRound.TeamTname = Demo.TeamT.Name;
+						CurrentRound.TeamCtName = Demo.TeamCT.Name;
 					}
 					else
 					{
 						CurrentRound.WinnerName = Demo.TeamCT.Name;
 						Demo.ScoreFirstHalfTeam1++;
 						Demo.ScoreTeam1++;
+						CurrentRound.TeamTname = Demo.TeamCT.Name;
+						CurrentRound.TeamCtName = Demo.TeamT.Name;
 					}
 				}
 			}

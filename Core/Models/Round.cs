@@ -139,6 +139,16 @@ namespace Core.Models
 		private string _winnerName;
 
 		/// <summary>
+		/// CT team's name
+		/// </summary>
+		private string _teamCt;
+
+		/// <summary>
+		/// T team's name
+		/// </summary>
+		private string _teamT;
+
+		/// <summary>
 		/// Number of 1K during the round
 		/// </summary>
 		private int _onekillCount;
@@ -358,6 +368,20 @@ namespace Core.Models
 		{
 			get { return _winnerName; }
 			set { Set(() => WinnerName, ref _winnerName, value); }
+		}
+
+		[JsonProperty("team_t_name")]
+		public string TeamTname
+		{
+			get { return _teamT; }
+			set { Set(() => TeamTname, ref _teamT, value); }
+		}
+
+		[JsonProperty("team_ct_name")]
+		public string TeamCtName
+		{
+			get { return _teamCt; }
+			set { Set(() => TeamCtName, ref _teamCt, value); }
 		}
 
 		[JsonProperty("kill_count")]
