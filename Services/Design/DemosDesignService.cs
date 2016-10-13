@@ -359,5 +359,9 @@ namespace Services.Design
 		{
 			return Task.FromResult(true);
 		}
+
+		public void WriteChatFile(Demo demo, string filePath)
+		{
+		}
 	}
 }

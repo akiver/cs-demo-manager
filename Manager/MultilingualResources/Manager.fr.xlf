@@ -3369,6 +3369,22 @@ Message d'erreur :
           <source>{0} minutes</source>
           <target state="final">{0} minutes</target>
         </trans-unit>
+        <trans-unit id="ToolTipExportChat" translate="yes" xml:space="preserve">
+          <source>Export demo chat</source>
+          <target state="final">Exporter les messages du tchat</target>
+        </trans-unit>
+        <trans-unit id="ExportChat" translate="yes" xml:space="preserve">
+          <source>Export chat</source>
+          <target state="final">Exporter tchat</target>
+        </trans-unit>
+        <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
+          <source>Chat messages file has been created.</source>
+          <target state="final">Le fichier contenant les messages du tchat a été créé avec succès.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
+          <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
+          <target state="final">Aucun message de tchat trouvé. (L'export ne fonctionne que lorsque la démo provient d'un serveur ayant "tv_relaytextchat" différent de "0", ce qui n'est pas le cas des serveurs Valve matchmaking)</target>
+        </trans-unit>
       </group>
     </body>
   </file>

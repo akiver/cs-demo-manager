@@ -89,6 +89,7 @@ namespace Services.Concrete.Analyzer
 			Parser.DecoyNadeEnded += HandleDecoyNadeEnded;
 			Parser.PlayerHurt += HandlePlayerHurted;
 			Parser.SayText += HandleSayText;
+			Parser.SayText2 += HandleSayText2;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 			Parser.RoundFinal += HandleRoundFinal;
 		}
@@ -144,10 +145,9 @@ namespace Services.Concrete.Analyzer
 			if (_isFaceit && IsOvertime) IsLastRoundHalf = true;
 		}
 
-		protected void HandleSayText(object sender, SayTextEventArgs e)
+		protected new void HandleSayText(object sender, SayTextEventArgs e)
 		{
-			// cleanup text
-			e.Text = Regex.Replace(e.Text, @"[\u0001\u0002\u0003\u0004\u0005\u0006\u0007]", string.Empty);
+			base.HandleSayText(sender, e);
 
 			// Beginning of the match
 			Match faceItLive = _faceItLiveRegex.Match(e.Text);

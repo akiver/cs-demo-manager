@@ -2512,4 +2512,16 @@ Message d'erreur :
   <data name="AverageMatchTimeValue" xml:space="preserve">
     <value>{0} minutes</value>
   </data>
+  <data name="ToolTipExportChat" xml:space="preserve">
+    <value>Exporter les messages du tchat</value>
+  </data>
+  <data name="ExportChat" xml:space="preserve">
+    <value>Exporter tchat</value>
+  </data>
+  <data name="DialogChatFileCreated" xml:space="preserve">
+    <value>Le fichier contenant les messages du tchat a été créé avec succès.</value>
+  </data>
+  <data name="DialogNoChatFound" xml:space="preserve">
+    <value>Aucun message de tchat trouvé. (L'export ne fonctionne que lorsque la démo provient d'un serveur ayant "tv_relaytextchat" différent de "0", ce qui n'est pas le cas des serveurs Valve matchmaking)</value>
+  </data>
 </root>

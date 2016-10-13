@@ -120,6 +120,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand<Player> _showPlayerDemosCommand;
 
+		private RelayCommand _exportChatCommand;
+
 		private RelayCommand _goToPreviousDemoCommand;
 
 		private RelayCommand _goToNextDemoCommand;
@@ -897,6 +899,73 @@ namespace Manager.ViewModel.Demos
 							await LoadData();
 						},
 						() => NextDemo != null && !IsAnalyzing));
+			}
+		}
+
+		public RelayCommand ExportChatCommand
+		{
+			get
+			{
+				return _exportChatCommand
+					?? (_exportChatCommand = new RelayCommand(
+					async () =>
+					{
+						SaveFileDialog exportDialog = new SaveFileDialog
+						{
+							FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + "-chat.txt",
+							Filter = "Text file (*.txt)|*.txt"
+						};
+
+						if (exportDialog.ShowDialog() == DialogResult.OK)
+						{
+							if (!_cacheService.HasDemoInCache(CurrentDemo.Id))
+							{
+								try
+								{
+									NotificationMessage = Properties.Resources.NotificationAnalyzing;
+									IsAnalyzing = true;
+									HasNotification = true;
+
+									if (_cts == null)
+									{
+										_cts = new CancellationTokenSource();
+									}
+									await _demosService.AnalyzeDemo(CurrentDemo, _cts.Token);
+
+									if (AppSettings.IsInternetConnectionAvailable())
+									{
+										await _demosService.AnalyzeBannedPlayersAsync(CurrentDemo);
+									}
+									await _cacheService.WriteDemoDataCache(CurrentDemo);
+								}
+								catch (Exception e)
+								{
+									Logger.Instance.Log(e);
+									CurrentDemo.Status = "old";
+									await _cacheService.WriteDemoDataCache(CurrentDemo);
+									await _dialogService.ShowErrorAsync(
+										string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE),
+										MessageDialogStyle.Affirmative
+									);
+								}
+								finally
+								{
+									IsAnalyzing = false;
+									HasNotification = false;
+								}
+							}
+
+							if (CurrentDemo.ChatMessageList.Any())
+							{
+								_demosService.WriteChatFile(CurrentDemo, exportDialog.FileName);
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogChatFileCreated, MessageDialogStyle.Affirmative);
+							}
+							else
+							{
+								await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoChatFound, MessageDialogStyle.Affirmative);
+							}
+						}
+					}));
 			}
 		}
 

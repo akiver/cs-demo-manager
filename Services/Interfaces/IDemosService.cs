@@ -130,5 +130,13 @@ namespace Services.Interfaces
 		/// <param name="demoName"></param>
 		/// <returns></returns>
 		Task<bool> DecompressDemoArchive(string demoName);
+
+		/// <summary>
+		/// Create a txt file containing demo's chat messages
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <param name="filePath"></param>
+		/// <returns></returns>
+		void WriteChatFile(Demo demo, string filePath);
 	}
 }

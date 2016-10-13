@@ -1025,6 +1025,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chat messages file has been created..
+        /// </summary>
+        public static string DialogChatFileCreated {
+            get {
+                return ResourceManager.GetString("DialogChatFileCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demos data will be deleted! Are you sure?.
         /// </summary>
         public static string DialogConfirmDeleteDemosData {
@@ -1427,6 +1436,15 @@ namespace Manager.Properties {
         public static string DialogNewVersionAvailable {
             get {
                 return ResourceManager.GetString("DialogNewVersionAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No chat messages found. (It only works for demos coming from a server that has &quot;tv_relaytextchat&quot; set to a value different from &quot;0&quot; which is not the case for Valve matchmaking)..
+        /// </summary>
+        public static string DialogNoChatFound {
+            get {
+                return ResourceManager.GetString("DialogNoChatFound", resourceCulture);
             }
         }
         
@@ -1995,6 +2013,15 @@ namespace Manager.Properties {
         public static string ExportAsXls {
             get {
                 return ResourceManager.GetString("ExportAsXls", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export chat.
+        /// </summary>
+        public static string ExportChat {
+            get {
+                return ResourceManager.GetString("ExportChat", resourceCulture);
             }
         }
         
@@ -6390,6 +6417,15 @@ namespace Manager.Properties {
         public static string ToolTipDownloadDemos {
             get {
                 return ResourceManager.GetString("ToolTipDownloadDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export demo chat.
+        /// </summary>
+        public static string ToolTipExportChat {
+            get {
+                return ResourceManager.GetString("ToolTipExportChat", resourceCulture);
             }
         }
         

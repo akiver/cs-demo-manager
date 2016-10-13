@@ -3366,6 +3366,22 @@ Message Error :
           <source>{0} minutes</source>
           <target state="new">{0} minutes</target>
         </trans-unit>
+        <trans-unit id="ToolTipExportChat" translate="yes" xml:space="preserve">
+          <source>Export demo chat</source>
+          <target state="new">Export demo chat</target>
+        </trans-unit>
+        <trans-unit id="ExportChat" translate="yes" xml:space="preserve">
+          <source>Export chat</source>
+          <target state="new">Export chat</target>
+        </trans-unit>
+        <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
+          <source>Chat messages file has been created.</source>
+          <target state="new">Chat messages file has been created.</target>
+        </trans-unit>
+        <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
+          <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
+          <target state="new">No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</target>
+        </trans-unit>
       </group>
     </body>
   </file>

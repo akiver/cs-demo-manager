@@ -50,6 +50,8 @@ namespace Services.Concrete.Analyzer
 			Parser.RankUpdate += HandleServerRankUpdate;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 			Parser.PlayerTeam += HandlePlayerTeam;
+			Parser.SayText += HandleSayText;
+			Parser.SayText2 += HandleSayText2;
 		}
 
 		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)

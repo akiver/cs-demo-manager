@@ -179,6 +179,23 @@
 						</StackPanel>
 					</Button>
 
+					<Button Command="{Binding ExportChatCommand}"
+							Style="{DynamicResource GeneralButton}"
+							ToolTip="{x:Static properties:Resources.ToolTipExportChat}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_chat}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="{x:Static properties:Resources.ExportChat}"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
 					<TextBlock Text="{x:Static properties:Resources.LabelPlayerStats}"
 							   Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox Style="{StaticResource ComboBoxAccountsStyle}"

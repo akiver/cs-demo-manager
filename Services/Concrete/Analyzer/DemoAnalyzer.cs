@@ -1302,6 +1302,21 @@ namespace Services.Concrete.Analyzer
 			player.Side = e.NewTeam.ToSide();
 		}
 
+		protected void HandleSayText2(object sender, SayText2EventArgs e)
+		{
+			e.Text = CleanUpChatText(e.Text);
+			string message = string.Empty;
+			if (e.Sender != null) message += e.Sender.Name + ": ";
+			message += e.Text;
+			Demo.ChatMessageList.Add(message);
+		}
+
+		protected void HandleSayText(object sender, SayTextEventArgs e)
+		{
+			e.Text = CleanUpChatText(e.Text);
+			Demo.ChatMessageList.Add(e.Text);
+		}
+
 		#endregion
 
 		#region Process
@@ -2017,6 +2032,11 @@ namespace Services.Concrete.Analyzer
 			{
 				LastPlayersFireEndedMolotov.Clear();
 			}
+		}
+
+		private static string CleanUpChatText(string message)
+		{
+			return Regex.Replace(message, @"[\u0001\u0002\u0003\u0004\u0005\u0006\u0007]", string.Empty);
 		}
 
 		#endregion

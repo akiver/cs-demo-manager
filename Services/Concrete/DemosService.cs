@@ -421,6 +421,11 @@ namespace Services.Concrete
 			return demoUrlList;
 		}
 
+		public void WriteChatFile(Demo demo, string filePath)
+		{
+			File.WriteAllText(filePath, string.Join(Environment.NewLine, demo.ChatMessageList.ToArray()));
+		}
+
 		/// <summary>
 		/// Check if the round stats contains useful information and in this case do the work
 		/// 1. Check if the demo archive is still available

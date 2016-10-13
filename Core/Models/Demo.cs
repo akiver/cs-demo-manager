@@ -431,6 +431,11 @@ namespace Core.Models
 		/// </summary>
 		private Team _teamT;
 
+		/// <summary>
+		/// Contains text messages from game chat
+		/// </summary>
+		private List<string> _chatMessageList;
+
 		#endregion
 
 		#region Accessors
@@ -1055,6 +1060,13 @@ namespace Core.Models
 			set { Set(() => AverageEseaRws, ref _averageEseaRws, value); }
 		}
 
+		[JsonProperty("chat_messages")]
+		public List<string> ChatMessageList
+		{
+			get { return _chatMessageList; }
+			set { Set(() => ChatMessageList, ref _chatMessageList, value); }
+		}
+
 		#endregion
 
 		public Demo()
@@ -1072,6 +1084,7 @@ namespace Core.Models
 			BombDefused = new ObservableCollection<BombDefusedEvent>();
 			PlayerBlinded = new ObservableCollection<PlayerBlindedEvent>();
 			Overtimes = new ObservableCollection<Overtime>();
+			ChatMessageList = new List<string>();
 
 			_teamCt = new Team
 			{
@@ -1166,6 +1179,7 @@ namespace Core.Models
 					HasCheater = false;
 					PlayersHurted.Clear();
 					PlayerBlinded.Clear();
+					ChatMessageList.Clear();
 					Winner = null;
 					Surrender = null;
 					if (resetTeams)

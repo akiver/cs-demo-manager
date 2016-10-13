@@ -71,6 +71,8 @@ namespace Services.Concrete.Analyzer
 			Parser.PlayerHurt += HandlePlayerHurted;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 			Parser.PlayerTeam += HandlePlayerTeam;
+			Parser.SayText += HandleSayText;
+			Parser.SayText2 += HandleSayText2;
 		}
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
