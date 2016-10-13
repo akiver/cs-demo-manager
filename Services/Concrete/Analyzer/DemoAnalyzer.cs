@@ -2023,7 +2023,8 @@ namespace Services.Concrete.Analyzer
 				if (IsOvertime) Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
 			}
 
-			if (Parser.TScore != Parser.CTScore)
+			// Scores are reset on ESEA demos when the match is over
+			if (Parser.TScore != Parser.CTScore || Parser.CTScore == 0 && Parser.TScore == 0)
 				Demo.Winner = Demo.ScoreTeam1 > Demo.ScoreTeam2 ? Demo.TeamCT : Demo.TeamT;
 
 			if (Demo.Players.Any())
