@@ -3340,6 +3340,32 @@ Message Error :
           <source>Translators</source>
           <target state="final">翻译</target>
         </trans-unit>
+        <trans-unit id="HeaderToolTipTotalMatchesTime" translate="yes" xml:space="preserve">
+          <source>Total Matches Time (hours / minutes)</source>
+          <target state="new">Total Matches Time (hours / minutes)</target>
+        </trans-unit>
+        <trans-unit id="HeaderTotalMatchesTime" translate="yes" xml:space="preserve">
+          <source>TMT</source>
+          <target state="new">TMT</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Total Match Time</note>
+        </trans-unit>
+        <trans-unit id="HeaderAverageMatchTime" translate="yes" xml:space="preserve">
+          <source>AMT</source>
+          <target state="new">AMT</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Average Match Time</note>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAverageMatchTime" translate="yes" xml:space="preserve">
+          <source>Average Match Time (minutes)</source>
+          <target state="new">Average Match Time (minutes)</target>
+        </trans-unit>
+        <trans-unit id="TotalMatchTimeValue" translate="yes" xml:space="preserve">
+          <source>{0}h {1}m</source>
+          <target state="new">{0}h {1}m</target>
+        </trans-unit>
+        <trans-unit id="AverageMatchTimeValue" translate="yes" xml:space="preserve">
+          <source>{0} minutes</source>
+          <target state="new">{0} minutes</target>
+        </trans-unit>
       </group>
     </body>
   </file>

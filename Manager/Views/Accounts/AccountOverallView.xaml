@@ -353,6 +353,8 @@
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
 						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition Width="Auto"/>
 					</Grid.ColumnDefinitions>
 
 					<Grid Grid.Column="0"
@@ -441,6 +443,36 @@
 										   Style="{StaticResource StatsTitleStyle}"/>
 								<TextBlock Text="{Binding DamageCount}"
 										   Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="6"
+						  Margin="10"
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipTotalMatchesTime}">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}"
+								BorderThickness="1">
+							<StackPanel Orientation="Vertical"
+										Margin="5">
+								<TextBlock Text="{x:Static properties:Resources.HeaderTotalMatchesTime}"
+										   Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Text="{Binding TotalMatchTime}"
+										   Style="{StaticResource StatsValueStyle}"/>
+							</StackPanel>
+						</Border>
+					</Grid>
+
+					<Grid Grid.Column="7"
+						  Margin="10"
+						  ToolTip="{x:Static properties:Resources.HeaderToolTipAverageMatchTime}">
+						<Border BorderBrush="{StaticResource LightWhiteBrush}"
+								BorderThickness="1">
+							<StackPanel Orientation="Vertical"
+										Margin="5">
+								<TextBlock Text="{x:Static properties:Resources.HeaderAverageMatchTime}"
+										   Style="{StaticResource StatsTitleStyle}"/>
+								<TextBlock Style="{StaticResource StatsValueStyle}"
+										   Text="{Binding AverageMatchTime}"/>
 							</StackPanel>
 						</Border>
 					</Grid>

@@ -99,6 +99,7 @@ namespace Services.Concrete
 								break;
 						}
 					}
+					stats.TotalMatchesDuration += demo.Duration;
 				}
 
 				if (stats.KillCount != 0 && stats.DeathCount != 0)

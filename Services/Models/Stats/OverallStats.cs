@@ -54,6 +54,17 @@ namespace Services.Models.Stats
 
 		public double HltvRating { get; set; } = 0;
 
+		public float TotalMatchesDuration { get; set; } = 0;
+
+		public double AverageMatchDuration
+		{
+			get
+			{
+				if (MatchCount == 0) return 0;
+				return Math.Round((double)TotalMatchesDuration / MatchCount, 2);
+			}
+		}
+
 		public double KillPerRoundPercentage
 		{
 			get

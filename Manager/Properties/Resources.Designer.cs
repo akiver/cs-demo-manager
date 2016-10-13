@@ -295,6 +295,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} minutes.
+        /// </summary>
+        public static string AverageMatchTimeValue {
+            get {
+                return ResourceManager.GetString("AverageMatchTimeValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Average value.
         /// </summary>
         public static string AverageValue {
@@ -2179,6 +2188,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AMT.
+        /// </summary>
+        public static string HeaderAverageMatchTime {
+            get {
+                return ResourceManager.GetString("HeaderAverageMatchTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ban Count.
         /// </summary>
         public static string HeaderBanCount {
@@ -2778,6 +2796,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipAverageDamagePerRound {
             get {
                 return ResourceManager.GetString("HeaderToolTipAverageDamagePerRound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Match Time (minutes).
+        /// </summary>
+        public static string HeaderToolTipAverageMatchTime {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAverageMatchTime", resourceCulture);
             }
         }
         
@@ -3583,6 +3610,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total Matches Time (hours / minutes).
+        /// </summary>
+        public static string HeaderToolTipTotalMatchesTime {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTotalMatchesTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Trade death.
         /// </summary>
         public static string HeaderToolTipTradeDeath {
@@ -3696,6 +3732,15 @@ namespace Manager.Properties {
         public static string HeaderTotalDamagesHealth {
             get {
                 return ResourceManager.GetString("HeaderTotalDamagesHealth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TMT.
+        /// </summary>
+        public static string HeaderTotalMatchesTime {
+            get {
+                return ResourceManager.GetString("HeaderTotalMatchesTime", resourceCulture);
             }
         }
         
@@ -6966,6 +7011,15 @@ namespace Manager.Properties {
         public static string TotalKills {
             get {
                 return ResourceManager.GetString("TotalKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}h {1}m.
+        /// </summary>
+        public static string TotalMatchTimeValue {
+            get {
+                return ResourceManager.GetString("TotalMatchTimeValue", resourceCulture);
             }
         }
         

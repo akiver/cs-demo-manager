@@ -3343,6 +3343,32 @@ Message d'erreur :
           <source>Probation</source>
           <target state="final">Probation</target>
         </trans-unit>
+        <trans-unit id="HeaderToolTipTotalMatchesTime" translate="yes" xml:space="preserve">
+          <source>Total Matches Time (hours / minutes)</source>
+          <target state="final">Durée Totale Matchs (heures / minutes)</target>
+        </trans-unit>
+        <trans-unit id="HeaderTotalMatchesTime" translate="yes" xml:space="preserve">
+          <source>TMT</source>
+          <target state="final">DTM</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Total Match Time</note>
+        </trans-unit>
+        <trans-unit id="HeaderAverageMatchTime" translate="yes" xml:space="preserve">
+          <source>AMT</source>
+          <target state="final">DMM</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Average Match Time</note>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAverageMatchTime" translate="yes" xml:space="preserve">
+          <source>Average Match Time (minutes)</source>
+          <target state="final">Durée Moyenne Match (minutes)</target>
+        </trans-unit>
+        <trans-unit id="TotalMatchTimeValue" translate="yes" xml:space="preserve">
+          <source>{0}h {1}m</source>
+          <target state="final">{0}h {1}m</target>
+        </trans-unit>
+        <trans-unit id="AverageMatchTimeValue" translate="yes" xml:space="preserve">
+          <source>{0} minutes</source>
+          <target state="final">{0} minutes</target>
+        </trans-unit>
       </group>
     </body>
   </file>

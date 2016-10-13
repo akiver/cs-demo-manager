@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
@@ -90,6 +91,10 @@ namespace Manager.ViewModel.Accounts
 		private double _averageDamagesPerRound;
 
 		private double _hltvRating;
+
+		private string _totalMatchTime;
+
+		private string _averageMatchTime;
 
 		#endregion
 
@@ -263,6 +268,18 @@ namespace Manager.ViewModel.Accounts
 			set { Set(() => HltvRating, ref _hltvRating, value); }
 		}
 
+		public string TotalMatchTime
+		{
+			get { return _totalMatchTime; }
+			set { Set(() => TotalMatchTime, ref _totalMatchTime, value); }
+		}
+
+		public string AverageMatchTime
+		{
+			get { return _averageMatchTime; }
+			set { Set(() => AverageMatchTime, ref _averageMatchTime, value); }
+		}
+
 		#endregion
 
 		#region Commands
@@ -414,6 +431,10 @@ namespace Manager.ViewModel.Accounts
 			DamageCount = datas.DamageCount;
 			RoundCount = datas.RoundCount;
 			HltvRating = datas.HltvRating;
+			TimeSpan totalTime = TimeSpan.FromSeconds(datas.TotalMatchesDuration);
+			TotalMatchTime = string.Format(Properties.Resources.TotalMatchTimeValue, totalTime.Hours, totalTime.Minutes);
+			TimeSpan avgTotalTime = TimeSpan.FromSeconds(datas.AverageMatchDuration);
+			AverageMatchTime = string.Format(Properties.Resources.AverageMatchTimeValue, avgTotalTime.Minutes);
 			DatasMatchStats = new List<GenericDoubleChart>
 			{
 				new GenericDoubleChart

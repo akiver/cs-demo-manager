@@ -2492,4 +2492,24 @@ Message d'erreur :
   <data name="Probation" xml:space="preserve">
     <value>Probation</value>
   </data>
+  <data name="HeaderToolTipTotalMatchesTime" xml:space="preserve">
+    <value>Durée Totale Matchs (heures / minutes)</value>
+  </data>
+  <data name="HeaderTotalMatchesTime" xml:space="preserve">
+    <value>DTM</value>
+    <comment>Total Match Time</comment>
+  </data>
+  <data name="HeaderAverageMatchTime" xml:space="preserve">
+    <value>DMM</value>
+    <comment>Average Match Time</comment>
+  </data>
+  <data name="HeaderToolTipAverageMatchTime" xml:space="preserve">
+    <value>Durée Moyenne Match (minutes)</value>
+  </data>
+  <data name="TotalMatchTimeValue" xml:space="preserve">
+    <value>{0}h {1}m</value>
+  </data>
+  <data name="AverageMatchTimeValue" xml:space="preserve">
+    <value>{0} minutes</value>
+  </data>
 </root>

@@ -2619,4 +2619,24 @@ Message Error :
   <data name="Translators" xml:space="preserve">
     <value>Translators</value>
   </data>
+  <data name="HeaderAverageMatchTime" xml:space="preserve">
+    <value>AMT</value>
+    <comment>Average Match Time</comment>
+  </data>
+  <data name="HeaderToolTipAverageMatchTime" xml:space="preserve">
+    <value>Average Match Time (minutes)</value>
+  </data>
+  <data name="HeaderToolTipTotalMatchesTime" xml:space="preserve">
+    <value>Total Matches Time (hours / minutes)</value>
+  </data>
+  <data name="HeaderTotalMatchesTime" xml:space="preserve">
+    <value>TMT</value>
+    <comment>Total Match Time</comment>
+  </data>
+  <data name="TotalMatchTimeValue" xml:space="preserve">
+    <value>{0}h {1}m</value>
+  </data>
+  <data name="AverageMatchTimeValue" xml:space="preserve">
+    <value>{0} minutes</value>
+  </data>
 </root>
