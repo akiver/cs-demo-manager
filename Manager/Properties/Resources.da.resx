@@ -12,4 +12,2482 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Analyze" xml:space="preserve">
+    <value>Analyser</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tilbage</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detaljer</value>
+  </data>
+  <data name="AccountStats" xml:space="preserve">
+    <value>Bruger Indstillinger</value>
+  </data>
+  <data name="AddToSuspects" xml:space="preserve">
+    <value>Tilføj til mistænkte</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Gennemse</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Slet</value>
+  </data>
+  <data name="DownloadMatchMakingDemos" xml:space="preserve">
+    <value>Hent MM Demoer</value>
+  </data>
+  <data name="ExportAsXls" xml:space="preserve">
+    <value>Eksporter som XLS</value>
+  </data>
+  <data name="GotoTick" xml:space="preserve">
+    <value>Gå til Tick</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Opdater</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>Vis Alle</value>
+  </data>
+  <data name="ShowOnlyAccountDemos" xml:space="preserve">
+    <value>Vis Kun Bruger Demoer</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Statistik</value>
+  </data>
+  <data name="Suspects" xml:space="preserve">
+    <value>Mistænkte</value>
+  </data>
+  <data name="Watch" xml:space="preserve">
+    <value>Se</value>
+  </data>
+  <data name="WatchHighlights" xml:space="preserve">
+    <value>Se Højdepunkter</value>
+  </data>
+  <data name="WatchLowlights" xml:space="preserve">
+    <value>Se lavdepunkter</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Om</value>
+  </data>
+  <data name="FreeSoftware" xml:space="preserve">
+    <value>CSGO Demo Manager er en gratis open source program og vil forblive sådan.</value>
+  </data>
+  <data name="SourceCodeAvailable" xml:space="preserve">
+    <value>Source code er tilgængelig på</value>
+  </data>
+  <data name="EncounteredBug" xml:space="preserve">
+    <value>Hvis du støder på et problem eller har et forslag, du er velkommen til at åbne et spørgsmål på</value>
+  </data>
+  <data name="OrSendAn" xml:space="preserve">
+    <value>Eller send en</value>
+  </data>
+  <data name="WantSayThank" xml:space="preserve">
+    <value>Hvis du vil sige tak, er du velkommen til at lave en</value>
+  </data>
+  <data name="AlwaysDownload" xml:space="preserve">
+    <value>Altid hent applikationen fra den officielle side</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Brugere</value>
+  </data>
+  <data name="AddAccount" xml:space="preserve">
+    <value>Tilføj bruger</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Tilføj mappe</value>
+  </data>
+  <data name="AdditionalsParametersLabel" xml:space="preserve">
+    <value>Yderligere parametre</value>
+  </data>
+  <data name="HeaderAverageDamagesPerRound" xml:space="preserve">
+    <value>GSR</value>
+    <comment>Average Damage Per Round</comment>
+  </data>
+  <data name="AdrFull" xml:space="preserve">
+    <value>GSR (Gennemsnitlig Skade Per Runde)</value>
+  </data>
+  <data name="AprFull" xml:space="preserve">
+    <value>APR (Assisterende Drab Per Runde)</value>
+  </data>
+  <data name="Assists" xml:space="preserve">
+    <value>Assisterende Drab</value>
+  </data>
+  <data name="Ban" xml:space="preserve">
+    <value>Bandlyst</value>
+  </data>
+  <data name="BanFull" xml:space="preserve">
+    <value>Bandlyst (VAC / OW)</value>
+  </data>
+  <data name="HeaderBombDefused" xml:space="preserve">
+    <value>BD</value>
+    <comment>Bomb Defused</comment>
+  </data>
+  <data name="HeaderBombExploded" xml:space="preserve">
+    <value>BE</value>
+    <comment>Bomb Exploded</comment>
+  </data>
+  <data name="BombDefused" xml:space="preserve">
+    <value>Bombe Demonteret</value>
+  </data>
+  <data name="BombExploded" xml:space="preserve">
+    <value>Bomb Eksploderet</value>
+  </data>
+  <data name="BombPlanted" xml:space="preserve">
+    <value>Bombe anbragt</value>
+  </data>
+  <data name="HeaderBombPlanted" xml:space="preserve">
+    <value>Bombe anbragt</value>
+    <comment>Bomb Planted</comment>
+  </data>
+  <data name="BrowseToErrorsFile" xml:space="preserve">
+    <value>send til fejl filer</value>
+  </data>
+  <data name="HeaderCrouchKills" xml:space="preserve">
+    <value>KD</value>
+    <comment>Crouch Kill</comment>
+  </data>
+  <data name="ClearDemosData" xml:space="preserve">
+    <value>Ryd Demoer data</value>
+  </data>
+  <data name="ClearVdmFiles" xml:space="preserve">
+    <value>Slet VDM filer</value>
+  </data>
+  <data name="ClientName" xml:space="preserve">
+    <value>Klient</value>
+  </data>
+  <data name="CloseBotOnExit" xml:space="preserve">
+    <value>Luk BOT ved afslut</value>
+  </data>
+  <data name="Clutch" xml:space="preserve">
+    <value>Clutch</value>
+  </data>
+  <data name="Clutches" xml:space="preserve">
+    <value>Clutches</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Kolonner</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="CommentLabel" xml:space="preserve">
+    <value>Kommentar</value>
+  </data>
+  <data name="CrouchKills" xml:space="preserve">
+    <value>Kravle Drab</value>
+  </data>
+  <data name="CsgoExePath" xml:space="preserve">
+    <value>csgo.exe path</value>
+  </data>
+  <data name="CurrentAccountWatch" xml:space="preserve">
+    <value>Nuværende bruger bruges til at se (Højdepunkter/Lavdepunkter)</value>
+  </data>
+  <data name="CurrentFolder" xml:space="preserve">
+    <value>Nuværende Mappe</value>
+  </data>
+  <data name="DataCache" xml:space="preserve">
+    <value>Cache</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Dato</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>Dato Format</value>
+  </data>
+  <data name="Deaths" xml:space="preserve">
+    <value>Dødsfald</value>
+  </data>
+  <data name="DemoName" xml:space="preserve">
+    <value>Demo Navn</value>
+  </data>
+  <data name="Demos" xml:space="preserve">
+    <value>Demo(er)</value>
+  </data>
+  <data name="DemoType" xml:space="preserve">
+    <value>Demo type</value>
+  </data>
+  <data name="DestinationFolderLabel" xml:space="preserve">
+    <value>Destinations mappe</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>Donation</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Hent</value>
+  </data>
+  <data name="HeaderDeathPerRound" xml:space="preserve">
+    <value>DPR</value>
+    <comment>Death Per Round</comment>
+  </data>
+  <data name="DprFull" xml:space="preserve">
+    <value>DPR (Dødsfald Per Runde)</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Varighed</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="EnableMoviemakerMode" xml:space="preserve">
+    <value>Aktiver Moviemaker mode</value>
+  </data>
+  <data name="EntryKills" xml:space="preserve">
+    <value>Entry Drab</value>
+  </data>
+  <data name="EquipmentValueTeam1" xml:space="preserve">
+    <value>Udstyrs værdi hold 1</value>
+  </data>
+  <data name="EquipmentValueTeam2" xml:space="preserve">
+    <value>Udstyrs værdi hold 2</value>
+  </data>
+  <data name="ExportCustomData" xml:space="preserve">
+    <value>Eksporter brugerdefineret data</value>
+  </data>
+  <data name="FilterEtc" xml:space="preserve">
+    <value>Filter...</value>
+  </data>
+  <data name="HeaderFiveKills" xml:space="preserve">
+    <value>5K</value>
+    <comment>5 Kills</comment>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Mapper</value>
+  </data>
+  <data name="HeaderFourKills" xml:space="preserve">
+    <value>4K</value>
+    <comment>4 Kills</comment>
+  </data>
+  <data name="HeaderFramerate" xml:space="preserve">
+    <value>FR</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Fra</value>
+  </data>
+  <data name="Fullscreen" xml:space="preserve">
+    <value>Fuldskærm</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Højde</value>
+  </data>
+  <data name="HeaderHltvRating" xml:space="preserve">
+    <value>HLTV</value>
+  </data>
+  <data name="Hostname" xml:space="preserve">
+    <value>Værtsnavn</value>
+  </data>
+  <data name="HeaderHeadshots" xml:space="preserve">
+    <value>HS</value>
+    <comment>HeadShot</comment>
+  </data>
+  <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
+    <value>Ignorer bandlys forkommet efter demo dato</value>
+  </data>
+  <data name="ImportCustomData" xml:space="preserve">
+    <value>Importer brugerdefineret data</value>
+  </data>
+  <data name="HeaderJumpKills" xml:space="preserve">
+    <value>HD</value>
+    <comment>Jump Kill</comment>
+  </data>
+  <data name="JumpKills" xml:space="preserve">
+    <value>Hop Drab</value>
+  </data>
+  <data name="HeaderKillDeathRatio" xml:space="preserve">
+    <value>D/D</value>
+    <comment>Kills Per Deaths</comment>
+  </data>
+  <data name="Kills" xml:space="preserve">
+    <value>Drab</value>
+  </data>
+  <data name="HeaderKillsPerRound" xml:space="preserve">
+    <value>Drab Per Runde</value>
+    <comment>Kill Per Round</comment>
+  </data>
+  <data name="LaunchOptions" xml:space="preserve">
+    <value>Opstart indstillinger</value>
+  </data>
+  <data name="LimitStatsToSelectedFolder" xml:space="preserve">
+    <value>Begræns statistikker til den markerede mappe</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Bane</value>
+  </data>
+  <data name="MapName" xml:space="preserve">
+    <value>Bane navn</value>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>div.</value>
+  </data>
+  <data name="MVP" xml:space="preserve">
+    <value>MVS</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Navn</value>
+  </data>
+  <data name="NoAnalyzableDemos" xml:space="preserve">
+    <value>Ingen Analyserbare Demoer</value>
+  </data>
+  <data name="NotAnalyzable" xml:space="preserve">
+    <value>Ikke analyserbar</value>
+  </data>
+  <data name="HeaderOneKill" xml:space="preserve">
+    <value>1K</value>
+    <comment>1 Kill</comment>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Fjern Bruger</value>
+  </data>
+  <data name="RemoveFolder" xml:space="preserve">
+    <value>Fjern Mappe</value>
+  </data>
+  <data name="RoundPlayed" xml:space="preserve">
+    <value>Runde Spillet</value>
+  </data>
+  <data name="RoundType" xml:space="preserve">
+    <value>Runde Type</value>
+  </data>
+  <data name="HeaderRoundPlayed" xml:space="preserve">
+    <value>RS</value>
+    <comment>Round Played</comment>
+  </data>
+  <data name="RWS" xml:space="preserve">
+    <value>RVD</value>
+    <comment>Round Win Share</comment>
+  </data>
+  <data name="ScoreTeam1" xml:space="preserve">
+    <value>Points hold 1</value>
+  </data>
+  <data name="ScoreTeam2" xml:space="preserve">
+    <value>Points hold 2</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Indstillinger</value>
+  </data>
+  <data name="ShowAllFolders" xml:space="preserve">
+    <value>Vis Alle Mapper</value>
+  </data>
+  <data name="ShowMoreDemos" xml:space="preserve">
+    <value>Vis flere Demoer</value>
+  </data>
+  <data name="SideTrouble" xml:space="preserve">
+    <value>Side Problemer</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>kilde</value>
+  </data>
+  <data name="HeaderScoreTeam1" xml:space="preserve">
+    <value>PH1</value>
+    <comment>Score Team 1</comment>
+  </data>
+  <data name="HeaderScoreTeam2" xml:space="preserve">
+    <value>PH2</value>
+    <comment>Score Team 2</comment>
+  </data>
+  <data name="StartBotOnLaunch" xml:space="preserve">
+    <value>Start BOT ved opstart</value>
+  </data>
+  <data name="StartMoneyTeam1" xml:space="preserve">
+    <value>Start penge hold 1</value>
+  </data>
+  <data name="StartMoneyTeam2" xml:space="preserve">
+    <value>Start penge hold 2</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="SyncNicknames" xml:space="preserve">
+    <value>Synkroniser Navne</value>
+  </data>
+  <data name="HeaderTotalDamagesArmor" xml:space="preserve">
+    <value>TSK
+</value>
+    <comment>Total Damage Armor</comment>
+  </data>
+  <data name="HeaderTotalDamagesHealth" xml:space="preserve">
+    <value>TSH</value>
+    <comment>Total Damage Health</comment>
+  </data>
+  <data name="Team1" xml:space="preserve">
+    <value>Hold 1</value>
+  </data>
+  <data name="Team1Name" xml:space="preserve">
+    <value>Hold 1 navn</value>
+  </data>
+  <data name="Team2" xml:space="preserve">
+    <value>Hold 2</value>
+  </data>
+  <data name="Team2Name" xml:space="preserve">
+    <value>Hold 2 navn</value>
+  </data>
+  <data name="TeamTrouble" xml:space="preserve">
+    <value>Hold problemer</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>tema</value>
+  </data>
+  <data name="HeaderThreeKills" xml:space="preserve">
+    <value>3K</value>
+    <comment>3 Kills</comment>
+  </data>
+  <data name="HeaderTickrate" xml:space="preserve">
+    <value>TR</value>
+  </data>
+  <data name="Ticks" xml:space="preserve">
+    <value>Ticks</value>
+  </data>
+  <data name="TkFull" xml:space="preserve">
+    <value>HD (Hold Drab)</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Til</value>
+  </data>
+  <data name="TotalDamageArmor" xml:space="preserve">
+    <value>Total Skade kevlar</value>
+  </data>
+  <data name="TotalDamageHealth" xml:space="preserve">
+    <value>Total Skade helbred</value>
+  </data>
+  <data name="TotalKills" xml:space="preserve">
+    <value>Samlet drab</value>
+  </data>
+  <data name="ToWatch" xml:space="preserve">
+    <value>Se senere</value>
+  </data>
+  <data name="TradeDeath" xml:space="preserve">
+    <value>Bytnings dødsfald</value>
+  </data>
+  <data name="TradeKill" xml:space="preserve">
+    <value>Bytnings Drab</value>
+  </data>
+  <data name="HeaderTwoKills" xml:space="preserve">
+    <value>2K</value>
+    <comment>2 Kills</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="UseAccountForWatch" xml:space="preserve">
+    <value>Brug denne bruger til at se</value>
+  </data>
+  <data name="UseCutomLowlightHighlight" xml:space="preserve">
+    <value>Brug brugerdefineret Højdepunkter/lavdepunkter generation</value>
+  </data>
+  <data name="Watched" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Bredde</value>
+  </data>
+  <data name="WinnerTeamName" xml:space="preserve">
+    <value>Vinder hold navn</value>
+  </data>
+  <data name="WinnerSide" xml:space="preserve">
+    <value>WS</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ja</value>
+  </data>
+  <data name="ToolTipAccountStats" xml:space="preserve">
+    <value>Bruger statistikker(CTRL+E)</value>
+  </data>
+  <data name="ToolTipAddToSuspectsList" xml:space="preserve">
+    <value>Tilføj spillere til mistænkte liste (CTRL+W)</value>
+  </data>
+  <data name="ToolTipAnalyzeSelectedDemos" xml:space="preserve">
+    <value>Analyser markerede demo(er) (CTRL+S)</value>
+  </data>
+  <data name="ToolTipBrowseToDemo" xml:space="preserve">
+    <value>gå til demo(CTRL+B)</value>
+  </data>
+  <data name="ToolTipDeleteDemo" xml:space="preserve">
+    <value>Slet markerede demo(er) (CTRL+D)</value>
+  </data>
+  <data name="ToolTipDemoDetails" xml:space="preserve">
+    <value>Demo detaljer (CTRL+D)</value>
+  </data>
+  <data name="ToolTipDownloadDemos" xml:space="preserve">
+    <value>Hent nyeste MM demoer fra den nuværende steam konto(CTRL+H)</value>
+  </data>
+  <data name="ToolTipExportXls" xml:space="preserve">
+    <value>Eksporter som XLS(CTRL+X)</value>
+  </data>
+  <data name="ToolTipGoToSuspectsList" xml:space="preserve">
+    <value>Gå til mistænkte liste (CTRL+F)</value>
+  </data>
+  <data name="ToolTipGotoTick" xml:space="preserve">
+    <value>Begynd at se den markerede demo ved specifik tick (CTRL+G)</value>
+  </data>
+  <data name="ToolTipRefreshDemosList" xml:space="preserve">
+    <value>Opdater demo liste (CTRL+R | F5)</value>
+  </data>
+  <data name="ToolTipStop" xml:space="preserve">
+    <value>Stop (CTRL+S)</value>
+  </data>
+  <data name="ToolTipWatchDemo" xml:space="preserve">
+    <value>Se demo (CTRL+W)</value>
+  </data>
+  <data name="ToolTipWatchHighlights" xml:space="preserve">
+    <value>Se dine højdepunkter (CTRL+H)</value>
+  </data>
+  <data name="ToolTipWatchLowlights" xml:space="preserve">
+    <value>Se dine lavdepunkter (CTRL+L)</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>af</value>
+  </data>
+  <data name="CopyEmailAddress" xml:space="preserve">
+    <value>kopier Email adresse</value>
+  </data>
+  <data name="Damages" xml:space="preserve">
+    <value>Skade</value>
+  </data>
+  <data name="Flashbangs" xml:space="preserve">
+    <value>Flashbangs</value>
+  </data>
+  <data name="Heatmap" xml:space="preserve">
+    <value>VarmeKort</value>
+  </data>
+  <data name="LabelClientname" xml:space="preserve">
+    <value>Bruger navn</value>
+  </data>
+  <data name="LabelFilename" xml:space="preserve">
+    <value>Filnavn</value>
+  </data>
+  <data name="LabelHostname" xml:space="preserve">
+    <value>Værts navn</value>
+  </data>
+  <data name="LabelMostHsPercent" xml:space="preserve">
+    <value>Flest Hovedskud %</value>
+  </data>
+  <data name="LabelMap" xml:space="preserve">
+    <value>Bane</value>
+  </data>
+  <data name="LabelMostBombPlanted" xml:space="preserve">
+    <value>Flest bomber anbragt</value>
+  </data>
+  <data name="LabelMostDamagingWeapon" xml:space="preserve">
+    <value>Mest dødbringende våben</value>
+  </data>
+  <data name="LabelMostEntryKills" xml:space="preserve">
+    <value>Flest Entry Drab</value>
+  </data>
+  <data name="LabelMostKillingWeapon" xml:space="preserve">
+    <value>Mest dræbende våben</value>
+  </data>
+  <data name="LabelPlayerStats" xml:space="preserve">
+    <value>Spiller statistik</value>
+  </data>
+  <data name="LabelStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="LabelTickrate" xml:space="preserve">
+    <value>Tickrate</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Overblik</value>
+  </data>
+  <data name="PlayerDetails" xml:space="preserve">
+    <value>Spiller Detaljer</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rang</value>
+  </data>
+  <data name="RoundDetails" xml:space="preserve">
+    <value>Runde detaljer</value>
+  </data>
+  <data name="SaveComment" xml:space="preserve">
+    <value>Gem kommentar</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="Stuffs" xml:space="preserve">
+    <value>Ting</value>
+  </data>
+  <data name="Tick" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="ToolTipAnalyze" xml:space="preserve">
+    <value>Analyser (CTRL+S)</value>
+  </data>
+  <data name="ToolTipBack" xml:space="preserve">
+    <value>Tilbage (CTRL+B)</value>
+  </data>
+  <data name="ToolTipDamages" xml:space="preserve">
+    <value>Skade (CTRL+D)</value>
+  </data>
+  <data name="ToolTipFlashbangs" xml:space="preserve">
+    <value>Flashbangs (CTRL+F)</value>
+  </data>
+  <data name="ToolTipHeatmap" xml:space="preserve">
+    <value>VarmeBane udregner (CTRL+H)</value>
+  </data>
+  <data name="ToolTipKillsDetails" xml:space="preserve">
+    <value>Drabs detaljer (CTRL+K)</value>
+  </data>
+  <data name="ToolTipNextDemo" xml:space="preserve">
+    <value>Næste Demo (CTRL+RIGHT)</value>
+  </data>
+  <data name="ToolTipOverview" xml:space="preserve">
+    <value>Overblik (CTRL+O)</value>
+  </data>
+  <data name="ToolTipPlayerDetails" xml:space="preserve">
+    <value>Spiller Detaljer(CTRL+P)</value>
+  </data>
+  <data name="ToolTipPreviousDemo" xml:space="preserve">
+    <value>Forrige Demo(CTRL+LEFT)</value>
+  </data>
+  <data name="ToolTipRoundDetails" xml:space="preserve">
+    <value>Runde detaljer (CTRL+R)</value>
+  </data>
+  <data name="ToolTipStuffs" xml:space="preserve">
+    <value>Ting (CTRL+G)</value>
+  </data>
+  <data name="ToolTipWatchRound" xml:space="preserve">
+    <value>Se Runde</value>
+  </data>
+  <data name="WatchRound" xml:space="preserve">
+    <value>Se Runde</value>
+  </data>
+  <data name="HeaderAssists" xml:space="preserve">
+    <value>A</value>
+    <comment>Assists</comment>
+  </data>
+  <data name="HeaderAssistsPerRound" xml:space="preserve">
+    <value>APR</value>
+    <comment>Assists Per Round</comment>
+  </data>
+  <data name="HeaderAvarageDamagesPerPlayer" xml:space="preserve">
+    <value>GSS</value>
+    <comment>Average Damages Per Player</comment>
+  </data>
+  <data name="HeaderDeaths" xml:space="preserve">
+    <value>D</value>
+    <comment>Deaths</comment>
+  </data>
+  <data name="HeaderEntryKills" xml:space="preserve">
+    <value>ED</value>
+    <comment>Entry Kills</comment>
+  </data>
+  <data name="HeaderEquipementValueTeam1" xml:space="preserve">
+    <value>EV Hold 1 ($)</value>
+  </data>
+  <data name="HeaderEquipementValueTeam2" xml:space="preserve">
+    <value>EV Hold 2 ($)</value>
+  </data>
+  <data name="HeaderHsPercent" xml:space="preserve">
+    <value>HS%</value>
+    <comment>% headshot</comment>
+  </data>
+  <data name="HeaderKills" xml:space="preserve">
+    <value>D</value>
+    <comment>Kills</comment>
+  </data>
+  <data name="HeaderOverwatch" xml:space="preserve">
+    <value>OW</value>
+    <comment>Overwatch</comment>
+  </data>
+  <data name="HeaderSideTrouble" xml:space="preserve">
+    <value>SP</value>
+    <comment>Side Trouble</comment>
+  </data>
+  <data name="HeaderStartMoneyTeam1" xml:space="preserve">
+    <value>SM Hold 1 ($)</value>
+  </data>
+  <data name="HeaderStartMoneyTeam2" xml:space="preserve">
+    <value>SM Hold 2 ($)</value>
+  </data>
+  <data name="HeaderTeamKill" xml:space="preserve">
+    <value>HD</value>
+    <comment>Team Kill</comment>
+  </data>
+  <data name="HeaderTeamTrouble" xml:space="preserve">
+    <value>HP</value>
+    <comment>Team Trouble</comment>
+  </data>
+  <data name="HeaderToolTipAccountNickname" xml:space="preserve">
+    <value>Brugers Øgenavn</value>
+  </data>
+  <data name="HeaderToolTipAccountProfileUrl" xml:space="preserve">
+    <value>Brugers profil URL</value>
+  </data>
+  <data name="HeaderToolTipAccountStatus" xml:space="preserve">
+    <value>Bruger Status (offline, online...)</value>
+  </data>
+  <data name="HeaderToolTipAccountVacBanned" xml:space="preserve">
+    <value>Bruger VAC bandlyst</value>
+  </data>
+  <data name="HeaderToolTipAccountVisibilityStatus" xml:space="preserve">
+    <value>Bruger Synligheds Status</value>
+  </data>
+  <data name="HeaderToolTipAssisterName" xml:space="preserve">
+    <value>Assistent Navn</value>
+  </data>
+  <data name="HeaderToolTipAssists" xml:space="preserve">
+    <value>Assists</value>
+  </data>
+  <data name="HeaderToolTipAssistsPerRound" xml:space="preserve">
+    <value>Assist Per Runde</value>
+  </data>
+  <data name="HeaderToolTipAverageDamagePerPlayer" xml:space="preserve">
+    <value>Gennemsnitlig Skade Per Spiller</value>
+  </data>
+  <data name="HeaderToolTipAverageDamagePerRound" xml:space="preserve">
+    <value>Gennemsnitlig Skade Per Runde</value>
+  </data>
+  <data name="HeaderToolTipBombDefused" xml:space="preserve">
+    <value>Bombe Demonteret</value>
+  </data>
+  <data name="HeaderToolTipBombExploded" xml:space="preserve">
+    <value>Bombe Detoneret</value>
+  </data>
+  <data name="HeaderToolTipBombPlanted" xml:space="preserve">
+    <value>Bombe Anbragt</value>
+  </data>
+  <data name="HeaderToolTipClutchCount" xml:space="preserve">
+    <value>Antal Clutches</value>
+  </data>
+  <data name="HeaderToolTipClutchWonCount" xml:space="preserve">
+    <value>Antal Clutches vundet</value>
+  </data>
+  <data name="HeaderToolTipCommunityBanned" xml:space="preserve">
+    <value>Fællesskabs Bandlyst</value>
+  </data>
+  <data name="HeaderToolTipCommunityProfileConfigured" xml:space="preserve">
+    <value>Fællesskabs Profil konfigureret</value>
+  </data>
+  <data name="HeaderToolTipCrouchKills" xml:space="preserve">
+    <value>Kravle Drab</value>
+  </data>
+  <data name="HeaderToolTipDaysSinceLastBan" xml:space="preserve">
+    <value>Dage siden sidste Ban</value>
+  </data>
+  <data name="HeaderToolTipDeaths" xml:space="preserve">
+    <value>Dødsfald</value>
+  </data>
+  <data name="HeaderToolTipDeathsPerRound" xml:space="preserve">
+    <value>Dødsfald per runde</value>
+  </data>
+  <data name="HeaderToolTipDemoClientname" xml:space="preserve">
+    <value>Demo's klientnavn</value>
+  </data>
+  <data name="HeaderToolTipDemoComment" xml:space="preserve">
+    <value>Demo's Kommentar</value>
+  </data>
+  <data name="HeaderToolTipDemoDate" xml:space="preserve">
+    <value>Demo's Dato</value>
+  </data>
+  <data name="HeaderToolTipDemoDuration" xml:space="preserve">
+    <value>Demo's Varighed</value>
+  </data>
+  <data name="HeaderToolTipDemoFramerate" xml:space="preserve">
+    <value>Demo's Billedhastighed</value>
+  </data>
+  <data name="HeaderToolTipDemoHostname" xml:space="preserve">
+    <value>Demo's Værtsnavn</value>
+  </data>
+  <data name="HeaderToolTipDemoName" xml:space="preserve">
+    <value>Demo's Navn</value>
+  </data>
+  <data name="HeaderToolTipDemoSource" xml:space="preserve">
+    <value>Demo's kilde</value>
+  </data>
+  <data name="HeaderToolTipDemoTicks" xml:space="preserve">
+    <value>Demo's ticks</value>
+  </data>
+  <data name="HeaderToolTipDemoType" xml:space="preserve">
+    <value>Demo's type</value>
+  </data>
+  <data name="HeaderToolTipEntryKill" xml:space="preserve">
+    <value>Åbnings Drab</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValue" xml:space="preserve">
+    <value>Udstyrs Værdi</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
+    <value>Udstyrs værdi Hold 1 ($)</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValueTeam2" xml:space="preserve">
+    <value>Udstyrs Værdi Hold 2 ($)</value>
+  </data>
+  <data name="HeaderToolTipFiveKill" xml:space="preserve">
+    <value>5 Drab</value>
+  </data>
+  <data name="HeaderToolTipFourKill" xml:space="preserve">
+    <value>4 Drab</value>
+  </data>
+  <data name="HeaderToolTipHasVacOwBan" xml:space="preserve">
+    <value>VAC / OW bandlyst?</value>
+  </data>
+  <data name="HeaderToolTipHasWonClutch" xml:space="preserve">
+    <value>Har Vundet Clutch?</value>
+  </data>
+  <data name="HeaderToolTipHasWonDuel" xml:space="preserve">
+    <value>Har vundet Duel?</value>
+  </data>
+  <data name="HeaderToolTipHeadshotPercent" xml:space="preserve">
+    <value>Hovedskuds procent</value>
+  </data>
+  <data name="HeaderToolTipHeadshots" xml:space="preserve">
+    <value>Hovedskud</value>
+  </data>
+  <data name="HeaderToolTipHits" xml:space="preserve">
+    <value>Ramt</value>
+  </data>
+  <data name="HeaderToolTipHltvRating" xml:space="preserve">
+    <value>HLTV bedømmelse</value>
+  </data>
+  <data name="HeaderToolTipIsOwBanned" xml:space="preserve">
+    <value>Overwatch bandlyst?</value>
+  </data>
+  <data name="HeaderToolTipIsVacBanned" xml:space="preserve">
+    <value>VAC bandlyst?</value>
+  </data>
+  <data name="HeaderToolTipJumpKills" xml:space="preserve">
+    <value>Hop drab</value>
+  </data>
+  <data name="HeaderToolTipKillerName" xml:space="preserve">
+    <value>Drabsmandens navn</value>
+  </data>
+  <data name="HeaderToolTipKillerSide" xml:space="preserve">
+    <value>Drabsmandens Side</value>
+  </data>
+  <data name="HeaderToolTipKillPerRound" xml:space="preserve">
+    <value>Drab per runde</value>
+  </data>
+  <data name="HeaderToolTipKills" xml:space="preserve">
+    <value>Drab</value>
+  </data>
+  <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
+    <value>Drab per Dødsfald</value>
+  </data>
+  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
+    <value>Sidste Online</value>
+  </data>
+  <data name="HeaderToolTipMapName" xml:space="preserve">
+    <value>Bane Navn</value>
+  </data>
+  <data name="HeaderToolTipMarketBanned" xml:space="preserve">
+    <value>Marked Bandlyst</value>
+  </data>
+  <data name="HeaderToolTipMvp" xml:space="preserve">
+    <value>Mest Værdifulde spiller</value>
+  </data>
+  <data name="HeaderToolTipNumber" xml:space="preserve">
+    <value>Nummer</value>
+  </data>
+  <data name="HeaderToolTipOneKill" xml:space="preserve">
+    <value>1 drab</value>
+  </data>
+  <data name="HeaderToolTipOneVersusFive" xml:space="preserve">
+    <value>1 mod 5</value>
+  </data>
+  <data name="HeaderToolTipOneVersusFour" xml:space="preserve">
+    <value>1 mod 4</value>
+  </data>
+  <data name="HeaderToolTipOneVersusOne" xml:space="preserve">
+    <value>1 mod 1</value>
+  </data>
+  <data name="HeaderToolTipOneVersusThree" xml:space="preserve">
+    <value>1 mod 3</value>
+  </data>
+  <data name="HeaderToolTipOneVersusTwo" xml:space="preserve">
+    <value>1 mod 2</value>
+  </data>
+  <data name="HeaderToolTipOneVersusX" xml:space="preserve">
+    <value>1vX</value>
+  </data>
+  <data name="HeaderToolTipOverwatchGameBanCount" xml:space="preserve">
+    <value>Antal Overwatch bandlysninger</value>
+  </data>
+  <data name="HeaderToolTipPlayerAvatar" xml:space="preserve">
+    <value>Spiller Avatar</value>
+  </data>
+  <data name="HeaderToolTipPlayerFlashbangThrown" xml:space="preserve">
+    <value>Samlet antal flashbangs kastet af spiller</value>
+  </data>
+  <data name="HeaderToolTipPlayerName" xml:space="preserve">
+    <value>Spiller navn</value>
+  </data>
+  <data name="HeaderToolTipPlayerRank" xml:space="preserve">
+    <value>Spiller rang</value>
+  </data>
+  <data name="HeaderToolTipRatio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="HeaderToolTipResult" xml:space="preserve">
+    <value>Resultat</value>
+  </data>
+  <data name="HeaderToolTipRoundLost" xml:space="preserve">
+    <value>Runde tabt</value>
+  </data>
+  <data name="HeaderToolTipRoundNumber" xml:space="preserve">
+    <value>Runde nummer</value>
+  </data>
+  <data name="HeaderToolTipRoundPlayed" xml:space="preserve">
+    <value>Runde Spillet</value>
+  </data>
+  <data name="HeaderToolTipRoundType" xml:space="preserve">
+    <value>Runde type (normal / eco / tvangs køb/ semi-eco)</value>
+  </data>
+  <data name="HeaderToolTipRoundWon" xml:space="preserve">
+    <value>Runde vundet</value>
+  </data>
+  <data name="HeaderToolTipRws" xml:space="preserve">
+    <value>ESEA RWS (Runde vundet Deling)</value>
+  </data>
+  <data name="HeaderToolTipScore" xml:space="preserve">
+    <value>Score</value>
+  </data>
+  <data name="HeaderToolTipScoreTeam1" xml:space="preserve">
+    <value>Score Team 1</value>
+  </data>
+  <data name="HeaderToolTipScoreTeam2" xml:space="preserve">
+    <value>Score Team 2</value>
+  </data>
+  <data name="HeaderToolTipServerTickrate" xml:space="preserve">
+    <value>Server tickhypighed</value>
+  </data>
+  <data name="HeaderToolTipShotsFired" xml:space="preserve">
+    <value>Skud affyret</value>
+  </data>
+  <data name="HeaderToolTipSideTrouble" xml:space="preserve">
+    <value>Side på eco / tvangskøb eller semi-eco</value>
+  </data>
+  <data name="HeaderToolTipStartMoney" xml:space="preserve">
+    <value>Start penge</value>
+  </data>
+  <data name="HeaderToolTipStartMoneyTeam1" xml:space="preserve">
+    <value>Start penge hold 1 ($)</value>
+  </data>
+  <data name="HeaderToolTipStartMoneyTeam2" xml:space="preserve">
+    <value>Start penge hold 2 ($)</value>
+  </data>
+  <data name="HeaderToolTipTeam1Name" xml:space="preserve">
+    <value>Hold 1 navn</value>
+  </data>
+  <data name="HeaderToolTipTeam2Name" xml:space="preserve">
+    <value>Hold 2 navn</value>
+  </data>
+  <data name="HeaderToolTipTeamFlashbangThrown" xml:space="preserve">
+    <value>Samlet antal flashbangs kastet af spiller</value>
+  </data>
+  <data name="HeaderToolTipTeamKill" xml:space="preserve">
+    <value>Hold drab (Venligsindet beskydning)</value>
+  </data>
+  <data name="HeaderToolTipTeamName" xml:space="preserve">
+    <value>Hold navn</value>
+  </data>
+  <data name="HeaderToolTipTeamNameTrouble" xml:space="preserve">
+    <value>Hold navn på eco / tvangskøb eller semi-eco</value>
+  </data>
+  <data name="HeaderToolTipThreeKill" xml:space="preserve">
+    <value>3 Drab</value>
+  </data>
+  <data name="HeaderToolTipThrowerName" xml:space="preserve">
+    <value>Kaster navn</value>
+  </data>
+  <data name="HeaderToolTipTick" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="HeaderToolTipTotalDamageArmor" xml:space="preserve">
+    <value>Samlet Skade Kevlar</value>
+  </data>
+  <data name="HeaderToolTipTotalDamageHealth" xml:space="preserve">
+    <value>Samlet Skade helbred</value>
+  </data>
+  <data name="HeaderToolTipTotalEntryKill" xml:space="preserve">
+    <value>Samlet åbnings drab</value>
+  </data>
+  <data name="HeaderToolTipTradeDeath" xml:space="preserve">
+    <value>Bytte Dødsfald</value>
+  </data>
+  <data name="HeaderToolTipTradeKill" xml:space="preserve">
+    <value>Bytte Drab</value>
+  </data>
+  <data name="HeaderToolTipTradeKillsDeaths" xml:space="preserve">
+    <value>Bytte Drab/ Dødsfald</value>
+  </data>
+  <data name="HeaderToolTipTwoKill" xml:space="preserve">
+    <value>2 Drab</value>
+  </data>
+  <data name="HeaderToolTipVacBanCount" xml:space="preserve">
+    <value>Antal af Vac Bandlysninger</value>
+  </data>
+  <data name="HeaderToolTipVictimName" xml:space="preserve">
+    <value>Offer navn</value>
+  </data>
+  <data name="HeaderToolTipWeaponName" xml:space="preserve">
+    <value>Våben Navn</value>
+  </data>
+  <data name="HeaderToolTipWinner" xml:space="preserve">
+    <value>Vinder</value>
+  </data>
+  <data name="HeaderToolTipWinnerTeamName" xml:space="preserve">
+    <value>Vinder Hold Navn</value>
+  </data>
+  <data name="HeaderToolTipWinStatus" xml:space="preserve">
+    <value>Vundet/tabt/uafgjort</value>
+  </data>
+  <data name="HeaderToolTipWonRound" xml:space="preserve">
+    <value>Runde Vundet?</value>
+  </data>
+  <data name="HeaderTradeDeaths" xml:space="preserve">
+    <value>BD</value>
+    <comment>Trade Deaths</comment>
+  </data>
+  <data name="HeaderTradeKills" xml:space="preserve">
+    <value>BD</value>
+    <comment>Trade Kills</comment>
+  </data>
+  <data name="HeaderWinnerSide" xml:space="preserve">
+    <value>VS</value>
+    <comment>Winner Side</comment>
+  </data>
+  <data name="HeaderWinnerTeamName" xml:space="preserve">
+    <value>VHN</value>
+    <comment>Winner Team Name</comment>
+  </data>
+  <data name="OneVersusFive" xml:space="preserve">
+    <value>1V5</value>
+  </data>
+  <data name="OneVersusFour" xml:space="preserve">
+    <value>1V4</value>
+  </data>
+  <data name="OneVersusOne" xml:space="preserve">
+    <value>1V1</value>
+  </data>
+  <data name="OneVersusThree" xml:space="preserve">
+    <value>1V3</value>
+  </data>
+  <data name="OneVersusTwo" xml:space="preserve">
+    <value>1V2</value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Spiller</value>
+  </data>
+  <data name="HeaderClutchs" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="AddPlayersToSuspects" xml:space="preserve">
+    <value>Tilføj spiller til mistænkte</value>
+  </data>
+  <data name="AddToAccountList" xml:space="preserve">
+    <value>Tilføj til bruger liste</value>
+  </data>
+  <data name="AddToWhitelist" xml:space="preserve">
+    <value>Tilføj til hvidliste</value>
+  </data>
+  <data name="AssistsFull" xml:space="preserve">
+    <value>A (Assits)</value>
+  </data>
+  <data name="BombDefusedFull" xml:space="preserve">
+    <value>BD (Bomb Demonteret)</value>
+  </data>
+  <data name="BombExplodedFull" xml:space="preserve">
+    <value>BE (Bomb Eksploderet)</value>
+  </data>
+  <data name="BombPlantedFull" xml:space="preserve">
+    <value>BP (Bomb Anbragt)</value>
+  </data>
+  <data name="ClutchsFull" xml:space="preserve">
+    <value>C (Clutchs)</value>
+  </data>
+  <data name="CopyPlayDemoCommand" xml:space="preserve">
+    <value>Kopier Afspildemo kommando</value>
+  </data>
+  <data name="CrouchKillsFull" xml:space="preserve">
+    <value>KD (kravle drab)</value>
+  </data>
+  <data name="DeathsFull" xml:space="preserve">
+    <value>D (Dødsfald)</value>
+  </data>
+  <data name="EntryKillsFull" xml:space="preserve">
+    <value>ÅD (Åbningsdrab)</value>
+  </data>
+  <data name="EquipmentValueTeam1Full" xml:space="preserve">
+    <value>UVH1 (Udstyrs Værdi Hold 1 ($))</value>
+  </data>
+  <data name="EquipmentValueTeam2Full" xml:space="preserve">
+    <value>UVH2 (Udstyrs Værdi Hold 2 ($))</value>
+  </data>
+  <data name="EseaRwsFull" xml:space="preserve">
+    <value>RWS (ESEA Runde vundet deling)</value>
+  </data>
+  <data name="ExportJson" xml:space="preserve">
+    <value>Eksporter JSON</value>
+  </data>
+  <data name="Framerate" xml:space="preserve">
+    <value>BilledHastighed</value>
+  </data>
+  <data name="FramerateFull" xml:space="preserve">
+    <value>BH (BilledHastighed)</value>
+  </data>
+  <data name="HeadshotsFull" xml:space="preserve">
+    <value>HS (Hovedskud)</value>
+  </data>
+  <data name="HltvFull" xml:space="preserve">
+    <value>HLTV (HLTV Bedømmelse)</value>
+  </data>
+  <data name="JumpKillsFull" xml:space="preserve">
+    <value>HB (Hop drab)</value>
+  </data>
+  <data name="KillsDeathsRatioFull" xml:space="preserve">
+    <value>D/D (Drab Per Dødsfald)</value>
+  </data>
+  <data name="KillsFull" xml:space="preserve">
+    <value>D (Drab)</value>
+  </data>
+  <data name="LastRankDetected" xml:space="preserve">
+    <value>Nyeste rang Noteret</value>
+  </data>
+  <data name="MoveToWhitelist" xml:space="preserve">
+    <value>Flyt til hvidliste</value>
+  </data>
+  <data name="MvpFull" xml:space="preserve">
+    <value>MVS (Mest værdifulde Spiller)</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Fjern</value>
+  </data>
+  <data name="RemoveFromCache" xml:space="preserve">
+    <value>Fjern fra cache</value>
+  </data>
+  <data name="RoundPlayedFull" xml:space="preserve">
+    <value>RS ( Runde Spillet)</value>
+  </data>
+  <data name="ScoreTeam1Full" xml:space="preserve">
+    <value>SH1 (Score Hold 1)</value>
+  </data>
+  <data name="ScoreTeam2Full" xml:space="preserve">
+    <value>SH2 (Score Hold 2)</value>
+  </data>
+  <data name="ShowPlayerDemos" xml:space="preserve">
+    <value>Vis Spiller Demos</value>
+  </data>
+  <data name="ShowSuspectDemos" xml:space="preserve">
+    <value>Vis Mistænkte Demos</value>
+  </data>
+  <data name="SideTroubleFull" xml:space="preserve">
+    <value>SP (Side Problemer)</value>
+  </data>
+  <data name="StartMoneyTeam1Full" xml:space="preserve">
+    <value>SPH1 (Start Penge Hold 1 ($))</value>
+  </data>
+  <data name="StartMoneyTeam2Full" xml:space="preserve">
+    <value>SPH2 (Start Penge Hold 2 ($))</value>
+  </data>
+  <data name="TeamNameTroubleFull" xml:space="preserve">
+    <value>HNP (Hold Navn Problemer)</value>
+  </data>
+  <data name="Tickrate" xml:space="preserve">
+    <value>TickHyppighed</value>
+  </data>
+  <data name="TickrateFull" xml:space="preserve">
+    <value>TH (TickHyppighed)</value>
+  </data>
+  <data name="TotalDamagesArmorFull" xml:space="preserve">
+    <value>SSK (Samlet Skade Kevlar)</value>
+  </data>
+  <data name="TotalDamagesHealthFull" xml:space="preserve">
+    <value>SSH (Samlet Skade Helbred)</value>
+  </data>
+  <data name="TradeDeathsFull" xml:space="preserve">
+    <value>BD (Bytte Dødsfald)</value>
+  </data>
+  <data name="TradeKillsFull" xml:space="preserve">
+    <value>HD (Hold Drab)</value>
+  </data>
+  <data name="WatchPlayer" xml:space="preserve">
+    <value>Se Spiller</value>
+  </data>
+  <data name="WinnerSideFull" xml:space="preserve">
+    <value>VS (Vinder Side)</value>
+  </data>
+  <data name="WinnerTeamNameFull" xml:space="preserve">
+    <value>VHN (Vinder Hold Navn)</value>
+  </data>
+  <data name="Decoys" xml:space="preserve">
+    <value>LokkeDuer</value>
+  </data>
+  <data name="EndReasonBombDefused" xml:space="preserve">
+    <value>Bombe Demonteret</value>
+  </data>
+  <data name="EndReasonBombExploded" xml:space="preserve">
+    <value>Bomb Eksploderet</value>
+  </data>
+  <data name="EndReasonCtSurrender" xml:space="preserve">
+    <value>CT Overgivelse</value>
+  </data>
+  <data name="EndReasonCtWin" xml:space="preserve">
+    <value>Anti-Terrorister Vinder</value>
+  </data>
+  <data name="EndReasonTargetSaved" xml:space="preserve">
+    <value>Tid Udløbet</value>
+  </data>
+  <data name="EndReasonTsurrender" xml:space="preserve">
+    <value>T Overgivelse</value>
+  </data>
+  <data name="EndReasonTwin" xml:space="preserve">
+    <value>Terrorister Vundet</value>
+  </data>
+  <data name="EndReasonUnknown" xml:space="preserve">
+    <value>Ukendt</value>
+  </data>
+  <data name="HeaderAssister" xml:space="preserve">
+    <value>Assistent</value>
+  </data>
+  <data name="HeaderEquipmentValuePlayer" xml:space="preserve">
+    <value>EV ($)</value>
+  </data>
+  <data name="HeaderHits" xml:space="preserve">
+    <value>Ramt</value>
+  </data>
+  <data name="HeaderKiller" xml:space="preserve">
+    <value>Drabsmand</value>
+  </data>
+  <data name="HeaderShots" xml:space="preserve">
+    <value>Skud</value>
+  </data>
+  <data name="HeaderStartMoneyPlayer" xml:space="preserve">
+    <value>SM ($)</value>
+  </data>
+  <data name="HeaderVictim" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="HeaderWeapon" xml:space="preserve">
+    <value>Våben</value>
+  </data>
+  <data name="HeGrenades" xml:space="preserve">
+    <value>HE Granat</value>
+  </data>
+  <data name="Incendiaries" xml:space="preserve">
+    <value>Brandgranater</value>
+  </data>
+  <data name="LabelWinnerSide" xml:space="preserve">
+    <value>Vinder Side</value>
+  </data>
+  <data name="Molotovs" xml:space="preserve">
+    <value>Molotovs</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Spillere</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>begrundelse</value>
+  </data>
+  <data name="Smoke" xml:space="preserve">
+    <value>Røg</value>
+  </data>
+  <data name="StartMoney" xml:space="preserve">
+    <value>Start Penge</value>
+  </data>
+  <data name="Timeline" xml:space="preserve">
+    <value>Tidslinje</value>
+  </data>
+  <data name="ToolTipNextRound" xml:space="preserve">
+    <value>Næste Runde</value>
+  </data>
+  <data name="ToolTipPreviousRound" xml:space="preserve">
+    <value>Forrige Runde</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Ukendt</value>
+  </data>
+  <data name="ArmorDamages" xml:space="preserve">
+    <value>Kevlar Skade</value>
+  </data>
+  <data name="Attempts" xml:space="preserve">
+    <value>Forsøg</value>
+  </data>
+  <data name="ClutchesLoss" xml:space="preserve">
+    <value>Clutches Tabt</value>
+  </data>
+  <data name="ClutchesWon" xml:space="preserve">
+    <value>Clutches Vundet</value>
+  </data>
+  <data name="ClutchesWonPercent" xml:space="preserve">
+    <value>Clutches Vundet %</value>
+  </data>
+  <data name="DamagesPerRound" xml:space="preserve">
+    <value>Skade Per Runde</value>
+  </data>
+  <data name="EntryHoldKills" xml:space="preserve">
+    <value>Åbnings Hold Drab</value>
+  </data>
+  <data name="EntryHoldKillsDescription" xml:space="preserve">
+    <value>(Første Drab som CT)</value>
+  </data>
+  <data name="EntryKillDescription" xml:space="preserve">
+    <value>(Første Drab Som T)</value>
+  </data>
+  <data name="EquipmentValue" xml:space="preserve">
+    <value>Udstyrs Værdi ($)</value>
+  </data>
+  <data name="EquipmentValuePerRound" xml:space="preserve">
+    <value>Udstyrs Værdi Per Runde ($)</value>
+  </data>
+  <data name="HeaderKillerSide" xml:space="preserve">
+    <value>DS</value>
+    <comment>Killer Side</comment>
+  </data>
+  <data name="HeaderRound" xml:space="preserve">
+    <value>Runde</value>
+  </data>
+  <data name="HeaderRoundWon" xml:space="preserve">
+    <value>RW</value>
+  </data>
+  <data name="HeaderWon" xml:space="preserve">
+    <value>Vundet</value>
+  </data>
+  <data name="HealthDamages" xml:space="preserve">
+    <value>Helbreds Skade</value>
+  </data>
+  <data name="Loss" xml:space="preserve">
+    <value>Tabt</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Nej</value>
+  </data>
+  <data name="OneVersusFiveLoss" xml:space="preserve">
+    <value>1V5 tabt</value>
+  </data>
+  <data name="OneVersusFiveWon" xml:space="preserve">
+    <value>1V5 Vundet</value>
+  </data>
+  <data name="OneVersusFiveWonPercent" xml:space="preserve">
+    <value>1V5 Vundet %</value>
+  </data>
+  <data name="OneVersusFourLoss" xml:space="preserve">
+    <value>1V4 tabt</value>
+  </data>
+  <data name="OneVersusFourWon" xml:space="preserve">
+    <value>1V4 Vundet</value>
+  </data>
+  <data name="OneVersusFourWonPercent" xml:space="preserve">
+    <value>1V4 Vundet %</value>
+  </data>
+  <data name="OneVersusOneLoss" xml:space="preserve">
+    <value>1V1 tabt</value>
+  </data>
+  <data name="OneVersusOneWon" xml:space="preserve">
+    <value>1V1 Vundet</value>
+  </data>
+  <data name="OneVersusOneWonPercent" xml:space="preserve">
+    <value>1V1 Vundet %</value>
+  </data>
+  <data name="OneVersusThreeLoss" xml:space="preserve">
+    <value>1V3 Tabt</value>
+  </data>
+  <data name="OneVersusThreeWon" xml:space="preserve">
+    <value>1V3 Vundet</value>
+  </data>
+  <data name="OneVersusThreeWonPercent" xml:space="preserve">
+    <value>1V3 Vundet %</value>
+  </data>
+  <data name="OneVersusTwoLoss" xml:space="preserve">
+    <value>1V2 tabt</value>
+  </data>
+  <data name="OneVersusTwoWon" xml:space="preserve">
+    <value>1V2 Vundet</value>
+  </data>
+  <data name="OneVersusTwoWonPercent" xml:space="preserve">
+    <value>1V2 Vundet %</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Runde</value>
+  </data>
+  <data name="RoundTypeEco" xml:space="preserve">
+    <value>Eco</value>
+  </data>
+  <data name="RoundTypeForceBuy" xml:space="preserve">
+    <value>Tvangs Køb</value>
+  </data>
+  <data name="RoundTypeNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="RoundTypePistolRound" xml:space="preserve">
+    <value>Pistol Runde</value>
+  </data>
+  <data name="RoundTypeSemiEco" xml:space="preserve">
+    <value>Semi-Eco</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Samlet</value>
+  </data>
+  <data name="TotalArmorDamages" xml:space="preserve">
+    <value>Samlet Kevlar Skade</value>
+  </data>
+  <data name="TotalClutches" xml:space="preserve">
+    <value>Samlet Clutches</value>
+  </data>
+  <data name="TotalClutchesLoss" xml:space="preserve">
+    <value>Samlet Clutches tabt</value>
+  </data>
+  <data name="TotalClutchesWon" xml:space="preserve">
+    <value>Samlet Clutches Vundet</value>
+  </data>
+  <data name="TotalDamages" xml:space="preserve">
+    <value>Samlet Skade</value>
+  </data>
+  <data name="TotalHealthDamages" xml:space="preserve">
+    <value>Samlet Helbred Skade</value>
+  </data>
+  <data name="TotalOneVersusFiveLoss" xml:space="preserve">
+    <value>Samlet 1v5 Tabt</value>
+  </data>
+  <data name="TotalOneVersusFiveWon" xml:space="preserve">
+    <value>Samlet 1v5 Vundet</value>
+  </data>
+  <data name="TotalOneVersusFourLoss" xml:space="preserve">
+    <value>Samlet 1v4 Tabt</value>
+  </data>
+  <data name="TotalOneVersusFourWon" xml:space="preserve">
+    <value>Samlet 1V4 Vundet</value>
+  </data>
+  <data name="TotalOneVersusOneLoss" xml:space="preserve">
+    <value>Samlet 1V1 Tabt</value>
+  </data>
+  <data name="TotalOneVersusOneWon" xml:space="preserve">
+    <value>Samlet 1V1 Vundet</value>
+  </data>
+  <data name="TotalOneVersusThreeLoss" xml:space="preserve">
+    <value>Samlet 1v3 Tabt</value>
+  </data>
+  <data name="TotalOneVersusThreeWon" xml:space="preserve">
+    <value>Samlet 1V3 Vundet</value>
+  </data>
+  <data name="TotalOneVersusTwoLoss" xml:space="preserve">
+    <value>Samlet 1V2 tabt</value>
+  </data>
+  <data name="TotalOneVersusTwoWon" xml:space="preserve">
+    <value>Samlet 1V2 Vundet</value>
+  </data>
+  <data name="TradeKillsDeaths" xml:space="preserve">
+    <value>Bytte Drab/Dødsfald</value>
+  </data>
+  <data name="TradeKillsDeathsDescription" xml:space="preserve">
+    <value>(Drabshævn skete maximum 4s efter indledende drab)</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Værdi</value>
+  </data>
+  <data name="Won" xml:space="preserve">
+    <value>Vundet</value>
+  </data>
+  <data name="WonRate" xml:space="preserve">
+    <value>Sejr Ratio</value>
+  </data>
+  <data name="HeaderOneVersusX" xml:space="preserve">
+    <value>1VX</value>
+  </data>
+  <data name="Headshots" xml:space="preserve">
+    <value>Hovedskud</value>
+  </data>
+  <data name="HeaderHeadshotsPercent" xml:space="preserve">
+    <value>HS %</value>
+  </data>
+  <data name="AverageValue" xml:space="preserve">
+    <value>Gennemsnitlig Værdi</value>
+  </data>
+  <data name="CrouchKillPercent" xml:space="preserve">
+    <value>kravle Drab%</value>
+  </data>
+  <data name="CrouchKillPercentPerMatch" xml:space="preserve">
+    <value>Kravle Drab % per kamp</value>
+  </data>
+  <data name="DamagePerGameValue" xml:space="preserve">
+    <value>Skade per Kamp Værdi</value>
+  </data>
+  <data name="Death" xml:space="preserve">
+    <value>Dødsfald</value>
+  </data>
+  <data name="DeathAverage" xml:space="preserve">
+    <value>Dødsfald gennemsnit</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>Uafgjort</value>
+  </data>
+  <data name="Duels" xml:space="preserve">
+    <value>Dueller</value>
+  </data>
+  <data name="Economy" xml:space="preserve">
+    <value>Økonomi</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>Generelt</value>
+  </data>
+  <data name="HeadshotPercentPerMatch" xml:space="preserve">
+    <value>Hovedskud % per kamp</value>
+  </data>
+  <data name="Heavy" xml:space="preserve">
+    <value>Tungt</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>Drab</value>
+  </data>
+  <data name="KillAverage" xml:space="preserve">
+    <value>Drab gennemsnit</value>
+  </data>
+  <data name="KillVelocity" xml:space="preserve">
+    <value>Drab hastighed</value>
+  </data>
+  <data name="HeaderKnifeKills" xml:space="preserve">
+    <value>KK</value>
+  </data>
+  <data name="Maps" xml:space="preserve">
+    <value>Baner</value>
+  </data>
+  <data name="Matches" xml:space="preserve">
+    <value>Kampe</value>
+  </data>
+  <data name="MatchesStats" xml:space="preserve">
+    <value>Kampe Statistikker</value>
+  </data>
+  <data name="Overall" xml:space="preserve">
+    <value>Alt i Alt</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>Procenter</value>
+  </data>
+  <data name="Pistol" xml:space="preserve">
+    <value>Pistol</value>
+  </data>
+  <data name="Pistoles" xml:space="preserve">
+    <value>Pistoler</value>
+  </data>
+  <data name="Progression" xml:space="preserve">
+    <value>Fremskridt</value>
+  </data>
+  <data name="Rifle" xml:space="preserve">
+    <value>Rifle</value>
+  </data>
+  <data name="Rifles" xml:space="preserve">
+    <value>Rifler</value>
+  </data>
+  <data name="Rounds" xml:space="preserve">
+    <value>Runder</value>
+  </data>
+  <data name="Smg" xml:space="preserve">
+    <value>SMG</value>
+  </data>
+  <data name="Smgs" xml:space="preserve">
+    <value>SMGs</value>
+  </data>
+  <data name="Sniper" xml:space="preserve">
+    <value>Snigeskytte</value>
+  </data>
+  <data name="Snipers" xml:space="preserve">
+    <value>Snigeskytter</value>
+  </data>
+  <data name="TipsGraphAverageKillVelocity" xml:space="preserve">
+    <value>Denne graf viser din gennemsnitlige hastighed da du dræbte nogen ved våbengruppe</value>
+  </data>
+  <data name="TipsMaximumVelocity" xml:space="preserve">
+    <value>Information : Maximum Hastigheden ved løb er 250 enheder/s</value>
+  </data>
+  <data name="ToolTipAddPlayerToSuspectsList" xml:space="preserve">
+    <value>Tilføj spiller til mistænkte listen(CTRL+S)</value>
+  </data>
+  <data name="ToolTipAddPlayerToWhiteList" xml:space="preserve">
+    <value>Tilføj spiller til hvidliste(CTRL+W)</value>
+  </data>
+  <data name="ToolTipMaps" xml:space="preserve">
+    <value>Baner (CTRL+M)</value>
+  </data>
+  <data name="ToolTipMatchesPlayed" xml:space="preserve">
+    <value>Kampe spillet</value>
+  </data>
+  <data name="ToolTipOverall" xml:space="preserve">
+    <value>Alt i Alt(CTRL+O)</value>
+  </data>
+  <data name="ToolTipProgression" xml:space="preserve">
+    <value>Framskridt (CTRL+P)</value>
+  </data>
+  <data name="ToolTipRank" xml:space="preserve">
+    <value>Rang (CTRL+R)</value>
+  </data>
+  <data name="ToolTipTotalAssists" xml:space="preserve">
+    <value>Samlet Assistance</value>
+  </data>
+  <data name="ToolTipTotalBombDefused" xml:space="preserve">
+    <value>Samlet bomber demonteret</value>
+  </data>
+  <data name="ToolTipTotalBombExploded" xml:space="preserve">
+    <value>Samlet Bomber Eksploderet</value>
+  </data>
+  <data name="ToolTipTotalBombPlanted" xml:space="preserve">
+    <value>Samlet bomber Anbragt</value>
+  </data>
+  <data name="ToolTipTotalDamages" xml:space="preserve">
+    <value>Samlet Skade</value>
+  </data>
+  <data name="ToolTipTotalDeaths" xml:space="preserve">
+    <value>Samlet Dødsfald</value>
+  </data>
+  <data name="ToolTipTotalHeadshots" xml:space="preserve">
+    <value>Samlet Hovedskud</value>
+  </data>
+  <data name="ToolTipTotalMvp" xml:space="preserve">
+    <value>Samlet MVS</value>
+  </data>
+  <data name="ToolTipTotalRoundPlayed" xml:space="preserve">
+    <value>Samlet Runder Spillet</value>
+  </data>
+  <data name="ToolTipWeapons" xml:space="preserve">
+    <value>Våben (CTRL+W)</value>
+  </data>
+  <data name="VelocityAverage" xml:space="preserve">
+    <value>Hastighed gennemsnit</value>
+  </data>
+  <data name="WeaponKills" xml:space="preserve">
+    <value>Våben Drab</value>
+  </data>
+  <data name="Weapons" xml:space="preserve">
+    <value>Våben</value>
+  </data>
+  <data name="WeeklyPercent" xml:space="preserve">
+    <value>Ugentlig %</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>Sejr</value>
+  </data>
+  <data name="WinPercent" xml:space="preserve">
+    <value>Sejr Procent</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="CompetitivesWins" xml:space="preserve">
+    <value>competitives vundet</value>
+  </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Demo</value>
+  </data>
+  <data name="DialogDemoNotFound" xml:space="preserve">
+    <value>Demo ikke fundet</value>
+  </data>
+  <data name="DialogDemosHaveBeenDownloaded" xml:space="preserve">
+    <value>{0} demo(s) er blevet hentet.</value>
+  </data>
+  <data name="DialogDemosRemovedFromCache" xml:space="preserve">
+    <value>{0} demo(s) fjernet fra data cache</value>
+  </data>
+  <data name="DialogDemosSentToRecycleBin" xml:space="preserve">
+    <value>{0} demo(s) sendt til skraldespanden</value>
+  </data>
+  <data name="DialogEnterTick" xml:space="preserve">
+    <value>indtast tick.</value>
+  </data>
+  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
+    <value>En fejl skete under analysering:</value>
+  </data>
+  <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
+    <value>Fejl ved hentning af mistænktes informationer</value>
+  </data>
+  <data name="DialogErrorWhileExportingDemo" xml:space="preserve">
+    <value>En fejl skete ved eksporteringen af demoen</value>
+  </data>
+  <data name="DialogErrorWhileExportingDemos" xml:space="preserve">
+    <value>En fejl skete ved eksporteringen af demoer</value>
+  </data>
+  <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
+    <value>En fejl skete ved opdateringen af nyeste rang</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
+    <value>En Fejl skete ved hentning af kamp informationer ({0}).</value>
+  </data>
+  <data name="DialogExportMultipleOrSingle" xml:space="preserve">
+    <value>Vil du eksportere data til en enkelt fil eller flere filer?</value>
+  </data>
+  <data name="DialogExportPlayer" xml:space="preserve">
+    <value>Du er ved eksportere data fra Spiller"{0}".
+Vil du forsætte?</value>
+  </data>
+  <data name="DialogGoToTick" xml:space="preserve">
+    <value>Gå til Tick</value>
+  </data>
+  <data name="DialogInvalidTick" xml:space="preserve">
+    <value>Ugyldig tick.</value>
+  </data>
+  <data name="DialogNoNewerDemo" xml:space="preserve">
+    <value>Ingen nye demoer tilgængelig</value>
+  </data>
+  <data name="DialogRemoveDemosFromCacheConfirmation" xml:space="preserve">
+    <value>Er du sikker på du vil slette denne demo(er) fra data cache?
+Dette vil ikke fjerne demo(erne) fra din harddisk.</value>
+  </data>
+  <data name="DialogRestartSteam" xml:space="preserve">
+    <value>Du skal genstarte Steam</value>
+  </data>
+  <data name="DialogSelectAccountFirst" xml:space="preserve">
+    <value>Du skal markere en konto først</value>
+  </data>
+  <data name="DialogSendToRecycleBinConfimation" xml:space="preserve">
+    <value>Er du sikker på du vel sende denne demo(er) til skraldespanden?</value>
+  </data>
+  <data name="DialogSetAccountToFocus" xml:space="preserve">
+    <value>Du skal sætte kontoen du ønsker skal fokusere fra indstillinger for at være i stand til at bruge denne funktion</value>
+  </data>
+  <data name="DialogSetFolderForDownload" xml:space="preserve">
+    <value>Du skal vælge mappen hvor vil blive gemt fra indstillinger</value>
+  </data>
+  <data name="DialogSteamNotFound" xml:space="preserve">
+    <value>Steam er ikke installeret.
+Er ikke istand til at starte spillet</value>
+  </data>
+  <data name="DialogSteamNotRunningOrNotLoggedIn" xml:space="preserve">
+    <value>Steam kører ikke eller også er du ikke logget ind til nogen konto</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>FEJL</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Eksport</value>
+  </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>Adskellige</value>
+  </data>
+  <data name="NotificationAddingSuspects" xml:space="preserve">
+    <value>Tilføjer mistænkte</value>
+  </data>
+  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
+    <value>Analysere Demoer for eksportering.</value>
+  </data>
+  <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
+    <value>Analysere demo(er) til JSON eksport</value>
+  </data>
+  <data name="NotificationAnalyzingMultipleDemos" xml:space="preserve">
+    <value>Analysere Flere demoer</value>
+  </data>
+  <data name="NotificationCancelling" xml:space="preserve">
+    <value>Annullere...</value>
+  </data>
+  <data name="NotificationCheckingNewBanned" xml:space="preserve">
+    <value>Leder efter nye Bandlyste Mistænkte</value>
+  </data>
+  <data name="NotificationDownloadingDemo" xml:space="preserve">
+    <value>Henter Demo {0}/{1}...</value>
+  </data>
+  <data name="NotificationExportingDemo" xml:space="preserve">
+    <value>Eksporter Demo {0}...</value>
+  </data>
+  <data name="NotificationExtractingDemo" xml:space="preserve">
+    <value>Udpakker demo {0}/{1}...</value>
+  </data>
+  <data name="NotificationInitCache" xml:space="preserve">
+    <value>initialisering af cache...</value>
+  </data>
+  <data name="NotificationInThisFolder" xml:space="preserve">
+    <value>i denne mappe</value>
+  </data>
+  <data name="NotificationLoading" xml:space="preserve">
+    <value>Indlæser...</value>
+  </data>
+  <data name="NotificationLoadingAllDemos" xml:space="preserve">
+    <value>Indlæser alle demoer..</value>
+  </data>
+  <data name="NotificationLoadingDemos" xml:space="preserve">
+    <value>Indlæser demoer...</value>
+  </data>
+  <data name="NotificationLoadingMoreDemos" xml:space="preserve">
+    <value>Indlæser flere demoer...</value>
+  </data>
+  <data name="NotificationNoDemosFound" xml:space="preserve">
+    <value>Ingen demoer fundet</value>
+  </data>
+  <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
+    <value>Ingen Demoer er fundet for denne konto</value>
+  </data>
+  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
+    <value>Afspil demo kommando kopiret til udklipsholder</value>
+  </data>
+  <data name="NotificationRetrievingMatchesData" xml:space="preserve">
+    <value>Henter sidste kamp informationer</value>
+  </data>
+  <data name="NotificationSearchingLastRank" xml:space="preserve">
+    <value>Leder efter kontos sidste rang...</value>
+  </data>
+  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
+    <value>{0} Mistænkt(e) er blevet bandlyst!</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SaveHere" xml:space="preserve">
+    <value>Gem Her</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>Enkelt</value>
+  </data>
+  <data name="WinPercentage" xml:space="preserve">
+    <value>Sejr Procent</value>
+  </data>
+  <data name="AllFemale" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="CacheSize" xml:space="preserve">
+    <value>Cache Størrelse</value>
+  </data>
+  <data name="DialogAccountAlreadyInList" xml:space="preserve">
+    <value>Denne konto er allerede på din konto liste</value>
+  </data>
+  <data name="DialogAddAnAccount" xml:space="preserve">
+    <value>Tilføj en konto</value>
+  </data>
+  <data name="DialogAnalyzeAllDemosConfirmation" xml:space="preserve">
+    <value>Ønsker du kun at Analysere den markede demo eller alle demoer i mappen?</value>
+  </data>
+  <data name="DialogBackupCreated" xml:space="preserve">
+    <value>Backup Filen er blevet skabt, du kan gen-importere fra indstillinger</value>
+  </data>
+  <data name="DialogConfirmDeleteDemosData" xml:space="preserve">
+    <value>Demo data vil blive slettet! er du sikker?</value>
+  </data>
+  <data name="DialogCustomDataImported" xml:space="preserve">
+    <value>Brugerdefineret</value>
+  </data>
+  <data name="DialogDeleteVdmFilesConfirmation" xml:space="preserve">
+    <value>Alle VDM filer i din mappe vil blive slettet er du sikker?</value>
+  </data>
+  <data name="DialogDemosDataCleared" xml:space="preserve">
+    <value>Demo Data Slettet</value>
+  </data>
+  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
+    <value>Aktivering af Moviemaker mode ændre måden spillet bliver startet.(når du klikker på alle "Se" knapper).
+Den vil starte værktøjet "Half-Life Advanced Effects" (HLAE) som teknisk set er en hack
+Du burde KUN bruge dette hvis du ved hvad du laver OG til at lave film relateret ting
+Hvis du ikke ved hvad dette er eller du ikke planlægger at lave film klik på Annuler.
+If du aktivere dette, vil dit spil starte med "-insecure" parameteren(ALTID), som betyder at du ikke vil være i stand til at deltage på servere som er beskyttet VAC, Derfor vil du undgå VAC bandlysning.</value>
+  </data>
+  <data name="DialogEnterSteamId" xml:space="preserve">
+    <value>Indtast din SteamID 64 eller Steam Fællesskabs URL.</value>
+  </data>
+  <data name="DialogErrorCreatingBackupFile" xml:space="preserve">
+    <value>En fejl skete under eksportering af brugerdefinerede data.</value>
+  </data>
+  <data name="DialogErrorDeletingVdmFiles" xml:space="preserve">
+    <value>En fejl skete ved sletning af VDM filer</value>
+  </data>
+  <data name="DialogErrorImportingCustomData" xml:space="preserve">
+    <value>En fejl skete ved importering af brugerdefinerede data. Backup filen kan muligvis være korrupt.</value>
+  </data>
+  <data name="DialogErrorInvalidSteamId" xml:space="preserve">
+    <value>Ugyldig SteamID 64 eller Steam Fællesskabs URL</value>
+  </data>
+  <data name="DialogErrorRemovingAccount" xml:space="preserve">
+    <value>En fejl skete ved sletning af kontoen</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingPlayerInformation" xml:space="preserve">
+    <value>Fejl ved hentning af spiller informationer</value>
+  </data>
+  <data name="DialogNoErrorsFile" xml:space="preserve">
+    <value>Der er ingen fejl log fil</value>
+  </data>
+  <data name="DialogSelectCsgoPath" xml:space="preserve">
+    <value>Marker venligst csgo.exe fil lokationen for at aktivere den.</value>
+  </data>
+  <data name="DialogVdmFilesDeleted" xml:space="preserve">
+    <value>VDM filer slettet</value>
+  </data>
+  <data name="MegaByte" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="NotificationAddingAccount" xml:space="preserve">
+    <value>tilføjer konto...</value>
+  </data>
+  <data name="NotificationSyncingAccountsNickname" xml:space="preserve">
+    <value>Synkronisere konto øgenavne.</value>
+  </data>
+  <data name="PlayerPov" xml:space="preserve">
+    <value>Spiller POV</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>markering</value>
+  </data>
+  <data name="ToolTipDisplaySettings" xml:space="preserve">
+    <value>Vid indstillinger</value>
+  </data>
+  <data name="DialogAnalyzeRequired" xml:space="preserve">
+    <value>Du skal først analysere demoen</value>
+  </data>
+  <data name="DialogBoilerIncorrect" xml:space="preserve">
+    <value>boiler.exe er ukorrekt.</value>
+  </data>
+  <data name="DialogBoilerNotFound" xml:space="preserve">
+    <value>boiler.exe blev ikke funndet.</value>
+  </data>
+  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
+    <value>Demoen kan være for gammel, hvis det ikke er tilfældet send den venligst til mig i en email.
+Du kan finde mere information på </value>
+  </data>
+  <data name="DialogDemosNotFound" xml:space="preserve">
+    <value>Følgende demoer er ikke blevet fundet</value>
+  </data>
+  <data name="DialogErrorDemoNotFound" xml:space="preserve">
+    <value>Demo {0} blev ikke fundet.</value>
+  </data>
+  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
+    <value>En fejl skete under analyseringen af
+Demoen kan være for gammel, hvis det ikke er tilfældet send den venligst til mig i en emil.
+du kan finde mere information på http://csgo-demos-manager.com.</value>
+  </data>
+  <data name="DialogMapNotSupported" xml:space="preserve">
+    <value>Denne bane understøtter ikke denne funktion</value>
+  </data>
+  <data name="DialogNoConnexionDetected" xml:space="preserve">
+    <value>Ingen internet forbindelse</value>
+  </data>
+  <data name="DialogNoConnexionNoFeature" xml:space="preserve">
+    <value>Ingen internet forbindelse fundet, du ikke bruge denne funktion.</value>
+  </data>
+  <data name="DialogPovSelection" xml:space="preserve">
+    <value>hvilken POV(kamera perspektiv) vil du se?</value>
+  </data>
+  <data name="EnemyPov" xml:space="preserve">
+    <value>Fjende POV</value>
+  </data>
+  <data name="NotificationAnalyzing" xml:space="preserve">
+    <value>Analysere....</value>
+  </data>
+  <data name="NotificationAnalyzingDemo" xml:space="preserve">
+    <value>Analysere demo {0}...</value>
+  </data>
+  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
+    <value>Analyser demo {0} til eksport...</value>
+  </data>
+  <data name="Pov" xml:space="preserve">
+    <value>POV</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Tilføj</value>
+  </data>
+  <data name="AddAllPlayersSeen" xml:space="preserve">
+    <value>Tilføj alle spillere set</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>begge</value>
+  </data>
+  <data name="CounterTerrorists" xml:space="preserve">
+    <value>Anti-Terrorister</value>
+  </data>
+  <data name="DialogNoPointsFound" xml:space="preserve">
+    <value>Ingen points fundet. Du kan være du skal analysere demoen.</value>
+  </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>udstyr</value>
+  </data>
+  <data name="HeaderToolTipKnifeKills" xml:space="preserve">
+    <value>Kniv Drab</value>
+  </data>
+  <data name="HeadshotsPercent" xml:space="preserve">
+    <value>Hovedskud%</value>
+  </data>
+  <data name="LabelScale" xml:space="preserve">
+    <value>Skaler</value>
+  </data>
+  <data name="LabelSpeed" xml:space="preserve">
+    <value>Fart</value>
+  </data>
+  <data name="LabelVolume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="LogOnlyKills" xml:space="preserve">
+    <value>Noter kun drab</value>
+  </data>
+  <data name="NotificationGeneratingData" xml:space="preserve">
+    <value>Generere data...</value>
+  </data>
+  <data name="NotificationPaused" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="NotificationPlaying" xml:space="preserve">
+    <value>Afspiller...</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Afspil</value>
+  </data>
+  <data name="ShowOnlyBanned" xml:space="preserve">
+    <value>Vis kun bandlyste</value>
+  </data>
+  <data name="ShowSuspectsDemos" xml:space="preserve">
+    <value>Vis mistænkt(e) demoer</value>
+  </data>
+  <data name="Side" xml:space="preserve">
+    <value>Side</value>
+  </data>
+  <data name="StuffsThrown" xml:space="preserve">
+    <value>Ting kastet</value>
+  </data>
+  <data name="Terrorists" xml:space="preserve">
+    <value>Terrorister</value>
+  </data>
+  <data name="ToolTipAddAllPlayersSeen" xml:space="preserve">
+    <value>Tilføj alle spillere set til liste (CTRL+G)</value>
+  </data>
+  <data name="ToolTipGoToSuspectProfile" xml:space="preserve">
+    <value>Gå til mistænkte profil(CTRL+P)</value>
+  </data>
+  <data name="ToolTipMoveSuspectToWhitelist" xml:space="preserve">
+    <value>Flyt Mistænkt(e) til hvidliste (CTRL+M)</value>
+  </data>
+  <data name="ToolTipPause" xml:space="preserve">
+    <value>Pause (CTRL+O)</value>
+  </data>
+  <data name="ToolTipPlay" xml:space="preserve">
+    <value>Afspil (CTRL+P)</value>
+  </data>
+  <data name="ToolTipRefreshList" xml:space="preserve">
+    <value>Genopfrisk liste (CTRL+R)</value>
+  </data>
+  <data name="ToolTipRemoveSuspect" xml:space="preserve">
+    <value>Fjern Mistænkt(e) (DEL)</value>
+  </data>
+  <data name="ToolTIpShowOnlySuspectDemos" xml:space="preserve">
+    <value>Vis demoer der indeholder markerede mistænkt(e)(CTRL+F)</value>
+  </data>
+  <data name="ToolTipWhitelist" xml:space="preserve">
+    <value>Hvidliste (CTRL+W)</value>
+  </data>
+  <data name="WatermarkSearch" xml:space="preserve">
+    <value>Søg...</value>
+  </data>
+  <data name="Whitelist" xml:space="preserve">
+    <value>Hvidliste</value>
+  </data>
+  <data name="DialogAddPlayerToWhitelist" xml:space="preserve">
+    <value>Tilføj spiller til hvidliste</value>
+  </data>
+  <data name="DialogAddSuspect" xml:space="preserve">
+    <value>Tilføj mistænkte</value>
+  </data>
+  <data name="DialogCsgoNotDetected" xml:space="preserve">
+    <value>Det ser ikke ud til CSGO er installeret på dit hoveddrev.
+Standard lokation for "csgo" og "replays" kan ikke findes. Find venligst mappen i indstillinger</value>
+  </data>
+  <data name="DialogErrorWhileDeletingPlayer" xml:space="preserve">
+    <value>Fejl ved fjernelse af spiller</value>
+  </data>
+  <data name="DialogErrorWhileDeletingSuspect" xml:space="preserve">
+    <value>Fejl ved fjernelse af mistænkte</value>
+  </data>
+  <data name="DialogErrorWhileExportingCustomData" xml:space="preserve">
+    <value>Fejl ved eksportering af brugedefinerede Data</value>
+  </data>
+  <data name="DialogErrorWhileMovingSuspects" xml:space="preserve">
+    <value>Fejl ved flytning af mistænkt(e)</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingPlayersInformation" xml:space="preserve">
+    <value>Fejl under forsøg på at få spiller information</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingSuspectInformation" xml:space="preserve">
+    <value>Fejl under forsøg på at få mistænkte information</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingSuspectsInformation" xml:space="preserve">
+    <value>Fejl under forsøg på at få mistænkte information</value>
+  </data>
+  <data name="DialogNewVersionAvailable" xml:space="preserve">
+    <value>En ny version er tilgængelig.
+Ønsker du at hente den?</value>
+  </data>
+  <data name="DialogNoDemosPlayerFound" xml:space="preserve">
+    <value>Ingen demoer fundet for denne spiller.
+Demoer ved denne spiller er måsker ikke analyseret</value>
+  </data>
+  <data name="DialogNoDemosSuspectFound" xml:space="preserve">
+    <value>Ingen demoer fundet for mistænkte.
+Demoer for mistænkte er måske ikke analyseret.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInSuspectWhitelist" xml:space="preserve">
+    <value>Denne spiller er på din mistænkte/ hvid / konto liste.
+you skal fjerne den fra din konto liste og hvidliste for at kunne tilføje den til din mistænkte liste.</value>
+  </data>
+  <data name="DialogUpdateRequireClearCache" xml:space="preserve">
+    <value>Denne opdatering kræver rydning af brugerdefineret data fra cache(Dine mistænkte vil ikke blive fjernet).
+Ønsker du at gemme dine brugerdefineret data?</value>
+  </data>
+  <data name="DialogPlayerNotFound" xml:space="preserve">
+    <value>Spiller ikke fundet</value>
+  </data>
+  <data name="HeaderAccountVisibility" xml:space="preserve">
+    <value>Konto Synlighed</value>
+  </data>
+  <data name="HeaderBanCount" xml:space="preserve">
+    <value>Bandlysnings Antal</value>
+  </data>
+  <data name="HeaderCommunityBanned" xml:space="preserve">
+    <value>Fællesskabs Bandlyst</value>
+  </data>
+  <data name="HeaderDaysSinceLastBan" xml:space="preserve">
+    <value>DSLB</value>
+  </data>
+  <data name="HeaderEconomyBanned" xml:space="preserve">
+    <value>Økonomi Bandlyst</value>
+  </data>
+  <data name="HeaderGameBan" xml:space="preserve">
+    <value>Spil Ban</value>
+  </data>
+  <data name="HeaderLastConnection" xml:space="preserve">
+    <value>Sidste Forbindelse.</value>
+  </data>
+  <data name="HeaderNickname" xml:space="preserve">
+    <value>Øgenavn</value>
+  </data>
+  <data name="HeaderProfileSetup" xml:space="preserve">
+    <value>Profil opsætning</value>
+  </data>
+  <data name="NotificationAddingPlayerToWhitelist" xml:space="preserve">
+    <value>Tilføjer Spiller til Hvidliste...</value>
+  </data>
+  <data name="NotificationAddingSuspect" xml:space="preserve">
+    <value>tilføjer mistænkte...</value>
+  </data>
+  <data name="NotificationMovingSuspectsToWhitelist" xml:space="preserve">
+    <value>Flytter mistænkt(e) til hvidliste...</value>
+  </data>
+  <data name="NotificationPlayerAlreadyInWhitelist" xml:space="preserve">
+    <value>Spiller allerede på din hvidliste...</value>
+  </data>
+  <data name="NotificationRefreshing" xml:space="preserve">
+    <value>Genopfrisker...</value>
+  </data>
+  <data name="NotificationSearching" xml:space="preserve">
+    <value>Søger....</value>
+  </data>
+  <data name="NotificationStoppingAnalyze" xml:space="preserve">
+    <value>Stopper analysering...</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Mørk</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Dag</value>
+  </data>
+  <data name="DialogErrorExportingHeatmap" xml:space="preserve">
+    <value>En fejl skete under eksportering af Varmekort til PNG</value>
+  </data>
+  <data name="DialogErrorWhileAddingPlayerToSuspectsList" xml:space="preserve">
+    <value>Fejl ved tilføjelse af spiller til mistænkte liste</value>
+  </data>
+  <data name="DialogErrorWhileAddingPlayerToWhitelist" xml:space="preserve">
+    <value>Fejl ved tilføjelse af spiller til hvidliste</value>
+  </data>
+  <data name="DialogNoDamagesDataFound" xml:space="preserve">
+    <value>ingen skade data fundet.
+Demoen er for  gammel eller også har du ikke analyseret den.</value>
+  </data>
+  <data name="DialogNoDemosFoundForPlayer" xml:space="preserve">
+    <value>Ingen demoer fundet for denne spiller.
+Demoer hos denne spiller er måske ikke analyseret</value>
+  </data>
+  <data name="DialogPlayerAlreadyInAccountsList" xml:space="preserve">
+    <value>Denne spiller er allerede på din kontoliste</value>
+  </data>
+  <data name="DialogPlayerAlreadyInSuspectsList" xml:space="preserve">
+    <value>Denne Spiller er allerede på din mistænkte liste eller konto liste.
+Du skal fjerne den fra din konto liste for at være i stand til at tilføje ham til din mistænkte liste</value>
+  </data>
+  <data name="DialogPlayerAlreadyInWhitelist" xml:space="preserve">
+    <value>Denne spiller er allerede på din hvidliste eller på din konto liste.
+Du skal fjerne ham fra din konto liste for at være i stand til at tilføje ham til din hvidliste.</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Lys</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Måned</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Ingen</value>
+  </data>
+  <data name="NotificationAddingPlayerToAccountsList" xml:space="preserve">
+    <value>Tilføjer spiller til konto listen...</value>
+  </data>
+  <data name="NotificationAddingPlayerToSuspectsList" xml:space="preserve">
+    <value>Tilføjer spiller til mistænkte listen...</value>
+  </data>
+  <data name="NotificationCommentSaved" xml:space="preserve">
+    <value>Kommentar gemt</value>
+  </data>
+  <data name="NotificationPlayedAddedToSuspectsList" xml:space="preserve">
+    <value>Spiller tilføjet til mitænkte listen</value>
+  </data>
+  <data name="NotificationPlayerAddedToAccountsList" xml:space="preserve">
+    <value>Spiller tilføjet til konto listen</value>
+  </data>
+  <data name="NotificationPlayerAddedToWhitelist" xml:space="preserve">
+    <value>Spiller tilføjet til hvidliste</value>
+  </data>
+  <data name="NotificationSearchingDemosForPlayer" xml:space="preserve">
+    <value>Søger demoer for denne spiller..</value>
+  </data>
+  <data name="NotificationSetposCommandCopied" xml:space="preserve">
+    <value>setpos Kommando kopiret til udklipsholder</value>
+  </data>
+  <data name="ShotsFired" xml:space="preserve">
+    <value>Skud Affyret</value>
+  </data>
+  <data name="Smokes" xml:space="preserve">
+    <value>Røg</value>
+  </data>
+  <data name="CT" xml:space="preserve">
+    <value>CT</value>
+  </data>
+  <data name="Spec" xml:space="preserve">
+    <value>SPEC</value>
+  </data>
+  <data name="T" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="Lost" xml:space="preserve">
+    <value> Nederlag</value>
+  </data>
+  <data name="LostSurrender" xml:space="preserve">
+    <value>Nederlag (S)</value>
+  </data>
+  <data name="WinSurrender" xml:space="preserve">
+    <value>Sejr (S)</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>Ikke tilstede</value>
+  </data>
+  <data name="Busy" xml:space="preserve">
+    <value>Travl</value>
+  </data>
+  <data name="LookingToPlay" xml:space="preserve">
+    <value>Vil gerne spille</value>
+  </data>
+  <data name="LookingToTrade" xml:space="preserve">
+    <value>Leder efter Byttehandel</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Privat</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Offentlig</value>
+  </data>
+  <data name="Snooze" xml:space="preserve">
+    <value>Slumre</value>
+  </data>
+  <data name="ToolTipAbout" xml:space="preserve">
+    <value>om</value>
+    <comment>used for heatmap flashbang tooltip (about x seconds)</comment>
+  </data>
+  <data name="ToolTipAddToWhitelist" xml:space="preserve">
+    <value>Tilføj konto til hvidliste</value>
+  </data>
+  <data name="ToolTipBlinded" xml:space="preserve">
+    <value>Blændet</value>
+    <comment>used for heatmap flashbang tooltip (player1 blinded player2)</comment>
+  </data>
+  <data name="ToolTipBlindedOthersPlayersFor" xml:space="preserve">
+    <value>Blændede andre spillere for</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipGoToPlayerProfile" xml:space="preserve">
+    <value>Gå til spiller profilen (CTRL+P)</value>
+  </data>
+  <data name="ToolTipKilled" xml:space="preserve">
+    <value>Dræbt</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipOneSingleFlashFrom" xml:space="preserve">
+    <value>En enkelt flash fra</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipRemovePlayersFromWhitelist" xml:space="preserve">
+    <value>Fjern spiller(e) fra hvidliste (DEL)</value>
+  </data>
+  <data name="ToolTipSeconds" xml:space="preserve">
+    <value>Sekund(er)</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipSecondsOnAverage" xml:space="preserve">
+    <value>Sekund(er) gennemsnitlig</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipShowPlayerDemos" xml:space="preserve">
+    <value>Vis demoer der indeholder spilleren (CTRL+F)</value>
+  </data>
+  <data name="ToolTipTimes" xml:space="preserve">
+    <value>gang(e)</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="WhitelistInformation" xml:space="preserve">
+    <value>Følgende Spillere vil ikke blive undersøgt for Bans under analysering</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="AllPlayers" xml:space="preserve">
+    <value>Alle Spillere</value>
+  </data>
+  <data name="AllRounds" xml:space="preserve">
+    <value>Alle runder</value>
+  </data>
+  <data name="AmountDollar" xml:space="preserve">
+    <value>Mængde ($)</value>
+  </data>
+  <data name="Chest" xml:space="preserve">
+    <value>Bryst</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Ryd</value>
+  </data>
+  <data name="CopySetpos" xml:space="preserve">
+    <value>Kopier setpos</value>
+  </data>
+  <data name="FlashedPlayers" xml:space="preserve">
+    <value>Flashed Spillere</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generer</value>
+  </data>
+  <data name="Head" xml:space="preserve">
+    <value>Hoved</value>
+  </data>
+  <data name="HeaderFlasherFlashed" xml:space="preserve">
+    <value>Flasher \ Flashed</value>
+    <comment>Used for flashbangs heatmap chart</comment>
+  </data>
+  <data name="HeaderPlayerName" xml:space="preserve">
+    <value>Spiller Navn</value>
+  </data>
+  <data name="HeaderTeamName" xml:space="preserve">
+    <value>Hold navn</value>
+  </data>
+  <data name="HeaderThrower" xml:space="preserve">
+    <value>Kaster</value>
+  </data>
+  <data name="KillsPerRoundFull" xml:space="preserve">
+    <value>DPR (Drab Per Runde)</value>
+  </data>
+  <data name="LeftArm" xml:space="preserve">
+    <value>Venstre Arm</value>
+  </data>
+  <data name="LeftLeg" xml:space="preserve">
+    <value>Venstre Ben</value>
+  </data>
+  <data name="NotificationGenerating" xml:space="preserve">
+    <value>Generere...</value>
+  </data>
+  <data name="NotificationUpdating" xml:space="preserve">
+    <value>Opdatere...</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Ugennemsigtig</value>
+  </data>
+  <data name="RightArm" xml:space="preserve">
+    <value>Højre arm</value>
+  </data>
+  <data name="RightLeg" xml:space="preserve">
+    <value>Højre Ben</value>
+  </data>
+  <data name="Sides" xml:space="preserve">
+    <value>Siden</value>
+  </data>
+  <data name="Stomach" xml:space="preserve">
+    <value>Mave</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Hold</value>
+  </data>
+  <data name="ToolTipCopySetposCommand" xml:space="preserve">
+    <value>Kopier Setpos Kommando (CTRL+C)</value>
+  </data>
+  <data name="ToolTipGenerateHeatmap" xml:space="preserve">
+    <value>Generer Varmekort (CTRL+G)</value>
+  </data>
+  <data name="ToolTipSaveAsPng" xml:space="preserve">
+    <value>Gem som PNG (CTRL+S)</value>
+  </data>
+  <data name="ToolTipUpdate" xml:space="preserve">
+    <value>Opdater (CTRL+R)</value>
+  </data>
+  <data name="ToolTipWatchAllStuffsFromPlayer" xml:space="preserve">
+    <value>Se alle ting fra denne spiller (CTRL+W)</value>
+  </data>
+  <data name="TotalCashEarned" xml:space="preserve">
+    <value>Samlet Penge Tjent ($)</value>
+  </data>
+  <data name="TotalFlashbangsThrown" xml:space="preserve">
+    <value>Samlet Flashbangs Kastet</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Opdatering</value>
+  </data>
+  <data name="WatchPlayerStuffs" xml:space="preserve">
+    <value>Se Spiller ting</value>
+  </data>
+  <data name="DescriptionEntryHoldKills" xml:space="preserve">
+    <value>(Første Drab af en CT)</value>
+  </data>
+  <data name="DescriptionEntryKills" xml:space="preserve">
+    <value>(Første Drab af en T)</value>
+  </data>
+  <data name="HeaderMatrixKillerVictim" xml:space="preserve">
+    <value>Drabsmand \ Offer</value>
+  </data>
+  <data name="HeaderRoundLost" xml:space="preserve">
+    <value>RL</value>
+  </data>
+  <data name="Matrix" xml:space="preserve">
+    <value>Matrix</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Hold</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Sprog</value>
+  </data>
+  <data name="UnexpectedErrorOccured" xml:space="preserve">
+    <value>Der skete en uforudset fejl. Send Venligst 'errors.log' filen som er tilgængelig far indstillinger.
+Besked Fejl :
+{0}</value>
+  </data>
+  <data name="Banned" xml:space="preserve">
+    <value>Bandlyst</value>
+  </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>Bidragydere</value>
+  </data>
+  <data name="InfomationHelpTranslatingApp" xml:space="preserve">
+    <value>Hvis du har mulighed for at oversætte appen, mere information her:</value>
+  </data>
+  <data name="InformationTranslateIncomplete" xml:space="preserve">
+    <value>Hvis Appen stadig er på engelsk efter sprog skift vil det sige oversættelsen er ufuldkommen eller ikke er blevet lavet endnu</value>
+  </data>
+  <data name="Probation" xml:space="preserve">
+    <value>Forbud</value>
+  </data>
+  <data name="Translators" xml:space="preserve">
+    <value>Oversættere</value>
+  </data>
 </root>

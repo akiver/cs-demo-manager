@@ -12,4 +12,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Bomb" xml:space="preserve">
+    <value>Bombe</value>
+  </data>
+  <data name="Decoy" xml:space="preserve">
+    <value>Lokkedue</value>
+  </data>
+  <data name="DefusedTheBombOnBombSite" xml:space="preserve">
+    <value>{0} demonterede bomben på bombe lokation {1}</value>
+  </data>
+  <data name="Flashbang" xml:space="preserve">
+    <value>Flashbang</value>
+  </data>
+  <data name="HE" xml:space="preserve">
+    <value>HE</value>
+  </data>
+  <data name="Killed" xml:space="preserve">
+    <value>{0} dræbte {1}</value>
+  </data>
+  <data name="Kills" xml:space="preserve">
+    <value>Drab</value>
+  </data>
+  <data name="Molotov" xml:space="preserve">
+    <value>Molotov</value>
+  </data>
+  <data name="PlantedTheBombOnBombSite" xml:space="preserve">
+    <value>{0} anbragte bomben på bombe lokation {1}</value>
+  </data>
+  <data name="Smoke" xml:space="preserve">
+    <value>Røg</value>
+  </data>
+  <data name="TheBombExplodedOnBombSite" xml:space="preserve">
+    <value>Bomben detonerede på bombe lokation {0}</value>
+  </data>
+  <data name="ThrownDecoy" xml:space="preserve">
+    <value>{0} kastede en lokke-granat</value>
+  </data>
+  <data name="ThrownFlashbang" xml:space="preserve">
+    <value>{0} kastede en flashbang</value>
+  </data>
+  <data name="ThrownHeGrenade" xml:space="preserve">
+    <value>{0} kastede en HE granat</value>
+  </data>
+  <data name="ThrownIncendiary" xml:space="preserve">
+    <value>{0} kastede en brand granat</value>
+  </data>
+  <data name="ThrownMolotov" xml:space="preserve">
+    <value>{0} kastede en molotov</value>
+  </data>
+  <data name="ThrownSmoke" xml:space="preserve">
+    <value>{0} kastede en røg granat</value>
+  </data>
 </root>

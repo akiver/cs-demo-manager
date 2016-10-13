@@ -80,7 +80,7 @@ namespace Core
 			{
 				Key = "da-DK",
 				Name = "Danish",
-				IsEnabled = false
+				IsEnabled = true
 			},
 			new Language
 			{
