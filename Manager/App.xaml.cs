@@ -26,7 +26,8 @@ namespace Manager
 			"thedudeguy1"
 		};
 		public static string[] Translators = {
-			"FisherMan aka. deathles乃夫 (Chinese simplified)"
+			"FisherMan aka. deathles乃夫 (Chinese simplified)",
+			"Allan \"Michael\" Simonsen (Danish)"
 		};
 
 		public App()
