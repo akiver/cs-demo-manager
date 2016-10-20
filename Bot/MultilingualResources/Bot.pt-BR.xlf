@@ -8,83 +8,83 @@
       <group id="BOT/PROPERTIES/RESOURCES.RESX" datatype="resx">
         <trans-unit id="BalloonNoNewSuspectsFound" translate="yes" xml:space="preserve">
           <source>No new suspects banned found.</source>
-          <target state="new">No new suspects banned found.</target>
+          <target state="final">Não foram encontrados novos suspeitos banidos.</target>
         </trans-unit>
         <trans-unit id="CheckEvery" translate="yes" xml:space="preserve">
           <source>Check every</source>
-          <target state="new">Check every</target>
+          <target state="final">Verificar cada</target>
         </trans-unit>
         <trans-unit id="CheckNow" translate="yes" xml:space="preserve">
           <source>Check now</source>
-          <target state="new">Check now</target>
+          <target state="final">Verificar agora</target>
         </trans-unit>
         <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
           <source>Click here to download your last matchmaking demos.</source>
-          <target state="new">Click here to download your last matchmaking demos.</target>
+          <target state="final">Clique aqui para baixar suas últimas demos do matchmaking.</target>
         </trans-unit>
         <trans-unit id="Error" translate="yes" xml:space="preserve">
           <source>Error</source>
-          <target state="new">Error</target>
+          <target state="final">Erro</target>
         </trans-unit>
         <trans-unit id="IsNotRunning" translate="yes" xml:space="preserve">
           <source>is not running</source>
-          <target state="new">is not running</target>
+          <target state="final">Não está em execução</target>
         </trans-unit>
         <trans-unit id="IsRunning" translate="yes" xml:space="preserve">
           <source>is running</source>
-          <target state="new">is running</target>
+          <target state="final">Está em execução</target>
         </trans-unit>
         <trans-unit id="Language" translate="yes" xml:space="preserve">
           <source>Language</source>
-          <target state="new">Language</target>
+          <target state="final">Idioma</target>
         </trans-unit>
         <trans-unit id="LaunchAtStartup" translate="yes" xml:space="preserve">
           <source>Launch at startup</source>
-          <target state="new">Launch at startup</target>
+          <target state="final">Iniciar automaticamente</target>
         </trans-unit>
         <trans-unit id="Quit" translate="yes" xml:space="preserve">
           <source>Quit</source>
-          <target state="new">Quit</target>
+          <target state="final">Sair</target>
         </trans-unit>
         <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
           <source>Send download demos notifications</source>
-          <target state="new">Send download demos notifications</target>
+          <target state="final">Enviar notificações de demos baixadas</target>
         </trans-unit>
         <trans-unit id="ShowCsgoDm" translate="yes" xml:space="preserve">
           <source>Show CSGO-DM</source>
-          <target state="new">Show CSGO-DM</target>
+          <target state="final">Mostrar CSGO-DM</target>
         </trans-unit>
         <trans-unit id="Start" translate="yes" xml:space="preserve">
           <source>Start</source>
-          <target state="new">Start</target>
+          <target state="final">Iniciar</target>
         </trans-unit>
         <trans-unit id="Stop" translate="yes" xml:space="preserve">
           <source>Stop</source>
-          <target state="new">Stop</target>
+          <target state="final">Parar</target>
         </trans-unit>
         <trans-unit id="SuspectsList" translate="yes" xml:space="preserve">
           <source>Suspects list</source>
-          <target state="new">Suspects list</target>
+          <target state="final">Lista de suspeitos</target>
         </trans-unit>
         <trans-unit id="UnableToStartBot" translate="yes" xml:space="preserve">
           <source>Unable to start the BOT.</source>
-          <target state="new">Unable to start the BOT.</target>
+          <target state="final">Não é possivel inicar o BOT.</target>
         </trans-unit>
         <trans-unit id="Xhour" translate="yes" xml:space="preserve">
           <source>{0} hour</source>
-          <target state="new">{0} hour</target>
+          <target state="final">{0} hora</target>
         </trans-unit>
         <trans-unit id="Xhours" translate="yes" xml:space="preserve">
           <source>{0} hours</source>
-          <target state="new">{0} hours</target>
+          <target state="final">{0} horas</target>
         </trans-unit>
         <trans-unit id="Xminutes" translate="yes" xml:space="preserve">
           <source>{0} minutes</source>
-          <target state="new">{0} minutes</target>
+          <target state="final">{0} minutos</target>
         </trans-unit>
         <trans-unit id="XsuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
           <source>{0} suspect(s) has been banned.</source>
-          <target state="new">{0} suspect(s) has been banned.</target>
+          <target state="final">{0} suspeito(s) foi/foram banidos.</target>
         </trans-unit>
       </group>
     </body>
