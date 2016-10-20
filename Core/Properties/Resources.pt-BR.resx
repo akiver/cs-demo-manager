@@ -96,6 +96,72 @@
   <data name="pov" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Logos\pov.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Rank0" xml:space="preserve">
+    <value>Nenhum</value>
+  </data>
+  <data name="Rank1" xml:space="preserve">
+    <value>Prata I</value>
+  </data>
+  <data name="Rank10" xml:space="preserve">
+    <value>Guardião Mestre</value>
+  </data>
+  <data name="Rank11" xml:space="preserve">
+    <value>Guardião Mestre I</value>
+  </data>
+  <data name="Rank12" xml:space="preserve">
+    <value>Guardião Mestre II</value>
+  </data>
+  <data name="Rank13" xml:space="preserve">
+    <value>Guardião Mestre de Elite</value>
+  </data>
+  <data name="Rank14" xml:space="preserve">
+    <value>Guardião Mestre Exímio</value>
+  </data>
+  <data name="Rank15" xml:space="preserve">
+    <value>Águia Lendária</value>
+  </data>
+  <data name="Rank16" xml:space="preserve">
+    <value>Águia Lendária (Mestre)</value>
+  </data>
+  <data name="Rank17" xml:space="preserve">
+    <value>Mestre Supremo Primeira Classe</value>
+  </data>
+  <data name="Rank18" xml:space="preserve">
+    <value>A Elite Global</value>
+  </data>
+  <data name="Rank2" xml:space="preserve">
+    <value>Prata II</value>
+  </data>
+  <data name="Rank3" xml:space="preserve">
+    <value>Prata III</value>
+  </data>
+  <data name="Rank4" xml:space="preserve">
+    <value>Prata IV</value>
+  </data>
+  <data name="Rank5" xml:space="preserve">
+    <value>Prata Elite</value>
+  </data>
+  <data name="Rank6" xml:space="preserve">
+    <value>Prata de Elite (Mestre)</value>
+  </data>
+  <data name="Rank7" xml:space="preserve">
+    <value>Ouro I</value>
+  </data>
+  <data name="Rank8" xml:space="preserve">
+    <value>Ouro II</value>
+  </data>
+  <data name="Rank9" xml:space="preserve">
+    <value>Ouro III</value>
+  </data>
+  <data name="StatusNone" xml:space="preserve">
+    <value>Nenhum</value>
+  </data>
+  <data name="StatusToWatch" xml:space="preserve">
+    <value>Para assistir</value>
+  </data>
+  <data name="StatusWatched" xml:space="preserve">
+    <value>Assistido</value>
+  </data>
   <data name="valve" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Logos\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

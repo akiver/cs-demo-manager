@@ -62,7 +62,7 @@ namespace Core
 			{
 				Key = "pt-BR",
 				Name = "Brazilian",
-				IsEnabled = false
+				IsEnabled = true
 			},
 			new Language
 			{
