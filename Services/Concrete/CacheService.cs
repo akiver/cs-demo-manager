@@ -385,6 +385,23 @@ namespace Services.Concrete
 			return true;
 		}
 
+		public async Task<bool> UpdateAccountAsync(Account account)
+		{
+			List<Account> accounts = await GetAccountListAsync();
+
+			int accountIndex = accounts.FindIndex(a => a.SteamId == account.SteamId);
+
+			if (accountIndex == -1) return false;
+
+			accounts[accountIndex] = account;
+			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
+
+			string pathAccountsFileJson = _pathFolderCache + Path.DirectorySeparatorChar + ACCOUNTS_FILENAME;
+			File.WriteAllText(pathAccountsFileJson, json);
+
+			return true;
+		}
+
 		public async Task<bool> RemoveAccountAsync(Account accountToRemove)
 		{
 			List<Account> accounts = await GetAccountListAsync();

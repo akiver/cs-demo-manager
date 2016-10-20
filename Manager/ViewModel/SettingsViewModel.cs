@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Core;
 using Core.Models;
@@ -1639,11 +1638,13 @@ namespace Manager.ViewModel
 							Accounts.Clear();
 							foreach (Suspect player in players)
 							{
-								Accounts.Add(new Account
+								Account account = new Account
 								{
 									SteamId = player.SteamId,
 									Name = player.Nickname
-								});
+								};
+								await _cacheService.UpdateAccountAsync(account);
+								Accounts.Add(account);
 							}
 							SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == currentAccountSteamId.ToString());
 

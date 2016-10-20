@@ -41,6 +41,8 @@ namespace Services.Interfaces
 
 		Task<bool> RemoveAccountAsync(Account account);
 
+		Task<bool> UpdateAccountAsync(Account account);
+
 		Task<List<Account>> GetAccountListAsync();
 
 		Task<Account> GetAccountAsync(long steamId);

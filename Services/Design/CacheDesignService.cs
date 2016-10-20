@@ -188,6 +188,11 @@ namespace Services.Design
 			return Task.FromResult(true);
 		}
 
+		public Task<bool> UpdateAccountAsync(Account account)
+		{
+			return Task.FromResult(true);
+		}
+
 		public Task<bool> RemoveAccountAsync(Account account)
 		{
 			return Task.FromResult(true);
