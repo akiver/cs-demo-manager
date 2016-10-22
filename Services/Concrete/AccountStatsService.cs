@@ -522,7 +522,7 @@ namespace Services.Concrete
 							Demo currentDemo = demosPlayerList[i];
 							Demo nextDemo = demosPlayerList.ElementAtOrDefault(i + 1);
 							// Ignore demos where all players have no rank, sometimes CCSUsrMsg_ServerRankUpdate isn't raised
-							if (currentDemo.Players.All(p => p.RankNumberOld != 0))
+							if (currentDemo.Players.Count(p => p.RankNumberOld != 0) > 0)
 							{
 								int newRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberNew;
 								int oldRankNumber = currentDemo.Players.First(p => p.SteamId == SelectedStatsAccountSteamId).RankNumberOld;
