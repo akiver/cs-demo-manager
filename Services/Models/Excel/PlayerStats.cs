@@ -16,7 +16,7 @@ namespace Services.Models.Excel
 
 		public int HeadshotCount { get; set; }
 
-		public decimal HeadshotPercent => HeadshotCount == 0 ? 0 : Math.Round(HeadshotCount / (decimal)KillCount * 100, 2);
+		public decimal HeadshotPercent => KillCount == 0 ? 0 : Math.Round(HeadshotCount / (decimal)KillCount * 100, 2);
 
 		public int RoundCount { get; set; }
 
