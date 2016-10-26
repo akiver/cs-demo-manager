@@ -47,7 +47,7 @@ namespace Manager.Models
 					return StuffType.HE;
 				case "molotovs":
 					return StuffType.MOLOTOV;
-				case "incendiary":
+				case "incendiaries":
 					return StuffType.INCENDIARY;
 				case "decoys":
 					return StuffType.DECOY;

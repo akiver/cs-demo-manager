@@ -382,6 +382,7 @@ namespace Manager.ViewModel.Demos
 			EventSelectors.Add(new ComboboxSelector("he", Properties.Resources.HeGrenades));
 			EventSelectors.Add(new ComboboxSelector("smokes", Properties.Resources.Smokes));
 			EventSelectors.Add(new ComboboxSelector("molotovs", Properties.Resources.Molotovs));
+			EventSelectors.Add(new ComboboxSelector("incendiaries", Properties.Resources.Incendiaries));
 			EventSelectors.Add(new ComboboxSelector("decoys", Properties.Resources.Decoys));
 			CurrentEventSelector = EventSelectors[0];
 

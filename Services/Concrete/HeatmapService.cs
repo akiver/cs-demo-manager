@@ -126,6 +126,13 @@ namespace Services.Concrete
 						throw new HeatmapDataNotFoundException("No molotov thrown with this selection.");
 					}
 					break;
+				case "incendiaries":
+					heatmapPoints = GetIncendiaryFireStartedPoints();
+					if (heatmapPoints.Count == 0)
+					{
+						throw new HeatmapDataNotFoundException("No incendiaries thrown with this selection.");
+					}
+					break;
 				case "decoys":
 					heatmapPoints = GetDecoyStartedPoints();
 					if (heatmapPoints.Count == 0)
@@ -469,6 +476,19 @@ namespace Services.Concrete
 				{
 					X = e.Point.X, Y = e.Point.Y,
 				}).ToList();
+		}
+
+		private List<HeatmapPoint> GetIncendiaryFireStartedPoints()
+		{
+			return (from e in _configuration.Demo.IncendiariesFireStarted
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+					|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
 		}
 
 		private List<HeatmapPoint> GetDecoyStartedPoints()
