@@ -290,8 +290,15 @@ namespace Manager.ViewModel.Demos
 							_heatmapService = new HeatmapService(_mapService, configuration);
 							_points = await _heatmapService.GetPoints();
 
-							// Generate the colored layer
-							ColorsLayer = _heatmapService.GenerateHeatmap(_points, _opacity);
+							if (_points.Count == 0)
+							{
+								await _dialogService.ShowHeatmapDataNotFoundAsync(configuration.SelectedEventId);
+							}
+							else
+							{
+								// Generate the colored layer
+								ColorsLayer = _heatmapService.GenerateHeatmap(_points, _opacity);
+							}
 
 							CommandManager.InvalidateRequerySuggested();
 						}

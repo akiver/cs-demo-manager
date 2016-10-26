@@ -154,7 +154,6 @@
     <Compile Include="Design\RoundDesignService.cs" />
     <Compile Include="Design\SteamDesignService.cs" />
     <Compile Include="Design\StuffDesignService.cs" />
-    <Compile Include="Exceptions\Map\HeatmapDataNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
     <Compile Include="Extensions.cs" />

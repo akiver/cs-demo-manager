@@ -114,5 +114,41 @@ namespace Manager.Services
 
 			return await metroWindow.ShowMessageAsync(Properties.Resources.Pov, Properties.Resources.DialogPovSelection, MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
+
+		public async Task<MessageDialogResult> ShowHeatmapDataNotFoundAsync(string eventType)
+		{
+			string type = string.Empty;
+			switch (eventType)
+			{
+				case "kills":
+					type = Properties.Resources.Kills;
+					break;
+				case "deaths":
+					type = Properties.Resources.Deaths;
+					break;
+				case "shots":
+					type = Properties.Resources.Shots;
+					break;
+				case "flashbangs":
+					type = Properties.Resources.Flashbangs;
+					break;
+				case "he":
+					type = Properties.Resources.HeGrenades;
+					break;
+				case "smokes":
+					type = Properties.Resources.Smokes;
+					break;
+				case "molotovs":
+					type = Properties.Resources.Molotovs;
+					break;
+				case "incendiaries":
+					type = Properties.Resources.Incendiaries;
+					break;
+				case "decoys":
+					type = Properties.Resources.Decoys;
+					break;
+			}
+			return await ShowMessageAsync(string.Format(Properties.Resources.NoHeatmapDataFound, type.ToLower()), MessageDialogStyle.Affirmative);
+		}
 	}
 }

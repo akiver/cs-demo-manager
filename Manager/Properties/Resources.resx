@@ -2651,4 +2651,10 @@ Message Error :
   <data name="ToolTipExportChat" xml:space="preserve">
     <value>Export demo chat</value>
   </data>
+  <data name="NoHeatmapDataFound" xml:space="preserve">
+    <value>No {0} found for this selection.</value>
+  </data>
+  <data name="Shots" xml:space="preserve">
+    <value>Shots</value>
+  </data>
 </root>

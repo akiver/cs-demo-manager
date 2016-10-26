@@ -3383,6 +3383,14 @@ Mensagem de Erro:
           <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
           <target state="final">Nenhuma mensagem de chat encontrados. (Funciona apenas para demos provenientes de um servidor que tem "tv_relaytextchat" definido como um valor diferente de "0", o que não é o caso para os servidores oficiais de MM da Valve).</target>
         </trans-unit>
+        <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
+          <source>No {0} found for this selection.</source>
+          <target state="new">No {0} found for this selection.</target>
+        </trans-unit>
+        <trans-unit id="Shots" translate="yes" xml:space="preserve">
+          <source>Shots</source>
+          <target state="new">Shots</target>
+        </trans-unit>
       </group>
     </body>
   </file>

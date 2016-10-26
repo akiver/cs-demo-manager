@@ -3383,6 +3383,14 @@ Besked Fejl :
           <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
           <target state="new">No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</target>
         </trans-unit>
+        <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
+          <source>No {0} found for this selection.</source>
+          <target state="new">No {0} found for this selection.</target>
+        </trans-unit>
+        <trans-unit id="Shots" translate="yes" xml:space="preserve">
+          <source>Shots</source>
+          <target state="new">Shots</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -74,24 +74,12 @@ namespace Services.Concrete
 			{
 				case "kills":
 					heatmapPoints = GetKillsPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No kills occured with this selection.");
-					}
 					break;
 				case "deaths":
 					heatmapPoints = GetDeathsPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No deaths occured with this selection.");
-					}
 					break;
 				case "shots":
 					heatmapPoints = GetWeaponFiredPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No shots occured with this selection.");
-					}
 					if (heatmapPoints.Count > 600)
 					{
 						// Reduce intensity for "shots" as there is a lot of points
@@ -100,45 +88,21 @@ namespace Services.Concrete
 					break;
 				case "flashbangs":
 					heatmapPoints = GetFlashbangExplodedPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No flashbang thrown with this selection.");
-					}
 					break;
 				case "he":
 					heatmapPoints = GetHeGrenadeExplodedPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No HE grenade thrown with this selection.");
-					}
 					break;
 				case "smokes":
 					heatmapPoints = GetSmokeStartedPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No smoke thrown with this selection");
-					}
 					break;
 				case "molotovs":
 					heatmapPoints = GetMolotovFireStartedPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No molotov thrown with this selection.");
-					}
 					break;
 				case "incendiaries":
 					heatmapPoints = GetIncendiaryFireStartedPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No incendiaries thrown with this selection.");
-					}
 					break;
 				case "decoys":
 					heatmapPoints = GetDecoyStartedPoints();
-					if (heatmapPoints.Count == 0)
-					{
-						throw new HeatmapDataNotFoundException("No decoy thrown with this selection.");
-					}
 					break;
 				default:
 					return points;

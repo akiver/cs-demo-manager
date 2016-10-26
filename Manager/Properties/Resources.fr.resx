@@ -2524,4 +2524,10 @@ Message d'erreur :
   <data name="DialogNoChatFound" xml:space="preserve">
     <value>Aucun message de tchat trouvé. (L'export ne fonctionne que lorsque la démo provient d'un serveur ayant "tv_relaytextchat" différent de "0", ce qui n'est pas le cas des serveurs Valve matchmaking)</value>
   </data>
+  <data name="NoHeatmapDataFound" xml:space="preserve">
+    <value>Pas de {0} pour cette selection.</value>
+  </data>
+  <data name="Shots" xml:space="preserve">
+    <value>Tirs</value>
+  </data>
 </root>

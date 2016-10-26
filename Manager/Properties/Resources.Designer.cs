@@ -4524,6 +4524,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No {0} found for this selection..
+        /// </summary>
+        public static string NoHeatmapDataFound {
+            get {
+                return ResourceManager.GetString("NoHeatmapDataFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         public static string None {
@@ -5649,6 +5658,15 @@ namespace Manager.Properties {
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shots.
+        /// </summary>
+        public static string Shots {
+            get {
+                return ResourceManager.GetString("Shots", resourceCulture);
             }
         }
         
