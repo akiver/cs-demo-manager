@@ -73,6 +73,7 @@
     <Compile Include="Models\Maps\Inferno.cs" />
     <Compile Include="Models\Maps\Mikla.cs" />
     <Compile Include="Models\Maps\Mirage.cs" />
+    <Compile Include="Models\Maps\NewInferno.cs" />
     <Compile Include="Models\Maps\NewNuke.cs" />
     <Compile Include="Models\Maps\Nuke.cs" />
     <Compile Include="Models\Maps\Overpass.cs" />

@@ -44,6 +44,11 @@ namespace Services.Concrete.Maps
 					Map = new Dust2();
 					break;
 				case INFERNO:
+					if (demo.Date > new DateTime(2016, 10, 12))
+					{
+						Map = new NewInferno();
+						break;
+					}
 					Map = new Inferno();
 					break;
 				case NUKE:

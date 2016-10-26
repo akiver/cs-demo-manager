@@ -303,6 +303,16 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap de_new_inferno {
+            get {
+                object obj = ResourceManager.GetObject("de_new_inferno", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap de_new_nuke {
             get {
                 object obj = ResourceManager.GetObject("de_new_nuke", resourceCulture);
@@ -636,6 +646,16 @@ namespace Resources.Properties {
         internal static System.Drawing.Bitmap molotov_burning {
             get {
                 object obj = ResourceManager.GetObject("molotov_burning", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap new_inferno {
+            get {
+                object obj = ResourceManager.GetObject("new_inferno", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

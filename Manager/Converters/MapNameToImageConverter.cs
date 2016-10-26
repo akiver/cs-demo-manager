@@ -53,6 +53,7 @@ namespace Manager.Converters
 				case "de_gwalior":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/gwalior.png", UriKind.RelativeOrAbsolute);
 				case "de_inferno":
+					if (demo.Date > new DateTime(2016, 10, 12)) return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/new_inferno.png", UriKind.RelativeOrAbsolute);
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/inferno.png", UriKind.RelativeOrAbsolute);
 				case "de_inferno_ce":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/inferno_ce.png", UriKind.RelativeOrAbsolute);

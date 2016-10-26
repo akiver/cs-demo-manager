@@ -176,6 +176,12 @@
   <ItemGroup>
     <Resource Include="images\icons\weapon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_new_inferno.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\new_inferno.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
