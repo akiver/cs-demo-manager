@@ -786,6 +786,7 @@ namespace Services.Concrete
 						endIcon = GetIconBitmapFromStream("he_exploded");
 						break;
 					case StuffType.MOLOTOV:
+					case StuffType.INCENDIARY:
 						startIcon = GetIconBitmapFromStream("molotov");
 						endIcon = GetIconBitmapFromStream("molotov_burning");
 						break;

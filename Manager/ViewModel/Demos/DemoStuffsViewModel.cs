@@ -283,6 +283,7 @@ namespace Manager.ViewModel.Demos
 			StuffSelectors.Add(new ComboboxSelector("flashbangs", Properties.Resources.Flashbangs));
 			StuffSelectors.Add(new ComboboxSelector("he", Properties.Resources.HeGrenades));
 			StuffSelectors.Add(new ComboboxSelector("molotovs", Properties.Resources.Molotovs));
+			StuffSelectors.Add(new ComboboxSelector("incendiaries", Properties.Resources.Incendiaries));
 			StuffSelectors.Add(new ComboboxSelector("decoys", Properties.Resources.Decoys));
 			CurrentStuffSelector = StuffSelectors[0];
 

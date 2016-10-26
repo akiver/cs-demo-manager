@@ -134,11 +134,10 @@ namespace Services.Concrete
 						}
 						break;
 					case StuffType.MOLOTOV:
-					case StuffType.INCENDIARY:
 						foreach (Round round in demo.Rounds)
 						{
 							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& (e.Weapon.Element == EquipmentElement.Incendiary || e.Weapon.Element == EquipmentElement.Molotov)).ToList();
+							&& e.Weapon.Element == EquipmentElement.Molotov).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							List<MolotovFireStartedEvent> fireStartedList = demo.MolotovsFireStarted.Where(e => e.RoundNumber == round.Number).ToList();
 							fireStartedList.Sort((w1, w2) => w1.ThrowerSteamId.CompareTo(w2.ThrowerSteamId));
@@ -153,6 +152,43 @@ namespace Services.Concrete
 											Tick = weaponFired[i].Tick,
 											RoundNumber = round.Number,
 											Type = StuffType.MOLOTOV,
+											StartX = weaponFired[i].Point.X,
+											StartY = weaponFired[i].Point.Y,
+											EndX = fireStartedList[i].Point.X,
+											EndY = fireStartedList[i].Point.Y,
+											ThrowerName = weaponFired[i].ShooterName,
+											ThrowerSteamId = weaponFired[i].ShooterSteamId,
+											ShooterPosX = weaponFired[i].ShooterPosX,
+											ShooterPosY = weaponFired[i].ShooterPosY,
+											ShooterPosZ = weaponFired[i].ShooterPosZ,
+											ShooterAnglePitch = weaponFired[i].ShooterAnglePitch,
+											ShooterAngleYaw = weaponFired[i].ShooterAngleYaw
+										};
+										stuffs.Add(s);
+									}
+								}
+							}
+						}
+						break;
+					case StuffType.INCENDIARY:
+						foreach (Round round in demo.Rounds)
+						{
+							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
+							&& e.Weapon.Element == EquipmentElement.Incendiary).ToList();
+							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
+							List<MolotovFireStartedEvent> fireStartedList = demo.IncendiariesFireStarted.Where(e => e.RoundNumber == round.Number).ToList();
+							fireStartedList.Sort((w1, w2) => w1.ThrowerSteamId.CompareTo(w2.ThrowerSteamId));
+							if (weaponFired.Count == fireStartedList.Count)
+							{
+								for (int i = 0; i < fireStartedList.Count; i++)
+								{
+									if (fireStartedList[i].Point != null && fireStartedList[i].ThrowerSteamId == weaponFired[i].ShooterSteamId)
+									{
+										Stuff s = new Stuff
+										{
+											Tick = weaponFired[i].Tick,
+											RoundNumber = round.Number,
+											Type = StuffType.INCENDIARY,
 											StartX = weaponFired[i].Point.X,
 											StartY = weaponFired[i].Point.Y,
 											EndX = fireStartedList[i].Point.X,
