@@ -89,6 +89,12 @@ namespace Services.Concrete.Analyzer
 		public readonly Queue<Player> LastPlayersFireEndedMolotov = new Queue<Player>();
 
 		/// <summary>
+		/// Used to distinct molotovs and icendiaries grenades.
+		/// As FireEventArgs doesn't distinct molo / inc, we use it to know the right nade type on each FireNade events.
+		/// </summary>
+		public readonly Queue<EquipmentElement> LastNadeTypeThrown = new Queue<EquipmentElement>();
+
+		/// <summary>
 		/// Last player who thrown a flashbang, used for flashbangs stats
 		/// </summary>
 		public Player LastPlayerExplodedFlashbang { get; set; }
@@ -819,8 +825,10 @@ namespace Services.Concrete.Analyzer
 			{
 				case EquipmentElement.Incendiary:
 					shooter.IncendiaryThrownCount++;
+					LastNadeTypeThrown.Enqueue(EquipmentElement.Incendiary);
 					break;
 				case EquipmentElement.Molotov:
+					LastNadeTypeThrown.Enqueue(EquipmentElement.Molotov);
 					shooter.MolotovThrownCount++;
 					break;
 				case EquipmentElement.Decoy:
@@ -920,7 +928,15 @@ namespace Services.Concrete.Analyzer
 							Demo.PositionPoints.Add(positionPoint);
 						}
 					}
-					Demo.MolotovsFireStarted.Add(molotovEvent);
+
+					if (LastNadeTypeThrown.Count > 0)
+					{
+						EquipmentElement lastNadeType = LastNadeTypeThrown.Dequeue();
+						if (lastNadeType == EquipmentElement.Molotov)
+							Demo.MolotovsFireStarted.Add(molotovEvent);
+						else
+							Demo.IncendiariesFireStarted.Add(molotovEvent);
+					}
 					break;
 			}
 		}
@@ -1351,7 +1367,6 @@ namespace Services.Concrete.Analyzer
 
 		protected void CreateNewRound()
 		{
-			IsRoundEndOccured = false;
 			CurrentRound = new Round
 			{
 				Tick = Parser.IngameTick,
@@ -1360,27 +1375,18 @@ namespace Services.Concrete.Analyzer
 				SideTrouble = Side.None,
 				WinnerSide = Side.None
 			};
+
+			IsRoundEndOccured = false;
 			CurrentClutch = null;
-
-			KillsThisRound.Clear();
-			// Sometimes parser return wrong money values on 1st round of side
-			if (CurrentRound.Number == 1 || CurrentRound.Number == 16)
-			{
-				CurrentRound.StartMoneyTeam1 = 4000;
-				CurrentRound.StartMoneyTeam2 = 4000;
-			}
-			else
-			{
-				CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.Money);
-				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.Money);
-			}
-
+			LastPlayerExplodedFlashbang = null;
 			IsFirstKillOccured = false;
 			IsFirstShotOccured = false;
 			_playerInClutch1 = null;
 			_playerInClutch2 = null;
+			KillsThisRound.Clear();
+			ClearQueues();
 
-			// Nobody is controlling a BOT at the beginning of a round
+			// Update players infos
 			foreach (Player pl in Demo.Players)
 			{
 				pl.HasEntryKill = false;
@@ -1401,6 +1407,18 @@ namespace Services.Concrete.Analyzer
 				{
 					pl.IsAlive = false;
 				}
+			}
+
+			// Sometimes parser return wrong money values on 1st round of side
+			if (CurrentRound.Number == 1 || CurrentRound.Number == 16)
+			{
+				CurrentRound.StartMoneyTeam1 = 4000;
+				CurrentRound.StartMoneyTeam2 = 4000;
+			}
+			else
+			{
+				CurrentRound.StartMoneyTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.Money);
+				CurrentRound.StartMoneyTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.Money);
 			}
 		}
 
@@ -2033,15 +2051,21 @@ namespace Services.Concrete.Analyzer
 				if (weapons.Any()) Demo.MostKillingWeapon = weapons.Select(w => w.Weapon).First();
 			}
 
-			if (AnalyzePlayersPosition)
-			{
-				LastPlayersFireEndedMolotov.Clear();
-			}
+			ClearQueues();
 		}
 
 		private static string CleanUpChatText(string message)
 		{
 			return Regex.Replace(message, @"[\u0001\u0002\u0003\u0004\u0005\u0006\u0007]", string.Empty);
+		}
+
+		private void ClearQueues()
+		{
+			LastPlayersFireStartedMolotov.Clear();
+			LastPlayersFireEndedMolotov.Clear();
+			LastPlayersThrownMolotov.Clear();
+			LastNadeTypeThrown.Clear();
+			PlayersFlashQueue.Clear();
 		}
 
 		#endregion

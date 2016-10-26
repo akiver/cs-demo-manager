@@ -402,6 +402,11 @@ namespace Core.Models
 		private ObservableCollection<MolotovFireStartedEvent> _molotovsFireStarted;
 
 		/// <summary>
+		/// Incendiary fire started events data
+		/// </summary>
+		private ObservableCollection<MolotovFireStartedEvent> _incendiariesFireStarted;
+
+		/// <summary>
 		/// Player with the best HS ratio
 		/// </summary>
 		private Player _mostHeadshotPlayer;
@@ -887,6 +892,13 @@ namespace Core.Models
 			set { Set(() => DecoyStarted, ref _decoysStarted, value); }
 		}
 
+		[JsonProperty("incendiaries")]
+		public ObservableCollection<MolotovFireStartedEvent> IncendiariesFireStarted
+		{
+			get { return _incendiariesFireStarted; }
+			set { Set(() => IncendiariesFireStarted, ref _incendiariesFireStarted, value); }
+		}
+
 		[JsonProperty("molotovs")]
 		public ObservableCollection<MolotovFireStartedEvent> MolotovsFireStarted
 		{
@@ -1075,6 +1087,7 @@ namespace Core.Models
 			Players = new ObservableCollection<Player>();
 			Rounds = new ObservableCollection<Round>();
 			MolotovsFireStarted = new ObservableCollection<MolotovFireStartedEvent>();
+			IncendiariesFireStarted = new ObservableCollection<MolotovFireStartedEvent>();
 			DecoyStarted = new ObservableCollection<DecoyStartedEvent>();
 			WeaponFired = new ObservableCollection<WeaponFireEvent>();
 			PlayersHurted = new ObservableCollection<PlayerHurtedEvent>();
@@ -1161,6 +1174,7 @@ namespace Core.Models
 					Overtimes.Clear();
 					PositionPoints.Clear();
 					MolotovsFireStarted.Clear();
+					IncendiariesFireStarted.Clear();
 					DecoyStarted.Clear();
 					BombPlanted.Clear();
 					BombDefused.Clear();
