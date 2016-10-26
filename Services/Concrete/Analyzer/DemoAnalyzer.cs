@@ -696,16 +696,8 @@ namespace Services.Concrete.Analyzer
 					if (player != null) player.EquipementValueRounds[CurrentRound.Number] = pl.CurrentEquipmentValue;
 				}
 
-				if (IsHalfMatch)
-				{
-					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
-					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-				}
-				else
-				{
-					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
-				}
+				CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+				CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
 
 				// Not 100% accurate maybe improved it with current equipement...
 				if (CurrentRound.StartMoneyTeam1 == 4000 && CurrentRound.StartMoneyTeam2 == 4000)
@@ -734,6 +726,9 @@ namespace Services.Concrete.Analyzer
 
 					if (CurrentRound.Type != RoundType.NORMAL)
 					{
+						CurrentRound.SideTrouble = CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2
+							? Side.Terrorist : Side.CounterTerrorist;
+
 						if (IsOvertime)
 						{
 							if (IsHalfMatch)
@@ -741,12 +736,10 @@ namespace Services.Concrete.Analyzer
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamCT.Name;
-									CurrentRound.SideTrouble = Side.CounterTerrorist;
 								}
 								else
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamT.Name;
-									CurrentRound.SideTrouble = Side.Terrorist;
 								}
 							}
 							else
@@ -754,12 +747,10 @@ namespace Services.Concrete.Analyzer
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamT.Name;
-									CurrentRound.SideTrouble = Side.CounterTerrorist;
 								}
 								else
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamCT.Name;
-									CurrentRound.SideTrouble = Side.Terrorist;
 								}
 							}
 						}
@@ -770,12 +761,10 @@ namespace Services.Concrete.Analyzer
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamCT.Name;
-									CurrentRound.SideTrouble = Side.Terrorist;
 								}
 								else
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamT.Name;
-									CurrentRound.SideTrouble = Side.CounterTerrorist;
 								}
 							}
 							else
@@ -783,12 +772,10 @@ namespace Services.Concrete.Analyzer
 								if (CurrentRound.EquipementValueTeam1 > CurrentRound.EquipementValueTeam2)
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamT.Name;
-									CurrentRound.SideTrouble = Side.Terrorist;
 								}
 								else
 								{
 									CurrentRound.TeamTroubleName = Demo.TeamCT.Name;
-									CurrentRound.SideTrouble = Side.CounterTerrorist;
 								}
 							}
 						}
