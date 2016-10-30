@@ -76,11 +76,11 @@
         </trans-unit>
         <trans-unit id="Language" translate="yes" xml:space="preserve">
           <source>Language</source>
-          <target state="final">Langage</target>
+          <target state="final">Langue</target>
         </trans-unit>
         <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
           <source>Click here to download your last matchmaking demos.</source>
-          <target state="final">Cliquez ici pour télécharger vos dernières démos matchmaking.</target>
+          <target state="final">Cliquez ici pour télécharger vos dernières démos du matchmaking.</target>
         </trans-unit>
         <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
           <source>Send download demos notifications</source>
