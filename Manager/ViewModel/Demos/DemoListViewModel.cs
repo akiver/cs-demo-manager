@@ -159,6 +159,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _downloadDemosCommand;
 
+		private RelayCommand _copyShareCodeCommand;
+
 		private int _newBannedPlayerCount;
 
 		private ObservableCollection<string> _folders;
@@ -1446,6 +1448,37 @@ namespace Manager.ViewModel.Demos
 						CommandManager.InvalidateRequerySuggested();
 					},
 					() => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command to copy demo's share code
+		/// </summary>
+		public RelayCommand CopyShareCodeCommand
+		{
+			get
+			{
+				return _copyShareCodeCommand
+					?? (_copyShareCodeCommand = new RelayCommand(
+						async () =>
+						{
+							string shareCode = await _demosService.GetShareCode(SelectedDemo);
+							if (shareCode == string.Empty)
+							{
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoShareCodeUnavailable, MessageDialogStyle.Affirmative);
+								return;
+							}
+							Clipboard.SetText(shareCode);
+							IsBusy = true;
+							HasRing = false;
+							HasNotification = true;
+							NotificationMessage = Properties.Resources.NotificationDemoShareCodeCopied;
+							await Task.Delay(3000);
+							HasNotification = false;
+							IsBusy = false;
+							CommandManager.InvalidateRequerySuggested();
+						},
+						() => SelectedDemo != null));
 			}
 		}
 

@@ -69,6 +69,8 @@
 					  Command="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}"
 					  CommandParameter="cevo" />
 		</MenuItem>
+		<MenuItem Header="{x:Static properties:Resources.CopyDemoShareCode}"
+				  Command="{Binding DemoList.CopyShareCodeCommand, Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.ExportJson}"
 				  Command="{Binding DemoList.ExportJsonCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>

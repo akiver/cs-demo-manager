@@ -54,6 +54,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
@@ -97,6 +98,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ShareCode.cs" />
     <Compile Include="Win32Utils.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Demo.cs" />

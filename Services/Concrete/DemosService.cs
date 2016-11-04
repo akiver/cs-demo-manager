@@ -426,6 +426,44 @@ namespace Services.Concrete
 			File.WriteAllText(filePath, string.Join(Environment.NewLine, demo.ChatMessageList.ToArray()));
 		}
 
+		public async Task<string> GetShareCode(Demo demo)
+		{
+			string shareCode = string.Empty;
+			string infoFilePath = demo.Path + ".info";
+			if (!File.Exists(infoFilePath)) return shareCode;
+
+			using (FileStream file = File.OpenRead(infoFilePath))
+			{
+				try
+				{
+					CDataGCCStrike15_v2_MatchInfo matchInfo = await Task.Run(() => Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file));
+					UInt64 matchId = matchInfo.matchid;
+					UInt32 tvPort = matchInfo.watchablematchinfo.tv_port;
+					UInt64 reservationId;
+
+					// old definition
+					if (matchInfo.roundstats_legacy != null)
+					{
+						reservationId = matchInfo.roundstats_legacy.reservationid;
+					}
+					else
+					{
+						// new definition
+						List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats> roundStatsList = matchInfo.roundstatsall;
+						reservationId = roundStatsList.Last().reservationid;
+					}
+
+					shareCode = ShareCode.GenerateShareCode(matchId, reservationId, tvPort);
+				}
+				catch (Exception e)
+				{
+					Logger.Instance.Log(e);
+				}
+			}
+
+			return shareCode;
+		}
+
 		/// <summary>
 		/// Check if the round stats contains useful information and in this case do the work
 		/// 1. Check if the demo archive is still available

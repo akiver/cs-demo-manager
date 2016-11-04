@@ -638,6 +638,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Copy share code.
+        /// </summary>
+        public static string CopyDemoShareCode {
+            get {
+                return ResourceManager.GetString("CopyDemoShareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy email address.
         /// </summary>
         public static string CopyEmailAddress {
@@ -1085,6 +1094,15 @@ namespace Manager.Properties {
         public static string DialogDemosDataCleared {
             get {
                 return ResourceManager.GetString("DialogDemosDataCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This demo is not from Valve matchmaking servers or the .info file is missing..
+        /// </summary>
+        public static string DialogDemoShareCodeUnavailable {
+            get {
+                return ResourceManager.GetString("DialogDemoShareCodeUnavailable", resourceCulture);
             }
         }
         
@@ -4682,6 +4700,15 @@ namespace Manager.Properties {
         public static string NotificationCommentSaved {
             get {
                 return ResourceManager.GetString("NotificationCommentSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share code copied to clipboard..
+        /// </summary>
+        public static string NotificationDemoShareCodeCopied {
+            get {
+                return ResourceManager.GetString("NotificationDemoShareCodeCopied", resourceCulture);
             }
         }
         

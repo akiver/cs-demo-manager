@@ -2657,4 +2657,13 @@ Message Error :
   <data name="Shots" xml:space="preserve">
     <value>Shots</value>
   </data>
+  <data name="CopyDemoShareCode" xml:space="preserve">
+    <value>Copy share code</value>
+  </data>
+  <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
+    <value>This demo is not from Valve matchmaking servers or the .info file is missing.</value>
+  </data>
+  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
+    <value>Share code copied to clipboard.</value>
+  </data>
 </root>

@@ -3391,6 +3391,18 @@ Besked Fejl :
           <source>Shots</source>
           <target state="new">Shots</target>
         </trans-unit>
+        <trans-unit id="DialogDemoShareCodeUnavailable" translate="yes" xml:space="preserve">
+          <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
+          <target state="new">This demo is not from Valve matchmaking servers or the .info file is missing.</target>
+        </trans-unit>
+        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
+          <source>Share code copied to clipboard.</source>
+          <target state="new">Share code copied to clipboard.</target>
+        </trans-unit>
+        <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
+          <source>Copy share code</source>
+          <target state="new">Copy share code</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -2530,4 +2530,13 @@ Message d'erreur :
   <data name="Shots" xml:space="preserve">
     <value>Tirs</value>
   </data>
+  <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
+    <value>Cette démo ne provient pas d'un serveur matchmaking Valve ou le fichier .info n'est pas présent.</value>
+  </data>
+  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
+    <value>Code de partage copié dans le presse-papiers.</value>
+  </data>
+  <data name="CopyDemoShareCode" xml:space="preserve">
+    <value>Copier le code de partage</value>
+  </data>
 </root>

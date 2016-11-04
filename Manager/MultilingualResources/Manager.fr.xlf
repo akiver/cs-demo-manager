@@ -3393,6 +3393,18 @@ Message d'erreur :
           <source>Shots</source>
           <target state="final">Tirs</target>
         </trans-unit>
+        <trans-unit id="DialogDemoShareCodeUnavailable" translate="yes" xml:space="preserve">
+          <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
+          <target state="final">Cette démo ne provient pas d'un serveur matchmaking Valve ou le fichier .info n'est pas présent.</target>
+        </trans-unit>
+        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
+          <source>Share code copied to clipboard.</source>
+          <target state="final">Code de partage copié dans le presse-papiers.</target>
+        </trans-unit>
+        <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
+          <source>Copy share code</source>
+          <target state="final">Copier le code de partage</target>
+        </trans-unit>
       </group>
     </body>
   </file>

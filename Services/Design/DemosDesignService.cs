@@ -363,5 +363,10 @@ namespace Services.Design
 		public void WriteChatFile(Demo demo, string filePath)
 		{
 		}
+
+		public Task<string> GetShareCode(Demo demo)
+		{
+			return Task.FromResult("CSGO-Vd1T-FD32d-549td-DF41f-Td8dZ");
+		}
 	}
 }

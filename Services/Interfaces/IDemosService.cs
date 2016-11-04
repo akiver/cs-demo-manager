@@ -138,5 +138,12 @@ namespace Services.Interfaces
 		/// <param name="filePath"></param>
 		/// <returns></returns>
 		void WriteChatFile(Demo demo, string filePath);
+
+		/// <summary>
+		/// Return demo's share code
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<string> GetShareCode(Demo demo);
 	}
 }
