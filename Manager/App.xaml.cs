@@ -29,6 +29,7 @@ namespace Manager
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",
 			"Allan \"Michael\" Simonsen (Danish)",
 			"Leonardo (Brazilian)",
+			"Spidersouris (French)",
 		};
 
 		public App()
