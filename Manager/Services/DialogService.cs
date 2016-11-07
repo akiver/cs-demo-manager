@@ -170,7 +170,7 @@ namespace Manager.Services
 			}
 		}
 
-		public async Task<MessageDialogResult> ShowSendShareCodeToThirdParyConfirmationAsync(string thirdPartyName)
+		public async Task<MessageDialogResult> ShowSendShareCodeToThirdPartyConfirmationAsync(string thirdPartyName)
 		{
 			MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;
 			MetroDialogSettings dialogOptions = new MetroDialogSettings

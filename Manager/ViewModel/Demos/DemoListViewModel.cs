@@ -1750,7 +1750,7 @@ namespace Manager.ViewModel.Demos
 							// dialog confirmation
 							if (Properties.Settings.Default.AskThirdPartyConfirmation)
 							{
-								var send = await _dialogService.ShowSendShareCodeToThirdParyConfirmationAsync(thirdPartyName);
+								var send = await _dialogService.ShowSendShareCodeToThirdPartyConfirmationAsync(thirdPartyName);
 								if (send == MessageDialogResult.Negative) return;
 								if (send == MessageDialogResult.FirstAuxiliary)
 								{
