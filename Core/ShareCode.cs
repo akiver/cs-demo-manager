@@ -43,8 +43,6 @@ namespace Core
 
 			BigInteger big = new BigInteger(bytes.Reverse().ToArray());
 
-			if (big < 0) big = -big;
-
 			string sharecode = EncodeAgainstString(big);
 
 			return sharecode;
@@ -59,11 +57,12 @@ namespace Core
 		/// <returns></returns>
 		private static byte[] CombineBytes(byte[] matchIdBytes, byte[] reservationBytes, byte[] tvBytes)
 		{
-			byte[] result = new byte[matchIdBytes.Length + reservationBytes.Length + tvBytes.Length];
+			byte[] result = new byte[matchIdBytes.Length + reservationBytes.Length + tvBytes.Length + 1];
 
-			Buffer.BlockCopy(matchIdBytes, 0, result, 0, matchIdBytes.Length);
-			Buffer.BlockCopy(reservationBytes, 0, result, matchIdBytes.Length, reservationBytes.Length);
-			Buffer.BlockCopy(tvBytes, 0, result, matchIdBytes.Length + reservationBytes.Length, tvBytes.Length);
+			Buffer.BlockCopy(new byte[] { 0 }, 0, result, 0, 1);
+			Buffer.BlockCopy(matchIdBytes, 0, result, 1, matchIdBytes.Length);
+			Buffer.BlockCopy(reservationBytes, 0, result, 1 + matchIdBytes.Length, reservationBytes.Length);
+			Buffer.BlockCopy(tvBytes, 0, result, 1 + matchIdBytes.Length + reservationBytes.Length, tvBytes.Length);
 
 			return result;
 		}
