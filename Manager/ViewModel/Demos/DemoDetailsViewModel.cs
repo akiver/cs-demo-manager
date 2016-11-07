@@ -48,7 +48,7 @@ namespace Manager.ViewModel.Demos
 
 		private readonly IRoundService _roundService;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly ExcelService _excelService;
 
@@ -972,7 +972,7 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		public DemoDetailsViewModel(
-			IDemosService demosService, DialogService dialogService, ISteamService steamService,
+			IDemosService demosService, IDialogService dialogService, ISteamService steamService,
 			ICacheService cacheService, ExcelService excelService, IRoundService roundService)
 		{
 			_demosService = demosService;

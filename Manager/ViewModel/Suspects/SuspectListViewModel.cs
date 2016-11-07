@@ -38,7 +38,7 @@ namespace Manager.ViewModel.Suspects
 
 		private readonly IDemosService _demosService;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private string _suspectSteamCommunityUrl;
 
@@ -568,7 +568,7 @@ namespace Manager.ViewModel.Suspects
 
 		#endregion
 
-		public SuspectListViewModel(ISteamService steamService, ICacheService cacheService, DialogService dialogService, IDemosService demosService)
+		public SuspectListViewModel(ISteamService steamService, ICacheService cacheService, IDialogService dialogService, IDemosService demosService)
 		{
 			_steamService = steamService;
 			_cacheService = cacheService;

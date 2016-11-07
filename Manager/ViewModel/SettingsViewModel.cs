@@ -76,7 +76,7 @@ namespace Manager.ViewModel
 
 		private readonly IDemosService _demosService;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly ISteamService _steamService;
 
@@ -1708,7 +1708,7 @@ namespace Manager.ViewModel
 		#endregion
 
 		public SettingsViewModel(
-			DialogService dialogService, ICacheService chacheService, IDemosService demosService,
+			IDialogService dialogService, ICacheService chacheService, IDemosService demosService,
 			ISteamService steamService, IAccountStatsService accountStatsService)
 		{
 			_dialogService = dialogService;

@@ -178,6 +178,7 @@
     <Compile Include="Messages\SettingsFlyoutClosed.cs" />
     <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
     <Compile Include="Messages\SettingsFlyoutOpenedMessage.cs" />
+    <Compile Include="Messages\ThirdPartySelected.cs" />
     <Compile Include="Messages\UpdateSuspectBannedCountMessage.cs" />
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />
@@ -190,8 +191,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
+    <Compile Include="ViewModel\DialogThirdPartiesViewModel.cs" />
     <Compile Include="ViewModel\Players\PlayerDetailsViewModel.cs" />
     <Compile Include="ViewModel\Rounds\RoundDetailsViewModel.cs" />
     <Compile Include="ViewModel\Suspects\WhitelistViewModel.cs" />
@@ -200,6 +203,9 @@
     </Compile>
     <Compile Include="Views\Demos\DemoStuffsView.xaml.cs">
       <DependentUpon>DemoStuffsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\DialogThirdPartySelection.xaml.cs">
+      <DependentUpon>DialogThirdPartySelection.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Players\PlayerDetailsView.xaml.cs">
       <DependentUpon>PlayerDetailsView.xaml</DependentUpon>
@@ -269,6 +275,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Demos\DemoStuffsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\DialogThirdPartySelection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

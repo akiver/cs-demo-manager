@@ -28,7 +28,7 @@ namespace Manager.ViewModel.Players
 
 		private readonly ICacheService _cacheService;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private Player _currentPlayer;
 
@@ -353,7 +353,7 @@ namespace Manager.ViewModel.Players
 
 		#endregion
 
-		public PlayerDetailsViewModel(IPlayerService playerService, DialogService dialogService, ICacheService cacheService)
+		public PlayerDetailsViewModel(IPlayerService playerService, IDialogService dialogService, ICacheService cacheService)
 		{
 			_playerService = playerService;
 			_dialogService = dialogService;

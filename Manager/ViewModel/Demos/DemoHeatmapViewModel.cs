@@ -46,7 +46,7 @@ namespace Manager.ViewModel.Demos
 
 		private List<HeatmapPoint> _points = new List<HeatmapPoint>();
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly IMapService _mapService;
 
@@ -377,7 +377,7 @@ namespace Manager.ViewModel.Demos
 
 		#endregion
 
-		public DemoHeatmapViewModel(DialogService dialogService, ICacheService cacheService, IMapService mapService)
+		public DemoHeatmapViewModel(IDialogService dialogService, ICacheService cacheService, IMapService mapService)
 		{
 			_dialogService = dialogService;
 			_cacheService = cacheService;

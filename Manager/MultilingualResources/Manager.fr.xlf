@@ -3405,6 +3405,38 @@ Message d'erreur :
           <source>Copy share code</source>
           <target state="final">Copier le code de partage</target>
         </trans-unit>
+        <trans-unit id="ShowOnThirdParty" translate="yes" xml:space="preserve">
+          <source>Show on third party application</source>
+          <target state="final">Afficher dans app tierce</target>
+        </trans-unit>
+        <trans-unit id="DialogShareCodeNotAvailable" translate="yes" xml:space="preserve">
+          <source>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</source>
+          <target state="final">Code de partage indisponible. La démo doit provenir d'un serveur Valve matchmaking et le fichier .info doît être présent.</target>
+        </trans-unit>
+        <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
+          <source>Yes and don't ask next time</source>
+          <target state="final">Oui et ne plus le demander</target>
+        </trans-unit>
+        <trans-unit id="DialogSendThirdPartyConfirmation" translate="yes" xml:space="preserve">
+          <source>You are going to send the demo's share code to {0}. Do you want to continue?</source>
+          <target state="final">Vous êtes sur le point d'envoyer le code de partage de cette démo à {0}. Voulez-vous vraiment continuer?</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileSendingShareCode" translate="yes" xml:space="preserve">
+          <source>An error occured while sending the share code.</source>
+          <target state="final">Une erreur est survenue pendant l'envoi du code de partage.</target>
+        </trans-unit>
+        <trans-unit id="DialogSendShareCodeWarning" translate="yes" xml:space="preserve">
+          <source>You are going to send the demo's share code to {0}.</source>
+          <target state="final">Vous êtes sur le point d'envoyer le code de partage de la démo à {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectThirdParty" translate="yes" xml:space="preserve">
+          <source>Select third party application</source>
+          <target state="final">Sélectionnez une application tierce</target>
+        </trans-unit>
+        <trans-unit id="ToolTipShowDemoOnThirdParty" translate="yes" xml:space="preserve">
+          <source>Show demo's details on a third party application</source>
+          <target state="final">Afficher les détails de la démo dans une application tierce</target>
+        </trans-unit>
       </group>
     </body>
   </file>

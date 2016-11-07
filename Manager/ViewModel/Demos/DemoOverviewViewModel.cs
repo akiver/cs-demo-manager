@@ -79,7 +79,7 @@ namespace Manager.ViewModel.Demos
 
 		private ComboboxSelector _currentTeamSelector;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly IDemosService _demoService;
 
@@ -468,7 +468,7 @@ namespace Manager.ViewModel.Demos
 
 		#endregion
 
-		public DemoOverviewViewModel(DialogService dialogService, IDemosService demoService, IMapService mapService)
+		public DemoOverviewViewModel(IDialogService dialogService, IDemosService demoService, IMapService mapService)
 		{
 			_dialogService = dialogService;
 			_demoService = demoService;

@@ -43,7 +43,7 @@ namespace Manager.ViewModel
 
 		public string CreditsText => AppSettings.APP_NAME + " " + AppSettings.APP_VERSION + " " + Properties.Resources.By + " " + AppSettings.AUTHOR;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private RelayCommand _windowLoadedCommand;
 
@@ -303,7 +303,7 @@ namespace Manager.ViewModel
 
 		#endregion
 
-		public MainViewModel(DialogService dialogService, ICacheService cacheService)
+		public MainViewModel(IDialogService dialogService, ICacheService cacheService)
 		{
 			_dialogService = dialogService;
 			_cacheService = cacheService;

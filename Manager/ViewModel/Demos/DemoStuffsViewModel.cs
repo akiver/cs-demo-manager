@@ -20,7 +20,7 @@ namespace Manager.ViewModel.Demos
 	{
 		#region Properties
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private DrawService _drawService;
 
@@ -271,8 +271,8 @@ namespace Manager.ViewModel.Demos
 		}
 
 		public DemoStuffsViewModel(
-			DialogService dialogService, ICacheService cacheService, IStuffService stuffService,
-			IMapService mapService)
+			IDialogService dialogService, ICacheService cacheService,
+			IStuffService stuffService, IMapService mapService)
 		{
 			_dialogService = dialogService;
 			_cacheService = cacheService;

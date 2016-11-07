@@ -21,8 +21,6 @@ namespace Manager.ViewModel
 		{
 			ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-			SimpleIoc.Default.Register<DialogService, DialogService>();
-
 			if (ViewModelBase.IsInDesignModeStatic)
 			{
 				// Create design time view services and models
@@ -38,6 +36,7 @@ namespace Manager.ViewModel
 				SimpleIoc.Default.Register<IStuffService, StuffDesignService>();
 				SimpleIoc.Default.Register<IAccountStatsService, AccountStatsDesignService>();
 				SimpleIoc.Default.Register<IMapService, MapDesignService>();
+				SimpleIoc.Default.Register<IDialogService, DialogService>();
 			}
 			else
 			{
@@ -54,6 +53,7 @@ namespace Manager.ViewModel
 				SimpleIoc.Default.Register<IStuffService, StuffService>();
 				SimpleIoc.Default.Register<IAccountStatsService, AccountStatsService>();
 				SimpleIoc.Default.Register<IMapService, MapService>();
+				SimpleIoc.Default.Register<IDialogService, DialogService>();
 			}
 
 			SimpleIoc.Default.Register<MainViewModel>();
@@ -75,6 +75,7 @@ namespace Manager.ViewModel
 			SimpleIoc.Default.Register<RoundDetailsViewModel>();
 			SimpleIoc.Default.Register<DemoStuffsViewModel>();
 			SimpleIoc.Default.Register<PlayerDetailsViewModel>();
+			SimpleIoc.Default.Register<DialogThirdPartiesViewModel>();
 		}
 
 		public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
@@ -114,6 +115,8 @@ namespace Manager.ViewModel
 		public DemoStuffsViewModel DemoStuffs => ServiceLocator.Current.GetInstance<DemoStuffsViewModel>();
 
 		public PlayerDetailsViewModel PlayerDetails => ServiceLocator.Current.GetInstance<PlayerDetailsViewModel>();
+
+		public DialogThirdPartiesViewModel ThirdParties => ServiceLocator.Current.GetInstance<DialogThirdPartiesViewModel>();
 
 		public static void Cleanup()
 		{

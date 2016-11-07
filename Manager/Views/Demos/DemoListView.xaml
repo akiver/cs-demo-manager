@@ -369,6 +369,23 @@
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>
+
+					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="{x:Static properties:Resources.ToolTipShowDemoOnThirdParty}"
+							Command="{Binding ShowDialogThirdPartySelectionCommand}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_skydrive_upload}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="{x:Static properties:Resources.ShowOnThirdParty}"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
 				</StackPanel>
 			</Grid>
 		</Grid>

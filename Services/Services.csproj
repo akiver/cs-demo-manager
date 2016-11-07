@@ -143,6 +143,8 @@
     <Compile Include="Concrete\RoundService.cs" />
     <Compile Include="Concrete\SoundService.cs" />
     <Compile Include="Concrete\StuffService.cs" />
+    <Compile Include="Concrete\ThirdParties\CsgoStatsService.cs" />
+    <Compile Include="Concrete\ThirdParties\ThirdPartiesServiceFactory.cs" />
     <Compile Include="Design\AccountStatsDesignService.cs" />
     <Compile Include="Design\CacheDesignService.cs" />
     <Compile Include="Design\DamageDesignService.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Interfaces\IRoundService.cs" />
     <Compile Include="Interfaces\ISteamService.cs" />
     <Compile Include="Interfaces\IStuffService.cs" />
+    <Compile Include="Interfaces\IThirdPartyInterface.cs" />
     <Compile Include="Models\Charts\CrouchKillDateChart.cs" />
     <Compile Include="Models\Charts\DamageDateChart.cs" />
     <Compile Include="Models\Charts\GenericDoubleChart.cs" />
@@ -190,6 +193,8 @@
     <Compile Include="Models\Stats\PlayerRoundStats.cs" />
     <Compile Include="Models\Stats\ProgressStats.cs" />
     <Compile Include="Models\Stats\WeaponStats.cs" />
+    <Compile Include="Models\ThirdParties\Responses\CsgostatsResponse.cs" />
+    <Compile Include="Models\ThirdParties\ThirdPartyData.cs" />
     <Compile Include="Models\Timelines\RoundEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Concrete\SteamService.cs" />

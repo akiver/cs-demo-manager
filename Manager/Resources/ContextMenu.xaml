@@ -71,6 +71,19 @@
 		</MenuItem>
 		<MenuItem Header="{x:Static properties:Resources.CopyDemoShareCode}"
 				  Command="{Binding DemoList.CopyShareCodeCommand, Source={StaticResource Locator}}"/>
+		<MenuItem Header="{x:Static properties:Resources.ShowOnThirdParty}"
+				  ItemsSource="{Binding ThirdParties.ThirdPartiesSelector, Source={StaticResource Locator}}"
+				  DisplayMemberPath="Title">
+			<MenuItem.ItemContainerStyle>
+				<Style TargetType="{x:Type MenuItem}"
+					   BasedOn="{StaticResource MetroMenuItem}">
+					<Setter Property="Command"
+							Value="{Binding DemoList.ShowThirdPatyDemoCommand, Source={StaticResource Locator}}" />
+					<Setter Property="CommandParameter"
+							Value="{Binding Id}" />
+				</Style>
+			</MenuItem.ItemContainerStyle>
+		</MenuItem>
 		<MenuItem Header="{x:Static properties:Resources.ExportJson}"
 				  Command="{Binding DemoList.ExportJsonCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>

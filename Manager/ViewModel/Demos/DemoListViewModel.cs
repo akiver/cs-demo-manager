@@ -23,11 +23,14 @@ using Manager.Messages;
 using Manager.Services;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
+using Manager.Views.Dialogs;
 using Manager.Views.Suspects;
 using Newtonsoft.Json;
 using Nito.AsyncEx;
 using Services.Concrete.Excel;
+using Services.Concrete.ThirdParties;
 using Services.Interfaces;
+using Services.Models.ThirdParties;
 using Application = System.Windows.Application;
 using Demo = Core.Models.Demo;
 using UserControl = System.Windows.Controls.UserControl;
@@ -43,7 +46,7 @@ namespace Manager.ViewModel.Demos
 
 		private readonly IDemosService _demosService;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly ICacheService _cacheService;
 
@@ -161,6 +164,10 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _copyShareCodeCommand;
 
+		private RelayCommand _showDialogThirdPartySelectionCommand;
+
+		private RelayCommand<string> _showThirdPartyDemoCommand;
+
 		private int _newBannedPlayerCount;
 
 		private ObservableCollection<string> _folders;
@@ -172,6 +179,8 @@ namespace Manager.ViewModel.Demos
 		private Rank _lastRankAccountStats;
 
 		private CancellationTokenSource _cts = new CancellationTokenSource();
+
+		private readonly DialogThirdPartySelection _dialogThirdPartySelection = new DialogThirdPartySelection();
 
 		#endregion
 
@@ -1483,6 +1492,23 @@ namespace Manager.ViewModel.Demos
 		}
 
 		/// <summary>
+		/// Command to show dialog third party selection
+		/// </summary>
+		public RelayCommand ShowDialogThirdPartySelectionCommand
+		{
+			get
+			{
+				return _showDialogThirdPartySelectionCommand
+					?? (_showDialogThirdPartySelectionCommand = new RelayCommand(
+						async () =>
+						{
+							await _dialogService.ShowCustomDialogAsync(_dialogThirdPartySelection);
+						},
+						() => SelectedDemo != null && SelectedDemos.Count > 0));
+			}
+		}
+
+		/// <summary>
 		/// Command to download last MM demos for the current Steam account
 		/// </summary>
 		public RelayCommand DownloadDemosCommand
@@ -1620,7 +1646,7 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		public DemoListViewModel(
-			IDemosService demosService, DialogService dialogService, ISteamService steamService,
+			IDemosService demosService, IDialogService dialogService, ISteamService steamService,
 			ICacheService cacheService, ExcelService excelService, IAccountStatsService accountStatsService)
 		{
 			_demosService = demosService;
@@ -1688,6 +1714,7 @@ namespace Manager.ViewModel.Demos
 				Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
 				Messenger.Default.Register<UpdateSuspectBannedCountMessage>(this, HandleUpdateSuspectBannedCountMessage);
 				Messenger.Default.Register<DownloadDemosMessage>(this, HandleDownloadDemosMessage);
+				Messenger.Default.Register<ThirdPartySelected>(this, HandleThirdPartySelectedMessage);
 
 				// Notify the bot that the app is loaded
 				Win32Utils.SendMessageToBot(Win32Utils.WM_CSGO_DM_LOADED);
@@ -1698,6 +1725,44 @@ namespace Manager.ViewModel.Demos
 
 				_isMainWindowLoaded = true;
 			});
+		}
+
+		/// <summary>
+		/// Handle third party selection from dialog
+		/// </summary>
+		/// <param name="msg"></param>
+		private void HandleThirdPartySelectedMessage(ThirdPartySelected msg)
+		{
+			ProcessSendShareCode(msg.Name);
+		}
+
+		/// <summary>
+		/// Command to show demo's details on a third party application
+		/// </summary>
+		public RelayCommand<string> ShowThirdPatyDemoCommand
+		{
+			get
+			{
+				return _showThirdPartyDemoCommand
+					?? (_showThirdPartyDemoCommand = new RelayCommand<string>(
+						async thirdPartyName =>
+						{
+							// dialog confirmation
+							if (Properties.Settings.Default.AskThirdPartyConfirmation)
+							{
+								var send = await _dialogService.ShowSendShareCodeToThirdParyConfirmationAsync(thirdPartyName);
+								if (send == MessageDialogResult.Negative) return;
+								if (send == MessageDialogResult.FirstAuxiliary)
+								{
+									Properties.Settings.Default.AskThirdPartyConfirmation = false;
+									Properties.Settings.Default.Save();
+								}
+							}
+
+							ProcessSendShareCode(thirdPartyName);
+						},
+						thirdPartyName => SelectedDemo != null));
+			}
 		}
 
 		private void HandleDownloadDemosMessage(DownloadDemosMessage obj)
@@ -1781,6 +1846,36 @@ namespace Manager.ViewModel.Demos
 				UpdateNotificationStatus();
 			}
 			CommandManager.InvalidateRequerySuggested();
+		}
+
+		/// <summary>
+		/// Handle share code sending / response to a third party
+		/// </summary>
+		/// <param name="thirdPartyName"></param>
+		private async void ProcessSendShareCode(string thirdPartyName)
+		{
+			if (!AppSettings.IsInternetConnectionAvailable())
+			{
+				await _dialogService.ShowNoInternetConnectionAsync();
+				return;
+			}
+
+			string shareCode = await _demosService.GetShareCode(SelectedDemo);
+			if (shareCode == string.Empty)
+			{
+				await _dialogService.ShowErrorAsync(Properties.Resources.DialogShareCodeNotAvailable, MessageDialogStyle.Affirmative);
+				return;
+			}
+
+			IThirdPartyInterface thirdPartyService = ThirdPartiesServiceFactory.Factory(thirdPartyName);
+			ThirdPartyData data = await thirdPartyService.SendShareCode(SelectedDemo, shareCode);
+			if (!data.Success)
+			{
+				await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileSendingShareCode, MessageDialogStyle.Affirmative);
+				return;
+			}
+
+			Process.Start(data.DemoUrl);
 		}
 
 		private async Task<bool> RefreshSelectedDemos()

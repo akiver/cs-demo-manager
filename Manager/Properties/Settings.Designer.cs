@@ -1209,5 +1209,17 @@ namespace Manager.Properties {
                 this["Language"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AskThirdPartyConfirmation {
+            get {
+                return ((bool)(this["AskThirdPartyConfirmation"]));
+            }
+            set {
+                this["AskThirdPartyConfirmation"] = value;
+            }
+        }
     }
 }

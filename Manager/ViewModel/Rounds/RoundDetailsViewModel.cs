@@ -22,7 +22,7 @@ namespace Manager.ViewModel.Rounds
 	{
 		#region Properties
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly IRoundService _roundService;
 
@@ -238,7 +238,7 @@ namespace Manager.ViewModel.Rounds
 			}
 		}
 
-		public RoundDetailsViewModel(DialogService dialogService, IRoundService rounderService, IPlayerService playerService, ICacheService cacheService)
+		public RoundDetailsViewModel(IDialogService dialogService, IRoundService rounderService, IPlayerService playerService, ICacheService cacheService)
 		{
 			_dialogService = dialogService;
 			_roundService = rounderService;

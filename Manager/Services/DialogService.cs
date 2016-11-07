@@ -10,8 +10,10 @@ using MahApps.Metro.Controls.Dialogs;
 
 namespace Manager.Services
 {
-	public class DialogService
+	public class DialogService : IDialogService
 	{
+		private CustomDialog _currentDialog;
+
 		public async Task<MessageDialogResult> ShowMessageAsync(string message, MessageDialogStyle dialogStyle)
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;
@@ -149,6 +151,36 @@ namespace Manager.Services
 					break;
 			}
 			return await ShowMessageAsync(string.Format(Properties.Resources.NoHeatmapDataFound, type.ToLower()), MessageDialogStyle.Affirmative);
+		}
+
+		public async Task ShowCustomDialogAsync(CustomDialog dialog)
+		{
+			_currentDialog = dialog;
+			var metroWindow = Application.Current.MainWindow as MetroWindow;
+			await metroWindow.ShowMetroDialogAsync(dialog);
+		}
+
+		public async Task HideCurrentDialog()
+		{
+			if (_currentDialog != null)
+			{
+				var metroWindow = Application.Current.MainWindow as MetroWindow;
+				await metroWindow.HideMetroDialogAsync(_currentDialog);
+				_currentDialog = null;
+			}
+		}
+
+		public async Task<MessageDialogResult> ShowSendShareCodeToThirdParyConfirmationAsync(string thirdPartyName)
+		{
+			MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;
+			MetroDialogSettings dialogOptions = new MetroDialogSettings
+			{
+				AffirmativeButtonText = Properties.Resources.Yes,
+				NegativeButtonText = Properties.Resources.No,
+				FirstAuxiliaryButtonText = Properties.Resources.YesDontAsk
+			};
+
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Information, string.Format(Properties.Resources.DialogSendThirdPartyConfirmation, thirdPartyName), MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
 	}
 }

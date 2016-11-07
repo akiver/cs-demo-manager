@@ -1402,6 +1402,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while sending the share code..
+        /// </summary>
+        public static string DialogErrorWhileSendingShareCode {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileSendingShareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to export data into a single file or in multiple files?.
         /// </summary>
         public static string DialogExportMultipleOrSingle {
@@ -1646,6 +1655,33 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select third party application.
+        /// </summary>
+        public static string DialogSelectThirdParty {
+            get {
+                return ResourceManager.GetString("DialogSelectThirdParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are going to send the demo&apos;s share code to {0}..
+        /// </summary>
+        public static string DialogSendShareCodeWarning {
+            get {
+                return ResourceManager.GetString("DialogSendShareCodeWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are going to send the demo&apos;s share code to {0}. Do you want to continue?.
+        /// </summary>
+        public static string DialogSendThirdPartyConfirmation {
+            get {
+                return ResourceManager.GetString("DialogSendThirdPartyConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to send this demo(s) to Recycle Bin?.
         /// </summary>
         public static string DialogSendToRecycleBinConfimation {
@@ -1669,6 +1705,15 @@ namespace Manager.Properties {
         public static string DialogSetFolderForDownload {
             get {
                 return ResourceManager.GetString("DialogSetFolderForDownload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists..
+        /// </summary>
+        public static string DialogShareCodeNotAvailable {
+            get {
+                return ResourceManager.GetString("DialogShareCodeNotAvailable", resourceCulture);
             }
         }
         
@@ -5752,6 +5797,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show on third party application.
+        /// </summary>
+        public static string ShowOnThirdParty {
+            get {
+                return ResourceManager.GetString("ShowOnThirdParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show player demos.
         /// </summary>
         public static string ShowPlayerDemos {
@@ -6772,6 +6826,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show demo&apos;s details on a third party application.
+        /// </summary>
+        public static string ToolTipShowDemoOnThirdParty {
+            get {
+                return ResourceManager.GetString("ToolTipShowDemoOnThirdParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show demos that contains selected suspect(s) (CTRL+F).
         /// </summary>
         public static string ToolTIpShowOnlySuspectDemos {
@@ -7571,6 +7634,15 @@ namespace Manager.Properties {
         public static string Yes {
             get {
                 return ResourceManager.GetString("Yes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes and don&apos;t ask next time.
+        /// </summary>
+        public static string YesDontAsk {
+            get {
+                return ResourceManager.GetString("YesDontAsk", resourceCulture);
             }
         }
     }

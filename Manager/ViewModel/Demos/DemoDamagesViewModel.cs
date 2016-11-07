@@ -69,7 +69,7 @@ namespace Manager.ViewModel.Demos
 
 		private bool _selectAllPlayers = true;
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly IDamageService _damageService;
 
@@ -331,7 +331,7 @@ namespace Manager.ViewModel.Demos
 
 		#endregion
 
-		public DemoDamagesViewModel(DialogService dialogService, IDamageService damageService)
+		public DemoDamagesViewModel(IDialogService dialogService, IDamageService damageService)
 		{
 			_dialogService = dialogService;
 			_damageService = damageService;

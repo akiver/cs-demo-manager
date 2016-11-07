@@ -26,7 +26,7 @@ namespace Manager.ViewModel.Suspects
 	{
 		#region Properties
 
-		private readonly DialogService _dialogService;
+		private readonly IDialogService _dialogService;
 
 		private readonly ICacheService _cacheService;
 
@@ -353,7 +353,7 @@ namespace Manager.ViewModel.Suspects
 
 		#endregion
 
-		public WhitelistViewModel(DialogService dialogService, ICacheService cacheService, ISteamService steamService, IDemosService demosService)
+		public WhitelistViewModel(IDialogService dialogService, ICacheService cacheService, ISteamService steamService, IDemosService demosService)
 		{
 			_dialogService = dialogService;
 			_steamService = steamService;

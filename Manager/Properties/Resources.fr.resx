@@ -2539,4 +2539,28 @@ Message d'erreur :
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Copier le code de partage</value>
   </data>
+  <data name="ShowOnThirdParty" xml:space="preserve">
+    <value>Afficher dans app tierce</value>
+  </data>
+  <data name="DialogShareCodeNotAvailable" xml:space="preserve">
+    <value>Code de partage indisponible. La démo doit provenir d'un serveur Valve matchmaking et le fichier .info doît être présent.</value>
+  </data>
+  <data name="YesDontAsk" xml:space="preserve">
+    <value>Oui et ne plus le demander</value>
+  </data>
+  <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
+    <value>Vous êtes sur le point d'envoyer le code de partage de cette démo à {0}. Voulez-vous vraiment continuer?</value>
+  </data>
+  <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
+    <value>Une erreur est survenue pendant l'envoi du code de partage.</value>
+  </data>
+  <data name="DialogSendShareCodeWarning" xml:space="preserve">
+    <value>Vous êtes sur le point d'envoyer le code de partage de la démo à {0}.</value>
+  </data>
+  <data name="DialogSelectThirdParty" xml:space="preserve">
+    <value>Sélectionnez une application tierce</value>
+  </data>
+  <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
+    <value>Afficher les détails de la démo dans une application tierce</value>
+  </data>
 </root>

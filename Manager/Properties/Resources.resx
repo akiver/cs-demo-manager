@@ -2666,4 +2666,28 @@ Message Error :
   <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
     <value>Share code copied to clipboard.</value>
   </data>
+  <data name="ShowOnThirdParty" xml:space="preserve">
+    <value>Show on third party application</value>
+  </data>
+  <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
+    <value>An error occured while sending the share code.</value>
+  </data>
+  <data name="DialogSelectThirdParty" xml:space="preserve">
+    <value>Select third party application</value>
+  </data>
+  <data name="DialogSendShareCodeWarning" xml:space="preserve">
+    <value>You are going to send the demo's share code to {0}.</value>
+  </data>
+  <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
+    <value>You are going to send the demo's share code to {0}. Do you want to continue?</value>
+  </data>
+  <data name="DialogShareCodeNotAvailable" xml:space="preserve">
+    <value>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</value>
+  </data>
+  <data name="YesDontAsk" xml:space="preserve">
+    <value>Yes and don't ask next time</value>
+  </data>
+  <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
+    <value>Show demo's details on a third party application</value>
+  </data>
 </root>
