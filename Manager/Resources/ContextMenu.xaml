@@ -78,7 +78,7 @@
 				<Style TargetType="{x:Type MenuItem}"
 					   BasedOn="{StaticResource MetroMenuItem}">
 					<Setter Property="Command"
-							Value="{Binding DemoList.ShowThirdPatyDemoCommand, Source={StaticResource Locator}}" />
+							Value="{Binding DemoList.ShowThirdPartyDemoCommand, Source={StaticResource Locator}}" />
 					<Setter Property="CommandParameter"
 							Value="{Binding Id}" />
 				</Style>

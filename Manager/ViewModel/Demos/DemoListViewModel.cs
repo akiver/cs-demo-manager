@@ -1739,7 +1739,7 @@ namespace Manager.ViewModel.Demos
 		/// <summary>
 		/// Command to show demo's details on a third party application
 		/// </summary>
-		public RelayCommand<string> ShowThirdPatyDemoCommand
+		public RelayCommand<string> ShowThirdPartyDemoCommand
 		{
 			get
 			{
