@@ -64,10 +64,10 @@
     <value>{0} suspect(s) ont été banni(s).</value>
   </data>
   <data name="Language" xml:space="preserve">
-    <value>Langage</value>
+    <value>Langue</value>
   </data>
   <data name="DownloadDemos" xml:space="preserve">
-    <value>Cliquez ici pour télécharger vos dernières démos matchmaking.</value>
+    <value>Cliquez ici pour télécharger vos dernières démos du matchmaking.</value>
   </data>
   <data name="SendDownloadNotification" xml:space="preserve">
     <value>Envoyer notifications pour télécharger les démos</value>
