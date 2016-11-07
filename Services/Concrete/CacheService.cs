@@ -81,21 +81,25 @@ namespace Services.Concrete
 
 		public DemoFilter Filter { get; set; }
 
+		private readonly string[] _requiredFiles = {
+			FILENAME_DEMOS_BASIC_DATA,
+			SUSPECT_BANNED_FILENAME,
+			SUSPECT_FILENAME,
+			SUSPECT_WHITELIST_FILENAME,
+			ACCOUNTS_FILENAME,
+			RANKS_FILENAME,
+		};
+
 		#endregion
 
 		public CacheService()
 		{
 			_pathFolderCache = AppSettings.GetFolderCachePath();
-			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_FILENAME))
-				File.Create(_pathFolderCache + "\\" + SUSPECT_FILENAME);
-			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME))
-				File.Create(_pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME);
-			if (!File.Exists(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME))
-				File.Create(_pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME);
-			if (!File.Exists(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME))
-				File.Create(_pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME);
-			string demoBasicDataFilePath = GetDemoBasicFilePath();
-			if (!File.Exists(demoBasicDataFilePath)) File.Create(demoBasicDataFilePath);
+			foreach (string fileName in _requiredFiles)
+			{
+				string filePath = GetFilePath(fileName);
+				if (!File.Exists(filePath)) File.Create(filePath);
+			}
 			Filter = new DemoFilter();
 #if DEBUG
 
@@ -283,7 +287,7 @@ namespace Services.Concrete
 				throw;
 			}
 
-			string pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_FILENAME;
+			string pathSuspectsFileJson = GetFilePath(SUSPECT_FILENAME);
 			File.WriteAllText(pathSuspectsFileJson, json);
 
 			return true;
@@ -306,7 +310,7 @@ namespace Services.Concrete
 			// If not add it and update
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
 
-			string pathSuspectsBannedFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
+			string pathSuspectsBannedFileJson = GetFilePath(SUSPECT_BANNED_FILENAME);
 			File.WriteAllText(pathSuspectsBannedFileJson, json);
 
 			return true;
@@ -318,7 +322,7 @@ namespace Services.Concrete
 		/// <returns></returns>
 		public async Task<List<string>> GetSuspectsListFromCache()
 		{
-			string pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_FILENAME;
+			string pathSuspectsFileJson = GetFilePath(SUSPECT_FILENAME);
 			if (!File.Exists(pathSuspectsFileJson)) return new List<string>();
 			string json = File.ReadAllText(pathSuspectsFileJson);
 			List<string> ids = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
@@ -333,7 +337,7 @@ namespace Services.Concrete
 		/// <returns></returns>
 		public async Task<List<string>> GetSuspectsBannedList()
 		{
-			string pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
+			string pathSuspectsFileJson = GetFilePath(SUSPECT_BANNED_FILENAME);
 			if (!File.Exists(pathSuspectsFileJson)) return new List<string>();
 			string json = File.ReadAllText(pathSuspectsFileJson);
 			List<string> ids = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
@@ -348,7 +352,7 @@ namespace Services.Concrete
 		/// <returns></returns>
 		public async Task<List<Account>> GetAccountListAsync()
 		{
-			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			string pathAccountsFileJson = GetFilePath(ACCOUNTS_FILENAME);
 			if (!File.Exists(pathAccountsFileJson)) return new List<Account>();
 			string json = File.ReadAllText(pathAccountsFileJson);
 			List<Account> accounts = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Account>>(json));
@@ -359,7 +363,7 @@ namespace Services.Concrete
 
 		public async Task<Account> GetAccountAsync(long steamId)
 		{
-			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			string pathAccountsFileJson = GetFilePath(ACCOUNTS_FILENAME);
 			if (!File.Exists(pathAccountsFileJson)) return null;
 			string json = File.ReadAllText(pathAccountsFileJson);
 			List<Account> accounts = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Account>>(json));
@@ -379,7 +383,7 @@ namespace Services.Concrete
 			// If not add it and update
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
 
-			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			string pathAccountsFileJson = GetFilePath(ACCOUNTS_FILENAME);
 			File.WriteAllText(pathAccountsFileJson, json);
 
 			return true;
@@ -396,7 +400,7 @@ namespace Services.Concrete
 			accounts[accountIndex] = account;
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
 
-			string pathAccountsFileJson = _pathFolderCache + Path.DirectorySeparatorChar + ACCOUNTS_FILENAME;
+			string pathAccountsFileJson = GetFilePath(ACCOUNTS_FILENAME);
 			File.WriteAllText(pathAccountsFileJson, json);
 
 			return true;
@@ -409,7 +413,7 @@ namespace Services.Concrete
 			if (accountFromJson == null) return false;
 			accounts.Remove(accountFromJson);
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(accounts));
-			string pathAccountsFileJson = _pathFolderCache + "\\" + ACCOUNTS_FILENAME;
+			string pathAccountsFileJson = GetFilePath(ACCOUNTS_FILENAME);
 			File.WriteAllText(pathAccountsFileJson, json);
 
 			// remove its RankInfo data
@@ -430,7 +434,7 @@ namespace Services.Concrete
 
 			ids.Remove(steamId);
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
-			string pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_FILENAME;
+			string pathSuspectsFileJson = GetFilePath(SUSPECT_FILENAME);
 			File.WriteAllText(pathSuspectsFileJson, json);
 
 			// If this suspect is in the banned suspects list, we remove it
@@ -439,7 +443,7 @@ namespace Services.Concrete
 			{
 				suspectBannedIdList.Remove(steamId);
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(suspectBannedIdList));
-				pathSuspectsFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
+				pathSuspectsFileJson = GetFilePath(SUSPECT_BANNED_FILENAME);
 				File.WriteAllText(pathSuspectsFileJson, json);
 			}
 
@@ -596,7 +600,7 @@ namespace Services.Concrete
 		public async Task<List<string>> GetFoldersAsync()
 		{
 			List<string> folders = new List<string>();
-			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+			string pathFoldersFileJson = GetFilePath(FOLDERS_FILENAME);
 			if (!File.Exists(pathFoldersFileJson))
 			{
 				folders = await InitCsgoFolders(folders);
@@ -621,7 +625,7 @@ namespace Services.Concrete
 			if (folders.Contains(path)) return false;
 			folders.Add(path);
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders));
-			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+			string pathFoldersFileJson = GetFilePath(FOLDERS_FILENAME);
 			File.WriteAllText(pathFoldersFileJson, json);
 
 			return true;
@@ -633,7 +637,7 @@ namespace Services.Concrete
 			if (!folders.Contains(path)) return false;
 			folders.Remove(path);
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders));
-			string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+			string pathFoldersFileJson = GetFilePath(FOLDERS_FILENAME);
 			File.WriteAllText(pathFoldersFileJson, json);
 
 			return true;
@@ -656,7 +660,7 @@ namespace Services.Concrete
 			if (folders.Any())
 			{
 				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(folders));
-				string pathFoldersFileJson = _pathFolderCache + "\\" + FOLDERS_FILENAME;
+				string pathFoldersFileJson = GetFilePath(FOLDERS_FILENAME);
 				File.WriteAllText(pathFoldersFileJson, json);
 			}
 
@@ -669,7 +673,7 @@ namespace Services.Concrete
 		/// <returns></returns>
 		public async Task<List<string>> GetPlayersWhitelist()
 		{
-			string pathWhitelistFileJson = _pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME;
+			string pathWhitelistFileJson = GetFilePath(SUSPECT_WHITELIST_FILENAME);
 			if (!File.Exists(pathWhitelistFileJson)) return new List<string>();
 			string json = File.ReadAllText(pathWhitelistFileJson);
 			List<string> ids = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<string>>(json));
@@ -707,7 +711,7 @@ namespace Services.Concrete
 				throw;
 			}
 
-			string pathWhitelistFileJson = _pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME;
+			string pathWhitelistFileJson = GetFilePath(SUSPECT_WHITELIST_FILENAME);
 			File.WriteAllText(pathWhitelistFileJson, json);
 
 			// remove players from suspects / banned list
@@ -731,7 +735,7 @@ namespace Services.Concrete
 
 			ids.Remove(steamId);
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(ids));
-			string pathWhitelistFileJson = _pathFolderCache + "\\" + SUSPECT_WHITELIST_FILENAME;
+			string pathWhitelistFileJson = GetFilePath(SUSPECT_WHITELIST_FILENAME);
 			File.WriteAllText(pathWhitelistFileJson, json);
 
 			// If this player is in the banned suspects list, we remove it
@@ -740,7 +744,7 @@ namespace Services.Concrete
 			{
 				suspectBannedIdList.Remove(steamId);
 				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(suspectBannedIdList));
-				string pathSuspectsBannedFileJson = _pathFolderCache + "\\" + SUSPECT_BANNED_FILENAME;
+				string pathSuspectsBannedFileJson = GetFilePath(SUSPECT_BANNED_FILENAME);
 				File.WriteAllText(pathSuspectsBannedFileJson, json);
 			}
 
@@ -769,7 +773,7 @@ namespace Services.Concrete
 
 		public async Task<List<RankInfo>> GetRankInfoListAsync()
 		{
-			string pathRankFile = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+			string pathRankFile = GetFilePath(RANKS_FILENAME);
 			string json = File.ReadAllText(pathRankFile);
 			List<RankInfo>  rankAccountList = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<RankInfo>>(json));
 			if (rankAccountList == null) rankAccountList = new List<RankInfo>();
@@ -823,7 +827,7 @@ namespace Services.Concrete
 				}
 
 				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(rankInfoList));
-				string pathWhitelistFileJson = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+				string pathWhitelistFileJson = GetFilePath(RANKS_FILENAME);
 				File.WriteAllText(pathWhitelistFileJson, json);
 			}
 			catch (Exception e)
@@ -860,7 +864,7 @@ namespace Services.Concrete
 		{
 			return Task.Run(() =>
 			{
-				string pathRankFile = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+				string pathRankFile = GetFilePath(RANKS_FILENAME);
 				File.WriteAllText(pathRankFile, string.Empty);
 			});
 		}
@@ -873,7 +877,7 @@ namespace Services.Concrete
 
 			rankInfoList.Remove(rankInfo);
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(rankInfoList));
-			string pathRankFile = _pathFolderCache + Path.DirectorySeparatorChar + RANKS_FILENAME;
+			string pathRankFile = GetFilePath(RANKS_FILENAME);
 			File.WriteAllText(pathRankFile, json);
 
 			return true;
@@ -915,7 +919,7 @@ namespace Services.Concrete
 
 		public async Task<DemoBasicData> AddDemoBasicDataAsync(Demo demo)
 		{
-			string filePath = GetDemoBasicFilePath();
+			string filePath = GetFilePath(FILENAME_DEMOS_BASIC_DATA);
 			List<DemoBasicData> data = await GetDemoBasicDataAsync();
 			DemoBasicData demoData = new DemoBasicData
 			{
@@ -935,7 +939,7 @@ namespace Services.Concrete
 		public async Task<List<DemoBasicData>> GetDemoBasicDataAsync()
 		{
 			List<DemoBasicData> data = new List<DemoBasicData>();
-			string filePath = GetDemoBasicFilePath();
+			string filePath = GetFilePath(FILENAME_DEMOS_BASIC_DATA);
 			if (!File.Exists(filePath)) return data;
 			string json = File.ReadAllText(filePath);
 			try
@@ -967,7 +971,7 @@ namespace Services.Concrete
 
 			if (hasUpdated)
 			{
-				string filePath = GetDemoBasicFilePath();
+				string filePath = GetFilePath(FILENAME_DEMOS_BASIC_DATA);
 				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(data));
 				File.WriteAllText(filePath, json);
 			}
@@ -975,9 +979,14 @@ namespace Services.Concrete
 			return hasUpdated;
 		}
 
-		private string GetDemoBasicFilePath()
+		/// <summary>
+		/// Return file path for a given file name
+		/// </summary>
+		/// <param name="fileName"></param>
+		/// <returns></returns>
+		private string GetFilePath(string fileName)
 		{
-			return _pathFolderCache + Path.DirectorySeparatorChar + FILENAME_DEMOS_BASIC_DATA;
+			return _pathFolderCache + Path.DirectorySeparatorChar + fileName;
 		}
 	}
 }
