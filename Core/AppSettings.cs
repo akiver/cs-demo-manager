@@ -174,9 +174,42 @@ namespace Core
 		/// <returns></returns>
 		public static string GetCsgoPath()
 		{
-			string steamPath = SteamPath();
-			if (steamPath == null) return null;
-			return steamPath + "/SteamApps/common/Counter-Strike Global Offensive/csgo";
+			string steamPath = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Valve\\Steam", "SteamPath", "");
+
+			string pathsFile = Path.Combine(steamPath, "steamapps", "libraryfolders.vdf");
+
+			if (!File.Exists(pathsFile))
+				return null;
+
+			List<string> libraries = new List<string>
+			{
+				Path.Combine(steamPath)
+			};
+
+			var pathVDF = File.ReadAllLines(pathsFile);
+
+			// This is not a full vdf-parser, but it seems to work pretty much, since the vdf-grammar
+			// is pretty easy. Hopefully it never breaks. It should be replaced with a full vdf-parser
+			Regex pathRegex = new Regex(@"\""(([^\""]*):\\([^\""]*))\""");
+			foreach (var line in pathVDF)
+			{
+				if (pathRegex.IsMatch(line))
+				{
+					string match = pathRegex.Matches(line)[0].Groups[1].Value;
+
+					// De-Escape vdf-string
+					libraries.Add(match.Replace("\\\\", "\\"));
+				}
+			}
+
+			foreach (var library in libraries)
+			{
+				string csgoPath = Path.Combine(library, @"steamapps\common\Counter-Strike Global Offensive\csgo");
+				if (Directory.Exists(csgoPath) && File.Exists(Path.Combine(csgoPath, "pak01_000.vpk")))
+					return csgoPath;
+			}
+
+			return null;
 		}
 
 		/// <summary>
