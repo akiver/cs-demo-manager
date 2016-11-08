@@ -2100,7 +2100,7 @@
           <target state="final">手枪</target>
         </trans-unit>
         <trans-unit id="Pistoles" translate="yes" xml:space="preserve">
-          <source>Pistoles</source>
+          <source>Pistols</source>
           <target state="final">手枪</target>
         </trans-unit>
         <trans-unit id="Progression" translate="yes" xml:space="preserve">

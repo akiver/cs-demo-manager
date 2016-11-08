@@ -5307,7 +5307,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pistoles.
+        ///   Looks up a localized string similar to Pistols.
         /// </summary>
         public static string Pistoles {
             get {

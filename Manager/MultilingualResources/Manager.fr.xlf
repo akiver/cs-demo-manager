@@ -2128,7 +2128,7 @@
           <target state="final">Victime</target>
         </trans-unit>
         <trans-unit id="Pistoles" translate="yes" xml:space="preserve">
-          <source>Pistoles</source>
+          <source>Pistols</source>
           <target state="final">Pistolets</target>
         </trans-unit>
         <trans-unit id="Rifles" translate="yes" xml:space="preserve">
