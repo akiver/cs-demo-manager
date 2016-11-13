@@ -99,7 +99,7 @@ namespace Manager.ViewModel.Demos
 			{
 				{
 					Set(() => SelectedStuff, ref _selectedStuff, value);
-					if (value != null) DrawStuff(value);
+					if (value != null && !IsInDesignMode) DrawStuff(value);
 				}
 			}
 		}

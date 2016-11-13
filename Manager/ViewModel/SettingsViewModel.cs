@@ -1716,17 +1716,22 @@ namespace Manager.ViewModel
 			_demosService = demosService;
 			_steamService = steamService;
 			_accountStatsService = accountStatsService;
-			if (IsInDesignMode)
-			{
-				_dateStatsTo = DateTime.Today.AddDays(30);
-			}
 
 			Themes = new List<ComboboxSelector>
 			{
 				new ComboboxSelector("Dark", Properties.Resources.Dark),
 				new ComboboxSelector("Light", Properties.Resources.Light)
 			};
-			SelectedTheme = Themes.First(t => t.Id == Settings.Default.Theme);
+
+			if (IsInDesignMode)
+			{
+				_dateStatsTo = DateTime.Today.AddDays(30);
+				_selectedTheme = new ComboboxSelector("Dark", Properties.Resources.Dark);
+			}
+			else
+			{
+				SelectedTheme = Themes.First(t => t.Id == Settings.Default.Theme);
+			}
 
 			Languages = new List<ComboboxSelector>();
 			foreach (Language language in AppSettings.LANGUAGES.Where(l => l.IsEnabled))
