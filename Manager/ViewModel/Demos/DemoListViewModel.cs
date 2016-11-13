@@ -1,4 +1,5 @@
-﻿using System;
+﻿#region Imports
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -34,6 +35,7 @@ using Services.Models.ThirdParties;
 using Application = System.Windows.Application;
 using Demo = Core.Models.Demo;
 using UserControl = System.Windows.Controls.UserControl;
+#endregion
 
 namespace Manager.ViewModel.Demos
 {
@@ -68,21 +70,9 @@ namespace Manager.ViewModel.Demos
 
 		private bool _isMainWindowLoaded;
 
-		private bool _isShowPovDemos = Properties.Settings.Default.ShowPovDemos;
+		private Dictionary<string, object> _demoSourcesSelectors = new Dictionary<string, object>();
 
-		private bool _isShowEbotDemos = Properties.Settings.Default.ShowEbotDemos;
-
-		private bool _isShowFaceitDemos = Properties.Settings.Default.ShowFaceitDemos;
-
-		private bool _isShowEseaDemos = Properties.Settings.Default.ShowEseaDemos;
-
-		private bool _isShowCevoDemos = Properties.Settings.Default.ShowCevoDemos;
-
-		private bool _isShowValveDemos = Properties.Settings.Default.ShowValveDemos;
-
-		private bool _isShowPopFlashDemos = Properties.Settings.Default.ShowPopFlashDemos;
-
-		private bool _isShowOldDemos = Properties.Settings.Default.ShowOldDemos;
+		private Dictionary<string, object> _demoSourcesSelected = new Dictionary<string, object>();
 
 		private string _notificationMessage;
 
@@ -127,22 +117,6 @@ namespace Manager.ViewModel.Demos
 		private RelayCommand<ObservableCollection<Demo>> _addPlayersToSuspectsListCommand;
 
 		private RelayCommand<bool> _showAllFoldersCommand;
-
-		private RelayCommand<bool> _showPovDemosCommand;
-
-		private RelayCommand<bool> _showEbotDemosCommand;
-
-		private RelayCommand<bool> _showEseaDemosCommand;
-
-		private RelayCommand<bool> _showValveDemosCommand;
-
-		private RelayCommand<bool> _showOldDemosCommand;
-
-		private RelayCommand<bool> _showFaceitDemosCommand;
-
-		private RelayCommand<bool> _showCevoDemosCommand;
-
-		private RelayCommand<bool> _showPopFlashDemosCommand;
 
 		private RelayCommand<bool> _showAllAccountsCommand;
 
@@ -210,80 +184,32 @@ namespace Manager.ViewModel.Demos
 			set { Set(() => IsShowAllFolders, ref _isShowAllFolders, value); }
 		}
 
-		public bool IsShowOldDemos
+		public bool IsShowOldDemos => Properties.Settings.Default.ShowOldDemos;
+
+		public bool IsShowPovDemos => Properties.Settings.Default.ShowPovDemos;
+
+		public bool IsShowEbotDemos => Properties.Settings.Default.ShowEbotDemos;
+
+		public bool IsShowFaceitDemos => Properties.Settings.Default.ShowFaceitDemos;
+
+		public bool IsShowCevoDemos => Properties.Settings.Default.ShowCevoDemos;
+
+		public bool IsShowEseaDemos => Properties.Settings.Default.ShowEseaDemos;
+
+		public bool IsShowValveDemos => Properties.Settings.Default.ShowValveDemos;
+
+		public bool IsShowPopFlashDemos => Properties.Settings.Default.ShowPopFlashDemos;
+
+		public Dictionary<string, object> DemoSourcesSelectors
 		{
-			get { return _isShowOldDemos; }
-			set { Set(() => IsShowOldDemos, ref _isShowOldDemos, value); }
+			get { return _demoSourcesSelectors; }
+			set { Set(() => DemoSourcesSelectors, ref _demoSourcesSelectors, value); }
 		}
 
-		public bool IsShowPovDemos
+		public Dictionary<string, object> DemoSourcesSelected
 		{
-			get { return _isShowPovDemos; }
-			set
-			{
-				Set(() => IsShowPovDemos, ref _isShowPovDemos, value);
-				FilterCollection();
-			}
-		}
-
-		public bool IsShowEbotDemos
-		{
-			get { return _isShowEbotDemos; }
-			set
-			{
-				Set(() => IsShowEbotDemos, ref _isShowEbotDemos, value);
-				FilterCollection();
-			}
-		}
-
-		public bool IsShowFaceitDemos
-		{
-			get { return _isShowFaceitDemos; }
-			set
-			{
-				Set(() => IsShowFaceitDemos, ref _isShowFaceitDemos, value);
-				FilterCollection();
-			}
-		}
-
-		public bool IsShowCevoDemos
-		{
-			get { return _isShowCevoDemos; }
-			set
-			{
-				Set(() => IsShowCevoDemos, ref _isShowCevoDemos, value);
-				FilterCollection();
-			}
-		}
-
-		public bool IsShowEseaDemos
-		{
-			get { return _isShowEseaDemos; }
-			set
-			{
-				Set(() => IsShowEseaDemos, ref _isShowEseaDemos, value);
-				FilterCollection();
-			}
-		}
-
-		public bool IsShowValveDemos
-		{
-			get { return _isShowValveDemos; }
-			set
-			{
-				Set(() => IsShowValveDemos, ref _isShowValveDemos, value);
-				FilterCollection();
-			}
-		}
-
-		public bool IsShowPopFlashDemos
-		{
-			get { return _isShowPopFlashDemos; }
-			set
-			{
-				Set(() => IsShowPopFlashDemos, ref _isShowPopFlashDemos, value);
-				FilterCollection();
-			}
+			get { return _demoSourcesSelected; }
+			set { Set(() => DemoSourcesSelected, ref _demoSourcesSelected, value); }
 		}
 
 		public int NewBannedPlayerCount
@@ -985,166 +911,6 @@ namespace Manager.ViewModel.Demos
 		}
 
 		/// <summary>
-		/// Command when the checkbox to toggle old demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowOldDemosCommand
-		{
-			get
-			{
-				return _showOldDemosCommand
-					?? (_showOldDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowOldDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowOldDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle Faceit demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowFaceitDemosCommand
-		{
-			get
-			{
-				return _showFaceitDemosCommand
-					?? (_showFaceitDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowFaceitDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowFaceitDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle CEVO demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowCevoDemosCommand
-		{
-			get
-			{
-				return _showCevoDemosCommand
-					?? (_showCevoDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowCevoDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowCevoDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle PopFlash demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowPopFlashDemosCommand
-		{
-			get
-			{
-				return _showPopFlashDemosCommand
-					?? (_showPopFlashDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowPopFlashDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowPopFlashDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle POV demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowPovDemosCommand
-		{
-			get
-			{
-				return _showPovDemosCommand
-					?? (_showPovDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowPovDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowPovDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle eBot demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowEbotDemosCommand
-		{
-			get
-			{
-				return _showEbotDemosCommand
-					?? (_showEbotDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowEbotDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowEbotDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle ESEA demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowEseaDemosCommand
-		{
-			get
-			{
-				return _showEseaDemosCommand
-					?? (_showEseaDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowEseaDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowEseaDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
-		/// Command when the checkbox to toggle Valve demos is clicked
-		/// </summary>
-		public RelayCommand<bool> ShowValveDemosCommand
-		{
-			get
-			{
-				return _showValveDemosCommand
-					?? (_showValveDemosCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsShowValveDemos = isChecked;
-							DataGridDemosCollection.Refresh();
-							Properties.Settings.Default.ShowValveDemos = isChecked;
-							Properties.Settings.Default.Save();
-						},
-						isChecked => !IsBusy));
-			}
-		}
-
-		/// <summary>
 		/// Browse to demo command
 		/// </summary>
 		public RelayCommand<Demo> BrowseToDemoCommand
@@ -1669,6 +1435,7 @@ namespace Manager.ViewModel.Demos
 			DataGridDemosCollection.Filter = Filter;
 
 			Messenger.Default.Register<MainWindowLoadedMessage>(this, HandleMainWindowLoadedMessage);
+			Messenger.Default.Register<ComboBoxMultiClosedMessage>(this, HandleComboBoxMultiClosedMessage);
 		}
 
 		private void HandleMainWindowLoadedMessage(MainWindowLoadedMessage msg)
@@ -1676,6 +1443,8 @@ namespace Manager.ViewModel.Demos
 			DispatcherHelper.CheckBeginInvokeOnUI(
 			async () =>
 			{
+				LoadDemoSourcesSelection();
+
 				HasNotification = true;
 				IsBusy = true;
 				HasRing = true;
@@ -1725,6 +1494,98 @@ namespace Manager.ViewModel.Demos
 
 				_isMainWindowLoaded = true;
 			});
+		}
+
+		private void LoadDemoSourcesSelection()
+		{
+			DemoSourcesSelectors = new Dictionary<string, object>
+				{
+					{"valve", "Valve"},
+					{"ebot", "eBot"},
+					{"cevo", "CEVO"},
+					{"faceit", "FaceIt"},
+					{"esea", "ESEA"},
+					{"popflash", "Popflash"},
+					{"pov", "POV"},
+					{"old", Properties.Resources.NoAnalyzableDemos}
+				};
+
+			if (Properties.Settings.Default.ShowValveDemos)
+			{
+				_demoSourcesSelected.Add("valve", "Valve");
+			}
+			if (Properties.Settings.Default.ShowEbotDemos)
+			{
+				_demoSourcesSelected.Add("ebot", "eBot");
+			}
+			if (Properties.Settings.Default.ShowCevoDemos)
+			{
+				_demoSourcesSelected.Add("cevo", "CEVO");
+			}
+			if (Properties.Settings.Default.ShowEseaDemos)
+			{
+				_demoSourcesSelected.Add("esea", "ESEA");
+			}
+			if (Properties.Settings.Default.ShowFaceitDemos)
+			{
+				_demoSourcesSelected.Add("faceit", "FaceIt");
+			}
+			if (Properties.Settings.Default.ShowPopFlashDemos)
+			{
+				_demoSourcesSelected.Add("popflash", "PopFlash");
+			}
+			if (Properties.Settings.Default.ShowPovDemos)
+			{
+				_demoSourcesSelected.Add("pov", "POV");
+			}
+			if (Properties.Settings.Default.ShowOldDemos)
+			{
+				_demoSourcesSelected.Add("old", Properties.Resources.NoAnalyzableDemos);
+			}
+
+			DemoSourcesSelected = _demoSourcesSelected;
+		}
+
+		private static void UpdateDemoSourceSettings(Dictionary<string, object> items, string name)
+		{
+			switch (name)
+			{
+				case "valve":
+					Properties.Settings.Default.ShowValveDemos = items.ContainsKey(name);
+					break;
+				case "ebot":
+					Properties.Settings.Default.ShowEbotDemos = items.ContainsKey(name);
+					break;
+				case "esea":
+					Properties.Settings.Default.ShowEseaDemos = items.ContainsKey(name);
+					break;
+				case "cevo":
+					Properties.Settings.Default.ShowCevoDemos = items.ContainsKey(name);
+					break;
+				case "faceit":
+					Properties.Settings.Default.ShowFaceitDemos = items.ContainsKey(name);
+					break;
+				case "popflash":
+					Properties.Settings.Default.ShowPopFlashDemos = items.ContainsKey(name);
+					break;
+				case "pov":
+					Properties.Settings.Default.ShowPovDemos = items.ContainsKey(name);
+					break;
+				case "old":
+					Properties.Settings.Default.ShowOldDemos = items.ContainsKey(name);
+					break;
+			}
+		}
+
+		private async void HandleComboBoxMultiClosedMessage(ComboBoxMultiClosedMessage msg)
+		{
+			foreach (KeyValuePair<string, object> demoSelector in DemoSourcesSelectors)
+			{
+				UpdateDemoSourceSettings(msg.SelectedItems, demoSelector.Key);
+			}
+			Properties.Settings.Default.Save();
+
+			await LoadDemosHeader();
 		}
 
 		/// <summary>

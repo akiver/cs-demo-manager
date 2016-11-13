@@ -166,10 +166,14 @@
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Internals\Extensions.cs" />
+    <Compile Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml.cs">
+      <DependentUpon>MultiSelectComboBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Internals\MultiSelect\IMultiSelectCollectionView.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelect.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelectCollectionView.cs" />
+    <Compile Include="Messages\ComboBoxMultiClosedMessage.cs" />
     <Compile Include="Messages\DownloadDemosMessage.cs" />
     <Compile Include="Messages\LoadDemoFromAppArgument.cs" />
     <Compile Include="Messages\LoadSuspectListMessage.cs" />
@@ -234,6 +238,10 @@
     <Compile Include="Views\Suspects\WhitelistView.xaml.cs">
       <DependentUpon>WhitelistView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\Accents\CustomLime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +255,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\Buttons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\ComboBoxMultiSelect.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -704,6 +716,7 @@
     <XliffResource Include="MultilingualResources\Manager.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Manager.zh-Hant.xlf" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
   <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">

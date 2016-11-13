@@ -33,6 +33,7 @@
 				<ResourceDictionary Source="Resources/Heatmaps.xaml"/>
 				<ResourceDictionary Source="Resources/Buttons.xaml"/>
 				<ResourceDictionary Source="Resources/Separators.xaml"/>
+				<ResourceDictionary Source="Resources/ComboBoxMultiSelect.xaml"/>
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>
