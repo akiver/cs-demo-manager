@@ -3437,6 +3437,10 @@ Message d'erreur :
           <source>Show demo's details on a third party application</source>
           <target state="final">Afficher les détails de la démo dans une application tierce</target>
         </trans-unit>
+        <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
+          <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
+          <target state="final">Votre fichier de configuration est corrompu. Veuillez relancer l'application pour réinitialiser votre fichier de configuration.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

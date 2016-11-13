@@ -3435,6 +3435,10 @@ Mensagem de Erro:
           <source>Show demo's details on a third party application</source>
           <target state="new">Show demo's details on a third party application</target>
         </trans-unit>
+        <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
+          <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
+          <target state="new">Your configuration file is corrupted. Please restart the application to reset your configuration.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

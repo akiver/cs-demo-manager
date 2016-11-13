@@ -2563,4 +2563,7 @@ Message d'erreur :
   <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
     <value>Afficher les détails de la démo dans une application tierce</value>
   </data>
+  <data name="DialogConfigurationCorrupted" xml:space="preserve">
+    <value>Votre fichier de configuration est corrompu. Veuillez relancer l'application pour réinitialiser votre fichier de configuration.</value>
+  </data>
 </root>

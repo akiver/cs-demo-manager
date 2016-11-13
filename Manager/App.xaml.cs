@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -134,8 +135,7 @@ namespace Manager
 			}
 			catch (Exception ex)
 			{
-				Logger.Instance.Log(ex);
-				MessageBox.Show(string.Format(Manager.Properties.Resources.UnexpectedErrorOccured, ex.Message), Manager.Properties.Resources.Error);
+				HandleException(ex);
 			}
 		}
 
@@ -153,19 +153,46 @@ namespace Manager
 
 		protected override void OnStartup(StartupEventArgs e)
 		{
-			ThemeManager.AddAccent("CustomLime", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/CustomLime.xaml"));
-			ThemeManager.AddAppTheme("Dark", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeDark.xaml"));
-			ThemeManager.AddAppTheme("Light", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeLight.xaml"));
-			Accent accent = ThemeManager.GetAccent("CustomLime");
-			AppTheme theme = ThemeManager.GetAppTheme(Settings.Default.Theme);
-			ThemeManager.ChangeAppStyle(Current, accent, theme);
-			base.OnStartup(e);
+			try
+			{
+				ThemeManager.AddAccent("CustomLime", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/CustomLime.xaml"));
+				ThemeManager.AddAppTheme("Dark", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeDark.xaml"));
+				ThemeManager.AddAppTheme("Light", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeLight.xaml"));
+				Accent accent = ThemeManager.GetAccent("CustomLime");
+				AppTheme theme = ThemeManager.GetAppTheme(Settings.Default.Theme);
+				ThemeManager.ChangeAppStyle(Current, accent, theme);
+				base.OnStartup(e);
+			}
+			catch (Exception ex)
+			{
+				HandleException(ex);
+			}
 		}
 
 		protected override void OnExit(ExitEventArgs e)
 		{
 			_instance?.ReleaseMutex();
 			base.OnExit(e);
+		}
+
+		private static void HandleException(Exception e)
+		{
+			Logger.Instance.Log(e);
+			if (e is ConfigurationErrorsException)
+			{
+				if (e.InnerException != null)
+				{
+					MessageBox.Show(Manager.Properties.Resources.DialogConfigurationCorrupted, Manager.Properties.Resources.Error);
+					string filename = ((ConfigurationErrorsException)e.InnerException).Filename;
+					File.Delete(filename);
+					Settings.Default.Reload();
+				}
+			}
+			else
+			{
+				MessageBox.Show(string.Format(Manager.Properties.Resources.UnexpectedErrorOccured, e.Message), Manager.Properties.Resources.Error);
+			}
+			Process.GetCurrentProcess().Kill();
 		}
 
 		public void Dispose()

@@ -1043,6 +1043,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your configuration file is corrupted. Please restart the application to reset your configuration..
+        /// </summary>
+        public static string DialogConfigurationCorrupted {
+            get {
+                return ResourceManager.GetString("DialogConfigurationCorrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demos data will be deleted! Are you sure?.
         /// </summary>
         public static string DialogConfirmDeleteDemosData {

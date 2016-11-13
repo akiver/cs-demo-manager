@@ -2690,4 +2690,7 @@ Message Error :
   <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
     <value>Show demo's details on a third party application</value>
   </data>
+  <data name="DialogConfigurationCorrupted" xml:space="preserve">
+    <value>Your configuration file is corrupted. Please restart the application to reset your configuration.</value>
+  </data>
 </root>
