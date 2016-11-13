@@ -213,13 +213,12 @@
 						</StackPanel>
 					</Button>
 
-					<TextBlock Text="{x:Static properties:Resources.AccountStats}"
-							   Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
 							  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedStatsAccount}"
 							  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 							  DisplayMemberPath ="Name"
 							  SelectedValuePath="SteamId"
+							  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.AccountStats}"
 							  Margin="5" />
 
 					<CheckBox x:Name="CheckBoxShowAllAccounts"
