@@ -3342,7 +3342,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="HeaderToolTipTotalMatchesTime" translate="yes" xml:space="preserve">
           <source>Total Matches Time (hours / minutes)</source>
-          <target state="new">Total Matches Time (hours / minutes)</target>
+          <target state="needs-review-translation">总比赛时间(小时 / 分钟)</target>
         </trans-unit>
         <trans-unit id="HeaderTotalMatchesTime" translate="yes" xml:space="preserve">
           <source>TMT</source>
@@ -3356,87 +3356,87 @@ Message Error :
         </trans-unit>
         <trans-unit id="HeaderToolTipAverageMatchTime" translate="yes" xml:space="preserve">
           <source>Average Match Time (minutes)</source>
-          <target state="new">Average Match Time (minutes)</target>
+          <target state="translated">平均比赛时间(小时 / 分钟)</target>
         </trans-unit>
         <trans-unit id="TotalMatchTimeValue" translate="yes" xml:space="preserve">
           <source>{0}h {1}m</source>
-          <target state="new">{0}h {1}m</target>
+          <target state="translated">{0}小时 {1}分钟</target>
         </trans-unit>
         <trans-unit id="AverageMatchTimeValue" translate="yes" xml:space="preserve">
           <source>{0} minutes</source>
-          <target state="new">{0} minutes</target>
+          <target state="needs-review-translation">{0} 分钟</target>
         </trans-unit>
         <trans-unit id="ToolTipExportChat" translate="yes" xml:space="preserve">
           <source>Export demo chat</source>
-          <target state="new">Export demo chat</target>
+          <target state="needs-review-translation">导出demo聊天文本</target>
         </trans-unit>
         <trans-unit id="ExportChat" translate="yes" xml:space="preserve">
           <source>Export chat</source>
-          <target state="new">Export chat</target>
+          <target state="needs-review-translation">导出聊天</target>
         </trans-unit>
         <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
           <source>Chat messages file has been created.</source>
-          <target state="new">Chat messages file has been created.</target>
+          <target state="needs-review-translation">聊天信息文件已经创建</target>
         </trans-unit>
         <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
           <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
-          <target state="new">No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</target>
+          <target state="needs-review-translation">没有找到聊天信息. (此功能只在当服务端的 "tv_relaytextchat" 参数没有被设置成 "0"的非Valve匹配服务器下有效)</target>
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="new">No {0} found for this selection.</target>
+          <target state="needs-review-translation">没有找到{0} 这个选项</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
-          <target state="new">Shots</target>
+          <target state="needs-review-translation">射击</target>
         </trans-unit>
         <trans-unit id="DialogDemoShareCodeUnavailable" translate="yes" xml:space="preserve">
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
-          <target state="new">This demo is not from Valve matchmaking servers or the .info file is missing.</target>
+          <target state="needs-review-translation">这个demo不是来自Valve官方服务器或者.info文件已丢失</target>
         </trans-unit>
         <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
           <source>Share code copied to clipboard.</source>
-          <target state="new">Share code copied to clipboard.</target>
+          <target state="needs-review-translation">复制分享代码到剪切板</target>
         </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
-          <target state="new">Copy share code</target>
+          <target state="needs-review-translation">复制分享代码</target>
         </trans-unit>
         <trans-unit id="ShowOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show on third party application</source>
-          <target state="new">Show on third party application</target>
+          <target state="needs-review-translation">在第三方应用上显示</target>
         </trans-unit>
         <trans-unit id="DialogShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</source>
-          <target state="new">Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</target>
+          <target state="needs-review-translation">分享代码不可用，只有来自Valve官方匹配服务器的demo或者存在.info文件的情况下可用</target>
         </trans-unit>
         <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
           <source>Yes and don't ask next time</source>
-          <target state="new">Yes and don't ask next time</target>
+          <target state="needs-review-translation">是，并且下次不再询问</target>
         </trans-unit>
         <trans-unit id="DialogSendThirdPartyConfirmation" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}. Do you want to continue?</source>
-          <target state="new">You are going to send the demo's share code to {0}. Do you want to continue?</target>
+          <target state="needs-review-translation">你将要发送demo分享代码到{0}，你想继续吗？</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileSendingShareCode" translate="yes" xml:space="preserve">
           <source>An error occured while sending the share code.</source>
-          <target state="new">An error occured while sending the share code.</target>
+          <target state="needs-review-translation">发送共享代码时发生错误</target>
         </trans-unit>
         <trans-unit id="DialogSendShareCodeWarning" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}.</source>
-          <target state="new">You are going to send the demo's share code to {0}.</target>
+          <target state="needs-review-translation">你将要发送demo分享代码到{0}</target>
         </trans-unit>
         <trans-unit id="DialogSelectThirdParty" translate="yes" xml:space="preserve">
           <source>Select third party application</source>
-          <target state="new">Select third party application</target>
+          <target state="needs-review-translation">选择第三方应用程序</target>
         </trans-unit>
         <trans-unit id="ToolTipShowDemoOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show demo's details on a third party application</source>
-          <target state="new">Show demo's details on a third party application</target>
+          <target state="needs-review-translation">在第三方应用程序上显示demo详情</target>
         </trans-unit>
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
-          <target state="new">Your configuration file is corrupted. Please restart the application to reset your configuration.</target>
+          <target state="needs-review-translation">你的配置文件已经损坏，请重启应用程序来重置你的配置文件</target>
         </trans-unit>
       </group>
     </body>

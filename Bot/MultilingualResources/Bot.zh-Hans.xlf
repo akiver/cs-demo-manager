@@ -80,11 +80,11 @@
         </trans-unit>
         <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
           <source>Click here to download your last matchmaking demos.</source>
-          <target state="new">Click here to download your last matchmaking demos.</target>
+          <target state="needs-review-translation">点击这里下载你最后一场管匹的demo</target>
         </trans-unit>
         <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
           <source>Send download demos notifications</source>
-          <target state="new">Send download demos notifications</target>
+          <target state="needs-review-translation">发送demo下载通知</target>
         </trans-unit>
       </group>
     </body>
