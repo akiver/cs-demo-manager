@@ -166,6 +166,24 @@ Source: "Manager\bin\x86\Release\WpfPageTransitions.dll"; DestDir: "{app}"; Flag
 Source: "Manager\bin\x86\Release\WriteableBitmapEx.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion recursesubdirs createallsubdirs
+; Translations
+Source: "Manager\bin\x86\Release\ar\*"; DestDir: "{app}\ar"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\da\*"; DestDir: "{app}\da"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\de\*"; DestDir: "{app}\de"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\es\*"; DestDir: "{app}\es"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\fr\*"; DestDir: "{app}\fr"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\hr\*"; DestDir: "{app}\hr"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\it\*"; DestDir: "{app}\it"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\ja\*"; DestDir: "{app}\ja"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\nl\*"; DestDir: "{app}\nl"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\pl\*"; DestDir: "{app}\pl"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\pt\*"; DestDir: "{app}\pt"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\pt-BR\*"; DestDir: "{app}\pt-BR"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\ru\*"; DestDir: "{app}\ru"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\sr-Cyrl\*"; DestDir: "{app}\sr-Cyrl"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\tr\*"; DestDir: "{app}\tr"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\zh-Hans\*"; DestDir: "{app}\zh-Hans"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\zh-Hant\*"; DestDir: "{app}\zh-Hant"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Icons]
