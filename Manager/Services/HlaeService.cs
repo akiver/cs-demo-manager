@@ -119,7 +119,6 @@ namespace Manager.Services
 				request.Method = "GET";
 				request.Proxy = null;
 				request.UserAgent = "advancedfx";
-				if (!request.HaveResponse) return null;
 
 				using (WebResponse response = await request.GetResponseAsync())
 				{
