@@ -1729,14 +1729,17 @@ namespace Manager.ViewModel.Demos
 			}
 
 			IThirdPartyInterface thirdPartyService = ThirdPartiesServiceFactory.Factory(thirdPartyName);
-			ThirdPartyData data = await thirdPartyService.SendShareCode(SelectedDemo, shareCode);
-			if (!data.Success)
+			foreach (Demo demo in SelectedDemos)
 			{
-				await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileSendingShareCode, MessageDialogStyle.Affirmative);
-				return;
-			}
+				ThirdPartyData data = await thirdPartyService.SendShareCode(demo, shareCode);
+				if (!data.Success)
+				{
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileSendingShareCode, MessageDialogStyle.Affirmative);
+					continue;
+				}
 
-			Process.Start(data.DemoUrl);
+				Process.Start(data.DemoUrl);
+			}
 		}
 
 		private async Task<bool> RefreshSelectedDemos()
