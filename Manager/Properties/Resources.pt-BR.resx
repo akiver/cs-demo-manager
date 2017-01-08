@@ -12,30 +12,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="bullet" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="model" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="skip_ahead" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="spec_player" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="stop_playback" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="screen_fade_start" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="text_message_start" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="main" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
   <data name="Analyze" xml:space="preserve">
     <value>Analizar</value>
   </data>
@@ -254,9 +230,6 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>email</value>
-  </data>
-  <data name="EnableMoviemakerMode" xml:space="preserve">
-    <value>Ativar movo moviemaker</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Mortes de entrada</value>
@@ -1891,13 +1864,6 @@ Não é possivel iniciar o jogo.</value>
   <data name="DialogDemosDataCleared" xml:space="preserve">
     <value>Dados das demos apagados.</value>
   </data>
-  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
-    <value>Ativa o mode de cineasta (moviemaker) muda forma como o jogo é iniciado (Quando você clica em todos os botões "Assistir").
-Ele vai usar uma ferramenta "Half-Life Advanced Effects" (HLAE) que é tecnicamente um hack.
-Você deve usá-lo APENAS se voce souber o que etá fazendo e para fazer a criação de filmes coisas relacionadas.
-Se você não sabe o que é isso ou você não está planejando fazer filmes basta clicar sobre cancelar.
-Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas as vezes),o que significa que você não será capaz de se conectar a servidores protegidos pelo VAC e previnir um ban VAC.</value>
-  </data>
   <data name="DialogEnterSteamId" xml:space="preserve">
     <value>Entre com SteamID 64 ou url da comunidade Steam.</value>
   </data>
@@ -2545,5 +2511,15 @@ Mensagem de Erro:
   </data>
   <data name="DialogNoChatFound" xml:space="preserve">
     <value>Nenhuma mensagem de chat encontrados. (Funciona apenas para demos provenientes de um servidor que tem "tv_relaytextchat" definido como um valor diferente de "0", o que não é o caso para os servidores oficiais de MM da Valve).</value>
+  </data>
+  <data name="EnableHlae" xml:space="preserve">
+    <value>Ativar HLAE</value>
+  </data>
+  <data name="DialogEnableHlaeWarning" xml:space="preserve">
+    <value>Ativa HLAE muda forma como o jogo é iniciado (Quando você clica em todos os botões "Assistir"). 
+Ele vai usar uma ferramenta "Half-Life Advanced Effects" (HLAE) que é tecnicamente um hack. 
+Você deve usá-lo APENAS se voce souber o que etá fazendo e para fazer a criação de filmes coisas relacionadas. 
+Se você não sabe o que é isso ou você não está planejando fazer filmes basta clicar sobre cancelar. 
+Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas as vezes),o que significa que você não será capaz de se conectar a servidores protegidos pelo VAC e previnir um ban VAC.</value>
   </data>
 </root>

@@ -1162,15 +1162,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enabling moviemaker mode change the way the game is started (when you click on all &quot;Watch&quot; buttons).
+        ///   Looks up a localized string similar to Enabling HLAE change the way the game is started (when you click on all &quot;Watch&quot; buttons).
         ///It will use the tool &quot;Half-Life Advanced Effects&quot; (HLAE) which is technically a hack.
         ///You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
         ///If you don&apos;t know what is this or you are not planning to make movies just click on cancel.
-        ///If you enable it, the game is launched with the &quot;-insecure&quot; parameter (everytime), which means that you will not be able to join server  [rest of string was truncated]&quot;;.
+        ///If you enable it, the game is launched with the &quot;-insecure&quot; parameter (everytime), which means that you will not be able to join server protected b [rest of string was truncated]&quot;;.
         /// </summary>
-        public static string DialogEnableMoviemakerModeWarning {
+        public static string DialogEnableHlaeWarning {
             get {
-                return ResourceManager.GetString("DialogEnableMoviemakerModeWarning", resourceCulture);
+                return ResourceManager.GetString("DialogEnableHlaeWarning", resourceCulture);
             }
         }
         
@@ -1448,6 +1448,61 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while installing HLAE..
+        /// </summary>
+        public static string DialogHlaeInstallationFailed {
+            get {
+                return ResourceManager.GetString("DialogHlaeInstallationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE has been installed..
+        /// </summary>
+        public static string DialogHlaeInstalled {
+            get {
+                return ResourceManager.GetString("DialogHlaeInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It looks like HLAE isn&apos;t installed.
+        ///Do you want to install it? (If you are using it you have to install it first to be able to use it).
+        /// </summary>
+        public static string DialogHlaeNotFound {
+            get {
+                return ResourceManager.GetString("DialogHlaeNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE needs to be installed to use it..
+        /// </summary>
+        public static string DialogHlaeRequired {
+            get {
+                return ResourceManager.GetString("DialogHlaeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE has been updated..
+        /// </summary>
+        public static string DialogHlaeUpdated {
+            get {
+                return ResourceManager.GetString("DialogHlaeUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while updating HLAE..
+        /// </summary>
+        public static string DialogHlaeUpdateFailed {
+            get {
+                return ResourceManager.GetString("DialogHlaeUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid tick..
         /// </summary>
         public static string DialogInvalidTick {
@@ -1462,6 +1517,16 @@ namespace Manager.Properties {
         public static string DialogMapNotSupported {
             get {
                 return ResourceManager.GetString("DialogMapNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A new HLAE version is avalailable.
+        ///Do you want to install it? (It&apos;s recommended to avoid possible crash due to CSGO updates).
+        /// </summary>
+        public static string DialogNewHlaeVersionAvailable {
+            get {
+                return ResourceManager.GetString("DialogNewHlaeVersionAvailable", resourceCulture);
             }
         }
         
@@ -1664,6 +1729,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select the HLAE config parent folder location..
+        /// </summary>
+        public static string DialogSelectHlaeConfigParentFolderLocation {
+            get {
+                return ResourceManager.GetString("DialogSelectHlaeConfigParentFolderLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select third party application.
         /// </summary>
         public static string DialogSelectThirdParty {
@@ -1846,11 +1920,20 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable moviemaker mode.
+        ///   Looks up a localized string similar to Enable HLAE.
         /// </summary>
-        public static string EnableMoviemakerMode {
+        public static string EnableHlae {
             get {
-                return ResourceManager.GetString("EnableMoviemakerMode", resourceCulture);
+                return ResourceManager.GetString("EnableHlae", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable movie making config parent folder.
+        /// </summary>
+        public static string EnableMovieMakingConfigParentFolder {
+            get {
+                return ResourceManager.GetString("EnableMovieMakingConfigParentFolder", resourceCulture);
             }
         }
         
@@ -3997,6 +4080,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to HLAE not found. Please install it by enabling it from settings..
+        /// </summary>
+        public static string HlaeNotFoundException {
+            get {
+                return ResourceManager.GetString("HlaeNotFoundException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HLTV (HLTV Rating).
         /// </summary>
         public static string HltvFull {
@@ -4821,6 +4913,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Installing HLAE....
+        /// </summary>
+        public static string NotificationInstallingHlae {
+            get {
+                return ResourceManager.GetString("NotificationInstallingHlae", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to in this folder.
         /// </summary>
         public static string NotificationInThisFolder {
@@ -5042,6 +5143,15 @@ namespace Manager.Properties {
         public static string NotificationUpdating {
             get {
                 return ResourceManager.GetString("NotificationUpdating", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updating HLAE....
+        /// </summary>
+        public static string NotificationUpdatingHlae {
+            get {
+                return ResourceManager.GetString("NotificationUpdatingHlae", resourceCulture);
             }
         }
         

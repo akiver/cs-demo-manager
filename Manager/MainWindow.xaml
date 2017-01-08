@@ -58,7 +58,7 @@
 			<controls:Flyout x:Name="SettingsFlyout"
 							 Position="Right"
 							 Theme="Adapt"
-							 Header="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+							 Header="{x:Static properties:Resources.Settings}"
 							 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
 							 IsOpen="{Binding IsSettingsOpen}"
 							 CloseCommand="{Binding SettingsFlyoutClosedCommand}">
@@ -91,6 +91,10 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
+							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+									   Style="{StaticResource NotificationMessageStyle}"
+									   HorizontalAlignment="Center"
+									   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 							<TextBlock Text="{x:Static properties:Resources.LaunchOptions}"
 									   Style="{StaticResource TitleSettingsStyle}" />
 							<CheckBox Content="{x:Static properties:Resources.Fullscreen}"
@@ -135,27 +139,60 @@
 							<CheckBox Content="{x:Static properties:Resources.UseCutomLowlightHighlight}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsUseCustomActionGeneration}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-							<CheckBox x:Name="EnableMoviemakerModeCheckbox"
-									  Content="{x:Static properties:Resources.EnableMoviemakerMode}"
-									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
+
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Text="Hal-Life Advanced Effects"
+										   Style="{StaticResource TitleSettingsStyle}" />
+								<TextBlock Style="{StaticResource TitleSettingsStyle}" Margin="5 0 0 0">
+									<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+											   CommandParameter="https://github.com/ripieces/advancedfx/wiki/AfxHookSource">
+										(HLAE)
+									</Hyperlink>
+								</TextBlock>
+							</StackPanel>
+							<CheckBox x:Name="EnableHlae"
+									  Content="{x:Static properties:Resources.EnableHlae}"
+									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlae}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}">
 								<i:Interaction.Triggers>
 									<i:EventTrigger EventName="Checked">
-										<command:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerModeCommand, Mode=OneWay}"
-																CommandParameter="{Binding IsChecked, ElementName=EnableMoviemakerModeCheckbox}" />
+										<command:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeCommand, Mode=OneWay}"
+																CommandParameter="{Binding IsChecked, ElementName=EnableHlae}" />
 									</i:EventTrigger>
 								</i:Interaction.Triggers>
 							</CheckBox>
-							<StackPanel Orientation="Horizontal">
+							<StackPanel Orientation="Horizontal" Margin="0 5 0 0">
 								<TextBlock Text="{x:Static properties:Resources.CsgoExePath}"
 										   Style="{StaticResource SubTitleSettingsStyle}"/>
 								<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.CsgoExePath}"
+										 Margin="5 0 0 5"
 										 IsEnabled="False" />
 								<Button Content="{x:Static properties:Resources.Browse}"
 										Margin="5 0 0 5"
 										Style="{DynamicResource GeneralButton}"
-										IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableMoviemakerMode}"
+										IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlae}"
 										Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}"/>
+							</StackPanel>
+							<StackPanel Orientation="Vertical" Margin="0 5 0 0">
+								<CheckBox Content="{x:Static properties:Resources.EnableMovieMakingConfigParentFolder}"
+										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
+										  Style="{StaticResource CheckBoxColumnOptionStyle}">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="Checked">
+											<command:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParentCommand, Mode=OneWay}" />
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</CheckBox>
+								<StackPanel Orientation="Horizontal">
+									<TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeConfigParentFolderPath}"
+											 Margin="0 0 0 5"
+											 IsEnabled="False" />
+									<Button Content="{x:Static properties:Resources.Browse}"
+											Margin="5 0 0 5"
+											Style="{DynamicResource GeneralButton}"
+											IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
+											Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectHlaeConfigParentFolderCommand}"/>
+								</StackPanel>
 							</StackPanel>
 						</StackPanel>
 					</controls:MetroTabItem>
@@ -163,6 +200,10 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
+							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+									   Style="{StaticResource NotificationMessageStyle}"
+									   HorizontalAlignment="Center"
+									   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 							<StackPanel Orientation="Horizontal">
 								<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.AddAccountCommand}"
 										Style="{DynamicResource SettingsButton}"

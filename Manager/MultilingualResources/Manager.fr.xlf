@@ -243,10 +243,6 @@
           <source>Download</source>
           <target state="final">Téléchargements</target>
         </trans-unit>
-        <trans-unit id="EnableMoviemakerMode" translate="yes" xml:space="preserve">
-          <source>Enable moviemaker mode</source>
-          <target state="final">Activer le mode moviemaker</target>
-        </trans-unit>
         <trans-unit id="Folders" translate="yes" xml:space="preserve">
           <source>Folders</source>
           <target state="final">Dossiers</target>
@@ -2463,18 +2459,6 @@ Impossible de lancer le jeu.</target>
           <source>Demos data cleared.</source>
           <target state="final">Les données des démos du cache ont été supprimées.</target>
         </trans-unit>
-        <trans-unit id="DialogEnableMoviemakerModeWarning" translate="yes" xml:space="preserve">
-          <source>Enabling moviemaker mode change the way the game is started (when you click on all "Watch" buttons).
-It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
-You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
-If you don't know what is this or you are not planning to make movies just click on cancel.
-If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
-          <target state="final">Le mode moviemaker influ sur la façon dont le jeu est lancé (au clic sur n'importe quels boutons "Regarder").
-Quand il est activé, le jeu est lancé par l'intermédiaire de "Half-Life Advanced Effects" (HLAE) qui est techniquement un hack.
-Vous devez activer ce mode seulement si vous avez besoin d'utiliser une des fonctionnalités d'HLAE ET que vous savez ce que vous faites.
-Si vous n'avez pas besoin de HLAE ou que vous n'êtes pas sur de savoir ce que c'est, n'activez pas ce mode.
-Lorsque ce mode est activé, le jeu est lancé avec le paramètre "-insecure", ce qui signifie que vous ne pourrez pas rejoindre de serveur protégé par VAC et ainsi éviter tous risques de bannissement.</target>
-        </trans-unit>
         <trans-unit id="DialogEnterSteamId" translate="yes" xml:space="preserve">
           <source>Enter the SteamID 64 or the Steam community URL.</source>
           <target state="final">Veuillez entrer le SteamID 64 our l'URL du profil Steam.</target>
@@ -3091,7 +3075,7 @@ Vous devez le supprimer de la liste des comptes pour pouvoir l'ajouter à la lis
         </trans-unit>
         <trans-unit id="CsgoExePath" translate="yes" xml:space="preserve">
           <source>csgo.exe path</source>
-          <target state="final">csgo.exe path</target>
+          <target state="final">Chemin csgo.exe</target>
         </trans-unit>
         <trans-unit id="ToolTipAbout" translate="yes" xml:space="preserve">
           <source>about</source>
@@ -3440,6 +3424,74 @@ Message d'erreur :
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
           <target state="final">Votre fichier de configuration est corrompu. Veuillez relancer l'application pour réinitialiser votre fichier de configuration.</target>
+        </trans-unit>
+        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
+          <source>HLAE not found. Please install it by enabling it from settings.</source>
+          <target state="final">HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</target>
+        </trans-unit>
+        <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
+          <source>Enable movie making config parent folder</source>
+          <target state="final">Activer le dossier de configuration movie making</target>
+        </trans-unit>
+        <trans-unit id="EnableHlae" translate="yes" xml:space="preserve">
+          <source>Enable HLAE</source>
+          <target state="final">Activer HLAE</target>
+        </trans-unit>
+        <trans-unit id="DialogEnableHlaeWarning" translate="yes" xml:space="preserve">
+          <source>Enabling HLAE change the way the game is started (when you click on all "Watch" buttons).
+It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
+You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
+If you don't know what is this or you are not planning to make movies just click on cancel.
+If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
+          <target state="final">Activer HLAE influ sur la façon dont le jeu est lancé (au clic sur n'importe quels boutons "Regarder"). 
+Quand il est activé, le jeu est lancé par l'intermédiaire de "Half-Life Advanced Effects" (HLAE) qui est techniquement un hack. 
+Vous devez activer ce mode seulement si vous avez besoin d'utiliser une des fonctionnalités d'HLAE ET que vous savez ce que vous faites. 
+Si vous n'avez pas besoin de HLAE ou que vous n'êtes pas sur de savoir ce que c'est, n'activez pas ce mode. 
+Lorsque ce mode est activé, le jeu est lancé avec le paramètre "-insecure", ce qui signifie que vous ne pourrez pas rejoindre de serveur protégé par VAC et ainsi éviter tous risques de bannissement.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeNotFound" translate="yes" xml:space="preserve">
+          <source>It looks like HLAE isn't installed.
+Do you want to install it? (If you are using it you have to install it first to be able to use it)</source>
+          <target state="final">Il semble que HLAE n'est pas installé.
+Voulez-vous l'installer? (Il est obligatoire de l'installer pour pouvoir l'utiliser)</target>
+        </trans-unit>
+        <trans-unit id="DialogNewHlaeVersionAvailable" translate="yes" xml:space="preserve">
+          <source>A new HLAE version is avalailable.
+Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</source>
+          <target state="final">Une nouvelle version de HLAE est disponible.
+Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter de possibles crashs suite aux MàJ CSGO)</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeInstallationFailed" translate="yes" xml:space="preserve">
+          <source>An error occured while installing HLAE.</source>
+          <target state="final">Une erreur s'est produite pendant l'installation de HLAE.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeInstalled" translate="yes" xml:space="preserve">
+          <source>HLAE has been installed.</source>
+          <target state="final">HLAE a été installé avec succès.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeRequired" translate="yes" xml:space="preserve">
+          <source>HLAE needs to be installed to use it.</source>
+          <target state="final">HLAE doit être installé pour pouvoir l'activer.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeUpdated" translate="yes" xml:space="preserve">
+          <source>HLAE has been updated.</source>
+          <target state="final">HLAE a été mis à jour.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeUpdateFailed" translate="yes" xml:space="preserve">
+          <source>An error occured while updating HLAE.</source>
+          <target state="final">Une erreur s'est produite pendant la mise à jour de HLAE.</target>
+        </trans-unit>
+        <trans-unit id="NotificationInstallingHlae" translate="yes" xml:space="preserve">
+          <source>Installing HLAE...</source>
+          <target state="final">Installation de HLAE en cours...</target>
+        </trans-unit>
+        <trans-unit id="NotificationUpdatingHlae" translate="yes" xml:space="preserve">
+          <source>Updating HLAE...</source>
+          <target state="final">Mise à jour de HLAE en cours...</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectHlaeConfigParentFolderLocation" translate="yes" xml:space="preserve">
+          <source>Please select the HLAE config parent folder location.</source>
+          <target state="final">Veuillez selectionner le dossier qui contiendra les fichiers de configuration générées par HLAE.</target>
         </trans-unit>
       </group>
     </body>

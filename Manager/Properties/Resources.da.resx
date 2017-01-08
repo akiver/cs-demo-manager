@@ -231,9 +231,6 @@
   <data name="Email" xml:space="preserve">
     <value>email</value>
   </data>
-  <data name="EnableMoviemakerMode" xml:space="preserve">
-    <value>Aktiver Moviemaker mode</value>
-  </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Entry Drab</value>
   </data>
@@ -1868,13 +1865,6 @@ Er ikke istand til at starte spillet</value>
   <data name="DialogDemosDataCleared" xml:space="preserve">
     <value>Demo Data Slettet</value>
   </data>
-  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
-    <value>Aktivering af Moviemaker mode ændre måden spillet bliver startet.(når du klikker på alle "Se" knapper).
-Den vil starte værktøjet "Half-Life Advanced Effects" (HLAE) som teknisk set er en hack
-Du burde KUN bruge dette hvis du ved hvad du laver OG til at lave film relateret ting
-Hvis du ikke ved hvad dette er eller du ikke planlægger at lave film klik på Annuler.
-If du aktivere dette, vil dit spil starte med "-insecure" parameteren(ALTID), som betyder at du ikke vil være i stand til at deltage på servere som er beskyttet VAC, Derfor vil du undgå VAC bandlysning.</value>
-  </data>
   <data name="DialogEnterSteamId" xml:space="preserve">
     <value>Indtast din SteamID 64 eller Steam Fællesskabs URL.</value>
   </data>
@@ -2489,5 +2479,15 @@ Besked Fejl :
   </data>
   <data name="Translators" xml:space="preserve">
     <value>Oversættere</value>
+  </data>
+  <data name="EnableHlae" xml:space="preserve">
+    <value>Aktiver HLAE</value>
+  </data>
+  <data name="DialogEnableHlaeWarning" xml:space="preserve">
+    <value>Aktivering HLAE ændre måden spillet bliver startet.(når du klikker på alle "Se" knapper). 
+Den vil starte værktøjet "Half-Life Advanced Effects" (HLAE) som teknisk set er en hack 
+Du burde KUN bruge dette hvis du ved hvad du laver OG til at lave film relateret ting 
+Hvis du ikke ved hvad dette er eller du ikke planlægger at lave film klik på Annuler. 
+If du aktivere dette, vil dit spil starte med "-insecure" parameteren(ALTID), som betyder at du ikke vil være i stand til at deltage på servere som er beskyttet VAC, Derfor vil du undgå VAC bandlysning.</value>
   </data>
 </root>

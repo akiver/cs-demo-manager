@@ -27,6 +27,13 @@ namespace Manager.Services
 		private const int MOLOTOV_TIME = 8; // Seconds average waiting time for a molotov end
 		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid"};
 		private readonly Process _process = new Process();
+		private readonly List<string> _hlaeArguments = new List<string>
+		{
+			"hlae.exe",
+			"-noGui",
+			"-csgoLauncher",
+			"-autoStart",
+		};
 		private const string ARGUMENT_SEPARATOR = " ";
 		private readonly Demo _demo;
 
@@ -41,24 +48,42 @@ namespace Manager.Services
 		public void StartGame()
 		{
 			SetupResolutionParameters();
-			if (Properties.Settings.Default.MoviemakerMode)
+			KillCsgo();
+			if (Properties.Settings.Default.EnableHlae)
 			{
+				// start the game using HLAE
 				if (!File.Exists(Properties.Settings.Default.CsgoExePath))
-				{
 					throw new CsgoNotFoundException();
+
+				string hlaeExePath = HlaeService.GetHlaeExePath();
+				if (!File.Exists(hlaeExePath))
+					throw new HlaeNotFound();
+
+				_arguments.Add(Properties.Settings.Default.LaunchParameters);
+				List<string> argList = new List<string>(_hlaeArguments)
+				{
+					$"-csgoExe \"{Properties.Settings.Default.CsgoExePath}\"",
+					$"-customLaunchOptions \"{string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray())}\""
+				};
+
+				string hlaeConfigParentPath = Properties.Settings.Default.HlaeConfigParentFolderPath;
+				if (Properties.Settings.Default.EnableHlaeConfigParent && Directory.Exists(hlaeConfigParentPath))
+				{
+					argList.Add("-mmcfgEnabled true");
+					argList.Add($"-mmcfg \"{hlaeConfigParentPath}\"");
 				}
-				string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
-				args += " -steam -insecure +sv_lan 1 -game csgo " + Properties.Settings.Default.LaunchParameters;
-				AfxCppCli.AfxHook.LauchAndHook(Properties.Settings.Default.CsgoExePath, args, Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\AfxHookSource.dll");
+
+				string args = string.Join(ARGUMENT_SEPARATOR, argList.ToArray());
+				ProcessStartInfo psi = new ProcessStartInfo
+				{
+					Arguments = args,
+					FileName = hlaeExePath,
+					UseShellExecute = false
+				};
+				Process.Start(psi);
 			}
 			else
 			{
-				Process[] currentProcess = Process.GetProcessesByName("csgo");
-				if (currentProcess.Length > 0)
-				{
-					currentProcess[0].Kill();
-				}
-
 				string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
 				_process.StartInfo.Arguments = args + " " + Properties.Settings.Default.LaunchParameters;
 				_process.Start();
@@ -381,6 +406,15 @@ namespace Manager.Services
 					return "Fast forwarding to the next decoy...";
 				default:
 					return string.Empty;
+			}
+		}
+
+		private void KillCsgo()
+		{
+			Process[] currentProcess = Process.GetProcessesByName("csgo");
+			if (currentProcess.Length > 0)
+			{
+				currentProcess[0].Kill();
 			}
 		}
 

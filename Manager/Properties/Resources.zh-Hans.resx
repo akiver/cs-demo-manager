@@ -231,9 +231,6 @@
   <data name="Email" xml:space="preserve">
     <value>email</value>
   </data>
-  <data name="EnableMoviemakerMode" xml:space="preserve">
-    <value>打开视频作者模式</value>
-  </data>
   <data name="EntryKills" xml:space="preserve">
     <value>破点杀敌</value>
   </data>
@@ -1867,13 +1864,6 @@
   <data name="DialogDemosDataCleared" xml:space="preserve">
     <value>Demo数据已清除</value>
   </data>
-  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
-    <value>开启视频作者模式将改变游戏启动方式(当你点击所有"观看"按钮)
-这将使用HLACE工具
-只有当你知道你在干什么或者做视频时才打开它
-如果你不了解这个或者不打算做视频，点击取消
-如果你开启了它，游戏每次启动时会伴随"-insucre"启动项，这意味着你将保护你不被VAC封禁并且不能进入VAC保护的服务器</value>
-  </data>
   <data name="DialogEnterSteamId" xml:space="preserve">
     <value>输入Steam64位ID或Steam社区连接</value>
   </data>
@@ -2488,5 +2478,78 @@
   </data>
   <data name="Translators" xml:space="preserve">
     <value>翻译</value>
+  </data>
+  <data name="HeaderToolTipTotalMatchesTime" xml:space="preserve">
+    <value>总比赛时间(小时 / 分钟)</value>
+  </data>
+  <data name="HeaderToolTipAverageMatchTime" xml:space="preserve">
+    <value>平均比赛时间(小时 / 分钟)</value>
+  </data>
+  <data name="TotalMatchTimeValue" xml:space="preserve">
+    <value>{0}小时 {1}分钟</value>
+  </data>
+  <data name="AverageMatchTimeValue" xml:space="preserve">
+    <value>{0} 分钟</value>
+  </data>
+  <data name="ToolTipExportChat" xml:space="preserve">
+    <value>导出demo聊天文本</value>
+  </data>
+  <data name="ExportChat" xml:space="preserve">
+    <value>导出聊天</value>
+  </data>
+  <data name="DialogChatFileCreated" xml:space="preserve">
+    <value>聊天信息文件已经创建</value>
+  </data>
+  <data name="DialogNoChatFound" xml:space="preserve">
+    <value>没有找到聊天信息. (此功能只在当服务端的 "tv_relaytextchat" 参数没有被设置成 "0"的非Valve匹配服务器下有效)</value>
+  </data>
+  <data name="NoHeatmapDataFound" xml:space="preserve">
+    <value>没有找到{0} 这个选项</value>
+  </data>
+  <data name="Shots" xml:space="preserve">
+    <value>射击</value>
+  </data>
+  <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
+    <value>这个demo不是来自Valve官方服务器或者.info文件已丢失</value>
+  </data>
+  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
+    <value>复制分享代码到剪切板</value>
+  </data>
+  <data name="CopyDemoShareCode" xml:space="preserve">
+    <value>复制分享代码</value>
+  </data>
+  <data name="ShowOnThirdParty" xml:space="preserve">
+    <value>在第三方应用上显示</value>
+  </data>
+  <data name="DialogShareCodeNotAvailable" xml:space="preserve">
+    <value>分享代码不可用，只有来自Valve官方匹配服务器的demo或者存在.info文件的情况下可用</value>
+  </data>
+  <data name="YesDontAsk" xml:space="preserve">
+    <value>是，并且下次不再询问</value>
+  </data>
+  <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
+    <value>你将要发送demo分享代码到{0}，你想继续吗？</value>
+  </data>
+  <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
+    <value>发送共享代码时发生错误</value>
+  </data>
+  <data name="DialogSendShareCodeWarning" xml:space="preserve">
+    <value>你将要发送demo分享代码到{0}</value>
+  </data>
+  <data name="DialogSelectThirdParty" xml:space="preserve">
+    <value>选择第三方应用程序</value>
+  </data>
+  <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
+    <value>在第三方应用程序上显示demo详情</value>
+  </data>
+  <data name="DialogConfigurationCorrupted" xml:space="preserve">
+    <value>你的配置文件已经损坏，请重启应用程序来重置你的配置文件</value>
+  </data>
+  <data name="DialogEnableHlaeWarning" xml:space="preserve">
+    <value>开启视频作者模式将改变游戏启动方式(当你点击所有"观看"按钮) 
+这将使用HLACE工具 
+只有当你知道你在干什么或者做视频时才打开它 
+如果你不了解这个或者不打算做视频，点击取消 
+如果你开启了它，游戏每次启动时会伴随"-insucre"启动项，这意味着你将保护你不被VAC封禁并且不能进入VAC保护的服务器</value>
   </data>
 </root>

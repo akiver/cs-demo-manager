@@ -6,37 +6,37 @@
     </header>
     <body>
       <group id="MANAGER/PROPERTIES/RESOURCES.RESX" datatype="resx">
-        <trans-unit id="bullet" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="bullet" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\images\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
-          <target state="needs-review-translation">..\Resources\images\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+          <target state="final">..\Resources\images\bullet.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
         </trans-unit>
-        <trans-unit id="model" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="model" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
-          <target state="needs-review-translation">..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+          <target state="final">..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
         </trans-unit>
-        <trans-unit id="skip_ahead" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="skip_ahead" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
-        <trans-unit id="spec_player" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="spec_player" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
-        <trans-unit id="stop_playback" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="stop_playback" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
-        <trans-unit id="screen_fade_start" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="screen_fade_start" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
-        <trans-unit id="text_message_start" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="text_message_start" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
-        <trans-unit id="main" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="main" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
         <trans-unit id="Analyze" translate="yes" xml:space="preserve">
           <source>Analyze</source>
@@ -327,10 +327,6 @@
         <trans-unit id="Email" translate="yes" xml:space="preserve">
           <source>email</source>
           <target state="final">email</target>
-        </trans-unit>
-        <trans-unit id="EnableMoviemakerMode" translate="yes" xml:space="preserve">
-          <source>Enable moviemaker mode</source>
-          <target state="final">Ativar movo moviemaker</target>
         </trans-unit>
         <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
           <source>Entry kills</source>
@@ -2501,18 +2497,6 @@ Não é possivel iniciar o jogo.</target>
           <source>Demos data cleared.</source>
           <target state="final">Dados das demos apagados.</target>
         </trans-unit>
-        <trans-unit id="DialogEnableMoviemakerModeWarning" translate="yes" xml:space="preserve">
-          <source>Enabling moviemaker mode change the way the game is started (when you click on all "Watch" buttons).
-It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
-You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
-If you don't know what is this or you are not planning to make movies just click on cancel.
-If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
-          <target state="final">Ativa o mode de cineasta (moviemaker) muda forma como o jogo é iniciado (Quando você clica em todos os botões "Assistir").
-Ele vai usar uma ferramenta "Half-Life Advanced Effects" (HLAE) que é tecnicamente um hack.
-Você deve usá-lo APENAS se voce souber o que etá fazendo e para fazer a criação de filmes coisas relacionadas.
-Se você não sabe o que é isso ou você não está planejando fazer filmes basta clicar sobre cancelar.
-Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas as vezes),o que significa que você não será capaz de se conectar a servidores protegidos pelo VAC e previnir um ban VAC.</target>
-        </trans-unit>
         <trans-unit id="DialogEnterSteamId" translate="yes" xml:space="preserve">
           <source>Enter the SteamID 64 or the Steam community URL.</source>
           <target state="final">Entre com SteamID 64 ou url da comunidade Steam.</target>
@@ -3438,6 +3422,74 @@ Mensagem de Erro:
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
           <target state="new">Your configuration file is corrupted. Please restart the application to reset your configuration.</target>
+        </trans-unit>
+        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
+          <source>HLAE not found. Please install it by enabling it from settings.</source>
+          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
+        </trans-unit>
+        <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
+          <source>Enable movie making config parent folder</source>
+          <target state="new">Enable movie making config parent folder</target>
+        </trans-unit>
+        <trans-unit id="EnableHlae" translate="yes" xml:space="preserve">
+          <source>Enable HLAE</source>
+          <target state="final">Ativar HLAE</target>
+        </trans-unit>
+        <trans-unit id="DialogEnableHlaeWarning" translate="yes" xml:space="preserve">
+          <source>Enabling HLAE change the way the game is started (when you click on all "Watch" buttons).
+It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
+You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
+If you don't know what is this or you are not planning to make movies just click on cancel.
+If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
+          <target state="final">Ativa HLAE muda forma como o jogo é iniciado (Quando você clica em todos os botões "Assistir"). 
+Ele vai usar uma ferramenta "Half-Life Advanced Effects" (HLAE) que é tecnicamente um hack. 
+Você deve usá-lo APENAS se voce souber o que etá fazendo e para fazer a criação de filmes coisas relacionadas. 
+Se você não sabe o que é isso ou você não está planejando fazer filmes basta clicar sobre cancelar. 
+Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas as vezes),o que significa que você não será capaz de se conectar a servidores protegidos pelo VAC e previnir um ban VAC.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeNotFound" translate="yes" xml:space="preserve">
+          <source>It looks like HLAE isn't installed.
+Do you want to install it? (If you are using it you have to install it first to be able to use it)</source>
+          <target state="new">It looks like HLAE isn't installed.
+Do you want to install it? (If you are using it you have to install it first to be able to use it)</target>
+        </trans-unit>
+        <trans-unit id="DialogNewHlaeVersionAvailable" translate="yes" xml:space="preserve">
+          <source>A new HLAE version is avalailable.
+Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</source>
+          <target state="new">A new HLAE version is avalailable.
+Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeInstallationFailed" translate="yes" xml:space="preserve">
+          <source>An error occured while installing HLAE.</source>
+          <target state="new">An error occured while installing HLAE.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeInstalled" translate="yes" xml:space="preserve">
+          <source>HLAE has been installed.</source>
+          <target state="new">HLAE has been installed.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeRequired" translate="yes" xml:space="preserve">
+          <source>HLAE needs to be installed to use it.</source>
+          <target state="new">HLAE needs to be installed to use it.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeUpdated" translate="yes" xml:space="preserve">
+          <source>HLAE has been updated.</source>
+          <target state="new">HLAE has been updated.</target>
+        </trans-unit>
+        <trans-unit id="DialogHlaeUpdateFailed" translate="yes" xml:space="preserve">
+          <source>An error occured while updating HLAE.</source>
+          <target state="new">An error occured while updating HLAE.</target>
+        </trans-unit>
+        <trans-unit id="NotificationInstallingHlae" translate="yes" xml:space="preserve">
+          <source>Installing HLAE...</source>
+          <target state="new">Installing HLAE...</target>
+        </trans-unit>
+        <trans-unit id="NotificationUpdatingHlae" translate="yes" xml:space="preserve">
+          <source>Updating HLAE...</source>
+          <target state="new">Updating HLAE...</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectHlaeConfigParentFolderLocation" translate="yes" xml:space="preserve">
+          <source>Please select the HLAE config parent folder location.</source>
+          <target state="new">Please select the HLAE config parent folder location.</target>
         </trans-unit>
       </group>
     </body>

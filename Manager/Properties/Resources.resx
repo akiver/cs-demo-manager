@@ -361,8 +361,8 @@
   <data name="Email" xml:space="preserve">
     <value>email</value>
   </data>
-  <data name="EnableMoviemakerMode" xml:space="preserve">
-    <value>Enable moviemaker mode</value>
+  <data name="EnableHlae" xml:space="preserve">
+    <value>Enable HLAE</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Entry kills</value>
@@ -1997,8 +1997,8 @@ Unable to start the game.</value>
   <data name="DialogDemosDataCleared" xml:space="preserve">
     <value>Demos data cleared.</value>
   </data>
-  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
-    <value>Enabling moviemaker mode change the way the game is started (when you click on all "Watch" buttons).
+  <data name="DialogEnableHlaeWarning" xml:space="preserve">
+    <value>Enabling HLAE change the way the game is started (when you click on all "Watch" buttons).
 It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a hack.
 You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
 If you don't know what is this or you are not planning to make movies just click on cancel.
@@ -2692,5 +2692,43 @@ Message Error :
   </data>
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
     <value>Your configuration file is corrupted. Please restart the application to reset your configuration.</value>
+  </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE not found. Please install it by enabling it from settings.</value>
+  </data>
+  <data name="DialogHlaeNotFound" xml:space="preserve">
+    <value>It looks like HLAE isn't installed.
+Do you want to install it? (If you are using it you have to install it first to be able to use it)</value>
+  </data>
+  <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
+    <value>Enable movie making config parent folder</value>
+  </data>
+  <data name="DialogHlaeInstallationFailed" xml:space="preserve">
+    <value>An error occured while installing HLAE.</value>
+  </data>
+  <data name="DialogHlaeInstalled" xml:space="preserve">
+    <value>HLAE has been installed.</value>
+  </data>
+  <data name="DialogHlaeRequired" xml:space="preserve">
+    <value>HLAE needs to be installed to use it.</value>
+  </data>
+  <data name="DialogHlaeUpdated" xml:space="preserve">
+    <value>HLAE has been updated.</value>
+  </data>
+  <data name="DialogHlaeUpdateFailed" xml:space="preserve">
+    <value>An error occured while updating HLAE.</value>
+  </data>
+  <data name="DialogNewHlaeVersionAvailable" xml:space="preserve">
+    <value>A new HLAE version is avalailable.
+Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</value>
+  </data>
+  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
+    <value>Please select the HLAE config parent folder location.</value>
+  </data>
+  <data name="NotificationInstallingHlae" xml:space="preserve">
+    <value>Installing HLAE...</value>
+  </data>
+  <data name="NotificationUpdatingHlae" xml:space="preserve">
+    <value>Updating HLAE...</value>
   </data>
 </root>

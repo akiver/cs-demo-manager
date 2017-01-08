@@ -166,9 +166,6 @@
   <data name="Download" xml:space="preserve">
     <value>Téléchargements</value>
   </data>
-  <data name="EnableMoviemakerMode" xml:space="preserve">
-    <value>Activer le mode moviemaker</value>
-  </data>
   <data name="Folders" xml:space="preserve">
     <value>Dossiers</value>
   </data>
@@ -1839,13 +1836,6 @@ Impossible de lancer le jeu.</value>
   <data name="DialogDemosDataCleared" xml:space="preserve">
     <value>Les données des démos du cache ont été supprimées.</value>
   </data>
-  <data name="DialogEnableMoviemakerModeWarning" xml:space="preserve">
-    <value>Le mode moviemaker influ sur la façon dont le jeu est lancé (au clic sur n'importe quels boutons "Regarder").
-Quand il est activé, le jeu est lancé par l'intermédiaire de "Half-Life Advanced Effects" (HLAE) qui est techniquement un hack.
-Vous devez activer ce mode seulement si vous avez besoin d'utiliser une des fonctionnalités d'HLAE ET que vous savez ce que vous faites.
-Si vous n'avez pas besoin de HLAE ou que vous n'êtes pas sur de savoir ce que c'est, n'activez pas ce mode.
-Lorsque ce mode est activé, le jeu est lancé avec le paramètre "-insecure", ce qui signifie que vous ne pourrez pas rejoindre de serveur protégé par VAC et ainsi éviter tous risques de bannissement.</value>
-  </data>
   <data name="DialogEnterSteamId" xml:space="preserve">
     <value>Veuillez entrer le SteamID 64 our l'URL du profil Steam.</value>
   </data>
@@ -2301,7 +2291,7 @@ Vous devez le supprimer de la liste des comptes pour pouvoir l'ajouter à la lis
     <value>Largeur</value>
   </data>
   <data name="CsgoExePath" xml:space="preserve">
-    <value>csgo.exe path</value>
+    <value>Chemin csgo.exe</value>
   </data>
   <data name="ToolTipAbout" xml:space="preserve">
     <value>environ</value>
@@ -2565,5 +2555,53 @@ Message d'erreur :
   </data>
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
     <value>Votre fichier de configuration est corrompu. Veuillez relancer l'application pour réinitialiser votre fichier de configuration.</value>
+  </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</value>
+  </data>
+  <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
+    <value>Activer le dossier de configuration movie making</value>
+  </data>
+  <data name="EnableHlae" xml:space="preserve">
+    <value>Activer HLAE</value>
+  </data>
+  <data name="DialogEnableHlaeWarning" xml:space="preserve">
+    <value>Activer HLAE influ sur la façon dont le jeu est lancé (au clic sur n'importe quels boutons "Regarder"). 
+Quand il est activé, le jeu est lancé par l'intermédiaire de "Half-Life Advanced Effects" (HLAE) qui est techniquement un hack. 
+Vous devez activer ce mode seulement si vous avez besoin d'utiliser une des fonctionnalités d'HLAE ET que vous savez ce que vous faites. 
+Si vous n'avez pas besoin de HLAE ou que vous n'êtes pas sur de savoir ce que c'est, n'activez pas ce mode. 
+Lorsque ce mode est activé, le jeu est lancé avec le paramètre "-insecure", ce qui signifie que vous ne pourrez pas rejoindre de serveur protégé par VAC et ainsi éviter tous risques de bannissement.</value>
+  </data>
+  <data name="DialogHlaeNotFound" xml:space="preserve">
+    <value>Il semble que HLAE n'est pas installé.
+Voulez-vous l'installer? (Il est obligatoire de l'installer pour pouvoir l'utiliser)</value>
+  </data>
+  <data name="DialogNewHlaeVersionAvailable" xml:space="preserve">
+    <value>Une nouvelle version de HLAE est disponible.
+Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter de possibles crashs suite aux MàJ CSGO)</value>
+  </data>
+  <data name="DialogHlaeInstallationFailed" xml:space="preserve">
+    <value>Une erreur s'est produite pendant l'installation de HLAE.</value>
+  </data>
+  <data name="DialogHlaeInstalled" xml:space="preserve">
+    <value>HLAE a été installé avec succès.</value>
+  </data>
+  <data name="DialogHlaeRequired" xml:space="preserve">
+    <value>HLAE doit être installé pour pouvoir l'activer.</value>
+  </data>
+  <data name="DialogHlaeUpdated" xml:space="preserve">
+    <value>HLAE a été mis à jour.</value>
+  </data>
+  <data name="DialogHlaeUpdateFailed" xml:space="preserve">
+    <value>Une erreur s'est produite pendant la mise à jour de HLAE.</value>
+  </data>
+  <data name="NotificationInstallingHlae" xml:space="preserve">
+    <value>Installation de HLAE en cours...</value>
+  </data>
+  <data name="NotificationUpdatingHlae" xml:space="preserve">
+    <value>Mise à jour de HLAE en cours...</value>
+  </data>
+  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
+    <value>Veuillez selectionner le dossier qui contiendra les fichiers de configuration générées par HLAE.</value>
   </data>
 </root>

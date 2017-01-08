@@ -141,15 +141,57 @@ namespace Manager.ViewModel
 						if (_cacheService.HasDummyCacheFile()) _cacheService.DeleteDummyCacheFile();
 
 						// Check for update
-						if (AppSettings.IsInternetConnectionAvailable() && Properties.Settings.Default.EnableCheckUpdate)
+						if (AppSettings.IsInternetConnectionAvailable())
 						{
-							bool isUpdateAvailable = await CheckUpdate();
-							if (isUpdateAvailable)
+							if (Properties.Settings.Default.EnableCheckUpdate)
 							{
-								var download = await _dialogService.ShowMessageAsync(Properties.Resources.DialogNewVersionAvailable, MessageDialogStyle.AffirmativeAndNegative);
-								if (download == MessageDialogResult.Affirmative)
+								bool isUpdateAvailable = await CheckUpdate();
+								if (isUpdateAvailable)
 								{
-									System.Diagnostics.Process.Start(AppSettings.APP_WEBSITE);
+									var download = await _dialogService.ShowMessageAsync(Properties.Resources.DialogNewVersionAvailable, MessageDialogStyle.AffirmativeAndNegative);
+									if (download == MessageDialogResult.Affirmative)
+									{
+										Process.Start(AppSettings.APP_WEBSITE);
+									}
+								}
+							}
+
+							if (Properties.Settings.Default.EnableHlae)
+							{
+								// check for HLAE update
+								if (HlaeService.GetHlaeVersion() != null)
+								{
+									bool isUpdateAvailable = await HlaeService.IsUpdateAvailable();
+									if (isUpdateAvailable)
+									{
+										var download = await _dialogService.ShowMessageAsync(Properties.Resources.DialogNewHlaeVersionAvailable, MessageDialogStyle.AffirmativeAndNegative);
+										if (download == MessageDialogResult.Affirmative)
+										{
+											bool hlaeUpdated = await HlaeService.UpgradeHlae();
+											if (hlaeUpdated)
+												await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeUpdated, MessageDialogStyle.Affirmative);
+											else
+												await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeUpdateFailed, MessageDialogStyle.Affirmative);
+										}
+									}
+								}
+								else
+								{
+									// inform that HLAE isn't installed
+									var installHlae = await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeNotFound, MessageDialogStyle.AffirmativeAndNegative);
+									if (installHlae == MessageDialogResult.Affirmative)
+									{
+										bool isHlaeInstalled = await HlaeService.UpgradeHlae();
+										if (isHlaeInstalled)
+											await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeInstalled, MessageDialogStyle.Affirmative);
+										else
+											await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeInstallationFailed, MessageDialogStyle.Affirmative);
+									}
+									else
+									{
+										await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeRequired, MessageDialogStyle.Affirmative);
+										new ViewModelLocator().Settings.EnableHlae = false;
+									}
 								}
 							}
 						}

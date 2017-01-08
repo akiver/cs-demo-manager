@@ -30,6 +30,8 @@ namespace Manager.ViewModel
 
 		private int _resolutionHeight = Settings.Default.ResolutionHeight;
 
+		private bool _hasNotification;
+
 		private bool _resolutionFullscreen = Settings.Default.IsFullscreen;
 
 		private bool _isShowAllAccounts = Settings.Default.IsShowAllAccounts;
@@ -58,7 +60,11 @@ namespace Manager.ViewModel
 
 		private RelayCommand _selectCsgoExePathCommand;
 
-		private RelayCommand _enableMoviemakerModeCommand;
+		private RelayCommand _enableHlaeCommand;
+
+		private RelayCommand _enableHlaeConfigParentFolderCommand;
+
+		private RelayCommand _selectHlaeConfigParentFolderCommand;
 
 		private RelayCommand _addAccountCommand;
 
@@ -216,9 +222,13 @@ namespace Manager.ViewModel
 
 		private string _csgoExePath = Settings.Default.CsgoExePath;
 
+		private string _hlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath;
+
 		private string _downloadFolderPath = Settings.Default.DownloadFolder;
 
-		private bool _enableMoviemakerMode = Settings.Default.MoviemakerMode;
+		private bool _enableHlae = Settings.Default.EnableHlae;
+
+		private bool _enableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent;
 
 		private bool _limitStatsSelectedFolder = Settings.Default.LimitStatsFolder;
 
@@ -272,6 +282,12 @@ namespace Manager.ViewModel
 		#endregion
 
 		#region Accessors
+
+		public bool HasNotification
+		{
+			get { return _hasNotification; }
+			set { Set(() => HasNotification, ref _hasNotification, value); }
+		}
 
 		public List<ComboboxSelector> Languages
 		{
@@ -1136,6 +1152,17 @@ namespace Manager.ViewModel
 			}
 		}
 
+		public string HlaeConfigParentFolderPath
+		{
+			get { return _hlaeConfigParentFolderPath; }
+			set
+			{
+				Settings.Default.HlaeConfigParentFolderPath = value;
+				Settings.Default.Save();
+				Set(() => HlaeConfigParentFolderPath, ref _hlaeConfigParentFolderPath, value);
+			}
+		}
+
 		public string DownloadFolderPath
 		{
 			get { return _downloadFolderPath; }
@@ -1148,14 +1175,25 @@ namespace Manager.ViewModel
 			}
 		}
 
-		public bool EnableMoviemakerMode
+		public bool EnableHlae
 		{
-			get { return _enableMoviemakerMode; }
+			get { return _enableHlae; }
 			set
 			{
-				Settings.Default.MoviemakerMode = value;
+				Settings.Default.EnableHlae = value;
 				Settings.Default.Save();
-				Set(() => EnableMoviemakerMode, ref _enableMoviemakerMode, value);
+				Set(() => EnableHlae, ref _enableHlae, value);
+			}
+		}
+
+		public bool EnableHlaeConfigParent
+		{
+			get { return _enableHlaeConfigParent; }
+			set
+			{
+				Settings.Default.EnableHlaeConfigParent = value;
+				Settings.Default.Save();
+				Set(() => EnableHlaeConfigParent, ref _enableHlaeConfigParent, value);
 			}
 		}
 
@@ -1278,6 +1316,7 @@ namespace Manager.ViewModel
 							if (string.IsNullOrEmpty(steamInput)) return;
 
 							NotificationMessage = Properties.Resources.NotificationAddingAccount;
+							HasNotification = true;
 
 							try
 							{
@@ -1324,7 +1363,7 @@ namespace Manager.ViewModel
 							}
 							finally
 							{
-								NotificationMessage = Properties.Resources.Settings;
+								HasNotification = false;
 							}
 						}));
 			}
@@ -1547,17 +1586,17 @@ namespace Manager.ViewModel
 		}
 
 		/// <summary>
-		/// Command to enable moviemaker mode
+		/// Command to enable HLAE
 		/// </summary>
-		public RelayCommand EnableMoviemakerModeCommand
+		public RelayCommand EnableHlaeCommand
 		{
 			get
 			{
-				return _enableMoviemakerModeCommand
-					?? (_enableMoviemakerModeCommand = new RelayCommand(
+				return _enableHlaeCommand
+					?? (_enableHlaeCommand = new RelayCommand(
 					async () =>
 					{
-						string warningMessage = Properties.Resources.DialogEnableMoviemakerModeWarning;
+						string warningMessage = Properties.Resources.DialogEnableHlaeWarning;
 
 						if (Settings.Default.CsgoExePath == string.Empty)
 						{
@@ -1568,15 +1607,116 @@ namespace Manager.ViewModel
 
 						if (enable == MessageDialogResult.Affirmative)
 						{
-							if (Settings.Default.CsgoExePath == string.Empty)
+							bool isCsgoPathSelected = Settings.Default.CsgoExePath != string.Empty;
+							if (!isCsgoPathSelected)
+								isCsgoPathSelected = ShowCsgoExeDialog();
+							if (!isCsgoPathSelected)
 							{
-								EnableMoviemakerMode = ShowCsgoExeDialog();
+								EnableHlae = false;
+								return;
+							}
+
+							// check if HLAE is installed and ask to install it if it's not
+							if (!HlaeService.IsHlaeInstalled())
+							{
+								var installHlae = await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeNotFound,
+											MessageDialogStyle.AffirmativeAndNegative);
+								if (installHlae == MessageDialogResult.Affirmative)
+								{
+									if (!AppSettings.IsInternetConnectionAvailable())
+									{
+										await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoConnexionDetected, MessageDialogStyle.Affirmative);
+										EnableHlae = false;
+										return;
+									}
+
+									NotificationMessage = Properties.Resources.NotificationInstallingHlae;
+									HasNotification = true;
+									EnableHlae = await HlaeService.UpgradeHlae();
+									if (EnableHlae)
+									{
+										await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeInstalled, MessageDialogStyle.Affirmative);
+									}
+									else
+									{
+										await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeInstallationFailed, MessageDialogStyle.Affirmative);
+									}
+									HasNotification = false;
+								}
+								else
+								{
+									await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeRequired, MessageDialogStyle.Affirmative);
+									EnableHlae = false;
+								}
+							}
+							else
+							{
+								// check if an HLAE update is available
+								if (AppSettings.IsInternetConnectionAvailable())
+								{
+									bool isUpdateAvailable = await HlaeService.IsUpdateAvailable();
+									if (isUpdateAvailable)
+									{
+										NotificationMessage = Properties.Resources.NotificationUpdatingHlae;
+										HasNotification = true;
+										EnableHlae = await HlaeService.UpgradeHlae();
+										if (EnableHlae)
+										{
+											await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeUpdated, MessageDialogStyle.Affirmative);
+										}
+										else
+										{
+											await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeUpdateFailed, MessageDialogStyle.Affirmative);
+										}
+										HasNotification = false;
+									}
+								}
 							}
 						}
 						else
 						{
-							EnableMoviemakerMode = false;
+							EnableHlae = false;
 						}
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to enable HLAE config parent.
+		/// </summary>
+		public RelayCommand EnableHlaeConfigParentCommand
+		{
+			get
+			{
+				return _enableHlaeConfigParentFolderCommand
+					?? (_enableHlaeConfigParentFolderCommand = new RelayCommand(
+					async () =>
+					{
+						if (string.IsNullOrEmpty(Settings.Default.HlaeConfigParentFolderPath))
+						{
+							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSelectHlaeConfigParentFolderLocation, MessageDialogStyle.Affirmative);
+							EnableHlaeConfigParent = ShowHlaeConfigParentFolderDialog();
+						}
+						else
+						{
+							EnableHlaeConfigParent = true;
+						}
+					}));
+			}
+		}
+
+		/// <summary>
+		/// Command to select the HLAE config parent folder.
+		/// </summary>
+		public RelayCommand SelectHlaeConfigParentFolderCommand
+		{
+			get
+			{
+				return _selectHlaeConfigParentFolderCommand
+					?? (_selectHlaeConfigParentFolderCommand = new RelayCommand(
+					() =>
+					{
+						EnableHlaeConfigParent = ShowHlaeConfigParentFolderDialog();
 					}));
 			}
 		}
@@ -1632,6 +1772,7 @@ namespace Manager.ViewModel
 							}
 
 							NotificationMessage = Properties.Resources.NotificationSyncingAccountsNickname;
+							HasNotification = true;
 							List<string> steamIdList = Accounts.Select(a => a.SteamId.ToString()).ToList();
 							IEnumerable<Suspect> players = await _steamService.GetBanStatusForUserList(steamIdList);
 							long currentAccountSteamId = Settings.Default.SelectedStatsAccountSteamID;
@@ -1648,7 +1789,7 @@ namespace Manager.ViewModel
 							}
 							SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == currentAccountSteamId.ToString());
 
-							NotificationMessage = Properties.Resources.Settings;
+							HasNotification = false;
 
 						}, () => Accounts.Any()));
 			}
@@ -1769,7 +1910,7 @@ namespace Manager.ViewModel
 		/// <returns></returns>
 		private bool ShowCsgoExeDialog()
 		{
-			bool enableMoviemakerMode = false;
+			bool isPathSelected = false;
 
 			OpenFileDialog dialog = new OpenFileDialog
 			{
@@ -1781,10 +1922,30 @@ namespace Manager.ViewModel
 			if (result != null && (bool)result)
 			{
 				CsgoExePath = dialog.FileName;
-				enableMoviemakerMode = true;
+				isPathSelected = true;
 			}
 
-			return enableMoviemakerMode;
+			return isPathSelected;
+		}
+
+		/// <summary>
+		/// Display a directory dialog to select the HLAE config parent folder location.
+		/// </summary>
+		/// <returns></returns>
+		private bool ShowHlaeConfigParentFolderDialog()
+		{
+			bool isFolderSelected = false;
+
+			FolderBrowserDialog dialog = new FolderBrowserDialog();
+			DialogResult result = dialog.ShowDialog();
+			if (result == DialogResult.OK)
+			{
+				string path = dialog.SelectedPath;
+				isFolderSelected = !string.IsNullOrWhiteSpace(path);
+				if (isFolderSelected) HlaeConfigParentFolderPath = path;
+			}
+
+			return isFolderSelected;
 		}
 	}
 }

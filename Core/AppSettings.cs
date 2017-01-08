@@ -231,6 +231,15 @@ namespace Core
 		}
 
 		/// <summary>
+		/// Return the path to the local AppData user's profile.
+		/// </summary>
+		/// <returns></returns>
+		public static string GetLocalAppDataPath()
+		{
+			return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), AUTHOR);
+		}
+
+		/// <summary>
 		/// Check if the user has access to the awesome world of the Internet
 		/// </summary>
 		/// <returns></returns>

@@ -806,12 +806,12 @@ namespace Manager.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool MoviemakerMode {
+        public bool EnableHlae {
             get {
-                return ((bool)(this["MoviemakerMode"]));
+                return ((bool)(this["EnableHlae"]));
             }
             set {
-                this["MoviemakerMode"] = value;
+                this["EnableHlae"] = value;
             }
         }
         
@@ -1219,6 +1219,30 @@ namespace Manager.Properties {
             }
             set {
                 this["AskThirdPartyConfirmation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HlaeConfigParentFolderPath {
+            get {
+                return ((string)(this["HlaeConfigParentFolderPath"]));
+            }
+            set {
+                this["HlaeConfigParentFolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool EnableHlaeConfigParent {
+            get {
+                return ((bool)(this["EnableHlaeConfigParent"]));
+            }
+            set {
+                this["EnableHlaeConfigParent"] = value;
             }
         }
     }

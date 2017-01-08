@@ -67,10 +67,6 @@
     <MultilingualFallbackLanguage>en-US</MultilingualFallbackLanguage>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AfxCppCli, Version=1.0.5707.30208, Culture=neutral, processorArchitecture=x86">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Downloads\Compressed\advancedfx-master\AfxGui\Resources\AfxCppCli.dll</HintPath>
-    </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.3.0.19026, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
       <Private>True</Private>
@@ -81,6 +77,10 @@
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Platform, Version=5.3.0.19032, Culture=neutral, PublicKeyToken=5f873c45e98af8a1, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.3.0.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="MahApps.Metro, Version=1.3.0.0, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
@@ -166,6 +166,7 @@
     <Compile Include="Converters\StringToMinimalDateConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
+    <Compile Include="Exceptions\Launcher\HlaeNotFound.cs" />
     <Compile Include="Internals\Extensions.cs" />
     <Compile Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml.cs">
       <DependentUpon>MultiSelectComboBox.xaml</DependentUpon>
@@ -186,6 +187,7 @@
     <Compile Include="Messages\ThirdPartySelected.cs" />
     <Compile Include="Messages\UpdateSuspectBannedCountMessage.cs" />
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
+    <Compile Include="Models\GitHub\LatestRelease.cs" />
     <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />
     <Compile Include="Models\Selectors\RoundTimelineTemplateSelector.cs" />
     <Compile Include="Models\PlayerColor.cs" />
@@ -196,6 +198,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\HlaeService.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
@@ -331,77 +334,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <None Include="AfxHook.dat">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\cfg\afx\updateWorkaround.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\cfg\afx\wh.cfg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\black.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\depth.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\greenmatte.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\invisible.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\white.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\cable.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\ct.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\level.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\level.vtf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\levelLit.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\smokeOverlay.vtf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\t.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods.vtf" />
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_emods_impactdust.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_fire.vmt" />
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\vistasmokev1_smokegrenade.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\assets\csgo\materials\afx\wh\weapon.vmt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\shaders\afx_line_ps20.fxo">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Include="resources\AfxHookSource\shaders\afx_line_vs20.fxo">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <Resource Include="resources\Entypo.ttf" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\GameLauncher.cs" />
@@ -644,39 +576,8 @@
     <Resource Include="resources\images\model.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AfxCppCli.dll" />
-    <Content Include="AfxHookSource.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="app.ico" />
     <Content Include="boiler.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Half.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Iex-2_2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IexMath-2_2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IlmImf-2_2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="IlmThread-2_2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Imath-2_2.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="msvcp100.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="msvcp140.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="msvcr100.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Resource Include="resources\vdm\main.txt" />
@@ -691,12 +592,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="steam_appid.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="vcruntime140.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="zlib1.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

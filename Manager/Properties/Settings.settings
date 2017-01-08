@@ -197,7 +197,7 @@
     <Setting Name="ShowBanColumns" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="MoviemakerMode" Type="System.Boolean" Scope="User">
+    <Setting Name="EnableHlae" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CsgoExePath" Type="System.String" Scope="User">
@@ -301,6 +301,12 @@
     </Setting>
     <Setting Name="AskThirdPartyConfirmation" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="HlaeConfigParentFolderPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="EnableHlaeConfigParent" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

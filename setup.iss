@@ -115,9 +115,6 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}"
 
 [Files]
-Source: "Manager\bin\x86\Release\AfxCppCli.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\AfxHook.dat"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\AfxHookSource.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\boiler.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe"; DestDir: "{app}"; Flags: ignoreversion 
@@ -131,19 +128,10 @@ Source: "Manager\bin\x86\Release\DemoInfo.dll"; DestDir: "{app}"; Flags: ignorev
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Half.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Hardcodet.Wpf.TaskbarNotification.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Iex-2_2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\IexMath-2_2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\IlmImf-2_2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\IlmThread-2_2.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Imath-2_2.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Microsoft.Practices.ServiceLocation.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\msvcp100.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\msvcp140.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\msvcr100.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Nito.AsyncEx.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Nito.AsyncEx.Enlightenment.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -161,10 +149,8 @@ Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.Data.dll"; DestDir: "{
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.DataVisualization.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.Input.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\vcruntime140.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\WpfPageTransitions.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\WriteableBitmapEx.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\zlib1.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; Translations
 Source: "Manager\bin\x86\Release\ar\*"; DestDir: "{app}\ar"; Flags: ignoreversion recursesubdirs createallsubdirs
