@@ -392,8 +392,8 @@
           <note from="MultilingualBuild" annotates="source" priority="2">HeadShot</note>
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
-          <source>Ignore ban occured after demo date</source>
-          <target state="final">Ignorer bandlys forkommet efter demo dato</target>
+          <source>Ignore ban occured before demo date</source>
+          <target state="final">Ignorer bandlys forkommet før demo dato</target>
         </trans-unit>
         <trans-unit id="ImportCustomData" translate="yes" xml:space="preserve">
           <source>Import custom data</source>

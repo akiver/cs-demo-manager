@@ -413,7 +413,7 @@
     <comment>HeadShot</comment>
   </data>
   <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
-    <value>Ignore ban occured after demo date</value>
+    <value>Ignore ban occured before demo date</value>
   </data>
   <data name="ImportCustomData" xml:space="preserve">
     <value>Import custom data</value>

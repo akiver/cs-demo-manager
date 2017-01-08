@@ -392,8 +392,9 @@
           <note from="MultilingualBuild" annotates="source" priority="2">HeadShot</note>
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
-          <source>Ignore ban occured after demo date</source>
-          <target state="final">忽略封禁产生在DEMO日期后</target>
+          <source>Ignore ban occured before demo date</source>
+          <target state="needs-review-translation">忽略封禁产生在DEMO日期后</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ImportCustomData" translate="yes" xml:space="preserve">
           <source>Import custom data</source>

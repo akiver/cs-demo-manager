@@ -4107,7 +4107,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ignore ban occured after demo date.
+        ///   Looks up a localized string similar to Ignore ban occured before demo date.
         /// </summary>
         public static string IgnoreBanOccuredAfterDemoDate {
             get {

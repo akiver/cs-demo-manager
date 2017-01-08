@@ -404,8 +404,8 @@
           <target state="final">Exporter données utilisateur</target>
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
-          <source>Ignore ban occured after demo date</source>
-          <target state="final">Ignorer les bans ultérieurs à la date des démos</target>
+          <source>Ignore ban occured before demo date</source>
+          <target state="final">Ignorer les bans antérieurs à la date des démos</target>
         </trans-unit>
         <trans-unit id="ImportCustomData" translate="yes" xml:space="preserve">
           <source>Import custom data</source>
