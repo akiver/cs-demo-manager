@@ -358,6 +358,7 @@ namespace Manager.ViewModel
 					_demosService.SelectedStatsAccountSteamId = steamId;
 					_accountStatsService.SelectedStatsAccountSteamId = steamId;
 					_cacheService.Filter.SteamId = steamId;
+					IsShowAllAccounts = false;
 				}
 				Settings.Default.Save();
 				RaisePropertyChanged(() => ShowOnlyAccountStats);
