@@ -280,7 +280,7 @@
     <comment>HeadShot</comment>
   </data>
   <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
-    <value>Ignorer bandlys forkommet efter demo dato</value>
+    <value>Ignorer bandlys forkommet før demo dato</value>
   </data>
   <data name="ImportCustomData" xml:space="preserve">
     <value>Importer brugerdefineret data</value>
