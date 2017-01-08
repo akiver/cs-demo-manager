@@ -224,7 +224,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillWonCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillLossCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.EntryHoldKillWinPercent);
-					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillPerDeath);
+					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillPerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AssistPerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.DeathPerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AverageDamagePerRound);
