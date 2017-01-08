@@ -5,7 +5,7 @@ namespace Core
 {
 	public sealed class Logger
 	{
-		public const string LOG_FILENAME = "errors.log";
+		public readonly string LogFilePath = AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "errors.log";
 
 		private static readonly Lazy<Logger> Lazy = new Lazy<Logger>(() => new Logger());
 
@@ -17,7 +17,7 @@ namespace Core
 
 		public void Log(Exception e)
 		{
-			using (StreamWriter sw = File.AppendText(LOG_FILENAME))
+			using (StreamWriter sw = File.AppendText(LogFilePath))
 			{
 				sw.WriteLine("{0} {1}: {2}", DateTime.Now.ToShortDateString(), DateTime.Now.ToShortTimeString(), e.Message);
 				sw.WriteLine("StackTrace:");

@@ -1408,12 +1408,12 @@ namespace Manager.ViewModel
 					?? (_navigateToLogFile = new RelayCommand(
 						async () =>
 						{
-							if (!File.Exists(AppDomain.CurrentDomain.BaseDirectory + Logger.LOG_FILENAME))
+							if (!File.Exists(Logger.Instance.LogFilePath))
 							{
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogNoErrorsFile, MessageDialogStyle.Affirmative);
 								return;
 							}
-							string argument = "/select, \"" + AppDomain.CurrentDomain.BaseDirectory + Logger.LOG_FILENAME + "\"";
+							string argument = "/select, \"" + Logger.Instance.LogFilePath + "\"";
 							Process.Start("explorer.exe", argument);
 						}));
 			}
