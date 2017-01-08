@@ -24,6 +24,8 @@ namespace Services.Concrete.Excel
 
 		private RoundsSheet _roundsSheet;
 
+		private KillsSheet _killsSheet;
+
 		public MultipleExport(List<Demo> demos, long selectedStatsAccountSteamId = 0)
 		{
 			_demos = demos;
@@ -50,6 +52,8 @@ namespace Services.Concrete.Excel
 			await _weaponsSheet.Generate();
 			_roundsSheet = new RoundsSheet(Workbook, _demos);
 			await _roundsSheet.Generate();
+			_killsSheet = new KillsSheet(Workbook, _demos);
+			await _killsSheet.Generate();
 
 			return Workbook;
 		}

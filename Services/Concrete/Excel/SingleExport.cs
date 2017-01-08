@@ -27,6 +27,8 @@ namespace Services.Concrete.Excel
 
 		private EntryKillsTeamSheet _entryKillsTeamSheet;
 
+		private KillsSheet _killsSheet;
+
 		public SingleExport(Demo demo)
 		{
 			_demo = demo;
@@ -42,6 +44,8 @@ namespace Services.Concrete.Excel
 			await _playersSheet.Generate();
 			_roundsSheet = new RoundsSheet(Workbook, _demo);
 			await _roundsSheet.Generate();
+			_killsSheet = new KillsSheet(Workbook, _demo);
+			await _killsSheet.Generate();
 			_entryHoldKillsRoundSheet = new EntryHoldKillsRoundSheet(Workbook, _demo);
 			await _entryHoldKillsRoundSheet.Generate();
 			_entryHoldKillsPlayerSheet = new EntryHoldKillsPlayerSheet(Workbook, _demo);
