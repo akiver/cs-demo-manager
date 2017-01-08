@@ -61,6 +61,15 @@ namespace Core.Models.Events
 		[JsonProperty("is_headshot")]
 		public bool IsHeadshot { get; set; }
 
+		[JsonProperty("killer_is_controlling_bot")]
+		public bool KillerIsControllingBot { get; set; }
+
+		[JsonProperty("killed_is_controlling_bot")]
+		public bool KilledIsControllingBot { get; set; }
+
+		[JsonProperty("assister_is_controlling_bot")]
+		public bool AssisterIsControllingBot { get; set; }
+
 		[JsonIgnore]
 		public override string Message => KillerName + " killed " + KilledName + " with " + Weapon.Name;
 

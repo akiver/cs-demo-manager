@@ -218,7 +218,13 @@ namespace Services.Concrete.Analyzer
 						killer.RoundsMoneyEarned[CurrentRound.Number] += weapon.KillAward;
 				}
 
+				killEvent.KillerIsControllingBot = e.Killer.SteamID != 0 && killer.IsControllingBot;
 				ProcessTradeKill(killEvent);
+			}
+
+			if (killed != null)
+			{
+				killEvent.KilledIsControllingBot = e.Victim.SteamID != 0 && killed.IsControllingBot;
 			}
 
 			// Human killed human
@@ -269,6 +275,7 @@ namespace Services.Concrete.Analyzer
 				{
 					killEvent.AssisterSteamId = e.Assister.SteamID;
 					killEvent.AssisterName = e.Assister.Name;
+					killEvent.AssisterIsControllingBot = e.Assister.SteamID != 0 && assister.IsControllingBot;
 					assister.Assists.Add(killEvent);
 				}
 			}
