@@ -263,23 +263,26 @@ namespace Services.Concrete.Analyzer
 
 			if (AnalyzeFlashbang)
 			{
-				foreach (DemoInfo.Player player in Parser.PlayingParticipants)
+				if (LastPlayerExplodedFlashbang != null)
 				{
-					Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
-					if (pl != null && player.FlashDuration >= pl.FlashDurationTemp)
+					foreach (DemoInfo.Player player in Parser.PlayingParticipants)
 					{
-						PlayerBlindedEvent playerBlindedEvent = new PlayerBlindedEvent(Parser.CurrentTick, Parser.CurrentTime)
+						Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+						if (pl != null && player.FlashDuration >= pl.FlashDurationTemp)
 						{
-							ThrowerSteamId = LastPlayerExplodedFlashbang.SteamId,
-							ThrowerName = LastPlayerExplodedFlashbang.Name,
-							ThrowerTeamName = LastPlayerExplodedFlashbang.TeamName,
-							VictimSteamId = pl.SteamId,
-							VictimName = pl.Name,
-							VictimTeamName = pl.TeamName,
-							RoundNumber = CurrentRound.Number,
-							Duration = player.FlashDuration - pl.FlashDurationTemp
-						};
-						Demo.PlayerBlinded.Add(playerBlindedEvent);
+							PlayerBlindedEvent playerBlindedEvent = new PlayerBlindedEvent(Parser.CurrentTick, Parser.CurrentTime)
+							{
+								ThrowerSteamId = LastPlayerExplodedFlashbang.SteamId,
+								ThrowerName = LastPlayerExplodedFlashbang.Name,
+								ThrowerTeamName = LastPlayerExplodedFlashbang.TeamName,
+								VictimSteamId = pl.SteamId,
+								VictimName = pl.Name,
+								VictimTeamName = pl.TeamName,
+								RoundNumber = CurrentRound.Number,
+								Duration = player.FlashDuration - pl.FlashDurationTemp
+							};
+							Demo.PlayerBlinded.Add(playerBlindedEvent);
+						}
 					}
 				}
 				AnalyzeFlashbang = false;
