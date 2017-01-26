@@ -52,6 +52,7 @@ namespace Services.Concrete.Analyzer
 			Parser.PlayerTeam += HandlePlayerTeam;
 			Parser.SayText += HandleSayText;
 			Parser.SayText2 += HandleSayText2;
+			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 		}
 
 		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
@@ -158,7 +159,7 @@ namespace Services.Concrete.Analyzer
 		{
 			base.HandleRoundOfficiallyEnd(sender, e);
 
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || IsFreezetime) return;
 
 			if (Parser.CTScore == 15 && Parser.TScore == 15)
 			{
@@ -172,7 +173,7 @@ namespace Services.Concrete.Analyzer
 
 		protected new void HandlePlayerKilled(object sender, PlayerKilledEventArgs e)
 		{
-			if (!IsMatchStarted || e.Victim == null) return;
+			if (!IsMatchStarted || IsFreezetime || e.Victim == null) return;
 
 			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
 			if (weapon == null) return;

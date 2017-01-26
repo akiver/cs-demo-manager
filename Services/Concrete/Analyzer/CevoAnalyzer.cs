@@ -73,6 +73,7 @@ namespace Services.Concrete.Analyzer
 			Parser.PlayerTeam += HandlePlayerTeam;
 			Parser.SayText += HandleSayText;
 			Parser.SayText2 += HandleSayText2;
+			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 		}
 
 		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
@@ -146,7 +147,7 @@ namespace Services.Concrete.Analyzer
 
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || IsFreezetime) return;
 
 			CheckForSpecialClutchEnd();
 			UpdateKillsCount();

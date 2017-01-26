@@ -92,6 +92,7 @@ namespace Services.Concrete.Analyzer
 			Parser.SayText2 += HandleSayText2;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
 			Parser.RoundFinal += HandleRoundFinal;
+			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 		}
 
 		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)

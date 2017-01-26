@@ -169,7 +169,7 @@ namespace Services.Concrete.Analyzer
 
 			base.HandleRoundOfficiallyEnd(sender, e);
 
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || IsFreezetime) return;
 
 			int score = Demo.ScoreTeam1 + Demo.ScoreTeam2;
 			if (score < 15) return;

@@ -41,6 +41,9 @@ namespace Services.Concrete.Analyzer
 		/// I use this because the event buytime_ended isn't raised everytime
 		/// </summary>
 		public bool IsFirstShotOccured { get; set; } = false;
+		/// <summary>
+		/// Mainly used to detect game pauses
+		/// </summary>
 		public bool IsFreezetime { get; set; } = false;
 		public int MoneySaveAmoutTeam1 { get; set; } = 0;
 		public int MoneySaveAmoutTeam2 { get; set; } = 0;
@@ -335,7 +338,7 @@ namespace Services.Concrete.Analyzer
 		/// <param name="e"></param>
 		protected void HandlePlayerKilled(object sender, PlayerKilledEventArgs e)
 		{
-			if (!IsMatchStarted || e.Victim == null) return;
+			if (!IsMatchStarted || IsFreezetime || e.Victim == null) return;
 
 			Player killed = Demo.Players.FirstOrDefault(player => player.SteamId == e.Victim.SteamID);
 			if (killed == null) return;
@@ -464,7 +467,7 @@ namespace Services.Concrete.Analyzer
 		protected void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
 			IsRoundEndOccured = true;
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || IsFreezetime) return;
 
 			CurrentRound.EndReason = e.Reason;
 			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
@@ -508,7 +511,7 @@ namespace Services.Concrete.Analyzer
 		/// <param name="e"></param>
 		protected void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || IsFreezetime) return;
 
 			// sometimes round_end isn't triggered, I update the score here
 			if (!IsRoundEndOccured)
@@ -1220,7 +1223,7 @@ namespace Services.Concrete.Analyzer
 
 		protected void HandleRoundMvp(object sender, RoundMVPEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || IsFreezetime) return;
 
 			if (e.Player.SteamID == 0) return;
 			Player playerMvp = Demo.Players.FirstOrDefault(player => player.SteamId == e.Player.SteamID);
@@ -1370,6 +1373,9 @@ namespace Services.Concrete.Analyzer
 
 		protected void CreateNewRound()
 		{
+			// do not create a new round if the freezetime didn't ended, it means the game is paused
+			if (IsFreezetime) return;
+
 			CurrentRound = new Round
 			{
 				Tick = Parser.IngameTick,
@@ -1379,6 +1385,7 @@ namespace Services.Concrete.Analyzer
 				WinnerSide = Side.None
 			};
 
+			IsFreezetime = true;
 			IsRoundEndOccured = false;
 			CurrentClutch = null;
 			LastPlayerExplodedFlashbang = null;
