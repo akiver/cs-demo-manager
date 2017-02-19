@@ -334,13 +334,11 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipment value CT</source>
-          <target state="needs-review-translation">1队装备价值</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">1队装备价值</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipment value T</source>
-          <target state="needs-review-translation">2队装备价值</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">2队装备价值</target>
         </trans-unit>
         <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
           <source>Export custom data</source>
@@ -395,8 +393,7 @@
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
           <source>Ignore ban occured before demo date</source>
-          <target state="needs-review-translation">忽略封禁产生在DEMO日期后</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">忽略封禁产生在DEMO日期后</target>
         </trans-unit>
         <trans-unit id="ImportCustomData" translate="yes" xml:space="preserve">
           <source>Import custom data</source>
@@ -536,13 +533,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start money CT</source>
-          <target state="needs-review-translation">1队开局经济</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">1队开局经济</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start money T</source>
-          <target state="needs-review-translation">2队开局经济</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">2队开局经济</target>
         </trans-unit>
         <trans-unit id="Status" translate="yes" xml:space="preserve">
           <source>Status</source>
@@ -923,13 +918,11 @@
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
           <source>EV CT ($)</source>
-          <target state="needs-review-translation">1队EV ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">1队EV ($)</target>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
           <source>EV T ($)</source>
-          <target state="needs-review-translation">2队EV ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">2队EV ($)</target>
         </trans-unit>
         <trans-unit id="HeaderHsPercent" translate="yes" xml:space="preserve">
           <source>HS%</source>
@@ -953,13 +946,11 @@
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>SM CT ($)</source>
-          <target state="needs-review-translation">1队SM ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">1队SM ($)</target>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>SM T ($)</source>
-          <target state="needs-review-translation">2队SM ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">2队SM ($)</target>
         </trans-unit>
         <trans-unit id="HeaderTeamKill" translate="yes" xml:space="preserve">
           <source>FF</source>
@@ -1105,13 +1096,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipement Value CT ($)</source>
-          <target state="needs-review-translation">1队装备价值 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">1队装备价值 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipement Value T ($)</source>
-          <target state="needs-review-translation">2队装备价值 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">2队装备价值 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
@@ -1311,13 +1300,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start Money CT ($)</source>
-          <target state="needs-review-translation">1队开局经济 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">1队开局经济 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start Money T ($)</source>
-          <target state="needs-review-translation">2队开局经济 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">2队开局经济 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -1509,13 +1496,11 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
           <source>EV CT (Equipment Value CT ($))</source>
-          <target state="needs-review-translation">EVT1 (1队装备价值 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EVT1 (1队装备价值 ($))</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
           <source>EV T (Equipment Value T ($))</source>
-          <target state="needs-review-translation">EVT2 (2队装备价值  ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EVT2 (2队装备价值  ($))</target>
         </trans-unit>
         <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
           <source>RWS (ESEA Round Win Share)</source>
@@ -1603,13 +1588,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
           <source>SM CT (Start Money CT ($))</source>
-          <target state="needs-review-translation">SMT1 (1队开局经济 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SMT1 (1队开局经济 ($))</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
           <source>SM T (Start Money T ($))</source>
-          <target state="needs-review-translation">SMT2 (2队开局经济  ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SMT2 (2队开局经济  ($))</target>
         </trans-unit>
         <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
           <source>TNT (Team Name Trouble)</source>
@@ -2670,8 +2653,7 @@ You can find more information on http://csgo-demos-manager.com.</source>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
           <source>Equipment</source>
-          <target state="needs-review-translation">装备</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">装备</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>
@@ -3344,101 +3326,101 @@ Message Error :
         </trans-unit>
         <trans-unit id="HeaderToolTipTotalMatchesTime" translate="yes" xml:space="preserve">
           <source>Total Matches Time (hours / minutes)</source>
-          <target state="needs-review-translation">总比赛时间(小时 / 分钟)</target>
+          <target state="final">总共游戏时间 (小时 / 分钟)</target>
         </trans-unit>
         <trans-unit id="HeaderTotalMatchesTime" translate="yes" xml:space="preserve">
           <source>TMT</source>
-          <target state="new">TMT</target>
+          <target state="final">TMT</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Total Match Time</note>
         </trans-unit>
         <trans-unit id="HeaderAverageMatchTime" translate="yes" xml:space="preserve">
           <source>AMT</source>
-          <target state="new">AMT</target>
+          <target state="final">AMT</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Average Match Time</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipAverageMatchTime" translate="yes" xml:space="preserve">
           <source>Average Match Time (minutes)</source>
-          <target state="translated">平均比赛时间(小时 / 分钟)</target>
+          <target state="final">平均游戏时间 (平均游戏时间)</target>
         </trans-unit>
         <trans-unit id="TotalMatchTimeValue" translate="yes" xml:space="preserve">
           <source>{0}h {1}m</source>
-          <target state="translated">{0}小时 {1}分钟</target>
+          <target state="final">{0}小时 {1}分钟</target>
         </trans-unit>
         <trans-unit id="AverageMatchTimeValue" translate="yes" xml:space="preserve">
           <source>{0} minutes</source>
-          <target state="needs-review-translation">{0} 分钟</target>
+          <target state="final">{0} 分钟</target>
         </trans-unit>
         <trans-unit id="ToolTipExportChat" translate="yes" xml:space="preserve">
           <source>Export demo chat</source>
-          <target state="needs-review-translation">导出demo聊天文本</target>
+          <target state="final">输出DEMO聊天记录</target>
         </trans-unit>
         <trans-unit id="ExportChat" translate="yes" xml:space="preserve">
           <source>Export chat</source>
-          <target state="needs-review-translation">导出聊天</target>
+          <target state="final">输出聊天记录</target>
         </trans-unit>
         <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
           <source>Chat messages file has been created.</source>
-          <target state="needs-review-translation">聊天信息文件已经创建</target>
+          <target state="final">聊天记录文件已经建立</target>
         </trans-unit>
         <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
           <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
-          <target state="needs-review-translation">没有找到聊天信息. (此功能只在当服务端的 "tv_relaytextchat" 参数没有被设置成 "0"的非Valve匹配服务器下有效)</target>
+          <target state="final">没找到聊天记录</target>
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="needs-review-translation">没有找到{0} 这个选项</target>
+          <target state="final">No {0} 找到为这个选择</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
-          <target state="needs-review-translation">射击</target>
+          <target state="final">枪</target>
         </trans-unit>
         <trans-unit id="DialogDemoShareCodeUnavailable" translate="yes" xml:space="preserve">
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
-          <target state="needs-review-translation">这个demo不是来自Valve官方服务器或者.info文件已丢失</target>
+          <target state="final">这个demo不是来自V社官方匹配服务器或者.info文件缺失</target>
         </trans-unit>
         <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
           <source>Share code copied to clipboard.</source>
-          <target state="needs-review-translation">复制分享代码到剪切板</target>
+          <target state="final">分享码已被复制到剪贴板</target>
         </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
-          <target state="needs-review-translation">复制分享代码</target>
+          <target state="final">复制分享码</target>
         </trans-unit>
         <trans-unit id="ShowOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show on third party application</source>
-          <target state="needs-review-translation">在第三方应用上显示</target>
+          <target state="final">在第三方应用上显示</target>
         </trans-unit>
         <trans-unit id="DialogShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</source>
-          <target state="needs-review-translation">分享代码不可用，只有来自Valve官方匹配服务器的demo或者存在.info文件的情况下可用</target>
+          <target state="final">分享码不可用. 只有当demos来自V社官方匹配服务器并且.info文件存在该功能才可用。</target>
         </trans-unit>
         <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
           <source>Yes and don't ask next time</source>
-          <target state="needs-review-translation">是，并且下次不再询问</target>
+          <target state="final">是的并且下次不要问我</target>
         </trans-unit>
         <trans-unit id="DialogSendThirdPartyConfirmation" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}. Do you want to continue?</source>
-          <target state="needs-review-translation">你将要发送demo分享代码到{0}，你想继续吗？</target>
+          <target state="final">你将发送demo分享码到 {0}. 是否继续?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileSendingShareCode" translate="yes" xml:space="preserve">
           <source>An error occured while sending the share code.</source>
-          <target state="needs-review-translation">发送共享代码时发生错误</target>
+          <target state="final">产生了一个错误-当发送分享码时</target>
         </trans-unit>
         <trans-unit id="DialogSendShareCodeWarning" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}.</source>
-          <target state="needs-review-translation">你将要发送demo分享代码到{0}</target>
+          <target state="final">你将发送demo分享码到 {0}.</target>
         </trans-unit>
         <trans-unit id="DialogSelectThirdParty" translate="yes" xml:space="preserve">
           <source>Select third party application</source>
-          <target state="needs-review-translation">选择第三方应用程序</target>
+          <target state="final">选择第三方应用</target>
         </trans-unit>
         <trans-unit id="ToolTipShowDemoOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show demo's details on a third party application</source>
-          <target state="needs-review-translation">在第三方应用程序上显示demo详情</target>
+          <target state="final">在第三方应用上显示demo详情</target>
         </trans-unit>
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
-          <target state="needs-review-translation">你的配置文件已经损坏，请重启应用程序来重置你的配置文件</target>
+          <target state="final">你的配置文件是损坏的。请重启应用程序来重置你的配置。</target>
         </trans-unit>
         <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
           <source>HLAE not found. Please install it by enabling it from settings.</source>

@@ -2480,10 +2480,18 @@
     <value>翻译</value>
   </data>
   <data name="HeaderToolTipTotalMatchesTime" xml:space="preserve">
-    <value>总比赛时间(小时 / 分钟)</value>
+    <value>总共游戏时间 (小时 / 分钟)</value>
+  </data>
+  <data name="HeaderTotalMatchesTime" xml:space="preserve">
+    <value>TMT</value>
+    <comment>Total Match Time</comment>
+  </data>
+  <data name="HeaderAverageMatchTime" xml:space="preserve">
+    <value>AMT</value>
+    <comment>Average Match Time</comment>
   </data>
   <data name="HeaderToolTipAverageMatchTime" xml:space="preserve">
-    <value>平均比赛时间(小时 / 分钟)</value>
+    <value>平均游戏时间 (平均游戏时间)</value>
   </data>
   <data name="TotalMatchTimeValue" xml:space="preserve">
     <value>{0}小时 {1}分钟</value>
@@ -2492,58 +2500,58 @@
     <value>{0} 分钟</value>
   </data>
   <data name="ToolTipExportChat" xml:space="preserve">
-    <value>导出demo聊天文本</value>
+    <value>输出DEMO聊天记录</value>
   </data>
   <data name="ExportChat" xml:space="preserve">
-    <value>导出聊天</value>
+    <value>输出聊天记录</value>
   </data>
   <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>聊天信息文件已经创建</value>
+    <value>聊天记录文件已经建立</value>
   </data>
   <data name="DialogNoChatFound" xml:space="preserve">
-    <value>没有找到聊天信息. (此功能只在当服务端的 "tv_relaytextchat" 参数没有被设置成 "0"的非Valve匹配服务器下有效)</value>
+    <value>没找到聊天记录</value>
   </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
-    <value>没有找到{0} 这个选项</value>
+    <value>No {0} 找到为这个选择</value>
   </data>
   <data name="Shots" xml:space="preserve">
-    <value>射击</value>
+    <value>枪</value>
   </data>
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
-    <value>这个demo不是来自Valve官方服务器或者.info文件已丢失</value>
+    <value>这个demo不是来自V社官方匹配服务器或者.info文件缺失</value>
   </data>
   <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>复制分享代码到剪切板</value>
+    <value>分享码已被复制到剪贴板</value>
   </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
-    <value>复制分享代码</value>
+    <value>复制分享码</value>
   </data>
   <data name="ShowOnThirdParty" xml:space="preserve">
     <value>在第三方应用上显示</value>
   </data>
   <data name="DialogShareCodeNotAvailable" xml:space="preserve">
-    <value>分享代码不可用，只有来自Valve官方匹配服务器的demo或者存在.info文件的情况下可用</value>
+    <value>分享码不可用. 只有当demos来自V社官方匹配服务器并且.info文件存在该功能才可用。</value>
   </data>
   <data name="YesDontAsk" xml:space="preserve">
-    <value>是，并且下次不再询问</value>
+    <value>是的并且下次不要问我</value>
   </data>
   <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
-    <value>你将要发送demo分享代码到{0}，你想继续吗？</value>
+    <value>你将发送demo分享码到 {0}. 是否继续?</value>
   </data>
   <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
-    <value>发送共享代码时发生错误</value>
+    <value>产生了一个错误-当发送分享码时</value>
   </data>
   <data name="DialogSendShareCodeWarning" xml:space="preserve">
-    <value>你将要发送demo分享代码到{0}</value>
+    <value>你将发送demo分享码到 {0}.</value>
   </data>
   <data name="DialogSelectThirdParty" xml:space="preserve">
-    <value>选择第三方应用程序</value>
+    <value>选择第三方应用</value>
   </data>
   <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
-    <value>在第三方应用程序上显示demo详情</value>
+    <value>在第三方应用上显示demo详情</value>
   </data>
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
-    <value>你的配置文件已经损坏，请重启应用程序来重置你的配置文件</value>
+    <value>你的配置文件是损坏的。请重启应用程序来重置你的配置。</value>
   </data>
   <data name="DialogEnableHlaeWarning" xml:space="preserve">
     <value>开启视频作者模式将改变游戏启动方式(当你点击所有"观看"按钮) 
