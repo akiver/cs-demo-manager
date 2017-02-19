@@ -388,18 +388,26 @@ namespace Manager.ViewModel
 
 		private static async Task<bool> CheckUpdate()
 		{
-			using (var httpClient = new HttpClient())
+			try
 			{
-				string url = AppSettings.APP_WEBSITE + "/update";
-				HttpResponseMessage result = await httpClient.GetAsync(url);
-				string version = await result.Content.ReadAsStringAsync();
-				Version lastVersion = new Version(version);
-
-				var resultCompare = AppSettings.APP_VERSION.CompareTo(lastVersion);
-				if (resultCompare < 0)
+				using (var httpClient = new HttpClient())
 				{
-					return true;
+					string url = AppSettings.APP_WEBSITE + "/update";
+					HttpResponseMessage result = await httpClient.GetAsync(url);
+					string version = await result.Content.ReadAsStringAsync();
+					Version lastVersion = new Version(version);
+
+					var resultCompare = AppSettings.APP_VERSION.CompareTo(lastVersion);
+					if (resultCompare < 0)
+					{
+						return true;
+					}
+					return false;
 				}
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
 				return false;
 			}
 		}
