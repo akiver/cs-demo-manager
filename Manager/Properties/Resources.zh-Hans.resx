@@ -2491,7 +2491,7 @@
     <comment>Average Match Time</comment>
   </data>
   <data name="HeaderToolTipAverageMatchTime" xml:space="preserve">
-    <value>平均游戏时间 (平均游戏时间)</value>
+    <value>平均比赛时间(分钟)</value>
   </data>
   <data name="TotalMatchTimeValue" xml:space="preserve">
     <value>{0}小时 {1}分钟</value>

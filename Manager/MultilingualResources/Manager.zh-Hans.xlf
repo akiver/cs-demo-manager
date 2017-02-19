@@ -3340,7 +3340,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="HeaderToolTipAverageMatchTime" translate="yes" xml:space="preserve">
           <source>Average Match Time (minutes)</source>
-          <target state="final">平均游戏时间 (平均游戏时间)</target>
+          <target state="translated">平均比赛时间(分钟)</target>
         </trans-unit>
         <trans-unit id="TotalMatchTimeValue" translate="yes" xml:space="preserve">
           <source>{0}h {1}m</source>
