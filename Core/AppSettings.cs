@@ -176,6 +176,8 @@ namespace Core
 		{
 			string steamPath = (string)Registry.GetValue("HKEY_CURRENT_USER\\Software\\Valve\\Steam", "SteamPath", "");
 
+			if (steamPath == null) return null;
+
 			string pathsFile = Path.Combine(steamPath, "steamapps", "libraryfolders.vdf");
 
 			if (!File.Exists(pathsFile))
