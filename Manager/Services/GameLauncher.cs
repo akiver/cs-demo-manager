@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using Core;
 using Core.Models;
 using Core.Models.Events;
@@ -36,6 +37,7 @@ namespace Manager.Services
 		};
 		private const string ARGUMENT_SEPARATOR = " ";
 		private readonly Demo _demo;
+		private bool _removeVdmFile = false;
 
 		public GameLauncher(Demo demo)
 		{
@@ -45,7 +47,7 @@ namespace Manager.Services
 			_arguments.Add(demo.Path);
 		}
 
-		public void StartGame()
+		public async void StartGame()
 		{
 			SetupResolutionParameters();
 			KillCsgo();
@@ -87,6 +89,21 @@ namespace Manager.Services
 				string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
 				_process.StartInfo.Arguments = args + " " + Properties.Settings.Default.LaunchParameters;
 				_process.Start();
+			}
+
+			if (_removeVdmFile)
+			{
+				await Task.Delay(3000);
+				Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
+				if (processes.Length > 0)
+				{
+					Process p = processes[0];
+					p.EnableRaisingEvents = true;
+					p.Exited += (sender, args) =>
+					{
+						DeleteVdmFile();
+					};
+				}
 			}
 		}
 
@@ -167,6 +184,7 @@ namespace Manager.Services
 			if (steamId != -1) generated += string.Format(Properties.Resources.spec_player, 2, tick + 1, steamId);
 			string content = string.Format(Properties.Resources.main, generated);
 			File.WriteAllText(_demo.GetVdmFilePath(), content);
+			_removeVdmFile = true;
 			StartGame();
 		}
 
@@ -231,7 +249,6 @@ namespace Manager.Services
 								generated += string.Format(Properties.Resources.screen_fade_start, ++actionCount, startToTick - nextActionDelayCount);
 								generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
 								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
-								
 							}
 
 							// find the tick where the smoke popped
@@ -330,6 +347,7 @@ namespace Manager.Services
 			generated += string.Format(Properties.Resources.stop_playback, ++actionCount, lastTick + nextActionDelayCount);
 			string content = string.Format(Properties.Resources.main, generated);
 			File.WriteAllText(_demo.GetVdmFilePath(), content);
+			_removeVdmFile = true;
 		}
 
 		private void GenerateHighLowVdm(bool isHighlight, bool isFromPlayerPerspective = true, string steamId = null)
@@ -387,6 +405,7 @@ namespace Manager.Services
 			generated += string.Format(Properties.Resources.stop_playback, ++actionCount, lastTick + nextActionDelayCount);
 			string content = string.Format(Properties.Resources.main, generated);
 			File.WriteAllText(_demo.GetVdmFilePath(), content);
+			_removeVdmFile = true;
 		}
 
 		private static string GetFastForwardMessage(EquipmentElement type)
