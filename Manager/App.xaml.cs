@@ -32,6 +32,7 @@ namespace Manager
 			"Leonardo (Brazilian)",
 			"Spidersouris (French)",
 			"Kacper \"sikl0`\" Olkis (Polish)",
+			"yRRCK (German)",
 		};
 
 		public App()
