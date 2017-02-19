@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Globalization;
@@ -31,6 +31,7 @@ namespace Manager
 			"Allan \"Michael\" Simonsen (Danish)",
 			"Leonardo (Brazilian)",
 			"Spidersouris (French)",
+			"Kacper \"sikl0`\" Olkis (Polish)",
 		};
 
 		public App()
