@@ -1,4 +1,4 @@
-﻿<controls:MetroWindow x:Class="Manager.MainWindow"
+<controls:MetroWindow x:Class="Manager.MainWindow"
 					  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					  xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
 					  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -426,6 +426,12 @@
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 								<CheckBox Content="{x:Static properties:Resources.Team2Name}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeam2NameColumn}"
+										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
+								<CheckBox Content="{x:Static properties:Resources.CounterTerrorists}"
+										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowCtTeamNameColumn}"
+										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
+								<CheckBox Content="{x:Static properties:Resources.Terrorists}"
+										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTteamNameColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 								<CheckBox Content="{x:Static properties:Resources.TeamNameTroubleFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn}"

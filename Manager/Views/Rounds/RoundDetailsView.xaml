@@ -190,10 +190,10 @@
 						<TextBlock Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}">
 							<Run Text="{x:Static properties:Resources.StartMoney}" />
-							<Run Text="{Binding CurrentDemo.TeamCT.Name}" />
+							<Run Text="{Binding CurrentRound.TeamCtName}" />
 						</TextBlock>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.StartMoneyTeam1, StringFormat='{} {0}$'}"
+								   Text="{Binding CurrentRound.StartMoneyTeamCt, StringFormat='{} {0}$'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>
@@ -204,10 +204,10 @@
 						<TextBlock Grid.Column="0"
 								   Style="{StaticResource TextBlockHighlight}">
 							<Run Text="{x:Static properties:Resources.StartMoney}" />
-							<Run Text="{Binding CurrentDemo.TeamT.Name}" />
+							<Run Text="{Binding CurrentRound.TeamTname}" />
 						</TextBlock>
 						<TextBlock Grid.Column="1"
-								   Text="{Binding CurrentRound.StartMoneyTeam2, StringFormat='{} {0}$'}"
+								   Text="{Binding CurrentRound.StartMoneyTeamT, StringFormat='{} {0}$'}"
 								   Style="{StaticResource TextBlockStandard}"/>
 					</Grid>
 					<Grid>

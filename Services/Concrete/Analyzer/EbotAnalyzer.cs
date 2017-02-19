@@ -1,4 +1,3 @@
-﻿using System;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -15,6 +14,7 @@ namespace Services.Concrete.Analyzer
 	public class EbotAnalyzer : DemoAnalyzer
 	{
 		// Counter of player team swap (used detect end of a half)
+		// TODO remove
 		private int _playerTeamCount;
 
 		private bool _isMatchStartedOccured = false;
@@ -22,10 +22,6 @@ namespace Services.Concrete.Analyzer
 		private bool _isTeamsInitialized = false;
 
 		private bool _isRoundOffiallyEndedOccured = false;
-
-		private bool _isTeamsNameDetected = false;
-
-		private bool _isFinalRound = false;
 
 		/// <summary>
 		/// Used to avoid additional score update when a match is over (detected by eBot text)
@@ -38,8 +34,6 @@ namespace Services.Concrete.Analyzer
 		private bool _isFaceit = false;
 
 		private readonly Regex _scoreRegex = new Regex("^eBot: (.*) (?<score1>[0-9]+) - (?<score2>[0-9]+) (.*)$");
-
-		private readonly Regex _faceitScoreRegex = new Regex("^ (\\[FACEIT\\^?\\]|\\[ANNA\\^\\]) (.*) \\[(?<score1>[0-9]+) - (?<score2>[0-9]+)\\] (.*)$");
 
 		private readonly Regex _endMatchRegex = new Regex("^eBot: (.*) win(.*)$|^ \\[FACEIT\\^\\] (.*) won the match(.*)$");
 
@@ -91,7 +85,6 @@ namespace Services.Concrete.Analyzer
 			Parser.SayText += HandleSayText;
 			Parser.SayText2 += HandleSayText2;
 			Parser.PlayerDisconnect += HandlePlayerDisconnect;
-			Parser.RoundFinal += HandleRoundFinal;
 			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 		}
 
@@ -110,14 +103,26 @@ namespace Services.Concrete.Analyzer
 		{
 			base.HandleRoundOfficiallyEnd(sender, e);
 			_isRoundOffiallyEndedOccured = true;
-			// Don't stop the match for Faceit demos because there isn't warmup between end of the match and OT
-			if (!_isFaceit && CurrentRound.Number == 30) IsMatchStarted = false;
-		}
 
-		private void HandleRoundFinal(object sender, RoundFinalEventArgs e)
-		{
-			if (!_isFaceit && !IsMatchStarted && !IsOvertime) return;
-			_isFinalRound = true;
+			// count rounds played in case of overtime to detect overtime end
+			if (IsOvertime)
+			{
+				++RoundCountOvertime;
+				// if the number of rounds played is equals to the double of MR, the OT is over
+				if (MrOvertime * 2 == RoundCountOvertime)
+				{
+					Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
+					CreateNewOvertime();
+					RoundCountOvertime = 0;
+				}
+			}
+
+			// First OT detection
+			if (Parser.CTScore == 15 && Parser.TScore == 15)
+			{
+				IsOvertime = true;
+				CreateNewOvertime();
+			}
 		}
 
 		protected new void HandleWeaponFired(object sender, WeaponFiredEventArgs e)
@@ -129,15 +134,33 @@ namespace Services.Concrete.Analyzer
 		protected new void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
 		{
 			if (e.Swapped == null || e.Swapped.SteamID == 0) return;
+
+			// Keep track of the number team_player events to detect teams swap
+			if (e.OldTeam != e.NewTeam)
+			{
+				PlayerTeamCount++;
+				if (PlayerTeamCount > 7)
+				{
+					PlayerTeamCount = 0;
+					IsSwapTeamRequired = true;
+					// detect MR overtimes to be able to add OT at the right time
+					if (IsOvertime)
+					{
+						if (MrOvertime == 0) MrOvertime = Demo.ScoreTeamT + Demo.ScoreTeamCt - 30;
+						IsHalfMatch = !IsHalfMatch;
+					}
+				}
+			}
+
 			Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
 			if (player != null)
 			{
 				player.IsConnected = true;
 				player.Side = e.NewTeam.ToSide();
 			}
+
 			if (!IsMatchStarted) return;
 			if (e.Silent) _playerTeamCount++;
-			if (IsOvertime && e.Silent && _playerTeamCount == 10) IsHalfMatch = !IsHalfMatch;
 		}
 
 		protected void HandleLastRoundHalf(object sender, LastRoundHalfEventArgs e)
@@ -155,51 +178,16 @@ namespace Services.Concrete.Analyzer
 			if (e.Text == EBOT_LIVE || faceItLive.Success)
 			{
 				Demo.ResetStats(false);
-				AddTeams();
-				RoundCount = 0;
-				CreateNewRound();
+				InitMatch();
+				CreateNewRound(true);
 				IsMatchStarted = true;
 			}
 
 			Match scoreUpdateEbot = _scoreRegex.Match(e.Text);
-			Match scoreUpdateFaceit = _faceitScoreRegex.Match(e.Text);
 			// Score update
-			if (scoreUpdateEbot.Success || scoreUpdateFaceit.Success)
+			if (!scoreUpdateEbot.Success)
 			{
-				// sometimes the parser doesn't have the right team's name when they have been swapped
-				// use the first score update to know the right name of the teams
-				if (!_isTeamsNameDetected)
-				{
-					_isTeamsNameDetected = true;
-					if (Parser.CTClanName != Demo.TeamCT.Name)
-					{
-						foreach (Player player in Demo.Players)
-						{
-							player.TeamName = player.TeamName == Demo.TeamCT.Name ? Demo.TeamT.Name : Demo.TeamCT.Name;
-						}
-						Demo.TeamCT.Name = Parser.CTClanName;
-						Demo.TeamT.Name = Parser.TClanName;
-						Demo.TeamCT.Name = Parser.CTClanName;
-						Demo.TeamT.Name = Parser.TClanName;
-					}
-				}
-
-				int score1;
-				int score2;
-				if (scoreUpdateEbot.Success)
-				{
-					score1 = Convert.ToInt32(scoreUpdateEbot.Groups["score1"].Value);
-					score2 = Convert.ToInt32(scoreUpdateEbot.Groups["score2"].Value);
-				}
-				else
-				{
-					score1 = Convert.ToInt32(scoreUpdateFaceit.Groups["score1"].Value);
-					score2 = Convert.ToInt32(scoreUpdateFaceit.Groups["score2"].Value);
-					_isFaceit = true;
-				}
-
-				int scoreTotal = score1 + score2;
-				if (scoreTotal == 15) IsSwapTeamRequired = true;
+				_isFaceit = true;
 				return;
 			}
 
@@ -217,29 +205,10 @@ namespace Services.Concrete.Analyzer
 				// if eBot is waiting for !ready, the match isn't started
 				if (e.Text == PLEASE_WRITE_READY) IsMatchStarted = false;
 
-				// announce the beginning of the 1st OT side
-				if (e.Text == BEGIN_FIRST_SIDE_OVERTIME)
+				// announce the beginning of an overtime
+				if (e.Text == BEGIN_FIRST_SIDE_OVERTIME || e.Text == BEGIN_SECOND_SIDE_OVERTIME)
 				{
 					IsMatchStarted = true;
-					// Add the last OT played and create a new one
-					if (Demo.ScoreTeam1 + Demo.ScoreTeam2 > 30)
-					{
-						Application.Current.Dispatcher.Invoke(delegate
-						{
-							Demo.Overtimes.Add(CurrentOvertime);
-						});
-						CurrentOvertime = new Overtime
-						{
-							Number = ++OvertimeCount
-						};
-					}
-				}
-
-				// announce the beginning of the 2nd OT side
-				if (e.Text == BEGIN_SECOND_SIDE_OVERTIME)
-				{
-					IsMatchStarted = true;
-					IsSwapTeamRequired = true;
 				}
 			}
 		}
@@ -256,8 +225,9 @@ namespace Services.Concrete.Analyzer
 			Application.Current.Dispatcher.Invoke(delegate
 			{
 				if (!IsOvertime || !_isFaceit) Demo.Rounds.Add(CurrentRound);
-				if (IsOvertime) Demo.Overtimes.Add(CurrentOvertime);
 			});
+
+			IsMatchStarted = false;
 		}
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
@@ -269,9 +239,8 @@ namespace Services.Concrete.Analyzer
 				_isMatchStartedOccured = true;
 				// Reset demo start recording before
 				Demo.ResetStats(false);
-				AddTeams();
-				RoundCount = 0;
-				CreateNewRound();
+				InitMatch();
+				CreateNewRound(true);
 			}
 		}
 
@@ -279,46 +248,20 @@ namespace Services.Concrete.Analyzer
 		{
 			if (_playerTeamCount > 8 && !_isMatchEnded) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
+			UpdateTeams();
 			_isRoundOffiallyEndedOccured = false;
-
-			// Detect new OT for FaceIt demos
-			if (_isFaceit && IsOvertime && _isFinalRound)
-			{
-				Application.Current.Dispatcher.Invoke(delegate
-				{
-					Demo.Overtimes.Add(CurrentOvertime);
-				});
-				CurrentOvertime = new Overtime
-				{
-					Number = ++OvertimeCount
-				};
-				IsHalfMatch = false;
-			}
-			_isFinalRound = false;
-
-			// First OT detection for FaceIt demos
-			if (Parser.CTScore + Parser.TScore == 30)
-			{
-				IsOvertime = true;
-				CurrentOvertime = new Overtime
-				{
-					Number = ++OvertimeCount
-				};
-			}
 
 			// Reset until both scores > 0
 			// Sometimes parser scores are reseted at the end of the match, check the actual demo scores too
-			if (Parser.CTScore == 0 && Parser.TScore == 0
-				&& Demo.ScoreTeam1 < 16 && Demo.ScoreTeam2 < 16)
+			if (Parser.CTScore == 0 && Parser.TScore == 0 && Demo.ScoreTeamCt < 16 && Demo.ScoreTeamT < 16)
 			{
 				Demo.ResetStats(false);
-				RoundCount = 0;
-				AddTeams();
+				InitMatch();
 			}
 
 			CreateNewRound();
 
-			if (Demo.ScoreTeam1 + Demo.ScoreTeam2 == 15) IsHalfMatch = true;
+			if (Demo.ScoreTeamCt + Demo.ScoreTeamT == 15) IsHalfMatch = true;
 
 			if(!IsOvertime) return;
 
@@ -329,73 +272,116 @@ namespace Services.Concrete.Analyzer
 		{
 			base.HandleRoundEnd(sender, e);
 
-			Application.Current.Dispatcher.Invoke(delegate
-			{
-				if (IsLastRoundHalf) Demo.Rounds.Add(CurrentRound);
-			});
+			if (IsLastRoundHalf)
+				Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Add(CurrentRound));
 		}
 
 		protected new void HandleTickDone(object sender, TickDoneEventArgs e)
 		{
-			if (Parser.PlayingParticipants.Count() >= 10
-				&& Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == 0) == null
-				&& !_isTeamsInitialized)
+			if (!_isTeamsInitialized)
 			{
 				Application.Current.Dispatcher.Invoke(delegate
 				{
-					if (Demo.Players.Count < 10)
-					{
-						AddTeams();
-					}
-					else
-					{
-						_isTeamsInitialized = true;
-					}
+					if (Demo.Players.Count < 10) InitMatch();
 					Demo.Rounds.Clear();
-					RoundCount = 0;
 					CreateNewRound();
-					CurrentRound.EquipementValueTeam1 = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
-					CurrentRound.EquipementValueTeam2 = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
-					if (!string.IsNullOrEmpty(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
-					if (!string.IsNullOrEmpty(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
-					foreach (Player player in Demo.Players)
-					{
-						if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-							player.RoundsMoneyEarned[CurrentRound.Number] = 0;
-					}
+					// since some demos are already started we can't use the freezetime event
+					if (CurrentRound.Number == 1) IsFreezetime = false;
 				});
 			}
 
 			base.HandleTickDone(sender, e);
 		}
 
-		private void AddTeams()
+		private void InitMatch()
 		{
-			// Detect possible swap by teams name, work for some demos
-			if (Parser.TClanName == Demo.TeamCT.Name || Parser.CTClanName == Demo.TeamT.Name)
+			if (!string.IsNullOrEmpty(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
+			if (!string.IsNullOrEmpty(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
+			Demo.TeamCT.CurrentSide = Side.CounterTerrorist;
+			Demo.TeamT.CurrentSide = Side.Terrorist;
+			UpdatePlayers();
+
+			CurrentRound.EquipementValueTeamCt = Parser.Participants.Where(a => a.Team.ToSide() == Side.CounterTerrorist).Sum(a => a.CurrentEquipmentValue);
+			CurrentRound.EquipementValueTeamT = Parser.Participants.Where(a => a.Team.ToSide() == Side.Terrorist).Sum(a => a.CurrentEquipmentValue);
+			foreach (Player player in Demo.Players)
 			{
-				Team tmp = Demo.TeamT;
-				Demo.TeamT = Demo.TeamCT;
-				Demo.TeamCT = tmp.Clone();
+				if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+					player.RoundsMoneyEarned[CurrentRound.Number] = 0;
 			}
 
-			// Add all players to our ObservableCollection of PlayerExtended
+			if (Demo.Players.Count >= 10) _isTeamsInitialized = true;
+		}
+
+		/// <summary>
+		/// Update teams data
+		/// </summary>
+		private void UpdateTeams()
+		{
+			Team teamCt = GetTeamBySide(Side.CounterTerrorist);
+			Team teamT = GetTeamBySide(Side.Terrorist);
+
+			if (!string.IsNullOrEmpty(Parser.TClanName)
+				&& !string.IsNullOrEmpty(Parser.TClanName)
+				&& teamCt.Name == Parser.TClanName
+				&& teamT.Name == Parser.CTClanName)
+			{
+				SwapTeams();
+			}
+
+			UpdatePlayers();
+		}
+
+		/// <summary>
+		/// Update players and their team relation
+		/// </summary>
+		protected void UpdatePlayers()
+		{
+			Team teamCt = GetTeamBySide(Side.CounterTerrorist);
+			Team teamT = GetTeamBySide(Side.Terrorist);
+
 			foreach (DemoInfo.Player player in Parser.PlayingParticipants)
 			{
 				if (player.SteamID != 0)
 				{
-					Player pl = new Player
+					Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+					if (pl != null)
 					{
-						SteamId = player.SteamID,
-						Name = player.Name,
-						Side = player.Team.ToSide()
-					};
-
-					Application.Current.Dispatcher.Invoke(delegate
+						pl.Side = player.Team.ToSide();
+						if (player.Team == DemoInfo.Team.CounterTerrorist)
+						{
+							if (teamT.Players.Contains(pl))
+							{
+								Application.Current.Dispatcher.Invoke(() => teamT.Players.Remove(pl));
+							}
+							if (!teamCt.Players.Contains(pl))
+							{
+								Application.Current.Dispatcher.Invoke(() => teamCt.Players.Add(pl));
+							}
+						}
+						else if (player.Team == DemoInfo.Team.Terrorist)
+						{
+							if (teamCt.Players.Contains(pl))
+							{
+								Application.Current.Dispatcher.Invoke(() => teamCt.Players.Remove(pl));
+							}
+							if (!teamT.Players.Contains(pl))
+							{
+								Application.Current.Dispatcher.Invoke(() => teamT.Players.Add(pl));
+							}
+						}
+					}
+					else
 					{
-						if (!Demo.Players.Contains(pl)) Demo.Players.Add(pl);
+						// new player
+						pl = new Player
+						{
+							SteamId = player.SteamID,
+							Name = player.Name,
+							Side = player.Team.ToSide()
+						};
+						Application.Current.Dispatcher.Invoke(() => Demo.Players.Add(pl));
 
-						if (pl.Side == Side.CounterTerrorist)
+						if (player.Team == DemoInfo.Team.CounterTerrorist)
 						{
 							pl.TeamName = Demo.TeamCT.Name;
 							// Check swap
@@ -409,8 +395,7 @@ namespace Services.Concrete.Analyzer
 								if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
 							}
 						}
-
-						if (pl.Side == Side.Terrorist)
+						else if (player.Team == DemoInfo.Team.Terrorist)
 						{
 							pl.TeamName = Demo.TeamT.Name;
 							// Check swap
@@ -424,58 +409,7 @@ namespace Services.Concrete.Analyzer
 								if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
 							}
 						}
-					});
-				}
-			}
-		}
-
-		/// <summary>
-		/// Update team score
-		/// TODO Move to DemoAnalyzer
-		/// </summary>
-		/// <param name="e"></param>
-		protected new void UpdateTeamScore(RoundEndedEventArgs e)
-		{
-			if (IsHalfMatch)
-			{
-				if (e.Winner.ToSide() == Side.CounterTerrorist)
-				{
-					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
-					if (!IsOvertime) Demo.ScoreSecondHalfTeam2++;
-					Demo.ScoreTeam2++;
-					CurrentRound.WinnerName = Demo.TeamT.Name;
-					CurrentRound.TeamTname = Demo.TeamCT.Name;
-					CurrentRound.TeamCtName = Demo.TeamT.Name;
-				}
-				else
-				{
-					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
-					if (!IsOvertime) Demo.ScoreSecondHalfTeam1++;
-					Demo.ScoreTeam1++;
-					CurrentRound.WinnerName = Demo.TeamCT.Name;
-					CurrentRound.TeamTname = Demo.TeamT.Name;
-					CurrentRound.TeamCtName = Demo.TeamCT.Name;
-				}
-			}
-			else
-			{
-				if (e.Winner.ToSide() == Side.CounterTerrorist)
-				{
-					if (IsOvertime) CurrentOvertime.ScoreTeam1++;
-					if (!IsOvertime) Demo.ScoreFirstHalfTeam1++;
-					Demo.ScoreTeam1++;
-					CurrentRound.WinnerName = Demo.TeamCT.Name;
-					CurrentRound.TeamTname = Demo.TeamT.Name;
-					CurrentRound.TeamCtName = Demo.TeamCT.Name;
-				}
-				else
-				{
-					if (IsOvertime) CurrentOvertime.ScoreTeam2++;
-					if (!IsOvertime) Demo.ScoreFirstHalfTeam2++;
-					Demo.ScoreTeam2++;
-					CurrentRound.WinnerName = Demo.TeamT.Name;
-					CurrentRound.TeamTname = Demo.TeamCT.Name;
-					CurrentRound.TeamCtName = Demo.TeamT.Name;
+					}
 				}
 			}
 		}

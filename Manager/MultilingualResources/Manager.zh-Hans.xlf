@@ -333,12 +333,14 @@
           <target state="final">破点杀敌</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
-          <source>Equipment value team 1</source>
-          <target state="final">1队装备价值</target>
+          <source>Equipment value CT</source>
+          <target state="needs-review-translation">1队装备价值</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
-          <source>Equipment value team 2</source>
-          <target state="final">2队装备价值</target>
+          <source>Equipment value T</source>
+          <target state="needs-review-translation">2队装备价值</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
           <source>Export custom data</source>
@@ -533,12 +535,14 @@
           <target state="final">启动时开启BOT</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
-          <source>Start money team 1</source>
-          <target state="final">1队开局经济</target>
+          <source>Start money CT</source>
+          <target state="needs-review-translation">1队开局经济</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
-          <source>Start money team 2</source>
-          <target state="final">2队开局经济</target>
+          <source>Start money T</source>
+          <target state="needs-review-translation">2队开局经济</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Status" translate="yes" xml:space="preserve">
           <source>Status</source>
@@ -918,12 +922,14 @@
           <note from="MultilingualBuild" annotates="source" priority="2">Entry Kills</note>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
-          <source>EV Team 1 ($)</source>
-          <target state="final">1队EV ($)</target>
+          <source>EV CT ($)</source>
+          <target state="needs-review-translation">1队EV ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
-          <source>EV Team 2 ($)</source>
-          <target state="final">2队EV ($)</target>
+          <source>EV T ($)</source>
+          <target state="needs-review-translation">2队EV ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderHsPercent" translate="yes" xml:space="preserve">
           <source>HS%</source>
@@ -946,12 +952,14 @@
           <note from="MultilingualBuild" annotates="source" priority="2">Side Trouble</note>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
-          <source>SM Team 1 ($)</source>
-          <target state="final">1队SM ($)</target>
+          <source>SM CT ($)</source>
+          <target state="needs-review-translation">1队SM ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
-          <source>SM Team 2 ($)</source>
-          <target state="final">2队SM ($)</target>
+          <source>SM T ($)</source>
+          <target state="needs-review-translation">2队SM ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderTeamKill" translate="yes" xml:space="preserve">
           <source>FF</source>
@@ -1096,12 +1104,14 @@
           <target state="final">装备价值</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
-          <source>Equipement Value Team 1 ($)</source>
-          <target state="final">1队装备价值 ($)</target>
+          <source>Equipement Value CT ($)</source>
+          <target state="needs-review-translation">1队装备价值 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
-          <source>Equipement Value Team 2 ($)</source>
-          <target state="final">2队装备价值 ($)</target>
+          <source>Equipement Value T ($)</source>
+          <target state="needs-review-translation">2队装备价值 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
@@ -1300,12 +1310,14 @@
           <target state="final">开局经济</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
-          <source>Start Money Team 1 ($)</source>
-          <target state="final">1队开局经济 ($)</target>
+          <source>Start Money CT ($)</source>
+          <target state="needs-review-translation">1队开局经济 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
-          <source>Start Money Team 2 ($)</source>
-          <target state="final">2队开局经济 ($)</target>
+          <source>Start Money T ($)</source>
+          <target state="needs-review-translation">2队开局经济 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -1496,12 +1508,14 @@
           <target state="final">EK (破点杀敌)</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
-          <source>EVT1 (Equipment Value Team 1 ($))</source>
-          <target state="final">EVT1 (1队装备价值 ($))</target>
+          <source>EV CT (Equipment Value CT ($))</source>
+          <target state="needs-review-translation">EVT1 (1队装备价值 ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
-          <source>EVT2 (Equipment Value Team 2 ($))</source>
-          <target state="final">EVT2 (2队装备价值  ($))</target>
+          <source>EV T (Equipment Value T ($))</source>
+          <target state="needs-review-translation">EVT2 (2队装备价值  ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
           <source>RWS (ESEA Round Win Share)</source>
@@ -1588,12 +1602,14 @@
           <target state="final">ST (阵营麻烦)</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
-          <source>SMT1 (Start Money Team 1 ($))</source>
-          <target state="final">SMT1 (1队开局经济 ($))</target>
+          <source>SM CT (Start Money CT ($))</source>
+          <target state="needs-review-translation">SMT1 (1队开局经济 ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
-          <source>SMT2 (Start Money Team 2 ($))</source>
-          <target state="final">SMT2 (2队开局经济  ($))</target>
+          <source>SM T (Start Money T ($))</source>
+          <target state="needs-review-translation">SMT2 (2队开局经济  ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
           <source>TNT (Team Name Trouble)</source>

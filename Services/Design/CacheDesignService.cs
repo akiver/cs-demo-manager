@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -38,13 +38,7 @@ namespace Services.Design
 			demo.FourKillCount = 2;
 			demo.FiveKillCount = 1;
 			demo.Path = "C:\\mydemo.dem";
-			demo.ScoreTeam1 = 16;
-			demo.ScoreTeam2 = 6;
 			demo.ServerTickrate = 128;
-			demo.ScoreFirstHalfTeam1 = 10;
-			demo.ScoreFirstHalfTeam2 = 5;
-			demo.ScoreSecondHalfTeam1 = 6;
-			demo.ScoreSecondHalfTeam2 = 1;
 			demo.Type = "GOTV";
 			demo.Comment = "My comment";
 			demo.Status = AppSettings.DefaultStatus[0].Label;
@@ -53,6 +47,13 @@ namespace Services.Design
 			teamCt.Name = "Team 1";
 			Team teamT = new Team();
 			teamCt.Name = "Team 2";
+
+			teamCt.Score = 16;
+			teamT.Score = 6;
+			teamCt.ScoreFirstHalf = 10;
+			teamCt.ScoreSecondHalf = 5;
+			teamT.ScoreFirstHalf = 6;
+			teamT.ScoreSecondHalf = 1;
 
 			for (int i = 0; i < 10; i++)
 			{
@@ -110,8 +111,8 @@ namespace Services.Design
 				round.WinnerName = r.Next(100) < 50 ? teamCt.Name : teamT.Name;
 				round.CrouchKillCount = r.Next(8);
 				round.JumpKillCount = r.Next(1);
-				round.EquipementValueTeam1 = r.Next(4000, 30000);
-				round.EquipementValueTeam2 = r.Next(4000, 30000);
+				round.EquipementValueTeamCt = r.Next(4000, 30000);
+				round.EquipementValueTeamT = r.Next(4000, 30000);
 				round.TradeKillCount = r.Next(4);
 				demo.Rounds.Add(round);
 			}

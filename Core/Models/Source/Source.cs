@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using Newtonsoft.Json;
 
 namespace Core.Models.Source
@@ -9,7 +9,30 @@ namespace Core.Models.Source
 		public string Name { get; set; }
 
 		[JsonIgnore]
-		public Image Logo { get; set; }
+		public Image Logo {
+			get
+			{
+				switch (Name)
+				{
+					case "ebot":
+						return Properties.Resources.ebot;
+					case "esea":
+						return Properties.Resources.esea;
+					case "faceit":
+						return Properties.Resources.faceit;
+					case "cevo":
+						return Properties.Resources.cevo;
+					case "pov":
+						return Properties.Resources.pov;
+					case "esl":
+						return Properties.Resources.esl;
+					case "popflash":
+						return Properties.Resources.popflash;
+					default:
+						return Properties.Resources.valve;
+				}
+			}
+		}
 
 		public static Source Factory(string name)
 		{

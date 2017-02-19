@@ -537,12 +537,12 @@
 				</DataGridTemplateColumn>
 				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.HeaderScoreTeam1}"
-									Binding="{Binding ScoreTeam1}"
+									Binding="{Binding ScoreTeamCt}"
 									HeaderStyle="{StaticResource ScoreTeam1Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.HeaderScoreTeam2}"
-									Binding="{Binding ScoreTeam2}"
+									Binding="{Binding ScoreTeamT}"
 									HeaderStyle="{StaticResource ScoreTeam2Header}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowScoreTeam2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTemplateColumn Header="{x:Static properties:Resources.Ban}"

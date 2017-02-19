@@ -396,8 +396,9 @@
           <target state="final">Victimes d'ouvertures</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
-          <source>Equipment value team 1</source>
-          <target state="final">Valeur équipement équipe 1</target>
+          <source>Equipment value CT</source>
+          <target state="needs-review-translation">Valeur équipement équipe 1</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
           <source>Export custom data</source>
@@ -448,12 +449,14 @@
           <target state="final">Démarrer le BOT au lancement de l'application</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
-          <source>Start money team 1</source>
-          <target state="final">Argent en début de round équipe 1</target>
+          <source>Start money CT</source>
+          <target state="needs-review-translation">Argent en début de round équipe 1</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
-          <source>Start money team 2</source>
-          <target state="final">Argent en début de round équipe 2</target>
+          <source>Start money T</source>
+          <target state="needs-review-translation">Argent en début de round équipe 2</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="Team1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -500,8 +503,9 @@
           <target state="final">CG</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
-          <source>Equipment value team 2</source>
-          <target state="final">Valeur équipement équipe 2</target>
+          <source>Equipment value T</source>
+          <target state="needs-review-translation">Valeur équipement équipe 2</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ToolTipAnalyzeSelectedDemos" translate="yes" xml:space="preserve">
           <source>Analyze selected demo(s) (CTRL+S)</source>
@@ -946,20 +950,24 @@
           <note from="MultilingualBuild" annotates="source" priority="2">Average Damages Per Player</note>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
-          <source>SM Team 1 ($)</source>
-          <target state="final">ADE1 ($)</target>
+          <source>SM CT ($)</source>
+          <target state="needs-review-translation">ADE1 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
-          <source>SM Team 2 ($)</source>
-          <target state="final">ADE2 ($)</target>
+          <source>SM T ($)</source>
+          <target state="needs-review-translation">ADE2 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
-          <source>EV Team 1 ($)</source>
-          <target state="final">VEE1 ($)</target>
+          <source>EV CT ($)</source>
+          <target state="needs-review-translation">VEE1 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
-          <source>EV Team 2 ($)</source>
-          <target state="final">VEE2 ($)</target>
+          <source>EV T ($)</source>
+          <target state="needs-review-translation">VEE2 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderSideTrouble" translate="yes" xml:space="preserve">
           <source>ST</source>
@@ -1055,12 +1063,14 @@
           <target state="final">Valeur Equipement</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
-          <source>Equipement Value Team 1 ($)</source>
-          <target state="final">Valeur équipement de l'équipe 1 ($)</target>
+          <source>Equipement Value CT ($)</source>
+          <target state="needs-review-translation">Valeur équipement de l'équipe 1 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
-          <source>Equipement Value Team 2 ($)</source>
-          <target state="final">Valeur équipement de l'équipe 2 ($)</target>
+          <source>Equipement Value T ($)</source>
+          <target state="needs-review-translation">Valeur équipement de l'équipe 2 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
@@ -1211,12 +1221,14 @@
           <target state="final">Argent de dépârt</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
-          <source>Start Money Team 1 ($)</source>
-          <target state="final">Argent de départ de l'équipe 1 ($)</target>
+          <source>Start Money CT ($)</source>
+          <target state="needs-review-translation">Argent de départ de l'équipe 1 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
-          <source>Start Money Team 2 ($)</source>
-          <target state="final">Argent de départ de l'équipe 2 ($)</target>
+          <source>Start Money T ($)</source>
+          <target state="needs-review-translation">Argent de départ de l'équipe 2 ($)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -1451,12 +1463,14 @@
           <target state="final">VO (Victimes d'Ouverture)</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
-          <source>EVT1 (Equipment Value Team 1 ($))</source>
-          <target state="final">VEE1 (Valeur Equipement Equipe 1 ($))</target>
+          <source>EV CT (Equipment Value CT ($))</source>
+          <target state="needs-review-translation">VEE1 (Valeur Equipement Equipe 1 ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
-          <source>EVT2 (Equipment Value Team 2 ($))</source>
-          <target state="final">VEE2 (Valeur Equipement Equipe 2 ($))</target>
+          <source>EV T (Equipment Value T ($))</source>
+          <target state="needs-review-translation">VEE2 (Valeur Equipement Equipe 2 ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
           <source>RWS (ESEA Round Win Share)</source>
@@ -1539,12 +1553,14 @@
           <target state="final">VA (Victimes Accroupi)</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
-          <source>SMT1 (Start Money Team 1 ($))</source>
-          <target state="final">ADE1 (Argent de Départ de l'Equipe 1 ($))</target>
+          <source>SM CT (Start Money CT ($))</source>
+          <target state="needs-review-translation">ADE1 (Argent de Départ de l'Equipe 1 ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
-          <source>SMT2 (Start Money Team 2 ($))</source>
-          <target state="final">ADE2 (Argent de Départ de l'Equipe 2 ($))</target>
+          <source>SM T (Start Money T ($))</source>
+          <target state="needs-review-translation">ADE2 (Argent de Départ de l'Equipe 2 ($))</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
           <source>TNT (Team Name Trouble)</source>

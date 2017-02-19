@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
@@ -82,12 +82,12 @@ namespace Services.Concrete.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Ticks);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamCT.Name);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamT.Name);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreTeam1);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreTeam2);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreFirstHalfTeam1);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreFirstHalfTeam2);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeam1);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeam2);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreTeamCt);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreTeamT);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreFirstHalfTeamCt);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreFirstHalfTeamT);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeamCt);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ScoreSecondHalfTeamT);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.Winner != null ? Demo.Winner.Name : string.Empty);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.KillCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.AssistCount);

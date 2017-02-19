@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -187,6 +187,10 @@ namespace Manager.ViewModel
 		private bool _showEquipementValueTeam2Column = Settings.Default.ShowEquipementValueTeam2Column;
 
 		private bool _showWinnerClanNameColumn = Settings.Default.ShowWinnerClanNameColumn;
+
+		private bool _showCtTeamName = Settings.Default.ShowCtTeamName;
+
+		private bool _showTteamName = Settings.Default.ShowTteamName;
 
 		private bool _showWinnerSideColumn = Settings.Default.ShowWinnerSideColumn;
 
@@ -490,6 +494,28 @@ namespace Manager.ViewModel
 				Settings.Default.ShowWinnerClanNameColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowWinnerClanNameColumn, ref _showWinnerClanNameColumn, value);
+			}
+		}
+
+		public bool ShowCtTeamNameColumn
+		{
+			get { return _showCtTeamName; }
+			set
+			{
+				Settings.Default.ShowCtTeamName = value;
+				Settings.Default.Save();
+				Set(() => ShowCtTeamNameColumn, ref _showCtTeamName, value);
+			}
+		}
+
+		public bool ShowTteamNameColumn
+		{
+			get { return _showTteamName; }
+			set
+			{
+				Settings.Default.ShowTteamName = value;
+				Settings.Default.Save();
+				Set(() => ShowTteamNameColumn, ref _showTteamName, value);
 			}
 		}
 

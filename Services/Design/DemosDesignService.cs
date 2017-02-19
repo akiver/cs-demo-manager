@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -93,10 +93,10 @@ namespace Services.Design
 						ThreeKillCount = random.Next(1),
 						FourKillCount = random.Next(1),
 						FiveKillCount = random.Next(1),
-						EquipementValueTeam1 = random.Next(4200, 30000),
-						EquipementValueTeam2 = random.Next(4200, 30000),
-						StartMoneyTeam1 = random.Next(4200, 50000),
-						StartMoneyTeam2 = random.Next(4200, 50000),
+						EquipementValueTeamCt = random.Next(4200, 30000),
+						EquipementValueTeamT = random.Next(4200, 30000),
+						StartMoneyTeamCt = random.Next(4200, 50000),
+						StartMoneyTeamT = random.Next(4200, 50000),
 						Tick = random.Next(7000, 100000)
 					};
 
@@ -117,19 +117,33 @@ namespace Services.Design
 					FourKillCount = random.Next(3),
 					FiveKillCount = random.Next(1),
 					Path = "C:\\mydemo.dem",
-					ScoreTeam1 = 16,
-					ScoreTeam2 = 6,
 					Type = "GOTV",
 					Comment = "comment",
-					ScoreFirstHalfTeam1 = 10,
-					ScoreFirstHalfTeam2 = 5,
-					ScoreSecondHalfTeam1 = 6,
-					ScoreSecondHalfTeam2 = 1,
 					Players = players,
 					MostBombPlantedPlayer = players.ElementAt(random.Next(10)),
 					MostHeadshotPlayer = players.ElementAt(random.Next(10)),
 					Rounds = rounds
 				};
+
+				Team teamCt = new Team
+				{
+					Name = "Team 1",
+					Players = new ObservableCollection<Player>(players.Take(5)),
+					Score = 6,
+					ScoreFirstHalf = 6,
+					ScoreSecondHalf = 1,
+				};
+				Team teamT = new Team
+				{
+					Name = "Team 2",
+					Players = new ObservableCollection<Player>(players.Skip(5).Take(5)),
+					Score = 16,
+					ScoreFirstHalf = 10,
+					ScoreSecondHalf = 5,
+				};
+
+				demo.TeamT = teamT;
+				demo.TeamCT = teamCt;
 
 				demos.Add(demo);
 			}
@@ -194,15 +208,21 @@ namespace Services.Design
 
 				players.Add(player);
 			}
-			Team teamT = new Team
-			{
-				Name = "Team 1",
-				Players = new ObservableCollection<Player>(players.Take(5))
-			};
 			Team teamCt = new Team
 			{
+				Name = "Team 1",
+				Players = new ObservableCollection<Player>(players.Take(5)),
+				Score = 6,
+				ScoreFirstHalf = 6,
+				ScoreSecondHalf = 1,
+			};
+			Team teamT = new Team
+			{
 				Name = "Team 2",
-				Players = new ObservableCollection<Player>(players.Skip(5).Take(5))
+				Players = new ObservableCollection<Player>(players.Skip(5).Take(5)),
+				Score = 16,
+				ScoreFirstHalf = 10,
+				ScoreSecondHalf = 5,
 			};
 
 			ObservableCollection<Round> rounds = new ObservableCollection<Round>();
@@ -235,10 +255,10 @@ namespace Services.Design
 					ThreeKillCount = random.Next(1),
 					FourKillCount = random.Next(1),
 					FiveKillCount = random.Next(1),
-					EquipementValueTeam1 = random.Next(4200, 30000),
-					EquipementValueTeam2 = random.Next(4200, 30000),
-					StartMoneyTeam1 = random.Next(4200, 50000),
-					StartMoneyTeam2 = random.Next(4200, 50000),
+					EquipementValueTeamCt = random.Next(4200, 30000),
+					EquipementValueTeamT = random.Next(4200, 30000),
+					StartMoneyTeamCt = random.Next(4200, 50000),
+					StartMoneyTeamT = random.Next(4200, 50000),
 					Tick = random.Next(7000, 100000),
 					WinnerName = teamCt.Name,
 					WinnerSide = Side.CounterTerrorist,
@@ -280,14 +300,8 @@ namespace Services.Design
 			demo.FourKillCount = 3;
 			demo.FiveKillCount = 1;
 			demo.Path = "C:\\mydemo.dem";
-			demo.ScoreTeam1 = 16;
-			demo.ScoreTeam2 = 6;
 			demo.Type = "GOTV";
 			demo.Comment = "comment";
-			demo.ScoreFirstHalfTeam1 = 10;
-			demo.ScoreFirstHalfTeam2 = 5;
-			demo.ScoreSecondHalfTeam1 = 6;
-			demo.ScoreSecondHalfTeam2 = 1;
 			demo.TeamCT = teamCt;
 			demo.TeamT = teamT;
 			demo.Players = players;

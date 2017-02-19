@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -9,7 +9,19 @@ namespace Core.Models
 {
 	public class Team : ObservableObject
 	{
+		#region Properties
+
 		private string _name;
+
+		private int _score;
+
+		private int _scoreFirstHalf;
+
+		private int _scoreSecondHalf;
+
+		#endregion
+
+		#region Accessors
 
 		[JsonProperty("team_name")]
 		public string Name
@@ -18,8 +30,32 @@ namespace Core.Models
 			set { Set(() => Name, ref _name, value); }
 		}
 
+		[JsonProperty("score")]
+		public int Score
+		{
+			get { return _score; }
+			set { Set(() => Score, ref _score, value); }
+		}
+
+		[JsonProperty("score_first_half")]
+		public int ScoreFirstHalf
+		{
+			get { return _scoreFirstHalf; }
+			set { Set(() => ScoreFirstHalf, ref _scoreFirstHalf, value); }
+		}
+
+		[JsonProperty("score_second_half")]
+		public int ScoreSecondHalf
+		{
+			get { return _scoreSecondHalf; }
+			set { Set(() => ScoreSecondHalf, ref _scoreSecondHalf, value); }
+		}
+
 		[JsonProperty("team_players", IsReference = false)]
 		public ObservableCollection<Player> Players { get; set; }
+
+		[JsonIgnore]
+		public Side CurrentSide { get; set; }
 
 		/// <summary>
 		/// Keep track of loss serie to determine money reward at each round
@@ -200,6 +236,8 @@ namespace Core.Models
 		[JsonIgnore]
 		public int CrouchKillCount => Players.Sum(player => player.CrouchKillCount);
 
+		#endregion
+
 		public override bool Equals(object obj)
 		{
 			var item = obj as Team;
@@ -225,10 +263,61 @@ namespace Core.Models
 			LossRowCount = 0;
 		}
 
+		public void ResetStats()
+		{
+			Score = 0;
+			ScoreFirstHalf = 0;
+			ScoreSecondHalf = 0;
+			BombPlantedOnACount = 0;
+			BombPlantedOnBCount = 0;
+			RoundCount = 0;
+			LossRowCount = 0;
+			LostCount = 0;
+			LostRoundCount = 0;
+			LostRoundCtCount = 0;
+			LostRoundTCount = 0;
+			MatchCount = 0;
+			WinCount = 0;
+			WinEcoRoundCount = 0;
+			WinForceBuyRoundCount = 0;
+			WinPistolRoundCount = 0;
+			WinRoundCount = 0;
+			WinRoundCtCount = 0;
+			WinRoundTCount = 0;
+			WinSemiEcoRoundCount = 0;
+		}
+
 		public Team Clone()
 		{
 			return (Team)MemberwiseClone();
 		}
+
+		public void BackupFromTeam(Team team)
+		{
+			Score = team.Score;
+			ScoreFirstHalf = team.ScoreFirstHalf;
+			ScoreSecondHalf = team.ScoreSecondHalf;
+			BombPlantedOnACount = team.BombPlantedOnACount;
+			BombPlantedOnBCount = team.BombPlantedOnBCount;
+			CurrentSide = team.CurrentSide;
+			RoundCount = team.RoundCount;
+			LossRowCount = team.LossRowCount;
+			LostCount = team.LostCount;
+			LostRoundCount = team.LostRoundCount;
+			LostRoundCtCount = team.LostRoundCtCount;
+			LostRoundTCount = team.LostRoundTCount;
+			MatchCount = team.MatchCount;
+			WinCount = team.WinCount;
+			WinEcoRoundCount = team.WinEcoRoundCount;
+			WinForceBuyRoundCount = team.WinForceBuyRoundCount;
+			WinPistolRoundCount = team.WinPistolRoundCount;
+			WinRoundCount = team.WinRoundCount;
+			WinRoundCtCount = team.WinRoundCtCount;
+			WinRoundTCount = team.WinRoundTCount;
+			WinSemiEcoRoundCount = team.WinSemiEcoRoundCount;
+		}
+
+		#region Collections events
 
 		private void OnPlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
@@ -280,5 +369,7 @@ namespace Core.Models
 			RaisePropertyChanged(() => EntryHoldKillLossCount);
 			RaisePropertyChanged(() => RatioEntryHoldKill);
 		}
+
+		#endregion
 	}
 }

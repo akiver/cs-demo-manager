@@ -1,4 +1,5 @@
-﻿using System.IO;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,17 +12,8 @@ namespace Services.Concrete.Analyzer
 {
 	public class EseaAnalyzer : DemoAnalyzer
 	{
-		// 2 match_started without freeze time ended = match started
-		private int _matchStartedCount;
-
-		// Used to detect swap team on overtime
-		private bool _overtimeHasSwapped;
-
-		// Keep in memory scores to detect when a new side of overtime has begun
-		// On ESEA demos score doesn't change until the match is really in progress
-		private int _previousScoreT;
-
-		private int _previousScoreCT;
+		// Keep track of match_started events occured during each rounds to detect when the match is live
+		private readonly Dictionary<int, int> _matchStartedByRound = new Dictionary<int, int>();
 
 		public EseaAnalyzer(Demo demo)
 		{
@@ -74,58 +66,62 @@ namespace Services.Concrete.Analyzer
 
 		#region Handlers
 
+		protected new void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
+		{
+			if (e.Swapped == null || e.Swapped.SteamID == 0) return;
+
+			// Keep track of the number team_player events to detect teams swap
+			if (e.OldTeam != e.NewTeam)
+			{
+				PlayerTeamCount++;
+				if (PlayerTeamCount > 7)
+				{
+					PlayerTeamCount = 0;
+					IsSwapTeamRequired = true;
+					// detect MR overtimes to be able to add OT at the right time
+					if (IsOvertime && MrOvertime == 0)
+					{
+						MrOvertime = Parser.CTScore + Parser.TScore- 30;
+						// add first OT rounds to the counter
+						RoundCountOvertime = MrOvertime - 1;
+					}
+				}
+			}
+
+			base.HandlePlayerTeam(sender, e);
+		}
+
 		protected new void HandleFreezetimeEnded(object sender, FreezetimeEndedEventArgs e)
 		{
 			IsFreezetime = false;
-			_matchStartedCount = 0;
 			base.HandleFreezetimeEnded(sender, e);
 		}
 
 		protected override void HandleMatchStarted(object sender, MatchStartedEventArgs e)
 		{
-			_matchStartedCount++;
+			PlayerTeamCount = 0;
+			IsMatchStarted = false;
 
-			// ESEA demos raise begin_new_match between half time, it's only when the LO3 occurs that the match resume
-			if (_matchStartedCount == 1) IsMatchStarted = false;
+			// increment the match_started counter to detect when the match is live
+			if (!_matchStartedByRound.ContainsKey(CurrentRound.Number))
+				_matchStartedByRound[CurrentRound.Number] = 1;
+			else
+				++_matchStartedByRound[CurrentRound.Number];
 
-			if (IsOvertime && _matchStartedCount == 3)
+			bool isMatchStarted = false;
+			if (_matchStartedByRound.ContainsKey(CurrentRound.Number - 1))
 			{
-				// Ignore the first OT
-				if (CurrentRound.Number > 32)
-				{
-					if (!_overtimeHasSwapped)
-					{
-						SwapTeams();
-						_overtimeHasSwapped = true;
-					}
-					else
-					{
-						_overtimeHasSwapped = false;
-					}
-				}
+				isMatchStarted = _matchStartedByRound[CurrentRound.Number] + _matchStartedByRound[CurrentRound.Number - 1] > 3;
+			}
 
-				if (IsHalfMatch && CurrentOvertime.ScoreTeam1 != 0 && CurrentOvertime.ScoreTeam2 != 0)
-				{
-					Application.Current.Dispatcher.Invoke(delegate
-					{
-						Demo.Overtimes.Add(CurrentOvertime);
-					});
-					CurrentOvertime = new Overtime()
-					{
-						Number = ++OvertimeCount
-					};
-				}
-
-				if (Demo.Overtimes.Count > 0 && IsHalfMatch)
-				{
-					IsHalfMatch = false;
-				}
-				else
-				{
-					IsHalfMatch = !IsHalfMatch;
-				}
-
+			// the match is live after 3 restarts
+			if (_matchStartedByRound[CurrentRound.Number] > 2 || isMatchStarted)
+			{
 				IsMatchStarted = true;
+				// https://github.com/akiver/CSGO-Demos-Manager/issues/76
+				// some ESEA demos have 1 match_started between round_end event
+				// that prevent to create a new round when it should had been created
+				if (Demo.Rounds.Count == CurrentRound.Number) CreateNewRound();
 			}
 
 			if (CurrentRound.Number == 1) InitPlayers();
@@ -133,67 +129,59 @@ namespace Services.Concrete.Analyzer
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
-			// Match is really ongoing after a LO3
-			if (!IsOvertime && _matchStartedCount > 1) IsMatchStarted = true;
-			if (Parser.CTScore == 0 && Parser.TScore == 0 && CurrentRound.Number > 15) IsMatchStarted = false;
 			if (!IsMatchStarted) return;
 
-			IsFreezetime = true;
+			// Detect teams name only during first half
+			if (CurrentRound.Number < 15)
+			{
+				if (!string.IsNullOrEmpty(Parser.CTClanName)) Demo.TeamCT.Name = Parser.CTClanName;
+				if (!string.IsNullOrEmpty(Parser.TClanName)) Demo.TeamT.Name = Parser.TClanName;
+			}
+
 			CreateNewRound();
-		}
-
-		protected new void HandleRoundEnd(object sender, RoundEndedEventArgs e)
-		{
-			_matchStartedCount = 0;
-			base.HandleRoundEnd(sender, e);
-
-			// On ESEA demos round_announce_last_round_half isn't raised
-			if (CurrentRound.Number == 15) IsSwapTeamRequired = true;
 		}
 
 		protected new void HandleRoundOfficiallyEnd(object sender, RoundOfficiallyEndedEventArgs e)
 		{
-			// Prevent adding rounds that are between half side during overtime
-			if (IsOvertime && Parser.TScore == _previousScoreT && Parser.CTScore == _previousScoreCT && !IsHalfMatch)
-			{
-				IsMatchStarted = false;
-				return;
-			}
-
-			// Keep track of the score to avoid "warmup" round that are between half side
-			if (IsOvertime)
-			{
-				_previousScoreCT = Parser.CTScore;
-				_previousScoreT = Parser.TScore;
-			}
-
 			base.HandleRoundOfficiallyEnd(sender, e);
 
 			if (!IsMatchStarted || IsFreezetime) return;
 
-			int score = Demo.ScoreTeam1 + Demo.ScoreTeam2;
+			int score = Parser.CTScore + Parser.TScore;
 			if (score < 15) return;
 
+			// Detect half match
 			if (score == 15)
 			{
 				IsMatchStarted = false;
 				IsHalfMatch = true;
 			}
 
-			if (score < 30) return;
+			// count rounds played in case of overtime to detect overtime end
+			if (IsOvertime)
+			{
+				++RoundCountOvertime;
+				// if the number of rounds played during OT == 2x MR OT detected, the OT is over
+				if (MrOvertime * 2 == RoundCountOvertime)
+				{
+					Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
+					CreateNewOvertime();
+					RoundCountOvertime = 0;
+				}
+			}
+
+			// detect first overtime, the next overtimes are detected
+			// by counting rounds and compare the value to MrOvertime
 			if (score == 30)
 			{
 				IsMatchStarted = false;
 				IsOvertime = true;
 
 				// Create a new round when the score is 15-15 because round_start isn't raised
-				if (Parser.TScore == 15 && Parser.CTScore == 15) CreateNewRound();
+				CreateNewRound();
 
 				// Init the first OT
-				CurrentOvertime = new Overtime()
-				{
-					Number = ++OvertimeCount
-				};
+				CreateNewOvertime();
 			}
 		}
 

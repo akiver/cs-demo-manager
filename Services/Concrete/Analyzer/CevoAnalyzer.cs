@@ -1,4 +1,4 @@
-﻿using System.IO;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -83,15 +83,6 @@ namespace Services.Concrete.Analyzer
 			{
 				Demo.Rounds.Add(CurrentRound);
 			});
-
-			// Add the last OT
-			if (IsOvertime)
-			{
-				Application.Current.Dispatcher.Invoke(delegate
-				{
-					Demo.Overtimes.Add(CurrentOvertime);
-				});
-			}
 
 			ProcessPlayersRating();
 		}

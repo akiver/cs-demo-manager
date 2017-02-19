@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 
 namespace Core.Models
@@ -7,9 +7,15 @@ namespace Core.Models
 	{
 		private int _number;
 
-		private int _scoreTeam1;
+		/// <summary>
+		/// Score of the team that started the match as CT
+		/// </summary>
+		private int _scoreTeamCt;
 
-		private int _scoreTeam2;
+		/// <summary>
+		/// Score of the team that started the match as T
+		/// </summary>
+		private int _scoreTeamT;
 
 		[JsonProperty("number")]
 		public int Number
@@ -18,18 +24,18 @@ namespace Core.Models
 			set { Set(() => Number, ref _number, value); }
 		}
 
-		[JsonProperty("score_team1")]
-		public int ScoreTeam1
+		[JsonProperty("score_team_ct")]
+		public int ScoreTeamCt
 		{
-			get { return _scoreTeam1; }
-			set { Set(() => ScoreTeam1, ref _scoreTeam1, value); }
+			get { return _scoreTeamCt; }
+			set { Set(() => ScoreTeamCt, ref _scoreTeamCt, value); }
 		}
 
-		[JsonProperty("score_team2")]
-		public int ScoreTeam2
+		[JsonProperty("score_team_t")]
+		public int ScoreTeamT
 		{
-			get { return _scoreTeam2; }
-			set { Set(() => ScoreTeam2, ref _scoreTeam2, value); }
+			get { return _scoreTeamT; }
+			set { Set(() => ScoreTeamT, ref _scoreTeamT, value); }
 		}
 	}
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
@@ -94,24 +94,24 @@ namespace Core.Models
 		private RoundEndReason _endReason;
 
 		/// <summary>
-		/// Equipement value of the team 2
+		/// Equipement value of the team that started the round as T
 		/// </summary>
-		private int _equipementValueTeam2;
+		private int _equipementValueTeamT;
 
 		/// <summary>
-		/// Equipement value of the team 1
+		/// Equipement value of the team that started the round as CT
 		/// </summary>
-		private int _equipementValueTeam1;
+		private int _equipementValueTeamCt;
 
 		/// <summary>
-		/// Start money of the team 1
+		/// Start money of the team that started the round as CT
 		/// </summary>
-		private int _startMoneyTeam1;
+		private int _startMoneyTeamCt;
 
 		/// <summary>
-		/// Start money of the team 2
+		/// Start money of the team that started the round as T
 		/// </summary>
-		private int _startMoneyTeam2;
+		private int _startMoneyTeamT;
 
 		/// <summary>
 		/// Round's side winner
@@ -447,32 +447,32 @@ namespace Core.Models
 			set { Set(() => TradeKillCount, ref _tradeKillCount, value); }
 		}
 
-		[JsonProperty("equipement_value_team2")]
-		public int EquipementValueTeam2
+		[JsonProperty("equipement_value_team_t")]
+		public int EquipementValueTeamT
 		{
-			get { return _equipementValueTeam2; }
-			set { Set(() => EquipementValueTeam2, ref _equipementValueTeam2, value); }
+			get { return _equipementValueTeamT; }
+			set { Set(() => EquipementValueTeamT, ref _equipementValueTeamT, value); }
 		}
 
-		[JsonProperty("equipement_value_team1")]
-		public int EquipementValueTeam1
+		[JsonProperty("equipement_value_team_ct")]
+		public int EquipementValueTeamCt
 		{
-			get { return _equipementValueTeam1; }
-			set { Set(() => EquipementValueTeam1, ref _equipementValueTeam1, value); }
+			get { return _equipementValueTeamCt; }
+			set { Set(() => EquipementValueTeamCt, ref _equipementValueTeamCt, value); }
 		}
 
-		[JsonProperty("start_money_team2")]
-		public int StartMoneyTeam2
+		[JsonProperty("start_money_team_t")]
+		public int StartMoneyTeamT
 		{
-			get { return _startMoneyTeam2; }
-			set { Set(() => StartMoneyTeam2, ref _startMoneyTeam2, value); }
+			get { return _startMoneyTeamT; }
+			set { Set(() => StartMoneyTeamT, ref _startMoneyTeamT, value); }
 		}
 
-		[JsonProperty("start_money_team1")]
-		public int StartMoneyTeam1
+		[JsonProperty("start_money_team_ct")]
+		public int StartMoneyTeamCt
 		{
-			get { return _startMoneyTeam1; }
-			set { Set(() => StartMoneyTeam1, ref _startMoneyTeam1, value); }
+			get { return _startMoneyTeamCt; }
+			set { Set(() => StartMoneyTeamCt, ref _startMoneyTeamCt, value); }
 		}
 
 		[JsonProperty("bomb_defused_count")]
@@ -689,6 +689,49 @@ namespace Core.Models
 		public override int GetHashCode()
 		{
 			return base.GetHashCode();
+		}
+
+		public void Reset(int tick)
+		{
+			AverageHealthDamagePerPlayer = 0;
+			BombDefused = null;
+			BombDefusedCount = 0;
+			BombExploded = null;
+			BombExplodedCount = 0;
+			BombPlanted = null;
+			BombPlantedCount = 0;
+			CrouchKillCount = 0;
+			DamageArmorCount = 0;
+			DamageHealthCount = 0;
+			DecoyThrownCount = 0;
+			EntryHoldKillEvent = null;
+			EntryKillEvent = null;
+			EquipementValueTeamCt = 0;
+			EquipementValueTeamT = 0;
+			FiveKillCount = 0;
+			FourKillCount = 0;
+			IncendiaryThrownCount = 0;
+			JumpKillCount = 0;
+			KillCount = 0;
+			MolotovThrownCount = 0;
+			OneKillCount = 0;
+			SideTrouble = Side.None;
+			SmokeThrownCount = 0;
+			TeamTroubleName = string.Empty;
+			ThreeKillCount = 0;
+			TradeKillCount = 0;
+			Tick = tick;
+			Type = RoundType.NORMAL;
+			TwoKillCount = 0;
+			WinnerName = string.Empty;
+			WinnerSide = Side.None;
+
+			ExplosiveGrenadesExploded.Clear();
+			FlashbangsExploded.Clear();
+			Kills.Clear();
+			PlayersHurted.Clear();
+			SmokeStarted.Clear();
+			WeaponFired.Clear();
 		}
 
 		#region Handler collections changed

@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -1057,46 +1057,134 @@ namespace Core.Models
 
 		public void ResetStats()
 		{
-			KillCount = 0;
-			DeathCount = 0;
 			AssistCount = 0;
-			HeadshotCount = 0;
-			TeamKillCount = 0;
-			RoundMvpCount = 0;
-			OneKillCount = 0;
-			TwoKillCount = 0;
-			ThreeKillCount = 0;
-			FourKillCount = 0;
-			FiveKillCount = 0;
 			BombDefusedCount = 0;
+			BombExplodedCount = 0;
 			BombPlantedCount = 0;
-			Score = 0;
-			RatingHltv = 0;
-			RoundPlayedCount = 0;
-			FlashDurationTemp = 0;
 			CrouchKillCount = 0;
-			JumpKillCount = 0;
-			TradeKillCount = 0;
-			TradeDeathCount = 0;
+			DecoyThrownCount = 0;
+			DeathCount = 0;
 			EseaRws = 0;
 			EseaRwsPointCount = 0;
-			HasEntryKill = false;
+			FiveKillCount = 0;
+			FlashbangThrownCount = 0;
+			FlashDurationTemp = 0;
+			FourKillCount = 0;
+			HasBomb = false;
 			HasEntryHoldKill = false;
-			Kills.Clear();
-			Deaths.Clear();
+			HasEntryKill = false;
+			HeadshotCount = 0;
+			HeGrenadeThrownCount = 0;
+			IncendiaryThrownCount = 0;
+			IsAlive = true;
+			IsConnected = true;
+			IsControllingBot = false;
+			JumpKillCount = 0;
+			KillCount = 0;
+			MolotovThrownCount = 0;
+			OneKillCount = 0;
+			RatingHltv = 0;
+			RoundMvpCount = 0;
+			RoundPlayedCount = 0;
+			Score = 0;
+			SmokeThrownCount = 0;
+			TeamKillCount = 0;
+			ThreeKillCount = 0;
+			TradeDeathCount = 0;
+			TradeKillCount = 0;
+			TwoKillCount = 0;
+
 			Assists.Clear();
-			EntryKills.Clear();
-			EntryHoldKills.Clear();
-			PlayersHurted.Clear();
 			Clutches.Clear();
-			StartMoneyRounds.Clear();
+			Deaths.Clear();
+			EntryHoldKills.Clear();
+			EntryKills.Clear();
 			EquipementValueRounds.Clear();
+			Kills.Clear();
+			PlayersHurted.Clear();
 			RoundsMoneyEarned.Clear();
+			StartMoneyRounds.Clear();
 		}
 
 		public Player Clone()
 		{
 			return (Player)MemberwiseClone();
+		}
+
+		/// <summary>
+		/// Restore player's data from a Player object
+		/// </summary>
+		/// <param name="player"></param>
+		public void BackupFromPlayer(Player player)
+		{
+			Kills.Clear();
+			foreach (KillEvent e in player.Kills) Kills.Add(e);
+
+			Deaths.Clear();
+			foreach (KillEvent e in player.Deaths) Deaths.Add(e);
+
+			Assists.Clear();
+			foreach (KillEvent e in player.Assists) Assists.Add(e);
+
+			Clutches.Clear();
+			foreach (ClutchEvent e in player.Clutches) Clutches.Add(e);
+
+			EntryHoldKills.Clear();
+			foreach (EntryHoldKillEvent e in player.EntryHoldKills) EntryHoldKills.Add(e);
+
+			EntryKills.Clear();
+			foreach (EntryKillEvent e in player.EntryKills) EntryKills.Add(e);
+
+			PlayersHurted.Clear();
+			foreach (PlayerHurtedEvent e in player.PlayersHurted) PlayersHurted.Add(e);
+
+			RoundsMoneyEarned.Clear();
+			foreach (KeyValuePair<int, int> kvp in player.RoundsMoneyEarned) RoundsMoneyEarned.Add(kvp.Key, kvp.Value);
+
+			StartMoneyRounds.Clear();
+			foreach (KeyValuePair<int, int> kvp in player.StartMoneyRounds) StartMoneyRounds.Add(kvp.Key, kvp.Value);
+
+			EquipementValueRounds.Clear();
+			foreach (KeyValuePair<int, int> kvp in player.EquipementValueRounds) EquipementValueRounds.Add(kvp.Key, kvp.Value);
+
+			AssistCount = player.AssistCount;
+			BombDefusedCount = player.BombDefusedCount;
+			BombExplodedCount = player.BombExplodedCount;
+			BombPlantedCount = player.BombPlantedCount;
+			CrouchKillCount = player.CrouchKillCount;
+			DeathCount = player.DeathCount;
+			DecoyThrownCount = player.DecoyThrownCount;
+			EseaRws = player.EseaRws;
+			EseaRwsPointCount = player.EseaRwsPointCount;
+			FiveKillCount = player.FiveKillCount;
+			FlashbangThrownCount = player.FlashbangThrownCount;
+			FlashDurationTemp = player.FlashDurationTemp;
+			FourKillCount = player.FourKillCount;
+			HasBomb = player.HasBomb;
+			HasEntryHoldKill = player.HasEntryHoldKill;
+			HasEntryKill = player.HasEntryKill;
+			HeadshotCount = player.HeadshotCount;
+			HeGrenadeThrownCount = player.HeGrenadeThrownCount;
+			IsAlive = player.IsAlive;
+			IncendiaryThrownCount = player.IncendiaryThrownCount;
+			IsConnected = player.IsConnected;
+			IsControllingBot = player.IsControllingBot;
+			JumpKillCount = player.JumpKillCount;
+			KillCount = player.KillCount;
+			MolotovThrownCount = player.MolotovThrownCount;
+			OneKillCount = player.OneKillCount;
+			RatingHltv = player.RatingHltv;
+			RoundMvpCount = player.RoundMvpCount;
+			RoundPlayedCount = player.RoundPlayedCount;
+			Score = player.Score;
+			Side = player.Side;
+			SmokeThrownCount = player.SmokeThrownCount;
+			TeamKillCount = player.TeamKillCount;
+			TeamName = player.TeamName;
+			ThreeKillCount = player.ThreeKillCount;
+			TradeDeathCount = player.TradeDeathCount;
+			TradeKillCount = player.TradeKillCount;
+			TwoKillCount = player.TwoKillCount;
 		}
 	}
 }

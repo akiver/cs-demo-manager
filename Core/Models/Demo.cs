@@ -1,4 +1,4 @@
-﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -262,36 +262,6 @@ namespace Core.Models
 		private decimal _averageEseaRws;
 
 		/// <summary>
-		/// Team 1 score
-		/// </summary>
-		private int _scoreTeam1;
-
-		/// <summary>
-		/// Team 2 Score
-		/// </summary>
-		private int _scoreTeam2;
-
-		/// <summary>
-		/// First half team 1 score
-		/// </summary>
-		private int _scoreFirstHalfTeam1;
-
-		/// <summary>
-		/// First half team 2 score
-		/// </summary>
-		private int _scoreFirstHalfTeam2;
-
-		/// <summary>
-		/// Second half team 1 score
-		/// </summary>
-		private int _scoreSecondHalfTeam1;
-
-		/// <summary>
-		/// Second half team 2 score
-		/// </summary>
-		private int _scoreSecondHalfTeam2;
-
-		/// <summary>
 		/// Number of 1K during the match
 		/// </summary>
 		private int _oneKillCount;
@@ -427,12 +397,12 @@ namespace Core.Models
 		private Weapon _mostKillingWeapon;
 
 		/// <summary>
-		/// Counter-Terrorist team
+		/// Team that started as Counter-Terrorists
 		/// </summary>
 		private Team _teamCt;
 
 		/// <summary>
-		/// Terrorit team
+		/// Team that started as Terrorits
 		/// </summary>
 		private Team _teamT;
 
@@ -561,47 +531,41 @@ namespace Core.Models
 			set { Set(() => HasCheater, ref _hasCheater, value); }
 		}
 
+		/// <summary>
+		/// Score of the team that started as CT
+		/// </summary>
 		[JsonProperty("score_team1")]
-		public int ScoreTeam1
-		{
-			get { return _scoreTeam1; }
-			set { Set(() => ScoreTeam1, ref _scoreTeam1, value); }
-		}
+		public int ScoreTeamCt => TeamCT.Score;
 
+		/// <summary>
+		/// Score of the team that started as T
+		/// </summary>
 		[JsonProperty("score_team2")]
-		public int ScoreTeam2
-		{
-			get { return _scoreTeam2; }
-			set { Set(() => ScoreTeam2, ref _scoreTeam2, value); }
-		}
+		public int ScoreTeamT => TeamT.Score;
 
+		/// <summary>
+		/// First half score of the team that started as CT
+		/// </summary>
 		[JsonProperty("score_half1_team1")]
-		public int ScoreFirstHalfTeam1
-		{
-			get { return _scoreFirstHalfTeam1; }
-			set { Set(() => ScoreFirstHalfTeam1, ref _scoreFirstHalfTeam1, value); }
-		}
+		public int ScoreFirstHalfTeamCt => TeamCT.ScoreFirstHalf;
 
+		/// <summary>
+		/// First half score of the team that started as T
+		/// </summary>
 		[JsonProperty("score_half1_team2")]
-		public int ScoreFirstHalfTeam2
-		{
-			get { return _scoreFirstHalfTeam2; }
-			set { Set(() => ScoreFirstHalfTeam2, ref _scoreFirstHalfTeam2, value); }
-		}
+		public int ScoreFirstHalfTeamT => TeamT.ScoreFirstHalf;
 
+		/// <summary>
+		/// Second half score of the team that started as CT
+		/// </summary>
 		[JsonProperty("score_half2_team1")]
-		public int ScoreSecondHalfTeam1
-		{
-			get { return _scoreSecondHalfTeam1; }
-			set { Set(() => ScoreSecondHalfTeam1, ref _scoreSecondHalfTeam1, value); }
-		}
+		public int ScoreSecondHalfTeamCt => TeamCT.ScoreSecondHalf;
 
+		/// <summary>
+		/// Second half score of the team that started as T
+		/// </summary>
 		[JsonProperty("score_half2_team2")]
-		public int ScoreSecondHalfTeam2
-		{
-			get { return _scoreSecondHalfTeam2; }
-			set { Set(() => ScoreSecondHalfTeam2, ref _scoreSecondHalfTeam2, value); }
-		}
+		public int ScoreSecondHalfTeamT => TeamT.ScoreSecondHalf;
 
 		[JsonProperty("5k_count")]
 		public int FiveKillCount
@@ -1101,11 +1065,13 @@ namespace Core.Models
 
 			_teamCt = new Team
 			{
-				Name = "Team 1"
+				Name = "Team 1",
+				CurrentSide = Side.CounterTerrorist,
 			};
 			_teamT = new Team
 			{
-				Name = "Team 2"
+				Name = "Team 2",
+				CurrentSide = Side.Terrorist,
 			};
 			Kills.CollectionChanged += OnKillsCollectionChanged;
 			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
@@ -1127,89 +1093,179 @@ namespace Core.Models
 		{
 			return base.GetHashCode();
 		}
-		
+
+		public Demo Copy()
+		{
+			return ObjectExtensions.Copy(this);
+		}
+
+		/// <summary>
+		/// Restore demo's data from a Demo object
+		/// </summary>
+		/// <param name="demo"></param>
+		public void BackupFromDemo(Demo demo)
+		{
+			Kills.Clear();
+			foreach (KillEvent killEvent in demo.Kills) Kills.Add(killEvent);
+			Rounds.Clear();
+			foreach (Round round in demo.Rounds) Rounds.Add(round);
+			MolotovsFireStarted.Clear();
+			foreach (MolotovFireStartedEvent e in demo.MolotovsFireStarted) MolotovsFireStarted.Add(e);
+			IncendiariesFireStarted.Clear();
+			foreach (MolotovFireStartedEvent e in demo.IncendiariesFireStarted) IncendiariesFireStarted.Add(e);
+			WeaponFired.Clear();
+			foreach (WeaponFireEvent e in demo.WeaponFired) WeaponFired.Add(e);
+			Overtimes.Clear();
+			foreach (Overtime o in demo.Overtimes) Overtimes.Add(o);
+			PositionPoints.Clear();
+			foreach (PositionPoint p in demo.PositionPoints) PositionPoints.Add(p);
+			DecoyStarted.Clear();
+			foreach (DecoyStartedEvent e in demo.DecoyStarted) DecoyStarted.Add(e);
+			BombPlanted.Clear();
+			foreach (BombPlantedEvent e in demo.BombPlanted) BombPlanted.Add(e);
+			BombDefused.Clear();
+			foreach (BombDefusedEvent e in demo.BombDefused) BombDefused.Add(e);
+			BombExploded.Clear();
+			foreach (BombExplodedEvent e in demo.BombExploded) BombExploded.Add(e);
+			PlayersHurted.Clear();
+			foreach (PlayerHurtedEvent e in demo.PlayersHurted) PlayersHurted.Add(e);
+			PlayerBlinded.Clear();
+			foreach (PlayerBlindedEvent e in demo.PlayerBlinded) PlayerBlinded.Add(e);
+
+			foreach (Player player in Players)
+			{
+				Player pl = demo.Players.FirstOrDefault(p => p.SteamId == player.SteamId);
+				if (pl != null) player.BackupFromPlayer(pl);
+			}
+
+			// Backup teams state
+			TeamCT.BackupFromTeam(demo.TeamCT);
+			TeamT.BackupFromTeam(demo.TeamT);
+
+			AssistCount = demo.AssistCount;
+			AssistPerRound = demo.AssistPerRound;
+			AverageEseaRws = demo.AverageEseaRws;
+			AverageHealthDamage = demo.AverageHealthDamage;
+			AverageHltvRating = demo.AverageHltvRating;
+			BombDefusedCount = demo.BombDefusedCount;
+			BombExplodedCount = demo.BombExplodedCount;
+			BombPlantedCount = demo.BombPlantedCount;
+			ClutchCount = demo.ClutchCount;
+			ClutchLostCount = demo.ClutchLostCount;
+			ClutchWonCount = demo.ClutchWonCount;
+			CrouchKillCount = demo.CrouchKillCount;
+			DamageArmorCount = demo.DamageArmorCount;
+			DamageHealthCount = demo.DamageHealthCount;
+			DeathCount = demo.DeathCount;
+			DeathPerRound = demo.DeathPerRound;
+			DecoyThrownCount = demo.DecoyThrownCount;
+			EntryKillCount = demo.EntryKillCount;
+			FlashbangThrownCount = demo.FlashbangThrownCount;
+			FiveKillCount = demo.FiveKillCount;
+			FourKillCount = demo.FourKillCount;
+			HeadshotCount = demo.HeadshotCount;
+			HeThrownCount = demo.HeThrownCount;
+			HitCount = demo.HitCount;
+			IncendiaryThrownCount = demo.IncendiaryThrownCount;
+			JumpKillCount = demo.JumpKillCount;
+			KillCount = demo.KillCount;
+			KillPerRound = demo.KillPerRound;
+			KnifeKillCount = demo.KnifeKillCount;
+			MolotovThrownCount = demo.MolotovThrownCount;
+			MostBombPlantedPlayer = demo.MostBombPlantedPlayer;
+			MostEntryKillPlayer = demo.MostEntryKillPlayer;
+			MostHeadshotPlayer = demo.MostHeadshotPlayer;
+			MostKillingWeapon = demo.MostKillingWeapon;
+			MvpCount = demo.MvpCount;
+			OneKillCount = demo.OneKillCount;
+			SmokeThrownCount = demo.SmokeThrownCount;
+			TeamKillCount = demo.TeamKillCount;
+			ThreeKillCount = demo.ThreeKillCount;
+			TradeKillCount = demo.TradeKillCount;
+			TwoKillCount = demo.TwoKillCount;
+			WeaponFiredCount = demo.WeaponFiredCount;
+
+			RaiseScoresChanged();
+		}
+
 		public void ResetStats(bool resetTeams = true)
 		{
 			DispatcherHelper.CheckBeginInvokeOnUI(delegate
+			{
+				AssistCount = 0;
+				AssistPerRound = 0;
+				AverageEseaRws = 0;
+				AverageHealthDamage = 0;
+				AverageHltvRating = 0;
+				BombDefusedCount = 0;
+				BombExplodedCount = 0;
+				BombPlantedCount = 0;
+				ClutchCount = 0;
+				ClutchLostCount = 0;
+				ClutchWonCount = 0;
+				CrouchKillCount = 0;
+				DamageArmorCount = 0;
+				DamageHealthCount = 0;
+				DeathCount = 0;
+				DeathPerRound = 0;
+				DecoyThrownCount = 0;
+				EntryKillCount = 0;
+				FlashbangThrownCount = 0;
+				FiveKillCount = 0;
+				FourKillCount = 0;
+				HasCheater = false;
+				HeadshotCount = 0;
+				HeThrownCount = 0;
+				HitCount = 0;
+				IncendiaryThrownCount = 0;
+				JumpKillCount = 0;
+				KillCount = 0;
+				KillPerRound = 0;
+				KnifeKillCount = 0;
+				MolotovThrownCount = 0;
+				MostBombPlantedPlayer = null;
+				MostEntryKillPlayer = null;
+				MostHeadshotPlayer = null;
+				MostKillingWeapon = null;
+				MvpCount = 0;
+				OneKillCount = 0;
+				SmokeThrownCount = 0;
+				Surrender = null;
+				TeamKillCount = 0;
+				ThreeKillCount = 0;
+				TradeKillCount = 0;
+				TwoKillCount = 0;
+				WeaponFiredCount = 0;
+				Winner = null;
+				BombDefused.Clear();
+				BombExploded.Clear();
+				BombPlanted.Clear();
+				ChatMessageList.Clear();
+				DecoyStarted.Clear();
+				IncendiariesFireStarted.Clear();
+				Kills.Clear();
+				MolotovsFireStarted.Clear();
+				Overtimes.Clear();
+				PlayersHurted.Clear();
+				PlayerBlinded.Clear();
+				PositionPoints.Clear();
+				Rounds.Clear();
+				WeaponFired.Clear();
+				TeamT.ResetStats();
+				TeamCT.ResetStats();
+				TeamCT.CurrentSide = Side.CounterTerrorist;
+				TeamT.CurrentSide = Side.Terrorist;
+				if (resetTeams)
 				{
-					AverageHealthDamage = 0;
-					AverageHltvRating = 0;
-					AverageEseaRws = 0;
-					AssistPerRound = 0;
-					DeathPerRound = 0;
-					KillPerRound = 0;
-					DamageHealthCount = 0;
-					DamageArmorCount = 0;
-					MvpCount = 0;
-					KillCount = 0;
-					KnifeKillCount = 0;
-					TeamKillCount = 0;
-					HeadshotCount = 0;
-					AssistCount = 0;
-					DeathCount = 0;
-					SmokeThrownCount = 0;
-					FlashbangThrownCount = 0;
-					HeadshotCount = 0;
-					DecoyThrownCount = 0;
-					MolotovThrownCount = 0;
-					IncendiaryThrownCount = 0;
-					HitCount = 0;
-					WeaponFiredCount = 0;
-					AssistPerRound = 0;
-					DeathPerRound = 0;
-					OneKillCount = 0;
-					TwoKillCount = 0;
-					ThreeKillCount = 0;
-					FourKillCount = 0;
-					FiveKillCount = 0;
-					ScoreTeam1 = 0;
-					ScoreTeam2 = 0;
-					ScoreFirstHalfTeam1 = 0;
-					ScoreFirstHalfTeam2 = 0;
-					ScoreSecondHalfTeam1 = 0;
-					ScoreSecondHalfTeam2 = 0;
-					Rounds.Clear();
-					WeaponFired.Clear();
-					Kills.Clear();
-					Overtimes.Clear();
-					PositionPoints.Clear();
-					MolotovsFireStarted.Clear();
-					IncendiariesFireStarted.Clear();
-					DecoyStarted.Clear();
-					BombPlanted.Clear();
-					BombDefused.Clear();
-					BombExploded.Clear();
-					BombPlanted.Clear();
-					BombDefused.Clear();
-					BombExploded.Clear();
-					ClutchCount = 0;
-					ClutchLostCount = 0;
-					ClutchWonCount = 0;
-					EntryKillCount = 0;
-					MostBombPlantedPlayer = null;
-					MostEntryKillPlayer = null;
-					MostHeadshotPlayer = null;
-					MostKillingWeapon = null;
-					HasCheater = false;
-					PlayersHurted.Clear();
-					PlayerBlinded.Clear();
-					ChatMessageList.Clear();
-					Winner = null;
-					Surrender = null;
-					if (resetTeams)
-					{
-						Players.Clear();
-						TeamCT.Clear();
-						TeamT.Clear();
-					}
-					else
-					{
-						foreach (Player playerExtended in Players)
-						{
-							playerExtended.ResetStats();
-						}
-					}
-				});
+					Players.Clear();
+					TeamCT.Clear();
+					TeamT.Clear();
+				}
+				else
+				{
+					foreach (Player player in Players) player.ResetStats();
+				}
+			});
 		}
 
 		/// <summary>
@@ -1219,6 +1275,16 @@ namespace Core.Models
 		public string GetVdmFilePath()
 		{
 			return Path.Substring(0, Path.Length - 3) + "vdm";
+		}
+
+		public void RaiseScoresChanged()
+		{
+			RaisePropertyChanged(() => ScoreTeamT);
+			RaisePropertyChanged(() => ScoreTeamCt);
+			RaisePropertyChanged(() => ScoreFirstHalfTeamCt);
+			RaisePropertyChanged(() => ScoreFirstHalfTeamT);
+			RaisePropertyChanged(() => ScoreSecondHalfTeamCt);
+			RaisePropertyChanged(() => ScoreSecondHalfTeamT);
 		}
 
 		#region Handler collections changed

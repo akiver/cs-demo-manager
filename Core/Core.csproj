@@ -93,6 +93,7 @@
     <Compile Include="Models\Source\Esl.cs" />
     <Compile Include="Models\Steam\VanityUrlResponse.cs" />
     <Compile Include="Models\Stuff.cs" />
+    <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -1245,5 +1245,29 @@ namespace Manager.Properties {
                 this["EnableHlaeConfigParent"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowCtTeamName {
+            get {
+                return ((bool)(this["ShowCtTeamName"]));
+            }
+            set {
+                this["ShowCtTeamName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool ShowTteamName {
+            get {
+                return ((bool)(this["ShowTteamName"]));
+            }
+            set {
+                this["ShowTteamName"] = value;
+            }
+        }
     }
 }

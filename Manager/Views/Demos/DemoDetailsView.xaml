@@ -687,7 +687,7 @@
 									<StackPanel Orientation="Horizontal">
 										<TextBlock Text="{Binding CurrentDemo.TeamCT.Name}"
 												   Style="{StaticResource TeamTitleScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ScoreTeam1}"
+										<TextBlock Text="{Binding CurrentDemo.ScoreTeamCt}"
 												   Style="{StaticResource TeamScoreScoreboard}"/>
 									</StackPanel>
 								</Grid>
@@ -696,7 +696,7 @@
 									<StackPanel Orientation="Vertical"
 												VerticalAlignment="Center">
 										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeam1}"
+											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeamCt}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource BlueBrush}"
 													   TextAlignment="Right"/>
@@ -704,13 +704,13 @@
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   TextAlignment="Center"
 													   Foreground="{StaticResource LightWhiteBrush}" />
-											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeam2}"
+											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeamT}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource LightRedColorBrush}"
 													   TextAlignment="Left"/>
 										</StackPanel>
 										<StackPanel Orientation="Horizontal">
-											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeam1}"
+											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeamCt}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource LightRedColorBrush}"
 													   TextAlignment="Right"/>
@@ -718,7 +718,7 @@
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   TextAlignment="Center"
 													   Foreground="{StaticResource LightWhiteBrush}" />
-											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeam2}"
+											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeamT}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource BlueBrush}"
 													   TextAlignment="Left"/>
@@ -728,7 +728,7 @@
 								<Grid Grid.Column="2"
 									  HorizontalAlignment="Left">
 									<StackPanel Orientation="Horizontal">
-										<TextBlock Text="{Binding CurrentDemo.ScoreTeam2}"
+										<TextBlock Text="{Binding CurrentDemo.ScoreTeamT}"
 												   Style="{StaticResource TeamScoreScoreboard}"/>
 										<TextBlock Text="{Binding CurrentDemo.TeamT.Name}"
 												   Style="{StaticResource TeamTitleScoreboard}"/>
@@ -1261,15 +1261,29 @@
 														Width="Auto"
 														Header="{x:Static properties:Resources.Tick}"
 														Binding="{Binding Tick}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TeamCtHeader}"
+														Width="Auto"
+														Header="{x:Static properties:Resources.CT}"
+														Binding="{Binding TeamCtName}"
+														CellStyle="{StaticResource CellCtStyle}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowCtTeamNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource TeamtHeader}"
+														Width="Auto"
+														Header="{x:Static properties:Resources.T}"
+														Binding="{Binding TeamTname}"
+														CellStyle="{StaticResource CellTstyle}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTteamNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerClanNameHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderWinnerTeamName}"
 														Binding="{Binding WinnerName}"
+														CellStyle="{StaticResource CellWinnerStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerClanNameColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource WinnerHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderWinnerSide}"
 														Binding="{Binding WinnerSide, Converter={StaticResource SideToStringConverter}}"
+														CellStyle="{StaticResource CellWinnerStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RoundTypeHeader}"
 														Width="Auto"
@@ -1280,11 +1294,13 @@
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderSideTrouble}"
 														Binding="{Binding SideTrouble, Converter={StaticResource SideToStringConverter}}"
+														CellStyle="{StaticResource CellTroubleTeamStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowSideTroubleColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource TeamTroubleHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderTeamTrouble}"
 														Binding="{Binding TeamTroubleName}"
+														CellStyle="{StaticResource CellTroubleTeamStyle}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource KillsHeader}"
 														Width="Auto"
@@ -1361,25 +1377,25 @@
 														Header="{x:Static properties:Resources.HeaderBombDefused}"
 														Binding="{Binding BombDefusedCount}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombDefusedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
-									<DataGridTextColumn HeaderStyle="{StaticResource StartMoneyTeam1Header}"
+									<DataGridTextColumn HeaderStyle="{StaticResource StartMoneyTeamCtHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderStartMoneyTeam1}"
-														Binding="{Binding StartMoneyTeam1}"
+														Binding="{Binding StartMoneyTeamCt}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource StartMoneyTeam2Header}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderStartMoneyTeam2}"
-														Binding="{Binding StartMoneyTeam2}"
+														Binding="{Binding StartMoneyTeamT}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowStartMoneyTeam2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource EquipementValueTeam1Header}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderEquipementValueTeam1}"
-														Binding="{Binding EquipementValueTeam1}"
+														Binding="{Binding EquipementValueTeamCt}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam1Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource EquipementValueTeam2Header}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderEquipementValueTeam2}"
-														Binding="{Binding EquipementValueTeam2}"
+														Binding="{Binding EquipementValueTeamT}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowEquipementValueTeam2Column, Converter={StaticResource BooleanToVisibilityConverter}}" />
 								</DataGrid.Columns>
 							</DataGrid>

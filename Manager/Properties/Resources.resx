@@ -368,10 +368,10 @@
     <value>Entry kills</value>
   </data>
   <data name="EquipmentValueTeam1" xml:space="preserve">
-    <value>Equipment value team 1</value>
+    <value>Equipment value CT</value>
   </data>
   <data name="EquipmentValueTeam2" xml:space="preserve">
-    <value>Equipment value team 2</value>
+    <value>Equipment value T</value>
   </data>
   <data name="ExportCustomData" xml:space="preserve">
     <value>Export custom data</value>
@@ -520,10 +520,10 @@
     <value>Start BOT on launch</value>
   </data>
   <data name="StartMoneyTeam1" xml:space="preserve">
-    <value>Start money team 1</value>
+    <value>Start money CT</value>
   </data>
   <data name="StartMoneyTeam2" xml:space="preserve">
-    <value>Start money team 2</value>
+    <value>Start money T</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
@@ -811,10 +811,10 @@
     <comment>Entry Kills</comment>
   </data>
   <data name="HeaderEquipementValueTeam1" xml:space="preserve">
-    <value>EV Team 1 ($)</value>
+    <value>EV CT ($)</value>
   </data>
   <data name="HeaderEquipementValueTeam2" xml:space="preserve">
-    <value>EV Team 2 ($)</value>
+    <value>EV T ($)</value>
   </data>
   <data name="HeaderHsPercent" xml:space="preserve">
     <value>HS%</value>
@@ -833,10 +833,10 @@
     <comment>Side Trouble</comment>
   </data>
   <data name="HeaderStartMoneyTeam1" xml:space="preserve">
-    <value>SM Team 1 ($)</value>
+    <value>SM CT ($)</value>
   </data>
   <data name="HeaderStartMoneyTeam2" xml:space="preserve">
-    <value>SM Team 2 ($)</value>
+    <value>SM T ($)</value>
   </data>
   <data name="HeaderTeamKill" xml:space="preserve">
     <value>FF</value>
@@ -946,10 +946,10 @@
     <value>Equipment Value</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
-    <value>Equipement Value Team 1 ($)</value>
+    <value>Equipement Value CT ($)</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam2" xml:space="preserve">
-    <value>Equipement Value Team 2 ($)</value>
+    <value>Equipement Value T ($)</value>
   </data>
   <data name="HeaderToolTipFiveKill" xml:space="preserve">
     <value>5 Kills</value>
@@ -1099,10 +1099,10 @@
     <value>Start Money</value>
   </data>
   <data name="HeaderToolTipStartMoneyTeam1" xml:space="preserve">
-    <value>Start Money Team 1 ($)</value>
+    <value>Start Money CT ($)</value>
   </data>
   <data name="HeaderToolTipStartMoneyTeam2" xml:space="preserve">
-    <value>Start Money Team 2 ($)</value>
+    <value>Start Money T ($)</value>
   </data>
   <data name="HeaderToolTipTeam1Name" xml:space="preserve">
     <value>Team 1 name</value>
@@ -1247,10 +1247,10 @@
     <value>EK (Entry Kills)</value>
   </data>
   <data name="EquipmentValueTeam1Full" xml:space="preserve">
-    <value>EVT1 (Equipment Value Team 1 ($))</value>
+    <value>EV CT (Equipment Value CT ($))</value>
   </data>
   <data name="EquipmentValueTeam2Full" xml:space="preserve">
-    <value>EVT2 (Equipment Value Team 2 ($))</value>
+    <value>EV T (Equipment Value T ($))</value>
   </data>
   <data name="EseaRwsFull" xml:space="preserve">
     <value>RWS (ESEA Round Win Share)</value>
@@ -1316,10 +1316,10 @@
     <value>ST (Side Trouble)</value>
   </data>
   <data name="StartMoneyTeam1Full" xml:space="preserve">
-    <value>SMT1 (Start Money Team 1 ($))</value>
+    <value>SM CT (Start Money CT ($))</value>
   </data>
   <data name="StartMoneyTeam2Full" xml:space="preserve">
-    <value>SMT2 (Start Money Team 2 ($))</value>
+    <value>SM T (Start Money T ($))</value>
   </data>
   <data name="TeamNameTroubleFull" xml:space="preserve">
     <value>TNT (Team Name Trouble)</value>

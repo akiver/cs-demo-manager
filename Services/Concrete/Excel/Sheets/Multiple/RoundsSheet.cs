@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
@@ -91,10 +91,10 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.BombExplodedCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.BombPlantedCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.BombDefusedCount);
-						SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeam1);
-						SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeam2);
-						SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeam1);
-						SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeam2);
+						SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeamCt);
+						SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeamT);
+						SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeamCt);
+						SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeamT);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.FlashbangThrownCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.SmokeThrownCount);
 						SetCellValue(row, columnNumber++, CellType.Numeric, round.HeGrenadeThrownCount);

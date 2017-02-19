@@ -2100,7 +2100,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Equipment value team 1.
+        ///   Looks up a localized string similar to Equipment value CT.
         /// </summary>
         public static string EquipmentValueTeam1 {
             get {
@@ -2109,7 +2109,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EVT1 (Equipment Value Team 1 ($)).
+        ///   Looks up a localized string similar to EV CT (Equipment Value CT ($)).
         /// </summary>
         public static string EquipmentValueTeam1Full {
             get {
@@ -2118,7 +2118,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Equipment value team 2.
+        ///   Looks up a localized string similar to Equipment value T.
         /// </summary>
         public static string EquipmentValueTeam2 {
             get {
@@ -2127,7 +2127,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EVT2 (Equipment Value Team 2 ($)).
+        ///   Looks up a localized string similar to EV T (Equipment Value T ($)).
         /// </summary>
         public static string EquipmentValueTeam2Full {
             get {
@@ -2487,7 +2487,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV Team 1 ($).
+        ///   Looks up a localized string similar to EV CT ($).
         /// </summary>
         public static string HeaderEquipementValueTeam1 {
             get {
@@ -2496,7 +2496,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EV Team 2 ($).
+        ///   Looks up a localized string similar to EV T ($).
         /// </summary>
         public static string HeaderEquipementValueTeam2 {
             get {
@@ -2820,7 +2820,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SM Team 1 ($).
+        ///   Looks up a localized string similar to SM CT ($).
         /// </summary>
         public static string HeaderStartMoneyTeam1 {
             get {
@@ -2829,7 +2829,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SM Team 2 ($).
+        ///   Looks up a localized string similar to SM T ($).
         /// </summary>
         public static string HeaderStartMoneyTeam2 {
             get {
@@ -3198,7 +3198,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Equipement Value Team 1 ($).
+        ///   Looks up a localized string similar to Equipement Value CT ($).
         /// </summary>
         public static string HeaderToolTipEquipmentValueTeam1 {
             get {
@@ -3207,7 +3207,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Equipement Value Team 2 ($).
+        ///   Looks up a localized string similar to Equipement Value T ($).
         /// </summary>
         public static string HeaderToolTipEquipmentValueTeam2 {
             get {
@@ -3666,7 +3666,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Money Team 1 ($).
+        ///   Looks up a localized string similar to Start Money CT ($).
         /// </summary>
         public static string HeaderToolTipStartMoneyTeam1 {
             get {
@@ -3675,7 +3675,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start Money Team 2 ($).
+        ///   Looks up a localized string similar to Start Money T ($).
         /// </summary>
         public static string HeaderToolTipStartMoneyTeam2 {
             get {
@@ -6135,7 +6135,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start money team 1.
+        ///   Looks up a localized string similar to Start money CT.
         /// </summary>
         public static string StartMoneyTeam1 {
             get {
@@ -6144,7 +6144,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMT1 (Start Money Team 1 ($)).
+        ///   Looks up a localized string similar to SM CT (Start Money CT ($)).
         /// </summary>
         public static string StartMoneyTeam1Full {
             get {
@@ -6153,7 +6153,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start money team 2.
+        ///   Looks up a localized string similar to Start money T.
         /// </summary>
         public static string StartMoneyTeam2 {
             get {
@@ -6162,7 +6162,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to SMT2 (Start Money Team 2 ($)).
+        ///   Looks up a localized string similar to SM T (Start Money T ($)).
         /// </summary>
         public static string StartMoneyTeam2Full {
             get {

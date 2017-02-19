@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:properties="clr-namespace:Manager.Properties"
 					xmlns:converters="clr-namespace:Manager.Converters">
@@ -303,6 +303,14 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipTick}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="TeamCtHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.CounterTerrorists}" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="TeamtHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.Terrorists}" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="WinnerClanNameHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipWinnerTeamName}" />
 	</Style>
@@ -327,7 +335,7 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipRoundNumber}" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="StartMoneyTeam1Header" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+	<Style TargetType="DataGridColumnHeader" x:Key="StartMoneyTeamCtHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipStartMoneyTeam1}" />
 	</Style>
 
@@ -445,6 +453,65 @@
 
 	<Style TargetType="DataGridColumnHeader" x:Key="EconomyBanHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipMarketBanned}" />
+	</Style>
+	
+	<!-- DataGrid styles for rounds -->
+	<Style TargetType="DataGridCell" x:Key="CellCtStyle">
+		<Setter Property="Background">
+			<Setter.Value>
+				<SolidColorBrush Color="{StaticResource Blue}" Opacity="0.5"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="DataGridCell" x:Key="CellTstyle">
+		<Setter Property="Background">
+			<Setter.Value>
+				<SolidColorBrush Color="{StaticResource LightRed}" Opacity="0.5"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="DataGridCell" x:Key="CellWinnerStyle">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding WinnerSide}" Value="CounterTerrorist">
+				<Setter Property="Background">
+					<Setter.Value>
+						<SolidColorBrush Color="{StaticResource Blue}" Opacity="0.5"/>
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding WinnerSide}" Value="Terrorist">
+				<Setter Property="Background">
+					<Setter.Value>
+						<SolidColorBrush Color="{StaticResource LightRed}" Opacity="0.5"/>
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="DataGridCell" x:Key="CellTroubleTeamStyle">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0" />
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding SideTrouble}" Value="CounterTerrorist">
+				<Setter Property="Background">
+					<Setter.Value>
+						<SolidColorBrush Color="{StaticResource Blue}" Opacity="0.5"/>
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BorderThickness" Value="1" />
+			</DataTrigger>
+			<DataTrigger Binding="{Binding SideTrouble}" Value="Terrorist">
+				<Setter Property="Background">
+					<Setter.Value>
+						<SolidColorBrush Color="{StaticResource LightRed}" Opacity="0.5"/>
+					</Setter.Value>
+				</Setter>
+				<Setter Property="BorderThickness" Value="1" />
+			</DataTrigger>
+		</Style.Triggers>
 	</Style>
 
 	<!--DataGrid Row style for scoreboard -->

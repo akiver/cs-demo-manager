@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -768,7 +768,7 @@ namespace Services.Concrete
 		/// <returns></returns>
 		private static int GetWinStatusCode(Demo demo, long accountSteamId = 0)
 		{
-			if (accountSteamId == 0 || demo.ScoreTeam1 == 0 && demo.ScoreTeam2 == 0) return -3;
+			if (accountSteamId == 0 || demo.ScoreTeamCt == 0 && demo.ScoreTeamT == 0) return -3;
 
 			Player player = demo.Players.FirstOrDefault(p => p.SteamId == accountSteamId);
 			if (player == null) return -3;
@@ -783,16 +783,16 @@ namespace Services.Concrete
 			// was in CT?
 			if (player.TeamName == demo.TeamCT.Name)
 			{
-				if (demo.ScoreTeam1 == demo.ScoreTeam2) return 0;
-				if (demo.ScoreTeam1 > demo.ScoreTeam2) return 1;
+				if (demo.ScoreTeamCt == demo.ScoreTeamT) return 0;
+				if (demo.ScoreTeamCt > demo.ScoreTeamT) return 1;
 				return -1;
 			}
 
 			// was in T?
 			if (player.TeamName == demo.TeamT.Name)
 			{
-				if (demo.ScoreTeam1 == demo.ScoreTeam2) return 0;
-				if (demo.ScoreTeam1 < demo.ScoreTeam2) return 1;
+				if (demo.ScoreTeamCt == demo.ScoreTeamT) return 0;
+				if (demo.ScoreTeamCt < demo.ScoreTeamT) return 1;
 				return -1;
 			}
 
