@@ -12,4 +12,70 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Rank0" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="Rank1" xml:space="preserve">
+    <value>Srebro I</value>
+  </data>
+  <data name="Rank10" xml:space="preserve">
+    <value>Mistrzowski Złoty Laur</value>
+  </data>
+  <data name="Rank11" xml:space="preserve">
+    <value>Mistrzowski Obrońca I</value>
+  </data>
+  <data name="Rank12" xml:space="preserve">
+    <value>Mistrzowski Obrońca II</value>
+  </data>
+  <data name="Rank13" xml:space="preserve">
+    <value>Elitarny Mistrzowski Obrońca</value>
+  </data>
+  <data name="Rank14" xml:space="preserve">
+    <value>Wybitny Mistrzowski Obrońca</value>
+  </data>
+  <data name="Rank15" xml:space="preserve">
+    <value>Legendarny Orzeł</value>
+  </data>
+  <data name="Rank16" xml:space="preserve">
+    <value>Mistrzowski Legendarny Orzeł</value>
+  </data>
+  <data name="Rank17" xml:space="preserve">
+    <value>Mistrzowska Pierwsza Klasa</value>
+  </data>
+  <data name="Rank18" xml:space="preserve">
+    <value>Elita Światowa</value>
+  </data>
+  <data name="Rank2" xml:space="preserve">
+    <value>Srebro II</value>
+  </data>
+  <data name="Rank3" xml:space="preserve">
+    <value>Srebro III</value>
+  </data>
+  <data name="Rank4" xml:space="preserve">
+    <value>Srebro IV</value>
+  </data>
+  <data name="Rank5" xml:space="preserve">
+    <value>Elitarne Srebro</value>
+  </data>
+  <data name="Rank6" xml:space="preserve">
+    <value>Mistrzowskie Elitarne Srebro</value>
+  </data>
+  <data name="Rank7" xml:space="preserve">
+    <value>Złoty Laur I</value>
+  </data>
+  <data name="Rank8" xml:space="preserve">
+    <value>Złoty Laur II</value>
+  </data>
+  <data name="Rank9" xml:space="preserve">
+    <value>Złoty Laur III</value>
+  </data>
+  <data name="StatusNone" xml:space="preserve">
+    <value>Brak</value>
+  </data>
+  <data name="StatusToWatch" xml:space="preserve">
+    <value>Do obejrzenia</value>
+  </data>
+  <data name="StatusWatched" xml:space="preserve">
+    <value>Obejrzane</value>
+  </data>
 </root>
