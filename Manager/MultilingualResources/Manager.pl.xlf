@@ -2653,8 +2653,9 @@ Więcej informacji znajdziesz na http://csgo-demos-manager.com.</target>
           <target state="final">Nie znaleziono żadnych punktów. Być może musisz analizować to demo.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
-          <source>Equipement</source>
-          <target state="final">Ekwipunek</target>
+          <source>Equipment</source>
+          <target state="needs-review-translation">Ekwipunek</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>

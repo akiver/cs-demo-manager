@@ -2669,8 +2669,9 @@ You can find more information on http://csgo-demos-manager.com.</source>
           <target state="final">没找到点 你也许要分析这个demo</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
-          <source>Equipement</source>
-          <target state="final">装备</target>
+          <source>Equipment</source>
+          <target state="needs-review-translation">装备</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>

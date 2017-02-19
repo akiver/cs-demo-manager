@@ -2669,8 +2669,9 @@ du kan finde mere information på http://csgo-demos-manager.com.</target>
           <target state="final">Ingen points fundet. Du kan være du skal analysere demoen.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
-          <source>Equipement</source>
-          <target state="final">udstyr</target>
+          <source>Equipment</source>
+          <target state="needs-review-translation">udstyr</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>

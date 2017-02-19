@@ -2073,7 +2073,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Equipement.
+        ///   Looks up a localized string similar to Equipment.
         /// </summary>
         public static string Equipment {
             get {

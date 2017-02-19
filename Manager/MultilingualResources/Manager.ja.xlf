@@ -2652,8 +2652,8 @@ You can find more information on http://csgo-demos-manager.com.</target>
           <target state="new">No points found. You may have to analyze this demo.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
-          <source>Equipement</source>
-          <target state="new">Equipement</target>
+          <source>Equipment</source>
+          <target state="new">Equipment</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>

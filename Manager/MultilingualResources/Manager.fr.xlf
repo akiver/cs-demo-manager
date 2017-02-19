@@ -2636,8 +2636,9 @@ Voulez-vous vraiment continuer?</target>
           <target state="final">% tir dans la tête</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
-          <source>Equipement</source>
-          <target state="final">Equipement</target>
+          <source>Equipment</source>
+          <target state="needs-review-translation">Equipement</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="StuffsThrown" translate="yes" xml:space="preserve">
           <source>Stuffs Thrown</source>

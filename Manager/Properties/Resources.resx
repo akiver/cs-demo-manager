@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -2119,7 +2119,7 @@ You can find more information on http://csgo-demos-manager.com.</value>
     <value>No points found. You may have to analyze this demo.</value>
   </data>
   <data name="Equipment" xml:space="preserve">
-    <value>Equipement</value>
+    <value>Equipment</value>
   </data>
   <data name="HeaderToolTipKnifeKills" xml:space="preserve">
     <value>Knife Kills</value>
