@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using Core;
 
 namespace Manager.Converters
 {
@@ -14,14 +15,21 @@ namespace Manager.Converters
 			Image image = value as Image;
 			if (image != null)
 			{
-				MemoryStream ms = new MemoryStream();
-				image.Save(ms, image.RawFormat);
-				ms.Seek(0, SeekOrigin.Begin);
-				BitmapImage bitmap = new BitmapImage();
-				bitmap.BeginInit();
-				bitmap.StreamSource = ms;
-				bitmap.EndInit();
-				return bitmap;
+				try
+				{
+					MemoryStream ms = new MemoryStream();
+					image.Save(ms, image.RawFormat);
+					ms.Seek(0, SeekOrigin.Begin);
+					BitmapImage bitmap = new BitmapImage();
+					bitmap.BeginInit();
+					bitmap.StreamSource = ms;
+					bitmap.EndInit();
+					return bitmap;
+				}
+				catch (Exception e)
+				{
+					Logger.Instance.Log(e);
+				}
 			}
 			return null;
 		}
