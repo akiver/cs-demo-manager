@@ -136,7 +136,7 @@ namespace Services.Concrete.Analyzer
 			if (e.Swapped == null || e.Swapped.SteamID == 0) return;
 
 			// Keep track of the number team_player events to detect teams swap
-			if (e.OldTeam != e.NewTeam)
+			if (e.OldTeam != e.NewTeam && e.NewTeam != DemoInfo.Team.Spectate && e.OldTeam != DemoInfo.Team.Spectate)
 			{
 				PlayerTeamCount++;
 				if (PlayerTeamCount > 7)
