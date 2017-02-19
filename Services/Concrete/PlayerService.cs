@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
@@ -92,8 +92,8 @@ namespace Services.Concrete
 					FiveKillCount = round.Kills.Count(k => k.KillerSteamId == player.SteamId) == 5 ? 1 : 0,
 					TradeKillCount = round.Kills.Count(k => k.KillerSteamId == player.SteamId && k.IsTradeKill),
 					TradeDeathCount = round.Kills.Count(k => k.KilledSteamId == player.SteamId && k.IsTradeKill),
-					StartMoneyValue = player.StartMoneyRounds[round.Number],
-					EquipementValue = player.EquipementValueRounds[round.Number],
+					StartMoneyValue = player.StartMoneyRounds.ContainsKey(round.Number) ? player.StartMoneyRounds[round.Number] : 0,
+					EquipementValue = player.EquipementValueRounds.ContainsKey(round.Number) ? player.EquipementValueRounds[round.Number] : 0,
 					TeamKillCount = round.Kills.Count(k => k.KillerSteamId == player.SteamId && k.KillerSide == k.KilledSide),
 					BombPlantedCount = round.BombPlanted != null && round.BombPlanted.PlanterSteamId == player.SteamId ? 1 : 0,
 					BombDefusedCount = round.BombDefused != null && round.BombDefused.DefuserSteamId == player.SteamId ? 1 : 0,
@@ -114,7 +114,7 @@ namespace Services.Concrete
 				data.AddRange(demo.Rounds.Select(round => new GenericDoubleChart
 				{
 					Label = round.Number.ToString(),
-					Value = player.EquipementValueRounds[round.Number]
+					Value = player.EquipementValueRounds.ContainsKey(round.Number) ? player.EquipementValueRounds[round.Number] : 0,
 				}));
 			});
 
@@ -130,7 +130,7 @@ namespace Services.Concrete
 				int total = 0;
 				foreach (Round round in demo.Rounds)
 				{
-					total += player.RoundsMoneyEarned[round.Number];
+					total += player.RoundsMoneyEarned.ContainsKey(round.Number) ? player.RoundsMoneyEarned[round.Number] : 0;
 					data.Add(new GenericDoubleChart
 					{
 						Label = round.Number.ToString(),
