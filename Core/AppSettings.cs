@@ -104,7 +104,7 @@ namespace Core
 			{
 				Key = "de-DE",
 				Name = "German",
-				IsEnabled = false
+				IsEnabled = true
 			},
 			new Language
 			{
