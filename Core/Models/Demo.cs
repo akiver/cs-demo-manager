@@ -1265,6 +1265,7 @@ namespace Core.Models
 				{
 					foreach (Player player in Players) player.ResetStats();
 				}
+				RaiseScoresChanged();
 			});
 		}
 
