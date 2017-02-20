@@ -457,6 +457,7 @@
 	
 	<!-- DataGrid styles for rounds -->
 	<Style TargetType="DataGridCell" x:Key="CellCtStyle">
+		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Background">
 			<Setter.Value>
 				<SolidColorBrush Color="{StaticResource Blue}" Opacity="0.5"/>
@@ -465,6 +466,7 @@
 	</Style>
 
 	<Style TargetType="DataGridCell" x:Key="CellTstyle">
+		<Setter Property="BorderThickness" Value="0" />
 		<Setter Property="Background">
 			<Setter.Value>
 				<SolidColorBrush Color="{StaticResource LightRed}" Opacity="0.5"/>
@@ -473,6 +475,7 @@
 	</Style>
 
 	<Style TargetType="DataGridCell" x:Key="CellWinnerStyle">
+		<Setter Property="BorderThickness" Value="0" />
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding WinnerSide}" Value="CounterTerrorist">
 				<Setter Property="Background">
@@ -501,7 +504,6 @@
 						<SolidColorBrush Color="{StaticResource Blue}" Opacity="0.5"/>
 					</Setter.Value>
 				</Setter>
-				<Setter Property="BorderThickness" Value="1" />
 			</DataTrigger>
 			<DataTrigger Binding="{Binding SideTrouble}" Value="Terrorist">
 				<Setter Property="Background">
@@ -509,7 +511,6 @@
 						<SolidColorBrush Color="{StaticResource LightRed}" Opacity="0.5"/>
 					</Setter.Value>
 				</Setter>
-				<Setter Property="BorderThickness" Value="1" />
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
