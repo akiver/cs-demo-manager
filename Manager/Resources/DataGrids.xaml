@@ -17,7 +17,7 @@
 		   TargetType="DataGrid"
 		   BasedOn="{StaticResource MetroDataGrid}">
 		<Setter Property="IsReadOnly" Value="True" />
-		<Setter Property="GridLinesVisibility" Value="None" />
+		<Setter Property="GridLinesVisibility" Value="Vertical" />
 		<Setter Property="AutoGenerateColumns" Value="False" />
 		<Setter Property="FontSize" Value="13" />
 		<Setter Property="ClipToBounds" Value="True" />
