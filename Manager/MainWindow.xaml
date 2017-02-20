@@ -220,15 +220,16 @@
 										Style="{DynamicResource GeneralButton}"
 										Content="{x:Static properties:Resources.SyncNicknames}" />
 							</StackPanel>
+							<ListView ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
+									  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"/>
 							<StackPanel Orientation="Horizontal"
 										Margin="0 5 0 10">
 								<TextBlock FontSize="18"
 										   Text="{x:Static properties:Resources.CurrentAccountWatch}" />
+								<TextBlock FontSize="18" Text=" : " />
 								<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.SelectedWatchAccount}"
 										   FontSize="18" />
 							</StackPanel>
-							<ListView ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Accounts}"
-									  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedAccount}"/>
 						</StackPanel>
 					</controls:MetroTabItem>
 					<controls:MetroTabItem Header="{x:Static properties:Resources.Folders}">

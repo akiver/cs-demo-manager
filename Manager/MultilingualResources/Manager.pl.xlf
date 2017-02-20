@@ -3492,6 +3492,10 @@ Czy chcesz ją zainstalować? (Zalecane by uniknąć crashów w związku z aktua
           <source>Please select the HLAE config parent folder location.</source>
           <target state="final">Wybierz lokalizację nadrzędnego folderu z plikami konfiguracyjnymi HLAE.</target>
         </trans-unit>
+        <trans-unit id="DialogPlayerFocusedNotFound" translate="yes" xml:space="preserve">
+          <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
+          <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

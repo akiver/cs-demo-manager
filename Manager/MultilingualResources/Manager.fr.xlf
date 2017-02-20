@@ -3510,6 +3510,10 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
           <source>Please select the HLAE config parent folder location.</source>
           <target state="final">Veuillez selectionner le dossier qui contiendra les fichiers de configuration générées par HLAE.</target>
         </trans-unit>
+        <trans-unit id="DialogPlayerFocusedNotFound" translate="yes" xml:space="preserve">
+          <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
+          <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

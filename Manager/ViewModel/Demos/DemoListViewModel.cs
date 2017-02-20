@@ -1,4 +1,4 @@
-﻿#region Imports
+#region Imports
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -1021,28 +1021,7 @@ namespace Manager.ViewModel.Demos
 					?? (_watchHighlightCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (AppSettings.SteamExePath() == null)
-						{
-							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
-							return;
-						}
-						if (Properties.Settings.Default.WatchAccountSteamId == 0)
-						{
-							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSetAccountToFocus, MessageDialogStyle.Affirmative);
-							return;
-						}
-						try
-						{
-							GameLauncher launcher = new GameLauncher(SelectedDemo);
-							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
-							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
-						}
-						catch (Exception e)
-						{
-							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
-						}
+						await ProcessWatchHighOrLow();
 					},
 					demo => SelectedDemo != null));
 			}
@@ -1059,28 +1038,7 @@ namespace Manager.ViewModel.Demos
 					?? (_watchLowlightCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						if (AppSettings.SteamExePath() == null)
-						{
-							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
-							return;
-						}
-						if (Properties.Settings.Default.WatchAccountSteamId == 0)
-						{
-							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSetAccountToFocus, MessageDialogStyle.Affirmative);
-							return;
-						}
-						try
-						{
-							GameLauncher launcher = new GameLauncher(SelectedDemo);
-							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
-							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
-						}
-						catch (Exception e)
-						{
-							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
-						}
+						await ProcessWatchHighOrLow(false);
 					},
 					demo => SelectedDemo != null));
 			}
@@ -2012,6 +1970,72 @@ namespace Manager.ViewModel.Demos
 					await _dialogService.ShowMessageAsync(string.Format(Properties.Resources.DialogDemosHaveBeenDownloaded, demoDownloadedCount), MessageDialogStyle.Affirmative);
 					await LoadDemosHeader();
 				}
+			}
+		}
+
+		/// <summary>
+		/// Check if the user is able to use the highlight / lowlight from the demos list
+		/// - Steam is required
+		/// - An account has to be selected
+		/// - The selected account must be in the selected demo
+		/// </summary>
+		/// <returns></returns>
+		private async Task<bool> ValidateHighLowWatch()
+		{
+			if (AppSettings.SteamExePath() == null)
+			{
+				await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
+				return false;
+			}
+			if (Properties.Settings.Default.WatchAccountSteamId == 0)
+			{
+				await _dialogService.ShowMessageAsync(Properties.Resources.DialogSetAccountToFocus, MessageDialogStyle.Affirmative);
+				return false;
+
+			}
+			Player player = SelectedDemo.Players.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.WatchAccountSteamId);
+			if (player == null)
+			{
+				await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerFocusedNotFound, MessageDialogStyle.Affirmative);
+				return false;
+			}
+
+			return true;
+		}
+
+		/// <summary>
+		/// Launch highlights or lowlights
+		/// </summary>
+		/// <param name="isHighlight"></param>
+		private async void StartWatchHighOrLow(bool isHighlight = true)
+		{
+			GameLauncher launcher = new GameLauncher(SelectedDemo);
+			var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+			if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
+			if (isHighlight)
+			{
+				launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
+			}
+			else
+			{
+				launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
+			}
+		}
+
+		/// <summary>
+		/// Process when the user want to watch highlights or lowlights
+		/// </summary>
+		private async Task ProcessWatchHighOrLow(bool isHighlight = true)
+		{
+			bool isWatchValidated = await ValidateHighLowWatch();
+			try
+			{
+				if (isWatchValidated) StartWatchHighOrLow(isHighlight);
+			}
+			catch (Exception e)
+			{
+				Logger.Instance.Log(e);
+				await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
 			}
 		}
 
