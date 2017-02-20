@@ -232,12 +232,6 @@ namespace Services.Concrete.Analyzer
 				return Source.Factory("pov");
 			}
 
-			// Check for esea demos, appart the filename there is no magic to detect it
-			if (demo.Name.Contains("esea", StringComparison.OrdinalIgnoreCase))
-			{
-				return Source.Factory("esea");
-			}
-
 			// Check for faceit demos
 			// (Before May 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
 			// (May 2015) Faceit : uses hostname
@@ -253,6 +247,12 @@ namespace Services.Concrete.Analyzer
 				return Source.Factory("cevo");
 			}
 
+			// Check for ESL demos
+			if (demo.Hostname.Contains("esl", StringComparison.OrdinalIgnoreCase))
+			{
+				return Source.Factory("esl");
+			}
+
 			// Check for ebot demos
 			if (demo.Hostname.Contains("ebot", StringComparison.OrdinalIgnoreCase)
 				|| FILENAME_EBOT_REGEX.Match(demo.Name).Success)
@@ -260,16 +260,16 @@ namespace Services.Concrete.Analyzer
 				return Source.Factory("ebot");
 			}
 
+			// Check for esea demos, appart the filename there is no magic to detect it
+			if (demo.Name.Contains("esea", StringComparison.OrdinalIgnoreCase))
+			{
+				return Source.Factory("esea");
+			}
+
 			if (demo.Name.Contains("popflash", StringComparison.OrdinalIgnoreCase)
 				|| demo.Hostname.Contains("popflash", StringComparison.OrdinalIgnoreCase))
 			{
 				return Source.Factory("popflash");
-			}
-
-			// Check for ESL demos
-			if (demo.Hostname.Contains("esl", StringComparison.OrdinalIgnoreCase))
-			{
-				return Source.Factory("esl");
 			}
 
 			// If none of the previous checks matched, we use ValveAnalyzer
