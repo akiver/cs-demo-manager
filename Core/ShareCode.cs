@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Numerics;
 
@@ -75,20 +75,17 @@ namespace Core
 		private static String EncodeAgainstString(BigInteger input)
 		{
 			char[] charArray = DICTIONARY.ToCharArray();
-			string result = "CSGO";
-			int charCount = 0;
+			string c = "";
 
-			while (input != 0)
+			for (int i = 0; i < 25; i++)
 			{
-				if (charCount % 5 == 0) result += "-";
 				BigInteger rem;
 				BigInteger.DivRem(input, charArray.Length, out rem);
-				result += charArray[(int)rem];
+				c += charArray[(int)rem];
 				input = BigInteger.Divide(input, charArray.Length);
-				charCount++;
 			}
 
-			return result;
+			return $"CSGO-{c.Substring(0, 5)}-{c.Substring(5, 5)}-{c.Substring(10, 5)}-{c.Substring(15, 5)}-{c.Substring(20, 5)}";
 		}
 
 		private static ushort Uint32ToUint16(UInt32 val)
