@@ -51,6 +51,15 @@
 		<Setter Property="ContextMenu" Value="{StaticResource DemoRowContextMenu}" />
 	</Style>
 
+	<Style TargetType="DataGridCell" x:Key="CellDemoSourceStyle">
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="Background">
+			<Setter.Value>
+				<SolidColorBrush Color="{StaticResource LightGreen}" Opacity="0.7"/>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="WinStatusHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipWinStatus}" />
 	</Style>

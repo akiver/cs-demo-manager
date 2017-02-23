@@ -489,6 +489,7 @@
 				<DataGridTemplateColumn Header="{x:Static properties:Resources.Source}"
 										Width="Auto"
 										SortMemberPath="Source.Name"
+										CellStyle="{StaticResource CellDemoSourceStyle}"
 										HeaderStyle="{StaticResource DemoSourceHeader}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
