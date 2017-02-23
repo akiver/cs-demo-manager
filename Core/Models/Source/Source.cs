@@ -1,32 +1,32 @@
+using System.Collections.Generic;
 using System.Drawing;
-using Newtonsoft.Json;
 
 namespace Core.Models.Source
 {
 	public abstract class Source
 	{
-		[JsonProperty("name")]
 		public string Name { get; set; }
 
-		[JsonIgnore]
+		public string Label { get; set; }
+
 		public Image Logo {
 			get
 			{
 				switch (Name)
 				{
-					case "ebot":
+					case Ebot.NAME:
 						return Properties.Resources.ebot;
-					case "esea":
+					case Esea.NAME:
 						return Properties.Resources.esea;
-					case "faceit":
+					case Faceit.NAME:
 						return Properties.Resources.faceit;
-					case "cevo":
+					case Cevo.NAME:
 						return Properties.Resources.cevo;
-					case "pov":
+					case Pov.NAME:
 						return Properties.Resources.pov;
-					case "esl":
+					case Esl.NAME:
 						return Properties.Resources.esl;
-					case "popflash":
+					case PopFlash.NAME:
 						return Properties.Resources.popflash;
 					default:
 						return Properties.Resources.valve;
@@ -38,25 +38,38 @@ namespace Core.Models.Source
 		{
 			switch (name)
 			{
-				case "valve":
+				case Valve.NAME:
 					return new Valve();
-				case "esea":
+				case Esea.NAME:
 					return new Esea();
-				case "ebot":
+				case Ebot.NAME:
 					return new Ebot();
-				case "pov":
+				case Pov.NAME:
 					return new Pov();
-				case "faceit":
+				case Faceit.NAME:
 					return new Faceit();
-				case "cevo":
+				case Cevo.NAME:
 					return new Cevo();
-				case "popflash":
+				case PopFlash.NAME:
 					return new PopFlash();
-				case "esl":
+				case Esl.NAME:
 					return new Esl();
 				default:
 					return null;
 			}
 		}
+
+		public static List<Source> Sources = new List<Source>
+		{
+			new Cevo(),
+			new Ebot(),
+			new Esea(),
+			new Esl(),
+			new Faceit(),
+			new PopFlash(),
+			// do not let POV source selectable
+			//new Pov(),
+			new Valve(),
+		};
 	}
 }

@@ -1075,9 +1075,9 @@ namespace Manager.ViewModel.Demos
 					?? (_setDemoSourceCommand = new RelayCommand<string>(
 					async source =>
 					{
-						await _demosService.SetSource(SelectedDemos, source);
+						SelectedDemos = await _demosService.SetSource(SelectedDemos, source);
 					},
-					source => SelectedDemos != null && SelectedDemos.Count > 0));
+					source => SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy));
 			}
 		}
 
@@ -1508,25 +1508,25 @@ namespace Manager.ViewModel.Demos
 		{
 			switch (name)
 			{
-				case "valve":
+				case Valve.NAME:
 					Properties.Settings.Default.ShowValveDemos = items.ContainsKey(name);
 					break;
-				case "ebot":
+				case Ebot.NAME:
 					Properties.Settings.Default.ShowEbotDemos = items.ContainsKey(name);
 					break;
-				case "esea":
+				case Esea.NAME:
 					Properties.Settings.Default.ShowEseaDemos = items.ContainsKey(name);
 					break;
-				case "cevo":
+				case Cevo.NAME:
 					Properties.Settings.Default.ShowCevoDemos = items.ContainsKey(name);
 					break;
-				case "faceit":
+				case Faceit.NAME:
 					Properties.Settings.Default.ShowFaceitDemos = items.ContainsKey(name);
 					break;
-				case "popflash":
+				case PopFlash.NAME:
 					Properties.Settings.Default.ShowPopFlashDemos = items.ContainsKey(name);
 					break;
-				case "pov":
+				case Pov.NAME:
 					Properties.Settings.Default.ShowPovDemos = items.ContainsKey(name);
 					break;
 				case "old":

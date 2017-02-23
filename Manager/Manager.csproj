@@ -144,7 +144,7 @@
     <Compile Include="Converters\DoubleToStringConverter.cs" />
     <Compile Include="Converters\DoubleToVisibilityConverter.cs" />
     <Compile Include="Converters\EventToVisibilityConverter.cs" />
-    <Compile Include="Converters\ImageToSourceConverter.cs" />
+    <Compile Include="Converters\DemoSourceToImageConverter.cs" />
     <Compile Include="Converters\IntToBooleanConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\LowerCaseConverter.cs" />

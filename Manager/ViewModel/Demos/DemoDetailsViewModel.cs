@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -44,6 +44,11 @@ namespace Manager.ViewModel.Demos
 
 		private Round _selectedRound;
 
+		/// <summary>
+		/// Demos sources available
+		/// </summary>
+		private List<Source> _sources;
+
 		private readonly IDemosService _demosService;
 
 		private readonly IRoundService _roundService;
@@ -81,6 +86,8 @@ namespace Manager.ViewModel.Demos
 		private RelayCommand<int> _goToRoundCommand;
 
 		private RelayCommand<Player> _goToPlayerCommand;
+
+		private RelayCommand<Source> _setDemoSourceCommand;
 
 		private RelayCommand<Demo> _heatmapCommand;
 
@@ -166,6 +173,12 @@ namespace Manager.ViewModel.Demos
 			set { Set(() => SelectedPlayer, ref _selectedPlayer, value); }
 		}
 
+		public List<Source> Sources
+		{
+			get { return _sources; }
+			set { Set(() => Sources, ref _sources, value); }
+		}
+
 		public Player SelectedPlayerStats
 		{
 			get { return _selectedPlayerStats; }
@@ -244,6 +257,19 @@ namespace Manager.ViewModel.Demos
 							_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 						await UpdateDemoFromAppArgument();
 						await LoadData();
+					}));
+			}
+		}
+
+		public RelayCommand<Source> SetDemoSourceCommand
+		{
+			get
+			{
+				return _setDemoSourceCommand
+					?? (_setDemoSourceCommand = new RelayCommand<Source>(
+					async source =>
+					{
+						CurrentDemo = await _demosService.SetSource(CurrentDemo, source.Name);
 					}));
 			}
 		}
@@ -617,7 +643,7 @@ namespace Manager.ViewModel.Demos
 							Logger.Instance.Log(e);
 							await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
 						}
-						
+
 						IsAnalyzing = false;
 						HasNotification = false;
 						CommandManager.InvalidateRequerySuggested();
@@ -981,6 +1007,8 @@ namespace Manager.ViewModel.Demos
 			_cacheService = cacheService;
 			_excelService = excelService;
 			_roundService = roundService;
+
+			Sources = Source.Sources;
 
 			if (IsInDesignMode)
 			{

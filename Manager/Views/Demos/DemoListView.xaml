@@ -22,7 +22,7 @@
 			<converters:RowDemoDoubleClickedToDemoDetailsConverter x:Key="RowDemoDoubleClickedToDemoDetails" />
 			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
 			<converters:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
-			<converters:ImageToSourceConverter x:Key="ImageToSourceConverter" />
+			<converters:DemoSourceToImageConverter x:Key="DemoSourceToImageConverter" />
 			<converters:StringToDateConverter x:Key="StringToDateConverter" />
 			<converters:BooleanMultipleConverter x:Key="BooleanMultipleConverter" />
 			<converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
@@ -492,9 +492,9 @@
 										HeaderStyle="{StaticResource DemoSourceHeader}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<Image Source="{Binding Path=Source.Logo, Converter={StaticResource ImageToSourceConverter}}"
+							<Image Source="{Binding Path=SourceName, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DemoSourceToImageConverter}}"
 								   Height="20"
-								   Width="40"/>
+								   Width="50"/>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>

@@ -324,9 +324,9 @@ namespace Services.Design
 			return Task.FromResult(demo);
 		}
 
-		public Task SetSource(ObservableCollection<Demo> demos, string source)
+		public Task<ObservableCollection<Demo>>  SetSource(ObservableCollection<Demo> demos, string source)
 		{
-			return Task.FromResult(true);
+			return Task.FromResult(demos);
 		}
 
 		public Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token)
@@ -381,6 +381,11 @@ namespace Services.Design
 		public Task<string> GetShareCode(Demo demo)
 		{
 			return Task.FromResult("CSGO-Vd1T-FD32d-549td-DF41f-Td8dZ");
+		}
+
+		public Task<Demo> SetSource(Demo demo, string source)
+		{
+			return Task.FromResult(demo);
 		}
 	}
 }

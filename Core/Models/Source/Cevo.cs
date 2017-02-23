@@ -2,9 +2,12 @@ namespace Core.Models.Source
 {
 	public class Cevo : Source
 	{
+		public const string NAME = "cevo";
+
 		public Cevo()
 		{
-			Name = "cevo";
+			Name = NAME;
+			Label = "CEVO";
 		}
 	}
 }

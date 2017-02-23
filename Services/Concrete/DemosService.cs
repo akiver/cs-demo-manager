@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -222,33 +222,25 @@ namespace Services.Concrete
 			await _cacheService.WriteDemoDataCache(demo);
 		}
 
-		public async Task SetSource(ObservableCollection<Demo> demos, string source)
+		public async Task<ObservableCollection<Demo>>  SetSource(ObservableCollection<Demo> demos, string source)
 		{
 			foreach (Demo demo in demos.Where(demo => demo.Type != "POV"))
 			{
-				switch (source)
-				{
-					case "valve":
-						demo.Source = new Valve();
-						break;
-					case "esea":
-						demo.Source = new Esea();
-						break;
-					case "ebot":
-						demo.Source = new Ebot();
-						break;
-					case "faceit":
-						demo.Source = new Faceit();
-						break;
-					case "cevo":
-						demo.Source = new Cevo();
-						break;
-					default:
-						demo.Source = new Valve();
-						break;
-				}
+				await SetSource(demo, source);
+			}
+
+			return demos;
+		}
+
+		public async Task<Demo> SetSource(Demo demo, string source)
+		{
+			if (demo.SourceName != source)
+			{
+				demo.SourceName = source;
 				await _cacheService.WriteDemoDataCache(demo);
 			}
+
+			return demo;
 		}
 
 		public async Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token)

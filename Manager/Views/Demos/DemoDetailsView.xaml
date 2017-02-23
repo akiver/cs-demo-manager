@@ -548,7 +548,33 @@
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
 
-							<Grid>
+							<Grid Margin="0 2 0 2">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+								<TextBlock Grid.Column="0"
+										   Text="{x:Static properties:Resources.Source}"
+										   Style="{StaticResource TextBlockHighlight}">
+									<Run Text=" "/>
+								</TextBlock>
+								<ComboBox x:Name="SourceList"
+										  Grid.Column="1"
+										  ItemsSource="{Binding Source={StaticResource Locator}, Path=DemoDetails.Sources}"
+										  SelectedValue="{Binding CurrentDemo.SourceName}"
+										  DisplayMemberPath="Label"
+										  SelectedValuePath="Name"
+										  IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="SelectionChanged">
+											<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=DemoDetails.SetDemoSourceCommand}"
+																   CommandParameter="{Binding ElementName=SourceList, Path=SelectedItem}"/>
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</ComboBox>
+							</Grid>
+							
+							<Grid Margin="0 2 0 2">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
 									<ColumnDefinition Width="Auto" />

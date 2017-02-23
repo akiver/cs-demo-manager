@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
@@ -80,7 +80,21 @@ namespace Services.Interfaces
 		/// <returns></returns>
 		Task SaveStatus(Demo demo, string status);
 
-		Task SetSource(ObservableCollection<Demo> demos, string source);
+		/// <summary>
+		/// Change multiple demos source
+		/// </summary>
+		/// <param name="demos"></param>
+		/// <param name="source"></param>
+		/// <returns></returns>
+		Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source);
+
+		/// <summary>
+		/// Change a single demo's source
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <param name="source"></param>
+		/// <returns></returns>
+		Task<Demo> SetSource(Demo demo, string source);
 
 		Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token);
 
