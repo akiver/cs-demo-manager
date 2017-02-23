@@ -252,6 +252,8 @@ namespace Services.Concrete.Analyzer
 
 			if (killed != null)
 			{
+				// suicide, probably because he missed the jump from upper B on train :)
+				if (e.Killer == null) killed.SuicideCount++;
 				killEvent.KilledIsControllingBot = e.Victim.SteamID != 0 && killed.IsControllingBot;
 			}
 

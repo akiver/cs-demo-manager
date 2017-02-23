@@ -393,7 +393,16 @@ namespace Services.Concrete.Analyzer
 			};
 
 			killed.IsAlive = false;
-			if (e.Killer != null) killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
+			if (e.Killer != null)
+			{
+				killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
+			}
+			else
+			{
+				// suicide, probably because he missed the jump from upper B on train :)
+				killed.SuicideCount++;
+			}
+
 			if (killer != null )
 			{
 				// add kill to the current round only if it's not a TK / suicide

@@ -766,6 +766,9 @@ namespace Core.Models
 		[JsonIgnore]
 		public decimal Clutch1V5WonPercent => Clutch1V5Count == 0 ? 0 : Math.Round((decimal)(Clutch1V5WonCount * 100) / Clutch1V5Count, 2);
 
+		[JsonProperty("suicide_count")]
+		public int SuicideCount { get; set; }
+
 		/// <summary>
 		/// Total health damage made by the player
 		/// </summary>
@@ -1001,13 +1004,13 @@ namespace Core.Models
 
 		private void OnDeathsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
-			DeathCount = Deaths.Count;
+			DeathCount = Deaths.Count + SuicideCount;
 		}
 
 		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			TeamKillCount = Kills.Count(k => k.KilledSide == k.KillerSide);
-			KillCount = Kills.Count(k => k.KilledSide != k.KillerSide) - TeamKillCount;
+			KillCount = Kills.Count(k => k.KilledSide != k.KillerSide) - TeamKillCount - SuicideCount;
 			HeadshotCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.IsHeadshot);
 			CrouchKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.IsKillerCrouching);
 			JumpKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.KillerVelocityZ > 0);
