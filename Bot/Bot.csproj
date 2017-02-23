@@ -125,6 +125,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
+    <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <None Include="packages.config" />
@@ -197,6 +198,7 @@
     <XliffResource Include="MultilingualResources\Bot.pt.xlf" />
     <XliffResource Include="MultilingualResources\Bot.ru.xlf" />
     <XliffResource Include="MultilingualResources\Bot.sr-Cyrl.xlf" />
+    <XliffResource Include="MultilingualResources\Bot.tr.xlf" />
     <XliffResource Include="MultilingualResources\Bot.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Bot.zh-Hant.xlf" />
   </ItemGroup>

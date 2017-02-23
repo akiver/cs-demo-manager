@@ -148,6 +148,12 @@ namespace Core
 				Name = "Spanish",
 				IsEnabled = false
 			},
+			new Language
+			{
+				Key = "tr-TR",
+				Name = "Turkish",
+				IsEnabled = false
+			},
 		};
 
 		/// <summary>
