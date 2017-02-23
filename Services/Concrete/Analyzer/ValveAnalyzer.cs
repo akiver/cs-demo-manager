@@ -294,7 +294,7 @@ namespace Services.Concrete.Analyzer
 				// TK or not we add a death to the human
 				killed?.Deaths.Add(killEvent);
 			}
-		
+
 			// Add assist if there was one
 			if (e.Assister != null && !assisterIsBot && e.Assister.Team != e.Victim.Team)
 			{

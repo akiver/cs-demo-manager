@@ -387,12 +387,18 @@ namespace Services.Concrete.Analyzer
 							// Check swap
 							if (Demo.TeamT.Players.Contains(pl))
 							{
-								Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
-								Demo.TeamT.Players.Remove(pl);
+								Application.Current.Dispatcher.Invoke(delegate
+								{
+									Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
+									Demo.TeamT.Players.Remove(pl);
+								});
 							}
 							else
 							{
-								if (!Demo.TeamCT.Players.Contains(pl)) Demo.TeamCT.Players.Add(pl);
+								if (!Demo.TeamCT.Players.Contains(pl))
+								{
+									Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(pl));
+								}
 							}
 						}
 						else if (player.Team == DemoInfo.Team.Terrorist)
@@ -401,12 +407,18 @@ namespace Services.Concrete.Analyzer
 							// Check swap
 							if (Demo.TeamCT.Players.Contains(pl))
 							{
-								Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
-								Demo.TeamCT.Players.Remove(pl);
+								Application.Current.Dispatcher.Invoke(delegate
+								{
+									Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
+									Demo.TeamCT.Players.Remove(pl);
+								});
 							}
 							else
 							{
-								if (!Demo.TeamT.Players.Contains(pl)) Demo.TeamT.Players.Add(pl);
+								if (!Demo.TeamT.Players.Contains(pl))
+								{
+									Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(pl));
+								}
 							}
 						}
 					}
