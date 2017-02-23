@@ -3514,6 +3514,14 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
           <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
           <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
         </trans-unit>
+        <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
+          <source>Demos list size</source>
+          <target state="final">Nombre de démos affichées dans la liste</target>
+        </trans-unit>
+        <trans-unit id="ShowAllDemos" translate="yes" xml:space="preserve">
+          <source>Show all demos</source>
+          <target state="final">Afficher toutes les démos</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -908,6 +908,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Demos list size.
+        /// </summary>
+        public static string DemosListSize {
+            get {
+                return ResourceManager.GetString("DemosListSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demo type.
         /// </summary>
         public static string DemoType {
@@ -5885,6 +5894,15 @@ namespace Manager.Properties {
         public static string ShowAll {
             get {
                 return ResourceManager.GetString("ShowAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show all demos.
+        /// </summary>
+        public static string ShowAllDemos {
+            get {
+                return ResourceManager.GetString("ShowAllDemos", resourceCulture);
             }
         }
         

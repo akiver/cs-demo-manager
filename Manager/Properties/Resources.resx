@@ -2734,4 +2734,10 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
   <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
     <value>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</value>
   </data>
+  <data name="DemosListSize" xml:space="preserve">
+    <value>Demos list size</value>
+  </data>
+  <data name="ShowAllDemos" xml:space="preserve">
+    <value>Show all demos</value>
+  </data>
 </root>

@@ -44,11 +44,15 @@ namespace Manager.ViewModel
 
 		private string _notificationMessage = Properties.Resources.Settings;
 
+		private int _demosListSize = Settings.Default.DemosListSize;
+
 		private RelayCommand<string> _saveResolutionWidthCommand;
 
 		private RelayCommand<string> _saveResolutionHeightCommand;
 
 		private RelayCommand<string> _saveLaunchParametersCommand;
+
+		private RelayCommand<string> _saveDemoListSizeCommand;
 
 		private RelayCommand _clearDemosDataCacheCommand;
 
@@ -483,6 +487,16 @@ namespace Manager.ViewModel
 				Settings.Default.DateFormatEuropean = value;
 				Settings.Default.Save();
 				Set(() => DateFormatUsa, ref _dateFormatEuropean, value);
+			}
+		}
+
+		public int DemosListSize
+		{
+			get { return _demosListSize; }
+			set
+			{
+				if (value == 0) value = AppSettings.DEMO_PAGE_COUNT;
+				Set(() => DemosListSize, ref _demosListSize, value);
 			}
 		}
 
@@ -1494,6 +1508,28 @@ namespace Manager.ViewModel
 							Settings.Default.LaunchParameters = parameters;
 							Settings.Default.Save();
 						}));
+			}
+		}
+
+		/// <summary>
+		/// Command to change the demos list max size
+		/// </summary>
+		public RelayCommand<string> SaveDemoListSizeCommand
+		{
+			get
+			{
+				return _saveDemoListSizeCommand
+					?? (_saveDemoListSizeCommand = new RelayCommand<string>(
+						inputSize =>
+						{
+							int size = Convert.ToInt32(inputSize);
+							if (size == 0) size = AppSettings.DEMO_PAGE_COUNT;
+							if (size != Settings.Default.DemosListSize)
+							{
+								Settings.Default.DemosListSize = size;
+								Settings.Default.Save();
+							}
+						}, inputSize => !string.IsNullOrEmpty(inputSize)));
 			}
 		}
 

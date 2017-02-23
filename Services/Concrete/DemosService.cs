@@ -119,7 +119,7 @@ namespace Services.Concrete
 			return demo;
 		}
 
-		public async Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
+		public async Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, int demoSize = 0)
 		{
 			// Demos list returned
 			List<Demo> demos = new List<Demo>();
@@ -143,7 +143,7 @@ namespace Services.Concrete
 							if (demo != null)
 							{
 								// Skip if the demo is already in the current demos list
-								if (currentDemos != null && currentDemos.Contains(demo))
+								if ((currentDemos != null && currentDemos.Contains(demo)) || demoHeaderList.Contains(demo))
 									continue;
 								demoHeaderList.Add(demo);
 							}
@@ -171,7 +171,7 @@ namespace Services.Concrete
 				}
 
 				tempDemoBasicDataList.Sort((d1, d2) => d2.Date.CompareTo(d1.Date));
-				if (limit) tempDemoBasicDataList = tempDemoBasicDataList.Take(AppSettings.DEMO_PAGE_COUNT).ToList();
+				if (demoSize > 0) tempDemoBasicDataList = tempDemoBasicDataList.Take(demoSize).ToList();
 
 				foreach (DemoBasicData basicData in tempDemoBasicDataList)
 				{

@@ -1269,5 +1269,17 @@ namespace Manager.Properties {
                 this["ShowTteamName"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50")]
+        public int DemosListSize {
+            get {
+                return ((int)(this["DemosListSize"]));
+            }
+            set {
+                this["DemosListSize"] = value;
+            }
+        }
     }
 }

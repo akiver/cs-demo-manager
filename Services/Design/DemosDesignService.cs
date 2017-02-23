@@ -32,7 +32,7 @@ namespace Services.Design
 			return Task.FromResult(new Demo());
 		}
 
-		public Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false)
+		public Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, int size = 0)
 		{
 			List<Demo> demos = new List<Demo>();
 

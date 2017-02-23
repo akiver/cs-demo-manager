@@ -38,9 +38,9 @@ namespace Services.Interfaces
 		/// </summary>
 		/// <param name="folders"></param>
 		/// <param name="currentDemos"></param>
-		/// <param name="limit"></param>
+		/// <param name="size">Limit the demos list size returned</param>
 		/// <returns></returns>
-		Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, bool limit = false);
+		Task<List<Demo>> GetDemosHeader(List<string> folders, List<Demo> currentDemos = null, int size = 0);
 
 		/// <summary>
 		/// Return the whole demo

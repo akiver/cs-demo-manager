@@ -3495,6 +3495,14 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
           <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
           <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
         </trans-unit>
+        <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
+          <source>Demos list size</source>
+          <target state="new">Demos list size</target>
+        </trans-unit>
+        <trans-unit id="ShowAllDemos" translate="yes" xml:space="preserve">
+          <source>Show all demos</source>
+          <target state="new">Show all demos</target>
+        </trans-unit>
       </group>
     </body>
   </file>

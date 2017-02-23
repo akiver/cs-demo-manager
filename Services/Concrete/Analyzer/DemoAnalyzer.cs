@@ -181,9 +181,7 @@ namespace Services.Concrete.Analyzer
 			}
 
 			DemoHeader header = parser.Header;
-			DateTime dateTime = File.GetCreationTime(pathDemoFile);
-			int seconds = (int)(dateTime.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
-			demo.Id = header.MapName.Replace("/", "") + "_" + seconds + header.SignonLength + header.PlaybackFrames;
+			demo.Id = header.MapName.Replace("/", "") + "_" + Math.Abs(header.ClientName.GetHashCode()) + Math.Abs(header.ServerName.GetHashCode()) + header.SignonLength + header.PlaybackFrames;
 			demo.ClientName = header.ClientName;
 			demo.Hostname = header.ServerName;
 			if (header.PlaybackTicks != 0 && header.PlaybackTime != 0)

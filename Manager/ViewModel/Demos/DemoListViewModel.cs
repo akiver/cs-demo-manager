@@ -100,6 +100,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _showMoreDemosCommand;
 
+		private RelayCommand _showAllDemosCommand;
+
 		private RelayCommand<Demo> _watchDemoCommand;
 
 		private RelayCommand<Demo> _watchHighlightCommand;
@@ -1154,31 +1156,21 @@ namespace Manager.ViewModel.Demos
 					?? (_showMoreDemosCommand = new RelayCommand(
 					async () =>
 					{
-						NotificationMessage = Properties.Resources.NotificationLoadingMoreDemos;
-						IsBusy = true;
-						HasRing = true;
-						HasNotification = true;
-						List<string> folders = new List<string>();
-						if (SelectedFolder != null)
-						{
-							folders.Add(SelectedFolder);
-						}
-						else
-						{
-							folders = Folders.ToList();
-						}
+						await PaginateDemos(Properties.Settings.Default.DemosListSize);
+					},
+					() => !IsBusy));
+			}
+		}
 
-						List<Demo> demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
-
-						foreach (Demo demo in demos)
-						{
-							await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
-							Demos.Add(demo);
-						}
-
-						IsBusy = false;
-						HasNotification = false;
-						CommandManager.InvalidateRequerySuggested();
+		public RelayCommand ShowAllDemosCommand
+		{
+			get
+			{
+				return _showAllDemosCommand
+					?? (_showAllDemosCommand = new RelayCommand(
+					async () =>
+					{
+						await PaginateDemos();
 					},
 					() => !IsBusy));
 			}
@@ -1502,6 +1494,30 @@ namespace Manager.ViewModel.Demos
 			}
 
 			DemoSourcesSelected = _demoSourcesSelected;
+		}
+
+		private async Task PaginateDemos(int size = 0)
+		{
+			NotificationMessage = Properties.Resources.NotificationLoadingMoreDemos;
+			IsBusy = true;
+			HasRing = true;
+			HasNotification = true;
+			List<string> folders = new List<string>();
+			if (SelectedFolder != null)
+				folders.Add(SelectedFolder);
+			else
+				folders = Folders.ToList();
+
+			List<Demo> demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), size);
+			foreach (Demo demo in demos)
+			{
+				await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
+				Demos.Add(demo);
+			}
+
+			IsBusy = false;
+			HasNotification = false;
+			CommandManager.InvalidateRequerySuggested();
 		}
 
 		private static void UpdateDemoSourceSettings(Dictionary<string, object> items, string name)
@@ -1891,7 +1907,7 @@ namespace Manager.ViewModel.Demos
 
 				Demos.Clear();
 
-				List<Demo> demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), true);
+				List<Demo> demos = await _demosService.GetDemosHeader(folders, Demos.ToList(), Properties.Settings.Default.DemosListSize);
 				foreach (Demo demo in demos)
 				{
 					await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);

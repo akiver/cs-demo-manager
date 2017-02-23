@@ -2604,4 +2604,10 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
   <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
     <value>Veuillez selectionner le dossier qui contiendra les fichiers de configuration générées par HLAE.</value>
   </data>
+  <data name="DemosListSize" xml:space="preserve">
+    <value>Nombre de démos affichées dans la liste</value>
+  </data>
+  <data name="ShowAllDemos" xml:space="preserve">
+    <value>Afficher toutes les démos</value>
+  </data>
 </root>
