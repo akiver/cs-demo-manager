@@ -281,7 +281,7 @@
     <value>Victimes d'ouvertures</value>
   </data>
   <data name="EquipmentValueTeam1" xml:space="preserve">
-    <value>Valeur équipement équipe 1</value>
+    <value>Valeur équipement AT</value>
   </data>
   <data name="ExportCustomData" xml:space="preserve">
     <value>Exporter données utilisateur</value>
@@ -320,10 +320,10 @@
     <value>Démarrer le BOT au lancement de l'application</value>
   </data>
   <data name="StartMoneyTeam1" xml:space="preserve">
-    <value>Argent en début de round équipe 1</value>
+    <value>Argent en début de round des AT</value>
   </data>
   <data name="StartMoneyTeam2" xml:space="preserve">
-    <value>Argent en début de round équipe 2</value>
+    <value>Argent en début de round des T</value>
   </data>
   <data name="Team1Name" xml:space="preserve">
     <value>Nom équipe 1</value>
@@ -359,7 +359,7 @@
     <value>CG</value>
   </data>
   <data name="EquipmentValueTeam2" xml:space="preserve">
-    <value>Valeur équipement équipe 2</value>
+    <value>Valeur équipement des T</value>
   </data>
   <data name="ToolTipAnalyzeSelectedDemos" xml:space="preserve">
     <value>Analyser démos sélectionnée(s) (CTRL+S)</value>
@@ -702,16 +702,16 @@
     <comment>Average Damages Per Player</comment>
   </data>
   <data name="HeaderStartMoneyTeam1" xml:space="preserve">
-    <value>ADE1 ($)</value>
+    <value>AD CT ($)</value>
   </data>
   <data name="HeaderStartMoneyTeam2" xml:space="preserve">
-    <value>ADE2 ($)</value>
+    <value>AD T ($)</value>
   </data>
   <data name="HeaderEquipementValueTeam1" xml:space="preserve">
-    <value>VEE1 ($)</value>
+    <value>VE CT ($)</value>
   </data>
   <data name="HeaderEquipementValueTeam2" xml:space="preserve">
-    <value>VEE2 ($)</value>
+    <value>VE T ($)</value>
   </data>
   <data name="HeaderSideTrouble" xml:space="preserve">
     <value>CD</value>
@@ -784,10 +784,10 @@
     <value>Valeur Equipement</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
-    <value>Valeur équipement de l'équipe 1 ($)</value>
+    <value>Valeur équipement des AT ($)</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam2" xml:space="preserve">
-    <value>Valeur équipement de l'équipe 2 ($)</value>
+    <value>Valeur équipement des T ($)</value>
   </data>
   <data name="HeaderToolTipFiveKill" xml:space="preserve">
     <value>5 Victimes</value>
@@ -901,10 +901,10 @@
     <value>Argent de dépârt</value>
   </data>
   <data name="HeaderToolTipStartMoneyTeam1" xml:space="preserve">
-    <value>Argent de départ de l'équipe 1 ($)</value>
+    <value>Argent de départ des CT ($)</value>
   </data>
   <data name="HeaderToolTipStartMoneyTeam2" xml:space="preserve">
-    <value>Argent de départ de l'équipe 2 ($)</value>
+    <value>Argent de départ des T ($)</value>
   </data>
   <data name="HeaderToolTipTeam1Name" xml:space="preserve">
     <value>Nom de l'équipe 1</value>
@@ -1081,10 +1081,10 @@
     <value>VO (Victimes d'Ouverture)</value>
   </data>
   <data name="EquipmentValueTeam1Full" xml:space="preserve">
-    <value>VEE1 (Valeur Equipement Equipe 1 ($))</value>
+    <value>VE CT (Valeur Equipement des CT ($))</value>
   </data>
   <data name="EquipmentValueTeam2Full" xml:space="preserve">
-    <value>VEE2 (Valeur Equipement Equipe 2 ($))</value>
+    <value>VE T (Valeur Equipement des T ($))</value>
   </data>
   <data name="EseaRwsFull" xml:space="preserve">
     <value>RWS (ESEA Round Win Share)</value>
@@ -1147,10 +1147,10 @@
     <value>VA (Victimes Accroupi)</value>
   </data>
   <data name="StartMoneyTeam1Full" xml:space="preserve">
-    <value>ADE1 (Argent de Départ de l'Equipe 1 ($))</value>
+    <value>AD CT (Argent de Départ des CT ($))</value>
   </data>
   <data name="StartMoneyTeam2Full" xml:space="preserve">
-    <value>ADE2 (Argent de Départ de l'Equipe 2 ($))</value>
+    <value>AD T (Argent de Départ des T ($))</value>
   </data>
   <data name="TeamNameTroubleFull" xml:space="preserve">
     <value>NED (Nom Equipe en Difficulté)</value>
@@ -2603,6 +2603,9 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
   </data>
   <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
     <value>Veuillez selectionner le dossier qui contiendra les fichiers de configuration générées par HLAE.</value>
+  </data>
+  <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
+    <value>Le joueur actuellement ciblé n'est pas dans cette démo. Vous pouvez le changer depuis les options (section Comptes) ou le selectionner directement depuis le scoreboard.</value>
   </data>
   <data name="DemosListSize" xml:space="preserve">
     <value>Nombre de démos affichées dans la liste</value>

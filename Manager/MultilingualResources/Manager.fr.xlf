@@ -397,8 +397,7 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipment value CT</source>
-          <target state="needs-review-translation">Valeur équipement équipe 1</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valeur équipement AT</target>
         </trans-unit>
         <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
           <source>Export custom data</source>
@@ -450,13 +449,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start money CT</source>
-          <target state="needs-review-translation">Argent en début de round équipe 1</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Argent en début de round des AT</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start money T</source>
-          <target state="needs-review-translation">Argent en début de round équipe 2</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Argent en début de round des T</target>
         </trans-unit>
         <trans-unit id="Team1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -504,8 +501,7 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipment value T</source>
-          <target state="needs-review-translation">Valeur équipement équipe 2</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valeur équipement des T</target>
         </trans-unit>
         <trans-unit id="ToolTipAnalyzeSelectedDemos" translate="yes" xml:space="preserve">
           <source>Analyze selected demo(s) (CTRL+S)</source>
@@ -951,23 +947,19 @@
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>SM CT ($)</source>
-          <target state="needs-review-translation">ADE1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">AD CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>SM T ($)</source>
-          <target state="needs-review-translation">ADE2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">AD T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
           <source>EV CT ($)</source>
-          <target state="needs-review-translation">VEE1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">VE CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
           <source>EV T ($)</source>
-          <target state="needs-review-translation">VEE2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">VE T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderSideTrouble" translate="yes" xml:space="preserve">
           <source>ST</source>
@@ -1064,13 +1056,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipement Value CT ($)</source>
-          <target state="needs-review-translation">Valeur équipement de l'équipe 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valeur équipement des AT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipement Value T ($)</source>
-          <target state="needs-review-translation">Valeur équipement de l'équipe 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valeur équipement des T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
@@ -1222,13 +1212,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start Money CT ($)</source>
-          <target state="needs-review-translation">Argent de départ de l'équipe 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Argent de départ des CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start Money T ($)</source>
-          <target state="needs-review-translation">Argent de départ de l'équipe 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Argent de départ des T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -1464,13 +1452,11 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
           <source>EV CT (Equipment Value CT ($))</source>
-          <target state="needs-review-translation">VEE1 (Valeur Equipement Equipe 1 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">VE CT (Valeur Equipement des CT ($))</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
           <source>EV T (Equipment Value T ($))</source>
-          <target state="needs-review-translation">VEE2 (Valeur Equipement Equipe 2 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">VE T (Valeur Equipement des T ($))</target>
         </trans-unit>
         <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
           <source>RWS (ESEA Round Win Share)</source>
@@ -1554,13 +1540,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
           <source>SM CT (Start Money CT ($))</source>
-          <target state="needs-review-translation">ADE1 (Argent de Départ de l'Equipe 1 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">AD CT (Argent de Départ des CT ($))</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
           <source>SM T (Start Money T ($))</source>
-          <target state="needs-review-translation">ADE2 (Argent de Départ de l'Equipe 2 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">AD T (Argent de Départ des T ($))</target>
         </trans-unit>
         <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
           <source>TNT (Team Name Trouble)</source>
@@ -2637,8 +2621,7 @@ Voulez-vous vraiment continuer?</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
           <source>Equipment</source>
-          <target state="needs-review-translation">Equipement</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Equipement</target>
         </trans-unit>
         <trans-unit id="StuffsThrown" translate="yes" xml:space="preserve">
           <source>Stuffs Thrown</source>
@@ -3512,7 +3495,7 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
         </trans-unit>
         <trans-unit id="DialogPlayerFocusedNotFound" translate="yes" xml:space="preserve">
           <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
-          <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
+          <target state="final">Le joueur actuellement ciblé n'est pas dans cette démo. Vous pouvez le changer depuis les options (section Comptes) ou le selectionner directement depuis le scoreboard.</target>
         </trans-unit>
         <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
           <source>Demos list size</source>
