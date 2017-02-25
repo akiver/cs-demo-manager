@@ -445,7 +445,7 @@ namespace Services.Concrete
 						reservationId = roundStatsList.Last().reservationid;
 					}
 
-					shareCode = ShareCode.GenerateShareCode(matchId, reservationId, tvPort);
+					shareCode = ShareCode.Encode(matchId, reservationId, tvPort);
 				}
 				catch (Exception e)
 				{

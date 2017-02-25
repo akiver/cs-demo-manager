@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using System.Numerics;
+using System.Text.RegularExpressions;
 
 namespace Core
 {
@@ -23,74 +24,94 @@ namespace Core
 	public class ShareCode
 	{
 		const string DICTIONARY = "ABCDEFGHJKLMNOPQRSTUVWXYZabcdefhijkmnopqrstuvwxyz23456789";
+		const string SHARECODE_PATTERN = "^CSGO(-?[\\w]{5}){5}$";
+
+		public struct ShareCodeStruct
+		{
+			public UInt64 MatchId;
+			public UInt64 OutcomeId; // reservation id
+			public UInt32 TokenId; // tv port
+		}
 
 		/// <summary>
-		/// Generate the share code from required fields coming from a CDataGCCStrike15_v2_MatchInfo message.
+		/// Encode a share code from required fields coming from a CDataGCCStrike15_v2_MatchInfo message.
 		/// </summary>
 		/// <param name="matchId"></param>
 		/// <param name="reservationId"></param>
 		/// <param name="tvPort"></param>
 		/// <returns></returns>
-		public static string GenerateShareCode(UInt64 matchId, UInt64 reservationId, UInt32 tvPort)
+		public static string Encode(UInt64 matchId, UInt64 reservationId, UInt32 tvPort)
 		{
 			byte[] matchIdBytes = BitConverter.GetBytes(matchId);
 			byte[] reservationBytes = BitConverter.GetBytes(reservationId);
 			// only the UInt16 low bits from the TV port are used
-			UInt16 tvPort16 = Uint32ToUint16(tvPort);
+			UInt16 tvPort16 = (ushort)(tvPort & ((1 << 16) - 1));
 			byte[] tvBytes = BitConverter.GetBytes(tvPort16);
 
-			byte[] bytes = CombineBytes(matchIdBytes, reservationBytes, tvBytes);
+			byte[] bytes = new byte[matchIdBytes.Length + reservationBytes.Length + tvBytes.Length + 1];
+
+			Buffer.BlockCopy(new byte[] { 0 }, 0, bytes, 0, 1);
+			Buffer.BlockCopy(matchIdBytes, 0, bytes, 1, matchIdBytes.Length);
+			Buffer.BlockCopy(reservationBytes, 0, bytes, 1 + matchIdBytes.Length, reservationBytes.Length);
+			Buffer.BlockCopy(tvBytes, 0, bytes, 1 + matchIdBytes.Length + reservationBytes.Length, tvBytes.Length);
 
 			BigInteger big = new BigInteger(bytes.Reverse().ToArray());
 
-			string sharecode = EncodeAgainstString(big);
-
-			return sharecode;
-		}
-
-		/// <summary>
-		/// Combine all bytes in one byte array.
-		/// </summary>
-		/// <param name="matchIdBytes"></param>
-		/// <param name="reservationBytes"></param>
-		/// <param name="tvBytes"></param>
-		/// <returns></returns>
-		private static byte[] CombineBytes(byte[] matchIdBytes, byte[] reservationBytes, byte[] tvBytes)
-		{
-			byte[] result = new byte[matchIdBytes.Length + reservationBytes.Length + tvBytes.Length + 1];
-
-			Buffer.BlockCopy(new byte[] { 0 }, 0, result, 0, 1);
-			Buffer.BlockCopy(matchIdBytes, 0, result, 1, matchIdBytes.Length);
-			Buffer.BlockCopy(reservationBytes, 0, result, 1 + matchIdBytes.Length, reservationBytes.Length);
-			Buffer.BlockCopy(tvBytes, 0, result, 1 + matchIdBytes.Length + reservationBytes.Length, tvBytes.Length);
-
-			return result;
-		}
-
-		/// <summary>
-		/// Run the base57 encoding process against the the giant number.
-		/// </summary>
-		/// <param name="input"></param>
-		/// <returns></returns>
-		private static String EncodeAgainstString(BigInteger input)
-		{
 			char[] charArray = DICTIONARY.ToCharArray();
 			string c = "";
 
 			for (int i = 0; i < 25; i++)
 			{
 				BigInteger rem;
-				BigInteger.DivRem(input, charArray.Length, out rem);
+				BigInteger.DivRem(big, charArray.Length, out rem);
 				c += charArray[(int)rem];
-				input = BigInteger.Divide(input, charArray.Length);
+				big = BigInteger.Divide(big, charArray.Length);
 			}
 
 			return $"CSGO-{c.Substring(0, 5)}-{c.Substring(5, 5)}-{c.Substring(10, 5)}-{c.Substring(15, 5)}-{c.Substring(20, 5)}";
 		}
 
-		private static ushort Uint32ToUint16(UInt32 val)
+		/// <summary>
+		/// Decode a share code from the string.
+		/// </summary>
+		/// <param name="shareCode"></param>
+		/// <returns></returns>
+		public static ShareCodeStruct Decode(string shareCode)
 		{
-			return (ushort)(val & ((1 << 16) - 1));
+			Regex r = new Regex(SHARECODE_PATTERN);
+			if (!r.IsMatch(shareCode))
+				throw new ShareCodePatternException();
+
+			string code = shareCode.Remove(0, 4).Replace("-", "");
+
+			BigInteger big = BigInteger.Zero;
+			foreach (char c in code.ToCharArray().Reverse())
+				big = BigInteger.Multiply(big, DICTIONARY.Length) + DICTIONARY.IndexOf(c);
+
+			byte[] matchIdBytes = new byte[sizeof(UInt64)];
+			byte[] outcomeIdBytes = new byte[sizeof(UInt64)];
+			byte[] tvPortIdBytes = new byte[sizeof(UInt32)];
+
+			byte[] all = big.ToByteArray().Reverse().ToArray();
+			Array.Copy(all, 0, matchIdBytes, 0, sizeof(UInt64));
+			Array.Copy(all, sizeof(UInt64), outcomeIdBytes, 0, sizeof(UInt64));
+			Array.Copy(all, 2 * sizeof(UInt64), tvPortIdBytes, 0, sizeof(UInt16));
+
+			ShareCodeStruct s = new ShareCodeStruct
+			{
+				MatchId = BitConverter.ToUInt64(matchIdBytes, 0),
+				OutcomeId = BitConverter.ToUInt64(outcomeIdBytes, 0),
+				TokenId = BitConverter.ToUInt32(tvPortIdBytes, 0),
+			};
+
+			return s;
+		}
+
+		public class ShareCodePatternException : Exception
+		{
+			public ShareCodePatternException() : base("Invalid share code")
+			{
+			}
 		}
 	}
 }
