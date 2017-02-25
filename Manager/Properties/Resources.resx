@@ -2740,4 +2740,30 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
   <data name="ShowAllDemos" xml:space="preserve">
     <value>Show all demos</value>
   </data>
+  <data name="DialogErrorInvalidShareCode" xml:space="preserve">
+    <value>Invalid share code</value>
+  </data>
+  <data name="ToolTipDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Download a demo from share code</value>
+  </data>
+  <data name="ShareCode" xml:space="preserve">
+    <value>Share code</value>
+  </data>
+  <data name="DialogMessageDownloadDemoFromShareCode" xml:space="preserve">
+    <value>You are going to download a demo from its share code.
+
+Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</value>
+  </data>
+  <data name="DialogTitleDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Download demo from share code</value>
+  </data>
+  <data name="DialogDemoFromShareCodeNotAvailable" xml:space="preserve">
+    <value>Demo link has expired or you already have it in your download folder.</value>
+  </data>
+  <data name="NotificationRetrievingDemoFromShareCode" xml:space="preserve">
+    <value>Retrieving demo data...</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingDemoData" xml:space="preserve">
+    <value>An error occured while retrieving demo data.</value>
+  </data>
 </root>

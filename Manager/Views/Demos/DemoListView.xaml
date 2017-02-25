@@ -371,6 +371,23 @@
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
+							ToolTip="{x:Static properties:Resources.ToolTipDownloadDemoFromShareCode}"
+							Command="{Binding DownloadDemoFromShareCodeCommand}">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_skydrive_download}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="{x:Static properties:Resources.ShareCode}"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipShowDemoOnThirdParty}"
 							Command="{Binding ShowDialogThirdPartySelectionCommand}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">

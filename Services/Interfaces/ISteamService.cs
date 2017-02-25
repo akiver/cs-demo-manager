@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
@@ -27,6 +27,14 @@ namespace Services.Interfaces
 		/// <param name="ct"></param>
 		/// <returns></returns>
 		Task<int> GenerateMatchListFile(CancellationToken ct);
+
+		/// <summary>
+		/// Download a demo from its share code
+		/// </summary>
+		/// <param name="shareCode"></param>
+		/// <param name="ct"></param>
+		/// <returns></returns>
+		Task<int> DownloadDemoFromShareCode(string shareCode, CancellationToken ct);
 
 		/// <summary>
 		/// Return the SteamID for the given username

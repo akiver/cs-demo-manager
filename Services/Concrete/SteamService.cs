@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -24,7 +24,7 @@ namespace Services.Concrete
 		private const string PLAYERS_SUMMARIES_URL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v1/?key={0}&steamids={1}";
 		private const string STEAM_RESOLVE_VANITY_URL = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key={0}&vanityurl={1}";
 		private const string BOILER_EXE_NAME = "boiler.exe";
-		private const string BOILER_SHA1 = "9F4093CBF678A8D40D57C7AEF361A141DEC509BF";
+		private const string BOILER_SHA1 = "80F2C8A1F51118FA450AB9E700645508172B01B8";
 
 		/// <summary>
 		/// Return suspect list that have been banned
@@ -208,28 +208,18 @@ namespace Services.Concrete
 
 		public async Task<int> GenerateMatchListFile(CancellationToken ct)
 		{
-			ct.ThrowIfCancellationRequested();
-			string hash = GetSha1HashFile(BOILER_EXE_NAME);
-			if (!hash.Equals(BOILER_SHA1)) return 2;
+			int result = await StartBoiler(ct);
 
-			Process[] currentProcess = Process.GetProcessesByName("csgo");
-			if (currentProcess.Length > 0) currentProcess[0].Kill();
+			return result;
+		}
 
-			string matchListDataFilePath = "\"" + AppSettings.GetMatchListDataFilePath() + "\"";
-			Process boiler = new Process
-			{
-				StartInfo =
-				{
-					FileName = BOILER_EXE_NAME,
-					Arguments = matchListDataFilePath,
-					UseShellExecute = false,
-					CreateNoWindow = true
-				}
-			};
-			boiler.Start();
-			await boiler.WaitForExitAsync(ct);
+		public async Task<int> DownloadDemoFromShareCode(string shareCode, CancellationToken ct)
+		{
+			ShareCode.ShareCodeStruct s = ShareCode.Decode(shareCode);
 
-			return boiler.ExitCode;
+			int result = await StartBoiler(ct, $"{s.MatchId} {s.OutcomeId} {s.TokenId}");
+
+			return result;
 		}
 
 		public async Task<string> GetSteamIdFromSteamProfileUsername(string username)
@@ -308,6 +298,31 @@ namespace Services.Concrete
 			}
 
 			return steamIdBannedList;
+		}
+
+		private static async Task<int> StartBoiler(CancellationToken ct, string args = "")
+		{
+			ct.ThrowIfCancellationRequested();
+			string hash = GetSha1HashFile(BOILER_EXE_NAME);
+			if (!hash.Equals(BOILER_SHA1)) return 2;
+
+			Process[] currentProcess = Process.GetProcessesByName("csgo");
+			if (currentProcess.Length > 0) currentProcess[0].Kill();
+
+			Process boiler = new Process
+			{
+				StartInfo =
+				{
+					FileName = BOILER_EXE_NAME,
+					Arguments = $"\"{AppSettings.GetMatchListDataFilePath()}\" {args}",
+					UseShellExecute = false,
+					CreateNoWindow = true
+				}
+			};
+			boiler.Start();
+			await boiler.WaitForExitAsync(ct);
+
+			return boiler.ExitCode;
 		}
 	}
 }

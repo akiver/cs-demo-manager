@@ -138,6 +138,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _downloadDemosCommand;
 
+		private RelayCommand _downloadDemoFromShareCodeCommand;
+
 		private RelayCommand _copyShareCodeCommand;
 
 		private RelayCommand _showDialogThirdPartySelectionCommand;
@@ -1235,16 +1237,8 @@ namespace Manager.ViewModel.Demos
 					?? (_downloadDemosCommand = new RelayCommand(
 					async () =>
 					{
-						if (!AppSettings.IsInternetConnectionAvailable())
-						{
-							await _dialogService.ShowNoInternetConnectionAsync();
-							return;
-						}
-						if (!Directory.Exists(Properties.Settings.Default.DownloadFolder))
-						{
-							await _dialogService.ShowErrorAsync(Properties.Resources.DialogSetFolderForDownload, MessageDialogStyle.Affirmative);
-							return;
-						}
+						bool downloadAllowed = await PreProcessDemoDownload();
+						if (!downloadAllowed) return;
 
 						try
 						{
@@ -1255,36 +1249,66 @@ namespace Manager.ViewModel.Demos
 							NotificationMessage = Properties.Resources.NotificationRetrievingMatchesData;
 							if (_cts == null) _cts = new CancellationTokenSource();
 							int result = await _steamService.GenerateMatchListFile(_cts.Token);
-							switch (result)
-							{
-								case 1:
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerNotFound, MessageDialogStyle.Affirmative);
-									break;
-								case 2:
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerIncorrect, MessageDialogStyle.Affirmative);
-									break;
-								case -2:
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogRestartSteam, MessageDialogStyle.Affirmative);
-									break;
-								case -3:
-								case -4:
-									await
-										_dialogService.ShowErrorAsync(Properties.Resources.DialogSteamNotRunningOrNotLoggedIn, MessageDialogStyle.Affirmative);
-									break;
-								case -5:
-								case -6:
-								case -7:
-									await
-										_dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileRetrievingMatchesData, result), MessageDialogStyle.Affirmative);
-									break;
-								case 0:
-									await ProcessDemosDownloaded();
-									break;
-							}
+							await HandleBoilerResult(result);
 						}
 						catch (Exception e)
 						{
 							if (!(e is TaskCanceledException))
+							{
+								Logger.Instance.Log(e);
+							}
+						}
+						finally
+						{
+							IsBusy = false;
+							HasNotification = false;
+							HasRing = false;
+							IsCancellable = false;
+							CommandManager.InvalidateRequerySuggested();
+						}
+					},
+					() => !IsBusy));
+			}
+		}
+
+		/// <summary>
+		/// Command to download a demo from its share code
+		/// </summary>
+		public RelayCommand DownloadDemoFromShareCodeCommand
+		{
+			get
+			{
+				return _downloadDemoFromShareCodeCommand
+					?? (_downloadDemoFromShareCodeCommand = new RelayCommand(
+					async () =>
+					{
+						bool downloadAllowed = await PreProcessDemoDownload();
+						if (!downloadAllowed) return;
+
+						string shareCode = await _dialogService.ShowInputAsync(Properties.Resources.DialogTitleDownloadDemoFromShareCode, Properties.Resources.DialogMessageDownloadDemoFromShareCode);
+						if (string.IsNullOrEmpty(shareCode)) return;
+
+						try
+						{
+							CommandManager.InvalidateRequerySuggested();
+							IsBusy = true;
+							HasNotification = true;
+							HasRing = true;
+							IsCancellable = true;
+							NotificationMessage = Properties.Resources.NotificationRetrievingDemoFromShareCode;
+							if (_cts == null) _cts = new CancellationTokenSource();
+
+							int result = await _steamService.DownloadDemoFromShareCode(shareCode, _cts.Token);
+
+							await HandleBoilerResult(result, false);
+						}
+						catch (Exception e)
+						{
+							if (e is ShareCode.ShareCodePatternException)
+							{
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidShareCode, MessageDialogStyle.Affirmative);
+							}
+							if (!(e is TaskCanceledException) && !(e is ShareCode.ShareCodePatternException))
 							{
 								Logger.Instance.Log(e);
 							}
@@ -1945,7 +1969,68 @@ namespace Manager.ViewModel.Demos
 			CommandManager.InvalidateRequerySuggested();
 		}
 
-		private async Task ProcessDemosDownloaded()
+		private async Task<bool> PreProcessDemoDownload()
+		{
+			if (!AppSettings.IsInternetConnectionAvailable())
+			{
+				await _dialogService.ShowNoInternetConnectionAsync();
+				return false;
+			}
+			if (!Directory.Exists(Properties.Settings.Default.DownloadFolder))
+			{
+				await _dialogService.ShowErrorAsync(Properties.Resources.DialogSetFolderForDownload, MessageDialogStyle.Affirmative);
+				return false;
+			}
+
+			return true;
+		}
+
+		private async Task HandleBoilerResult(int result, bool isRecentMatches = true)
+		{
+			switch (result)
+			{
+				case 1:
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerNotFound, MessageDialogStyle.Affirmative);
+					break;
+				case 2:
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerIncorrect, MessageDialogStyle.Affirmative);
+					break;
+				case -1:
+					await _dialogService.ShowErrorAsync("Invalid arguments", MessageDialogStyle.Affirmative);
+					break;
+				case -2:
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogRestartSteam, MessageDialogStyle.Affirmative);
+					break;
+				case -3:
+				case -4:
+					await
+						_dialogService.ShowErrorAsync(Properties.Resources.DialogSteamNotRunningOrNotLoggedIn, MessageDialogStyle.Affirmative);
+					break;
+				case -5:
+				case -6:
+				case -7:
+					string msg = isRecentMatches
+						? string.Format(Properties.Resources.DialogErrorWhileRetrievingMatchesData, result)
+						: Properties.Resources.DialogErrorWhileRetrievingDemoData;
+					await _dialogService.ShowErrorAsync(msg, MessageDialogStyle.Affirmative);
+					break;
+				case -8:
+					string demoNotFoundMessage = isRecentMatches
+						? Properties.Resources.DialogNoNewerDemo
+						: Properties.Resources.DialogDemoFromShareCodeNotAvailable;
+					await _dialogService.ShowMessageAsync(demoNotFoundMessage, MessageDialogStyle.Affirmative);
+					break;
+				case 0:
+					await ProcessDemosDownloaded(isRecentMatches);
+					break;
+				default:
+					await
+						_dialogService.ShowErrorAsync("Unknown error", MessageDialogStyle.Affirmative);
+					break;
+			}
+		}
+
+		private async Task ProcessDemosDownloaded(bool isRecentMatches = true)
 		{
 			_cts = new CancellationTokenSource();
 			CancellationToken ct = _cts.Token;
@@ -1972,7 +2057,10 @@ namespace Manager.ViewModel.Demos
 				}
 				else
 				{
-					await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoNewerDemo, MessageDialogStyle.Affirmative);
+					string demoNotFoundMessage = isRecentMatches
+						? Properties.Resources.DialogNoNewerDemo
+						: Properties.Resources.DialogDemoFromShareCodeNotAvailable;
+					await _dialogService.ShowMessageAsync(demoNotFoundMessage, MessageDialogStyle.Affirmative);
 				}
 			}
 			catch (Exception e)

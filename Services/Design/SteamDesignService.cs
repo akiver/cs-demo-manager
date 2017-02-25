@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
@@ -131,6 +131,11 @@ namespace Services.Design
 		public Task<string> GetSteamIdFromUrlOrSteamId(string steamUrl)
 		{
 			return Task.FromResult("12345");
+		}
+
+		public Task<int> DownloadDemoFromShareCode(string shareCode, CancellationToken ct)
+		{
+			return Task.FromResult(0);
 		}
 	}
 }

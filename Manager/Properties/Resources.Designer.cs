@@ -1098,6 +1098,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Demo link has expired or you already have it in your download folder..
+        /// </summary>
+        public static string DialogDemoFromShareCodeNotAvailable {
+            get {
+                return ResourceManager.GetString("DialogDemoFromShareCodeNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demo not found..
         /// </summary>
         public static string DialogDemoNotFound {
@@ -1265,6 +1274,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid share code.
+        /// </summary>
+        public static string DialogErrorInvalidShareCode {
+            get {
+                return ResourceManager.GetString("DialogErrorInvalidShareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid SteamID 64 or Steam community URL..
         /// </summary>
         public static string DialogErrorInvalidSteamId {
@@ -1371,6 +1389,15 @@ namespace Manager.Properties {
         public static string DialogErrorWhileRefreshingLastRank {
             get {
                 return ResourceManager.GetString("DialogErrorWhileRefreshingLastRank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while retrieving demo data..
+        /// </summary>
+        public static string DialogErrorWhileRetrievingDemoData {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileRetrievingDemoData", resourceCulture);
             }
         }
         
@@ -1526,6 +1553,17 @@ namespace Manager.Properties {
         public static string DialogMapNotSupported {
             get {
                 return ResourceManager.GetString("DialogMapNotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are going to download a demo from its share code.
+        ///
+        ///Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR)..
+        /// </summary>
+        public static string DialogMessageDownloadDemoFromShareCode {
+            get {
+                return ResourceManager.GetString("DialogMessageDownloadDemoFromShareCode", resourceCulture);
             }
         }
         
@@ -1834,6 +1872,15 @@ namespace Manager.Properties {
         public static string DialogSteamNotRunningOrNotLoggedIn {
             get {
                 return ResourceManager.GetString("DialogSteamNotRunningOrNotLoggedIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download demo from share code.
+        /// </summary>
+        public static string DialogTitleDownloadDemoFromShareCode {
+            get {
+                return ResourceManager.GetString("DialogTitleDownloadDemoFromShareCode", resourceCulture);
             }
         }
         
@@ -5084,6 +5131,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retrieving demo data....
+        /// </summary>
+        public static string NotificationRetrievingDemoFromShareCode {
+            get {
+                return ResourceManager.GetString("NotificationRetrievingDemoFromShareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Retrieving last matches information....
         /// </summary>
         public static string NotificationRetrievingMatchesData {
@@ -5871,6 +5927,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share code.
+        /// </summary>
+        public static string ShareCode {
+            get {
+                return ResourceManager.GetString("ShareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shots.
         /// </summary>
         public static string Shots {
@@ -6653,6 +6718,15 @@ namespace Manager.Properties {
         public static string ToolTipDisplaySettings {
             get {
                 return ResourceManager.GetString("ToolTipDisplaySettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download a demo from share code.
+        /// </summary>
+        public static string ToolTipDownloadDemoFromShareCode {
+            get {
+                return ResourceManager.GetString("ToolTipDownloadDemoFromShareCode", resourceCulture);
             }
         }
         

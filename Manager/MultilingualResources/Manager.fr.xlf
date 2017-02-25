@@ -3505,6 +3505,42 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
           <source>Show all demos</source>
           <target state="final">Afficher toutes les démos</target>
         </trans-unit>
+        <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
+          <source>Invalid share code</source>
+          <target state="final">Code de partage invalide</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>Download a demo from share code</source>
+          <target state="final">Télécharger une démo à partir de son code de partage</target>
+        </trans-unit>
+        <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
+          <source>Share code</source>
+          <target state="final">Code de partage</target>
+        </trans-unit>
+        <trans-unit id="DialogMessageDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>You are going to download a demo from its share code.
+
+Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</source>
+          <target state="final">Vous êtes sur le point de télécharger une démo à partir de son code de partage.
+
+Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
+        </trans-unit>
+        <trans-unit id="DialogTitleDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>Download demo from share code</source>
+          <target state="final">Télécharger une démo à partir de son code de partage</target>
+        </trans-unit>
+        <trans-unit id="DialogDemoFromShareCodeNotAvailable" translate="yes" xml:space="preserve">
+          <source>Demo link has expired or you already have it in your download folder.</source>
+          <target state="final">Le lien de cette démo à expiré ou vous l'avez déjà dans votre dossier de téléchargement.</target>
+        </trans-unit>
+        <trans-unit id="NotificationRetrievingDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>Retrieving demo data...</source>
+          <target state="final">Récupération des informations de la démo...</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingDemoData" translate="yes" xml:space="preserve">
+          <source>An error occured while retrieving demo data.</source>
+          <target state="final">Une erreur s'est produite pendant la récupération des informations de la démo.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

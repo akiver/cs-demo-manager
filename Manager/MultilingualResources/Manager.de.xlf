@@ -3503,6 +3503,42 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
           <source>Show all demos</source>
           <target state="new">Show all demos</target>
         </trans-unit>
+        <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
+          <source>Invalid share code</source>
+          <target state="new">Invalid share code</target>
+        </trans-unit>
+        <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>Download a demo from share code</source>
+          <target state="new">Download a demo from share code</target>
+        </trans-unit>
+        <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
+          <source>Share code</source>
+          <target state="new">Share code</target>
+        </trans-unit>
+        <trans-unit id="DialogMessageDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>You are going to download a demo from its share code.
+
+Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</source>
+          <target state="new">You are going to download a demo from its share code.
+
+Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
+        </trans-unit>
+        <trans-unit id="DialogTitleDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>Download demo from share code</source>
+          <target state="new">Download demo from share code</target>
+        </trans-unit>
+        <trans-unit id="DialogDemoFromShareCodeNotAvailable" translate="yes" xml:space="preserve">
+          <source>Demo link has expired or you already have it in your download folder.</source>
+          <target state="new">Demo link has expired or you already have it in your download folder.</target>
+        </trans-unit>
+        <trans-unit id="NotificationRetrievingDemoFromShareCode" translate="yes" xml:space="preserve">
+          <source>Retrieving demo data...</source>
+          <target state="new">Retrieving demo data...</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileRetrievingDemoData" translate="yes" xml:space="preserve">
+          <source>An error occured while retrieving demo data.</source>
+          <target state="new">An error occured while retrieving demo data.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

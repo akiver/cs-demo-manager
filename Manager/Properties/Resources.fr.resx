@@ -2613,4 +2613,30 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
   <data name="ShowAllDemos" xml:space="preserve">
     <value>Afficher toutes les démos</value>
   </data>
+  <data name="DialogErrorInvalidShareCode" xml:space="preserve">
+    <value>Code de partage invalide</value>
+  </data>
+  <data name="ToolTipDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Télécharger une démo à partir de son code de partage</value>
+  </data>
+  <data name="ShareCode" xml:space="preserve">
+    <value>Code de partage</value>
+  </data>
+  <data name="DialogMessageDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Vous êtes sur le point de télécharger une démo à partir de son code de partage.
+
+Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</value>
+  </data>
+  <data name="DialogTitleDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Télécharger une démo à partir de son code de partage</value>
+  </data>
+  <data name="DialogDemoFromShareCodeNotAvailable" xml:space="preserve">
+    <value>Le lien de cette démo à expiré ou vous l'avez déjà dans votre dossier de téléchargement.</value>
+  </data>
+  <data name="NotificationRetrievingDemoFromShareCode" xml:space="preserve">
+    <value>Récupération des informations de la démo...</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingDemoData" xml:space="preserve">
+    <value>Une erreur s'est produite pendant la récupération des informations de la démo.</value>
+  </data>
 </root>
