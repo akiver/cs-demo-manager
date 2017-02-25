@@ -2579,6 +2579,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RWS.
+        /// </summary>
+        public static string HeaderEseaRws {
+            get {
+                return ResourceManager.GetString("HeaderEseaRws", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 5K.
         /// </summary>
         public static string HeaderFiveKills {
@@ -3277,6 +3286,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipEquipmentValueTeam2 {
             get {
                 return ResourceManager.GetString("HeaderToolTipEquipmentValueTeam2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average ESEA Round Win Share.
+        /// </summary>
+        public static string HeaderToolTipEseaRws {
+            get {
+                return ResourceManager.GetString("HeaderToolTipEseaRws", resourceCulture);
             }
         }
         

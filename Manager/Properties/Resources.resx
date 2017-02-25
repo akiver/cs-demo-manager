@@ -2766,4 +2766,10 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</valu
   <data name="DialogErrorWhileRetrievingDemoData" xml:space="preserve">
     <value>An error occured while retrieving demo data.</value>
   </data>
+  <data name="HeaderEseaRws" xml:space="preserve">
+    <value>RWS</value>
+  </data>
+  <data name="HeaderToolTipEseaRws" xml:space="preserve">
+    <value>Average ESEA Round Win Share</value>
+  </data>
 </root>

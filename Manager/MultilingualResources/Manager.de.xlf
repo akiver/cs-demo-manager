@@ -3539,6 +3539,14 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
           <source>An error occured while retrieving demo data.</source>
           <target state="new">An error occured while retrieving demo data.</target>
         </trans-unit>
+        <trans-unit id="HeaderEseaRws" translate="yes" xml:space="preserve">
+          <source>RWS</source>
+          <target state="new">RWS</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipEseaRws" translate="yes" xml:space="preserve">
+          <source>Average ESEA Round Win Share</source>
+          <target state="new">Average ESEA Round Win Share</target>
+        </trans-unit>
       </group>
     </body>
   </file>

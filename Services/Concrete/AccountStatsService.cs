@@ -84,6 +84,12 @@ namespace Services.Concrete
 						stats.ClutchCount += player.ClutchCount;
 						stats.ClutchWin += player.ClutchWonCount;
 						stats.HltvRating += player.RatingHltv;
+						stats.EseaRws += (double)player.EseaRws;
+						stats.OneVersusOneCount += player.Clutch1V1WonCount;
+						stats.OneVersusTwoCount += player.Clutch1V2WonCount;
+						stats.OneVersusThreeCount += player.Clutch1V3WonCount;
+						stats.OneVersusFourCount += player.Clutch1V4WonCount;
+						stats.OneVersusFiveCount += player.Clutch1V5WonCount;
 						switch (GetWinStatus(demo, SelectedStatsAccountSteamId))
 						{
 							case "lost":
@@ -113,6 +119,10 @@ namespace Services.Concrete
 				if (stats.HltvRating > 0)
 				{
 					stats.HltvRating = Math.Round(stats.HltvRating / stats.MatchCount, 2);
+				}
+				if (stats.EseaRws > 0)
+				{
+					stats.EseaRws = Math.Round(stats.EseaRws / stats.MatchCount, 2);
 				}
 			});
 

@@ -3541,6 +3541,14 @@ Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR)
           <source>An error occured while retrieving demo data.</source>
           <target state="final">Une erreur s'est produite pendant la récupération des informations de la démo.</target>
         </trans-unit>
+        <trans-unit id="HeaderEseaRws" translate="yes" xml:space="preserve">
+          <source>RWS</source>
+          <target state="final">RWS</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipEseaRws" translate="yes" xml:space="preserve">
+          <source>Average ESEA Round Win Share</source>
+          <target state="final">Moyenne ESEA Round Win Share</target>
+        </trans-unit>
       </group>
     </body>
   </file>

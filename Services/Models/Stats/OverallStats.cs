@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Services.Models.Stats
 {
@@ -52,7 +52,19 @@ namespace Services.Models.Stats
 
 		public int ClutchWin { get; set; } = 0;
 
+		public int OneVersusOneCount { get; set; } = 0;
+
+		public int OneVersusTwoCount { get; set; } = 0;
+
+		public int OneVersusThreeCount { get; set; } = 0;
+
+		public int OneVersusFourCount { get; set; } = 0;
+
+		public int OneVersusFiveCount { get; set; } = 0;
+
 		public double HltvRating { get; set; } = 0;
+
+		public double EseaRws { get; set; } = 0;
 
 		public float TotalMatchesDuration { get; set; } = 0;
 

@@ -2639,4 +2639,10 @@ Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR)
   <data name="DialogErrorWhileRetrievingDemoData" xml:space="preserve">
     <value>Une erreur s'est produite pendant la récupération des informations de la démo.</value>
   </data>
+  <data name="HeaderEseaRws" xml:space="preserve">
+    <value>RWS</value>
+  </data>
+  <data name="HeaderToolTipEseaRws" xml:space="preserve">
+    <value>Moyenne ESEA Round Win Share</value>
+  </data>
 </root>

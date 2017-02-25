@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
@@ -80,6 +80,16 @@ namespace Manager.ViewModel.Accounts
 
 		private int _roundCount;
 
+		private int _oneVersusOneCount;
+
+		private int _oneVersusTwoCount;
+
+		private int _oneVersusThreeCount;
+
+		private int _oneVersusFourCount;
+
+		private int _oneVersusFiveCount;
+
 		private double _killPerRoundPercentage;
 
 		private double _assistPerRoundPercentage;
@@ -91,6 +101,8 @@ namespace Manager.ViewModel.Accounts
 		private double _averageDamagesPerRound;
 
 		private double _hltvRating;
+
+		private double _eseaRws;
 
 		private string _totalMatchTime;
 
@@ -232,6 +244,36 @@ namespace Manager.ViewModel.Accounts
 			set { Set(() => RoundCount, ref _roundCount, value); }
 		}
 
+		public int OneVersusOneCount
+		{
+			get { return _oneVersusOneCount; }
+			set { Set(() => OneVersusOneCount, ref _oneVersusOneCount, value); }
+		}
+
+		public int OneVersusTwoCount
+		{
+			get { return _oneVersusTwoCount; }
+			set { Set(() => OneVersusTwoCount, ref _oneVersusTwoCount, value); }
+		}
+
+		public int OneVersusThreeCount
+		{
+			get { return _oneVersusThreeCount; }
+			set { Set(() => OneVersusThreeCount, ref _oneVersusThreeCount, value); }
+		}
+
+		public int OneVersusFourCount
+		{
+			get { return _oneVersusFourCount; }
+			set { Set(() => OneVersusFourCount, ref _oneVersusFourCount, value); }
+		}
+
+		public int OneVersusFiveCount
+		{
+			get { return _oneVersusFiveCount; }
+			set { Set(() => OneVersusFiveCount, ref _oneVersusFiveCount, value); }
+		}
+
 		public double KillPerRoundPercentage
 		{
 			get { return _killPerRoundPercentage; }
@@ -266,6 +308,12 @@ namespace Manager.ViewModel.Accounts
 		{
 			get { return _hltvRating; }
 			set { Set(() => HltvRating, ref _hltvRating, value); }
+		}
+
+		public double EseaRws
+		{
+			get { return _eseaRws; }
+			set { Set(() => EseaRws, ref _eseaRws, value); }
 		}
 
 		public string TotalMatchTime
@@ -431,6 +479,12 @@ namespace Manager.ViewModel.Accounts
 			DamageCount = datas.DamageCount;
 			RoundCount = datas.RoundCount;
 			HltvRating = datas.HltvRating;
+			EseaRws = datas.EseaRws;
+			OneVersusOneCount = datas.OneVersusOneCount;
+			OneVersusTwoCount = datas.OneVersusTwoCount;
+			OneVersusThreeCount = datas.OneVersusThreeCount;
+			OneVersusFourCount = datas.OneVersusFourCount;
+			OneVersusFiveCount = datas.OneVersusFiveCount;
 			TimeSpan totalTime = TimeSpan.FromSeconds(datas.TotalMatchesDuration);
 			TotalMatchTime = string.Format(Properties.Resources.TotalMatchTimeValue, totalTime.Hours, totalTime.Minutes);
 			TimeSpan avgTotalTime = TimeSpan.FromSeconds(datas.AverageMatchDuration);
@@ -507,6 +561,12 @@ namespace Manager.ViewModel.Accounts
 			KillPerRoundPercentage = 0;
 			AverageDamagesPerRound = 0;
 			RoundCount = 0;
+			EseaRws = 0;
+			OneVersusFiveCount = 0;
+			OneVersusFourCount = 0;
+			OneVersusThreeCount = 0;
+			OneVersusTwoCount = 0;
+			OneVersusOneCount = 0;
 		}
 	}
 }
