@@ -254,7 +254,7 @@ namespace Manager.ViewModel.Demos
 						HasNotification = true;
 						// reload whole demo data if an account was selected and the current page was the demos list
 						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(CurrentDemo.Id))
-							_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
+							CurrentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 						await UpdateDemoFromAppArgument();
 						await LoadData();
 					}));
@@ -717,7 +717,7 @@ namespace Manager.ViewModel.Demos
 								HasNotification = false;
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectsList, MessageDialogStyle.Affirmative);
 							}
-							
+
 							NotificationMessage = Properties.Resources.NotificationPlayedAddedToSuspectsList;
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
@@ -1014,7 +1014,7 @@ namespace Manager.ViewModel.Demos
 			{
 				DispatcherHelper.CheckBeginInvokeOnUI(async () =>
 				{
-					_currentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
+					CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
 					PlayersTeam1Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamCT.Players);
 					PlayersTeam2Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamT.Players);
 					RoundsCollection = CollectionViewSource.GetDefaultView(CurrentDemo.Rounds);
@@ -1116,8 +1116,7 @@ namespace Manager.ViewModel.Demos
 				CurrentDemo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
 				if (_cacheService.HasDemoInCache(CurrentDemo.Id))
 				{
-					_currentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
-					RaisePropertyChanged(() => CurrentDemo);
+					CurrentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 				}
 			}
 		}
