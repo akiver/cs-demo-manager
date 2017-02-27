@@ -168,6 +168,16 @@ namespace Core.Models
 		private decimal _eseaRws;
 
 		/// <summary>
+		/// How many shots the player fired
+		/// </summary>
+		private int _shotCount;
+
+		/// <summary>
+		/// How many hits the player had
+		/// </summary>
+		private int _hitCount;
+
+		/// <summary>
 		/// Indicates if the player has the bomb, used for the overview animation
 		/// </summary>
 		private bool _hasBomb = false;
@@ -501,6 +511,31 @@ namespace Core.Models
 			get { return _eseaRws; }
 			set { Set(() => EseaRws, ref _eseaRws, value); }
 		}
+
+		[JsonProperty("shot_count")]
+		public int ShotCount
+		{
+			get { return _shotCount; }
+			set
+			{
+				Set(() => ShotCount, ref _shotCount, value);
+				RaisePropertyChanged(() => Accuracy);
+			}
+		}
+
+		[JsonProperty("hit_count")]
+		public int HitCount
+		{
+			get { return _hitCount; }
+			set
+			{
+				Set(() => HitCount, ref _hitCount, value);
+				RaisePropertyChanged(() => Accuracy);
+			}
+		}
+
+		[JsonIgnore]
+		public double Accuracy => ShotCount == 0 ? 0 : Math.Round(HitCount / (double)ShotCount * 100, 2);
 
 		[JsonProperty("is_vac_banned")]
 		public bool IsVacBanned

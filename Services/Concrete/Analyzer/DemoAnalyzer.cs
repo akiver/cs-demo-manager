@@ -762,6 +762,7 @@ namespace Services.Concrete.Analyzer
 			Player shooter = Demo.Players.FirstOrDefault(p => p.SteamId == e.Shooter.SteamID);
 			Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
 			if (shooter == null || weapon == null) return;
+			shooter.ShotCount++;
 
 			WeaponFireEvent shoot = new WeaponFireEvent(Parser.IngameTick, Parser.CurrentTime)
 			{
@@ -1210,6 +1211,7 @@ namespace Services.Concrete.Analyzer
 			Player attacker = null;
 			// attacker may be null (hurted by world)
 			if (e.Attacker != null) attacker = Demo.Players.FirstOrDefault(player => player.SteamId == e.Attacker.SteamID);
+			if (attacker != null) attacker.HitCount++;
 
 			PlayerHurtedEvent playerHurtedEvent = new PlayerHurtedEvent(Parser.IngameTick, Parser.CurrentTime)
 			{

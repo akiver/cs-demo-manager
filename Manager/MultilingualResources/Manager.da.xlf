@@ -3572,6 +3572,26 @@ This is an ESEA issue, you may have missing data for this demo.</source>
 As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
 This is an ESEA issue, you may have missing data for this demo.</target>
         </trans-unit>
+        <trans-unit id="HeaderAccuracy" translate="yes" xml:space="preserve">
+          <source>ACC (%)</source>
+          <target state="new">ACC (%)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccuracy" translate="yes" xml:space="preserve">
+          <source>Accuracy (%)</source>
+          <target state="new">Accuracy (%)</target>
+        </trans-unit>
+        <trans-unit id="Accuracy" translate="yes" xml:space="preserve">
+          <source>Accuracy</source>
+          <target state="new">Accuracy</target>
+        </trans-unit>
+        <trans-unit id="AccuracyFull" translate="yes" xml:space="preserve">
+          <source>Accuracy % (shots / hits)</source>
+          <target state="new">Accuracy % (shots / hits)</target>
+        </trans-unit>
+        <trans-unit id="Hits" translate="yes" xml:space="preserve">
+          <source>Hits</source>
+          <target state="new">Hits</target>
+        </trans-unit>
       </group>
     </body>
   </file>

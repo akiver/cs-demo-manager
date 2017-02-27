@@ -188,6 +188,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipHits}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="AccuracyHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipAccuracy}" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="AverageDamagePerRoundHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipAverageDamagePerRound}" />
 	</Style>

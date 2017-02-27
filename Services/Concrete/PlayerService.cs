@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -71,6 +72,8 @@ namespace Services.Concrete
 			demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);
 			foreach (Round round in demo.Rounds)
 			{
+				int shotCount = demo.WeaponFired.Where(w => w.RoundNumber == round.Number).Count(k => k.ShooterSteamId == player.SteamId);
+				int hitCount = round.PlayersHurted.Count(k => k.AttackerSteamId == player.SteamId);
 				PlayerRoundStats stats = new PlayerRoundStats
 				{
 					Number = round.Number,
@@ -79,8 +82,9 @@ namespace Services.Concrete
 					AssistCount = round.Kills.Count(k => k.AssisterSteamId == player.SteamId),
 					DeathCount = round.Kills.Count(k => k.KilledSteamId == player.SteamId),
 					HeadshotCount = round.Kills.Count(k => k.KillerSteamId == player.SteamId && k.IsHeadshot),
-					ShotCount = demo.WeaponFired.Where(w => w.RoundNumber == round.Number).Count(k => k.ShooterSteamId == player.SteamId),
-					HitCount = round.PlayersHurted.Count(k => k.AttackerSteamId == player.SteamId),
+					ShotCount = shotCount,
+					HitCount = hitCount,
+					Accuracy = shotCount == 0 ? 0 : Math.Round(hitCount / (double)shotCount * 100, 2),
 					DamageHealthCount = round.PlayersHurted.Where(e => e.AttackerSteamId == player.SteamId).Sum(e => e.HealthDamage),
 					DamageArmorCount = round.PlayersHurted.Where(e => e.AttackerSteamId == player.SteamId).Sum(e => e.ArmorDamage),
 					JumpKillCount = round.Kills.Count(k => k.KillerSteamId == player.SteamId && k.KillerVelocityZ > 0),

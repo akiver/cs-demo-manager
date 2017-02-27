@@ -88,6 +88,24 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accuracy.
+        /// </summary>
+        public static string Accuracy {
+            get {
+                return ResourceManager.GetString("Accuracy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accuracy % (shots / hits).
+        /// </summary>
+        public static string AccuracyFull {
+            get {
+                return ResourceManager.GetString("AccuracyFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
@@ -2401,6 +2419,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ACC (%).
+        /// </summary>
+        public static string HeaderAccuracy {
+            get {
+                return ResourceManager.GetString("HeaderAccuracy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assister.
         /// </summary>
         public static string HeaderAssister {
@@ -3018,6 +3045,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipAccountVisibilityStatus {
             get {
                 return ResourceManager.GetString("HeaderToolTipAccountVisibilityStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accuracy (%).
+        /// </summary>
+        public static string HeaderToolTipAccuracy {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAccuracy", resourceCulture);
             }
         }
         
@@ -4170,6 +4206,15 @@ namespace Manager.Properties {
         public static string Height {
             get {
                 return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hits.
+        /// </summary>
+        public static string Hits {
+            get {
+                return ResourceManager.GetString("Hits", resourceCulture);
             }
         }
         

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Manager.Views.Players.PlayerGeneralView"
+<UserControl x:Class="Manager.Views.Players.PlayerGeneralView"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -82,6 +82,24 @@
 					   FontSize="18"
 					   ToolTip="{x:Static properties:Resources.EseaRwsFull}">
 				<TextBlock Text="{Binding CurrentPlayer.EseaRws, StringFormat='{} {0}'}"
+						   Style="{StaticResource TextBlockHighlightBig}"/>
+			</TextBlock>
+			<TextBlock Text="{x:Static properties:Resources.Shots}"
+					   FontSize="18"
+					   ToolTip="{x:Static properties:Resources.ShotsFired}">
+				<TextBlock Text="{Binding CurrentPlayer.ShotCount, StringFormat='{} {0}'}"
+						   Style="{StaticResource TextBlockHighlightBig}"/>
+			</TextBlock>
+			<TextBlock Text="{x:Static properties:Resources.Hits}"
+					   FontSize="18"
+					   ToolTip="{x:Static properties:Resources.Hits}">
+				<TextBlock Text="{Binding CurrentPlayer.HitCount, StringFormat='{} {0}'}"
+						   Style="{StaticResource TextBlockHighlightBig}"/>
+			</TextBlock>
+			<TextBlock Text="{x:Static properties:Resources.Accuracy}"
+					   FontSize="18"
+					   ToolTip="{x:Static properties:Resources.AccuracyFull}">
+				<TextBlock Text="{Binding CurrentPlayer.Accuracy, StringFormat='{} {0}%'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
 		</StackPanel>

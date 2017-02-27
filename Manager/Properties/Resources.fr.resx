@@ -2645,4 +2645,24 @@ Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR)
   <data name="HeaderToolTipEseaRws" xml:space="preserve">
     <value>Moyenne ESEA Round Win Share</value>
   </data>
+  <data name="DialogErrorEseaDemosParsing" xml:space="preserve">
+    <value>Une erreur s'est produite pendant l'analyse de la démo {0}.
+La source de la démo étant ESEA, il est possible que cette erreur soit du à l'arrêt non conforme de l'enregistrement de la démo causé par le système des serveurs ESEA.
+C'est un problème qui arrive avec certaines démos ESEA et il est possible que certaines données soient manquantes.</value>
+  </data>
+  <data name="HeaderAccuracy" xml:space="preserve">
+    <value>PREC (%)</value>
+  </data>
+  <data name="HeaderToolTipAccuracy" xml:space="preserve">
+    <value>Précision (%)</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Précision</value>
+  </data>
+  <data name="AccuracyFull" xml:space="preserve">
+    <value>Précision % (tirs / tirs cadrés)</value>
+  </data>
+  <data name="Hits" xml:space="preserve">
+    <value>Tirs</value>
+  </data>
 </root>

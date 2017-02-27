@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="Manager.Views.Players.PlayerRoundsView"
+<UserControl x:Class="Manager.Views.Players.PlayerRoundsView"
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -63,6 +63,10 @@
 									Width="Auto"
 									Header="{x:Static properties:Resources.HeaderHits}"
 									Binding="{Binding HitCount}"/>
+				<DataGridTextColumn HeaderStyle="{StaticResource AccuracyHeader}"
+									Width="Auto"
+									Header="{x:Static properties:Resources.HeaderAccuracy}"
+									Binding="{Binding Accuracy}"/>
 				<DataGridTextColumn HeaderStyle="{StaticResource TotalDamageHealthHeader}"
 									Width="Auto"
 									Header="{x:Static properties:Resources.HeaderTotalDamagesHealth}"

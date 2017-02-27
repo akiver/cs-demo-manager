@@ -1,4 +1,4 @@
-﻿namespace Services.Models.Stats
+namespace Services.Models.Stats
 {
 	/// <summary>
 	/// Contains some stats about a player for a specific round
@@ -14,6 +14,8 @@
 		public int ShotCount { get; set; }
 
 		public int HitCount { get; set; }
+
+		public double Accuracy { get; set; }
 
 		public int DamageHealthCount { get; set; }
 

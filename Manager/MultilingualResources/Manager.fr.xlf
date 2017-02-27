@@ -3557,6 +3557,26 @@ This is an ESEA issue, you may have missing data for this demo.</source>
 La source de la démo étant ESEA, il est possible que cette erreur soit du à l'arrêt non conforme de l'enregistrement de la démo causé par le système des serveurs ESEA.
 C'est un problème qui arrive avec certaines démos ESEA et il est possible que certaines données soient manquantes.</target>
         </trans-unit>
+        <trans-unit id="HeaderAccuracy" translate="yes" xml:space="preserve">
+          <source>ACC (%)</source>
+          <target state="final">PREC (%)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAccuracy" translate="yes" xml:space="preserve">
+          <source>Accuracy (%)</source>
+          <target state="final">Précision (%)</target>
+        </trans-unit>
+        <trans-unit id="Accuracy" translate="yes" xml:space="preserve">
+          <source>Accuracy</source>
+          <target state="final">Précision</target>
+        </trans-unit>
+        <trans-unit id="AccuracyFull" translate="yes" xml:space="preserve">
+          <source>Accuracy % (shots / hits)</source>
+          <target state="final">Précision % (tirs / tirs cadrés)</target>
+        </trans-unit>
+        <trans-unit id="Hits" translate="yes" xml:space="preserve">
+          <source>Hits</source>
+          <target state="final">Tirs</target>
+        </trans-unit>
       </group>
     </body>
   </file>
