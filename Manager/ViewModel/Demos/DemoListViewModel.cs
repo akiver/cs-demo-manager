@@ -788,21 +788,13 @@ namespace Manager.ViewModel.Demos
 							List<Demo> demosFailed = new List<Demo>();
 							for (int i = 0; i < demos.Count; i++)
 							{
-								if (!demos[i].Players.Any())
+								if (!_cacheService.HasDemoInCache(demos[i].Id))
 								{
 									try
 									{
-										if (_cts == null)
-										{
-											_cts = new CancellationTokenSource();
-										}
+										if (_cts == null) _cts = new CancellationTokenSource();
 										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
-										demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
-										if (AppSettings.IsInternetConnectionAvailable())
-										{
-											await _demosService.AnalyzeBannedPlayersAsync(demos[i]);
-										}
-										await _cacheService.WriteDemoDataCache(demos[i]);
+										await AnalyzeDemoAsync(demos[i], _cts.Token);
 									}
 									catch (Exception e)
 									{
@@ -811,7 +803,6 @@ namespace Manager.ViewModel.Demos
 										demosFailed.Add(demos[i]);
 										await _cacheService.WriteDemoDataCache(demos[i]);
 									}
-
 								}
 								if (demos[i].Players.Any())
 								{
@@ -1857,6 +1848,12 @@ namespace Manager.ViewModel.Demos
 			catch (Exception e)
 			{
 				if (e is TaskCanceledException || e is JsonSerializationException) return -1;
+				if (demo.SourceName == Esea.NAME && e is EndOfStreamException)
+				{
+					await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorEseaDemosParsing, demo.Name), MessageDialogStyle.Affirmative);
+					await _cacheService.WriteDemoDataCache(demo);
+					return -3;
+				}
 				Logger.Instance.Log(e);
 				demo.Status = "old";
 				await _cacheService.WriteDemoDataCache(demo);

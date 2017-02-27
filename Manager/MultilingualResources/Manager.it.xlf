@@ -3546,6 +3546,14 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
           <source>Average ESEA Round Win Share</source>
           <target state="new">Average ESEA Round Win Share</target>
         </trans-unit>
+        <trans-unit id="DialogErrorEseaDemosParsing" translate="yes" xml:space="preserve">
+          <source>An error occured while analyzing the demo {0}.
+As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
+This is an ESEA issue, you may have missing data for this demo.</source>
+          <target state="new">An error occured while analyzing the demo {0}.
+As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
+This is an ESEA issue, you may have missing data for this demo.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

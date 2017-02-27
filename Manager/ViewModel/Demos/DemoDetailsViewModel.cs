@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -592,8 +593,16 @@ namespace Manager.ViewModel.Demos
 								}
 								catch (Exception e)
 								{
-									Logger.Instance.Log(e);
-									await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
+									if (CurrentDemo.SourceName == Esea.NAME && e is EndOfStreamException)
+									{
+										await _dialogService.ShowErrorAsync(
+											string.Format(Properties.Resources.DialogErrorEseaDemosParsing, CurrentDemo.Name), MessageDialogStyle.Affirmative);
+									}
+									else
+									{
+										Logger.Instance.Log(e);
+										await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
+									}
 								}
 								finally
 								{
@@ -640,8 +649,18 @@ namespace Manager.ViewModel.Demos
 						}
 						catch (Exception e)
 						{
-							Logger.Instance.Log(e);
-							await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
+							if (CurrentDemo.SourceName == Esea.NAME && e is EndOfStreamException)
+							{
+								await _cacheService.WriteDemoDataCache(CurrentDemo);
+								await _dialogService.ShowErrorAsync(
+									string.Format(Properties.Resources.DialogErrorEseaDemosParsing, CurrentDemo.Name),
+									MessageDialogStyle.Affirmative);
+							}
+							else
+							{
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
+							}
 						}
 
 						IsAnalyzing = false;
@@ -966,13 +985,22 @@ namespace Manager.ViewModel.Demos
 								}
 								catch (Exception e)
 								{
-									Logger.Instance.Log(e);
-									CurrentDemo.Status = "old";
+									if (CurrentDemo.SourceName == Esea.NAME && e is EndOfStreamException)
+									{
+										await _dialogService.ShowErrorAsync(
+											string.Format(Properties.Resources.DialogErrorEseaDemosParsing, CurrentDemo.Name),
+											MessageDialogStyle.Affirmative);
+									}
+									else
+									{
+										Logger.Instance.Log(e);
+										CurrentDemo.Status = "old";
+										await _dialogService.ShowErrorAsync(
+											string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE),
+											MessageDialogStyle.Affirmative
+										);
+									}
 									await _cacheService.WriteDemoDataCache(CurrentDemo);
-									await _dialogService.ShowErrorAsync(
-										string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE),
-										MessageDialogStyle.Affirmative
-									);
 								}
 								finally
 								{

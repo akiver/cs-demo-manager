@@ -1247,6 +1247,17 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while analyzing the demo {0}.
+        ///As this demo&apos;s source is ESEA, it&apos;s probably due to the ESEA pug system that improperly stop demos recording.
+        ///This is an ESEA issue, you may have missing data for this demo..
+        /// </summary>
+        public static string DialogErrorEseaDemosParsing {
+            get {
+                return ResourceManager.GetString("DialogErrorEseaDemosParsing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured while exporting heatmap to PNG..
         /// </summary>
         public static string DialogErrorExportingHeatmap {

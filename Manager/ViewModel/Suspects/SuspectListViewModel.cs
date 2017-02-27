@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -372,9 +373,18 @@ namespace Manager.ViewModel.Suspects
 									}
 									catch (Exception e)
 									{
-										Logger.Instance.Log(e);
-										demos[i].Status = "old";
-										demosFailed.Add(demos[i]);
+										if (demos[i].SourceName == Esea.NAME && e is EndOfStreamException)
+										{
+											await _dialogService.ShowErrorAsync(
+												string.Format(Properties.Resources.DialogErrorEseaDemosParsing, demos[i].Name),
+												MessageDialogStyle.Affirmative);
+										}
+										else
+										{
+											Logger.Instance.Log(e);
+											demos[i].Status = "old";
+											demosFailed.Add(demos[i]);
+										}
 										await _cacheService.WriteDemoDataCache(demos[i]);
 									}
 								}
