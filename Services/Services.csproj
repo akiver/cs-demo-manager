@@ -133,6 +133,7 @@
     <Compile Include="Concrete\Excel\Sheets\Single\EntryKillsRoundSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\EntryKillsTeamSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\GeneralSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\KillMatrixSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\KillsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\PlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\RoundsSheet.cs" />

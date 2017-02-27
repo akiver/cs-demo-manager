@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 using Services.Concrete.Excel.Sheets.Single;
@@ -29,6 +29,8 @@ namespace Services.Concrete.Excel
 
 		private KillsSheet _killsSheet;
 
+		private KillMatrixSheet _killMatrixSheet;
+
 		public SingleExport(Demo demo)
 		{
 			_demo = demo;
@@ -58,6 +60,8 @@ namespace Services.Concrete.Excel
 			await _entryKillsPlayerSheet.Generate();
 			_entryKillsTeamSheet = new EntryKillsTeamSheet(Workbook, _demo);
 			await _entryKillsTeamSheet.Generate();
+			_killMatrixSheet = new KillMatrixSheet(Workbook, _demo);
+			await _killMatrixSheet.Generate();
 
 			return Workbook;
 		}
