@@ -270,6 +270,13 @@ namespace Services.Concrete.Analyzer
 
 		protected new void HandleRoundEnd(object sender, RoundEndedEventArgs e)
 		{
+			// ebot sometimes doesn't have the right teams name at the first round when there was a teams swap
+			if (CurrentRound.Number == 1 && CurrentRound.TeamCtName != Demo.TeamCT.Name)
+			{
+				CurrentRound.TeamCtName = Demo.TeamCT.Name;
+				CurrentRound.TeamTname = Demo.TeamT.Name;
+			}
+
 			base.HandleRoundEnd(sender, e);
 
 			if (IsLastRoundHalf)
