@@ -120,6 +120,7 @@
     <Compile Include="Concrete\Excel\Sheets\AbstractSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\AbstractSingleSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\GeneralSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\KillMatrixSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\KillsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\MapsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\PlayersSheet.cs" />

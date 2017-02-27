@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
@@ -25,6 +25,8 @@ namespace Services.Concrete.Excel
 		private RoundsSheet _roundsSheet;
 
 		private KillsSheet _killsSheet;
+
+		private KillMatrixSheet _killMatrixSheet;
 
 		public MultipleExport(List<Demo> demos, long selectedStatsAccountSteamId = 0)
 		{
@@ -54,6 +56,8 @@ namespace Services.Concrete.Excel
 			await _roundsSheet.Generate();
 			_killsSheet = new KillsSheet(Workbook, _demos);
 			await _killsSheet.Generate();
+			_killMatrixSheet = new KillMatrixSheet(Workbook, _demos);
+			await _killMatrixSheet.Generate();
 
 			return Workbook;
 		}
