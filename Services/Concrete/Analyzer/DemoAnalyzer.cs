@@ -1024,7 +1024,8 @@ namespace Services.Concrete.Analyzer
 				{
 					X = e.Position.X,
 					Y = e.Position.Y
-				}
+				},
+				RoundNumber = CurrentRound.Number,
 			};
 
 			if (e.FlashedPlayers != null)
