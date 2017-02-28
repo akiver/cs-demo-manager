@@ -3,6 +3,8 @@
 CSGO Demos Manager is an application to manage replays from the game Counter-Strike: Global Offensive.
 You can download the last release from http://csgo-demos-manager.com.
 
+You can follow [@CSGODemoManager](https://twitter.com/CSGODemoManager) on Twitter to keep updated on releases.
+
 ## Preview ##
 
 ![preview](http://csgo-demos-manager.com/images/listing.jpg)
@@ -21,6 +23,7 @@ More screenshots and video are available at [http://csgo-demos-manager.com](http
 - Track your stats (overall stats and graphs)
 - [HLAE](https://github.com/ripieces/advancedfx/wiki/Half-Life-Advanced-Effects) integration
 - Download your last matchmaking demos
+- Download demos from share codes
 
 ## Dependencies ##
 
@@ -54,6 +57,12 @@ More screenshots and video are available at [http://csgo-demos-manager.com](http
 ## Contribute
 
 You are free to contribute to the project. Please follow the [AngularJS commit guidelines](https://github.com/angular/angular.js/blob/master/CONTRIBUTING.md#-git-commit-guidelines).
+
+## Donate
+
+ If you want to say thank you, please feel free to make a donation. Thank you!
+
+ [![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4K9LM2PMM8D3E&lc=US&item_name=CSGO%20Demos%20Manager&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 
 ## Translations
 
