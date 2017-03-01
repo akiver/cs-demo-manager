@@ -124,75 +124,75 @@
         </trans-unit>
         <trans-unit id="Rank1" translate="yes" xml:space="preserve">
           <source>Silver I</source>
-          <target state="new">Silver I</target>
+          <target state="translated">Plata I</target>
         </trans-unit>
         <trans-unit id="Rank10" translate="yes" xml:space="preserve">
           <source>Gold Nova Master</source>
-          <target state="new">Gold Nova Master</target>
+          <target state="translated">Maestro de Nova de Oro</target>
         </trans-unit>
         <trans-unit id="Rank11" translate="yes" xml:space="preserve">
           <source>Master Guardian I</source>
-          <target state="new">Master Guardian I</target>
+          <target state="translated">Guardián Maestro I</target>
         </trans-unit>
         <trans-unit id="Rank12" translate="yes" xml:space="preserve">
           <source>Master Guardian II</source>
-          <target state="new">Master Guardian II</target>
+          <target state="translated">Guardián Maestro II</target>
         </trans-unit>
         <trans-unit id="Rank13" translate="yes" xml:space="preserve">
           <source>Master Guardian Elite</source>
-          <target state="new">Master Guardian Elite</target>
+          <target state="translated">Guardián Maestro de Élite</target>
         </trans-unit>
         <trans-unit id="Rank14" translate="yes" xml:space="preserve">
           <source>Distinguished Master Guardian</source>
-          <target state="new">Distinguished Master Guardian</target>
+          <target state="translated">Guardián Maestro Distinguido</target>
         </trans-unit>
         <trans-unit id="Rank15" translate="yes" xml:space="preserve">
           <source>Legendary Eagle</source>
-          <target state="new">Legendary Eagle</target>
+          <target state="translated">Águila Legendaria</target>
         </trans-unit>
         <trans-unit id="Rank16" translate="yes" xml:space="preserve">
           <source>Legendary Eagle Master</source>
-          <target state="new">Legendary Eagle Master</target>
+          <target state="translated">Águila Legendaria Maestra</target>
         </trans-unit>
         <trans-unit id="Rank17" translate="yes" xml:space="preserve">
           <source>Supreme Master First Class</source>
-          <target state="new">Supreme Master First Class</target>
+          <target state="translated">Maestro Supremo de Primera Clase</target>
         </trans-unit>
         <trans-unit id="Rank18" translate="yes" xml:space="preserve">
           <source>Global Elite</source>
-          <target state="new">Global Elite</target>
+          <target state="translated">La Élite Mundial</target>
         </trans-unit>
         <trans-unit id="Rank2" translate="yes" xml:space="preserve">
           <source>Silver II</source>
-          <target state="new">Silver II</target>
+          <target state="translated">Plata II</target>
         </trans-unit>
         <trans-unit id="Rank3" translate="yes" xml:space="preserve">
           <source>Silver III</source>
-          <target state="new">Silver III</target>
+          <target state="translated">Plata III</target>
         </trans-unit>
         <trans-unit id="Rank4" translate="yes" xml:space="preserve">
           <source>Silver IV</source>
-          <target state="new">Silver IV</target>
+          <target state="translated">Plata IV</target>
         </trans-unit>
         <trans-unit id="Rank5" translate="yes" xml:space="preserve">
           <source>Silver Elite</source>
-          <target state="new">Silver Elite</target>
+          <target state="translated">Élite de Plata</target>
         </trans-unit>
         <trans-unit id="Rank6" translate="yes" xml:space="preserve">
           <source>Silver Elite Master</source>
-          <target state="new">Silver Elite Master</target>
+          <target state="translated">Maestro de Élite de Plata</target>
         </trans-unit>
         <trans-unit id="Rank7" translate="yes" xml:space="preserve">
           <source>Gold Nova I</source>
-          <target state="new">Gold Nova I</target>
+          <target state="translated">Nova de Oro I</target>
         </trans-unit>
         <trans-unit id="Rank8" translate="yes" xml:space="preserve">
           <source>Gold Nova II</source>
-          <target state="new">Gold Nova II</target>
+          <target state="translated">Nova de Oro II</target>
         </trans-unit>
         <trans-unit id="Rank9" translate="yes" xml:space="preserve">
           <source>Gold Nova III</source>
-          <target state="new">Gold Nova III</target>
+          <target state="translated">Nova de Oro III</target>
         </trans-unit>
         <trans-unit id="StatusNone" translate="yes" xml:space="preserve">
           <source>None</source>
@@ -200,11 +200,11 @@
         </trans-unit>
         <trans-unit id="StatusToWatch" translate="yes" xml:space="preserve">
           <source>To watch</source>
-          <target state="new">To watch</target>
+          <target state="translated">Para ver</target>
         </trans-unit>
         <trans-unit id="StatusWatched" translate="yes" xml:space="preserve">
           <source>Watched</source>
-          <target state="new">Watched</target>
+          <target state="translated">Vista</target>
         </trans-unit>
         <trans-unit id="valve" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\Images\Logos\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
