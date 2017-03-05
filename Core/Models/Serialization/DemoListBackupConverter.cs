@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -11,9 +10,6 @@ namespace Core.Models.Serialization
 	/// </summary>
 	public class DemoListBackupConverter: JsonConverter
 	{
-		private readonly Regex _oldDemoIdPattern = new Regex("^(?<mapName>.*?_([^_0-9]+))(?<identifier>([0-9]*))$");
-
-
 		public override bool CanConvert(Type objectType)
 		{
 			return objectType.IsGenericType;
@@ -21,17 +17,16 @@ namespace Core.Models.Serialization
 
 		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
+			// Store application version for future compatibility
+			writer.WriteStartObject();
+			writer.WritePropertyName("Version");
+			writer.WriteValue(AppSettings.APP_VERSION.ToString());
 			// The demos list is stored in an JSON array
+			writer.WritePropertyName("Demos");
 			writer.WriteStartArray();
 			foreach (Demo demo in (List<Demo>)value)
 			{
 				writer.WriteStartObject();
-				Match matchId = _oldDemoIdPattern.Match(demo.Id);
-				if (matchId.Success)
-				{
-					// Add a "_" for new id formatting
-					demo.Id = matchId.Groups["mapName"] + "_" + matchId.Groups["identifier"];
-				}
 				writer.WritePropertyName("Id");
 				writer.WriteValue(demo.Id);
 				writer.WritePropertyName("Comment");
@@ -41,25 +36,35 @@ namespace Core.Models.Serialization
 				writer.WriteEndObject();
 			}
 			writer.WriteEndArray();
+			writer.WriteEndObject();
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
 		{
 			List<Demo> demos = new List<Demo>();
 
+			string version = string.Empty;
 			while (reader.Read())
 			{
-				if (reader.TokenType != JsonToken.StartObject) break;
-
-				JObject obj = (JObject)serializer.Deserialize(reader);
-
-				Demo demo = new Demo
+				if (reader.TokenType == JsonToken.PropertyName && reader.Path == "Version")
 				{
-					Id = Convert.ToString(((JValue) obj["Id"]).Value),
-					Comment = Convert.ToString(((JValue) obj["Comment"]).Value),
-					Status = Convert.ToString(((JValue)obj["status"]).Value)
-				};
-				if(!string.IsNullOrEmpty(demo.Comment) || !string.IsNullOrEmpty(demo.Status)) demos.Add(demo);
+					version = reader.ReadAsString();
+					continue;
+				}
+
+				// update logic based on version if needed
+				if (reader.TokenType == JsonToken.StartObject)
+				{
+					JObject obj = (JObject) serializer.Deserialize(reader);
+
+					Demo demo = new Demo
+					{
+						Id = Convert.ToString(((JValue) obj["Id"]).Value),
+						Comment = Convert.ToString(((JValue) obj["Comment"]).Value),
+						Status = Convert.ToString(((JValue) obj["status"]).Value)
+					};
+					if (!string.IsNullOrEmpty(demo.Comment) || !string.IsNullOrEmpty(demo.Status)) demos.Add(demo);
+				}
 			}
 
 			return demos;

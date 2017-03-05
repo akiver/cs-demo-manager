@@ -11,6 +11,7 @@ using Core.Models;
 using Core.Models.protobuf;
 using Core.Models.Serialization;
 using Core.Models.Source;
+using DemoInfo;
 using ICSharpCode.SharpZipLib.BZip2;
 using Newtonsoft.Json;
 using ProtoBuf;
@@ -556,6 +557,25 @@ namespace Services.Concrete
 			{
 				return false;
 			}
+		}
+
+		public Task<string> GetOldId(Demo demo)
+		{
+			string id = string.Empty;
+			try
+			{
+				DemoParser parser = new DemoParser(File.OpenRead(demo.Path));
+				parser.ParseHeader();
+				DateTime dateTime = File.GetCreationTime(demo.Path);
+				int seconds = (int)dateTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+				id = parser.Header.MapName.Replace("/", "") + "_" + seconds + parser.Header.SignonLength + parser.Header.PlaybackFrames;
+			}
+			catch
+			{
+				// Silently ignore no CSGO demos or unreadable file
+			}
+
+			return Task.FromResult(id);
 		}
 	}
 }

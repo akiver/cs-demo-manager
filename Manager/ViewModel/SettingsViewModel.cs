@@ -1611,6 +1611,8 @@ namespace Manager.ViewModel
 						{
 							try
 							{
+								NotificationMessage = Properties.Resources.NotificationImportingCustomData;
+								HasNotification = true;
 								string filename = fileDialog.FileName;
 
 								// contains demos with only custom data
@@ -1625,7 +1627,8 @@ namespace Manager.ViewModel
 								{
 									foreach (Demo demoHeader in demosHeader)
 									{
-										if (demoHeader.Equals(demo))
+										string oldId = await _demosService.GetOldId(demoHeader);
+										if (demoHeader.Equals(demo) || demo.Id == oldId)
 										{
 											await _demosService.GetDemoDataAsync(demoHeader);
 											demoHeader.Comment = demo.Comment;
@@ -1642,6 +1645,10 @@ namespace Manager.ViewModel
 							{
 								Logger.Instance.Log(e);
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorImportingCustomData, MessageDialogStyle.Affirmative);
+							}
+							finally
+							{
+								HasNotification = false;
 							}
 						}
 					}));

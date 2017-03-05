@@ -3577,6 +3577,10 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
           <source>Hits</source>
           <target state="final">Tirs</target>
         </trans-unit>
+        <trans-unit id="NotificationImportingCustomData" translate="yes" xml:space="preserve">
+          <source>Importing custom data...</source>
+          <target state="final">Importation des données en cours...</target>
+        </trans-unit>
       </group>
     </body>
   </file>

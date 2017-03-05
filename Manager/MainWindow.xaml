@@ -501,6 +501,10 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
+							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+									   Style="{StaticResource NotificationMessageStyle}"
+									   HorizontalAlignment="Center"
+									   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 							<Button Command="{Binding Source={StaticResource Locator}, Path=Settings.ClearDemosDataCacheCommand}"
 									Style="{DynamicResource SettingsButton}"
 									Content="{x:Static properties:Resources.ClearDemosData}" />

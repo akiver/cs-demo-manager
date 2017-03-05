@@ -159,5 +159,11 @@ namespace Services.Interfaces
 		/// <param name="demo"></param>
 		/// <returns></returns>
 		Task<string> GetShareCode(Demo demo);
+
+		/// <summary>
+		/// Return the demo ID used in version prior to 2.11 version
+		/// </summary>
+		/// <returns></returns>
+		Task<string> GetOldId(Demo demo);
 	}
 }

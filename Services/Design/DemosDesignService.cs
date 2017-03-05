@@ -387,5 +387,10 @@ namespace Services.Design
 		{
 			return Task.FromResult(demo);
 		}
+
+		public Task<string> GetOldId(Demo demo)
+		{
+			return Task.FromResult("12345");
+		}
 	}
 }

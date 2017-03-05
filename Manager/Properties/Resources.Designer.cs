@@ -1202,7 +1202,7 @@ namespace Manager.Properties {
         ///It will use the tool &quot;Half-Life Advanced Effects&quot; (HLAE) which is technically a hack.
         ///You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
         ///If you don&apos;t know what is this or you are not planning to make movies just click on cancel.
-        ///If you enable it, the game is launched with the &quot;-insecure&quot; parameter (everytime), which means that you will not be able to join server protected by VA [rest of string was truncated]&quot;;.
+        ///If you enable it, the game is launched with the &quot;-insecure&quot; parameter (everytime), which means that you will not be able to join server protected b [rest of string was truncated]&quot;;.
         /// </summary>
         public static string DialogEnableHlaeWarning {
             get {
@@ -5039,6 +5039,15 @@ namespace Manager.Properties {
         public static string NotificationGeneratingData {
             get {
                 return ResourceManager.GetString("NotificationGeneratingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing custom data....
+        /// </summary>
+        public static string NotificationImportingCustomData {
+            get {
+                return ResourceManager.GetString("NotificationImportingCustomData", resourceCulture);
             }
         }
         

@@ -2665,4 +2665,7 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
   <data name="Hits" xml:space="preserve">
     <value>Tirs</value>
   </data>
+  <data name="NotificationImportingCustomData" xml:space="preserve">
+    <value>Importation des données en cours...</value>
+  </data>
 </root>
