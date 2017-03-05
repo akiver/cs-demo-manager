@@ -72,6 +72,10 @@ namespace Services.Concrete.Analyzer
 		/// Number of overtime
 		/// </summary>
 		public int OvertimeCount { get; set; } = 0;
+		/// <summary>
+		/// Flag to know when the game is paused (used only with eBot atm)
+		/// </summary>
+		public bool IsGamePaused { get; set; }
 
 		public Dictionary<DemoInfo.Player, int> KillsThisRound { get; set; } = new Dictionary<DemoInfo.Player, int>();
 

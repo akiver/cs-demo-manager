@@ -47,6 +47,12 @@ namespace Services.Concrete.Analyzer
 
 		private const string PLEASE_WRITE_READY = "eBot: Please write !ready when your team is ready !";
 
+		private const string STOP_ROUND = "eBot: This round has been cancelled, we will restart at the begin of the round";
+
+		private const string ROUND_RESTORED = "eBot: Round restored, going live !";
+
+		private const string MATCH_UNPAUSED = "eBot: This round has been cancelled, we will restart at the begin of the round";
+
 		public EbotAnalyzer(Demo demo)
 		{
 			Parser = new DemoParser(File.OpenRead(demo.Path));
@@ -173,6 +179,23 @@ namespace Services.Concrete.Analyzer
 		{
 			base.HandleSayText(sender, e);
 
+			// game pause
+			if (e.Text == STOP_ROUND)
+			{
+				IsMatchStarted = false;
+				IsGamePaused = true;
+				BackupToLastRound();
+				return;
+			}
+
+			// live after pause
+			if (e.Text == MATCH_UNPAUSED || e.Text == ROUND_RESTORED)
+			{
+				IsMatchStarted = true;
+				IsGamePaused = false;
+				return;
+			}
+
 			// Beginning of the match
 			Match faceItLive = _faceItLiveRegex.Match(e.Text);
 			if (e.Text == EBOT_LIVE || faceItLive.Success)
@@ -246,7 +269,7 @@ namespace Services.Concrete.Analyzer
 
 		protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
 		{
-			if (_playerTeamCount > 8 && !_isMatchEnded) IsMatchStarted = true;
+			if (_playerTeamCount > 8 && !_isMatchEnded && !IsGamePaused) IsMatchStarted = true;
 			if (!IsMatchStarted) return;
 			UpdateTeams();
 			_isRoundOffiallyEndedOccured = false;
