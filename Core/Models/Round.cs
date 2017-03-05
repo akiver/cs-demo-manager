@@ -691,6 +691,76 @@ namespace Core.Models
 			return base.GetHashCode();
 		}
 
+		public Round Clone()
+		{
+			Round round = new Round
+			{
+				Number = Number,
+				DecoyThrownCount = DecoyThrownCount,
+				BombDefusedCount = BombDefusedCount,
+				SmokeThrownCount = SmokeThrownCount,
+				TradeKillCount = TradeKillCount,
+				KillCount = KillCount,
+				BombExplodedCount = BombExplodedCount,
+				AverageHealthDamagePerPlayer = AverageHealthDamagePerPlayer,
+				BombDefused = BombDefused,
+				BombPlantedCount = BombPlantedCount,
+				BombExploded = BombExploded,
+				BombPlanted = BombPlanted,
+				SideTrouble = SideTrouble,
+				CrouchKillCount = CrouchKillCount,
+				DamageArmorCount = DamageArmorCount,
+				DamageHealthCount = DamageHealthCount,
+				EndReason = EndReason,
+				EndTimeSeconds = EndTimeSeconds,
+				EntryHoldKillEvent = EntryHoldKillEvent,
+				EntryKillEvent = EntryKillEvent,
+				EquipementValueTeamCt = EquipementValueTeamCt,
+				EquipementValueTeamT = EquipementValueTeamT,
+				FiveKillCount = FiveKillCount,
+				FourKillCount = FourKillCount,
+				ThreeKillCount = ThreeKillCount,
+				TwoKillCount = TwoKillCount,
+				OneKillCount = OneKillCount,
+				FlashbangThrownCount = FlashbangThrownCount,
+				HeGrenadeThrownCount = HeGrenadeThrownCount,
+				IncendiaryThrownCount = IncendiaryThrownCount,
+				JumpKillCount = JumpKillCount,
+				MolotovThrownCount = MolotovThrownCount,
+				StartMoneyTeamCt = StartMoneyTeamCt,
+				StartMoneyTeamT = StartMoneyTeamT,
+				StartTimeSeconds = StartTimeSeconds,
+				TeamCtName = TeamCtName,
+				TeamTname = TeamTname,
+				TeamTroubleName = TeamTroubleName,
+				Tick = Tick,
+				Type = Type,
+				WinnerName = WinnerName,
+				WinnerSide = WinnerSide,
+				PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(),
+				Kills = new ObservableCollection<KillEvent>(),
+				WeaponFired = new ObservableCollection<WeaponFireEvent>(),
+				ExplosiveGrenadesExploded = new ObservableCollection<ExplosiveNadeExplodedEvent>(),
+				FlashbangsExploded = new ObservableCollection<FlashbangExplodedEvent>(),
+				SmokeStarted = new ObservableCollection<SmokeNadeStartedEvent>(),
+			};
+
+			foreach (PlayerHurtedEvent e in PlayersHurted)
+				round.PlayersHurted.Add(e);
+			foreach (ExplosiveNadeExplodedEvent e in ExplosiveGrenadesExploded)
+				round.ExplosiveGrenadesExploded.Add(e);
+			foreach (FlashbangExplodedEvent e in FlashbangsExploded)
+				round.FlashbangsExploded.Add(e);
+			foreach (SmokeNadeStartedEvent e in SmokeStarted)
+				round.SmokeStarted.Add(e);
+			foreach (KillEvent k in Kills)
+				round.Kills.Add(k);
+			foreach (WeaponFireEvent e in WeaponFired)
+				round.WeaponFired.Add(e);
+
+			return round;
+		}
+
 		public void Reset(int tick)
 		{
 			AverageHealthDamagePerPlayer = 0;

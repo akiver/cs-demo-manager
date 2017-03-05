@@ -320,38 +320,26 @@ namespace Services.Concrete.Analyzer
 
 			if (!AnalyzePlayersPosition) return;
 
-			if (Parser.PlayingParticipants.Any())
+			if (Parser.PlayingParticipants.Any() && Demo.Players.Any())
 			{
-				if (Demo.Players.Any())
+				// Update players position
+				foreach (DemoInfo.Player player in Parser.PlayingParticipants)
 				{
-					// Reset bomber
-					foreach (Player player in Demo.Players)
+					if (!player.IsAlive) continue;
+					Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+					if (pl == null || pl.SteamId == 0) continue;
+
+					PositionPoint positionPoint = new PositionPoint
 					{
-						player.HasBomb = false;
-					}
-
-					// Update players position
-					foreach (DemoInfo.Player player in Parser.PlayingParticipants)
-					{
-						if (!player.IsAlive) continue;
-						Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
-						if (pl == null || pl.SteamId == 0) continue;
-
-						// Set the bomber
-						if (player.Weapons.FirstOrDefault(w => w.Weapon == EquipmentElement.Bomb) != null) pl.HasBomb = true;
-
-						PositionPoint positionPoint = new PositionPoint
-						{
-							X = player.Position.X,
-							Y = player.Position.Y,
-							RoundNumber = CurrentRound.Number,
-							Team = player.Team.ToSide(),
-							PlayerName = player.Name,
-							PlayerSteamId = player.SteamID,
-							PlayerHasBomb = pl.HasBomb
-						};
-						Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
-					}
+						X = player.Position.X,
+						Y = player.Position.Y,
+						RoundNumber = CurrentRound.Number,
+						Team = player.Team.ToSide(),
+						PlayerName = player.Name,
+						PlayerSteamId = player.SteamID,
+						PlayerHasBomb = player.Weapons.FirstOrDefault(w => w.Weapon == EquipmentElement.Bomb) != null
+					};
+					Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
 				}
 			}
 		}
@@ -870,7 +858,6 @@ namespace Services.Concrete.Analyzer
 						RoundNumber = CurrentRound.Number
 					};
 					Player thrower = null;
-					
 					if (e.ThrownBy != null)
 					{
 						thrower = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID);
@@ -2014,7 +2001,6 @@ namespace Services.Concrete.Analyzer
 
 		/// <summary>
 		/// Restore demo's data to the last round
-		/// Currently only used with valve demos to handle pause / timeout
 		/// </summary>
 		protected void BackupToLastRound()
 		{

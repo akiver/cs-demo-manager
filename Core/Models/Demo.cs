@@ -20,7 +20,7 @@ namespace Core.Models
 		/// Unique demo's ID
 		/// </summary>
 		private string _id;
-		
+
 		/// <summary>
 		/// Name of the demo's file
 		/// </summary>
@@ -1096,7 +1096,120 @@ namespace Core.Models
 
 		public Demo Copy()
 		{
-			return ObjectExtensions.Copy(this);
+			Demo demo = new Demo
+			{
+				Id = Id,
+				Name = Name,
+				Source = Source,
+				SourceName = SourceName,
+				DecoyThrownCount = DecoyThrownCount,
+				DeathCount = DeathCount,
+				AssistCount = AssistCount,
+				AssistPerRound = AssistPerRound,
+				AverageEseaRws = AverageEseaRws,
+				AverageHealthDamage = AverageHealthDamage,
+				AverageHltvRating = AverageHltvRating,
+				BombDefusedCount = BombDefusedCount,
+				BombExplodedCount = BombExplodedCount,
+				BombPlantedCount = BombPlantedCount,
+				ClientName = ClientName,
+				Hostname = Hostname,
+				ClutchCount = ClutchCount,
+				ClutchWonCount = ClutchWonCount,
+				ClutchLostCount = ClutchLostCount,
+				Comment = Comment,
+				DamageArmorCount = DamageArmorCount,
+				DamageHealthCount = DamageHealthCount,
+				Date = Date,
+				CrouchKillCount = CrouchKillCount,
+				TeamKillCount = TeamKillCount,
+				JumpKillCount = JumpKillCount,
+				DeathPerRound = DeathPerRound,
+				Duration = Duration,
+				FiveKillCount = FiveKillCount,
+				FourKillCount = FourKillCount,
+				ThreeKillCount = ThreeKillCount,
+				TwoKillCount = TwoKillCount,
+				OneKillCount = OneKillCount,
+				EntryKillCount = EntryKillCount,
+				HasCheater = HasCheater,
+				FlashbangThrownCount = FlashbangThrownCount,
+				HeadshotCount = HeadshotCount,
+				HeThrownCount = HeThrownCount,
+				HitCount = HitCount,
+				IncendiaryThrownCount = IncendiaryThrownCount,
+				KillCount = KillCount,
+				KillPerRound = KillPerRound,
+				KnifeKillCount = KnifeKillCount,
+				MapName = MapName,
+				MolotovThrownCount = MolotovThrownCount,
+				MostBombPlantedPlayer = MostBombPlantedPlayer,
+				MostEntryKillPlayer = MostEntryKillPlayer,
+				MostHeadshotPlayer = MostHeadshotPlayer,
+				MvpCount = MvpCount,
+				Path = Path,
+				ServerTickrate = ServerTickrate,
+				Status = Status,
+				SmokeThrownCount = SmokeThrownCount,
+				Surrender = Surrender,
+				Ticks = Ticks,
+				TradeKillCount = TradeKillCount,
+				TeamCT = TeamCT.Clone(),
+				TeamT = TeamT.Clone(),
+				Tickrate = Tickrate,
+				Type = Type,
+				WeaponFiredCount = WeaponFiredCount,
+				Winner = Winner,
+				WinStatus = WinStatus,
+				Players = new ObservableCollection<Player>(),
+				WeaponFired = new ObservableCollection<WeaponFireEvent>(),
+				DecoyStarted = new ObservableCollection<DecoyStartedEvent>(),
+				BombDefused = new ObservableCollection<BombDefusedEvent>(),
+				BombExploded = new ObservableCollection<BombExplodedEvent>(),
+				BombPlanted = new ObservableCollection<BombPlantedEvent>(),
+				MolotovsFireStarted = new ObservableCollection<MolotovFireStartedEvent>(),
+				IncendiariesFireStarted = new ObservableCollection<MolotovFireStartedEvent>(),
+				ChatMessageList = new List<string>(),
+				PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(),
+				Kills = new ObservableCollection<KillEvent>(),
+				PlayerBlinded = new ObservableCollection<PlayerBlindedEvent>(),
+				PositionPoints = new ObservableCollection<PositionPoint>(),
+				Overtimes = new ObservableCollection<Overtime>(),
+				Rounds = new ObservableCollection<Round>(),
+			};
+
+			foreach (Player player in Players)
+				demo.Players.Add(player.Clone());
+			foreach (Round r in Rounds)
+				demo.Rounds.Add(r.Clone());
+			foreach (BombDefusedEvent e in BombDefused)
+				demo.BombDefused.Add(e);
+			foreach (BombPlantedEvent e in BombPlanted)
+				demo.BombPlanted.Add(e);
+			foreach (BombExplodedEvent e in BombExploded)
+				demo.BombExploded.Add(e);
+			foreach (string msg in ChatMessageList)
+				demo.ChatMessageList.Add(msg);
+			foreach (DecoyStartedEvent e in DecoyStarted)
+				demo.DecoyStarted.Add(e);
+			foreach (MolotovFireStartedEvent e in IncendiariesFireStarted)
+				demo.IncendiariesFireStarted.Add(e);
+			foreach (MolotovFireStartedEvent e in MolotovsFireStarted)
+				demo.MolotovsFireStarted.Add(e);
+			foreach (KillEvent e in Kills)
+				demo.Kills.Add(e);
+			foreach (Overtime o in Overtimes)
+				demo.Overtimes.Add(o);
+			foreach (PlayerBlindedEvent e in PlayerBlinded)
+				demo.PlayerBlinded.Add(e);
+			foreach (PlayerHurtedEvent e in PlayersHurted)
+				demo.PlayersHurted.Add(e);
+			foreach (PositionPoint p in PositionPoints)
+				demo.PositionPoints.Add(p);
+			foreach (WeaponFireEvent e in WeaponFired)
+				demo.WeaponFired.Add(e);
+
+			return demo;
 		}
 
 		/// <summary>
@@ -1131,6 +1244,9 @@ namespace Core.Models
 			foreach (PlayerHurtedEvent e in demo.PlayersHurted) PlayersHurted.Add(e);
 			PlayerBlinded.Clear();
 			foreach (PlayerBlindedEvent e in demo.PlayerBlinded) PlayerBlinded.Add(e);
+			PositionPoints.Clear();
+			foreach (PositionPoint p in demo.PositionPoints)
+			PositionPoints.Add(p);
 
 			foreach (Player player in Players)
 			{

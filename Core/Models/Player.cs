@@ -1146,7 +1146,93 @@ namespace Core.Models
 
 		public Player Clone()
 		{
-			return (Player)MemberwiseClone();
+			Player player = new Player
+			{
+				Name = Name,
+				SteamId = SteamId,
+				Score = Score,
+				DecoyThrownCount = DecoyThrownCount,
+				KillCount = KillCount,
+				BombDefusedCount = BombDefusedCount,
+				MatchCount = MatchCount,
+				DeathCount = DeathCount,
+				SuicideCount = SuicideCount,
+				HitCount = HitCount,
+				AssistCount = AssistCount,
+				AvatarUrl = AvatarUrl,
+				BombExplodedCount = BombExplodedCount,
+				BombPlantedCount = BombPlantedCount,
+				CrouchKillCount = CrouchKillCount,
+				FiveKillCount = FiveKillCount,
+				FourKillCount = FourKillCount,
+				ThreeKillCount = ThreeKillCount,
+				TwoKillCount = TwoKillCount,
+				OneKillCount = OneKillCount,
+				EseaRws = EseaRws,
+				EseaRwsPointCount = EseaRwsPointCount,
+				FlashDurationTemp = FlashDurationTemp,
+				FlashbangThrownCount = FlashbangThrownCount,
+				HeadshotCount = HeadshotCount,
+				HasBomb = HasBomb,
+				HasEntryHoldKill = HasEntryHoldKill,
+				HasEntryKill = HasEntryKill,
+				IsAlive = IsAlive,
+				HeGrenadeThrownCount = HeGrenadeThrownCount,
+				IsConnected = IsConnected,
+				IsControllingBot = IsControllingBot,
+				IncendiaryThrownCount = IncendiaryThrownCount,
+				IsOverwatchBanned = IsOverwatchBanned,
+				IsVacBanned = IsVacBanned,
+				JumpKillCount = JumpKillCount,
+				KillDeathRatio = KillDeathRatio,
+				MolotovThrownCount = MolotovThrownCount,
+				RankNumberNew = RankNumberNew,
+				RankNumberOld = RankNumberOld,
+				RatingHltv = RatingHltv,
+				RoundPlayedCount = RoundPlayedCount,
+				RoundMvpCount = RoundMvpCount,
+				ShotCount = ShotCount,
+				Side = Side,
+				SmokeThrownCount = SmokeThrownCount,
+				TeamKillCount = TeamKillCount,
+				TeamName = TeamName,
+				TradeDeathCount = TradeDeathCount,
+				TradeKillCount = TradeKillCount,
+				WinCount = WinCount,
+				PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(),
+				Kills = new ObservableCollection<KillEvent>(),
+				Assists = new ObservableCollection<KillEvent>(),
+				Deaths = new ObservableCollection<KillEvent>(),
+				EntryHoldKills = new ObservableCollection<EntryHoldKillEvent>(),
+				RoundsMoneyEarned = new Dictionary<int, int>(),
+				Clutches = new ObservableCollection<ClutchEvent>(),
+				EntryKills = new ObservableCollection<EntryKillEvent>(),
+				EquipementValueRounds = new Dictionary<int, int>(),
+				StartMoneyRounds = new Dictionary<int, int>(),
+			};
+
+			foreach (PlayerHurtedEvent e in PlayersHurted)
+				player.PlayersHurted.Add(e);
+			foreach (KillEvent e in Kills)
+				player.Kills.Add(e);
+			foreach (KillEvent e in Deaths)
+				player.Deaths.Add(e);
+			foreach (KillEvent a in Assists)
+				player.Assists.Add(a);
+			foreach (EntryHoldKillEvent e in EntryHoldKills)
+				player.EntryHoldKills.Add(e);
+			foreach (ClutchEvent e in Clutches)
+				player.Clutches.Add(e);
+			foreach (KeyValuePair<int, int> kvp in EquipementValueRounds)
+				player.EquipementValueRounds.Add(kvp.Key, kvp.Value);
+			foreach (EntryKillEvent e in EntryKills)
+				player.EntryKills.Add(e);
+			foreach (KeyValuePair<int, int> kvp in RoundsMoneyEarned)
+				player.RoundsMoneyEarned.Add(kvp.Key, kvp.Value);
+			foreach (KeyValuePair<int, int> kvp in StartMoneyRounds)
+				player.StartMoneyRounds.Add(kvp.Key, kvp.Value);
+
+			return player;
 		}
 
 		/// <summary>

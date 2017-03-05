@@ -289,7 +289,37 @@ namespace Core.Models
 
 		public Team Clone()
 		{
-			return (Team)MemberwiseClone();
+			Team team = new Team
+			{
+				Name = Name,
+				BombPlantedOnACount = BombPlantedOnACount,
+				BombPlantedOnBCount = BombPlantedOnBCount,
+				CurrentSide = CurrentSide,
+				LossRowCount = LossRowCount,
+				LostCount = LostCount,
+				LostRoundCount = LostRoundCount,
+				LostRoundCtCount = LostRoundCtCount,
+				LostRoundTCount = LostRoundTCount,
+				MatchCount = MatchCount,
+				RoundCount = RoundCount,
+				Score = Score,
+				ScoreSecondHalf = ScoreSecondHalf,
+				ScoreFirstHalf = ScoreFirstHalf,
+				WinCount = WinCount,
+				WinEcoRoundCount = WinEcoRoundCount,
+				WinForceBuyRoundCount = WinForceBuyRoundCount,
+				WinPistolRoundCount = WinPistolRoundCount,
+				WinRoundCount = WinRoundCount,
+				WinRoundCtCount = WinRoundCtCount,
+				WinRoundTCount = WinRoundTCount,
+				WinSemiEcoRoundCount = WinSemiEcoRoundCount,
+				Players = new ObservableCollection<Player>(),
+			};
+
+			foreach (Player player in Players)
+				team.Players.Add(player.Clone());
+
+			return team;
 		}
 
 		public void BackupFromTeam(Team team)
