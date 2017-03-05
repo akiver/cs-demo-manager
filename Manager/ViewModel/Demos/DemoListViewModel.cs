@@ -1710,16 +1710,15 @@ namespace Manager.ViewModel.Demos
 				return;
 			}
 
-			string shareCode = await _demosService.GetShareCode(SelectedDemo);
-			if (shareCode == string.Empty)
-			{
-				await _dialogService.ShowErrorAsync(Properties.Resources.DialogShareCodeNotAvailable, MessageDialogStyle.Affirmative);
-				return;
-			}
-
 			IThirdPartyInterface thirdPartyService = ThirdPartiesServiceFactory.Factory(thirdPartyName);
 			foreach (Demo demo in SelectedDemos)
 			{
+				string shareCode = await _demosService.GetShareCode(demo);
+				if (shareCode == string.Empty)
+				{
+					await _dialogService.ShowErrorAsync(Properties.Resources.DialogShareCodeNotAvailable, MessageDialogStyle.Affirmative);
+					continue;
+				}
 				ThirdPartyData data = await thirdPartyService.SendShareCode(demo, shareCode);
 				if (!data.Success)
 				{
