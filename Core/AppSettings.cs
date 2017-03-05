@@ -146,7 +146,7 @@ namespace Core
 			{
 				Key = "es-ES",
 				Name = "Spanish",
-				IsEnabled = false
+				IsEnabled = true
 			},
 			new Language
 			{

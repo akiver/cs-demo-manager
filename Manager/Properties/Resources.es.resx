@@ -12,4 +12,2654 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Analyze" xml:space="preserve">
+    <value>Analizar</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Atrás</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="AccountStats" xml:space="preserve">
+    <value>Estadísticas de la cuenta</value>
+  </data>
+  <data name="AddToSuspects" xml:space="preserve">
+    <value>Añadir a sospechosos</value>
+  </data>
+  <data name="Browse" xml:space="preserve">
+    <value>Explorar</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Borrar</value>
+  </data>
+  <data name="DownloadMatchMakingDemos" xml:space="preserve">
+    <value>Descargar demos de MM</value>
+  </data>
+  <data name="ExportAsXls" xml:space="preserve">
+    <value>Exportar como XLS</value>
+  </data>
+  <data name="GotoTick" xml:space="preserve">
+    <value>Ir a Tick</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Información</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refrescar</value>
+  </data>
+  <data name="ShowAll" xml:space="preserve">
+    <value>Mostrar todo</value>
+  </data>
+  <data name="ShowOnlyAccountDemos" xml:space="preserve">
+    <value>Mostrar solo repeticiones de la cuenta</value>
+  </data>
+  <data name="Stats" xml:space="preserve">
+    <value>Estadísticas</value>
+  </data>
+  <data name="Suspects" xml:space="preserve">
+    <value>Sospechosos</value>
+  </data>
+  <data name="Watch" xml:space="preserve">
+    <value>Ver</value>
+  </data>
+  <data name="WatchHighlights" xml:space="preserve">
+    <value>Ver mejores momentos</value>
+  </data>
+  <data name="WatchLowlights" xml:space="preserve">
+    <value>Ver peores momentos</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>Sobre</value>
+  </data>
+  <data name="FreeSoftware" xml:space="preserve">
+    <value>CSGO Demos Manager gratuito y de código libre, y siempre lo será</value>
+  </data>
+  <data name="SourceCodeAvailable" xml:space="preserve">
+    <value>El código fuente está disponible en</value>
+  </data>
+  <data name="EncounteredBug" xml:space="preserve">
+    <value>Si has encontrado un bug o tienes alguna sugerencia, no dude en abrir un issue en</value>
+  </data>
+  <data name="OrSendAn" xml:space="preserve">
+    <value>o enviar un</value>
+  </data>
+  <data name="WantSayThank" xml:space="preserve">
+    <value>Si quiere agradecer, puede hacer una</value>
+  </data>
+  <data name="AlwaysDownload" xml:space="preserve">
+    <value>Siempre descargue el instalador de la aplicación de la página web oficial</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Cuentas</value>
+  </data>
+  <data name="AddAccount" xml:space="preserve">
+    <value>Añadir cuenta</value>
+  </data>
+  <data name="AddFolder" xml:space="preserve">
+    <value>Añadir carpeta</value>
+  </data>
+  <data name="AdditionalsParametersLabel" xml:space="preserve">
+    <value>Parámetros adicionales</value>
+  </data>
+  <data name="HeaderAverageDamagesPerRound" xml:space="preserve">
+    <value>ADR</value>
+    <comment>Average Damage Per Round</comment>
+  </data>
+  <data name="AdrFull" xml:space="preserve">
+    <value>ADR (Daño Medio Por Ronda)</value>
+  </data>
+  <data name="AprFull" xml:space="preserve">
+    <value>APR (Asistencias Por Ronda)</value>
+  </data>
+  <data name="Assists" xml:space="preserve">
+    <value>Asistencias</value>
+  </data>
+  <data name="Ban" xml:space="preserve">
+    <value>Ban</value>
+  </data>
+  <data name="BanFull" xml:space="preserve">
+    <value>Ban (VAC / OW)</value>
+  </data>
+  <data name="HeaderBombDefused" xml:space="preserve">
+    <value>BD</value>
+    <comment>Bomb Defused</comment>
+  </data>
+  <data name="HeaderBombExploded" xml:space="preserve">
+    <value>BE</value>
+    <comment>Bomb Exploded</comment>
+  </data>
+  <data name="BombDefused" xml:space="preserve">
+    <value>Bomba desactivada</value>
+  </data>
+  <data name="BombExploded" xml:space="preserve">
+    <value>Bomba explotó</value>
+  </data>
+  <data name="BombPlanted" xml:space="preserve">
+    <value>Bomba plantada</value>
+  </data>
+  <data name="HeaderBombPlanted" xml:space="preserve">
+    <value>BP</value>
+    <comment>Bomb Planted</comment>
+  </data>
+  <data name="BrowseToErrorsFile" xml:space="preserve">
+    <value>Navegar a archivo de errores</value>
+  </data>
+  <data name="HeaderCrouchKills" xml:space="preserve">
+    <value>CK</value>
+    <comment>Crouch Kill</comment>
+  </data>
+  <data name="ClearDemosData" xml:space="preserve">
+    <value>Limpiar información de repeticiones</value>
+  </data>
+  <data name="ClearVdmFiles" xml:space="preserve">
+    <value>Limpiar archivos VDM</value>
+  </data>
+  <data name="ClientName" xml:space="preserve">
+    <value>Cliente</value>
+  </data>
+  <data name="CloseBotOnExit" xml:space="preserve">
+    <value>Cerrar BOT al salir</value>
+  </data>
+  <data name="Clutch" xml:space="preserve">
+    <value>Clutch</value>
+  </data>
+  <data name="Clutches" xml:space="preserve">
+    <value>Clutches</value>
+  </data>
+  <data name="Columns" xml:space="preserve">
+    <value>Columnas</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="CommentLabel" xml:space="preserve">
+    <value>Comentario</value>
+  </data>
+  <data name="CrouchKills" xml:space="preserve">
+    <value>Eliminaciones agachado</value>
+  </data>
+  <data name="CsgoExePath" xml:space="preserve">
+    <value>Dirección de csgo.exe</value>
+  </data>
+  <data name="CurrentAccountWatch" xml:space="preserve">
+    <value>Cuenta usada para ver (mejores momentos/peores momentos)</value>
+  </data>
+  <data name="CurrentFolder" xml:space="preserve">
+    <value>Carpeta actual</value>
+  </data>
+  <data name="DataCache" xml:space="preserve">
+    <value>Caché</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>Formato de la fecha</value>
+  </data>
+  <data name="Deaths" xml:space="preserve">
+    <value>Muertes</value>
+  </data>
+  <data name="DemoName" xml:space="preserve">
+    <value>Nombre de la repetición</value>
+  </data>
+  <data name="Demos" xml:space="preserve">
+    <value>Repetición(es)</value>
+  </data>
+  <data name="DemoType" xml:space="preserve">
+    <value>Tipo de la repetición</value>
+  </data>
+  <data name="DestinationFolderLabel" xml:space="preserve">
+    <value>Carpeta de destino</value>
+  </data>
+  <data name="Donation" xml:space="preserve">
+    <value>donación</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Descargar</value>
+  </data>
+  <data name="HeaderDeathPerRound" xml:space="preserve">
+    <value>DPR</value>
+    <comment>Death Per Round</comment>
+  </data>
+  <data name="DprFull" xml:space="preserve">
+    <value>DPR (Muertes Por Ronda)</value>
+  </data>
+  <data name="Duration" xml:space="preserve">
+    <value>Duración</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>email</value>
+  </data>
+  <data name="EntryKills" xml:space="preserve">
+    <value>Muertes de entrada</value>
+  </data>
+  <data name="EquipmentValueTeam1" xml:space="preserve">
+    <value>Valor del equipo CT</value>
+  </data>
+  <data name="EquipmentValueTeam2" xml:space="preserve">
+    <value>Valor del equipo T</value>
+  </data>
+  <data name="ExportCustomData" xml:space="preserve">
+    <value>Exportar datos personalizados</value>
+  </data>
+  <data name="FilterEtc" xml:space="preserve">
+    <value>Filtrar ...</value>
+  </data>
+  <data name="HeaderFiveKills" xml:space="preserve">
+    <value>5K</value>
+    <comment>5 Kills</comment>
+  </data>
+  <data name="Folders" xml:space="preserve">
+    <value>Carpetas</value>
+  </data>
+  <data name="HeaderFourKills" xml:space="preserve">
+    <value>4K</value>
+    <comment>4 Kills</comment>
+  </data>
+  <data name="HeaderFramerate" xml:space="preserve">
+    <value>FR</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>De</value>
+  </data>
+  <data name="Fullscreen" xml:space="preserve">
+    <value>Pantalla completa</value>
+  </data>
+  <data name="Height" xml:space="preserve">
+    <value>Altura</value>
+  </data>
+  <data name="HeaderHltvRating" xml:space="preserve">
+    <value>HLTV</value>
+  </data>
+  <data name="Hostname" xml:space="preserve">
+    <value>Nombre del host</value>
+  </data>
+  <data name="HeaderHeadshots" xml:space="preserve">
+    <value>HS</value>
+    <comment>HeadShot</comment>
+  </data>
+  <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
+    <value>Ignorar baneos anteriores a la fecha de la repetición</value>
+  </data>
+  <data name="ImportCustomData" xml:space="preserve">
+    <value>Importar datos personalizados</value>
+  </data>
+  <data name="HeaderJumpKills" xml:space="preserve">
+    <value>JK</value>
+    <comment>Jump Kill</comment>
+  </data>
+  <data name="JumpKills" xml:space="preserve">
+    <value>Eliminaciones en salto</value>
+  </data>
+  <data name="HeaderKillDeathRatio" xml:space="preserve">
+    <value>K/D</value>
+    <comment>Kills Per Deaths</comment>
+  </data>
+  <data name="Kills" xml:space="preserve">
+    <value>Eliminaciones</value>
+  </data>
+  <data name="HeaderKillsPerRound" xml:space="preserve">
+    <value>EPR</value>
+    <comment>Kill Per Round</comment>
+  </data>
+  <data name="LaunchOptions" xml:space="preserve">
+    <value>Opciones de ejecución</value>
+  </data>
+  <data name="LimitStatsToSelectedFolder" xml:space="preserve">
+    <value>Limitar estadísticas a la carpeta seleccionada</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="MapName" xml:space="preserve">
+    <value>Nombre del mapa</value>
+  </data>
+  <data name="Misc" xml:space="preserve">
+    <value>Miscelánea</value>
+  </data>
+  <data name="MVP" xml:space="preserve">
+    <value>MVP</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="NoAnalyzableDemos" xml:space="preserve">
+    <value>No hay repeticiones analizables</value>
+  </data>
+  <data name="NotAnalyzable" xml:space="preserve">
+    <value>No analizable</value>
+  </data>
+  <data name="HeaderOneKill" xml:space="preserve">
+    <value>1K</value>
+    <comment>1 Kill</comment>
+  </data>
+  <data name="RemoveAccount" xml:space="preserve">
+    <value>Eliminar cuenta</value>
+  </data>
+  <data name="RemoveFolder" xml:space="preserve">
+    <value>Eliminar carpeta</value>
+  </data>
+  <data name="RoundPlayed" xml:space="preserve">
+    <value>Ronda jugada</value>
+  </data>
+  <data name="RoundType" xml:space="preserve">
+    <value>Tipo de ronda</value>
+  </data>
+  <data name="HeaderRoundPlayed" xml:space="preserve">
+    <value>RP</value>
+    <comment>Round Played</comment>
+  </data>
+  <data name="RWS" xml:space="preserve">
+    <value>RWS</value>
+    <comment>Round Win Share</comment>
+  </data>
+  <data name="ScoreTeam1" xml:space="preserve">
+    <value>Puntuación del equipo 1</value>
+  </data>
+  <data name="ScoreTeam2" xml:space="preserve">
+    <value>Puntuación del equipo 2</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Configuración</value>
+  </data>
+  <data name="ShowAllFolders" xml:space="preserve">
+    <value>Mostrar todas las carpetas</value>
+  </data>
+  <data name="ShowMoreDemos" xml:space="preserve">
+    <value>Mostrar más repeticiones</value>
+  </data>
+  <data name="SideTrouble" xml:space="preserve">
+    <value>Bando en problemas</value>
+  </data>
+  <data name="Source" xml:space="preserve">
+    <value>Fuente</value>
+  </data>
+  <data name="HeaderScoreTeam1" xml:space="preserve">
+    <value>ST1</value>
+    <comment>Score Team 1</comment>
+  </data>
+  <data name="HeaderScoreTeam2" xml:space="preserve">
+    <value>ST2</value>
+    <comment>Score Team 2</comment>
+  </data>
+  <data name="StartBotOnLaunch" xml:space="preserve">
+    <value>Iniciar BOT al iniciar sesión</value>
+  </data>
+  <data name="StartMoneyTeam1" xml:space="preserve">
+    <value>Dinero inicial CT</value>
+  </data>
+  <data name="StartMoneyTeam2" xml:space="preserve">
+    <value>Dinero inicial T</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Parar</value>
+  </data>
+  <data name="SyncNicknames" xml:space="preserve">
+    <value>Sincronizar nombres de cuentas</value>
+  </data>
+  <data name="HeaderTotalDamagesArmor" xml:space="preserve">
+    <value>TDA</value>
+    <comment>Total Damage Armor</comment>
+  </data>
+  <data name="HeaderTotalDamagesHealth" xml:space="preserve">
+    <value>TDH</value>
+    <comment>Total Damage Health</comment>
+  </data>
+  <data name="Team1" xml:space="preserve">
+    <value>Equipo 1</value>
+  </data>
+  <data name="Team1Name" xml:space="preserve">
+    <value>Nombre del Equipo 1</value>
+  </data>
+  <data name="Team2" xml:space="preserve">
+    <value>Equipo 2</value>
+  </data>
+  <data name="Team2Name" xml:space="preserve">
+    <value>Nombre del equipo 2</value>
+  </data>
+  <data name="TeamTrouble" xml:space="preserve">
+    <value>Equipo en problemas</value>
+  </data>
+  <data name="Theme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="HeaderThreeKills" xml:space="preserve">
+    <value>3K</value>
+    <comment>3 Kills</comment>
+  </data>
+  <data name="HeaderTickrate" xml:space="preserve">
+    <value>TR</value>
+  </data>
+  <data name="Ticks" xml:space="preserve">
+    <value>Ticks</value>
+  </data>
+  <data name="TkFull" xml:space="preserve">
+    <value>TK (Eliminación de compañero)</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Hasta</value>
+  </data>
+  <data name="TotalDamageArmor" xml:space="preserve">
+    <value>Daño total de armadura</value>
+  </data>
+  <data name="TotalDamageHealth" xml:space="preserve">
+    <value>Daño total de vida</value>
+  </data>
+  <data name="TotalKills" xml:space="preserve">
+    <value>Muertes totales</value>
+  </data>
+  <data name="ToWatch" xml:space="preserve">
+    <value>Para ver</value>
+  </data>
+  <data name="TradeDeath" xml:space="preserve">
+    <value>Muerte de tradeo</value>
+  </data>
+  <data name="TradeKill" xml:space="preserve">
+    <value>Eliminación de tradeo</value>
+  </data>
+  <data name="HeaderTwoKills" xml:space="preserve">
+    <value>2K</value>
+    <comment>2 Kills</comment>
+  </data>
+  <data name="Type" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="UseAccountForWatch" xml:space="preserve">
+    <value>Usar esta cuenta para ver</value>
+  </data>
+  <data name="UseCutomLowlightHighlight" xml:space="preserve">
+    <value>Usar generador personalizado de mejores/peores momentos</value>
+  </data>
+  <data name="Watched" xml:space="preserve">
+    <value>Vista</value>
+  </data>
+  <data name="Width" xml:space="preserve">
+    <value>Ancho</value>
+  </data>
+  <data name="WinnerTeamName" xml:space="preserve">
+    <value>Nombre del equipo ganador</value>
+  </data>
+  <data name="WinnerSide" xml:space="preserve">
+    <value>WS</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="ToolTipAccountStats" xml:space="preserve">
+    <value>Estadísticas de la cuenta (CTRL+E)</value>
+  </data>
+  <data name="ToolTipAddToSuspectsList" xml:space="preserve">
+    <value>Añadir jugador a la lista de sospechosos (CTRL+W)</value>
+  </data>
+  <data name="ToolTipAnalyzeSelectedDemos" xml:space="preserve">
+    <value>Analizar la repetición(es) seleccionada (CTRL+S)</value>
+  </data>
+  <data name="ToolTipBrowseToDemo" xml:space="preserve">
+    <value>Abrir repetición en explorador (CTRL+B)</value>
+  </data>
+  <data name="ToolTipDeleteDemo" xml:space="preserve">
+    <value>Borrar la repetición(es) seleccionada (CTRL+D)</value>
+  </data>
+  <data name="ToolTipDemoDetails" xml:space="preserve">
+    <value>Detalles de la repetición (CTRL+D)</value>
+  </data>
+  <data name="ToolTipDownloadDemos" xml:space="preserve">
+    <value>Descargar últimas repeticiones de MM disponibles para la cuenta de Steam conectada actualmente (CTRL+H)</value>
+  </data>
+  <data name="ToolTipExportXls" xml:space="preserve">
+    <value>Exportar como XLS (CTRL+X)</value>
+  </data>
+  <data name="ToolTipGoToSuspectsList" xml:space="preserve">
+    <value>Ir a lista de sospechosos (CTRL+F)</value>
+  </data>
+  <data name="ToolTipGotoTick" xml:space="preserve">
+    <value>Empezar a ver la repetición en un tick específico (CTRL+G)</value>
+  </data>
+  <data name="ToolTipRefreshDemosList" xml:space="preserve">
+    <value>Refrescar la lista de repeticiones (CTRL+R | F5)</value>
+  </data>
+  <data name="ToolTipStop" xml:space="preserve">
+    <value>Parar (CTRL+S)</value>
+  </data>
+  <data name="ToolTipWatchDemo" xml:space="preserve">
+    <value>Ver repetición (CTRL+W)</value>
+  </data>
+  <data name="ToolTipWatchHighlights" xml:space="preserve">
+    <value>Ver tus mejores momentos (CTRL+H)</value>
+  </data>
+  <data name="ToolTipWatchLowlights" xml:space="preserve">
+    <value>Ver tus peores momentos (CTRL+L)</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="By" xml:space="preserve">
+    <value>por</value>
+  </data>
+  <data name="CopyEmailAddress" xml:space="preserve">
+    <value>Copiar dirección de email</value>
+  </data>
+  <data name="Damages" xml:space="preserve">
+    <value>Daños</value>
+  </data>
+  <data name="Flashbangs" xml:space="preserve">
+    <value>Grandas aturdidoras</value>
+  </data>
+  <data name="Heatmap" xml:space="preserve">
+    <value>Mapa de calor</value>
+  </data>
+  <data name="LabelClientname" xml:space="preserve">
+    <value>Nombre del cleinte</value>
+  </data>
+  <data name="LabelFilename" xml:space="preserve">
+    <value>Nombre del archivo</value>
+  </data>
+  <data name="LabelHostname" xml:space="preserve">
+    <value>Nombre del host</value>
+  </data>
+  <data name="LabelMostHsPercent" xml:space="preserve">
+    <value>Mayor % de disparos a la cabeza</value>
+  </data>
+  <data name="LabelMap" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="LabelMostBombPlanted" xml:space="preserve">
+    <value>Más bombas colocadas</value>
+  </data>
+  <data name="LabelMostDamagingWeapon" xml:space="preserve">
+    <value>Arma con más daño</value>
+  </data>
+  <data name="LabelMostEntryKills" xml:space="preserve">
+    <value>Más eliminaciones de entrada</value>
+  </data>
+  <data name="LabelMostKillingWeapon" xml:space="preserve">
+    <value>Arma con más eliminaciones</value>
+  </data>
+  <data name="LabelPlayerStats" xml:space="preserve">
+    <value>Estadísticas del jugador</value>
+  </data>
+  <data name="LabelStatus" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="LabelTickrate" xml:space="preserve">
+    <value>Tickrate</value>
+  </data>
+  <data name="LabelType" xml:space="preserve">
+    <value>Tipo</value>
+  </data>
+  <data name="Overview" xml:space="preserve">
+    <value>Vista general</value>
+  </data>
+  <data name="PlayerDetails" xml:space="preserve">
+    <value>Detalles del jugador</value>
+  </data>
+  <data name="Rank" xml:space="preserve">
+    <value>Rango</value>
+  </data>
+  <data name="RoundDetails" xml:space="preserve">
+    <value>Detalles de la ronda</value>
+  </data>
+  <data name="SaveComment" xml:space="preserve">
+    <value>Guardar comentario</value>
+  </data>
+  <data name="Score" xml:space="preserve">
+    <value>Puntuación</value>
+  </data>
+  <data name="Stuffs" xml:space="preserve">
+    <value>Granadas</value>
+  </data>
+  <data name="Tick" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="ToolTipAnalyze" xml:space="preserve">
+    <value>Analizar (CTRL+S)</value>
+  </data>
+  <data name="ToolTipBack" xml:space="preserve">
+    <value>Atrás (CTRL+B)</value>
+  </data>
+  <data name="ToolTipDamages" xml:space="preserve">
+    <value>Daños (CTRL+D)</value>
+  </data>
+  <data name="ToolTipFlashbangs" xml:space="preserve">
+    <value>Grandas aturdidoras (CTRL+F)</value>
+  </data>
+  <data name="ToolTipHeatmap" xml:space="preserve">
+    <value>Genrador de mapas de calor (CTRL+H)</value>
+  </data>
+  <data name="ToolTipKillsDetails" xml:space="preserve">
+    <value>Detalles de eliminaciones (CTRL+K)</value>
+  </data>
+  <data name="ToolTipNextDemo" xml:space="preserve">
+    <value>Siguiente repetición (CTRL+RIGHT)</value>
+  </data>
+  <data name="ToolTipOverview" xml:space="preserve">
+    <value>Vista general (CTRL+O)</value>
+  </data>
+  <data name="ToolTipPlayerDetails" xml:space="preserve">
+    <value>Detalles del jugador (CTRL+P)</value>
+  </data>
+  <data name="ToolTipPreviousDemo" xml:space="preserve">
+    <value>Repetición anterior (CTRL+LEFT)</value>
+  </data>
+  <data name="ToolTipRoundDetails" xml:space="preserve">
+    <value>Detalles de la ronda (CTRL+R)</value>
+  </data>
+  <data name="ToolTipStuffs" xml:space="preserve">
+    <value>Granadas (CTRL+G)</value>
+  </data>
+  <data name="ToolTipWatchRound" xml:space="preserve">
+    <value>Ver ronda</value>
+  </data>
+  <data name="WatchRound" xml:space="preserve">
+    <value>Ver ronda</value>
+  </data>
+  <data name="HeaderAssists" xml:space="preserve">
+    <value>A</value>
+    <comment>Assists</comment>
+  </data>
+  <data name="HeaderAssistsPerRound" xml:space="preserve">
+    <value>APR</value>
+    <comment>Assists Per Round</comment>
+  </data>
+  <data name="HeaderAvarageDamagesPerPlayer" xml:space="preserve">
+    <value>ADP</value>
+    <comment>Average Damages Per Player</comment>
+  </data>
+  <data name="HeaderDeaths" xml:space="preserve">
+    <value>D</value>
+    <comment>Deaths</comment>
+  </data>
+  <data name="HeaderEntryKills" xml:space="preserve">
+    <value>EK</value>
+    <comment>Entry Kills</comment>
+  </data>
+  <data name="HeaderEquipementValueTeam1" xml:space="preserve">
+    <value>VE CT ($)</value>
+  </data>
+  <data name="HeaderEquipementValueTeam2" xml:space="preserve">
+    <value>VE T($)</value>
+  </data>
+  <data name="HeaderHsPercent" xml:space="preserve">
+    <value>HS%</value>
+    <comment>% headshot</comment>
+  </data>
+  <data name="HeaderKills" xml:space="preserve">
+    <value>K</value>
+    <comment>Kills</comment>
+  </data>
+  <data name="HeaderOverwatch" xml:space="preserve">
+    <value>OW</value>
+    <comment>Overwatch</comment>
+  </data>
+  <data name="HeaderSideTrouble" xml:space="preserve">
+    <value>ST</value>
+    <comment>Side Trouble</comment>
+  </data>
+  <data name="HeaderStartMoneyTeam1" xml:space="preserve">
+    <value>SM CT ($)</value>
+  </data>
+  <data name="HeaderStartMoneyTeam2" xml:space="preserve">
+    <value>SM T ($)</value>
+  </data>
+  <data name="HeaderTeamKill" xml:space="preserve">
+    <value>FF</value>
+    <comment>Team Kill</comment>
+  </data>
+  <data name="HeaderTeamTrouble" xml:space="preserve">
+    <value>TT</value>
+    <comment>Team Trouble</comment>
+  </data>
+  <data name="HeaderToolTipAccountNickname" xml:space="preserve">
+    <value>Nombre de la cuenta</value>
+  </data>
+  <data name="HeaderToolTipAccountProfileUrl" xml:space="preserve">
+    <value>URL del perfil de la cuenta</value>
+  </data>
+  <data name="HeaderToolTipAccountStatus" xml:space="preserve">
+    <value>Estado de la cuenta (offline, online...)</value>
+  </data>
+  <data name="HeaderToolTipAccountVacBanned" xml:space="preserve">
+    <value>Cuenta bloqueada por VAC</value>
+  </data>
+  <data name="HeaderToolTipAccountVisibilityStatus" xml:space="preserve">
+    <value>Estado de visibilidad de la cuenta</value>
+  </data>
+  <data name="HeaderToolTipAssisterName" xml:space="preserve">
+    <value>Nombre del asistente</value>
+  </data>
+  <data name="HeaderToolTipAssists" xml:space="preserve">
+    <value>Asistencias</value>
+  </data>
+  <data name="HeaderToolTipAssistsPerRound" xml:space="preserve">
+    <value>Asistencias por ronda</value>
+  </data>
+  <data name="HeaderToolTipAverageDamagePerPlayer" xml:space="preserve">
+    <value>Daño medio por jugador</value>
+  </data>
+  <data name="HeaderToolTipAverageDamagePerRound" xml:space="preserve">
+    <value>Daño medio por ronda</value>
+  </data>
+  <data name="HeaderToolTipBombDefused" xml:space="preserve">
+    <value>Bomba desactivada</value>
+  </data>
+  <data name="HeaderToolTipBombExploded" xml:space="preserve">
+    <value>Bomba explotó</value>
+  </data>
+  <data name="HeaderToolTipBombPlanted" xml:space="preserve">
+    <value>Bomba plantada</value>
+  </data>
+  <data name="HeaderToolTipClutchCount" xml:space="preserve">
+    <value>Número de clutches</value>
+  </data>
+  <data name="HeaderToolTipClutchWonCount" xml:space="preserve">
+    <value>Número de clutches ganados</value>
+  </data>
+  <data name="HeaderToolTipCommunityBanned" xml:space="preserve">
+    <value>Baneado por la comunidad</value>
+  </data>
+  <data name="HeaderToolTipCommunityProfileConfigured" xml:space="preserve">
+    <value>Perfil de la comunidad configurado</value>
+  </data>
+  <data name="HeaderToolTipCrouchKills" xml:space="preserve">
+    <value>Eliminaciones agachado</value>
+  </data>
+  <data name="HeaderToolTipDaysSinceLastBan" xml:space="preserve">
+    <value>Días desde el último baneo</value>
+  </data>
+  <data name="HeaderToolTipDeaths" xml:space="preserve">
+    <value>Muertes</value>
+  </data>
+  <data name="HeaderToolTipDeathsPerRound" xml:space="preserve">
+    <value>Muertes por ronda</value>
+  </data>
+  <data name="HeaderToolTipDemoClientname" xml:space="preserve">
+    <value>Nombre del cliente de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoComment" xml:space="preserve">
+    <value>Comentario de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoDate" xml:space="preserve">
+    <value>Fecha de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoDuration" xml:space="preserve">
+    <value>Duración de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoFramerate" xml:space="preserve">
+    <value>Framerate de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoHostname" xml:space="preserve">
+    <value>Nombre del host de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoName" xml:space="preserve">
+    <value>Nombre de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoSource" xml:space="preserve">
+    <value>Fuente de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoTicks" xml:space="preserve">
+    <value>Ticks de la repetición</value>
+  </data>
+  <data name="HeaderToolTipDemoType" xml:space="preserve">
+    <value>Tipo de la repetición</value>
+  </data>
+  <data name="HeaderToolTipEntryKill" xml:space="preserve">
+    <value>Eliminación de entrada</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValue" xml:space="preserve">
+    <value>Valor del equipo</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
+    <value>Valor del equipo CT ($)</value>
+  </data>
+  <data name="HeaderToolTipEquipmentValueTeam2" xml:space="preserve">
+    <value>Valor del equipo T ($)</value>
+  </data>
+  <data name="HeaderToolTipFiveKill" xml:space="preserve">
+    <value>5 Eliminaciones</value>
+  </data>
+  <data name="HeaderToolTipFourKill" xml:space="preserve">
+    <value>4 Eliminaciones</value>
+  </data>
+  <data name="HeaderToolTipHasVacOwBan" xml:space="preserve">
+    <value>baneo de VAC / OW?</value>
+  </data>
+  <data name="HeaderToolTipHasWonClutch" xml:space="preserve">
+    <value>¿Ha ganado clutch?</value>
+  </data>
+  <data name="HeaderToolTipHasWonDuel" xml:space="preserve">
+    <value>¿Ha ganado duelo?</value>
+  </data>
+  <data name="HeaderToolTipHeadshotPercent" xml:space="preserve">
+    <value>Porcentaje de disparos a la cabeza</value>
+  </data>
+  <data name="HeaderToolTipHeadshots" xml:space="preserve">
+    <value>disparos a la cabeza</value>
+  </data>
+  <data name="HeaderToolTipHits" xml:space="preserve">
+    <value>Impactos</value>
+  </data>
+  <data name="HeaderToolTipHltvRating" xml:space="preserve">
+    <value>Rating HLTV</value>
+  </data>
+  <data name="HeaderToolTipIsOwBanned" xml:space="preserve">
+    <value>¿Baneado por Overwatch?</value>
+  </data>
+  <data name="HeaderToolTipIsVacBanned" xml:space="preserve">
+    <value>¿Baneado por VAC?</value>
+  </data>
+  <data name="HeaderToolTipJumpKills" xml:space="preserve">
+    <value>Eliminaciones en salto</value>
+  </data>
+  <data name="HeaderToolTipKillerName" xml:space="preserve">
+    <value>Nombre del asesino</value>
+  </data>
+  <data name="HeaderToolTipKillerSide" xml:space="preserve">
+    <value>Bando del asesino</value>
+  </data>
+  <data name="HeaderToolTipKillPerRound" xml:space="preserve">
+    <value>Eliminaciones por ronda</value>
+  </data>
+  <data name="HeaderToolTipKills" xml:space="preserve">
+    <value>Eliminaciones</value>
+  </data>
+  <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
+    <value>Eliminaciones por muertes</value>
+  </data>
+  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
+    <value>Última conexión</value>
+  </data>
+  <data name="HeaderToolTipMapName" xml:space="preserve">
+    <value>Nombre del mapa</value>
+  </data>
+  <data name="HeaderToolTipMarketBanned" xml:space="preserve">
+    <value>Baneado del mercado</value>
+  </data>
+  <data name="HeaderToolTipMvp" xml:space="preserve">
+    <value>Jugador Mejor Valorado</value>
+  </data>
+  <data name="HeaderToolTipNumber" xml:space="preserve">
+    <value>Número</value>
+  </data>
+  <data name="HeaderToolTipOneKill" xml:space="preserve">
+    <value>1 Eliminación</value>
+  </data>
+  <data name="HeaderToolTipOneVersusFive" xml:space="preserve">
+    <value>1 contra 5</value>
+  </data>
+  <data name="HeaderToolTipOneVersusFour" xml:space="preserve">
+    <value>1 contra 4</value>
+  </data>
+  <data name="HeaderToolTipOneVersusOne" xml:space="preserve">
+    <value>1 contra 1</value>
+  </data>
+  <data name="HeaderToolTipOneVersusThree" xml:space="preserve">
+    <value>1 contra 3</value>
+  </data>
+  <data name="HeaderToolTipOneVersusTwo" xml:space="preserve">
+    <value>1 contra 2</value>
+  </data>
+  <data name="HeaderToolTipOneVersusX" xml:space="preserve">
+    <value>1contraX</value>
+  </data>
+  <data name="HeaderToolTipOverwatchGameBanCount" xml:space="preserve">
+    <value>Número de baneos por Overwatch</value>
+  </data>
+  <data name="HeaderToolTipPlayerAvatar" xml:space="preserve">
+    <value>Avatar del jugador</value>
+  </data>
+  <data name="HeaderToolTipPlayerFlashbangThrown" xml:space="preserve">
+    <value>Granadas aturdidoras totales lanzadas por el jugador</value>
+  </data>
+  <data name="HeaderToolTipPlayerName" xml:space="preserve">
+    <value>Nombre del jugador</value>
+  </data>
+  <data name="HeaderToolTipPlayerRank" xml:space="preserve">
+    <value>Rango del jugador</value>
+  </data>
+  <data name="HeaderToolTipRatio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="HeaderToolTipResult" xml:space="preserve">
+    <value>Resultado</value>
+  </data>
+  <data name="HeaderToolTipRoundLost" xml:space="preserve">
+    <value>Ronda perdida</value>
+  </data>
+  <data name="HeaderToolTipRoundNumber" xml:space="preserve">
+    <value>Número de ronda</value>
+  </data>
+  <data name="HeaderToolTipRoundPlayed" xml:space="preserve">
+    <value>Ronda jugada</value>
+  </data>
+  <data name="HeaderToolTipRoundType" xml:space="preserve">
+    <value>Tipo de ronda (normal / eco / force / semi-eco)</value>
+  </data>
+  <data name="HeaderToolTipRoundWon" xml:space="preserve">
+    <value>Ronda ganada</value>
+  </data>
+  <data name="HeaderToolTipRws" xml:space="preserve">
+    <value>ESEA RWS (Round Win Share)</value>
+  </data>
+  <data name="HeaderToolTipScore" xml:space="preserve">
+    <value>Puntuación</value>
+  </data>
+  <data name="HeaderToolTipScoreTeam1" xml:space="preserve">
+    <value>Puntuación del Equipo 1</value>
+  </data>
+  <data name="HeaderToolTipScoreTeam2" xml:space="preserve">
+    <value>Puntuación del Equipo 2</value>
+  </data>
+  <data name="HeaderToolTipServerTickrate" xml:space="preserve">
+    <value>Tickrate del servidor</value>
+  </data>
+  <data name="HeaderToolTipShotsFired" xml:space="preserve">
+    <value>Disparos realizados</value>
+  </data>
+  <data name="HeaderToolTipSideTrouble" xml:space="preserve">
+    <value>Bando en eco/force o semi-eco</value>
+  </data>
+  <data name="HeaderToolTipStartMoney" xml:space="preserve">
+    <value>Dinero inicial</value>
+  </data>
+  <data name="HeaderToolTipStartMoneyTeam1" xml:space="preserve">
+    <value>Dinero inicial CT ($)</value>
+  </data>
+  <data name="HeaderToolTipStartMoneyTeam2" xml:space="preserve">
+    <value>Dinero inicial T ($)</value>
+  </data>
+  <data name="HeaderToolTipTeam1Name" xml:space="preserve">
+    <value>Nombre del Equipo 1</value>
+  </data>
+  <data name="HeaderToolTipTeam2Name" xml:space="preserve">
+    <value>Nombre del Equipo 2</value>
+  </data>
+  <data name="HeaderToolTipTeamFlashbangThrown" xml:space="preserve">
+    <value>Total de grandas aturdidoras lanzadas por el equipo</value>
+  </data>
+  <data name="HeaderToolTipTeamKill" xml:space="preserve">
+    <value>Muertes de equipo (fuego amigo)</value>
+  </data>
+  <data name="HeaderToolTipTeamName" xml:space="preserve">
+    <value>Nombre del equipo</value>
+  </data>
+  <data name="HeaderToolTipTeamNameTrouble" xml:space="preserve">
+    <value>Nombre del equipo en eco/force o semi-eco</value>
+  </data>
+  <data name="HeaderToolTipThreeKill" xml:space="preserve">
+    <value>3 Eliminaciones</value>
+  </data>
+  <data name="HeaderToolTipThrowerName" xml:space="preserve">
+    <value>Nombre del lanzador</value>
+  </data>
+  <data name="HeaderToolTipTick" xml:space="preserve">
+    <value>Tick</value>
+  </data>
+  <data name="HeaderToolTipTotalDamageArmor" xml:space="preserve">
+    <value>Daño total a armadura</value>
+  </data>
+  <data name="HeaderToolTipTotalDamageHealth" xml:space="preserve">
+    <value>Daño total a vida</value>
+  </data>
+  <data name="HeaderToolTipTotalEntryKill" xml:space="preserve">
+    <value>Eliminaciones de entrada totales</value>
+  </data>
+  <data name="HeaderToolTipTradeDeath" xml:space="preserve">
+    <value>Muerte de trade</value>
+  </data>
+  <data name="HeaderToolTipTradeKill" xml:space="preserve">
+    <value>Eliminación de trade</value>
+  </data>
+  <data name="HeaderToolTipTradeKillsDeaths" xml:space="preserve">
+    <value>Eliminaciones/Muertes de trade</value>
+  </data>
+  <data name="HeaderToolTipTwoKill" xml:space="preserve">
+    <value>2 Eliminaciones</value>
+  </data>
+  <data name="HeaderToolTipVacBanCount" xml:space="preserve">
+    <value>Número de baneos por VAC</value>
+  </data>
+  <data name="HeaderToolTipVictimName" xml:space="preserve">
+    <value>Nombre de la víctima</value>
+  </data>
+  <data name="HeaderToolTipWeaponName" xml:space="preserve">
+    <value>Nombre del arma</value>
+  </data>
+  <data name="HeaderToolTipWinner" xml:space="preserve">
+    <value>Ganador</value>
+  </data>
+  <data name="HeaderToolTipWinnerTeamName" xml:space="preserve">
+    <value>Nombre del equipo ganador</value>
+  </data>
+  <data name="HeaderToolTipWinStatus" xml:space="preserve">
+    <value>Victoria/Derrota/Empate</value>
+  </data>
+  <data name="HeaderToolTipWonRound" xml:space="preserve">
+    <value>¿Ronda ganada?</value>
+  </data>
+  <data name="HeaderTradeDeaths" xml:space="preserve">
+    <value>TD</value>
+    <comment>Trade Deaths</comment>
+  </data>
+  <data name="HeaderTradeKills" xml:space="preserve">
+    <value>TK</value>
+    <comment>Trade Kills</comment>
+  </data>
+  <data name="HeaderWinnerSide" xml:space="preserve">
+    <value>WS</value>
+    <comment>Winner Side</comment>
+  </data>
+  <data name="HeaderWinnerTeamName" xml:space="preserve">
+    <value>WTN</value>
+    <comment>Winner Team Name</comment>
+  </data>
+  <data name="OneVersusFive" xml:space="preserve">
+    <value>1V5</value>
+  </data>
+  <data name="OneVersusFour" xml:space="preserve">
+    <value>1V4</value>
+  </data>
+  <data name="OneVersusOne" xml:space="preserve">
+    <value>1V1</value>
+  </data>
+  <data name="OneVersusThree" xml:space="preserve">
+    <value>1V3</value>
+  </data>
+  <data name="OneVersusTwo" xml:space="preserve">
+    <value>1V2</value>
+  </data>
+  <data name="Player" xml:space="preserve">
+    <value>Jugador</value>
+  </data>
+  <data name="HeaderClutchs" xml:space="preserve">
+    <value>C</value>
+  </data>
+  <data name="AddPlayersToSuspects" xml:space="preserve">
+    <value>Añadir jugadores a la lista de sospechosos</value>
+  </data>
+  <data name="AddToAccountList" xml:space="preserve">
+    <value>Añadir a la lista de cuentas</value>
+  </data>
+  <data name="AddToWhitelist" xml:space="preserve">
+    <value>Añadir a la lista blanca (whitelist)</value>
+  </data>
+  <data name="AssistsFull" xml:space="preserve">
+    <value>A (Asistencias)</value>
+  </data>
+  <data name="BombDefusedFull" xml:space="preserve">
+    <value>BD (Bomba Desactivada)</value>
+  </data>
+  <data name="BombExplodedFull" xml:space="preserve">
+    <value>BE (Bomba Explotó)</value>
+  </data>
+  <data name="BombPlantedFull" xml:space="preserve">
+    <value>BP (Bomba Plantada)</value>
+  </data>
+  <data name="ClutchsFull" xml:space="preserve">
+    <value>C (Clutches)</value>
+  </data>
+  <data name="CopyPlayDemoCommand" xml:space="preserve">
+    <value>Copiar comando para reproducir la repetición</value>
+  </data>
+  <data name="CrouchKillsFull" xml:space="preserve">
+    <value>CK (Eliminaciones agachado)</value>
+  </data>
+  <data name="DeathsFull" xml:space="preserve">
+    <value>D (Muertes)</value>
+  </data>
+  <data name="EntryKillsFull" xml:space="preserve">
+    <value>EK (Eliminaciones de entrada)</value>
+  </data>
+  <data name="EquipmentValueTeam1Full" xml:space="preserve">
+    <value>EV CT (Valor del equipo CT ($))</value>
+  </data>
+  <data name="EquipmentValueTeam2Full" xml:space="preserve">
+    <value>EV T (Valor del equipo T ($))</value>
+  </data>
+  <data name="EseaRwsFull" xml:space="preserve">
+    <value>RWS (ESEA Round Win Share)</value>
+  </data>
+  <data name="ExportJson" xml:space="preserve">
+    <value>Exportar JSON</value>
+  </data>
+  <data name="Framerate" xml:space="preserve">
+    <value>Framerate</value>
+  </data>
+  <data name="FramerateFull" xml:space="preserve">
+    <value>FR (Framerate)</value>
+  </data>
+  <data name="HeadshotsFull" xml:space="preserve">
+    <value>HS (Disparos a la cabeza)</value>
+  </data>
+  <data name="HltvFull" xml:space="preserve">
+    <value>HLTV (HLTV Rating)</value>
+  </data>
+  <data name="JumpKillsFull" xml:space="preserve">
+    <value>JK (Eliminaciones en salto)</value>
+  </data>
+  <data name="KillsDeathsRatioFull" xml:space="preserve">
+    <value>K/D (Eliminaciones por muerte)</value>
+  </data>
+  <data name="KillsFull" xml:space="preserve">
+    <value>K (Eliminaciones)</value>
+  </data>
+  <data name="LastRankDetected" xml:space="preserve">
+    <value>ÚIltimo rango detectado</value>
+  </data>
+  <data name="MoveToWhitelist" xml:space="preserve">
+    <value>Mover a lista blanca</value>
+  </data>
+  <data name="MvpFull" xml:space="preserve">
+    <value>MVP (Jugador Mejor Valorado)</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="RemoveFromCache" xml:space="preserve">
+    <value>Eliminar de la caché</value>
+  </data>
+  <data name="RoundPlayedFull" xml:space="preserve">
+    <value>RP (Ronda jugada)</value>
+  </data>
+  <data name="ScoreTeam1Full" xml:space="preserve">
+    <value>ST1 (Puntuación del Equipo 1)</value>
+  </data>
+  <data name="ScoreTeam2Full" xml:space="preserve">
+    <value>ST2 (Puntuación del Equipo 2)</value>
+  </data>
+  <data name="ShowPlayerDemos" xml:space="preserve">
+    <value>Mostrar repeticiones del jugador</value>
+  </data>
+  <data name="ShowSuspectDemos" xml:space="preserve">
+    <value>Mostrar repeticiones del sospechoso</value>
+  </data>
+  <data name="SideTroubleFull" xml:space="preserve">
+    <value>ST (Bando en problemas)</value>
+  </data>
+  <data name="StartMoneyTeam1Full" xml:space="preserve">
+    <value>SM CT (Dinero inicial CT ($))</value>
+  </data>
+  <data name="StartMoneyTeam2Full" xml:space="preserve">
+    <value>SM T (Dinero inicial T ($))</value>
+  </data>
+  <data name="TeamNameTroubleFull" xml:space="preserve">
+    <value>TNT (Nombre del equipo en problemas)</value>
+  </data>
+  <data name="Tickrate" xml:space="preserve">
+    <value>Tickrate</value>
+  </data>
+  <data name="TickrateFull" xml:space="preserve">
+    <value>TR (Tickrate)</value>
+  </data>
+  <data name="TotalDamagesArmorFull" xml:space="preserve">
+    <value>TDA (Daño total a armadura)</value>
+  </data>
+  <data name="TotalDamagesHealthFull" xml:space="preserve">
+    <value>TDH (Daño total a vida)</value>
+  </data>
+  <data name="TradeDeathsFull" xml:space="preserve">
+    <value>TD (Muertes de trade)</value>
+  </data>
+  <data name="TradeKillsFull" xml:space="preserve">
+    <value>TK (Eliminaciones de trade)</value>
+  </data>
+  <data name="WatchPlayer" xml:space="preserve">
+    <value>Ver jugador</value>
+  </data>
+  <data name="WinnerSideFull" xml:space="preserve">
+    <value>WS (Bando ganador)</value>
+  </data>
+  <data name="WinnerTeamNameFull" xml:space="preserve">
+    <value>WTN (Nombre del equipo ganador)</value>
+  </data>
+  <data name="Decoys" xml:space="preserve">
+    <value>Granadas señuelo</value>
+  </data>
+  <data name="EndReasonBombDefused" xml:space="preserve">
+    <value>Bombas desactivadas</value>
+  </data>
+  <data name="EndReasonBombExploded" xml:space="preserve">
+    <value>Bombas explotadas</value>
+  </data>
+  <data name="EndReasonCtSurrender" xml:space="preserve">
+    <value>Rendición CT</value>
+  </data>
+  <data name="EndReasonCtWin" xml:space="preserve">
+    <value>Victoria Anti-Terrorista</value>
+  </data>
+  <data name="EndReasonTargetSaved" xml:space="preserve">
+    <value>Tiempo extra</value>
+  </data>
+  <data name="EndReasonTsurrender" xml:space="preserve">
+    <value>Rendición T</value>
+  </data>
+  <data name="EndReasonTwin" xml:space="preserve">
+    <value>Victoria Terrorista</value>
+  </data>
+  <data name="EndReasonUnknown" xml:space="preserve">
+    <value>Desconocido</value>
+  </data>
+  <data name="HeaderAssister" xml:space="preserve">
+    <value>Asistente</value>
+  </data>
+  <data name="HeaderEquipmentValuePlayer" xml:space="preserve">
+    <value>EV ($)</value>
+  </data>
+  <data name="HeaderHits" xml:space="preserve">
+    <value>Impactos</value>
+  </data>
+  <data name="HeaderKiller" xml:space="preserve">
+    <value>Asesino</value>
+  </data>
+  <data name="HeaderShots" xml:space="preserve">
+    <value>Disparos</value>
+  </data>
+  <data name="HeaderStartMoneyPlayer" xml:space="preserve">
+    <value>SM ($)</value>
+  </data>
+  <data name="HeaderVictim" xml:space="preserve">
+    <value>Víctima</value>
+  </data>
+  <data name="HeaderWeapon" xml:space="preserve">
+    <value>Arma</value>
+  </data>
+  <data name="HeGrenades" xml:space="preserve">
+    <value>Granadas HE</value>
+  </data>
+  <data name="Incendiaries" xml:space="preserve">
+    <value>Granadas incendiarias</value>
+  </data>
+  <data name="LabelWinnerSide" xml:space="preserve">
+    <value>Bando ganador</value>
+  </data>
+  <data name="Molotovs" xml:space="preserve">
+    <value>Cócteles Molotov</value>
+  </data>
+  <data name="Players" xml:space="preserve">
+    <value>Jugadores</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Razón</value>
+  </data>
+  <data name="Smoke" xml:space="preserve">
+    <value>Granada de humo</value>
+  </data>
+  <data name="StartMoney" xml:space="preserve">
+    <value>Dinero inicial</value>
+  </data>
+  <data name="Timeline" xml:space="preserve">
+    <value>Línea temporal</value>
+  </data>
+  <data name="ToolTipNextRound" xml:space="preserve">
+    <value>Siguiente ronda</value>
+  </data>
+  <data name="ToolTipPreviousRound" xml:space="preserve">
+    <value>Ronda anterior</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Desconocido</value>
+  </data>
+  <data name="ArmorDamages" xml:space="preserve">
+    <value>Daños a armadura</value>
+  </data>
+  <data name="Attempts" xml:space="preserve">
+    <value>Intentos</value>
+  </data>
+  <data name="ClutchesLoss" xml:space="preserve">
+    <value>Clutches perdidos</value>
+  </data>
+  <data name="ClutchesWon" xml:space="preserve">
+    <value>Clutches ganados</value>
+  </data>
+  <data name="ClutchesWonPercent" xml:space="preserve">
+    <value>% de clutches gandos</value>
+  </data>
+  <data name="DamagesPerRound" xml:space="preserve">
+    <value>Daño por ronda</value>
+  </data>
+  <data name="EntryHoldKills" xml:space="preserve">
+    <value>Muertes de entrada a hold</value>
+  </data>
+  <data name="EntryHoldKillsDescription" xml:space="preserve">
+    <value>(Primera muerte como CT)</value>
+  </data>
+  <data name="EntryKillDescription" xml:space="preserve">
+    <value>(Primera muerte como T)</value>
+  </data>
+  <data name="EquipmentValue" xml:space="preserve">
+    <value>Valor del equipo ($)</value>
+  </data>
+  <data name="EquipmentValuePerRound" xml:space="preserve">
+    <value>Valor del equipo por ronda ($)</value>
+  </data>
+  <data name="HeaderKillerSide" xml:space="preserve">
+    <value>KS</value>
+    <comment>Killer Side</comment>
+  </data>
+  <data name="HeaderRound" xml:space="preserve">
+    <value>Ronda</value>
+  </data>
+  <data name="HeaderRoundWon" xml:space="preserve">
+    <value>RW</value>
+  </data>
+  <data name="HeaderWon" xml:space="preserve">
+    <value>Ganada</value>
+  </data>
+  <data name="HealthDamages" xml:space="preserve">
+    <value>Daños a vida</value>
+  </data>
+  <data name="Loss" xml:space="preserve">
+    <value>Perdida</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="OneVersusFiveLoss" xml:space="preserve">
+    <value>1V5 perdido</value>
+  </data>
+  <data name="OneVersusFiveWon" xml:space="preserve">
+    <value>1V5 ganado</value>
+  </data>
+  <data name="OneVersusFiveWonPercent" xml:space="preserve">
+    <value>% de 1V5 ganados</value>
+  </data>
+  <data name="OneVersusFourLoss" xml:space="preserve">
+    <value>1V4 perdidos</value>
+  </data>
+  <data name="OneVersusFourWon" xml:space="preserve">
+    <value>1V4 ganados</value>
+  </data>
+  <data name="OneVersusFourWonPercent" xml:space="preserve">
+    <value>% de 1V4 ganados</value>
+  </data>
+  <data name="OneVersusOneLoss" xml:space="preserve">
+    <value>1V1 perdidos</value>
+  </data>
+  <data name="OneVersusOneWon" xml:space="preserve">
+    <value>1V1 ganados</value>
+  </data>
+  <data name="OneVersusOneWonPercent" xml:space="preserve">
+    <value>% de 1V1 ganados</value>
+  </data>
+  <data name="OneVersusThreeLoss" xml:space="preserve">
+    <value>1V3 perdidos</value>
+  </data>
+  <data name="OneVersusThreeWon" xml:space="preserve">
+    <value>1V3 ganados</value>
+  </data>
+  <data name="OneVersusThreeWonPercent" xml:space="preserve">
+    <value>% de 1V3 ganados</value>
+  </data>
+  <data name="OneVersusTwoLoss" xml:space="preserve">
+    <value>1V2 perdidos</value>
+  </data>
+  <data name="OneVersusTwoWon" xml:space="preserve">
+    <value>1V2 ganados</value>
+  </data>
+  <data name="OneVersusTwoWonPercent" xml:space="preserve">
+    <value>% de 1V2 ganados</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Ronda</value>
+  </data>
+  <data name="RoundTypeEco" xml:space="preserve">
+    <value>Eco</value>
+  </data>
+  <data name="RoundTypeForceBuy" xml:space="preserve">
+    <value>Force</value>
+  </data>
+  <data name="RoundTypeNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="RoundTypePistolRound" xml:space="preserve">
+    <value>Ronda de pistolas</value>
+  </data>
+  <data name="RoundTypeSemiEco" xml:space="preserve">
+    <value>Semi-Eco</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="TotalArmorDamages" xml:space="preserve">
+    <value>Daño a armadura total</value>
+  </data>
+  <data name="TotalClutches" xml:space="preserve">
+    <value>Total de clutches</value>
+  </data>
+  <data name="TotalClutchesLoss" xml:space="preserve">
+    <value>Total de clutches perdidos</value>
+  </data>
+  <data name="TotalClutchesWon" xml:space="preserve">
+    <value>Total de clutches ganados</value>
+  </data>
+  <data name="TotalDamages" xml:space="preserve">
+    <value>Daños totales</value>
+  </data>
+  <data name="TotalHealthDamages" xml:space="preserve">
+    <value>Daños a vida totales</value>
+  </data>
+  <data name="TotalOneVersusFiveLoss" xml:space="preserve">
+    <value>Total de 1V5 perdidos</value>
+  </data>
+  <data name="TotalOneVersusFiveWon" xml:space="preserve">
+    <value>Total de 1V5 ganados</value>
+  </data>
+  <data name="TotalOneVersusFourLoss" xml:space="preserve">
+    <value>Total de 1V4 perdidos</value>
+  </data>
+  <data name="TotalOneVersusFourWon" xml:space="preserve">
+    <value>Total de 1V4 ganados</value>
+  </data>
+  <data name="TotalOneVersusOneLoss" xml:space="preserve">
+    <value>Total de 1V1 perdidos</value>
+  </data>
+  <data name="TotalOneVersusOneWon" xml:space="preserve">
+    <value>Total de 1V1 ganados</value>
+  </data>
+  <data name="TotalOneVersusThreeLoss" xml:space="preserve">
+    <value>Total de 1V3 perdidos</value>
+  </data>
+  <data name="TotalOneVersusThreeWon" xml:space="preserve">
+    <value>Total de 1V3 ganados</value>
+  </data>
+  <data name="TotalOneVersusTwoLoss" xml:space="preserve">
+    <value>Total de 1V2 perdidos</value>
+  </data>
+  <data name="TotalOneVersusTwoWon" xml:space="preserve">
+    <value>Total de 1V2 ganados</value>
+  </data>
+  <data name="TradeKillsDeaths" xml:space="preserve">
+    <value>Eliminaciones / Muertes de trade</value>
+  </data>
+  <data name="TradeKillsDeathsDescription" xml:space="preserve">
+    <value>(Venganza de la muerte ocurrida un máximo de 4s después de la inicial)</value>
+  </data>
+  <data name="Value" xml:space="preserve">
+    <value>Valor</value>
+  </data>
+  <data name="Won" xml:space="preserve">
+    <value>Victorias</value>
+  </data>
+  <data name="WonRate" xml:space="preserve">
+    <value>Ratio de vicotiras</value>
+  </data>
+  <data name="HeaderOneVersusX" xml:space="preserve">
+    <value>1VX</value>
+  </data>
+  <data name="Headshots" xml:space="preserve">
+    <value>Disparos a la cabeza</value>
+  </data>
+  <data name="HeaderHeadshotsPercent" xml:space="preserve">
+    <value>HS %</value>
+  </data>
+  <data name="AverageValue" xml:space="preserve">
+    <value>Valor medio</value>
+  </data>
+  <data name="CrouchKillPercent" xml:space="preserve">
+    <value>% de muertes agachado</value>
+  </data>
+  <data name="CrouchKillPercentPerMatch" xml:space="preserve">
+    <value>% de muertes agachado por partida</value>
+  </data>
+  <data name="DamagePerGameValue" xml:space="preserve">
+    <value>Valor de daño por partida</value>
+  </data>
+  <data name="Death" xml:space="preserve">
+    <value>Muertes</value>
+  </data>
+  <data name="DeathAverage" xml:space="preserve">
+    <value>Media de muertes</value>
+  </data>
+  <data name="Draw" xml:space="preserve">
+    <value>Empate</value>
+  </data>
+  <data name="Duels" xml:space="preserve">
+    <value>Duelos</value>
+  </data>
+  <data name="Economy" xml:space="preserve">
+    <value>Economía</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="HeadshotPercentPerMatch" xml:space="preserve">
+    <value>% de disparos a la cabeza por partida</value>
+  </data>
+  <data name="Heavy" xml:space="preserve">
+    <value>Pesado</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>Eliminación</value>
+  </data>
+  <data name="KillAverage" xml:space="preserve">
+    <value>Media de eliminaciones</value>
+  </data>
+  <data name="KillVelocity" xml:space="preserve">
+    <value>Velocidad de eliminaciones</value>
+  </data>
+  <data name="HeaderKnifeKills" xml:space="preserve">
+    <value>KK</value>
+  </data>
+  <data name="Maps" xml:space="preserve">
+    <value>Mapas</value>
+  </data>
+  <data name="Matches" xml:space="preserve">
+    <value>Partidas</value>
+  </data>
+  <data name="MatchesStats" xml:space="preserve">
+    <value>Estadísticas de las partidas</value>
+  </data>
+  <data name="Overall" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Percentage" xml:space="preserve">
+    <value>Porcentaje</value>
+  </data>
+  <data name="Pistol" xml:space="preserve">
+    <value>Pistola</value>
+  </data>
+  <data name="Pistoles" xml:space="preserve">
+    <value>Pistolas</value>
+  </data>
+  <data name="Progression" xml:space="preserve">
+    <value>Progresión</value>
+  </data>
+  <data name="Rifle" xml:space="preserve">
+    <value>Rifle</value>
+  </data>
+  <data name="Rifles" xml:space="preserve">
+    <value>Rifles</value>
+  </data>
+  <data name="Rounds" xml:space="preserve">
+    <value>Rondas</value>
+  </data>
+  <data name="Smg" xml:space="preserve">
+    <value>SMG</value>
+  </data>
+  <data name="Smgs" xml:space="preserve">
+    <value>SMGs</value>
+  </data>
+  <data name="Sniper" xml:space="preserve">
+    <value>Sniper</value>
+  </data>
+  <data name="Snipers" xml:space="preserve">
+    <value>Snipers</value>
+  </data>
+  <data name="TipsGraphAverageKillVelocity" xml:space="preserve">
+    <value>Este gráfico muestra tu velocidad media cuando eliminaste a alguien por grupo de armas.</value>
+  </data>
+  <data name="TipsMaximumVelocity" xml:space="preserve">
+    <value>Información: La velocidad máxima corriendo es 250 unidades/s</value>
+  </data>
+  <data name="ToolTipAddPlayerToSuspectsList" xml:space="preserve">
+    <value>Añadir jugador a la lista de sospechosos (CTRL+S)</value>
+  </data>
+  <data name="ToolTipAddPlayerToWhiteList" xml:space="preserve">
+    <value>Añadir jugador a la lista blanca (CTRL+W)</value>
+  </data>
+  <data name="ToolTipMaps" xml:space="preserve">
+    <value>Mapas (CTRL+M)</value>
+  </data>
+  <data name="ToolTipMatchesPlayed" xml:space="preserve">
+    <value>Partidas jugadas</value>
+  </data>
+  <data name="ToolTipOverall" xml:space="preserve">
+    <value>Totales (CTRL+O)</value>
+  </data>
+  <data name="ToolTipProgression" xml:space="preserve">
+    <value>Progresión (CTRL+P)</value>
+  </data>
+  <data name="ToolTipRank" xml:space="preserve">
+    <value>Rango (CTRL+R)</value>
+  </data>
+  <data name="ToolTipTotalAssists" xml:space="preserve">
+    <value>Asistencias totales</value>
+  </data>
+  <data name="ToolTipTotalBombDefused" xml:space="preserve">
+    <value>Total de bombas desactivadas</value>
+  </data>
+  <data name="ToolTipTotalBombExploded" xml:space="preserve">
+    <value>Total de bombas explotadas</value>
+  </data>
+  <data name="ToolTipTotalBombPlanted" xml:space="preserve">
+    <value>Total de bombas plantadas</value>
+  </data>
+  <data name="ToolTipTotalDamages" xml:space="preserve">
+    <value>Daño total</value>
+  </data>
+  <data name="ToolTipTotalDeaths" xml:space="preserve">
+    <value>Muertes totales</value>
+  </data>
+  <data name="ToolTipTotalHeadshots" xml:space="preserve">
+    <value>Disparos a la cabeza totales</value>
+  </data>
+  <data name="ToolTipTotalMvp" xml:space="preserve">
+    <value>MVP totales</value>
+  </data>
+  <data name="ToolTipTotalRoundPlayed" xml:space="preserve">
+    <value>Disparos a la cabeza totales</value>
+  </data>
+  <data name="ToolTipWeapons" xml:space="preserve">
+    <value>Armas (CTRL+W)</value>
+  </data>
+  <data name="VelocityAverage" xml:space="preserve">
+    <value>Media de velocidad</value>
+  </data>
+  <data name="WeaponKills" xml:space="preserve">
+    <value>Eliminaciones con arma</value>
+  </data>
+  <data name="Weapons" xml:space="preserve">
+    <value>Armas</value>
+  </data>
+  <data name="WeeklyPercent" xml:space="preserve">
+    <value>% semanal</value>
+  </data>
+  <data name="Win" xml:space="preserve">
+    <value>Vicotria</value>
+  </data>
+  <data name="WinPercent" xml:space="preserve">
+    <value>% de vicotrias</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="CompetitivesWins" xml:space="preserve">
+    <value>victorias competitivas</value>
+  </data>
+  <data name="Demo" xml:space="preserve">
+    <value>Repetición</value>
+  </data>
+  <data name="DialogDemoNotFound" xml:space="preserve">
+    <value>Repetición no encontrada</value>
+  </data>
+  <data name="DialogDemosHaveBeenDownloaded" xml:space="preserve">
+    <value>{0} repetición(es) han sido descargadas.</value>
+  </data>
+  <data name="DialogDemosRemovedFromCache" xml:space="preserve">
+    <value>{0} repetición(es) borradas de caché.</value>
+  </data>
+  <data name="DialogDemosSentToRecycleBin" xml:space="preserve">
+    <value>{0} Repetición(es) enviadas a la papelera de reciclaje.</value>
+  </data>
+  <data name="DialogEnterTick" xml:space="preserve">
+    <value>Introduce el tick.</value>
+  </data>
+  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
+    <value>Un error ocurrió mientras se analizaban las repeticiones:</value>
+  </data>
+  <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
+    <value>Error mientras se intentaba extraer la información de los sospechosos.</value>
+  </data>
+  <data name="DialogErrorWhileExportingDemo" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se exportaba la repetición.</value>
+  </data>
+  <data name="DialogErrorWhileExportingDemos" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se exportaban repeticiones.</value>
+  </data>
+  <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se refrescaba el último rango.</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se recuperaba la información de partida ({0}).</value>
+  </data>
+  <data name="DialogExportMultipleOrSingle" xml:space="preserve">
+    <value>¿Quieres exportar los datos a un solo archivo o a varios?</value>
+  </data>
+  <data name="DialogExportPlayer" xml:space="preserve">
+    <value>Vas a exportar los datos del jugador "{0}".
+¿Quieres continuar?</value>
+  </data>
+  <data name="DialogGoToTick" xml:space="preserve">
+    <value>Ir a Tick</value>
+  </data>
+  <data name="DialogInvalidTick" xml:space="preserve">
+    <value>Tick no válido.</value>
+  </data>
+  <data name="DialogNoNewerDemo" xml:space="preserve">
+    <value>No hay repeticiones más recientes disponibles.</value>
+  </data>
+  <data name="DialogRemoveDemosFromCacheConfirmation" xml:space="preserve">
+    <value>¿Estás seguro de que quieres eliminar esta repetición(es) de la caché?
+Esto no borrará la repetición(es) de tu disco duro.</value>
+  </data>
+  <data name="DialogRestartSteam" xml:space="preserve">
+    <value>Tienes que reiniciar Steam.</value>
+  </data>
+  <data name="DialogSelectAccountFirst" xml:space="preserve">
+    <value>Tienes que seleccionar una cuenta antes.</value>
+  </data>
+  <data name="DialogSendToRecycleBinConfimation" xml:space="preserve">
+    <value>¿Estás seguro de que quieres enviar esta repetición(es) a la papelera de reciclaje?</value>
+  </data>
+  <data name="DialogSetAccountToFocus" xml:space="preserve">
+    <value>Tienes que seleccionar la cuenta que quieres seguir en la configuración para poder usar esta característica.</value>
+  </data>
+  <data name="DialogSetFolderForDownload" xml:space="preserve">
+    <value>Tienes que seleccionar la carpeta donde se guardarán las repeticiones en la configuración.</value>
+  </data>
+  <data name="DialogSteamNotFound" xml:space="preserve">
+    <value>Parece que Steam no está instalado.
+No se puede iniciar el juego.</value>
+  </data>
+  <data name="DialogSteamNotRunningOrNotLoggedIn" xml:space="preserve">
+    <value>Steam no está funcionando o no estás conectado a una cuenta de Steam.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Exportar</value>
+  </data>
+  <data name="Multiple" xml:space="preserve">
+    <value>Múltiples</value>
+  </data>
+  <data name="NotificationAddingSuspects" xml:space="preserve">
+    <value>Añadiendo sospechosos...</value>
+  </data>
+  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
+    <value>Analizando repeticiones para exportar...</value>
+  </data>
+  <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
+    <value>Analizando repetición(es) para exportar json...</value>
+  </data>
+  <data name="NotificationAnalyzingMultipleDemos" xml:space="preserve">
+    <value>Analizando múltiples repeticiones...</value>
+  </data>
+  <data name="NotificationCancelling" xml:space="preserve">
+    <value>Cancelando...</value>
+  </data>
+  <data name="NotificationCheckingNewBanned" xml:space="preserve">
+    <value>Comprobando si nuevos sospechosos han sido baneados...</value>
+  </data>
+  <data name="NotificationDownloadingDemo" xml:space="preserve">
+    <value>Descargando repetición {0}/{1}...</value>
+  </data>
+  <data name="NotificationExportingDemo" xml:space="preserve">
+    <value>Exportando repetición {0}...</value>
+  </data>
+  <data name="NotificationExtractingDemo" xml:space="preserve">
+    <value>Extrayendo repetición {0}/{1}...</value>
+  </data>
+  <data name="NotificationInitCache" xml:space="preserve">
+    <value>Inicializando caché...</value>
+  </data>
+  <data name="NotificationInThisFolder" xml:space="preserve">
+    <value>en esta carpeta</value>
+  </data>
+  <data name="NotificationLoading" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
+  <data name="NotificationLoadingAllDemos" xml:space="preserve">
+    <value>Cargando todas las repeticiones...</value>
+  </data>
+  <data name="NotificationLoadingDemos" xml:space="preserve">
+    <value>Cargando repeticiones...</value>
+  </data>
+  <data name="NotificationLoadingMoreDemos" xml:space="preserve">
+    <value>Cargando más repeticiones...</value>
+  </data>
+  <data name="NotificationNoDemosFound" xml:space="preserve">
+    <value>No se han encontrado repeticiones</value>
+  </data>
+  <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
+    <value>No se han encontrado repeticiones para esta cuenta</value>
+  </data>
+  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
+    <value>Comando Playdemo copiado al portapapeles</value>
+  </data>
+  <data name="NotificationRetrievingMatchesData" xml:space="preserve">
+    <value>Recuperando información de las últimas partidas...</value>
+  </data>
+  <data name="NotificationSearchingLastRank" xml:space="preserve">
+    <value>Buscando el último rango de la cuenta...</value>
+  </data>
+  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
+    <value>¡{0} sospechoso(s) han sido baneados!</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="SaveHere" xml:space="preserve">
+    <value>Guardar aquí</value>
+  </data>
+  <data name="Single" xml:space="preserve">
+    <value>Uno solo</value>
+  </data>
+  <data name="WinPercentage" xml:space="preserve">
+    <value>Porcentaje de victorias</value>
+  </data>
+  <data name="AllFemale" xml:space="preserve">
+    <value>Todo</value>
+  </data>
+  <data name="CacheSize" xml:space="preserve">
+    <value>Tamaño de caché</value>
+  </data>
+  <data name="DialogAccountAlreadyInList" xml:space="preserve">
+    <value>Este jugado ya está en tu lista de cuentas.</value>
+  </data>
+  <data name="DialogAddAnAccount" xml:space="preserve">
+    <value>Añadir cuenta</value>
+  </data>
+  <data name="DialogAnalyzeAllDemosConfirmation" xml:space="preserve">
+    <value>¿Quieres analizar exclusivamente las repeticiones seleccionadas o todas las repeticioens en la carpeta seleccionada?</value>
+  </data>
+  <data name="DialogBackupCreated" xml:space="preserve">
+    <value>La copia de seguridad ha sido creada, puedes re-importarlo desde la configuración.</value>
+  </data>
+  <data name="DialogConfirmDeleteDemosData" xml:space="preserve">
+    <value>¡La información de repeticiones será eliminada!¿Estás seguro?</value>
+  </data>
+  <data name="DialogCustomDataImported" xml:space="preserve">
+    <value>Se han importado datos personalizados.</value>
+  </data>
+  <data name="DialogDeleteVdmFilesConfirmation" xml:space="preserve">
+    <value>Todos los archivos VDM en tus carpetas serán borrados. ¿Estás seguro?</value>
+  </data>
+  <data name="DialogDemosDataCleared" xml:space="preserve">
+    <value>Datos de repeticiones eliminados.</value>
+  </data>
+  <data name="DialogEnterSteamId" xml:space="preserve">
+    <value>Introduce la SteamID 64 o el link de la comunidad de Steam.</value>
+  </data>
+  <data name="DialogErrorCreatingBackupFile" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se exportaban los datos personalizados.</value>
+  </data>
+  <data name="DialogErrorDeletingVdmFiles" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se borraban los archivos VDM.</value>
+  </data>
+  <data name="DialogErrorImportingCustomData" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se importaban los datos personalizados. La copia de seguridad puede estar corrupta.</value>
+  </data>
+  <data name="DialogErrorInvalidSteamId" xml:space="preserve">
+    <value>SteamID 64 o link de la comunidad de Steam no válido.</value>
+  </data>
+  <data name="DialogErrorRemovingAccount" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se eliminaba la cuenta.</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingPlayerInformation" xml:space="preserve">
+    <value>Error mientras se recuperaba la información del jugador.</value>
+  </data>
+  <data name="DialogNoErrorsFile" xml:space="preserve">
+    <value>No hay ningún archivo de log de errores.</value>
+  </data>
+  <data name="DialogSelectCsgoPath" xml:space="preserve">
+    <value>Por favor selecciona la localización del archivo csgo.exe para activarlo.</value>
+  </data>
+  <data name="DialogVdmFilesDeleted" xml:space="preserve">
+    <value>Archivos VDM borrados.</value>
+  </data>
+  <data name="MegaByte" xml:space="preserve">
+    <value>MB</value>
+  </data>
+  <data name="NotificationAddingAccount" xml:space="preserve">
+    <value>Añadiendo cuenta...</value>
+  </data>
+  <data name="NotificationSyncingAccountsNickname" xml:space="preserve">
+    <value>Sincronizando nombres de cuentas...</value>
+  </data>
+  <data name="PlayerPov" xml:space="preserve">
+    <value>POV del jugador</value>
+  </data>
+  <data name="Selection" xml:space="preserve">
+    <value>Selección</value>
+  </data>
+  <data name="ToolTipDisplaySettings" xml:space="preserve">
+    <value>Configuración de display</value>
+  </data>
+  <data name="DialogAnalyzeRequired" xml:space="preserve">
+    <value>Tienes que analizar la repetición primero.</value>
+  </data>
+  <data name="DialogBoilerIncorrect" xml:space="preserve">
+    <value>boiler.exe es incorrecto.</value>
+  </data>
+  <data name="DialogBoilerNotFound" xml:space="preserve">
+    <value>boiler.exe no encontrado.</value>
+  </data>
+  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
+    <value>Estas repeticiones parecen ser demasiado antiguas, si no lo son por favor envia un correo con las repeticiones adjuntas.
+Puedes encontrar más información en {0}.</value>
+  </data>
+  <data name="DialogDemosNotFound" xml:space="preserve">
+    <value>Las siguientes repeticiones no han sido encontradas:</value>
+  </data>
+  <data name="DialogErrorDemoNotFound" xml:space="preserve">
+    <value>Repetición {0} no encontrada.</value>
+  </data>
+  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se analizaba la repetición {0}.
+La repetición parece ser demasiado antigua, si no lo es por favor envia un correo con la repetición adjunta.
+Puedes encontrar más información en http://csgo-demos-manager.com.</value>
+  </data>
+  <data name="DialogMapNotSupported" xml:space="preserve">
+    <value>Este mapa no soporta esta característica.</value>
+  </data>
+  <data name="DialogNoConnexionDetected" xml:space="preserve">
+    <value>No hay conexión a Internet.</value>
+  </data>
+  <data name="DialogNoConnexionNoFeature" xml:space="preserve">
+    <value>No se ha detectado conexión a Internet, no puedes usar esta característica.</value>
+  </data>
+  <data name="DialogPovSelection" xml:space="preserve">
+    <value>¿Qué POV (Punto de Vista) quieres ver?</value>
+  </data>
+  <data name="EnemyPov" xml:space="preserve">
+    <value>POV enemigo</value>
+  </data>
+  <data name="NotificationAnalyzing" xml:space="preserve">
+    <value>Analizando...</value>
+  </data>
+  <data name="NotificationAnalyzingDemo" xml:space="preserve">
+    <value>Analizando repetición {0}...</value>
+  </data>
+  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
+    <value>Analizando repetición {0} para exportar...</value>
+  </data>
+  <data name="Pov" xml:space="preserve">
+    <value>POV</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="AddAllPlayersSeen" xml:space="preserve">
+    <value>Añadir todos los jugadores vistos</value>
+  </data>
+  <data name="Both" xml:space="preserve">
+    <value>Ambos</value>
+  </data>
+  <data name="CounterTerrorists" xml:space="preserve">
+    <value>Anti-Terroristas</value>
+  </data>
+  <data name="DialogNoPointsFound" xml:space="preserve">
+    <value>No se han encontrado puntos. Puede que tengas que analizar esta repetición.</value>
+  </data>
+  <data name="Equipment" xml:space="preserve">
+    <value>Equipo.</value>
+  </data>
+  <data name="HeaderToolTipKnifeKills" xml:space="preserve">
+    <value>Eliminaciones a cuchillo</value>
+  </data>
+  <data name="HeadshotsPercent" xml:space="preserve">
+    <value>% de disparos a la cabeza</value>
+  </data>
+  <data name="LabelScale" xml:space="preserve">
+    <value>Escala</value>
+  </data>
+  <data name="LabelSpeed" xml:space="preserve">
+    <value>Velocidad</value>
+  </data>
+  <data name="LabelVolume" xml:space="preserve">
+    <value>Volumen</value>
+  </data>
+  <data name="LogOnlyKills" xml:space="preserve">
+    <value>Registrar solo eliminaciones</value>
+  </data>
+  <data name="NotificationGeneratingData" xml:space="preserve">
+    <value>Generando datos...</value>
+  </data>
+  <data name="NotificationPaused" xml:space="preserve">
+    <value>Pausado</value>
+  </data>
+  <data name="NotificationPlaying" xml:space="preserve">
+    <value>Reproduciendo...</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>pausa</value>
+  </data>
+  <data name="Play" xml:space="preserve">
+    <value>Reproducir</value>
+  </data>
+  <data name="ShowOnlyBanned" xml:space="preserve">
+    <value>Mostrar solo baneados</value>
+  </data>
+  <data name="ShowSuspectsDemos" xml:space="preserve">
+    <value>Mostrar la repetición(es) del sospechoso</value>
+  </data>
+  <data name="Side" xml:space="preserve">
+    <value>Bando</value>
+  </data>
+  <data name="StuffsThrown" xml:space="preserve">
+    <value>Grandas lanzadas</value>
+  </data>
+  <data name="Terrorists" xml:space="preserve">
+    <value>Terroristas</value>
+  </data>
+  <data name="ToolTipAddAllPlayersSeen" xml:space="preserve">
+    <value>Añadir todos los jugadores vistos a la lista(CTRL+G)</value>
+  </data>
+  <data name="ToolTipGoToSuspectProfile" xml:space="preserve">
+    <value>Ir al perfil del sospechoso(CTRL+P)</value>
+  </data>
+  <data name="ToolTipMoveSuspectToWhitelist" xml:space="preserve">
+    <value>Mover sospechoso(s) a la lista blanca (CTRL+M)</value>
+  </data>
+  <data name="ToolTipPause" xml:space="preserve">
+    <value>Pausa (CTRL+O)</value>
+  </data>
+  <data name="ToolTipPlay" xml:space="preserve">
+    <value>Reproducir (CTRL+P)</value>
+  </data>
+  <data name="ToolTipRefreshList" xml:space="preserve">
+    <value>Refrescar lista (CTRL+R)</value>
+  </data>
+  <data name="ToolTipRemoveSuspect" xml:space="preserve">
+    <value>Eliminar sospechoso(s) (DEL)</value>
+  </data>
+  <data name="ToolTIpShowOnlySuspectDemos" xml:space="preserve">
+    <value>Mostrar repeticiones que contienen al sospechoso(s) sleccionado (CTRL+F)</value>
+  </data>
+  <data name="ToolTipWhitelist" xml:space="preserve">
+    <value>Añadir a lista blanca (CTRL+W)</value>
+  </data>
+  <data name="WatermarkSearch" xml:space="preserve">
+    <value>Buscar...</value>
+  </data>
+  <data name="Whitelist" xml:space="preserve">
+    <value>Lista blanca</value>
+  </data>
+  <data name="DialogAddPlayerToWhitelist" xml:space="preserve">
+    <value>Añadir jugador a la lista blanca</value>
+  </data>
+  <data name="DialogAddSuspect" xml:space="preserve">
+    <value>Añadir un sospechoso</value>
+  </data>
+  <data name="DialogCsgoNotDetected" xml:space="preserve">
+    <value>Parece que CSGO no está instalado en tu disco duro principal.
+Los valores por defecto de "csgo" y "replays" no han sido encontrados. Por favor añade las carpetas desde la configuración.</value>
+  </data>
+  <data name="DialogErrorWhileDeletingPlayer" xml:space="preserve">
+    <value>Error mientras se eliminaban los jugadores.</value>
+  </data>
+  <data name="DialogErrorWhileDeletingSuspect" xml:space="preserve">
+    <value>Error mientras se eliminaba el sospechoso.</value>
+  </data>
+  <data name="DialogErrorWhileExportingCustomData" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se exportaban datos personalizados.</value>
+  </data>
+  <data name="DialogErrorWhileMovingSuspects" xml:space="preserve">
+    <value>Error mientras se movía al sospechoso(s).</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingPlayersInformation" xml:space="preserve">
+    <value>Error mientras se recuperaba información de los jugadores.</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingSuspectInformation" xml:space="preserve">
+    <value>Error mientras se recuperaba la información del sospechoso.</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingSuspectsInformation" xml:space="preserve">
+    <value>Error mientras se recuperaba la información de los sospechosos.</value>
+  </data>
+  <data name="DialogNewVersionAvailable" xml:space="preserve">
+    <value>Hay una nueva versión disponible.
+¿Quieres descargarla?</value>
+  </data>
+  <data name="DialogNoDemosPlayerFound" xml:space="preserve">
+    <value>No se han encontrado repeticiones para este jugador.
+Repeticiones con este jugador pueden no haberse analizado.</value>
+  </data>
+  <data name="DialogNoDemosSuspectFound" xml:space="preserve">
+    <value>No se han encontrado repeticiones para este sospechoso.
+Repeticiones con este sospechoso pueden no haberse analizado.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInSuspectWhitelist" xml:space="preserve">
+    <value>Este jugador está en tu lista de sospechosos / lista blanca / lista de cuentas.
+Tienes que eliminarlo de tu cuenta y lista blanca para poder añadirlo a tu lista de sospechosos.</value>
+  </data>
+  <data name="DialogUpdateRequireClearCache" xml:space="preserve">
+    <value>Esta actualización requiere eliminar los datos personalizados de caché (tu lista de sospechosos no será eliminada).
+¿Quieres guardar tus datos personalizados?</value>
+  </data>
+  <data name="DialogPlayerNotFound" xml:space="preserve">
+    <value>Jugador no encontrado.</value>
+  </data>
+  <data name="HeaderAccountVisibility" xml:space="preserve">
+    <value>Visibilidad de cuenta</value>
+  </data>
+  <data name="HeaderBanCount" xml:space="preserve">
+    <value>Número de baneos</value>
+  </data>
+  <data name="HeaderCommunityBanned" xml:space="preserve">
+    <value>Baneado por la comunidad</value>
+  </data>
+  <data name="HeaderDaysSinceLastBan" xml:space="preserve">
+    <value>DSLB</value>
+  </data>
+  <data name="HeaderEconomyBanned" xml:space="preserve">
+    <value>Baneado de economía</value>
+  </data>
+  <data name="HeaderGameBan" xml:space="preserve">
+    <value>Baneado de juego</value>
+  </data>
+  <data name="HeaderLastConnection" xml:space="preserve">
+    <value>Última conexión</value>
+  </data>
+  <data name="HeaderNickname" xml:space="preserve">
+    <value>Nickname</value>
+  </data>
+  <data name="HeaderProfileSetup" xml:space="preserve">
+    <value>Perfil con datos</value>
+  </data>
+  <data name="NotificationAddingPlayerToWhitelist" xml:space="preserve">
+    <value>Añadiendo jugador a la lista blanca...</value>
+  </data>
+  <data name="NotificationAddingSuspect" xml:space="preserve">
+    <value>Añadiendo sospechoso...</value>
+  </data>
+  <data name="NotificationMovingSuspectsToWhitelist" xml:space="preserve">
+    <value>Moviendo sospechoso(s) a la lista blanca...</value>
+  </data>
+  <data name="NotificationPlayerAlreadyInWhitelist" xml:space="preserve">
+    <value>El jugador ya está en tu lista blanca.</value>
+  </data>
+  <data name="NotificationRefreshing" xml:space="preserve">
+    <value>Refrescando...</value>
+  </data>
+  <data name="NotificationSearching" xml:space="preserve">
+    <value>Buscando...</value>
+  </data>
+  <data name="NotificationStoppingAnalyze" xml:space="preserve">
+    <value>Deteniéndo análisis...</value>
+  </data>
+  <data name="Dark" xml:space="preserve">
+    <value>Oscuro</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Día</value>
+  </data>
+  <data name="DialogErrorExportingHeatmap" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se exportaba el mapa de calor a PNG.</value>
+  </data>
+  <data name="DialogErrorWhileAddingPlayerToSuspectsList" xml:space="preserve">
+    <value>Error mientras se añadía el jugador a la lista de sospechosos.</value>
+  </data>
+  <data name="DialogErrorWhileAddingPlayerToWhitelist" xml:space="preserve">
+    <value>Error mientras se añadía el jugador a la lista blanca.</value>
+  </data>
+  <data name="DialogNoDamagesDataFound" xml:space="preserve">
+    <value>No se han encontrado datos dañados.
+La repetición es demasiado antigua o no la analizaste.</value>
+  </data>
+  <data name="DialogNoDemosFoundForPlayer" xml:space="preserve">
+    <value>No se han encontrado repeticiones para este jugador.
+Las repeticiones con este jugador podrían no haber sido analizadas.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInAccountsList" xml:space="preserve">
+    <value>Este jugador ya está en tu lista de cuentas.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInSuspectsList" xml:space="preserve">
+    <value>Este jugador ya está en tu lista de sospechosos o está en tu lista de cuentas.
+Tienes que eliminarlo de tu lista de cuentas para poder añadirlo a tu lista de sospechosos.</value>
+  </data>
+  <data name="DialogPlayerAlreadyInWhitelist" xml:space="preserve">
+    <value>Este jugador ya está en tu lista blanca o está en tu lista de cuentas.
+Tienes que eliminarlo de tu lista de cuentas para poder añadirlo a tu lista blanca.</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Claro</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Mes</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="NotificationAddingPlayerToAccountsList" xml:space="preserve">
+    <value>Añadiendo jugador a la lista de cuentas...</value>
+  </data>
+  <data name="NotificationAddingPlayerToSuspectsList" xml:space="preserve">
+    <value>Añadiendo jugador a la lista de sospechosos...</value>
+  </data>
+  <data name="NotificationCommentSaved" xml:space="preserve">
+    <value>Comentario guardado.</value>
+  </data>
+  <data name="NotificationPlayedAddedToSuspectsList" xml:space="preserve">
+    <value>Añadido jugador a la lista de sospechosos.</value>
+  </data>
+  <data name="NotificationPlayerAddedToAccountsList" xml:space="preserve">
+    <value>Añadido jugador a la lista de cuentas.</value>
+  </data>
+  <data name="NotificationPlayerAddedToWhitelist" xml:space="preserve">
+    <value>Añadido jugador a la lista blanca.</value>
+  </data>
+  <data name="NotificationSearchingDemosForPlayer" xml:space="preserve">
+    <value>Buscando en las repeticiones a este jugador...</value>
+  </data>
+  <data name="NotificationSetposCommandCopied" xml:space="preserve">
+    <value>comando setpos copiado al portapapeles</value>
+  </data>
+  <data name="ShotsFired" xml:space="preserve">
+    <value>Disparos realizados</value>
+  </data>
+  <data name="Smokes" xml:space="preserve">
+    <value>Granadas de humo</value>
+  </data>
+  <data name="CT" xml:space="preserve">
+    <value>CT</value>
+  </data>
+  <data name="Spec" xml:space="preserve">
+    <value>SPEC</value>
+  </data>
+  <data name="T" xml:space="preserve">
+    <value>T</value>
+  </data>
+  <data name="Lost" xml:space="preserve">
+    <value>Derrota</value>
+  </data>
+  <data name="LostSurrender" xml:space="preserve">
+    <value>Derrota (S)</value>
+  </data>
+  <data name="WinSurrender" xml:space="preserve">
+    <value>Victoria (S)</value>
+  </data>
+  <data name="Away" xml:space="preserve">
+    <value>Ausente</value>
+  </data>
+  <data name="Busy" xml:space="preserve">
+    <value>Ocupado</value>
+  </data>
+  <data name="LookingToPlay" xml:space="preserve">
+    <value>Buscando partida</value>
+  </data>
+  <data name="LookingToTrade" xml:space="preserve">
+    <value>Buscando trade</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Desconectado</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Conectado</value>
+  </data>
+  <data name="Private" xml:space="preserve">
+    <value>Privado</value>
+  </data>
+  <data name="Public" xml:space="preserve">
+    <value>Público</value>
+  </data>
+  <data name="Snooze" xml:space="preserve">
+    <value>Snooze</value>
+  </data>
+  <data name="ToolTipAbout" xml:space="preserve">
+    <value>sobre</value>
+    <comment>used for heatmap flashbang tooltip (about x seconds)</comment>
+  </data>
+  <data name="ToolTipAddToWhitelist" xml:space="preserve">
+    <value>Añadir una cuenta a la lista blanca</value>
+  </data>
+  <data name="ToolTipBlinded" xml:space="preserve">
+    <value>cegado</value>
+    <comment>used for heatmap flashbang tooltip (player1 blinded player2)</comment>
+  </data>
+  <data name="ToolTipBlindedOthersPlayersFor" xml:space="preserve">
+    <value>cegó a otros jugadores por</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipGoToPlayerProfile" xml:space="preserve">
+    <value>Ir al perfil del jugador (CTRL+P)</value>
+  </data>
+  <data name="ToolTipKilled" xml:space="preserve">
+    <value>eliminó</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipOneSingleFlashFrom" xml:space="preserve">
+    <value>Una sola flash de</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipRemovePlayersFromWhitelist" xml:space="preserve">
+    <value>Eliminar jugador(es) de la lista blanca (DEL)</value>
+  </data>
+  <data name="ToolTipSeconds" xml:space="preserve">
+    <value>segundo(s)</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipSecondsOnAverage" xml:space="preserve">
+    <value>segundo(s) de media</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="ToolTipShowPlayerDemos" xml:space="preserve">
+    <value>Mostrar repeticiones que contienen al jugador (CTRL+F)</value>
+  </data>
+  <data name="ToolTipTimes" xml:space="preserve">
+    <value>tiempo(s)</value>
+    <comment>used for heatmap flashbang tooltip</comment>
+  </data>
+  <data name="WhitelistInformation" xml:space="preserve">
+    <value>No se comprobará si los jugadores listados abajo están baneados cuando se analize una repetición.</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todo</value>
+  </data>
+  <data name="AllPlayers" xml:space="preserve">
+    <value>Todos los jugadores</value>
+  </data>
+  <data name="AllRounds" xml:space="preserve">
+    <value>Todas las rondas</value>
+  </data>
+  <data name="AmountDollar" xml:space="preserve">
+    <value>Cantidad ($)</value>
+  </data>
+  <data name="Chest" xml:space="preserve">
+    <value>Pecho</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="CopySetpos" xml:space="preserve">
+    <value>Copiar setpos</value>
+  </data>
+  <data name="FlashedPlayers" xml:space="preserve">
+    <value>Jugadores cegados</value>
+  </data>
+  <data name="Generate" xml:space="preserve">
+    <value>Generar</value>
+  </data>
+  <data name="Head" xml:space="preserve">
+    <value>Cabeza</value>
+  </data>
+  <data name="HeaderFlasherFlashed" xml:space="preserve">
+    <value>Flasheador \ Flasheado</value>
+    <comment>Used for flashbangs heatmap chart</comment>
+  </data>
+  <data name="HeaderPlayerName" xml:space="preserve">
+    <value>Nombre del jugador</value>
+  </data>
+  <data name="HeaderTeamName" xml:space="preserve">
+    <value>Nombre del equipo</value>
+  </data>
+  <data name="HeaderThrower" xml:space="preserve">
+    <value>Lanzados</value>
+  </data>
+  <data name="KillsPerRoundFull" xml:space="preserve">
+    <value>KPR (Eliminaciones Por Ronda)</value>
+  </data>
+  <data name="LeftArm" xml:space="preserve">
+    <value>Brazo izquierdo</value>
+  </data>
+  <data name="LeftLeg" xml:space="preserve">
+    <value>Pierza izquierda</value>
+  </data>
+  <data name="NotificationGenerating" xml:space="preserve">
+    <value>Generando...</value>
+  </data>
+  <data name="NotificationUpdating" xml:space="preserve">
+    <value>Actualizando...</value>
+  </data>
+  <data name="Opacity" xml:space="preserve">
+    <value>Opacidad</value>
+  </data>
+  <data name="RightArm" xml:space="preserve">
+    <value>Brazo derecho</value>
+  </data>
+  <data name="RightLeg" xml:space="preserve">
+    <value>Pierna derecha</value>
+  </data>
+  <data name="Sides" xml:space="preserve">
+    <value>Bandos</value>
+  </data>
+  <data name="Stomach" xml:space="preserve">
+    <value>Vientre</value>
+  </data>
+  <data name="Team" xml:space="preserve">
+    <value>Equipo</value>
+  </data>
+  <data name="ToolTipCopySetposCommand" xml:space="preserve">
+    <value>Copiar comando setpos (CTRL+C)</value>
+  </data>
+  <data name="ToolTipGenerateHeatmap" xml:space="preserve">
+    <value>Generar mapa de calor (CTRL+G)</value>
+  </data>
+  <data name="ToolTipSaveAsPng" xml:space="preserve">
+    <value>Guardar como PNG (CTRL+S)</value>
+  </data>
+  <data name="ToolTipUpdate" xml:space="preserve">
+    <value>Actualizar (CTRL+R)</value>
+  </data>
+  <data name="ToolTipWatchAllStuffsFromPlayer" xml:space="preserve">
+    <value>Ver todas las granadas de este jugador (CTRL+W)</value>
+  </data>
+  <data name="TotalCashEarned" xml:space="preserve">
+    <value>Dinero total ganado ($)</value>
+  </data>
+  <data name="TotalFlashbangsThrown" xml:space="preserve">
+    <value>Total de granadas cegadoras lanzadas</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Actualizar</value>
+  </data>
+  <data name="WatchPlayerStuffs" xml:space="preserve">
+    <value>Ver granadas del jugador</value>
+  </data>
+  <data name="DescriptionEntryHoldKills" xml:space="preserve">
+    <value>(Primera eliminación como CT)</value>
+  </data>
+  <data name="DescriptionEntryKills" xml:space="preserve">
+    <value>(Primera eliminación como T)</value>
+  </data>
+  <data name="HeaderMatrixKillerVictim" xml:space="preserve">
+    <value>Asesino \ Víctima</value>
+  </data>
+  <data name="HeaderRoundLost" xml:space="preserve">
+    <value>RL</value>
+  </data>
+  <data name="Matrix" xml:space="preserve">
+    <value>Matriz</value>
+  </data>
+  <data name="Ratio" xml:space="preserve">
+    <value>Ratio</value>
+  </data>
+  <data name="Teams" xml:space="preserve">
+    <value>Equipos</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Idioma</value>
+  </data>
+  <data name="UnexpectedErrorOccured" xml:space="preserve">
+    <value>Ha ocurrido un error inesperado. Por favor envía el archivo 'errors.log' accesible desde la configuración.
+Mensaje de error:
+{0}</value>
+  </data>
+  <data name="InformationTranslateIncomplete" xml:space="preserve">
+    <value>Si la aplicación sigue en inglés después de cambiar el idioma, significa que la traducción no se ha hecho aún o es incompleta.</value>
+  </data>
+  <data name="InfomationHelpTranslatingApp" xml:space="preserve">
+    <value>Eres libre de ayudar a traducir la aplicación, más información en</value>
+  </data>
+  <data name="Contributors" xml:space="preserve">
+    <value>Contribuyentes</value>
+  </data>
+  <data name="Translators" xml:space="preserve">
+    <value>Traductores</value>
+  </data>
+  <data name="Banned" xml:space="preserve">
+    <value>Baneado</value>
+  </data>
+  <data name="Probation" xml:space="preserve">
+    <value>A prueba</value>
+  </data>
+  <data name="HeaderToolTipTotalMatchesTime" xml:space="preserve">
+    <value>Tiempo total de partidas (hours / minutes)</value>
+  </data>
+  <data name="HeaderTotalMatchesTime" xml:space="preserve">
+    <value>TMT</value>
+    <comment>Total Match Time</comment>
+  </data>
+  <data name="HeaderAverageMatchTime" xml:space="preserve">
+    <value>AMT</value>
+    <comment>Average Match Time</comment>
+  </data>
+  <data name="HeaderToolTipAverageMatchTime" xml:space="preserve">
+    <value>Tiemp medio de partida (minutes)</value>
+  </data>
+  <data name="TotalMatchTimeValue" xml:space="preserve">
+    <value>{0}h {1}m</value>
+  </data>
+  <data name="AverageMatchTimeValue" xml:space="preserve">
+    <value>{0} minutos</value>
+  </data>
+  <data name="ToolTipExportChat" xml:space="preserve">
+    <value>Exportar el chat de la repetición</value>
+  </data>
+  <data name="ExportChat" xml:space="preserve">
+    <value>Exportar chat</value>
+  </data>
+  <data name="DialogChatFileCreated" xml:space="preserve">
+    <value>El archivo de mensajes de chat ha sido creado.</value>
+  </data>
+  <data name="DialogNoChatFound" xml:space="preserve">
+    <value>No se han encontrado mensajes de chat. (Solo funciona para repeticiones de un servidor que tenga "tv_relaytextchat" con un valor diferente de "0",  no es el caso de los de Valve)</value>
+  </data>
+  <data name="NoHeatmapDataFound" xml:space="preserve">
+    <value>No se ha encontrado {0} en esta selección.</value>
+  </data>
+  <data name="Shots" xml:space="preserve">
+    <value>Disparos</value>
+  </data>
+  <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
+    <value>Esta repetición no es de los servidores de Valve o falta el archivo .info.</value>
+  </data>
+  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
+    <value>Código para compartir copiado al portapapeles.</value>
+  </data>
+  <data name="CopyDemoShareCode" xml:space="preserve">
+    <value>Copiar código para compartir</value>
+  </data>
+  <data name="ShowOnThirdParty" xml:space="preserve">
+    <value>Mostrar en aplicación de terceros</value>
+  </data>
+  <data name="DialogShareCodeNotAvailable" xml:space="preserve">
+    <value>Código para compartir no disponible. Solo funciona para repeticiones de servidores de Valve y si el archivo .info existe.</value>
+  </data>
+  <data name="YesDontAsk" xml:space="preserve">
+    <value>Sí, y no preguntes la próxima vez</value>
+  </data>
+  <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
+    <value>Vas a enviar el código para compartir la repetición a {0}. ¿Quieres continuar?</value>
+  </data>
+  <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se enviaba el código para compartir.</value>
+  </data>
+  <data name="DialogSendShareCodeWarning" xml:space="preserve">
+    <value>Vas a enviar el código para compartir la repetición a {0}.</value>
+  </data>
+  <data name="DialogSelectThirdParty" xml:space="preserve">
+    <value>Selecciona la aplicación de terceros</value>
+  </data>
+  <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
+    <value>Mostrar detalles de la repetición en una aplicación de terceros</value>
+  </data>
+  <data name="DialogConfigurationCorrupted" xml:space="preserve">
+    <value>Tu archivo de configuración está corrupto. Por favor, reinicia la aplicación para restablecer tu configuración.</value>
+  </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE no encontrado. Por favor instálalo activándolo desde la configuración.</value>
+  </data>
+  <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
+    <value>Activa la carpeta raíz de la configuración del creador de vídeos</value>
+  </data>
+  <data name="EnableHlae" xml:space="preserve">
+    <value>Activar HLAE</value>
+  </data>
+  <data name="DialogEnableHlaeWarning" xml:space="preserve">
+    <value>Activar HLAE cambia la forma en la que el juego se inicial (cuando haces click en cualquier botón de "Ver").
+Usará la herramienta "Half-Life Advanced Effects" (HLAE), la cual es técnicamente un HACK.
+Úsala únicamente si sabes lo que estás haciendo Y para hacer cosas relacionadas con edición de vídeos.
+Si no sabes que es esto, o no tienes pensado hacer vídeos, haz click en cancelar.
+Si lo has activado, el juego se ejecuta con el parámetro "-insecure" (siempre), lo que significa que no podrás unirte a servidores protegidos por VAC y evitar un ban por VAC (SI TE CONECTAS A UN SERVIDOR SEGURO, RECIBIRÁS UN BAN). </value>
+  </data>
+  <data name="DialogHlaeNotFound" xml:space="preserve">
+    <value>Parece que HLAE no está instalado.
+¿Quieres instalarlo? (Si lo estás usando tienes que instalarlo primero para poder usarlo)</value>
+  </data>
+  <data name="DialogNewHlaeVersionAvailable" xml:space="preserve">
+    <value>Una nueva versión de HLAE está disponible.
+¿Quieres instalarla? (Se recomienda para evitar un posible crasheo debido a las actualizaciones de CSGO)</value>
+  </data>
+  <data name="DialogHlaeInstallationFailed" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se instalaba HLAE.</value>
+  </data>
+  <data name="DialogHlaeInstalled" xml:space="preserve">
+    <value>HLAE ha sido instalado.</value>
+  </data>
+  <data name="DialogHlaeRequired" xml:space="preserve">
+    <value>HLAE debe estar instalado para usarse.</value>
+  </data>
+  <data name="DialogHlaeUpdated" xml:space="preserve">
+    <value>HLAE ha sido actualizado.</value>
+  </data>
+  <data name="DialogHlaeUpdateFailed" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se actualizaba HLAE.</value>
+  </data>
+  <data name="NotificationInstallingHlae" xml:space="preserve">
+    <value>Instalando HLAE...</value>
+  </data>
+  <data name="NotificationUpdatingHlae" xml:space="preserve">
+    <value>Actualizando HLAE...</value>
+  </data>
+  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
+    <value>Por favor selecciona la localización de la carpeta raíz de HLAE.</value>
+  </data>
+  <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
+    <value>El jugador que estás siguiendo no está en esta repetición. Puedes cambiarlo desde la configuración (sección de cuenta) o verlo desde la tabla de puntuaciones.</value>
+  </data>
+  <data name="DemosListSize" xml:space="preserve">
+    <value>Tamaño de la lista de repeticiones</value>
+  </data>
+  <data name="ShowAllDemos" xml:space="preserve">
+    <value>Mostrar todas las repeticiones</value>
+  </data>
+  <data name="DialogErrorInvalidShareCode" xml:space="preserve">
+    <value>Código para compartir no válido</value>
+  </data>
+  <data name="ToolTipDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Descargar repetición mediante código para compartir</value>
+  </data>
+  <data name="ShareCode" xml:space="preserve">
+    <value>Código para compartir</value>
+  </data>
+  <data name="DialogMessageDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Vas a descargar una repetición mediante su código para compartir.
+
+Por favor introduce el código para compartir (ejemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</value>
+  </data>
+  <data name="DialogTitleDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Descargar repetición mediante el código para compartir.</value>
+  </data>
+  <data name="DialogDemoFromShareCodeNotAvailable" xml:space="preserve">
+    <value>El enlace de la repetición ha expirado o ya la tienes en tu carpeta de descargas.</value>
+  </data>
+  <data name="NotificationRetrievingDemoFromShareCode" xml:space="preserve">
+    <value>Recuperando información de la repetición...</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingDemoData" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se recuperaba la información de la repetición.</value>
+  </data>
+  <data name="HeaderEseaRws" xml:space="preserve">
+    <value>RWS</value>
+  </data>
+  <data name="HeaderToolTipEseaRws" xml:space="preserve">
+    <value>ESEA Round Win Share medio</value>
+  </data>
+  <data name="DialogErrorEseaDemosParsing" xml:space="preserve">
+    <value>Ha ocurrido un error mientras se analizaba la repetición {0}.
+Debido a que el origen de esta demo es ESEA, probablemente se debe a que el sistema de pug de ESEA detiene la grabación de la repetición de forma indebida.
+Este es un problema de ESEA, puede que tengas datos perdidos en esta repetición.</value>
+  </data>
+  <data name="HeaderAccuracy" xml:space="preserve">
+    <value>ACC (%)</value>
+  </data>
+  <data name="HeaderToolTipAccuracy" xml:space="preserve">
+    <value>Precisión (%)</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Precisión</value>
+  </data>
+  <data name="AccuracyFull" xml:space="preserve">
+    <value>% precisión (disparos / impactos)</value>
+  </data>
+  <data name="Hits" xml:space="preserve">
+    <value>Impactos</value>
+  </data>
 </root>

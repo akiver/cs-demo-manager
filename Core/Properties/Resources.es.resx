@@ -12,4 +12,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Rank1" xml:space="preserve">
+    <value>Plata I</value>
+  </data>
+  <data name="Rank10" xml:space="preserve">
+    <value>Maestro de Nova de Oro</value>
+  </data>
+  <data name="Rank11" xml:space="preserve">
+    <value>Guardián Maestro I</value>
+  </data>
+  <data name="Rank12" xml:space="preserve">
+    <value>Guardián Maestro II</value>
+  </data>
+  <data name="Rank13" xml:space="preserve">
+    <value>Guardián Maestro de Élite</value>
+  </data>
+  <data name="Rank14" xml:space="preserve">
+    <value>Guardián Maestro Distinguido</value>
+  </data>
+  <data name="Rank15" xml:space="preserve">
+    <value>Águila Legendaria</value>
+  </data>
+  <data name="Rank16" xml:space="preserve">
+    <value>Águila Legendaria Maestra</value>
+  </data>
+  <data name="Rank17" xml:space="preserve">
+    <value>Maestro Supremo de Primera Clase</value>
+  </data>
+  <data name="Rank18" xml:space="preserve">
+    <value>La Élite Mundial</value>
+  </data>
+  <data name="Rank2" xml:space="preserve">
+    <value>Plata II</value>
+  </data>
+  <data name="Rank3" xml:space="preserve">
+    <value>Plata III</value>
+  </data>
+  <data name="Rank4" xml:space="preserve">
+    <value>Plata IV</value>
+  </data>
+  <data name="Rank5" xml:space="preserve">
+    <value>Élite de Plata</value>
+  </data>
+  <data name="Rank6" xml:space="preserve">
+    <value>Maestro de Élite de Plata</value>
+  </data>
+  <data name="Rank7" xml:space="preserve">
+    <value>Nova de Oro I</value>
+  </data>
+  <data name="Rank8" xml:space="preserve">
+    <value>Nova de Oro II</value>
+  </data>
+  <data name="Rank9" xml:space="preserve">
+    <value>Nova de Oro III</value>
+  </data>
+  <data name="StatusToWatch" xml:space="preserve">
+    <value>Para ver</value>
+  </data>
+  <data name="StatusWatched" xml:space="preserve">
+    <value>Vista</value>
+  </data>
 </root>

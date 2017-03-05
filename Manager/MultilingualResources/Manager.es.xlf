@@ -901,26 +901,26 @@
         <trans-unit id="HeaderAssistsPerRound" translate="yes" xml:space="preserve">
           <source>APR</source>
           <target state="translated">APR</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Assists Per Round</note>
           <note from="MultilingualEditor" annotates="source" priority="4">Asistencias por ronda</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Assists Per Round</note>
         </trans-unit>
         <trans-unit id="HeaderAvarageDamagesPerPlayer" translate="yes" xml:space="preserve">
           <source>ADP</source>
           <target state="translated">ADP</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Average Damages Per Player</note>
           <note from="MultilingualEditor" annotates="source" priority="4">Daño medio por jugador</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Average Damages Per Player</note>
         </trans-unit>
         <trans-unit id="HeaderDeaths" translate="yes" xml:space="preserve">
           <source>D</source>
           <target state="translated">D</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Deaths</note>
           <note from="MultilingualEditor" annotates="source" priority="4">Muertes</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Deaths</note>
         </trans-unit>
         <trans-unit id="HeaderEntryKills" translate="yes" xml:space="preserve">
           <source>EK</source>
           <target state="translated">EK</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Entry Kills</note>
           <note from="MultilingualEditor" annotates="source" priority="4">Eliminaciones de entrada</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Entry Kills</note>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
           <source>EV CT ($)</source>
@@ -940,8 +940,8 @@
         <trans-unit id="HeaderKills" translate="yes" xml:space="preserve">
           <source>K</source>
           <target state="translated">K</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Kills</note>
           <note from="MultilingualEditor" annotates="source" priority="4">Eliminaciones</note>
+          <note from="MultilingualBuild" annotates="source" priority="2">Kills</note>
         </trans-unit>
         <trans-unit id="HeaderOverwatch" translate="yes" xml:space="preserve">
           <source>OW</source>
@@ -3230,8 +3230,7 @@ Tienes que eliminarlo de tu lista de cuentas para poder añadirlo a tu lista bla
         </trans-unit>
         <trans-unit id="Sides" translate="yes" xml:space="preserve">
           <source>Sides</source>
-          <target state="needs-review-translation">Bandos</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Context is critical here. If it means sides, as in CT or T, it's right. If it means sides of the body, it should be "Lados"</note>
+          <target state="final">Bandos</target>
         </trans-unit>
         <trans-unit id="Stomach" translate="yes" xml:space="preserve">
           <source>Stomach</source>
@@ -3339,9 +3338,7 @@ Mensaje de error:
         </trans-unit>
         <trans-unit id="Probation" translate="yes" xml:space="preserve">
           <source>Probation</source>
-          <target state="needs-review-translation">A prueba</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Context for this?</note>
-          <note from="MultilingualEditor" annotates="source" priority="4">The current translation means "on trial"</note>
+          <target state="final">A prueba</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTotalMatchesTime" translate="yes" xml:space="preserve">
           <source>Total Matches Time (hours / minutes)</source>
