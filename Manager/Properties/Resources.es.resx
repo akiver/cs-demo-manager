@@ -1934,7 +1934,7 @@ Puedes encontrar más información en {0}.</value>
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
     <value>Ha ocurrido un error mientras se analizaba la repetición {0}.
 La repetición parece ser demasiado antigua, si no lo es por favor envia un correo con la repetición adjunta.
-Puedes encontrar más información en http://csgo-demos-manager.com.</value>
+Puedes encontrar más información en {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Este mapa no soporta esta característica.</value>

@@ -1934,7 +1934,7 @@
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
     <value>产生了一个错误-当分析demo {0}时
 这个demo可能太旧了。如果不是请邮件附件发送demo
-你可以在http://csgo-demos-manager.com.找到更多信息</value>
+你可以在{1}.找到更多信息</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>这个地图不支持该功能</value>

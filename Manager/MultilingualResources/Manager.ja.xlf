@@ -2590,10 +2590,10 @@ You can find more information on {0}.</target>
         <trans-unit id="DialogErrorWhileAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>An error occured while analyzing the demo {0}.
 The demo may be too old, if not please send an email with the attached demo.
-You can find more information on http://csgo-demos-manager.com.</source>
+You can find more information on {1}.</source>
           <target state="new">An error occured while analyzing the demo {0}.
 The demo may be too old, if not please send an email with the attached demo.
-You can find more information on http://csgo-demos-manager.com.</target>
+You can find more information on {1}.</target>
         </trans-unit>
         <trans-unit id="DialogMapNotSupported" translate="yes" xml:space="preserve">
           <source>This map doesn't support this feature.</source>

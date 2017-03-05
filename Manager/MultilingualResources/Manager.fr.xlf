@@ -2584,7 +2584,7 @@ Vous pouvez trouver plus d'informations sur {0}.</target>
         <trans-unit id="DialogErrorWhileAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>An error occured while analyzing the demo {0}.
 The demo may be too old, if not please send an email with the attached demo.
-You can find more information on http://csgo-demos-manager.com.</source>
+You can find more information on {1}.</source>
           <target state="final">Use erreur s'est produite pendant l'analyse de la démo {0}.
 Cette démo est peut être trop vieille.
 Si ce n'est pas le cas, merci de l'envoyer par email à l'adresse indiquée sur {1}.</target>

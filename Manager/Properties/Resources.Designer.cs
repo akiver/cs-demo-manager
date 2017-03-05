@@ -1350,7 +1350,7 @@ namespace Manager.Properties {
         /// <summary>
         ///   Looks up a localized string similar to An error occured while analyzing the demo {0}.
         ///The demo may be too old, if not please send an email with the attached demo.
-        ///You can find more information on http://csgo-demos-manager.com..
+        ///You can find more information on {1}..
         /// </summary>
         public static string DialogErrorWhileAnalyzingDemo {
             get {

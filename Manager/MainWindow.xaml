@@ -584,13 +584,13 @@
 								</Hyperlink>
 								<Run Text="{x:Static properties:Resources.OrSendAn}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
-										   CommandParameter="mailto:ys.renaud@gmail.com">
+										   CommandParameter="mailto:contact@csgo-demos-manager.com">
 									<Run Text="{x:Static properties:Resources.Email}" />
 									<Hyperlink.ContextMenu>
 										<ContextMenu>
 											<MenuItem Header="{x:Static properties:Resources.CopyEmailAddress}"
 															   Command="{Binding CopyTextCommand}"
-															   CommandParameter="ys.renaud@gmail.com">
+															   CommandParameter="contact@csgo-demos-manager.com">
 											</MenuItem>
 										</ContextMenu>
 									</Hyperlink.ContextMenu>
@@ -599,7 +599,7 @@
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
 								<Run Text="{x:Static properties:Resources.WantSayThank}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
-										   CommandParameter="http://csgo-demos-manager.com/donate">
+										   CommandParameter="https://csgo-demos-manager.com/donate">
 									<Run Text="{x:Static properties:Resources.Donation}" />
 								</Hyperlink><Run Text="."/>
 								<LineBreak />
@@ -608,8 +608,8 @@
 									   Foreground="{StaticResource LightRedColorBrush}">
 								<Run Text="{x:Static properties:Resources.AlwaysDownload}" />
 								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
-										   CommandParameter="http://csgo-demos-manager.com">
-									 http://csgo-demos-manager.com
+										   CommandParameter="https://csgo-demos-manager.com">
+									 https://csgo-demos-manager.com
 								</Hyperlink><Run Text="." />
 							</TextBlock>
 							<TextBlock Text="{x:Static properties:Resources.Contributors}"

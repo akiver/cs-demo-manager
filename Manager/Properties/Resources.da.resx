@@ -1935,7 +1935,7 @@ Du kan finde mere information på </value>
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
     <value>En fejl skete under analyseringen af
 Demoen kan være for gammel, hvis det ikke er tilfældet send den venligst til mig i en emil.
-du kan finde mere information på http://csgo-demos-manager.com.</value>
+du kan finde mere information på {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Denne bane understøtter ikke denne funktion</value>

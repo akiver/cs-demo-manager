@@ -1,14 +1,14 @@
 # CSGO Demos Manager #
 
 CSGO Demos Manager is an application to manage replays from the game Counter-Strike: Global Offensive.
-You can download the last release from http://csgo-demos-manager.com.
+You can download the last release from https://csgo-demos-manager.com.
 
 You can follow [@CSGODemoManager](https://twitter.com/CSGODemoManager) on Twitter to keep updated on releases.
 
 ## Preview ##
 
-![preview](http://csgo-demos-manager.com/images/listing.jpg)
-More screenshots and video are available at [http://csgo-demos-manager.com](http://csgo-demos-manager.com).
+![preview](https://csgo-demos-manager.com/images/listing.jpg)
+More screenshots and video are available at [https://csgo-demos-manager.com](https://csgo-demos-manager.com).
 
 ## Features ##
 - Generate data from demos (kills, deaths, round stats, damages...)
@@ -91,7 +91,7 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 1. Install
 2. Download the zip
 3. Edit the .xlf files of your language ()
-4. Send me the .xlf files at ys.renaud@gmail.com
+4. Send me the .xlf files at contact@csgo-demos-manager.com
 
 #### How-to translate step by step
 

@@ -2074,7 +2074,7 @@ You can find more information on {0}.</value>
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
     <value>An error occured while analyzing the demo {0}.
 The demo may be too old, if not please send an email with the attached demo.
-You can find more information on http://csgo-demos-manager.com.</value>
+You can find more information on {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>This map doesn't support this feature.</value>
