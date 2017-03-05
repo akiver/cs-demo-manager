@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
@@ -14,6 +14,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 			Headers = new Dictionary<string, CellType>(){
 				{ "Name", CellType.String },
 				{ "SteamID", CellType.String },
+				{ "Team", CellType.String },
 				{ "Match", CellType.Numeric },
 				{ "Kills", CellType.Numeric },
 				{ "Assists", CellType.Numeric },
@@ -168,6 +169,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 					int columnNumber = 0;
 					SetCellValue(row, columnNumber++, CellType.String, keyValuePair.Key.Name);
 					SetCellValue(row, columnNumber++, CellType.String, keyValuePair.Key.SteamId);
+					SetCellValue(row, columnNumber++, CellType.String, keyValuePair.Key.TeamName);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.MatchCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.KillCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.AssistCount);
