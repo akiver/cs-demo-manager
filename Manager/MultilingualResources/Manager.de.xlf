@@ -2033,7 +2033,7 @@
         </trans-unit>
         <trans-unit id="Draw" translate="yes" xml:space="preserve">
           <source>Draw</source>
-          <target state="final">Zeichen</target>
+          <target state="final">Unentschieden</target>
         </trans-unit>
         <trans-unit id="Duels" translate="yes" xml:space="preserve">
           <source>Duels</source>
