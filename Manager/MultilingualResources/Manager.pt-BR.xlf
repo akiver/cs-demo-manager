@@ -2049,7 +2049,7 @@
         </trans-unit>
         <trans-unit id="Draw" translate="yes" xml:space="preserve">
           <source>Draw</source>
-          <target state="final">Desenhar</target>
+          <target state="final">Empate</target>
         </trans-unit>
         <trans-unit id="Duels" translate="yes" xml:space="preserve">
           <source>Duels</source>
@@ -3386,23 +3386,23 @@ Mensagem de Erro:
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="new">No {0} found for this selection.</target>
+          <target state="new">Nenhum {0} encontrado nessa seleção.</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
-          <target state="new">Shots</target>
+          <target state="new">Tiros</target>
         </trans-unit>
         <trans-unit id="DialogDemoShareCodeUnavailable" translate="yes" xml:space="preserve">
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
-          <target state="new">This demo is not from Valve matchmaking servers or the .info file is missing.</target>
+          <target state="new">Essa demo não é de um servidor do matchmaking da valve ou o arquivo .info não existe</target>
         </trans-unit>
         <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
           <source>Share code copied to clipboard.</source>
-          <target state="new">Share code copied to clipboard.</target>
+          <target state="new">Copiar o código de compartilhamento para o clipboard.</target>
         </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
-          <target state="new">Copy share code</target>
+          <target state="new">Copia o código de compartilhamento</target>
         </trans-unit>
         <trans-unit id="ShowOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show on third party application</source>
@@ -3410,23 +3410,23 @@ Mensagem de Erro:
         </trans-unit>
         <trans-unit id="DialogShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</source>
-          <target state="new">Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</target>
+          <target state="new">Código de compartilhamento não disponível. Funciona apenas para demos do matchmaking de servidores da Valve e se o arquivo .info existir.</target>
         </trans-unit>
         <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
           <source>Yes and don't ask next time</source>
-          <target state="new">Yes and don't ask next time</target>
+          <target state="new">Sim, e não pergunte na próxima vez</target>
         </trans-unit>
         <trans-unit id="DialogSendThirdPartyConfirmation" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}. Do you want to continue?</source>
-          <target state="new">You are going to send the demo's share code to {0}. Do you want to continue?</target>
+          <target state="new">Voce está preste a mandar o código de compartilhamento da demo para {0}. Gostaria de continuar?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileSendingShareCode" translate="yes" xml:space="preserve">
           <source>An error occured while sending the share code.</source>
-          <target state="new">An error occured while sending the share code.</target>
+          <target state="new">Ocorreu um erro enquanto o código de compartilhamento era enviado.</target>
         </trans-unit>
         <trans-unit id="DialogSendShareCodeWarning" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}.</source>
-          <target state="new">You are going to send the demo's share code to {0}.</target>
+          <target state="new">Você irá mandar o código de comaprtilhaemnto da demo para {0}.</target>
         </trans-unit>
         <trans-unit id="DialogSelectThirdParty" translate="yes" xml:space="preserve">
           <source>Select third party application</source>
@@ -3438,11 +3438,11 @@ Mensagem de Erro:
         </trans-unit>
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
-          <target state="new">Your configuration file is corrupted. Please restart the application to reset your configuration.</target>
+          <target state="new">O arquivo com suas configurações está corrompido. Por favor, reinicie o programa para resetar suas configurações.</target>
         </trans-unit>
         <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
           <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
+          <target state="new">HLAE não encontrado. Por favor istale ativando-o nas configurações.</target>
         </trans-unit>
         <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
           <source>Enable movie making config parent folder</source>
@@ -3467,41 +3467,41 @@ Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas 
         <trans-unit id="DialogHlaeNotFound" translate="yes" xml:space="preserve">
           <source>It looks like HLAE isn't installed.
 Do you want to install it? (If you are using it you have to install it first to be able to use it)</source>
-          <target state="new">It looks like HLAE isn't installed.
-Do you want to install it? (If you are using it you have to install it first to be able to use it)</target>
+          <target state="new">Parece que o HALE não está instalado.
+Gostaria de instala-li? (Se você o está usando, seria preciso instalalo antes para ser capaz de utiliza-lo)</target>
         </trans-unit>
         <trans-unit id="DialogNewHlaeVersionAvailable" translate="yes" xml:space="preserve">
           <source>A new HLAE version is avalailable.
 Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</source>
-          <target state="new">A new HLAE version is avalailable.
-Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</target>
+          <target state="new">Uma nova versão do HLAE está disponível.
+Gostaria de instala-lo? (É recomendado para evitar possíveis problemass devido a atualizações no CSGO)</target>
         </trans-unit>
         <trans-unit id="DialogHlaeInstallationFailed" translate="yes" xml:space="preserve">
           <source>An error occured while installing HLAE.</source>
-          <target state="new">An error occured while installing HLAE.</target>
+          <target state="new">Um erro ocorreu enquanto o HLAE era instalado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeInstalled" translate="yes" xml:space="preserve">
           <source>HLAE has been installed.</source>
-          <target state="new">HLAE has been installed.</target>
+          <target state="new">O HLAE foi instalado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeRequired" translate="yes" xml:space="preserve">
           <source>HLAE needs to be installed to use it.</source>
-          <target state="new">HLAE needs to be installed to use it.</target>
+          <target state="new">O HLAE precisa estar isntalado para ser utilizado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeUpdated" translate="yes" xml:space="preserve">
           <source>HLAE has been updated.</source>
-          <target state="new">HLAE has been updated.</target>
+          <target state="new">O HLAE foi atualizado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeUpdateFailed" translate="yes" xml:space="preserve">
           <source>An error occured while updating HLAE.</source>
-          <target state="new">An error occured while updating HLAE.</target>
+          <target state="new">Ocorreu um erro enquanto o HLAE era atualizado.</target>
         </trans-unit>
         <trans-unit id="NotificationInstallingHlae" translate="yes" xml:space="preserve">
           <source>Installing HLAE...</source>
-          <target state="new">Installing HLAE...</target>
+          <target state="new">Instalando o HLAE...</target>
         </trans-unit>
         <trans-unit id="NotificationUpdatingHlae" translate="yes" xml:space="preserve">
-          <source>Updating HLAE...</source>
+          <source>Atualizando o HLAE...</source>
           <target state="new">Updating HLAE...</target>
         </trans-unit>
         <trans-unit id="DialogSelectHlaeConfigParentFolderLocation" translate="yes" xml:space="preserve">
@@ -3522,23 +3522,23 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
         </trans-unit>
         <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
           <source>Invalid share code</source>
-          <target state="new">Invalid share code</target>
+          <target state="new">Código de compartilhaemnto inválido</target>
         </trans-unit>
         <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download a demo from share code</source>
-          <target state="new">Download a demo from share code</target>
+          <target state="new">fazer o download da demo pelo código de compartilhamento</target>
         </trans-unit>
         <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
           <source>Share code</source>
-          <target state="new">Share code</target>
+          <target state="new">Compartilhar cóigo</target>
         </trans-unit>
         <trans-unit id="DialogMessageDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>You are going to download a demo from its share code.
 
 Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</source>
-          <target state="new">You are going to download a demo from its share code.
+          <target state="new">Você vai fazer o download da demo por um código de compartilhamento.
 
-Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
+Por favor, entre com o código de compartilhamento (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
         </trans-unit>
         <trans-unit id="DialogTitleDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download demo from share code</source>
