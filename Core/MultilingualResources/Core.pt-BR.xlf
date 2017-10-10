@@ -120,11 +120,11 @@
         </trans-unit>
         <trans-unit id="Rank0" translate="yes" xml:space="preserve">
           <source>None</source>
-          <target state="translated">Nenhum</target>
+          <target state="final">Nenhum</target>
         </trans-unit>
         <trans-unit id="Rank1" translate="yes" xml:space="preserve">
           <source>Silver I</source>
-          <target state="translated">Prata I</target>
+          <target state="final">Prata I</target>
         </trans-unit>
         <trans-unit id="Rank10" translate="yes" xml:space="preserve">
           <source>Gold Nova Master</source>

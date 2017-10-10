@@ -8,7 +8,7 @@
       <group id="SERVICES/PROPERTIES/RESOURCES.RESX" datatype="resx">
         <trans-unit id="Bomb" translate="yes" xml:space="preserve">
           <source>Bomb</source>
-          <target state="translated">Bomba</target>
+          <target state="final">Bomba</target>
         </trans-unit>
         <trans-unit id="colors" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
@@ -16,71 +16,71 @@
         </trans-unit>
         <trans-unit id="Decoy" translate="yes" xml:space="preserve">
           <source>Decoy</source>
-          <target state="translated">Decoy</target>
+          <target state="final">Decoy</target>
         </trans-unit>
         <trans-unit id="DefusedTheBombOnBombSite" translate="yes" xml:space="preserve">
           <source>{0} defused the bomb on bomb site {1}</source>
-          <target state="translated">{0} Desarmou a bomba no bomb {1}</target>
+          <target state="final">{0} Desarmou a bomba no bomb {1}</target>
         </trans-unit>
         <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
           <source>Flashbang</source>
-          <target state="translated">Flashbang</target>
+          <target state="final">Flashbang</target>
         </trans-unit>
         <trans-unit id="HE" translate="yes" xml:space="preserve">
           <source>HE</source>
-          <target state="translated">HE</target>
+          <target state="final">HE</target>
         </trans-unit>
         <trans-unit id="Killed" translate="yes" xml:space="preserve">
           <source>{0} killed {1}</source>
-          <target state="translated">{0} assasinou {1}</target>
+          <target state="final">{0} assasinou {1}</target>
         </trans-unit>
         <trans-unit id="Kills" translate="yes" xml:space="preserve">
           <source>Kills</source>
-          <target state="translated">Mortes</target>
+          <target state="final">Mortes</target>
         </trans-unit>
         <trans-unit id="Molotov" translate="yes" xml:space="preserve">
           <source>Molotov</source>
-          <target state="translated">Molotov</target>
+          <target state="final">Molotov</target>
         </trans-unit>
         <trans-unit id="PlantedTheBombOnBombSite" translate="yes" xml:space="preserve">
           <source>{0} planted the bomb on bomb site {1}</source>
-          <target state="translated">{0} plantou a bomba no bomb {1}</target>
+          <target state="final">{0} plantou a bomba no bomb {1}</target>
         </trans-unit>
         <trans-unit id="Smoke" translate="yes" xml:space="preserve">
           <source>Smoke</source>
-          <target state="translated">Smoke</target>
+          <target state="final">Smoke</target>
         </trans-unit>
         <trans-unit id="steam_api_key" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
         <trans-unit id="TheBombExplodedOnBombSite" translate="yes" xml:space="preserve">
           <source>The bomb exploded on bomb site {0}</source>
-          <target state="translated">A bomba explodiu no bomb {0}</target>
+          <target state="final">A bomba explodiu no bomb {0}</target>
         </trans-unit>
         <trans-unit id="ThrownDecoy" translate="yes" xml:space="preserve">
           <source>{0} thrown a decoy</source>
-          <target state="translated">{0} jogou uma decoy</target>
+          <target state="final">{0} jogou uma decoy</target>
         </trans-unit>
         <trans-unit id="ThrownFlashbang" translate="yes" xml:space="preserve">
           <source>{0} thrown a flashbang</source>
-          <target state="translated">{0} jogou uma flashbang</target>
+          <target state="final">{0} jogou uma flashbang</target>
         </trans-unit>
         <trans-unit id="ThrownHeGrenade" translate="yes" xml:space="preserve">
           <source>{0} thrown a HE grenade</source>
-          <target state="translated">{0} jogou uma granada HE</target>
+          <target state="final">{0} jogou uma granada HE</target>
         </trans-unit>
         <trans-unit id="ThrownIncendiary" translate="yes" xml:space="preserve">
           <source>{0} thrown an incendiary</source>
-          <target state="translated">{0} jogou uma incendiária</target>
+          <target state="final">{0} jogou uma incendiária</target>
         </trans-unit>
         <trans-unit id="ThrownMolotov" translate="yes" xml:space="preserve">
           <source>{0} thrown a molotov</source>
-          <target state="translated">{0} Jogou uma molotov</target>
+          <target state="final">{0} Jogou uma molotov</target>
         </trans-unit>
         <trans-unit id="ThrownSmoke" translate="yes" xml:space="preserve">
           <source>{0} thrown a smoke</source>
-          <target state="translated">{0} jogou uma smoke</target>
+          <target state="final">{0} jogou uma smoke</target>
         </trans-unit>
       </group>
     </body>
