@@ -1487,7 +1487,7 @@
     <value>Victorias</value>
   </data>
   <data name="WonRate" xml:space="preserve">
-    <value>Ratio de vicotiras</value>
+    <value>Ratio de victorias</value>
   </data>
   <data name="HeaderOneVersusX" xml:space="preserve">
     <value>1VX</value>
@@ -1661,10 +1661,10 @@
     <value>% semanal</value>
   </data>
   <data name="Win" xml:space="preserve">
-    <value>Vicotria</value>
+    <value>Victoria</value>
   </data>
   <data name="WinPercent" xml:space="preserve">
-    <value>% de vicotrias</value>
+    <value>% de victorias</value>
   </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancelar</value>
