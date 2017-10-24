@@ -22,6 +22,7 @@ namespace Services.Concrete.ThirdParties
 
 			using (var client = new HttpClient())
 			{
+				ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 				try
 				{
 					Dictionary<string, string> parameters = new Dictionary<string, string> {
