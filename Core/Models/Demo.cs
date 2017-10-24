@@ -87,9 +87,9 @@ namespace Core.Models
 		private string _path;
 
 		/// <summary>
-		/// Indicates if there are at least 1 banned player (OW / VAC)
+		/// Number of cheater in the demo (based on VAC report so a no CSGO ban count as a ban)
 		/// </summary>
-		private bool _hasCheater;
+		private int _cheaterCounter;
 
 		/// <summary>
 		/// Win status for the selected account
@@ -524,11 +524,17 @@ namespace Core.Models
 			set { Set(() => Path, ref _path, value); }
 		}
 
-		[JsonProperty("has_cheater")]
-		public bool HasCheater
+		/// <summary>
+		/// Indicates if there are at least 1 banned player (OW / VAC)
+		/// </summary>
+		[JsonIgnore]
+		public bool HasCheater => _cheaterCounter > 0;
+
+		[JsonProperty("cheater_count")]
+		public int CheaterCount
 		{
-			get { return _hasCheater; }
-			set { Set(() => HasCheater, ref _hasCheater, value); }
+			get { return _cheaterCounter; }
+			set { Set(() => CheaterCount, ref _cheaterCounter, value); }
 		}
 
 		/// <summary>
@@ -1132,7 +1138,7 @@ namespace Core.Models
 				TwoKillCount = TwoKillCount,
 				OneKillCount = OneKillCount,
 				EntryKillCount = EntryKillCount,
-				HasCheater = HasCheater,
+				CheaterCount = CheaterCount,
 				FlashbangThrownCount = FlashbangThrownCount,
 				HeadshotCount = HeadshotCount,
 				HeThrownCount = HeThrownCount,
@@ -1329,7 +1335,7 @@ namespace Core.Models
 				FlashbangThrownCount = 0;
 				FiveKillCount = 0;
 				FourKillCount = 0;
-				HasCheater = false;
+				CheaterCount = 0;
 				HeadshotCount = 0;
 				HeThrownCount = 0;
 				HitCount = 0;

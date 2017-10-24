@@ -62,16 +62,9 @@ namespace Services.Concrete
 					{
 						if (IgnoreLaterBan && DateTime.Now.AddDays(-suspect.DaySinceLastBanCount) < demo.Date)
 							continue;
-						if (suspect.GameBanCount > 0)
-						{
-							demo.HasCheater = true;
-							cheater.IsOverwatchBanned = true;
-						}
-						if (suspect.VacBanned)
-						{
-							demo.HasCheater = true;
-							cheater.IsVacBanned = true;
-						}
+						if (suspect.GameBanCount > 0 || suspect.VacBanned) demo.CheaterCount++;
+						cheater.IsOverwatchBanned = suspect.GameBanCount > 0;
+						cheater.IsVacBanned = suspect.VacBanned;
 					}
 				}
 			}

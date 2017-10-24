@@ -569,10 +569,12 @@
 										Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBanColumns, Converter={StaticResource BooleanToVisibilityConverter}}">
 					<DataGridTemplateColumn.CellTemplate>
 						<DataTemplate>
-							<TextBlock Text="{x:Static properties:Resources.Yes}"
-									   Background="{StaticResource RedColorBrush}"
+							<TextBlock Background="{StaticResource RedColorBrush}"
 									   TextAlignment="Center"
-									   Visibility="{Binding HasCheater, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+									   Visibility="{Binding HasCheater, Converter={StaticResource BooleanToVisibilityConverter}}">
+								<Run Text="{x:Static properties:Resources.Yes}" />
+								<Run Text="{Binding CheaterCount, StringFormat='({0})'}" />
+							</TextBlock>
 						</DataTemplate>
 					</DataGridTemplateColumn.CellTemplate>
 				</DataGridTemplateColumn>
