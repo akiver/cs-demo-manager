@@ -246,6 +246,7 @@ namespace Services.Concrete.Analyzer
 					return;
 				}
 
+				killEvent.KillerTeam = killer.TeamName;
 				killEvent.KillerIsControllingBot = e.Killer.SteamID != 0 && killer.IsControllingBot;
 				ProcessTradeKill(killEvent);
 			}
@@ -255,6 +256,7 @@ namespace Services.Concrete.Analyzer
 				// suicide, probably because he missed the jump from upper B on train :)
 				if (e.Killer == null) killed.SuicideCount++;
 				killEvent.KilledIsControllingBot = e.Victim.SteamID != 0 && killed.IsControllingBot;
+				killEvent.KilledTeam = killed.TeamName;
 			}
 
 			// Human killed human

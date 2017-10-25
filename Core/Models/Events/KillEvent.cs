@@ -36,9 +36,15 @@ namespace Core.Models.Events
 		[JsonConverter(typeof(SideToStringConverter))]
 		public Side KillerSide { get; set; }
 
+		[JsonProperty("killer_team")]
+		public string KillerTeam { get; set; }
+
 		[JsonProperty("killed_side")]
 		[JsonConverter(typeof(SideToStringConverter))]
 		public Side KilledSide { get; set; }
+
+		[JsonProperty("killed_team")]
+		public string KilledTeam { get; set; }
 
 		[JsonProperty("killer_name")]
 		public string KillerName { get; set; }

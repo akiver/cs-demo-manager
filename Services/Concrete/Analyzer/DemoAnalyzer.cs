@@ -371,6 +371,7 @@ namespace Services.Concrete.Analyzer
 				KilledSide = e.Victim.Team.ToSide(),
 				KilledSteamId = e.Victim.SteamID,
 				KilledName = e.Victim.Name,
+				KilledTeam = killed.TeamName,
 				KillerVelocityX = e.Killer?.Velocity.X ?? 0,
 				KillerVelocityY = e.Killer?.Velocity.Y ?? 0,
 				KillerVelocityZ = e.Killer?.Velocity.Z ?? 0,
@@ -399,6 +400,7 @@ namespace Services.Concrete.Analyzer
 
 			if (killer != null )
 			{
+				killEvent.KillerTeam = killer.TeamName;
 				// add kill to the current round only if it's not a TK / suicide
 				if (e.Killer.Team != e.Victim.Team)
 				{
