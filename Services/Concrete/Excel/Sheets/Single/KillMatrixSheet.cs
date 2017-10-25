@@ -25,7 +25,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 
 				// first row containing victims name
 				IRow firstRow = Sheet.CreateRow(0);
-				SetCellValue(firstRow, 0, CellType.String, "Killer\\Killed");
+				SetCellValue(firstRow, 0, CellType.String, "Killer\\Victim");
 
 				// concat teams players to have a more logic matrix pattern
 				List<Player> players = new List<Player>(Demo.TeamCT.Players).Concat(Demo.TeamT.Players).ToList();

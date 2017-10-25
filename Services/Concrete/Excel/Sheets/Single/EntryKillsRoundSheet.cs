@@ -13,8 +13,8 @@ namespace Services.Concrete.Excel.Sheets.Single
 				{ "Number", CellType.Numeric },
 				{ "Killer Name", CellType.String},
 				{ "Killer SteamID", CellType.String },
-				{ "Killed Name", CellType.String },
-				{ "Killed SteamID", CellType.String },
+				{ "Victim Name", CellType.String },
+				{ "Victim SteamID", CellType.String },
 				{ "Weapon", CellType.String },
 				{ "Round Won", CellType.String }
 			};

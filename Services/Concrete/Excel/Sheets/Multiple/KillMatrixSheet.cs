@@ -25,7 +25,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 
 				// first row containing victims name
 				IRow firstRow = Sheet.CreateRow(0);
-				SetCellValue(firstRow, 0, CellType.String, "Killer\\Killed");
+				SetCellValue(firstRow, 0, CellType.String, "Killer\\Victim");
 
 				int columnCount = 1;
 				int rowCount = 1;
