@@ -44,7 +44,9 @@
 			<Button Command="{Binding SettingsFlyoutOpenedCommand}"
 					ToolTip="{x:Static properties:Resources.ToolTipDisplaySettings}"
 					IsEnabled="{Binding Source={StaticResource Locator}, Path=DemoList.IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-					Content="{x:Static properties:Resources.Settings}" />
+					Content="{x:Static properties:Resources.Settings}"
+					Foreground="Black"
+					FontWeight="Bold" />
 		</controls:WindowCommands>
 	</controls:MetroWindow.RightWindowCommands>
 
