@@ -219,14 +219,8 @@ namespace Manager.ViewModel.Demos
 		public int NewBannedPlayerCount
 		{
 			get { return _newBannedPlayerCount; }
-			set
-			{
-				Set(() => NewBannedPlayerCount, ref _newBannedPlayerCount, value);
-				RaisePropertyChanged(() => NewBannedPlayerCountAsString);
-			}
+			set { Set(() => NewBannedPlayerCount, ref _newBannedPlayerCount, value); }
 		}
-
-		public string NewBannedPlayerCountAsString => string.Format(" ({0})", _newBannedPlayerCount);
 
 		public bool HasNotification
 		{

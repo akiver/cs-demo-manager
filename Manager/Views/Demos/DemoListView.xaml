@@ -338,19 +338,23 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipGoToSuspectsList}"
 							Command="{Binding ShowSuspectsCommand}">
-						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-							<Rectangle Width="15"
-									   Height="15"
-									   Fill="{StaticResource IdealForegroundColorBrush}">
-								<Rectangle.OpacityMask>
-									<VisualBrush Visual="{StaticResource appbar_people_profile}"
-												 Stretch="Fill" />
-								</Rectangle.OpacityMask>
-							</Rectangle>
-							<TextBlock Text="{x:Static properties:Resources.Suspects}"
-									   Style="{StaticResource ButtonTitleStyle}" />
-							<TextBlock Text="{Binding NewBannedPlayerCountAsString}" />
-						</StackPanel>
+						<controls:Badged Badge="{Binding Path=NewBannedPlayerCount}"
+										 BadgeBackground="{StaticResource LightWhiteBrush}"
+										 BadgeForeground="{StaticResource IdealForegroundColorBrush}">
+							<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+								<Rectangle Width="15"
+										   Height="15"
+										   Fill="{StaticResource IdealForegroundColorBrush}">
+									<Rectangle.OpacityMask>
+										<VisualBrush Visual="{StaticResource appbar_people_profile}"
+													 Stretch="Fill" />
+									</Rectangle.OpacityMask>
+								</Rectangle>
+								<TextBlock Text="{x:Static properties:Resources.Suspects}"
+										   Style="{StaticResource ButtonTitleStyle}"
+										   Margin="0 0 5 0" />
+							</StackPanel>
+						</controls:Badged>
 					</Button>
 
 					<Button Style="{DynamicResource GeneralButton}"
