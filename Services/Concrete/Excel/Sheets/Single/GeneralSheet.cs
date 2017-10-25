@@ -56,7 +56,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				{ "Hits", CellType.Numeric },
 				{ "Round", CellType.Numeric },
 				{ "Comment", CellType.String },
-				{ "Cheater", CellType.Boolean }
+				{ "Cheater", CellType.Numeric }
 			};
 			Demo = demo;
 			Sheet = workbook.CreateSheet("General");
@@ -114,7 +114,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.HitCount);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Rounds.Count);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.Comment);
-				SetCellValue(row, columnNumber, CellType.Boolean, Demo.HasCheater);
+				SetCellValue(row, columnNumber, CellType.Boolean, Demo.CheaterCount);
 			});
 		}
 	}
