@@ -11,15 +11,7 @@
 		<Setter Property="Template">
 		<Setter.Value>
 			<ControlTemplate TargetType="{x:Type ListViewItem}">
-				<Border BorderBrush="{TemplateBinding BorderBrush}"
-						BorderThickness="{TemplateBinding BorderThickness}"
-						Background="{TemplateBinding Background}"
-						Padding="{TemplateBinding Padding}"
-						SnapsToDevicePixels="true">
-					<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-									  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
-									  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-				</Border>
+				<ContentPresenter />
 				<ControlTemplate.Triggers>
 						<Trigger Property="IsEnabled"
 								 Value="false">
@@ -31,21 +23,18 @@
 	</Style>
 	
 	<DataTemplate x:Key="OvertimeScoreboardItemTemplate" DataType="{x:Type ListViewItem}">
-		<Grid HorizontalAlignment="Center">
-			<StackPanel Orientation="Horizontal">
-				<StackPanel.Resources>
-					<Style TargetType="TextBlock">
-						<Setter Property="FontSize"
-								Value="12"/>
-					</Style>
-				</StackPanel.Resources>
-				<TextBlock Text="Overtime " />
-				<TextBlock Text="{Binding Number}" />
-				<TextBlock Text=" : " />
-				<TextBlock Text="{Binding ScoreTeamCt}" />
-				<TextBlock Text=" - " />
-				<TextBlock Text="{Binding ScoreTeamT}" />
-			</StackPanel>
-		</Grid>
+		<StackPanel Orientation="Vertical">
+			<TextBlock Text="{Binding ScoreTeamCt}" Style="{StaticResource HalfScoreScoreboard}" />
+			<TextBlock Text="|" Style="{StaticResource HalfScoreScoreboard}" />
+			<TextBlock Text="{Binding ScoreTeamT}" Style="{StaticResource HalfScoreScoreboard}" />
+		</StackPanel>
 	</DataTemplate>
+
+	<ItemsPanelTemplate x:Key="ScoreboardItemsPanel">
+		<StackPanel
+			Orientation="Horizontal"
+			HorizontalAlignment="Center"
+			VerticalAlignment="Center"
+			ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+	</ItemsPanelTemplate>
 </ResourceDictionary>

@@ -43,17 +43,22 @@ namespace Services.Design
 			demo.Comment = "My comment";
 			demo.Status = AppSettings.DefaultStatus[0].Label;
 
-			Team teamCt = new Team();
-			teamCt.Name = "Team 1";
-			Team teamT = new Team();
-			teamCt.Name = "Team 2";
-
-			teamCt.Score = 16;
-			teamT.Score = 6;
-			teamCt.ScoreFirstHalf = 10;
-			teamCt.ScoreSecondHalf = 5;
-			teamT.ScoreFirstHalf = 6;
-			teamT.ScoreSecondHalf = 1;
+			Team teamCt = new Team
+			{
+				Name = "Team 1",
+				Score = 16,
+				ScoreFirstHalf = 10,
+				ScoreSecondHalf = 6,
+			};
+			Team teamT = new Team
+			{
+				Name = "Team 2",
+				Score = 6,
+				ScoreFirstHalf = 6,
+				ScoreSecondHalf = 0,
+			};
+			demo.TeamCT = teamCt;
+			demo.TeamT = teamT;
 
 			for (int i = 0; i < 10; i++)
 			{
@@ -121,8 +126,19 @@ namespace Services.Design
 			demo.MostEntryKillPlayer = demo.Players[r.Next(10)];
 			demo.MostHeadshotPlayer = demo.Players[r.Next(10)];
 			demo.MostKillingWeapon = Weapon.WeaponList[r.Next(30)];
-			demo.TeamCT = teamCt;
-			demo.TeamT = teamT;
+
+			demo.Overtimes.Add(new Overtime
+			{
+				ScoreTeamCt = 3,
+				Number = 1,
+				ScoreTeamT = 3,
+			});
+			demo.Overtimes.Add(new Overtime
+			{
+				ScoreTeamCt = 3,
+				Number = 2,
+				ScoreTeamT = 3,
+			});
 
 			return Task.FromResult(demo);
 		}
