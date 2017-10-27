@@ -28,6 +28,8 @@ namespace Core.Models.Source
 						return Properties.Resources.esl;
 					case PopFlash.NAME:
 						return Properties.Resources.popflash;
+					case Wanmei.NAME:
+						return Properties.Resources.wanmei;
 					default:
 						return Properties.Resources.valve;
 				}
@@ -54,6 +56,8 @@ namespace Core.Models.Source
 					return new PopFlash();
 				case Esl.NAME:
 					return new Esl();
+				case Wanmei.NAME:
+					return new Wanmei();
 				default:
 					return null;
 			}
@@ -70,6 +74,7 @@ namespace Core.Models.Source
 			// do not let POV source selectable
 			//new Pov(),
 			new Valve(),
+			new Wanmei(),
 		};
 	}
 }
