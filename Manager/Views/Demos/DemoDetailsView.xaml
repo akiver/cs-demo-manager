@@ -9,6 +9,7 @@
 			 xmlns:converters="clr-namespace:Manager.Converters"
 			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
 			 xmlns:properties="clr-namespace:Manager.Properties"
+			 xmlns:internals="clr-namespace:Manager.Internals"
 			 mc:Ignorable="d"
 			 Name="DetailsUserControl"
 			 d:DesignHeight="720"
@@ -776,7 +777,8 @@
 									  ItemsSource="{Binding PlayersTeam1Collection, IsAsync=True}"
 									  SelectedItem="{Binding SelectedPlayer}"
 									  Style="{StaticResource DataGridStyle}"
-									  RowStyle="{StaticResource DataGridRowPlayerStyle}">
+									  RowStyle="{StaticResource DataGridRowPlayerStyle}"
+									  internals:ScrollViewerHelper.UseHorizontalScrolling="True">
 								<DataGrid.Resources>
 									<converters:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 								</DataGrid.Resources>
@@ -1012,7 +1014,8 @@
 									  ItemsSource="{Binding PlayersTeam2Collection, IsAsync=True}"
 									  SelectedItem="{Binding SelectedPlayer}"
 									  RowStyle="{StaticResource DataGridRowPlayerStyle}"
-									  Style="{StaticResource DataGridStyle}">
+									  Style="{StaticResource DataGridStyle}"
+									  internals:ScrollViewerHelper.UseHorizontalScrolling="True">
 								<DataGrid.Resources>
 									<converters:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
 								</DataGrid.Resources>

@@ -172,6 +172,7 @@
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelect.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelectCollectionView.cs" />
+    <Compile Include="Internals\ScrollViewHelper.cs" />
     <Compile Include="Messages\ComboBoxMultiClosedMessage.cs" />
     <Compile Include="Messages\DownloadDemosMessage.cs" />
     <Compile Include="Messages\LoadDemoFromAppArgument.cs" />
