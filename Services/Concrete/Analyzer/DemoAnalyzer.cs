@@ -146,6 +146,7 @@ namespace Services.Concrete.Analyzer
 			{
 				case "valve":
 				case "popflash":
+				case Wanmei.NAME:
 					return new ValveAnalyzer(demo);
 				case "esea":
 					return new EseaAnalyzer(demo);
