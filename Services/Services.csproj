@@ -119,7 +119,9 @@
     <Compile Include="Concrete\Excel\Sheets\AbstractMultipleSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\AbstractSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\AbstractSingleSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\FlashMatrixTeamsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\GeneralSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\FlashMatrixPlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\KillMatrixSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\KillsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\MapsSheet.cs" />
@@ -133,6 +135,8 @@
     <Compile Include="Concrete\Excel\Sheets\Single\EntryHoldKillsTeamSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\EntryKillsRoundSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\EntryKillsTeamSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\FlashMatrixTeamsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\FlashMatrixPlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\GeneralSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\KillMatrixSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\KillsSheet.cs" />

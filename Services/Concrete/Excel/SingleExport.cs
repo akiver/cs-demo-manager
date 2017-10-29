@@ -31,6 +31,10 @@ namespace Services.Concrete.Excel
 
 		private KillMatrixSheet _killMatrixSheet;
 
+		private FlashMatrixPlayersSheet _flashMatrixPlayersSheet;
+
+		private FlashMatrixTeamsSheet _flashMatrixTeamsSheet;
+
 		public SingleExport(Demo demo)
 		{
 			_demo = demo;
@@ -62,6 +66,10 @@ namespace Services.Concrete.Excel
 			await _entryKillsTeamSheet.Generate();
 			_killMatrixSheet = new KillMatrixSheet(Workbook, _demo);
 			await _killMatrixSheet.Generate();
+			_flashMatrixPlayersSheet = new FlashMatrixPlayersSheet(Workbook, _demo);
+			await _flashMatrixPlayersSheet.Generate();
+			_flashMatrixTeamsSheet = new FlashMatrixTeamsSheet(Workbook, _demo);
+			await _flashMatrixTeamsSheet.Generate();
 
 			return Workbook;
 		}

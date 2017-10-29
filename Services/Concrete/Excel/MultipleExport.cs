@@ -28,6 +28,10 @@ namespace Services.Concrete.Excel
 
 		private KillMatrixSheet _killMatrixSheet;
 
+		private FlashMatrixPlayersSheet _flashMatrixPlayersSheet;
+
+		private FlashMatrixTeamsSheet _flashMatrixTeamsSheet;
+
 		public MultipleExport(List<Demo> demos, long selectedStatsAccountSteamId = 0)
 		{
 			_demos = demos;
@@ -58,6 +62,10 @@ namespace Services.Concrete.Excel
 			await _killsSheet.Generate();
 			_killMatrixSheet = new KillMatrixSheet(Workbook, _demos);
 			await _killMatrixSheet.Generate();
+			_flashMatrixPlayersSheet = new FlashMatrixPlayersSheet(Workbook, _demos);
+			await _flashMatrixPlayersSheet.Generate();
+			_flashMatrixTeamsSheet = new FlashMatrixTeamsSheet(Workbook, _demos);
+			await _flashMatrixTeamsSheet.Generate();
 
 			return Workbook;
 		}

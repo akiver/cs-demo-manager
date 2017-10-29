@@ -51,5 +51,23 @@ namespace Services.Concrete.Excel.Sheets
 			cell.SetCellType(cellType);
 			cell.SetCellValue(value);
 		}
+
+		/// <summary>
+		/// Fill empty cells with a numeric value 0
+		/// </summary>
+		/// <param name="rowCount"></param>
+		/// <param name="columnCount"></param>
+		protected void FillEmptyCells(int rowCount, int columnCount)
+		{
+			for (int rowIndex = 0; rowIndex < rowCount; rowIndex++)
+			{
+				for (int columnIndex = 0; columnIndex < columnCount; columnIndex++)
+				{
+					IRow row = Sheet.GetRow(rowIndex);
+					ICell cell = row.GetCell(columnIndex);
+					if (cell == null) SetCellValue(row, columnIndex, CellType.Numeric, 0);
+				}
+			}
+		}
 	}
 }
