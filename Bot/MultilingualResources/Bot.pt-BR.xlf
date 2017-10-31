@@ -40,7 +40,7 @@
         </trans-unit>
         <trans-unit id="LaunchAtStartup" translate="yes" xml:space="preserve">
           <source>Launch at startup</source>
-          <target state="final">Iniciar automaticamente</target>
+          <target state="final">Iniciar com o Windows</target>
         </trans-unit>
         <trans-unit id="Quit" translate="yes" xml:space="preserve">
           <source>Quit</source>
@@ -68,7 +68,7 @@
         </trans-unit>
         <trans-unit id="UnableToStartBot" translate="yes" xml:space="preserve">
           <source>Unable to start the BOT.</source>
-          <target state="final">Não é possivel inicar o BOT.</target>
+          <target state="final">Não foi possivel inicar o BOT.</target>
         </trans-unit>
         <trans-unit id="Xhour" translate="yes" xml:space="preserve">
           <source>{0} hour</source>

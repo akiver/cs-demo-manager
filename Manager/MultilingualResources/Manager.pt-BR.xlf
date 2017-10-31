@@ -212,7 +212,7 @@
         </trans-unit>
         <trans-unit id="BrowseToErrorsFile" translate="yes" xml:space="preserve">
           <source>Browse to errors file</source>
-          <target state="final">Browse to errors file</target>
+          <target state="final">Navegar para os arquivos de erros</target>
         </trans-unit>
         <trans-unit id="HeaderCrouchKills" translate="yes" xml:space="preserve">
           <source>CK</source>
@@ -237,11 +237,11 @@
         </trans-unit>
         <trans-unit id="Clutch" translate="yes" xml:space="preserve">
           <source>Clutch</source>
-          <target state="final">Embreagem</target>
+          <target state="final">Clutch</target>
         </trans-unit>
         <trans-unit id="Clutches" translate="yes" xml:space="preserve">
           <source>Clutches</source>
-          <target state="final">Embreagens</target>
+          <target state="final">Clutches</target>
         </trans-unit>
         <trans-unit id="Columns" translate="yes" xml:space="preserve">
           <source>Columns</source>
@@ -261,7 +261,7 @@
         </trans-unit>
         <trans-unit id="CsgoExePath" translate="yes" xml:space="preserve">
           <source>csgo.exe path</source>
-          <target state="final">csgo.exe path</target>
+          <target state="final">Caminho csgo.exe</target>
         </trans-unit>
         <trans-unit id="CurrentAccountWatch" translate="yes" xml:space="preserve">
           <source>Current account used for watch (highlights / lowlights)</source>
@@ -305,7 +305,7 @@
         </trans-unit>
         <trans-unit id="Donation" translate="yes" xml:space="preserve">
           <source>donation</source>
-          <target state="final">diação</target>
+          <target state="final">doação</target>
         </trans-unit>
         <trans-unit id="Download" translate="yes" xml:space="preserve">
           <source>Download</source>
@@ -334,13 +334,11 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipment value CT</source>
-          <target state="needs-review-translation">Valor do equipamento da equipe 1</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valor do equipamento CT</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipment value T</source>
-          <target state="needs-review-translation">Valor do equipamento da equipe 2</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valor do equipamento T</target>
         </trans-unit>
         <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
           <source>Export custom data</source>
@@ -374,7 +372,7 @@
         </trans-unit>
         <trans-unit id="Fullscreen" translate="yes" xml:space="preserve">
           <source>Fullscreen</source>
-          <target state="final">Fullscreen</target>
+          <target state="final">Tela cheia </target>
         </trans-unit>
         <trans-unit id="Height" translate="yes" xml:space="preserve">
           <source>Height</source>
@@ -386,7 +384,7 @@
         </trans-unit>
         <trans-unit id="Hostname" translate="yes" xml:space="preserve">
           <source>Hostname</source>
-          <target state="final">Hostname</target>
+          <target state="final">Servidor</target>
         </trans-unit>
         <trans-unit id="HeaderHeadshots" translate="yes" xml:space="preserve">
           <source>HS</source>
@@ -395,7 +393,7 @@
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
           <source>Ignore ban occured before demo date</source>
-          <target state="final">Ignorar ban ocorrido antes a data da demo</target>
+          <target state="final">Ignorar ban ocorrido antes da data da demo</target>
         </trans-unit>
         <trans-unit id="ImportCustomData" translate="yes" xml:space="preserve">
           <source>Import custom data</source>
@@ -403,7 +401,7 @@
         </trans-unit>
         <trans-unit id="HeaderJumpKills" translate="yes" xml:space="preserve">
           <source>JK</source>
-          <target state="final">JK</target>
+          <target state="final">MP (Mortes pulando)</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Jump Kill</note>
         </trans-unit>
         <trans-unit id="JumpKills" translate="yes" xml:space="preserve">
@@ -442,7 +440,7 @@
         </trans-unit>
         <trans-unit id="Misc" translate="yes" xml:space="preserve">
           <source>Misc</source>
-          <target state="final">Misc</target>
+          <target state="final">Diversos</target>
         </trans-unit>
         <trans-unit id="MVP" translate="yes" xml:space="preserve">
           <source>MVP</source>
@@ -535,13 +533,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start money CT</source>
-          <target state="needs-review-translation">Dinheiro de incio do time 1</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Dinheiro inicial CT</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start money T</source>
-          <target state="needs-review-translation">Dinheiro de incio da equipe 2</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Dinheiro inicial T</target>
         </trans-unit>
         <trans-unit id="Status" translate="yes" xml:space="preserve">
           <source>Status</source>
@@ -549,7 +545,7 @@
         </trans-unit>
         <trans-unit id="Stop" translate="yes" xml:space="preserve">
           <source>Stop</source>
-          <target state="final">Para</target>
+          <target state="final">Parar</target>
         </trans-unit>
         <trans-unit id="SyncNicknames" translate="yes" xml:space="preserve">
           <source>Sync nicknames</source>
@@ -628,7 +624,7 @@
         </trans-unit>
         <trans-unit id="TradeDeath" translate="yes" xml:space="preserve">
           <source>Trade death</source>
-          <target state="final">Trade de morte</target>
+          <target state="final">Troca de morte</target>
         </trans-unit>
         <trans-unit id="TradeKill" translate="yes" xml:space="preserve">
           <source>Trade kill</source>
@@ -645,7 +641,7 @@
         </trans-unit>
         <trans-unit id="UseAccountForWatch" translate="yes" xml:space="preserve">
           <source>Use this account for watch</source>
-          <target state="final">Use essa conta para o assistir</target>
+          <target state="final">Use essa conta para assistir</target>
         </trans-unit>
         <trans-unit id="UseCutomLowlightHighlight" translate="yes" xml:space="preserve">
           <source>Use custom highlights / lowlights generation</source>
@@ -665,7 +661,7 @@
         </trans-unit>
         <trans-unit id="WinnerSide" translate="yes" xml:space="preserve">
           <source>WS</source>
-          <target state="final">WS</target>
+          <target state="final">LG</target>
         </trans-unit>
         <trans-unit id="Yes" translate="yes" xml:space="preserve">
           <source>Yes</source>
@@ -765,7 +761,7 @@
         </trans-unit>
         <trans-unit id="LabelHostname" translate="yes" xml:space="preserve">
           <source>Hostname</source>
-          <target state="final">Hostname</target>
+          <target state="final">Servidor</target>
         </trans-unit>
         <trans-unit id="LabelMostHsPercent" translate="yes" xml:space="preserve">
           <source>Most Headshots %</source>
@@ -777,19 +773,19 @@
         </trans-unit>
         <trans-unit id="LabelMostBombPlanted" translate="yes" xml:space="preserve">
           <source>Most Bomb plants</source>
-          <target state="final">A maioria das plantas de bomba</target>
+          <target state="final">Plantou mais C4</target>
         </trans-unit>
         <trans-unit id="LabelMostDamagingWeapon" translate="yes" xml:space="preserve">
           <source>Most damaging weapon</source>
-          <target state="final">A maioria de danos por arma</target>
+          <target state="final">Maior dano por</target>
         </trans-unit>
         <trans-unit id="LabelMostEntryKills" translate="yes" xml:space="preserve">
           <source>Most Entry Kill</source>
-          <target state="final">A maioria de mortes de entrada</target>
+          <target state="final">Maior entry kills</target>
         </trans-unit>
         <trans-unit id="LabelMostKillingWeapon" translate="yes" xml:space="preserve">
           <source>Most killing weapon</source>
-          <target state="needs-review-translation">Most killing weapon</target>
+          <target state="final">Arma que mais matou</target>
         </trans-unit>
         <trans-unit id="LabelPlayerStats" translate="yes" xml:space="preserve">
           <source>Player stats</source>
@@ -857,7 +853,7 @@
         </trans-unit>
         <trans-unit id="ToolTipHeatmap" translate="yes" xml:space="preserve">
           <source>Heatmap generator (CTRL+H)</source>
-          <target state="final">Gerador mapa de calor (CTRL+H)</target>
+          <target state="final">Geradar mapa de calor (CTRL+H)</target>
         </trans-unit>
         <trans-unit id="ToolTipKillsDetails" translate="yes" xml:space="preserve">
           <source>Kills details (CTRL+K)</source>
@@ -922,13 +918,11 @@
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
           <source>EV CT ($)</source>
-          <target state="needs-review-translation">EV Equipe  1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EV CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
           <source>EV T ($)</source>
-          <target state="needs-review-translation">EV Equipe 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EV T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderHsPercent" translate="yes" xml:space="preserve">
           <source>HS%</source>
@@ -952,13 +946,11 @@
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>SM CT ($)</source>
-          <target state="needs-review-translation">SM Equipe 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SM CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>SM T ($)</source>
-          <target state="needs-review-translation">SM Side Trouble 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SM T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderTeamKill" translate="yes" xml:space="preserve">
           <source>FF</source>
@@ -992,7 +984,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipAssisterName" translate="yes" xml:space="preserve">
           <source>Assister Name</source>
-          <target state="final">Nome do ajudante</target>
+          <target state="final">Nome do assistente</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipAssists" translate="yes" xml:space="preserve">
           <source>Assists</source>
@@ -1012,7 +1004,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipBombDefused" translate="yes" xml:space="preserve">
           <source>Bomb Defused</source>
-          <target state="final">Bomb Desarmada</target>
+          <target state="final">Bomba Desarmada</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipBombExploded" translate="yes" xml:space="preserve">
           <source>Bomb Exploded</source>
@@ -1024,7 +1016,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipClutchCount" translate="yes" xml:space="preserve">
           <source>Number of clutch</source>
-          <target state="final">Numero de embragem</target>
+          <target state="final">Numero de clutch</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipClutchWonCount" translate="yes" xml:space="preserve">
           <source>Number of clutch won</source>
@@ -1072,11 +1064,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipDemoFramerate" translate="yes" xml:space="preserve">
           <source>Demo's framerate</source>
-          <target state="final">Framehate da demo</target>
+          <target state="final">Framerate da demo</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipDemoHostname" translate="yes" xml:space="preserve">
           <source>Demo's hostname</source>
-          <target state="final">Hostname da demo</target>
+          <target state="final">Servidor da demo</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipDemoName" translate="yes" xml:space="preserve">
           <source>Demo's name</source>
@@ -1104,13 +1096,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipement Value CT ($)</source>
-          <target state="needs-review-translation">Valor do equipamento da equipe 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valor do equipamento CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipement Value T ($)</source>
-          <target state="needs-review-translation">Valor do equipamento da equipe 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Valor do equipamento T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
@@ -1118,7 +1108,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipFourKill" translate="yes" xml:space="preserve">
           <source>4 Kills</source>
-          <target state="final">4 Kills</target>
+          <target state="final">4 Mortes</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipHasVacOwBan" translate="yes" xml:space="preserve">
           <source>VAC / OW ban?</source>
@@ -1206,23 +1196,23 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipOneVersusFive" translate="yes" xml:space="preserve">
           <source>1 versus 5</source>
-          <target state="final">1 versus 5</target>
+          <target state="final">1 VS 5</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipOneVersusFour" translate="yes" xml:space="preserve">
           <source>1 versus 4</source>
-          <target state="final">1 versus 4</target>
+          <target state="final">1 VS 4</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipOneVersusOne" translate="yes" xml:space="preserve">
           <source>1 versus 1</source>
-          <target state="final">1 versus 1</target>
+          <target state="final">1 VS1</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipOneVersusThree" translate="yes" xml:space="preserve">
           <source>1 versus 3</source>
-          <target state="final">1 versus 3</target>
+          <target state="final">1 VS 3</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipOneVersusTwo" translate="yes" xml:space="preserve">
           <source>1 versus 2</source>
-          <target state="final">1 versus 2</target>
+          <target state="final">1 VS 2</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipOneVersusX" translate="yes" xml:space="preserve">
           <source>1vX</source>
@@ -1310,13 +1300,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start Money CT ($)</source>
-          <target state="needs-review-translation">Dinheiro de inicio da equipe 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Dinheiro de inicio da equipe CT ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start Money T ($)</source>
-          <target state="needs-review-translation">Dinheiro de inicio da equipe 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Dinheiro de inicio da equipe T ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -1508,17 +1496,15 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
           <source>EV CT (Equipment Value CT ($))</source>
-          <target state="needs-review-translation">EVT1 (Valor do equipamento da equipe 1 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EV CT (Valor do equipamento CT ($))</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
           <source>EV T (Equipment Value T ($))</source>
-          <target state="needs-review-translation">EVT2 (Valor do equipamento da equipe 2 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EV T (Valor do equipamento T ($))</target>
         </trans-unit>
         <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
           <source>RWS (ESEA Round Win Share)</source>
-          <target state="final">RWS (ESEA Rodada partilhada vencida)</target>
+          <target state="final">RWS (ESEA Rodada compartilhada vencida)</target>
         </trans-unit>
         <trans-unit id="ExportJson" translate="yes" xml:space="preserve">
           <source>Export JSON</source>
@@ -1602,13 +1588,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
           <source>SM CT (Start Money CT ($))</source>
-          <target state="needs-review-translation">SMT1 (Dinheiro de inicio da equipe 1 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SM CT (Dinheiro de inicio CT ($))</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
           <source>SM T (Start Money T ($))</source>
-          <target state="needs-review-translation">SMT2 (Dinheiro de inico da equipe 2 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SM T (Dinheiro de inico T ($))</target>
         </trans-unit>
         <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
           <source>TNT (Team Name Trouble)</source>
@@ -1656,7 +1640,7 @@
         </trans-unit>
         <trans-unit id="EndReasonBombDefused" translate="yes" xml:space="preserve">
           <source>Bomb defused</source>
-          <target state="final">Bomb desamada</target>
+          <target state="final">Bomba desamada</target>
         </trans-unit>
         <trans-unit id="EndReasonBombExploded" translate="yes" xml:space="preserve">
           <source>Bomb exploded</source>
@@ -2201,7 +2185,7 @@
         </trans-unit>
         <trans-unit id="ToolTipTotalDamages" translate="yes" xml:space="preserve">
           <source>Total damages</source>
-          <target state="final">Total de danos</target>
+          <target state="final">Total de dano</target>
         </trans-unit>
         <trans-unit id="ToolTipTotalDeaths" translate="yes" xml:space="preserve">
           <source>Total deaths</source>
@@ -2669,8 +2653,7 @@ Você pode encontrar mais informações sobre em {1}.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
           <source>Equipment</source>
-          <target state="needs-review-translation">Equipamento</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Equipamento</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>
@@ -3260,7 +3243,7 @@ Jogadores listados abaixo não serão verificados por ban enquando se analisar u
         </trans-unit>
         <trans-unit id="ToolTipWatchAllStuffsFromPlayer" translate="yes" xml:space="preserve">
           <source>Watch all stuffs from this player (CTRL+W)</source>
-          <target state="needs-review-translation">Assistir todas as coisas desse jogador (CTRL+W)</target>
+          <target state="final">Assistir tudo desse jogador (CTRL+W)</target>
         </trans-unit>
         <trans-unit id="TotalCashEarned" translate="yes" xml:space="preserve">
           <source>Total Cash Earned ($)</source>
@@ -3276,7 +3259,7 @@ Jogadores listados abaixo não serão verificados por ban enquando se analisar u
         </trans-unit>
         <trans-unit id="WatchPlayerStuffs" translate="yes" xml:space="preserve">
           <source>Watch player stuffs</source>
-          <target state="needs-review-translation">Assistir coisas do jogador</target>
+          <target state="final">Assistir tudo do jogador</target>
         </trans-unit>
         <trans-unit id="DescriptionEntryHoldKills" translate="yes" xml:space="preserve">
           <source>(First kill by a CT)</source>
@@ -3386,67 +3369,67 @@ Mensagem de Erro:
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="new">No {0} found for this selection.</target>
+          <target state="final">Nenhum {0} encontrado para esta seleção</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
-          <target state="new">Shots</target>
+          <target state="final">Tiros</target>
         </trans-unit>
         <trans-unit id="DialogDemoShareCodeUnavailable" translate="yes" xml:space="preserve">
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
-          <target state="new">This demo is not from Valve matchmaking servers or the .info file is missing.</target>
+          <target state="final">Essa demo não é dos servidores de matchmaking de Valve ou o arquivo .info está faltando.</target>
         </trans-unit>
         <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
           <source>Share code copied to clipboard.</source>
-          <target state="new">Share code copied to clipboard.</target>
+          <target state="final">Link de compartilhamento copiado para a área de transferência</target>
         </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
-          <target state="new">Copy share code</target>
+          <target state="final">Copiar link de compartilhamento</target>
         </trans-unit>
         <trans-unit id="ShowOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show on third party application</source>
-          <target state="new">Show on third party application</target>
+          <target state="final">Mostrar no aplicativo de terceiros</target>
         </trans-unit>
         <trans-unit id="DialogShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</source>
-          <target state="new">Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</target>
+          <target state="final">Link de compartilhamento não disponível. Ele funciona apenas com demos dos servidores Valve e se o arquivo .info existir.</target>
         </trans-unit>
         <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
           <source>Yes and don't ask next time</source>
-          <target state="new">Yes and don't ask next time</target>
+          <target state="final">Sim e não perguntar na próxima vez</target>
         </trans-unit>
         <trans-unit id="DialogSendThirdPartyConfirmation" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}. Do you want to continue?</source>
-          <target state="new">You are going to send the demo's share code to {0}. Do you want to continue?</target>
+          <target state="final">Você enviará o link de compartilhamento de demos para {0}. Você quer continuar?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileSendingShareCode" translate="yes" xml:space="preserve">
           <source>An error occured while sending the share code.</source>
-          <target state="new">An error occured while sending the share code.</target>
+          <target state="final">Ocorreu um erro ao enviar o link de compartilhamento.</target>
         </trans-unit>
         <trans-unit id="DialogSendShareCodeWarning" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}.</source>
-          <target state="new">You are going to send the demo's share code to {0}.</target>
+          <target state="final">Você enviará o link de compartilhamento de demos para {0}.</target>
         </trans-unit>
         <trans-unit id="DialogSelectThirdParty" translate="yes" xml:space="preserve">
           <source>Select third party application</source>
-          <target state="new">Select third party application</target>
+          <target state="final">Selecione o aplicativo de terceiros</target>
         </trans-unit>
         <trans-unit id="ToolTipShowDemoOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show demo's details on a third party application</source>
-          <target state="new">Show demo's details on a third party application</target>
+          <target state="final">Mostrar detalhes da demo em um aplicativo de terceiros</target>
         </trans-unit>
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
-          <target state="new">Your configuration file is corrupted. Please restart the application to reset your configuration.</target>
+          <target state="final">Seu arquivo de configuração está corrompido. Reinicie o aplicativo para redefinir sua configuração.</target>
         </trans-unit>
         <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
           <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
+          <target state="final">HLAE não encontrado. Instale-o, permitindo as configurações.</target>
         </trans-unit>
         <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
           <source>Enable movie making config parent folder</source>
-          <target state="new">Enable movie making config parent folder</target>
+          <target state="final">Habilite a pasta principal de configuração de criação de filmes</target>
         </trans-unit>
         <trans-unit id="EnableHlae" translate="yes" xml:space="preserve">
           <source>Enable HLAE</source>
@@ -3467,134 +3450,134 @@ Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas 
         <trans-unit id="DialogHlaeNotFound" translate="yes" xml:space="preserve">
           <source>It looks like HLAE isn't installed.
 Do you want to install it? (If you are using it you have to install it first to be able to use it)</source>
-          <target state="new">It looks like HLAE isn't installed.
-Do you want to install it? (If you are using it you have to install it first to be able to use it)</target>
+          <target state="final">Parece que HLAE não está instalado. 
+Você deseja instalá-lo? (Se você estiver usando, você deve instalá-lo primeiro para poder usá-lo)</target>
         </trans-unit>
         <trans-unit id="DialogNewHlaeVersionAvailable" translate="yes" xml:space="preserve">
           <source>A new HLAE version is avalailable.
 Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</source>
-          <target state="new">A new HLAE version is avalailable.
-Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</target>
+          <target state="final">Está disponível uma nova versão HLAE.
+Você deseja instalar (Recomenda-se evitar possíveis falhas devido às atualizações do CSGO)</target>
         </trans-unit>
         <trans-unit id="DialogHlaeInstallationFailed" translate="yes" xml:space="preserve">
           <source>An error occured while installing HLAE.</source>
-          <target state="new">An error occured while installing HLAE.</target>
+          <target state="final">Ocorreu um erro ao instalar o HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeInstalled" translate="yes" xml:space="preserve">
           <source>HLAE has been installed.</source>
-          <target state="new">HLAE has been installed.</target>
+          <target state="final">HLAE foi instalado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeRequired" translate="yes" xml:space="preserve">
           <source>HLAE needs to be installed to use it.</source>
-          <target state="new">HLAE needs to be installed to use it.</target>
+          <target state="final">HLAE precisa ser instalado para ser usado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeUpdated" translate="yes" xml:space="preserve">
           <source>HLAE has been updated.</source>
-          <target state="new">HLAE has been updated.</target>
+          <target state="final">HLAE foi atualizado.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeUpdateFailed" translate="yes" xml:space="preserve">
           <source>An error occured while updating HLAE.</source>
-          <target state="new">An error occured while updating HLAE.</target>
+          <target state="final">Ocorreu um erro ao atualizar o HLAE</target>
         </trans-unit>
         <trans-unit id="NotificationInstallingHlae" translate="yes" xml:space="preserve">
           <source>Installing HLAE...</source>
-          <target state="new">Installing HLAE...</target>
+          <target state="final">Instalando o HLAE...</target>
         </trans-unit>
         <trans-unit id="NotificationUpdatingHlae" translate="yes" xml:space="preserve">
           <source>Updating HLAE...</source>
-          <target state="new">Updating HLAE...</target>
+          <target state="final">Atualizando o HLAE...</target>
         </trans-unit>
         <trans-unit id="DialogSelectHlaeConfigParentFolderLocation" translate="yes" xml:space="preserve">
           <source>Please select the HLAE config parent folder location.</source>
-          <target state="new">Please select the HLAE config parent folder location.</target>
+          <target state="final">Selecione a localização da pasta principal da configuração do HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerFocusedNotFound" translate="yes" xml:space="preserve">
           <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
-          <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
+          <target state="final">O jogador que você está focando não está nesta demo. Você pode alterá-lo das configurações (seção de contas) ou assisti-lo a partir do placar.</target>
         </trans-unit>
         <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
           <source>Demos list size</source>
-          <target state="new">Demos list size</target>
+          <target state="final">Tamanho da lista de demos</target>
         </trans-unit>
         <trans-unit id="ShowAllDemos" translate="yes" xml:space="preserve">
           <source>Show all demos</source>
-          <target state="new">Show all demos</target>
+          <target state="final">Mostrar todas as demos</target>
         </trans-unit>
         <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
           <source>Invalid share code</source>
-          <target state="new">Invalid share code</target>
+          <target state="final">Link de compartilhamento inválido</target>
         </trans-unit>
         <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download a demo from share code</source>
-          <target state="new">Download a demo from share code</target>
+          <target state="final">Baixe uma demo do link de compartilhamento</target>
         </trans-unit>
         <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
           <source>Share code</source>
-          <target state="new">Share code</target>
+          <target state="final">link de compartilhamento</target>
         </trans-unit>
         <trans-unit id="DialogMessageDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>You are going to download a demo from its share code.
 
 Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</source>
-          <target state="new">You are going to download a demo from its share code.
+          <target state="final">Você vai baixar uma demo a partir do link de compartilhamento.
 
-Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
+Digite link de compartilhamento (exemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
         </trans-unit>
         <trans-unit id="DialogTitleDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download demo from share code</source>
-          <target state="new">Download demo from share code</target>
+          <target state="final">Baixar demo a partir do link de compartilhamento</target>
         </trans-unit>
         <trans-unit id="DialogDemoFromShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Demo link has expired or you already have it in your download folder.</source>
-          <target state="new">Demo link has expired or you already have it in your download folder.</target>
+          <target state="final">O link da demo expirou ou você já tem essa demo na sua pasta de downloads.</target>
         </trans-unit>
         <trans-unit id="NotificationRetrievingDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Retrieving demo data...</source>
-          <target state="new">Retrieving demo data...</target>
+          <target state="final">Recuperando dados de demo...</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingDemoData" translate="yes" xml:space="preserve">
           <source>An error occured while retrieving demo data.</source>
-          <target state="new">An error occured while retrieving demo data.</target>
+          <target state="final">Ocorreu um erro ao recuperar as informações da demo.</target>
         </trans-unit>
         <trans-unit id="HeaderEseaRws" translate="yes" xml:space="preserve">
           <source>RWS</source>
-          <target state="new">RWS</target>
+          <target state="final">RWS</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEseaRws" translate="yes" xml:space="preserve">
           <source>Average ESEA Round Win Share</source>
-          <target state="new">Average ESEA Round Win Share</target>
+          <target state="final">Média de vitórias da rodada compartilhada da ESEA</target>
         </trans-unit>
         <trans-unit id="DialogErrorEseaDemosParsing" translate="yes" xml:space="preserve">
           <source>An error occured while analyzing the demo {0}.
 As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
 This is an ESEA issue, you may have missing data for this demo.</source>
-          <target state="new">An error occured while analyzing the demo {0}.
-As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
-This is an ESEA issue, you may have missing data for this demo.</target>
+          <target state="final">Ocorreu um erro ao analisar a demo {0}.
+Como esta fonte de demo é a ESEA, provavelmente é devido ao sistema ESEA pug que impede a gravação de demos.
+Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</target>
         </trans-unit>
         <trans-unit id="HeaderAccuracy" translate="yes" xml:space="preserve">
           <source>ACC (%)</source>
-          <target state="new">ACC (%)</target>
+          <target state="final">ACR (%)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipAccuracy" translate="yes" xml:space="preserve">
           <source>Accuracy (%)</source>
-          <target state="new">Accuracy (%)</target>
+          <target state="final">Precisão (%)</target>
         </trans-unit>
         <trans-unit id="Accuracy" translate="yes" xml:space="preserve">
           <source>Accuracy</source>
-          <target state="new">Accuracy</target>
+          <target state="final">Precisão</target>
         </trans-unit>
         <trans-unit id="AccuracyFull" translate="yes" xml:space="preserve">
           <source>Accuracy % (shots / hits)</source>
-          <target state="new">Accuracy % (shots / hits)</target>
+          <target state="final">Precisão % (tiros / acertos)</target>
         </trans-unit>
         <trans-unit id="Hits" translate="yes" xml:space="preserve">
           <source>Hits</source>
-          <target state="new">Hits</target>
+          <target state="final">Acertos</target>
         </trans-unit>
         <trans-unit id="NotificationImportingCustomData" translate="yes" xml:space="preserve">
           <source>Importing custom data...</source>
-          <target state="new">Importing custom data...</target>
+          <target state="final">Importando dados personalizados...</target>
         </trans-unit>
       </group>
     </body>
