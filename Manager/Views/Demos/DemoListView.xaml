@@ -26,6 +26,7 @@
 			<converters:StringToDateConverter x:Key="StringToDateConverter" />
 			<converters:BooleanMultipleConverter x:Key="BooleanMultipleConverter" />
 			<converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
+			<converters:MultiLineTextToSingleLineConverter x:Key="MultiLineTextToSingleLineConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -723,9 +724,11 @@
 									HeaderStyle="{StaticResource BombPlantedHeader}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowBombPlantedColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 				<DataGridTextColumn Width="Auto"
+									MaxWidth="200"
 									Header="{x:Static properties:Resources.Comment}"
-									Binding="{Binding Comment}"
+									Binding="{Binding Comment, Converter={StaticResource MultiLineTextToSingleLineConverter}}"
 									HeaderStyle="{StaticResource CommentHeader}"
+									ElementStyle="{StaticResource CommentTextStyle}"
 									Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowCommentColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 			</DataGrid.Columns>
 		</DataGrid>

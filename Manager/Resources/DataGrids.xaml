@@ -396,6 +396,12 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipRoundPlayed}" />
 	</Style>
 
+	<Style TargetType="TextBlock" x:Key="CommentTextStyle">
+		<Setter Property="TextWrapping" Value="NoWrap" />
+		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
+		<Setter Property="ToolTip" Value="{Binding Path=Comment, Mode=OneWay}"/>
+	</Style>
+
 
 	<!--DataGrid for suspects list style -->
 	<Style TargetType="DataGridRow"
