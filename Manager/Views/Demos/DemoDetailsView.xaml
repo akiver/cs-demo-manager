@@ -876,6 +876,10 @@
 														Header="{x:Static properties:Resources.Score}"
 														Binding="{Binding Score}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource AverageTimeDeathHeader}"
+														Width="Auto"
+														Header="{x:Static properties:Resources.HeaderAverageTimeDeath}"
+														Binding="{Binding AverageTimeDeath}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderHltvRating}"
@@ -1113,6 +1117,10 @@
 														Header="{x:Static properties:Resources.Score}"
 														Binding="{Binding Score}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<DataGridTextColumn HeaderStyle="{StaticResource AverageTimeDeathHeader}"
+														Width="Auto"
+														Header="{x:Static properties:Resources.HeaderAverageTimeDeath}"
+														Binding="{Binding AverageTimeDeath}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderHltvRating}"

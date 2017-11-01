@@ -3595,6 +3595,14 @@ Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</tar
           <source>Average time the player died in seconds after the freezetime ended</source>
           <target state="new">Average time the player died in seconds after the freezetime ended</target>
         </trans-unit>
+        <trans-unit id="HeaderAverageTimeDeath" translate="yes" xml:space="preserve">
+          <source>ATD (s)</source>
+          <target state="new">ATD (s)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAverageTimeDeath" translate="yes" xml:space="preserve">
+          <source>Average Time Death (seconds)</source>
+          <target state="new">Average Time Death (seconds)</target>
+        </trans-unit>
       </group>
     </body>
   </file>

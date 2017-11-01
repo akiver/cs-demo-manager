@@ -2807,4 +2807,10 @@ This is an ESEA issue, you may have missing data for this demo.</value>
   <data name="AverageTimeDeathFull" xml:space="preserve">
     <value>Average time the player died in seconds after the freezetime ended</value>
   </data>
+  <data name="HeaderAverageTimeDeath" xml:space="preserve">
+    <value>ATD (s)</value>
+  </data>
+  <data name="HeaderToolTipAverageTimeDeath" xml:space="preserve">
+    <value>Average Time Death (seconds)</value>
+  </data>
 </root>

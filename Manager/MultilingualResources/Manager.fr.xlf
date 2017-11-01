@@ -3597,6 +3597,14 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
           <source>Average time the player died in seconds after the freezetime ended</source>
           <target state="final">Temps moyen en seconde avant que le joueur ne meurt après la fin du freezetime</target>
         </trans-unit>
+        <trans-unit id="HeaderAverageTimeDeath" translate="yes" xml:space="preserve">
+          <source>ATD (s)</source>
+          <target state="final">MTM (s)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipAverageTimeDeath" translate="yes" xml:space="preserve">
+          <source>Average Time Death (seconds)</source>
+          <target state="final">Moyenne temps avant mort (secondes)</target>
+        </trans-unit>
       </group>
     </body>
   </file>

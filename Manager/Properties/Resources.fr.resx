@@ -2680,4 +2680,10 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
   <data name="AverageTimeDeathFull" xml:space="preserve">
     <value>Temps moyen en seconde avant que le joueur ne meurt après la fin du freezetime</value>
   </data>
+  <data name="HeaderAverageTimeDeath" xml:space="preserve">
+    <value>MTM (s)</value>
+  </data>
+  <data name="HeaderToolTipAverageTimeDeath" xml:space="preserve">
+    <value>Moyenne temps avant mort (secondes)</value>
+  </data>
 </root>

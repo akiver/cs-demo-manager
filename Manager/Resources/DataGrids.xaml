@@ -224,6 +224,10 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipTimeDeath}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="AverageTimeDeathHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipAverageTimeDeath}" />
+	</Style>
+
 	<Style TargetType="DataGridColumnHeader" x:Key="ClutchCountHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipClutchCount}" />
 	</Style>

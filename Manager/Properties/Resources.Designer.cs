@@ -2500,6 +2500,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ATD (s).
+        /// </summary>
+        public static string HeaderAverageTimeDeath {
+            get {
+                return ResourceManager.GetString("HeaderAverageTimeDeath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ban Count.
         /// </summary>
         public static string HeaderBanCount {
@@ -3135,6 +3144,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipAverageMatchTime {
             get {
                 return ResourceManager.GetString("HeaderToolTipAverageMatchTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Time Death (seconds).
+        /// </summary>
+        public static string HeaderToolTipAverageTimeDeath {
+            get {
+                return ResourceManager.GetString("HeaderToolTipAverageTimeDeath", resourceCulture);
             }
         }
         
