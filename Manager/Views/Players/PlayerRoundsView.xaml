@@ -75,6 +75,10 @@
 									Width="Auto"
 									Header="{x:Static properties:Resources.HeaderTotalDamagesArmor}"
 									Binding="{Binding DamageArmorCount}"/>
+				<DataGridTextColumn HeaderStyle="{StaticResource TimeDeathHeader}"
+									Width="Auto"
+									Header="{x:Static properties:Resources.HeaderTimeDeath}"
+									Binding="{Binding TimeDeath}"/>
 				<DataGridTextColumn HeaderStyle="{StaticResource JumpKillsHeader}"
 									Width="Auto"
 									Header="{x:Static properties:Resources.HeaderJumpKills}"

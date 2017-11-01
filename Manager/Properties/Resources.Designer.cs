@@ -19,7 +19,7 @@ namespace Manager.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -318,6 +318,24 @@ namespace Manager.Properties {
         public static string AverageMatchTimeValue {
             get {
                 return ResourceManager.GetString("AverageMatchTimeValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average Time Death (s).
+        /// </summary>
+        public static string AverageTimeDeath {
+            get {
+                return ResourceManager.GetString("AverageTimeDeath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average time the player died in seconds after the freezetime ended.
+        /// </summary>
+        public static string AverageTimeDeathFull {
+            get {
+                return ResourceManager.GetString("AverageTimeDeathFull", resourceCulture);
             }
         }
         
@@ -3004,6 +3022,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TD (s).
+        /// </summary>
+        public static string HeaderTimeDeath {
+            get {
+                return ResourceManager.GetString("HeaderTimeDeath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account&apos;s Nickname.
         /// </summary>
         public static string HeaderToolTipAccountNickname {
@@ -3891,6 +3918,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipTick {
             get {
                 return ResourceManager.GetString("HeaderToolTipTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Death (seconds).
+        /// </summary>
+        public static string HeaderToolTipTimeDeath {
+            get {
+                return ResourceManager.GetString("HeaderToolTipTimeDeath", resourceCulture);
             }
         }
         

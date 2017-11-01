@@ -21,6 +21,8 @@ namespace Services.Models.Stats
 
 		public int DamageArmorCount { get; set; }
 
+		public int TimeDeath { get; set; }
+
 		public int KillCount { get; set; }
 
 		public int JumpKillCount { get; set; }

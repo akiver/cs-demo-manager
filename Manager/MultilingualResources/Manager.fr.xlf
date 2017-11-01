@@ -3581,6 +3581,22 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
           <source>Importing custom data...</source>
           <target state="final">Importation des données en cours...</target>
         </trans-unit>
+        <trans-unit id="HeaderTimeDeath" translate="yes" xml:space="preserve">
+          <source>TD (s)</source>
+          <target state="final">TM (s)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTimeDeath" translate="yes" xml:space="preserve">
+          <source>Time Death (seconds)</source>
+          <target state="final">Temps Mort (secondes)</target>
+        </trans-unit>
+        <trans-unit id="AverageTimeDeath" translate="yes" xml:space="preserve">
+          <source>Average Time Death (s)</source>
+          <target state="final">Temps Moyen Mort (s)</target>
+        </trans-unit>
+        <trans-unit id="AverageTimeDeathFull" translate="yes" xml:space="preserve">
+          <source>Average time the player died in seconds after the freezetime ended</source>
+          <target state="final">Temps moyen en seconde avant que le joueur ne meurt après la fin du freezetime</target>
+        </trans-unit>
       </group>
     </body>
   </file>

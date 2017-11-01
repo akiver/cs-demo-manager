@@ -102,6 +102,12 @@
 				<TextBlock Text="{Binding CurrentPlayer.Accuracy, StringFormat='{} {0}%'}"
 						   Style="{StaticResource TextBlockHighlightBig}"/>
 			</TextBlock>
+			<TextBlock Text="{x:Static properties:Resources.AverageTimeDeath}"
+					   FontSize="18"
+					   ToolTip="{x:Static properties:Resources.AverageTimeDeathFull}">
+				<TextBlock Text="{Binding CurrentPlayer.AverageTimeDeath, StringFormat='{} {0}(s)'}"
+				           Style="{StaticResource TextBlockHighlightBig}"/>
+			</TextBlock>
 		</StackPanel>
 
 		<Grid Grid.Column="1" Margin="10 0 0 0">

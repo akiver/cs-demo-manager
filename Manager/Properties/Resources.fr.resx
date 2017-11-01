@@ -2668,4 +2668,16 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
   <data name="NotificationImportingCustomData" xml:space="preserve">
     <value>Importation des données en cours...</value>
   </data>
+  <data name="HeaderTimeDeath" xml:space="preserve">
+    <value>TM (s)</value>
+  </data>
+  <data name="HeaderToolTipTimeDeath" xml:space="preserve">
+    <value>Temps Mort (secondes)</value>
+  </data>
+  <data name="AverageTimeDeath" xml:space="preserve">
+    <value>Temps Moyen Mort (s)</value>
+  </data>
+  <data name="AverageTimeDeathFull" xml:space="preserve">
+    <value>Temps moyen en seconde avant que le joueur ne meurt après la fin du freezetime</value>
+  </data>
 </root>

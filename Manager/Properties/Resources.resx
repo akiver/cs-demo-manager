@@ -2795,4 +2795,16 @@ This is an ESEA issue, you may have missing data for this demo.</value>
   <data name="NotificationImportingCustomData" xml:space="preserve">
     <value>Importing custom data...</value>
   </data>
+  <data name="HeaderTimeDeath" xml:space="preserve">
+    <value>TD (s)</value>
+  </data>
+  <data name="HeaderToolTipTimeDeath" xml:space="preserve">
+    <value>Time Death (seconds)</value>
+  </data>
+  <data name="AverageTimeDeath" xml:space="preserve">
+    <value>Average Time Death (s)</value>
+  </data>
+  <data name="AverageTimeDeathFull" xml:space="preserve">
+    <value>Average time the player died in seconds after the freezetime ended</value>
+  </data>
 </root>

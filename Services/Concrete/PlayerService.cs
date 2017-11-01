@@ -102,6 +102,7 @@ namespace Services.Concrete
 					BombPlantedCount = round.BombPlanted != null && round.BombPlanted.PlanterSteamId == player.SteamId ? 1 : 0,
 					BombDefusedCount = round.BombDefused != null && round.BombDefused.DefuserSteamId == player.SteamId ? 1 : 0,
 					BombExplodedCount = round.BombExploded != null && round.BombExploded.PlanterSteamId == player.SteamId ? 1 : 0,
+					TimeDeath = player.TimeDeathRounds.ContainsKey(round.Number) ? (int)player.TimeDeathRounds[round.Number] : 0,
 				};
 				data.Add(stats);
 			}

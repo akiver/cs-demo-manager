@@ -3579,6 +3579,22 @@ This is an ESEA issue, you may have missing data for this demo.</target>
           <source>Importing custom data...</source>
           <target state="new">Importing custom data...</target>
         </trans-unit>
+        <trans-unit id="HeaderTimeDeath" translate="yes" xml:space="preserve">
+          <source>TD (s)</source>
+          <target state="new">TD (s)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipTimeDeath" translate="yes" xml:space="preserve">
+          <source>Time Death (seconds)</source>
+          <target state="new">Time Death (seconds)</target>
+        </trans-unit>
+        <trans-unit id="AverageTimeDeath" translate="yes" xml:space="preserve">
+          <source>Average Time Death (s)</source>
+          <target state="new">Average Time Death (s)</target>
+        </trans-unit>
+        <trans-unit id="AverageTimeDeathFull" translate="yes" xml:space="preserve">
+          <source>Average time the player died in seconds after the freezetime ended</source>
+          <target state="new">Average time the player died in seconds after the freezetime ended</target>
+        </trans-unit>
       </group>
     </body>
   </file>
