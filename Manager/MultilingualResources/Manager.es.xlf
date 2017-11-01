@@ -901,26 +901,26 @@
         <trans-unit id="HeaderAssistsPerRound" translate="yes" xml:space="preserve">
           <source>APR</source>
           <target state="translated">APR</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Asistencias por ronda</note>
           <note from="MultilingualBuild" annotates="source" priority="2">Assists Per Round</note>
+          <note from="MultilingualEditor" annotates="source" priority="4">Asistencias por ronda</note>
         </trans-unit>
         <trans-unit id="HeaderAvarageDamagesPerPlayer" translate="yes" xml:space="preserve">
           <source>ADP</source>
           <target state="translated">ADP</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Daño medio por jugador</note>
           <note from="MultilingualBuild" annotates="source" priority="2">Average Damages Per Player</note>
+          <note from="MultilingualEditor" annotates="source" priority="4">Daño medio por jugador</note>
         </trans-unit>
         <trans-unit id="HeaderDeaths" translate="yes" xml:space="preserve">
           <source>D</source>
           <target state="translated">D</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Muertes</note>
           <note from="MultilingualBuild" annotates="source" priority="2">Deaths</note>
+          <note from="MultilingualEditor" annotates="source" priority="4">Muertes</note>
         </trans-unit>
         <trans-unit id="HeaderEntryKills" translate="yes" xml:space="preserve">
           <source>EK</source>
           <target state="translated">EK</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Eliminaciones de entrada</note>
           <note from="MultilingualBuild" annotates="source" priority="2">Entry Kills</note>
+          <note from="MultilingualEditor" annotates="source" priority="4">Eliminaciones de entrada</note>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
           <source>EV CT ($)</source>
@@ -940,8 +940,8 @@
         <trans-unit id="HeaderKills" translate="yes" xml:space="preserve">
           <source>K</source>
           <target state="translated">K</target>
-          <note from="MultilingualEditor" annotates="source" priority="4">Eliminaciones</note>
           <note from="MultilingualBuild" annotates="source" priority="2">Kills</note>
+          <note from="MultilingualEditor" annotates="source" priority="4">Eliminaciones</note>
         </trans-unit>
         <trans-unit id="HeaderOverwatch" translate="yes" xml:space="preserve">
           <source>OW</source>
@@ -2006,7 +2006,7 @@
         </trans-unit>
         <trans-unit id="WonRate" translate="yes" xml:space="preserve">
           <source>Won rate</source>
-          <target state="translated">Ratio de vicotiras</target>
+          <target state="translated">Ratio de victorias</target>
         </trans-unit>
         <trans-unit id="HeaderOneVersusX" translate="yes" xml:space="preserve">
           <source>1VX</source>
@@ -2238,11 +2238,11 @@
         </trans-unit>
         <trans-unit id="Win" translate="yes" xml:space="preserve">
           <source>Win</source>
-          <target state="translated">Vicotria</target>
+          <target state="translated">Victoria</target>
         </trans-unit>
         <trans-unit id="WinPercent" translate="yes" xml:space="preserve">
           <source>Win percentage</source>
-          <target state="translated">% de vicotrias</target>
+          <target state="translated">% de victorias</target>
         </trans-unit>
         <trans-unit id="Cancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
