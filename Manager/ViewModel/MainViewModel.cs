@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,9 +56,9 @@ namespace Manager.ViewModel
 
 		private readonly ICacheService _cacheService;
 
-		public string Contributors => string.Join(" / ", App.Contributors);
+		public List<string> Contributors => App.Contributors.ToList();
 
-		public string Translators => string.Join(" / ", App.Translators);
+		public List<string> Translators => App.Translators.ToList();
 
 		#endregion
 

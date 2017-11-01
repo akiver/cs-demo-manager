@@ -617,15 +617,36 @@
 							<TextBlock Text="{x:Static properties:Resources.Contributors}"
 									   Style="{StaticResource TitleSettingsStyle}"
 									   Foreground="{StaticResource HighlightBrush}"/>
-							<TextBlock Text="{Binding Contributors}"
-									   Style="{StaticResource SubTitleSettingsStyle}"
-									   TextWrapping="Wrap"/>
+							<ItemsControl ItemsSource="{Binding Contributors}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Vertical"/>
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding}"
+												   Style="{StaticResource SubTitleSettingsStyle}"
+												   TextWrapping="Wrap"/>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
 							<TextBlock Text="{x:Static properties:Resources.Translators}"
 									   Style="{StaticResource TitleSettingsStyle}"
 									   Foreground="{StaticResource HighlightBrush}"/>
-							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
-									   Text="{Binding Translators}"
-									   TextWrapping="Wrap"/>
+							<ItemsControl ItemsSource="{Binding Translators}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Orientation="Vertical"/>
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
+												   TextWrapping="Wrap" Text="{Binding}"/>
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
 						</StackPanel>
 					</controls:MetroTabItem>
 				</TabControl>

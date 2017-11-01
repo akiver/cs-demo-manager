@@ -29,11 +29,11 @@ namespace Manager
 		public static string[] Translators = {
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",
 			"Allan \"Michael\" Simonsen (Danish)",
-			"Leonardo (Brazilian)",
+			"Leonardo / RedDeadLuigi (Brazilian)",
 			"Spidersouris (French)",
 			"Kacper \"sikl0`\" Olkis (Polish)",
 			"yRRCK (German)",
-			"Paco González López (Spanish)"
+			"Paco González López / monxas (Spanish)"
 		};
 
 		public App()
