@@ -18,6 +18,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				{"Killer side", CellType.String},
 				{"Killer team", CellType.String},
 				{"Killer bot", CellType.Boolean},
+				{"Killer blinded", CellType.Boolean},
 				{"Killer vel X", CellType.Numeric},
 				{"Killer vel Y", CellType.Numeric},
 				{"Killer vel Z", CellType.Numeric},
@@ -26,6 +27,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				{"Victim side", CellType.String},
 				{"Victim team", CellType.String},
 				{"Victim bot", CellType.Boolean},
+				{"Victim blinded", CellType.Boolean},
 				{"Assister", CellType.String},
 				{"Assister SteamID", CellType.String},
 				{"assister bot", CellType.Boolean},
@@ -54,6 +56,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.String, e.KillerSide.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, e.KillerTeam);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsControllingBot);
+					SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsBlinded);
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityX);
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityY);
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityZ);
@@ -62,6 +65,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.String, e.KilledSide.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, e.KilledTeam);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.KilledIsControllingBot);
+					SetCellValue(row, columnNumber++, CellType.Boolean, e.VictimIsBlinded);
 					SetCellValue(row, columnNumber++, CellType.String, e.AssisterName);
 					SetCellValue(row, columnNumber++, CellType.String, e.AssisterSteamId);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.AssisterIsControllingBot);

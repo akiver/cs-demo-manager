@@ -61,6 +61,9 @@ namespace Core.Models.Events
 		[JsonProperty("killer_crouching")]
 		public bool IsKillerCrouching { get; set; }
 
+		[JsonProperty("killer_blinded")]
+		public bool KillerIsBlinded { get; set; }
+
 		[JsonProperty("is_trade_kill")]
 		public bool IsTradeKill { get; set; }
 
@@ -72,6 +75,9 @@ namespace Core.Models.Events
 
 		[JsonProperty("killed_is_controlling_bot")]
 		public bool KilledIsControllingBot { get; set; }
+
+		[JsonProperty("victim_blinded")]
+		public bool VictimIsBlinded { get; set; }
 
 		[JsonProperty("assister_is_controlling_bot")]
 		public bool AssisterIsControllingBot { get; set; }
