@@ -259,6 +259,7 @@ namespace Services.Concrete.Analyzer
 				if (e.Killer == null) killed.SuicideCount++;
 				killEvent.KilledIsControllingBot = e.Victim.SteamID != 0 && killed.IsControllingBot;
 				killEvent.KilledTeam = killed.TeamName;
+				killed.TimeDeathRounds[CurrentRound.Number] = Parser.CurrentTime - CurrentRound.FreezeTimeEndSeconds;
 			}
 
 			// Human killed human

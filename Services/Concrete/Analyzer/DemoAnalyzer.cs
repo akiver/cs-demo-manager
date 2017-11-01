@@ -391,6 +391,7 @@ namespace Services.Concrete.Analyzer
 			};
 
 			killed.IsAlive = false;
+			killed.TimeDeathRounds[CurrentRound.Number] = Parser.CurrentTime - CurrentRound.FreezeTimeEndSeconds;
 			if (e.Killer != null)
 			{
 				killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
@@ -595,6 +596,7 @@ namespace Services.Concrete.Analyzer
 			if (!IsMatchStarted) return;
 
 			IsFreezetime = false;
+			CurrentRound.FreezeTimeEndSeconds = Parser.CurrentTime;
 		}
 
 		protected void HandleBombPlanted(object sender, BombEventArgs e)
@@ -1376,6 +1378,7 @@ namespace Services.Concrete.Analyzer
 				if (!pl.RoundsMoneyEarned.ContainsKey(CurrentRound.Number)) pl.RoundsMoneyEarned.Add(CurrentRound.Number, 0);
 				if (!pl.StartMoneyRounds.ContainsKey(CurrentRound.Number)) pl.StartMoneyRounds.Add(CurrentRound.Number, 0);
 				if (!pl.EquipementValueRounds.ContainsKey(CurrentRound.Number)) pl.EquipementValueRounds.Add(CurrentRound.Number, 0);
+				if (!pl.TimeDeathRounds.ContainsKey(CurrentRound.Number)) pl.TimeDeathRounds.Add(CurrentRound.Number, 0);
 				DemoInfo.Player player = Parser.PlayingParticipants.FirstOrDefault(p => p.SteamID == pl.SteamId);
 				if (player != null)
 				{

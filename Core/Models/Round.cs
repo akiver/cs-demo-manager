@@ -89,6 +89,11 @@ namespace Core.Models
 		private float _timeEndSeconds;
 
 		/// <summary>
+		/// Number of the seconds from the start of the match the round's freezetime ended
+		/// </summary>
+		private float _freezetimeEndSeconds;
+
+		/// <summary>
 		/// Why the round ended
 		/// </summary>
 		private RoundEndReason _endReason;
@@ -324,6 +329,13 @@ namespace Core.Models
 		{
 			get { return _tick; }
 			set { Set(() => Tick, ref _tick, value); }
+		}
+
+		[JsonProperty("freezetime_end_seconds")]
+		public float FreezeTimeEndSeconds
+		{
+			get { return _freezetimeEndSeconds; }
+			set { Set(() => FreezeTimeEndSeconds, ref _freezetimeEndSeconds, value); }
 		}
 
 		[JsonProperty("start_seconds")]

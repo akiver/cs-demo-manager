@@ -278,6 +278,11 @@ namespace Core.Models
 		private Dictionary<int, int> _roundsMoneyEarned = new Dictionary<int, int>();
 
 		/// <summary>
+		/// Player's time of death for each round in seconds.
+		/// </summary>
+		private Dictionary<int, float> _timeDeathRounds = new Dictionary<int, float>();
+
+		/// <summary>
 		/// Player's kills data
 		/// </summary>
 		private ObservableCollection<KillEvent> _kills;
@@ -628,6 +633,13 @@ namespace Core.Models
 			set { Set(() => RoundsMoneyEarned, ref _roundsMoneyEarned, value); }
 		}
 
+		[JsonProperty("time_death_rounds")]
+		public Dictionary<int, float> TimeDeathRounds
+		{
+			get { return _timeDeathRounds; }
+			set { Set(() => TimeDeathRounds, ref _timeDeathRounds, value); }
+		}
+
 		[JsonProperty("entry_kills")]
 		public ObservableCollection<EntryKillEvent> EntryKills
 		{
@@ -940,6 +952,19 @@ namespace Core.Models
 			}
 		}
 
+		[JsonProperty("total_time_death")]
+		public int TotalTimeDeath => TimeDeathRounds.Sum(kvp => (int)kvp.Value);
+
+		[JsonProperty("avg_time_death")]
+		public double AverageTimeDeath
+		{
+			get
+			{
+				if (RoundPlayedCount > 0) return Math.Round((double)TotalTimeDeath / RoundPlayedCount, 2);
+				return 0;
+			}
+		}
+
 		[JsonIgnore]
 		public bool IsControllingBot
 		{
@@ -1040,6 +1065,7 @@ namespace Core.Models
 		private void OnDeathsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			DeathCount = Deaths.Count + SuicideCount;
+			RaisePropertyChanged(() => AverageTimeDeath);
 		}
 
 		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -1142,6 +1168,7 @@ namespace Core.Models
 			PlayersHurted.Clear();
 			RoundsMoneyEarned.Clear();
 			StartMoneyRounds.Clear();
+			TimeDeathRounds.Clear();
 		}
 
 		public Player Clone()
@@ -1231,6 +1258,8 @@ namespace Core.Models
 				player.RoundsMoneyEarned.Add(kvp.Key, kvp.Value);
 			foreach (KeyValuePair<int, int> kvp in StartMoneyRounds)
 				player.StartMoneyRounds.Add(kvp.Key, kvp.Value);
+			foreach (KeyValuePair<int, float> kvp in TimeDeathRounds)
+				player.TimeDeathRounds.Add(kvp.Key, kvp.Value);
 
 			return player;
 		}
@@ -1270,6 +1299,9 @@ namespace Core.Models
 
 			EquipementValueRounds.Clear();
 			foreach (KeyValuePair<int, int> kvp in player.EquipementValueRounds) EquipementValueRounds.Add(kvp.Key, kvp.Value);
+
+			TimeDeathRounds.Clear();
+			foreach (KeyValuePair<int, float> kvp in player.TimeDeathRounds) TimeDeathRounds.Add(kvp.Key, kvp.Value);
 
 			AssistCount = player.AssistCount;
 			BombDefusedCount = player.BombDefusedCount;
