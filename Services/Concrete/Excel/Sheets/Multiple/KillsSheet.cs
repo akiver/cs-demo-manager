@@ -15,6 +15,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 				{"Demo ID", CellType.String},
 				{"Tick", CellType.Numeric},
 				{"Round", CellType.Numeric},
+				{"Time death (s)", CellType.Numeric},
 				{"Killer", CellType.String},
 				{"Killer SteamID", CellType.String},
 				{"Killer side", CellType.String},
@@ -57,6 +58,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 						SetCellValue(row, columnNumber++, CellType.String, demo.Id);
 						SetCellValue(row, columnNumber++, CellType.Numeric, e.Tick);
 						SetCellValue(row, columnNumber++, CellType.Numeric, e.RoundNumber);
+						SetCellValue(row, columnNumber++, CellType.Numeric, e.TimeDeathSeconds);
 						SetCellValue(row, columnNumber++, CellType.String, e.KillerName);
 						SetCellValue(row, columnNumber++, CellType.String, e.KillerSteamId);
 						SetCellValue(row, columnNumber++, CellType.String, e.KillerSide.AsString());

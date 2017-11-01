@@ -219,7 +219,8 @@ namespace Services.Concrete.Analyzer
 					KillerY = e.Killer?.Position.Y ?? 0,
 					VictimX = e.Victim.Position.X,
 					VictimY = e.Victim.Position.Y
-				}
+				},
+				TimeDeathSeconds = (int)(Parser.CurrentTime - CurrentRound.FreezeTimeEndSeconds),
 			};
 
 			bool killerIsBot = e.Killer != null && e.Killer.SteamID == 0;
