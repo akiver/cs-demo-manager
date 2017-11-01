@@ -37,7 +37,7 @@
     <value>Idioma</value>
   </data>
   <data name="LaunchAtStartup" xml:space="preserve">
-    <value>Iniciar automaticamente</value>
+    <value>Iniciar com o Windows</value>
   </data>
   <data name="Quit" xml:space="preserve">
     <value>Sair</value>
@@ -58,7 +58,7 @@
     <value>Lista de suspeitos</value>
   </data>
   <data name="UnableToStartBot" xml:space="preserve">
-    <value>Não é possivel inicar o BOT.</value>
+    <value>Não foi possivel inicar o BOT.</value>
   </data>
   <data name="Xhour" xml:space="preserve">
     <value>{0} hora</value>

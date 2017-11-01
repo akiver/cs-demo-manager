@@ -143,7 +143,7 @@
     <comment>Bomb Planted</comment>
   </data>
   <data name="BrowseToErrorsFile" xml:space="preserve">
-    <value>Browse to errors file</value>
+    <value>Navegar para os arquivos de erros</value>
   </data>
   <data name="HeaderCrouchKills" xml:space="preserve">
     <value>MA</value>
@@ -162,10 +162,10 @@
     <value>Fechar BOT na saída</value>
   </data>
   <data name="Clutch" xml:space="preserve">
-    <value>Embreagem</value>
+    <value>Clutch</value>
   </data>
   <data name="Clutches" xml:space="preserve">
-    <value>Embreagens</value>
+    <value>Clutches</value>
   </data>
   <data name="Columns" xml:space="preserve">
     <value>Colunas</value>
@@ -180,7 +180,7 @@
     <value>Mortes agachado</value>
   </data>
   <data name="CsgoExePath" xml:space="preserve">
-    <value>csgo.exe path</value>
+    <value>Caminho csgo.exe</value>
   </data>
   <data name="CurrentAccountWatch" xml:space="preserve">
     <value>Conta atual usada pra assistir (highlights / lowlights)</value>
@@ -213,7 +213,7 @@
     <value>Pasta de destino</value>
   </data>
   <data name="Donation" xml:space="preserve">
-    <value>diação</value>
+    <value>doação</value>
   </data>
   <data name="Download" xml:space="preserve">
     <value>Download</value>
@@ -235,10 +235,10 @@
     <value>Mortes de entrada</value>
   </data>
   <data name="EquipmentValueTeam1" xml:space="preserve">
-    <value>Valor do equipamento da equipe 1</value>
+    <value>Valor do equipamento CT</value>
   </data>
   <data name="EquipmentValueTeam2" xml:space="preserve">
-    <value>Valor do equipamento da equipe 2</value>
+    <value>Valor do equipamento T</value>
   </data>
   <data name="ExportCustomData" xml:space="preserve">
     <value>Exportar dados customizados</value>
@@ -264,7 +264,7 @@
     <value>De</value>
   </data>
   <data name="Fullscreen" xml:space="preserve">
-    <value>Fullscreen</value>
+    <value>Tela cheia </value>
   </data>
   <data name="Height" xml:space="preserve">
     <value>Altura</value>
@@ -273,20 +273,20 @@
     <value>HLTV</value>
   </data>
   <data name="Hostname" xml:space="preserve">
-    <value>Hostname</value>
+    <value>Servidor</value>
   </data>
   <data name="HeaderHeadshots" xml:space="preserve">
     <value>HS</value>
     <comment>HeadShot</comment>
   </data>
   <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
-    <value>Ignorar ban ocorrido antes a data da demo</value>
+    <value>Ignorar ban ocorrido antes da data da demo</value>
   </data>
   <data name="ImportCustomData" xml:space="preserve">
     <value>Importar dados customizados</value>
   </data>
   <data name="HeaderJumpKills" xml:space="preserve">
-    <value>JK</value>
+    <value>MP (Mortes pulando)</value>
     <comment>Jump Kill</comment>
   </data>
   <data name="JumpKills" xml:space="preserve">
@@ -316,7 +316,7 @@
     <value>Nome do mapa</value>
   </data>
   <data name="Misc" xml:space="preserve">
-    <value>Misc</value>
+    <value>Diversos</value>
   </data>
   <data name="MVP" xml:space="preserve">
     <value>MVP</value>
@@ -387,16 +387,16 @@
     <value>Iniciar BOT na inicialização</value>
   </data>
   <data name="StartMoneyTeam1" xml:space="preserve">
-    <value>Dinheiro de incio do time 1</value>
+    <value>Dinheiro inicial CT</value>
   </data>
   <data name="StartMoneyTeam2" xml:space="preserve">
-    <value>Dinheiro de incio da equipe 2</value>
+    <value>Dinheiro inicial T</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>
   <data name="Stop" xml:space="preserve">
-    <value>Para</value>
+    <value>Parar</value>
   </data>
   <data name="SyncNicknames" xml:space="preserve">
     <value>Sincronizar apelidos</value>
@@ -456,7 +456,7 @@
     <value>Para assistir</value>
   </data>
   <data name="TradeDeath" xml:space="preserve">
-    <value>Trade de morte</value>
+    <value>Troca de morte</value>
   </data>
   <data name="TradeKill" xml:space="preserve">
     <value>Troca de morte</value>
@@ -469,7 +469,7 @@
     <value>Tipo</value>
   </data>
   <data name="UseAccountForWatch" xml:space="preserve">
-    <value>Use essa conta para o assistir</value>
+    <value>Use essa conta para assistir</value>
   </data>
   <data name="UseCutomLowlightHighlight" xml:space="preserve">
     <value>Usar geração de highlights / lowlights customizados</value>
@@ -484,7 +484,7 @@
     <value>Nome da equipe vencedora</value>
   </data>
   <data name="WinnerSide" xml:space="preserve">
-    <value>WS</value>
+    <value>LG</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Sim</value>
@@ -559,7 +559,7 @@
     <value>Nome do arquivo</value>
   </data>
   <data name="LabelHostname" xml:space="preserve">
-    <value>Hostname</value>
+    <value>Servidor</value>
   </data>
   <data name="LabelMostHsPercent" xml:space="preserve">
     <value>A maioria Headshots %</value>
@@ -568,16 +568,16 @@
     <value>Mapa</value>
   </data>
   <data name="LabelMostBombPlanted" xml:space="preserve">
-    <value>A maioria das plantas de bomba</value>
+    <value>Plantou mais C4</value>
   </data>
   <data name="LabelMostDamagingWeapon" xml:space="preserve">
-    <value>A maioria de danos por arma</value>
+    <value>Maior dano por</value>
   </data>
   <data name="LabelMostEntryKills" xml:space="preserve">
-    <value>A maioria de mortes de entrada</value>
+    <value>Maior entry kills</value>
   </data>
   <data name="LabelMostKillingWeapon" xml:space="preserve">
-    <value>Most killing weapon</value>
+    <value>Arma que mais matou</value>
   </data>
   <data name="LabelPlayerStats" xml:space="preserve">
     <value>Estatísticas do jogador</value>
@@ -628,7 +628,7 @@
     <value>Flashbangs (CTRL+F)</value>
   </data>
   <data name="ToolTipHeatmap" xml:space="preserve">
-    <value>Gerador mapa de calor (CTRL+H)</value>
+    <value>Geradar mapa de calor (CTRL+H)</value>
   </data>
   <data name="ToolTipKillsDetails" xml:space="preserve">
     <value>Detalhes das mortes (CTRL+K)</value>
@@ -678,10 +678,10 @@
     <comment>Entry Kills</comment>
   </data>
   <data name="HeaderEquipementValueTeam1" xml:space="preserve">
-    <value>EV Equipe  1 ($)</value>
+    <value>EV CT ($)</value>
   </data>
   <data name="HeaderEquipementValueTeam2" xml:space="preserve">
-    <value>EV Equipe 2 ($)</value>
+    <value>EV T ($)</value>
   </data>
   <data name="HeaderHsPercent" xml:space="preserve">
     <value>HS%</value>
@@ -700,10 +700,10 @@
     <comment>Side Trouble</comment>
   </data>
   <data name="HeaderStartMoneyTeam1" xml:space="preserve">
-    <value>SM Equipe 1 ($)</value>
+    <value>SM CT ($)</value>
   </data>
   <data name="HeaderStartMoneyTeam2" xml:space="preserve">
-    <value>SM Side Trouble 2 ($)</value>
+    <value>SM T ($)</value>
   </data>
   <data name="HeaderTeamKill" xml:space="preserve">
     <value>FF</value>
@@ -729,7 +729,7 @@
     <value>Visibilidade do Estado da Conta</value>
   </data>
   <data name="HeaderToolTipAssisterName" xml:space="preserve">
-    <value>Nome do ajudante</value>
+    <value>Nome do assistente</value>
   </data>
   <data name="HeaderToolTipAssists" xml:space="preserve">
     <value>Assistências</value>
@@ -744,7 +744,7 @@
     <value>Dano médio por rodada</value>
   </data>
   <data name="HeaderToolTipBombDefused" xml:space="preserve">
-    <value>Bomb Desarmada</value>
+    <value>Bomba Desarmada</value>
   </data>
   <data name="HeaderToolTipBombExploded" xml:space="preserve">
     <value>Bomba explodiu</value>
@@ -753,7 +753,7 @@
     <value>Bomba plantada</value>
   </data>
   <data name="HeaderToolTipClutchCount" xml:space="preserve">
-    <value>Numero de embragem</value>
+    <value>Numero de clutch</value>
   </data>
   <data name="HeaderToolTipClutchWonCount" xml:space="preserve">
     <value>Numero de clutches ganhos</value>
@@ -789,10 +789,10 @@
     <value>Duração da demo</value>
   </data>
   <data name="HeaderToolTipDemoFramerate" xml:space="preserve">
-    <value>Framehate da demo</value>
+    <value>Framerate da demo</value>
   </data>
   <data name="HeaderToolTipDemoHostname" xml:space="preserve">
-    <value>Hostname da demo</value>
+    <value>Servidor da demo</value>
   </data>
   <data name="HeaderToolTipDemoName" xml:space="preserve">
     <value>Nome da demo</value>
@@ -813,16 +813,16 @@
     <value>Valor da equipe</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
-    <value>Valor do equipamento da equipe 1 ($)</value>
+    <value>Valor do equipamento CT ($)</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam2" xml:space="preserve">
-    <value>Valor do equipamento da equipe 2 ($)</value>
+    <value>Valor do equipamento T ($)</value>
   </data>
   <data name="HeaderToolTipFiveKill" xml:space="preserve">
     <value>5 Mortes</value>
   </data>
   <data name="HeaderToolTipFourKill" xml:space="preserve">
-    <value>4 Kills</value>
+    <value>4 Mortes</value>
   </data>
   <data name="HeaderToolTipHasVacOwBan" xml:space="preserve">
     <value>VAC / OW ban?</value>
@@ -888,19 +888,19 @@
     <value>1 Kill</value>
   </data>
   <data name="HeaderToolTipOneVersusFive" xml:space="preserve">
-    <value>1 versus 5</value>
+    <value>1 VS 5</value>
   </data>
   <data name="HeaderToolTipOneVersusFour" xml:space="preserve">
-    <value>1 versus 4</value>
+    <value>1 VS 4</value>
   </data>
   <data name="HeaderToolTipOneVersusOne" xml:space="preserve">
-    <value>1 versus 1</value>
+    <value>1 VS1</value>
   </data>
   <data name="HeaderToolTipOneVersusThree" xml:space="preserve">
-    <value>1 versus 3</value>
+    <value>1 VS 3</value>
   </data>
   <data name="HeaderToolTipOneVersusTwo" xml:space="preserve">
-    <value>1 versus 2</value>
+    <value>1 VS 2</value>
   </data>
   <data name="HeaderToolTipOneVersusX" xml:space="preserve">
     <value>1vX</value>
@@ -966,10 +966,10 @@
     <value>Dinheiro de inicio</value>
   </data>
   <data name="HeaderToolTipStartMoneyTeam1" xml:space="preserve">
-    <value>Dinheiro de inicio da equipe 1 ($)</value>
+    <value>Dinheiro de inicio da equipe CT ($)</value>
   </data>
   <data name="HeaderToolTipStartMoneyTeam2" xml:space="preserve">
-    <value>Dinheiro de inicio da equipe 2 ($)</value>
+    <value>Dinheiro de inicio da equipe T ($)</value>
   </data>
   <data name="HeaderToolTipTeam1Name" xml:space="preserve">
     <value>Nome da equipe 1</value>
@@ -1114,13 +1114,13 @@
     <value>ME (Mortes de entrada)</value>
   </data>
   <data name="EquipmentValueTeam1Full" xml:space="preserve">
-    <value>EVT1 (Valor do equipamento da equipe 1 ($))</value>
+    <value>EV CT (Valor do equipamento CT ($))</value>
   </data>
   <data name="EquipmentValueTeam2Full" xml:space="preserve">
-    <value>EVT2 (Valor do equipamento da equipe 2 ($))</value>
+    <value>EV T (Valor do equipamento T ($))</value>
   </data>
   <data name="EseaRwsFull" xml:space="preserve">
-    <value>RWS (ESEA Rodada partilhada vencida)</value>
+    <value>RWS (ESEA Rodada compartilhada vencida)</value>
   </data>
   <data name="ExportJson" xml:space="preserve">
     <value>Exportar para JSON</value>
@@ -1183,10 +1183,10 @@
     <value>ST (Lado com problema)</value>
   </data>
   <data name="StartMoneyTeam1Full" xml:space="preserve">
-    <value>SMT1 (Dinheiro de inicio da equipe 1 ($))</value>
+    <value>SM CT (Dinheiro de inicio CT ($))</value>
   </data>
   <data name="StartMoneyTeam2Full" xml:space="preserve">
-    <value>SMT2 (Dinheiro de inico da equipe 2 ($))</value>
+    <value>SM T (Dinheiro de inico T ($))</value>
   </data>
   <data name="TeamNameTroubleFull" xml:space="preserve">
     <value>TNT (Nome da equipe problema)</value>
@@ -1222,7 +1222,7 @@
     <value>Decoys</value>
   </data>
   <data name="EndReasonBombDefused" xml:space="preserve">
-    <value>Bomb desamada</value>
+    <value>Bomba desamada</value>
   </data>
   <data name="EndReasonBombExploded" xml:space="preserve">
     <value>Bomba explodiu</value>
@@ -1517,7 +1517,7 @@
     <value>Média de mortes</value>
   </data>
   <data name="Draw" xml:space="preserve">
-    <value>Desenhar</value>
+    <value>Empate</value>
   </data>
   <data name="Duels" xml:space="preserve">
     <value>Duelos</value>
@@ -1631,7 +1631,7 @@
     <value>Total de bombas plantadas</value>
   </data>
   <data name="ToolTipTotalDamages" xml:space="preserve">
-    <value>Total de danos</value>
+    <value>Total de dano</value>
   </data>
   <data name="ToolTipTotalDeaths" xml:space="preserve">
     <value>Total de mortes</value>
@@ -2419,7 +2419,7 @@ Jogadores listados abaixo não serão verificados por ban enquando se analisar u
     <value>Atualizar (CTRL+R)</value>
   </data>
   <data name="ToolTipWatchAllStuffsFromPlayer" xml:space="preserve">
-    <value>Assistir todas as coisas desse jogador (CTRL+W)</value>
+    <value>Assistir tudo desse jogador (CTRL+W)</value>
   </data>
   <data name="TotalCashEarned" xml:space="preserve">
     <value>Total de dinehiro ganho ($)</value>
@@ -2431,7 +2431,7 @@ Jogadores listados abaixo não serão verificados por ban enquando se analisar u
     <value>Atualizar</value>
   </data>
   <data name="WatchPlayerStuffs" xml:space="preserve">
-    <value>Assistir coisas do jogador</value>
+    <value>Assistir tudo do jogador</value>
   </data>
   <data name="DescriptionEntryHoldKills" xml:space="preserve">
     <value>(Primeira morte por um CT)</value>
@@ -2512,14 +2512,158 @@ Mensagem de Erro:
   <data name="DialogNoChatFound" xml:space="preserve">
     <value>Nenhuma mensagem de chat encontrados. (Funciona apenas para demos provenientes de um servidor que tem "tv_relaytextchat" definido como um valor diferente de "0", o que não é o caso para os servidores oficiais de MM da Valve).</value>
   </data>
+  <data name="NoHeatmapDataFound" xml:space="preserve">
+    <value>Nenhum {0} encontrado para esta seleção</value>
+  </data>
+  <data name="Shots" xml:space="preserve">
+    <value>Tiros</value>
+  </data>
+  <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
+    <value>Essa demo não é dos servidores de matchmaking de Valve ou o arquivo .info está faltando.</value>
+  </data>
+  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
+    <value>Link de compartilhamento copiado para a área de transferência</value>
+  </data>
+  <data name="CopyDemoShareCode" xml:space="preserve">
+    <value>Copiar link de compartilhamento</value>
+  </data>
+  <data name="ShowOnThirdParty" xml:space="preserve">
+    <value>Mostrar no aplicativo de terceiros</value>
+  </data>
+  <data name="DialogShareCodeNotAvailable" xml:space="preserve">
+    <value>Link de compartilhamento não disponível. Ele funciona apenas com demos dos servidores Valve e se o arquivo .info existir.</value>
+  </data>
+  <data name="YesDontAsk" xml:space="preserve">
+    <value>Sim e não perguntar na próxima vez</value>
+  </data>
+  <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
+    <value>Você enviará o link de compartilhamento de demos para {0}. Você quer continuar?</value>
+  </data>
+  <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
+    <value>Ocorreu um erro ao enviar o link de compartilhamento.</value>
+  </data>
+  <data name="DialogSendShareCodeWarning" xml:space="preserve">
+    <value>Você enviará o link de compartilhamento de demos para {0}.</value>
+  </data>
+  <data name="DialogSelectThirdParty" xml:space="preserve">
+    <value>Selecione o aplicativo de terceiros</value>
+  </data>
+  <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
+    <value>Mostrar detalhes da demo em um aplicativo de terceiros</value>
+  </data>
+  <data name="DialogConfigurationCorrupted" xml:space="preserve">
+    <value>Seu arquivo de configuração está corrompido. Reinicie o aplicativo para redefinir sua configuração.</value>
+  </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE não encontrado. Instale-o, permitindo as configurações.</value>
+  </data>
+  <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
+    <value>Habilite a pasta principal de configuração de criação de filmes</value>
+  </data>
   <data name="EnableHlae" xml:space="preserve">
     <value>Ativar HLAE</value>
   </data>
   <data name="DialogEnableHlaeWarning" xml:space="preserve">
-    <value>Ativa HLAE muda forma como o jogo é iniciado (Quando você clica em todos os botões "Assistir"). 
-Ele vai usar uma ferramenta "Half-Life Advanced Effects" (HLAE) que é tecnicamente um hack. 
-Você deve usá-lo APENAS se voce souber o que etá fazendo e para fazer a criação de filmes coisas relacionadas. 
-Se você não sabe o que é isso ou você não está planejando fazer filmes basta clicar sobre cancelar. 
+    <value>Ativa HLAE muda forma como o jogo é iniciado (Quando você clica em todos os botões "Assistir").
+Ele vai usar uma ferramenta "Half-Life Advanced Effects" (HLAE) que é tecnicamente um hack.
+Você deve usá-lo APENAS se voce souber o que etá fazendo e para fazer a criação de filmes coisas relacionadas.
+Se você não sabe o que é isso ou você não está planejando fazer filmes basta clicar sobre cancelar.
 Se você ativá-lo,  o jogo será iniciado com o parâmentro "-insecure" (todas as vezes),o que significa que você não será capaz de se conectar a servidores protegidos pelo VAC e previnir um ban VAC.</value>
+  </data>
+  <data name="DialogHlaeNotFound" xml:space="preserve">
+    <value>Parece que HLAE não está instalado.
+Você deseja instalá-lo? (Se você estiver usando, você deve instalá-lo primeiro para poder usá-lo)</value>
+  </data>
+  <data name="DialogNewHlaeVersionAvailable" xml:space="preserve">
+    <value>Está disponível uma nova versão HLAE.
+Você deseja instalar (Recomenda-se evitar possíveis falhas devido às atualizações do CSGO)</value>
+  </data>
+  <data name="DialogHlaeInstallationFailed" xml:space="preserve">
+    <value>Ocorreu um erro ao instalar o HLAE.</value>
+  </data>
+  <data name="DialogHlaeInstalled" xml:space="preserve">
+    <value>HLAE foi instalado.</value>
+  </data>
+  <data name="DialogHlaeRequired" xml:space="preserve">
+    <value>HLAE precisa ser instalado para ser usado.</value>
+  </data>
+  <data name="DialogHlaeUpdated" xml:space="preserve">
+    <value>HLAE foi atualizado.</value>
+  </data>
+  <data name="DialogHlaeUpdateFailed" xml:space="preserve">
+    <value>Ocorreu um erro ao atualizar o HLAE</value>
+  </data>
+  <data name="NotificationInstallingHlae" xml:space="preserve">
+    <value>Instalando o HLAE...</value>
+  </data>
+  <data name="NotificationUpdatingHlae" xml:space="preserve">
+    <value>Atualizando o HLAE...</value>
+  </data>
+  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
+    <value>Selecione a localização da pasta principal da configuração do HLAE.</value>
+  </data>
+  <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
+    <value>O jogador que você está focando não está nesta demo. Você pode alterá-lo das configurações (seção de contas) ou assisti-lo a partir do placar.</value>
+  </data>
+  <data name="DemosListSize" xml:space="preserve">
+    <value>Tamanho da lista de demos</value>
+  </data>
+  <data name="ShowAllDemos" xml:space="preserve">
+    <value>Mostrar todas as demos</value>
+  </data>
+  <data name="DialogErrorInvalidShareCode" xml:space="preserve">
+    <value>Link de compartilhamento inválido</value>
+  </data>
+  <data name="ToolTipDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Baixe uma demo do link de compartilhamento</value>
+  </data>
+  <data name="ShareCode" xml:space="preserve">
+    <value>link de compartilhamento</value>
+  </data>
+  <data name="DialogMessageDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Você vai baixar uma demo a partir do link de compartilhamento.
+
+Digite link de compartilhamento (exemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</value>
+  </data>
+  <data name="DialogTitleDownloadDemoFromShareCode" xml:space="preserve">
+    <value>Baixar demo a partir do link de compartilhamento</value>
+  </data>
+  <data name="DialogDemoFromShareCodeNotAvailable" xml:space="preserve">
+    <value>O link da demo expirou ou você já tem essa demo na sua pasta de downloads.</value>
+  </data>
+  <data name="NotificationRetrievingDemoFromShareCode" xml:space="preserve">
+    <value>Recuperando dados de demo...</value>
+  </data>
+  <data name="DialogErrorWhileRetrievingDemoData" xml:space="preserve">
+    <value>Ocorreu um erro ao recuperar as informações da demo.</value>
+  </data>
+  <data name="HeaderEseaRws" xml:space="preserve">
+    <value>RWS</value>
+  </data>
+  <data name="HeaderToolTipEseaRws" xml:space="preserve">
+    <value>Média de vitórias da rodada compartilhada da ESEA</value>
+  </data>
+  <data name="DialogErrorEseaDemosParsing" xml:space="preserve">
+    <value>Ocorreu um erro ao analisar a demo {0}.
+Como esta fonte de demo é a ESEA, provavelmente é devido ao sistema ESEA pug que impede a gravação de demos.
+Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</value>
+  </data>
+  <data name="HeaderAccuracy" xml:space="preserve">
+    <value>ACR (%)</value>
+  </data>
+  <data name="HeaderToolTipAccuracy" xml:space="preserve">
+    <value>Precisão (%)</value>
+  </data>
+  <data name="Accuracy" xml:space="preserve">
+    <value>Precisão</value>
+  </data>
+  <data name="AccuracyFull" xml:space="preserve">
+    <value>Precisão % (tiros / acertos)</value>
+  </data>
+  <data name="Hits" xml:space="preserve">
+    <value>Acertos</value>
+  </data>
+  <data name="NotificationImportingCustomData" xml:space="preserve">
+    <value>Importando dados personalizados...</value>
   </data>
 </root>
