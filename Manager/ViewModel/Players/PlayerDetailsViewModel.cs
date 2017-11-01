@@ -183,6 +183,8 @@ namespace Manager.ViewModel.Players
 						Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
 						DemoDetailsView detailsView = new DemoDetailsView();
 						mainViewModel.CurrentPage.ShowPage(detailsView);
+						CurrentPlayer = null;
+						CurrentDemo = null;
 					}));
 			}
 		}
