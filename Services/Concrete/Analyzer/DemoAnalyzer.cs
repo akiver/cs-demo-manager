@@ -144,19 +144,19 @@ namespace Services.Concrete.Analyzer
 		{
 			switch (demo.SourceName)
 			{
-				case "valve":
-				case "popflash":
+				case Valve.NAME:
+				case PopFlash.NAME:
 				case Wanmei.NAME:
 					return new ValveAnalyzer(demo);
-				case "esea":
+				case Esea.NAME:
 					return new EseaAnalyzer(demo);
-				case "ebot":
-				case "faceit":
-				case "esl":
+				case Ebot.NAME:
+				case Faceit.NAME:
+				case Esl.NAME:
 					return new EbotAnalyzer(demo);
-				case "cevo":
+				case Cevo.NAME:
 					return new CevoAnalyzer(demo);
-				case "pov":
+				case Pov.NAME:
 					return null;
 				default:
 					return null;
