@@ -45,7 +45,7 @@ More screenshots and video are available at [https://csgo-demos-manager.com](htt
 
 ### You need Telerik binaries to be able to compile the application.
 
-* Install Telerik binaries
+* Install [Telerik binaries](https://www.telerik.com/products/wpf/overview.aspx)
 * Download the repository and extract it
 * Launch the solution in Visual Studio
 * Set the correct path for Telerik references if needed
