@@ -114,6 +114,8 @@ namespace Services.Models.Excel
 
 		public int TradeDeathCount { get; set; }
 
+		public double AverageTimeDeathSeconds { get; set; }
+
 		public decimal EntryHoldKillWinPercent => EntryHoldKillCount == 0 ? 0 : Math.Round((decimal)(EntryHoldKillWonCount * 100) / EntryHoldKillCount, 2);
 
 		public decimal KillPerRound => RoundCount == 0 ? 0 : Math.Round((decimal)KillCount / RoundCount, 2);

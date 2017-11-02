@@ -28,6 +28,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				{ "MVP", CellType.Numeric },
 				{ "Score", CellType.Numeric },
 				{ "Rating", CellType.Numeric },
+				{ "ATD (s)", CellType.Numeric },
 				{ "KPR", CellType.Numeric },
 				{ "APR", CellType.Numeric },
 				{ "DPR", CellType.Numeric },
@@ -103,6 +104,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RoundMvpCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Score);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatingHltv);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.AverageTimeDeath);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.KillPerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.AssistPerRound);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.DeathPerRound);
