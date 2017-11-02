@@ -3620,6 +3620,14 @@ This is an ESEA issue, you may have missing data for this demo.</target>
           <source>Average Time Death (seconds)</source>
           <target state="new">Average Time Death (seconds)</target>
         </trans-unit>
+        <trans-unit id="ToolTipSaveAsPngNoShortcut" translate="yes" xml:space="preserve">
+          <source>Save as PNG</source>
+          <target state="new">Save as PNG</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorExportingChart" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting the chart.</source>
+          <target state="new">An error occured while exporting the chart.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

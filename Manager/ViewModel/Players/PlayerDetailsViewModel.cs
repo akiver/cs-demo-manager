@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Core;
 using Core.Models;
 using Core.Models.Events;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Services;
@@ -14,7 +15,9 @@ using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Charts;
 using Services.Models.Stats;
+using Telerik.Windows.Controls;
 using Application = System.Windows.Application;
+using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Manager.ViewModel.Players
 {
@@ -69,6 +72,8 @@ namespace Manager.ViewModel.Players
 		private RelayCommand _addPlayerToSuspectListCommand;
 
 		private RelayCommand _addPlayerToWhitelistCommand;
+
+		private RelayCommand<RadCartesianChart> _exportChartCommand;
 
 		#endregion
 
@@ -348,6 +353,47 @@ namespace Manager.ViewModel.Players
 								HasNotification = false;
 								Logger.Instance.Log(e);
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileAddingPlayerToWhitelist, MessageDialogStyle.Affirmative);
+							}
+						}));
+			}
+		}
+
+		public RelayCommand<RadCartesianChart> ExportChartCommand
+		{
+			get
+			{
+				return _exportChartCommand
+					?? (_exportChartCommand = new RelayCommand<RadCartesianChart>(
+						async chart =>
+						{
+							try
+							{
+								string fileNameSuffix = "equipment";
+								switch (chart.Name)
+								{
+									case "DamagesChart":
+										fileNameSuffix = "damages";
+										break;
+									case "MoneyChart":
+										fileNameSuffix = "money";
+										break;
+								}
+								
+								SaveFileDialog dialog = new SaveFileDialog
+								{
+									FileName = $"{CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4)}-{CurrentPlayer.Name}-{fileNameSuffix}.png",
+									Filter = "PNG file (*.png)|*.png"
+								};
+
+								if (dialog.ShowDialog() == DialogResult.OK)
+								{
+									Telerik.Windows.Media.Imaging.ExportExtensions.ExportToImage(chart, dialog.FileName, new PngBitmapEncoder());
+								}
+							}
+							catch (Exception e)
+							{
+								Logger.Instance.Log(e);
+								await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorExportingChart, MessageDialogStyle.Affirmative).ConfigureAwait(false);
 							}
 						}));
 			}

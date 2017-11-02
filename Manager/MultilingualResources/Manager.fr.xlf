@@ -3605,6 +3605,14 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
           <source>Average Time Death (seconds)</source>
           <target state="final">Moyenne temps avant mort (secondes)</target>
         </trans-unit>
+        <trans-unit id="ToolTipSaveAsPngNoShortcut" translate="yes" xml:space="preserve">
+          <source>Save as PNG</source>
+          <target state="final">Exporter en PNG</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorExportingChart" translate="yes" xml:space="preserve">
+          <source>An error occured while exporting the chart.</source>
+          <target state="final">Une erreur est survenue pendant l'export du graphique.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

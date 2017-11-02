@@ -2686,4 +2686,10 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
   <data name="HeaderToolTipAverageTimeDeath" xml:space="preserve">
     <value>Moyenne temps avant mort (secondes)</value>
   </data>
+  <data name="ToolTipSaveAsPngNoShortcut" xml:space="preserve">
+    <value>Exporter en PNG</value>
+  </data>
+  <data name="DialogErrorExportingChart" xml:space="preserve">
+    <value>Une erreur est survenue pendant l'export du graphique.</value>
+  </data>
 </root>

@@ -16,10 +16,28 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
-		<TextBlock Grid.Row="0"
-				   Style="{StaticResource LabelChartStyle}"
-				   Text="{x:Static properties:Resources.EquipmentValuePerRound}"/>
+		<StackPanel Grid.Row="0" Orientation="Horizontal">
+			<TextBlock Style="{StaticResource LabelChartStyle}"
+					   Text="{x:Static properties:Resources.EquipmentValuePerRound}"/>
+			<Button Command="{Binding ExportChartCommand}"
+					CommandParameter="{Binding ElementName=EquipmentChart}"
+					Style="{DynamicResource GeneralButton}"
+					Margin="0"
+					ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}">
+				<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+					<Rectangle Width="15" Height="15" Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_page_png}" Stretch="Fill" />
+						</Rectangle.OpacityMask>
+					</Rectangle>
+					<TextBlock Text="{x:Static properties:Resources.Export}"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
 		<telerik:RadCartesianChart Grid.Row="1"
+								   x:Name="EquipmentChart"
+								   Background="{StaticResource WindowBackgroundBrush}"
 								   ClipToBounds="False">
 			<telerik:RadCartesianChart.VerticalAxis>
 				<telerik:LinearAxis RangeExtendDirection="Both"
@@ -60,11 +78,29 @@
 			</telerik:RadCartesianChart.Grid>
 		</telerik:RadCartesianChart>
 
-		<TextBlock Grid.Row="2"
-				   Style="{StaticResource LabelChartStyle}"
-				   Text="{x:Static properties:Resources.TotalCashEarned}"/>
+		<StackPanel Grid.Row="2" Orientation="Horizontal">
+			<TextBlock Style="{StaticResource LabelChartStyle}"
+					   Text="{x:Static properties:Resources.TotalCashEarned}"/>
+			<Button Command="{Binding ExportChartCommand}"
+					CommandParameter="{Binding ElementName=MoneyChart}"
+					Style="{DynamicResource GeneralButton}"
+					Margin="0"
+					ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}">
+				<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+					<Rectangle Width="15" Height="15" Fill="{StaticResource IdealForegroundColorBrush}">
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_page_png}" Stretch="Fill" />
+						</Rectangle.OpacityMask>
+					</Rectangle>
+					<TextBlock Text="{x:Static properties:Resources.Export}"
+							   Style="{StaticResource ButtonTitleStyle}" />
+				</StackPanel>
+			</Button>
+		</StackPanel>
 		<telerik:RadCartesianChart Grid.Row="3"
-								   ClipToBounds="False">
+								   ClipToBounds="False"
+								   x:Name="MoneyChart"
+								   Background="{StaticResource WindowBackgroundBrush}">
 			<telerik:RadCartesianChart.VerticalAxis>
 				<telerik:LinearAxis RangeExtendDirection="Both"
 									LabelStyle="{StaticResource LabelChartStyle}"

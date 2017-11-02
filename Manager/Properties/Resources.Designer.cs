@@ -1294,6 +1294,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while exporting the chart..
+        /// </summary>
+        public static string DialogErrorExportingChart {
+            get {
+                return ResourceManager.GetString("DialogErrorExportingChart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured while exporting heatmap to PNG..
         /// </summary>
         public static string DialogErrorExportingHeatmap {
@@ -7161,6 +7170,15 @@ namespace Manager.Properties {
         public static string ToolTipSaveAsPng {
             get {
                 return ResourceManager.GetString("ToolTipSaveAsPng", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save as PNG.
+        /// </summary>
+        public static string ToolTipSaveAsPngNoShortcut {
+            get {
+                return ResourceManager.GetString("ToolTipSaveAsPngNoShortcut", resourceCulture);
             }
         }
         

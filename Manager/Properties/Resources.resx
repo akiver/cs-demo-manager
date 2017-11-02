@@ -2813,4 +2813,10 @@ This is an ESEA issue, you may have missing data for this demo.</value>
   <data name="HeaderToolTipAverageTimeDeath" xml:space="preserve">
     <value>Average Time Death (seconds)</value>
   </data>
+  <data name="DialogErrorExportingChart" xml:space="preserve">
+    <value>An error occured while exporting the chart.</value>
+  </data>
+  <data name="ToolTipSaveAsPngNoShortcut" xml:space="preserve">
+    <value>Save as PNG</value>
+  </data>
 </root>
