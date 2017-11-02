@@ -226,6 +226,8 @@ namespace Manager.ViewModel
 
 		private bool _showTeamTroubleColumn = Settings.Default.ShowTeamTroubleColumn;
 
+		private bool _showtimeDeathColumn = Settings.Default.ShowTimeDeathColumn;
+
 		private bool _showRoundPlayedColumn = Settings.Default.ShowRoundPlayedColumn;
 
 		private string _csgoExePath = Settings.Default.CsgoExePath;
@@ -1168,6 +1170,17 @@ namespace Manager.ViewModel
 				Settings.Default.ShowTeamTroubleColumn = value;
 				Settings.Default.Save();
 				Set(() => ShowTeamTroubleColumn, ref _showTeamTroubleColumn, value);
+			}
+		}
+
+		public bool ShowTimeDeathColumn
+		{
+			get { return _showtimeDeathColumn; }
+			set
+			{
+				Settings.Default.ShowTimeDeathColumn = value;
+				Settings.Default.Save();
+				Set(() => ShowTimeDeathColumn, ref _showtimeDeathColumn, value);
 			}
 		}
 

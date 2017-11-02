@@ -451,6 +451,9 @@
 								<CheckBox Content="{x:Static properties:Resources.TeamNameTroubleFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTeamTroubleColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
+								<CheckBox Content="{x:Static properties:Resources.AverageTimeDeath}"
+										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTimeDeathColumn}"
+										  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 								<CheckBox Content="{x:Static properties:Resources.TickrateFull}"
 										  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn}"
 										  Style="{StaticResource CheckBoxColumnOptionStyle}" />

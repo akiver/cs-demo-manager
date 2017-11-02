@@ -879,7 +879,8 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource AverageTimeDeathHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderAverageTimeDeath}"
-														Binding="{Binding AverageTimeDeath}" />
+														Binding="{Binding AverageTimeDeath}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTimeDeathColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderHltvRating}"
@@ -1120,7 +1121,8 @@
 									<DataGridTextColumn HeaderStyle="{StaticResource AverageTimeDeathHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderAverageTimeDeath}"
-														Binding="{Binding AverageTimeDeath}" />
+														Binding="{Binding AverageTimeDeath}"
+														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTimeDeathColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
 									<DataGridTextColumn HeaderStyle="{StaticResource RatingHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderHltvRating}"
