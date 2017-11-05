@@ -189,7 +189,7 @@ namespace Services.Concrete
 			return demos;
 		}
 
-		public async Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)
+		public async Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token, Action<string, float> progressCallback = null)
 		{
 			if (!File.Exists(demo.Path))
 			{
@@ -199,7 +199,7 @@ namespace Services.Concrete
 
 			DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
 
-			demo = await analyzer.AnalyzeDemoAsync(token);
+			demo = await analyzer.AnalyzeDemoAsync(token, progressCallback);
 
 			return demo;
 		}
@@ -216,7 +216,7 @@ namespace Services.Concrete
 			await _cacheService.WriteDemoDataCache(demo);
 		}
 
-		public async Task<ObservableCollection<Demo>>  SetSource(ObservableCollection<Demo> demos, string source)
+		public async Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source)
 		{
 			foreach (Demo demo in demos.Where(demo => demo.Type != "POV"))
 			{

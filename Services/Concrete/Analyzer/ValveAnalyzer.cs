@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -65,8 +66,9 @@ namespace Services.Concrete.Analyzer
 			Parser.RoundFinal += HandleRoundFinal;
 		}
 
-		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
+		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
 		{
+			ProgressCallback = progressCallback;
 			Parser.ParseHeader();
 
 			await Task.Run(() => Parser.ParseToEnd(token), token);

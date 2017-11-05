@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
@@ -61,8 +62,9 @@ namespace Services.Interfaces
 		/// </summary>
 		/// <param name="demo"></param>
 		/// <param name="token"></param>
+		/// <param name="progressCallback"></param>
 		/// <returns></returns>
-		Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token);
+		Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token, Action<string, float> progressCallback = null);
 
 		/// <summary>
 		/// Save the demo's comment

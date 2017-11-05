@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
@@ -33,8 +34,9 @@ namespace Services.Concrete.Analyzer
 			RegisterEvents();
 		}
 
-		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
+		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
 		{
+			ProgressCallback = progressCallback;
 			Parser.ParseHeader();
 
 			await Task.Run(() => Parser.ParseToEnd(token), token);

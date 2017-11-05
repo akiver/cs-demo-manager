@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Core;
 using Core.Models;
 using Core.Models.Source;
@@ -75,6 +76,8 @@ namespace Manager.ViewModel.Demos
 		private bool _hasNotification;
 
 		private string _notificationMessage;
+
+		private float _progress;
 
 		private CancellationTokenSource _cts;
 
@@ -639,7 +642,8 @@ namespace Manager.ViewModel.Demos
 								_cts = new CancellationTokenSource();
 							}
 
-							CurrentDemo = await _demosService.AnalyzeDemo(CurrentDemo, _cts.Token);
+							_progress = 0;
+							CurrentDemo = await _demosService.AnalyzeDemo(CurrentDemo, _cts.Token, HandleAnalyzeProgress);
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
 								await _demosService.AnalyzeBannedPlayersAsync(CurrentDemo);
@@ -1147,6 +1151,24 @@ namespace Manager.ViewModel.Demos
 					CurrentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
 				}
 			}
+		}
+
+		private void HandleAnalyzeProgress(string demoId, float value)
+		{
+			// it's time consuming, we don't want to update at each events only when the rounded value has changed
+			if (value < 0 || value > 1) return;
+			value = (float)Math.Round(value, 2);
+			if (value <= _progress) return;
+			_progress = value;
+
+			Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+			{
+				UpdateTaskbarProgressMessage msg = new UpdateTaskbarProgressMessage
+				{
+					Value = value,
+				};
+				Messenger.Default.Send(msg);
+			}));
 		}
 	}
 }

@@ -131,9 +131,11 @@ namespace Services.Concrete.Analyzer
 
 		public Queue<Player> PlayersFlashQueue = new Queue<Player>();
 
+		protected Action<string, float> ProgressCallback;
+
 		#endregion
 
-		public abstract Task<Demo> AnalyzeDemoAsync(CancellationToken token);
+		public abstract Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null);
 
 		protected abstract void RegisterEvents();
 
@@ -290,6 +292,8 @@ namespace Services.Concrete.Analyzer
 		/// <param name="e"></param>
 		protected void HandleTickDone(object sender, TickDoneEventArgs e)
 		{
+			ProgressCallback?.Invoke(Demo.Id, Parser.ParsingProgess);
+
 			if (!IsMatchStarted || IsFreezetime) return;
 
 			if (AnalyzeFlashbang)

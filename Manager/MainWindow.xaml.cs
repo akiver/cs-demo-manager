@@ -19,6 +19,16 @@ namespace Manager
 		{
 			InitializeComponent();
 			Closing += (s, e) => ViewModelLocator.Cleanup();
+
+			TaskbarItemInfo = new System.Windows.Shell.TaskbarItemInfo
+			{
+				ProgressState = System.Windows.Shell.TaskbarItemProgressState.Normal
+			};
+
+			Messenger.Default.Register<UpdateTaskbarProgressMessage>(this, msg =>
+			{
+				TaskbarItemInfo.ProgressValue = msg.Value >= 1 ? 0 : msg.Value;
+			});
 		}
 
 		private void NumberPreviewTextInput(object sender, TextCompositionEventArgs e)

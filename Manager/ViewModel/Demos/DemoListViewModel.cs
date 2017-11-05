@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Threading;
 using Core;
 using Core.Models;
 using Core.Models.Source;
@@ -72,6 +73,11 @@ namespace Manager.ViewModel.Demos
 		private Dictionary<string, object> _demoSourcesSelectors = new Dictionary<string, object>();
 
 		private Dictionary<string, object> _demoSourcesSelected = new Dictionary<string, object>();
+
+		/// <summary>
+		/// Keep track of demos analyze progression to update the Windows taskbar state
+		/// </summary>
+		private readonly Dictionary<string, float> _demoProgress = new Dictionary<string, float>();
 
 		private string _notificationMessage;
 
@@ -1101,7 +1107,7 @@ namespace Manager.ViewModel.Demos
 			{
 				return _stopAnalyzeCommand
 					?? (_stopAnalyzeCommand = new RelayCommand(
-						() =>
+						async () =>
 						{
 							if (_cts != null)
 							{
@@ -1109,6 +1115,10 @@ namespace Manager.ViewModel.Demos
 								_cts = null;
 								NotificationMessage = Properties.Resources.NotificationCancelling;
 								IsCancellable = false;
+								// small delay to be sure to send the msg after the last progress event trigerred
+								await Task.Delay(100);
+								SendTaskbarProgressMessage(0);
+								_demoProgress.Clear();
 							}
 						}, () => IsBusy));
 			}
@@ -1737,6 +1747,7 @@ namespace Manager.ViewModel.Demos
 		private async Task AnalyzeDemosAsync(bool checkExists = false)
 		{
 			CommandManager.InvalidateRequerySuggested();
+			_demoProgress.Clear();
 			IsBusy = true;
 			HasRing = true;
 			HasNotification = true;
@@ -1755,6 +1766,10 @@ namespace Manager.ViewModel.Demos
 				List<Task> tasks = new List<Task>();
 				SemaphoreSlim throttler = new SemaphoreSlim(MAX_ANALYZE_DEMO_COUNT);
 				List<Demo> demos = new List<Demo>(SelectedDemos.ToList());
+
+				// init progresses before to have the right number of demos in the dict
+				foreach (Demo demo in demos)
+					_demoProgress.Add(demo.Id, 0);
 
 				foreach (Demo demo in demos)
 				{
@@ -1810,7 +1825,7 @@ namespace Manager.ViewModel.Demos
 			bool result = false;
 			try
 			{
-				await _demosService.AnalyzeDemo(demo, token);
+				await _demosService.AnalyzeDemo(demo, token, HandleAnalyzeProgress);
 				if (demo.Status == "old") demo.Status = "none";
 				if (_cts != null)
 				{
@@ -2112,6 +2127,31 @@ namespace Manager.ViewModel.Demos
 				Logger.Instance.Log(e);
 				await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
 			}
+		}
+
+		private void HandleAnalyzeProgress(string demoId, float value)
+		{
+			// it's time consuming, we don't want to update at each events only when the rounded value has changed
+			if (value < 0 || value > 1) return;
+			value = (float)Math.Round(value, 2);
+			if (value <= _demoProgress[demoId]) return;
+			_demoProgress[demoId] = value;
+
+			float total = _demoProgress.ToList().Sum(kvp => kvp.Value);
+			value = _demoProgress.Count > 0 ? total / _demoProgress.Count : 0;
+			SendTaskbarProgressMessage(value);
+		}
+
+		private static void SendTaskbarProgressMessage(float value)
+		{
+			Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(() =>
+			{
+				UpdateTaskbarProgressMessage msg = new UpdateTaskbarProgressMessage
+				{
+					Value = value,
+				};
+				Messenger.Default.Send(msg);
+			}));
 		}
 
 		public void Dispose()

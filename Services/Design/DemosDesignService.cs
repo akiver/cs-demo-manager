@@ -162,7 +162,7 @@ namespace Services.Design
 			return Task.FromResult(new Demo());
 		}
 
-		public Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token)
+		public Task<Demo> AnalyzeDemo(Demo demo, CancellationToken token, Action<string, float> progressCallback = null)
 		{
 			Random random = new Random();
 

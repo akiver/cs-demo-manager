@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -53,8 +54,9 @@ namespace Services.Concrete.Analyzer
 			Parser.SayText2 += HandleSayText2;
 		}
 
-		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token)
+		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
 		{
+			ProgressCallback = progressCallback;
 			Parser.ParseHeader();
 
 			await Task.Run(() => Parser.ParseToEnd(token), token);
