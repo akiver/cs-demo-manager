@@ -27,7 +27,6 @@ using Manager.Views.Demos;
 using Manager.Views.Dialogs;
 using Manager.Views.Suspects;
 using Newtonsoft.Json;
-using Nito.AsyncEx;
 using Services.Concrete.Excel;
 using Services.Concrete.ThirdParties;
 using Services.Interfaces;
@@ -369,8 +368,9 @@ namespace Manager.ViewModel.Demos
 					async demos =>
 					{
 						Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof(Valve));
-						bool result = await RefreshSelectedDemos();
-						if (result && hasValveDemo != null) await RefreshLastRankAccount();
+						await UpdateSelectedDemosAsync();
+						await AnalyzeDemosAsync();
+						if (hasValveDemo != null) await RefreshLastRankAccount();
 					},
 					demos => SelectedDemos != null && SelectedDemos.Count > 0 && SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
 			}
@@ -495,23 +495,17 @@ namespace Manager.ViewModel.Demos
 											HasNotification = true;
 											NotificationMessage = Properties.Resources.NotificationAnalyzingDemosForExport;
 											IsCancellable = true;
-											if (_cts == null) _cts = new CancellationTokenSource();
 
-											List<Demo> demoList = demos.ToList();
-											while (demoList.Any() && _cts != null)
+											await AnalyzeDemosAsync(true);
+											if (_cts != null)
 											{
-												Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async demo =>
+												foreach (Demo demo in demos)
 												{
-													if (!_cacheService.HasDemoInCache(demo.Id))
-													{
-														await AnalyzeDemoAsync(demo, _cts.Token);
-													}
-													demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-													demoList.Remove(demo);
-												}).ToArray();
-												await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+													if (demo.WeaponFired.Count == 0)
+														demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+												}
+												await _excelService.GenerateXls(demos.ToList(), saveExportFileDialog.FileName, Properties.Settings.Default.SelectedStatsAccountSteamID);
 											}
-											if (_cts != null) await _excelService.GenerateXls(SelectedDemos.ToList(), saveExportFileDialog.FileName, Properties.Settings.Default.SelectedStatsAccountSteamID);
 										}
 										catch (Exception e)
 										{
@@ -538,8 +532,6 @@ namespace Manager.ViewModel.Demos
 										string directoryPath = Path.GetDirectoryName(saveExportFolderDialog.FileName);
 										if (directoryPath != null)
 										{
-											if (_cts == null) _cts = new CancellationTokenSource();
-
 											try
 											{
 												IsBusy = true;
@@ -548,31 +540,18 @@ namespace Manager.ViewModel.Demos
 												NotificationMessage = Properties.Resources.NotificationAnalyzingDemosForExport;
 												IsCancellable = true;
 
-												List<Demo> demoList = demos.ToList();
-												while (demoList.Any() && _cts != null)
+												await AnalyzeDemosAsync(true);
+												if (_cts != null)
 												{
-													Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async demo =>
+													foreach (Demo demo in demos)
 													{
-														string exportFilePath = directoryPath + Path.DirectorySeparatorChar + demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx";
-														if (!_cacheService.HasDemoInCache(demo.Id))
-														{
-															int analyzeResult = await AnalyzeDemoAsync(demo, _cts.Token);
-															if (analyzeResult == 1 && _cts != null)
-															{
-																NotificationMessage = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
-																demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-																await _excelService.GenerateXls(demo, exportFilePath);
-															}
-														}
-														else
-														{
-															NotificationMessage = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
+														NotificationMessage = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
+														if (demo.WeaponFired.Count == 0)
 															demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-															await _excelService.GenerateXls(demo, exportFilePath);
-														}
-														demoList.Remove(demo);
-													}).ToArray();
-													await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+
+														string exportFilePath = $"{directoryPath}{Path.DirectorySeparatorChar}{demo.Name.Substring(0, demo.Name.Length - 4)}-export.xlsx";
+														await _excelService.GenerateXls(demo, exportFilePath);
+													}
 												}
 											}
 											catch (Exception e)
@@ -1328,7 +1307,6 @@ namespace Manager.ViewModel.Demos
 							};
 							DialogResult result = folderDialog.ShowDialog();
 							if (result != DialogResult.OK) return;
-							string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
 
 							try
 							{
@@ -1337,18 +1315,13 @@ namespace Manager.ViewModel.Demos
 								HasNotification = true;
 								NotificationMessage = Properties.Resources.NotificationAnalyzingForJsonExport;
 								IsCancellable = true;
-								if (_cts == null) _cts = new CancellationTokenSource();
 
-								List<Demo> demoList = demos.ToList();
-								while (demoList.Any() && _cts != null)
+								string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
+								await AnalyzeDemosAsync(true);
+								if (_cts != null)
 								{
-									Task[] tasks = demoList.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async demo =>
-									{
-										await AnalyzeDemoAsync(demo, _cts.Token, false);
+									foreach (Demo demo in demos)
 										await _cacheService.GenerateJsonAsync(demo, path);
-										demoList.Remove(demo);
-									}).ToArray();
-									await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
 								}
 							}
 							catch (Exception e)
@@ -1724,12 +1697,12 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
-		private async Task<bool> RefreshSelectedDemos()
+		private async Task UpdateSelectedDemosAsync()
 		{
-			if (SelectedDemos.Count == Demos.Count && Demos.Count == AppSettings.DEMO_PAGE_COUNT)
+			if (SelectedDemos.Count == Demos.Count && Demos.Count == Properties.Settings.Default.DemosListSize)
 			{
-				var isAllAnalyze = await _dialogService.ShowAnalyzeAllDemosAsync();
-				if (isAllAnalyze == MessageDialogResult.FirstAuxiliary) return false;
+				MessageDialogResult isAllAnalyze = await _dialogService.ShowAnalyzeAllDemosAsync();
+				if (isAllAnalyze == MessageDialogResult.FirstAuxiliary) return;
 				IsBusy = true;
 				HasRing = true;
 				HasNotification = true;
@@ -1755,14 +1728,23 @@ namespace Manager.ViewModel.Demos
 					}
 				}
 			}
+		}
 
+		/// <summary>
+		/// Process to analyze multiple demos
+		/// </summary>
+		/// <returns></returns>
+		private async Task AnalyzeDemosAsync(bool checkExists = false)
+		{
+			CommandManager.InvalidateRequerySuggested();
 			IsBusy = true;
 			HasRing = true;
 			HasNotification = true;
 			IsCancellable = true;
-			NotificationMessage = Properties.Resources.NotificationAnalyzingMultipleDemos;
-			CommandManager.InvalidateRequerySuggested();
-			if (SelectedDemos.Count == 1) NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, SelectedDemos[0].Name);
+			if (SelectedDemos.Count == 1)
+				NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, SelectedDemos[0].Name);
+			else
+				NotificationMessage = Properties.Resources.NotificationAnalyzingMultipleDemos;
 
 			List<Demo> demosFailed = new List<Demo>();
 			List<Demo> demosNotFound = new List<Demo>();
@@ -1770,43 +1752,51 @@ namespace Manager.ViewModel.Demos
 			try
 			{
 				if (_cts == null) _cts = new CancellationTokenSource();
-				List<Demo> demos = SelectedDemos.ToList();
-				while (demos.Any() && _cts != null)
-				{
-					Task[] tasks = demos.ToList().Take(MAX_ANALYZE_DEMO_COUNT).Select(async demo =>
-					{
-						int result = await AnalyzeDemoAsync(demo, _cts.Token);
-						switch (result)
-						{
-							case -1:
-								demosFailed.Add(demo);
-								break;
-							case -2:
-								demosNotFound.Add(demo);
-								break;
-						}
-						demos.Remove(demo);
-					}).ToArray();
+				List<Task> tasks = new List<Task>();
+				SemaphoreSlim throttler = new SemaphoreSlim(MAX_ANALYZE_DEMO_COUNT);
+				List<Demo> demos = new List<Demo>(SelectedDemos.ToList());
 
-					await Task.WhenAny(Task.WhenAll(tasks), _cts.Token.AsTask());
+				foreach (Demo demo in demos)
+				{
+					await throttler.WaitAsync().ConfigureAwait(false);
+
+					tasks.Add(Task.Run(async () =>
+					{
+						if (_cts != null)
+						{
+							if (!File.Exists(demo.Path))
+							{
+								demosNotFound.Add(demo);
+							}
+							else
+							{
+								bool analyze = !checkExists || !_cacheService.HasDemoInCache(demo.Id);
+								if (analyze)
+								{
+									bool result = await AnalyzeDemoAsync(demo, _cts.Token);
+									if (!result) demosFailed.Add(demo);
+								}
+							}
+						}
+						throttler.Release();
+					}));
 				}
+
+				await Task.WhenAll(tasks);
 			}
 			catch (Exception e)
 			{
 				Logger.Instance.Log(e);
-				await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorAnalyzingDemos, MessageDialogStyle.Affirmative);
 			}
 			finally
 			{
 				IsBusy = false;
 				HasNotification = false;
 				IsCancellable = false;
+				if (demosNotFound.Any()) DispatcherHelper.CheckBeginInvokeOnUI(async () => await _dialogService.ShowDemosNotFoundAsync(demosNotFound));
+				if (demosFailed.Any()) DispatcherHelper.CheckBeginInvokeOnUI(async () => await _dialogService.ShowDemosFailedAsync(demosFailed));
 				CommandManager.InvalidateRequerySuggested();
-				if (demosNotFound.Any()) await _dialogService.ShowDemosNotFoundAsync(demosNotFound);
-				if (demosFailed.Any()) await _dialogService.ShowDemosFailedAsync(demosFailed);
 			}
-
-			return true;
 		}
 
 		/// <summary>
@@ -1814,15 +1804,14 @@ namespace Manager.ViewModel.Demos
 		/// </summary>
 		/// <param name="demo"></param>
 		/// <param name="token"></param>
-		/// <param name="writeToCache"></param>
 		/// <returns></returns>
-		private async Task<int> AnalyzeDemoAsync(Demo demo, CancellationToken token, bool writeToCache = true)
+		private async Task<bool> AnalyzeDemoAsync(Demo demo, CancellationToken token)
 		{
-			if (!File.Exists(demo.Path)) return -2;
-
+			bool result = false;
 			try
 			{
 				await _demosService.AnalyzeDemo(demo, token);
+				if (demo.Status == "old") demo.Status = "none";
 				if (_cts != null)
 				{
 					if (AppSettings.IsInternetConnectionAvailable())
@@ -1830,38 +1819,30 @@ namespace Manager.ViewModel.Demos
 						await _demosService.AnalyzeBannedPlayersAsync(demo);
 					}
 
-					if (writeToCache)
-					{
-						await _cacheService.WriteDemoDataCache(demo);
-						await _cacheService.UpdateRankInfoAsync(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
-					}
+					await _cacheService.WriteDemoDataCache(demo);
+					await _cacheService.UpdateRankInfoAsync(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 					await _accountStatsService.MapSelectedAccountValues(demo, Properties.Settings.Default.SelectedStatsAccountSteamID);
 				}
+				result = true;
 			}
 			catch (Exception e)
 			{
-				if (e is TaskCanceledException || e is JsonSerializationException) return -1;
-				if (demo.SourceName == Esea.NAME && e is EndOfStreamException)
+				if (!(e is TaskCanceledException) && !(e is JsonSerializationException))
 				{
-					await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorEseaDemosParsing, demo.Name), MessageDialogStyle.Affirmative);
-					await _cacheService.WriteDemoDataCache(demo);
-					return -3;
-				}
-				Logger.Instance.Log(e);
-				demo.Status = "old";
-				await _cacheService.WriteDemoDataCache(demo);
-				return -1;
-			}
-			finally
-			{
-				if (_cts != null && demo.Status == "old")
-				{
-					demo.Status = "none";
-					await _cacheService.WriteDemoDataCache(demo);
+					try
+					{
+						Logger.Instance.Log(e);
+						demo.Status = "old";
+						await _cacheService.WriteDemoDataCache(demo);
+					}
+					catch (Exception)
+					{
+						// ignore JsonSerializationException
+					}
 				}
 			}
 
-			return 1;
+			return result;
 		}
 
 		private async Task RefreshBannedPlayerCount()
