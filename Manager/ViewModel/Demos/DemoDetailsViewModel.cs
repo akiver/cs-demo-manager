@@ -21,6 +21,7 @@ using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Messages;
+using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
 using Manager.Views.Demos;
@@ -596,16 +597,7 @@ namespace Manager.ViewModel.Demos
 								}
 								catch (Exception e)
 								{
-									if (CurrentDemo.SourceName == Esea.NAME && e is EndOfStreamException)
-									{
-										await _dialogService.ShowErrorAsync(
-											string.Format(Properties.Resources.DialogErrorEseaDemosParsing, CurrentDemo.Name), MessageDialogStyle.Affirmative);
-									}
-									else
-									{
-										Logger.Instance.Log(e);
-										await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
-									}
+									await HandleAnalyzeException(e);
 								}
 								finally
 								{
@@ -653,18 +645,7 @@ namespace Manager.ViewModel.Demos
 						}
 						catch (Exception e)
 						{
-							if (CurrentDemo.SourceName == Esea.NAME && e is EndOfStreamException)
-							{
-								await _cacheService.WriteDemoDataCache(CurrentDemo);
-								await _dialogService.ShowErrorAsync(
-									string.Format(Properties.Resources.DialogErrorEseaDemosParsing, CurrentDemo.Name),
-									MessageDialogStyle.Affirmative);
-							}
-							else
-							{
-								Logger.Instance.Log(e);
-								await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
-							}
+							await HandleAnalyzeException(e);
 						}
 
 						IsAnalyzing = false;
@@ -989,22 +970,7 @@ namespace Manager.ViewModel.Demos
 								}
 								catch (Exception e)
 								{
-									if (CurrentDemo.SourceName == Esea.NAME && e is EndOfStreamException)
-									{
-										await _dialogService.ShowErrorAsync(
-											string.Format(Properties.Resources.DialogErrorEseaDemosParsing, CurrentDemo.Name),
-											MessageDialogStyle.Affirmative);
-									}
-									else
-									{
-										Logger.Instance.Log(e);
-										CurrentDemo.Status = "old";
-										await _dialogService.ShowErrorAsync(
-											string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE),
-											MessageDialogStyle.Affirmative
-										);
-									}
-									await _cacheService.WriteDemoDataCache(CurrentDemo);
+									await HandleAnalyzeException(e);
 								}
 								finally
 								{
@@ -1059,6 +1025,17 @@ namespace Manager.ViewModel.Demos
 		private async void HandleLoadFromArgumentMessage(LoadDemoFromAppArgument m)
 		{
 			await UpdateDemoFromAppArgument();
+		}
+
+		private async Task HandleAnalyzeException(Exception e)
+		{
+			Logger.Instance.Log(e);
+			await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
+			if (CurrentDemo.Duration == 0.0) // invalid header
+				CurrentDemo.Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
+			else
+				CurrentDemo.Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
+			await _cacheService.WriteDemoDataCache(CurrentDemo);
 		}
 
 		public override void Cleanup()

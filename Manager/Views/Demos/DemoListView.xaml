@@ -778,29 +778,23 @@
 			</StackPanel>
 			<StackPanel Grid.Column="1"
 						Orientation="Horizontal">
-				<StackPanel Orientation="Horizontal">
-					<Rectangle Width="10"
-							   Height="10"
-							   Fill="{StaticResource GreenBrush}" />
-					<TextBlock Text="{x:Static properties:Resources.ToWatch}"
-							   Style="{StaticResource CurrentFolderStyle}" />
-				</StackPanel>
-				<StackPanel Orientation="Horizontal"
-							Margin="5 0 0 0">
-					<Rectangle Width="10"
-							   Height="10"
-							   Fill="{StaticResource LightBlueBrush}" />
-					<TextBlock Text="{x:Static properties:Resources.Watched}"
-							   Style="{StaticResource CurrentFolderStyle}" />
-				</StackPanel>
-				<StackPanel Orientation="Horizontal"
-							Margin="5 0 5 0">
-					<Rectangle Width="10"
-							   Height="10"
-							   Fill="{StaticResource RedColorBrush}" />
-					<TextBlock Text="{x:Static properties:Resources.NotAnalyzable}"
-							   Style="{StaticResource CurrentFolderStyle}" />
-				</StackPanel>
+				<ItemsControl ItemsSource="{Binding Statuses}">
+					<ItemsControl.ItemsPanel>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal"/>
+						</ItemsPanelTemplate>
+					</ItemsControl.ItemsPanel>
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal">
+								<Rectangle Width="10" Height="10"
+										   Style="{StaticResource DemoStatusColorStyle}" />
+								<TextBlock Text="{Binding Label}"
+										   Style="{StaticResource CurrentFolderStyle}" />
+							</StackPanel>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
 			</StackPanel>
 		</Grid>
 	</Grid>

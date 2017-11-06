@@ -7,6 +7,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
+using Core;
 using Core.Models;
 using Core.Models.Events;
 using Core.Models.protobuf;
@@ -196,6 +197,10 @@ namespace Services.Concrete.Analyzer
 			if (header.PlaybackTicks != 0 && header.PlaybackTime != 0)
 			{
 				demo.ServerTickrate = header.PlaybackTicks / header.PlaybackTime;
+			}
+			else
+			{
+				demo.Status = "corrupted";
 			}
 			if (header.PlaybackFrames != 0 && header.PlaybackTime != 0)
 			{

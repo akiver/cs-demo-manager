@@ -3613,6 +3613,26 @@ C'est un problème qui arrive avec certaines démos ESEA et il est possible que 
           <source>An error occured while exporting the chart.</source>
           <target state="final">Une erreur est survenue pendant l'export du graphique.</target>
         </trans-unit>
+        <trans-unit id="DemoStatusCorrupted" translate="yes" xml:space="preserve">
+          <source>Corrupted</source>
+          <target state="final">Corrompu</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusError" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="final">Erreur</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusNone" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="final">Aucun</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusToWatch" translate="yes" xml:space="preserve">
+          <source>To watch</source>
+          <target state="final">A regarder</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusWatched" translate="yes" xml:space="preserve">
+          <source>Watched</source>
+          <target state="final">Regardée</target>
+        </trans-unit>
       </group>
     </body>
   </file>

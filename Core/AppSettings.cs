@@ -284,25 +284,6 @@ namespace Core
 			return GetFolderCachePath() + Path.DirectorySeparatorChar + MATCH_LIST_FILENAME;
 		}
 
-		public static List<DemoStatus> DefaultStatus = new List<DemoStatus>
-		{
-			new DemoStatus
-			{
-				Name = "none",
-				Label = Properties.Resources.StatusNone
-			},
-			new DemoStatus
-			{
-				Name = "watched",
-				Label = Properties.Resources.StatusWatched
-			},
-			new DemoStatus
-			{
-				Name = "towatch",
-				Label = Properties.Resources.StatusToWatch
-			}
-		};
-
 		public static List<Rank> RankList = new List<Rank>
 		{
 			new Rank

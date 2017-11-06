@@ -953,6 +953,51 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Corrupted.
+        /// </summary>
+        public static string DemoStatusCorrupted {
+            get {
+                return ResourceManager.GetString("DemoStatusCorrupted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string DemoStatusError {
+            get {
+                return ResourceManager.GetString("DemoStatusError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string DemoStatusNone {
+            get {
+                return ResourceManager.GetString("DemoStatusNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To watch.
+        /// </summary>
+        public static string DemoStatusToWatch {
+            get {
+                return ResourceManager.GetString("DemoStatusToWatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Watched.
+        /// </summary>
+        public static string DemoStatusWatched {
+            get {
+                return ResourceManager.GetString("DemoStatusWatched", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demo type.
         /// </summary>
         public static string DemoType {

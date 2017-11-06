@@ -2662,4 +2662,10 @@ Este es un problema de ESEA, puede que tengas datos perdidos en esta repetición
   <data name="Hits" xml:space="preserve">
     <value>Impactos</value>
   </data>
+  <data name="DemoStatusToWatch" xml:space="preserve">
+    <value>Para ver</value>
+  </data>
+  <data name="DemoStatusWatched" xml:space="preserve">
+    <value>Vista</value>
+  </data>
 </root>

@@ -178,6 +178,7 @@
     <Compile Include="Messages\ThirdPartySelected.cs" />
     <Compile Include="Messages\UpdateSuspectBannedCountMessage.cs" />
     <Compile Include="Messages\UpdateTaskbarProgressMessage.cs" />
+    <Compile Include="Models\DemoStatus.cs" />
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\GitHub\LatestRelease.cs" />
     <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />

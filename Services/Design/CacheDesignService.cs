@@ -41,7 +41,7 @@ namespace Services.Design
 			demo.ServerTickrate = 128;
 			demo.Type = "GOTV";
 			demo.Comment = "My comment";
-			demo.Status = AppSettings.DefaultStatus[0].Label;
+			demo.Status = "none";
 
 			Team teamCt = new Team
 			{

@@ -512,33 +512,6 @@ namespace Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to None.
-        /// </summary>
-        internal static string StatusNone {
-            get {
-                return ResourceManager.GetString("StatusNone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to To watch.
-        /// </summary>
-        internal static string StatusToWatch {
-            get {
-                return ResourceManager.GetString("StatusToWatch", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Watched.
-        /// </summary>
-        internal static string StatusWatched {
-            get {
-                return ResourceManager.GetString("StatusWatched", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap valve {

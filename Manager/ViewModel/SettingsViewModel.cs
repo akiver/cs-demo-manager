@@ -1969,7 +1969,7 @@ namespace Manager.ViewModel
 			{
 				List<Account> accounts = await _cacheService.GetAccountListAsync();
 				Accounts = new ObservableCollection<Account>(accounts);
-				StatusList = new List<DemoStatus>(AppSettings.DefaultStatus);
+				StatusList = new List<DemoStatus>(DemoStatus.DefaultStatus);
 				SelectedStatsAccount = Accounts.FirstOrDefault(a => a.SteamId == Settings.Default.SelectedStatsAccountSteamID.ToString());
 				DownloadFolderPath = Settings.Default.DownloadFolder;
 				IgnoreLaterBan = Settings.Default.IgnoreLaterBan;

@@ -3611,6 +3611,26 @@ Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</tar
           <source>An error occured while exporting the chart.</source>
           <target state="new">An error occured while exporting the chart.</target>
         </trans-unit>
+        <trans-unit id="DemoStatusCorrupted" translate="yes" xml:space="preserve">
+          <source>Corrupted</source>
+          <target state="new">Corrupted</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusError" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="new">Error</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusNone" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="final">Nenhum</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusToWatch" translate="yes" xml:space="preserve">
+          <source>To watch</source>
+          <target state="final">Para assistir</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusWatched" translate="yes" xml:space="preserve">
+          <source>Watched</source>
+          <target state="final">Assistido</target>
+        </trans-unit>
       </group>
     </body>
   </file>

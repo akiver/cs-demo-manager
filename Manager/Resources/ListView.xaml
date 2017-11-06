@@ -1,5 +1,9 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					mc:Ignorable="d"
+					xmlns:models="clr-namespace:Manager.Models">
 	
 	<Style x:Key="OvertimeScoreboardTemplate" TargetType="{x:Type ListView}">
 		<Setter Property="BorderBrush" Value="Transparent"></Setter>
@@ -37,4 +41,30 @@
 			VerticalAlignment="Center"
 			ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
 	</ItemsPanelTemplate>
+
+
+	<Style TargetType="Rectangle" x:Key="DemoStatusColorStyle">
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Name}"
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_TO_WATCH}"
+						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+				<Setter Property="Fill" Value="{StaticResource GreenBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Name}"
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_WATCHED}"
+						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+				<Setter Property="Fill" Value="{StaticResource LightBlueBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Name}"
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_ERROR}"
+						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+				<Setter Property="Fill" Value="{StaticResource RedColorBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Name}"
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_CORRUPTED}"
+						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+				<Setter Property="Fill" Value="{StaticResource LightRedColorBrush}"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
 </ResourceDictionary>

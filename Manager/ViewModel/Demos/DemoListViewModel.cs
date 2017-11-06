@@ -22,6 +22,7 @@ using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Messages;
+using Manager.Models;
 using Manager.Services;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
@@ -84,6 +85,8 @@ namespace Manager.ViewModel.Demos
 		private ObservableCollection<Demo> _demos;
 
 		private ObservableCollection<Demo> _selectedDemos;
+
+		private List<DemoStatus> _statuses;
 
 		private ICollectionView _dataGridDemosCollection;
 
@@ -221,6 +224,12 @@ namespace Manager.ViewModel.Demos
 			set { Set(() => DemoSourcesSelected, ref _demoSourcesSelected, value); }
 		}
 
+		public List<DemoStatus> Statuses
+		{
+			get { return _statuses; }
+			set { Set(() => Statuses, ref _statuses, value); }
+		}
+
 		public int NewBannedPlayerCount
 		{
 			get { return _newBannedPlayerCount; }
@@ -346,7 +355,7 @@ namespace Manager.ViewModel.Demos
 				if (!IsShowPopFlashDemos && data.SourceName == "popflash") return false;
 
 				// No analyzable demos filter
-				if (!IsShowOldDemos && data.Status == "old") return false;
+				if (!IsShowOldDemos && data.Status == DemoStatus.NAME_DEMO_STATUS_ERROR) return false;
 
 				return true;
 			}
@@ -591,13 +600,10 @@ namespace Manager.ViewModel.Demos
 									IsBusy = true;
 									HasRing = true;
 									HasNotification = true;
-									if (!_cacheService.HasDemoInCache(SelectedDemo.Id))
-									{
-										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
-										IsCancellable = true;
-										if (_cts == null) _cts = new CancellationTokenSource();
-										await AnalyzeDemoAsync(SelectedDemo, _cts.Token);
-									}
+									IsCancellable = true;
+									NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
+
+									await AnalyzeDemosAsync(true);
 									if (_cts != null)
 									{
 										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
@@ -761,42 +767,23 @@ namespace Manager.ViewModel.Demos
 								return;
 							}
 
+							await AnalyzeDemosAsync(true);
+
 							IsBusy = true;
-							HasRing = true;
 							HasNotification = true;
-							List<Demo> demosFailed = new List<Demo>();
+							NotificationMessage = Properties.Resources.NotificationAddingSuspects;
 							for (int i = 0; i < demos.Count; i++)
 							{
-								if (!_cacheService.HasDemoInCache(demos[i].Id))
-								{
-									try
-									{
-										if (_cts == null) _cts = new CancellationTokenSource();
-										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
-										await AnalyzeDemoAsync(demos[i], _cts.Token);
-									}
-									catch (Exception e)
-									{
-										Logger.Instance.Log(e);
-										demos[i].Status = "old";
-										demosFailed.Add(demos[i]);
-										await _cacheService.WriteDemoDataCache(demos[i]);
-									}
-								}
 								if (demos[i].Players.Any())
 								{
 									foreach (Player playerExtended in demos[i].Players)
 									{
-										NotificationMessage = Properties.Resources.NotificationAddingSuspects;
 										await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
 									}
 								}
 							}
-
-							if (demosFailed.Any())
-							{
-								await _dialogService.ShowDemosFailedAsync(demosFailed);
-							}
+							IsBusy = false;
+							HasNotification = false;
 
 							await RefreshBannedPlayerCount();
 						},
@@ -1370,6 +1357,7 @@ namespace Manager.ViewModel.Demos
 				DispatcherHelper.Initialize();
 			}
 
+			Statuses = new List<DemoStatus>(DemoStatus.DefaultStatus.Where(s => s.Name != DemoStatus.NAME_DEMO_STATUS_NONE));
 			Demos = new ObservableCollection<Demo>();
 			SelectedDemos = new ObservableCollection<Demo>();
 			DataGridDemosCollection = CollectionViewSource.GetDefaultView(Demos);
@@ -1449,7 +1437,7 @@ namespace Manager.ViewModel.Demos
 					{"esea", "ESEA"},
 					{"popflash", "Popflash"},
 					{"pov", "POV"},
-					{"old", Properties.Resources.NoAnalyzableDemos}
+					{DemoStatus.NAME_DEMO_STATUS_ERROR, Properties.Resources.NoAnalyzableDemos}
 				};
 
 			if (Properties.Settings.Default.ShowValveDemos)
@@ -1482,7 +1470,7 @@ namespace Manager.ViewModel.Demos
 			}
 			if (Properties.Settings.Default.ShowOldDemos)
 			{
-				_demoSourcesSelected.Add("old", Properties.Resources.NoAnalyzableDemos);
+				_demoSourcesSelected.Add(DemoStatus.NAME_DEMO_STATUS_ERROR, Properties.Resources.NoAnalyzableDemos);
 			}
 
 			DemoSourcesSelected = _demoSourcesSelected;
@@ -1537,7 +1525,7 @@ namespace Manager.ViewModel.Demos
 				case Pov.NAME:
 					Properties.Settings.Default.ShowPovDemos = items.ContainsKey(name);
 					break;
-				case "old":
+				case DemoStatus.NAME_DEMO_STATUS_ERROR:
 					Properties.Settings.Default.ShowOldDemos = items.ContainsKey(name);
 					break;
 			}
@@ -1826,7 +1814,7 @@ namespace Manager.ViewModel.Demos
 			try
 			{
 				await _demosService.AnalyzeDemo(demo, token, HandleAnalyzeProgress);
-				if (demo.Status == "old") demo.Status = "none";
+				if (demo.Status == DemoStatus.NAME_DEMO_STATUS_ERROR) demo.Status = DemoStatus.NAME_DEMO_STATUS_NONE;
 				if (_cts != null)
 				{
 					if (AppSettings.IsInternetConnectionAvailable())
@@ -1847,7 +1835,10 @@ namespace Manager.ViewModel.Demos
 					try
 					{
 						Logger.Instance.Log(e);
-						demo.Status = "old";
+						if (demo.Duration == 0.0) // invalid header
+							demo.Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
+						else
+							demo.Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
 						await _cacheService.WriteDemoDataCache(demo);
 					}
 					catch (Exception)

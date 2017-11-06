@@ -1,3 +1,4 @@
+#region using
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -5,7 +6,6 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,11 +21,13 @@ using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Internals;
 using Manager.Messages;
+using Manager.Models;
 using Manager.Services;
 using Manager.Views.Demos;
 using Manager.Views.Suspects;
 using Services;
 using Services.Interfaces;
+#endregion
 
 namespace Manager.ViewModel.Suspects
 {
@@ -373,18 +375,13 @@ namespace Manager.ViewModel.Suspects
 									}
 									catch (Exception e)
 									{
-										if (demos[i].SourceName == Esea.NAME && e is EndOfStreamException)
-										{
-											await _dialogService.ShowErrorAsync(
-												string.Format(Properties.Resources.DialogErrorEseaDemosParsing, demos[i].Name),
-												MessageDialogStyle.Affirmative);
-										}
+										Logger.Instance.Log(e);
+										await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, demos[i].Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
+										if (demos[i].Duration == 0.0) // invalid header
+											demos[i].Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
 										else
-										{
-											Logger.Instance.Log(e);
-											demos[i].Status = "old";
-											demosFailed.Add(demos[i]);
-										}
+											demos[i].Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
+										demosFailed.Add(demos[i]);
 										await _cacheService.WriteDemoDataCache(demos[i]);
 									}
 								}

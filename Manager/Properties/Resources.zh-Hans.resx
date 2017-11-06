@@ -2560,4 +2560,13 @@
 如果你不了解这个或者不打算做视频，点击取消 
 如果你开启了它，游戏每次启动时会伴随"-insucre"启动项，这意味着你将保护你不被VAC封禁并且不能进入VAC保护的服务器</value>
   </data>
+  <data name="DemoStatusNone" xml:space="preserve">
+    <value>无</value>
+  </data>
+  <data name="DemoStatusToWatch" xml:space="preserve">
+    <value>观看</value>
+  </data>
+  <data name="DemoStatusWatched" xml:space="preserve">
+    <value>已观看</value>
+  </data>
 </root>

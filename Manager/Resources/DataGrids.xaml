@@ -1,7 +1,8 @@
 <ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:properties="clr-namespace:Manager.Properties"
-					xmlns:converters="clr-namespace:Manager.Converters">
+					xmlns:converters="clr-namespace:Manager.Converters"
+					xmlns:models="clr-namespace:Manager.Models">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.datagrid.xaml" />
@@ -36,16 +37,17 @@
 		   x:Key="DataGridRowMainListDemosStyle"
 		   BasedOn="{StaticResource MetroDataGridRow}">
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding Status}" Value="towatch">
+			<DataTrigger Binding="{Binding Status}" Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_TO_WATCH}">
 				<Setter Property="Background" Value="{StaticResource GreenBrush}"/>
 			</DataTrigger>
-
-			<DataTrigger Binding="{Binding Status}" Value="watched">
+			<DataTrigger Binding="{Binding Status}" Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_WATCHED}">
 				<Setter Property="Background" Value="{StaticResource LightBlueBrush}"/>
 			</DataTrigger>
-
-			<DataTrigger Binding="{Binding Status}" Value="old">
+			<DataTrigger Binding="{Binding Status}" Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_ERROR}">
 				<Setter Property="Background" Value="{StaticResource RedColorBrush}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Status}" Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_CORRUPTED}">
+				<Setter Property="Background" Value="{StaticResource LightRedColorBrush}"/>
 			</DataTrigger>
 		</Style.Triggers>
 		<Setter Property="ContextMenu" Value="{StaticResource DemoRowContextMenu}" />

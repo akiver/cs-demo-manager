@@ -69,15 +69,6 @@
   <data name="Rank9" xml:space="preserve">
     <value>黄金新星-III</value>
   </data>
-  <data name="StatusNone" xml:space="preserve">
-    <value>无</value>
-  </data>
-  <data name="StatusToWatch" xml:space="preserve">
-    <value>观看</value>
-  </data>
-  <data name="StatusWatched" xml:space="preserve">
-    <value>已观看</value>
-  </data>
   <data name="wanmei" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Logos\wanmei.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>

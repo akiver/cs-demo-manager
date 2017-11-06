@@ -4,8 +4,8 @@
 					mc:Ignorable="d"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					xmlns:viewModel="clr-namespace:Manager.ViewModel"
-					xmlns:models="clr-namespace:Core.Models;assembly=csgodm.core"
-					xmlns:properties="clr-namespace:Manager.Properties">
+					xmlns:properties="clr-namespace:Manager.Properties"
+					xmlns:models="clr-namespace:Manager.Models">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.contextmenu.xaml" />

@@ -3610,6 +3610,26 @@ This is an ESEA issue, you may have missing data for this demo.</target>
           <source>An error occured while exporting the chart.</source>
           <target state="new">An error occured while exporting the chart.</target>
         </trans-unit>
+        <trans-unit id="DemoStatusCorrupted" translate="yes" xml:space="preserve">
+          <source>Corrupted</source>
+          <target state="new">Corrupted</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusError" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="new">Error</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusNone" translate="yes" xml:space="preserve">
+          <source>None</source>
+          <target state="new">None</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusToWatch" translate="yes" xml:space="preserve">
+          <source>To watch</source>
+          <target state="new">To watch</target>
+        </trans-unit>
+        <trans-unit id="DemoStatusWatched" translate="yes" xml:space="preserve">
+          <source>Watched</source>
+          <target state="new">Watched</target>
+        </trans-unit>
       </group>
     </body>
   </file>

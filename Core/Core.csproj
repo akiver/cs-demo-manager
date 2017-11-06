@@ -101,7 +101,6 @@
     <Compile Include="Win32Utils.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\Demo.cs" />
-    <Compile Include="Models\DemoStatus.cs" />
     <Compile Include="Models\Events\BaseEvent.cs" />
     <Compile Include="Models\Events\BombDefusedEvent.cs" />
     <Compile Include="Models\Events\BombExplodedEvent.cs" />
