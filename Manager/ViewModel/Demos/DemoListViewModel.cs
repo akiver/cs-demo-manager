@@ -334,25 +334,25 @@ namespace Manager.ViewModel.Demos
 				}
 
 				// POV filter
-				if (!IsShowPovDemos && data.SourceName == "pov") return false;
+				if (!IsShowPovDemos && data.SourceName == Pov.NAME) return false;
 
 				// eBot filter
-				if (!IsShowEbotDemos && data.SourceName == "ebot") return false;
+				if (!IsShowEbotDemos && data.SourceName == Ebot.NAME) return false;
 
 				// ESEA filter
-				if (!IsShowEseaDemos && data.SourceName == "esea") return false;
+				if (!IsShowEseaDemos && data.SourceName == Esea.NAME) return false;
 
 				// Valve filter
-				if (!IsShowValveDemos && data.SourceName == "valve") return false;
+				if (!IsShowValveDemos && data.SourceName == Valve.NAME) return false;
 
 				// Faceit filter
-				if (!IsShowFaceitDemos && data.SourceName == "faceit") return false;
+				if (!IsShowFaceitDemos && data.SourceName == Faceit.NAME) return false;
 
 				// Cevo filter
-				if (!IsShowCevoDemos && data.SourceName == "cevo") return false;
+				if (!IsShowCevoDemos && data.SourceName == Cevo.NAME) return false;
 
 				// PopFlash filter
-				if (!IsShowPopFlashDemos && data.SourceName == "popflash") return false;
+				if (!IsShowPopFlashDemos && data.SourceName == PopFlash.NAME) return false;
 
 				// No analyzable demos filter
 				if (!IsShowOldDemos && data.Status == DemoStatus.NAME_DEMO_STATUS_ERROR) return false;
@@ -1430,43 +1430,43 @@ namespace Manager.ViewModel.Demos
 		{
 			DemoSourcesSelectors = new Dictionary<string, object>
 				{
-					{"valve", "Valve"},
-					{"ebot", "eBot"},
-					{"cevo", "CEVO"},
-					{"faceit", "FaceIt"},
-					{"esea", "ESEA"},
-					{"popflash", "Popflash"},
-					{"pov", "POV"},
+					{Valve.NAME, "Valve"},
+					{Ebot.NAME, "eBot"},
+					{Cevo.NAME, "CEVO"},
+					{Faceit.NAME, "FaceIt"},
+					{Esea.NAME, "ESEA"},
+					{PopFlash.NAME, "Popflash"},
+					{Pov.NAME, "POV"},
 					{DemoStatus.NAME_DEMO_STATUS_ERROR, Properties.Resources.NoAnalyzableDemos}
 				};
 
 			if (Properties.Settings.Default.ShowValveDemos)
 			{
-				_demoSourcesSelected.Add("valve", "Valve");
+				_demoSourcesSelected.Add(Valve.NAME, "Valve");
 			}
 			if (Properties.Settings.Default.ShowEbotDemos)
 			{
-				_demoSourcesSelected.Add("ebot", "eBot");
+				_demoSourcesSelected.Add(Ebot.NAME, "eBot");
 			}
 			if (Properties.Settings.Default.ShowCevoDemos)
 			{
-				_demoSourcesSelected.Add("cevo", "CEVO");
+				_demoSourcesSelected.Add(Cevo.NAME, "CEVO");
 			}
 			if (Properties.Settings.Default.ShowEseaDemos)
 			{
-				_demoSourcesSelected.Add("esea", "ESEA");
+				_demoSourcesSelected.Add(Esea.NAME, "ESEA");
 			}
 			if (Properties.Settings.Default.ShowFaceitDemos)
 			{
-				_demoSourcesSelected.Add("faceit", "FaceIt");
+				_demoSourcesSelected.Add(Faceit.NAME, "FaceIt");
 			}
 			if (Properties.Settings.Default.ShowPopFlashDemos)
 			{
-				_demoSourcesSelected.Add("popflash", "PopFlash");
+				_demoSourcesSelected.Add(PopFlash.NAME, "PopFlash");
 			}
 			if (Properties.Settings.Default.ShowPovDemos)
 			{
-				_demoSourcesSelected.Add("pov", "POV");
+				_demoSourcesSelected.Add(Pov.NAME, "POV");
 			}
 			if (Properties.Settings.Default.ShowOldDemos)
 			{
