@@ -3547,14 +3547,6 @@ Digite link de compartilhamento (exemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</
           <source>Average ESEA Round Win Share</source>
           <target state="final">Média de vitórias da rodada compartilhada da ESEA</target>
         </trans-unit>
-        <trans-unit id="DialogErrorEseaDemosParsing" translate="yes" xml:space="preserve">
-          <source>An error occured while analyzing the demo {0}.
-As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
-This is an ESEA issue, you may have missing data for this demo.</source>
-          <target state="final">Ocorreu um erro ao analisar a demo {0}.
-Como esta fonte de demo é a ESEA, provavelmente é devido ao sistema ESEA pug que impede a gravação de demos.
-Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</target>
-        </trans-unit>
         <trans-unit id="HeaderAccuracy" translate="yes" xml:space="preserve">
           <source>ACC (%)</source>
           <target state="final">ACR (%)</target>
@@ -3630,6 +3622,14 @@ Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</tar
         <trans-unit id="DemoStatusWatched" translate="yes" xml:space="preserve">
           <source>Watched</source>
           <target state="final">Assistido</target>
+        </trans-unit>
+        <trans-unit id="DialogDemosCorruptedWarning" translate="yes" xml:space="preserve">
+          <source>The following demos are corrupted:
+{0}
+You may have missing data for this demos.</source>
+          <target state="new">The following demos are corrupted:
+{0}
+You may have missing data for this demos.</target>
         </trans-unit>
       </group>
     </body>

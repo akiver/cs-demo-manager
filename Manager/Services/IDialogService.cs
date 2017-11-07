@@ -19,6 +19,8 @@ namespace Manager.Services
 
 		Task<MessageDialogResult> ShowDemosFailedAsync(List<Demo> demosFailed);
 
+		Task<MessageDialogResult> ShowDemosCorruptedWarningAsync(List<Demo> demos);
+
 		Task<MessageDialogResult> ShowNoInternetConnectionAsync();
 
 		Task<MessageDialogResult> ShowDemosNotFoundAsync(List<Demo> demosNotFound);

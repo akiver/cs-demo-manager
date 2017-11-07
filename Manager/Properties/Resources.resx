@@ -2772,11 +2772,6 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</valu
   <data name="HeaderToolTipEseaRws" xml:space="preserve">
     <value>Average ESEA Round Win Share</value>
   </data>
-  <data name="DialogErrorEseaDemosParsing" xml:space="preserve">
-    <value>An error occured while analyzing the demo {0}.
-As this demo's source is ESEA, it's probably due to the ESEA pug system that improperly stop demos recording.
-This is an ESEA issue, you may have missing data for this demo.</value>
-  </data>
   <data name="Accuracy" xml:space="preserve">
     <value>Accuracy</value>
   </data>
@@ -2833,5 +2828,10 @@ This is an ESEA issue, you may have missing data for this demo.</value>
   </data>
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Watched</value>
+  </data>
+  <data name="DialogDemosCorruptedWarning" xml:space="preserve">
+    <value>The following demos are corrupted:
+{0}
+You may have missing data for this demos.</value>
   </data>
 </root>

@@ -570,6 +570,9 @@ namespace Manager.ViewModel.Demos
 					?? (_exportDemoToExcelCommand = new RelayCommand(
 						async () =>
 						{
+							if (CurrentDemo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
+								await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { CurrentDemo });
+
 							if (SelectedPlayerStats != null && SelectedPlayerStats.SteamId != 0)
 							{
 								var isExportFocusedOnPlayer = await _dialogService.ShowExportPlayerStatsAsync(SelectedPlayerStats.Name);
@@ -622,6 +625,9 @@ namespace Manager.ViewModel.Demos
 					?? (_analyzeDemoCommand = new RelayCommand(
 					async () =>
 					{
+						if (CurrentDemo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
+							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo>{CurrentDemo});
+
 						NotificationMessage = Properties.Resources.NotificationAnalyzing;
 						IsAnalyzing = true;
 						HasNotification = true;
@@ -940,6 +946,9 @@ namespace Manager.ViewModel.Demos
 					?? (_exportChatCommand = new RelayCommand(
 					async () =>
 					{
+						if (CurrentDemo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
+							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { CurrentDemo });
+
 						SaveFileDialog exportDialog = new SaveFileDialog
 						{
 							FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + "-chat.txt",

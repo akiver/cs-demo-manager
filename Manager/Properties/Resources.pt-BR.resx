@@ -2643,11 +2643,6 @@ Digite link de compartilhamento (exemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</
   <data name="HeaderToolTipEseaRws" xml:space="preserve">
     <value>Média de vitórias da rodada compartilhada da ESEA</value>
   </data>
-  <data name="DialogErrorEseaDemosParsing" xml:space="preserve">
-    <value>Ocorreu um erro ao analisar a demo {0}.
-Como esta fonte de demo é a ESEA, provavelmente é devido ao sistema ESEA pug que impede a gravação de demos.
-Este é um problema da ESEA, você pode ter dados faltantes para esta demo.</value>
-  </data>
   <data name="HeaderAccuracy" xml:space="preserve">
     <value>ACR (%)</value>
   </data>

@@ -42,6 +42,14 @@ namespace Manager.Services
 			return await metroWindow.ShowMessageAsync(Properties.Resources.Error, errorMessage);
 		}
 
+		public async Task<MessageDialogResult> ShowDemosCorruptedWarningAsync(List<Demo> demos)
+		{
+			string demosAsString = demos.Aggregate(string.Empty, (current, demo) => current + (demo.Name + Environment.NewLine));
+			string message = string.Format(Properties.Resources.DialogDemosCorruptedWarning, demosAsString);
+			var metroWindow = Application.Current.MainWindow as MetroWindow;
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Information, message);
+		}
+
 		public async Task<MessageDialogResult> ShowNoInternetConnectionAsync()
 		{
 			var metroWindow = Application.Current.MainWindow as MetroWindow;

@@ -350,6 +350,11 @@ namespace Manager.ViewModel.Suspects
 							List<Demo> demosFailed = new List<Demo>();
 							List<string> folders = await _cacheService.GetFoldersAsync();
 							List<Demo> demos = await _demosService.GetDemosHeader(folders);
+
+							List<Demo> corruptedDemos = demos.Where(d => d.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED).ToList();
+							if (corruptedDemos.Count > 0)
+								await _dialogService.ShowDemosCorruptedWarningAsync(corruptedDemos);
+
 							for (int i = 0; i < demos.Count; i++)
 							{
 								if (demos[i].Source.GetType() != typeof(Pov) && IsAnalyzing)

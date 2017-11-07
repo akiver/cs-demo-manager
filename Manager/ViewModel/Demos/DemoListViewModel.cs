@@ -1734,6 +1734,10 @@ namespace Manager.ViewModel.Demos
 		/// <returns></returns>
 		private async Task AnalyzeDemosAsync(bool checkExists = false)
 		{
+			List<Demo> corruptedDemos = SelectedDemos.Where(d => d.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED).ToList();
+			if (corruptedDemos.Count > 0)
+				await _dialogService.ShowDemosCorruptedWarningAsync(corruptedDemos);
+
 			CommandManager.InvalidateRequerySuggested();
 			_demoProgress.Clear();
 			IsBusy = true;

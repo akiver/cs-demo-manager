@@ -2642,11 +2642,6 @@ Por favor introduce el código para compartir (ejemplo: CSGO-orkmt-Z8udN-apVEh-G
   <data name="HeaderToolTipEseaRws" xml:space="preserve">
     <value>ESEA Round Win Share medio</value>
   </data>
-  <data name="DialogErrorEseaDemosParsing" xml:space="preserve">
-    <value>Ha ocurrido un error mientras se analizaba la repetición {0}.
-Debido a que el origen de esta demo es ESEA, probablemente se debe a que el sistema de pug de ESEA detiene la grabación de la repetición de forma indebida.
-Este es un problema de ESEA, puede que tengas datos perdidos en esta repetición.</value>
-  </data>
   <data name="HeaderAccuracy" xml:space="preserve">
     <value>ACC (%)</value>
   </data>

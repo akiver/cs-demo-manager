@@ -1197,6 +1197,17 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The following demos are corrupted:
+        ///{0}
+        ///You may have missing data for this demos..
+        /// </summary>
+        public static string DialogDemosCorruptedWarning {
+            get {
+                return ResourceManager.GetString("DialogDemosCorruptedWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Demos data cleared..
         /// </summary>
         public static string DialogDemosDataCleared {
@@ -1324,17 +1335,6 @@ namespace Manager.Properties {
         public static string DialogErrorDemoNotFound {
             get {
                 return ResourceManager.GetString("DialogErrorDemoNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to An error occured while analyzing the demo {0}.
-        ///As this demo&apos;s source is ESEA, it&apos;s probably due to the ESEA pug system that improperly stop demos recording.
-        ///This is an ESEA issue, you may have missing data for this demo..
-        /// </summary>
-        public static string DialogErrorEseaDemosParsing {
-            get {
-                return ResourceManager.GetString("DialogErrorEseaDemosParsing", resourceCulture);
             }
         }
         
