@@ -93,7 +93,7 @@ namespace Services.Concrete.Analyzer
 
 		private void HandleBotTakeOver(object sender, BotTakeOverEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			if (!IsMatchStarted || e.Taker == null) return;
 			Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Taker.SteamID);
 			if (player != null) player.IsControllingBot = true;
 		}

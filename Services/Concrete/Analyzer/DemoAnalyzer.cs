@@ -1197,9 +1197,7 @@ namespace Services.Concrete.Analyzer
 
 		protected void HandleRoundMvp(object sender, RoundMVPEventArgs e)
 		{
-			if (!IsMatchStarted || IsFreezetime) return;
-
-			if (e.Player.SteamID == 0) return;
+			if (!IsMatchStarted || IsFreezetime || e.Player == null || e.Player.SteamID == 0) return;
 			Player playerMvp = Demo.Players.FirstOrDefault(player => player.SteamId == e.Player.SteamID);
 			if (playerMvp != null) playerMvp.RoundMvpCount++;
 		}
