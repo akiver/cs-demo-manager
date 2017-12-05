@@ -50,7 +50,6 @@ namespace DemoInfo.DP.Handler
 				};
 
 				parser.RaiseRoundStart (rs);
-
 			}
 
 			if (eventDescriptor.Name == "cs_win_panel_match")
@@ -113,7 +112,9 @@ namespace DemoInfo.DP.Handler
 				parser.RaiseRoundAnnounceMatchStarted();
 
 			if (eventDescriptor.Name == "round_freeze_end")
-				parser.RaiseFreezetimeEnded ();
+			{
+				parser.RaiseFreezetimeEnded();
+			}
 
 			//if (eventDescriptor.Name != "player_footstep" && eventDescriptor.Name != "weapon_fire" && eventDescriptor.Name != "player_jump") {
 			//	Console.WriteLine (eventDescriptor.Name);
@@ -126,10 +127,21 @@ namespace DemoInfo.DP.Handler
 
 				WeaponFiredEventArgs fire = new WeaponFiredEventArgs ();
 				fire.Shooter = parser.Players.ContainsKey ((int)data ["userid"]) ? parser.Players [(int)data ["userid"]] : null;
-				fire.Weapon = new Equipment ((string)data ["weapon"]);
 
-				if (fire.Shooter != null && fire.Weapon.Class != EquipmentClass.Grenade) {
+				if (fire.Shooter != null && fire.Shooter.ActiveWeapon != null)
+				{
 					fire.Weapon = fire.Shooter.ActiveWeapon;
+				}
+				else
+				{
+					// should not happen but we never know
+					fire.Weapon = new Equipment((string)data["weapon"]);
+				}
+
+				// Workaround to detect who throw molo / inc
+				if (fire.Weapon.Weapon == EquipmentElement.Molotov || fire.Weapon.Weapon == EquipmentElement.Incendiary)
+				{
+					parser.LastPlayerIdsThrownFire.Enqueue((int)data["userid"]);
 				}
 
 				parser.RaiseWeaponFired(fire);
@@ -145,16 +157,15 @@ namespace DemoInfo.DP.Handler
 				kill.Headshot = (bool)data["headshot"];
 				kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
 
-				if (kill.Killer != null && kill.Weapon.Class != EquipmentClass.Grenade
-						&& kill.Weapon.Weapon != EquipmentElement.Revolver
-						&& kill.Killer.Weapons.Any() && kill.Weapon.Weapon != EquipmentElement.World) {
-					#if DEBUG
-					if(kill.Weapon.Weapon != kill.Killer.ActiveWeapon.Weapon)
-						throw new InvalidDataException();
-					#endif
-					kill.Weapon = kill.Killer.ActiveWeapon;
+				if (kill.Killer != null && kill.Killer.ActiveWeapon != null)
+				{
+					// in case of grenade kills, killer's active weapon is not his grenade at this state
+					if (kill.Weapon == null || (kill.Weapon != null && kill.Weapon.Class != EquipmentClass.Grenade))
+					{
+						kill.Weapon = kill.Killer.ActiveWeapon;
+						kill.Weapon.SkinID = (string)data["weapon_itemid"];
+					}
 				}
-
 
 				kill.PenetratedObjects = (int)data["penetrated"];
 
@@ -171,11 +182,15 @@ namespace DemoInfo.DP.Handler
 				hurt.HealthDamage = (int)data ["dmg_health"];
 				hurt.ArmorDamage = (int)data ["dmg_armor"];
 				hurt.Hitgroup = (Hitgroup)((int)data ["hitgroup"]);
+				hurt.Weapon = new Equipment((string)data["weapon"]);
 
-				hurt.Weapon = new Equipment ((string)data ["weapon"], "");
-
-				if (hurt.Attacker != null && hurt.Weapon.Class != EquipmentClass.Grenade && hurt.Attacker.Weapons.Any ()) {
-					hurt.Weapon = hurt.Attacker.ActiveWeapon;
+				if (hurt.Attacker != null && hurt.Attacker.ActiveWeapon != null)
+				{
+					// in case of grenade attacks, attacker's active weapon is not his grenade at this state
+					if (hurt.Weapon == null || (hurt.Weapon != null && hurt.Weapon.Class != EquipmentClass.Grenade))
+					{
+						hurt.Weapon = hurt.Attacker.ActiveWeapon;
+					}
 				}
 
 				parser.RaisePlayerHurt (hurt);
@@ -184,8 +199,23 @@ namespace DemoInfo.DP.Handler
 				#region Nades
 			case "player_blind":
 				data = MapData(eventDescriptor, rawEvent);
-				if (parser.Players.ContainsKey((int)data["userid"]))
-					blindPlayers.Add(parser.Players[(int)data["userid"]]);
+				if (parser.Players.ContainsKey((int) data["userid"]))
+				{
+					Player p = parser.Players[(int) data["userid"]];
+					blindPlayers.Add(p);
+
+					if (data.ContainsKey("attacker"))
+					{
+						Player attacker = parser.Players[(int)data["attacker"]];
+						PlayerBlindEventArgs ev = new PlayerBlindEventArgs
+						{
+							Player = p,
+							Duration = (float)data["blind_duration"],
+							Attacker = attacker,
+						};
+						parser.RaisePlayerBlind(ev);
+					}
+				}
 				break;
 			case "flashbang_detonate":
 				var args = FillNadeEvent<FlashEventArgs>(MapData(eventDescriptor, rawEvent), parser);
@@ -209,10 +239,29 @@ namespace DemoInfo.DP.Handler
 				parser.RaiseSmokeEnd(FillNadeEvent<SmokeEventArgs>(MapData(eventDescriptor, rawEvent), parser));
 				break;
 			case "inferno_startburn":
-				parser.RaiseFireStart(FillNadeEvent<FireEventArgs>(MapData(eventDescriptor, rawEvent), parser));
+				var fireData = MapData(eventDescriptor, rawEvent);
+				// molotov / inc events doesn't contains thrower, this is a hack to retrieve it
+				// WARNING: This hack is not 100% accurated since if a molotov never burn, the ids will be incorrect
+
+				// 1. when a molo / inc is thrown (weapon_fire events), we add the userid to the queue
+				// 2. when this event (inferno_startburn) occurs we retrieve the last userid from this queue (LastPlayerIdsThrownFire)
+				// 3. we add the userid to the queue LastPlayerIdsStartFire to retrieve the player at the next inferno_expire event
+				if (!fireData.ContainsKey("userid") && parser.LastPlayerIdsThrownFire.Count > 0)
+				{
+					int throwerId = parser.LastPlayerIdsThrownFire.Dequeue();
+					fireData.Add("userid", throwerId);
+					// add this id to the queue to be able to detect it when the inferno_expire event occurs
+					parser.LastPlayerIdsStartFire.Enqueue(throwerId);
+				}
+				parser.RaiseFireStart(FillNadeEvent<FireEventArgs>(fireData, parser));
 				break;
 			case "inferno_expire":
-				parser.RaiseFireEnd(FillNadeEvent<FireEventArgs>(MapData(eventDescriptor, rawEvent), parser));
+				var fireEndData = MapData(eventDescriptor, rawEvent);
+				if (!fireEndData.ContainsKey("userid") && parser.LastPlayerIdsStartFire.Count > 0)
+				{
+					fireEndData.Add("userid", parser.LastPlayerIdsStartFire.Dequeue());
+				}
+				parser.RaiseFireEnd(FillNadeEvent<FireEventArgs>(fireEndData, parser));
 				break;
 				#endregion
 			
@@ -237,7 +286,10 @@ namespace DemoInfo.DP.Handler
 			case "player_disconnect":
 				data = MapData(eventDescriptor, rawEvent);
 
-				PlayerDisconnectEventArgs disconnect = new PlayerDisconnectEventArgs();
+				PlayerDisconnectEventArgs disconnect = new PlayerDisconnectEventArgs
+				{
+					Reason = (string)data["reason"],
+				};
 				disconnect.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
 				parser.RaisePlayerDisconnect(disconnect);
 

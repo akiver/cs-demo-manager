@@ -15,56 +15,55 @@
     <DelaySign>true</DelaySign>
     <AssemblyOriginatorKeyFile>demoinfo-release.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <OutputPath>bin\x86\Release\</OutputPath>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE;YOLO</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DocumentationFile>bin\Release\DemoInfo.xml</DocumentationFile>
-    <Optimize>true</Optimize>
-    <DebugType>pdbonly</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Bitstream-Debugging|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Bitstream-Debugging|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\Bitstream-Debugging\</OutputPath>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE;BITSTREAMDEBUG</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'YoloDebug|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'YoloDebug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\YoloDebug\</OutputPath>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE;YOLO;DEBUG</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'SavePropValues|x86'">
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SavePropValues|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
-    <OutputPath>bin\x86\SavePropValues\</OutputPath>
-    <DefineConstants>TRACE;SAVE_PROP_VALUES</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;SAVE_PROP_VALUES</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -73,10 +72,13 @@
     <Compile Include="DemoParser.cs" />
     <Compile Include="DP\DemoPacketParser.cs" />
     <Compile Include="DP\Entity.cs" />
+    <Compile Include="DP\FastNetmessages\CVar.cs" />
+    <Compile Include="DP\FastNetmessages\CVars.cs" />
     <Compile Include="DP\FastNetmessages\RankUpdate.cs" />
     <Compile Include="DP\FastNetmessages\SayText.cs" />
     <Compile Include="DP\FastNetmessages\SayText2.cs" />
     <Compile Include="DP\FastNetmessages\ServerRankUpdate.cs" />
+    <Compile Include="DP\FastNetmessages\SetConVar.cs" />
     <Compile Include="DP\FastNetmessages\UserMessage.cs" />
     <Compile Include="DP\Handler\GameEventHandler.cs" />
     <Compile Include="DP\Handler\PacketEntitesHandler.cs" />
@@ -132,5 +134,7 @@
   </Target>
   -->
   <ItemGroup />
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="DP\FastNetmessages\" />
+  </ItemGroup>
 </Project>

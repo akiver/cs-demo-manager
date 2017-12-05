@@ -46,6 +46,8 @@ namespace DemoInfo.DP
 					new UpdateStringTable().Parse(bitstream, demo);
 				} else if (cmd == (int)NET_Messages.net_Tick) { //and all this other stuff
 						new NETTick().Parse(bitstream, demo);
+				} else if (cmd == (int)NET_Messages.net_SetConVar) {
+					new SetConVar().Parse(bitstream, demo);
 				} else if (cmd == (int)SVC_Messages.svc_UserMessage) {
 					new UserMessage().Parse(bitstream, demo);
 				} else {

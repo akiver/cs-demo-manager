@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Manager", "Manager\Manager.csproj", "{1D6D9598-4348-4444-A8DF-A634CA0D371B}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -65,16 +65,16 @@ Global
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.SavePropValues|x86.Build.0 = Release|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.YoloDebug|x86.ActiveCfg = Debug|x86
 		{22A46D61-1D40-43A9-802C-B9D43DADD9EC}.YoloDebug|x86.Build.0 = Debug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.Build.0 = Debug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.ActiveCfg = Debug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.Build.0 = Debug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.ActiveCfg = Release|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.Build.0 = Release|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.ActiveCfg = SavePropValues|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.Build.0 = SavePropValues|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.ActiveCfg = YoloDebug|x86
-		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.Build.0 = YoloDebug|x86
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.ActiveCfg = Bitstream-Debugging|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Bitstream-Debugging|x86.Build.0 = Bitstream-Debugging|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Debug|x86.Build.0 = Debug|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.ActiveCfg = Release|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.Release|x86.Build.0 = Release|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.ActiveCfg = SavePropValues|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.SavePropValues|x86.Build.0 = SavePropValues|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.ActiveCfg = YoloDebug|Any CPU
+		{22D4CFC7-6810-4C18-A353-71A49782394F}.YoloDebug|x86.Build.0 = YoloDebug|Any CPU
 		{9E6E1490-43BD-4925-8A3F-84B962828208}.Bitstream-Debugging|x86.ActiveCfg = Debug|x86
 		{9E6E1490-43BD-4925-8A3F-84B962828208}.Bitstream-Debugging|x86.Build.0 = Debug|x86
 		{9E6E1490-43BD-4925-8A3F-84B962828208}.Debug|x86.ActiveCfg = Debug|x86
@@ -118,5 +118,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1EDBB817-5CA8-485B-B5AD-AADB24F234F8}
 	EndGlobalSection
 EndGlobal

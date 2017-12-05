@@ -81,7 +81,7 @@ namespace DemoInfo.DP.Handler
 				}
 
 				if (userdata.Length == 0)
-					break;
+					continue;
 
 				if (table.Name == "userinfo") {
 					// Now we'll parse the players out of it.

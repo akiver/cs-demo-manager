@@ -188,6 +188,24 @@ namespace DemoInfo
 		public bool HasKit { get; set; }
 	}
 
+	public class PlayerBlindEventArgs : EventArgs
+	{
+		/// <summary>
+		/// The blinded player
+		/// </summary>
+		public Player Player { get; set; }
+
+		/// <summary>
+		/// Flash duration
+		/// </summary>
+		public float Duration { get; set; }
+
+		/// <summary>
+		/// Player who threw the flash
+		/// </summary>
+		public Player Attacker { get; set; }
+	}
+
 	public class PlayerHurtEventArgs : EventArgs
 	{
 		/// <summary>
@@ -253,6 +271,8 @@ namespace DemoInfo
 	public class PlayerDisconnectEventArgs : EventArgs
 	{
 		public Player Player {get; set; }
+
+		public string Reason { get; set; }
 	}
 
 	/// <summary>
@@ -342,6 +362,128 @@ namespace DemoInfo
 		public float RankChange { get; set; }
 	}
 
+	/// <summary>
+	/// Occurs when a player leave a buy zone
+	/// </summary>
+	public class PlayerLeftBuyZoneEventArgs : EventArgs
+	{
+		/// <summary>
+		/// Player who left the zone
+		/// </summary>
+		public Player Player { get; set; }
+	}
+
+	/// <summary>
+	/// Occurs when a player's money changed
+	/// </summary>
+	public class PlayerMoneyChangedEventArgs : EventArgs
+	{
+		/// <summary>
+		/// Player that had money changes
+		/// </summary>
+		public Player Player { get; set; }
+
+		/// <summary>
+		/// Old account value
+		/// </summary>
+		public int OldAccount { get; set; }
+
+		/// <summary>
+		/// New account value
+		/// </summary>
+		public int NewAccount { get; set; }
+	}
+
+	/// <summary>
+	/// Occurs when a player picked a weapon (buy or standard pick)
+	/// </summary>
+	public class PlayerPickWeaponEventArgs : EventArgs
+	{
+		/// <summary>
+		/// The player who picked the weapon
+		/// </summary>
+		public Player Player { get; set; }
+
+		/// <summary>
+		/// Weapon picked
+		/// </summary>
+		public Equipment Weapon { get; set; }
+	}
+
+	/// <summary>
+	/// Occurs when a player drop a weapon
+	/// </summary>
+	public class PlayerDropWeaponEventArgs : EventArgs
+	{
+		/// <summary>
+		/// The player who dropped the weapon
+		/// </summary>
+		public Player Player { get; set; }
+
+		/// <summary>
+		/// Weapon dropped
+		/// </summary>
+		public Equipment Weapon { get; set; }
+	}
+
+	/// <summary>
+	/// Occurs when a player buy an equipment
+	/// </summary>
+	public class PlayerBuyEventArgs : EventArgs
+	{
+		/// <summary>
+		/// The player who bought the equipment
+		/// </summary>
+		public Player Player { get; set; }
+
+		/// <summary>
+		/// Equipment bought
+		/// </summary>
+		public Equipment Weapon { get; set; }
+	}
+
+	/// <summary>
+	/// Occurs when a ConVar has changed
+	/// </summary>
+	public class ConVarChangeEventArgs : EventArgs
+	{
+		/// <summary>
+		/// ConVar's name
+		/// </summary>
+		public string Name { get; set; }
+
+		/// <summary>
+		/// ConVar value
+		/// </summary>
+		public string Value { get; set; }
+
+		/// <summary>
+		/// Don't know what's that
+		/// </summary>
+		public UInt32 DictionaryValue { get; set; }
+	}
+
+	/// <summary>
+	/// Occurs when a team's score has changed
+	/// </summary>
+	public class TeamScoreChangeEventArgs : EventArgs
+	{
+		/// <summary>
+		/// Team which its score changed
+		/// </summary>
+		public Team Team { get; set; }
+
+		/// <summary>
+		/// Old score
+		/// </summary>
+		public int OldScore { get; set; }
+
+		/// <summary>
+		/// New Score
+		/// </summary>
+		public int NewScore { get; set; }
+	}
+
 	public class Equipment
 	{
 		internal int EntityID { get; set; }
@@ -354,6 +496,10 @@ namespace DemoInfo
 			}
 		}
 
+		/// <summary>
+		/// string name from the game (eg. weapon_ak47)
+		/// This names are defined in scripts/items/items_game.txt
+		/// </summary>
 		public string OriginalString { get; set; }
 
 		public string SkinID { get; set; }
@@ -363,6 +509,11 @@ namespace DemoInfo
 		internal int AmmoType { get; set; }
 
 		public Player Owner { get; set; }
+
+		/// <summary>
+		/// Previous equipment owner
+		/// </summary>
+		public Player PrevOwner { get; set; }
 
 		public int ReserveAmmo {
 			get {
@@ -392,176 +543,390 @@ namespace DemoInfo
 			SkinID = skin;
 		}
 
-		const string WEAPON_PREFIX = "weapon_";
+		private const string WEAPON_PREFIX = "weapon_";
+		private const string ITEM_PREFIX = "item_";
 
-		public static EquipmentElement MapEquipment(string OriginalString)
+		/// <summary>
+		/// Map item string coming from demos events with equipment.
+		/// Used for specials equipments such as kevlar and weapons that have special name such as molotov.
+		/// Others weapons detection is based on their item index definition.
+		/// </summary>
+		/// <param name="originalString"></param>
+		/// <returns></returns>
+		public static EquipmentElement MapEquipment(string originalString)
 		{
 			EquipmentElement weapon = EquipmentElement.Unknown;
 
-			OriginalString = OriginalString.StartsWith(WEAPON_PREFIX)
-				? OriginalString.Substring(WEAPON_PREFIX.Length)
-				: OriginalString;
-
-			if (OriginalString.Contains ("knife") || OriginalString == "bayonet") {
-				weapon = EquipmentElement.Knife;
+			if (!originalString.StartsWith(ITEM_PREFIX) && !originalString.StartsWith(WEAPON_PREFIX))
+			{
+				originalString = WEAPON_PREFIX + originalString;
 			}
 
-			if (weapon == EquipmentElement.Unknown) {
-				switch (OriginalString) {
-				case "ak47":
-					weapon = EquipmentElement.AK47;
-					break;
-				case "aug":
-					weapon = EquipmentElement.AUG;
-					break;
-				case "awp":
-					weapon = EquipmentElement.AWP;
-					break;
-				case "bizon":
-					weapon = EquipmentElement.Bizon;
-					break;
-				case "c4":
-					weapon = EquipmentElement.Bomb;
-					break;
-				case "deagle":
-					weapon = EquipmentElement.Deagle;
-					break;
-				case "decoy":
-				case "decoygrenade":
-					weapon = EquipmentElement.Decoy;
-					break;
-				case "elite":
-					weapon = EquipmentElement.DualBarettas;
-					break;
-				case "famas":
-					weapon = EquipmentElement.Famas;
-					break;
-				case "fiveseven":
-					weapon = EquipmentElement.FiveSeven;
-					break;
-				case "flashbang":
-					weapon = EquipmentElement.Flash;
-					break;
-				case "g3sg1":
-					weapon = EquipmentElement.G3SG1;
-					break;
-				case "galil":
-				case "galilar":
-					weapon = EquipmentElement.Gallil;
-					break;
-				case "glock":
-					weapon = EquipmentElement.Glock;
-					break;
-				case "hegrenade":
-					weapon = EquipmentElement.HE;
-					break;
-				case "hkp2000":
-					weapon = EquipmentElement.P2000;
-					break;
-				case "incgrenade":
-				case "incendiarygrenade":
-					weapon = EquipmentElement.Incendiary;
-					break;
-				case "m249":
-					weapon = EquipmentElement.M249;
-					break;
-				case "m4a1":
-					weapon = EquipmentElement.M4A4;
-					break;
-				case "mac10":
-					weapon = EquipmentElement.Mac10;
-					break;
-				case "mag7":
-					weapon = EquipmentElement.Swag7;
-					break;
-				case "molotov":
-				case "molotovgrenade":
-				case "molotov_projectile":
-					weapon = EquipmentElement.Molotov;
-					break;
-				case "mp7":
-					weapon = EquipmentElement.MP7;
-					break;
-				case "mp9":
-					weapon = EquipmentElement.MP9;
-					break;
-				case "negev":
-					weapon = EquipmentElement.Negev;
-					break;
-				case "nova":
-					weapon = EquipmentElement.Nova;
-					break;
-				case "p250":
-					weapon = EquipmentElement.P250;
-					break;
-				case "p90":
-					weapon = EquipmentElement.P90;
-					break;
-				case "sawedoff":
-					weapon = EquipmentElement.SawedOff;
-					break;
-				case "scar20":
-					weapon = EquipmentElement.Scar20;
-					break;
-				case "sg556":
-					weapon = EquipmentElement.SG556;
-					break;
-				case "smokegrenade":
-					weapon = EquipmentElement.Smoke;
-					break;
-				case "ssg08":
-					weapon = EquipmentElement.Scout;
-					break;
-				case "taser":
-					weapon = EquipmentElement.Zeus;
-					break;
-				case "tec9":
-					weapon = EquipmentElement.Tec9;
-					break;
-				case "ump45":
-					weapon = EquipmentElement.UMP;
-					break;
-				case "xm1014":
-					weapon = EquipmentElement.XM1014;
-					break;
-				case "m4a1_silencer":
-				case "m4a1_silencer_off":
-					weapon = EquipmentElement.M4A1;
-					break;
-				case "cz75a":
-					weapon = EquipmentElement.CZ;
-					break;
-				case "usp":
-				case "usp_silencer":
-				case "usp_silencer_off":
-					weapon = EquipmentElement.USP;
-					break;
-				case "world":
-					weapon = EquipmentElement.World;
-					break;
-				case "inferno":
-					weapon = EquipmentElement.Incendiary;
-					break;
-				case "revolver":
-					weapon = EquipmentElement.Revolver;
-					break;
-				case "scar17"://These crash the game when given via give weapon_[mp5navy|...], and cannot be purchased ingame.
-				case "sg550"://yet the server-classes are networked, so I need to resolve them. 
-				case "mp5navy": 
-				case "p228":
-				case "scout":
-				case "sg552":
-				case "tmp":
-					weapon = EquipmentElement.Unknown;
-					break;
-				default:
-					Trace.WriteLine("Unknown weapon. " + OriginalString, "Equipment.MapEquipment()");
-					break;
+			EquipmentMapping equipment = Equipments.FirstOrDefault(e => e.OriginalName == originalString);
+			if (equipment.ItemIndex == 0)
+			{
+				switch (originalString)
+				{
+					case "item_kevlar":
+					case "item_vest":
+						weapon = EquipmentElement.Kevlar;
+						break;
+					case "item_assaultsuit":
+					case "item_vesthelm":
+						weapon = EquipmentElement.Helmet;
+						break;
+					case "item_defuser":
+						weapon = EquipmentElement.DefuseKit;
+						break;
+					case "weapon_world":
+					case "weapon_worldspawn":
+						weapon = EquipmentElement.World;
+						break;
+					case "weapon_inferno":
+						weapon = EquipmentElement.Incendiary;
+						break;
+					case "weapon_molotov_projectile":
+					case "weapon_molotovgrenade":
+						weapon = EquipmentElement.Molotov;
+						break;
+					default:
+						Trace.WriteLine("Unknown weapon. " + originalString, "Equipment.MapEquipment()");
+						break;
 				}
+			}
+			else
+			{
+				weapon = equipment.Element;
 			}
 
 			return weapon;
 		}
+
+		/// <summary>
+		/// Mapping between item index definition and EquipmentElement.
+		/// Item indexes are located in the game file /csgo/scripts/items_game.txt
+		/// </summary>
+		public static EquipmentMapping[] Equipments =
+		{
+			new EquipmentMapping
+			{
+				ItemIndex = 1,
+				OriginalName = "weapon_deagle",
+				Element = EquipmentElement.Deagle,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 2,
+				OriginalName = "weapon_elite",
+				Element = EquipmentElement.DualBarettas,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 3,
+				OriginalName = "weapon_fiveseven",
+				Element = EquipmentElement.FiveSeven,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 4,
+				OriginalName = "weapon_glock",
+				Element = EquipmentElement.Glock,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 7,
+				OriginalName = "weapon_ak47",
+				Element = EquipmentElement.AK47,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 8,
+				OriginalName = "weapon_aug",
+				Element = EquipmentElement.AUG,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 9,
+				OriginalName = "weapon_awp",
+				Element = EquipmentElement.AWP,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 10,
+				OriginalName = "weapon_famas",
+				Element = EquipmentElement.Famas,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 11,
+				OriginalName = "weapon_g3sg1",
+				Element = EquipmentElement.G3SG1,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 13,
+				OriginalName = "weapon_galilar",
+				Element = EquipmentElement.Gallil,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 14,
+				OriginalName = "weapon_m249",
+				Element = EquipmentElement.M249,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 16,
+				OriginalName = "weapon_m4a1",
+				Element = EquipmentElement.M4A4,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 17,
+				OriginalName = "weapon_mac10",
+				Element = EquipmentElement.Mac10,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 19,
+				OriginalName = "weapon_p90",
+				Element = EquipmentElement.P90,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 24,
+				OriginalName = "weapon_ump45",
+				Element = EquipmentElement.UMP,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 25,
+				OriginalName = "weapon_xm1014",
+				Element = EquipmentElement.XM1014,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 26,
+				OriginalName = "weapon_bizon",
+				Element = EquipmentElement.Bizon,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 27,
+				OriginalName = "weapon_mag7",
+				Element = EquipmentElement.Swag7,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 28,
+				OriginalName = "weapon_negev",
+				Element = EquipmentElement.Negev,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 29,
+				OriginalName = "weapon_sawedoff",
+				Element = EquipmentElement.SawedOff,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 30,
+				OriginalName = "weapon_tec9",
+				Element = EquipmentElement.Tec9,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 31,
+				OriginalName = "weapon_taser",
+				Element = EquipmentElement.Zeus,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 32,
+				OriginalName = "weapon_hkp2000",
+				Element = EquipmentElement.P2000,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 33,
+				OriginalName = "weapon_mp7",
+				Element = EquipmentElement.MP7,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 34,
+				OriginalName = "weapon_mp9",
+				Element = EquipmentElement.MP9,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 35,
+				OriginalName = "weapon_nova",
+				Element = EquipmentElement.Nova,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 36,
+				OriginalName = "weapon_p250",
+				Element = EquipmentElement.P250,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 38,
+				OriginalName = "weapon_scar20",
+				Element = EquipmentElement.Scar20,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 39,
+				OriginalName = "weapon_sg556",
+				Element = EquipmentElement.SG556,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 40,
+				OriginalName = "weapon_ssg08",
+				Element = EquipmentElement.Scout,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 42,
+				OriginalName = "weapon_knife",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 43,
+				OriginalName = "weapon_flashbang",
+				Element = EquipmentElement.Flash,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 44,
+				OriginalName = "weapon_hegrenade",
+				Element = EquipmentElement.HE,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 45,
+				OriginalName = "weapon_smokegrenade",
+				Element = EquipmentElement.Smoke,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 46,
+				OriginalName = "weapon_molotov",
+				Element = EquipmentElement.Molotov,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 47,
+				OriginalName = "weapon_decoy",
+				Element = EquipmentElement.Decoy,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 48,
+				OriginalName = "weapon_incgrenade",
+				Element = EquipmentElement.Incendiary,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 49,
+				OriginalName = "weapon_c4",
+				Element = EquipmentElement.Bomb,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 59,
+				OriginalName = "weapon_knife_t",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 60,
+				OriginalName = "weapon_m4a1_silencer",
+				Element = EquipmentElement.M4A1,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 61,
+				OriginalName = "weapon_usp_silencer",
+				Element = EquipmentElement.USP,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 63,
+				OriginalName = "weapon_cz75a",
+				Element = EquipmentElement.CZ,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 64,
+				OriginalName = "weapon_revolver",
+				Element = EquipmentElement.Revolver,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 500,
+				OriginalName = "weapon_bayonet",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 505,
+				OriginalName = "weapon_knife_flip",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 506,
+				OriginalName = "weapon_knife_gut",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 507,
+				OriginalName = "weapon_knife_karambit",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 508,
+				OriginalName = "weapon_knife_m9_bayonet",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 509,
+				OriginalName = "weapon_knife_tactical",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 512,
+				OriginalName = "weapon_knife_falchion",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 514,
+				OriginalName = "weapon_knife_survival_bowie",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 515,
+				OriginalName = "weapon_knife_butterfly",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 516,
+				OriginalName = "weapon_knife_push",
+				Element = EquipmentElement.Knife,
+			},
+		};
 	}
 
 	public enum EquipmentElement
@@ -637,6 +1002,27 @@ namespace DemoInfo
 		Equipment = 5,
 		Grenade = 6,
 
+	}
+
+	/// <summary>
+	/// Struct to map Equipment with game item index and DemoInfo EquipmentElement API.
+	/// </summary>
+	public struct EquipmentMapping
+	{
+		/// <summary>
+		/// Index defined in the game file items_game.txt
+		/// </summary>
+		public int ItemIndex;
+
+		/// <summary>
+		/// Equipment string name defined in the game file items_game.txt
+		/// </summary>
+		public string OriginalName;
+
+		/// <summary>
+		/// Mapping to EquipmentElement to not break current API
+		/// </summary>
+		public EquipmentElement Element;
 	}
 }
 
