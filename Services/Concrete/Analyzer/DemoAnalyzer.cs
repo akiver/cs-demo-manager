@@ -111,6 +111,7 @@ namespace Services.Concrete.Analyzer
 		private const int ESEA_ASSIST_THRESHOLD = 50;
 
 		/// <summary>
+		/// TODO use internal demoinfo detection https://github.com/StatsHelix/demoinfo/commit/62bb523cf36c757cffe3bed472971dc67b6511d1#r26059706
 		/// As molotov thrower isn't networked eveytime, this 3 queues are used to know who thrown a moloto
 		/// </summary>
 		public readonly Queue<Player> LastPlayersThrownMolotov = new Queue<Player>();
