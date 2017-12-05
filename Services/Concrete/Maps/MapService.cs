@@ -41,6 +41,11 @@ namespace Services.Concrete.Maps
 			switch (demo.MapName)
 			{
 				case DUST2:
+					if (demo.Date > new DateTime(2017, 10, 17))
+					{
+						Map = new NewDust2();
+						break;
+					}
 					Map = new Dust2();
 					break;
 				case INFERNO:
