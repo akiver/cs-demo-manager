@@ -11,44 +11,29 @@
 		public string Name { get; set; }
 
 		/// <summary>
-		/// Scaled X size
+		/// Number of pixels X
 		/// </summary>
-		public int SizeX { get; set; }
+		public int ResolutionX { get; set; } = 1024;
 
 		/// <summary>
-		/// Scaled Y size
+		/// Number of pixels Y
 		/// </summary>
-		public int SizeY { get; set; }
+		public int ResolutionY { get; set; } = 1024;
 
 		/// <summary>
-		/// X Coordinate where the map start in game (getpos_exact)
+		/// Upper left world coordinate (see map's .txt file in csgo\resource\overviews)
 		/// </summary>
-		public int StartX { get; set; }
+		public int PosX { get; set; }
 
 		/// <summary>
-		/// X Coordinate where the map start in game (getpos_exact)
+		/// Bottom right world coordinate (see map's .txt file in csgo\resource\overviews)
 		/// </summary>
-		public int StartY { get; set; }
+		public int PosY { get; set; }
 
 		/// <summary>
-		/// X Coordinate where the map end in game (getpos_exact)
+		/// Map's scaling (see map's .txt file in csgo\resource\overviews)
 		/// </summary>
-		public int EndX { get; set; }
-
-		/// <summary>
-		/// Y Coordinate where the map end in game (getpos_exact)
-		/// </summary>
-		public int EndY { get; set; }
-
-		/// <summary>
-		/// Pixel dimensions of the overview image (width)
-		/// </summary>
-		public int ResX { get; set; }
-
-		/// <summary>
-		/// Pixel dimensions of the overview image (height)
-		/// </summary>
-		public int ResY { get; set; }
+		public double Scale { get; set; }
 
 		/// <summary>
 		/// Number of matchs played on this map
@@ -114,15 +99,6 @@
 		/// Number of bomb planted on B
 		/// </summary>
 		public int BombPlantedOnBCount { get; set; } = 0;
-
-		/// <summary>
-		/// Compute the overview size (scaling)
-		/// </summary>
-		protected void CalcSize()
-		{
-			SizeX = EndX - StartX;
-			SizeY = EndY - StartY;
-		}
 
 		public override bool Equals(object obj)
 		{

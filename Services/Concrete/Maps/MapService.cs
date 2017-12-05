@@ -109,9 +109,7 @@ namespace Services.Concrete.Maps
 		/// <param name="x"></param>
 		public float CalculatePointToResolutionX(float x)
 		{
-			x += (Map.StartX < 0) ? Map.StartX * -1 : Map.StartX;
-			x = (float)Math.Floor((x / Map.SizeX) * Map.ResX);
-			return x;
+			return (float)((x - Map.PosX) / Map.Scale);
 		}
 
 		/// <summary>
@@ -120,10 +118,7 @@ namespace Services.Concrete.Maps
 		/// <param name="y"></param>
 		public float CalculatePointToResolutionY(float y)
 		{
-			y += (Map.StartY < 0) ? Map.StartY * -1 : Map.StartY;
-			y = (float)Math.Floor((y / Map.SizeY) * Map.ResY);
-			y = (y - Map.ResY) * -1;
-			return y;
+			return (float)((Map.PosY - y) / Map.Scale);
 		}
 
 		public WriteableBitmap GetWriteableImage()
@@ -135,7 +130,7 @@ namespace Services.Concrete.Maps
 				{
 					using (Stream s = sri.Stream)
 					{
-						return BitmapFactory.New(Map.ResX, Map.ResY).FromStream(s);
+						return BitmapFactory.FromStream(s);
 					}
 				}
 

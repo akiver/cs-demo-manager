@@ -5,13 +5,9 @@
 		public Cache()
 		{
 			Name = "de_cache";
-			StartX = -2031;
-			StartY = -2240;
-			EndX = 3752;
-			EndY = 3187;
-			ResX = 1024;
-			ResY = 1024;
-			CalcSize();
+			PosX = -2000;
+			PosY= 3250;
+			Scale = 5.5;
 		}
 	}
 }

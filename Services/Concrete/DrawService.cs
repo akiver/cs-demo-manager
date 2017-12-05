@@ -61,14 +61,14 @@ namespace Services.Concrete
 		{
 			MapService = mapService;
 			OverviewLayer = mapService.GetWriteableImage();
-			WeaponLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			KillLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			SmokeLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			FlashbangLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			HegrenadeLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			DecoyLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			MolotovLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
-			PlayerMarkerLayer = BitmapFactory.New(MapService.Map.ResX, MapService.Map.ResY);
+			WeaponLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			KillLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			SmokeLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			FlashbangLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			HegrenadeLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			DecoyLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			MolotovLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
+			PlayerMarkerLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
 		}
 
 		/// <summary>

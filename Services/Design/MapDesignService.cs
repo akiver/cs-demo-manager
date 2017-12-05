@@ -28,7 +28,7 @@ namespace Services.Design
 				{
 					using (Stream s = sri.Stream)
 					{
-						return BitmapFactory.New(Map.ResX, Map.ResY).FromStream(s);
+						return BitmapFactory.FromStream(s);
 					}
 				}
 

@@ -10,7 +10,6 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media.Imaging;
 using Core.Models;
-using Services.Exceptions.Map;
 using Services.Interfaces;
 using Services.Models.Heatmap;
 using Color = System.Drawing.Color;
@@ -129,7 +128,7 @@ namespace Services.Concrete
 			bitmap2.MakeTransparent();
 
 			// Final image
-			Bitmap finalImage = new Bitmap(_mapService.Map.ResX, _mapService.Map.ResY);
+			Bitmap finalImage = new Bitmap(_mapService.Map.ResolutionX, _mapService.Map.ResolutionY);
 
 			using (Graphics g = Graphics.FromImage(finalImage))
 			{
@@ -151,7 +150,7 @@ namespace Services.Concrete
 		public WriteableBitmap GenerateHeatmap(List<HeatmapPoint> points, byte alpha)
 		{
 			// Create a blank bitmap
-			Bitmap blankBitmap = new Bitmap(_mapService.Map.ResX, _mapService.Map.ResY);
+			Bitmap blankBitmap = new Bitmap(_mapService.Map.ResolutionX, _mapService.Map.ResolutionY);
 			// Calculate mask intensity
 			Bitmap dataBitmap = CreateIntensityMask(blankBitmap, points);
 			// Colorize the mask

@@ -5,13 +5,9 @@
 		public Tulip()
 		{
 			Name = "de_tulip";
-			StartX = 3418;
-			StartY = -64;
-			EndX = 9022;
-			EndY = 5594;
-			ResX = 1024;
-			ResY = 1024;
-			CalcSize();
+			PosX = 3402;
+			PosY = 5583;
+			Scale = 5.50;
 		}
 	}
 }
