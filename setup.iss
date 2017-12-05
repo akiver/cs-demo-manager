@@ -133,8 +133,6 @@ Source: "Manager\bin\x86\Release\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}";
 Source: "Manager\bin\x86\Release\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Microsoft.Practices.ServiceLocation.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Nito.AsyncEx.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Nito.AsyncEx.Enlightenment.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.OOXML.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.OpenXml4Net.dll"; DestDir: "{app}"; Flags: ignoreversion
