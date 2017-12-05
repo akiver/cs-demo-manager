@@ -24,7 +24,8 @@ namespace Manager
 			"Ezro",
 			"green-s",
 			"moritzuehling",
-			"thedudeguy1"
+			"thedudeguy1",
+			"Leonardo",
 		};
 		public static string[] Translators = {
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",
