@@ -860,7 +860,8 @@ namespace Services.Concrete.Analyzer
 
 		protected void HandleFireNadeStarted(object sender, FireEventArgs e)
 		{
-			if (!IsMatchStarted) return;
+			// ignore molotovs thrown by a BOT since we didn't add BOT in queues
+			if (!IsMatchStarted || e.ThrownBy != null && e.ThrownBy.SteamID == 0) return;
 
 			switch (e.NadeType)
 			{
@@ -878,7 +879,7 @@ namespace Services.Concrete.Analyzer
 					Player thrower = null;
 					if (e.ThrownBy != null)
 					{
-						thrower = Demo.Players.First(p => p.SteamId == e.ThrownBy.SteamID);
+						thrower = Demo.Players.FirstOrDefault(p => p.SteamId == e.ThrownBy.SteamID);
 						molotovEvent.ThrowerSide = e.ThrownBy.Team.ToSide();
 					}
 
