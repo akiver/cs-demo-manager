@@ -198,13 +198,13 @@ namespace DemoInfo.DP.Handler
 
 				#region Nades
 			case "player_blind":
+				// BOT are ignored (thrower or not)
 				data = MapData(eventDescriptor, rawEvent);
-				if (parser.Players.ContainsKey((int) data["userid"]))
+				if (parser.Players.ContainsKey((int)data["userid"]))
 				{
-					Player p = parser.Players[(int) data["userid"]];
-					blindPlayers.Add(p);
+					Player p = parser.Players[(int)data["userid"]];
 
-					if (data.ContainsKey("attacker"))
+					if (data.ContainsKey("attacker") && parser.Players.ContainsKey((int)data["attacker"]))
 					{
 						Player attacker = parser.Players[(int)data["attacker"]];
 						PlayerBlindEventArgs ev = new PlayerBlindEventArgs
@@ -213,6 +213,7 @@ namespace DemoInfo.DP.Handler
 							Duration = (float)data["blind_duration"],
 							Attacker = attacker,
 						};
+						blindPlayers.Add(p);
 						parser.RaisePlayerBlind(ev);
 					}
 				}
