@@ -184,6 +184,8 @@ namespace Core
 
 			if (steamPath == null) return null;
 
+			steamPath = steamPath.Replace("/", "\\");
+
 			string pathsFile = Path.Combine(steamPath, "steamapps", "libraryfolders.vdf");
 
 			if (!File.Exists(pathsFile))
