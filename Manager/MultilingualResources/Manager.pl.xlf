@@ -3632,6 +3632,10 @@ You may have missing data for this demos.</source>
 {0}
 You may have missing data for this demos.</target>
         </trans-unit>
+        <trans-unit id="execute_command" translate="yes" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
       </group>
     </body>
   </file>

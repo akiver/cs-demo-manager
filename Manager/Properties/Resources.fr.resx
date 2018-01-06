@@ -2707,4 +2707,7 @@ Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR)
 {0}
 Il est possible que des données soient manquantes pour celles-ci.</value>
   </data>
+  <data name="execute_command" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

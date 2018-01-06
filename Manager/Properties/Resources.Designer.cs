@@ -2320,6 +2320,21 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot;
+        ///	{{
+        ///		factory &quot;PlayCommands&quot;
+        ///		name &quot;spec&quot;
+        ///		starttick &quot;{1}&quot;
+        ///		commands &quot;{2}&quot;
+        ///	}}.
+        /// </summary>
+        public static string execute_command {
+            get {
+                return ResourceManager.GetString("execute_command", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string Export {

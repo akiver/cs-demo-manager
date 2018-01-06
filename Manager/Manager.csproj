@@ -581,6 +581,7 @@
     <Resource Include="resources\vdm\text_message_start.txt" />
     <Resource Include="resources\WindowsIcons-license.txt" />
     <Resource Include="resources\Entypo-license.txt" />
+    <Resource Include="resources\vdm\execute_command.txt" />
     <Content Include="steam_api.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
