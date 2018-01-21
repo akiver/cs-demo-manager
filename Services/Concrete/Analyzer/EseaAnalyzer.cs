@@ -133,7 +133,7 @@ namespace Services.Concrete.Analyzer
 		{
 			if (!IsMatchStarted) return;
 
-            if (IsSwapTeamRequired && CurrentRound.Number == 1) IsSwapTeamRequired = false;
+			if (IsSwapTeamRequired && CurrentRound.Number == 1) IsSwapTeamRequired = false;
 
 			// Detect teams name only during first half
 			if (CurrentRound.Number < 15)
