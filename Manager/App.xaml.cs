@@ -34,7 +34,8 @@ namespace Manager
 			"Spidersouris (French)",
 			"Kacper \"sikl0`\" Olkis (Polish)",
 			"yRRCK (German)",
-			"Paco González López / monxas (Spanish)"
+			"Paco González López / monxas (Spanish)",
+			"aLieN (Hungarian)",
 		};
 
 		public App()
