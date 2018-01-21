@@ -25,6 +25,8 @@ namespace SuspectsBot
 
 		public ObservableCollection<Language> Languages { get; set; }
 
+		public bool SendDownloadNotificationOnGameClosed { get; set; } = true;
+
 		public string IconToolTipText
 		{
 			get
@@ -294,8 +296,11 @@ namespace SuspectsBot
 
 		private void HandleCsgoClosed(object sender, CsgoClosedEvent args)
 		{
-			App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, Properties.Resources.DownloadDemos, BalloonIcon.Info);
-			App.NotifyIcon.TrayBalloonTipClicked += CsgoClosedBalloonClicked;
+			if (SendDownloadNotificationOnGameClosed)
+			{
+				App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, Properties.Resources.DownloadDemos, BalloonIcon.Info);
+				App.NotifyIcon.TrayBalloonTipClicked += CsgoClosedBalloonClicked;
+			}
 		}
 
 		private void CsgoClosedBalloonClicked(object sender, RoutedEventArgs routedEventArgs)

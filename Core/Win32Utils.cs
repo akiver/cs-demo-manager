@@ -72,6 +72,11 @@ namespace Core
 		/// </summary>
 		public const int WM_DOWNLOAD_DEMOS = 0X585F;
 
+		/// <summary>
+		/// Sent to toggle download notification on game closed.
+		/// </summary>
+		public const int WM_TOGGLE_DOWNLOAD_NOTIFICATION = 0x61DD;
+
 		public const int WM_CLOSE = 0x0010;
 
 		[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Ansi)]

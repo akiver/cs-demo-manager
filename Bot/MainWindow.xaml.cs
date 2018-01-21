@@ -43,6 +43,14 @@ namespace SuspectsBot
 				handled = true;
 			}
 
+			if (msg == Win32Utils.WM_TOGGLE_DOWNLOAD_NOTIFICATION)
+			{
+				NotifyIconViewModel dataContext = App.NotifyIcon.DataContext as NotifyIconViewModel;
+				if (dataContext != null)
+					dataContext.SendDownloadNotificationOnGameClosed = !dataContext.SendDownloadNotificationOnGameClosed;
+				handled = true;
+			}
+
 			return IntPtr.Zero;
 		}
 	}
