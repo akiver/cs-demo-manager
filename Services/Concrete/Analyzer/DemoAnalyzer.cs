@@ -241,52 +241,54 @@ namespace Services.Concrete.Analyzer
 			Match match = LocalRegex.Match(header.ServerName);
 			if (match.Success || header.ServerName.Contains("localhost"))
 			{
-				demo.Type = "POV";
-				return Source.Factory("pov");
+				demo.Type = Pov.NAME;
+				return Source.Factory(Pov.NAME);
 			}
 
 			// Check for faceit demos
 			// (Before May 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
 			// (May 2015) Faceit : uses hostname
-			if (demo.Hostname.Contains("faceit", StringComparison.OrdinalIgnoreCase)
+			if (demo.Hostname.Contains(Faceit.NAME, StringComparison.OrdinalIgnoreCase)
 				|| FILENAME_FACEIT_REGEX.Match(demo.Name).Success)
 			{
-				return Source.Factory("faceit");
+				return Source.Factory(Faceit.NAME);
 			}
 
 			// Check for cevo demos
-			if (demo.Hostname.Contains("cevo", StringComparison.OrdinalIgnoreCase))
+			if (demo.Hostname.Contains(Cevo.NAME, StringComparison.OrdinalIgnoreCase))
 			{
-				return Source.Factory("cevo");
+				return Source.Factory(Cevo.NAME);
 			}
 
 			// Check for ESL demos
-			if (demo.Hostname.Contains("esl", StringComparison.OrdinalIgnoreCase))
+			if (demo.Hostname.Contains(Esl.NAME, StringComparison.OrdinalIgnoreCase))
 			{
-				return Source.Factory("esl");
+				return Source.Factory(Esl.NAME);
 			}
 
 			// Check for ebot demos
-			if (demo.Hostname.Contains("ebot", StringComparison.OrdinalIgnoreCase)
-				|| FILENAME_EBOT_REGEX.Match(demo.Name).Success)
+			if (demo.Hostname.Contains(Ebot.NAME, StringComparison.OrdinalIgnoreCase)
+				|| FILENAME_EBOT_REGEX.Match(demo.Name).Success
+				|| demo.Hostname.Contains("ksnetwork.es", StringComparison.OrdinalIgnoreCase)
+				)
 			{
-				return Source.Factory("ebot");
+				return Source.Factory(Ebot.NAME);
 			}
 
 			// Check for esea demos, appart the filename there is no magic to detect it
-			if (demo.Name.Contains("esea", StringComparison.OrdinalIgnoreCase))
+			if (demo.Name.Contains(Esea.NAME, StringComparison.OrdinalIgnoreCase))
 			{
-				return Source.Factory("esea");
+				return Source.Factory(Esea.NAME);
 			}
 
-			if (demo.Name.Contains("popflash", StringComparison.OrdinalIgnoreCase)
-				|| demo.Hostname.Contains("popflash", StringComparison.OrdinalIgnoreCase))
+			if (demo.Name.Contains(PopFlash.NAME, StringComparison.OrdinalIgnoreCase)
+				|| demo.Hostname.Contains(PopFlash.NAME, StringComparison.OrdinalIgnoreCase))
 			{
-				return Source.Factory("popflash");
+				return Source.Factory(PopFlash.NAME);
 			}
 
 			// If none of the previous checks matched, we use ValveAnalyzer
-			return Source.Factory("valve");
+			return Source.Factory(Valve.NAME);
 		}
 
 		#region Events Handlers
