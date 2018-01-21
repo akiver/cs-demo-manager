@@ -83,7 +83,7 @@ namespace Services.Concrete.Analyzer
 					// detect MR overtimes to be able to add OT at the right time
 					if (IsOvertime && MrOvertime == 0)
 					{
-						MrOvertime = Parser.CTScore + Parser.TScore- 30;
+						MrOvertime = Parser.CTScore + Parser.TScore - 30;
 						// add first OT rounds to the counter
 						RoundCountOvertime = MrOvertime - 1;
 					}
