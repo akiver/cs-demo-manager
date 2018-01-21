@@ -24,6 +24,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Manager.Messages;
 using Manager.Models;
 using Manager.Services;
+using Manager.Services.Configuration;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Manager.Views.Dialogs;
@@ -732,7 +733,22 @@ namespace Manager.ViewModel.Demos
 							{
 								try
 								{
-									GameLauncher launcher = new GameLauncher(SelectedDemo);
+									GameLauncherConfiguration config = new GameLauncherConfiguration(SelectedDemo)
+									{
+										SteamExePath = AppSettings.SteamExePath(),
+										Width = Properties.Settings.Default.ResolutionWidth,
+										Height = Properties.Settings.Default.ResolutionHeight,
+										Fullscreen = Properties.Settings.Default.IsFullscreen,
+										EnableHlae = Properties.Settings.Default.EnableHlae,
+										CsgoExePath = Properties.Settings.Default.CsgoExePath,
+										EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
+										HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
+										HlaeExePath = HlaeService.GetHlaeExePath(),
+										LaunchParameters = Properties.Settings.Default.LaunchParameters,
+										UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
+										FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId,
+									};
+									GameLauncher launcher = new GameLauncher(config);
 									launcher.WatchDemoAt(tick);
 								}
 								catch (Exception e)
@@ -958,8 +974,23 @@ namespace Manager.ViewModel.Demos
 						}
 						try
 						{
-							GameLauncher launcher = new GameLauncher(SelectedDemo);
-							launcher.WatchDemo();
+							GameLauncherConfiguration config = new GameLauncherConfiguration(SelectedDemo)
+							{
+								SteamExePath = AppSettings.SteamExePath(),
+								Width = Properties.Settings.Default.ResolutionWidth,
+								Height = Properties.Settings.Default.ResolutionHeight,
+								Fullscreen = Properties.Settings.Default.IsFullscreen,
+								EnableHlae = Properties.Settings.Default.EnableHlae,
+								CsgoExePath = Properties.Settings.Default.CsgoExePath,
+								EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
+								HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
+								HlaeExePath = HlaeService.GetHlaeExePath(),
+								LaunchParameters = Properties.Settings.Default.LaunchParameters,
+								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
+								FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId,
+							};
+							GameLauncher launcher = new GameLauncher(config);
+							await launcher.StartGame();
 						}
 						catch (Exception e)
 						{
@@ -2094,7 +2125,22 @@ namespace Manager.ViewModel.Demos
 		/// <param name="isHighlight"></param>
 		private async void StartWatchHighOrLow(bool isHighlight = true)
 		{
-			GameLauncher launcher = new GameLauncher(SelectedDemo);
+			GameLauncherConfiguration config = new GameLauncherConfiguration(SelectedDemo)
+			{
+				SteamExePath = AppSettings.SteamExePath(),
+				Width = Properties.Settings.Default.ResolutionWidth,
+				Height = Properties.Settings.Default.ResolutionHeight,
+				Fullscreen = Properties.Settings.Default.IsFullscreen,
+				EnableHlae = Properties.Settings.Default.EnableHlae,
+				CsgoExePath = Properties.Settings.Default.CsgoExePath,
+				EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
+				HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
+				HlaeExePath = HlaeService.GetHlaeExePath(),
+				LaunchParameters = Properties.Settings.Default.LaunchParameters,
+				UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
+				FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId,
+			};
+			GameLauncher launcher = new GameLauncher(config);
 			var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
 			if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
 			if (isHighlight)

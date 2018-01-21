@@ -67,6 +67,9 @@
 		<KeyBinding Command="{Binding ShowDemoStuffsCommand}"
 					CommandParameter="{Binding CurrentDemo}"
 					Gesture="CTRL+G" />
+		<KeyBinding Command="{Binding GoToMovie}"
+					CommandParameter="{Binding CurrentDemo}"
+					Gesture="CTRL+M" />
 		<KeyBinding Command="{Binding GoToPreviousDemoCommand}"
 					CommandParameter="{Binding GoToPreviousDemoCommand}"
 					Gesture="CTRL+LEFT" />
@@ -193,6 +196,24 @@
 								</Rectangle.OpacityMask>
 							</Rectangle>
 							<TextBlock Text="{x:Static properties:Resources.ExportChat}"
+									   Style="{StaticResource ButtonTitleStyle}" />
+						</StackPanel>
+					</Button>
+
+					<Button Command="{Binding GoToMovie}"
+							CommandParameter="{Binding CurrentDemo}"
+							Style="{DynamicResource GeneralButton}"
+							ToolTip="Generate movie">
+						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+							<Rectangle Width="15"
+									   Height="15"
+									   Fill="{StaticResource IdealForegroundColorBrush}">
+								<Rectangle.OpacityMask>
+									<VisualBrush Visual="{StaticResource appbar_movie_clapper}"
+												 Stretch="Fill" />
+								</Rectangle.OpacityMask>
+							</Rectangle>
+							<TextBlock Text="Movie"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>

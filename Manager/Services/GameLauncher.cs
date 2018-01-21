@@ -9,6 +9,8 @@ using Core.Models;
 using Core.Models.Events;
 using DemoInfo;
 using Manager.Exceptions.Launcher;
+using Manager.Services.Configuration;
+using Services;
 using Player = Core.Models.Player;
 
 namespace Manager.Services
@@ -26,6 +28,11 @@ namespace Manager.Services
 		private const int STUFF_BEGIN_DELAY = 5; // Seconds before the playback start playing and focus on the player
 		private const int STUFF_END_DELAY = 3; // Seconds before the playback fast forward to the next stuff when the previous one is done
 		private const int MOLOTOV_TIME = 8; // Seconds average waiting time for a molotov end
+		private const string ARGUMENT_SEPARATOR = " ";
+		/// <summary>
+		/// Launcher configuration
+		/// </summary>
+		private readonly GameLauncherConfiguration _config;
 		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid"};
 		private readonly Process _process = new Process();
 		private readonly List<string> _hlaeArguments = new List<string>
@@ -35,160 +42,167 @@ namespace Manager.Services
 			"-csgoLauncher",
 			"-autoStart",
 		};
-		private const string ARGUMENT_SEPARATOR = " ";
-		private readonly Demo _demo;
-		private bool _removeVdmFile = false;
 
-		public GameLauncher(Demo demo)
+		public GameLauncher(GameLauncherConfiguration config)
 		{
-			_demo = demo;
-			_process.StartInfo.FileName = AppSettings.SteamExePath();
+			_config = config;
 			_arguments.Add("+playdemo");
-			_arguments.Add(demo.Path);
+			_arguments.Add(_config.Demo.Path);
 		}
 
-		public async void StartGame()
+		public async Task StartGame()
 		{
 			SetupResolutionParameters();
 			KillCsgo();
-			if (Properties.Settings.Default.EnableHlae)
+			if (_config.EnableHlae)
 			{
 				// start the game using HLAE
-				if (!File.Exists(Properties.Settings.Default.CsgoExePath))
+				if (!File.Exists(_config.CsgoExePath))
 					throw new CsgoNotFoundException();
 
-				string hlaeExePath = HlaeService.GetHlaeExePath();
-				if (!File.Exists(hlaeExePath))
+				if (!File.Exists(_config.HlaeExePath))
 					throw new HlaeNotFound();
 
-				_arguments.Add(Properties.Settings.Default.LaunchParameters);
+				_arguments.Add(_config.LaunchParameters);
 				List<string> argList = new List<string>(_hlaeArguments)
 				{
-					$"-csgoExe \"{Properties.Settings.Default.CsgoExePath}\"",
+					$"-csgoExe \"{_config.CsgoExePath}\"",
 					$"-customLaunchOptions \"{string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray())}\""
 				};
 
-				string hlaeConfigParentPath = Properties.Settings.Default.HlaeConfigParentFolderPath;
-				if (Properties.Settings.Default.EnableHlaeConfigParent && Directory.Exists(hlaeConfigParentPath))
+				if (_config.EnableHlaeConfigParent && Directory.Exists(_config.HlaeConfigParentFolderPath))
 				{
 					argList.Add("-mmcfgEnabled true");
-					argList.Add($"-mmcfg \"{hlaeConfigParentPath}\"");
+					argList.Add($"-mmcfg \"{_config.HlaeConfigParentFolderPath}\"");
 				}
 
 				string args = string.Join(ARGUMENT_SEPARATOR, argList.ToArray());
 				ProcessStartInfo psi = new ProcessStartInfo
 				{
 					Arguments = args,
-					FileName = hlaeExePath,
-					UseShellExecute = false
+					FileName = _config.HlaeExePath,
+					UseShellExecute = false,
 				};
-				Process.Start(psi);
+				_process.StartInfo = psi;
+				_process.Start();
+				_config.OnHLAEStarted?.Invoke();
+				// wait for HLAE process to exit
+				await _process.WaitForExitAsync();
+				_config.OnHLAEClosed?.Invoke();
 			}
 			else
 			{
 				string args = string.Join(ARGUMENT_SEPARATOR, _arguments.ToArray());
-				_process.StartInfo.Arguments = args + " " + Properties.Settings.Default.LaunchParameters;
+				ProcessStartInfo psi = new ProcessStartInfo
+				{
+					Arguments = args + " " + _config.LaunchParameters,
+					FileName = _config.SteamExePath,
+				};
+				_process.StartInfo = psi;
 				_process.Start();
 			}
 
-			if (_removeVdmFile)
-			{
-				await Task.Delay(3000);
-				Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
-				if (processes.Length > 0)
-				{
-					Process p = processes[0];
-					p.EnableRaisingEvents = true;
-					p.Exited += (sender, args) =>
-					{
-						DeleteVdmFile();
-					};
-				}
-			}
-		}
+			if (_config.DeleteVdmFileAtStratup)
+				await DeleteVdmFile();
 
-		public void WatchDemo()
-		{
-			DeleteVdmFile();
-			StartGame();
+			_config.OnGameStarted?.Invoke();
+
+			await Task.Delay(3000);
+			Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
+			if (processes.Length > 0)
+			{
+				_config.OnGameRunning?.Invoke();
+				Process p = processes[0];
+				await p.WaitForExitAsync();
+			}
+
+			if (_config.OnGameClosed != null)
+				await _config.OnGameClosed();
+
+			if (_config.DeleteVdmFileWhenClosed)
+				await DeleteVdmFile();
 		}
 
 		private void SetupResolutionParameters()
 		{
 			_arguments.Add("-w");
-			_arguments.Add(Properties.Settings.Default.ResolutionWidth.ToString());
+			_arguments.Add(_config.Width > 800 ? _config.Width.ToString() : "800");
 			_arguments.Add("-h");
-			_arguments.Add(Properties.Settings.Default.ResolutionHeight.ToString());
-			_arguments.Add(!Properties.Settings.Default.IsFullscreen ? "-windowed" : "-fullscreen");
+			_arguments.Add(_config.Height > 600 ? _config.Height.ToString() : "600");
+			_arguments.Add(_config.Fullscreen ? "-fullscreen" : "-windowed");
 		}
 
-		private void DeleteVdmFile()
+		private Task DeleteVdmFile()
 		{
-			string vdmPath = _demo.GetVdmFilePath();
-			if (File.Exists(vdmPath)) File.Delete(vdmPath);
-		}
-
-		internal void WatchHighlightDemo(bool fromPlayerPerspective, string steamId = null)
-		{
-			if (Properties.Settings.Default.UseCustomActionsGeneration)
+			return Task.Run(() =>
 			{
-				GenerateHighLowVdm(true, fromPlayerPerspective, steamId);
+				string vdmPath = _config.Demo.GetVdmFilePath();
+				if (File.Exists(vdmPath)) File.Delete(vdmPath);
+			});
+		}
+
+		internal async void WatchHighlightDemo(bool fromPlayerPerspective)
+		{
+			if (_config.UseCustomActionsGeneration)
+			{
+				GenerateHighLowVdm(true, fromPlayerPerspective);
+				_config.DeleteVdmFileAtStratup = false;
 			}
 			else
 			{
 				if (fromPlayerPerspective)
 				{
-					_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
-					DeleteVdmFile();
+					_arguments.Add(_config.FocusPlayerSteamId.ToString());
 				}
 				else
 				{
-					GenerateHighLowVdm(true, false, steamId);
+					GenerateHighLowVdm(true, false);
+					_config.DeleteVdmFileAtStratup = false;
 				}
 			}
-			StartGame();
+			await StartGame();
 		}
 
-		internal void WatchLowlightDemo(bool fromPlayerPerspective, string steamId = null)
+		internal async void WatchLowlightDemo(bool fromPlayerPerspective)
 		{
-			if (Properties.Settings.Default.UseCustomActionsGeneration)
+			if (_config.UseCustomActionsGeneration)
 			{
-				GenerateHighLowVdm(false, fromPlayerPerspective, steamId);
+				GenerateHighLowVdm(false, fromPlayerPerspective);
+				_config.DeleteVdmFileAtStratup = false;
 			}
 			else
 			{
 				if (fromPlayerPerspective)
 				{
-					GenerateHighLowVdm(false, true, steamId);
+					GenerateHighLowVdm(false);
+					_config.DeleteVdmFileAtStratup = false;
 				}
 				else
 				{
-					_arguments.Add(steamId ?? Properties.Settings.Default.WatchAccountSteamId.ToString());
+					_arguments.Add(_config.FocusPlayerSteamId.ToString());
 					_arguments.Add("lowlights");
-					DeleteVdmFile();
 				}
 			}
-			StartGame();
+			await StartGame();
 		}
 
-		internal void WatchDemoAt(int tick, bool delay = false, long steamId = -1)
+		internal async void WatchDemoAt(int tick, bool delay = false)
 		{
-			DeleteVdmFile();
 			if (delay)
 			{
-				int tickDelayCount = (int)(_demo.ServerTickrate * PLAYBACK_DELAY);
+				int tickDelayCount = (int)(_config.Demo.ServerTickrate * PLAYBACK_DELAY);
 				if (tick > tickDelayCount) tick -= tickDelayCount;
 			}
 			string generated = string.Empty;
 			generated += string.Format(Properties.Resources.skip_ahead, 1, 1, tick);
-			if (steamId != -1) generated += string.Format(Properties.Resources.spec_player, 2, tick + 1, steamId);
+			if (_config.FocusPlayerSteamId > 0) generated += string.Format(Properties.Resources.spec_player, 2, tick + 1, _config.FocusPlayerSteamId);
 			string content = string.Format(Properties.Resources.main, generated);
-			File.WriteAllText(_demo.GetVdmFilePath(), content);
-			_removeVdmFile = true;
-			StartGame();
+			File.WriteAllText(_config.Demo.GetVdmFilePath(), content);
+			_config.DeleteVdmFileAtStratup = false;
+			await StartGame();
 		}
 
-		internal void WatchPlayerStuff(Player player, string selectedType)
+		internal async void WatchPlayerStuff(Player player, string selectedType)
 		{
 			EquipmentElement type = EquipmentElement.Unknown;
 			switch (selectedType)
@@ -210,23 +224,25 @@ namespace Manager.Services
 					break;
 			}
 			GeneratePlayerStuffVdm(player, type);
-			StartGame();
+			_config.DeleteVdmFileAtStratup = false;
+			await StartGame();
 		}
 
 		private void GeneratePlayerStuffVdm(Player player, EquipmentElement type)
 		{
+			Demo demo = _config.Demo;
 			string generated = string.Empty;
 			int actionCount = 0;
 			int lastTick = 0;
-			int beginTickDelayCount = (int)(_demo.ServerTickrate * STUFF_BEGIN_DELAY);
-			int endTickDelayCount = (int)(_demo.ServerTickrate * STUFF_END_DELAY);
+			int beginTickDelayCount = (int)(demo.ServerTickrate * STUFF_BEGIN_DELAY);
+			int endTickDelayCount = (int)(demo.ServerTickrate * STUFF_END_DELAY);
 			int lastSuffSartedTick = 0;
 			// max delay between 2 stuffs
-			int maxTickDelayCount = (int)(_demo.ServerTickrate * MAX_NEXT_STUFF_DELAY);
-			int nextActionDelayCount = (int)(_demo.ServerTickrate * NEXT_ACTION_DELAY);
+			int maxTickDelayCount = (int)(demo.ServerTickrate * MAX_NEXT_STUFF_DELAY);
+			int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
 			string message = GetFastForwardMessage(type);
 
-			foreach (WeaponFireEvent e in _demo.WeaponFired)
+			foreach (WeaponFireEvent e in demo.WeaponFired)
 			{
 				if (e.ShooterSteamId == player.SteamId && e.Weapon.Element == type
 					|| (e.ShooterSteamId == player.SteamId
@@ -252,7 +268,7 @@ namespace Manager.Services
 							}
 
 							// find the tick where the smoke popped
-							foreach (Round round in _demo.Rounds.Where(round => round.Number == e.RoundNumber))
+							foreach (Round round in demo.Rounds.Where(round => round.Number == e.RoundNumber))
 							{
 								foreach (
 									SmokeNadeStartedEvent smokeNadeStartedEvent in
@@ -276,7 +292,7 @@ namespace Manager.Services
 								generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
 								generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
 								// the molotov may have not burned, use time average instead
-								lastSuffSartedTick = e.Tick + (int)(_demo.ServerTickrate * MOLOTOV_TIME);
+								lastSuffSartedTick = e.Tick + (int)(demo.ServerTickrate * MOLOTOV_TIME);
 							}
 							break;
 						case EquipmentElement.Flash:
@@ -295,7 +311,7 @@ namespace Manager.Services
 							switch (type)
 							{
 								case EquipmentElement.Flash:
-									foreach (Round round in _demo.Rounds.Where(round => round.Number == e.RoundNumber))
+									foreach (Round round in demo.Rounds.Where(round => round.Number == e.RoundNumber))
 									{
 										foreach (
 											FlashbangExplodedEvent flashEvent in
@@ -310,7 +326,7 @@ namespace Manager.Services
 									}
 									break;
 								case EquipmentElement.Decoy:
-									foreach (DecoyStartedEvent decoyEvent in _demo.DecoyStarted)
+									foreach (DecoyStartedEvent decoyEvent in demo.DecoyStarted)
 									{
 										if (decoyEvent.ThrowerSteamId == player.SteamId
 											&& decoyEvent.RoundNumber == e.RoundNumber
@@ -322,7 +338,7 @@ namespace Manager.Services
 									}
 									break;
 								case EquipmentElement.HE:
-									foreach (Round round in _demo.Rounds.Where(round => round.Number == e.RoundNumber))
+									foreach (Round round in demo.Rounds.Where(round => round.Number == e.RoundNumber))
 									{
 										foreach (
 											ExplosiveNadeExplodedEvent heEvent in
@@ -346,33 +362,33 @@ namespace Manager.Services
 
 			generated += string.Format(Properties.Resources.stop_playback, ++actionCount, lastTick + nextActionDelayCount);
 			string content = string.Format(Properties.Resources.main, generated);
-			File.WriteAllText(_demo.GetVdmFilePath(), content);
-			_removeVdmFile = true;
+			File.WriteAllText(demo.GetVdmFilePath(), content);
 		}
 
-		private void GenerateHighLowVdm(bool isHighlight, bool isFromPlayerPerspective = true, string steamId = null)
+		private void GenerateHighLowVdm(bool isHighlight, bool isFromPlayerPerspective = true)
 		{
+			if (_config.FocusPlayerSteamId <= 0)
+				throw new Exception("SteamID required to generate highlights / lowlights.");
+			Demo demo = _config.Demo;
 			int lastTick = 0;
 			int actionCount = 0;
 			string generated = string.Empty;
 			int currentRoundNumber = 0;
-			int tickDelayCount = isHighlight ? (int)(_demo.ServerTickrate * HIGHLIGHT_DELAY) : (int)(_demo.ServerTickrate * LOWLIGHT_DELAY);
-			int maxTickCountNextKill = isHighlight ? (int)(_demo.ServerTickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY) : (int)(_demo.ServerTickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
-			int nextActionDelayCount = (int)(_demo.ServerTickrate * NEXT_ACTION_DELAY);
+			int tickDelayCount = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_DELAY);
+			int maxTickCountNextKill = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
+			int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
 			string message = "Fast forwarding to the next kill...";
 
-			foreach (KillEvent e in _demo.Kills)
+			foreach (KillEvent e in demo.Kills)
 			{
-				if ((!isHighlight && (e.KilledSteamId == Properties.Settings.Default.WatchAccountSteamId
-					|| (steamId != null && e.KilledSteamId.ToString() == steamId)))
-					|| (isHighlight && (e.KillerSteamId == Properties.Settings.Default.WatchAccountSteamId
-					|| (steamId != null && e.KillerSteamId.ToString() == steamId))))
+				if (!isHighlight && e.KilledSteamId == _config.FocusPlayerSteamId
+					|| isHighlight && e.KillerSteamId == _config.FocusPlayerSteamId)
 				{
 					int startTick = actionCount == 0 ? 0 : lastTick;
 					// check if the player had others kills during the current round
 					if (isHighlight && currentRoundNumber == e.RoundNumber)
 					{
-						startTick = startTick + (int)(_demo.ServerTickrate * SWITCH_PLAYER_DELAY);
+						startTick = startTick + (int)(demo.ServerTickrate * SWITCH_PLAYER_DELAY);
 						// fast forward if the next kill is far away
 						if (e.Tick - lastTick > maxTickCountNextKill)
 						{
@@ -404,8 +420,7 @@ namespace Manager.Services
 
 			generated += string.Format(Properties.Resources.stop_playback, ++actionCount, lastTick + nextActionDelayCount);
 			string content = string.Format(Properties.Resources.main, generated);
-			File.WriteAllText(_demo.GetVdmFilePath(), content);
-			_removeVdmFile = true;
+			File.WriteAllText(demo.GetVdmFilePath(), content);
 		}
 
 		private static string GetFastForwardMessage(EquipmentElement type)
@@ -428,7 +443,7 @@ namespace Manager.Services
 			}
 		}
 
-		private void KillCsgo()
+		private static void KillCsgo()
 		{
 			Process[] currentProcess = Process.GetProcessesByName("csgo");
 			if (currentProcess.Length > 0)

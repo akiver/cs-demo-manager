@@ -10,7 +10,9 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Properties;
 using Manager.Services;
+using Manager.Services.Configuration;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Stats;
@@ -37,8 +39,10 @@ namespace Manager.ViewModel.Rounds
 		private Round _currentRound;
 
 		private KillEvent _selectedKill;
+		private DateTime _periodStart;
+		private DateTime _periodEnd;
 
-		private List<RoundEvent> _roundEventList;
+		private List<TimelineEvent> _roundEventList;
 
 		private List<PlayerRoundStats> _playersStats;
 
@@ -80,7 +84,19 @@ namespace Manager.ViewModel.Rounds
 			set { Set(() => CurrentRound, ref _currentRound, value); }
 		}
 
-		public List<RoundEvent> RoundEventList
+		public DateTime PeriodStart
+		{
+			get { return _periodStart; }
+			set { Set(() => PeriodStart, ref _periodStart, value); }
+		}
+
+		public DateTime PeriodEnd
+		{
+			get { return _periodEnd; }
+			set { Set(() => PeriodEnd, ref _periodEnd, value); }
+		}
+
+		public List<TimelineEvent> RoundEventList
 		{
 			get { return _roundEventList; }
 			set { Set(() => RoundEventList, ref _roundEventList, value); }
@@ -151,7 +167,22 @@ namespace Manager.ViewModel.Rounds
 							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncher launcher = new GameLauncher(CurrentDemo);
+						GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+						{
+							SteamExePath = AppSettings.SteamExePath(),
+							Width = Settings.Default.ResolutionWidth,
+							Height = Settings.Default.ResolutionHeight,
+							Fullscreen = Settings.Default.IsFullscreen,
+							EnableHlae = Settings.Default.EnableHlae,
+							CsgoExePath = Settings.Default.CsgoExePath,
+							EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
+							HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
+							HlaeExePath = HlaeService.GetHlaeExePath(),
+							LaunchParameters = Settings.Default.LaunchParameters,
+							UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
+							FocusPlayerSteamId = Settings.Default.WatchAccountSteamId,
+						};
+						GameLauncher launcher = new GameLauncher(config);
 						launcher.WatchDemoAt(CurrentRound.Tick);
 					},
 					() => CurrentRound != null));
@@ -213,8 +244,10 @@ namespace Manager.ViewModel.Rounds
 		{
 			CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
 			CurrentRound = CurrentDemo.Rounds.First(r => r.Number == RoundNumber);
-			VisibleStartTime = DateTime.Today.AddSeconds(-5);
-			VisibleEndTime = CurrentRound.EndTickTime.AddSeconds(5);
+			PeriodStart = DateTime.Today;
+			PeriodEnd = DateTime.Today.AddSeconds(CurrentRound.Duration);
+			VisibleStartTime = PeriodStart.AddSeconds(-5);
+			VisibleEndTime = PeriodEnd.AddSeconds(5);
 			RoundEventList = await _roundService.GetTimeLineEventList(CurrentDemo, CurrentRound);
 			PlayersStats = await _playerService.GetPlayerRoundStatsListAsync(CurrentDemo, CurrentRound);
 		}
@@ -232,8 +265,23 @@ namespace Manager.ViewModel.Rounds
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncher launcher = new GameLauncher(CurrentDemo);
-							launcher.WatchDemoAt(kill.Tick, true, kill.KillerSteamId);
+							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							{
+								SteamExePath = AppSettings.SteamExePath(),
+								Width = Settings.Default.ResolutionWidth,
+								Height = Settings.Default.ResolutionHeight,
+								Fullscreen = Settings.Default.IsFullscreen,
+								EnableHlae = Settings.Default.EnableHlae,
+								CsgoExePath = Settings.Default.CsgoExePath,
+								EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
+								HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
+								HlaeExePath = HlaeService.GetHlaeExePath(),
+								LaunchParameters = Settings.Default.LaunchParameters,
+								UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
+								FocusPlayerSteamId = kill.KillerSteamId,
+							};
+							GameLauncher launcher = new GameLauncher(config);
+							launcher.WatchDemoAt(kill.Tick, true);
 						}));
 			}
 		}

@@ -38,5 +38,7 @@ namespace Manager.Services
 		Task<MessageDialogResult> ShowHeatmapDataNotFoundAsync(string eventType);
 
 		Task<MessageDialogResult> ShowSendShareCodeToThirdPartyConfirmationAsync(string thirdPartyName);
+
+		Task<MessageDialogResult> ShowTgaFound(bool generateVideo);
 	}
 }

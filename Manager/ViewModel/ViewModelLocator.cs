@@ -5,6 +5,7 @@ using Manager.ViewModel.Accounts;
 using Manager.ViewModel.Demos;
 using Manager.ViewModel.Players;
 using Manager.ViewModel.Rounds;
+using Manager.ViewModel.Shared;
 using Manager.ViewModel.Suspects;
 using Microsoft.Practices.ServiceLocation;
 using Services.Concrete;
@@ -74,6 +75,7 @@ namespace Manager.ViewModel
 			SimpleIoc.Default.Register<DemoFlashbangsViewModel>();
 			SimpleIoc.Default.Register<RoundDetailsViewModel>();
 			SimpleIoc.Default.Register<DemoStuffsViewModel>();
+			SimpleIoc.Default.Register<DemoMovieViewModel>();
 			SimpleIoc.Default.Register<PlayerDetailsViewModel>();
 			SimpleIoc.Default.Register<DialogThirdPartiesViewModel>();
 		}
@@ -113,6 +115,8 @@ namespace Manager.ViewModel
 		public RoundDetailsViewModel RoundDetails => ServiceLocator.Current.GetInstance<RoundDetailsViewModel>();
 
 		public DemoStuffsViewModel DemoStuffs => ServiceLocator.Current.GetInstance<DemoStuffsViewModel>();
+
+		public DemoMovieViewModel DemoMovie => ServiceLocator.Current.GetInstance<DemoMovieViewModel>();
 
 		public PlayerDetailsViewModel PlayerDetails => ServiceLocator.Current.GetInstance<PlayerDetailsViewModel>();
 

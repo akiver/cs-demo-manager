@@ -25,6 +25,7 @@
 				<ResourceDictionary Source="Resources/ContextMenu.xaml" />
 				<ResourceDictionary Source="Resources/DataGrids.xaml" />
 				<ResourceDictionary Source="Resources/Textblocks.xaml" />
+				<ResourceDictionary Source="Resources/TextBox.xaml" />
 				<ResourceDictionary Source="Resources/ListView.xaml" />
 				<ResourceDictionary Source="Resources/ComboBoxs.xaml" />
 				<ResourceDictionary Source="Resources/CheckBoxs.xaml" />

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core.Models;
@@ -78,7 +79,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				SetCellValue(row, columnNumber++, CellType.String, Demo.ClientName);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.ServerTickrate);
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Tickrate);
-				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Duration);
+				SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(Demo.Duration, 2));
 				SetCellValue(row, columnNumber++, CellType.Numeric, Demo.Ticks);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamCT.Name);
 				SetCellValue(row, columnNumber++, CellType.String, Demo.TeamT.Name);

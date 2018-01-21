@@ -12,117 +12,102 @@ namespace Services.Concrete
 {
 	public class RoundService : IRoundService
 	{
-		public async Task<List<RoundEvent>> GetTimeLineEventList(Demo demo, Round round)
+		public Task<List<TimelineEvent>> GetTimeLineEventList(Demo demo, Round round)
 		{
-			List<RoundEvent> roundEventList = new List<RoundEvent>();
-			await Task.Factory.StartNew(() =>
+			List<TimelineEvent> events = new List<TimelineEvent>();
+			float tickrate = demo.ServerTickrate;
+
+			foreach (KillEvent e in round.Kills)
 			{
-				foreach (KillEvent e in demo.Kills)
+				events.Add(new KillEventTimeline(tickrate, e.Tick - round.Tick, (int)(e.Tick + demo.Tickrate) - round.Tick)
 				{
-					if (e.RoundNumber == round.Number)
-					{
-						roundEventList.Add(new RoundEvent
-						{
-							StartTime = DateTime.Today.AddSeconds(e.Seconds - round.StartTimeSeconds),
-							EndTime = DateTime.Today.AddSeconds(e.Seconds - round.StartTimeSeconds + 1),
-							Category = Properties.Resources.Kills,
-							Message = string.Format(Properties.Resources.Killed, e.KillerName, e.KilledName),
-							Type = "kill"
-						});
-					}
-				}
-				foreach (WeaponFireEvent e in demo.WeaponFired)
-				{
-					if (e.RoundNumber == round.Number)
-					{
-						string type = string.Empty;
-						string message = string.Empty;
-						string category = string.Empty;
-						switch (e.Weapon.Element)
-						{
-							case EquipmentElement.Flash:
-								type = "flash";
-								category = Properties.Resources.Flashbang;
-								message = string.Format(Properties.Resources.ThrownFlashbang, e.ShooterName);
-								break;
-							case EquipmentElement.Smoke:
-								type = "smoke";
-								category = Properties.Resources.Smoke;
-								message = string.Format(Properties.Resources.ThrownSmoke, e.ShooterName);
-								break;
-							case EquipmentElement.Decoy:
-								type = "decoy";
-								category = Properties.Resources.Decoy;
-								message = string.Format(Properties.Resources.ThrownDecoy, e.ShooterName);
-								break;
-							case EquipmentElement.HE:
-								type = "he";
-								category = Properties.Resources.HE;
-								message = string.Format(Properties.Resources.ThrownHeGrenade, e.ShooterName);
-								break;
-							case EquipmentElement.Molotov:
-								type = "molotov";
-								category = Properties.Resources.Molotov;
-								message = string.Format(Properties.Resources.ThrownMolotov, e.ShooterName);
-								break;
-							case EquipmentElement.Incendiary:
-								type = "incendiary";
-								category = Properties.Resources.Molotov;
-								message = string.Format(Properties.Resources.ThrownIncendiary, e.ShooterName);
-								break;
-						}
+					VictimName = e.KilledName,
+					KillerName = e.KillerName,
+					WeaponName = e.Weapon.Name,
+				});
+			}
 
-						if (type != string.Empty)
-						{
-							roundEventList.Add(new RoundEvent
-							{
-								StartTime = DateTime.Today.AddSeconds(e.Seconds - round.StartTimeSeconds),
-								EndTime = DateTime.Today.AddSeconds(e.Seconds - round.StartTimeSeconds + 1),
-								Category = category,
-								Message = message,
-								Type = type
-							});
-						}
-					}
-				}
-
-				if (round.BombPlanted != null)
+			List<WeaponFireEvent> flashs = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Flash).ToList();
+			foreach (WeaponFireEvent e in flashs)
+			{
+				events.Add(new FlashThrownEventTimeline(tickrate, e.Tick - round.Tick, e.Tick + (int)demo.Tickrate - round.Tick)
 				{
-					roundEventList.Add(new RoundEvent
-					{
-						StartTime = DateTime.Today.AddSeconds(round.BombPlanted.Seconds - round.StartTimeSeconds),
-						EndTime = DateTime.Today.AddSeconds(round.BombPlanted.Seconds - round.StartTimeSeconds + 1),
-						Category = Properties.Resources.Bomb,
-						Message = string.Format(Properties.Resources.PlantedTheBombOnBombSite, round.BombPlanted.PlanterName, round.BombPlanted.Site),
-						Type = "bomb_planted"
-					});
-				}
+					ThrowerName = e.ShooterName,
+				});
+			}
 
-				if (round.BombDefused != null)
+			List<WeaponFireEvent> smokes = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Smoke).ToList();
+			foreach (WeaponFireEvent e in smokes)
+			{
+				events.Add(new SmokeThrownEventTimeline(tickrate, e.Tick - round.Tick, e.Tick + (int)demo.Tickrate - round.Tick)
 				{
-					roundEventList.Add(new RoundEvent
-					{
-						StartTime = DateTime.Today.AddSeconds(round.BombDefused.Seconds - round.StartTimeSeconds),
-						EndTime = DateTime.Today.AddSeconds(round.BombDefused.Seconds - round.StartTimeSeconds + 1),
-						Category = Properties.Resources.Bomb,
-						Message = string.Format(Properties.Resources.DefusedTheBombOnBombSite, round.BombDefused.DefuserName, round.BombDefused.Site),
-						Type = "bomb_defused"
-					});
-				}
-				if (round.BombExploded != null)
-				{
-					roundEventList.Add(new RoundEvent
-					{
-						StartTime = DateTime.Today.AddSeconds(round.BombExploded.Seconds - round.StartTimeSeconds),
-						EndTime = DateTime.Today.AddSeconds(round.BombExploded.Seconds - round.StartTimeSeconds + 1),
-						Category = Properties.Resources.Bomb,
-						Message = string.Format(Properties.Resources.TheBombExplodedOnBombSite, round.BombExploded.Site),
-						Type = "bomb_exploded"
-					});
-				}
-			});
+					ThrowerName = e.ShooterName,
+				});
+			}
 
-			return roundEventList;
+			List<WeaponFireEvent> he = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.HE).ToList();
+			foreach (WeaponFireEvent e in he)
+			{
+				events.Add(new HeThrownEventTimeline(tickrate, e.Tick - round.Tick, e.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> molotovs = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Molotov).ToList();
+			foreach (WeaponFireEvent e in molotovs)
+			{
+				events.Add(new MolotovThrownEventTimeline(tickrate, e.Tick - round.Tick, e.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> incendiaries = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Incendiary).ToList();
+			foreach (WeaponFireEvent e in incendiaries)
+			{
+				events.Add(new IncendiaryThrownEventTimeline(tickrate, e.Tick - round.Tick, e.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> decoys = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Decoy).ToList();
+			foreach (WeaponFireEvent e in decoys)
+			{
+				events.Add(new DecoyThrownEventTimeline(tickrate, e.Tick - round.Tick, e.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			if (round.BombPlanted != null)
+			{
+				events.Add(new BombPlantedEventTimeline(tickrate, round.BombPlanted.Tick - round.Tick, round.BombPlanted.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					PlanterName = round.BombPlanted.PlanterName,
+					Site = round.BombPlanted.Site,
+				});
+			}
+
+			if (round.BombDefused != null)
+			{
+				events.Add(new BombDefusedEventTimeline(tickrate, round.BombDefused.Tick - round.Tick, round.BombDefused.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					Site = round.BombDefused.Site,
+					DefuserName = round.BombDefused.DefuserName,
+				});
+			}
+			if (round.BombExploded != null)
+			{
+				events.Add(new BombExplodedEventTimeline(tickrate, round.BombExploded.Tick - round.Tick, round.BombExploded.Tick + (int)demo.Tickrate - round.Tick)
+				{
+					PlanterName = round.BombExploded.PlanterName,
+					Site = round.BombExploded.Site,
+				});
+			}
+
+			return Task.FromResult(events);
 		}
 
 		public Task<Round> MapRoundValuesToSelectedPlayer(Demo demo, Round round, long playerSteamId = 0)

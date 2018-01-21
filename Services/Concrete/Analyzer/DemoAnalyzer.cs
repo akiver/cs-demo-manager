@@ -400,11 +400,11 @@ namespace Services.Concrete.Analyzer
 					VictimX = e.Victim.Position.X,
 					VictimY = e.Victim.Position.Y
 				},
-				TimeDeathSeconds = (int)(Parser.CurrentTime - CurrentRound.FreezeTimeEndSeconds),
+				TimeDeathSeconds = (float)Math.Round((Parser.IngameTick - CurrentRound.FreezetimeEndTick) / Demo.ServerTickrate, 2),
 			};
 
 			killed.IsAlive = false;
-			killed.TimeDeathRounds[CurrentRound.Number] = Parser.CurrentTime - CurrentRound.FreezeTimeEndSeconds;
+			killed.TimeDeathRounds[CurrentRound.Number] = killEvent.TimeDeathSeconds;
 			if (e.Killer != null)
 			{
 				killer = Demo.Players.FirstOrDefault(player => player.SteamId == e.Killer.SteamID);
@@ -515,8 +515,9 @@ namespace Services.Concrete.Analyzer
 			IsRoundEndOccured = true;
 			if (!IsMatchStarted || IsFreezetime) return;
 
+			CurrentRound.EndTick = Parser.IngameTick;
+			CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTick - CurrentRound.Tick) / Demo.ServerTickrate, 2);
 			CurrentRound.EndReason = e.Reason;
-			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 			UpdateTeamScore(e);
 			ProcessRoundEndReward(e);
 			if (e.Reason == RoundEndReason.CTSurrender)
@@ -558,6 +559,9 @@ namespace Services.Concrete.Analyzer
 		{
 			if (!IsMatchStarted || IsFreezetime) return;
 
+			CurrentRound.EndTickOfficially = Parser.IngameTick;
+			CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTickOfficially - CurrentRound.Tick) / Demo.ServerTickrate, 2);
+
 			// sometimes round_end isn't triggered, I update scores here
 			if (!IsRoundEndOccured)
 			{
@@ -581,7 +585,6 @@ namespace Services.Concrete.Analyzer
 			CheckForSpecialClutchEnd();
 			UpdateKillsCount();
 			UpdatePlayerScore();
-			CurrentRound.EndTimeSeconds = Parser.CurrentTime;
 
 			if (!IsLastRoundHalf || !IsRoundEndOccured)
 			{
@@ -609,7 +612,7 @@ namespace Services.Concrete.Analyzer
 			if (!IsMatchStarted) return;
 
 			IsFreezetime = false;
-			CurrentRound.FreezeTimeEndSeconds = Parser.CurrentTime;
+			CurrentRound.FreezetimeEndTick = Parser.IngameTick;
 		}
 
 		protected void HandleBombPlanted(object sender, BombEventArgs e)
@@ -1357,11 +1360,12 @@ namespace Services.Concrete.Analyzer
 			{
 				Tick = Parser.IngameTick,
 				Number = Demo.Rounds.Count + 1,
-				StartTimeSeconds = Parser.CurrentTime,
 				SideTrouble = Side.None,
 				WinnerSide = Side.None,
 				TeamTname = GetTeamBySide(Side.Terrorist).Name,
 				TeamCtName = GetTeamBySide(Side.CounterTerrorist).Name,
+				EndTick = 0,
+				EndTickOfficially = 0,
 			};
 
 			IsFreezetime = true;

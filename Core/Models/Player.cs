@@ -953,7 +953,7 @@ namespace Core.Models
 		}
 
 		[JsonProperty("total_time_death")]
-		public uint TotalTimeDeath => (uint)TimeDeathRounds.Sum(kvp => kvp.Value);
+		public float TotalTimeDeath => TimeDeathRounds.Sum(kvp => kvp.Value);
 
 		[JsonProperty("avg_time_death")]
 		public double AverageTimeDeath

@@ -370,4 +370,25 @@
   <data name="de_new_dust2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\images\maps\overview\de_new_dust2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="decoy_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\decoy_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="defuser_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\defuser_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="flashbang_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\flashbang_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="hegrenade_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\hegrenade_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="incendiary_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\incendiary_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="kill_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\kill_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="molotov_black" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\images\icons\molotov_black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

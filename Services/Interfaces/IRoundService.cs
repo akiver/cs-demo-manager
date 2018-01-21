@@ -13,7 +13,7 @@ namespace Services.Interfaces
 		/// <param name="demo"></param>
 		/// <param name="round"></param>
 		/// <returns></returns>
-		Task<List<RoundEvent>> GetTimeLineEventList(Demo demo, Round round);
+		Task<List<TimelineEvent>> GetTimeLineEventList(Demo demo, Round round);
 
 		/// <summary>
 		/// Map the round values to the player stats at this round

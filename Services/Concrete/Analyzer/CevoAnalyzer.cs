@@ -142,6 +142,9 @@ namespace Services.Concrete.Analyzer
 		{
 			if (!IsMatchStarted || IsFreezetime) return;
 
+			CurrentRound.EndTickOfficially = Parser.IngameTick;
+			CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTickOfficially - CurrentRound.Tick) / Demo.ServerTickrate, 2);
+
 			CheckForSpecialClutchEnd();
 			UpdateKillsCount();
 			UpdatePlayerScore();

@@ -185,6 +185,17 @@
   <ItemGroup>
     <Resource Include="images\maps\overview\de_new_dust2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\kill_black.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\decoy_black.png" />
+    <Resource Include="images\icons\defuser_black.png" />
+    <Resource Include="images\icons\flashbang_black.png" />
+    <Resource Include="images\icons\hegrenade_black.png" />
+    <Resource Include="images\icons\incendiary_black.png" />
+    <Resource Include="images\icons\molotov_black.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug

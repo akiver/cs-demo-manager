@@ -9,19 +9,23 @@
 	<Style x:Key="BaseButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AccentedSquareButtonStyle}">
 		<Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
 	</Style>
-	
+
 	<Style x:Key="GeneralButtonStackPanel" TargetType="{x:Type StackPanel}">
 		<Setter Property="Orientation" Value="Horizontal" />
 		<Setter Property="VerticalAlignment" Value="Center" />
 		<Setter Property="Margin" Value="5 0 5 0" />
 	</Style>
-	
+
 	<Style x:Key="GeneralButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
 		<Setter Property="Margin" Value="5" />
 	</Style>
 
 	<Style x:Key="SettingsButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
 		<Setter Property="Margin" Value="0 5 5 5" />
+	</Style>
+
+	<Style x:Key="MovieButton" TargetType="{x:Type Button}" BasedOn="{StaticResource BaseButton}">
+		<Setter Property="Margin" Value="0" />
 	</Style>
 
 </ResourceDictionary>

@@ -2837,4 +2837,7 @@ You may have missing data for this demos.</value>
   <data name="execute_command" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="vd" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

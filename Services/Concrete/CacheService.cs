@@ -234,14 +234,21 @@ namespace Services.Concrete
 
 			try
 			{
+				string json;
 				// Save WeaponFire events to dedicated file and release it from RAM
-				string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.WeaponFired, _settingsJson));
-				File.WriteAllText(pathDemoWeaponFiredFileJson, json);
-				demo.WeaponFired.Clear();
+				if (demo.WeaponFired.Count > 0)
+				{
+					json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.WeaponFired, _settingsJson));
+					File.WriteAllText(pathDemoWeaponFiredFileJson, json);
+					demo.WeaponFired.Clear();
+				}
 				// Save PlayerBlindedEvent to dedicated file and release it from RAM
-				json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.PlayerBlinded, _settingsJson));
-				File.WriteAllText(pathDemoPlayerBlindedFileJson, json);
-				demo.PlayerBlinded.Clear();
+				if (demo.PlayerBlinded.Count > 0)
+				{
+					json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo.PlayerBlinded, _settingsJson));
+					File.WriteAllText(pathDemoPlayerBlindedFileJson, json);
+					demo.PlayerBlinded.Clear();
+				}
 				// save basic demo data
 				await AddDemoBasicDataAsync(demo);
 
@@ -497,21 +504,22 @@ namespace Services.Concrete
 
 		public async Task<ObservableCollection<WeaponFireEvent>> GetDemoWeaponFiredAsync(Demo demo)
 		{
-			string pathDemoFileJson = GetWeaponFiredFilePath(demo.Id);
-			string json = File.ReadAllText(pathDemoFileJson);
-
-			ObservableCollection<WeaponFireEvent> weaponFiredList;
 			try
 			{
+				ObservableCollection<WeaponFireEvent> weaponFiredList = new ObservableCollection<WeaponFireEvent>();
+				string pathDemoFileJson = GetWeaponFiredFilePath(demo.Id);
+				if (!File.Exists(pathDemoFileJson)) return weaponFiredList;
+				string json = File.ReadAllText(pathDemoFileJson);
+
 				weaponFiredList = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<ObservableCollection<WeaponFireEvent>>(json, _settingsJson));
+
+				return weaponFiredList;
 			}
 			catch (Exception e)
 			{
 				Logger.Instance.Log(e);
 				throw;
 			}
-
-			return weaponFiredList;
 		}
 
 		public async Task<ObservableCollection<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo)

@@ -1692,14 +1692,17 @@ namespace Manager.ViewModel
 						{
 							bool isCsgoPathSelected = Settings.Default.CsgoExePath != string.Empty;
 							if (!isCsgoPathSelected)
-								isCsgoPathSelected = ShowCsgoExeDialog();
-							if (!isCsgoPathSelected)
 							{
-								EnableHlae = false;
-								return;
+								string path = HlaeService.ShowCsgoExeDialog();
+								if (string.IsNullOrEmpty(path))
+								{
+									EnableHlae = false;
+									return;
+								}
+								CsgoExePath = path;
 							}
 
-							// check if HLAE is installed and ask to install it if it's not
+							// check if HLAE is installed and ask to install if it's not
 							if (!HlaeService.IsHlaeInstalled())
 							{
 								var installHlae = await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeNotFound,
@@ -1815,7 +1818,8 @@ namespace Manager.ViewModel
 					?? (_selectCsgoExePathCommand = new RelayCommand(
 					() =>
 					{
-						ShowCsgoExeDialog();
+						string path = HlaeService.ShowCsgoExeDialog();
+						if (!string.IsNullOrEmpty(path)) CsgoExePath = path;
 					}));
 			}
 		}
@@ -1985,30 +1989,6 @@ namespace Manager.ViewModel
 		private async void HandleSettingsFlyoutOpenedMessage(SettingsFlyoutOpenedMessage msg)
 		{
 			CacheSize = await _cacheService.GetCacheSizeAsync();
-		}
-
-		/// <summary>
-		/// Display a file dialog to select the csgo.exe location
-		/// </summary>
-		/// <returns></returns>
-		private bool ShowCsgoExeDialog()
-		{
-			bool isPathSelected = false;
-
-			OpenFileDialog dialog = new OpenFileDialog
-			{
-				DefaultExt = "csgo.exe",
-				Filter = "EXE Files (csgo.exe)|csgo.exe"
-			};
-
-			bool? result = dialog.ShowDialog();
-			if (result != null && (bool)result)
-			{
-				CsgoExePath = dialog.FileName;
-				isPathSelected = true;
-			}
-
-			return isPathSelected;
 		}
 
 		/// <summary>

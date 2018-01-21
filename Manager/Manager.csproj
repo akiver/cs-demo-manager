@@ -180,7 +180,10 @@
     <Compile Include="Messages\UpdateTaskbarProgressMessage.cs" />
     <Compile Include="Models\DemoStatus.cs" />
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
+    <Compile Include="Models\Formatters\DemoMovieIntervalFormatter.cs" />
+    <Compile Include="Models\Selectors\DemoTimelineTemplateSelector.cs" />
     <Compile Include="Models\GitHub\LatestRelease.cs" />
+    <Compile Include="Models\Movie\MovieConfiguration.cs" />
     <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />
     <Compile Include="Models\Selectors\RoundTimelineTemplateSelector.cs" />
     <Compile Include="Models\PlayerColor.cs" />
@@ -191,16 +194,26 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Configuration\GameLauncherConfiguration.cs" />
+    <Compile Include="Services\FFmpegService.cs" />
     <Compile Include="Services\HlaeService.cs" />
     <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="Services\MovieService.cs" />
+    <Compile Include="Services\VirtualDubService.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoMovieViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
     <Compile Include="ViewModel\DialogThirdPartiesViewModel.cs" />
     <Compile Include="ViewModel\Players\PlayerDetailsViewModel.cs" />
     <Compile Include="ViewModel\Rounds\RoundDetailsViewModel.cs" />
+    <Compile Include="ViewModel\Shared\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Shared\SingleDemoViewModel.cs" />
     <Compile Include="ViewModel\Suspects\WhitelistViewModel.cs" />
     <Compile Include="Views\Demos\DemoFlashbangsView.xaml.cs">
       <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Demos\DemoMovieView.xaml.cs">
+      <DependentUpon>DemoMovieView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Demos\DemoStuffsView.xaml.cs">
       <DependentUpon>DemoStuffsView.xaml</DependentUpon>
@@ -275,11 +288,27 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="resources\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="resources\Timelines.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="resources\timelines\DemoMovie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="resources\timelines\Round.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Demos\DemoFlashbangsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoMovieView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -501,6 +530,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
@@ -513,6 +543,7 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <Resource Include="resources\scripts\vd.job" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -623,7 +654,7 @@ snremove.exe -r DemoInfo.dll</PostBuildEvent>
     <PreBuildEvent>
     </PreBuildEvent>
   </PropertyGroup>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

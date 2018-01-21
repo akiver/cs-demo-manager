@@ -145,6 +145,7 @@ namespace Manager
 
 		private void Application_Exit(object sender, ExitEventArgs e)
 		{
+			Settings.Default.Save();
 			if (Settings.Default.CloseBotOnExit && _instance != null)
 			{
 				Win32Utils.SendMessageToBot(Win32Utils.WM_CLOSE);

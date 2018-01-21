@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
+using Services.Models.Timelines;
 using Demo = Core.Models.Demo;
 
 namespace Services.Interfaces
@@ -167,5 +168,12 @@ namespace Services.Interfaces
 		/// </summary>
 		/// <returns></returns>
 		Task<string> GetOldId(Demo demo);
+
+		/// <summary>
+		/// Return demo's timeline events.
+		/// </summary>
+		/// <param name="demo"></param>
+		/// <returns></returns>
+		Task<List<TimelineEvent>> GetTimeLineEventList(Demo demo);
 	}
 }

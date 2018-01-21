@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using Core;
 using ICSharpCode.SharpZipLib.Zip;
 using Manager.Models.GitHub;
+using Microsoft.Win32;
 using Newtonsoft.Json;
 
 namespace Manager.Services
 {
-	public class HlaeService
+	public static class HlaeService
 	{
-		public const string GITHUB_ENDPOINT = "https://api.github.com/repos/ripieces/advancedfx/releases/latest";
+		public const string GITHUB_ENDPOINT = "https://api.github.com/repos/advancedfx/advancedfx/releases/latest";
 
 		/// <summary>
 		/// Return the path where HLAE is installed.
@@ -39,8 +40,9 @@ namespace Manager.Services
 		{
 			string versionFilePath = GetHlaeVersionFilePath();
 			if (!File.Exists(versionFilePath)) return null;
+			string version = File.ReadAllText(versionFilePath);
 
-			return File.ReadAllText(versionFilePath);
+			return string.IsNullOrEmpty(version) ? null : version;
 		}
 
 		/// <summary>
@@ -54,7 +56,7 @@ namespace Manager.Services
 
 		/// <summary>
 		/// Indicates if HLAE is installed.
-		/// We test if we have the HLAE exe and a "version" file required to check update.
+		/// We test if we have the HLAE .exe and a "version" file required to check update.
 		/// </summary>
 		/// <returns></returns>
 		public static bool IsHlaeInstalled()
@@ -179,6 +181,27 @@ namespace Manager.Services
 				Logger.Instance.Log(e);
 				return false;
 			}
+		}
+
+		/// <summary>
+		/// Display a file dialog to select the csgo.exe location and return its path
+		/// </summary>
+		/// <returns></returns>
+		public static string ShowCsgoExeDialog()
+		{
+			OpenFileDialog dialog = new OpenFileDialog
+			{
+				DefaultExt = "csgo.exe",
+				Filter = "EXE Files (csgo.exe)|csgo.exe"
+			};
+
+			bool? result = dialog.ShowDialog();
+			if (result != null && (bool)result)
+			{
+				return dialog.FileName;
+			}
+
+			return string.Empty;
 		}
 	}
 }

@@ -5,12 +5,12 @@ using Telerik.Windows.Controls.Timeline;
 
 namespace Manager.Models.Selectors
 {
-	class RoundTimeLineTemplateSelector : DataTemplateSelector
+	public class RoundTimeLineTemplateSelector : DataTemplateSelector
 	{
 		public override DataTemplate SelectTemplate(object item, DependencyObject container)
 		{
-			var e = item as TimelineDataItem;
-			var roundEvent = e?.DataItem as RoundEvent;
+			TimelineDataItem e = item as TimelineDataItem;
+			TimelineEvent roundEvent = e?.DataItem as TimelineEvent;
 			if (roundEvent == null) return null;
 			switch (roundEvent.Type)
 			{

@@ -413,6 +413,16 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap decoy_black {
+            get {
+                object obj = ResourceManager.GetObject("decoy_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap decoy_exploded {
             get {
                 object obj = ResourceManager.GetObject("decoy_exploded", resourceCulture);
@@ -436,6 +446,16 @@ namespace Resources.Properties {
         internal static System.Drawing.Bitmap defuser {
             get {
                 object obj = ResourceManager.GetObject("defuser", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap defuser_black {
+            get {
+                object obj = ResourceManager.GetObject("defuser_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -513,6 +533,16 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap flashbang_black {
+            get {
+                object obj = ResourceManager.GetObject("flashbang_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap flashbang_exploded {
             get {
                 object obj = ResourceManager.GetObject("flashbang_exploded", resourceCulture);
@@ -553,9 +583,29 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap hegrenade_black {
+            get {
+                object obj = ResourceManager.GetObject("hegrenade_black", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap incendiary {
             get {
                 object obj = ResourceManager.GetObject("incendiary", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap incendiary_black {
+            get {
+                object obj = ResourceManager.GetObject("incendiary_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -586,6 +636,16 @@ namespace Resources.Properties {
         internal static System.Drawing.Bitmap kill {
             get {
                 object obj = ResourceManager.GetObject("kill", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap kill_black {
+            get {
+                object obj = ResourceManager.GetObject("kill_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -646,6 +706,16 @@ namespace Resources.Properties {
         internal static System.Drawing.Bitmap molotov {
             get {
                 object obj = ResourceManager.GetObject("molotov", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap molotov_black {
+            get {
+                object obj = ResourceManager.GetObject("molotov_black", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

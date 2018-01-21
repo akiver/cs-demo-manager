@@ -147,7 +147,7 @@
 										   Style="{StaticResource TitleSettingsStyle}" />
 								<TextBlock Style="{StaticResource TitleSettingsStyle}" Margin="5 0 0 0">
 									<Hyperlink Command="{Binding HandleHyperLinkCommand}"
-											   CommandParameter="https://github.com/ripieces/advancedfx/wiki/AfxHookSource">
+											   CommandParameter="https://github.com/advancedfx/advancedfx/wiki/AfxHookSource">
 										(HLAE)
 									</Hyperlink>
 								</TextBlock>

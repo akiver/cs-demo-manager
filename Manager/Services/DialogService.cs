@@ -190,5 +190,28 @@ namespace Manager.Services
 
 			return await metroWindow.ShowMessageAsync(Properties.Resources.Information, string.Format(Properties.Resources.DialogSendThirdPartyConfirmation, thirdPartyName), MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
 		}
+
+		public async Task<MessageDialogResult> ShowTgaFound(bool generateVideo)
+		{
+			MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;
+			MetroDialogSettings dialogOptions = new MetroDialogSettings();
+			MessageDialogStyle style = MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary;
+			string message = "TGA files already exists for this selection, do you want to delete it and re-create it or only encode it into a video?";
+			if (generateVideo)
+			{
+				dialogOptions.AffirmativeButtonText = "Delete TGA files, re-create it and encode it into a video";
+				dialogOptions.NegativeButtonText = "Do not delete TGA files, just encode it into a video";
+				dialogOptions.FirstAuxiliaryButtonText = Properties.Resources.Cancel;
+			}
+			else
+			{
+				message = "TGA files already exists for this selection, do you want to delete it and re-create it?";
+				style = MessageDialogStyle.AffirmativeAndNegative;
+				dialogOptions.AffirmativeButtonText = "Yes, delete TGA files and re-create it";
+				dialogOptions.NegativeButtonText = Properties.Resources.Cancel;
+			}
+
+			return await metroWindow.ShowMessageAsync(Properties.Resources.Information, message, style, dialogOptions);
+		}
 	}
 }

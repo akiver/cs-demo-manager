@@ -3,10 +3,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					mc:Ignorable="d"
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-					xmlns:formatters="clr-namespace:Manager.Models.Formatters"
-					xmlns:selectors="clr-namespace:Manager.Models.Selectors"
-					xmlns:timelines="clr-namespace:Services.Models.Timelines;assembly=csgodm.services">
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="pack://application:,,,/Telerik.Windows.Controls.DataVisualization;component/themes/genericwindows8.xaml" />
@@ -14,107 +11,351 @@
 
 	<Style TargetType="telerik:TimelineItemGroupControl"
 		   BasedOn="{StaticResource TimelineItemGroupControlStyle}">
-		<Setter Property="IsExpanded"
-				Value="True" />
-		<Setter Property="Foreground"
-				Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="IsExpanded" Value="True" />
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
 	</Style>
 
 	<Style TargetType="telerik:TimelinePeriodControl">
-		<Setter Property="Foreground"
-				Value="{StaticResource LightWhiteBrush}" />
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
 	</Style>
-
-	<formatters:CustomSecondsFormatter x:Key="CustomSecondsFormatter" />
 
 	<!-- set the Timeline strip color -->
-	<Style TargetType="Border"
-		   x:Key="NormalStyle">
-		<Setter Property="Background"
-				Value="{StaticResource LightGreyBrush}" />
+	<Style TargetType="Border" x:Key="NormalStyle">
+		<Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
 	</Style>
-	<Style TargetType="Border"
-		   x:Key="AlternateStyle">
-		<Setter Property="Background"
-				Value="{StaticResource DarkGreyBrush}" />
+	<Style TargetType="Border" x:Key="AlternateStyle">
+		<Setter Property="Background" Value="{DynamicResource GrayBrush10}" />
 	</Style>
 	<Style TargetType="telerik:TimelineStripLineControl">
-		<Setter Property="NormalStyle"
-				Value="{StaticResource NormalStyle}" />
-		<Setter Property="AlternateStyle"
-				Value="{StaticResource AlternateStyle}" />
+		<Setter Property="NormalStyle" Value="{StaticResource NormalStyle}" />
+		<Setter Property="AlternateStyle" Value="{StaticResource AlternateStyle}" />
 	</Style>
 	<!-- end timeline strip color -->
 
-	<!-- Item template -->
-	<DataTemplate x:Key="KillTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/kill.png" />
-	</DataTemplate>
+	<Style TargetType="TextBlock" x:Key="TimeLineToolTipTextBlockStyle">
+		<Setter Property="FontSize" Value="14" />
+		<Setter Property="TextWrapping" Value="Wrap" />
+		<Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+	</Style>
 
-	<DataTemplate x:Key="SmokeTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/smokegrenade.png" />
-	</DataTemplate>
+	<!-- WPF styling is not really flexible, had to override the whole default theme :/ -->
+	<Style TargetType="{x:Type telerik:RadSlider}" x:Key="TimeLineSliderStyle">
+		<Setter Property="HandlesVisibility" Value="Collapsed"/>
+		<Setter Property="Height" Value="20"/>
+		<Setter Property="Width" Value="20"/>
+		<Setter Property="IsMouseWheelEnabled" Value="False"/>
+		<Setter Property="IsSelectionRangeEnabled" Value="True"/>
+		<Setter Property="StepAction" Value="MoveRange"/>
+		<Setter Property="Background" Value="{DynamicResource TextBrush}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}"/>
+		<Setter Property="BorderThickness" Value="0 1 0 0"/>
+		<Setter Property="ThumbStyle">
+			<Setter.Value>
+				<Style TargetType="{x:Type Thumb}">
+					<Setter Property="Width" Value="8"/>
+					<Setter Property="IsTabStop" Value="True"/>
+					<Setter Property="BorderThickness" Value="0"/>
+					<Setter Property="BorderBrush" Value="Transparent"/>
+					<Setter Property="Background" Value="Transparent"/>
+					<Setter Property="Foreground" Value="{StaticResource HighlightBrush}"/>
+					<Setter Property="Cursor" Value="SizeWE"/>
+					<Setter Property="Margin" Value="0 1 0 0"/>
+					<Setter Property="VerticalAlignment" Value="Stretch"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Thumb}">
+								<Grid>
+									<Border x:Name="Border"
+											BorderBrush="{TemplateBinding BorderBrush}"
+											BorderThickness="{TemplateBinding BorderThickness}"
+											Background="{TemplateBinding Background}"/>
+									<Rectangle Fill="{TemplateBinding Foreground}"
+											   HorizontalAlignment="Left"
+											   Height="2"
+											   Margin="1 0 0 0"
+											   SnapsToDevicePixels="True"
+											   Width="2" />
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="AlternateThumbStyle">
+			<Setter.Value>
+				<Style TargetType="{x:Type Thumb}">
+					<Setter Property="Width" Value="8"/>
+					<Setter Property="IsTabStop" Value="True"/>
+					<Setter Property="BorderThickness" Value="0"/>
+					<Setter Property="BorderBrush" Value="Transparent"/>
+					<Setter Property="Background" Value="Transparent"/>
+					<Setter Property="Foreground" Value="{StaticResource HighlightBrush}"/>
+					<Setter Property="Cursor" Value="SizeWE"/>
+					<Setter Property="Margin" Value="0 1 0 0"/>
+					<Setter Property="VerticalAlignment" Value="Stretch"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Thumb}">
+								<Grid>
+									<Border x:Name="Border"
+											BorderBrush="{TemplateBinding BorderBrush}"
+											BorderThickness="{TemplateBinding BorderThickness}"
+											Background="{TemplateBinding Background}" />
+									<Rectangle Fill="{TemplateBinding Foreground}"
+											   HorizontalAlignment="Right"
+											   Height="2"
+											   Margin="0 0 1 0"
+											   SnapsToDevicePixels="True"
+											   Width="2" />
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
+		<Setter Property="SelectionMiddleThumbStyle">
+			<Setter.Value>
+				<Style TargetType="{x:Type Thumb}">
+					<Setter Property="IsTabStop" Value="True"/>
+					<Setter Property="BorderThickness" Value="0"/>
+					<Setter Property="BorderBrush" Value="Transparent"/>
+					<Setter Property="Background" Value="Transparent"/>
+					<Setter Property="Cursor" Value="Hand"/>
+					<Setter Property="VerticalAlignment" Value="Stretch"/>
+					<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type Thumb}">
+								<Grid>
+									<Border x:Name="Border"
+											BorderBrush="{TemplateBinding BorderBrush}"
+											BorderThickness="{TemplateBinding BorderThickness}"
+											Background="{TemplateBinding Background}"/>
+								</Grid>
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
 
-	<DataTemplate x:Key="FlashTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/flashbang.png" />
-	</DataTemplate>
+		<Setter Property="TrackStyle">
+			<Setter.Value>
+				<Style TargetType="{x:Type ContentControl}">
+					<Setter Property="IsTabStop" Value="False"/>
+					<Setter Property="Template">
+						<Setter.Value>
+							<ControlTemplate TargetType="{x:Type ContentControl}">
+								<Border BorderBrush="{TemplateBinding BorderBrush}"
+										BorderThickness="{TemplateBinding BorderThickness}" />
+							</ControlTemplate>
+						</Setter.Value>
+					</Setter>
+				</Style>
+			</Setter.Value>
+		</Setter>
 
-	<DataTemplate x:Key="HeTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/hegrenade.png" />
-	</DataTemplate>
-
-	<DataTemplate x:Key="BombPlantedTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/bomb.png" />
-	</DataTemplate>
-
-	<DataTemplate x:Key="DecoyTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/decoy.png" />
-	</DataTemplate>
-
-	<DataTemplate x:Key="BombDefusedTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/defuser.png" />
-	</DataTemplate>
-
-	<DataTemplate x:Key="BombExplodedTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/bomb_exploded.png" />
-	</DataTemplate>
-
-	<DataTemplate x:Key="MolotovTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/molotov.png" />
-	</DataTemplate>
-
-	<DataTemplate x:Key="IncendiaryTemplate">
-		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/incendiary.png" />
-	</DataTemplate>
-	<!-- end item template -->
-
-	<DataTemplate x:Key="ToolTipTemplate">
-		<Grid>
-			<Rectangle Margin="0"
-					   Fill="{StaticResource LightGreenBrush}" />
-			<Rectangle Margin="2"
-					   Fill="{StaticResource LightWhiteBrush}"/>
-			<TextBlock Margin="5"
-					   TextWrapping="Wrap"
-					   FontSize="14"
-					   Foreground="{StaticResource LightGreyBrush}"
-					   d:DataContext="{d:DesignInstance timelines:RoundEvent}">
-				<Run Text="{Binding StartTime, StringFormat=\{0:mm:ss:\}}"/>
-				<Run Text="{Binding Message}"/>
-			</TextBlock>
-		</Grid>
-	</DataTemplate>
-
-	<selectors:RoundTimeLineTemplateSelector x:Key="RoundTemplateSelector"
-											 KillTemplate="{StaticResource KillTemplate}"
-											 FlashbangTemplate="{StaticResource FlashTemplate}"
-											 SmokeTemplate="{StaticResource SmokeTemplate}"
-											 BombPlantedTemplate="{StaticResource BombPlantedTemplate}"
-											 HeTemplate="{StaticResource HeTemplate}"
-											 DecoyTemplate="{StaticResource DecoyTemplate}"
-											 IncendiaryTemplate="{StaticResource IncendiaryTemplate}"
-											 MolotovTemplate="{StaticResource MolotovTemplate}"
-											 BombDefusedTemplate="{StaticResource BombDefusedTemplate}"
-											 BombExplodedTemplate="{StaticResource BombExplodedTemplate}"/>
-
+		<Setter Property="IsTabStop" Value="False"/>
+		<Setter Property="Padding" Value="0"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type telerik:RadSlider}">
+					<telerik:LayoutTransformControl x:Name="layoutControl"
+													IsTabStop="False"
+													RenderTransformOrigin="0.5 0">
+						<telerik:LayoutTransformControl.LayoutTransform>
+							<TransformGroup>
+								<ScaleTransform/>
+								<SkewTransform/>
+								<RotateTransform/>
+								<TranslateTransform/>
+							</TransformGroup>
+						</telerik:LayoutTransformControl.LayoutTransform>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="OrientationStates">
+								<VisualState x:Name="Horizontal">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
+																	   Storyboard.TargetName="layoutControl">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<RotateTransform Angle="0"/>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Vertical">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
+																	   Storyboard.TargetName="layoutControl">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<RotateTransform Angle="-90"/>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="ReversedHorizontal">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
+																	   Storyboard.TargetName="layoutControl">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<ScaleTransform ScaleX="-1"/>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="ReversedVertical">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
+																	   Storyboard.TargetName="layoutControl">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<TransformGroup>
+														<ScaleTransform ScaleY="-1"/>
+														<RotateTransform Angle="90"/>
+													</TransformGroup>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+							<VisualStateGroup x:Name="RangeStates">
+								<VisualState x:Name="SingleThumb"/>
+								<VisualState x:Name="RangeThumbs">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+																	   Storyboard.TargetName="RangeThumbsPanel">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<Visibility>Visible</Visibility>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+																	   Storyboard.TargetName="SingleThumbHost">
+											<DiscreteObjectKeyFrame KeyTime="0">
+												<DiscreteObjectKeyFrame.Value>
+													<Visibility>Collapsed</Visibility>
+												</DiscreteObjectKeyFrame.Value>
+											</DiscreteObjectKeyFrame>
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+						<Grid>
+							<Border BorderBrush="{TemplateBinding BorderBrush}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									Background="{DynamicResource ControlBackgroundBrush}"/>
+							<Grid Margin="{TemplateBinding Padding}">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="*"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<Grid Grid.ColumnSpan="3" Grid.Column="1">
+									<ContentControl x:Name="Track" Style="{TemplateBinding TrackStyle}"/>
+								</Grid>
+								<RepeatButton x:Name="DecreaseButton"
+											  Grid.Column="0"
+											  Delay="{TemplateBinding Delay}"
+											  Interval="{TemplateBinding RepeatInterval}"
+											  Style="{TemplateBinding DecreaseHandleStyle}"
+											  Visibility="{TemplateBinding HandlesVisibility}" />
+								<RepeatButton x:Name="LargeDecreaseButton"
+											  Grid.Column="1"
+											  Delay="{TemplateBinding Delay}"
+											  Interval="{TemplateBinding RepeatInterval}">
+									<RepeatButton.Style>
+										<Style TargetType="{x:Type RepeatButton}">
+											<Setter Property="IsTabStop" Value="False"/>
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="{x:Type RepeatButton}">
+														<Grid Background="Transparent"/>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+										</Style>
+									</RepeatButton.Style>
+								</RepeatButton>
+								<Grid Grid.Column="2">
+									<Border BorderBrush="Transparent"
+											BorderThickness="0"
+											CornerRadius="0">
+										<Border BorderBrush="#01FFFFFF"
+												BorderThickness="0 6 0 5"
+												Background="{DynamicResource BlackBrush}"
+												CornerRadius="0">
+											<Border BorderBrush="Transparent"
+													BorderThickness="0"
+													Background="Transparent"
+													CornerRadius="0"
+													Height="6"
+													MaxWidth="{Binding (telerik:ActualSizeProxy.ActualWidth), ElementName=RangeMiddleThumb}"
+													Margin="1 0"
+													VerticalAlignment="Center">
+												<Border Background="Transparent"
+														CornerRadius="0"
+														Visibility="{TemplateBinding ThumbVisibility}" />
+											</Border>
+										</Border>
+									</Border>
+									<Thumb x:Name="SingleThumbHost"
+										   Style="{TemplateBinding ThumbStyle}"
+										   Visibility="Collapsed"/>
+									<StackPanel x:Name="RangeThumbsPanel" Orientation="Horizontal">
+										<Thumb x:Name="RangeStartThumb"
+											   Style="{TemplateBinding ThumbStyle}"
+											   Visibility="{TemplateBinding ThumbVisibility}"/>
+										<Thumb x:Name="RangeMiddleThumb"
+											   telerik:ActualSizeProxy.IsEnabled="True"
+											   Style="{TemplateBinding SelectionMiddleThumbStyle}"/>
+										<Thumb x:Name="RangeEndThumb"
+											   Style="{TemplateBinding AlternateThumbStyle}"
+											   Visibility="{TemplateBinding ThumbVisibility}"/>
+									</StackPanel>
+								</Grid>
+								<RepeatButton x:Name="LargeIncreaseButton"
+											  Grid.Column="3"
+											  Delay="{TemplateBinding Delay}"
+											  Interval="{TemplateBinding RepeatInterval}">
+									<RepeatButton.Style>
+										<Style TargetType="{x:Type RepeatButton}">
+											<Setter Property="IsTabStop" Value="False"/>
+											<Setter Property="Template">
+												<Setter.Value>
+													<ControlTemplate TargetType="{x:Type RepeatButton}">
+														<Grid Background="Transparent"/>
+													</ControlTemplate>
+												</Setter.Value>
+											</Setter>
+										</Style>
+									</RepeatButton.Style>
+								</RepeatButton>
+								<RepeatButton x:Name="IncreaseButton"
+											  Grid.Column="4"
+											  Delay="{TemplateBinding Delay}"
+											  Interval="{TemplateBinding RepeatInterval}"
+											  Grid.Row="1"
+											  RenderTransformOrigin="0.5 0.5"
+											  Style="{TemplateBinding IncreaseHandleStyle}"
+											  Visibility="{TemplateBinding HandlesVisibility}"/>
+							</Grid>
+						</Grid>
+					</telerik:LayoutTransformControl>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 </ResourceDictionary>

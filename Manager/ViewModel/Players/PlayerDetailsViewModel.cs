@@ -10,7 +10,9 @@ using Core.Models;
 using Core.Models.Events;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Properties;
 using Manager.Services;
+using Manager.Services.Configuration;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Charts;
@@ -207,8 +209,23 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncher launcher = new GameLauncher(CurrentDemo);
-							launcher.WatchDemoAt(tick, true, CurrentPlayer.SteamId);
+							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							{
+								SteamExePath = AppSettings.SteamExePath(),
+								Width = Settings.Default.ResolutionWidth,
+								Height = Settings.Default.ResolutionHeight,
+								Fullscreen = Settings.Default.IsFullscreen,
+								EnableHlae = Settings.Default.EnableHlae,
+								CsgoExePath = Settings.Default.CsgoExePath,
+								EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
+								HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
+								HlaeExePath = HlaeService.GetHlaeExePath(),
+								LaunchParameters = Settings.Default.LaunchParameters,
+								UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
+								FocusPlayerSteamId = CurrentPlayer.SteamId,
+							};
+							GameLauncher launcher = new GameLauncher(config);
+							launcher.WatchDemoAt(tick, true);
 						}));
 			}
 		}
@@ -226,8 +243,23 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncher launcher = new GameLauncher(CurrentDemo);
-							launcher.WatchDemoAt(tick, false, CurrentPlayer.SteamId);
+							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							{
+								SteamExePath = AppSettings.SteamExePath(),
+								Width = Settings.Default.ResolutionWidth,
+								Height = Settings.Default.ResolutionHeight,
+								Fullscreen = Settings.Default.IsFullscreen,
+								EnableHlae = Settings.Default.EnableHlae,
+								CsgoExePath = Settings.Default.CsgoExePath,
+								EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
+								HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
+								HlaeExePath = HlaeService.GetHlaeExePath(),
+								LaunchParameters = Settings.Default.LaunchParameters,
+								UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
+								FocusPlayerSteamId = CurrentPlayer.SteamId,
+							};
+							GameLauncher launcher = new GameLauncher(config);
+							launcher.WatchDemoAt(tick, false);
 						}));
 			}
 		}
@@ -245,11 +277,25 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							string steamId = CurrentPlayer.SteamId.ToString();
-							GameLauncher launcher = new GameLauncher(CurrentDemo);
+							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							{
+								SteamExePath = AppSettings.SteamExePath(),
+								Width = Settings.Default.ResolutionWidth,
+								Height = Settings.Default.ResolutionHeight,
+								Fullscreen = Settings.Default.IsFullscreen,
+								EnableHlae = Settings.Default.EnableHlae,
+								CsgoExePath = Settings.Default.CsgoExePath,
+								EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
+								HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
+								HlaeExePath = HlaeService.GetHlaeExePath(),
+								LaunchParameters = Settings.Default.LaunchParameters,
+								UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
+								FocusPlayerSteamId = CurrentPlayer.SteamId,
+							};
+							GameLauncher launcher = new GameLauncher(config);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
 							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
-							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
+							launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
 						}));
 			}
 		}
@@ -267,11 +313,25 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							string steamId = CurrentPlayer.SteamId.ToString();
-							GameLauncher launcher = new GameLauncher(CurrentDemo);
+							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							{
+								SteamExePath = AppSettings.SteamExePath(),
+								Width = Settings.Default.ResolutionWidth,
+								Height = Settings.Default.ResolutionHeight,
+								Fullscreen = Settings.Default.IsFullscreen,
+								EnableHlae = Settings.Default.EnableHlae,
+								CsgoExePath = Settings.Default.CsgoExePath,
+								EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
+								HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
+								HlaeExePath = HlaeService.GetHlaeExePath(),
+								LaunchParameters = Settings.Default.LaunchParameters,
+								UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
+								FocusPlayerSteamId = CurrentPlayer.SteamId,
+							};
+							GameLauncher launcher = new GameLauncher(config);
 							var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
 							if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;
-							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative, steamId);
+							launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
 						}));
 			}
 		}

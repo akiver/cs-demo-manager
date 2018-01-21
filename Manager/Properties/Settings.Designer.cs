@@ -12,7 +12,7 @@ namespace Manager.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -1291,6 +1291,234 @@ namespace Manager.Properties {
             }
             set {
                 this["ShowTimeDeathColumn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string RawFilesFolderDestination {
+            get {
+                return ((string)(this["RawFilesFolderDestination"]));
+            }
+            set {
+                this["RawFilesFolderDestination"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MovieOutputFileFolderDestination {
+            get {
+                return ((string)(this["MovieOutputFileFolderDestination"]));
+            }
+            set {
+                this["MovieOutputFileFolderDestination"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int MovieFramerate {
+            get {
+                return ((int)(this["MovieFramerate"]));
+            }
+            set {
+                this["MovieFramerate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MovieUserCfg {
+            get {
+                return ((string)(this["MovieUserCfg"]));
+            }
+            set {
+                this["MovieUserCfg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MovieShowDefaultCfg {
+            get {
+                return ((bool)(this["MovieShowDefaultCfg"]));
+            }
+            set {
+                this["MovieShowDefaultCfg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MovieAutoCloseGame {
+            get {
+                return ((bool)(this["MovieAutoCloseGame"]));
+            }
+            set {
+                this["MovieAutoCloseGame"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MovieCleanUpRawFiles {
+            get {
+                return ((bool)(this["MovieCleanUpRawFiles"]));
+            }
+            set {
+                this["MovieCleanUpRawFiles"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MovieGenerateVideoFile {
+            get {
+                return ((bool)(this["MovieGenerateVideoFile"]));
+            }
+            set {
+                this["MovieGenerateVideoFile"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1280")]
+        public int MovieWidth {
+            get {
+                return ((int)(this["MovieWidth"]));
+            }
+            set {
+                this["MovieWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("720")]
+        public int MovieHeight {
+            get {
+                return ((int)(this["MovieHeight"]));
+            }
+            set {
+                this["MovieHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MovieUseVirtualDub {
+            get {
+                return ((bool)(this["MovieUseVirtualDub"]));
+            }
+            set {
+                this["MovieUseVirtualDub"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("23")]
+        public int MovieVideoQuality {
+            get {
+                return ((int)(this["MovieVideoQuality"]));
+            }
+            set {
+                this["MovieVideoQuality"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("256")]
+        public int MovieAudioBitrate {
+            get {
+                return ((int)(this["MovieAudioBitrate"]));
+            }
+            set {
+                this["MovieAudioBitrate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("60")]
+        public int MovieVideoFramerate {
+            get {
+                return ((int)(this["MovieVideoFramerate"]));
+            }
+            set {
+                this["MovieVideoFramerate"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MovieOpenInExplorer {
+            get {
+                return ((bool)(this["MovieOpenInExplorer"]));
+            }
+            set {
+                this["MovieOpenInExplorer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MovieHlaeConfigParentFolderPath {
+            get {
+                return ((string)(this["MovieHlaeConfigParentFolderPath"]));
+            }
+            set {
+                this["MovieHlaeConfigParentFolderPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MovieEnableHlaeConfigParent {
+            get {
+                return ((bool)(this["MovieEnableHlaeConfigParent"]));
+            }
+            set {
+                this["MovieEnableHlaeConfigParent"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MovieShowDemoComment {
+            get {
+                return ((bool)(this["MovieShowDemoComment"]));
+            }
+            set {
+                this["MovieShowDemoComment"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string MovieCsgoExePath {
+            get {
+                return ((string)(this["MovieCsgoExePath"]));
+            }
+            set {
+                this["MovieCsgoExePath"] = value;
             }
         }
     }

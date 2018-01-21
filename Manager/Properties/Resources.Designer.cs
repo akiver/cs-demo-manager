@@ -7830,6 +7830,29 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to VirtualDub.Open(&quot;{0}&quot;,&quot;&quot;,0);
+        ///VirtualDub.audio.SetSource(&quot;{1}&quot;, &quot;&quot;);
+        ///VirtualDub.audio.SetMode(0);
+        ///VirtualDub.audio.SetInterleave(1, 500, 1, 0, 0);
+        ///VirtualDub.audio.SetClipMode(1, 1);
+        ///VirtualDub.audio.SetEditMode(1);
+        ///VirtualDub.audio.SetConversion(0, 0, 0, 0, 0);
+        ///VirtualDub.audio.SetVolume();
+        ///VirtualDub.audio.SetCompression();
+        ///VirtualDub.audio.EnableFilterGraph(0);
+        ///VirtualDub.video.SetInputFormat(0);
+        ///VirtualDub.video.SetOutputFormat(7);
+        ///VirtualDub.video.SetMode(3);
+        ///VirtualDub.video.SetSmartRendering(0);
+        ///Virtu [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string vd {
+            get {
+                return ResourceManager.GetString("vd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Velocity average.
         /// </summary>
         public static string VelocityAverage {

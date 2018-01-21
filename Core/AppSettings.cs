@@ -223,6 +223,19 @@ namespace Core
 		}
 
 		/// <summary>
+		/// Return the location of csgo.exe.
+		/// </summary>
+		/// <returns></returns>
+		public static string GetCsgoExePath()
+		{
+			string csgoFolderPath = GetCsgoPath();
+			if (string.IsNullOrEmpty(csgoFolderPath)) return null;
+			string path = Directory.GetParent(csgoFolderPath).FullName + Path.DirectorySeparatorChar + "csgo.exe";
+			if (!File.Exists(path)) return null;
+			return path;
+		}
+
+		/// <summary>
 		/// Return the path where JSON files (contains demos data) are stored
 		/// </summary>
 		/// <returns></returns>

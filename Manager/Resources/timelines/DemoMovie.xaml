@@ -1,0 +1,692 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					mc:Ignorable="d"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+					xmlns:timelines="clr-namespace:Services.Models.Timelines;assembly=csgodm.services"
+					xmlns:properties="clr-namespace:Manager.Properties"
+					xmlns:formatters="clr-namespace:Manager.Models.Formatters"
+					xmlns:selectors="clr-namespace:Manager.Models.Selectors">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<formatters:DemoMovieIntervalFormatter x:Key="DemoMovieIntervalFormatter" />
+
+	<ContextMenu x:Key="DemoMovieRoundContextMenu"
+				 d:DataContext="{d:DesignInstance timelines:TimelineEvent}">
+		<MenuItem Header="Set round's start tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set round's end tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieKillContextMenu"
+				 d:DataContext="{d:DesignInstance timelines:KillEventTimeline}">
+		<MenuItem Header="Set kill's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set kill's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set kill's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set kill's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set kill's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set kill's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on killer"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.KillerName}" />
+		<MenuItem Header="Focus on victim"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.VictimName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieFlashbangContextMenu">
+		<MenuItem Header="Set flash's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set flash's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set flash's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set flash's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set flash's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set flash's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on thower"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.ThrowerName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieSmokeContextMenu">
+		<MenuItem Header="Set smoke's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set smoke's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set smoke's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set smoke's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set smoke's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set smoke's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on thower"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.ThrowerName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieHeContextMenu">
+		<MenuItem Header="Set HE's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set HE's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set HE's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set HE's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set HE's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set HE's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on thower"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.ThrowerName}" />
+	</ContextMenu>
+
+
+	<ContextMenu x:Key="DemoMovieDecoyContextMenu">
+		<MenuItem Header="Set decoy's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set decoy's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set decoy's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set decoy's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set decoy's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set decoy's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on thower"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.ThrowerName}" />
+	</ContextMenu>
+
+
+	<ContextMenu x:Key="DemoMovieMolotovContextMenu">
+		<MenuItem Header="Set molotov's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set molotov's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set molotov's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set molotov's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set molotov's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set molotov's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on thower"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.ThrowerName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieIncendiaryContextMenu">
+		<MenuItem Header="Set incendiary's tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set incendiary's tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set incendiary's tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set incendiary's tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set incendiary's tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set incendiary's tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on thower"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.ThrowerName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieBombPlantedContextMenu">
+		<MenuItem Header="Set bomb planted tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb planted tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb planted tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set bomb planted tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set bomb planted tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb planted tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on planter"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.PlanterName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieBombDefusedContextMenu">
+		<MenuItem Header="Set bomb defused tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb defused tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb defused tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set bomb defused tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set bomb defused tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb defused tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on defuser"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.PlanterName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieBombExplodedContextMenu">
+		<MenuItem Header="Set bomb exploded tick as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb exploded tick minus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb exploded tick plus x seconds as start tick"
+				  Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Set bomb exploded tick as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.EndTick}" />
+		<MenuItem Header="Set bomb exploded tick minus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<MenuItem Header="Set bomb exploded tick plus x seconds as end tick"
+				  Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.StartTick}" />
+		<Separator />
+		<MenuItem Header="Focus on planter"
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.PlanterName}" />
+	</ContextMenu>
+
+	<ContextMenu x:Key="DemoMovieTimeLineContextMenu">
+		<MenuItem Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoMovie.SelectedTick, Source={StaticResource Locator}}">
+			<MenuItem.Header>
+				<TextBlock Text="{Binding Path=DemoMovie.SelectedTick, Source={StaticResource Locator}, StringFormat='Set tick {0} as start tick'}" />
+			</MenuItem.Header>
+		</MenuItem>
+		<MenuItem Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DemoMovie.SelectedTick, Source={StaticResource Locator}}">
+			<MenuItem.Header>
+				<TextBlock Text="{Binding Path=DemoMovie.SelectedTick, Source={StaticResource Locator}, StringFormat='Set tick {0} as end tick'}" />
+			</MenuItem.Header>
+		</MenuItem>
+	</ContextMenu>
+
+	<Style TargetType="TextBlock" x:Key="DemoMovieTimeLineRoundTextBlockStyle">
+		<Setter Property="FontSize" Value="16"/>
+		<Setter Property="TextWrapping" Value="Wrap"/>
+		<Setter Property="Foreground" Value="{DynamicResource WhiteColorBrush}"/>
+	</Style>
+
+	<DataTemplate x:Key="DemoMovieTimelineRoundTemplate">
+		<StackPanel Orientation="Horizontal"
+					Height="25"
+					ContextMenu="{StaticResource DemoMovieRoundContextMenu}"
+					Background="{DynamicResource BlackBrush}"
+					d:DataContext="{d:DesignInstance telerik:TimelineDataItem}">
+			<TextBlock VerticalAlignment="Center"
+					   Margin="5 0 0 0"
+					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
+					   Foreground="{StaticResource RedColorBrush}"
+					   Text="{Binding DataItem.Number, StringFormat='#{0}: '}" />
+			<TextBlock VerticalAlignment="Center"
+					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
+					   Foreground="{StaticResource OrangeBrush}"
+					   Text="{Binding DataItem.StartTick, StringFormat='{}{0} '}" />
+			<TextBlock VerticalAlignment="Center"
+					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
+					   Text="to" />
+			<TextBlock VerticalAlignment="Center"
+					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
+					   Foreground="{StaticResource OrangeBrush}"
+					   Text="{Binding DataItem.EndTick, StringFormat=' \{0}'}" />
+			<TextBlock VerticalAlignment="Center"
+					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
+					   Text="{Binding DataItem.Duration.TotalSeconds, StringFormat=' \({0:N0}s)'}" />
+		</StackPanel>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieKillTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieKillContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/kill.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/kill_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieFlashTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieFlashbangContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/flashbang.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/flashbang_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieSmokeTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieSmokeContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/smokegrenade.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/smokegrenade_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieHeGrenadeTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieHeContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/hegrenade.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/hegrenade_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieDecoyTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieDecoyContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/decoy.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/decoy_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieMolotovTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieMolotovContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/molotov.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/molotov_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieIncediaryTemplate">
+		<Image MinWidth="25" ContextMenu="{StaticResource DemoMovieIncendiaryContextMenu}">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/incendiary.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/incendiary_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieBombPlantedTemplate">
+		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/bomb.png"
+			   ContextMenu="{StaticResource DemoMovieBombPlantedContextMenu}"
+			   MinWidth="25" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieBombDefusedTemplate">
+		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/defuser.png"
+			   ContextMenu="{StaticResource DemoMovieBombDefusedContextMenu}"
+			   MinWidth="25" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieBombExplodedTemplate">
+		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/bomb_exploded.png"
+			   ContextMenu="{StaticResource DemoMovieBombExplodedContextMenu}"
+			   MinWidth="25" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoTimeLineKillToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:KillEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource GreenBrush}"
+						   Text="{Binding KillerName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="killed" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightBlueBrush}"
+						   Text="{Binding VictimName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="with" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding WeaponName, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoTimeLineStuffToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:StuffEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding ThrowerName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="thrown a" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StuffType, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoTimeLineRoundToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:RoundEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="Round #" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding Number, StringFormat='{}{0} '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="from" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="to" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding EndTick, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="{Binding Duration.TotalSeconds, StringFormat='{}({0:N0}s)'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieTimeLineBombPlantedToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:BombPlantedEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="planted the bomb on site" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieTimeLineBombDefusedToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:BombDefusedEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="defused the bomb on site" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoMovieTimeLineBombExplodedToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:BombExplodedEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat='{}{0}: '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="the bomb planted by" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="exploded on site" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoToolTipTemplate">
+		<ContentControl Content="{Binding}" d:DataContext="{d:DesignInstance timelines:TimelineEvent}">
+			<ContentControl.Style>
+				<Style TargetType="ContentControl">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Type}" Value="kill">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineKillToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="round_start">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineRoundToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="flash">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="he">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="smoke">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="incendiary">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="molotov">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="decoy">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="bomb_planted">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoMovieTimeLineBombPlantedToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="bomb_defused">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoMovieTimeLineBombDefusedToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="bomb_exploded">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoMovieTimeLineBombExplodedToolTip}" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ContentControl.Style>
+		</ContentControl>
+	</DataTemplate>
+
+	<selectors:DemoTimeLineTemplateSelector x:Key="DemoMovieTemplateSelector"
+											KillTemplate="{StaticResource DemoMovieKillTemplate}"
+											FlashbangTemplate="{StaticResource DemoMovieFlashTemplate}"
+											SmokeTemplate="{StaticResource DemoMovieSmokeTemplate}"
+											BombPlantedTemplate="{StaticResource DemoMovieBombPlantedTemplate}"
+											HeTemplate="{StaticResource DemoMovieHeGrenadeTemplate}"
+											DecoyTemplate="{StaticResource DemoMovieDecoyTemplate}"
+											IncendiaryTemplate="{StaticResource DemoMovieIncediaryTemplate}"
+											MolotovTemplate="{StaticResource DemoMovieMolotovTemplate}"
+											BombDefusedTemplate="{StaticResource DemoMovieBombDefusedTemplate}"
+											RoundTemplate="{StaticResource DemoMovieTimelineRoundTemplate}"
+											BombExplodedTemplate="{StaticResource DemoMovieBombExplodedTemplate}"/>
+</ResourceDictionary>

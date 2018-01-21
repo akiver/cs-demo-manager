@@ -62,7 +62,7 @@ namespace Core.Models.Events
 		/// Number of seconds elapsed since the freezetime end
 		/// </summary>
 		[JsonProperty("time_death_seconds")]
-		public int TimeDeathSeconds { get; set; }
+		public float TimeDeathSeconds { get; set; }
 
 		[JsonProperty("killer_crouching")]
 		public bool IsKillerCrouching { get; set; }

@@ -79,19 +79,24 @@ namespace Core.Models
 		private int _tick;
 
 		/// <summary>
-		/// Number of the seconds from the start of the match the round started
+		/// Round's end tick
 		/// </summary>
-		private float _timeStartSeconds;
+		private int _endTick;
 
 		/// <summary>
-		/// Number of the seconds from the start of the match the round ended
+		/// Round's officially ended tick
 		/// </summary>
-		private float _timeEndSeconds;
+		private int _endTickOfficially;
 
 		/// <summary>
-		/// Number of the seconds from the start of the match the round's freezetime ended
+		/// Round's duration (seconds).
 		/// </summary>
-		private float _freezetimeEndSeconds;
+		private float _duration;
+
+		/// <summary>
+		/// Tick when the round's freezetime ended.
+		/// </summary>
+		private int _freezetimeEndTick;
 
 		/// <summary>
 		/// Why the round ended
@@ -331,25 +336,25 @@ namespace Core.Models
 			set { Set(() => Tick, ref _tick, value); }
 		}
 
-		[JsonProperty("freezetime_end_seconds")]
-		public float FreezeTimeEndSeconds
+		[JsonProperty("end_tick")]
+		public int EndTick
 		{
-			get { return _freezetimeEndSeconds; }
-			set { Set(() => FreezeTimeEndSeconds, ref _freezetimeEndSeconds, value); }
+			get { return _endTick; }
+			set { Set(() => EndTick, ref _endTick, value); }
 		}
 
-		[JsonProperty("start_seconds")]
-		public float StartTimeSeconds
+		[JsonProperty("end_tick_officially")]
+		public int EndTickOfficially
 		{
-			get { return _timeStartSeconds; }
-			set { Set(() => StartTimeSeconds, ref _timeStartSeconds, value); }
+			get { return _endTickOfficially; }
+			set { Set(() => EndTickOfficially, ref _endTickOfficially, value); }
 		}
 
-		[JsonProperty("end_seconds")]
-		public float EndTimeSeconds
+		[JsonProperty("freezetime_end_tick")]
+		public int FreezetimeEndTick
 		{
-			get { return _timeEndSeconds; }
-			set { Set(() => EndTimeSeconds, ref _timeEndSeconds, value); }
+			get { return _freezetimeEndTick; }
+			set { Set(() => FreezetimeEndTick, ref _freezetimeEndTick, value); }
 		}
 
 		[JsonProperty("end_reason")]
@@ -621,17 +626,12 @@ namespace Core.Models
 			set { Set(() => WeaponFired, ref _weaponFired, value); }
 		}
 
-		/// <summary>
-		/// Round duration (seconds)
-		/// </summary>
-		[JsonIgnore]
-		public float Duration => EndTimeSeconds - StartTimeSeconds;
-
-		[JsonIgnore]
-		public DateTime StartTickTime => DateTime.Today;
-
-		[JsonIgnore]
-		public DateTime EndTickTime => DateTime.Today.AddSeconds(Duration);
+		[JsonProperty("duration")]
+		public float Duration
+		{
+			get { return _duration; }
+			set { Set(() => Duration, ref _duration, value); }
+		}
 
 		[JsonProperty("damage_health_count")]
 		public int DamageHealthCount
@@ -724,7 +724,10 @@ namespace Core.Models
 				DamageArmorCount = DamageArmorCount,
 				DamageHealthCount = DamageHealthCount,
 				EndReason = EndReason,
-				EndTimeSeconds = EndTimeSeconds,
+				EndTick = EndTick,
+				Duration = Duration,
+				FreezetimeEndTick = FreezetimeEndTick,
+				EndTickOfficially = EndTickOfficially,
 				EntryHoldKillEvent = EntryHoldKillEvent,
 				EntryKillEvent = EntryKillEvent,
 				EquipementValueTeamCt = EquipementValueTeamCt,
@@ -741,7 +744,6 @@ namespace Core.Models
 				MolotovThrownCount = MolotovThrownCount,
 				StartMoneyTeamCt = StartMoneyTeamCt,
 				StartMoneyTeamT = StartMoneyTeamT,
-				StartTimeSeconds = StartTimeSeconds,
 				TeamCtName = TeamCtName,
 				TeamTname = TeamTname,
 				TeamTroubleName = TeamTroubleName,

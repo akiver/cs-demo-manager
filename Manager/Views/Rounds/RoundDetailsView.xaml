@@ -16,7 +16,7 @@
 	<UserControl.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
+				<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/timelines/Round.xaml" />
 			</ResourceDictionary.MergedDictionaries>
 			<converters:SideToStringConverter x:Key="SideToStringConverter" />
 			<converters:RoundEndReasonToStringConverter x:Key="RoundEndReasonToStringConverter" />
@@ -451,10 +451,9 @@
 						Margin="1"
 						BorderThickness="2 0 2 2"
 						BorderBrush="{StaticResource HighlightBrush}">
-					<telerik:RadTimeline x:Name="RoundTimeline"
-										 BorderThickness="0"
-										 PeriodStart="{Binding CurrentRound.StartTickTime}"
-										 PeriodEnd="{Binding CurrentRound.EndTickTime}"
+					<telerik:RadTimeline BorderThickness="0"
+										 PeriodStart="{Binding PeriodStart}"
+										 PeriodEnd="{Binding PeriodEnd}"
 										 VisiblePeriodStart="{Binding VisibleStartTime}"
 										 VisiblePeriodEnd="{Binding VisibleEndTime}"
 										 IsSelectionEnabled="True"
@@ -465,7 +464,8 @@
 										 ScrollMode="ScrollAndZoom"
 										 GroupExpandMode="Multiple"
 										 VerticalScrollBarVisibility="Auto"
-										 ToolTipTemplate="{StaticResource ToolTipTemplate}"
+										 SliderStyle="{StaticResource TimeLineSliderStyle}"
+										 ToolTipTemplate="{StaticResource RoundToolTipTemplate}"
 										 ItemTemplateSelector="{StaticResource RoundTemplateSelector}"
 										 ItemsSource="{Binding RoundEventList}">
 						<telerik:RadTimeline.Intervals>

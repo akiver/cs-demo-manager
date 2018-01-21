@@ -8,6 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Core;
 using Core.Models;
+using Core.Models.Events;
 using Core.Models.protobuf;
 using Core.Models.Serialization;
 using Core.Models.Source;
@@ -17,6 +18,7 @@ using Newtonsoft.Json;
 using ProtoBuf;
 using Services.Concrete.Analyzer;
 using Services.Interfaces;
+using Services.Models.Timelines;
 using Demo = Core.Models.Demo;
 using Player = Core.Models.Player;
 
@@ -53,7 +55,7 @@ namespace Services.Concrete
 			var enumerableSuspects = suspects as IList<Suspect> ?? suspects.ToList();
 			if (enumerableSuspects.Any())
 			{
-				List<string> whitelistIds =  await _cacheService.GetPlayersWhitelist();
+				List<string> whitelistIds = await _cacheService.GetPlayersWhitelist();
 				// Update player's flag
 				foreach (Suspect suspect in enumerableSuspects)
 				{
@@ -157,7 +159,7 @@ namespace Services.Concrete
 					}
 					// Skip if the player isn't in the demo
 					if (ShowOnlyAccountDemos && SelectedStatsAccountSteamId != 0
-					    && !demoData.SteamIdList.Contains(SelectedStatsAccountSteamId))
+						&& !demoData.SteamIdList.Contains(SelectedStatsAccountSteamId))
 						continue;
 
 					// store basic data to filter on date quickly
@@ -315,7 +317,7 @@ namespace Services.Concrete
 			if (demos.Any())
 			{
 				result = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
-				for(int i = 0; i < result.Count; i++)
+				for (int i = 0; i < result.Count; i++)
 				{
 					Demo demo = await GetDemoHeaderAsync(result[i].Path);
 					if (demo != null) result[i] = demo;
@@ -569,6 +571,116 @@ namespace Services.Concrete
 			}
 
 			return Task.FromResult(id);
+		}
+
+		public Task<List<TimelineEvent>> GetTimeLineEventList(Demo demo)
+		{
+			List<TimelineEvent> events = new List<TimelineEvent>();
+			float tickrate = demo.ServerTickrate;
+			foreach (Round round in demo.Rounds)
+			{
+				int endTick = round.EndTickOfficially > 0 ? round.EndTickOfficially : round.EndTick;
+				var e = new RoundEventTimeline(tickrate, round.Tick, endTick)
+				{
+					Number = round.Number,
+				};
+				events.Add(e);
+			}
+
+			foreach (KillEvent e in demo.Kills)
+			{
+				events.Add(new KillEventTimeline(tickrate, e.Tick, (int)(e.Tick + demo.Tickrate))
+				{
+					VictimName = e.KilledName,
+					KillerName = e.KillerName,
+					WeaponName = e.Weapon.Name,
+				});
+			}
+
+			List<WeaponFireEvent> flashs = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Flash).ToList();
+			foreach (WeaponFireEvent e in flashs)
+			{
+				events.Add(new FlashThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> smokes = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Smoke).ToList();
+			foreach (WeaponFireEvent e in smokes)
+			{
+				events.Add(new SmokeThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> he = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.HE).ToList();
+			foreach (WeaponFireEvent e in he)
+			{
+				events.Add(new HeThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> molotovs = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Molotov).ToList();
+			foreach (WeaponFireEvent e in molotovs)
+			{
+				events.Add(new MolotovThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> incendiaries = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Incendiary).ToList();
+			foreach (WeaponFireEvent e in incendiaries)
+			{
+				events.Add(new IncendiaryThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			List<WeaponFireEvent> decoys = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Decoy).ToList();
+			foreach (WeaponFireEvent e in decoys)
+			{
+				events.Add(new DecoyThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+				{
+					ThrowerName = e.ShooterName,
+				});
+			}
+
+			foreach (Round round in demo.Rounds)
+			{
+				if (round.BombPlanted != null)
+				{
+					events.Add(new BombPlantedEventTimeline(tickrate, round.BombPlanted.Tick, round.BombPlanted.Tick + (int)demo.Tickrate)
+					{
+						PlanterName = round.BombPlanted.PlanterName,
+						Site = round.BombPlanted.Site,
+					});
+				}
+
+				if (round.BombDefused != null)
+				{
+					events.Add(new BombDefusedEventTimeline(tickrate, round.BombDefused.Tick, round.BombDefused.Tick + (int)demo.Tickrate)
+					{
+						Site = round.BombDefused.Site,
+						DefuserName = round.BombDefused.DefuserName,
+					});
+				}
+				if (round.BombExploded != null)
+				{
+					events.Add(new BombExplodedEventTimeline(tickrate, round.BombExploded.Tick, round.BombExploded.Tick + (int)demo.Tickrate)
+					{
+						PlanterName = round.BombExploded.PlanterName,
+						Site = round.BombExploded.Site,
+					});
+				}
+			}
+
+			return Task.FromResult(events);
 		}
 	}
 }

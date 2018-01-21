@@ -1,0 +1,343 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					mc:Ignorable="d"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:formatters="clr-namespace:Manager.Models.Formatters"
+					xmlns:properties="clr-namespace:Manager.Properties"
+					xmlns:selectors="clr-namespace:Manager.Models.Selectors"
+					xmlns:timelines="clr-namespace:Services.Models.Timelines;assembly=csgodm.services">
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<formatters:CustomSecondsFormatter x:Key="CustomSecondsFormatter" />
+
+	<DataTemplate x:Key="RoundKillTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/kill.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/kill_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundSmokeTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/smokegrenade.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/smokegrenade_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundFlashTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/flashbang.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/flashbang_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundHeTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/hegrenade.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/hegrenade_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundBombPlantedTemplate">
+		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/bomb.png" MinWidth="20" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundDecoyTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/decoy.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/decoy_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundBombDefusedTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/defuser.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/defuser_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundBombExplodedTemplate">
+		<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/bomb_exploded.png" MinWidth="20" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundMolotovTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/molotov.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/molotov_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundIncendiaryTemplate">
+		<Image MinWidth="20">
+			<Image.Style>
+				<Style TargetType="Image">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Dark">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/incendiary.png"/>
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Source={x:Static properties:Settings.Default}, Path=Theme}" Value="Light">
+							<Setter Property="Source" Value="pack://application:,,,/csgodm.resources;component/images/icons/incendiary_black.png"/>
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</Image.Style>
+		</Image>
+	</DataTemplate>
+
+	<selectors:RoundTimeLineTemplateSelector x:Key="RoundTemplateSelector"
+											 KillTemplate="{StaticResource RoundKillTemplate}"
+											 FlashbangTemplate="{StaticResource RoundFlashTemplate}"
+											 SmokeTemplate="{StaticResource RoundSmokeTemplate}"
+											 BombPlantedTemplate="{StaticResource RoundBombPlantedTemplate}"
+											 HeTemplate="{StaticResource RoundHeTemplate}"
+											 DecoyTemplate="{StaticResource RoundDecoyTemplate}"
+											 IncendiaryTemplate="{StaticResource RoundIncendiaryTemplate}"
+											 MolotovTemplate="{StaticResource RoundMolotovTemplate}"
+											 BombDefusedTemplate="{StaticResource RoundBombDefusedTemplate}"
+											 BombExplodedTemplate="{StaticResource RoundBombExplodedTemplate}"/>
+
+	<!-- ToolTips -->
+	<DataTemplate x:Key="RoundTimeLineKillToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:KillEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource GreenBrush}"
+						   Text="{Binding KillerName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="killed" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightBlueBrush}"
+						   Text="{Binding VictimName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="with" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding WeaponName, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundTimeLineStuffToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:StuffEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding ThrowerName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="thrown a" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StuffType, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundTimeLineBombPlantedToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:BombPlantedEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="planted the bomb on site" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundTimeLineBombDefusedToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:BombDefusedEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="defused the bomb on site" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundTimeLineBombExplodedToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:BombExplodedEventTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="the bomb planted by" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource LightGreenBrush}"
+						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="exploded on site" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource OrangeBrush}"
+						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="RoundToolTipTemplate">
+		<ContentControl Content="{Binding}" d:DataContext="{d:DesignInstance timelines:TimelineEvent}">
+			<ContentControl.Style>
+				<Style TargetType="ContentControl">
+					<Style.Triggers>
+						<DataTrigger Binding="{Binding Type}" Value="kill">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineKillToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="flash">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="he">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="smoke">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="incendiary">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="molotov">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="decoy">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineStuffToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="bomb_planted">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineBombPlantedToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="bomb_defused">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineBombDefusedToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="bomb_exploded">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource RoundTimeLineBombExplodedToolTip}" />
+						</DataTrigger>
+					</Style.Triggers>
+				</Style>
+			</ContentControl.Style>
+		</ContentControl>
+	</DataTemplate>
+	<!-- End tooltips -->
+
+</ResourceDictionary>
