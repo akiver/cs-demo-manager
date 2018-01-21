@@ -4,11 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using DemoInfo;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Models;
 using Manager.Services;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Demo = Core.Models.Demo;
@@ -17,11 +17,9 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoDamagesViewModel : ViewModelBase
+	public class DemoDamagesViewModel : SingleDemoViewModel
 	{
 		#region Properties
-
-		private Demo _currentDemo;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -55,8 +53,6 @@ namespace Manager.ViewModel.Demos
 
 		private double _damagePercentLeftArm;
 
-		private bool _isGenerating;
-
 		private List<ComboboxSelector> _teamSelectors = new List<ComboboxSelector>();
 
 		private ComboboxSelector _selectedTeam;
@@ -78,12 +74,6 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
-
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
 
 		public List<ComboboxSelector> TeamSelectors
 		{
@@ -145,12 +135,6 @@ namespace Manager.ViewModel.Demos
 				if (value) SelectedTeam = null;
 				if (value) SelectedPlayer = null;
 			}
-		}
-
-		public bool IsGenerating
-		{
-			get { return _isGenerating; }
-			set { Set(() => IsGenerating, ref _isGenerating, value); }
 		}
 
 		public double TotalDamage
@@ -259,13 +243,13 @@ namespace Manager.ViewModel.Demos
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 							Cleanup();
 						},
-						demo => CurrentDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -280,10 +264,10 @@ namespace Manager.ViewModel.Demos
 					?? (_updateCommand = new RelayCommand(
 					async () =>
 					{
-						if (!CurrentDemo.PlayersHurted.Any())
+						if (!Demo.PlayersHurted.Any())
 						{
 							await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoDamagesDataFound, MessageDialogStyle.Affirmative);
-							IsGenerating = false;
+							IsBusy = false;
 							return;
 						}
 
@@ -294,37 +278,37 @@ namespace Manager.ViewModel.Demos
 						if (SelectedTeam != null)
 						{
 							steamIdList.AddRange(SelectedTeam.Id == "CT"
-								? CurrentDemo.TeamCT.Players.Select(player => player.SteamId)
-								: CurrentDemo.Players.Select(player => player.SteamId));
+								? Demo.TeamCT.Players.Select(player => player.SteamId)
+								: Demo.Players.Select(player => player.SteamId));
 						}
 
 						// All players selected
 						if (SelectAllPlayers)
 						{
-							steamIdList.AddRange(CurrentDemo.Players.Select(player => player.SteamId));
+							steamIdList.AddRange(Demo.Players.Select(player => player.SteamId));
 						}
 
 						// only 1 player selected
 						if (SelectedPlayer != null)
 						{
-							steamIdList.Add(CurrentDemo.Players.First(p => p.SteamId == SelectedPlayer.SteamId).SteamId);
+							steamIdList.Add(Demo.Players.First(p => p.SteamId == SelectedPlayer.SteamId).SteamId);
 						}
 
 						// All rounds selected
 						if (SelectAllRounds)
 						{
-							roundNumberList.AddRange(CurrentDemo.Rounds.Select(round => round.Number));
+							roundNumberList.AddRange(Demo.Rounds.Select(round => round.Number));
 						}
 
 						// only 1 round selected
 						if (SelectedRound != null)
 						{
-							roundNumberList.Add(CurrentDemo.Rounds.First(r => r.Number == SelectedRound.Number).Number);
+							roundNumberList.Add(Demo.Rounds.First(r => r.Number == SelectedRound.Number).Number);
 						}
 
 						await LoadDatas(steamIdList, roundNumberList);
 
-					}, () => !IsGenerating && SelectAllRounds && SelectAllPlayers || (SelectAllPlayers && SelectedRound != null)
+					}, () => !IsBusy && SelectAllRounds && SelectAllPlayers || (SelectAllPlayers && SelectedRound != null)
 					|| (SelectedTeam != null || SelectedPlayer != null) && (SelectAllRounds || SelectedRound != null)));
 			}
 		}
@@ -350,23 +334,23 @@ namespace Manager.ViewModel.Demos
 
 		private async Task LoadDatas(List<long> steamIdList, List<int> roundNumberList)
 		{
-			IsGenerating = true;
-			TotalDamage = await _damageService.GetTotalDamageAsync(CurrentDemo, steamIdList, roundNumberList);
-			DamageHeadValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.Head, steamIdList, roundNumberList);
+			IsBusy = true;
+			TotalDamage = await _damageService.GetTotalDamageAsync(Demo, steamIdList, roundNumberList);
+			DamageHeadValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.Head, steamIdList, roundNumberList);
 			if (DamageHeadValue > 0) DamagePercentHead = Math.Round(DamageHeadValue * 100 / TotalDamage, 1);
-			DamageChestValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.Chest, steamIdList, roundNumberList);
+			DamageChestValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.Chest, steamIdList, roundNumberList);
 			if (DamageChestValue > 0) DamagePercentChest = Math.Round(DamageChestValue * 100 / TotalDamage, 1);
-			DamageLeftArmValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.LeftArm, steamIdList, roundNumberList);
+			DamageLeftArmValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.LeftArm, steamIdList, roundNumberList);
 			if (DamageLeftArmValue > 0) DamagePercentLeftArm = Math.Round(DamageLeftArmValue * 100 / TotalDamage, 1);
-			DamageRightArmValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.RightArm, steamIdList, roundNumberList);
+			DamageRightArmValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.RightArm, steamIdList, roundNumberList);
 			if (DamageRightArmValue > 0) DamagePercentRightArm = Math.Round(DamageRightArmValue * 100 / TotalDamage, 1);
-			DamageLeftLegValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.LeftLeg, steamIdList, roundNumberList);
+			DamageLeftLegValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.LeftLeg, steamIdList, roundNumberList);
 			if (DamageLeftLegValue > 0) DamagePercentLeftLeg = Math.Round(DamageLeftLegValue * 100 / TotalDamage, 1);
-			DamageRightLegValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.RightLeg, steamIdList, roundNumberList);
+			DamageRightLegValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.RightLeg, steamIdList, roundNumberList);
 			if (DamageRightLegValue > 0) DamagePercentRightLeg = Math.Round(DamageRightLegValue * 100 / TotalDamage, 1);
-			DamageStomachValue = await _damageService.GetHitGroupDamageAsync(CurrentDemo, Hitgroup.Stomach, steamIdList, roundNumberList);
+			DamageStomachValue = await _damageService.GetHitGroupDamageAsync(Demo, Hitgroup.Stomach, steamIdList, roundNumberList);
 			if (DamageStomachValue > 0) DamagePercentStomach = Math.Round(DamageStomachValue * 100 / TotalDamage, 1);
-			IsGenerating = false;
+			IsBusy = false;
 		}
 
 		public override void Cleanup()
@@ -381,7 +365,6 @@ namespace Manager.ViewModel.Demos
 			DamageLeftLegValue = 0;
 			DamageRightLegValue = 0;
 			DamageChestValue = 0;
-			IsGenerating = false;
 		}
 	}
 }

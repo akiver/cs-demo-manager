@@ -10,13 +10,13 @@ using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Core;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Internals.MultiSelect;
 using Manager.Models;
 using Manager.Services;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Concrete;
 using Services.Exceptions.Map;
@@ -27,7 +27,7 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoHeatmapViewModel : ViewModelBase
+	public class DemoHeatmapViewModel : SingleDemoViewModel
 	{
 
 		#region Properties
@@ -37,8 +37,6 @@ namespace Manager.ViewModel.Demos
 		private RelayCommand _generateCommand;
 
 		private RelayCommand _exportCommand;
-
-		private Demo _currentDemo;
 
 		private WriteableBitmap _overviewLayer;
 
@@ -70,8 +68,6 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _selectAllPlayerCommand;
 
-		private bool _isGenerating;
-
 		private bool _hasGeneratedHeatmap;
 		
 		private readonly ICacheService _cacheService;
@@ -89,12 +85,6 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
-
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
 
 		public WriteableBitmap ColorsLayer
 		{
@@ -118,12 +108,6 @@ namespace Manager.ViewModel.Demos
 		{
 			get { return _currentEventSelector; }
 			set { Set(() => CurrentEventSelector, ref _currentEventSelector, value); }
-		}
-
-		public bool IsGenerating
-		{
-			get { return _isGenerating; }
-			set { Set(() => IsGenerating, ref _isGenerating, value); }
 		}
 
 		public bool HasGeneratedHeatmap
@@ -263,7 +247,7 @@ namespace Manager.ViewModel.Demos
 					?? (_generateCommand = new RelayCommand(
 					async () =>
 					{
-						IsGenerating = true;
+						IsBusy = true;
 						HasGeneratedHeatmap = false;
 
 						try
@@ -273,15 +257,15 @@ namespace Manager.ViewModel.Demos
 								_cts = new CancellationTokenSource();
 							}
 
-							if (_currentEventSelector.Id == "shots" && !CurrentDemo.WeaponFired.Any())
+							if (_currentEventSelector.Id == "shots" && !Demo.WeaponFired.Any())
 							{
-								CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
+								Demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(Demo);
 							}
 
 							// Get KillHeatmapPoint list based on selection
 							HeatmapConfiguration configuration = new HeatmapConfiguration
 							{
-								Demo = CurrentDemo,
+								Demo = Demo,
 								SelectedSideList = Sides.SelectedItems.Select(comboboxSelector => comboboxSelector.Id).ToList(),
 								SelectedEventId = CurrentEventSelector.Id,
 								SelectedPlayerList = Players.SelectedItems.ToList(),
@@ -311,10 +295,10 @@ namespace Manager.ViewModel.Demos
 							}
 						}
 
-						IsGenerating = false;
+						IsBusy = false;
 						HasGeneratedHeatmap = true;
 
-					}, () => !IsGenerating));
+					}, () => !IsBusy));
 			}
 		}
 
@@ -334,7 +318,7 @@ namespace Manager.ViewModel.Demos
 							Image overviewImage = _heatmapService.GenerateOverviewImage(OverviewLayer, ColorsLayer);
 							SaveFileDialog saveHeatmapDialog = new SaveFileDialog
 							{
-								FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + ".png",
+								FileName = Demo.Name.Substring(0, Demo.Name.Length - 4) + ".png",
 								Filter = "PNG file (*.png)|*.png"
 							};
 
@@ -349,7 +333,7 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorExportingHeatmap, MessageDialogStyle.Affirmative).ConfigureAwait(false);
 						}
 
-					}, () => HasGeneratedHeatmap && !IsGenerating));
+					}, () => HasGeneratedHeatmap && !IsBusy));
 			}
 		}
 
@@ -365,13 +349,13 @@ namespace Manager.ViewModel.Demos
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 							Cleanup();
 						},
-						demo => CurrentDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -413,14 +397,14 @@ namespace Manager.ViewModel.Demos
 			if (IsInDesignMode)
 			{
 				DispatcherHelper.Initialize();
-				CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
+				Demo = await _cacheService.GetDemoDataFromCache(string.Empty);
 			}
 
-			Rounds = new MultiSelectCollectionView<Round>(CurrentDemo.Rounds);
-			Players = new MultiSelectCollectionView<Player>(CurrentDemo.Players);
+			Rounds = new MultiSelectCollectionView<Round>(Demo.Rounds);
+			Players = new MultiSelectCollectionView<Player>(Demo.Players);
 
 			// Get the original overview image
-			_mapService.InitMap(CurrentDemo);
+			_mapService.InitMap(Demo);
 			DispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
 				OverviewLayer = _mapService.GetWriteableImage();
@@ -431,7 +415,6 @@ namespace Manager.ViewModel.Demos
 		{
 			base.Cleanup();
 			HasGeneratedHeatmap = false;
-			IsGenerating = false;
 			OverviewLayer = null;
 			ColorsLayer = null;
 		}

@@ -25,6 +25,7 @@ using Manager.Messages;
 using Manager.Models;
 using Manager.Services;
 using Manager.Services.Configuration;
+using Manager.ViewModel.Shared;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Manager.Views.Dialogs;
@@ -41,7 +42,7 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoListViewModel : ViewModelBase, IDisposable
+	public class DemoListViewModel : SingleDemoViewModel, IDisposable
 	{
 
 		#region Properties
@@ -60,13 +61,9 @@ namespace Manager.ViewModel.Demos
 
 		private readonly ExcelService _excelService;
 
-		private bool _isBusy;
-
 		private bool _hasRing;
 
 		private bool _isCancellable;
-
-		private bool _hasNotification;
 
 		private bool _isShowAllFolders;
 
@@ -81,8 +78,6 @@ namespace Manager.ViewModel.Demos
 		/// </summary>
 		private readonly Dictionary<string, float> _demoProgress = new Dictionary<string, float>();
 
-		private string _notificationMessage;
-
 		private ObservableCollection<Demo> _demos;
 
 		private ObservableCollection<Demo> _selectedDemos;
@@ -92,8 +87,6 @@ namespace Manager.ViewModel.Demos
 		private ICollectionView _dataGridDemosCollection;
 
 		private string _filterDemoText;
-
-		private Demo _selectedDemo;
 
 		private RelayCommand<Demo> _showDemoDetailsCommand;
 
@@ -179,12 +172,6 @@ namespace Manager.ViewModel.Demos
 			set { Set(() => HasRing, ref _hasRing, value); }
 		}
 
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
 		public bool IsCancellable
 		{
 			get { return _isCancellable; }
@@ -235,24 +222,6 @@ namespace Manager.ViewModel.Demos
 		{
 			get { return _newBannedPlayerCount; }
 			set { Set(() => NewBannedPlayerCount, ref _newBannedPlayerCount, value); }
-		}
-
-		public bool HasNotification
-		{
-			get { return _hasNotification; }
-			set { Set(() => HasNotification, ref _hasNotification, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
-
-		public Demo SelectedDemo
-		{
-			get { return _selectedDemo; }
-			set { Set(() => SelectedDemo, ref _selectedDemo, value); }
 		}
 
 		public ObservableCollection<Demo> Demos
@@ -509,7 +478,7 @@ namespace Manager.ViewModel.Demos
 											IsBusy = true;
 											HasRing = true;
 											HasNotification = true;
-											NotificationMessage = Properties.Resources.NotificationAnalyzingDemosForExport;
+											Notification = Properties.Resources.NotificationAnalyzingDemosForExport;
 											IsCancellable = true;
 
 											await AnalyzeDemosAsync(true);
@@ -553,7 +522,7 @@ namespace Manager.ViewModel.Demos
 												IsBusy = true;
 												HasRing = true;
 												HasNotification = true;
-												NotificationMessage = Properties.Resources.NotificationAnalyzingDemosForExport;
+												Notification = Properties.Resources.NotificationAnalyzingDemosForExport;
 												IsCancellable = true;
 
 												await AnalyzeDemosAsync(true);
@@ -561,7 +530,7 @@ namespace Manager.ViewModel.Demos
 												{
 													foreach (Demo demo in demos)
 													{
-														NotificationMessage = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
+														Notification = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
 														if (demo.WeaponFired.Count == 0)
 															demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 
@@ -590,7 +559,7 @@ namespace Manager.ViewModel.Demos
 						{
 							SaveFileDialog saveExportDialog = new SaveFileDialog
 							{
-								FileName = SelectedDemo.Name.Substring(0, SelectedDemo.Name.Length - 4) + "-export.xlsx",
+								FileName = Demo.Name.Substring(0, Demo.Name.Length - 4) + "-export.xlsx",
 								Filter = "XLSX file (*.xlsx)|*.xlsx"
 							};
 
@@ -602,13 +571,13 @@ namespace Manager.ViewModel.Demos
 									HasRing = true;
 									HasNotification = true;
 									IsCancellable = true;
-									NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
+									Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, Demo.Name);
 
 									await AnalyzeDemosAsync(true);
 									if (_cts != null)
 									{
-										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, SelectedDemo.Name);
-										await _excelService.GenerateXls(SelectedDemo, saveExportDialog.FileName);
+										Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, Demo.Name);
+										await _excelService.GenerateXls(Demo, saveExportDialog.FileName);
 									}
 								}
 								catch (Exception e)
@@ -649,14 +618,14 @@ namespace Manager.ViewModel.Demos
 
 							// Set the demo
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 
 							// Display the UserControl
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 						},
-						demo => SelectedDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -698,13 +667,13 @@ namespace Manager.ViewModel.Demos
 							IsBusy = true;
 							HasRing = false;
 							HasNotification = true;
-							NotificationMessage = Properties.Resources.NotificationPlayDemoCommandCopied;
+							Notification = Properties.Resources.NotificationPlayDemoCommandCopied;
 							await Task.Delay(3000);
 							HasNotification = false;
 							IsBusy = false;
 							CommandManager.InvalidateRequerySuggested();
 						},
-						demo => SelectedDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -733,7 +702,7 @@ namespace Manager.ViewModel.Demos
 							{
 								try
 								{
-									GameLauncherConfiguration config = new GameLauncherConfiguration(SelectedDemo)
+									GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 									{
 										SteamExePath = AppSettings.SteamExePath(),
 										Width = Properties.Settings.Default.ResolutionWidth,
@@ -762,7 +731,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogInvalidTick, MessageDialogStyle.Affirmative);
 							}
 						},
-						demo => SelectedDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -787,7 +756,7 @@ namespace Manager.ViewModel.Demos
 
 							IsBusy = true;
 							HasNotification = true;
-							NotificationMessage = Properties.Resources.NotificationAddingSuspects;
+							Notification = Properties.Resources.NotificationAddingSuspects;
 							for (int i = 0; i < demos.Count; i++)
 							{
 								if (demos[i].Players.Any())
@@ -878,7 +847,7 @@ namespace Manager.ViewModel.Demos
 							IsBusy = true;
 							HasRing = true;
 							IsCancellable = false;
-							NotificationMessage = Properties.Resources.NotificationLoading;
+							Notification = Properties.Resources.NotificationLoading;
 							await LoadDemosHeader();
 							IsBusy = false;
 							HasRing = false;
@@ -907,7 +876,7 @@ namespace Manager.ViewModel.Demos
 							string argument = "/select, \"" + demo.Path + "\"";
 							Process.Start("explorer.exe", argument);
 						},
-						demo => SelectedDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -974,7 +943,7 @@ namespace Manager.ViewModel.Demos
 						}
 						try
 						{
-							GameLauncherConfiguration config = new GameLauncherConfiguration(SelectedDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Properties.Settings.Default.ResolutionWidth,
@@ -998,7 +967,7 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
 						}
 					},
-					demo => SelectedDemo != null));
+					demo => Demo != null));
 			}
 		}
 
@@ -1015,7 +984,7 @@ namespace Manager.ViewModel.Demos
 					{
 						await ProcessWatchHighOrLow();
 					},
-					demo => SelectedDemo != null));
+					demo => Demo != null));
 			}
 		}
 
@@ -1032,7 +1001,7 @@ namespace Manager.ViewModel.Demos
 					{
 						await ProcessWatchHighOrLow(false);
 					},
-					demo => SelectedDemo != null));
+					demo => Demo != null));
 			}
 		}
 
@@ -1131,7 +1100,7 @@ namespace Manager.ViewModel.Demos
 							{
 								_cts.Cancel();
 								_cts = null;
-								NotificationMessage = Properties.Resources.NotificationCancelling;
+								Notification = Properties.Resources.NotificationCancelling;
 								IsCancellable = false;
 								// small delay to be sure to send the msg after the last progress event trigerred
 								await Task.Delay(100);
@@ -1181,7 +1150,7 @@ namespace Manager.ViewModel.Demos
 					?? (_copyShareCodeCommand = new RelayCommand(
 						async () =>
 						{
-							string shareCode = await _demosService.GetShareCode(SelectedDemo);
+							string shareCode = await _demosService.GetShareCode(Demo);
 							if (shareCode == string.Empty)
 							{
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoShareCodeUnavailable, MessageDialogStyle.Affirmative);
@@ -1191,13 +1160,13 @@ namespace Manager.ViewModel.Demos
 							IsBusy = true;
 							HasRing = false;
 							HasNotification = true;
-							NotificationMessage = Properties.Resources.NotificationDemoShareCodeCopied;
+							Notification = Properties.Resources.NotificationDemoShareCodeCopied;
 							await Task.Delay(3000);
 							HasNotification = false;
 							IsBusy = false;
 							CommandManager.InvalidateRequerySuggested();
 						},
-						() => SelectedDemo != null));
+						() => Demo != null));
 			}
 		}
 
@@ -1214,7 +1183,7 @@ namespace Manager.ViewModel.Demos
 						{
 							await _dialogService.ShowCustomDialogAsync(_dialogThirdPartySelection);
 						},
-						() => SelectedDemo != null && SelectedDemos.Count > 0));
+						() => Demo != null && SelectedDemos.Count > 0));
 			}
 		}
 
@@ -1238,7 +1207,7 @@ namespace Manager.ViewModel.Demos
 							HasNotification = true;
 							HasRing = true;
 							IsCancellable = true;
-							NotificationMessage = Properties.Resources.NotificationRetrievingMatchesData;
+							Notification = Properties.Resources.NotificationRetrievingMatchesData;
 							if (_cts == null) _cts = new CancellationTokenSource();
 							int result = await _steamService.GenerateMatchListFile(_cts.Token);
 							await HandleBoilerResult(result);
@@ -1287,7 +1256,7 @@ namespace Manager.ViewModel.Demos
 							HasNotification = true;
 							HasRing = true;
 							IsCancellable = true;
-							NotificationMessage = Properties.Resources.NotificationRetrievingDemoFromShareCode;
+							Notification = Properties.Resources.NotificationRetrievingDemoFromShareCode;
 							if (_cts == null) _cts = new CancellationTokenSource();
 
 							int result = await _steamService.DownloadDemoFromShareCode(shareCode, _cts.Token);
@@ -1341,7 +1310,7 @@ namespace Manager.ViewModel.Demos
 								IsBusy = true;
 								HasRing = true;
 								HasNotification = true;
-								NotificationMessage = Properties.Resources.NotificationAnalyzingForJsonExport;
+								Notification = Properties.Resources.NotificationAnalyzingForJsonExport;
 								IsCancellable = true;
 
 								string path = Path.GetFullPath(folderDialog.SelectedPath).ToLower();
@@ -1409,7 +1378,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				IsBusy = true;
 				HasRing = true;
-				NotificationMessage = Properties.Resources.NotificationInitCache;
+				Notification = Properties.Resources.NotificationInitCache;
 				await _cacheService.InitDemoBasicDataList();
 				HasNotification = false;
 				IsBusy = false;
@@ -1509,7 +1478,7 @@ namespace Manager.ViewModel.Demos
 
 		private async Task PaginateDemos(int size = 0)
 		{
-			NotificationMessage = Properties.Resources.NotificationLoadingMoreDemos;
+			Notification = Properties.Resources.NotificationLoadingMoreDemos;
 			IsBusy = true;
 			HasRing = true;
 			HasNotification = true;
@@ -1607,7 +1576,7 @@ namespace Manager.ViewModel.Demos
 
 							ProcessSendShareCode(thirdPartyName);
 						},
-						thirdPartyName => SelectedDemo != null));
+						thirdPartyName => Demo != null));
 			}
 		}
 
@@ -1627,7 +1596,7 @@ namespace Manager.ViewModel.Demos
 			HasRing = false;
 			IsBusy = true;
 			NewBannedPlayerCount += count;
-			NotificationMessage = string.Format(Properties.Resources.NotificationSuspectsHaveBeenBanned, NewBannedPlayerCount);
+			Notification = string.Format(Properties.Resources.NotificationSuspectsHaveBeenBanned, NewBannedPlayerCount);
 			await Task.Delay(5000);
 			HasNotification = false;
 			IsBusy = false;
@@ -1677,7 +1646,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				IsBusy = true;
 				HasRing = true;
-				NotificationMessage = Properties.Resources.NotificationSearchingLastRank;
+				Notification = Properties.Resources.NotificationSearchingLastRank;
 				long steamId = Properties.Settings.Default.SelectedStatsAccountSteamID;
 				Rank lastRank = await _cacheService.GetLastRankAsync(steamId);
 				if (lastRank == null)
@@ -1737,7 +1706,7 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				if (isAllAnalyze == MessageDialogResult.Negative)
 				{
-					NotificationMessage = Properties.Resources.NotificationLoadingAllDemos;
+					Notification = Properties.Resources.NotificationLoadingAllDemos;
 					List<string> folders = new List<string>();
 					if (SelectedFolder != null)
 					{
@@ -1776,9 +1745,9 @@ namespace Manager.ViewModel.Demos
 			HasNotification = true;
 			IsCancellable = true;
 			if (SelectedDemos.Count == 1)
-				NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, SelectedDemos[0].Name);
+				Notification = string.Format(Properties.Resources.NotificationAnalyzingDemo, SelectedDemos[0].Name);
 			else
-				NotificationMessage = Properties.Resources.NotificationAnalyzingMultipleDemos;
+				Notification = Properties.Resources.NotificationAnalyzingMultipleDemos;
 
 			List<Demo> demosFailed = new List<Demo>();
 			List<Demo> demosNotFound = new List<Demo>();
@@ -1894,7 +1863,7 @@ namespace Manager.ViewModel.Demos
 				IsBusy = true;
 				HasRing = true;
 				IsCancellable = false;
-				NotificationMessage = Properties.Resources.NotificationCheckingNewBanned;
+				Notification = Properties.Resources.NotificationCheckingNewBanned;
 				List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
 				List<string> bannedIdList = await _cacheService.GetSuspectsBannedList();
 				List<Suspect> newSuspectBannedList = await _steamService.GetNewSuspectBannedList(suspectIdList, bannedIdList);
@@ -1924,7 +1893,7 @@ namespace Manager.ViewModel.Demos
 		{
 			try
 			{
-				NotificationMessage = Properties.Resources.NotificationLoadingDemos;
+				Notification = Properties.Resources.NotificationLoadingDemos;
 				IsBusy = true;
 				HasRing = true;
 				HasNotification = true;
@@ -1967,10 +1936,10 @@ namespace Manager.ViewModel.Demos
 				HasNotification = true;
 				IsBusy = false;
 				HasRing = false;
-				NotificationMessage = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+				Notification = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
 					? Properties.Resources.NotificationNoDemosFoundForAccount
 					: Properties.Resources.NotificationNoDemosFound;
-				if (!string.IsNullOrEmpty(Properties.Settings.Default.LastFolder)) NotificationMessage += " " + Properties.Resources.NotificationInThisFolder;
+				if (!string.IsNullOrEmpty(Properties.Settings.Default.LastFolder)) Notification += " " + Properties.Resources.NotificationInThisFolder;
 			}
 			else
 			{
@@ -2058,10 +2027,10 @@ namespace Manager.ViewModel.Demos
 					{
 						string demoName = demoDownloadList.ElementAt(i - 1).Key;
 						string demoUrl = demoDownloadList.ElementAt(i - 1).Value;
-						NotificationMessage = string.Format(Properties.Resources.NotificationDownloadingDemo, i, demoDownloadList.Count);
+						Notification = string.Format(Properties.Resources.NotificationDownloadingDemo, i, demoDownloadList.Count);
 						await _demosService.DownloadDemo(demoUrl, demoName);
 						if (ct.IsCancellationRequested) return;
-						NotificationMessage = string.Format(Properties.Resources.NotificationExtractingDemo, i, demoDownloadList.Count);
+						Notification = string.Format(Properties.Resources.NotificationExtractingDemo, i, demoDownloadList.Count);
 						await _demosService.DecompressDemoArchive(demoName);
 						demoDownloadedCount++;
 						if (ct.IsCancellationRequested) return;
@@ -2109,7 +2078,7 @@ namespace Manager.ViewModel.Demos
 				return false;
 
 			}
-			Player player = SelectedDemo.Players.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.WatchAccountSteamId);
+			Player player = Demo.Players.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.WatchAccountSteamId);
 			if (player == null)
 			{
 				await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerFocusedNotFound, MessageDialogStyle.Affirmative);
@@ -2125,7 +2094,7 @@ namespace Manager.ViewModel.Demos
 		/// <param name="isHighlight"></param>
 		private async void StartWatchHighOrLow(bool isHighlight = true)
 		{
-			GameLauncherConfiguration config = new GameLauncherConfiguration(SelectedDemo)
+			GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 			{
 				SteamExePath = AppSettings.SteamExePath(),
 				Width = Properties.Settings.Default.ResolutionWidth,

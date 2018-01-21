@@ -25,6 +25,7 @@ using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
 using Manager.Services.Configuration;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Manager.Views.Players;
 using Manager.Views.Rounds;
@@ -36,11 +37,9 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoDetailsViewModel : ViewModelBase
+	public class DemoDetailsViewModel : SingleDemoViewModel
 	{
 		#region Properties
-
-		private Demo _currentDemo;
 
 		private Demo _previousDemo;
 
@@ -71,13 +70,7 @@ namespace Manager.ViewModel.Demos
 		// player selected in the combobox
 		private Player _selectedPlayerStats;
 
-		private bool _isAnalyzing;
-
 		private bool _isLeftSideVisible = Settings.Default.ShowLeftPartDetails;
-
-		private bool _hasNotification;
-
-		private string _notificationMessage;
 
 		private float _progress;
 
@@ -150,12 +143,6 @@ namespace Manager.ViewModel.Demos
 
 		#region Accessors
 
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
-
 		public Demo PreviousDemo
 		{
 			get { return _previousDemo; }
@@ -196,12 +183,6 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
-		public bool IsAnalyzing
-		{
-			get { return _isAnalyzing; }
-			set { Set(() => IsAnalyzing, ref _isAnalyzing, value); }
-		}
-
 		public bool IsLeftSideVisible
 		{
 			get { return _isLeftSideVisible; }
@@ -211,18 +192,6 @@ namespace Manager.ViewModel.Demos
 				Settings.Default.Save();
 				Set(() => IsLeftSideVisible, ref _isLeftSideVisible, value);
 			}
-		}
-
-		public bool HasNotification
-		{
-			get { return _hasNotification; }
-			set { Set(() => HasNotification, ref _hasNotification, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
 		public ICollectionView PlayersTeam1Collection
@@ -256,12 +225,12 @@ namespace Manager.ViewModel.Demos
 					async () =>
 					{
 						var currentPage = new ViewModelLocator().Main.CurrentPage.CurrentPage;
-						IsAnalyzing = true;
-						NotificationMessage = Properties.Resources.NotificationLoading;
+						IsBusy = true;
+						Notification = Properties.Resources.NotificationLoading;
 						HasNotification = true;
 						// reload whole demo data if an account was selected and the current page was the demos list
-						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(CurrentDemo.Id))
-							CurrentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
+						if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView && _cacheService.HasDemoInCache(Demo.Id))
+							Demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
 						await UpdateDemoFromAppArgument();
 						await LoadData();
 					}));
@@ -276,7 +245,7 @@ namespace Manager.ViewModel.Demos
 					?? (_setDemoSourceCommand = new RelayCommand<Source>(
 					async source =>
 					{
-						CurrentDemo = await _demosService.SetSource(CurrentDemo, source.Name);
+						Demo = await _demosService.SetSource(Demo, source.Name);
 					}, source => source != null));
 			}
 		}
@@ -319,12 +288,12 @@ namespace Manager.ViewModel.Demos
 					{
 						var roundViewModel = new ViewModelLocator().RoundDetails;
 						roundViewModel.RoundNumber = roundNumber;
-						roundViewModel.CurrentDemo = CurrentDemo;
+						roundViewModel.Demo = Demo;
 						RoundDetailsView roundView = new RoundDetailsView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(roundView);
-					}, roundNumber => !IsAnalyzing && CurrentDemo != null
-					&& CurrentDemo.Source.GetType() != typeof(Pov) && SelectedRound != null));
+					}, roundNumber => !IsBusy && Demo != null
+					&& Demo.Source.GetType() != typeof(Pov) && SelectedRound != null));
 			}
 		}
 
@@ -341,12 +310,12 @@ namespace Manager.ViewModel.Demos
 					{
 						var playerViewModel = new ViewModelLocator().PlayerDetails;
 						playerViewModel.CurrentPlayer = player;
-						playerViewModel.CurrentDemo = CurrentDemo;
+						playerViewModel.Demo = Demo;
 						PlayerDetailsView playerView = new PlayerDetailsView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(playerView);
-					}, player => !IsAnalyzing && CurrentDemo != null
-					&& CurrentDemo.Source.GetType() != typeof(Pov) && SelectedPlayer != null));
+					}, player => !IsBusy && Demo != null
+					&& Demo.Source.GetType() != typeof(Pov) && SelectedPlayer != null));
 			}
 		}
 
@@ -367,11 +336,11 @@ namespace Manager.ViewModel.Demos
 							return;
 						}
 						var heatmapViewModel = new ViewModelLocator().DemoHeatmap;
-						heatmapViewModel.CurrentDemo = demo;
+						heatmapViewModel.Demo = demo;
 						DemoHeatmapView heatmapView = new DemoHeatmapView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(heatmapView);
-					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					}, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -387,11 +356,11 @@ namespace Manager.ViewModel.Demos
 					demo =>
 					{
 						var overviewViewModel = new ViewModelLocator().DemoOverview;
-						overviewViewModel.CurrentDemo = demo;
+						overviewViewModel.Demo = demo;
 						DemoOverviewView overviewView = new DemoOverviewView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(overviewView);
-					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					}, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -407,11 +376,11 @@ namespace Manager.ViewModel.Demos
 					demo =>
 					{
 						var entryKillsViewModel = new ViewModelLocator().DemoKills;
-						entryKillsViewModel.CurrentDemo = demo;
+						entryKillsViewModel.Demo = demo;
 						DemoKillsView killsView = new DemoKillsView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(killsView);
-					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					}, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -427,11 +396,11 @@ namespace Manager.ViewModel.Demos
 					demo =>
 					{
 						var demoDamagesViewModel = new ViewModelLocator().DemoDamages;
-						demoDamagesViewModel.CurrentDemo = demo;
+						demoDamagesViewModel.Demo = demo;
 						DemoDamagesView demoDamagesView = new DemoDamagesView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(demoDamagesView);
-					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					}, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -452,11 +421,11 @@ namespace Manager.ViewModel.Demos
 							return;
 						}
 						var demoFlashbangsViewModel = new ViewModelLocator().DemoFlashbangs;
-						demoFlashbangsViewModel.CurrentDemo = demo;
+						demoFlashbangsViewModel.Demo = demo;
 						DemoFlashbangsView demoFlashbangsView = new DemoFlashbangsView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(demoFlashbangsView);
-					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					}, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -477,7 +446,7 @@ namespace Manager.ViewModel.Demos
 							   DemoMovieView demoMovieView = new DemoMovieView();
 							   mainViewModel.CurrentPage.ShowPage(demoMovieView);
 						   },
-						   demo => CurrentDemo != null && !IsAnalyzing));
+						   demo => Demo != null && !IsBusy));
 			}
 		}
 
@@ -495,11 +464,11 @@ namespace Manager.ViewModel.Demos
 							return;
 						}
 						var demoStuffsViewModel = new ViewModelLocator().DemoStuffs;
-						demoStuffsViewModel.CurrentDemo = demo;
+						demoStuffsViewModel.Demo = demo;
 						DemoStuffsView demoStuffsView = new DemoStuffsView();
 						var mainViewModel = new ViewModelLocator().Main;
 						mainViewModel.CurrentPage.ShowPage(demoStuffsView);
-					}, demo => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					}, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -530,9 +499,9 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							Round firstRound = CurrentDemo.Rounds.FirstOrDefault();
+							Round firstRound = Demo.Rounds.FirstOrDefault();
 							if (firstRound == null) return;
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -567,7 +536,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -604,7 +573,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -636,8 +605,8 @@ namespace Manager.ViewModel.Demos
 					?? (_exportDemoToExcelCommand = new RelayCommand(
 						async () =>
 						{
-							if (CurrentDemo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
-								await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { CurrentDemo });
+							if (Demo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
+								await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { Demo });
 
 							if (SelectedPlayerStats != null && SelectedPlayerStats.SteamId != 0)
 							{
@@ -647,7 +616,7 @@ namespace Manager.ViewModel.Demos
 
 							SaveFileDialog exportDialog = new SaveFileDialog
 							{
-								FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + "-export.xlsx",
+								FileName = Demo.Name.Substring(0, Demo.Name.Length - 4) + "-export.xlsx",
 								Filter = "XLSX file (*.xlsx)|*.xlsx"
 							};
 
@@ -655,14 +624,14 @@ namespace Manager.ViewModel.Demos
 							{
 								try
 								{
-									if (!_cacheService.HasDemoInCache(CurrentDemo.Id))
+									if (!_cacheService.HasDemoInCache(Demo.Id))
 									{
-										IsAnalyzing = true;
+										IsBusy = true;
 										HasNotification = true;
-										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, CurrentDemo.Name);
-										await _demosService.AnalyzeDemo(CurrentDemo, CancellationToken.None);
+										Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, Demo.Name);
+										await _demosService.AnalyzeDemo(Demo, CancellationToken.None);
 									}
-									await _excelService.GenerateXls(CurrentDemo, exportDialog.FileName);
+									await _excelService.GenerateXls(Demo, exportDialog.FileName);
 								}
 								catch (Exception e)
 								{
@@ -670,13 +639,13 @@ namespace Manager.ViewModel.Demos
 								}
 								finally
 								{
-									IsAnalyzing = false;
+									IsBusy = false;
 									HasNotification = false;
 								}
 							}
 
 						},
-						() => CurrentDemo != null && !IsAnalyzing && CurrentDemo.Source.GetType() != typeof(Pov)));
+						() => Demo != null && !IsBusy && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -691,11 +660,11 @@ namespace Manager.ViewModel.Demos
 					?? (_analyzeDemoCommand = new RelayCommand(
 					async () =>
 					{
-						if (CurrentDemo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
-							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo>{CurrentDemo});
+						if (Demo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
+							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo>{ Demo });
 
-						NotificationMessage = Properties.Resources.NotificationAnalyzing;
-						IsAnalyzing = true;
+						Notification = Properties.Resources.NotificationAnalyzing;
+						IsBusy = true;
 						HasNotification = true;
 						new ViewModelLocator().Settings.IsShowAllPlayers = true;
 
@@ -707,24 +676,24 @@ namespace Manager.ViewModel.Demos
 							}
 
 							_progress = 0;
-							CurrentDemo = await _demosService.AnalyzeDemo(CurrentDemo, _cts.Token, HandleAnalyzeProgress);
+							Demo = await _demosService.AnalyzeDemo(Demo, _cts.Token, HandleAnalyzeProgress);
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
-								await _demosService.AnalyzeBannedPlayersAsync(CurrentDemo);
+								await _demosService.AnalyzeBannedPlayersAsync(Demo);
 							}
-							await _cacheService.WriteDemoDataCache(CurrentDemo);
-							await _cacheService.UpdateRankInfoAsync(CurrentDemo, Settings.Default.SelectedStatsAccountSteamID);
+							await _cacheService.WriteDemoDataCache(Demo);
+							await _cacheService.UpdateRankInfoAsync(Demo, Settings.Default.SelectedStatsAccountSteamID);
 						}
 						catch (Exception e)
 						{
 							await HandleAnalyzeException(e);
 						}
 
-						IsAnalyzing = false;
+						IsBusy = false;
 						HasNotification = false;
 						CommandManager.InvalidateRequerySuggested();
 					},
-					() => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Source.GetType() != typeof(Pov)));
+					() => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
 			}
 		}
 
@@ -739,9 +708,9 @@ namespace Manager.ViewModel.Demos
 					?? (_saveCommentDemoCommand = new RelayCommand<string>(
 					async comment =>
 					{
-						await _demosService.SaveComment(CurrentDemo, comment);
+						await _demosService.SaveComment(Demo, comment);
 						HasNotification = true;
-						NotificationMessage = Properties.Resources.NotificationCommentSaved;
+						Notification = Properties.Resources.NotificationCommentSaved;
 						await Task.Delay(5000);
 						HasNotification = false;
 					}));
@@ -764,7 +733,7 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+						GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 						{
 							SteamExePath = AppSettings.SteamExePath(),
 							Width = Settings.Default.ResolutionWidth,
@@ -782,7 +751,7 @@ namespace Manager.ViewModel.Demos
 						GameLauncher launcher = new GameLauncher(config);
 						launcher.WatchDemoAt(round.Tick);
 					},
-					round => CurrentDemo != null && SelectedRound != null));
+					round => Demo != null && SelectedRound != null));
 			}
 		}
 
@@ -797,19 +766,19 @@ namespace Manager.ViewModel.Demos
 					?? (_addSuspectCommand = new RelayCommand<string>(
 						async steamId =>
 						{
-							NotificationMessage = Properties.Resources.NotificationAddingPlayerToSuspectsList;
+							Notification = Properties.Resources.NotificationAddingPlayerToSuspectsList;
 							HasNotification = true;
-							IsAnalyzing = true;
+							IsBusy = true;
 
 							bool added = await _cacheService.AddSuspectToCache(steamId);
-							IsAnalyzing = false;
+							IsBusy = false;
 							if (!added)
 							{
 								HasNotification = false;
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectsList, MessageDialogStyle.Affirmative);
 							}
 
-							NotificationMessage = Properties.Resources.NotificationPlayedAddedToSuspectsList;
+							Notification = Properties.Resources.NotificationPlayedAddedToSuspectsList;
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
 							HasNotification = false;
@@ -829,18 +798,18 @@ namespace Manager.ViewModel.Demos
 						async steamId =>
 						{
 							HasNotification = true;
-							IsAnalyzing = true;
-							NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
+							IsBusy = true;
+							Notification = Properties.Resources.NotificationAddingPlayerToWhitelist;
 
 							bool added = await _cacheService.AddPlayerToWhitelist(steamId);
-							IsAnalyzing = false;
+							IsBusy = false;
 							if (!added)
 							{
 								HasNotification = false;
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerAlreadyInSuspectWhitelist, MessageDialogStyle.Affirmative);
 							}
 
-							NotificationMessage = Properties.Resources.NotificationPlayerAddedToWhitelist;
+							Notification = Properties.Resources.NotificationPlayerAddedToWhitelist;
 							CommandManager.InvalidateRequerySuggested();
 							await Task.Delay(5000);
 							HasNotification = false;
@@ -861,12 +830,12 @@ namespace Manager.ViewModel.Demos
 						{
 							var settingsViewModel = new ViewModelLocator().Settings;
 							if (!isChecked)
-								SelectedPlayerStats = CurrentDemo.Players[0];
+								SelectedPlayerStats = Demo.Players[0];
 							else
 								SelectedPlayerStats = null;
 							settingsViewModel.IsShowAllPlayers = isChecked;
 						},
-						isChecked => !IsAnalyzing && CurrentDemo != null && CurrentDemo.Players.Any()));
+						isChecked => !IsBusy && Demo != null && Demo.Players.Any()));
 			}
 		}
 
@@ -897,9 +866,9 @@ namespace Manager.ViewModel.Demos
 					?? (_addPlayerToAccountListCommand = new RelayCommand<string>(
 					async steamId =>
 					{
-						NotificationMessage = Properties.Resources.NotificationAddingPlayerToAccountsList;
+						Notification = Properties.Resources.NotificationAddingPlayerToAccountsList;
 						HasNotification = true;
-						IsAnalyzing = true;
+						IsBusy = true;
 
 						bool added = false;
 						try
@@ -920,7 +889,7 @@ namespace Manager.ViewModel.Demos
 							}
 
 							added = await _cacheService.AddAccountAsync(account);
-							IsAnalyzing = false;
+							IsBusy = false;
 							if (!added)
 							{
 								HasNotification = false;
@@ -938,7 +907,7 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileRetrievingPlayerInformation, MessageDialogStyle.Affirmative);
 						}
 
-						if (added) NotificationMessage = Properties.Resources.NotificationPlayerAddedToAccountsList;
+						if (added) Notification = Properties.Resources.NotificationPlayerAddedToAccountsList;
 						CommandManager.InvalidateRequerySuggested();
 						if (added) await Task.Delay(5000);
 						HasNotification = false;
@@ -957,11 +926,11 @@ namespace Manager.ViewModel.Demos
 					?? (_showPlayerDemosCommand = new RelayCommand<Player>(
 						async player =>
 						{
-							IsAnalyzing = true;
+							IsBusy = true;
 							HasNotification = true;
-							NotificationMessage = Properties.Resources.NotificationSearchingDemosForPlayer;
+							Notification = Properties.Resources.NotificationSearchingDemosForPlayer;
 							List<Demo> demos = await _demosService.GetDemosPlayer(player.SteamId.ToString());
-							IsAnalyzing = false;
+							IsBusy = false;
 							HasNotification = false;
 							if (!demos.Any())
 							{
@@ -995,11 +964,11 @@ namespace Manager.ViewModel.Demos
 					?? (_goToPreviousDemoCommand = new RelayCommand(
 						async () =>
 						{
-							CurrentDemo = PreviousDemo;
+							Demo = PreviousDemo;
 							SelectedPlayerStats = null;
 							await LoadData();
 						},
-						() => PreviousDemo != null && !IsAnalyzing));
+						() => PreviousDemo != null && !IsBusy));
 			}
 		}
 
@@ -1011,11 +980,11 @@ namespace Manager.ViewModel.Demos
 					?? (_goToNextDemoCommand = new RelayCommand(
 						async () =>
 						{
-							CurrentDemo = NextDemo;
+							Demo = NextDemo;
 							SelectedPlayerStats = null;
 							await LoadData();
 						},
-						() => NextDemo != null && !IsAnalyzing));
+						() => NextDemo != null && !IsBusy));
 			}
 		}
 
@@ -1027,36 +996,36 @@ namespace Manager.ViewModel.Demos
 					?? (_exportChatCommand = new RelayCommand(
 					async () =>
 					{
-						if (CurrentDemo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
-							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { CurrentDemo });
+						if (Demo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
+							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { Demo });
 
 						SaveFileDialog exportDialog = new SaveFileDialog
 						{
-							FileName = CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4) + "-chat.txt",
+							FileName = Demo.Name.Substring(0, Demo.Name.Length - 4) + "-chat.txt",
 							Filter = "Text file (*.txt)|*.txt"
 						};
 
 						if (exportDialog.ShowDialog() == DialogResult.OK)
 						{
-							if (!_cacheService.HasDemoInCache(CurrentDemo.Id))
+							if (!_cacheService.HasDemoInCache(Demo.Id))
 							{
 								try
 								{
-									NotificationMessage = Properties.Resources.NotificationAnalyzing;
-									IsAnalyzing = true;
+									Notification = Properties.Resources.NotificationAnalyzing;
+									IsBusy = true;
 									HasNotification = true;
 
 									if (_cts == null)
 									{
 										_cts = new CancellationTokenSource();
 									}
-									await _demosService.AnalyzeDemo(CurrentDemo, _cts.Token);
+									await _demosService.AnalyzeDemo(Demo, _cts.Token);
 
 									if (AppSettings.IsInternetConnectionAvailable())
 									{
-										await _demosService.AnalyzeBannedPlayersAsync(CurrentDemo);
+										await _demosService.AnalyzeBannedPlayersAsync(Demo);
 									}
-									await _cacheService.WriteDemoDataCache(CurrentDemo);
+									await _cacheService.WriteDemoDataCache(Demo);
 								}
 								catch (Exception e)
 								{
@@ -1064,14 +1033,14 @@ namespace Manager.ViewModel.Demos
 								}
 								finally
 								{
-									IsAnalyzing = false;
+									IsBusy = false;
 									HasNotification = false;
 								}
 							}
 
-							if (CurrentDemo.ChatMessageList.Any())
+							if (Demo.ChatMessageList.Any())
 							{
-								_demosService.WriteChatFile(CurrentDemo, exportDialog.FileName);
+								_demosService.WriteChatFile(Demo, exportDialog.FileName);
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogChatFileCreated, MessageDialogStyle.Affirmative);
 							}
 							else
@@ -1102,10 +1071,10 @@ namespace Manager.ViewModel.Demos
 			{
 				DispatcherHelper.CheckBeginInvokeOnUI(async () =>
 				{
-					CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
-					PlayersTeam1Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamCT.Players);
-					PlayersTeam2Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamT.Players);
-					RoundsCollection = CollectionViewSource.GetDefaultView(CurrentDemo.Rounds);
+					Demo = await _cacheService.GetDemoDataFromCache(string.Empty);
+					PlayersTeam1Collection = CollectionViewSource.GetDefaultView(Demo.TeamCT.Players);
+					PlayersTeam2Collection = CollectionViewSource.GetDefaultView(Demo.TeamT.Players);
+					RoundsCollection = CollectionViewSource.GetDefaultView(Demo.Rounds);
 				});
 			}
 
@@ -1120,57 +1089,54 @@ namespace Manager.ViewModel.Demos
 		private async Task HandleAnalyzeException(Exception e)
 		{
 			Logger.Instance.Log(e);
-			await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, CurrentDemo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
-			if (CurrentDemo.Duration == 0.0) // invalid header
-				CurrentDemo.Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
+			await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, Demo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
+			if (Demo.Duration == 0.0) // invalid header
+				Demo.Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
 			else
-				CurrentDemo.Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
-			await _cacheService.WriteDemoDataCache(CurrentDemo);
+				Demo.Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
+			await _cacheService.WriteDemoDataCache(Demo);
 		}
 
 		public override void Cleanup()
 		{
 			base.Cleanup();
-			HasNotification = false;
-			IsAnalyzing = false;
 			SelectedPlayer = null;
 			PlayersTeam1Collection = null;
 			PlayersTeam2Collection = null;
 			RoundsCollection = null;
 			SelectedRound = null;
 			SelectedPlayerStats = null;
-			NotificationMessage = string.Empty;
 		}
 
 		private async void UpdateRoundListStats()
 		{
 			HasNotification = true;
-			IsAnalyzing = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
-			if (SelectedPlayerStats == null && _cacheService.HasDemoInCache(CurrentDemo.Id))
+			IsBusy = true;
+			Notification = Properties.Resources.NotificationLoading;
+			if (SelectedPlayerStats == null && _cacheService.HasDemoInCache(Demo.Id))
 			{
-				Demo demo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
-				CurrentDemo.Rounds.Clear();
+				Demo demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
+				Demo.Rounds.Clear();
 				foreach (Round round in demo.Rounds)
 				{
-					CurrentDemo.Rounds.Add(round);
+					Demo.Rounds.Add(round);
 				}
 			}
 			else
 			{
-				foreach (Round round in CurrentDemo.Rounds)
+				foreach (Round round in Demo.Rounds)
 				{
-					await _roundService.MapRoundValuesToSelectedPlayer(CurrentDemo, round, SelectedPlayerStats.SteamId);
+					await _roundService.MapRoundValuesToSelectedPlayer(Demo, round, SelectedPlayerStats.SteamId);
 				}
 			}
 			HasNotification = false;
-			IsAnalyzing = false;
+			IsBusy = false;
 		}
 
 		private void UpdateDemosPagination()
 		{
 			ObservableCollection<Demo> demos = new ViewModelLocator().DemoList.Demos;
-			int demoIndex = demos.IndexOf(CurrentDemo);
+			int demoIndex = demos.IndexOf(Demo);
 			int indexPrevious = demoIndex - 1;
 			int indexNext = demoIndex + 1;
 			PreviousDemo = demos.ElementAtOrDefault(indexPrevious);
@@ -1179,27 +1145,27 @@ namespace Manager.ViewModel.Demos
 
 		private async Task LoadData()
 		{
-			IsAnalyzing = true;
+			IsBusy = true;
 			HasNotification = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
-			PlayersTeam1Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamCT.Players);
-			PlayersTeam2Collection = CollectionViewSource.GetDefaultView(CurrentDemo.TeamT.Players);
+			Notification = Properties.Resources.NotificationLoading;
+			PlayersTeam1Collection = CollectionViewSource.GetDefaultView(Demo.TeamCT.Players);
+			PlayersTeam2Collection = CollectionViewSource.GetDefaultView(Demo.TeamT.Players);
 			PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 			PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
-			RoundsCollection = CollectionViewSource.GetDefaultView(CurrentDemo.Rounds);
-			if (AppSettings.IsInternetConnectionAvailable() && CurrentDemo.Players.Any())
+			RoundsCollection = CollectionViewSource.GetDefaultView(Demo.Rounds);
+			if (AppSettings.IsInternetConnectionAvailable() && Demo.Players.Any())
 			{
-				IEnumerable<string> steamIdList = CurrentDemo.Players.Select(p => p.SteamId.ToString()).Distinct();
+				IEnumerable<string> steamIdList = Demo.Players.Select(p => p.SteamId.ToString()).Distinct();
 				List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
 				foreach (PlayerSummary playerSummary in playerSummaryList)
 				{
-					Player player = CurrentDemo.Players.FirstOrDefault(p => p.SteamId.ToString() == playerSummary.SteamId);
+					Player player = Demo.Players.FirstOrDefault(p => p.SteamId.ToString() == playerSummary.SteamId);
 					if(player != null) player.AvatarUrl = playerSummary.AvatarFull;
 				}
 			}
 			new ViewModelLocator().Settings.IsShowAllPlayers = true;
 			UpdateDemosPagination();
-			IsAnalyzing = false;
+			IsBusy = false;
 			HasNotification = false;
 		}
 
@@ -1212,10 +1178,10 @@ namespace Manager.ViewModel.Demos
 		{
 			if (!string.IsNullOrEmpty(App.DemoFilePath))
 			{
-				CurrentDemo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
-				if (_cacheService.HasDemoInCache(CurrentDemo.Id))
+				Demo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
+				if (_cacheService.HasDemoInCache(Demo.Id))
 				{
-					CurrentDemo = await _cacheService.GetDemoDataFromCache(CurrentDemo.Id);
+					Demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
 				}
 			}
 		}

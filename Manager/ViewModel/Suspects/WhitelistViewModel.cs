@@ -4,17 +4,16 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Input;
 using Core;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Internals;
 using Manager.Services;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Manager.Views.Suspects;
 using Services;
@@ -22,7 +21,7 @@ using Services.Interfaces;
 
 namespace Manager.ViewModel.Suspects
 {
-	public class WhitelistViewModel : ViewModelBase
+	public class WhitelistViewModel : BaseViewModel
 	{
 		#region Properties
 
@@ -33,10 +32,6 @@ namespace Manager.ViewModel.Suspects
 		private readonly ISteamService _steamService;
 
 		private readonly IDemosService _demosService;
-
-		private string _notificationMessage;
-
-		private bool _isBusy;
 
 		private ObservableCollection<Suspect> _suspects;
 
@@ -88,18 +83,6 @@ namespace Manager.ViewModel.Suspects
 		{
 			get { return _dataGridPlayerCollection; }
 			set { Set(() => DataGridPlayerCollection, ref _dataGridPlayerCollection, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
 		}
 
 		public string FilterText
@@ -176,7 +159,7 @@ namespace Manager.ViewModel.Suspects
 								string steamInput = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddPlayerToWhitelist, Properties.Resources.DialogEnterSteamId);
 								if (string.IsNullOrEmpty(steamInput)) return;
 
-								NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
+								Notification = Properties.Resources.NotificationAddingPlayerToWhitelist;
 								IsBusy = true;
 
 								string steamId = await _steamService.GetSteamIdFromUrlOrSteamId(steamInput);
@@ -197,7 +180,7 @@ namespace Manager.ViewModel.Suspects
 										}
 										else
 										{
-											NotificationMessage = Properties.Resources.NotificationPlayerAlreadyInWhitelist;
+											Notification = Properties.Resources.NotificationPlayerAlreadyInWhitelist;
 											await Task.Delay(3000);
 										}
 									}
@@ -285,7 +268,7 @@ namespace Manager.ViewModel.Suspects
 						async suspect =>
 						{
 							IsBusy = true;
-							NotificationMessage = Properties.Resources.NotificationSearching;
+							Notification = Properties.Resources.NotificationSearching;
 							List<Demo> demos = await _demosService.GetDemosPlayer(suspect.SteamId);
 							IsBusy = false;
 							if (!demos.Any())
@@ -321,7 +304,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsBusy = true;
-							NotificationMessage = Properties.Resources.NotificationRefreshing;
+							Notification = Properties.Resources.NotificationRefreshing;
 							await LoadPlayers();
 							IsBusy = false;
 							CommandManager.InvalidateRequerySuggested();

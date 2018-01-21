@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
 using Manager.Models;
+using Manager.ViewModel.Shared;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Services.Interfaces;
@@ -15,17 +15,13 @@ using Services.Models.Charts;
 
 namespace Manager.ViewModel.Accounts
 {
-	public class AccountRankViewModel : ViewModelBase
+	public class AccountRankViewModel : BaseViewModel
 	{
 		#region Properties
 
 		private readonly IAccountStatsService _accountStatsService;
 
 		private readonly ICacheService _cacheService;
-
-		private bool _isBusy;
-
-		private string _notificationMessage;
 
 		private List<RankDateChart> _datas;
 
@@ -48,18 +44,6 @@ namespace Manager.ViewModel.Accounts
 		#endregion
 
 		#region Accessors
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
 
 		public List<RankDateChart> Datas
 		{
@@ -217,7 +201,7 @@ namespace Manager.ViewModel.Accounts
 			if (IsInDesignMode)
 			{
 				DispatcherHelper.Initialize();
-				NotificationMessage = Properties.Resources.NotificationLoading;
+				Notification = Properties.Resources.NotificationLoading;
 				IsBusy = true;
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
@@ -244,7 +228,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadData()
 		{
 			IsBusy = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
+			Notification = Properties.Resources.NotificationLoading;
 			List <Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			Datas = await _accountStatsService.GetRankDateChartDataAsync(demos, SelectedScale.Id);
 			Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);

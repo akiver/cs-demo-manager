@@ -163,7 +163,7 @@
 									   Foreground="{DynamicResource BlackColorBrush}"
 									   Width="40"
 									   Height="40" />
-				<TextBlock Text="{Binding NotificationMessage}"
+				<TextBlock Text="{Binding Notification}"
 						   Style="{StaticResource NotificationMessageStyle}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			</StackPanel>
@@ -171,7 +171,7 @@
 
 		<TabControl Grid.Row="1"
 					Margin="10"
-					controls:TabControlHelper.IsUnderlined="True">
+					controls:TabControlHelper.Underlined="SelectedTabItem">
 			<controls:MetroTabItem Header="{x:Static properties:Resources.General}">
 				<player:PlayerGeneralView />
 			</controls:MetroTabItem>

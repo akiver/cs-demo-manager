@@ -147,7 +147,7 @@
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
-					<TextBlock Text="{Binding NotificationMessage}"
+					<TextBlock Text="{Binding Notification}"
 							   Style="{StaticResource NotificationMessageStyle}"
 							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>

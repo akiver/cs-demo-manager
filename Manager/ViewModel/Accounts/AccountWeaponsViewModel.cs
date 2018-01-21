@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
+using Manager.ViewModel.Shared;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Services.Interfaces;
@@ -15,7 +15,7 @@ using Telerik.Charting;
 
 namespace Manager.ViewModel.Accounts
 {
-	public class AccountWeaponsViewModel : ViewModelBase
+	public class AccountWeaponsViewModel : BaseViewModel
 	{
 		#region Properties
 
@@ -34,10 +34,6 @@ namespace Manager.ViewModel.Accounts
 		private RelayCommand _goToMapCommand;
 
 		private RelayCommand _goToProgressCommand;
-
-		private bool _isBusy;
-
-		private string _notificationMessage;
 
 		private readonly string _killsLabel = Properties.Resources.Kills;
 
@@ -144,19 +140,7 @@ namespace Manager.ViewModel.Accounts
 		#endregion
 
 		#region Accessors
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
-
+		
 		#region Rifles accessors
 		public List<CategoricalDataPoint> DatasAk47Kill
 		{
@@ -772,7 +756,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
+			Notification = Properties.Resources.NotificationLoading;
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			WeaponStats datas = await _accountStatsService.GetWeaponStatsAsync(demos);
 

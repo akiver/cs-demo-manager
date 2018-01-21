@@ -31,18 +31,18 @@
 	</UserControl.Resources>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BrowseToDemoCommand}"
-					CommandParameter="{Binding SelectedDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding GoToAccountStatsCommand}"
 					Gesture="CTRL+E" />
 		<KeyBinding Command="{Binding ShowDemoDetailsCommand}"
-					CommandParameter="{Binding SelectedDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+D" />
 		<KeyBinding Command="{Binding WatchDemoCommand}"
-					CommandParameter="{Binding SelectedDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+W" />
 		<KeyBinding Command="{Binding GoToTickCommand}"
-					CommandParameter="{Binding SelectedDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+G" />
 		<KeyBinding Command="{Binding AnalyzeDemosCommand}"
 					CommandParameter="{Binding SelectedDemos}"
@@ -59,10 +59,10 @@
 		<KeyBinding Command="{Binding RefreshListCommand}"
 					Gesture="F5" />
 		<KeyBinding Command="{Binding WatchHighlightCommand}"
-					CommandParameter="{Binding SelectedDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+H" />
 		<KeyBinding Command="{Binding WatchLowlightCommand}"
-					CommandParameter="{Binding SelectedDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+L" />
 		<mouse:MouseBindingExtended Gesture="XButton2"
 									Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
@@ -111,7 +111,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipDemoDetails}"
 							Command="{Binding ShowDemoDetailsCommand}"
-							CommandParameter="{Binding SelectedDemo}">
+							CommandParameter="{Binding Demo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -144,7 +144,7 @@
 					</Button>
 
 					<Button Command="{Binding BrowseToDemoCommand}"
-							CommandParameter="{Binding SelectedDemo}"
+							CommandParameter="{Binding Demo}"
 							Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipBrowseToDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -250,7 +250,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchDemo}"
 							Command="{Binding WatchDemoCommand}"
-							CommandParameter="{Binding SelectedDemo}">
+							CommandParameter="{Binding Demo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -285,7 +285,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchHighlights}"
 							Command="{Binding WatchHighlightCommand}"
-							CommandParameter="{Binding SelectedDemo}">
+							CommandParameter="{Binding Demo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -303,7 +303,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchLowlights}"
 							Command="{Binding WatchLowlightCommand}"
-							CommandParameter="{Binding SelectedDemo}">
+							CommandParameter="{Binding Demo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -465,7 +465,7 @@
 									   Width="40"
 									   Height="40" />
 				<TextBlock Name="NotificationText"
-						   Text="{Binding NotificationMessage}"
+						   Text="{Binding Notification}"
 						   Style="{StaticResource NotificationMessageStyle}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				<Button Command="{Binding StopAnalyzeCommand}"
@@ -492,14 +492,14 @@
 				  x:Name="DataGridDemos"
 				  Style="{StaticResource DataGridStyle}"
 				  ItemsSource="{Binding Demos, IsAsync=True}"
-				  SelectedItem="{Binding SelectedDemo}"
+				  SelectedItem="{Binding Demo}"
 				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
 										 PassEventArgsToCommand="True"
 										 EventArgsConverter="{StaticResource RowDemoDoubleClickedToDemoDetails}"
-										 EventArgsConverterParameter="{Binding SelectedDemo}"/>
+										 EventArgsConverterParameter="{Binding Demo}"/>
 				</i:EventTrigger>
 				<i:EventTrigger EventName="SelectionChanged">
 					<mvvm:EventToCommand
@@ -776,7 +776,7 @@
 				<ScrollViewer MaxHeight="100"
 							  HorizontalScrollBarVisibility="Auto"
 							  VerticalScrollBarVisibility="Auto">
-					<TextBlock Text="{Binding SelectedDemo.Comment}"
+					<TextBlock Text="{Binding Demo.Comment}"
 							   TextWrapping="Wrap"
 							   Style="{StaticResource TextBlockSmall}" />
 				</ScrollViewer>

@@ -600,7 +600,7 @@ namespace Manager.ViewModel.Demos
 						   () =>
 						   {
 							   var detailsViewModel = new ViewModelLocator().DemoDetails;
-							   detailsViewModel.CurrentDemo = Demo;
+							   detailsViewModel.Demo = Demo;
 							   var mainViewModel = new ViewModelLocator().Main;
 							   DemoDetailsView detailsView = new DemoDetailsView();
 							   mainViewModel.CurrentPage.ShowPage(detailsView);

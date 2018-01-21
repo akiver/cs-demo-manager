@@ -39,36 +39,36 @@
 		<KeyBinding Command="{Binding BackToHomeCommand}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding HeatmapCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+H" />
 		<KeyBinding Command="{Binding GoToKillsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+K" />
 		<KeyBinding Command="{Binding AnalyzeDemoCommand}"
 					Gesture="CTRL+S" />
 		<KeyBinding Command="{Binding DemoList.WatchDemoCommand, Source={StaticResource Locator}}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+W" />
 		<KeyBinding Command="{Binding ExportDemoToExcelCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+X" />
 		<KeyBinding Command="{Binding OverviewCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+O" />
 		<KeyBinding Command="{Binding GoToDemoDamagesCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+D" />
 		<KeyBinding Command="{Binding GoToDemoFlashbangsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+F" />
 		<KeyBinding Command="{Binding ShowRoundCommand}"
 					CommandParameter="{Binding SelectedRound.Number}"
 					Gesture="CTRL+R" />
 		<KeyBinding Command="{Binding ShowDemoStuffsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+G" />
 		<KeyBinding Command="{Binding GoToMovie}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+M" />
 		<KeyBinding Command="{Binding GoToPreviousDemoCommand}"
 					CommandParameter="{Binding GoToPreviousDemoCommand}"
@@ -133,7 +133,7 @@
 						</StackPanel>
 					</Button>
 					<Button Command="{Binding DemoList.WatchDemoCommand, Source={StaticResource Locator}}"
-							CommandParameter="{Binding CurrentDemo}"
+							CommandParameter="{Binding Demo}"
 							Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -201,7 +201,7 @@
 					</Button>
 
 					<Button Command="{Binding GoToMovie}"
-							CommandParameter="{Binding CurrentDemo}"
+							CommandParameter="{Binding Demo}"
 							Style="{DynamicResource GeneralButton}"
 							ToolTip="Generate movie">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -221,7 +221,7 @@
 					<TextBlock Text="{x:Static properties:Resources.LabelPlayerStats}"
 							   Style="{StaticResource CurrentFolderStyle}"/>
 					<ComboBox Style="{StaticResource ComboBoxAccountsStyle}"
-							  ItemsSource="{Binding CurrentDemo.Players}"
+							  ItemsSource="{Binding Demo.Players}"
 							  SelectedItem="{Binding SelectedPlayerStats}"
 							  DisplayMemberPath ="Name"
 							  SelectedValuePath="SteamId"
@@ -275,7 +275,7 @@
 			  Height="40">
 			<StackPanel Orientation="Horizontal">
 				<Button Command="{Binding HeatmapCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipHeatmap}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -293,7 +293,7 @@
 				</Button>
 
 				<Button Command="{Binding OverviewCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipOverview}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -311,7 +311,7 @@
 				</Button>
 
 				<Button Command="{Binding GoToKillsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipKillsDetails}">
 					<StackPanel Orientation="Horizontal">
@@ -328,7 +328,7 @@
 				</Button>
 
 				<Button Command="{Binding GoToDemoDamagesCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipDamages}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -346,7 +346,7 @@
 				</Button>
 
 				<Button Command="{Binding GoToDemoFlashbangsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipFlashbangs}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -364,7 +364,7 @@
 				</Button>
 
 				<Button Command="{Binding ShowDemoStuffsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipStuffs}">
 					<StackPanel Orientation="Horizontal"
@@ -427,11 +427,11 @@
 			<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Center"
 						Margin="5">
-				<controls:ProgressRing IsActive="{Binding IsAnalyzing}"
+				<controls:ProgressRing IsActive="{Binding IsBusy}"
 									   Foreground="{DynamicResource BlackColorBrush}"
 									   Width="40"
 									   Height="40" />
-				<TextBlock Text="{Binding NotificationMessage}"
+				<TextBlock Text="{Binding Notification}"
 						   Style="{StaticResource NotificationMessageStyle}"
 						   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 			</StackPanel>
@@ -445,7 +445,7 @@
 			</Grid.ColumnDefinitions>
 
 			<ScrollViewer Margin="0 5 0 0">
-				<Grid Grid.Column="0">
+				<Grid>
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="Auto" />
@@ -470,7 +470,7 @@
 									Grid.Row="0">
 							<Border BorderThickness="1"
 									BorderBrush="{DynamicResource AccentColorBrush}">
-								<Image Source="{Binding CurrentDemo, Converter={StaticResource MapNameToImageConverter}}"
+								<Image Source="{Binding Demo, Converter={StaticResource MapNameToImageConverter}}"
 									   Stretch="Fill"
 									   MaxHeight="250"/>
 							</Border>
@@ -485,7 +485,7 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<TextBlock Text="{Binding CurrentDemo.Name}"
+								<TextBlock Text="{Binding Demo.Name}"
 										   Grid.Column="1"
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
@@ -501,7 +501,7 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<TextBlock Text="{Binding CurrentDemo.MapName}"
+								<TextBlock Text="{Binding Demo.MapName}"
 										   Grid.Column="1"
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
@@ -517,7 +517,7 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<TextBlock Text="{Binding CurrentDemo.Type}"
+								<TextBlock Text="{Binding Demo.Type}"
 										   Grid.Column="1"
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
@@ -533,7 +533,7 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<TextBlock Text="{Binding CurrentDemo.Hostname}"
+								<TextBlock Text="{Binding Demo.Hostname}"
 										   Grid.Column="1"
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
@@ -549,7 +549,7 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<TextBlock Text="{Binding CurrentDemo.ClientName}"
+								<TextBlock Text="{Binding Demo.ClientName}"
 										   Grid.Column="1"
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
@@ -565,7 +565,7 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<TextBlock Text="{Binding CurrentDemo.ServerTickrate}"
+								<TextBlock Text="{Binding Demo.ServerTickrate}"
 										   Grid.Column="1"
 										   Style="{StaticResource TextBlockSmall}"/>
 							</Grid>
@@ -583,10 +583,10 @@
 								<ComboBox x:Name="SourceList"
 										  Grid.Column="1"
 										  ItemsSource="{Binding Source={StaticResource Locator}, Path=DemoDetails.Sources}"
-										  SelectedValue="{Binding CurrentDemo.SourceName}"
+										  SelectedValue="{Binding Demo.SourceName}"
 										  DisplayMemberPath="Label"
 										  SelectedValuePath="Name"
-										  IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}">
+										  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}">
 									<i:Interaction.Triggers>
 										<i:EventTrigger EventName="SelectionChanged">
 											<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=DemoDetails.SetDemoSourceCommand}"
@@ -608,7 +608,7 @@
 								</TextBlock>
 								<ComboBox Grid.Column="1"
 										  ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.StatusList}"
-										  SelectedItem="{Binding CurrentDemo.Status, Converter={StaticResource StringToDemoStatusConverter}}"
+										  SelectedItem="{Binding Demo.Status, Converter={StaticResource StringToDemoStatusConverter}}"
 										  DisplayMemberPath="Label"
 										  SelectedValuePath="Name"/>
 							</Grid>
@@ -629,7 +629,7 @@
 										 x:Name="TextBoxComment"
 										 TextWrapping="Wrap"
 										 AcceptsReturn="True"
-										 Text="{Binding CurrentDemo.Comment}" />
+										 Text="{Binding Demo.Comment}" />
 								<Button Grid.Row="2"
 										HorizontalAlignment="Center"
 										Command="{Binding SaveCommentDemoCommand}"
@@ -649,7 +649,7 @@
 											   Style="{StaticResource TextBlockHighlight}">
 										<Run Text=" "/>
 									</TextBlock>
-									<TextBlock Text="{Binding CurrentDemo.MostHeadshotPlayer.Name}"
+									<TextBlock Text="{Binding Demo.MostHeadshotPlayer.Name}"
 											   Style="{StaticResource TextBlockSmall}" />
 								</StackPanel>
 								<StackPanel Orientation="Horizontal"
@@ -662,7 +662,7 @@
 											   Margin="5 0 0 0">
 										<Run Text=" "/>
 									</TextBlock>
-									<TextBlock Text="{Binding CurrentDemo.MostBombPlantedPlayer.Name}"
+									<TextBlock Text="{Binding Demo.MostBombPlantedPlayer.Name}"
 											   Style="{StaticResource TextBlockSmall}" />
 								</StackPanel>
 								<StackPanel Orientation="Horizontal"
@@ -675,7 +675,7 @@
 											   Margin="5 0 0 0">
 										<Run Text=" "/>
 									</TextBlock>
-									<TextBlock Text="{Binding CurrentDemo.MostEntryKillPlayer.Name}"
+									<TextBlock Text="{Binding Demo.MostEntryKillPlayer.Name}"
 											   Style="{StaticResource TextBlockSmall}" />
 								</StackPanel>
 								<StackPanel Orientation="Horizontal"
@@ -688,7 +688,7 @@
 											   Margin="5 0 0 0">
 										<Run Text=" "/>
 									</TextBlock>
-									<TextBlock Text="{Binding CurrentDemo.MostKillingWeapon.Name}"
+									<TextBlock Text="{Binding Demo.MostKillingWeapon.Name}"
 											   Style="{StaticResource TextBlockSmall}" />
 								</StackPanel>
 								<StackPanel Orientation="Horizontal"
@@ -701,7 +701,7 @@
 											   Margin="5 0 0 0">
 										<Run Text=" "/>
 									</TextBlock>
-									<TextBlock Text="{Binding CurrentDemo.MostDamageWeapon.Name}"
+									<TextBlock Text="{Binding Demo.MostDamageWeapon.Name}"
 											   Style="{StaticResource TextBlockSmall}" />
 								</StackPanel>
 							</StackPanel>
@@ -737,9 +737,9 @@
 								</Grid.RowDefinitions>
 								<Grid Grid.Row="0" HorizontalAlignment="Center">
 									<StackPanel Orientation="Vertical">
-										<TextBlock Text="{Binding CurrentDemo.TeamCT.Name}"
+										<TextBlock Text="{Binding Demo.TeamCT.Name}"
 												   Style="{StaticResource TeamTitleScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.ScoreTeamCt}"
+										<TextBlock Text="{Binding Demo.ScoreTeamCt}"
 												   Style="{StaticResource TeamScoreScoreboard}"/>
 									</StackPanel>
 								</Grid>
@@ -747,26 +747,26 @@
 									  HorizontalAlignment="Center">
 									<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
 										<StackPanel Orientation="Vertical" Margin="0 0 2 0">
-											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeamCt}"
+											<TextBlock Text="{Binding Demo.ScoreFirstHalfTeamCt}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource BlueBrush}" />
 											<TextBlock Text="|"
 													   Style="{StaticResource HalfScoreScoreboard}" />
-											<TextBlock Text="{Binding CurrentDemo.ScoreFirstHalfTeamT}"
+											<TextBlock Text="{Binding Demo.ScoreFirstHalfTeamT}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource LightRedColorBrush}" />
 										</StackPanel>
 										<StackPanel Orientation="Vertical" Margin="0 0 2 0">
-											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeamCt}"
+											<TextBlock Text="{Binding Demo.ScoreSecondHalfTeamCt}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource LightRedColorBrush}" />
 											<TextBlock Text="|"
 													   Style="{StaticResource HalfScoreScoreboard}" />
-											<TextBlock Text="{Binding CurrentDemo.ScoreSecondHalfTeamT}"
+											<TextBlock Text="{Binding Demo.ScoreSecondHalfTeamT}"
 													   Style="{StaticResource HalfScoreScoreboard}"
 													   Foreground="{StaticResource BlueBrush}" />
 										</StackPanel>
-										<ListView ItemsSource="{Binding CurrentDemo.Overtimes}"
+										<ListView ItemsSource="{Binding Demo.Overtimes}"
 												  Style="{StaticResource OvertimeScoreboardTemplate}"
 												  ItemContainerStyle="{StaticResource OvertimeScoreboardItemStyle}"
 												  ItemsPanel="{StaticResource ScoreboardItemsPanel}"
@@ -779,9 +779,9 @@
 								<Grid Grid.Row="2"
 									  HorizontalAlignment="Center">
 									<StackPanel Orientation="Vertical">
-										<TextBlock Text="{Binding CurrentDemo.ScoreTeamT}"
+										<TextBlock Text="{Binding Demo.ScoreTeamT}"
 												   Style="{StaticResource TeamScoreScoreboard}"/>
-										<TextBlock Text="{Binding CurrentDemo.TeamT.Name}"
+										<TextBlock Text="{Binding Demo.TeamT.Name}"
 												   Style="{StaticResource TeamTitleScoreboard}"/>
 									</StackPanel>
 								</Grid>
@@ -824,7 +824,7 @@
 									<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}"
 															Width="Auto"
 															Header="{x:Static properties:Resources.Rank}"
-															Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
+															Visibility="{Binding Data.Demo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 										<DataGridTemplateColumn.CellTemplate>
 											<DataTemplate>
 												<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}"
@@ -1066,7 +1066,7 @@
 									<DataGridTemplateColumn HeaderStyle="{StaticResource PlayerOldRankNameHeader}"
 															Width="Auto"
 															Header="{x:Static properties:Resources.Rank}"
-															Visibility="{Binding Data.CurrentDemo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
+															Visibility="{Binding Data.Demo.SourceName, Converter={StaticResource ValveDemoToVisibilityConverter}, Source={StaticResource BindingProxy}}">
 										<DataGridTemplateColumn.CellTemplate>
 											<DataTemplate>
 												<Image Source="{Binding RankNumberOld, Converter={StaticResource RankToImageConverter}}"

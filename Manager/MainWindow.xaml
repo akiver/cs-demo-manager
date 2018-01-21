@@ -64,7 +64,7 @@
 							 Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
 							 IsOpen="{Binding IsSettingsOpen}"
 							 CloseCommand="{Binding SettingsFlyoutClosedCommand}">
-				<TabControl controls:TabControlHelper.IsUnderlined="True"
+				<TabControl controls:TabControlHelper.Underlined="SelectedTabItem"
 							Margin="15 0 0 0"
 							TabStripPlacement="Left">
 					<controls:MetroTabItem Header="{x:Static properties:Resources.Stats}">
@@ -93,7 +93,7 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.Notification}"
 									   Style="{StaticResource NotificationMessageStyle}"
 									   HorizontalAlignment="Center"
 									   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
@@ -202,7 +202,7 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.Notification}"
 									   Style="{StaticResource NotificationMessageStyle}"
 									   HorizontalAlignment="Center"
 									   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
@@ -506,7 +506,7 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
-							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.NotificationMessage}"
+							<TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.Notification}"
 									   Style="{StaticResource NotificationMessageStyle}"
 									   HorizontalAlignment="Center"
 									   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>

@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
+using Manager.ViewModel.Shared;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Services.Interfaces;
@@ -15,7 +15,7 @@ using Services.Models.Stats;
 
 namespace Manager.ViewModel.Accounts
 {
-	public class AccountMapsViewModel : ViewModelBase
+	public class AccountMapsViewModel : BaseViewModel
 	{
 		#region Properties
 
@@ -34,10 +34,6 @@ namespace Manager.ViewModel.Accounts
 		private RelayCommand _goToWeaponCommand;
 
 		private RelayCommand _goToProgressCommand;
-
-		private bool _isBusy;
-
-		private string _notificationMessage;
 
 		private List<GenericDoubleChart> _dust2PieDatas;
 
@@ -74,18 +70,6 @@ namespace Manager.ViewModel.Accounts
 		#endregion
 
 		#region Accessors
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
 
 		public List<GenericDoubleChart> Dust2PieDatas
 		{
@@ -306,7 +290,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
+			Notification = Properties.Resources.NotificationLoading;
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			MapStats datas = await _accountStatsService.GetMapStatsAsync(demos);
 

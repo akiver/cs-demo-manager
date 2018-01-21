@@ -10,14 +10,14 @@ using GalaSoft.MvvmLight.Threading;
 using Manager.Models;
 using Manager.Services;
 using Manager.Services.Configuration;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Concrete;
 using Services.Interfaces;
-using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoStuffsViewModel : ViewModelBase
+	public class DemoStuffsViewModel : SingleDemoViewModel
 	{
 		#region Properties
 
@@ -30,14 +30,6 @@ namespace Manager.ViewModel.Demos
 		private readonly ICacheService _cacheService;
 
 		private readonly IMapService _mapService;
-
-		private Demo _currentDemo;
-
-		private bool _isBusy;
-
-		private bool _hasNotificationMessage;
-
-		private string _notificationMessage;
 
 		private Stuff _selectedStuff;
 
@@ -68,30 +60,6 @@ namespace Manager.ViewModel.Demos
 		#endregion Properties
 
 		#region Accessors
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public bool HasNotificationMessage
-		{
-			get { return _hasNotificationMessage; }
-			set { Set(() => HasNotificationMessage, ref _hasNotificationMessage, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
-
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
 
 		public Stuff SelectedStuff
 		{
@@ -170,13 +138,13 @@ namespace Manager.ViewModel.Demos
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 							Cleanup();
 						},
-						demo => CurrentDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -194,7 +162,7 @@ namespace Manager.ViewModel.Demos
 								await LoadStuffs();
 							});
 						},
-						() => CurrentDemo != null));
+						() => Demo != null));
 			}
 		}
 
@@ -211,7 +179,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Properties.Settings.Default.ResolutionWidth,
@@ -245,7 +213,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Properties.Settings.Default.ResolutionWidth,
@@ -262,7 +230,7 @@ namespace Manager.ViewModel.Demos
 							};
 							GameLauncher launcher = new GameLauncher(config);
 							launcher.WatchPlayerStuff(SelectedPlayer, CurrentStuffSelector.Id);
-						}, () => CurrentDemo != null && SelectedPlayer != null));
+						}, () => Demo != null && SelectedPlayer != null));
 			}
 		}
 
@@ -278,10 +246,10 @@ namespace Manager.ViewModel.Demos
 							+ " " + SelectedStuff.ShooterPosY + " " + SelectedStuff.ShooterPosZ
 							+ " ;setang " + SelectedStuff.ShooterAnglePitch + " " + SelectedStuff.ShooterAngleYaw;
 							Clipboard.SetText(command);
-							HasNotificationMessage = true;
-							NotificationMessage = Properties.Resources.NotificationSetposCommandCopied;
+							HasNotification = true;
+							Notification = Properties.Resources.NotificationSetposCommandCopied;
 							await Task.Delay(5000);
-							HasNotificationMessage = false;
+							HasNotification = false;
 						},
 						() => SelectedStuff != null));
 			}
@@ -297,7 +265,7 @@ namespace Manager.ViewModel.Demos
 		private async Task LoadStuffs()
 		{
 			IsBusy = true;
-			Stuffs = await _stuffService.GetStuffPointListAsync(CurrentDemo, CurrentStuffSelector.ToStuffType());
+			Stuffs = await _stuffService.GetStuffPointListAsync(Demo, CurrentStuffSelector.ToStuffType());
 			IsBusy = false;
 		}
 
@@ -331,21 +299,21 @@ namespace Manager.ViewModel.Demos
 
 		private async Task LoadData()
 		{
-			NotificationMessage = Properties.Resources.NotificationLoading;
+			Notification = Properties.Resources.NotificationLoading;
 			IsBusy = true;
-			HasNotificationMessage = true;
+			HasNotification = true;
 			if (IsInDesignMode)
 			{
-				CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
+				Demo = await _cacheService.GetDemoDataFromCache(string.Empty);
 			}
-			CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
-			_mapService.InitMap(CurrentDemo);
+			Demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(Demo);
+			_mapService.InitMap(Demo);
 			OverviewLayer = _mapService.GetWriteableImage();
 			_drawService = new DrawService(_mapService);
 			StuffLayer = _drawService.SmokeLayer;
 			await LoadStuffs();
 			IsBusy = false;
-			HasNotificationMessage = false;
+			HasNotification = false;
 		}
 
 		public override void Cleanup()

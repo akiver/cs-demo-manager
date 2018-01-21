@@ -28,11 +28,11 @@
 		<KeyBinding Command="{Binding StopCommand}"
 					Gesture="CTRL+S" />
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+B" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}" />
+					CommandParameter="{Binding Demo}" />
 	</UserControl.InputBindings>
 	
 	<Grid>
@@ -47,7 +47,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -71,7 +71,7 @@
 						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Side}"
 						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
-				<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
+				<ComboBox ItemsSource="{Binding Demo.Players}"
 						  SelectedItem="{Binding SelectedPlayer}"
 						  DisplayMemberPath ="Name"
 						  SelectedValuePath="Name"
@@ -79,7 +79,7 @@
 						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
 						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
-				<ComboBox ItemsSource="{Binding CurrentDemo.Rounds}"
+				<ComboBox ItemsSource="{Binding Demo.Rounds}"
 						  SelectedItem="{Binding SelectedRound}"
 						  DisplayMemberPath ="Number"
 						  SelectedValuePath="Number"
@@ -181,7 +181,7 @@
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
-					<TextBlock Text="{Binding MessageNotification}"
+					<TextBlock Text="{Binding Notification}"
 							   Style="{StaticResource NotificationMessageStyle}"
 							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>

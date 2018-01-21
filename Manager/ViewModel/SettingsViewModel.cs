@@ -7,7 +7,6 @@ using System.Linq;
 using System.Windows.Forms;
 using Core;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro;
@@ -16,21 +15,20 @@ using Manager.Messages;
 using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
+using Manager.ViewModel.Shared;
 using Services.Interfaces;
 using Application = System.Windows.Application;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace Manager.ViewModel
 {
-	public class SettingsViewModel : ViewModelBase
+	public class SettingsViewModel : BaseViewModel
 	{
 		#region Properties
 
 		private int _resolutionWidth = Settings.Default.ResolutionWidth;
 
 		private int _resolutionHeight = Settings.Default.ResolutionHeight;
-
-		private bool _hasNotification;
 
 		private bool _resolutionFullscreen = Settings.Default.IsFullscreen;
 
@@ -41,8 +39,6 @@ namespace Manager.ViewModel
 		private bool _isShowAllPlayers = Settings.Default.IsShowAllPlayers;
 
 		private string _launchParameters = Settings.Default.LaunchParameters;
-
-		private string _notificationMessage = Properties.Resources.Settings;
 
 		private int _demosListSize = Settings.Default.DemosListSize;
 
@@ -293,12 +289,6 @@ namespace Manager.ViewModel
 
 		#region Accessors
 
-		public bool HasNotification
-		{
-			get { return _hasNotification; }
-			set { Set(() => HasNotification, ref _hasNotification, value); }
-		}
-
 		public List<ComboboxSelector> Languages
 		{
 			get { return _languages; }
@@ -444,12 +434,6 @@ namespace Manager.ViewModel
 				Settings.Default.Save();
 				Set(() => IsUseCustomActionGeneration, ref _isUseCustomActionGeneration, value);
 			}
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
 		public int ResolutionWidth
@@ -1369,7 +1353,7 @@ namespace Manager.ViewModel
 							var steamInput = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddAnAccount, Properties.Resources.DialogEnterSteamId);
 							if (string.IsNullOrEmpty(steamInput)) return;
 
-							NotificationMessage = Properties.Resources.NotificationAddingAccount;
+							Notification = Properties.Resources.NotificationAddingAccount;
 							HasNotification = true;
 
 							try
@@ -1624,7 +1608,7 @@ namespace Manager.ViewModel
 						{
 							try
 							{
-								NotificationMessage = Properties.Resources.NotificationImportingCustomData;
+								Notification = Properties.Resources.NotificationImportingCustomData;
 								HasNotification = true;
 								string filename = fileDialog.FileName;
 
@@ -1716,7 +1700,7 @@ namespace Manager.ViewModel
 										return;
 									}
 
-									NotificationMessage = Properties.Resources.NotificationInstallingHlae;
+									Notification = Properties.Resources.NotificationInstallingHlae;
 									HasNotification = true;
 									EnableHlae = await HlaeService.UpgradeHlae();
 									if (EnableHlae)
@@ -1743,7 +1727,7 @@ namespace Manager.ViewModel
 									bool isUpdateAvailable = await HlaeService.IsUpdateAvailable();
 									if (isUpdateAvailable)
 									{
-										NotificationMessage = Properties.Resources.NotificationUpdatingHlae;
+										Notification = Properties.Resources.NotificationUpdatingHlae;
 										HasNotification = true;
 										EnableHlae = await HlaeService.UpgradeHlae();
 										if (EnableHlae)
@@ -1858,7 +1842,7 @@ namespace Manager.ViewModel
 								return;
 							}
 
-							NotificationMessage = Properties.Resources.NotificationSyncingAccountsNickname;
+							Notification = Properties.Resources.NotificationSyncingAccountsNickname;
 							HasNotification = true;
 							List<string> steamIdList = Accounts.Select(a => a.SteamId.ToString()).ToList();
 							IEnumerable<Suspect> players = await _steamService.GetBanStatusForUserList(steamIdList);
@@ -1944,6 +1928,7 @@ namespace Manager.ViewModel
 			_demosService = demosService;
 			_steamService = steamService;
 			_accountStatsService = accountStatsService;
+			Notification = Properties.Resources.Settings;
 
 			Themes = new List<ComboboxSelector>
 			{

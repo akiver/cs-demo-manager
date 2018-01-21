@@ -16,13 +16,13 @@
 
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding UpdateCommand}"
 					Gesture="CTRL+R" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}" />
+					CommandParameter="{Binding Demo}" />
 	</UserControl.InputBindings>
 
 	<Grid>
@@ -36,7 +36,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -58,32 +58,32 @@
 						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Team}"
 						  SelectedValuePath="Title"
 						  Margin="5"
-						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
-				<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
+				<ComboBox ItemsSource="{Binding Demo.Players}"
 						  SelectedItem="{Binding SelectedPlayer}"
 						  DisplayMemberPath ="Name"
 						  SelectedValuePath="Name"
 						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
 						  Margin="5"
-						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 
 				<CheckBox Content="{x:Static properties:Resources.AllPlayers}"
 						  IsChecked="{Binding SelectAllPlayers}"
-						  IsEnabled="{Binding IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"
+						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 						  Margin="5"
 						  VerticalAlignment="Center" />
 
-				<ComboBox ItemsSource="{Binding CurrentDemo.Rounds}"
+				<ComboBox ItemsSource="{Binding Demo.Rounds}"
 						  SelectedItem="{Binding SelectedRound}"
 						  DisplayMemberPath ="Number"
 						  SelectedValuePath="Number"
 						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
 						  Margin="5"
-						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 				<CheckBox Content="{x:Static properties:Resources.AllRounds}"
 						  IsChecked="{Binding SelectAllRounds}"
-						  IsEnabled="{Binding IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"
+						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 						  Margin="5"
 						  VerticalAlignment="Center" />
 				<Button Command="{Binding UpdateCommand}"
@@ -105,13 +105,13 @@
 
 				<StackPanel Orientation="Horizontal"
 							Margin="5">
-					<controls:ProgressRing IsActive="{Binding IsGenerating}"
+					<controls:ProgressRing IsActive="{Binding IsBusy}"
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
 					<TextBlock Text="{x:Static properties:Resources.NotificationUpdating}"
 							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>

@@ -60,7 +60,7 @@
 			  Height="40">
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
-						IsEnabled="{Binding IsAnalyzing, Converter={StaticResource BooleanInvertedConverter}}"
+						IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 						Command="{Binding BackToHomeCommand}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -244,11 +244,11 @@
 									   Foreground="{DynamicResource BlackColorBrush}"
 									   Width="40"
 									   Height="40" />
-				<TextBlock Text="{Binding NotificationMessage}"
+				<TextBlock Text="{Binding Notification}"
 						   Style="{StaticResource NotificationMessageStyle}" />
 				<Button Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipStop}"
-						Visibility="{Binding IsAnalyzing, Converter={StaticResource BooleanToVisibilityConverter}}"
+						Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
 						Command="{Binding StopCommand}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"

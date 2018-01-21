@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
+using Manager.ViewModel.Shared;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Services.Interfaces;
@@ -16,7 +16,7 @@ using Services.Models.Stats;
 
 namespace Manager.ViewModel.Accounts
 {
-	public class AccountOverallViewModel : ViewModelBase
+	public class AccountOverallViewModel : BaseViewModel
 	{
 		#region Properties
 
@@ -35,10 +35,6 @@ namespace Manager.ViewModel.Accounts
 		private RelayCommand _goToWeaponCommand;
 
 		private RelayCommand _goToProgressCommand;
-
-		private bool _isBusy;
-
-		private string _notificationMessage;
 
 		private List<GenericDoubleChart> _datasMatchStats;
 
@@ -116,18 +112,6 @@ namespace Manager.ViewModel.Accounts
 		{
 			get { return _datasMatchStats; }
 			set { Set(() => DatasMatchStats, ref _datasMatchStats, value); }
-		}
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
 		public int MatchCount
@@ -451,7 +435,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
+			Notification = Properties.Resources.NotificationLoading;
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			OverallStats datas = await _accountStatsService.GetGeneralAccountStatsAsync(demos);
 			MatchCount = datas.MatchCount;

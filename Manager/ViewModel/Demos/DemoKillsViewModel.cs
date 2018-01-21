@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Stats;
@@ -12,11 +12,9 @@ using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoKillsViewModel : ViewModelBase
+	public class DemoKillsViewModel : SingleDemoViewModel
 	{
 		#region Properties
-
-		private Demo _currentDemo;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -32,12 +30,6 @@ namespace Manager.ViewModel.Demos
 
 		#region Accessors
 
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
-
 		public int MaxPlayerKillCount
 		{
 			get { return _maxPlayerKillCount; }
@@ -50,8 +42,8 @@ namespace Manager.ViewModel.Demos
 			{
 				List<Team> teams = new List<Team>
 				{
-					_currentDemo.TeamCT,
-					_currentDemo.TeamT
+					Demo.TeamCT,
+					Demo.TeamT
 				};
 				return teams;
 			}
@@ -92,12 +84,12 @@ namespace Manager.ViewModel.Demos
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 						},
-						demo => CurrentDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -105,7 +97,7 @@ namespace Manager.ViewModel.Demos
 
 		private async Task LoadDatas()
 		{
-			_killService.Demo = CurrentDemo;
+			_killService.Demo = Demo;
 			KillsData = await _killService.GetPlayersKillsMatrix();
 			if (KillsData.Any()) MaxPlayerKillCount = KillsData.Max(p => p.Count);
 		}
@@ -126,7 +118,6 @@ namespace Manager.ViewModel.Demos
 		public override void Cleanup()
 		{
 			base.Cleanup();
-			CurrentDemo = null;
 			KillsData.Clear();
 			MaxPlayerKillCount = 0;
 		}

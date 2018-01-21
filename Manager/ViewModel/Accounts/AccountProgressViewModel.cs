@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
+using Manager.ViewModel.Shared;
 using Manager.Views.Accounts;
 using Manager.Views.Demos;
 using Services.Interfaces;
@@ -16,17 +16,13 @@ using Services.Models.Stats;
 
 namespace Manager.ViewModel.Accounts
 {
-	public class AccountProgressViewModel : ViewModelBase
+	public class AccountProgressViewModel : BaseViewModel
 	{
 		#region Properties
 
 		private readonly IAccountStatsService _accountStatsService;
 
 		private readonly ICacheService _cacheService;
-
-		private bool _isBusy;
-
-		private string _notificationMessage;
 
 		private bool _isWinChartEnabled = true;
 
@@ -101,18 +97,6 @@ namespace Manager.ViewModel.Accounts
 		#endregion
 
 		#region Accessors
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
 
 		public bool IsWinChartEnabled
 		{
@@ -512,7 +496,7 @@ namespace Manager.ViewModel.Accounts
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = "Loading...";
+			Notification = "Loading...";
 			List<Demo> demos = await _cacheService.GetFilteredDemoListAsync();
 			ProgressStats datas = await _accountStatsService.GetProgressStatsAsync(demos);
 			DatasWin = datas.Win;

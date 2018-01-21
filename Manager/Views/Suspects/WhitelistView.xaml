@@ -183,7 +183,7 @@
 									   Foreground="{DynamicResource AccentColorBrush}"
 									   Width="40"
 									   Height="40" />
-				<TextBlock Text="{Binding NotificationMessage}"
+				<TextBlock Text="{Binding Notification}"
 						   Style="{StaticResource NotificationMessageStyle}" />
 			</StackPanel>
 		</Grid>

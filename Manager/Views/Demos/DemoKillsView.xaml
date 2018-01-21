@@ -25,11 +25,11 @@
 	
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+B" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}" />
+					CommandParameter="{Binding Demo}" />
 	</UserControl.InputBindings>
 
 	<i:Interaction.Triggers>
@@ -50,7 +50,7 @@
 				<Button Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}"
 						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding CurrentDemo}">
+						CommandParameter="{Binding Demo}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -68,7 +68,7 @@
 		</Grid>
 
 		<Grid Grid.Row="1">
-			<TabControl controls:TabControlHelper.IsUnderlined="True">
+			<TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
 				<controls:MetroTabItem Header="{x:Static properties:Resources.EntryKills}">
 					<Grid>
 						<Grid.ColumnDefinitions>
@@ -119,7 +119,7 @@
 												   Grid.ColumnSpan="2"/>
 										<DataGrid Grid.Row="1"
 												  Grid.Column="0"
-												  ItemsSource="{Binding CurrentDemo.Rounds, IsAsync=True}"
+												  ItemsSource="{Binding Demo.Rounds, IsAsync=True}"
 												  Style="{StaticResource DataGridStyle}"
 												  Grid.ColumnSpan="2">
 											<DataGrid.Columns>
@@ -159,7 +159,7 @@
 												   Text="{x:Static properties:Resources.Players}"
 												   Style="{StaticResource SmallTitleStyle}"/>
 										<DataGrid Grid.Row="1"
-												  ItemsSource="{Binding CurrentDemo.Players}"
+												  ItemsSource="{Binding Demo.Players}"
 												  Style="{StaticResource DataGridStyle}">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
@@ -274,7 +274,7 @@
 												   Grid.ColumnSpan="2"/>
 										<DataGrid Grid.Column="0"
 												  Grid.Row="1"
-												  ItemsSource="{Binding CurrentDemo.Rounds}"
+												  ItemsSource="{Binding Demo.Rounds}"
 												  Style="{StaticResource DataGridStyle}"
 												  Grid.ColumnSpan="2">
 											<DataGrid.Columns>
@@ -314,7 +314,7 @@
 												   Text="{x:Static properties:Resources.Players}"
 												   Style="{StaticResource SmallTitleStyle}"/>
 										<DataGrid Grid.Row="1"
-												  ItemsSource="{Binding CurrentDemo.Players}"
+												  ItemsSource="{Binding Demo.Players}"
 												  Style="{StaticResource DataGridStyle}">
 											<DataGrid.Columns>
 												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"

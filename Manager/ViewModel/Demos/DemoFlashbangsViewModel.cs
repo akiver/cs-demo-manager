@@ -3,8 +3,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Stats;
@@ -12,15 +12,9 @@ using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoFlashbangsViewModel : ViewModelBase
+	public class DemoFlashbangsViewModel : SingleDemoViewModel
 	{
 		#region Properties
-
-		private bool _isBusy;
-
-		private string _notificationMessage;
-
-		private Demo _currentDemo;
 
 		private readonly IFlashbangService _flashbangService;
 
@@ -64,24 +58,6 @@ namespace Manager.ViewModel.Demos
 
 		#region Accessors
 
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
-		}
-
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
-
 		public List<FlashbangDataPoint> PlayersFlashTimes
 		{
 			get { return _playersFlashTimes; }
@@ -106,8 +82,8 @@ namespace Manager.ViewModel.Demos
 			{
 				List<Team> teams = new List<Team>
 				{
-					_currentDemo.TeamCT,
-					_currentDemo.TeamT
+					Demo.TeamCT,
+					Demo.TeamT
 				};
 				return teams;
 			}
@@ -160,13 +136,13 @@ namespace Manager.ViewModel.Demos
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 							Cleanup();
 						},
-						demo => CurrentDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -189,9 +165,9 @@ namespace Manager.ViewModel.Demos
 		private async Task LoadDatas()
 		{
 			IsBusy = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
-			CurrentDemo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(CurrentDemo);
-			_flashbangService.Demo = CurrentDemo;
+			Notification = Properties.Resources.NotificationLoading;
+			Demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(Demo);
+			_flashbangService.Demo = Demo;
 			PlayersFlashTimes = await _flashbangService.GetPlayersFlashTimesData();
 			if (PlayersFlashTimes.Any()) MaxDurationPlayer = PlayersFlashTimes.Max(p => p.Duration);
 			TeamsFlashTimes = await _flashbangService.GetTeamsFlashTimesData();

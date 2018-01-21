@@ -15,6 +15,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Concrete;
 using Services.Exceptions.Map;
@@ -25,27 +26,21 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoOverviewViewModel : ViewModelBase
+	public class DemoOverviewViewModel : SingleDemoViewModel
 	{
 		#region Properties
 
 		private readonly IMapService _mapService;
 
-		private Demo _currentDemo;
-
 		private Round _selectedRound;
 
 		private Player _selectedPlayer;
-
-		private bool _isBusy;
 
 		private bool _isPlaying;
 
 		private bool _isPaused;
 
 		private bool _isLogOnlyKills = Settings.Default.LogOnlyKillOnOverview;
-
-		private string _messageNotification;
 
 		private int _volume = 10;
 
@@ -101,15 +96,15 @@ namespace Manager.ViewModel.Demos
 		{
 			get
 			{
-				if (CurrentDemo.Tickrate > 0 && CurrentDemo.Tickrate <= 17)
+				if (Demo.Tickrate > 0 && Demo.Tickrate <= 17)
 				{
 					return 16 * _frameLimiterMultiplier;
 				}
-				if (CurrentDemo.Tickrate > 17 && CurrentDemo.Tickrate <= 33)
+				if (Demo.Tickrate > 17 && Demo.Tickrate <= 33)
 				{
 					return 47 * _frameLimiterMultiplier;
 				}
-				if (CurrentDemo.Tickrate > 33 && CurrentDemo.Tickrate <= 44)
+				if (Demo.Tickrate > 33 && Demo.Tickrate <= 44)
 				{
 					if (_frameLimiterMultiplier > 1) _frameLimiterMultiplier *= 1.5;
 					return 57 * _frameLimiterMultiplier;
@@ -124,12 +119,6 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
-
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
 
 		public WriteableBitmap WriteableBitmapOverview
 		{
@@ -251,12 +240,6 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
 		public bool IsPlaying
 		{
 			get { return _isPlaying; }
@@ -278,12 +261,6 @@ namespace Manager.ViewModel.Demos
 				Settings.Default.Save();
 				Set(() => IsLogOnlyKills, ref _isLogOnlyKills, value);
 			}
-		}
-
-		public string MessageNotification
-		{
-			get { return _messageNotification; }
-			set { Set(() => MessageNotification, ref _messageNotification, value); }
 		}
 
 		#endregion
@@ -321,7 +298,7 @@ namespace Manager.ViewModel.Demos
 					{
 						if (IsPaused)
 						{
-							MessageNotification = Properties.Resources.NotificationPlaying;
+							Notification = Properties.Resources.NotificationPlaying;
 							IsPlaying = true;
 							IsPaused = false;
 
@@ -331,7 +308,7 @@ namespace Manager.ViewModel.Demos
 						}
 
 						IsBusy = true;
-						MessageNotification = Properties.Resources.NotificationGeneratingData;
+						Notification = Properties.Resources.NotificationGeneratingData;
 
 						try
 						{
@@ -343,21 +320,21 @@ namespace Manager.ViewModel.Demos
 							PlayersColor.Clear();
 							Events.Clear();
 
-							_mapService.InitMap(CurrentDemo);
+							_mapService.InitMap(Demo);
 							_drawService = new DrawService(_mapService);
 
 							Player player = SelectedPlayer;
 							Round round = SelectedRound;
 
 							// Analyze demos to get player's positions
-							CurrentDemo = await _demoService.AnalyzePlayersPosition(CurrentDemo, _cts.Token);
+							Demo = await _demoService.AnalyzePlayersPosition(Demo, _cts.Token);
 
 							// Get back selection
 							SelectedPlayer = player;
 							SelectedRound = round;
 
 							// Generate points to draw
-							Points = await _drawService.GetPoints(CurrentDemo, CurrentTeamSelector.Id, player, round);
+							Points = await _drawService.GetPoints(Demo, CurrentTeamSelector.Id, player, round);
 
 							// Set players colors on UI
 							foreach (List<PositionPoint> positionPoints in Points)
@@ -380,7 +357,7 @@ namespace Manager.ViewModel.Demos
 
 							InitLayers();
 
-							MessageNotification = Properties.Resources.NotificationPlaying;
+							Notification = Properties.Resources.NotificationPlaying;
 							IsPlaying = true;
 
 							CommandManager.InvalidateRequerySuggested();
@@ -419,7 +396,7 @@ namespace Manager.ViewModel.Demos
 						IsBusy = false;
 						IsPlaying = false;
 						IsPaused = false;
-						CurrentDemo.PositionPoints.Clear();
+						Demo.PositionPoints.Clear();
 						Points.Clear();
 					}, () => IsBusy && (SelectedPlayer != null || CurrentTeamSelector != null) && SelectedRound != null));
 			}
@@ -436,7 +413,7 @@ namespace Manager.ViewModel.Demos
 					?? (_pauseCommand = new RelayCommand(
 					() =>
 					{
-						MessageNotification = Properties.Resources.NotificationPaused;
+						Notification = Properties.Resources.NotificationPaused;
 						IsPlaying = false;
 						IsPaused = true;
 						CompositionTarget.Rendering -= CompositionTarget_Rendering;
@@ -456,13 +433,13 @@ namespace Manager.ViewModel.Demos
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 							Cleanup();
 						},
-						demo => CurrentDemo != null && !IsBusy));
+						demo => Demo != null && !IsBusy));
 			}
 		}
 
@@ -497,7 +474,7 @@ namespace Manager.ViewModel.Demos
 				CompositionTarget.Rendering -= CompositionTarget_Rendering;
 				IsBusy = false;
 				IsPlaying = false;
-				CurrentDemo.PositionPoints.Clear();
+				Demo.PositionPoints.Clear();
 				Points.Clear();
 				CommandManager.InvalidateRequerySuggested();
 				return;
@@ -556,7 +533,6 @@ namespace Manager.ViewModel.Demos
 			FrameLimiterMultiplier = 1;
 			PlayersColor.Clear();
 			Events.Clear();
-			CurrentDemo = null;
 			SoundService.CloseSounds();
 		}
 

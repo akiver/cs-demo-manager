@@ -44,5 +44,13 @@ namespace Manager.ViewModel.Shared
 					       }));
 			}
 		}
+
+		public override void Cleanup()
+		{
+			base.Cleanup();
+			IsBusy = false;
+			HasNotification = false;
+			Notification = string.Empty;
+		}
 	}
 }

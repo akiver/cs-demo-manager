@@ -13,21 +13,19 @@ using MahApps.Metro.Controls.Dialogs;
 using Manager.Properties;
 using Manager.Services;
 using Manager.Services.Configuration;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Charts;
 using Services.Models.Stats;
 using Telerik.Windows.Controls;
 using Application = System.Windows.Application;
-using ViewModelBase = GalaSoft.MvvmLight.ViewModelBase;
 
 namespace Manager.ViewModel.Players
 {
-	public class PlayerDetailsViewModel : ViewModelBase
+	public class PlayerDetailsViewModel : SingleDemoViewModel
 	{
 		#region Properties
-
-		private Demo _currentDemo;
 
 		private readonly IPlayerService _playerService;
 
@@ -36,12 +34,6 @@ namespace Manager.ViewModel.Players
 		private readonly IDialogService _dialogService;
 
 		private Player _currentPlayer;
-
-		private bool _isBusy;
-
-		private bool _hasNotification;
-
-		private string _notificationMessage;
 
 		private List<PlayerRoundStats> _rounds = new List<PlayerRoundStats>();
 
@@ -81,34 +73,10 @@ namespace Manager.ViewModel.Players
 
 		#region Accessors
 
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
-
 		public Player CurrentPlayer
 		{
 			get { return _currentPlayer; }
 			set { Set(() => CurrentPlayer, ref _currentPlayer, value); }
-		}
-
-		public bool IsBusy
-		{
-			get { return _isBusy; }
-			set { Set(() => IsBusy, ref _isBusy, value); }
-		}
-
-		public bool HasNotification
-		{
-			get { return _hasNotification; }
-			set { Set(() => HasNotification, ref _hasNotification, value); }
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
 		public List<PlayerRoundStats> Rounds
@@ -159,7 +127,7 @@ namespace Manager.ViewModel.Players
 			set { Set(() => WeaponKillData, ref _weaponKillData, value); }
 		}
 
-		public List<KillEvent> Kills => CurrentDemo.Kills.Where(k => k.KillerSteamId == CurrentPlayer.SteamId).ToList();
+		public List<KillEvent> Kills => Demo.Kills.Where(k => k.KillerSteamId == CurrentPlayer.SteamId).ToList();
 
 		#endregion
 
@@ -191,7 +159,7 @@ namespace Manager.ViewModel.Players
 						DemoDetailsView detailsView = new DemoDetailsView();
 						mainViewModel.CurrentPage.ShowPage(detailsView);
 						CurrentPlayer = null;
-						CurrentDemo = null;
+						Demo = null;
 					}));
 			}
 		}
@@ -209,7 +177,7 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -243,7 +211,7 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -277,7 +245,7 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -313,7 +281,7 @@ namespace Manager.ViewModel.Players
 								await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -344,7 +312,7 @@ namespace Manager.ViewModel.Players
 					?? (_addPlayerToSuspectListCommand = new RelayCommand(
 						async () =>
 						{
-							NotificationMessage = Properties.Resources.NotificationAddingPlayerToSuspectsList;
+							Notification = Properties.Resources.NotificationAddingPlayerToSuspectsList;
 							HasNotification = true;
 							IsBusy = true;
 
@@ -360,7 +328,7 @@ namespace Manager.ViewModel.Players
 								else
 								{
 									IsBusy = false;
-									NotificationMessage = Properties.Resources.NotificationPlayedAddedToSuspectsList;
+									Notification = Properties.Resources.NotificationPlayedAddedToSuspectsList;
 									await Task.Delay(5000);
 									HasNotification = false;
 								}
@@ -385,7 +353,7 @@ namespace Manager.ViewModel.Players
 					?? (_addPlayerToWhitelistCommand = new RelayCommand(
 						async () =>
 						{
-							NotificationMessage = Properties.Resources.NotificationAddingPlayerToWhitelist;
+							Notification = Properties.Resources.NotificationAddingPlayerToWhitelist;
 							HasNotification = true;
 							IsBusy = true;
 
@@ -401,7 +369,7 @@ namespace Manager.ViewModel.Players
 								else
 								{
 									IsBusy = false;
-									NotificationMessage = Properties.Resources.NotificationPlayerAddedToWhitelist;
+									Notification = Properties.Resources.NotificationPlayerAddedToWhitelist;
 									await Task.Delay(5000);
 									HasNotification = false;
 								}
@@ -441,7 +409,7 @@ namespace Manager.ViewModel.Players
 								
 								SaveFileDialog dialog = new SaveFileDialog
 								{
-									FileName = $"{CurrentDemo.Name.Substring(0, CurrentDemo.Name.Length - 4)}-{CurrentPlayer.Name}-{fileNameSuffix}.png",
+									FileName = $"{Demo.Name.Substring(0, Demo.Name.Length - 4)}-{CurrentPlayer.Name}-{fileNameSuffix}.png",
 									Filter = "PNG file (*.png)|*.png"
 								};
 
@@ -472,15 +440,15 @@ namespace Manager.ViewModel.Players
 		{
 			IsBusy = true;
 			HasNotification = true;
-			NotificationMessage = Properties.Resources.NotificationLoading;
-			Rounds = await _playerService.GetRoundListStatsAsync(CurrentDemo, CurrentPlayer);
-			EquipmentValueData = await _playerService.GetEquipmentValueChartAsync(CurrentDemo, CurrentPlayer);
-			MoneyEarnedData = await _playerService.GetCashEarnedChartAsync(CurrentDemo, CurrentPlayer);
-			DamageHealthData = await _playerService.GetDamageHealthChartAsync(CurrentDemo, CurrentPlayer);
-			DamageArmorData = await _playerService.GetDamageArmorChartAsync(CurrentDemo, CurrentPlayer);
-			TotalDamageHealthData = await _playerService.GetTotalDamageHealthChartAsync(CurrentDemo, CurrentPlayer);
-			TotalDamageArmorData = await _playerService.GetTotalDamageArmorChartAsync(CurrentDemo, CurrentPlayer);
-			WeaponKillData = await _playerService.GetWeaponKillChartAsync(CurrentDemo, CurrentPlayer);
+			Notification = Properties.Resources.NotificationLoading;
+			Rounds = await _playerService.GetRoundListStatsAsync(Demo, CurrentPlayer);
+			EquipmentValueData = await _playerService.GetEquipmentValueChartAsync(Demo, CurrentPlayer);
+			MoneyEarnedData = await _playerService.GetCashEarnedChartAsync(Demo, CurrentPlayer);
+			DamageHealthData = await _playerService.GetDamageHealthChartAsync(Demo, CurrentPlayer);
+			DamageArmorData = await _playerService.GetDamageArmorChartAsync(Demo, CurrentPlayer);
+			TotalDamageHealthData = await _playerService.GetTotalDamageHealthChartAsync(Demo, CurrentPlayer);
+			TotalDamageArmorData = await _playerService.GetTotalDamageArmorChartAsync(Demo, CurrentPlayer);
+			WeaponKillData = await _playerService.GetWeaponKillChartAsync(Demo, CurrentPlayer);
 			IsBusy = false;
 			HasNotification = false;
 		}
@@ -488,8 +456,6 @@ namespace Manager.ViewModel.Players
 		public override void Cleanup()
 		{
 			base.Cleanup();
-			HasNotification = false;
-			IsBusy = false;
 			CurrentPlayer = null;
 			EquipmentValueData.Clear();
 			Rounds.Clear();
@@ -499,7 +465,6 @@ namespace Manager.ViewModel.Players
 			TotalDamageArmorData.Clear();
 			TotalDamageHealthData.Clear();
 			WeaponKillData.Clear();
-			NotificationMessage = string.Empty;
 		}
 	}
 }

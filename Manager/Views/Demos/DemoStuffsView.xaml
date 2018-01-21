@@ -22,11 +22,11 @@
 	</UserControl.Resources>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+B" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 									Command="{Binding BackToDemoDetailsCommand}"
-									CommandParameter="{Binding CurrentDemo}" />
+									CommandParameter="{Binding Demo}" />
 		<KeyBinding Command="{Binding WatchPlayerStuffCommand}"
 					Gesture="CTRL+W" />
 	</UserControl.InputBindings>
@@ -48,7 +48,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -76,7 +76,7 @@
 					</i:Interaction.Triggers>
 				</ComboBox>
 
-				<ComboBox ItemsSource="{Binding CurrentDemo.Players}"
+				<ComboBox ItemsSource="{Binding Demo.Players}"
 						  SelectedItem="{Binding SelectedPlayer}"
 						  DisplayMemberPath ="Name"
 						  SelectedValuePath="Name"
@@ -124,9 +124,9 @@
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
-					<TextBlock Text="{Binding NotificationMessage}"
+					<TextBlock Text="{Binding Notification}"
 							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding HasNotificationMessage, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+							   Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>

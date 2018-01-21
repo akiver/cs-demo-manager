@@ -147,7 +147,7 @@
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
-					<TextBlock Text="{Binding NotificationMessage}"
+					<TextBlock Text="{Binding Notification}"
 							   Style="{StaticResource NotificationMessageStyle}"
 							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
@@ -157,7 +157,7 @@
 		<Grid Grid.Row="1"
 			  Margin="10">
 
-			<TabControl controls:TabControlHelper.IsUnderlined="True">
+			<TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
 				<controls:MetroTabItem Header="{x:Static properties:Resources.Rifle}">
 
 					<Grid>

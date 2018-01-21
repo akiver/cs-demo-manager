@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +13,6 @@ using System.Windows.Input;
 using Core;
 using Core.Models;
 using Core.Models.Source;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
@@ -23,6 +21,7 @@ using Manager.Internals;
 using Manager.Messages;
 using Manager.Models;
 using Manager.Services;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Manager.Views.Suspects;
 using Services;
@@ -31,7 +30,7 @@ using Services.Interfaces;
 
 namespace Manager.ViewModel.Suspects
 {
-	public class SuspectListViewModel : ViewModelBase, IDisposable
+	public class SuspectListViewModel : BaseViewModel, IDisposable
 	{
 		#region Properties
 
@@ -81,10 +80,6 @@ namespace Manager.ViewModel.Suspects
 
 		private bool _isRefreshing;
 
-		private string _notificationMessage;
-
-		private bool _isAnalyzing;
-
 		private bool _isShowOnlyBannedSuspects = Properties.Settings.Default.ShowOnlyBannedSuspects;
 
 		private CancellationTokenSource _cts = new CancellationTokenSource();
@@ -133,12 +128,6 @@ namespace Manager.ViewModel.Suspects
 			set { Set(() => IsRefreshing, ref _isRefreshing, value); }
 		}
 
-		public bool IsAnalyzing
-		{
-			get { return _isAnalyzing; }
-			set { Set(() => IsAnalyzing, ref _isAnalyzing, value); }
-		}
-
 		public string FilterText
 		{
 			get { return _filterText; }
@@ -147,12 +136,6 @@ namespace Manager.ViewModel.Suspects
 				Set(() => FilterText, ref _filterText, value);
 				_dataGridSuspectsCollection?.Refresh();
 			}
-		}
-
-		public string NotificationMessage
-		{
-			get { return _notificationMessage; }
-			set { Set(() => NotificationMessage, ref _notificationMessage, value); }
 		}
 
 		public bool IsShowOnlyBannedSuspects
@@ -206,7 +189,7 @@ namespace Manager.ViewModel.Suspects
 						if (IsLoadSuspects)
 						{
 							IsRefreshing = true;
-							NotificationMessage = Properties.Resources.NotificationRefreshing;
+							Notification = Properties.Resources.NotificationRefreshing;
 							await LoadSuspects();
 							if (!IsInDesignMode) IsRefreshing = false;
 							CommandManager.InvalidateRequerySuggested();
@@ -254,7 +237,7 @@ namespace Manager.ViewModel.Suspects
 								string steamInput = await _dialogService.ShowInputAsync(Properties.Resources.DialogAddSuspect, Properties.Resources.DialogEnterSteamId);
 								if (string.IsNullOrEmpty(steamInput)) return;
 
-								NotificationMessage = Properties.Resources.NotificationAddingSuspect;
+								Notification = Properties.Resources.NotificationAddingSuspect;
 								IsRefreshing = true;
 
 								string steamId = await _steamService.GetSteamIdFromUrlOrSteamId(steamInput);
@@ -346,7 +329,7 @@ namespace Manager.ViewModel.Suspects
 							}
 
 							IsRefreshing = true;
-							IsAnalyzing = true;
+							IsBusy = true;
 							List<Demo> demosFailed = new List<Demo>();
 							List<string> folders = await _cacheService.GetFoldersAsync();
 							List<Demo> demos = await _demosService.GetDemosHeader(folders);
@@ -357,7 +340,7 @@ namespace Manager.ViewModel.Suspects
 
 							for (int i = 0; i < demos.Count; i++)
 							{
-								if (demos[i].Source.GetType() != typeof(Pov) && IsAnalyzing)
+								if (demos[i].Source.GetType() != typeof(Pov) && IsBusy)
 								{
 									try
 									{
@@ -366,14 +349,14 @@ namespace Manager.ViewModel.Suspects
 											_cts = new CancellationTokenSource();
 										}
 
-										NotificationMessage = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
+										Notification = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
 										demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
 										await _cacheService.WriteDemoDataCache(demos[i]);
 										if (demos[i].Players.Any())
 										{
 											foreach (Player playerExtended in demos[i].Players)
 											{
-												NotificationMessage = Properties.Resources.NotificationAddingSuspects;
+												Notification = Properties.Resources.NotificationAddingSuspects;
 												await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
 											}
 										}
@@ -397,11 +380,11 @@ namespace Manager.ViewModel.Suspects
 								await _dialogService.ShowDemosFailedAsync(demosFailed);
 							}
 
-							NotificationMessage = Properties.Resources.NotificationRefreshing;
+							Notification = Properties.Resources.NotificationRefreshing;
 							await LoadSuspects();
 							CommandManager.InvalidateRequerySuggested();
 							IsRefreshing = false;
-							IsAnalyzing = false;
+							IsBusy = false;
 						},
 						() => !IsRefreshing));
 			}
@@ -433,7 +416,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsRefreshing = true;
-							NotificationMessage = Properties.Resources.NotificationSearching;
+							Notification = Properties.Resources.NotificationSearching;
 							List<Demo> demos = new List<Demo>();
 							foreach (Suspect suspect in SelectedSuspects)
 							{
@@ -473,7 +456,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsRefreshing = true;
-							NotificationMessage = Properties.Resources.NotificationRefreshing;
+							Notification = Properties.Resources.NotificationRefreshing;
 							await LoadSuspects();
 							IsRefreshing = false;
 							CommandManager.InvalidateRequerySuggested();
@@ -511,8 +494,8 @@ namespace Manager.ViewModel.Suspects
 					?? (_stopCommand = new RelayCommand(
 						() =>
 						{
-							IsAnalyzing = false;
-							NotificationMessage = Properties.Resources.NotificationStoppingAnalyze;
+							IsBusy = false;
+							Notification = Properties.Resources.NotificationStoppingAnalyze;
 						},
 						() => IsRefreshing));
 			}
@@ -558,7 +541,7 @@ namespace Manager.ViewModel.Suspects
 						async () =>
 						{
 							IsRefreshing = true;
-							NotificationMessage = Properties.Resources.NotificationMovingSuspectsToWhitelist;
+							Notification = Properties.Resources.NotificationMovingSuspectsToWhitelist;
 							foreach (Suspect suspect in SelectedSuspects.ToList())
 							{
 								bool hasMoved = await _cacheService.AddPlayerToWhitelist(suspect.SteamId);
@@ -590,7 +573,7 @@ namespace Manager.ViewModel.Suspects
 			if (IsInDesignMode)
 			{
 				DispatcherHelper.Initialize();
-				IsAnalyzing = true;
+				IsBusy = true;
 			}
 
 			Suspects = new ObservableCollection<Suspect>();
@@ -647,11 +630,11 @@ namespace Manager.ViewModel.Suspects
 
 			IsLoadSuspects = false;
 			IsRefreshing = true;
-			IsAnalyzing = true;
+			IsBusy = true;
 			List<Suspect> suspectList = await _steamService.GetBanStatusForUserList(m.SteamIdList);
 			UpdateSuspectList(suspectList);
 			IsRefreshing = false;
-			IsAnalyzing = false;
+			IsBusy = false;
 		}
 
 		private void UpdateSuspectList(List<Suspect> suspectList)

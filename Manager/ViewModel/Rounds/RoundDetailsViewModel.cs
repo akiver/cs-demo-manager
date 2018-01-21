@@ -6,13 +6,13 @@ using System.Windows;
 using Core;
 using Core.Models;
 using Core.Models.Events;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Properties;
 using Manager.Services;
 using Manager.Services.Configuration;
+using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Stats;
@@ -20,7 +20,7 @@ using Services.Models.Timelines;
 
 namespace Manager.ViewModel.Rounds
 {
-	public class RoundDetailsViewModel : ViewModelBase
+	public class RoundDetailsViewModel : SingleDemoViewModel
 	{
 		#region Properties
 
@@ -31,8 +31,6 @@ namespace Manager.ViewModel.Rounds
 		private readonly IPlayerService _playerService;
 
 		private readonly ICacheService _cacheService;
-
-		private Demo _currentDemo;
 
 		private int _roundNumber;
 
@@ -65,12 +63,6 @@ namespace Manager.ViewModel.Rounds
 		#endregion
 
 		#region Accessors
-
-		public Demo CurrentDemo
-		{
-			get { return _currentDemo; }
-			set { Set(() => CurrentDemo, ref _currentDemo, value); }
-		}
 
 		public int RoundNumber
 		{
@@ -142,12 +134,12 @@ namespace Manager.ViewModel.Rounds
 						demo =>
 						{
 							var detailsViewModel = new ViewModelLocator().DemoDetails;
-							detailsViewModel.CurrentDemo = demo;
+							detailsViewModel.Demo = demo;
 							var mainViewModel = new ViewModelLocator().Main;
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 						},
-						demo => CurrentDemo != null));
+						demo => Demo != null));
 			}
 		}
 
@@ -167,7 +159,7 @@ namespace Manager.ViewModel.Rounds
 							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+						GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 						{
 							SteamExePath = AppSettings.SteamExePath(),
 							Width = Settings.Default.ResolutionWidth,
@@ -203,7 +195,7 @@ namespace Manager.ViewModel.Rounds
 							RoundNumber++;
 							await LoadDatas();
 						},
-						() => RoundNumber < CurrentDemo.Rounds.Count));
+						() => RoundNumber < Demo.Rounds.Count));
 			}
 		}
 
@@ -242,14 +234,14 @@ namespace Manager.ViewModel.Rounds
 
 		private async Task LoadDatas()
 		{
-			CurrentDemo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(CurrentDemo);
-			CurrentRound = CurrentDemo.Rounds.First(r => r.Number == RoundNumber);
+			Demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(Demo);
+			CurrentRound = Demo.Rounds.First(r => r.Number == RoundNumber);
 			PeriodStart = DateTime.Today;
 			PeriodEnd = DateTime.Today.AddSeconds(CurrentRound.Duration);
 			VisibleStartTime = PeriodStart.AddSeconds(-5);
 			VisibleEndTime = PeriodEnd.AddSeconds(5);
-			RoundEventList = await _roundService.GetTimeLineEventList(CurrentDemo, CurrentRound);
-			PlayersStats = await _playerService.GetPlayerRoundStatsListAsync(CurrentDemo, CurrentRound);
+			RoundEventList = await _roundService.GetTimeLineEventList(Demo, CurrentRound);
+			PlayersStats = await _playerService.GetPlayerRoundStatsListAsync(Demo, CurrentRound);
 		}
 
 		public RelayCommand<KillEvent> WatchKillCommand
@@ -265,7 +257,7 @@ namespace Manager.ViewModel.Rounds
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(CurrentDemo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Settings.Default.ResolutionWidth,
@@ -298,7 +290,7 @@ namespace Manager.ViewModel.Rounds
 				DispatcherHelper.Initialize();
 				Application.Current.Dispatcher.Invoke(async () =>
 				{
-					CurrentDemo = await _cacheService.GetDemoDataFromCache(string.Empty);
+					Demo = await _cacheService.GetDemoDataFromCache(string.Empty);
 					RoundNumber = 10;
 					await LoadDatas();
 				});

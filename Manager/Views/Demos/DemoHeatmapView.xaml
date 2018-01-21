@@ -24,7 +24,7 @@
 
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding CurrentDemo}"
+					CommandParameter="{Binding Demo}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding GenerateCommand}"
 					Gesture="CTRL+G" />
@@ -32,7 +32,7 @@
 					Gesture="CTRL+S" />
 		<mouse:MouseBindingExtended Gesture="XButton1"
 									Command="{Binding BackToDemoDetailsCommand}"
-									CommandParameter="{Binding CurrentDemo}" />
+									CommandParameter="{Binding Demo}" />
 	</UserControl.InputBindings>
 
 	<i:Interaction.Triggers>
@@ -53,7 +53,7 @@
 			<StackPanel Orientation="Horizontal">
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding CurrentDemo}"
+						CommandParameter="{Binding Demo}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
@@ -73,7 +73,7 @@
 						  DisplayMemberPath ="Title"
 						  SelectedValuePath="Title"
 						  Margin="5"
-						  IsEnabled="{Binding Path=IsGenerating, Converter={StaticResource BooleanInvertedConverter}}"/>
+						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
 				<Button Command="{Binding GenerateCommand}"
 						Style="{DynamicResource GeneralButton}"
 						ToolTip="{x:Static properties:Resources.ToolTipGenerateHeatmap}">
@@ -125,13 +125,13 @@
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center"
 							Margin="5">
-					<controls:ProgressRing IsActive="{Binding IsGenerating}"
+					<controls:ProgressRing IsActive="{Binding IsBusy}"
 										   Foreground="{DynamicResource BlackColorBrush}"
 										   Width="30"
 										   Height="30" />
 					<TextBlock Text="{x:Static properties:Resources.NotificationGenerating}"
 							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding IsGenerating, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
 				</StackPanel>
 
 			</StackPanel>
