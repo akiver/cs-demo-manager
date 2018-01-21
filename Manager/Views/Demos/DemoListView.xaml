@@ -773,8 +773,13 @@
 						Orientation="Horizontal">
 				<TextBlock Text="{x:Static properties:Resources.CommentLabel}"
 						   Style="{StaticResource CurrentFolderStyle}" />
-				<TextBlock Text="{Binding SelectedDemo.Comment}"
-						   Style="{StaticResource TextBlockSmall}" />
+				<ScrollViewer MaxHeight="100"
+							  HorizontalScrollBarVisibility="Auto"
+							  VerticalScrollBarVisibility="Auto">
+					<TextBlock Text="{Binding SelectedDemo.Comment}"
+							   TextWrapping="Wrap"
+							   Style="{StaticResource TextBlockSmall}" />
+				</ScrollViewer>
 			</StackPanel>
 			<StackPanel Grid.Column="1"
 						Orientation="Horizontal">
