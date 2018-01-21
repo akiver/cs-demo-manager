@@ -107,7 +107,7 @@
 				<TextBlock Grid.Column="1"
 						   Style="{StaticResource BigTitleStyle}">
 					<TextBlock.Text>
-						<MultiBinding StringFormat="'{0} #{1}}'">
+						<MultiBinding StringFormat="{}{0} #{1}">
 							<Binding Source="{x:Static properties:Resources.Round}"/>
 							<Binding Path="CurrentRound.Number"/>
 						</MultiBinding>
