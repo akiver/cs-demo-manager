@@ -114,6 +114,7 @@
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.hr.resx" />
+    <EmbeddedResource Include="Properties\Resources.hu.resx" />
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
@@ -191,6 +192,7 @@
     <XliffResource Include="MultilingualResources\Bot.es.xlf" />
     <XliffResource Include="MultilingualResources\Bot.fr.xlf" />
     <XliffResource Include="MultilingualResources\Bot.hr.xlf" />
+    <XliffResource Include="MultilingualResources\Bot.hu.xlf" />
     <XliffResource Include="MultilingualResources\Bot.it.xlf" />
     <XliffResource Include="MultilingualResources\Bot.ja.xlf" />
     <XliffResource Include="MultilingualResources\Bot.pl.xlf" />

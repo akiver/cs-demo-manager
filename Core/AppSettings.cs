@@ -108,6 +108,12 @@ namespace Core
 			},
 			new Language
 			{
+				Key = "hu-HU",
+				Name = "Hungarian",
+				IsEnabled = false
+			},
+			new Language
+			{
 				Key = "it-IT",
 				Name = "Italian",
 				IsEnabled = false

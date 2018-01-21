@@ -340,6 +340,7 @@
     <EmbeddedResource Include="Properties\Resources.es.resx" />
     <EmbeddedResource Include="Properties\Resources.fr.resx" />
     <EmbeddedResource Include="Properties\Resources.hr.resx" />
+    <EmbeddedResource Include="Properties\Resources.hu.resx" />
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
@@ -365,6 +366,7 @@
     <XliffResource Include="MultilingualResources\Services.es.xlf" />
     <XliffResource Include="MultilingualResources\Services.fr.xlf" />
     <XliffResource Include="MultilingualResources\Services.hr.xlf" />
+    <XliffResource Include="MultilingualResources\Services.hu.xlf" />
     <XliffResource Include="MultilingualResources\Services.it.xlf" />
     <XliffResource Include="MultilingualResources\Services.ja.xlf" />
     <XliffResource Include="MultilingualResources\Services.pl.xlf" />
