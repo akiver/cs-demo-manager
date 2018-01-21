@@ -12,10 +12,55 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="colors" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Bomb" xml:space="preserve">
+    <value>Bomba</value>
   </data>
-  <data name="steam_api_key" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  <data name="Decoy" xml:space="preserve">
+    <value>Csali</value>
+  </data>
+  <data name="DefusedTheBombOnBombSite" xml:space="preserve">
+    <value>{0} hatástalanította a bombát {1} bomba lerakón</value>
+  </data>
+  <data name="Flashbang" xml:space="preserve">
+    <value>Villanógránát</value>
+  </data>
+  <data name="HE" xml:space="preserve">
+    <value>Robbanógránát</value>
+  </data>
+  <data name="Killed" xml:space="preserve">
+    <value>{0} megölte{1}-t</value>
+  </data>
+  <data name="Kills" xml:space="preserve">
+    <value>Ölések</value>
+  </data>
+  <data name="Molotov" xml:space="preserve">
+    <value>Molotov</value>
+  </data>
+  <data name="PlantedTheBombOnBombSite" xml:space="preserve">
+    <value>{0} telepítette a bombát{1} lerakón</value>
+  </data>
+  <data name="Smoke" xml:space="preserve">
+    <value>Füst</value>
+  </data>
+  <data name="TheBombExplodedOnBombSite" xml:space="preserve">
+    <value>A bomba felrobbant {0} lerakón</value>
+  </data>
+  <data name="ThrownDecoy" xml:space="preserve">
+    <value>{0} dobott egy csalit</value>
+  </data>
+  <data name="ThrownFlashbang" xml:space="preserve">
+    <value>{0} dobott egy villanógránátot</value>
+  </data>
+  <data name="ThrownHeGrenade" xml:space="preserve">
+    <value>{0} dobott egy robbanógránátot</value>
+  </data>
+  <data name="ThrownIncendiary" xml:space="preserve">
+    <value>{0} dobott egy tűzgránátot</value>
+  </data>
+  <data name="ThrownMolotov" xml:space="preserve">
+    <value>{0} dobott egy molotovot</value>
+  </data>
+  <data name="ThrownSmoke" xml:space="preserve">
+    <value>{0} dobott egy füstöt</value>
   </data>
 </root>

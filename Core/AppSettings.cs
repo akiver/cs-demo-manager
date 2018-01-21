@@ -110,7 +110,7 @@ namespace Core
 			{
 				Key = "hu-HU",
 				Name = "Hungarian",
-				IsEnabled = false
+				IsEnabled = true
 			},
 			new Language
 			{
