@@ -1325,27 +1325,22 @@ namespace Services.Concrete.Analyzer
 					case 1:
 						player.OneKillCount++;
 						Demo.OneKillCount++;
-						CurrentRound.OneKillCount++;
 						break;
 					case 2:
 						player.TwoKillCount++;
 						Demo.TwoKillCount++;
-						CurrentRound.TwoKillCount++;
 						break;
 					case 3:
 						player.ThreeKillCount++;
 						Demo.ThreeKillCount++;
-						CurrentRound.ThreeKillCount++;
 						break;
 					case 4:
 						player.FourKillCount++;
 						Demo.FourKillCount++;
-						CurrentRound.FourKillCount++;
 						break;
 					case 5:
 						player.FiveKillCount++;
 						Demo.FiveKillCount++;
-						CurrentRound.FiveKillCount++;
 						break;
 				}
 			}
