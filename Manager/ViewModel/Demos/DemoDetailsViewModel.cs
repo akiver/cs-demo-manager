@@ -15,7 +15,6 @@ using Core;
 using Core.Models;
 using Core.Models.Source;
 using Core.Models.Steam;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
@@ -24,14 +23,16 @@ using Manager.Messages;
 using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
-using Manager.Services.Configuration;
 using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Manager.Views.Players;
 using Manager.Views.Rounds;
+using Services.Concrete;
 using Services.Concrete.Excel;
 using Services.Concrete.Maps;
+using Services.Concrete.Movie;
 using Services.Interfaces;
+using Services.Models;
 using Application = System.Windows.Application;
 using Round = Core.Models.Round;
 
@@ -517,7 +518,7 @@ namespace Manager.ViewModel.Demos
 								FocusPlayerSteamId = player.SteamId,
 							};
 							GameLauncher launcher = new GameLauncher(config);
-							launcher.WatchDemoAt(firstRound.Tick, false);
+							launcher.WatchDemoAt(firstRound.Tick);
 						},
 						suspect => SelectedPlayer != null));
 			}

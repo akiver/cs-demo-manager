@@ -2554,9 +2554,6 @@ Mensagem de Erro:
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
     <value>Seu arquivo de configuração está corrompido. Reinicie o aplicativo para redefinir sua configuração.</value>
   </data>
-  <data name="HlaeNotFoundException" xml:space="preserve">
-    <value>HLAE não encontrado. Instale-o, permitindo as configurações.</value>
-  </data>
   <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
     <value>Habilite a pasta principal de configuração de criação de filmes</value>
   </data>
@@ -2669,11 +2666,5 @@ Digite link de compartilhamento (exemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</
   </data>
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Assistido</value>
-  </data>
-  <data name="execute_command" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="vd" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\scripts\vd.job;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

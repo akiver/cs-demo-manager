@@ -11,10 +11,12 @@ using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Properties;
 using Manager.Services;
-using Manager.Services.Configuration;
 using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
+using Services.Concrete;
+using Services.Concrete.Movie;
 using Services.Interfaces;
+using Services.Models;
 using Services.Models.Stats;
 using Services.Models.Timelines;
 

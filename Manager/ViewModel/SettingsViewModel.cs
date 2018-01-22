@@ -16,6 +16,7 @@ using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
 using Manager.ViewModel.Shared;
+using Services.Concrete.Movie;
 using Services.Interfaces;
 using Application = System.Windows.Application;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;

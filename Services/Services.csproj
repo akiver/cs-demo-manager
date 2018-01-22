@@ -137,9 +137,14 @@
     <Compile Include="Concrete\Excel\Sheets\Single\RoundsSheet.cs" />
     <Compile Include="Concrete\Excel\SingleExport.cs" />
     <Compile Include="Concrete\FlashbangService.cs" />
+    <Compile Include="Concrete\GameLauncher.cs" />
     <Compile Include="Concrete\HeatmapService.cs" />
     <Compile Include="Concrete\KillService.cs" />
     <Compile Include="Concrete\Maps\MapService.cs" />
+    <Compile Include="Concrete\Movie\FFmpegService.cs" />
+    <Compile Include="Concrete\Movie\HlaeService.cs" />
+    <Compile Include="Concrete\Movie\MovieService.cs" />
+    <Compile Include="Concrete\Movie\VirtualDubService.cs" />
     <Compile Include="Concrete\PlayerService.cs" />
     <Compile Include="Concrete\RoundService.cs" />
     <Compile Include="Concrete\SoundService.cs" />
@@ -157,6 +162,8 @@
     <Compile Include="Design\RoundDesignService.cs" />
     <Compile Include="Design\SteamDesignService.cs" />
     <Compile Include="Design\StuffDesignService.cs" />
+    <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
+    <Compile Include="Exceptions\Launcher\HlaeNotFound.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
     <Compile Include="Extensions.cs" />
@@ -185,8 +192,11 @@
     <Compile Include="Models\DemoFilter.cs" />
     <Compile Include="Models\Excel\PlayerStats.cs" />
     <Compile Include="Models\Excel\WeaponsData.cs" />
+    <Compile Include="Models\GameLauncherConfiguration.cs" />
+    <Compile Include="Models\GitHub\LatestRelease.cs" />
     <Compile Include="Models\Heatmap\HeatmapConfiguration.cs" />
     <Compile Include="Models\Heatmap\HeatmapPointComparer.cs" />
+    <Compile Include="Models\Movie\MovieConfiguration.cs" />
     <Compile Include="Models\Stats\FlashbangDataPoint.cs" />
     <Compile Include="Models\Stats\KillDataPoint.cs" />
     <Compile Include="Models\Stats\MapStats.cs" />
@@ -231,6 +241,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="resources\scripts\vd.job" />
     <None Include="resources\sounds\bomb_defused.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -377,6 +388,27 @@
     <XliffResource Include="MultilingualResources\Services.tr.xlf" />
     <XliffResource Include="MultilingualResources\Services.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Services.zh-Hant.xlf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\execute_command.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\main.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\screen_fade_start.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\skip_ahead.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\spec_player.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\stop_playback.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="resources\vdm\text_message_start.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />

@@ -4,11 +4,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Core;
-using Manager.Models.Movie;
-using Manager.Services.Configuration;
-using Services;
+using Services.Models;
+using Services.Models.Movie;
 
-namespace Manager.Services
+namespace Services.Concrete.Movie
 {
 	public class MovieService
 	{
@@ -402,7 +401,7 @@ namespace Manager.Services
 			return Task.Run(() => OnHLAEClosed?.Invoke());
 		}
 
-		private void KillProcess(string processName)
+		private static void KillProcess(string processName)
 		{
 			Process[] currentProcess = Process.GetProcessesByName(processName);
 			if (currentProcess.Length > 0) currentProcess[0].Kill();

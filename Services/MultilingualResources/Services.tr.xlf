@@ -10,9 +10,9 @@
           <source>Bomb</source>
           <target state="new">Bomb</target>
         </trans-unit>
-        <trans-unit id="colors" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="colors" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
-          <target state="needs-review-translation">..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+          <target state="final">..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
         </trans-unit>
         <trans-unit id="Decoy" translate="yes" xml:space="preserve">
           <source>Decoy</source>
@@ -50,9 +50,9 @@
           <source>Smoke</source>
           <target state="new">Smoke</target>
         </trans-unit>
-        <trans-unit id="steam_api_key" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+        <trans-unit id="steam_api_key" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+          <target state="final">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
         <trans-unit id="TheBombExplodedOnBombSite" translate="yes" xml:space="preserve">
           <source>The bomb exploded on bomb site {0}</source>
@@ -81,6 +81,42 @@
         <trans-unit id="ThrownSmoke" translate="yes" xml:space="preserve">
           <source>{0} thrown a smoke</source>
           <target state="new">{0} thrown a smoke</target>
+        </trans-unit>
+        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
+          <source>HLAE not found. Please install it by enabling it from settings.</source>
+          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
+        </trans-unit>
+        <trans-unit id="execute_command" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="main" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="screen_fade_start" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="skip_ahead" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="spec_player" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="stop_playback" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="text_message_start" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="vd" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="final">..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
       </group>
     </body>

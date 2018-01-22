@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Core;
 using ICSharpCode.SharpZipLib.Zip;
 
-namespace Manager.Services
+namespace Services.Concrete.Movie
 {
 	public static class FFmpegService
 	{

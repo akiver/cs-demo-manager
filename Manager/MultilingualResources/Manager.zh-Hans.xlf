@@ -14,30 +14,6 @@
           <source>..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
           <target state="final">..\Resources\images\model.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
         </trans-unit>
-        <trans-unit id="skip_ahead" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
-          <source>..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="final">..\Resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
-        <trans-unit id="spec_player" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
-          <source>..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="final">..\Resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
-        <trans-unit id="stop_playback" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
-          <source>..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="final">..\Resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
-        <trans-unit id="screen_fade_start" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
-          <source>..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="final">..\Resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
-        <trans-unit id="text_message_start" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
-          <source>..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="final">..\Resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
-        <trans-unit id="main" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
-          <source>..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="final">..\Resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
         <trans-unit id="Analyze" translate="yes" xml:space="preserve">
           <source>Analyze</source>
           <target state="final">分析</target>
@@ -3422,10 +3398,6 @@ Message Error :
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
           <target state="final">你的配置文件是损坏的。请重启应用程序来重置你的配置。</target>
         </trans-unit>
-        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
-          <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
-        </trans-unit>
         <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
           <source>Enable movie making config parent folder</source>
           <target state="new">Enable movie making config parent folder</target>
@@ -3629,15 +3601,6 @@ You may have missing data for this demos.</source>
           <target state="new">The following demos are corrupted:
 {0}
 You may have missing data for this demos.</target>
-        </trans-unit>
-        <trans-unit id="execute_command" translate="yes" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
-          <source>..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
-        </trans-unit>
-        <trans-unit id="vd" translate="yes" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
-          <source>..\Resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
-          <target state="needs-review-translation">..\Resources\scripts\vd.job;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
       </group>
     </body>

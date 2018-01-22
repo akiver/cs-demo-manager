@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Manager.Exceptions.Launcher
+namespace Services.Exceptions.Launcher
 {
 	public class CsgoNotFoundException : Exception
 	{

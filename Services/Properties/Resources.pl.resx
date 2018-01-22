@@ -63,4 +63,7 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} rzucił granat dymny</value>
   </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>Nie znaleziono HLAE. Zainstaluj HLAE włączając go w ustawieniach.</value>
+  </data>
 </root>

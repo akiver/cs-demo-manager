@@ -69,4 +69,7 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} jogou uma smoke</value>
   </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE não encontrado. Instale-o, permitindo as configurações.</value>
+  </data>
 </root>

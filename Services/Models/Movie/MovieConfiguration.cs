@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using Core.Models;
 
-namespace Manager.Models.Movie
+namespace Services.Models.Movie
 {
 	public class MovieConfiguration
 	{
 		public Demo Demo { get; set; }
-		/// <summary>
+		/// <summary>s
 		/// Use VirtualDub or FFmpeg?
 		/// </summary>
 		public bool UseVirtualDub { get; set; } = true;

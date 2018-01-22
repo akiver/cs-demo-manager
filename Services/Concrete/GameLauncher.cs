@@ -8,12 +8,11 @@ using Core;
 using Core.Models;
 using Core.Models.Events;
 using DemoInfo;
-using Manager.Exceptions.Launcher;
-using Manager.Services.Configuration;
-using Services;
+using Services.Exceptions.Launcher;
+using Services.Models;
 using Player = Core.Models.Player;
 
-namespace Manager.Services
+namespace Services.Concrete
 {
 	public class GameLauncher : IDisposable
 	{
@@ -141,7 +140,7 @@ namespace Manager.Services
 			});
 		}
 
-		internal async void WatchHighlightDemo(bool fromPlayerPerspective)
+		public async void WatchHighlightDemo(bool fromPlayerPerspective)
 		{
 			if (_config.UseCustomActionsGeneration)
 			{
@@ -163,7 +162,7 @@ namespace Manager.Services
 			await StartGame();
 		}
 
-		internal async void WatchLowlightDemo(bool fromPlayerPerspective)
+		public async void WatchLowlightDemo(bool fromPlayerPerspective)
 		{
 			if (_config.UseCustomActionsGeneration)
 			{
@@ -186,7 +185,7 @@ namespace Manager.Services
 			await StartGame();
 		}
 
-		internal async void WatchDemoAt(int tick, bool delay = false)
+		public async void WatchDemoAt(int tick, bool delay = false)
 		{
 			if (delay)
 			{
@@ -202,7 +201,7 @@ namespace Manager.Services
 			await StartGame();
 		}
 
-		internal async void WatchPlayerStuff(Player player, string selectedType)
+		public async void WatchPlayerStuff(Player player, string selectedType)
 		{
 			EquipmentElement type = EquipmentElement.Unknown;
 			switch (selectedType)

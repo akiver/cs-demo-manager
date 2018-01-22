@@ -14,12 +14,13 @@ using Core.Models;
 using Core.Models.Source;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
-using Manager.Models.Movie;
 using Manager.Properties;
 using Manager.Services;
 using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
+using Services.Concrete.Movie;
 using Services.Interfaces;
+using Services.Models.Movie;
 using Services.Models.Timelines;
 using Telerik.Windows.Controls;
 #endregion

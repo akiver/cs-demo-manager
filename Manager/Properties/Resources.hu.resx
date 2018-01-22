@@ -2553,9 +2553,6 @@ Hibaüzenet:
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
     <value>A konfigurációja hibás. Kérem indítsa újra az alkalmazást a konfigurációja újrakonfigurálásához.</value>
   </data>
-  <data name="HlaeNotFoundException" xml:space="preserve">
-    <value>HLAE nem található. Kérem telepítse, úgy, hogy aktiválja a beállításokban.</value>
-  </data>
   <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
     <value>Engedélyezze a film készítő konfigurációt a szülőkönyvtárban</value>
   </data>

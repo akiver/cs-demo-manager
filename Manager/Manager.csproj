@@ -155,8 +155,6 @@
     <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToMinimalDateConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
-    <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
-    <Compile Include="Exceptions\Launcher\HlaeNotFound.cs" />
     <Compile Include="Internals\Extensions.cs" />
     <Compile Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml.cs">
       <DependentUpon>MultiSelectComboBox.xaml</DependentUpon>
@@ -182,8 +180,6 @@
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\Formatters\DemoMovieIntervalFormatter.cs" />
     <Compile Include="Models\Selectors\DemoTimelineTemplateSelector.cs" />
-    <Compile Include="Models\GitHub\LatestRelease.cs" />
-    <Compile Include="Models\Movie\MovieConfiguration.cs" />
     <Compile Include="Models\Selectors\RankPointTemplateSelector.cs" />
     <Compile Include="Models\Selectors\RoundTimelineTemplateSelector.cs" />
     <Compile Include="Models\PlayerColor.cs" />
@@ -194,12 +190,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Services\Configuration\GameLauncherConfiguration.cs" />
-    <Compile Include="Services\FFmpegService.cs" />
-    <Compile Include="Services\HlaeService.cs" />
     <Compile Include="Services\IDialogService.cs" />
-    <Compile Include="Services\MovieService.cs" />
-    <Compile Include="Services\VirtualDubService.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoMovieViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
@@ -358,7 +349,6 @@
     </Page>
     <Resource Include="resources\Entypo.ttf" />
     <Compile Include="Services\DialogService.cs" />
-    <Compile Include="Services\GameLauncher.cs" />
     <Compile Include="ViewModel\Accounts\AccountOverallViewModel.cs" />
     <Compile Include="ViewModel\Accounts\AccountMapsViewModel.cs" />
     <Compile Include="ViewModel\Accounts\AccountProgressViewModel.cs" />
@@ -544,7 +534,6 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <Resource Include="resources\scripts\vd.job" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -605,15 +594,8 @@
     <Content Include="boiler.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="resources\vdm\main.txt" />
-    <Resource Include="resources\vdm\skip_ahead.txt" />
-    <Resource Include="resources\vdm\spec_player.txt" />
-    <Resource Include="resources\vdm\stop_playback.txt" />
-    <Resource Include="resources\vdm\screen_fade_start.txt" />
-    <Resource Include="resources\vdm\text_message_start.txt" />
     <Resource Include="resources\WindowsIcons-license.txt" />
     <Resource Include="resources\Entypo-license.txt" />
-    <Resource Include="resources\vdm\execute_command.txt" />
     <Content Include="steam_api.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

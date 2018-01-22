@@ -63,4 +63,7 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} dobott egy füstöt</value>
   </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE nem található. Kérem telepítse, úgy, hogy aktiválja a beállításokban.</value>
+  </data>
 </root>

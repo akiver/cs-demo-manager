@@ -63,4 +63,7 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} a jetée une fumigène</value>
   </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</value>
+  </data>
 </root>

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace Manager.Models.GitHub
+namespace Services.Models.GitHub
 {
 	public class Asset
 	{

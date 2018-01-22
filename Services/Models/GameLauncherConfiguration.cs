@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Core.Models;
 
-namespace Manager.Services.Configuration
+namespace Services.Models
 {
 	public class GameLauncherConfiguration
 	{

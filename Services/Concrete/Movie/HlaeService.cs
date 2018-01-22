@@ -4,11 +4,11 @@ using System.Net;
 using System.Threading.Tasks;
 using Core;
 using ICSharpCode.SharpZipLib.Zip;
-using Manager.Models.GitHub;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using Services.Models.GitHub;
 
-namespace Manager.Services
+namespace Services.Concrete.Movie
 {
 	public static class HlaeService
 	{

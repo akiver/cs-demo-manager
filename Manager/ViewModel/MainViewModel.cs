@@ -16,6 +16,7 @@ using Manager.Messages;
 using Manager.Services;
 using Manager.Views.Demos;
 using Manager.Views.Suspects;
+using Services.Concrete.Movie;
 using Services.Interfaces;
 using WpfPageTransitions;
 

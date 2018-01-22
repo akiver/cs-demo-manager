@@ -5,7 +5,6 @@ using Manager.ViewModel.Accounts;
 using Manager.ViewModel.Demos;
 using Manager.ViewModel.Players;
 using Manager.ViewModel.Rounds;
-using Manager.ViewModel.Shared;
 using Manager.ViewModel.Suspects;
 using Microsoft.Practices.ServiceLocation;
 using Services.Concrete;

@@ -2553,9 +2553,6 @@ Mensaje de error:
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
     <value>Tu archivo de configuración está corrupto. Por favor, reinicia la aplicación para restablecer tu configuración.</value>
   </data>
-  <data name="HlaeNotFoundException" xml:space="preserve">
-    <value>HLAE no encontrado. Por favor instálalo activándolo desde la configuración.</value>
-  </data>
   <data name="EnableMovieMakingConfigParentFolder" xml:space="preserve">
     <value>Activa la carpeta raíz de la configuración del creador de vídeos</value>
   </data>
@@ -2662,11 +2659,5 @@ Por favor introduce el código para compartir (ejemplo: CSGO-orkmt-Z8udN-apVEh-G
   </data>
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Vista</value>
-  </data>
-  <data name="execute_command" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
-  </data>
-  <data name="vd" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\scripts\vd.job;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

@@ -63,4 +63,7 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} lanzó una granada de humo</value>
   </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>HLAE no encontrado. Por favor instálalo activándolo desde la configuración.</value>
+  </data>
 </root>

@@ -12,10 +12,12 @@ using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Properties;
 using Manager.Services;
-using Manager.Services.Configuration;
 using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
+using Services.Concrete;
+using Services.Concrete.Movie;
 using Services.Interfaces;
+using Services.Models;
 using Services.Models.Charts;
 using Services.Models.Stats;
 using Telerik.Windows.Controls;
@@ -227,7 +229,7 @@ namespace Manager.ViewModel.Players
 								FocusPlayerSteamId = CurrentPlayer.SteamId,
 							};
 							GameLauncher launcher = new GameLauncher(config);
-							launcher.WatchDemoAt(tick, false);
+							launcher.WatchDemoAt(tick);
 						}));
 			}
 		}
