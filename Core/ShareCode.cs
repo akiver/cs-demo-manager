@@ -93,9 +93,10 @@ namespace Core
 			byte[] tvPortIdBytes = new byte[sizeof(UInt32)];
 
 			byte[] all = big.ToByteArray().Reverse().ToArray();
-			Array.Copy(all, 0, matchIdBytes, 0, sizeof(UInt64));
-			Array.Copy(all, sizeof(UInt64), outcomeIdBytes, 0, sizeof(UInt64));
-			Array.Copy(all, 2 * sizeof(UInt64), tvPortIdBytes, 0, sizeof(UInt16));
+			// there is an additional byte in BitInteger which represent positive values
+			Array.Copy(all, 1, matchIdBytes, 0, sizeof(UInt64));
+			Array.Copy(all, 1 + sizeof(UInt64), outcomeIdBytes, 0, sizeof(UInt64));
+			Array.Copy(all, 1 + 2 * sizeof(UInt64), tvPortIdBytes, 0, sizeof(UInt16));
 
 			ShareCodeStruct s = new ShareCodeStruct
 			{
