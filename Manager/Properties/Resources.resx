@@ -2813,4 +2813,7 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</valu
 {0}
 You may have missing data for this demos.</value>
   </data>
+  <data name="UseSimpleRadarCheckbox" xml:space="preserve">
+    <value>Use Simple Radar overviews</value>
+  </data>
 </root>

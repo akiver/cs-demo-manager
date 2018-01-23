@@ -29,6 +29,18 @@ namespace Services.Concrete.Maps
 		private const string COAST = "de_coast";
 		private const string MIKLA = "de_mikla";
 
+		public static string[] SimpleRadarMaps =
+		{
+			"de_cache",
+			"de_cbble",
+			"de_mirage",
+			"de_new_dust2",
+			"de_new_inferno",
+			"de_new_nuke",
+			"de_overpass",
+			"de_train"
+		};
+
 		public static string[] Maps = {
 			DUST2, INFERNO, NUKE, CACHE, SEASON, TRAIN, CBBLE, OVERPASS,
 			MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA
@@ -126,11 +138,14 @@ namespace Services.Concrete.Maps
 			return (float)((Map.PosY - y) / Map.Scale);
 		}
 
-		public WriteableBitmap GetWriteableImage()
+		public WriteableBitmap GetWriteableImage(bool useSimpleRadar = true)
 		{
 			try
 			{
-				StreamResourceInfo sri = System.Windows.Application.GetResourceStream(new Uri(AppSettings.RESOURCES_URI + "images/maps/overview/" + Map.Name + ".png", UriKind.RelativeOrAbsolute));
+				string imagesPath = AppSettings.RESOURCES_URI + "images/maps/overview/";
+				if (useSimpleRadar && Array.IndexOf(SimpleRadarMaps, Map.Name) >= 0) imagesPath += "simpleradar/";
+				Uri uri = new Uri(imagesPath + Map.Name + ".png", UriKind.RelativeOrAbsolute);
+				StreamResourceInfo sri = System.Windows.Application.GetResourceStream(uri);
 				if (sri != null)
 				{
 					using (Stream s = sri.Stream)

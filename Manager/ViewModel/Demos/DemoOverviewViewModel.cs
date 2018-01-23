@@ -321,7 +321,10 @@ namespace Manager.ViewModel.Demos
 							Events.Clear();
 
 							_mapService.InitMap(Demo);
-							_drawService = new DrawService(_mapService);
+							_drawService = new DrawService(_mapService)
+							{
+								UseSimpleRadar = Settings.Default.UseSimpleRadar,
+							};
 
 							Player player = SelectedPlayer;
 							Round round = SelectedRound;

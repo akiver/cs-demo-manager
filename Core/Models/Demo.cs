@@ -6,7 +6,6 @@ using System.Linq;
 using System;
 using System.Collections.Specialized;
 using System.Globalization;
-using System.IO;
 using Core.Models.Events;
 using DemoInfo;
 using GalaSoft.MvvmLight.Threading;

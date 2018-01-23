@@ -541,6 +541,9 @@
 									  SelectedItem="{Binding Source={StaticResource Locator}, Path=Settings.SelectedTheme}"
 									  DisplayMemberPath="Title"
 									  SelectedValuePath="Id" />
+							<CheckBox Content="{x:Static properties:Resources.UseSimpleRadarCheckbox}"
+									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.UseSimpleRadar}"
+									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							<TextBlock Text="{x:Static properties:Resources.Language}"
 									   Style="{StaticResource TitleSettingsStyle}" />
 							<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Languages}"

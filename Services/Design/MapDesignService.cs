@@ -19,7 +19,7 @@ namespace Services.Design
 			Map = new Dust2();
 		}
 
-		public WriteableBitmap GetWriteableImage()
+		public WriteableBitmap GetWriteableImage(bool useSimpleRadar = false)
 		{
 			try
 			{

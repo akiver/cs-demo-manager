@@ -2704,4 +2704,7 @@ Veuillez saisir le code de partage (exemple: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR)
 {0}
 Il est possible que des données soient manquantes pour celles-ci.</value>
   </data>
+  <data name="UseSimpleRadarCheckbox" xml:space="preserve">
+    <value>Utiliser les overviews de Simple Radar</value>
+  </data>
 </root>

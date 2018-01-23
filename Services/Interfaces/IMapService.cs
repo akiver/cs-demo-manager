@@ -5,11 +5,11 @@ namespace Services.Interfaces
 {
 	public interface IMapService
 	{
-		Map Map { get;set; }
+		Map Map { get; set; }
 
 		void InitMap(Demo demo);
 
-		WriteableBitmap GetWriteableImage();
+		WriteableBitmap GetWriteableImage(bool useSimpleRadar = true);
 
 		float CalculatePointToResolutionX(float x);
 

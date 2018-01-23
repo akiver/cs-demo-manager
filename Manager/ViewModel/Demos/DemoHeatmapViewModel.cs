@@ -407,7 +407,7 @@ namespace Manager.ViewModel.Demos
 			_mapService.InitMap(Demo);
 			DispatcherHelper.CheckBeginInvokeOnUI(() =>
 			{
-				OverviewLayer = _mapService.GetWriteableImage();
+				OverviewLayer = _mapService.GetWriteableImage(Properties.Settings.Default.UseSimpleRadar);
 			});
 		}
 

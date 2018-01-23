@@ -7687,6 +7687,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use Simple Radar overviews.
+        /// </summary>
+        public static string UseSimpleRadarCheckbox {
+            get {
+                return ResourceManager.GetString("UseSimpleRadarCheckbox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
         public static string Value {

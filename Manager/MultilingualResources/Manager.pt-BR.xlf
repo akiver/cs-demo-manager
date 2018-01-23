@@ -3603,6 +3603,10 @@ You may have missing data for this demos.</source>
 {0}
 You may have missing data for this demos.</target>
         </trans-unit>
+        <trans-unit id="UseSimpleRadarCheckbox" translate="yes" xml:space="preserve">
+          <source>Use Simple Radar overviews</source>
+          <target state="new">Use Simple Radar overviews</target>
+        </trans-unit>
       </group>
     </body>
   </file>

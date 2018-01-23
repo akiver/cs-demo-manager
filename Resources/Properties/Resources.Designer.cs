@@ -233,9 +233,29 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap de_cache_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_cache_sr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap de_cbble {
             get {
                 object obj = ResourceManager.GetObject("de_cbble", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap de_cbble_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_cbble_sr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -303,9 +323,29 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap de_mirage_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_mirage_sr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap de_new_dust2 {
             get {
                 object obj = ResourceManager.GetObject("de_new_dust2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap de_new_dust2_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_new_dust2_sr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -323,9 +363,29 @@ namespace Resources.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap de_new_inferno_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_new_inferno_sr", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap de_new_nuke {
             get {
                 object obj = ResourceManager.GetObject("de_new_nuke", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap de_new_nuke_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_new_nuke_sr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -346,6 +406,16 @@ namespace Resources.Properties {
         internal static System.Drawing.Bitmap de_overpass {
             get {
                 object obj = ResourceManager.GetObject("de_overpass", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap de_overpass_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_overpass_sr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -386,6 +456,16 @@ namespace Resources.Properties {
         internal static System.Drawing.Bitmap de_train {
             get {
                 object obj = ResourceManager.GetObject("de_train", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap de_train_sr {
+            get {
+                object obj = ResourceManager.GetObject("de_train_sr", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

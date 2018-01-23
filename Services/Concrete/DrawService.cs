@@ -43,6 +43,8 @@ namespace Services.Concrete
 
 		public WriteableBitmap PlayerMarkerLayer { get; set; }
 
+		public bool UseSimpleRadar { get; set; } = true;
+
 		private readonly Color[] _colors =
 		{
 			Color.FromArgb(255, 255, 0, 0),
@@ -60,7 +62,7 @@ namespace Services.Concrete
 		public DrawService(IMapService mapService)
 		{
 			MapService = mapService;
-			OverviewLayer = mapService.GetWriteableImage();
+			OverviewLayer = mapService.GetWriteableImage(UseSimpleRadar);
 			WeaponLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
 			KillLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);
 			SmokeLayer = BitmapFactory.New(MapService.Map.ResolutionX, MapService.Map.ResolutionY);

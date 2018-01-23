@@ -1521,5 +1521,17 @@ namespace Manager.Properties {
                 this["MovieCsgoExePath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UseSimpleRadar {
+            get {
+                return ((bool)(this["UseSimpleRadar"]));
+            }
+            set {
+                this["UseSimpleRadar"] = value;
+            }
+        }
     }
 }

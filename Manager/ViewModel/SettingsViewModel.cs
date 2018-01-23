@@ -43,6 +43,8 @@ namespace Manager.ViewModel
 
 		private int _demosListSize = Settings.Default.DemosListSize;
 
+		private bool _useSimpleRadar = Settings.Default.UseSimpleRadar;
+
 		private RelayCommand<string> _saveResolutionWidthCommand;
 
 		private RelayCommand<string> _saveResolutionHeightCommand;
@@ -412,6 +414,17 @@ namespace Manager.ViewModel
 				{
 					WatchAccountSteamId = 0;
 				}
+			}
+		}
+
+		public bool UseSimpleRadar
+		{
+			get => _useSimpleRadar;
+			set
+			{
+				Set(() => UseSimpleRadar, ref _useSimpleRadar, value);
+				Settings.Default.UseSimpleRadar = value;
+				Settings.Default.Save();
 			}
 		}
 

@@ -308,8 +308,11 @@ namespace Manager.ViewModel.Demos
 			}
 			Demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(Demo);
 			_mapService.InitMap(Demo);
-			OverviewLayer = _mapService.GetWriteableImage();
-			_drawService = new DrawService(_mapService);
+			OverviewLayer = _mapService.GetWriteableImage(Properties.Settings.Default.UseSimpleRadar);
+			_drawService = new DrawService(_mapService)
+			{
+				UseSimpleRadar = Properties.Settings.Default.UseSimpleRadar,
+			};
 			StuffLayer = _drawService.SmokeLayer;
 			await LoadStuffs();
 			IsBusy = false;
