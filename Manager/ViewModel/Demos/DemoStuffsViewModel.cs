@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Core;
 using Core.Models;
@@ -14,6 +14,7 @@ using Services.Concrete;
 using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
+using Clipboard = System.Windows.Clipboard;
 
 namespace Manager.ViewModel.Demos
 {
@@ -51,11 +52,15 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _windowLoadedCommand;
 
-		private RelayCommand<Stuff> _watchStuffCommand;
+		private RelayCommand _watchStuff;
 
 		private RelayCommand _watchPlayerStuffCommand;
 
 		private RelayCommand _copySetPosCommand;
+
+		private RelayCommand<DataGridRowClipboardEventArgs> _copyCellContent;
+
+		private RelayCommand<SelectedCellsChangedEventArgs> _selectedCellChanged;
 
 		#endregion Properties
 
@@ -113,6 +118,35 @@ namespace Manager.ViewModel.Demos
 
 		#region Commands
 
+		public RelayCommand<SelectedCellsChangedEventArgs> SelectedCellChanged
+		{
+			get
+			{
+				return _selectedCellChanged
+					   ?? (_selectedCellChanged = new RelayCommand<SelectedCellsChangedEventArgs>(
+						   e =>
+						   {
+							   if (e.AddedCells.Count > 0)
+								   SelectedStuff = (Stuff)e.AddedCells[0].Item;
+							   else
+								   SelectedStuff = null;
+						   }));
+			}
+		}
+		public RelayCommand<DataGridRowClipboardEventArgs> CopyCellContent
+		{
+			get
+			{
+				return _copyCellContent
+					   ?? (_copyCellContent = new RelayCommand<DataGridRowClipboardEventArgs>(
+						   e =>
+						   {
+							   if (e.ClipboardRowContent.Count > 0)
+								   Clipboard.SetText(e.ClipboardRowContent[0].Content.ToString());
+						   }));
+			}
+		}
+
 		public RelayCommand WindowLoaded
 		{
 			get
@@ -166,13 +200,13 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
-		public RelayCommand<Stuff> WatchStuffCommand
+		public RelayCommand WatchStuff
 		{
 			get
 			{
-				return _watchStuffCommand
-					?? (_watchStuffCommand = new RelayCommand<Stuff>(
-						async stuff =>
+				return _watchStuff
+					?? (_watchStuff = new RelayCommand(
+						async () =>
 						{
 							if (AppSettings.SteamExePath() == null)
 							{
@@ -192,11 +226,11 @@ namespace Manager.ViewModel.Demos
 								HlaeExePath = HlaeService.GetHlaeExePath(),
 								LaunchParameters = Properties.Settings.Default.LaunchParameters,
 								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = stuff.ThrowerSteamId,
+								FocusPlayerSteamId = SelectedStuff.ThrowerSteamId,
 							};
 							GameLauncher launcher = new GameLauncher(config);
-							launcher.WatchDemoAt(stuff.Tick, true);
-						}));
+							launcher.WatchDemoAt(SelectedStuff.Tick, true);
+						}, () => SelectedStuff != null));
 			}
 		}
 

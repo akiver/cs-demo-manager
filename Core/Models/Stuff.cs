@@ -22,6 +22,16 @@ namespace Core.Models
 
 		public int Tick { get; set; }
 
+		/// <summary>
+		/// Seconds elapsed when the stuff has been thrown since the beginning of the demo.
+		/// </summary>
+		public float DemoSeconds { get; set; }
+
+		/// <summary>
+		/// Seconds elapsed when the stuff has been thrown since the beginning of the round.
+		/// </summary>
+		public float RoundSeconds { get; set; }
+
 		public int RoundNumber { get; set; }
 
 		public string ThrowerName { get; set; }

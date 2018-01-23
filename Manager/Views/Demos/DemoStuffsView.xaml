@@ -18,6 +18,7 @@
 		<ResourceDictionary>
 			<converters:FlashbangStuffTypeToVisibilityConverter x:Key="FlashbangStuffTypeToVisibilityConverter" />
 			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+			<converters:StuffTypeToStringConverter x:Key="StuffTypeToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 	<UserControl.InputBindings>
@@ -142,14 +143,27 @@
 
 			<Grid Grid.Column="0">
 				<DataGrid x:Name="StuffDataGrid"
+						  Style="{StaticResource DataGridStyle}"
 						  ItemsSource="{Binding Stuffs}"
-						  SelectedItem="{Binding SelectedStuff}"
-						  Style="{StaticResource DataGridStyle}">
-					<DataGrid.InputBindings>
-						<KeyBinding Command="{Binding CopySetPosCommand}"
-							Gesture="CTRL+C" />
-					</DataGrid.InputBindings>
+						  SelectionMode="Single"
+						  ClipboardCopyMode="ExcludeHeader"
+						  SelectionUnit="Cell">
+					<i:Interaction.Triggers>
+						<i:EventTrigger EventName="CopyingRowClipboardContent">
+							<command:EventToCommand Command="{Binding CopyCellContent}"
+													PassEventArgsToCommand="True" />
+						</i:EventTrigger>
+						<i:EventTrigger EventName="SelectedCellsChanged">
+							<command:EventToCommand Command="{Binding SelectedCellChanged}"
+													PassEventArgsToCommand="True" />
+						</i:EventTrigger>
+					</i:Interaction.Triggers>
+					
 					<DataGrid.Columns>
+						<DataGridTextColumn HeaderStyle="{StaticResource TypeHeader}"
+											Width="Auto"
+											Header="{x:Static properties:Resources.Type}"
+											Binding="{Binding Type, Converter={StaticResource StuffTypeToStringConverter}}" />
 						<DataGridTextColumn HeaderStyle="{StaticResource TickHeader}"
 											Width="Auto"
 											Header="{x:Static properties:Resources.Tick}"
@@ -158,6 +172,16 @@
 											Width="Auto"
 											Header="{x:Static properties:Resources.Round}"
 											Binding="{Binding RoundNumber}" />
+						<DataGridTextColumn HeaderStyle="{StaticResource SecondsRoundStuffRoundHeader}"
+											Width="Auto"
+											Header="{x:Static properties:Resources.SecondsRound}"
+											IsReadOnly="True"
+											Binding="{Binding RoundSeconds}" />
+						<DataGridTextColumn HeaderStyle="{StaticResource SecondsDemoStuffRoundHeader}"
+											Width="Auto"
+											Header="{x:Static properties:Resources.SecondsDemo}"
+											IsReadOnly="True"
+											Binding="{Binding DemoSeconds}" />
 						<DataGridTextColumn HeaderStyle="{StaticResource ThrowerNameHeader}"
 											Width="Auto"
 											Header="{x:Static properties:Resources.HeaderThrower}"
@@ -165,8 +189,7 @@
 						<DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
 							<DataGridTemplateColumn.CellTemplate>
 								<DataTemplate>
-									<Button Command="{Binding Source={StaticResource Locator}, Path=DemoStuffs.WatchStuffCommand}"
-											CommandParameter="{Binding SelectedItem, ElementName=StuffDataGrid}"
+									<Button Command="{Binding Source={StaticResource Locator}, Path=DemoStuffs.WatchStuff}"
 											Style="{DynamicResource AccentedSquareButtonStyle}"
 											Content="{x:Static properties:Resources.Watch}" />
 								</DataTemplate>

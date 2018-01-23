@@ -899,6 +899,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decoy.
+        /// </summary>
+        public static string Decoy {
+            get {
+                return ResourceManager.GetString("Decoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decoys.
         /// </summary>
         public static string Decoys {
@@ -2374,6 +2383,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flashbang.
+        /// </summary>
+        public static string Flashbang {
+            get {
+                return ResourceManager.GetString("Flashbang", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Flashbangs.
         /// </summary>
         public static string Flashbangs {
@@ -2469,6 +2487,15 @@ namespace Manager.Properties {
         public static string GotoTick {
             get {
                 return ResourceManager.GetString("GotoTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HE.
+        /// </summary>
+        public static string HE {
+            get {
+                return ResourceManager.GetString("HE", resourceCulture);
             }
         }
         
@@ -3859,6 +3886,24 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Seconds elapsed since the beginning of the demo.
+        /// </summary>
+        public static string HeaderToolTipSecondsDemoStuffThrown {
+            get {
+                return ResourceManager.GetString("HeaderToolTipSecondsDemoStuffThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds elapsed since the round&apos;s freezetime ended.
+        /// </summary>
+        public static string HeaderToolTipSecondsRoundStuffThrown {
+            get {
+                return ResourceManager.GetString("HeaderToolTipSecondsRoundStuffThrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Server tickrate.
         /// </summary>
         public static string HeaderToolTipServerTickrate {
@@ -4372,6 +4417,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incendiary.
+        /// </summary>
+        public static string Incendiary {
+            get {
+                return ResourceManager.GetString("Incendiary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are free to help translating the app, more information on.
         /// </summary>
         public static string InfomationHelpTranslatingApp {
@@ -4828,6 +4882,15 @@ namespace Manager.Properties {
             get {
                 object obj = ResourceManager.GetObject("model", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Molotov.
+        /// </summary>
+        public static string Molotov {
+            get {
+                return ResourceManager.GetString("Molotov", resourceCulture);
             }
         }
         
@@ -6052,6 +6115,24 @@ namespace Manager.Properties {
         public static string ScoreTeam2Full {
             get {
                 return ResourceManager.GetString("ScoreTeam2Full", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds (D).
+        /// </summary>
+        public static string SecondsDemo {
+            get {
+                return ResourceManager.GetString("SecondsDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Seconds (R).
+        /// </summary>
+        public static string SecondsRound {
+            get {
+                return ResourceManager.GetString("SecondsRound", resourceCulture);
             }
         }
         

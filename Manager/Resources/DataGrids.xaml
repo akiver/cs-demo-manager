@@ -659,4 +659,16 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipThrowerName}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="SecondsRoundStuffRoundHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipSecondsRoundStuffThrown}" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="SecondsDemoStuffRoundHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipSecondsDemoStuffThrown}" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="TypeHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.Type}" />
+	</Style>
+
 </ResourceDictionary>

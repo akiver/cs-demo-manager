@@ -3624,6 +3624,42 @@ You may have missing data for this demos.</target>
           <source>Use Simple Radar overviews</source>
           <target state="new">Use Simple Radar overviews</target>
         </trans-unit>
+        <trans-unit id="SecondsRound" translate="yes" xml:space="preserve">
+          <source>Seconds (R)</source>
+          <target state="new">Seconds (R)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipSecondsRoundStuffThrown" translate="yes" xml:space="preserve">
+          <source>Seconds elapsed since the round's freezetime ended</source>
+          <target state="new">Seconds elapsed since the round's freezetime ended</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipSecondsDemoStuffThrown" translate="yes" xml:space="preserve">
+          <source>Seconds elapsed since the beginning of the demo</source>
+          <target state="new">Seconds elapsed since the beginning of the demo</target>
+        </trans-unit>
+        <trans-unit id="SecondsDemo" translate="yes" xml:space="preserve">
+          <source>Seconds (D)</source>
+          <target state="new">Seconds (D)</target>
+        </trans-unit>
+        <trans-unit id="Decoy" translate="yes" xml:space="preserve">
+          <source>Decoy</source>
+          <target state="new">Decoy</target>
+        </trans-unit>
+        <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
+          <source>Flashbang</source>
+          <target state="new">Flashbang</target>
+        </trans-unit>
+        <trans-unit id="HE" translate="yes" xml:space="preserve">
+          <source>HE</source>
+          <target state="new">HE</target>
+        </trans-unit>
+        <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
+          <source>Incendiary</source>
+          <target state="new">Incendiary</target>
+        </trans-unit>
+        <trans-unit id="Molotov" translate="yes" xml:space="preserve">
+          <source>Molotov</source>
+          <target state="new">Molotov</target>
+        </trans-unit>
       </group>
     </body>
   </file>

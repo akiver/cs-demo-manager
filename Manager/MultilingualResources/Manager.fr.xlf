@@ -1604,7 +1604,7 @@
         </trans-unit>
         <trans-unit id="Smoke" translate="yes" xml:space="preserve">
           <source>Smoke</source>
-          <target state="final">Grenades fumigènes</target>
+          <target state="final">Fumigène</target>
         </trans-unit>
         <trans-unit id="HeGrenades" translate="yes" xml:space="preserve">
           <source>HE Grenades</source>
@@ -3608,6 +3608,42 @@ Il est possible que des données soient manquantes pour celles-ci.</target>
         <trans-unit id="UseSimpleRadarCheckbox" translate="yes" xml:space="preserve">
           <source>Use Simple Radar overviews</source>
           <target state="final">Utiliser les overviews de Simple Radar</target>
+        </trans-unit>
+        <trans-unit id="SecondsRound" translate="yes" xml:space="preserve">
+          <source>Seconds (R)</source>
+          <target state="final">Secondes (R)</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipSecondsRoundStuffThrown" translate="yes" xml:space="preserve">
+          <source>Seconds elapsed since the round's freezetime ended</source>
+          <target state="final">Nombre de secondes écoulées depuis la fin du freezetime</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipSecondsDemoStuffThrown" translate="yes" xml:space="preserve">
+          <source>Seconds elapsed since the beginning of the demo</source>
+          <target state="final">Nombre de secondes écoulées depuis le début de la démo</target>
+        </trans-unit>
+        <trans-unit id="SecondsDemo" translate="yes" xml:space="preserve">
+          <source>Seconds (D)</source>
+          <target state="final">Secondes (D)</target>
+        </trans-unit>
+        <trans-unit id="Decoy" translate="yes" xml:space="preserve">
+          <source>Decoy</source>
+          <target state="final">Leurre</target>
+        </trans-unit>
+        <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
+          <source>Flashbang</source>
+          <target state="final">Flashbang</target>
+        </trans-unit>
+        <trans-unit id="HE" translate="yes" xml:space="preserve">
+          <source>HE</source>
+          <target state="final">Grenades explosive</target>
+        </trans-unit>
+        <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
+          <source>Incendiary</source>
+          <target state="final">Grenades incendiaire</target>
+        </trans-unit>
+        <trans-unit id="Molotov" translate="yes" xml:space="preserve">
+          <source>Molotov</source>
+          <target state="final">Molotov</target>
         </trans-unit>
       </group>
     </body>

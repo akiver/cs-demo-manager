@@ -1213,7 +1213,7 @@
     <value>Raison</value>
   </data>
   <data name="Smoke" xml:space="preserve">
-    <value>Grenades fumigènes</value>
+    <value>Fumigène</value>
   </data>
   <data name="HeGrenades" xml:space="preserve">
     <value>Grenades explosives</value>
@@ -2706,5 +2706,32 @@ Il est possible que des données soient manquantes pour celles-ci.</value>
   </data>
   <data name="UseSimpleRadarCheckbox" xml:space="preserve">
     <value>Utiliser les overviews de Simple Radar</value>
+  </data>
+  <data name="SecondsRound" xml:space="preserve">
+    <value>Secondes (R)</value>
+  </data>
+  <data name="HeaderToolTipSecondsRoundStuffThrown" xml:space="preserve">
+    <value>Nombre de secondes écoulées depuis la fin du freezetime</value>
+  </data>
+  <data name="HeaderToolTipSecondsDemoStuffThrown" xml:space="preserve">
+    <value>Nombre de secondes écoulées depuis le début de la démo</value>
+  </data>
+  <data name="SecondsDemo" xml:space="preserve">
+    <value>Secondes (D)</value>
+  </data>
+  <data name="Decoy" xml:space="preserve">
+    <value>Leurre</value>
+  </data>
+  <data name="Flashbang" xml:space="preserve">
+    <value>Flashbang</value>
+  </data>
+  <data name="HE" xml:space="preserve">
+    <value>Grenades explosive</value>
+  </data>
+  <data name="Incendiary" xml:space="preserve">
+    <value>Grenades incendiaire</value>
+  </data>
+  <data name="Molotov" xml:space="preserve">
+    <value>Molotov</value>
   </data>
 </root>

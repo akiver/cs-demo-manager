@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
@@ -22,8 +23,7 @@ namespace Services.Concrete
 					case StuffType.SMOKE:
 						foreach (Round round in demo.Rounds)
 						{
-							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& e.Weapon.Element == EquipmentElement.Smoke).ToList();
+							List<WeaponFireEvent> weaponFired = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Smoke).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							if (weaponFired.Count == round.SmokeStarted.Count)
 							{
@@ -36,6 +36,8 @@ namespace Services.Concrete
 										Stuff s = new Stuff
 										{
 											Tick = weaponFired[i].Tick,
+											RoundSeconds = (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
+											DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
 											RoundNumber = round.Number,
 											Type = StuffType.SMOKE,
 											StartX = weaponFired[i].Point.X,
@@ -59,8 +61,7 @@ namespace Services.Concrete
 					case StuffType.FLASHBANG:
 						foreach (Round round in demo.Rounds)
 						{
-							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& e.Weapon.Element == EquipmentElement.Flash).ToList();
+							List<WeaponFireEvent> weaponFired = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Flash).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							if (weaponFired.Count == round.FlashbangsExploded.Count)
 							{
@@ -73,6 +74,8 @@ namespace Services.Concrete
 										Stuff s = new Stuff
 										{
 											Tick = weaponFired[i].Tick,
+											RoundSeconds = (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
+											DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
 											RoundNumber = round.Number,
 											Type = StuffType.FLASHBANG,
 											StartX = weaponFired[i].Point.X,
@@ -99,8 +102,7 @@ namespace Services.Concrete
 					case StuffType.HE:
 						foreach (Round round in demo.Rounds)
 						{
-							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& e.Weapon.Element == EquipmentElement.HE).ToList();
+							List<WeaponFireEvent> weaponFired = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.HE).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							if (weaponFired.Count == round.ExplosiveGrenadesExploded.Count)
 							{
@@ -113,6 +115,8 @@ namespace Services.Concrete
 										Stuff s = new Stuff
 										{
 											Tick = weaponFired[i].Tick,
+											RoundSeconds = (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
+											DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
 											RoundNumber = round.Number,
 											Type = StuffType.HE,
 											StartX = weaponFired[i].Point.X,
@@ -136,8 +140,7 @@ namespace Services.Concrete
 					case StuffType.MOLOTOV:
 						foreach (Round round in demo.Rounds)
 						{
-							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& e.Weapon.Element == EquipmentElement.Molotov).ToList();
+							List<WeaponFireEvent> weaponFired = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Molotov).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							List<MolotovFireStartedEvent> fireStartedList = demo.MolotovsFireStarted.Where(e => e.RoundNumber == round.Number).ToList();
 							fireStartedList.Sort((w1, w2) => w1.ThrowerSteamId.CompareTo(w2.ThrowerSteamId));
@@ -150,6 +153,8 @@ namespace Services.Concrete
 										Stuff s = new Stuff
 										{
 											Tick = weaponFired[i].Tick,
+											RoundSeconds = (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
+											DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
 											RoundNumber = round.Number,
 											Type = StuffType.MOLOTOV,
 											StartX = weaponFired[i].Point.X,
@@ -173,8 +178,7 @@ namespace Services.Concrete
 					case StuffType.INCENDIARY:
 						foreach (Round round in demo.Rounds)
 						{
-							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& e.Weapon.Element == EquipmentElement.Incendiary).ToList();
+							List<WeaponFireEvent> weaponFired = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Incendiary).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							List<MolotovFireStartedEvent> fireStartedList = demo.IncendiariesFireStarted.Where(e => e.RoundNumber == round.Number).ToList();
 							fireStartedList.Sort((w1, w2) => w1.ThrowerSteamId.CompareTo(w2.ThrowerSteamId));
@@ -187,6 +191,8 @@ namespace Services.Concrete
 										Stuff s = new Stuff
 										{
 											Tick = weaponFired[i].Tick,
+											RoundSeconds = (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
+											DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
 											RoundNumber = round.Number,
 											Type = StuffType.INCENDIARY,
 											StartX = weaponFired[i].Point.X,
@@ -210,8 +216,7 @@ namespace Services.Concrete
 					case StuffType.DECOY:
 						foreach (Round round in demo.Rounds)
 						{
-							List<WeaponFireEvent> weaponFired = demo.WeaponFired.Where(e => e.RoundNumber == round.Number
-							&& e.Weapon.Element == EquipmentElement.Decoy).ToList();
+							List<WeaponFireEvent> weaponFired = round.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Decoy).ToList();
 							weaponFired.Sort((w1, w2) => w1.ShooterSteamId.CompareTo(w2.ShooterSteamId));
 							List<DecoyStartedEvent> decoyStartedList = demo.DecoyStarted.Where(e => e.RoundNumber == round.Number).ToList();
 							decoyStartedList.Sort((w1, w2) => w1.ThrowerSteamId.CompareTo(w2.ThrowerSteamId));
@@ -224,6 +229,8 @@ namespace Services.Concrete
 										Stuff s = new Stuff
 										{
 											Tick = weaponFired[i].Tick,
+											RoundSeconds = (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
+											DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
 											RoundNumber = round.Number,
 											Type = StuffType.DECOY,
 											StartX = weaponFired[i].Point.X,
@@ -247,7 +254,7 @@ namespace Services.Concrete
 				}
 			});
 
-			return stuffs;
+			return stuffs.OrderBy(s => s.Tick).ToList();
 		}
 	}
 }

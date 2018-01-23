@@ -2816,4 +2816,31 @@ You may have missing data for this demos.</value>
   <data name="UseSimpleRadarCheckbox" xml:space="preserve">
     <value>Use Simple Radar overviews</value>
   </data>
+  <data name="SecondsRound" xml:space="preserve">
+    <value>Seconds (R)</value>
+  </data>
+  <data name="HeaderToolTipSecondsRoundStuffThrown" xml:space="preserve">
+    <value>Seconds elapsed since the round's freezetime ended</value>
+  </data>
+  <data name="HeaderToolTipSecondsDemoStuffThrown" xml:space="preserve">
+    <value>Seconds elapsed since the beginning of the demo</value>
+  </data>
+  <data name="SecondsDemo" xml:space="preserve">
+    <value>Seconds (D)</value>
+  </data>
+  <data name="Decoy" xml:space="preserve">
+    <value>Decoy</value>
+  </data>
+  <data name="Flashbang" xml:space="preserve">
+    <value>Flashbang</value>
+  </data>
+  <data name="HE" xml:space="preserve">
+    <value>HE</value>
+  </data>
+  <data name="Incendiary" xml:space="preserve">
+    <value>Incendiary</value>
+  </data>
+  <data name="Molotov" xml:space="preserve">
+    <value>Molotov</value>
+  </data>
 </root>
