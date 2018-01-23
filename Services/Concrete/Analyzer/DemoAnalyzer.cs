@@ -275,8 +275,9 @@ namespace Services.Concrete.Analyzer
 				return Source.Factory(Ebot.NAME);
 			}
 
-			// Check for esea demos, appart the filename there is no magic to detect it
-			if (demo.Name.Contains(Esea.NAME, StringComparison.OrdinalIgnoreCase))
+			// Check for esea demos, appart filename or hostname, there is no magic to detect it
+			if (demo.Name.Contains(Esea.NAME, StringComparison.OrdinalIgnoreCase)
+				|| demo.Hostname.Contains(Esea.NAME, StringComparison.OrdinalIgnoreCase))
 			{
 				return Source.Factory(Esea.NAME);
 			}
