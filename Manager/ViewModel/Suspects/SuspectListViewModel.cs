@@ -511,7 +511,6 @@ namespace Manager.ViewModel.Suspects
 						{
 							IsShowOnlyBannedSuspects = isChecked;
 							Properties.Settings.Default.ShowOnlyBannedSuspects = isChecked;
-							Properties.Settings.Default.Save();
 							DataGridSuspectsCollection.Refresh();
 						}, isChecked => !IsRefreshing));
 			}

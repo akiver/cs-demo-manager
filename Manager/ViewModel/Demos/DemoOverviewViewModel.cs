@@ -88,8 +88,6 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
-		private RelayCommand<bool> _toggleLogOnlyKillsCommand;
-
 		private CancellationTokenSource _cts;
 
 		private double FrameLimiter
@@ -258,7 +256,6 @@ namespace Manager.ViewModel.Demos
 			set
 			{
 				Settings.Default.LogOnlyKillOnOverview = value;
-				Settings.Default.Save();
 				Set(() => IsLogOnlyKills, ref _isLogOnlyKills, value);
 			}
 		}
@@ -266,24 +263,6 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Commands
-
-		/// <summary>
-		/// Command to toggle log only kills
-		/// </summary>
-		public RelayCommand<bool> ToggleLogOnlyKillsCommand
-		{
-			get
-			{
-				return _toggleLogOnlyKillsCommand
-					?? (_toggleLogOnlyKillsCommand = new RelayCommand<bool>(
-						isChecked =>
-						{
-							IsLogOnlyKills = isChecked;
-							Settings.Default.LogOnlyKillOnOverview = isChecked;
-							Settings.Default.Save();
-						}));
-			}
-		}
 
 		/// <summary>
 		/// Command to start animation

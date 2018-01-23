@@ -45,14 +45,6 @@ namespace Manager.ViewModel
 
 		private bool _useSimpleRadar = Settings.Default.UseSimpleRadar;
 
-		private RelayCommand<string> _saveResolutionWidthCommand;
-
-		private RelayCommand<string> _saveResolutionHeightCommand;
-
-		private RelayCommand<string> _saveLaunchParametersCommand;
-
-		private RelayCommand<string> _saveDemoListSizeCommand;
-
 		private RelayCommand _clearDemosDataCacheCommand;
 
 		private RelayCommand _importCustomDataCacheCommand;
@@ -307,7 +299,6 @@ namespace Manager.ViewModel
 				if (!string.IsNullOrEmpty(value.Id) && value.Id != Settings.Default.Language)
 				{
 					Settings.Default.Language = value.Id;
-					Settings.Default.Save();
 					Process.Start(Application.ResourceAssembly.Location);
 					Application.Current.Shutdown();
 				}
@@ -327,7 +318,6 @@ namespace Manager.ViewModel
 			{
 				Set(() => SelectedTheme, ref _selectedTheme, value);
 				Settings.Default.Theme = value.Id;
-				Settings.Default.Save();
 				Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
 				AppTheme theme = ThemeManager.GetAppTheme(SelectedTheme.Id);
 				ThemeManager.ChangeAppStyle(Application.Current, appStyle.Item2, theme);
@@ -363,7 +353,6 @@ namespace Manager.ViewModel
 					_cacheService.Filter.SteamId = steamId;
 					IsShowAllAccounts = false;
 				}
-				Settings.Default.Save();
 				RaisePropertyChanged(() => ShowOnlyAccountStats);
 				Messenger.Default.Send(new SelectedAccountChangedMessage());
 			}
@@ -381,7 +370,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.IsShowAllAccounts = value;
-				Settings.Default.Save();
 				if (value && SelectedStatsAccount != null) SelectedStatsAccount = null;
 				Set(() => IsShowAllAccounts, ref _isShowAllAccounts, value);
 			}
@@ -393,7 +381,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowOnlyAccountDemos = value;
-				Settings.Default.Save();
 				Set(() => IsShowOnlyAccountDemos, ref _isShowOnlyAccountDemos, value);
 			}
 		}
@@ -424,7 +411,6 @@ namespace Manager.ViewModel
 			{
 				Set(() => UseSimpleRadar, ref _useSimpleRadar, value);
 				Settings.Default.UseSimpleRadar = value;
-				Settings.Default.Save();
 			}
 		}
 
@@ -435,7 +421,6 @@ namespace Manager.ViewModel
 			{
 				Set(() => IsShowAllPlayers, ref _isShowAllPlayers, value);
 				Settings.Default.IsShowAllPlayers = value;
-				Settings.Default.Save();
 			}
 		}
 
@@ -445,7 +430,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.UseCustomActionsGeneration = value;
-				Settings.Default.Save();
 				Set(() => IsUseCustomActionGeneration, ref _isUseCustomActionGeneration, value);
 			}
 		}
@@ -453,13 +437,21 @@ namespace Manager.ViewModel
 		public int ResolutionWidth
 		{
 			get { return _resolutionWidth; }
-			set { Set(() => ResolutionWidth, ref _resolutionWidth, value); }
+			set
+			{
+				Settings.Default.ResolutionWidth = value;
+				Set(() => ResolutionWidth, ref _resolutionWidth, value);
+			}
 		}
 
 		public int ResolutionHeight
 		{
 			get { return _resolutionHeight; }
-			set { Set(() => ResolutionHeight, ref _resolutionHeight, value); }
+			set
+			{
+				Settings.Default.ResolutionHeight = value;
+				Set(() => ResolutionHeight, ref _resolutionHeight, value);
+			}
 		}
 
 		public bool ResolutionFullscreen
@@ -468,7 +460,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.IsFullscreen = value;
-				Settings.Default.Save();
 				Set(() => ResolutionFullscreen, ref _resolutionFullscreen, value);
 			}
 		}
@@ -476,7 +467,11 @@ namespace Manager.ViewModel
 		public string LaunchParameters
 		{
 			get { return _launchParameters; }
-			set { Set(() => LaunchParameters, ref _launchParameters, value); }
+			set
+			{
+				Settings.Default.LaunchParameters = value;
+				Set(() => LaunchParameters, ref _launchParameters, value);
+			}
 		}
 
 		public bool DateFormatUsa
@@ -485,7 +480,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.DateFormatEuropean = value;
-				Settings.Default.Save();
 				Set(() => DateFormatUsa, ref _dateFormatEuropean, value);
 			}
 		}
@@ -495,7 +489,7 @@ namespace Manager.ViewModel
 			get { return _demosListSize; }
 			set
 			{
-				if (value == 0) value = AppSettings.DEMO_PAGE_COUNT;
+				Settings.Default.DemosListSize = value;
 				Set(() => DemosListSize, ref _demosListSize, value);
 			}
 		}
@@ -506,7 +500,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowWinnerClanNameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowWinnerClanNameColumn, ref _showWinnerClanNameColumn, value);
 			}
 		}
@@ -517,7 +510,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowCtTeamName = value;
-				Settings.Default.Save();
 				Set(() => ShowCtTeamNameColumn, ref _showCtTeamName, value);
 			}
 		}
@@ -528,7 +520,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTteamName = value;
-				Settings.Default.Save();
 				Set(() => ShowTteamNameColumn, ref _showTteamName, value);
 			}
 		}
@@ -539,7 +530,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowWinnerSideColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowWinnerSideColumn, ref _showWinnerSideColumn, value);
 			}
 		}
@@ -550,7 +540,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowStartMoneyTeam1Column = value;
-				Settings.Default.Save();
 				Set(() => ShowStartMoneyTeam1Column, ref _showStartMoneyTeam1Column, value);
 			}
 		}
@@ -561,7 +550,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowStartMoneyTeam2Column = value;
-				Settings.Default.Save();
 				Set(() => ShowStartMoneyTeam2Column, ref _showStartMoneyTeam2Column, value);
 			}
 		}
@@ -572,7 +560,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowEquipementValueTeam1Column = value;
-				Settings.Default.Save();
 				Set(() => ShowEquipementValueTeam1Column, ref _showEquipementValueTeam1Column, value);
 			}
 		}
@@ -583,7 +570,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowEquipementValueTeam2Column = value;
-				Settings.Default.Save();
 				Set(() => ShowEquipementValueTeam2Column, ref _showEquipementValueTeam2Column, value);
 			}
 		}
@@ -594,7 +580,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowDateColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowDateColumn, ref _showDateColumn, value);
 			}
 		}
@@ -605,7 +590,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowDemoNameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowDemoNameColumn, ref _showDemoNameColumn, value);
 			}
 		}
@@ -616,7 +600,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowMapNameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowMapNameColumn, ref _showMapNameColumn, value);
 			}
 		}
@@ -627,7 +610,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowHostnameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowHostnameColumn, ref _showHostnameColumn, value);
 			}
 		}
@@ -638,7 +620,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClientnameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowClientnameColumn, ref _showClientnameColumn, value);
 			}
 		}
@@ -649,7 +630,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowDemoTypeColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowDemoTypeColumn, ref _showDemoTypeColumn, value);
 			}
 		}
@@ -660,7 +640,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowFramerateColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowFramerateColumn, ref _showFramerateColumn, value);
 			}
 		}
@@ -671,7 +650,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTicksColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTicksColumn, ref _showTicksColumn, value);
 			}
 		}
@@ -682,7 +660,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTickrateColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTickrateColumn, ref _showTickrateColumn, value);
 			}
 		}
@@ -693,7 +670,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTeam1NameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTeam1NameColumn, ref _showTeam1NameColumn, value);
 			}
 		}
@@ -704,7 +680,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTeam2NameColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTeam2NameColumn, ref _showTeam2NameColumn, value);
 			}
 		}
@@ -715,7 +690,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowScoreTeam1Column = value;
-				Settings.Default.Save();
 				Set(() => ShowScoreTeam1Column, ref _showScoreTeam1Column, value);
 			}
 		}
@@ -726,7 +700,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowScoreTeam2Column = value;
-				Settings.Default.Save();
 				Set(() => ShowScoreTeam2Column, ref _showScoreTeam2Column, value);
 			}
 		}
@@ -737,7 +710,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowBombPlantedColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowBombPlantedColumn, ref _showBombPlantedColumn, value);
 			}
 		}
@@ -748,7 +720,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowBombExplodedColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowBombExplodedColumn, ref _showBombExplodedColumn, value);
 			}
 		}
@@ -759,7 +730,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowBombDefusedColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowBombDefusedColumn, ref _showBombDefusedColumn, value);
 			}
 		}
@@ -770,7 +740,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowJumpKillCoulmn = value;
-				Settings.Default.Save();
 				Set(() => ShowJumpKillColumn, ref _showJumpKillColumn, value);
 			}
 		}
@@ -781,7 +750,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowCrouchKillsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowCrouchKillColumn, ref _showCrouchKillColumn, value);
 			}
 		}
@@ -792,7 +760,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTradeDeathColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTradeDeathColumn, ref _showTradeDeathColumn, value);
 			}
 		}
@@ -803,7 +770,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTradeKillColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTradeKillColumn, ref _showTradeKillColumn, value);
 			}
 		}
@@ -814,7 +780,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowOneKillColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowOneKillColumn, ref _showOneKillColumn, value);
 			}
 		}
@@ -825,7 +790,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTwoKillsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTwoKillsColumn, ref _showTwoKillsColumn, value);
 			}
 		}
@@ -836,7 +800,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowThreeKillsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowThreeKillsColumn, ref _showThreeKillsColumn, value);
 			}
 		}
@@ -847,7 +810,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowFourKillsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowFourKillsColumn, ref _showFourKillsColumn, value);
 			}
 		}
@@ -858,7 +820,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowFiveKillsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowFiveKillsColumn, ref _showFiveKillsColumn, value);
 			}
 		}
@@ -869,7 +830,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTotalKillsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTotalKillsColumn, ref _showTotalKillsColumn, value);
 			}
 		}
@@ -880,7 +840,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowDeathsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowDeathsColumn, ref _showDeathsColumn, value);
 			}
 		}
@@ -891,7 +850,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowAssistsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowAssistsColumn, ref _showAssistsColumn, value);
 			}
 		}
@@ -902,7 +860,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowHsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowHsColumn, ref _showHsColumn, value);
 			}
 		}
@@ -913,7 +870,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowKdColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowKdColumn, ref _showKdColumn, value);
 			}
 		}
@@ -924,7 +880,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowMvpColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowMvpColumn, ref _showMvpColumn, value);
 			}
 		}
@@ -935,7 +890,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTkColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTkColumn, ref _showTkColumn, value);
 			}
 		}
@@ -946,7 +900,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowEkColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowEkColumn, ref _showEkColumn, value);
 			}
 		}
@@ -957,7 +910,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowPlayerScoreColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowPlayerScoreColumn, ref _showPlayerScoreColumn, value);
 			}
 		}
@@ -968,7 +920,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowEseaRwsColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowEseaRwsColumn, ref _showEseaRwsColumn, value);
 			}
 		}
@@ -979,7 +930,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClutch1v1Column = value;
-				Settings.Default.Save();
 				Set(() => ShowClutch1v1Column, ref _showClutch1v1Column, value);
 			}
 		}
@@ -990,7 +940,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClutch1v2Column = value;
-				Settings.Default.Save();
 				Set(() => ShowClutch1v2Column, ref _showClutch1v2Column, value);
 			}
 		}
@@ -1001,7 +950,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClutch1v3Column = value;
-				Settings.Default.Save();
 				Set(() => ShowClutch1v3Column, ref _showClutch1v3Column, value);
 			}
 		}
@@ -1012,7 +960,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClutch1v4Column = value;
-				Settings.Default.Save();
 				Set(() => ShowClutch1v4Column, ref _showClutch1v4Column, value);
 			}
 		}
@@ -1023,7 +970,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClutch1v5Column = value;
-				Settings.Default.Save();
 				Set(() => ShowClutch1v5Column, ref _showClutch1v5Column, value);
 			}
 		}
@@ -1034,7 +980,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowDurationColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowDurationColumn, ref _showDurationColumn, value);
 			}
 		}
@@ -1045,7 +990,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowCommentColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowCommentColumn, ref _showCommentColumn, value);
 			}
 		}
@@ -1056,7 +1000,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowClutchCountColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowClutchCountColumn, ref _showClutchCountColumn, value);
 			}
 		}
@@ -1067,7 +1010,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTotalDamageHealthColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTotalDamageHealthColumn, ref _showTotalDamageHealthColumn, value);
 			}
 		}
@@ -1078,7 +1020,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTotalDamageArmorColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTotalDamageArmorColumn, ref _showTotalDamageArmorColumn, value);
 			}
 		}
@@ -1089,7 +1030,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowAverageDamageColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowAverageDamageColumn, ref _showAverageDamageColumn, value);
 			}
 		}
@@ -1100,7 +1040,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowBanColumns = value;
-				Settings.Default.Save();
 				Set(() => ShowBanColumns, ref _showBanColumns, value);
 			}
 		}
@@ -1111,7 +1050,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowKillPerRoundColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowKillPerRoundColumn, ref _showKillPerRoundColumn, value);
 			}
 		}
@@ -1122,7 +1060,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowAssistPerRoundColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowAssistPerRoundColumn, ref _showAssistPerRoundColumn, value);
 			}
 		}
@@ -1133,7 +1070,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowDeathPerRoundColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowDeathPerRoundColumn, ref _showDeathPerRoundColumn, value);
 			}
 		}
@@ -1144,7 +1080,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowRoundTypeColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowRoundTypeColumn, ref _showRoundTypeColumn, value);
 			}
 		}
@@ -1155,7 +1090,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowSideTroubleColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowSideTroubleColumn, ref _showSideTroubleColumn, value);
 			}
 		}
@@ -1166,7 +1100,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTeamTroubleColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTeamTroubleColumn, ref _showTeamTroubleColumn, value);
 			}
 		}
@@ -1177,7 +1110,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowTimeDeathColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowTimeDeathColumn, ref _showtimeDeathColumn, value);
 			}
 		}
@@ -1188,7 +1120,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.ShowRoundPlayedColumn = value;
-				Settings.Default.Save();
 				Set(() => ShowRoundPlayedColumn, ref _showRoundPlayedColumn, value);
 			}
 		}
@@ -1199,7 +1130,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.CsgoExePath = value;
-				Settings.Default.Save();
 				Set(() => CsgoExePath, ref _csgoExePath, value);
 			}
 		}
@@ -1210,7 +1140,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.HlaeConfigParentFolderPath = value;
-				Settings.Default.Save();
 				Set(() => HlaeConfigParentFolderPath, ref _hlaeConfigParentFolderPath, value);
 			}
 		}
@@ -1221,7 +1150,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.DownloadFolder = value;
-				Settings.Default.Save();
 				Set(() => DownloadFolderPath, ref _downloadFolderPath, value);
 				_demosService.DownloadFolderPath = value;
 			}
@@ -1233,7 +1161,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.EnableHlae = value;
-				Settings.Default.Save();
 				Set(() => EnableHlae, ref _enableHlae, value);
 			}
 		}
@@ -1244,7 +1171,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.EnableHlaeConfigParent = value;
-				Settings.Default.Save();
 				Set(() => EnableHlaeConfigParent, ref _enableHlaeConfigParent, value);
 			}
 		}
@@ -1255,7 +1181,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.LimitStatsFolder = value;
-				Settings.Default.Save();
 				_cacheService.Filter.Folder = Settings.Default.LimitStatsFolder ? Settings.Default.LastFolder : null;
 				Set(() => LimitStatsSelectedFolder, ref _limitStatsSelectedFolder, value);
 			}
@@ -1267,7 +1192,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.IgnoreLaterBan = value;
-				Settings.Default.Save();
 				Set(() => IgnoreLaterBan, ref _ignoreLaterBan, value);
 				_demosService.IgnoreLaterBan = value;
 			}
@@ -1279,7 +1203,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.WatchAccountSteamId = value;
-				Settings.Default.Save();
 				Set(() => WatchAccountSteamId, ref _watchAccountSteamId, value);
 			}
 		}
@@ -1290,7 +1213,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.DateStatsFrom = value;
-				Settings.Default.Save();
 				_cacheService.Filter.From = value;
 				Set(() => DateStatsFrom, ref _dateStatsFrom, value);
 			}
@@ -1302,7 +1224,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.DateStatsTo = value;
-				Settings.Default.Save();
 				_cacheService.Filter.To = value;
 				Set(() => DateStatsTo, ref _dateStatsTo, value);
 			}
@@ -1320,7 +1241,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.StartBotOnLaunch = value;
-				Settings.Default.Save();
 				Set(() => StartBotOnLaunch, ref _startBotOnLaunch, value);
 			}
 		}
@@ -1331,7 +1251,6 @@ namespace Manager.ViewModel
 			set
 			{
 				Settings.Default.CloseBotOnExit = value;
-				Settings.Default.Save();
 				Set(() => CloseBotOnExit, ref _closeBotOnExit, value);
 			}
 		}
@@ -1467,80 +1386,6 @@ namespace Manager.ViewModel
 							string argument = "/select, \"" + Logger.Instance.LogFilePath + "\"";
 							Process.Start("explorer.exe", argument);
 						}));
-			}
-		}
-
-		/// <summary>
-		/// Command to save width resolution
-		/// </summary>
-		public RelayCommand<string> SaveResolutionWidthCommand
-		{
-			get
-			{
-				return _saveResolutionWidthCommand
-					?? (_saveResolutionWidthCommand = new RelayCommand<string>(
-						width =>
-						{
-							Settings.Default.ResolutionWidth = Convert.ToInt32(width);
-							Settings.Default.Save();
-						},
-						width => !string.IsNullOrEmpty(width)));
-			}
-		}
-
-		/// <summary>
-		/// Command to save height resolution
-		/// </summary>
-		public RelayCommand<string> SaveResolutionHeightCommand
-		{
-			get
-			{
-				return _saveResolutionHeightCommand
-					?? (_saveResolutionHeightCommand = new RelayCommand<string>(
-						height =>
-						{
-							Settings.Default.ResolutionHeight = Convert.ToInt32(height);
-							Settings.Default.Save();
-						}, height => !string.IsNullOrEmpty(height)));
-			}
-		}
-
-		/// <summary>
-		/// Command to save additionals launch parameters
-		/// </summary>
-		public RelayCommand<string> SaveLaunchParametersCommand
-		{
-			get
-			{
-				return _saveLaunchParametersCommand
-					?? (_saveLaunchParametersCommand = new RelayCommand<string>(
-						parameters =>
-						{
-							Settings.Default.LaunchParameters = parameters;
-							Settings.Default.Save();
-						}));
-			}
-		}
-
-		/// <summary>
-		/// Command to change the demos list max size
-		/// </summary>
-		public RelayCommand<string> SaveDemoListSizeCommand
-		{
-			get
-			{
-				return _saveDemoListSizeCommand
-					?? (_saveDemoListSizeCommand = new RelayCommand<string>(
-						inputSize =>
-						{
-							int size = Convert.ToInt32(inputSize);
-							if (size == 0) size = AppSettings.DEMO_PAGE_COUNT;
-							if (size != Settings.Default.DemosListSize)
-							{
-								Settings.Default.DemosListSize = size;
-								Settings.Default.Save();
-							}
-						}, inputSize => !string.IsNullOrEmpty(inputSize)));
 			}
 		}
 

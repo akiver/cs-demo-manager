@@ -136,7 +136,6 @@ namespace Manager
 						Settings.Default.DownloadFolder = Path.GetFullPath(demoFolder);
 					}
 				}
-				Settings.Default.Save();
 			}
 			catch (Exception ex)
 			{

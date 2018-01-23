@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Interop;
 using Core;
 using GalaSoft.MvvmLight.Messaging;
@@ -29,12 +27,6 @@ namespace Manager
 			{
 				TaskbarItemInfo.ProgressValue = msg.Value >= 1 ? 0 : msg.Value;
 			});
-		}
-
-		private void NumberPreviewTextInput(object sender, TextCompositionEventArgs e)
-		{
-			Regex regex = new Regex("[^0-9]+");
-			e.Handled = regex.IsMatch(e.Text);
 		}
 
 		protected override void OnSourceInitialized(EventArgs e)

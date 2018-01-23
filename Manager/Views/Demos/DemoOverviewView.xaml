@@ -166,13 +166,10 @@
 							Value="{Binding FrameLimiterMultiplier}"/>
 				</StackPanel>
 
-				<CheckBox x:Name="CbLogOnlyKills"
-						  Content="{x:Static properties:Resources.LogOnlyKills}"
+				<CheckBox Content="{x:Static properties:Resources.LogOnlyKills}"
 						  IsChecked="{Binding IsLogOnlyKills}"
 						  VerticalAlignment="Center"
-						  Margin="5"
-						  Command="{Binding ToggleLogOnlyKillsCommand}"
-						  CommandParameter="{Binding IsChecked, ElementName=CbLogOnlyKills}"/>
+						  Margin="5" />
 
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center"

@@ -266,7 +266,6 @@ namespace Manager.ViewModel.Demos
 			{
 				Set(() => SelectedFolder, ref _selectedFolder, value);
 				Properties.Settings.Default.LastFolder = value;
-				Properties.Settings.Default.Save();
 				if (Properties.Settings.Default.LimitStatsFolder) _cacheService.Filter.Folder = value;
 				if (_isMainWindowLoaded)
 				{
@@ -808,7 +807,6 @@ namespace Manager.ViewModel.Demos
 
 							}
 							Properties.Settings.Default.ShowAllFolders = isChecked;
-							Properties.Settings.Default.Save();
 						},
 						isChecked => !IsBusy));
 			}
@@ -1538,7 +1536,6 @@ namespace Manager.ViewModel.Demos
 			{
 				UpdateDemoSourceSettings(msg.SelectedItems, demoSelector.Key);
 			}
-			Properties.Settings.Default.Save();
 
 			await LoadDemosHeader();
 		}

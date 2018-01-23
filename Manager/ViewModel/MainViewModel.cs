@@ -235,7 +235,6 @@ namespace Manager.ViewModel
 						if (Folders.Count == 0)
 						{
 							Properties.Settings.Default.LastFolder = string.Empty;
-							Properties.Settings.Default.Save();
 						}
 					}));
 			}

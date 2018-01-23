@@ -103,41 +103,28 @@
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionFullscreen}" />
 							<Label Target="{Binding ElementName=ResolutionWidthTextBox}"
 								   Content="{x:Static properties:Resources.Width}" />
-							<TextBox x:Name="ResolutionWidthTextBox"
-									 PreviewTextInput="NumberPreviewTextInput"
-									 Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth, Converter={StaticResource NullableValue}}">
-								<i:Interaction.Triggers>
-									<i:EventTrigger EventName="LostFocus">
-										<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveResolutionWidthCommand}"
-															   CommandParameter="{Binding Path=Text, ElementName=ResolutionWidthTextBox}"/>
-									</i:EventTrigger>
-								</i:Interaction.Triggers>
-							</TextBox>
-
+							<controls:NumericUpDown x:Name="ResolutionWidthTextBox"
+													Minimum="800"
+													Maximum="10000"
+													HasDecimals="False"
+													HideUpDownButtons="True"
+													HorizontalAlignment="Left"
+													MaxWidth="80"
+													Value="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth}" />
 							<Label Target="{Binding ElementName=ResolutionHeightTextBox}"
 								   Content="{x:Static properties:Resources.Height}" />
-							<TextBox x:Name="ResolutionHeightTextBox"
-									 PreviewTextInput="NumberPreviewTextInput"
-									 Text="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionHeight, Converter={StaticResource NullableValue}}">
-								<i:Interaction.Triggers>
-									<i:EventTrigger EventName="LostFocus">
-										<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveResolutionHeightCommand}"
-															   CommandParameter="{Binding Path=Text, ElementName=ResolutionHeightTextBox}"/>
-									</i:EventTrigger>
-								</i:Interaction.Triggers>
-							</TextBox>
-
+							<controls:NumericUpDown x:Name="ResolutionHeightTextBox"
+													Minimum="600"
+													Maximum="10000"
+													HasDecimals="False"
+													HideUpDownButtons="True"
+													HorizontalAlignment="Left"
+													MaxWidth="80"
+													Value="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionHeight}" />
 							<Label Target="{Binding ElementName=LaunchParametersTextBox}"
 								   Content="{x:Static properties:Resources.AdditionalsParametersLabel}"/>
 							<TextBox x:Name="LaunchParametersTextBox"
-									 Text="{Binding Source={StaticResource Locator}, Path=Settings.LaunchParameters}">
-								<i:Interaction.Triggers>
-									<i:EventTrigger EventName="LostFocus">
-										<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveLaunchParametersCommand}"
-															   CommandParameter="{Binding Path=Text, ElementName=LaunchParametersTextBox}"/>
-									</i:EventTrigger>
-								</i:Interaction.Triggers>
-							</TextBox>
+									 Text="{Binding Source={StaticResource Locator}, Path=Settings.LaunchParameters}" />
 							<CheckBox Content="{x:Static properties:Resources.UseCutomLowlightHighlight}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsUseCustomActionGeneration}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
@@ -251,16 +238,14 @@
 									  SelectedItem="{Binding SelectedFolder}"/>
 							<Label Target="{Binding ElementName=DemosListSizeTextBox}"
 								   Content="{x:Static properties:Resources.DemosListSize}" />
-							<TextBox x:Name="DemosListSizeTextBox"
-									 PreviewTextInput="NumberPreviewTextInput"
-									 Text="{Binding Source={StaticResource Locator}, Path=Settings.DemosListSize}">
-								<i:Interaction.Triggers>
-									<i:EventTrigger EventName="LostFocus">
-										<i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=Settings.SaveDemoListSizeCommand}"
-															   CommandParameter="{Binding Path=Text, ElementName=DemosListSizeTextBox}"/>
-									</i:EventTrigger>
-								</i:Interaction.Triggers>
-							</TextBox>
+							<controls:NumericUpDown x:Name="DemosListSizeTextBox"
+													Minimum="1"
+													Maximum="500"
+													MaxWidth="50"
+													HorizontalAlignment="Left"
+													HasDecimals="False"
+													HideUpDownButtons="True"
+													Value="{Binding Source={StaticResource Locator}, Path=Settings.DemosListSize}" />
 						</StackPanel>
 					</controls:MetroTabItem>
 					<controls:MetroTabItem Header="{x:Static properties:Resources.Download}">

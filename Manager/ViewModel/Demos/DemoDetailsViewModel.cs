@@ -190,7 +190,6 @@ namespace Manager.ViewModel.Demos
 			set
 			{
 				Settings.Default.ShowLeftPartDetails = value;
-				Settings.Default.Save();
 				Set(() => IsLeftSideVisible, ref _isLeftSideVisible, value);
 			}
 		}
