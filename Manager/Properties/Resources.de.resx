@@ -37,7 +37,7 @@
     <value>MM Demos herunterladen</value>
   </data>
   <data name="ExportAsXls" xml:space="preserve">
-    <value>As XLS exportieren</value>
+    <value>Als XLS exportieren</value>
   </data>
   <data name="GotoTick" xml:space="preserve">
     <value>Gehe zu Tick</value>
@@ -511,7 +511,7 @@
     <value>Lade für den momentan eingeloggten Steam Account alle vorhandenen MM Demos herunter (CTRL+H)</value>
   </data>
   <data name="ToolTipExportXls" xml:space="preserve">
-    <value>Exportiere als XLS (CTRL+X)</value>
+    <value>Als XLS exportieren (CTRL+X)</value>
   </data>
   <data name="ToolTipGoToSuspectsList" xml:space="preserve">
     <value>Liste der Verdächtigen (CTRL+F)</value>
@@ -577,7 +577,7 @@
     <value>Meiste Entry Kills</value>
   </data>
   <data name="LabelMostKillingWeapon" xml:space="preserve">
-    <value>Meist-tötende Waffe</value>
+    <value>Meist tötende Waffe</value>
   </data>
   <data name="LabelPlayerStats" xml:space="preserve">
     <value>Spieler Statistiken</value>
@@ -1517,7 +1517,7 @@
     <value>Durchschnittliche Tode</value>
   </data>
   <data name="Draw" xml:space="preserve">
-    <value>Zeichen</value>
+    <value>Unentschieden</value>
   </data>
   <data name="Duels" xml:space="preserve">
     <value>Duelle</value>
@@ -2247,10 +2247,10 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <value>T</value>
   </data>
   <data name="Lost" xml:space="preserve">
-    <value>Verloren</value>
+    <value>Niederlage</value>
   </data>
   <data name="LostSurrender" xml:space="preserve">
-    <value>Verloren (S)</value>
+    <value>Niederlage (S)</value>
   </data>
   <data name="WinSurrender" xml:space="preserve">
     <value>Sieg (S)</value>
