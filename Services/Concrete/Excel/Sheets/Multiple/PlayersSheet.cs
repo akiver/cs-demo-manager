@@ -23,6 +23,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 				{ "HS", CellType.Numeric },
 				{ "HS%", CellType.Numeric },
 				{ "Rounds", CellType.Numeric },
+				{ "RWS", CellType.Numeric },
 				{ "Rating", CellType.Numeric },
 				{ "ATD (s)", CellType.Numeric },
 				{ "5K", CellType.Numeric },
@@ -141,6 +142,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 						data[player].MvpCount += player.RoundMvpCount;
 						data[player].ScoreCount += player.Score;
 						data[player].Rating += player.RatingHltv;
+						data[player].EseaRws += player.EseaRws;
 						data[player].RoundCount += player.RoundPlayedCount;
 						data[player].IsVacBanned = data[player].IsVacBanned || player.IsVacBanned;
 						data[player].IsOverwatchBanned = data[player].IsOverwatchBanned || player.IsOverwatchBanned;
@@ -180,6 +182,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeadshotCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeadshotPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.RoundCount);
+					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.EseaRws / keyValuePair.Value.MatchCount, 2));
 					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.Rating / keyValuePair.Value.MatchCount, 2));
 					SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.AverageTimeDeathSeconds / keyValuePair.Value.MatchCount, 2));
 					SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.FiveKillCount);

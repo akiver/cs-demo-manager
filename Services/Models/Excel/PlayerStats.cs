@@ -22,6 +22,8 @@ namespace Services.Models.Excel
 
 		public float Rating { get; set; }
 
+		public decimal EseaRws { get; set; }
+
 		public int FiveKillCount { get; set; }
 
 		public int FourKillCount { get; set; }

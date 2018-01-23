@@ -27,6 +27,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 				{ "Bomb defused", CellType.Numeric },
 				{ "MVP", CellType.Numeric },
 				{ "Score", CellType.Numeric },
+				{ "RWS", CellType.Numeric },
 				{ "Rating", CellType.Numeric },
 				{ "ATD (s)", CellType.Numeric },
 				{ "KPR", CellType.Numeric },
@@ -98,11 +99,12 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotPercent);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.TeamKillCount);
-					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKills.Count());
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKills.Count);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.BombPlantedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.BombDefusedCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RoundMvpCount);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.Score);
+					SetCellValue(row, columnNumber++, CellType.Numeric, player.EseaRws);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.RatingHltv);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.AverageTimeDeath);
 					SetCellValue(row, columnNumber++, CellType.Numeric, player.KillPerRound);
