@@ -234,7 +234,7 @@
 						   Foreground="{StaticResource LightGreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Text="planted the bomb on site" />
+						   Text="{x:Static properties:Resources.PlantedOnSite}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource OrangeBrush}"
 						   Text="{Binding Site, StringFormat=' \{0}'}" />
@@ -256,7 +256,7 @@
 						   Foreground="{StaticResource LightGreenBrush}"
 						   Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Text="defused the bomb on site" />
+						   Text="{x:Static properties:Resources.DefusedOnSite}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource OrangeBrush}"
 						   Text="{Binding Site, StringFormat=' \{0}'}" />
@@ -275,12 +275,12 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Text="the bomb planted by" />
+						   Text="{x:Static properties:Resources.BombPlantedBy}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource LightGreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Text="exploded on site" />
+						   Text="{x:Static properties:Resources.ExplodedOnSite}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource OrangeBrush}"
 						   Text="{Binding Site, StringFormat=' \{0}'}" />

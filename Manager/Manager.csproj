@@ -154,6 +154,7 @@
     <Compile Include="Converters\StringToDemoStatusConverter.cs" />
     <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToMinimalDateConverter.cs" />
+    <Compile Include="Converters\StuffTypeToolTipToStringConverter.cs" />
     <Compile Include="Converters\StuffTypeToStringConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
     <Compile Include="Internals\Extensions.cs" />

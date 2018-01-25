@@ -247,8 +247,7 @@ namespace Manager.ViewModel.Demos
 				{
 					List<string> cmds = new List<string>
 					{
-						"// CFG example with some useful commands",
-						"// You should paste your moviemaking CFG here",
+						Properties.Resources.ExampleCFG,
 					};
 					cmds.AddRange(MovieService.DefaultCommands);
 
@@ -583,7 +582,7 @@ namespace Manager.ViewModel.Demos
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while saving demo's comment", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorSavingCommentDemo, MessageDialogStyle.Affirmative);
 							   }
 						   }));
 			}
@@ -629,47 +628,47 @@ namespace Manager.ViewModel.Demos
 							   }
 							   if (!IsHLAEInstalled)
 							   {
-								   await _dialogService.ShowErrorAsync("Please install HLAE first from HLAE section.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogInstallHLAEFirst, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (!_movieConfig.UseVirtualDub && !IsFFmpegInstalled)
 							   {
-								   await _dialogService.ShowErrorAsync("Please install FFmpeg first from FFmpeg section.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogInstallFFmpegFirst, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (_movieConfig.UseVirtualDub && !IsVirtualDubInstalled)
 							   {
-								   await _dialogService.ShowErrorAsync("Please install VirtualDub first from VirtualDub section.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogInstallVirtuaDubFirst, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (string.IsNullOrEmpty(CsgoExePath))
 							   {
-								   await _dialogService.ShowErrorAsync("Please select csgo.exe path from HLAE section.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogSelectCsgoExeLocation, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (string.IsNullOrEmpty(RawFilesFolderDestination))
 							   {
-								   await _dialogService.ShowErrorAsync("Please select a RAW files folder destination.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogSelectRawFilesDestination, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (StartTick <= 0)
 							   {
-								   await _dialogService.ShowErrorAsync("Please select a valid start tick.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogSelectValidStartTIck, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (EndTick <= 0)
 							   {
-								   await _dialogService.ShowErrorAsync("Please select a valid end tick.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogSelectValidEndTick, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (EndTick <= StartTick)
 							   {
-								   await _dialogService.ShowErrorAsync("End tick must be greater than start tick.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogEndTickGreaterThanStartTick, MessageDialogStyle.Affirmative);
 								   return;
 							   }
 							   if (RequiredSpace >= 30)
 							   {
-								   MessageDialogResult confirm = await _dialogService.ShowMessageAsync($"You need about {RequiredSpace} GB available on your HDD.{Environment.NewLine}Do you want to continue?", MessageDialogStyle.AffirmativeAndNegative);
+								   MessageDialogResult confirm = await _dialogService.ShowMessageAsync(string.Format(Properties.Resources.DialogAmountSpaceRequired, RequiredSpace), MessageDialogStyle.AffirmativeAndNegative);
 								   if (confirm == MessageDialogResult.Negative) return;
 							   }
 
@@ -701,7 +700,7 @@ namespace Manager.ViewModel.Demos
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while generating the video." + Environment.NewLine + e.Message, MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileGeneratingVideo, e.Message), MessageDialogStyle.Affirmative);
 							   }
 							   finally
 							   {
@@ -747,18 +746,18 @@ namespace Manager.ViewModel.Demos
 									   return;
 								   }
 
-								   Notification = "Installing FFmpeg...";
+								   Notification = Properties.Resources.NotificationInstallingFFmpeg;
 								   HasNotification = true;
 								   IsInstalling = true;
 
 								   bool installed = await FFmpegService.Install();
 								   if (!installed)
 								   {
-									   await _dialogService.ShowMessageAsync("FFmpeg has not been installed.", MessageDialogStyle.Affirmative);
+									   await _dialogService.ShowMessageAsync(Properties.Resources.DialogFFmpegHasNotInstalled, MessageDialogStyle.Affirmative);
 									   return;
 								   }
 
-								   await _dialogService.ShowMessageAsync("FFmpeg has been installed.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowMessageAsync(Properties.Resources.DialogFFmpegHasBeenInstalled, MessageDialogStyle.Affirmative);
 								   RaisePropertyChanged(() => IsFFmpegInstalled);
 								   RaisePropertyChanged(() => IsInstallFFmpegAvailable);
 								   RaisePropertyChanged(() => FFmpegVersion);
@@ -767,7 +766,7 @@ namespace Manager.ViewModel.Demos
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while installing FFmpeg." + Environment.NewLine + e.Message, MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorInstallingFFmpeg, e.Message), MessageDialogStyle.Affirmative);
 							   }
 							   finally
 							   {
@@ -798,18 +797,18 @@ namespace Manager.ViewModel.Demos
 									   return;
 								   }
 
-								   Notification = "Installing VirtualDub...";
+								   Notification = Properties.Resources.InstallingVirtualDub;
 								   HasNotification = true;
 								   IsInstalling = true;
 
 								   bool installed = await VirtualDubService.Install();
 								   if (!installed)
 								   {
-									   await _dialogService.ShowMessageAsync("VirtualDub has not been installed.", MessageDialogStyle.Affirmative);
+									   await _dialogService.ShowMessageAsync(Properties.Resources.DialogVirtualDubHasNotBeenInstalled, MessageDialogStyle.Affirmative);
 									   return;
 								   }
 
-								   await _dialogService.ShowMessageAsync("VirtualDub has been installed.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowMessageAsync(Properties.Resources.DialogVirtualDubHasBeenInstalled, MessageDialogStyle.Affirmative);
 								   RaisePropertyChanged(() => IsVirtualDubInstalled);
 								   RaisePropertyChanged(() => IsInstallVirtualDubAvailable);
 								   RaisePropertyChanged(() => VirtualDubVersion);
@@ -817,7 +816,7 @@ namespace Manager.ViewModel.Demos
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while installing VirtualDub." + Environment.NewLine + e.Message, MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorInstallingVirtualDub, e.Message), MessageDialogStyle.Affirmative);
 							   }
 							   finally
 							   {
@@ -848,18 +847,18 @@ namespace Manager.ViewModel.Demos
 									   return;
 								   }
 
-								   Notification = "Installing HLAE...";
+								   Notification = Properties.Resources.NotificationInstallingHlae;
 								   HasNotification = true;
 								   IsInstalling = true;
 
 								   bool installed = await HlaeService.UpgradeHlae();
 								   if (!installed)
 								   {
-									   await _dialogService.ShowMessageAsync("HLAE installation failed.", MessageDialogStyle.Affirmative);
+									   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasNotBeenInstalled, MessageDialogStyle.Affirmative);
 									   return;
 								   }
 
-								   await _dialogService.ShowMessageAsync("HLAE has been installed.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasBeenInstalled, MessageDialogStyle.Affirmative);
 								   RaisePropertyChanged(() => IsHLAEInstalled);
 								   RaisePropertyChanged(() => HLAEVersion);
 
@@ -876,7 +875,7 @@ namespace Manager.ViewModel.Demos
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while installing HLAE.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorInstallingHLAE, e.Message), MessageDialogStyle.Affirmative);
 							   }
 							   finally
 							   {
@@ -909,30 +908,29 @@ namespace Manager.ViewModel.Demos
 
 								   IsInstalling = true;
 								   HasNotification = true;
-								   Notification = "Checking for HLAE update...";
+								   Notification = Properties.Resources.CheckingForHLAEUpdate;
 								   bool isUpdateAvailable = await HlaeService.IsUpdateAvailable();
 								   if (!isUpdateAvailable)
 								   {
-									   await _dialogService.ShowMessageAsync("No HLAE update available",
-										   MessageDialogStyle.Affirmative);
+									   await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoHLAEUpdateAvailable, MessageDialogStyle.Affirmative);
 									   return;
 								   }
 
-								   Notification = "Updating HLAE...";
+								   Notification = Properties.Resources.CheckingForHLAEUpdate;
 								   bool hasUpdated = await HlaeService.UpgradeHlae();
 								   if (!hasUpdated)
 								   {
-									   await _dialogService.ShowMessageAsync("HLAE has not been updated", MessageDialogStyle.Affirmative);
+									   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasNotBeenUpdated, MessageDialogStyle.Affirmative);
 									   return;
 								   }
 
-								   await _dialogService.ShowMessageAsync("HLAE has been updated", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasBeenInstalled, MessageDialogStyle.Affirmative);
 								   RaisePropertyChanged(() => HLAEVersion);
 							   }
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while updating HLAE.", MessageDialogStyle.Affirmative);
+								   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorUpdatingHLAE, e.Message), MessageDialogStyle.Affirmative);
 							   }
 							   finally
 							   {
@@ -1152,11 +1150,11 @@ namespace Manager.ViewModel.Demos
 
 		private async Task<int> GetSecondsFromInput()
 		{
-			string input = await _dialogService.ShowInputAsync(Properties.Resources.Information, "How many seconds?");
+			string input = await _dialogService.ShowInputAsync(Properties.Resources.Information, Properties.Resources.HowManySeconds);
 			bool isNumeric = int.TryParse(input, out var seconds); // C# 7 power
 			if (!isNumeric && input != null)
 			{
-				await _dialogService.ShowErrorAsync("A valid number is required.", MessageDialogStyle.Affirmative);
+				await _dialogService.ShowErrorAsync(Properties.Resources.ValidNumberRequired, MessageDialogStyle.Affirmative);
 			}
 
 			return seconds;
@@ -1222,7 +1220,7 @@ namespace Manager.ViewModel.Demos
 						   {
 							   try
 							   {
-								   Notification = "Loading data...";
+								   Notification = Properties.Resources.LoadingData;
 								   HasNotification = true;
 								   IsPovDemo = Demo.Type == Pov.NAME;
 								   IsCorruptedDemo = Demo.Ticks == 0;
@@ -1251,13 +1249,13 @@ namespace Manager.ViewModel.Demos
 								   {
 									   bool isUpdateAvailable = await HlaeService.IsUpdateAvailable();
 									   if (isUpdateAvailable)
-										   await _dialogService.ShowMessageAsync("A new HLAE version is available." + Environment.NewLine + "Please update it by clicking on the \"Update\" button.", MessageDialogStyle.Affirmative);
+										   await _dialogService.ShowMessageAsync(Properties.Resources.DialogPleaseUpdateHLAE, MessageDialogStyle.Affirmative);
 								   }
 							   }
 							   catch (Exception e)
 							   {
 								   Logger.Instance.Log(e);
-								   await _dialogService.ShowErrorAsync("An error occured while loading data " + Environment.NewLine + e.Message,
+								   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorLoadingData, e.Message),
 									   MessageDialogStyle.Affirmative);
 							   }
 							   finally
@@ -1291,31 +1289,31 @@ namespace Manager.ViewModel.Demos
 		private void HandleOnGameRunning()
 		{
 			HasNotification = true;
-			Notification = "CSGO recording in progress, please wait...";
+			Notification = Properties.Resources.CSGORecordingInProgress;
 		}
 
 		private void OnHLAEStarted()
 		{
 			HasNotification = true;
-			Notification = "Starting HLAE, please wait...";
+			Notification = Properties.Resources.DialogPleaseUpdateHLAE;
 		}
 
 		private void OnFFmpegStarted()
 		{
 			HasNotification = true;
-			Notification = "FFmpeg encoding in progress, please wait...";
+			Notification = Properties.Resources.FFmpegEncodingInProgress;
 		}
 
 		private void OnGameStarted()
 		{
 			HasNotification = true;
-			Notification = "Starting CSGO, please wait...";
+			Notification = Properties.Resources.StartingCSGO;
 		}
 
 		private void OnVirtualDubStarted()
 		{
 			HasNotification = true;
-			Notification = "VirtualDub encoding in progress, please wait...";
+			Notification = Properties.Resources.VirtualDubEncodingInProgress;
 		}
 
 		private void InitConfiguration()

@@ -34,10 +34,6 @@
           <source>{0} killed {1}</source>
           <target state="final">{0} 击杀 {1}</target>
         </trans-unit>
-        <trans-unit id="Kills" translate="yes" xml:space="preserve">
-          <source>Kills</source>
-          <target state="final">杀敌</target>
-        </trans-unit>
         <trans-unit id="Molotov" translate="yes" xml:space="preserve">
           <source>Molotov</source>
           <target state="final">燃烧弹</target>
@@ -117,6 +113,67 @@
         <trans-unit id="vd" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
           <source>..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
           <target state="final">..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="Kill" translate="yes" xml:space="preserve">
+          <source>Kill</source>
+          <target state="new">Kill</target>
+        </trans-unit>
+        <trans-unit id="BombDefusedEventName" translate="yes" xml:space="preserve">
+          <source>of the bomb defused</source>
+          <target state="new">of the bomb defused</target>
+        </trans-unit>
+        <trans-unit id="BombExplodedEventName" translate="yes" xml:space="preserve">
+          <source>of the bomb exploded</source>
+          <target state="new">of the bomb exploded</target>
+        </trans-unit>
+        <trans-unit id="BombPlantedEventName" translate="yes" xml:space="preserve">
+          <source>of the bomb planted</source>
+          <target state="new">of the bomb planted</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">example: Set the tick of "the bomb planted"</note>
+        </trans-unit>
+        <trans-unit id="DecoyEventName" translate="yes" xml:space="preserve">
+          <source>of the decoy</source>
+          <target state="new">of the decoy</target>
+        </trans-unit>
+        <trans-unit id="FlashbangEventName" translate="yes" xml:space="preserve">
+          <source>of the flashbang</source>
+          <target state="new">of the flashbang</target>
+        </trans-unit>
+        <trans-unit id="HEEventName" translate="yes" xml:space="preserve">
+          <source>of the HE</source>
+          <target state="new">of the HE</target>
+        </trans-unit>
+        <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
+          <source>Incendiary</source>
+          <target state="new">Incendiary</target>
+        </trans-unit>
+        <trans-unit id="IncendiaryEventName" translate="yes" xml:space="preserve">
+          <source>of the incendiary</source>
+          <target state="new">of the incendiary</target>
+        </trans-unit>
+        <trans-unit id="KillEventName" translate="yes" xml:space="preserve">
+          <source>of the kill</source>
+          <target state="new">of the kill</target>
+        </trans-unit>
+        <trans-unit id="MolotovEventName" translate="yes" xml:space="preserve">
+          <source>of the molotov</source>
+          <target state="new">of the molotov</target>
+        </trans-unit>
+        <trans-unit id="Round" translate="yes" xml:space="preserve">
+          <source>Round</source>
+          <target state="new">Round</target>
+        </trans-unit>
+        <trans-unit id="SmokeEventName" translate="yes" xml:space="preserve">
+          <source>of the smoke</source>
+          <target state="new">of the smoke</target>
+        </trans-unit>
+        <trans-unit id="RoundEndEventName" translate="yes" xml:space="preserve">
+          <source>of the round end</source>
+          <target state="new">of the round end</target>
+        </trans-unit>
+        <trans-unit id="RoundStartEventName" translate="yes" xml:space="preserve">
+          <source>of the round start</source>
+          <target state="new">of the round start</target>
         </trans-unit>
       </group>
     </body>

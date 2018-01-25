@@ -80,7 +80,7 @@
 
 				<Button Style="{DynamicResource GeneralButton}"
 						Command="{Binding GenerateMovie}"
-						ToolTip="Start movie generation">
+						ToolTip="{x:Static properties:Resources.ToolTipGenerateMovie}">
 					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 						<Rectangle Width="15"
 								   Height="15"
@@ -90,17 +90,17 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Generate"
+						<TextBlock Text="{x:Static properties:Resources.Generate}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
-				<CheckBox Content="Generate video file"
+				<CheckBox Content="{x:Static properties:Resources.GenerateVideoFile}"
 						  IsChecked="{Binding GenerateVideoFile}"
 						  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 				<controls:ToggleSwitch OnLabel="VirtualDub"
 									   OffLabel="FFmpeg"
 									   VerticalAlignment="Center"
-									   ToolTip="Switch between VirtualDub / FFmpeg"
+									   ToolTip="{x:Static properties:Resources.ToolTipSwitchBetweenFFmpegVirtualDub}"
 									   IsChecked="{Binding UseVirtualDub}"
 									   Visibility="{Binding GenerateVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}"
 									   IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
@@ -117,7 +117,7 @@
 											 Stretch="Fill" />
 							</Rectangle.OpacityMask>
 						</Rectangle>
-						<TextBlock Text="Cancel"
+						<TextBlock Text="{x:Static properties:Resources.Cancel}"
 								   Style="{StaticResource ButtonTitleStyle}" />
 					</StackPanel>
 				</Button>
@@ -125,15 +125,15 @@
 				<StackPanel Orientation="Horizontal"
 							VerticalAlignment="Center"
 							Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
-					<Label Content="RAW files required space:"
+					<Label Content="{x:Static properties:Resources.RawFilesRequiredSpace}"
 						   Foreground="{StaticResource OrangeBrush}"/>
 					<TextBlock Text="{Binding RequiredSpace, Mode=OneWay, StringFormat=' ~\{0} '}"
 							   Style="{StaticResource TextBlockSmallDanger}" />
-					<TextBlock Text="GB"
+					<TextBlock Text="{x:Static properties:Resources.GB}"
 							   Style="{StaticResource TextBlockSmallDanger}" />
 				</StackPanel>
 
-				<TextBlock Text="Required space calculation is not available with corrupted demos."
+				<TextBlock Text="{x:Static properties:Resources.RequiredSpaceNotAvailable}"
 						   VerticalAlignment="Center"
 						   Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityConverter}}"
 						   Style="{StaticResource TextBlockSmallDanger}" />
@@ -182,27 +182,27 @@
 									<Hyperlink Command="{Binding HandleHyperLinkCommand}"
 											   Style="{StaticResource HyperLinkStyle}"
 											   CommandParameter="https://github.com/ripieces/advancedfx/wiki/Half-Life-Advanced-Effects">
-										Official website
+										<TextBlock Text="{x:Static properties:Resources.Website}"/>
 									</Hyperlink>
 								</TextBlock>
 								<StackPanel Orientation="Horizontal"
 											HorizontalAlignment="Right">
-									<Label Content="Installed version:"
+									<Label Content="{x:Static properties:Resources.LabelInstalledVersion}"
 										   VerticalAlignment="Center" />
 									<TextBlock Style="{StaticResource TextBlockSmallWarning}"
 											   Text="{Binding HLAEVersion, Mode=OneWay, StringFormat={} {0}}" />
-									<Button Content="Install"
-											ToolTip="Install HLAE"
+									<Button Content="{x:Static properties:Resources.Install}"
+											ToolTip="{x:Static properties:Resources.ToolTipInstallHLAE}"
 											Style="{DynamicResource GeneralButton}"
 											IsEnabled="{Binding IsHLAEInstalled, Converter={StaticResource BooleanInvertedConverter}}"
 											Command="{Binding InstallHLAE}"/>
-									<Button Content="Browse"
-											ToolTip="Open HLAE installation folder in Window Explorer"
+									<Button Content="{x:Static properties:Resources.Browse}"
+											ToolTip="{x:Static properties:Resources.ToolTipBrowseToHLAEFolder}"
 											Style="{DynamicResource GeneralButton}"
 											IsEnabled="{Binding IsHLAEInstalled}"
 											Command="{Binding NavigateToHLAEFolder}"/>
-									<Button Content="Update"
-											ToolTip="Update HLAE"
+									<Button Content="{x:Static properties:Resources.Update}"
+											ToolTip="{x:Static properties:Resources.ToolTipUpdateHLAE}"
 											Style="{DynamicResource GeneralButton}"
 											IsEnabled="{Binding IsHLAEInstalled}"
 											Command="{Binding UpdateHLAE}"/>
@@ -229,8 +229,8 @@
 										 Style="{StaticResource MovieTextBox}"
 										 IsReadOnly="True" />
 								<Button Grid.Column="2"
-										Content="Change"
-										ToolTip="Change csgo.exe location"
+										Content="{x:Static properties:Resources.Change}"
+										ToolTip="{x:Static properties:Resources.ToolTipSelectCsgoExeLocation}"
 										Style="{DynamicResource GeneralButton}"
 										Command="{Binding SelectCsgoExePathLocation}"/>
 							</Grid>
@@ -250,8 +250,8 @@
 											 Style="{StaticResource MovieTextBox}"
 											 IsReadOnly="True" />
 									<Button Grid.Column="1"
-											Content="Select folder"
-											ToolTip="Change HLAE config parent folder location"
+											Content="{x:Static properties:Resources.SelectFolder}"
+											ToolTip="{x:Static properties:Resources.ChangeHLAEParentFolderLocation}"
 											Style="{DynamicResource GeneralButton}"
 											IsEnabled="{Binding EnableHlaeConfigParentFolder}"
 											Command="{Binding SelectHlaeConfigParentPath}"/>
@@ -279,23 +279,23 @@
 									<Hyperlink Style="{StaticResource HyperLinkStyle}"
 											   Command="{Binding HandleHyperLinkCommand}"
 											   CommandParameter="https://www.ffmpeg.org/">
-										Official website
+										<TextBlock Text="{x:Static properties:Resources.Website}" />
 									</Hyperlink>
 									</TextBlock>
 
 									<StackPanel Orientation="Horizontal"
 											HorizontalAlignment="Right">
-										<Label Content="Installed version:"
+										<Label Content="{x:Static properties:Resources.LabelInstalledVersion}"
 										   VerticalAlignment="Center" />
 										<TextBlock Style="{StaticResource TextBlockSmallWarning}"
 											   Text="{Binding FFmpegVersion, Mode=OneWay, StringFormat={} {0}}" />
-										<Button Content="Install"
-												ToolTip="Install FFmpeg"
+										<Button Content="{x:Static properties:Resources.Install}"
+												ToolTip="{x:Static properties:Resources.ToolTipInstallFFmpeg}"
 											Style="{DynamicResource GeneralButton}"
 											IsEnabled="{Binding IsInstallFFmpegAvailable}"
 											Command="{Binding InstallFFmpeg}"/>
-										<Button Content="Browse"
-												ToolTip="Open FFmpeg installation folder in Windows Explorer"
+										<Button Content="{x:Static properties:Resources.Browse}"
+												ToolTip="{x:Static properties:Resources.ToolTipBrowseToFFmpegFolder}"
 											Style="{DynamicResource GeneralButton}"
 											IsEnabled="{Binding IsFFmpegInstalled}"
 											Command="{Binding NavigateToFFmpegFolder}"/>
@@ -314,7 +314,7 @@
 										<ColumnDefinition Width="Auto"/>
 									</Grid.ColumnDefinitions>
 
-									<Label Grid.Column="0" Content="Video quality:"/>
+									<Label Grid.Column="0" Content="{x:Static properties:Resources.LabelVideoQuality}"/>
 									<controls:NumericUpDown Grid.Column="1"
 														Minimum="0"
 														Maximum="51"
@@ -325,7 +325,7 @@
 														IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 														Value="{Binding VideoQuality}"/>
 									<Label Grid.Column="2"
-									   Content="Video framerate:" />
+									   Content="{x:Static properties:Resources.LabelVideoFramerate}" />
 									<controls:NumericUpDown Grid.Column="3"
 														Minimum="30"
 														MinWidth="80"
@@ -334,7 +334,7 @@
 														HasDecimals="False"
 														IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 														Value="{Binding VideoFrameRate}"/>
-									<Label Grid.Column="4" Content="Audio bitrate:"/>
+									<Label Grid.Column="4" Content="{x:Static properties:Resources.LabelAudioBitrate}"/>
 									<ComboBox Grid.Column="5"
 										  ItemsSource="{Binding AudioBitrateValues}"
 										  SelectedItem="{Binding AudioBitrate}" />
@@ -348,20 +348,20 @@
 										<ColumnDefinition Width="*"/>
 									</Grid.ColumnDefinitions>
 									<Label Grid.Column="0"
-									   Content="Extra input parameters:" />
+									   Content="{x:Static properties:Resources.LabelExtraInputParams}" />
 									<TextBox Grid.Column="1"
 										 Style="{StaticResource MovieTextBox}"
 										 Text="{Binding FFmpegInputParameters}"
 										 IsEnabled="{Binding GenerateVideoFile, Mode=OneWay}" />
 									<Label Grid.Column="2"
-									   Content="Extra parameters:" />
+									   Content="{x:Static properties:Resources.LabelExtraParams}" />
 									<TextBox Grid.Column="3"
 										 Style="{StaticResource MovieTextBox}"
 										 Text="{Binding FFmpegExtraParameters}"
 										 IsEnabled="{Binding GenerateVideoFile, Mode=OneWay}" />
 								</Grid>
 								<StackPanel Orientation="Vertical">
-									<Label Content="Command-line input:" />
+									<Label Content="{x:Static properties:Resources.LabelCLI}" />
 									<TextBox Text="{Binding FFmpegCommand, Mode=OneWay}"
 										 TextWrapping="Wrap"
 										 IsEnabled="{Binding GenerateVideoFile, Mode=OneWay}"
@@ -380,23 +380,23 @@
 										<Hyperlink Style="{StaticResource HyperLinkStyle}"
 												   Command="{Binding HandleHyperLinkCommand}"
 												   CommandParameter="http://www.virtualdub.org/">
-											Official website
+											<TextBlock Text="{x:Static properties:Resources.Website}"/>
 										</Hyperlink>
 								</TextBlock>
 
 								<StackPanel Orientation="Horizontal"
 												HorizontalAlignment="Right">
-									<Label Content="Installed version:"
+									<Label Content="{x:Static properties:Resources.LabelInstalledVersion}"
 											   VerticalAlignment="Center" />
 									<TextBlock Style="{StaticResource TextBlockSmallWarning}"
 												   Text="{Binding VirtualDubVersion, Mode=OneWay, StringFormat={} {0}}" />
-									<Button Content="Install"
-											ToolTip="Install VirtualDub"
+									<Button Content="{x:Static properties:Resources.Install}"
+											ToolTip="{x:Static properties:Resources.ToolTipInstallVirtualDub}"
 												Style="{DynamicResource GeneralButton}"
 												IsEnabled="{Binding IsVirtualDubInstalled, Converter={StaticResource BooleanInvertedConverter}}"
 												Command="{Binding InstallVirtualDub}"/>
-									<Button Content="Browse"
-											ToolTip="Open VirtualDub installation folder in Window Explorer"
+									<Button Content="{x:Static properties:Resources.Browse}"
+											ToolTip="{x:Static properties:Resources.ToolTipBrowseToVirtualDubFolder}"
 												Style="{DynamicResource GeneralButton}"
 												IsEnabled="{Binding IsVirtualDubInstalled}"
 												Command="{Binding NavigateToVirtualDubFolder}"/>
@@ -418,7 +418,7 @@
 						<StackPanel Orientation="Horizontal"
 									VerticalAlignment="Center"
 									Height="38">
-							<TextBlock Text="General"
+							<TextBlock Text="{x:Static properties:Resources.General}"
 									   Style="{StaticResource SmallTitleStyle}" />
 						</StackPanel>
 					</Border>
@@ -430,19 +430,19 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 						<Label Grid.Column="0"
-							   Content="RAW files destination folder:"
+							   Content="{x:Static properties:Resources.LabelRawFilesFolder}"
 							   VerticalAlignment="Center" />
 						<TextBox Grid.Column="1"
 								 Text="{Binding RawFilesFolderDestination}"
 								 Style="{StaticResource MovieTextBox}"
 								 IsReadOnly="True" />
-						<Button Grid.Column="2" Content="Change"
+						<Button Grid.Column="2" Content="{x:Static properties:Resources.Change}"
 								Style="{DynamicResource GeneralButton}"
-								ToolTip="Change RAW files folder destination"
+								ToolTip="{x:Static properties:Resources.ToolTipChangeRawFilesDestination}"
 								Command="{Binding SelectRawFilesFolderDestination}"/>
 						<Button Grid.Column="3"
 								Content="{x:Static properties:Resources.Browse}"
-								ToolTip="Open RAW files folder in Windows Explorer"
+								ToolTip="{x:Static properties:Resources.ToolTipBrowseToRawFilesDestination}"
 								Style="{DynamicResource GeneralButton}"
 								Command="{Binding NavigateToRawFilesFolder}"/>
 					</Grid>
@@ -455,20 +455,20 @@
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
 						<Label Grid.Column="0"
-							   Content="Output folder destination:"
+							   Content="{x:Static properties:Resources.LabelOutputDestination}"
 							   VerticalAlignment="Center" />
 						<TextBox Grid.Column="1"
 								 Text="{Binding OuputFileDestinationFolder}"
 								 Style="{StaticResource MovieTextBox}"
 								 IsReadOnly="True" />
 						<Button Grid.Column="2"
-								Content="Change"
-								ToolTip="Change output folder destination"
+								Content="{x:Static properties:Resources.Change}"
+								ToolTip="{x:Static properties:Resources.ToolTipChangeOutputDestination}"
 								Style="{DynamicResource GeneralButton}"
 								Command="{Binding SelectOutputFileDestinationFolder}"/>
 						<Button Grid.Column="3"
 								Content="{x:Static properties:Resources.Browse}"
-								ToolTip="Open output folder in Windows Explorer"
+								ToolTip="{x:Static properties:Resources.ToolTipBrowseToOutputDestination}"
 								Style="{DynamicResource GeneralButton}"
 								Command="{Binding NavigateToOutputFileFolderDestination}"/>
 					</Grid>
@@ -479,7 +479,7 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 						<Label Grid.Column="0"
-							   Content="Output filename" />
+							   Content="{x:Static properties:Resources.LabelOutputFilename}" />
 						<TextBox Grid.Column="1"
 								 Text="{Binding OutputFileName}"
 								 Style="{StaticResource MovieTextBox}"
@@ -488,21 +488,21 @@
 					</Grid>
 
 					<StackPanel Orientation="Horizontal" Margin="0 5 0 5">
-						<Label Content="Framerate:" />
+						<Label Content="{x:Static properties:Resources.LabelFramerate}" />
 						<controls:NumericUpDown Minimum="30"
 												Interval="10"
 												HasDecimals="False"
 												MinWidth="80"
 												IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 												Value="{Binding FrameRate}"/>
-						<Label Content="Width:" />
+						<Label Content="{x:Static properties:Resources.LabelWidth}" />
 						<controls:NumericUpDown Minimum="800"
 												HideUpDownButtons="True"
 												HasDecimals="False"
 												MinWidth="40"
 												IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 												Value="{Binding Width}"/>
-						<Label Content="Height:" />
+						<Label Content="{x:Static properties:Resources.LabelHeight}" />
 						<controls:NumericUpDown Minimum="600"
 												HideUpDownButtons="True"
 												HasDecimals="False"
@@ -512,7 +512,7 @@
 					</StackPanel>
 
 					<StackPanel Orientation="Horizontal" Margin="0 0 0 5">
-						<Label Content="Start tick"
+						<Label Content="{x:Static properties:Resources.LabelStartTick}"
 							   Foreground="{StaticResource OrangeBrush}" />
 						<controls:NumericUpDown Minimum="0"
 												Interval="1"
@@ -520,7 +520,7 @@
 												MinWidth="100"
 												IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 												Value="{Binding StartTick}"/>
-						<Label Content="End tick"
+						<Label Content="{x:Static properties:Resources.LabelEndTick}"
 							   Foreground="{StaticResource OrangeBrush}" />
 						<controls:NumericUpDown Minimum="0"
 												Interval="1"
@@ -528,7 +528,7 @@
 												MinWidth="100"
 												IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 												Value="{Binding EndTick}"/>
-						<Label Content="Duration (seconds)"
+						<Label Content="{x:Static properties:Resources.LabelDurationSeconds}"
 							   Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
 							   Foreground="{StaticResource OrangeBrush}" />
 						<controls:NumericUpDown Minimum="0"
@@ -542,7 +542,7 @@
 
 					<StackPanel Orientation="Horizontal"
 								Visibility="{Binding IsPovDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
-						<CheckBox Content="Focus on player:"
+						<CheckBox Content="{x:Static properties:Resources.FocusOnPlayer}"
 								  IsChecked="{Binding FocusOnPlayer}"
 								  Style="{StaticResource CheckBoxColumnOptionStyle}"
 								  Foreground="{StaticResource OrangeBrush}"
@@ -565,14 +565,14 @@
 
 
 					<StackPanel Orientation="Vertical">
-						<CheckBox Content="Auto close the game when recording is done"
+						<CheckBox Content="{x:Static properties:Resources.AutoCloseGameOnRecordEnd}"
 								  IsChecked="{Binding AutoCloseGame}"
 								  Style="{StaticResource CheckBoxColumnOptionStyle}"
 								  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
-						<CheckBox Content="Delete RAW files at the end of encoding"
+						<CheckBox Content="{x:Static properties:Resources.DeleteRawFilesOnEncodeEnd}"
 								  IsChecked="{Binding CleanUpRawFiles}"
 								  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-						<CheckBox Content="Open video in Windows Explorer at the end of encoding"
+						<CheckBox Content="{x:Static properties:Resources.OpenFolderOnEncodeEnd}"
 								  IsChecked="{Binding OpenInExplorer}"
 								  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 					</StackPanel>
@@ -597,31 +597,31 @@
 							<Border BorderBrush="{StaticResource LightWhiteBrush}"
 									BorderThickness="0 0 0 1">
 								<DockPanel VerticalAlignment="Center">
-									<TextBlock Text="CFG"
+									<TextBlock Text="{x:Static properties:Resources.CFG}"
 											   Style="{StaticResource SmallTitleStyle}" />
 									<StackPanel Orientation="Horizontal"
 												HorizontalAlignment="Right">
-										<Button Content="Reset"
+										<Button Content="{x:Static properties:Resources.Reset}"
 												Style="{DynamicResource GeneralButton}"
 												MinWidth="70"
-												ToolTip="Reset CFG to default"
+												ToolTip="{x:Static properties:Resources.ToolTipResetCFG}"
 												Command="{Binding ResetCfg}" />
-										<Button Content="Show demo comment"
+										<Button Content="{x:Static properties:Resources.ShowDemoComment}"
 												Style="{DynamicResource GeneralButton}"
-												ToolTip="Toggle demo's comment (CTRL+T)"
+												ToolTip="{x:Static properties:Resources.ToolTipToggleDemoComment}"
 												Command="{Binding ToggleDemoCommentVisibility}" />
 									</StackPanel>
 								</DockPanel>
 							</Border>
 
 							<StackPanel Orientation="Vertical">
-								<TextBlock Text="The following CFG will be automatically executed:"/>
+								<TextBlock Text="{x:Static properties:Resources.FollowingCFGWillBeExecuted}"/>
 								<TextBox Text="{Binding MandatoryCvars, Mode=OneWay}"
 										 IsReadOnly="True" />
 							</StackPanel>
 
 							<StackPanel Orientation="Vertical">
-								<TextBlock Text="The following CFG will be executed when the demo start playing:"/>
+								<TextBlock Text="{x:Static properties:Resources.FollowingCFGWillBeExecutedOnGameStart}"/>
 								<TextBox MaxHeight="200"
 										 Text="{Binding Cfg}"
 										 TextWrapping="Wrap"
@@ -644,12 +644,13 @@
 									VerticalAlignment="Center"
 									Margin="5 0 5 0">
 							<DockPanel VerticalAlignment="Center">
-								<TextBlock Text="Demo's comment"
+								<TextBlock Text="{x:Static properties:Resources.Comment}"
 										   Style="{StaticResource SmallTitleStyle}" />
 								<StackPanel Orientation="Horizontal"
 											HorizontalAlignment="Right">
-									<Button Content="Show CFG"
+									<Button Content="{x:Static properties:Resources.ShowCFG}"
 											Style="{DynamicResource GeneralButton}"
+									        ToolTip="{x:Static properties:Resources.ToolTipShowCFG}"
 											Command="{Binding ToggleDemoCommentVisibility}" />
 								</StackPanel>
 							</DockPanel>
@@ -677,14 +678,14 @@
 				   Foreground="{StaticResource RedColorBrush}"
 				   TextWrapping="Wrap"
 				   Visibility="{Binding IsIncompatibleDemo, Converter={StaticResource BooleanToVisibilityConverter}}"
-				   Text="Timeline is not available with POV or corrupted demos. You have to enter ticks manually, adding a comment to the demo may be useful in this case." />
+				   Text="{x:Static properties:Resources.TimeLineNotAvailableWarning}" />
 
 		<TextBlock Grid.Row="4"
 				   Style="{StaticResource BigTitleStyle}"
 				   Foreground="{StaticResource RedColorBrush}"
 				   TextWrapping="Wrap"
 				   Visibility="{Binding IsAnalyzeRequired, Converter={StaticResource BooleanToVisibilityConverter}}"
-				   Text="You have to analyze the demo first to have timeline data." />
+				   Text="{x:Static properties:Resources.AnalyzeForTimeLineWarning}" />
 
 		<telerik:RadTimeline Grid.Row="5"
 							 Visibility="{Binding IsTimelineAvailable, Converter={StaticResource BooleanToVisibilityConverter}}"

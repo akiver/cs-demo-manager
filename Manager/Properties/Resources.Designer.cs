@@ -187,11 +187,29 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to a decoy.
+        /// </summary>
+        public static string Adecoy {
+            get {
+                return ResourceManager.GetString("Adecoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ADR (Average Damage Per Round).
         /// </summary>
         public static string AdrFull {
             get {
                 return ResourceManager.GetString("AdrFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a flashbang.
+        /// </summary>
+        public static string AFlashbang {
+            get {
+                return ResourceManager.GetString("AFlashbang", resourceCulture);
             }
         }
         
@@ -241,6 +259,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to a molotov.
+        /// </summary>
+        public static string AMolotov {
+            get {
+                return ResourceManager.GetString("AMolotov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount ($).
         /// </summary>
         public static string AmountDollar {
@@ -259,6 +286,33 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have to analyze the demo first to have the timeline..
+        /// </summary>
+        public static string AnalyzeForTimeLineWarning {
+            get {
+                return ResourceManager.GetString("AnalyzeForTimeLineWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to an HE.
+        /// </summary>
+        public static string AnHE {
+            get {
+                return ResourceManager.GetString("AnHE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to an incendiary.
+        /// </summary>
+        public static string AnIncendiary {
+            get {
+                return ResourceManager.GetString("AnIncendiary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to APR (Assist Per Round).
         /// </summary>
         public static string AprFull {
@@ -273,6 +327,15 @@ namespace Manager.Properties {
         public static string ArmorDamages {
             get {
                 return ResourceManager.GetString("ArmorDamages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to a smoke.
+        /// </summary>
+        public static string Asmoke {
+            get {
+                return ResourceManager.GetString("Asmoke", resourceCulture);
             }
         }
         
@@ -300,6 +363,15 @@ namespace Manager.Properties {
         public static string Attempts {
             get {
                 return ResourceManager.GetString("Attempts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto close the game when recording is done.
+        /// </summary>
+        public static string AutoCloseGameOnRecordEnd {
+            get {
+                return ResourceManager.GetString("AutoCloseGameOnRecordEnd", resourceCulture);
             }
         }
         
@@ -439,6 +511,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to the bomb planted by.
+        /// </summary>
+        public static string BombPlantedBy {
+            get {
+                return ResourceManager.GetString("BombPlantedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to BP (Bomb Planted).
         /// </summary>
         public static string BombPlantedFull {
@@ -517,6 +598,42 @@ namespace Manager.Properties {
         public static string Cancel {
             get {
                 return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CFG.
+        /// </summary>
+        public static string CFG {
+            get {
+                return ResourceManager.GetString("CFG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change.
+        /// </summary>
+        public static string Change {
+            get {
+                return ResourceManager.GetString("Change", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change HLAE config parent folder location.
+        /// </summary>
+        public static string ChangeHLAEParentFolderLocation {
+            get {
+                return ResourceManager.GetString("ChangeHLAEParentFolderLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking for HLAE update....
+        /// </summary>
+        public static string CheckingForHLAEUpdate {
+            get {
+                return ResourceManager.GetString("CheckingForHLAEUpdate", resourceCulture);
             }
         }
         
@@ -665,6 +782,60 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set the tick {0} as end tick.
+        /// </summary>
+        public static string ContextMenuTimeLineSetEventTickAsEndTick {
+            get {
+                return ResourceManager.GetString("ContextMenuTimeLineSetEventTickAsEndTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the tick {0} as start tick.
+        /// </summary>
+        public static string ContextMenuTimeLineSetEventTickAsStartTick {
+            get {
+                return ResourceManager.GetString("ContextMenuTimeLineSetEventTickAsStartTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the tick {0} minus x seconds as end tick.
+        /// </summary>
+        public static string ContextMenuTimeLineSetEventTickMinusAsEndTick {
+            get {
+                return ResourceManager.GetString("ContextMenuTimeLineSetEventTickMinusAsEndTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the tick {0} minus x seconds as start tick.
+        /// </summary>
+        public static string ContextMenuTimeLineSetEventTickMinusAsStartTick {
+            get {
+                return ResourceManager.GetString("ContextMenuTimeLineSetEventTickMinusAsStartTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the tick {0} plus x seconds as end tick.
+        /// </summary>
+        public static string ContextMenuTimeLineSetEventTickPlusAsEndTick {
+            get {
+                return ResourceManager.GetString("ContextMenuTimeLineSetEventTickPlusAsEndTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the tick {0} plus x seconds as start tick.
+        /// </summary>
+        public static string ContextMenuTimeLineSetEventTickPlusAsStartTick {
+            get {
+                return ResourceManager.GetString("ContextMenuTimeLineSetEventTickPlusAsStartTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contributors.
         /// </summary>
         public static string Contributors {
@@ -760,6 +931,15 @@ namespace Manager.Properties {
         public static string CsgoExePath {
             get {
                 return ResourceManager.GetString("CsgoExePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSGO in-game recording in progress, please wait....
+        /// </summary>
+        public static string CSGORecordingInProgress {
+            get {
+                return ResourceManager.GetString("CSGORecordingInProgress", resourceCulture);
             }
         }
         
@@ -917,11 +1097,29 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to defused the bomb on site.
+        /// </summary>
+        public static string DefusedOnSite {
+            get {
+                return ResourceManager.GetString("DefusedOnSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string Delete {
             get {
                 return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete RAW files at the end of encoding.
+        /// </summary>
+        public static string DeleteRawFilesOnEncodeEnd {
+            get {
+                return ResourceManager.GetString("DeleteRawFilesOnEncodeEnd", resourceCulture);
             }
         }
         
@@ -1084,6 +1282,16 @@ namespace Manager.Properties {
         public static string DialogAddSuspect {
             get {
                 return ResourceManager.GetString("DialogAddSuspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need about {0} GB available on your HDD.
+        ///Do you want to continue?.
+        /// </summary>
+        public static string DialogAmountSpaceRequired {
+            get {
+                return ResourceManager.GetString("DialogAmountSpaceRequired", resourceCulture);
             }
         }
         
@@ -1294,6 +1502,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End tick must be greater than start tick..
+        /// </summary>
+        public static string DialogEndTickGreaterThanStartTick {
+            get {
+                return ResourceManager.GetString("DialogEndTickGreaterThanStartTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter the SteamID 64 or the Steam community URL..
         /// </summary>
         public static string DialogEnterSteamId {
@@ -1384,6 +1601,36 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while installing FFmpeg.
+        ///{0}.
+        /// </summary>
+        public static string DialogErrorInstallingFFmpeg {
+            get {
+                return ResourceManager.GetString("DialogErrorInstallingFFmpeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while installing HLAE.
+        ///{0}.
+        /// </summary>
+        public static string DialogErrorInstallingHLAE {
+            get {
+                return ResourceManager.GetString("DialogErrorInstallingHLAE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while installing VirtualDub.
+        ///{0}.
+        /// </summary>
+        public static string DialogErrorInstallingVirtualDub {
+            get {
+                return ResourceManager.GetString("DialogErrorInstallingVirtualDub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid share code.
         /// </summary>
         public static string DialogErrorInvalidShareCode {
@@ -1402,11 +1649,40 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An error occured while loading data.
+        ///{0}.
+        /// </summary>
+        public static string DialogErrorLoadingData {
+            get {
+                return ResourceManager.GetString("DialogErrorLoadingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured while removing the account..
         /// </summary>
         public static string DialogErrorRemovingAccount {
             get {
                 return ResourceManager.GetString("DialogErrorRemovingAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while saving hte comment of the demo.
+        /// </summary>
+        public static string DialogErrorSavingCommentDemo {
+            get {
+                return ResourceManager.GetString("DialogErrorSavingCommentDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while updating HLAE.
+        ///{0}.
+        /// </summary>
+        public static string DialogErrorUpdatingHLAE {
+            get {
+                return ResourceManager.GetString("DialogErrorUpdatingHLAE", resourceCulture);
             }
         }
         
@@ -1481,6 +1757,16 @@ namespace Manager.Properties {
         public static string DialogErrorWhileExportingDemos {
             get {
                 return ResourceManager.GetString("DialogErrorWhileExportingDemos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occured while generating the video.
+        ///{0].
+        /// </summary>
+        public static string DialogErrorWhileGeneratingVideo {
+            get {
+                return ResourceManager.GetString("DialogErrorWhileGeneratingVideo", resourceCulture);
             }
         }
         
@@ -1585,11 +1871,65 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FFmpeg has been installed..
+        /// </summary>
+        public static string DialogFFmpegHasBeenInstalled {
+            get {
+                return ResourceManager.GetString("DialogFFmpegHasBeenInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FFmpeg has not been installed..
+        /// </summary>
+        public static string DialogFFmpegHasNotInstalled {
+            get {
+                return ResourceManager.GetString("DialogFFmpegHasNotInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Goto Tick.
         /// </summary>
         public static string DialogGoToTick {
             get {
                 return ResourceManager.GetString("DialogGoToTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE has been installed..
+        /// </summary>
+        public static string DialogHLAEHasBeenInstalled {
+            get {
+                return ResourceManager.GetString("DialogHLAEHasBeenInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE has been updated..
+        /// </summary>
+        public static string DialogHLAEHasBeenUpdated {
+            get {
+                return ResourceManager.GetString("DialogHLAEHasBeenUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE has not been installed..
+        /// </summary>
+        public static string DialogHLAEHasNotBeenInstalled {
+            get {
+                return ResourceManager.GetString("DialogHLAEHasNotBeenInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE has not been updated..
+        /// </summary>
+        public static string DialogHLAEHasNotBeenUpdated {
+            get {
+                return ResourceManager.GetString("DialogHLAEHasNotBeenUpdated", resourceCulture);
             }
         }
         
@@ -1645,6 +1985,33 @@ namespace Manager.Properties {
         public static string DialogHlaeUpdateFailed {
             get {
                 return ResourceManager.GetString("DialogHlaeUpdateFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please install FFmpeg first from FFmpeg section..
+        /// </summary>
+        public static string DialogInstallFFmpegFirst {
+            get {
+                return ResourceManager.GetString("DialogInstallFFmpegFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please install HLAE first from HLAE section..
+        /// </summary>
+        public static string DialogInstallHLAEFirst {
+            get {
+                return ResourceManager.GetString("DialogInstallHLAEFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please install VirtualDub first from VirtualDub section..
+        /// </summary>
+        public static string DialogInstallVirtuaDubFirst {
+            get {
+                return ResourceManager.GetString("DialogInstallVirtuaDubFirst", resourceCulture);
             }
         }
         
@@ -1774,6 +2141,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No HLAE update available..
+        /// </summary>
+        public static string DialogNoHLAEUpdateAvailable {
+            get {
+                return ResourceManager.GetString("DialogNoHLAEUpdateAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No newer demo available..
         /// </summary>
         public static string DialogNoNewerDemo {
@@ -1849,6 +2225,16 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A new HLAE version is available.
+        ///Please update it by clicking on the &quot;Update&quot; button..
+        /// </summary>
+        public static string DialogPleaseUpdateHLAE {
+            get {
+                return ResourceManager.GetString("DialogPleaseUpdateHLAE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Which POV (camera perspective) do you want to see?.
         /// </summary>
         public static string DialogPovSelection {
@@ -1886,6 +2272,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select csgo.exe path from HLAE section..
+        /// </summary>
+        public static string DialogSelectCsgoExeLocation {
+            get {
+                return ResourceManager.GetString("DialogSelectCsgoExeLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the csgo.exe file location to enable it..
         /// </summary>
         public static string DialogSelectCsgoPath {
@@ -1904,11 +2299,38 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a RAW files folder destination..
+        /// </summary>
+        public static string DialogSelectRawFilesDestination {
+            get {
+                return ResourceManager.GetString("DialogSelectRawFilesDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select third party application.
         /// </summary>
         public static string DialogSelectThirdParty {
             get {
                 return ResourceManager.GetString("DialogSelectThirdParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a valid end tick..
+        /// </summary>
+        public static string DialogSelectValidEndTick {
+            get {
+                return ResourceManager.GetString("DialogSelectValidEndTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a valid start tick..
+        /// </summary>
+        public static string DialogSelectValidStartTIck {
+            get {
+                return ResourceManager.GetString("DialogSelectValidStartTIck", resourceCulture);
             }
         }
         
@@ -2010,6 +2432,24 @@ namespace Manager.Properties {
         public static string DialogVdmFilesDeleted {
             get {
                 return ResourceManager.GetString("DialogVdmFilesDeleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VirtualDub has been installed..
+        /// </summary>
+        public static string DialogVirtualDubHasBeenInstalled {
+            get {
+                return ResourceManager.GetString("DialogVirtualDubHasBeenInstalled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VirtualDub has not been installed..
+        /// </summary>
+        public static string DialogVirtualDubHasNotBeenInstalled {
+            get {
+                return ResourceManager.GetString("DialogVirtualDubHasNotBeenInstalled", resourceCulture);
             }
         }
         
@@ -2329,6 +2769,25 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to // CFG example with some useful commands
+        ///// You should paste your moviemaking CFG here.
+        /// </summary>
+        public static string ExampleCFG {
+            get {
+                return ResourceManager.GetString("ExampleCFG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to exploded on site.
+        /// </summary>
+        public static string ExplodedOnSite {
+            get {
+                return ResourceManager.GetString("ExplodedOnSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string Export {
@@ -2374,6 +2833,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FFmpeg encoding in progress, please wait....
+        /// </summary>
+        public static string FFmpegEncodingInProgress {
+            get {
+                return ResourceManager.GetString("FFmpegEncodingInProgress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter....
         /// </summary>
         public static string FilterEtc {
@@ -2410,11 +2878,83 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Focus on defuser.
+        /// </summary>
+        public static string FocusOnDefuser {
+            get {
+                return ResourceManager.GetString("FocusOnDefuser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focus on killer.
+        /// </summary>
+        public static string FocusOnKiller {
+            get {
+                return ResourceManager.GetString("FocusOnKiller", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focus on planter.
+        /// </summary>
+        public static string FocusOnPlanter {
+            get {
+                return ResourceManager.GetString("FocusOnPlanter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focus on player.
+        /// </summary>
+        public static string FocusOnPlayer {
+            get {
+                return ResourceManager.GetString("FocusOnPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focus on thrower.
+        /// </summary>
+        public static string FocusOnThrower {
+            get {
+                return ResourceManager.GetString("FocusOnThrower", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Focus on victim.
+        /// </summary>
+        public static string FocusOnVictim {
+            get {
+                return ResourceManager.GetString("FocusOnVictim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Folders.
         /// </summary>
         public static string Folders {
             get {
                 return ResourceManager.GetString("Folders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following CFG will be automatically executed:.
+        /// </summary>
+        public static string FollowingCFGWillBeExecuted {
+            get {
+                return ResourceManager.GetString("FollowingCFGWillBeExecuted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The following CFG will be executed when the demo start playing:.
+        /// </summary>
+        public static string FollowingCFGWillBeExecutedOnGameStart {
+            get {
+                return ResourceManager.GetString("FollowingCFGWillBeExecutedOnGameStart", resourceCulture);
             }
         }
         
@@ -2464,6 +3004,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GB.
+        /// </summary>
+        public static string GB {
+            get {
+                return ResourceManager.GetString("GB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         public static string General {
@@ -2478,6 +3027,15 @@ namespace Manager.Properties {
         public static string Generate {
             get {
                 return ResourceManager.GetString("Generate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Generate video file.
+        /// </summary>
+        public static string GenerateVideoFile {
+            get {
+                return ResourceManager.GetString("GenerateVideoFile", resourceCulture);
             }
         }
         
@@ -4390,6 +4948,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How many seconds?.
+        /// </summary>
+        public static string HowManySeconds {
+            get {
+                return ResourceManager.GetString("HowManySeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ignore ban occured before demo date.
         /// </summary>
         public static string IgnoreBanOccuredAfterDemoDate {
@@ -4453,6 +5020,24 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install.
+        /// </summary>
+        public static string Install {
+            get {
+                return ResourceManager.GetString("Install", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing VirtualDub....
+        /// </summary>
+        public static string InstallingVirtualDub {
+            get {
+                return ResourceManager.GetString("InstallingVirtualDub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Jump kills.
         /// </summary>
         public static string JumpKills {
@@ -4485,6 +5070,15 @@ namespace Manager.Properties {
         public static string KillAverage {
             get {
                 return ResourceManager.GetString("KillAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to killed.
+        /// </summary>
+        public static string Killed {
+            get {
+                return ResourceManager.GetString("Killed", resourceCulture);
             }
         }
         
@@ -4534,11 +5128,65 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio bitrate:.
+        /// </summary>
+        public static string LabelAudioBitrate {
+            get {
+                return ResourceManager.GetString("LabelAudioBitrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Command-line input:.
+        /// </summary>
+        public static string LabelCLI {
+            get {
+                return ResourceManager.GetString("LabelCLI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clientname.
         /// </summary>
         public static string LabelClientname {
             get {
                 return ResourceManager.GetString("LabelClientname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration (seconds):.
+        /// </summary>
+        public static string LabelDurationSeconds {
+            get {
+                return ResourceManager.GetString("LabelDurationSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End tick:.
+        /// </summary>
+        public static string LabelEndTick {
+            get {
+                return ResourceManager.GetString("LabelEndTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra input parameters:.
+        /// </summary>
+        public static string LabelExtraInputParams {
+            get {
+                return ResourceManager.GetString("LabelExtraInputParams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra parameters:.
+        /// </summary>
+        public static string LabelExtraParams {
+            get {
+                return ResourceManager.GetString("LabelExtraParams", resourceCulture);
             }
         }
         
@@ -4552,11 +5200,38 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Framerate:.
+        /// </summary>
+        public static string LabelFramerate {
+            get {
+                return ResourceManager.GetString("LabelFramerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Height:.
+        /// </summary>
+        public static string LabelHeight {
+            get {
+                return ResourceManager.GetString("LabelHeight", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hostname.
         /// </summary>
         public static string LabelHostname {
             get {
                 return ResourceManager.GetString("LabelHostname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installed version:.
+        /// </summary>
+        public static string LabelInstalledVersion {
+            get {
+                return ResourceManager.GetString("LabelInstalledVersion", resourceCulture);
             }
         }
         
@@ -4615,11 +5290,38 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Output folder destination:.
+        /// </summary>
+        public static string LabelOutputDestination {
+            get {
+                return ResourceManager.GetString("LabelOutputDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output filename:.
+        /// </summary>
+        public static string LabelOutputFilename {
+            get {
+                return ResourceManager.GetString("LabelOutputFilename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Player stats.
         /// </summary>
         public static string LabelPlayerStats {
             get {
                 return ResourceManager.GetString("LabelPlayerStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RAW files destination folder:.
+        /// </summary>
+        public static string LabelRawFilesFolder {
+            get {
+                return ResourceManager.GetString("LabelRawFilesFolder", resourceCulture);
             }
         }
         
@@ -4638,6 +5340,15 @@ namespace Manager.Properties {
         public static string LabelSpeed {
             get {
                 return ResourceManager.GetString("LabelSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start tick:.
+        /// </summary>
+        public static string LabelStartTick {
+            get {
+                return ResourceManager.GetString("LabelStartTick", resourceCulture);
             }
         }
         
@@ -4669,11 +5380,38 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Video framerate:.
+        /// </summary>
+        public static string LabelVideoFramerate {
+            get {
+                return ResourceManager.GetString("LabelVideoFramerate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video quality:.
+        /// </summary>
+        public static string LabelVideoQuality {
+            get {
+                return ResourceManager.GetString("LabelVideoQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Volume.
         /// </summary>
         public static string LabelVolume {
             get {
                 return ResourceManager.GetString("LabelVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Width:.
+        /// </summary>
+        public static string LabelWidth {
+            get {
+                return ResourceManager.GetString("LabelWidth", resourceCulture);
             }
         }
         
@@ -4746,6 +5484,15 @@ namespace Manager.Properties {
         public static string LimitStatsToSelectedFolder {
             get {
                 return ResourceManager.GetString("LimitStatsToSelectedFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Loading data....
+        /// </summary>
+        public static string LoadingData {
+            get {
+                return ResourceManager.GetString("LoadingData", resourceCulture);
             }
         }
         
@@ -4918,6 +5665,15 @@ namespace Manager.Properties {
         public static string MoveToWhitelist {
             get {
                 return ResourceManager.GetString("MoveToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Movie.
+        /// </summary>
+        public static string Movie {
+            get {
+                return ResourceManager.GetString("Movie", resourceCulture);
             }
         }
         
@@ -5206,6 +5962,15 @@ namespace Manager.Properties {
         public static string NotificationInitCache {
             get {
                 return ResourceManager.GetString("NotificationInitCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Installing FFmpeg....
+        /// </summary>
+        public static string NotificationInstallingFFmpeg {
+            get {
+                return ResourceManager.GetString("NotificationInstallingFFmpeg", resourceCulture);
             }
         }
         
@@ -5678,6 +6443,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open video in Windows Explorer at the end of encoding.
+        /// </summary>
+        public static string OpenFolderOnEncodeEnd {
+            get {
+                return ResourceManager.GetString("OpenFolderOnEncodeEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to or send an.
         /// </summary>
         public static string OrSendAn {
@@ -5737,6 +6511,15 @@ namespace Manager.Properties {
         public static string Pistoles {
             get {
                 return ResourceManager.GetString("Pistoles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to planted the bomb on site.
+        /// </summary>
+        public static string PlantedOnSite {
+            get {
+                return ResourceManager.GetString("PlantedOnSite", resourceCulture);
             }
         }
         
@@ -5858,6 +6641,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RAW files required space:.
+        /// </summary>
+        public static string RawFilesRequiredSpace {
+            get {
+                return ResourceManager.GetString("RawFilesRequiredSpace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reason.
         /// </summary>
         public static string Reason {
@@ -5912,6 +6704,24 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Required space calculation is not available with corrupted demos..
+        /// </summary>
+        public static string RequiredSpaceNotAvailable {
+            get {
+                return ResourceManager.GetString("RequiredSpaceNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string Reset {
+            get {
+                return ResourceManager.GetString("Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Rifle.
         /// </summary>
         public static string Rifle {
@@ -5962,6 +6772,15 @@ namespace Manager.Properties {
         public static string RoundDetails {
             get {
                 return ResourceManager.GetString("RoundDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round #.
+        /// </summary>
+        public static string RoundNumber {
+            get {
+                return ResourceManager.GetString("RoundNumber", resourceCulture);
             }
         }
         
@@ -6137,11 +6956,38 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select folder.
+        /// </summary>
+        public static string SelectFolder {
+            get {
+                return ResourceManager.GetString("SelectFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selection.
         /// </summary>
         public static string Selection {
             get {
                 return ResourceManager.GetString("Selection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set tick {0} as end tick.
+        /// </summary>
+        public static string SetTickAsEndTick {
+            get {
+                return ResourceManager.GetString("SetTickAsEndTick", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set tick {0} as start tick.
+        /// </summary>
+        public static string SetTickAsStartTick {
+            get {
+                return ResourceManager.GetString("SetTickAsStartTick", resourceCulture);
             }
         }
         
@@ -6205,6 +7051,24 @@ namespace Manager.Properties {
         public static string ShowAllFolders {
             get {
                 return ResourceManager.GetString("ShowAllFolders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show CFG.
+        /// </summary>
+        public static string ShowCFG {
+            get {
+                return ResourceManager.GetString("ShowCFG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show demo comment.
+        /// </summary>
+        public static string ShowDemoComment {
+            get {
+                return ResourceManager.GetString("ShowDemoComment", resourceCulture);
             }
         }
         
@@ -6412,6 +7276,24 @@ namespace Manager.Properties {
         public static string StartBotOnLaunch {
             get {
                 return ResourceManager.GetString("StartBotOnLaunch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting CSGO, please wait....
+        /// </summary>
+        public static string StartingCSGO {
+            get {
+                return ResourceManager.GetString("StartingCSGO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting HLAE, please wait....
+        /// </summary>
+        public static string StartingHLAE {
+            get {
+                return ResourceManager.GetString("StartingHLAE", resourceCulture);
             }
         }
         
@@ -6632,6 +7514,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to thrown.
+        /// </summary>
+        public static string Thrown {
+            get {
+                return ResourceManager.GetString("Thrown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tick.
         /// </summary>
         public static string Tick {
@@ -6673,6 +7564,15 @@ namespace Manager.Properties {
         public static string Timeline {
             get {
                 return ResourceManager.GetString("Timeline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case..
+        /// </summary>
+        public static string TimeLineNotAvailableWarning {
+            get {
+                return ResourceManager.GetString("TimeLineNotAvailableWarning", resourceCulture);
             }
         }
         
@@ -6830,6 +7730,69 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Open FFmpeg installation folder in Windows Explorer.
+        /// </summary>
+        public static string ToolTipBrowseToFFmpegFolder {
+            get {
+                return ResourceManager.GetString("ToolTipBrowseToFFmpegFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open HLAE installation folder in Window Explorer.
+        /// </summary>
+        public static string ToolTipBrowseToHLAEFolder {
+            get {
+                return ResourceManager.GetString("ToolTipBrowseToHLAEFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open output folder in Windows Explorer.
+        /// </summary>
+        public static string ToolTipBrowseToOutputDestination {
+            get {
+                return ResourceManager.GetString("ToolTipBrowseToOutputDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open RAW files folder in Windows Explorer.
+        /// </summary>
+        public static string ToolTipBrowseToRawFilesDestination {
+            get {
+                return ResourceManager.GetString("ToolTipBrowseToRawFilesDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open VirtualDub installation folder in Window Explorer.
+        /// </summary>
+        public static string ToolTipBrowseToVirtualDubFolder {
+            get {
+                return ResourceManager.GetString("ToolTipBrowseToVirtualDubFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change output folder destination.
+        /// </summary>
+        public static string ToolTipChangeOutputDestination {
+            get {
+                return ResourceManager.GetString("ToolTipChangeOutputDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change RAW files folder destination.
+        /// </summary>
+        public static string ToolTipChangeRawFilesDestination {
+            get {
+                return ResourceManager.GetString("ToolTipChangeRawFilesDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy setpos command (CTRL+C).
         /// </summary>
         public static string ToolTipCopySetposCommand {
@@ -6929,6 +7892,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start movie generation.
+        /// </summary>
+        public static string ToolTipGenerateMovie {
+            get {
+                return ResourceManager.GetString("ToolTipGenerateMovie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to player profile (CTRL+P).
         /// </summary>
         public static string ToolTipGoToPlayerProfile {
@@ -6974,6 +7946,33 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Install FFmpeg.
+        /// </summary>
+        public static string ToolTipInstallFFmpeg {
+            get {
+                return ResourceManager.GetString("ToolTipInstallFFmpeg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install HLAE.
+        /// </summary>
+        public static string ToolTipInstallHLAE {
+            get {
+                return ResourceManager.GetString("ToolTipInstallHLAE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install VirtualDub.
+        /// </summary>
+        public static string ToolTipInstallVirtualDub {
+            get {
+                return ResourceManager.GetString("ToolTipInstallVirtualDub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to killed.
         /// </summary>
         public static string ToolTipKilled {
@@ -7015,6 +8014,15 @@ namespace Manager.Properties {
         public static string ToolTipMoveSuspectToWhitelist {
             get {
                 return ResourceManager.GetString("ToolTipMoveSuspectToWhitelist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to movie generator.
+        /// </summary>
+        public static string ToolTipMovie {
+            get {
+                return ResourceManager.GetString("ToolTipMovie", resourceCulture);
             }
         }
         
@@ -7163,6 +8171,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset CFG to default.
+        /// </summary>
+        public static string ToolTipResetCFG {
+            get {
+                return ResourceManager.GetString("ToolTipResetCFG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Round details (CTRL+R).
         /// </summary>
         public static string ToolTipRoundDetails {
@@ -7204,6 +8221,24 @@ namespace Manager.Properties {
         public static string ToolTipSecondsOnAverage {
             get {
                 return ResourceManager.GetString("ToolTipSecondsOnAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change csgo.exe location.
+        /// </summary>
+        public static string ToolTipSelectCsgoExeLocation {
+            get {
+                return ResourceManager.GetString("ToolTipSelectCsgoExeLocation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show CFG.
+        /// </summary>
+        public static string ToolTipShowCFG {
+            get {
+                return ResourceManager.GetString("ToolTipShowCFG", resourceCulture);
             }
         }
         
@@ -7253,11 +8288,29 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switch between VirtualDub / FFmpeg.
+        /// </summary>
+        public static string ToolTipSwitchBetweenFFmpegVirtualDub {
+            get {
+                return ResourceManager.GetString("ToolTipSwitchBetweenFFmpegVirtualDub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to time(s).
         /// </summary>
         public static string ToolTipTimes {
             get {
                 return ResourceManager.GetString("ToolTipTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle demo&apos;s comment (CTRL+T).
+        /// </summary>
+        public static string ToolTipToggleDemoComment {
+            get {
+                return ResourceManager.GetString("ToolTipToggleDemoComment", resourceCulture);
             }
         }
         
@@ -7348,6 +8401,15 @@ namespace Manager.Properties {
         public static string ToolTipUpdate {
             get {
                 return ResourceManager.GetString("ToolTipUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update HLAE.
+        /// </summary>
+        public static string ToolTipUpdateHLAE {
+            get {
+                return ResourceManager.GetString("ToolTipUpdateHLAE", resourceCulture);
             }
         }
         
@@ -7777,6 +8839,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A valid number is required..
+        /// </summary>
+        public static string ValidNumberRequired {
+            get {
+                return ResourceManager.GetString("ValidNumberRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Value.
         /// </summary>
         public static string Value {
@@ -7791,6 +8862,15 @@ namespace Manager.Properties {
         public static string VelocityAverage {
             get {
                 return ResourceManager.GetString("VelocityAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VirtualDub encoding in progress, please wait....
+        /// </summary>
+        public static string VirtualDubEncodingInProgress {
+            get {
+                return ResourceManager.GetString("VirtualDubEncodingInProgress", resourceCulture);
             }
         }
         
@@ -7890,6 +8970,15 @@ namespace Manager.Properties {
         public static string Weapons {
             get {
                 return ResourceManager.GetString("Weapons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Website.
+        /// </summary>
+        public static string Website {
+            get {
+                return ResourceManager.GetString("Website", resourceCulture);
             }
         }
         
@@ -7998,6 +9087,15 @@ namespace Manager.Properties {
         public static string WinSurrender {
             get {
                 return ResourceManager.GetString("WinSurrender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to with.
+        /// </summary>
+        public static string With {
+            get {
+                return ResourceManager.GetString("With", resourceCulture);
             }
         }
         

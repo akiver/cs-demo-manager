@@ -7,8 +7,9 @@
 
 		public BombExplodedEventTimeline(float tickrate, int startTick, int endTick) : base(tickrate, startTick, endTick)
 		{
-			Category = Properties.Resources.Bomb;
 			Type = "bomb_exploded";
+			Category = Properties.Resources.Bomb;
+			EventName = Properties.Resources.BombExplodedEventName;
 		}
 	}
 }

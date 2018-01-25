@@ -30,9 +30,6 @@
   <data name="Killed" xml:space="preserve">
     <value>{0} a tué {1}</value>
   </data>
-  <data name="Kills" xml:space="preserve">
-    <value>Victimes</value>
-  </data>
   <data name="Molotov" xml:space="preserve">
     <value>Molotov</value>
   </data>
@@ -65,5 +62,51 @@
   </data>
   <data name="HlaeNotFoundException" xml:space="preserve">
     <value>HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>Victime</value>
+  </data>
+  <data name="BombDefusedEventName" xml:space="preserve">
+    <value>de la bombe désamorcée</value>
+  </data>
+  <data name="BombExplodedEventName" xml:space="preserve">
+    <value>de la bombe explosée</value>
+  </data>
+  <data name="BombPlantedEventName" xml:space="preserve">
+    <value>de la bombe plantée</value>
+    <comment>example: Set the tick of "the bomb planted"</comment>
+  </data>
+  <data name="DecoyEventName" xml:space="preserve">
+    <value>de la grenade leurre</value>
+  </data>
+  <data name="FlashbangEventName" xml:space="preserve">
+    <value>de la flash</value>
+  </data>
+  <data name="HEEventName" xml:space="preserve">
+    <value>de la grenade explosive</value>
+  </data>
+  <data name="Incendiary" xml:space="preserve">
+    <value>Grenade incendiaire</value>
+  </data>
+  <data name="IncendiaryEventName" xml:space="preserve">
+    <value>de la grenade incendiaire</value>
+  </data>
+  <data name="KillEventName" xml:space="preserve">
+    <value>de la victime</value>
+  </data>
+  <data name="MolotovEventName" xml:space="preserve">
+    <value>du molotov</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="SmokeEventName" xml:space="preserve">
+    <value>de la fumigène</value>
+  </data>
+  <data name="RoundEndEventName" xml:space="preserve">
+    <value>de la fin du round</value>
+  </data>
+  <data name="RoundStartEventName" xml:space="preserve">
+    <value>de début du round</value>
   </data>
 </root>

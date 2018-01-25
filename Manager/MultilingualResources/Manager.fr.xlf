@@ -3128,7 +3128,7 @@ Vous devez le supprimer de la liste des comptes pour pouvoir l'ajouter à la lis
         </trans-unit>
         <trans-unit id="Update" translate="yes" xml:space="preserve">
           <source>Update</source>
-          <target state="final">Actualiser</target>
+          <target state="final">Mettre à jour</target>
         </trans-unit>
         <trans-unit id="NotificationUpdating" translate="yes" xml:space="preserve">
           <source>Updating...</source>
@@ -3403,7 +3403,7 @@ Message d'erreur :
         </trans-unit>
         <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
           <source>Enable movie making config parent folder</source>
-          <target state="final">Activer le dossier de configuration movie making</target>
+          <target state="final">Activer le dossier de configuration moviemaking HLAE</target>
         </trans-unit>
         <trans-unit id="EnableHlae" translate="yes" xml:space="preserve">
           <source>Enable HLAE</source>
@@ -3455,7 +3455,7 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
         </trans-unit>
         <trans-unit id="NotificationInstallingHlae" translate="yes" xml:space="preserve">
           <source>Installing HLAE...</source>
-          <target state="final">Installation de HLAE en cours...</target>
+          <target state="final">Installation d'HLAE en cours...</target>
         </trans-unit>
         <trans-unit id="NotificationUpdatingHlae" translate="yes" xml:space="preserve">
           <source>Updating HLAE...</source>
@@ -3644,6 +3644,518 @@ Il est possible que des données soient manquantes pour celles-ci.</target>
         <trans-unit id="Molotov" translate="yes" xml:space="preserve">
           <source>Molotov</source>
           <target state="final">Molotov</target>
+        </trans-unit>
+        <trans-unit id="FocusOnPlayer" translate="yes" xml:space="preserve">
+          <source>Focus on player</source>
+          <target state="final">Cibler la caméra sur le joueur</target>
+        </trans-unit>
+        <trans-unit id="FocusOnThrower" translate="yes" xml:space="preserve">
+          <source>Focus on thrower</source>
+          <target state="final">Cibler la caméra sur le lanceur</target>
+        </trans-unit>
+        <trans-unit id="FocusOnVictim" translate="yes" xml:space="preserve">
+          <source>Focus on victim</source>
+          <target state="final">Cibler la caméra sur la victime</target>
+        </trans-unit>
+        <trans-unit id="SetTickAsStartTick" translate="yes" xml:space="preserve">
+          <source>Set tick {0} as start tick</source>
+          <target state="final">Définir le tick {0} en tant que tick de début</target>
+        </trans-unit>
+        <trans-unit id="AnalyzeForTimeLineWarning" translate="yes" xml:space="preserve">
+          <source>You have to analyze the demo first to have the timeline.</source>
+          <target state="final">Vous devez d'abord analyser la démo pour avoir la chronologie.</target>
+        </trans-unit>
+        <trans-unit id="AutoCloseGameOnRecordEnd" translate="yes" xml:space="preserve">
+          <source>Auto close the game when recording is done</source>
+          <target state="final">Fermer automatiquement le jeu a la fin de la lecture</target>
+        </trans-unit>
+        <trans-unit id="BombPlantedBy" translate="yes" xml:space="preserve">
+          <source>the bomb planted by</source>
+          <target state="final">la bombe plantée par</target>
+        </trans-unit>
+        <trans-unit id="CFG" translate="yes" xml:space="preserve">
+          <source>CFG</source>
+          <target state="final">CFG</target>
+        </trans-unit>
+        <trans-unit id="Change" translate="yes" xml:space="preserve">
+          <source>Change</source>
+          <target state="final">Changer</target>
+        </trans-unit>
+        <trans-unit id="ChangeHLAEParentFolderLocation" translate="yes" xml:space="preserve">
+          <source>Change HLAE config parent folder location</source>
+          <target state="final">Sélectionner le dossier de config HLAE</target>
+        </trans-unit>
+        <trans-unit id="CheckingForHLAEUpdate" translate="yes" xml:space="preserve">
+          <source>Checking for HLAE update...</source>
+          <target state="final">Recherche d'une possible mise à jour d'HLAE en cours...</target>
+        </trans-unit>
+        <trans-unit id="CSGORecordingInProgress" translate="yes" xml:space="preserve">
+          <source>CSGO in-game recording in progress, please wait...</source>
+          <target state="final">Génération des fichiers brutes depuis le jeu en cours, merci de patienter...</target>
+        </trans-unit>
+        <trans-unit id="DefusedOnSite" translate="yes" xml:space="preserve">
+          <source>defused the bomb on site</source>
+          <target state="final">a désamorcé la bombe sur le site</target>
+        </trans-unit>
+        <trans-unit id="DeleteRawFilesOnEncodeEnd" translate="yes" xml:space="preserve">
+          <source>Delete RAW files at the end of encoding</source>
+          <target state="final">Supprimer les fichiers bruts a la fin de l'encodage</target>
+        </trans-unit>
+        <trans-unit id="DialogAmountSpaceRequired" translate="yes" xml:space="preserve">
+          <source>You need about {0} GB available on your HDD.
+Do you want to continue?</source>
+          <target state="final">L'espace disque requis pour la sélection actuelle est d'environ {0} GO.
+Voulez-vous vraiment continuer?</target>
+        </trans-unit>
+        <trans-unit id="DialogEndTickGreaterThanStartTick" translate="yes" xml:space="preserve">
+          <source>End tick must be greater than start tick.</source>
+          <target state="final">Le tick de fin doit être plus grande que le tick de début.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorInstallingFFmpeg" translate="yes" xml:space="preserve">
+          <source>An error occured while installing FFmpeg.
+{0}</source>
+          <target state="final">Une erreur s'est produite pendant l'installation de FFmpeg.
+{0}</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorInstallingHLAE" translate="yes" xml:space="preserve">
+          <source>An error occured while installing HLAE.
+{0}</source>
+          <target state="final">Une erreur s'est produite pendant l'installation d'HLAE.
+{0}</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorInstallingVirtualDub" translate="yes" xml:space="preserve">
+          <source>An error occured while installing VirtualDub.
+{0}</source>
+          <target state="final">Une erreur s'est produite pendant l'installation de VirtualDub.
+{0}</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorLoadingData" translate="yes" xml:space="preserve">
+          <source>An error occured while loading data.
+{0}</source>
+          <target state="final">Une erreur s'est produite pendant le chargement des données.
+{0}</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorSavingCommentDemo" translate="yes" xml:space="preserve">
+          <source>An error occured while saving hte comment of the demo</source>
+          <target state="final">Une erreur s'est produite pendant la sauvegarde du commentaire de la démo.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorUpdatingHLAE" translate="yes" xml:space="preserve">
+          <source>An error occured while updating HLAE.
+{0}</source>
+          <target state="final">Une erreur s'est produite pendant la mise à jour d'HLAE.
+{0}</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
+          <source>An error occured while generating the video.
+{0]</source>
+          <target state="final">Un erreur s'est produite pendant la génération de la vidéo.
+{0]</target>
+        </trans-unit>
+        <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
+          <source>FFmpeg has been installed.</source>
+          <target state="final">FFmpeg a été installé avec succès.</target>
+        </trans-unit>
+        <trans-unit id="DialogFFmpegHasNotInstalled" translate="yes" xml:space="preserve">
+          <source>FFmpeg has not been installed.</source>
+          <target state="final">FFmpeg n'a pas pu être installé.</target>
+        </trans-unit>
+        <trans-unit id="DialogHLAEHasBeenInstalled" translate="yes" xml:space="preserve">
+          <source>HLAE has been installed.</source>
+          <target state="final">HLAE a été installé avec succès.</target>
+        </trans-unit>
+        <trans-unit id="DialogHLAEHasBeenUpdated" translate="yes" xml:space="preserve">
+          <source>HLAE has been updated.</source>
+          <target state="final">HLAE a été mis à jour avec succès.</target>
+        </trans-unit>
+        <trans-unit id="DialogHLAEHasNotBeenInstalled" translate="yes" xml:space="preserve">
+          <source>HLAE has not been installed.</source>
+          <target state="final">HLAE n'a pas pu être installé.</target>
+        </trans-unit>
+        <trans-unit id="DialogHLAEHasNotBeenUpdated" translate="yes" xml:space="preserve">
+          <source>HLAE has not been updated.</source>
+          <target state="final">HLAE n'a pas pu être mis à jour.</target>
+        </trans-unit>
+        <trans-unit id="DialogInstallFFmpegFirst" translate="yes" xml:space="preserve">
+          <source>Please install FFmpeg first from FFmpeg section.</source>
+          <target state="final">FFmpeg est requis.
+Veuillez l'installer en cliquant sur "Installer" depuis la section FFmpeg.</target>
+        </trans-unit>
+        <trans-unit id="DialogInstallHLAEFirst" translate="yes" xml:space="preserve">
+          <source>Please install HLAE first from HLAE section.</source>
+          <target state="final">HLAE est requis.
+Veuillez l'installer en cliquant sur "Installer" depuis la section HLAE.</target>
+        </trans-unit>
+        <trans-unit id="DialogInstallVirtuaDubFirst" translate="yes" xml:space="preserve">
+          <source>Please install VirtualDub first from VirtualDub section.</source>
+          <target state="final">VirtualDub est requis.
+Veuillez l'installer en cliquant sur "Installer" depuis la section VirtualDub.</target>
+        </trans-unit>
+        <trans-unit id="DialogPleaseUpdateHLAE" translate="yes" xml:space="preserve">
+          <source>A new HLAE version is available.
+Please update it by clicking on the "Update" button.</source>
+          <target state="final">Une nouvelle version d'HLAE est disponible.
+Veuillez installer la mise à jour en cliquant sur le bouton "Mettre à jour".</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectCsgoExeLocation" translate="yes" xml:space="preserve">
+          <source>Please select csgo.exe path from HLAE section.</source>
+          <target state="final">Veuillez indiquer le chemin vers le fichier csgo.exe depuis la section HLAE.</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectRawFilesDestination" translate="yes" xml:space="preserve">
+          <source>Please select a RAW files folder destination.</source>
+          <target state="final">Veuillez sélectionner le dossier dans lequel seront sauvegardés les fichiers brutes.</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectValidEndTick" translate="yes" xml:space="preserve">
+          <source>Please select a valid end tick.</source>
+          <target state="final">Veuillez sélectionner un tick de fin valide.</target>
+        </trans-unit>
+        <trans-unit id="DialogSelectValidStartTIck" translate="yes" xml:space="preserve">
+          <source>Please select a valid start tick.</source>
+          <target state="final">Veuillez sélectionner un tick de début valide.</target>
+        </trans-unit>
+        <trans-unit id="DialogVirtualDubHasBeenInstalled" translate="yes" xml:space="preserve">
+          <source>VirtualDub has been installed.</source>
+          <target state="final">VirtualDub a été installé avec succès.</target>
+        </trans-unit>
+        <trans-unit id="DialogVirtualDubHasNotBeenInstalled" translate="yes" xml:space="preserve">
+          <source>VirtualDub has not been installed.</source>
+          <target state="final">VirtualDub n'a pas pu être installée.</target>
+        </trans-unit>
+        <trans-unit id="ExampleCFG" translate="yes" xml:space="preserve">
+          <source>// CFG example with some useful commands
+// You should paste your moviemaking CFG here</source>
+          <target state="final">// Exemple de CFG avec quelques commandes utiles
+// C'est ici qu'il faut coller votre CFG perso</target>
+        </trans-unit>
+        <trans-unit id="ExplodedOnSite" translate="yes" xml:space="preserve">
+          <source>exploded on site</source>
+          <target state="final">a explosée sur le site</target>
+        </trans-unit>
+        <trans-unit id="FFmpegEncodingInProgress" translate="yes" xml:space="preserve">
+          <source>FFmpeg encoding in progress, please wait...</source>
+          <target state="final">Encodage par FFmpeg en cours, veuillez patienter...</target>
+        </trans-unit>
+        <trans-unit id="FollowingCFGWillBeExecuted" translate="yes" xml:space="preserve">
+          <source>The following CFG will be automatically executed:</source>
+          <target state="final">La CFG suivante sera automatiquement exécutée:</target>
+        </trans-unit>
+        <trans-unit id="FollowingCFGWillBeExecutedOnGameStart" translate="yes" xml:space="preserve">
+          <source>The following CFG will be executed when the demo start playing:</source>
+          <target state="final">La CFG suivante sera exécutée au démarrage de la démo:</target>
+        </trans-unit>
+        <trans-unit id="GB" translate="yes" xml:space="preserve">
+          <source>GB</source>
+          <target state="final">GO</target>
+        </trans-unit>
+        <trans-unit id="GenerateVideoFile" translate="yes" xml:space="preserve">
+          <source>Generate video file</source>
+          <target state="final">Générer un fichier vidéo</target>
+        </trans-unit>
+        <trans-unit id="HowManySeconds" translate="yes" xml:space="preserve">
+          <source>How many seconds?</source>
+          <target state="final">Combien de secondes?</target>
+        </trans-unit>
+        <trans-unit id="Install" translate="yes" xml:space="preserve">
+          <source>Install</source>
+          <target state="final">Installer</target>
+        </trans-unit>
+        <trans-unit id="InstallingVirtualDub" translate="yes" xml:space="preserve">
+          <source>Installing VirtualDub...</source>
+          <target state="final">Installation de VirtualDub en cours...</target>
+        </trans-unit>
+        <trans-unit id="Killed" translate="yes" xml:space="preserve">
+          <source>killed</source>
+          <target state="final">a tué</target>
+        </trans-unit>
+        <trans-unit id="LabelAudioBitrate" translate="yes" xml:space="preserve">
+          <source>Audio bitrate:</source>
+          <target state="final">Bitrate audio:</target>
+        </trans-unit>
+        <trans-unit id="LabelCLI" translate="yes" xml:space="preserve">
+          <source>Command-line input:</source>
+          <target state="final">Command-line input:</target>
+        </trans-unit>
+        <trans-unit id="LabelDurationSeconds" translate="yes" xml:space="preserve">
+          <source>Duration (seconds):</source>
+          <target state="final">Durée (secondes):</target>
+        </trans-unit>
+        <trans-unit id="LabelEndTick" translate="yes" xml:space="preserve">
+          <source>End tick:</source>
+          <target state="final">Tick de fin:</target>
+        </trans-unit>
+        <trans-unit id="LabelExtraInputParams" translate="yes" xml:space="preserve">
+          <source>Extra input parameters:</source>
+          <target state="final">Paramètres d'entrée additionnels:</target>
+        </trans-unit>
+        <trans-unit id="LabelExtraParams" translate="yes" xml:space="preserve">
+          <source>Extra parameters:</source>
+          <target state="final">Paramètres additionnels:</target>
+        </trans-unit>
+        <trans-unit id="LabelFramerate" translate="yes" xml:space="preserve">
+          <source>Framerate:</source>
+          <target state="final">Framerate:</target>
+        </trans-unit>
+        <trans-unit id="LabelHeight" translate="yes" xml:space="preserve">
+          <source>Height:</source>
+          <target state="final">Hauteur:</target>
+        </trans-unit>
+        <trans-unit id="LabelInstalledVersion" translate="yes" xml:space="preserve">
+          <source>Installed version:</source>
+          <target state="final">Version installée:</target>
+        </trans-unit>
+        <trans-unit id="LabelOutputDestination" translate="yes" xml:space="preserve">
+          <source>Output folder destination:</source>
+          <target state="final">Destination de la vidéo:</target>
+        </trans-unit>
+        <trans-unit id="LabelOutputFilename" translate="yes" xml:space="preserve">
+          <source>Output filename:</source>
+          <target state="final">Nom du fichier vidéo:</target>
+        </trans-unit>
+        <trans-unit id="LabelRawFilesFolder" translate="yes" xml:space="preserve">
+          <source>RAW files destination folder:</source>
+          <target state="final">Destination des fichiers bruts:</target>
+        </trans-unit>
+        <trans-unit id="LabelStartTick" translate="yes" xml:space="preserve">
+          <source>Start tick:</source>
+          <target state="final">Tick de début:</target>
+        </trans-unit>
+        <trans-unit id="LabelVideoFramerate" translate="yes" xml:space="preserve">
+          <source>Video framerate:</source>
+          <target state="final">Framerate vidéo:</target>
+        </trans-unit>
+        <trans-unit id="LabelVideoQuality" translate="yes" xml:space="preserve">
+          <source>Video quality:</source>
+          <target state="final">Qualité vidéo:</target>
+        </trans-unit>
+        <trans-unit id="LabelWidth" translate="yes" xml:space="preserve">
+          <source>Width:</source>
+          <target state="final">Largeur:</target>
+        </trans-unit>
+        <trans-unit id="LoadingData" translate="yes" xml:space="preserve">
+          <source>Loading data...</source>
+          <target state="final">Chargement des données...</target>
+        </trans-unit>
+        <trans-unit id="OpenFolderOnEncodeEnd" translate="yes" xml:space="preserve">
+          <source>Open video in Windows Explorer at the end of encoding</source>
+          <target state="final">Ouvrir la vidéo dans Windows Explorer à la fin de l'encodage</target>
+        </trans-unit>
+        <trans-unit id="PlantedOnSite" translate="yes" xml:space="preserve">
+          <source>planted the bomb on site</source>
+          <target state="final">a planté la bombe sur le site</target>
+        </trans-unit>
+        <trans-unit id="RawFilesRequiredSpace" translate="yes" xml:space="preserve">
+          <source>RAW files required space:</source>
+          <target state="final">Espace disque requis pour les fichier bruts:</target>
+        </trans-unit>
+        <trans-unit id="RequiredSpaceNotAvailable" translate="yes" xml:space="preserve">
+          <source>Required space calculation is not available with corrupted demos.</source>
+          <target state="final">Le calcul de l'espace disque requis n'est pas disponible avec les démos corrompus.</target>
+        </trans-unit>
+        <trans-unit id="Reset" translate="yes" xml:space="preserve">
+          <source>Reset</source>
+          <target state="final">Réinitialiser</target>
+        </trans-unit>
+        <trans-unit id="RoundNumber" translate="yes" xml:space="preserve">
+          <source>Round #</source>
+          <target state="final">Round #</target>
+        </trans-unit>
+        <trans-unit id="SelectFolder" translate="yes" xml:space="preserve">
+          <source>Select folder</source>
+          <target state="final">Changer dossier</target>
+        </trans-unit>
+        <trans-unit id="SetTickAsEndTick" translate="yes" xml:space="preserve">
+          <source>Set tick {0} as end tick</source>
+          <target state="final">Définir le tick  {0} en tant que tick de fin</target>
+        </trans-unit>
+        <trans-unit id="ShowCFG" translate="yes" xml:space="preserve">
+          <source>Show CFG</source>
+          <target state="final">Afficher CFG</target>
+        </trans-unit>
+        <trans-unit id="ShowDemoComment" translate="yes" xml:space="preserve">
+          <source>Show demo comment</source>
+          <target state="final">Afficher le commentaire de la démo</target>
+        </trans-unit>
+        <trans-unit id="StartingCSGO" translate="yes" xml:space="preserve">
+          <source>Starting CSGO, please wait...</source>
+          <target state="final">Lancement de CSGO en cours, veuillez patienter...</target>
+        </trans-unit>
+        <trans-unit id="StartingHLAE" translate="yes" xml:space="preserve">
+          <source>Starting HLAE, please wait...</source>
+          <target state="final">Lancement d'HLAE en cours, veuillez patienter...</target>
+        </trans-unit>
+        <trans-unit id="TimeLineNotAvailableWarning" translate="yes" xml:space="preserve">
+          <source>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</source>
+          <target state="final">La chronologie n'est pas disponible avec les démos POV ou corrompues, vous devez saisir les ticks de début et fin manuellement.
+Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks importants.</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBrowseToFFmpegFolder" translate="yes" xml:space="preserve">
+          <source>Open FFmpeg installation folder in Windows Explorer</source>
+          <target state="final">Ouvrir le dossier d'installation de FFmpeg dans Windows Explorer</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBrowseToHLAEFolder" translate="yes" xml:space="preserve">
+          <source>Open HLAE installation folder in Window Explorer</source>
+          <target state="final">Ouvrir le dossier d'installation d'HLAE dans Windows Explorer</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBrowseToOutputDestination" translate="yes" xml:space="preserve">
+          <source>Open output folder in Windows Explorer</source>
+          <target state="final">Ouvrir le dossier de la vidéo dans Windows Explorer</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBrowseToRawFilesDestination" translate="yes" xml:space="preserve">
+          <source>Open RAW files folder in Windows Explorer</source>
+          <target state="final">Ouvrir le dossier des fichiers bruts dans Windows Explorer</target>
+        </trans-unit>
+        <trans-unit id="ToolTipBrowseToVirtualDubFolder" translate="yes" xml:space="preserve">
+          <source>Open VirtualDub installation folder in Window Explorer</source>
+          <target state="final">Ouvrir le dossier d'installation de VirtualDub dans Window Explorer</target>
+        </trans-unit>
+        <trans-unit id="ToolTipChangeOutputDestination" translate="yes" xml:space="preserve">
+          <source>Change output folder destination</source>
+          <target state="final">Changer le dossier de destination de la vidéo</target>
+        </trans-unit>
+        <trans-unit id="ToolTipChangeRawFilesDestination" translate="yes" xml:space="preserve">
+          <source>Change RAW files folder destination</source>
+          <target state="final">Changer le dossier de destination des fichiers bruts</target>
+        </trans-unit>
+        <trans-unit id="ToolTipGenerateMovie" translate="yes" xml:space="preserve">
+          <source>Start movie generation</source>
+          <target state="final">Démarrer le génération de la vidéo</target>
+        </trans-unit>
+        <trans-unit id="ToolTipInstallFFmpeg" translate="yes" xml:space="preserve">
+          <source>Install FFmpeg</source>
+          <target state="final">Installer FFmpeg</target>
+        </trans-unit>
+        <trans-unit id="ToolTipInstallHLAE" translate="yes" xml:space="preserve">
+          <source>Install HLAE</source>
+          <target state="final">Installer HLAE</target>
+        </trans-unit>
+        <trans-unit id="ToolTipInstallVirtualDub" translate="yes" xml:space="preserve">
+          <source>Install VirtualDub</source>
+          <target state="final">Installer VirtualDub</target>
+        </trans-unit>
+        <trans-unit id="ToolTipResetCFG" translate="yes" xml:space="preserve">
+          <source>Reset CFG to default</source>
+          <target state="final">Réinitialiser la CFG avec celle par défaut</target>
+        </trans-unit>
+        <trans-unit id="ToolTipSelectCsgoExeLocation" translate="yes" xml:space="preserve">
+          <source>Change csgo.exe location</source>
+          <target state="final">Changer le chemin vers csgo.exe</target>
+        </trans-unit>
+        <trans-unit id="ToolTipSwitchBetweenFFmpegVirtualDub" translate="yes" xml:space="preserve">
+          <source>Switch between VirtualDub / FFmpeg</source>
+          <target state="final">Basculer entre VirtualDub / FFmpeg</target>
+        </trans-unit>
+        <trans-unit id="ToolTipToggleDemoComment" translate="yes" xml:space="preserve">
+          <source>Toggle demo's comment (CTRL+T)</source>
+          <target state="final">Afficher le commentaire de la démo (CTRL+T)</target>
+        </trans-unit>
+        <trans-unit id="ToolTipUpdateHLAE" translate="yes" xml:space="preserve">
+          <source>Update HLAE</source>
+          <target state="final">Mettre à jour HLAE</target>
+        </trans-unit>
+        <trans-unit id="ValidNumberRequired" translate="yes" xml:space="preserve">
+          <source>A valid number is required.</source>
+          <target state="final">Un nombre valide est requis.</target>
+        </trans-unit>
+        <trans-unit id="VirtualDubEncodingInProgress" translate="yes" xml:space="preserve">
+          <source>VirtualDub encoding in progress, please wait...</source>
+          <target state="final">Encodage de la vidéo par VirtualDub en cours, veuillez patienter...</target>
+        </trans-unit>
+        <trans-unit id="With" translate="yes" xml:space="preserve">
+          <source>with</source>
+          <target state="final">avec</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuTimeLineSetEventTickAsEndTick" translate="yes" xml:space="preserve">
+          <source>Set the tick {0} as end tick</source>
+          <target state="final">Définir le tick {0} en tant que tick de fin</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" as end tick</note>
+        </trans-unit>
+        <trans-unit id="ContextMenuTimeLineSetEventTickAsStartTick" translate="yes" xml:space="preserve">
+          <source>Set the tick {0} as start tick</source>
+          <target state="final">Définir le tick {0} en tant que tick de début</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" as start tick</note>
+        </trans-unit>
+        <trans-unit id="ContextMenuTimeLineSetEventTickMinusAsEndTick" translate="yes" xml:space="preserve">
+          <source>Set the tick {0} minus x seconds as end tick</source>
+          <target state="final">Définir le tick {0} moins x secondes en tant que tick de fin</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" minus x seconds as end tick</note>
+        </trans-unit>
+        <trans-unit id="ContextMenuTimeLineSetEventTickMinusAsStartTick" translate="yes" xml:space="preserve">
+          <source>Set the tick {0} minus x seconds as start tick</source>
+          <target state="final">Définir le tick {0} moins x secondes en tant que tick de début</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" minus x seconds as start tick</note>
+        </trans-unit>
+        <trans-unit id="ContextMenuTimeLineSetEventTickPlusAsEndTick" translate="yes" xml:space="preserve">
+          <source>Set the tick {0} plus x seconds as end tick</source>
+          <target state="final">Définir le tick {0} plus x secondes en tant que tick de fin</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" plus x seconds as end tick</note>
+        </trans-unit>
+        <trans-unit id="ContextMenuTimeLineSetEventTickPlusAsStartTick" translate="yes" xml:space="preserve">
+          <source>Set the tick {0} plus x seconds as start tick</source>
+          <target state="final">Définir le tick {0} plus x secondes en tant que tick de début</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" plus x seconds as start tick</note>
+        </trans-unit>
+        <trans-unit id="FocusOnDefuser" translate="yes" xml:space="preserve">
+          <source>Focus on defuser</source>
+          <target state="final">Cibler la caméra sur le désamorçeur</target>
+        </trans-unit>
+        <trans-unit id="FocusOnPlanter" translate="yes" xml:space="preserve">
+          <source>Focus on planter</source>
+          <target state="final">Cibler la caméra sur le poseur</target>
+        </trans-unit>
+        <trans-unit id="FocusOnKiller" translate="yes" xml:space="preserve">
+          <source>Focus on killer</source>
+          <target state="final">Cibler la caméra sur le tueur</target>
+        </trans-unit>
+        <trans-unit id="Movie" translate="yes" xml:space="preserve">
+          <source>Movie</source>
+          <target state="final">Vidéo</target>
+        </trans-unit>
+        <trans-unit id="ToolTipMovie" translate="yes" xml:space="preserve">
+          <source>Go to movie generator</source>
+          <target state="final">Aller vers le générateur de vidéos</target>
+        </trans-unit>
+        <trans-unit id="Adecoy" translate="yes" xml:space="preserve">
+          <source>a decoy</source>
+          <target state="final">un leurre</target>
+        </trans-unit>
+        <trans-unit id="AFlashbang" translate="yes" xml:space="preserve">
+          <source>a flashbang</source>
+          <target state="final">une flash</target>
+        </trans-unit>
+        <trans-unit id="AMolotov" translate="yes" xml:space="preserve">
+          <source>a molotov</source>
+          <target state="final">un molotov</target>
+        </trans-unit>
+        <trans-unit id="AnHE" translate="yes" xml:space="preserve">
+          <source>an HE</source>
+          <target state="final">une grenade explosive</target>
+        </trans-unit>
+        <trans-unit id="AnIncendiary" translate="yes" xml:space="preserve">
+          <source>an incendiary</source>
+          <target state="final">une grenade incendiaire</target>
+        </trans-unit>
+        <trans-unit id="Asmoke" translate="yes" xml:space="preserve">
+          <source>a smoke</source>
+          <target state="final">une fumigène</target>
+        </trans-unit>
+        <trans-unit id="Thrown" translate="yes" xml:space="preserve">
+          <source>thrown</source>
+          <target state="final">a jété</target>
+        </trans-unit>
+        <trans-unit id="ToolTipShowCFG" translate="yes" xml:space="preserve">
+          <source>Show CFG</source>
+          <target state="final">Afficher CFG</target>
+        </trans-unit>
+        <trans-unit id="Website" translate="yes" xml:space="preserve">
+          <source>Website</source>
+          <target state="final">Site Internet</target>
+        </trans-unit>
+        <trans-unit id="DialogNoHLAEUpdateAvailable" translate="yes" xml:space="preserve">
+          <source>No HLAE update available.</source>
+          <target state="final">Aucune mise à jour d'HLAE disponible.</target>
+        </trans-unit>
+        <trans-unit id="NotificationInstallingFFmpeg" translate="yes" xml:space="preserve">
+          <source>Installing FFmpeg...</source>
+          <target state="final">Installation de FFmpeg en cours...</target>
         </trans-unit>
       </group>
     </body>

@@ -30,9 +30,6 @@
   <data name="Killed" xml:space="preserve">
     <value>{0} 击杀 {1}</value>
   </data>
-  <data name="Kills" xml:space="preserve">
-    <value>杀敌</value>
-  </data>
   <data name="Molotov" xml:space="preserve">
     <value>燃烧弹</value>
   </data>

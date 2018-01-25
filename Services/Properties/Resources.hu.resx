@@ -30,9 +30,6 @@
   <data name="Killed" xml:space="preserve">
     <value>{0} megölte{1}-t</value>
   </data>
-  <data name="Kills" xml:space="preserve">
-    <value>Ölések</value>
-  </data>
   <data name="Molotov" xml:space="preserve">
     <value>Molotov</value>
   </data>

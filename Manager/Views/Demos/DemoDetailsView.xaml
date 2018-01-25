@@ -203,7 +203,7 @@
 					<Button Command="{Binding GoToMovie}"
 							CommandParameter="{Binding Demo}"
 							Style="{DynamicResource GeneralButton}"
-							ToolTip="Generate movie">
+							ToolTip="{x:Static properties:Resources.ToolTipMovie}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -213,7 +213,7 @@
 												 Stretch="Fill" />
 								</Rectangle.OpacityMask>
 							</Rectangle>
-							<TextBlock Text="Movie"
+							<TextBlock Text="{x:Static properties:Resources.Movie}"
 									   Style="{StaticResource ButtonTitleStyle}" />
 						</StackPanel>
 					</Button>

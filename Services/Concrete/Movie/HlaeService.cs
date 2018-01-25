@@ -70,8 +70,10 @@ namespace Services.Concrete.Movie
 			{
 				LatestRelease release = await GetLastReleaseObject();
 				string version = release.TagName.Remove(0, 1);
+				string currentVersion = GetHlaeVersion();
+				if (string.IsNullOrEmpty(currentVersion)) return false;
 
-				return new Version(version) > new Version(GetHlaeVersion());
+				return new Version(version) > new Version(currentVersion);
 			}
 			catch (Exception e)
 			{

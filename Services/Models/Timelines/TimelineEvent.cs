@@ -16,6 +16,10 @@ namespace Services.Models.Timelines
 		/// </summary>
 		public string Category { get; set; }
 		/// <summary>
+		/// Used for localization.
+		/// </summary>
+		public string EventName { get; set; }
+		/// <summary>
 		/// Event start tick
 		/// </summary>
 		public int StartTick { get; }

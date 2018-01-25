@@ -30,9 +30,6 @@
   <data name="Killed" xml:space="preserve">
     <value>{0} killed {1}</value>
   </data>
-  <data name="Kills" xml:space="preserve">
-    <value>Kills</value>
-  </data>
   <data name="Molotov" xml:space="preserve">
     <value>Molotov</value>
   </data>

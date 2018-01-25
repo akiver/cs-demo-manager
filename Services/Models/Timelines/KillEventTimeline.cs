@@ -8,8 +8,9 @@
 
 		public KillEventTimeline(float tickrate, int startTick, int endTick) : base(tickrate, startTick, endTick)
 		{
-			Category = Properties.Resources.Kills;
 			Type = "kill";
+			Category = Properties.Resources.Kill;
+			EventName = Properties.Resources.KillEventName;
 		}
 	}
 }

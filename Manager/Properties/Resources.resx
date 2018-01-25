@@ -2843,4 +2843,382 @@ You may have missing data for this demos.</value>
   <data name="Molotov" xml:space="preserve">
     <value>Molotov</value>
   </data>
+  <data name="FocusOnPlayer" xml:space="preserve">
+    <value>Focus on player</value>
+  </data>
+  <data name="FocusOnThrower" xml:space="preserve">
+    <value>Focus on thrower</value>
+  </data>
+  <data name="FocusOnVictim" xml:space="preserve">
+    <value>Focus on victim</value>
+  </data>
+  <data name="Adecoy" xml:space="preserve">
+    <value>a decoy</value>
+  </data>
+  <data name="AFlashbang" xml:space="preserve">
+    <value>a flashbang</value>
+  </data>
+  <data name="AMolotov" xml:space="preserve">
+    <value>a molotov</value>
+  </data>
+  <data name="AnalyzeForTimeLineWarning" xml:space="preserve">
+    <value>You have to analyze the demo first to have the timeline.</value>
+  </data>
+  <data name="AnHE" xml:space="preserve">
+    <value>an HE</value>
+  </data>
+  <data name="AnIncendiary" xml:space="preserve">
+    <value>an incendiary</value>
+  </data>
+  <data name="Asmoke" xml:space="preserve">
+    <value>a smoke</value>
+  </data>
+  <data name="AutoCloseGameOnRecordEnd" xml:space="preserve">
+    <value>Auto close the game when recording is done</value>
+  </data>
+  <data name="BombPlantedBy" xml:space="preserve">
+    <value>the bomb planted by</value>
+  </data>
+  <data name="CFG" xml:space="preserve">
+    <value>CFG</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="ChangeHLAEParentFolderLocation" xml:space="preserve">
+    <value>Change HLAE config parent folder location</value>
+  </data>
+  <data name="CheckingForHLAEUpdate" xml:space="preserve">
+    <value>Checking for HLAE update...</value>
+  </data>
+  <data name="ContextMenuTimeLineSetEventTickAsEndTick" xml:space="preserve">
+    <value>Set the tick {0} as end tick</value>
+    <comment>Set the tick "of the flash" as end tick</comment>
+  </data>
+  <data name="ContextMenuTimeLineSetEventTickAsStartTick" xml:space="preserve">
+    <value>Set the tick {0} as start tick</value>
+    <comment>Set the tick "of the flash" as start tick</comment>
+  </data>
+  <data name="ContextMenuTimeLineSetEventTickMinusAsEndTick" xml:space="preserve">
+    <value>Set the tick {0} minus x seconds as end tick</value>
+    <comment>Set the tick "of the flash" minus x seconds as end tick</comment>
+  </data>
+  <data name="ContextMenuTimeLineSetEventTickMinusAsStartTick" xml:space="preserve">
+    <value>Set the tick {0} minus x seconds as start tick</value>
+    <comment>Set the tick "of the flash" minus x seconds as start tick</comment>
+  </data>
+  <data name="ContextMenuTimeLineSetEventTickPlusAsEndTick" xml:space="preserve">
+    <value>Set the tick {0} plus x seconds as end tick</value>
+    <comment>Set the tick "of the flash" plus x seconds as end tick</comment>
+  </data>
+  <data name="ContextMenuTimeLineSetEventTickPlusAsStartTick" xml:space="preserve">
+    <value>Set the tick {0} plus x seconds as start tick</value>
+    <comment>Set the tick "of the flash" plus x seconds as start tick</comment>
+  </data>
+  <data name="CSGORecordingInProgress" xml:space="preserve">
+    <value>CSGO in-game recording in progress, please wait...</value>
+  </data>
+  <data name="DefusedOnSite" xml:space="preserve">
+    <value>defused the bomb on site</value>
+  </data>
+  <data name="DeleteRawFilesOnEncodeEnd" xml:space="preserve">
+    <value>Delete RAW files at the end of encoding</value>
+  </data>
+  <data name="DialogAmountSpaceRequired" xml:space="preserve">
+    <value>You need about {0} GB available on your HDD.
+Do you want to continue?</value>
+  </data>
+  <data name="DialogEndTickGreaterThanStartTick" xml:space="preserve">
+    <value>End tick must be greater than start tick.</value>
+  </data>
+  <data name="DialogErrorInstallingFFmpeg" xml:space="preserve">
+    <value>An error occured while installing FFmpeg.
+{0}</value>
+  </data>
+  <data name="DialogErrorInstallingHLAE" xml:space="preserve">
+    <value>An error occured while installing HLAE.
+{0}</value>
+  </data>
+  <data name="DialogErrorInstallingVirtualDub" xml:space="preserve">
+    <value>An error occured while installing VirtualDub.
+{0}</value>
+  </data>
+  <data name="DialogErrorLoadingData" xml:space="preserve">
+    <value>An error occured while loading data.
+{0}</value>
+  </data>
+  <data name="DialogErrorSavingCommentDemo" xml:space="preserve">
+    <value>An error occured while saving hte comment of the demo</value>
+  </data>
+  <data name="DialogErrorUpdatingHLAE" xml:space="preserve">
+    <value>An error occured while updating HLAE.
+{0}</value>
+  </data>
+  <data name="DialogErrorWhileGeneratingVideo" xml:space="preserve">
+    <value>An error occured while generating the video.
+{0]</value>
+  </data>
+  <data name="DialogFFmpegHasBeenInstalled" xml:space="preserve">
+    <value>FFmpeg has been installed.</value>
+  </data>
+  <data name="DialogFFmpegHasNotInstalled" xml:space="preserve">
+    <value>FFmpeg has not been installed.</value>
+  </data>
+  <data name="DialogHLAEHasBeenInstalled" xml:space="preserve">
+    <value>HLAE has been installed.</value>
+  </data>
+  <data name="DialogHLAEHasBeenUpdated" xml:space="preserve">
+    <value>HLAE has been updated.</value>
+  </data>
+  <data name="DialogHLAEHasNotBeenInstalled" xml:space="preserve">
+    <value>HLAE has not been installed.</value>
+  </data>
+  <data name="DialogHLAEHasNotBeenUpdated" xml:space="preserve">
+    <value>HLAE has not been updated.</value>
+  </data>
+  <data name="DialogInstallFFmpegFirst" xml:space="preserve">
+    <value>Please install FFmpeg first from FFmpeg section.</value>
+  </data>
+  <data name="DialogInstallHLAEFirst" xml:space="preserve">
+    <value>Please install HLAE first from HLAE section.</value>
+  </data>
+  <data name="DialogInstallVirtuaDubFirst" xml:space="preserve">
+    <value>Please install VirtualDub first from VirtualDub section.</value>
+  </data>
+  <data name="DialogNoHLAEUpdateAvailable" xml:space="preserve">
+    <value>No HLAE update available.</value>
+  </data>
+  <data name="DialogPleaseUpdateHLAE" xml:space="preserve">
+    <value>A new HLAE version is available.
+Please update it by clicking on the "Update" button.</value>
+  </data>
+  <data name="DialogSelectCsgoExeLocation" xml:space="preserve">
+    <value>Please select csgo.exe path from HLAE section.</value>
+  </data>
+  <data name="DialogSelectRawFilesDestination" xml:space="preserve">
+    <value>Please select a RAW files folder destination.</value>
+  </data>
+  <data name="DialogSelectValidEndTick" xml:space="preserve">
+    <value>Please select a valid end tick.</value>
+  </data>
+  <data name="DialogSelectValidStartTIck" xml:space="preserve">
+    <value>Please select a valid start tick.</value>
+  </data>
+  <data name="DialogVirtualDubHasBeenInstalled" xml:space="preserve">
+    <value>VirtualDub has been installed.</value>
+  </data>
+  <data name="DialogVirtualDubHasNotBeenInstalled" xml:space="preserve">
+    <value>VirtualDub has not been installed.</value>
+  </data>
+  <data name="ExampleCFG" xml:space="preserve">
+    <value>// CFG example with some useful commands
+// You should paste your moviemaking CFG here</value>
+  </data>
+  <data name="ExplodedOnSite" xml:space="preserve">
+    <value>exploded on site</value>
+  </data>
+  <data name="FFmpegEncodingInProgress" xml:space="preserve">
+    <value>FFmpeg encoding in progress, please wait...</value>
+  </data>
+  <data name="FocusOnDefuser" xml:space="preserve">
+    <value>Focus on defuser</value>
+  </data>
+  <data name="FocusOnKiller" xml:space="preserve">
+    <value>Focus on killer</value>
+  </data>
+  <data name="FocusOnPlanter" xml:space="preserve">
+    <value>Focus on planter</value>
+  </data>
+  <data name="FollowingCFGWillBeExecuted" xml:space="preserve">
+    <value>The following CFG will be automatically executed:</value>
+  </data>
+  <data name="FollowingCFGWillBeExecutedOnGameStart" xml:space="preserve">
+    <value>The following CFG will be executed when the demo start playing:</value>
+  </data>
+  <data name="GB" xml:space="preserve">
+    <value>GB</value>
+  </data>
+  <data name="GenerateVideoFile" xml:space="preserve">
+    <value>Generate video file</value>
+  </data>
+  <data name="HowManySeconds" xml:space="preserve">
+    <value>How many seconds?</value>
+  </data>
+  <data name="Install" xml:space="preserve">
+    <value>Install</value>
+  </data>
+  <data name="InstallingVirtualDub" xml:space="preserve">
+    <value>Installing VirtualDub...</value>
+  </data>
+  <data name="Killed" xml:space="preserve">
+    <value>killed</value>
+  </data>
+  <data name="LabelAudioBitrate" xml:space="preserve">
+    <value>Audio bitrate:</value>
+  </data>
+  <data name="LabelCLI" xml:space="preserve">
+    <value>Command-line input:</value>
+  </data>
+  <data name="LabelDurationSeconds" xml:space="preserve">
+    <value>Duration (seconds):</value>
+  </data>
+  <data name="LabelEndTick" xml:space="preserve">
+    <value>End tick:</value>
+  </data>
+  <data name="LabelExtraInputParams" xml:space="preserve">
+    <value>Extra input parameters:</value>
+  </data>
+  <data name="LabelExtraParams" xml:space="preserve">
+    <value>Extra parameters:</value>
+  </data>
+  <data name="LabelFramerate" xml:space="preserve">
+    <value>Framerate:</value>
+  </data>
+  <data name="LabelHeight" xml:space="preserve">
+    <value>Height:</value>
+  </data>
+  <data name="LabelInstalledVersion" xml:space="preserve">
+    <value>Installed version:</value>
+  </data>
+  <data name="LabelOutputDestination" xml:space="preserve">
+    <value>Output folder destination:</value>
+  </data>
+  <data name="LabelOutputFilename" xml:space="preserve">
+    <value>Output filename:</value>
+  </data>
+  <data name="LabelRawFilesFolder" xml:space="preserve">
+    <value>RAW files destination folder:</value>
+  </data>
+  <data name="LabelStartTick" xml:space="preserve">
+    <value>Start tick:</value>
+  </data>
+  <data name="LabelVideoFramerate" xml:space="preserve">
+    <value>Video framerate:</value>
+  </data>
+  <data name="LabelVideoQuality" xml:space="preserve">
+    <value>Video quality:</value>
+  </data>
+  <data name="LabelWidth" xml:space="preserve">
+    <value>Width:</value>
+  </data>
+  <data name="LoadingData" xml:space="preserve">
+    <value>Loading data...</value>
+  </data>
+  <data name="Movie" xml:space="preserve">
+    <value>Movie</value>
+  </data>
+  <data name="NotificationInstallingFFmpeg" xml:space="preserve">
+    <value>Installing FFmpeg...</value>
+  </data>
+  <data name="OpenFolderOnEncodeEnd" xml:space="preserve">
+    <value>Open video in Windows Explorer at the end of encoding</value>
+  </data>
+  <data name="PlantedOnSite" xml:space="preserve">
+    <value>planted the bomb on site</value>
+  </data>
+  <data name="RawFilesRequiredSpace" xml:space="preserve">
+    <value>RAW files required space:</value>
+  </data>
+  <data name="RequiredSpaceNotAvailable" xml:space="preserve">
+    <value>Required space calculation is not available with corrupted demos.</value>
+  </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="RoundNumber" xml:space="preserve">
+    <value>Round #</value>
+  </data>
+  <data name="SelectFolder" xml:space="preserve">
+    <value>Select folder</value>
+  </data>
+  <data name="SetTickAsEndTick" xml:space="preserve">
+    <value>Set tick {0} as end tick</value>
+  </data>
+  <data name="SetTickAsStartTick" xml:space="preserve">
+    <value>Set tick {0} as start tick</value>
+  </data>
+  <data name="ShowCFG" xml:space="preserve">
+    <value>Show CFG</value>
+  </data>
+  <data name="ShowDemoComment" xml:space="preserve">
+    <value>Show demo comment</value>
+  </data>
+  <data name="StartingCSGO" xml:space="preserve">
+    <value>Starting CSGO, please wait...</value>
+  </data>
+  <data name="StartingHLAE" xml:space="preserve">
+    <value>Starting HLAE, please wait...</value>
+  </data>
+  <data name="Thrown" xml:space="preserve">
+    <value>thrown</value>
+  </data>
+  <data name="TimeLineNotAvailableWarning" xml:space="preserve">
+    <value>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</value>
+  </data>
+  <data name="ToolTipBrowseToFFmpegFolder" xml:space="preserve">
+    <value>Open FFmpeg installation folder in Windows Explorer</value>
+  </data>
+  <data name="ToolTipBrowseToHLAEFolder" xml:space="preserve">
+    <value>Open HLAE installation folder in Window Explorer</value>
+  </data>
+  <data name="ToolTipBrowseToOutputDestination" xml:space="preserve">
+    <value>Open output folder in Windows Explorer</value>
+  </data>
+  <data name="ToolTipBrowseToRawFilesDestination" xml:space="preserve">
+    <value>Open RAW files folder in Windows Explorer</value>
+  </data>
+  <data name="ToolTipBrowseToVirtualDubFolder" xml:space="preserve">
+    <value>Open VirtualDub installation folder in Window Explorer</value>
+  </data>
+  <data name="ToolTipChangeOutputDestination" xml:space="preserve">
+    <value>Change output folder destination</value>
+  </data>
+  <data name="ToolTipChangeRawFilesDestination" xml:space="preserve">
+    <value>Change RAW files folder destination</value>
+  </data>
+  <data name="ToolTipGenerateMovie" xml:space="preserve">
+    <value>Start movie generation</value>
+  </data>
+  <data name="ToolTipInstallFFmpeg" xml:space="preserve">
+    <value>Install FFmpeg</value>
+  </data>
+  <data name="ToolTipInstallHLAE" xml:space="preserve">
+    <value>Install HLAE</value>
+  </data>
+  <data name="ToolTipInstallVirtualDub" xml:space="preserve">
+    <value>Install VirtualDub</value>
+  </data>
+  <data name="ToolTipMovie" xml:space="preserve">
+    <value>Go to movie generator</value>
+  </data>
+  <data name="ToolTipResetCFG" xml:space="preserve">
+    <value>Reset CFG to default</value>
+  </data>
+  <data name="ToolTipSelectCsgoExeLocation" xml:space="preserve">
+    <value>Change csgo.exe location</value>
+  </data>
+  <data name="ToolTipShowCFG" xml:space="preserve">
+    <value>Show CFG</value>
+  </data>
+  <data name="ToolTipSwitchBetweenFFmpegVirtualDub" xml:space="preserve">
+    <value>Switch between VirtualDub / FFmpeg</value>
+  </data>
+  <data name="ToolTipToggleDemoComment" xml:space="preserve">
+    <value>Toggle demo's comment (CTRL+T)</value>
+  </data>
+  <data name="ToolTipUpdateHLAE" xml:space="preserve">
+    <value>Update HLAE</value>
+  </data>
+  <data name="ValidNumberRequired" xml:space="preserve">
+    <value>A valid number is required.</value>
+  </data>
+  <data name="VirtualDubEncodingInProgress" xml:space="preserve">
+    <value>VirtualDub encoding in progress, please wait...</value>
+  </data>
+  <data name="Website" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="With" xml:space="preserve">
+    <value>with</value>
+  </data>
 </root>

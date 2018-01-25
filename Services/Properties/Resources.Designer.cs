@@ -70,6 +70,33 @@ namespace Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of the bomb defused.
+        /// </summary>
+        public static string BombDefusedEventName {
+            get {
+                return ResourceManager.GetString("BombDefusedEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the bomb exploded.
+        /// </summary>
+        public static string BombExplodedEventName {
+            get {
+                return ResourceManager.GetString("BombExplodedEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the bomb planted.
+        /// </summary>
+        public static string BombPlantedEventName {
+            get {
+                return ResourceManager.GetString("BombPlantedEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         public static System.Drawing.Bitmap colors {
@@ -85,6 +112,15 @@ namespace Services.Properties {
         public static string Decoy {
             get {
                 return ResourceManager.GetString("Decoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the decoy.
+        /// </summary>
+        public static string DecoyEventName {
+            get {
+                return ResourceManager.GetString("DecoyEventName", resourceCulture);
             }
         }
         
@@ -122,11 +158,29 @@ namespace Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of the flashbang.
+        /// </summary>
+        public static string FlashbangEventName {
+            get {
+                return ResourceManager.GetString("FlashbangEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to HE.
         /// </summary>
         public static string HE {
             get {
                 return ResourceManager.GetString("HE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the HE.
+        /// </summary>
+        public static string HEEventName {
+            get {
+                return ResourceManager.GetString("HEEventName", resourceCulture);
             }
         }
         
@@ -140,6 +194,33 @@ namespace Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Incendiary.
+        /// </summary>
+        public static string Incendiary {
+            get {
+                return ResourceManager.GetString("Incendiary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the incendiary.
+        /// </summary>
+        public static string IncendiaryEventName {
+            get {
+                return ResourceManager.GetString("IncendiaryEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Kill.
+        /// </summary>
+        public static string Kill {
+            get {
+                return ResourceManager.GetString("Kill", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} killed {1}.
         /// </summary>
         public static string Killed {
@@ -149,11 +230,11 @@ namespace Services.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Kills.
+        ///   Looks up a localized string similar to of the kill.
         /// </summary>
-        public static string Kills {
+        public static string KillEventName {
             get {
-                return ResourceManager.GetString("Kills", resourceCulture);
+                return ResourceManager.GetString("KillEventName", resourceCulture);
             }
         }
         
@@ -180,11 +261,47 @@ namespace Services.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to of the molotov.
+        /// </summary>
+        public static string MolotovEventName {
+            get {
+                return ResourceManager.GetString("MolotovEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} planted the bomb on bomb site {1}.
         /// </summary>
         public static string PlantedTheBombOnBombSite {
             get {
                 return ResourceManager.GetString("PlantedTheBombOnBombSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Round.
+        /// </summary>
+        public static string Round {
+            get {
+                return ResourceManager.GetString("Round", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the round end.
+        /// </summary>
+        public static string RoundEndEventName {
+            get {
+                return ResourceManager.GetString("RoundEndEventName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the round start.
+        /// </summary>
+        public static string RoundStartEventName {
+            get {
+                return ResourceManager.GetString("RoundStartEventName", resourceCulture);
             }
         }
         
@@ -231,6 +348,15 @@ namespace Services.Properties {
         public static string Smoke {
             get {
                 return ResourceManager.GetString("Smoke", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to of the smoke.
+        /// </summary>
+        public static string SmokeEventName {
+            get {
+                return ResourceManager.GetString("SmokeEventName", resourceCulture);
             }
         }
         

@@ -139,8 +139,8 @@
   <data name="Killed" xml:space="preserve">
     <value>{0} killed {1}</value>
   </data>
-  <data name="Kills" xml:space="preserve">
-    <value>Kills</value>
+  <data name="Kill" xml:space="preserve">
+    <value>Kill</value>
   </data>
   <data name="Molotov" xml:space="preserve">
     <value>Molotov</value>
@@ -201,5 +201,48 @@
   </data>
   <data name="vd" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="BombDefusedEventName" xml:space="preserve">
+    <value>of the bomb defused</value>
+  </data>
+  <data name="BombExplodedEventName" xml:space="preserve">
+    <value>of the bomb exploded</value>
+  </data>
+  <data name="BombPlantedEventName" xml:space="preserve">
+    <value>of the bomb planted</value>
+    <comment>example: Set the tick of "the bomb planted"</comment>
+  </data>
+  <data name="DecoyEventName" xml:space="preserve">
+    <value>of the decoy</value>
+  </data>
+  <data name="FlashbangEventName" xml:space="preserve">
+    <value>of the flashbang</value>
+  </data>
+  <data name="HEEventName" xml:space="preserve">
+    <value>of the HE</value>
+  </data>
+  <data name="Incendiary" xml:space="preserve">
+    <value>Incendiary</value>
+  </data>
+  <data name="IncendiaryEventName" xml:space="preserve">
+    <value>of the incendiary</value>
+  </data>
+  <data name="KillEventName" xml:space="preserve">
+    <value>of the kill</value>
+  </data>
+  <data name="MolotovEventName" xml:space="preserve">
+    <value>of the molotov</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>Round</value>
+  </data>
+  <data name="RoundEndEventName" xml:space="preserve">
+    <value>of the round end</value>
+  </data>
+  <data name="RoundStartEventName" xml:space="preserve">
+    <value>of the round start</value>
+  </data>
+  <data name="SmokeEventName" xml:space="preserve">
+    <value>of the smoke</value>
   </data>
 </root>
