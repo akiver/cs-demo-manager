@@ -39,19 +39,19 @@
 		</MenuItem>
 		<Separator />
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.EndTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.RoundEndEventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.EndTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.RoundEndEventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickMinusAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.EndTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.RoundEndEventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickPlusAsEndTick}}"/>
 			</MenuItem.Header>
