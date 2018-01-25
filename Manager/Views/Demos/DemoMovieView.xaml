@@ -336,8 +336,9 @@
 														Value="{Binding VideoFrameRate}"/>
 									<Label Grid.Column="4" Content="{x:Static properties:Resources.LabelAudioBitrate}"/>
 									<ComboBox Grid.Column="5"
-										  ItemsSource="{Binding AudioBitrateValues}"
-										  SelectedItem="{Binding AudioBitrate}" />
+											  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+											  ItemsSource="{Binding AudioBitrateValues}"
+											  SelectedItem="{Binding AudioBitrate}" />
 								</Grid>
 
 								<Grid Margin="0 5 0 5">
@@ -548,7 +549,7 @@
 								  Foreground="{StaticResource OrangeBrush}"
 								  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 						<ComboBox ItemsSource="{Binding Demo.Players}"
-								  IsEnabled="{Binding FocusOnPlayer}"
+								  IsEnabled="{Binding IsPlayerListEnabled}"
 								  Visibility="{Binding IsIncompatibleDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
 								  DisplayMemberPath="Name"
 								  SelectedItem="{Binding FocusedPlayer}" />

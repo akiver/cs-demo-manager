@@ -191,6 +191,7 @@ namespace Manager.ViewModel.Demos
 				if (!value) FocusedPlayer = null;
 				else if (FocusedPlayer == null && Demo.Players.Count > 0) FocusedPlayer = Demo.Players[0];
 				Set(() => FocusOnPlayer, ref _focusOnPlayer, value);
+				RaisePropertyChanged(() => IsPlayerListEnabled);
 			}
 		}
 
@@ -527,6 +528,8 @@ namespace Manager.ViewModel.Demos
 
 		public bool IsAnalyzeRequired => !IsPovDemo && !IsTimelineAvailable && !IsCorruptedDemo;
 
+		public bool IsPlayerListEnabled => FocusOnPlayer && !IsBusy;
+
 		/// <summary>
 		/// Command called when the user right clicked on the timeline (not on a timeline item).
 		/// </summary>
@@ -693,6 +696,7 @@ namespace Manager.ViewModel.Demos
 								   }
 
 								   IsBusy = true;
+								   RaisePropertyChanged(() => IsPlayerListEnabled);
 								   Win32Utils.SendMessageToBot(Win32Utils.WM_TOGGLE_DOWNLOAD_NOTIFICATION);
 								   await _movieService.Start();
 								   // TODO notification
@@ -722,6 +726,8 @@ namespace Manager.ViewModel.Demos
 						   () =>
 						   {
 							   _movieService.Cancel();
+							   IsBusy = false;
+							   RaisePropertyChanged(() => IsPlayerListEnabled);
 						   },
 						   () => Demo != null && IsBusy));
 			}
