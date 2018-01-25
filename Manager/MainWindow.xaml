@@ -25,7 +25,6 @@
 
 	<controls:MetroWindow.Resources>
 		<ResourceDictionary>
-			<converters:NullableValueConverter x:Key="NullableValue"/>
 			<converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
 		</ResourceDictionary>
 	</controls:MetroWindow.Resources>
@@ -133,7 +132,8 @@
 								<TextBlock Text="Hal-Life Advanced Effects"
 										   Style="{StaticResource TitleSettingsStyle}" />
 								<TextBlock Style="{StaticResource TitleSettingsStyle}" Margin="5 0 0 0">
-									<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+									<Hyperlink Style="{StaticResource HyperLinkStyle}"
+											   Command="{Binding HandleHyperLinkCommand}"
 											   CommandParameter="https://github.com/advancedfx/advancedfx/wiki/AfxHookSource">
 										(HLAE)
 									</Hyperlink>
@@ -542,8 +542,9 @@
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
 									   Foreground="{StaticResource OrangeBrush}">
 								<Run Text="{x:Static properties:Resources.InfomationHelpTranslatingApp}" />
-									<Hyperlink Command="{Binding HandleHyperLinkCommand}"
-										   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
+									<Hyperlink Style="{StaticResource HyperLinkStyle}"
+											   Command="{Binding HandleHyperLinkCommand}"
+											   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
 										GitHub
 									</Hyperlink>
 								<Run Text="."/>
@@ -563,7 +564,8 @@
 									   Text="{x:Static properties:Resources.FreeSoftware}"/>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
 								<Run Text="{x:Static properties:Resources.SourceCodeAvailable}" />
-								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+								<Hyperlink Style="{StaticResource HyperLinkStyle}"
+										   Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
 									GitHub
 								</Hyperlink><Run Text="."/>
@@ -571,12 +573,14 @@
 							</TextBlock>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
 								<Run Text="{x:Static properties:Resources.EncounteredBug}" />
-								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+								<Hyperlink Style="{StaticResource HyperLinkStyle}"
+										   Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="https://github.com/akiver/CSGO-Demos-Manager/issues">
 									 GitHub 
 								</Hyperlink>
 								<Run Text="{x:Static properties:Resources.OrSendAn}" />
-								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+								<Hyperlink Style="{StaticResource HyperLinkStyle}"
+										   Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="mailto:contact@csgo-demos-manager.com">
 									<Run Text="{x:Static properties:Resources.Email}" />
 									<Hyperlink.ContextMenu>
@@ -591,7 +595,8 @@
 							</TextBlock>
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}">
 								<Run Text="{x:Static properties:Resources.WantSayThank}" />
-								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+								<Hyperlink Style="{StaticResource HyperLinkStyle}"
+										   Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="https://csgo-demos-manager.com/donate">
 									<Run Text="{x:Static properties:Resources.Donation}" />
 								</Hyperlink><Run Text="."/>
@@ -600,7 +605,8 @@
 							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
 									   Foreground="{StaticResource LightRedColorBrush}">
 								<Run Text="{x:Static properties:Resources.AlwaysDownload}" />
-								<Hyperlink Command="{Binding HandleHyperLinkCommand}"
+								<Hyperlink Style="{StaticResource HyperLinkStyle}"
+										   Command="{Binding HandleHyperLinkCommand}"
 										   CommandParameter="https://csgo-demos-manager.com">
 									 https://csgo-demos-manager.com
 								</Hyperlink><Run Text="." />
