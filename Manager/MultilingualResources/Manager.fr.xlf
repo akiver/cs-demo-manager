@@ -4157,6 +4157,14 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <source>Installing FFmpeg...</source>
           <target state="final">Installation de FFmpeg en cours...</target>
         </trans-unit>
+        <trans-unit id="CreditsTools" translate="yes" xml:space="preserve">
+          <source>CSGO Demos Manager uses internally the following tools:</source>
+          <target state="final">CSGO Demos Manager utilise en interne les utilitaires suivants:</target>
+        </trans-unit>
+        <trans-unit id="Tools" translate="yes" xml:space="preserve">
+          <source>Tools</source>
+          <target state="final">Utilitaires</target>
+        </trans-unit>
       </group>
     </body>
   </file>

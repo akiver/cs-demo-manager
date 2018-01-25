@@ -890,6 +890,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSGO Demos Manager uses internally the following tools:.
+        /// </summary>
+        public static string CreditsTools {
+            get {
+                return ResourceManager.GetString("CreditsTools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Crouch kill %.
         /// </summary>
         public static string CrouchKillPercent {
@@ -7609,6 +7618,15 @@ namespace Manager.Properties {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tools.
+        /// </summary>
+        public static string Tools {
+            get {
+                return ResourceManager.GetString("Tools", resourceCulture);
             }
         }
         

@@ -3221,4 +3221,10 @@ Please update it by clicking on the "Update" button.</value>
   <data name="With" xml:space="preserve">
     <value>with</value>
   </data>
+  <data name="CreditsTools" xml:space="preserve">
+    <value>CSGO Demos Manager uses internally the following tools:</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
 </root>

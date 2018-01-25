@@ -3116,4 +3116,10 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   <data name="NotificationInstallingFFmpeg" xml:space="preserve">
     <value>Installation de FFmpeg en cours...</value>
   </data>
+  <data name="CreditsTools" xml:space="preserve">
+    <value>CSGO Demos Manager utilise en interne les utilitaires suivants:</value>
+  </data>
+  <data name="Tools" xml:space="preserve">
+    <value>Utilitaires</value>
+  </data>
 </root>

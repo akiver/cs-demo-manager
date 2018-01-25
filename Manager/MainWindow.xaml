@@ -644,6 +644,45 @@
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>
+							<TextBlock Text="{x:Static properties:Resources.Tools}"
+									   Style="{StaticResource TitleSettingsStyle}"
+									   Foreground="{StaticResource HighlightBrush}"/>
+							<TextBlock Style="{StaticResource SubTitleSettingsStyle}"
+									   Text="{x:Static properties:Resources.CreditsTools}"/>
+							<StackPanel Orientation="Vertical">
+								<TextBlock>
+									<Hyperlink Style="{StaticResource ToolsHyperLinkStyle}"
+											   FontSize="16"
+											   Command="{Binding HandleHyperLinkCommand}"
+											   CommandParameter="https://github.com/advancedfx/advancedfx/wiki/Half-Life-Advanced-Effects">
+										<TextBlock Text="Half-Life Advanced Effects (HLAE)" />
+									</Hyperlink>
+								</TextBlock>
+								<TextBlock>
+									<Hyperlink Style="{StaticResource ToolsHyperLinkStyle}"
+											   FontSize="16"
+											   Command="{Binding HandleHyperLinkCommand}"
+											   CommandParameter="https://www.ffmpeg.org/">
+										<TextBlock Text="FFmpeg" />
+									</Hyperlink>
+								</TextBlock>
+								<TextBlock>
+									<Hyperlink Style="{StaticResource ToolsHyperLinkStyle}"
+											   FontSize="16"
+											   Command="{Binding HandleHyperLinkCommand}"
+											   CommandParameter="http://www.virtualdub.org/">
+										<TextBlock Text="VirtualDub" />
+									</Hyperlink>
+								</TextBlock>
+								<TextBlock>
+									<Hyperlink Style="{StaticResource ToolsHyperLinkStyle}"
+											   FontSize="16"
+											   Command="{Binding HandleHyperLinkCommand}"
+											   CommandParameter="http://simpleradar.com/">
+										<TextBlock Text="Simple Radar" />
+									</Hyperlink>
+								</TextBlock>
+							</StackPanel>
 						</StackPanel>
 					</controls:MetroTabItem>
 				</TabControl>

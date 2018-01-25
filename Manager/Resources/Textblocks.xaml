@@ -166,6 +166,10 @@
 		<Setter Property="Foreground" Value="#3273dc" />
 	</Style>
 
+	<Style TargetType="Hyperlink" x:Key="ToolsHyperLinkStyle" BasedOn="{StaticResource HyperLinkStyle}">
+		<Setter Property="FontSize" Value="18" />
+	</Style>
+
 	<!-- TextBlock on HomeView -->
 	<Style TargetType="TextBlock" x:Key="WinStatusStyle">
 		<Setter Property="TextAlignment" Value="Center" />

@@ -4152,6 +4152,14 @@ Please update it by clicking on the "Update" button.</target>
           <source>Installing FFmpeg...</source>
           <target state="new">Installing FFmpeg...</target>
         </trans-unit>
+        <trans-unit id="CreditsTools" translate="yes" xml:space="preserve">
+          <source>CSGO Demos Manager uses internally the following tools:</source>
+          <target state="new">CSGO Demos Manager uses internally the following tools:</target>
+        </trans-unit>
+        <trans-unit id="Tools" translate="yes" xml:space="preserve">
+          <source>Tools</source>
+          <target state="new">Tools</target>
+        </trans-unit>
       </group>
     </body>
   </file>
