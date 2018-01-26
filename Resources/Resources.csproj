@@ -196,7 +196,9 @@
     <Resource Include="images\icons\incendiary_black.png" />
     <Resource Include="images\icons\molotov_black.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_canals.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="images\maps\overview\simpleradar\de_cache.png" />
     <Resource Include="images\maps\overview\simpleradar\de_cbble.png" />
@@ -206,6 +208,9 @@
     <Resource Include="images\maps\overview\simpleradar\de_new_nuke.png" />
     <Resource Include="images\maps\overview\simpleradar\de_overpass.png" />
     <Resource Include="images\maps\overview\simpleradar\de_train.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\canals.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

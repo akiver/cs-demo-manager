@@ -28,6 +28,7 @@ namespace Services.Concrete.Maps
 		private const string CRUISE = "cs_cruise";
 		private const string COAST = "de_coast";
 		private const string MIKLA = "de_mikla";
+		private const string CANALS = "de_canals";
 
 		public static string[] SimpleRadarMaps =
 		{
@@ -43,7 +44,8 @@ namespace Services.Concrete.Maps
 
 		public static string[] Maps = {
 			DUST2, INFERNO, NUKE, CACHE, SEASON, TRAIN, CBBLE, OVERPASS,
-			MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA
+			MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA,
+			CANALS,
 		};
 
 		public Map Map { get; set; }
@@ -114,6 +116,9 @@ namespace Services.Concrete.Maps
 					break;
 				case MIKLA:
 					Map = new Mikla();
+					break;
+				case CANALS:
+					Map = new Canals();
 					break;
 				default:
 					throw new MapUnavailableException(demo.MapName);

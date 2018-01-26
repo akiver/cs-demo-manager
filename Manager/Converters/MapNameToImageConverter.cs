@@ -24,6 +24,8 @@ namespace Manager.Converters
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/black_gold.png", UriKind.RelativeOrAbsolute);
 				case "de_cache":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/cache.png", UriKind.RelativeOrAbsolute);
+				case "de_canals":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/canals.png", UriKind.RelativeOrAbsolute);
 				case "de_castle":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/castle.png", UriKind.RelativeOrAbsolute);
 				case "de_cbble":
