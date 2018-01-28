@@ -3122,4 +3122,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   <data name="Tools" xml:space="preserve">
     <value>Utilitaires</value>
   </data>
+  <data name="SteamMustBeRunning" xml:space="preserve">
+    <value>Steam doit être lancé pour continuer.</value>
+  </data>
 </root>

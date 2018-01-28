@@ -4159,6 +4159,10 @@ Please update it by clicking on the "Update" button.</target>
           <source>Tools</source>
           <target state="new">Tools</target>
         </trans-unit>
+        <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
+          <source>Steam must be running.</source>
+          <target state="new">Steam must be running.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

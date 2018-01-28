@@ -669,6 +669,11 @@ namespace Manager.ViewModel.Demos
 								   await _dialogService.ShowErrorAsync(Properties.Resources.DialogEndTickGreaterThanStartTick, MessageDialogStyle.Affirmative);
 								   return;
 							   }
+							   if (Process.GetProcessesByName("Steam").Length == 0)
+							   {
+								   await _dialogService.ShowErrorAsync(Properties.Resources.SteamMustBeRunning, MessageDialogStyle.Affirmative);
+								   return;
+							   }
 							   if (RequiredSpace >= 30)
 							   {
 								   MessageDialogResult confirm = await _dialogService.ShowMessageAsync(string.Format(Properties.Resources.DialogAmountSpaceRequired, RequiredSpace), MessageDialogStyle.AffirmativeAndNegative);

@@ -3227,4 +3227,7 @@ Please update it by clicking on the "Update" button.</value>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>
   </data>
+  <data name="SteamMustBeRunning" xml:space="preserve">
+    <value>Steam must be running.</value>
+  </data>
 </root>

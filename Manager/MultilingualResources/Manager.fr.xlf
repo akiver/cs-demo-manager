@@ -4165,6 +4165,10 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <source>Tools</source>
           <target state="final">Utilitaires</target>
         </trans-unit>
+        <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
+          <source>Steam must be running.</source>
+          <target state="final">Steam doit être lancé pour continuer.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

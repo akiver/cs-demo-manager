@@ -7370,6 +7370,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Steam must be runnig..
+        /// </summary>
+        public static string SteamMustBeRunning {
+            get {
+                return ResourceManager.GetString("SteamMustBeRunning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stomach.
         /// </summary>
         public static string Stomach {
