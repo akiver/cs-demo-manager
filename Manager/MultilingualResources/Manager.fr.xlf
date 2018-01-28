@@ -4139,7 +4139,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         </trans-unit>
         <trans-unit id="Thrown" translate="yes" xml:space="preserve">
           <source>thrown</source>
-          <target state="final">a jété</target>
+          <target state="translated">a jeté</target>
         </trans-unit>
         <trans-unit id="ToolTipShowCFG" translate="yes" xml:space="preserve">
           <source>Show CFG</source>
@@ -4168,6 +4168,10 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
           <source>Steam must be running.</source>
           <target state="final">Steam doit être lancé pour continuer.</target>
+        </trans-unit>
+        <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
+          <source>See documentation on the website</source>
+          <target state="final">Voir la documentation sur le site Internet</target>
         </trans-unit>
       </group>
     </body>

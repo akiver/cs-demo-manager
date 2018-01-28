@@ -6965,6 +6965,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to See documentation on the website.
+        /// </summary>
+        public static string SeeDocOnWebsite {
+            get {
+                return ResourceManager.GetString("SeeDocOnWebsite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select folder.
         /// </summary>
         public static string SelectFolder {
@@ -7370,7 +7379,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Steam must be runnig..
+        ///   Looks up a localized string similar to Steam must be running..
         /// </summary>
         public static string SteamMustBeRunning {
             get {

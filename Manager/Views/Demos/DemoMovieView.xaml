@@ -60,84 +60,115 @@
 		</Grid.RowDefinitions>
 
 		<Grid Grid.Row="0" Height="40">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{DynamicResource GeneralButton}"
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+			<Button Grid.Column="0"
+						Style="{DynamicResource GeneralButton}"
 						Command="{Binding BackToDemoDetails}"
 						ToolTip="{x:Static properties:Resources.ToolTipBack}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
+				<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+					<Rectangle Width="15"
 								   Height="15"
 								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_arrow_left}"
 											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Back}"
+						</Rectangle.OpacityMask>
+					</Rectangle>
+					<TextBlock Text="{x:Static properties:Resources.Back}"
 								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				</StackPanel>
+			</Button>
 
-				<Button Style="{DynamicResource GeneralButton}"
+			<Button Grid.Column="1" Style="{DynamicResource GeneralButton}"
 						Command="{Binding GenerateMovie}"
 						ToolTip="{x:Static properties:Resources.ToolTipGenerateMovie}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
+				<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+					<Rectangle Width="15"
 								   Height="15"
 								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_movie_clapper_select}"
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_movie_clapper_select}"
 											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Generate}"
+						</Rectangle.OpacityMask>
+					</Rectangle>
+					<TextBlock Text="{x:Static properties:Resources.Generate}"
 								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-				<CheckBox Content="{x:Static properties:Resources.GenerateVideoFile}"
+				</StackPanel>
+			</Button>
+			<CheckBox Grid.Column="2" Content="{x:Static properties:Resources.GenerateVideoFile}"
 						  IsChecked="{Binding GenerateVideoFile}"
 						  Style="{StaticResource CheckBoxColumnOptionStyle}" />
-				<controls:ToggleSwitch OnLabel="VirtualDub"
+			<controls:ToggleSwitch Grid.Column="3"
+									   OnLabel="VirtualDub"
 									   OffLabel="FFmpeg"
 									   VerticalAlignment="Center"
 									   ToolTip="{x:Static properties:Resources.ToolTipSwitchBetweenFFmpegVirtualDub}"
 									   IsChecked="{Binding UseVirtualDub}"
 									   Visibility="{Binding GenerateVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}"
 									   IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
-				<Button Style="{DynamicResource GeneralButton}"
+			<Button Grid.Column="4"
+						Style="{DynamicResource GeneralButton}"
 						Command="{Binding Cancel}"
 						Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
 						ToolTip="Cancel">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
+				<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+					<Rectangle Width="15"
 								   Height="15"
 								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_control_stop}"
+						<Rectangle.OpacityMask>
+							<VisualBrush Visual="{StaticResource appbar_control_stop}"
 											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Cancel}"
+						</Rectangle.OpacityMask>
+					</Rectangle>
+					<TextBlock Text="{x:Static properties:Resources.Cancel}"
 								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+				</StackPanel>
+			</Button>
 
-				<StackPanel Orientation="Horizontal"
+			<StackPanel Grid.Column="5"
+						Orientation="Horizontal"
 							VerticalAlignment="Center"
 							Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
-					<Label Content="{x:Static properties:Resources.RawFilesRequiredSpace}"
+				<Label Content="{x:Static properties:Resources.RawFilesRequiredSpace}"
 						   Foreground="{StaticResource OrangeBrush}"/>
-					<TextBlock Text="{Binding RequiredSpace, Mode=OneWay, StringFormat=' ~\{0} '}"
+				<TextBlock Text="{Binding RequiredSpace, Mode=OneWay, StringFormat=' ~\{0} '}"
 							   Style="{StaticResource TextBlockSmallDanger}" />
-					<TextBlock Text="{x:Static properties:Resources.GB}"
+				<TextBlock Text="{x:Static properties:Resources.GB}"
 							   Style="{StaticResource TextBlockSmallDanger}" />
-				</StackPanel>
+			</StackPanel>
 
-				<TextBlock Text="{x:Static properties:Resources.RequiredSpaceNotAvailable}"
+			<TextBlock Grid.Column="6"
+					   Text="{x:Static properties:Resources.RequiredSpaceNotAvailable}"
 						   VerticalAlignment="Center"
 						   Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityConverter}}"
 						   Style="{StaticResource TextBlockSmallDanger}" />
-			</StackPanel>
+
+			<Rectangle Grid.Column="7"
+					   Margin="10 0 10 0"
+					   Fill="{StaticResource HighlightBrush}"
+					   Height="20"
+					   Width="20"
+					   ToolTip="{x:Static properties:Resources.SeeDocOnWebsite}"
+					   Cursor="Hand">
+				<i:Interaction.Triggers>
+					<i:EventTrigger EventName="MouseDown">
+						<command:EventToCommand Command="{Binding HandleHyperLinkCommand}"
+												CommandParameter="https://csgo-demos-manager.com/docs/movie"/>
+					</i:EventTrigger>
+				</i:Interaction.Triggers>
+				<Rectangle.OpacityMask>
+					<VisualBrush Visual="{StaticResource appbar_question}" Stretch="Fill" />
+				</Rectangle.OpacityMask>
+			</Rectangle>
 		</Grid>
 
 		<Grid Grid.Row="1"
@@ -651,7 +682,7 @@
 											HorizontalAlignment="Right">
 									<Button Content="{x:Static properties:Resources.ShowCFG}"
 											Style="{DynamicResource GeneralButton}"
-									        ToolTip="{x:Static properties:Resources.ToolTipShowCFG}"
+											ToolTip="{x:Static properties:Resources.ToolTipShowCFG}"
 											Command="{Binding ToggleDemoCommentVisibility}" />
 								</StackPanel>
 							</DockPanel>
@@ -717,9 +748,10 @@
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseRightButtonDown">
 					<command:EventToCommand Command="{Binding TimelineRightClick}"
-												PassEventArgsToCommand="True" />
+											PassEventArgsToCommand="True" />
 				</i:EventTrigger>
 			</i:Interaction.Triggers>
 		</telerik:RadTimeline>
 	</Grid>
 </UserControl>
+

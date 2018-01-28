@@ -4180,6 +4180,10 @@ Please update it by clicking on the "Update" button.</target>
           <source>Steam must be running.</source>
           <target state="new">Steam must be running.</target>
         </trans-unit>
+        <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
+          <source>See documentation on the website</source>
+          <target state="new">See documentation on the website</target>
+        </trans-unit>
       </group>
     </body>
   </file>

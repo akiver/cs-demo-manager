@@ -3102,7 +3102,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
     <value>une fumigène</value>
   </data>
   <data name="Thrown" xml:space="preserve">
-    <value>a jété</value>
+    <value>a jeté</value>
   </data>
   <data name="ToolTipShowCFG" xml:space="preserve">
     <value>Afficher CFG</value>
@@ -3124,5 +3124,8 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="SteamMustBeRunning" xml:space="preserve">
     <value>Steam doit être lancé pour continuer.</value>
+  </data>
+  <data name="SeeDocOnWebsite" xml:space="preserve">
+    <value>Voir la documentation sur le site Internet</value>
   </data>
 </root>

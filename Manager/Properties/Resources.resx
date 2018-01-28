@@ -3230,4 +3230,7 @@ Please update it by clicking on the "Update" button.</value>
   <data name="SteamMustBeRunning" xml:space="preserve">
     <value>Steam must be running.</value>
   </data>
+  <data name="SeeDocOnWebsite" xml:space="preserve">
+    <value>See documentation on the website</value>
+  </data>
 </root>
