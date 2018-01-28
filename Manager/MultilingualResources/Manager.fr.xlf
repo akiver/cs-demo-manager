@@ -3698,7 +3698,7 @@ Il est possible que des données soient manquantes pour celles-ci.</target>
           <target state="final">a désamorcé la bombe sur le site</target>
         </trans-unit>
         <trans-unit id="DeleteRawFilesOnEncodeEnd" translate="yes" xml:space="preserve">
-          <source>Delete RAW files at the end of encoding</source>
+          <source>Delete raw files at the end of encoding</source>
           <target state="final">Supprimer les fichiers bruts a la fin de l'encodage</target>
         </trans-unit>
         <trans-unit id="DialogAmountSpaceRequired" translate="yes" xml:space="preserve">
@@ -3801,7 +3801,7 @@ Veuillez installer la mise à jour en cliquant sur le bouton "Mettre à jour".</
           <target state="final">Veuillez indiquer le chemin vers le fichier csgo.exe depuis la section HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogSelectRawFilesDestination" translate="yes" xml:space="preserve">
-          <source>Please select a RAW files folder destination.</source>
+          <source>Please select a raw files folder destination.</source>
           <target state="final">Veuillez sélectionner le dossier dans lequel seront sauvegardés les fichiers brutes.</target>
         </trans-unit>
         <trans-unit id="DialogSelectValidEndTick" translate="yes" xml:space="preserve">
@@ -3911,7 +3911,7 @@ Veuillez installer la mise à jour en cliquant sur le bouton "Mettre à jour".</
           <target state="final">Nom du fichier vidéo:</target>
         </trans-unit>
         <trans-unit id="LabelRawFilesFolder" translate="yes" xml:space="preserve">
-          <source>RAW files destination folder:</source>
+          <source>Raw files destination folder:</source>
           <target state="final">Destination des fichiers bruts:</target>
         </trans-unit>
         <trans-unit id="LabelStartTick" translate="yes" xml:space="preserve">
@@ -3943,7 +3943,7 @@ Veuillez installer la mise à jour en cliquant sur le bouton "Mettre à jour".</
           <target state="final">a planté la bombe sur le site</target>
         </trans-unit>
         <trans-unit id="RawFilesRequiredSpace" translate="yes" xml:space="preserve">
-          <source>RAW files required space:</source>
+          <source>Raw files required space:</source>
           <target state="final">Espace disque requis pour les fichier bruts:</target>
         </trans-unit>
         <trans-unit id="RequiredSpaceNotAvailable" translate="yes" xml:space="preserve">
@@ -4000,7 +4000,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <target state="final">Ouvrir le dossier de la vidéo dans Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToRawFilesDestination" translate="yes" xml:space="preserve">
-          <source>Open RAW files folder in Windows Explorer</source>
+          <source>Open raw files folder in Windows Explorer</source>
           <target state="final">Ouvrir le dossier des fichiers bruts dans Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToVirtualDubFolder" translate="yes" xml:space="preserve">
@@ -4012,7 +4012,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <target state="final">Changer le dossier de destination de la vidéo</target>
         </trans-unit>
         <trans-unit id="ToolTipChangeRawFilesDestination" translate="yes" xml:space="preserve">
-          <source>Change RAW files folder destination</source>
+          <source>Change raw files folder destination</source>
           <target state="final">Changer le dossier de destination des fichiers bruts</target>
         </trans-unit>
         <trans-unit id="ToolTipGenerateMovie" translate="yes" xml:space="preserve">

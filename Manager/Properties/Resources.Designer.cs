@@ -1124,7 +1124,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete RAW files at the end of encoding.
+        ///   Looks up a localized string similar to Delete raw files at the end of encoding.
         /// </summary>
         public static string DeleteRawFilesOnEncodeEnd {
             get {
@@ -2308,7 +2308,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select a RAW files folder destination..
+        ///   Looks up a localized string similar to Please select a raw files folder destination..
         /// </summary>
         public static string DialogSelectRawFilesDestination {
             get {
@@ -5326,7 +5326,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RAW files destination folder:.
+        ///   Looks up a localized string similar to Raw files destination folder:.
         /// </summary>
         public static string LabelRawFilesFolder {
             get {
@@ -6650,7 +6650,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RAW files required space:.
+        ///   Looks up a localized string similar to Raw files required space:.
         /// </summary>
         public static string RawFilesRequiredSpace {
             get {
@@ -7775,7 +7775,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Open RAW files folder in Windows Explorer.
+        ///   Looks up a localized string similar to Open raw files folder in Windows Explorer.
         /// </summary>
         public static string ToolTipBrowseToRawFilesDestination {
             get {
@@ -7802,7 +7802,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change RAW files folder destination.
+        ///   Looks up a localized string similar to Change raw files folder destination.
         /// </summary>
         public static string ToolTipChangeRawFilesDestination {
             get {

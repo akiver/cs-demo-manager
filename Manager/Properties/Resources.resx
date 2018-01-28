@@ -2922,7 +2922,7 @@ You may have missing data for this demos.</value>
     <value>defused the bomb on site</value>
   </data>
   <data name="DeleteRawFilesOnEncodeEnd" xml:space="preserve">
-    <value>Delete RAW files at the end of encoding</value>
+    <value>Delete raw files at the end of encoding</value>
   </data>
   <data name="DialogAmountSpaceRequired" xml:space="preserve">
     <value>You need about {0} GB available on your HDD.
@@ -2996,7 +2996,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>Please select csgo.exe path from HLAE section.</value>
   </data>
   <data name="DialogSelectRawFilesDestination" xml:space="preserve">
-    <value>Please select a RAW files folder destination.</value>
+    <value>Please select a raw files folder destination.</value>
   </data>
   <data name="DialogSelectValidEndTick" xml:space="preserve">
     <value>Please select a valid end tick.</value>
@@ -3087,7 +3087,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>Output filename:</value>
   </data>
   <data name="LabelRawFilesFolder" xml:space="preserve">
-    <value>RAW files destination folder:</value>
+    <value>Raw files destination folder:</value>
   </data>
   <data name="LabelStartTick" xml:space="preserve">
     <value>Start tick:</value>
@@ -3117,7 +3117,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>planted the bomb on site</value>
   </data>
   <data name="RawFilesRequiredSpace" xml:space="preserve">
-    <value>RAW files required space:</value>
+    <value>Raw files required space:</value>
   </data>
   <data name="RequiredSpaceNotAvailable" xml:space="preserve">
     <value>Required space calculation is not available with corrupted demos.</value>
@@ -3165,7 +3165,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>Open output folder in Windows Explorer</value>
   </data>
   <data name="ToolTipBrowseToRawFilesDestination" xml:space="preserve">
-    <value>Open RAW files folder in Windows Explorer</value>
+    <value>Open raw files folder in Windows Explorer</value>
   </data>
   <data name="ToolTipBrowseToVirtualDubFolder" xml:space="preserve">
     <value>Open VirtualDub installation folder in Window Explorer</value>
@@ -3174,7 +3174,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>Change output folder destination</value>
   </data>
   <data name="ToolTipChangeRawFilesDestination" xml:space="preserve">
-    <value>Change RAW files folder destination</value>
+    <value>Change raw files folder destination</value>
   </data>
   <data name="ToolTipGenerateMovie" xml:space="preserve">
     <value>Start movie generation</value>

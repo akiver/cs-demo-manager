@@ -3713,8 +3713,8 @@ You may have missing data for this demos.</target>
           <target state="new">defused the bomb on site</target>
         </trans-unit>
         <trans-unit id="DeleteRawFilesOnEncodeEnd" translate="yes" xml:space="preserve">
-          <source>Delete RAW files at the end of encoding</source>
-          <target state="new">Delete RAW files at the end of encoding</target>
+          <source>Delete raw files at the end of encoding</source>
+          <target state="new">Delete raw files at the end of encoding</target>
         </trans-unit>
         <trans-unit id="DialogAmountSpaceRequired" translate="yes" xml:space="preserve">
           <source>You need about {0} GB available on your HDD.
@@ -3813,8 +3813,8 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">Please select csgo.exe path from HLAE section.</target>
         </trans-unit>
         <trans-unit id="DialogSelectRawFilesDestination" translate="yes" xml:space="preserve">
-          <source>Please select a RAW files folder destination.</source>
-          <target state="new">Please select a RAW files folder destination.</target>
+          <source>Please select a raw files folder destination.</source>
+          <target state="new">Please select a raw files folder destination.</target>
         </trans-unit>
         <trans-unit id="DialogSelectValidEndTick" translate="yes" xml:space="preserve">
           <source>Please select a valid end tick.</source>
@@ -3923,8 +3923,8 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">Output filename:</target>
         </trans-unit>
         <trans-unit id="LabelRawFilesFolder" translate="yes" xml:space="preserve">
-          <source>RAW files destination folder:</source>
-          <target state="new">RAW files destination folder:</target>
+          <source>Raw files destination folder:</source>
+          <target state="new">Raw files destination folder:</target>
         </trans-unit>
         <trans-unit id="LabelStartTick" translate="yes" xml:space="preserve">
           <source>Start tick:</source>
@@ -3955,8 +3955,8 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">planted the bomb on site</target>
         </trans-unit>
         <trans-unit id="RawFilesRequiredSpace" translate="yes" xml:space="preserve">
-          <source>RAW files required space:</source>
-          <target state="new">RAW files required space:</target>
+          <source>Raw files required space:</source>
+          <target state="new">Raw files required space:</target>
         </trans-unit>
         <trans-unit id="RequiredSpaceNotAvailable" translate="yes" xml:space="preserve">
           <source>Required space calculation is not available with corrupted demos.</source>
@@ -4011,8 +4011,8 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">Open output folder in Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToRawFilesDestination" translate="yes" xml:space="preserve">
-          <source>Open RAW files folder in Windows Explorer</source>
-          <target state="new">Open RAW files folder in Windows Explorer</target>
+          <source>Open raw files folder in Windows Explorer</source>
+          <target state="new">Open raw files folder in Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToVirtualDubFolder" translate="yes" xml:space="preserve">
           <source>Open VirtualDub installation folder in Window Explorer</source>
@@ -4023,8 +4023,8 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">Change output folder destination</target>
         </trans-unit>
         <trans-unit id="ToolTipChangeRawFilesDestination" translate="yes" xml:space="preserve">
-          <source>Change RAW files folder destination</source>
-          <target state="new">Change RAW files folder destination</target>
+          <source>Change raw files folder destination</source>
+          <target state="new">Change raw files folder destination</target>
         </trans-unit>
         <trans-unit id="ToolTipGenerateMovie" translate="yes" xml:space="preserve">
           <source>Start movie generation</source>
