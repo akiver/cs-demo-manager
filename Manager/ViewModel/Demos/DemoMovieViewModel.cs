@@ -1301,7 +1301,7 @@ namespace Manager.ViewModel.Demos
 		private void OnHLAEStarted()
 		{
 			HasNotification = true;
-			Notification = Properties.Resources.DialogPleaseUpdateHLAE;
+			Notification = Properties.Resources.StartingHLAE;
 		}
 
 		private void OnFFmpegStarted()
