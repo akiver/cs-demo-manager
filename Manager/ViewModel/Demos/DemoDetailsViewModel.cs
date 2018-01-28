@@ -233,6 +233,7 @@ namespace Manager.ViewModel.Demos
 							Demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
 						await UpdateDemoFromAppArgument();
 						await LoadData();
+						CommandManager.InvalidateRequerySuggested();
 					}));
 			}
 		}
