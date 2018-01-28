@@ -208,7 +208,7 @@ namespace Services.Concrete.Movie
 		/// </summary>
 		private void GenerateVirtualDubScript()
 		{
-			string[] tgaFiles = Directory.GetFiles(_config.RawFilesDestination, _config.Demo.NameWithoutExtension + "*.tga");
+			string[] tgaFiles = Directory.GetFiles(_config.RawFilesDestination, _config.OutputFilename + "*.tga");
 			string videoPath = GetOuputFilePath().Replace("\\", "\\\\");
 			string firstTgaFilePath = GetFirstTgaPath();
 			string wavFilePath = RawFullPath + ".wav";
