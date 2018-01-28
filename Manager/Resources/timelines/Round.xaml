@@ -209,7 +209,7 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding ThrowerName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="thrown a" />
@@ -231,7 +231,7 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.PlantedOnSite}" />
@@ -253,7 +253,7 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.DefusedOnSite}" />
@@ -277,7 +277,7 @@
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.BombPlantedBy}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.ExplodedOnSite}" />

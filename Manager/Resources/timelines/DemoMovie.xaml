@@ -274,9 +274,7 @@
 					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
 					   Foreground="{StaticResource OrangeBrush}"
 					   Text="{Binding DataItem.StartTick, StringFormat='{}{0} '}" />
-			<TextBlock VerticalAlignment="Center"
-					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
-					   Text="{x:Static properties:Resources.To}" />
+			<TextBlock Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}" Text="-" />
 			<TextBlock VerticalAlignment="Center"
 					   Style="{StaticResource DemoMovieTimeLineRoundTextBlockStyle}"
 					   Foreground="{StaticResource OrangeBrush}"
@@ -462,7 +460,7 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding ThrowerName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.Thrown}" />
@@ -483,15 +481,12 @@
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.RoundNumber}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding Number, StringFormat='{}{0} '}" />
-				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Text="{x:Static properties:Resources.From}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTick, StringFormat=' \{0}\ '}" />
-				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Text="{x:Static properties:Resources.To}" />
+				<TextBlock Text="-" Style="{StaticResource TimeLineToolTipTextBlockStyle}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding EndTick, StringFormat=' \{0}\ '}" />
@@ -512,7 +507,7 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.PlantedOnSite}" />
@@ -534,7 +529,7 @@
 						   Foreground="{StaticResource RedColorBrush}"
 						   Text="{Binding StartTick, StringFormat='{}{0}:'}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.DefusedOnSite}" />
@@ -558,7 +553,7 @@
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.BombPlantedBy}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-						   Foreground="{StaticResource LightGreenBrush}"
+				           Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.ExplodedOnSite}" />
