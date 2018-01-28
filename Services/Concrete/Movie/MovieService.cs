@@ -64,7 +64,7 @@ namespace Services.Concrete.Movie
 			"sv_cheats 1",
 			"host_timescale 0",
 			"mirv_snd_timescale 1", // fix the audio sync issue with startmovie command
-			"mirv_gameoverlay enable 1",
+			"mirv_gameoverlay enable 0",
 		};
 
 		public async Task Start()
