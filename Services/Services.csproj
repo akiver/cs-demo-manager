@@ -149,6 +149,7 @@
     <Compile Include="Concrete\RoundService.cs" />
     <Compile Include="Concrete\SoundService.cs" />
     <Compile Include="Concrete\StuffService.cs" />
+    <Compile Include="Concrete\ThirdParties\CsgoDashStatsService.cs" />
     <Compile Include="Concrete\ThirdParties\CsgoStatsService.cs" />
     <Compile Include="Concrete\ThirdParties\ThirdPartiesServiceFactory.cs" />
     <Compile Include="Design\AccountStatsDesignService.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Models\Stats\PlayerRoundStats.cs" />
     <Compile Include="Models\Stats\ProgressStats.cs" />
     <Compile Include="Models\Stats\WeaponStats.cs" />
+    <Compile Include="Models\ThirdParties\Responses\CsgoDashStatsResponse.cs" />
     <Compile Include="Models\ThirdParties\Responses\CsgostatsResponse.cs" />
     <Compile Include="Models\ThirdParties\ThirdPartyData.cs" />
     <Compile Include="Models\Timelines\BombDefusedEventTimeline.cs" />
