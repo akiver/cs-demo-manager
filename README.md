@@ -21,13 +21,14 @@ More screenshots and video are available at [https://csgo-demos-manager.com](htt
 - Watch rounds from an animated map overview
 - Display damages by hitbox
 - Track your stats (overall stats and graphs)
-- [HLAE](https://github.com/ripieces/advancedfx/wiki/Half-Life-Advanced-Effects) integration
+- [HLAE](https://github.com/advancedfx/advancedfx/wiki/Half-Life-Advanced-Effects) integration
 - Download your last matchmaking demos
 - Download demos from share codes
+- Generate videos from demos
 
 ## Dependencies ##
 
-* Microsoft Visual Studio 2015 (C# 6 is required)
+* Microsoft Visual Studio 2017 (C# 7 is required)
 * [Multilingual App Toolkit v4](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520) (required to handle app translations)
 * [MVVM Light](https://mvvmlight.codeplex.com/)
 * [Mahapps](https://github.com/MahApps/MahApps.Metro)
@@ -41,6 +42,13 @@ More screenshots and video are available at [https://csgo-demos-manager.com](htt
 * [boiler-writter](https://github.com/akiver/boiler-writter)
 * [SharpZipLib](http://icsharpcode.github.io/SharpZipLib/)
 
+## Integrated Tools ##
+
+* [HLAE](https://github.com/advancedfx/advancedfx/wiki/Half-Life-Advanced-Effects)
+* [Simple Radar](http://simpleradar.com/)
+* [VirtualDub](http://www.virtualdub.org/)
+* [FFmpeg](http://ffmpeg.org/)
+
 ## Build instructructions ##
 
 ### You need Telerik binaries to be able to compile the application.
@@ -49,7 +57,7 @@ More screenshots and video are available at [https://csgo-demos-manager.com](htt
 * Download the repository and extract it
 * Launch the solution in Visual Studio
 * Set the correct path for Telerik references if needed
-* Copy / paste your Steam API key into the file "steam_api_key.txt". If you don't have a Steam API key, suspects features will not work and players avatar will not be fetched.
+* (optional) Copy / paste your Steam API key into the file "steam_api_key.txt". If you don't have a Steam API key, suspects features will not work and players avatar will not be fetched.
 * The [DemoInfo](https://github.com/EHVAG/demoinfo) pre-release isn't properly signed. You have to download [snremove](http://www.nirsoft.net/dot_net_tools/strong_name_remove.html) and copy / paste it into the folder "bin/Debug" and "bin/Release" of demoinfo AND CSGO Demos Manager.
 * Select the x86 platform configuration
 * Build and start
