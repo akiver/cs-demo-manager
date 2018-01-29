@@ -212,6 +212,7 @@
     <Compile Include="Models\Timelines\BombExplodedEventTimeline.cs" />
     <Compile Include="Models\Timelines\BombPlantedEventTimeline.cs" />
     <Compile Include="Models\Timelines\DecoyThrownEventTimeline.cs" />
+    <Compile Include="Models\Timelines\EndTickEventMarkerTimeline.cs" />
     <Compile Include="Models\Timelines\FlashThrownEventTimeline.cs" />
     <Compile Include="Models\Timelines\HeThrownEventTimeline.cs" />
     <Compile Include="Models\Timelines\IncendiaryThrownEventTimeline.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\Timelines\MolotovThrownEventTimeline.cs" />
     <Compile Include="Models\Timelines\RoundEventTimeline.cs" />
     <Compile Include="Models\Timelines\SmokeThrownEventTimeline.cs" />
+    <Compile Include="Models\Timelines\StartTickEventMarkerTimeline.cs" />
     <Compile Include="Models\Timelines\StuffEventTimeline.cs" />
     <Compile Include="Models\Timelines\TimelineEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

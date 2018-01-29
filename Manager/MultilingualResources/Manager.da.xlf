@@ -4184,6 +4184,10 @@ Please update it by clicking on the "Update" button.</target>
           <source>See documentation on the website</source>
           <target state="new">See documentation on the website</target>
         </trans-unit>
+        <trans-unit id="Markers" translate="yes" xml:space="preserve">
+          <source>Markers</source>
+          <target state="new">Markers</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -152,38 +152,38 @@
 
 	<ContextMenu x:Key="DemoMovieBombContextMenu">
 		<MenuItem Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickAsStartTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickMinusAsStartTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickPlusAsStartTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<Separator />
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.EndTick}">
+				  CommandParameter="{Binding DataItem.EndTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickMinusAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickPlusAsEndTick}}"/>
 			</MenuItem.Header>
@@ -193,49 +193,49 @@
 				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DataItem.PlanterName}" />
 	</ContextMenu>
-	
+
 	<ContextMenu x:Key="DemoMovieBombDefusedContextMenu">
 		<MenuItem Command="{Binding DemoMovie.UpdateStartTick, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickAsStartTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateStartTickBeforeSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickMinusAsStartTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateStartTickAfterSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickPlusAsStartTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<Separator />
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTick, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.EndTick}">
+				  CommandParameter="{Binding DataItem.EndTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTickBeforeSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickMinusAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<MenuItem Command="{Binding DemoMovie.UpdateEndTickAfterSeconds, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.StartTick}">
+				  CommandParameter="{Binding DataItem.StartTick}">
 			<MenuItem.Header>
 				<TextBlock Text="{Binding Path=DataItem.EventName, StringFormat={x:Static properties:Resources.ContextMenuTimeLineSetEventTickPlusAsEndTick}}"/>
 			</MenuItem.Header>
 		</MenuItem>
 		<Separator />
 		<MenuItem Header="{x:Static properties:Resources.FocusOnDefuser}"
-		          Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
-		          CommandParameter="{Binding DataItem.DefuserName}" />
+				  Command="{Binding DemoMovie.UpdateFocusPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding DataItem.DefuserName}" />
 	</ContextMenu>
 
 	<ContextMenu x:Key="DemoMovieTimeLineContextMenu">
@@ -422,6 +422,10 @@
 			   MinWidth="25" />
 	</DataTemplate>
 
+	<DataTemplate x:Key="DemoMovieMarkerTemplate">
+		<Rectangle Height="30" Width="4" Fill="Red" />
+	</DataTemplate>
+
 	<DataTemplate x:Key="DemoTimeLineKillToolTip">
 		<Grid d:DataContext="{d:DesignInstance timelines:KillEventTimeline}">
 			<Rectangle Margin="0"
@@ -553,13 +557,45 @@
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.BombPlantedBy}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-				           Foreground="{StaticResource GreenBrush}"
+						   Foreground="{StaticResource GreenBrush}"
 						   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Text="{x:Static properties:Resources.ExplodedOnSite}" />
 				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
 						   Foreground="{StaticResource OrangeBrush}"
 						   Text="{Binding Site, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoTimeLineMarkerStartTickToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:StartTickEventMarkerTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="{x:Static properties:Resources.LabelStartTick}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat=' \{0}'}" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DemoTimeLineMarkerEndTickToolTip">
+		<Grid d:DataContext="{d:DesignInstance timelines:EndTickEventMarkerTimeline}">
+			<Rectangle Margin="0"
+					   Fill="{DynamicResource HighlightBrush}" />
+			<Rectangle Margin="2"
+					   Fill="{DynamicResource WhiteBrush}"/>
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Text="{x:Static properties:Resources.LabelEndTick}" />
+				<TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+						   Foreground="{StaticResource RedColorBrush}"
+						   Text="{Binding StartTick, StringFormat=' \{0}'}" />
 			</StackPanel>
 		</Grid>
 	</DataTemplate>
@@ -613,6 +649,14 @@
 							<Setter Property="ContentTemplate"
 									Value="{StaticResource DemoMovieTimeLineBombExplodedToolTip}" />
 						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="start_tick">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineMarkerStartTickToolTip}" />
+						</DataTrigger>
+						<DataTrigger Binding="{Binding Type}" Value="end_tick">
+							<Setter Property="ContentTemplate"
+									Value="{StaticResource DemoTimeLineMarkerEndTickToolTip}" />
+						</DataTrigger>
 					</Style.Triggers>
 				</Style>
 			</ContentControl.Style>
@@ -630,5 +674,7 @@
 											MolotovTemplate="{StaticResource DemoMovieMolotovTemplate}"
 											BombDefusedTemplate="{StaticResource DemoMovieBombDefusedTemplate}"
 											RoundTemplate="{StaticResource DemoMovieTimelineRoundTemplate}"
-											BombExplodedTemplate="{StaticResource DemoMovieBombExplodedTemplate}"/>
+											BombExplodedTemplate="{StaticResource DemoMovieBombExplodedTemplate}"
+											MarkerStartTickTemplate="{StaticResource DemoMovieMarkerTemplate}"
+											MarkerEndTickTemplate="{StaticResource DemoMovieMarkerTemplate}" />
 </ResourceDictionary>

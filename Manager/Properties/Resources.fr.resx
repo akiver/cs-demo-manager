@@ -3128,4 +3128,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   <data name="SeeDocOnWebsite" xml:space="preserve">
     <value>Voir la documentation sur le site Internet</value>
   </data>
+  <data name="Markers" xml:space="preserve">
+    <value>Marqueurs</value>
+  </data>
 </root>

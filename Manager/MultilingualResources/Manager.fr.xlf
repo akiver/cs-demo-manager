@@ -4139,7 +4139,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         </trans-unit>
         <trans-unit id="Thrown" translate="yes" xml:space="preserve">
           <source>thrown</source>
-          <target state="translated">a jeté</target>
+          <target state="final">a jeté</target>
         </trans-unit>
         <trans-unit id="ToolTipShowCFG" translate="yes" xml:space="preserve">
           <source>Show CFG</source>
@@ -4172,6 +4172,10 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
           <source>See documentation on the website</source>
           <target state="final">Voir la documentation sur le site Internet</target>
+        </trans-unit>
+        <trans-unit id="Markers" translate="yes" xml:space="preserve">
+          <source>Markers</source>
+          <target state="final">Marqueurs</target>
         </trans-unit>
       </group>
     </body>

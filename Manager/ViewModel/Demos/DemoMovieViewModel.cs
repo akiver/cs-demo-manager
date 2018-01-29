@@ -61,7 +61,7 @@ namespace Manager.ViewModel.Demos
 		private RelayCommand _selectHlaeConfigParentPath;
 		private RelayCommand _toggleDemoCommentVisibility;
 		private RelayCommand<MouseButtonEventArgs> _timelineRightClick;
-		private List<TimelineEvent> _timelineEventList = new List<TimelineEvent>();
+		private ObservableCollection<TimelineEvent> _timelineEventList = new ObservableCollection<TimelineEvent>();
 		private MovieService _movieService;
 		private MovieConfiguration _movieConfig = new MovieConfiguration();
 		private string _csgoExePath;
@@ -329,6 +329,13 @@ namespace Manager.ViewModel.Demos
 			set
 			{
 				_movieConfig.StartTick = value;
+				if (Demo != null && TimelineEventList.Count > 0)
+				{
+					TimelineEventList.RemoveAt(0);
+					StartTickEventMarkerTimeline e = new StartTickEventMarkerTimeline(Demo.ServerTickrate, value, value + (int)Demo.ServerTickrate);
+					TimelineEventList.Insert(0, e);
+				}
+
 				RaisePropertyChanged(() => StartTick);
 				RaisePropertyChanged(() => Duration);
 				RaisePropertyChanged(() => RequiredSpace);
@@ -341,6 +348,12 @@ namespace Manager.ViewModel.Demos
 			set
 			{
 				_movieConfig.EndTick = value;
+				if (Demo != null && TimelineEventList.Count > 1)
+				{
+					TimelineEventList.RemoveAt(1);
+					EndTickEventMarkerTimeline e = new EndTickEventMarkerTimeline(Demo.ServerTickrate, value, value + (int)Demo.ServerTickrate);
+					TimelineEventList.Insert(1, e);
+				}
 				RaisePropertyChanged(() => EndTick);
 				RaisePropertyChanged(() => Duration);
 				RaisePropertyChanged(() => RequiredSpace);
@@ -500,7 +513,7 @@ namespace Manager.ViewModel.Demos
 			set { Set(() => VisiblePeriodEnd, ref _visiblePeriodEnd, value); }
 		}
 
-		public List<TimelineEvent> TimelineEventList
+		public ObservableCollection<TimelineEvent> TimelineEventList
 		{
 			get => _timelineEventList;
 			set { Set(() => TimelineEventList, ref _timelineEventList, value); }
@@ -1252,7 +1265,11 @@ namespace Manager.ViewModel.Demos
 									   VisiblePeriodStart = PeriodStart;
 									   VisiblePeriodEnd = PeriodStart.AddSeconds(Demo.Duration / 3);
 									   Demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(Demo);
-									   TimelineEventList = await _demoService.GetTimeLineEventList(Demo);
+									   List<TimelineEvent> events = await _demoService.GetTimeLineEventList(Demo);
+									   // the two first item are reserved for markers
+									   events.Insert(0, new StartTickEventMarkerTimeline(1, -4, -3));
+									   events.Insert(1, new EndTickEventMarkerTimeline(1, -2, -1));
+									   TimelineEventList = new ObservableCollection<TimelineEvent>(events);
 								   }
 
 								   // check for HLAE update

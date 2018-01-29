@@ -3233,4 +3233,7 @@ Please update it by clicking on the "Update" button.</value>
   <data name="SeeDocOnWebsite" xml:space="preserve">
     <value>See documentation on the website</value>
   </data>
+  <data name="Markers" xml:space="preserve">
+    <value>Markers</value>
+  </data>
 </root>

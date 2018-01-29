@@ -15,11 +15,19 @@ namespace Manager.Models.Selectors
 			{
 				case "round_start":
 					return RoundTemplate;
+				case "start_tick":
+					return MarkerStartTickTemplate;
+				case "end_tick":
+					return MarkerEndTickTemplate;
 				default:
 					return base.SelectTemplate(item, container);
 			}
 		}
 
 		public DataTemplate RoundTemplate { get; set; }
+
+		public DataTemplate MarkerStartTickTemplate { get; set; }
+
+		public DataTemplate MarkerEndTickTemplate { get; set; }
 	}
 }

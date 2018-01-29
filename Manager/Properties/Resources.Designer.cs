@@ -5587,6 +5587,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Markers.
+        /// </summary>
+        public static string Markers {
+            get {
+                return ResourceManager.GetString("Markers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Matches.
         /// </summary>
         public static string Matches {
