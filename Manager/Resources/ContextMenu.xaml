@@ -19,16 +19,16 @@
 	<ContextMenu x:Key="DemoRowContextMenu">
 		<MenuItem Header="{x:Static properties:Resources.Details}"
 				  Command="{Binding DemoList.ShowDemoDetailsCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoList.Demo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.Analyze}"
 				  Command="{Binding DemoList.AnalyzeDemosCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.Browse}"
 				  Command="{Binding DemoList.BrowseToDemoCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoList.Demo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.CopyPlayDemoCommand}"
 				  Command="{Binding DemoList.CopyPlaydemoCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoList.SelectedDemo, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoList.Demo, Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.Status}"
 				  ItemsSource="{Binding Settings.StatusList, Source={StaticResource Locator}}"
 				  DataContext="{StaticResource DemoStatus}"

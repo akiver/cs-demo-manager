@@ -1080,6 +1080,7 @@ namespace Manager.ViewModel.Demos
 							{
 								SelectedDemos.Add(demo);
 							}
+							if (demos.Count > 0) Demo = SelectedDemos.Last();
 						}));
 			}
 		}
