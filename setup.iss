@@ -157,6 +157,7 @@ Source: "Manager\bin\x86\Release\de\*"; DestDir: "{app}\de"; Flags: ignoreversio
 Source: "Manager\bin\x86\Release\es\*"; DestDir: "{app}\es"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\fr\*"; DestDir: "{app}\fr"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\hr\*"; DestDir: "{app}\hr"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\hu\*"; DestDir: "{app}\hu"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\it\*"; DestDir: "{app}\it"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\ja\*"; DestDir: "{app}\ja"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\nl\*"; DestDir: "{app}\nl"; Flags: ignoreversion recursesubdirs createallsubdirs
