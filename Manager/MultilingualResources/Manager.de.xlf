@@ -4207,6 +4207,10 @@ Please update it by clicking on the "Update" button.</target>
           <source>Highlight kills</source>
           <target state="new">Highlight kills</target>
         </trans-unit>
+        <trans-unit id="LabelDisplayTimeSeconds" translate="yes" xml:space="preserve">
+          <source>Display time (seconds):</source>
+          <target state="new">Display time (seconds):</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -3263,4 +3263,7 @@ Please update it by clicking on the "Update" button.</value>
   <data name="HighlightKills" xml:space="preserve">
     <value>Highlight kills</value>
   </data>
+  <data name="LabelDisplayTimeSeconds" xml:space="preserve">
+    <value>Display time (seconds):</value>
+  </data>
 </root>

@@ -123,5 +123,10 @@ namespace Services.Models.Movie
 		/// Additional game launch parameters
 		/// </summary>
 		public string LaunchParameters { get; set; }
+		/// <summary>
+		/// How many seconds the death notices will be displayed.
+		/// mirv_deathmsg cfg noticeLifeTime f
+		/// </summary>
+		public float DeathsNoticesDisplayTime { get; set; } = 5;
 	}
 }

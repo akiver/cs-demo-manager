@@ -378,6 +378,17 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
+		public float DeathNoticesDisplayTime
+		{
+			get => _movieConfig.DeathsNoticesDisplayTime;
+			set
+			{
+				_movieConfig.DeathsNoticesDisplayTime = value;
+				Settings.Default.MovieDeathNoticesDisplayTime = value;
+				RaisePropertyChanged(() => DeathNoticesDisplayTime);
+			}
+		}
+
 		public float Duration
 		{
 			get
@@ -1454,6 +1465,7 @@ namespace Manager.ViewModel.Demos
 			OpenInExplorer = Settings.Default.MovieOpenInExplorer;
 			EnableHlaeConfigParentFolder = Settings.Default.MovieEnableHlaeConfigParent;
 			HlaeConfigParentFolderPath = Settings.Default.MovieHlaeConfigParentFolderPath;
+			DeathNoticesDisplayTime = Settings.Default.MovieDeathNoticesDisplayTime;
 			if (!Settings.Default.MovieShowDefaultCfg)
 				Cfg = Settings.Default.MovieUserCfg;
 		}
@@ -1480,6 +1492,7 @@ namespace Manager.ViewModel.Demos
 				EnableHlaeConfigParent = EnableHlaeConfigParentFolder,
 				HlaeConfigParentFolderPath = HlaeConfigParentFolderPath,
 				GenerateVideoFile = GenerateVideoFile,
+				DeathsNoticesDisplayTime = DeathNoticesDisplayTime,
 			};
 			_movieService = new MovieService(_movieConfig);
 			_movieService.OnVirtualDubStarted += OnVirtualDubStarted;

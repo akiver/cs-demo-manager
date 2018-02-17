@@ -233,8 +233,8 @@ namespace Services.Concrete.Movie
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_USER_CFG_TICK, "exec csgodm_movie.cfg");
 
 			// Step 2, add explicitly mandatory cvars with a small delay to be sure user's cfg has been loaded
-			foreach (string command in MandatoryCommands)
-				generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, command);
+			foreach (string cmd in MandatoryCommands)
+				generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, cmd);
 
 			// Step 3, execute required commands with dynamic args
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, "host_framerate " + _config.FrameRate);
@@ -248,10 +248,14 @@ namespace Services.Concrete.Movie
 			if (_config.FocusSteamId != 0)
 				generated += string.Format(Properties.Resources.spec_player, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
 
+			// Set the deaths notices lifetime using "mirv_deathmsg cfg noticeLifeTime f" (ATM)
+			string command = $"mirv_deathmsg cfg noticeLifeTime {_config.DeathsNoticesDisplayTime}";
+			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
+
 			// hide deaths notifications for specific players
 			foreach (long steamId in _config.BlockedSteamIdList)
 			{
-				string command = $"mirv_deathmsg block x{steamId} *";
+				command = $"mirv_deathmsg block x{steamId} *";
 				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
 			}
 
@@ -262,7 +266,7 @@ namespace Services.Concrete.Movie
 				foreach (KillEvent e in kills)
 				{
 					// warning: if 2 kills occured exactly at the same tick it will keep only the the last one
-					string command = $"mirv_deathmsg highLightId x{steamId}";
+					command = $"mirv_deathmsg highLightId x{steamId}";
 					generated += string.Format(Properties.Resources.execute_command, ++actionCount, e.Tick - 5, command);
 				}
 			}

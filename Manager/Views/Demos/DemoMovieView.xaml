@@ -246,6 +246,7 @@
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
 							</Grid.RowDefinitions>
 							<Grid Grid.Row="0">
 								<Grid.ColumnDefinitions>
@@ -374,6 +375,23 @@
 										</DataGrid>
 									</Grid>
 								</ScrollViewer>
+							</Grid>
+							<Grid Grid.Row="3" Margin="0 5 0 5">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto"/>
+									<ColumnDefinition Width="Auto"/>
+								</Grid.ColumnDefinitions>
+								<Label Grid.Column="0"
+									   Content="{x:Static properties:Resources.LabelDisplayTimeSeconds}" />
+								<controls:NumericUpDown Grid.Column="1"
+														Minimum="1"
+														Maximum="60"
+														Interval="0.5"
+														MinWidth="70"
+														InterceptMouseWheel="True"
+														HasDecimals="True"
+														IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+														Value="{Binding DeathNoticesDisplayTime}"/>
 							</Grid>
 						</Grid>
 					</StackPanel>

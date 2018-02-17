@@ -1533,5 +1533,17 @@ namespace Manager.Properties {
                 this["UseSimpleRadar"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public float MovieDeathNoticesDisplayTime {
+            get {
+                return ((float)(this["MovieDeathNoticesDisplayTime"]));
+            }
+            set {
+                this["MovieDeathNoticesDisplayTime"] = value;
+            }
+        }
     }
 }

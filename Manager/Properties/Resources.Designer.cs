@@ -5245,6 +5245,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display time (seconds):.
+        /// </summary>
+        public static string LabelDisplayTimeSeconds {
+            get {
+                return ResourceManager.GetString("LabelDisplayTimeSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Duration (seconds):.
         /// </summary>
         public static string LabelDurationSeconds {

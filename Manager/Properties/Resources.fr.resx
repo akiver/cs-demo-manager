@@ -3158,4 +3158,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   <data name="HighlightKills" xml:space="preserve">
     <value>MeV notif.</value>
   </data>
+  <data name="LabelDisplayTimeSeconds" xml:space="preserve">
+    <value>Durée d'affichage (secondes):</value>
+  </data>
 </root>
