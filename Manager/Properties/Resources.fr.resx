@@ -3131,4 +3131,31 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   <data name="Markers" xml:space="preserve">
     <value>Marqueurs</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ContextMenuDisplayKillsOnyForPlayer" xml:space="preserve">
+    <value>Afficher les notifications seulement pour ce joueur</value>
+  </data>
+  <data name="ContextMenuHighlightKillsOnlyForPlayer" xml:space="preserve">
+    <value>Mettre en valeur les notifications seulement pour ce joueur</value>
+  </data>
+  <data name="CopySteamID" xml:space="preserve">
+    <value>Copier SteamID</value>
+  </data>
+  <data name="DeathNoticesOptions" xml:space="preserve">
+    <value>Options notifications de morts</value>
+  </data>
+  <data name="DisplayKills" xml:space="preserve">
+    <value>Afficher notif.</value>
+  </data>
+  <data name="HeaderToolDisplayKillsForPlayer" xml:space="preserve">
+    <value>Afficher les notifications pour ce joueur</value>
+  </data>
+  <data name="HeaderToolTipHighlightKillsForPlayer" xml:space="preserve">
+    <value>Mettre en valeur les notifications pour ce joueur</value>
+  </data>
+  <data name="HighlightKills" xml:space="preserve">
+    <value>MeV notif.</value>
+  </data>
 </root>

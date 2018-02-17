@@ -14,6 +14,7 @@ using Core.Models;
 using Core.Models.Source;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Models.DemoMovie;
 using Manager.Properties;
 using Manager.Services;
 using Manager.ViewModel.Shared;
@@ -33,6 +34,10 @@ namespace Manager.ViewModel.Demos
 		private readonly IDemosService _demoService;
 		private readonly ICacheService _cacheService;
 		private Player _focusedPlayer;
+		private ObservableCollection<PlayersSelection> _teamCtPlayersSelection = new ObservableCollection<PlayersSelection>();
+		private ObservableCollection<PlayersSelection> _teamTplayersSelection = new ObservableCollection<PlayersSelection>();
+		private RelayCommand<long> _setDisplayKillsOnlyForPlayer;
+		private RelayCommand<long> _setHighlightKillsOnlyForPlayer;
 		private RelayCommand _windowLoaded;
 		private RelayCommand _backToDemoDetails;
 		private RelayCommand _generateMovie;
@@ -60,6 +65,7 @@ namespace Manager.ViewModel.Demos
 		private RelayCommand _resetCfg;
 		private RelayCommand _selectHlaeConfigParentPath;
 		private RelayCommand _toggleDemoCommentVisibility;
+		private RelayCommand<PlayersSelection> _copyPlayerSteamId;
 		private RelayCommand<MouseButtonEventArgs> _timelineRightClick;
 		private ObservableCollection<TimelineEvent> _timelineEventList = new ObservableCollection<TimelineEvent>();
 		private MovieService _movieService;
@@ -203,6 +209,18 @@ namespace Manager.ViewModel.Demos
 				Set(() => FocusedPlayer, ref _focusedPlayer, value);
 				_movieConfig.FocusSteamId = value?.SteamId ?? 0;
 			}
+		}
+
+		public ObservableCollection<PlayersSelection> TeamCtPlayersSelection
+		{
+			get => _teamCtPlayersSelection;
+			set { Set(() => TeamCtPlayersSelection, ref _teamCtPlayersSelection, value); }
+		}
+
+		public ObservableCollection<PlayersSelection> TeamTplayersSelection
+		{
+			get => _teamTplayersSelection;
+			set { Set(() => TeamTplayersSelection, ref _teamTplayersSelection, value); }
 		}
 
 		public bool UseVirtualDub
@@ -713,6 +731,17 @@ namespace Manager.ViewModel.Demos
 									   }
 								   }
 
+								   foreach (PlayersSelection player in TeamCtPlayersSelection)
+								   {
+									   if (!player.DisplayKills) _movieConfig.BlockedSteamIdList.Add(player.SteamId);
+									   if (player.HighlightKills) _movieConfig.HighlightSteamIdList.Add(player.SteamId);
+								   }
+								   foreach (PlayersSelection player in TeamTplayersSelection)
+								   {
+									   if (!player.DisplayKills) _movieConfig.BlockedSteamIdList.Add(player.SteamId);
+									   if (player.HighlightKills) _movieConfig.HighlightSteamIdList.Add(player.SteamId);
+								   }
+
 								   IsBusy = true;
 								   RaisePropertyChanged(() => IsPlayerListEnabled);
 								   Win32Utils.SendMessageToBot(Win32Utils.WM_TOGGLE_DOWNLOAD_NOTIFICATION);
@@ -748,6 +777,54 @@ namespace Manager.ViewModel.Demos
 							   RaisePropertyChanged(() => IsPlayerListEnabled);
 						   },
 						   () => Demo != null && IsBusy));
+			}
+		}
+
+		public RelayCommand<PlayersSelection> CopyPlayerSteamId
+		{
+			get
+			{
+				return _copyPlayerSteamId
+					?? (_copyPlayerSteamId = new RelayCommand<PlayersSelection>(
+						player =>
+						{
+							System.Windows.Clipboard.SetText(player.SteamId.ToString());
+						},
+						player => Demo != null && !IsBusy));
+			}
+		}
+
+		public RelayCommand<long> SetDisplayKillsOnlyForPlayer
+		{
+			get
+			{
+				return _setDisplayKillsOnlyForPlayer
+					   ?? (_setDisplayKillsOnlyForPlayer = new RelayCommand<long>(
+						   steamId =>
+						   {
+							   foreach (PlayersSelection player in TeamTplayersSelection)
+								   player.DisplayKills = player.SteamId == steamId;
+							   foreach (PlayersSelection player in TeamCtPlayersSelection)
+								   player.DisplayKills = player.SteamId == steamId;
+						   },
+						   steamId => Demo != null && !IsBusy));
+			}
+		}
+
+		public RelayCommand<long> SetHighlightKillsOnlyForPlayer
+		{
+			get
+			{
+				return _setHighlightKillsOnlyForPlayer
+					   ?? (_setHighlightKillsOnlyForPlayer = new RelayCommand<long>(
+						   steamId =>
+						   {
+							   foreach (PlayersSelection player in TeamTplayersSelection)
+								   player.HighlightKills = player.SteamId == steamId;
+							   foreach (PlayersSelection player in TeamCtPlayersSelection)
+								   player.HighlightKills = player.SteamId == steamId;
+						   },
+						   steamId => Demo != null && !IsBusy));
 			}
 		}
 
@@ -1250,6 +1327,23 @@ namespace Manager.ViewModel.Demos
 								   IsCorruptedDemo = Demo.Ticks == 0;
 								   IsIncompatibleDemo = IsCorruptedDemo || IsPovDemo;
 
+								   foreach (Player player in Demo.TeamCT.Players)
+								   {
+									   TeamCtPlayersSelection.Add(new PlayersSelection
+									   {
+										   SteamId = player.SteamId,
+										   Name = player.Name,
+									   });
+								   }
+								   foreach (Player player in Demo.TeamT.Players)
+								   {
+									   TeamTplayersSelection.Add(new PlayersSelection
+									   {
+										   SteamId = player.SteamId,
+										   Name = player.Name,
+									   });
+								   }
+
 								   InitRawFilesDestinationFolder();
 								   InitOutputFileDestinationFolder();
 								   InitCsgoExePath();
@@ -1466,6 +1560,8 @@ namespace Manager.ViewModel.Demos
 		{
 			base.Cleanup();
 			TimelineEventList.Clear();
+			TeamCtPlayersSelection.Clear();
+			TeamTplayersSelection.Clear();
 			StartTick = 0;
 			EndTick = 0;
 			FocusOnPlayer = false;

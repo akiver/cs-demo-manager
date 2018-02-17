@@ -245,6 +245,7 @@
 							<Grid.RowDefinitions>
 								<RowDefinition Height="Auto"/>
 								<RowDefinition Height="Auto"/>
+								<RowDefinition Height="Auto"/>
 							</Grid.RowDefinitions>
 							<Grid Grid.Row="0">
 								<Grid.ColumnDefinitions>
@@ -288,6 +289,92 @@
 											Command="{Binding SelectHlaeConfigParentPath}"/>
 								</Grid>
 							</StackPanel>
+							<Grid Grid.Row="2">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+								<TextBlock Grid.Row="0"
+										   Text="{x:Static properties:Resources.DeathNoticesOptions}"
+										   FontSize="16" />
+								<ScrollViewer Grid.Row="1"
+											  CanContentScroll="True"
+											  HorizontalScrollBarVisibility="Visible"
+											  VerticalScrollBarVisibility="Hidden">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="Auto"/>
+											<ColumnDefinition Width="Auto"/>
+										</Grid.ColumnDefinitions>
+										<DataGrid x:Name="TeamCtPlayersSelection"
+												  Grid.Column="0"
+												  RowStyle="{StaticResource DataGridMoviePlayerStyle}"
+												  Style="{StaticResource DataGridStyle}"
+												  IsReadOnly="{Binding IsBusy}"
+												  CanUserAddRows="False"
+												  ItemsSource="{Binding TeamCtPlayersSelection}">
+											<DataGrid.Columns>
+												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+															Width="Auto"
+															IsReadOnly="True"
+															Header="{x:Static properties:Resources.Name}"
+															Binding="{Binding Name}" />
+												<DataGridCheckBoxColumn HeaderStyle="{StaticResource DisplayKillsForPlayerHeader}"
+																Width="Auto"
+																Header="{x:Static properties:Resources.DisplayKills}"
+																Binding="{Binding DisplayKills}" />
+												<DataGridCheckBoxColumn HeaderStyle="{StaticResource HighlightKillsForPlayerHeader}"
+																Width="Auto"
+																Header="{x:Static properties:Resources.HighlightKills}"
+																Binding="{Binding HighlightKills}" />
+												<DataGridTemplateColumn Header="Actions">
+													<DataGridTemplateColumn.CellTemplate>
+														<DataTemplate>
+															<Button Command="{Binding Source={StaticResource Locator}, Path=DemoMovie.CopyPlayerSteamId}"
+																	CommandParameter="{Binding SelectedItem, ElementName=TeamCtPlayersSelection}"
+																	Style="{DynamicResource MovieButton}"
+																	Content="{x:Static properties:Resources.CopySteamID}" />
+														</DataTemplate>
+													</DataGridTemplateColumn.CellTemplate>
+												</DataGridTemplateColumn>
+											</DataGrid.Columns>
+										</DataGrid>
+										<DataGrid Grid.Column="1"
+												  x:Name="TeamTplayersSelection"
+												  Style="{StaticResource DataGridStyle}"
+												  RowStyle="{StaticResource DataGridMoviePlayerStyle}"
+												  IsReadOnly="{Binding IsBusy}"
+												  CanUserAddRows="False"
+												  ItemsSource="{Binding TeamTplayersSelection}">
+											<DataGrid.Columns>
+												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+															Width="Auto"
+															IsReadOnly="True"
+															Header="{x:Static properties:Resources.Name}"
+															Binding="{Binding Name}" />
+												<DataGridCheckBoxColumn HeaderStyle="{StaticResource DisplayKillsForPlayerHeader}"
+																		Width="Auto"
+																		Header="{x:Static properties:Resources.DisplayKills}"
+																		Binding="{Binding DisplayKills}" />
+												<DataGridCheckBoxColumn HeaderStyle="{StaticResource HighlightKillsForPlayerHeader}"
+																		Width="Auto"
+																		Header="{x:Static properties:Resources.HighlightKills}"
+																		Binding="{Binding HighlightKills}" />
+												<DataGridTemplateColumn Header="{x:Static properties:Resources.Actions}">
+													<DataGridTemplateColumn.CellTemplate>
+														<DataTemplate>
+															<Button Command="{Binding Source={StaticResource Locator}, Path=DemoMovie.CopyPlayerSteamId}"
+																	CommandParameter="{Binding SelectedItem, ElementName=TeamTplayersSelection}"
+																	Style="{DynamicResource MovieButton}"
+																	Content="{x:Static properties:Resources.CopySteamID}" />
+														</DataTemplate>
+													</DataGridTemplateColumn.CellTemplate>
+												</DataGridTemplateColumn>
+											</DataGrid.Columns>
+										</DataGrid>
+									</Grid>
+								</ScrollViewer>
+							</Grid>
 						</Grid>
 					</StackPanel>
 				</Border>

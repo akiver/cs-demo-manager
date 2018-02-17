@@ -44,6 +44,15 @@ namespace Services.Models.Movie
 		/// </summary>
 		public long FocusSteamId { get; set; }
 		/// <summary>
+		/// SteamIDs that will be hidden on the deathnotices using "mirv_deathmsg block xSTEAMID *" command.
+		/// </summary>
+		public List<long> BlockedSteamIdList { get; set; } = new List<long>();
+		/// <summary>
+		/// SteamIDs that will be highlighted on the deathnotices using "mirv_deathmsg highLightId xSTEAMID" command.
+		/// This command is added 5 ticks before the kill because "mirv_deathmsg highLightId" is a "static variable", it needs to be updated during playback.
+		/// </summary>
+		public List<long> HighlightSteamIdList { get; set; } = new List<long>();
+		/// <summary>
 		/// User's custom CFG.
 		/// </summary>
 		public List<string> UserCfg { get; set; } = new List<string>();

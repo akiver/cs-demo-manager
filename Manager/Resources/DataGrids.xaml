@@ -671,4 +671,19 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.Type}" />
 	</Style>
 
+	<Style TargetType="DataGridColumnHeader" x:Key="DisplayKillsForPlayerHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolDisplayKillsForPlayer}" />
+	</Style>
+
+	<Style TargetType="DataGridColumnHeader" x:Key="HighlightKillsForPlayerHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipHighlightKillsForPlayer}" />
+	</Style>
+
+	<Style TargetType="DataGridRow"
+		   x:Key="DataGridMoviePlayerStyle"
+		   BasedOn="{StaticResource MetroDataGridRow}">
+		<Setter Property="ContextMenu"
+				Value="{StaticResource PlayerMovieContextMenu}" />
+	</Style>
+
 </ResourceDictionary>

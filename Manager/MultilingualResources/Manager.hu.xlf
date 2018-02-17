@@ -4171,6 +4171,42 @@ Please update it by clicking on the "Update" button.</target>
           <source>Markers</source>
           <target state="new">Markers</target>
         </trans-unit>
+        <trans-unit id="Actions" translate="yes" xml:space="preserve">
+          <source>Actions</source>
+          <target state="new">Actions</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuDisplayKillsOnyForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills only for this player</source>
+          <target state="new">Display kills only for this player</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuHighlightKillsOnlyForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills only for this player</source>
+          <target state="new">Highlight kills only for this player</target>
+        </trans-unit>
+        <trans-unit id="CopySteamID" translate="yes" xml:space="preserve">
+          <source>Copy SteamID</source>
+          <target state="new">Copy SteamID</target>
+        </trans-unit>
+        <trans-unit id="DeathNoticesOptions" translate="yes" xml:space="preserve">
+          <source>Death notices options</source>
+          <target state="new">Death notices options</target>
+        </trans-unit>
+        <trans-unit id="DisplayKills" translate="yes" xml:space="preserve">
+          <source>Display kills</source>
+          <target state="new">Display kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolDisplayKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills for this player on death notices</source>
+          <target state="new">Display kills for this player on death notices</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHighlightKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills for this player on death notices</source>
+          <target state="new">Highlight kills for this player on death notices</target>
+        </trans-unit>
+        <trans-unit id="HighlightKills" translate="yes" xml:space="preserve">
+          <source>Highlight kills</source>
+          <target state="new">Highlight kills</target>
+        </trans-unit>
       </group>
     </body>
   </file>

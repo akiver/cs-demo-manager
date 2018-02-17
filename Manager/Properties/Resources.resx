@@ -3236,4 +3236,31 @@ Please update it by clicking on the "Update" button.</value>
   <data name="Markers" xml:space="preserve">
     <value>Markers</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ContextMenuDisplayKillsOnyForPlayer" xml:space="preserve">
+    <value>Display kills only for this player</value>
+  </data>
+  <data name="ContextMenuHighlightKillsOnlyForPlayer" xml:space="preserve">
+    <value>Highlight kills only for this player</value>
+  </data>
+  <data name="CopySteamID" xml:space="preserve">
+    <value>Copy SteamID</value>
+  </data>
+  <data name="DeathNoticesOptions" xml:space="preserve">
+    <value>Death notices options</value>
+  </data>
+  <data name="DisplayKills" xml:space="preserve">
+    <value>Display kills</value>
+  </data>
+  <data name="HeaderToolDisplayKillsForPlayer" xml:space="preserve">
+    <value>Display kills for this player on death notices</value>
+  </data>
+  <data name="HeaderToolTipHighlightKillsForPlayer" xml:space="preserve">
+    <value>Highlight kills for this player on death notices</value>
+  </data>
+  <data name="HighlightKills" xml:space="preserve">
+    <value>Highlight kills</value>
+  </data>
 </root>

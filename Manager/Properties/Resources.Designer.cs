@@ -106,6 +106,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add.
         /// </summary>
         public static string Add {
@@ -782,6 +791,24 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display kills only for this player.
+        /// </summary>
+        public static string ContextMenuDisplayKillsOnyForPlayer {
+            get {
+                return ResourceManager.GetString("ContextMenuDisplayKillsOnyForPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Highlight kills only for this player.
+        /// </summary>
+        public static string ContextMenuHighlightKillsOnlyForPlayer {
+            get {
+                return ResourceManager.GetString("ContextMenuHighlightKillsOnlyForPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set the tick {0} as end tick.
         /// </summary>
         public static string ContextMenuTimeLineSetEventTickAsEndTick {
@@ -877,6 +904,15 @@ namespace Manager.Properties {
         public static string CopySetpos {
             get {
                 return ResourceManager.GetString("CopySetpos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Copy SteamID.
+        /// </summary>
+        public static string CopySteamID {
+            get {
+                return ResourceManager.GetString("CopySteamID", resourceCulture);
             }
         }
         
@@ -1066,6 +1102,15 @@ namespace Manager.Properties {
         public static string DeathAverage {
             get {
                 return ResourceManager.GetString("DeathAverage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Death notices options.
+        /// </summary>
+        public static string DeathNoticesOptions {
+            get {
+                return ResourceManager.GetString("DeathNoticesOptions", resourceCulture);
             }
         }
         
@@ -2463,6 +2508,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display kills.
+        /// </summary>
+        public static string DisplayKills {
+            get {
+                return ResourceManager.GetString("DisplayKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to donation.
         /// </summary>
         public static string Donation {
@@ -3688,6 +3742,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Display kills for this player on death notices.
+        /// </summary>
+        public static string HeaderToolDisplayKillsForPlayer {
+            get {
+                return ResourceManager.GetString("HeaderToolDisplayKillsForPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account&apos;s Nickname.
         /// </summary>
         public static string HeaderToolTipAccountNickname {
@@ -4098,6 +4161,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipHeadshots {
             get {
                 return ResourceManager.GetString("HeaderToolTipHeadshots", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Highlight kills for this player on death notices.
+        /// </summary>
+        public static string HeaderToolTipHighlightKillsForPlayer {
+            get {
+                return ResourceManager.GetString("HeaderToolTipHighlightKillsForPlayer", resourceCulture);
             }
         }
         
@@ -4926,6 +4998,15 @@ namespace Manager.Properties {
         public static string Height {
             get {
                 return ResourceManager.GetString("Height", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Highlight kills.
+        /// </summary>
+        public static string HighlightKills {
+            get {
+                return ResourceManager.GetString("HighlightKills", resourceCulture);
             }
         }
         

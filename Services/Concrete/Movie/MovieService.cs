@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Core;
+using Core.Models.Events;
 using Services.Models;
 using Services.Models.Movie;
 
@@ -245,6 +247,25 @@ namespace Services.Concrete.Movie
 			// step 5, focus on player if a SteamID has been provided
 			if (_config.FocusSteamId != 0)
 				generated += string.Format(Properties.Resources.spec_player, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
+
+			// hide deaths notifications for specific players
+			foreach (long steamId in _config.BlockedSteamIdList)
+			{
+				string command = $"mirv_deathmsg block x{steamId} *";
+				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
+			}
+
+			// hightlight kills for selected players
+			foreach (long steamId in _config.HighlightSteamIdList)
+			{
+				IEnumerable<KillEvent> kills = _config.Demo.Kills.Where(k => k.KillerSteamId == steamId && k.Tick >= _config.StartTick && k.Tick <= _config.EndTick);
+				foreach (KillEvent e in kills)
+				{
+					// warning: if 2 kills occured exactly at the same tick it will keep only the the last one
+					string command = $"mirv_deathmsg highLightId x{steamId}";
+					generated += string.Format(Properties.Resources.execute_command, ++actionCount, e.Tick - 5, command);
+				}
+			}
 
 			// Step 6, start recording !!escaping quotes is required for vdm files!!
 			string startCommand = "mirv_streams record start; startmovie \\\"" + RawFullPath + "\\\"";
