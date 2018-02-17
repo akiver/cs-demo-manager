@@ -1479,6 +1479,7 @@ namespace Manager.ViewModel.Demos
 				OpenInExplorer = OpenInExplorer,
 				EnableHlaeConfigParent = EnableHlaeConfigParentFolder,
 				HlaeConfigParentFolderPath = HlaeConfigParentFolderPath,
+				GenerateVideoFile = GenerateVideoFile,
 			};
 			_movieService = new MovieService(_movieConfig);
 			_movieService.OnVirtualDubStarted += OnVirtualDubStarted;
