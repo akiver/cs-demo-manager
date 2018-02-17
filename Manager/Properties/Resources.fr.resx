@@ -2768,7 +2768,7 @@ Il est possible que des données soient manquantes pour celles-ci.</value>
     <value>Recherche d'une possible mise à jour d'HLAE en cours...</value>
   </data>
   <data name="CSGORecordingInProgress" xml:space="preserve">
-    <value>Génération des fichiers brutes depuis le jeu en cours, merci de patienter...</value>
+    <value>Génération des fichiers bruts depuis le jeu en cours, merci de patienter...</value>
   </data>
   <data name="DefusedOnSite" xml:space="preserve">
     <value>a désamorcé la bombe sur le site</value>

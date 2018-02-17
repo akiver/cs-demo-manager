@@ -3691,7 +3691,7 @@ Il est possible que des données soient manquantes pour celles-ci.</target>
         </trans-unit>
         <trans-unit id="CSGORecordingInProgress" translate="yes" xml:space="preserve">
           <source>CSGO in-game recording in progress, please wait...</source>
-          <target state="final">Génération des fichiers brutes depuis le jeu en cours, merci de patienter...</target>
+          <target state="final">Génération des fichiers bruts depuis le jeu en cours, merci de patienter...</target>
         </trans-unit>
         <trans-unit id="DefusedOnSite" translate="yes" xml:space="preserve">
           <source>defused the bomb on site</source>
