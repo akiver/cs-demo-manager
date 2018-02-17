@@ -1833,6 +1833,8 @@ namespace Manager.ViewModel.Demos
 			}
 			catch (Exception e)
 			{
+				// remove it from the dict to ignore it during progress calculation
+				_demoProgress.Remove(demo.Id);
 				if (!(e is TaskCanceledException) && !(e is JsonSerializationException))
 				{
 					try
