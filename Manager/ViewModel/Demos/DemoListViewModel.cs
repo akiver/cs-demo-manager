@@ -486,6 +486,7 @@ namespace Manager.ViewModel.Demos
 											{
 												foreach (Demo demo in demos)
 												{
+													if (demo.SourceName == Pov.NAME) continue;
 													if (demo.WeaponFired.Count == 0)
 														demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 												}
