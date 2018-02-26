@@ -246,7 +246,7 @@ namespace Services.Concrete.Movie
 
 			// step 5, focus on player if a SteamID has been provided
 			if (_config.FocusSteamId != 0)
-				generated += string.Format(Properties.Resources.spec_player, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
+				generated += string.Format(Properties.Resources.spec_player_lock, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
 
 			// Set the deaths notices lifetime using "mirv_deathmsg cfg noticeLifeTime f" (ATM)
 			string command = $"mirv_deathmsg cfg noticeLifeTime {_config.DeathsNoticesDisplayTime}";
