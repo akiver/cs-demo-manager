@@ -27,6 +27,7 @@ namespace Manager
 			"thedudeguy1",
 			"Leonardo",
 			"Cookieseller",
+			"CorySanin",
 		};
 		public static string[] Translators = {
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",

@@ -60,4 +60,7 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} kastede en røg granat</value>
   </data>
+  <data name="spec_player_lock" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\resources\vdm\spec_player_lock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
 </root>

@@ -358,7 +358,7 @@ namespace Services.Concrete
 		{
 			return (from e in _configuration.Demo.Kills
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.KillerSteamId))
+				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.FirstOrDefault(p => p.SteamId == e.KillerSteamId))
 				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.KillerSide.AsString()) != null
 				select new HeatmapPoint
 				{
@@ -370,7 +370,7 @@ namespace Services.Concrete
 		{
 			return (from e in _configuration.Demo.Kills
 				where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.KilledSteamId))
+				where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.FirstOrDefault(p => p.SteamId == e.KilledSteamId))
 				|| _configuration.SelectedSideList.FirstOrDefault(s => s == e.KilledSide.AsString()) != null
 				select new HeatmapPoint
 				{

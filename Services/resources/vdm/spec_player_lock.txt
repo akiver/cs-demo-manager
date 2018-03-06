@@ -3,5 +3,5 @@
 		factory "PlayCommands"
 		name "spec"
 		starttick "{1}"
-		commands "spec_player_by_accountid {2}"
+		commands "spec_lock_to_accountid {2}"
 	}}

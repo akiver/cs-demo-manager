@@ -119,6 +119,9 @@ namespace Services.Concrete.Movie
 		{
 			try
 			{
+				// GitHub dropped support for TLS 1.0 and 1.1, force to 1.2
+				// https://github.com/blog/2507-weak-cryptographic-standards-removed
+				ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 				HttpWebRequest request = WebRequest.Create(GITHUB_ENDPOINT) as HttpWebRequest;
 				request.Method = "GET";
 				request.Proxy = null;

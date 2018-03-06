@@ -2768,7 +2768,7 @@ Il est possible que des données soient manquantes pour celles-ci.</value>
     <value>Recherche d'une possible mise à jour d'HLAE en cours...</value>
   </data>
   <data name="CSGORecordingInProgress" xml:space="preserve">
-    <value>Génération des fichiers brutes depuis le jeu en cours, merci de patienter...</value>
+    <value>Génération des fichiers bruts depuis le jeu en cours, merci de patienter...</value>
   </data>
   <data name="DefusedOnSite" xml:space="preserve">
     <value>a désamorcé la bombe sur le site</value>
@@ -3130,5 +3130,35 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="Markers" xml:space="preserve">
     <value>Marqueurs</value>
+  </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="ContextMenuDisplayKillsOnyForPlayer" xml:space="preserve">
+    <value>Afficher les notifications seulement pour ce joueur</value>
+  </data>
+  <data name="ContextMenuHighlightKillsOnlyForPlayer" xml:space="preserve">
+    <value>Mettre en valeur les notifications seulement pour ce joueur</value>
+  </data>
+  <data name="CopySteamID" xml:space="preserve">
+    <value>Copier SteamID</value>
+  </data>
+  <data name="DeathNoticesOptions" xml:space="preserve">
+    <value>Options notifications de morts</value>
+  </data>
+  <data name="DisplayKills" xml:space="preserve">
+    <value>Afficher notif.</value>
+  </data>
+  <data name="HeaderToolDisplayKillsForPlayer" xml:space="preserve">
+    <value>Afficher les notifications pour ce joueur</value>
+  </data>
+  <data name="HeaderToolTipHighlightKillsForPlayer" xml:space="preserve">
+    <value>Mettre en valeur les notifications pour ce joueur</value>
+  </data>
+  <data name="HighlightKills" xml:space="preserve">
+    <value>MeV notif.</value>
+  </data>
+  <data name="LabelDisplayTimeSeconds" xml:space="preserve">
+    <value>Durée d'affichage (secondes):</value>
   </data>
 </root>

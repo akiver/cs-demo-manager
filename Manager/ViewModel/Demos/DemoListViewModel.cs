@@ -486,6 +486,7 @@ namespace Manager.ViewModel.Demos
 											{
 												foreach (Demo demo in demos)
 												{
+													if (demo.SourceName == Pov.NAME) continue;
 													if (demo.WeaponFired.Count == 0)
 														demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
 												}
@@ -1833,6 +1834,8 @@ namespace Manager.ViewModel.Demos
 			}
 			catch (Exception e)
 			{
+				// remove it from the dict to ignore it during progress calculation
+				_demoProgress.Remove(demo.Id);
 				if (!(e is TaskCanceledException) && !(e is JsonSerializationException))
 				{
 					try

@@ -92,8 +92,11 @@ namespace Core
 			byte[] outcomeIdBytes = new byte[sizeof(UInt64)];
 			byte[] tvPortIdBytes = new byte[sizeof(UInt32)];
 
-			byte[] all = big.ToByteArray().Reverse().ToArray();
-			// there is an additional byte in BitInteger which represent positive values
+			byte[] all = big.ToByteArray().ToArray();
+			// sometimes the number isn't unsigned, add a 00 byte at the end of the array to make sure it is
+			if (all.Length == sizeof(UInt64) + sizeof(UInt64) + sizeof(UInt16))
+				all = all.Concat(new byte[] { 0 }).ToArray();
+			all = all.Reverse().ToArray();
 			Array.Copy(all, 1, matchIdBytes, 0, sizeof(UInt64));
 			Array.Copy(all, 1 + sizeof(UInt64), outcomeIdBytes, 0, sizeof(UInt64));
 			Array.Copy(all, 1 + 2 * sizeof(UInt64), tvPortIdBytes, 0, sizeof(UInt16));

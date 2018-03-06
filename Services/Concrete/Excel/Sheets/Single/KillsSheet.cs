@@ -54,7 +54,7 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.RoundNumber);
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.TimeDeathSeconds);
 					SetCellValue(row, columnNumber++, CellType.String, e.KillerName);
-					SetCellValue(row, columnNumber++, CellType.String, e.KillerSteamId);
+					SetCellValue(row, columnNumber++, CellType.String, e.KillerSteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.String, e.KillerSide.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, e.KillerTeam);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsControllingBot);
@@ -63,13 +63,13 @@ namespace Services.Concrete.Excel.Sheets.Single
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityY);
 					SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityZ);
 					SetCellValue(row, columnNumber++, CellType.String, e.KilledName);
-					SetCellValue(row, columnNumber++, CellType.String, e.KilledSteamId);
+					SetCellValue(row, columnNumber++, CellType.String, e.KilledSteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.String, e.KilledSide.AsString());
 					SetCellValue(row, columnNumber++, CellType.String, e.KilledTeam);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.KilledIsControllingBot);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.VictimIsBlinded);
 					SetCellValue(row, columnNumber++, CellType.String, e.AssisterName);
-					SetCellValue(row, columnNumber++, CellType.String, e.AssisterSteamId);
+					SetCellValue(row, columnNumber++, CellType.String, e.AssisterSteamId.ToString());
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.AssisterIsControllingBot);
 					SetCellValue(row, columnNumber++, CellType.String, e.Weapon.Name);
 					SetCellValue(row, columnNumber++, CellType.Boolean, e.IsHeadshot);

@@ -175,6 +175,10 @@
           <source>of the round start</source>
           <target state="new">of the round start</target>
         </trans-unit>
+        <trans-unit id="spec_player_lock" translate="yes" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
+          <source>..\resources\vdm\spec_player_lock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\spec_player_lock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
       </group>
     </body>
   </file>
