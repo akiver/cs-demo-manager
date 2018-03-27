@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
   <file datatype="xml" source-language="en-US" target-language="de" original="MANAGER/PROPERTIES/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
     <header>
@@ -2724,8 +2724,9 @@ Mehr Informationen finden Sie unter {1}.</target>
           <target state="final">Entferne Verdächtige (ENTF)</target>
         </trans-unit>
         <trans-unit id="ToolTIpShowOnlySuspectDemos" translate="yes" xml:space="preserve">
-          <source>Show demos that contains selected suspect(s) (STRG+F)</source>
-          <target state="final">Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</target>
+          <source>Show demos that contains selected suspect(s) (CTRL+F)</source>
+          <target state="needs-review-translation">Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ToolTipWhitelist" translate="yes" xml:space="preserve">
           <source>Whitelist (CTRL+W)</source>
