@@ -32,10 +32,10 @@ namespace Manager
 		public static string[] Translators = {
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",
 			"Allan \"Michael\" Simonsen (Danish)",
-			"Leonardo / RedDeadLuigi (Brazilian)",
+			"Leonardo / RedDeadLuigi / mvinoba (Brazilian)",
 			"Spidersouris (French)",
 			"Kacper \"sikl0`\" Olkis (Polish)",
-			"yRRCK (German)",
+			"yRRCK / FliessendWasser (German)",
 			"Paco González López / monxas (Spanish)",
 			"aLieN (Hungarian)",
 		};
