@@ -1071,7 +1071,7 @@ namespace Core.Models
 		private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			TeamKillCount = Kills.Count(k => k.KilledSide == k.KillerSide);
-			KillCount = Kills.Count(k => k.KilledSide != k.KillerSide) - TeamKillCount - SuicideCount;
+			KillCount = Kills.Count(k => k.KilledSide != k.KillerSide) - SuicideCount;
 			HeadshotCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.IsHeadshot);
 			CrouchKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.IsKillerCrouching);
 			JumpKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.KillerVelocityZ > 0);
