@@ -249,13 +249,13 @@ namespace Services.Concrete.Movie
 				generated += string.Format(Properties.Resources.spec_player_lock, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
 
 			// Set the deaths notices lifetime using "mirv_deathmsg cfg noticeLifeTime f" (ATM)
-			string command = $"mirv_deathmsg cfg noticeLifeTime {_config.DeathsNoticesDisplayTime}";
+			string command = $"mirv_deathmsg lifetime {_config.DeathsNoticesDisplayTime}";
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
 
 			// hide deaths notifications for specific players
 			foreach (long steamId in _config.BlockedSteamIdList)
 			{
-				command = $"mirv_deathmsg block x{steamId} *";
+				command = $"mirv_deathmsg filter add attackerMatch=x{steamId} block=1";
 				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
 			}
 
@@ -266,7 +266,7 @@ namespace Services.Concrete.Movie
 				foreach (KillEvent e in kills)
 				{
 					// warning: if 2 kills occured exactly at the same tick it will keep only the the last one
-					command = $"mirv_deathmsg highLightId x{steamId}";
+					command = $"mirv_deathmsg localPlayer x{steamId}";
 					generated += string.Format(Properties.Resources.execute_command, ++actionCount, e.Tick - 5, command);
 				}
 			}
