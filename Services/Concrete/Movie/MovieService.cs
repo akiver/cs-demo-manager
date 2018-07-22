@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Core;
-using Core.Models.Events;
 using Services.Models;
 using Services.Models.Movie;
 
@@ -252,6 +250,9 @@ namespace Services.Concrete.Movie
 			string command = $"mirv_deathmsg lifetime {_config.DeathsNoticesDisplayTime}";
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
 
+			// Init with no red border (needs to be first)
+			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, "mirv_deathmsg filter attackerIsLocal=0 victimIsLocal=0");
+
 			// hide deaths notifications for specific players
 			foreach (long steamId in _config.BlockedSteamIdList)
 			{
@@ -262,13 +263,9 @@ namespace Services.Concrete.Movie
 			// hightlight kills for selected players
 			foreach (long steamId in _config.HighlightSteamIdList)
 			{
-				IEnumerable<KillEvent> kills = _config.Demo.Kills.Where(k => k.KillerSteamId == steamId && k.Tick >= _config.StartTick && k.Tick <= _config.EndTick);
-				foreach (KillEvent e in kills)
-				{
-					// warning: if 2 kills occured exactly at the same tick it will keep only the the last one
-					command = $"mirv_deathmsg localPlayer x{steamId}";
-					generated += string.Format(Properties.Resources.execute_command, ++actionCount, e.Tick - 5, command);
-				}
+				// when the player is the attacker only
+				command = $"mirv_deathmsg filter add attackerMatch=x{steamId} attackerIsLocal=1";
+				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
 			}
 
 			// Step 6, start recording !!escaping quotes is required for vdm files!!
