@@ -309,8 +309,8 @@ namespace DemoInfo
 	public class SayText2EventArgs : EventArgs
 	{
 		/// <summary>
- 		/// The player who sent the message
- 		/// </summary>
+		/// The player who sent the message
+		/// </summary>
 		public Player Sender { get; set; }
 
 		/// <summary>
@@ -868,6 +868,12 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
+				ItemIndex = 65,
+				OriginalName = "weapon_mp5sd",
+				Element = EquipmentElement.MP5SD,
+			},
+			new EquipmentMapping
+			{
 				ItemIndex = 500,
 				OriginalName = "weapon_bayonet",
 				Element = EquipmentElement.Knife,
@@ -952,6 +958,7 @@ namespace DemoInfo
 		Mac10 = 104,
 		UMP = 105,
 		P90 = 106,
+		MP5SD = 107,
 
 		//Heavy
 		SawedOff = 201,
