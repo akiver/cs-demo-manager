@@ -3691,7 +3691,7 @@ Il est possible que des données soient manquantes pour celles-ci.</target>
         </trans-unit>
         <trans-unit id="CSGORecordingInProgress" translate="yes" xml:space="preserve">
           <source>CSGO in-game recording in progress, please wait...</source>
-          <target state="final">Génération des fichiers brutes depuis le jeu en cours, merci de patienter...</target>
+          <target state="final">Génération des fichiers bruts depuis le jeu en cours, merci de patienter...</target>
         </trans-unit>
         <trans-unit id="DefusedOnSite" translate="yes" xml:space="preserve">
           <source>defused the bomb on site</source>
@@ -4176,6 +4176,46 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         <trans-unit id="Markers" translate="yes" xml:space="preserve">
           <source>Markers</source>
           <target state="final">Marqueurs</target>
+        </trans-unit>
+        <trans-unit id="Actions" translate="yes" xml:space="preserve">
+          <source>Actions</source>
+          <target state="final">Actions</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuDisplayKillsOnyForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills only for this player</source>
+          <target state="final">Afficher les notifications seulement pour ce joueur</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuHighlightKillsOnlyForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills only for this player</source>
+          <target state="final">Mettre en valeur les notifications seulement pour ce joueur</target>
+        </trans-unit>
+        <trans-unit id="CopySteamID" translate="yes" xml:space="preserve">
+          <source>Copy SteamID</source>
+          <target state="final">Copier SteamID</target>
+        </trans-unit>
+        <trans-unit id="DeathNoticesOptions" translate="yes" xml:space="preserve">
+          <source>Death notices options</source>
+          <target state="final">Options notifications de morts</target>
+        </trans-unit>
+        <trans-unit id="DisplayKills" translate="yes" xml:space="preserve">
+          <source>Display kills</source>
+          <target state="final">Afficher notif.</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolDisplayKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills for this player on death notices</source>
+          <target state="final">Afficher les notifications pour ce joueur</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHighlightKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills for this player on death notices</source>
+          <target state="final">Mettre en valeur les notifications pour ce joueur</target>
+        </trans-unit>
+        <trans-unit id="HighlightKills" translate="yes" xml:space="preserve">
+          <source>Highlight kills</source>
+          <target state="final">MeV notif.</target>
+        </trans-unit>
+        <trans-unit id="LabelDisplayTimeSeconds" translate="yes" xml:space="preserve">
+          <source>Display time (seconds):</source>
+          <target state="final">Durée d'affichage (secondes):</target>
         </trans-unit>
       </group>
     </body>

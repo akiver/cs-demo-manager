@@ -13,7 +13,7 @@
 			<models:DemoStatus x:Key="DemoStatus" />
 		</ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
-	
+
 	<viewModel:ViewModelLocator x:Key="Locator" />
 
 	<ContextMenu x:Key="DemoRowContextMenu">
@@ -141,6 +141,15 @@
 		<MenuItem Header="{x:Static properties:Resources.Watch}"
 				  Command="{Binding DemoDetails.WatchRoundCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoDetails.SelectedRound, Source={StaticResource Locator}}"/>
+	</ContextMenu>
+
+	<ContextMenu x:Key="PlayerMovieContextMenu">
+		<MenuItem Header="{x:Static properties:Resources.ContextMenuDisplayKillsOnyForPlayer}"
+				  Command="{Binding DemoMovie.SetDisplayKillsOnlyForPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding SteamId}"/>
+		<MenuItem Header="{x:Static properties:Resources.ContextMenuHighlightKillsOnlyForPlayer}"
+				  Command="{Binding DemoMovie.SetHighlightKillsOnlyForPlayer, Source={StaticResource Locator}}"
+				  CommandParameter="{Binding SteamId}"/>
 	</ContextMenu>
 
 </ResourceDictionary>

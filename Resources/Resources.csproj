@@ -212,6 +212,12 @@
   <ItemGroup>
     <Resource Include="images\maps\preview\canals.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\cs_agency.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\agency.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug

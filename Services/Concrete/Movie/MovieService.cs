@@ -231,8 +231,8 @@ namespace Services.Concrete.Movie
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_USER_CFG_TICK, "exec csgodm_movie.cfg");
 
 			// Step 2, add explicitly mandatory cvars with a small delay to be sure user's cfg has been loaded
-			foreach (string command in MandatoryCommands)
-				generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, command);
+			foreach (string cmd in MandatoryCommands)
+				generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, cmd);
 
 			// Step 3, execute required commands with dynamic args
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, "host_framerate " + _config.FrameRate);
@@ -244,7 +244,29 @@ namespace Services.Concrete.Movie
 
 			// step 5, focus on player if a SteamID has been provided
 			if (_config.FocusSteamId != 0)
-				generated += string.Format(Properties.Resources.spec_player, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
+				generated += string.Format(Properties.Resources.spec_player_lock, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
+
+			// Set the deaths notices lifetime using "mirv_deathmsg cfg noticeLifeTime f" (ATM)
+			string command = $"mirv_deathmsg lifetime {_config.DeathsNoticesDisplayTime}";
+			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
+
+			// Init with no red border (needs to be first)
+			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, "mirv_deathmsg filter attackerIsLocal=0 victimIsLocal=0");
+
+			// hide deaths notifications for specific players
+			foreach (long steamId in _config.BlockedSteamIdList)
+			{
+				command = $"mirv_deathmsg filter add attackerMatch=x{steamId} block=1";
+				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
+			}
+
+			// hightlight kills for selected players
+			foreach (long steamId in _config.HighlightSteamIdList)
+			{
+				// when the player is the attacker only
+				command = $"mirv_deathmsg filter add attackerMatch=x{steamId} attackerIsLocal=1";
+				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
+			}
 
 			// Step 6, start recording !!escaping quotes is required for vdm files!!
 			string startCommand = "mirv_streams record start; startmovie \\\"" + RawFullPath + "\\\"";

@@ -28,7 +28,7 @@
         </trans-unit>
         <trans-unit id="AccountStats" translate="yes" xml:space="preserve">
           <source>Account Stats</source>
-          <target state="final">Account Statistiken</target>
+          <target state="final">Accountstatistiken</target>
         </trans-unit>
         <trans-unit id="AddToSuspects" translate="yes" xml:space="preserve">
           <source>Add to suspects</source>
@@ -68,7 +68,7 @@
         </trans-unit>
         <trans-unit id="ShowOnlyAccountDemos" translate="yes" xml:space="preserve">
           <source>Show Only Account Demos</source>
-          <target state="final">Zeige nur Demos zu Account</target>
+          <target state="final">Zeige nur Demos zum Account</target>
         </trans-unit>
         <trans-unit id="Stats" translate="yes" xml:space="preserve">
           <source>Stats</source>
@@ -104,7 +104,7 @@
         </trans-unit>
         <trans-unit id="EncounteredBug" translate="yes" xml:space="preserve">
           <source>If you encountered a bug or have any suggestions, feel free to open an issue on</source>
-          <target state="final">Falls sie einen Fehler finden oder Vorschläge haben, bitte melden sie sich unter</target>
+          <target state="final">Falls Sie einen Fehler finden oder Vorschläge haben, melden Sie sich bitte unter</target>
         </trans-unit>
         <trans-unit id="OrSendAn" translate="yes" xml:space="preserve">
           <source>or send an</source>
@@ -112,11 +112,11 @@
         </trans-unit>
         <trans-unit id="WantSayThank" translate="yes" xml:space="preserve">
           <source>If you want to say thank you, please feel free to make a</source>
-          <target state="final">Wenn sie danken sagen möchten, können sie gerne </target>
+          <target state="final">Wenn Sie danken sagen möchten, können Sie gerne </target>
         </trans-unit>
         <trans-unit id="AlwaysDownload" translate="yes" xml:space="preserve">
           <source>Always download the application installer from the official website</source>
-          <target state="final">Bitte laden sie den Installer immer nur von der Offiziellen Website herunter!</target>
+          <target state="final">Bitte laden Sie den Installer immer nur von der offiziellen Website herunter!</target>
         </trans-unit>
         <trans-unit id="Accounts" translate="yes" xml:space="preserve">
           <source>Accounts</source>
@@ -153,11 +153,11 @@
         </trans-unit>
         <trans-unit id="Ban" translate="yes" xml:space="preserve">
           <source>Ban</source>
-          <target state="final">Ban</target>
+          <target state="final">Bann</target>
         </trans-unit>
         <trans-unit id="BanFull" translate="yes" xml:space="preserve">
           <source>Ban (VAC / OW)</source>
-          <target state="final">Ban (VAC / OW)</target>
+          <target state="final">Bann (VAC / OW)</target>
         </trans-unit>
         <trans-unit id="HeaderBombDefused" translate="yes" xml:space="preserve">
           <source>BD</source>
@@ -233,15 +233,15 @@
         </trans-unit>
         <trans-unit id="CrouchKills" translate="yes" xml:space="preserve">
           <source>Crouch kills</source>
-          <target state="final">Crouch kills</target>
+          <target state="final">Geduckte Kills</target>
         </trans-unit>
         <trans-unit id="CsgoExePath" translate="yes" xml:space="preserve">
           <source>csgo.exe path</source>
-          <target state="final">csgo.exe Dateipfad</target>
+          <target state="final">csgo.exe-Dateipfad</target>
         </trans-unit>
         <trans-unit id="CurrentAccountWatch" translate="yes" xml:space="preserve">
           <source>Current account used for watch (highlights / lowlights)</source>
-          <target state="final">Akuteller Account für Hightlights / Lowlights</target>
+          <target state="final">Aktueller Account für Hightlights / Lowlights</target>
         </trans-unit>
         <trans-unit id="CurrentFolder" translate="yes" xml:space="preserve">
           <source>Current folder</source>
@@ -302,7 +302,7 @@
         </trans-unit>
         <trans-unit id="Email" translate="yes" xml:space="preserve">
           <source>email</source>
-          <target state="final">Email</target>
+          <target state="final">E-Mail</target>
         </trans-unit>
         <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
           <source>Entry kills</source>
@@ -621,7 +621,7 @@
         </trans-unit>
         <trans-unit id="UseCutomLowlightHighlight" translate="yes" xml:space="preserve">
           <source>Use custom highlights / lowlights generation</source>
-          <target state="final">Benutze benutzerdefinierte highlights / lowlights</target>
+          <target state="final">Benutze benutzerdefinierte Highlights / Lowlights</target>
         </trans-unit>
         <trans-unit id="Watched" translate="yes" xml:space="preserve">
           <source>Watched</source>
@@ -645,27 +645,27 @@
         </trans-unit>
         <trans-unit id="ToolTipAccountStats" translate="yes" xml:space="preserve">
           <source>Account stats (CTRL+E)</source>
-          <target state="final">Account Statistiken (CTRL+E)</target>
+          <target state="final">Account Statistiken (STRG+E)</target>
         </trans-unit>
         <trans-unit id="ToolTipAddToSuspectsList" translate="yes" xml:space="preserve">
           <source>Add players to suspects list (CTRL+W)</source>
-          <target state="final">Füge Spieler zu Liste der Verdächtigen hinzu (CTRL+W)</target>
+          <target state="final">Füge Spieler zu Liste der Verdächtigen hinzu (STRG+W)</target>
         </trans-unit>
         <trans-unit id="ToolTipAnalyzeSelectedDemos" translate="yes" xml:space="preserve">
           <source>Analyze selected demo(s) (CTRL+S)</source>
-          <target state="final">Analysiere ausgewählte Demo(s) (CTRL+S)</target>
+          <target state="final">Analysiere ausgewählte Demo(s) (STRG+S)</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToDemo" translate="yes" xml:space="preserve">
           <source>Browse to demo (CTRL+B)</source>
-          <target state="final">Durchsuchen (CTRL+B)</target>
+          <target state="final">Durchsuchen (STRG+B)</target>
         </trans-unit>
         <trans-unit id="ToolTipDeleteDemo" translate="yes" xml:space="preserve">
           <source>Delete selected demo(s) (CTRL+D)</source>
-          <target state="final">Lösche ausgewählte Demo(s) (CTRL+D)</target>
+          <target state="final">Lösche ausgewählte Demo(s) (STRG+D)</target>
         </trans-unit>
         <trans-unit id="ToolTipDemoDetails" translate="yes" xml:space="preserve">
           <source>Demo's details (CTRL+D)</source>
-          <target state="final">Demo Details (CTRL+D)</target>
+          <target state="final">Demo Details (STRG+D)</target>
         </trans-unit>
         <trans-unit id="ToolTipDownloadDemos" translate="yes" xml:space="preserve">
           <source>Download last MM demos available for the current logged Steam account (CTRL+H)</source>
@@ -673,19 +673,19 @@
         </trans-unit>
         <trans-unit id="ToolTipExportXls" translate="yes" xml:space="preserve">
           <source>Export as XLS (CTRL+X)</source>
-          <target state="final">Als XLS exportieren (CTRL+X)</target>
+          <target state="final">Als XLS exportieren (STRG+X)</target>
         </trans-unit>
         <trans-unit id="ToolTipGoToSuspectsList" translate="yes" xml:space="preserve">
           <source>Go to suspects list (CTRL+F)</source>
-          <target state="final">Liste der Verdächtigen (CTRL+F)</target>
+          <target state="final">Liste der Verdächtigen (STRG+F)</target>
         </trans-unit>
         <trans-unit id="ToolTipGotoTick" translate="yes" xml:space="preserve">
           <source>Start watching selected demo at specific tick (CTRL+G)</source>
-          <target state="final">Starte Demo Playback bei speziellem Tick (CTRL+G)</target>
+          <target state="final">Starte Demo Playback bei speziellem Tick (STRG+G)</target>
         </trans-unit>
         <trans-unit id="ToolTipRefreshDemosList" translate="yes" xml:space="preserve">
           <source>Refresh demos list (CTRL+R | F5)</source>
-          <target state="final">Aktualisiere Demo Liste (CTRL+R | F5)</target>
+          <target state="final">Aktualisiere Demo Liste (STRG+R | F5)</target>
         </trans-unit>
         <trans-unit id="ToolTipStop" translate="yes" xml:space="preserve">
           <source>Stop (CTRL+S)</source>
@@ -693,15 +693,15 @@
         </trans-unit>
         <trans-unit id="ToolTipWatchDemo" translate="yes" xml:space="preserve">
           <source>Watch demo (CTRL+W)</source>
-          <target state="final">Demo ansehen (CTRL+W)</target>
+          <target state="final">Demo ansehen (STRG+W)</target>
         </trans-unit>
         <trans-unit id="ToolTipWatchHighlights" translate="yes" xml:space="preserve">
           <source>Watch your highlights (CTRL+H)</source>
-          <target state="final">Sieh deine Highlights (CTRL+H)</target>
+          <target state="final">Deine Highlights ansehen (STRG+H)</target>
         </trans-unit>
         <trans-unit id="ToolTipWatchLowlights" translate="yes" xml:space="preserve">
           <source>Watch your lowlights (CTRL+L)</source>
-          <target state="final">Sieh deine Lowlights (CTRL+H)</target>
+          <target state="final">Deine Lowlights ansehen (STRG+H)</target>
         </trans-unit>
         <trans-unit id="Avatar" translate="yes" xml:space="preserve">
           <source>Avatar</source>
@@ -713,7 +713,7 @@
         </trans-unit>
         <trans-unit id="CopyEmailAddress" translate="yes" xml:space="preserve">
           <source>Copy email address</source>
-          <target state="final">Kopiere Email Adresse</target>
+          <target state="final">Kopiere E-Mail-Adresse</target>
         </trans-unit>
         <trans-unit id="Damages" translate="yes" xml:space="preserve">
           <source>Damages</source>
@@ -785,7 +785,7 @@
         </trans-unit>
         <trans-unit id="PlayerDetails" translate="yes" xml:space="preserve">
           <source>Player details</source>
-          <target state="final">Player Details</target>
+          <target state="final">Spieler Details</target>
         </trans-unit>
         <trans-unit id="Rank" translate="yes" xml:space="preserve">
           <source>Rank</source>
@@ -797,7 +797,7 @@
         </trans-unit>
         <trans-unit id="SaveComment" translate="yes" xml:space="preserve">
           <source>Save comment</source>
-          <target state="final">Speicher Kommentar</target>
+          <target state="final">Kommentar speichern</target>
         </trans-unit>
         <trans-unit id="Score" translate="yes" xml:space="preserve">
           <source>Score</source>
@@ -813,51 +813,51 @@
         </trans-unit>
         <trans-unit id="ToolTipAnalyze" translate="yes" xml:space="preserve">
           <source>Analyze (CTRL+S)</source>
-          <target state="final">Analysiere (CTRL+S)</target>
+          <target state="final">Analysiere (STRG+S)</target>
         </trans-unit>
         <trans-unit id="ToolTipBack" translate="yes" xml:space="preserve">
           <source>Back (CTRL+B)</source>
-          <target state="final">Zurück (CTRL+B)</target>
+          <target state="final">Zurück (STRG++B)</target>
         </trans-unit>
         <trans-unit id="ToolTipDamages" translate="yes" xml:space="preserve">
           <source>Damages (CTRL+D)</source>
-          <target state="final">Schaden (CTRL+D)</target>
+          <target state="final">Schaden (STRG++D)</target>
         </trans-unit>
         <trans-unit id="ToolTipFlashbangs" translate="yes" xml:space="preserve">
           <source>Flashbangs (CTRL+F)</source>
-          <target state="final">Blendgranaten  (CTRL+F)</target>
+          <target state="final">Blendgranaten (STRG++F)</target>
         </trans-unit>
         <trans-unit id="ToolTipHeatmap" translate="yes" xml:space="preserve">
           <source>Heatmap generator (CTRL+H)</source>
-          <target state="final">Heatmap Generator (CTRL+H)</target>
+          <target state="final">Heatmap Generator (STRG+H)</target>
         </trans-unit>
         <trans-unit id="ToolTipKillsDetails" translate="yes" xml:space="preserve">
           <source>Kills details (CTRL+K)</source>
-          <target state="final">Kills Details (CTRL+K)</target>
+          <target state="final">Kills Details (STRG+K)</target>
         </trans-unit>
         <trans-unit id="ToolTipNextDemo" translate="yes" xml:space="preserve">
           <source>Next demo (CTRL+RIGHT)</source>
-          <target state="final">Nächste Demo (CTRL+RIGHT)</target>
+          <target state="final">Nächste Demo (STRG+RIGHT)</target>
         </trans-unit>
         <trans-unit id="ToolTipOverview" translate="yes" xml:space="preserve">
           <source>Overview (CTRL+O)</source>
-          <target state="final">Übersicht (CTRL+O)</target>
+          <target state="final">Übersicht (STRG+O)</target>
         </trans-unit>
         <trans-unit id="ToolTipPlayerDetails" translate="yes" xml:space="preserve">
           <source>Player details (CTRL+P)</source>
-          <target state="final">Spieler Details (CTRL+P)</target>
+          <target state="final">Spieler Details (STRG+P)</target>
         </trans-unit>
         <trans-unit id="ToolTipPreviousDemo" translate="yes" xml:space="preserve">
           <source>Previous demo (CTRL+LEFT)</source>
-          <target state="final">Letzte Demo (CTRL+LEFT)</target>
+          <target state="final">Letzte Demo (STRG+LEFT)</target>
         </trans-unit>
         <trans-unit id="ToolTipRoundDetails" translate="yes" xml:space="preserve">
           <source>Round details (CTRL+R)</source>
-          <target state="final">Runden Details (CTRL+R)</target>
+          <target state="final">Runden Details (STRG+R)</target>
         </trans-unit>
         <trans-unit id="ToolTipStuffs" translate="yes" xml:space="preserve">
           <source>Stuffs (CTRL+G)</source>
-          <target state="final">Ausrüstung (CTRL+G)</target>
+          <target state="final">Ausrüstung (STRG+G)</target>
         </trans-unit>
         <trans-unit id="ToolTipWatchRound" translate="yes" xml:space="preserve">
           <source>Watch round</source>
@@ -944,7 +944,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipAccountProfileUrl" translate="yes" xml:space="preserve">
           <source>Account's Profile URL</source>
-          <target state="final">Account Profile URL</target>
+          <target state="final">Account Profil URL</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipAccountStatus" translate="yes" xml:space="preserve">
           <source>Account's Status (offline, online...)</source>
@@ -1068,7 +1068,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValue" translate="yes" xml:space="preserve">
           <source>Equipment Value</source>
-          <target state="final">Equipment Wert </target>
+          <target state="final">Equipment Wert</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipement Value CT ($)</source>
@@ -1152,7 +1152,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipMapName" translate="yes" xml:space="preserve">
           <source>Map's name</source>
-          <target state="final">Map's name</target>
+          <target state="final">Mapname</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipMarketBanned" translate="yes" xml:space="preserve">
           <source>Market Banned</source>
@@ -1204,7 +1204,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipPlayerFlashbangThrown" translate="yes" xml:space="preserve">
           <source>Total flashbang thrown by the player</source>
-          <target state="final">Total Blendgranaten geworfen von Spieler</target>
+          <target state="final">Gesamtanzahl Blendgranaten geworfen von Spieler</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipPlayerName" translate="yes" xml:space="preserve">
           <source>Player's name</source>
@@ -1228,7 +1228,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipRoundNumber" translate="yes" xml:space="preserve">
           <source>Round Number</source>
-          <target state="final">Runden Nummer</target>
+          <target state="final">Rundennummer</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipRoundPlayed" translate="yes" xml:space="preserve">
           <source>Round Played</source>
@@ -1236,7 +1236,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipRoundType" translate="yes" xml:space="preserve">
           <source>Round Type (normal / eco / force buy / semi-eco)</source>
-          <target state="final">Runden Typ (normal / eco / force buy / semi-eco)</target>
+          <target state="final">Rundentyp (normal / eco / force buy / semi-eco)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipRoundWon" translate="yes" xml:space="preserve">
           <source>Round Won</source>
@@ -1296,7 +1296,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamKill" translate="yes" xml:space="preserve">
           <source>Team Kill (Friendly Fire)</source>
-          <target state="final">Team Kill (Friendly Fire)</target>
+          <target state="final">Teamkill (Friendly Fire)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamName" translate="yes" xml:space="preserve">
           <source>Team Name</source>
@@ -1432,11 +1432,11 @@
         </trans-unit>
         <trans-unit id="AddToWhitelist" translate="yes" xml:space="preserve">
           <source>Add to whitelist</source>
-          <target state="final">Füge zur Whitelist hinzu</target>
+          <target state="final">Zur Whitelist hinzufügen</target>
         </trans-unit>
         <trans-unit id="AssistsFull" translate="yes" xml:space="preserve">
           <source>A (Assits)</source>
-          <target state="final">A (Assits)</target>
+          <target state="final">A (Assists)</target>
         </trans-unit>
         <trans-unit id="BombDefusedFull" translate="yes" xml:space="preserve">
           <source>BD (Bomb Defused)</source>
@@ -1444,7 +1444,7 @@
         </trans-unit>
         <trans-unit id="BombExplodedFull" translate="yes" xml:space="preserve">
           <source>BE (Bomb Exploded)</source>
-          <target state="final">BE (Bomb Explodiert)</target>
+          <target state="final">BE (Bombe explodiert)</target>
         </trans-unit>
         <trans-unit id="BombPlantedFull" translate="yes" xml:space="preserve">
           <source>BP (Bomb Planted)</source>
@@ -1456,7 +1456,7 @@
         </trans-unit>
         <trans-unit id="CopyPlayDemoCommand" translate="yes" xml:space="preserve">
           <source>Copy playdemo command</source>
-          <target state="final">Copiere Playdemo-Befehl</target>
+          <target state="final">Kopiere Playdemo-Befehl</target>
         </trans-unit>
         <trans-unit id="CrouchKillsFull" translate="yes" xml:space="preserve">
           <source>CK (Crouch Kills)</source>
@@ -1536,7 +1536,7 @@
         </trans-unit>
         <trans-unit id="RemoveFromCache" translate="yes" xml:space="preserve">
           <source>Remove from cache</source>
-          <target state="final">Entfernen vom Cäche</target>
+          <target state="final">Entfernen vom Cache</target>
         </trans-unit>
         <trans-unit id="RoundPlayedFull" translate="yes" xml:space="preserve">
           <source>RP (Round Played)</source>
@@ -1552,11 +1552,11 @@
         </trans-unit>
         <trans-unit id="ShowPlayerDemos" translate="yes" xml:space="preserve">
           <source>Show player demos</source>
-          <target state="final">Zeige Spieler Demos</target>
+          <target state="final">Zeige Spielerdemos</target>
         </trans-unit>
         <trans-unit id="ShowSuspectDemos" translate="yes" xml:space="preserve">
           <source>Show suspect demos</source>
-          <target state="final">Zeige Verdächtigen Demos</target>
+          <target state="final">Zeige Verdächtigendemos</target>
         </trans-unit>
         <trans-unit id="SideTroubleFull" translate="yes" xml:space="preserve">
           <source>ST (Side Trouble)</source>
@@ -1636,7 +1636,7 @@
         </trans-unit>
         <trans-unit id="EndReasonTsurrender" translate="yes" xml:space="preserve">
           <source>T surrender</source>
-          <target state="final">T Augegeben</target>
+          <target state="final">T Ausgegeben</target>
         </trans-unit>
         <trans-unit id="EndReasonTwin" translate="yes" xml:space="preserve">
           <source>Terrorists win</source>
@@ -1688,7 +1688,7 @@
         </trans-unit>
         <trans-unit id="LabelWinnerSide" translate="yes" xml:space="preserve">
           <source>Winner side</source>
-          <target state="final">Gewinner Seite</target>
+          <target state="final">Gewinnerseite</target>
         </trans-unit>
         <trans-unit id="Molotovs" translate="yes" xml:space="preserve">
           <source>Molotovs</source>
@@ -2109,23 +2109,23 @@
         </trans-unit>
         <trans-unit id="TipsGraphAverageKillVelocity" translate="yes" xml:space="preserve">
           <source>This graph displays your average velocity when you killed someone by weapon group</source>
-          <target state="final">Dieses Diagramm stellt Ihre durchschnittliche geschwindigkeit dar wenn sie einen Gegner mit einer Waffe fraggen.</target>
+          <target state="final">Dieses Diagramm stellt Ihre durchschnittliche Geschwindigkeit dar, in der Sie einen Gegner mit einer Waffe töten.</target>
         </trans-unit>
         <trans-unit id="TipsMaximumVelocity" translate="yes" xml:space="preserve">
           <source>Information : The maximum velocity while running is 250 unit/s</source>
-          <target state="final">Information : Die maximale Geschwindigkeit beim laufen beträgt 250 units/s</target>
+          <target state="final">Information : Die maximale Geschwindigkeit beim Laufen beträgt 250 Einheiten/s</target>
         </trans-unit>
         <trans-unit id="ToolTipAddPlayerToSuspectsList" translate="yes" xml:space="preserve">
           <source>Add player to suspects list (CTRL+S)</source>
-          <target state="final">Füge Spieler zur Liste der Verdächtigen hinzu (CTRL+S)</target>
+          <target state="final">Füge Spieler zur Liste der Verdächtigen hinzu (STRG+S)</target>
         </trans-unit>
         <trans-unit id="ToolTipAddPlayerToWhiteList" translate="yes" xml:space="preserve">
           <source>Add player to whitelist (CTRL+W)</source>
-          <target state="final">Füge Spieler zur Whitelist hinzu (CTRL+W)</target>
+          <target state="final">Füge Spieler zur Whitelist hinzu (STRG+W)</target>
         </trans-unit>
         <trans-unit id="ToolTipMaps" translate="yes" xml:space="preserve">
           <source>Maps (CTRL+M)</source>
-          <target state="final">Maps (CTRL+M)</target>
+          <target state="final">Maps (STRG+M)</target>
         </trans-unit>
         <trans-unit id="ToolTipMatchesPlayed" translate="yes" xml:space="preserve">
           <source>Matches played</source>
@@ -2133,15 +2133,15 @@
         </trans-unit>
         <trans-unit id="ToolTipOverall" translate="yes" xml:space="preserve">
           <source>Overall (CTRL+O)</source>
-          <target state="final">Gesamt (CTRL+O)</target>
+          <target state="final">Gesamt (STRG+O)</target>
         </trans-unit>
         <trans-unit id="ToolTipProgression" translate="yes" xml:space="preserve">
           <source>Progression (CTRL+P)</source>
-          <target state="final">Fortschritt (CTRL+P)</target>
+          <target state="final">Fortschritt (STRG+P)</target>
         </trans-unit>
         <trans-unit id="ToolTipRank" translate="yes" xml:space="preserve">
           <source>Rank (CTRL+R)</source>
-          <target state="final">Rang (CTRL+R)</target>
+          <target state="final">Rang (STRG+R)</target>
         </trans-unit>
         <trans-unit id="ToolTipTotalAssists" translate="yes" xml:space="preserve">
           <source>Total assists</source>
@@ -2185,7 +2185,7 @@
         </trans-unit>
         <trans-unit id="VelocityAverage" translate="yes" xml:space="preserve">
           <source>Velocity average</source>
-          <target state="final">Durchschnittliche Geschwindigkeit.</target>
+          <target state="final">Durchschnittliche Geschwindigkeit</target>
         </trans-unit>
         <trans-unit id="WeaponKills" translate="yes" xml:space="preserve">
           <source>Weapon Kills</source>
@@ -2225,7 +2225,7 @@
         </trans-unit>
         <trans-unit id="DialogDemosHaveBeenDownloaded" translate="yes" xml:space="preserve">
           <source>{0} demo(s) have been downloaded.</source>
-          <target state="final">{0} Dmo(s) wurden heruntergeladen.</target>
+          <target state="final">{0} Demo(s) wurden heruntergeladen.</target>
         </trans-unit>
         <trans-unit id="DialogDemosRemovedFromCache" translate="yes" xml:space="preserve">
           <source>{0} demo(s) deleted from data cache.</source>
@@ -2237,41 +2237,41 @@
         </trans-unit>
         <trans-unit id="DialogEnterTick" translate="yes" xml:space="preserve">
           <source>Enter the tick.</source>
-          <target state="final">Geben sie den Tick ein.</target>
+          <target state="final">Geben Sie den Tick ein.</target>
         </trans-unit>
         <trans-unit id="DialogErrorAnalyzingDemos" translate="yes" xml:space="preserve">
           <source>An error occured while analyzing demos:</source>
-          <target state="final">Beim analyieren der Demo(s) ist ein Fehler aufgetreten.</target>
+          <target state="final">Beim analysieren der Demo(s) ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorGettingSuspectsData" translate="yes" xml:space="preserve">
           <source>Error while trying to get suspects information.</source>
-          <target state="final">Fehler beim Versuch Verdächtigen Informationen zu erhalten.</target>
+          <target state="final">Fehler beim Versuch, Informationen zum Verdächtigten zu erhalten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileExportingDemo" translate="yes" xml:space="preserve">
           <source>An error occured while exporting the demo.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim  exportieren der Demo</target>
+          <target state="final">Beim Exportieren der Demo ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileExportingDemos" translate="yes" xml:space="preserve">
           <source>An error occured while exporting demos.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim exporieren der Demos.</target>
+          <target state="final">Beim Exportieren der Demos ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRefreshingLastRank" translate="yes" xml:space="preserve">
           <source>An error occured while refreshing last rank.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim aktualisieren des zuletzt bekannten Rangs.</target>
+          <target state="final">Beim Aktualisieren des zuletzt bekannten Rangs ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>An error occured while retrieving matches information ({0}).</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim erhalten der Match Informationen ({0}).</target>
+          <target state="final">Beim erhalten der Match-Informationen ({0}) ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogExportMultipleOrSingle" translate="yes" xml:space="preserve">
           <source>Do you want to export data into a single file or in multiple files?</source>
-          <target state="final">Wollen sie die Daten in eine einzelne Datei oder in mehrere exporieren?</target>
+          <target state="final">Wollen Sie die Daten in eine einzelne Datei oder in mehrere exporieren?</target>
         </trans-unit>
         <trans-unit id="DialogExportPlayer" translate="yes" xml:space="preserve">
           <source>You are going to export data for the player "{0}".
 Do you want to continue?</source>
-          <target state="final">Sie sind dabei Daten vom Spieler "{0}" zu exportieren.
-Wollen sie fortfahren?</target>
+          <target state="final">Sie sind dabei, Daten vom Spieler "{0}" zu exportieren.
+Wollen Sie fortfahren?</target>
         </trans-unit>
         <trans-unit id="DialogGoToTick" translate="yes" xml:space="preserve">
           <source>Goto Tick</source>
@@ -2288,34 +2288,34 @@ Wollen sie fortfahren?</target>
         <trans-unit id="DialogRemoveDemosFromCacheConfirmation" translate="yes" xml:space="preserve">
           <source>Are you sure you want to delete this demo(s) from data cache?
 This will not delete this demo(s) from your HDD.</source>
-          <target state="final">Sind Sie sich sicher dass sie diese Demo(s) aus dem Dateien Cache entfernen wollen?
+          <target state="final">Sind Sie sich sicher, dass Sie diese Demo(s) aus dem Dateien-Cache entfernen wollen?
 Dies löscht nicht ihre Demos auf der Festplatte.</target>
         </trans-unit>
         <trans-unit id="DialogRestartSteam" translate="yes" xml:space="preserve">
           <source>You have to restart Steam.</source>
-          <target state="final">Bitte starten sie Steam neu.</target>
+          <target state="final">Bitte starten Sie Steam neu.</target>
         </trans-unit>
         <trans-unit id="DialogSelectAccountFirst" translate="yes" xml:space="preserve">
           <source>You have to select an account first.</source>
-          <target state="final">Bitte wählen sie zunächst einen Account aus.</target>
+          <target state="final">Bitte wählen Sie zunächst einen Account aus.</target>
         </trans-unit>
         <trans-unit id="DialogSendToRecycleBinConfimation" translate="yes" xml:space="preserve">
           <source>Are you sure you want to send this demo(s) to Recycle Bin?</source>
-          <target state="final">Sie sie sich sicher, dass sie die Demo(s) in den Papierkorb verschieben wollen?</target>
+          <target state="final">Sind Se sich sicher, dass Sie die Demo(s) in den Papierkorb verschieben wollen?</target>
         </trans-unit>
         <trans-unit id="DialogSetAccountToFocus" translate="yes" xml:space="preserve">
           <source>You have to set the account that you want to focus from settings to be able to use this feature.</source>
-          <target state="final">Sie müssen den Account auswählen um diese Funktionen zu nutzen</target>
+          <target state="final">Sie müssen den Account auswählen, um diese Funktionen zu nutzen</target>
         </trans-unit>
         <trans-unit id="DialogSetFolderForDownload" translate="yes" xml:space="preserve">
           <source>You have to select the folder where demos will be saved from settings.</source>
-          <target state="final">Sie müssen den Ordner auswählen indem die Demos gespeicher werden sollen (Einstellungen)</target>
+          <target state="final">Sie müssen den Ordner in den Einstellungen auswählen, in dem die Demos gespeicher werden sollen.</target>
         </trans-unit>
         <trans-unit id="DialogSteamNotFound" translate="yes" xml:space="preserve">
           <source>Steam doesn't seems to be installed.
 Unable to start the game.</source>
-          <target state="final">Steam ist nicht installiert. 
-So kann CSGO nicht gestartet werden.</target>
+          <target state="final">Steam scheint nicht installiert zu sein. 
+Das Spiel kann nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogSteamNotRunningOrNotLoggedIn" translate="yes" xml:space="preserve">
           <source>Steam is not running or you are not connected to a Steam account.</source>
@@ -2355,7 +2355,7 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="NotificationCheckingNewBanned" translate="yes" xml:space="preserve">
           <source>Checking for new banned suspects...</source>
-          <target state="final">Überprüfe auf neu-gebannte Verdächtige...</target>
+          <target state="final">Überprüfe auf neu gebannte Verdächtige...</target>
         </trans-unit>
         <trans-unit id="NotificationDownloadingDemo" translate="yes" xml:space="preserve">
           <source>Downloading demo {0}/{1}...</source>
@@ -2443,7 +2443,7 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogAccountAlreadyInList" translate="yes" xml:space="preserve">
           <source>This player is already in your accounts list.</source>
-          <target state="final">Dieser Spieler ist bereits in ihrer Account Liste.</target>
+          <target state="final">Dieser Spieler ist bereits in ihrer Accountliste.</target>
         </trans-unit>
         <trans-unit id="DialogAddAnAccount" translate="yes" xml:space="preserve">
           <source>Add an account</source>
@@ -2451,7 +2451,7 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogAnalyzeAllDemosConfirmation" translate="yes" xml:space="preserve">
           <source>Do you want to analyze only the selected demos or all the demos within the selected folder?</source>
-          <target state="final">Wollen sie nur die ausgewählten Demos, oder alle Demos im Ordner analysieren?</target>
+          <target state="final">Wollen Sie nur die ausgewählten Demos oder alle Demos im Ordner analysieren?</target>
         </trans-unit>
         <trans-unit id="DialogBackupCreated" translate="yes" xml:space="preserve">
           <source>The backup file has been created, you can re-import it from settings.</source>
@@ -2459,7 +2459,7 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogConfirmDeleteDemosData" translate="yes" xml:space="preserve">
           <source>Demos data will be deleted! Are you sure?</source>
-          <target state="final">Demos Daten werden gelöscht. Sind Sie sich sicher?</target>
+          <target state="final">Demo-Daten werden gelöscht. Sind Sie sich sicher?</target>
         </trans-unit>
         <trans-unit id="DialogCustomDataImported" translate="yes" xml:space="preserve">
           <source>Custom data has been imported.</source>
@@ -2467,7 +2467,7 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogDeleteVdmFilesConfirmation" translate="yes" xml:space="preserve">
           <source>All VDM files within your folders will be deleted, are you sure?</source>
-          <target state="final">All VDM Dateien in deinen Ordner werden gelöscht, bist du dir sicher?</target>
+          <target state="final">Alle VDM Dateien in deinen Ordner werden gelöscht, sind Sie sich sicher?</target>
         </trans-unit>
         <trans-unit id="DialogDemosDataCleared" translate="yes" xml:space="preserve">
           <source>Demos data cleared.</source>
@@ -2475,31 +2475,31 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogEnterSteamId" translate="yes" xml:space="preserve">
           <source>Enter the SteamID 64 or the Steam community URL.</source>
-          <target state="final">Fügen sie die SteamID 64 oder die Steam Community URL ein.</target>
+          <target state="final">Fügen Sie die SteamID 64 oder die Steam Community URL ein.</target>
         </trans-unit>
         <trans-unit id="DialogErrorCreatingBackupFile" translate="yes" xml:space="preserve">
           <source>An error occured while exporting custom data.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim Exporieren der speziellen Daten.</target>
+          <target state="final">Beim Exporieren der speziellen Daten ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorDeletingVdmFiles" translate="yes" xml:space="preserve">
           <source>An error occured while deleting VDM files.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim Löschen der VDM Dateien.</target>
+          <target state="final">Beim Löschen der VDM Dateien ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorImportingCustomData" translate="yes" xml:space="preserve">
           <source>An error occured while importing custom data. The backup file may be corrupt.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim imporieren von speziellen Daten. Die Backup Datei könnte beschädigt sein.</target>
+          <target state="final">Beim imporieren von speziellen Daten ist ein Fehler aufgetreten. Die Backup-Datei könnte beschädigt sein.</target>
         </trans-unit>
         <trans-unit id="DialogErrorInvalidSteamId" translate="yes" xml:space="preserve">
           <source>Invalid SteamID 64 or Steam community URL.</source>
-          <target state="final">Ungültige SteamID 64 or Steam Community URL.</target>
+          <target state="final">Ungültige SteamID 64 oder Steam Community URL.</target>
         </trans-unit>
         <trans-unit id="DialogErrorRemovingAccount" translate="yes" xml:space="preserve">
           <source>An error occured while removing the account.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim löschen des Accounts.</target>
+          <target state="final">Beim Löschen des Accounts ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingPlayerInformation" translate="yes" xml:space="preserve">
           <source>Error while trying to get player information.</source>
-          <target state="final">Fehler beim Versuch Spieler Informationen zu erhalten.</target>
+          <target state="final">Fehler beim Versuch Spielerinformationen zu erhalten.</target>
         </trans-unit>
         <trans-unit id="DialogNoErrorsFile" translate="yes" xml:space="preserve">
           <source>There is no errors log file.</source>
@@ -2507,11 +2507,11 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="DialogSelectCsgoPath" translate="yes" xml:space="preserve">
           <source>Please select the csgo.exe file location to enable it.</source>
-          <target state="final">Bitte wählen sie den csgo.exe Dateipad aus um dies zu aktivieren.</target>
+          <target state="final">Bitte wählen Sie den Dateipfad von csgo.exe aus, um dies zu aktivieren.</target>
         </trans-unit>
         <trans-unit id="DialogVdmFilesDeleted" translate="yes" xml:space="preserve">
           <source>VDM files deleted.</source>
-          <target state="final">VDM Dateienn gelöscht.</target>
+          <target state="final">VDM-Dateien gelöscht.</target>
         </trans-unit>
         <trans-unit id="MegaByte" translate="yes" xml:space="preserve">
           <source>MB</source>
@@ -2535,7 +2535,7 @@ So kann CSGO nicht gestartet werden.</target>
         </trans-unit>
         <trans-unit id="ToolTipDisplaySettings" translate="yes" xml:space="preserve">
           <source>Display settings</source>
-          <target state="final">Anzeigen Einstellungen</target>
+          <target state="final">Zeige Einstellungen an</target>
         </trans-unit>
         <trans-unit id="DialogAnalyzeRequired" translate="yes" xml:space="preserve">
           <source>You have to analyze this demo first.</source>
@@ -2552,8 +2552,8 @@ So kann CSGO nicht gestartet werden.</target>
         <trans-unit id="DialogDemosMayBeTooOld" translate="yes" xml:space="preserve">
           <source>This demos may be too old, if not please send an email with the attached demos.
 You can find more information on {0}.</source>
-          <target state="final">Diese Demo scheint zu alt zu sein, falls nicht senden Sie mir bitte eine Email mit der Demo.
-Sie finden mehr Informationen hierzu unter {0}.</target>
+          <target state="final">Diese Demos scheinen zu alt zu sein. Falls nicht, senden Sie mir bitte eine E-Mail mit der Demo.
+Mehr Informationen finden Sie unter {0}.</target>
         </trans-unit>
         <trans-unit id="DialogDemosNotFound" translate="yes" xml:space="preserve">
           <source>The following demos have not been found:</source>
@@ -2568,8 +2568,8 @@ Sie finden mehr Informationen hierzu unter {0}.</target>
 The demo may be too old, if not please send an email with the attached demo.
 You can find more information on {1}.</source>
           <target state="final">Beim analysieren der Demo(s) ist ein Fehler aufgetreten {0}.
-Die Demo könnte zu alt sein, falls nicht, senden sie mir bitte eine Email mit der Demo.
-Sie finden mehr Informationen hierzu unter {1}.</target>
+Die Demo scheinen zu alt zu sein. Falls nicht, senden Sie mir bitte eine E-Mail mit der Demo.
+Mehr Informationen finden Sie unter {1}.</target>
         </trans-unit>
         <trans-unit id="DialogMapNotSupported" translate="yes" xml:space="preserve">
           <source>This map doesn't support this feature.</source>
@@ -2585,7 +2585,7 @@ Sie finden mehr Informationen hierzu unter {1}.</target>
         </trans-unit>
         <trans-unit id="DialogPovSelection" translate="yes" xml:space="preserve">
           <source>Which POV (camera perspective) do you want to see?</source>
-          <target state="final">Welche POV (Kamera Perspektive) wollen Sie sehen?</target>
+          <target state="final">Welche POV (Kameraperspektive) wollen Sie sehen?</target>
         </trans-unit>
         <trans-unit id="EnemyPov" translate="yes" xml:space="preserve">
           <source>Enemy POV</source>
@@ -2625,7 +2625,7 @@ Sie finden mehr Informationen hierzu unter {1}.</target>
         </trans-unit>
         <trans-unit id="DialogNoPointsFound" translate="yes" xml:space="preserve">
           <source>No points found. You may have to analyze this demo.</source>
-          <target state="final">Keine Punkte gefunden. Sie müssen vielleicht die Demo analysieren.</target>
+          <target state="final">Keine Punkte gefunden. Sie sollten die Demo analysieren.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
           <source>Equipment</source>
@@ -2633,7 +2633,7 @@ Sie finden mehr Informationen hierzu unter {1}.</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>
-          <target state="final">Knife Kills</target>
+          <target state="final">Messer Kills</target>
         </trans-unit>
         <trans-unit id="HeadshotsPercent" translate="yes" xml:space="preserve">
           <source>Headshots %</source>
@@ -2653,7 +2653,7 @@ Sie finden mehr Informationen hierzu unter {1}.</target>
         </trans-unit>
         <trans-unit id="LogOnlyKills" translate="yes" xml:space="preserve">
           <source>Log only kills</source>
-          <target state="final">Log nur kills</target>
+          <target state="final">Nur Kills loggen</target>
         </trans-unit>
         <trans-unit id="NotificationGeneratingData" translate="yes" xml:space="preserve">
           <source>Generating data...</source>
@@ -2697,39 +2697,40 @@ Sie finden mehr Informationen hierzu unter {1}.</target>
         </trans-unit>
         <trans-unit id="ToolTipAddAllPlayersSeen" translate="yes" xml:space="preserve">
           <source>Add all players seen to list (CTRL+G)</source>
-          <target state="final">Füge alle gesehen Spieler hinzu (CTRL+G)</target>
+          <target state="final">Füge alle gesehen Spieler hinzu (STRG+G)</target>
         </trans-unit>
         <trans-unit id="ToolTipGoToSuspectProfile" translate="yes" xml:space="preserve">
           <source>Go to suspect profile (CTRL+P)</source>
-          <target state="final">Öffne Profil des Verdächtigen (CTRL+P)</target>
+          <target state="final">Öffne Profil des Verdächtigen (STRG+P)</target>
         </trans-unit>
         <trans-unit id="ToolTipMoveSuspectToWhitelist" translate="yes" xml:space="preserve">
           <source>Move suspect(s) to whitelist (CTRL+M)</source>
-          <target state="final">Bewege Verdächtige(n) zur Whitelist (CTRL+M)</target>
+          <target state="final">Bewege Verdächtige(n) zur Whitelist (STRG+M)</target>
         </trans-unit>
         <trans-unit id="ToolTipPause" translate="yes" xml:space="preserve">
           <source>Pause (CTRL+O)</source>
-          <target state="final">Pause (CTRL+O)</target>
+          <target state="final">Pause (STRG+O)</target>
         </trans-unit>
         <trans-unit id="ToolTipPlay" translate="yes" xml:space="preserve">
           <source>Play (CTRL+P)</source>
-          <target state="final">Abspielen (CTRL+P)</target>
+          <target state="final">Abspielen (STRG+P)</target>
         </trans-unit>
         <trans-unit id="ToolTipRefreshList" translate="yes" xml:space="preserve">
           <source>Refresh list (CTRL+R)</source>
-          <target state="final">Aktualisere Liste (CTRL+R)</target>
+          <target state="final">Aktualisere Liste (STRG+R)</target>
         </trans-unit>
         <trans-unit id="ToolTipRemoveSuspect" translate="yes" xml:space="preserve">
           <source>Remove suspect(s) (DEL)</source>
-          <target state="final">Entferne Verdächtige (DEL)</target>
+          <target state="final">Entferne Verdächtige (ENTF)</target>
         </trans-unit>
         <trans-unit id="ToolTIpShowOnlySuspectDemos" translate="yes" xml:space="preserve">
           <source>Show demos that contains selected suspect(s) (CTRL+F)</source>
-          <target state="final">Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</target>
+          <target state="needs-review-translation">Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
         </trans-unit>
         <trans-unit id="ToolTipWhitelist" translate="yes" xml:space="preserve">
           <source>Whitelist (CTRL+W)</source>
-          <target state="final">Whitelist (CTRL+W)</target>
+          <target state="final">Whitelist (STRG+W)</target>
         </trans-unit>
         <trans-unit id="WatermarkSearch" translate="yes" xml:space="preserve">
           <source>Search...</source>
@@ -2751,7 +2752,7 @@ Sie finden mehr Informationen hierzu unter {1}.</target>
           <source>It seems that CSGO is not installed on your main hard drive.
 The defaults "csgo" and "replays" can not be found. Please add folders from the settings.</source>
           <target state="final">Es scheint, dass CSGO nicht auf ihrer Hauptfestplatte installiert ist.
-Die standardisierten "csgo" und "replays" Ordner konnten nicht gefunden werden. Bitte fügen sie Ordner unter Einstellungen hinzu.</target>
+Die normalen Ordner "csgo" und "replays" konnten nicht gefunden werden. Bitte fügen Sie Ordner unter den Einstellungen hinzu.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileDeletingPlayer" translate="yes" xml:space="preserve">
           <source>Error while deleting player.</source>
@@ -2763,7 +2764,7 @@ Die standardisierten "csgo" und "replays" Ordner konnten nicht gefunden werden. 
         </trans-unit>
         <trans-unit id="DialogErrorWhileExportingCustomData" translate="yes" xml:space="preserve">
           <source>An error occured while exporting custom data.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim Exporieren der speziellen Daten.</target>
+          <target state="final">Beim Exporieren der speziellen Daten ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileMovingSuspects" translate="yes" xml:space="preserve">
           <source>Error while moving suspect(s).</source>
@@ -2771,20 +2772,20 @@ Die standardisierten "csgo" und "replays" Ordner konnten nicht gefunden werden. 
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingPlayersInformation" translate="yes" xml:space="preserve">
           <source>Error while trying to get players information.</source>
-          <target state="final">Fehler beim Versuch Spieler Informationen zu erhalten.</target>
+          <target state="final">Fehler beim Versuch, Spieler Informationen zu erhalten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingSuspectInformation" translate="yes" xml:space="preserve">
           <source>Error while trying to get suspect information.</source>
-          <target state="final">Fehler beim Versuch Verdächtigen Informationen zu erhalten.</target>
+          <target state="final">Fehler beim Versuch, Verdächtigen Informationen zu erhalten.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingSuspectsInformation" translate="yes" xml:space="preserve">
           <source>Error while trying to get suspects information.</source>
-          <target state="final">Fehler beim Versuch Verdächtigen Informationen zu erhalten.</target>
+          <target state="final">Fehler beim Versuch, Verdächtigen Informationen zu erhalten.</target>
         </trans-unit>
         <trans-unit id="DialogNewVersionAvailable" translate="yes" xml:space="preserve">
           <source>A new version is available.
 Do you want to download it?</source>
-          <target state="final">Eine aktuellere Version ist verfügbar.
+          <target state="final">Eine neue Version ist verfügbar.
 Wollen Sie sie herunterladen?</target>
         </trans-unit>
         <trans-unit id="DialogNoDemosPlayerFound" translate="yes" xml:space="preserve">
@@ -2809,7 +2810,7 @@ Um ihn in ihre Liste der Verdächtigen hinzuzufügen müssen sie ihn aus den and
           <source>This update requires to clear custom data from cache (your suspects list will not be removed).
 Do you want to save your custom data?</source>
           <target state="final">Dieses Update verlangt das Löschen von allen Daten aus dem Cache (Verdächtige bleiben erhalten).
-Möchtigen sie ihre benutzerdefinierten Daten speichern?</target>
+Möchten Sie Ihre benutzerdefinierten Daten speichern?</target>
         </trans-unit>
         <trans-unit id="DialogPlayerNotFound" translate="yes" xml:space="preserve">
           <source>Player not found.</source>
@@ -2893,17 +2894,17 @@ Möchtigen sie ihre benutzerdefinierten Daten speichern?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileAddingPlayerToSuspectsList" translate="yes" xml:space="preserve">
           <source>Error while adding player to suspects list.</source>
-          <target state="final">Fehler beim hinzufügen von Spieler zur Liste der Verdächtigen.</target>
+          <target state="final">Fehler beim Hinzufügen von Spieler zur Liste der Verdächtigen.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileAddingPlayerToWhitelist" translate="yes" xml:space="preserve">
           <source>Error while adding player to whitelist.</source>
-          <target state="final">Fehler beim hinzufügen von Spieler zur Whitelist.</target>
+          <target state="final">Fehler beim Hinzufügen von Spieler zur Whitelist.</target>
         </trans-unit>
         <trans-unit id="DialogNoDamagesDataFound" translate="yes" xml:space="preserve">
           <source>No damages data found.
 The demo is too old or you didn't analyze it.</source>
           <target state="final">Keine Beschädigungen gefunden. 
-Die Demo ist zu alt oder sie haben sie noch nicht analysiert.</target>
+Die Demo ist zu alt oder Sie haben sie noch nicht analysiert.</target>
         </trans-unit>
         <trans-unit id="DialogNoDemosFoundForPlayer" translate="yes" xml:space="preserve">
           <source>No demos found for this player.
@@ -2913,19 +2914,19 @@ Demos mit diesem Spieler sind vielleicht noch nicht analysiert worden.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInAccountsList" translate="yes" xml:space="preserve">
           <source>This player is already in your account list.</source>
-          <target state="final">Dieser Spieler ist bereits in ihrer Account Liste.</target>
+          <target state="final">Dieser Spieler ist bereits in Ihrer Account Liste.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
 You have to remove it from your account list to be able to add him in your supect list.</source>
-          <target state="final">Dieser Spieler ist bereits in ihrer Account Liste.
-Um ihn in ihre Liste der Verdächtigen hinzuzufügen müssen Sie vorher aus der Accountliste löschen.</target>
+          <target state="final">Dieser Spieler ist bereits in ihrer Accountliste.
+Um ihn in Ihre Liste der Verdächtigen hinzuzufügen müssen Sie ihn aus der Accountliste löschen.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInWhitelist" translate="yes" xml:space="preserve">
           <source>This player is already in your whitelist or he is in your account list.
 You have to remove it from your account list to be able to add him in your whitelist.</source>
-          <target state="final">Dieser Spieler ist bereits in ihrer Account Liste.
-Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste löschen.</target>
+          <target state="final">Dieser Spieler ist bereits in ihrer Accountliste.
+Um ihn in Ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste löschen.</target>
         </trans-unit>
         <trans-unit id="Light" translate="yes" xml:space="preserve">
           <source>Light</source>
@@ -2958,7 +2959,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="NotificationPlayerAddedToAccountsList" translate="yes" xml:space="preserve">
           <source>Player added to the account list.</source>
-          <target state="final">Spieler wurde zur Account Liste hinzugefügt.</target>
+          <target state="final">Spieler wurde zur Accountliste hinzugefügt.</target>
         </trans-unit>
         <trans-unit id="NotificationPlayerAddedToWhitelist" translate="yes" xml:space="preserve">
           <source>Player added to whitelist.</source>
@@ -3047,7 +3048,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="ToolTipAddToWhitelist" translate="yes" xml:space="preserve">
           <source>Add an account to whitelist</source>
-          <target state="final">Add Account zur Whitelist hinzu</target>
+          <target state="final">Account zur Whitelist hinzufügen</target>
         </trans-unit>
         <trans-unit id="ToolTipBlinded" translate="yes" xml:space="preserve">
           <source>blinded</source>
@@ -3061,7 +3062,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="ToolTipGoToPlayerProfile" translate="yes" xml:space="preserve">
           <source>Go to player profile (CTRL+P)</source>
-          <target state="final">Öffne Profil des Spielers (CTRL+P)</target>
+          <target state="final">Öffne Profil des Spielers (STRG+P)</target>
         </trans-unit>
         <trans-unit id="ToolTipKilled" translate="yes" xml:space="preserve">
           <source>killed</source>
@@ -3075,7 +3076,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="ToolTipRemovePlayersFromWhitelist" translate="yes" xml:space="preserve">
           <source>Remove player(s) from whitelist (DEL)</source>
-          <target state="final">Entferne Spieler von der Whiteliste (DEL)</target>
+          <target state="final">Entferne Spieler von der Whiteliste (ENTF)</target>
         </trans-unit>
         <trans-unit id="ToolTipSeconds" translate="yes" xml:space="preserve">
           <source>second(s)</source>
@@ -3089,7 +3090,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="ToolTipShowPlayerDemos" translate="yes" xml:space="preserve">
           <source>Show demos that contains the player (CTRL+F)</source>
-          <target state="final">Zeige Demos die den Spieler enthalten (CTRL+F)</target>
+          <target state="final">Zeige Demos die den Spieler enthalten (STRG+F)</target>
         </trans-unit>
         <trans-unit id="ToolTipTimes" translate="yes" xml:space="preserve">
           <source>time(s)</source>
@@ -3098,7 +3099,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="WhitelistInformation" translate="yes" xml:space="preserve">
           <source>Players listed below will not be checked for ban when analyzing a demo.</source>
-          <target state="final">Spieler die unten gelisten sind werden nicht auf Ban überprüft beim Aalysieren der Demo</target>
+          <target state="final">Spieler, die unten gelisten sind, werden beim Analysieren der Demo nicht auf Ban überprüft.</target>
         </trans-unit>
         <trans-unit id="All" translate="yes" xml:space="preserve">
           <source>All</source>
@@ -3203,23 +3204,23 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
         </trans-unit>
         <trans-unit id="ToolTipCopySetposCommand" translate="yes" xml:space="preserve">
           <source>Copy setpos command (CTRL+C)</source>
-          <target state="final">Kopiere setpos-Befehl (CTRL+C)</target>
+          <target state="final">Kopiere setpos-Befehl (STRG+C)</target>
         </trans-unit>
         <trans-unit id="ToolTipGenerateHeatmap" translate="yes" xml:space="preserve">
           <source>Generate heatmap (CTRL+G)</source>
-          <target state="final">Generiere Heatmap (CTRL+G)</target>
+          <target state="final">Generiere Heatmap (STRG+G)</target>
         </trans-unit>
         <trans-unit id="ToolTipSaveAsPng" translate="yes" xml:space="preserve">
           <source>Save as PNG (CTRL+S)</source>
-          <target state="final">Speichern als PNG (CTRL+S)</target>
+          <target state="final">Speichern als PNG (STRG+S)</target>
         </trans-unit>
         <trans-unit id="ToolTipUpdate" translate="yes" xml:space="preserve">
           <source>Update (CTRL+R)</source>
-          <target state="final">Update (CTRL+R)</target>
+          <target state="final">Update (STRG+R)</target>
         </trans-unit>
         <trans-unit id="ToolTipWatchAllStuffsFromPlayer" translate="yes" xml:space="preserve">
           <source>Watch all stuffs from this player (CTRL+W)</source>
-          <target state="final">Zeige alle Ausrüstung von diesem Spieler (CTRL+W)</target>
+          <target state="final">Zeige alle Ausrüstung von diesem Spieler (STRG+W)</target>
         </trans-unit>
         <trans-unit id="TotalCashEarned" translate="yes" xml:space="preserve">
           <source>Total Cash Earned ($)</source>
@@ -3279,11 +3280,11 @@ Message Error :
         </trans-unit>
         <trans-unit id="InformationTranslateIncomplete" translate="yes" xml:space="preserve">
           <source>If the app is still in english after changing the language, it means that the translation has not been done or is incomplete.</source>
-          <target state="final">If the app is still in english after changing the language, it means that the translation has not been done or is incomplete.</target>
+          <target state="final">Falls die App nach dem Wechsel der Sprache noch auf Englisch ist könnte es sein, dass die Übersetzung noch nicht fertig oder vollständig ist.</target>
         </trans-unit>
         <trans-unit id="InfomationHelpTranslatingApp" translate="yes" xml:space="preserve">
           <source>You are free to help translating the app, more information on</source>
-          <target state="final">Bitte helfen sie diese App zu übersetzen, mehr Informationen unter</target>
+          <target state="final">Bitte helfen Sie, diese App zu übersetzen. Mehr Informationen unter</target>
         </trans-unit>
         <trans-unit id="Contributors" translate="yes" xml:space="preserve">
           <source>Contributors</source>
@@ -3333,7 +3334,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="ExportChat" translate="yes" xml:space="preserve">
           <source>Export chat</source>
-          <target state="final">Export chat</target>
+          <target state="final">Exportiere Chat</target>
         </trans-unit>
         <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
           <source>Chat messages file has been created.</source>
@@ -3341,11 +3342,11 @@ Message Error :
         </trans-unit>
         <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
           <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
-          <target state="final">Keine Chat Messages Gefunden. (Es funktioniert nur bei Demos die auf einem Server aufgenommen wurden mit "tv_relaytextchat" ungleich "0" - dies ist nicht der Fall bei Valve Matchmaking)</target>
+          <target state="final">Keine Chatnachrichten gefunden. (Es funktioniert nur bei Demos, die auf einem Server aufgenommen wurden, mit "tv_relaytextchat" ungleich "0" - dies ist nicht der Fall bei Valve Matchmaking)</target>
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="needs-review-translation">Nichts {0} gefunden bei diser auswahl.</target>
+          <target state="needs-review-translation">Nichts {0} gefunden bei dieser Auswahl.</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
@@ -3373,15 +3374,15 @@ Message Error :
         </trans-unit>
         <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
           <source>Yes and don't ask next time</source>
-          <target state="final">Ja und fragen Se micht nicht wieder</target>
+          <target state="final">Ja und fragen nicht wieder</target>
         </trans-unit>
         <trans-unit id="DialogSendThirdPartyConfirmation" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}. Do you want to continue?</source>
-          <target state="final">Sie sind dabei den Teilen-Code der Demo zu senden {0}. Wllen sie fortfahren?</target>
+          <target state="final">Sie sind dabei den Teilen-Code der Demo zu senden {0}. Wollen sie fortfahren?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileSendingShareCode" translate="yes" xml:space="preserve">
           <source>An error occured while sending the share code.</source>
-          <target state="final">Es ist ein Fehler aufgetreten beim senden des Teilen Codes.</target>
+          <target state="final">Beim Senden des Teilen Codes ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogSendShareCodeWarning" translate="yes" xml:space="preserve">
           <source>You are going to send the demo's share code to {0}.</source>
@@ -3389,7 +3390,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="DialogSelectThirdParty" translate="yes" xml:space="preserve">
           <source>Select third party application</source>
-          <target state="final">Wählen sie die  third party application aus.</target>
+          <target state="final">Wählen sie die third party application aus.</target>
         </trans-unit>
         <trans-unit id="ToolTipShowDemoOnThirdParty" translate="yes" xml:space="preserve">
           <source>Show demo's details on a third party application</source>
@@ -3397,15 +3398,15 @@ Message Error :
         </trans-unit>
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
-          <target state="final">Ihre Konfiguartion ist fehlerhaft. Bitte starten sie diese App erneut und setzen sie die Konfiguration zurück.</target>
+          <target state="final">Ihre Konfiguration ist fehlerhaft. Bitte starten sie die App erneut und setzen sie die Konfiguration zurück.</target>
         </trans-unit>
         <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
           <source>Enable movie making config parent folder</source>
-          <target state="new">Enable movie making config parent folder</target>
+          <target state="new">Aktivieren Sie den übergeordneten Ordner für die Movie Making Config</target>
         </trans-unit>
         <trans-unit id="EnableHlae" translate="yes" xml:space="preserve">
           <source>Enable HLAE</source>
-          <target state="new">Enable HLAE</target>
+          <target state="new">HLAE erlauben</target>
         </trans-unit>
         <trans-unit id="DialogEnableHlaeWarning" translate="yes" xml:space="preserve">
           <source>Enabling HLAE change the way the game is started (when you click on all "Watch" buttons).
@@ -3413,103 +3414,103 @@ It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a 
 You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
 If you don't know what is this or you are not planning to make movies just click on cancel.
 If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
-          <target state="final">Den Moviemakermode zu aktivieren ändert wie sich das Spiel startet. (Wenn man auf alle "Watch/Ansehen" buttons klickt)
-Es nutzt das Tool "Half-Life Advanced Effects" (HLAE) which ist technically a hack.
-Sie sollten das NUR nutzen wenn sie wissen was sie tun UND nur zum bearbeiten von Moviemaking bezogenen Dingen.
-Falls sie nicht wissen was das ist oder sie planen nicht oben beschriebenen durchzuführen klicken sie JETZT auf Cancel/Abbrechen.
-Falls sie es einschalten wird das Spiel (immer) mit dem "-insecure" Startparameter gestarten, was bedeutet, dass es ihnen nicht möglich ist auf VAC geschützten Servern zu spielen um einen Vac Bann zu verhindern.</target>
+          <target state="final">Den Moviemakermode zu aktivieren ändert, wie sich das Spiel startet. (Wenn man auf alle "Watch/Ansehen"-Buttons klickt)
+Es nutzt das Tool "Half-Life Advanced Effects" (HLAE), welches, technisch gesehen, ein Hack ist.
+Sie sollten das NUR nutzen, wenn Sie wissen, was Sie tun UND es nur zum Bearbeiten von Moviemaking-bezogenen Dingen nutzen.
+Falls Sie nicht wissen, was das ist, oder Sie planen, nicht oben beschriebene Dinge durchzuführen, klicken Sie JETZT auf Cancel/Abbrechen.
+Falls Sie es einschalten, wird das Spiel (immer) mit dem "-insecure" Startparameter gestarten, was bedeutet, dass es Ihnen nicht möglich ist, auf VAC geschützten Servern zu spielen, um einen VAC-Bann zu verhindern.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeNotFound" translate="yes" xml:space="preserve">
           <source>It looks like HLAE isn't installed.
 Do you want to install it? (If you are using it you have to install it first to be able to use it)</source>
-          <target state="new">It looks like HLAE isn't installed.
-Do you want to install it? (If you are using it you have to install it first to be able to use it)</target>
+          <target state="new">Schaut so aus, als ob HLAE nicht installiert ist.
+Wollen Sie es installieren? (Falls Sie es nutzen, müssen Sie erst insallieren, um es verwenden zu können)</target>
         </trans-unit>
         <trans-unit id="DialogNewHlaeVersionAvailable" translate="yes" xml:space="preserve">
           <source>A new HLAE version is avalailable.
 Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</source>
-          <target state="new">A new HLAE version is avalailable.
-Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</target>
+          <target state="new"> Eine neue Version von HLAE ist verfügbar.
+Wollen Sie sie installieren? (Es wird empfohlen zu aktualisieren, um mögliche Crashes von CSGO zu verhindern)</target>
         </trans-unit>
         <trans-unit id="DialogHlaeInstallationFailed" translate="yes" xml:space="preserve">
           <source>An error occured while installing HLAE.</source>
-          <target state="new">An error occured while installing HLAE.</target>
+          <target state="new">Beim Installieren von HLAE ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeInstalled" translate="yes" xml:space="preserve">
           <source>HLAE has been installed.</source>
-          <target state="new">HLAE has been installed.</target>
+          <target state="new">HLAE wurde installiert.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeRequired" translate="yes" xml:space="preserve">
           <source>HLAE needs to be installed to use it.</source>
-          <target state="new">HLAE needs to be installed to use it.</target>
+          <target state="new">HLAE muss installiert werden um es nutzen zu können.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeUpdated" translate="yes" xml:space="preserve">
           <source>HLAE has been updated.</source>
-          <target state="new">HLAE has been updated.</target>
+          <target state="new">HLAE wurde aktualisiert.</target>
         </trans-unit>
         <trans-unit id="DialogHlaeUpdateFailed" translate="yes" xml:space="preserve">
           <source>An error occured while updating HLAE.</source>
-          <target state="new">An error occured while updating HLAE.</target>
+          <target state="new">Beim Aktualisieren von HLAE ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="NotificationInstallingHlae" translate="yes" xml:space="preserve">
           <source>Installing HLAE...</source>
-          <target state="new">Installing HLAE...</target>
+          <target state="new">Installiere HLAE...</target>
         </trans-unit>
         <trans-unit id="NotificationUpdatingHlae" translate="yes" xml:space="preserve">
           <source>Updating HLAE...</source>
-          <target state="new">Updating HLAE...</target>
+          <target state="new">Aktualisiere HLAE...</target>
         </trans-unit>
         <trans-unit id="DialogSelectHlaeConfigParentFolderLocation" translate="yes" xml:space="preserve">
           <source>Please select the HLAE config parent folder location.</source>
-          <target state="new">Please select the HLAE config parent folder location.</target>
+          <target state="new">Bitte wählen Sie den übergeordneten Config-Ordner für HLAE aus.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerFocusedNotFound" translate="yes" xml:space="preserve">
           <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
-          <target state="new">The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</target>
+          <target state="new">Den Spieler, den Sie sich anschauen, ist nicht in der Demo. Sie können dies mit den Einstellungen (Account-Bereich) ändern, oder sie schauen sich das Scoreboard an.</target>
         </trans-unit>
         <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
           <source>Demos list size</source>
-          <target state="new">Demos list size</target>
+          <target state="new">Größe Demoliste</target>
         </trans-unit>
         <trans-unit id="ShowAllDemos" translate="yes" xml:space="preserve">
           <source>Show all demos</source>
-          <target state="new">Show all demos</target>
+          <target state="new">Zeige alle Demos</target>
         </trans-unit>
         <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
           <source>Invalid share code</source>
-          <target state="new">Invalid share code</target>
+          <target state="new">Fehlerhafter Teilen-Code</target>
         </trans-unit>
         <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download a demo from share code</source>
-          <target state="new">Download a demo from share code</target>
+          <target state="new">Lade eine Demo von einem Teilen-Code herunter</target>
         </trans-unit>
         <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
           <source>Share code</source>
-          <target state="new">Share code</target>
+          <target state="new">Teilen-Code</target>
         </trans-unit>
         <trans-unit id="DialogMessageDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>You are going to download a demo from its share code.
 
 Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</source>
-          <target state="new">You are going to download a demo from its share code.
+          <target state="new">Sie sind dabei, eine Demo von einem Teile-Code herunterzuladen.
 
-Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
+Bitte geben Sie den Teilen-Code ein (Beispiel: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
         </trans-unit>
         <trans-unit id="DialogTitleDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download demo from share code</source>
-          <target state="new">Download demo from share code</target>
+          <target state="new">Lade Demo von Teilen-Code</target>
         </trans-unit>
         <trans-unit id="DialogDemoFromShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Demo link has expired or you already have it in your download folder.</source>
-          <target state="new">Demo link has expired or you already have it in your download folder.</target>
+          <target state="new">Demo-Link ist abgelaufen oder Sie haben die Demo bereits in Ihrem Download-Ordner.</target>
         </trans-unit>
         <trans-unit id="NotificationRetrievingDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Retrieving demo data...</source>
-          <target state="new">Retrieving demo data...</target>
+          <target state="new">Erhalte Demo-Daten...</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingDemoData" translate="yes" xml:space="preserve">
           <source>An error occured while retrieving demo data.</source>
-          <target state="new">An error occured while retrieving demo data.</target>
+          <target state="new">Beim Erhalten der Demo-Daten ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="HeaderEseaRws" translate="yes" xml:space="preserve">
           <source>RWS</source>
@@ -3517,7 +3518,7 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="HeaderToolTipEseaRws" translate="yes" xml:space="preserve">
           <source>Average ESEA Round Win Share</source>
-          <target state="new">Average ESEA Round Win Share</target>
+          <target state="new">Durchschnittliche ESEA Round Win Share</target>
         </trans-unit>
         <trans-unit id="HeaderAccuracy" translate="yes" xml:space="preserve">
           <source>ACC (%)</source>
@@ -3541,7 +3542,7 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="NotificationImportingCustomData" translate="yes" xml:space="preserve">
           <source>Importing custom data...</source>
-          <target state="new">Importing custom data...</target>
+          <target state="new">Importiere benutzerdefinierte Daten...</target>
         </trans-unit>
         <trans-unit id="HeaderTimeDeath" translate="yes" xml:space="preserve">
           <source>TD (s)</source>
@@ -3549,15 +3550,15 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="HeaderToolTipTimeDeath" translate="yes" xml:space="preserve">
           <source>Time Death (seconds)</source>
-          <target state="new">Time Death (seconds)</target>
+          <target state="new">Zeit Tod (Sekunden)</target>
         </trans-unit>
         <trans-unit id="AverageTimeDeath" translate="yes" xml:space="preserve">
           <source>Average Time Death (s)</source>
-          <target state="new">Average Time Death (s)</target>
+          <target state="new">Durchschnittliche Zeit Tod (s)</target>
         </trans-unit>
         <trans-unit id="AverageTimeDeathFull" translate="yes" xml:space="preserve">
           <source>Average time the player died in seconds after the freezetime ended</source>
-          <target state="new">Average time the player died in seconds after the freezetime ended</target>
+          <target state="new">Durchschnittliche Zeit, in welcher der Spieler in Sekunden gestorben ist, nachdem die Freezetime geendet hat</target>
         </trans-unit>
         <trans-unit id="HeaderAverageTimeDeath" translate="yes" xml:space="preserve">
           <source>ATD (s)</source>
@@ -3565,23 +3566,23 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="HeaderToolTipAverageTimeDeath" translate="yes" xml:space="preserve">
           <source>Average Time Death (seconds)</source>
-          <target state="new">Average Time Death (seconds)</target>
+          <target state="new">Durchschnittliche Zeit Tod (Sekunden)</target>
         </trans-unit>
         <trans-unit id="ToolTipSaveAsPngNoShortcut" translate="yes" xml:space="preserve">
           <source>Save as PNG</source>
-          <target state="new">Save as PNG</target>
+          <target state="new">Als PNG speichern</target>
         </trans-unit>
         <trans-unit id="DialogErrorExportingChart" translate="yes" xml:space="preserve">
           <source>An error occured while exporting the chart.</source>
-          <target state="new">An error occured while exporting the chart.</target>
+          <target state="new">Beim Exportieren des Diagramms ist ein Fehler aufgetreten.</target>
         </trans-unit>
         <trans-unit id="DemoStatusCorrupted" translate="yes" xml:space="preserve">
           <source>Corrupted</source>
-          <target state="new">Corrupted</target>
+          <target state="new">Fehlerhaft</target>
         </trans-unit>
         <trans-unit id="DemoStatusError" translate="yes" xml:space="preserve">
           <source>Error</source>
-          <target state="new">Error</target>
+          <target state="new">Fehler</target>
         </trans-unit>
         <trans-unit id="DemoStatusNone" translate="yes" xml:space="preserve">
           <source>None</source>
@@ -3599,29 +3600,29 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
           <source>The following demos are corrupted:
 {0}
 You may have missing data for this demos.</source>
-          <target state="new">The following demos are corrupted:
+          <target state="new">Die folgenden Demos sind fehlerhaft:
 {0}
-You may have missing data for this demos.</target>
+Es fehlen spezielle Daten für diese Demos.</target>
         </trans-unit>
         <trans-unit id="UseSimpleRadarCheckbox" translate="yes" xml:space="preserve">
           <source>Use Simple Radar overviews</source>
-          <target state="new">Use Simple Radar overviews</target>
+          <target state="new">Benutze Simple Radar als Überblick</target>
         </trans-unit>
         <trans-unit id="SecondsRound" translate="yes" xml:space="preserve">
           <source>Seconds (R)</source>
-          <target state="new">Seconds (R)</target>
+          <target state="new">Sekunden (R)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipSecondsRoundStuffThrown" translate="yes" xml:space="preserve">
           <source>Seconds elapsed since the round's freezetime ended</source>
-          <target state="new">Seconds elapsed since the round's freezetime ended</target>
+          <target state="new">Verstrichene Sekunden seit Ende der Freezetime der Runde</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipSecondsDemoStuffThrown" translate="yes" xml:space="preserve">
           <source>Seconds elapsed since the beginning of the demo</source>
-          <target state="new">Seconds elapsed since the beginning of the demo</target>
+          <target state="new">Verstrichene Sekunden seit dem Beginn der Demo</target>
         </trans-unit>
         <trans-unit id="SecondsDemo" translate="yes" xml:space="preserve">
           <source>Seconds (D)</source>
-          <target state="new">Seconds (D)</target>
+          <target state="new">Sekunde (D)</target>
         </trans-unit>
         <trans-unit id="Decoy" translate="yes" xml:space="preserve">
           <source>Decoy</source>
@@ -3629,7 +3630,7 @@ You may have missing data for this demos.</target>
         </trans-unit>
         <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
           <source>Flashbang</source>
-          <target state="new">Flashbang</target>
+          <target state="new">Blendgranate</target>
         </trans-unit>
         <trans-unit id="HE" translate="yes" xml:space="preserve">
           <source>HE</source>
@@ -3637,7 +3638,7 @@ You may have missing data for this demos.</target>
         </trans-unit>
         <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
           <source>Incendiary</source>
-          <target state="new">Incendiary</target>
+          <target state="new">Brandgranate</target>
         </trans-unit>
         <trans-unit id="Molotov" translate="yes" xml:space="preserve">
           <source>Molotov</source>
@@ -3645,31 +3646,31 @@ You may have missing data for this demos.</target>
         </trans-unit>
         <trans-unit id="FocusOnPlayer" translate="yes" xml:space="preserve">
           <source>Focus on player</source>
-          <target state="new">Focus on player</target>
+          <target state="new">Fokussiere auf Spieler</target>
         </trans-unit>
         <trans-unit id="FocusOnThrower" translate="yes" xml:space="preserve">
           <source>Focus on thrower</source>
-          <target state="new">Focus on thrower</target>
+          <target state="new">Fokussiere auf Werfer</target>
         </trans-unit>
         <trans-unit id="FocusOnVictim" translate="yes" xml:space="preserve">
           <source>Focus on victim</source>
-          <target state="new">Focus on victim</target>
+          <target state="new">Fokussiere auf Opfer</target>
         </trans-unit>
         <trans-unit id="SetTickAsStartTick" translate="yes" xml:space="preserve">
           <source>Set tick {0} as start tick</source>
-          <target state="new">Set tick {0} as start tick</target>
+          <target state="new"> Setze Tick {0} als Anfangstick</target>
         </trans-unit>
         <trans-unit id="AnalyzeForTimeLineWarning" translate="yes" xml:space="preserve">
           <source>You have to analyze the demo first to have the timeline.</source>
-          <target state="new">You have to analyze the demo first to have the timeline.</target>
+          <target state="new">Sie müssen die Demo erst analysieren, um die Timeline zu erhalten.</target>
         </trans-unit>
         <trans-unit id="AutoCloseGameOnRecordEnd" translate="yes" xml:space="preserve">
           <source>Auto close the game when recording is done</source>
-          <target state="new">Auto close the game when recording is done</target>
+          <target state="new">Schließe das Spiel automatisch, nachdem die Aufnahme beendet ist</target>
         </trans-unit>
         <trans-unit id="BombPlantedBy" translate="yes" xml:space="preserve">
           <source>the bomb planted by</source>
-          <target state="new">the bomb planted by</target>
+          <target state="new">die Bombe gelegt von</target>
         </trans-unit>
         <trans-unit id="CFG" translate="yes" xml:space="preserve">
           <source>CFG</source>
@@ -3677,165 +3678,165 @@ You may have missing data for this demos.</target>
         </trans-unit>
         <trans-unit id="Change" translate="yes" xml:space="preserve">
           <source>Change</source>
-          <target state="new">Change</target>
+          <target state="new">Wechseln</target>
         </trans-unit>
         <trans-unit id="ChangeHLAEParentFolderLocation" translate="yes" xml:space="preserve">
           <source>Change HLAE config parent folder location</source>
-          <target state="new">Change HLAE config parent folder location</target>
+          <target state="new">HLAE config Überordner Ort wechseln</target>
         </trans-unit>
         <trans-unit id="CheckingForHLAEUpdate" translate="yes" xml:space="preserve">
           <source>Checking for HLAE update...</source>
-          <target state="new">Checking for HLAE update...</target>
+          <target state="new">Suche nach Update für HLAE...</target>
         </trans-unit>
         <trans-unit id="CSGORecordingInProgress" translate="yes" xml:space="preserve">
           <source>CSGO in-game recording in progress, please wait...</source>
-          <target state="new">CSGO in-game recording in progress, please wait...</target>
+          <target state="new">CSGO in-game Aufnahme am Laufen, bitte warten...</target>
         </trans-unit>
         <trans-unit id="DefusedOnSite" translate="yes" xml:space="preserve">
           <source>defused the bomb on site</source>
-          <target state="new">defused the bomb on site</target>
+          <target state="new">entschärfte die Bombe auf Site</target>
         </trans-unit>
         <trans-unit id="DeleteRawFilesOnEncodeEnd" translate="yes" xml:space="preserve">
           <source>Delete raw files at the end of encoding</source>
-          <target state="new">Delete raw files at the end of encoding</target>
+          <target state="new">Alle Rohdaten nach Ende des Codierens löschen</target>
         </trans-unit>
         <trans-unit id="DialogAmountSpaceRequired" translate="yes" xml:space="preserve">
           <source>You need about {0} GB available on your HDD.
 Do you want to continue?</source>
-          <target state="new">You need about {0} GB available on your HDD.
+          <target state="new">Sie brauchen ungefähr {0} GB auf Ihrer Festplatte.
 Do you want to continue?</target>
         </trans-unit>
         <trans-unit id="DialogEndTickGreaterThanStartTick" translate="yes" xml:space="preserve">
           <source>End tick must be greater than start tick.</source>
-          <target state="new">End tick must be greater than start tick.</target>
+          <target state="new">Endtick muss größer als Anfangstick sein.</target>
         </trans-unit>
         <trans-unit id="DialogErrorInstallingFFmpeg" translate="yes" xml:space="preserve">
           <source>An error occured while installing FFmpeg.
 {0}</source>
-          <target state="new">An error occured while installing FFmpeg.
+          <target state="new">Beim installieren von FFmpeg ist ein Fehler aufgetreten.
 {0}</target>
         </trans-unit>
         <trans-unit id="DialogErrorInstallingHLAE" translate="yes" xml:space="preserve">
           <source>An error occured while installing HLAE.
 {0}</source>
-          <target state="new">An error occured while installing HLAE.
+          <target state="new">Beim installieren von HLAE ist ein Fehler aufgetreten.
 {0}</target>
         </trans-unit>
         <trans-unit id="DialogErrorInstallingVirtualDub" translate="yes" xml:space="preserve">
           <source>An error occured while installing VirtualDub.
 {0}</source>
-          <target state="new">An error occured while installing VirtualDub.
+          <target state="new">Beim Installieren von VirtualDub ist ein Fehler aufgetreten.
 {0}</target>
         </trans-unit>
         <trans-unit id="DialogErrorLoadingData" translate="yes" xml:space="preserve">
           <source>An error occured while loading data.
 {0}</source>
-          <target state="new">An error occured while loading data.
+          <target state="new">Beim Laden der Daten ist ein Fehler aufgetreten.
 {0}</target>
         </trans-unit>
         <trans-unit id="DialogErrorSavingCommentDemo" translate="yes" xml:space="preserve">
           <source>An error occured while saving hte comment of the demo</source>
-          <target state="new">An error occured while saving hte comment of the demo</target>
+          <target state="new">Beim Speichern des hte-Kommentars der Demo ist ein Fehler aufgetreten</target>
         </trans-unit>
         <trans-unit id="DialogErrorUpdatingHLAE" translate="yes" xml:space="preserve">
           <source>An error occured while updating HLAE.
 {0}</source>
-          <target state="new">An error occured while updating HLAE.
+          <target state="new">Beim Aktualisieren von HLAE ist ein Fehler aufgetreten.
 {0}</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
           <source>An error occured while generating the video.
 {0]</source>
-          <target state="new">An error occured while generating the video.
+          <target state="new">Beim Generieren des Videos ist ein Fehler aufgetreten.
 {0]</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has been installed.</source>
-          <target state="new">FFmpeg has been installed.</target>
+          <target state="new">FFmpeg wurde installieren.</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasNotInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has not been installed.</source>
-          <target state="new">FFmpeg has not been installed.</target>
+          <target state="new">FFmpeg wurde nicht installiert.</target>
         </trans-unit>
         <trans-unit id="DialogHLAEHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>HLAE has been installed.</source>
-          <target state="new">HLAE has been installed.</target>
+          <target state="new">HLAE wurde installiert.</target>
         </trans-unit>
         <trans-unit id="DialogHLAEHasBeenUpdated" translate="yes" xml:space="preserve">
           <source>HLAE has been updated.</source>
-          <target state="new">HLAE has been updated.</target>
+          <target state="new">HLAE wurde aktualisiert.</target>
         </trans-unit>
         <trans-unit id="DialogHLAEHasNotBeenInstalled" translate="yes" xml:space="preserve">
           <source>HLAE has not been installed.</source>
-          <target state="new">HLAE has not been installed.</target>
+          <target state="new">HLAE wurde nicht installiert.</target>
         </trans-unit>
         <trans-unit id="DialogHLAEHasNotBeenUpdated" translate="yes" xml:space="preserve">
           <source>HLAE has not been updated.</source>
-          <target state="new">HLAE has not been updated.</target>
+          <target state="new">HLAE wurde nicht aktualisiert.</target>
         </trans-unit>
         <trans-unit id="DialogInstallFFmpegFirst" translate="yes" xml:space="preserve">
           <source>Please install FFmpeg first from FFmpeg section.</source>
-          <target state="new">Please install FFmpeg first from FFmpeg section.</target>
+          <target state="new">Bitte installieren Sie FFmpeg zuerst vom Abschnitt für FFmpeg.</target>
         </trans-unit>
         <trans-unit id="DialogInstallHLAEFirst" translate="yes" xml:space="preserve">
           <source>Please install HLAE first from HLAE section.</source>
-          <target state="new">Please install HLAE first from HLAE section.</target>
+          <target state="new">Bitte installieren Sie HLAE zuerstP vom Abschnitt für HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogInstallVirtuaDubFirst" translate="yes" xml:space="preserve">
           <source>Please install VirtualDub first from VirtualDub section.</source>
-          <target state="new">Please install VirtualDub first from VirtualDub section.</target>
+          <target state="new">Bitte installieren Sie VirtualDub zuerst vom Abschnitt für FFmpeg.</target>
         </trans-unit>
         <trans-unit id="DialogPleaseUpdateHLAE" translate="yes" xml:space="preserve">
           <source>A new HLAE version is available.
 Please update it by clicking on the "Update" button.</source>
-          <target state="new">A new HLAE version is available.
-Please update it by clicking on the "Update" button.</target>
+          <target state="new">Eine neue Version von HLAE ist verfügbar.
+Bitte aktualisieren Sie mit dem Klicken auf den "Update"-Button.</target>
         </trans-unit>
         <trans-unit id="DialogSelectCsgoExeLocation" translate="yes" xml:space="preserve">
           <source>Please select csgo.exe path from HLAE section.</source>
-          <target state="new">Please select csgo.exe path from HLAE section.</target>
+          <target state="new">Bitte wählen Sie den Pfad für csgo.exe im Abschnitt für HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogSelectRawFilesDestination" translate="yes" xml:space="preserve">
           <source>Please select a raw files folder destination.</source>
-          <target state="new">Please select a raw files folder destination.</target>
+          <target state="new">Bitte wählen Sie den Ort des Ordners für Rohdateien.</target>
         </trans-unit>
         <trans-unit id="DialogSelectValidEndTick" translate="yes" xml:space="preserve">
           <source>Please select a valid end tick.</source>
-          <target state="new">Please select a valid end tick.</target>
+          <target state="new">Bitte wählen Sie einen gültigen Endtick.</target>
         </trans-unit>
         <trans-unit id="DialogSelectValidStartTIck" translate="yes" xml:space="preserve">
           <source>Please select a valid start tick.</source>
-          <target state="new">Please select a valid start tick.</target>
+          <target state="new">Bitte wählen Sie einen gültigen Anfangstick.</target>
         </trans-unit>
         <trans-unit id="DialogVirtualDubHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>VirtualDub has been installed.</source>
-          <target state="new">VirtualDub has been installed.</target>
+          <target state="new">VirtualDub wurde installiert.</target>
         </trans-unit>
         <trans-unit id="DialogVirtualDubHasNotBeenInstalled" translate="yes" xml:space="preserve">
           <source>VirtualDub has not been installed.</source>
-          <target state="new">VirtualDub has not been installed.</target>
+          <target state="new">VirtualDub wurde nicht installiert.</target>
         </trans-unit>
         <trans-unit id="ExampleCFG" translate="yes" xml:space="preserve">
           <source>// CFG example with some useful commands
 // You should paste your moviemaking CFG here</source>
-          <target state="new">// CFG example with some useful commands
-// You should paste your moviemaking CFG here</target>
+          <target state="new">// CFG-Beispiel mit nützlichen Commands
+// Sie sollten Ihre Moviemaking-CFG hier einfügen</target>
         </trans-unit>
         <trans-unit id="ExplodedOnSite" translate="yes" xml:space="preserve">
           <source>exploded on site</source>
-          <target state="new">exploded on site</target>
+          <target state="new">auf Site explodiert</target>
         </trans-unit>
         <trans-unit id="FFmpegEncodingInProgress" translate="yes" xml:space="preserve">
           <source>FFmpeg encoding in progress, please wait...</source>
-          <target state="new">FFmpeg encoding in progress, please wait...</target>
+          <target state="new">FFmpeg-Codierung in Arbeit, bitte warten...</target>
         </trans-unit>
         <trans-unit id="FollowingCFGWillBeExecuted" translate="yes" xml:space="preserve">
           <source>The following CFG will be automatically executed:</source>
-          <target state="new">The following CFG will be automatically executed:</target>
+          <target state="new">Die folgende CFG wird automatisch ausgeführt:</target>
         </trans-unit>
         <trans-unit id="FollowingCFGWillBeExecutedOnGameStart" translate="yes" xml:space="preserve">
           <source>The following CFG will be executed when the demo start playing:</source>
-          <target state="new">The following CFG will be executed when the demo start playing:</target>
+          <target state="new">Die folgende CFG wird automatisch ausgeführt wenn die Demo startet:</target>
         </trans-unit>
         <trans-unit id="GB" translate="yes" xml:space="preserve">
           <source>GB</source>
@@ -3843,27 +3844,27 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="GenerateVideoFile" translate="yes" xml:space="preserve">
           <source>Generate video file</source>
-          <target state="new">Generate video file</target>
+          <target state="new">Videodatei generieren</target>
         </trans-unit>
         <trans-unit id="HowManySeconds" translate="yes" xml:space="preserve">
           <source>How many seconds?</source>
-          <target state="new">How many seconds?</target>
+          <target state="new">Wie viele Sekunden?</target>
         </trans-unit>
         <trans-unit id="Install" translate="yes" xml:space="preserve">
           <source>Install</source>
-          <target state="new">Install</target>
+          <target state="new">Installieren</target>
         </trans-unit>
         <trans-unit id="InstallingVirtualDub" translate="yes" xml:space="preserve">
           <source>Installing VirtualDub...</source>
-          <target state="new">Installing VirtualDub...</target>
+          <target state="new">Installiere VirtualDub...</target>
         </trans-unit>
         <trans-unit id="Killed" translate="yes" xml:space="preserve">
           <source>killed</source>
-          <target state="new">killed</target>
+          <target state="new">getötet</target>
         </trans-unit>
         <trans-unit id="LabelAudioBitrate" translate="yes" xml:space="preserve">
           <source>Audio bitrate:</source>
-          <target state="new">Audio bitrate:</target>
+          <target state="new">Audio-Bitrate:</target>
         </trans-unit>
         <trans-unit id="LabelCLI" translate="yes" xml:space="preserve">
           <source>Command-line input:</source>
@@ -3871,19 +3872,19 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="LabelDurationSeconds" translate="yes" xml:space="preserve">
           <source>Duration (seconds):</source>
-          <target state="new">Duration (seconds):</target>
+          <target state="new">Dauer (Sekunden):</target>
         </trans-unit>
         <trans-unit id="LabelEndTick" translate="yes" xml:space="preserve">
           <source>End tick:</source>
-          <target state="new">End tick:</target>
+          <target state="new">Endtick:</target>
         </trans-unit>
         <trans-unit id="LabelExtraInputParams" translate="yes" xml:space="preserve">
           <source>Extra input parameters:</source>
-          <target state="new">Extra input parameters:</target>
+          <target state="new">Zusätzliche Input-Parameter:</target>
         </trans-unit>
         <trans-unit id="LabelExtraParams" translate="yes" xml:space="preserve">
           <source>Extra parameters:</source>
-          <target state="new">Extra parameters:</target>
+          <target state="new">Zusätzliche Parameter:</target>
         </trans-unit>
         <trans-unit id="LabelFramerate" translate="yes" xml:space="preserve">
           <source>Framerate:</source>
@@ -3891,27 +3892,27 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="LabelHeight" translate="yes" xml:space="preserve">
           <source>Height:</source>
-          <target state="new">Height:</target>
+          <target state="new">Höhe:</target>
         </trans-unit>
         <trans-unit id="LabelInstalledVersion" translate="yes" xml:space="preserve">
           <source>Installed version:</source>
-          <target state="new">Installed version:</target>
+          <target state="new">Installierte Version:</target>
         </trans-unit>
         <trans-unit id="LabelOutputDestination" translate="yes" xml:space="preserve">
           <source>Output folder destination:</source>
-          <target state="new">Output folder destination:</target>
+          <target state="new">Ausgabeordner Ort:</target>
         </trans-unit>
         <trans-unit id="LabelOutputFilename" translate="yes" xml:space="preserve">
           <source>Output filename:</source>
-          <target state="new">Output filename:</target>
+          <target state="new">Ausgabedatei Name:</target>
         </trans-unit>
         <trans-unit id="LabelRawFilesFolder" translate="yes" xml:space="preserve">
           <source>Raw files destination folder:</source>
-          <target state="new">Raw files destination folder:</target>
+          <target state="new">Zielordner für Rohdateien:</target>
         </trans-unit>
         <trans-unit id="LabelStartTick" translate="yes" xml:space="preserve">
           <source>Start tick:</source>
-          <target state="new">Start tick:</target>
+          <target state="new">Starttick:</target>
         </trans-unit>
         <trans-unit id="LabelVideoFramerate" translate="yes" xml:space="preserve">
           <source>Video framerate:</source>
@@ -3919,185 +3920,185 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="LabelVideoQuality" translate="yes" xml:space="preserve">
           <source>Video quality:</source>
-          <target state="new">Video quality:</target>
+          <target state="new">Video Qualität:</target>
         </trans-unit>
         <trans-unit id="LabelWidth" translate="yes" xml:space="preserve">
           <source>Width:</source>
-          <target state="new">Width:</target>
+          <target state="new">Breite:</target>
         </trans-unit>
         <trans-unit id="LoadingData" translate="yes" xml:space="preserve">
           <source>Loading data...</source>
-          <target state="new">Loading data...</target>
+          <target state="new">Lade Daten...</target>
         </trans-unit>
         <trans-unit id="OpenFolderOnEncodeEnd" translate="yes" xml:space="preserve">
           <source>Open video in Windows Explorer at the end of encoding</source>
-          <target state="new">Open video in Windows Explorer at the end of encoding</target>
+          <target state="new">Öffne Video im Windows Explorer am Ende des Codierens</target>
         </trans-unit>
         <trans-unit id="PlantedOnSite" translate="yes" xml:space="preserve">
           <source>planted the bomb on site</source>
-          <target state="new">planted the bomb on site</target>
+          <target state="new">legte die Bombe auf Site</target>
         </trans-unit>
         <trans-unit id="RawFilesRequiredSpace" translate="yes" xml:space="preserve">
           <source>Raw files required space:</source>
-          <target state="new">Raw files required space:</target>
+          <target state="new">Benötigter Platz für Rohdaten:</target>
         </trans-unit>
         <trans-unit id="RequiredSpaceNotAvailable" translate="yes" xml:space="preserve">
           <source>Required space calculation is not available with corrupted demos.</source>
-          <target state="new">Required space calculation is not available with corrupted demos.</target>
+          <target state="new">Benötigte Platzberechnung ist nicht mit fehlerhaften Demos verfügbar.</target>
         </trans-unit>
         <trans-unit id="Reset" translate="yes" xml:space="preserve">
           <source>Reset</source>
-          <target state="new">Reset</target>
+          <target state="new">Zurücksetzen</target>
         </trans-unit>
         <trans-unit id="RoundNumber" translate="yes" xml:space="preserve">
           <source>Round #</source>
-          <target state="new">Round #</target>
+          <target state="new">Runde #</target>
         </trans-unit>
         <trans-unit id="SelectFolder" translate="yes" xml:space="preserve">
           <source>Select folder</source>
-          <target state="new">Select folder</target>
+          <target state="new">Ordner auswählen</target>
         </trans-unit>
         <trans-unit id="SetTickAsEndTick" translate="yes" xml:space="preserve">
           <source>Set tick {0} as end tick</source>
-          <target state="new">Set tick {0} as end tick</target>
+          <target state="new">Setze Tick {0} als Endtick</target>
         </trans-unit>
         <trans-unit id="ShowCFG" translate="yes" xml:space="preserve">
           <source>Show CFG</source>
-          <target state="new">Show CFG</target>
+          <target state="new">Zeige CFG</target>
         </trans-unit>
         <trans-unit id="ShowDemoComment" translate="yes" xml:space="preserve">
           <source>Show demo comment</source>
-          <target state="new">Show demo comment</target>
+          <target state="new">Zeige Demokommentar</target>
         </trans-unit>
         <trans-unit id="StartingCSGO" translate="yes" xml:space="preserve">
           <source>Starting CSGO, please wait...</source>
-          <target state="new">Starting CSGO, please wait...</target>
+          <target state="new">Starte CSGO, bitte warten...</target>
         </trans-unit>
         <trans-unit id="StartingHLAE" translate="yes" xml:space="preserve">
           <source>Starting HLAE, please wait...</source>
-          <target state="new">Starting HLAE, please wait...</target>
+          <target state="new">Starte HLAE, bitte warten...</target>
         </trans-unit>
         <trans-unit id="TimeLineNotAvailableWarning" translate="yes" xml:space="preserve">
           <source>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</source>
-          <target state="new">Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</target>
+          <target state="new">Die Timeline ist nicht mit POV oder fehlerhaften Demos verfügbar. Sie müssen die Ticks manuell eingeben. Einen Kommentar zur Demo hinzuzufügen wäre in diesem Fall nützlich.</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToFFmpegFolder" translate="yes" xml:space="preserve">
           <source>Open FFmpeg installation folder in Windows Explorer</source>
-          <target state="new">Open FFmpeg installation folder in Windows Explorer</target>
+          <target state="new">Öffne den Ordner zur Installation von FFmpeg im Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToHLAEFolder" translate="yes" xml:space="preserve">
           <source>Open HLAE installation folder in Window Explorer</source>
-          <target state="new">Open HLAE installation folder in Window Explorer</target>
+          <target state="new">Öffne den Ordner zur Installation von HLAE im Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToOutputDestination" translate="yes" xml:space="preserve">
           <source>Open output folder in Windows Explorer</source>
-          <target state="new">Open output folder in Windows Explorer</target>
+          <target state="new">Öffne Ausgabeordner in Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToRawFilesDestination" translate="yes" xml:space="preserve">
           <source>Open raw files folder in Windows Explorer</source>
-          <target state="new">Open raw files folder in Windows Explorer</target>
+          <target state="new">Öffne Ordner für Rohdateien im Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipBrowseToVirtualDubFolder" translate="yes" xml:space="preserve">
           <source>Open VirtualDub installation folder in Window Explorer</source>
-          <target state="new">Open VirtualDub installation folder in Window Explorer</target>
+          <target state="new">Öffne den Ordner zur Installation von VirtualDub im Windows Explorer</target>
         </trans-unit>
         <trans-unit id="ToolTipChangeOutputDestination" translate="yes" xml:space="preserve">
           <source>Change output folder destination</source>
-          <target state="new">Change output folder destination</target>
+          <target state="new">Wechsle Ort des Ausgabeordners</target>
         </trans-unit>
         <trans-unit id="ToolTipChangeRawFilesDestination" translate="yes" xml:space="preserve">
           <source>Change raw files folder destination</source>
-          <target state="new">Change raw files folder destination</target>
+          <target state="new">Wechsle Ort des Ordners für Rohdateien</target>
         </trans-unit>
         <trans-unit id="ToolTipGenerateMovie" translate="yes" xml:space="preserve">
           <source>Start movie generation</source>
-          <target state="new">Start movie generation</target>
+          <target state="new">Starte generieren des Films</target>
         </trans-unit>
         <trans-unit id="ToolTipInstallFFmpeg" translate="yes" xml:space="preserve">
           <source>Install FFmpeg</source>
-          <target state="new">Install FFmpeg</target>
+          <target state="new">Installiere FFmpeg</target>
         </trans-unit>
         <trans-unit id="ToolTipInstallHLAE" translate="yes" xml:space="preserve">
           <source>Install HLAE</source>
-          <target state="new">Install HLAE</target>
+          <target state="new">Installiere HLAE</target>
         </trans-unit>
         <trans-unit id="ToolTipInstallVirtualDub" translate="yes" xml:space="preserve">
           <source>Install VirtualDub</source>
-          <target state="new">Install VirtualDub</target>
+          <target state="new">Installiere VirtualDub</target>
         </trans-unit>
         <trans-unit id="ToolTipResetCFG" translate="yes" xml:space="preserve">
           <source>Reset CFG to default</source>
-          <target state="new">Reset CFG to default</target>
+          <target state="new">Setze CFG auf Standard zurück</target>
         </trans-unit>
         <trans-unit id="ToolTipSelectCsgoExeLocation" translate="yes" xml:space="preserve">
           <source>Change csgo.exe location</source>
-          <target state="new">Change csgo.exe location</target>
+          <target state="new">Wechsle Ort von csgo.exe</target>
         </trans-unit>
         <trans-unit id="ToolTipSwitchBetweenFFmpegVirtualDub" translate="yes" xml:space="preserve">
           <source>Switch between VirtualDub / FFmpeg</source>
-          <target state="new">Switch between VirtualDub / FFmpeg</target>
+          <target state="new">Wechsle zwischen VirtualDub / FFmpeg</target>
         </trans-unit>
         <trans-unit id="ToolTipToggleDemoComment" translate="yes" xml:space="preserve">
           <source>Toggle demo's comment (CTRL+T)</source>
-          <target state="new">Toggle demo's comment (CTRL+T)</target>
+          <target state="new">Kommentar der Demo umschalten (STRG+T)</target>
         </trans-unit>
         <trans-unit id="ToolTipUpdateHLAE" translate="yes" xml:space="preserve">
           <source>Update HLAE</source>
-          <target state="new">Update HLAE</target>
+          <target state="new">HLAE aktualisieren</target>
         </trans-unit>
         <trans-unit id="ValidNumberRequired" translate="yes" xml:space="preserve">
           <source>A valid number is required.</source>
-          <target state="new">A valid number is required.</target>
+          <target state="new">Eine gültige Nummer ist benötigt.</target>
         </trans-unit>
         <trans-unit id="VirtualDubEncodingInProgress" translate="yes" xml:space="preserve">
           <source>VirtualDub encoding in progress, please wait...</source>
-          <target state="new">VirtualDub encoding in progress, please wait...</target>
+          <target state="new">VirtualDub-Codierung ist in Arbeit, bitte warten...</target>
         </trans-unit>
         <trans-unit id="With" translate="yes" xml:space="preserve">
           <source>with</source>
-          <target state="new">with</target>
+          <target state="new">mit</target>
         </trans-unit>
         <trans-unit id="ContextMenuTimeLineSetEventTickAsEndTick" translate="yes" xml:space="preserve">
           <source>Set the tick {0} as end tick</source>
-          <target state="new">Set the tick {0} as end tick</target>
+          <target state="new">Setze Tick {0} als Endtick</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" as end tick</note>
         </trans-unit>
         <trans-unit id="ContextMenuTimeLineSetEventTickAsStartTick" translate="yes" xml:space="preserve">
           <source>Set the tick {0} as start tick</source>
-          <target state="new">Set the tick {0} as start tick</target>
+          <target state="new">Setze Tick {0} als Starttick</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" as start tick</note>
         </trans-unit>
         <trans-unit id="ContextMenuTimeLineSetEventTickMinusAsEndTick" translate="yes" xml:space="preserve">
           <source>Set the tick {0} minus x seconds as end tick</source>
-          <target state="new">Set the tick {0} minus x seconds as end tick</target>
+          <target state="new">Setze Tick {0} minus x Sekunden als Endtick</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" minus x seconds as end tick</note>
         </trans-unit>
         <trans-unit id="ContextMenuTimeLineSetEventTickMinusAsStartTick" translate="yes" xml:space="preserve">
           <source>Set the tick {0} minus x seconds as start tick</source>
-          <target state="new">Set the tick {0} minus x seconds as start tick</target>
+          <target state="new">Setze Tick {0} minus x Sekunden als Starttick</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" minus x seconds as start tick</note>
         </trans-unit>
         <trans-unit id="ContextMenuTimeLineSetEventTickPlusAsEndTick" translate="yes" xml:space="preserve">
           <source>Set the tick {0} plus x seconds as end tick</source>
-          <target state="new">Set the tick {0} plus x seconds as end tick</target>
+          <target state="new">Setze Tick {0} plus x Sekunden als Endtick</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" plus x seconds as end tick</note>
         </trans-unit>
         <trans-unit id="ContextMenuTimeLineSetEventTickPlusAsStartTick" translate="yes" xml:space="preserve">
           <source>Set the tick {0} plus x seconds as start tick</source>
-          <target state="new">Set the tick {0} plus x seconds as start tick</target>
+          <target state="new">Setze Tick {0} plus x Sekunden als Starttick</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Set the tick "of the flash" plus x seconds as start tick</note>
         </trans-unit>
         <trans-unit id="FocusOnDefuser" translate="yes" xml:space="preserve">
           <source>Focus on defuser</source>
-          <target state="new">Focus on defuser</target>
+          <target state="new">Fokussiere auf Entschärfer</target>
         </trans-unit>
         <trans-unit id="FocusOnPlanter" translate="yes" xml:space="preserve">
           <source>Focus on planter</source>
-          <target state="new">Focus on planter</target>
+          <target state="new">Fokussiere auf Leger</target>
         </trans-unit>
         <trans-unit id="FocusOnKiller" translate="yes" xml:space="preserve">
           <source>Focus on killer</source>
-          <target state="new">Focus on killer</target>
+          <target state="new">Fokussiere auf Killer</target>
         </trans-unit>
         <trans-unit id="Movie" translate="yes" xml:space="preserve">
           <source>Movie</source>
@@ -4105,39 +4106,39 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="ToolTipMovie" translate="yes" xml:space="preserve">
           <source>Go to movie generator</source>
-          <target state="new">Go to movie generator</target>
+          <target state="new">Gehe zum Filmgenerator</target>
         </trans-unit>
         <trans-unit id="Adecoy" translate="yes" xml:space="preserve">
           <source>a decoy</source>
-          <target state="new">a decoy</target>
+          <target state="new">eine Ködergranate</target>
         </trans-unit>
         <trans-unit id="AFlashbang" translate="yes" xml:space="preserve">
           <source>a flashbang</source>
-          <target state="new">a flashbang</target>
+          <target state="new">eine Blendgranate</target>
         </trans-unit>
         <trans-unit id="AMolotov" translate="yes" xml:space="preserve">
           <source>a molotov</source>
-          <target state="new">a molotov</target>
+          <target state="new">ein Molotov</target>
         </trans-unit>
         <trans-unit id="AnHE" translate="yes" xml:space="preserve">
           <source>an HE</source>
-          <target state="new">an HE</target>
+          <target state="new">eine HE</target>
         </trans-unit>
         <trans-unit id="AnIncendiary" translate="yes" xml:space="preserve">
           <source>an incendiary</source>
-          <target state="new">an incendiary</target>
+          <target state="new">eine Brandgranate</target>
         </trans-unit>
         <trans-unit id="Asmoke" translate="yes" xml:space="preserve">
           <source>a smoke</source>
-          <target state="new">a smoke</target>
+          <target state="new">eine Smoke</target>
         </trans-unit>
         <trans-unit id="Thrown" translate="yes" xml:space="preserve">
           <source>thrown</source>
-          <target state="new">thrown</target>
+          <target state="new">geworfen</target>
         </trans-unit>
         <trans-unit id="ToolTipShowCFG" translate="yes" xml:space="preserve">
           <source>Show CFG</source>
-          <target state="new">Show CFG</target>
+          <target state="new">Zeige CFG</target>
         </trans-unit>
         <trans-unit id="Website" translate="yes" xml:space="preserve">
           <source>Website</source>
@@ -4145,15 +4146,15 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="DialogNoHLAEUpdateAvailable" translate="yes" xml:space="preserve">
           <source>No HLAE update available.</source>
-          <target state="new">No HLAE update available.</target>
+          <target state="new">Keine Aktualisierung für HLAE verfügbar.</target>
         </trans-unit>
         <trans-unit id="NotificationInstallingFFmpeg" translate="yes" xml:space="preserve">
           <source>Installing FFmpeg...</source>
-          <target state="new">Installing FFmpeg...</target>
+          <target state="new">Installiere FFmpeg...</target>
         </trans-unit>
         <trans-unit id="CreditsTools" translate="yes" xml:space="preserve">
           <source>CSGO Demos Manager uses internally the following tools:</source>
-          <target state="new">CSGO Demos Manager uses internally the following tools:</target>
+          <target state="new">CSGO Demos Manager benutzt intern folgende Tools:</target>
         </trans-unit>
         <trans-unit id="Tools" translate="yes" xml:space="preserve">
           <source>Tools</source>
@@ -4161,15 +4162,55 @@ Please update it by clicking on the "Update" button.</target>
         </trans-unit>
         <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
           <source>Steam must be running.</source>
-          <target state="new">Steam must be running.</target>
+          <target state="new">Steam muss laufen.</target>
         </trans-unit>
         <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
           <source>See documentation on the website</source>
-          <target state="new">See documentation on the website</target>
+          <target state="new">Siehe Dokumentation auf der Website</target>
         </trans-unit>
         <trans-unit id="Markers" translate="yes" xml:space="preserve">
           <source>Markers</source>
-          <target state="new">Markers</target>
+          <target state="new">Markierungen</target>
+        </trans-unit>
+        <trans-unit id="Actions" translate="yes" xml:space="preserve">
+          <source>Actions</source>
+          <target state="new">Aktionen</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuDisplayKillsOnyForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills only for this player</source>
+          <target state="new">Zeige nur Kills für diesen Spieler</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuHighlightKillsOnlyForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills only for this player</source>
+          <target state="new">Highlighte nur Kills für diesen Spieler</target>
+        </trans-unit>
+        <trans-unit id="CopySteamID" translate="yes" xml:space="preserve">
+          <source>Copy SteamID</source>
+          <target state="new">Kopiere SteamID</target>
+        </trans-unit>
+        <trans-unit id="DeathNoticesOptions" translate="yes" xml:space="preserve">
+          <source>Death notices options</source>
+          <target state="new">Optionen für Todesanzeigen</target>
+        </trans-unit>
+        <trans-unit id="DisplayKills" translate="yes" xml:space="preserve">
+          <source>Display kills</source>
+          <target state="new">Zeige Kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolDisplayKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills for this player on death notices</source>
+          <target state="new">Zeige Kills für diesen Spieler auf Todesanzeigen</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHighlightKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills for this player on death notices</source>
+          <target state="new">Highlighte Kills für diesen Spieler auf Todesanzeigen</target>
+        </trans-unit>
+        <trans-unit id="HighlightKills" translate="yes" xml:space="preserve">
+          <source>Highlight kills</source>
+          <target state="new">Highlighte Kills</target>
+        </trans-unit>
+        <trans-unit id="LabelDisplayTimeSeconds" translate="yes" xml:space="preserve">
+          <source>Display time (seconds):</source>
+          <target state="new">Zeige Zeit an (Sekunden):</target>
         </trans-unit>
       </group>
     </body>

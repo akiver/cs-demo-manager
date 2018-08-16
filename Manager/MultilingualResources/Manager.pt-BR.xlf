@@ -171,7 +171,7 @@
         </trans-unit>
         <trans-unit id="BombDefused" translate="yes" xml:space="preserve">
           <source>Bomb defused</source>
-          <target state="final">Bomda desarmada</target>
+          <target state="final">Bomba desarmada</target>
         </trans-unit>
         <trans-unit id="BombExploded" translate="yes" xml:space="preserve">
           <source>Bomb exploded</source>
@@ -233,7 +233,7 @@
         </trans-unit>
         <trans-unit id="CrouchKills" translate="yes" xml:space="preserve">
           <source>Crouch kills</source>
-          <target state="final">Mortes agachado</target>
+          <target state="final">Vítimas agachado</target>
         </trans-unit>
         <trans-unit id="CsgoExePath" translate="yes" xml:space="preserve">
           <source>csgo.exe path</source>
@@ -306,7 +306,7 @@
         </trans-unit>
         <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
           <source>Entry kills</source>
-          <target state="final">Mortes de entrada</target>
+          <target state="final">Vítimas de entrada</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipment value CT</source>
@@ -377,12 +377,12 @@
         </trans-unit>
         <trans-unit id="HeaderJumpKills" translate="yes" xml:space="preserve">
           <source>JK</source>
-          <target state="final">MP (Mortes pulando)</target>
+          <target state="final">VP (Vítimas pulando)</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Jump Kill</note>
         </trans-unit>
         <trans-unit id="JumpKills" translate="yes" xml:space="preserve">
           <source>Jump kills</source>
-          <target state="final">Mortes pulando</target>
+          <target state="final">Vítimas pulando</target>
         </trans-unit>
         <trans-unit id="HeaderKillDeathRatio" translate="yes" xml:space="preserve">
           <source>K/D</source>
@@ -391,7 +391,7 @@
         </trans-unit>
         <trans-unit id="Kills" translate="yes" xml:space="preserve">
           <source>Kills</source>
-          <target state="final">Mortes</target>
+          <target state="final">Vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderKillsPerRound" translate="yes" xml:space="preserve">
           <source>KPR</source>
@@ -592,7 +592,7 @@
         </trans-unit>
         <trans-unit id="TotalKills" translate="yes" xml:space="preserve">
           <source>Total kills</source>
-          <target state="final">Total de mortes</target>
+          <target state="final">Total de vítimas</target>
         </trans-unit>
         <trans-unit id="ToWatch" translate="yes" xml:space="preserve">
           <source>To watch</source>
@@ -833,7 +833,7 @@
         </trans-unit>
         <trans-unit id="ToolTipKillsDetails" translate="yes" xml:space="preserve">
           <source>Kills details (CTRL+K)</source>
-          <target state="final">Detalhes das mortes (CTRL+K)</target>
+          <target state="final">Detalhes das vítimas (CTRL+K)</target>
         </trans-unit>
         <trans-unit id="ToolTipNextDemo" translate="yes" xml:space="preserve">
           <source>Next demo (CTRL+RIGHT)</source>
@@ -1008,7 +1008,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipCrouchKills" translate="yes" xml:space="preserve">
           <source>Crouch kills</source>
-          <target state="final">Mortes agaxado</target>
+          <target state="final">Vítimas agaxado</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipDaysSinceLastBan" translate="yes" xml:space="preserve">
           <source>Days Since Last Ban</source>
@@ -1080,11 +1080,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
-          <target state="final">5 Mortes</target>
+          <target state="final">5 Vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipFourKill" translate="yes" xml:space="preserve">
           <source>4 Kills</source>
-          <target state="final">4 Mortes</target>
+          <target state="final">4 Vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipHasVacOwBan" translate="yes" xml:space="preserve">
           <source>VAC / OW ban?</source>
@@ -1124,7 +1124,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipJumpKills" translate="yes" xml:space="preserve">
           <source>Jump Kills</source>
-          <target state="final">Mortes pulando</target>
+          <target state="final">Vítimas pulando</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKillerName" translate="yes" xml:space="preserve">
           <source>Killer Name</source>
@@ -1136,15 +1136,15 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipKillPerRound" translate="yes" xml:space="preserve">
           <source>Kill Per Round</source>
-          <target state="final">Mortes Por Rodada</target>
+          <target state="final">Vítimas Por Rodada</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKills" translate="yes" xml:space="preserve">
           <source>Kills</source>
-          <target state="final">Mortes</target>
+          <target state="final">Vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKillsPerDeaths" translate="yes" xml:space="preserve">
           <source>Kills Per Deaths</source>
-          <target state="final">Assasinados por mortes</target>
+          <target state="final">Vítimas por mortes</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
           <source>Last online</source>
@@ -1308,7 +1308,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
           <source>3 Kills</source>
-          <target state="final">3 mortes</target>
+          <target state="final">3 vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipThrowerName" translate="yes" xml:space="preserve">
           <source>Thrower Name</source>
@@ -1328,7 +1328,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipTotalEntryKill" translate="yes" xml:space="preserve">
           <source>Total Entry Kill</source>
-          <target state="final">Total de mortes de entrada</target>
+          <target state="final">Total de vítimas de entrada</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTradeDeath" translate="yes" xml:space="preserve">
           <source>Trade death</source>
@@ -1344,7 +1344,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipTwoKill" translate="yes" xml:space="preserve">
           <source>2 Kills</source>
-          <target state="final">2 Mortes</target>
+          <target state="final">2 Vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipVacBanCount" translate="yes" xml:space="preserve">
           <source>Number of VAC ban</source>
@@ -1460,7 +1460,7 @@
         </trans-unit>
         <trans-unit id="CrouchKillsFull" translate="yes" xml:space="preserve">
           <source>CK (Crouch Kills)</source>
-          <target state="final">MA (Mortes agaxado)</target>
+          <target state="final">VA (Vítimas agachado)</target>
         </trans-unit>
         <trans-unit id="DeathsFull" translate="yes" xml:space="preserve">
           <source>D (Deaths)</source>
@@ -1468,7 +1468,7 @@
         </trans-unit>
         <trans-unit id="EntryKillsFull" translate="yes" xml:space="preserve">
           <source>EK (Entry Kills)</source>
-          <target state="final">ME (Mortes de entrada)</target>
+          <target state="final">VE (Vítimas de entrada)</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
           <source>EV CT (Equipment Value CT ($))</source>
@@ -1504,11 +1504,11 @@
         </trans-unit>
         <trans-unit id="JumpKillsFull" translate="yes" xml:space="preserve">
           <source>JK (Jump Kills)</source>
-          <target state="final">MP (Mortes pulando)</target>
+          <target state="final">VP (Vítimas pulando)</target>
         </trans-unit>
         <trans-unit id="KillsDeathsRatioFull" translate="yes" xml:space="preserve">
           <source>K/D (Kills per Deaths)</source>
-          <target state="final">K/D (Matados / Mortes)</target>
+          <target state="final">K/D (Vítimas / )</target>
         </trans-unit>
         <trans-unit id="KillsFull" translate="yes" xml:space="preserve">
           <source>K (Kills)</source>
@@ -1592,11 +1592,11 @@
         </trans-unit>
         <trans-unit id="TradeDeathsFull" translate="yes" xml:space="preserve">
           <source>TD (Trade Deaths)</source>
-          <target state="final">TD (Troca de mortes)</target>
+          <target state="final">TD (Troca de )</target>
         </trans-unit>
         <trans-unit id="TradeKillsFull" translate="yes" xml:space="preserve">
           <source>TK (Trade Kills)</source>
-          <target state="final">TK (Troca de mortes)</target>
+          <target state="final">TK (Troca de vítimas)</target>
         </trans-unit>
         <trans-unit id="WatchPlayer" translate="yes" xml:space="preserve">
           <source>Watch player</source>
@@ -1752,7 +1752,7 @@
         </trans-unit>
         <trans-unit id="EntryHoldKills" translate="yes" xml:space="preserve">
           <source>Entry hold kills</source>
-          <target state="final">Mortes de entrada em aguardo</target>
+          <target state="final">Vítimas de entrada em aguardo</target>
         </trans-unit>
         <trans-unit id="EntryHoldKillsDescription" translate="yes" xml:space="preserve">
           <source>(First kill as CT)</source>
@@ -1989,11 +1989,11 @@
         </trans-unit>
         <trans-unit id="CrouchKillPercent" translate="yes" xml:space="preserve">
           <source>Crouch kill %</source>
-          <target state="final">Mortes agachado %</target>
+          <target state="final">Vítimas agachado %</target>
         </trans-unit>
         <trans-unit id="CrouchKillPercentPerMatch" translate="yes" xml:space="preserve">
           <source>Crouch kill % per match</source>
-          <target state="final">Mortes agachado % por partida</target>
+          <target state="final">Vítimas agachado % por partida</target>
         </trans-unit>
         <trans-unit id="DamagePerGameValue" translate="yes" xml:space="preserve">
           <source>Damage per game value</source>
@@ -2037,11 +2037,11 @@
         </trans-unit>
         <trans-unit id="KillAverage" translate="yes" xml:space="preserve">
           <source>Kill average</source>
-          <target state="final">Média de mortes</target>
+          <target state="final">Média de vítimas</target>
         </trans-unit>
         <trans-unit id="KillVelocity" translate="yes" xml:space="preserve">
           <source>Kill velocity</source>
-          <target state="final">Velocidade de mortes</target>
+          <target state="final">Velocidade de vítimas</target>
         </trans-unit>
         <trans-unit id="HeaderKnifeKills" translate="yes" xml:space="preserve">
           <source>KK</source>
@@ -2633,7 +2633,7 @@ Você pode encontrar mais informações sobre em {1}.</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>
-          <target state="final">Mortes na faca</target>
+          <target state="final">Vítimas na faca</target>
         </trans-unit>
         <trans-unit id="HeadshotsPercent" translate="yes" xml:space="preserve">
           <source>Headshots %</source>
@@ -2653,7 +2653,7 @@ Você pode encontrar mais informações sobre em {1}.</target>
         </trans-unit>
         <trans-unit id="LogOnlyKills" translate="yes" xml:space="preserve">
           <source>Log only kills</source>
-          <target state="final">Somente Log de mortes</target>
+          <target state="final">Somente Log de vítimas</target>
         </trans-unit>
         <trans-unit id="NotificationGeneratingData" translate="yes" xml:space="preserve">
           <source>Generating data...</source>
@@ -3159,7 +3159,7 @@ Jogadores listados abaixo não serão verificados por ban enquando se analisar u
         </trans-unit>
         <trans-unit id="KillsPerRoundFull" translate="yes" xml:space="preserve">
           <source>KPR (Kills Per Round)</source>
-          <target state="final">MPR (Mortes Por Rodada)</target>
+          <target state="final">VPR (Vítimas Por Rodada)</target>
         </trans-unit>
         <trans-unit id="LeftArm" translate="yes" xml:space="preserve">
           <source>Left arm</source>
@@ -4170,6 +4170,46 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="Markers" translate="yes" xml:space="preserve">
           <source>Markers</source>
           <target state="new">Markers</target>
+        </trans-unit>
+        <trans-unit id="Actions" translate="yes" xml:space="preserve">
+          <source>Actions</source>
+          <target state="new">Actions</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuDisplayKillsOnyForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills only for this player</source>
+          <target state="new">Display kills only for this player</target>
+        </trans-unit>
+        <trans-unit id="ContextMenuHighlightKillsOnlyForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills only for this player</source>
+          <target state="new">Highlight kills only for this player</target>
+        </trans-unit>
+        <trans-unit id="CopySteamID" translate="yes" xml:space="preserve">
+          <source>Copy SteamID</source>
+          <target state="new">Copy SteamID</target>
+        </trans-unit>
+        <trans-unit id="DeathNoticesOptions" translate="yes" xml:space="preserve">
+          <source>Death notices options</source>
+          <target state="new">Death notices options</target>
+        </trans-unit>
+        <trans-unit id="DisplayKills" translate="yes" xml:space="preserve">
+          <source>Display kills</source>
+          <target state="new">Display kills</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolDisplayKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Display kills for this player on death notices</source>
+          <target state="new">Display kills for this player on death notices</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipHighlightKillsForPlayer" translate="yes" xml:space="preserve">
+          <source>Highlight kills for this player on death notices</source>
+          <target state="new">Highlight kills for this player on death notices</target>
+        </trans-unit>
+        <trans-unit id="HighlightKills" translate="yes" xml:space="preserve">
+          <source>Highlight kills</source>
+          <target state="new">Highlight kills</target>
+        </trans-unit>
+        <trans-unit id="LabelDisplayTimeSeconds" translate="yes" xml:space="preserve">
+          <source>Display time (seconds):</source>
+          <target state="new">Display time (seconds):</target>
         </trans-unit>
       </group>
     </body>

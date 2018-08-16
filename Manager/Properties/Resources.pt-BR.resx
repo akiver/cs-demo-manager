@@ -130,7 +130,7 @@
     <comment>Bomb Exploded</comment>
   </data>
   <data name="BombDefused" xml:space="preserve">
-    <value>Bomda desarmada</value>
+    <value>Bomba desarmada</value>
   </data>
   <data name="BombExploded" xml:space="preserve">
     <value>Bomba explodiu</value>
@@ -177,7 +177,7 @@
     <value>Comentário</value>
   </data>
   <data name="CrouchKills" xml:space="preserve">
-    <value>Mortes agachado</value>
+    <value>Vítimas agachado</value>
   </data>
   <data name="CsgoExePath" xml:space="preserve">
     <value>Caminho csgo.exe</value>
@@ -232,7 +232,7 @@
     <value>email</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
-    <value>Mortes de entrada</value>
+    <value>Vítimas de entrada</value>
   </data>
   <data name="EquipmentValueTeam1" xml:space="preserve">
     <value>Valor do equipamento CT</value>
@@ -286,18 +286,18 @@
     <value>Importar dados customizados</value>
   </data>
   <data name="HeaderJumpKills" xml:space="preserve">
-    <value>MP (Mortes pulando)</value>
+    <value>VP (Vítimas pulando)</value>
     <comment>Jump Kill</comment>
   </data>
   <data name="JumpKills" xml:space="preserve">
-    <value>Mortes pulando</value>
+    <value>Vítimas pulando</value>
   </data>
   <data name="HeaderKillDeathRatio" xml:space="preserve">
     <value>K/D</value>
     <comment>Kills Per Deaths</comment>
   </data>
   <data name="Kills" xml:space="preserve">
-    <value>Mortes</value>
+    <value>Vítimas</value>
   </data>
   <data name="HeaderKillsPerRound" xml:space="preserve">
     <value>MPR</value>
@@ -450,7 +450,7 @@
     <value>Total de dano</value>
   </data>
   <data name="TotalKills" xml:space="preserve">
-    <value>Total de mortes</value>
+    <value>Total de vítimas</value>
   </data>
   <data name="ToWatch" xml:space="preserve">
     <value>Para assistir</value>
@@ -631,7 +631,7 @@
     <value>Geradar mapa de calor (CTRL+H)</value>
   </data>
   <data name="ToolTipKillsDetails" xml:space="preserve">
-    <value>Detalhes das mortes (CTRL+K)</value>
+    <value>Detalhes das vítimas (CTRL+K)</value>
   </data>
   <data name="ToolTipNextDemo" xml:space="preserve">
     <value>Proxima demo (CTRL+RIGHT)</value>
@@ -765,7 +765,7 @@
     <value>Perfil de comunidade configurado</value>
   </data>
   <data name="HeaderToolTipCrouchKills" xml:space="preserve">
-    <value>Mortes agaxado</value>
+    <value>Vítimas agaxado</value>
   </data>
   <data name="HeaderToolTipDaysSinceLastBan" xml:space="preserve">
     <value>Dias desde o ultimo ban</value>
@@ -819,10 +819,10 @@
     <value>Valor do equipamento T ($)</value>
   </data>
   <data name="HeaderToolTipFiveKill" xml:space="preserve">
-    <value>5 Mortes</value>
+    <value>5 Vítimas</value>
   </data>
   <data name="HeaderToolTipFourKill" xml:space="preserve">
-    <value>4 Mortes</value>
+    <value>4 Vítimas</value>
   </data>
   <data name="HeaderToolTipHasVacOwBan" xml:space="preserve">
     <value>VAC / OW ban?</value>
@@ -852,7 +852,7 @@
     <value>Banido via VAC?</value>
   </data>
   <data name="HeaderToolTipJumpKills" xml:space="preserve">
-    <value>Mortes pulando</value>
+    <value>Vítimas pulando</value>
   </data>
   <data name="HeaderToolTipKillerName" xml:space="preserve">
     <value>Nome do assasino</value>
@@ -861,13 +861,13 @@
     <value>Lado do assasino</value>
   </data>
   <data name="HeaderToolTipKillPerRound" xml:space="preserve">
-    <value>Mortes Por Rodada</value>
+    <value>Vítimas Por Rodada</value>
   </data>
   <data name="HeaderToolTipKills" xml:space="preserve">
-    <value>Mortes</value>
+    <value>Vítimas</value>
   </data>
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
-    <value>Assasinados por mortes</value>
+    <value>Vítimas por mortes</value>
   </data>
   <data name="HeaderToolTipLastConnexion" xml:space="preserve">
     <value>Último online</value>
@@ -990,7 +990,7 @@
     <value>Nome da equime em eco / compra forçada ou semi-eco</value>
   </data>
   <data name="HeaderToolTipThreeKill" xml:space="preserve">
-    <value>3 mortes</value>
+    <value>3 vítimas</value>
   </data>
   <data name="HeaderToolTipThrowerName" xml:space="preserve">
     <value>Nome do atirador</value>
@@ -1005,7 +1005,7 @@
     <value>Total de dano recebido</value>
   </data>
   <data name="HeaderToolTipTotalEntryKill" xml:space="preserve">
-    <value>Total de mortes de entrada</value>
+    <value>Total de vítimas de entrada</value>
   </data>
   <data name="HeaderToolTipTradeDeath" xml:space="preserve">
     <value>Troca de morte</value>
@@ -1017,7 +1017,7 @@
     <value>Troca de morte / Morte</value>
   </data>
   <data name="HeaderToolTipTwoKill" xml:space="preserve">
-    <value>2 Mortes</value>
+    <value>2 Vítimas</value>
   </data>
   <data name="HeaderToolTipVacBanCount" xml:space="preserve">
     <value>Numero de bans VAC</value>
@@ -1105,13 +1105,13 @@
     <value>Copiar comando de playdemo</value>
   </data>
   <data name="CrouchKillsFull" xml:space="preserve">
-    <value>MA (Mortes agaxado)</value>
+    <value>VA (Vítimas agachado)</value>
   </data>
   <data name="DeathsFull" xml:space="preserve">
     <value>D (Mortes)</value>
   </data>
   <data name="EntryKillsFull" xml:space="preserve">
-    <value>ME (Mortes de entrada)</value>
+    <value>VE (Vítimas de entrada)</value>
   </data>
   <data name="EquipmentValueTeam1Full" xml:space="preserve">
     <value>EV CT (Valor do equipamento CT ($))</value>
@@ -1138,10 +1138,10 @@
     <value>HLTV (HLTV Rating)</value>
   </data>
   <data name="JumpKillsFull" xml:space="preserve">
-    <value>MP (Mortes pulando)</value>
+    <value>VP (Vítimas pulando)</value>
   </data>
   <data name="KillsDeathsRatioFull" xml:space="preserve">
-    <value>K/D (Matados / Mortes)</value>
+    <value>K/D (Vítimas / )</value>
   </data>
   <data name="KillsFull" xml:space="preserve">
     <value>K (Kills)</value>
@@ -1204,10 +1204,10 @@
     <value>TDH (Total de dano recebido)</value>
   </data>
   <data name="TradeDeathsFull" xml:space="preserve">
-    <value>TD (Troca de mortes)</value>
+    <value>TD (Troca de )</value>
   </data>
   <data name="TradeKillsFull" xml:space="preserve">
-    <value>TK (Troca de mortes)</value>
+    <value>TK (Troca de vítimas)</value>
   </data>
   <data name="WatchPlayer" xml:space="preserve">
     <value>Assistir jogador</value>
@@ -1324,7 +1324,7 @@
     <value>Danmo por rodada</value>
   </data>
   <data name="EntryHoldKills" xml:space="preserve">
-    <value>Mortes de entrada em aguardo</value>
+    <value>Vítimas de entrada em aguardo</value>
   </data>
   <data name="EntryHoldKillsDescription" xml:space="preserve">
     <value>(Primeira morte com CT)</value>
@@ -1502,10 +1502,10 @@
     <value>Valor médio</value>
   </data>
   <data name="CrouchKillPercent" xml:space="preserve">
-    <value>Mortes agachado %</value>
+    <value>Vítimas agachado %</value>
   </data>
   <data name="CrouchKillPercentPerMatch" xml:space="preserve">
-    <value>Mortes agachado % por partida</value>
+    <value>Vítimas agachado % por partida</value>
   </data>
   <data name="DamagePerGameValue" xml:space="preserve">
     <value>Valor de dano por jogo</value>
@@ -1538,10 +1538,10 @@
     <value>Matar</value>
   </data>
   <data name="KillAverage" xml:space="preserve">
-    <value>Média de mortes</value>
+    <value>Média de vítimas</value>
   </data>
   <data name="KillVelocity" xml:space="preserve">
-    <value>Velocidade de mortes</value>
+    <value>Velocidade de vítimas</value>
   </data>
   <data name="HeaderKnifeKills" xml:space="preserve">
     <value>KK</value>
@@ -1982,7 +1982,7 @@ Você pode encontrar mais informações sobre em {1}.</value>
     <value>Equipamento</value>
   </data>
   <data name="HeaderToolTipKnifeKills" xml:space="preserve">
-    <value>Mortes na faca</value>
+    <value>Vítimas na faca</value>
   </data>
   <data name="HeadshotsPercent" xml:space="preserve">
     <value>Headshots %</value>
@@ -1997,7 +1997,7 @@ Você pode encontrar mais informações sobre em {1}.</value>
     <value>Volume</value>
   </data>
   <data name="LogOnlyKills" xml:space="preserve">
-    <value>Somente Log de mortes</value>
+    <value>Somente Log de vítimas</value>
   </data>
   <data name="NotificationGeneratingData" xml:space="preserve">
     <value>Gerando dados...</value>
@@ -2374,7 +2374,7 @@ Jogadores listados abaixo não serão verificados por ban enquando se analisar u
     <value>Atirador</value>
   </data>
   <data name="KillsPerRoundFull" xml:space="preserve">
-    <value>MPR (Mortes Por Rodada)</value>
+    <value>VPR (Vítimas Por Rodada)</value>
   </data>
   <data name="LeftArm" xml:space="preserve">
     <value>Braço esquerdo</value>
