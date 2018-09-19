@@ -732,13 +732,13 @@ namespace Manager.ViewModel.Demos
 									   if (_movieConfig.GenerateVideoFile)
 									   {
 										   if (choice == MessageDialogResult.FirstAuxiliary) return;
-										   if (choice == MessageDialogResult.Affirmative) _movieService.DeleteTgaFiles();
+										   if (choice == MessageDialogResult.Affirmative) _movieService.DeleteRawDirectory();
 										   if (choice == MessageDialogResult.Negative) _movieConfig.GenerateRawFiles = false;
 									   }
 									   else
 									   {
 										   if (choice == MessageDialogResult.Negative) return;
-										   _movieService.DeleteTgaFiles();
+										   _movieService.DeleteRawDirectory();
 									   }
 								   }
 

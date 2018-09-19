@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Core;
 using Services.Models;
@@ -25,9 +26,13 @@ namespace Services.Concrete.Movie
 		/// </summary>
 		private const int GOTO_TICK = EXEC_COMMANDS_TICK + 64;
 		/// <summary>
-		/// VDM files needs a double \ to escape the path
+		/// Path where all raw files will be saved.
 		/// </summary>
-		private string RawFullPath => _config.RawFilesDestination.Replace("\\", "\\\\") + "\\\\" + _config.OutputFilename;
+		private string RawFullPath => _config.RawFilesDestination + Path.DirectorySeparatorChar + _config.OutputFilename;
+		/// <summary>
+		/// Name of the normal used for the "mirv_streams add normal" command.
+		/// </summary>
+		private const string NORMAL_NAME = "defaultNormal";
 
 		public event Action OnVirtualDubStarted;
 		public event Action OnVirtualDubClosed;
@@ -126,17 +131,20 @@ namespace Services.Concrete.Movie
 		/// <returns></returns>
 		public bool IsFirstTgaExists()
 		{
-			return File.Exists(GetFirstTgaPath());
+			string firstTgaPath = GetFirstTgaPath();
+
+			return firstTgaPath != null && File.Exists(firstTgaPath);
 		}
 
 		/// <summary>
-		/// Delete all TGA files.
+		/// Delete the directory containing all raw files for the current configuration.
 		/// </summary>
-		public void DeleteTgaFiles()
+		public void DeleteRawDirectory()
 		{
-			string tga = _config.OutputFilename + "*.tga";
-			string[] files = Directory.GetFiles(_config.RawFilesDestination, tga);
-			foreach (string file in files) File.Delete(file);
+			string lastTakeFolderPath = GetLastTakeFolderPath();
+			if (!Directory.Exists(lastTakeFolderPath)) return;
+
+			Directory.Delete(lastTakeFolderPath, true);
 		}
 
 		/// <summary>
@@ -150,21 +158,61 @@ namespace Services.Concrete.Movie
 		}
 
 		/// <summary>
-		/// Return the path to the first TGA created by the game.
+		/// Return the directory path where TGA files are created by the game / HLAE.
+		/// </summary>
+		/// <returns></returns>
+		private string GetTgaDirectoryPath()
+		{
+			string lastTakeFolderPath = GetLastTakeFolderPath();
+			if (lastTakeFolderPath == null) return null;
+
+			return lastTakeFolderPath + Path.DirectorySeparatorChar + NORMAL_NAME;
+		}
+
+		/// <summary>
+		/// Return the path to the first TGA created by the game / HLAE.
 		/// </summary>
 		/// <returns></returns>
 		private string GetFirstTgaPath()
 		{
-			return RawFullPath + "0000.tga";
+			string tgaDirectoryPath = GetTgaDirectoryPath();
+			if (tgaDirectoryPath == null) return null;
+
+			return tgaDirectoryPath + Path.DirectorySeparatorChar + "00000.tga";
+			
 		}
 
 		/// <summary>
-		/// Return the path where the WAV file will be created.
+		/// HLAE generate an incrementing "takexxxx" folder, this function return the full path to the last one created.
 		/// </summary>
 		/// <returns></returns>
-		private string GetWavFilePath()
+		private string GetLastTakeFolderPath()
 		{
-			return RawFullPath + ".wav";
+			if (!Directory.Exists(RawFullPath)) return null;
+
+			IEnumerable<string> directories = Directory.GetDirectories(RawFullPath).ToList();
+			directories = directories.Where(dir => Path.GetFileName(dir).StartsWith("take"));
+
+			if (directories.Count() == 0) return null;
+
+			return directories.Last();
+		}
+
+		/// <summary>
+		/// HLAE generate a .wav file named "audio_xxxxxxxx" ending with a random hex letters, this function return the name of the last one created.
+		/// </summary>
+		/// <returns></returns>
+		private string GetLastWavFilePath()
+		{
+			string lastTakeFolderPath = GetLastTakeFolderPath();
+			if (lastTakeFolderPath == null) return null;
+
+			DirectoryInfo directory = new DirectoryInfo(lastTakeFolderPath);
+			IEnumerable<FileInfo> files = directory.GetFiles("audio_*.wav").OrderByDescending(f => f.CreationTime);
+
+			if (files.Count() == 0) return null;
+
+			return files.Last().FullName;
 		}
 
 		/// <summary>
@@ -178,6 +226,16 @@ namespace Services.Concrete.Movie
 		}
 
 		/// <summary>
+		/// Escape path to be compatible with VDM and VirtualDub jobs scripts.
+		/// </summary>
+		/// <param name="path"></param>
+		/// <returns></returns>
+		private string EscapePath(string path)
+		{
+			return path.Replace("\\", "\\\\");
+		}
+
+		/// <summary>
 		/// Create a CFG file which will be loaded when the demo start.
 		/// Users can edit it from the UI.
 		/// </summary>
@@ -188,7 +246,7 @@ namespace Services.Concrete.Movie
 		}
 
 		/// <summary>
-		/// Return the path to the CFG which will be execute when the demo start.
+		/// Return the path to the CFG which will be executed when the demo start.
 		/// </summary>
 		/// <returns></returns>
 		private static string GetCfgPath()
@@ -208,14 +266,32 @@ namespace Services.Concrete.Movie
 		/// </summary>
 		private void GenerateVirtualDubScript()
 		{
-			string[] tgaFiles = Directory.GetFiles(_config.RawFilesDestination, _config.OutputFilename + "*.tga");
-			string videoPath = GetOuputFilePath().Replace("\\", "\\\\");
-			string firstTgaFilePath = GetFirstTgaPath();
-			string wavFilePath = RawFullPath + ".wav";
+			string tgaDirectoryPath = GetTgaDirectoryPath();
+			if (!Directory.Exists(tgaDirectoryPath))
+				throw new Exception("Directory containing TGA files does not exists");
+
+			string[] tgaFiles = Directory.GetFiles(tgaDirectoryPath, "*.tga");
+			if (tgaFiles.Length == 0)
+				throw new Exception("No TGA files found");
+
+			string videoPath = EscapePath(GetOuputFilePath());
+			if (videoPath == null)
+				throw new Exception("Ouput directory does not exists");
+
+			string firstTgaFilePath = EscapePath(GetFirstTgaPath());
+			if (!File.Exists(firstTgaFilePath))
+				throw new Exception("TGA file 00000.tga not found");
+
+			string wavFilePath = EscapePath(GetLastWavFilePath());
+			if (!File.Exists(wavFilePath))
+				throw new Exception("WAV file not found");
+
 			string vdScript = string.Format(Properties.Resources.vd, firstTgaFilePath, wavFilePath, _config.FrameRate, tgaFiles.Length, videoPath);
 			string virtualDubPath = VirtualDubService.GetVirtualDubPath();
-			if (Directory.Exists(virtualDubPath))
-				File.WriteAllText(virtualDubPath + Path.DirectorySeparatorChar + "csgodm.jobs", vdScript);
+			if (!Directory.Exists(virtualDubPath))
+				throw new Exception("VirtualDub directory not found");
+
+			File.WriteAllText(virtualDubPath + Path.DirectorySeparatorChar + "csgodm.jobs", vdScript);
 		}
 
 		/// <summary>
@@ -236,16 +312,19 @@ namespace Services.Concrete.Movie
 
 			// Step 3, execute required commands with dynamic args
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, "host_framerate " + _config.FrameRate);
-			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, "mirv_streams record name \\\"" + RawFullPath + "\\\"");
 
-			// Step 4, go to some ticks just before to start recording to be sure that the world has been fully loaded
+			// Step 4, set the destination directory path used by HLAE !!escaping quotes is required for vdm files!!
+			generated += string.Format(Properties.Resources.execute_command, ++actionCount, EXEC_COMMANDS_TICK, "mirv_streams record name \\\"" + EscapePath(RawFullPath) + "\\\"");
+
+			// Step 5, goto some ticks just before to start recording to be sure that the world has been fully loaded
 			int goToTick = _config.StartTick < 256 ? 1 : _config.StartTick - 256;
 			generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, GOTO_TICK, goToTick);
 
-			// step 5, focus on player if a SteamID has been provided
+			// Step 6, focus on player if a SteamID has been provided
 			if (_config.FocusSteamId != 0)
 				generated += string.Format(Properties.Resources.spec_player_lock, ++actionCount, GOTO_TICK + 1, _config.FocusSteamId);
 
+			// Step 7, set HLAE options
 			// Set the deaths notices lifetime using "mirv_deathmsg cfg noticeLifeTime f" (ATM)
 			string command = $"mirv_deathmsg lifetime {_config.DeathsNoticesDisplayTime}";
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
@@ -268,15 +347,15 @@ namespace Services.Concrete.Movie
 				generated += string.Format(Properties.Resources.execute_command, ++actionCount, GOTO_TICK + 1, command);
 			}
 
-			// Step 6, start recording !!escaping quotes is required for vdm files!!
-			string startCommand = "mirv_streams record start; startmovie \\\"" + RawFullPath + "\\\"";
+			// Step 8, start recording
+			string startCommand = $"mirv_streams add normal {NORMAL_NAME}; mirv_streams record start";
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, _config.StartTick, startCommand);
 
-			// Step 7, stop recording and playblack
-			string stopCommand = "mirv_streams record end; endmovie";
+			// Step 9, stop recording
+			string stopCommand = "mirv_streams record end";
 			generated += string.Format(Properties.Resources.execute_command, ++actionCount, _config.EndTick, stopCommand);
 
-			// Step 8, auto close the game if the user want it otherwise stop playback (some ticks after recoding stopped)
+			// Step 10, auto close the game if the user want it otherwise stop playback (some ticks after recoding stopped)
 			if (_config.AutoCloseGame)
 				generated += string.Format(Properties.Resources.execute_command, ++actionCount, _config.EndTick + 128, "quit");
 			else
@@ -293,13 +372,13 @@ namespace Services.Concrete.Movie
 		private List<string> GetFFmpegArgs()
 		{
 			List<string> args = new List<string>();
-			args.Add("-y"); // override file if it exist
+			args.Add("-y"); // override file if it exists
 			args.Add("-f image2");
 			args.Add("-framerate " + _config.FrameRate);
 			if (!string.IsNullOrEmpty(_config.FFmpegInputParameters))
 				args.Add(_config.FFmpegInputParameters);
-			args.Add("-i \"" + RawFullPath + "%04d.tga\"");
-			args.Add("-i \"" + RawFullPath + ".wav\"");
+			args.Add("-i \"" + GetTgaDirectoryPath() + Path.DirectorySeparatorChar + "%05d.tga\"");
+			args.Add("-i \"" + GetLastWavFilePath() + "\"");
 			args.Add("-vcodec " + _config.VideoCodec);
 			args.Add("-qp " + _config.VideoQuality);
 			args.Add("-r " + _config.FFmpegVideoFramerate);
@@ -307,7 +386,7 @@ namespace Services.Concrete.Movie
 			args.Add("-b:a " + _config.AudioBitrate + "K");
 			if (!string.IsNullOrEmpty(_config.FFmpegExtraParameters))
 				args.Add(_config.FFmpegExtraParameters);
-			args.Add("\"" + _config.OutputFileDestinationFolder + Path.DirectorySeparatorChar + _config.OutputFilename + ".mp4\"");
+			args.Add("\"" + GetOuputFilePath() + "\"");
 
 			return args;
 		}
@@ -320,12 +399,6 @@ namespace Services.Concrete.Movie
 			// delete all RAW files generated by the game and HLAE
 			if (_config.CleanUpRawFiles)
 			{
-				// delete all tga files
-				DeleteTgaFiles();
-				// delete wav files
-				string wavFilePath = GetWavFilePath();
-				if (File.Exists(wavFilePath)) File.Delete(wavFilePath);
-				// delete the directory created by HLAE
 				if (Directory.Exists(RawFullPath)) Directory.Delete(RawFullPath, true);
 			}
 
