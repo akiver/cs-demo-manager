@@ -1816,7 +1816,7 @@ namespace Manager.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to An error occured while generating the video.
-        ///{0].
+        ///{0}.
         /// </summary>
         public static string DialogErrorWhileGeneratingVideo {
             get {
