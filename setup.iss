@@ -117,6 +117,7 @@ Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}"
 [Files]
 Source: "Manager\bin\x86\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\boiler.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\ControlzEx.dll"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\csgodm.core.dll"; DestDir: "{app}"; Flags: ignoreversion
