@@ -27,10 +27,12 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoHeatmapViewModel : SingleDemoViewModel
+	public class DemoHeatmapViewModel : BaseViewModel
 	{
 
 		#region Properties
+
+		private Demo _demo;
 
 		private RelayCommand _windowLoadedCommand;
 
@@ -85,6 +87,12 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public WriteableBitmap ColorsLayer
 		{

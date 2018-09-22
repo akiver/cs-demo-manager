@@ -12,9 +12,11 @@ using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoKillsViewModel : SingleDemoViewModel
+	public class DemoKillsViewModel : BaseViewModel
 	{
 		#region Properties
+
+		private Demo _demo;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -29,6 +31,12 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public int MaxPlayerKillCount
 		{

@@ -19,16 +19,16 @@
 	<ContextMenu x:Key="DemoRowContextMenu">
 		<MenuItem Header="{x:Static properties:Resources.Details}"
 				  Command="{Binding DemoList.ShowDemoDetailsCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoList.Demo, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoList.SelectedDemos[0], Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.Analyze}"
 				  Command="{Binding DemoList.AnalyzeDemosCommand, Source={StaticResource Locator}}"
 				  CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.Browse}"
 				  Command="{Binding DemoList.BrowseToDemoCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoList.Demo, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoList.SelectedDemos[0], Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.CopyPlayDemoCommand}"
 				  Command="{Binding DemoList.CopyPlaydemoCommand, Source={StaticResource Locator}}"
-				  CommandParameter="{Binding DemoList.Demo, Source={StaticResource Locator}}"/>
+				  CommandParameter="{Binding DemoList.SelectedDemos[0], Source={StaticResource Locator}}"/>
 		<MenuItem Header="{x:Static properties:Resources.Status}"
 				  ItemsSource="{Binding Settings.StatusList, Source={StaticResource Locator}}"
 				  DataContext="{StaticResource DemoStatus}"
@@ -66,7 +66,8 @@
 			</MenuItem.ItemContainerStyle>
 		</MenuItem>
 		<MenuItem Header="{x:Static properties:Resources.CopyDemoShareCode}"
-				  Command="{Binding DemoList.CopyShareCodeCommand, Source={StaticResource Locator}}"/>
+				  Command="{Binding DemoList.CopyShareCodeCommand, Source={StaticResource Locator}}"
+		          CommandParameter="{Binding DemoList.SelectedDemos[0], Source={StaticResource Locator}}" />
 		<MenuItem Header="{x:Static properties:Resources.ShowOnThirdParty}"
 				  ItemsSource="{Binding ThirdParties.ThirdPartiesSelector, Source={StaticResource Locator}}"
 				  DisplayMemberPath="Title">

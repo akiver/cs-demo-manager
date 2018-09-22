@@ -307,21 +307,16 @@ namespace Services.Concrete
 
 		public async Task<List<Demo>> GetDemosPlayer(string steamId)
 		{
-			List<Demo> result = new List<Demo>();
-
 			List<Demo> demos = await _cacheService.GetDemoListAsync();
 
 			if (demos.Any())
 			{
-				result = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
-				for (int i = 0; i < result.Count; i++)
-				{
-					Demo demo = await GetDemoHeaderAsync(result[i].Path);
-					if (demo != null) result[i] = demo;
-				}
+				demos = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
+				foreach (Demo demo in demos)
+					demo.Source = Source.Factory(demo.SourceName);
 			}
 
-			return result;
+			return demos;
 		}
 
 		public async Task<bool> DeleteDemo(Demo demo)

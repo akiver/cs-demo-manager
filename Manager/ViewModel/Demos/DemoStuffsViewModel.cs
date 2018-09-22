@@ -18,11 +18,13 @@ using Clipboard = System.Windows.Clipboard;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoStuffsViewModel : SingleDemoViewModel
+	public class DemoStuffsViewModel : BaseViewModel
 	{
 		#region Properties
 
 		private readonly IDialogService _dialogService;
+
+		private Demo _demo;
 
 		private DrawService _drawService;
 
@@ -65,6 +67,12 @@ namespace Manager.ViewModel.Demos
 		#endregion Properties
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public Stuff SelectedStuff
 		{

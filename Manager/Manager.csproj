@@ -201,7 +201,6 @@
     <Compile Include="ViewModel\Players\PlayerDetailsViewModel.cs" />
     <Compile Include="ViewModel\Rounds\RoundDetailsViewModel.cs" />
     <Compile Include="ViewModel\Shared\BaseViewModel.cs" />
-    <Compile Include="ViewModel\Shared\SingleDemoViewModel.cs" />
     <Compile Include="ViewModel\Suspects\WhitelistViewModel.cs" />
     <Compile Include="Views\Demos\DemoFlashbangsView.xaml.cs">
       <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>

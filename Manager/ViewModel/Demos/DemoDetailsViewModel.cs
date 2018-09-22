@@ -37,9 +37,11 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoDetailsViewModel : SingleDemoViewModel
+	public class DemoDetailsViewModel : BaseViewModel
 	{
 		#region Properties
+
+		private Demo _demo;
 
 		private Demo _previousDemo;
 
@@ -144,6 +146,12 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public Demo PreviousDemo
 		{

@@ -31,18 +31,18 @@
 	</UserControl.Resources>
 	<UserControl.InputBindings>
 		<KeyBinding Command="{Binding BrowseToDemoCommand}"
-					CommandParameter="{Binding Demo}"
+		            CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 					Gesture="CTRL+B" />
 		<KeyBinding Command="{Binding GoToAccountStatsCommand}"
 					Gesture="CTRL+E" />
 		<KeyBinding Command="{Binding ShowDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}"
+		            CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 					Gesture="CTRL+D" />
 		<KeyBinding Command="{Binding WatchDemoCommand}"
-					CommandParameter="{Binding Demo}"
+		            CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 					Gesture="CTRL+W" />
 		<KeyBinding Command="{Binding GoToTickCommand}"
-					CommandParameter="{Binding Demo}"
+		            CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 					Gesture="CTRL+G" />
 		<KeyBinding Command="{Binding AnalyzeDemosCommand}"
 					CommandParameter="{Binding SelectedDemos}"
@@ -59,10 +59,10 @@
 		<KeyBinding Command="{Binding RefreshListCommand}"
 					Gesture="F5" />
 		<KeyBinding Command="{Binding WatchHighlightCommand}"
-					CommandParameter="{Binding Demo}"
+		            CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 					Gesture="CTRL+H" />
 		<KeyBinding Command="{Binding WatchLowlightCommand}"
-					CommandParameter="{Binding Demo}"
+		            CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 					Gesture="CTRL+L" />
 		<mouse:MouseBindingExtended Gesture="XButton2"
 									Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
@@ -111,7 +111,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipDemoDetails}"
 							Command="{Binding ShowDemoDetailsCommand}"
-							CommandParameter="{Binding Demo}">
+					        CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -144,7 +144,7 @@
 					</Button>
 
 					<Button Command="{Binding BrowseToDemoCommand}"
-							CommandParameter="{Binding Demo}"
+					        CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
 							Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipBrowseToDemo}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
@@ -239,7 +239,7 @@
 					<Image Style="{StaticResource RankStyle}"
 						   Source="{Binding LastRankAccountStats.Logo}"
 						   Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
-					
+
 				</StackPanel>
 			</Grid>
 			<!--end action bar 1st row -->
@@ -250,7 +250,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchDemo}"
 							Command="{Binding WatchDemoCommand}"
-							CommandParameter="{Binding Demo}">
+					        CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -267,7 +267,8 @@
 
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipGotoTick}"
-							Command="{Binding GoToTickCommand}">
+							Command="{Binding GoToTickCommand}"
+					        CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -285,7 +286,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchHighlights}"
 							Command="{Binding WatchHighlightCommand}"
-							CommandParameter="{Binding Demo}">
+					        CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -303,7 +304,7 @@
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipWatchLowlights}"
 							Command="{Binding WatchLowlightCommand}"
-							CommandParameter="{Binding Demo}">
+					        CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
 									   Height="15"
@@ -418,7 +419,7 @@
 				<ColumnDefinition Width="*"/>
 				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			
+
 			<ComboBox Grid.Column="0"
 					  ItemsSource="{Binding Folders, Mode=TwoWay}"
 					  Style="{StaticResource ComboBoxFoldersStyle}"
@@ -492,14 +493,13 @@
 				  x:Name="DataGridDemos"
 				  Style="{StaticResource DataGridStyle}"
 				  ItemsSource="{Binding Demos, IsAsync=True}"
-				  SelectedItem="{Binding Demo}"
 				  RowStyle="{StaticResource DataGridRowMainListDemosStyle}">
 			<i:Interaction.Triggers>
 				<i:EventTrigger EventName="MouseDoubleClick">
 					<mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
 										 PassEventArgsToCommand="True"
 										 EventArgsConverter="{StaticResource RowDemoDoubleClickedToDemoDetails}"
-										 EventArgsConverterParameter="{Binding Demo}"/>
+										 EventArgsConverterParameter="{Binding SelectedValue, ElementName=DataGridDemos}"/>
 				</i:EventTrigger>
 				<i:EventTrigger EventName="SelectionChanged">
 					<mvvm:EventToCommand
@@ -776,7 +776,7 @@
 				<ScrollViewer MaxHeight="100"
 							  HorizontalScrollBarVisibility="Auto"
 							  VerticalScrollBarVisibility="Auto">
-					<TextBlock Text="{Binding Demo.Comment}"
+					<TextBlock Text="{Binding SelectedValue.Comment, ElementName=DataGridDemos}"
 							   TextWrapping="Wrap"
 							   Style="{StaticResource TextBlockSmall}" />
 				</ScrollViewer>

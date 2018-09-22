@@ -22,7 +22,7 @@ using Services.Models.Timelines;
 
 namespace Manager.ViewModel.Rounds
 {
-	public class RoundDetailsViewModel : SingleDemoViewModel
+	public class RoundDetailsViewModel : BaseViewModel
 	{
 		#region Properties
 
@@ -35,6 +35,8 @@ namespace Manager.ViewModel.Rounds
 		private readonly ICacheService _cacheService;
 
 		private int _roundNumber;
+
+		private Demo _demo;
 
 		private Round _currentRound;
 
@@ -65,6 +67,12 @@ namespace Manager.ViewModel.Rounds
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public int RoundNumber
 		{

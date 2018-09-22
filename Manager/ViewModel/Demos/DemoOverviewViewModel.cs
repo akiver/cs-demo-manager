@@ -26,11 +26,13 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoOverviewViewModel : SingleDemoViewModel
+	public class DemoOverviewViewModel : BaseViewModel
 	{
 		#region Properties
 
 		private readonly IMapService _mapService;
+
+		private Demo _demo;
 
 		private Round _selectedRound;
 
@@ -117,6 +119,12 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public WriteableBitmap WriteableBitmapOverview
 		{
