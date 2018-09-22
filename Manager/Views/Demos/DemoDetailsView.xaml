@@ -96,7 +96,7 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			
+
 			<Grid Grid.Row="0"
 				  Height="40">
 				<StackPanel Orientation="Horizontal">
@@ -252,7 +252,7 @@
 							</Rectangle>
 						</StackPanel>
 					</Button>
-					
+
 					<Button Style="{DynamicResource GeneralButton}"
 							ToolTip="{x:Static properties:Resources.ToolTipNextDemo}"
 							Command="{Binding GoToNextDemoCommand}">
@@ -270,7 +270,7 @@
 				</StackPanel>
 			</Grid>
 		</Grid>
-		
+
 		<Grid Grid.Row="1"
 			  Height="40">
 			<StackPanel Orientation="Horizontal">
@@ -583,7 +583,7 @@
 								<ComboBox x:Name="SourceList"
 										  Grid.Column="1"
 										  ItemsSource="{Binding Source={StaticResource Locator}, Path=DemoDetails.Sources}"
-										  SelectedValue="{Binding Demo.SourceName}"
+										  SelectedValue="{Binding Demo.SourceName, Mode=OneWay}"
 										  DisplayMemberPath="Label"
 										  SelectedValuePath="Name"
 										  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}">
@@ -595,7 +595,7 @@
 									</i:Interaction.Triggers>
 								</ComboBox>
 							</Grid>
-							
+
 							<Grid Margin="0 2 0 2">
 								<Grid.ColumnDefinitions>
 									<ColumnDefinition Width="Auto" />
@@ -606,11 +606,18 @@
 										   Style="{StaticResource TextBlockHighlight}">
 									<Run Text=" "/>
 								</TextBlock>
-								<ComboBox Grid.Column="1"
+								<ComboBox x:Name="Statuses"
+								          Grid.Column="1"
 										  ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.StatusList}"
-										  SelectedItem="{Binding Demo.Status, Converter={StaticResource StringToDemoStatusConverter}}"
+										  SelectedItem="{Binding Demo.Status, Converter={StaticResource StringToDemoStatusConverter}, Mode=OneWay}"
 										  DisplayMemberPath="Label"
-										  SelectedValuePath="Name"/>
+										  SelectedValuePath="Name">
+									<i:Interaction.Triggers>
+										<i:EventTrigger EventName="SelectionChanged">
+											<i:InvokeCommandAction Command="{Binding UpdateDemoStatus}" CommandParameter="{Binding ElementName=Statuses, Path=SelectedItem}" />
+										</i:EventTrigger>
+									</i:Interaction.Triggers>
+								</ComboBox>
 							</Grid>
 
 							<Grid>

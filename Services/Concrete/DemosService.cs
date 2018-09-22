@@ -230,11 +230,8 @@ namespace Services.Concrete
 
 		public async Task<Demo> SetSource(Demo demo, string source)
 		{
-			if (demo.SourceName != source)
-			{
-				demo.SourceName = source;
-				await _cacheService.WriteDemoDataCache(demo);
-			}
+			demo.SourceName = source;
+			await _cacheService.WriteDemoDataCache(demo);
 
 			return demo;
 		}

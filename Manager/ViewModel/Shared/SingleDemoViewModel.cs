@@ -11,11 +11,5 @@ namespace Manager.ViewModel.Shared
 			get => _demo;
 			set { Set(() => Demo, ref _demo, value); }
 		}
-
-		public override void Cleanup()
-		{
-			base.Cleanup();
-			Demo = null;
-		}
 	}
 }

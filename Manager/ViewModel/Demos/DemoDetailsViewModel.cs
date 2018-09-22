@@ -1,16 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Data;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Threading;
 using Core;
 using Core.Models;
 using Core.Models.Source;
@@ -33,6 +20,18 @@ using Services.Concrete.Maps;
 using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Data;
+using System.Windows.Forms;
+using System.Windows.Input;
+using System.Windows.Threading;
 using Application = System.Windows.Application;
 using Round = Core.Models.Round;
 
@@ -133,6 +132,8 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _goToNextDemoCommand;
 		private RelayCommand<Demo> _goToMovie;
+
+		private RelayCommand<DemoStatus> _updateDemoStatus;
 
 		private ICollectionView _playersTeam1Collection;
 
@@ -238,6 +239,9 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
+		/// <summary>
+		/// Update the demo's source (from the combobox)
+		/// </summary>
 		public RelayCommand<Source> SetDemoSourceCommand
 		{
 			get
@@ -246,8 +250,8 @@ namespace Manager.ViewModel.Demos
 					?? (_setDemoSourceCommand = new RelayCommand<Source>(
 					async source =>
 					{
-						Demo = await _demosService.SetSource(Demo, source.Name);
-					}, source => source != null));
+						await _demosService.SetSource(Demo, source.Name);
+					}, source => Demo != null && source != null && source.Name != Demo.SourceName));
 			}
 		}
 
@@ -662,7 +666,7 @@ namespace Manager.ViewModel.Demos
 					async () =>
 					{
 						if (Demo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
-							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo>{ Demo });
+							await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { Demo });
 
 						Notification = Properties.Resources.NotificationAnalyzing;
 						IsBusy = true;
@@ -1053,6 +1057,22 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
+		/// <summary>
+		/// Update the demo's status (from the combobox).
+		/// </summary>
+		public RelayCommand<DemoStatus> UpdateDemoStatus
+		{
+			get
+			{
+				return _updateDemoStatus
+					   ?? (_updateDemoStatus = new RelayCommand<DemoStatus>(
+						   async status =>
+						   {
+							   await _demosService.SaveStatus(Demo, status.Name);
+						   }, (status) => Demo != null && status.Name != Demo.Status));
+			}
+		}
+
 		#endregion
 
 		public DemoDetailsViewModel(
@@ -1161,7 +1181,7 @@ namespace Manager.ViewModel.Demos
 				foreach (PlayerSummary playerSummary in playerSummaryList)
 				{
 					Player player = Demo.Players.FirstOrDefault(p => p.SteamId.ToString() == playerSummary.SteamId);
-					if(player != null) player.AvatarUrl = playerSummary.AvatarFull;
+					if (player != null) player.AvatarUrl = playerSummary.AvatarFull;
 				}
 			}
 			new ViewModelLocator().Settings.IsShowAllPlayers = true;
