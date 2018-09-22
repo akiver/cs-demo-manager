@@ -2808,7 +2808,7 @@ Voulez-vous vraiment continuer?</value>
   </data>
   <data name="DialogErrorWhileGeneratingVideo" xml:space="preserve">
     <value>Un erreur s'est produite pendant la génération de la vidéo.
-{0]</value>
+{0}</value>
   </data>
   <data name="DialogFFmpegHasBeenInstalled" xml:space="preserve">
     <value>FFmpeg a été installé avec succès.</value>

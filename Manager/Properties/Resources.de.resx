@@ -986,9 +986,6 @@
   <data name="HeaderToolTipTeamName" xml:space="preserve">
     <value>Team Name</value>
   </data>
-  <data name="HeaderToolTipTeamNameTrouble" xml:space="preserve">
-    <value>Team's Name on eco / forcebuy or semi-eco</value>
-  </data>
   <data name="HeaderToolTipThreeKill" xml:space="preserve">
     <value>3 Kills</value>
   </data>
@@ -2568,5 +2565,9 @@ Falls Sie es einschalten, wird das Spiel (immer) mit dem "-insecure" Startparame
   </data>
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Gesehen</value>
+  </data>
+  <data name="DialogErrorWhileGeneratingVideo" xml:space="preserve">
+    <value>Beim Generieren des Videos ist ein Fehler aufgetreten.
+{0}</value>
   </data>
 </root>

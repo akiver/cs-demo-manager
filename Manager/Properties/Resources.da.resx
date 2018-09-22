@@ -1980,7 +1980,7 @@ du kan finde mere information på {1}.</value>
     <value>Ingen points fundet. Du kan være du skal analysere demoen.</value>
   </data>
   <data name="Equipment" xml:space="preserve">
-    <value>udstyr</value>
+    <value>Udstyr</value>
   </data>
   <data name="HeaderToolTipKnifeKills" xml:space="preserve">
     <value>Kniv Drab</value>
