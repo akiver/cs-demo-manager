@@ -27,6 +27,14 @@ namespace DemoInfo.DT
 				OnNewEntity(this, new EntityCreatedEventArgs(this, e));
 		}
 
+		public event EventHandler<EntityDestroyedEventArgs> OnDestroyEntity;
+
+		internal void AnnounceDestroyedEntity(Entity e)
+		{
+			if (OnDestroyEntity != null)
+				OnDestroyEntity(this, new EntityDestroyedEventArgs(this, e));
+		}
+
 		public override string ToString()
 		{
 			return Name + " | " + DTName;
@@ -36,6 +44,7 @@ namespace DemoInfo.DT
 		public void Dispose ()
 		{
 			this.OnNewEntity = null;
+			this.OnDestroyEntity = null;
 		}
     }
 
@@ -86,4 +95,11 @@ namespace DemoInfo.DT
 		}
 	}
 
+	class EntityDestroyedEventArgs : EntityCreatedEventArgs
+	{
+		public EntityDestroyedEventArgs(ServerClass c, Entity e) : base(c, e)
+		{
+
+		}
+	}
 }

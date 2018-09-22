@@ -1,16 +1,11 @@
-#DemoInfo
+# DemoInfo
 
 This is a C#-Library that makes reading CS:GO-Demos and analyzing them easier. 
 
 ![Travis CI results](https://travis-ci.org/EHVAG/demoinfo.svg?branch=master)
 
-##IRC and Gitter
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/EHVAG/demoinfo?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=body_badge)
-
-We now have a fancy IRC-Channel. Join [#demoinfogo](http://webchat.quakenet.org/?channels=demoinfogo) on Quakenet. If no one is there, you might want to try [#dota2replay](http://webchat.quakenet.org/?channels=dota2ŕeplay), the parsing of demos is pretty similar between those two games (There are some differences in how the field-headers are stored in the packet-entites, however).
-
-##nuget-package
+## nuget-package
 We now have an official nuget-package! See https://www.nuget.org/packages/DemoInfo/
 
 ### Stable releases
@@ -27,10 +22,10 @@ Please note that the assemblies in these releases are **not** properly signed. T
 
 Since no Windows machines are involved in any part of the development process, we can't provide `pdb` symbols for our releases. If you need to step into DemoInfo during debugging, you have to download the source code and add it to your project. Sorry.
 
-##Usage
+## Usage
 Refer to [this guide](https://github.com/moritzuehling/demostatistics-generator/blob/master/README.md#usage-of-demoinfo-public). There is also an example-project where you can see the parser in action!
 
-##Features 
+## Features 
 
 * Get Informations about each player at any point in time: 
  * Name
