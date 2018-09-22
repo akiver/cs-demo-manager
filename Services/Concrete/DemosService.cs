@@ -220,10 +220,8 @@ namespace Services.Concrete
 
 		public async Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source)
 		{
-			foreach (Demo demo in demos.Where(demo => demo.Type != "POV"))
-			{
+			foreach (Demo demo in demos)
 				await SetSource(demo, source);
-			}
 
 			return demos;
 		}

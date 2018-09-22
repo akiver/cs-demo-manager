@@ -71,10 +71,9 @@ namespace Core.Models.Source
 			new Esl(),
 			new Faceit(),
 			new PopFlash(),
-			// do not let POV source selectable
-			//new Pov(),
 			new Valve(),
 			new Wanmei(),
+			new Pov(),
 		};
 	}
 }
