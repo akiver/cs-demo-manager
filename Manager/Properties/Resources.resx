@@ -1102,7 +1102,7 @@
     <value>Team Name</value>
   </data>
   <data name="HeaderToolTipTeamNameTrouble" xml:space="preserve">
-    <value>Team's mame on eco / force buy or semi-eco</value>
+    <value>Team's name on eco / force buy or semi-eco</value>
   </data>
   <data name="HeaderToolTipThreeKill" xml:space="preserve">
     <value>3 Kills</value>

@@ -4642,7 +4642,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Team&apos;s mame on eco / force buy or semi-eco.
+        ///   Looks up a localized string similar to Team&apos;s name on eco / force buy or semi-eco.
         /// </summary>
         public static string HeaderToolTipTeamNameTrouble {
             get {

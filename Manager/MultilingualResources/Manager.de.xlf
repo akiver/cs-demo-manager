@@ -1303,8 +1303,8 @@
           <target state="final">Team Name</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamNameTrouble" translate="yes" xml:space="preserve">
-          <source>Team's mame on eco / force buy or semi-eco</source>
-          <target state="needs-review-translation">Team's Name on eco / forcebuy or semi-eco</target>
+          <source>Team's name on eco / force buy or semi-eco</source>
+          <target state="new">Team's name on eco / force buy or semi-eco</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
           <source>3 Kills</source>
@@ -2725,8 +2725,7 @@ Mehr Informationen finden Sie unter {1}.</target>
         </trans-unit>
         <trans-unit id="ToolTIpShowOnlySuspectDemos" translate="yes" xml:space="preserve">
           <source>Show demos that contains selected suspect(s) (CTRL+F)</source>
-          <target state="needs-review-translation">Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</target>
         </trans-unit>
         <trans-unit id="ToolTipWhitelist" translate="yes" xml:space="preserve">
           <source>Whitelist (CTRL+W)</source>
@@ -3746,9 +3745,9 @@ Do you want to continue?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
           <source>An error occured while generating the video.
-{0]</source>
-          <target state="new">Beim Generieren des Videos ist ein Fehler aufgetreten.
-{0]</target>
+{0}</source>
+          <target state="final">Beim Generieren des Videos ist ein Fehler aufgetreten.
+{0}</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has been installed.</source>

@@ -1303,7 +1303,7 @@
           <target state="final">Csapatnév</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamNameTrouble" translate="yes" xml:space="preserve">
-          <source>Team's mame on eco / force buy or semi-eco</source>
+          <source>Team's name on eco / force buy or semi-eco</source>
           <target state="final">Csapat neve eco / erőletett vásárlás vagy fél-eco</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
@@ -3745,9 +3745,9 @@ Do you want to continue?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
           <source>An error occured while generating the video.
-{0]</source>
+{0}</source>
           <target state="new">An error occured while generating the video.
-{0]</target>
+{0}</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has been installed.</source>
