@@ -690,6 +690,10 @@ namespace Manager.ViewModel.Demos
 
 							_progress = 0;
 							Demo = await _demosService.AnalyzeDemo(Demo, _cts.Token, HandleAnalyzeProgress);
+
+							await FetchPlayersAvatar();
+							UpdatePlayersSort();
+
 							if (AppSettings.IsInternetConnectionAvailable())
 							{
 								await _demosService.AnalyzeBannedPlayersAsync(Demo);
@@ -1179,9 +1183,17 @@ namespace Manager.ViewModel.Demos
 			Notification = Properties.Resources.NotificationLoading;
 			PlayersTeam1Collection = CollectionViewSource.GetDefaultView(Demo.TeamCT.Players);
 			PlayersTeam2Collection = CollectionViewSource.GetDefaultView(Demo.TeamT.Players);
-			PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
-			PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+			UpdatePlayersSort();
 			RoundsCollection = CollectionViewSource.GetDefaultView(Demo.Rounds);
+			await FetchPlayersAvatar();
+			new ViewModelLocator().Settings.IsShowAllPlayers = true;
+			UpdateDemosPagination();
+			IsBusy = false;
+			HasNotification = false;
+		}
+
+		private async Task FetchPlayersAvatar()
+		{
 			if (AppSettings.IsInternetConnectionAvailable() && Demo.Players.Any())
 			{
 				IEnumerable<string> steamIdList = Demo.Players.Select(p => p.SteamId.ToString()).Distinct();
@@ -1192,10 +1204,12 @@ namespace Manager.ViewModel.Demos
 					if (player != null) player.AvatarUrl = playerSummary.AvatarFull;
 				}
 			}
-			new ViewModelLocator().Settings.IsShowAllPlayers = true;
-			UpdateDemosPagination();
-			IsBusy = false;
-			HasNotification = false;
+		}
+
+		private void UpdatePlayersSort()
+		{
+			PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
+			PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
 		}
 
 		/// <summary>
