@@ -806,6 +806,7 @@
 									  SelectedItem="{Binding SelectedPlayer}"
 									  Style="{StaticResource DataGridStyle}"
 									  RowStyle="{StaticResource DataGridRowPlayerStyle}"
+									  MaxHeight="200"
 									  internals:ScrollViewerHelper.UseHorizontalScrolling="True">
 								<DataGrid.Resources>
 									<converters:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
@@ -1048,6 +1049,7 @@
 									  SelectedItem="{Binding SelectedPlayer}"
 									  RowStyle="{StaticResource DataGridRowPlayerStyle}"
 									  Style="{StaticResource DataGridStyle}"
+									  MaxHeight="200"
 									  internals:ScrollViewerHelper.UseHorizontalScrolling="True">
 								<DataGrid.Resources>
 									<converters:BindingProxy x:Key="BindingProxy" Data="{Binding}" />
