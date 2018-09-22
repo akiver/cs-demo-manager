@@ -861,7 +861,7 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
-				ItemIndex = 65,
+				ItemIndex = 23,
 				OriginalName = "weapon_mp5sd",
 				Element = EquipmentElement.MP5SD,
 			},
