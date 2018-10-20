@@ -38,6 +38,7 @@ namespace Core.Models
 		public const string G3SG1 = "G3SG1";
 		public const string KNIFE = "Knife";
 		public const string M249 = "M249";
+		public const string MP5SD = "MP5-SD";
 		public const string MP7 = "MP7";
 		public const string MP9 = "MP9";
 		public const string MAC_10 = "MAC-10";
@@ -211,6 +212,13 @@ namespace Core.Models
 				Name = M4A4,
 				Type = WeaponType.Rifle,
 				KillAward = 300
+			},
+			new Weapon
+			{
+				Element = EquipmentElement.MP5SD,
+				Name = MP5SD,
+				Type = WeaponType.SMG,
+				KillAward = 600
 			},
 			new Weapon
 			{
