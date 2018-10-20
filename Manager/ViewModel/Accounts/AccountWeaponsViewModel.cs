@@ -72,6 +72,8 @@ namespace Manager.ViewModel.Accounts
 		private List<CategoricalDataPoint> _datasBizonDeath;
 		private List<CategoricalDataPoint> _datasMp7Kill;
 		private List<CategoricalDataPoint> _datasMp7Death;
+		private List<CategoricalDataPoint> _datasMp5Kill;
+		private List<CategoricalDataPoint> _datasMp5Death;
 		private List<CategoricalDataPoint> _datasMp9Kill;
 		private List<CategoricalDataPoint> _datasMp9Death;
 		private List<CategoricalDataPoint> _datasMac10Kill;
@@ -288,6 +290,18 @@ namespace Manager.ViewModel.Accounts
 		{
 			get { return _datasMp7Death; }
 			set { Set(() => DatasMp7Death, ref _datasMp7Death, value); }
+		}
+
+		public List<CategoricalDataPoint> DatasMp5Kill
+		{
+			get { return _datasMp5Kill; }
+			set { Set(() => DatasMp5Kill, ref _datasMp5Kill, value); }
+		}
+
+		public List<CategoricalDataPoint> DatasMp5Death
+		{
+			get { return _datasMp5Death; }
+			set { Set(() => DatasMp5Death, ref _datasMp5Death, value); }
 		}
 
 		public List<CategoricalDataPoint> DatasMp9Kill
@@ -1002,6 +1016,26 @@ namespace Manager.ViewModel.Accounts
 				}
 			};
 
+			DatasMp5Kill = new List<CategoricalDataPoint>
+			{
+				new CategoricalDataPoint
+				{
+					Category = Weapon.MP5SD,
+					Value = datas.KillMp5Count,
+					Label = _killsLabel
+				}
+			};
+
+			DatasMp5Death = new List<CategoricalDataPoint>
+			{
+				new CategoricalDataPoint
+				{
+					Category = Weapon.MP5SD,
+					Value = datas.DeathMp5Count,
+					Label = _deathsLabel
+				}
+			};
+
 			DatasMp9Kill = new List<CategoricalDataPoint>
 			{
 				new CategoricalDataPoint
@@ -1584,6 +1618,8 @@ namespace Manager.ViewModel.Accounts
 			DatasM4A4Death = null;
 			DatasMp7Kill = null;
 			DatasMp7Death = null;
+			DatasMp5Kill = null;
+			DatasMp5Death = null;
 			DatasMp9Kill = null;
 			DatasMp9Death = null;
 			DatasP250Kill = null;

@@ -38,6 +38,9 @@
 		public int KillMp7Count { get; set; } = 0;
 		public int DeathMp7Count { get; set; } = 0;
 
+		public int KillMp5Count { get; set; } = 0;
+		public int DeathMp5Count { get; set; } = 0;
+
 		public int KillMp9Count { get; set; } = 0;
 		public int DeathMp9Count { get; set; } = 0;
 
