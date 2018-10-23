@@ -530,7 +530,7 @@ namespace Manager.ViewModel.Demos
 								FocusPlayerSteamId = player.SteamId,
 							};
 							GameLauncher launcher = new GameLauncher(config);
-							launcher.WatchDemoAt(firstRound.Tick);
+							launcher.WatchPlayer();
 						},
 						suspect => SelectedPlayer != null));
 			}
