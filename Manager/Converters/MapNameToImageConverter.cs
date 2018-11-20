@@ -14,6 +14,8 @@ namespace Manager.Converters
 
 			switch (demo.MapName)
 			{
+                case "de_austria":
+                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/austria.png", UriKind.RelativeOrAbsolute);
                 case "cs_agency":
                     return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/agency.png", UriKind.RelativeOrAbsolute);
                 case "de_ali":
