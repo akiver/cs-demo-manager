@@ -236,6 +236,12 @@
   <ItemGroup>
     <Resource Include="images\maps\overview\de_biome.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\cs_office.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\office.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug

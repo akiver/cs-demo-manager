@@ -90,6 +90,7 @@
     <Compile Include="Models\Maps\NewInferno.cs" />
     <Compile Include="Models\Maps\NewNuke.cs" />
     <Compile Include="Models\Maps\Nuke.cs" />
+    <Compile Include="Models\Maps\Office.cs" />
     <Compile Include="Models\Maps\Overpass.cs" />
     <Compile Include="Models\Maps\Royal.cs" />
     <Compile Include="Models\Maps\Santorini.cs" />
