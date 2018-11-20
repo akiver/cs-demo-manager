@@ -32,6 +32,7 @@ namespace Services.Concrete.Maps
         private const string AGENCY = "cs_agency";
         private const string AUSTRIA = "de_austria";
         private const string SUBZERO = "de_subzero";
+        private const string BIOME = "de_biome";
 
         public static string[] SimpleRadarMaps =
 		{
@@ -48,8 +49,8 @@ namespace Services.Concrete.Maps
 		public static string[] Maps = {
 			DUST2, INFERNO, NUKE, CACHE, SEASON, TRAIN, CBBLE, OVERPASS,
 			MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA,
-			CANALS, AGENCY, AUSTRIA, SUBZERO,
-		};
+			CANALS, AGENCY, AUSTRIA, SUBZERO, BIOME,
+        };
 
 		public Map Map { get; set; }
 
@@ -131,6 +132,9 @@ namespace Services.Concrete.Maps
                     break;
                 case SUBZERO:
                     Map = new Subzero();
+                    break;
+                case BIOME:
+                    Map = new Biome();
                     break;
                 default:
 					throw new MapUnavailableException(demo.MapName);

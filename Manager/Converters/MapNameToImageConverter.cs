@@ -14,6 +14,8 @@ namespace Manager.Converters
 
 			switch (demo.MapName)
 			{
+                case "de_biome":
+                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/biome.png", UriKind.RelativeOrAbsolute);
                 case "de_subzero":
                     return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/subzero.png", UriKind.RelativeOrAbsolute);
                 case "de_austria":
