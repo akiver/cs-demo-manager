@@ -476,6 +476,11 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowMessageAsync(Properties.Resources.DialogAnalyzeRequired, MessageDialogStyle.Affirmative);
 							return;
 						}
+						if (!MapService.Maps.Contains(demo.MapName))
+						{
+							await _dialogService.ShowErrorAsync(Properties.Resources.DialogMapNotSupported, MessageDialogStyle.Affirmative);
+							return;
+						}
 						var demoStuffsViewModel = new ViewModelLocator().DemoStuffs;
 						demoStuffsViewModel.Demo = demo;
 						DemoStuffsView demoStuffsView = new DemoStuffsView();
