@@ -230,6 +230,12 @@
   <ItemGroup>
     <Resource Include="images\maps\preview\subzero.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\biome.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_biome.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug
