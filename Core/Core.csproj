@@ -74,6 +74,7 @@
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Maps\Agency.cs" />
+    <Compile Include="Models\Maps\Austria.cs" />
     <Compile Include="Models\Maps\Cache.cs" />
     <Compile Include="Models\Maps\Canals.cs" />
     <Compile Include="Models\Maps\Cbble.cs" />
