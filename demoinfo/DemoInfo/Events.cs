@@ -50,13 +50,13 @@ namespace DemoInfo
 	{
 		public Player Player { get; set; }
 
-		public RoundMVPReason Reason  { get; set; }
+		public RoundMVPReason Reason { get; set; }
 	}
 
 	public class RoundStartedEventArgs : EventArgs
 	{
-		public int TimeLimit  { get; set; }
-		public int FragLimit  { get; set; }
+		public int TimeLimit { get; set; }
+		public int FragLimit { get; set; }
 		public string Objective { get; set; }
 	}
 
@@ -125,12 +125,12 @@ namespace DemoInfo
 		public EquipmentElement NadeType { get; internal set; }
 		public Player ThrownBy { get; internal set; }
 
-		internal NadeEventArgs ()
+		internal NadeEventArgs()
 		{
-		
+
 		}
 
-		internal NadeEventArgs (EquipmentElement type)
+		internal NadeEventArgs(EquipmentElement type)
 		{
 			this.NadeType = type;
 		}
@@ -138,39 +138,41 @@ namespace DemoInfo
 
 	public class FireEventArgs : NadeEventArgs
 	{
-		public FireEventArgs () : base(EquipmentElement.Incendiary)
+		public FireEventArgs() : base(EquipmentElement.Incendiary)
 		{
-			
+
 		}
 	}
 	public class SmokeEventArgs : NadeEventArgs
 	{
-		public SmokeEventArgs () : base(EquipmentElement.Smoke)
+		public SmokeEventArgs() : base(EquipmentElement.Smoke)
 		{
-			
+
 		}
 	}
 	public class DecoyEventArgs : NadeEventArgs
 	{
-		public DecoyEventArgs () : base(EquipmentElement.Decoy)
+		public DecoyEventArgs() : base(EquipmentElement.Decoy)
 		{
-			
+
 		}
 	}
 	public class FlashEventArgs : NadeEventArgs
 	{
+		//previous blind implementation
 		public Player[] FlashedPlayers { get; internal set; }
+		//
 
-		public FlashEventArgs () : base(EquipmentElement.Flash)
+		public FlashEventArgs() : base(EquipmentElement.Flash)
 		{
 
 		}
 	}
 	public class GrenadeEventArgs : NadeEventArgs
 	{
-		public GrenadeEventArgs () : base(EquipmentElement.HE)
+		public GrenadeEventArgs() : base(EquipmentElement.HE)
 		{
-			
+
 		}
 	}
 
@@ -186,24 +188,6 @@ namespace DemoInfo
 		public Player Player { get; set; }
 
 		public bool HasKit { get; set; }
-	}
-
-	public class PlayerBlindEventArgs : EventArgs
-	{
-		/// <summary>
-		/// The blinded player
-		/// </summary>
-		public Player Player { get; set; }
-
-		/// <summary>
-		/// Flash duration
-		/// </summary>
-		public float Duration { get; set; }
-
-		/// <summary>
-		/// Player who threw the flash
-		/// </summary>
-		public Player Attacker { get; set; }
 	}
 
 	public class PlayerHurtEventArgs : EventArgs
@@ -263,9 +247,18 @@ namespace DemoInfo
 		public Hitgroup Hitgroup { get; set; }
 	}
 
+	public class BlindEventArgs : EventArgs
+	{
+		public Player Player { get; set; }
+
+		public Player Attacker { get; set; }
+
+		public float? FlashDuration { get; set; }
+	}
+
 	public class PlayerBindEventArgs : EventArgs
 	{
-		public Player Player {get; set; }
+		public Player Player { get; set; }
 	}
 
 	public class PlayerDisconnectEventArgs : EventArgs
@@ -309,8 +302,8 @@ namespace DemoInfo
 	public class SayText2EventArgs : EventArgs
 	{
 		/// <summary>
- 		/// The player who sent the message
- 		/// </summary>
+		/// The player who sent the message
+		/// </summary>
 		public Player Sender { get; set; }
 
 		/// <summary>
@@ -489,7 +482,8 @@ namespace DemoInfo
 		internal int EntityID { get; set; }
 
 		public EquipmentElement Weapon { get; set; }
-		public EquipmentClass Class {
+		public EquipmentClass Class
+		{
 			get
 			{
 				return (EquipmentClass)(((int)Weapon / 100) + 1);
@@ -521,24 +515,23 @@ namespace DemoInfo
 			}
 		}
 
-		internal Equipment ()
+		internal Equipment()
 		{
 			this.Weapon = EquipmentElement.Unknown;
 		}
 
-		internal Equipment (string originalString)
+		internal Equipment(string originalString)
 		{
 			OriginalString = originalString;
 
-			this.Weapon = MapEquipment (originalString);
-
+			this.Weapon = MapEquipment(originalString);
 		}
 
-		internal Equipment (string originalString, string skin)
+		internal Equipment(string originalString, string skin)
 		{
 			OriginalString = originalString;
 
-			this.Weapon = MapEquipment (originalString);
+			this.Weapon = MapEquipment(originalString);
 
 			SkinID = skin;
 		}
@@ -868,6 +861,12 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
+				ItemIndex = 23,
+				OriginalName = "weapon_mp5sd",
+				Element = EquipmentElement.MP5SD,
+			},
+			new EquipmentMapping
+			{
 				ItemIndex = 500,
 				OriginalName = "weapon_bayonet",
 				Element = EquipmentElement.Knife,
@@ -952,6 +951,7 @@ namespace DemoInfo
 		Mac10 = 104,
 		UMP = 105,
 		P90 = 106,
+		MP5SD = 107,
 
 		//Heavy
 		SawedOff = 201,
@@ -1001,7 +1001,6 @@ namespace DemoInfo
 		Rifle = 4,
 		Equipment = 5,
 		Grenade = 6,
-
 	}
 
 	/// <summary>
@@ -1010,7 +1009,7 @@ namespace DemoInfo
 	public struct EquipmentMapping
 	{
 		/// <summary>
-		/// Index defined in the game file items_game.txt
+		/// Index defined in the game file csgo\scripts\items\items_game.txt
 		/// </summary>
 		public int ItemIndex;
 
@@ -1025,4 +1024,3 @@ namespace DemoInfo
 		public EquipmentElement Element;
 	}
 }
-

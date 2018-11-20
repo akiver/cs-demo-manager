@@ -28,11 +28,12 @@ using Telerik.Windows.Controls;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoMovieViewModel : SingleDemoViewModel
+	public class DemoMovieViewModel : BaseViewModel
 	{
 		private readonly IDialogService _dialogService;
 		private readonly IDemosService _demoService;
 		private readonly ICacheService _cacheService;
+		private Demo _demo;
 		private Player _focusedPlayer;
 		private ObservableCollection<PlayersSelection> _teamCtPlayersSelection = new ObservableCollection<PlayersSelection>();
 		private ObservableCollection<PlayersSelection> _teamTplayersSelection = new ObservableCollection<PlayersSelection>();
@@ -96,6 +97,12 @@ namespace Manager.ViewModel.Demos
 		/// Flag to adapt the UI with POV demos.
 		/// </summary>
 		private bool _isPovDemo;
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public bool IsInstalling
 		{
@@ -732,13 +739,13 @@ namespace Manager.ViewModel.Demos
 									   if (_movieConfig.GenerateVideoFile)
 									   {
 										   if (choice == MessageDialogResult.FirstAuxiliary) return;
-										   if (choice == MessageDialogResult.Affirmative) _movieService.DeleteTgaFiles();
+										   if (choice == MessageDialogResult.Affirmative) _movieService.DeleteRawDirectory();
 										   if (choice == MessageDialogResult.Negative) _movieConfig.GenerateRawFiles = false;
 									   }
 									   else
 									   {
 										   if (choice == MessageDialogResult.Negative) return;
-										   _movieService.DeleteTgaFiles();
+										   _movieService.DeleteRawDirectory();
 									   }
 								   }
 

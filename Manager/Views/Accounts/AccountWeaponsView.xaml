@@ -524,6 +524,26 @@
 									</telerik:BarSeries.LabelDefinitions>
 								</telerik:BarSeries>
 								<telerik:BarSeries CombineMode="Stack"
+												   StackGroupKey="mp5"
+												   ItemsSource="{Binding DatasMp5Kill}"
+												   CategoryBinding="Category"
+												   ValueBinding="Value"
+												   ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack"
+												   StackGroupKey="mp5"
+												   ItemsSource="{Binding DatasMp5Death}"
+												   CategoryBinding="Category"
+												   ValueBinding="Value"
+												   ShowLabels="True">
+									<telerik:BarSeries.LabelDefinitions>
+										<telerik:ChartSeriesLabelDefinition Template="{StaticResource LabelWeaponStatsTemplate}" />
+									</telerik:BarSeries.LabelDefinitions>
+								</telerik:BarSeries>
+								<telerik:BarSeries CombineMode="Stack"
 												   StackGroupKey="mp9"
 												   ItemsSource="{Binding DatasMp9Kill}"
 												   CategoryBinding="Category"

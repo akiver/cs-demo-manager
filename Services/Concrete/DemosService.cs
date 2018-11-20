@@ -220,21 +220,16 @@ namespace Services.Concrete
 
 		public async Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source)
 		{
-			foreach (Demo demo in demos.Where(demo => demo.Type != "POV"))
-			{
+			foreach (Demo demo in demos)
 				await SetSource(demo, source);
-			}
 
 			return demos;
 		}
 
 		public async Task<Demo> SetSource(Demo demo, string source)
 		{
-			if (demo.SourceName != source)
-			{
-				demo.SourceName = source;
-				await _cacheService.WriteDemoDataCache(demo);
-			}
+			demo.SourceName = source;
+			await _cacheService.WriteDemoDataCache(demo);
 
 			return demo;
 		}
@@ -310,21 +305,16 @@ namespace Services.Concrete
 
 		public async Task<List<Demo>> GetDemosPlayer(string steamId)
 		{
-			List<Demo> result = new List<Demo>();
-
 			List<Demo> demos = await _cacheService.GetDemoListAsync();
 
 			if (demos.Any())
 			{
-				result = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
-				for (int i = 0; i < result.Count; i++)
-				{
-					Demo demo = await GetDemoHeaderAsync(result[i].Path);
-					if (demo != null) result[i] = demo;
-				}
+				demos = demos.Where(demo => demo.Players.FirstOrDefault(p => p.SteamId.ToString() == steamId) != null).ToList();
+				foreach (Demo demo in demos)
+					demo.Source = Source.Factory(demo.SourceName);
 			}
 
-			return result;
+			return demos;
 		}
 
 		public async Task<bool> DeleteDemo(Demo demo)

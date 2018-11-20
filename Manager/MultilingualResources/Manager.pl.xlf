@@ -1303,7 +1303,7 @@
           <target state="final">Nazwa drużyny</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamNameTrouble" translate="yes" xml:space="preserve">
-          <source>Team's mame on eco / force buy or semi-eco</source>
+          <source>Team's name on eco / force buy or semi-eco</source>
           <target state="final">Nazwa drużyny na eko / force'ie lub pół-eko</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
@@ -2630,8 +2630,7 @@ Więcej informacji znajdziesz na {1}.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
           <source>Equipment</source>
-          <target state="needs-review-translation">Ekwipunek</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Ekwipunek</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>
@@ -3746,9 +3745,9 @@ Do you want to continue?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
           <source>An error occured while generating the video.
-{0]</source>
+{0}</source>
           <target state="new">An error occured while generating the video.
-{0]</target>
+{0}</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has been installed.</source>

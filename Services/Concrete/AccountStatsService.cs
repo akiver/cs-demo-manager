@@ -318,6 +318,13 @@ namespace Services.Concrete
 							demo.Kills.Count(
 								k => k.KilledSteamId != 0 && k.KilledSteamId == SelectedStatsAccountSteamId && k.Weapon.Element == EquipmentElement.MP7);
 
+						stats.KillMp5Count +=
+							demo.Kills.Count(
+								k => k.KillerSteamId != 0 && k.KillerSteamId == SelectedStatsAccountSteamId && k.Weapon.Element == EquipmentElement.MP5SD);
+						stats.DeathMp5Count +=
+							demo.Kills.Count(
+								k => k.KilledSteamId != 0 && k.KilledSteamId == SelectedStatsAccountSteamId && k.Weapon.Element == EquipmentElement.MP5SD);
+
 						stats.KillMp9Count +=
 							demo.Kills.Count(
 								k => k.KillerSteamId != 0 && k.KillerSteamId == SelectedStatsAccountSteamId && k.Weapon.Element == EquipmentElement.MP9);

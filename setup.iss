@@ -1,4 +1,4 @@
-#define AppVer "2.13.3"
+#define AppVer "2.13.4"
 #define AppName "CSGO Demos Manager"
 #define ExeName "CSGODemosManager.exe"
 #define AppWebsite "https://www.csgo-demos-manager.com"
@@ -117,6 +117,7 @@ Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}"
 [Files]
 Source: "Manager\bin\x86\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\boiler.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\ControlzEx.dll"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\csgodm.core.dll"; DestDir: "{app}"; Flags: ignoreversion

@@ -153,7 +153,7 @@
 								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2WonCount, StringFormat='{} {0}'}"
 										   Style="{StaticResource TextBlockHighlightBig}"/>
 							</TextBlock>
-							<TextBlock Text="1V2 loss "
+							<TextBlock Text="{x:Static properties:Resources.OneVersusTwoLoss}"
 									   FontSize="18"
 									   ToolTip="{x:Static properties:Resources.TotalOneVersusTwoLoss}">
 								<TextBlock Text="{Binding CurrentPlayer.Clutch1V2LossCount, StringFormat='{} {0}'}"

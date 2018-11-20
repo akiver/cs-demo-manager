@@ -1207,7 +1207,7 @@
           <target state="final">Tirs Alliés</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamNameTrouble" translate="yes" xml:space="preserve">
-          <source>Team's mame on eco / force buy or semi-eco</source>
+          <source>Team's name on eco / force buy or semi-eco</source>
           <target state="final">Nom de l'équipe en éco / force buy ou semi-éco</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
@@ -3747,9 +3747,9 @@ Voulez-vous vraiment continuer?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
           <source>An error occured while generating the video.
-{0]</source>
+{0}</source>
           <target state="final">Un erreur s'est produite pendant la génération de la vidéo.
-{0]</target>
+{0}</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has been installed.</source>

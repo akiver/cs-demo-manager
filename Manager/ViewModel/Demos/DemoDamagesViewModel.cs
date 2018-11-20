@@ -17,9 +17,11 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoDamagesViewModel : SingleDemoViewModel
+	public class DemoDamagesViewModel : BaseViewModel
 	{
 		#region Properties
+
+		private Demo _demo;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -74,6 +76,12 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public List<ComboboxSelector> TeamSelectors
 		{

@@ -310,13 +310,11 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipment value CT</source>
-          <target state="needs-review-translation">Udstyrs værdi hold 1</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Udstyrs værdi hold 1</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipment value T</source>
-          <target state="needs-review-translation">Udstyrs værdi hold 2</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Udstyrs værdi hold 2</target>
         </trans-unit>
         <trans-unit id="ExportCustomData" translate="yes" xml:space="preserve">
           <source>Export custom data</source>
@@ -511,13 +509,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start money CT</source>
-          <target state="needs-review-translation">Start penge hold 1</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Start penge hold 1</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start money T</source>
-          <target state="needs-review-translation">Start penge hold 2</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Start penge hold 2</target>
         </trans-unit>
         <trans-unit id="Status" translate="yes" xml:space="preserve">
           <source>Status</source>
@@ -899,13 +895,11 @@
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam1" translate="yes" xml:space="preserve">
           <source>EV CT ($)</source>
-          <target state="needs-review-translation">EV Hold 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EV Hold 1 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderEquipementValueTeam2" translate="yes" xml:space="preserve">
           <source>EV T ($)</source>
-          <target state="needs-review-translation">EV Hold 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">EV Hold 2 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderHsPercent" translate="yes" xml:space="preserve">
           <source>HS%</source>
@@ -929,13 +923,11 @@
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>SM CT ($)</source>
-          <target state="needs-review-translation">SM Hold 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SM Hold 1 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>SM T ($)</source>
-          <target state="needs-review-translation">SM Hold 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SM Hold 2 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderTeamKill" translate="yes" xml:space="preserve">
           <source>FF</source>
@@ -1081,13 +1073,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipement Value CT ($)</source>
-          <target state="needs-review-translation">Udstyrs værdi Hold 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Udstyrs værdi Hold 1 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipEquipmentValueTeam2" translate="yes" xml:space="preserve">
           <source>Equipement Value T ($)</source>
-          <target state="needs-review-translation">Udstyrs Værdi Hold 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Udstyrs Værdi Hold 2 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipFiveKill" translate="yes" xml:space="preserve">
           <source>5 Kills</source>
@@ -1287,13 +1277,11 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start Money CT ($)</source>
-          <target state="needs-review-translation">Start penge hold 1 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Start penge hold 1 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipStartMoneyTeam2" translate="yes" xml:space="preserve">
           <source>Start Money T ($)</source>
-          <target state="needs-review-translation">Start penge hold 2 ($)</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Start penge hold 2 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeam1Name" translate="yes" xml:space="preserve">
           <source>Team 1 name</source>
@@ -1316,7 +1304,7 @@
           <target state="final">Hold navn</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipTeamNameTrouble" translate="yes" xml:space="preserve">
-          <source>Team's mame on eco / force buy or semi-eco</source>
+          <source>Team's name on eco / force buy or semi-eco</source>
           <target state="final">Hold navn på eco / tvangskøb eller semi-eco</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipThreeKill" translate="yes" xml:space="preserve">
@@ -1485,13 +1473,11 @@
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1Full" translate="yes" xml:space="preserve">
           <source>EV CT (Equipment Value CT ($))</source>
-          <target state="needs-review-translation">UVH1 (Udstyrs Værdi Hold 1 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">UVH1 (Udstyrs Værdi Hold 1 ($))</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam2Full" translate="yes" xml:space="preserve">
           <source>EV T (Equipment Value T ($))</source>
-          <target state="needs-review-translation">UVH2 (Udstyrs Værdi Hold 2 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">UVH2 (Udstyrs Værdi Hold 2 ($))</target>
         </trans-unit>
         <trans-unit id="EseaRwsFull" translate="yes" xml:space="preserve">
           <source>RWS (ESEA Round Win Share)</source>
@@ -1579,13 +1565,11 @@
         </trans-unit>
         <trans-unit id="StartMoneyTeam1Full" translate="yes" xml:space="preserve">
           <source>SM CT (Start Money CT ($))</source>
-          <target state="needs-review-translation">SPH1 (Start Penge Hold 1 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SPH1 (Start Penge Hold 1 ($))</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam2Full" translate="yes" xml:space="preserve">
           <source>SM T (Start Money T ($))</source>
-          <target state="needs-review-translation">SPH2 (Start Penge Hold 2 ($))</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">SPH2 (Start Penge Hold 2 ($))</target>
         </trans-unit>
         <trans-unit id="TeamNameTroubleFull" translate="yes" xml:space="preserve">
           <source>TNT (Team Name Trouble)</source>
@@ -2646,8 +2630,7 @@ du kan finde mere information på {1}.</target>
         </trans-unit>
         <trans-unit id="Equipment" translate="yes" xml:space="preserve">
           <source>Equipment</source>
-          <target state="needs-review-translation">udstyr</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Udstyr</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKnifeKills" translate="yes" xml:space="preserve">
           <source>Knife Kills</source>
@@ -3762,9 +3745,9 @@ Do you want to continue?</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileGeneratingVideo" translate="yes" xml:space="preserve">
           <source>An error occured while generating the video.
-{0]</source>
+{0}</source>
           <target state="new">An error occured while generating the video.
-{0]</target>
+{0}</target>
         </trans-unit>
         <trans-unit id="DialogFFmpegHasBeenInstalled" translate="yes" xml:space="preserve">
           <source>FFmpeg has been installed.</source>

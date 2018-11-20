@@ -3,7 +3,8 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 					mc:Ignorable="d"
-					xmlns:models="clr-namespace:Manager.Models">
+					xmlns:models="clr-namespace:Manager.Models"
+					xmlns:core="clr-namespace:Core.Models;assembly=csgodm.core">
 	
 	<Style x:Key="OvertimeScoreboardTemplate" TargetType="{x:Type ListView}">
 		<Setter Property="BorderBrush" Value="Transparent"></Setter>
@@ -27,7 +28,7 @@
 	</Style>
 	
 	<DataTemplate x:Key="OvertimeScoreboardItemTemplate" DataType="{x:Type ListViewItem}">
-		<StackPanel Orientation="Vertical">
+		<StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance core:Demo}">
 			<TextBlock Text="{Binding ScoreTeamCt}" Style="{StaticResource HalfScoreScoreboard}" />
 			<TextBlock Text="|" Style="{StaticResource HalfScoreScoreboard}" />
 			<TextBlock Text="{Binding ScoreTeamT}" Style="{StaticResource HalfScoreScoreboard}" />
@@ -44,25 +45,24 @@
 
 
 	<Style TargetType="Rectangle" x:Key="DemoStatusColorStyle">
+		<d:Style.DataContext>
+			<x:Type Type="models:DemoStatus" />
+		</d:Style.DataContext>
 		<Style.Triggers>
 			<DataTrigger Binding="{Binding Name}"
-						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_TO_WATCH}"
-						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_TO_WATCH}">
 				<Setter Property="Fill" Value="{StaticResource GreenBrush}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Name}"
-						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_WATCHED}"
-						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_WATCHED}">
 				<Setter Property="Fill" Value="{StaticResource LightBlueBrush}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Name}"
-						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_ERROR}"
-						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_ERROR}">
 				<Setter Property="Fill" Value="{StaticResource RedColorBrush}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Name}"
-						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_CORRUPTED}"
-						 d:DataContext="{d:DesignInstance models:DemoStatus}">
+						 Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_CORRUPTED}">
 				<Setter Property="Fill" Value="{StaticResource LightRedColorBrush}"/>
 			</DataTrigger>
 		</Style.Triggers>

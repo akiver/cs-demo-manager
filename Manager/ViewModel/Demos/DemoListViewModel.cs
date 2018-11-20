@@ -43,7 +43,7 @@ using UserControl = System.Windows.Controls.UserControl;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoListViewModel : SingleDemoViewModel, IDisposable
+	public class DemoListViewModel : BaseViewModel, IDisposable
 	{
 
 		#region Properties
@@ -143,7 +143,7 @@ namespace Manager.ViewModel.Demos
 
 		private RelayCommand _downloadDemoFromShareCodeCommand;
 
-		private RelayCommand _copyShareCodeCommand;
+		private RelayCommand<Demo> _copyShareCodeCommand;
 
 		private RelayCommand _showDialogThirdPartySelectionCommand;
 
@@ -558,9 +558,10 @@ namespace Manager.ViewModel.Demos
 						}
 						else
 						{
+							Demo demo = demos.First();
 							SaveFileDialog saveExportDialog = new SaveFileDialog
 							{
-								FileName = Demo.Name.Substring(0, Demo.Name.Length - 4) + "-export.xlsx",
+								FileName = demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx",
 								Filter = "XLSX file (*.xlsx)|*.xlsx"
 							};
 
@@ -572,13 +573,13 @@ namespace Manager.ViewModel.Demos
 									HasRing = true;
 									HasNotification = true;
 									IsCancellable = true;
-									Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, Demo.Name);
+									Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, demo.Name);
 
 									await AnalyzeDemosAsync(true);
 									if (_cts != null)
 									{
-										Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, Demo.Name);
-										await _excelService.GenerateXls(Demo, saveExportDialog.FileName);
+										Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, demo.Name);
+										await _excelService.GenerateXls(demo, saveExportDialog.FileName);
 									}
 								}
 								catch (Exception e)
@@ -626,7 +627,7 @@ namespace Manager.ViewModel.Demos
 							DemoDetailsView detailsView = new DemoDetailsView();
 							mainViewModel.CurrentPage.ShowPage(detailsView);
 						},
-						demo => Demo != null));
+						demo => demo != null));
 			}
 		}
 
@@ -674,7 +675,7 @@ namespace Manager.ViewModel.Demos
 							IsBusy = false;
 							CommandManager.InvalidateRequerySuggested();
 						},
-						demo => Demo != null));
+						demo => demo != null));
 			}
 		}
 
@@ -703,7 +704,7 @@ namespace Manager.ViewModel.Demos
 							{
 								try
 								{
-									GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
+									GameLauncherConfiguration config = new GameLauncherConfiguration(demo)
 									{
 										SteamExePath = AppSettings.SteamExePath(),
 										Width = Properties.Settings.Default.ResolutionWidth,
@@ -732,7 +733,7 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogInvalidTick, MessageDialogStyle.Affirmative);
 							}
 						},
-						demo => Demo != null));
+						demo => demo != null));
 			}
 		}
 
@@ -876,7 +877,7 @@ namespace Manager.ViewModel.Demos
 							string argument = "/select, \"" + demo.Path + "\"";
 							Process.Start("explorer.exe", argument);
 						},
-						demo => Demo != null));
+						demo => demo != null));
 			}
 		}
 
@@ -943,7 +944,7 @@ namespace Manager.ViewModel.Demos
 						}
 						try
 						{
-							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
+							GameLauncherConfiguration config = new GameLauncherConfiguration(demo)
 							{
 								SteamExePath = AppSettings.SteamExePath(),
 								Width = Properties.Settings.Default.ResolutionWidth,
@@ -967,7 +968,7 @@ namespace Manager.ViewModel.Demos
 							await _dialogService.ShowErrorAsync(e.Message, MessageDialogStyle.Affirmative);
 						}
 					},
-					demo => Demo != null));
+					demo => demo != null));
 			}
 		}
 
@@ -982,9 +983,9 @@ namespace Manager.ViewModel.Demos
 					?? (_watchHighlightCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						await ProcessWatchHighOrLow();
+						await ProcessWatchHighOrLow(demo);
 					},
-					demo => Demo != null));
+					demo => demo != null));
 			}
 		}
 
@@ -999,9 +1000,9 @@ namespace Manager.ViewModel.Demos
 					?? (_watchLowlightCommand = new RelayCommand<Demo>(
 					async demo =>
 					{
-						await ProcessWatchHighOrLow(false);
+						await ProcessWatchHighOrLow(demo, false);
 					},
-					demo => Demo != null));
+					demo => demo != null));
 			}
 		}
 
@@ -1078,10 +1079,7 @@ namespace Manager.ViewModel.Demos
 							if (demos == null) return;
 							SelectedDemos.Clear();
 							foreach (Demo demo in demos)
-							{
 								SelectedDemos.Add(demo);
-							}
-							if (demos.Count == 1) Demo = SelectedDemos[0];
 						}));
 			}
 		}
@@ -1143,15 +1141,15 @@ namespace Manager.ViewModel.Demos
 		/// <summary>
 		/// Command to copy demo's share code
 		/// </summary>
-		public RelayCommand CopyShareCodeCommand
+		public RelayCommand<Demo> CopyShareCodeCommand
 		{
 			get
 			{
 				return _copyShareCodeCommand
-					?? (_copyShareCodeCommand = new RelayCommand(
-						async () =>
+					?? (_copyShareCodeCommand = new RelayCommand<Demo>(
+						async demo =>
 						{
-							string shareCode = await _demosService.GetShareCode(Demo);
+							string shareCode = await _demosService.GetShareCode(demo);
 							if (shareCode == string.Empty)
 							{
 								await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoShareCodeUnavailable, MessageDialogStyle.Affirmative);
@@ -1167,7 +1165,7 @@ namespace Manager.ViewModel.Demos
 							IsBusy = false;
 							CommandManager.InvalidateRequerySuggested();
 						},
-						() => Demo != null));
+						(demo) => demo != null));
 			}
 		}
 
@@ -1184,7 +1182,7 @@ namespace Manager.ViewModel.Demos
 						{
 							await _dialogService.ShowCustomDialogAsync(_dialogThirdPartySelection);
 						},
-						() => Demo != null && SelectedDemos.Count > 0));
+						() => SelectedDemos.Count > 0));
 			}
 		}
 
@@ -1576,7 +1574,7 @@ namespace Manager.ViewModel.Demos
 
 							ProcessSendShareCode(thirdPartyName);
 						},
-						thirdPartyName => Demo != null));
+						thirdPartyName => SelectedDemos.Count > 0));
 			}
 		}
 
@@ -2067,7 +2065,7 @@ namespace Manager.ViewModel.Demos
 		/// - The selected account must be in the selected demo
 		/// </summary>
 		/// <returns></returns>
-		private async Task<bool> ValidateHighLowWatch()
+		private async Task<bool> ValidateHighLowWatch(Demo demo)
 		{
 			if (AppSettings.SteamExePath() == null)
 			{
@@ -2080,7 +2078,7 @@ namespace Manager.ViewModel.Demos
 				return false;
 
 			}
-			Player player = Demo.Players.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.WatchAccountSteamId);
+			Player player = demo.Players.FirstOrDefault(p => p.SteamId == Properties.Settings.Default.WatchAccountSteamId);
 			if (player == null)
 			{
 				await _dialogService.ShowMessageAsync(Properties.Resources.DialogPlayerFocusedNotFound, MessageDialogStyle.Affirmative);
@@ -2094,9 +2092,9 @@ namespace Manager.ViewModel.Demos
 		/// Launch highlights or lowlights
 		/// </summary>
 		/// <param name="isHighlight"></param>
-		private async void StartWatchHighOrLow(bool isHighlight = true)
+		private async void StartWatchHighOrLow(Demo demo, bool isHighlight = true)
 		{
-			GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
+			GameLauncherConfiguration config = new GameLauncherConfiguration(demo)
 			{
 				SteamExePath = AppSettings.SteamExePath(),
 				Width = Properties.Settings.Default.ResolutionWidth,
@@ -2127,12 +2125,12 @@ namespace Manager.ViewModel.Demos
 		/// <summary>
 		/// Process when the user want to watch highlights or lowlights
 		/// </summary>
-		private async Task ProcessWatchHighOrLow(bool isHighlight = true)
+		private async Task ProcessWatchHighOrLow(Demo demo, bool isHighlight = true)
 		{
-			bool isWatchValidated = await ValidateHighLowWatch();
+			bool isWatchValidated = await ValidateHighLowWatch(demo);
 			try
 			{
-				if (isWatchValidated) StartWatchHighOrLow(isHighlight);
+				if (isWatchValidated) StartWatchHighOrLow(demo, isHighlight);
 			}
 			catch (Exception e)
 			{

@@ -22,7 +22,7 @@
     <value>Details</value>
   </data>
   <data name="AccountStats" xml:space="preserve">
-    <value>Account Statistiken</value>
+    <value>Accountstatistiken</value>
   </data>
   <data name="AddToSuspects" xml:space="preserve">
     <value>Zu Verdächtigen hinzufügen</value>
@@ -52,7 +52,7 @@
     <value>Zeige alle</value>
   </data>
   <data name="ShowOnlyAccountDemos" xml:space="preserve">
-    <value>Zeige nur Demos zu Account</value>
+    <value>Zeige nur Demos zum Account</value>
   </data>
   <data name="Stats" xml:space="preserve">
     <value>Statistiken</value>
@@ -79,16 +79,16 @@
     <value>Der Quellcode ist erhältlich unter</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
-    <value>Falls sie einen Fehler finden oder Vorschläge haben, bitte melden sie sich unter</value>
+    <value>Falls Sie einen Fehler finden oder Vorschläge haben, melden Sie sich bitte unter</value>
   </data>
   <data name="OrSendAn" xml:space="preserve">
     <value>oder senden Sie eine</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
-    <value>Wenn sie danken sagen möchten, können sie gerne </value>
+    <value>Wenn Sie danken sagen möchten, können Sie gerne </value>
   </data>
   <data name="AlwaysDownload" xml:space="preserve">
-    <value>Bitte laden sie den Installer immer nur von der Offiziellen Website herunter!</value>
+    <value>Bitte laden Sie den Installer immer nur von der offiziellen Website herunter!</value>
   </data>
   <data name="Accounts" xml:space="preserve">
     <value>Accounts</value>
@@ -116,10 +116,10 @@
     <value>Assists</value>
   </data>
   <data name="Ban" xml:space="preserve">
-    <value>Ban</value>
+    <value>Bann</value>
   </data>
   <data name="BanFull" xml:space="preserve">
-    <value>Ban (VAC / OW)</value>
+    <value>Bann (VAC / OW)</value>
   </data>
   <data name="HeaderBombDefused" xml:space="preserve">
     <value>BD</value>
@@ -177,13 +177,13 @@
     <value>Kommentar</value>
   </data>
   <data name="CrouchKills" xml:space="preserve">
-    <value>Crouch kills</value>
+    <value>Geduckte Kills</value>
   </data>
   <data name="CsgoExePath" xml:space="preserve">
-    <value>csgo.exe Dateipfad</value>
+    <value>csgo.exe-Dateipfad</value>
   </data>
   <data name="CurrentAccountWatch" xml:space="preserve">
-    <value>Akuteller Account für Hightlights / Lowlights</value>
+    <value>Aktueller Account für Hightlights / Lowlights</value>
   </data>
   <data name="CurrentFolder" xml:space="preserve">
     <value>Aktueller Ordner</value>
@@ -229,7 +229,7 @@
     <value>Dauer</value>
   </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>E-Mail</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Entry kills</value>
@@ -472,7 +472,7 @@
     <value>Benutze dieses Account zum ansehen</value>
   </data>
   <data name="UseCutomLowlightHighlight" xml:space="preserve">
-    <value>Benutze benutzerdefinierte highlights / lowlights</value>
+    <value>Benutze benutzerdefinierte Highlights / Lowlights</value>
   </data>
   <data name="Watched" xml:space="preserve">
     <value>Angesehen</value>
@@ -490,49 +490,49 @@
     <value>Ja</value>
   </data>
   <data name="ToolTipAccountStats" xml:space="preserve">
-    <value>Account Statistiken (CTRL+E)</value>
+    <value>Account Statistiken (STRG+E)</value>
   </data>
   <data name="ToolTipAddToSuspectsList" xml:space="preserve">
-    <value>Füge Spieler zu Liste der Verdächtigen hinzu (CTRL+W)</value>
+    <value>Füge Spieler zu Liste der Verdächtigen hinzu (STRG+W)</value>
   </data>
   <data name="ToolTipAnalyzeSelectedDemos" xml:space="preserve">
-    <value>Analysiere ausgewählte Demo(s) (CTRL+S)</value>
+    <value>Analysiere ausgewählte Demo(s) (STRG+S)</value>
   </data>
   <data name="ToolTipBrowseToDemo" xml:space="preserve">
-    <value>Durchsuchen (CTRL+B)</value>
+    <value>Durchsuchen (STRG+B)</value>
   </data>
   <data name="ToolTipDeleteDemo" xml:space="preserve">
-    <value>Lösche ausgewählte Demo(s) (CTRL+D)</value>
+    <value>Lösche ausgewählte Demo(s) (STRG+D)</value>
   </data>
   <data name="ToolTipDemoDetails" xml:space="preserve">
-    <value>Demo Details (CTRL+D)</value>
+    <value>Demo Details (STRG+D)</value>
   </data>
   <data name="ToolTipDownloadDemos" xml:space="preserve">
     <value>Lade für den momentan eingeloggten Steam Account alle vorhandenen MM Demos herunter (CTRL+H)</value>
   </data>
   <data name="ToolTipExportXls" xml:space="preserve">
-    <value>Als XLS exportieren (CTRL+X)</value>
+    <value>Als XLS exportieren (STRG+X)</value>
   </data>
   <data name="ToolTipGoToSuspectsList" xml:space="preserve">
-    <value>Liste der Verdächtigen (CTRL+F)</value>
+    <value>Liste der Verdächtigen (STRG+F)</value>
   </data>
   <data name="ToolTipGotoTick" xml:space="preserve">
-    <value>Starte Demo Playback bei speziellem Tick (CTRL+G)</value>
+    <value>Starte Demo Playback bei speziellem Tick (STRG+G)</value>
   </data>
   <data name="ToolTipRefreshDemosList" xml:space="preserve">
-    <value>Aktualisiere Demo Liste (CTRL+R | F5)</value>
+    <value>Aktualisiere Demo Liste (STRG+R | F5)</value>
   </data>
   <data name="ToolTipStop" xml:space="preserve">
     <value>Stop (CTRL+S)</value>
   </data>
   <data name="ToolTipWatchDemo" xml:space="preserve">
-    <value>Demo ansehen (CTRL+W)</value>
+    <value>Demo ansehen (STRG+W)</value>
   </data>
   <data name="ToolTipWatchHighlights" xml:space="preserve">
-    <value>Sieh deine Highlights (CTRL+H)</value>
+    <value>Deine Highlights ansehen (STRG+H)</value>
   </data>
   <data name="ToolTipWatchLowlights" xml:space="preserve">
-    <value>Sieh deine Lowlights (CTRL+H)</value>
+    <value>Deine Lowlights ansehen (STRG+H)</value>
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
@@ -541,7 +541,7 @@
     <value>durch</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
-    <value>Kopiere Email Adresse</value>
+    <value>Kopiere E-Mail-Adresse</value>
   </data>
   <data name="Damages" xml:space="preserve">
     <value>Schaden</value>
@@ -595,7 +595,7 @@
     <value>Übersicht</value>
   </data>
   <data name="PlayerDetails" xml:space="preserve">
-    <value>Player Details</value>
+    <value>Spieler Details</value>
   </data>
   <data name="Rank" xml:space="preserve">
     <value>Rang</value>
@@ -604,7 +604,7 @@
     <value>Runden Details</value>
   </data>
   <data name="SaveComment" xml:space="preserve">
-    <value>Speicher Kommentar</value>
+    <value>Kommentar speichern</value>
   </data>
   <data name="Score" xml:space="preserve">
     <value>Punktestand</value>
@@ -616,40 +616,40 @@
     <value>Tick</value>
   </data>
   <data name="ToolTipAnalyze" xml:space="preserve">
-    <value>Analysiere (CTRL+S)</value>
+    <value>Analysiere (STRG+S)</value>
   </data>
   <data name="ToolTipBack" xml:space="preserve">
-    <value>Zurück (CTRL+B)</value>
+    <value>Zurück (STRG++B)</value>
   </data>
   <data name="ToolTipDamages" xml:space="preserve">
-    <value>Schaden (CTRL+D)</value>
+    <value>Schaden (STRG++D)</value>
   </data>
   <data name="ToolTipFlashbangs" xml:space="preserve">
-    <value>Blendgranaten  (CTRL+F)</value>
+    <value>Blendgranaten (STRG++F)</value>
   </data>
   <data name="ToolTipHeatmap" xml:space="preserve">
-    <value>Heatmap Generator (CTRL+H)</value>
+    <value>Heatmap Generator (STRG+H)</value>
   </data>
   <data name="ToolTipKillsDetails" xml:space="preserve">
-    <value>Kills Details (CTRL+K)</value>
+    <value>Kills Details (STRG+K)</value>
   </data>
   <data name="ToolTipNextDemo" xml:space="preserve">
-    <value>Nächste Demo (CTRL+RIGHT)</value>
+    <value>Nächste Demo (STRG+RIGHT)</value>
   </data>
   <data name="ToolTipOverview" xml:space="preserve">
-    <value>Übersicht (CTRL+O)</value>
+    <value>Übersicht (STRG+O)</value>
   </data>
   <data name="ToolTipPlayerDetails" xml:space="preserve">
-    <value>Spieler Details (CTRL+P)</value>
+    <value>Spieler Details (STRG+P)</value>
   </data>
   <data name="ToolTipPreviousDemo" xml:space="preserve">
-    <value>Letzte Demo (CTRL+LEFT)</value>
+    <value>Letzte Demo (STRG+LEFT)</value>
   </data>
   <data name="ToolTipRoundDetails" xml:space="preserve">
-    <value>Runden Details (CTRL+R)</value>
+    <value>Runden Details (STRG+R)</value>
   </data>
   <data name="ToolTipStuffs" xml:space="preserve">
-    <value>Ausrüstung (CTRL+G)</value>
+    <value>Ausrüstung (STRG+G)</value>
   </data>
   <data name="ToolTipWatchRound" xml:space="preserve">
     <value>Runde ansehen</value>
@@ -717,7 +717,7 @@
     <value>Account Nickname</value>
   </data>
   <data name="HeaderToolTipAccountProfileUrl" xml:space="preserve">
-    <value>Account Profile URL</value>
+    <value>Account Profil URL</value>
   </data>
   <data name="HeaderToolTipAccountStatus" xml:space="preserve">
     <value>Account Status (offline, online...)</value>
@@ -810,7 +810,7 @@
     <value>Entry Kill</value>
   </data>
   <data name="HeaderToolTipEquipmentValue" xml:space="preserve">
-    <value>Equipment Wert </value>
+    <value>Equipment Wert</value>
   </data>
   <data name="HeaderToolTipEquipmentValueTeam1" xml:space="preserve">
     <value>Equipment Wert CT ($)</value>
@@ -873,7 +873,7 @@
     <value>Zuletzt online</value>
   </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
-    <value>Map's name</value>
+    <value>Mapname</value>
   </data>
   <data name="HeaderToolTipMarketBanned" xml:space="preserve">
     <value>Market gebannt</value>
@@ -912,7 +912,7 @@
     <value>Spieler Avatar</value>
   </data>
   <data name="HeaderToolTipPlayerFlashbangThrown" xml:space="preserve">
-    <value>Total Blendgranaten geworfen von Spieler</value>
+    <value>Gesamtanzahl Blendgranaten geworfen von Spieler</value>
   </data>
   <data name="HeaderToolTipPlayerName" xml:space="preserve">
     <value>Spieler Name</value>
@@ -930,13 +930,13 @@
     <value>Runden verloren</value>
   </data>
   <data name="HeaderToolTipRoundNumber" xml:space="preserve">
-    <value>Runden Nummer</value>
+    <value>Rundennummer</value>
   </data>
   <data name="HeaderToolTipRoundPlayed" xml:space="preserve">
     <value>Runden gespielt</value>
   </data>
   <data name="HeaderToolTipRoundType" xml:space="preserve">
-    <value>Runden Typ (normal / eco / force buy / semi-eco)</value>
+    <value>Rundentyp (normal / eco / force buy / semi-eco)</value>
   </data>
   <data name="HeaderToolTipRoundWon" xml:space="preserve">
     <value>Runde gewonnen</value>
@@ -981,13 +981,10 @@
     <value>Total Blendgranaten geworfen von Team</value>
   </data>
   <data name="HeaderToolTipTeamKill" xml:space="preserve">
-    <value>Team Kill (Friendly Fire)</value>
+    <value>Teamkill (Friendly Fire)</value>
   </data>
   <data name="HeaderToolTipTeamName" xml:space="preserve">
     <value>Team Name</value>
-  </data>
-  <data name="HeaderToolTipTeamNameTrouble" xml:space="preserve">
-    <value>Team's Name on eco / forcebuy or semi-eco</value>
   </data>
   <data name="HeaderToolTipThreeKill" xml:space="preserve">
     <value>3 Kills</value>
@@ -1084,16 +1081,16 @@
     <value>Zur Accountliste hinzufügen</value>
   </data>
   <data name="AddToWhitelist" xml:space="preserve">
-    <value>Füge zur Whitelist hinzu</value>
+    <value>Zur Whitelist hinzufügen</value>
   </data>
   <data name="AssistsFull" xml:space="preserve">
-    <value>A (Assits)</value>
+    <value>A (Assists)</value>
   </data>
   <data name="BombDefusedFull" xml:space="preserve">
     <value>BD (Bombe entschärft)</value>
   </data>
   <data name="BombExplodedFull" xml:space="preserve">
-    <value>BE (Bomb Explodiert)</value>
+    <value>BE (Bombe explodiert)</value>
   </data>
   <data name="BombPlantedFull" xml:space="preserve">
     <value>BP (Bombe gelegt)</value>
@@ -1102,7 +1099,7 @@
     <value>C (Clutches)</value>
   </data>
   <data name="CopyPlayDemoCommand" xml:space="preserve">
-    <value>Copiere Playdemo-Befehl</value>
+    <value>Kopiere Playdemo-Befehl</value>
   </data>
   <data name="CrouchKillsFull" xml:space="preserve">
     <value>CK (Geduckte Kills)</value>
@@ -1162,7 +1159,7 @@
     <value>Entfernen</value>
   </data>
   <data name="RemoveFromCache" xml:space="preserve">
-    <value>Entfernen vom Cäche</value>
+    <value>Entfernen vom Cache</value>
   </data>
   <data name="RoundPlayedFull" xml:space="preserve">
     <value>RP (Round Played)</value>
@@ -1174,10 +1171,10 @@
     <value>ST2 (Score Team 2)</value>
   </data>
   <data name="ShowPlayerDemos" xml:space="preserve">
-    <value>Zeige Spieler Demos</value>
+    <value>Zeige Spielerdemos</value>
   </data>
   <data name="ShowSuspectDemos" xml:space="preserve">
-    <value>Zeige Verdächtigen Demos</value>
+    <value>Zeige Verdächtigendemos</value>
   </data>
   <data name="SideTroubleFull" xml:space="preserve">
     <value>ST (Side Trouble)</value>
@@ -1237,7 +1234,7 @@
     <value>Zeit abgelaufen</value>
   </data>
   <data name="EndReasonTsurrender" xml:space="preserve">
-    <value>T Augegeben</value>
+    <value>T Ausgegeben</value>
   </data>
   <data name="EndReasonTwin" xml:space="preserve">
     <value>Terroristen gewinnen</value>
@@ -1276,7 +1273,7 @@
     <value>Brandgrante</value>
   </data>
   <data name="LabelWinnerSide" xml:space="preserve">
-    <value>Gewinner Seite</value>
+    <value>Gewinnerseite</value>
   </data>
   <data name="Molotovs" xml:space="preserve">
     <value>Molotovs</value>
@@ -1592,31 +1589,31 @@
     <value>Snipers</value>
   </data>
   <data name="TipsGraphAverageKillVelocity" xml:space="preserve">
-    <value>Dieses Diagramm stellt Ihre durchschnittliche geschwindigkeit dar wenn sie einen Gegner mit einer Waffe fraggen.</value>
+    <value>Dieses Diagramm stellt Ihre durchschnittliche Geschwindigkeit dar, in der Sie einen Gegner mit einer Waffe töten.</value>
   </data>
   <data name="TipsMaximumVelocity" xml:space="preserve">
-    <value>Information : Die maximale Geschwindigkeit beim laufen beträgt 250 units/s</value>
+    <value>Information : Die maximale Geschwindigkeit beim Laufen beträgt 250 Einheiten/s</value>
   </data>
   <data name="ToolTipAddPlayerToSuspectsList" xml:space="preserve">
-    <value>Füge Spieler zur Liste der Verdächtigen hinzu (CTRL+S)</value>
+    <value>Füge Spieler zur Liste der Verdächtigen hinzu (STRG+S)</value>
   </data>
   <data name="ToolTipAddPlayerToWhiteList" xml:space="preserve">
-    <value>Füge Spieler zur Whitelist hinzu (CTRL+W)</value>
+    <value>Füge Spieler zur Whitelist hinzu (STRG+W)</value>
   </data>
   <data name="ToolTipMaps" xml:space="preserve">
-    <value>Maps (CTRL+M)</value>
+    <value>Maps (STRG+M)</value>
   </data>
   <data name="ToolTipMatchesPlayed" xml:space="preserve">
     <value>Matches gespielt</value>
   </data>
   <data name="ToolTipOverall" xml:space="preserve">
-    <value>Gesamt (CTRL+O)</value>
+    <value>Gesamt (STRG+O)</value>
   </data>
   <data name="ToolTipProgression" xml:space="preserve">
-    <value>Fortschritt (CTRL+P)</value>
+    <value>Fortschritt (STRG+P)</value>
   </data>
   <data name="ToolTipRank" xml:space="preserve">
-    <value>Rang (CTRL+R)</value>
+    <value>Rang (STRG+R)</value>
   </data>
   <data name="ToolTipTotalAssists" xml:space="preserve">
     <value>Total Assists</value>
@@ -1649,7 +1646,7 @@
     <value>Waffen (CTRL+W)</value>
   </data>
   <data name="VelocityAverage" xml:space="preserve">
-    <value>Durchschnittliche Geschwindigkeit.</value>
+    <value>Durchschnittliche Geschwindigkeit</value>
   </data>
   <data name="WeaponKills" xml:space="preserve">
     <value>Waffe Kills</value>
@@ -1679,7 +1676,7 @@
     <value>Demo nicht gefunden.</value>
   </data>
   <data name="DialogDemosHaveBeenDownloaded" xml:space="preserve">
-    <value>{0} Dmo(s) wurden heruntergeladen.</value>
+    <value>{0} Demo(s) wurden heruntergeladen.</value>
   </data>
   <data name="DialogDemosRemovedFromCache" xml:space="preserve">
     <value>{0} Demo(s) gelöscht vom Cache.</value>
@@ -1688,32 +1685,32 @@
     <value>{0} Demo(s) wurden in den Papierkorb verschoben.</value>
   </data>
   <data name="DialogEnterTick" xml:space="preserve">
-    <value>Geben sie den Tick ein.</value>
+    <value>Geben Sie den Tick ein.</value>
   </data>
   <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>Beim analyieren der Demo(s) ist ein Fehler aufgetreten.</value>
+    <value>Beim analysieren der Demo(s) ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
-    <value>Fehler beim Versuch Verdächtigen Informationen zu erhalten.</value>
+    <value>Fehler beim Versuch, Informationen zum Verdächtigten zu erhalten.</value>
   </data>
   <data name="DialogErrorWhileExportingDemo" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim  exportieren der Demo</value>
+    <value>Beim Exportieren der Demo ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorWhileExportingDemos" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim exporieren der Demos.</value>
+    <value>Beim Exportieren der Demos ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim aktualisieren des zuletzt bekannten Rangs.</value>
+    <value>Beim Aktualisieren des zuletzt bekannten Rangs ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim erhalten der Match Informationen ({0}).</value>
+    <value>Beim erhalten der Match-Informationen ({0}) ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogExportMultipleOrSingle" xml:space="preserve">
-    <value>Wollen sie die Daten in eine einzelne Datei oder in mehrere exporieren?</value>
+    <value>Wollen Sie die Daten in eine einzelne Datei oder in mehrere exporieren?</value>
   </data>
   <data name="DialogExportPlayer" xml:space="preserve">
-    <value>Sie sind dabei Daten vom Spieler "{0}" zu exportieren.
-Wollen sie fortfahren?</value>
+    <value>Sie sind dabei, Daten vom Spieler "{0}" zu exportieren.
+Wollen Sie fortfahren?</value>
   </data>
   <data name="DialogGoToTick" xml:space="preserve">
     <value>Gehe zu Tick</value>
@@ -1725,27 +1722,27 @@ Wollen sie fortfahren?</value>
     <value>Keine aktuellere Demo verfügbar.</value>
   </data>
   <data name="DialogRemoveDemosFromCacheConfirmation" xml:space="preserve">
-    <value>Sind Sie sich sicher dass sie diese Demo(s) aus dem Dateien Cache entfernen wollen?
+    <value>Sind Sie sich sicher, dass Sie diese Demo(s) aus dem Dateien-Cache entfernen wollen?
 Dies löscht nicht ihre Demos auf der Festplatte.</value>
   </data>
   <data name="DialogRestartSteam" xml:space="preserve">
-    <value>Bitte starten sie Steam neu.</value>
+    <value>Bitte starten Sie Steam neu.</value>
   </data>
   <data name="DialogSelectAccountFirst" xml:space="preserve">
-    <value>Bitte wählen sie zunächst einen Account aus.</value>
+    <value>Bitte wählen Sie zunächst einen Account aus.</value>
   </data>
   <data name="DialogSendToRecycleBinConfimation" xml:space="preserve">
-    <value>Sie sie sich sicher, dass sie die Demo(s) in den Papierkorb verschieben wollen?</value>
+    <value>Sind Se sich sicher, dass Sie die Demo(s) in den Papierkorb verschieben wollen?</value>
   </data>
   <data name="DialogSetAccountToFocus" xml:space="preserve">
-    <value>Sie müssen den Account auswählen um diese Funktionen zu nutzen</value>
+    <value>Sie müssen den Account auswählen, um diese Funktionen zu nutzen</value>
   </data>
   <data name="DialogSetFolderForDownload" xml:space="preserve">
-    <value>Sie müssen den Ordner auswählen indem die Demos gespeicher werden sollen (Einstellungen)</value>
+    <value>Sie müssen den Ordner in den Einstellungen auswählen, in dem die Demos gespeicher werden sollen.</value>
   </data>
   <data name="DialogSteamNotFound" xml:space="preserve">
-    <value>Steam ist nicht installiert. 
-So kann CSGO nicht gestartet werden.</value>
+    <value>Steam scheint nicht installiert zu sein. 
+Das Spiel kann nicht gestartet werden.</value>
   </data>
   <data name="DialogSteamNotRunningOrNotLoggedIn" xml:space="preserve">
     <value>Steam ist nicht geöffnet oder Sie sind nicht mit einem Steamaccount eingeloggt.</value>
@@ -1775,7 +1772,7 @@ So kann CSGO nicht gestartet werden.</value>
     <value>Abbrechen...</value>
   </data>
   <data name="NotificationCheckingNewBanned" xml:space="preserve">
-    <value>Überprüfe auf neu-gebannte Verdächtige...</value>
+    <value>Überprüfe auf neu gebannte Verdächtige...</value>
   </data>
   <data name="NotificationDownloadingDemo" xml:space="preserve">
     <value>Demo herunterladen {0}/{1}...</value>
@@ -1841,58 +1838,58 @@ So kann CSGO nicht gestartet werden.</value>
     <value>Cachegröße</value>
   </data>
   <data name="DialogAccountAlreadyInList" xml:space="preserve">
-    <value>Dieser Spieler ist bereits in ihrer Account Liste.</value>
+    <value>Dieser Spieler ist bereits in ihrer Accountliste.</value>
   </data>
   <data name="DialogAddAnAccount" xml:space="preserve">
     <value>Füge Account hinzu</value>
   </data>
   <data name="DialogAnalyzeAllDemosConfirmation" xml:space="preserve">
-    <value>Wollen sie nur die ausgewählten Demos, oder alle Demos im Ordner analysieren?</value>
+    <value>Wollen Sie nur die ausgewählten Demos oder alle Demos im Ordner analysieren?</value>
   </data>
   <data name="DialogBackupCreated" xml:space="preserve">
     <value>Die Backup-Datei wurde erstellt, Sie können sie nun reimporierten unter Einstellungen.</value>
   </data>
   <data name="DialogConfirmDeleteDemosData" xml:space="preserve">
-    <value>Demos Daten werden gelöscht. Sind Sie sich sicher?</value>
+    <value>Demo-Daten werden gelöscht. Sind Sie sich sicher?</value>
   </data>
   <data name="DialogCustomDataImported" xml:space="preserve">
     <value>Spezielle Daten wurden importiert.</value>
   </data>
   <data name="DialogDeleteVdmFilesConfirmation" xml:space="preserve">
-    <value>All VDM Dateien in deinen Ordner werden gelöscht, bist du dir sicher?</value>
+    <value>Alle VDM Dateien in deinen Ordner werden gelöscht, sind Sie sich sicher?</value>
   </data>
   <data name="DialogDemosDataCleared" xml:space="preserve">
     <value>Demos Daten gelöscht.</value>
   </data>
   <data name="DialogEnterSteamId" xml:space="preserve">
-    <value>Fügen sie die SteamID 64 oder die Steam Community URL ein.</value>
+    <value>Fügen Sie die SteamID 64 oder die Steam Community URL ein.</value>
   </data>
   <data name="DialogErrorCreatingBackupFile" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim Exporieren der speziellen Daten.</value>
+    <value>Beim Exporieren der speziellen Daten ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorDeletingVdmFiles" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim Löschen der VDM Dateien.</value>
+    <value>Beim Löschen der VDM Dateien ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorImportingCustomData" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim imporieren von speziellen Daten. Die Backup Datei könnte beschädigt sein.</value>
+    <value>Beim imporieren von speziellen Daten ist ein Fehler aufgetreten. Die Backup-Datei könnte beschädigt sein.</value>
   </data>
   <data name="DialogErrorInvalidSteamId" xml:space="preserve">
-    <value>Ungültige SteamID 64 or Steam Community URL.</value>
+    <value>Ungültige SteamID 64 oder Steam Community URL.</value>
   </data>
   <data name="DialogErrorRemovingAccount" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim löschen des Accounts.</value>
+    <value>Beim Löschen des Accounts ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorWhileRetrievingPlayerInformation" xml:space="preserve">
-    <value>Fehler beim Versuch Spieler Informationen zu erhalten.</value>
+    <value>Fehler beim Versuch Spielerinformationen zu erhalten.</value>
   </data>
   <data name="DialogNoErrorsFile" xml:space="preserve">
     <value>Es gibt keine Error log Datei.</value>
   </data>
   <data name="DialogSelectCsgoPath" xml:space="preserve">
-    <value>Bitte wählen sie den csgo.exe Dateipad aus um dies zu aktivieren.</value>
+    <value>Bitte wählen Sie den Dateipfad von csgo.exe aus, um dies zu aktivieren.</value>
   </data>
   <data name="DialogVdmFilesDeleted" xml:space="preserve">
-    <value>VDM Dateienn gelöscht.</value>
+    <value>VDM-Dateien gelöscht.</value>
   </data>
   <data name="MegaByte" xml:space="preserve">
     <value>MB</value>
@@ -1910,7 +1907,7 @@ So kann CSGO nicht gestartet werden.</value>
     <value>Auswahl</value>
   </data>
   <data name="ToolTipDisplaySettings" xml:space="preserve">
-    <value>Anzeigen Einstellungen</value>
+    <value>Zeige Einstellungen an</value>
   </data>
   <data name="DialogAnalyzeRequired" xml:space="preserve">
     <value>Sie müssen die Demo zuerst analysieren.</value>
@@ -1922,8 +1919,8 @@ So kann CSGO nicht gestartet werden.</value>
     <value>boiler.exe nicht gefunden.</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>Diese Demo scheint zu alt zu sein, falls nicht senden Sie mir bitte eine Email mit der Demo.
-Sie finden mehr Informationen hierzu unter {0}.</value>
+    <value>Diese Demos scheinen zu alt zu sein. Falls nicht, senden Sie mir bitte eine E-Mail mit der Demo.
+Mehr Informationen finden Sie unter {0}.</value>
   </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>Folgende Demos konnten nicht gefunden werden:</value>
@@ -1933,8 +1930,8 @@ Sie finden mehr Informationen hierzu unter {0}.</value>
   </data>
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
     <value>Beim analysieren der Demo(s) ist ein Fehler aufgetreten {0}.
-Die Demo könnte zu alt sein, falls nicht, senden sie mir bitte eine Email mit der Demo.
-Sie finden mehr Informationen hierzu unter {1}.</value>
+Die Demo scheinen zu alt zu sein. Falls nicht, senden Sie mir bitte eine E-Mail mit der Demo.
+Mehr Informationen finden Sie unter {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Diese Karte unterstützt diese Funktion nicht.</value>
@@ -1946,7 +1943,7 @@ Sie finden mehr Informationen hierzu unter {1}.</value>
     <value>Keine Internetverbindung erkannt, Sie können diese Funktion nicht nutzen.</value>
   </data>
   <data name="DialogPovSelection" xml:space="preserve">
-    <value>Welche POV (Kamera Perspektive) wollen Sie sehen?</value>
+    <value>Welche POV (Kameraperspektive) wollen Sie sehen?</value>
   </data>
   <data name="EnemyPov" xml:space="preserve">
     <value>Gegner POV</value>
@@ -1976,13 +1973,13 @@ Sie finden mehr Informationen hierzu unter {1}.</value>
     <value>Counter-Terrorists</value>
   </data>
   <data name="DialogNoPointsFound" xml:space="preserve">
-    <value>Keine Punkte gefunden. Sie müssen vielleicht die Demo analysieren.</value>
+    <value>Keine Punkte gefunden. Sie sollten die Demo analysieren.</value>
   </data>
   <data name="Equipment" xml:space="preserve">
     <value>Equipment</value>
   </data>
   <data name="HeaderToolTipKnifeKills" xml:space="preserve">
-    <value>Knife Kills</value>
+    <value>Messer Kills</value>
   </data>
   <data name="HeadshotsPercent" xml:space="preserve">
     <value>Kopfschüsse %</value>
@@ -1997,7 +1994,7 @@ Sie finden mehr Informationen hierzu unter {1}.</value>
     <value>Lautstärke</value>
   </data>
   <data name="LogOnlyKills" xml:space="preserve">
-    <value>Log nur kills</value>
+    <value>Nur Kills loggen</value>
   </data>
   <data name="NotificationGeneratingData" xml:space="preserve">
     <value>Generiere Daten...</value>
@@ -2030,31 +2027,31 @@ Sie finden mehr Informationen hierzu unter {1}.</value>
     <value>Terroristen</value>
   </data>
   <data name="ToolTipAddAllPlayersSeen" xml:space="preserve">
-    <value>Füge alle gesehen Spieler hinzu (CTRL+G)</value>
+    <value>Füge alle gesehen Spieler hinzu (STRG+G)</value>
   </data>
   <data name="ToolTipGoToSuspectProfile" xml:space="preserve">
-    <value>Öffne Profil des Verdächtigen (CTRL+P)</value>
+    <value>Öffne Profil des Verdächtigen (STRG+P)</value>
   </data>
   <data name="ToolTipMoveSuspectToWhitelist" xml:space="preserve">
-    <value>Bewege Verdächtige(n) zur Whitelist (CTRL+M)</value>
+    <value>Bewege Verdächtige(n) zur Whitelist (STRG+M)</value>
   </data>
   <data name="ToolTipPause" xml:space="preserve">
-    <value>Pause (CTRL+O)</value>
+    <value>Pause (STRG+O)</value>
   </data>
   <data name="ToolTipPlay" xml:space="preserve">
-    <value>Abspielen (CTRL+P)</value>
+    <value>Abspielen (STRG+P)</value>
   </data>
   <data name="ToolTipRefreshList" xml:space="preserve">
-    <value>Aktualisere Liste (CTRL+R)</value>
+    <value>Aktualisere Liste (STRG+R)</value>
   </data>
   <data name="ToolTipRemoveSuspect" xml:space="preserve">
-    <value>Entferne Verdächtige (DEL)</value>
+    <value>Entferne Verdächtige (ENTF)</value>
   </data>
   <data name="ToolTIpShowOnlySuspectDemos" xml:space="preserve">
     <value>Zeige Demos die den ausgewählten Verdächtigen beinhalten (CTRL+F)</value>
   </data>
   <data name="ToolTipWhitelist" xml:space="preserve">
-    <value>Whitelist (CTRL+W)</value>
+    <value>Whitelist (STRG+W)</value>
   </data>
   <data name="WatermarkSearch" xml:space="preserve">
     <value>Suchen...</value>
@@ -2070,7 +2067,7 @@ Sie finden mehr Informationen hierzu unter {1}.</value>
   </data>
   <data name="DialogCsgoNotDetected" xml:space="preserve">
     <value>Es scheint, dass CSGO nicht auf ihrer Hauptfestplatte installiert ist.
-Die standardisierten "csgo" und "replays" Ordner konnten nicht gefunden werden. Bitte fügen sie Ordner unter Einstellungen hinzu.</value>
+Die normalen Ordner "csgo" und "replays" konnten nicht gefunden werden. Bitte fügen Sie Ordner unter den Einstellungen hinzu.</value>
   </data>
   <data name="DialogErrorWhileDeletingPlayer" xml:space="preserve">
     <value>Fehler beim Löschen von Spielern.</value>
@@ -2079,22 +2076,22 @@ Die standardisierten "csgo" und "replays" Ordner konnten nicht gefunden werden. 
     <value>Fehler beim Löschen von Verdächtigen.</value>
   </data>
   <data name="DialogErrorWhileExportingCustomData" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim Exporieren der speziellen Daten.</value>
+    <value>Beim Exporieren der speziellen Daten ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogErrorWhileMovingSuspects" xml:space="preserve">
     <value>Fehler beim bewegen von Verdächtigen.</value>
   </data>
   <data name="DialogErrorWhileRetrievingPlayersInformation" xml:space="preserve">
-    <value>Fehler beim Versuch Spieler Informationen zu erhalten.</value>
+    <value>Fehler beim Versuch, Spieler Informationen zu erhalten.</value>
   </data>
   <data name="DialogErrorWhileRetrievingSuspectInformation" xml:space="preserve">
-    <value>Fehler beim Versuch Verdächtigen Informationen zu erhalten.</value>
+    <value>Fehler beim Versuch, Verdächtigen Informationen zu erhalten.</value>
   </data>
   <data name="DialogErrorWhileRetrievingSuspectsInformation" xml:space="preserve">
-    <value>Fehler beim Versuch Verdächtigen Informationen zu erhalten.</value>
+    <value>Fehler beim Versuch, Verdächtigen Informationen zu erhalten.</value>
   </data>
   <data name="DialogNewVersionAvailable" xml:space="preserve">
-    <value>Eine aktuellere Version ist verfügbar.
+    <value>Eine neue Version ist verfügbar.
 Wollen Sie sie herunterladen?</value>
   </data>
   <data name="DialogNoDemosPlayerFound" xml:space="preserve">
@@ -2111,7 +2108,7 @@ Um ihn in ihre Liste der Verdächtigen hinzuzufügen müssen sie ihn aus den and
   </data>
   <data name="DialogUpdateRequireClearCache" xml:space="preserve">
     <value>Dieses Update verlangt das Löschen von allen Daten aus dem Cache (Verdächtige bleiben erhalten).
-Möchtigen sie ihre benutzerdefinierten Daten speichern?</value>
+Möchten Sie Ihre benutzerdefinierten Daten speichern?</value>
   </data>
   <data name="DialogPlayerNotFound" xml:space="preserve">
     <value>Spieler konnte nicht gefunden werden.</value>
@@ -2174,29 +2171,29 @@ Möchtigen sie ihre benutzerdefinierten Daten speichern?</value>
     <value>Es ist ein Fehler aufgetreten beim exporieren der Heatmap als PNG.</value>
   </data>
   <data name="DialogErrorWhileAddingPlayerToSuspectsList" xml:space="preserve">
-    <value>Fehler beim hinzufügen von Spieler zur Liste der Verdächtigen.</value>
+    <value>Fehler beim Hinzufügen von Spieler zur Liste der Verdächtigen.</value>
   </data>
   <data name="DialogErrorWhileAddingPlayerToWhitelist" xml:space="preserve">
-    <value>Fehler beim hinzufügen von Spieler zur Whitelist.</value>
+    <value>Fehler beim Hinzufügen von Spieler zur Whitelist.</value>
   </data>
   <data name="DialogNoDamagesDataFound" xml:space="preserve">
     <value>Keine Beschädigungen gefunden. 
-Die Demo ist zu alt oder sie haben sie noch nicht analysiert.</value>
+Die Demo ist zu alt oder Sie haben sie noch nicht analysiert.</value>
   </data>
   <data name="DialogNoDemosFoundForPlayer" xml:space="preserve">
     <value>Keine Demos für diesen Spieler gefunden.
 Demos mit diesem Spieler sind vielleicht noch nicht analysiert worden.</value>
   </data>
   <data name="DialogPlayerAlreadyInAccountsList" xml:space="preserve">
-    <value>Dieser Spieler ist bereits in ihrer Account Liste.</value>
+    <value>Dieser Spieler ist bereits in Ihrer Account Liste.</value>
   </data>
   <data name="DialogPlayerAlreadyInSuspectsList" xml:space="preserve">
-    <value>Dieser Spieler ist bereits in ihrer Account Liste.
-Um ihn in ihre Liste der Verdächtigen hinzuzufügen müssen Sie vorher aus der Accountliste löschen.</value>
+    <value>Dieser Spieler ist bereits in ihrer Accountliste.
+Um ihn in Ihre Liste der Verdächtigen hinzuzufügen müssen Sie ihn aus der Accountliste löschen.</value>
   </data>
   <data name="DialogPlayerAlreadyInWhitelist" xml:space="preserve">
-    <value>Dieser Spieler ist bereits in ihrer Account Liste.
-Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste löschen.</value>
+    <value>Dieser Spieler ist bereits in ihrer Accountliste.
+Um ihn in Ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste löschen.</value>
   </data>
   <data name="Light" xml:space="preserve">
     <value>Licht</value>
@@ -2220,7 +2217,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <value>Spieler wurde zur Liste der Verdächtigen hinzugefügt.</value>
   </data>
   <data name="NotificationPlayerAddedToAccountsList" xml:space="preserve">
-    <value>Spieler wurde zur Account Liste hinzugefügt.</value>
+    <value>Spieler wurde zur Accountliste hinzugefügt.</value>
   </data>
   <data name="NotificationPlayerAddedToWhitelist" xml:space="preserve">
     <value>Spieler wurde zur Whitelist hinzugefügt.</value>
@@ -2287,7 +2284,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <comment>used for heatmap flashbang tooltip (about x seconds)</comment>
   </data>
   <data name="ToolTipAddToWhitelist" xml:space="preserve">
-    <value>Add Account zur Whitelist hinzu</value>
+    <value>Account zur Whitelist hinzufügen</value>
   </data>
   <data name="ToolTipBlinded" xml:space="preserve">
     <value>geblendet</value>
@@ -2298,7 +2295,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <comment>used for heatmap flashbang tooltip</comment>
   </data>
   <data name="ToolTipGoToPlayerProfile" xml:space="preserve">
-    <value>Öffne Profil des Spielers (CTRL+P)</value>
+    <value>Öffne Profil des Spielers (STRG+P)</value>
   </data>
   <data name="ToolTipKilled" xml:space="preserve">
     <value>gekillt</value>
@@ -2309,7 +2306,7 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <comment>used for heatmap flashbang tooltip</comment>
   </data>
   <data name="ToolTipRemovePlayersFromWhitelist" xml:space="preserve">
-    <value>Entferne Spieler von der Whiteliste (DEL)</value>
+    <value>Entferne Spieler von der Whiteliste (ENTF)</value>
   </data>
   <data name="ToolTipSeconds" xml:space="preserve">
     <value>Sekunde(n)</value>
@@ -2320,14 +2317,14 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <comment>used for heatmap flashbang tooltip</comment>
   </data>
   <data name="ToolTipShowPlayerDemos" xml:space="preserve">
-    <value>Zeige Demos die den Spieler enthalten (CTRL+F)</value>
+    <value>Zeige Demos die den Spieler enthalten (STRG+F)</value>
   </data>
   <data name="ToolTipTimes" xml:space="preserve">
     <value>Zeit(en)</value>
     <comment>used for heatmap flashbang tooltip</comment>
   </data>
   <data name="WhitelistInformation" xml:space="preserve">
-    <value>Spieler die unten gelisten sind werden nicht auf Ban überprüft beim Aalysieren der Demo</value>
+    <value>Spieler, die unten gelisten sind, werden beim Analysieren der Demo nicht auf Ban überprüft.</value>
   </data>
   <data name="All" xml:space="preserve">
     <value>Alle</value>
@@ -2406,19 +2403,19 @@ Um ihn in ihre Whitelist hinzuzufügen müssen Sie vorher aus der Accountliste l
     <value>Team</value>
   </data>
   <data name="ToolTipCopySetposCommand" xml:space="preserve">
-    <value>Kopiere setpos-Befehl (CTRL+C)</value>
+    <value>Kopiere setpos-Befehl (STRG+C)</value>
   </data>
   <data name="ToolTipGenerateHeatmap" xml:space="preserve">
-    <value>Generiere Heatmap (CTRL+G)</value>
+    <value>Generiere Heatmap (STRG+G)</value>
   </data>
   <data name="ToolTipSaveAsPng" xml:space="preserve">
-    <value>Speichern als PNG (CTRL+S)</value>
+    <value>Speichern als PNG (STRG+S)</value>
   </data>
   <data name="ToolTipUpdate" xml:space="preserve">
-    <value>Update (CTRL+R)</value>
+    <value>Update (STRG+R)</value>
   </data>
   <data name="ToolTipWatchAllStuffsFromPlayer" xml:space="preserve">
-    <value>Zeige alle Ausrüstung von diesem Spieler (CTRL+W)</value>
+    <value>Zeige alle Ausrüstung von diesem Spieler (STRG+W)</value>
   </data>
   <data name="TotalCashEarned" xml:space="preserve">
     <value>Total Geld verdient ($)</value>
@@ -2462,10 +2459,10 @@ Message Error :
 {0}</value>
   </data>
   <data name="InformationTranslateIncomplete" xml:space="preserve">
-    <value>If the app is still in english after changing the language, it means that the translation has not been done or is incomplete.</value>
+    <value>Falls die App nach dem Wechsel der Sprache noch auf Englisch ist könnte es sein, dass die Übersetzung noch nicht fertig oder vollständig ist.</value>
   </data>
   <data name="InfomationHelpTranslatingApp" xml:space="preserve">
-    <value>Bitte helfen sie diese App zu übersetzen, mehr Informationen unter</value>
+    <value>Bitte helfen Sie, diese App zu übersetzen. Mehr Informationen unter</value>
   </data>
   <data name="Contributors" xml:space="preserve">
     <value>Teilnehmer</value>
@@ -2503,16 +2500,16 @@ Message Error :
     <value>Exportiere Demo Chat</value>
   </data>
   <data name="ExportChat" xml:space="preserve">
-    <value>Export chat</value>
+    <value>Exportiere Chat</value>
   </data>
   <data name="DialogChatFileCreated" xml:space="preserve">
     <value>Chat Message Datei wurde erstellt.</value>
   </data>
   <data name="DialogNoChatFound" xml:space="preserve">
-    <value>Keine Chat Messages Gefunden. (Es funktioniert nur bei Demos die auf einem Server aufgenommen wurden mit "tv_relaytextchat" ungleich "0" - dies ist nicht der Fall bei Valve Matchmaking)</value>
+    <value>Keine Chatnachrichten gefunden. (Es funktioniert nur bei Demos, die auf einem Server aufgenommen wurden, mit "tv_relaytextchat" ungleich "0" - dies ist nicht der Fall bei Valve Matchmaking)</value>
   </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
-    <value>Nichts {0} gefunden bei diser auswahl.</value>
+    <value>Nichts {0} gefunden bei dieser Auswahl.</value>
   </data>
   <data name="Shots" xml:space="preserve">
     <value>Schüsse</value>
@@ -2533,32 +2530,32 @@ Message Error :
     <value>Teilen-Code nicht verfügbar. Dies funktioniert nur bei MM Demos und sofern die .info file existiert.</value>
   </data>
   <data name="YesDontAsk" xml:space="preserve">
-    <value>Ja und fragen Se micht nicht wieder</value>
+    <value>Ja und fragen nicht wieder</value>
   </data>
   <data name="DialogSendThirdPartyConfirmation" xml:space="preserve">
-    <value>Sie sind dabei den Teilen-Code der Demo zu senden {0}. Wllen sie fortfahren?</value>
+    <value>Sie sind dabei den Teilen-Code der Demo zu senden {0}. Wollen sie fortfahren?</value>
   </data>
   <data name="DialogErrorWhileSendingShareCode" xml:space="preserve">
-    <value>Es ist ein Fehler aufgetreten beim senden des Teilen Codes.</value>
+    <value>Beim Senden des Teilen Codes ist ein Fehler aufgetreten.</value>
   </data>
   <data name="DialogSendShareCodeWarning" xml:space="preserve">
     <value>Sie sind dabei den Teilen-Code der Demo zu senden {0}.</value>
   </data>
   <data name="DialogSelectThirdParty" xml:space="preserve">
-    <value>Wählen sie die  third party application aus.</value>
+    <value>Wählen sie die third party application aus.</value>
   </data>
   <data name="ToolTipShowDemoOnThirdParty" xml:space="preserve">
     <value>Zeige Demo Details in third party application</value>
   </data>
   <data name="DialogConfigurationCorrupted" xml:space="preserve">
-    <value>Ihre Konfiguartion ist fehlerhaft. Bitte starten sie diese App erneut und setzen sie die Konfiguration zurück.</value>
+    <value>Ihre Konfiguration ist fehlerhaft. Bitte starten sie die App erneut und setzen sie die Konfiguration zurück.</value>
   </data>
   <data name="DialogEnableHlaeWarning" xml:space="preserve">
-    <value>Den Moviemakermode zu aktivieren ändert wie sich das Spiel startet. (Wenn man auf alle "Watch/Ansehen" buttons klickt)
-Es nutzt das Tool "Half-Life Advanced Effects" (HLAE) which ist technically a hack.
-Sie sollten das NUR nutzen wenn sie wissen was sie tun UND nur zum bearbeiten von Moviemaking bezogenen Dingen.
-Falls sie nicht wissen was das ist oder sie planen nicht oben beschriebenen durchzuführen klicken sie JETZT auf Cancel/Abbrechen.
-Falls sie es einschalten wird das Spiel (immer) mit dem "-insecure" Startparameter gestarten, was bedeutet, dass es ihnen nicht möglich ist auf VAC geschützten Servern zu spielen um einen Vac Bann zu verhindern.</value>
+    <value>Den Moviemakermode zu aktivieren ändert, wie sich das Spiel startet. (Wenn man auf alle "Watch/Ansehen"-Buttons klickt)
+Es nutzt das Tool "Half-Life Advanced Effects" (HLAE), welches, technisch gesehen, ein Hack ist.
+Sie sollten das NUR nutzen, wenn Sie wissen, was Sie tun UND es nur zum Bearbeiten von Moviemaking-bezogenen Dingen nutzen.
+Falls Sie nicht wissen, was das ist, oder Sie planen, nicht oben beschriebene Dinge durchzuführen, klicken Sie JETZT auf Cancel/Abbrechen.
+Falls Sie es einschalten, wird das Spiel (immer) mit dem "-insecure" Startparameter gestarten, was bedeutet, dass es Ihnen nicht möglich ist, auf VAC geschützten Servern zu spielen, um einen VAC-Bann zu verhindern.</value>
   </data>
   <data name="DemoStatusNone" xml:space="preserve">
     <value>Nichts</value>
@@ -2568,5 +2565,9 @@ Falls sie es einschalten wird das Spiel (immer) mit dem "-insecure" Startparamet
   </data>
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Gesehen</value>
+  </data>
+  <data name="DialogErrorWhileGeneratingVideo" xml:space="preserve">
+    <value>Beim Generieren des Videos ist ein Fehler aufgetreten.
+{0}</value>
   </data>
 </root>

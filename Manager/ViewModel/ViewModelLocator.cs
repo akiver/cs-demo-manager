@@ -6,7 +6,7 @@ using Manager.ViewModel.Demos;
 using Manager.ViewModel.Players;
 using Manager.ViewModel.Rounds;
 using Manager.ViewModel.Suspects;
-using Microsoft.Practices.ServiceLocation;
+using CommonServiceLocator;
 using Services.Concrete;
 using Services.Concrete.Excel;
 using Services.Concrete.Maps;

@@ -12,13 +12,15 @@ using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {
-	public class DemoFlashbangsViewModel : SingleDemoViewModel
+	public class DemoFlashbangsViewModel : BaseViewModel
 	{
 		#region Properties
 
 		private readonly IFlashbangService _flashbangService;
 
 		private readonly ICacheService _cacheService;
+
+		private Demo _demo;
 
 		private RelayCommand<Demo> _backToDemoDetailsCommand;
 
@@ -57,6 +59,12 @@ namespace Manager.ViewModel.Demos
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public List<FlashbangDataPoint> PlayersFlashTimes
 		{

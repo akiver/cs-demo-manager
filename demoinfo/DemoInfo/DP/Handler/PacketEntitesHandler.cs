@@ -43,11 +43,14 @@ namespace DemoInfo.DP.Handler
 						e.ApplyUpdate(reader);
 					}
 				} else {
+					Entity e = parser.Entities[currentEntity];
+					e.ServerClass.AnnounceDestroyedEntity(e);
+
 					// leave / destroy
-					parser.Entities [currentEntity].Leave ();
+					e.Leave ();
 					parser.Entities[currentEntity] = null;
 
-					//dunno, but you gotta read this. 
+					//dunno, but you gotta read this.
 					if (reader.ReadBit()) {
 					}
 				}

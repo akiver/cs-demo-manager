@@ -29,6 +29,7 @@ namespace DemoInfo.DP.Handler
 		public static void Apply(GameEvent rawEvent, DemoParser parser)
 		{
 			var descriptors = parser.GEH_Descriptors;
+			//previous blind implementation
 			var blindPlayers = parser.GEH_BlindPlayers;
 
 			if (descriptors == null)
@@ -138,12 +139,6 @@ namespace DemoInfo.DP.Handler
 					fire.Weapon = new Equipment((string)data["weapon"]);
 				}
 
-				// Workaround to detect who throw molo / inc
-				if (fire.Weapon.Weapon == EquipmentElement.Molotov || fire.Weapon.Weapon == EquipmentElement.Incendiary)
-				{
-					parser.LastPlayerIdsThrownFire.Enqueue((int)data["userid"]);
-				}
-
 				parser.RaiseWeaponFired(fire);
 				break;
 			case "player_death":
@@ -198,31 +193,39 @@ namespace DemoInfo.DP.Handler
 
 				#region Nades
 			case "player_blind":
-				// BOT are ignored (thrower or not)
 				data = MapData(eventDescriptor, rawEvent);
-				if (parser.Players.ContainsKey((int)data["userid"]))
-				{
-					Player p = parser.Players[(int)data["userid"]];
 
-					if (data.ContainsKey("attacker") && parser.Players.ContainsKey((int)data["attacker"]))
+				if (parser.Players.ContainsKey((int)data["userid"])) {
+					var blindPlayer = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
+
+					if (blindPlayer != null && blindPlayer.Team != Team.Spectate)
 					{
-						Player attacker = parser.Players[(int)data["attacker"]];
-						PlayerBlindEventArgs ev = new PlayerBlindEventArgs
-						{
-							Player = p,
-							Duration = (float)data["blind_duration"],
-							Attacker = attacker,
-						};
-						blindPlayers.Add(p);
-						parser.RaisePlayerBlind(ev);
+						BlindEventArgs blind = new BlindEventArgs();
+						blind.Player = blindPlayer;
+						if (data.ContainsKey("attacker") && parser.Players.ContainsKey((int)data["attacker"])) {
+							blind.Attacker = parser.Players[(int)data["attacker"]];
+						} else {
+							blind.Attacker = null;
+						}
+
+						if (data.ContainsKey("blind_duration"))
+							blind.FlashDuration = (float?)data["blind_duration"];
+						else
+							blind.FlashDuration = null;
+
+						parser.RaiseBlind(blind);
 					}
+
+					//previous blind implementation
+					blindPlayers.Add(parser.Players[(int)data["userid"]]);
 				}
+
 				break;
 			case "flashbang_detonate":
 				var args = FillNadeEvent<FlashEventArgs>(MapData(eventDescriptor, rawEvent), parser);
-				args.FlashedPlayers = blindPlayers.ToArray();
+				args.FlashedPlayers = blindPlayers.ToArray(); //prev blind implementation
 				parser.RaiseFlashExploded(args);
-				blindPlayers.Clear();
+				blindPlayers.Clear(); //prev blind implementation
 				break;
 			case "hegrenade_detonate":
 				parser.RaiseGrenadeExploded(FillNadeEvent<GrenadeEventArgs>(MapData(eventDescriptor, rawEvent), parser));
@@ -241,31 +244,20 @@ namespace DemoInfo.DP.Handler
 				break;
 			case "inferno_startburn":
 				var fireData = MapData(eventDescriptor, rawEvent);
-				// molotov / inc events doesn't contains thrower, this is a hack to retrieve it
-				// WARNING: This hack is not 100% accurated since if a molotov never burn, the ids will be incorrect
-
-				// 1. when a molo / inc is thrown (weapon_fire events), we add the userid to the queue
-				// 2. when this event (inferno_startburn) occurs we retrieve the last userid from this queue (LastPlayerIdsThrownFire)
-				// 3. we add the userid to the queue LastPlayerIdsStartFire to retrieve the player at the next inferno_expire event
-				if (!fireData.ContainsKey("userid") && parser.LastPlayerIdsThrownFire.Count > 0)
-				{
-					int throwerId = parser.LastPlayerIdsThrownFire.Dequeue();
-					fireData.Add("userid", throwerId);
-					// add this id to the queue to be able to detect it when the inferno_expire event occurs
-					parser.LastPlayerIdsStartFire.Enqueue(throwerId);
-				}
-				parser.RaiseFireStart(FillNadeEvent<FireEventArgs>(fireData, parser));
+				var fireArgs = FillNadeEvent<FireEventArgs>(fireData, parser);
+				var fireStarted = new Tuple<int, FireEventArgs>((int)fireData["entityid"], fireArgs);
+				parser.GEH_StartBurns.Enqueue(fireStarted);
+				parser.RaiseFireStart(fireArgs);
 				break;
 			case "inferno_expire":
 				var fireEndData = MapData(eventDescriptor, rawEvent);
-				if (!fireEndData.ContainsKey("userid") && parser.LastPlayerIdsStartFire.Count > 0)
-				{
-					fireEndData.Add("userid", parser.LastPlayerIdsStartFire.Dequeue());
-				}
-				parser.RaiseFireEnd(FillNadeEvent<FireEventArgs>(fireEndData, parser));
+				var fireEndArgs = FillNadeEvent<FireEventArgs>(fireEndData, parser);
+				int entityID = (int)fireEndData["entityid"];
+				fireEndArgs.ThrownBy = parser.InfernoOwners[entityID];
+				parser.RaiseFireEnd(fireEndArgs);
 				break;
 				#endregion
-			
+
 			case "player_connect":
 				data = MapData (eventDescriptor, rawEvent);
 

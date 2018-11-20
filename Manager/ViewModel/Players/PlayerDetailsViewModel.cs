@@ -25,7 +25,7 @@ using Application = System.Windows.Application;
 
 namespace Manager.ViewModel.Players
 {
-	public class PlayerDetailsViewModel : SingleDemoViewModel
+	public class PlayerDetailsViewModel : BaseViewModel
 	{
 		#region Properties
 
@@ -34,6 +34,8 @@ namespace Manager.ViewModel.Players
 		private readonly ICacheService _cacheService;
 
 		private readonly IDialogService _dialogService;
+
+		private Demo _demo;
 
 		private Player _currentPlayer;
 
@@ -74,6 +76,12 @@ namespace Manager.ViewModel.Players
 		#endregion
 
 		#region Accessors
+
+		public Demo Demo
+		{
+			get => _demo;
+			set { Set(() => Demo, ref _demo, value); }
+		}
 
 		public Player CurrentPlayer
 		{

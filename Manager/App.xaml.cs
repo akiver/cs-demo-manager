@@ -4,9 +4,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
+using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Threading;
 using Core;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro;
@@ -32,10 +35,10 @@ namespace Manager
 		public static string[] Translators = {
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",
 			"Allan \"Michael\" Simonsen (Danish)",
-			"Leonardo / RedDeadLuigi (Brazilian)",
+			"Leonardo / RedDeadLuigi / mvinoba (Brazilian)",
 			"Spidersouris (French)",
 			"Kacper \"sikl0`\" Olkis (Polish)",
-			"yRRCK (German)",
+			"yRRCK / FliessendWasser (German)",
 			"Paco González López / monxas (Spanish)",
 			"aLieN (Hungarian)",
 		};
@@ -43,16 +46,32 @@ namespace Manager
 		public App()
 		{
 			DispatcherHelper.Initialize();
-#if RELEASE
-			AppDomain.CurrentDomain.UnhandledException += HandleAppDomainUnhandleException;
-#endif
+			AppDomain.CurrentDomain.UnhandledException += OnCurrentDomainOnUnhandledException;
+			AppDomain.CurrentDomain.FirstChanceException += OnCurrentDomainOnFirstChanceException;
+			DispatcherUnhandledException += OnDispatcherUnhandledException;
+			TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
 		}
 
-		private static void HandleAppDomainUnhandleException(object sender, UnhandledExceptionEventArgs args)
+		private static void OnCurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs e)
 		{
-			Exception e = (Exception)args.ExceptionObject;
-			Logger.Instance.Log(e);
-			MessageBox.Show(string.Format(Manager.Properties.Resources.UnexpectedErrorOccured, e.Message), Manager.Properties.Resources.Error);
+			Exception ex = (Exception)e.ExceptionObject;
+			Logger.Instance.Log(ex);
+			MessageBox.Show(string.Format(Manager.Properties.Resources.UnexpectedErrorOccured, ex.Message), Manager.Properties.Resources.Error);
+		}
+
+		private static void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
+		{
+			Logger.Instance.Log(e.Exception);
+		}
+
+		private static void OnCurrentDomainOnFirstChanceException(object sender, FirstChanceExceptionEventArgs e)
+		{
+			Logger.Instance.Log(e.Exception);
+		}
+
+		private static void OnDispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e)
+		{
+			Logger.Instance.Log(e.Exception);
 		}
 
 		private void Application_Startup(object sender, StartupEventArgs e)
