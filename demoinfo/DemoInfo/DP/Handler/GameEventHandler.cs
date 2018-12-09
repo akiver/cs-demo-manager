@@ -253,7 +253,9 @@ namespace DemoInfo.DP.Handler
 				var fireEndData = MapData(eventDescriptor, rawEvent);
 				var fireEndArgs = FillNadeEvent<FireEventArgs>(fireEndData, parser);
 				int entityID = (int)fireEndData["entityid"];
-				fireEndArgs.ThrownBy = parser.InfernoOwners[entityID];
+				if (parser.InfernoOwners.ContainsKey(entityID)) {
+					fireEndArgs.ThrownBy = parser.InfernoOwners[entityID];
+				}
 				parser.RaiseFireEnd(fireEndArgs);
 				break;
 				#endregion
