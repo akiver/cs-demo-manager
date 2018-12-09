@@ -668,8 +668,11 @@ namespace DemoInfo
 
 			while (GEH_StartBurns.Count > 0) {
 				var fireTup = GEH_StartBurns.Dequeue();
-				fireTup.Item2.ThrownBy = InfernoOwners[fireTup.Item1];
-				RaiseFireWithOwnerStart(fireTup.Item2);
+				if (InfernoOwners.ContainsKey(fireTup.Item1))
+				{
+					fireTup.Item2.ThrownBy = InfernoOwners[fireTup.Item1];
+					RaiseFireWithOwnerStart(fireTup.Item2);
+				}
 			}
 
 			if (b) {
