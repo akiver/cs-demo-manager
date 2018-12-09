@@ -121,6 +121,9 @@ namespace DemoInfo.DP.Handler
 					case SendPropertyType.Int:
 						prop.IntRecived += HandleIntRecived;
 						break;
+					case SendPropertyType.Int64:
+						prop.Int64Received += HandleInt64Received;
+						break;
 					case SendPropertyType.String:
 						prop.StringRecived += HandleStringRecived;
 						break;
@@ -137,6 +140,7 @@ namespace DemoInfo.DP.Handler
 			private void HandleVectorRecived (object sender, PropertyUpdateEventArgs<Vector> e) { Capture.Add(e.Record()); }
 			private void HandleStringRecived (object sender, PropertyUpdateEventArgs<string> e) { Capture.Add(e.Record()); }
 			private void HandleIntRecived (object sender, PropertyUpdateEventArgs<int> e) { Capture.Add(e.Record()); }
+			private void HandleInt64Received(object sender, PropertyUpdateEventArgs<long> e) { Capture.Add(e.Record()); }
 			private void HandleFloatRecived (object sender, PropertyUpdateEventArgs<float> e) { Capture.Add(e.Record()); }
 			private void HandleArrayRecived (object sender, PropertyUpdateEventArgs<object[]> e) { Capture.Add(e.Record()); }
 
@@ -152,6 +156,9 @@ namespace DemoInfo.DP.Handler
 						break;
 					case SendPropertyType.Int:
 						prop.IntRecived -= HandleIntRecived;
+						break;
+					case SendPropertyType.Int64:
+						prop.Int64Received -= HandleInt64Received;
 						break;
 					case SendPropertyType.String:
 						prop.StringRecived -= HandleStringRecived;

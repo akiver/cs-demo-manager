@@ -112,6 +112,7 @@ namespace DemoInfo.DP
 		public FlattenedPropEntry Entry { get; private set; }
 
 		public event EventHandler<PropertyUpdateEventArgs<int>> IntRecived;
+		public event EventHandler<PropertyUpdateEventArgs<long>> Int64Received;
 		public event EventHandler<PropertyUpdateEventArgs<float>> FloatRecived;
 		public event EventHandler<PropertyUpdateEventArgs<Vector>>  VectorRecived;
 		public event EventHandler<PropertyUpdateEventArgs<string>>  StringRecived;
@@ -192,6 +193,16 @@ namespace DemoInfo.DP
 					FireDataReceived_DebugEvent(val, e);
 				}
 				break;
+			case SendPropertyType.Int64:
+				{
+					var val = PropDecoder.DecodeInt64(Entry.Prop, stream);
+					if (Int64Received != null)
+						Int64Received(this, new PropertyUpdateEventArgs<long>(val, e, this));
+
+					SaveValue(val);
+					FireDataReceived_DebugEvent(val, e);
+				}
+				break;
 			case SendPropertyType.Float:
 				{
 					var val = PropDecoder.DecodeFloat(Entry.Prop, stream);
@@ -257,6 +268,7 @@ namespace DemoInfo.DP
 		public void Destroy()
 		{
 			this.IntRecived = null;
+			this.Int64Received = null;
 			this.FloatRecived = null;
 			this.ArrayRecived = null;
 			this.StringRecived = null;
@@ -287,6 +299,13 @@ namespace DemoInfo.DP
 						e.ServerClass.Name, 
 						Entry.PropertyName, 
 						SendPropertyType.Int));
+
+			if (Int64Received != null && this.Entry.Prop.Type != SendPropertyType.Int64)
+				throw new InvalidOperationException(
+					string.Format("({0}).({1}) isn't an {2}",
+						e.ServerClass.Name,
+						Entry.PropertyName,
+						SendPropertyType.Int64));
 
 			if (FloatRecived != null && this.Entry.Prop.Type != SendPropertyType.Float)
 				throw new InvalidOperationException(
@@ -323,6 +342,7 @@ namespace DemoInfo.DP
 		{
 			foreach (var arg in captured) {
 				var intReceived = arg as RecordedPropertyUpdate<int>;
+				var int64Received = arg as RecordedPropertyUpdate<long>;
 				var floatReceived = arg as RecordedPropertyUpdate<float>;
 				var vectorReceived = arg as RecordedPropertyUpdate<Vector>;
 				var stringReceived = arg as RecordedPropertyUpdate<string>;
@@ -332,6 +352,10 @@ namespace DemoInfo.DP
 					var e = entity.Props[intReceived.PropIndex].IntRecived;
 					if (e != null)
 						e(null, new PropertyUpdateEventArgs<int>(intReceived.Value, entity, entity.Props[intReceived.PropIndex]));
+				} else if (int64Received != null) {
+					var e = entity.Props[int64Received.PropIndex].Int64Received;
+					if (e != null)
+						e(null, new PropertyUpdateEventArgs<long>(int64Received.Value, entity, entity.Props[int64Received.PropIndex]));
 				} else if (floatReceived != null) {
 					var e = entity.Props[floatReceived.PropIndex].FloatRecived;
 					if (e != null)

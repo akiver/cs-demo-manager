@@ -16,6 +16,8 @@ namespace DemoInfo.DP.Handler
 			switch (sendProp.Type) {
 			case SendPropertyType.Int:
 				return DecodeInt(sendProp, stream);
+			case SendPropertyType.Int64:
+				return DecodeInt64(sendProp, stream);
 			case SendPropertyType.Float:
 				return DecodeFloat(sendProp, stream);
 			case SendPropertyType.Vector:
@@ -46,6 +48,46 @@ namespace DemoInfo.DP.Handler
 				} else {
 					return reader.ReadSignedInt(prop.NumberOfBits);
 				}
+			}
+		}
+
+		public static long DecodeInt64(SendTableProperty prop, IBitStream reader)
+		{
+			if (prop.Flags.HasFlagFast(SendPropertyFlags.VarInt))
+			{
+				if (prop.Flags.HasFlagFast(SendPropertyFlags.Unsigned))
+				{
+					return reader.ReadVarInt();
+				}
+				else
+				{
+					return reader.ReadSignedVarInt();
+				}
+			}
+			else
+			{
+				bool isNegative = false;
+				uint low = 0;
+				uint high = 0;
+
+				if (prop.Flags.HasFlag(SendPropertyFlags.Unsigned))
+				{
+					low = reader.ReadInt(32);
+					high = reader.ReadInt(prop.NumberOfBits - 32);
+				}
+				else
+				{
+					isNegative = reader.ReadBit();
+					low = reader.ReadInt(32);
+					high = reader.ReadInt(prop.NumberOfBits - 32 - 1);
+				}
+
+				long result = ((long)high << 32) | low;
+
+				if (isNegative)
+					result = -result;
+
+				return result;
 			}
 		}
 
