@@ -117,6 +117,7 @@ Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}"
 [Files]
 Source: "Manager\bin\x86\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\boiler.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\ControlzEx.dll"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe"; DestDir: "{app}"; Flags: ignoreversion 
 Source: "Manager\bin\x86\Release\CSGODemosManager.exe.config"; DestDir: "{app}"; Flags: ignoreversion
@@ -132,7 +133,6 @@ Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{ap
 Source: "Manager\bin\x86\Release\Hardcodet.Wpf.TaskbarNotification.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Microsoft.Practices.ServiceLocation.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.OOXML.dll"; DestDir: "{app}"; Flags: ignoreversion
