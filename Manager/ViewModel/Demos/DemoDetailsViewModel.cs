@@ -1086,7 +1086,7 @@ namespace Manager.ViewModel.Demos
 						   async status =>
 						   {
 							   await _demosService.SaveStatus(Demo, status.Name);
-						   }, (status) => Demo != null && status.Name != Demo.Status));
+						   }, (status) => Demo != null && status != null && status.Name != Demo.Status));
 			}
 		}
 
@@ -1229,7 +1229,7 @@ namespace Manager.ViewModel.Demos
 				Demo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
 				if (_cacheService.HasDemoInCache(Demo.Id))
 				{
-					Demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
+					_demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
 				}
 			}
 		}
