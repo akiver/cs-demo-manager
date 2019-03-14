@@ -154,17 +154,17 @@ namespace DemoInfo.DP.Handler
 			    if (data.ContainsKey("assistedflash"))
 			        kill.AssistedFlash = (bool)data["assistedflash"];
 
-                    if (kill.Killer != null && kill.Killer.ActiveWeapon != null)
-				{
-					// in case of grenade kills, killer's active weapon is not his grenade at this state
-					if (kill.Weapon == null || (kill.Weapon != null && kill.Weapon.Class != EquipmentClass.Grenade))
-					{
-						kill.Weapon = kill.Killer.ActiveWeapon;
-						kill.Weapon.SkinID = (string)data["weapon_itemid"];
-					}
-				}
+			    if (kill.Killer != null && kill.Killer.ActiveWeapon != null)
+			    {
+			        // in case of grenade kills, killer's active weapon is not his grenade at this state
+			        if (kill.Weapon == null || (kill.Weapon != null && kill.Weapon.Class != EquipmentClass.Grenade))
+			        {
+			            kill.Weapon = kill.Killer.ActiveWeapon;
+			            kill.Weapon.SkinID = (string) data["weapon_itemid"];
+			        }
+			    }
 
-				kill.PenetratedObjects = (int)data["penetrated"];
+			    kill.PenetratedObjects = (int)data["penetrated"];
 
 				parser.RaisePlayerKilled(kill);
 				break;
