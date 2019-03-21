@@ -97,6 +97,7 @@
     <Compile Include="Models\Maps\Season.cs" />
     <Compile Include="Models\Maps\Train.cs" />
     <Compile Include="Models\Maps\Tulip.cs" />
+    <Compile Include="Models\Maps\Vertigo.cs" />
     <Compile Include="Models\protobuf\GCMessages.cs" />
     <Compile Include="Models\protobuf\SteamMessages.cs" />
     <Compile Include="Models\Serialization\EndReasonToStringConverter.cs" />
