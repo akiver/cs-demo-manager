@@ -106,6 +106,7 @@
     <Compile Include="Models\Serialization\SideToStringConverter.cs" />
     <Compile Include="Models\Side.cs" />
     <Compile Include="Models\Source\Esl.cs" />
+    <Compile Include="Models\Source\PugSetup.cs" />
     <Compile Include="Models\Source\Wanmei.cs" />
     <Compile Include="Models\Steam\VanityUrlResponse.cs" />
     <Compile Include="Models\Stuff.cs" />
@@ -286,6 +287,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\Images\Logos\esl.png" />
+    <Content Include="Resources\Images\Logos\pugsetup.png" />
     <Content Include="Resources\Images\Logos\wanmei.png" />
   </ItemGroup>
   <ItemGroup>
