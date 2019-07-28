@@ -147,6 +147,7 @@
     <Compile Include="Concrete\RoundService.cs" />
     <Compile Include="Concrete\SoundService.cs" />
     <Compile Include="Concrete\StuffService.cs" />
+    <Compile Include="Concrete\ThirdParties\CsgoDashStatsComService.cs" />
     <Compile Include="Concrete\ThirdParties\CsgoDashStatsService.cs" />
     <Compile Include="Concrete\ThirdParties\CsgoStatsService.cs" />
     <Compile Include="Concrete\ThirdParties\ThirdPartiesServiceFactory.cs" />

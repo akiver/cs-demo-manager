@@ -22,6 +22,11 @@ namespace Services.Concrete.ThirdParties
 			new ThirdParty
 			{
 				Name = "csgo-stats",
+				Url = "csgo-stats.net",
+			},
+			new ThirdParty
+			{
+				Name = "csgo-stats-com",
 				Url = "csgo-stats.com",
 			}
 		};
@@ -34,6 +39,8 @@ namespace Services.Concrete.ThirdParties
 					return new CsgoStatsService();
 				case "csgo-stats":
 					return new CsgoDashStatsService();
+        case "csgo-stats-com":
+            return new CsgoDashStatsComService();
 				default:
 					throw new Exception("Third party service not found.");
 			}
