@@ -411,11 +411,17 @@ namespace Core.Models
 		/// </summary>
 		private List<string> _chatMessageList;
 
-		#endregion
 
-		#region Accessors
+        /// <summary>
+        /// A flag to improve performance by disabling internal calculations (sometimes it is better to do them at the end)
+        /// </summary>
+        private bool _keepUpdated = false;
 
-		[JsonProperty("id")]
+        #endregion
+
+        #region Accessors
+
+        [JsonProperty("id")]
 		public string Id
 		{
 			get { return _id; }
@@ -1055,7 +1061,7 @@ namespace Core.Models
 
 		public Demo()
 		{
-			Kills =new ObservableCollection<KillEvent>();
+			Kills = new ObservableCollection<KillEvent>();
 			Players = new ObservableCollection<Player>();
 			Rounds = new ObservableCollection<Round>();
 			MolotovsFireStarted = new ObservableCollection<MolotovFireStartedEvent>();
@@ -1081,14 +1087,31 @@ namespace Core.Models
 				Name = "Team 2",
 				CurrentSide = Side.Terrorist,
 			};
-			Kills.CollectionChanged += OnKillsCollectionChanged;
-			BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
-			BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
-			BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
-			Rounds.CollectionChanged += OnRoundsCollectionChanged;
-			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
-			WeaponFired.CollectionChanged += OnWeaponFireCollectionChanged;
 		}
+
+        public void EnableUpdates()
+        {
+            if (_keepUpdated)
+            {
+                return;
+            }
+
+            Kills.CollectionChanged += OnKillsCollectionChanged;
+            BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
+            BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
+            BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
+            Rounds.CollectionChanged += OnRoundsCollectionChanged;
+            PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
+            WeaponFired.CollectionChanged += OnWeaponFireCollectionChanged;
+            _keepUpdated = true;
+            OnBombDefusedCollectionChanged(null, null);
+            OnBombExplodedCollectionChanged(null, null);
+            OnBombPlantedCollectionChanged(null, null);
+            OnKillsCollectionChanged(null, null);
+            OnPlayersHurtedCollectionChanged(null, null);
+            OnRoundsCollectionChanged(null, null);
+            OnWeaponFireCollectionChanged(null, null);
+        }
 
 		public override bool Equals(object obj)
 		{
@@ -1217,6 +1240,7 @@ namespace Core.Models
 			foreach (WeaponFireEvent e in WeaponFired)
 				demo.WeaponFired.Add(e);
 
+            demo.EnableUpdates();
 			return demo;
 		}
 

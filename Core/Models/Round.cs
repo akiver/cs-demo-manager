@@ -318,11 +318,16 @@ namespace Core.Models
 		/// </summary>
 		private ObservableCollection<WeaponFireEvent> _weaponFired;
 
-		#endregion
+        /// <summary>
+        /// A flag to improve performance by disabling internal calculations (sometimes it is better to do them at the end)
+        /// </summary>
+        private bool _keepUpdated = false;
 
-		#region Accessors
+        #endregion
 
-		[JsonProperty("number")]
+        #region Accessors
+
+        [JsonProperty("number")]
 		public int Number
 		{
 			get { return _number; }
@@ -686,12 +691,24 @@ namespace Core.Models
 			FlashbangsExploded = new ObservableCollection<FlashbangExplodedEvent>();
 			Kills = new ObservableCollection<KillEvent>();
 
-			Kills.CollectionChanged += OnKillsCollectionChanged;
-			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
-			WeaponFired.CollectionChanged += OnWeaponFiredCollectionChanged;
-		}
+        }
+        public void EnableUpdates()
+        {
+            if (_keepUpdated)
+            {
+                return;
+            }
 
-		public override bool Equals(object obj)
+            Kills.CollectionChanged += OnKillsCollectionChanged;
+            PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
+            WeaponFired.CollectionChanged += OnWeaponFiredCollectionChanged;
+            _keepUpdated = true;
+            OnWeaponFiredCollectionChanged(null, null);
+            OnPlayersHurtedCollectionChanged(null, null);
+            OnWeaponFiredCollectionChanged(null, null);
+        }
+
+        public override bool Equals(object obj)
 		{
 			var item = obj as Round;
 
@@ -772,6 +789,7 @@ namespace Core.Models
 			foreach (WeaponFireEvent e in WeaponFired)
 				round.WeaponFired.Add(e);
 
+            round.EnableUpdates();
 			return round;
 		}
 

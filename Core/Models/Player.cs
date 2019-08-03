@@ -317,11 +317,16 @@ namespace Core.Models
 		/// </summary>
 		private ObservableCollection<ClutchEvent> _clutches;
 
-		#endregion
+        /// <summary>
+        /// A flag to improve performance by disabling internal calculations (sometimes it is better to do them at the end)
+        /// </summary>
+        private bool _keepUpdated = false;
 
-		#region Accessors
+        #endregion
 
-		[JsonProperty("steamid")]
+        #region Accessors
+
+        [JsonProperty("steamid")]
 		[JsonConverter(typeof(LongToStringConverter))]
 		public long SteamId
 		{
@@ -1047,17 +1052,34 @@ namespace Core.Models
 			Kills = new ObservableCollection<KillEvent>();
 			Deaths = new ObservableCollection<KillEvent>();
 			Assists = new ObservableCollection<KillEvent>();
-			Kills.CollectionChanged += OnKillsCollectionChanged;
-			Deaths.CollectionChanged += OnDeathsCollectionChanged;
-			Assists.CollectionChanged += OnAssistsCollectionChanged;
-			EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
-			EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
-			PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
-			Clutches.CollectionChanged += OnClutchesCollectionChanged;
 			Side = Side.None;
 		}
 
-		private void OnAssistsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void EnableUpdates()
+        {
+            if (_keepUpdated)
+            {
+                return;
+            }
+
+            Kills.CollectionChanged += OnKillsCollectionChanged;
+            Deaths.CollectionChanged += OnDeathsCollectionChanged;
+            Assists.CollectionChanged += OnAssistsCollectionChanged;
+            EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
+            EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
+            PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
+            Clutches.CollectionChanged += OnClutchesCollectionChanged;
+            _keepUpdated = true;
+            OnKillsCollectionChanged(null, null);
+            OnDeathsCollectionChanged(null, null);
+            OnAssistsCollectionChanged(null, null);
+            OnEntryKillsCollectionChanged(null, null);
+            OnEntryHoldKillsCollectionChanged(null, null);
+            OnPlayersHurtedCollectionChanged(null, null);
+            OnClutchesCollectionChanged(null, null);
+        }
+
+        private void OnAssistsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
 		{
 			AssistCount = Assists.Count;
 		}
@@ -1261,6 +1283,7 @@ namespace Core.Models
 			foreach (KeyValuePair<int, float> kvp in TimeDeathRounds)
 				player.TimeDeathRounds.Add(kvp.Key, kvp.Value);
 
+            player.EnableUpdates();
 			return player;
 		}
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -142,6 +142,8 @@ namespace Services.Concrete.Analyzer
 						Demo.Players.Add(pl);
 						pl.TeamName = pl.Side == Side.CounterTerrorist ? Demo.TeamCT.Name : Demo.TeamT.Name;
 					});
+
+                    pl.EnableUpdates();
 				}
 			}
 

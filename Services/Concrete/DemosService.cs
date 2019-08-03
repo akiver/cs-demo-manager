@@ -105,6 +105,7 @@ namespace Services.Concrete
 			{
 				Id = demoId
 			};
+            demo.EnableUpdates();
 			bool demosIsCached = _cacheService.HasDemoInCache(demoId);
 			if (demosIsCached)
 			{
