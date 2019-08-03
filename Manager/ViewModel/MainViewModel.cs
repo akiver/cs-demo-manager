@@ -389,9 +389,9 @@ namespace Manager.ViewModel
 
 		private static async Task<bool> CheckUpdate()
 		{
-			try
+			using (var httpClient = new HttpClient())
 			{
-				using (var httpClient = new HttpClient())
+				try
 				{
 					string url = AppSettings.APP_WEBSITE + "/update";
 					HttpResponseMessage result = await httpClient.GetAsync(url);
@@ -405,12 +405,14 @@ namespace Manager.ViewModel
 					}
 					return false;
 				}
-			}
-			catch (Exception e)
-			{
-				Logger.Instance.Log(e);
-				return false;
+				catch (Exception e)
+				{
+					Logger.Instance.Log(e);
+					return false;
+				}
+
 			}
 		}
+
 	}
 }
