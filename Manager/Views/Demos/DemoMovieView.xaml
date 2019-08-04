@@ -460,16 +460,6 @@
 														HasDecimals="False"
 														IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
 														Value="{Binding VideoQuality}"/>
-									<Label Grid.Column="2"
-									   Content="{x:Static properties:Resources.LabelVideoFramerate}" />
-									<controls:NumericUpDown Grid.Column="3"
-														Minimum="30"
-														MinWidth="80"
-														Interval="10"
-														InterceptMouseWheel="True"
-														HasDecimals="False"
-														IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-														Value="{Binding VideoFrameRate}"/>
 									<Label Grid.Column="4" Content="{x:Static properties:Resources.LabelAudioBitrate}"/>
 									<ComboBox Grid.Column="5"
 											  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"

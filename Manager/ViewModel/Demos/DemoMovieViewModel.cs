@@ -457,18 +457,6 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
-		public int VideoFrameRate
-		{
-			get => _movieConfig.FFmpegVideoFramerate;
-			set
-			{
-				Settings.Default.MovieVideoFramerate = value;
-				_movieConfig.FFmpegVideoFramerate = value;
-				RaisePropertyChanged(() => VideoFrameRate);
-				RaisePropertyChanged(() => FFmpegCommand);
-			}
-		}
-
 		public bool GenerateVideoFile
 		{
 			get => _movieConfig.GenerateVideoFile;
@@ -1468,7 +1456,6 @@ namespace Manager.ViewModel.Demos
 			UseVirtualDub = Settings.Default.MovieUseVirtualDub;
 			VideoQuality = Settings.Default.MovieVideoQuality;
 			AudioBitrate = Settings.Default.MovieAudioBitrate;
-			VideoFrameRate = Settings.Default.MovieVideoFramerate;
 			OpenInExplorer = Settings.Default.MovieOpenInExplorer;
 			EnableHlaeConfigParentFolder = Settings.Default.MovieEnableHlaeConfigParent;
 			HlaeConfigParentFolderPath = Settings.Default.MovieHlaeConfigParentFolderPath;
