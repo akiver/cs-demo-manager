@@ -302,7 +302,11 @@ namespace Services.Concrete
 
 		private static async Task<int> StartBoiler(CancellationToken ct, string args = "")
 		{
-			ct.ThrowIfCancellationRequested();
+            // https://www.reddit.com/r/GlobalOffensive/comments/2uqovq/boiler_a_tool_to_archive_your_match_history/
+            // https://bitbucket.org/ACB/boiler/src/master/boiler/
+
+            // Maybe replace with https://steamworks.github.io/snippits/??
+            ct.ThrowIfCancellationRequested();
 			string hash = GetSha1HashFile(BOILER_EXE_NAME);
 			if (!hash.Equals(BOILER_SHA1)) return 2;
 
