@@ -4217,6 +4217,10 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <source>Display time (seconds):</source>
           <target state="final">Durée d'affichage (secondes):</target>
         </trans-unit>
+        <trans-unit id="CheckForUpdatesOnAppStartup" translate="yes" xml:space="preserve">
+          <source>Check for updates on app startup</source>
+          <target state="final">Vérifier la présence de mise a jour au lancement de l'application</target>
+        </trans-unit>
       </group>
     </body>
   </file>

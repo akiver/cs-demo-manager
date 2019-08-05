@@ -515,6 +515,9 @@
 						<StackPanel Orientation="Vertical"
 									Margin="10"
 									HorizontalAlignment="Left">
+							<CheckBox Content="{x:Static properties:Resources.CheckForUpdatesOnAppStartup}"
+									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsCheckForUpdatesEnabled}"
+									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
 							<TextBlock Text="{x:Static properties:Resources.DateFormat}"
 									   Style="{StaticResource TitleSettingsStyle}" />
 							<CheckBox Content="dd/mm/yyyy"

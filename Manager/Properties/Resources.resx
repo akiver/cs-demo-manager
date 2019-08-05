@@ -3266,4 +3266,7 @@ Please update it by clicking on the "Update" button.</value>
   <data name="LabelDisplayTimeSeconds" xml:space="preserve">
     <value>Display time (seconds):</value>
   </data>
+  <data name="CheckForUpdatesOnAppStartup" xml:space="preserve">
+    <value>Check for updates on app startup</value>
+  </data>
 </root>
