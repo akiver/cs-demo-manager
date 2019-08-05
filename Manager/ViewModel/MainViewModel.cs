@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -16,8 +17,10 @@ using Manager.Messages;
 using Manager.Services;
 using Manager.Views.Demos;
 using Manager.Views.Suspects;
+using Newtonsoft.Json;
 using Services.Concrete.Movie;
 using Services.Interfaces;
+using Services.Models.GitHub;
 using WpfPageTransitions;
 
 namespace Manager.ViewModel
@@ -147,13 +150,13 @@ namespace Manager.ViewModel
 						{
 							if (Properties.Settings.Default.EnableCheckUpdate)
 							{
-								bool isUpdateAvailable = await CheckUpdate();
-								if (isUpdateAvailable)
+								string newRealaseDownloadUrl = await GetNewReleaseDownloadUrl();
+								if (newRealaseDownloadUrl != null)
 								{
 									var download = await _dialogService.ShowMessageAsync(Properties.Resources.DialogNewVersionAvailable, MessageDialogStyle.AffirmativeAndNegative);
 									if (download == MessageDialogResult.Affirmative)
 									{
-										Process.Start(AppSettings.APP_WEBSITE);
+										Process.Start(newRealaseDownloadUrl);
 									}
 								}
 							}
@@ -387,28 +390,36 @@ namespace Manager.ViewModel
 			CurrentPage.ShowPage(suspectsView);
 		}
 
-		private static async Task<bool> CheckUpdate()
+		private static async Task<string> GetNewReleaseDownloadUrl()
 		{
 			using (var httpClient = new HttpClient())
 			{
 				try
 				{
-					string url = AppSettings.APP_WEBSITE + "/update";
-					HttpResponseMessage result = await httpClient.GetAsync(url);
-					string version = await result.Content.ReadAsStringAsync();
+					ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+					httpClient.DefaultRequestHeaders.Add("User-Agent", "csgo-demos-manager");
+					string url = "https://api.github.com/repos/akiver/csgo-demos-manager/releases/latest";
+					HttpResponseMessage response = await httpClient.GetAsync(url);
+					string json = await response.Content.ReadAsStringAsync();
+					LatestRelease release = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<LatestRelease>(json));
+					string version = release.TagName;
+					if (version.StartsWith("v"))
+						version = version.Substring(1, version.Length -1);
+
 					Version lastVersion = new Version(version);
 
 					var resultCompare = AppSettings.APP_VERSION.CompareTo(lastVersion);
-					if (resultCompare < 0)
+					if (resultCompare < 0 && release.Assets.Count > 0)
 					{
-						return true;
+						string releaseUrl = release.Assets[0].BrowserDownloadUrl;
+						return releaseUrl;
 					}
-					return false;
+					return null;
 				}
 				catch (Exception e)
 				{
 					Logger.Instance.Log(e);
-					return false;
+					return null;
 				}
 
 			}
