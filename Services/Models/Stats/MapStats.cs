@@ -32,11 +32,11 @@
 
 		public int CacheDrawCount { get; set; } = 0;
 
-		public int CobblestoneWinCount { get; set; } = 0;
+		public int VertigoWinCount { get; set; } = 0;
 
-		public int CobblestoneLossCount { get; set; } = 0;
+		public int VertigoLossCount { get; set; } = 0;
 
-		public int CobblestoneDrawCount { get; set; } = 0;
+		public int VertigoDrawCount { get; set; } = 0;
 
 		public int OverpassWinCount { get; set; } = 0;
 
@@ -60,7 +60,7 @@
 
 		public double CacheWinPercentage { get; set; } = 0;
 
-		public double CobblestoneWinPercentage { get; set; } = 0;
+		public double VertigoWinPercentage { get; set; } = 0;
 
 		public double OverpassWinPercentage { get; set; } = 0;
 

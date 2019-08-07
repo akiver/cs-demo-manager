@@ -520,13 +520,13 @@
 								</Grid.RowDefinitions>
 
 								<TextBlock Grid.Row="0"
-										   Text="Cobblestone"
+										   Text="Vertigo"
 										   Style="{StaticResource MapTitleStatsStyle}"/>
 								<telerik:RadPieChart Grid.Row="1"
 													 Palette="{StaticResource MatchStatsChartPalette}"
 													 TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
 									<telerik:RadPieChart.Series>
-										<telerik:PieSeries ItemsSource="{Binding CobblestonePieDatas}"
+										<telerik:PieSeries ItemsSource="{Binding VertigoPieDatas}"
 														   ValueBinding="Value"
 														   ShowLabels="True"
 														   RadiusFactor="0.65">
@@ -673,7 +673,7 @@
 																	Format="{} {0:F1}%"/>
 							</telerik:BarSeries.LabelDefinitions>
 						</telerik:BarSeries>
-						<telerik:BarSeries ItemsSource="{Binding CobblestonePercentDatas}"
+						<telerik:BarSeries ItemsSource="{Binding VertigoPercentDatas}"
 										   CategoryBinding="Label"
 										   ValueBinding="Value"
 										   ShowLabels="True">
