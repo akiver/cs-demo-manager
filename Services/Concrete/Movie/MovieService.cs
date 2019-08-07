@@ -381,7 +381,6 @@ namespace Services.Concrete.Movie
 			args.Add("-i \"" + GetLastWavFilePath() + "\"");
 			args.Add("-vcodec " + _config.VideoCodec);
 			args.Add("-qp " + _config.VideoQuality);
-			args.Add("-r " + _config.FFmpegVideoFramerate);
 			args.Add("-acodec " + _config.AudioCodec);
 			args.Add("-b:a " + _config.AudioBitrate + "K");
 			if (!string.IsNullOrEmpty(_config.FFmpegExtraParameters))

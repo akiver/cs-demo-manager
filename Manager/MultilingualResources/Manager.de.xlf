@@ -4211,6 +4211,10 @@ Bitte aktualisieren Sie mit dem Klicken auf den "Update"-Button.</target>
           <source>Display time (seconds):</source>
           <target state="new">Zeige Zeit an (Sekunden):</target>
         </trans-unit>
+        <trans-unit id="CheckForUpdatesOnAppStartup" translate="yes" xml:space="preserve">
+          <source>Check for updates on app startup</source>
+          <target state="new">Check for updates on app startup</target>
+        </trans-unit>
       </group>
     </body>
   </file>

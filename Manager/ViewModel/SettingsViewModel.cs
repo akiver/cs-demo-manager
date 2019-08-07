@@ -45,6 +45,8 @@ namespace Manager.ViewModel
 
 		private bool _useSimpleRadar = Settings.Default.UseSimpleRadar;
 
+		private bool _isCheckForUpdatesEnabled = Settings.Default.EnableCheckUpdate;
+
 		private RelayCommand _clearDemosDataCacheCommand;
 
 		private RelayCommand _importCustomDataCacheCommand;
@@ -431,6 +433,16 @@ namespace Manager.ViewModel
 			{
 				Settings.Default.UseCustomActionsGeneration = value;
 				Set(() => IsUseCustomActionGeneration, ref _isUseCustomActionGeneration, value);
+			}
+		}
+
+		public bool IsCheckForUpdatesEnabled
+		{
+			get { return _isCheckForUpdatesEnabled; }
+			set
+			{
+				Settings.Default.EnableCheckUpdate = value;
+				Set(() => IsCheckForUpdatesEnabled, ref _isCheckForUpdatesEnabled, value);
 			}
 		}
 

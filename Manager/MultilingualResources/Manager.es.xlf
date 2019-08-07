@@ -4227,6 +4227,10 @@ Please update it by clicking on the "Update" button.</target>
           <source>Display time (seconds):</source>
           <target state="new">Display time (seconds):</target>
         </trans-unit>
+        <trans-unit id="CheckForUpdatesOnAppStartup" translate="yes" xml:space="preserve">
+          <source>Check for updates on app startup</source>
+          <target state="new">Check for updates on app startup</target>
+        </trans-unit>
       </group>
     </body>
   </file>

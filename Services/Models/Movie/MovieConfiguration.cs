@@ -91,11 +91,6 @@ namespace Services.Models.Movie
 		/// </summary>
 		public bool OpenInExplorer { get; set; } = true;
 		/// <summary>
-		/// FFmpeg framerate video, this is not the same as the one used ingame during the recording.
-		/// You can record the game at 300 fps and create the mp4 at 60 fps for example.
-		/// </summary>
-		public int FFmpegVideoFramerate { get; set; } = 60;
-		/// <summary>
 		/// Additional FFmpeg input parameters.
 		/// </summary>
 		public string FFmpegInputParameters { get; set; }
