@@ -217,7 +217,7 @@ namespace Services.Concrete
 		{
 			ShareCode.ShareCodeStruct s = ShareCode.Decode(shareCode);
 
-			int result = await StartBoiler(ct, $"{s.MatchId} {s.OutcomeId} {s.TokenId}");
+			int result = await StartBoiler(ct, args: $"{s.MatchId} {s.OutcomeId} {s.TokenId}");
 
 			return result;
 		}
@@ -302,12 +302,24 @@ namespace Services.Concrete
 
 		private static async Task<int> StartBoiler(CancellationToken ct, string args = "")
 		{
+            var boilerExe = BOILER_EXE_NAME;
+            if (!File.Exists(boilerExe))
+            {
+                // find relative to assembly
+                var loc = Path.GetDirectoryName(typeof(SteamService).Assembly.Location);
+                var localBoiler = Path.Combine(loc, BOILER_EXE_NAME);
+                if (File.Exists(localBoiler))
+                {
+                    boilerExe = localBoiler;
+                }
+            }
+
             // https://www.reddit.com/r/GlobalOffensive/comments/2uqovq/boiler_a_tool_to_archive_your_match_history/
             // https://bitbucket.org/ACB/boiler/src/master/boiler/
 
             // Maybe replace with https://steamworks.github.io/snippits/??
             ct.ThrowIfCancellationRequested();
-			string hash = GetSha1HashFile(BOILER_EXE_NAME);
+			string hash = GetSha1HashFile(boilerExe);
 			if (!hash.Equals(BOILER_SHA1)) return 2;
 
 			Process[] currentProcess = Process.GetProcessesByName("csgo");
@@ -317,7 +329,7 @@ namespace Services.Concrete
 			{
 				StartInfo =
 				{
-					FileName = BOILER_EXE_NAME,
+					FileName = boilerExe,
 					Arguments = $"\"{AppSettings.GetMatchListDataFilePath()}\" {args}",
 					UseShellExecute = false,
 					CreateNoWindow = true
