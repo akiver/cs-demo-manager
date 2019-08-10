@@ -303,6 +303,7 @@ namespace Services.Concrete
 		private static async Task<int> StartBoiler(CancellationToken ct, string args = "")
 		{
             var boilerExe = BOILER_EXE_NAME;
+            var workDir = Environment.CurrentDirectory;
             if (!File.Exists(boilerExe))
             {
                 // find relative to assembly
@@ -311,6 +312,7 @@ namespace Services.Concrete
                 if (File.Exists(localBoiler))
                 {
                     boilerExe = localBoiler;
+                    workDir = Path.GetDirectoryName(boilerExe);
                 }
             }
 
@@ -325,12 +327,13 @@ namespace Services.Concrete
 			Process[] currentProcess = Process.GetProcessesByName("csgo");
 			if (currentProcess.Length > 0) currentProcess[0].Kill();
 
-			Process boiler = new Process
-			{
-				StartInfo =
-				{
-					FileName = boilerExe,
-					Arguments = $"\"{AppSettings.GetMatchListDataFilePath()}\" {args}",
+            Process boiler = new Process
+            {
+                StartInfo =
+                {
+                    FileName = boilerExe,
+                    Arguments = $"\"{AppSettings.GetMatchListDataFilePath()}\" {args}",
+                    WorkingDirectory = workDir,
 					UseShellExecute = false,
 					CreateNoWindow = true
 				}
