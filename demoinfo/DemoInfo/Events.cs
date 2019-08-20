@@ -105,6 +105,8 @@ namespace DemoInfo
 		public int PenetratedObjects { get; internal set; }
 
 		public bool Headshot { get; internal set; }
+
+		public bool AssistedFlash { get; internal set; }
 	}
 
 	public class BotTakeOverEventArgs : EventArgs
