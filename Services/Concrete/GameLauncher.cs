@@ -33,7 +33,7 @@ namespace Services.Concrete
 		/// Launcher configuration
 		/// </summary>
 		private readonly GameLauncherConfiguration _config;
-		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid"};
+		private readonly List<string> _arguments = new List<string>{"-applaunch 730", "-novid", "-worldwide"};
 		private readonly Process _process = new Process();
 		private readonly List<string> _hlaeArguments = new List<string>
 		{
