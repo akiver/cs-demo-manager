@@ -47,6 +47,8 @@ namespace Manager.ViewModel
 
 		private bool _isCheckForUpdatesEnabled = Settings.Default.EnableCheckUpdate;
 
+		private bool _isWorldwideEnabled = Settings.Default.IsWorldwideEnabled;
+
 		private RelayCommand _clearDemosDataCacheCommand;
 
 		private RelayCommand _importCustomDataCacheCommand;
@@ -403,6 +405,16 @@ namespace Manager.ViewModel
 				{
 					WatchAccountSteamId = 0;
 				}
+			}
+		}
+
+		public bool IsWorldwideEnabled
+		{
+			get => _isWorldwideEnabled;
+			set
+			{
+				Set(() => IsWorldwideEnabled, ref _isWorldwideEnabled, value);
+				Settings.Default.IsWorldwideEnabled = value;
 			}
 		}
 

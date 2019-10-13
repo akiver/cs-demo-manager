@@ -192,6 +192,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Services\Config.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoMovieViewModel.cs" />

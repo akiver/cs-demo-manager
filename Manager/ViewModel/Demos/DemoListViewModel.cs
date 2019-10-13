@@ -704,21 +704,8 @@ namespace Manager.ViewModel.Demos
 							{
 								try
 								{
-									GameLauncherConfiguration config = new GameLauncherConfiguration(demo)
-									{
-										SteamExePath = AppSettings.SteamExePath(),
-										Width = Properties.Settings.Default.ResolutionWidth,
-										Height = Properties.Settings.Default.ResolutionHeight,
-										Fullscreen = Properties.Settings.Default.IsFullscreen,
-										EnableHlae = Properties.Settings.Default.EnableHlae,
-										CsgoExePath = Properties.Settings.Default.CsgoExePath,
-										EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-										HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-										HlaeExePath = HlaeService.GetHlaeExePath(),
-										LaunchParameters = Properties.Settings.Default.LaunchParameters,
-										UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-										FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId,
-									};
+									GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(demo);
+									config.FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId;
 									GameLauncher launcher = new GameLauncher(config);
 									launcher.WatchDemoAt(tick);
 								}
@@ -944,21 +931,8 @@ namespace Manager.ViewModel.Demos
 						}
 						try
 						{
-							GameLauncherConfiguration config = new GameLauncherConfiguration(demo)
-							{
-								SteamExePath = AppSettings.SteamExePath(),
-								Width = Properties.Settings.Default.ResolutionWidth,
-								Height = Properties.Settings.Default.ResolutionHeight,
-								Fullscreen = Properties.Settings.Default.IsFullscreen,
-								EnableHlae = Properties.Settings.Default.EnableHlae,
-								CsgoExePath = Properties.Settings.Default.CsgoExePath,
-								EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-								HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-								HlaeExePath = HlaeService.GetHlaeExePath(),
-								LaunchParameters = Properties.Settings.Default.LaunchParameters,
-								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId,
-							};
+							GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(demo);
+							config.FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId;
 							GameLauncher launcher = new GameLauncher(config);
 							await launcher.StartGame();
 						}
@@ -2094,21 +2068,8 @@ namespace Manager.ViewModel.Demos
 		/// <param name="isHighlight"></param>
 		private async void StartWatchHighOrLow(Demo demo, bool isHighlight = true)
 		{
-			GameLauncherConfiguration config = new GameLauncherConfiguration(demo)
-			{
-				SteamExePath = AppSettings.SteamExePath(),
-				Width = Properties.Settings.Default.ResolutionWidth,
-				Height = Properties.Settings.Default.ResolutionHeight,
-				Fullscreen = Properties.Settings.Default.IsFullscreen,
-				EnableHlae = Properties.Settings.Default.EnableHlae,
-				CsgoExePath = Properties.Settings.Default.CsgoExePath,
-				EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-				HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-				HlaeExePath = HlaeService.GetHlaeExePath(),
-				LaunchParameters = Properties.Settings.Default.LaunchParameters,
-				UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-				FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId,
-			};
+			GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(demo);
+			config.FocusPlayerSteamId = Properties.Settings.Default.WatchAccountSteamId;
 			GameLauncher launcher = new GameLauncher(config);
 			var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
 			if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary) return;

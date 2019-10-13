@@ -169,21 +169,8 @@ namespace Manager.ViewModel.Rounds
 							await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
 							return;
 						}
-						GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
-						{
-							SteamExePath = AppSettings.SteamExePath(),
-							Width = Settings.Default.ResolutionWidth,
-							Height = Settings.Default.ResolutionHeight,
-							Fullscreen = Settings.Default.IsFullscreen,
-							EnableHlae = Settings.Default.EnableHlae,
-							CsgoExePath = Settings.Default.CsgoExePath,
-							EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
-							HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
-							HlaeExePath = HlaeService.GetHlaeExePath(),
-							LaunchParameters = Settings.Default.LaunchParameters,
-							UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
-							FocusPlayerSteamId = Settings.Default.WatchAccountSteamId,
-						};
+						GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+						config.FocusPlayerSteamId = Settings.Default.WatchAccountSteamId;
 						GameLauncher launcher = new GameLauncher(config);
 						launcher.WatchDemoAt(CurrentRound.Tick);
 					},
@@ -267,21 +254,8 @@ namespace Manager.ViewModel.Rounds
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
-							{
-								SteamExePath = AppSettings.SteamExePath(),
-								Width = Settings.Default.ResolutionWidth,
-								Height = Settings.Default.ResolutionHeight,
-								Fullscreen = Settings.Default.IsFullscreen,
-								EnableHlae = Settings.Default.EnableHlae,
-								CsgoExePath = Settings.Default.CsgoExePath,
-								EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
-								HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
-								HlaeExePath = HlaeService.GetHlaeExePath(),
-								LaunchParameters = Settings.Default.LaunchParameters,
-								UseCustomActionsGeneration = Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = kill.KillerSteamId,
-							};
+							GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+							config.FocusPlayerSteamId = kill.KillerSteamId;
 							GameLauncher launcher = new GameLauncher(config);
 							launcher.WatchDemoAt(kill.Tick, true);
 						}));

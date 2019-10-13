@@ -107,6 +107,10 @@ namespace Services.Models.Movie
 		/// </summary>
 		public int Height { get; set; }
 		/// <summary>
+		/// Add -worldwide startup parameter.
+		/// </summary>
+		public bool IsWorldwideEnabled { get; set; } = false;
+		/// <summary>
 		/// Enable HLAE config parent.
 		/// </summary>
 		public bool EnableHlaeConfigParent { get; set; } = false;

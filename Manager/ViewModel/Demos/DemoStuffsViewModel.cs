@@ -221,21 +221,8 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
-							{
-								SteamExePath = AppSettings.SteamExePath(),
-								Width = Properties.Settings.Default.ResolutionWidth,
-								Height = Properties.Settings.Default.ResolutionHeight,
-								Fullscreen = Properties.Settings.Default.IsFullscreen,
-								EnableHlae = Properties.Settings.Default.EnableHlae,
-								CsgoExePath = Properties.Settings.Default.CsgoExePath,
-								EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-								HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-								HlaeExePath = HlaeService.GetHlaeExePath(),
-								LaunchParameters = Properties.Settings.Default.LaunchParameters,
-								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = SelectedStuff.ThrowerSteamId,
-							};
+							GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+							config.FocusPlayerSteamId = SelectedStuff.ThrowerSteamId;
 							GameLauncher launcher = new GameLauncher(config);
 							launcher.WatchDemoAt(SelectedStuff.Tick, true);
 						}, () => SelectedStuff != null));
@@ -255,21 +242,8 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
-							{
-								SteamExePath = AppSettings.SteamExePath(),
-								Width = Properties.Settings.Default.ResolutionWidth,
-								Height = Properties.Settings.Default.ResolutionHeight,
-								Fullscreen = Properties.Settings.Default.IsFullscreen,
-								EnableHlae = Properties.Settings.Default.EnableHlae,
-								CsgoExePath = Properties.Settings.Default.CsgoExePath,
-								EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-								HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-								HlaeExePath = HlaeService.GetHlaeExePath(),
-								LaunchParameters = Properties.Settings.Default.LaunchParameters,
-								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = SelectedPlayer.SteamId,
-							};
+							GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+							config.FocusPlayerSteamId = SelectedPlayer.SteamId;
 							GameLauncher launcher = new GameLauncher(config);
 							launcher.WatchPlayerStuff(SelectedPlayer, CurrentStuffSelector.Id);
 						}, () => Demo != null && SelectedPlayer != null));
