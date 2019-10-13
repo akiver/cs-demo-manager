@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -11,7 +12,6 @@ using Manager.Services;
 using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Concrete;
-using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
 using Clipboard = System.Windows.Clipboard;
@@ -258,14 +258,27 @@ namespace Manager.ViewModel.Demos
 					?? (_copySetPosCommand = new RelayCommand(
 						async () =>
 						{
-							string command = "setpos " + SelectedStuff.ShooterPosX
-							+ " " + SelectedStuff.ShooterPosY + " " + SelectedStuff.ShooterPosZ
-							+ " ;setang " + SelectedStuff.ShooterAnglePitch + " " + SelectedStuff.ShooterAngleYaw;
-							Clipboard.SetText(command);
-							HasNotification = true;
-							Notification = Properties.Resources.NotificationSetposCommandCopied;
-							await Task.Delay(5000);
-							HasNotification = false;
+							try
+							{
+								string command = "setpos " + SelectedStuff.ShooterPosX
+														   + " " + SelectedStuff.ShooterPosY + " " +
+														   SelectedStuff.ShooterPosZ
+														   + " ;setang " + SelectedStuff.ShooterAnglePitch + " " +
+														   SelectedStuff.ShooterAngleYaw;
+								Clipboard.SetDataObject(command);
+								Notification = Properties.Resources.NotificationSetposCommandCopied;
+							}
+							catch (Exception ex)
+							{
+								Logger.Instance.Log(ex);
+								Notification = "Impossible to copy position into clipboard";
+							}
+							finally
+							{
+								HasNotification = true;
+								await Task.Delay(5000);
+								HasNotification = false;
+							}
 						},
 						() => SelectedStuff != null));
 			}
