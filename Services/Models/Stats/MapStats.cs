@@ -38,6 +38,12 @@
 
 		public int VertigoDrawCount { get; set; } = 0;
 
+		public int VertigoWinCount { get; set; } = 0;
+
+		public int VertigoLossCount { get; set; } = 0;
+
+		public int VertigoDrawCount { get; set; } = 0;
+
 		public int OverpassWinCount { get; set; } = 0;
 
 		public int OverpassLossCount { get; set; } = 0;
@@ -59,6 +65,8 @@
 		public double NukeWinPercentage { get; set; } = 0;
 
 		public double CacheWinPercentage { get; set; } = 0;
+
+		public double VertigoWinPercentage { get; set; } = 0;
 
 		public double VertigoWinPercentage { get; set; } = 0;
 

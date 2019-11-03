@@ -90,6 +90,7 @@ namespace Services.Concrete.Movie
 					CsgoExePath = AppSettings.GetCsgoExePath(), // TODO move it?
 					EnableHlaeConfigParent = _config.EnableHlaeConfigParent,
 					Fullscreen = false,
+					IsWorldwideEnabled = _config.IsWorldwideEnabled,
 					Height = _config.Height,
 					Width = _config.Width,
 					HlaeConfigParentFolderPath = _config.HlaeConfigParentFolderPath,

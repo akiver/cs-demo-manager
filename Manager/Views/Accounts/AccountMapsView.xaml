@@ -175,6 +175,7 @@
 								<ColumnDefinition Width="*"/>
 								<ColumnDefinition Width="*"/>
 								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
 							</Grid.ColumnDefinitions>
 
 							<Grid Grid.Column="0">
@@ -394,17 +395,7 @@
 								</telerik:RadLegend>
 							</Grid>
 
-						</Grid>
-
-						<Grid Grid.Row="1">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-								<ColumnDefinition Width="*"/>
-							</Grid.ColumnDefinitions>
-
-							<Grid Grid.Column="0">
+							<Grid Grid.Column="4">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="Auto"/>
 									<RowDefinition Height="*"/>
@@ -457,8 +448,17 @@
 									</telerik:RadLegend.Items>
 								</telerik:RadLegend>
 							</Grid>
+						</Grid>
 
-							<Grid Grid.Column="1">
+						<Grid Grid.Row="1">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="*"/>
+							</Grid.ColumnDefinitions>
+
+							<Grid Grid.Column="0">
 								<Grid.RowDefinitions>
 									<RowDefinition Height="Auto"/>
 									<RowDefinition Height="*"/>
@@ -473,6 +473,60 @@
 													 TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
 									<telerik:RadPieChart.Series>
 										<telerik:PieSeries ItemsSource="{Binding NukePieDatas}"
+														   ValueBinding="Value"
+														   ShowLabels="True"
+														   RadiusFactor="0.65">
+											<telerik:PieSeries.LabelDefinitions>
+												<telerik:ChartSeriesLabelDefinition Margin="-10"
+																					Template="{StaticResource PieMatchWinStatsLabelTemplate}" />
+											</telerik:PieSeries.LabelDefinitions>
+											<telerik:PieSeries.LabelConnectorsSettings>
+												<telerik:ChartSeriesLabelConnectorsSettings Style="{StaticResource LabelConnectorStyle}" />
+											</telerik:PieSeries.LabelConnectorsSettings>
+										</telerik:PieSeries>
+									</telerik:RadPieChart.Series>
+									<telerik:RadPieChart.Behaviors>
+										<telerik:ChartSelectionBehavior DataPointSelectionMode="Multiple" />
+										<telerik:ChartTooltipBehavior />
+									</telerik:RadPieChart.Behaviors>
+								</telerik:RadPieChart>
+
+								<telerik:RadLegend Grid.Row="2"
+												   VerticalAlignment="Bottom"
+												   HorizontalAlignment="Center">
+									<telerik:RadLegend.ItemsPanel>
+										<ItemsPanelTemplate>
+											<StackPanel Orientation="Horizontal" />
+										</ItemsPanelTemplate>
+									</telerik:RadLegend.ItemsPanel>
+									<telerik:RadLegend.Items>
+										<telerik:LegendItemCollection>
+											<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
+																Title="{x:Static properties:Resources.Win}"/>
+											<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
+																Title="{x:Static properties:Resources.Loss}" />
+											<telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}"
+																Title="{x:Static properties:Resources.Draw}" />
+										</telerik:LegendItemCollection>
+									</telerik:RadLegend.Items>
+								</telerik:RadLegend>
+							</Grid>
+
+							<Grid Grid.Column="1">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto"/>
+									<RowDefinition Height="*"/>
+									<RowDefinition Height="Auto"/>
+								</Grid.RowDefinitions>
+
+								<TextBlock Grid.Row="0"
+										   Text="Cache"
+										   Style="{StaticResource MapTitleStatsStyle}"/>
+								<telerik:RadPieChart Grid.Row="1"
+													 Palette="{StaticResource MatchStatsChartPalette}"
+													 TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
+									<telerik:RadPieChart.Series>
+										<telerik:PieSeries ItemsSource="{Binding CachePieDatas}"
 														   ValueBinding="Value"
 														   ShowLabels="True"
 														   RadiusFactor="0.65">
@@ -574,13 +628,13 @@
 								</Grid.RowDefinitions>
 
 								<TextBlock Grid.Row="0"
-										   Text="Cache"
+										   Text="Cobblestone"
 										   Style="{StaticResource MapTitleStatsStyle}"/>
 								<telerik:RadPieChart Grid.Row="1"
 													 Palette="{StaticResource MatchStatsChartPalette}"
 													 TooltipTemplate="{StaticResource TooltipCountPieTemplate}">
 									<telerik:RadPieChart.Series>
-										<telerik:PieSeries ItemsSource="{Binding CachePieDatas}"
+										<telerik:PieSeries ItemsSource="{Binding CobblestonePieDatas}"
 														   ValueBinding="Value"
 														   ShowLabels="True"
 														   RadiusFactor="0.65">
@@ -665,6 +719,15 @@
 							</telerik:BarSeries.LabelDefinitions>
 						</telerik:BarSeries>
 						<telerik:BarSeries ItemsSource="{Binding OverpassPercentDatas}"
+										   CategoryBinding="Label"
+										   ValueBinding="Value"
+										   ShowLabels="True">
+							<telerik:BarSeries.LabelDefinitions>
+								<telerik:ChartSeriesLabelDefinition HorizontalAlignment="Center"
+																	Format="{} {0:F1}%"/>
+							</telerik:BarSeries.LabelDefinitions>
+						</telerik:BarSeries>
+						<telerik:BarSeries ItemsSource="{Binding VertigoPercentDatas}"
 										   CategoryBinding="Label"
 										   ValueBinding="Value"
 										   ShowLabels="True">

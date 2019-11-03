@@ -204,6 +204,15 @@ namespace Services.Concrete
 							stats.VertigoWinPercentage = Math.Round((stats.VertigoWinCount / (double)matchCount * 100), 2);
 						}
 
+						stats.VertigoWinCount = demosPlayerList.Count(d => d.MapName == "de_vertigo" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
+						stats.VertigoLossCount = demosPlayerList.Count(d => d.MapName == "de_vertigo" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
+						stats.VertigoDrawCount = demosPlayerList.Count(d => d.MapName == "de_vertigo" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);
+						matchCount = stats.VertigoWinCount + stats.VertigoLossCount + stats.VertigoDrawCount;
+						if (matchCount > 0)
+						{
+							stats.VertigoWinPercentage = Math.Round((stats.VertigoWinCount / (double)matchCount * 100), 2);
+						}
+
 						stats.NukeWinCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == 1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == 2));
 						stats.NukeLossCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && (GetWinStatusCode(d, SelectedStatsAccountSteamId) == -1 || GetWinStatusCode(d, SelectedStatsAccountSteamId) == -2));
 						stats.NukeDrawCount = demosPlayerList.Count(d => d.MapName == "de_nuke" && GetWinStatusCode(d, SelectedStatsAccountSteamId) == 0);

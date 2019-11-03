@@ -45,6 +45,8 @@ namespace Manager.ViewModel.Accounts
 
 		private List<GenericDoubleChart> _vertigoPieDatas;
 
+		private List<GenericDoubleChart> _vertigoPieDatas;
+
 		private List<GenericDoubleChart> _overpassPieDatas;
 
 		private List<GenericDoubleChart> _cachePieDatas;
@@ -60,6 +62,8 @@ namespace Manager.ViewModel.Accounts
 		private List<GenericDoubleChart> _nukePercentageDatas;
 
 		private List<GenericDoubleChart> _overpassPercentageDatas;
+
+		private List<GenericDoubleChart> _vertigoPercentageDatas;
 
 		private List<GenericDoubleChart> _vertigoPercentageDatas;
 
@@ -87,6 +91,12 @@ namespace Manager.ViewModel.Accounts
 		{
 			get { return _miragePieDatas; }
 			set { Set(() => MiragePieDatas, ref _miragePieDatas, value); }
+		}
+
+		public List<GenericDoubleChart> VertigoPieDatas
+		{
+			get { return _vertigoPieDatas; }
+			set { Set(() => VertigoPieDatas, ref _vertigoPieDatas, value); }
 		}
 
 		public List<GenericDoubleChart> VertigoPieDatas
@@ -147,6 +157,12 @@ namespace Manager.ViewModel.Accounts
 		{
 			get { return _cachePercentageDatas; }
 			set { Set(() => CachePercentDatas, ref _cachePercentageDatas, value); }
+		}
+
+		public List<GenericDoubleChart> VertigoPercentDatas
+		{
+			get { return _vertigoPercentageDatas; }
+			set { Set(() => VertigoPercentDatas, ref _vertigoPercentageDatas, value); }
 		}
 
 		public List<GenericDoubleChart> VertigoPercentDatas
@@ -427,6 +443,25 @@ namespace Manager.ViewModel.Accounts
 				}
 			};
 
+            CobblestonePieDatas = new List<GenericDoubleChart>
+            {
+                new GenericDoubleChart
+                {
+                    Label = Properties.Resources.Win,
+                    Value = datas.CobblestoneWinCount
+                },
+                new GenericDoubleChart
+                {
+                    Label = Properties.Resources.Loss,
+                    Value = datas.CobblestoneLossCount
+                },
+                new GenericDoubleChart
+                {
+                    Label = Properties.Resources.Draw,
+                    Value = datas.CobblestoneDrawCount
+                }
+            };
+
 			VertigoPieDatas = new List<GenericDoubleChart>
 			{
 				new GenericDoubleChart
@@ -500,6 +535,15 @@ namespace Manager.ViewModel.Accounts
 				}
 			};
 
+			VertigoPercentDatas = new List<GenericDoubleChart>
+			{
+				new GenericDoubleChart
+				{
+					Label = "Vertigo",
+					Value = (float) datas.VertigoWinPercentage
+				}
+			};
+
 			CachePercentDatas = new List<GenericDoubleChart>
 			{
 				new GenericDoubleChart
@@ -554,6 +598,9 @@ namespace Manager.ViewModel.Accounts
 			NukePieDatas = null;
 			OverpassPieDatas = null;
 			TrainPieDatas = null;
+			VertigoPieDatas = null;
+			CachePercentDatas = null;
+			CobblestonePercentDatas = null;
 			Dust2PercentDatas = null;
 			MiragePercentDatas = null;
 			InfernoPercentDatas = null;
@@ -561,7 +608,7 @@ namespace Manager.ViewModel.Accounts
 			OverpassPercentDatas = null;
 			VertigoPercentDatas = null;
 			TrainPercentDatas = null;
-			CachePercentDatas = null;
+			VertigoPercentDatas = null;
 		}
 	}
 }

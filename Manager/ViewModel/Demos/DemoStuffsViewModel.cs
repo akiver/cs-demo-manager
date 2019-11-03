@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
@@ -11,7 +12,6 @@ using Manager.Services;
 using Manager.ViewModel.Shared;
 using Manager.Views.Demos;
 using Services.Concrete;
-using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
 using Clipboard = System.Windows.Clipboard;
@@ -221,21 +221,8 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
-							{
-								SteamExePath = AppSettings.SteamExePath(),
-								Width = Properties.Settings.Default.ResolutionWidth,
-								Height = Properties.Settings.Default.ResolutionHeight,
-								Fullscreen = Properties.Settings.Default.IsFullscreen,
-								EnableHlae = Properties.Settings.Default.EnableHlae,
-								CsgoExePath = Properties.Settings.Default.CsgoExePath,
-								EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-								HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-								HlaeExePath = HlaeService.GetHlaeExePath(),
-								LaunchParameters = Properties.Settings.Default.LaunchParameters,
-								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = SelectedStuff.ThrowerSteamId,
-							};
+							GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+							config.FocusPlayerSteamId = SelectedStuff.ThrowerSteamId;
 							GameLauncher launcher = new GameLauncher(config);
 							launcher.WatchDemoAt(SelectedStuff.Tick, true);
 						}, () => SelectedStuff != null));
@@ -255,21 +242,8 @@ namespace Manager.ViewModel.Demos
 								await _dialogService.ShowSteamNotFoundAsync();
 								return;
 							}
-							GameLauncherConfiguration config = new GameLauncherConfiguration(Demo)
-							{
-								SteamExePath = AppSettings.SteamExePath(),
-								Width = Properties.Settings.Default.ResolutionWidth,
-								Height = Properties.Settings.Default.ResolutionHeight,
-								Fullscreen = Properties.Settings.Default.IsFullscreen,
-								EnableHlae = Properties.Settings.Default.EnableHlae,
-								CsgoExePath = Properties.Settings.Default.CsgoExePath,
-								EnableHlaeConfigParent = Properties.Settings.Default.EnableHlaeConfigParent,
-								HlaeConfigParentFolderPath = Properties.Settings.Default.HlaeConfigParentFolderPath,
-								HlaeExePath = HlaeService.GetHlaeExePath(),
-								LaunchParameters = Properties.Settings.Default.LaunchParameters,
-								UseCustomActionsGeneration = Properties.Settings.Default.UseCustomActionsGeneration,
-								FocusPlayerSteamId = SelectedPlayer.SteamId,
-							};
+							GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+							config.FocusPlayerSteamId = SelectedPlayer.SteamId;
 							GameLauncher launcher = new GameLauncher(config);
 							launcher.WatchPlayerStuff(SelectedPlayer, CurrentStuffSelector.Id);
 						}, () => Demo != null && SelectedPlayer != null));
@@ -284,14 +258,27 @@ namespace Manager.ViewModel.Demos
 					?? (_copySetPosCommand = new RelayCommand(
 						async () =>
 						{
-							string command = "setpos " + SelectedStuff.ShooterPosX
-							+ " " + SelectedStuff.ShooterPosY + " " + SelectedStuff.ShooterPosZ
-							+ " ;setang " + SelectedStuff.ShooterAnglePitch + " " + SelectedStuff.ShooterAngleYaw;
-							Clipboard.SetText(command);
-							HasNotification = true;
-							Notification = Properties.Resources.NotificationSetposCommandCopied;
-							await Task.Delay(5000);
-							HasNotification = false;
+							try
+							{
+								string command = "setpos " + SelectedStuff.ShooterPosX
+														   + " " + SelectedStuff.ShooterPosY + " " +
+														   SelectedStuff.ShooterPosZ
+														   + " ;setang " + SelectedStuff.ShooterAnglePitch + " " +
+														   SelectedStuff.ShooterAngleYaw;
+								Clipboard.SetDataObject(command);
+								Notification = Properties.Resources.NotificationSetposCommandCopied;
+							}
+							catch (Exception ex)
+							{
+								Logger.Instance.Log(ex);
+								Notification = "Impossible to copy position into clipboard";
+							}
+							finally
+							{
+								HasNotification = true;
+								await Task.Delay(5000);
+								HasNotification = false;
+							}
 						},
 						() => SelectedStuff != null));
 			}

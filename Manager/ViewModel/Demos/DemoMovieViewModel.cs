@@ -1478,6 +1478,7 @@ namespace Manager.ViewModel.Demos
 				UserCfg = new List<string>(Cfg.Split(Environment.NewLine.ToCharArray())),
 				Width = Width,
 				Height = Height,
+				IsWorldwideEnabled = Settings.Default.IsWorldwideEnabled,
 				UseVirtualDub = UseVirtualDub,
 				VideoQuality = VideoQuality,
 				AudioBitrate = AudioBitrate,
