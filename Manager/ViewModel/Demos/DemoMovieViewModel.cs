@@ -857,6 +857,13 @@ namespace Manager.ViewModel.Demos
 								   HasNotification = true;
 								   IsInstalling = true;
 
+								   bool isHlaeInstalled = HlaeService.IsHlaeInstalled();
+								   if (!isHlaeInstalled)
+								   {
+									   await _dialogService.ShowErrorAsync(Properties.Resources.DialogInstallHLAEFirst, MessageDialogStyle.Affirmative);
+									   return;
+								   }
+
 								   bool installed = await FFmpegService.Install();
 								   if (!installed)
 								   {
