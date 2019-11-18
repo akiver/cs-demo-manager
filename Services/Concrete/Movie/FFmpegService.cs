@@ -19,8 +19,8 @@ namespace Services.Concrete.Movie
 		/// <returns></returns>
 		public static string GetFFmpegPath()
 		{
-			// the archive already contains ffpmeg version
-			return Path.Combine(AppSettings.GetLocalAppDataPath(), "ffmpeg");
+			string hlaeFolderPath = HlaeService.GetHlaePath();
+			return Path.Combine(hlaeFolderPath, "ffmpeg");
 		}
 
 		/// <summary>
@@ -38,7 +38,7 @@ namespace Services.Concrete.Movie
 		/// <returns></returns>
 		public static string GetFFmpegVersionFilePath()
 		{
-			return GetFFmpegPath() + Path.DirectorySeparatorChar + "version";
+			return AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "ffmpeg_version";
 		}
 
 		private static string GetArchiveName()
@@ -60,6 +60,7 @@ namespace Services.Concrete.Movie
 
 		public static string GetInstalledVersion()
 		{
+			if (!IsFFmpegInstalled()) return string.Empty;
 			string versionFilePath = GetFFmpegVersionFilePath();
 			if (!File.Exists(versionFilePath)) return string.Empty;
 

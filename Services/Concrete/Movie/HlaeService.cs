@@ -96,7 +96,10 @@ namespace Services.Concrete.Movie
 					bool downloaded = await Download(downloadUrl, archivePath);
 					if (downloaded)
 					{
+						bool shouldBackupFfmpegFolder = FFmpegService.IsFFmpegInstalled();
+						if (shouldBackupFfmpegFolder) BackupFfmpegFolder();
 						bool extracted = await ExtractArchive(archivePath);
+						if (shouldBackupFfmpegFolder) RestoreFfmpegFolder();
 						if (extracted)
 						{
 							// create a file containing the version installed to check update later
@@ -188,6 +191,29 @@ namespace Services.Concrete.Movie
 			}
 		}
 
+		private static void BackupFfmpegFolder()
+		{
+			string ffmpegFolderPath = FFmpegService.GetFFmpegPath();
+			if (Directory.Exists(ffmpegFolderPath))
+			{
+				string ffmpegTemporaryFolderPath = GetTemporaryFfmegDirectoryPath();
+				if (Directory.Exists(ffmpegTemporaryFolderPath)) Directory.Delete(ffmpegTemporaryFolderPath, true);
+				Directory.Move(ffmpegFolderPath, ffmpegTemporaryFolderPath);
+			}
+		}
+
+		private static void RestoreFfmpegFolder()
+		{
+			string ffmpegTemporaryFolderPath = GetTemporaryFfmegDirectoryPath();
+			if (Directory.Exists(ffmpegTemporaryFolderPath))
+			{
+				string ffmpegFolderPath = FFmpegService.GetFFmpegPath();
+				if (Directory.Exists(ffmpegFolderPath)) Directory.Delete(ffmpegFolderPath, true);
+				Directory.Move(ffmpegTemporaryFolderPath, ffmpegFolderPath);
+			}
+		}
+
+
 		/// <summary>
 		/// Display a file dialog to select the csgo.exe location and return its path
 		/// </summary>
@@ -207,6 +233,11 @@ namespace Services.Concrete.Movie
 			}
 
 			return string.Empty;
+		}
+
+		private static string GetTemporaryFfmegDirectoryPath()
+		{
+			return Path.Combine(AppSettings.GetLocalAppDataPath(), "ffmpeg-temp");
 		}
 	}
 }
