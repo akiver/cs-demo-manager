@@ -7,7 +7,7 @@ You can follow [@CSGODemoManager](https://twitter.com/CSGODemoManager) on Twitte
 
 ## Preview ##
 
-![preview](https://csgo-demos-manager.com/images/listing.jpg)
+![preview](https://github.com/akiver/CSGO-Demos-Manager/blob/master/preview.jpg)
 More screenshots and video are available at [https://csgo-demos-manager.com](https://csgo-demos-manager.com).
 
 ## Features ##
