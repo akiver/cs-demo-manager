@@ -124,27 +124,27 @@
         </trans-unit>
         <trans-unit id="Rank1" translate="yes" xml:space="preserve">
           <source>Silver I</source>
-          <target state="final">白银-I</target>
+          <target state="final">白银 - I</target>
         </trans-unit>
         <trans-unit id="Rank10" translate="yes" xml:space="preserve">
           <source>Gold Nova Master</source>
-          <target state="final">黄金新星-大师级</target>
+          <target state="final">黄金新星 - 大师级</target>
         </trans-unit>
         <trans-unit id="Rank11" translate="yes" xml:space="preserve">
           <source>Master Guardian I</source>
-          <target state="final">大师级守护者-I</target>
+          <target state="final">大师级守护者 - I</target>
         </trans-unit>
         <trans-unit id="Rank12" translate="yes" xml:space="preserve">
           <source>Master Guardian II</source>
-          <target state="final">大师级守护者-II</target>
+          <target state="final">大师级守护者 - II</target>
         </trans-unit>
         <trans-unit id="Rank13" translate="yes" xml:space="preserve">
           <source>Master Guardian Elite</source>
-          <target state="final">大师级守护者-精英</target>
+          <target state="final">大师级守护者 - 精英</target>
         </trans-unit>
         <trans-unit id="Rank14" translate="yes" xml:space="preserve">
           <source>Distinguished Master Guardian</source>
-          <target state="final">大师级守护者-卓越</target>
+          <target state="final">大师级守护者 - 卓越</target>
         </trans-unit>
         <trans-unit id="Rank15" translate="yes" xml:space="preserve">
           <source>Legendary Eagle</source>
@@ -152,7 +152,7 @@
         </trans-unit>
         <trans-unit id="Rank16" translate="yes" xml:space="preserve">
           <source>Legendary Eagle Master</source>
-          <target state="final">传奇之鹰-大师级</target>
+          <target state="final">传奇之鹰 - 大师级</target>
         </trans-unit>
         <trans-unit id="Rank17" translate="yes" xml:space="preserve">
           <source>Supreme Master First Class</source>
@@ -164,35 +164,35 @@
         </trans-unit>
         <trans-unit id="Rank2" translate="yes" xml:space="preserve">
           <source>Silver II</source>
-          <target state="final">白银-II</target>
+          <target state="final">白银 - II</target>
         </trans-unit>
         <trans-unit id="Rank3" translate="yes" xml:space="preserve">
           <source>Silver III</source>
-          <target state="final">白银-III</target>
+          <target state="final">白银 - III</target>
         </trans-unit>
         <trans-unit id="Rank4" translate="yes" xml:space="preserve">
           <source>Silver IV</source>
-          <target state="final">白银-IV</target>
+          <target state="final">白银 - IV</target>
         </trans-unit>
         <trans-unit id="Rank5" translate="yes" xml:space="preserve">
           <source>Silver Elite</source>
-          <target state="final">白银-精英</target>
+          <target state="final">白银 - 精英</target>
         </trans-unit>
         <trans-unit id="Rank6" translate="yes" xml:space="preserve">
           <source>Silver Elite Master</source>
-          <target state="final">白银-大师级精英</target>
+          <target state="final">白银 - 大师级精英</target>
         </trans-unit>
         <trans-unit id="Rank7" translate="yes" xml:space="preserve">
           <source>Gold Nova I</source>
-          <target state="final">黄金新星-I</target>
+          <target state="final">黄金新星 - I</target>
         </trans-unit>
         <trans-unit id="Rank8" translate="yes" xml:space="preserve">
           <source>Gold Nova II</source>
-          <target state="final">黄金新星-II</target>
+          <target state="final">黄金新星 - II</target>
         </trans-unit>
         <trans-unit id="Rank9" translate="yes" xml:space="preserve">
           <source>Gold Nova III</source>
-          <target state="final">黄金新星-III</target>
+          <target state="final">黄金新星 - III</target>
         </trans-unit>
         <trans-unit id="valve" translate="no" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\Resources\Images\Logos\valve.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
