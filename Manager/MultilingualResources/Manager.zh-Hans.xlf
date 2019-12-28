@@ -2997,11 +2997,11 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="LostSurrender" translate="yes" xml:space="preserve">
           <source>Lost (S)</source>
-          <target state="final">失败次数</target>
+          <target state="final">失败(投降)</target>
         </trans-unit>
         <trans-unit id="WinSurrender" translate="yes" xml:space="preserve">
           <source>Win (S)</source>
-          <target state="final">胜利次数</target>
+          <target state="final">胜利(投降)</target>
         </trans-unit>
         <trans-unit id="Away" translate="yes" xml:space="preserve">
           <source>Away</source>
@@ -3568,7 +3568,7 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="ToolTipSaveAsPngNoShortcut" translate="yes" xml:space="preserve">
           <source>Save as PNG</source>
-          <target state="new">Save as PNG</target>
+          <target state="final">另存为为PNG</target>
         </trans-unit>
         <trans-unit id="DialogErrorExportingChart" translate="yes" xml:space="preserve">
           <source>An error occured while exporting the chart.</source>
@@ -3576,11 +3576,11 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="DemoStatusCorrupted" translate="yes" xml:space="preserve">
           <source>Corrupted</source>
-          <target state="new">Corrupted</target>
+          <target state="final">损坏</target>
         </trans-unit>
         <trans-unit id="DemoStatusError" translate="yes" xml:space="preserve">
           <source>Error</source>
-          <target state="new">Error</target>
+          <target state="final">错误</target>
         </trans-unit>
         <trans-unit id="DemoStatusNone" translate="yes" xml:space="preserve">
           <source>None</source>
