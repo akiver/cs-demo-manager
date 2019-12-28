@@ -34,6 +34,7 @@ namespace Manager
 		};
 		public static string[] Translators = {
 			"FisherMan aka. deathles乃夫 (Chinese simplified)",
+			"❤Elsa (Chinese simplified)",
 			"Allan \"Michael\" Simonsen (Danish)",
 			"Leonardo / RedDeadLuigi / mvinoba (Brazilian)",
 			"Spidersouris (French)",
