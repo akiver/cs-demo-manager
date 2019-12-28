@@ -3344,7 +3344,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="final">No {0} 找到为这个选择</target>
+          <target state="final">该分类找不到 {0}</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
@@ -3468,19 +3468,19 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
         </trans-unit>
         <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
           <source>Demos list size</source>
-          <target state="new">Demos list size</target>
+          <target state="final">每页DEMO数量</target>
         </trans-unit>
         <trans-unit id="ShowAllDemos" translate="yes" xml:space="preserve">
           <source>Show all demos</source>
-          <target state="new">Show all demos</target>
+          <target state="final">加载所有DEMO</target>
         </trans-unit>
         <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
           <source>Invalid share code</source>
-          <target state="new">Invalid share code</target>
+          <target state="final">分享码无效</target>
         </trans-unit>
         <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download a demo from share code</source>
-          <target state="new">Download a demo from share code</target>
+          <target state="final">使用分享码下载demo</target>
         </trans-unit>
         <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
           <source>Share code</source>
