@@ -172,6 +172,10 @@ namespace Services.Concrete.Analyzer
 			DemoParser parser = new DemoParser(File.OpenRead(pathDemoFile));
 
 			DateTime dateFile = File.GetCreationTime(pathDemoFile);
+
+			if (dateFile > File.GetLastWriteTime(pathDemoFile))
+				dateFile = File.GetLastWriteTime(pathDemoFile);
+
 			Demo demo = new Demo
 			{
 				Name = Path.GetFileName(pathDemoFile),
