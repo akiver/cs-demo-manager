@@ -16,28 +16,28 @@
     <value>无</value>
   </data>
   <data name="Rank1" xml:space="preserve">
-    <value>白银-I</value>
+    <value>白银 - I</value>
   </data>
   <data name="Rank10" xml:space="preserve">
-    <value>黄金新星-大师级</value>
+    <value>黄金新星 - 大师级</value>
   </data>
   <data name="Rank11" xml:space="preserve">
-    <value>大师级守护者-I</value>
+    <value>大师级守护者 - I</value>
   </data>
   <data name="Rank12" xml:space="preserve">
-    <value>大师级守护者-II</value>
+    <value>大师级守护者 - II</value>
   </data>
   <data name="Rank13" xml:space="preserve">
-    <value>大师级守护者-精英</value>
+    <value>大师级守护者 - 精英</value>
   </data>
   <data name="Rank14" xml:space="preserve">
-    <value>大师级守护者-卓越</value>
+    <value>大师级守护者 - 卓越</value>
   </data>
   <data name="Rank15" xml:space="preserve">
     <value>传奇之鹰</value>
   </data>
   <data name="Rank16" xml:space="preserve">
-    <value>传奇之鹰-大师级</value>
+    <value>传奇之鹰 - 大师级</value>
   </data>
   <data name="Rank17" xml:space="preserve">
     <value>无上之首席大师</value>
@@ -46,28 +46,28 @@
     <value>全球精英</value>
   </data>
   <data name="Rank2" xml:space="preserve">
-    <value>白银-II</value>
+    <value>白银 - II</value>
   </data>
   <data name="Rank3" xml:space="preserve">
-    <value>白银-III</value>
+    <value>白银 - III</value>
   </data>
   <data name="Rank4" xml:space="preserve">
-    <value>白银-IV</value>
+    <value>白银 - IV</value>
   </data>
   <data name="Rank5" xml:space="preserve">
-    <value>白银-精英</value>
+    <value>白银 - 精英</value>
   </data>
   <data name="Rank6" xml:space="preserve">
-    <value>白银-大师级精英</value>
+    <value>白银 - 大师级精英</value>
   </data>
   <data name="Rank7" xml:space="preserve">
-    <value>黄金新星-I</value>
+    <value>黄金新星 - I</value>
   </data>
   <data name="Rank8" xml:space="preserve">
-    <value>黄金新星-II</value>
+    <value>黄金新星 - II</value>
   </data>
   <data name="Rank9" xml:space="preserve">
-    <value>黄金新星-III</value>
+    <value>黄金新星 - III</value>
   </data>
   <data name="wanmei" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Images\Logos\wanmei.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

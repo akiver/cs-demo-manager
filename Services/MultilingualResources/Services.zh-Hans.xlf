@@ -20,7 +20,7 @@
         </trans-unit>
         <trans-unit id="DefusedTheBombOnBombSite" translate="yes" xml:space="preserve">
           <source>{0} defused the bomb on bomb site {1}</source>
-          <target state="final">{0} 在包点拆除炸弹 {1}</target>
+          <target state="final">{0} 在包点 {1} 拆除炸弹</target>
         </trans-unit>
         <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
           <source>Flashbang</source>
@@ -36,11 +36,11 @@
         </trans-unit>
         <trans-unit id="Molotov" translate="yes" xml:space="preserve">
           <source>Molotov</source>
-          <target state="final">燃烧弹</target>
+          <target state="final">燃烧弹-T</target>
         </trans-unit>
         <trans-unit id="PlantedTheBombOnBombSite" translate="yes" xml:space="preserve">
           <source>{0} planted the bomb on bomb site {1}</source>
-          <target state="final">{0} 在包点安放炸弹 {1}</target>
+          <target state="final">{0} 在包点 {1} 安放炸弹</target>
         </trans-unit>
         <trans-unit id="Smoke" translate="yes" xml:space="preserve">
           <source>Smoke</source>
@@ -52,7 +52,7 @@
         </trans-unit>
         <trans-unit id="TheBombExplodedOnBombSite" translate="yes" xml:space="preserve">
           <source>The bomb exploded on bomb site {0}</source>
-          <target state="final">炸弹在包点爆炸 {0}</target>
+          <target state="final">炸弹在包点 {0} 爆炸</target>
         </trans-unit>
         <trans-unit id="ThrownDecoy" translate="yes" xml:space="preserve">
           <source>{0} thrown a decoy</source>
@@ -80,7 +80,7 @@
         </trans-unit>
         <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
           <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
+          <target state="final">无法找到HLAE引擎,请安装后在设置中启用.</target>
         </trans-unit>
         <trans-unit id="execute_command" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
           <source>..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
@@ -116,7 +116,7 @@
         </trans-unit>
         <trans-unit id="Kill" translate="yes" xml:space="preserve">
           <source>Kill</source>
-          <target state="new">Kill</target>
+          <target state="final">击杀</target>
         </trans-unit>
         <trans-unit id="BombDefusedEventName" translate="yes" xml:space="preserve">
           <source>of the bomb defused</source>
@@ -145,7 +145,7 @@
         </trans-unit>
         <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
           <source>Incendiary</source>
-          <target state="new">Incendiary</target>
+          <target state="final">燃烧弹-CT</target>
         </trans-unit>
         <trans-unit id="IncendiaryEventName" translate="yes" xml:space="preserve">
           <source>of the incendiary</source>
@@ -161,7 +161,7 @@
         </trans-unit>
         <trans-unit id="Round" translate="yes" xml:space="preserve">
           <source>Round</source>
-          <target state="new">Round</target>
+          <target state="final">回合</target>
         </trans-unit>
         <trans-unit id="SmokeEventName" translate="yes" xml:space="preserve">
           <source>of the smoke</source>
