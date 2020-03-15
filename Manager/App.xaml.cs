@@ -33,8 +33,7 @@ namespace Manager
 			"CorySanin",
 		};
 		public static string[] Translators = {
-			"FisherMan aka. deathles乃夫 (Chinese simplified)",
-			"❤Elsa (Chinese simplified)",
+			"FisherMan aka. deathles乃夫 / AlexWIT from 無盡國度 / ❤Elsa (Chinese Simplified)",
 			"Allan \"Michael\" Simonsen (Danish)",
 			"Leonardo / RedDeadLuigi / mvinoba (Brazilian)",
 			"Spidersouris (French)",

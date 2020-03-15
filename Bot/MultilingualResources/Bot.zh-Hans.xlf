@@ -8,7 +8,7 @@
       <group id="BOT/PROPERTIES/RESOURCES.RESX" datatype="resx">
         <trans-unit id="BalloonNoNewSuspectsFound" translate="yes" xml:space="preserve">
           <source>No new suspects banned found.</source>
-          <target state="final">没有发现新的嫌疑人封禁</target>
+          <target state="final">未发现新的嫌疑玩家封禁记录</target>
         </trans-unit>
         <trans-unit id="CheckEvery" translate="yes" xml:space="preserve">
           <source>Check every</source>
@@ -16,7 +16,7 @@
         </trans-unit>
         <trans-unit id="CheckNow" translate="yes" xml:space="preserve">
           <source>Check now</source>
-          <target state="final">现在检查</target>
+          <target state="final">立即检查</target>
         </trans-unit>
         <trans-unit id="Error" translate="yes" xml:space="preserve">
           <source>Error</source>
@@ -24,7 +24,7 @@
         </trans-unit>
         <trans-unit id="IsNotRunning" translate="yes" xml:space="preserve">
           <source>is not running</source>
-          <target state="final">不在运行</target>
+          <target state="final">未在运行</target>
         </trans-unit>
         <trans-unit id="IsRunning" translate="yes" xml:space="preserve">
           <source>is running</source>
@@ -44,7 +44,7 @@
         </trans-unit>
         <trans-unit id="ShowCsgoDm" translate="yes" xml:space="preserve">
           <source>Show CSGO-DM</source>
-          <target state="final">显示CSGO-DM</target>
+          <target state="final">显示 CSGO-DM</target>
         </trans-unit>
         <trans-unit id="Start" translate="yes" xml:space="preserve">
           <source>Start</source>
@@ -56,11 +56,11 @@
         </trans-unit>
         <trans-unit id="SuspectsList" translate="yes" xml:space="preserve">
           <source>Suspects list</source>
-          <target state="final">嫌疑人目录</target>
+          <target state="final">嫌疑人列表</target>
         </trans-unit>
         <trans-unit id="UnableToStartBot" translate="yes" xml:space="preserve">
           <source>Unable to start the BOT.</source>
-          <target state="final">无法启动BOT</target>
+          <target state="final">无法启动 BOT</target>
         </trans-unit>
         <trans-unit id="Xhour" translate="yes" xml:space="preserve">
           <source>{0} hour</source>
@@ -76,15 +76,15 @@
         </trans-unit>
         <trans-unit id="XsuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
           <source>{0} suspect(s) has been banned.</source>
-          <target state="final">{0} 嫌疑人已被封禁</target>
+          <target state="final">{0} 位嫌疑玩家已被封禁</target>
         </trans-unit>
         <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
           <source>Click here to download your last matchmaking demos.</source>
-          <target state="final">点击这里来下载你最近的匹配demo</target>
+          <target state="final">点此下载您近期的游戏录像</target>
         </trans-unit>
         <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
           <source>Send download demos notifications</source>
-          <target state="final">发送下载demo提醒</target>
+          <target state="final">发送录像下载提醒</target>
         </trans-unit>
       </group>
     </body>
