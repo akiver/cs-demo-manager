@@ -1146,10 +1146,6 @@
           <source>Kills Per Deaths</source>
           <target state="final">Kills Pro Tod</target>
         </trans-unit>
-        <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
-          <source>Last online</source>
-          <target state="final">Zuletzt online</target>
-        </trans-unit>
         <trans-unit id="HeaderToolTipMapName" translate="yes" xml:space="preserve">
           <source>Map's name</source>
           <target state="final">Mapname</target>
@@ -2838,10 +2834,6 @@ Möchten Sie Ihre benutzerdefinierten Daten speichern?</target>
         <trans-unit id="HeaderGameBan" translate="yes" xml:space="preserve">
           <source>Game ban</source>
           <target state="final">Game ban</target>
-        </trans-unit>
-        <trans-unit id="HeaderLastConnection" translate="yes" xml:space="preserve">
-          <source>Last connection</source>
-          <target state="final">Letzte Verbindung.</target>
         </trans-unit>
         <trans-unit id="HeaderNickname" translate="yes" xml:space="preserve">
           <source>Nickname</source>

@@ -1290,10 +1290,6 @@
           <source>Community Profile Configured</source>
           <target state="final">Profil communautaire configuré?</target>
         </trans-unit>
-        <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
-          <source>Last online</source>
-          <target state="final">Dernière connexion</target>
-        </trans-unit>
         <trans-unit id="HeaderToolTipMarketBanned" translate="yes" xml:space="preserve">
           <source>Market Banned</source>
           <target state="final">Banni du marché</target>
@@ -2722,10 +2718,6 @@ Voulez-vous vraiment continuer?</target>
         <trans-unit id="HeaderAccountVisibility" translate="yes" xml:space="preserve">
           <source>Account visibility</source>
           <target state="final">Visibilité</target>
-        </trans-unit>
-        <trans-unit id="HeaderLastConnection" translate="yes" xml:space="preserve">
-          <source>Last connection</source>
-          <target state="final">Dernière connexion</target>
         </trans-unit>
         <trans-unit id="HeaderNickname" translate="yes" xml:space="preserve">
           <source>Nickname</source>

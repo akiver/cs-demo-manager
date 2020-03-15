@@ -249,10 +249,6 @@
 									Binding="{Binding PublicProfile}"
 									HeaderStyle="{StaticResource PublicProfileHeader}" />
 				<DataGridTextColumn Width="Auto"
-									Header="{x:Static properties:Resources.HeaderLastConnection}"
-									Binding="{Binding LastLogOffDate}"
-									HeaderStyle="{StaticResource LastLogOffHeader}" />
-				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.HeaderProfileSetup}"
 									Binding="{Binding ProfileStateString}"
 									HeaderStyle="{StaticResource ProfileStateHeader}" />

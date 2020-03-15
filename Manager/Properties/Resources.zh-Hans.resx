@@ -869,9 +869,6 @@
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
     <value>杀敌/死亡比例</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>上次在线</value>
-  </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
     <value>地图名称</value>
   </data>
@@ -2133,9 +2130,6 @@
   </data>
   <data name="HeaderGameBan" xml:space="preserve">
     <value>游戏封禁</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>上次在线</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>昵称</value>

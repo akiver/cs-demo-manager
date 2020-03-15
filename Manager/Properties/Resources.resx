@@ -984,9 +984,6 @@
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
     <value>Kills Per Deaths</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>Last online</value>
-  </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
     <value>Map's name</value>
   </data>
@@ -2255,9 +2252,6 @@ Do you want to save your custom data?</value>
   </data>
   <data name="HeaderGameBan" xml:space="preserve">
     <value>Game ban</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>Last connection</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>Nickname</value>

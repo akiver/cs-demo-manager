@@ -978,9 +978,6 @@
   <data name="HeaderToolTipCommunityProfileConfigured" xml:space="preserve">
     <value>Profil communautaire configuré?</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>Dernière connexion</value>
-  </data>
   <data name="HeaderToolTipMarketBanned" xml:space="preserve">
     <value>Banni du marché</value>
   </data>
@@ -2049,9 +2046,6 @@ Voulez-vous vraiment continuer?</value>
   </data>
   <data name="HeaderAccountVisibility" xml:space="preserve">
     <value>Visibilité</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>Dernière connexion</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>Pseudo</value>

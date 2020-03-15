@@ -870,9 +870,6 @@
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
     <value>Drab per Dødsfald</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>Sidste Online</value>
-  </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
     <value>Bane Navn</value>
   </data>
@@ -2134,9 +2131,6 @@ you skal fjerne den fra din konto liste og hvidliste for at kunne tilføje den t
   </data>
   <data name="HeaderGameBan" xml:space="preserve">
     <value>Spil Ban</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>Sidste Forbindelse.</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>Øgenavn</value>

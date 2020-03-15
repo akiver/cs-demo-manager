@@ -869,9 +869,6 @@
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
     <value>Ölések Halálonként</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>Utoljára elérhető</value>
-  </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
     <value>Pálya neve</value>
   </data>
@@ -2133,9 +2130,6 @@ Szeretné menteni az egyedi adatokat?</value>
   </data>
   <data name="HeaderGameBan" xml:space="preserve">
     <value>Játék-kitiltás</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>Utolsó csatlakozás</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>Becenév</value>

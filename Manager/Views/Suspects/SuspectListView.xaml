@@ -323,11 +323,6 @@
 									Header="{x:Static properties:Resources.HeaderAccountVisibility}"
 									Binding="{Binding CommunityVisibilityState, Converter={StaticResource SteamAccountVisibilityToStringConverter}}"
 									HeaderStyle="{StaticResource PublicProfileHeader}" />
-				<DataGridTextColumn x:Name="LastLogOffColumn"
-									Width="Auto"
-									Header="{x:Static properties:Resources.HeaderLastConnection}"
-									Binding="{Binding LastLogOffDate}"
-									HeaderStyle="{StaticResource LastLogOffHeader}" />
 				<DataGridTextColumn x:Name="ProfileConfiguredColumn"
 									Width="Auto"
 									Header="{x:Static properties:Resources.HeaderProfileSetup}"

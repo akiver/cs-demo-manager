@@ -1150,10 +1150,6 @@
           <source>Kills Per Deaths</source>
           <target state="new">Kills Per Deaths</target>
         </trans-unit>
-        <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
-          <source>Last online</source>
-          <target state="new">Last online</target>
-        </trans-unit>
         <trans-unit id="HeaderToolTipMapName" translate="yes" xml:space="preserve">
           <source>Map's name</source>
           <target state="new">Map's name</target>
@@ -2854,10 +2850,6 @@ Do you want to save your custom data?</target>
         <trans-unit id="HeaderGameBan" translate="yes" xml:space="preserve">
           <source>Game ban</source>
           <target state="new">Game ban</target>
-        </trans-unit>
-        <trans-unit id="HeaderLastConnection" translate="yes" xml:space="preserve">
-          <source>Last connection</source>
-          <target state="new">Last connection</target>
         </trans-unit>
         <trans-unit id="HeaderNickname" translate="yes" xml:space="preserve">
           <source>Nickname</source>

@@ -33,11 +33,6 @@ namespace Core.Models
 		private string _nickname;
 
 		/// <summary>
-		/// The last time the user was online, in unix time.
-		/// </summary>
-		private int _lastLogOff = 0;
-
-		/// <summary>
 		/// The full URL of the player's Steam Community profile.
 		/// </summary>
 		private string _profileUrl;
@@ -119,22 +114,6 @@ namespace Core.Models
 		{
 			get { return _communityVisibilityState; }
 			set { Set(() => CommunityVisibilityState, ref _communityVisibilityState, value); }
-		}
-
-		public string LastLogOffDate
-		{
-			get
-			{
-				DateTime dt = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-				dt = dt.AddSeconds(_lastLogOff).ToLocalTime();
-				return string.Format("{0:d/M/yyyy HH:mm:ss}", dt);
-			}
-		}
-
-		public int LastLogOff
-		{
-			get { return _lastLogOff; }
-			set { Set(() => LastLogOff, ref _lastLogOff, value); }
 		}
 
 		public int ProfileState

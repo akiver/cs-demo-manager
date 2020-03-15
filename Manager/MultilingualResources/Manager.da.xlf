@@ -1147,10 +1147,6 @@
           <source>Kills Per Deaths</source>
           <target state="final">Drab per Dødsfald</target>
         </trans-unit>
-        <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
-          <source>Last online</source>
-          <target state="final">Sidste Online</target>
-        </trans-unit>
         <trans-unit id="HeaderToolTipMapName" translate="yes" xml:space="preserve">
           <source>Map's name</source>
           <target state="final">Bane Navn</target>
@@ -2839,10 +2835,6 @@ Do you want to save your custom data?</source>
         <trans-unit id="HeaderGameBan" translate="yes" xml:space="preserve">
           <source>Game ban</source>
           <target state="final">Spil Ban</target>
-        </trans-unit>
-        <trans-unit id="HeaderLastConnection" translate="yes" xml:space="preserve">
-          <source>Last connection</source>
-          <target state="final">Sidste Forbindelse.</target>
         </trans-unit>
         <trans-unit id="HeaderNickname" translate="yes" xml:space="preserve">
           <source>Nickname</source>

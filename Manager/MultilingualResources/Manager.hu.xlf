@@ -1146,10 +1146,6 @@
           <source>Kills Per Deaths</source>
           <target state="final">Ölések Halálonként</target>
         </trans-unit>
-        <trans-unit id="HeaderToolTipLastConnexion" translate="yes" xml:space="preserve">
-          <source>Last online</source>
-          <target state="final">Utoljára elérhető</target>
-        </trans-unit>
         <trans-unit id="HeaderToolTipMapName" translate="yes" xml:space="preserve">
           <source>Map's name</source>
           <target state="final">Pálya neve</target>
@@ -2838,10 +2834,6 @@ Szeretné menteni az egyedi adatokat?</target>
         <trans-unit id="HeaderGameBan" translate="yes" xml:space="preserve">
           <source>Game ban</source>
           <target state="final">Játék-kitiltás</target>
-        </trans-unit>
-        <trans-unit id="HeaderLastConnection" translate="yes" xml:space="preserve">
-          <source>Last connection</source>
-          <target state="final">Utolsó csatlakozás</target>
         </trans-unit>
         <trans-unit id="HeaderNickname" translate="yes" xml:space="preserve">
           <source>Nickname</source>

@@ -468,10 +468,6 @@
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipAccountVisibilityStatus}" />
 	</Style>
 
-	<Style TargetType="DataGridColumnHeader" x:Key="LastLogOffHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
-		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipLastConnexion}" />
-	</Style>
-
 	<Style TargetType="DataGridColumnHeader" x:Key="ProfileStateHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
 		<Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipCommunityProfileConfigured}" />
 	</Style>

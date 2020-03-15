@@ -869,9 +869,6 @@
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
     <value>Eliminaciones por muertes</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>Última conexión</value>
-  </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
     <value>Nombre del mapa</value>
   </data>
@@ -2133,9 +2130,6 @@ Tienes que eliminarlo de tu cuenta y lista blanca para poder añadirlo a tu list
   </data>
   <data name="HeaderGameBan" xml:space="preserve">
     <value>Baneado de juego</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>Última conexión</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>Nickname</value>

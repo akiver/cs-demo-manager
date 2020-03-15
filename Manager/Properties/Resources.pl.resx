@@ -869,9 +869,6 @@
   <data name="HeaderToolTipKillsPerDeaths" xml:space="preserve">
     <value>Zabójstw na śmierć</value>
   </data>
-  <data name="HeaderToolTipLastConnexion" xml:space="preserve">
-    <value>Ostatnio online</value>
-  </data>
   <data name="HeaderToolTipMapName" xml:space="preserve">
     <value>Nazwa mapy</value>
   </data>
@@ -2134,9 +2131,6 @@ Czy chcesz zapisać swoje niestandardowe dane?</value>
   </data>
   <data name="HeaderGameBan" xml:space="preserve">
     <value>Ban w grze</value>
-  </data>
-  <data name="HeaderLastConnection" xml:space="preserve">
-    <value>Ostatnie połączenie</value>
   </data>
   <data name="HeaderNickname" xml:space="preserve">
     <value>Nick</value>
