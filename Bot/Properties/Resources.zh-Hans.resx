@@ -13,19 +13,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BalloonNoNewSuspectsFound" xml:space="preserve">
-    <value>没有发现新的嫌疑人封禁</value>
+    <value>未发现新的嫌疑玩家封禁记录</value>
   </data>
   <data name="CheckEvery" xml:space="preserve">
     <value>检查频率</value>
   </data>
   <data name="CheckNow" xml:space="preserve">
-    <value>现在检查</value>
+    <value>立即检查</value>
   </data>
   <data name="Error" xml:space="preserve">
     <value>错误</value>
   </data>
   <data name="IsNotRunning" xml:space="preserve">
-    <value>不在运行</value>
+    <value>未在运行</value>
   </data>
   <data name="IsRunning" xml:space="preserve">
     <value>正在运行</value>
@@ -40,7 +40,7 @@
     <value>退出</value>
   </data>
   <data name="ShowCsgoDm" xml:space="preserve">
-    <value>显示CSGO-DM</value>
+    <value>显示 CSGO-DM</value>
   </data>
   <data name="Start" xml:space="preserve">
     <value>开始</value>
@@ -49,10 +49,10 @@
     <value>停止</value>
   </data>
   <data name="SuspectsList" xml:space="preserve">
-    <value>嫌疑人目录</value>
+    <value>嫌疑人列表</value>
   </data>
   <data name="UnableToStartBot" xml:space="preserve">
-    <value>无法启动BOT</value>
+    <value>无法启动 BOT</value>
   </data>
   <data name="Xhour" xml:space="preserve">
     <value>{0} 小时</value>
@@ -64,12 +64,12 @@
     <value>{0} 分钟</value>
   </data>
   <data name="XsuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} 嫌疑人已被封禁</value>
+    <value>{0} 位嫌疑玩家已被封禁</value>
   </data>
   <data name="DownloadDemos" xml:space="preserve">
-    <value>点击这里来下载你最近的匹配demo</value>
+    <value>点此下载您近期的游戏录像</value>
   </data>
   <data name="SendDownloadNotification" xml:space="preserve">
-    <value>发送下载demo提醒</value>
+    <value>发送录像下载提醒</value>
   </data>
 </root>

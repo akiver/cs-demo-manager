@@ -19,7 +19,7 @@
     <value>诱饵弹</value>
   </data>
   <data name="DefusedTheBombOnBombSite" xml:space="preserve">
-    <value>{0} 在包点拆除炸弹 {1}</value>
+    <value>{0} 在包点 {1} 拆除炸弹</value>
   </data>
   <data name="Flashbang" xml:space="preserve">
     <value>闪光弹</value>
@@ -31,16 +31,16 @@
     <value>{0} 击杀 {1}</value>
   </data>
   <data name="Molotov" xml:space="preserve">
-    <value>燃烧弹</value>
+    <value>燃烧弹-T</value>
   </data>
   <data name="PlantedTheBombOnBombSite" xml:space="preserve">
-    <value>{0} 在包点安放炸弹 {1}</value>
+    <value>{0} 在包点 {1} 安放炸弹</value>
   </data>
   <data name="Smoke" xml:space="preserve">
     <value>烟雾弹</value>
   </data>
   <data name="TheBombExplodedOnBombSite" xml:space="preserve">
-    <value>炸弹在包点爆炸 {0}</value>
+    <value>炸弹在包点 {0} 爆炸</value>
   </data>
   <data name="ThrownDecoy" xml:space="preserve">
     <value>{0} 投掷了一个诱饵弹</value>
@@ -59,6 +59,18 @@
   </data>
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} 投掷了一个烟雾弹</value>
+  </data>
+  <data name="HlaeNotFoundException" xml:space="preserve">
+    <value>无法找到HLAE引擎,请安装后在设置中启用.</value>
+  </data>
+  <data name="Kill" xml:space="preserve">
+    <value>击杀</value>
+  </data>
+  <data name="Incendiary" xml:space="preserve">
+    <value>燃烧弹-CT</value>
+  </data>
+  <data name="Round" xml:space="preserve">
+    <value>回合</value>
   </data>
   <data name="spec_player_lock" xml:space="preserve" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\vdm\spec_player_lock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
