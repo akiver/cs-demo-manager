@@ -22,6 +22,9 @@
 												 False="{x:Static properties:Resources.No}"/>
 			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible"/>
 			<converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+			<converters:IntToStringConverter x:Key="IntToStringConverter" />
+			<converters:SteamAccountStatusToStringConverter x:Key="SteamAccountStatusToStringConverter" />
+			<converters:SteamAccountVisibilityToStringConverter x:Key="SteamAccountVisibilityToStringConverter" />
 			<converters:SteamEconomyBanStatusToStringConverter x:Key="SteamEconomyBanStatusToStringConverter" />
 		</ResourceDictionary>
 	</UserControl.Resources>
@@ -242,15 +245,15 @@
 									HeaderStyle="{StaticResource ProfileUrlHeader}" />
 				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.Status}"
-									Binding="{Binding CurrentStatusString}"
+									Binding="{Binding CurrentStatus, Converter={StaticResource SteamAccountStatusToStringConverter}}"
 									HeaderStyle="{StaticResource CurrentStatusHeader}" />
 				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.HeaderAccountVisibility}"
-									Binding="{Binding PublicProfile}"
+									Binding="{Binding CommunityVisibilityState, Converter={StaticResource SteamAccountVisibilityToStringConverter}}"
 									HeaderStyle="{StaticResource PublicProfileHeader}" />
 				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.HeaderProfileSetup}"
-									Binding="{Binding ProfileStateString}"
+									Binding="{Binding ProfileState, Converter={StaticResource IntToStringConverter}}"
 									HeaderStyle="{StaticResource ProfileStateHeader}" />
 				<DataGridTextColumn Width="Auto"
 									Header="{x:Static properties:Resources.HeaderToolTipIsVacBanned}"
