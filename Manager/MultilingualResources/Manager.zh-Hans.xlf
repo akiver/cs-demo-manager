@@ -2997,11 +2997,11 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="LostSurrender" translate="yes" xml:space="preserve">
           <source>Lost (S)</source>
-          <target state="final">失败次数</target>
+          <target state="final">失败(投降)</target>
         </trans-unit>
         <trans-unit id="WinSurrender" translate="yes" xml:space="preserve">
           <source>Win (S)</source>
-          <target state="final">胜利次数</target>
+          <target state="final">胜利(投降)</target>
         </trans-unit>
         <trans-unit id="Away" translate="yes" xml:space="preserve">
           <source>Away</source>
@@ -3344,7 +3344,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
-          <target state="final">No {0} 找到为这个选择</target>
+          <target state="final">该分类找不到 {0}</target>
         </trans-unit>
         <trans-unit id="Shots" translate="yes" xml:space="preserve">
           <source>Shots</source>
@@ -3468,19 +3468,19 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
         </trans-unit>
         <trans-unit id="DemosListSize" translate="yes" xml:space="preserve">
           <source>Demos list size</source>
-          <target state="new">Demos list size</target>
+          <target state="final">每页DEMO数量</target>
         </trans-unit>
         <trans-unit id="ShowAllDemos" translate="yes" xml:space="preserve">
           <source>Show all demos</source>
-          <target state="new">Show all demos</target>
+          <target state="final">加载所有DEMO</target>
         </trans-unit>
         <trans-unit id="DialogErrorInvalidShareCode" translate="yes" xml:space="preserve">
           <source>Invalid share code</source>
-          <target state="new">Invalid share code</target>
+          <target state="final">分享码无效</target>
         </trans-unit>
         <trans-unit id="ToolTipDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download a demo from share code</source>
-          <target state="new">Download a demo from share code</target>
+          <target state="final">使用分享码下载demo</target>
         </trans-unit>
         <trans-unit id="ShareCode" translate="yes" xml:space="preserve">
           <source>Share code</source>
@@ -3568,7 +3568,7 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="ToolTipSaveAsPngNoShortcut" translate="yes" xml:space="preserve">
           <source>Save as PNG</source>
-          <target state="new">Save as PNG</target>
+          <target state="final">另存为为PNG</target>
         </trans-unit>
         <trans-unit id="DialogErrorExportingChart" translate="yes" xml:space="preserve">
           <source>An error occured while exporting the chart.</source>
@@ -3576,11 +3576,11 @@ Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</targ
         </trans-unit>
         <trans-unit id="DemoStatusCorrupted" translate="yes" xml:space="preserve">
           <source>Corrupted</source>
-          <target state="new">Corrupted</target>
+          <target state="final">损坏</target>
         </trans-unit>
         <trans-unit id="DemoStatusError" translate="yes" xml:space="preserve">
           <source>Error</source>
-          <target state="new">Error</target>
+          <target state="final">错误</target>
         </trans-unit>
         <trans-unit id="DemoStatusNone" translate="yes" xml:space="preserve">
           <source>None</source>
