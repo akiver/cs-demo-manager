@@ -350,154 +350,154 @@ namespace Services.Concrete
 			return bmp;
 		}
 
-        #endregion
+		#endregion
 
-        #region Getter points
+		#region Getter points
 
-        private List<HeatmapPoint> GetKillsPoints()
-        {
-            return (from e in _configuration.Demo.Kills
-                    where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-                        || !_configuration.SelectedRoundList.Any()
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.FirstOrDefault(p => p.SteamId == e.KillerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.KillerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.KillerX,
-                        Y = e.Point.KillerY,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetKillsPoints()
+		{
+			return (from e in _configuration.Demo.Kills
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+						|| !_configuration.SelectedRoundList.Any()
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.FirstOrDefault(p => p.SteamId == e.KillerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.KillerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.KillerX,
+						Y = e.Point.KillerY,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetDeathsPoints()
-        {
-            return (from e in _configuration.Demo.Kills
-                    where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-                        || !_configuration.SelectedRoundList.Any()
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.FirstOrDefault(p => p.SteamId == e.KilledSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.KilledSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.VictimX,
-                        Y = e.Point.VictimY,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetDeathsPoints()
+		{
+			return (from e in _configuration.Demo.Kills
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+						|| !_configuration.SelectedRoundList.Any()
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.FirstOrDefault(p => p.SteamId == e.KilledSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.KilledSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.VictimX,
+						Y = e.Point.VictimY,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetWeaponFiredPoints()
-        {
-            return (from e in _configuration.Demo.WeaponFired
-                    where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-                        || !_configuration.SelectedRoundList.Any()
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ShooterSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ShooterSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetWeaponFiredPoints()
+		{
+			return (from e in _configuration.Demo.WeaponFired
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+						|| !_configuration.SelectedRoundList.Any()
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ShooterSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ShooterSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetHeGrenadeExplodedPoints()
-        {
-            return (from round in _configuration.Demo.Rounds
-                    where _configuration.SelectedRoundList.Contains(round)
-                    from e in round.ExplosiveGrenadesExploded
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetHeGrenadeExplodedPoints()
+		{
+			return (from round in _configuration.Demo.Rounds
+					where _configuration.SelectedRoundList.Contains(round)
+					from e in round.ExplosiveGrenadesExploded
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetFlashbangExplodedPoints()
-        {
-            return (from round in _configuration.Demo.Rounds
-                    where _configuration.SelectedRoundList.Contains(round)
-                    from e in round.FlashbangsExploded
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetFlashbangExplodedPoints()
+		{
+			return (from round in _configuration.Demo.Rounds
+					where _configuration.SelectedRoundList.Contains(round)
+					from e in round.FlashbangsExploded
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetSmokeStartedPoints()
-        {
-            return (from round in _configuration.Demo.Rounds
-                    where _configuration.SelectedRoundList.Contains(round)
-                    from e in round.SmokeStarted
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetSmokeStartedPoints()
+		{
+			return (from round in _configuration.Demo.Rounds
+					where _configuration.SelectedRoundList.Contains(round)
+					from e in round.SmokeStarted
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetMolotovFireStartedPoints()
-        {
-            return (from e in _configuration.Demo.MolotovsFireStarted
-                    where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-                        || !_configuration.SelectedRoundList.Any()
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetMolotovFireStartedPoints()
+		{
+			return (from e in _configuration.Demo.MolotovsFireStarted
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+						|| !_configuration.SelectedRoundList.Any()
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetIncendiaryFireStartedPoints()
-        {
-            return (from e in _configuration.Demo.IncendiariesFireStarted
-                    where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-                        || !_configuration.SelectedRoundList.Any()
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetIncendiaryFireStartedPoints()
+		{
+			return (from e in _configuration.Demo.IncendiariesFireStarted
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+						|| !_configuration.SelectedRoundList.Any()
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        private List<HeatmapPoint> GetDecoyStartedPoints()
-        {
-            return (from e in _configuration.Demo.DecoyStarted
-                    where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
-                        || !_configuration.SelectedRoundList.Any()
-                    where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
-                        || !_configuration.SelectedPlayerList.Any()
-                    where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
-                        || !_configuration.SelectedSideList.Any()
-                    select new HeatmapPoint
-                    {
-                        X = e.Point.X,
-                        Y = e.Point.Y,
-                    }).ToList();
-        }
+		private List<HeatmapPoint> GetDecoyStartedPoints()
+		{
+			return (from e in _configuration.Demo.DecoyStarted
+					where _configuration.SelectedRoundList.Contains(_configuration.Demo.Rounds.First(r => r.Number == e.RoundNumber))
+						|| !_configuration.SelectedRoundList.Any()
+					where _configuration.SelectedPlayerList.Contains(_configuration.Demo.Players.First(p => p.SteamId == e.ThrowerSteamId))
+						|| !_configuration.SelectedPlayerList.Any()
+					where _configuration.SelectedSideList.FirstOrDefault(s => s == e.ThrowerSide.AsString()) != null
+						|| !_configuration.SelectedSideList.Any()
+					select new HeatmapPoint
+					{
+						X = e.Point.X,
+						Y = e.Point.Y,
+					}).ToList();
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }
