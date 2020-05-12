@@ -525,11 +525,13 @@ namespace Services.Concrete
 		public async Task<ObservableCollection<PlayerBlindedEvent>> GetDemoPlayerBlindedAsync(Demo demo)
 		{
 			string pathFile = GetPlayerBlindedFilePath(demo.Id);
-			string json = File.ReadAllText(pathFile);
 
-			ObservableCollection<PlayerBlindedEvent> playerBlindedList;
+			ObservableCollection<PlayerBlindedEvent> playerBlindedList = new ObservableCollection<PlayerBlindedEvent>();
+			if (!File.Exists(pathFile)) return playerBlindedList;
+
 			try
 			{
+				string json = File.ReadAllText(pathFile);
 				playerBlindedList = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<ObservableCollection<PlayerBlindedEvent>>(json, _settingsJson));
 			}
 			catch (Exception e)
