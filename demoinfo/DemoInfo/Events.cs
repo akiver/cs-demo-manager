@@ -689,6 +689,12 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
+				ItemIndex = 23,
+				OriginalName = "weapon_mp5sd",
+				Element = EquipmentElement.MP5SD,
+			},
+			new EquipmentMapping
+			{
 				ItemIndex = 24,
 				OriginalName = "weapon_ump45",
 				Element = EquipmentElement.UMP,
@@ -785,6 +791,12 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
+				ItemIndex = 41,
+				OriginalName = "weapon_knifegg",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
 				ItemIndex = 42,
 				OriginalName = "weapon_knife",
 				Element = EquipmentElement.Knife,
@@ -833,6 +845,24 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
+				ItemIndex = 50,
+				OriginalName = "item_kevlar",
+				Element = EquipmentElement.Kevlar,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 51,
+				OriginalName = "item_assaultsuit",
+				Element = EquipmentElement.Helmet,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 55,
+				OriginalName = "item_defuser",
+				Element = EquipmentElement.DefuseKit,
+			},
+			new EquipmentMapping
+			{
 				ItemIndex = 59,
 				OriginalName = "weapon_knife_t",
 				Element = EquipmentElement.Knife,
@@ -863,14 +893,26 @@ namespace DemoInfo
 			},
 			new EquipmentMapping
 			{
-				ItemIndex = 23,
-				OriginalName = "weapon_mp5sd",
-				Element = EquipmentElement.MP5SD,
+				ItemIndex = 80,
+				OriginalName = "weapon_knife_ghost",
+				Element = EquipmentElement.Knife,
+			},
+			 new EquipmentMapping
+			{
+				ItemIndex = 83,
+				OriginalName = "weapon_frag_grenade",
+				Element = EquipmentElement.HE, // Not sure
 			},
 			new EquipmentMapping
 			{
 				ItemIndex = 500,
 				OriginalName = "weapon_bayonet",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 503,
+				OriginalName = "weapon_knife_css",
 				Element = EquipmentElement.Knife,
 			},
 			new EquipmentMapping
@@ -925,6 +967,54 @@ namespace DemoInfo
 			{
 				ItemIndex = 516,
 				OriginalName = "weapon_knife_push",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 517,
+				OriginalName = "weapon_knife_cord",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 518,
+				OriginalName = "weapon_knife_canis",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 519,
+				OriginalName = "weapon_knife_ursus",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 520,
+				OriginalName = "weapon_knife_gypsy_jackknife",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 521,
+				OriginalName = "weapon_knife_outdoor",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 522,
+				OriginalName = "weapon_knife_stiletto",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 523,
+				OriginalName = "weapon_knife_widowmaker",
+				Element = EquipmentElement.Knife,
+			},
+			new EquipmentMapping
+			{
+				ItemIndex = 525,
+				OriginalName = "weapon_knife_skeleton",
 				Element = EquipmentElement.Knife,
 			},
 		};
