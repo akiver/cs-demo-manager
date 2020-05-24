@@ -237,7 +237,7 @@
         </trans-unit>
         <trans-unit id="CsgoExePath" translate="yes" xml:space="preserve">
           <source>csgo.exe path</source>
-          <target state="final">”csgo.exe“文件路径</target>
+          <target state="final">"csgo.exe" 文件路径</target>
         </trans-unit>
         <trans-unit id="CurrentAccountWatch" translate="yes" xml:space="preserve">
           <source>Current account used for watch (highlights / lowlights)</source>
@@ -364,7 +364,7 @@
         </trans-unit>
         <trans-unit id="HeaderHeadshots" translate="yes" xml:space="preserve">
           <source>HS</source>
-          <target state="final">HS</target>
+          <target state="final">爆头率</target>
           <note from="MultilingualBuild" annotates="source" priority="2">HeadShot</note>
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
@@ -377,12 +377,12 @@
         </trans-unit>
         <trans-unit id="HeaderJumpKills" translate="yes" xml:space="preserve">
           <source>JK</source>
-          <target state="final">JK</target>
+          <target state="final">空中击杀</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Jump Kill</note>
         </trans-unit>
         <trans-unit id="JumpKills" translate="yes" xml:space="preserve">
           <source>Jump kills</source>
-          <target state="final">跳起杀敌</target>
+          <target state="final">空中击杀</target>
         </trans-unit>
         <trans-unit id="HeaderKillDeathRatio" translate="yes" xml:space="preserve">
           <source>K/D</source>
@@ -395,7 +395,7 @@
         </trans-unit>
         <trans-unit id="HeaderKillsPerRound" translate="yes" xml:space="preserve">
           <source>KPR</source>
-          <target state="final">KPR</target>
+          <target state="final">KPR (每回合杀敌数)</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Kill Per Round</note>
         </trans-unit>
         <trans-unit id="LaunchOptions" translate="yes" xml:space="preserve">
@@ -495,17 +495,17 @@
         </trans-unit>
         <trans-unit id="HeaderScoreTeam1" translate="yes" xml:space="preserve">
           <source>ST1</source>
-          <target state="final">ST1</target>
+          <target state="final">队伍1得分</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Score Team 1</note>
         </trans-unit>
         <trans-unit id="HeaderScoreTeam2" translate="yes" xml:space="preserve">
           <source>ST2</source>
-          <target state="final">ST2</target>
+          <target state="final">队伍2得分</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Score Team 2</note>
         </trans-unit>
         <trans-unit id="StartBotOnLaunch" translate="yes" xml:space="preserve">
           <source>Start BOT on launch</source>
-          <target state="final">启动时开启 BOT</target>
+          <target state="final">启动时开启封禁监控机器人</target>
         </trans-unit>
         <trans-unit id="StartMoneyTeam1" translate="yes" xml:space="preserve">
           <source>Start money CT</source>
@@ -1452,7 +1452,7 @@
         </trans-unit>
         <trans-unit id="CopyPlayDemoCommand" translate="yes" xml:space="preserve">
           <source>Copy playdemo command</source>
-          <target state="final">复制”playdemo“控制台指令</target>
+          <target state="final">复制 "playdemo" 控制台指令</target>
         </trans-unit>
         <trans-unit id="CrouchKillsFull" translate="yes" xml:space="preserve">
           <source>CK (Crouch Kills)</source>
@@ -1664,7 +1664,7 @@
         </trans-unit>
         <trans-unit id="HeaderStartMoneyPlayer" translate="yes" xml:space="preserve">
           <source>SM ($)</source>
-          <target state="final">SM ($)</target>
+          <target state="final">玩家开局经济 ($)</target>
         </trans-unit>
         <trans-unit id="HeaderVictim" translate="yes" xml:space="preserve">
           <source>Victim</source>
@@ -1764,7 +1764,7 @@
         </trans-unit>
         <trans-unit id="EquipmentValuePerRound" translate="yes" xml:space="preserve">
           <source>Equipment value per round ($)</source>
-          <target state="final">每回合装备均值($) </target>
+          <target state="final">每回合装备均值 ($) </target>
         </trans-unit>
         <trans-unit id="HeaderKillerSide" translate="yes" xml:space="preserve">
           <source>KS</source>
@@ -1777,7 +1777,7 @@
         </trans-unit>
         <trans-unit id="HeaderRoundWon" translate="yes" xml:space="preserve">
           <source>RW</source>
-          <target state="final">RW</target>
+          <target state="final">胜利回合</target>
         </trans-unit>
         <trans-unit id="HeaderWon" translate="yes" xml:space="preserve">
           <source>Won</source>
@@ -2399,7 +2399,7 @@ Unable to start the game.</source>
         </trans-unit>
         <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
           <source>Playdemo command copied to clipboard</source>
-          <target state="final">已将”playdemo“命令复制到剪贴板</target>
+          <target state="final">已将 "playdemo" 命令复制到剪贴板</target>
         </trans-unit>
         <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>Retrieving last matches information...</source>
@@ -2503,7 +2503,7 @@ Unable to start the game.</source>
         </trans-unit>
         <trans-unit id="DialogSelectCsgoPath" translate="yes" xml:space="preserve">
           <source>Please select the csgo.exe file location to enable it.</source>
-          <target state="final">请选择”csgo.exe“文件的所在目录以将其启用。</target>
+          <target state="final">请选择 "csgo.exe" 文件的所在目录以将其启用。</target>
         </trans-unit>
         <trans-unit id="DialogVdmFilesDeleted" translate="yes" xml:space="preserve">
           <source>VDM files deleted.</source>
@@ -2539,11 +2539,11 @@ Unable to start the game.</source>
         </trans-unit>
         <trans-unit id="DialogBoilerIncorrect" translate="yes" xml:space="preserve">
           <source>boiler.exe is incorrect.</source>
-          <target state="final">无效的”boiler.exe“文件路径。</target>
+          <target state="final">无效的 "boiler.exe" 文件路径。</target>
         </trans-unit>
         <trans-unit id="DialogBoilerNotFound" translate="yes" xml:space="preserve">
           <source>boiler.exe not found.</source>
-          <target state="final">未找到”boiler.exe“文件。</target>
+          <target state="final">未找到 "boiler.exe" 文件。</target>
         </trans-unit>
         <trans-unit id="DialogDemosMayBeTooOld" translate="yes" xml:space="preserve">
           <source>This demos may be too old, if not please send an email with the attached demos.
@@ -2747,7 +2747,7 @@ You can find more information on {1}.</source>
           <source>It seems that CSGO is not installed on your main hard drive.
 The defaults "csgo" and "replays" can not be found. Please add folders from the settings.</source>
           <target state="final">您的计算机中似乎并未安装 Counter Strike: Global Offensive。
-未找到默认的”csgo“及”replays“文件夹路径。请前往设置页面手动添加。</target>
+未找到默认的 "csgo" 及 "replays" 文件夹路径。请前往设置页面手动添加。</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileDeletingPlayer" translate="yes" xml:space="preserve">
           <source>Error while deleting player.</source>
@@ -2961,7 +2961,7 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="NotificationSetposCommandCopied" translate="yes" xml:space="preserve">
           <source>setpos command copied to clipboard</source>
-          <target state="final">复制”setpos“命令到剪贴板</target>
+          <target state="final">复制 "setpos" 命令到剪贴板</target>
         </trans-unit>
         <trans-unit id="ShotsFired" translate="yes" xml:space="preserve">
           <source>Shots fired</source>
@@ -3038,7 +3038,7 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="ToolTipAddToWhitelist" translate="yes" xml:space="preserve">
           <source>Add an account to whitelist</source>
-          <target state="final">添加一个帐户至白名单</target>
+          <target state="final">将一个帐户添加至白名单</target>
         </trans-unit>
         <trans-unit id="ToolTipBlinded" translate="yes" xml:space="preserve">
           <source>blinded</source>
@@ -3117,7 +3117,7 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="CopySetpos" translate="yes" xml:space="preserve">
           <source>Copy setpos</source>
-          <target state="final">复制”setpos“命令</target>
+          <target state="final">复制 "setpos" 命令</target>
         </trans-unit>
         <trans-unit id="FlashedPlayers" translate="yes" xml:space="preserve">
           <source>Flashed players</source>
@@ -3194,7 +3194,7 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="ToolTipCopySetposCommand" translate="yes" xml:space="preserve">
           <source>Copy setpos command (CTRL+C)</source>
-          <target state="final">复制”setpos“命令 (CTRL+C)</target>
+          <target state="final">复制 "setpos" 命令 (CTRL+C)</target>
         </trans-unit>
         <trans-unit id="ToolTipGenerateHeatmap" translate="yes" xml:space="preserve">
           <source>Generate heatmap (CTRL+G)</source>
@@ -3264,7 +3264,7 @@ You have to remove it from your account list to be able to add him in your white
           <source>An unexpected error occured. Please send the 'errors.log' file accessible from settings.
 Message Error :
 {0}</source>
-          <target state="final">程序发生异常。请在设置中找到并发送”errors.log“文件。
+          <target state="final">程序发生异常。请在设置中找到并发送 "errors.log" 文件。
 错误信息：
 {0}</target>
         </trans-unit>
@@ -3332,7 +3332,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
           <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
-          <target state="final">未找到聊天信息。(此功能仅适用于来自将”tv_relaytextchat“参数设为 0 的服务器的录像文件，Valve 官方竞技匹配服务器并未启用此参数)</target>
+          <target state="final">未找到聊天信息。(此功能仅适用于来自将 "tv_relaytextchat" 参数设为 0 的服务器的录像文件，Valve 官方竞技匹配服务器并未启用此参数)</target>
         </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
@@ -3360,7 +3360,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="DialogShareCodeNotAvailable" translate="yes" xml:space="preserve">
           <source>Share code not available. It works only with demos from Valve matchmaking servers and if the .info file exists.</source>
-          <target state="final">分享代码不可用。此功能仅可用于来自 Valve 官方竞技匹配服务器且拥有”.info“文件的录像。</target>
+          <target state="final">分享代码不可用。此功能仅可用于来自 Valve 官方竞技匹配服务器且拥有 ".info" 文件的录像。</target>
         </trans-unit>
         <trans-unit id="YesDontAsk" translate="yes" xml:space="preserve">
           <source>Yes and don't ask next time</source>
@@ -3404,11 +3404,11 @@ It will use the tool "Half-Life Advanced Effects" (HLAE) which is technically a 
 You should use it ONLY if you know what you are doing AND to make moviemaking related stuff.
 If you don't know what is this or you are not planning to make movies just click on cancel.
 If you enable it, the game is launched with the "-insecure" parameter (everytime), which means that you will not be able to join server protected by VAC and prevent from a VAC ban.</source>
-          <target state="final">启用 HLAE 组件将会改变游戏的启动方式 (当您点击本程序中的任意”观看“按钮后) 。
-”Half-Life Advanced Effects“ (HLAE) 是一种采用了特殊技术的程序。
+          <target state="final">启用 HLAE 组件将会改变游戏的启动方式 (当您点击本程序中的任意 "观看" 按钮后) 。
+" Half-Life Advanced Effects" (HLAE) 是一种采用了特殊技术的程序。
 请您仅在完全了解您的行为，且仅将其用于影片制作的情况下使用该组件。
-倘若您并不了解该组件，或您并非计划制作游戏相关影片，请点击”取消“按钮。
-启用该组件后，游戏将会始终以”-insecure“参数启动，这意味着您将不再被允许进入带有 VAC 保护的服务器 (包括所有的官方服务器和部分社区服务器) ，同时也无法避免遭到 VAC 封禁。</target>
+倘若您并不了解该组件，或您并非计划制作游戏相关影片，请点击 "取消" 按钮。
+启用该组件后，游戏将会始终以 "-insecure" 参数启动，这意味着您将不再被允许进入带有 VAC 保护的服务器 (包括所有的官方服务器和部分社区服务器) ，同时也无法避免遭到 VAC 封禁。</target>
         </trans-unit>
         <trans-unit id="DialogHlaeNotFound" translate="yes" xml:space="preserve">
           <source>It looks like HLAE isn't installed.
@@ -3780,11 +3780,11 @@ Do you want to continue?</source>
           <source>A new HLAE version is available.
 Please update it by clicking on the "Update" button.</source>
           <target state="final">有新版本的 HLAE 组件可用。
-请点击”更新“按钮将其更新至最新版本。</target>
+请点击 "更新" 按钮将其更新至最新版本。</target>
         </trans-unit>
         <trans-unit id="DialogSelectCsgoExeLocation" translate="yes" xml:space="preserve">
           <source>Please select csgo.exe path from HLAE section.</source>
-          <target state="final">请在 HLAE 的选项中添加”csgo.exe“文件的路径</target>
+          <target state="final">请在 HLAE 的选项中添加 "csgo.exe" 文件的路径</target>
         </trans-unit>
         <trans-unit id="DialogSelectRawFilesDestination" translate="yes" xml:space="preserve">
           <source>Please select a raw files folder destination.</source>
@@ -4022,7 +4022,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="ToolTipSelectCsgoExeLocation" translate="yes" xml:space="preserve">
           <source>Change csgo.exe location</source>
-          <target state="final">更改”csgo.exe“文件路径</target>
+          <target state="final">更改 "csgo.exe" 文件路径</target>
         </trans-unit>
         <trans-unit id="ToolTipSwitchBetweenFFmpegVirtualDub" translate="yes" xml:space="preserve">
           <source>Switch between VirtualDub / FFmpeg</source>
