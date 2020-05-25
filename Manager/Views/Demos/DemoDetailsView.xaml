@@ -607,9 +607,9 @@
 									<Run Text=" "/>
 								</TextBlock>
 								<ComboBox x:Name="Statuses"
-								          Grid.Column="1"
+										  Grid.Column="1"
 										  ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.StatusList}"
-										  SelectedItem="{Binding Demo.Status, Converter={StaticResource StringToDemoStatusConverter}, Mode=OneWay}"
+										  SelectedItem="{Binding Demo.Status, Converter={StaticResource StringToDemoStatusConverter}, Mode=OneTime}"
 										  DisplayMemberPath="Label"
 										  SelectedValuePath="Name">
 									<i:Interaction.Triggers>
