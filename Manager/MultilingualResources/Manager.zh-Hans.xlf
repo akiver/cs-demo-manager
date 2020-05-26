@@ -364,7 +364,7 @@
         </trans-unit>
         <trans-unit id="HeaderHeadshots" translate="yes" xml:space="preserve">
           <source>HS</source>
-          <target state="final">爆头率</target>
+          <target state="final">爆头数</target>
           <note from="MultilingualBuild" annotates="source" priority="2">HeadShot</note>
         </trans-unit>
         <trans-unit id="IgnoreBanOccuredAfterDemoDate" translate="yes" xml:space="preserve">
