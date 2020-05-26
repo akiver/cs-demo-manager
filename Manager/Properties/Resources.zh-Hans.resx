@@ -2241,7 +2241,7 @@
     <value>T</value>
   </data>
   <data name="Lost" xml:space="preserve">
-    <value>失败次数</value>
+    <value>失败</value>
   </data>
   <data name="LostSurrender" xml:space="preserve">
     <value>失败(投降)</value>
