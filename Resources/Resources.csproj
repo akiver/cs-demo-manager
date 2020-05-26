@@ -245,6 +245,18 @@
   <ItemGroup>
     <Resource Include="images\maps\overview\de_vertigo.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_anubis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_chlorine.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\anubis.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\chlorine.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug

@@ -74,11 +74,13 @@
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Map.cs" />
     <Compile Include="Models\Maps\Agency.cs" />
+    <Compile Include="Models\Maps\Anubis.cs" />
     <Compile Include="Models\Maps\Austria.cs" />
     <Compile Include="Models\Maps\Biome.cs" />
     <Compile Include="Models\Maps\Cache.cs" />
     <Compile Include="Models\Maps\Canals.cs" />
     <Compile Include="Models\Maps\Cbble.cs" />
+    <Compile Include="Models\Maps\Chlorine.cs" />
     <Compile Include="Models\Maps\Coast.cs" />
     <Compile Include="Models\Maps\Cruise.cs" />
     <Compile Include="Models\Maps\Dust2.cs" />

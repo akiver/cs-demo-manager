@@ -14,18 +14,20 @@ namespace Manager.Converters
 
 			switch (demo.MapName)
 			{
-                case "cs_office":
-                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/office.png", UriKind.RelativeOrAbsolute);
-                case "de_biome":
-                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/biome.png", UriKind.RelativeOrAbsolute);
-                case "de_subzero":
-                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/subzero.png", UriKind.RelativeOrAbsolute);
-                case "de_austria":
-                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/austria.png", UriKind.RelativeOrAbsolute);
-                case "cs_agency":
-                    return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/agency.png", UriKind.RelativeOrAbsolute);
-                case "de_ali":
+				case "cs_office":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/office.png", UriKind.RelativeOrAbsolute);
+				case "de_biome":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/biome.png", UriKind.RelativeOrAbsolute);
+				case "de_subzero":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/subzero.png", UriKind.RelativeOrAbsolute);
+				case "de_austria":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/austria.png", UriKind.RelativeOrAbsolute);
+				case "cs_agency":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/agency.png", UriKind.RelativeOrAbsolute);
+				case "de_ali":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/ali.png", UriKind.RelativeOrAbsolute);
+				case "de_anubis":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/anubis.png", UriKind.RelativeOrAbsolute);
 				case "de_aztec":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/aztec.png", UriKind.RelativeOrAbsolute);
 				case "de_bazaar":
@@ -42,6 +44,8 @@ namespace Manager.Converters
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/cobblestone.png", UriKind.RelativeOrAbsolute);
 				case "de_chinatown":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/chinatown.png", UriKind.RelativeOrAbsolute);
+				case "de_chlorine":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/chlorine.png", UriKind.RelativeOrAbsolute);
 				case "de_coast":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/coast.png", UriKind.RelativeOrAbsolute);
 				case "de_contra":
