@@ -180,7 +180,7 @@
     <value>蹲下杀敌</value>
   </data>
   <data name="CsgoExePath" xml:space="preserve">
-    <value>”csgo.exe“文件路径</value>
+    <value>"csgo.exe" 文件路径</value>
   </data>
   <data name="CurrentAccountWatch" xml:space="preserve">
     <value>当前被选定观看（高潮/低谷）的账户</value>
@@ -276,7 +276,7 @@
     <value>服务器</value>
   </data>
   <data name="HeaderHeadshots" xml:space="preserve">
-    <value>HS</value>
+    <value>爆头率</value>
     <comment>HeadShot</comment>
   </data>
   <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
@@ -286,11 +286,11 @@
     <value>导入自定义数据</value>
   </data>
   <data name="HeaderJumpKills" xml:space="preserve">
-    <value>JK</value>
+    <value>空中击杀</value>
     <comment>Jump Kill</comment>
   </data>
   <data name="JumpKills" xml:space="preserve">
-    <value>跳起杀敌</value>
+    <value>空中击杀</value>
   </data>
   <data name="HeaderKillDeathRatio" xml:space="preserve">
     <value>K/D</value>
@@ -300,7 +300,7 @@
     <value>杀敌统计</value>
   </data>
   <data name="HeaderKillsPerRound" xml:space="preserve">
-    <value>KPR</value>
+    <value>KPR (每回合杀敌数)</value>
     <comment>Kill Per Round</comment>
   </data>
   <data name="LaunchOptions" xml:space="preserve">
@@ -376,15 +376,15 @@
     <value>来源</value>
   </data>
   <data name="HeaderScoreTeam1" xml:space="preserve">
-    <value>ST1</value>
+    <value>队伍1得分</value>
     <comment>Score Team 1</comment>
   </data>
   <data name="HeaderScoreTeam2" xml:space="preserve">
-    <value>ST2</value>
+    <value>队伍2得分</value>
     <comment>Score Team 2</comment>
   </data>
   <data name="StartBotOnLaunch" xml:space="preserve">
-    <value>启动时开启 BOT</value>
+    <value>启动时开启封禁监控机器人</value>
   </data>
   <data name="StartMoneyTeam1" xml:space="preserve">
     <value>开局经济 - CT</value>
@@ -1099,7 +1099,7 @@
     <value>C (残局)</value>
   </data>
   <data name="CopyPlayDemoCommand" xml:space="preserve">
-    <value>复制”playdemo“控制台指令</value>
+    <value>复制 "playdemo" 控制台指令</value>
   </data>
   <data name="CrouchKillsFull" xml:space="preserve">
     <value>CK (下蹲杀敌)</value>
@@ -1258,7 +1258,7 @@
     <value>开火</value>
   </data>
   <data name="HeaderStartMoneyPlayer" xml:space="preserve">
-    <value>SM ($)</value>
+    <value>玩家开局经济 ($)</value>
   </data>
   <data name="HeaderVictim" xml:space="preserve">
     <value>被杀者</value>
@@ -1333,7 +1333,7 @@
     <value>装备价值 ($)</value>
   </data>
   <data name="EquipmentValuePerRound" xml:space="preserve">
-    <value>每回合装备均值($) </value>
+    <value>每回合装备均值 ($) </value>
   </data>
   <data name="HeaderKillerSide" xml:space="preserve">
     <value>KS</value>
@@ -1343,7 +1343,7 @@
     <value>回合</value>
   </data>
   <data name="HeaderRoundWon" xml:space="preserve">
-    <value>RW</value>
+    <value>胜利回合</value>
   </data>
   <data name="HeaderWon" xml:space="preserve">
     <value>胜利</value>
@@ -1808,7 +1808,7 @@
     <value>未找到该账户的录像信息</value>
   </data>
   <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>已将”playdemo“命令复制到剪贴板</value>
+    <value>已将 "playdemo" 命令复制到剪贴板</value>
   </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>正在获取近期的比赛信息……</value>
@@ -1886,7 +1886,7 @@
     <value>尚无错误日志文件</value>
   </data>
   <data name="DialogSelectCsgoPath" xml:space="preserve">
-    <value>请选择”csgo.exe“文件的所在目录以将其启用。</value>
+    <value>请选择 "csgo.exe" 文件的所在目录以将其启用。</value>
   </data>
   <data name="DialogVdmFilesDeleted" xml:space="preserve">
     <value>VDM 文件已删除。</value>
@@ -1913,10 +1913,10 @@
     <value>您必须先对此录像进行分析。</value>
   </data>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
-    <value>无效的”boiler.exe“文件路径。</value>
+    <value>无效的 "boiler.exe" 文件路径。</value>
   </data>
   <data name="DialogBoilerNotFound" xml:space="preserve">
-    <value>未找到”boiler.exe“文件。</value>
+    <value>未找到 "boiler.exe" 文件。</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
     <value>此录像文件可能太过久远。若非如此，请发送邮件并将其随附。
@@ -2067,7 +2067,7 @@
   </data>
   <data name="DialogCsgoNotDetected" xml:space="preserve">
     <value>您的计算机中似乎并未安装 Counter Strike: Global Offensive。
-未找到默认的”csgo“及”replays“文件夹路径。请前往设置页面手动添加。</value>
+未找到默认的 "csgo" 及 "replays" 文件夹路径。请前往设置页面手动添加。</value>
   </data>
   <data name="DialogErrorWhileDeletingPlayer" xml:space="preserve">
     <value>在删除玩家时发生错误。</value>
@@ -2223,7 +2223,7 @@
     <value>正在搜索该玩家的录像……</value>
   </data>
   <data name="NotificationSetposCommandCopied" xml:space="preserve">
-    <value>复制”setpos“命令到剪贴板</value>
+    <value>复制 "setpos" 命令到剪贴板</value>
   </data>
   <data name="ShotsFired" xml:space="preserve">
     <value>开火</value>
@@ -2281,7 +2281,7 @@
     <comment>used for heatmap flashbang tooltip (about x seconds)</comment>
   </data>
   <data name="ToolTipAddToWhitelist" xml:space="preserve">
-    <value>添加一个帐户至白名单</value>
+    <value>将一个帐户添加至白名单</value>
   </data>
   <data name="ToolTipBlinded" xml:space="preserve">
     <value>致盲</value>
@@ -2342,7 +2342,7 @@
     <value>清除</value>
   </data>
   <data name="CopySetpos" xml:space="preserve">
-    <value>复制”setpos“命令</value>
+    <value>复制 "setpos" 命令</value>
   </data>
   <data name="FlashedPlayers" xml:space="preserve">
     <value>致盲者</value>
@@ -2400,7 +2400,7 @@
     <value>团队</value>
   </data>
   <data name="ToolTipCopySetposCommand" xml:space="preserve">
-    <value>复制”setpos“命令 (CTRL+C)</value>
+    <value>复制 "setpos" 命令 (CTRL+C)</value>
   </data>
   <data name="ToolTipGenerateHeatmap" xml:space="preserve">
     <value>生成热点地图 (CTRL+G)</value>
@@ -2451,7 +2451,7 @@
     <value>语言</value>
   </data>
   <data name="UnexpectedErrorOccured" xml:space="preserve">
-    <value>程序发生异常。请在设置中找到并发送”errors.log“文件。
+    <value>程序发生异常。请在设置中找到并发送 "errors.log" 文件。
 错误信息：
 {0}</value>
   </data>
@@ -2503,7 +2503,7 @@
     <value>聊天记录文件已创建</value>
   </data>
   <data name="DialogNoChatFound" xml:space="preserve">
-    <value>未找到聊天信息。(此功能仅适用于来自将”tv_relaytextchat“参数设为 0 的服务器的录像文件，Valve 官方竞技匹配服务器并未启用此参数)</value>
+    <value>未找到聊天信息。(此功能仅适用于来自将 "tv_relaytextchat" 参数设为 0 的服务器的录像文件，Valve 官方竞技匹配服务器并未启用此参数)</value>
   </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>该分类找不到 {0}</value>
@@ -2524,7 +2524,7 @@
     <value>在第三方应用中显示</value>
   </data>
   <data name="DialogShareCodeNotAvailable" xml:space="preserve">
-    <value>分享代码不可用。此功能仅可用于来自 Valve 官方竞技匹配服务器且拥有”.info“文件的录像。</value>
+    <value>分享代码不可用。此功能仅可用于来自 Valve 官方竞技匹配服务器且拥有 ".info" 文件的录像。</value>
   </data>
   <data name="YesDontAsk" xml:space="preserve">
     <value>是的，以后不再询问</value>
@@ -2554,11 +2554,11 @@
     <value>启用 HLAE</value>
   </data>
   <data name="DialogEnableHlaeWarning" xml:space="preserve">
-    <value>启用 HLAE 组件将会改变游戏的启动方式 (当您点击本程序中的任意”观看“按钮后) 。
-”Half-Life Advanced Effects“ (HLAE) 是一种采用了特殊技术的程序。
+    <value>启用 HLAE 组件将会改变游戏的启动方式 (当您点击本程序中的任意 "观看" 按钮后) 。
+" Half-Life Advanced Effects" (HLAE) 是一种采用了特殊技术的程序。
 请您仅在完全了解您的行为，且仅将其用于影片制作的情况下使用该组件。
-倘若您并不了解该组件，或您并非计划制作游戏相关影片，请点击”取消“按钮。
-启用该组件后，游戏将会始终以”-insecure“参数启动，这意味着您将不再被允许进入带有 VAC 保护的服务器 (包括所有的官方服务器和部分社区服务器) ，同时也无法避免遭到 VAC 封禁。</value>
+倘若您并不了解该组件，或您并非计划制作游戏相关影片，请点击 "取消" 按钮。
+启用该组件后，游戏将会始终以 "-insecure" 参数启动，这意味着您将不再被允许进入带有 VAC 保护的服务器 (包括所有的官方服务器和部分社区服务器) ，同时也无法避免遭到 VAC 封禁。</value>
   </data>
   <data name="DialogHlaeNotFound" xml:space="preserve">
     <value>您似乎尚未安装 HLAE 组件。
@@ -2830,10 +2830,10 @@
   </data>
   <data name="DialogPleaseUpdateHLAE" xml:space="preserve">
     <value>有新版本的 HLAE 组件可用。
-请点击”更新“按钮将其更新至最新版本。</value>
+请点击 "更新" 按钮将其更新至最新版本。</value>
   </data>
   <data name="DialogSelectCsgoExeLocation" xml:space="preserve">
-    <value>请在 HLAE 的选项中添加”csgo.exe“文件的路径</value>
+    <value>请在 HLAE 的选项中添加 "csgo.exe" 文件的路径</value>
   </data>
   <data name="DialogSelectRawFilesDestination" xml:space="preserve">
     <value>请选择源文件的路径</value>
@@ -3011,7 +3011,7 @@
     <value>将 CFG 配置文件重置为默认状态</value>
   </data>
   <data name="ToolTipSelectCsgoExeLocation" xml:space="preserve">
-    <value>更改”csgo.exe“文件路径</value>
+    <value>更改 "csgo.exe" 文件路径</value>
   </data>
   <data name="ToolTipSwitchBetweenFFmpegVirtualDub" xml:space="preserve">
     <value>切换编码工具 VirtualDub / FFmpeg</value>
