@@ -1431,8 +1431,8 @@
           <target state="new">Add to whitelist</target>
         </trans-unit>
         <trans-unit id="AssistsFull" translate="yes" xml:space="preserve">
-          <source>A (Assits)</source>
-          <target state="new">A (Assits)</target>
+          <source>A (Assists)</source>
+          <target state="new">A (Assists)</target>
         </trans-unit>
         <trans-unit id="BombDefusedFull" translate="yes" xml:space="preserve">
           <source>BD (Bomb Defused)</source>
