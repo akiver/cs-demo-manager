@@ -64,11 +64,11 @@
         </trans-unit>
         <trans-unit id="ShowAll" translate="yes" xml:space="preserve">
           <source>Show All</source>
-          <target state="final">Zeige alle</target>
+          <target state="final">Alle anzeigen</target>
         </trans-unit>
         <trans-unit id="ShowOnlyAccountDemos" translate="yes" xml:space="preserve">
           <source>Show Only Account Demos</source>
-          <target state="final">Zeige nur Demos zum Account</target>
+          <target state="final">Zeige nur Demos des Accountes</target>
         </trans-unit>
         <trans-unit id="Stats" translate="yes" xml:space="preserve">
           <source>Stats</source>
@@ -104,15 +104,15 @@
         </trans-unit>
         <trans-unit id="EncounteredBug" translate="yes" xml:space="preserve">
           <source>If you encountered a bug or have any suggestions, feel free to open an issue on</source>
-          <target state="final">Falls Sie einen Fehler finden oder Vorschläge haben, melden Sie sich bitte unter</target>
+          <target state="final">Falls Sie einen Fehler finden oder Vorschläge finden, melden Sie sich bitte unter</target>
         </trans-unit>
         <trans-unit id="OrSendAn" translate="yes" xml:space="preserve">
           <source>or send an</source>
-          <target state="final">oder senden Sie eine</target>
+          <target state="final">oder senden Sie an</target>
         </trans-unit>
         <trans-unit id="WantSayThank" translate="yes" xml:space="preserve">
           <source>If you want to say thank you, please feel free to make a</source>
-          <target state="final">Wenn Sie danken sagen möchten, können Sie gerne </target>
+          <target state="final">Wenn Sie Danke sagen möchten, können Sie gerne </target>
         </trans-unit>
         <trans-unit id="AlwaysDownload" translate="yes" xml:space="preserve">
           <source>Always download the application installer from the official website</source>
@@ -141,7 +141,7 @@
         </trans-unit>
         <trans-unit id="AdrFull" translate="yes" xml:space="preserve">
           <source>ADR (Average Damage Per Round)</source>
-          <target state="final">ADR (Durchschnittlicher Schaden pro Runde)</target>
+          <target state="final">ADR (Durchschnittlicher Rundenschaden)</target>
         </trans-unit>
         <trans-unit id="AprFull" translate="yes" xml:space="preserve">
           <source>APR (Assist Per Round)</source>
@@ -209,7 +209,7 @@
         </trans-unit>
         <trans-unit id="CloseBotOnExit" translate="yes" xml:space="preserve">
           <source>Close BOT on exit</source>
-          <target state="final">BOT beim Schließen schließen</target>
+          <target state="final">BOT beim Schließen stoppen</target>
         </trans-unit>
         <trans-unit id="Clutch" translate="yes" xml:space="preserve">
           <source>Clutch</source>
@@ -249,7 +249,7 @@
         </trans-unit>
         <trans-unit id="DataCache" translate="yes" xml:space="preserve">
           <source>Cache</source>
-          <target state="final">Cache</target>
+          <target state="final">Zwischenspeicher</target>
         </trans-unit>
         <trans-unit id="Date" translate="yes" xml:space="preserve">
           <source>Date</source>
@@ -294,7 +294,7 @@
         </trans-unit>
         <trans-unit id="DprFull" translate="yes" xml:space="preserve">
           <source>DPR (Death Per Round)</source>
-          <target state="final">DPR (Tode pro Runde)</target>
+          <target state="final">DPR (Durchschnittliche Tode pro Runde)</target>
         </trans-unit>
         <trans-unit id="Duration" translate="yes" xml:space="preserve">
           <source>Duration</source>
@@ -306,7 +306,7 @@
         </trans-unit>
         <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
           <source>Entry kills</source>
-          <target state="final">Entry kills</target>
+          <target state="final">Offensive Kills</target>
         </trans-unit>
         <trans-unit id="EquipmentValueTeam1" translate="yes" xml:space="preserve">
           <source>Equipment value CT</source>
@@ -1748,7 +1748,7 @@
         </trans-unit>
         <trans-unit id="EntryHoldKills" translate="yes" xml:space="preserve">
           <source>Entry hold kills</source>
-          <target state="needs-review-translation">Entry hold kills</target>
+          <target state="final">Verteidigungskills</target>
         </trans-unit>
         <trans-unit id="EntryHoldKillsDescription" translate="yes" xml:space="preserve">
           <source>(First kill as CT)</source>
