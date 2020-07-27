@@ -90,6 +90,12 @@ namespace Core
 			},
 			new Language
 			{
+				Key = "nl-BE",
+				Name = "Dutch",
+				IsEnabled = false
+			},
+			new Language
+			{
 				Key = "en-US",
 				Name = "English",
 				IsEnabled = true

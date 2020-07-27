@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="nl" original="SERVICES/PROPERTIES/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6916.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="SERVICES/PROPERTIES/RESOURCES.RESX" datatype="resx">
+        <trans-unit id="Bomb" translate="yes" xml:space="preserve">
+          <source>Bomb</source>
+          <target state="new">Bomb</target>
+        </trans-unit>
+        <trans-unit id="colors" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</source>
+          <target state="needs-review-translation">..\resources\images\colors.jpg;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</target>
+        </trans-unit>
+        <trans-unit id="Decoy" translate="yes" xml:space="preserve">
+          <source>Decoy</source>
+          <target state="new">Decoy</target>
+        </trans-unit>
+        <trans-unit id="DefusedTheBombOnBombSite" translate="yes" xml:space="preserve">
+          <source>{0} defused the bomb on bomb site {1}</source>
+          <target state="new">{0} defused the bomb on bomb site {1}</target>
+        </trans-unit>
+        <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
+          <source>Flashbang</source>
+          <target state="new">Flashbang</target>
+        </trans-unit>
+        <trans-unit id="HE" translate="yes" xml:space="preserve">
+          <source>HE</source>
+          <target state="new">HE</target>
+        </trans-unit>
+        <trans-unit id="Killed" translate="yes" xml:space="preserve">
+          <source>{0} killed {1}</source>
+          <target state="new">{0} killed {1}</target>
+        </trans-unit>
+        <trans-unit id="Kill" translate="yes" xml:space="preserve">
+          <source>Kill</source>
+          <target state="new">Kill</target>
+        </trans-unit>
+        <trans-unit id="Molotov" translate="yes" xml:space="preserve">
+          <source>Molotov</source>
+          <target state="new">Molotov</target>
+        </trans-unit>
+        <trans-unit id="PlantedTheBombOnBombSite" translate="yes" xml:space="preserve">
+          <source>{0} planted the bomb on bomb site {1}</source>
+          <target state="new">{0} planted the bomb on bomb site {1}</target>
+        </trans-unit>
+        <trans-unit id="Smoke" translate="yes" xml:space="preserve">
+          <source>Smoke</source>
+          <target state="new">Smoke</target>
+        </trans-unit>
+        <trans-unit id="steam_api_key" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\steam_api_key.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="TheBombExplodedOnBombSite" translate="yes" xml:space="preserve">
+          <source>The bomb exploded on bomb site {0}</source>
+          <target state="new">The bomb exploded on bomb site {0}</target>
+        </trans-unit>
+        <trans-unit id="ThrownDecoy" translate="yes" xml:space="preserve">
+          <source>{0} thrown a decoy</source>
+          <target state="new">{0} thrown a decoy</target>
+        </trans-unit>
+        <trans-unit id="ThrownFlashbang" translate="yes" xml:space="preserve">
+          <source>{0} thrown a flashbang</source>
+          <target state="new">{0} thrown a flashbang</target>
+        </trans-unit>
+        <trans-unit id="ThrownHeGrenade" translate="yes" xml:space="preserve">
+          <source>{0} thrown a HE grenade</source>
+          <target state="new">{0} thrown a HE grenade</target>
+        </trans-unit>
+        <trans-unit id="ThrownIncendiary" translate="yes" xml:space="preserve">
+          <source>{0} thrown an incendiary</source>
+          <target state="new">{0} thrown an incendiary</target>
+        </trans-unit>
+        <trans-unit id="ThrownMolotov" translate="yes" xml:space="preserve">
+          <source>{0} thrown a molotov</source>
+          <target state="new">{0} thrown a molotov</target>
+        </trans-unit>
+        <trans-unit id="ThrownSmoke" translate="yes" xml:space="preserve">
+          <source>{0} thrown a smoke</source>
+          <target state="new">{0} thrown a smoke</target>
+        </trans-unit>
+        <trans-unit id="execute_command" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
+          <source>HLAE not found. Please install it by enabling it from settings.</source>
+          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
+        </trans-unit>
+        <trans-unit id="main" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="screen_fade_start" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\screen_fade_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="skip_ahead" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\skip_ahead.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="spec_player" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\spec_player.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="stop_playback" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\stop_playback.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="text_message_start" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\text_message_start.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="vd" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\scripts\vd.job;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+        <trans-unit id="BombDefusedEventName" translate="yes" xml:space="preserve">
+          <source>of the bomb defused</source>
+          <target state="new">of the bomb defused</target>
+        </trans-unit>
+        <trans-unit id="BombExplodedEventName" translate="yes" xml:space="preserve">
+          <source>of the bomb exploded</source>
+          <target state="new">of the bomb exploded</target>
+        </trans-unit>
+        <trans-unit id="BombPlantedEventName" translate="yes" xml:space="preserve">
+          <source>of the bomb planted</source>
+          <target state="new">of the bomb planted</target>
+          <note from="MultilingualBuild" annotates="source" priority="2">example: Set the tick of "the bomb planted"</note>
+        </trans-unit>
+        <trans-unit id="DecoyEventName" translate="yes" xml:space="preserve">
+          <source>of the decoy</source>
+          <target state="new">of the decoy</target>
+        </trans-unit>
+        <trans-unit id="FlashbangEventName" translate="yes" xml:space="preserve">
+          <source>of the flashbang</source>
+          <target state="new">of the flashbang</target>
+        </trans-unit>
+        <trans-unit id="HEEventName" translate="yes" xml:space="preserve">
+          <source>of the HE</source>
+          <target state="new">of the HE</target>
+        </trans-unit>
+        <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
+          <source>Incendiary</source>
+          <target state="new">Incendiary</target>
+        </trans-unit>
+        <trans-unit id="IncendiaryEventName" translate="yes" xml:space="preserve">
+          <source>of the incendiary</source>
+          <target state="new">of the incendiary</target>
+        </trans-unit>
+        <trans-unit id="KillEventName" translate="yes" xml:space="preserve">
+          <source>of the kill</source>
+          <target state="new">of the kill</target>
+        </trans-unit>
+        <trans-unit id="MolotovEventName" translate="yes" xml:space="preserve">
+          <source>of the molotov</source>
+          <target state="new">of the molotov</target>
+        </trans-unit>
+        <trans-unit id="Round" translate="yes" xml:space="preserve">
+          <source>Round</source>
+          <target state="new">Round</target>
+        </trans-unit>
+        <trans-unit id="RoundEndEventName" translate="yes" xml:space="preserve">
+          <source>of the round end</source>
+          <target state="new">of the round end</target>
+        </trans-unit>
+        <trans-unit id="RoundStartEventName" translate="yes" xml:space="preserve">
+          <source>of the round start</source>
+          <target state="new">of the round start</target>
+        </trans-unit>
+        <trans-unit id="SmokeEventName" translate="yes" xml:space="preserve">
+          <source>of the smoke</source>
+          <target state="new">of the smoke</target>
+        </trans-unit>
+        <trans-unit id="spec_player_lock" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
+          <source>..\resources\vdm\spec_player_lock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
+          <target state="needs-review-translation">..\resources\vdm\spec_player_lock.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

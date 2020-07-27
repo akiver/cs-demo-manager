@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:oasis:names:tc:xliff:document:1.2 xliff-core-1.2-transitional.xsd">
+  <file datatype="xml" source-language="en-US" target-language="tr-TR" original="BOT/PROPERTIES/RESOURCES.RESX" tool-id="MultilingualAppToolkit" product-name="n/a" product-version="n/a" build-num="n/a">
+    <header>
+      <tool tool-id="MultilingualAppToolkit" tool-name="Multilingual App Toolkit" tool-version="4.0.6916.0" tool-company="Microsoft" />
+    </header>
+    <body>
+      <group id="BOT/PROPERTIES/RESOURCES.RESX" datatype="resx">
+        <trans-unit id="BalloonNoNewSuspectsFound" translate="yes" xml:space="preserve">
+          <source>No new suspects banned found.</source>
+          <target state="new">No new suspects banned found.</target>
+        </trans-unit>
+        <trans-unit id="CheckEvery" translate="yes" xml:space="preserve">
+          <source>Check every</source>
+          <target state="new">Check every</target>
+        </trans-unit>
+        <trans-unit id="CheckNow" translate="yes" xml:space="preserve">
+          <source>Check now</source>
+          <target state="new">Check now</target>
+        </trans-unit>
+        <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
+          <source>Click here to download your last matchmaking demos.</source>
+          <target state="new">Click here to download your last matchmaking demos.</target>
+        </trans-unit>
+        <trans-unit id="Error" translate="yes" xml:space="preserve">
+          <source>Error</source>
+          <target state="new">Error</target>
+        </trans-unit>
+        <trans-unit id="IsNotRunning" translate="yes" xml:space="preserve">
+          <source>is not running</source>
+          <target state="new">is not running</target>
+        </trans-unit>
+        <trans-unit id="IsRunning" translate="yes" xml:space="preserve">
+          <source>is running</source>
+          <target state="new">is running</target>
+        </trans-unit>
+        <trans-unit id="Language" translate="yes" xml:space="preserve">
+          <source>Language</source>
+          <target state="new">Language</target>
+        </trans-unit>
+        <trans-unit id="LaunchAtStartup" translate="yes" xml:space="preserve">
+          <source>Launch at startup</source>
+          <target state="new">Launch at startup</target>
+        </trans-unit>
+        <trans-unit id="Quit" translate="yes" xml:space="preserve">
+          <source>Quit</source>
+          <target state="new">Quit</target>
+        </trans-unit>
+        <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
+          <source>Send download demos notifications</source>
+          <target state="new">Send download demos notifications</target>
+        </trans-unit>
+        <trans-unit id="ShowCsgoDm" translate="yes" xml:space="preserve">
+          <source>Show CSGO-DM</source>
+          <target state="new">Show CSGO-DM</target>
+        </trans-unit>
+        <trans-unit id="Start" translate="yes" xml:space="preserve">
+          <source>Start</source>
+          <target state="new">Start</target>
+        </trans-unit>
+        <trans-unit id="Stop" translate="yes" xml:space="preserve">
+          <source>Stop</source>
+          <target state="new">Stop</target>
+        </trans-unit>
+        <trans-unit id="SuspectsList" translate="yes" xml:space="preserve">
+          <source>Suspects list</source>
+          <target state="new">Suspects list</target>
+        </trans-unit>
+        <trans-unit id="UnableToStartBot" translate="yes" xml:space="preserve">
+          <source>Unable to start the BOT.</source>
+          <target state="new">Unable to start the BOT.</target>
+        </trans-unit>
+        <trans-unit id="Xhour" translate="yes" xml:space="preserve">
+          <source>{0} hour</source>
+          <target state="new">{0} hour</target>
+        </trans-unit>
+        <trans-unit id="Xhours" translate="yes" xml:space="preserve">
+          <source>{0} hours</source>
+          <target state="new">{0} hours</target>
+        </trans-unit>
+        <trans-unit id="Xminutes" translate="yes" xml:space="preserve">
+          <source>{0} minutes</source>
+          <target state="new">{0} minutes</target>
+        </trans-unit>
+        <trans-unit id="XsuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
+          <source>{0} suspect(s) has been banned.</source>
+          <target state="new">{0} suspect(s) has been banned.</target>
+        </trans-unit>
+      </group>
+    </body>
+  </file>
+</xliff>

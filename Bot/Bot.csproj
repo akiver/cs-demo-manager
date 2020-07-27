@@ -117,6 +117,7 @@
     <EmbeddedResource Include="Properties\Resources.hu.resx" />
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.nl.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.pt.resx" />
@@ -126,6 +127,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
+    <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
@@ -195,11 +197,13 @@
     <XliffResource Include="MultilingualResources\Bot.hu.xlf" />
     <XliffResource Include="MultilingualResources\Bot.it.xlf" />
     <XliffResource Include="MultilingualResources\Bot.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Bot.nl.xlf" />
     <XliffResource Include="MultilingualResources\Bot.pl.xlf" />
     <XliffResource Include="MultilingualResources\Bot.pt-BR.xlf" />
     <XliffResource Include="MultilingualResources\Bot.pt.xlf" />
     <XliffResource Include="MultilingualResources\Bot.ru.xlf" />
     <XliffResource Include="MultilingualResources\Bot.sr-Cyrl.xlf" />
+    <XliffResource Include="MultilingualResources\Bot.tr-TR.xlf" />
     <XliffResource Include="MultilingualResources\Bot.tr.xlf" />
     <XliffResource Include="MultilingualResources\Bot.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Bot.zh-Hant.xlf" />

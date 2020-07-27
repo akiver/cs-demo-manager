@@ -180,6 +180,7 @@
     <EmbeddedResource Include="Properties\Resources.hu.resx" />
     <EmbeddedResource Include="Properties\Resources.it.resx" />
     <EmbeddedResource Include="Properties\Resources.ja.resx" />
+    <EmbeddedResource Include="Properties\Resources.nl.resx" />
     <EmbeddedResource Include="Properties\Resources.pl.resx" />
     <EmbeddedResource Include="Properties\Resources.pt-BR.resx" />
     <EmbeddedResource Include="Properties\Resources.pt.resx" />
@@ -190,6 +191,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
+    <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
     <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
@@ -300,11 +302,13 @@
     <XliffResource Include="MultilingualResources\Core.hu.xlf" />
     <XliffResource Include="MultilingualResources\Core.it.xlf" />
     <XliffResource Include="MultilingualResources\Core.ja.xlf" />
+    <XliffResource Include="MultilingualResources\Core.nl.xlf" />
     <XliffResource Include="MultilingualResources\Core.pl.xlf" />
     <XliffResource Include="MultilingualResources\Core.pt-BR.xlf" />
     <XliffResource Include="MultilingualResources\Core.pt.xlf" />
     <XliffResource Include="MultilingualResources\Core.ru.xlf" />
     <XliffResource Include="MultilingualResources\Core.sr-Cyrl.xlf" />
+    <XliffResource Include="MultilingualResources\Core.tr-TR.xlf" />
     <XliffResource Include="MultilingualResources\Core.tr.xlf" />
     <XliffResource Include="MultilingualResources\Core.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Core.zh-Hant.xlf" />
