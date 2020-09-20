@@ -9,9 +9,9 @@ namespace Services.Concrete.Movie
 {
 	public static class FFmpegService
 	{
-		public const string FFMPEG_VERSION = "3.4.1";
-		public const string ARCHIVE_NAME = "ffmpeg-{0}-{1}-static";
-		public const string DOWNLOAD_ENDPOINT = "https://ffmpeg.zeranoe.com/builds/{0}/static/{1}.zip";
+		private const string FFMPEG_VERSION = "4.3.1-2021-01-26";
+		private static string ARCHIVE_NAME = $"ffmpeg-{FFMPEG_VERSION}-essentials_build";
+		private static string DOWNLOAD_ENDPOINT = $"https://www.gyan.dev/ffmpeg/builds/packages/{ARCHIVE_NAME}.zip";
 
 		/// <summary>
 		/// Return the path where FFmpeg is installed.
@@ -41,18 +41,14 @@ namespace Services.Concrete.Movie
 			return AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "ffmpeg_version";
 		}
 
-		private static string GetArchiveName()
-		{
-			return string.Format(ARCHIVE_NAME, FFMPEG_VERSION, Environment.Is64BitOperatingSystem ? "win64" : "win32");
-		}
-
 		public static bool IsUpdateAvailable()
 		{
 			string version = GetInstalledVersion();
 			if (!string.IsNullOrEmpty(version))
 			{
 				Version installedVersion = new Version(version);
-				Version supportedVersion = new Version(FFMPEG_VERSION);
+				string versionWithoutDate = GetVersionWithoutDate();
+				Version supportedVersion = new Version(versionWithoutDate);
 				return supportedVersion > installedVersion;
 			}
 			return true;
@@ -107,7 +103,7 @@ namespace Services.Concrete.Movie
 			{
 				try
 				{
-					Uri uri = new Uri(string.Format(DOWNLOAD_ENDPOINT, Environment.Is64BitOperatingSystem ? "win64" : "win32", GetArchiveName()));
+					Uri uri = new Uri(DOWNLOAD_ENDPOINT);
 					await Task.Factory.StartNew(() => webClient.DownloadFile(uri, archivePath));
 					return true;
 				}
@@ -130,7 +126,7 @@ namespace Services.Concrete.Movie
 					await Task.Factory.StartNew(() => fast.ExtractZip(archivePath, destination, null));
 					string ffmpegPath = GetFFmpegPath();
 					if (Directory.Exists(ffmpegPath)) Directory.Delete(ffmpegPath, true);
-					Directory.Move(destination + Path.DirectorySeparatorChar + GetArchiveName(), ffmpegPath);
+					Directory.Move(destination + Path.DirectorySeparatorChar + ARCHIVE_NAME, ffmpegPath);
 					File.Delete(archivePath);
 				}
 				return true;
@@ -146,7 +142,12 @@ namespace Services.Concrete.Movie
 		private static void WriteVersion()
 		{
 			string versionFilePath = GetFFmpegVersionFilePath();
-			File.WriteAllText(versionFilePath, FFMPEG_VERSION);
+			File.WriteAllText(versionFilePath, GetVersionWithoutDate());
+		}
+
+		private static string GetVersionWithoutDate()
+		{
+			return FFMPEG_VERSION.Split('-')[0];
 		}
 	}
 }
