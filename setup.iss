@@ -180,3 +180,6 @@ Name: "{commondesktop}\{#AppName}"; Filename: "{app}\{#ExeName}"; Tasks: desktop
 
 [Run]
 Filename: "{app}\{#ExeName}"; Description: "{cm:LaunchProgram,CSGO Demos Manager}"; Flags: nowait postinstall skipifsilent
+
+[UninstallRun]
+Filename: "{cmd}"; Parameters: "/C ""taskkill /im CSGOSuspectsBot.exe /f /t"
