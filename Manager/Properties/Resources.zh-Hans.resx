@@ -276,7 +276,7 @@
     <value>服务器</value>
   </data>
   <data name="HeaderHeadshots" xml:space="preserve">
-    <value>爆头率</value>
+    <value>爆头数</value>
     <comment>HeadShot</comment>
   </data>
   <data name="IgnoreBanOccuredAfterDemoDate" xml:space="preserve">
@@ -2241,7 +2241,7 @@
     <value>T</value>
   </data>
   <data name="Lost" xml:space="preserve">
-    <value>失败</value>
+    <value>失败次数</value>
   </data>
   <data name="LostSurrender" xml:space="preserve">
     <value>失败(投降)</value>

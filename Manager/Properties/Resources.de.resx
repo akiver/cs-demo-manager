@@ -49,10 +49,10 @@
     <value>Aktualisieren</value>
   </data>
   <data name="ShowAll" xml:space="preserve">
-    <value>Zeige alle</value>
+    <value>Alle anzeigen</value>
   </data>
   <data name="ShowOnlyAccountDemos" xml:space="preserve">
-    <value>Zeige nur Demos zum Account</value>
+    <value>Zeige nur Demos des Accountes</value>
   </data>
   <data name="Stats" xml:space="preserve">
     <value>Statistiken</value>
@@ -79,13 +79,13 @@
     <value>Der Quellcode ist erhältlich unter</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
-    <value>Falls Sie einen Fehler finden oder Vorschläge haben, melden Sie sich bitte unter</value>
+    <value>Falls Sie einen Fehler finden oder Vorschläge finden, melden Sie sich bitte unter</value>
   </data>
   <data name="OrSendAn" xml:space="preserve">
-    <value>oder senden Sie eine</value>
+    <value>oder senden Sie an</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
-    <value>Wenn Sie danken sagen möchten, können Sie gerne </value>
+    <value>Wenn Sie Danke sagen möchten, können Sie gerne </value>
   </data>
   <data name="AlwaysDownload" xml:space="preserve">
     <value>Bitte laden Sie den Installer immer nur von der offiziellen Website herunter!</value>
@@ -107,7 +107,7 @@
     <comment>Average Damage Per Round</comment>
   </data>
   <data name="AdrFull" xml:space="preserve">
-    <value>ADR (Durchschnittlicher Schaden pro Runde)</value>
+    <value>ADR (Durchschnittlicher Rundenschaden)</value>
   </data>
   <data name="AprFull" xml:space="preserve">
     <value>APR (Durchschnittliche Assists pro Runde)</value>
@@ -159,7 +159,7 @@
     <value>Client</value>
   </data>
   <data name="CloseBotOnExit" xml:space="preserve">
-    <value>BOT beim Schließen schließen</value>
+    <value>BOT beim Schließen stoppen</value>
   </data>
   <data name="Clutch" xml:space="preserve">
     <value>Clutch</value>
@@ -189,7 +189,7 @@
     <value>Aktueller Ordner</value>
   </data>
   <data name="DataCache" xml:space="preserve">
-    <value>Cache</value>
+    <value>Zwischenspeicher</value>
   </data>
   <data name="Date" xml:space="preserve">
     <value>Datum</value>
@@ -223,7 +223,7 @@
     <comment>Death Per Round</comment>
   </data>
   <data name="DprFull" xml:space="preserve">
-    <value>DPR (Tode pro Runde)</value>
+    <value>DPR (Durchschnittliche Tode pro Runde)</value>
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Dauer</value>
@@ -232,7 +232,7 @@
     <value>E-Mail</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
-    <value>Entry kills</value>
+    <value>Offensive Kills</value>
   </data>
   <data name="EquipmentValueTeam1" xml:space="preserve">
     <value>Equipment Wert CT</value>
@@ -1318,7 +1318,7 @@
     <value>Schaden pro Runde</value>
   </data>
   <data name="EntryHoldKills" xml:space="preserve">
-    <value>Entry hold kills</value>
+    <value>Verteidigungskills</value>
   </data>
   <data name="EntryHoldKillsDescription" xml:space="preserve">
     <value>(Erster Kill als CT)</value>
