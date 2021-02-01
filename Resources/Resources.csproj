@@ -257,6 +257,12 @@
   <ItemGroup>
     <Resource Include="images\maps\preview\chlorine.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_ancient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\ancient.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>cd $(SolutionDir)Manager\bin\x86\Debug

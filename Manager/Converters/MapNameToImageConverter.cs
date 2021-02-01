@@ -26,6 +26,8 @@ namespace Manager.Converters
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/agency.png", UriKind.RelativeOrAbsolute);
 				case "de_ali":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/ali.png", UriKind.RelativeOrAbsolute);
+				case "de_ancient":
+					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/ancient.png", UriKind.RelativeOrAbsolute);
 				case "de_anubis":
 					return new Uri(AppSettings.RESOURCES_URI + "images/maps/preview/anubis.png", UriKind.RelativeOrAbsolute);
 				case "de_aztec":

@@ -37,6 +37,7 @@ namespace Services.Concrete.Maps
 		private const string VERTIGO = "de_vertigo";
 		private const string ANUBIS = "de_anubis";
 		private const string CHLORINE = "de_chlorine";
+		private const string ANCIENT = "de_ancient";
 
 		public static string[] SimpleRadarMaps =
 		{
@@ -53,7 +54,8 @@ namespace Services.Concrete.Maps
 		public static string[] Maps = {
 			DUST2, INFERNO, NUKE, CACHE, SEASON, TRAIN, CBBLE, OVERPASS,
 			MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA,
-			CANALS, AGENCY, AUSTRIA, SUBZERO, BIOME, OFFICE, VERTIGO, ANUBIS, CHLORINE
+			CANALS, AGENCY, AUSTRIA, SUBZERO, BIOME, OFFICE, VERTIGO, ANUBIS,
+			CHLORINE, ANCIENT
 		};
 
 		public Map Map { get; set; }
@@ -151,6 +153,9 @@ namespace Services.Concrete.Maps
 					break;
 				case CHLORINE:
 					Map = new Chlorine();
+					break;
+				case ANCIENT:
+					Map = new Ancient();
 					break;
 				default:
 					throw new MapUnavailableException(demo.MapName);
