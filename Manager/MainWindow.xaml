@@ -535,6 +535,12 @@
 							<CheckBox Content="{x:Static properties:Resources.UseSimpleRadarCheckbox}"
 									  IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.UseSimpleRadar}"
 									  Style="{StaticResource CheckBoxColumnOptionStyle}" />
+							<TextBlock Text="{x:Static properties:Resources.MaxConcurrentAnalyzes}"
+									   Style="{StaticResource TitleSettingsStyle}" />
+							<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.MaxConcurrentAnalyzes}"
+									  SelectedValue="{Binding Source={StaticResource Locator}, Path=Settings.SelectedMaxConcurrentAnalyzes}"
+									  DisplayMemberPath="Title"
+									  SelectedValuePath="Id" />
 							<TextBlock Text="{x:Static properties:Resources.Language}"
 									   Style="{StaticResource TitleSettingsStyle}" />
 							<ComboBox ItemsSource="{Binding Source={StaticResource Locator}, Path=Settings.Languages}"

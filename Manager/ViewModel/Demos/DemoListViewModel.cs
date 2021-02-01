@@ -48,8 +48,6 @@ namespace Manager.ViewModel.Demos
 
 		#region Properties
 
-		private const int MAX_ANALYZE_DEMO_COUNT = 4;
-
 		private readonly IDemosService _demosService;
 
 		private readonly IDialogService _dialogService;
@@ -1728,7 +1726,7 @@ namespace Manager.ViewModel.Demos
 			{
 				if (_cts == null) _cts = new CancellationTokenSource();
 				List<Task> tasks = new List<Task>();
-				SemaphoreSlim throttler = new SemaphoreSlim(MAX_ANALYZE_DEMO_COUNT);
+				SemaphoreSlim throttler = new SemaphoreSlim(Properties.Settings.Default.MaxConcurrentAnalyzes);
 				List<Demo> demos = new List<Demo>(SelectedDemos.ToList());
 
 				// init progresses before to have the right number of demos in the dict

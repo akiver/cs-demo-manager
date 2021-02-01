@@ -4218,6 +4218,11 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <target state="final">Activer le paramètre de lancement "worldwide"</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Enable -worldwide startup parameter</note>
         </trans-unit>
+        <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
+          <source>Max concurrent demo analyzes</source>
+          <target state="needs-review-translation">Nombre max d'analyses de démo en parallèle</target>
+          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+        </trans-unit>
       </group>
     </body>
   </file>

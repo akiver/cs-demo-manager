@@ -5713,6 +5713,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max concurrent demo analyzes.
+        /// </summary>
+        public static string MaxConcurrentAnalyzes {
+            get {
+                return ResourceManager.GetString("MaxConcurrentAnalyzes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MB.
         /// </summary>
         public static string MegaByte {

@@ -4211,6 +4211,10 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">Enable worldwide parameter</target>
           <note from="MultilingualBuild" annotates="source" priority="2">Enable -worldwide startup parameter</note>
         </trans-unit>
+        <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
+          <source>Max concurrent demo analyzes</source>
+          <target state="new">Max concurrent demo analyzes</target>
+        </trans-unit>
       </group>
     </body>
   </file>

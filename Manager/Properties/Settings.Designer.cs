@@ -1569,5 +1569,17 @@ namespace Manager.Properties {
                 this["MovieFullscreen"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("4")]
+        public int MaxConcurrentAnalyzes {
+            get {
+                return ((int)(this["MaxConcurrentAnalyzes"]));
+            }
+            set {
+                this["MaxConcurrentAnalyzes"] = value;
+            }
+        }
     }
 }

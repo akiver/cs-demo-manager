@@ -3267,4 +3267,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>Enable worldwide parameter</value>
     <comment>Enable -worldwide startup parameter</comment>
   </data>
+  <data name="MaxConcurrentAnalyzes" xml:space="preserve">
+    <value>Max concurrent demo analyzes</value>
+  </data>
 </root>

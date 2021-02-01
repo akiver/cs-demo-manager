@@ -3162,4 +3162,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
     <value>Activer le paramètre de lancement "worldwide"</value>
     <comment>Enable -worldwide startup parameter</comment>
   </data>
+  <data name="MaxConcurrentAnalyzes" xml:space="preserve">
+    <value>Nombre max d'analyses de démo en parallèle</value>
+  </data>
 </root>

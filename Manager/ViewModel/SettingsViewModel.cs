@@ -87,6 +87,10 @@ namespace Manager.ViewModel
 
 		private readonly IAccountStatsService _accountStatsService;
 
+		private List<ComboboxSelector> _maxConcurrentAnalyzes;
+
+		private string _selectedMaxConcurrentAnalyzes;
+
 		private List<ComboboxSelector> _themes;
 
 		private ComboboxSelector _selectedTheme;
@@ -306,6 +310,23 @@ namespace Manager.ViewModel
 					Process.Start(Application.ResourceAssembly.Location);
 					Application.Current.Shutdown();
 				}
+			}
+		}
+
+		public List<ComboboxSelector> MaxConcurrentAnalyzes
+		{
+			get { return _maxConcurrentAnalyzes; }
+			set { Set(() => MaxConcurrentAnalyzes, ref _maxConcurrentAnalyzes, value); }
+		}
+
+
+		public string SelectedMaxConcurrentAnalyzes
+		{
+			get { return _selectedMaxConcurrentAnalyzes; }
+			set
+			{
+				Set(() => SelectedMaxConcurrentAnalyzes, ref _selectedMaxConcurrentAnalyzes, value);
+				Settings.Default.MaxConcurrentAnalyzes = Int32.Parse(value);
 			}
 		}
 
@@ -1836,6 +1857,13 @@ namespace Manager.ViewModel
 				if (language.Key == Settings.Default.Language) SelectedLanguage = newLanguage;
 				Languages.Add(newLanguage);
 			}
+
+			MaxConcurrentAnalyzes = new List<ComboboxSelector>();
+			for (int number = 1; number <= 8; number++)
+			{
+				MaxConcurrentAnalyzes.Add(new ComboboxSelector(number.ToString(), number.ToString()));
+			}
+			SelectedMaxConcurrentAnalyzes = Settings.Default.MaxConcurrentAnalyzes.ToString();
 
 			Application.Current.Dispatcher.Invoke(async () =>
 			{
