@@ -692,6 +692,10 @@
 
 
 					<StackPanel Orientation="Vertical">
+						<CheckBox Content="{x:Static properties:Resources.Fullscreen}"
+								  IsChecked="{Binding Fullscreen}"
+								  Style="{StaticResource CheckBoxColumnOptionStyle}"
+								  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 						<CheckBox Content="{x:Static properties:Resources.AutoCloseGameOnRecordEnd}"
 								  IsChecked="{Binding AutoCloseGame}"
 								  Style="{StaticResource CheckBoxColumnOptionStyle}"

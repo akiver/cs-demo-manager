@@ -89,7 +89,7 @@ namespace Services.Concrete.Movie
 					DeleteVdmFileAtStratup = false,
 					CsgoExePath = AppSettings.GetCsgoExePath(), // TODO move it?
 					EnableHlaeConfigParent = _config.EnableHlaeConfigParent,
-					Fullscreen = false,
+					Fullscreen = _config.FullScreen,
 					IsWorldwideEnabled = _config.IsWorldwideEnabled,
 					Height = _config.Height,
 					Width = _config.Width,

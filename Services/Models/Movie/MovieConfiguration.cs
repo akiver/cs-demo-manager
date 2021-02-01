@@ -7,6 +7,10 @@ namespace Services.Models.Movie
 	{
 		public Demo Demo { get; set; }
 		/// <summary>s
+		/// Run CSGO in fullscreen?
+		/// </summary>
+		public bool FullScreen { get; set; } = false;
+		/// <summary>s
 		/// Use VirtualDub or FFmpeg?
 		/// </summary>
 		public bool UseVirtualDub { get; set; } = true;

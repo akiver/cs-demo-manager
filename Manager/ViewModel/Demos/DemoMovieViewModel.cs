@@ -479,6 +479,17 @@ namespace Manager.ViewModel.Demos
 			}
 		}
 
+		public bool Fullscreen
+		{
+			get => _movieConfig.FullScreen;
+			set
+			{
+				_movieConfig.FullScreen = value;
+				Settings.Default.MovieFullscreen = value;
+				RaisePropertyChanged(() => Fullscreen);
+			}
+		}
+
 		public bool CleanUpRawFiles
 		{
 			get => _movieConfig.CleanUpRawFiles;
@@ -1456,6 +1467,7 @@ namespace Manager.ViewModel.Demos
 			OutputFileName = Path.GetFileNameWithoutExtension(Demo.Name);
 			FrameRate = Settings.Default.MovieFramerate;
 			AutoCloseGame = Settings.Default.MovieAutoCloseGame;
+			Fullscreen = Settings.Default.MovieFullscreen;
 			GenerateVideoFile = Settings.Default.MovieGenerateVideoFile;
 			CleanUpRawFiles = Settings.Default.MovieCleanUpRawFiles;
 			Width = Settings.Default.MovieWidth;
@@ -1495,6 +1507,7 @@ namespace Manager.ViewModel.Demos
 				HlaeConfigParentFolderPath = HlaeConfigParentFolderPath,
 				GenerateVideoFile = GenerateVideoFile,
 				DeathsNoticesDisplayTime = DeathNoticesDisplayTime,
+				FullScreen = Settings.Default.IsFullscreen,
 			};
 			_movieService = new MovieService(_movieConfig);
 			_movieService.OnVirtualDubStarted += OnVirtualDubStarted;
