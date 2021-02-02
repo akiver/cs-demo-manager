@@ -8,83 +8,83 @@
       <group id="BOT/PROPERTIES/RESOURCES.RESX" datatype="resx">
         <trans-unit id="BalloonNoNewSuspectsFound" translate="yes" xml:space="preserve">
           <source>No new suspects banned found.</source>
-          <target state="new">Yeni banlanmış kişiler bulunamadı.</target>
+          <target state="translated">Yeni banlanmış kişiler bulunamadı.</target>
         </trans-unit>
         <trans-unit id="CheckEvery" translate="yes" xml:space="preserve">
           <source>Check every</source>
-          <target state="new">Hepsini kontrol et</target>
+          <target state="translated">Hepsini kontrol et</target>
         </trans-unit>
         <trans-unit id="CheckNow" translate="yes" xml:space="preserve">
           <source>Check now</source>
-          <target state="new">Şimdi kontrol et</target>
+          <target state="translated">Şimdi kontrol et</target>
         </trans-unit>
         <trans-unit id="DownloadDemos" translate="yes" xml:space="preserve">
           <source>Click here to download your last matchmaking demos.</source>
-          <target state="new">Son maç demolarını indirmek için buraya tıklayınız.</target>
+          <target state="translated">Son maç demolarını indirmek için buraya tıklayınız.</target>
         </trans-unit>
         <trans-unit id="Error" translate="yes" xml:space="preserve">
           <source>Error</source>
-          <target state="new">Hata</target>
+          <target state="translated">Hata</target>
         </trans-unit>
         <trans-unit id="IsNotRunning" translate="yes" xml:space="preserve">
           <source>is not running</source>
-          <target state="new">çalışmıyor</target>
+          <target state="translated">çalışmıyor</target>
         </trans-unit>
         <trans-unit id="IsRunning" translate="yes" xml:space="preserve">
           <source>is running</source>
-          <target state="new">çalışıyor</target>
+          <target state="translated">çalışıyor</target>
         </trans-unit>
         <trans-unit id="Language" translate="yes" xml:space="preserve">
           <source>Language</source>
-          <target state="new">Dil</target>
+          <target state="translated">Dil</target>
         </trans-unit>
         <trans-unit id="LaunchAtStartup" translate="yes" xml:space="preserve">
           <source>Launch at startup</source>
-          <target state="new">Başlangıçta çalış</target>
+          <target state="translated">Başlangıçta çalış</target>
         </trans-unit>
         <trans-unit id="Quit" translate="yes" xml:space="preserve">
           <source>Quit</source>
-          <target state="new">Kapat</target>
+          <target state="translated">Kapat</target>
         </trans-unit>
         <trans-unit id="SendDownloadNotification" translate="yes" xml:space="preserve">
           <source>Send download demos notifications</source>
-          <target state="new">İndirilmiş demolar için uyarı gönder</target>
+          <target state="translated">İndirilmiş demolar için uyarı gönder</target>
         </trans-unit>
         <trans-unit id="ShowCsgoDm" translate="yes" xml:space="preserve">
           <source>Show CSGO-DM</source>
-          <target state="new">CSGO-DM'yi göster</target>
+          <target state="translated">CSGO-DM'yi göster</target>
         </trans-unit>
         <trans-unit id="Start" translate="yes" xml:space="preserve">
           <source>Start</source>
-          <target state="new">Başlat</target>
+          <target state="translated">Başlat</target>
         </trans-unit>
         <trans-unit id="Stop" translate="yes" xml:space="preserve">
           <source>Stop</source>
-          <target state="new">Dur</target>
+          <target state="translated">Dur</target>
         </trans-unit>
         <trans-unit id="SuspectsList" translate="yes" xml:space="preserve">
           <source>Suspects list</source>
-          <target state="new">Şüpheli listesi</target>
+          <target state="translated">Şüpheli listesi</target>
         </trans-unit>
         <trans-unit id="UnableToStartBot" translate="yes" xml:space="preserve">
           <source>Unable to start the BOT.</source>
-          <target state="new">Botu başlatılamıyor.</target>
+          <target state="translated">Botu başlatılamıyor.</target>
         </trans-unit>
         <trans-unit id="Xhour" translate="yes" xml:space="preserve">
           <source>{0} hour</source>
-          <target state="new">{0} saat</target>
+          <target state="translated">{0} saat</target>
         </trans-unit>
         <trans-unit id="Xhours" translate="yes" xml:space="preserve">
           <source>{0} hours</source>
-          <target state="new">{0} saat</target>
+          <target state="translated">{0} saat</target>
         </trans-unit>
         <trans-unit id="Xminutes" translate="yes" xml:space="preserve">
           <source>{0} minutes</source>
-          <target state="new">{0} dakika</target>
+          <target state="translated">{0} dakika</target>
         </trans-unit>
         <trans-unit id="XsuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
           <source>{0} suspect(s) has been banned.</source>
-          <target state="new">{0} şüpheli(ler) banlandı.</target>
+          <target state="translated">{0} şüpheli(ler) banlandı.</target>
         </trans-unit>
       </group>
     </body>

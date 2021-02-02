@@ -12,4 +12,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BalloonNoNewSuspectsFound" xml:space="preserve">
+    <value>Yeni banlanmış kişiler bulunamadı.</value>
+  </data>
+  <data name="CheckEvery" xml:space="preserve">
+    <value>Hepsini kontrol et</value>
+  </data>
+  <data name="CheckNow" xml:space="preserve">
+    <value>Şimdi kontrol et</value>
+  </data>
+  <data name="DownloadDemos" xml:space="preserve">
+    <value>Son maç demolarını indirmek için buraya tıklayınız.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Hata</value>
+  </data>
+  <data name="IsNotRunning" xml:space="preserve">
+    <value>çalışmıyor</value>
+  </data>
+  <data name="IsRunning" xml:space="preserve">
+    <value>çalışıyor</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Dil</value>
+  </data>
+  <data name="LaunchAtStartup" xml:space="preserve">
+    <value>Başlangıçta çalış</value>
+  </data>
+  <data name="Quit" xml:space="preserve">
+    <value>Kapat</value>
+  </data>
+  <data name="SendDownloadNotification" xml:space="preserve">
+    <value>İndirilmiş demolar için uyarı gönder</value>
+  </data>
+  <data name="ShowCsgoDm" xml:space="preserve">
+    <value>CSGO-DM'yi göster</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Başlat</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Dur</value>
+  </data>
+  <data name="SuspectsList" xml:space="preserve">
+    <value>Şüpheli listesi</value>
+  </data>
+  <data name="UnableToStartBot" xml:space="preserve">
+    <value>Botu başlatılamıyor.</value>
+  </data>
+  <data name="Xhour" xml:space="preserve">
+    <value>{0} saat</value>
+  </data>
+  <data name="Xhours" xml:space="preserve">
+    <value>{0} saat</value>
+  </data>
+  <data name="Xminutes" xml:space="preserve">
+    <value>{0} dakika</value>
+  </data>
+  <data name="XsuspectsHaveBeenBanned" xml:space="preserve">
+    <value>{0} şüpheli(ler) banlandı.</value>
+  </data>
 </root>

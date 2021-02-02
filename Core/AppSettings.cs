@@ -162,9 +162,9 @@ namespace Core
 			},
 			new Language
 			{
-				Key = "tr-TR",
+				Key = "tr",
 				Name = "Turkish",
-				IsEnabled = false
+				IsEnabled = true
 			},
 		};
 
