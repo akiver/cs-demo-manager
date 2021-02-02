@@ -64,6 +64,7 @@ namespace Services.Concrete.Analyzer
 			Parser.SayText2 += HandleSayText2;
 			Parser.FreezetimeEnded += HandleFreezetimeEnded;
 			Parser.RoundFinal += HandleRoundFinal;
+			Parser.WinPanelMatch += HandleWinPanelMatch;
 		}
 
 		public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
@@ -113,6 +114,11 @@ namespace Services.Concrete.Analyzer
 		{
 			if (IsMatchStarted) Demo.ResetStats(false);
 			StartMatch();
+		}
+
+		protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
+		{
+			IsMatchStarted = false;
 		}
 
 		protected void HandleRoundAnnounceMatchStarted(object sender, RoundAnnounceMatchStartedEventArgs e)
