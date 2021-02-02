@@ -41,6 +41,7 @@ namespace Manager
 			"yRRCK / FliessendWasser (German)",
 			"Paco González López / monxas (Spanish)",
 			"aLieN (Hungarian)",
+			"Mad-Kingu (Turkish)",
 		};
 
 		public App()
