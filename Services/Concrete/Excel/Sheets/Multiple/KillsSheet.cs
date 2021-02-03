@@ -37,7 +37,11 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 				{"Weapon", CellType.String},
 				{"Headshot", CellType.Boolean},
 				{"Crouching", CellType.Boolean},
-				{"Trade kill", CellType.Numeric}
+				{"Trade kill", CellType.Boolean},
+				{"Killer X", CellType.Numeric},
+				{"Killer Y", CellType.Numeric},
+				{"Victim X", CellType.Numeric},
+				{"Victim Y", CellType.Numeric},
 			};
 			Demos = demos;
 			Sheet = workbook.CreateSheet("Kills");
@@ -80,7 +84,11 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 						SetCellValue(row, columnNumber++, CellType.String, e.Weapon.Name);
 						SetCellValue(row, columnNumber++, CellType.Boolean, e.IsHeadshot);
 						SetCellValue(row, columnNumber++, CellType.Boolean, e.IsKillerCrouching);
-						SetCellValue(row, columnNumber, CellType.Boolean, e.IsTradeKill);
+						SetCellValue(row, columnNumber++, CellType.Boolean, e.IsTradeKill);
+						SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerX);
+						SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerY);
+						SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimX);
+						SetCellValue(row, columnNumber, CellType.Numeric, e.Point.VictimY);
 					}
 				}
 			});
