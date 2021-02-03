@@ -34,5 +34,17 @@ namespace Core.Models.Events
 
 		[JsonProperty("round_number")]
 		public int RoundNumber { get; set; }
+
+		[JsonProperty("victim_x")]
+		public float VictimX{ get; set; }
+
+		[JsonProperty("victim_y")]
+		public float VictimY { get; set; }
+
+		[JsonProperty("attacker_x")]
+		public float AttackerX { get; set; }
+
+		[JsonProperty("attacker_y")]
+		public float AttackerY { get; set; }
 	}
 }

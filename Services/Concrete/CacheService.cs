@@ -585,6 +585,8 @@ namespace Services.Concrete
 				ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
 				Formatting = Formatting.Indented
 			};
+			demo.PlayerBlinded = await GetDemoPlayerBlindedAsync(demo);
+			demo.WeaponFired = await GetDemoWeaponFiredAsync(demo);
 			string filePath = folderPath + Path.DirectorySeparatorChar + demo.Name + ".json";
 			string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, settings));
 			File.WriteAllText(filePath, json);

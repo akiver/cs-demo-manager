@@ -1244,7 +1244,11 @@ namespace Services.Concrete.Analyzer
 				HealthDamage = e.Player.HP < e.HealthDamage ? e.Player.HP : e.HealthDamage,
 				HitGroup = e.Hitgroup,
 				Weapon = weapon,
-				RoundNumber = CurrentRound.Number
+				RoundNumber = CurrentRound.Number,
+				VictimX = e.Player.Position.X,
+				VictimY = e.Player.Position.Y,
+				AttackerX = e.Attacker?.Position.X ?? 0,
+				AttackerY = e.Attacker?.Position.Y ?? 0,
 			};
 
 			Application.Current.Dispatcher.Invoke(delegate
