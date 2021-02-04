@@ -107,13 +107,11 @@ namespace Services.Concrete
 
 			_config.OnGameStarted?.Invoke();
 
-			await Task.Delay(3000);
-			Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
-			if (processes.Length > 0)
+			Process csgoProcess = await WaitForCsgoProcess();
+			if (csgoProcess  != null)
 			{
 				_config.OnGameRunning?.Invoke();
-				Process p = processes[0];
-				await p.WaitForExitAsync();
+				await csgoProcess.WaitForExitAsync();
 			}
 
 			if (_config.OnGameClosed != null)
@@ -121,6 +119,32 @@ namespace Services.Concrete
 
 			if (_config.DeleteVdmFileWhenClosed)
 				await DeleteVdmFile();
+		}
+
+		private async Task<Process> WaitForCsgoProcess()
+		{
+			Process process = null;
+			int attemptCount = 0;
+			await Task.Run(async () => {
+				for (; ; )
+				{
+					await Task.Delay(3000);
+					Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
+					if (processes.Length > 0)
+					{
+						process = processes[0];
+						break;
+					}
+					if (attemptCount == 6)
+					{
+						break;
+					}
+
+					attemptCount++;
+				}
+			});
+
+			return process;
 		}
 
 		private void SetupResolutionParameters()
