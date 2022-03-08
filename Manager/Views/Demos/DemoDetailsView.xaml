@@ -101,7 +101,7 @@
 				  Height="40">
 				<StackPanel Orientation="Horizontal">
 					<Button Style="{DynamicResource GeneralButton}"
-							ToolTip="{x:Static properties:Resources.ToolTipBack}" 
+							ToolTip="{x:Static properties:Resources.ToolTipBack}"
 							Command="{Binding BackToHomeCommand}">
 						<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
 							<Rectangle Width="15"
@@ -915,12 +915,12 @@
 														Header="{x:Static properties:Resources.HeaderHltvRating}"
 														Binding="{Binding RatingHltv}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
-                                    <DataGridTextColumn HeaderStyle="{StaticResource Rating2Header}"
+									<DataGridTextColumn HeaderStyle="{StaticResource Rating2Header}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderHltv2Rating}"
-														Binding="{Binding Rating2Hltv}"
+														Binding="{Binding RatingHltv2}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
-                                    <DataGridTextColumn HeaderStyle="{StaticResource EseaRwsHeader}"
+									<DataGridTextColumn HeaderStyle="{StaticResource EseaRwsHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.RWS}"
 														Binding="{Binding EseaRws}"
@@ -1163,12 +1163,12 @@
 														Header="{x:Static properties:Resources.HeaderHltvRating}"
 														Binding="{Binding RatingHltv}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
-                                    <DataGridTextColumn HeaderStyle="{StaticResource Rating2Header}"
+									<DataGridTextColumn HeaderStyle="{StaticResource Rating2Header}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.HeaderHltv2Rating}"
 														Binding="{Binding RatingHltv2}"
 														Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" SortDirection="Descending" />
-                                    <DataGridTextColumn HeaderStyle="{StaticResource EseaRwsHeader}"
+									<DataGridTextColumn HeaderStyle="{StaticResource EseaRwsHeader}"
 														Width="Auto"
 														Header="{x:Static properties:Resources.RWS}"
 														Binding="{Binding EseaRws}"
