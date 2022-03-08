@@ -2,11 +2,11 @@
 
 namespace Manager.Views.Dialogs
 {
-	public partial class DialogThirdPartySelection : CustomDialog
-	{
-		public DialogThirdPartySelection()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class DialogThirdPartySelection : CustomDialog
+    {
+        public DialogThirdPartySelection()
+        {
+            InitializeComponent();
+        }
+    }
 }

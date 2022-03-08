@@ -54,4 +54,3 @@ using System.Windows;
 [assembly: AssemblyFileVersion("2.13.15.0")]
 [assembly: Guid("11a35f95-5f2e-4781-964e-94d624fff358")]
 [assembly: NeutralResourcesLanguage("en-US")]
-

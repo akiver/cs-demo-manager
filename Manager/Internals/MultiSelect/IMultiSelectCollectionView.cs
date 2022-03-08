@@ -2,9 +2,9 @@
 
 namespace Manager.Internals.MultiSelect
 {
-	public interface IMultiSelectCollectionView
-	{
-		void AddControl(Selector selector);
-		void RemoveControl(Selector selector);
-	}
+    public interface IMultiSelectCollectionView
+    {
+        void AddControl(Selector selector);
+        void RemoveControl(Selector selector);
+    }
 }

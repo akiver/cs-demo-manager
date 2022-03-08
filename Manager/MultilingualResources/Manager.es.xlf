@@ -358,7 +358,7 @@
           <source>HLTV</source>
           <target state="translated">HLTV</target>
         </trans-unit>
-		  <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2</source>
           <target state="translated">HLTV2</target>
         </trans-unit>
@@ -1127,7 +1127,7 @@
           <source>HLTV Rating</source>
           <target state="translated">Rating HLTV</target>
         </trans-unit>
-		  <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2 Rating</source>
           <target state="translated">Rating HLTV2</target>
         </trans-unit>
@@ -1518,7 +1518,7 @@
           <target state="translated">HLTV (HLTV Rating)</target>
           <note from="MultilingualEditor" annotates="source" priority="4">Leave as is</note>
         </trans-unit>
-		  <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
+        <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
           <source>HLTV2 (HLTV2 Rating)</source>
           <target state="translated">HLTV2 (HLTV2 Rating)</target>
           <note from="MultilingualEditor" annotates="source" priority="4">Leave as is</note>

@@ -1,225 +1,225 @@
 ﻿<UserControl x:Class="Manager.Views.Demos.DemoDamagesView"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:converters="clr-namespace:Manager.Converters"
-			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-			 xmlns:properties="clr-namespace:Manager.Properties"
-			 DataContext="{Binding DemoDamages, Source={StaticResource Locator}}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="clr-namespace:Manager.Converters"
+             xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:properties="clr-namespace:Manager.Properties"
+             DataContext="{Binding DemoDamages, Source={StaticResource Locator}}">
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
-			<converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
-		</ResourceDictionary>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}"
-					Gesture="CTRL+B" />
-		<KeyBinding Command="{Binding UpdateCommand}"
-					Gesture="CTRL+R" />
-		<mouse:MouseBindingExtended Gesture="XButton1"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}" />
-	</UserControl.InputBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}"
+                    Gesture="CTRL+B" />
+        <KeyBinding Command="{Binding UpdateCommand}"
+                    Gesture="CTRL+R" />
+        <mouse:MouseBindingExtended Gesture="XButton1"
+                                    Command="{Binding BackToDemoDetailsCommand}"
+                                    CommandParameter="{Binding Demo}" />
+    </UserControl.InputBindings>
 
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-		<Grid Grid.Row="0"
-			  Height="40">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding Demo}"
-						ToolTip="{x:Static properties:Resources.ToolTipBack}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
-											Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Back}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+        <Grid Grid.Row="0"
+              Height="40">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding BackToDemoDetailsCommand}"
+                        CommandParameter="{Binding Demo}"
+                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Back}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<ComboBox ItemsSource="{Binding TeamSelectors}"
-						  SelectedItem="{Binding SelectedTeam}"
-						  DisplayMemberPath ="Title"
-						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Team}"
-						  SelectedValuePath="Title"
-						  Margin="5"
-						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
+                <ComboBox ItemsSource="{Binding TeamSelectors}"
+                          SelectedItem="{Binding SelectedTeam}"
+                          DisplayMemberPath="Title"
+                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Team}"
+                          SelectedValuePath="Title"
+                          Margin="5"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 
-				<ComboBox ItemsSource="{Binding Demo.Players}"
-						  SelectedItem="{Binding SelectedPlayer}"
-						  DisplayMemberPath ="Name"
-						  SelectedValuePath="Name"
-						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
-						  Margin="5"
-						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
+                <ComboBox ItemsSource="{Binding Demo.Players}"
+                          SelectedItem="{Binding SelectedPlayer}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Name"
+                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
+                          Margin="5"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 
-				<CheckBox Content="{x:Static properties:Resources.AllPlayers}"
-						  IsChecked="{Binding SelectAllPlayers}"
-						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-						  Margin="5"
-						  VerticalAlignment="Center" />
+                <CheckBox Content="{x:Static properties:Resources.AllPlayers}"
+                          IsChecked="{Binding SelectAllPlayers}"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                          Margin="5"
+                          VerticalAlignment="Center" />
 
-				<ComboBox ItemsSource="{Binding Demo.Rounds}"
-						  SelectedItem="{Binding SelectedRound}"
-						  DisplayMemberPath ="Number"
-						  SelectedValuePath="Number"
-						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
-						  Margin="5"
-						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
-				<CheckBox Content="{x:Static properties:Resources.AllRounds}"
-						  IsChecked="{Binding SelectAllRounds}"
-						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-						  Margin="5"
-						  VerticalAlignment="Center" />
-				<Button Command="{Binding UpdateCommand}"
-						Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipUpdate}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_refresh}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Refresh}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <ComboBox ItemsSource="{Binding Demo.Rounds}"
+                          SelectedItem="{Binding SelectedRound}"
+                          DisplayMemberPath="Number"
+                          SelectedValuePath="Number"
+                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
+                          Margin="5"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
+                <CheckBox Content="{x:Static properties:Resources.AllRounds}"
+                          IsChecked="{Binding SelectAllRounds}"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                          Margin="5"
+                          VerticalAlignment="Center" />
+                <Button Command="{Binding UpdateCommand}"
+                        Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipUpdate}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_refresh}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Refresh}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<StackPanel Orientation="Horizontal"
-							Margin="5">
-					<controls:ProgressRing IsActive="{Binding IsBusy}"
-										   Foreground="{DynamicResource BlackColorBrush}"
-										   Width="30"
-										   Height="30" />
-					<TextBlock Text="{x:Static properties:Resources.NotificationUpdating}"
-							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				</StackPanel>
-			</StackPanel>
-		</Grid>
+                <StackPanel Orientation="Horizontal"
+                            Margin="5">
+                    <controls:ProgressRing IsActive="{Binding IsBusy}"
+                                           Foreground="{DynamicResource BlackColorBrush}"
+                                           Width="30"
+                                           Height="30" />
+                    <TextBlock Text="{x:Static properties:Resources.NotificationUpdating}"
+                               Style="{StaticResource NotificationMessageStyle}"
+                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
 
-		<Grid Grid.Row="1">
-			<Canvas Width="800">
-				<StackPanel x:Name="DamageHeadValue"
-							Canvas.Left="440">
-					<TextBlock Text="{x:Static properties:Resources.Head}"
-							   Style="{StaticResource DamageLabelStyle}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageHeadValue" />
-								<Binding Path="DamagePercentHead" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<StackPanel x:Name="DamageChestValue"
-							Canvas.Left="230">
-					<TextBlock Style="{StaticResource DamageLabelStyle}"
-							   Text="{x:Static properties:Resources.Chest}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageChestValue" />
-								<Binding Path="DamagePercentChest" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<StackPanel x:Name="DamageLeftArmValue"
-							Canvas.Left="620"
-							Canvas.Top="120">
-					<TextBlock Style="{StaticResource DamageLabelStyle}"
-							   Text="{x:Static properties:Resources.LeftArm}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageLeftArmValue" />
-								<Binding Path="DamagePercentLeftArm" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<StackPanel x:Name="DamageRightArmValue"
-							Canvas.Left="30"
-							Canvas.Top="160">
-					<TextBlock Style="{StaticResource DamageLabelStyle}"
-							   Text="{x:Static properties:Resources.RightArm}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageRightArmValue" />
-								<Binding Path="DamagePercentRightArm" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<StackPanel x:Name="DamageRightLegValue"
-							Canvas.Left="30"
-							Canvas.Top="550">
-					<TextBlock Style="{StaticResource DamageLabelStyle}"
-							   Text="{x:Static properties:Resources.RightLeg}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageRightLegValue" />
-								<Binding Path="DamagePercentRightLeg" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<StackPanel x:Name="DamageLeftLegValue"
-							Canvas.Left="630"
-							Canvas.Top="555">
-					<TextBlock Style="{StaticResource DamageLabelStyle}"
-							   Text="{x:Static properties:Resources.LeftLeg}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageLeftLegValue" />
-								<Binding Path="DamagePercentLeftLeg" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<StackPanel x:Name="DamageStomachValue"
-							Canvas.Left="640"
-							Canvas.Top="370">
-					<TextBlock Style="{StaticResource DamageLabelStyle}"
-							   Text="{x:Static properties:Resources.Stomach}"/>
-					<TextBlock Style="{StaticResource DamageValueStyle}">
-						<TextBlock.Text>
-							<MultiBinding StringFormat="{}{0} ({1}%)">
-								<Binding Path="DamageStomachValue" />
-								<Binding Path="DamagePercentStomach" />
-							</MultiBinding>
-						</TextBlock.Text>
-					</TextBlock>
-				</StackPanel>
-				<Image Source="/Resources/images/model.png"
-					   Height="600"
-					   Width="425"
-					   Canvas.Left="190"
-					   Canvas.Top="90"/>
-			</Canvas>
-		</Grid>
-	</Grid>
+        <Grid Grid.Row="1">
+            <Canvas Width="800">
+                <StackPanel x:Name="DamageHeadValue"
+                            Canvas.Left="440">
+                    <TextBlock Text="{x:Static properties:Resources.Head}"
+                               Style="{StaticResource DamageLabelStyle}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageHeadValue" />
+                                <Binding Path="DamagePercentHead" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="DamageChestValue"
+                            Canvas.Left="230">
+                    <TextBlock Style="{StaticResource DamageLabelStyle}"
+                               Text="{x:Static properties:Resources.Chest}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageChestValue" />
+                                <Binding Path="DamagePercentChest" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="DamageLeftArmValue"
+                            Canvas.Left="620"
+                            Canvas.Top="120">
+                    <TextBlock Style="{StaticResource DamageLabelStyle}"
+                               Text="{x:Static properties:Resources.LeftArm}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageLeftArmValue" />
+                                <Binding Path="DamagePercentLeftArm" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="DamageRightArmValue"
+                            Canvas.Left="30"
+                            Canvas.Top="160">
+                    <TextBlock Style="{StaticResource DamageLabelStyle}"
+                               Text="{x:Static properties:Resources.RightArm}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageRightArmValue" />
+                                <Binding Path="DamagePercentRightArm" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="DamageRightLegValue"
+                            Canvas.Left="30"
+                            Canvas.Top="550">
+                    <TextBlock Style="{StaticResource DamageLabelStyle}"
+                               Text="{x:Static properties:Resources.RightLeg}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageRightLegValue" />
+                                <Binding Path="DamagePercentRightLeg" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="DamageLeftLegValue"
+                            Canvas.Left="630"
+                            Canvas.Top="555">
+                    <TextBlock Style="{StaticResource DamageLabelStyle}"
+                               Text="{x:Static properties:Resources.LeftLeg}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageLeftLegValue" />
+                                <Binding Path="DamagePercentLeftLeg" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel x:Name="DamageStomachValue"
+                            Canvas.Left="640"
+                            Canvas.Top="370">
+                    <TextBlock Style="{StaticResource DamageLabelStyle}"
+                               Text="{x:Static properties:Resources.Stomach}" />
+                    <TextBlock Style="{StaticResource DamageValueStyle}">
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} ({1}%)">
+                                <Binding Path="DamageStomachValue" />
+                                <Binding Path="DamagePercentStomach" />
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </StackPanel>
+                <Image Source="/Resources/images/model.png"
+                       Height="600"
+                       Width="425"
+                       Canvas.Left="190"
+                       Canvas.Top="90" />
+            </Canvas>
+        </Grid>
+    </Grid>
 </UserControl>

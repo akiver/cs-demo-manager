@@ -1,19 +1,19 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:properties="clr-namespace:Manager.Properties">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:properties="clr-namespace:Manager.Properties">
 
-	<Style TargetType="Image" x:Key="RankStyle">
-		<Setter Property="ToolTip" Value="{x:Static properties:Resources.LastRankDetected}" />
-		<Setter Property="Height" Value="30" />
-		<Setter Property="Margin" Value="5" />
-	</Style>
+    <Style TargetType="Image" x:Key="RankStyle">
+        <Setter Property="ToolTip" Value="{x:Static properties:Resources.LastRankDetected}" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Margin" Value="5" />
+    </Style>
 
-	<Style TargetType="Image" x:Key="OverviewLayerStyle">
-		<Setter Property="Width" Value="Auto"/>
-		<Setter Property="Height" Value="Auto"/>
-		<Setter Property="Margin" Value="10"/>
-		<Setter Property="HorizontalAlignment" Value="Stretch"/>
-		<Setter Property="VerticalAlignment" Value="Stretch"/>
-		<Setter Property="Stretch" Value="Uniform"/>
-	</Style>
+    <Style TargetType="Image" x:Key="OverviewLayerStyle">
+        <Setter Property="Width" Value="Auto" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Stretch" Value="Uniform" />
+    </Style>
 </ResourceDictionary>

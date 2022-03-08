@@ -1,260 +1,260 @@
 ﻿<UserControl x:Class="Manager.Views.Demos.DemoOverviewView"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-			 xmlns:converters="clr-namespace:Manager.Converters"
-			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 xmlns:properties="clr-namespace:Manager.Properties"
-			 mc:Ignorable="d"
-			 d:DesignHeight="720"
-			 d:DesignWidth="1280"
-			 DataContext="{Binding DemoOverview, Source={StaticResource Locator}}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:converters="clr-namespace:Manager.Converters"
+             xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+             xmlns:properties="clr-namespace:Manager.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1280"
+             DataContext="{Binding DemoOverview, Source={StaticResource Locator}}">
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<converters:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
-			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
-			<converters:EventToVisibilityConverter x:Key="EventToVisibilityConverter" />
-		</ResourceDictionary>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:EventToVisibilityConverter x:Key="EventToVisibilityConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding PlayCommand}"
-					Gesture="CTRL+P" />
-		<KeyBinding Command="{Binding PauseCommand}"
-					Gesture="CTRL+O" />
-		<KeyBinding Command="{Binding StopCommand}"
-					Gesture="CTRL+S" />
-		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}"
-					Gesture="CTRL+B" />
-		<mouse:MouseBindingExtended Gesture="XButton1"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}" />
-	</UserControl.InputBindings>
-	
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding PlayCommand}"
+                    Gesture="CTRL+P" />
+        <KeyBinding Command="{Binding PauseCommand}"
+                    Gesture="CTRL+O" />
+        <KeyBinding Command="{Binding StopCommand}"
+                    Gesture="CTRL+S" />
+        <KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}"
+                    Gesture="CTRL+B" />
+        <mouse:MouseBindingExtended Gesture="XButton1"
+                                    Command="{Binding BackToDemoDetailsCommand}"
+                                    CommandParameter="{Binding Demo}" />
+    </UserControl.InputBindings>
 
-		<!-- ActionBar-->
-		<Grid Grid.Row="0"
-			  Height="40">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding Demo}"
-						ToolTip="{x:Static properties:Resources.ToolTipBack}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Back}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-				<ComboBox ItemsSource="{Binding TeamSelectors}"
-						  SelectedItem="{Binding CurrentTeamSelector}"
-						  DisplayMemberPath ="Title"
-						  SelectedValuePath="Title"
-						  Margin="5"
-						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Side}"
-						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
+        <!-- ActionBar-->
+        <Grid Grid.Row="0"
+              Height="40">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding BackToDemoDetailsCommand}"
+                        CommandParameter="{Binding Demo}"
+                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Back}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<ComboBox ItemsSource="{Binding Demo.Players}"
-						  SelectedItem="{Binding SelectedPlayer}"
-						  DisplayMemberPath ="Name"
-						  SelectedValuePath="Name"
-						  Margin="5"
-						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
-						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
+                <ComboBox ItemsSource="{Binding TeamSelectors}"
+                          SelectedItem="{Binding CurrentTeamSelector}"
+                          DisplayMemberPath="Title"
+                          SelectedValuePath="Title"
+                          Margin="5"
+                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Side}"
+                          IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 
-				<ComboBox ItemsSource="{Binding Demo.Rounds}"
-						  SelectedItem="{Binding SelectedRound}"
-						  DisplayMemberPath ="Number"
-						  SelectedValuePath="Number"
-						  Margin="5"
-						  controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
-						  IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
+                <ComboBox ItemsSource="{Binding Demo.Players}"
+                          SelectedItem="{Binding SelectedPlayer}"
+                          DisplayMemberPath="Name"
+                          SelectedValuePath="Name"
+                          Margin="5"
+                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
+                          IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 
-				<Button Command="{Binding PlayCommand}"
-						Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipPlay}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_control_play}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Play}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <ComboBox ItemsSource="{Binding Demo.Rounds}"
+                          SelectedItem="{Binding SelectedRound}"
+                          DisplayMemberPath="Number"
+                          SelectedValuePath="Number"
+                          Margin="5"
+                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
+                          IsEnabled="{Binding Path=IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 
-				<Button Command="{Binding PauseCommand}"
-						Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipPause}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_control_pause}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Pause}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Command="{Binding PlayCommand}"
+                        Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipPlay}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_control_play}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Play}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<Button Command="{Binding StopCommand}"
-						Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipStop}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_control_stop}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Stop}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Command="{Binding PauseCommand}"
+                        Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipPause}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_control_pause}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Pause}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<StackPanel Orientation="Horizontal"
-							VerticalAlignment="Center"
-							Margin="5">
-					<TextBlock Text="{x:Static properties:Resources.LabelVolume}"
-							   Style="{StaticResource TextBlockStandard}"/>
-					<Slider Minimum="0"
-							Maximum="10"
-							LargeChange="1"
-							SmallChange="1"
-							Width="100"
-							Margin="5 0 0 0"
-							VerticalAlignment="Center"
-							Value="{Binding Volume}"/>
-				</StackPanel>
+                <Button Command="{Binding StopCommand}"
+                        Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipStop}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_control_stop}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Stop}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<StackPanel Orientation="Horizontal"
-							VerticalAlignment="Center"
-							Margin="5">
-					<TextBlock Text="{x:Static properties:Resources.LabelSpeed}"
-							   Style="{StaticResource TextBlockStandard}"/>
-					<Slider Minimum="1"
-							Maximum="5"
-							Width="100"
-							Margin="5 0 0 0"
-							VerticalAlignment="Center"
-							Value="{Binding FrameLimiterMultiplier}"/>
-				</StackPanel>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <TextBlock Text="{x:Static properties:Resources.LabelVolume}"
+                               Style="{StaticResource TextBlockStandard}" />
+                    <Slider Minimum="0"
+                            Maximum="10"
+                            LargeChange="1"
+                            SmallChange="1"
+                            Width="100"
+                            Margin="5 0 0 0"
+                            VerticalAlignment="Center"
+                            Value="{Binding Volume}" />
+                </StackPanel>
 
-				<CheckBox Content="{x:Static properties:Resources.LogOnlyKills}"
-						  IsChecked="{Binding IsLogOnlyKills}"
-						  VerticalAlignment="Center"
-						  Margin="5" />
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <TextBlock Text="{x:Static properties:Resources.LabelSpeed}"
+                               Style="{StaticResource TextBlockStandard}" />
+                    <Slider Minimum="1"
+                            Maximum="5"
+                            Width="100"
+                            Margin="5 0 0 0"
+                            VerticalAlignment="Center"
+                            Value="{Binding FrameLimiterMultiplier}" />
+                </StackPanel>
 
-				<StackPanel Orientation="Horizontal"
-							VerticalAlignment="Center"
-							Margin="5">
-					<controls:ProgressRing IsActive="{Binding IsBusy}"
-										   Foreground="{DynamicResource BlackColorBrush}"
-										   Width="30"
-										   Height="30" />
-					<TextBlock Text="{Binding Notification}"
-							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				</StackPanel>
+                <CheckBox Content="{x:Static properties:Resources.LogOnlyKills}"
+                          IsChecked="{Binding IsLogOnlyKills}"
+                          VerticalAlignment="Center"
+                          Margin="5" />
 
-			</StackPanel>
-		</Grid>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <controls:ProgressRing IsActive="{Binding IsBusy}"
+                                           Foreground="{DynamicResource BlackColorBrush}"
+                                           Width="30"
+                                           Height="30" />
+                    <TextBlock Text="{Binding Notification}"
+                               Style="{StaticResource NotificationMessageStyle}"
+                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
 
-		<Grid Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			<ItemsControl Grid.Column="0"
-						  ItemsSource="{Binding PlayersColor}"
-						  Background="Transparent"
-						  Margin="10"
-						  BorderThickness="0">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<StackPanel Orientation="Horizontal">
-							<Rectangle Width="20"
-									   Height="20"
-									   Fill="{Binding Color}" />
-							<TextBlock Text="{Binding Name}"
-									   Style="{StaticResource TextBlockStandard}"
-									   Margin="5 0 0 0"/>
-						</StackPanel>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-			<Grid Grid.Column="1">
-				<Image x:Name="OverviewLayer"
-					   Source="{Binding WriteableBitmapOverview}"
-					   Stretch="Uniform"/>
-				<Image x:Name="PlayerMarkerLayer"
-					   Source="{Binding WriteableBitmapPlayerMarker}"
-					   Stretch="Uniform"/>
-				<Image x:Name="SmokeLayer"
-					   Source="{Binding WriteableBitmapSmoke}"
-					   Stretch="Uniform"/>
-				<Image x:Name="KillLayer"
-					   Source="{Binding WriteableBitmapKill}"
-					   Stretch="Uniform"/>
-				<Image x:Name="WeaponLayer"
-					   Source="{Binding WriteableBitmapWeapon}"
-					   Stretch="Uniform"/>
-				<Image x:Name="MolotovLayer"
-					   Source="{Binding WriteableBitmapMolotov}"
-					   Stretch="Uniform"/>
-				<Image x:Name="FlashbangLayer"
-					   Source="{Binding WriteableBitmapFlashbang}"
-					   Stretch="Uniform"/>
-				<Image x:Name="HegrenadeLayer"
-					   Source="{Binding WriteableBitmapHegrenade}"
-					   Stretch="Uniform"/>
-				<Image x:Name="DecoyLayer"
-					   Source="{Binding WriteableBitmapDecoy}"
-					   Stretch="Uniform"/>
-			</Grid>
-			<ScrollViewer VerticalScrollBarVisibility="Auto"
-						  Grid.Column="2">
-				<ItemsControl ItemsSource="{Binding Events}"
-							  Background="Transparent"
-							  Margin="10"
-							  BorderThickness="0">
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<TextBlock Text="{Binding Message}"
-									   Style="{StaticResource TextBlockStandard}"
-									   Visibility="{Binding Path=., Converter={StaticResource EventToVisibilityConverter}}" />
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
-			</ScrollViewer>
-		</Grid>
-		
-	</Grid>
+            </StackPanel>
+        </Grid>
+
+        <Grid Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <ItemsControl Grid.Column="0"
+                          ItemsSource="{Binding PlayersColor}"
+                          Background="Transparent"
+                          Margin="10"
+                          BorderThickness="0">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Rectangle Width="20"
+                                       Height="20"
+                                       Fill="{Binding Color}" />
+                            <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource TextBlockStandard}"
+                                       Margin="5 0 0 0" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <Grid Grid.Column="1">
+                <Image x:Name="OverviewLayer"
+                       Source="{Binding WriteableBitmapOverview}"
+                       Stretch="Uniform" />
+                <Image x:Name="PlayerMarkerLayer"
+                       Source="{Binding WriteableBitmapPlayerMarker}"
+                       Stretch="Uniform" />
+                <Image x:Name="SmokeLayer"
+                       Source="{Binding WriteableBitmapSmoke}"
+                       Stretch="Uniform" />
+                <Image x:Name="KillLayer"
+                       Source="{Binding WriteableBitmapKill}"
+                       Stretch="Uniform" />
+                <Image x:Name="WeaponLayer"
+                       Source="{Binding WriteableBitmapWeapon}"
+                       Stretch="Uniform" />
+                <Image x:Name="MolotovLayer"
+                       Source="{Binding WriteableBitmapMolotov}"
+                       Stretch="Uniform" />
+                <Image x:Name="FlashbangLayer"
+                       Source="{Binding WriteableBitmapFlashbang}"
+                       Stretch="Uniform" />
+                <Image x:Name="HegrenadeLayer"
+                       Source="{Binding WriteableBitmapHegrenade}"
+                       Stretch="Uniform" />
+                <Image x:Name="DecoyLayer"
+                       Source="{Binding WriteableBitmapDecoy}"
+                       Stretch="Uniform" />
+            </Grid>
+            <ScrollViewer VerticalScrollBarVisibility="Auto"
+                          Grid.Column="2">
+                <ItemsControl ItemsSource="{Binding Events}"
+                              Background="Transparent"
+                              Margin="10"
+                              BorderThickness="0">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Message}"
+                                       Style="{StaticResource TextBlockStandard}"
+                                       Visibility="{Binding Path=., Converter={StaticResource EventToVisibilityConverter}}" />
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
 </UserControl>

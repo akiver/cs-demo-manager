@@ -5,9 +5,8 @@ using Services.Models.ThirdParties;
 
 namespace Services.Concrete.ThirdParties
 {
-    class CsgoDashStatsComService : IThirdPartyInterface
+    internal class CsgoDashStatsComService : IThirdPartyInterface
     {
-
         public async Task<ThirdPartyData> SendShareCode(Demo demo, string shareCode)
         {
             ThirdPartyData data = new ThirdPartyData { Success = true };

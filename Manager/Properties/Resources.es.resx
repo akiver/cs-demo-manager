@@ -272,7 +272,7 @@
   <data name="HeaderHltvRating" xml:space="preserve">
     <value>HLTV</value>
   </data>
-	<data name="HeaderHltv2Rating" xml:space="preserve">
+  <data name="HeaderHltv2Rating" xml:space="preserve">
     <value>HLTV2</value>
   </data>
   <data name="Hostname" xml:space="preserve">
@@ -848,7 +848,7 @@
   <data name="HeaderToolTipHltvRating" xml:space="preserve">
     <value>Rating HLTV</value>
   </data>
-	<data name="HeaderToolTipHltv2Rating" xml:space="preserve">
+  <data name="HeaderToolTipHltv2Rating" xml:space="preserve">
     <value>Rating HLTV2</value>
   </data>
   <data name="HeaderToolTipIsOwBanned" xml:space="preserve">
@@ -1140,7 +1140,7 @@
   <data name="HltvFull" xml:space="preserve">
     <value>HLTV (HLTV Rating)</value>
   </data>
-	<data name="Hltv2Full" xml:space="preserve">
+  <data name="Hltv2Full" xml:space="preserve">
     <value>HLTV2 (HLTV2 Rating)</value>
   </data>
   <data name="JumpKillsFull" xml:space="preserve">

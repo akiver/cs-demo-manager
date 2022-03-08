@@ -2,11 +2,11 @@
 
 namespace Manager.Views.Players
 {
-	public partial class PlayerGeneralView : UserControl
-	{
-		public PlayerGeneralView()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class PlayerGeneralView : UserControl
+    {
+        public PlayerGeneralView()
+        {
+            InitializeComponent();
+        }
+    }
 }

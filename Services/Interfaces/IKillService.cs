@@ -5,10 +5,10 @@ using Services.Models.Stats;
 
 namespace Services.Interfaces
 {
-	public interface IKillService
-	{
-		Demo Demo { get; set; }
+    public interface IKillService
+    {
+        Demo Demo { get; set; }
 
-		Task<List<KillDataPoint>> GetPlayersKillsMatrix();
-	}
+        Task<List<KillDataPoint>> GetPlayersKillsMatrix();
+    }
 }

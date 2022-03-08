@@ -5,18 +5,22 @@ using System.Windows.Data;
 
 namespace Manager.Converters
 {
-	class DoubleToVisibilityConverter : IValueConverter
-	{
-		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			double number = value as double? ?? 0;
-			if (number > 0) return Visibility.Visible;
-			return Visibility.Collapsed;
-		}
+    internal class DoubleToVisibilityConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double number = value as double? ?? 0;
+            if (number > 0)
+            {
+                return Visibility.Visible;
+            }
 
-		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-		{
-			return value;
-		}
-	}
+            return Visibility.Collapsed;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value;
+        }
+    }
 }

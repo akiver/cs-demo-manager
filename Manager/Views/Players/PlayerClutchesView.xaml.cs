@@ -2,11 +2,11 @@
 
 namespace Manager.Views.Players
 {
-	public partial class PlayerClutchesView : UserControl
-	{
-		public PlayerClutchesView()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class PlayerClutchesView : UserControl
+    {
+        public PlayerClutchesView()
+        {
+            InitializeComponent();
+        }
+    }
 }

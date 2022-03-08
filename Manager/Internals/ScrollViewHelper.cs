@@ -6,63 +6,81 @@ using System.Windows.Media;
 
 namespace Manager.Internals
 {
-	public static class ScrollViewerHelper
-	{
-		public static readonly DependencyProperty ShiftWheelScrollsHorizontallyProperty
-			= DependencyProperty.RegisterAttached("ShiftWheelScrollsHorizontally",
-				typeof(bool),
-				typeof(ScrollViewerHelper),
-				new PropertyMetadata(false, UseHorizontalScrollingChangedCallback));
+    public static class ScrollViewerHelper
+    {
+        public static readonly DependencyProperty ShiftWheelScrollsHorizontallyProperty
+            = DependencyProperty.RegisterAttached("ShiftWheelScrollsHorizontally",
+                typeof(bool),
+                typeof(ScrollViewerHelper),
+                new PropertyMetadata(false, UseHorizontalScrollingChangedCallback));
 
-		private static void UseHorizontalScrollingChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
-		{
-			var element = d as UIElement;
+        private static void UseHorizontalScrollingChangedCallback(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var element = d as UIElement;
 
-			if (element == null)
-				throw new Exception("Attached property must be used with UIElement.");
+            if (element == null)
+            {
+                throw new Exception("Attached property must be used with UIElement.");
+            }
 
-			if ((bool)e.NewValue)
-				element.PreviewMouseWheel += OnPreviewMouseWheel;
-			else
-				element.PreviewMouseWheel -= OnPreviewMouseWheel;
-		}
+            if ((bool)e.NewValue)
+            {
+                element.PreviewMouseWheel += OnPreviewMouseWheel;
+            }
+            else
+            {
+                element.PreviewMouseWheel -= OnPreviewMouseWheel;
+            }
+        }
 
-		private static void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)
-		{
-			var scrollViewer = ((UIElement)sender).FindDescendant<ScrollViewer>();
+        private static void OnPreviewMouseWheel(object sender, MouseWheelEventArgs args)
+        {
+            var scrollViewer = ((UIElement)sender).FindDescendant<ScrollViewer>();
 
-			if (scrollViewer == null)
-				return;
+            if (scrollViewer == null)
+            {
+                return;
+            }
 
-			if (args.Delta < 0)
-				scrollViewer.LineRight();
-			else
-				scrollViewer.LineLeft();
+            if (args.Delta < 0)
+            {
+                scrollViewer.LineRight();
+            }
+            else
+            {
+                scrollViewer.LineLeft();
+            }
 
-			args.Handled = true;
-		}
+            args.Handled = true;
+        }
 
-		public static void SetUseHorizontalScrolling(ItemsControl element, bool value) => element.SetValue(ShiftWheelScrollsHorizontallyProperty, value);
-		public static bool GetUseHorizontalScrolling(ItemsControl element) => (bool)element.GetValue(ShiftWheelScrollsHorizontallyProperty);
+        public static void SetUseHorizontalScrolling(ItemsControl element, bool value) =>
+            element.SetValue(ShiftWheelScrollsHorizontallyProperty, value);
 
-		private static T FindDescendant<T>(this DependencyObject d) where T : DependencyObject
-		{
-			if (d == null)
-				return null;
+        public static bool GetUseHorizontalScrolling(ItemsControl element) => (bool)element.GetValue(ShiftWheelScrollsHorizontallyProperty);
 
-			var childCount = VisualTreeHelper.GetChildrenCount(d);
+        private static T FindDescendant<T>(this DependencyObject d) where T : DependencyObject
+        {
+            if (d == null)
+            {
+                return null;
+            }
 
-			for (var i = 0; i < childCount; i++)
-			{
-				var child = VisualTreeHelper.GetChild(d, i);
+            var childCount = VisualTreeHelper.GetChildrenCount(d);
 
-				var result = child as T ?? FindDescendant<T>(child);
+            for (var i = 0; i < childCount; i++)
+            {
+                var child = VisualTreeHelper.GetChild(d, i);
 
-				if (result != null)
-					return result;
-			}
+                var result = child as T ?? FindDescendant<T>(child);
 
-			return null;
-		}
-	}
+                if (result != null)
+                {
+                    return result;
+                }
+            }
+
+            return null;
+        }
+    }
 }

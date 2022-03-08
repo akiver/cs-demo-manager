@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DemoInfo.DP
 {
-	#if SLOW_PROTOBUF
+#if SLOW_PROTOBUF
 	using ProtoBuf;
 
 	/// <summary>
@@ -32,5 +32,5 @@ namespace DemoInfo.DP
 		/// <value>The priority.</value>
 		int Priority { get; }
     }
-	#endif
+#endif
 }

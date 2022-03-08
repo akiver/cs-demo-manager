@@ -14,47 +14,47 @@ using Services.Models.ThirdParties.Responses;
 
 namespace Services.Concrete.ThirdParties
 {
-	public class CsgoDashStatsService : IThirdPartyInterface
-	{
-		private const string ENDPOINT = "https://csgo-stats.net/api/match/status";
+    public class CsgoDashStatsService : IThirdPartyInterface
+    {
+        private const string ENDPOINT = "https://csgo-stats.net/api/match/status";
 
-		public async Task<ThirdPartyData> SendShareCode(Demo demo, string shareCode)
-		{
-			ThirdPartyData data = new ThirdPartyData { Success = false };
+        public async Task<ThirdPartyData> SendShareCode(Demo demo, string shareCode)
+        {
+            ThirdPartyData data = new ThirdPartyData { Success = false };
 
-			using (var client = new HttpClient())
-			{
-				ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-				try
-				{
-					Dictionary<string, string> parameters = new Dictionary<string, string> {
-						{ "sharecode", shareCode }
-					};
+            using (var client = new HttpClient())
+            {
+                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                try
+                {
+                    Dictionary<string, string> parameters = new Dictionary<string, string>
+                    {
+                        { "sharecode", shareCode },
+                    };
 
-					var content = new FormUrlEncodedContent(parameters);
+                    var content = new FormUrlEncodedContent(parameters);
 
-					HttpResponseMessage response = await client.PostAsync(ENDPOINT, content);
+                    HttpResponseMessage response = await client.PostAsync(ENDPOINT, content);
 
-					if (response.StatusCode == HttpStatusCode.OK && response.Content != null)
-					{
-						string responseString = await response.Content.ReadAsStringAsync();
+                    if (response.StatusCode == HttpStatusCode.OK && response.Content != null)
+                    {
+                        string responseString = await response.Content.ReadAsStringAsync();
 
-						CsgoDashStatsResponse jsonObject = JsonConvert.DeserializeObject<CsgoDashStatsResponse>(responseString);
-						if (jsonObject != null)
-						{
-							data.Success = true;
-							data.DemoUrl = $"https://csgo-stats.net/search?q={shareCode}";
-						}
-					}
+                        CsgoDashStatsResponse jsonObject = JsonConvert.DeserializeObject<CsgoDashStatsResponse>(responseString);
+                        if (jsonObject != null)
+                        {
+                            data.Success = true;
+                            data.DemoUrl = $"https://csgo-stats.net/search?q={shareCode}";
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Logger.Instance.Log(e);
+                }
+            }
 
-				}
-				catch (Exception e)
-				{
-					Logger.Instance.Log(e);
-				}
-			}
-
-			return data;
-		}
-	}
+            return data;
+        }
+    }
 }

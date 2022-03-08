@@ -1,223 +1,222 @@
 ﻿<UserControl x:Class="Manager.Views.Accounts.AccountRankView"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-			 xmlns:command="http://www.galasoft.ch/mvvmlight"
-			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 xmlns:properties="clr-namespace:Manager.Properties"
-			 mc:Ignorable="d"
-			 d:DesignHeight="720"
-			 d:DesignWidth="1280"
-			 DataContext="{Binding AccountRank, Source={StaticResource Locator}}">
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+             xmlns:properties="clr-namespace:Manager.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1280"
+             DataContext="{Binding AccountRank, Source={StaticResource Locator}}">
 
-	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding BackToHomeCommand}"
-					Gesture="CTRL+B" />
-		<KeyBinding Command="{Binding GoToOverallCommand}"
-					Gesture="CTRL+O" />
-		<KeyBinding Command="{Binding GoToMapCommand}"
-					Gesture="CTRL+M" />
-		<KeyBinding Command="{Binding GoToWeaponCommand}"
-					Gesture="CTRL+W" />
-		<KeyBinding Command="{Binding GoToProgressCommand}"
-					Gesture="CTRL+P" />
-		<mouse:MouseBindingExtended Gesture="XButton1"
-									Command="{Binding BackToHomeCommand}" />
-	</UserControl.InputBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding BackToHomeCommand}"
+                    Gesture="CTRL+B" />
+        <KeyBinding Command="{Binding GoToOverallCommand}"
+                    Gesture="CTRL+O" />
+        <KeyBinding Command="{Binding GoToMapCommand}"
+                    Gesture="CTRL+M" />
+        <KeyBinding Command="{Binding GoToWeaponCommand}"
+                    Gesture="CTRL+W" />
+        <KeyBinding Command="{Binding GoToProgressCommand}"
+                    Gesture="CTRL+P" />
+        <mouse:MouseBindingExtended Gesture="XButton1"
+                                    Command="{Binding BackToHomeCommand}" />
+    </UserControl.InputBindings>
 
-	<i:Interaction.Triggers>
-		<i:EventTrigger EventName="Loaded">
-			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
-		</i:EventTrigger>
-	</i:Interaction.Triggers>
-	<Grid>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-		<Grid Grid.Row="0">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding BackToHomeCommand}"
-						ToolTip="{x:Static properties:Resources.ToolTipBack}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Back}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+        <Grid Grid.Row="0">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding BackToHomeCommand}"
+                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Back}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding GoToOverallCommand}"
-						ToolTip="{x:Static properties:Resources.ToolTipOverall}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_globe_wire}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Overall}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding GoToOverallCommand}"
+                        ToolTip="{x:Static properties:Resources.ToolTipOverall}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_globe_wire}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Overall}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<Button Style="{DynamicResource GeneralButton}"
-						IsEnabled="False"
-						ToolTip="{x:Static properties:Resources.ToolTipRank}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Rank}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Style="{DynamicResource GeneralButton}"
+                        IsEnabled="False"
+                        ToolTip="{x:Static properties:Resources.ToolTipRank}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Rank}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding GoToMapCommand}"
-						ToolTip="{x:Static properties:Resources.ToolTipMaps}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_map}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Maps}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding GoToMapCommand}"
+                        ToolTip="{x:Static properties:Resources.ToolTipMaps}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_map}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Maps}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding GoToWeaponCommand}"
-						ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
-							   Width="15"
-							   Height="15"/>
-						<TextBlock Text="{x:Static properties:Resources.Weapons}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding GoToWeaponCommand}"
+                        ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
+                               Width="15"
+                               Height="15" />
+                        <TextBlock Text="{x:Static properties:Resources.Weapons}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding GoToProgressCommand}"
-						ToolTip="{x:Static properties:Resources.ToolTipProgression}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_graph_line_up}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Progression}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding GoToProgressCommand}"
+                        ToolTip="{x:Static properties:Resources.ToolTipProgression}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_graph_line_up}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Progression}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<TextBlock Text="{x:Static properties:Resources.LabelScale}"
-						   Style="{StaticResource TextBlockStandard}"/>
-				<ComboBox ItemsSource="{Binding ScaleList}"
-						  SelectedItem="{Binding SelectedScale}"
-						  DisplayMemberPath ="Title"
-						  SelectedValuePath="Id"
-						  Margin="5" />
+                <TextBlock Text="{x:Static properties:Resources.LabelScale}"
+                           Style="{StaticResource TextBlockStandard}" />
+                <ComboBox ItemsSource="{Binding ScaleList}"
+                          SelectedItem="{Binding SelectedScale}"
+                          DisplayMemberPath="Title"
+                          SelectedValuePath="Id"
+                          Margin="5" />
 
-				<StackPanel Orientation="Horizontal"
-							HorizontalAlignment="Center">
-					<controls:ProgressRing IsActive="{Binding IsBusy}"
-										   Foreground="{DynamicResource BlackColorBrush}"
-										   Width="30"
-										   Height="30" />
-					<TextBlock Text="{Binding Notification}"
-							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				</StackPanel>
-			</StackPanel>
-		</Grid>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+                    <controls:ProgressRing IsActive="{Binding IsBusy}"
+                                           Foreground="{DynamicResource BlackColorBrush}"
+                                           Width="30"
+                                           Height="30" />
+                    <TextBlock Text="{Binding Notification}"
+                               Style="{StaticResource NotificationMessageStyle}"
+                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
 
-		<Grid Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="*"/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			
-			<telerik:RadCartesianChart Grid.Row="0"
-									   TooltipTemplate="{StaticResource RankToolTipTemplate}"
-									   ClipToBounds="False">
-				<telerik:RadCartesianChart.VerticalAxis>
-					<telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}"
-										MajorStep="1"
-										RangeExtendDirection="Both"/>
-				</telerik:RadCartesianChart.VerticalAxis>
-				<telerik:RadCartesianChart.HorizontalAxis>
-					<telerik:DateTimeCategoricalAxis LabelFormat="d"
-													 LabelStyle="{StaticResource LabelChartStyle}"
-													 LabelRotationAngle="45"
-													 LabelFitMode="Rotate" />
-				</telerik:RadCartesianChart.HorizontalAxis>
-				<telerik:RadCartesianChart.Behaviors>
-					<telerik:ChartPanAndZoomBehavior PanMode="Horizontal"
-													 ZoomMode="Horizontal"
-													 DragMode="Pan" />
-					<telerik:ChartTooltipBehavior />
-				</telerik:RadCartesianChart.Behaviors>
-				<telerik:LineSeries ItemsSource="{Binding Datas}"
-									CategoryBinding="Date"
-									ValueBinding="NewRank"
-									StrokeThickness="3"
-									Stroke="{StaticResource LightGreenBrush}"
-									PointTemplateSelector="{StaticResource RankPointTemplateSelector}">
-				</telerik:LineSeries>
-				<telerik:RadCartesianChart.Grid>
-					<telerik:CartesianChartGrid MajorLinesVisibility="X" />
-				</telerik:RadCartesianChart.Grid>
-			</telerik:RadCartesianChart>
-			
-			<telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom"
-							   HorizontalAlignment="Center"
-							   Foreground="{StaticResource LightWhiteBrush}">
-				<telerik:RadLegend.ItemsPanel>
-					<ItemsPanelTemplate>
-						<StackPanel Orientation="Horizontal" />
-					</ItemsPanelTemplate>
-				</telerik:RadLegend.ItemsPanel>
-				<telerik:RadLegend.Items>
-					<telerik:LegendItemCollection>
-						<telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
-											Title="{x:Static properties:Resources.Win}" />
-						<telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
-											Title="{x:Static properties:Resources.Loss}" />
-						<telerik:LegendItem MarkerFill="{StaticResource BlueBrush}"
-											Title="{x:Static properties:Resources.Draw}" />
-					</telerik:LegendItemCollection>
-				</telerik:RadLegend.Items>
-			</telerik:RadLegend>
-		</Grid>
-	</Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <telerik:RadCartesianChart Grid.Row="0"
+                                       TooltipTemplate="{StaticResource RankToolTipTemplate}"
+                                       ClipToBounds="False">
+                <telerik:RadCartesianChart.VerticalAxis>
+                    <telerik:LinearAxis LabelTemplate="{StaticResource RankAxisTemplate}"
+                                        MajorStep="1"
+                                        RangeExtendDirection="Both" />
+                </telerik:RadCartesianChart.VerticalAxis>
+                <telerik:RadCartesianChart.HorizontalAxis>
+                    <telerik:DateTimeCategoricalAxis LabelFormat="d"
+                                                     LabelStyle="{StaticResource LabelChartStyle}"
+                                                     LabelRotationAngle="45"
+                                                     LabelFitMode="Rotate" />
+                </telerik:RadCartesianChart.HorizontalAxis>
+                <telerik:RadCartesianChart.Behaviors>
+                    <telerik:ChartPanAndZoomBehavior PanMode="Horizontal"
+                                                     ZoomMode="Horizontal"
+                                                     DragMode="Pan" />
+                    <telerik:ChartTooltipBehavior />
+                </telerik:RadCartesianChart.Behaviors>
+                <telerik:LineSeries ItemsSource="{Binding Datas}"
+                                    CategoryBinding="Date"
+                                    ValueBinding="NewRank"
+                                    StrokeThickness="3"
+                                    Stroke="{StaticResource LightGreenBrush}"
+                                    PointTemplateSelector="{StaticResource RankPointTemplateSelector}" />
+                <telerik:RadCartesianChart.Grid>
+                    <telerik:CartesianChartGrid MajorLinesVisibility="X" />
+                </telerik:RadCartesianChart.Grid>
+            </telerik:RadCartesianChart>
+
+            <telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom"
+                               HorizontalAlignment="Center"
+                               Foreground="{StaticResource LightWhiteBrush}">
+                <telerik:RadLegend.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </telerik:RadLegend.ItemsPanel>
+                <telerik:RadLegend.Items>
+                    <telerik:LegendItemCollection>
+                        <telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
+                                            Title="{x:Static properties:Resources.Win}" />
+                        <telerik:LegendItem MarkerFill="{StaticResource RedColorBrush}"
+                                            Title="{x:Static properties:Resources.Loss}" />
+                        <telerik:LegendItem MarkerFill="{StaticResource BlueBrush}"
+                                            Title="{x:Static properties:Resources.Draw}" />
+                    </telerik:LegendItemCollection>
+                </telerik:RadLegend.Items>
+            </telerik:RadLegend>
+        </Grid>
+    </Grid>
 </UserControl>

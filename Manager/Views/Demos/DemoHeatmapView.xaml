@@ -1,253 +1,253 @@
 ﻿<UserControl x:Class="Manager.Views.Demos.DemoHeatmapView"
-			 xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-			 xmlns:command="http://www.galasoft.ch/mvvmlight"
-			 xmlns:converters="clr-namespace:Manager.Converters"
-			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 xmlns:multiSelect="clr-namespace:Manager.Internals.MultiSelect"
-			 xmlns:properties="clr-namespace:Manager.Properties"
-			 mc:Ignorable="d"
-			 d:DesignHeight="720"
-			 d:DesignWidth="1280"
-			 DataContext="{Binding DemoHeatmap, Source={StaticResource Locator}}">
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:converters="clr-namespace:Manager.Converters"
+             xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+             xmlns:multiSelect="clr-namespace:Manager.Internals.MultiSelect"
+             xmlns:properties="clr-namespace:Manager.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1280"
+             DataContext="{Binding DemoHeatmap, Source={StaticResource Locator}}">
 
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<converters:BooleanToVisibilityConverter  x:Key="BooleanToVisibilityConverter" />
-			<converters:BooleanInvertedConverter  x:Key="BooleanInvertedConverter" />
-		</ResourceDictionary>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}"
-					Gesture="CTRL+B" />
-		<KeyBinding Command="{Binding GenerateCommand}"
-					Gesture="CTRL+G" />
-		<KeyBinding Command="{Binding ExportCommand}"
-					Gesture="CTRL+S" />
-		<mouse:MouseBindingExtended Gesture="XButton1"
-									Command="{Binding BackToDemoDetailsCommand}"
-									CommandParameter="{Binding Demo}" />
-	</UserControl.InputBindings>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}"
+                    Gesture="CTRL+B" />
+        <KeyBinding Command="{Binding GenerateCommand}"
+                    Gesture="CTRL+G" />
+        <KeyBinding Command="{Binding ExportCommand}"
+                    Gesture="CTRL+S" />
+        <mouse:MouseBindingExtended Gesture="XButton1"
+                                    Command="{Binding BackToDemoDetailsCommand}"
+                                    CommandParameter="{Binding Demo}" />
+    </UserControl.InputBindings>
 
-	<i:Interaction.Triggers>
-		<i:EventTrigger EventName="Loaded">
-			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
-		</i:EventTrigger>
-	</i:Interaction.Triggers>
-	
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-		<!-- ActionBar-->
-		<Grid Grid.Row="0"
-			  Height="40">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{DynamicResource GeneralButton}"
-						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding Demo}"
-						ToolTip="{x:Static properties:Resources.ToolTipBack}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Back}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-				<ComboBox ItemsSource="{Binding EventSelectors}"
-						  SelectedItem="{Binding CurrentEventSelector}"
-						  DisplayMemberPath ="Title"
-						  SelectedValuePath="Title"
-						  Margin="5"
-						  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"/>
-				<Button Command="{Binding GenerateCommand}"
-						Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipGenerateHeatmap}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_draw_pixel_fill_grid}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Generate}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-				<Button Command="{Binding ExportCommand}"
-						Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipSaveAsPng}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_page_png}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Export}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-				<StackPanel Orientation="Horizontal">
-					<TextBlock Text="{x:Static properties:Resources.Opacity}"
-							   Style="{StaticResource TextBlockStandard}"
-							   Margin="5"/>
-					<Slider Minimum="0"
-							Maximum="255"
-							LargeChange="1"
-							SmallChange="1"
-							Width="150"
-							Margin="5 0 0 0"
-							VerticalAlignment="Center"
-							Value="{Binding Opacity}"
-							IsEnabled="{Binding HasGeneratedHeatmap}"/>
-				</StackPanel>
+        <!-- ActionBar-->
+        <Grid Grid.Row="0"
+              Height="40">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource GeneralButton}"
+                        Command="{Binding BackToDemoDetailsCommand}"
+                        CommandParameter="{Binding Demo}"
+                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Back}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
+                <ComboBox ItemsSource="{Binding EventSelectors}"
+                          SelectedItem="{Binding CurrentEventSelector}"
+                          DisplayMemberPath="Title"
+                          SelectedValuePath="Title"
+                          Margin="5"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
+                <Button Command="{Binding GenerateCommand}"
+                        Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipGenerateHeatmap}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_draw_pixel_fill_grid}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Generate}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
+                <Button Command="{Binding ExportCommand}"
+                        Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipSaveAsPng}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_page_png}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Export}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
 
-				<StackPanel Orientation="Horizontal"
-							VerticalAlignment="Center"
-							Margin="5">
-					<controls:ProgressRing IsActive="{Binding IsBusy}"
-										   Foreground="{DynamicResource BlackColorBrush}"
-										   Width="30"
-										   Height="30" />
-					<TextBlock Text="{x:Static properties:Resources.NotificationGenerating}"
-							   Style="{StaticResource NotificationMessageStyle}"
-							   Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"/>
-				</StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{x:Static properties:Resources.Opacity}"
+                               Style="{StaticResource TextBlockStandard}"
+                               Margin="5" />
+                    <Slider Minimum="0"
+                            Maximum="255"
+                            LargeChange="1"
+                            SmallChange="1"
+                            Width="150"
+                            Margin="5 0 0 0"
+                            VerticalAlignment="Center"
+                            Value="{Binding Opacity}"
+                            IsEnabled="{Binding HasGeneratedHeatmap}" />
+                </StackPanel>
 
-			</StackPanel>
-		</Grid>
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            Margin="5">
+                    <controls:ProgressRing IsActive="{Binding IsBusy}"
+                                           Foreground="{DynamicResource BlackColorBrush}"
+                                           Width="30"
+                                           Height="30" />
+                    <TextBlock Text="{x:Static properties:Resources.NotificationGenerating}"
+                               Style="{StaticResource NotificationMessageStyle}"
+                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                </StackPanel>
 
-		<Grid Grid.Row="1"
-			  HorizontalAlignment="Center">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto"/>
-				<ColumnDefinition Width="Auto" />
-				<ColumnDefinition Width="*"/>
-			</Grid.ColumnDefinitions>
-			
-			<Grid Grid.Column="0"
-				  Margin="10">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
+            </StackPanel>
+        </Grid>
 
-				<StackPanel Orientation="Horizontal"
-							Grid.Row="0">
-					<TextBlock Text="{x:Static properties:Resources.Sides}"
-							   Style="{StaticResource TextBlockStandard}"/>
-					<Button Content="{x:Static properties:Resources.All}"
-							Command="{Binding SelectAllSideCommand}"
-							Style="{DynamicResource GeneralButton}"
-							Margin="5 0 0 0" />
-					<Button Content="{x:Static properties:Resources.Clear}"
-							Command="{Binding ClearSelectedSideCommand}"
-							Style="{DynamicResource GeneralButton}"
-							Margin="5 0 0 0" />
-				</StackPanel>
-				<ListBox Name="SideListBox"
-						 Grid.Row="1"
-						 Margin="10"
-						 ItemsSource="{Binding Sides}"
-						 SelectionMode="Extended"
-						 multiSelect:MultiSelect.IsEnabled="True"
-						 DisplayMemberPath="Title"
-						 SelectedValuePath="Title"/>
-				<StackPanel Orientation="Horizontal"
-							Grid.Row="2">
-					<TextBlock Text="{x:Static properties:Resources.Players}"
-							   Style="{StaticResource TextBlockStandard}"/>
-					<Button Content="{x:Static properties:Resources.All}"
-							Command="{Binding SelectAllPlayerCommand}"
-							Style="{DynamicResource GeneralButton}"
-							Margin="5 0 0 0" />
-					<Button Content="{x:Static properties:Resources.Clear}"
-							Command="{Binding ClearSelectedPlayerCommand}"
-							Style="{DynamicResource GeneralButton}"
-							Margin="5 0 0 0"/>
-				</StackPanel>
-				<ListBox Name="PlayerListBox"
-						 Margin="10"
-						 Grid.Row="3"
-						 ItemsSource="{Binding Players}"
-						 SelectionMode="Extended"
-						 multiSelect:MultiSelect.IsEnabled="True"
-						 DisplayMemberPath="Name"
-						 SelectedValuePath="Name"/>
-			</Grid>
-			
-			<Grid Grid.Column="1">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="*"/>
-				</Grid.RowDefinitions>
-				
-				<StackPanel Orientation="Horizontal"
-							Grid.Row="0">
-					<TextBlock Text="{x:Static properties:Resources.Rounds}"
-							   Style="{StaticResource TextBlockStandard}"/>
-					<Button Content="{x:Static properties:Resources.All}"
-							Command="{Binding SelectAllRoundCommand}"
-							Style="{DynamicResource GeneralButton}"
-							Margin="5 0 0 0" />
-					<Button Content="{x:Static properties:Resources.Clear}"
-							Command="{Binding ClearSelectedRoundCommand}"
-							Style="{DynamicResource GeneralButton}"
-							Margin="5 0 0 0" />
-				</StackPanel>
+        <Grid Grid.Row="1"
+              HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-				<Grid Grid.Row="1">
-					<ListBox Name="RoundListBox"
-							 Margin="10"
-							 ItemsSource="{Binding Rounds}"
-							 SelectionMode="Extended"
-							 multiSelect:MultiSelect.IsEnabled="True"
-							 DisplayMemberPath="Number"
-							 ScrollViewer.VerticalScrollBarVisibility="Visible"
-							 SelectedValuePath="Number"/>
-				</Grid>
-				
-			</Grid>
-			
-			<Grid Grid.Column="2">
-				<Image Source="{Binding OverviewLayer}"
-					   Stretch="Uniform"
-					   Width="Auto"
-					   Height="Auto"
-					   Margin="10"
-					   HorizontalAlignment="Stretch"
-					   VerticalAlignment="Stretch"/>
-				<Image Source="{Binding ColorsLayer}"
-					   Stretch="Uniform"
-					   Width="Auto"
-					   Height="Auto"
-					   Margin="10"
-					   HorizontalAlignment="Stretch"
-					   VerticalAlignment="Stretch"/>
-			</Grid>
-		</Grid>
-		
-	</Grid>
+            <Grid Grid.Column="0"
+                  Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0">
+                    <TextBlock Text="{x:Static properties:Resources.Sides}"
+                               Style="{StaticResource TextBlockStandard}" />
+                    <Button Content="{x:Static properties:Resources.All}"
+                            Command="{Binding SelectAllSideCommand}"
+                            Style="{DynamicResource GeneralButton}"
+                            Margin="5 0 0 0" />
+                    <Button Content="{x:Static properties:Resources.Clear}"
+                            Command="{Binding ClearSelectedSideCommand}"
+                            Style="{DynamicResource GeneralButton}"
+                            Margin="5 0 0 0" />
+                </StackPanel>
+                <ListBox Name="SideListBox"
+                         Grid.Row="1"
+                         Margin="10"
+                         ItemsSource="{Binding Sides}"
+                         SelectionMode="Extended"
+                         multiSelect:MultiSelect.IsEnabled="True"
+                         DisplayMemberPath="Title"
+                         SelectedValuePath="Title" />
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="2">
+                    <TextBlock Text="{x:Static properties:Resources.Players}"
+                               Style="{StaticResource TextBlockStandard}" />
+                    <Button Content="{x:Static properties:Resources.All}"
+                            Command="{Binding SelectAllPlayerCommand}"
+                            Style="{DynamicResource GeneralButton}"
+                            Margin="5 0 0 0" />
+                    <Button Content="{x:Static properties:Resources.Clear}"
+                            Command="{Binding ClearSelectedPlayerCommand}"
+                            Style="{DynamicResource GeneralButton}"
+                            Margin="5 0 0 0" />
+                </StackPanel>
+                <ListBox Name="PlayerListBox"
+                         Margin="10"
+                         Grid.Row="3"
+                         ItemsSource="{Binding Players}"
+                         SelectionMode="Extended"
+                         multiSelect:MultiSelect.IsEnabled="True"
+                         DisplayMemberPath="Name"
+                         SelectedValuePath="Name" />
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <StackPanel Orientation="Horizontal"
+                            Grid.Row="0">
+                    <TextBlock Text="{x:Static properties:Resources.Rounds}"
+                               Style="{StaticResource TextBlockStandard}" />
+                    <Button Content="{x:Static properties:Resources.All}"
+                            Command="{Binding SelectAllRoundCommand}"
+                            Style="{DynamicResource GeneralButton}"
+                            Margin="5 0 0 0" />
+                    <Button Content="{x:Static properties:Resources.Clear}"
+                            Command="{Binding ClearSelectedRoundCommand}"
+                            Style="{DynamicResource GeneralButton}"
+                            Margin="5 0 0 0" />
+                </StackPanel>
+
+                <Grid Grid.Row="1">
+                    <ListBox Name="RoundListBox"
+                             Margin="10"
+                             ItemsSource="{Binding Rounds}"
+                             SelectionMode="Extended"
+                             multiSelect:MultiSelect.IsEnabled="True"
+                             DisplayMemberPath="Number"
+                             ScrollViewer.VerticalScrollBarVisibility="Visible"
+                             SelectedValuePath="Number" />
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Image Source="{Binding OverviewLayer}"
+                       Stretch="Uniform"
+                       Width="Auto"
+                       Height="Auto"
+                       Margin="10"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch" />
+                <Image Source="{Binding ColorsLayer}"
+                       Stretch="Uniform"
+                       Width="Auto"
+                       Height="Auto"
+                       Margin="10"
+                       HorizontalAlignment="Stretch"
+                       VerticalAlignment="Stretch" />
+            </Grid>
+        </Grid>
+
+    </Grid>
 </UserControl>

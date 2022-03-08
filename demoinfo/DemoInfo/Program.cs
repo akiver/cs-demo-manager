@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace DemoInfo
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
         }
     }

@@ -358,7 +358,7 @@
           <source>HLTV</source>
           <target state="final">HLTV</target>
         </trans-unit>
-		  <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2</source>
           <target state="final">HLTV2</target>
         </trans-unit>
@@ -1118,7 +1118,7 @@
           <source>HLTV Rating</source>
           <target state="final">HLTV értékelés</target>
         </trans-unit>
-		  <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2 Rating</source>
           <target state="final">HLTV2 értékelés</target>
         </trans-unit>
@@ -1506,7 +1506,7 @@
           <source>HLTV (HLTV Rating)</source>
           <target state="final">HLTV (HLTV értékelés)</target>
         </trans-unit>
-		  <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
+        <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
           <source>HLTV2 (HLTV2 Rating)</source>
           <target state="final">HLTV2 (HLTV2 értékelés)</target>
         </trans-unit>

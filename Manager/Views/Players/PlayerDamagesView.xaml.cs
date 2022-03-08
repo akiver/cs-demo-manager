@@ -2,11 +2,11 @@
 
 namespace Manager.Views.Players
 {
-	public partial class PlayerDamagesView : UserControl
-	{
-		public PlayerDamagesView()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class PlayerDamagesView : UserControl
+    {
+        public PlayerDamagesView()
+        {
+            InitializeComponent();
+        }
+    }
 }

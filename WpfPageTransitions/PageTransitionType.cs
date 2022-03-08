@@ -5,16 +5,16 @@ using System.Text;
 
 namespace WpfPageTransitions
 {
-	public enum PageTransitionType
-	{
-		Fade,
-		Slide,
-		SlideAndFade,
-		Grow,
-		GrowAndFade,
-		Flip,
-		FlipAndFade,
-		Spin,
-		SpinAndFade
-	}
+    public enum PageTransitionType
+    {
+        Fade,
+        Slide,
+        SlideAndFade,
+        Grow,
+        GrowAndFade,
+        Flip,
+        FlipAndFade,
+        Spin,
+        SpinAndFade,
+    }
 }

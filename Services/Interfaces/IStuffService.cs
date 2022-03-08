@@ -5,8 +5,8 @@ using Demo = Core.Models.Demo;
 
 namespace Services.Interfaces
 {
-	public interface IStuffService
-	{
-		Task<List<Stuff>> GetStuffPointListAsync(Demo demo, StuffType type);
-	}
+    public interface IStuffService
+    {
+        Task<List<Stuff>> GetStuffPointListAsync(Demo demo, StuffType type);
+    }
 }

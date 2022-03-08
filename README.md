@@ -148,6 +148,13 @@ For example **"8 demo(s) have been downloaded."**
 
 - Since English is the fallback language, if an existing resource from the English files changed, all others resources languages files are updated and the changed resources are set to "Needs review". You are free to check if some resources of your language have the status "Needs review" and create a pull request with the final translation.
 
+## Code formatting
+
+1. Download the [Resharper CLI](https://www.jetbrains.com/resharper/download/#section=commandline) and extract it
+2. `./cleanupcode.exe --profile=format "path/to/CSGO Demos Manager.sln"`
+
+To format the code and also apply syntax styles, use the profile `--profile=format-syntax`
+
 ## License
 
 [GPL v2](https://github.com/akiver/CSGO-Demos-Manager/blob/master/LICENSE)

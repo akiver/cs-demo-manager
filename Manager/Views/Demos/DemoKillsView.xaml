@@ -1,434 +1,434 @@
 ﻿<UserControl x:Class="Manager.Views.Demos.DemoKillsView"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
-			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-			 xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-			 xmlns:command="http://www.galasoft.ch/mvvmlight"
-			 xmlns:converters="clr-namespace:Manager.Converters"
-			 xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-			 xmlns:properties="clr-namespace:Manager.Properties"
-			 mc:Ignorable="d"
-			 d:DesignHeight="720"
-			 d:DesignWidth="1280"
-			 DataContext="{Binding DemoKills, Source={StaticResource Locator}}">
-	
-	<UserControl.Resources>
-		<ResourceDictionary>
-			<converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
-												 True="{x:Static properties:Resources.Yes}"
-												 False="{x:Static properties:Resources.No}"/>
-		</ResourceDictionary>
-	</UserControl.Resources>
-	
-	<UserControl.InputBindings>
-		<KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}"
-					Gesture="CTRL+B" />
-		<mouse:MouseBindingExtended Gesture="XButton1"
-					Command="{Binding BackToDemoDetailsCommand}"
-					CommandParameter="{Binding Demo}" />
-	</UserControl.InputBindings>
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:converters="clr-namespace:Manager.Converters"
+             xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+             xmlns:properties="clr-namespace:Manager.Properties"
+             mc:Ignorable="d"
+             d:DesignHeight="720"
+             d:DesignWidth="1280"
+             DataContext="{Binding DemoKills, Source={StaticResource Locator}}">
 
-	<i:Interaction.Triggers>
-		<i:EventTrigger EventName="Loaded">
-			<command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
-		</i:EventTrigger>
-	</i:Interaction.Triggers>
-	
-	<Grid>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
+                                                 True="{x:Static properties:Resources.Yes}"
+                                                 False="{x:Static properties:Resources.No}" />
+        </ResourceDictionary>
+    </UserControl.Resources>
 
-		<Grid Grid.Row="0"
-			  Height="40">
-			<StackPanel Orientation="Horizontal">
-				<Button Style="{DynamicResource GeneralButton}"
-						ToolTip="{x:Static properties:Resources.ToolTipBack}"
-						Command="{Binding BackToDemoDetailsCommand}"
-						CommandParameter="{Binding Demo}">
-					<StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-						<Rectangle Width="15"
-								   Height="15"
-								   Fill="{StaticResource IdealForegroundColorBrush}">
-							<Rectangle.OpacityMask>
-								<VisualBrush Visual="{StaticResource appbar_arrow_left}"
-											 Stretch="Fill" />
-							</Rectangle.OpacityMask>
-						</Rectangle>
-						<TextBlock Text="{x:Static properties:Resources.Back}"
-								   Style="{StaticResource ButtonTitleStyle}" />
-					</StackPanel>
-				</Button>
-			</StackPanel>
-		</Grid>
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}"
+                    Gesture="CTRL+B" />
+        <mouse:MouseBindingExtended Gesture="XButton1"
+                                    Command="{Binding BackToDemoDetailsCommand}"
+                                    CommandParameter="{Binding Demo}" />
+    </UserControl.InputBindings>
 
-		<Grid Grid.Row="1">
-			<TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
-				<controls:MetroTabItem Header="{x:Static properties:Resources.EntryKills}">
-					<Grid>
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
-						<Border Grid.Column="0"
-								BorderBrush="{StaticResource HighlightBrush}"
-								BorderThickness="1" >
-							<Grid Margin="5 0 5 5">
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="*" />
-								</Grid.RowDefinitions>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-								<Grid Grid.Row="0">
-									<StackPanel Orientation="Horizontal"
-												HorizontalAlignment="Center">
-										<TextBlock Text="{x:Static properties:Resources.EntryHoldKills}"
-												   Style="{StaticResource BigTitleStyle}">
-											<Run Text=" "/>
-										</TextBlock>
-										<TextBlock Text="{x:Static properties:Resources.DescriptionEntryHoldKills}"
-												   Style="{StaticResource SmallTitleStyle}" />
-									</StackPanel>
-								</Grid>
+        <Grid Grid.Row="0"
+              Height="40">
+            <StackPanel Orientation="Horizontal">
+                <Button Style="{DynamicResource GeneralButton}"
+                        ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                        Command="{Binding BackToDemoDetailsCommand}"
+                        CommandParameter="{Binding Demo}">
+                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
+                        <Rectangle Width="15"
+                                   Height="15"
+                                   Fill="{StaticResource IdealForegroundColorBrush}">
+                            <Rectangle.OpacityMask>
+                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
+                                             Stretch="Fill" />
+                            </Rectangle.OpacityMask>
+                        </Rectangle>
+                        <TextBlock Text="{x:Static properties:Resources.Back}"
+                                   Style="{StaticResource ButtonTitleStyle}" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
 
-								<Grid Grid.Row="1">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
-									</Grid.ColumnDefinitions>
+        <Grid Grid.Row="1">
+            <TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
+                <controls:MetroTabItem Header="{x:Static properties:Resources.EntryKills}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
 
-									<Grid Grid.Column="0" Margin="5">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="Auto"/>
-											<ColumnDefinition Width="*"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="*" />
-										</Grid.RowDefinitions>
+                        <Border Grid.Column="0"
+                                BorderBrush="{StaticResource HighlightBrush}"
+                                BorderThickness="1">
+                            <Grid Margin="5 0 5 5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-										<TextBlock Grid.Row="0"
-												   Text="{x:Static properties:Resources.Rounds}"
-												   Style="{StaticResource SmallTitleStyle}"
-												   Grid.ColumnSpan="2"/>
-										<DataGrid Grid.Row="1"
-												  Grid.Column="0"
-												  ItemsSource="{Binding Demo.Rounds, IsAsync=True}"
-												  Style="{StaticResource DataGridStyle}"
-												  Grid.ColumnSpan="2">
-											<DataGrid.Columns>
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
-																	Width="Auto"
-																	Header="#"
-																	Binding="{Binding Number}"/>
-												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderKiller}"
-																	Binding="{Binding EntryHoldKillEvent.KillerName}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderVictim}"
-																	Binding="{Binding EntryHoldKillEvent.KilledName}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderWeapon}"
-																	Binding="{Binding EntryHoldKillEvent.Weapon.Name}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderRoundWon}"
-																	Binding="{Binding EntryHoldKillEvent.HasWonRound, Converter={StaticResource BooleanToStringConverter}}" />
-											</DataGrid.Columns>
-										</DataGrid>
-									</Grid>
+                                <Grid Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <TextBlock Text="{x:Static properties:Resources.EntryHoldKills}"
+                                                   Style="{StaticResource BigTitleStyle}">
+                                            <Run Text=" " />
+                                        </TextBlock>
+                                        <TextBlock Text="{x:Static properties:Resources.DescriptionEntryHoldKills}"
+                                                   Style="{StaticResource SmallTitleStyle}" />
+                                    </StackPanel>
+                                </Grid>
 
-									<Grid Grid.Column="1"
-										  Margin="5">
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="*" />
-											<RowDefinition Height="*" />
-										</Grid.RowDefinitions>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-										<TextBlock Grid.Row="0"
-												   Text="{x:Static properties:Resources.Players}"
-												   Style="{StaticResource SmallTitleStyle}"/>
-										<DataGrid Grid.Row="1"
-												  ItemsSource="{Binding Demo.Players}"
-												  Style="{StaticResource DataGridStyle}">
-											<DataGrid.Columns>
-												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.Name}"
-																	Binding="{Binding Name}"/>
-												<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.Total}"
-																	Binding="{Binding EntryHoldKills.Count}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderRoundWon}"
-																	Binding="{Binding EntryHoldKillWonCount}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderRoundLost}"
-																	Binding="{Binding EntryHoldKillLossCount}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.Ratio}"
-																	Binding="{Binding RatioEntryHoldKill, StringFormat='{}{0}%'}" />
-											</DataGrid.Columns>
-										</DataGrid>
+                                    <Grid Grid.Column="0" Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
 
-										<Grid Grid.Row="2"
-											  Margin="5">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="*" />
-											</Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0"
+                                                   Text="{x:Static properties:Resources.Rounds}"
+                                                   Style="{StaticResource SmallTitleStyle}"
+                                                   Grid.ColumnSpan="2" />
+                                        <DataGrid Grid.Row="1"
+                                                  Grid.Column="0"
+                                                  ItemsSource="{Binding Demo.Rounds, IsAsync=True}"
+                                                  Style="{StaticResource DataGridStyle}"
+                                                  Grid.ColumnSpan="2">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+                                                                    Width="Auto"
+                                                                    Header="#"
+                                                                    Binding="{Binding Number}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderKiller}"
+                                                                    Binding="{Binding EntryHoldKillEvent.KillerName}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderVictim}"
+                                                                    Binding="{Binding EntryHoldKillEvent.KilledName}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderWeapon}"
+                                                                    Binding="{Binding EntryHoldKillEvent.Weapon.Name}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderRoundWon}"
+                                                                    Binding="{Binding EntryHoldKillEvent.HasWonRound, Converter={StaticResource BooleanToStringConverter}}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
 
-											<TextBlock Grid.Row="0"
-													   Text="{x:Static properties:Resources.Teams}"
-													   Style="{StaticResource SmallTitleStyle}"/>
-											<DataGrid Grid.Row="1"
-													  ItemsSource="{Binding Teams}"
-													  Style="{StaticResource DataGridStyle}">
-												<DataGrid.Columns>
-													<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.Name}"
-																		Binding="{Binding Name}"/>
-													<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.Total}"
-																		Binding="{Binding EntryHoldKillCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.HeaderRoundWon}"
-																		Binding="{Binding EntryHoldKillWonCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.HeaderRoundLost}"
-																		Binding="{Binding EntryHoldKillLossCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.Ratio}"
-																		Binding="{Binding RatioEntryHoldKill, StringFormat='{}{0}%'}" />
-												</DataGrid.Columns>
-											</DataGrid>
-										</Grid>
-									</Grid>
-								</Grid>
-							</Grid>
-						</Border>
+                                    <Grid Grid.Column="1"
+                                          Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+
+                                        <TextBlock Grid.Row="0"
+                                                   Text="{x:Static properties:Resources.Players}"
+                                                   Style="{StaticResource SmallTitleStyle}" />
+                                        <DataGrid Grid.Row="1"
+                                                  ItemsSource="{Binding Demo.Players}"
+                                                  Style="{StaticResource DataGridStyle}">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.Name}"
+                                                                    Binding="{Binding Name}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.Total}"
+                                                                    Binding="{Binding EntryHoldKills.Count}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderRoundWon}"
+                                                                    Binding="{Binding EntryHoldKillWonCount}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderRoundLost}"
+                                                                    Binding="{Binding EntryHoldKillLossCount}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.Ratio}"
+                                                                    Binding="{Binding RatioEntryHoldKill, StringFormat='{}{0}%'}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+
+                                        <Grid Grid.Row="2"
+                                              Margin="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+
+                                            <TextBlock Grid.Row="0"
+                                                       Text="{x:Static properties:Resources.Teams}"
+                                                       Style="{StaticResource SmallTitleStyle}" />
+                                            <DataGrid Grid.Row="1"
+                                                      ItemsSource="{Binding Teams}"
+                                                      Style="{StaticResource DataGridStyle}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.Name}"
+                                                                        Binding="{Binding Name}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.Total}"
+                                                                        Binding="{Binding EntryHoldKillCount}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.HeaderRoundWon}"
+                                                                        Binding="{Binding EntryHoldKillWonCount}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.HeaderRoundLost}"
+                                                                        Binding="{Binding EntryHoldKillLossCount}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.Ratio}"
+                                                                        Binding="{Binding RatioEntryHoldKill, StringFormat='{}{0}%'}" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
 
 
-						<Border Grid.Column="1"
-								BorderBrush="{DynamicResource HighlightBrush}"
-								BorderThickness="1"
-								Margin="5 0 0 0">
-							<Grid Margin="5 0 5 5">
+                        <Border Grid.Column="1"
+                                BorderBrush="{DynamicResource HighlightBrush}"
+                                BorderThickness="1"
+                                Margin="5 0 0 0">
+                            <Grid Margin="5 0 5 5">
 
-								<Grid.RowDefinitions>
-									<RowDefinition Height="Auto" />
-									<RowDefinition Height="*" />
-								</Grid.RowDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
 
-								<Grid Grid.Row="0">
-									<StackPanel Orientation="Horizontal"
-												HorizontalAlignment="Center">
-										<TextBlock Text="{x:Static properties:Resources.EntryKills}"
-												   Style="{StaticResource BigTitleStyle}">
-											<Run Text=" " />
-										</TextBlock>
-										<TextBlock Text="{x:Static properties:Resources.DescriptionEntryKills}"
-												   Style="{StaticResource SmallTitleStyle}" />
-									</StackPanel>
-								</Grid>
+                                <Grid Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center">
+                                        <TextBlock Text="{x:Static properties:Resources.EntryKills}"
+                                                   Style="{StaticResource BigTitleStyle}">
+                                            <Run Text=" " />
+                                        </TextBlock>
+                                        <TextBlock Text="{x:Static properties:Resources.DescriptionEntryKills}"
+                                                   Style="{StaticResource SmallTitleStyle}" />
+                                    </StackPanel>
+                                </Grid>
 
-								<Grid Grid.Row="1">
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="*" />
-									</Grid.ColumnDefinitions>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
 
-									<Grid Grid.Column="0"
-										  Margin="5">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*"/>
-											<ColumnDefinition Width="*"/>
-										</Grid.ColumnDefinitions>
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="*" />
-										</Grid.RowDefinitions>
+                                    <Grid Grid.Column="0"
+                                          Margin="5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
 
-										<TextBlock Grid.Row="0"
-												   Text="{x:Static properties:Resources.Rounds}"
-												   Style="{StaticResource SmallTitleStyle}"
-												   Grid.ColumnSpan="2"/>
-										<DataGrid Grid.Column="0"
-												  Grid.Row="1"
-												  ItemsSource="{Binding Demo.Rounds}"
-												  Style="{StaticResource DataGridStyle}"
-												  Grid.ColumnSpan="2">
-											<DataGrid.Columns>
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
-																	Width="Auto"
-																	Header="#"
-																	Binding="{Binding Number}"/>
-												<DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderKiller}"
-																	Binding="{Binding EntryKillEvent.KillerName}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderVictim}"
-																	Binding="{Binding EntryKillEvent.KilledName}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderWeapon}"
-																	Binding="{Binding EntryKillEvent.Weapon.Name}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderRoundWon}"
-																	Binding="{Binding EntryKillEvent.HasWonRound, Converter={StaticResource BooleanToStringConverter}}" />
-											</DataGrid.Columns>
-										</DataGrid>
-									</Grid>
+                                        <TextBlock Grid.Row="0"
+                                                   Text="{x:Static properties:Resources.Rounds}"
+                                                   Style="{StaticResource SmallTitleStyle}"
+                                                   Grid.ColumnSpan="2" />
+                                        <DataGrid Grid.Column="0"
+                                                  Grid.Row="1"
+                                                  ItemsSource="{Binding Demo.Rounds}"
+                                                  Style="{StaticResource DataGridStyle}"
+                                                  Grid.ColumnSpan="2">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+                                                                    Width="Auto"
+                                                                    Header="#"
+                                                                    Binding="{Binding Number}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource KillerNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderKiller}"
+                                                                    Binding="{Binding EntryKillEvent.KillerName}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderVictim}"
+                                                                    Binding="{Binding EntryKillEvent.KilledName}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderWeapon}"
+                                                                    Binding="{Binding EntryKillEvent.Weapon.Name}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderRoundWon}"
+                                                                    Binding="{Binding EntryKillEvent.HasWonRound, Converter={StaticResource BooleanToStringConverter}}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
+                                    </Grid>
 
-									<Grid Grid.Column="1"
-										  Margin="5">
-										<Grid.RowDefinitions>
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="Auto" />
-											<RowDefinition Height="*" />
-										</Grid.RowDefinitions>
+                                    <Grid Grid.Column="1"
+                                          Margin="5">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
 
-										<TextBlock Grid.Row="0"
-												   Text="{x:Static properties:Resources.Players}"
-												   Style="{StaticResource SmallTitleStyle}"/>
-										<DataGrid Grid.Row="1"
-												  ItemsSource="{Binding Demo.Players}"
-												  Style="{StaticResource DataGridStyle}">
-											<DataGrid.Columns>
-												<DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.Name}"
-																	Binding="{Binding Name}"/>
-												<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.Total}"
-																	Binding="{Binding EntryKills.Count}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderRoundWon}"
-																	Binding="{Binding EntryKillWonCount}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.HeaderRoundLost}"
-																	Binding="{Binding EntryKillLossCount}" />
-												<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
-																	Width="Auto"
-																	Header="{x:Static properties:Resources.Ratio}"
-																	Binding="{Binding RatioEntryKill, StringFormat='{}{0}%'}" />
-											</DataGrid.Columns>
-										</DataGrid>
+                                        <TextBlock Grid.Row="0"
+                                                   Text="{x:Static properties:Resources.Players}"
+                                                   Style="{StaticResource SmallTitleStyle}" />
+                                        <DataGrid Grid.Row="1"
+                                                  ItemsSource="{Binding Demo.Players}"
+                                                  Style="{StaticResource DataGridStyle}">
+                                            <DataGrid.Columns>
+                                                <DataGridTextColumn HeaderStyle="{StaticResource PlayerNameHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.Name}"
+                                                                    Binding="{Binding Name}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.Total}"
+                                                                    Binding="{Binding EntryKills.Count}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderRoundWon}"
+                                                                    Binding="{Binding EntryKillWonCount}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.HeaderRoundLost}"
+                                                                    Binding="{Binding EntryKillLossCount}" />
+                                                <DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
+                                                                    Width="Auto"
+                                                                    Header="{x:Static properties:Resources.Ratio}"
+                                                                    Binding="{Binding RatioEntryKill, StringFormat='{}{0}%'}" />
+                                            </DataGrid.Columns>
+                                        </DataGrid>
 
-										<Grid Grid.Row="2"
-											  Margin="5">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="*" />
-											</Grid.RowDefinitions>
+                                        <Grid Grid.Row="2"
+                                              Margin="5">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
 
-											<TextBlock Grid.Row="0"
-													   Text="{x:Static properties:Resources.Teams}"
-													   Style="{StaticResource SmallTitleStyle}"/>
-											<DataGrid Grid.Row="1"
-													  ItemsSource="{Binding Teams}"
-													  Style="{StaticResource DataGridStyle}">
-												<DataGrid.Columns>
-													<DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.Name}"
-																		Binding="{Binding Name}"/>
-													<DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.Total}"
-																		Binding="{Binding EntryKillCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.HeaderRoundWon}"
-																		Binding="{Binding EntryKillWonCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.HeaderRoundLost}"
-																		Binding="{Binding EntryKillLossCount}" />
-													<DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
-																		Width="Auto"
-																		Header="{x:Static properties:Resources.Ratio}"
-																		Binding="{Binding RatioEntryKill, StringFormat='{}{0}%'}" />
-												</DataGrid.Columns>
-											</DataGrid>
-										</Grid>
-									</Grid>
-								</Grid>
-							</Grid>
-						</Border>
-					</Grid>
-				</controls:MetroTabItem>
-				<controls:MetroTabItem Header="{x:Static properties:Resources.Matrix}">
-					<telerik:RadHeatMap ShowToolTips="True"
-										CellBorderThickness="1"
-										Margin="10">
-						<telerik:RadHeatMap.Definition>
-							<telerik:CategoricalDefinition RowGroupMemberPath="Killer"
-														   ColumnGroupMemberPath="Victim"
-														   ValuePath="Count"
-														   ItemsSource="{Binding KillsData}">
-								<telerik:CategoricalDefinition.Colorizer>
-									<telerik:HeatMapValueGradientColorizer RangeMinimum="0"
-																		   RangeMaximum="{Binding MaxPlayerKillCount}">
-										<GradientStop Offset="0.0"
-													  Color="{StaticResource LightWhite}" />
-										<GradientStop Offset="0.5"
-													  Color="{StaticResource Orange}" />
-										<GradientStop Offset="1.0"
-													  Color="{StaticResource Red}" />
-									</telerik:HeatMapValueGradientColorizer>
-								</telerik:CategoricalDefinition.Colorizer>
-							</telerik:CategoricalDefinition>
-						</telerik:RadHeatMap.Definition>
-						<telerik:RadHeatMap.CellLabelSettings>
-							<telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
-						</telerik:RadHeatMap.CellLabelSettings>
-						<telerik:RadHeatMap.ColumnHeaderSettings>
-							<telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
-																 LabelStyle="{StaticResource LabelHeatmapStyle}"
-																 LabelRotationAngle="90"/>
-						</telerik:RadHeatMap.ColumnHeaderSettings>
-						<telerik:RadHeatMap.RowHeaderSettings>
-							<telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center"
-															  LabelStyle="{StaticResource LabelHeatmapStyle}" />
-						</telerik:RadHeatMap.RowHeaderSettings>
-						<telerik:RadHeatMap.ToolTipSettings>
-							<telerik:HeatMapToolTipSettings ToolTipTemplate="{StaticResource KillPlayerToolTipTemplate}" />
-						</telerik:RadHeatMap.ToolTipSettings>
-						<telerik:RadHeatMap.DescriptionContent>
-							<Grid>
-								<TextBlock Text="{x:Static properties:Resources.HeaderMatrixKillerVictim}"
-										   Style="{StaticResource DescriptionLabelHeatmapStyle}" />
-							</Grid>
-						</telerik:RadHeatMap.DescriptionContent>
-					</telerik:RadHeatMap>
-				</controls:MetroTabItem>
-			</TabControl>
-		</Grid>
-	</Grid>
+                                            <TextBlock Grid.Row="0"
+                                                       Text="{x:Static properties:Resources.Teams}"
+                                                       Style="{StaticResource SmallTitleStyle}" />
+                                            <DataGrid Grid.Row="1"
+                                                      ItemsSource="{Binding Teams}"
+                                                      Style="{StaticResource DataGridStyle}">
+                                                <DataGrid.Columns>
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource TeamNameHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.Name}"
+                                                                        Binding="{Binding Name}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource TotalEntryKillHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.Total}"
+                                                                        Binding="{Binding EntryKillCount}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource RoundWonHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.HeaderRoundWon}"
+                                                                        Binding="{Binding EntryKillWonCount}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource RoundLostHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.HeaderRoundLost}"
+                                                                        Binding="{Binding EntryKillLossCount}" />
+                                                    <DataGridTextColumn HeaderStyle="{StaticResource RatioHeader}"
+                                                                        Width="Auto"
+                                                                        Header="{x:Static properties:Resources.Ratio}"
+                                                                        Binding="{Binding RatioEntryKill, StringFormat='{}{0}%'}" />
+                                                </DataGrid.Columns>
+                                            </DataGrid>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </controls:MetroTabItem>
+                <controls:MetroTabItem Header="{x:Static properties:Resources.Matrix}">
+                    <telerik:RadHeatMap ShowToolTips="True"
+                                        CellBorderThickness="1"
+                                        Margin="10">
+                        <telerik:RadHeatMap.Definition>
+                            <telerik:CategoricalDefinition RowGroupMemberPath="Killer"
+                                                           ColumnGroupMemberPath="Victim"
+                                                           ValuePath="Count"
+                                                           ItemsSource="{Binding KillsData}">
+                                <telerik:CategoricalDefinition.Colorizer>
+                                    <telerik:HeatMapValueGradientColorizer RangeMinimum="0"
+                                                                           RangeMaximum="{Binding MaxPlayerKillCount}">
+                                        <GradientStop Offset="0.0"
+                                                      Color="{StaticResource LightWhite}" />
+                                        <GradientStop Offset="0.5"
+                                                      Color="{StaticResource Orange}" />
+                                        <GradientStop Offset="1.0"
+                                                      Color="{StaticResource Red}" />
+                                    </telerik:HeatMapValueGradientColorizer>
+                                </telerik:CategoricalDefinition.Colorizer>
+                            </telerik:CategoricalDefinition>
+                        </telerik:RadHeatMap.Definition>
+                        <telerik:RadHeatMap.CellLabelSettings>
+                            <telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
+                        </telerik:RadHeatMap.CellLabelSettings>
+                        <telerik:RadHeatMap.ColumnHeaderSettings>
+                            <telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
+                                                                 LabelStyle="{StaticResource LabelHeatmapStyle}"
+                                                                 LabelRotationAngle="90" />
+                        </telerik:RadHeatMap.ColumnHeaderSettings>
+                        <telerik:RadHeatMap.RowHeaderSettings>
+                            <telerik:HeatMapRowHeaderSettings LabelVerticalAlignment="Center"
+                                                              LabelStyle="{StaticResource LabelHeatmapStyle}" />
+                        </telerik:RadHeatMap.RowHeaderSettings>
+                        <telerik:RadHeatMap.ToolTipSettings>
+                            <telerik:HeatMapToolTipSettings ToolTipTemplate="{StaticResource KillPlayerToolTipTemplate}" />
+                        </telerik:RadHeatMap.ToolTipSettings>
+                        <telerik:RadHeatMap.DescriptionContent>
+                            <Grid>
+                                <TextBlock Text="{x:Static properties:Resources.HeaderMatrixKillerVictim}"
+                                           Style="{StaticResource DescriptionLabelHeatmapStyle}" />
+                            </Grid>
+                        </telerik:RadHeatMap.DescriptionContent>
+                    </telerik:RadHeatMap>
+                </controls:MetroTabItem>
+            </TabControl>
+        </Grid>
+    </Grid>
 </UserControl>

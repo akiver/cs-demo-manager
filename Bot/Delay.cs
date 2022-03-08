@@ -2,28 +2,29 @@
 
 namespace SuspectsBot
 {
-	public class Delay : INotifyPropertyChanged
-	{
-		public int Value { get; set; }
+    public class Delay : INotifyPropertyChanged
+    {
+        public int Value { get; set; }
 
-		public string Title { get; set; }
+        public string Title { get; set; }
 
-		private bool _isChecked;
-		public bool IsChecked
-		{
-			get { return _isChecked; }
-			set
-			{
-				_isChecked = value;
-				OnPropertyChanged("IsChecked");
-			}
-		}
+        private bool _isChecked;
 
-		public event PropertyChangedEventHandler PropertyChanged;
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                OnPropertyChanged("IsChecked");
+            }
+        }
 
-		public void OnPropertyChanged(string propertyName)
-		{
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+    }
 }

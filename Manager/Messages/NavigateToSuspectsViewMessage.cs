@@ -1,6 +1,6 @@
 ﻿namespace Manager.Messages
 {
-	public class NavigateToSuspectsViewMessage
-	{
-	}
+    public class NavigateToSuspectsViewMessage
+    {
+    }
 }

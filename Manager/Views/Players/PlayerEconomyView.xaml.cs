@@ -2,11 +2,11 @@
 
 namespace Manager.Views.Players
 {
-	public partial class PlayerEconomyView : UserControl
-	{
-		public PlayerEconomyView()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class PlayerEconomyView : UserControl
+    {
+        public PlayerEconomyView()
+        {
+            InitializeComponent();
+        }
+    }
 }

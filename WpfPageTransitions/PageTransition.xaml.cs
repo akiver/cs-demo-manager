@@ -16,95 +16,88 @@ using System.Windows.Media.Animation;
 
 namespace WpfPageTransitions
 {
-	public partial class PageTransition : UserControl
-	{
-		Stack<UserControl> pages = new Stack<UserControl>();
+    public partial class PageTransition : UserControl
+    {
+        private Stack<UserControl> pages = new Stack<UserControl>();
 
-		public UserControl CurrentPage { get; set; }
+        public UserControl CurrentPage { get; set; }
 
-		public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register("TransitionType",
-			typeof(PageTransitionType),
-			typeof(PageTransition), new PropertyMetadata(PageTransitionType.SlideAndFade));
+        public static readonly DependencyProperty TransitionTypeProperty = DependencyProperty.Register("TransitionType",
+            typeof(PageTransitionType),
+            typeof(PageTransition), new PropertyMetadata(PageTransitionType.SlideAndFade));
 
-		public PageTransitionType TransitionType
-		{
-			get
-			{
-				return (PageTransitionType)GetValue(TransitionTypeProperty);
-			}
-			set 
-			{
-				SetValue(TransitionTypeProperty, value);
-			}
-		}
+        public PageTransitionType TransitionType
+        {
+            get { return (PageTransitionType)GetValue(TransitionTypeProperty); }
+            set { SetValue(TransitionTypeProperty, value); }
+        }
 
-		public PageTransition()
-		{
-			InitializeComponent();
-		}		
-		
-		public void ShowPage(UserControl newPage)
-		{			
-			pages.Push(newPage);
+        public PageTransition()
+        {
+            InitializeComponent();
+        }
 
-			Task.Factory.StartNew(() => ShowNewPage());
-		}
+        public void ShowPage(UserControl newPage)
+        {
+            pages.Push(newPage);
 
-		void ShowNewPage()
-		{
-			Dispatcher.Invoke((Action)delegate 
-				{
-					if (contentPresenter.Content != null)
-					{
-						UserControl oldPage = contentPresenter.Content as UserControl;
+            Task.Factory.StartNew(() => ShowNewPage());
+        }
 
-						if (oldPage != null)
-						{
-							oldPage.Loaded -= newPage_Loaded;
+        private void ShowNewPage()
+        {
+            Dispatcher.Invoke((Action)delegate
+            {
+                if (contentPresenter.Content != null)
+                {
+                    UserControl oldPage = contentPresenter.Content as UserControl;
 
-							UnloadPage(oldPage);
-						}
-					}
-					else
-					{
-						ShowNextPage();
-					}
-					
-				});
-		}
+                    if (oldPage != null)
+                    {
+                        oldPage.Loaded -= newPage_Loaded;
 
-		void ShowNextPage()
-		{
-			UserControl newPage = pages.Pop();
+                        UnloadPage(oldPage);
+                    }
+                }
+                else
+                {
+                    ShowNextPage();
+                }
+            });
+        }
 
-			newPage.Loaded += newPage_Loaded;
+        private void ShowNextPage()
+        {
+            UserControl newPage = pages.Pop();
 
-			contentPresenter.Content = newPage;
-		}
+            newPage.Loaded += newPage_Loaded;
 
-		void UnloadPage(UserControl page)
-		{
-			Storyboard hidePage = (Resources[string.Format("{0}Out", TransitionType.ToString())] as Storyboard).Clone();
+            contentPresenter.Content = newPage;
+        }
 
-			hidePage.Completed += hidePage_Completed;
+        private void UnloadPage(UserControl page)
+        {
+            Storyboard hidePage = (Resources[string.Format("{0}Out", TransitionType.ToString())] as Storyboard).Clone();
 
-			hidePage.Begin(contentPresenter);
-		}
+            hidePage.Completed += hidePage_Completed;
 
-		void newPage_Loaded(object sender, RoutedEventArgs e)
-		{
-			Storyboard showNewPage = Resources[string.Format("{0}In", TransitionType.ToString())] as Storyboard;
+            hidePage.Begin(contentPresenter);
+        }
 
-			showNewPage.Begin(contentPresenter);
+        private void newPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            Storyboard showNewPage = Resources[string.Format("{0}In", TransitionType.ToString())] as Storyboard;
 
-			CurrentPage = sender as UserControl;
-		}		
+            showNewPage.Begin(contentPresenter);
 
-		void hidePage_Completed(object sender, EventArgs e)
-		{
-			contentPresenter.Content = null;
+            CurrentPage = sender as UserControl;
+        }
 
-			ShowNextPage();
-		}		
-	}
+        private void hidePage_Completed(object sender, EventArgs e)
+        {
+            contentPresenter.Content = null;
+
+            ShowNextPage();
+        }
+    }
 }

@@ -1070,7 +1070,7 @@
           <source>HLTV Rating</source>
           <target state="final">Classement HLTV</target>
         </trans-unit>
-		  <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2 Rating</source>
           <target state="final">Classement HLTV2</target>
         </trans-unit>
@@ -1382,7 +1382,7 @@
           <source>HLTV</source>
           <target state="final">HLTV</target>
         </trans-unit>
-		  <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2</source>
           <target state="final">HLTV2</target>
         </trans-unit>
@@ -1454,7 +1454,7 @@
           <source>HLTV (HLTV Rating)</source>
           <target state="final">HLTV (Classement HLTV)</target>
         </trans-unit>
-		  <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
+        <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
           <source>HLTV2 (HLTV2 Rating)</source>
           <target state="final">HLTV2 (Classement HLTV2)</target>
         </trans-unit>
@@ -4232,8 +4232,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         </trans-unit>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
-          <target state="needs-review-translation">Nombre max d'analyses de démo en parallèle</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">Nombre max d'analyses de démo en parallèle</target>
         </trans-unit>
       </group>
     </body>

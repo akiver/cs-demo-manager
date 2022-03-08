@@ -2,11 +2,11 @@
 
 namespace Manager.Views.Suspects
 {
-	public partial class WhitelistView : UserControl
-	{
-		public WhitelistView()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class WhitelistView : UserControl
+    {
+        public WhitelistView()
+        {
+            InitializeComponent();
+        }
+    }
 }

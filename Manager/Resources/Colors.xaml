@@ -1,45 +1,45 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-	<Color x:Key="LightGrey">#2D2D30</Color>
-	<Color x:Key="DarkGrey">#2f2f2f</Color>
-	<Color x:Key="LightGreen">#A4C400</Color>
-	<Color x:Key="LightGreenHighlight">#799100</Color>
-	<Color x:Key="LightWhite">#ecf0f1</Color>
-	<Color x:Key="LightRed">#C65D57</Color>
-	<Color x:Key="Red">#c9302c</Color>
-	<Color x:Key="Green">#5cb85c</Color>
-	<Color x:Key="LightBlue">#5bc0de</Color>
-	<Color x:Key="Dust2Color">#bdb387</Color>
-	<Color x:Key="CobblestoneColor">#350d46</Color>
-	<Color x:Key="OverpassColor">#ffcc00</Color>
-	<Color x:Key="TrainColor">#f8f1d3</Color>
-	<Color x:Key="NukeColor">#141d1a</Color>
-	<Color x:Key="InfernoColor">#611e05</Color>
-	<Color x:Key="MirageColor">#56a5b3</Color>
-	<Color x:Key="CacheColor">#2a1014</Color>
-	<Color x:Key="Orange">#FF9800</Color>
-	<Color x:Key="Blue">#2980b9</Color>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="LightGrey">#2D2D30</Color>
+    <Color x:Key="DarkGrey">#2f2f2f</Color>
+    <Color x:Key="LightGreen">#A4C400</Color>
+    <Color x:Key="LightGreenHighlight">#799100</Color>
+    <Color x:Key="LightWhite">#ecf0f1</Color>
+    <Color x:Key="LightRed">#C65D57</Color>
+    <Color x:Key="Red">#c9302c</Color>
+    <Color x:Key="Green">#5cb85c</Color>
+    <Color x:Key="LightBlue">#5bc0de</Color>
+    <Color x:Key="Dust2Color">#bdb387</Color>
+    <Color x:Key="CobblestoneColor">#350d46</Color>
+    <Color x:Key="OverpassColor">#ffcc00</Color>
+    <Color x:Key="TrainColor">#f8f1d3</Color>
+    <Color x:Key="NukeColor">#141d1a</Color>
+    <Color x:Key="InfernoColor">#611e05</Color>
+    <Color x:Key="MirageColor">#56a5b3</Color>
+    <Color x:Key="CacheColor">#2a1014</Color>
+    <Color x:Key="Orange">#FF9800</Color>
+    <Color x:Key="Blue">#2980b9</Color>
 
-	<SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
-	<SolidColorBrush x:Key="DarkGreyBrush" Color="{StaticResource DarkGrey}" />
-	<SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
-	<SolidColorBrush x:Key="LightGreenHihlightBrush" Color="{StaticResource LightGreenHighlight}" />
-	<SolidColorBrush x:Key="LightWhiteBrush" Color="{StaticResource LightWhite}" />
-	<SolidColorBrush x:Key="LightRedColorBrush" Color="{StaticResource LightRed}" />
-	<SolidColorBrush x:Key="RedColorBrush" Color="{StaticResource Red}" />
-	<SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}" />
-	<SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
-	<SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
-	<SolidColorBrush x:Key="BlueBrush" Color="{StaticResource Blue}" />
+    <SolidColorBrush x:Key="LightGreyBrush" Color="{StaticResource LightGrey}" />
+    <SolidColorBrush x:Key="DarkGreyBrush" Color="{StaticResource DarkGrey}" />
+    <SolidColorBrush x:Key="LightGreenBrush" Color="{StaticResource LightGreen}" />
+    <SolidColorBrush x:Key="LightGreenHihlightBrush" Color="{StaticResource LightGreenHighlight}" />
+    <SolidColorBrush x:Key="LightWhiteBrush" Color="{StaticResource LightWhite}" />
+    <SolidColorBrush x:Key="LightRedColorBrush" Color="{StaticResource LightRed}" />
+    <SolidColorBrush x:Key="RedColorBrush" Color="{StaticResource Red}" />
+    <SolidColorBrush x:Key="GreenBrush" Color="{StaticResource Green}" />
+    <SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
+    <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
+    <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource Blue}" />
 
-	<SolidColorBrush x:Key="Dust2ColorBrush" Color="{StaticResource Dust2Color}" />
-	<SolidColorBrush x:Key="InfernoColorBrush" Color="{StaticResource InfernoColor}" />
-	<SolidColorBrush x:Key="MirageColorBrush" Color="{StaticResource MirageColor}" />
-	<SolidColorBrush x:Key="CobblestoneColorBrush" Color="{StaticResource CobblestoneColor}" />
-	<SolidColorBrush x:Key="CacheColorBrush" Color="{StaticResource CacheColor}" />
-	<SolidColorBrush x:Key="OverpassColorBrush" Color="{StaticResource OverpassColor}" />
-	<SolidColorBrush x:Key="NukeColorBrush" Color="{StaticResource NukeColor}" />
-	<SolidColorBrush x:Key="TrainColorBrush" Color="{StaticResource TrainColor}" />
+    <SolidColorBrush x:Key="Dust2ColorBrush" Color="{StaticResource Dust2Color}" />
+    <SolidColorBrush x:Key="InfernoColorBrush" Color="{StaticResource InfernoColor}" />
+    <SolidColorBrush x:Key="MirageColorBrush" Color="{StaticResource MirageColor}" />
+    <SolidColorBrush x:Key="CobblestoneColorBrush" Color="{StaticResource CobblestoneColor}" />
+    <SolidColorBrush x:Key="CacheColorBrush" Color="{StaticResource CacheColor}" />
+    <SolidColorBrush x:Key="OverpassColorBrush" Color="{StaticResource OverpassColor}" />
+    <SolidColorBrush x:Key="NukeColorBrush" Color="{StaticResource NukeColor}" />
+    <SolidColorBrush x:Key="TrainColorBrush" Color="{StaticResource TrainColor}" />
 
-	<SolidColorBrush x:Key="RedColorSemiOpaqueBrush" Color="{StaticResource Red}" Opacity="0.5"/>
+    <SolidColorBrush x:Key="RedColorSemiOpaqueBrush" Color="{StaticResource Red}" Opacity="0.5" />
 </ResourceDictionary>
