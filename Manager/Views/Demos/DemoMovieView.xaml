@@ -7,8 +7,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              mc:Ignorable="d"
              d:DesignHeight="720"
@@ -39,7 +38,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+            <i:InvokeCommandAction Command="{Binding WindowLoaded, Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -161,7 +160,7 @@
                        Cursor="Hand">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDown">
-                        <command:EventToCommand Command="{Binding HandleHyperLinkCommand}"
+                        <i:InvokeCommandAction Command="{Binding HandleHyperLinkCommand}"
                                                 CommandParameter="https://csgo-demos-manager.com/docs/movie" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
@@ -795,7 +794,7 @@
                                          AcceptsReturn="True">
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="LostFocus">
-                                            <command:EventToCommand Command="{Binding SaveCommentDemo}" />
+                                            <i:InvokeCommandAction Command="{Binding SaveCommentDemo}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </TextBox>
@@ -848,7 +847,7 @@
 
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseRightButtonDown">
-                    <command:EventToCommand Command="{Binding TimelineRightClick}"
+                    <i:InvokeCommandAction Command="{Binding TimelineRightClick}"
                                             PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>

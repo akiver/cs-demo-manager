@@ -8,7 +8,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Core;
 using Core.Models;
 using Core.Models.Events;
 using Core.Models.protobuf;
@@ -253,9 +252,9 @@ namespace Services.Concrete.Analyzer
                 {
                     try
                     {
-                        CDataGCCStrike15_v2_MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file);
+                        CDataGCCStrike15v2MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15v2MatchInfo>(file);
                         DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
-                        demo.Date = date.AddSeconds(infoMsg.matchtime).ToLocalTime();
+                        demo.Date = date.AddSeconds(infoMsg.Matchtime).ToLocalTime();
                     }
                     catch (Exception)
                     {

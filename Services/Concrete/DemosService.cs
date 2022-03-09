@@ -415,20 +415,20 @@ namespace Services.Concrete
                 {
                     try
                     {
-                        CMsgGCCStrike15_v2_MatchList matchList = Serializer.Deserialize<CMsgGCCStrike15_v2_MatchList>(file);
-                        foreach (CDataGCCStrike15_v2_MatchInfo matchInfo in matchList.matches)
+                        CMsgGCCStrike15v2MatchList matchList = Serializer.Deserialize<CMsgGCCStrike15v2MatchList>(file);
+                        foreach (CDataGCCStrike15v2MatchInfo matchInfo in matchList.Matches)
                         {
                             // old definition
-                            if (matchInfo.roundstats_legacy != null)
+                            if (matchInfo.RoundstatsLegacy != null)
                             {
-                                CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats = matchInfo.roundstats_legacy;
+                                CMsgGCCStrike15v2MatchmakingServerRoundStats roundStats = matchInfo.RoundstatsLegacy;
                                 await ProcessRoundStats(matchInfo, roundStats, demoUrlList);
                             }
                             else
                             {
                                 // new definition
-                                List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats> roundStatsList = matchInfo.roundstatsall;
-                                foreach (CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats in roundStatsList)
+                                List<CMsgGCCStrike15v2MatchmakingServerRoundStats> roundStatsList = matchInfo.Roundstatsalls;
+                                foreach (CMsgGCCStrike15v2MatchmakingServerRoundStats roundStats in roundStatsList)
                                 {
                                     await ProcessRoundStats(matchInfo, roundStats, demoUrlList);
                                 }
@@ -463,21 +463,21 @@ namespace Services.Concrete
             {
                 try
                 {
-                    CDataGCCStrike15_v2_MatchInfo matchInfo = await Task.Run(() => Serializer.Deserialize<CDataGCCStrike15_v2_MatchInfo>(file));
-                    ulong matchId = matchInfo.matchid;
-                    uint tvPort = matchInfo.watchablematchinfo.tv_port;
+                    CDataGCCStrike15v2MatchInfo matchInfo = await Task.Run(() => Serializer.Deserialize<CDataGCCStrike15v2MatchInfo>(file));
+                    ulong matchId = matchInfo.Matchid;
+                    uint tvPort = matchInfo.Watchablematchinfo.TvPort;
                     ulong reservationId;
 
                     // old definition
-                    if (matchInfo.roundstats_legacy != null)
+                    if (matchInfo.RoundstatsLegacy != null)
                     {
-                        reservationId = matchInfo.roundstats_legacy.reservationid;
+                        reservationId = matchInfo.RoundstatsLegacy.Reservationid;
                     }
                     else
                     {
                         // new definition
-                        List<CMsgGCCStrike15_v2_MatchmakingServerRoundStats> roundStatsList = matchInfo.roundstatsall;
-                        reservationId = roundStatsList.Last().reservationid;
+                        List<CMsgGCCStrike15v2MatchmakingServerRoundStats> roundStatsList = matchInfo.Roundstatsalls;
+                        reservationId = roundStatsList.Last().Reservationid;
                     }
 
                     shareCode = ShareCode.Encode(matchId, reservationId, tvPort);
@@ -501,17 +501,17 @@ namespace Services.Concrete
         /// <param name="roundStats"></param>
         /// <param name="demoUrlList"></param>
         /// <returns></returns>
-        private async Task ProcessRoundStats(CDataGCCStrike15_v2_MatchInfo matchInfo, CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats,
+        private async Task ProcessRoundStats(CDataGCCStrike15v2MatchInfo matchInfo, CMsgGCCStrike15v2MatchmakingServerRoundStats roundStats,
             Dictionary<string, string> demoUrlList)
         {
             string demoName = GetDemoName(matchInfo, roundStats);
-            if (roundStats.reservationid != 0 && roundStats.map != null)
+            if (roundStats.Reservationid != 0 && roundStats.Map != null)
             {
-                if (await IsDownloadRequired(demoName, roundStats.map))
+                if (await IsDownloadRequired(demoName, roundStats.Map))
                 {
                     if (SerializeMatch(matchInfo, demoName))
                     {
-                        demoUrlList.Add(demoName, roundStats.map);
+                        demoUrlList.Add(demoName, roundStats.Map);
                     }
                 }
             }
@@ -523,7 +523,7 @@ namespace Services.Concrete
         /// <param name="matchInfo"></param>
         /// <param name="demoName"></param>
         /// <returns></returns>
-        private bool SerializeMatch(CDataGCCStrike15_v2_MatchInfo matchInfo, string demoName)
+        private bool SerializeMatch(CDataGCCStrike15v2MatchInfo matchInfo, string demoName)
         {
             string infoFilePath = DownloadFolderPath + Path.DirectorySeparatorChar + demoName + ".dem.info";
             try
@@ -548,12 +548,12 @@ namespace Services.Concrete
         /// <param name="matchInfo"></param>
         /// <param name="roundStats"></param>
         /// <returns></returns>
-        private static string GetDemoName(CDataGCCStrike15_v2_MatchInfo matchInfo,
-            CMsgGCCStrike15_v2_MatchmakingServerRoundStats roundStats)
+        private static string GetDemoName(CDataGCCStrike15v2MatchInfo matchInfo,
+            CMsgGCCStrike15v2MatchmakingServerRoundStats roundStats)
         {
-            return "match730_" + string.Format("{0,21:D21}", roundStats.reservationid) + "_"
-                   + string.Format("{0,10:D10}", matchInfo.watchablematchinfo.tv_port) + "_"
-                   + matchInfo.watchablematchinfo.server_ip;
+            return "match730_" + string.Format("{0,21:D21}", roundStats.Reservationid) + "_"
+                   + string.Format("{0,10:D10}", matchInfo.Watchablematchinfo.TvPort) + "_"
+                   + matchInfo.Watchablematchinfo.ServerIp;
         }
 
         /// <summary>

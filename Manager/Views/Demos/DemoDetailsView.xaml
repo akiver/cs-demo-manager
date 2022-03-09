@@ -4,8 +4,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
@@ -31,7 +30,7 @@
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+            <i:InvokeCommandAction Command="{Binding WindowLoaded, Mode=OneWay}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
@@ -814,7 +813,7 @@
                                 </DataGrid.Resources>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseDoubleClick">
-                                        <command:EventToCommand Command="{Binding ShowPlayerCommand, Mode=OneWay}"
+                                        <i:InvokeCommandAction Command="{Binding ShowPlayerCommand, Mode=OneWay}"
                                                                 CommandParameter="{Binding SelectedPlayer}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
@@ -1064,7 +1063,7 @@
                                 </DataGrid.Resources>
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseDoubleClick">
-                                        <command:EventToCommand Command="{Binding ShowPlayerCommand, Mode=OneWay}"
+                                        <i:InvokeCommandAction Command="{Binding ShowPlayerCommand, Mode=OneWay}"
                                                                 CommandParameter="{Binding SelectedPlayer}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
@@ -1323,7 +1322,7 @@
                                       Style="{StaticResource DataGridStyle}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="MouseDoubleClick">
-                                        <command:EventToCommand Command="{Binding ShowRoundCommand, Mode=OneWay}"
+                                        <i:InvokeCommandAction Command="{Binding ShowRoundCommand, Mode=OneWay}"
                                                                 CommandParameter="{Binding SelectedRound.Number}" />
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>

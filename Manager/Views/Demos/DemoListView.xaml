@@ -4,8 +4,7 @@
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
@@ -496,13 +495,13 @@
                   RowStyle="{StaticResource DataGridRowMainListDemosStyle}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
-                    <mvvm:EventToCommand Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
+                    <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
                                          PassEventArgsToCommand="True"
                                          EventArgsConverter="{StaticResource RowDemoDoubleClickedToDemoDetails}"
                                          EventArgsConverterParameter="{Binding SelectedValue, ElementName=DataGridDemos}" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectionChanged">
-                    <mvvm:EventToCommand
+                    <i:InvokeCommandAction
                         Command="{Binding DemosSelectionChangedCommand}"
                         CommandParameter="{Binding SelectedItems, ElementName=DataGridDemos}" />
                 </i:EventTrigger>

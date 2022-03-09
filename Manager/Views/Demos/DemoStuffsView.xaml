@@ -4,8 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:command="http://www.galasoft.ch/mvvmlight"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
@@ -35,7 +34,7 @@
     <Grid>
         <i:Interaction.Triggers>
             <i:EventTrigger EventName="Loaded">
-                <command:EventToCommand Command="{Binding WindowLoaded, Mode=OneWay}" />
+                <i:InvokeCommandAction Command="{Binding WindowLoaded, Mode=OneWay}" />
             </i:EventTrigger>
         </i:Interaction.Triggers>
 
@@ -150,11 +149,11 @@
                           SelectionUnit="Cell">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CopyingRowClipboardContent">
-                            <command:EventToCommand Command="{Binding CopyCellContent}"
+                            <i:InvokeCommandAction Command="{Binding CopyCellContent}"
                                                     PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                         <i:EventTrigger EventName="SelectedCellsChanged">
-                            <command:EventToCommand Command="{Binding SelectedCellChanged}"
+                            <i:InvokeCommandAction Command="{Binding SelectedCellChanged}"
                                                     PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
