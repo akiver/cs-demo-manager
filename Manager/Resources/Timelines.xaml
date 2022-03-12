@@ -6,25 +6,25 @@
                     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Telerik.Windows.Controls.DataVisualization;component/themes/genericwindows8.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Telerik.Windows.Controls.DataVisualization;component/themes/genericfluent.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="telerik:TimelineItemGroupControl"
            BasedOn="{StaticResource TimelineItemGroupControlStyle}">
         <Setter Property="IsExpanded" Value="True" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
     <Style TargetType="telerik:TimelinePeriodControl">
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
     <!-- set the Timeline strip color -->
     <Style TargetType="Border" x:Key="NormalStyle">
-        <Setter Property="Background" Value="{DynamicResource ControlBackgroundBrush}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
     </Style>
     <Style TargetType="Border" x:Key="AlternateStyle">
-        <Setter Property="Background" Value="{DynamicResource GrayBrush10}" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
     </Style>
     <Style TargetType="telerik:TimelineStripLineControl">
         <Setter Property="NormalStyle" Value="{StaticResource NormalStyle}" />
@@ -35,136 +35,103 @@
     <Style TargetType="TextBlock" x:Key="TimeLineToolTipTextBlockStyle">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground" Value="{DynamicResource TextBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
     </Style>
 
-    <!-- WPF styling is not really flexible, had to override the whole default theme :/ -->
+    <Style x:Key="Timeline_SelectionMiddleThumbStyle" TargetType="Thumb">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="BorderThickness" Value="0 4" />
+        <Setter Property="BorderBrush" Value="#01FFFFFF" />
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.ThemeBackground}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Grid>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static telerik:RadTimeBarCommands.ExpandVisiblePeriod}" />
+                        </Grid.InputBindings>
+                        <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray10}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter Property="Background" Value="{telerik:FluentResource ResourceKey=PressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="Timeline_ThumbStyle" TargetType="Thumb">
+        <Setter Property="Width" Value="6" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="BorderThickness" Value="0 4" />
+        <Setter Property="BorderBrush" Value="#01FFFFFF" />
+        <Setter Property="Background" Value="{telerik:FluentResource ResourceKey=AccentBrush}" />
+        <Setter Property="Cursor" Value="SizeWE" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Panel.ZIndex" Value="10" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <Grid>
+                        <Grid.InputBindings>
+                            <MouseBinding MouseAction="LeftDoubleClick" Command="{x:Static telerik:RadTimeBarCommands.ExpandVisiblePeriodToStart}" />
+                        </Grid.InputBindings>
+                        <Border x:Name="Border"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{DynamicResource MahApps.Brushes.Highlight}"
+                                Height="{TemplateBinding Height}"
+                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                Width="{TemplateBinding Width}" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{telerik:FluentResource ResourceKey=AccentMouseOverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter Property="Background" Value="{telerik:FluentResource ResourceKey=AccentPressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="Timeline_AlternateThumbStyle" TargetType="Thumb" BasedOn="{StaticResource Timeline_ThumbStyle}" />
+
+    <!-- Original Telerik theme adjusted, you can find it in the Telerik folder installation, example: -->
+    <!-- %ProgramFiles%\Telerik UI for WPF R1 2022\Themes.Implicit\WPF\Fluent\Themes\Telerik.Windows.Controls.DataVisualization.xaml -->
     <Style TargetType="{x:Type telerik:RadSlider}" x:Key="TimeLineSliderStyle">
         <Setter Property="HandlesVisibility" Value="Collapsed" />
-        <Setter Property="Height" Value="20" />
-        <Setter Property="Width" Value="20" />
         <Setter Property="IsMouseWheelEnabled" Value="False" />
         <Setter Property="IsSelectionRangeEnabled" Value="True" />
         <Setter Property="StepAction" Value="MoveRange" />
-        <Setter Property="Background" Value="{DynamicResource TextBrush}" />
-        <Setter Property="BorderBrush" Value="{StaticResource HighlightBrush}" />
-        <Setter Property="BorderThickness" Value="0 1 0 0" />
-        <Setter Property="ThumbStyle">
-            <Setter.Value>
-                <Style TargetType="{x:Type Thumb}">
-                    <Setter Property="Width" Value="8" />
-                    <Setter Property="IsTabStop" Value="True" />
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="BorderBrush" Value="Transparent" />
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
-                    <Setter Property="Cursor" Value="SizeWE" />
-                    <Setter Property="Margin" Value="0 1 0 0" />
-                    <Setter Property="VerticalAlignment" Value="Stretch" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Thumb}">
-                                <Grid>
-                                    <Border x:Name="Border"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            Background="{TemplateBinding Background}" />
-                                    <Rectangle Fill="{TemplateBinding Foreground}"
-                                               HorizontalAlignment="Left"
-                                               Height="2"
-                                               Margin="1 0 0 0"
-                                               SnapsToDevicePixels="True"
-                                               Width="2" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="AlternateThumbStyle">
-            <Setter.Value>
-                <Style TargetType="{x:Type Thumb}">
-                    <Setter Property="Width" Value="8" />
-                    <Setter Property="IsTabStop" Value="True" />
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="BorderBrush" Value="Transparent" />
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
-                    <Setter Property="Cursor" Value="SizeWE" />
-                    <Setter Property="Margin" Value="0 1 0 0" />
-                    <Setter Property="VerticalAlignment" Value="Stretch" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Thumb}">
-                                <Grid>
-                                    <Border x:Name="Border"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            Background="{TemplateBinding Background}" />
-                                    <Rectangle Fill="{TemplateBinding Foreground}"
-                                               HorizontalAlignment="Right"
-                                               Height="2"
-                                               Margin="0 0 1 0"
-                                               SnapsToDevicePixels="True"
-                                               Width="2" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-        <Setter Property="SelectionMiddleThumbStyle">
-            <Setter.Value>
-                <Style TargetType="{x:Type Thumb}">
-                    <Setter Property="IsTabStop" Value="True" />
-                    <Setter Property="BorderThickness" Value="0" />
-                    <Setter Property="BorderBrush" Value="Transparent" />
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Cursor" Value="Hand" />
-                    <Setter Property="VerticalAlignment" Value="Stretch" />
-                    <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Thumb}">
-                                <Grid>
-                                    <Border x:Name="Border"
-                                            BorderBrush="{TemplateBinding BorderBrush}"
-                                            BorderThickness="{TemplateBinding BorderThickness}"
-                                            Background="{TemplateBinding Background}" />
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-
-        <Setter Property="TrackStyle">
-            <Setter.Value>
-                <Style TargetType="{x:Type ContentControl}">
-                    <Setter Property="IsTabStop" Value="False" />
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ContentControl}">
-                                <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                        BorderThickness="{TemplateBinding BorderThickness}" />
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
-
+        <Setter Property="Background" Value="{DynamicResource MahApps.Brushes.Gray8}" />
+        <Setter Property="BorderBrush" Value="{telerik:FluentResource ResourceKey=BasicBrush}" />
+        <Setter Property="Height" Value="16" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="ThumbStyle" Value="{StaticResource Timeline_ThumbStyle}" />
+        <Setter Property="AlternateThumbStyle" Value="{StaticResource Timeline_AlternateThumbStyle}" />
+        <Setter Property="SelectionMiddleThumbStyle" Value="{StaticResource Timeline_SelectionMiddleThumbStyle}" />
+        <Setter Property="TrackStyle" Value="{StaticResource Timeline_TrackStyle}" />
+        <Setter Property="IncreaseHandleStyle" Value="{StaticResource Timeline_IncreaseHandleStyle}" />
+        <Setter Property="DecreaseHandleStyle" Value="{StaticResource Timeline_DecreaseHandleStyle}" />
         <Setter Property="IsTabStop" Value="False" />
         <Setter Property="Padding" Value="0" />
+        <Setter Property="ThumbVisibility" Value="Visible" />
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type telerik:RadSlider}">
-                    <telerik:LayoutTransformControl x:Name="layoutControl"
-                                                    IsTabStop="False"
-                                                    RenderTransformOrigin="0.5 0">
+                <ControlTemplate TargetType="telerik:RadSlider">
+                    <telerik:LayoutTransformControl x:Name="layoutControl" RenderTransformOrigin=".5 0">
                         <telerik:LayoutTransformControl.LayoutTransform>
                             <TransformGroup>
                                 <ScaleTransform />
@@ -177,8 +144,8 @@
                             <VisualStateGroup x:Name="OrientationStates">
                                 <VisualState x:Name="Horizontal">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
-                                                                       Storyboard.TargetName="layoutControl">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="layoutControl"
+                                                                       Storyboard.TargetProperty="LayoutTransform">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <RotateTransform Angle="0" />
@@ -189,8 +156,8 @@
                                 </VisualState>
                                 <VisualState x:Name="Vertical">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
-                                                                       Storyboard.TargetName="layoutControl">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="layoutControl"
+                                                                       Storyboard.TargetProperty="LayoutTransform">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <RotateTransform Angle="-90" />
@@ -201,8 +168,8 @@
                                 </VisualState>
                                 <VisualState x:Name="ReversedHorizontal">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
-                                                                       Storyboard.TargetName="layoutControl">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="layoutControl"
+                                                                       Storyboard.TargetProperty="LayoutTransform">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <ScaleTransform ScaleX="-1" />
@@ -213,8 +180,8 @@
                                 </VisualState>
                                 <VisualState x:Name="ReversedVertical">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="LayoutTransform"
-                                                                       Storyboard.TargetName="layoutControl">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="layoutControl"
+                                                                       Storyboard.TargetProperty="LayoutTransform">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <TransformGroup>
@@ -231,16 +198,15 @@
                                 <VisualState x:Name="SingleThumb" />
                                 <VisualState x:Name="RangeThumbs">
                                     <Storyboard>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                       Storyboard.TargetName="RangeThumbsPanel">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RangeThumbsPanel"
+                                                                       Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
-                                                                       Storyboard.TargetName="SingleThumbHost">
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="SingleThumbHost" Storyboard.TargetProperty="Visibility">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <Visibility>Collapsed</Visibility>
@@ -252,9 +218,8 @@
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid>
-                            <Border BorderBrush="{TemplateBinding BorderBrush}"
-                                    BorderThickness="{TemplateBinding BorderThickness}"
-                                    Background="{DynamicResource ControlBackgroundBrush}" />
+                            <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}" />
                             <Grid Margin="{TemplateBinding Padding}">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
@@ -263,94 +228,42 @@
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
-                                <Grid Grid.ColumnSpan="3" Grid.Column="1">
-                                    <ContentControl x:Name="Track" Style="{TemplateBinding TrackStyle}" />
+                                <Grid Grid.Column="1" Grid.ColumnSpan="3">
+                                    <ContentControl Style="{TemplateBinding TrackStyle}" x:Name="Track" />
                                 </Grid>
                                 <RepeatButton x:Name="DecreaseButton"
-                                              Grid.Column="0"
                                               Delay="{TemplateBinding Delay}"
                                               Interval="{TemplateBinding RepeatInterval}"
-                                              Style="{TemplateBinding DecreaseHandleStyle}"
-                                              Visibility="{TemplateBinding HandlesVisibility}" />
+                                              Visibility="{TemplateBinding HandlesVisibility}"
+                                              Style="{TemplateBinding DecreaseHandleStyle}" />
                                 <RepeatButton x:Name="LargeDecreaseButton"
                                               Grid.Column="1"
+                                              Style="{StaticResource Timeline_LargeHandleStyle}"
                                               Delay="{TemplateBinding Delay}"
-                                              Interval="{TemplateBinding RepeatInterval}">
-                                    <RepeatButton.Style>
-                                        <Style TargetType="{x:Type RepeatButton}">
-                                            <Setter Property="IsTabStop" Value="False" />
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                        <Grid Background="Transparent" />
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </RepeatButton.Style>
-                                </RepeatButton>
+                                              Interval="{TemplateBinding RepeatInterval}" />
                                 <Grid Grid.Column="2">
-                                    <Border BorderBrush="Transparent"
-                                            BorderThickness="0"
-                                            CornerRadius="0">
-                                        <Border BorderBrush="#01FFFFFF"
-                                                BorderThickness="0 6 0 5"
-                                                Background="{DynamicResource BlackBrush}"
-                                                CornerRadius="0">
-                                            <Border BorderBrush="Transparent"
-                                                    BorderThickness="0"
-                                                    Background="Transparent"
-                                                    CornerRadius="0"
-                                                    Height="6"
-                                                    MaxWidth="{Binding (telerik:ActualSizeProxy.ActualWidth), ElementName=RangeMiddleThumb}"
-                                                    Margin="1 0"
-                                                    VerticalAlignment="Center">
-                                                <Border Background="Transparent"
-                                                        CornerRadius="0"
-                                                        Visibility="{TemplateBinding ThumbVisibility}" />
-                                            </Border>
-                                        </Border>
-                                    </Border>
-                                    <Thumb x:Name="SingleThumbHost"
-                                           Style="{TemplateBinding ThumbStyle}"
-                                           Visibility="Collapsed" />
+                                    <Thumb x:Name="SingleThumbHost" Style="{TemplateBinding ThumbStyle}" Visibility="Collapsed" />
                                     <StackPanel x:Name="RangeThumbsPanel" Orientation="Horizontal">
-                                        <Thumb x:Name="RangeStartThumb"
-                                               Style="{TemplateBinding ThumbStyle}"
+                                        <Thumb x:Name="RangeStartThumb" Style="{TemplateBinding ThumbStyle}"
                                                Visibility="{TemplateBinding ThumbVisibility}" />
-                                        <Thumb x:Name="RangeMiddleThumb"
-                                               telerik:ActualSizeProxy.IsEnabled="True"
-                                               Style="{TemplateBinding SelectionMiddleThumbStyle}" />
-                                        <Thumb x:Name="RangeEndThumb"
-                                               Style="{TemplateBinding AlternateThumbStyle}"
+                                        <Thumb x:Name="RangeMiddleThumb" Style="{TemplateBinding SelectionMiddleThumbStyle}"
+                                               telerik:ActualSizeProxy.IsEnabled="True" />
+                                        <Thumb x:Name="RangeEndThumb" Style="{TemplateBinding AlternateThumbStyle}"
                                                Visibility="{TemplateBinding ThumbVisibility}" />
                                     </StackPanel>
                                 </Grid>
                                 <RepeatButton x:Name="LargeIncreaseButton"
                                               Grid.Column="3"
+                                              Style="{StaticResource Timeline_LargeHandleStyle}"
                                               Delay="{TemplateBinding Delay}"
-                                              Interval="{TemplateBinding RepeatInterval}">
-                                    <RepeatButton.Style>
-                                        <Style TargetType="{x:Type RepeatButton}">
-                                            <Setter Property="IsTabStop" Value="False" />
-                                            <Setter Property="Template">
-                                                <Setter.Value>
-                                                    <ControlTemplate TargetType="{x:Type RepeatButton}">
-                                                        <Grid Background="Transparent" />
-                                                    </ControlTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </Style>
-                                    </RepeatButton.Style>
-                                </RepeatButton>
+                                              Interval="{TemplateBinding RepeatInterval}" />
                                 <RepeatButton x:Name="IncreaseButton"
+                                              Grid.Row="1"
                                               Grid.Column="4"
                                               Delay="{TemplateBinding Delay}"
                                               Interval="{TemplateBinding RepeatInterval}"
-                                              Grid.Row="1"
-                                              RenderTransformOrigin="0.5 0.5"
-                                              Style="{TemplateBinding IncreaseHandleStyle}"
-                                              Visibility="{TemplateBinding HandlesVisibility}" />
+                                              Visibility="{TemplateBinding HandlesVisibility}"
+                                              Style="{TemplateBinding IncreaseHandleStyle}" />
                             </Grid>
                         </Grid>
                     </telerik:LayoutTransformControl>
@@ -358,4 +271,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

@@ -358,7 +358,7 @@
           <source>HLTV</source>
           <target state="final">HLTV</target>
         </trans-unit>
-		  <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2</source>
           <target state="final">HLTV2</target>
         </trans-unit>
@@ -1119,7 +1119,7 @@
           <source>HLTV Rating</source>
           <target state="final">HLTV bedømmelse</target>
         </trans-unit>
-		  <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
+        <trans-unit id="HeaderToolTipHltv2Rating" translate="yes" xml:space="preserve">
           <source>HLTV2 Rating</source>
           <target state="final">HLTV2 bedømmelse</target>
         </trans-unit>
@@ -1507,7 +1507,7 @@
           <source>HLTV (HLTV Rating)</source>
           <target state="final">HLTV (HLTV Bedømmelse)</target>
         </trans-unit>
-		  <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
+        <trans-unit id="Hltv2Full" translate="yes" xml:space="preserve">
           <source>HLTV2 (HLTV2 Rating)</source>
           <target state="final">HLTV2 (HLTV2 Bedømmelse)</target>
         </trans-unit>
@@ -2410,10 +2410,6 @@ Er ikke istand til at starte spillet</target>
           <source>No demos found for this account</source>
           <target state="final">Ingen Demoer er fundet for denne konto</target>
         </trans-unit>
-        <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
-          <source>Playdemo command copied to clipboard</source>
-          <target state="final">Afspil demo kommando kopiret til udklipsholder</target>
-        </trans-unit>
         <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>Retrieving last matches information...</source>
           <target state="final">Henter sidste kamp informationer</target>
@@ -2421,10 +2417,6 @@ Er ikke istand til at starte spillet</target>
         <trans-unit id="NotificationSearchingLastRank" translate="yes" xml:space="preserve">
           <source>Searching account's last rank...</source>
           <target state="final">Leder efter kontos sidste rang...</target>
-        </trans-unit>
-        <trans-unit id="NotificationSuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
-          <source>{0} suspect(s) have been banned!</source>
-          <target state="final">{0} Mistænkt(e) er blevet bandlyst!</target>
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>OK</source>
@@ -3359,10 +3351,6 @@ Besked Fejl :
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
           <target state="new">This demo is not from Valve matchmaking servers or the .info file is missing.</target>
         </trans-unit>
-        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
-          <source>Share code copied to clipboard.</source>
-          <target state="new">Share code copied to clipboard.</target>
-        </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
           <target state="new">Copy share code</target>
@@ -4227,6 +4215,10 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
           <target state="new">Max concurrent demo analyzes</target>
+        </trans-unit>
+        <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="new">Cancel</target>
         </trans-unit>
       </group>
     </body>

@@ -5,11 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:player="clr-namespace:Manager.Views.Players"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              d:DesignHeight="720"
              d:DesignWidth="1280"
              DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
@@ -59,109 +60,45 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0"
-                    Style="{DynamicResource GeneralButton}"
-                    ToolTip="{x:Static properties:Resources.ToolTipBack}"
-                    Command="{Binding BackToDetailsCommand}">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Back}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
-
-            <Button Grid.Column="1"
-                    Style="{DynamicResource GeneralButton}"
-                    ToolTip="{x:Static properties:Resources.ToolTipWatchHighlights}"
-                    Command="{Binding WatchHighlightsCommand}">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_thumbs_up}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.WatchHighlights}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
-
-            <Button Grid.Column="2"
-                    Style="{DynamicResource GeneralButton}"
-                    ToolTip="{x:Static properties:Resources.ToolTipWatchLowlights}"
-                    Command="{Binding WatchLowlightsCommand}">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_thumbs_down}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.WatchLowlights}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
-
-            <Button Grid.Column="3"
-                    Style="{DynamicResource GeneralButton}"
-                    ToolTip="{x:Static properties:Resources.ToolTipAddPlayerToSuspectsList}"
-                    Command="{Binding AddPlayerToSuspectsListCommand}">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_user_add}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.AddToSuspects}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
-
-            <Button Grid.Column="4"
-                    Style="{DynamicResource GeneralButton}"
-                    ToolTip="{x:Static properties:Resources.ToolTipAddPlayerToWhiteList}"
-                    Command="{Binding AddPlayerToWhitelistCommand}">
-                <StackPanel Orientation="Horizontal"
-                            VerticalAlignment="Center">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_user_add}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.AddToWhitelist}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
+            <controls:ButtonWithIcon
+                Grid.Column="0"
+                Text="{x:Static properties:Resources.Back}"
+                ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                Icon="ArrowLeftBold"
+                Command="{Binding BackToDetailsCommand}" />
+            <controls:ButtonWithIcon
+                Grid.Column="1"
+                Text="{x:Static properties:Resources.WatchHighlights}"
+                ToolTip="{x:Static properties:Resources.ToolTipWatchHighlights}"
+                Icon="ThumbUp"
+                Command="{Binding WatchHighlightsCommand}" />
+            <controls:ButtonWithIcon
+                Grid.Column="2"
+                Text="{x:Static properties:Resources.WatchLowlights}"
+                ToolTip="{x:Static properties:Resources.ToolTipWatchLowlights}"
+                Icon="ThumbDown"
+                Command="{Binding WatchLowlightsCommand}" />
+            <controls:ButtonWithIcon
+                Grid.Column="3"
+                Text="{x:Static properties:Resources.AddToSuspects}"
+                ToolTip="{x:Static properties:Resources.ToolTipAddPlayerToSuspectsList}"
+                Icon="AccountPlus"
+                Command="{Binding AddPlayerToSuspectsListCommand}" />
+            <controls:ButtonWithIcon
+                Grid.Column="4"
+                Text="{x:Static properties:Resources.AddToWhitelist}"
+                ToolTip="{x:Static properties:Resources.ToolTipAddPlayerToWhiteList}"
+                Icon="AccountPlusOutline"
+                Command="{Binding AddPlayerToWhitelistCommand}" />
 
             <StackPanel Grid.Column="5"
                         Orientation="Horizontal"
                         HorizontalAlignment="Center"
                         Margin="2">
-                <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                       Foreground="{DynamicResource BlackColorBrush}"
-                                       Width="40"
-                                       Height="40" />
+                <mahapps:ProgressRing IsActive="{Binding IsBusy}"
+                                      Foreground="{DynamicResource BlackColorBrush}"
+                                      Width="40"
+                                      Height="40" />
                 <TextBlock Text="{Binding Notification}"
                            Style="{StaticResource NotificationMessageStyle}"
                            Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -170,25 +107,25 @@
 
         <TabControl Grid.Row="1"
                     Margin="10"
-                    controls:TabControlHelper.Underlined="SelectedTabItem">
-            <controls:MetroTabItem Header="{x:Static properties:Resources.General}">
+                    mahapps:TabControlHelper.Underlined="SelectedTabItem">
+            <mahapps:MetroTabItem Header="{x:Static properties:Resources.General}">
                 <player:PlayerGeneralView />
-            </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{x:Static properties:Resources.Rounds}">
+            </mahapps:MetroTabItem>
+            <mahapps:MetroTabItem Header="{x:Static properties:Resources.Rounds}">
                 <player:PlayerRoundsView />
-            </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{x:Static properties:Resources.Clutches}">
+            </mahapps:MetroTabItem>
+            <mahapps:MetroTabItem Header="{x:Static properties:Resources.Clutches}">
                 <player:PlayerClutchesView />
-            </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{x:Static properties:Resources.Duels}">
+            </mahapps:MetroTabItem>
+            <mahapps:MetroTabItem Header="{x:Static properties:Resources.Duels}">
                 <player:PlayerDuelView />
-            </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{x:Static properties:Resources.Economy}">
+            </mahapps:MetroTabItem>
+            <mahapps:MetroTabItem Header="{x:Static properties:Resources.Economy}">
                 <player:PlayerEconomyView />
-            </controls:MetroTabItem>
-            <controls:MetroTabItem Header="{x:Static properties:Resources.Damages}">
+            </mahapps:MetroTabItem>
+            <mahapps:MetroTabItem Header="{x:Static properties:Resources.Damages}">
                 <player:PlayerDamagesView />
-            </controls:MetroTabItem>
+            </mahapps:MetroTabItem>
         </TabControl>
     </Grid>
 </UserControl>

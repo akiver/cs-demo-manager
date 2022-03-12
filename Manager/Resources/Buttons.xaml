@@ -2,11 +2,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.buttons.xaml" />
-    </ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="BaseButton" TargetType="{x:Type Button}" BasedOn="{StaticResource AccentedSquareButtonStyle}">
+    <Style x:Key="BaseButton" TargetType="{x:Type Button}" BasedOn="{StaticResource MahApps.Styles.Button.Square.Accent}">
         <Setter Property="controls:ControlsHelper.ContentCharacterCasing" Value="Normal" />
     </Style>
 

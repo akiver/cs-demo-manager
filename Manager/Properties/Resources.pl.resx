@@ -1817,17 +1817,11 @@ Uruchomienie gry nie powiodło się.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>Nie znaleziono dem dla tego konta</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Komenda playdemo skopiowana do schowka</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Uzyskiwanie informacji z ostatnich meczów...</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Szukanie ostatniej rangi na koncie...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} podejrzanych zostało zbanowanych!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
@@ -2523,9 +2517,6 @@ Treść błędu :
   </data>
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>To demo nie pochodzi z serwerów dobierania przeciwników Valve lub nie znaleziono pliku .info.</value>
-  </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Kod udostępniania skopiowany do schowka.</value>
   </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Skopiuj kod udostępniania</value>

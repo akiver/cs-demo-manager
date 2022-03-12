@@ -4,10 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -43,121 +44,47 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToHomeCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    Icon="ArrowLEft"
+                    Command="{Binding BackToHomeCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Overall}"
+                    Icon="Earth"
+                    Command="{Binding GoToOverallCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipOverall}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Rank}"
+                    Icon="ChartBellCurve"
+                    Command="{Binding GoToRankCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipRank}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Maps}"
+                    Icon="Map"
+                    Command="{Binding GoToMapCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipMaps}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Weapons}"
+                    Icon="Pistol"
+                    ToolTip="{x:Static properties:Resources.ToolTipWeapons}"
+                    IsEnabled="False" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Progression}"
+                    Icon="TrendingUp"
+                    Command="{Binding GoToProgressCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipProgression}" />
 
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToOverallCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipOverall}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_globe_wire}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Overall}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToRankCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipRank}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Rank}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToMapCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipMaps}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_map}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Maps}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        IsEnabled="False"
-                        ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
-                               Width="15"
-                               Height="15" />
-                        <TextBlock Text="{x:Static properties:Resources.Weapons}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToProgressCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipProgression}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_graph_line_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Progression}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{Binding Notification}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{Binding Notification}" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1"
               Margin="10">
 
-            <TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Rifle}">
+            <TabControl mahapps:TabControlHelper.Underlined="SelectedTabItem">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Rifle}">
 
                     <Grid>
                         <Grid.RowDefinitions>
@@ -173,7 +100,7 @@
                                                          LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.HorizontalAxis>
                             <telerik:RadCartesianChart.VerticalAxis>
-                                <telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}"
+                                <telerik:LinearAxis LineStroke="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                     Minimum="0"
                                                     LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.VerticalAxis>
@@ -345,9 +272,9 @@
                             </telerik:RadLegend.Items>
                         </telerik:RadLegend>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
 
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Sniper}">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Sniper}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -362,7 +289,7 @@
                                                          LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.HorizontalAxis>
                             <telerik:RadCartesianChart.VerticalAxis>
-                                <telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}"
+                                <telerik:LinearAxis LineStroke="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                     Minimum="0"
                                                     LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.VerticalAxis>
@@ -474,9 +401,9 @@
                             </telerik:RadLegend.Items>
                         </telerik:RadLegend>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
 
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Smg}">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Smg}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -491,7 +418,7 @@
                                                          LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.HorizontalAxis>
                             <telerik:RadCartesianChart.VerticalAxis>
-                                <telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}"
+                                <telerik:LinearAxis LineStroke="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                     Minimum="0"
                                                     LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.VerticalAxis>
@@ -663,9 +590,9 @@
                             </telerik:RadLegend.Items>
                         </telerik:RadLegend>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
 
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Heavy}">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Heavy}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -680,7 +607,7 @@
                                                          LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.HorizontalAxis>
                             <telerik:RadCartesianChart.VerticalAxis>
-                                <telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}"
+                                <telerik:LinearAxis LineStroke="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                     Minimum="0"
                                                     LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.VerticalAxis>
@@ -832,9 +759,9 @@
                             </telerik:RadLegend.Items>
                         </telerik:RadLegend>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
 
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Pistol}">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Pistol}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -849,7 +776,7 @@
                                                          LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.HorizontalAxis>
                             <telerik:RadCartesianChart.VerticalAxis>
-                                <telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}"
+                                <telerik:LinearAxis LineStroke="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                     Minimum="0"
                                                     LabelStyle="{StaticResource LabelChartStyle}" />
                             </telerik:RadCartesianChart.VerticalAxis>
@@ -1061,9 +988,9 @@
                             </telerik:RadLegend.Items>
                         </telerik:RadLegend>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
 
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Equipment}">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Equipment}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -1084,7 +1011,7 @@
                                                              LabelStyle="{StaticResource LabelChartStyle}" />
                                 </telerik:RadCartesianChart.HorizontalAxis>
                                 <telerik:RadCartesianChart.VerticalAxis>
-                                    <telerik:LinearAxis LineStroke="{StaticResource LightWhiteBrush}"
+                                    <telerik:LinearAxis LineStroke="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                         Minimum="0"
                                                         LabelStyle="{StaticResource LabelChartStyle}" />
                                 </telerik:RadCartesianChart.VerticalAxis>
@@ -1243,7 +1170,7 @@
 
                                     <Grid Grid.Row="0"
                                           Margin="10">
-                                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                 BorderThickness="1">
                                             <StackPanel Orientation="Vertical"
                                                         Margin="5">
@@ -1256,7 +1183,7 @@
                                     </Grid>
                                     <Grid Grid.Row="1"
                                           Margin="10">
-                                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                 BorderThickness="1">
                                             <StackPanel Orientation="Vertical"
                                                         Margin="5">
@@ -1269,7 +1196,7 @@
                                     </Grid>
                                     <Grid Grid.Row="2"
                                           Margin="10">
-                                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                 BorderThickness="1">
                                             <StackPanel Orientation="Vertical"
                                                         Margin="5">
@@ -1291,7 +1218,7 @@
 
                                     <Grid Grid.Row="0"
                                           Margin="10">
-                                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                 BorderThickness="1">
                                             <StackPanel Orientation="Vertical"
                                                         Margin="5">
@@ -1304,7 +1231,7 @@
                                     </Grid>
                                     <Grid Grid.Row="1"
                                           Margin="10">
-                                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                 BorderThickness="1">
                                             <StackPanel Orientation="Vertical"
                                                         Margin="5">
@@ -1317,7 +1244,7 @@
                                     </Grid>
                                     <Grid Grid.Row="2"
                                           Margin="10">
-                                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                                 BorderThickness="1">
                                             <StackPanel Orientation="Vertical"
                                                         Margin="5">
@@ -1332,7 +1259,7 @@
                             </Grid>
                         </Grid>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
             </TabControl>
         </Grid>
     </Grid>

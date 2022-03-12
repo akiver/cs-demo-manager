@@ -130,18 +130,26 @@ Source: "Manager\bin\x86\Release\DemoInfo.dll"; DestDir: "{app}"; Flags: ignorev
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.Platform.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\Hardcodet.Wpf.TaskbarNotification.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\Hardcodet.NotifyIcon.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\ICSharpCode.SharpZipLib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\MahApps.Metro.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\MahApps.Metro.IconPacks.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\MahApps.Metro.IconPacks.Material.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.OOXML.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.OpenXml4Net.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\NPOI.OpenXmlFormats.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\protobuf-net.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\protobuf-net.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\steam_api.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\steam_appid.txt"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\System.Windows.Interactivity.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\System.Buffers.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\System.Collections.Immutable.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\System.Memory.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\System.Numerics.Vectors.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\System.Runtime.CompilerServices.Unsafe.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.Chart.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
@@ -168,6 +176,7 @@ Source: "Manager\bin\x86\Release\pt-BR\*"; DestDir: "{app}\pt-BR"; Flags: ignore
 Source: "Manager\bin\x86\Release\ru\*"; DestDir: "{app}\ru"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\sr-Cyrl\*"; DestDir: "{app}\sr-Cyrl"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\tr\*"; DestDir: "{app}\tr"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "Manager\bin\x86\Release\tr-TR\*"; DestDir: "{app}\tr"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\zh-Hans\*"; DestDir: "{app}\zh-Hans"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "Manager\bin\x86\Release\zh-Hant\*"; DestDir: "{app}\zh-Hant"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files

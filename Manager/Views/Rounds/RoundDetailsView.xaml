@@ -7,6 +7,7 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -46,40 +47,17 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}"
-                        Command="{Binding BackToDemoDetailsCommand}"
-                        CommandParameter="{Binding Demo}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        ToolTip="{x:Static properties:Resources.ToolTipWatchRound}"
-                        Command="{Binding WatchRoundCommand}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_control_play}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Watch}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Watch}"
+                    ToolTip="{x:Static properties:Resources.ToolTipWatchRound}"
+                    Icon="Play"
+                    Command="{Binding WatchRoundCommand}" />
             </StackPanel>
 
             <Grid HorizontalAlignment="Center">
@@ -88,21 +66,11 @@
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0"
-                        Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToPreviousRoundCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipPreviousRound}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Grid.Column="0"
+                    ToolTip="{x:Static properties:Resources.ToolTipPreviousRound}"
+                    Icon="ArrowLeft"
+                    Command="{Binding GoToPreviousRoundCommand}" />
                 <TextBlock Grid.Column="1"
                            Style="{StaticResource BigTitleStyle}">
                     <TextBlock.Text>
@@ -112,21 +80,11 @@
                         </MultiBinding>
                     </TextBlock.Text>
                 </TextBlock>
-                <Button Grid.Column="2"
-                        Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToNextRoundCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipNextRound}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_right}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Grid.Column="2"
+                    ToolTip="{x:Static properties:Resources.ToolTipNextRound}"
+                    Icon="ArrowRight"
+                    Command="{Binding GoToNextRoundCommand}" />
             </Grid>
         </Grid>
 
@@ -372,7 +330,7 @@
                                     <DataTemplate>
                                         <Button Command="{Binding Source={StaticResource Locator}, Path=RoundDetails.WatchKillCommand}"
                                                 CommandParameter="{Binding SelectedItem, ElementName=KillsDataGrid}"
-                                                Style="{DynamicResource AccentedSquareButtonStyle}"
+                                                Style="{StaticResource BaseButton}"
                                                 Content="{x:Static properties:Resources.Watch}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>

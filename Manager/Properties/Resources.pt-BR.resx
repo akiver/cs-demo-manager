@@ -1816,17 +1816,11 @@ Não é possivel iniciar o jogo.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>Nenhuma demo encontrada para essa conta</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Comando para início de dmeo copiado para área de transferência</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Recuperando informações das últimas partidas...</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Procurando contas do último rank</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} suspeitos(s) foi/foram banidos!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
@@ -2523,9 +2517,6 @@ Mensagem de Erro:
   </data>
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>Essa demo não é dos servidores de matchmaking de Valve ou o arquivo .info está faltando.</value>
-  </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Link de compartilhamento copiado para a área de transferência</value>
   </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Copiar link de compartilhamento</value>

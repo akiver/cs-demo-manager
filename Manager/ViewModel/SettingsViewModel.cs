@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using ControlzEx.Theming;
 using Core;
 using Core.Models;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -342,10 +343,11 @@ namespace Manager.ViewModel
             set
             {
                 Set(() => SelectedTheme, ref _selectedTheme, value);
-                Settings.Default.Theme = value.Id;
-                Tuple<AppTheme, Accent> appStyle = ThemeManager.DetectAppStyle(Application.Current);
-                AppTheme theme = ThemeManager.GetAppTheme(SelectedTheme.Id);
-                ThemeManager.ChangeAppStyle(Application.Current, appStyle.Item2, theme);
+                if (value.Id != null)
+                {
+                    Settings.Default.Theme = value.Id;
+                    ThemeManager.Current.ChangeThemeBaseColor(Application.Current, value.Id);
+                }
             }
         }
 

@@ -2355,10 +2355,6 @@ Impossible de lancer le jeu.</target>
           <source>No demos found for this account</source>
           <target state="final">Aucune démo trouvée pour ce compte</target>
         </trans-unit>
-        <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
-          <source>Playdemo command copied to clipboard</source>
-          <target state="final">Commande "playdemo" copiée dans le presse papier</target>
-        </trans-unit>
         <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>Retrieving last matches information...</source>
           <target state="final">Récupération des informations de vos derniers matchs...</target>
@@ -2366,10 +2362,6 @@ Impossible de lancer le jeu.</target>
         <trans-unit id="NotificationSearchingLastRank" translate="yes" xml:space="preserve">
           <source>Searching account's last rank...</source>
           <target state="final">Récupération du dernier rang détecté pour ce compte...</target>
-        </trans-unit>
-        <trans-unit id="NotificationSuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
-          <source>{0} suspect(s) have been banned!</source>
-          <target state="final">{0} suspect(s) ont été banni!</target>
         </trans-unit>
         <trans-unit id="SaveHere" translate="yes" xml:space="preserve">
           <source>Save here</source>
@@ -3361,10 +3353,6 @@ Message d'erreur :
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
           <target state="final">Cette démo ne provient pas d'un serveur matchmaking Valve ou le fichier .info n'est pas présent.</target>
         </trans-unit>
-        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
-          <source>Share code copied to clipboard.</source>
-          <target state="final">Code de partage copié dans le presse-papiers.</target>
-        </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
           <target state="final">Copier le code de partage</target>
@@ -4233,6 +4221,10 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
           <target state="final">Nombre max d'analyses de démo en parallèle</target>
+        </trans-unit>
+        <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="final">Annuler</target>
         </trans-unit>
       </group>
     </body>

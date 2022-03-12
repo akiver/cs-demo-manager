@@ -2409,10 +2409,6 @@ Unable to start the game.</source>
           <source>No demos found for this account</source>
           <target state="final">未找到该账户的录像信息</target>
         </trans-unit>
-        <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
-          <source>Playdemo command copied to clipboard</source>
-          <target state="final">已将 "playdemo" 命令复制到剪贴板</target>
-        </trans-unit>
         <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>Retrieving last matches information...</source>
           <target state="final">正在获取近期的比赛信息……</target>
@@ -2420,10 +2416,6 @@ Unable to start the game.</source>
         <trans-unit id="NotificationSearchingLastRank" translate="yes" xml:space="preserve">
           <source>Searching account's last rank...</source>
           <target state="final">正在搜索账户的最后段位……</target>
-        </trans-unit>
-        <trans-unit id="NotificationSuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
-          <source>{0} suspect(s) have been banned!</source>
-          <target state="final">{0} 名嫌疑玩家已被封禁！</target>
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>OK</source>
@@ -3358,10 +3350,6 @@ Message Error :
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
           <target state="final">此录像文件并非来源于 Valve 官方竞技匹配服务器或者其 .info 文件已经丢失。</target>
         </trans-unit>
-        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
-          <source>Share code copied to clipboard.</source>
-          <target state="final">分享代码已被复制到剪贴板</target>
-        </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
           <target state="final">复制分享代码</target>
@@ -4226,6 +4214,10 @@ Please update it by clicking on the "Update" button.</source>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
           <target state="new">Max concurrent demo analyzes</target>
+        </trans-unit>
+        <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="new">Cancel</target>
         </trans-unit>
       </group>
     </body>

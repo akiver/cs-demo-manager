@@ -1813,17 +1813,11 @@ Das Spiel kann nicht gestartet werden.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>Keine Demos für diesen Account gefunden</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Playdemo-Befehl wurde in die Zwischenablage kopiert</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Erhalte Informationen über das letzte Spiel.</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Suche den letzten bekannten Rang...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} Verdächtige(r) wurde(n) gebannt!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
@@ -2519,9 +2513,6 @@ Message Error :
   </data>
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>Diese Demo ist keine MM Demo oder die .info Datei fehlt.</value>
-  </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Teilen-Code wurde in die Zwischenablage kopiert.</value>
   </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Kopiere Teilen-Code</value>

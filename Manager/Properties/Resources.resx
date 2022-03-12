@@ -387,7 +387,7 @@
   <data name="HeaderHltvRating" xml:space="preserve">
     <value>HLTV</value>
   </data>
-	<data name="HeaderHltv2Rating" xml:space="preserve">
+  <data name="HeaderHltv2Rating" xml:space="preserve">
     <value>HLTV2</value>
   </data>
   <data name="Hostname" xml:space="preserve">
@@ -963,7 +963,7 @@
   <data name="HeaderToolTipHltvRating" xml:space="preserve">
     <value>HLTV Rating</value>
   </data>
-	<data name="HeaderToolTipHltv2Rating" xml:space="preserve">
+  <data name="HeaderToolTipHltv2Rating" xml:space="preserve">
     <value>HLTV2 Rating</value>
   </data>
   <data name="HeaderToolTipIsOwBanned" xml:space="preserve">
@@ -1255,7 +1255,7 @@
   <data name="HltvFull" xml:space="preserve">
     <value>HLTV (HLTV Rating)</value>
   </data>
-	<data name="Hltv2Full" xml:space="preserve">
+  <data name="Hltv2Full" xml:space="preserve">
     <value>HLTV2 (HLTV2 Rating)</value>
   </data>
   <data name="JumpKillsFull" xml:space="preserve">
@@ -1931,17 +1931,11 @@ Unable to start the game.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>No demos found for this account</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Playdemo command copied to clipboard</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Retrieving last matches information...</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Searching account's last rank...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} suspect(s) have been banned!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
@@ -2648,9 +2642,6 @@ Message Error :
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>This demo is not from Valve matchmaking servers or the .info file is missing.</value>
   </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Share code copied to clipboard.</value>
-  </data>
   <data name="ShowOnThirdParty" xml:space="preserve">
     <value>Show on third party application</value>
   </data>
@@ -3278,5 +3269,8 @@ Please update it by clicking on the "Update" button.</value>
   </data>
   <data name="MaxConcurrentAnalyzes" xml:space="preserve">
     <value>Max concurrent demo analyzes</value>
+  </data>
+  <data name="TooltipCancel" xml:space="preserve">
+    <value>Cancel</value>
   </data>
 </root>

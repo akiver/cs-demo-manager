@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -42,102 +42,36 @@
 
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToHomeCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToOverallCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipOverall}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_globe_wire}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Overall}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        IsEnabled="False"
-                        ToolTip="{x:Static properties:Resources.ToolTipRank}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Rank}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToMapCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipMaps}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_map}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Maps}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToWeaponCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
-                               Width="15"
-                               Height="15" />
-                        <TextBlock Text="{x:Static properties:Resources.Weapons}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToProgressCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipProgression}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_graph_line_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Progression}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToHomeCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Overall}"
+                    Icon="Earth"
+                    Command="{Binding GoToOverallCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipOverall}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Rank}"
+                    Icon="ChartBellCurve"
+                    ToolTip="{x:Static properties:Resources.ToolTipRank}"
+                    IsEnabled="False" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Maps}"
+                    Icon="Map"
+                    Command="{Binding GoToMapCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipMaps}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Weapons}"
+                    Icon="Pistol"
+                    Command="{Binding GoToWeaponCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipWeapons}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Progression}"
+                    Icon="TrendingUp"
+                    Command="{Binding GoToProgressCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipProgression}" />
 
                 <TextBlock Text="{x:Static properties:Resources.LabelScale}"
                            Style="{StaticResource TextBlockStandard}" />
@@ -147,16 +81,8 @@
                           SelectedValuePath="Id"
                           Margin="5" />
 
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{Binding Notification}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{Binding Notification}" />
             </StackPanel>
         </Grid>
 
@@ -190,7 +116,7 @@
                                     CategoryBinding="Date"
                                     ValueBinding="NewRank"
                                     StrokeThickness="3"
-                                    Stroke="{StaticResource LightGreenBrush}"
+                                    Stroke="{DynamicResource MahApps.Brushes.Highlight}"
                                     PointTemplateSelector="{StaticResource RankPointTemplateSelector}" />
                 <telerik:RadCartesianChart.Grid>
                     <telerik:CartesianChartGrid MajorLinesVisibility="X" />
@@ -199,7 +125,7 @@
 
             <telerik:RadLegend Grid.Row="1" VerticalAlignment="Bottom"
                                HorizontalAlignment="Center"
-                               Foreground="{StaticResource LightWhiteBrush}">
+                               Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
                 <telerik:RadLegend.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel Orientation="Horizontal" />

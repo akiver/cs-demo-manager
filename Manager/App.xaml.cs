@@ -10,9 +10,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
+using ControlzEx.Theming;
 using Core;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro;
+using MahApps.Metro.Theming;
 using Manager.Properties;
 
 namespace Manager
@@ -184,12 +186,21 @@ namespace Manager
         {
             try
             {
-                ThemeManager.AddAccent("CustomLime", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/CustomLime.xaml"));
-                ThemeManager.AddAppTheme("Dark", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeDark.xaml"));
-                ThemeManager.AddAppTheme("Light", new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeLight.xaml"));
-                Accent accent = ThemeManager.GetAccent("CustomLime");
-                AppTheme theme = ThemeManager.GetAppTheme(Settings.Default.Theme);
-                ThemeManager.ChangeAppStyle(Current, accent, theme);
+                var darkTheme = ThemeManager.Current.AddLibraryTheme(new LibraryTheme(
+                    new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeDark.xaml"),
+                    MahAppsLibraryThemeProvider.DefaultInstance));
+                var lightTheme = ThemeManager.Current.AddLibraryTheme(new LibraryTheme(
+                    new Uri("pack://application:,,,/CSGODemosManager;component/Resources/Accents/ThemeLight.xaml"),
+                    MahAppsLibraryThemeProvider.DefaultInstance));
+                if (Settings.Default.Theme == "Dark")
+                {
+                    ThemeManager.Current.ChangeTheme(this, darkTheme);
+                }
+                else
+                {
+                    ThemeManager.Current.ChangeTheme(this, lightTheme);
+                }
+
                 base.OnStartup(e);
             }
             catch (Exception ex)

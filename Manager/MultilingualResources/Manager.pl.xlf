@@ -2410,10 +2410,6 @@ Uruchomienie gry nie powiodło się.</target>
           <source>No demos found for this account</source>
           <target state="final">Nie znaleziono dem dla tego konta</target>
         </trans-unit>
-        <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
-          <source>Playdemo command copied to clipboard</source>
-          <target state="final">Komenda playdemo skopiowana do schowka</target>
-        </trans-unit>
         <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>Retrieving last matches information...</source>
           <target state="final">Uzyskiwanie informacji z ostatnich meczów...</target>
@@ -2421,10 +2417,6 @@ Uruchomienie gry nie powiodło się.</target>
         <trans-unit id="NotificationSearchingLastRank" translate="yes" xml:space="preserve">
           <source>Searching account's last rank...</source>
           <target state="final">Szukanie ostatniej rangi na koncie...</target>
-        </trans-unit>
-        <trans-unit id="NotificationSuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
-          <source>{0} suspect(s) have been banned!</source>
-          <target state="final">{0} podejrzanych zostało zbanowanych!</target>
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>OK</source>
@@ -3359,10 +3351,6 @@ Treść błędu :
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
           <target state="final">To demo nie pochodzi z serwerów dobierania przeciwników Valve lub nie znaleziono pliku .info.</target>
         </trans-unit>
-        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
-          <source>Share code copied to clipboard.</source>
-          <target state="final">Kod udostępniania skopiowany do schowka.</target>
-        </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
           <target state="final">Skopiuj kod udostępniania</target>
@@ -4227,6 +4215,10 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
           <target state="new">Max concurrent demo analyzes</target>
+        </trans-unit>
+        <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="new">Cancel</target>
         </trans-unit>
       </group>
     </body>

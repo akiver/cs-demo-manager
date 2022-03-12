@@ -3,13 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              DataContext="{Binding DemoDamages, Source={StaticResource Locator}}">
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -34,28 +34,17 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToDemoDetailsCommand}"
-                        CommandParameter="{Binding Demo}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}" />
 
                 <ComboBox ItemsSource="{Binding TeamSelectors}"
                           SelectedItem="{Binding SelectedTeam}"
                           DisplayMemberPath="Title"
-                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Team}"
+                          mahapps:TextBoxHelper.Watermark="{x:Static properties:Resources.Team}"
                           SelectedValuePath="Title"
                           Margin="5"
                           IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
@@ -64,7 +53,7 @@
                           SelectedItem="{Binding SelectedPlayer}"
                           DisplayMemberPath="Name"
                           SelectedValuePath="Name"
-                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
+                          mahapps:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}"
                           Margin="5"
                           IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
 
@@ -78,7 +67,7 @@
                           SelectedItem="{Binding SelectedRound}"
                           DisplayMemberPath="Number"
                           SelectedValuePath="Number"
-                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
+                          mahapps:TextBoxHelper.Watermark="{x:Static properties:Resources.Round}"
                           Margin="5"
                           IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
                 <CheckBox Content="{x:Static properties:Resources.AllRounds}"
@@ -86,33 +75,13 @@
                           IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
                           Margin="5"
                           VerticalAlignment="Center" />
-                <Button Command="{Binding UpdateCommand}"
-                        Style="{DynamicResource GeneralButton}"
-                        ToolTip="{x:Static properties:Resources.ToolTipUpdate}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_refresh}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Refresh}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Orientation="Horizontal"
-                            Margin="5">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{x:Static properties:Resources.NotificationUpdating}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Refresh}"
+                    ToolTip="{x:Static properties:Resources.ToolTipUpdate}"
+                    Icon="Update"
+                    Command="{Binding UpdateCommand}" />
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{x:Static properties:Resources.NotificationUpdating}" />
             </StackPanel>
         </Grid>
 

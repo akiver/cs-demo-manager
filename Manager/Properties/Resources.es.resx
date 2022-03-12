@@ -1816,17 +1816,11 @@ No se puede iniciar el juego.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>No se han encontrado repeticiones para esta cuenta</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Comando Playdemo copiado al portapapeles</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Recuperando información de las últimas partidas...</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Buscando el último rango de la cuenta...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>¡{0} sospechoso(s) han sido baneados!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
@@ -2522,9 +2516,6 @@ Mensaje de error:
   </data>
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>Esta repetición no es de los servidores de Valve o falta el archivo .info.</value>
-  </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Código para compartir copiado al portapapeles.</value>
   </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Copiar código para compartir</value>

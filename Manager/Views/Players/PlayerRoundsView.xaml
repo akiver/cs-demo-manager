@@ -124,7 +124,7 @@
                         <DataTemplate>
                             <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithoutDelayCommand}"
                                     CommandParameter="{Binding SelectedItem.Tick, ElementName=RoundsDataGrid}"
-                                    Style="{DynamicResource AccentedSquareButtonStyle}"
+                                    Style="{DynamicResource BaseButton}"
                                     Content="{x:Static properties:Resources.Watch}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

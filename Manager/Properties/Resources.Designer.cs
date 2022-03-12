@@ -6038,15 +6038,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Share code copied to clipboard..
-        /// </summary>
-        public static string NotificationDemoShareCodeCopied {
-            get {
-                return ResourceManager.GetString("NotificationDemoShareCodeCopied", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Downloading demo {0}/{1}....
         /// </summary>
         public static string NotificationDownloadingDemo {
@@ -6209,15 +6200,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Playdemo command copied to clipboard.
-        /// </summary>
-        public static string NotificationPlayDemoCommandCopied {
-            get {
-                return ResourceManager.GetString("NotificationPlayDemoCommandCopied", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Player added to suspects list..
         /// </summary>
         public static string NotificationPlayedAddedToSuspectsList {
@@ -6331,15 +6313,6 @@ namespace Manager.Properties {
         public static string NotificationStoppingAnalyze {
             get {
                 return ResourceManager.GetString("NotificationStoppingAnalyze", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to {0} suspect(s) have been banned!.
-        /// </summary>
-        public static string NotificationSuspectsHaveBeenBanned {
-            get {
-                return ResourceManager.GetString("NotificationSuspectsHaveBeenBanned", resourceCulture);
             }
         }
         
@@ -7942,6 +7915,15 @@ namespace Manager.Properties {
         public static string ToolTipBrowseToVirtualDubFolder {
             get {
                 return ResourceManager.GetString("ToolTipBrowseToVirtualDubFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string TooltipCancel {
+            get {
+                return ResourceManager.GetString("TooltipCancel", resourceCulture);
             }
         }
         

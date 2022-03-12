@@ -4,11 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:properties="clr-namespace:Manager.Properties"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
+             xmlns:controls="clr-namespace:Manager.Controls"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -55,7 +57,7 @@
             <!-- Demo not analyzed message -->
             <RowDefinition Height="Auto" />
             <!-- Timeline-->
-            <RowDefinition Height="*" MinHeight="450" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0" Height="40">
@@ -69,69 +71,41 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"
-                    Style="{DynamicResource GeneralButton}"
-                    Command="{Binding BackToDemoDetails}"
-                    ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Back}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
 
-            <Button Grid.Column="1" Style="{DynamicResource GeneralButton}"
-                    Command="{Binding GenerateMovie}"
-                    ToolTip="{x:Static properties:Resources.ToolTipGenerateMovie}">
-                <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_movie_clapper_select}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Generate}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
-            <CheckBox Grid.Column="2" Content="{x:Static properties:Resources.GenerateVideoFile}"
+            <controls:ButtonWithIcon
+                Grid.Column="0"
+                Text="{x:Static properties:Resources.Back}"
+                ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                Icon="ArrowLeft"
+                Command="{Binding BackToDemoDetails}" />
+            <controls:ButtonWithIcon
+                Grid.Column="1"
+                Text="{x:Static properties:Resources.Generate}"
+                ToolTip="{x:Static properties:Resources.ToolTipGenerateMovie}"
+                Icon="MovieOpen"
+                Command="{Binding GenerateMovie}" />
+
+            <CheckBox Grid.Column="2"
+                      Content="{x:Static properties:Resources.GenerateVideoFile}"
                       IsChecked="{Binding GenerateVideoFile}"
                       Style="{StaticResource CheckBoxColumnOptionStyle}" />
-            <controls:ToggleSwitch Grid.Column="3"
-                                   OnLabel="VirtualDub"
-                                   OffLabel="FFmpeg"
-                                   VerticalAlignment="Center"
-                                   ToolTip="{x:Static properties:Resources.ToolTipSwitchBetweenFFmpegVirtualDub}"
-                                   IsChecked="{Binding UseVirtualDub}"
-                                   Visibility="{Binding GenerateVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                   IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
-            <Button Grid.Column="4"
-                    Style="{DynamicResource GeneralButton}"
-                    Command="{Binding Cancel}"
-                    Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}"
-                    ToolTip="Cancel">
-                <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                    <Rectangle Width="15"
-                               Height="15"
-                               Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_control_stop}"
-                                         Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Cancel}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
+
+            <mahapps:ToggleSwitch Grid.Column="3"
+                                  OnContent="VirtualDub"
+                                  OffContent="FFmpeg"
+                                  VerticalAlignment="Center"
+                                  ToolTip="{x:Static properties:Resources.ToolTipSwitchBetweenFFmpegVirtualDub}"
+                                  IsOn="{Binding UseVirtualDub}"
+                                  Visibility="{Binding GenerateVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
+
+            <controls:ButtonWithIcon
+                Grid.Column="4"
+                Text="{x:Static properties:Resources.Cancel}"
+                ToolTip="{x:Static properties:Resources.TooltipCancel}"
+                Icon="Stop"
+                Command="{Binding Cancel}"
+                Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
 
             <StackPanel Grid.Column="5"
                         Orientation="Horizontal"
@@ -151,39 +125,28 @@
                        Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityConverter}}"
                        Style="{StaticResource TextBlockSmallDanger}" />
 
-            <Rectangle Grid.Column="7"
-                       Margin="10 0 10 0"
-                       Fill="{StaticResource HighlightBrush}"
-                       Height="20"
-                       Width="20"
-                       ToolTip="{x:Static properties:Resources.SeeDocOnWebsite}"
-                       Cursor="Hand">
+            <iconPacks:PackIconMaterial Kind="HelpCircle"
+                                        Grid.Column="7"
+                                        ToolTip="{x:Static properties:Resources.SeeDocOnWebsite}"
+                                        VerticalAlignment="Center"
+                                        Cursor="Hand"
+                                        Margin="0 0 5 0"
+                                        Foreground="{DynamicResource MahApps.Brushes.Highlight}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDown">
                         <i:InvokeCommandAction Command="{Binding HandleHyperLinkCommand}"
-                                                CommandParameter="https://csgo-demos-manager.com/docs/movie" />
+                                               CommandParameter="https://csgo-demos-manager.com/docs/movie" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                <Rectangle.OpacityMask>
-                    <VisualBrush Visual="{StaticResource appbar_question}" Stretch="Fill" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
+            </iconPacks:PackIconMaterial>
+
         </Grid>
 
-        <Grid Grid.Row="1"
-              Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}">
-            <StackPanel Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="5">
-                <controls:ProgressRing Foreground="{DynamicResource BlackColorBrush}"
-                                       Width="40"
-                                       Height="40" />
-                <TextBlock Text="{Binding Notification}"
-                           Style="{StaticResource NotificationMessageStyle}" />
-            </StackPanel>
-        </Grid>
+        <controls:LoadingMessage Grid.Row="1"
+                                 Visible="{Binding HasNotification}"
+                                 Message="{Binding Notification}" />
 
-        <Grid Grid.Row="2" Margin="10">
+        <Grid Grid.Row="2" Margin="5 0 5 5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -198,12 +161,12 @@
                 </Grid.RowDefinitions>
 
                 <Border Grid.Row="0"
-                        BorderBrush="{StaticResource LightWhiteBrush}"
+                        BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                         BorderThickness="1"
                         Margin="0 0 0 5">
                     <StackPanel Orientation="Vertical"
                                 Margin="5 0 5 0">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="0 0 0 1">
                             <DockPanel VerticalAlignment="Center">
                                 <TextBlock Text="HLAE"
@@ -384,22 +347,22 @@
                                 </Grid.ColumnDefinitions>
                                 <Label Grid.Column="0"
                                        Content="{x:Static properties:Resources.LabelDisplayTimeSeconds}" />
-                                <controls:NumericUpDown Grid.Column="1"
-                                                        Minimum="1"
-                                                        Maximum="60"
-                                                        Interval="0.5"
-                                                        MinWidth="70"
-                                                        InterceptMouseWheel="True"
-                                                        HasDecimals="True"
-                                                        IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                        Value="{Binding DeathNoticesDisplayTime}" />
+                                <mahapps:NumericUpDown Grid.Column="1"
+                                                       Minimum="1"
+                                                       Maximum="60"
+                                                       Interval="0.5"
+                                                       MinWidth="70"
+                                                       InterceptMouseWheel="True"
+                                                       NumericInputMode="Decimal"
+                                                       IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                                       Value="{Binding DeathNoticesDisplayTime}" />
                             </Grid>
                         </Grid>
                     </StackPanel>
                 </Border>
 
                 <Border Grid.Row="1"
-                        BorderBrush="{StaticResource LightWhiteBrush}"
+                        BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                         BorderThickness="1"
                         Margin="0 0 0 5"
                         Visibility="{Binding GenerateVideoFile, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -407,7 +370,7 @@
                         <StackPanel Orientation="Vertical"
                                     Visibility="{Binding UseVirtualDub, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
                                     Margin="5 0 5 0">
-                            <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                            <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                     BorderThickness="0 0 0 1">
                                 <DockPanel VerticalAlignment="Center">
                                     <TextBlock Text="FFmpeg"
@@ -452,15 +415,15 @@
                                     </Grid.ColumnDefinitions>
 
                                     <Label Grid.Column="0" Content="{x:Static properties:Resources.LabelVideoQuality}" />
-                                    <controls:NumericUpDown Grid.Column="1"
-                                                            Minimum="0"
-                                                            Maximum="51"
-                                                            Interval="1"
-                                                            MinWidth="70"
-                                                            InterceptMouseWheel="True"
-                                                            HasDecimals="False"
-                                                            IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                            Value="{Binding VideoQuality}" />
+                                    <mahapps:NumericUpDown Grid.Column="1"
+                                                           Minimum="0"
+                                                           Maximum="51"
+                                                           Interval="1"
+                                                           MinWidth="70"
+                                                           InterceptMouseWheel="True"
+                                                           NumericInputMode="Numbers"
+                                                           IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                                           Value="{Binding VideoQuality}" />
                                     <Label Grid.Column="4" Content="{x:Static properties:Resources.LabelAudioBitrate}" />
                                     <ComboBox Grid.Column="5"
                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
@@ -488,7 +451,7 @@
                                              Text="{Binding FFmpegExtraParameters}"
                                              IsEnabled="{Binding GenerateVideoFile, Mode=OneWay}" />
                                 </Grid>
-                                <StackPanel Orientation="Vertical">
+                                <StackPanel Orientation="Vertical" Margin="0 0 0 5">
                                     <Label Content="{x:Static properties:Resources.LabelCLI}" />
                                     <TextBox Text="{Binding FFmpegCommand, Mode=OneWay}"
                                              TextWrapping="Wrap"
@@ -536,12 +499,12 @@
             </Grid>
 
             <Border Grid.Column="1"
-                    BorderBrush="{StaticResource LightWhiteBrush}"
+                    BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                     Margin="5 0 0 0"
                     BorderThickness="1">
                 <StackPanel Orientation="Vertical"
                             Margin="5 0 5 0">
-                    <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                    <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="0 0 0 1">
                         <StackPanel Orientation="Horizontal"
                                     VerticalAlignment="Center"
@@ -617,55 +580,55 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0 5 0 5">
                         <Label Content="{x:Static properties:Resources.LabelFramerate}" />
-                        <controls:NumericUpDown Minimum="30"
-                                                Interval="10"
-                                                HasDecimals="False"
-                                                MinWidth="80"
-                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                Value="{Binding FrameRate}" />
+                        <mahapps:NumericUpDown Minimum="30"
+                                               Interval="10"
+                                               NumericInputMode="Numbers"
+                                               MinWidth="80"
+                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                               Value="{Binding FrameRate}" />
                         <Label Content="{x:Static properties:Resources.LabelWidth}" />
-                        <controls:NumericUpDown Minimum="800"
-                                                HideUpDownButtons="True"
-                                                HasDecimals="False"
-                                                MinWidth="40"
-                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                Value="{Binding Width}" />
+                        <mahapps:NumericUpDown Minimum="800"
+                                               HideUpDownButtons="True"
+                                               NumericInputMode="Numbers"
+                                               MinWidth="40"
+                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                               Value="{Binding Width}" />
                         <Label Content="{x:Static properties:Resources.LabelHeight}" />
-                        <controls:NumericUpDown Minimum="600"
-                                                HideUpDownButtons="True"
-                                                HasDecimals="False"
-                                                MinWidth="40"
-                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                Value="{Binding Height}" />
+                        <mahapps:NumericUpDown Minimum="600"
+                                               HideUpDownButtons="True"
+                                               NumericInputMode="Numbers"
+                                               MinWidth="40"
+                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                               Value="{Binding Height}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
                         <Label Content="{x:Static properties:Resources.LabelStartTick}"
                                Foreground="{StaticResource OrangeBrush}" />
-                        <controls:NumericUpDown Minimum="0"
-                                                Interval="1"
-                                                HasDecimals="False"
-                                                MinWidth="100"
-                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                Value="{Binding StartTick}" />
+                        <mahapps:NumericUpDown Minimum="0"
+                                               Interval="1"
+                                               NumericInputMode="Numbers"
+                                               MinWidth="100"
+                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                               Value="{Binding StartTick}" />
                         <Label Content="{x:Static properties:Resources.LabelEndTick}"
                                Foreground="{StaticResource OrangeBrush}" />
-                        <controls:NumericUpDown Minimum="0"
-                                                Interval="1"
-                                                HasDecimals="False"
-                                                MinWidth="100"
-                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                Value="{Binding EndTick}" />
+                        <mahapps:NumericUpDown Minimum="0"
+                                               Interval="1"
+                                               NumericInputMode="Numbers"
+                                               MinWidth="100"
+                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                               Value="{Binding EndTick}" />
                         <Label Content="{x:Static properties:Resources.LabelDurationSeconds}"
                                Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
                                Foreground="{StaticResource OrangeBrush}" />
-                        <controls:NumericUpDown Minimum="0"
-                                                Interval="1"
-                                                StringFormat="N2"
-                                                MinWidth="100"
-                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
-                                                Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
-                                                Value="{Binding Duration}" />
+                        <mahapps:NumericUpDown Minimum="0"
+                                               Interval="1"
+                                               StringFormat="N2"
+                                               MinWidth="100"
+                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                               Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
+                                               Value="{Binding Duration}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal"
@@ -680,15 +643,15 @@
                                   Visibility="{Binding IsIncompatibleDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
                                   DisplayMemberPath="Name"
                                   SelectedItem="{Binding FocusedPlayer}" />
-                        <controls:NumericUpDown Minimum="0"
-                                                HideUpDownButtons="True"
-                                                HasDecimals="False"
-                                                MinWidth="100"
-                                                Margin="5 0 0 0"
-                                                Value="{Binding PlayerFocusSteamID}"
-                                                Visibility="{Binding IsIncompatibleDemo, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                controls:TextBoxHelper.Watermark="SteamID 64"
-                                                IsEnabled="{Binding FocusOnPlayer}" />
+                        <mahapps:NumericUpDown Minimum="0"
+                                               HideUpDownButtons="True"
+                                               NumericInputMode="Numbers"
+                                               MinWidth="100"
+                                               Margin="5 0 0 0"
+                                               Value="{Binding PlayerFocusSteamID}"
+                                               Visibility="{Binding IsIncompatibleDemo, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                               mahapps:TextBoxHelper.Watermark="SteamID 64"
+                                               IsEnabled="{Binding FocusOnPlayer}" />
                     </StackPanel>
 
 
@@ -720,13 +683,13 @@
                     </Grid.RowDefinitions>
 
                     <Border Grid.Row="0"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             Visibility="{Binding ShowDemoComment, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
                             BorderThickness="1">
                         <StackPanel Orientation="Vertical"
                                     VerticalAlignment="Center"
                                     Margin="5 0 5 0">
-                            <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                            <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                     BorderThickness="0 0 0 1">
                                 <DockPanel VerticalAlignment="Center">
                                     <TextBlock Text="{x:Static properties:Resources.CFG}"
@@ -763,13 +726,14 @@
                                          ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                          ScrollViewer.VerticalScrollBarVisibility="Auto"
                                          ScrollViewer.CanContentScroll="True"
-                                         IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
+                                         IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                                         Margin="0 0 0 5" />
                             </StackPanel>
                         </StackPanel>
                     </Border>
 
                     <Border Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             Visibility="{Binding ShowDemoComment, Converter={StaticResource BooleanToVisibilityConverter}}"
                             BorderThickness="1">
                         <StackPanel Orientation="Vertical"
@@ -786,19 +750,17 @@
                                             Command="{Binding ToggleDemoCommentVisibility}" />
                                 </StackPanel>
                             </DockPanel>
-                            <Border BorderBrush="{StaticResource LightWhiteBrush}"
-                                    Margin="0 0 0 5">
-                                <TextBox Text="{Binding Demo.Comment}"
-                                         MaxHeight="300"
-                                         TextWrapping="Wrap"
-                                         AcceptsReturn="True">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="LostFocus">
-                                            <i:InvokeCommandAction Command="{Binding SaveCommentDemo}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </TextBox>
-                            </Border>
+                            <TextBox Text="{Binding Demo.Comment}"
+                                     MaxHeight="300"
+                                     TextWrapping="Wrap"
+                                     AcceptsReturn="True"
+                                     Margin="0 0 0 5">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="LostFocus">
+                                        <i:InvokeCommandAction Command="{Binding SaveCommentDemo}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </TextBox>
                         </StackPanel>
                     </Border>
                 </Grid>
@@ -848,7 +810,7 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseRightButtonDown">
                     <i:InvokeCommandAction Command="{Binding TimelineRightClick}"
-                                            PassEventArgsToCommand="True" />
+                                           PassEventArgsToCommand="True" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </telerik:RadTimeline>

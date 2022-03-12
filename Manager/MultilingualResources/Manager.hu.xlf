@@ -2409,10 +2409,6 @@ A játékot nem lehet elindítani.</target>
           <source>No demos found for this account</source>
           <target state="final">Nem található demó ehhez a fiókhoz</target>
         </trans-unit>
-        <trans-unit id="NotificationPlayDemoCommandCopied" translate="yes" xml:space="preserve">
-          <source>Playdemo command copied to clipboard</source>
-          <target state="final">A playdemo parancs a vágólapra másolva</target>
-        </trans-unit>
         <trans-unit id="NotificationRetrievingMatchesData" translate="yes" xml:space="preserve">
           <source>Retrieving last matches information...</source>
           <target state="final">Utolsó meccs információi beolvasása...</target>
@@ -2420,10 +2416,6 @@ A játékot nem lehet elindítani.</target>
         <trans-unit id="NotificationSearchingLastRank" translate="yes" xml:space="preserve">
           <source>Searching account's last rank...</source>
           <target state="final">Az utolsó ismert rang utáni keresés...</target>
-        </trans-unit>
-        <trans-unit id="NotificationSuspectsHaveBeenBanned" translate="yes" xml:space="preserve">
-          <source>{0} suspect(s) have been banned!</source>
-          <target state="final">{0} gyanúsított ki lett tiltva!</target>
         </trans-unit>
         <trans-unit id="Ok" translate="yes" xml:space="preserve">
           <source>OK</source>
@@ -3359,10 +3351,6 @@ Hibaüzenet:
           <source>This demo is not from Valve matchmaking servers or the .info file is missing.</source>
           <target state="final">Ez a demó nem a Valve versengő szervereiről származik vagy a .info fájl hiányzik.</target>
         </trans-unit>
-        <trans-unit id="NotificationDemoShareCodeCopied" translate="yes" xml:space="preserve">
-          <source>Share code copied to clipboard.</source>
-          <target state="final">Megosztási-kód vágólapra másolva.</target>
-        </trans-unit>
         <trans-unit id="CopyDemoShareCode" translate="yes" xml:space="preserve">
           <source>Copy share code</source>
           <target state="final">Megosztási-kód másolása</target>
@@ -4227,6 +4215,10 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
           <target state="new">Max concurrent demo analyzes</target>
+        </trans-unit>
+        <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
+          <source>Cancel</source>
+          <target state="new">Cancel</target>
         </trans-unit>
       </group>
     </body>

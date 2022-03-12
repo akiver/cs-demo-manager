@@ -1816,17 +1816,11 @@ A játékot nem lehet elindítani.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>Nem található demó ehhez a fiókhoz</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>A playdemo parancs a vágólapra másolva</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Utolsó meccs információi beolvasása...</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Az utolsó ismert rang utáni keresés...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} gyanúsított ki lett tiltva!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>
@@ -2522,9 +2516,6 @@ Hibaüzenet:
   </data>
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>Ez a demó nem a Valve versengő szervereiről származik vagy a .info fájl hiányzik.</value>
-  </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Megosztási-kód vágólapra másolva.</value>
   </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Megosztási-kód másolása</value>

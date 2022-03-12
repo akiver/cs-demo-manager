@@ -1776,17 +1776,11 @@ Impossible de lancer le jeu.</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>Aucune démo trouvée pour ce compte</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Commande "playdemo" copiée dans le presse papier</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Récupération des informations de vos derniers matchs...</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Récupération du dernier rang détecté pour ce compte...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} suspect(s) ont été banni!</value>
   </data>
   <data name="SaveHere" xml:space="preserve">
     <value>Sauvegarder ici</value>
@@ -2526,9 +2520,6 @@ Message d'erreur :
   <data name="DialogDemoShareCodeUnavailable" xml:space="preserve">
     <value>Cette démo ne provient pas d'un serveur matchmaking Valve ou le fichier .info n'est pas présent.</value>
   </data>
-  <data name="NotificationDemoShareCodeCopied" xml:space="preserve">
-    <value>Code de partage copié dans le presse-papiers.</value>
-  </data>
   <data name="CopyDemoShareCode" xml:space="preserve">
     <value>Copier le code de partage</value>
   </data>
@@ -3173,5 +3164,8 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="MaxConcurrentAnalyzes" xml:space="preserve">
     <value>Nombre max d'analyses de démo en parallèle</value>
+  </data>
+  <data name="TooltipCancel" xml:space="preserve">
+    <value>Annuler</value>
   </data>
 </root>

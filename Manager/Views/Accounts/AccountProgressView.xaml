@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -49,119 +50,45 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToHomeCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToHomeCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Overall}"
+                    Icon="Earth"
+                    Command="{Binding GoToOverallCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipOverall}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Rank}"
+                    Icon="ChartBellCurve"
+                    Command="{Binding GoToRankCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipRank}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Maps}"
+                    Icon="Map"
+                    Command="{Binding GoToMapCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipMaps}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Weapons}"
+                    Icon="Pistol"
+                    Command="{Binding GoToWeaponCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipWeapons}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Progression}"
+                    Icon="TrendingUp"
+                    ToolTip="{x:Static properties:Resources.ToolTipProgression}"
+                    IsEnabled="False" />
 
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToOverallCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipOverall}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_globe_wire}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Overall}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToRankCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipRank}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Rank}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToMapCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipMaps}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_map}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Maps}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToWeaponCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
-                               Width="15"
-                               Height="15" />
-                        <TextBlock Text="{x:Static properties:Resources.Weapons}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        IsEnabled="False"
-                        ToolTip="{x:Static properties:Resources.ToolTipProgression}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_graph_line_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Progression}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{Binding Notification}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{Binding Notification}" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Percentage}">
+            <TabControl mahapps:TabControlHelper.Underlined="SelectedTabItem">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Percentage}">
                     <Grid Margin="10">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -240,14 +167,14 @@
                                                     CategoryBinding="Date"
                                                     ValueBinding="WinPercentage"
                                                     StrokeThickness="3"
-                                                    Stroke="{StaticResource LightGreenBrush}"
+                                                    Stroke="{StaticResource GreenBrush}"
                                                     TooltipTemplate="{StaticResource WinToolTipTemplate}"
                                                     Visibility="{Binding IsWinChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}">
                                     <telerik:LineSeries.PointTemplate>
                                         <DataTemplate>
                                             <Ellipse Width="10"
                                                      Height="10"
-                                                     Fill="{DynamicResource BlackColorBrush}" />
+                                                     Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                         </DataTemplate>
                                     </telerik:LineSeries.PointTemplate>
                                 </telerik:LineSeries>
@@ -263,7 +190,7 @@
                                         <DataTemplate>
                                             <Ellipse Width="10"
                                                      Height="10"
-                                                     Fill="{DynamicResource BlackColorBrush}" />
+                                                     Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                         </DataTemplate>
                                     </telerik:LineSeries.PointTemplate>
                                 </telerik:LineSeries>
@@ -271,14 +198,14 @@
                                                     CategoryBinding="Date"
                                                     ValueBinding="HeadshotPercentage"
                                                     StrokeThickness="3"
-                                                    Stroke="{StaticResource GreenBrush}"
+                                                    Stroke="{StaticResource LightRedColorBrush}"
                                                     Visibility="{Binding IsHeadshotChartEnabled, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                     TooltipTemplate="{StaticResource HeadshotTooltipTemplate}">
                                     <telerik:LineSeries.PointTemplate>
                                         <DataTemplate>
                                             <Ellipse Width="10"
                                                      Height="10"
-                                                     Fill="{DynamicResource BlackColorBrush}" />
+                                                     Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                         </DataTemplate>
                                     </telerik:LineSeries.PointTemplate>
                                 </telerik:LineSeries>
@@ -293,7 +220,7 @@
                                         <DataTemplate>
                                             <Ellipse Width="10"
                                                      Height="10"
-                                                     Fill="{DynamicResource BlackColorBrush}" />
+                                                     Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                         </DataTemplate>
                                     </telerik:LineSeries.PointTemplate>
                                 </telerik:LineSeries>
@@ -312,9 +239,9 @@
                                 </telerik:RadLegend.ItemsPanel>
                                 <telerik:RadLegend.Items>
                                     <telerik:LegendItemCollection>
-                                        <telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}"
-                                                            Title="{x:Static properties:Resources.WinPercent}" />
                                         <telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
+                                                            Title="{x:Static properties:Resources.WinPercent}" />
+                                        <telerik:LegendItem MarkerFill="{StaticResource LightRedColorBrush}"
                                                             Title="{x:Static properties:Resources.HeadshotsPercent}" />
                                         <telerik:LegendItem MarkerFill="{StaticResource LightBlueBrush}"
                                                             Title="{x:Static properties:Resources.Damages}" />
@@ -325,9 +252,9 @@
                             </telerik:RadLegend>
                         </Grid>
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
 
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Kills}">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Kills}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*" />
@@ -360,13 +287,13 @@
                                                 CategoryBinding="Date"
                                                 ValueBinding="KillAverage"
                                                 StrokeThickness="3"
-                                                Stroke="{StaticResource LightGreenBrush}"
+                                                Stroke="{StaticResource GreenBrush}"
                                                 TooltipTemplate="{StaticResource KillTooltipTemplate}">
                                 <telerik:LineSeries.PointTemplate>
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -380,7 +307,7 @@
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -399,7 +326,7 @@
                             </telerik:RadLegend.ItemsPanel>
                             <telerik:RadLegend.Items>
                                 <telerik:LegendItemCollection>
-                                    <telerik:LegendItem MarkerFill="{StaticResource LightGreenBrush}"
+                                    <telerik:LegendItem MarkerFill="{StaticResource GreenBrush}"
                                                         Title="{x:Static properties:Resources.Kill}" />
                                     <telerik:LegendItem MarkerFill="{StaticResource LightRedColorBrush}"
                                                         Title="{x:Static properties:Resources.Death}" />
@@ -407,8 +334,8 @@
                             </telerik:RadLegend.Items>
                         </telerik:RadLegend>
                     </Grid>
-                </controls:MetroTabItem>
-                <controls:MetroTabItem Header="{x:Static properties:Resources.KillVelocity}">
+                </mahapps:MetroTabItem>
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.KillVelocity}">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -490,7 +417,7 @@
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -505,7 +432,7 @@
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -520,7 +447,7 @@
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -535,7 +462,7 @@
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -550,7 +477,7 @@
                                     <DataTemplate>
                                         <Ellipse Width="10"
                                                  Height="10"
-                                                 Fill="{DynamicResource BlackColorBrush}" />
+                                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                                     </DataTemplate>
                                 </telerik:LineSeries.PointTemplate>
                             </telerik:LineSeries>
@@ -587,7 +514,7 @@
                                    Style="{StaticResource LabelChartStyle}"
                                    HorizontalAlignment="Center" />
                     </Grid>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
             </TabControl>
         </Grid>
     </Grid>

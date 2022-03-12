@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1280"
              DataContext="{Binding PlayerDetails, Source={StaticResource Locator}}">
@@ -18,26 +19,17 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Style="{StaticResource LabelChartStyle}"
                        Text="{x:Static properties:Resources.Damages}" />
-            <Button Command="{Binding ExportChartCommand}"
-                    CommandParameter="{Binding ElementName=DamagesChart}"
-                    Style="{DynamicResource GeneralButton}"
-                    Margin="0"
-                    ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}">
-                <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                    <Rectangle Width="15" Height="15" Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_page_png}" Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Export}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
+            <controls:ButtonWithIcon
+                Text="{x:Static properties:Resources.Export}"
+                ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}"
+                Icon="FilePngBox"
+                Command="{Binding ExportChartCommand}"
+                CommandParameter="{Binding ElementName=DamagesChart}" />
         </StackPanel>
         <telerik:RadCartesianChart Grid.Row="1"
                                    ClipToBounds="False"
                                    x:Name="DamagesChart"
-                                   Background="{StaticResource WindowBackgroundBrush}">
+                                   Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
             <telerik:RadCartesianChart.Resources>
                 <telerik:LinearAxis x:Key="TotalDamageAxis"
                                     Minimum="0"
@@ -81,7 +73,7 @@
                     <DataTemplate>
                         <Ellipse Width="10"
                                  Height="10"
-                                 Fill="{DynamicResource BlackColorBrush}" />
+                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                     </DataTemplate>
                 </telerik:LineSeries.PointTemplate>
             </telerik:LineSeries>
@@ -97,7 +89,7 @@
                     <DataTemplate>
                         <Ellipse Width="10"
                                  Height="10"
-                                 Fill="{DynamicResource BlackColorBrush}" />
+                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                     </DataTemplate>
                 </telerik:LineSeries.PointTemplate>
             </telerik:LineSeries>
@@ -114,7 +106,7 @@
                     <DataTemplate>
                         <Ellipse Width="10"
                                  Height="10"
-                                 Fill="{DynamicResource BlackColorBrush}" />
+                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                     </DataTemplate>
                 </telerik:LineSeries.PointTemplate>
             </telerik:LineSeries>
@@ -131,7 +123,7 @@
                     <DataTemplate>
                         <Ellipse Width="10"
                                  Height="10"
-                                 Fill="{DynamicResource BlackColorBrush}" />
+                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                     </DataTemplate>
                 </telerik:LineSeries.PointTemplate>
             </telerik:LineSeries>
@@ -143,7 +135,7 @@
         <telerik:RadLegend Grid.Row="2"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Center"
-                           Foreground="{DynamicResource BlackColorBrush}">
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
             <telerik:RadLegend.ItemsPanel>
                 <ItemsPanelTemplate>
                     <StackPanel Orientation="Horizontal" />

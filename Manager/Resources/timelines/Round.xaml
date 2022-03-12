@@ -8,10 +8,6 @@
                     xmlns:selectors="clr-namespace:Manager.Models.Selectors"
                     xmlns:timelines="clr-namespace:Services.Models.Timelines;assembly=csgodm.services">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/CSGODemosManager;component/resources/Timelines.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <formatters:CustomSecondsFormatter x:Key="CustomSecondsFormatter" />
 
     <DataTemplate x:Key="RoundKillTemplate">
@@ -173,118 +169,118 @@
     <!-- ToolTips -->
     <DataTemplate x:Key="RoundTimeLineKillToolTip">
         <Grid d:DataContext="{d:DesignInstance timelines:KillEventTimeline}">
-            <Rectangle Margin="0"
-                       Fill="{DynamicResource HighlightBrush}" />
-            <Rectangle Margin="2"
-                       Fill="{DynamicResource WhiteBrush}" />
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource RedColorBrush}"
-                           Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource GreenBrush}"
-                           Text="{Binding KillerName, StringFormat=' \{0}\ '}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="killed" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource LightBlueBrush}"
-                           Text="{Binding VictimName, StringFormat=' \{0}\ '}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="with" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource OrangeBrush}"
-                           Text="{Binding WeaponName, StringFormat=' \{0}'}" />
-            </StackPanel>
+            <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+                <Border Padding="5" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource RedColorBrush}"
+                                   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource GreenBrush}"
+                                   Text="{Binding KillerName, StringFormat=' \{0}\ '}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="killed" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource LightBlueBrush}"
+                                   Text="{Binding VictimName, StringFormat=' \{0}\ '}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="with" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource OrangeBrush}"
+                                   Text="{Binding WeaponName, StringFormat=' \{0}'}" />
+                    </StackPanel>
+                </Border>
+            </Border>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="RoundTimeLineStuffToolTip">
         <Grid d:DataContext="{d:DesignInstance timelines:StuffEventTimeline}">
-            <Rectangle Margin="0"
-                       Fill="{DynamicResource HighlightBrush}" />
-            <Rectangle Margin="2"
-                       Fill="{DynamicResource WhiteBrush}" />
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource RedColorBrush}"
-                           Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource GreenBrush}"
-                           Text="{Binding ThrowerName, StringFormat=' \{0}\ '}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="thrown a" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource RedColorBrush}"
-                           Text="{Binding StuffType, StringFormat=' \{0}'}" />
-            </StackPanel>
+            <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+                <Border Padding="5" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource RedColorBrush}"
+                                   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource GreenBrush}"
+                                   Text="{Binding ThrowerName, StringFormat=' \{0}\ '}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="thrown a" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource RedColorBrush}"
+                                   Text="{Binding StuffType, StringFormat=' \{0}'}" />
+                    </StackPanel>
+                </Border>
+            </Border>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="RoundTimeLineBombPlantedToolTip">
         <Grid d:DataContext="{d:DesignInstance timelines:BombPlantedEventTimeline}">
-            <Rectangle Margin="0"
-                       Fill="{DynamicResource HighlightBrush}" />
-            <Rectangle Margin="2"
-                       Fill="{DynamicResource WhiteBrush}" />
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource RedColorBrush}"
-                           Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource GreenBrush}"
-                           Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="{x:Static properties:Resources.PlantedOnSite}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource OrangeBrush}"
-                           Text="{Binding Site, StringFormat=' \{0}'}" />
-            </StackPanel>
+            <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+                <Border Padding="5" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource RedColorBrush}"
+                                   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource GreenBrush}"
+                                   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="{x:Static properties:Resources.PlantedOnSite}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource OrangeBrush}"
+                                   Text="{Binding Site, StringFormat=' \{0}'}" />
+                    </StackPanel>
+                </Border>
+            </Border>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="RoundTimeLineBombDefusedToolTip">
         <Grid d:DataContext="{d:DesignInstance timelines:BombDefusedEventTimeline}">
-            <Rectangle Margin="0"
-                       Fill="{DynamicResource HighlightBrush}" />
-            <Rectangle Margin="2"
-                       Fill="{DynamicResource WhiteBrush}" />
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource RedColorBrush}"
-                           Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource GreenBrush}"
-                           Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="{x:Static properties:Resources.DefusedOnSite}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource OrangeBrush}"
-                           Text="{Binding Site, StringFormat=' \{0}'}" />
-            </StackPanel>
+            <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+                <Border Padding="5" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource RedColorBrush}"
+                                   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource GreenBrush}"
+                                   Text="{Binding DefuserName, StringFormat=' \{0}\ '}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="{x:Static properties:Resources.DefusedOnSite}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource OrangeBrush}"
+                                   Text="{Binding Site, StringFormat=' \{0}'}" />
+                    </StackPanel>
+                </Border>
+            </Border>
         </Grid>
     </DataTemplate>
 
     <DataTemplate x:Key="RoundTimeLineBombExplodedToolTip">
         <Grid d:DataContext="{d:DesignInstance timelines:BombExplodedEventTimeline}">
-            <Rectangle Margin="0"
-                       Fill="{DynamicResource HighlightBrush}" />
-            <Rectangle Margin="2"
-                       Fill="{DynamicResource WhiteBrush}" />
-            <StackPanel Orientation="Horizontal" Margin="5">
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource RedColorBrush}"
-                           Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="{x:Static properties:Resources.BombPlantedBy}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource GreenBrush}"
-                           Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Text="{x:Static properties:Resources.ExplodedOnSite}" />
-                <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
-                           Foreground="{StaticResource OrangeBrush}"
-                           Text="{Binding Site, StringFormat=' \{0}'}" />
-            </StackPanel>
+            <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+                <Border Padding="5" Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource RedColorBrush}"
+                                   Text="{Binding StartTime, StringFormat='{}mm:ss:'}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="{x:Static properties:Resources.BombPlantedBy}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource GreenBrush}"
+                                   Text="{Binding PlanterName, StringFormat=' \{0}\ '}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Text="{x:Static properties:Resources.ExplodedOnSite}" />
+                        <TextBlock Style="{StaticResource TimeLineToolTipTextBlockStyle}"
+                                   Foreground="{StaticResource OrangeBrush}"
+                                   Text="{Binding Site, StringFormat=' \{0}'}" />
+                    </StackPanel>
+                </Border>
+            </Border>
         </Grid>
     </DataTemplate>
 

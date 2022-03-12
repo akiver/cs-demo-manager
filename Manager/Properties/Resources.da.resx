@@ -1817,17 +1817,11 @@ Er ikke istand til at starte spillet</value>
   <data name="NotificationNoDemosFoundForAccount" xml:space="preserve">
     <value>Ingen Demoer er fundet for denne konto</value>
   </data>
-  <data name="NotificationPlayDemoCommandCopied" xml:space="preserve">
-    <value>Afspil demo kommando kopiret til udklipsholder</value>
-  </data>
   <data name="NotificationRetrievingMatchesData" xml:space="preserve">
     <value>Henter sidste kamp informationer</value>
   </data>
   <data name="NotificationSearchingLastRank" xml:space="preserve">
     <value>Leder efter kontos sidste rang...</value>
-  </data>
-  <data name="NotificationSuspectsHaveBeenBanned" xml:space="preserve">
-    <value>{0} Mistænkt(e) er blevet bandlyst!</value>
   </data>
   <data name="Ok" xml:space="preserve">
     <value>OK</value>

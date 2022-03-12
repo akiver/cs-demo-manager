@@ -17,9 +17,9 @@
     <telerik:ChartPalette x:Key="MatchStatsChartPalette">
         <telerik:ChartPalette.SeriesEntries>
             <telerik:PaletteEntryCollection SeriesFamily="Pie">
-                <telerik:PaletteEntry Fill="{StaticResource GreenBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource LightBlueBrush}" Stroke="{StaticResource LightWhiteBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource GreenBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource LightBlueBrush}" />
             </telerik:PaletteEntryCollection>
         </telerik:ChartPalette.SeriesEntries>
     </telerik:ChartPalette>
@@ -27,17 +27,17 @@
     <telerik:ChartPalette x:Key="MapPercentagePalette">
         <telerik:ChartPalette.SeriesEntries>
             <telerik:PaletteEntryCollection SeriesFamily="Bar">
-                <telerik:PaletteEntry Fill="{StaticResource GreenBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource LightBlueBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource Dust2ColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource InfernoColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource MirageColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource CacheColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource OverpassColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource CobblestoneColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource TrainColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource NukeColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource GreenBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource LightBlueBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource Dust2ColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource InfernoColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource MirageColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource CacheColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource OverpassColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource CobblestoneColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource TrainColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource NukeColorBrush}" />
             </telerik:PaletteEntryCollection>
         </telerik:ChartPalette.SeriesEntries>
     </telerik:ChartPalette>
@@ -45,14 +45,14 @@
     <telerik:ChartPalette x:Key="WeaponKillPalette">
         <telerik:ChartPalette.SeriesEntries>
             <telerik:PaletteEntryCollection SeriesFamily="Pie">
-                <telerik:PaletteEntry Fill="{StaticResource Dust2ColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource InfernoColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource MirageColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource CacheColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource OverpassColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource CobblestoneColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource TrainColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource NukeColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource Dust2ColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource InfernoColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource MirageColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource CacheColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource OverpassColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource CobblestoneColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource TrainColorBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource NukeColorBrush}" />
             </telerik:PaletteEntryCollection>
         </telerik:ChartPalette.SeriesEntries>
     </telerik:ChartPalette>
@@ -60,53 +60,39 @@
     <telerik:ChartPalette x:Key="WeaponStatsChartPalette">
         <telerik:ChartPalette.SeriesEntries>
             <telerik:PaletteEntryCollection SeriesFamily="Bar">
-                <telerik:PaletteEntry Fill="{StaticResource GreenBrush}" Stroke="{StaticResource LightWhiteBrush}" />
-                <telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" Stroke="{StaticResource LightWhiteBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource GreenBrush}" />
+                <telerik:PaletteEntry Fill="{StaticResource RedColorBrush}" />
             </telerik:PaletteEntryCollection>
         </telerik:ChartPalette.SeriesEntries>
     </telerik:ChartPalette>
 
     <DataTemplate x:Key="RankToolTipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0"
-                               Source="{Binding Path=DataItem.OldRank, Converter={StaticResource RankToImageConverter}}"
-                               Height="32" />
-                        <TextBlock Grid.Column="1"
-                                   Text="=>"
-                                   FontSize="26"
-                                   VerticalAlignment="Center"
-                                   Foreground="{StaticResource LightGreyBrush}" />
-                        <Image Grid.Column="2"
-                               Source="{Binding Path=DataItem.NewRank, Converter={StaticResource RankToImageConverter}}"
-                               Height="32" />
-                    </Grid>
-                    <TextBlock Grid.Row="2"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{Binding Path=DataItem.WinCount, StringFormat='{}{0}'}" />
-                        <Run Text="{x:Static properties:Resources.CompetitivesWins}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="{Binding Path=DataItem.OldRank, Converter={StaticResource RankToImageConverter}}"
+                           Height="32" />
+                    <TextBlock Text="=>"
+                               FontSize="26"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Image Source="{Binding Path=DataItem.NewRank, Converter={StaticResource RankToImageConverter}}"
+                           Height="32" />
+                </StackPanel>
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                    <Run Text="{Binding Path=DataItem.WinCount, StringFormat='{}{0}'}" />
+                    <Run Text="{x:Static properties:Resources.CompetitivesWins}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="RankAxisTemplate">
@@ -131,13 +117,13 @@
                                          DrawTemplate="{StaticResource DrawPointTemplate}" />
 
     <Style x:Key="LabelChartStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="{DynamicResource BlackColorBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="FontSize" Value="18" />
         <Setter Property="Margin" Value="0 0 10 0" />
     </Style>
 
     <DataTemplate x:Key="PieStatsLabelTemplate">
-        <StackPanel Orientation="Vertical">
+        <StackPanel>
             <TextBlock Foreground="{DynamicResource BlackColorBrush}"
                        Text="{Binding DataItem.Label}"
                        FontSize="18"
@@ -150,12 +136,12 @@
     </DataTemplate>
 
     <DataTemplate x:Key="PieCountLabelTemplate">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Foreground="{DynamicResource BlackColorBrush}"
+        <StackPanel>
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                        Text="{Binding DataItem.Label}"
                        FontSize="18"
                        TextAlignment="Center" />
-            <TextBlock Foreground="{DynamicResource BlackColorBrush}"
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                        Text="{Binding DataItem.Value, StringFormat= '{}{0}'}"
                        FontSize="18"
                        TextAlignment="Center" />
@@ -163,12 +149,12 @@
     </DataTemplate>
 
     <DataTemplate x:Key="WeaponKillPieLabelTemplate">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Foreground="{DynamicResource BlackColorBrush}"
+        <StackPanel>
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                        Text="{Binding DataItem.Label}"
                        FontSize="12"
                        TextAlignment="Center" />
-            <TextBlock Foreground="{DynamicResource BlackColorBrush}"
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                        Text="{Binding DataItem.Value, StringFormat= '{}{0}'}"
                        FontSize="12"
                        TextAlignment="Center" />
@@ -176,24 +162,23 @@
     </DataTemplate>
 
     <DataTemplate x:Key="PieMatchWinStatsLabelTemplate">
-        <TextBlock Foreground="{DynamicResource BlackColorBrush}"
+        <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                    Text="{Binding DataItem.Value}"
                    FontSize="18"
                    TextAlignment="Center" />
     </DataTemplate>
 
     <Style TargetType="Path" x:Key="LabelConnectorStyle">
-        <Setter Property="Stroke" Value="{DynamicResource BlackColorBrush}" />
+        <Setter Property="Stroke" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="StrokeThickness" Value="2" />
     </Style>
 
     <DataTemplate x:Key="TooltipPercentageChartTemplate">
         <Border BorderThickness="1"
-                BorderBrush="{StaticResource LightGreyBrush}"
-                CornerRadius="5"
-                Padding="2"
-                Background="{StaticResource LightWhiteBrush}">
-            <TextBlock Foreground="{StaticResource LightGreyBrush}" FontSize="18">
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Padding="5"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" FontSize="18">
                 <Run Text="{Binding Path=DataItem.Label, StringFormat= '{}{0} : '}" />
                 <Run Text="{Binding Path=DataItem.Value, StringFormat= '{}{0}%'}" />
             </TextBlock>
@@ -202,28 +187,13 @@
 
     <DataTemplate x:Key="TooltipCountPieTemplate">
         <Border BorderThickness="1"
-                BorderBrush="{StaticResource LightGreyBrush}"
-                CornerRadius="5"
-                Padding="2"
-                Background="{StaticResource LightWhiteBrush}">
-            <TextBlock Foreground="{StaticResource LightGreyBrush}"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Padding="5"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+            <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                        FontSize="18">
                 <Run Text="{Binding Path=DataItem.Label, StringFormat= '{}{0} : '}" />
                 <Run Text="{Binding Path=DataItem.Value, StringFormat= '{}{0}'}" />
-            </TextBlock>
-        </Border>
-    </DataTemplate>
-
-    <DataTemplate x:Key="TooltipMapPercentageChartTemplate">
-        <Border BorderThickness="1"
-                BorderBrush="{StaticResource LightGreyBrush}"
-                CornerRadius="5"
-                Padding="2"
-                Background="{StaticResource LightWhiteBrush}">
-            <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                       FontSize="18">
-                <Run Text="{Binding Path=DataItem.Label, StringFormat= '{}{0} : '}" />
-                <Run Text="{Binding Path=DataItem.Value, StringFormat= '{}{0}%'}" />
             </TextBlock>
         </Border>
     </DataTemplate>
@@ -236,347 +206,370 @@
 
     <DataTemplate x:Key="TitleChartTemplate">
         <TextBlock Text="{Binding}"
-                   Foreground="{DynamicResource BlackColorBrush}"
+                   Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                    FontSize="18" />
     </DataTemplate>
 
     <DataTemplate x:Key="DamageTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.DamagesPerRound}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.DamageCount, StringFormat=' {0}'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.DamagesPerRound}"
+                         Foreground="{StaticResource LightBlueBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataItem.DamageCount, StringFormat=' {0}'}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="KillTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.KillAverage}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.KillAverage, StringFormat=' {0}'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.KillAverage}"
+                         Foreground="{StaticResource GreenBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataItem.KillAverage, StringFormat=' {0}'}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="DeathTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.DeathAverage}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.DeathAverage, StringFormat=' {0}'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.DeathAverage}"
+                         Foreground="{StaticResource LightRedColorBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataItem.DeathAverage, StringFormat=' {0}'}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="WinToolTipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.WinPercent}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.WinPercentage, StringFormat=' {0}%'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.WinPercent}"
+                         Foreground="{StaticResource GreenBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataItem.WinPercentage, StringFormat=' {0}%'}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="HeadshotTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.HeadshotPercentPerMatch}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.HeadshotPercentage, StringFormat=' {0}%'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.HeadshotPercentPerMatch}"
+                         Foreground="{StaticResource LightRedColorBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataItem.HeadshotPercentage, StringFormat=' {0}%'}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="CrouchKillTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.CrouchKillPercentPerMatch}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.CrouchKillPercentage, StringFormat=' {0}%'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.CrouchKillPercentPerMatch}"
+                         Foreground="{StaticResource OrangeBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataItem.CrouchKillPercentage, StringFormat=' {0}%'}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="VelocityTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18" />
-                    <TextBlock Grid.Row="1"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.VelocityAverage}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.VelocityAverage, StringFormat=' {0}'}" />
-                    </TextBlock>
-                </Grid>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Text="{Binding Path=DataItem.Date, Converter={StaticResource StringToMinimalDateConverter}}"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18" />
+                <TextBlock HorizontalAlignment="Center" FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                    <Run Text="{x:Static properties:Resources.VelocityAverage}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.VelocityAverage, StringFormat=' {0}'}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
-    <DataTemplate x:Key="PlayerEquipementValueTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0"
-                               Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18">
+    <DataTemplate x:Key="PlayerEquipmentValueTooltipTemplate">
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.Round}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Label}" />
+                </TextBlock>
+                <TextBlock Text="{Binding Path=DataItem.Value, StringFormat='{}{0}$'}"
+                           HorizontalAlignment="Center"
+                           FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+            </StackPanel>
+        </Border>
+    </DataTemplate>
+
+    <DataTemplate x:Key="PlayerEquipmentValueTrackBallTemplate">
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Margin="-8">
+            <Border Padding="5">
+                <StackPanel Orientation="Vertical"
+                            Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+                    <TextBlock FontSize="18" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
                         <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Label}" />
+                        <Run Text="{Binding Path=DataPoint.Category}" />
                     </TextBlock>
-                    <TextBlock Grid.Row="1"
-                               Text="{Binding Path=DataItem.Value, StringFormat='{}{0}$'}"
-                               HorizontalAlignment="Center"
-                               FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}" />
-                </Grid>
+                    <TextBlock FontSize="18" Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                        <Run Text="{x:Static properties:Resources.Value}" /><Run Text=":" />
+                        <Run Text="{Binding Path=DataPoint.Value, StringFormat='{}{0}$'}" />
+                    </TextBlock>
+                </StackPanel>
             </Border>
-        </Grid>
-    </DataTemplate>
-
-    <DataTemplate x:Key="PlayerEquipementValueTrackBallTemplate">
-        <StackPanel Orientation="Vertical"
-                    Background="{StaticResource LightWhiteBrush}">
-            <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                       FontSize="18">
-                <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                <Run Text="{Binding Path=DataPoint.Category}" />
-            </TextBlock>
-            <TextBlock FontSize="18"
-                       Foreground="{StaticResource LightGreyBrush}">
-                <Run Text="{x:Static properties:Resources.Value}" /><Run Text=":" />
-                <Run Text="{Binding Path=DataPoint.Value, StringFormat='{}{0}$'}" />
-            </TextBlock>
-        </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerDamageHealthTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <StackPanel Orientation="Vertical"
-                            Background="{StaticResource LightWhiteBrush}">
-                    <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18">
-                        <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Label}" />
-                    </TextBlock>
-                    <TextBlock FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.HealthDamages}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Value}" />
-                    </TextBlock>
-                </StackPanel>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.Round}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Label}" />
+                </TextBlock>
+                <TextBlock FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                    <Run Text="{x:Static properties:Resources.HealthDamages}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Value}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerDamageArmorTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <StackPanel Orientation="Vertical"
-                            Background="{StaticResource LightWhiteBrush}">
-                    <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18">
-                        <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Label}" />
-                    </TextBlock>
-                    <TextBlock FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.ArmorDamages}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Value}" />
-                    </TextBlock>
-                </StackPanel>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel>
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.Round}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Label}" />
+                </TextBlock>
+                <TextBlock FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                    <Run Text="{x:Static properties:Resources.ArmorDamages}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Value}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerTotalDamageHealthTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <StackPanel Orientation="Vertical"
-                            Background="{StaticResource LightWhiteBrush}">
-                    <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18">
-                        <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Label}" />
-                    </TextBlock>
-                    <TextBlock FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.TotalDamageHealth}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Value}" />
-                    </TextBlock>
-                </StackPanel>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.Round}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Label}" />
+                </TextBlock>
+                <TextBlock FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                    <Run Text="{x:Static properties:Resources.TotalDamageHealth}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Value}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerTotalDamageArmorTooltipTemplate">
-        <Grid Background="{StaticResource LightWhiteBrush}">
-            <Border BorderThickness="2"
-                    BorderBrush="{StaticResource LightGreenBrush}">
-                <StackPanel Orientation="Vertical"
-                            Background="{StaticResource LightWhiteBrush}">
-                    <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                               FontSize="18">
-                        <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Label}" />
-                    </TextBlock>
-                    <TextBlock FontSize="18"
-                               Foreground="{StaticResource LightGreyBrush}">
-                        <Run Text="{x:Static properties:Resources.TotalDamageArmor}" /><Run Text=":" />
-                        <Run Text="{Binding Path=DataItem.Value}" />
-                    </TextBlock>
-                </StackPanel>
-            </Border>
-        </Grid>
+        <Border BorderThickness="1"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Padding="5">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                           FontSize="18">
+                    <Run Text="{x:Static properties:Resources.Round}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Label}" />
+                </TextBlock>
+                <TextBlock FontSize="18"
+                           Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                    <Run Text="{x:Static properties:Resources.TotalDamageArmor}" />
+                    <Run Text=":" />
+                    <Run Text="{Binding Path=DataItem.Value}" />
+                </TextBlock>
+            </StackPanel>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerDamageHealthTrackBallTemplate">
-        <StackPanel Orientation="Vertical">
-            <TextBlock Foreground="{StaticResource LightGreyBrush}"
-                       FontSize="18">
-                <Run Text="{x:Static properties:Resources.Round}" /><Run Text=":" />
-                <Run Text="{Binding Path=DataPoint.Category}" />
-            </TextBlock>
-            <TextBlock FontSize="18"
-                       Foreground="{StaticResource LightGreyBrush}">
-                <Run Text="{x:Static properties:Resources.HealthDamages}" /><Run Text=":" />
-                <Run Text="{Binding Path=DataPoint.Value}" />
-            </TextBlock>
-        </StackPanel>
+        <Border BorderThickness="1 1 1 0"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
+                Margin="-4 -8 -4 0">
+            <Border Padding="5 5 5 0">
+                <StackPanel Orientation="Vertical">
+                    <TextBlock FontSize="18"
+                               Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}">
+                        <Run Text="{x:Static properties:Resources.Round}" />
+                        <Run Text=":" />
+                        <Run Text="{Binding Path=DataPoint.Category}" />
+                    </TextBlock>
+                    <TextBlock FontSize="18">
+                        <Run Text="{x:Static properties:Resources.HealthDamages}"
+                             Foreground="{StaticResource LightBlueBrush}" />
+                        <Run Text=":"
+                             Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                        <Run Text="{Binding Path=DataPoint.Value}"
+                             Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    </TextBlock>
+                </StackPanel>
+            </Border>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerDamageArmorTrackBallTemplate">
-        <TextBlock FontSize="18"
-                   Foreground="{StaticResource LightGreyBrush}">
-            <Run Text="{x:Static properties:Resources.ArmorDamages}" /><Run Text=":" />
-            <Run Text="{Binding Path=DataPoint.Value}" />
-        </TextBlock>
+        <Border BorderThickness="1 0 1 0"
+                Margin="-4 0 -4 0"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+            <Border Padding="5 0 5 0">
+                <TextBlock FontSize="18">
+                    <Run Text="{x:Static properties:Resources.ArmorDamages}"
+                         Foreground="{StaticResource GreenBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataPoint.Value}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </Border>
+        </Border>
     </DataTemplate>
 
+
     <DataTemplate x:Key="PlayerTotalDamageHealthTrackBallTemplate">
-        <TextBlock FontSize="18"
-                   Foreground="{StaticResource LightGreyBrush}">
-            <Run Text="{x:Static properties:Resources.TotalHealthDamages}" /><Run Text=":" />
-            <Run Text="{Binding Path=DataPoint.Value}" />
-        </TextBlock>
+        <Border BorderThickness="1 0 1 0"
+                Margin="-4 0 -4 0"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+            <Border Padding="5 0 5 0">
+                <TextBlock FontSize="18">
+                    <Run Text="{x:Static properties:Resources.TotalHealthDamages}"
+                         Foreground="{StaticResource OrangeBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataPoint.Value}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </Border>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="PlayerTotalDamageArmorTrackBallTemplate">
-        <TextBlock FontSize="18"
-                   Foreground="{StaticResource LightGreyBrush}">
-            <Run Text="{x:Static properties:Resources.TotalArmorDamages}" /><Run Text=":" />
-            <Run Text="{Binding Path=DataPoint.Value}" />
-        </TextBlock>
+        <Border BorderThickness="1 0 1 1"
+                Margin="-4 0 -4 -8"
+                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
+            <Border Padding="5 0 5 5">
+                <TextBlock FontSize="18">
+                    <Run Text="{x:Static properties:Resources.TotalArmorDamages}"
+                         Foreground="{StaticResource RedColorBrush}" />
+                    <Run Text=":"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                    <Run Text="{Binding Path=DataPoint.Value}"
+                         Foreground="{DynamicResource MahApps.Brushes.ThemeForeground}" />
+                </TextBlock>
+            </Border>
+        </Border>
     </DataTemplate>
 
     <DataTemplate x:Key="HorizontalAxisTitleTemplate">

@@ -1,12 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.textbox.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
-    <Style TargetType="TextBox" x:Key="MovieTextBox" BasedOn="{StaticResource MetroTextBox}">
+    <Style TargetType="TextBox" x:Key="MovieTextBox" BasedOn="{StaticResource MahApps.Styles.TextBox}">
         <Setter Property="Height" Value="25" />
+        <Setter Property="mahapps:TextBoxHelper.ClearTextButton" Value="False" />
     </Style>
 
 </ResourceDictionary>

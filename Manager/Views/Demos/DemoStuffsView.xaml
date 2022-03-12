@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -16,7 +17,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:FlashbangStuffTypeToVisibilityConverter x:Key="FlashbangStuffTypeToVisibilityConverter" />
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:StuffTypeToStringConverter x:Key="StuffTypeToStringConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
@@ -46,23 +46,11 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToDemoDetailsCommand}"
-                        CommandParameter="{Binding Demo}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                    Icon="ArrowLeftBold"
+                    Command="{Binding BackToDemoDetailsCommand}" />
 
                 <ComboBox ItemsSource="{Binding StuffSelectors}"
                           SelectedItem="{Binding CurrentStuffSelector}"
@@ -81,53 +69,21 @@
                           DisplayMemberPath="Name"
                           SelectedValuePath="Name"
                           Margin="5"
-                          controls:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}" />
+                          mahapps:TextBoxHelper.Watermark="{x:Static properties:Resources.Player}" />
 
-                <Button Command="{Binding WatchPlayerStuffCommand}"
-                        Style="{DynamicResource GeneralButton}"
-                        ToolTip="{x:Static properties:Resources.ToolTipWatchAllStuffsFromPlayer}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_control_play}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.WatchPlayerStuffs}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.WatchPlayerStuffs}"
+                    ToolTip="{x:Static properties:Resources.ToolTipWatchAllStuffsFromPlayer}"
+                    Icon="Play"
+                    Command="{Binding WatchPlayerStuffCommand}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.CopySetpos}"
+                    ToolTip="{x:Static properties:Resources.ToolTipCopySetposCommand}"
+                    Icon="MapMarkerRadius"
+                    Command="{Binding CopySetPosCommand}" />
 
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding CopySetPosCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipCopySetposCommand}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_location_round}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.CopySetpos}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="5">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{Binding Notification}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding HasNotification, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{Binding Notification}" />
             </StackPanel>
         </Grid>
 
@@ -150,11 +106,11 @@
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="CopyingRowClipboardContent">
                             <i:InvokeCommandAction Command="{Binding CopyCellContent}"
-                                                    PassEventArgsToCommand="True" />
+                                                   PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                         <i:EventTrigger EventName="SelectedCellsChanged">
                             <i:InvokeCommandAction Command="{Binding SelectedCellChanged}"
-                                                    PassEventArgsToCommand="True" />
+                                                   PassEventArgsToCommand="True" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
 
@@ -189,7 +145,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Button Command="{Binding Source={StaticResource Locator}, Path=DemoStuffs.WatchStuff}"
-                                            Style="{DynamicResource AccentedSquareButtonStyle}"
+                                            Style="{StaticResource BaseButton}"
                                             Content="{x:Static properties:Resources.Watch}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

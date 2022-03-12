@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Manager</RootNamespace>
     <AssemblyName>CSGODemosManager</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -71,8 +71,8 @@
     <Reference Include="CommonServiceLocator, Version=2.0.6.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.2.0.6\lib\net46\CommonServiceLocator.dll</HintPath>
     </Reference>
-    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    <Reference Include="ControlzEx, Version=5.0.0.0, Culture=neutral, PublicKeyToken=69f1c32f803d307e, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.5.0.1\lib\net462\ControlzEx.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight, Version=5.4.1.0, Culture=neutral, PublicKeyToken=e7570ab207bcb616, processorArchitecture=MSIL">
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
@@ -86,8 +86,14 @@
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.3.11, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>..\packages\SharpZipLib.1.3.3\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.6.5.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.6.5\lib\net46\MahApps.Metro.dll</HintPath>
+    <Reference Include="MahApps.Metro, Version=2.0.0.0, Culture=neutral, PublicKeyToken=51482d6f650b2b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.2.4.9\lib\net46\MahApps.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net46\MahApps.Metro.IconPacks.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.Material.4.11.0\lib\net46\MahApps.Metro.IconPacks.Material.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
@@ -103,9 +109,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -147,6 +150,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\ButtonWithIcon.xaml.cs">
+      <DependentUpon>ButtonWithIcon.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LoadingMessage.xaml.cs">
+      <DependentUpon>LoadingMessage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\BindingProxy.cs" />
     <Compile Include="Converters\BooleanConverter.cs" />
     <Compile Include="Converters\BooleanInvertedConverter.cs" />
@@ -158,6 +167,7 @@
     <Compile Include="Converters\DoubleToVisibilityConverter.cs" />
     <Compile Include="Converters\EventToVisibilityConverter.cs" />
     <Compile Include="Converters\DemoSourceToImageConverter.cs" />
+    <Compile Include="Converters\IntToBadgeContentConverter.cs" />
     <Compile Include="Converters\IntToBooleanConverter.cs" />
     <Compile Include="Converters\IntToStringConverter.cs" />
     <Compile Include="Converters\LowerCaseConverter.cs" />
@@ -178,6 +188,7 @@
     <Compile Include="Converters\StringToDemoStatusConverter.cs" />
     <Compile Include="Converters\FlashbangStuffTypeToVisibilityConverter.cs" />
     <Compile Include="Converters\StringToMinimalDateConverter.cs" />
+    <Compile Include="Converters\StringToVisibilityConverter.cs" />
     <Compile Include="Converters\StuffTypeToolTipToStringConverter.cs" />
     <Compile Include="Converters\StuffTypeToStringConverter.cs" />
     <Compile Include="Converters\ValveDemoToVisibilityConverter.cs" />
@@ -266,11 +277,15 @@
     <Compile Include="Views\Suspects\WhitelistView.xaml.cs">
       <DependentUpon>WhitelistView.xaml</DependentUpon>
     </Compile>
-    <Page Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml">
+    <Page Include="Controls\ButtonWithIcon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="resources\Accents\CustomLime.xaml">
+    <Page Include="Controls\LoadingMessage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -293,14 +308,6 @@
     <Page Include="resources\Heatmaps.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="resources\Icons.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="resources\IconsNonShared.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="resources\Separators.xaml">
       <SubType>Designer</SubType>
@@ -374,7 +381,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Resource Include="resources\Entypo.ttf" />
     <Compile Include="Services\DialogService.cs" />
     <Compile Include="ViewModel\Accounts\AccountOverallViewModel.cs" />
     <Compile Include="ViewModel\Accounts\AccountMapsViewModel.cs" />
@@ -594,7 +600,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="resources\images\suicide-black.png" />
     <Resource Include="resources\images\suicide.png" />
     <Resource Include="resources\images\deagle.png" />
     <Resource Include="resources\images\bomb.png" />
@@ -623,8 +628,6 @@
     <Content Include="boiler.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Resource Include="resources\WindowsIcons-license.txt" />
-    <Resource Include="resources\Entypo-license.txt" />
     <Content Include="steam_api.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

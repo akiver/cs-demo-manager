@@ -7,17 +7,11 @@
         <ResourceDictionary>
             <converters:LowerCaseConverter x:Key="LowerCaseConverter" />
         </ResourceDictionary>
-        <ResourceDictionary Source="Accents/CustomLime.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <DataTemplate x:Key="FlashbangPlayerToolTipTemplate">
-        <Border Padding="10">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="3"
-                                  ShadowDepth="1"
-                                  Color="{StaticResource HighlightColor}" />
-            </Border.Effect>
-            <Grid Background="{StaticResource WhiteColorBrush}">
+        <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+            <Grid Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -64,13 +58,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="FlashbangAveragePlayerToolTipTemplate">
-        <Border Padding="10">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="3"
-                                  ShadowDepth="1"
-                                  Color="{StaticResource HighlightColor}" />
-            </Border.Effect>
-            <Grid Background="{StaticResource WhiteColorBrush}">
+        <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+            <Grid Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -112,13 +101,8 @@
     </DataTemplate>
 
     <DataTemplate x:Key="KillPlayerToolTipTemplate">
-        <Border Padding="10">
-            <Border.Effect>
-                <DropShadowEffect BlurRadius="3"
-                                  ShadowDepth="1"
-                                  Color="{StaticResource HighlightColor}" />
-            </Border.Effect>
-            <Grid Background="{StaticResource WhiteColorBrush}">
+        <Border Padding="1" Background="{DynamicResource MahApps.Brushes.Highlight}">
+            <Grid Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
                 <Grid Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />

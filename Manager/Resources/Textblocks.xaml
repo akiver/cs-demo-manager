@@ -10,7 +10,6 @@
         <ResourceDictionary>
             <models:Demo x:Key="Demo" />
         </ResourceDictionary>
-        <ResourceDictionary Source="Accents/CustomLime.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="TextBlock" x:Key="ButtonTitleStyle">
@@ -64,7 +63,7 @@
 
     <Style TargetType="TextBlock" x:Key="TextBlockHighlight" BasedOn="{StaticResource BaseTextBlock}">
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="Foreground" Value="{DynamicResource HighlightBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="TextBlockHighlightBig" BasedOn="{StaticResource TextBlockHighlight}">
@@ -103,7 +102,7 @@
 
     <Style TargetType="TextBlock" x:Key="DamageLabelStyle">
         <Setter Property="FontSize" Value="26" />
-        <Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
@@ -122,7 +121,7 @@
         <Setter Property="FontSize" Value="26" />
         <Setter Property="TextAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}" />
     </Style>
 
     <Style x:Key="LabelStyle" TargetType="{x:Type TextBlock}">
@@ -223,14 +222,14 @@
 
     <!-- Heatmaps TextBlock -->
     <Style TargetType="TextBlock" x:Key="ToolTipPlayerHeatmapStyle">
-        <Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="ToolTipLabelHeatmapStyle">
-        <Setter Property="Foreground" Value="{StaticResource LightWhiteBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.ThemeForeground}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />
@@ -244,7 +243,7 @@
     </Style>
 
     <Style TargetType="TextBlock" x:Key="DescriptionLabelHeatmapStyle">
-        <Setter Property="Foreground" Value="{StaticResource HighlightBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource MahApps.Brushes.Highlight}" />
         <Setter Property="FontSize" Value="12" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="HorizontalAlignment" Value="Center" />

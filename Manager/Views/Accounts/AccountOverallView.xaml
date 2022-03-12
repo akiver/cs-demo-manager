@@ -4,10 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -43,113 +43,39 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToHomeCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToHomeCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Overall}"
+                    Icon="Earth"
+                    ToolTip="{x:Static properties:Resources.ToolTipOverall}"
+                    IsEnabled="False" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Rank}"
+                    Icon="ChartBellCurve"
+                    Command="{Binding GoToRankCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipRank}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Maps}"
+                    Icon="Map"
+                    Command="{Binding GoToMapCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipMaps}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Weapons}"
+                    Icon="Pistol"
+                    Command="{Binding GoToWeaponCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipWeapons}" />
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Progression}"
+                    Icon="Finance"
+                    Command="{Binding GoToProgressCommand}"
+                    ToolTip="{x:Static properties:Resources.ToolTipProgression}" />
 
-                <Button Style="{DynamicResource GeneralButton}"
-                        IsEnabled="False"
-                        ToolTip="{x:Static properties:Resources.ToolTipOverall}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_globe_wire}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Overall}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToRankCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipRank}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_down_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Rank}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToMapCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipMaps}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_map}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Maps}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToWeaponCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipWeapons}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Image Source="pack://application:,,,/csgodm.resources;component/images/icons/weapon.png"
-                               Width="15"
-                               Height="15" />
-                        <TextBlock Text="{x:Static properties:Resources.Weapons}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding GoToProgressCommand}"
-                        ToolTip="{x:Static properties:Resources.ToolTipProgression}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_graph_line_up}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Progression}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{Binding Notification}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{Binding Notification}" />
             </StackPanel>
         </Grid>
 
@@ -181,7 +107,7 @@
                     <Grid Grid.Column="0"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.ToolTipMatchesPlayed}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -196,7 +122,7 @@
                     <Grid Grid.Column="1"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipKills}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -211,7 +137,7 @@
                     <Grid Grid.Column="2"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipAssists}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -226,7 +152,7 @@
                     <Grid Grid.Column="3"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipDeaths}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -241,7 +167,7 @@
                     <Grid Grid.Column="4"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipKillsPerDeaths}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -256,7 +182,7 @@
                     <Grid Grid.Column="5"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipHeadshots}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -271,7 +197,7 @@
                     <Grid Grid.Column="6"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipHeadshotPercent}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -286,7 +212,7 @@
                     <Grid Grid.Column="7"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipFiveKill}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -301,7 +227,7 @@
                     <Grid Grid.Column="8"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipFourKill}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -316,7 +242,7 @@
                     <Grid Grid.Column="9"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipThreeKill}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -331,7 +257,7 @@
                     <Grid Grid.Column="10"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipTwoKill}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -360,7 +286,7 @@
                     <Grid Grid.Column="0"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipKnifeKills}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -375,7 +301,7 @@
                     <Grid Grid.Column="1"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipBombPlanted}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -390,7 +316,7 @@
                     <Grid Grid.Column="2"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipBombDefused}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -405,7 +331,7 @@
                     <Grid Grid.Column="3"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipBombExploded}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -420,7 +346,7 @@
                     <Grid Grid.Column="4"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipMvp}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -435,7 +361,7 @@
                     <Grid Grid.Column="5"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipTotalDamageHealth}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -450,7 +376,7 @@
                     <Grid Grid.Column="6"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipTotalMatchesTime}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -465,7 +391,7 @@
                     <Grid Grid.Column="7"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipAverageMatchTime}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -494,7 +420,7 @@
                     <Grid Grid.Column="0"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipRoundPlayed}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -509,7 +435,7 @@
                     <Grid Grid.Column="1"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipKillPerRound}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -524,7 +450,7 @@
                     <Grid Grid.Column="2"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipAssistsPerRound}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -539,7 +465,7 @@
                     <Grid Grid.Column="3"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipDeathsPerRound}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -554,7 +480,7 @@
                     <Grid Grid.Column="4"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipAverageDamagePerRound}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -569,7 +495,7 @@
                     <Grid Grid.Column="5"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipHltvRating}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -584,7 +510,7 @@
                     <Grid Grid.Column="6"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipHltv2Rating}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -599,7 +525,7 @@
                     <Grid Grid.Column="7"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.HeaderToolTipEseaRws}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -625,7 +551,7 @@
                     <Grid Grid.Column="0"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.OneVersusFiveWon}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -640,7 +566,7 @@
                     <Grid Grid.Column="1"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.OneVersusFourWon}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -655,7 +581,7 @@
                     <Grid Grid.Column="2"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.OneVersusThreeWon}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -670,7 +596,7 @@
                     <Grid Grid.Column="3"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.OneVersusTwoWon}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -685,7 +611,7 @@
                     <Grid Grid.Column="4"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.OneVersusOneWon}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">
@@ -700,7 +626,7 @@
                     <Grid Grid.Column="5"
                           Margin="10"
                           ToolTip="{x:Static properties:Resources.ClutchesWonPercent}">
-                        <Border BorderBrush="{StaticResource LightWhiteBrush}"
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                 BorderThickness="1">
                             <StackPanel Orientation="Vertical"
                                         Margin="5">

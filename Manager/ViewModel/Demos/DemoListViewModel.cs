@@ -61,8 +61,6 @@ namespace Manager.ViewModel.Demos
 
         private readonly ExcelService _excelService;
 
-        private bool _hasRing;
-
         private bool _isCancellable;
 
         private bool _isShowAllFolders;
@@ -154,6 +152,8 @@ namespace Manager.ViewModel.Demos
 
         private string _selectedFolder;
 
+        private string _noDemoFoundMessage;
+
         private RelayCommand<UserControl> _showLastUserControlCommand;
 
         private Rank _lastRankAccountStats;
@@ -165,12 +165,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Accessors
-
-        public bool HasRing
-        {
-            get { return _hasRing; }
-            set { Set(() => HasRing, ref _hasRing, value); }
-        }
 
         public bool IsCancellable
         {
@@ -278,6 +272,12 @@ namespace Manager.ViewModel.Demos
             }
         }
 
+        public string NoDemoFoundMessage
+        {
+            get { return _noDemoFoundMessage; }
+            set { Set(() => NoDemoFoundMessage, ref _noDemoFoundMessage, value); }
+        }
+
         public Rank LastRankAccountStats
         {
             get { return _lastRankAccountStats; }
@@ -379,8 +379,42 @@ namespace Manager.ViewModel.Demos
                        ?? (_analyzeDemosCommand = new RelayCommand<ObservableCollection<Demo>>(
                            async demos =>
                            {
+                               bool areAllDemosSelected = SelectedDemos.Count == Demos.Count;
+                               if (areAllDemosSelected)
+                               {
+                                   MessageDialogResult result = await _dialogService.ShowAnalyzeAllDemosAsync();
+                                   bool isCancel = result == MessageDialogResult.FirstAuxiliary;
+                                   if (isCancel)
+                                   {
+                                       return;
+                                   }
+
+                                   bool isAnalyzeAll = result == MessageDialogResult.Negative;
+                                   if (isAnalyzeAll)
+                                   {
+                                       Notification = Properties.Resources.NotificationLoadingAllDemos;
+                                       List<string> folders = new List<string>();
+                                       if (SelectedFolder != null)
+                                       {
+                                           folders.Add(SelectedFolder);
+                                       }
+                                       else
+                                       {
+                                           folders = Folders.ToList();
+                                       }
+
+                                       List<Demo> allDemos = await _demosService.GetDemosHeader(folders);
+                                       foreach (Demo demo in allDemos)
+                                       {
+                                           if (!SelectedDemos.Contains(demo))
+                                           {
+                                               SelectedDemos.Add(demo);
+                                           }
+                                       }
+                                   }
+                               }
+
                                Demo hasValveDemo = SelectedDemos.FirstOrDefault(d => d.Source.GetType() == typeof(Valve));
-                               await UpdateSelectedDemosAsync();
                                await AnalyzeDemosAsync();
                                if (hasValveDemo != null)
                                {
@@ -524,8 +558,6 @@ namespace Manager.ViewModel.Demos
                                            try
                                            {
                                                IsBusy = true;
-                                               HasRing = true;
-                                               HasNotification = true;
                                                Notification = Properties.Resources.NotificationAnalyzingDemosForExport;
                                                IsCancellable = true;
 
@@ -558,7 +590,6 @@ namespace Manager.ViewModel.Demos
                                            finally
                                            {
                                                IsBusy = false;
-                                               HasNotification = false;
                                            }
                                        }
                                            break;
@@ -582,8 +613,6 @@ namespace Manager.ViewModel.Demos
                                                try
                                                {
                                                    IsBusy = true;
-                                                   HasRing = true;
-                                                   HasNotification = true;
                                                    Notification = Properties.Resources.NotificationAnalyzingDemosForExport;
                                                    IsCancellable = true;
 
@@ -613,7 +642,6 @@ namespace Manager.ViewModel.Demos
                                                finally
                                                {
                                                    IsBusy = false;
-                                                   HasNotification = false;
                                                    IsCancellable = false;
                                                }
                                            }
@@ -635,8 +663,6 @@ namespace Manager.ViewModel.Demos
                                        try
                                        {
                                            IsBusy = true;
-                                           HasRing = true;
-                                           HasNotification = true;
                                            IsCancellable = true;
                                            Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, demo.Name);
 
@@ -656,7 +682,6 @@ namespace Manager.ViewModel.Demos
                                        finally
                                        {
                                            IsBusy = false;
-                                           HasNotification = false;
                                            IsCancellable = false;
                                        }
                                    }
@@ -732,16 +757,9 @@ namespace Manager.ViewModel.Demos
             {
                 return _copyPlaydemoCommand
                        ?? (_copyPlaydemoCommand = new RelayCommand<Demo>(
-                           async demo =>
+                           demo =>
                            {
                                Clipboard.SetText("playdemo \"" + demo.Path + "\"");
-                               IsBusy = true;
-                               HasRing = false;
-                               HasNotification = true;
-                               Notification = Properties.Resources.NotificationPlayDemoCommandCopied;
-                               await Task.Delay(3000);
-                               HasNotification = false;
-                               IsBusy = false;
                                CommandManager.InvalidateRequerySuggested();
                            },
                            demo => demo != null));
@@ -819,7 +837,6 @@ namespace Manager.ViewModel.Demos
                                await AnalyzeDemosAsync(true);
 
                                IsBusy = true;
-                               HasNotification = true;
                                Notification = Properties.Resources.NotificationAddingSuspects;
                                for (int i = 0; i < demos.Count; i++)
                                {
@@ -833,7 +850,6 @@ namespace Manager.ViewModel.Demos
                                }
 
                                IsBusy = false;
-                               HasNotification = false;
 
                                await RefreshBannedPlayerCount();
                            },
@@ -910,12 +926,10 @@ namespace Manager.ViewModel.Demos
                                new ViewModelLocator().Settings.IsShowOnlyAccountDemos = isChecked;
                                _demosService.ShowOnlyAccountDemos = isChecked;
                                IsBusy = true;
-                               HasRing = true;
                                IsCancellable = false;
                                Notification = Properties.Resources.NotificationLoading;
                                await LoadDemosHeader();
                                IsBusy = false;
-                               HasRing = false;
                            },
                            isChecked => !IsBusy && new ViewModelLocator().Settings.SelectedStatsAccount != null));
             }
@@ -1198,13 +1212,6 @@ namespace Manager.ViewModel.Demos
                                }
 
                                Clipboard.SetText(shareCode);
-                               IsBusy = true;
-                               HasRing = false;
-                               HasNotification = true;
-                               Notification = Properties.Resources.NotificationDemoShareCodeCopied;
-                               await Task.Delay(3000);
-                               HasNotification = false;
-                               IsBusy = false;
                                CommandManager.InvalidateRequerySuggested();
                            },
                            (demo) => demo != null));
@@ -1245,8 +1252,6 @@ namespace Manager.ViewModel.Demos
                                try
                                {
                                    IsBusy = true;
-                                   HasNotification = true;
-                                   HasRing = true;
                                    IsCancellable = true;
                                    Notification = Properties.Resources.NotificationRetrievingMatchesData;
                                    if (_cts == null)
@@ -1267,8 +1272,6 @@ namespace Manager.ViewModel.Demos
                                finally
                                {
                                    IsBusy = false;
-                                   HasNotification = false;
-                                   HasRing = false;
                                    IsCancellable = false;
                                    CommandManager.InvalidateRequerySuggested();
                                }
@@ -1305,8 +1308,6 @@ namespace Manager.ViewModel.Demos
                                {
                                    CommandManager.InvalidateRequerySuggested();
                                    IsBusy = true;
-                                   HasNotification = true;
-                                   HasRing = true;
                                    IsCancellable = true;
                                    Notification = Properties.Resources.NotificationRetrievingDemoFromShareCode;
                                    if (_cts == null)
@@ -1334,8 +1335,6 @@ namespace Manager.ViewModel.Demos
                                finally
                                {
                                    IsBusy = false;
-                                   HasNotification = false;
-                                   HasRing = false;
                                    IsCancellable = false;
                                    CommandManager.InvalidateRequerySuggested();
                                }
@@ -1368,8 +1367,6 @@ namespace Manager.ViewModel.Demos
                                try
                                {
                                    IsBusy = true;
-                                   HasRing = true;
-                                   HasNotification = true;
                                    Notification = Properties.Resources.NotificationAnalyzingForJsonExport;
                                    IsCancellable = true;
 
@@ -1392,8 +1389,6 @@ namespace Manager.ViewModel.Demos
                                finally
                                {
                                    IsBusy = false;
-                                   HasRing = false;
-                                   HasNotification = false;
                                    IsCancellable = false;
                                }
                            },
@@ -1438,14 +1433,10 @@ namespace Manager.ViewModel.Demos
                 {
                     LoadDemoSourcesSelection();
 
-                    HasNotification = true;
                     IsBusy = true;
-                    HasRing = true;
                     Notification = Properties.Resources.NotificationInitCache;
                     await _cacheService.InitDemoBasicDataList();
-                    HasNotification = false;
                     IsBusy = false;
-                    HasRing = false;
                     await RefreshFolders();
 
                     IsShowAllFolders = Properties.Settings.Default.ShowAllFolders;
@@ -1552,8 +1543,6 @@ namespace Manager.ViewModel.Demos
         {
             Notification = Properties.Resources.NotificationLoadingMoreDemos;
             IsBusy = true;
-            HasRing = true;
-            HasNotification = true;
             List<string> folders = new List<string>();
             if (SelectedFolder != null)
             {
@@ -1572,7 +1561,6 @@ namespace Manager.ViewModel.Demos
             }
 
             IsBusy = false;
-            HasNotification = false;
             CommandManager.InvalidateRequerySuggested();
         }
 
@@ -1669,16 +1657,9 @@ namespace Manager.ViewModel.Demos
             UpdateSuspectBannedCount(m.Count);
         }
 
-        private async void UpdateSuspectBannedCount(int count)
+        private void UpdateSuspectBannedCount(int count)
         {
-            HasNotification = true;
-            HasRing = false;
-            IsBusy = true;
             NewBannedPlayerCount += count;
-            Notification = string.Format(Properties.Resources.NotificationSuspectsHaveBeenBanned, NewBannedPlayerCount);
-            await Task.Delay(5000);
-            HasNotification = false;
-            IsBusy = false;
         }
 
         private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)
@@ -1730,9 +1711,7 @@ namespace Manager.ViewModel.Demos
         {
             if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0)
             {
-                HasNotification = true;
                 IsBusy = true;
-                HasRing = true;
                 Notification = Properties.Resources.NotificationSearchingLastRank;
                 long steamId = Properties.Settings.Default.SelectedStatsAccountSteamID;
                 Rank lastRank = await _cacheService.GetLastRankAsync(steamId);
@@ -1746,7 +1725,7 @@ namespace Manager.ViewModel.Demos
                     LastRankAccountStats = lastRank;
                 }
 
-                UpdateNotificationStatus();
+                IsBusy = false;
             }
 
             CommandManager.InvalidateRequerySuggested();
@@ -1785,44 +1764,6 @@ namespace Manager.ViewModel.Demos
             }
         }
 
-        private async Task UpdateSelectedDemosAsync()
-        {
-            if (SelectedDemos.Count == Demos.Count && Demos.Count == Properties.Settings.Default.DemosListSize)
-            {
-                MessageDialogResult isAllAnalyze = await _dialogService.ShowAnalyzeAllDemosAsync();
-                if (isAllAnalyze == MessageDialogResult.FirstAuxiliary)
-                {
-                    return;
-                }
-
-                IsBusy = true;
-                HasRing = true;
-                HasNotification = true;
-                if (isAllAnalyze == MessageDialogResult.Negative)
-                {
-                    Notification = Properties.Resources.NotificationLoadingAllDemos;
-                    List<string> folders = new List<string>();
-                    if (SelectedFolder != null)
-                    {
-                        folders.Add(SelectedFolder);
-                    }
-                    else
-                    {
-                        folders = Folders.ToList();
-                    }
-
-                    List<Demo> allDemos = await _demosService.GetDemosHeader(folders);
-                    foreach (Demo demo in allDemos)
-                    {
-                        if (!SelectedDemos.Contains(demo))
-                        {
-                            SelectedDemos.Add(demo);
-                        }
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Process to analyze multiple demos
         /// </summary>
@@ -1838,8 +1779,6 @@ namespace Manager.ViewModel.Demos
             CommandManager.InvalidateRequerySuggested();
             _demoProgress.Clear();
             IsBusy = true;
-            HasRing = true;
-            HasNotification = true;
             IsCancellable = true;
             if (SelectedDemos.Count == 1)
             {
@@ -1909,7 +1848,6 @@ namespace Manager.ViewModel.Demos
             finally
             {
                 IsBusy = false;
-                HasNotification = false;
                 IsCancellable = false;
                 if (demosNotFound.Any())
                 {
@@ -1990,9 +1928,7 @@ namespace Manager.ViewModel.Demos
         {
             try
             {
-                HasNotification = true;
                 IsBusy = true;
-                HasRing = true;
                 IsCancellable = false;
                 Notification = Properties.Resources.NotificationCheckingNewBanned;
                 List<string> suspectIdList = await _cacheService.GetSuspectsListFromCache();
@@ -2015,7 +1951,7 @@ namespace Manager.ViewModel.Demos
             }
             finally
             {
-                UpdateNotificationStatus();
+                IsBusy = false;
                 CommandManager.InvalidateRequerySuggested();
             }
         }
@@ -2026,9 +1962,8 @@ namespace Manager.ViewModel.Demos
             {
                 Notification = Properties.Resources.NotificationLoadingDemos;
                 IsBusy = true;
-                HasRing = true;
-                HasNotification = true;
                 IsCancellable = false;
+                NoDemoFoundMessage = "";
                 List<string> folders = new List<string>();
 
                 if (SelectedFolder != null)
@@ -2056,33 +1991,30 @@ namespace Manager.ViewModel.Demos
             }
             finally
             {
-                UpdateNotificationStatus();
+                IsBusy = false;
+                UpdateNoDemosFoundMessage();
+                CommandManager.InvalidateRequerySuggested();
             }
         }
 
-        private void UpdateNotificationStatus()
+        private void UpdateNoDemosFoundMessage()
         {
             if (Demos.Count == 0)
             {
-                HasNotification = true;
-                IsBusy = false;
-                HasRing = false;
-                Notification = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
+                string message = Properties.Settings.Default.SelectedStatsAccountSteamID != 0
                     ? Properties.Resources.NotificationNoDemosFoundForAccount
                     : Properties.Resources.NotificationNoDemosFound;
                 if (!string.IsNullOrEmpty(Properties.Settings.Default.LastFolder))
                 {
-                    Notification += " " + Properties.Resources.NotificationInThisFolder;
+                    message += " " + Properties.Resources.NotificationInThisFolder;
                 }
+
+                NoDemoFoundMessage = message;
             }
             else
             {
-                IsBusy = false;
-                HasNotification = false;
-                HasRing = false;
+                NoDemoFoundMessage = "";
             }
-
-            CommandManager.InvalidateRequerySuggested();
         }
 
         private async Task<bool> PreProcessDemoDownload()
@@ -2291,6 +2223,11 @@ namespace Manager.ViewModel.Demos
             }
 
             value = (float)Math.Round(value, 2);
+            if (!_demoProgress.ContainsKey(demoId))
+            {
+                _demoProgress[demoId] = value;
+            }
+
             if (value <= _demoProgress[demoId])
             {
                 return;

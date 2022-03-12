@@ -16,11 +16,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Fonts.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Colors.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/Lime.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
-
-                <ResourceDictionary Source="Resources/Icons.xaml" />
                 <ResourceDictionary Source="Resources/Colors.xaml" />
                 <ResourceDictionary Source="Resources/ContextMenu.xaml" />
                 <ResourceDictionary Source="Resources/DataGrids.xaml" />
@@ -34,6 +29,7 @@
                 <ResourceDictionary Source="Resources/Heatmaps.xaml" />
                 <ResourceDictionary Source="Resources/Buttons.xaml" />
                 <ResourceDictionary Source="Resources/Separators.xaml" />
+                <ResourceDictionary Source="Resources/Timelines.xaml" />
                 <ResourceDictionary Source="Resources/ComboBoxMultiSelect.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

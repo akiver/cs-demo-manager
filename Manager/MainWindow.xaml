@@ -6,7 +6,7 @@
                       xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
                       xmlns:properties="clr-namespace:Manager.Properties"
                       xmlns:converters="clr-namespace:Manager.Converters"
-                      GlowBrush="{StaticResource HighlightBrush}"
+                      GlowBrush="{DynamicResource MahApps.Brushes.Highlight}"
                       Title="CSGO Demos Manager"
                       SaveWindowPosition="True"
                       DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -104,7 +104,7 @@
                             <controls:NumericUpDown x:Name="ResolutionWidthTextBox"
                                                     Minimum="800"
                                                     Maximum="10000"
-                                                    HasDecimals="False"
+                                                    NumericInputMode="Numbers"
                                                     HideUpDownButtons="True"
                                                     HorizontalAlignment="Left"
                                                     MaxWidth="80"
@@ -114,7 +114,7 @@
                             <controls:NumericUpDown x:Name="ResolutionHeightTextBox"
                                                     Minimum="600"
                                                     Maximum="10000"
-                                                    HasDecimals="False"
+                                                    NumericInputMode="Numbers"
                                                     HideUpDownButtons="True"
                                                     HorizontalAlignment="Left"
                                                     MaxWidth="80"
@@ -239,6 +239,7 @@
                                         Content="{x:Static properties:Resources.RemoveFolder}" />
                             </StackPanel>
                             <ListView ItemsSource="{Binding Folders}"
+                                      BorderThickness="1"
                                       SelectedItem="{Binding SelectedFolder}" />
                             <Label Target="{Binding ElementName=DemosListSizeTextBox}"
                                    Content="{x:Static properties:Resources.DemosListSize}" />
@@ -247,7 +248,7 @@
                                                     Maximum="500"
                                                     MaxWidth="50"
                                                     HorizontalAlignment="Left"
-                                                    HasDecimals="False"
+                                                    NumericInputMode="Numbers"
                                                     HideUpDownButtons="True"
                                                     Value="{Binding Source={StaticResource Locator}, Path=Settings.DemosListSize}" />
                         </StackPanel>
@@ -571,7 +572,7 @@
                                     Margin="10">
                             <TextBlock Text="{Binding CreditsText}"
                                        Style="{StaticResource TitleSettingsStyle}"
-                                       Foreground="{StaticResource HighlightBrush}" />
+                                       Foreground="{DynamicResource MahApps.Brushes.Highlight}" />
                             <TextBlock Style="{StaticResource SubTitleSettingsStyle}"
                                        Text="{x:Static properties:Resources.FreeSoftware}" />
                             <TextBlock Style="{StaticResource SubTitleSettingsStyle}">
@@ -628,7 +629,7 @@
                             </TextBlock>
                             <TextBlock Text="{x:Static properties:Resources.Contributors}"
                                        Style="{StaticResource TitleSettingsStyle}"
-                                       Foreground="{StaticResource HighlightBrush}" />
+                                       Foreground="{DynamicResource MahApps.Brushes.Highlight}" />
                             <ItemsControl ItemsSource="{Binding Contributors}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -645,7 +646,7 @@
                             </ItemsControl>
                             <TextBlock Text="{x:Static properties:Resources.Translators}"
                                        Style="{StaticResource TitleSettingsStyle}"
-                                       Foreground="{StaticResource HighlightBrush}" />
+                                       Foreground="{DynamicResource MahApps.Brushes.Highlight}" />
                             <ItemsControl ItemsSource="{Binding Translators}">
                                 <ItemsControl.ItemsPanel>
                                     <ItemsPanelTemplate>
@@ -661,7 +662,7 @@
                             </ItemsControl>
                             <TextBlock Text="{x:Static properties:Resources.Tools}"
                                        Style="{StaticResource TitleSettingsStyle}"
-                                       Foreground="{StaticResource HighlightBrush}" />
+                                       Foreground="{DynamicResource MahApps.Brushes.Highlight}" />
                             <TextBlock Style="{StaticResource SubTitleSettingsStyle}"
                                        Text="{x:Static properties:Resources.CreditsTools}" />
                             <StackPanel Orientation="Vertical">

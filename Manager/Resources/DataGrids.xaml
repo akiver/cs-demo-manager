@@ -4,19 +4,15 @@
                     xmlns:converters="clr-namespace:Manager.Converters"
                     xmlns:models="clr-namespace:Manager.Models">
 
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.datagrid.xaml" />
-    </ResourceDictionary.MergedDictionaries>
-
     <Style x:Key="DataGridColumnHeaderStyle"
            TargetType="DataGridColumnHeader"
-           BasedOn="{StaticResource MetroDataGridColumnHeader}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridColumnHeader}">
         <Setter Property="Width" Value="Auto" />
     </Style>
 
     <Style x:Key="DataGridStyle"
            TargetType="DataGrid"
-           BasedOn="{StaticResource MetroDataGrid}">
+           BasedOn="{StaticResource MahApps.Styles.DataGrid}">
         <Setter Property="IsReadOnly" Value="True" />
         <Setter Property="GridLinesVisibility" Value="Vertical" />
         <Setter Property="AutoGenerateColumns" Value="False" />
@@ -30,12 +26,10 @@
         <Setter Property="AlternatingRowBackground" Value="{DynamicResource GrayBrush10}" />
     </Style>
 
-    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="{StaticResource LightGrey}" />
-
     <!--DataGrid Row for Demos main list-->
     <Style TargetType="DataGridRow"
            x:Key="DataGridRowMainListDemosStyle"
-           BasedOn="{StaticResource MetroDataGridRow}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
         <Style.Triggers>
             <DataTrigger Binding="{Binding Status}" Value="{x:Static models:DemoStatus.NAME_DEMO_STATUS_TO_WATCH}">
                 <Setter Property="Background" Value="{StaticResource GreenBrush}" />
@@ -57,7 +51,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{StaticResource LightGreen}" Opacity="0.7" />
+                <SolidColorBrush Color="{DynamicResource MahApps.Colors.Highlight}" Opacity="0.7" />
             </Setter.Value>
         </Setter>
     </Style>
@@ -420,7 +414,7 @@
     <!--DataGrid for suspects list style -->
     <Style TargetType="DataGridRow"
            x:Key="DataGridRowSuspectsListStyle"
-           BasedOn="{StaticResource MetroDataGridRow}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
         <Style.Resources>
             <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
         </Style.Resources>
@@ -440,7 +434,7 @@
                 Value="{StaticResource SuspectRowContextMenu}" />
     </Style>
 
-    <!-- Supects view header -->
+    <!-- Suspects view header -->
     <Style TargetType="DataGridColumnHeader" x:Key="DaySinceLastBanHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
         <Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipDaysSinceLastBan}" />
     </Style>
@@ -548,7 +542,7 @@
     <!--DataGrid Row style for scoreboard -->
     <Style TargetType="DataGridRow"
            x:Key="DataGridRowPlayerStyle"
-           BasedOn="{StaticResource MetroDataGridRow}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
         <Setter Property="ContextMenu"
                 Value="{StaticResource PlayerRowContextMenu}" />
         <Style.Triggers>
@@ -617,7 +611,7 @@
     <!-- Whitelist -->
     <Style TargetType="DataGridRow"
            x:Key="DataGridRowPlayerWhitelistStyle"
-           BasedOn="{StaticResource MetroDataGridRow}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
         <Style.Resources>
             <converters:IntToBooleanConverter x:Key="IntToBooleanConverter" />
         </Style.Resources>
@@ -650,7 +644,7 @@
 
     <Style TargetType="DataGridRow"
            x:Key="DataGridRowRoundListStyle"
-           BasedOn="{StaticResource MetroDataGridRow}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
         <Setter Property="ContextMenu"
                 Value="{StaticResource RoundRowContextMenu}" />
     </Style>
@@ -683,7 +677,7 @@
 
     <Style TargetType="DataGridRow"
            x:Key="DataGridMoviePlayerStyle"
-           BasedOn="{StaticResource MetroDataGridRow}">
+           BasedOn="{StaticResource MahApps.Styles.DataGridRow}">
         <Setter Property="ContextMenu"
                 Value="{StaticResource PlayerMovieContextMenu}" />
     </Style>

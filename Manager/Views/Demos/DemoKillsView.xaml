@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:mahapps="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -46,29 +47,18 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}"
-                        Command="{Binding BackToDemoDetailsCommand}"
-                        CommandParameter="{Binding Demo}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}" />
             </StackPanel>
         </Grid>
 
         <Grid Grid.Row="1">
-            <TabControl controls:TabControlHelper.Underlined="SelectedTabItem">
-                <controls:MetroTabItem Header="{x:Static properties:Resources.EntryKills}">
+            <TabControl mahapps:TabControlHelper.Underlined="SelectedTabItem">
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.EntryKills}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -76,7 +66,7 @@
                         </Grid.ColumnDefinitions>
 
                         <Border Grid.Column="0"
-                                BorderBrush="{StaticResource HighlightBrush}"
+                                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
                                 BorderThickness="1">
                             <Grid Margin="5 0 5 5">
                                 <Grid.RowDefinitions>
@@ -228,7 +218,7 @@
 
 
                         <Border Grid.Column="1"
-                                BorderBrush="{DynamicResource HighlightBrush}"
+                                BorderBrush="{DynamicResource MahApps.Brushes.Highlight}"
                                 BorderThickness="1"
                                 Margin="5 0 0 0">
                             <Grid Margin="5 0 5 5">
@@ -381,8 +371,8 @@
                             </Grid>
                         </Border>
                     </Grid>
-                </controls:MetroTabItem>
-                <controls:MetroTabItem Header="{x:Static properties:Resources.Matrix}">
+                </mahapps:MetroTabItem>
+                <mahapps:MetroTabItem Header="{x:Static properties:Resources.Matrix}">
                     <telerik:RadHeatMap ShowToolTips="True"
                                         CellBorderThickness="1"
                                         Margin="10">
@@ -395,7 +385,7 @@
                                     <telerik:HeatMapValueGradientColorizer RangeMinimum="0"
                                                                            RangeMaximum="{Binding MaxPlayerKillCount}">
                                         <GradientStop Offset="0.0"
-                                                      Color="{StaticResource LightWhite}" />
+                                                      Color="{StaticResource White}" />
                                         <GradientStop Offset="0.5"
                                                       Color="{StaticResource Orange}" />
                                         <GradientStop Offset="1.0"
@@ -405,7 +395,7 @@
                             </telerik:CategoricalDefinition>
                         </telerik:RadHeatMap.Definition>
                         <telerik:RadHeatMap.CellLabelSettings>
-                            <telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
+                            <telerik:HeatMapCellLabelSettings Foreground="{StaticResource BlackBrush}" />
                         </telerik:RadHeatMap.CellLabelSettings>
                         <telerik:RadHeatMap.ColumnHeaderSettings>
                             <telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
@@ -426,7 +416,7 @@
                             </Grid>
                         </telerik:RadHeatMap.DescriptionContent>
                     </telerik:RadHeatMap>
-                </controls:MetroTabItem>
+                </mahapps:MetroTabItem>
             </TabControl>
         </Grid>
     </Grid>

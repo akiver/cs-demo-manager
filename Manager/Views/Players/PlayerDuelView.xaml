@@ -42,7 +42,7 @@
                                Margin="5 0 0 0" />
                 </StackPanel>
                 <Border Grid.Row="1"
-                        BorderBrush="{StaticResource LightWhiteBrush}"
+                        BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                         BorderThickness="1"
                         Padding="10">
                     <Grid>
@@ -116,7 +116,7 @@
                                         <DataTemplate>
                                             <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
                                                     CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryKillsDataGrid}"
-                                                    Style="{DynamicResource AccentedSquareButtonStyle}"
+                                                    Style="{DynamicResource BaseButton}"
                                                     Content="{x:Static properties:Resources.Watch}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -141,7 +141,7 @@
                                Margin="5 0 0 0" />
                 </StackPanel>
                 <Border Grid.Row="1"
-                        BorderBrush="{StaticResource LightWhiteBrush}"
+                        BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                         BorderThickness="1"
                         Padding="10">
                     <Grid>
@@ -215,7 +215,7 @@
                                         <DataTemplate>
                                             <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
                                                     CommandParameter="{Binding SelectedItem.Tick, ElementName=EntryHoldKillsDataGrid}"
-                                                    Style="{DynamicResource AccentedSquareButtonStyle}"
+                                                    Style="{DynamicResource BaseButton}"
                                                     Content="{x:Static properties:Resources.Watch}" />
                                         </DataTemplate>
                                     </DataGridTemplateColumn.CellTemplate>
@@ -241,7 +241,7 @@
                                Style="{StaticResource TextBlockSectionSubTitle}" />
                 </StackPanel>
                 <Border Grid.Row="1"
-                        BorderBrush="{StaticResource LightWhiteBrush}"
+                        BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                         BorderThickness="1"
                         Padding="10">
                     <StackPanel Orientation="Vertical">

@@ -10,7 +10,7 @@
     <RootNamespace>DemoInfo</RootNamespace>
     <AssemblyName>DemoInfo</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <SignAssembly>true</SignAssembly>
     <DelaySign>true</DelaySign>
     <AssemblyOriginatorKeyFile>demoinfo-release.snk</AssemblyOriginatorKeyFile>

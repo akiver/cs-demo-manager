@@ -5,10 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:converters="clr-namespace:Manager.Converters"
              xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              DataContext="{Binding DemoFlashbangs, Source={StaticResource Locator}}"
              d:DesignHeight="720"
@@ -17,7 +17,6 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <converters:BooleanToVisibilityInvertedConverter x:Key="BooleanToVisibilityInvertedConverter" />
-            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" />
         </ResourceDictionary>
     </UserControl.Resources>
 
@@ -45,36 +44,15 @@
         <Grid Grid.Row="0"
               Height="40">
             <StackPanel Orientation="Horizontal">
-                <Button Style="{DynamicResource GeneralButton}"
-                        Command="{Binding BackToDemoDetailsCommand}"
-                        CommandParameter="{Binding Demo}"
-                        ToolTip="{x:Static properties:Resources.ToolTipBack}">
-                    <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                        <Rectangle Width="15"
-                                   Height="15"
-                                   Fill="{StaticResource IdealForegroundColorBrush}">
-                            <Rectangle.OpacityMask>
-                                <VisualBrush Visual="{StaticResource appbar_arrow_left}"
-                                             Stretch="Fill" />
-                            </Rectangle.OpacityMask>
-                        </Rectangle>
-                        <TextBlock Text="{x:Static properties:Resources.Back}"
-                                   Style="{StaticResource ButtonTitleStyle}" />
-                    </StackPanel>
-                </Button>
+                <controls:ButtonWithIcon
+                    Text="{x:Static properties:Resources.Back}"
+                    ToolTip="{x:Static properties:Resources.ToolTipBack}"
+                    Icon="ArrowLeft"
+                    Command="{Binding BackToDemoDetailsCommand}"
+                    CommandParameter="{Binding Demo}" />
 
-
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Center"
-                            Margin="5">
-                    <controls:ProgressRing IsActive="{Binding IsBusy}"
-                                           Foreground="{DynamicResource BlackColorBrush}"
-                                           Width="30"
-                                           Height="30" />
-                    <TextBlock Text="{Binding Notification}"
-                               Style="{StaticResource NotificationMessageStyle}"
-                               Visibility="{Binding IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                </StackPanel>
+                <controls:LoadingMessage Visible="{Binding IsBusy}"
+                                         Message="{Binding Notification}" />
             </StackPanel>
         </Grid>
 
@@ -99,7 +77,7 @@
                                 <telerik:HeatMapValueGradientColorizer RangeMinimum="0"
                                                                        RangeMaximum="{Binding MaxDurationPlayer}">
                                     <GradientStop Offset="0.0"
-                                                  Color="{StaticResource LightWhite}" />
+                                                  Color="{StaticResource White}" />
                                     <GradientStop Offset="0.5"
                                                   Color="{StaticResource Orange}" />
                                     <GradientStop Offset="1.0"
@@ -109,7 +87,7 @@
                         </telerik:CategoricalDefinition>
                     </telerik:RadHeatMap.Definition>
                     <telerik:RadHeatMap.CellLabelSettings>
-                        <telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
+                        <telerik:HeatMapCellLabelSettings Foreground="{StaticResource BlackBrush}" />
                     </telerik:RadHeatMap.CellLabelSettings>
                     <telerik:RadHeatMap.ColumnHeaderSettings>
                         <telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
@@ -151,7 +129,7 @@
                                     <telerik:HeatMapValueGradientColorizer RangeMinimum="0"
                                                                            RangeMaximum="{Binding MaxDurationTeam}">
                                         <GradientStop Offset="0.0"
-                                                      Color="{StaticResource LightWhite}" />
+                                                      Color="{StaticResource White}" />
                                         <GradientStop Offset="0.5"
                                                       Color="{StaticResource Orange}" />
                                         <GradientStop Offset="1.0"
@@ -161,7 +139,7 @@
                             </telerik:CategoricalDefinition>
                         </telerik:RadHeatMap.Definition>
                         <telerik:RadHeatMap.CellLabelSettings>
-                            <telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
+                            <telerik:HeatMapCellLabelSettings Foreground="{StaticResource BlackBrush}" />
                         </telerik:RadHeatMap.CellLabelSettings>
                         <telerik:RadHeatMap.ColumnHeaderSettings>
                             <telerik:HeatMapColumnHeaderSettings LabelHorizontalAlignment="Center"
@@ -201,7 +179,7 @@
                                         <telerik:HeatMapValueGradientColorizer RangeMinimum="0"
                                                                                RangeMaximum="{Binding MaxDurationAveragePlayer}">
                                             <GradientStop Offset="0.0"
-                                                          Color="{StaticResource LightWhite}" />
+                                                          Color="{StaticResource White}" />
                                             <GradientStop Offset="0.5"
                                                           Color="{StaticResource Orange}" />
                                             <GradientStop Offset="1.0"
@@ -211,7 +189,7 @@
                                 </telerik:CategoricalDefinition>
                             </telerik:RadHeatMap.Definition>
                             <telerik:RadHeatMap.CellLabelSettings>
-                                <telerik:HeatMapCellLabelSettings Foreground="{StaticResource IdealForegroundColorBrush}" />
+                                <telerik:HeatMapCellLabelSettings Foreground="{StaticResource BlackBrush}" />
                             </telerik:RadHeatMap.CellLabelSettings>
                             <telerik:RadHeatMap.ColumnHeaderSettings>
                                 <telerik:HeatMapColumnHeaderSettings LabelStyle="{StaticResource LabelHeatmapInvisibleStyle}" />

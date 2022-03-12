@@ -8,7 +8,6 @@
                     xmlns:models="clr-namespace:Manager.Models">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/controls.contextmenu.xaml" />
         <ResourceDictionary>
             <models:DemoStatus x:Key="DemoStatus" />
         </ResourceDictionary>
@@ -35,7 +34,7 @@
                   DisplayMemberPath="Label">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="{x:Type MenuItem}"
-                       BasedOn="{StaticResource MetroMenuItem}">
+                       BasedOn="{StaticResource MahApps.Styles.MenuItem}">
                     <Setter Property="Command"
                             Value="{Binding DemoList.SaveStatusDemoCommand, Source={StaticResource Locator}}" />
                     <Setter Property="CommandParameter"
@@ -57,7 +56,7 @@
                   DisplayMemberPath="Label">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="{x:Type MenuItem}"
-                       BasedOn="{StaticResource MetroMenuItem}">
+                       BasedOn="{StaticResource MahApps.Styles.MenuItem}">
                     <Setter Property="Command"
                             Value="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}" />
                     <Setter Property="CommandParameter"
@@ -73,7 +72,7 @@
                   DisplayMemberPath="Title">
             <MenuItem.ItemContainerStyle>
                 <Style TargetType="{x:Type MenuItem}"
-                       BasedOn="{StaticResource MetroMenuItem}">
+                       BasedOn="{StaticResource MahApps.Styles.MenuItem}">
                     <Setter Property="Command"
                             Value="{Binding DemoList.ShowThirdPartyDemoCommand, Source={StaticResource Locator}}" />
                     <Setter Property="CommandParameter"

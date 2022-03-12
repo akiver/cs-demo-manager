@@ -125,7 +125,7 @@
                        Text="{x:Static properties:Resources.Kills}"
                        Style="{StaticResource TextBlockSectionTitle}" />
             <Border Grid.Row="1"
-                    BorderBrush="{StaticResource LightWhiteBrush}"
+                    BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                     BorderThickness="1"
                     Padding="10">
                 <DataGrid Name="KillsDataGrid"
@@ -157,7 +157,7 @@
                                 <DataTemplate>
                                     <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
                                             CommandParameter="{Binding SelectedItem.Tick, ElementName=KillsDataGrid}"
-                                            Style="{DynamicResource AccentedSquareButtonStyle}"
+                                            Style="{DynamicResource BaseButton}"
                                             Content="{x:Static properties:Resources.Watch}" />
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>

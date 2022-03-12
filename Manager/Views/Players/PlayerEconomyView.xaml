@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:properties="clr-namespace:Manager.Properties"
+             xmlns:controls="clr-namespace:Manager.Controls"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -19,25 +20,16 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <TextBlock Style="{StaticResource LabelChartStyle}"
                        Text="{x:Static properties:Resources.EquipmentValuePerRound}" />
-            <Button Command="{Binding ExportChartCommand}"
-                    CommandParameter="{Binding ElementName=EquipmentChart}"
-                    Style="{DynamicResource GeneralButton}"
-                    Margin="0"
-                    ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}">
-                <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                    <Rectangle Width="15" Height="15" Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_page_png}" Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Export}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
+            <controls:ButtonWithIcon
+                Text="{x:Static properties:Resources.Export}"
+                ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}"
+                Icon="FilePngBox"
+                Command="{Binding ExportChartCommand}"
+                CommandParameter="{Binding ElementName=EquipmentChart}" />
         </StackPanel>
         <telerik:RadCartesianChart Grid.Row="1"
                                    x:Name="EquipmentChart"
-                                   Background="{StaticResource WindowBackgroundBrush}"
+                                   Background="{DynamicResource MahApps.Brushes.ThemeBackground}"
                                    ClipToBounds="False">
             <telerik:RadCartesianChart.VerticalAxis>
                 <telerik:LinearAxis RangeExtendDirection="Both"
@@ -62,14 +54,14 @@
                                 CategoryBinding="Label"
                                 ValueBinding="Value"
                                 StrokeThickness="3"
-                                TrackBallInfoTemplate="{StaticResource PlayerEquipementValueTrackBallTemplate}"
-                                Stroke="{StaticResource HighlightBrush}"
-                                TooltipTemplate="{StaticResource PlayerEquipementValueTooltipTemplate}">
+                                TrackBallInfoTemplate="{StaticResource PlayerEquipmentValueTrackBallTemplate}"
+                                Stroke="{DynamicResource MahApps.Brushes.Highlight}"
+                                TooltipTemplate="{StaticResource PlayerEquipmentValueTooltipTemplate}">
                 <telerik:LineSeries.PointTemplate>
                     <DataTemplate>
                         <Ellipse Width="10"
                                  Height="10"
-                                 Fill="{DynamicResource BlackColorBrush}" />
+                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                     </DataTemplate>
                 </telerik:LineSeries.PointTemplate>
             </telerik:LineSeries>
@@ -81,26 +73,17 @@
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <TextBlock Style="{StaticResource LabelChartStyle}"
                        Text="{x:Static properties:Resources.TotalCashEarned}" />
-            <Button Command="{Binding ExportChartCommand}"
-                    CommandParameter="{Binding ElementName=MoneyChart}"
-                    Style="{DynamicResource GeneralButton}"
-                    Margin="0"
-                    ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}">
-                <StackPanel Style="{StaticResource GeneralButtonStackPanel}">
-                    <Rectangle Width="15" Height="15" Fill="{StaticResource IdealForegroundColorBrush}">
-                        <Rectangle.OpacityMask>
-                            <VisualBrush Visual="{StaticResource appbar_page_png}" Stretch="Fill" />
-                        </Rectangle.OpacityMask>
-                    </Rectangle>
-                    <TextBlock Text="{x:Static properties:Resources.Export}"
-                               Style="{StaticResource ButtonTitleStyle}" />
-                </StackPanel>
-            </Button>
+            <controls:ButtonWithIcon
+                Text="{x:Static properties:Resources.Export}"
+                ToolTip="{x:Static properties:Resources.ToolTipSaveAsPngNoShortcut}"
+                Icon="FilePngBox"
+                Command="{Binding ExportChartCommand}"
+                CommandParameter="{Binding ElementName=MoneyChart}" />
         </StackPanel>
         <telerik:RadCartesianChart Grid.Row="3"
                                    ClipToBounds="False"
                                    x:Name="MoneyChart"
-                                   Background="{StaticResource WindowBackgroundBrush}">
+                                   Background="{DynamicResource MahApps.Brushes.ThemeBackground}">
             <telerik:RadCartesianChart.VerticalAxis>
                 <telerik:LinearAxis RangeExtendDirection="Both"
                                     LabelStyle="{StaticResource LabelChartStyle}"
@@ -123,14 +106,14 @@
                                 CategoryBinding="Label"
                                 ValueBinding="Value"
                                 StrokeThickness="3"
-                                TrackBallInfoTemplate="{StaticResource PlayerEquipementValueTrackBallTemplate}"
-                                Stroke="{StaticResource HighlightBrush}"
-                                TooltipTemplate="{StaticResource PlayerEquipementValueTooltipTemplate}">
+                                TrackBallInfoTemplate="{StaticResource PlayerEquipmentValueTrackBallTemplate}"
+                                Stroke="{DynamicResource MahApps.Brushes.Highlight}"
+                                TooltipTemplate="{StaticResource PlayerEquipmentValueTooltipTemplate}">
                 <telerik:LineSeries.PointTemplate>
                     <DataTemplate>
                         <Ellipse Width="10"
                                  Height="10"
-                                 Fill="{DynamicResource BlackColorBrush}" />
+                                 Fill="{DynamicResource MahApps.Brushes.ThemeForeground}" />
                     </DataTemplate>
                 </telerik:LineSeries.PointTemplate>
             </telerik:LineSeries>

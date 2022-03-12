@@ -48,7 +48,7 @@
                                Style="{StaticResource TextBlockSectionTitle}" />
                     <Border Grid.Column="0"
                             Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="1"
                             Margin="5"
                             Padding="10">
@@ -92,7 +92,7 @@
                                Style="{StaticResource TextBlockSectionTitle}" />
                     <Border Grid.Column="0"
                             Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="1"
                             Margin="5"
                             Padding="10">
@@ -136,7 +136,7 @@
                                Style="{StaticResource TextBlockSectionTitle}" />
                     <Border Grid.Column="0"
                             Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="1"
                             Margin="5"
                             Padding="10">
@@ -188,7 +188,7 @@
                                Style="{StaticResource TextBlockSectionTitle}" />
                     <Border Grid.Column="0"
                             Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="1"
                             Margin="5"
                             Padding="10">
@@ -232,7 +232,7 @@
                                Style="{StaticResource TextBlockSectionTitle}" />
                     <Border Grid.Column="0"
                             Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="1"
                             Margin="5"
                             Padding="10">
@@ -276,7 +276,7 @@
                                Style="{StaticResource TextBlockSectionTitle}" />
                     <Border Grid.Column="0"
                             Grid.Row="1"
-                            BorderBrush="{StaticResource LightWhiteBrush}"
+                            BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
                             BorderThickness="1"
                             Margin="5"
                             Padding="10">
@@ -334,7 +334,7 @@
                             <DataTemplate>
                                 <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithoutDelayCommand}"
                                         CommandParameter="{Binding SelectedItem.Tick, ElementName=ClutchsDataGrid}"
-                                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                                        Style="{StaticResource BaseButton}"
                                         Content="{x:Static properties:Resources.Watch}" />
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
