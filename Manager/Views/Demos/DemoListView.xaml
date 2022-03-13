@@ -30,45 +30,6 @@
             <converters:IntToBadgeContentConverter x:Key="IntToBadgeContentConverter" />
         </ResourceDictionary>
     </UserControl.Resources>
-    <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BrowseToDemoCommand}"
-                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
-                    Gesture="CTRL+B" />
-        <KeyBinding Command="{Binding GoToAccountStatsCommand}"
-                    Gesture="CTRL+E" />
-        <KeyBinding Command="{Binding ShowDemoDetailsCommand}"
-                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
-                    Gesture="CTRL+D" />
-        <KeyBinding Command="{Binding WatchDemoCommand}"
-                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
-                    Gesture="CTRL+W" />
-        <KeyBinding Command="{Binding GoToTickCommand}"
-                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
-                    Gesture="CTRL+G" />
-        <KeyBinding Command="{Binding AnalyzeDemosCommand}"
-                    CommandParameter="{Binding SelectedDemos}"
-                    Gesture="CTRL+S" />
-        <KeyBinding Command="{Binding RefreshListCommand}"
-                    Gesture="CTRL+R" />
-        <KeyBinding Command="{Binding ShowSuspectsCommand}"
-                    Gesture="CTRL+F" />
-        <KeyBinding Command="{Binding ExportExcelCommand}"
-                    CommandParameter="{Binding SelectedDemos}"
-                    Gesture="CTRL+X" />
-        <KeyBinding Command="{Binding DownloadDemosCommand}"
-                    Gesture="CTRL+H" />
-        <KeyBinding Command="{Binding RefreshListCommand}"
-                    Gesture="F5" />
-        <KeyBinding Command="{Binding WatchHighlightCommand}"
-                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
-                    Gesture="CTRL+H" />
-        <KeyBinding Command="{Binding WatchLowlightCommand}"
-                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
-                    Gesture="CTRL+L" />
-        <mouse:MouseBindingExtended Gesture="XButton2"
-                                    Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
-                                    CommandParameter="{Binding ElementName=DemoListUserControl}" />
-    </UserControl.InputBindings>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -597,4 +558,44 @@
             </StackPanel>
         </Grid>
     </Grid>
+
+    <UserControl.InputBindings>
+        <KeyBinding Command="{Binding BrowseToDemoCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                    Gesture="CTRL+B" />
+        <KeyBinding Command="{Binding GoToAccountStatsCommand}"
+                    Gesture="CTRL+E" />
+        <KeyBinding Command="{Binding ShowDemoDetailsCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                    Gesture="CTRL+D" />
+        <KeyBinding Command="{Binding WatchDemoCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                    Gesture="CTRL+W" />
+        <KeyBinding Command="{Binding GoToTickCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                    Gesture="CTRL+G" />
+        <KeyBinding Command="{Binding AnalyzeDemosCommand}"
+                    CommandParameter="{Binding SelectedDemos}"
+                    Gesture="CTRL+S" />
+        <KeyBinding Command="{Binding RefreshListCommand}"
+                    Gesture="CTRL+R" />
+        <KeyBinding Command="{Binding ShowSuspectsCommand}"
+                    Gesture="CTRL+F" />
+        <KeyBinding Command="{Binding ExportExcelCommand}"
+                    CommandParameter="{Binding SelectedDemos}"
+                    Gesture="CTRL+X" />
+        <KeyBinding Command="{Binding DownloadDemosCommand}"
+                    Gesture="CTRL+H" />
+        <KeyBinding Command="{Binding RefreshListCommand}"
+                    Gesture="F5" />
+        <KeyBinding Command="{Binding WatchHighlightCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                    Gesture="CTRL+H" />
+        <KeyBinding Command="{Binding WatchLowlightCommand}"
+                    CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                    Gesture="CTRL+L" />
+        <mouse:MouseBindingExtended Gesture="XButton2"
+                                    Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
+                                    CommandParameter="{Binding ElementName=DemoListUserControl}" />
+    </UserControl.InputBindings>
 </UserControl>
