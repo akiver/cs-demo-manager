@@ -11,10 +11,8 @@ using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Properties;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
+using Manager.ViewModel.Demos;
 using Services.Concrete;
-using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
 using Services.Models.Stats;
@@ -22,7 +20,7 @@ using Services.Models.Timelines;
 
 namespace Manager.ViewModel.Rounds
 {
-    public class RoundDetailsViewModel : BaseViewModel
+    public class RoundDetailsViewModel : DemoViewModel
     {
         #region Properties
 
@@ -35,8 +33,6 @@ namespace Manager.ViewModel.Rounds
         private readonly ICacheService _cacheService;
 
         private int _roundNumber;
-
-        private Demo _demo;
 
         private Round _currentRound;
 
@@ -54,8 +50,6 @@ namespace Manager.ViewModel.Rounds
 
         private RelayCommand _windowLoadedCommand;
 
-        private RelayCommand<Demo> _backToDemoDetailsCommand;
-
         private RelayCommand<KillEvent> _watchKillCommand;
 
         private RelayCommand _goToNextRoundCommand;
@@ -67,12 +61,6 @@ namespace Manager.ViewModel.Rounds
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public int RoundNumber
         {
@@ -133,27 +121,6 @@ namespace Manager.ViewModel.Rounds
         #region Commands
 
         /// <summary>
-        /// Command to back to details view
-        /// </summary>
-        public RelayCommand<Demo> BackToDemoDetailsCommand
-        {
-            get
-            {
-                return _backToDemoDetailsCommand
-                       ?? (_backToDemoDetailsCommand = new RelayCommand<Demo>(
-                           demo =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                           },
-                           demo => Demo != null));
-            }
-        }
-
-        /// <summary>
         /// Command to watch the round
         /// </summary>
         public RelayCommand WatchRoundCommand
@@ -191,7 +158,7 @@ namespace Manager.ViewModel.Rounds
                            async () =>
                            {
                                RoundNumber++;
-                               await LoadDatas();
+                               await LoadData();
                            },
                            () => RoundNumber < Demo.Rounds.Count));
             }
@@ -209,7 +176,7 @@ namespace Manager.ViewModel.Rounds
                            async () =>
                            {
                                RoundNumber--;
-                               await LoadDatas();
+                               await LoadData();
                            },
                            () => RoundNumber > 1));
             }
@@ -221,13 +188,13 @@ namespace Manager.ViewModel.Rounds
             {
                 return _windowLoadedCommand
                        ?? (_windowLoadedCommand = new RelayCommand(
-                           async () => { await LoadDatas(); }));
+                           async () => { await LoadData(); }));
             }
         }
 
         #endregion
 
-        private async Task LoadDatas()
+        private async Task LoadData()
         {
             Demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(Demo);
             CurrentRound = Demo.Rounds.First(r => r.Number == RoundNumber);
@@ -276,7 +243,7 @@ namespace Manager.ViewModel.Rounds
                 {
                     Demo = await _cacheService.GetDemoDataFromCache(string.Empty);
                     RoundNumber = 10;
-                    await LoadDatas();
+                    await LoadData();
                 });
             }
         }

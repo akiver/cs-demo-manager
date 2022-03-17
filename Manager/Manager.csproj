@@ -200,6 +200,7 @@
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelect.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelectCollectionView.cs" />
+    <Compile Include="Internals\Navigation.cs" />
     <Compile Include="Internals\ScrollViewHelper.cs" />
     <Compile Include="Messages\ComboBoxMultiClosedMessage.cs" />
     <Compile Include="Messages\DownloadDemosMessage.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Messages\SettingsFlyoutClosed.cs" />
     <Compile Include="Messages\SelectedAccountChangedMessage.cs" />
     <Compile Include="Messages\SettingsFlyoutOpenedMessage.cs" />
+    <Compile Include="Messages\ShowPageMessage.cs" />
     <Compile Include="Messages\ThirdPartySelected.cs" />
     <Compile Include="Messages\UpdateSuspectBannedCountMessage.cs" />
     <Compile Include="Messages\UpdateTaskbarProgressMessage.cs" />
@@ -230,10 +232,13 @@
     </Compile>
     <Compile Include="Services\Config.cs" />
     <Compile Include="Services\IDialogService.cs" />
+    <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoMovieViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoViewModel.cs" />
     <Compile Include="ViewModel\DialogThirdPartiesViewModel.cs" />
+    <Compile Include="ViewModel\PageNavigationViewModel.cs" />
     <Compile Include="ViewModel\Players\PlayerDetailsViewModel.cs" />
     <Compile Include="ViewModel\Rounds\RoundDetailsViewModel.cs" />
     <Compile Include="ViewModel\Shared\BaseViewModel.cs" />
@@ -593,10 +598,6 @@
     <ProjectReference Include="..\Services\Services.csproj">
       <Project>{b0b2f0b5-4e7f-41ae-817f-9c0f30da5367}</Project>
       <Name>Services</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WpfPageTransitions\WpfPageTransitions.csproj">
-      <Project>{22a46d61-1d40-43a9-802c-b9d43dadd9ec}</Project>
-      <Name>WpfPageTransitions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

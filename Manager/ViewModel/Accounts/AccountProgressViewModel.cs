@@ -7,16 +7,13 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
-using Manager.ViewModel.Shared;
-using Manager.Views.Accounts;
-using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Charts;
 using Services.Models.Stats;
 
 namespace Manager.ViewModel.Accounts
 {
-    public class AccountProgressViewModel : BaseViewModel
+    public class AccountProgressViewModel : AccountViewModel
     {
         #region Properties
 
@@ -44,37 +41,27 @@ namespace Manager.ViewModel.Accounts
 
         private double _maximumVelocity = 250;
 
-        private List<HeadshotDateChart> _datasHeadshot;
+        private List<HeadshotDateChart> _datasHeadshot = new List<HeadshotDateChart>();
 
-        private List<CrouchKillDateChart> _datasCrouchKill;
+        private List<CrouchKillDateChart> _datasCrouchKill = new List<CrouchKillDateChart>();
 
-        private List<DamageDateChart> _datasDamage;
+        private List<DamageDateChart> _datasDamage = new List<DamageDateChart>();
 
-        private List<WinDateChart> _datasWin;
+        private List<WinDateChart> _datasWin = new List<WinDateChart>();
 
-        private List<KillDateChart> _datasKill;
+        private List<KillDateChart> _datasKill = new List<KillDateChart>();
 
-        private List<KillVelocityChart> _velocityRifle;
+        private List<KillVelocityChart> _velocityRifle = new List<KillVelocityChart>();
 
-        private List<KillVelocityChart> _velocityPistol;
+        private List<KillVelocityChart> _velocityPistol = new List<KillVelocityChart>();
 
-        private List<KillVelocityChart> _velocitySniper;
+        private List<KillVelocityChart> _velocitySniper = new List<KillVelocityChart>();
 
-        private List<KillVelocityChart> _velocityHeavy;
+        private List<KillVelocityChart> _velocityHeavy = new List<KillVelocityChart>();
 
-        private List<KillVelocityChart> _velocitySmg;
+        private List<KillVelocityChart> _velocitySmg = new List<KillVelocityChart>();
 
         private RelayCommand _windowLoadedCommand;
-
-        private RelayCommand _backToHomeCommand;
-
-        private RelayCommand _goToOverallCommand;
-
-        private RelayCommand _goToMapCommand;
-
-        private RelayCommand _goToWeaponCommand;
-
-        private RelayCommand _goToRankCommand;
 
         private RelayCommand<bool> _toggleWinChartCommand;
 
@@ -234,106 +221,6 @@ namespace Manager.ViewModel.Accounts
                            {
                                await LoadDatas();
                                Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to the home page
-        /// </summary>
-        public RelayCommand BackToHomeCommand
-        {
-            get
-            {
-                return _backToHomeCommand
-                       ?? (_backToHomeCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView demoListView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(demoListView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the overall stats page
-        /// </summary>
-        public RelayCommand GoToOverallCommand
-        {
-            get
-            {
-                return _goToOverallCommand
-                       ?? (_goToOverallCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountOverallView overallView = new AccountOverallView();
-                               mainViewModel.CurrentPage.ShowPage(overallView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the maps stats page
-        /// </summary>
-        public RelayCommand GoToMapCommand
-        {
-            get
-            {
-                return _goToMapCommand
-                       ?? (_goToMapCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountMapsView mapsView = new AccountMapsView();
-                               mainViewModel.CurrentPage.ShowPage(mapsView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the weapon stats page
-        /// </summary>
-        public RelayCommand GoToWeaponCommand
-        {
-            get
-            {
-                return _goToWeaponCommand
-                       ?? (_goToWeaponCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountWeaponsView weaponsView = new AccountWeaponsView();
-                               mainViewModel.CurrentPage.ShowPage(weaponsView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the rank stats page
-        /// </summary>
-        public RelayCommand GoToRankCommand
-        {
-            get
-            {
-                return _goToRankCommand
-                       ?? (_goToRankCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountRankView rankView = new AccountRankView();
-                               mainViewModel.CurrentPage.ShowPage(rankView);
-                               Cleanup();
                            }));
             }
         }

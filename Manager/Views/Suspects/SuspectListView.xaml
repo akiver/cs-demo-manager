@@ -29,7 +29,7 @@
         </ResourceDictionary>
     </UserControl.Resources>
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BackToHomeCommand}"
+        <KeyBinding Command="{Binding ShowDemoListCommand}"
                     Gesture="CTRL+B" />
         <KeyBinding Command="{Binding RefreshSuspectListCommand}"
                     Gesture="CTRL+R" />
@@ -40,7 +40,7 @@
         <KeyBinding Command="{Binding DisplayDemosCommand}"
                     Gesture="CTRL+F" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToHomeCommand}" />
+                                    Command="{Binding ShowDemoListCommand}" />
     </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
@@ -63,13 +63,13 @@
                     Text="{x:Static properties:Resources.Back}"
                     ToolTip="{x:Static properties:Resources.ToolTipBack}"
                     Icon="ArrowLeftBold"
-                    Command="{Binding BackToHomeCommand}"
+                    Command="{Binding ShowDemoListCommand}"
                     IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Whitelist}"
                     ToolTip="{x:Static properties:Resources.ToolTipWhitelist}"
                     Icon="AccountMultipleCheck"
-                    Command="{Binding GoToWhitelistCommand}" />
+                    Command="{Binding ShowWhitelistCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Add}"
                     Icon="AccountPlus"

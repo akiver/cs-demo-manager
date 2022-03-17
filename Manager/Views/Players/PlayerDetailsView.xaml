@@ -22,7 +22,7 @@
     </UserControl.Resources>
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BackToDetailsCommand}"
+        <KeyBinding Command="{Binding ShowCurrentDemoDetailsCommand}"
                     Gesture="CTRL+B" />
         <KeyBinding Command="{Binding WatchHighlightsCommand}"
                     Gesture="CTRL+H" />
@@ -33,7 +33,7 @@
         <KeyBinding Command="{Binding AddPlayerToWhitelistCommand}"
                     Gesture="CTRL+W" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToDetailsCommand}" />
+                                    Command="{Binding ShowCurrentDemoDetailsCommand}" />
     </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
@@ -65,7 +65,7 @@
                 Text="{x:Static properties:Resources.Back}"
                 ToolTip="{x:Static properties:Resources.ToolTipBack}"
                 Icon="ArrowLeftBold"
-                Command="{Binding BackToDetailsCommand}" />
+                Command="{Binding ShowCurrentDemoDetailsCommand}" />
             <controls:ButtonWithIcon
                 Grid.Column="1"
                 Text="{x:Static properties:Resources.WatchHighlights}"

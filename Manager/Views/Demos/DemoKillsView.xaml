@@ -24,12 +24,10 @@
     </UserControl.Resources>
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowCurrentDemoDetailsCommand}"
                     Gesture="CTRL+B" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToDemoDetailsCommand}"
-                                    CommandParameter="{Binding Demo}" />
+                                    Command="{Binding ShowCurrentDemoDetailsCommand}" />
     </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
@@ -51,8 +49,7 @@
                     Text="{x:Static properties:Resources.Back}"
                     ToolTip="{x:Static properties:Resources.ToolTipBack}"
                     Icon="ArrowLeft"
-                    Command="{Binding BackToDemoDetailsCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowCurrentDemoDetailsCommand}" />
             </StackPanel>
         </Grid>
 

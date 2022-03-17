@@ -9,8 +9,6 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Models;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
 using Services.Concrete;
 using Services.Interfaces;
 using Services.Models;
@@ -18,13 +16,11 @@ using Clipboard = System.Windows.Clipboard;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoStuffsViewModel : BaseViewModel
+    public class DemoStuffsViewModel : DemoViewModel
     {
         #region Properties
 
         private readonly IDialogService _dialogService;
-
-        private Demo _demo;
 
         private DrawService _drawService;
 
@@ -48,8 +44,6 @@ namespace Manager.ViewModel.Demos
 
         private ComboboxSelector _currentStuffSelector;
 
-        private RelayCommand<Demo> _backToDemoDetailsCommand;
-
         private RelayCommand _stuffTypeChangedCommand;
 
         private RelayCommand _windowLoadedCommand;
@@ -67,12 +61,6 @@ namespace Manager.ViewModel.Demos
         #endregion Properties
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public Stuff SelectedStuff
         {
@@ -172,28 +160,6 @@ namespace Manager.ViewModel.Demos
                 return _windowLoadedCommand
                        ?? (_windowLoadedCommand = new RelayCommand(
                            async () => { await LoadData(); }));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to details view
-        /// </summary>
-        public RelayCommand<Demo> BackToDemoDetailsCommand
-        {
-            get
-            {
-                return _backToDemoDetailsCommand
-                       ?? (_backToDemoDetailsCommand = new RelayCommand<Demo>(
-                           demo =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               Cleanup();
-                           },
-                           demo => Demo != null));
             }
         }
 

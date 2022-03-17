@@ -16,22 +16,17 @@ using MahApps.Metro.Controls.Dialogs;
 using Manager.Internals.MultiSelect;
 using Manager.Models;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
 using Services.Concrete;
 using Services.Exceptions.Map;
 using Services.Interfaces;
 using Services.Models.Heatmap;
-using Demo = Core.Models.Demo;
 using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoHeatmapViewModel : BaseViewModel
+    public class DemoHeatmapViewModel : DemoViewModel
     {
         #region Properties
-
-        private Demo _demo;
 
         private RelayCommand _windowLoadedCommand;
 
@@ -54,8 +49,6 @@ namespace Manager.ViewModel.Demos
         private List<ComboboxSelector> _eventSelectors = new List<ComboboxSelector>();
 
         private ComboboxSelector _currentEventSelector;
-
-        private RelayCommand<Demo> _backToDemoDetailsCommand;
 
         private RelayCommand _clearSelectedPlayerCommand;
 
@@ -86,12 +79,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public WriteableBitmap ColorsLayer
         {
@@ -324,28 +311,6 @@ namespace Manager.ViewModel.Demos
                                        .ConfigureAwait(false);
                                }
                            }, () => HasGeneratedHeatmap && !IsBusy));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to details view
-        /// </summary>
-        public RelayCommand<Demo> BackToDemoDetailsCommand
-        {
-            get
-            {
-                return _backToDemoDetailsCommand
-                       ?? (_backToDemoDetailsCommand = new RelayCommand<Demo>(
-                           demo =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               Cleanup();
-                           },
-                           demo => Demo != null));
             }
         }
 

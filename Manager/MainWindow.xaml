@@ -1,17 +1,16 @@
-<controls:MetroWindow x:Class="Manager.MainWindow"
-                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                      xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-                      xmlns:pageTransitions="clr-namespace:WpfPageTransitions;assembly=WpfPageTransitions"
-                      xmlns:properties="clr-namespace:Manager.Properties"
-                      xmlns:converters="clr-namespace:Manager.Converters"
-                      GlowBrush="{DynamicResource MahApps.Brushes.Highlight}"
-                      Title="CSGO Demos Manager"
-                      SaveWindowPosition="True"
-                      DataContext="{Binding Main, Source={StaticResource Locator}}">
+<mahapps:MetroWindow x:Class="Manager.MainWindow"
+                     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                     xmlns:mahapps="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                     xmlns:properties="clr-namespace:Manager.Properties"
+                     xmlns:converters="clr-namespace:Manager.Converters"
+                     GlowBrush="{DynamicResource MahApps.Brushes.Highlight}"
+                     Title="CSGO Demos Manager"
+                     SaveWindowPosition="True"
+                     DataContext="{Binding Main, Source={StaticResource Locator}}">
 
-    <controls:MetroWindow.IconTemplate>
+    <mahapps:MetroWindow.IconTemplate>
         <DataTemplate>
             <Grid Width="{TemplateBinding Width}"
                   Height="{TemplateBinding Height}"
@@ -20,13 +19,13 @@
                 <Image Source="app.ico" />
             </Grid>
         </DataTemplate>
-    </controls:MetroWindow.IconTemplate>
+    </mahapps:MetroWindow.IconTemplate>
 
-    <controls:MetroWindow.Resources>
+    <mahapps:MetroWindow.Resources>
         <ResourceDictionary>
             <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
         </ResourceDictionary>
-    </controls:MetroWindow.Resources>
+    </mahapps:MetroWindow.Resources>
 
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
@@ -37,35 +36,32 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
 
-    <controls:MetroWindow.RightWindowCommands>
-        <controls:WindowCommands>
+    <mahapps:MetroWindow.RightWindowCommands>
+        <mahapps:WindowCommands>
             <Button Command="{Binding SettingsFlyoutOpenedCommand}"
                     ToolTip="{x:Static properties:Resources.ToolTipDisplaySettings}"
                     IsEnabled="{Binding Source={StaticResource Locator}, Path=DemoList.IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
                     Content="{x:Static properties:Resources.Settings}"
                     Foreground="Black"
                     FontWeight="Bold" />
-        </controls:WindowCommands>
-    </controls:MetroWindow.RightWindowCommands>
+        </mahapps:WindowCommands>
+    </mahapps:MetroWindow.RightWindowCommands>
 
-    <Grid>
-        <pageTransitions:PageTransition Content="{Binding CurrentPage}"
-                                        TransitionType="SlideAndFade" />
-    </Grid>
+    <UserControl Content="{Binding Source={StaticResource Locator}, Path=PageNavigation.CurrentPage, Mode=OneWay}" />
 
-    <controls:MetroWindow.Flyouts>
-        <controls:FlyoutsControl>
-            <controls:Flyout x:Name="SettingsFlyout"
+    <mahapps:MetroWindow.Flyouts>
+        <mahapps:FlyoutsControl>
+            <mahapps:Flyout x:Name="SettingsFlyout"
                              Position="Right"
                              Theme="Adapt"
                              Header="{x:Static properties:Resources.Settings}"
-                             Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=controls:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
+                             Width="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=mahapps:MetroWindow}, Path=ActualWidth, Mode=OneWay}"
                              IsOpen="{Binding IsSettingsOpen}"
                              CloseCommand="{Binding SettingsFlyoutClosedCommand}">
-                <TabControl controls:TabControlHelper.Underlined="SelectedTabItem"
+                <TabControl mahapps:TabControlHelper.Underlined="SelectedTabItem"
                             Margin="15 0 0 0"
                             TabStripPlacement="Left">
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Stats}">
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Stats}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -86,8 +82,8 @@
                                       IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.LimitStatsSelectedFolder}"
                                       Style="{StaticResource CheckBoxColumnOptionStyle}" />
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Watch}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Watch}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -101,7 +97,7 @@
                                       IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionFullscreen}" />
                             <Label Target="{Binding ElementName=ResolutionWidthTextBox}"
                                    Content="{x:Static properties:Resources.Width}" />
-                            <controls:NumericUpDown x:Name="ResolutionWidthTextBox"
+                            <mahapps:NumericUpDown x:Name="ResolutionWidthTextBox"
                                                     Minimum="800"
                                                     Maximum="10000"
                                                     NumericInputMode="Numbers"
@@ -111,7 +107,7 @@
                                                     Value="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionWidth}" />
                             <Label Target="{Binding ElementName=ResolutionHeightTextBox}"
                                    Content="{x:Static properties:Resources.Height}" />
-                            <controls:NumericUpDown x:Name="ResolutionHeightTextBox"
+                            <mahapps:NumericUpDown x:Name="ResolutionHeightTextBox"
                                                     Minimum="600"
                                                     Maximum="10000"
                                                     NumericInputMode="Numbers"
@@ -188,8 +184,8 @@
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Accounts}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Accounts}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -224,8 +220,8 @@
                                            FontSize="18" />
                             </StackPanel>
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Folders}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Folders}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -243,7 +239,7 @@
                                       SelectedItem="{Binding SelectedFolder}" />
                             <Label Target="{Binding ElementName=DemosListSizeTextBox}"
                                    Content="{x:Static properties:Resources.DemosListSize}" />
-                            <controls:NumericUpDown x:Name="DemosListSizeTextBox"
+                            <mahapps:NumericUpDown x:Name="DemosListSizeTextBox"
                                                     Minimum="1"
                                                     Maximum="500"
                                                     MaxWidth="50"
@@ -252,8 +248,8 @@
                                                     HideUpDownButtons="True"
                                                     Value="{Binding Source={StaticResource Locator}, Path=Settings.DemosListSize}" />
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Download}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Download}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -268,8 +264,8 @@
                                         Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectDownloadFolderPathCommand}" />
                             </StackPanel>
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Columns}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Columns}">
                         <Grid Margin="10"
                               HorizontalAlignment="Left">
                             <Grid.ColumnDefinitions>
@@ -476,8 +472,8 @@
                                           Style="{StaticResource CheckBoxColumnOptionStyle}" />
                             </StackPanel>
                         </Grid>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Suspects}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Suspects}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -491,8 +487,8 @@
                                       Style="{StaticResource CheckBoxColumnOptionStyle}"
                                       IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.CloseBotOnExit}" />
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.DataCache}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.DataCache}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -515,8 +511,8 @@
                             <TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.CacheSizeAsString}"
                                        Style="{StaticResource SubTitleSettingsStyle}" />
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.Misc}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Misc}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10"
                                     HorizontalAlignment="Left">
@@ -566,8 +562,8 @@
                                     Style="{DynamicResource SettingsButton}"
                                     Content="{x:Static properties:Resources.BrowseToErrorsFile}" />
                         </StackPanel>
-                    </controls:MetroTabItem>
-                    <controls:MetroTabItem Header="{x:Static properties:Resources.About}">
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.About}">
                         <StackPanel Orientation="Vertical"
                                     Margin="10">
                             <TextBlock Text="{Binding CreditsText}"
@@ -700,9 +696,9 @@
                                 </TextBlock>
                             </StackPanel>
                         </StackPanel>
-                    </controls:MetroTabItem>
+                    </mahapps:MetroTabItem>
                 </TabControl>
-            </controls:Flyout>
-        </controls:FlyoutsControl>
-    </controls:MetroWindow.Flyouts>
-</controls:MetroWindow>
+            </mahapps:Flyout>
+        </mahapps:FlyoutsControl>
+    </mahapps:MetroWindow.Flyouts>
+</mahapps:MetroWindow>

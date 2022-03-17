@@ -56,6 +56,7 @@ namespace Manager.ViewModel
                 SimpleIoc.Default.Register<IDialogService, DialogService>();
             }
 
+            SimpleIoc.Default.Register<PageNavigationViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DemoListViewModel>();
             SimpleIoc.Default.Register<SettingsViewModel>();
@@ -78,6 +79,8 @@ namespace Manager.ViewModel
             SimpleIoc.Default.Register<PlayerDetailsViewModel>();
             SimpleIoc.Default.Register<DialogThirdPartiesViewModel>();
         }
+
+        public PageNavigationViewModel PageNavigation => ServiceLocator.Current.GetInstance<PageNavigationViewModel>();
 
         public MainViewModel Main => ServiceLocator.Current.GetInstance<MainViewModel>();
 
