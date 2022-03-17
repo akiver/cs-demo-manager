@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using Core;
@@ -23,8 +22,6 @@ using Manager.Messages;
 using Manager.Models;
 using Manager.Services;
 using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
-using Manager.Views.Suspects;
 using Services;
 using Services.Interfaces;
 
@@ -48,7 +45,7 @@ namespace Manager.ViewModel.Suspects
 
         private RelayCommand _windowLoadedCommand;
 
-        private RelayCommand _backToHomeCommand;
+        private RelayCommand _showDemoListCommand;
 
         private RelayCommand _addSuspectCommand;
 
@@ -66,7 +63,7 @@ namespace Manager.ViewModel.Suspects
 
         private RelayCommand _stopCommand;
 
-        private RelayCommand _goToWhitelistCommand;
+        private RelayCommand _showWhitelistCommand;
 
         private RelayCommand<bool> _showOnlyBannedSuspects;
 
@@ -74,7 +71,7 @@ namespace Manager.ViewModel.Suspects
 
         private ObservableCollection<Suspect> _suspects;
 
-        private ObservableCollection<Suspect> _selectedsuspects;
+        private ObservableCollection<Suspect> _selectedSuspects;
 
         private ICollectionView _dataGridSuspectsCollection;
 
@@ -108,8 +105,8 @@ namespace Manager.ViewModel.Suspects
 
         public ObservableCollection<Suspect> SelectedSuspects
         {
-            get { return _selectedsuspects; }
-            set { Set(() => SelectedSuspects, ref _selectedsuspects, value); }
+            get { return _selectedSuspects; }
+            set { Set(() => SelectedSuspects, ref _selectedSuspects, value); }
         }
 
         public ICollectionView DataGridSuspectsCollection
@@ -207,21 +204,15 @@ namespace Manager.ViewModel.Suspects
             }
         }
 
-        /// <summary>
-        /// Command to back to the home page
-        /// </summary>
-        public RelayCommand BackToHomeCommand
+        public RelayCommand ShowDemoListCommand
         {
             get
             {
-                return _backToHomeCommand
-                       ?? (_backToHomeCommand = new RelayCommand(
+                return _showDemoListCommand
+                       ?? (_showDemoListCommand = new RelayCommand(
                            () =>
                            {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView demoListView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(demoListView);
+                               Navigation.ShowDemoList();
                            }));
             }
         }
@@ -463,10 +454,7 @@ namespace Manager.ViewModel.Suspects
 
                                homeViewModel.DataGridDemosCollection.Refresh();
 
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView demoListView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(demoListView);
+                               Navigation.ShowDemoList();
                            },
                            () => SelectedSuspects.Any()));
             }
@@ -549,17 +537,15 @@ namespace Manager.ViewModel.Suspects
             }
         }
 
-        public RelayCommand GoToWhitelistCommand
+        public RelayCommand ShowWhitelistCommand
         {
             get
             {
-                return _goToWhitelistCommand
-                       ?? (_goToWhitelistCommand = new RelayCommand(
+                return _showWhitelistCommand
+                       ?? (_showWhitelistCommand = new RelayCommand(
                            () =>
                            {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               WhitelistView whitelistView = new WhitelistView();
-                               mainViewModel.CurrentPage.ShowPage(whitelistView);
+                               Navigation.ShowWhitelist();
                            }));
             }
         }

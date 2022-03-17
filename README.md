@@ -28,7 +28,7 @@ More screenshots and video are available at [https://csgo-demos-manager.com](htt
 
 ## Dependencies ##
 
-* Microsoft Visual Studio 2017 (C# 7 is required)
+* Microsoft Visual Studio 2022
 * [Multilingual App Toolkit v4](https://visualstudiogallery.msdn.microsoft.com/6dab9154-a7e1-46e4-bbfa-18b5e81df520) (required to handle app translations)
 * [MVVM Light](https://mvvmlight.codeplex.com/)
 * [Mahapps](https://github.com/MahApps/MahApps.Metro)

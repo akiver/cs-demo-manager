@@ -70,8 +70,7 @@ namespace Manager
                     try
                     {
                         string demoPath = Marshal.PtrToStringAnsi(cps.lpData, cps.cbData);
-                        App.DemoFilePath = demoPath;
-                        LoadDemoFromAppArgument loadDemoMessage = new LoadDemoFromAppArgument();
+                        LoadDemoFromAppArgument loadDemoMessage = new LoadDemoFromAppArgument(demoPath);
                         Messenger.Default.Send(loadDemoMessage);
                         handled = true;
                     }

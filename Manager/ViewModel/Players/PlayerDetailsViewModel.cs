@@ -10,22 +10,18 @@ using Core.Models;
 using Core.Models.Events;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
-using Manager.Properties;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
+using Manager.ViewModel.Demos;
 using Services.Concrete;
-using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
 using Services.Models.Charts;
 using Services.Models.Stats;
 using Telerik.Windows.Controls;
-using Application = System.Windows.Application;
 
 namespace Manager.ViewModel.Players
 {
-    public class PlayerDetailsViewModel : BaseViewModel
+    public class PlayerDetailsViewModel : DemoViewModel
     {
         #region Properties
 
@@ -34,8 +30,6 @@ namespace Manager.ViewModel.Players
         private readonly ICacheService _cacheService;
 
         private readonly IDialogService _dialogService;
-
-        private Demo _demo;
 
         private Player _currentPlayer;
 
@@ -57,8 +51,6 @@ namespace Manager.ViewModel.Players
 
         private RelayCommand _windowLoadedCommand;
 
-        private RelayCommand _backToDetailsCommand;
-
         private RelayCommand<int> _watchDemoWithDelayCommand;
 
         private RelayCommand<int> _watchDemoWithoutDelayCommand;
@@ -76,12 +68,6 @@ namespace Manager.ViewModel.Players
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public Player CurrentPlayer
         {
@@ -149,25 +135,7 @@ namespace Manager.ViewModel.Players
             {
                 return _windowLoadedCommand
                        ?? (_windowLoadedCommand = new RelayCommand(
-                           async () => { await LoadDatas(); }));
-            }
-        }
-
-        public RelayCommand BackToDetailsCommand
-        {
-            get
-            {
-                return _backToDetailsCommand
-                       ?? (_backToDetailsCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               CurrentPlayer = null;
-                               Demo = null;
-                           }));
+                           async () => { await LoadData(); }));
             }
         }
 
@@ -410,7 +378,7 @@ namespace Manager.ViewModel.Players
             _cacheService = cacheService;
         }
 
-        private async Task LoadDatas()
+        private async Task LoadData()
         {
             IsBusy = true;
             HasNotification = true;

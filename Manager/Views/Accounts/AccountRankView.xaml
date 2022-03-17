@@ -14,7 +14,7 @@
              DataContext="{Binding AccountRank, Source={StaticResource Locator}}">
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BackToHomeCommand}"
+        <KeyBinding Command="{Binding ShowDemoListCommand}"
                     Gesture="CTRL+B" />
         <KeyBinding Command="{Binding GoToOverallCommand}"
                     Gesture="CTRL+O" />
@@ -25,7 +25,7 @@
         <KeyBinding Command="{Binding GoToProgressCommand}"
                     Gesture="CTRL+P" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToHomeCommand}" />
+                                    Command="{Binding ShowDemoListCommand}" />
     </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
@@ -45,7 +45,7 @@
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Back}"
                     Icon="ArrowLeft"
-                    Command="{Binding BackToHomeCommand}"
+                    Command="{Binding ShowDemoListCommand}"
                     ToolTip="{x:Static properties:Resources.ToolTipBack}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Overall}"
@@ -69,7 +69,7 @@
                     ToolTip="{x:Static properties:Resources.ToolTipWeapons}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Progression}"
-                    Icon="TrendingUp"
+                    Icon="Finance"
                     Command="{Binding GoToProgressCommand}"
                     ToolTip="{x:Static properties:Resources.ToolTipProgression}" />
 

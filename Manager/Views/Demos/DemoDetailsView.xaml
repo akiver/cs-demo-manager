@@ -36,13 +36,11 @@
     </i:Interaction.Triggers>
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BackToHomeCommand}"
+        <KeyBinding Command="{Binding ShowDemoListCommand}"
                     Gesture="CTRL+B" />
-        <KeyBinding Command="{Binding HeatmapCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowDemoHeatmapCommand}"
                     Gesture="CTRL+H" />
-        <KeyBinding Command="{Binding GoToKillsCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowDemoKillsCommand}"
                     Gesture="CTRL+K" />
         <KeyBinding Command="{Binding AnalyzeDemoCommand}"
                     Gesture="CTRL+S" />
@@ -50,37 +48,26 @@
                     CommandParameter="{Binding Demo}"
                     Gesture="CTRL+W" />
         <KeyBinding Command="{Binding ExportDemoToExcelCommand}"
-                    CommandParameter="{Binding Demo}"
                     Gesture="CTRL+X" />
-        <KeyBinding Command="{Binding OverviewCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowOverviewCommand}"
                     Gesture="CTRL+O" />
-        <KeyBinding Command="{Binding GoToDemoDamagesCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowDemoDamagesCommand}"
                     Gesture="CTRL+D" />
-        <KeyBinding Command="{Binding GoToDemoFlashbangsCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowDemoFlashbangsCommand}"
                     Gesture="CTRL+F" />
         <KeyBinding Command="{Binding ShowRoundCommand}"
                     CommandParameter="{Binding SelectedRound.Number}"
                     Gesture="CTRL+R" />
         <KeyBinding Command="{Binding ShowDemoStuffsCommand}"
-                    CommandParameter="{Binding Demo}"
                     Gesture="CTRL+G" />
-        <KeyBinding Command="{Binding GoToMovie}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowDemoMovie}"
                     Gesture="CTRL+M" />
         <KeyBinding Command="{Binding GoToPreviousDemoCommand}"
-                    CommandParameter="{Binding GoToPreviousDemoCommand}"
                     Gesture="CTRL+LEFT" />
         <KeyBinding Command="{Binding GoToNextDemoCommand}"
-                    CommandParameter="{Binding GoToNextDemoCommand}"
                     Gesture="CTRL+RIGHT" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToHomeCommand}" />
-        <mouse:MouseBindingExtended Gesture="XButton2"
-                                    Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
-                                    CommandParameter="{Binding ElementName=DetailsUserControl}" />
+                                    Command="{Binding ShowDemoListCommand}" />
     </UserControl.InputBindings>
 
     <Grid>
@@ -104,7 +91,7 @@
                         Text="{x:Static properties:Resources.Back}"
                         ToolTip="{x:Static properties:Resources.ToolTipBack}"
                         Icon="ArrowLeft"
-                        Command="{Binding BackToHomeCommand}" />
+                        Command="{Binding ShowDemoListCommand}" />
                     <controls:ButtonWithIcon
                         Text="{x:Static properties:Resources.Analyze}"
                         ToolTip="{x:Static properties:Resources.ToolTipAnalyze}"
@@ -136,8 +123,7 @@
                         Text="{x:Static properties:Resources.Movie}"
                         ToolTip="{x:Static properties:Resources.ToolTipMovie}"
                         Icon="MovieRoll"
-                        Command="{Binding GoToMovie}"
-                        CommandParameter="{Binding Demo}" />
+                        Command="{Binding ShowDemoMovie}" />
 
                     <TextBlock Text="{x:Static properties:Resources.LabelPlayerStats}"
                                Style="{StaticResource CurrentFolderStyle}" />
@@ -177,38 +163,32 @@
                     Text="{x:Static properties:Resources.Heatmap}"
                     ToolTip="{x:Static properties:Resources.ToolTipHeatmap}"
                     Icon="MapSearch"
-                    Command="{Binding HeatmapCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowDemoHeatmapCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Overview}"
                     ToolTip="{x:Static properties:Resources.ToolTipOverview}"
                     Icon="MovieOpenPlay"
-                    Command="{Binding OverviewCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowOverviewCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Kills}"
                     ToolTip="{x:Static properties:Resources.ToolTipKillsDetails}"
                     Icon="SkullCrossbones"
-                    Command="{Binding GoToKillsCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowDemoKillsCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Damages}"
                     ToolTip="{x:Static properties:Resources.ToolTipDamages}"
                     Icon="HeartHalfFull"
-                    Command="{Binding GoToDemoDamagesCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowDemoDamagesCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Flashbangs}"
                     ToolTip="{x:Static properties:Resources.ToolTipFlashbangs}"
                     Icon="EyeOff"
-                    Command="{Binding GoToDemoFlashbangsCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowDemoFlashbangsCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Stuffs}"
                     ToolTip="{x:Static properties:Resources.ToolTipStuffs}"
                     Icon="Pistol"
-                    Command="{Binding ShowDemoStuffsCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowDemoStuffsCommand}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.RoundDetails}"
                     ToolTip="{x:Static properties:Resources.ToolTipRoundDetails}"
@@ -708,8 +688,7 @@
                                                         Width="Auto"
                                                         Header="{x:Static properties:Resources.HeaderHltvRating}"
                                                         Binding="{Binding RatingHltv}"
-                                                        Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                        SortDirection="Descending" />
+                                                        Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                     <DataGridTextColumn HeaderStyle="{StaticResource Rating2Header}"
                                                         Width="Auto"
                                                         Header="{x:Static properties:Resources.HeaderHltv2Rating}"
@@ -956,8 +935,7 @@
                                                         Width="Auto"
                                                         Header="{x:Static properties:Resources.HeaderHltvRating}"
                                                         Binding="{Binding RatingHltv}"
-                                                        Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}"
-                                                        SortDirection="Descending" />
+                                                        Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowPlayerScoreColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                     <DataGridTextColumn HeaderStyle="{StaticResource Rating2Header}"
                                                         Width="Auto"
                                                         Header="{x:Static properties:Resources.HeaderHltv2Rating}"

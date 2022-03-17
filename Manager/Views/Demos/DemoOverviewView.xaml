@@ -27,12 +27,10 @@
                     Gesture="CTRL+O" />
         <KeyBinding Command="{Binding StopCommand}"
                     Gesture="CTRL+S" />
-        <KeyBinding Command="{Binding BackToDemoDetailsCommand}"
-                    CommandParameter="{Binding Demo}"
+        <KeyBinding Command="{Binding ShowCurrentDemoDetailsCommand}"
                     Gesture="CTRL+B" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToDemoDetailsCommand}"
-                                    CommandParameter="{Binding Demo}" />
+                                    Command="{Binding ShowCurrentDemoDetailsCommand}" />
     </UserControl.InputBindings>
 
     <Grid>
@@ -49,8 +47,7 @@
                     Text="{x:Static properties:Resources.Back}"
                     ToolTip="{x:Static properties:Resources.ToolTipBack}"
                     Icon="ArrowLeft"
-                    Command="{Binding BackToDemoDetailsCommand}"
-                    CommandParameter="{Binding Demo}" />
+                    Command="{Binding ShowCurrentDemoDetailsCommand}" />
 
                 <ComboBox ItemsSource="{Binding TeamSelectors}"
                           SelectedItem="{Binding CurrentTeamSelector}"

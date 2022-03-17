@@ -4,25 +4,20 @@ using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
 using GalaSoft.MvvmLight.CommandWpf;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
+using Manager.Internals;
 using Services.Interfaces;
 using Services.Models.Stats;
 using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoFlashbangsViewModel : BaseViewModel
+    public class DemoFlashbangsViewModel : DemoViewModel
     {
         #region Properties
 
         private readonly IFlashbangService _flashbangService;
 
         private readonly ICacheService _cacheService;
-
-        private Demo _demo;
-
-        private RelayCommand<Demo> _backToDemoDetailsCommand;
 
         private RelayCommand _windowLoadedCommand;
 
@@ -59,12 +54,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public List<FlashbangDataPoint> PlayersFlashTimes
         {
@@ -126,28 +115,6 @@ namespace Manager.ViewModel.Demos
                 return _windowLoadedCommand
                        ?? (_windowLoadedCommand = new RelayCommand(
                            async () => { await LoadDatas(); }));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to details view
-        /// </summary>
-        public RelayCommand<Demo> BackToDemoDetailsCommand
-        {
-            get
-            {
-                return _backToDemoDetailsCommand
-                       ?? (_backToDemoDetailsCommand = new RelayCommand<Demo>(
-                           demo =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               Cleanup();
-                           },
-                           demo => Demo != null));
             }
         }
 

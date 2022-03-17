@@ -14,8 +14,6 @@ using MahApps.Metro.Controls.Dialogs;
 using Manager.Internals;
 using Manager.Services;
 using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
-using Manager.Views.Suspects;
 using Services;
 using Services.Interfaces;
 
@@ -39,7 +37,7 @@ namespace Manager.ViewModel.Suspects
 
         private Suspect _selectedSuspect;
 
-        private RelayCommand _goToSuspectsCommand;
+        private RelayCommand _showSuspectListCommand;
 
         private RelayCommand _addPlayerCommand;
 
@@ -119,20 +117,15 @@ namespace Manager.ViewModel.Suspects
 
         #region Commands
 
-        /// <summary>
-        /// Command to go back to suspects view
-        /// </summary>
-        public RelayCommand GoToSuspectsCommand
+        public RelayCommand ShowSuspectListCommand
         {
             get
             {
-                return _goToSuspectsCommand
-                       ?? (_goToSuspectsCommand = new RelayCommand(
+                return _showSuspectListCommand
+                       ?? (_showSuspectListCommand = new RelayCommand(
                            () =>
                            {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               SuspectListView suspectsView = new SuspectListView();
-                               mainViewModel.CurrentPage.ShowPage(suspectsView);
+                               Navigation.ShowSuspectList();
                            }));
             }
         }
@@ -292,10 +285,7 @@ namespace Manager.ViewModel.Suspects
 
                                homeViewModel.DataGridDemosCollection.Refresh();
 
-                               var mainViewModel = new ViewModelLocator().Main;
-                               System.Windows.Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView demoListView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(demoListView);
+                               Navigation.ShowDemoList();
                            },
                            suspect => SelectedSuspect != null));
             }

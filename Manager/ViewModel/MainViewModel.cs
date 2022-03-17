@@ -13,23 +13,19 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Internals;
 using Manager.Messages;
 using Manager.Services;
-using Manager.Views.Demos;
-using Manager.Views.Suspects;
 using Newtonsoft.Json;
 using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models.GitHub;
-using WpfPageTransitions;
 
 namespace Manager.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
         #region Properties
-
-        private PageTransition _currentPage;
 
         private bool _isSettingsOpen;
 
@@ -49,6 +45,8 @@ namespace Manager.ViewModel
 
         private readonly IDialogService _dialogService;
 
+        private readonly IDemosService _demosService;
+
         private RelayCommand _windowLoadedCommand;
 
         private RelayCommand _windowClosedCommand;
@@ -66,12 +64,6 @@ namespace Manager.ViewModel
         #endregion
 
         #region Accessors
-
-        public PageTransition CurrentPage
-        {
-            get { return _currentPage; }
-            set { Set(() => CurrentPage, ref _currentPage, value); }
-        }
 
         public bool IsSettingsOpen
         {
@@ -224,22 +216,6 @@ namespace Manager.ViewModel
                                    }
                                }
 
-                               switch (App.StartUpWindow)
-                               {
-                                   case "suspects":
-                                       SuspectListView suspectsView = new SuspectListView();
-                                       CurrentPage.ShowPage(suspectsView);
-                                       break;
-                                   case "demo":
-                                       DemoDetailsView demoDetails = new DemoDetailsView();
-                                       CurrentPage.ShowPage(demoDetails);
-                                       break;
-                                   default:
-                                       DemoListView demoListView = new DemoListView();
-                                       CurrentPage.ShowPage(demoListView);
-                                       break;
-                               }
-
                                // Notify the DemoListViewModel that it can now load demos data
                                MainWindowLoadedMessage msg = new MainWindowLoadedMessage();
                                Messenger.Default.Send(msg);
@@ -383,12 +359,12 @@ namespace Manager.ViewModel
 
         #endregion
 
-        public MainViewModel(IDialogService dialogService, ICacheService cacheService)
+        public MainViewModel(IDialogService dialogService, ICacheService cacheService, IDemosService demosService)
         {
             _dialogService = dialogService;
             _cacheService = cacheService;
+            _demosService = demosService;
 
-            CurrentPage = new PageTransition();
             Messenger.Default.Register<NavigateToSuspectsViewMessage>(this, HandleNavigateToSuspectsMessage);
             Messenger.Default.Register<LoadSuspectListMessage>(this, HandleLoadSuspectListMessage);
             Messenger.Default.Register<LoadDemoFromAppArgument>(this, HandleLoadFromArgumentMessage);
@@ -403,14 +379,17 @@ namespace Manager.ViewModel
 
         private void HandleDownloadDemosMessage(DownloadDemosMessage obj)
         {
-            DemoListView dmoListView = new DemoListView();
-            CurrentPage.ShowPage(dmoListView);
+            Navigation.ShowDemoList();
         }
 
-        private void HandleLoadFromArgumentMessage(LoadDemoFromAppArgument m)
+        private async void HandleLoadFromArgumentMessage(LoadDemoFromAppArgument m)
         {
-            DemoDetailsView detailsView = new DemoDetailsView();
-            CurrentPage.ShowPage(detailsView);
+            var demo = await _demosService.GetDemoHeaderAsync(m.DemoPath);
+            if (_cacheService.HasDemoInCache(demo.Id))
+            {
+                demo = await _cacheService.GetDemoDataFromCache(demo.Id);
+            }
+            Navigation.ShowDemoDetails(demo);
         }
 
         private static void HandleLoadSuspectListMessage(LoadSuspectListMessage obj)
@@ -420,8 +399,7 @@ namespace Manager.ViewModel
 
         private void HandleNavigateToSuspectsMessage(NavigateToSuspectsViewMessage msg)
         {
-            SuspectListView suspectsView = new SuspectListView();
-            CurrentPage.ShowPage(suspectsView);
+            Navigation.ShowSuspectList();
         }
 
         private static async Task<string> GetNewReleaseDownloadUrl()

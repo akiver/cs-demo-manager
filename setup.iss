@@ -156,7 +156,6 @@ Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.Data.dll"; DestDir: "{
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.DataVisualization.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Controls.Input.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Telerik.Windows.Data.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\WpfPageTransitions.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\WriteableBitmapEx.Wpf.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Resources\*"; DestDir: "{app}\Resources"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; Translations

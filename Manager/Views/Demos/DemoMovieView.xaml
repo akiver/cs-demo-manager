@@ -28,14 +28,14 @@
     </UserControl.Resources>
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding BackToDemoDetails}"
+        <KeyBinding Command="{Binding ShowCurrentDemoDetailsCommand}"
                     Gesture="CTRL+B" />
         <KeyBinding Command="{Binding GenerateMovie}"
                     Gesture="CTRL+G" />
         <KeyBinding Command="{Binding ToggleDemoCommentVisibility}"
                     Gesture="CTRL+T" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding BackToDemoDetails}" />
+                                    Command="{Binding ShowCurrentDemoDetailsCommand}" />
     </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
@@ -77,7 +77,7 @@
                 Text="{x:Static properties:Resources.Back}"
                 ToolTip="{x:Static properties:Resources.ToolTipBack}"
                 Icon="ArrowLeft"
-                Command="{Binding BackToDemoDetails}" />
+                Command="{Binding ShowCurrentDemoDetailsCommand}" />
             <controls:ButtonWithIcon
                 Grid.Column="1"
                 Text="{x:Static properties:Resources.Generate}"

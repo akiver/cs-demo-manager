@@ -8,22 +8,15 @@ using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Models;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
 using Services.Interfaces;
-using Demo = Core.Models.Demo;
 using Player = Core.Models.Player;
 using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoDamagesViewModel : BaseViewModel
+    public class DemoDamagesViewModel : DemoViewModel
     {
         #region Properties
-
-        private Demo _demo;
-
-        private RelayCommand<Demo> _backToDemoDetailsCommand;
 
         private double _totalDamage;
 
@@ -76,12 +69,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public List<ComboboxSelector> TeamSelectors
         {
@@ -271,28 +258,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Commands
-
-        /// <summary>
-        /// Command to back to details view
-        /// </summary>
-        public RelayCommand<Demo> BackToDemoDetailsCommand
-        {
-            get
-            {
-                return _backToDemoDetailsCommand
-                       ?? (_backToDemoDetailsCommand = new RelayCommand<Demo>(
-                           demo =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               Cleanup();
-                           },
-                           demo => Demo != null));
-            }
-        }
 
         /// <summary>
         /// Command to update the damages stats displayed

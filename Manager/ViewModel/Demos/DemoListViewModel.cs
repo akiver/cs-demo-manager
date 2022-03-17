@@ -21,25 +21,21 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Internals;
 using Manager.Messages;
 using Manager.Models;
 using Manager.Services;
 using Manager.ViewModel.Shared;
-using Manager.Views.Accounts;
-using Manager.Views.Demos;
 using Manager.Views.Dialogs;
-using Manager.Views.Suspects;
 using Newtonsoft.Json;
 using Services.Concrete;
 using Services.Concrete.Excel;
-using Services.Concrete.Movie;
 using Services.Concrete.ThirdParties;
 using Services.Interfaces;
 using Services.Models;
 using Services.Models.ThirdParties;
 using Application = System.Windows.Application;
 using Demo = Core.Models.Demo;
-using UserControl = System.Windows.Controls.UserControl;
 
 #endregion
 
@@ -153,8 +149,6 @@ namespace Manager.ViewModel.Demos
         private string _selectedFolder;
 
         private string _noDemoFoundMessage;
-
-        private RelayCommand<UserControl> _showLastUserControlCommand;
 
         private Rank _lastRankAccountStats;
 
@@ -711,14 +705,7 @@ namespace Manager.ViewModel.Demos
                                    return;
                                }
 
-                               // Set the demo
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-
-                               // Display the UserControl
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
+                               Navigation.ShowDemoDetails(demo);
                            },
                            demo => demo != null));
             }
@@ -741,9 +728,7 @@ namespace Manager.ViewModel.Demos
                                    return;
                                }
 
-                               var mainViewModel = new ViewModelLocator().Main;
-                               AccountOverallView overallView = new AccountOverallView();
-                               mainViewModel.CurrentPage.ShowPage(overallView);
+                               Navigation.ShowAccountOverall();
                            }, () => !IsBusy));
             }
         }
@@ -993,9 +978,7 @@ namespace Manager.ViewModel.Demos
                                    return;
                                }
 
-                               var mainViewModel = new ViewModelLocator().Main;
-                               SuspectListView suspectsView = new SuspectListView();
-                               mainViewModel.CurrentPage.ShowPage(suspectsView);
+                               Navigation.ShowSuspectList();
                                NewBannedPlayerCount = 0;
                            }));
             }
@@ -1094,28 +1077,6 @@ namespace Manager.ViewModel.Demos
                        ?? (_setDemoSourceCommand = new RelayCommand<string>(
                            async source => { SelectedDemos = await _demosService.SetSource(SelectedDemos, source); },
                            source => SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy));
-            }
-        }
-
-        /// <summary>
-        /// Show the last window viewed
-        /// </summary>
-        public RelayCommand<UserControl> ShowLastUserControlCommand
-        {
-            get
-            {
-                return _showLastUserControlCommand
-                       ?? (_showLastUserControlCommand = new RelayCommand<UserControl>(
-                           userControl =>
-                           {
-                               UserControl lastUserControl = (UserControl)Application.Current.Properties["LastPageViewed"];
-                               if (lastUserControl != null)
-                               {
-                                   var mainViewModel = new ViewModelLocator().Main;
-                                   mainViewModel.CurrentPage.ShowPage(lastUserControl);
-                                   Application.Current.Properties["LastPageViewed"] = userControl;
-                               }
-                           }));
             }
         }
 

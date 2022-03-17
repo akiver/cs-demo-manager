@@ -15,11 +15,10 @@ using Core.Models;
 using Core.Models.Source;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Internals;
 using Manager.Models.DemoMovie;
 using Manager.Properties;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
 using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models.Movie;
@@ -30,19 +29,17 @@ using Telerik.Windows.Controls;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoMovieViewModel : BaseViewModel
+    public class DemoMovieViewModel : DemoViewModel
     {
         private readonly IDialogService _dialogService;
         private readonly IDemosService _demoService;
         private readonly ICacheService _cacheService;
-        private Demo _demo;
         private Player _focusedPlayer;
         private ObservableCollection<PlayersSelection> _teamCtPlayersSelection = new ObservableCollection<PlayersSelection>();
         private ObservableCollection<PlayersSelection> _teamTplayersSelection = new ObservableCollection<PlayersSelection>();
         private RelayCommand<long> _setDisplayKillsOnlyForPlayer;
         private RelayCommand<long> _setHighlightKillsOnlyForPlayer;
         private RelayCommand _windowLoaded;
-        private RelayCommand _backToDemoDetails;
         private RelayCommand _generateMovie;
         private RelayCommand _cancel;
         private RelayCommand _selectRawFilesFolderDestination;
@@ -104,12 +101,6 @@ namespace Manager.ViewModel.Demos
         /// Flag to adapt the UI with POV demos.
         /// </summary>
         private bool _isPovDemo;
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public bool IsInstalling
         {
@@ -652,28 +643,6 @@ namespace Manager.ViewModel.Demos
                                        MessageDialogStyle.Affirmative);
                                }
                            }));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to demo's details view.
-        /// </summary>
-        public RelayCommand BackToDemoDetails
-        {
-            get
-            {
-                return _backToDemoDetails
-                       ?? (_backToDemoDetails = new RelayCommand(
-                           () =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = Demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               Cleanup();
-                           },
-                           () => Demo != null && !IsBusy));
             }
         }
 
@@ -1722,7 +1691,6 @@ namespace Manager.ViewModel.Demos
             FocusOnPlayer = false;
             FocusedPlayer = null;
             PlayerFocusSteamID = 0;
-            Demo = null;
         }
     }
 }

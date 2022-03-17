@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Runtime.ExceptionServices;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,7 +12,6 @@ using System.Windows.Threading;
 using ControlzEx.Theming;
 using Core;
 using GalaSoft.MvvmLight.Threading;
-using MahApps.Metro;
 using MahApps.Metro.Theming;
 using Manager.Properties;
 

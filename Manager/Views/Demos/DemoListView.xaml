@@ -6,12 +6,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:converters="clr-namespace:Manager.Converters"
-             xmlns:mouse="clr-namespace:Manager.Internals.Mouse"
              xmlns:properties="clr-namespace:Manager.Properties"
              xmlns:controls="clr-namespace:Manager.Controls"
              xmlns:multiSelectComboBox="clr-namespace:Manager.Internals.MultiSelectComboBox"
              mc:Ignorable="d"
-             Name="DemoListUserControl"
              d:DesignHeight="720"
              d:DesignWidth="1280"
              DataContext="{Binding DemoList, Source={StaticResource Locator}}"
@@ -148,7 +146,7 @@
 
                     <mahapps:Badged Badge="{Binding Path=NewBannedPlayerCount, Converter={StaticResource IntToBadgeContentConverter}}"
                                     BadgeBackground="{StaticResource RedColorBrush}"
-                                    BadgeForeground="{StaticResource MahApps.Brushes.ThemeForeground}"
+                                    BadgeForeground="{DynamicResource MahApps.Brushes.ThemeForeground}"
                                     BadgeMargin="-2 2 -2 2">
                         <controls:ButtonWithIcon Text="{x:Static properties:Resources.Suspects}"
                                                  ToolTip="{x:Static properties:Resources.ToolTipGoToSuspectsList}"
@@ -594,8 +592,5 @@
         <KeyBinding Command="{Binding WatchLowlightCommand}"
                     CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
                     Gesture="CTRL+L" />
-        <mouse:MouseBindingExtended Gesture="XButton2"
-                                    Command="{Binding DemoList.ShowLastUserControlCommand, Source={StaticResource Locator}}"
-                                    CommandParameter="{Binding ElementName=DemoListUserControl}" />
     </UserControl.InputBindings>
 </UserControl>

@@ -9,14 +9,12 @@ using System.Windows.Media.Imaging;
 using Core;
 using Core.Models;
 using Core.Models.Events;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Internals;
 using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
 using Services.Concrete;
 using Services.Exceptions.Map;
 using Services.Interfaces;
@@ -26,13 +24,11 @@ using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoOverviewViewModel : BaseViewModel
+    public class DemoOverviewViewModel : DemoViewModel
     {
         #region Properties
 
         private readonly IMapService _mapService;
-
-        private Demo _demo;
 
         private Round _selectedRound;
 
@@ -88,8 +84,6 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand _pauseCommand;
 
-        private RelayCommand<Demo> _backToDemoDetailsCommand;
-
         private CancellationTokenSource _cts;
 
         private double FrameLimiter
@@ -130,12 +124,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public WriteableBitmap WriteableBitmapOverview
         {
@@ -442,28 +430,6 @@ namespace Manager.ViewModel.Demos
                                IsPaused = true;
                                CompositionTarget.Rendering -= CompositionTarget_Rendering;
                            }, () => IsPlaying));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to details view
-        /// </summary>
-        public RelayCommand<Demo> BackToDemoDetailsCommand
-        {
-            get
-            {
-                return _backToDemoDetailsCommand
-                       ?? (_backToDemoDetailsCommand = new RelayCommand<Demo>(
-                           demo =>
-                           {
-                               var detailsViewModel = new ViewModelLocator().DemoDetails;
-                               detailsViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoDetailsView detailsView = new DemoDetailsView();
-                               mainViewModel.CurrentPage.ShowPage(detailsView);
-                               Cleanup();
-                           },
-                           demo => Demo != null && !IsBusy));
             }
         }
 

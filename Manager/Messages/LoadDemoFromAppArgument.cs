@@ -5,5 +5,11 @@
     /// </summary>
     public class LoadDemoFromAppArgument
     {
+        public string DemoPath { get; }
+
+        public LoadDemoFromAppArgument(string demoPath)
+        {
+            DemoPath = demoPath;
+        }
     }
 }

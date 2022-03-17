@@ -7,16 +7,13 @@ using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Threading;
 using Manager.Messages;
-using Manager.ViewModel.Shared;
-using Manager.Views.Accounts;
-using Manager.Views.Demos;
 using Services.Interfaces;
 using Services.Models.Charts;
 using Services.Models.Stats;
 
 namespace Manager.ViewModel.Accounts
 {
-    public class AccountOverallViewModel : BaseViewModel
+    public class AccountOverallViewModel : AccountViewModel
     {
         #region Properties
 
@@ -25,16 +22,6 @@ namespace Manager.ViewModel.Accounts
         private readonly ICacheService _cacheService;
 
         private RelayCommand _windowLoadedCommand;
-
-        private RelayCommand _backToHomeCommand;
-
-        private RelayCommand _goToRankCommand;
-
-        private RelayCommand _goToMapCommand;
-
-        private RelayCommand _goToWeaponCommand;
-
-        private RelayCommand _goToProgressCommand;
 
         private List<GenericDoubleChart> _datasMatchStats;
 
@@ -334,106 +321,6 @@ namespace Manager.ViewModel.Accounts
                            {
                                await LoadDatas();
                                Messenger.Default.Register<SettingsFlyoutClosed>(this, HandleSettingsFlyoutClosedMessage);
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to back to the home page
-        /// </summary>
-        public RelayCommand BackToHomeCommand
-        {
-            get
-            {
-                return _backToHomeCommand
-                       ?? (_backToHomeCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView homeView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(homeView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the rank stats page
-        /// </summary>
-        public RelayCommand GoToRankCommand
-        {
-            get
-            {
-                return _goToRankCommand
-                       ?? (_goToRankCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountRankView rankView = new AccountRankView();
-                               mainViewModel.CurrentPage.ShowPage(rankView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the maps stats page
-        /// </summary>
-        public RelayCommand GoToMapCommand
-        {
-            get
-            {
-                return _goToMapCommand
-                       ?? (_goToMapCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountMapsView mapsView = new AccountMapsView();
-                               mainViewModel.CurrentPage.ShowPage(mapsView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the weapon stats page
-        /// </summary>
-        public RelayCommand GoToWeaponCommand
-        {
-            get
-            {
-                return _goToWeaponCommand
-                       ?? (_goToWeaponCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountWeaponsView weaponsView = new AccountWeaponsView();
-                               mainViewModel.CurrentPage.ShowPage(weaponsView);
-                               Cleanup();
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to go to the progression stats page
-        /// </summary>
-        public RelayCommand GoToProgressCommand
-        {
-            get
-            {
-                return _goToProgressCommand
-                       ?? (_goToProgressCommand = new RelayCommand(
-                           () =>
-                           {
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               AccountProgressView progressView = new AccountProgressView();
-                               mainViewModel.CurrentPage.ShowPage(progressView);
-                               Cleanup();
                            }));
             }
         }

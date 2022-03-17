@@ -29,7 +29,7 @@
     </UserControl.Resources>
 
     <UserControl.InputBindings>
-        <KeyBinding Command="{Binding GoToSuspectsCommand}"
+        <KeyBinding Command="{Binding ShowSuspectListCommand}"
                     Gesture="CTRL+B" />
         <KeyBinding Command="{Binding RefreshPlayerListCommand}"
                     Gesture="CTRL+R" />
@@ -37,7 +37,7 @@
                     CommandParameter="{Binding SelectedSuspect}"
                     Gesture="CTRL+F" />
         <mouse:MouseBindingExtended Gesture="XButton1"
-                                    Command="{Binding GoToSuspectsCommand}" />
+                                    Command="{Binding ShowSuspectListCommand}" />
     </UserControl.InputBindings>
 
     <i:Interaction.Triggers>
@@ -61,7 +61,7 @@
                     Text="{x:Static properties:Resources.Back}"
                     ToolTip="{x:Static properties:Resources.ToolTipBack}"
                     Icon="ArrowLeftBold"
-                    Command="{Binding GoToSuspectsCommand}"
+                    Command="{Binding ShowSuspectListCommand}"
                     IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}" />
                 <controls:ButtonWithIcon
                     Text="{x:Static properties:Resources.Add}"

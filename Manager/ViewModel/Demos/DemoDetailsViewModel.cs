@@ -10,14 +10,9 @@ using Manager.Messages;
 using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
-using Manager.ViewModel.Shared;
-using Manager.Views.Demos;
-using Manager.Views.Players;
-using Manager.Views.Rounds;
 using Services.Concrete;
 using Services.Concrete.Excel;
 using Services.Concrete.Maps;
-using Services.Concrete.Movie;
 using Services.Interfaces;
 using Services.Models;
 using System;
@@ -32,16 +27,15 @@ using System.Windows.Data;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
+using Manager.Internals;
 using Application = System.Windows.Application;
 using Round = Core.Models.Round;
 
 namespace Manager.ViewModel.Demos
 {
-    public class DemoDetailsViewModel : BaseViewModel
+    public class DemoDetailsViewModel : DemoViewModel
     {
         #region Properties
-
-        private Demo _demo;
 
         private Demo _previousDemo;
 
@@ -80,7 +74,7 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand _windowLoadedCommand;
 
-        private RelayCommand _backToHomeCommand;
+        private RelayCommand _showDemoListCommand;
 
         private RelayCommand _analyzeDemoCommand;
 
@@ -90,17 +84,17 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand<Source> _setDemoSourceCommand;
 
-        private RelayCommand<Demo> _heatmapCommand;
+        private RelayCommand _showDemoHeatmapCommand;
 
-        private RelayCommand<Demo> _overviewCommand;
+        private RelayCommand _showOverviewCommand;
 
-        private RelayCommand<Demo> _goToKillsCommand;
+        private RelayCommand _showDemoKillsCommand;
 
-        private RelayCommand<Demo> _goToDemoDamagesCommand;
+        private RelayCommand _showDemoDamagesCommand;
 
-        private RelayCommand<Demo> _goToDemoFlashbangsCommand;
+        private RelayCommand _showDemoFlashbangsCommand;
 
-        private RelayCommand<Demo> _showDemoStuffsCommand;
+        private RelayCommand _showDemoStuffsCommand;
 
         private RelayCommand<string> _saveCommentDemoCommand;
 
@@ -133,7 +127,7 @@ namespace Manager.ViewModel.Demos
         private RelayCommand _goToPreviousDemoCommand;
 
         private RelayCommand _goToNextDemoCommand;
-        private RelayCommand<Demo> _goToMovie;
+        private RelayCommand _showDemoMovie;
 
         private RelayCommand<DemoStatus> _updateDemoStatus;
 
@@ -146,12 +140,6 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Accessors
-
-        public Demo Demo
-        {
-            get => _demo;
-            set { Set(() => Demo, ref _demo, value); }
-        }
 
         public Demo PreviousDemo
         {
@@ -236,17 +224,9 @@ namespace Manager.ViewModel.Demos
                        ?? (_windowLoadedCommand = new RelayCommand(
                            async () =>
                            {
-                               var currentPage = new ViewModelLocator().Main.CurrentPage.CurrentPage;
                                IsBusy = true;
                                Notification = Properties.Resources.NotificationLoading;
                                HasNotification = true;
-                               // reload whole demo data if an account was selected and the current page was the demos list
-                               if (Settings.Default.SelectedStatsAccountSteamID != 0 && currentPage is DemoListView &&
-                                   _cacheService.HasDemoInCache(Demo.Id))
-                               {
-                                   Demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
-                               }
-
                                await UpdateDemoFromAppArgument();
                                await LoadData();
                                CommandManager.InvalidateRequerySuggested();
@@ -268,15 +248,12 @@ namespace Manager.ViewModel.Demos
             }
         }
 
-        /// <summary>
-        /// Command to back to the home page
-        /// </summary>
-        public RelayCommand BackToHomeCommand
+        public RelayCommand ShowDemoListCommand
         {
             get
             {
-                return _backToHomeCommand
-                       ?? (_backToHomeCommand = new RelayCommand(
+                return _showDemoListCommand
+                       ?? (_showDemoListCommand = new RelayCommand(
                            () =>
                            {
                                if (SelectedPlayerStats != null && SelectedPlayerStats.SteamId != 0)
@@ -284,19 +261,12 @@ namespace Manager.ViewModel.Demos
                                    var settingsViewModel = new ViewModelLocator().Settings;
                                    settingsViewModel.IsShowAllPlayers = true;
                                }
-
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView demoListView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(demoListView);
+                               Navigation.ShowDemoList();
                                Cleanup();
                            }));
             }
         }
 
-        /// <summary>
-        /// Command to go to round control
-        /// </summary>
         public RelayCommand<int> ShowRoundCommand
         {
             get
@@ -305,20 +275,12 @@ namespace Manager.ViewModel.Demos
                        ?? (_goToRoundCommand = new RelayCommand<int>(
                            roundNumber =>
                            {
-                               var roundViewModel = new ViewModelLocator().RoundDetails;
-                               roundViewModel.RoundNumber = roundNumber;
-                               roundViewModel.Demo = Demo;
-                               RoundDetailsView roundView = new RoundDetailsView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(roundView);
+                               Navigation.ShowRoundDetails(Demo, roundNumber);
                            }, roundNumber => !IsBusy && Demo != null
                                                      && Demo.Source.GetType() != typeof(Pov) && SelectedRound != null));
             }
         }
 
-        /// <summary>
-        /// Command to go to player control
-        /// </summary>
         public RelayCommand<Player> ShowPlayerCommand
         {
             get
@@ -327,176 +289,125 @@ namespace Manager.ViewModel.Demos
                        ?? (_goToPlayerCommand = new RelayCommand<Player>(
                            player =>
                            {
-                               var playerViewModel = new ViewModelLocator().PlayerDetails;
-                               playerViewModel.CurrentPlayer = player;
-                               playerViewModel.Demo = Demo;
-                               PlayerDetailsView playerView = new PlayerDetailsView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(playerView);
+                               Navigation.ShowPlayerDetails(Demo, player);
                            }, player => !IsBusy && Demo != null
                                                 && Demo.Source.GetType() != typeof(Pov) && SelectedPlayer != null));
             }
         }
 
-        /// <summary>
-        /// Command to go to heatmap control
-        /// </summary>
-        public RelayCommand<Demo> HeatmapCommand
+        public RelayCommand ShowDemoHeatmapCommand
         {
             get
             {
-                return _heatmapCommand
-                       ?? (_heatmapCommand = new RelayCommand<Demo>(
-                           async demo =>
+                return _showDemoHeatmapCommand
+                       ?? (_showDemoHeatmapCommand = new RelayCommand(
+                           async () =>
                            {
-                               if (!MapService.Maps.Contains(demo.MapName))
+                               if (!MapService.Maps.Contains(Demo.MapName))
                                {
                                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogMapNotSupported, MessageDialogStyle.Affirmative);
                                    return;
                                }
 
-                               var heatmapViewModel = new ViewModelLocator().DemoHeatmap;
-                               heatmapViewModel.Demo = demo;
-                               DemoHeatmapView heatmapView = new DemoHeatmapView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(heatmapView);
-                           }, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                              Navigation.ShowDemoHeatmap(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
 
-        /// <summary>
-        /// Command to go to overview control
-        /// </summary>
-        public RelayCommand<Demo> OverviewCommand
+        public RelayCommand ShowOverviewCommand
         {
             get
             {
-                return _overviewCommand
-                       ?? (_overviewCommand = new RelayCommand<Demo>(
-                           demo =>
+                return _showOverviewCommand
+                       ?? (_showOverviewCommand = new RelayCommand(
+                           () =>
                            {
-                               var overviewViewModel = new ViewModelLocator().DemoOverview;
-                               overviewViewModel.Demo = demo;
-                               DemoOverviewView overviewView = new DemoOverviewView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(overviewView);
-                           }, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                               Navigation.ShowDemoOverview(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
 
-        /// <summary>
-        /// Command to go to kills control
-        /// </summary>
-        public RelayCommand<Demo> GoToKillsCommand
+        public RelayCommand ShowDemoKillsCommand
         {
             get
             {
-                return _goToKillsCommand
-                       ?? (_goToKillsCommand = new RelayCommand<Demo>(
-                           demo =>
+                return _showDemoKillsCommand
+                       ?? (_showDemoKillsCommand = new RelayCommand(
+                           () =>
                            {
-                               var entryKillsViewModel = new ViewModelLocator().DemoKills;
-                               entryKillsViewModel.Demo = demo;
-                               DemoKillsView killsView = new DemoKillsView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(killsView);
-                           }, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                               Navigation.ShowDemoKills(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
 
-        /// <summary>
-        /// Command to go to demo damages control
-        /// </summary>
-        public RelayCommand<Demo> GoToDemoDamagesCommand
+        public RelayCommand ShowDemoDamagesCommand
         {
             get
             {
-                return _goToDemoDamagesCommand
-                       ?? (_goToDemoDamagesCommand = new RelayCommand<Demo>(
-                           demo =>
+                return _showDemoDamagesCommand
+                       ?? (_showDemoDamagesCommand = new RelayCommand(
+                           () =>
                            {
-                               var demoDamagesViewModel = new ViewModelLocator().DemoDamages;
-                               demoDamagesViewModel.Demo = demo;
-                               DemoDamagesView demoDamagesView = new DemoDamagesView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(demoDamagesView);
-                           }, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                               Navigation.ShowDemoDamages(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
 
-        /// <summary>
-        /// Command to go to demo flashbangs stats control
-        /// </summary>
-        public RelayCommand<Demo> GoToDemoFlashbangsCommand
+        public RelayCommand ShowDemoFlashbangsCommand
         {
             get
             {
-                return _goToDemoFlashbangsCommand
-                       ?? (_goToDemoFlashbangsCommand = new RelayCommand<Demo>(
-                           async demo =>
+                return _showDemoFlashbangsCommand
+                       ?? (_showDemoFlashbangsCommand = new RelayCommand(
+                           async () =>
                            {
-                               if (!_cacheService.HasDemoInCache(demo.Id))
+                               if (!_cacheService.HasDemoInCache(Demo.Id))
                                {
                                    await _dialogService.ShowMessageAsync(Properties.Resources.DialogAnalyzeRequired, MessageDialogStyle.Affirmative);
                                    return;
                                }
 
-                               var demoFlashbangsViewModel = new ViewModelLocator().DemoFlashbangs;
-                               demoFlashbangsViewModel.Demo = demo;
-                               DemoFlashbangsView demoFlashbangsView = new DemoFlashbangsView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(demoFlashbangsView);
-                           }, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                               Navigation.ShowDemoFlashbangs(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
 
-        /// <summary>
-        /// Command to show movie view
-        /// </summary>
-        public RelayCommand<Demo> GoToMovie
+        public RelayCommand ShowDemoMovie
         {
             get
             {
-                return _goToMovie
-                       ?? (_goToMovie = new RelayCommand<Demo>(
-                           demo =>
+                return _showDemoMovie
+                       ?? (_showDemoMovie = new RelayCommand(
+                           () =>
                            {
-                               DemoMovieViewModel movieViewModel = new ViewModelLocator().DemoMovie;
-                               movieViewModel.Demo = demo;
-                               var mainViewModel = new ViewModelLocator().Main;
-                               DemoMovieView demoMovieView = new DemoMovieView();
-                               mainViewModel.CurrentPage.ShowPage(demoMovieView);
+                               Navigation.ShowDemoMovie(Demo);
                            },
-                           demo => Demo != null && !IsBusy));
+                           () => Demo != null && !IsBusy));
             }
         }
 
-        public RelayCommand<Demo> ShowDemoStuffsCommand
+        public RelayCommand ShowDemoStuffsCommand
         {
             get
             {
                 return _showDemoStuffsCommand
-                       ?? (_showDemoStuffsCommand = new RelayCommand<Demo>(
-                           async demo =>
+                       ?? (_showDemoStuffsCommand = new RelayCommand(
+                           async () =>
                            {
-                               if (!_cacheService.HasDemoInCache(demo.Id))
+                               if (!_cacheService.HasDemoInCache(Demo.Id))
                                {
                                    await _dialogService.ShowMessageAsync(Properties.Resources.DialogAnalyzeRequired, MessageDialogStyle.Affirmative);
                                    return;
                                }
 
-                               if (!MapService.Maps.Contains(demo.MapName))
+                               if (!MapService.Maps.Contains(Demo.MapName))
                                {
                                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogMapNotSupported, MessageDialogStyle.Affirmative);
                                    return;
                                }
 
-                               var demoStuffsViewModel = new ViewModelLocator().DemoStuffs;
-                               demoStuffsViewModel.Demo = demo;
-                               DemoStuffsView demoStuffsView = new DemoStuffsView();
-                               var mainViewModel = new ViewModelLocator().Main;
-                               mainViewModel.CurrentPage.ShowPage(demoStuffsView);
-                           }, demo => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                               Navigation.ShowDemoStuffs(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
 
@@ -963,11 +874,7 @@ namespace Manager.ViewModel.Demos
                                }
 
                                demoListViewModel.DataGridDemosCollection.Refresh();
-
-                               var mainViewModel = new ViewModelLocator().Main;
-                               Application.Current.Properties["LastPageViewed"] = mainViewModel.CurrentPage.CurrentPage;
-                               DemoListView demoListView = new DemoListView();
-                               mainViewModel.CurrentPage.ShowPage(demoListView);
+                               Navigation.ShowDemoList();
                            },
                            player => SelectedPlayer != null));
             }
@@ -1221,9 +1128,7 @@ namespace Manager.ViewModel.Demos
 
         private void UpdatePlayersSort()
         {
-            PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
             PlayersTeam1Collection.SortDescriptions.Add(new SortDescription("RatingHltv2", ListSortDirection.Descending));
-            PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv", ListSortDirection.Descending));
             PlayersTeam2Collection.SortDescriptions.Add(new SortDescription("RatingHltv2", ListSortDirection.Descending));
         }
 
@@ -1239,8 +1144,10 @@ namespace Manager.ViewModel.Demos
                 Demo = await _demosService.GetDemoHeaderAsync(App.DemoFilePath);
                 if (_cacheService.HasDemoInCache(Demo.Id))
                 {
-                    _demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
+                    Demo = await _cacheService.GetDemoDataFromCache(Demo.Id);
                 }
+
+                App.DemoFilePath = null;
             }
         }
 
