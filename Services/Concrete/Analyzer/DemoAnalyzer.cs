@@ -178,6 +178,7 @@ namespace Services.Concrete.Analyzer
                     return new EseaAnalyzer(demo);
                 case Ebot.NAME:
                 case Faceit.NAME:
+                case Esportal.NAME:
                 case Esl.NAME:
                     return new EbotAnalyzer(demo);
                 case Cevo.NAME:
@@ -305,6 +306,11 @@ namespace Services.Concrete.Analyzer
                )
             {
                 return Source.Factory(Ebot.NAME);
+            }
+
+            if (demo.Hostname.Contains(Esportal.NAME, StringComparison.OrdinalIgnoreCase))
+            {
+                return Source.Factory(Esportal.NAME);
             }
 
             // Check for esea demos, appart filename or hostname, there is no magic to detect it

@@ -51,7 +51,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource MahApps.Colors.Highlight}" Opacity="0.7" />
+                <SolidColorBrush Color="{DynamicResource MahApps.Colors.BackgroundColor}" />
             </Setter.Value>
         </Setter>
     </Style>

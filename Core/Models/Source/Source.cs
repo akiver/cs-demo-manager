@@ -31,6 +31,8 @@ namespace Core.Models.Source
                         return Properties.Resources.popflash;
                     case Wanmei.NAME:
                         return Properties.Resources.wanmei;
+                    case Esportal.NAME:
+                        return Properties.Resources.esportal;
                     default:
                         return Properties.Resources.valve;
                 }
@@ -59,6 +61,8 @@ namespace Core.Models.Source
                     return new Esl();
                 case Wanmei.NAME:
                     return new Wanmei();
+                case Esportal.NAME:
+                    return new Esportal();
                 default:
                     return null;
             }
@@ -74,6 +78,7 @@ namespace Core.Models.Source
             new PopFlash(),
             new Valve(),
             new Wanmei(),
+            new Esportal(),
             new Pov(),
         };
     }
