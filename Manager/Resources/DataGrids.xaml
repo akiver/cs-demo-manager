@@ -23,7 +23,7 @@
         <Setter Property="RenderOptions.ClearTypeHint" Value="Enabled" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
         <Setter Property="Width" Value="Auto" />
-        <Setter Property="AlternatingRowBackground" Value="{DynamicResource GrayBrush10}" />
+        <Setter Property="AlternatingRowBackground" Value="{DynamicResource MahApps.Brushes.Gray10}" />
     </Style>
 
     <!--DataGrid Row for Demos main list-->
@@ -51,7 +51,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Background">
             <Setter.Value>
-                <SolidColorBrush Color="{DynamicResource MahApps.Colors.BackgroundColor}" />
+                <SolidColorBrush Color="Transparent" />
             </Setter.Value>
         </Setter>
     </Style>
