@@ -25,6 +25,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 { "HS%", CellType.Numeric },
                 { "Rounds", CellType.Numeric },
                 { "RWS", CellType.Numeric },
+                { "KAST", CellType.Numeric },
                 { "Rating", CellType.Numeric },
                 { "Rating 2", CellType.Numeric },
                 { "ATD (s)", CellType.Numeric },
@@ -170,6 +171,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                         data[player].TradeKillCount += player.TradeKillCount;
                         data[player].TradeDeathCount += player.TradeDeathCount;
                         data[player].AverageTimeDeathSeconds += player.AverageTimeDeath;
+                        data[player].Kast += player.Kast;
                     }
                 }
 
@@ -190,6 +192,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.HeadshotPercent);
                     SetCellValue(row, columnNumber++, CellType.Numeric, keyValuePair.Value.RoundCount);
                     SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.EseaRws / keyValuePair.Value.MatchCount, 2));
+                    SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.Kast, 2));
                     SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.Rating / keyValuePair.Value.MatchCount, 2));
                     SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(keyValuePair.Value.Rating2 / keyValuePair.Value.MatchCount, 2));
                     SetCellValue(row, columnNumber++, CellType.Numeric,

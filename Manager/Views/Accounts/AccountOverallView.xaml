@@ -415,6 +415,7 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0"
@@ -532,6 +533,21 @@
                                 <TextBlock Text="{x:Static properties:Resources.HeaderEseaRws}"
                                            Style="{StaticResource StatsTitleStyle}" />
                                 <TextBlock Text="{Binding EseaRws}"
+                                           Style="{StaticResource StatsValueStyle}" />
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <Grid Grid.Column="8"
+                          Margin="10"
+                          ToolTip="{x:Static properties:Resources.HeaderToolTipKast}">
+                        <Border BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                                BorderThickness="1">
+                            <StackPanel Orientation="Vertical"
+                                        Margin="5">
+                                <TextBlock Text="{x:Static properties:Resources.HeaderKast}"
+                                           Style="{StaticResource StatsTitleStyle}" />
+                                <TextBlock Text="{Binding kast}"
                                            Style="{StaticResource StatsValueStyle}" />
                             </StackPanel>
                         </Border>

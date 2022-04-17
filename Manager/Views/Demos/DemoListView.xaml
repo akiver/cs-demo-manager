@@ -374,6 +374,11 @@
                                     HeaderStyle="{StaticResource Rating2Header}"
                                     Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}" />
                 <DataGridTextColumn Width="Auto"
+                                    Header="{x:Static properties:Resources.HeaderKast}"
+                                    Binding="{Binding AverageKast, StringFormat=N2}"
+                                    HeaderStyle="{StaticResource KastHeader}"
+                                    Visibility="{Binding Source={StaticResource Locator}, Path=Settings.IsShowAllAccounts, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"/>
+                <DataGridTextColumn Width="Auto"
                                     Header="{x:Static properties:Resources.RWS}"
                                     Binding="{Binding AverageEseaRws}"
                                     HeaderStyle="{StaticResource EseaRwsHeader}"

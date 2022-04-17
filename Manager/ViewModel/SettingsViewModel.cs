@@ -158,6 +158,8 @@ namespace Manager.ViewModel
 
         private bool _showHsColumn = Settings.Default.ShowHsColumn;
 
+        private bool _showKastColumn = Settings.Default.ShowKastColumn;
+
         private bool _showJumpKillColumn = Settings.Default.ShowJumpKillCoulmn;
 
         private bool _showCrouchKillColumn = Settings.Default.ShowCrouchKillsColumn;
@@ -913,6 +915,16 @@ namespace Manager.ViewModel
             {
                 Settings.Default.ShowHsColumn = value;
                 Set(() => ShowHsColumn, ref _showHsColumn, value);
+            }
+        }
+
+        public bool ShowKastColumn
+        {
+            get { return _showKastColumn; }
+            set
+            {
+                Settings.Default.ShowKastColumn = value;
+                Set(() => ShowKastColumn, ref _showKastColumn, value);
             }
         }
 

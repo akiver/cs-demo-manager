@@ -3276,4 +3276,13 @@ Please update it by clicking on the "Update" button.</value>
   <data name="DialogUnknownBoilerExitCode" xml:space="preserve">
     <value>An unknown error happened, code: ({0}).</value>
   </data>
+  <data name="HeaderKast" xml:space="preserve">
+    <value>KAST</value>
+  </data>
+  <data name="HeaderToolTipKast" xml:space="preserve">
+    <value>Percentage of rounds in which the player either had a kill, assist, survived or was traded</value>
+  </data>
+  <data name="Kast" xml:space="preserve">
+    <value>KAST</value>
+  </data>
 </root>

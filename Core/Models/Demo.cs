@@ -249,6 +249,8 @@ namespace Core.Models
         /// </summary>
         private double _averageHealthDamage;
 
+        private float _averageKast;
+
         /// <summary>
         /// Average HLTV ranking (AVG players)
         /// </summary>
@@ -1014,6 +1016,13 @@ namespace Core.Models
             set { Set(() => HitCount, ref _hitCount, value); }
         }
 
+        [JsonProperty("average_kast")]
+        public float AverageKast
+        {
+            get { return _averageKast; }
+            set { Set(() => AverageKast, ref _averageKast, value); }
+        }
+
         [JsonProperty("average_hltv_rating")]
         public float AverageHltvRating
         {
@@ -1359,6 +1368,7 @@ namespace Core.Models
             AverageHealthDamage = demo.AverageHealthDamage;
             AverageHltvRating = demo.AverageHltvRating;
             AverageHltv2Rating = demo.AverageHltv2Rating;
+            AverageKast = demo.AverageKast;
             BombDefusedCount = demo.BombDefusedCount;
             BombExplodedCount = demo.BombExplodedCount;
             BombPlantedCount = demo.BombPlantedCount;
@@ -1449,6 +1459,7 @@ namespace Core.Models
             TradeKillCount = 0;
             TwoKillCount = 0;
             WeaponFiredCount = 0;
+            AverageKast = 0;
             Winner = null;
             BombDefused.Clear();
             BombExploded.Clear();
@@ -1534,16 +1545,6 @@ namespace Core.Models
                 AverageHealthDamage = GetAverageHealthDamage();
             }
 
-            if (Players.Any())
-            {
-                float totalHltv = Players.Sum(player => player.RatingHltv);
-                AverageHltvRating = totalHltv / Players.Count;
-                float totalHltv2 = Players.Sum(player => player.RatingHltv2);
-                AverageHltv2Rating = totalHltv2 / Players.Count;
-                decimal totalEseaRws = Players.Sum(player => player.EseaRws);
-                AverageEseaRws = Math.Round(totalEseaRws / Players.Count, 2);
-            }
-
             DamageArmorCount = PlayersHurted.Sum(h => h.ArmorDamage);
             DamageHealthCount = PlayersHurted.Sum(h => h.HealthDamage);
             HitCount = PlayersHurted.Count;
@@ -1558,12 +1559,24 @@ namespace Core.Models
 
             foreach (var player in Players)
             {
-                player.ComputeStats();
+                player.ComputeStats(this);
             }
 
             foreach (var round in Rounds)
             {
                 round.ComputeStats();
+            }
+
+            if (Players.Any())
+            {
+                float totalHltv = Players.Sum(player => player.RatingHltv);
+                AverageHltvRating = totalHltv / Players.Count;
+                float totalHltv2 = Players.Sum(player => player.RatingHltv2);
+                AverageHltv2Rating = totalHltv2 / Players.Count;
+                decimal totalEseaRws = Players.Sum(player => player.EseaRws);
+                AverageEseaRws = Math.Round(totalEseaRws / Players.Count, 2);
+                float totalKast = Players.Sum(player => player.Kast);
+                AverageKast = totalKast / Players.Count;
             }
         }
 

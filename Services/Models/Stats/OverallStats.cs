@@ -62,6 +62,8 @@ namespace Services.Models.Stats
 
         public int OneVersusFiveCount { get; set; } = 0;
 
+        public float Kast { get; set; } = 0;
+
         public double HltvRating { get; set; } = 0;
 
         public double Hltv2Rating { get; set; } = 0;

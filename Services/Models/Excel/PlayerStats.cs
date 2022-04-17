@@ -20,6 +20,8 @@ namespace Services.Models.Excel
 
         public int RoundCount { get; set; }
 
+        public float Kast { get; set; }
+
         public float Rating { get; set; }
 
         public float Rating2 { get; set; }

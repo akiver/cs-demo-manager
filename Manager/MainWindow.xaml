@@ -272,6 +272,7 @@
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Orientation="Vertical"
                                         Grid.Column="0">
@@ -461,6 +462,9 @@
                                 <CheckBox Content="{x:Static properties:Resources.TradeDeathsFull}"
                                           IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeDeathColumn}"
                                           Style="{StaticResource CheckBoxColumnOptionStyle}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical"
+                                        Grid.Column="3">
                                 <CheckBox Content="{x:Static properties:Resources.TradeKillsFull}"
                                           IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowTradeKillColumn}"
                                           Style="{StaticResource CheckBoxColumnOptionStyle}" />
@@ -469,6 +473,9 @@
                                           Style="{StaticResource CheckBoxColumnOptionStyle}" />
                                 <CheckBox Content="{x:Static properties:Resources.WinnerSideFull}"
                                           IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowWinnerSideColumn}"
+                                          Style="{StaticResource CheckBoxColumnOptionStyle}" />
+                                <CheckBox Content="{x:Static properties:Resources.Kast}"
+                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.ShowKastColumn}"
                                           Style="{StaticResource CheckBoxColumnOptionStyle}" />
                             </StackPanel>
                         </Grid>

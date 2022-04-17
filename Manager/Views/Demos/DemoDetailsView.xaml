@@ -649,6 +649,11 @@
                                                         Header="{x:Static properties:Resources.HeaderHsPercent}"
                                                         Binding="{Binding HeadshotPercent}"
                                                         Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <DataGridTextColumn HeaderStyle="{StaticResource KastHeader}"
+                                                        Width="Auto"
+                                                        Header="{x:Static properties:Resources.HeaderKast}"
+                                                        Binding="{Binding Kast, StringFormat=N2}"
+                                                        Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKastColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                     <DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}"
                                                         Width="Auto"
                                                         Header="{x:Static properties:Resources.HeaderTeamKill}"
@@ -896,6 +901,11 @@
                                                         Header="{x:Static properties:Resources.HeaderHsPercent}"
                                                         Binding="{Binding HeadshotPercent}"
                                                         Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowHsColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                    <DataGridTextColumn HeaderStyle="{StaticResource KastHeader}"
+                                                        Width="Auto"
+                                                        Header="{x:Static properties:Resources.HeaderKast}"
+                                                        Binding="{Binding Kast, StringFormat=N2}"
+                                                        Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowKastColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                                     <DataGridTextColumn HeaderStyle="{StaticResource TeamKillHeader}"
                                                         Width="Auto"
                                                         Header="{x:Static properties:Resources.HeaderTeamKill}"

@@ -280,6 +280,10 @@
         <Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipHeadshotPercent}" />
     </Style>
 
+    <Style TargetType="DataGridColumnHeader" x:Key="KastHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+        <Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipKast}" />
+    </Style>
+
     <Style TargetType="DataGridColumnHeader" x:Key="TeamKillHeader" BasedOn="{StaticResource DataGridColumnHeaderStyle}">
         <Setter Property="ToolTipService.ToolTip" Value="{x:Static properties:Resources.HeaderToolTipTeamKill}" />
     </Style>

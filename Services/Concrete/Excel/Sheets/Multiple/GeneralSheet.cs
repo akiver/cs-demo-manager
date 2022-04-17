@@ -44,6 +44,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 { "Average Damage Per Round", CellType.Numeric },
                 { "Total Damage Health", CellType.Numeric },
                 { "Total Damage Armor", CellType.Numeric },
+                { "Average KAST", CellType.Numeric },
                 { "Clutch", CellType.Numeric },
                 { "Bomb Defused", CellType.Numeric },
                 { "Bomb Exploded", CellType.Numeric },
@@ -105,6 +106,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, columnNumber++, CellType.Numeric, demo.AverageHealthDamage);
                     SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageHealthCount);
                     SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageArmorCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.AverageKast, 2));
                     SetCellValue(row, columnNumber++, CellType.Numeric, demo.ClutchCount);
                     SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombDefusedCount);
                     SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombExplodedCount);

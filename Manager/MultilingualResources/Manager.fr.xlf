@@ -4230,6 +4230,18 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <source>An unknown error happened, code: ({0}).</source>
           <target state="new">An unknown error happened, code: ({0}).</target>
         </trans-unit>
+        <trans-unit id="HeaderKast" translate="yes" xml:space="preserve">
+          <source>KAST</source>
+          <target state="new">KAST</target>
+        </trans-unit>
+        <trans-unit id="HeaderToolTipKast" translate="yes" xml:space="preserve">
+          <source>Percentage of rounds in which the player either had a kill, assist, survived or was traded</source>
+          <target state="new">Percentage of rounds in which the player either had a kill, assist, survived or was traded</target>
+        </trans-unit>
+        <trans-unit id="Kast" translate="yes" xml:space="preserve">
+          <source>KAST</source>
+          <target state="new">KAST</target>
+        </trans-unit>
       </group>
     </body>
   </file>

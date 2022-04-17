@@ -87,6 +87,8 @@ namespace Manager.ViewModel.Accounts
 
         private double _hltv2Rating;
 
+        private float _kast;
+
         private double _eseaRws;
 
         private string _totalMatchTime;
@@ -289,6 +291,12 @@ namespace Manager.ViewModel.Accounts
             set { Set(() => Hltv2Rating, ref _hltv2Rating, value); }
         }
 
+        public float kast
+        {
+            get { return _kast; }
+            set { Set(() => kast, ref _kast, value); }
+        }
+
         public double EseaRws
         {
             get { return _eseaRws; }
@@ -365,6 +373,7 @@ namespace Manager.ViewModel.Accounts
             OneVersusThreeCount = datas.OneVersusThreeCount;
             OneVersusFourCount = datas.OneVersusFourCount;
             OneVersusFiveCount = datas.OneVersusFiveCount;
+            kast = datas.Kast;
             TimeSpan totalTime = TimeSpan.FromSeconds(datas.TotalMatchesDuration);
             TotalMatchTime = string.Format(Properties.Resources.TotalMatchTimeValue, totalTime.Hours, totalTime.Minutes);
             TimeSpan avgTotalTime = TimeSpan.FromSeconds(datas.AverageMatchDuration);
@@ -441,6 +450,7 @@ namespace Manager.ViewModel.Accounts
             OneVersusThreeCount = 0;
             OneVersusTwoCount = 0;
             OneVersusOneCount = 0;
+            kast = 0;
         }
     }
 }

@@ -156,6 +156,8 @@ namespace Core.Models
         /// </summary>
         private float _ratingHltv2;
 
+        private float _kast;
+
         /// <summary>
         /// ESEA points use to calculate RWS
         /// </summary>
@@ -480,6 +482,13 @@ namespace Core.Models
         {
             get { return _roundMvpCount; }
             set { Set(() => RoundMvpCount, ref _roundMvpCount, value); }
+        }
+
+        [JsonProperty("kast")]
+        public float Kast
+        {
+            get { return _kast; }
+            set { Set(() => Kast, ref _kast, value); }
         }
 
         [JsonProperty("hltv_rating")]
@@ -1060,7 +1069,7 @@ namespace Core.Models
             Side = Side.None;
         }
 
-        public void ComputeStats()
+        public void ComputeStats(Demo demo)
         {
             TeamKillCount = Kills.Count(k => k.KilledSide == k.KillerSide);
             KillCount = Kills.Count(k => k.KilledSide != k.KillerSide) - TeamKillCount - SuicideCount;
@@ -1069,6 +1078,7 @@ namespace Core.Models
             JumpKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.KillerVelocityZ > 0);
             AssistCount = Assists.Count;
             DeathCount = Deaths.Count + SuicideCount;
+            Kast = ComputeKast(demo);
         }
 
         public void ResetStats()
@@ -1110,6 +1120,7 @@ namespace Core.Models
             TradeDeathCount = 0;
             TradeKillCount = 0;
             TwoKillCount = 0;
+            Kast = 0;
 
             Assists.Clear();
             Clutches.Clear();
@@ -1149,6 +1160,7 @@ namespace Core.Models
                 TwoKillCount = TwoKillCount,
                 OneKillCount = OneKillCount,
                 EseaRws = EseaRws,
+                Kast = Kast,
                 EseaRwsPointCount = EseaRwsPointCount,
                 FlashDurationTemp = FlashDurationTemp,
                 FlashbangThrownCount = FlashbangThrownCount,
@@ -1360,6 +1372,32 @@ namespace Core.Models
             TradeDeathCount = player.TradeDeathCount;
             TradeKillCount = player.TradeKillCount;
             TwoKillCount = player.TwoKillCount;
+            Kast = player.Kast;
+        }
+
+        private float ComputeKast(Demo demo)
+        {
+            if (demo.Rounds.Count == 0)
+            {
+                return 0;
+            }
+
+            int eventCount = 0;
+            foreach(Round round in demo.Rounds)
+            {
+                bool hasKill = Kills.Any(kill => kill.RoundNumber == round.Number);
+                bool hasAssist = Assists.Any(assist => assist.RoundNumber == round.Number);
+                bool hasTradeDeath = Deaths.Any(death => death.RoundNumber == round.Number && death.IsTradeKill);
+                bool hasSurvived = !Deaths.Any(death => death.RoundNumber == round.Number);
+                if (hasKill || hasAssist || hasTradeDeath || hasSurvived)
+                {
+                    eventCount++;
+                }
+            }
+
+            float kast = (float)eventCount / (float)demo.Rounds.Count * 100;
+
+            return kast;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
@@ -22,6 +23,7 @@ namespace Services.Concrete.Excel.Sheets.Single
                 { "K/D", CellType.Numeric },
                 { "HS", CellType.Numeric },
                 { "HS%", CellType.Numeric },
+                { "KAST", CellType.Numeric },
                 { "Team kill", CellType.Numeric },
                 { "Entry kill", CellType.Numeric },
                 { "Bomb planted", CellType.Numeric },
@@ -100,6 +102,7 @@ namespace Services.Concrete.Excel.Sheets.Single
                     SetCellValue(row, columnNumber++, CellType.Numeric, (double)player.KillDeathRatio);
                     SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotCount);
                     SetCellValue(row, columnNumber++, CellType.Numeric, player.HeadshotPercent);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(player.Kast, 2));
                     SetCellValue(row, columnNumber++, CellType.Numeric, player.TeamKillCount);
                     SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKills.Count);
                     SetCellValue(row, columnNumber++, CellType.Numeric, player.BombPlantedCount);

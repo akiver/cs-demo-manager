@@ -3490,6 +3490,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to KAST.
+        /// </summary>
+        public static string HeaderKast {
+            get {
+                return ResourceManager.GetString("HeaderKast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to K/D.
         /// </summary>
         public static string HeaderKillDeathRatio {
@@ -4251,6 +4260,15 @@ namespace Manager.Properties {
         public static string HeaderToolTipJumpKills {
             get {
                 return ResourceManager.GetString("HeaderToolTipJumpKills", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Percentage of rounds in which the player either had a kill, assist, survived or was traded.
+        /// </summary>
+        public static string HeaderToolTipKast {
+            get {
+                return ResourceManager.GetString("HeaderToolTipKast", resourceCulture);
             }
         }
         
@@ -5178,6 +5196,15 @@ namespace Manager.Properties {
         public static string JumpKillsFull {
             get {
                 return ResourceManager.GetString("JumpKillsFull", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to KAST.
+        /// </summary>
+        public static string Kast {
+            get {
+                return ResourceManager.GetString("Kast", resourceCulture);
             }
         }
         
