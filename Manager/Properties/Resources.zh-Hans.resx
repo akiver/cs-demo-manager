@@ -1711,9 +1711,6 @@
   <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
     <value>在获取最新段位时发生错误。</value>
   </data>
-  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
-    <value>在检索以下比赛信息时发生错误：{0}</value>
-  </data>
   <data name="DialogExportMultipleOrSingle" xml:space="preserve">
     <value>您希望将数据导出至单个文件还是多个文件？</value>
   </data>
@@ -1917,9 +1914,6 @@
   </data>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>无效的 "boiler.exe" 文件路径。</value>
-  </data>
-  <data name="DialogBoilerNotFound" xml:space="preserve">
-    <value>未找到 "boiler.exe" 文件。</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
     <value>此录像文件可能太过久远。若非如此，请发送邮件并将其随附。

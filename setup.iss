@@ -25,9 +25,25 @@ OutputDir=.
 OutputBaseFilename=csgo-demos-manager-{#AppVer}
 SolidCompression=yes
 UninstallDisplayIcon={app}\{#ExeName}
+ChangesEnvironment=yes
 
 [Dirs]
 Name: "{userappdata}\{#emit SetupSetting("AppPublisher")}\{#emit SetupSetting("AppName")}"
+
+[code]
+function NeedsAddPath(Param: string): boolean;
+var
+  OrigPath: string;
+begin
+  if not RegQueryStringValue(HKEY_LOCAL_MACHINE, 'SYSTEM\CurrentControlSet\Control\Session Manager\Environment', 'Path', OrigPath)
+  then begin
+    Result := True;
+    exit;
+  end;
+  { look for the path with leading and trailing semicolon }
+  { Pos() returns 0 if not found }
+  Result := Pos(';' + Param + ';', ';' + OrigPath + ';') = 0;
+end;
 
 [code]
 /////////////////////////////////////////////////////////////////////
@@ -98,14 +114,12 @@ begin
   end;
 end;
 
-
-// setup registry to change .dem files association
 [Registry]
 Root: HKCR; Subkey: ".dem"; ValueData: "{#AppName}"; Flags: uninsdeletevalue; ValueType: string; ValueName: ""
 Root: HKCR; Subkey: "{#AppName}"; ValueData: "Program {#AppName}"; Flags: uninsdeletekey; ValueType: string; ValueName: ""
 Root: HKCR; Subkey: "{#AppName}\DefaultIcon"; ValueData: "{app}\app.ico,0"; ValueType: string; ValueName: ""
 Root: HKCR; Subkey: "{#AppName}\shell\open\command"; ValueData: """{app}\{#ExeName}"" ""%1"""; ValueType: string; ValueName: ""
-
+Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Check: NeedsAddPath(ExpandConstant('{app}')); Tasks: envPath
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "french"; MessagesFile: "compiler:Languages\French.isl"
@@ -113,8 +127,11 @@ Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}"
+Name: "envPath"; Description: "Add to PATH variable (useful to use the CLI from anywhere)"
 
 [Files]
+Source: "CLI\bin\Release\csgodm.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "CLI\bin\Release\csgodm.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\app.ico"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\boiler.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\CommonServiceLocator.dll"; DestDir: "{app}"; Flags: ignoreversion 
@@ -191,3 +208,4 @@ Filename: "{app}\{#ExeName}"; Description: "{cm:LaunchProgram,CSGO Demos Manager
 
 [UninstallRun]
 Filename: "{cmd}"; Parameters: "/C ""taskkill /im CSGOSuspectsBot.exe /f /t"
+Filename: "{cmd}"; Parameters: "/C ""taskkill /im csgodm.exe /f /t"

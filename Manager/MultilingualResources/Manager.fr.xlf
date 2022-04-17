@@ -2250,8 +2250,8 @@ Elles ne seront pas supprimées de votre disque dur.</target>
           <target state="final">Une erreur s'est produite pendant la récupération du dernier rang.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingMatchesData" translate="yes" xml:space="preserve">
-          <source>An error occured while retrieving matches information ({0}).</source>
-          <target state="final">Une erreur s'est produite pendant la récuparation des informations des matchs ({0}).</target>
+          <source>An error occured while retrieving matches information.</source>
+          <target state="final">Une erreur s'est produite pendant la récuparation des informations des matchs.</target>
         </trans-unit>
         <trans-unit id="DialogGoToTick" translate="yes" xml:space="preserve">
           <source>Goto Tick</source>
@@ -2548,10 +2548,6 @@ Vous pouvez trouver plus d'informations sur {0}.</target>
         <trans-unit id="DialogBoilerIncorrect" translate="yes" xml:space="preserve">
           <source>boiler.exe is incorrect.</source>
           <target state="final">boiler.exe est incorrect.</target>
-        </trans-unit>
-        <trans-unit id="DialogBoilerNotFound" translate="yes" xml:space="preserve">
-          <source>boiler.exe not found.</source>
-          <target state="final">boiler.exe introuvable.</target>
         </trans-unit>
         <trans-unit id="DialogErrorDemoNotFound" translate="yes" xml:space="preserve">
           <source>Demo {0} not found.</source>
@@ -4225,6 +4221,14 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
           <target state="final">Annuler</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorDownloadingDemos" translate="yes" xml:space="preserve">
+          <source>An error occurred while downloading demos.</source>
+          <target state="new">An error occurred while downloading demos.</target>
+        </trans-unit>
+        <trans-unit id="DialogUnknownBoilerExitCode" translate="yes" xml:space="preserve">
+          <source>An unknown error happened, code: ({0}).</source>
+          <target state="new">An unknown error happened, code: ({0}).</target>
         </trans-unit>
       </group>
     </body>

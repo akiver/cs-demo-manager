@@ -1711,9 +1711,6 @@
   <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
     <value>Egy hiba lépett fel a rang frissítése közben.</value>
   </data>
-  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
-    <value>Egy hiba lépett fel a meccs információk elemzése közben ({0}).</value>
-  </data>
   <data name="DialogExportMultipleOrSingle" xml:space="preserve">
     <value>Egy vagy több fájlba szeretné exportálni az adatokat?</value>
   </data>
@@ -1917,9 +1914,6 @@ A játékot nem lehet elindítani.</value>
   </data>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe hibás.</value>
-  </data>
-  <data name="DialogBoilerNotFound" xml:space="preserve">
-    <value>boiler.exe nem található.</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
     <value>Ezek a demók túl régiek lehetnek, ha nem kérem küldjön egy emailt a demókkal.

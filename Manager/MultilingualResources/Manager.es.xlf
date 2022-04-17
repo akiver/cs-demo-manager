@@ -2282,8 +2282,8 @@
           <target state="translated">Ha ocurrido un error mientras se refrescaba el último rango.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileRetrievingMatchesData" translate="yes" xml:space="preserve">
-          <source>An error occured while retrieving matches information ({0}).</source>
-          <target state="translated">Ha ocurrido un error mientras se recuperaba la información de partida ({0}).</target>
+          <source>An error occured while retrieving matches information.</source>
+          <target state="new">An error occured while retrieving matches information.</target>
         </trans-unit>
         <trans-unit id="DialogExportMultipleOrSingle" translate="yes" xml:space="preserve">
           <source>Do you want to export data into a single file or in multiple files?</source>
@@ -2558,10 +2558,6 @@ No se puede iniciar el juego.</target>
         <trans-unit id="DialogBoilerIncorrect" translate="yes" xml:space="preserve">
           <source>boiler.exe is incorrect.</source>
           <target state="translated">boiler.exe es incorrecto.</target>
-        </trans-unit>
-        <trans-unit id="DialogBoilerNotFound" translate="yes" xml:space="preserve">
-          <source>boiler.exe not found.</source>
-          <target state="translated">boiler.exe no encontrado.</target>
         </trans-unit>
         <trans-unit id="DialogDemosMayBeTooOld" translate="yes" xml:space="preserve">
           <source>This demos may be too old, if not please send an email with the attached demos.
@@ -4236,6 +4232,14 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="TooltipCancel" translate="yes" xml:space="preserve">
           <source>Cancel</source>
           <target state="new">Cancel</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorDownloadingDemos" translate="yes" xml:space="preserve">
+          <source>An error occurred while downloading demos.</source>
+          <target state="new">An error occurred while downloading demos.</target>
+        </trans-unit>
+        <trans-unit id="DialogUnknownBoilerExitCode" translate="yes" xml:space="preserve">
+          <source>An unknown error happened, code: ({0}).</source>
+          <target state="new">An unknown error happened, code: ({0}).</target>
         </trans-unit>
       </group>
     </body>

@@ -1708,9 +1708,6 @@
   <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
     <value>Beim Aktualisieren des zuletzt bekannten Rangs ist ein Fehler aufgetreten.</value>
   </data>
-  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
-    <value>Beim erhalten der Match-Informationen ({0}) ist ein Fehler aufgetreten.</value>
-  </data>
   <data name="DialogExportMultipleOrSingle" xml:space="preserve">
     <value>Wollen Sie die Daten in eine einzelne Datei oder in mehrere exporieren?</value>
   </data>
@@ -1914,9 +1911,6 @@ Das Spiel kann nicht gestartet werden.</value>
   </data>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe ist fehlerhaft.</value>
-  </data>
-  <data name="DialogBoilerNotFound" xml:space="preserve">
-    <value>boiler.exe nicht gefunden.</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
     <value>Diese Demos scheinen zu alt zu sein. Falls nicht, senden Sie mir bitte eine E-Mail mit der Demo.

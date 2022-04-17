@@ -626,15 +626,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="app.ico" />
-    <Content Include="boiler.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="steam_api.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="steam_appid.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <XliffResource Include="MultilingualResources\Manager.ar.xlf" />

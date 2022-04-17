@@ -1712,9 +1712,6 @@
   <data name="DialogErrorWhileRefreshingLastRank" xml:space="preserve">
     <value>En fejl skete ved opdateringen af nyeste rang</value>
   </data>
-  <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
-    <value>En Fejl skete ved hentning af kamp informationer ({0}).</value>
-  </data>
   <data name="DialogExportMultipleOrSingle" xml:space="preserve">
     <value>Vil du eksportere data til en enkelt fil eller flere filer?</value>
   </data>
@@ -1918,9 +1915,6 @@ Er ikke istand til at starte spillet</value>
   </data>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe er ukorrekt.</value>
-  </data>
-  <data name="DialogBoilerNotFound" xml:space="preserve">
-    <value>boiler.exe blev ikke funndet.</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
     <value>Demoen kan være for gammel, hvis det ikke er tilfældet send den venligst til mig i en email.

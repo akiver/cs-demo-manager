@@ -76,7 +76,7 @@ namespace Services.Interfaces
         /// <param name="demo"></param>
         /// <param name="folderPath"></param>
         /// <returns></returns>
-        Task<bool> GenerateJsonAsync(Demo demo, string folderPath);
+        Task<string> GenerateJsonAsync(Demo demo, string folderPath);
 
         /// <summary>
         /// Return the size of the cache folder

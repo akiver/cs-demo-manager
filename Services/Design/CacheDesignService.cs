@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Core;
@@ -263,9 +264,10 @@ namespace Services.Design
             return Task.FromResult(true);
         }
 
-        public Task<bool> GenerateJsonAsync(Demo demo, string folderPath)
+        public Task<string> GenerateJsonAsync(Demo demo, string folderPath)
         {
-            return Task.FromResult(true);
+            string filePath = folderPath + Path.DirectorySeparatorChar + demo.Name + ".json";
+            return Task.FromResult(filePath);
         }
 
         public Task<long> GetCacheSizeAsync()
