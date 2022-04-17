@@ -1162,7 +1162,10 @@ namespace DemoInfo
                         if (cache[iForTheMethod] != 0) //Player already has a weapon in this slot. 
                         {
                             // add to the weapons dropped queue that will be clear at the end of the tick
-                            p.DroppedWeapons.Enqueue(p.rawWeapons[cache[iForTheMethod]]);
+                            if (p.rawWeapons.ContainsKey(cache[iForTheMethod]))
+                            {
+                                p.DroppedWeapons.Enqueue(p.rawWeapons[cache[iForTheMethod]]);
+                            }
 
                             // remove the player's weapon slot
                             p.rawWeapons.Remove(cache[iForTheMethod]);
@@ -1180,10 +1183,9 @@ namespace DemoInfo
                     {
                         if (cache[iForTheMethod] != 0)
                         {
-                            p.DroppedWeapons.Enqueue(p.rawWeapons[cache[iForTheMethod]]);
-
                             if (p.rawWeapons.ContainsKey(cache[iForTheMethod]))
                             {
+                                p.DroppedWeapons.Enqueue(p.rawWeapons[cache[iForTheMethod]]);
                                 // is it necessary as we remove element from dict just after?
                                 p.rawWeapons[cache[iForTheMethod]].Owner = null;
                             }
