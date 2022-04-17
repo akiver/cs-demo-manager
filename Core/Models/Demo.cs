@@ -537,7 +537,10 @@ namespace Core.Models
         public int CheaterCount
         {
             get { return _cheaterCounter; }
-            set { Set(() => CheaterCount, ref _cheaterCounter, value); }
+            set {
+                Set(() => CheaterCount, ref _cheaterCounter, value);
+                RaisePropertyChanged(() => HasCheater);
+            }
         }
 
         /// <summary>
