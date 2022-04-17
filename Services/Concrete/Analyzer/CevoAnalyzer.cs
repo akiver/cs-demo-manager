@@ -2,7 +2,6 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Core.Models;
 using DemoInfo;
 using Player = Core.Models.Player;
@@ -81,7 +80,7 @@ namespace Services.Concrete.Analyzer
         protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
         {
             // Add the last round (round_officially_ended isn't raised at the end)
-            Application.Current.Dispatcher.Invoke(delegate { Demo.Rounds.Add(CurrentRound); });
+            Demo.Rounds.Add(CurrentRound);
 
             ProcessPlayersRating();
         }
@@ -165,7 +164,7 @@ namespace Services.Concrete.Analyzer
             UpdateKillsCount();
             UpdatePlayerScore();
 
-            Application.Current.Dispatcher.Invoke(delegate { Demo.Rounds.Add(CurrentRound); });
+            Demo.Rounds.Add(CurrentRound);
 
             // End of a half
             if (IsLastRoundHalf)
@@ -183,7 +182,7 @@ namespace Services.Concrete.Analyzer
                 // Add the current overtime only if it's not the first
                 if (CurrentOvertime.Number != 0)
                 {
-                    Application.Current.Dispatcher.Invoke(delegate { Demo.Overtimes.Add(CurrentOvertime); });
+                    Demo.Overtimes.Add(CurrentOvertime);
                     IsHalfMatch = true;
                 }
                 else
@@ -219,31 +218,28 @@ namespace Services.Concrete.Analyzer
                     Side = player.Team.ToSide(),
                 };
 
-                Application.Current.Dispatcher.Invoke(delegate
+                if (!Demo.Players.Contains(pl))
                 {
-                    if (!Demo.Players.Contains(pl))
-                    {
-                        Demo.Players.Add(pl);
-                    }
+                    Demo.Players.Add(pl);
+                }
 
-                    if (pl.Side == Side.CounterTerrorist)
+                if (pl.Side == Side.CounterTerrorist)
+                {
+                    pl.TeamName = Demo.TeamCT.Name;
+                    if (!Demo.TeamCT.Players.Contains(pl))
                     {
-                        pl.TeamName = Demo.TeamCT.Name;
-                        if (!Demo.TeamCT.Players.Contains(pl))
-                        {
-                            Demo.TeamCT.Players.Add(pl);
-                        }
+                        Demo.TeamCT.Players.Add(pl);
                     }
+                }
 
-                    if (pl.Side == Side.Terrorist)
+                if (pl.Side == Side.Terrorist)
+                {
+                    pl.TeamName = Demo.TeamT.Name;
+                    if (!Demo.TeamT.Players.Contains(pl))
                     {
-                        pl.TeamName = Demo.TeamT.Name;
-                        if (!Demo.TeamT.Players.Contains(pl))
-                        {
-                            Demo.TeamT.Players.Add(pl);
-                        }
+                        Demo.TeamT.Players.Add(pl);
                     }
-                });
+                }
             }
         }
     }

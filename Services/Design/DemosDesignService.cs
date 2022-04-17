@@ -97,7 +97,6 @@ namespace Services.Design
                     HeGrenadeThrownCount = random.Next(20),
                     BombExplodedCount = random.Next(5),
                     AvatarUrl = string.Empty,
-                    KillDeathRatio = (decimal)random.NextDouble(),
                     MatchCount = random.Next(100),
                     RoundPlayedCount = random.Next(100),
                 };

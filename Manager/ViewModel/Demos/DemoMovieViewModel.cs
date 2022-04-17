@@ -15,7 +15,6 @@ using Core.Models;
 using Core.Models.Source;
 using GalaSoft.MvvmLight.CommandWpf;
 using MahApps.Metro.Controls.Dialogs;
-using Manager.Internals;
 using Manager.Models.DemoMovie;
 using Manager.Properties;
 using Manager.Services;
@@ -1537,7 +1536,7 @@ namespace Manager.ViewModel.Demos
 
         private void InitConfiguration()
         {
-            OutputFileName = Path.GetFileNameWithoutExtension(Demo.Name);
+            OutputFileName = Demo.NameWithoutExtension;
             FrameRate = Settings.Default.MovieFramerate;
             AutoCloseGame = Settings.Default.MovieAutoCloseGame;
             Fullscreen = Settings.Default.MovieFullscreen;

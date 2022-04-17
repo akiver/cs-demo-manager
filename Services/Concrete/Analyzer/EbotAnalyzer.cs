@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Core.Models;
 using DemoInfo;
 using Player = Core.Models.Player;
@@ -119,7 +118,7 @@ namespace Services.Concrete.Analyzer
                 // if the number of rounds played is equals to the double of MR, the OT is over
                 if (MrOvertime * 2 == RoundCountOvertime)
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
+                    Demo.Overtimes.Add(CurrentOvertime);
                     CreateNewOvertime();
                     RoundCountOvertime = 0;
                 }
@@ -275,13 +274,10 @@ namespace Services.Concrete.Analyzer
                 UpdatePlayerScore();
             }
 
-            Application.Current.Dispatcher.Invoke(delegate
+            if (!IsOvertime || !_isFaceit)
             {
-                if (!IsOvertime || !_isFaceit)
-                {
-                    Demo.Rounds.Add(CurrentRound);
-                }
-            });
+                Demo.Rounds.Add(CurrentRound);
+            }
 
             IsMatchStarted = false;
         }
@@ -354,7 +350,7 @@ namespace Services.Concrete.Analyzer
 
             if (IsLastRoundHalf)
             {
-                Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Add(CurrentRound));
+                Demo.Rounds.Add(CurrentRound);
             }
         }
 
@@ -364,21 +360,18 @@ namespace Services.Concrete.Analyzer
 
             if (!_isTeamsInitialized)
             {
-                Application.Current.Dispatcher.Invoke(delegate
+                if (Demo.Players.Count < 10)
                 {
-                    if (Demo.Players.Count < 10)
-                    {
-                        InitMatch();
-                    }
+                    InitMatch();
+                }
 
-                    Demo.Rounds.Clear();
-                    CreateNewRound();
-                    // since some demos are already started we can't use the freezetime event
-                    if (CurrentRound.Number == 1)
-                    {
-                        IsFreezetime = false;
-                    }
-                });
+                Demo.Rounds.Clear();
+                CreateNewRound();
+                // since some demos are already started we can't use the freezetime event
+                if (CurrentRound.Number == 1)
+                {
+                    IsFreezetime = false;
+                }
             }
 
             base.HandleTickDone(sender, e);
@@ -456,24 +449,24 @@ namespace Services.Concrete.Analyzer
                         {
                             if (teamT.Players.Contains(pl))
                             {
-                                Application.Current.Dispatcher.Invoke(() => teamT.Players.Remove(pl));
+                                teamT.Players.Remove(pl);
                             }
 
                             if (!teamCt.Players.Contains(pl))
                             {
-                                Application.Current.Dispatcher.Invoke(() => teamCt.Players.Add(pl));
+                                teamCt.Players.Add(pl);
                             }
                         }
                         else if (player.Team == DemoInfo.Team.Terrorist)
                         {
                             if (teamCt.Players.Contains(pl))
                             {
-                                Application.Current.Dispatcher.Invoke(() => teamCt.Players.Remove(pl));
+                                teamCt.Players.Remove(pl);
                             }
 
                             if (!teamT.Players.Contains(pl))
                             {
-                                Application.Current.Dispatcher.Invoke(() => teamT.Players.Add(pl));
+                                teamT.Players.Add(pl);
                             }
                         }
                     }
@@ -486,7 +479,7 @@ namespace Services.Concrete.Analyzer
                             Name = player.Name,
                             Side = player.Team.ToSide(),
                         };
-                        Application.Current.Dispatcher.Invoke(() => Demo.Players.Add(pl));
+                        Demo.Players.Add(pl);
 
                         if (player.Team == DemoInfo.Team.CounterTerrorist)
                         {
@@ -494,17 +487,14 @@ namespace Services.Concrete.Analyzer
                             // Check swap
                             if (Demo.TeamT.Players.Contains(pl))
                             {
-                                Application.Current.Dispatcher.Invoke(delegate
-                                {
-                                    Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
-                                    Demo.TeamT.Players.Remove(pl);
-                                });
+                                Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
+                                Demo.TeamT.Players.Remove(pl);
                             }
                             else
                             {
                                 if (!Demo.TeamCT.Players.Contains(pl))
                                 {
-                                    Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(pl));
+                                    Demo.TeamCT.Players.Add(pl);
                                 }
                             }
                         }
@@ -514,17 +504,14 @@ namespace Services.Concrete.Analyzer
                             // Check swap
                             if (Demo.TeamCT.Players.Contains(pl))
                             {
-                                Application.Current.Dispatcher.Invoke(delegate
-                                {
-                                    Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
-                                    Demo.TeamCT.Players.Remove(pl);
-                                });
+                                Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
+                                Demo.TeamCT.Players.Remove(pl);
                             }
                             else
                             {
                                 if (!Demo.TeamT.Players.Contains(pl))
                                 {
-                                    Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(pl));
+                                    Demo.TeamT.Players.Add(pl);
                                 }
                             }
                         }
