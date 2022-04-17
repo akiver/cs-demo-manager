@@ -241,7 +241,6 @@
                                    Content="{x:Static properties:Resources.DemosListSize}" />
                             <mahapps:NumericUpDown x:Name="DemosListSizeTextBox"
                                                     Minimum="1"
-                                                    Maximum="500"
                                                     MaxWidth="50"
                                                     HorizontalAlignment="Left"
                                                     NumericInputMode="Numbers"
