@@ -4,11 +4,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System;
-using System.Collections.Specialized;
 using System.Globalization;
 using Core.Models.Events;
 using DemoInfo;
-using GalaSoft.MvvmLight.Threading;
 
 namespace Core.Models
 {
@@ -314,72 +312,72 @@ namespace Core.Models
         /// <summary>
         /// List of rounds during the match
         /// </summary>
-        private ObservableCollection<Round> _rounds;
+        private Collection<Round> _rounds;
 
         /// <summary>
         /// List of players who played during the match
         /// </summary>
-        private ObservableCollection<Player> _players;
+        private Collection<Player> _players;
 
         /// <summary>
         /// Infos on bomb planted during the match
         /// </summary>
-        private ObservableCollection<BombPlantedEvent> _bombPlanted;
+        private Collection<BombPlantedEvent> _bombPlanted;
 
         /// <summary>
         /// Infos on bomb defused during the match
         /// </summary>
-        private ObservableCollection<BombDefusedEvent> _bombDefused;
+        private Collection<BombDefusedEvent> _bombDefused;
 
         /// <summary>
         /// Infos on bomb exploded during the match
         /// </summary>
-        private ObservableCollection<BombExplodedEvent> _bombExploded;
+        private Collection<BombExplodedEvent> _bombExploded;
 
         /// <summary>
         /// Infos about players hurted event
         /// </summary>
-        private ObservableCollection<PlayerHurtedEvent> _playersHurted;
+        private Collection<PlayerHurtedEvent> _playersHurted;
 
         /// <summary>
         /// All kills during the match
         /// </summary>
-        private ObservableCollection<KillEvent> _kills;
+        private Collection<KillEvent> _kills;
 
         /// <summary>
         /// All shots fired during the match
         /// </summary>
-        private ObservableCollection<WeaponFireEvent> _weaponFired;
+        private Collection<WeaponFireEvent> _weaponFired;
 
         /// <summary>
         /// Contains data about flashbangs which had blinded players
         /// </summary>
-        private ObservableCollection<PlayerBlindedEvent> _playerBlinded;
+        private Collection<PlayerBlindedEvent> _playerBlinded;
 
         /// <summary>
         /// Demo's overtimes
         /// </summary>
-        private ObservableCollection<Overtime> _overtimes;
+        private Collection<Overtime> _overtimes;
 
         /// <summary>
         /// Contains all PositionPoint for overview generation
         /// </summary>
-        private ObservableCollection<PositionPoint> _positionPoints;
+        private Collection<PositionPoint> _positionPoints;
 
         /// <summary>
         /// Decoy started events data
         /// </summary>
-        private ObservableCollection<DecoyStartedEvent> _decoysStarted;
+        private Collection<DecoyStartedEvent> _decoysStarted;
 
         /// <summary>
         /// Molotov fire started events data
         /// </summary>
-        private ObservableCollection<MolotovFireStartedEvent> _molotovsFireStarted;
+        private Collection<MolotovFireStartedEvent> _molotovsFireStarted;
 
         /// <summary>
         /// Incendiary fire started events data
         /// </summary>
-        private ObservableCollection<MolotovFireStartedEvent> _incendiariesFireStarted;
+        private Collection<MolotovFireStartedEvent> _incendiariesFireStarted;
 
         /// <summary>
         /// Player with the best HS ratio
@@ -400,6 +398,8 @@ namespace Core.Models
         /// Weapon with the most kills
         /// </summary>
         private Weapon _mostKillingWeapon;
+
+        private Weapon _mostDamagingWeapon;
 
         /// <summary>
         /// Team that started as Counter-Terrorists
@@ -503,11 +503,7 @@ namespace Core.Models
         public float Duration
         {
             get { return _duration; }
-            set
-            {
-                Set(() => Duration, ref _duration, value);
-                RaisePropertyChanged(() => DurationTime);
-            }
+            set { Set(() => Duration, ref _duration, value); }
         }
 
         [JsonProperty("ticks")]
@@ -633,11 +629,7 @@ namespace Core.Models
         public Team Surrender
         {
             get { return _surrender; }
-            set
-            {
-                Set(() => Surrender, ref _surrender, value);
-                RaisePropertyChanged(() => Surrender);
-            }
+            set { Set(() => Surrender, ref _surrender, value); }
         }
 
         [JsonProperty("team_winner", IsReference = true)]
@@ -648,14 +640,14 @@ namespace Core.Models
         }
 
         [JsonProperty("rounds", IsReference = false)]
-        public ObservableCollection<Round> Rounds
+        public Collection<Round> Rounds
         {
             get { return _rounds; }
             set { Set(() => Rounds, ref _rounds, value); }
         }
 
         [JsonProperty("players", IsReference = false)]
-        public ObservableCollection<Player> Players
+        public Collection<Player> Players
         {
             get { return _players; }
             set { Set(() => Players, ref _players, value); }
@@ -668,8 +660,15 @@ namespace Core.Models
             set { Set(() => MostKillingWeapon, ref _mostKillingWeapon, value); }
         }
 
+        [JsonProperty("most_damaging_weapon")]
+        public Weapon MostDamagingWeapon
+        {
+            get { return _mostDamagingWeapon; }
+            set { Set(() => MostDamagingWeapon, ref _mostDamagingWeapon, value); }
+        }
+
         [JsonProperty("overtimes", IsReference = false)]
-        public ObservableCollection<Overtime> Overtimes
+        public Collection<Overtime> Overtimes
         {
             get { return _overtimes; }
             set { Set(() => Overtimes, ref _overtimes, value); }
@@ -697,49 +696,49 @@ namespace Core.Models
         }
 
         [JsonProperty("bomb_planted", IsReference = false)]
-        public ObservableCollection<BombPlantedEvent> BombPlanted
+        public Collection<BombPlantedEvent> BombPlanted
         {
             get { return _bombPlanted; }
             set { Set(() => BombPlanted, ref _bombPlanted, value); }
         }
 
         [JsonProperty("bomb_defused", IsReference = false)]
-        public ObservableCollection<BombDefusedEvent> BombDefused
+        public Collection<BombDefusedEvent> BombDefused
         {
             get { return _bombDefused; }
             set { Set(() => BombDefused, ref _bombDefused, value); }
         }
 
         [JsonProperty("bomb_exploded", IsReference = false)]
-        public ObservableCollection<BombExplodedEvent> BombExploded
+        public Collection<BombExplodedEvent> BombExploded
         {
             get { return _bombExploded; }
             set { Set(() => BombExploded, ref _bombExploded, value); }
         }
 
         [JsonProperty("kills", IsReference = false)]
-        public ObservableCollection<KillEvent> Kills
+        public Collection<KillEvent> Kills
         {
             get { return _kills; }
             set { Set(() => Kills, ref _kills, value); }
         }
 
         [JsonProperty("weapon_fired", IsReference = false)]
-        public ObservableCollection<WeaponFireEvent> WeaponFired
+        public Collection<WeaponFireEvent> WeaponFired
         {
             get { return _weaponFired; }
             set { Set(() => WeaponFired, ref _weaponFired, value); }
         }
 
         [JsonProperty("player_blinded_events", IsReference = false)]
-        public ObservableCollection<PlayerBlindedEvent> PlayerBlinded
+        public Collection<PlayerBlindedEvent> PlayerBlinded
         {
             get { return _playerBlinded; }
             set { Set(() => PlayerBlinded, ref _playerBlinded, value); }
         }
 
         [JsonProperty("player_hurted", IsReference = false)]
-        public ObservableCollection<PlayerHurtedEvent> PlayersHurted
+        public Collection<PlayerHurtedEvent> PlayersHurted
         {
             get { return _playersHurted; }
             set { Set(() => PlayersHurted, ref _playersHurted, value); }
@@ -852,28 +851,28 @@ namespace Core.Models
         }
 
         [JsonIgnore]
-        public ObservableCollection<PositionPoint> PositionPoints
+        public Collection<PositionPoint> PositionPoints
         {
             get { return _positionPoints; }
             set { Set(() => PositionPoints, ref _positionPoints, value); }
         }
 
         [JsonProperty("decoys")]
-        public ObservableCollection<DecoyStartedEvent> DecoyStarted
+        public Collection<DecoyStartedEvent> DecoyStarted
         {
             get { return _decoysStarted; }
             set { Set(() => DecoyStarted, ref _decoysStarted, value); }
         }
 
         [JsonProperty("incendiaries")]
-        public ObservableCollection<MolotovFireStartedEvent> IncendiariesFireStarted
+        public Collection<MolotovFireStartedEvent> IncendiariesFireStarted
         {
             get { return _incendiariesFireStarted; }
             set { Set(() => IncendiariesFireStarted, ref _incendiariesFireStarted, value); }
         }
 
         [JsonProperty("molotovs")]
-        public ObservableCollection<MolotovFireStartedEvent> MolotovsFireStarted
+        public Collection<MolotovFireStartedEvent> MolotovsFireStarted
         {
             get { return _molotovsFireStarted; }
             set { Set(() => MolotovsFireStarted, ref _molotovsFireStarted, value); }
@@ -891,29 +890,6 @@ namespace Core.Models
         {
             get { return _damageArmorCount; }
             set { Set(() => DamageArmorCount, ref _damageArmorCount, value); }
-        }
-
-        [JsonIgnore]
-        public Weapon MostDamageWeapon
-        {
-            get
-            {
-                Dictionary<Weapon, int> weapons = new Dictionary<Weapon, int>();
-
-                foreach (PlayerHurtedEvent playerHurtedEvent in Rounds.SelectMany(round => round.PlayersHurted))
-                {
-                    if (!weapons.ContainsKey(playerHurtedEvent.Weapon))
-                    {
-                        weapons[playerHurtedEvent.Weapon] = playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
-                    }
-                    else
-                    {
-                        weapons[playerHurtedEvent.Weapon] += playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
-                    }
-                }
-
-                return weapons.OrderByDescending(x => x.Value).FirstOrDefault().Key;
-            }
         }
 
         [JsonProperty("average_health_damage")]
@@ -1067,20 +1043,20 @@ namespace Core.Models
 
         public Demo()
         {
-            Kills = new ObservableCollection<KillEvent>();
-            Players = new ObservableCollection<Player>();
-            Rounds = new ObservableCollection<Round>();
-            MolotovsFireStarted = new ObservableCollection<MolotovFireStartedEvent>();
-            IncendiariesFireStarted = new ObservableCollection<MolotovFireStartedEvent>();
-            DecoyStarted = new ObservableCollection<DecoyStartedEvent>();
-            WeaponFired = new ObservableCollection<WeaponFireEvent>();
-            PlayersHurted = new ObservableCollection<PlayerHurtedEvent>();
-            PositionPoints = new ObservableCollection<PositionPoint>();
-            BombExploded = new ObservableCollection<BombExplodedEvent>();
-            BombPlanted = new ObservableCollection<BombPlantedEvent>();
-            BombDefused = new ObservableCollection<BombDefusedEvent>();
-            PlayerBlinded = new ObservableCollection<PlayerBlindedEvent>();
-            Overtimes = new ObservableCollection<Overtime>();
+            Kills = new Collection<KillEvent>();
+            Players = new Collection<Player>();
+            Rounds = new Collection<Round>();
+            MolotovsFireStarted = new Collection<MolotovFireStartedEvent>();
+            IncendiariesFireStarted = new Collection<MolotovFireStartedEvent>();
+            DecoyStarted = new Collection<DecoyStartedEvent>();
+            WeaponFired = new Collection<WeaponFireEvent>();
+            PlayersHurted = new Collection<PlayerHurtedEvent>();
+            PositionPoints = new Collection<PositionPoint>();
+            BombExploded = new Collection<BombExplodedEvent>();
+            BombPlanted = new Collection<BombPlantedEvent>();
+            BombDefused = new Collection<BombDefusedEvent>();
+            PlayerBlinded = new Collection<PlayerBlindedEvent>();
+            Overtimes = new Collection<Overtime>();
             ChatMessageList = new List<string>();
 
             _teamCt = new Team
@@ -1093,13 +1069,6 @@ namespace Core.Models
                 Name = "Team 2",
                 CurrentSide = Side.Terrorist,
             };
-            Kills.CollectionChanged += OnKillsCollectionChanged;
-            BombExploded.CollectionChanged += OnBombExplodedCollectionChanged;
-            BombDefused.CollectionChanged += OnBombDefusedCollectionChanged;
-            BombPlanted.CollectionChanged += OnBombPlantedCollectionChanged;
-            Rounds.CollectionChanged += OnRoundsCollectionChanged;
-            PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
-            WeaponFired.CollectionChanged += OnWeaponFireCollectionChanged;
         }
 
         public override bool Equals(object obj)
@@ -1167,6 +1136,7 @@ namespace Core.Models
                 MostBombPlantedPlayer = MostBombPlantedPlayer,
                 MostEntryKillPlayer = MostEntryKillPlayer,
                 MostHeadshotPlayer = MostHeadshotPlayer,
+                MostDamagingWeapon = MostDamagingWeapon,
                 MvpCount = MvpCount,
                 Path = Path,
                 ServerTickrate = ServerTickrate,
@@ -1182,21 +1152,21 @@ namespace Core.Models
                 WeaponFiredCount = WeaponFiredCount,
                 Winner = Winner,
                 WinStatus = WinStatus,
-                Players = new ObservableCollection<Player>(),
-                WeaponFired = new ObservableCollection<WeaponFireEvent>(),
-                DecoyStarted = new ObservableCollection<DecoyStartedEvent>(),
-                BombDefused = new ObservableCollection<BombDefusedEvent>(),
-                BombExploded = new ObservableCollection<BombExplodedEvent>(),
-                BombPlanted = new ObservableCollection<BombPlantedEvent>(),
-                MolotovsFireStarted = new ObservableCollection<MolotovFireStartedEvent>(),
-                IncendiariesFireStarted = new ObservableCollection<MolotovFireStartedEvent>(),
+                Players = new Collection<Player>(),
+                WeaponFired = new Collection<WeaponFireEvent>(),
+                DecoyStarted = new Collection<DecoyStartedEvent>(),
+                BombDefused = new Collection<BombDefusedEvent>(),
+                BombExploded = new Collection<BombExplodedEvent>(),
+                BombPlanted = new Collection<BombPlantedEvent>(),
+                MolotovsFireStarted = new Collection<MolotovFireStartedEvent>(),
+                IncendiariesFireStarted = new Collection<MolotovFireStartedEvent>(),
                 ChatMessageList = new List<string>(),
-                PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(),
-                Kills = new ObservableCollection<KillEvent>(),
-                PlayerBlinded = new ObservableCollection<PlayerBlindedEvent>(),
-                PositionPoints = new ObservableCollection<PositionPoint>(),
-                Overtimes = new ObservableCollection<Overtime>(),
-                Rounds = new ObservableCollection<Round>(),
+                PlayersHurted = new Collection<PlayerHurtedEvent>(),
+                Kills = new Collection<KillEvent>(),
+                PlayerBlinded = new Collection<PlayerBlindedEvent>(),
+                PositionPoints = new Collection<PositionPoint>(),
+                Overtimes = new Collection<Overtime>(),
+                Rounds = new Collection<Round>(),
             };
 
             foreach (Player player in Players)
@@ -1415,6 +1385,7 @@ namespace Core.Models
             MostEntryKillPlayer = demo.MostEntryKillPlayer;
             MostHeadshotPlayer = demo.MostHeadshotPlayer;
             MostKillingWeapon = demo.MostKillingWeapon;
+            MostDamagingWeapon = demo.MostDamagingWeapon;
             MvpCount = demo.MvpCount;
             OneKillCount = demo.OneKillCount;
             SmokeThrownCount = demo.SmokeThrownCount;
@@ -1429,88 +1400,86 @@ namespace Core.Models
 
         public void ResetStats(bool resetTeams = true)
         {
-            DispatcherHelper.CheckBeginInvokeOnUI(delegate
+            AssistCount = 0;
+            AssistPerRound = 0;
+            AverageEseaRws = 0;
+            AverageHealthDamage = 0;
+            AverageHltvRating = 0;
+            AverageHltv2Rating = 0;
+            BombDefusedCount = 0;
+            BombExplodedCount = 0;
+            BombPlantedCount = 0;
+            ClutchCount = 0;
+            ClutchLostCount = 0;
+            ClutchWonCount = 0;
+            CrouchKillCount = 0;
+            DamageArmorCount = 0;
+            DamageHealthCount = 0;
+            DeathCount = 0;
+            DeathPerRound = 0;
+            DecoyThrownCount = 0;
+            EntryKillCount = 0;
+            FlashbangThrownCount = 0;
+            FiveKillCount = 0;
+            FourKillCount = 0;
+            CheaterCount = 0;
+            HeadshotCount = 0;
+            HeThrownCount = 0;
+            HitCount = 0;
+            IncendiaryThrownCount = 0;
+            JumpKillCount = 0;
+            KillCount = 0;
+            KillPerRound = 0;
+            KnifeKillCount = 0;
+            MolotovThrownCount = 0;
+            MostBombPlantedPlayer = null;
+            MostEntryKillPlayer = null;
+            MostHeadshotPlayer = null;
+            MostKillingWeapon = null;
+            MostDamagingWeapon = null;
+            MvpCount = 0;
+            OneKillCount = 0;
+            SmokeThrownCount = 0;
+            Surrender = null;
+            TeamKillCount = 0;
+            ThreeKillCount = 0;
+            TradeKillCount = 0;
+            TwoKillCount = 0;
+            WeaponFiredCount = 0;
+            Winner = null;
+            BombDefused.Clear();
+            BombExploded.Clear();
+            BombPlanted.Clear();
+            ChatMessageList.Clear();
+            DecoyStarted.Clear();
+            IncendiariesFireStarted.Clear();
+            Kills.Clear();
+            MolotovsFireStarted.Clear();
+            Overtimes.Clear();
+            PlayersHurted.Clear();
+            PlayerBlinded.Clear();
+            PositionPoints.Clear();
+            Rounds.Clear();
+            WeaponFired.Clear();
+            TeamT.ResetStats();
+            TeamCT.ResetStats();
+            TeamCT.CurrentSide = Side.CounterTerrorist;
+            TeamT.CurrentSide = Side.Terrorist;
+            if (resetTeams)
             {
-                AssistCount = 0;
-                AssistPerRound = 0;
-                AverageEseaRws = 0;
-                AverageHealthDamage = 0;
-                AverageHltvRating = 0;
-                AverageHltv2Rating = 0;
-                BombDefusedCount = 0;
-                BombExplodedCount = 0;
-                BombPlantedCount = 0;
-                ClutchCount = 0;
-                ClutchLostCount = 0;
-                ClutchWonCount = 0;
-                CrouchKillCount = 0;
-                DamageArmorCount = 0;
-                DamageHealthCount = 0;
-                DeathCount = 0;
-                DeathPerRound = 0;
-                DecoyThrownCount = 0;
-                EntryKillCount = 0;
-                FlashbangThrownCount = 0;
-                FiveKillCount = 0;
-                FourKillCount = 0;
-                CheaterCount = 0;
-                HeadshotCount = 0;
-                HeThrownCount = 0;
-                HitCount = 0;
-                IncendiaryThrownCount = 0;
-                JumpKillCount = 0;
-                KillCount = 0;
-                KillPerRound = 0;
-                KnifeKillCount = 0;
-                MolotovThrownCount = 0;
-                MostBombPlantedPlayer = null;
-                MostEntryKillPlayer = null;
-                MostHeadshotPlayer = null;
-                MostKillingWeapon = null;
-                MvpCount = 0;
-                OneKillCount = 0;
-                SmokeThrownCount = 0;
-                Surrender = null;
-                TeamKillCount = 0;
-                ThreeKillCount = 0;
-                TradeKillCount = 0;
-                TwoKillCount = 0;
-                WeaponFiredCount = 0;
-                Winner = null;
-                BombDefused.Clear();
-                BombExploded.Clear();
-                BombPlanted.Clear();
-                ChatMessageList.Clear();
-                DecoyStarted.Clear();
-                IncendiariesFireStarted.Clear();
-                Kills.Clear();
-                MolotovsFireStarted.Clear();
-                Overtimes.Clear();
-                PlayersHurted.Clear();
-                PlayerBlinded.Clear();
-                PositionPoints.Clear();
-                Rounds.Clear();
-                WeaponFired.Clear();
-                TeamT.ResetStats();
-                TeamCT.ResetStats();
-                TeamCT.CurrentSide = Side.CounterTerrorist;
-                TeamT.CurrentSide = Side.Terrorist;
-                if (resetTeams)
+                Players.Clear();
+                TeamCT.Clear();
+                TeamT.Clear();
+            }
+            else
+            {
+                foreach (Player player in Players)
                 {
-                    Players.Clear();
-                    TeamCT.Clear();
-                    TeamT.Clear();
+                    player.ResetStats();
                 }
-                else
-                {
-                    foreach (Player player in Players)
-                    {
-                        player.ResetStats();
-                    }
-                }
+            }
 
-                RaiseScoresChanged();
-            });
+            RaiseScoresChanged();
         }
 
         /// <summary>
@@ -1532,9 +1501,7 @@ namespace Core.Models
             RaisePropertyChanged(() => ScoreSecondHalfTeamT);
         }
 
-        #region Handler collections changed
-
-        private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void ComputeStats()
         {
             KillCount = Kills.Count;
             DeathCount = Kills.Count;
@@ -1546,31 +1513,13 @@ namespace Core.Models
             JumpKillCount = Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
             KnifeKillCount = Kills.Count(killEvent => killEvent.Weapon.Element == EquipmentElement.Knife);
             TeamKillCount = Players.Sum(p => p.TeamKillCount);
-        }
-
-        private void OnBombExplodedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             BombExplodedCount = BombExploded.Count;
-        }
-
-        private void OnBombDefusedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             BombDefusedCount = BombDefused.Count;
-        }
-
-        private void OnBombPlantedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             BombPlantedCount = BombPlanted.Count;
-        }
-
-        private void OnRoundsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => MostDamageWeapon);
-            RaisePropertyChanged(() => WinStatus);
-
             ClutchWonCount = Players.Sum(p => p.ClutchWonCount);
             ClutchCount = Players.Sum(p => p.ClutchCount);
             ClutchLostCount = Players.Sum(p => p.ClutchLostCount);
+            MostDamagingWeapon = GetMostDamagingWeapon();
 
             if (Rounds.Any())
             {
@@ -1579,6 +1528,7 @@ namespace Core.Models
                 AssistPerRound = GetAssistPerRound();
                 MvpCount = Players.Sum(p => p.RoundMvpCount);
                 DeathPerRound = Math.Round((double)DeathCount / Rounds.Count, 2);
+                AverageHealthDamage = GetAverageHealthDamage();
             }
 
             if (Players.Any())
@@ -1590,21 +1540,11 @@ namespace Core.Models
                 decimal totalEseaRws = Players.Sum(player => player.EseaRws);
                 AverageEseaRws = Math.Round(totalEseaRws / Players.Count, 2);
             }
-        }
 
-        private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             DamageArmorCount = PlayersHurted.Sum(h => h.ArmorDamage);
             DamageHealthCount = PlayersHurted.Sum(h => h.HealthDamage);
             HitCount = PlayersHurted.Count;
-            if (Rounds.Any())
-            {
-                AverageHealthDamage = GetAverageHealthDamage();
-            }
-        }
 
-        private void OnWeaponFireCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             WeaponFiredCount = WeaponFired.Count;
             FlashbangThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
             SmokeThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
@@ -1612,9 +1552,37 @@ namespace Core.Models
             DecoyThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
             MolotovThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
             IncendiaryThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
+
+            foreach (var player in Players)
+            {
+                player.ComputeStats();
+            }
+
+            foreach (var round in Rounds)
+            {
+                round.ComputeStats();
+            }
         }
 
-        #endregion
+
+        private Weapon GetMostDamagingWeapon()
+        {
+            Dictionary<Weapon, int> weapons = new Dictionary<Weapon, int>();
+
+            foreach (PlayerHurtedEvent playerHurtedEvent in Rounds.SelectMany(round => round.PlayersHurted))
+            {
+                if (!weapons.ContainsKey(playerHurtedEvent.Weapon))
+                {
+                    weapons[playerHurtedEvent.Weapon] = playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
+                }
+                else
+                {
+                    weapons[playerHurtedEvent.Weapon] += playerHurtedEvent.HealthDamage + playerHurtedEvent.ArmorDamage;
+                }
+            }
+
+            return weapons.OrderByDescending(x => x.Value).FirstOrDefault().Key;
+        }
 
         private double GetKillPerRound()
         {

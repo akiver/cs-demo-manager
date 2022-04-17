@@ -1,6 +1,5 @@
 using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
@@ -52,7 +51,7 @@ namespace Core.Models
         }
 
         [JsonProperty("team_players", IsReference = false)]
-        public ObservableCollection<Player> Players { get; set; }
+        public Collection<Player> Players { get; set; }
 
         [JsonIgnore] public Side CurrentSide { get; set; }
 
@@ -231,8 +230,7 @@ namespace Core.Models
 
         public Team()
         {
-            Players = new ObservableCollection<Player>();
-            Players.CollectionChanged += OnPlayersCollectionChanged;
+            Players = new Collection<Player>();
         }
 
         public void Clear()
@@ -291,7 +289,7 @@ namespace Core.Models
                 WinRoundCtCount = WinRoundCtCount,
                 WinRoundTCount = WinRoundTCount,
                 WinSemiEcoRoundCount = WinSemiEcoRoundCount,
-                Players = new ObservableCollection<Player>(),
+                Players = new Collection<Player>(),
             };
 
             foreach (Player player in Players)
@@ -326,60 +324,5 @@ namespace Core.Models
             WinRoundTCount = team.WinRoundTCount;
             WinSemiEcoRoundCount = team.WinSemiEcoRoundCount;
         }
-
-        #region Collections events
-
-        private void OnPlayersCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            if (Players.Any())
-            {
-                foreach (var player in Players)
-                {
-                    if (player != null)
-                    {
-                        player.Kills.CollectionChanged += OnKillsCollectionChanged;
-                        player.Deaths.CollectionChanged += OnDeathsCollectionChanged;
-                        player.Assists.CollectionChanged += OnAssistsCollectionChanged;
-                        player.EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
-                        player.EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
-                    }
-                }
-            }
-        }
-
-        private void OnDeathsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => DeathCount);
-        }
-
-        private void OnAssistsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => AssistCount);
-        }
-
-        private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => KillCount);
-            RaisePropertyChanged(() => JumpKillCount);
-            RaisePropertyChanged(() => CrouchKillCount);
-        }
-
-        private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => EntryKillCount);
-            RaisePropertyChanged(() => EntryKillWonCount);
-            RaisePropertyChanged(() => EntryKillLossCount);
-            RaisePropertyChanged(() => RatioEntryKill);
-        }
-
-        private void OnEntryHoldKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => EntryHoldKillCount);
-            RaisePropertyChanged(() => EntryHoldKillWonCount);
-            RaisePropertyChanged(() => EntryHoldKillLossCount);
-            RaisePropertyChanged(() => RatioEntryHoldKill);
-        }
-
-        #endregion
     }
 }

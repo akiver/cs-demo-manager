@@ -2,7 +2,6 @@ using System;
 using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using Core.Models.Events;
 using Core.Models.Serialization;
@@ -291,32 +290,32 @@ namespace Core.Models
         /// <summary>
         /// Kills done during the round
         /// </summary>
-        private ObservableCollection<KillEvent> _kills;
+        private Collection<KillEvent> _kills;
 
         /// <summary>
         /// Infos about flashbangs exploded events
         /// </summary>
-        private ObservableCollection<FlashbangExplodedEvent> _flashbangsExploded;
+        private Collection<FlashbangExplodedEvent> _flashbangsExploded;
 
         /// <summary>
         /// Infos about HE Grenades that exploded during the round
         /// </summary>
-        private ObservableCollection<ExplosiveNadeExplodedEvent> _explosiveGrenadesExploded;
+        private Collection<ExplosiveNadeExplodedEvent> _explosiveGrenadesExploded;
 
         /// <summary>
         /// Infos about smokes poped during the round
         /// </summary>
-        private ObservableCollection<SmokeNadeStartedEvent> _smokeStarted;
+        private Collection<SmokeNadeStartedEvent> _smokeStarted;
 
         /// <summary>
         /// Infos on players damages made during the round
         /// </summary>
-        private ObservableCollection<PlayerHurtedEvent> _playerHurted;
+        private Collection<PlayerHurtedEvent> _playerHurted;
 
         /// <summary>
         /// Infos about shoots done during the round
         /// </summary>
-        private ObservableCollection<WeaponFireEvent> _weaponFired;
+        private Collection<WeaponFireEvent> _weaponFired;
 
         #endregion
 
@@ -366,7 +365,7 @@ namespace Core.Models
         }
 
         [JsonProperty("kills", IsReference = false)]
-        public ObservableCollection<KillEvent> Kills
+        public Collection<KillEvent> Kills
         {
             get { return _kills; }
             set { Set(() => Kills, ref _kills, value); }
@@ -613,14 +612,14 @@ namespace Core.Models
         }
 
         [JsonProperty("players_hurted", IsReference = false)]
-        public ObservableCollection<PlayerHurtedEvent> PlayersHurted
+        public Collection<PlayerHurtedEvent> PlayersHurted
         {
             get { return _playerHurted; }
             set { Set(() => PlayersHurted, ref _playerHurted, value); }
         }
 
         [JsonProperty("weapon_fired", IsReference = false)]
-        public ObservableCollection<WeaponFireEvent> WeaponFired
+        public Collection<WeaponFireEvent> WeaponFired
         {
             get { return _weaponFired; }
             set { Set(() => WeaponFired, ref _weaponFired, value); }
@@ -655,21 +654,21 @@ namespace Core.Models
         }
 
         [JsonProperty("flashbangs_exploded")]
-        public ObservableCollection<FlashbangExplodedEvent> FlashbangsExploded
+        public Collection<FlashbangExplodedEvent> FlashbangsExploded
         {
             get { return _flashbangsExploded; }
             set { Set(() => FlashbangsExploded, ref _flashbangsExploded, value); }
         }
 
         [JsonProperty("smokes_started")]
-        public ObservableCollection<SmokeNadeStartedEvent> SmokeStarted
+        public Collection<SmokeNadeStartedEvent> SmokeStarted
         {
             get { return _smokeStarted; }
             set { Set(() => SmokeStarted, ref _smokeStarted, value); }
         }
 
         [JsonProperty("he_exploded")]
-        public ObservableCollection<ExplosiveNadeExplodedEvent> ExplosiveGrenadesExploded
+        public Collection<ExplosiveNadeExplodedEvent> ExplosiveGrenadesExploded
         {
             get { return _explosiveGrenadesExploded; }
             set { Set(() => ExplosiveGrenadesExploded, ref _explosiveGrenadesExploded, value); }
@@ -679,16 +678,12 @@ namespace Core.Models
 
         public Round()
         {
-            PlayersHurted = new ObservableCollection<PlayerHurtedEvent>();
-            WeaponFired = new ObservableCollection<WeaponFireEvent>();
-            ExplosiveGrenadesExploded = new ObservableCollection<ExplosiveNadeExplodedEvent>();
-            SmokeStarted = new ObservableCollection<SmokeNadeStartedEvent>();
-            FlashbangsExploded = new ObservableCollection<FlashbangExplodedEvent>();
-            Kills = new ObservableCollection<KillEvent>();
-
-            Kills.CollectionChanged += OnKillsCollectionChanged;
-            PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
-            WeaponFired.CollectionChanged += OnWeaponFiredCollectionChanged;
+            PlayersHurted = new Collection<PlayerHurtedEvent>();
+            WeaponFired = new Collection<WeaponFireEvent>();
+            ExplosiveGrenadesExploded = new Collection<ExplosiveNadeExplodedEvent>();
+            SmokeStarted = new Collection<SmokeNadeStartedEvent>();
+            FlashbangsExploded = new Collection<FlashbangExplodedEvent>();
+            Kills = new Collection<KillEvent>();
         }
 
         public override bool Equals(object obj)
@@ -751,12 +746,12 @@ namespace Core.Models
                 Type = Type,
                 WinnerName = WinnerName,
                 WinnerSide = WinnerSide,
-                PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(),
-                Kills = new ObservableCollection<KillEvent>(),
-                WeaponFired = new ObservableCollection<WeaponFireEvent>(),
-                ExplosiveGrenadesExploded = new ObservableCollection<ExplosiveNadeExplodedEvent>(),
-                FlashbangsExploded = new ObservableCollection<FlashbangExplodedEvent>(),
-                SmokeStarted = new ObservableCollection<SmokeNadeStartedEvent>(),
+                PlayersHurted = new Collection<PlayerHurtedEvent>(),
+                Kills = new Collection<KillEvent>(),
+                WeaponFired = new Collection<WeaponFireEvent>(),
+                ExplosiveGrenadesExploded = new Collection<ExplosiveNadeExplodedEvent>(),
+                FlashbangsExploded = new Collection<FlashbangExplodedEvent>(),
+                SmokeStarted = new Collection<SmokeNadeStartedEvent>(),
             };
 
             foreach (PlayerHurtedEvent e in PlayersHurted)
@@ -835,9 +830,7 @@ namespace Core.Models
             WeaponFired.Clear();
         }
 
-        #region Handler collections changed
-
-        private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void ComputeStats()
         {
             KillCount = Kills.Count;
             JumpKillCount = Kills.Count(killEvent => killEvent.KillerVelocityZ > 0);
@@ -856,19 +849,11 @@ namespace Core.Models
             ThreeKillCount = kills.Count(k => k.KillCount == 3);
             FourKillCount = kills.Count(k => k.KillCount == 4);
             FiveKillCount = kills.Count(k => k.KillCount == 5);
-        }
-
-        private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             DamageHealthCount = PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
                 .Sum(playerHurtedEvent => playerHurtedEvent.HealthDamage);
             DamageArmorCount = PlayersHurted.Where(playerHurtedEvent => playerHurtedEvent.AttackerSteamId != 0)
                 .Sum(playerHurtedEvent => playerHurtedEvent.ArmorDamage);
             AverageHealthDamagePerPlayer = GetAverageHealthDamagePerPlayer();
-        }
-
-        private void OnWeaponFiredCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
             IncendiaryThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Incendiary);
             MolotovThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Molotov);
             DecoyThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Decoy);
@@ -876,8 +861,6 @@ namespace Core.Models
             SmokeThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Smoke);
             FlashbangThrownCount = WeaponFired.Count(w => w.Weapon.Element == EquipmentElement.Flash);
         }
-
-        #endregion
 
         private double GetAverageHealthDamagePerPlayer()
         {

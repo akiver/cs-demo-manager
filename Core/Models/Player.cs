@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Linq;
 using Core.Models.Events;
 using Core.Models.Serialization;
@@ -116,11 +115,6 @@ namespace Core.Models
         /// Flag to detect disconnect / reconnect
         /// </summary>
         private bool _isConnected = true;
-
-        /// <summary>
-        /// Player kills / Deaths ratio
-        /// </summary>
-        private decimal _killsDeathsRatio;
 
         /// <summary>
         /// Player's current team side (change when half side is over)
@@ -290,37 +284,37 @@ namespace Core.Models
         /// <summary>
         /// Player's kills data
         /// </summary>
-        private ObservableCollection<KillEvent> _kills;
+        private Collection<KillEvent> _kills;
 
         /// <summary>
         /// Player's deaths data
         /// </summary>
-        private ObservableCollection<KillEvent> _deaths;
+        private Collection<KillEvent> _deaths;
 
         /// <summary>
         /// Player's assists data
         /// </summary>
-        private ObservableCollection<KillEvent> _assists;
+        private Collection<KillEvent> _assists;
 
         /// <summary>
         /// Player's entry kills data
         /// </summary>
-        private ObservableCollection<EntryKillEvent> _entryKills;
+        private Collection<EntryKillEvent> _entryKills;
 
         /// <summary>
         /// Player's entry hold kills data
         /// </summary>
-        private ObservableCollection<EntryHoldKillEvent> _entryHoldKills;
+        private Collection<EntryHoldKillEvent> _entryHoldKills;
 
         /// <summary>
         /// List of PlayerHurtedEvent in which the player is involved
         /// </summary>
-        private ObservableCollection<PlayerHurtedEvent> _playersHurted;
+        private Collection<PlayerHurtedEvent> _playersHurted;
 
         /// <summary>
         /// List of clutches that the player is concerned
         /// </summary>
-        private ObservableCollection<ClutchEvent> _clutches;
+        private Collection<ClutchEvent> _clutches;
 
         #endregion
 
@@ -345,11 +339,7 @@ namespace Core.Models
         public int KillCount
         {
             get { return _killCount; }
-            set
-            {
-                RaisePropertyChanged(() => KillDeathRatio);
-                Set(() => KillCount, ref _killCount, value);
-            }
+            set { Set(() => KillCount, ref _killCount, value); }
         }
 
         [JsonProperty("crouch_kill_count")]
@@ -384,11 +374,7 @@ namespace Core.Models
         public int AssistCount
         {
             get { return _assistCount; }
-            set
-            {
-                Set(() => AssistCount, ref _assistCount, value);
-                RaisePropertyChanged(() => AssistPerRound);
-            }
+            set { Set(() => AssistCount, ref _assistCount, value); }
         }
 
         [JsonProperty("trade_kill_count")]
@@ -430,11 +416,7 @@ namespace Core.Models
         public int DeathCount
         {
             get { return _deathCount; }
-            set
-            {
-                RaisePropertyChanged(() => KillDeathRatio);
-                Set(() => DeathCount, ref _deathCount, value);
-            }
+            set { Set(() => DeathCount, ref _deathCount, value); }
         }
 
         [JsonProperty("5k_count")]
@@ -476,11 +458,7 @@ namespace Core.Models
         public int HeadshotCount
         {
             get { return _headshotCount; }
-            set
-            {
-                Set(() => HeadshotCount, ref _headshotCount, value);
-                RaisePropertyChanged(() => HeadshotPercent);
-            }
+            set { Set(() => HeadshotCount, ref _headshotCount, value); }
         }
 
         [JsonProperty("kd")]
@@ -495,7 +473,6 @@ namespace Core.Models
 
                 return 0;
             }
-            set { Set(() => KillDeathRatio, ref _killsDeathsRatio, value); }
         }
 
         [JsonProperty("mvp_count")]
@@ -537,22 +514,14 @@ namespace Core.Models
         public int ShotCount
         {
             get { return _shotCount; }
-            set
-            {
-                Set(() => ShotCount, ref _shotCount, value);
-                RaisePropertyChanged(() => Accuracy);
-            }
+            set { Set(() => ShotCount, ref _shotCount, value); }
         }
 
         [JsonProperty("hit_count")]
         public int HitCount
         {
             get { return _hitCount; }
-            set
-            {
-                Set(() => HitCount, ref _hitCount, value);
-                RaisePropertyChanged(() => Accuracy);
-            }
+            set { Set(() => HitCount, ref _hitCount, value); }
         }
 
         [JsonIgnore] public double Accuracy => ShotCount == 0 ? 0 : Math.Round(HitCount / (double)ShotCount * 100, 2);
@@ -656,49 +625,49 @@ namespace Core.Models
         }
 
         [JsonProperty("entry_kills")]
-        public ObservableCollection<EntryKillEvent> EntryKills
+        public Collection<EntryKillEvent> EntryKills
         {
             get { return _entryKills; }
             set { Set(() => EntryKills, ref _entryKills, value); }
         }
 
         [JsonProperty("entry_hold_kills")]
-        public ObservableCollection<EntryHoldKillEvent> EntryHoldKills
+        public Collection<EntryHoldKillEvent> EntryHoldKills
         {
             get { return _entryHoldKills; }
             set { Set(() => EntryHoldKills, ref _entryHoldKills, value); }
         }
 
         [JsonProperty("kills", IsReference = false)]
-        public ObservableCollection<KillEvent> Kills
+        public Collection<KillEvent> Kills
         {
             get { return _kills; }
             set { Set(() => Kills, ref _kills, value); }
         }
 
         [JsonProperty("deaths", IsReference = false)]
-        public ObservableCollection<KillEvent> Deaths
+        public Collection<KillEvent> Deaths
         {
             get { return _deaths; }
             set { Set(() => Deaths, ref _deaths, value); }
         }
 
         [JsonProperty("assits", IsReference = false)]
-        public ObservableCollection<KillEvent> Assists
+        public Collection<KillEvent> Assists
         {
             get { return _assists; }
             set { Set(() => Assists, ref _assists, value); }
         }
 
         [JsonProperty("players_hurted")]
-        public ObservableCollection<PlayerHurtedEvent> PlayersHurted
+        public Collection<PlayerHurtedEvent> PlayersHurted
         {
             get { return _playersHurted; }
             set { Set(() => PlayersHurted, ref _playersHurted, value); }
         }
 
         [JsonProperty("clutches")]
-        public ObservableCollection<ClutchEvent> Clutches
+        public Collection<ClutchEvent> Clutches
         {
             get { return _clutches; }
             set { Set(() => Clutches, ref _clutches, value); }
@@ -1081,83 +1050,25 @@ namespace Core.Models
 
         public Player()
         {
-            EntryKills = new ObservableCollection<EntryKillEvent>();
-            EntryHoldKills = new ObservableCollection<EntryHoldKillEvent>();
-            PlayersHurted = new ObservableCollection<PlayerHurtedEvent>();
-            Clutches = new ObservableCollection<ClutchEvent>();
-            Kills = new ObservableCollection<KillEvent>();
-            Deaths = new ObservableCollection<KillEvent>();
-            Assists = new ObservableCollection<KillEvent>();
-            Kills.CollectionChanged += OnKillsCollectionChanged;
-            Deaths.CollectionChanged += OnDeathsCollectionChanged;
-            Assists.CollectionChanged += OnAssistsCollectionChanged;
-            EntryKills.CollectionChanged += OnEntryKillsCollectionChanged;
-            EntryHoldKills.CollectionChanged += OnEntryHoldKillsCollectionChanged;
-            PlayersHurted.CollectionChanged += OnPlayersHurtedCollectionChanged;
-            Clutches.CollectionChanged += OnClutchesCollectionChanged;
+            EntryKills = new Collection<EntryKillEvent>();
+            EntryHoldKills = new Collection<EntryHoldKillEvent>();
+            PlayersHurted = new Collection<PlayerHurtedEvent>();
+            Clutches = new Collection<ClutchEvent>();
+            Kills = new Collection<KillEvent>();
+            Deaths = new Collection<KillEvent>();
+            Assists = new Collection<KillEvent>();
             Side = Side.None;
         }
 
-        private void OnAssistsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            AssistCount = Assists.Count;
-        }
-
-        private void OnDeathsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            DeathCount = Deaths.Count + SuicideCount;
-            RaisePropertyChanged(() => AverageTimeDeath);
-        }
-
-        private void OnKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        public void ComputeStats()
         {
             TeamKillCount = Kills.Count(k => k.KilledSide == k.KillerSide);
             KillCount = Kills.Count(k => k.KilledSide != k.KillerSide) - TeamKillCount - SuicideCount;
             HeadshotCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.IsHeadshot);
             CrouchKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.IsKillerCrouching);
             JumpKillCount = Kills.Count(k => k.KilledSide != k.KillerSide && k.KillerVelocityZ > 0);
-        }
-
-        private void OnPlayersHurtedCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => TotalDamageHealthCount);
-            RaisePropertyChanged(() => TotalDamageArmorCount);
-            RaisePropertyChanged(() => AverageHealthDamage);
-        }
-
-        private void OnEntryKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => EntryKillWonCount);
-            RaisePropertyChanged(() => EntryKillLossCount);
-            RaisePropertyChanged(() => RatioEntryKill);
-        }
-
-        private void OnEntryHoldKillsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => EntryHoldKillWonCount);
-            RaisePropertyChanged(() => EntryHoldKillLossCount);
-            RaisePropertyChanged(() => RatioEntryHoldKill);
-        }
-
-        private void OnClutchesCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        {
-            RaisePropertyChanged(() => ClutchCount);
-            RaisePropertyChanged(() => ClutchLostCount);
-            RaisePropertyChanged(() => Clutch1V1Count);
-            RaisePropertyChanged(() => Clutch1V2Count);
-            RaisePropertyChanged(() => Clutch1V3Count);
-            RaisePropertyChanged(() => Clutch1V4Count);
-            RaisePropertyChanged(() => Clutch1V5Count);
-            RaisePropertyChanged(() => Clutch1V1WonCount);
-            RaisePropertyChanged(() => Clutch1V2WonCount);
-            RaisePropertyChanged(() => Clutch1V3WonCount);
-            RaisePropertyChanged(() => Clutch1V4WonCount);
-            RaisePropertyChanged(() => Clutch1V5WonCount);
-            RaisePropertyChanged(() => Clutch1V1LossCount);
-            RaisePropertyChanged(() => Clutch1V2LossCount);
-            RaisePropertyChanged(() => Clutch1V3LossCount);
-            RaisePropertyChanged(() => Clutch1V4LossCount);
-            RaisePropertyChanged(() => Clutch1V5LossCount);
+            AssistCount = Assists.Count;
+            DeathCount = Deaths.Count + SuicideCount;
         }
 
         public void ResetStats()
@@ -1253,7 +1164,6 @@ namespace Core.Models
                 IsOverwatchBanned = IsOverwatchBanned,
                 IsVacBanned = IsVacBanned,
                 JumpKillCount = JumpKillCount,
-                KillDeathRatio = KillDeathRatio,
                 MolotovThrownCount = MolotovThrownCount,
                 RankNumberNew = RankNumberNew,
                 RankNumberOld = RankNumberOld,
@@ -1269,14 +1179,14 @@ namespace Core.Models
                 TradeDeathCount = TradeDeathCount,
                 TradeKillCount = TradeKillCount,
                 WinCount = WinCount,
-                PlayersHurted = new ObservableCollection<PlayerHurtedEvent>(),
-                Kills = new ObservableCollection<KillEvent>(),
-                Assists = new ObservableCollection<KillEvent>(),
-                Deaths = new ObservableCollection<KillEvent>(),
-                EntryHoldKills = new ObservableCollection<EntryHoldKillEvent>(),
+                PlayersHurted = new Collection<PlayerHurtedEvent>(),
+                Kills = new Collection<KillEvent>(),
+                Assists = new Collection<KillEvent>(),
+                Deaths = new Collection<KillEvent>(),
+                EntryHoldKills = new Collection<EntryHoldKillEvent>(),
                 RoundsMoneyEarned = new Dictionary<int, int>(),
-                Clutches = new ObservableCollection<ClutchEvent>(),
-                EntryKills = new ObservableCollection<EntryKillEvent>(),
+                Clutches = new Collection<ClutchEvent>(),
+                EntryKills = new Collection<EntryKillEvent>(),
                 EquipementValueRounds = new Dictionary<int, int>(),
                 StartMoneyRounds = new Dictionary<int, int>(),
             };

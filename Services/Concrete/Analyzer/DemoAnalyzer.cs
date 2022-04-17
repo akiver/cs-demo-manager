@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Core.Models;
 using Core.Models.Events;
 using Core.Models.protobuf;
@@ -366,7 +365,7 @@ namespace Services.Concrete.Analyzer
                                 RoundNumber = CurrentRound.Number,
                                 Duration = player.FlashDuration - pl.FlashDurationTemp,
                             };
-                            Application.Current.Dispatcher.Invoke(() => Demo.PlayerBlinded.Add(playerBlindedEvent));
+                            Demo.PlayerBlinded.Add(playerBlindedEvent);
                         }
                     }
                 }
@@ -405,7 +404,7 @@ namespace Services.Concrete.Analyzer
                         PlayerSteamId = player.SteamID,
                         PlayerHasBomb = player.Weapons.FirstOrDefault(w => w.Weapon == EquipmentElement.Bomb) != null,
                     };
-                    Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                    Demo.PositionPoints.Add(positionPoint);
                 }
             }
         }
@@ -561,16 +560,13 @@ namespace Services.Concrete.Analyzer
             {
                 killEvent.AssisterSteamId = assister.SteamId;
                 killEvent.AssisterName = assister.Name;
-                Application.Current.Dispatcher.Invoke(() => assister.Assists.Add(killEvent));
+                assister.Assists.Add(killEvent);
             }
 
-            Application.Current.Dispatcher.Invoke(delegate
-            {
-                Demo.Kills.Add(killEvent);
-                CurrentRound.Kills.Add(killEvent);
-                killer?.Kills.Add(killEvent);
-                killed.Deaths.Add(killEvent);
-            });
+            Demo.Kills.Add(killEvent);
+            CurrentRound.Kills.Add(killEvent);
+            killer?.Kills.Add(killEvent);
+            killed.Deaths.Add(killEvent);
 
             if (AnalyzePlayersPosition)
             {
@@ -584,7 +580,7 @@ namespace Services.Concrete.Analyzer
                     Event = killEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -610,39 +606,36 @@ namespace Services.Concrete.Analyzer
                 Demo.Surrender = IsHalfMatch ? Demo.TeamCT : Demo.TeamT;
             }
 
-            Application.Current.Dispatcher.Invoke(delegate
+            // update round won status for entry kills / hold kills
+            if (e.Winner.ToSide() == CurrentRound.EntryKillEvent?.KillerSide)
             {
-                // update round won status for entry kills / hold kills
-                if (e.Winner.ToSide() == CurrentRound.EntryKillEvent?.KillerSide)
-                {
-                    CurrentRound.EntryKillEvent.HasWonRound = true;
-                }
+                CurrentRound.EntryKillEvent.HasWonRound = true;
+            }
 
-                if (e.Winner.ToSide() == CurrentRound.EntryHoldKillEvent?.KillerSide)
-                {
-                    CurrentRound.EntryHoldKillEvent.HasWonRound = true;
-                }
+            if (e.Winner.ToSide() == CurrentRound.EntryHoldKillEvent?.KillerSide)
+            {
+                CurrentRound.EntryHoldKillEvent.HasWonRound = true;
+            }
 
-                List<Player> playerWithEntryKill = Demo.Players.Where(p => p.HasEntryKill).ToList();
-                foreach (Player player in playerWithEntryKill)
+            List<Player> playerWithEntryKill = Demo.Players.Where(p => p.HasEntryKill).ToList();
+            foreach (Player player in playerWithEntryKill)
+            {
+                if (player.Side == e.Winner.ToSide())
                 {
-                    if (player.Side == e.Winner.ToSide())
-                    {
-                        player.EntryKills.Last().HasWonRound = true;
-                    }
+                    player.EntryKills.Last().HasWonRound = true;
                 }
+            }
 
-                List<Player> playerWithEntryHoldKill = Demo.Players.Where(p => p.HasEntryHoldKill).ToList();
-                foreach (Player player in playerWithEntryHoldKill)
+            List<Player> playerWithEntryHoldKill = Demo.Players.Where(p => p.HasEntryHoldKill).ToList();
+            foreach (Player player in playerWithEntryHoldKill)
+            {
+                if (player.Side == e.Winner.ToSide())
                 {
-                    if (player.Side == e.Winner.ToSide())
-                    {
-                        player.EntryHoldKills.Last().HasWonRound = true;
-                    }
+                    player.EntryHoldKills.Last().HasWonRound = true;
                 }
+            }
 
-                ComputeEseaRws();
-            });
+            ComputeEseaRws();
         }
 
         /// <summary>
@@ -687,7 +680,7 @@ namespace Services.Concrete.Analyzer
 
             if (!IsLastRoundHalf || !IsRoundEndOccured)
             {
-                Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Add(CurrentRound));
+                Demo.Rounds.Add(CurrentRound);
             }
 
             if (!IsOvertime && IsLastRoundHalf)
@@ -747,7 +740,7 @@ namespace Services.Concrete.Analyzer
 
             Demo.BombPlantedCount++;
             CurrentRound.BombPlantedCount++;
-            Application.Current.Dispatcher.Invoke(() => Demo.BombPlanted.Add(bombPlantedEvent));
+            Demo.BombPlanted.Add(bombPlantedEvent);
             CurrentRound.BombPlanted = bombPlantedEvent;
 
             if (AnalyzePlayersPosition && e.Player.SteamID != 0)
@@ -762,7 +755,7 @@ namespace Services.Concrete.Analyzer
                     Event = bombPlantedEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -791,7 +784,7 @@ namespace Services.Concrete.Analyzer
 
             Demo.BombDefusedCount++;
             CurrentRound.BombDefusedCount++;
-            Application.Current.Dispatcher.Invoke(() => Demo.BombDefused.Add(bombDefusedEvent));
+            Demo.BombDefused.Add(bombDefusedEvent);
             CurrentRound.BombDefused = bombDefusedEvent;
 
             if (AnalyzePlayersPosition && bombDefusedEvent.DefuserSteamId != 0)
@@ -806,7 +799,7 @@ namespace Services.Concrete.Analyzer
                     Event = bombDefusedEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -832,7 +825,7 @@ namespace Services.Concrete.Analyzer
 
             Demo.BombExplodedCount++;
             CurrentRound.BombExplodedCount++;
-            Application.Current.Dispatcher.Invoke(() => Demo.BombExploded.Add(bombExplodedEvent));
+            Demo.BombExploded.Add(bombExplodedEvent);
             CurrentRound.BombExploded = bombExplodedEvent;
 
             if (AnalyzePlayersPosition && planter != null)
@@ -847,7 +840,7 @@ namespace Services.Concrete.Analyzer
                     Event = bombExplodedEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -948,7 +941,7 @@ namespace Services.Concrete.Analyzer
 
             if (e.Weapon.Class == EquipmentClass.Grenade)
             {
-                Application.Current.Dispatcher.Invoke(() => CurrentRound.WeaponFired.Add(shoot));
+                CurrentRound.WeaponFired.Add(shoot);
             }
 
             switch (e.Weapon.Weapon)
@@ -976,7 +969,7 @@ namespace Services.Concrete.Analyzer
                     break;
             }
 
-            Application.Current.Dispatcher.Invoke(() => Demo.WeaponFired.Add(shoot));
+            Demo.WeaponFired.Add(shoot);
 
             if (e.Shooter.SteamID == 0)
             {
@@ -1008,7 +1001,7 @@ namespace Services.Concrete.Analyzer
                         Event = shoot,
                         RoundNumber = CurrentRound.Number,
                     };
-                    Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                    Demo.PositionPoints.Add(positionPoint);
                     break;
             }
         }
@@ -1065,7 +1058,7 @@ namespace Services.Concrete.Analyzer
                                 Event = molotovEvent,
                                 RoundNumber = CurrentRound.Number,
                             };
-                            Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                            Demo.PositionPoints.Add(positionPoint);
                         }
                     }
 
@@ -1074,11 +1067,11 @@ namespace Services.Concrete.Analyzer
                         EquipmentElement lastNadeType = LastNadeTypeThrown.Dequeue();
                         if (lastNadeType == EquipmentElement.Molotov)
                         {
-                            Application.Current.Dispatcher.Invoke(() => Demo.MolotovsFireStarted.Add(molotovEvent));
+                            Demo.MolotovsFireStarted.Add(molotovEvent);
                         }
                         else
                         {
-                            Application.Current.Dispatcher.Invoke(() => Demo.IncendiariesFireStarted.Add(molotovEvent));
+                            Demo.IncendiariesFireStarted.Add(molotovEvent);
                         }
                     }
 
@@ -1136,7 +1129,7 @@ namespace Services.Concrete.Analyzer
                             Event = molotovEvent,
                             RoundNumber = CurrentRound.Number,
                         };
-                        Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                        Demo.PositionPoints.Add(positionPoint);
                     }
 
                     break;
@@ -1163,7 +1156,7 @@ namespace Services.Concrete.Analyzer
                 },
             };
 
-            Application.Current.Dispatcher.Invoke(() => CurrentRound.ExplosiveGrenadesExploded.Add(explosiveEvent));
+            CurrentRound.ExplosiveGrenadesExploded.Add(explosiveEvent);
 
             if (AnalyzePlayersPosition && thrower != null)
             {
@@ -1177,7 +1170,7 @@ namespace Services.Concrete.Analyzer
                     Event = explosiveEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -1231,7 +1224,7 @@ namespace Services.Concrete.Analyzer
                 }
             }
 
-            Application.Current.Dispatcher.Invoke(() => CurrentRound.FlashbangsExploded.Add(flashbangEvent));
+            CurrentRound.FlashbangsExploded.Add(flashbangEvent);
 
             if (AnalyzePlayersPosition && thrower != null)
             {
@@ -1245,7 +1238,7 @@ namespace Services.Concrete.Analyzer
                     RoundNumber = CurrentRound.Number,
                     Event = flashbangEvent,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -1270,7 +1263,7 @@ namespace Services.Concrete.Analyzer
                 },
             };
 
-            Application.Current.Dispatcher.Invoke(() => CurrentRound.SmokeStarted.Add(smokeEvent));
+            CurrentRound.SmokeStarted.Add(smokeEvent);
 
             if (AnalyzePlayersPosition && thrower != null)
             {
@@ -1284,7 +1277,7 @@ namespace Services.Concrete.Analyzer
                     Event = smokeEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -1315,7 +1308,7 @@ namespace Services.Concrete.Analyzer
                     Event = smokeEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -1339,7 +1332,7 @@ namespace Services.Concrete.Analyzer
                     Y = e.Position.Y,
                 },
             };
-            Application.Current.Dispatcher.Invoke(() => Demo.DecoyStarted.Add(decoyStartedEvent));
+            Demo.DecoyStarted.Add(decoyStartedEvent);
 
             if (AnalyzePlayersPosition && thrower != null)
             {
@@ -1353,7 +1346,7 @@ namespace Services.Concrete.Analyzer
                     Event = decoyStartedEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -1383,7 +1376,7 @@ namespace Services.Concrete.Analyzer
                     Event = decoyEndedEvent,
                     RoundNumber = CurrentRound.Number,
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.PositionPoints.Add(positionPoint));
+                Demo.PositionPoints.Add(positionPoint);
             }
         }
 
@@ -1450,13 +1443,10 @@ namespace Services.Concrete.Analyzer
                 AttackerY = e.Attacker?.Position.Y ?? 0,
             };
 
-            Application.Current.Dispatcher.Invoke(delegate
-            {
-                Demo.PlayersHurted.Add(playerHurtedEvent);
-                attacker?.PlayersHurted.Add(playerHurtedEvent);
-                hurted.PlayersHurted.Add(playerHurtedEvent);
-                CurrentRound.PlayersHurted.Add(playerHurtedEvent);
-            });
+            Demo.PlayersHurted.Add(playerHurtedEvent);
+            attacker?.PlayersHurted.Add(playerHurtedEvent);
+            hurted.PlayersHurted.Add(playerHurtedEvent);
+            CurrentRound.PlayersHurted.Add(playerHurtedEvent);
         }
 
         /// <summary>
@@ -1499,15 +1489,15 @@ namespace Services.Concrete.Analyzer
                     Name = e.Swapped.Name,
                     Side = e.NewTeam.ToSide(),
                 };
-                Application.Current.Dispatcher.Invoke(() => Demo.Players.Add(newPlayer));
+                Demo.Players.Add(newPlayer);
                 if (e.NewTeam.ToSide() == Side.CounterTerrorist)
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(newPlayer));
+                    Demo.TeamCT.Players.Add(newPlayer);
                     newPlayer.TeamName = Demo.TeamCT.Name;
                 }
                 else
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(newPlayer));
+                    Demo.TeamT.Players.Add(newPlayer);
                     newPlayer.TeamName = Demo.TeamT.Name;
                 }
 
@@ -1738,13 +1728,10 @@ namespace Services.Concrete.Analyzer
                 _playerInClutch1 = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID && p.IsAlive);
                 if (_playerInClutch1 != null)
                 {
-                    Application.Current.Dispatcher.Invoke(delegate
+                    _playerInClutch1.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
                     {
-                        _playerInClutch1.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
-                        {
-                            RoundNumber = CurrentRound.Number,
-                            OpponentCount = counterTerroristAliveCount,
-                        });
+                        RoundNumber = CurrentRound.Number,
+                        OpponentCount = counterTerroristAliveCount,
                     });
                     return;
                 }
@@ -1762,13 +1749,10 @@ namespace Services.Concrete.Analyzer
                 _playerInClutch1 = Demo.Players.FirstOrDefault(p => p.SteamId == pl.SteamID && p.IsAlive);
                 if (_playerInClutch1 != null)
                 {
-                    Application.Current.Dispatcher.Invoke(delegate
+                    _playerInClutch1.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
                     {
-                        _playerInClutch1.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
-                        {
-                            RoundNumber = CurrentRound.Number,
-                            OpponentCount = terroristAliveCount,
-                        });
+                        RoundNumber = CurrentRound.Number,
+                        OpponentCount = terroristAliveCount,
                     });
                     return;
                 }
@@ -1796,13 +1780,10 @@ namespace Services.Concrete.Analyzer
                     return;
                 }
 
-                Application.Current.Dispatcher.Invoke(delegate
+                _playerInClutch2.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
                 {
-                    _playerInClutch2.Clutches.Add(new ClutchEvent(Parser.IngameTick, Parser.CurrentTime)
-                    {
-                        RoundNumber = CurrentRound.Number,
-                        OpponentCount = 1,
-                    });
+                    RoundNumber = CurrentRound.Number,
+                    OpponentCount = 1,
                 });
             }
         }
@@ -1986,57 +1967,54 @@ namespace Services.Concrete.Analyzer
                 return;
             }
 
-            Application.Current.Dispatcher.Invoke(delegate
+            if (killEvent.KillerSide == Side.Terrorist)
             {
-                if (killEvent.KillerSide == Side.Terrorist)
+                // This is an entry kill
+                killer.HasEntryKill = true;
+                killed.HasEntryKill = true;
+                EntryKillEvent entryKillEvent = new EntryKillEvent(Parser.IngameTick, Parser.CurrentTime)
                 {
-                    // This is an entry kill
-                    killer.HasEntryKill = true;
-                    killed.HasEntryKill = true;
-                    EntryKillEvent entryKillEvent = new EntryKillEvent(Parser.IngameTick, Parser.CurrentTime)
-                    {
-                        RoundNumber = CurrentRound.Number,
-                        KilledSteamId = killed.SteamId,
-                        KilledName = killed.Name,
-                        KilledSide = killEvent.KilledSide,
-                        KillerSteamId = killer.SteamId,
-                        KillerName = killer.Name,
-                        KillerSide = killEvent.KillerSide,
-                        Weapon = killEvent.Weapon,
-                    };
-                    CurrentRound.EntryKillEvent = entryKillEvent;
-                    EntryKillEvent killerEvent = CurrentRound.EntryKillEvent.Clone();
-                    killerEvent.HasWon = true;
-                    killer.EntryKills.Add(killerEvent);
-                    EntryKillEvent killedEvent = CurrentRound.EntryKillEvent.Clone();
-                    killedEvent.HasWon = false;
-                    killed.EntryKills.Add(killedEvent);
-                }
-                else
+                    RoundNumber = CurrentRound.Number,
+                    KilledSteamId = killed.SteamId,
+                    KilledName = killed.Name,
+                    KilledSide = killEvent.KilledSide,
+                    KillerSteamId = killer.SteamId,
+                    KillerName = killer.Name,
+                    KillerSide = killEvent.KillerSide,
+                    Weapon = killEvent.Weapon,
+                };
+                CurrentRound.EntryKillEvent = entryKillEvent;
+                EntryKillEvent killerEvent = CurrentRound.EntryKillEvent.Clone();
+                killerEvent.HasWon = true;
+                killer.EntryKills.Add(killerEvent);
+                EntryKillEvent killedEvent = CurrentRound.EntryKillEvent.Clone();
+                killedEvent.HasWon = false;
+                killed.EntryKills.Add(killedEvent);
+            }
+            else
+            {
+                // CT done the kill , it's an entry hold kill
+                killer.HasEntryHoldKill = true;
+                killed.HasEntryHoldKill = true;
+                EntryHoldKillEvent entryHoldKillEvent = new EntryHoldKillEvent(Parser.IngameTick, Parser.CurrentTime)
                 {
-                    // CT done the kill , it's an entry hold kill
-                    killer.HasEntryHoldKill = true;
-                    killed.HasEntryHoldKill = true;
-                    EntryHoldKillEvent entryHoldKillEvent = new EntryHoldKillEvent(Parser.IngameTick, Parser.CurrentTime)
-                    {
-                        RoundNumber = CurrentRound.Number,
-                        KilledSteamId = killed.SteamId,
-                        KilledName = killed.Name,
-                        KilledSide = killEvent.KilledSide,
-                        KillerSteamId = killer.SteamId,
-                        KillerName = killer.Name,
-                        KillerSide = killEvent.KillerSide,
-                        Weapon = killEvent.Weapon,
-                    };
-                    CurrentRound.EntryHoldKillEvent = entryHoldKillEvent;
-                    EntryHoldKillEvent killerEvent = CurrentRound.EntryHoldKillEvent.Clone();
-                    killerEvent.HasWon = true;
-                    killer.EntryHoldKills.Add(killerEvent);
-                    EntryHoldKillEvent killedEvent = CurrentRound.EntryHoldKillEvent.Clone();
-                    killedEvent.HasWon = false;
-                    killed.EntryHoldKills.Add(killedEvent);
-                }
-            });
+                    RoundNumber = CurrentRound.Number,
+                    KilledSteamId = killed.SteamId,
+                    KilledName = killed.Name,
+                    KilledSide = killEvent.KilledSide,
+                    KillerSteamId = killer.SteamId,
+                    KillerName = killer.Name,
+                    KillerSide = killEvent.KillerSide,
+                    Weapon = killEvent.Weapon,
+                };
+                CurrentRound.EntryHoldKillEvent = entryHoldKillEvent;
+                EntryHoldKillEvent killerEvent = CurrentRound.EntryHoldKillEvent.Clone();
+                killerEvent.HasWon = true;
+                killer.EntryHoldKills.Add(killerEvent);
+                EntryHoldKillEvent killedEvent = CurrentRound.EntryHoldKillEvent.Clone();
+                killedEvent.HasWon = false;
+                killed.EntryHoldKills.Add(killedEvent);
+            }
 
             IsFirstKillOccured = true;
         }
@@ -2449,13 +2427,13 @@ namespace Services.Concrete.Analyzer
             if (Demo.Rounds.Count < Demo.ScoreTeamCt + Demo.ScoreTeamT)
             {
                 UpdateKillsCount();
-                Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Add(CurrentRound));
+                Demo.Rounds.Add(CurrentRound);
             }
 
             // Add last overtime if there was an overtime at the end
             if (IsOvertime)
             {
-                Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
+                Demo.Overtimes.Add(CurrentOvertime);
             }
 
             // Scores are reset on ESEA demos when the match is over
@@ -2487,6 +2465,8 @@ namespace Services.Concrete.Analyzer
                 }
             }
 
+            Demo.ComputeStats();
+
             ClearQueues();
             DemoBackup = null;
         }
@@ -2515,11 +2495,8 @@ namespace Services.Concrete.Analyzer
         /// </summary>
         protected void BackupToLastRound()
         {
-            Application.Current.Dispatcher.Invoke(delegate
-            {
-                CurrentRound.Reset(Parser.IngameTick);
-                Demo.BackupFromDemo(DemoBackup);
-            });
+            CurrentRound.Reset(Parser.IngameTick);
+            Demo.BackupFromDemo(DemoBackup);
             IsFreezetime = true;
             IsRoundEndOccured = false;
             IsFirstShotOccured = false;

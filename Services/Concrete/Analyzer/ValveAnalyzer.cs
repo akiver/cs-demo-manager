@@ -3,7 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Core.Models;
 using Core.Models.Events;
 using DemoInfo;
@@ -168,11 +167,8 @@ namespace Services.Concrete.Analyzer
                             Name = player.Name,
                             Side = player.Team.ToSide(),
                         };
-                        Application.Current.Dispatcher.Invoke(delegate
-                        {
-                            Demo.Players.Add(pl);
-                            pl.TeamName = pl.Side == Side.CounterTerrorist ? Demo.TeamCT.Name : Demo.TeamT.Name;
-                        });
+                        Demo.Players.Add(pl);
+                        pl.TeamName = pl.Side == Side.CounterTerrorist ? Demo.TeamCT.Name : Demo.TeamT.Name;
                     }
                 }
             }
@@ -192,7 +188,7 @@ namespace Services.Concrete.Analyzer
             if (IsLastRoundHalf)
             {
                 SwapTeams();
-                Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Add(CurrentRound));
+                Demo.Rounds.Add(CurrentRound);
             }
 
             if (IsOvertime && IsLastRoundHalf)
@@ -215,7 +211,7 @@ namespace Services.Concrete.Analyzer
                 _isRoundFinal = false;
                 if (IsOvertime)
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
+                    Demo.Overtimes.Add(CurrentOvertime);
                     IsHalfMatch = !IsHalfMatch;
                 }
                 else
@@ -431,11 +427,11 @@ namespace Services.Concrete.Analyzer
             {
                 if (Demo.TeamCT.Players.Count > Demo.TeamT.Players.Count)
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.TeamT.Players.Add(player));
+                    Demo.TeamT.Players.Add(player);
                 }
                 else
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.TeamCT.Players.Add(player));
+                    Demo.TeamCT.Players.Add(player);
                 }
             }
         }
@@ -446,7 +442,7 @@ namespace Services.Concrete.Analyzer
 
         private void StartMatch()
         {
-            Application.Current.Dispatcher.Invoke(() => Demo.Rounds.Clear());
+            Demo.Rounds.Clear();
             IsMatchStarted = true;
 
             if (!string.IsNullOrWhiteSpace(Parser.CTClanName))
@@ -476,21 +472,18 @@ namespace Services.Concrete.Analyzer
                     };
                     if (!Demo.Players.Contains(pl))
                     {
-                        Application.Current.Dispatcher.Invoke(delegate
+                        Demo.Players.Add(pl);
+                        if (pl.Side == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(pl))
                         {
-                            Demo.Players.Add(pl);
-                            if (pl.Side == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(pl))
-                            {
-                                Demo.TeamCT.Players.Add(pl);
-                                pl.TeamName = Demo.TeamCT.Name;
-                            }
+                            Demo.TeamCT.Players.Add(pl);
+                            pl.TeamName = Demo.TeamCT.Name;
+                        }
 
-                            if (pl.Side == Side.Terrorist && !Demo.TeamT.Players.Contains(pl))
-                            {
-                                Demo.TeamT.Players.Add(pl);
-                                pl.TeamName = Demo.TeamT.Name;
-                            }
-                        });
+                        if (pl.Side == Side.Terrorist && !Demo.TeamT.Players.Contains(pl))
+                        {
+                            Demo.TeamT.Players.Add(pl);
+                            pl.TeamName = Demo.TeamT.Name;
+                        }
                     }
                 }
             }

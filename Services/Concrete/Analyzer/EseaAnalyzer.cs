@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows;
 using Core.Models;
 using DemoInfo;
 using Player = Core.Models.Player;
@@ -200,7 +199,7 @@ namespace Services.Concrete.Analyzer
                 // if the number of rounds played during OT == 2x MR OT detected, the OT is over
                 if (MrOvertime * 2 == RoundCountOvertime)
                 {
-                    Application.Current.Dispatcher.Invoke(() => Demo.Overtimes.Add(CurrentOvertime));
+                    Demo.Overtimes.Add(CurrentOvertime);
                     CreateNewOvertime();
                     RoundCountOvertime = 0;
                 }
@@ -232,56 +231,53 @@ namespace Services.Concrete.Analyzer
             {
                 if (player.SteamID != 0)
                 {
-                    Application.Current.Dispatcher.Invoke(delegate
+                    Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
+                    if (pl == null)
                     {
-                        Player pl = Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID);
-                        if (pl == null)
+                        pl = new Player
                         {
-                            pl = new Player
-                            {
-                                SteamId = player.SteamID,
-                                Name = player.Name,
-                                Side = player.Team.ToSide(),
-                            };
-                            Demo.Players.Add(pl);
-                        }
+                            SteamId = player.SteamID,
+                            Name = player.Name,
+                            Side = player.Team.ToSide(),
+                        };
+                        Demo.Players.Add(pl);
+                    }
 
-                        if (pl.Side == Side.CounterTerrorist)
+                    if (pl.Side == Side.CounterTerrorist)
+                    {
+                        pl.TeamName = Demo.TeamCT.Name;
+                        // Check swap
+                        if (Demo.TeamT.Players.Contains(pl))
                         {
-                            pl.TeamName = Demo.TeamCT.Name;
-                            // Check swap
-                            if (Demo.TeamT.Players.Contains(pl))
+                            Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
+                            Demo.TeamT.Players.Remove(pl);
+                        }
+                        else
+                        {
+                            if (!Demo.TeamCT.Players.Contains(pl))
                             {
-                                Demo.TeamCT.Players.Add(Demo.TeamT.Players.First(p => p.Equals(pl)));
-                                Demo.TeamT.Players.Remove(pl);
-                            }
-                            else
-                            {
-                                if (!Demo.TeamCT.Players.Contains(pl))
-                                {
-                                    Demo.TeamCT.Players.Add(pl);
-                                }
+                                Demo.TeamCT.Players.Add(pl);
                             }
                         }
+                    }
 
-                        if (pl.Side == Side.Terrorist)
+                    if (pl.Side == Side.Terrorist)
+                    {
+                        pl.TeamName = Demo.TeamT.Name;
+                        // Check swap
+                        if (Demo.TeamCT.Players.Contains(pl))
                         {
-                            pl.TeamName = Demo.TeamT.Name;
-                            // Check swap
-                            if (Demo.TeamCT.Players.Contains(pl))
+                            Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
+                            Demo.TeamCT.Players.Remove(pl);
+                        }
+                        else
+                        {
+                            if (!Demo.TeamT.Players.Contains(pl))
                             {
-                                Demo.TeamT.Players.Add(Demo.TeamCT.Players.First(p => p.Equals(pl)));
-                                Demo.TeamCT.Players.Remove(pl);
-                            }
-                            else
-                            {
-                                if (!Demo.TeamT.Players.Contains(pl))
-                                {
-                                    Demo.TeamT.Players.Add(pl);
-                                }
+                                Demo.TeamT.Players.Add(pl);
                             }
                         }
-                    });
+                    }
                 }
             }
         }
