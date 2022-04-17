@@ -9,7 +9,7 @@ namespace Services.Concrete.Movie
 {
     public static class FFmpegService
     {
-        private const string FFMPEG_VERSION = "4.3.1-2021-01-26";
+        private const string FFMPEG_VERSION = "5.0.1";
         private static string ARCHIVE_NAME = $"ffmpeg-{FFMPEG_VERSION}-essentials_build";
         private static string DOWNLOAD_ENDPOINT = $"https://www.gyan.dev/ffmpeg/builds/packages/{ARCHIVE_NAME}.zip";
 
