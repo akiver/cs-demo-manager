@@ -6,7 +6,7 @@
                      xmlns:properties="clr-namespace:Manager.Properties"
                      xmlns:converters="clr-namespace:Manager.Converters"
                      GlowBrush="{DynamicResource MahApps.Brushes.Highlight}"
-                     Title="CSGO Demos Manager"
+                     Title="CSGO Demo Manager"
                      SaveWindowPosition="True"
                      DataContext="{Binding Main, Source={StaticResource Locator}}">
 
@@ -595,38 +595,24 @@
                                            CommandParameter="https://github.com/akiver/CSGO-Demos-Manager/issues">
                                     GitHub
                                 </Hyperlink>
-                                <Run Text="{x:Static properties:Resources.OrSendAn}" />
-                                <Hyperlink Style="{StaticResource HyperLinkStyle}"
-                                           Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="mailto:contact@csgo-demos-manager.com">
-                                    <Run Text="{x:Static properties:Resources.Email}" />
-                                    <Hyperlink.ContextMenu>
-                                        <ContextMenu>
-                                            <MenuItem Header="{x:Static properties:Resources.CopyEmailAddress}"
-                                                      Command="{Binding CopyTextCommand}"
-                                                      CommandParameter="contact@csgo-demos-manager.com" />
-                                        </ContextMenu>
-                                    </Hyperlink.ContextMenu>
-                                </Hyperlink>
                                 <Run Text="." />
                             </TextBlock>
                             <TextBlock Style="{StaticResource SubTitleSettingsStyle}">
                                 <Run Text="{x:Static properties:Resources.WantSayThank}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://csgo-demos-manager.com/donate">
+                                           CommandParameter="https://csgo-demo-manager.com/download">
                                     <Run Text="{x:Static properties:Resources.Donation}" />
                                 </Hyperlink>
                                 <Run Text="." />
-                                <LineBreak />
                             </TextBlock>
                             <TextBlock Style="{StaticResource SubTitleSettingsStyle}"
                                        Foreground="{StaticResource LightRedColorBrush}">
                                 <Run Text="{x:Static properties:Resources.AlwaysDownload}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://csgo-demos-manager.com">
-                                    https://csgo-demos-manager.com
+                                           CommandParameter="https://csgo-demo-manager.com">
+                                    https://csgo-demo-manager.com
                                 </Hyperlink>
                                 <Run Text="." />
                             </TextBlock>

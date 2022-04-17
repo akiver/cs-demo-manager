@@ -81,9 +81,6 @@
   <data name="EncounteredBug" xml:space="preserve">
     <value>Ha bármilyen hibával vagy felvetésed támadna, nyugodtan nyiss egy topicot</value>
   </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>vagy küldj egy emailt</value>
-  </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>Ha megszeretnéd köszönni, nyugodtan </value>
   </data>
@@ -227,9 +224,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Játékidő</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>email</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Első ölés</value>
@@ -539,9 +533,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>által</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>Email cím másolása</value>

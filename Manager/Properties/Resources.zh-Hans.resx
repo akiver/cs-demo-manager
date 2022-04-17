@@ -73,16 +73,13 @@
     <value>关于</value>
   </data>
   <data name="FreeSoftware" xml:space="preserve">
-    <value>CSGO Demos Manager 将永远是一个免费的开源软件。</value>
+    <value>CSGO Demo Manager 将永远是一个免费的开源软件。</value>
   </data>
   <data name="SourceCodeAvailable" xml:space="preserve">
     <value>源代码地址：</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
     <value>若您遇到问题或有任何建议，敬请前往</value>
-  </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>提交 Issue，或者将其发送至我的</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>若您想对本软件的作者表达谢意，敬请</value>
@@ -227,9 +224,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>持续时间</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>破点杀敌</value>
@@ -539,9 +533,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>头像</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>by</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>复制 Email 地址</value>
@@ -3098,7 +3089,7 @@
     <value>正在安装 FFmpeg 组件……</value>
   </data>
   <data name="CreditsTools" xml:space="preserve">
-    <value>CSGO Demos Manager 使用以下工具：</value>
+    <value>CSGO Demo Manager 使用以下工具：</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>工具</value>

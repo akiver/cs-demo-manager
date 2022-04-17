@@ -274,9 +274,6 @@
   <data name="DprFull" xml:space="preserve">
     <value>MPR (Morts Par Round)</value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>email</value>
-  </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Victimes d'ouvertures</value>
   </data>
@@ -407,16 +404,13 @@
     <value>Regarder pires moments (CTRL+L)</value>
   </data>
   <data name="FreeSoftware" xml:space="preserve">
-    <value>CSGO Demos Manager est une logiciel open source gratuit et le restera.</value>
+    <value>CSGO Demo Manager est une logiciel open source gratuit et le restera.</value>
   </data>
   <data name="SourceCodeAvailable" xml:space="preserve">
     <value>Le code source est disponible sur</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
     <value>Si vous rencontrez un bug ou avez une suggestion, merci de créer une issue sur</value>
-  </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>ou envoyer un</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>Si vous le souhaitez, vous pouvez supporter le développement de l'application, en faisant un</value>
@@ -426,9 +420,6 @@
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>Copier l'adresse mail</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>par</value>
   </data>
   <data name="ToolTipBack" xml:space="preserve">
     <value>Retour (CTRL+B)</value>
@@ -3108,7 +3099,7 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
     <value>Installation de FFmpeg en cours...</value>
   </data>
   <data name="CreditsTools" xml:space="preserve">
-    <value>CSGO Demos Manager utilise en interne les utilitaires suivants:</value>
+    <value>CSGO Demo Manager utilise en interne les utilitaires suivants:</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Utilitaires</value>
@@ -3164,5 +3155,20 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="TooltipCancel" xml:space="preserve">
     <value>Annuler</value>
+  </data>
+  <data name="DialogErrorDownloadingDemos" xml:space="preserve">
+    <value>Une erreur est survenue pendant le téléchargement des démos.</value>
+  </data>
+  <data name="DialogUnknownBoilerExitCode" xml:space="preserve">
+    <value>Une erreur est survenue, code: ({0}).</value>
+  </data>
+  <data name="HeaderKast" xml:space="preserve">
+    <value>KAST</value>
+  </data>
+  <data name="HeaderToolTipKast" xml:space="preserve">
+    <value>Pourcentage de round pour lequels le joueur a soit fait un kill, une assistance, a survécu ou a été revenge</value>
+  </data>
+  <data name="Kast" xml:space="preserve">
+    <value>KAST</value>
   </data>
 </root>

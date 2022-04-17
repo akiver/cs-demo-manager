@@ -81,9 +81,6 @@
   <data name="EncounteredBug" xml:space="preserve">
     <value>Hvis du støder på et problem eller har et forslag, du er velkommen til at åbne et spørgsmål på</value>
   </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>Eller send en</value>
-  </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>Hvis du vil sige tak, er du velkommen til at lave en</value>
   </data>
@@ -227,9 +224,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Varighed</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>email</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Entry Drab</value>
@@ -540,9 +534,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>af</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>kopier Email adresse</value>

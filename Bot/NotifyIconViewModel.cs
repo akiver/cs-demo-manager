@@ -146,7 +146,7 @@ namespace SuspectsBot
                         bool hasNewSuspect = await _bot.Check();
                         if (!hasNewSuspect)
                         {
-                            App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, Properties.Resources.BalloonNoNewSuspectsFound, BalloonIcon.Info);
+                            App.NotifyIcon.ShowBalloonTip("CSGO Demo Manager", Properties.Resources.BalloonNoNewSuspectsFound, BalloonIcon.Info);
                         }
                     },
                 };
@@ -290,7 +290,7 @@ namespace SuspectsBot
                     }
                 }
 
-                App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME,
+                App.NotifyIcon.ShowBalloonTip("CSGO Demo Manager",
                     string.Format(Properties.Resources.XsuspectsHaveBeenBanned, _bannedSteamIdList.Count), BalloonIcon.Warning);
                 App.NotifyIcon.TrayBalloonTipClicked += NewSuspectsBalloonClicked;
             }
@@ -311,7 +311,7 @@ namespace SuspectsBot
         {
             if (SendDownloadNotificationOnGameClosed)
             {
-                App.NotifyIcon.ShowBalloonTip(AppSettings.APP_NAME, Properties.Resources.DownloadDemos, BalloonIcon.Info);
+                App.NotifyIcon.ShowBalloonTip("CSGO Demo Manager", Properties.Resources.DownloadDemos, BalloonIcon.Info);
                 App.NotifyIcon.TrayBalloonTipClicked += CsgoClosedBalloonClicked;
             }
         }

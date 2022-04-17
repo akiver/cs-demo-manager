@@ -73,16 +73,13 @@
     <value>Über</value>
   </data>
   <data name="FreeSoftware" xml:space="preserve">
-    <value>CSGO Demos Manager ist eine kostenlose Open-Source-Software und wird es immer bleiben.</value>
+    <value>CSGO Demo Manager ist eine kostenlose Open-Source-Software und wird es immer bleiben.</value>
   </data>
   <data name="SourceCodeAvailable" xml:space="preserve">
     <value>Der Quellcode ist erhältlich unter</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
     <value>Falls Sie einen Fehler finden oder Vorschläge finden, melden Sie sich bitte unter</value>
-  </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>oder senden Sie an</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>Wenn Sie Danke sagen möchten, können Sie gerne </value>
@@ -227,9 +224,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Dauer</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>E-Mail</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Offensive Kills</value>
@@ -539,9 +533,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>durch</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>Kopiere E-Mail-Adresse</value>
@@ -2557,5 +2548,8 @@ Falls Sie es einschalten, wird das Spiel (immer) mit dem "-insecure" Startparame
   <data name="DialogErrorWhileGeneratingVideo" xml:space="preserve">
     <value>Beim Generieren des Videos ist ein Fehler aufgetreten.
 {0}</value>
+  </data>
+  <data name="CreditsTools" xml:space="preserve">
+    <value>CSGO Demo Manager benutzt intern folgende Tools:</value>
   </data>
 </root>

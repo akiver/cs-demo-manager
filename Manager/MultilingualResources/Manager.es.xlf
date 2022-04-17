@@ -95,8 +95,8 @@
           <target state="translated">Sobre</target>
         </trans-unit>
         <trans-unit id="FreeSoftware" translate="yes" xml:space="preserve">
-          <source>CSGO Demos Manager is a free open source software and will always be.</source>
-          <target state="translated">CSGO Demos Manager gratuito y de código libre, y siempre lo será</target>
+          <source>CSGO Demo Manager is a free open source software and will always be.</source>
+          <target state="final">CSGO Demo Manager gratuito y de código libre, y siempre lo será</target>
         </trans-unit>
         <trans-unit id="SourceCodeAvailable" translate="yes" xml:space="preserve">
           <source>Source code is available on</source>
@@ -105,10 +105,6 @@
         <trans-unit id="EncounteredBug" translate="yes" xml:space="preserve">
           <source>If you encountered a bug or have any suggestions, feel free to open an issue on</source>
           <target state="translated">Si has encontrado un bug o tienes alguna sugerencia, no dude en abrir un issue en</target>
-        </trans-unit>
-        <trans-unit id="OrSendAn" translate="yes" xml:space="preserve">
-          <source>or send an</source>
-          <target state="translated">o enviar un</target>
         </trans-unit>
         <trans-unit id="WantSayThank" translate="yes" xml:space="preserve">
           <source>If you want to say thank you, please feel free to make a</source>
@@ -299,10 +295,6 @@
         <trans-unit id="Duration" translate="yes" xml:space="preserve">
           <source>Duration</source>
           <target state="translated">Duración</target>
-        </trans-unit>
-        <trans-unit id="Email" translate="yes" xml:space="preserve">
-          <source>email</source>
-          <target state="translated">email</target>
         </trans-unit>
         <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
           <source>Entry kills</source>
@@ -712,10 +704,6 @@
         <trans-unit id="Avatar" translate="yes" xml:space="preserve">
           <source>Avatar</source>
           <target state="translated">Avatar</target>
-        </trans-unit>
-        <trans-unit id="By" translate="yes" xml:space="preserve">
-          <source>by</source>
-          <target state="translated">por</target>
         </trans-unit>
         <trans-unit id="CopyEmailAddress" translate="yes" xml:space="preserve">
           <source>Copy email address</source>
@@ -4157,8 +4145,8 @@ Please update it by clicking on the "Update" button.</target>
           <target state="new">Installing FFmpeg...</target>
         </trans-unit>
         <trans-unit id="CreditsTools" translate="yes" xml:space="preserve">
-          <source>CSGO Demos Manager uses internally the following tools:</source>
-          <target state="new">CSGO Demos Manager uses internally the following tools:</target>
+          <source>CSGO Demo Manager uses internally the following tools:</source>
+          <target state="new">CSGO Demo Manager uses internally the following tools:</target>
         </trans-unit>
         <trans-unit id="Tools" translate="yes" xml:space="preserve">
           <source>Tools</source>

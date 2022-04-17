@@ -73,16 +73,13 @@
     <value>O programie</value>
   </data>
   <data name="FreeSoftware" xml:space="preserve">
-    <value>CSGO Demos Manager jest w pełni otwartym oprogramowaniem i zawsze nim będzie.</value>
+    <value>CSGO Demo Manager jest w pełni otwartym oprogramowaniem i zawsze nim będzie.</value>
   </data>
   <data name="SourceCodeAvailable" xml:space="preserve">
     <value>Kod źródłowy jest dostępny na</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
     <value>Jeśli napotkałeś błąd lub masz jakieś sugestie, utwórz temat na</value>
-  </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>lub wyślij </value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>Jeśli chcesz mi podziękować, przekaż</value>
@@ -227,9 +224,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Czas trwania</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>email</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Entry kille</value>
@@ -539,9 +533,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Awatar</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>przez</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>Skopiuj adres email</value>

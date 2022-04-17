@@ -363,10 +363,6 @@
           <source>DPR (Death Per Round)</source>
           <target state="final">MPR (Morts Par Round)</target>
         </trans-unit>
-        <trans-unit id="Email" translate="yes" xml:space="preserve">
-          <source>email</source>
-          <target state="final">email</target>
-        </trans-unit>
         <trans-unit id="EntryKills" translate="yes" xml:space="preserve">
           <source>Entry kills</source>
           <target state="final">Victimes d'ouvertures</target>
@@ -540,8 +536,8 @@
           <target state="final">Regarder pires moments (CTRL+L)</target>
         </trans-unit>
         <trans-unit id="FreeSoftware" translate="yes" xml:space="preserve">
-          <source>CSGO Demos Manager is a free open source software and will always be.</source>
-          <target state="final">CSGO Demos Manager est une logiciel open source gratuit et le restera.</target>
+          <source>CSGO Demo Manager is a free open source software and will always be.</source>
+          <target state="final">CSGO Demo Manager est une logiciel open source gratuit et le restera.</target>
         </trans-unit>
         <trans-unit id="SourceCodeAvailable" translate="yes" xml:space="preserve">
           <source>Source code is available on</source>
@@ -550,10 +546,6 @@
         <trans-unit id="EncounteredBug" translate="yes" xml:space="preserve">
           <source>If you encountered a bug or have any suggestions, feel free to open an issue on</source>
           <target state="final">Si vous rencontrez un bug ou avez une suggestion, merci de créer une issue sur</target>
-        </trans-unit>
-        <trans-unit id="OrSendAn" translate="yes" xml:space="preserve">
-          <source>or send an</source>
-          <target state="final">ou envoyer un</target>
         </trans-unit>
         <trans-unit id="WantSayThank" translate="yes" xml:space="preserve">
           <source>If you want to say thank you, please feel free to make a</source>
@@ -566,10 +558,6 @@
         <trans-unit id="CopyEmailAddress" translate="yes" xml:space="preserve">
           <source>Copy email address</source>
           <target state="final">Copier l'adresse mail</target>
-        </trans-unit>
-        <trans-unit id="By" translate="yes" xml:space="preserve">
-          <source>by</source>
-          <target state="final">par</target>
         </trans-unit>
         <trans-unit id="ToolTipBack" translate="yes" xml:space="preserve">
           <source>Back (CTRL+B)</source>
@@ -4146,8 +4134,8 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <target state="final">Installation de FFmpeg en cours...</target>
         </trans-unit>
         <trans-unit id="CreditsTools" translate="yes" xml:space="preserve">
-          <source>CSGO Demos Manager uses internally the following tools:</source>
-          <target state="final">CSGO Demos Manager utilise en interne les utilitaires suivants:</target>
+          <source>CSGO Demo Manager uses internally the following tools:</source>
+          <target state="final">CSGO Demo Manager utilise en interne les utilitaires suivants:</target>
         </trans-unit>
         <trans-unit id="Tools" translate="yes" xml:space="preserve">
           <source>Tools</source>
@@ -4224,23 +4212,23 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         </trans-unit>
         <trans-unit id="DialogErrorDownloadingDemos" translate="yes" xml:space="preserve">
           <source>An error occurred while downloading demos.</source>
-          <target state="new">An error occurred while downloading demos.</target>
+          <target state="final">Une erreur est survenue pendant le téléchargement des démos.</target>
         </trans-unit>
         <trans-unit id="DialogUnknownBoilerExitCode" translate="yes" xml:space="preserve">
           <source>An unknown error happened, code: ({0}).</source>
-          <target state="new">An unknown error happened, code: ({0}).</target>
+          <target state="final">Une erreur est survenue, code: ({0}).</target>
         </trans-unit>
         <trans-unit id="HeaderKast" translate="yes" xml:space="preserve">
           <source>KAST</source>
-          <target state="new">KAST</target>
+          <target state="final">KAST</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipKast" translate="yes" xml:space="preserve">
           <source>Percentage of rounds in which the player either had a kill, assist, survived or was traded</source>
-          <target state="new">Percentage of rounds in which the player either had a kill, assist, survived or was traded</target>
+          <target state="final">Pourcentage de round pour lequels le joueur a soit fait un kill, une assistance, a survécu ou a été revenge</target>
         </trans-unit>
         <trans-unit id="Kast" translate="yes" xml:space="preserve">
           <source>KAST</source>
-          <target state="new">KAST</target>
+          <target state="final">KAST</target>
         </trans-unit>
       </group>
     </body>

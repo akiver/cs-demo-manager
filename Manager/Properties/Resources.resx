@@ -185,16 +185,13 @@
     <value>About</value>
   </data>
   <data name="FreeSoftware" xml:space="preserve">
-    <value>CSGO Demos Manager is a free open source software and will always be.</value>
+    <value>CSGO Demo Manager is a free open source software and will always be.</value>
   </data>
   <data name="SourceCodeAvailable" xml:space="preserve">
     <value>Source code is available on</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
     <value>If you encountered a bug or have any suggestions, feel free to open an issue on</value>
-  </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>or send an</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>If you want to say thank you, please feel free to make a</value>
@@ -339,9 +336,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Duration</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>email</value>
   </data>
   <data name="EnableHlae" xml:space="preserve">
     <value>Enable HLAE</value>
@@ -654,9 +648,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>by</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>Copy email address</value>
@@ -3213,7 +3204,7 @@ Please update it by clicking on the "Update" button.</value>
     <value>with</value>
   </data>
   <data name="CreditsTools" xml:space="preserve">
-    <value>CSGO Demos Manager uses internally the following tools:</value>
+    <value>CSGO Demo Manager uses internally the following tools:</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>

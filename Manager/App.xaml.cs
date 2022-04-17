@@ -116,8 +116,8 @@ namespace Manager
                 }
 
                 CultureInfo culture = new CultureInfo(Settings.Default.Language);
-                CultureInfo.DefaultThreadCurrentCulture = culture;
-                CultureInfo.DefaultThreadCurrentUICulture = culture;
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
 
                 if (Settings.Default.StartBotOnLaunch)
                 {

@@ -73,16 +73,13 @@
     <value>Sobre</value>
   </data>
   <data name="FreeSoftware" xml:space="preserve">
-    <value>CSGO Demos Manager gratuito y de código libre, y siempre lo será</value>
+    <value>CSGO Demo Manager gratuito y de código libre, y siempre lo será</value>
   </data>
   <data name="SourceCodeAvailable" xml:space="preserve">
     <value>El código fuente está disponible en</value>
   </data>
   <data name="EncounteredBug" xml:space="preserve">
     <value>Si has encontrado un bug o tienes alguna sugerencia, no dude en abrir un issue en</value>
-  </data>
-  <data name="OrSendAn" xml:space="preserve">
-    <value>o enviar un</value>
   </data>
   <data name="WantSayThank" xml:space="preserve">
     <value>Si quiere agradecer, puede hacer una</value>
@@ -227,9 +224,6 @@
   </data>
   <data name="Duration" xml:space="preserve">
     <value>Duración</value>
-  </data>
-  <data name="Email" xml:space="preserve">
-    <value>email</value>
   </data>
   <data name="EntryKills" xml:space="preserve">
     <value>Muertes de entrada</value>
@@ -539,9 +533,6 @@
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
-  </data>
-  <data name="By" xml:space="preserve">
-    <value>por</value>
   </data>
   <data name="CopyEmailAddress" xml:space="preserve">
     <value>Copiar dirección de email</value>

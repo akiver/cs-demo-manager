@@ -20,7 +20,6 @@
 
     <Style TargetType="TextBlock" x:Key="TitleSettingsStyle">
         <Setter Property="FontSize" Value="22" />
-        <Setter Property="Margin" Value="0 0 0 10" />
     </Style>
 
     <Style TargetType="TextBlock" x:Key="SubTitleSettingsStyle">

@@ -584,15 +584,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to by.
-        /// </summary>
-        public static string By {
-            get {
-                return ResourceManager.GetString("By", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Cache size.
         /// </summary>
         public static string CacheSize {
@@ -935,7 +926,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CSGO Demos Manager uses internally the following tools:.
+        ///   Looks up a localized string similar to CSGO Demo Manager uses internally the following tools:.
         /// </summary>
         public static string CreditsTools {
             get {
@@ -2607,15 +2598,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to email.
-        /// </summary>
-        public static string Email {
-            get {
-                return ResourceManager.GetString("Email", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Enable HLAE.
         /// </summary>
         public static string EnableHlae {
@@ -3067,7 +3049,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CSGO Demos Manager is a free open source software and will always be..
+        ///   Looks up a localized string similar to CSGO Demo Manager is a free open source software and will always be..
         /// </summary>
         public static string FreeSoftware {
             get {
@@ -6601,15 +6583,6 @@ namespace Manager.Properties {
         public static string OpenFolderOnEncodeEnd {
             get {
                 return ResourceManager.GetString("OpenFolderOnEncodeEnd", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to or send an.
-        /// </summary>
-        public static string OrSendAn {
-            get {
-                return ResourceManager.GetString("OrSendAn", resourceCulture);
             }
         }
         

@@ -41,7 +41,7 @@ namespace Manager.ViewModel
 
         private RelayCommand<string> _removeFolderCommand;
 
-        public string CreditsText => AppSettings.APP_NAME + " " + AppSettings.APP_VERSION + " " + Properties.Resources.By + " " + AppSettings.AUTHOR;
+        public string CreditsText => "CSGO Demo Manager " + AppSettings.APP_VERSION;
 
         private readonly IDialogService _dialogService;
 
@@ -52,8 +52,6 @@ namespace Manager.ViewModel
         private RelayCommand _windowClosedCommand;
 
         private RelayCommand<string> _handleHyperLinkCommand;
-
-        private RelayCommand<string> _copyTextCommand;
 
         private readonly ICacheService _cacheService;
 
@@ -340,12 +338,6 @@ namespace Manager.ViewModel
                            }));
             }
         }
-
-        /// <summary>
-        /// Command to copy text to clipboard
-        /// </summary>
-        public RelayCommand<string> CopyTextCommand => _copyTextCommand
-                                                       ?? (_copyTextCommand = new RelayCommand<string>(Clipboard.SetText));
 
         public RelayCommand<string> HandleHyperLinkCommand
         {
