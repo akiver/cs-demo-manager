@@ -208,7 +208,7 @@
     <Compile Include="Models\Excel\PlayerStats.cs" />
     <Compile Include="Models\Excel\WeaponsData.cs" />
     <Compile Include="Models\GameLauncherConfiguration.cs" />
-    <Compile Include="Models\GitHub\LatestRelease.cs" />
+    <Compile Include="Models\GitHub\Release.cs" />
     <Compile Include="Models\Heatmap\HeatmapConfiguration.cs" />
     <Compile Include="Models\Heatmap\HeatmapPointComparer.cs" />
     <Compile Include="Models\Movie\MovieConfiguration.cs" />

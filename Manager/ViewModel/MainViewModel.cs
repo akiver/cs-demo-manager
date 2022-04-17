@@ -413,7 +413,7 @@ namespace Manager.ViewModel
                     string url = "https://api.github.com/repos/akiver/csgo-demos-manager/releases/latest";
                     HttpResponseMessage response = await httpClient.GetAsync(url);
                     string json = await response.Content.ReadAsStringAsync();
-                    LatestRelease release = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<LatestRelease>(json));
+                    Release release = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Release>(json));
                     string version = release.TagName;
                     if (version.StartsWith("v"))
                     {

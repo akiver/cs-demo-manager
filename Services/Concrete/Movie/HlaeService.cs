@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Net;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Core;
 using ICSharpCode.SharpZipLib.Zip;
@@ -12,7 +13,7 @@ namespace Services.Concrete.Movie
 {
     public static class HlaeService
     {
-        public const string GITHUB_ENDPOINT = "https://api.github.com/repos/advancedfx/advancedfx/releases/latest";
+        public const string GITHUB_ENDPOINT = "https://api.github.com/repos/advancedfx/advancedfx/releases";
 
         /// <summary>
         /// Return the path where HLAE is installed.
@@ -72,7 +73,7 @@ namespace Services.Concrete.Movie
         {
             try
             {
-                LatestRelease release = await GetLastReleaseObject();
+                Release release = await GetLastReleaseObject();
                 string version = release.TagName.Remove(0, 1);
                 string currentVersion = GetHlaeVersion();
                 if (string.IsNullOrEmpty(currentVersion))
@@ -93,7 +94,7 @@ namespace Services.Concrete.Movie
         {
             try
             {
-                LatestRelease release = await GetLastReleaseObject();
+                Release release = await GetLastReleaseObject();
                 if (release?.Assets != null && release.Assets.Count > 0)
                 {
                     string archivePath = AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "hlae.zip";
@@ -133,7 +134,7 @@ namespace Services.Concrete.Movie
             return false;
         }
 
-        private static async Task<LatestRelease> GetLastReleaseObject()
+        private static async Task<Release> GetLastReleaseObject()
         {
             try
             {
@@ -150,9 +151,20 @@ namespace Services.Concrete.Movie
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         string json = reader.ReadToEnd();
-                        return await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<LatestRelease>(json));
+                        List<Release> releases =  await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Release>>(json));
+                        foreach (Release release in releases)
+                        {
+                            if (release.PreRelease)
+                            {
+                                continue;
+                            }
+
+                            return release;
+                        }
                     }
                 }
+
+                throw new Exception("HLAE release not found");
             }
             catch (Exception e)
             {

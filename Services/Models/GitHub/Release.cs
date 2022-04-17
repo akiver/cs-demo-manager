@@ -8,10 +8,12 @@ namespace Services.Models.GitHub
         [JsonProperty("browser_download_url")] public string BrowserDownloadUrl { get; set; }
     }
 
-    public class LatestRelease
+    public class Release
     {
         [JsonProperty("tag_name")] public string TagName { get; set; }
 
         [JsonProperty("assets")] public List<Asset> Assets { get; set; }
+
+        [JsonProperty("prerelease")] public bool PreRelease { get; set; }
     }
 }
