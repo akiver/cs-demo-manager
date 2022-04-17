@@ -83,7 +83,7 @@ namespace Manager.ViewModel.Demos
 
         private string _filterDemoText;
 
-        private RelayCommand<Demo> _showDemoDetailsCommand;
+        private RelayCommand<ObservableCollection<Demo>> _showDemoDetailsCommand;
 
         private RelayCommand _goToAccountStatsCommand;
 
@@ -105,9 +105,9 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand<Demo> _watchLowlightCommand;
 
-        private RelayCommand<Demo> _browseToDemoCommand;
+        private RelayCommand<ObservableCollection<Demo>> _browseToDemoCommand;
 
-        private RelayCommand<Demo> _copyPlaydemoCommand;
+        private RelayCommand<ObservableCollection<Demo>> _copyPlaydemoCommand;
 
         private RelayCommand<ObservableCollection<Demo>> _exportJsonCommand;
 
@@ -137,7 +137,7 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand _downloadDemoFromShareCodeCommand;
 
-        private RelayCommand<Demo> _copyShareCodeCommand;
+        private RelayCommand<ObservableCollection<Demo>> _copyShareCodeCommand;
 
         private RelayCommand _showDialogThirdPartySelectionCommand;
 
@@ -691,14 +691,15 @@ namespace Manager.ViewModel.Demos
         /// <summary>
         /// Command to show details view
         /// </summary>
-        public RelayCommand<Demo> ShowDemoDetailsCommand
+        public RelayCommand<ObservableCollection<Demo>> ShowDemoDetailsCommand
         {
             get
             {
                 return _showDemoDetailsCommand
-                       ?? (_showDemoDetailsCommand = new RelayCommand<Demo>(
-                           async demo =>
+                       ?? (_showDemoDetailsCommand = new RelayCommand<ObservableCollection<Demo>>(
+                           async demos =>
                            {
+                               Demo demo = demos[0];
                                if (!File.Exists(demo.Path))
                                {
                                    await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorDemoNotFound, demo.Name),
@@ -708,7 +709,7 @@ namespace Manager.ViewModel.Demos
 
                                Navigation.ShowDemoDetails(demo);
                            },
-                           demo => demo != null));
+                           demos => demos != null && demos.Any()));
             }
         }
 
@@ -737,18 +738,19 @@ namespace Manager.ViewModel.Demos
         /// <summary>
         /// Command to copy watch command to clipboard
         /// </summary>
-        public RelayCommand<Demo> CopyPlaydemoCommand
+        public RelayCommand<ObservableCollection<Demo>> CopyPlaydemoCommand
         {
             get
             {
                 return _copyPlaydemoCommand
-                       ?? (_copyPlaydemoCommand = new RelayCommand<Demo>(
-                           demo =>
+                       ?? (_copyPlaydemoCommand = new RelayCommand<ObservableCollection<Demo>>(
+                           demos =>
                            {
+                               Demo demo = demos[0];
                                Clipboard.SetText("playdemo \"" + demo.Path + "\"");
                                CommandManager.InvalidateRequerySuggested();
                            },
-                           demo => demo != null));
+                           demos => demos != null && demos.Any()));
             }
         }
 
@@ -924,14 +926,15 @@ namespace Manager.ViewModel.Demos
         /// <summary>
         /// Browse to demo command
         /// </summary>
-        public RelayCommand<Demo> BrowseToDemoCommand
+        public RelayCommand<ObservableCollection<Demo>> BrowseToDemoCommand
         {
             get
             {
                 return _browseToDemoCommand
-                       ?? (_browseToDemoCommand = new RelayCommand<Demo>(
-                           async demo =>
+                       ?? (_browseToDemoCommand = new RelayCommand<ObservableCollection<Demo>>(
+                           async demos =>
                            {
+                               Demo demo = demos[0];
                                if (!File.Exists(demo.Path))
                                {
                                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoNotFound, MessageDialogStyle.Affirmative);
@@ -941,7 +944,7 @@ namespace Manager.ViewModel.Demos
                                string argument = "/select, \"" + demo.Path + "\"";
                                Process.Start("explorer.exe", argument);
                            },
-                           demo => demo != null));
+                           demos => demos != null && demos.Any()));
             }
         }
 
@@ -1157,14 +1160,15 @@ namespace Manager.ViewModel.Demos
         /// <summary>
         /// Command to copy demo's share code
         /// </summary>
-        public RelayCommand<Demo> CopyShareCodeCommand
+        public RelayCommand<ObservableCollection<Demo>> CopyShareCodeCommand
         {
             get
             {
                 return _copyShareCodeCommand
-                       ?? (_copyShareCodeCommand = new RelayCommand<Demo>(
-                           async demo =>
+                       ?? (_copyShareCodeCommand = new RelayCommand<ObservableCollection<Demo>>(
+                           async demos =>
                            {
+                               Demo demo = demos[0];
                                string shareCode = await _demosService.GetShareCode(demo);
                                if (shareCode == string.Empty)
                                {
@@ -1176,7 +1180,7 @@ namespace Manager.ViewModel.Demos
                                Clipboard.SetText(shareCode);
                                CommandManager.InvalidateRequerySuggested();
                            },
-                           (demo) => demo != null));
+                           (demos) => demos != null && demos.Any()));
             }
         }
 

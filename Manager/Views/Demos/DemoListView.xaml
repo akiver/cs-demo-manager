@@ -17,7 +17,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:RowDemoDoubleClickedToDemoDetailsConverter x:Key="RowDemoDoubleClickedToDemoDetails" />
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" True="Visible" />
             <converters:BooleanInvertedConverter x:Key="BooleanInvertedConverter" />
             <converters:DemoSourceToImageConverter x:Key="DemoSourceToImageConverter" />
@@ -244,9 +243,7 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
-                                           PassEventArgsToCommand="True"
-                                           EventArgsConverter="{StaticResource RowDemoDoubleClickedToDemoDetails}"
-                                           EventArgsConverterParameter="{Binding SelectedValue, ElementName=DataGridDemos}" />
+                                           CommandParameter="{Binding SelectedDemos}" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction

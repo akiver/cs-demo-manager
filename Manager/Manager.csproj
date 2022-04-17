@@ -178,8 +178,6 @@
     <Compile Include="Converters\RankToImageConverter.cs" />
     <Compile Include="Converters\RoundEndReasonToStringConverter.cs" />
     <Compile Include="Converters\RoundTypeToStringConverter.cs" />
-    <Compile Include="Converters\RowDemoDoubleClickedToDemoDetailsConverter.cs" />
-    <Compile Include="Converters\RowSuspectDoubleClickedToProfileConverter.cs" />
     <Compile Include="Converters\SideToStringConverter.cs" />
     <Compile Include="Converters\SteamAccountStatusToStringConverter.cs" />
     <Compile Include="Converters\SteamAccountVisibilityToStringConverter.cs" />

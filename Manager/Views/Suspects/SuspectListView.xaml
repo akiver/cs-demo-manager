@@ -16,7 +16,6 @@
 
     <UserControl.Resources>
         <ResourceDictionary>
-            <converters:RowSuspectDoubleClickedToProfileConverter x:Key="RowSuspectDoubleClickedToProfile" />
             <converters:BooleanToStringConverter x:Key="BooleanToStringConverter"
                                                  True="{x:Static properties:Resources.Yes}"
                                                  False="{x:Static properties:Resources.No}" />
@@ -151,9 +150,7 @@
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=SuspectList.GoToSuspectProfileCommand}"
-                                           PassEventArgsToCommand="True"
-                                           EventArgsConverter="{StaticResource RowSuspectDoubleClickedToProfile}"
-                                           EventArgsConverterParameter="{Binding SelectedSuspect}" />
+                                           CommandParameter="{Binding SelectedSuspect}" />
                 </i:EventTrigger>
                 <i:EventTrigger EventName="SelectionChanged">
                     <i:InvokeCommandAction Command="{Binding SuspectsSelectionChangedCommand}"
