@@ -31,6 +31,7 @@ using Newtonsoft.Json;
 using Services.Concrete;
 using Services.Concrete.Excel;
 using Services.Concrete.ThirdParties;
+using Services.Exceptions;
 using Services.Interfaces;
 using Services.Models;
 using Services.Models.ThirdParties;
@@ -1220,14 +1221,20 @@ namespace Manager.ViewModel.Demos
                                        _cts = new CancellationTokenSource();
                                    }
 
-                                   int result = await _steamService.GenerateMatchListFile(_cts.Token);
-                                   await HandleBoilerResult(result);
+                                   int exitCode = await _steamService.GenerateMatchListFile(_cts.Token);
+                                   await HandleBoilerResult(exitCode);
+                               }
+                               catch (InvalidBoilerExecutableException)
+                               {
+                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerIncorrect, MessageDialogStyle.Affirmative);
                                }
                                catch (Exception e)
                                {
                                    if (!(e is TaskCanceledException))
                                    {
                                        Logger.Instance.Log(e);
+                                       await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorDownloadingDemos,
+                                           MessageDialogStyle.Affirmative);
                                    }
                                }
                                finally
@@ -1276,21 +1283,25 @@ namespace Manager.ViewModel.Demos
                                        _cts = new CancellationTokenSource();
                                    }
 
-                                   int result = await _steamService.DownloadDemoFromShareCode(shareCode, _cts.Token);
-
-                                   await HandleBoilerResult(result, false);
+                                   int exitCode = await _steamService.DownloadDemoFromShareCode(shareCode, _cts.Token);
+                                   await HandleBoilerResult(exitCode, false);
+                               }
+                               catch (InvalidBoilerExecutableException)
+                               {
+                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerIncorrect, MessageDialogStyle.Affirmative);
+                               }
+                               catch (ShareCode.ShareCodePatternException)
+                               {
+                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidShareCode,
+                                       MessageDialogStyle.Affirmative);
                                }
                                catch (Exception e)
                                {
-                                   if (e is ShareCode.ShareCodePatternException)
-                                   {
-                                       await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorInvalidShareCode,
-                                           MessageDialogStyle.Affirmative);
-                                   }
-
-                                   if (!(e is TaskCanceledException) && !(e is ShareCode.ShareCodePatternException))
+                                   if (!(e is TaskCanceledException))
                                    {
                                        Logger.Instance.Log(e);
+                                       await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorDownloadingDemos,
+                                           MessageDialogStyle.Affirmative);
                                    }
                                }
                                finally
@@ -1995,47 +2006,48 @@ namespace Manager.ViewModel.Demos
             return true;
         }
 
-        private async Task HandleBoilerResult(int result, bool isRecentMatches = true)
+        private async Task HandleBoilerResult(int exitCode, bool isRecentMatches = true)
         {
-            switch (result)
+            switch (exitCode)
             {
-                case 1:
-                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerNotFound, MessageDialogStyle.Affirmative);
+                case (int)BoilerExitCode.Success:
+                    await ProcessDemosDownloaded();
                     break;
-                case 2:
-                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogBoilerIncorrect, MessageDialogStyle.Affirmative);
-                    break;
-                case -1:
-                    await _dialogService.ShowErrorAsync("Invalid arguments", MessageDialogStyle.Affirmative);
-                    break;
-                case -2:
-                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogRestartSteam, MessageDialogStyle.Affirmative);
-                    break;
-                case -3:
-                case -4:
-                    await
-                        _dialogService.ShowErrorAsync(Properties.Resources.DialogSteamNotRunningOrNotLoggedIn, MessageDialogStyle.Affirmative);
-                    break;
-                case -5:
-                case -6:
-                case -7:
+                case (int)BoilerExitCode.FatalError:
                     string msg = isRecentMatches
-                        ? string.Format(Properties.Resources.DialogErrorWhileRetrievingMatchesData, result)
+                        ? Properties.Resources.DialogErrorWhileRetrievingMatchesData
                         : Properties.Resources.DialogErrorWhileRetrievingDemoData;
                     await _dialogService.ShowErrorAsync(msg, MessageDialogStyle.Affirmative);
                     break;
-                case -8:
+                case (int)BoilerExitCode.InvalidArguments:
+                    await _dialogService.ShowErrorAsync("Invalid arguments provided to boiler", MessageDialogStyle.Affirmative);
+                    break;
+                case (int)BoilerExitCode.CommunicationFailure:
+                    await _dialogService.ShowErrorAsync("Error while contacting Steam, please retry later", MessageDialogStyle.Affirmative);
+                    break;
+                case (int)BoilerExitCode.AlreadyConnectedToGC:
+                    await _dialogService.ShowErrorAsync("You are already connected to the CSGO game coordinator, make sure to close CSGO and retry", MessageDialogStyle.Affirmative);
+                    break;
+                case (int)BoilerExitCode.SteamRestartRequired:
+                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogRestartSteam, MessageDialogStyle.Affirmative);
+                    break;
+                case (int)BoilerExitCode.SteamNotRunningOrLoggedIn:
+                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogSteamNotRunningOrNotLoggedIn, MessageDialogStyle.Affirmative);
+                    break;
+                case (int)BoilerExitCode.SteamUserNotLoggedIn:
+                    await _dialogService.ShowErrorAsync("Steam account not connected", MessageDialogStyle.Affirmative);
+                    break;
+                case (int)BoilerExitCode.NoMatchesFound:
                     string demoNotFoundMessage = isRecentMatches
                         ? Properties.Resources.DialogNoNewerDemo
                         : Properties.Resources.DialogDemoFromShareCodeNotAvailable;
                     await _dialogService.ShowMessageAsync(demoNotFoundMessage, MessageDialogStyle.Affirmative);
                     break;
-                case 0:
-                    await ProcessDemosDownloaded(isRecentMatches);
+                case (int)BoilerExitCode.WriteFileFailure:
+                    await _dialogService.ShowErrorAsync("An error occurred while writing matches file", MessageDialogStyle.Affirmative);
                     break;
                 default:
-                    await
-                        _dialogService.ShowErrorAsync("Unknown error", MessageDialogStyle.Affirmative);
+                    await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogUnknownBoilerExitCode, exitCode), MessageDialogStyle.Affirmative);
                     break;
             }
         }

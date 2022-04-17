@@ -175,6 +175,8 @@
     <Compile Include="Design\RoundDesignService.cs" />
     <Compile Include="Design\SteamDesignService.cs" />
     <Compile Include="Design\StuffDesignService.cs" />
+    <Compile Include="Concrete\BoilerExitCode.cs" />
+    <Compile Include="Exceptions\InvalidBoilerExecutableException.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Exceptions\Launcher\HlaeNotFound.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
@@ -434,6 +436,18 @@
   <ItemGroup>
     <Resource Include="resources\vdm\spec_player_lock.txt" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="boiler.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="steam_api.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="steam_appid.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets" Label="MultilingualAppToolkit" Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" />
   <Target Name="MATPrerequisite" BeforeTargets="PrepareForBuild" Condition="!Exists('$(MSBuildExtensionsPath)\Microsoft\Multilingual App Toolkit\Microsoft.Multilingual.ResxResources.targets')" Label="MultilingualAppToolkit">

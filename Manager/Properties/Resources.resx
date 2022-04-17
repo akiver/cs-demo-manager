@@ -1827,7 +1827,7 @@
     <value>An error occured while refreshing last rank.</value>
   </data>
   <data name="DialogErrorWhileRetrievingMatchesData" xml:space="preserve">
-    <value>An error occured while retrieving matches information ({0}).</value>
+    <value>An error occured while retrieving matches information.</value>
   </data>
   <data name="DialogExportMultipleOrSingle" xml:space="preserve">
     <value>Do you want to export data into a single file or in multiple files?</value>
@@ -2039,9 +2039,6 @@ If you enable it, the game is launched with the "-insecure" parameter (everytime
   </data>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe is incorrect.</value>
-  </data>
-  <data name="DialogBoilerNotFound" xml:space="preserve">
-    <value>boiler.exe not found.</value>
   </data>
   <data name="DialogDemosMayBeTooOld" xml:space="preserve">
     <value>This demos may be too old, if not please send an email with the attached demos.
@@ -3272,5 +3269,11 @@ Please update it by clicking on the "Update" button.</value>
   </data>
   <data name="TooltipCancel" xml:space="preserve">
     <value>Cancel</value>
+  </data>
+  <data name="DialogErrorDownloadingDemos" xml:space="preserve">
+    <value>An error occurred while downloading demos.</value>
+  </data>
+  <data name="DialogUnknownBoilerExitCode" xml:space="preserve">
+    <value>An unknown error happened, code: ({0}).</value>
   </data>
 </root>

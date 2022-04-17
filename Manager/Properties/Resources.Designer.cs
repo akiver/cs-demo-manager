@@ -19,7 +19,7 @@ namespace Manager.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -1395,15 +1395,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to boiler.exe not found..
-        /// </summary>
-        public static string DialogBoilerNotFound {
-            get {
-                return ResourceManager.GetString("DialogBoilerNotFound", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Chat messages file has been created..
         /// </summary>
         public static string DialogChatFileCreated {
@@ -1624,6 +1615,15 @@ namespace Manager.Properties {
         public static string DialogErrorDemoNotFound {
             get {
                 return ResourceManager.GetString("DialogErrorDemoNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An error occurred while downloading demos..
+        /// </summary>
+        public static string DialogErrorDownloadingDemos {
+            get {
+                return ResourceManager.GetString("DialogErrorDownloadingDemos", resourceCulture);
             }
         }
         
@@ -1861,7 +1861,7 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occured while retrieving matches information ({0})..
+        ///   Looks up a localized string similar to An error occured while retrieving matches information..
         /// </summary>
         public static string DialogErrorWhileRetrievingMatchesData {
             get {
@@ -2476,6 +2476,15 @@ namespace Manager.Properties {
         public static string DialogTitleDownloadDemoFromShareCode {
             get {
                 return ResourceManager.GetString("DialogTitleDownloadDemoFromShareCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An unknown error happened, code: ({0})..
+        /// </summary>
+        public static string DialogUnknownBoilerExitCode {
+            get {
+                return ResourceManager.GetString("DialogUnknownBoilerExitCode", resourceCulture);
             }
         }
         

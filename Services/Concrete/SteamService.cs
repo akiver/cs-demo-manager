@@ -14,6 +14,7 @@ using Core;
 using Core.Models;
 using Core.Models.Steam;
 using Newtonsoft.Json;
+using Services.Exceptions;
 using Services.Interfaces;
 
 namespace Services.Concrete
@@ -24,7 +25,7 @@ namespace Services.Concrete
         private const string PLAYERS_SUMMARIES_URL = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v1/?key={0}&steamids={1}";
         private const string STEAM_RESOLVE_VANITY_URL = "http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/?key={0}&vanityurl={1}";
         private const string BOILER_EXE_NAME = "boiler.exe";
-        private const string BOILER_SHA1 = "80F2C8A1F51118FA450AB9E700645508172B01B8";
+        private const string BOILER_SHA1 = "8C016C34466B1DB5E46B7CE7DECFC5CCA8A7EE2F";
 
         /// <summary>
         /// Return suspect list that have been banned
@@ -324,10 +325,11 @@ namespace Services.Concrete
         private static async Task<int> StartBoiler(CancellationToken ct, string args = "")
         {
             ct.ThrowIfCancellationRequested();
-            string hash = GetSha1HashFile(BOILER_EXE_NAME);
+            string boilerPath = AppDomain.CurrentDomain.BaseDirectory + BOILER_EXE_NAME;
+            string hash = GetSha1HashFile(boilerPath);
             if (!hash.Equals(BOILER_SHA1))
             {
-                return 2;
+                throw new InvalidBoilerExecutableException();
             }
 
             Process[] currentProcess = Process.GetProcessesByName("csgo");
@@ -340,7 +342,7 @@ namespace Services.Concrete
             {
                 StartInfo =
                 {
-                    FileName = BOILER_EXE_NAME,
+                    FileName = boilerPath,
                     Arguments = $"\"{AppSettings.GetMatchListDataFilePath()}\" {args}",
                     UseShellExecute = false,
                     CreateNoWindow = true,

@@ -662,7 +662,7 @@ namespace Services.Concrete
             File.WriteAllText(filePath, jsonBackup);
         }
 
-        public async Task<bool> GenerateJsonAsync(Demo demo, string folderPath)
+        public async Task<string> GenerateJsonAsync(Demo demo, string folderPath)
         {
             JsonSerializerSettings settings = new JsonSerializerSettings
             {
@@ -677,7 +677,7 @@ namespace Services.Concrete
             string json = await Task.Factory.StartNew(() => JsonConvert.SerializeObject(demo, settings));
             File.WriteAllText(filePath, json);
 
-            return true;
+            return filePath;
         }
 
         /// <summary>
