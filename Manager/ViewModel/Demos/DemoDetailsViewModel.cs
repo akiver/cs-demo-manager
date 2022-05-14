@@ -1066,6 +1066,7 @@ namespace Manager.ViewModel.Demos
             SelectedRound = null;
             SelectedPlayerStats = null;
             OvertimesCollection.Clear();
+            Demo = null;
         }
 
         private async void UpdateRoundListStats()

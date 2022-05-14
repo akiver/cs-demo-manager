@@ -96,8 +96,7 @@
         </trans-unit>
         <trans-unit id="FreeSoftware" translate="yes" xml:space="preserve">
           <source>CSGO Demo Manager is a free open source software and will always be.</source>
-          <target state="needs-review-translation">A CSGO Demo menedzser egy ingyenes, nyílt forráskodú program, ami ingyenes is fog maradni.</target>
-          <note from="MultilingualUpdate" annotates="source" priority="2">Please verify the translation’s accuracy as the source string was updated after it was translated.</note>
+          <target state="final">A CSGO Demo menedzser egy ingyenes, nyílt forráskodú program, ami ingyenes is fog maradni.</target>
         </trans-unit>
         <trans-unit id="SourceCodeAvailable" translate="yes" xml:space="preserve">
           <source>Source code is available on</source>
