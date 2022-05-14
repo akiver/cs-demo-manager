@@ -460,8 +460,10 @@ namespace Services.Concrete.Analyzer
                 {
                     KillerX = e.Killer?.Position.X ?? 0,
                     KillerY = e.Killer?.Position.Y ?? 0,
+                    KillerZ = e.Killer?.Position.Z ?? 0,
                     VictimX = e.Victim.Position.X,
                     VictimY = e.Victim.Position.Y,
+                    VictimZ = e.Victim.Position.Z,
                 },
                 TimeDeathSeconds = (float)Math.Round((Parser.IngameTick - CurrentRound.FreezetimeEndTick) / Demo.ServerTickrate, 2),
             };

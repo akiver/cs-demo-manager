@@ -39,8 +39,10 @@ namespace Services.Concrete.Excel.Sheets.Single
                 { "Trade kill", CellType.Boolean },
                 { "Killer X", CellType.Numeric },
                 { "Killer Y", CellType.Numeric },
+                { "Killer Z", CellType.Numeric },
                 { "Victim X", CellType.Numeric },
                 { "Victim Y", CellType.Numeric },
+                { "Victim Z", CellType.Numeric },
             };
             Demo = demo;
             Sheet = workbook.CreateSheet("Kills");
@@ -82,8 +84,10 @@ namespace Services.Concrete.Excel.Sheets.Single
                     SetCellValue(row, columnNumber++, CellType.Boolean, e.IsTradeKill);
                     SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerX);
                     SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerY);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerZ);
                     SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimX);
-                    SetCellValue(row, columnNumber, CellType.Numeric, e.Point.VictimY);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimY);
+                    SetCellValue(row, columnNumber, CellType.Numeric, e.Point.VictimZ);
                 }
             });
         }
