@@ -16,16 +16,6 @@ namespace Services.Concrete.ThirdParties
         {
             new ThirdParty
             {
-                Name = "csgostats",
-                Url = "csgostats.gg",
-            },
-            new ThirdParty
-            {
-                Name = "csgo-stats-net",
-                Url = "csgo-stats.net",
-            },
-            new ThirdParty
-            {
                 Name = "csgo-stats-com",
                 Url = "csgo-stats.com",
             },
@@ -35,10 +25,6 @@ namespace Services.Concrete.ThirdParties
         {
             switch (service)
             {
-                case "csgostats":
-                    return new CsgoStatsService();
-                case "csgo-stats-net":
-                    return new CsgoDashStatsService();
                 case "csgo-stats-com":
                     return new CsgoDashStatsComService();
                 default:
