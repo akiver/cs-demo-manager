@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DemoInfo.ST
 {
@@ -77,9 +73,6 @@ namespace DemoInfo.ST
                         int userDataSize = (int)reader.ReadInt(16);
 
                         reader.ReadBytes(userDataSize);
-                    }
-                    else
-                    {
                     }
                 }
             }

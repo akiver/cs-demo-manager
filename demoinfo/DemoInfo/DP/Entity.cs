@@ -2,10 +2,7 @@
 using DemoInfo.DT;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DemoInfo.DP
 {
@@ -131,68 +128,8 @@ namespace DemoInfo.DP
         public event EventHandler<PropertyUpdateEventArgs<string>> StringRecived;
         public event EventHandler<PropertyUpdateEventArgs<object[]>> ArrayRecived;
 
-#if SAVE_PROP_VALUES
-		public object Value { get; private set; }
-#endif
-
-        /*
-         * DON'T USE THIS.
-         * SERIOUSLY, NO!
-         * THERE IS ONLY _ONE_ PATTERN WHERE THIS IS OKAY.
-         *
-         * SendTableParser.FindByName("CBaseTrigger").OnNewEntity += (s1, newResource) => {
-         * 
-                Dictionary<string, object> values = new Dictionary<string, object>();
-                foreach(var res in newResource.Entity.Props)
-                {
-                    res.DataRecived += (sender, e) => values[e.Property.Entry.PropertyName] = e.Value;
-                }
-                
-         *
-         * The single purpose for this is to see what kind of values an entity has. You can check this faster with this thing.
-         * Really, ignore it if you don't know what you're doing.
-         */
-        [Obsolete("Don't use this attribute. It is only avaible for debugging. Bind to the correct event instead."
-#if !DEBUG
-            , true
-#endif
-        )]
-#pragma warning disable 0067 // this is unused in release builds, just as it should be
-        public event EventHandler<PropertyUpdateEventArgs<object>> DataRecivedDontUse;
-#pragma warning restore 0067
-
-        [Conditional("DEBUG")]
-        private void FireDataReceived_DebugEvent(object val, Entity e)
-        {
-#if DEBUG
-#pragma warning disable 0618
-            if (DataRecivedDontUse != null)
-            {
-                DataRecivedDontUse(this, new PropertyUpdateEventArgs<object>(val, e, this));
-            }
-#pragma warning restore 0618
-#endif
-        }
-
-
-        [Conditional("DEBUG")]
-        private void DeleteDataRecived()
-        {
-#if DEBUG
-#pragma warning disable 0618
-            DataRecivedDontUse = null;
-#pragma warning restore 0618
-#endif
-        }
-
         public void Decode(IBitStream stream, Entity e)
         {
-            //I found no better place for this, sorry.
-            //This checks, when in Debug-Mode
-            //whether you've bound to the right event
-            //Helps finding bugs, where you'd simply miss an update
-            CheckBindings(e);
-
             //So here you start decoding. If you really want 
             //to implement this yourself, GOOD LUCK. 
             //also, be warned: They have 11 ways to read floats. 
@@ -206,9 +143,6 @@ namespace DemoInfo.DP
                     {
                         IntRecived(this, new PropertyUpdateEventArgs<int>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 case SendPropertyType.Int64:
@@ -218,9 +152,6 @@ namespace DemoInfo.DP
                     {
                         Int64Received(this, new PropertyUpdateEventArgs<long>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 case SendPropertyType.Float:
@@ -230,9 +161,6 @@ namespace DemoInfo.DP
                     {
                         FloatRecived(this, new PropertyUpdateEventArgs<float>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 case SendPropertyType.Vector:
@@ -242,9 +170,6 @@ namespace DemoInfo.DP
                     {
                         VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 case SendPropertyType.Array:
@@ -254,9 +179,6 @@ namespace DemoInfo.DP
                     {
                         ArrayRecived(this, new PropertyUpdateEventArgs<object[]>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 case SendPropertyType.String:
@@ -266,9 +188,6 @@ namespace DemoInfo.DP
                     {
                         StringRecived(this, new PropertyUpdateEventArgs<string>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 case SendPropertyType.VectorXY:
@@ -278,9 +197,6 @@ namespace DemoInfo.DP
                     {
                         VectorRecived(this, new PropertyUpdateEventArgs<Vector>(val, e, this));
                     }
-
-                    SaveValue(val);
-                    FireDataReceived_DebugEvent(val, e);
                 }
                     break;
                 default:
@@ -302,79 +218,11 @@ namespace DemoInfo.DP
             ArrayRecived = null;
             StringRecived = null;
             VectorRecived = null;
-
-            DeleteDataRecived();
-        }
-
-        [Conditional("SAVE_PROP_VALUES")]
-        private void SaveValue(object value)
-        {
-#if SAVE_PROP_VALUES
-			this.Value = value;
-#endif
         }
 
         public override string ToString()
         {
             return string.Format("[PropertyEntry: Entry={0}]", Entry);
-        }
-
-        [Conditional("DEBUG")]
-        public void CheckBindings(Entity e)
-        {
-            if (IntRecived != null && Entry.Prop.Type != SendPropertyType.Int)
-            {
-                throw new InvalidOperationException(
-                    string.Format("({0}).({1}) isn't an {2}",
-                        e.ServerClass.Name,
-                        Entry.PropertyName,
-                        SendPropertyType.Int));
-            }
-
-            if (Int64Received != null && Entry.Prop.Type != SendPropertyType.Int64)
-            {
-                throw new InvalidOperationException(
-                    string.Format("({0}).({1}) isn't an {2}",
-                        e.ServerClass.Name,
-                        Entry.PropertyName,
-                        SendPropertyType.Int64));
-            }
-
-            if (FloatRecived != null && Entry.Prop.Type != SendPropertyType.Float)
-            {
-                throw new InvalidOperationException(
-                    string.Format("({0}).({1}) isn't an {2}",
-                        e.ServerClass.Name,
-                        Entry.PropertyName,
-                        SendPropertyType.Float));
-            }
-
-            if (StringRecived != null && Entry.Prop.Type != SendPropertyType.String)
-            {
-                throw new InvalidOperationException(
-                    string.Format("({0}).({1}) isn't an {2}",
-                        e.ServerClass.Name,
-                        Entry.PropertyName,
-                        SendPropertyType.String));
-            }
-
-            if (ArrayRecived != null && Entry.Prop.Type != SendPropertyType.Array)
-            {
-                throw new InvalidOperationException(
-                    string.Format("({0}).({1}) isn't an {2}",
-                        e.ServerClass.Name,
-                        Entry.PropertyName,
-                        SendPropertyType.Array));
-            }
-
-            if (VectorRecived != null && Entry.Prop.Type != SendPropertyType.Vector && Entry.Prop.Type != SendPropertyType.VectorXY)
-            {
-                throw new InvalidOperationException(
-                    string.Format("({0}).({1}) isn't an {2}",
-                        e.ServerClass.Name,
-                        Entry.PropertyName,
-                        SendPropertyType.Vector));
-            }
         }
 
         public static void Emit(Entity entity, object[] captured)

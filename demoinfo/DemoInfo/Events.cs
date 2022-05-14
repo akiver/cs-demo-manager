@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 
 namespace DemoInfo
@@ -102,12 +99,6 @@ namespace DemoInfo
     {
         public Equipment Weapon { get; internal set; }
 
-        [Obsolete("Use \"Victim\" instead. This will be removed soon™", false)]
-        public Player DeathPerson
-        {
-            get { return Victim; }
-        }
-
         public Player Victim { get; internal set; }
 
         public Player Killer { get; internal set; }
@@ -174,7 +165,6 @@ namespace DemoInfo
     {
         //previous blind implementation
         public Player[] FlashedPlayers { get; internal set; }
-        //
 
         public FlashEventArgs() : base(EquipmentElement.Flash)
         {

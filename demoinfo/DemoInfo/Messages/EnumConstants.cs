@@ -1,8 +1,5 @@
-﻿using System;
-
-namespace DemoInfo.Messages
+﻿namespace DemoInfo.Messages
 {
-#if !SLOW_PROTOBUF
     public enum NET_Messages
     {
         net_NOP = 0,
@@ -45,7 +42,6 @@ namespace DemoInfo.Messages
         svc_CmdKeyValues = 34,
         svc_EncryptedData = 35,
     }
-#endif
 
     public enum User_Messages
     {

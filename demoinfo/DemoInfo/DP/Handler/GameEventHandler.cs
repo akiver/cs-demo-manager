@@ -1,11 +1,6 @@
-﻿using DemoInfo.Messages;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.IO;
 
 namespace DemoInfo.DP.Handler
 {
@@ -143,10 +138,6 @@ namespace DemoInfo.DP.Handler
             {
                 parser.RaiseFreezetimeEnded();
             }
-
-            //if (eventDescriptor.Name != "player_footstep" && eventDescriptor.Name != "weapon_fire" && eventDescriptor.Name != "player_jump") {
-            //	Console.WriteLine (eventDescriptor.Name);
-            //}
 
             switch (eventDescriptor.Name)
             {

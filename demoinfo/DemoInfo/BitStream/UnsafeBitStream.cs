@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Diagnostics;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
@@ -157,12 +156,8 @@ namespace DemoInfo.BitStreamImpl
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private uint PeekInt(int numBits, bool mayOverflow = false)
+        private uint PeekInt(int numBits)
         {
-            BitStreamUtil.AssertMaxBits(32, numBits);
-            Debug.Assert(mayOverflow || Offset + numBits <= BitsInBuffer + SLED * 8, "gg",
-                "This code just fell apart. We're all dead. Offset={0} numBits={1} BitsInBuffer={2}", Offset, numBits, BitsInBuffer);
-
             return (uint)((*(ulong*)(PBuffer + ((Offset >> 3) & ~3)) << (8 * 8 - (Offset & (8 * 4 - 1)) - numBits)) >> (8 * 8 - numBits));
         }
 
@@ -190,7 +185,6 @@ namespace DemoInfo.BitStreamImpl
 
         public byte ReadByte(int bits)
         {
-            BitStreamUtil.AssertMaxBits(8, bits);
             var ret = (byte)PeekInt(bits);
             if (TryAdvance(bits))
             {
@@ -280,7 +274,6 @@ namespace DemoInfo.BitStreamImpl
         public int ReadSignedInt(int numBits)
         {
             // Just like PeekInt, but we cast to signed long before the shr because we need to sext
-            BitStreamUtil.AssertMaxBits(32, numBits);
             var result = (int)((long)(*(ulong*)(PBuffer + ((Offset >> 3) & ~3)) << (8 * 8 - (Offset & (8 * 4 - 1)) - numBits)) >>
                                (8 * 8 - numBits));
             if (TryAdvance(numBits))
@@ -329,34 +322,30 @@ namespace DemoInfo.BitStreamImpl
 
         public int ReadProtobufVarInt()
         {
-            var availableBits = BitsInBuffer + SLED * 8 - Offset;
             // Start by overflowingly reading 32 bits.
             // Reading beyond the buffer contents is safe in this case,
             // because the sled ensures that we stay inside of the buffer.
-            uint buf = PeekInt(32, true);
+            uint buf = PeekInt(32);
 
             // always take the first bytes; others if necessary
             uint result = buf & MSK_1;
-            BitStreamUtil.AssertMaxBits(availableBits, 1 * 8);
             if ((buf & MSB_1) != 0)
             {
                 result |= (buf & MSK_2) >> 1;
-                BitStreamUtil.AssertMaxBits(availableBits, 1 * 8);
                 if ((buf & MSB_2) != 0)
                 {
                     result |= (buf & MSK_3) >> 2;
-                    BitStreamUtil.AssertMaxBits(availableBits, 2 * 8);
                     if ((buf & MSB_3) != 0)
                     {
                         result |= (buf & MSK_4) >> 3;
-                        BitStreamUtil.AssertMaxBits(availableBits, 3 * 8);
                         if ((buf & MSB_4) != 0)
                             // dammit, it's too large (probably negative)
                             // fall back to the slow implementation, that's rare
                         {
                             return BitStreamUtil.ReadProtobufVarIntStub(this);
                         }
-                        else if (TryAdvance(4 * 8))
+
+                        if (TryAdvance(4 * 8))
                         {
                             RefillBuffer();
                         }

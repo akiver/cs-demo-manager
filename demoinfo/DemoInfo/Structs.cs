@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DemoInfo
 {
@@ -16,12 +12,6 @@ namespace DemoInfo
 
         public string Filestamp { get; private set; } // Should be HL2DEMO
         public int Protocol { get; private set; } // Should be DEMO_PROTOCOL (4)
-
-        [Obsolete("This was a typo. Use NetworkProtocol instead")]
-        public int NetworkProtocal
-        {
-            get { return NetworkProtocol; }
-        }
 
         public int NetworkProtocol { get; private set; } // Should be PROTOCOL_VERSION
 

@@ -1,11 +1,4 @@
-﻿using DemoInfo.Messages;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DemoInfo.DP.Handler
+﻿namespace DemoInfo.DP.Handler
 {
     public static class UpdateStringTableUserInfoHandler
     {

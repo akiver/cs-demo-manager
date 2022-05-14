@@ -1,24 +1,15 @@
 ﻿using DemoInfo.DP;
 using DemoInfo.DT;
-using DemoInfo.Messages;
 using DemoInfo.ST;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 
 namespace DemoInfo
 {
-#if DEBUG
-#warning The DemoParser is very slow when compiled in Debug-Mode, since we use it as that: We perform many integrity checks during runtime.
-#warning Build this in Relase-Mode for more performance if you're not working the internals of the parser. (If you are, create a pull request when you're done!)
-#endif
-#if SAVE_PROP_VALUES
-	#warning You're compiling in the SavePropValues-Mode. This is a mode intended for Debugging and nothing else. It's cool to take a (entity-)dump here to find out how things work, but don't use this in production
-#endif
     public class DemoParser : IDisposable
     {
         private const int MAX_EDICT_BITS = 11;
@@ -997,19 +988,6 @@ namespace DemoInfo
                     {
                         additionalInformations[iForTheMethod].TotalCashSpent = e.Value;
                     };
-
-#if DEBUG
-                    playerResources.Entity.FindProperty("m_iArmor." + iString).IntRecived += (sender, e) =>
-                    {
-                        additionalInformations[iForTheMethod].ScoreboardArmor = e.Value;
-                    };
-
-                    playerResources.Entity.FindProperty("m_iHealth." + iString).IntRecived += (sender, e) =>
-                    {
-                        additionalInformations[iForTheMethod].ScoreboardHP = e.Value;
-                    };
-
-#endif
                 }
             };
         }
@@ -1332,47 +1310,6 @@ namespace DemoInfo
 
             inferno.OnDestroyEntity += (s, infEntity) => { InfernoOwners.Remove(infEntity.Entity.ID); };
         }
-#if SAVE_PROP_VALUES
-		[Obsolete("This method is only for debugging-purposes and shuld never be used in production, so you need to live with this warning.")]
-		public string DumpAllEntities()
-		{
-			StringBuilder res = new StringBuilder ();
-			for (int i = 0; i < MAX_ENTITIES; i++) {
-				Entity entity = Entities [i];
-
-				if (entity == null)
-					continue;
-
-				res.Append("Entity " + i + ": " + entity.ServerClass.Name + " (inherits: ");
-
-				//The class with the lowest order is the first
-				//But we obv. want the highest order first :D
-				foreach(var c in entity.ServerClass.BaseClasses.Reverse<ServerClass>())
-				{
-					res.Append (c.Name + "; ");
-				}
-				res.AppendLine (")");
-
-				foreach (var prop in entity.Props) {
-					res.Append(prop.Entry.PropertyName.PadLeft(50));
-					res.Append(" = ");
-					res.Append(prop.Value);
-					res.AppendLine ();
-				}
-			}
-
-			return res.ToString();
-		}
-
-		[Obsolete("This method is only for debugging-purposes and shuld never be used in production, so you need to live with this warning.")]
-		public void DumpAllEntities(string fileName)
-		{
-			StreamWriter writer = new StreamWriter(fileName);
-			writer.WriteLine(DumpAllEntities());
-			writer.Flush();
-			writer.Close();
-		}
-#endif
 
         #region EventCaller
 
