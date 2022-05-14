@@ -548,7 +548,7 @@
                                                        Style="{StaticResource HalfScoreScoreboard}"
                                                        Foreground="{StaticResource BlueBrush}" />
                                         </StackPanel>
-                                        <ListView ItemsSource="{Binding Demo.Overtimes}"
+                                        <ListView ItemsSource="{Binding OvertimesCollection}"
                                                   Style="{StaticResource OvertimeScoreboardTemplate}"
                                                   ItemContainerStyle="{StaticResource OvertimeScoreboardItemStyle}"
                                                   ItemsPanel="{StaticResource ScoreboardItemsPanel}"

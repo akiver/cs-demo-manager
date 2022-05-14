@@ -137,6 +137,8 @@ namespace Manager.ViewModel.Demos
 
         private ICollectionView _roundsCollection;
 
+        private ObservableCollection<Overtime> _overtimesCollection = new ObservableCollection<Overtime>();
+
         #endregion
 
         #region Accessors
@@ -204,6 +206,12 @@ namespace Manager.ViewModel.Demos
         {
             get { return _roundsCollection; }
             set { Set(() => RoundsCollection, ref _roundsCollection, value); }
+        }
+
+        public ObservableCollection<Overtime> OvertimesCollection
+        {
+            get { return _overtimesCollection; }
+            set { Set(() => OvertimesCollection, ref _overtimesCollection, value); }
         }
 
         public ICollectionView PlayersTeam2Collection
@@ -595,7 +603,9 @@ namespace Manager.ViewModel.Demos
                                    }
 
                                    _progress = 0;
+                                   OvertimesCollection.Clear();
                                    Demo = await _demosService.AnalyzeDemo(Demo, _cts.Token, HandleAnalyzeProgress);
+                                   OvertimesCollection = new ObservableCollection<Overtime>(Demo.Overtimes);
 
                                    await FetchPlayersAvatar();
                                    UpdatePlayersSort();
@@ -1055,6 +1065,7 @@ namespace Manager.ViewModel.Demos
             RoundsCollection = null;
             SelectedRound = null;
             SelectedPlayerStats = null;
+            OvertimesCollection.Clear();
         }
 
         private async void UpdateRoundListStats()
@@ -1102,6 +1113,7 @@ namespace Manager.ViewModel.Demos
             PlayersTeam2Collection = CollectionViewSource.GetDefaultView(Demo.TeamT.Players);
             UpdatePlayersSort();
             RoundsCollection = CollectionViewSource.GetDefaultView(Demo.Rounds);
+            OvertimesCollection = new ObservableCollection<Overtime>(Demo.Overtimes);
             await FetchPlayersAvatar();
             new ViewModelLocator().Settings.IsShowAllPlayers = true;
             UpdateDemosPagination();

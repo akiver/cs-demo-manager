@@ -27,7 +27,7 @@
     </Style>
 
     <DataTemplate x:Key="OvertimeScoreboardItemTemplate" DataType="{x:Type ListViewItem}">
-        <StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance core:Demo}">
+        <StackPanel Orientation="Vertical" d:DataContext="{d:DesignInstance core:Overtime}">
             <TextBlock Text="{Binding ScoreTeamCt}" Style="{StaticResource HalfScoreScoreboard}" />
             <TextBlock Text="|" Style="{StaticResource HalfScoreScoreboard}" />
             <TextBlock Text="{Binding ScoreTeamT}" Style="{StaticResource HalfScoreScoreboard}" />
