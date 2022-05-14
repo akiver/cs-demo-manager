@@ -57,6 +57,10 @@ namespace DemoInfo
         /// </summary>
         public event EventHandler<RoundEndedEventArgs> RoundEnd;
 
+        public event EventHandler<GamePhaseChangedArgs> GamePhaseChanged;
+
+        public event EventHandler<RoundWinStatusChangedArgs> RoundWinStatusChanged;
+
         /// <summary>
         /// Occurs at the end of the match, when the scoreboard is shown
         /// </summary>
@@ -782,6 +786,8 @@ namespace DemoInfo
             HandleWeapons();
 
             HandleInfernos();
+
+            HandleGameRules();
         }
 
         private void HandleTeamScores()
@@ -914,6 +920,27 @@ namespace DemoInfo
                     {
                         TClanName = recivedClanName.Value;
                     }
+                };
+            };
+        }
+
+        private void HandleGameRules()
+        {
+            SendTableParser.FindByName("CCSGameRulesProxy").OnNewEntity += (object sender, EntityCreatedEventArgs e) =>
+            {
+                e.Entity.FindProperty("cs_gamerules_data.m_gamePhase").IntRecived += (xx, update) => {
+                    GamePhaseChangedArgs ev = new GamePhaseChangedArgs
+                    {
+                        GamePhase = (GamePhase)update.Value
+                    };
+                    RaiseGamePhaseChanged(ev);
+                };
+                e.Entity.FindProperty("cs_gamerules_data.m_iRoundWinStatus").IntRecived += (xx, update) => {
+                    RoundWinStatusChangedArgs ev = new RoundWinStatusChangedArgs
+                    {
+                        WinStatus = (RoundWinStatus)update.Value
+                    };
+                    RaiseRoundWinStatusChanged(ev);
                 };
             };
         }
@@ -1410,6 +1437,22 @@ namespace DemoInfo
             if (RoundOfficiallyEnd != null)
             {
                 RoundOfficiallyEnd(this, new RoundOfficiallyEndedEventArgs());
+            }
+        }
+
+        internal void RaiseGamePhaseChanged(GamePhaseChangedArgs args)
+        {
+            if (GamePhaseChanged != null)
+            {
+                GamePhaseChanged(this, args);
+            }
+        }
+
+        internal void RaiseRoundWinStatusChanged(RoundWinStatusChangedArgs args)
+        {
+            if (RoundWinStatusChanged != null)
+            {
+                RoundWinStatusChanged(this, args);
             }
         }
 

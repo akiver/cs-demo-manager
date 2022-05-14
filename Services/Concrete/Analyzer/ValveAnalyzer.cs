@@ -64,6 +64,7 @@ namespace Services.Concrete.Analyzer
             Parser.FreezetimeEnded += HandleFreezetimeEnded;
             Parser.RoundFinal += HandleRoundFinal;
             Parser.WinPanelMatch += HandleWinPanelMatch;
+            Parser.GamePhaseChanged += HandleGamePhaseChanged;
         }
 
         public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
@@ -130,6 +131,16 @@ namespace Services.Concrete.Analyzer
             StartMatch();
         }
 
+        protected void HandleGamePhaseChanged(object sender, GamePhaseChangedArgs e)
+        {
+            if (!IsMatchStarted || e.GamePhase != GamePhase.TeamSideSwitch)
+            {
+                return;
+            }
+
+            SwapTeams();
+        }
+
         protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
         {
             IsMatchStarted = false;
@@ -187,8 +198,7 @@ namespace Services.Concrete.Analyzer
 
             if (IsLastRoundHalf)
             {
-                SwapTeams();
-                Demo.Rounds.Add(CurrentRound);
+                AddCurrentRound();
             }
 
             if (IsOvertime && IsLastRoundHalf)

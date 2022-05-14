@@ -276,7 +276,7 @@ namespace Services.Concrete.Analyzer
 
             if (!IsOvertime || !_isFaceit)
             {
-                Demo.Rounds.Add(CurrentRound);
+                AddCurrentRound();
             }
 
             IsMatchStarted = false;
@@ -350,7 +350,7 @@ namespace Services.Concrete.Analyzer
 
             if (IsLastRoundHalf)
             {
-                Demo.Rounds.Add(CurrentRound);
+                AddCurrentRound();
             }
         }
 

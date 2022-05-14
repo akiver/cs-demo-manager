@@ -80,7 +80,7 @@ namespace Services.Concrete.Analyzer
         protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
         {
             // Add the last round (round_officially_ended isn't raised at the end)
-            Demo.Rounds.Add(CurrentRound);
+            AddCurrentRound();
 
             ProcessPlayersRating();
         }
@@ -164,7 +164,7 @@ namespace Services.Concrete.Analyzer
             UpdateKillsCount();
             UpdatePlayerScore();
 
-            Demo.Rounds.Add(CurrentRound);
+            AddCurrentRound();
 
             // End of a half
             if (IsLastRoundHalf)

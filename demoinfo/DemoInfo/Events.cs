@@ -45,6 +45,16 @@ namespace DemoInfo
     {
     }
 
+    public class GamePhaseChangedArgs : EventArgs
+    {
+        public GamePhase GamePhase { get; set; }
+    }
+
+    public class RoundWinStatusChangedArgs : EventArgs
+    {
+        public RoundWinStatus WinStatus { get; set; }
+    }
+
     public class RoundMVPEventArgs : EventArgs
     {
         public Player Player { get; set; }

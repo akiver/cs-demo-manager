@@ -680,7 +680,7 @@ namespace Services.Concrete.Analyzer
 
             if (!IsLastRoundHalf || !IsRoundEndOccured)
             {
-                Demo.Rounds.Add(CurrentRound);
+                AddCurrentRound();
             }
 
             if (!IsOvertime && IsLastRoundHalf)
@@ -1530,6 +1530,11 @@ namespace Services.Concrete.Analyzer
         #endregion
 
         #region Process
+
+        protected void AddCurrentRound()
+        {
+            Demo.Rounds.Add(CurrentRound);
+        }
 
         /// <summary>
         /// Update kills count for each player, current round and demo
@@ -2427,7 +2432,7 @@ namespace Services.Concrete.Analyzer
             if (Demo.Rounds.Count < Demo.ScoreTeamCt + Demo.ScoreTeamT)
             {
                 UpdateKillsCount();
-                Demo.Rounds.Add(CurrentRound);
+                AddCurrentRound();
             }
 
             // Add last overtime if there was an overtime at the end

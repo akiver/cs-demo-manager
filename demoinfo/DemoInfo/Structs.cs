@@ -482,4 +482,24 @@ namespace DemoInfo
         RightLeg = 7,
         Gear = 10,
     };
+
+    public enum GamePhase
+    {
+        Init = 0,
+        Pregame,
+        StartGame,
+        TeamSideSwitch, // Set when a team side switch happened usually at the beggining of the new round
+        GameHalfEnded,
+        GameEnded,
+        StaleMate,
+        GameOver,
+    };
+
+    public enum RoundWinStatus
+    {
+        Unassigned = 0,
+        Draw,
+        TerroristsWon,
+        CounterTerroristsWon,
+    };
 }
