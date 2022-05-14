@@ -22,6 +22,14 @@ namespace Services.Concrete.Analyzer
 
         private bool _isRoundFinal = false;
 
+        /// <summary>
+        /// Used to support buggy demos such as the one is this issue https://github.com/akiver/CSGO-Demos-Manager/issues/484
+        /// The round end officially event of the 14th round AND the round start event of the 15th round are not triggered.
+        /// To handle this scenario, this flag is synced with m_iRoundWinStatus and round start events.
+        /// Note: even the CSGO client playback system skips the 15th round when forwarding from the 14th to 15th round.
+        /// </summary>
+        private bool _isRoundStartOccurred = false;
+
         public ValveAnalyzer(Demo demo)
         {
             Parser = new DemoParser(File.OpenRead(demo.Path));
@@ -65,6 +73,7 @@ namespace Services.Concrete.Analyzer
             Parser.RoundFinal += HandleRoundFinal;
             Parser.WinPanelMatch += HandleWinPanelMatch;
             Parser.GamePhaseChanged += HandleGamePhaseChanged;
+            Parser.RoundWinStatusChanged += HandleRoundWinStatusChanged;
         }
 
         public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
@@ -131,14 +140,45 @@ namespace Services.Concrete.Analyzer
             StartMatch();
         }
 
-        protected void HandleGamePhaseChanged(object sender, GamePhaseChangedArgs e)
+        private void HandleGamePhaseChanged(object sender, GamePhaseChangedArgs e)
         {
-            if (!IsMatchStarted || e.GamePhase != GamePhase.TeamSideSwitch)
+            if (!IsMatchStarted)
             {
                 return;
             }
 
-            SwapTeams();
+            switch (e.GamePhase)
+            {
+                case GamePhase.TeamSideSwitch:
+                    SwapTeams();
+                    break;
+                case GamePhase.GameHalfEnded:
+                    if (!IsLastRoundHalf)
+                    {
+                        AddCurrentRound();
+                    }
+                    IsLastRoundHalf = true;
+                    break;
+            }
+        }
+
+        private void HandleRoundWinStatusChanged(object sender, RoundWinStatusChangedArgs e)
+        {
+            if (!IsMatchStarted)
+            {
+                return;
+            }
+
+            bool isRoundStart = e.WinStatus == RoundWinStatus.Unassigned;
+            if (isRoundStart && !_isRoundStartOccurred)
+            {
+                AddCurrentRound();
+                CreateNewRound();
+            }
+            else
+            {
+                _isRoundStartOccurred = false;
+            }
         }
 
         protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
@@ -161,6 +201,7 @@ namespace Services.Concrete.Analyzer
                 return;
             }
 
+            _isRoundStartOccurred = true;
             _suicideCount = 0;
             IsLastRoundHalf = false;
             // Check players count to prevent missing players who was connected after the match started event
