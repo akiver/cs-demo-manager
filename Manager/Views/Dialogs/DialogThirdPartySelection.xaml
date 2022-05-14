@@ -20,14 +20,14 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"
                        Margin="0 5 0 0"
-                       FontSize="{DynamicResource DialogMessageFontSize}"
+                       FontSize="{DynamicResource MahApps.Font.Size.Dialog.Message}"
                        TextWrapping="Wrap"
                        Text="{Binding WarningMessage}"
                        Foreground="{StaticResource RedColorBrush}" />
             <TextBlock Grid.Row="1"
                        Margin="0 15 0 0"
                        TextWrapping="Wrap"
-                       FontSize="{DynamicResource DialogMessageFontSize}"
+                       FontSize="{DynamicResource MahApps.Font.Size.Dialog.Message}"
                        Text="{x:Static properties:Resources.DialogSelectThirdParty}" />
             <ComboBox Grid.Row="2"
                       ItemsSource="{Binding ThirdPartiesSelector}"
@@ -38,15 +38,11 @@
                         Height="85"
                         HorizontalAlignment="Right"
                         Orientation="Horizontal">
-                <Button Height="35"
-                        MinWidth="80"
-                        Margin="0 0 5 0"
-                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                <Button Margin="0 0 10 0"
+                        Style="{DynamicResource MahApps.Styles.Button.Dialogs}"
                         Command="{Binding SelectCommand}"
                         Content="{x:Static properties:Resources.Ok}" />
-                <Button Height="35"
-                        MinWidth="80"
-                        Margin="5 0 5 0"
+                <Button Style="{DynamicResource MahApps.Styles.Button.Dialogs.Accent}"
                         Command="{Binding CloseCommand}"
                         Content="{x:Static properties:Resources.Cancel}" />
             </StackPanel>
