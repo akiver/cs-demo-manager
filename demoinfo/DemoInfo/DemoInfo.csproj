@@ -75,12 +75,14 @@
     <Compile Include="DP\Entity.cs" />
     <Compile Include="DP\FastNetmessages\CVar.cs" />
     <Compile Include="DP\FastNetmessages\CVars.cs" />
+    <Compile Include="DP\FastNetmessages\EncryptedMessage.cs" />
     <Compile Include="DP\FastNetmessages\RankUpdate.cs" />
     <Compile Include="DP\FastNetmessages\SayText.cs" />
     <Compile Include="DP\FastNetmessages\SayText2.cs" />
     <Compile Include="DP\FastNetmessages\ServerRankUpdate.cs" />
     <Compile Include="DP\FastNetmessages\SetConVar.cs" />
     <Compile Include="DP\FastNetmessages\UserMessage.cs" />
+    <Compile Include="DP\Handler\EncryptedDataHandler.cs" />
     <Compile Include="DP\Handler\GameEventHandler.cs" />
     <Compile Include="DP\Handler\PacketEntitesHandler.cs" />
     <Compile Include="DP\Handler\PropDecoder.cs" />
@@ -92,6 +94,7 @@
     <Compile Include="DT\ServerClass.cs" />
     <Compile Include="Events.cs" />
     <Compile Include="Helper.cs" />
+    <Compile Include="IceKey.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Structs.cs" />

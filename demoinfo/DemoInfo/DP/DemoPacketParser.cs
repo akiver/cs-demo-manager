@@ -53,6 +53,13 @@ namespace DemoInfo.DP
                 {
                     new UserMessage().Parse(bitstream, demo);
                 }
+                else if (cmd == (int)SVC_Messages.svc_EncryptedData)
+                {
+                    if (demo.NetMessageDecryptionKey != null)
+                    {
+                        new EncryptedMessage().Parse(bitstream, demo);
+                    }
+                }
 
                 bitstream.EndChunk();
             }

@@ -1,11 +1,14 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
+using Core.Models.protobuf;
 using DemoInfo;
+using ProtoBuf;
 using Player = Core.Models.Player;
 
 namespace Services.Concrete.Analyzer
@@ -32,11 +35,9 @@ namespace Services.Concrete.Analyzer
 
         public ValveAnalyzer(Demo demo)
         {
-            Parser = new DemoParser(File.OpenRead(demo.Path));
             // Reset to have update on UI
             demo.ResetStats();
             Demo = demo;
-            RegisterEvents();
         }
 
         protected sealed override void RegisterEvents()
@@ -78,6 +79,9 @@ namespace Services.Concrete.Analyzer
 
         public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
         {
+            byte[] netMessageDecryptionKey = GetDecryptionKey(Demo.Path);
+            Parser = new DemoParser(File.OpenRead(Demo.Path), netMessageDecryptionKey);
+            RegisterEvents();
             ProgressCallback = progressCallback;
             Parser.ParseHeader();
 
@@ -86,6 +90,31 @@ namespace Services.Concrete.Analyzer
             ProcessAnalyzeEnded();
 
             return Demo;
+        }
+
+        private static byte[] GetDecryptionKey(string demoPath)
+        {
+            string infoFilePath = demoPath + ".info";
+            bool isInfoFileExits = File.Exists(infoFilePath);
+            if (isInfoFileExits)
+            {
+                using (FileStream infoFile = File.OpenRead(infoFilePath))
+                {
+                    try
+                    {
+                        CDataGCCStrike15v2MatchInfo matchInfo = Serializer.Deserialize<CDataGCCStrike15v2MatchInfo>(infoFile);
+                        string publicKeyAsString = $"{matchInfo.Watchablematchinfo.ClDecryptdataKeyPub:X}".PadLeft(16, '0').ToUpper();
+
+                        return Encoding.ASCII.GetBytes(publicKeyAsString);
+                    }
+                    catch (Exception)
+                    {
+                        // ignore corrupted .info file
+                    }
+                }
+            }
+
+            return null;
         }
 
         #region Events Handlers

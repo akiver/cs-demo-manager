@@ -505,19 +505,30 @@ namespace DemoInfo
         /// </summary>
         private AdditionalPlayerInformation[] additionalInformations = new AdditionalPlayerInformation[MAXPLAYERS];
 
+        public IceKey NetMessageDecryptionKey { get; internal set; }
+
 
         /// <summary>
         /// Initializes a new DemoParser. Right point if you want to start analyzing demos. 
         /// Hint: ParseHeader() is propably what you want to look into next. 
         /// </summary>
         /// <param name="input">An input-stream.</param>
-        public DemoParser(Stream input)
+        /// <param name="netMessageDecryptionKey">
+        /// Decryption key used to decrypt net messages.
+        /// It should comes from a .info file.
+        /// </param>
+        public DemoParser(Stream input, byte[] netMessageDecryptionKey = null)
         {
             BitStream = BitStreamUtil.Create(input);
 
             for (int i = 0; i < MAXPLAYERS; i++)
             {
                 additionalInformations[i] = new AdditionalPlayerInformation();
+            }
+
+            if (netMessageDecryptionKey != null)
+            {
+                this.NetMessageDecryptionKey = new IceKey(2, netMessageDecryptionKey);
             }
         }
 
@@ -919,14 +930,16 @@ namespace DemoInfo
         {
             SendTableParser.FindByName("CCSGameRulesProxy").OnNewEntity += (object sender, EntityCreatedEventArgs e) =>
             {
-                e.Entity.FindProperty("cs_gamerules_data.m_gamePhase").IntRecived += (xx, update) => {
+                e.Entity.FindProperty("cs_gamerules_data.m_gamePhase").IntRecived += (xx, update) =>
+                {
                     GamePhaseChangedArgs ev = new GamePhaseChangedArgs
                     {
                         GamePhase = (GamePhase)update.Value
                     };
                     RaiseGamePhaseChanged(ev);
                 };
-                e.Entity.FindProperty("cs_gamerules_data.m_iRoundWinStatus").IntRecived += (xx, update) => {
+                e.Entity.FindProperty("cs_gamerules_data.m_iRoundWinStatus").IntRecived += (xx, update) =>
+                {
                     RoundWinStatusChangedArgs ev = new RoundWinStatusChangedArgs
                     {
                         WinStatus = (RoundWinStatus)update.Value
