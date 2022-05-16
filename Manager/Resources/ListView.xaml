@@ -4,14 +4,16 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     mc:Ignorable="d"
                     xmlns:models="clr-namespace:Manager.Models"
-                    xmlns:core="clr-namespace:Core.Models;assembly=csgodm.core">
+                    xmlns:core="clr-namespace:Core.Models;assembly=csgodm.core"
+                    xmlns:events="clr-namespace:Core.Models.Events;assembly=csgodm.core"
+                    xmlns:converters="clr-namespace:Manager.Converters">
 
     <Style x:Key="OvertimeScoreboardTemplate" TargetType="{x:Type ListView}">
         <Setter Property="BorderBrush" Value="Transparent" />
         <Setter Property="Background" Value="Transparent" />
     </Style>
 
-    <Style x:Key="OvertimeScoreboardItemStyle" TargetType="{x:Type ListViewItem}">
+    <Style x:Key="UnstyledItemStyle" TargetType="{x:Type ListViewItem}">
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
@@ -66,4 +68,58 @@
             </DataTrigger>
         </Style.Triggers>
     </Style>
+
+    <Style TargetType="Run" x:Key="ChatMessageSenderStyle">
+        <d:Style.DataContext>
+            <x:Type Type="events:ChatMessage" />
+        </d:Style.DataContext>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding SenderSide}"
+                         Value="{x:Static core:Side.Terrorist}">
+                <Setter Property="Foreground" Value="{StaticResource TerroristBrush}" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding SenderSide}"
+                         Value="{x:Static core:Side.CounterTerrorist}">
+                <Setter Property="Foreground" Value="{StaticResource CounterTerroristBrush}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="Run" x:Key="ChatMessageIsSenderAliveStyle" BasedOn="{StaticResource ChatMessageSenderStyle}">
+        <d:Style.DataContext>
+            <x:Type Type="events:ChatMessage" />
+        </d:Style.DataContext>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsSenderAlive}"
+                         Value="False">
+                <Setter Property="Text" Value="*DEAD*" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsSenderAlive}"
+                         Value="True">
+                <Setter Property="Text" Value="" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate x:Key="ChatMessageItemTemplate" DataType="{x:Type ListViewItem}">
+        <DataTemplate.Resources>
+            <converters:SecondsToTimerConverter x:Key="SecondsToTimerConverter" />
+        </DataTemplate.Resources>
+        <RichTextBox d:DataContext="{d:DesignInstance events:ChatMessage}"
+                     IsReadOnly="True"
+                     BorderThickness="0"
+                     Margin="0 -2 0 -2"
+                     IsDocumentEnabled="True"
+                     FontSize="14">
+            <FlowDocument>
+                <Paragraph>
+                    <Run Text="{Binding Seconds, Converter={StaticResource SecondsToTimerConverter}}" />
+                    <Run Style="{StaticResource ChatMessageIsSenderAliveStyle}" />
+                    <Run Text="{Binding SenderName}" Style="{StaticResource ChatMessageSenderStyle}" />
+                    <Run Text=":"  />
+                    <Run Text="{Binding Text}" />
+                </Paragraph>
+            </FlowDocument>
+        </RichTextBox>
+    </DataTemplate>
 </ResourceDictionary>

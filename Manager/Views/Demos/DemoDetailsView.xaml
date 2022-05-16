@@ -115,10 +115,10 @@
                         Icon="MicrosoftExcel"
                         Command="{Binding ExportDemoToExcelCommand}" />
                     <controls:ButtonWithIcon
-                        Text="{x:Static properties:Resources.ExportChat}"
-                        ToolTip="{x:Static properties:Resources.ToolTipExportChat}"
+                        Text="{x:Static properties:Resources.Chat}"
+                        ToolTip="{x:Static properties:Resources.TooltipChat}"
                         Icon="Chat"
-                        Command="{Binding ExportChatCommand}" />
+                        Command="{Binding ShowChatCommand}" />
                     <controls:ButtonWithIcon
                         Text="{x:Static properties:Resources.Movie}"
                         ToolTip="{x:Static properties:Resources.ToolTipMovie}"
@@ -550,7 +550,7 @@
                                         </StackPanel>
                                         <ListView ItemsSource="{Binding OvertimesCollection}"
                                                   Style="{StaticResource OvertimeScoreboardTemplate}"
-                                                  ItemContainerStyle="{StaticResource OvertimeScoreboardItemStyle}"
+                                                  ItemContainerStyle="{StaticResource UnstyledItemStyle}"
                                                   ItemsPanel="{StaticResource ScoreboardItemsPanel}"
                                                   ItemTemplate="{StaticResource OvertimeScoreboardItemTemplate}"
                                                   Margin="0 -2 0 -2" />

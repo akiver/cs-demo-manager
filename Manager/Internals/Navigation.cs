@@ -51,7 +51,7 @@ namespace Manager.Internals
         public static void ShowDemoHeatmap(Demo demo)
         {
             new ViewModelLocator().DemoHeatmap.Demo = demo;
-            
+
             ShowPage(new DemoHeatmapView());
         }
 
@@ -74,6 +74,13 @@ namespace Manager.Internals
             new ViewModelLocator().DemoDamages.Demo = demo;
 
             ShowPage(new DemoDamagesView());
+        }
+
+        public static void ShowDemoChat(Demo demo)
+        {
+            new ViewModelLocator().DemoChat.Demo = demo;
+
+            ShowPage(new DemoChatView());
         }
 
         public static void ShowDemoFlashbangs(Demo demo)

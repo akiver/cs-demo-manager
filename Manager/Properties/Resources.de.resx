@@ -2484,12 +2484,6 @@ Message Error :
   <data name="ExportChat" xml:space="preserve">
     <value>Exportiere Chat</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>Chat Message Datei wurde erstellt.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>Keine Chatnachrichten gefunden. (Es funktioniert nur bei Demos, die auf einem Server aufgenommen wurden, mit "tv_relaytextchat" ungleich "0" - dies ist nicht der Fall bei Valve Matchmaking)</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>Nichts {0} gefunden bei dieser Auswahl.</value>
   </data>

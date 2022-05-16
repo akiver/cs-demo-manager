@@ -2488,12 +2488,6 @@ Mensagem de Erro:
   <data name="ExportChat" xml:space="preserve">
     <value>Exportar chat</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>Arquivo de mensagens de chat foi criado.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>Nenhuma mensagem de chat encontrados. (Funciona apenas para demos provenientes de um servidor que tem "tv_relaytextchat" definido como um valor diferente de "0", o que não é o caso para os servidores oficiais de MM da Valve).</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>Nenhum {0} encontrado para esta seleção</value>
   </data>

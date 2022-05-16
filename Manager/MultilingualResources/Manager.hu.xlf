@@ -3315,14 +3315,6 @@ Hibaüzenet:
           <source>Export chat</source>
           <target state="final">Chat exportálása</target>
         </trans-unit>
-        <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
-          <source>Chat messages file has been created.</source>
-          <target state="final">Chat üzenetek létrehozva.</target>
-        </trans-unit>
-        <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
-          <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
-          <target state="final">Nem található chat üzenet. (Csak akkor működik, ha a szerveren a "tv_relaytextchat" parancs értéke nem "0").</target>
-        </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
           <target state="final">Nem található {0} ehhez a kiválasztáshoz.</target>
@@ -4223,6 +4215,14 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="Kast" translate="yes" xml:space="preserve">
           <source>KAST</source>
           <target state="new">KAST</target>
+        </trans-unit>
+        <trans-unit id="Chat" translate="yes" xml:space="preserve">
+          <source>Chat</source>
+          <target state="new">Chat</target>
+        </trans-unit>
+        <trans-unit id="TooltipChat" translate="yes" xml:space="preserve">
+          <source>Chat</source>
+          <target state="new">Chat</target>
         </trans-unit>
       </group>
     </body>

@@ -94,6 +94,8 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand _showDemoFlashbangsCommand;
 
+        private RelayCommand _showChatCommand;
+
         private RelayCommand _showDemoStuffsCommand;
 
         private RelayCommand<string> _saveCommentDemoCommand;
@@ -121,8 +123,6 @@ namespace Manager.ViewModel.Demos
         private RelayCommand<string> _addPlayerToAccountListCommand;
 
         private RelayCommand<Player> _showPlayerDemosCommand;
-
-        private RelayCommand _exportChatCommand;
 
         private RelayCommand _goToPreviousDemoCommand;
 
@@ -317,7 +317,7 @@ namespace Manager.ViewModel.Demos
                                    return;
                                }
 
-                              Navigation.ShowDemoHeatmap(Demo);
+                               Navigation.ShowDemoHeatmap(Demo);
                            }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
@@ -376,6 +376,19 @@ namespace Manager.ViewModel.Demos
                                }
 
                                Navigation.ShowDemoFlashbangs(Demo);
+                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+            }
+        }
+
+        public RelayCommand ShowChatCommand
+        {
+            get
+            {
+                return _showChatCommand
+                       ?? (_showChatCommand = new RelayCommand(
+                           () =>
+                           {
+                               Navigation.ShowDemoChat(Demo);
                            }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
             }
         }
@@ -919,75 +932,6 @@ namespace Manager.ViewModel.Demos
                                await LoadData();
                            },
                            () => NextDemo != null && !IsBusy));
-            }
-        }
-
-        public RelayCommand ExportChatCommand
-        {
-            get
-            {
-                return _exportChatCommand
-                       ?? (_exportChatCommand = new RelayCommand(
-                           async () =>
-                           {
-                               if (Demo.Status == DemoStatus.NAME_DEMO_STATUS_CORRUPTED)
-                               {
-                                   await _dialogService.ShowDemosCorruptedWarningAsync(new List<Demo> { Demo });
-                               }
-
-                               SaveFileDialog exportDialog = new SaveFileDialog
-                               {
-                                   FileName = Demo.Name.Substring(0, Demo.Name.Length - 4) + "-chat.txt",
-                                   Filter = "Text file (*.txt)|*.txt",
-                               };
-
-                               if (exportDialog.ShowDialog() == DialogResult.OK)
-                               {
-                                   if (!_cacheService.HasDemoInCache(Demo.Id))
-                                   {
-                                       try
-                                       {
-                                           Notification = Properties.Resources.NotificationAnalyzing;
-                                           IsBusy = true;
-                                           HasNotification = true;
-
-                                           if (_cts == null)
-                                           {
-                                               _cts = new CancellationTokenSource();
-                                           }
-
-                                           await _demosService.AnalyzeDemo(Demo, _cts.Token);
-
-                                           if (AppSettings.IsInternetConnectionAvailable())
-                                           {
-                                               await _demosService.AnalyzeBannedPlayersAsync(Demo);
-                                           }
-
-                                           await _cacheService.WriteDemoDataCache(Demo);
-                                       }
-                                       catch (Exception e)
-                                       {
-                                           await HandleAnalyzeException(e);
-                                       }
-                                       finally
-                                       {
-                                           IsBusy = false;
-                                           HasNotification = false;
-                                       }
-                                   }
-
-                                   if (Demo.ChatMessageList.Any())
-                                   {
-                                       _demosService.WriteChatFile(Demo, exportDialog.FileName);
-                                       await _dialogService.ShowMessageAsync(Properties.Resources.DialogChatFileCreated,
-                                           MessageDialogStyle.Affirmative);
-                                   }
-                                   else
-                                   {
-                                       await _dialogService.ShowMessageAsync(Properties.Resources.DialogNoChatFound, MessageDialogStyle.Affirmative);
-                                   }
-                               }
-                           }));
             }
         }
 

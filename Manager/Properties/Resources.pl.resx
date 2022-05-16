@@ -2488,12 +2488,6 @@ Treść błędu :
   <data name="ExportChat" xml:space="preserve">
     <value>Eksportuj czat</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>Plik wiadomości czatu został utworzony.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>Nie znaleziono wiadomości czatu (działa tylko dla dem pochodzących z serwera z ustawionym "tv_relaytextchat" na wartość inną niż "0". Niestety opcja nie jest dostępna dla dobierania przeciwników Valve).</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>Nie znaleziono {0} dla tego zaznaczenia.</value>
   </data>

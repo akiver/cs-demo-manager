@@ -16,6 +16,8 @@
     <Color x:Key="CacheColor">#2a1014</Color>
     <Color x:Key="Orange">#FF9800</Color>
     <Color x:Key="Blue">#2980b9</Color>
+    <Color x:Key="CounterTerrorist">#378ef0</Color>
+    <Color x:Key="Terrorist">#f29423</Color>
 
     <SolidColorBrush x:Key="BlackBrush" Color="{StaticResource Black}" />
     <SolidColorBrush x:Key="WhiteBrush" Color="{StaticResource White}" />
@@ -25,6 +27,8 @@
     <SolidColorBrush x:Key="LightBlueBrush" Color="{StaticResource LightBlue}" />
     <SolidColorBrush x:Key="OrangeBrush" Color="{StaticResource Orange}" />
     <SolidColorBrush x:Key="BlueBrush" Color="{StaticResource Blue}" />
+    <SolidColorBrush x:Key="CounterTerroristBrush" Color="{StaticResource CounterTerrorist}" />
+    <SolidColorBrush x:Key="TerroristBrush" Color="{StaticResource Terrorist}" />
 
     <SolidColorBrush x:Key="Dust2ColorBrush" Color="{StaticResource Dust2Color}" />
     <SolidColorBrush x:Key="InfernoColorBrush" Color="{StaticResource InfernoColor}" />

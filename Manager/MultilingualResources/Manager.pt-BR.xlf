@@ -3315,14 +3315,6 @@ Mensagem de Erro:
           <source>Export chat</source>
           <target state="final">Exportar chat</target>
         </trans-unit>
-        <trans-unit id="DialogChatFileCreated" translate="yes" xml:space="preserve">
-          <source>Chat messages file has been created.</source>
-          <target state="final">Arquivo de mensagens de chat foi criado.</target>
-        </trans-unit>
-        <trans-unit id="DialogNoChatFound" translate="yes" xml:space="preserve">
-          <source>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</source>
-          <target state="final">Nenhuma mensagem de chat encontrados. (Funciona apenas para demos provenientes de um servidor que tem "tv_relaytextchat" definido como um valor diferente de "0", o que não é o caso para os servidores oficiais de MM da Valve).</target>
-        </trans-unit>
         <trans-unit id="NoHeatmapDataFound" translate="yes" xml:space="preserve">
           <source>No {0} found for this selection.</source>
           <target state="final">Nenhum {0} encontrado para esta seleção</target>
@@ -4223,6 +4215,14 @@ Please update it by clicking on the "Update" button.</target>
         <trans-unit id="Kast" translate="yes" xml:space="preserve">
           <source>KAST</source>
           <target state="new">KAST</target>
+        </trans-unit>
+        <trans-unit id="Chat" translate="yes" xml:space="preserve">
+          <source>Chat</source>
+          <target state="new">Chat</target>
+        </trans-unit>
+        <trans-unit id="TooltipChat" translate="yes" xml:space="preserve">
+          <source>Chat</source>
+          <target state="new">Chat</target>
         </trans-unit>
       </group>
     </body>

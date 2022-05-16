@@ -4,10 +4,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using Core.Models;
 using GalaSoft.MvvmLight.CommandWpf;
-using Manager.Internals;
 using Services.Interfaces;
 using Services.Models.Stats;
-using Demo = Core.Models.Demo;
 
 namespace Manager.ViewModel.Demos
 {

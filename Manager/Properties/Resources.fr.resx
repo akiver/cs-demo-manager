@@ -2493,12 +2493,6 @@ Message d'erreur :
   <data name="ExportChat" xml:space="preserve">
     <value>Exporter tchat</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>Le fichier contenant les messages du tchat a été créé avec succès.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>Aucun message de tchat trouvé. (L'export ne fonctionne que lorsque la démo provient d'un serveur ayant "tv_relaytextchat" différent de "0", ce qui n'est pas le cas des serveurs Valve matchmaking)</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>Pas de {0} pour cette selection.</value>
   </data>
@@ -3170,5 +3164,11 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="Kast" xml:space="preserve">
     <value>KAST</value>
+  </data>
+  <data name="Chat" xml:space="preserve">
+    <value>Tchat</value>
+  </data>
+  <data name="TooltipChat" xml:space="preserve">
+    <value>Tchat</value>
   </data>
 </root>

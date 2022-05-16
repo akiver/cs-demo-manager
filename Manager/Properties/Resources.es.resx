@@ -2487,12 +2487,6 @@ Mensaje de error:
   <data name="ExportChat" xml:space="preserve">
     <value>Exportar chat</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>El archivo de mensajes de chat ha sido creado.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>No se han encontrado mensajes de chat. (Solo funciona para repeticiones de un servidor que tenga "tv_relaytextchat" con un valor diferente de "0",  no es el caso de los de Valve)</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>No se ha encontrado {0} en esta selección.</value>
   </data>

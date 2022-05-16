@@ -1512,21 +1512,21 @@ namespace Services.Concrete.Analyzer
 
         protected void HandleSayText2(object sender, SayText2EventArgs e)
         {
-            e.Text = CleanUpChatText(e.Text);
-            string message = string.Empty;
-            if (e.Sender != null)
+            if (sender == null)
             {
-                message += e.Sender.Name + ": ";
+                return;
             }
 
-            message += e.Text;
-            Demo.ChatMessageList.Add(message);
-        }
+            ChatMessage chatMessage = new ChatMessage(Parser.IngameTick, Parser.CurrentTime)
+            {
+                Text = CleanUpChatText(e.Text),
+                SenderName = e.Sender.Name,
+                SenderSide = e.Sender.Team.ToSide(),
+                SenderSteamId = e.Sender.SteamID,
+                IsSenderAlive = e.Sender.IsAlive,
+            };
 
-        protected void HandleSayText(object sender, SayTextEventArgs e)
-        {
-            e.Text = CleanUpChatText(e.Text);
-            Demo.ChatMessageList.Add(e.Text);
+            Demo.ChatMessages.Add(chatMessage);
         }
 
         #endregion

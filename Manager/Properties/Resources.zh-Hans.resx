@@ -2487,12 +2487,6 @@
   <data name="ExportChat" xml:space="preserve">
     <value>导出聊天记录</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>聊天记录文件已创建</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>未找到聊天信息。(此功能仅适用于来自将 "tv_relaytextchat" 参数设为 0 的服务器的录像文件，Valve 官方竞技匹配服务器并未启用此参数)</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>该分类找不到 {0}</value>
   </data>

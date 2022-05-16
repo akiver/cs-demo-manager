@@ -65,6 +65,7 @@ namespace Manager.ViewModel
             SimpleIoc.Default.Register<DemoHeatmapViewModel>();
             SimpleIoc.Default.Register<DemoKillsViewModel>();
             SimpleIoc.Default.Register<DemoOverviewViewModel>();
+            SimpleIoc.Default.Register<DemoChatViewModel>();
             SimpleIoc.Default.Register<DemoDamagesViewModel>();
             SimpleIoc.Default.Register<AccountOverallViewModel>();
             SimpleIoc.Default.Register<AccountRankViewModel>();
@@ -113,6 +114,8 @@ namespace Manager.ViewModel
         public WhitelistViewModel Whitelist => ServiceLocator.Current.GetInstance<WhitelistViewModel>();
 
         public DemoFlashbangsViewModel DemoFlashbangs => ServiceLocator.Current.GetInstance<DemoFlashbangsViewModel>();
+
+        public DemoChatViewModel DemoChat => ServiceLocator.Current.GetInstance<DemoChatViewModel>();
 
         public RoundDetailsViewModel RoundDetails => ServiceLocator.Current.GetInstance<RoundDetailsViewModel>();
 

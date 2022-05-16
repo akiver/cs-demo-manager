@@ -2487,12 +2487,6 @@ Hibaüzenet:
   <data name="ExportChat" xml:space="preserve">
     <value>Chat exportálása</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>Chat üzenetek létrehozva.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>Nem található chat üzenet. (Csak akkor működik, ha a szerveren a "tv_relaytextchat" parancs értéke nem "0").</value>
-  </data>
   <data name="NoHeatmapDataFound" xml:space="preserve">
     <value>Nem található {0} ehhez a kiválasztáshoz.</value>
   </data>

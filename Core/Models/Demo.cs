@@ -416,7 +416,7 @@ namespace Core.Models
         /// <summary>
         /// Contains text messages from game chat
         /// </summary>
-        private List<string> _chatMessageList;
+        private List<ChatMessage> _chatMessages;
 
         #endregion
 
@@ -539,7 +539,8 @@ namespace Core.Models
         public int CheaterCount
         {
             get { return _cheaterCounter; }
-            set {
+            set
+            {
                 Set(() => CheaterCount, ref _cheaterCounter, value);
                 RaisePropertyChanged(() => HasCheater);
             }
@@ -1045,10 +1046,10 @@ namespace Core.Models
         }
 
         [JsonProperty("chat_messages")]
-        public List<string> ChatMessageList
+        public List<ChatMessage> ChatMessages
         {
-            get { return _chatMessageList; }
-            set { Set(() => ChatMessageList, ref _chatMessageList, value); }
+            get { return _chatMessages; }
+            set { Set(() => ChatMessages, ref _chatMessages, value); }
         }
 
         #endregion
@@ -1069,7 +1070,7 @@ namespace Core.Models
             BombDefused = new Collection<BombDefusedEvent>();
             PlayerBlinded = new Collection<PlayerBlindedEvent>();
             Overtimes = new Collection<Overtime>();
-            ChatMessageList = new List<string>();
+            ChatMessages = new List<ChatMessage>();
 
             _teamCt = new Team
             {
@@ -1172,7 +1173,7 @@ namespace Core.Models
                 BombPlanted = new Collection<BombPlantedEvent>(),
                 MolotovsFireStarted = new Collection<MolotovFireStartedEvent>(),
                 IncendiariesFireStarted = new Collection<MolotovFireStartedEvent>(),
-                ChatMessageList = new List<string>(),
+                ChatMessages = new List<ChatMessage>(),
                 PlayersHurted = new Collection<PlayerHurtedEvent>(),
                 Kills = new Collection<KillEvent>(),
                 PlayerBlinded = new Collection<PlayerBlindedEvent>(),
@@ -1206,9 +1207,9 @@ namespace Core.Models
                 demo.BombExploded.Add(e);
             }
 
-            foreach (string msg in ChatMessageList)
+            foreach (ChatMessage msg in ChatMessages)
             {
-                demo.ChatMessageList.Add(msg);
+                demo.ChatMessages.Add(msg);
             }
 
             foreach (DecoyStartedEvent e in DecoyStarted)
@@ -1464,7 +1465,7 @@ namespace Core.Models
             BombDefused.Clear();
             BombExploded.Clear();
             BombPlanted.Clear();
-            ChatMessageList.Clear();
+            ChatMessages.Clear();
             DecoyStarted.Clear();
             IncendiariesFireStarted.Clear();
             Kills.Clear();

@@ -2606,12 +2606,6 @@ Message Error :
   <data name="AverageMatchTimeValue" xml:space="preserve">
     <value>{0} minutes</value>
   </data>
-  <data name="DialogChatFileCreated" xml:space="preserve">
-    <value>Chat messages file has been created.</value>
-  </data>
-  <data name="DialogNoChatFound" xml:space="preserve">
-    <value>No chat messages found. (It only works for demos coming from a server that has "tv_relaytextchat" set to a value different from "0" which is not the case for Valve matchmaking).</value>
-  </data>
   <data name="ExportChat" xml:space="preserve">
     <value>Export chat</value>
   </data>
@@ -3275,5 +3269,11 @@ Please update it by clicking on the "Update" button.</value>
   </data>
   <data name="Kast" xml:space="preserve">
     <value>KAST</value>
+  </data>
+  <data name="Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="TooltipChat" xml:space="preserve">
+    <value>Chat</value>
   </data>
 </root>

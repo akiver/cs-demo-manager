@@ -629,6 +629,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string Chat {
+            get {
+                return ResourceManager.GetString("Chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Check for updates on app startup.
         /// </summary>
         public static string CheckForUpdatesOnAppStartup {
@@ -1386,15 +1395,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Chat messages file has been created..
-        /// </summary>
-        public static string DialogChatFileCreated {
-            get {
-                return ResourceManager.GetString("DialogChatFileCreated", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Your configuration file is corrupted. Please restart the application to reset your configuration..
         /// </summary>
         public static string DialogConfigurationCorrupted {
@@ -2115,15 +2115,6 @@ namespace Manager.Properties {
         public static string DialogNewVersionAvailable {
             get {
                 return ResourceManager.GetString("DialogNewVersionAvailable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No chat messages found. (It only works for demos coming from a server that has &quot;tv_relaytextchat&quot; set to a value different from &quot;0&quot; which is not the case for Valve matchmaking)..
-        /// </summary>
-        public static string DialogNoChatFound {
-            get {
-                return ResourceManager.GetString("DialogNoChatFound", resourceCulture);
             }
         }
         
@@ -7951,6 +7942,15 @@ namespace Manager.Properties {
         public static string ToolTipChangeRawFilesDestination {
             get {
                 return ResourceManager.GetString("ToolTipChangeRawFilesDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string TooltipChat {
+            get {
+                return ResourceManager.GetString("TooltipChat", resourceCulture);
             }
         }
         

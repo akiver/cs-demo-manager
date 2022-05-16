@@ -201,10 +201,8 @@ namespace Services.Concrete.Analyzer
             }
         }
 
-        protected new void HandleSayText(object sender, SayTextEventArgs e)
+        private void HandleSayText(object sender, SayTextEventArgs e)
         {
-            base.HandleSayText(sender, e);
-
             // game pause
             if (e.Text == STOP_ROUND)
             {

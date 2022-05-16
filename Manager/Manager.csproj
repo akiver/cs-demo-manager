@@ -178,6 +178,7 @@
     <Compile Include="Converters\RankToImageConverter.cs" />
     <Compile Include="Converters\RoundEndReasonToStringConverter.cs" />
     <Compile Include="Converters\RoundTypeToStringConverter.cs" />
+    <Compile Include="Converters\SecondsToTimerConverter.cs" />
     <Compile Include="Converters\SideToStringConverter.cs" />
     <Compile Include="Converters\SteamAccountStatusToStringConverter.cs" />
     <Compile Include="Converters\SteamAccountVisibilityToStringConverter.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Services\Config.cs" />
     <Compile Include="Services\IDialogService.cs" />
     <Compile Include="ViewModel\Accounts\AccountViewModel.cs" />
+    <Compile Include="ViewModel\Demos\DemoChatViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoFlashbangsViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoMovieViewModel.cs" />
     <Compile Include="ViewModel\Demos\DemoStuffsViewModel.cs" />
@@ -241,6 +243,9 @@
     <Compile Include="ViewModel\Rounds\RoundDetailsViewModel.cs" />
     <Compile Include="ViewModel\Shared\BaseViewModel.cs" />
     <Compile Include="ViewModel\Suspects\WhitelistViewModel.cs" />
+    <Compile Include="Views\Demos\DemoChatView.xaml.cs">
+      <DependentUpon>DemoChatView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Demos\DemoFlashbangsView.xaml.cs">
       <DependentUpon>DemoFlashbangsView.xaml</DependentUpon>
     </Compile>
@@ -329,6 +334,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="resources\timelines\Round.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Demos\DemoChatView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

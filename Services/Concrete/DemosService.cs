@@ -447,7 +447,12 @@ namespace Services.Concrete
 
         public void WriteChatFile(Demo demo, string filePath)
         {
-            File.WriteAllText(filePath, string.Join(Environment.NewLine, demo.ChatMessageList.ToArray()));
+            string content = "";
+            foreach (ChatMessage chatMMessage in demo.ChatMessages)
+            {
+                content += $"{chatMMessage.SenderName}: {chatMMessage.Text}{Environment.NewLine}";
+            }
+            File.WriteAllText(filePath, content);
         }
 
         public async Task<string> GetShareCode(Demo demo)
