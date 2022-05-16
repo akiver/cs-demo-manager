@@ -57,7 +57,7 @@
                                              Text="{x:Static properties:Resources.Analyze}" />
                     <controls:ButtonWithIcon Icon="TextBox"
                                              Command="{Binding ShowDemoDetailsCommand}"
-                                             CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                                             CommandParameter="{Binding SelectedDemos}"
                                              ToolTip="{x:Static properties:Resources.ToolTipDemoDetails}"
                                              Text="{x:Static properties:Resources.Details}" />
                     <controls:ButtonWithIcon Icon="Reload"
@@ -66,7 +66,7 @@
                                              Text="{x:Static properties:Resources.Refresh}" />
                     <controls:ButtonWithIcon Icon="MicrosoftWindows"
                                              Command="{Binding BrowseToDemoCommand}"
-                                             CommandParameter="{Binding SelectedValue, ElementName=DataGridDemos}"
+                                             CommandParameter="{Binding SelectedDemos}"
                                              ToolTip="{x:Static properties:Resources.ToolTipBrowseToDemo}"
                                              Text="{x:Static properties:Resources.Browse}" />
                     <controls:ButtonWithIcon Icon="Delete"
