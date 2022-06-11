@@ -1512,7 +1512,7 @@ namespace Services.Concrete.Analyzer
 
         protected void HandleSayText2(object sender, SayText2EventArgs e)
         {
-            if (sender == null)
+            if (e.Sender == null)
             {
                 return;
             }
