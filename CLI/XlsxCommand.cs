@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
+using Services.Concrete;
 using Services.Concrete.Analyzer;
 using Services.Concrete.Excel;
 
@@ -67,19 +68,46 @@ namespace CLI
             try
             {
                 ExcelService excelService = new ExcelService();
+                CacheService cacheService = new CacheService();
                 List<Demo> demos = new List<Demo>();
 
+                int currentDemoNumber = 0;
                 foreach (string demoPath in _demoPaths)
                 {
-                    Console.WriteLine($@"Analyzing demo {demoPath}");
+                    Console.WriteLine($@"Retrieving demo {++currentDemoNumber}/{_demoPaths.Count} {demoPath}");
                     Demo demo = DemoAnalyzer.ParseDemoHeader(demoPath);
+                    if (demo == null)
+                    {
+                        Console.WriteLine($@"Invalid demo {demoPath}");
+                        continue;
+                    }
+
                     if (_source != null)
                     {
                         demo.Source = _source;
                     }
 
-                    DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
-                    demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
+                    if (cacheService.HasDemoInCache(demo.Id))
+                    {
+                        demo = await cacheService.GetDemoDataFromCache(demo.Id);
+                        demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);
+                        demo.PlayerBlinded = await cacheService.GetDemoPlayerBlindedAsync(demo);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            Console.WriteLine($@"Analyzing demo {demoPath}");
+                            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+                            demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
+                            await cacheService.WriteDemoDataCache(demo);
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($@"Error while analyzing demo {demoPath}");
+                            continue;
+                        }
+                    }
 
                     if (_exportIntoSingleFile)
                     {

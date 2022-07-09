@@ -55,20 +55,46 @@ namespace CLI
 
             try
             {
+                CacheService cacheService = new CacheService();
+                int currentDemoNumber = 0;
                 foreach (string demoPath in _demoPaths)
                 {
-                    Console.WriteLine($@"Analyzing demo {demoPath}");
+                    Console.WriteLine($@"Retrieving demo {++currentDemoNumber}/{_demoPaths.Count} {demoPath}");
                     Demo demo = DemoAnalyzer.ParseDemoHeader(demoPath);
+                    if (demo == null)
+                    {
+                        Console.WriteLine($@"Invalid demo {demoPath}");
+                        continue;
+                    }
+
                     if (_source != null)
                     {
                         demo.Source = _source;
                     }
 
-                    DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
-                    demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
-                    Console.WriteLine(@"Generating JSON file");
+                    if (cacheService.HasDemoInCache(demo.Id))
+                    {
+                        demo = await cacheService.GetDemoDataFromCache(demo.Id);
+                        demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);
+                        demo.PlayerBlinded = await cacheService.GetDemoPlayerBlindedAsync(demo);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            Console.WriteLine($@"Analyzing demo {demoPath}");
+                            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+                            demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
+                            await cacheService.WriteDemoDataCache(demo);
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($@"Error while analyzing demo {demoPath}");
+                            continue;
+                        }
+                    }
+
                     string outputFolderPath = BuildOutputFolderPathFromDemoPath(demoPath);
-                    CacheService cacheService = new CacheService();
                     string jsonFilePath = await cacheService.GenerateJsonAsync(demo, outputFolderPath);
                     Console.WriteLine($@"JSON file generated at {jsonFilePath}");
                 }

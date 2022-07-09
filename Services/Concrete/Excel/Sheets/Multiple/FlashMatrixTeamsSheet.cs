@@ -46,7 +46,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             Sheet = workbook.CreateSheet("Flash matrix teams");
         }
 
-        public override async Task GenerateContent()
+        public override Task GenerateContent()
         {
             // first row containing victims name
             _firstRow = Sheet.CreateRow(0);
@@ -54,9 +54,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 
             foreach (Demo demo in Demos)
             {
-                CacheService cacheService = new CacheService();
-                demo.PlayerBlinded = await cacheService.GetDemoPlayerBlindedAsync(demo);
-
                 // create rows and columns with only demo's teams name if this team is not 
                 if (!_teamsRow.ContainsKey(demo.TeamCT.Name))
                 {
@@ -101,6 +98,8 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 FillEmptyCells(_rowCount, _columnCount);
                 demo.PlayerBlinded.Clear();
             }
+
+            return Task.CompletedTask;
         }
 
         private void CreateRowAndColumnForTeam(string teamName)

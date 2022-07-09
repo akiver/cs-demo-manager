@@ -53,12 +53,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 
         public override async Task GenerateContent()
         {
-            foreach (Demo demo in Demos)
-            {
-                CacheService cacheService = new CacheService();
-                demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);
-            }
-
             await Task.Factory.StartNew(() =>
             {
                 var rowNumber = 1;

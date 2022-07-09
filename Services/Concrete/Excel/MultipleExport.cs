@@ -40,12 +40,6 @@ namespace Services.Concrete.Excel
 
         public override async Task<IWorkbook> Generate()
         {
-            CacheService cacheService = new CacheService();
-            foreach (Demo demo in _demos)
-            {
-                demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);
-            }
-
             _generalSheet = new GeneralSheet(Workbook, _demos);
             await _generalSheet.Generate();
             _playersSheet = new PlayersSheet(Workbook, _demos);

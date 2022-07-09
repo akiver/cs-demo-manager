@@ -124,7 +124,7 @@ namespace Services.Concrete
                 foreach (Player player in Demo.Players)
                 {
                     float totalDuration = Demo.PlayerBlinded
-                        .Where(e => e.ThrowerSteamId == player.SteamId)
+                        .Where(e => e.ThrowerSteamId == player.SteamId && !e.IsVictimBot)
                         .Sum(e => e.Duration);
 
                     if (!playerFlashStats.ContainsKey(player))

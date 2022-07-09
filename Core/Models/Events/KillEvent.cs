@@ -74,6 +74,12 @@ namespace Core.Models.Events
 
         [JsonIgnore] public override string Message => KillerName + " killed " + KilledName + " with " + Weapon.Name;
 
+        [JsonIgnore]
+        public bool IsKillerBot => KillerSteamId == 0;
+
+        [JsonIgnore]
+        public bool IsVictimBot => KilledSteamId == 0;
+
         public KillEvent(int tick, float seconds) : base(tick, seconds)
         {
         }

@@ -25,6 +25,12 @@ namespace Core.Models.Events
 
         [JsonProperty("duration")] public float Duration { get; set; }
 
+        [JsonIgnore]
+        public bool IsThrowerBot => ThrowerSteamId == 0;
+
+        [JsonIgnore]
+        public bool IsVictimBot => VictimSteamId == 0;
+
         public PlayerBlindedEvent(int tick, float seconds) : base(tick, seconds)
         {
         }

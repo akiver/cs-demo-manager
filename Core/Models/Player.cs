@@ -1041,7 +1041,11 @@ namespace Core.Models
             set { Set(() => HasEntryHoldKill, ref _hasEntryHoldKill, value); }
         }
 
-        [JsonIgnore] public int MatchCount { get; set; } = 1;
+        [JsonIgnore]
+        public int MatchCount { get; set; } = 1;
+
+        [JsonIgnore]
+        public bool IsBot => SteamId == 0;
 
         #endregion
 
@@ -1383,7 +1387,7 @@ namespace Core.Models
             }
 
             int eventCount = 0;
-            foreach(Round round in demo.Rounds)
+            foreach (Round round in demo.Rounds)
             {
                 bool hasKill = Kills.Any(kill => kill.RoundNumber == round.Number);
                 bool hasAssist = Assists.Any(assist => assist.RoundNumber == round.Number);

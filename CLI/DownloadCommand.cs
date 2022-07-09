@@ -183,7 +183,7 @@ namespace CLI
                     Console.WriteLine(@"Invalid arguments");
                     break;
                 case (int)BoilerExitCode.CommunicationFailure:
-                    Console.WriteLine(@"CSGO Game coordinator communication failure"); ;
+                    Console.WriteLine(@"CSGO Game coordinator communication failure");
                     break;
                 case (int)BoilerExitCode.AlreadyConnectedToGC:
                     Console.WriteLine(@"Already connected to CSGO GC, make sure to close CSGO and retry");

@@ -570,6 +570,11 @@ namespace Manager.ViewModel.Demos
                                                        {
                                                            demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
                                                        }
+
+                                                       if (demo.PlayerBlinded.Count == 0)
+                                                       {
+                                                           demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
+                                                       }
                                                    }
 
                                                    await _excelService.GenerateXls(demos.ToList(), saveExportFileDialog.FileName,
@@ -620,6 +625,11 @@ namespace Manager.ViewModel.Demos
                                                            if (demo.WeaponFired.Count == 0)
                                                            {
                                                                demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+                                                           }
+
+                                                           if (demo.PlayerBlinded.Count == 0)
+                                                           {
+                                                               demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
                                                            }
 
                                                            string exportFilePath =
