@@ -20,11 +20,12 @@ namespace CLI
         {
             Console.WriteLine(GetDescription());
             Console.WriteLine(@"");
-            Console.WriteLine($@"Usage: {Program.ExeName} {COMMAND_NAME} demoPaths... [--output] [--source]");
+            Console.WriteLine($@"Usage: {Program.ExeName} {COMMAND_NAME} demoPaths... [--output] [--source] [--force-analyze]");
             Console.WriteLine(@"");
             Console.WriteLine(@"Demos path can be either .dem files location or a directory. It can be relative or absolute.");
             Console.WriteLine(@"The --output argument specify the directory where output files will be saved.");
             Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", _availableSources)}]");
+            Console.WriteLine(@"The --force-analyze argument force demos analyzes (ignore cached data).");
             Console.WriteLine(@"");
             Console.WriteLine(@"Examples:");
             Console.WriteLine(@"");
@@ -72,7 +73,7 @@ namespace CLI
                         demo.Source = _source;
                     }
 
-                    if (cacheService.HasDemoInCache(demo.Id))
+                    if (!_forceAnalyze && cacheService.HasDemoInCache(demo.Id))
                     {
                         demo = await cacheService.GetDemoDataFromCache(demo.Id);
                         demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);

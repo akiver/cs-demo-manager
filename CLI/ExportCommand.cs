@@ -11,6 +11,7 @@ namespace CLI
         protected Source _source;
         protected readonly List<string> _demoPaths;
         protected string _outputFolderPath;
+        protected bool _forceAnalyze = false;
         protected List<string> _availableSources = new List<string>();
 
         public ExportCommand(string commandName, string description) : base(commandName, description)
@@ -80,6 +81,9 @@ namespace CLI
                                 Environment.Exit(1);
                             }
 
+                            break;
+                        case "--force-analyze":
+                            _forceAnalyze = true;
                             break;
                         default:
                             if (!allowedOptions.Contains(arg))
