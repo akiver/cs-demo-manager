@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using Core;
 using ICSharpCode.SharpZipLib.Zip;
+using Services.Exceptions;
 
 namespace Services.Concrete.Movie
 {
@@ -11,12 +13,22 @@ namespace Services.Concrete.Movie
     {
         public static string GetFFmpegPath()
         {
+            if (Properties.Settings.Default.IsFfmpegCustomLocationEnabled)
+            {
+                return Path.GetDirectoryName(Properties.Settings.Default.FfmpegExecutableLocation);
+            }
+
             string hlaeFolderPath = HlaeService.GetHlaePath();
             return Path.Combine(hlaeFolderPath, "ffmpeg");
         }
 
         public static string GetFFmpegExePath()
         {
+            if (Properties.Settings.Default.IsFfmpegCustomLocationEnabled)
+            {
+                return Properties.Settings.Default.FfmpegExecutableLocation;
+            }
+
             return GetFFmpegPath() + Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar + "ffmpeg.exe";
         }
 
@@ -44,6 +56,24 @@ namespace Services.Concrete.Movie
             }
 
             return false;
+        }
+
+        public static void EnableCustomLocation(string executablePath)
+        {
+            AssertExecutableIsValid(executablePath);
+            Properties.Settings.Default.FfmpegExecutableLocation = executablePath;
+            Properties.Settings.Default.IsFfmpegCustomLocationEnabled = true;
+        }
+
+        public static void DisableCustomLocation()
+        {
+            Properties.Settings.Default.IsFfmpegCustomLocationEnabled = false;
+        }
+
+        public static void ResetCustomLocation()
+        {
+            Properties.Settings.Default.IsFfmpegCustomLocationEnabled = false;
+            Properties.Settings.Default.FfmpegExecutableLocation = "";
         }
 
         private static async Task<bool> Download(string archivePath)
@@ -93,6 +123,34 @@ namespace Services.Concrete.Movie
             {
                 Logger.Instance.Log(e);
                 return false;
+            }
+        }
+
+        private static void AssertExecutableIsValid(string executablePath)
+        {
+            try
+            {
+                Process process = new Process
+                {
+                    StartInfo = new ProcessStartInfo
+                    {
+                        FileName = executablePath,
+                        Arguments = "-version",
+                        UseShellExecute = false,
+                        RedirectStandardOutput = true,
+                        CreateNoWindow = true
+                    }
+                };
+                process.Start();
+                string output = process.StandardOutput.ReadToEnd();
+                if (!output.StartsWith("ffmpeg version"))
+                {
+                    throw new InvalidFfmpegExecutableException();
+                }
+            }
+            catch
+            {
+                throw new InvalidFfmpegExecutableException();
             }
         }
     }

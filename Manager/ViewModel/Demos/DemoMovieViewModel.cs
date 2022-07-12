@@ -1496,12 +1496,19 @@ namespace Manager.ViewModel.Demos
             }
 
             Messenger.Default.Register<CustomHlaeLocationChangedMessage>(this, OnHlaeCustomLocationChanged);
+            Messenger.Default.Register<CustomFfmpegLocationChanged>(this, OnFfmpegCustomLocationChanged);
         }
 
         private void OnHlaeCustomLocationChanged(CustomHlaeLocationChangedMessage msg)
         {
             RaisePropertyChanged(() => HLAEVersion);
             RaisePropertyChanged(() => IsHLAEInstalled);
+            RaisePropertyChanged(() => IsFFmpegInstalled);
+            RaisePropertyChanged(() => FFmpegCommand);
+        }
+
+        private void OnFfmpegCustomLocationChanged(CustomFfmpegLocationChanged msg)
+        {
             RaisePropertyChanged(() => IsFFmpegInstalled);
             RaisePropertyChanged(() => FFmpegCommand);
         }

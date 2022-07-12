@@ -270,5 +270,23 @@ namespace Manager.Services
 
             return string.Empty;
         }
+
+        public string ShowSelectFfmpegExecutable()
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                FileName = "ffmpeg.exe",
+                Filter = "EXE Files |ffmpeg.exe",
+                DefaultExt = "ffmpeg.exe",
+            };
+
+            bool? result = dialog.ShowDialog();
+            if (result != null && (bool)result)
+            {
+                return dialog.FileName;
+            }
+
+            return string.Empty;
+        }
     }
 }

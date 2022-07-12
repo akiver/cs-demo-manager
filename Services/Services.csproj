@@ -175,6 +175,7 @@
     <Compile Include="Design\StuffDesignService.cs" />
     <Compile Include="Concrete\BoilerExitCode.cs" />
     <Compile Include="Exceptions\InvalidBoilerExecutableException.cs" />
+    <Compile Include="Exceptions\InvalidFfmpegExecutableException.cs" />
     <Compile Include="Exceptions\InvalidHlaeExecutableException.cs" />
     <Compile Include="Exceptions\InvalidHlaePathException.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />

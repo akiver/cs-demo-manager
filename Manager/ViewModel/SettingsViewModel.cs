@@ -66,6 +66,20 @@ namespace Manager.ViewModel
             set { Set(() => IsHlaeCustomLocationEnabled, ref _isHlaeCustomLocationEnabled, value); }
         }
 
+        private bool _isFfmpegCustomLocationEnabled = ServicesSettings.Default.IsFfmpegCustomLocationEnabled;
+        public bool IsFfmpegCustomLocationEnabled
+        {
+            get { return _isFfmpegCustomLocationEnabled; }
+            set { Set(() => IsFfmpegCustomLocationEnabled, ref _isFfmpegCustomLocationEnabled, value); }
+        }
+
+        private string _ffmpegExecutableLocation = ServicesSettings.Default.FfmpegExecutableLocation;
+        public string FfmpegExecutableLocation
+        {
+            get { return _ffmpegExecutableLocation; }
+            set { Set(() => FfmpegExecutableLocation, ref _ffmpegExecutableLocation, value); }
+        }
+
         private RelayCommand _clearDemosDataCacheCommand;
 
         private RelayCommand _importCustomDataCacheCommand;
@@ -313,6 +327,10 @@ namespace Manager.ViewModel
         public RelayCommand RevealHlaeExecutableCommand { get; }
         public RelayCommand EnableHlaeConfigFolderCommand { get; }
         public RelayCommand UpdateHlaeConfigFolderCommand { get; }
+        public RelayCommand<bool> EnableFfmpegCustomLocationCommand { get; }
+        public RelayCommand RevealFfmpegExecutableCommand { get; }
+        public RelayCommand UpdateCustomFfmpegLocationCommand { get; }
+        public RelayCommand ResetCustomFfmpegLocationCommand { get; }
 
         public List<ComboboxSelector> Languages
         {
@@ -1888,6 +1906,10 @@ namespace Manager.ViewModel
             RevealHlaeExecutableCommand = new RelayCommand(async () => await RevealHlaeExecutable());
             EnableHlaeConfigFolderCommand = new RelayCommand(EnableHlaeConfigFolder);
             UpdateHlaeConfigFolderCommand = new RelayCommand(UpdateHlaeConfigFolder);
+            EnableFfmpegCustomLocationCommand = new RelayCommand<bool>(async (isChecked) => await EnableFfmpegCustomLocation(isChecked));
+            RevealFfmpegExecutableCommand = new RelayCommand(async () => await RevealFfmpegExecutable());
+            UpdateCustomFfmpegLocationCommand = new RelayCommand(async () => await UpdateCustomFfmpegLocation());
+            ResetCustomFfmpegLocationCommand = new RelayCommand(ResetFfmpegCustomLocation);
 
             Notification = Properties.Resources.Settings;
 
@@ -2072,6 +2094,100 @@ namespace Manager.ViewModel
             {
                 HlaeConfigParentFolderPath = folderPath;
             }
+        }
+
+        private async Task EnableFfmpegCustomLocation(bool isChecked)
+        {
+            if (isChecked)
+            {
+                string executablePath = FfmpegExecutableLocation;
+                if (executablePath == "")
+                {
+                    executablePath = _dialogService.ShowSelectFfmpegExecutable();
+                    if (string.IsNullOrEmpty(executablePath))
+                    {
+                        IsFfmpegCustomLocationEnabled = false;
+                        return;
+                    }
+                }
+
+                try
+                {
+                    FFmpegService.EnableCustomLocation(executablePath);
+                }
+                catch (Exception ex)
+                {
+                    await HandleCustomFfmpegLocationActivationException(ex);
+                }
+            }
+            else
+            {
+                FFmpegService.DisableCustomLocation();
+            }
+
+            RefreshFfmpegSettings();
+            Messenger.Default.Send(new CustomFfmpegLocationChanged());
+        }
+
+        private async Task HandleCustomFfmpegLocationActivationException(Exception ex)
+        {
+            string message = string.Format(Properties.Resources.UnexpectedErrorOccured, ex.Message);
+            if (ex is InvalidFfmpegExecutableException)
+            {
+                message = Properties.Resources.DialogInvalidExecutable;
+            }
+            else if (ex is FileNotFoundException)
+            {
+                message = Properties.Resources.DialogExecutableNotFound;
+            }
+
+            await _dialogService.ShowErrorAsync(message, MessageDialogStyle.Affirmative);
+        }
+
+        private async Task UpdateCustomFfmpegLocation()
+        {
+            string executablePath = _dialogService.ShowSelectFfmpegExecutable();
+            if (string.IsNullOrEmpty(executablePath))
+            {
+                return;
+            }
+
+            try
+            {
+                FFmpegService.EnableCustomLocation(executablePath);
+            }
+            catch (Exception ex)
+            {
+                await HandleCustomFfmpegLocationActivationException(ex);
+            }
+
+            RefreshFfmpegSettings();
+            Messenger.Default.Send(new CustomFfmpegLocationChanged());
+        }
+
+        private async Task RevealFfmpegExecutable()
+        {
+            if (!File.Exists(FfmpegExecutableLocation))
+            {
+                await _dialogService.ShowErrorAsync(Properties.Resources.DialogExecutableNotFound, MessageDialogStyle.Affirmative);
+                return;
+            }
+
+            string argument = "/select, \"" + FfmpegExecutableLocation + "\"";
+            Process.Start("explorer.exe", argument);
+        }
+
+        private void ResetFfmpegCustomLocation()
+        {
+            FFmpegService.ResetCustomLocation();
+            RefreshFfmpegSettings();
+            Messenger.Default.Send(new CustomFfmpegLocationChanged());
+        }
+
+        private void RefreshFfmpegSettings()
+        {
+            IsFfmpegCustomLocationEnabled = ServicesSettings.Default.IsFfmpegCustomLocationEnabled;
+            FfmpegExecutableLocation = ServicesSettings.Default.FfmpegExecutableLocation;
         }
     }
 }

@@ -46,5 +46,29 @@ namespace Services.Properties {
                 this["HlaeExecutableLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IsFfmpegCustomLocationEnabled {
+            get {
+                return ((bool)(this["IsFfmpegCustomLocationEnabled"]));
+            }
+            set {
+                this["IsFfmpegCustomLocationEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FfmpegExecutableLocation {
+            get {
+                return ((string)(this["FfmpegExecutableLocation"]));
+            }
+            set {
+                this["FfmpegExecutableLocation"] = value;
+            }
+        }
     }
 }

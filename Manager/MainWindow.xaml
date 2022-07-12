@@ -161,58 +161,6 @@
                                         IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlae}"
                                         Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectCsgoExePathCommand}" />
                             </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
-                                <CheckBox Content="{x:Static properties:Resources.EnableMovieMakingConfigParentFolder}"
-                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
-                                          Style="{StaticResource CheckBoxColumnOptionStyle}">
-                                    <i:Interaction.Triggers>
-                                        <i:EventTrigger EventName="Checked">
-                                            <i:InvokeCommandAction
-                                                Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigFolderCommand, Mode=OneWay}" />
-                                        </i:EventTrigger>
-                                    </i:Interaction.Triggers>
-                                </CheckBox>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeConfigParentFolderPath}"
-                                             Margin="0 0 0 5"
-                                             IsEnabled="False" />
-                                    <Button Content="{x:Static properties:Resources.Browse}"
-                                            Margin="5 0 0 5"
-                                            Style="{DynamicResource GeneralButton}"
-                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
-                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateHlaeConfigFolderCommand}" />
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
-                                <CheckBox Content="{x:Static properties:Resources.LabelEnableCustomLocation}"
-                                          Style="{StaticResource CheckBoxColumnOptionStyle}"
-                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
-                                          Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeCustomLocationCommand}"
-                                          CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" />
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeExecutableLocation}"
-                                             Margin="0 0 0 5"
-                                             IsEnabled="False" />
-                                    <Button Content="{x:Static properties:Resources.Browse}"
-                                            Margin="5 0 0 5"
-                                            ToolTip="{x:Static properties:Resources.Browse}"
-                                            Style="{DynamicResource GeneralButton}"
-                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
-                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.RevealHlaeExecutableCommand}" />
-                                    <Button Content="{x:Static properties:Resources.Change}"
-                                            Margin="5 0 0 5"
-                                            ToolTip="{x:Static properties:Resources.Change}"
-                                            Style="{DynamicResource GeneralButton}"
-                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
-                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateCustomHlaeLocationCommand}" />
-                                    <Button Content="{x:Static properties:Resources.Reset}"
-                                            Margin="5 0 0 5"
-                                            ToolTip="{x:Static properties:Resources.Reset}"
-                                            Style="{DynamicResource GeneralButton}"
-                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
-                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.ResetCustomHlaeLocationCommand}" />
-                                </StackPanel>
-                            </StackPanel>
                         </StackPanel>
                     </mahapps:MetroTabItem>
                     <mahapps:MetroTabItem Header="{x:Static properties:Resources.Accounts}">
@@ -546,6 +494,110 @@
                                     Content="{x:Static properties:Resources.ClearVdmFiles}" />
                             <TextBlock Text="{Binding Source={StaticResource Locator}, Path=Settings.CacheSizeAsString}"
                                        Style="{StaticResource SubTitleSettingsStyle}" />
+                        </StackPanel>
+                    </mahapps:MetroTabItem>
+                    <mahapps:MetroTabItem Header="{x:Static properties:Resources.Movie}">
+                        <StackPanel Orientation="Vertical"
+                                    Margin="10"
+                                    HorizontalAlignment="Left">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="Hal-Life Advanced Effects"
+                                           Style="{StaticResource TitleSettingsStyle}" />
+                                <TextBlock Style="{StaticResource TitleSettingsStyle}" Margin="5 0 0 0">
+                                    <Hyperlink Style="{StaticResource HyperLinkStyle}"
+                                               Command="{Binding HandleHyperLinkCommand}"
+                                               CommandParameter="https://github.com/advancedfx/advancedfx/wiki/AfxHookSource">
+                                        (HLAE)
+                                    </Hyperlink>
+                                </TextBlock>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                                <CheckBox Content="{x:Static properties:Resources.EnableMovieMakingConfigParentFolder}"
+                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
+                                          Style="{StaticResource CheckBoxColumnOptionStyle}">
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Checked">
+                                            <i:InvokeCommandAction
+                                                Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigFolderCommand, Mode=OneWay}" />
+                                        </i:EventTrigger>
+                                    </i:Interaction.Triggers>
+                                </CheckBox>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeConfigParentFolderPath}"
+                                             Margin="0 0 0 5"
+                                             IsEnabled="False" />
+                                    <Button Content="{x:Static properties:Resources.Browse}"
+                                            Margin="5 0 0 5"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateHlaeConfigFolderCommand}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                                <CheckBox Content="{x:Static properties:Resources.LabelEnableCustomLocation}"
+                                          Style="{StaticResource CheckBoxColumnOptionStyle}"
+                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                          Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeCustomLocationCommand}"
+                                          CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeExecutableLocation}"
+                                             Margin="0 0 0 5"
+                                             IsEnabled="False" />
+                                    <Button Content="{x:Static properties:Resources.Browse}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Browse}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.RevealHlaeExecutableCommand}" />
+                                    <Button Content="{x:Static properties:Resources.Change}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Change}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateCustomHlaeLocationCommand}" />
+                                    <Button Content="{x:Static properties:Resources.Reset}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Reset}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.ResetCustomHlaeLocationCommand}" />
+                                </StackPanel>
+                            </StackPanel>
+
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="FFmpeg"
+                                           Style="{StaticResource TitleSettingsStyle}" />
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                                <CheckBox Content="{x:Static properties:Resources.LabelEnableCustomLocation}"
+                                          Style="{StaticResource CheckBoxColumnOptionStyle}"
+                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsFfmpegCustomLocationEnabled}"
+                                          Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableFfmpegCustomLocationCommand}"
+                                          CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.FfmpegExecutableLocation}"
+                                             Margin="0 0 0 5"
+                                             IsEnabled="False" />
+                                    <Button Content="{x:Static properties:Resources.Browse}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Browse}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsFfmpegCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.RevealFfmpegExecutableCommand}" />
+                                    <Button Content="{x:Static properties:Resources.Change}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Change}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsFfmpegCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateCustomFfmpegLocationCommand}" />
+                                    <Button Content="{x:Static properties:Resources.Reset}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Reset}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsFfmpegCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.ResetCustomFfmpegLocationCommand}" />
+                                </StackPanel>
+                            </StackPanel>
                         </StackPanel>
                     </mahapps:MetroTabItem>
                     <mahapps:MetroTabItem Header="{x:Static properties:Resources.Misc}">

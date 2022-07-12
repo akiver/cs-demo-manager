@@ -46,5 +46,7 @@ namespace Manager.Services
         string ShowSelectCsgoExecutable();
 
         string ShowSelectFolder();
+
+        string ShowSelectFfmpegExecutable();
     }
 }
