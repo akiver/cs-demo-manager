@@ -168,7 +168,7 @@
                                     <i:Interaction.Triggers>
                                         <i:EventTrigger EventName="Checked">
                                             <i:InvokeCommandAction
-                                                Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParentCommand, Mode=OneWay}" />
+                                                Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigFolderCommand, Mode=OneWay}" />
                                         </i:EventTrigger>
                                     </i:Interaction.Triggers>
                                 </CheckBox>
@@ -180,7 +180,37 @@
                                             Margin="5 0 0 5"
                                             Style="{DynamicResource GeneralButton}"
                                             IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeConfigParent}"
-                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.SelectHlaeConfigParentFolderCommand}" />
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateHlaeConfigFolderCommand}" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Margin="0 5 0 0">
+                                <CheckBox Content="{x:Static properties:Resources.LabelEnableCustomLocation}"
+                                          Style="{StaticResource CheckBoxColumnOptionStyle}"
+                                          IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                          Command="{Binding Source={StaticResource Locator}, Path=Settings.EnableHlaeCustomLocationCommand}"
+                                          CommandParameter="{Binding IsChecked, RelativeSource={RelativeSource Self}}" />
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeExecutableLocation}"
+                                             Margin="0 0 0 5"
+                                             IsEnabled="False" />
+                                    <Button Content="{x:Static properties:Resources.Browse}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Browse}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.RevealHlaeExecutableCommand}" />
+                                    <Button Content="{x:Static properties:Resources.Change}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Change}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.UpdateCustomHlaeLocationCommand}" />
+                                    <Button Content="{x:Static properties:Resources.Reset}"
+                                            Margin="5 0 0 5"
+                                            ToolTip="{x:Static properties:Resources.Reset}"
+                                            Style="{DynamicResource GeneralButton}"
+                                            IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
+                                            Command="{Binding Source={StaticResource Locator}, Path=Settings.ResetCustomHlaeLocationCommand}" />
                                 </StackPanel>
                             </StackPanel>
                         </StackPanel>

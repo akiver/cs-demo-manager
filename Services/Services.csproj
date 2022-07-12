@@ -175,6 +175,8 @@
     <Compile Include="Design\StuffDesignService.cs" />
     <Compile Include="Concrete\BoilerExitCode.cs" />
     <Compile Include="Exceptions\InvalidBoilerExecutableException.cs" />
+    <Compile Include="Exceptions\InvalidHlaeExecutableException.cs" />
+    <Compile Include="Exceptions\InvalidHlaePathException.cs" />
     <Compile Include="Exceptions\Launcher\CsgoNotFoundException.cs" />
     <Compile Include="Exceptions\Launcher\HlaeNotFound.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
@@ -240,6 +242,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -257,6 +264,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="resources\scripts\vd.job" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="resources\sounds\bomb_defused.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

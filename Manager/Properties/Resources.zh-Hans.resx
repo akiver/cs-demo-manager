@@ -2568,9 +2568,6 @@
   <data name="NotificationUpdatingHlae" xml:space="preserve">
     <value>正在更新 HLAE 组件……</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>请选择 HLAE 配置所在的父文件夹路径</value>
-  </data>
   <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
     <value>您正在关注的玩家不在此录像中。您可以在设置 -&gt; 账户中更改玩家，或是从计分板中查看。</value>
   </data>

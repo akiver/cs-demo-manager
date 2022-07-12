@@ -1906,6 +1906,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Executable not found..
+        /// </summary>
+        public static string DialogExecutableNotFound {
+            get {
+                return ResourceManager.GetString("DialogExecutableNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to export data into a single file or in multiple files?.
         /// </summary>
         public static string DialogExportMultipleOrSingle {
@@ -2066,6 +2075,24 @@ namespace Manager.Properties {
         public static string DialogInstallVirtuaDubFirst {
             get {
                 return ResourceManager.GetString("DialogInstallVirtuaDubFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid executable..
+        /// </summary>
+        public static string DialogInvalidExecutable {
+            get {
+                return ResourceManager.GetString("DialogInvalidExecutable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters..
+        /// </summary>
+        public static string DialogInvalidHlaeExecutablePath {
+            get {
+                return ResourceManager.GetString("DialogInvalidHlaeExecutablePath", resourceCulture);
             }
         }
         
@@ -2331,15 +2358,6 @@ namespace Manager.Properties {
         public static string DialogSelectCsgoPath {
             get {
                 return ResourceManager.GetString("DialogSelectCsgoPath", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select the HLAE config parent folder location..
-        /// </summary>
-        public static string DialogSelectHlaeConfigParentFolderLocation {
-            get {
-                return ResourceManager.GetString("DialogSelectHlaeConfigParentFolderLocation", resourceCulture);
             }
         }
         
@@ -5295,6 +5313,15 @@ namespace Manager.Properties {
         public static string LabelDurationSeconds {
             get {
                 return ResourceManager.GetString("LabelDurationSeconds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable custom location.
+        /// </summary>
+        public static string LabelEnableCustomLocation {
+            get {
+                return ResourceManager.GetString("LabelEnableCustomLocation", resourceCulture);
             }
         }
         

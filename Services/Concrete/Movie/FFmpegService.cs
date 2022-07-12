@@ -9,72 +9,17 @@ namespace Services.Concrete.Movie
 {
     public static class FFmpegService
     {
-        private const string FFMPEG_VERSION = "5.0.1";
-        private static string ARCHIVE_NAME = $"ffmpeg-{FFMPEG_VERSION}-essentials_build";
-        private static string DOWNLOAD_ENDPOINT = $"https://www.gyan.dev/ffmpeg/builds/packages/{ARCHIVE_NAME}.zip";
-
-        /// <summary>
-        /// Return the path where FFmpeg is installed.
-        /// </summary>
-        /// <returns></returns>
         public static string GetFFmpegPath()
         {
             string hlaeFolderPath = HlaeService.GetHlaePath();
             return Path.Combine(hlaeFolderPath, "ffmpeg");
         }
 
-        /// <summary>
-        /// Return the location of ffmpeg.exe.
-        /// </summary>
-        /// <returns></returns>
         public static string GetFFmpegExePath()
         {
             return GetFFmpegPath() + Path.DirectorySeparatorChar + "bin" + Path.DirectorySeparatorChar + "ffmpeg.exe";
         }
 
-        /// <summary>
-        /// Return the file's path containing the FFmpeg version installed.
-        /// </summary>
-        /// <returns></returns>
-        public static string GetFFmpegVersionFilePath()
-        {
-            return AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "ffmpeg_version";
-        }
-
-        public static bool IsUpdateAvailable()
-        {
-            string version = GetInstalledVersion();
-            if (!string.IsNullOrEmpty(version))
-            {
-                Version installedVersion = new Version(version);
-                string versionWithoutDate = GetVersionWithoutDate();
-                Version supportedVersion = new Version(versionWithoutDate);
-                return supportedVersion > installedVersion;
-            }
-
-            return true;
-        }
-
-        public static string GetInstalledVersion()
-        {
-            if (!IsFFmpegInstalled())
-            {
-                return string.Empty;
-            }
-
-            string versionFilePath = GetFFmpegVersionFilePath();
-            if (!File.Exists(versionFilePath))
-            {
-                return string.Empty;
-            }
-
-            return File.ReadAllText(versionFilePath);
-        }
-
-        /// <summary>
-        /// Indicates if FFmpeg is installed.
-        /// </summary>
-        /// <returns></returns>
         public static bool IsFFmpegInstalled()
         {
             return File.Exists(GetFFmpegExePath());
@@ -89,10 +34,6 @@ namespace Services.Concrete.Movie
                 if (downloaded)
                 {
                     bool extracted = await ExtractArchive(archivePath);
-                    if (extracted)
-                    {
-                        WriteVersion();
-                    }
 
                     return extracted;
                 }
@@ -105,16 +46,13 @@ namespace Services.Concrete.Movie
             return false;
         }
 
-        /// <summary>
-        /// Download the last FFmpeg release.
-        /// </summary>
         private static async Task<bool> Download(string archivePath)
         {
             using (WebClient webClient = new WebClient())
             {
                 try
                 {
-                    Uri uri = new Uri(DOWNLOAD_ENDPOINT);
+                    Uri uri = new Uri("https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip");
                     await Task.Factory.StartNew(() => webClient.DownloadFile(uri, archivePath));
                     return true;
                 }
@@ -131,19 +69,23 @@ namespace Services.Concrete.Movie
             try
             {
                 string destination = AppSettings.GetLocalAppDataPath();
-                if (File.Exists(archivePath))
+                FastZip fast = new FastZip();
+                await Task.Factory.StartNew(() => fast.ExtractZip(archivePath, destination, null));
+                string ffmpegPath = GetFFmpegPath();
+                DirectoryInfo directoryInfo = new DirectoryInfo(destination);
+                DirectoryInfo[] ffmpegFolders = directoryInfo.GetDirectories("ffmpeg-*-essentials_build");
+                if (ffmpegFolders.Length == 0)
                 {
-                    FastZip fast = new FastZip();
-                    await Task.Factory.StartNew(() => fast.ExtractZip(archivePath, destination, null));
-                    string ffmpegPath = GetFFmpegPath();
-                    if (Directory.Exists(ffmpegPath))
-                    {
-                        Directory.Delete(ffmpegPath, true);
-                    }
-
-                    Directory.Move(destination + Path.DirectorySeparatorChar + ARCHIVE_NAME, ffmpegPath);
-                    File.Delete(archivePath);
+                    throw new Exception("Couldn't find extracted FFmpeg folder.");
                 }
+
+                if (Directory.Exists(ffmpegPath))
+                {
+                    Directory.Delete(ffmpegPath, true);
+                }
+
+                Directory.Move(destination + Path.DirectorySeparatorChar + ffmpegFolders[0].Name, ffmpegPath);
+                File.Delete(archivePath);
 
                 return true;
             }
@@ -152,17 +94,6 @@ namespace Services.Concrete.Movie
                 Logger.Instance.Log(e);
                 return false;
             }
-        }
-
-        private static void WriteVersion()
-        {
-            string versionFilePath = GetFFmpegVersionFilePath();
-            File.WriteAllText(versionFilePath, GetVersionWithoutDate());
-        }
-
-        private static string GetVersionWithoutDate()
-        {
-            return FFMPEG_VERSION.Split('-')[0];
         }
     }
 }

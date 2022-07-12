@@ -202,6 +202,7 @@
     <Compile Include="Internals\Navigation.cs" />
     <Compile Include="Internals\ScrollViewHelper.cs" />
     <Compile Include="Messages\ComboBoxMultiClosedMessage.cs" />
+    <Compile Include="Messages\CustomHlaeLocationChangedMessage.cs" />
     <Compile Include="Messages\DownloadDemosMessage.cs" />
     <Compile Include="Messages\LoadDemoFromAppArgument.cs" />
     <Compile Include="Messages\LoadSuspectListMessage.cs" />

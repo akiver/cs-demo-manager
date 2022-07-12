@@ -2569,9 +2569,6 @@ Você deseja instalar (Recomenda-se evitar possíveis falhas devido às atualiza
   <data name="NotificationUpdatingHlae" xml:space="preserve">
     <value>Atualizando o HLAE...</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>Selecione a localização da pasta principal da configuração do HLAE.</value>
-  </data>
   <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
     <value>O jogador que você está focando não está nesta demo. Você pode alterá-lo das configurações (seção de contas) ou assisti-lo a partir do placar.</value>
   </data>

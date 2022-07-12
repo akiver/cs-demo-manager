@@ -2677,9 +2677,6 @@ Do you want to install it? (If you are using it you have to install it first to 
     <value>A new HLAE version is avalailable.
 Do you want to install it? (It's recommended to avoid possible crash due to CSGO updates)</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>Please select the HLAE config parent folder location.</value>
-  </data>
   <data name="NotificationInstallingHlae" xml:space="preserve">
     <value>Installing HLAE...</value>
   </data>
@@ -3275,5 +3272,17 @@ Please update it by clicking on the "Update" button.</value>
   </data>
   <data name="TooltipChat" xml:space="preserve">
     <value>Chat</value>
+  </data>
+  <data name="LabelEnableCustomLocation" xml:space="preserve">
+    <value>Enable custom location</value>
+  </data>
+  <data name="DialogExecutableNotFound" xml:space="preserve">
+    <value>Executable not found.</value>
+  </data>
+  <data name="DialogInvalidExecutable" xml:space="preserve">
+    <value>Invalid executable.</value>
+  </data>
+  <data name="DialogInvalidHlaeExecutablePath" xml:space="preserve">
+    <value>The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</value>
   </data>
 </root>

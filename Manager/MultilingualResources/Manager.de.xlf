@@ -3427,10 +3427,6 @@ Wollen Sie sie installieren? (Es wird empfohlen zu aktualisieren, um mögliche C
           <source>Updating HLAE...</source>
           <target state="new">Aktualisiere HLAE...</target>
         </trans-unit>
-        <trans-unit id="DialogSelectHlaeConfigParentFolderLocation" translate="yes" xml:space="preserve">
-          <source>Please select the HLAE config parent folder location.</source>
-          <target state="new">Bitte wählen Sie den übergeordneten Config-Ordner für HLAE aus.</target>
-        </trans-unit>
         <trans-unit id="DialogPlayerFocusedNotFound" translate="yes" xml:space="preserve">
           <source>The player that you are focusing is not in this demo. You can change it from settings (accounts section) or watch it from the scoreboard.</source>
           <target state="new">Den Spieler, den Sie sich anschauen, ist nicht in der Demo. Sie können dies mit den Einstellungen (Account-Bereich) ändern, oder sie schauen sich das Scoreboard an.</target>
@@ -4223,6 +4219,22 @@ Bitte aktualisieren Sie mit dem Klicken auf den "Update"-Button.</target>
         <trans-unit id="TooltipChat" translate="yes" xml:space="preserve">
           <source>Chat</source>
           <target state="new">Chat</target>
+        </trans-unit>
+        <trans-unit id="LabelEnableCustomLocation" translate="yes" xml:space="preserve">
+          <source>Enable custom location</source>
+          <target state="new">Enable custom location</target>
+        </trans-unit>
+        <trans-unit id="DialogExecutableNotFound" translate="yes" xml:space="preserve">
+          <source>Executable not found.</source>
+          <target state="new">Executable not found.</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidExecutable" translate="yes" xml:space="preserve">
+          <source>Invalid executable.</source>
+          <target state="new">Invalid executable.</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidHlaeExecutablePath" translate="yes" xml:space="preserve">
+          <source>The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</source>
+          <target state="new">The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</target>
         </trans-unit>
       </group>
     </body>

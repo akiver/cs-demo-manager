@@ -18,6 +18,7 @@ using Manager.Messages;
 using Manager.Services;
 using Newtonsoft.Json;
 using Services.Concrete.Movie;
+using Services.Exceptions;
 using Services.Interfaces;
 using Services.Models.GitHub;
 
@@ -167,41 +168,44 @@ namespace Manager.ViewModel
                                            bool isUpdateAvailable = await HlaeService.IsUpdateAvailable();
                                            if (isUpdateAvailable)
                                            {
-                                               var download = await _dialogService.ShowMessageAsync(
+                                               var shouldInstallUpdate = await _dialogService.ShowMessageAsync(
                                                    Properties.Resources.DialogNewHlaeVersionAvailable, MessageDialogStyle.AffirmativeAndNegative);
-                                               if (download == MessageDialogResult.Affirmative)
+                                               if (shouldInstallUpdate == MessageDialogResult.Affirmative)
                                                {
-                                                   bool hlaeUpdated = await HlaeService.UpgradeHlae();
-                                                   if (hlaeUpdated)
+                                                   try
                                                    {
-                                                       await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeUpdated,
-                                                           MessageDialogStyle.Affirmative);
+                                                       await HlaeService.Install();
+                                                       await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeUpdated, MessageDialogStyle.Affirmative);
                                                    }
-                                                   else
+                                                   catch (Exception ex)
                                                    {
-                                                       await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeUpdateFailed,
-                                                           MessageDialogStyle.Affirmative);
+                                                       Logger.Instance.Log(ex);
+                                                       string message = ex is InvalidHlaePathException
+                                                           ? Properties.Resources.DialogInvalidHlaeExecutablePath
+                                                           : Properties.Resources.DialogHlaeUpdateFailed;
+                                                       await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
                                                    }
                                                }
                                            }
                                        }
                                        else
                                        {
-                                           // inform that HLAE isn't installed
-                                           var installHlae = await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeNotFound,
+                                           var shouldInstallHlae = await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeNotFound,
                                                MessageDialogStyle.AffirmativeAndNegative);
-                                           if (installHlae == MessageDialogResult.Affirmative)
+                                           if (shouldInstallHlae == MessageDialogResult.Affirmative)
                                            {
-                                               bool isHlaeInstalled = await HlaeService.UpgradeHlae();
-                                               if (isHlaeInstalled)
+                                               try
                                                {
-                                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeInstalled,
-                                                       MessageDialogStyle.Affirmative);
+                                                   await HlaeService.Install();
+                                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeInstalled, MessageDialogStyle.Affirmative);
                                                }
-                                               else
+                                               catch (Exception ex)
                                                {
-                                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeInstallationFailed,
-                                                       MessageDialogStyle.Affirmative);
+                                                   Logger.Instance.Log(ex);
+                                                   string message = ex is InvalidHlaePathException
+                                                       ? Properties.Resources.DialogInvalidHlaeExecutablePath
+                                                       : Properties.Resources.DialogHlaeInstallationFailed;
+                                                   await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
                                                }
                                            }
                                            else

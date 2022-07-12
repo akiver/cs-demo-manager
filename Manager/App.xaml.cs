@@ -11,6 +11,7 @@ using System.Windows;
 using System.Windows.Threading;
 using ControlzEx.Theming;
 using Core;
+using ServicesSettings = Services.Properties.Settings;
 using GalaSoft.MvvmLight.Threading;
 using MahApps.Metro.Theming;
 using Manager.Properties;
@@ -102,12 +103,7 @@ namespace Manager
                     return;
                 }
 
-                // upgrade user settings
-                if (Settings.Default.UpgradeRequired)
-                {
-                    Settings.Default.Upgrade();
-                    Settings.Default.UpgradeRequired = false;
-                }
+                UpgradeSettingsIfNecessary();
 
                 CultureInfo ci = CultureInfo.InstalledUICulture;
                 if (string.IsNullOrEmpty(Settings.Default.Language))
@@ -169,7 +165,8 @@ namespace Manager
 
         private void Application_Exit(object sender, ExitEventArgs e)
         {
-            Settings.Default.Save();
+            SaveSettings();
+
             if (Settings.Default.CloseBotOnExit && _instance != null)
             {
                 Win32Utils.SendMessageToBot(Win32Utils.WM_CLOSE);
@@ -211,6 +208,21 @@ namespace Manager
         {
             _instance?.ReleaseMutex();
             base.OnExit(e);
+        }
+
+        private void UpgradeSettingsIfNecessary()
+        {
+            if (Settings.Default.UpgradeRequired)
+            {
+                Settings.Default.Upgrade();
+                Settings.Default.UpgradeRequired = false;
+            }
+        }
+
+        private void SaveSettings()
+        {
+            Settings.Default.Save();
+            ServicesSettings.Default.Save();
         }
 
         private static void HandleException(Exception e)

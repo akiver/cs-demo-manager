@@ -2,11 +2,13 @@
 using System.IO;
 using System.Net;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Core;
 using ICSharpCode.SharpZipLib.Zip;
-using Microsoft.Win32;
 using Newtonsoft.Json;
+using Services.Exceptions;
 using Services.Models.GitHub;
 
 namespace Services.Concrete.Movie
@@ -15,55 +17,33 @@ namespace Services.Concrete.Movie
     {
         public const string GITHUB_ENDPOINT = "https://api.github.com/repos/advancedfx/advancedfx/releases";
 
-        /// <summary>
-        /// Return the path where HLAE is installed.
-        /// </summary>
-        /// <returns></returns>
         public static string GetHlaePath()
         {
+            if (Properties.Settings.Default.IsHlaeCustomLocationEnabled)
+            {
+                return Path.GetDirectoryName(Properties.Settings.Default.HlaeExecutableLocation);
+            }
+
             return Path.Combine(AppSettings.GetLocalAppDataPath(), "hlae");
         }
 
-        /// <summary>
-        /// Return the file's path containing the HLAE version number installed.
-        /// </summary>
-        /// <returns></returns>
-        public static string GetHlaeVersionFilePath()
-        {
-            return GetHlaePath() + Path.DirectorySeparatorChar + "version";
-        }
-
-        /// <summary>
-        /// Return the version of HLAE installed.
-        /// </summary>
-        /// <returns></returns>
         public static string GetHlaeVersion()
         {
-            string versionFilePath = GetHlaeVersionFilePath();
-            if (!File.Exists(versionFilePath))
+            try
+            {
+                return GetHlaeVersionFromExecutable(GetHlaeExePath());
+            }
+            catch (Exception)
             {
                 return null;
             }
-
-            string version = File.ReadAllText(versionFilePath);
-
-            return string.IsNullOrEmpty(version) ? null : version;
         }
 
-        /// <summary>
-        /// Return the HLAE.exe path.
-        /// </summary>
-        /// <returns></returns>
         public static string GetHlaeExePath()
         {
             return GetHlaePath() + Path.DirectorySeparatorChar + "hlae.exe";
         }
 
-        /// <summary>
-        /// Indicates if HLAE is installed.
-        /// We test if we have the HLAE .exe and a "version" file required to check update.
-        /// </summary>
-        /// <returns></returns>
         public static bool IsHlaeInstalled()
         {
             return File.Exists(GetHlaeExePath()) && GetHlaeVersion() != null;
@@ -90,48 +70,51 @@ namespace Services.Concrete.Movie
             }
         }
 
-        public static async Task<bool> UpgradeHlae()
+        public static async Task Install()
         {
-            try
+            string hlaePath = GetHlaePath();
+            AssertInstallationPathIsValid(hlaePath);
+
+            Release release = await GetLastReleaseObject();
+            if (release?.Assets != null && release.Assets.Count > 0)
             {
-                Release release = await GetLastReleaseObject();
-                if (release?.Assets != null && release.Assets.Count > 0)
+                string archivePath = AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "hlae.zip";
+                string downloadUrl = release.Assets[0].BrowserDownloadUrl;
+                await DownloadArchive(downloadUrl, archivePath);
+
+                bool shouldBackupFfmpegFolder = FFmpegService.IsFFmpegInstalled();
+                if (shouldBackupFfmpegFolder)
                 {
-                    string archivePath = AppSettings.GetLocalAppDataPath() + Path.DirectorySeparatorChar + "hlae.zip";
-                    string downloadUrl = release.Assets[0].BrowserDownloadUrl;
-                    string version = release.TagName.Remove(0, 1);
+                    BackupFfmpegFolder();
+                }
 
-                    bool downloaded = await Download(downloadUrl, archivePath);
-                    if (downloaded)
-                    {
-                        bool shouldBackupFfmpegFolder = FFmpegService.IsFFmpegInstalled();
-                        if (shouldBackupFfmpegFolder)
-                        {
-                            BackupFfmpegFolder();
-                        }
-
-                        bool extracted = await ExtractArchive(archivePath);
-                        if (shouldBackupFfmpegFolder)
-                        {
-                            RestoreFfmpegFolder();
-                        }
-
-                        if (extracted)
-                        {
-                            // create a file containing the version installed to check update later
-                            File.WriteAllText(GetHlaeVersionFilePath(), version);
-                            return true;
-                        }
-                    }
+                await ExtractArchive(archivePath);
+                if (shouldBackupFfmpegFolder)
+                {
+                    RestoreFfmpegFolder();
                 }
             }
-            catch (Exception e)
-            {
-                Logger.Instance.Log(e);
-                return false;
-            }
+        }
 
-            return false;
+        public static void EnableCustomLocation(string executablePath)
+        {
+            AssertInstallationPathIsValid(executablePath);
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(executablePath);
+            AssertExecutableIsValid(versionInfo);
+
+            Properties.Settings.Default.HlaeExecutableLocation = executablePath;
+            Properties.Settings.Default.IsHlaeCustomLocationEnabled = true;
+        }
+
+        public static void DisableCustomLocation()
+        {
+            Properties.Settings.Default.IsHlaeCustomLocationEnabled = false;
+        }
+
+        public static void ResetCustomLocation()
+        {
+            Properties.Settings.Default.IsHlaeCustomLocationEnabled = false;
+            Properties.Settings.Default.HlaeExecutableLocation = "";
         }
 
         private static async Task<Release> GetLastReleaseObject()
@@ -151,7 +134,7 @@ namespace Services.Concrete.Movie
                     using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                     {
                         string json = reader.ReadToEnd();
-                        List<Release> releases =  await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<List<Release>>(json));
+                        List<Release> releases = await Task.Run(() => JsonConvert.DeserializeObject<List<Release>>(json));
                         foreach (Release release in releases)
                         {
                             if (release.PreRelease)
@@ -173,53 +156,26 @@ namespace Services.Concrete.Movie
             }
         }
 
-        /// <summary>
-        /// Download the last HLAE release.
-        /// </summary>
-        /// <param name="url"></param>
-        /// <param name="archivePath"></param>
-        private static async Task<bool> Download(string url, string archivePath)
+        private static async Task DownloadArchive(string url, string archivePath)
         {
             using (WebClient webClient = new WebClient())
             {
-                try
-                {
-                    Uri uri = new Uri(url);
-                    await Task.Factory.StartNew(() => webClient.DownloadFile(uri, archivePath));
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    Logger.Instance.Log(e);
-                    return false;
-                }
+                Uri uri = new Uri(url);
+                await Task.Run(() => webClient.DownloadFile(uri, archivePath));
             }
         }
 
-        private static async Task<bool> ExtractArchive(string archivePath)
+        private static async Task ExtractArchive(string archivePath)
         {
-            try
+            string destination = GetHlaePath();
+            if (Directory.Exists(destination))
             {
-                string destination = GetHlaePath();
-                if (File.Exists(archivePath))
-                {
-                    if (Directory.Exists(destination))
-                    {
-                        Directory.Delete(destination, true);
-                    }
-
-                    FastZip fast = new FastZip();
-                    await Task.Factory.StartNew(() => fast.ExtractZip(archivePath, destination, null));
-                    File.Delete(archivePath);
-                }
-
-                return true;
+                Directory.Delete(destination, true);
             }
-            catch (Exception e)
-            {
-                Logger.Instance.Log(e);
-                return false;
-            }
+
+            FastZip fast = new FastZip();
+            await Task.Run(() => fast.ExtractZip(archivePath, destination, null));
+            File.Delete(archivePath);
         }
 
         private static void BackupFfmpegFolder()
@@ -252,31 +208,38 @@ namespace Services.Concrete.Movie
             }
         }
 
-
-        /// <summary>
-        /// Display a file dialog to select the csgo.exe location and return its path
-        /// </summary>
-        /// <returns></returns>
-        public static string ShowCsgoExeDialog()
+        private static string GetHlaeVersionFromExecutable(string executablePath)
         {
-            OpenFileDialog dialog = new OpenFileDialog
-            {
-                DefaultExt = "csgo.exe",
-                Filter = "EXE Files (csgo.exe)|csgo.exe",
-            };
+            FileVersionInfo versionInfo = FileVersionInfo.GetVersionInfo(executablePath);
+            AssertExecutableIsValid(versionInfo);
 
-            bool? result = dialog.ShowDialog();
-            if (result != null && (bool)result)
+            return $"{versionInfo.ProductMajorPart}.{versionInfo.ProductMinorPart}.{versionInfo.ProductBuildPart}";
+        }
+
+        private static void AssertExecutableIsValid(FileVersionInfo versionInfo)
+        {
+            if (versionInfo.FileVersion == null || versionInfo.ProductName != "hlae" || versionInfo.CompanyName != "hlae")
             {
-                return dialog.FileName;
+                throw new InvalidHlaeExecutableException();
             }
-
-            return string.Empty;
         }
 
         private static string GetTemporaryFfmegDirectoryPath()
         {
             return Path.Combine(AppSettings.GetLocalAppDataPath(), "ffmpeg-temp");
+        }
+
+        private static void AssertInstallationPathIsValid(string path)
+        {
+            if (!IsValidPath(path))
+            {
+                throw new InvalidHlaePathException();
+            }
+        }
+
+        private static bool IsValidPath(string path)
+        {
+            return Regex.IsMatch(path, "^\\p{IsBasicLatin}*$");
         }
     }
 }

@@ -385,14 +385,10 @@
 
                                     <StackPanel Orientation="Horizontal"
                                                 HorizontalAlignment="Right">
-                                        <Label Content="{x:Static properties:Resources.LabelInstalledVersion}"
-                                               VerticalAlignment="Center" />
-                                        <TextBlock Style="{StaticResource TextBlockSmallWarning}"
-                                                   Text="{Binding FFmpegVersion, Mode=OneWay, StringFormat={} {0}}" />
                                         <Button Content="{x:Static properties:Resources.Install}"
                                                 ToolTip="{x:Static properties:Resources.ToolTipInstallFFmpeg}"
                                                 Style="{DynamicResource GeneralButton}"
-                                                IsEnabled="{Binding IsInstallFFmpegAvailable}"
+                                                IsEnabled="{Binding IsFFmpegInstalled, Converter={StaticResource BooleanInvertedConverter}}"
                                                 Command="{Binding InstallFFmpeg}" />
                                         <Button Content="{x:Static properties:Resources.Browse}"
                                                 ToolTip="{x:Static properties:Resources.ToolTipBrowseToFFmpegFolder}"

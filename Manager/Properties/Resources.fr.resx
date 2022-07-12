@@ -2574,9 +2574,6 @@ Voulez-vous l'installer? (Il est recommandé d'avoir la dernière pour éviter d
   <data name="NotificationUpdatingHlae" xml:space="preserve">
     <value>Mise à jour de HLAE en cours...</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>Veuillez selectionner le dossier qui contiendra les fichiers de configuration générées par HLAE.</value>
-  </data>
   <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
     <value>Le joueur actuellement ciblé n'est pas dans cette démo. Vous pouvez le changer depuis les options (section Comptes) ou le selectionner directement depuis le scoreboard.</value>
   </data>
@@ -3170,5 +3167,17 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="TooltipChat" xml:space="preserve">
     <value>Tchat</value>
+  </data>
+  <data name="LabelEnableCustomLocation" xml:space="preserve">
+    <value>Activer l'emplacement personnalisé</value>
+  </data>
+  <data name="DialogExecutableNotFound" xml:space="preserve">
+    <value>Exécutable introuvable.</value>
+  </data>
+  <data name="DialogInvalidExecutable" xml:space="preserve">
+    <value>Exécutable invalide.</value>
+  </data>
+  <data name="DialogInvalidHlaeExecutablePath" xml:space="preserve">
+    <value>Le chemin contient des caractères qui peuvent entraîner des comportements inattendus dans le jeu. Veuillez sélectionner un dossier qui contient seulement des caractères ASCII.</value>
   </data>
 </root>

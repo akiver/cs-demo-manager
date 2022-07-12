@@ -40,5 +40,11 @@ namespace Manager.Services
         Task<MessageDialogResult> ShowSendShareCodeToThirdPartyConfirmationAsync(string thirdPartyName);
 
         Task<MessageDialogResult> ShowTgaFound(bool generateVideo);
+
+        string ShowSelectHlaeExecutable();
+
+        string ShowSelectCsgoExecutable();
+
+        string ShowSelectFolder();
     }
 }

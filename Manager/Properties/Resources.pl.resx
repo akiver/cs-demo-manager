@@ -2569,9 +2569,6 @@ Czy chcesz ją zainstalować? (Zalecane by uniknąć crashów w związku z aktua
   <data name="NotificationUpdatingHlae" xml:space="preserve">
     <value>Aktualizowanie HLAE...</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>Wybierz lokalizację nadrzędnego folderu z plikami konfiguracyjnymi HLAE.</value>
-  </data>
   <data name="DemoStatusNone" xml:space="preserve">
     <value>Brak</value>
   </data>

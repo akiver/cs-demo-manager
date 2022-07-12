@@ -4,20 +4,22 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using ControlzEx.Theming;
 using Core;
 using Core.Models;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
-using MahApps.Metro;
 using MahApps.Metro.Controls.Dialogs;
 using Manager.Messages;
 using Manager.Models;
 using Manager.Properties;
 using Manager.Services;
+using ServicesSettings = Services.Properties.Settings;
 using Manager.ViewModel.Shared;
 using Services.Concrete.Movie;
+using Services.Exceptions;
 using Services.Interfaces;
 using Application = System.Windows.Application;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
@@ -50,6 +52,20 @@ namespace Manager.ViewModel
 
         private bool _isWorldwideEnabled = Settings.Default.IsWorldwideEnabled;
 
+        private string _hlaeExecutableLocation = ServicesSettings.Default.HlaeExecutableLocation;
+        public string HlaeExecutableLocation
+        {
+            get { return _hlaeExecutableLocation; }
+            set { Set(() => HlaeExecutableLocation, ref _hlaeExecutableLocation, value); }
+        }
+
+        private bool _isHlaeCustomLocationEnabled = ServicesSettings.Default.IsHlaeCustomLocationEnabled;
+        public bool IsHlaeCustomLocationEnabled
+        {
+            get { return _isHlaeCustomLocationEnabled; }
+            set { Set(() => IsHlaeCustomLocationEnabled, ref _isHlaeCustomLocationEnabled, value); }
+        }
+
         private RelayCommand _clearDemosDataCacheCommand;
 
         private RelayCommand _importCustomDataCacheCommand;
@@ -61,10 +77,6 @@ namespace Manager.ViewModel
         private RelayCommand _selectCsgoExePathCommand;
 
         private RelayCommand _enableHlaeCommand;
-
-        private RelayCommand _enableHlaeConfigParentFolderCommand;
-
-        private RelayCommand _selectHlaeConfigParentFolderCommand;
 
         private RelayCommand _addAccountCommand;
 
@@ -294,6 +306,13 @@ namespace Manager.ViewModel
         #endregion
 
         #region Accessors
+
+        public RelayCommand<bool> EnableHlaeCustomLocationCommand { get; }
+        public RelayCommand ResetCustomHlaeLocationCommand { get; }
+        public RelayCommand UpdateCustomHlaeLocationCommand { get; }
+        public RelayCommand RevealHlaeExecutableCommand { get; }
+        public RelayCommand EnableHlaeConfigFolderCommand { get; }
+        public RelayCommand UpdateHlaeConfigFolderCommand { get; }
 
         public List<ComboboxSelector> Languages
         {
@@ -1627,14 +1646,14 @@ namespace Manager.ViewModel
                                    bool isCsgoPathSelected = Settings.Default.CsgoExePath != string.Empty;
                                    if (!isCsgoPathSelected)
                                    {
-                                       string path = HlaeService.ShowCsgoExeDialog();
-                                       if (string.IsNullOrEmpty(path))
+                                       string csgoExecutablePath = _dialogService.ShowSelectCsgoExecutable();
+                                       if (string.IsNullOrEmpty(csgoExecutablePath))
                                        {
                                            EnableHlae = false;
                                            return;
                                        }
 
-                                       CsgoExePath = path;
+                                       CsgoExePath = csgoExecutablePath;
                                    }
 
                                    // check if HLAE is installed and ask to install if it's not
@@ -1654,16 +1673,21 @@ namespace Manager.ViewModel
 
                                            Notification = Properties.Resources.NotificationInstallingHlae;
                                            HasNotification = true;
-                                           EnableHlae = await HlaeService.UpgradeHlae();
-                                           if (EnableHlae)
+
+                                           try
                                            {
-                                               await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeInstalled,
-                                                   MessageDialogStyle.Affirmative);
+                                               await HlaeService.Install();
+                                               EnableHlae = true;
+                                               await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeInstalled, MessageDialogStyle.Affirmative);
                                            }
-                                           else
+                                           catch (Exception ex)
                                            {
-                                               await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeInstallationFailed,
-                                                   MessageDialogStyle.Affirmative);
+                                               EnableHlae = false;
+                                               Logger.Instance.Log(ex);
+                                               string message = ex is InvalidHlaePathException
+                                                   ? Properties.Resources.DialogInvalidHlaeExecutablePath
+                                                   : Properties.Resources.DialogHlaeInstallationFailed;
+                                               await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
                                            }
 
                                            HasNotification = false;
@@ -1685,16 +1709,20 @@ namespace Manager.ViewModel
                                            {
                                                Notification = Properties.Resources.NotificationUpdatingHlae;
                                                HasNotification = true;
-                                               EnableHlae = await HlaeService.UpgradeHlae();
-                                               if (EnableHlae)
+                                               try
                                                {
-                                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeUpdated,
-                                                       MessageDialogStyle.Affirmative);
+                                                   await HlaeService.Install();
+                                                   EnableHlae = true;
+                                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHlaeUpdated, MessageDialogStyle.Affirmative);
                                                }
-                                               else
+                                               catch (Exception ex)
                                                {
-                                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogHlaeUpdateFailed,
-                                                       MessageDialogStyle.Affirmative);
+                                                   EnableHlae = false;
+                                                   Logger.Instance.Log(ex);
+                                                   string message = ex is InvalidHlaePathException
+                                                       ? Properties.Resources.DialogInvalidHlaeExecutablePath
+                                                       : Properties.Resources.DialogHlaeUpdateFailed;
+                                                   await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
                                                }
 
                                                HasNotification = false;
@@ -1711,44 +1739,6 @@ namespace Manager.ViewModel
         }
 
         /// <summary>
-        /// Command to enable HLAE config parent.
-        /// </summary>
-        public RelayCommand EnableHlaeConfigParentCommand
-        {
-            get
-            {
-                return _enableHlaeConfigParentFolderCommand
-                       ?? (_enableHlaeConfigParentFolderCommand = new RelayCommand(
-                           async () =>
-                           {
-                               if (string.IsNullOrEmpty(Settings.Default.HlaeConfigParentFolderPath))
-                               {
-                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogSelectHlaeConfigParentFolderLocation,
-                                       MessageDialogStyle.Affirmative);
-                                   EnableHlaeConfigParent = ShowHlaeConfigParentFolderDialog();
-                               }
-                               else
-                               {
-                                   EnableHlaeConfigParent = true;
-                               }
-                           }));
-            }
-        }
-
-        /// <summary>
-        /// Command to select the HLAE config parent folder.
-        /// </summary>
-        public RelayCommand SelectHlaeConfigParentFolderCommand
-        {
-            get
-            {
-                return _selectHlaeConfigParentFolderCommand
-                       ?? (_selectHlaeConfigParentFolderCommand = new RelayCommand(
-                           () => { EnableHlaeConfigParent = ShowHlaeConfigParentFolderDialog(); }));
-            }
-        }
-
-        /// <summary>
         /// Command to select the csgo.exe location
         /// </summary>
         public RelayCommand SelectCsgoExePathCommand
@@ -1759,10 +1749,10 @@ namespace Manager.ViewModel
                        ?? (_selectCsgoExePathCommand = new RelayCommand(
                            () =>
                            {
-                               string path = HlaeService.ShowCsgoExeDialog();
-                               if (!string.IsNullOrEmpty(path))
+                               string csgoExecutablePath = _dialogService.ShowSelectCsgoExecutable();
+                               if (!string.IsNullOrEmpty(csgoExecutablePath))
                                {
-                                   CsgoExePath = path;
+                                   CsgoExePath = csgoExecutablePath;
                                }
                            }));
             }
@@ -1892,6 +1882,13 @@ namespace Manager.ViewModel
             _demosService = demosService;
             _steamService = steamService;
             _accountStatsService = accountStatsService;
+            EnableHlaeCustomLocationCommand = new RelayCommand<bool>(async (isChecked) => await EnableHlaeCustomLocation(isChecked));
+            UpdateCustomHlaeLocationCommand = new RelayCommand(async () => await UpdateCustomHlaeLocation());
+            ResetCustomHlaeLocationCommand = new RelayCommand(ResetHlaeCustomLocation);
+            RevealHlaeExecutableCommand = new RelayCommand(async () => await RevealHlaeExecutable());
+            EnableHlaeConfigFolderCommand = new RelayCommand(EnableHlaeConfigFolder);
+            UpdateHlaeConfigFolderCommand = new RelayCommand(UpdateHlaeConfigFolder);
+
             Notification = Properties.Resources.Settings;
 
             Themes = new List<ComboboxSelector>
@@ -1952,27 +1949,129 @@ namespace Manager.ViewModel
             CacheSize = await _cacheService.GetCacheSizeAsync();
         }
 
-        /// <summary>
-        /// Display a directory dialog to select the HLAE config parent folder location.
-        /// </summary>
-        /// <returns></returns>
-        private bool ShowHlaeConfigParentFolderDialog()
+        private void RefreshHlaeSettings()
         {
-            bool isFolderSelected = false;
+            IsHlaeCustomLocationEnabled = ServicesSettings.Default.IsHlaeCustomLocationEnabled;
+            HlaeExecutableLocation = ServicesSettings.Default.HlaeExecutableLocation;
+        }
 
-            FolderBrowserDialog dialog = new FolderBrowserDialog();
-            DialogResult result = dialog.ShowDialog();
-            if (result == DialogResult.OK)
+        private async Task EnableHlaeCustomLocation(bool isChecked)
+        {
+            if (isChecked)
             {
-                string path = dialog.SelectedPath;
-                isFolderSelected = !string.IsNullOrWhiteSpace(path);
-                if (isFolderSelected)
+                string executablePath = HlaeExecutableLocation;
+                if (executablePath == "")
                 {
-                    HlaeConfigParentFolderPath = path;
+                    executablePath = _dialogService.ShowSelectHlaeExecutable();
+                    if (string.IsNullOrEmpty(executablePath))
+                    {
+                        IsHlaeCustomLocationEnabled = false;
+                        return;
+                    }
+                }
+
+                try
+                {
+                    HlaeService.EnableCustomLocation(executablePath);
+                }
+                catch (Exception ex)
+                {
+                    await HandleCustomHlaeLocationActivationException(ex);
                 }
             }
+            else
+            {
+                HlaeService.DisableCustomLocation();
+            }
 
-            return isFolderSelected;
+            RefreshHlaeSettings();
+            Messenger.Default.Send(new CustomHlaeLocationChangedMessage());
+        }
+
+        private async Task UpdateCustomHlaeLocation()
+        {
+            string executablePath = _dialogService.ShowSelectHlaeExecutable();
+            if (string.IsNullOrEmpty(executablePath))
+            {
+                return;
+            }
+
+            try
+            {
+                HlaeService.EnableCustomLocation(executablePath);
+            }
+            catch (Exception ex)
+            {
+                await HandleCustomHlaeLocationActivationException(ex);
+            }
+
+            RefreshHlaeSettings();
+            Messenger.Default.Send(new CustomHlaeLocationChangedMessage());
+        }
+
+        private void ResetHlaeCustomLocation()
+        {
+            HlaeService.ResetCustomLocation();
+            RefreshHlaeSettings();
+            Messenger.Default.Send(new CustomHlaeLocationChangedMessage());
+        }
+
+        private async Task HandleCustomHlaeLocationActivationException(Exception ex)
+        {
+            string message = string.Format(Properties.Resources.UnexpectedErrorOccured, ex.Message);
+            if (ex is InvalidHlaeExecutableException)
+            {
+                message = Properties.Resources.DialogInvalidExecutable;
+            }
+            else if (ex is FileNotFoundException)
+            {
+                message = Properties.Resources.DialogExecutableNotFound;
+            }
+            else if (ex is InvalidHlaePathException)
+            {
+                message = Properties.Resources.DialogInvalidHlaeExecutablePath;
+            }
+
+            await _dialogService.ShowErrorAsync(message, MessageDialogStyle.Affirmative);
+        }
+
+        private async Task RevealHlaeExecutable()
+        {
+            if (!File.Exists(HlaeExecutableLocation))
+            {
+                await _dialogService.ShowErrorAsync(Properties.Resources.DialogExecutableNotFound, MessageDialogStyle.Affirmative);
+                return;
+            }
+
+            string argument = "/select, \"" + HlaeExecutableLocation + "\"";
+            Process.Start("explorer.exe", argument);
+        }
+
+        private void EnableHlaeConfigFolder()
+        {
+            if (!string.IsNullOrEmpty(Settings.Default.HlaeConfigParentFolderPath))
+            {
+                EnableHlaeConfigParent = true;
+                return;
+            }
+
+            string folderPath = _dialogService.ShowSelectFolder();
+            if (string.IsNullOrEmpty(folderPath))
+            {
+                return;
+            }
+
+            HlaeConfigParentFolderPath = folderPath;
+            EnableHlaeConfigParent = true;
+        }
+
+        private void UpdateHlaeConfigFolder()
+        {
+            string folderPath = _dialogService.ShowSelectFolder();
+            if (!string.IsNullOrEmpty(folderPath))
+            {
+                HlaeConfigParentFolderPath = folderPath;
+            }
         }
     }
 }

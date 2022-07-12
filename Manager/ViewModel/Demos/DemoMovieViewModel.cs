@@ -14,11 +14,14 @@ using Core;
 using Core.Models;
 using Core.Models.Source;
 using GalaSoft.MvvmLight.CommandWpf;
+using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
+using Manager.Messages;
 using Manager.Models.DemoMovie;
 using Manager.Properties;
 using Manager.Services;
 using Services.Concrete.Movie;
+using Services.Exceptions;
 using Services.Interfaces;
 using Services.Models.Movie;
 using Services.Models.Timelines;
@@ -565,10 +568,6 @@ namespace Manager.ViewModel.Demos
 
         public bool IsFFmpegInstalled => FFmpegService.IsFFmpegInstalled();
 
-        public bool IsInstallFFmpegAvailable => FFmpegService.IsUpdateAvailable();
-
-        public string FFmpegVersion => FFmpegService.GetInstalledVersion();
-
         public string HLAEVersion => HlaeService.GetHlaeVersion();
 
         public bool IsHLAEInstalled => HlaeService.IsHlaeInstalled();
@@ -930,8 +929,6 @@ namespace Manager.ViewModel.Demos
                                    await _dialogService.ShowMessageAsync(Properties.Resources.DialogFFmpegHasBeenInstalled,
                                        MessageDialogStyle.Affirmative);
                                    RaisePropertyChanged(() => IsFFmpegInstalled);
-                                   RaisePropertyChanged(() => IsInstallFFmpegAvailable);
-                                   RaisePropertyChanged(() => FFmpegVersion);
                                    RaisePropertyChanged(() => FFmpegCommand);
                                }
                                catch (Exception e)
@@ -1026,13 +1023,20 @@ namespace Manager.ViewModel.Demos
                                    HasNotification = true;
                                    IsInstalling = true;
 
-                                   bool installed = await HlaeService.UpgradeHlae();
-                                   if (!installed)
+                                   try
                                    {
-                                       await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasNotBeenInstalled,
-                                           MessageDialogStyle.Affirmative);
+                                       await HlaeService.Install();
+                                   }
+                                   catch (Exception ex)
+                                   {
+                                       Logger.Instance.Log(ex);
+                                       string message = ex is InvalidHlaePathException
+                                           ? Properties.Resources.DialogInvalidHlaeExecutablePath
+                                           : Properties.Resources.DialogHLAEHasNotBeenInstalled;
+                                       await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
                                        return;
                                    }
+
 
                                    await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasBeenInstalled,
                                        MessageDialogStyle.Affirmative);
@@ -1049,10 +1053,10 @@ namespace Manager.ViewModel.Demos
                                            return;
                                        }
 
-                                       string path = HlaeService.ShowCsgoExeDialog();
-                                       if (!string.IsNullOrEmpty(path))
+                                       string csgoExecutablePath = _dialogService.ShowSelectCsgoExecutable();
+                                       if (!string.IsNullOrEmpty(csgoExecutablePath))
                                        {
-                                           CsgoExePath = path;
+                                           CsgoExePath = csgoExecutablePath;
                                        }
                                    }
                                }
@@ -1103,23 +1107,17 @@ namespace Manager.ViewModel.Demos
                                    }
 
                                    Notification = Properties.Resources.CheckingForHLAEUpdate;
-                                   bool hasUpdated = await HlaeService.UpgradeHlae();
-                                   if (!hasUpdated)
-                                   {
-                                       await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasNotBeenUpdated,
-                                           MessageDialogStyle.Affirmative);
-                                       return;
-                                   }
-
-                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasBeenInstalled,
-                                       MessageDialogStyle.Affirmative);
+                                   await HlaeService.Install();
+                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogHLAEHasBeenInstalled, MessageDialogStyle.Affirmative);
                                    RaisePropertyChanged(() => HLAEVersion);
                                }
-                               catch (Exception e)
+                               catch (Exception ex)
                                {
-                                   Logger.Instance.Log(e);
-                                   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorUpdatingHLAE, e.Message),
-                                       MessageDialogStyle.Affirmative);
+                                   Logger.Instance.Log(ex);
+                                   string message = ex is InvalidHlaePathException
+                                       ? Properties.Resources.DialogInvalidHlaeExecutablePath
+                                       : string.Format(Properties.Resources.DialogErrorUpdatingHLAE, ex.Message);
+                                   await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
                                }
                                finally
                                {
@@ -1160,10 +1158,10 @@ namespace Manager.ViewModel.Demos
                        ?? (_selectCsgoExePathLocation = new RelayCommand(
                            () =>
                            {
-                               string path = HlaeService.ShowCsgoExeDialog();
-                               if (!string.IsNullOrEmpty(path))
+                               string csgoExecutablePath = _dialogService.ShowSelectCsgoExecutable();
+                               if (!string.IsNullOrEmpty(csgoExecutablePath))
                                {
-                                   CsgoExePath = path;
+                                   CsgoExePath = csgoExecutablePath;
                                    RaisePropertyChanged(() => IsHLAEInstalled);
                                }
                            }, () => !IsBusy));
@@ -1387,16 +1385,10 @@ namespace Manager.ViewModel.Demos
                        ?? (_selectHlaeConfigParentPath = new RelayCommand(
                            () =>
                            {
-                               FolderBrowserDialog dialog = new FolderBrowserDialog();
-                               DialogResult result = dialog.ShowDialog();
-                               if (result == DialogResult.OK)
+                               string folderPath = _dialogService.ShowSelectFolder();
+                               if (!string.IsNullOrWhiteSpace(folderPath))
                                {
-                                   string path = dialog.SelectedPath;
-                                   bool isFolderSelected = !string.IsNullOrWhiteSpace(path);
-                                   if (isFolderSelected)
-                                   {
-                                       HlaeConfigParentFolderPath = path;
-                                   }
+                                   HlaeConfigParentFolderPath = folderPath;
                                }
                            },
                            () => !IsBusy));
@@ -1502,6 +1494,16 @@ namespace Manager.ViewModel.Demos
             {
                 IsBusy = false;
             }
+
+            Messenger.Default.Register<CustomHlaeLocationChangedMessage>(this, OnHlaeCustomLocationChanged);
+        }
+
+        private void OnHlaeCustomLocationChanged(CustomHlaeLocationChangedMessage msg)
+        {
+            RaisePropertyChanged(() => HLAEVersion);
+            RaisePropertyChanged(() => IsHLAEInstalled);
+            RaisePropertyChanged(() => IsFFmpegInstalled);
+            RaisePropertyChanged(() => FFmpegCommand);
         }
 
         private void HandleOnGameRunning()

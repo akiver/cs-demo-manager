@@ -2568,9 +2568,6 @@ Si lo has activado, el juego se ejecuta con el parámetro "-insecure" (siempre),
   <data name="NotificationUpdatingHlae" xml:space="preserve">
     <value>Actualizando HLAE...</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>Por favor selecciona la localización de la carpeta raíz de HLAE.</value>
-  </data>
   <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
     <value>El jugador que estás siguiendo no está en esta repetición. Puedes cambiarlo desde la configuración (sección de cuenta) o verlo desde la tabla de puntuaciones.</value>
   </data>

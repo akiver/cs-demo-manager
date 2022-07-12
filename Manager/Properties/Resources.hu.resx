@@ -2568,9 +2568,6 @@ Szeretné telepíteni? (Ez ajánlott, hogy a kifagyásokat elkerülje)</value>
   <data name="NotificationUpdatingHlae" xml:space="preserve">
     <value>HLAE frissítése...</value>
   </data>
-  <data name="DialogSelectHlaeConfigParentFolderLocation" xml:space="preserve">
-    <value>Kérem válassza ki a HLAE konfigurációs mappa helyét.</value>
-  </data>
   <data name="DialogPlayerFocusedNotFound" xml:space="preserve">
     <value>A játékos akire fókuszál nem található meg ebben a demóban. Ezt meg tudja változtatni a beállításokban (fiók fül) vagy meg tudja nézni az eredménytábláról.</value>
   </data>

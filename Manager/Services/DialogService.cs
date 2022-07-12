@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 using Core;
 using Core.Models;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Application = System.Windows.Application;
+using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
 
 namespace Manager.Services
 {
@@ -219,6 +221,54 @@ namespace Manager.Services
             }
 
             return await metroWindow.ShowMessageAsync(Properties.Resources.Information, message, style, dialogOptions);
+        }
+
+        public string ShowSelectCsgoExecutable()
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                FileName = "csgo.exe",
+                DefaultExt = "csgo.exe",
+                Filter = "EXE Files |csgo.exe",
+            };
+
+            bool? result = dialog.ShowDialog();
+            if (result != null && (bool)result)
+            {
+                return dialog.FileName;
+            }
+
+            return string.Empty;
+        }
+
+        public string ShowSelectHlaeExecutable()
+        {
+            OpenFileDialog dialog = new OpenFileDialog
+            {
+                FileName = "HLAE.exe",
+                Filter = "EXE Files |HLAE.exe",
+                DefaultExt = "HLAE.exe",
+            };
+
+            bool? result = dialog.ShowDialog();
+            if (result != null && (bool)result)
+            {
+                return dialog.FileName;
+            }
+
+            return string.Empty;
+        }
+
+        public string ShowSelectFolder()
+        {
+            FolderBrowserDialog dialog = new FolderBrowserDialog();
+            DialogResult result = dialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                return dialog.SelectedPath;
+            }
+
+            return string.Empty;
         }
     }
 }
