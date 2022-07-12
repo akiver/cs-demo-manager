@@ -74,6 +74,8 @@ namespace Services.Concrete
                     throw new HlaeNotFound();
                 }
 
+                KillHlae();
+
                 _arguments.Add(_config.LaunchParameters);
                 List<string> argList = new List<string>(_hlaeArguments)
                 {
@@ -610,12 +612,27 @@ namespace Services.Concrete
             }
         }
 
+        private static void KillHlae()
+        {
+            KillProcessByName("HLAE");
+        }
+
         private static void KillCsgo()
         {
-            Process[] currentProcess = Process.GetProcessesByName("csgo");
-            if (currentProcess.Length > 0)
+            KillProcessByName("csgo");
+        }
+
+        private static void KillProcessByName(string processName)
+        {
+            Process[] processes = Process.GetProcessesByName(processName);
+            if (processes.Length > 0)
             {
-                currentProcess[0].Kill();
+                var process = processes[0];
+                if (!process.HasExited)
+                {
+                    process.Kill();
+                    process.WaitForExit();
+                }
             }
         }
 
