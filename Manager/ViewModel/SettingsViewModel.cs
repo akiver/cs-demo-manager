@@ -66,6 +66,17 @@ namespace Manager.ViewModel
             set { Set(() => IsHlaeCustomLocationEnabled, ref _isHlaeCustomLocationEnabled, value); }
         }
 
+        private string _hlaeParameters = ServicesSettings.Default.HlaeParameters;
+        public string HlaeParameters
+        {
+            get { return _hlaeParameters; }
+            set
+            {
+                ServicesSettings.Default.HlaeParameters = value;
+                Set(() => HlaeParameters, ref _hlaeParameters, value);
+            }
+        }
+
         private bool _isFfmpegCustomLocationEnabled = ServicesSettings.Default.IsFfmpegCustomLocationEnabled;
         public bool IsFfmpegCustomLocationEnabled
         {

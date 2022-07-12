@@ -70,5 +70,17 @@ namespace Services.Properties {
                 this["FfmpegExecutableLocation"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string HlaeParameters {
+            get {
+                return ((string)(this["HlaeParameters"]));
+            }
+            set {
+                this["HlaeParameters"] = value;
+            }
+        }
     }
 }

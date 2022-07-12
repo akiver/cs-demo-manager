@@ -87,6 +87,11 @@ namespace Services.Concrete
                     argList.Add($"-mmcfg \"{_config.HlaeConfigParentFolderPath}\"");
                 }
 
+                if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.HlaeParameters))
+                {
+                    argList.Add(Properties.Settings.Default.HlaeParameters);
+                }
+
                 string args = string.Join(ARGUMENT_SEPARATOR, argList.ToArray());
                 ProcessStartInfo psi = new ProcessStartInfo
                 {

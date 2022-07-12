@@ -562,6 +562,10 @@
                                             IsEnabled="{Binding Source={StaticResource Locator}, Path=Settings.IsHlaeCustomLocationEnabled}"
                                             Command="{Binding Source={StaticResource Locator}, Path=Settings.ResetCustomHlaeLocationCommand}" />
                                 </StackPanel>
+                                <Label Target="{Binding ElementName=HlaeParametersTextBox}"
+                                       Content="{x:Static properties:Resources.AdditionalsParametersLabel}" />
+                                <TextBox x:Name="HlaeParametersTextBox"
+                                         Text="{Binding Source={StaticResource Locator}, Path=Settings.HlaeParameters}" />
                             </StackPanel>
 
                             <StackPanel Orientation="Horizontal">
