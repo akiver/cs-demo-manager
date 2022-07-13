@@ -178,9 +178,6 @@
   <data name="execute_command" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
-  <data name="HlaeNotFoundException" xml:space="preserve">
-    <value>HLAE not found. Please install it by enabling it from settings.</value>
-  </data>
   <data name="main" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>

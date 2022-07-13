@@ -2630,4 +2630,7 @@ Por favor introduce el código para compartir (ejemplo: CSGO-orkmt-Z8udN-apVEh-G
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Vista</value>
   </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>HLAE no encontrado. Por favor instálalo activándolo desde la configuración.</value>
+  </data>
 </root>

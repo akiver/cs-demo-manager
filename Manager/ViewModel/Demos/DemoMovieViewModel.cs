@@ -799,11 +799,9 @@ namespace Manager.ViewModel.Demos
                                    await _movieService.Start();
                                    // TODO notification
                                }
-                               catch (Exception e)
+                               catch (Exception ex)
                                {
-                                   Logger.Instance.Log(e);
-                                   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileGeneratingVideo, e.Message),
-                                       MessageDialogStyle.Affirmative);
+                                   await HandleGameLauncherException(ex, string.Format(Properties.Resources.DialogErrorWhileGeneratingVideo, ex.Message));
                                }
                                finally
                                {

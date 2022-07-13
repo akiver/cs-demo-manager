@@ -4236,6 +4236,28 @@ Please update it by clicking on the "Update" button.</target>
           <source>The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</source>
           <target state="new">The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</target>
         </trans-unit>
+        <trans-unit id="HlaeNotFound" translate="yes" xml:space="preserve">
+          <source>HLAE not found. Please install it by enabling it from settings.</source>
+          <target state="final">Nie znaleziono HLAE. Zainstaluj HLAE włączając go w ustawieniach.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorKillingCsgo" translate="yes" xml:space="preserve">
+          <source>Failed to close CSGO, please do it manually and try again.
+Error: {0}.</source>
+          <target state="new">Failed to close CSGO, please do it manually and try again.
+Error: {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorKillingHlae" translate="yes" xml:space="preserve">
+          <source>Failed to close HLAE, please do it manually and try again.
+Error: {0}.</source>
+          <target state="new">Failed to close HLAE, please do it manually and try again.
+Error: {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorStartingCsgo" translate="yes" xml:space="preserve">
+          <source>Failed to start CSGO.
+Error: {0}.</source>
+          <target state="new">Failed to start CSGO.
+Error: {0}.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

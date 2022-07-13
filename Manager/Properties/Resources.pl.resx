@@ -2578,4 +2578,7 @@ Czy chcesz ją zainstalować? (Zalecane by uniknąć crashów w związku z aktua
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Obejrzane</value>
   </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>Nie znaleziono HLAE. Zainstaluj HLAE włączając go w ustawieniach.</value>
+  </data>
 </root>

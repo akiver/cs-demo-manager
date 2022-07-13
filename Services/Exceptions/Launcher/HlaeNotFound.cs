@@ -4,7 +4,7 @@ namespace Services.Exceptions.Launcher
 {
     public class HlaeNotFound : Exception
     {
-        public HlaeNotFound() : base(Properties.Resources.HlaeNotFoundException)
+        public HlaeNotFound() : base("HLAE.exe not found")
         {
         }
     }

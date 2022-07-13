@@ -3131,4 +3131,7 @@
     <value>启用国际服务器启动参数 (-worldwide)</value>
     <comment>Enable -worldwide startup parameter</comment>
   </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>无法找到HLAE引擎,请安装后在设置中启用.</value>
+  </data>
 </root>

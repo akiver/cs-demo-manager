@@ -186,16 +186,18 @@ namespace Manager.ViewModel.Demos
                        ?? (_watchStuff = new RelayCommand(
                            async () =>
                            {
-                               if (AppSettings.SteamExePath() == null)
+                               try
                                {
-                                   await _dialogService.ShowSteamNotFoundAsync();
-                                   return;
+                                   GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                                   config.FocusPlayerSteamId = SelectedStuff.ThrowerSteamId;
+                                   GameLauncher launcher = new GameLauncher(config);
+                                   await launcher.WatchDemoAt(SelectedStuff.Tick, true);
+                               }
+                               catch (Exception ex)
+                               {
+                                   await HandleGameLauncherException(ex);
                                }
 
-                               GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
-                               config.FocusPlayerSteamId = SelectedStuff.ThrowerSteamId;
-                               GameLauncher launcher = new GameLauncher(config);
-                               launcher.WatchDemoAt(SelectedStuff.Tick, true);
                            }, () => SelectedStuff != null));
             }
         }
@@ -208,16 +210,17 @@ namespace Manager.ViewModel.Demos
                        ?? (_watchPlayerStuffCommand = new RelayCommand(
                            async () =>
                            {
-                               if (AppSettings.SteamExePath() == null)
+                               try
                                {
-                                   await _dialogService.ShowSteamNotFoundAsync();
-                                   return;
+                                   GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                                   config.FocusPlayerSteamId = SelectedPlayer.SteamId;
+                                   GameLauncher launcher = new GameLauncher(config);
+                                   await launcher.WatchPlayerStuff(SelectedPlayer, CurrentStuffSelector.Id);
                                }
-
-                               GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
-                               config.FocusPlayerSteamId = SelectedPlayer.SteamId;
-                               GameLauncher launcher = new GameLauncher(config);
-                               launcher.WatchPlayerStuff(SelectedPlayer, CurrentStuffSelector.Id);
+                               catch (Exception ex)
+                               {
+                                   await HandleGameLauncherException(ex);
+                               }
                            }, () => Demo != null && SelectedPlayer != null));
             }
         }

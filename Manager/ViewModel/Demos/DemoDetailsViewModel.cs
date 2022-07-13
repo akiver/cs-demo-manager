@@ -453,22 +453,17 @@ namespace Manager.ViewModel.Demos
                        ?? (_watchPlayerCommand = new RelayCommand<Player>(
                            async player =>
                            {
-                               if (AppSettings.SteamExePath() == null)
+                               try
                                {
-                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
-                                   return;
+                                   GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                                   config.FocusPlayerSteamId = player.SteamId;
+                                   GameLauncher launcher = new GameLauncher(config);
+                                   await launcher.WatchPlayer();
                                }
-
-                               Round firstRound = Demo.Rounds.FirstOrDefault();
-                               if (firstRound == null)
+                               catch (Exception ex)
                                {
-                                   return;
+                                   await HandleGameLauncherException(ex);
                                }
-
-                               GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
-                               config.FocusPlayerSteamId = player.SteamId;
-                               GameLauncher launcher = new GameLauncher(config);
-                               launcher.WatchPlayer();
                            },
                            suspect => SelectedPlayer != null));
             }
@@ -482,22 +477,23 @@ namespace Manager.ViewModel.Demos
                        ?? (_watchHighlightsCommand = new RelayCommand<Player>(
                            async player =>
                            {
-                               if (AppSettings.SteamExePath() == null)
+                               try
                                {
-                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
-                                   return;
-                               }
+                                   GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                                   config.FocusPlayerSteamId = player.SteamId;
+                                   GameLauncher launcher = new GameLauncher(config);
+                                   var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+                                   if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary)
+                                   {
+                                       return;
+                                   }
 
-                               GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
-                               config.FocusPlayerSteamId = player.SteamId;
-                               GameLauncher launcher = new GameLauncher(config);
-                               var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-                               if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary)
+                                   await launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
+                               }
+                               catch (Exception ex)
                                {
-                                   return;
+                                   await HandleGameLauncherException(ex);
                                }
-
-                               launcher.WatchHighlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
                            },
                            suspect => SelectedPlayer != null));
             }
@@ -511,22 +507,22 @@ namespace Manager.ViewModel.Demos
                        ?? (_watchLowlightsCommand = new RelayCommand<Player>(
                            async player =>
                            {
-                               if (AppSettings.SteamExePath() == null)
+                               try
                                {
-                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
-                                   return;
+                                   GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                                   config.FocusPlayerSteamId = player.SteamId;
+                                   GameLauncher launcher = new GameLauncher(config);
+                                   var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
+                                   if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary)
+                                   {
+                                       return;
+                                   }
+                                   await launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
                                }
-
-                               GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
-                               config.FocusPlayerSteamId = player.SteamId;
-                               GameLauncher launcher = new GameLauncher(config);
-                               var isPlayerPerspective = await _dialogService.ShowHighLowWatchAsync();
-                               if (isPlayerPerspective == MessageDialogResult.FirstAuxiliary)
+                               catch (Exception ex)
                                {
-                                   return;
+                                   await HandleGameLauncherException(ex);
                                }
-
-                               launcher.WatchLowlightDemo(isPlayerPerspective == MessageDialogResult.Affirmative);
                            },
                            suspect => SelectedPlayer != null));
             }
@@ -677,16 +673,17 @@ namespace Manager.ViewModel.Demos
                        ?? (_watchRoundCommand = new RelayCommand<Round>(
                            async round =>
                            {
-                               if (AppSettings.SteamExePath() == null)
+                               try
                                {
-                                   await _dialogService.ShowMessageAsync(Properties.Resources.DialogSteamNotFound, MessageDialogStyle.Affirmative);
-                                   return;
+                                   GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                                   config.FocusPlayerSteamId = Settings.Default.WatchAccountSteamId;
+                                   GameLauncher launcher = new GameLauncher(config);
+                                   await launcher.WatchDemoAt(round.Tick);
                                }
-
-                               GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
-                               config.FocusPlayerSteamId = Settings.Default.WatchAccountSteamId;
-                               GameLauncher launcher = new GameLauncher(config);
-                               launcher.WatchDemoAt(round.Tick);
+                               catch (Exception ex)
+                               {
+                                   await HandleGameLauncherException(ex);
+                               }
                            },
                            round => Demo != null && SelectedRound != null));
             }

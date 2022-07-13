@@ -60,9 +60,6 @@
   <data name="ThrownSmoke" xml:space="preserve">
     <value>{0} 投掷了一个烟雾弹</value>
   </data>
-  <data name="HlaeNotFoundException" xml:space="preserve">
-    <value>无法找到HLAE引擎,请安装后在设置中启用.</value>
-  </data>
   <data name="Kill" xml:space="preserve">
     <value>击杀</value>
   </data>

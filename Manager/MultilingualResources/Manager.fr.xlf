@@ -4242,6 +4242,28 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
           <source>The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</source>
           <target state="final">Le chemin contient des caractères qui peuvent entraîner des comportements inattendus dans le jeu. Veuillez sélectionner un dossier qui contient seulement des caractères ASCII.</target>
         </trans-unit>
+        <trans-unit id="HlaeNotFound" translate="yes" xml:space="preserve">
+          <source>HLAE not found. Please install it by enabling it from settings.</source>
+          <target state="final">HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorKillingCsgo" translate="yes" xml:space="preserve">
+          <source>Failed to close CSGO, please do it manually and try again.
+Error: {0}.</source>
+          <target state="final">La fermeture de CSGO a échoué, veuillez fermer CSGO manuellement puis réessayer.
+Erreur: {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorKillingHlae" translate="yes" xml:space="preserve">
+          <source>Failed to close HLAE, please do it manually and try again.
+Error: {0}.</source>
+          <target state="final">La fermeture de HLAE a échoué, veuillez fermer HLAE manuellement puis réessayer.
+Erreur: {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogErrorStartingCsgo" translate="yes" xml:space="preserve">
+          <source>Failed to start CSGO.
+Error: {0}.</source>
+          <target state="final">Une erreur est survenue lors du lancement de CSGO.
+Error: {0}.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

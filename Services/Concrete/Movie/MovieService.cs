@@ -105,7 +105,7 @@ namespace Services.Concrete.Movie
                 };
 
                 GameLauncher launcher = new GameLauncher(config);
-                await launcher.StartGame();
+                await launcher.WatchDemo();
             }
             else
             {

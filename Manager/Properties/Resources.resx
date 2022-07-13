@@ -3285,4 +3285,19 @@ Please update it by clicking on the "Update" button.</value>
   <data name="DialogInvalidHlaeExecutablePath" xml:space="preserve">
     <value>The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</value>
   </data>
+  <data name="DialogErrorKillingCsgo" xml:space="preserve">
+    <value>Failed to close CSGO, please do it manually and try again.
+Error: {0}.</value>
+  </data>
+  <data name="DialogErrorKillingHlae" xml:space="preserve">
+    <value>Failed to close HLAE, please do it manually and try again.
+Error: {0}.</value>
+  </data>
+  <data name="DialogErrorStartingCsgo" xml:space="preserve">
+    <value>Failed to start CSGO.
+Error: {0}.</value>
+  </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>HLAE not found. Please install it by enabling it from settings.</value>
+  </data>
 </root>

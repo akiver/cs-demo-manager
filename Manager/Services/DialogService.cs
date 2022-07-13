@@ -109,14 +109,6 @@ namespace Manager.Services
                 MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
         }
 
-        public async Task<MessageDialogResult> ShowSteamNotFoundAsync()
-        {
-            string errorMessage = Properties.Resources.DialogSteamNotFound;
-
-            var metroWindow = Application.Current.MainWindow as MetroWindow;
-            return await metroWindow.ShowMessageAsync(Properties.Resources.Error, errorMessage);
-        }
-
         public async Task<MessageDialogResult> ShowHighLowWatchAsync()
         {
             MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;

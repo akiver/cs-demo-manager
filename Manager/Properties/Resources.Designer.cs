@@ -1703,6 +1703,26 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Failed to close CSGO, please do it manually and try again.
+        ///Error: {0}..
+        /// </summary>
+        public static string DialogErrorKillingCsgo {
+            get {
+                return ResourceManager.GetString("DialogErrorKillingCsgo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to close HLAE, please do it manually and try again.
+        ///Error: {0}..
+        /// </summary>
+        public static string DialogErrorKillingHlae {
+            get {
+                return ResourceManager.GetString("DialogErrorKillingHlae", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An error occured while loading data.
         ///{0}.
         /// </summary>
@@ -1727,6 +1747,16 @@ namespace Manager.Properties {
         public static string DialogErrorSavingCommentDemo {
             get {
                 return ResourceManager.GetString("DialogErrorSavingCommentDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to start CSGO.
+        ///Error: {0}..
+        /// </summary>
+        public static string DialogErrorStartingCsgo {
+            get {
+                return ResourceManager.GetString("DialogErrorStartingCsgo", resourceCulture);
             }
         }
         
@@ -5052,6 +5082,15 @@ namespace Manager.Properties {
         public static string Hits {
             get {
                 return ResourceManager.GetString("Hits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to HLAE not found. Please install it by enabling it from settings..
+        /// </summary>
+        public static string HlaeNotFound {
+            get {
+                return ResourceManager.GetString("HlaeNotFound", resourceCulture);
             }
         }
         

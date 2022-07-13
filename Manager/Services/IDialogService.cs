@@ -31,8 +31,6 @@ namespace Manager.Services
 
         Task<MessageDialogResult> ShowAnalyzeAllDemosAsync();
 
-        Task<MessageDialogResult> ShowSteamNotFoundAsync();
-
         Task<MessageDialogResult> ShowHighLowWatchAsync();
 
         Task<MessageDialogResult> ShowHeatmapDataNotFoundAsync(string eventType);

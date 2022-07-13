@@ -86,10 +86,6 @@
           <source>..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
           <target state="needs-review-translation">..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>
         </trans-unit>
-        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
-          <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="new">HLAE not found. Please install it by enabling it from settings.</target>
-        </trans-unit>
         <trans-unit id="main" translate="yes" extype="System.Resources.ResXFileRef, System.Windows.Forms" xml:space="preserve">
           <source>..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
           <target state="needs-review-translation">..\resources\vdm\main.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>

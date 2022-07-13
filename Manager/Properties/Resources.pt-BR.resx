@@ -2637,4 +2637,7 @@ Digite link de compartilhamento (exemplo: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</
   <data name="DemoStatusWatched" xml:space="preserve">
     <value>Assistido</value>
   </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>HLAE não encontrado. Instale-o, permitindo as configurações.</value>
+  </data>
 </root>

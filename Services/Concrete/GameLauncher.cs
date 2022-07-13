@@ -56,26 +56,13 @@ namespace Services.Concrete
             _arguments.Add(_config.Demo.Path);
         }
 
-        public async Task StartGame()
+        private async Task StartGame()
         {
             SetupResolutionParameters();
             SetupWorldwideParameter();
-            KillCsgo();
+
             if (_config.EnableHlae)
             {
-                // start the game using HLAE
-                if (!File.Exists(_config.CsgoExePath))
-                {
-                    throw new CsgoNotFoundException();
-                }
-
-                if (!File.Exists(_config.HlaeExePath))
-                {
-                    throw new HlaeNotFound();
-                }
-
-                KillHlae();
-
                 _arguments.Add(_config.LaunchParameters);
                 List<string> argList = new List<string>(_hlaeArguments)
                 {
@@ -122,7 +109,7 @@ namespace Services.Concrete
 
             if (_config.DeleteVdmFileAtStratup)
             {
-                await DeleteVdmFile();
+                DeleteVdmFile();
             }
 
             _config.OnGameStarted?.Invoke();
@@ -141,7 +128,7 @@ namespace Services.Concrete
 
             if (_config.DeleteVdmFileWhenClosed)
             {
-                await DeleteVdmFile();
+                DeleteVdmFile();
             }
         }
 
@@ -190,20 +177,24 @@ namespace Services.Concrete
             }
         }
 
-        private Task DeleteVdmFile()
+        private void DeleteVdmFile()
         {
-            return Task.Run(() =>
+            string vdmPath = _config.Demo.GetVdmFilePath();
+            if (File.Exists(vdmPath))
             {
-                string vdmPath = _config.Demo.GetVdmFilePath();
-                if (File.Exists(vdmPath))
-                {
-                    File.Delete(vdmPath);
-                }
-            });
+                File.Delete(vdmPath);
+            }
         }
 
-        public async void WatchHighlightDemo(bool fromPlayerPerspective)
+        public async Task WatchDemo()
         {
+            PrepareGameLaunching();
+            await StartGame();
+        }
+
+        public async Task WatchHighlightDemo(bool fromPlayerPerspective)
+        {
+            PrepareGameLaunching();
             if (_config.UseCustomActionsGeneration)
             {
                 GenerateHighLowVdm(true, fromPlayerPerspective);
@@ -225,8 +216,9 @@ namespace Services.Concrete
             await StartGame();
         }
 
-        public async void WatchLowlightDemo(bool fromPlayerPerspective)
+        public async Task WatchLowlightDemo(bool fromPlayerPerspective)
         {
+            PrepareGameLaunching();
             if (_config.UseCustomActionsGeneration)
             {
                 GenerateHighLowVdm(false, fromPlayerPerspective);
@@ -249,8 +241,9 @@ namespace Services.Concrete
             await StartGame();
         }
 
-        public async void WatchDemoAt(int tick, bool delay = false)
+        public async Task WatchDemoAt(int tick, bool delay = false)
         {
+            PrepareGameLaunching();
             if (delay)
             {
                 int tickDelayCount = (int)(_config.Demo.ServerTickrate * PLAYBACK_DELAY);
@@ -260,8 +253,7 @@ namespace Services.Concrete
                 }
             }
 
-            string generated = string.Empty;
-            generated += string.Format(Properties.Resources.skip_ahead, 1, 1, tick);
+            string generated = string.Format(Properties.Resources.skip_ahead, 1, 1, tick);
             if (_config.FocusPlayerSteamId > 0)
             {
                 generated += string.Format(Properties.Resources.spec_player, 2, tick + 1, _config.FocusPlayerSteamId);
@@ -273,8 +265,9 @@ namespace Services.Concrete
             await StartGame();
         }
 
-        public async void WatchPlayerStuff(Player player, string selectedType)
+        public async Task WatchPlayerStuff(Player player, string selectedType)
         {
+            PrepareGameLaunching();
             EquipmentElement type = EquipmentElement.Unknown;
             switch (selectedType)
             {
@@ -300,11 +293,37 @@ namespace Services.Concrete
             await StartGame();
         }
 
-        public async void WatchPlayer()
+        public async Task WatchPlayer()
         {
+            PrepareGameLaunching();
             GenerateWatchPlayerVdm();
             _config.DeleteVdmFileAtStratup = false;
             await StartGame();
+        }
+
+        private void PrepareGameLaunching()
+        {
+            KillCsgo();
+            if (_config.EnableHlae)
+            {
+                KillHlae();
+                if (!File.Exists(_config.CsgoExePath))
+                {
+                    throw new CsgoNotFoundException();
+                }
+
+                if (!File.Exists(_config.HlaeExePath))
+                {
+                    throw new HlaeNotFound();
+                }
+            }
+            else
+            {
+                if (!File.Exists(_config.SteamExePath))
+                {
+                    throw new SteamExecutableNotFoundException();
+                }
+            }
         }
 
         private void GeneratePlayerStuffVdm(Player player, EquipmentElement type)
@@ -614,12 +633,26 @@ namespace Services.Concrete
 
         private static void KillHlae()
         {
-            KillProcessByName("HLAE");
+            try
+            {
+                KillProcessByName("HLAE");
+            }
+            catch (Exception ex)
+            {
+                throw new KillHlaeException(ex);
+            }
         }
 
         private static void KillCsgo()
         {
-            KillProcessByName("csgo");
+            try
+            {
+                KillProcessByName("csgo");
+            }
+            catch (Exception ex)
+            {
+                throw new KillCsgoException(ex);
+            }
         }
 
         private static void KillProcessByName(string processName)

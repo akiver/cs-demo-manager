@@ -78,10 +78,6 @@
           <source>{0} thrown a smoke</source>
           <target state="final">{0} a jetée une fumigène</target>
         </trans-unit>
-        <trans-unit id="HlaeNotFoundException" translate="yes" xml:space="preserve">
-          <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="final">HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</target>
-        </trans-unit>
         <trans-unit id="execute_command" translate="no" xml:space="preserve" extype="System.Resources.ResXFileRef, System.Windows.Forms">
           <source>..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</source>
           <target state="final">..\resources\vdm\execute_command.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</target>

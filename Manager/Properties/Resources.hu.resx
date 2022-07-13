@@ -2671,4 +2671,7 @@ Kérem adja meg a megosztási-kódot. (Például: CSGO-orkmt-Z8udN-apVEh-GQtx3-s
 {0}
 Lehet, hogy hiányoznak adatok a demókhoz.</value>
   </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>HLAE nem található. Kérem telepítse, úgy, hogy aktiválja a beállításokban.</value>
+  </data>
 </root>

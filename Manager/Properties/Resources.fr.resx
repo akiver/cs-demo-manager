@@ -3180,4 +3180,19 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   <data name="DialogInvalidHlaeExecutablePath" xml:space="preserve">
     <value>Le chemin contient des caractères qui peuvent entraîner des comportements inattendus dans le jeu. Veuillez sélectionner un dossier qui contient seulement des caractères ASCII.</value>
   </data>
+  <data name="HlaeNotFound" xml:space="preserve">
+    <value>HLAE introuvable. Veuillez l'installer en l'activant depuis les options.</value>
+  </data>
+  <data name="DialogErrorKillingCsgo" xml:space="preserve">
+    <value>La fermeture de CSGO a échoué, veuillez fermer CSGO manuellement puis réessayer.
+Erreur: {0}.</value>
+  </data>
+  <data name="DialogErrorKillingHlae" xml:space="preserve">
+    <value>La fermeture de HLAE a échoué, veuillez fermer HLAE manuellement puis réessayer.
+Erreur: {0}.</value>
+  </data>
+  <data name="DialogErrorStartingCsgo" xml:space="preserve">
+    <value>Une erreur est survenue lors du lancement de CSGO.
+Error: {0}.</value>
+  </data>
 </root>
