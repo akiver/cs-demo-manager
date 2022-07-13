@@ -2655,15 +2655,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable worldwide parameter.
-        /// </summary>
-        public static string EnableWorldwide {
-            get {
-                return ResourceManager.GetString("EnableWorldwide", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to If you encountered a bug or have any suggestions, feel free to open an issue on.
         /// </summary>
         public static string EncounteredBug {

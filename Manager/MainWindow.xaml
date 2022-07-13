@@ -115,9 +115,6 @@
                                                     HorizontalAlignment="Left"
                                                     MaxWidth="80"
                                                     Value="{Binding Source={StaticResource Locator}, Path=Settings.ResolutionHeight}" />
-                            <CheckBox Content="{x:Static properties:Resources.EnableWorldwide}"
-                                      Style="{StaticResource CheckBoxColumnOptionStyle}"
-                                      IsChecked="{Binding Source={StaticResource Locator}, Path=Settings.IsWorldwideEnabled}" />
                             <Label Target="{Binding ElementName=LaunchParametersTextBox}"
                                    Content="{x:Static properties:Resources.AdditionalsParametersLabel}" />
                             <TextBox x:Name="LaunchParametersTextBox"

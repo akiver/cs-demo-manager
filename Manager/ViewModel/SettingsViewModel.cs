@@ -50,8 +50,6 @@ namespace Manager.ViewModel
 
         private bool _isCheckForUpdatesEnabled = Settings.Default.EnableCheckUpdate;
 
-        private bool _isWorldwideEnabled = Settings.Default.IsWorldwideEnabled;
-
         private string _hlaeExecutableLocation = ServicesSettings.Default.HlaeExecutableLocation;
         public string HlaeExecutableLocation
         {
@@ -483,16 +481,6 @@ namespace Manager.ViewModel
                 {
                     WatchAccountSteamId = 0;
                 }
-            }
-        }
-
-        public bool IsWorldwideEnabled
-        {
-            get => _isWorldwideEnabled;
-            set
-            {
-                Set(() => IsWorldwideEnabled, ref _isWorldwideEnabled, value);
-                Settings.Default.IsWorldwideEnabled = value;
             }
         }
 

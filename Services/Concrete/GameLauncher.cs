@@ -59,7 +59,6 @@ namespace Services.Concrete
         private async Task StartGame()
         {
             SetupResolutionParameters();
-            SetupWorldwideParameter();
 
             if (_config.EnableHlae)
             {
@@ -167,14 +166,6 @@ namespace Services.Concrete
             _arguments.Add("-h");
             _arguments.Add(_config.Height > 600 ? _config.Height.ToString() : "600");
             _arguments.Add(_config.Fullscreen ? "-fullscreen" : "-windowed");
-        }
-
-        private void SetupWorldwideParameter()
-        {
-            if (_config.IsWorldwideEnabled)
-            {
-                _arguments.Add("-worldwide");
-            }
         }
 
         private void DeleteVdmFile()

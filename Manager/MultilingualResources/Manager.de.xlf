@@ -4179,11 +4179,6 @@ Bitte aktualisieren Sie mit dem Klicken auf den "Update"-Button.</target>
           <source>Check for updates on app startup</source>
           <target state="new">Check for updates on app startup</target>
         </trans-unit>
-        <trans-unit id="EnableWorldwide" translate="yes" xml:space="preserve">
-          <source>Enable worldwide parameter</source>
-          <target state="new">Enable worldwide parameter</target>
-          <note from="MultilingualBuild" annotates="source" priority="2">Enable -worldwide startup parameter</note>
-        </trans-unit>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
           <target state="new">Max concurrent demo analyzes</target>

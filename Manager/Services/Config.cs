@@ -16,7 +16,6 @@ namespace Manager.Services
                 Width = Settings.Default.ResolutionWidth,
                 Height = Settings.Default.ResolutionHeight,
                 Fullscreen = Settings.Default.IsFullscreen,
-                IsWorldwideEnabled = Settings.Default.IsWorldwideEnabled,
                 EnableHlae = Settings.Default.EnableHlae,
                 CsgoExePath = Settings.Default.CsgoExePath,
                 EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,

@@ -24,11 +24,6 @@ namespace Services.Models
         public bool Fullscreen { get; set; }
 
         /// <summary>
-        /// Add -worldwide startup parameter.
-        /// </summary>
-        public bool IsWorldwideEnabled { get; set; } = false;
-
-        /// <summary>
         /// Enable HLAE?
         /// </summary>
         public bool EnableHlae { get; set; } = false;
