@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnalyzeCommand.cs" />
     <Compile Include="BaseCommand.cs" />
     <Compile Include="DownloadCommand.cs" />
     <Compile Include="JsonCommand.cs" />

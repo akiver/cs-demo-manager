@@ -6,7 +6,7 @@ namespace CLI
     internal class Program
     {
         public static string ExeName = AppDomain.CurrentDomain.FriendlyName;
-        private static readonly BaseCommand[] COMMANDS = { new JsonCommand(), new XlsxCommand(), new DownloadCommand() };
+        private static readonly BaseCommand[] COMMANDS = { new AnalyzeCommand(), new DownloadCommand(), new JsonCommand(), new XlsxCommand() };
 
         private static async Task Main(string[] args)
         {
