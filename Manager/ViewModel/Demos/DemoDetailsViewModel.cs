@@ -224,6 +224,8 @@ namespace Manager.ViewModel.Demos
 
         #region Commands
 
+        public RelayCommand<string> CopyPlayerSteamIdCommand { get; }
+
         public RelayCommand WindowLoaded
         {
             get
@@ -961,6 +963,7 @@ namespace Manager.ViewModel.Demos
             _cacheService = cacheService;
             _excelService = excelService;
             _roundService = roundService;
+            CopyPlayerSteamIdCommand = new RelayCommand<string>(CopyPlayerSteamId);
 
             Sources = Source.Sources;
 
@@ -1132,6 +1135,11 @@ namespace Manager.ViewModel.Demos
                 };
                 Messenger.Default.Send(msg);
             }));
+        }
+
+        private void CopyPlayerSteamId(string steamId)
+        {
+            System.Windows.Clipboard.SetText(steamId);
         }
     }
 }

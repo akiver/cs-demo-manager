@@ -123,6 +123,9 @@
         <MenuItem Header="{x:Static properties:Resources.ShowPlayerDemos}"
                   Command="{Binding DemoDetails.ShowPlayerDemosCommand, Source={StaticResource Locator}}"
                   CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}" />
+        <MenuItem Header="{x:Static properties:Resources.CopySteamID}"
+                  Command="{Binding DemoDetails.CopyPlayerSteamIdCommand, Source={StaticResource Locator}}"
+                  CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}" />
     </ContextMenu>
 
     <ContextMenu x:Key="WhitelistRowContextMenu">
