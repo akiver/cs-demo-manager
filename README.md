@@ -7,7 +7,7 @@ You can follow [@CSGODemoManager](https://twitter.com/CSGODemoManager) on Twitte
 
 ## Preview
 
-![preview](https://github.com/akiver/CSGO-Demos-Manager/blob/master/preview.jpg)
+![preview](https://github.com/akiver/CSGO-Demos-Manager/blob/main/preview.jpg)
 More screenshots and video are available at [https://csgo-demo-manager.com](https://csgo-demo-manager.com).
 
 ## Features
@@ -95,7 +95,7 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 3. Fork the repository and [clone](https://help.github.com/articles/cloning-a-repository/) it on your computer
 4. Edit the `.xlf` files of your language (don't forget to update the resources status: `Needs review` if you are not sure, `Final` otherwise)
 5. (Optional) Test your changes in the app by building it
-6. (Optional) Add your nickname to the [translators](https://github.com/akiver/CSGO-Demos-Manager/blob/master/Manager/App.xaml.cs#L28).
+6. (Optional) Add your nickname to the [translators](https://github.com/akiver/CSGO-Demos-Manager/blob/main/Manager/App.xaml.cs#L27).
 7. Commit and push your changes
 8. Create a [pull request](https://help.github.com/articles/creating-a-pull-request/)
 
@@ -125,4 +125,4 @@ For example **"8 demo(s) have been downloaded."**
 
 ## License
 
-[GPL v2](https://github.com/akiver/CSGO-Demos-Manager/blob/master/LICENSE)
+[GPL v2](https://github.com/akiver/CSGO-Demos-Manager/blob/main/LICENSE)
