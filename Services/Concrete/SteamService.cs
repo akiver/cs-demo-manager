@@ -189,25 +189,39 @@ namespace Services.Concrete
             return suspects;
         }
 
-        public async Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users)
+        public async Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> steamIds)
         {
-            List<PlayerSummary> playerSummaryList = new List<PlayerSummary>();
+            List<PlayerSummary> players = new List<PlayerSummary>();
             try
             {
                 using (var httpClient = new HttpClient())
                 {
-                    string ids = string.Join(",", users.ToArray());
-                    //  Grab general infos from user
+                    string ids = string.Join(",", steamIds.ToArray());
                     string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
                     HttpResponseMessage result = await httpClient.GetAsync(url);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
                         string json = await result.Content.ReadAsStringAsync();
-                        JObject o = JObject.Parse(json);
-                        playerSummaryList = o.SelectToken("response.players.player").ToObject<List<PlayerSummary>>();
-                        if (playerSummaryList == null)
+                        JObject jObject = JObject.Parse(json);
+                        JToken jToken = jObject.SelectToken("response.players.player");
+                        if (jToken == null)
+                        {
+                            return players;
+                        }
+
+                        players = jToken.ToObject<List<PlayerSummary>>();
+                        if (players == null)
                         {
                             return new List<PlayerSummary>();
+                        }
+
+                        foreach (PlayerSummary player in players)
+                        {
+                            // The Steam API returns null for deleted accounts
+                            if (player == null)
+                            {
+                                players.Remove(player);
+                            }
                         }
                     }
                 }
@@ -217,7 +231,7 @@ namespace Services.Concrete
                 Logger.Instance.Log(e);
             }
 
-            return playerSummaryList;
+            return players;
         }
 
         public async Task<int> GenerateMatchListFile(CancellationToken ct)

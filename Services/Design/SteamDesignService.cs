@@ -94,7 +94,7 @@ namespace Services.Design
             return Task.FromResult(suspects);
         }
 
-        public Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users)
+        public Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> steamIds)
         {
             Random random = new Random();
             return Task.FromResult(new List<PlayerSummary>

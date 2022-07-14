@@ -17,9 +17,9 @@ namespace Services.Interfaces
         /// <summary>
         /// Return user summary (general information about the account)
         /// </summary>
-        /// <param name="users"></param>
+        /// <param name="steamIds"></param>
         /// <returns></returns>
-        Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> users);
+        Task<List<PlayerSummary>> GetUserSummaryAsync(List<string> steamIds);
 
         /// <summary>
         /// Call boiler.exe which create a file containing the CMsgGCCStrike15_v2_MatchList message data
