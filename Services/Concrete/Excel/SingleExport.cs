@@ -50,24 +50,17 @@ namespace Services.Concrete.Excel
         public override async Task<IWorkbook> Generate()
         {
             CancellationToken cancellationToken = _configuration.CancellationToken.Token;
-            _configuration.OnProcessingDemo?.Invoke();
             Demo demo = DemoAnalyzer.ParseDemoHeader(_configuration.DemoPath);
             if (demo == null)
             {
                 throw new InvalidDemoException();
             }
 
-            if (!_configuration.ForceAnalyze && _cacheService.HasDemoInCache(demo.Id))
-            {
-                demo = await _cacheService.GetDemoDataFromCache(demo.Id);
-                demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-                demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
-                cancellationToken.ThrowIfCancellationRequested();
-            }
-            else
+            if (_configuration.ForceAnalyze || !_cacheService.HasDemoInCache(demo.Id))
             {
                 try
                 {
+                    _configuration.OnAnalyzeStart?.Invoke();
                     DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
                     if (_configuration.Source != null)
                     {
@@ -87,6 +80,13 @@ namespace Services.Concrete.Excel
 
                     throw new AnalyzeException(ex);
                 }
+            }
+            else
+            {
+                demo = await _cacheService.GetDemoDataFromCache(demo.Id);
+                demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+                demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
+                cancellationToken.ThrowIfCancellationRequested();
             }
 
             _generalSheet = new GeneralSheet(Workbook, demo);

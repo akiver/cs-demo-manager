@@ -65,7 +65,7 @@ namespace Services.Concrete.Excel
                     continue;
                 }
 
-                if (!_configuration.ForceAnalyze && !_cacheService.HasDemoInCache(demo.Id))
+                if (_configuration.ForceAnalyze || !_cacheService.HasDemoInCache(demo.Id))
                 {
                     try
                     {

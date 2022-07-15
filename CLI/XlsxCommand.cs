@@ -103,6 +103,7 @@ namespace CLI
                 DemoPaths = _demoPaths,
                 FocusSteamId = _focusSteamId,
                 Source = _source,
+                ForceAnalyze = _forceAnalyze,
                 OnProcessingDemo = (demoPath, demoNumber, totalDemoCount) => Console.WriteLine($@"Retrieving demo {demoNumber}/{totalDemoCount} {demoPath}"),
                 OnDemoNotFound = demoPath => Console.WriteLine($@"The demo doesn't exists: {demoPath}"),
                 OnInvalidDemo = demoPath => Console.WriteLine($@"Invalid demo {demoPath}"),
@@ -122,6 +123,7 @@ namespace CLI
             {
                 try
                 {
+                    Console.WriteLine($@"Retrieving demo {++currentDemoNumber}/{_demoPaths.Count} {demoPath}");
                     string outputFolderPath = BuildOutputFolderPathFromDemoPath(demoPath);
                     string demoName = Path.GetFileName(demoPath);
                     string fileName = outputFolderPath + Path.DirectorySeparatorChar + demoName + ".xlsx";
@@ -131,7 +133,6 @@ namespace CLI
                         FileName = fileName,
                         Source = _source,
                         ForceAnalyze = _forceAnalyze,
-                        OnProcessingDemo = () => Console.WriteLine($@"Retrieving demo {++currentDemoNumber}/{_demoPaths.Count} {demoPath}"),
                         OnAnalyzeStart = () => Console.WriteLine($@"Analyzing demo {demoPath}"),
                     };
                     await _excelService.GenerateXls(configuration);
