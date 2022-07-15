@@ -15,7 +15,7 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("Kill matrix");
         }
 
-        public override async Task GenerateContent()
+        protected override async Task GenerateContent()
         {
             await Task.Run(() =>
             {

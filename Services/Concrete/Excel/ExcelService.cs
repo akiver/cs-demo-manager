@@ -1,27 +1,25 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
-using Core.Models;
 using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel
 {
     public class ExcelService
     {
-        public async Task GenerateXls(Demo demo, string fileName)
+        public async Task GenerateXls(SingleExportConfiguration configuration)
         {
-            SingleExport export = new SingleExport(demo);
+            SingleExport export = new SingleExport(configuration);
             IWorkbook workbook = await export.Generate();
-            FileStream sw = File.Create(fileName);
+            FileStream sw = File.Create(configuration.FileName);
             workbook.Write(sw);
             sw.Close();
         }
 
-        public async Task GenerateXls(List<Demo> demos, string fileName, long selectedStatsAccountSteamId = 0)
+        public async Task GenerateXls(MultiExportConfiguration configuration)
         {
-            MultipleExport export = new MultipleExport(demos, selectedStatsAccountSteamId);
+            MultipleExport export = new MultipleExport(configuration);
             IWorkbook workbook = await export.Generate();
-            FileStream sw = File.Create(fileName);
+            FileStream sw = File.Create(configuration.FileName);
             workbook.Write(sw);
             sw.Close();
         }

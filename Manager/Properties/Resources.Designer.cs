@@ -6041,24 +6041,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Analyzing demo {0} for export....
-        /// </summary>
-        public static string NotificationAnalyzingDemoForExport {
-            get {
-                return ResourceManager.GetString("NotificationAnalyzingDemoForExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Analyzing demos for export....
-        /// </summary>
-        public static string NotificationAnalyzingDemosForExport {
-            get {
-                return ResourceManager.GetString("NotificationAnalyzingDemosForExport", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Analyzing demo(s) for json export....
         /// </summary>
         public static string NotificationAnalyzingForJsonExport {

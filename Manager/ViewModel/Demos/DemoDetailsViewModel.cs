@@ -20,6 +20,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -28,6 +29,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Threading;
 using Manager.Internals;
+using Services.Exceptions.Export;
 using Application = System.Windows.Application;
 using Round = Core.Models.Round;
 
@@ -560,19 +562,34 @@ namespace Manager.ViewModel.Demos
                                {
                                    try
                                    {
-                                       if (!_cacheService.HasDemoInCache(Demo.Id))
-                                       {
-                                           IsBusy = true;
-                                           HasNotification = true;
-                                           Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, Demo.Name);
-                                           await _demosService.AnalyzeDemo(Demo, CancellationToken.None);
-                                       }
+                                       IsBusy = true;
+                                       Notification = string.Format(Properties.Resources.NotificationExportingDemo, Demo.Name);
 
-                                       await _excelService.GenerateXls(Demo, exportDialog.FileName);
+                                       SingleExportConfiguration configuration = new SingleExportConfiguration
+                                       {
+                                           DemoPath = Demo.Path,
+                                           FileName = exportDialog.FileName,
+                                       };
+                                       await _excelService.GenerateXls(configuration);
                                    }
-                                   catch (Exception e)
+                                   catch (Exception ex)
                                    {
-                                       await HandleAnalyzeException(e);
+                                       Logger.Instance.Log(ex);
+                                       switch (ex)
+                                       {
+                                           case FileNotFoundException _:
+                                               await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoNotFound, MessageDialogStyle.Affirmative);
+                                               break;
+                                           case InvalidDemoException _:
+                                               await _dialogService.ShowErrorAsync("Invalid demo file.", MessageDialogStyle.Affirmative);
+                                               break;
+                                           case AnalyzeException _:
+                                               await _dialogService.ShowErrorAsync("Analyze error.", MessageDialogStyle.Affirmative);
+                                               break;
+                                           default:
+                                               await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
+                                               break;
+                                       }
                                    }
                                    finally
                                    {

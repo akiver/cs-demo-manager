@@ -65,7 +65,7 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("General");
         }
 
-        public override async Task GenerateContent()
+        protected override async Task GenerateContent()
         {
             await Task.Factory.StartNew(() =>
             {

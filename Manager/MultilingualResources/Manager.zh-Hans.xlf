@@ -2333,10 +2333,6 @@ Unable to start the game.</source>
           <source>Adding suspects...</source>
           <target state="final">正在添加嫌疑玩家……</target>
         </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemosForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demos for export...</source>
-          <target state="final">正在分析录像，准备导出……</target>
-        </trans-unit>
         <trans-unit id="NotificationAnalyzingForJsonExport" translate="yes" xml:space="preserve">
           <source>Analyzing demo(s) for json export...</source>
           <target state="final">正在分析录像，准备导出为 JSON 文件……</target>
@@ -2582,10 +2578,6 @@ You can find more information on {1}.</source>
         <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>Analyzing demo {0}...</source>
           <target state="final">正在分析录像文件 {0}……</target>
-        </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemoForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demo {0} for export...</source>
-          <target state="final">正在分析录像文件 {0}， 准备导出……</target>
         </trans-unit>
         <trans-unit id="Pov" translate="yes" xml:space="preserve">
           <source>POV</source>

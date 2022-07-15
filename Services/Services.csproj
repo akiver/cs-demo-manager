@@ -119,10 +119,12 @@
     <Compile Include="Concrete\DrawService.cs" />
     <Compile Include="Concrete\Excel\AbstractExport.cs" />
     <Compile Include="Concrete\Excel\ExcelService.cs" />
+    <Compile Include="Concrete\Excel\MultiExportConfiguration.cs" />
     <Compile Include="Concrete\Excel\MultipleExport.cs" />
     <Compile Include="Concrete\Excel\Sheets\AbstractMultipleSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\AbstractSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\AbstractSingleSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\IMultipleSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\FlashMatrixTeamsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\GeneralSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\FlashMatrixPlayersSheet.cs" />
@@ -147,6 +149,7 @@
     <Compile Include="Concrete\Excel\Sheets\Single\PlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\RoundsSheet.cs" />
     <Compile Include="Concrete\Excel\SingleExport.cs" />
+    <Compile Include="Concrete\Excel\SingleExportConfiguration.cs" />
     <Compile Include="Concrete\FlashbangService.cs" />
     <Compile Include="Concrete\GameLauncher.cs" />
     <Compile Include="Concrete\HeatmapService.cs" />
@@ -174,6 +177,8 @@
     <Compile Include="Design\SteamDesignService.cs" />
     <Compile Include="Design\StuffDesignService.cs" />
     <Compile Include="Concrete\BoilerExitCode.cs" />
+    <Compile Include="Exceptions\Export\AnalyzeException.cs" />
+    <Compile Include="Exceptions\Export\InvalidDemoException.cs" />
     <Compile Include="Exceptions\InvalidBoilerExecutableException.cs" />
     <Compile Include="Exceptions\InvalidFfmpegExecutableException.cs" />
     <Compile Include="Exceptions\InvalidHlaeExecutableException.cs" />

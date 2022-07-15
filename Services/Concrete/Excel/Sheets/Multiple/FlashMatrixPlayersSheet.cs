@@ -21,117 +21,91 @@ namespace Services.Concrete.Excel.Sheets.Multiple
         private readonly List<PlayerFlashEntry> _playerEntries = new List<PlayerFlashEntry>();
         private Dictionary<long, string> _playerNamePerSteamId = new Dictionary<long, string>();
 
-        public FlashMatrixPlayersSheet(IWorkbook workbook, List<Demo> demos)
+        public FlashMatrixPlayersSheet(IWorkbook workbook)
         {
             Headers = new Dictionary<string, CellType> { { string.Empty, CellType.String } };
-            Demos = demos;
             Sheet = workbook.CreateSheet("Flash matrix players");
         }
 
-        public override Task GenerateContent()
+        public override void AddDemo(Demo demo)
         {
-            ComputePlayerNamePerSteamId();
-            InitializePlayerEntries();
-            PopulatePlayerEntries();
-            GenerateSheet();
-
-            return Task.CompletedTask;
-        }
-
-        private void ComputePlayerNamePerSteamId()
-        {
-            foreach (Demo demo in Demos)
+            foreach (Player player in demo.Players)
             {
-                foreach (Player player in demo.Players)
-                {
-                    if (player.IsBot || _playerNamePerSteamId.ContainsKey(player.SteamId))
-                    {
-                        continue;
-                    }
-
-                    _playerNamePerSteamId.Add(player.SteamId, player.Name);
-
-                    if (IsMaxPlayerLimitReached())
-                    {
-                        break;
-                    }
-                }
-
                 if (IsMaxPlayerLimitReached())
                 {
                     break;
                 }
+
+                if (player.IsBot || _playerNamePerSteamId.ContainsKey(player.SteamId))
+                {
+                    continue;
+                }
+
+                _playerNamePerSteamId.Add(player.SteamId, player.Name);
             }
 
+
+            foreach (PlayerBlindedEvent blindEvent in demo.PlayerBlinded)
+            {
+                if (blindEvent.IsThrowerBot || blindEvent.IsVictimBot || !_playerNamePerSteamId.ContainsKey(blindEvent.ThrowerSteamId))
+                {
+                    continue;
+                }
+
+                PlayerFlashEntry throwerEntry = _playerEntries.Find(entry => entry.SteamId == blindEvent.ThrowerSteamId);
+                if (throwerEntry == null)
+                {
+                    throwerEntry = new PlayerFlashEntry
+                    {
+                        SteamId = blindEvent.ThrowerSteamId,
+                        Name = _playerNamePerSteamId[blindEvent.ThrowerSteamId],
+                        Durations = new Dictionary<long, float>(),
+                    };
+                    _playerEntries.Add(throwerEntry);
+                }
+
+                if (throwerEntry.Durations.ContainsKey(blindEvent.VictimSteamId))
+                {
+                    throwerEntry.Durations[blindEvent.VictimSteamId] += blindEvent.Duration;
+                }
+                else
+                {
+                    throwerEntry.Durations.Add(blindEvent.VictimSteamId, blindEvent.Duration);
+                }
+            }
+        }
+
+        protected override Task GenerateContent()
+        {
             _playerNamePerSteamId = _playerNamePerSteamId.OrderBy(k => k.Value).ToDictionary(x => x.Key, x => x.Value);
-        }
 
-        private void InitializePlayerEntries()
-        {
-            foreach (var playerName in _playerNamePerSteamId)
-            {
-                var durations = new Dictionary<long, float>();
-                foreach (var sortedPlayerName in _playerNamePerSteamId)
-                {
-                    durations.Add(sortedPlayerName.Key, 0);
-                }
-
-                _playerEntries.Add(new PlayerFlashEntry()
-                {
-                    SteamId = playerName.Key,
-                    Name = playerName.Value,
-                    Durations = durations,
-                });
-            }
-        }
-
-        private void PopulatePlayerEntries()
-        {
-            foreach (Demo demo in Demos)
-            {
-                foreach (PlayerBlindedEvent blindEvent in demo.PlayerBlinded)
-                {
-                    if (blindEvent.IsThrowerBot || blindEvent.IsVictimBot)
-                    {
-                        continue;
-                    }
-
-                    var throwerEntry = _playerEntries.Find(entry => entry.SteamId == blindEvent.ThrowerSteamId);
-                    if (throwerEntry == null)
-                    {
-                        continue;
-                    }
-
-                    var victimEntry = _playerEntries.Find(entry => entry.SteamId == blindEvent.VictimSteamId);
-                    if (victimEntry == null)
-                    {
-                        continue;
-                    }
-
-                    throwerEntry.Durations[victimEntry.SteamId] += blindEvent.Duration;
-                }
-            }
-        }
-
-        private void GenerateSheet()
-        {
             IRow firstRow = Sheet.CreateRow(0);
             SetCellValue(firstRow, 0, CellType.String, "Flasher\\Flashed");
 
-            for (int playerIndex = 0; playerIndex < _playerEntries.Count; playerIndex++)
+            int rowNumber = 1;
+            int firstRowColumnNumber = 1;
+            foreach (KeyValuePair<long, string> player in _playerNamePerSteamId)
             {
-                var playerEntry = _playerEntries[playerIndex];
-                SetCellValue(firstRow, playerIndex + 1, CellType.String, playerEntry.Name);
+                string playerName = player.Value;
+                SetCellValue(firstRow, firstRowColumnNumber++, CellType.String, playerName);
 
-                IRow row = Sheet.CreateRow(playerIndex + 1);
-                SetCellValue(row, 0, CellType.String, playerEntry.Name);
+                IRow row = Sheet.CreateRow(rowNumber++);
+                SetCellValue(row, 0, CellType.String, playerName);
 
-                for (int durationIndex = 0; durationIndex < playerEntry.Durations.Count; durationIndex++)
+                int columnNumber = 1;
+                foreach (KeyValuePair<long, string> namePerSteamId in _playerNamePerSteamId)
                 {
-                    var duration = playerEntry.Durations.ElementAt(durationIndex);
-                    SetCellValue(row, durationIndex + 1, CellType.Numeric, Math.Round(duration.Value, 2));
+                    double duration = 0;
+                    PlayerFlashEntry playerEntry = _playerEntries.Find(p => p.SteamId == player.Key);
+                    if (playerEntry != null && playerEntry.Durations.ContainsKey(namePerSteamId.Key))
+                    {
+                        duration = Math.Round(playerEntry.Durations[namePerSteamId.Key], 2);
+                    }
+                    SetCellValue(row, columnNumber++, CellType.Numeric, duration);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         private bool IsMaxPlayerLimitReached()

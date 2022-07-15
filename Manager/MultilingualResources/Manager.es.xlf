@@ -2347,10 +2347,6 @@ No se puede iniciar el juego.</target>
           <source>Adding suspects...</source>
           <target state="translated">Añadiendo sospechosos...</target>
         </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemosForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demos for export...</source>
-          <target state="translated">Analizando repeticiones para exportar...</target>
-        </trans-unit>
         <trans-unit id="NotificationAnalyzingForJsonExport" translate="yes" xml:space="preserve">
           <source>Analyzing demo(s) for json export...</source>
           <target state="translated">Analizando repetición(es) para exportar json...</target>
@@ -2596,10 +2592,6 @@ Puedes encontrar más información en {1}.</target>
         <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>Analyzing demo {0}...</source>
           <target state="translated">Analizando repetición {0}...</target>
-        </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemoForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demo {0} for export...</source>
-          <target state="translated">Analizando repetición {0} para exportar...</target>
         </trans-unit>
         <trans-unit id="Pov" translate="yes" xml:space="preserve">
           <source>POV</source>

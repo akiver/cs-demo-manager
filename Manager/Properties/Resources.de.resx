@@ -1753,9 +1753,6 @@ Das Spiel kann nicht gestartet werden.</value>
   <data name="NotificationAddingSuspects" xml:space="preserve">
     <value>Füge Verdächtigen hinzu...</value>
   </data>
-  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
-    <value>Analysiere Demos für Exportvorgang...</value>
-  </data>
   <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
     <value>Analysiere Demos(s) für json Exportvorgang...</value>
   </data>
@@ -1938,9 +1935,6 @@ Mehr Informationen finden Sie unter {1}.</value>
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Analysiere Demo {0}...</value>
-  </data>
-  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
-    <value>Analyisiere Demo {0} für den Exportvorgang.</value>
   </data>
   <data name="Pov" xml:space="preserve">
     <value>POV</value>

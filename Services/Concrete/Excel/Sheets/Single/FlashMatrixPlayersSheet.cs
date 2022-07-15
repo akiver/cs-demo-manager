@@ -16,7 +16,7 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("Flash matrix players");
         }
 
-        public override async Task GenerateContent()
+        protected override async Task GenerateContent()
         {
             CacheService cacheService = new CacheService();
             Demo.PlayerBlinded = await cacheService.GetDemoPlayerBlindedAsync(Demo);

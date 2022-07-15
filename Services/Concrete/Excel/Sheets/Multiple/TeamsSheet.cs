@@ -11,7 +11,9 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 {
     public class TeamsSheet : AbstractMultipleSheet
     {
-        public TeamsSheet(IWorkbook workbook, List<Demo> demos)
+        List<Team> _teams = new List<Team>();
+
+        public TeamsSheet(IWorkbook workbook)
         {
             Headers = new Dictionary<string, CellType>()
             {
@@ -54,87 +56,84 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 { "Incendiary", CellType.Numeric },
                 { "Decoy", CellType.Numeric },
             };
-            Demos = demos;
             Sheet = workbook.CreateSheet("Teams");
         }
 
-        public override async Task GenerateContent()
+        public override void AddDemo(Demo demo)
         {
-            await Task.Factory.StartNew(() =>
+            if (_teams.Contains(demo.TeamCT))
             {
-                List<Team> teams = new List<Team>();
-                foreach (Demo demo in Demos)
-                {
-                    if (teams.Contains(demo.TeamCT))
-                    {
-                        Team team = teams.First(t => t.Equals(demo.TeamCT));
-                        UpdateTeamStats(demo, team);
-                    }
-                    else
-                    {
-                        Team team = demo.TeamCT.Clone();
-                        InitTeam(demo, team);
-                        teams.Add(team);
-                    }
+                Team team = _teams.First(t => t.Equals(demo.TeamCT));
+                UpdateTeamStats(demo, team);
+            }
+            else
+            {
+                Team team = demo.TeamCT.Clone();
+                InitTeam(demo, team);
+                _teams.Add(team);
+            }
 
-                    if (teams.Contains(demo.TeamT))
-                    {
-                        Team team = teams.First(t => t.Equals(demo.TeamT));
-                        UpdateTeamStats(demo, team);
-                    }
-                    else
-                    {
-                        Team team = demo.TeamT.Clone();
-                        InitTeam(demo, team);
-                        teams.Add(team);
-                    }
-                }
+            if (_teams.Contains(demo.TeamT))
+            {
+                Team team = _teams.First(t => t.Equals(demo.TeamT));
+                UpdateTeamStats(demo, team);
+            }
+            else
+            {
+                Team team = demo.TeamT.Clone();
+                InitTeam(demo, team);
+                _teams.Add(team);
+            }
+        }
 
-                int rowCount = 1;
-                foreach (Team team in teams)
-                {
-                    IRow row = Sheet.CreateRow(rowCount++);
-                    int columnNumber = 0;
-                    SetCellValue(row, columnNumber++, CellType.String, team.Name);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.MatchCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.LostCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.KillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.DeathCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.AssistCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.RoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundCtCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundCtCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundTCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundTCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinPistolRoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinEcoRoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinSemiEcoRoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.WinForceBuyRoundCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.BombDefusedCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.BombExplodedCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedOnACount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedOnBCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.FiveKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.FourKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.ThreeKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.TwoKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.OneKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeDeathCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.JumpKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.CrouchKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.HeGrenadeThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.SmokeThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.MolotovThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, team.IncendiaryThrownCount);
-                    SetCellValue(row, columnNumber, CellType.Numeric, team.DecoyThrownCount);
-                }
-            });
+        protected override Task GenerateContent()
+        {
+            int rowCount = 1;
+            foreach (Team team in _teams)
+            {
+                IRow row = Sheet.CreateRow(rowCount++);
+                int columnNumber = 0;
+                SetCellValue(row, columnNumber++, CellType.String, team.Name);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.MatchCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.KillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.DeathCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.AssistCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.RoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundCtCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundCtCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundTCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundTCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinPistolRoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinEcoRoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinSemiEcoRoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinForceBuyRoundCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombDefusedCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombExplodedCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedOnACount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedOnBCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.FiveKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.FourKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.ThreeKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.TwoKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.OneKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeDeathCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.JumpKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.CrouchKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.HeGrenadeThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.SmokeThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.MolotovThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, team.IncendiaryThrownCount);
+                SetCellValue(row, columnNumber, CellType.Numeric, team.DecoyThrownCount);
+            }
+
+            return Task.CompletedTask;
         }
 
 

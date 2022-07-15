@@ -50,7 +50,7 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("Rounds");
         }
 
-        public override async Task GenerateContent()
+        protected override async Task GenerateContent()
         {
             var rowNumber = 1;
 

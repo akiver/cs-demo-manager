@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
@@ -8,7 +9,9 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 {
     public class RoundsSheet : AbstractMultipleSheet
     {
-        public RoundsSheet(IWorkbook workbook, List<Demo> demos)
+        private readonly Dictionary<string, Round[]> _roundsPerDemoId = new Dictionary<string, Round[]>();
+
+        public RoundsSheet(IWorkbook workbook)
         {
             Headers = new Dictionary<string, CellType>()
             {
@@ -47,62 +50,68 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 { "Molotov", CellType.Numeric },
                 { "Incendiary", CellType.Numeric },
             };
-            Demos = demos;
             Sheet = workbook.CreateSheet("Rounds");
         }
 
-        public override async Task GenerateContent()
+        public override void AddDemo(Demo demo)
         {
-            await Task.Factory.StartNew(() =>
+            if (!_roundsPerDemoId.ContainsKey(demo.Id))
             {
-                var rowNumber = 1;
+                _roundsPerDemoId.Add(demo.Id, demo.Rounds.ToArray());
+            }
+        }
 
-                foreach (Demo demo in Demos)
+        protected override Task GenerateContent()
+        {
+            int rowNumber = 1;
+            foreach (KeyValuePair<string, Round[]> kvp in _roundsPerDemoId)
+            {
+                string demoId = kvp.Key;
+                foreach (Round round in kvp.Value)
                 {
-                    foreach (Round round in demo.Rounds)
-                    {
-                        IRow row = Sheet.CreateRow(rowNumber);
-                        int columnNumber = 0;
-                        SetCellValue(row, columnNumber++, CellType.String, demo.Id);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(round.Duration, 2));
-                        SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
-                        SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide.AsString());
-                        SetCellValue(row, columnNumber++, CellType.String, round.EndReason.AsString());
-                        SetCellValue(row, columnNumber++, CellType.String, round.Type.AsString());
-                        SetCellValue(row, columnNumber++, CellType.String, round.SideTrouble.AsString());
-                        SetCellValue(row, columnNumber++, CellType.String,
-                            round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.KillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.TwoKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.ThreeKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.FourKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.FiveKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.TradeKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.JumpKillCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.AverageHealthDamagePerPlayer);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageHealthCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageArmorCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.BombExplodedCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.BombPlantedCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.BombDefusedCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeamCt);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeamT);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeamCt);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeamT);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.FlashbangThrownCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.SmokeThrownCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.HeGrenadeThrownCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.DecoyThrownCount);
-                        SetCellValue(row, columnNumber++, CellType.Numeric, round.MolotovThrownCount);
-                        SetCellValue(row, columnNumber, CellType.Numeric, round.IncendiaryThrownCount);
+                    IRow row = Sheet.CreateRow(rowNumber);
+                    int columnNumber = 0;
+                    SetCellValue(row, columnNumber++, CellType.String, demoId);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.Tick);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(round.Duration, 2));
+                    SetCellValue(row, columnNumber++, CellType.String, round.WinnerName);
+                    SetCellValue(row, columnNumber++, CellType.String, round.WinnerSide.AsString());
+                    SetCellValue(row, columnNumber++, CellType.String, round.EndReason.AsString());
+                    SetCellValue(row, columnNumber++, CellType.String, round.Type.AsString());
+                    SetCellValue(row, columnNumber++, CellType.String, round.SideTrouble.AsString());
+                    SetCellValue(row, columnNumber++, CellType.String,
+                        round.TeamTroubleName != string.Empty ? round.TeamTroubleName : string.Empty);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.KillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.OneKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.TwoKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.ThreeKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.FourKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.FiveKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.TradeKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.JumpKillCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.AverageHealthDamagePerPlayer);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageHealthCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.DamageArmorCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.BombExplodedCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.BombPlantedCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.BombDefusedCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeamCt);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.StartMoneyTeamT);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeamCt);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.EquipementValueTeamT);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.FlashbangThrownCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.SmokeThrownCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.HeGrenadeThrownCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.DecoyThrownCount);
+                    SetCellValue(row, columnNumber++, CellType.Numeric, round.MolotovThrownCount);
+                    SetCellValue(row, columnNumber, CellType.Numeric, round.IncendiaryThrownCount);
 
-                        rowNumber++;
-                    }
+                    rowNumber++;
                 }
-            });
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

@@ -1725,9 +1725,6 @@ Impossible de lancer le jeu.</value>
   <data name="NotificationAnalyzing" xml:space="preserve">
     <value>Analyse en cours...</value>
   </data>
-  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
-    <value>Analyse des démos en cours pour l'export...</value>
-  </data>
   <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
     <value>Analyse des démos en cours pour l'export JSON...</value>
   </data>
@@ -1922,9 +1919,6 @@ Si ce n'est pas le cas, merci de l'envoyer par email à l'adresse indiquée sur 
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Analyse de la démo {0} en cours...</value>
-  </data>
-  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
-    <value>Analyse de la démo {0} pour l'export en cours...</value>
   </data>
   <data name="DialogExportPlayer" xml:space="preserve">
     <value>Vous êtes sur le point d'exporter les données pour le joueur "{0}".

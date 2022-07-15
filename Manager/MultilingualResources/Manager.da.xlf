@@ -2334,10 +2334,6 @@ Er ikke istand til at starte spillet</target>
           <source>Adding suspects...</source>
           <target state="final">Tilføjer mistænkte</target>
         </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemosForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demos for export...</source>
-          <target state="final">Analysere Demoer for eksportering.</target>
-        </trans-unit>
         <trans-unit id="NotificationAnalyzingForJsonExport" translate="yes" xml:space="preserve">
           <source>Analyzing demo(s) for json export...</source>
           <target state="final">Analysere demo(er) til JSON eksport</target>
@@ -2583,10 +2579,6 @@ du kan finde mere information på {1}.</target>
         <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>Analyzing demo {0}...</source>
           <target state="final">Analysere demo {0}...</target>
-        </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemoForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demo {0} for export...</source>
-          <target state="final">Analyser demo {0} til eksport...</target>
         </trans-unit>
         <trans-unit id="Pov" translate="yes" xml:space="preserve">
           <source>POV</source>

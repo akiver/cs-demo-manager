@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Threading;
 using System.Threading.Tasks;
-using Core.Models;
-using Services.Concrete;
-using Services.Concrete.Analyzer;
 using Services.Concrete.Excel;
+using Services.Exceptions.Export;
 
 namespace CLI
 {
@@ -14,9 +10,11 @@ namespace CLI
     {
         public const string COMMAND_NAME = "xlsx";
         private bool _exportIntoSingleFile = false;
+        private readonly ExcelService _excelService;
 
         public XlsxCommand() : base(COMMAND_NAME, @"Export demos into XLSX files")
         {
+            _excelService = new ExcelService();
         }
 
         public override void PrintHelp()
@@ -68,98 +66,94 @@ namespace CLI
 
             try
             {
-                ExcelService excelService = new ExcelService();
-                CacheService cacheService = new CacheService();
-                List<Demo> demos = new List<Demo>();
-
-                int currentDemoNumber = 0;
-                foreach (string demoPath in _demoPaths)
-                {
-                    Console.WriteLine($@"Retrieving demo {++currentDemoNumber}/{_demoPaths.Count} {demoPath}");
-                    Demo demo = DemoAnalyzer.ParseDemoHeader(demoPath);
-                    if (demo == null)
-                    {
-                        Console.WriteLine($@"Invalid demo {demoPath}");
-                        continue;
-                    }
-
-                    if (_source != null)
-                    {
-                        demo.Source = _source;
-                    }
-
-                    if (!_forceAnalyze && cacheService.HasDemoInCache(demo.Id))
-                    {
-                        demo = await cacheService.GetDemoDataFromCache(demo.Id);
-                        demo.WeaponFired = await cacheService.GetDemoWeaponFiredAsync(demo);
-                        demo.PlayerBlinded = await cacheService.GetDemoPlayerBlindedAsync(demo);
-                    }
-                    else
-                    {
-                        try
-                        {
-                            Console.WriteLine($@"Analyzing demo {demoPath}");
-                            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
-                            demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
-                            await cacheService.WriteDemoDataCache(demo);
-                        }
-                        catch (Exception)
-                        {
-                            Console.WriteLine($@"Error while analyzing demo {demoPath}");
-                            continue;
-                        }
-                    }
-
-                    if (_exportIntoSingleFile)
-                    {
-                        demos.Add(demo);
-                    }
-                    else
-                    {
-                        Console.WriteLine($@"Generating XLSX file");
-                        string outputFolderPath = BuildOutputFolderPathFromDemoPath(demoPath);
-                        string fileName = outputFolderPath + Path.DirectorySeparatorChar + demo.Name + ".xlsx";
-                        await excelService.GenerateXls(demo, fileName);
-                        Console.WriteLine($@"XLSX file generated at {fileName}");
-                    }
-                }
-
                 if (_exportIntoSingleFile)
                 {
-                    if (demos.Count == 0)
-                    {
-                        Console.WriteLine(@"No demos to export");
-
-                        return;
-                    }
-
-                    if (string.IsNullOrEmpty(_outputFolderPath))
-                    {
-                        if (IsCurrentDirectoryWritable())
-                        {
-                            _outputFolderPath = Directory.GetCurrentDirectory();
-                        }
-                        else
-                        {
-                            _outputFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                        }
-                    }
-
-                    Console.WriteLine(@"Generating XLSX file");
-                    string fileName = _outputFolderPath + Path.DirectorySeparatorChar + "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx";
-                    await excelService.GenerateXls(demos, fileName);
-                    Console.WriteLine($@"XLSX file generated at {fileName}");
+                    await ProcessSingleFileExport();
                 }
-            }
-            catch (FileNotFoundException ex)
-            {
-                Console.WriteLine($@"The demo doesn't exists: {ex.FileName}");
-                Environment.Exit(1);
+                else
+                {
+                    await ProcessMultipleFilesExport();
+                }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($@"Error while exporting demo: {ex.Message}");
                 Environment.Exit(1);
+            }
+        }
+
+        private async Task ProcessSingleFileExport()
+        {
+            if (string.IsNullOrEmpty(_outputFolderPath))
+            {
+                if (IsCurrentDirectoryWritable())
+                {
+                    _outputFolderPath = Directory.GetCurrentDirectory();
+                }
+                else
+                {
+                    _outputFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                }
+            }
+            string fileName = _outputFolderPath + Path.DirectorySeparatorChar + "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx";
+            MultiExportConfiguration configuration = new MultiExportConfiguration
+            {
+                FileName = fileName,
+                DemoPaths = _demoPaths,
+                FocusSteamId = 0, // TODO --steamid parameter
+                Source = _source,
+                OnProcessingDemo = (demoPath, demoNumber, totalDemoCount) => Console.WriteLine($@"Retrieving demo {demoNumber}/{totalDemoCount} {demoPath}"),
+                OnDemoNotFound = demoPath => Console.WriteLine($@"The demo doesn't exists: {demoPath}"),
+                OnInvalidDemo = demoPath => Console.WriteLine($@"Invalid demo {demoPath}"),
+                OnAnalyzeStart = demoPath => Console.WriteLine($@"Analyzing demo {demoPath}"),
+                OnAnalyzeError = demoPath => Console.WriteLine($@"Error while analyzing demo {demoPath}"),
+                OnGeneratingXlsxFile = () => Console.WriteLine(@"Generating XLSX file..."),
+
+            };
+            await _excelService.GenerateXls(configuration);
+            Console.WriteLine($@"XLSX file generated at {fileName}");
+        }
+
+        private async Task ProcessMultipleFilesExport()
+        {
+            int currentDemoNumber = 0;
+            foreach (string demoPath in _demoPaths)
+            {
+                try
+                {
+                    string outputFolderPath = BuildOutputFolderPathFromDemoPath(demoPath);
+                    string demoName = Path.GetFileName(demoPath);
+                    string fileName = outputFolderPath + Path.DirectorySeparatorChar + demoName + ".xlsx";
+                    SingleExportConfiguration configuration = new SingleExportConfiguration
+                    {
+                        DemoPath = demoPath,
+                        FileName = fileName,
+                        Source = _source,
+                        ForceAnalyze = _forceAnalyze,
+                        OnProcessingDemo = () => Console.WriteLine($@"Retrieving demo {++currentDemoNumber}/{_demoPaths.Count} {demoPath}"),
+                        OnAnalyzeStart = () => Console.WriteLine($@"Analyzing demo {demoPath}"),
+                    };
+                    await _excelService.GenerateXls(configuration);
+                    Console.WriteLine($@"XLSX file generated at {fileName}");
+                }
+                catch (Exception ex)
+                {
+                    switch (ex)
+                    {
+                        case FileNotFoundException _:
+                            Console.WriteLine($@"The demo doesn't exists: {demoPath}");
+                            break;
+                        case InvalidDemoException _:
+                            Console.WriteLine($@"Invalid demo {demoPath}");
+                            break;
+                        case AnalyzeException _:
+                            Console.WriteLine($@"Error while analyzing demo {demoPath}");
+                            break;
+                        default:
+                            Console.WriteLine($@"An error occurred while exporting demo {demoPath}");
+                            break;
+                    }
+                }
             }
         }
     }

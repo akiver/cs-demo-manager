@@ -1757,9 +1757,6 @@ Er ikke istand til at starte spillet</value>
   <data name="NotificationAddingSuspects" xml:space="preserve">
     <value>Tilføjer mistænkte</value>
   </data>
-  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
-    <value>Analysere Demoer for eksportering.</value>
-  </data>
   <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
     <value>Analysere demo(er) til JSON eksport</value>
   </data>
@@ -1942,9 +1939,6 @@ du kan finde mere information på {1}.</value>
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Analysere demo {0}...</value>
-  </data>
-  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
-    <value>Analyser demo {0} til eksport...</value>
   </data>
   <data name="Pov" xml:space="preserve">
     <value>POV</value>

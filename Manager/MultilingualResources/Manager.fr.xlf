@@ -2287,10 +2287,6 @@ Impossible de lancer le jeu.</target>
           <source>Analyzing...</source>
           <target state="final">Analyse en cours...</target>
         </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemosForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demos for export...</source>
-          <target state="final">Analyse des démos en cours pour l'export...</target>
-        </trans-unit>
         <trans-unit id="NotificationAnalyzingForJsonExport" translate="yes" xml:space="preserve">
           <source>Analyzing demo(s) for json export...</source>
           <target state="final">Analyse des démos en cours pour l'export JSON...</target>
@@ -2552,10 +2548,6 @@ Si ce n'est pas le cas, merci de l'envoyer par email à l'adresse indiquée sur 
         <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>Analyzing demo {0}...</source>
           <target state="final">Analyse de la démo {0} en cours...</target>
-        </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemoForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demo {0} for export...</source>
-          <target state="final">Analyse de la démo {0} pour l'export en cours...</target>
         </trans-unit>
         <trans-unit id="DialogExportPlayer" translate="yes" xml:space="preserve">
           <source>You are going to export data for the player "{0}".

@@ -1,13 +1,18 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
+using Services.Concrete.Analyzer;
 using Services.Concrete.Excel.Sheets.Single;
+using Services.Exceptions.Export;
+using Services.Interfaces;
 
 namespace Services.Concrete.Excel
 {
     public class SingleExport : AbstractExport
     {
-        private readonly Demo _demo;
+        private readonly ICacheService _cacheService;
 
         private GeneralSheet _generalSheet;
 
@@ -34,40 +39,95 @@ namespace Services.Concrete.Excel
         private FlashMatrixPlayersSheet _flashMatrixPlayersSheet;
 
         private FlashMatrixTeamsSheet _flashMatrixTeamsSheet;
+        private readonly SingleExportConfiguration _configuration;
 
-        public SingleExport(Demo demo)
+        public SingleExport(SingleExportConfiguration configuration)
         {
-            _demo = demo;
+            _configuration = configuration;
+            _cacheService = new CacheService();
         }
 
         public override async Task<IWorkbook> Generate()
         {
-            _generalSheet = new GeneralSheet(Workbook, _demo);
+            CancellationToken cancellationToken = _configuration.CancellationToken.Token;
+            _configuration.OnProcessingDemo?.Invoke();
+            Demo demo = DemoAnalyzer.ParseDemoHeader(_configuration.DemoPath);
+            if (demo == null)
+            {
+                throw new InvalidDemoException();
+            }
+
+            if (!_configuration.ForceAnalyze && _cacheService.HasDemoInCache(demo.Id))
+            {
+                demo = await _cacheService.GetDemoDataFromCache(demo.Id);
+                demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+                demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
+                cancellationToken.ThrowIfCancellationRequested();
+            }
+            else
+            {
+                try
+                {
+                    DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+                    if (_configuration.Source != null)
+                    {
+                        demo.Source = _configuration.Source;
+                    }
+
+                    demo = await analyzer.AnalyzeDemoAsync(cancellationToken);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await _cacheService.WriteDemoDataCache(demo);
+                }
+                catch (Exception ex)
+                {
+                    if (ex is OperationCanceledException)
+                    {
+                        throw ex;
+                    }
+
+                    throw new AnalyzeException(ex);
+                }
+            }
+
+            _generalSheet = new GeneralSheet(Workbook, demo);
             await _generalSheet.Generate();
-            _playersSheet = new PlayersSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _playersSheet = new PlayersSheet(Workbook, demo);
             await _playersSheet.Generate();
-            _roundsSheet = new RoundsSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _roundsSheet = new RoundsSheet(Workbook, demo);
             await _roundsSheet.Generate();
-            _killsSheet = new KillsSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _killsSheet = new KillsSheet(Workbook, demo);
             await _killsSheet.Generate();
-            _entryHoldKillsRoundSheet = new EntryHoldKillsRoundSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _entryHoldKillsRoundSheet = new EntryHoldKillsRoundSheet(Workbook, demo);
             await _entryHoldKillsRoundSheet.Generate();
-            _entryHoldKillsPlayerSheet = new EntryHoldKillsPlayerSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _entryHoldKillsPlayerSheet = new EntryHoldKillsPlayerSheet(Workbook, demo);
             await _entryHoldKillsPlayerSheet.Generate();
-            _entryHoldKillsTeamSheet = new EntryHoldKillsTeamSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _entryHoldKillsTeamSheet = new EntryHoldKillsTeamSheet(Workbook, demo);
             await _entryHoldKillsTeamSheet.Generate();
-            _entryKillsRoundSheet = new EntryKillsRoundSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _entryKillsRoundSheet = new EntryKillsRoundSheet(Workbook, demo);
             await _entryKillsRoundSheet.Generate();
-            _entryKillsPlayerSheet = new EntryKillsPlayerSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _entryKillsPlayerSheet = new EntryKillsPlayerSheet(Workbook, demo);
             await _entryKillsPlayerSheet.Generate();
-            _entryKillsTeamSheet = new EntryKillsTeamSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _entryKillsTeamSheet = new EntryKillsTeamSheet(Workbook, demo);
             await _entryKillsTeamSheet.Generate();
-            _killMatrixSheet = new KillMatrixSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _killMatrixSheet = new KillMatrixSheet(Workbook, demo);
             await _killMatrixSheet.Generate();
-            _flashMatrixPlayersSheet = new FlashMatrixPlayersSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _flashMatrixPlayersSheet = new FlashMatrixPlayersSheet(Workbook, demo);
             await _flashMatrixPlayersSheet.Generate();
-            _flashMatrixTeamsSheet = new FlashMatrixTeamsSheet(Workbook, _demo);
+            cancellationToken.ThrowIfCancellationRequested();
+            _flashMatrixTeamsSheet = new FlashMatrixTeamsSheet(Workbook, demo);
             await _flashMatrixTeamsSheet.Generate();
+            cancellationToken.ThrowIfCancellationRequested();
 
             return Workbook;
         }

@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using Core.Models;
+﻿using Core.Models;
 
 namespace Services.Concrete.Excel.Sheets
 {
-    public abstract class AbstractMultipleSheet : AbstractSheet
+    public abstract class AbstractMultipleSheet : AbstractSheet, IMultipleSheet
     {
-        public List<Demo> Demos;
-
-        public long SteamId { get; set; }
+        public abstract void AddDemo(Demo demo);
     }
 }

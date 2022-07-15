@@ -2334,10 +2334,6 @@ Uruchomienie gry nie powiodło się.</target>
           <source>Adding suspects...</source>
           <target state="final">Dodawanie podejrzanych...</target>
         </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemosForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demos for export...</source>
-          <target state="final">Analizowanie dem do eksportu...</target>
-        </trans-unit>
         <trans-unit id="NotificationAnalyzingForJsonExport" translate="yes" xml:space="preserve">
           <source>Analyzing demo(s) for json export...</source>
           <target state="final">Analizowanie dem do eksportu JSON...</target>
@@ -2583,10 +2579,6 @@ Więcej informacji znajdziesz na {1}.</target>
         <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>Analyzing demo {0}...</source>
           <target state="final">Analizowanie dema {0}...</target>
-        </trans-unit>
-        <trans-unit id="NotificationAnalyzingDemoForExport" translate="yes" xml:space="preserve">
-          <source>Analyzing demo {0} for export...</source>
-          <target state="final">Analizowanie dema {0} do eksportu...</target>
         </trans-unit>
         <trans-unit id="Pov" translate="yes" xml:space="preserve">
           <source>POV</source>

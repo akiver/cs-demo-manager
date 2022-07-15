@@ -22,117 +22,90 @@ namespace Services.Concrete.Excel.Sheets.Multiple
         private readonly List<PlayerKillEntry> _playerEntries = new List<PlayerKillEntry>();
         private Dictionary<long, string> _playerNamePerSteamId = new Dictionary<long, string>();
 
-        public KillMatrixSheet(IWorkbook workbook, List<Demo> demos)
+        public KillMatrixSheet(IWorkbook workbook)
         {
             Headers = new Dictionary<string, CellType> { { Empty, CellType.String } };
-            Demos = demos;
             Sheet = workbook.CreateSheet("Kill matrix");
         }
 
-        public override Task GenerateContent()
+        public override void AddDemo(Demo demo)
         {
-            ComputePlayerNamePerSteamId();
-            InitializePlayerEntries();
-            PopulatePlayerEntries();
-            GenerateSheet();
-
-            return Task.CompletedTask;
-        }
-
-        private void ComputePlayerNamePerSteamId()
-        {
-            foreach (Demo demo in Demos)
+            foreach (Player player in demo.Players)
             {
-                foreach (Player player in demo.Players)
-                {
-                    if (player.IsBot || _playerNamePerSteamId.ContainsKey(player.SteamId))
-                    {
-                        continue;
-                    }
-
-                    _playerNamePerSteamId.Add(player.SteamId, player.Name);
-
-                    if (IsMaxPlayerLimitReached())
-                    {
-                        break;
-                    }
-                }
-
                 if (IsMaxPlayerLimitReached())
                 {
                     break;
                 }
+
+                if (player.IsBot || _playerNamePerSteamId.ContainsKey(player.SteamId))
+                {
+                    continue;
+                }
+
+                _playerNamePerSteamId.Add(player.SteamId, player.Name);
             }
 
+            foreach (KillEvent kill in demo.Kills)
+            {
+                if (kill.IsKillerBot || kill.IsVictimBot || !_playerNamePerSteamId.ContainsKey(kill.KillerSteamId))
+                {
+                    continue;
+                }
+
+                PlayerKillEntry killerEntry = _playerEntries.Find(entry => entry.SteamId == kill.KillerSteamId);
+                if (killerEntry == null)
+                {
+                    killerEntry = new PlayerKillEntry
+                    {
+                        SteamId = kill.KillerSteamId,
+                        Name = _playerNamePerSteamId[kill.KillerSteamId],
+                        Kills = new Dictionary<long, int>(),
+                    };
+                    _playerEntries.Add(killerEntry);
+                }
+
+                if (killerEntry.Kills.ContainsKey(kill.KilledSteamId))
+                {
+                    killerEntry.Kills[kill.KilledSteamId]++;
+                }
+                else
+                {
+                    killerEntry.Kills.Add(kill.KilledSteamId, 1);
+                }
+            }
+        }
+
+        protected override Task GenerateContent()
+        {
             _playerNamePerSteamId = _playerNamePerSteamId.OrderBy(k => k.Value).ToDictionary(x => x.Key, x => x.Value);
-        }
 
-        private void InitializePlayerEntries()
-        {
-            foreach (var playerName in _playerNamePerSteamId)
-            {
-                var kills = new Dictionary<long, int>();
-                foreach (var sortedPlayerName in _playerNamePerSteamId)
-                {
-                    kills.Add(sortedPlayerName.Key, 0);
-                }
-
-                _playerEntries.Add(new PlayerKillEntry
-                {
-                    SteamId = playerName.Key,
-                    Name = playerName.Value,
-                    Kills = kills,
-                });
-            }
-        }
-
-        private void PopulatePlayerEntries()
-        {
-            foreach (Demo demo in Demos)
-            {
-                foreach (KillEvent kill in demo.Kills)
-                {
-                    if (kill.IsKillerBot || kill.IsVictimBot)
-                    {
-                        continue;
-                    }
-
-                    PlayerKillEntry killerEntry = _playerEntries.Find(entry => entry.SteamId == kill.KillerSteamId);
-                    if (killerEntry == null)
-                    {
-                        continue;
-                    }
-
-                    PlayerKillEntry victimEntry = _playerEntries.Find(entry => entry.SteamId == kill.KilledSteamId);
-                    if (victimEntry == null)
-                    {
-                        continue;
-                    }
-
-                    killerEntry.Kills[victimEntry.SteamId]++;
-                }
-            }
-        }
-
-        private void GenerateSheet()
-        {
             IRow firstRow = Sheet.CreateRow(0);
             SetCellValue(firstRow, 0, CellType.String, "Killer\\Victim");
 
-            for (int playerIndex = 0; playerIndex < _playerEntries.Count; playerIndex++)
+            int rowNumber = 1;
+            int firstRowColumnNumber = 1;
+            foreach (KeyValuePair<long, string> player in _playerNamePerSteamId)
             {
-                PlayerKillEntry playerEntry = _playerEntries[playerIndex];
-                SetCellValue(firstRow, playerIndex + 1, CellType.String, playerEntry.Name);
+                string playerName = player.Value;
+                SetCellValue(firstRow, firstRowColumnNumber++, CellType.String, playerName);
 
-                IRow row = Sheet.CreateRow(playerIndex + 1);
-                SetCellValue(row, 0, CellType.String, playerEntry.Name);
+                IRow row = Sheet.CreateRow(rowNumber++);
+                SetCellValue(row, 0, CellType.String, playerName);
 
-                for (int killIndex = 0; killIndex < playerEntry.Kills.Count; killIndex++)
+                int killColumnNumber = 1;
+                foreach (KeyValuePair<long, string> namePerSteamId in _playerNamePerSteamId)
                 {
-                    var killEntry = playerEntry.Kills.ElementAt(killIndex);
-                    SetCellValue(row, killIndex + 1, CellType.Numeric, killEntry.Value);
+                    PlayerKillEntry playerEntry = _playerEntries.Find(p => p.SteamId == player.Key);
+                    int killCount = 0;
+                    if (playerEntry != null && playerEntry.Kills.ContainsKey(namePerSteamId.Key))
+                    {
+                        killCount = playerEntry.Kills[namePerSteamId.Key];
+                    }
+                    SetCellValue(row, killColumnNumber++, CellType.Numeric, killCount);
                 }
             }
+
+            return Task.CompletedTask;
         }
 
         private bool IsMaxPlayerLimitReached()

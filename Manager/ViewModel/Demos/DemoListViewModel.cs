@@ -32,6 +32,7 @@ using Services.Concrete;
 using Services.Concrete.Excel;
 using Services.Concrete.ThirdParties;
 using Services.Exceptions;
+using Services.Exceptions.Export;
 using Services.Interfaces;
 using Services.Models;
 using Services.Models.ThirdParties;
@@ -538,111 +539,65 @@ namespace Manager.ViewModel.Demos
                                        case MessageDialogResult.FirstAuxiliary:
                                            return;
                                        case MessageDialogResult.Affirmative:
-                                       {
-                                           SaveFileDialog saveExportFileDialog = new SaveFileDialog
                                            {
-                                               FileName = "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx",
-                                               Filter = "XLSX file (*.xlsx)|*.xlsx",
-                                           };
-
-                                           if (saveExportFileDialog.ShowDialog() != DialogResult.OK)
-                                           {
-                                               return;
-                                           }
-
-                                           try
-                                           {
-                                               IsBusy = true;
-                                               Notification = Properties.Resources.NotificationAnalyzingDemosForExport;
-                                               IsCancellable = true;
-
-                                               await AnalyzeDemosAsync(true);
-                                               if (_cts != null)
+                                               SaveFileDialog saveExportFileDialog = new SaveFileDialog
                                                {
+                                                   FileName = "export-" + DateTime.Now.ToString("yy-MM-dd-hh-mm-ss") + ".xlsx",
+                                                   Filter = "XLSX file (*.xlsx)|*.xlsx",
+                                               };
+
+                                               if (saveExportFileDialog.ShowDialog() != DialogResult.OK)
+                                               {
+                                                   return;
+                                               }
+
+                                               try
+                                               {
+                                                   IsBusy = true;
+                                                   IsCancellable = true;
+
+                                                   List<string> demoPaths = new List<string>();
+                                                   _cts = new CancellationTokenSource();
                                                    foreach (Demo demo in demos)
                                                    {
                                                        if (demo.SourceName == Pov.NAME)
                                                        {
                                                            continue;
                                                        }
-
-                                                       if (demo.WeaponFired.Count == 0)
-                                                       {
-                                                           demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
-                                                       }
-
-                                                       if (demo.PlayerBlinded.Count == 0)
-                                                       {
-                                                           demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
-                                                       }
+                                                       demoPaths.Add(demo.Path);
                                                    }
 
-                                                   await _excelService.GenerateXls(demos.ToList(), saveExportFileDialog.FileName,
-                                                       Properties.Settings.Default.SelectedStatsAccountSteamID);
-                                               }
-                                           }
-                                           catch (Exception e)
-                                           {
-                                               Logger.Instance.Log(e);
-                                               await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos,
-                                                   MessageDialogStyle.Affirmative);
-                                           }
-                                           finally
-                                           {
-                                               IsBusy = false;
-                                           }
-                                       }
-                                           break;
-                                       default:
-                                       {
-                                           SaveFileDialog saveExportFolderDialog = new SaveFileDialog
-                                           {
-                                               FileName = Properties.Resources.SaveHere,
-                                               OverwritePrompt = false,
-                                           };
-
-                                           DialogResult result = saveExportFolderDialog.ShowDialog();
-                                           if (result != DialogResult.OK)
-                                           {
-                                               return;
-                                           }
-
-                                           string directoryPath = Path.GetDirectoryName(saveExportFolderDialog.FileName);
-                                           if (directoryPath != null)
-                                           {
-                                               try
-                                               {
-                                                   IsBusy = true;
-                                                   Notification = Properties.Resources.NotificationAnalyzingDemosForExport;
-                                                   IsCancellable = true;
-
-                                                   await AnalyzeDemosAsync(true);
-                                                   if (_cts != null)
+                                                   MultiExportConfiguration configuration = new MultiExportConfiguration
                                                    {
-                                                       foreach (Demo demo in demos)
+                                                       FileName = saveExportFileDialog.FileName,
+                                                       DemoPaths = demoPaths,
+                                                       FocusSteamId = Properties.Settings.Default.SelectedStatsAccountSteamID,
+                                                       CancellationToken = _cts,
+                                                       OnProcessingDemo = (demoPath, demoCount, totalCount) => Notification = $"Retrieving demo {demoPath}",
+                                                       OnAnalyzeStart = demoPath => Notification = string.Format(Properties.Resources.NotificationAnalyzingDemo, demoPath),
+                                                       OnAnalyzeSuccess = demo =>
                                                        {
-                                                           Notification = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
-                                                           if (demo.WeaponFired.Count == 0)
+                                                           foreach (Demo actualDemo in Demos.ToList())
                                                            {
-                                                               demo.WeaponFired = await _cacheService.GetDemoWeaponFiredAsync(demo);
+                                                               if (actualDemo.Id == demo.Id)
+                                                               {
+                                                                   Demos.Remove(actualDemo);
+                                                                   Demos.Add(demo);
+                                                               }
                                                            }
-
-                                                           if (demo.PlayerBlinded.Count == 0)
-                                                           {
-                                                               demo.PlayerBlinded = await _cacheService.GetDemoPlayerBlindedAsync(demo);
-                                                           }
-
-                                                           string exportFilePath =
-                                                               $"{directoryPath}{Path.DirectorySeparatorChar}{demo.Name.Substring(0, demo.Name.Length - 4)}-export.xlsx";
-                                                           await _excelService.GenerateXls(demo, exportFilePath);
-                                                       }
-                                                   }
+                                                       },
+                                                       OnGeneratingXlsxFile = () => Notification = "Generating XLSX...",
+                                                   };
+                                                   await _excelService.GenerateXls(configuration);
                                                }
-                                               catch (Exception e)
+                                               catch (Exception ex)
                                                {
-                                                   Logger.Instance.Log(e);
-                                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos,
-                                                       MessageDialogStyle.Affirmative);
+                                                   if (!(ex is OperationCanceledException))
+                                                   {
+                                                       Logger.Instance.Log(ex);
+                                                       await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos,
+                                                           MessageDialogStyle.Affirmative);
+                                                   }
                                                }
                                                finally
                                                {
@@ -650,7 +605,65 @@ namespace Manager.ViewModel.Demos
                                                    IsCancellable = false;
                                                }
                                            }
-                                       }
+                                           break;
+                                       default:
+                                           {
+                                               SaveFileDialog saveExportFolderDialog = new SaveFileDialog
+                                               {
+                                                   FileName = Properties.Resources.SaveHere,
+                                                   OverwritePrompt = false,
+                                               };
+
+                                               DialogResult result = saveExportFolderDialog.ShowDialog();
+                                               if (result != DialogResult.OK)
+                                               {
+                                                   return;
+                                               }
+
+                                               string directoryPath = Path.GetDirectoryName(saveExportFolderDialog.FileName);
+                                               if (directoryPath != null)
+                                               {
+                                                   IsBusy = true;
+                                                   IsCancellable = true;
+                                                   _cts = new CancellationTokenSource();
+                                                   int demosExportFailedCount = 0;
+
+                                                   foreach (Demo demo in demos)
+                                                   {
+                                                       try
+                                                       {
+                                                           Notification = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
+                                                           string exportFilePath =
+                                                               $"{directoryPath}{Path.DirectorySeparatorChar}{demo.Name.Substring(0, demo.Name.Length - 4)}-export.xlsx";
+                                                           SingleExportConfiguration configuration = new SingleExportConfiguration
+                                                           {
+                                                               DemoPath = demo.Path,
+                                                               FileName = exportFilePath,
+                                                               CancellationToken = _cts,
+                                                           };
+                                                           await _excelService.GenerateXls(configuration);
+                                                       }
+                                                       catch (Exception ex)
+                                                       {
+                                                           if (ex is OperationCanceledException)
+                                                           {
+                                                               break;
+                                                           }
+
+                                                           Logger.Instance.Log(ex);
+                                                           demosExportFailedCount++;
+                                                       }
+                                                   }
+
+                                                   if (!_cts.IsCancellationRequested && demosExportFailedCount > 0)
+                                                   {
+                                                       await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemos, MessageDialogStyle.Affirmative);
+                                                   }
+
+                                                   IsBusy = false;
+                                                   IsCancellable = false;
+                                               }
+                                           }
                                            break;
                                    }
                                }
@@ -669,20 +682,37 @@ namespace Manager.ViewModel.Demos
                                        {
                                            IsBusy = true;
                                            IsCancellable = true;
-                                           Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, demo.Name);
+                                           Notification = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
+                                           _cts = new CancellationTokenSource();
 
-                                           await AnalyzeDemosAsync(true);
-                                           if (_cts != null)
+                                           SingleExportConfiguration configuration = new SingleExportConfiguration
                                            {
-                                               Notification = string.Format(Properties.Resources.NotificationAnalyzingDemoForExport, demo.Name);
-                                               await _excelService.GenerateXls(demo, saveExportDialog.FileName);
-                                           }
+                                               DemoPath = demo.Path,
+                                               FileName = saveExportDialog.FileName,
+                                               CancellationToken = _cts,
+                                           };
+                                           await _excelService.GenerateXls(configuration);
                                        }
-                                       catch (Exception e)
+                                       catch (Exception ex)
                                        {
-                                           Logger.Instance.Log(e);
-                                           await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo,
-                                               MessageDialogStyle.Affirmative);
+                                           Logger.Instance.Log(ex);
+                                           switch (ex)
+                                           {
+                                               case FileNotFoundException _:
+                                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoNotFound, MessageDialogStyle.Affirmative);
+                                                   break;
+                                               case InvalidDemoException _:
+                                                   await _dialogService.ShowErrorAsync("Invalid demo file.", MessageDialogStyle.Affirmative);
+                                                   break;
+                                               case AnalyzeException _:
+                                                   await _dialogService.ShowErrorAsync("Analyze error.", MessageDialogStyle.Affirmative);
+                                                   break;
+                                               default:
+                                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);
+                                                   break;
+                                               case OperationCanceledException _:
+                                                   break;
+                                           }
                                        }
                                        finally
                                        {
@@ -1119,7 +1149,6 @@ namespace Manager.ViewModel.Demos
                                if (_cts != null)
                                {
                                    _cts.Cancel();
-                                   _cts = null;
                                    Notification = Properties.Resources.NotificationCancelling;
                                    IsCancellable = false;
                                    // small delay to be sure to send the msg after the last progress event trigerred
@@ -1216,10 +1245,7 @@ namespace Manager.ViewModel.Demos
                                    IsBusy = true;
                                    IsCancellable = true;
                                    Notification = Properties.Resources.NotificationRetrievingMatchesData;
-                                   if (_cts == null)
-                                   {
-                                       _cts = new CancellationTokenSource();
-                                   }
+                                   _cts = new CancellationTokenSource();
 
                                    int exitCode = await _steamService.GenerateMatchListFile(_cts.Token);
                                    await HandleBoilerResult(exitCode);
@@ -1230,7 +1256,7 @@ namespace Manager.ViewModel.Demos
                                }
                                catch (Exception e)
                                {
-                                   if (!(e is TaskCanceledException))
+                                   if (!(e is OperationCanceledException))
                                    {
                                        Logger.Instance.Log(e);
                                        await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorDownloadingDemos,
@@ -1278,10 +1304,7 @@ namespace Manager.ViewModel.Demos
                                    IsBusy = true;
                                    IsCancellable = true;
                                    Notification = Properties.Resources.NotificationRetrievingDemoFromShareCode;
-                                   if (_cts == null)
-                                   {
-                                       _cts = new CancellationTokenSource();
-                                   }
+                                   _cts = new CancellationTokenSource();
 
                                    int exitCode = await _steamService.DownloadDemoFromShareCode(shareCode, _cts.Token);
                                    await HandleBoilerResult(exitCode, false);
@@ -1297,7 +1320,7 @@ namespace Manager.ViewModel.Demos
                                }
                                catch (Exception e)
                                {
-                                   if (!(e is TaskCanceledException))
+                                   if (!(e is OperationCanceledException))
                                    {
                                        Logger.Instance.Log(e);
                                        await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorDownloadingDemos,
@@ -1766,11 +1789,7 @@ namespace Manager.ViewModel.Demos
 
             try
             {
-                if (_cts == null)
-                {
-                    _cts = new CancellationTokenSource();
-                }
-
+                _cts = new CancellationTokenSource();
                 List<Task> tasks = new List<Task>();
                 SemaphoreSlim throttler = new SemaphoreSlim(Properties.Settings.Default.MaxConcurrentAnalyzes);
                 List<Demo> demos = new List<Demo>(SelectedDemos.ToList());
@@ -1870,7 +1889,7 @@ namespace Manager.ViewModel.Demos
             {
                 // remove it from the dict to ignore it during progress calculation
                 _demoProgress.Remove(demo.Id);
-                if (!(e is TaskCanceledException) && !(e is JsonSerializationException))
+                if (!(e is OperationCanceledException) && !(e is JsonSerializationException))
                 {
                     try
                     {

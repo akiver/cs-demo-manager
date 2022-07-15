@@ -8,7 +8,9 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 {
     public class GeneralSheet : AbstractMultipleSheet
     {
-        public GeneralSheet(IWorkbook workbook, List<Demo> demos)
+        private readonly List<Demo> _demos = new List<Demo>();
+
+        public GeneralSheet(IWorkbook workbook)
         {
             Headers = new Dictionary<string, CellType>()
             {
@@ -61,69 +63,75 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 { "Comment", CellType.String },
                 { "Cheater", CellType.Numeric },
             };
-            Demos = demos;
             Sheet = workbook.CreateSheet("General");
         }
 
-        public override async Task GenerateContent()
+        public override void AddDemo(Demo demo)
         {
-            await Task.Factory.StartNew(() =>
+            if (!_demos.Contains(demo))
             {
-                int rowCount = 1;
-                foreach (Demo demo in Demos)
-                {
-                    IRow row = Sheet.CreateRow(rowCount++);
-                    int columnNumber = 0;
-                    SetCellValue(row, columnNumber++, CellType.String, demo.Name);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.Id);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.DateAsString);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.Type);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.SourceName);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.MapName);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.Hostname);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.ClientName);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ServerTickrate);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.Tickrate);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.Duration, 2));
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.Ticks);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.TeamCT.Name);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.TeamT.Name);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreTeamCt);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreTeamT);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeamCt);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeamT);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeamCt);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeamT);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.Winner != null ? demo.Winner.Name : string.Empty);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.KillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.AssistCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.FiveKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.FourKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ThreeKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.TwoKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.OneKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.TradeKillCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.AverageHealthDamage);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageHealthCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageArmorCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.AverageKast, 2));
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.ClutchCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombDefusedCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombExplodedCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombPlantedCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.FlashbangThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.SmokeThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.HeThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.DecoyThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.MolotovThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.IncendiaryThrownCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.WeaponFiredCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.HitCount);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, demo.Rounds.Count);
-                    SetCellValue(row, columnNumber++, CellType.String, demo.Comment);
-                    SetCellValue(row, columnNumber, CellType.Boolean, demo.CheaterCount);
-                }
-            });
+                _demos.Add(demo);
+            }
+        }
+
+        protected override Task GenerateContent()
+        {
+            int rowNumber = 1;
+            foreach (Demo demo in _demos)
+            {
+                IRow row = Sheet.CreateRow(rowNumber++);
+                int columnNumber = 0;
+                SetCellValue(row, columnNumber++, CellType.String, demo.Name);
+                SetCellValue(row, columnNumber++, CellType.String, demo.Id);
+                SetCellValue(row, columnNumber++, CellType.String, demo.DateAsString);
+                SetCellValue(row, columnNumber++, CellType.String, demo.Type);
+                SetCellValue(row, columnNumber++, CellType.String, demo.SourceName);
+                SetCellValue(row, columnNumber++, CellType.String, demo.MapName);
+                SetCellValue(row, columnNumber++, CellType.String, demo.Hostname);
+                SetCellValue(row, columnNumber++, CellType.String, demo.ClientName);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ServerTickrate);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.Tickrate);
+                SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.Duration, 2));
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.Ticks);
+                SetCellValue(row, columnNumber++, CellType.String, demo.TeamCT.Name);
+                SetCellValue(row, columnNumber++, CellType.String, demo.TeamT.Name);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreTeamCt);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreTeamT);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeamCt);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeamT);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeamCt);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeamT);
+                SetCellValue(row, columnNumber++, CellType.String, demo.Winner != null ? demo.Winner.Name : string.Empty);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.KillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.AssistCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.FiveKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.FourKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ThreeKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.TwoKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.OneKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.TradeKillCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.AverageHealthDamage);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageHealthCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageArmorCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.AverageKast, 2));
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ClutchCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombDefusedCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombExplodedCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombPlantedCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.FlashbangThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.SmokeThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.HeThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.DecoyThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.MolotovThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.IncendiaryThrownCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.WeaponFiredCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.HitCount);
+                SetCellValue(row, columnNumber++, CellType.Numeric, demo.Rounds.Count);
+                SetCellValue(row, columnNumber++, CellType.String, demo.Comment);
+                SetCellValue(row, columnNumber, CellType.Boolean, demo.CheaterCount);
+            }
+
+            return Task.CompletedTask;
         }
     }
 }

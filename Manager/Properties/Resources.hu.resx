@@ -1756,9 +1756,6 @@ A játékot nem lehet elindítani.</value>
   <data name="NotificationAddingSuspects" xml:space="preserve">
     <value>Gyanúsított hozzáadása</value>
   </data>
-  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
-    <value>Demók elemzése exportáláshoz...</value>
-  </data>
   <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
     <value>Demó(k) elemzése JSON exportáláshoz...</value>
   </data>
@@ -1941,9 +1938,6 @@ Több információt találhat a {1}.</value>
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Demó elemzése {0}...</value>
-  </data>
-  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
-    <value>Demó elemzése {0} exportáláshoz.</value>
   </data>
   <data name="Pov" xml:space="preserve">
     <value>POV</value>

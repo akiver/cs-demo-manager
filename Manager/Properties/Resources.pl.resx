@@ -1757,9 +1757,6 @@ Uruchomienie gry nie powiodło się.</value>
   <data name="NotificationAddingSuspects" xml:space="preserve">
     <value>Dodawanie podejrzanych...</value>
   </data>
-  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
-    <value>Analizowanie dem do eksportu...</value>
-  </data>
   <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
     <value>Analizowanie dem do eksportu JSON...</value>
   </data>
@@ -1942,9 +1939,6 @@ Więcej informacji znajdziesz na {1}.</value>
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Analizowanie dema {0}...</value>
-  </data>
-  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
-    <value>Analizowanie dema {0} do eksportu...</value>
   </data>
   <data name="Pov" xml:space="preserve">
     <value>Perspektywa</value>

@@ -1874,9 +1874,6 @@ Unable to start the game.</value>
   <data name="NotificationAddingSuspects" xml:space="preserve">
     <value>Adding suspects...</value>
   </data>
-  <data name="NotificationAnalyzingDemosForExport" xml:space="preserve">
-    <value>Analyzing demos for export...</value>
-  </data>
   <data name="NotificationAnalyzingForJsonExport" xml:space="preserve">
     <value>Analyzing demo(s) for json export...</value>
   </data>
@@ -2066,9 +2063,6 @@ You can find more information on {1}.</value>
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Analyzing demo {0}...</value>
-  </data>
-  <data name="NotificationAnalyzingDemoForExport" xml:space="preserve">
-    <value>Analyzing demo {0} for export...</value>
   </data>
   <data name="Pov" xml:space="preserve">
     <value>POV</value>
