@@ -1687,9 +1687,6 @@
   <data name="DialogEnterTick" xml:space="preserve">
     <value>Introduce el tick.</value>
   </data>
-  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>Un error ocurrió mientras se analizaban las repeticiones:</value>
-  </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
     <value>Error mientras se intentaba extraer la información de los sospechosos.</value>
   </data>
@@ -1903,20 +1900,11 @@ No se puede iniciar el juego.</value>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe es incorrecto.</value>
   </data>
-  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>Estas repeticiones parecen ser demasiado antiguas, si no lo son por favor envia un correo con las repeticiones adjuntas.
-Puedes encontrar más información en {0}.</value>
-  </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>Las siguientes repeticiones no han sido encontradas:</value>
   </data>
   <data name="DialogErrorDemoNotFound" xml:space="preserve">
     <value>Repetición {0} no encontrada.</value>
-  </data>
-  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
-    <value>Ha ocurrido un error mientras se analizaba la repetición {0}.
-La repetición parece ser demasiado antigua, si no lo es por favor envia un correo con la repetición adjunta.
-Puedes encontrar más información en {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Este mapa no soporta esta característica.</value>

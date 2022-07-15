@@ -1803,7 +1803,15 @@
     <value>Enter the tick.</value>
   </data>
   <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>An error occured while analyzing demos:</value>
+    <value>An error occurred while analyzing the demos.
+- Make sure the demos source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demos only if it comes from a supported source.
+You can find more information on {0}.
+
+{1}</value>
   </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
     <value>Error while trying to get suspects information.</value>
@@ -2028,10 +2036,6 @@ If you enable it, the game is launched with the "-insecure" parameter (everytime
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe is incorrect.</value>
   </data>
-  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>This demos may be too old, if not please send an email with the attached demos.
-You can find more information on {0}.</value>
-  </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>The following demos have not been found:</value>
   </data>
@@ -2039,8 +2043,12 @@ You can find more information on {0}.</value>
     <value>Demo {0} not found.</value>
   </data>
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
-    <value>An error occured while analyzing the demo {0}.
-The demo may be too old, if not please send an email with the attached demo.
+    <value>An error occurred while analyzing the demo {0}.
+- Make sure the demo's source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demo only if it comes from a supported source.
 You can find more information on {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
@@ -3289,5 +3297,8 @@ Error: {0}.</value>
   </data>
   <data name="HlaeNotFound" xml:space="preserve">
     <value>HLAE not found. Please install it by enabling it from settings.</value>
+  </data>
+  <data name="DialogInvalidDemo" xml:space="preserve">
+    <value>Invalid demo file.</value>
   </data>
 </root>

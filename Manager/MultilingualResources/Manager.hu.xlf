@@ -2236,8 +2236,24 @@
           <target state="final">Adjon meg egy Tick-et.</target>
         </trans-unit>
         <trans-unit id="DialogErrorAnalyzingDemos" translate="yes" xml:space="preserve">
-          <source>An error occured while analyzing demos:</source>
-          <target state="final">Hiba lépett fel a demó elemzése közben:</target>
+          <source>An error occurred while analyzing the demos.
+- Make sure the demos source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demos only if it comes from a supported source.
+You can find more information on {0}.
+
+{1}</source>
+          <target state="new">An error occurred while analyzing the demos.
+- Make sure the demos source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demos only if it comes from a supported source.
+You can find more information on {0}.
+
+{1}</target>
         </trans-unit>
         <trans-unit id="DialogErrorGettingSuspectsData" translate="yes" xml:space="preserve">
           <source>Error while trying to get suspects information.</source>
@@ -2529,12 +2545,6 @@ A játékot nem lehet elindítani.</target>
           <source>boiler.exe is incorrect.</source>
           <target state="final">boiler.exe hibás.</target>
         </trans-unit>
-        <trans-unit id="DialogDemosMayBeTooOld" translate="yes" xml:space="preserve">
-          <source>This demos may be too old, if not please send an email with the attached demos.
-You can find more information on {0}.</source>
-          <target state="final">Ezek a demók túl régiek lehetnek, ha nem kérem küldjön egy emailt a demókkal.
-Több információt találhat a {0}.</target>
-        </trans-unit>
         <trans-unit id="DialogDemosNotFound" translate="yes" xml:space="preserve">
           <source>The following demos have not been found:</source>
           <target state="final">A következő demók nem találhatók:</target>
@@ -2544,12 +2554,20 @@ Több információt találhat a {0}.</target>
           <target state="final">Demó {0} nem található.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileAnalyzingDemo" translate="yes" xml:space="preserve">
-          <source>An error occured while analyzing the demo {0}.
-The demo may be too old, if not please send an email with the attached demo.
+          <source>An error occurred while analyzing the demo {0}.
+- Make sure the demo's source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demo only if it comes from a supported source.
 You can find more information on {1}.</source>
-          <target state="final">Elemzés közben egy hiba lépet fel {0}.
-A demó lehet, hogy túl régi, ha nem kérem küldjön egy emailt a demóval.
-Több információt találhat a {1}.</target>
+          <target state="new">An error occurred while analyzing the demo {0}.
+- Make sure the demo's source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demo only if it comes from a supported source.
+You can find more information on {1}.</target>
         </trans-unit>
         <trans-unit id="DialogMapNotSupported" translate="yes" xml:space="preserve">
           <source>This map doesn't support this feature.</source>
@@ -4244,6 +4262,10 @@ Error: {0}.</target>
 Error: {0}.</source>
           <target state="new">Failed to start CSGO.
 Error: {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidDemo" translate="yes" xml:space="preserve">
+          <source>Invalid demo file.</source>
+          <target state="new">Invalid demo file.</target>
         </trans-unit>
       </group>
     </body>

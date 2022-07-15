@@ -1497,16 +1497,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This demos may be too old, if not please send an email with the attached demos.
-        ///You can find more information on {0}..
-        /// </summary>
-        public static string DialogDemosMayBeTooOld {
-            get {
-                return ResourceManager.GetString("DialogDemosMayBeTooOld", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to The following demos have not been found:.
         /// </summary>
         public static string DialogDemosNotFound {
@@ -1574,7 +1564,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occured while analyzing demos:.
+        ///   Looks up a localized string similar to An error occurred while analyzing the demos.
+        ///- Make sure the demos source is correct.
+        ///- POV demos are not supported.
+        ///- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo&apos;s source and re-analyze it.
+        ///
+        ///Please create an issue on GitHub with the affected demos only if it comes from a supported source.
+        ///You can find more information on {0}.
+        ///
+        ///{1}.
         /// </summary>
         public static string DialogErrorAnalyzingDemos {
             get {
@@ -1789,8 +1787,12 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An error occured while analyzing the demo {0}.
-        ///The demo may be too old, if not please send an email with the attached demo.
+        ///   Looks up a localized string similar to An error occurred while analyzing the demo {0}.
+        ///- Make sure the demo&apos;s source is correct.
+        ///- POV demos are not supported.
+        ///- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo&apos;s source and re-analyze it.
+        ///
+        ///Please create an issue on GitHub with the affected demo only if it comes from a supported source.
         ///You can find more information on {1}..
         /// </summary>
         public static string DialogErrorWhileAnalyzingDemo {
@@ -2105,6 +2107,15 @@ namespace Manager.Properties {
         public static string DialogInstallVirtuaDubFirst {
             get {
                 return ResourceManager.GetString("DialogInstallVirtuaDubFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid demo file..
+        /// </summary>
+        public static string DialogInvalidDemo {
+            get {
+                return ResourceManager.GetString("DialogInvalidDemo", resourceCulture);
             }
         }
         

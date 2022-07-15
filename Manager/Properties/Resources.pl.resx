@@ -1688,9 +1688,6 @@
   <data name="DialogEnterTick" xml:space="preserve">
     <value>Wprowadź tick.</value>
   </data>
-  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>Podczas analizowania dem pojawił się błąd:</value>
-  </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
     <value>Podczas uzyskiwania informacji o podejrzanych pojawił się błąd.</value>
   </data>
@@ -1904,20 +1901,11 @@ Uruchomienie gry nie powiodło się.</value>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe jest niepoprawny.</value>
   </data>
-  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>Te dema mogą być za stare, jesli nie - wyślij email z załączonymi demami.
-Więcej informacji znajdziesz na {0}.</value>
-  </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>Poniższe dema nie zostały odnalezione:</value>
   </data>
   <data name="DialogErrorDemoNotFound" xml:space="preserve">
     <value>Demo {0} nie zostało znalezione.</value>
-  </data>
-  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
-    <value>Pojawił się problem podczas analizy dema {0}.
-Te dema mogą być za stare, jesli nie - wyślij email z załączonymi demami.
-Więcej informacji znajdziesz na {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Ta mapa nie obsługuje tej opcji.</value>

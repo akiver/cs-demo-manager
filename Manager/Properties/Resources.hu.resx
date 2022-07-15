@@ -1687,9 +1687,6 @@
   <data name="DialogEnterTick" xml:space="preserve">
     <value>Adjon meg egy Tick-et.</value>
   </data>
-  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>Hiba lépett fel a demó elemzése közben:</value>
-  </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
     <value>Hiba lépett fel a gyanúsított információ megjelenítése közben.</value>
   </data>
@@ -1903,20 +1900,11 @@ A játékot nem lehet elindítani.</value>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe hibás.</value>
   </data>
-  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>Ezek a demók túl régiek lehetnek, ha nem kérem küldjön egy emailt a demókkal.
-Több információt találhat a {0}.</value>
-  </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>A következő demók nem találhatók:</value>
   </data>
   <data name="DialogErrorDemoNotFound" xml:space="preserve">
     <value>Demó {0} nem található.</value>
-  </data>
-  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
-    <value>Elemzés közben egy hiba lépet fel {0}.
-A demó lehet, hogy túl régi, ha nem kérem küldjön egy emailt a demóval.
-Több információt találhat a {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Ez a pálya nem támogatja ezt a funkciót.</value>

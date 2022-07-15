@@ -702,10 +702,10 @@ namespace Manager.ViewModel.Demos
                                                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogDemoNotFound, MessageDialogStyle.Affirmative);
                                                    break;
                                                case InvalidDemoException _:
-                                                   await _dialogService.ShowErrorAsync("Invalid demo file.", MessageDialogStyle.Affirmative);
+                                                   await _dialogService.ShowErrorAsync(Properties.Resources.DialogInvalidDemo, MessageDialogStyle.Affirmative);
                                                    break;
                                                case AnalyzeException _:
-                                                   await _dialogService.ShowErrorAsync("Analyze error.", MessageDialogStyle.Affirmative);
+                                                   await _dialogService.ShowErrorAsync(string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, demo.Name, AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
                                                    break;
                                                default:
                                                    await _dialogService.ShowErrorAsync(Properties.Resources.DialogErrorWhileExportingDemo, MessageDialogStyle.Affirmative);

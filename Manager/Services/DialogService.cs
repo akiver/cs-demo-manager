@@ -36,9 +36,8 @@ namespace Manager.Services
 
         public async Task<MessageDialogResult> ShowDemosFailedAsync(List<Demo> demosFailed)
         {
-            string errorMessage = Properties.Resources.DialogErrorAnalyzingDemos + Environment.NewLine;
-            errorMessage = demosFailed.Aggregate(errorMessage, (current, demoFailed) => current + demoFailed.Name + Environment.NewLine);
-            errorMessage += string.Format(Properties.Resources.DialogDemosMayBeTooOld, AppSettings.APP_WEBSITE);
+            string demosAsString = demosFailed.Aggregate(string.Empty, (current, demo) => current + demo.Name + Environment.NewLine);
+            string errorMessage = string.Format(Properties.Resources.DialogErrorAnalyzingDemos, AppSettings.APP_WEBSITE, demosAsString);
 
             var metroWindow = Application.Current.MainWindow as MetroWindow;
             return await metroWindow.ShowMessageAsync(Properties.Resources.Error, errorMessage);

@@ -1674,7 +1674,13 @@ Elles ne seront pas supprimées de votre disque dur.</value>
     <value>Entrez le tick.</value>
   </data>
   <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>Une erreur s'est produite pendant l'analyse des démos:</value>
+    <value>Use erreur s'est produite pendant l'analyse des démos.
+- Vérifiez que la source des démos est correcte.
+- Les démos POV ne sont pas supportées.
+- Les démos provenant de serveurs privés ne sont pas officiellement supportée, vous pouvez essayer de changer la source des démos et re-lancer l'analyse.
+
+Veuillez créer une issue sur GitHub avec un lien pour télécharger les démos concernés seulement si elles proviennent d'une source officiellement supportée.
+Plus d'informations sur {1}.</value>
   </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
     <value>Une erreur s'est produite pendant la récupération des informations des suspects.</value>
@@ -1875,10 +1881,6 @@ Impossible de lancer le jeu.</value>
   <data name="Selection" xml:space="preserve">
     <value>Sélection</value>
   </data>
-  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>Une des démos est peut être trop vieille pour être analyser, si ce n'est pas le cas, merci d'envoyer un email avec la ou les démos posant problème.
-Vous pouvez trouver plus d'informations sur {0}.</value>
-  </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>Les démos suivantes sont introuvables:</value>
   </data>
@@ -1914,8 +1916,12 @@ Vous pouvez trouver plus d'informations sur {0}.</value>
   </data>
   <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
     <value>Use erreur s'est produite pendant l'analyse de la démo {0}.
-Cette démo est peut être trop vieille.
-Si ce n'est pas le cas, merci de l'envoyer par email à l'adresse indiquée sur {1}.</value>
+- Vérifiez que la source de la démo est correcte.
+- Les démos POV ne sont pas supportées.
+- Les démos provenant de serveurs privés ne sont pas officiellement supportée, vous pouvez essayer de changer la source de démo et re-lancer l'analyse.
+
+Veuillez créer une issue sur GitHub avec un lien pour télécharger la démo seulement si elle vient d'une source officiellement supportée.
+Plus d'informations sur {1}.</value>
   </data>
   <data name="NotificationAnalyzingDemo" xml:space="preserve">
     <value>Analyse de la démo {0} en cours...</value>
@@ -3184,5 +3190,8 @@ Erreur: {0}.</value>
   <data name="DialogErrorStartingCsgo" xml:space="preserve">
     <value>Une erreur est survenue lors du lancement de CSGO.
 Error: {0}.</value>
+  </data>
+  <data name="DialogInvalidDemo" xml:space="preserve">
+    <value>Le fichier de la démo est invalide.</value>
   </data>
 </root>

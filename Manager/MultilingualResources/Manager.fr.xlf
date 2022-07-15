@@ -2218,8 +2218,22 @@ Elles ne seront pas supprimées de votre disque dur.</target>
           <target state="final">Entrez le tick.</target>
         </trans-unit>
         <trans-unit id="DialogErrorAnalyzingDemos" translate="yes" xml:space="preserve">
-          <source>An error occured while analyzing demos:</source>
-          <target state="final">Une erreur s'est produite pendant l'analyse des démos:</target>
+          <source>An error occurred while analyzing the demos.
+- Make sure the demos source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demos only if it comes from a supported source.
+You can find more information on {0}.
+
+{1}</source>
+          <target state="final">Use erreur s'est produite pendant l'analyse des démos.
+- Vérifiez que la source des démos est correcte.
+- Les démos POV ne sont pas supportées.
+- Les démos provenant de serveurs privés ne sont pas officiellement supportée, vous pouvez essayer de changer la source des démos et re-lancer l'analyse.
+
+Veuillez créer une issue sur GitHub avec un lien pour télécharger les démos concernés seulement si elles proviennent d'une source officiellement supportée.
+Plus d'informations sur {1}.</target>
         </trans-unit>
         <trans-unit id="DialogErrorGettingSuspectsData" translate="yes" xml:space="preserve">
           <source>Error while trying to get suspects information.</source>
@@ -2487,12 +2501,6 @@ Impossible de lancer le jeu.</target>
           <source>Selection</source>
           <target state="final">Sélection</target>
         </trans-unit>
-        <trans-unit id="DialogDemosMayBeTooOld" translate="yes" xml:space="preserve">
-          <source>This demos may be too old, if not please send an email with the attached demos.
-You can find more information on {0}.</source>
-          <target state="final">Une des démos est peut être trop vieille pour être analyser, si ce n'est pas le cas, merci d'envoyer un email avec la ou les démos posant problème.
-Vous pouvez trouver plus d'informations sur {0}.</target>
-        </trans-unit>
         <trans-unit id="DialogDemosNotFound" translate="yes" xml:space="preserve">
           <source>The following demos have not been found:</source>
           <target state="final">Les démos suivantes sont introuvables:</target>
@@ -2538,12 +2546,20 @@ Vous pouvez trouver plus d'informations sur {0}.</target>
           <target state="final">Démo {0} introuvable.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileAnalyzingDemo" translate="yes" xml:space="preserve">
-          <source>An error occured while analyzing the demo {0}.
-The demo may be too old, if not please send an email with the attached demo.
+          <source>An error occurred while analyzing the demo {0}.
+- Make sure the demo's source is correct.
+- POV demos are not supported.
+- Demos coming from a custom server are not officially supported and thus may not work properly, you can try to change the demo's source and re-analyze it.
+
+Please create an issue on GitHub with the affected demo only if it comes from a supported source.
 You can find more information on {1}.</source>
           <target state="final">Use erreur s'est produite pendant l'analyse de la démo {0}.
-Cette démo est peut être trop vieille.
-Si ce n'est pas le cas, merci de l'envoyer par email à l'adresse indiquée sur {1}.</target>
+- Vérifiez que la source de la démo est correcte.
+- Les démos POV ne sont pas supportées.
+- Les démos provenant de serveurs privés ne sont pas officiellement supportée, vous pouvez essayer de changer la source de démo et re-lancer l'analyse.
+
+Veuillez créer une issue sur GitHub avec un lien pour télécharger la démo seulement si elle vient d'une source officiellement supportée.
+Plus d'informations sur {1}.</target>
         </trans-unit>
         <trans-unit id="NotificationAnalyzingDemo" translate="yes" xml:space="preserve">
           <source>Analyzing demo {0}...</source>
@@ -4250,6 +4266,10 @@ Erreur: {0}.</target>
 Error: {0}.</source>
           <target state="final">Une erreur est survenue lors du lancement de CSGO.
 Error: {0}.</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidDemo" translate="yes" xml:space="preserve">
+          <source>Invalid demo file.</source>
+          <target state="final">Le fichier de la démo est invalide.</target>
         </trans-unit>
       </group>
     </body>

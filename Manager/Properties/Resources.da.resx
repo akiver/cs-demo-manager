@@ -1688,9 +1688,6 @@
   <data name="DialogEnterTick" xml:space="preserve">
     <value>indtast tick.</value>
   </data>
-  <data name="DialogErrorAnalyzingDemos" xml:space="preserve">
-    <value>En fejl skete under analysering:</value>
-  </data>
   <data name="DialogErrorGettingSuspectsData" xml:space="preserve">
     <value>Fejl ved hentning af mistænktes informationer</value>
   </data>
@@ -1904,20 +1901,11 @@ Er ikke istand til at starte spillet</value>
   <data name="DialogBoilerIncorrect" xml:space="preserve">
     <value>boiler.exe er ukorrekt.</value>
   </data>
-  <data name="DialogDemosMayBeTooOld" xml:space="preserve">
-    <value>Demoen kan være for gammel, hvis det ikke er tilfældet send den venligst til mig i en email.
-Du kan finde mere information på </value>
-  </data>
   <data name="DialogDemosNotFound" xml:space="preserve">
     <value>Følgende demoer er ikke blevet fundet</value>
   </data>
   <data name="DialogErrorDemoNotFound" xml:space="preserve">
     <value>Demo {0} blev ikke fundet.</value>
-  </data>
-  <data name="DialogErrorWhileAnalyzingDemo" xml:space="preserve">
-    <value>En fejl skete under analyseringen af
-Demoen kan være for gammel, hvis det ikke er tilfældet send den venligst til mig i en emil.
-du kan finde mere information på {1}.</value>
   </data>
   <data name="DialogMapNotSupported" xml:space="preserve">
     <value>Denne bane understøtter ikke denne funktion</value>
