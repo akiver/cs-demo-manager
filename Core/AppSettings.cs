@@ -14,7 +14,7 @@ namespace Core
         public static string AUTHOR = "AkiVer";
         public static string APP_NAME = "CSGO Demos Manager"; // Stick with the typo to not break app upgrades
         public static string APP_WEBSITE = "https://csgo-demo-manager.com";
-        public static Version APP_VERSION = new Version("2.13.15");
+        public static Version APP_VERSION = new Version("2.14.0");
         private const string MATCH_LIST_FILENAME = "matches.dat";
         public const string PROCESS_NAME = "CSGODemosManager";
         public const string CSGO_PROCESS_NAME = "csgo";
