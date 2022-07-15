@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 
@@ -61,7 +60,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowNumber = 1;
             foreach (KeyValuePair<string, Round[]> kvp in _roundsPerDemoId)
@@ -110,8 +109,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     rowNumber++;
                 }
             }
-
-            return Task.CompletedTask;
         }
     }
 }

@@ -112,25 +112,25 @@ namespace Services.Concrete.Excel
 
             cancellationToken.ThrowIfCancellationRequested();
             _configuration.OnGeneratingXlsxFile?.Invoke();
-            await _generalSheet.Generate();
+            _generalSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _playersSheet.Generate();
+            _playersSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _teamsSheet.Generate();
+            _teamsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _mapsSheet.Generate();
+            _mapsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _weaponsSheet.Generate();
+            _weaponsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _roundsSheet.Generate();
+            _roundsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _killsSheet.Generate();
+            _killsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _killMatrixSheet.Generate();
+            _killMatrixSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _flashMatrixPlayersSheet.Generate();
+            _flashMatrixPlayersSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-            await _flashMatrixTeamsSheet.Generate();
+            _flashMatrixTeamsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
 
             return Workbook;

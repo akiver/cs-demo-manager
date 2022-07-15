@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
@@ -33,7 +32,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             ComputeTeamStats(demo.TeamT, demo.TeamCT, blindEvents);
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             _teamNames.Sort();
 
@@ -57,8 +56,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, killColumnNumber++, CellType.Numeric, duration);
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         private void ComputeTeamStats(Team team, Team oppositeTeam, List<PlayerBlindedEvent> blindEvents)

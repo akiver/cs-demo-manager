@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 
@@ -23,30 +22,27 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("Entry Hold Kills Rounds");
         }
 
-        protected override async Task GenerateContent()
+        protected override void GenerateContent()
         {
-            await Task.Factory.StartNew(() =>
+            int rowNumber = 1;
+
+            foreach (Round round in Demo.Rounds)
             {
-                int rowNumber = 1;
-
-                foreach (Round round in Demo.Rounds)
+                IRow row = Sheet.CreateRow(rowNumber);
+                int columnNumber = 0;
+                SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
+                if (round.EntryHoldKillEvent != null)
                 {
-                    IRow row = Sheet.CreateRow(rowNumber);
-                    int columnNumber = 0;
-                    SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
-                    if (round.EntryHoldKillEvent != null)
-                    {
-                        SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KillerName);
-                        SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KillerSteamId.ToString());
-                        SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KilledName);
-                        SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KilledSteamId.ToString());
-                        SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.Weapon.Name);
-                        SetCellValue(row, columnNumber, CellType.String, round.EntryHoldKillEvent.HasWonRound ? "yes" : "no");
-                    }
-
-                    rowNumber++;
+                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KillerName);
+                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KillerSteamId.ToString());
+                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KilledName);
+                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KilledSteamId.ToString());
+                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.Weapon.Name);
+                    SetCellValue(row, columnNumber, CellType.String, round.EntryHoldKillEvent.HasWonRound ? "yes" : "no");
                 }
-            });
+
+                rowNumber++;
+            }
         }
     }
 }

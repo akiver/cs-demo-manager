@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
@@ -75,7 +74,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             _playerNamePerSteamId = _playerNamePerSteamId.OrderBy(k => k.Value).ToDictionary(x => x.Key, x => x.Value);
 
@@ -104,8 +103,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, killColumnNumber++, CellType.Numeric, killCount);
                 }
             }
-
-            return Task.CompletedTask;
         }
 
         private bool IsMaxPlayerLimitReached()

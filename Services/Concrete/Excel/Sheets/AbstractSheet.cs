@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets
@@ -11,7 +10,7 @@ namespace Services.Concrete.Excel.Sheets
 
         protected Dictionary<string, CellType> Headers;
 
-        protected abstract Task GenerateContent();
+        protected abstract void GenerateContent();
 
         protected void GenerateHeaders()
         {
@@ -26,10 +25,10 @@ namespace Services.Concrete.Excel.Sheets
             };
         }
 
-        public async Task Generate()
+        public void Generate()
         {
             GenerateHeaders();
-            await GenerateContent();
+            GenerateContent();
         }
 
         public void SetCellValue(IRow row, int index, CellType cellType, dynamic value)

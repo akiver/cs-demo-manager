@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 
@@ -74,7 +73,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowNumber = 1;
             foreach (Demo demo in _demos)
@@ -130,8 +129,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 SetCellValue(row, columnNumber++, CellType.String, demo.Comment);
                 SetCellValue(row, columnNumber, CellType.Boolean, demo.CheaterCount);
             }
-
-            return Task.CompletedTask;
         }
     }
 }

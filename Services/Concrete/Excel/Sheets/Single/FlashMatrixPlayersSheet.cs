@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 
@@ -16,11 +15,8 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("Flash matrix players");
         }
 
-        protected override async Task GenerateContent()
+        protected override void GenerateContent()
         {
-            CacheService cacheService = new CacheService();
-            Demo.PlayerBlinded = await cacheService.GetDemoPlayerBlindedAsync(Demo);
-
             // store players row and columns index
             Dictionary<long, int> playersRow = new Dictionary<long, int>();
             Dictionary<long, int> playersColumn = new Dictionary<long, int>();

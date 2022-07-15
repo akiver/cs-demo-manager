@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
@@ -59,7 +58,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowNumber = 1;
             foreach (KeyValuePair<string, KillEvent[]> kvp in _KillsPerDemoId)
@@ -103,8 +102,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, columnNumber, CellType.Numeric, kill.Point.VictimZ);
                 }
             }
-
-            return Task.CompletedTask;
         }
     }
 }

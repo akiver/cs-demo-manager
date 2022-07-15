@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using DemoInfo;
@@ -88,7 +87,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowCount = 1;
             foreach (KeyValuePair<Weapon, WeaponsData> weaponData in _data)
@@ -103,8 +102,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 SetCellValue(row, columnNumber++, CellType.Numeric, weaponData.Value.Hits);
                 SetCellValue(row, columnNumber, CellType.Numeric, weaponData.Value.Accurary);
             }
-
-            return Task.CompletedTask;
         }
     }
 }

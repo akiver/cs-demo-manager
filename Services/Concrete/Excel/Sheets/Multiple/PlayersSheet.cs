@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 using Services.Models.Excel;
@@ -170,7 +169,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowCount = 1;
             foreach (KeyValuePair<Player, PlayerStats> playerData in _playersData)
@@ -257,8 +256,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 SetCellValue(row, columnNumber++, CellType.Boolean, playerData.Value.IsVacBanned);
                 SetCellValue(row, columnNumber, CellType.Boolean, playerData.Value.IsOverwatchBanned);
             }
-
-            return Task.CompletedTask;
         }
     }
 }

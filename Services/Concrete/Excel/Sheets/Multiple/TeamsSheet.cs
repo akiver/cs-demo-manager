@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
@@ -11,7 +10,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
 {
     public class TeamsSheet : AbstractMultipleSheet
     {
-        List<Team> _teams = new List<Team>();
+        readonly List<Team> _teams = new List<Team>();
 
         public TeamsSheet(IWorkbook workbook)
         {
@@ -86,7 +85,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowCount = 1;
             foreach (Team team in _teams)
@@ -132,8 +131,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 SetCellValue(row, columnNumber++, CellType.Numeric, team.IncendiaryThrownCount);
                 SetCellValue(row, columnNumber, CellType.Numeric, team.DecoyThrownCount);
             }
-
-            return Task.CompletedTask;
         }
 
 

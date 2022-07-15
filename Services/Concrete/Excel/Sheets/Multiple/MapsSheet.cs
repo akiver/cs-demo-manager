@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Core.Models;
 using NPOI.SS.UserModel;
 
@@ -68,7 +67,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             }
         }
 
-        protected override Task GenerateContent()
+        protected override void GenerateContent()
         {
             int rowCount = 1;
             foreach (Map map in _maps)
@@ -90,8 +89,6 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 SetCellValue(row, columnNumber++, CellType.Numeric, map.BombPlantedOnACount);
                 SetCellValue(row, columnNumber, CellType.Numeric, map.BombPlantedOnBCount);
             }
-
-            return Task.CompletedTask;
         }
 
         private void ComputeGlobalStats(Demo demo, Map map)

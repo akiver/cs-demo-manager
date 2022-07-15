@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.Models;
 using Core.Models.Events;
 using NPOI.SS.UserModel;
@@ -48,48 +47,45 @@ namespace Services.Concrete.Excel.Sheets.Single
             Sheet = workbook.CreateSheet("Kills");
         }
 
-        protected override async Task GenerateContent()
+        protected override void GenerateContent()
         {
-            await Task.Factory.StartNew(() =>
+            int rowCount = 1;
+            foreach (KillEvent e in Demo.Kills)
             {
-                int rowCount = 1;
-                foreach (KillEvent e in Demo.Kills)
-                {
-                    IRow row = Sheet.CreateRow(rowCount++);
-                    int columnNumber = 0;
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Tick);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.RoundNumber);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.TimeDeathSeconds);
-                    SetCellValue(row, columnNumber++, CellType.String, e.KillerName);
-                    SetCellValue(row, columnNumber++, CellType.String, e.KillerSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, e.KillerSide.AsString());
-                    SetCellValue(row, columnNumber++, CellType.String, e.KillerTeam);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsControllingBot);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsBlinded);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityX);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityY);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityZ);
-                    SetCellValue(row, columnNumber++, CellType.String, e.KilledName);
-                    SetCellValue(row, columnNumber++, CellType.String, e.KilledSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, e.KilledSide.AsString());
-                    SetCellValue(row, columnNumber++, CellType.String, e.KilledTeam);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.KilledIsControllingBot);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.VictimIsBlinded);
-                    SetCellValue(row, columnNumber++, CellType.String, e.AssisterName);
-                    SetCellValue(row, columnNumber++, CellType.String, e.AssisterSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.AssisterIsControllingBot);
-                    SetCellValue(row, columnNumber++, CellType.String, e.Weapon.Name);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.IsHeadshot);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.IsKillerCrouching);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, e.IsTradeKill);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerX);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerY);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerZ);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimX);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimY);
-                    SetCellValue(row, columnNumber, CellType.Numeric, e.Point.VictimZ);
-                }
-            });
+                IRow row = Sheet.CreateRow(rowCount++);
+                int columnNumber = 0;
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.Tick);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.RoundNumber);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.TimeDeathSeconds);
+                SetCellValue(row, columnNumber++, CellType.String, e.KillerName);
+                SetCellValue(row, columnNumber++, CellType.String, e.KillerSteamId.ToString());
+                SetCellValue(row, columnNumber++, CellType.String, e.KillerSide.AsString());
+                SetCellValue(row, columnNumber++, CellType.String, e.KillerTeam);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsControllingBot);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.KillerIsBlinded);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityX);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityY);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.KillerVelocityZ);
+                SetCellValue(row, columnNumber++, CellType.String, e.KilledName);
+                SetCellValue(row, columnNumber++, CellType.String, e.KilledSteamId.ToString());
+                SetCellValue(row, columnNumber++, CellType.String, e.KilledSide.AsString());
+                SetCellValue(row, columnNumber++, CellType.String, e.KilledTeam);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.KilledIsControllingBot);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.VictimIsBlinded);
+                SetCellValue(row, columnNumber++, CellType.String, e.AssisterName);
+                SetCellValue(row, columnNumber++, CellType.String, e.AssisterSteamId.ToString());
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.AssisterIsControllingBot);
+                SetCellValue(row, columnNumber++, CellType.String, e.Weapon.Name);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.IsHeadshot);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.IsKillerCrouching);
+                SetCellValue(row, columnNumber++, CellType.Boolean, e.IsTradeKill);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerX);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerY);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.KillerZ);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimX);
+                SetCellValue(row, columnNumber++, CellType.Numeric, e.Point.VictimY);
+                SetCellValue(row, columnNumber, CellType.Numeric, e.Point.VictimZ);
+            }
         }
     }
 }
