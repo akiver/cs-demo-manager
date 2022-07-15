@@ -12,6 +12,7 @@ namespace CLI
         protected readonly List<string> _demoPaths;
         protected string _outputFolderPath;
         protected bool _forceAnalyze = false;
+        protected long _focusSteamId = 0;
         protected List<string> _availableSources = new List<string>();
 
         public ExportCommand(string commandName, string description) : base(commandName, description)
@@ -84,6 +85,27 @@ namespace CLI
                             break;
                         case "--force-analyze":
                             _forceAnalyze = true;
+                            break;
+                        case "--steamid":
+                            if (args.Length > index + 1)
+                            {
+                                index += 1;
+                                bool success = long.TryParse(args[index], out long steamId);
+                                if (success)
+                                {
+                                    _focusSteamId = steamId;
+                                }
+                                else
+                                {
+                                    Console.WriteLine(@"Invalid SteamID");
+                                    Environment.Exit(1);
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine(@"Missing --steamid argument value");
+                                Environment.Exit(1);
+                            }
                             break;
                         default:
                             if (!allowedOptions.Contains(arg))

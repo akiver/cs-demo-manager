@@ -21,12 +21,13 @@ namespace CLI
         {
             Console.WriteLine(GetDescription());
             Console.WriteLine(@"");
-            Console.WriteLine($@"Usage: {Program.ExeName} {COMMAND_NAME} demoPaths... [--output] [--source] [--single] [--force-analyze]");
+            Console.WriteLine($@"Usage: {Program.ExeName} {COMMAND_NAME} demoPaths... [--output] [--source] [--single] [--steamid] [--force-analyze]");
             Console.WriteLine(@"");
             Console.WriteLine(@"Demos path can be either .dem files location or a directory. It can be relative or absolute.");
             Console.WriteLine(@"The --output argument specify the directory where output files will be saved.");
             Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", _availableSources)}]");
-            Console.WriteLine($@"The --single argument generates a single XLSX file instead of one per demo.");
+            Console.WriteLine(@"The --single argument generates a single XLSX file instead of one per demo.");
+            Console.WriteLine(@"The --steamid argument makes data in some sheets focusing on the player with the given SteamID (works with --single only).");
             Console.WriteLine(@"The --force-analyze argument force demos analyzes (ignore cached data).");
             Console.WriteLine(@"");
             Console.WriteLine(@"Examples:");
@@ -100,7 +101,7 @@ namespace CLI
             {
                 FileName = fileName,
                 DemoPaths = _demoPaths,
-                FocusSteamId = 0, // TODO --steamid parameter
+                FocusSteamId = _focusSteamId,
                 Source = _source,
                 OnProcessingDemo = (demoPath, demoNumber, totalDemoCount) => Console.WriteLine($@"Retrieving demo {demoNumber}/{totalDemoCount} {demoPath}"),
                 OnDemoNotFound = demoPath => Console.WriteLine($@"The demo doesn't exists: {demoPath}"),
