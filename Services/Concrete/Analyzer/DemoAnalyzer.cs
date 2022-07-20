@@ -1802,6 +1802,8 @@ namespace Services.Concrete.Analyzer
         {
             foreach (Player player in Demo.Players)
             {
+                player.ComputeStats(Demo);
+
                 player.RatingHltv = (float)ComputeHltvOrgRating(Demo.Rounds.Count, player.KillCount, player.DeathCount, new int[5]
                 {
                     player.OneKillCount, player.TwoKillCount, player.ThreeKillCount, player.FourKillCount, player.FiveKillCount,
