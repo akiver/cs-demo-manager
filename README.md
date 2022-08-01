@@ -30,16 +30,10 @@ More screenshots and video are available at [https://csgo-demo-manager.com](http
 
 ### Building the app
 
-**You need Telerik binaries to be able to compile the application.**
-
-* Install [Telerik binaries](https://www.telerik.com/products/wpf/overview.aspx)
-* Download the repository and extract it
-* Launch the solution in Visual Studio 2022
-* Set the correct path for Telerik references if needed
-* (optional) Copy / paste your Steam API key into the file "steam_api_key.txt". If you don't have a Steam API key, suspects features will not work and players avatar will not be fetched.
-* The `DemoInfo` project isn't properly signed. You have to download [snremove](http://www.nirsoft.net/dot_net_tools/strong_name_remove.html) and copy / paste it into the folder `bin/Debug` and `bin/Release` of the `DemoInfo` **and** `Manager` projects.
-* Select the x86 platform configuration
-* Build and start
+1. Install [Telerik UI for WPF](https://www.telerik.com/products/wpf/overview.aspx). If you don't have a license, install the trial version, it will display a trial message from time to time.
+2. Clone the repository and open the solution in Visual Studio 2022
+3. (optional) Copy / paste your Steam API key into the file `"steam_api_key.txt"`. If you don't have a Steam API key, suspects features will not work and players avatar will not be fetched.
+4. Build and start the `Manager` project
 
 ### Code formatting
 

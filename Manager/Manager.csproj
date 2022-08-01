@@ -664,7 +664,8 @@
     <Warning Text="$(MSBuildProjectFile) is Multilingual build enabled, but the Multilingual App Toolkit is unavailable during the build. If building with Visual Studio, please check to ensure that toolkit is properly installed." />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>$(SolutionDir)Manager\bin\x86\$(ConfigurationName)/snremove.exe -r DemoInfo.dll</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
