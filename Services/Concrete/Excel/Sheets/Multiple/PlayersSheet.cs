@@ -177,7 +177,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 IRow row = Sheet.CreateRow(rowCount++);
                 int columnNumber = 0;
                 SetCellValue(row, columnNumber++, CellType.String, playerData.Key.Name);
-                SetCellValue(row, columnNumber++, CellType.String, playerData.Key.SteamId);
+                SetCellValue(row, columnNumber++, CellType.String, playerData.Key.SteamId.ToString());
                 SetCellValue(row, columnNumber++, CellType.String, playerData.Key.TeamName);
                 SetCellValue(row, columnNumber++, CellType.Numeric, playerData.Value.MatchCount);
                 SetCellValue(row, columnNumber++, CellType.Numeric, playerData.Value.KillCount);

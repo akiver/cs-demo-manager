@@ -73,7 +73,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, columnNumber++, CellType.Numeric, kill.RoundNumber);
                     SetCellValue(row, columnNumber++, CellType.Numeric, kill.TimeDeathSeconds);
                     SetCellValue(row, columnNumber++, CellType.String, kill.KillerName);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KillerSteamId);
+                    SetCellValue(row, columnNumber++, CellType.String, kill.KillerSteamId.ToString());
                     SetCellValue(row, columnNumber++, CellType.String, kill.KillerSide.AsString());
                     SetCellValue(row, columnNumber++, CellType.String, kill.KillerTeam);
                     SetCellValue(row, columnNumber++, CellType.Boolean, kill.KillerIsControllingBot);
@@ -82,13 +82,13 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     SetCellValue(row, columnNumber++, CellType.Numeric, kill.KillerVelocityY);
                     SetCellValue(row, columnNumber++, CellType.Numeric, kill.KillerVelocityZ);
                     SetCellValue(row, columnNumber++, CellType.String, kill.KilledName);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KilledSteamId);
+                    SetCellValue(row, columnNumber++, CellType.String, kill.KilledSteamId.ToString());
                     SetCellValue(row, columnNumber++, CellType.String, kill.KilledSide.AsString());
                     SetCellValue(row, columnNumber++, CellType.String, kill.KilledTeam);
                     SetCellValue(row, columnNumber++, CellType.Boolean, kill.KilledIsControllingBot);
                     SetCellValue(row, columnNumber++, CellType.Boolean, kill.VictimIsBlinded);
                     SetCellValue(row, columnNumber++, CellType.String, kill.AssisterName);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.AssisterSteamId);
+                    SetCellValue(row, columnNumber++, CellType.String, kill.AssisterSteamId.ToString());
                     SetCellValue(row, columnNumber++, CellType.Boolean, kill.AssisterIsControllingBot);
                     SetCellValue(row, columnNumber++, CellType.String, kill.Weapon.Name);
                     SetCellValue(row, columnNumber++, CellType.Boolean, kill.IsHeadshot);
