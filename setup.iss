@@ -115,10 +115,10 @@ begin
 end;
 
 [Registry]
-Root: HKCR; Subkey: ".dem"; ValueData: "{#AppName}"; Flags: uninsdeletevalue; ValueType: string; ValueName: ""
-Root: HKCR; Subkey: "{#AppName}"; ValueData: "Program {#AppName}"; Flags: uninsdeletekey; ValueType: string; ValueName: ""
-Root: HKCR; Subkey: "{#AppName}\DefaultIcon"; ValueData: "{app}\app.ico,0"; ValueType: string; ValueName: ""
-Root: HKCR; Subkey: "{#AppName}\shell\open\command"; ValueData: """{app}\{#ExeName}"" ""%1"""; ValueType: string; ValueName: ""
+Root: HKCR; Subkey: ".dem"; ValueData: "{#AppName}"; Flags: uninsdeletevalue; ValueType: string; ValueName: ""; Tasks: fileassoc
+Root: HKCR; Subkey: "{#AppName}"; ValueData: "Program {#AppName}"; Flags: uninsdeletekey; ValueType: string; ValueName: ""; Tasks: fileassoc
+Root: HKCR; Subkey: "{#AppName}\DefaultIcon"; ValueData: "{app}\app.ico,0"; ValueType: string; ValueName: ""; Tasks: fileassoc
+Root: HKCR; Subkey: "{#AppName}\shell\open\command"; ValueData: """{app}\{#ExeName}"" ""%1"""; ValueType: string; ValueName: ""; Tasks: fileassoc
 Root: HKLM; Subkey: "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"; ValueType: expandsz; ValueName: "Path"; ValueData: "{olddata};{app}"; Check: NeedsAddPath(ExpandConstant('{app}')); Tasks: envPath
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
@@ -126,7 +126,7 @@ Name: "french"; MessagesFile: "compiler:Languages\French.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
-Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}"
+Name: "fileassoc"; Description: "{cm:AssocFileExtension,{#AppName},.dem}";
 Name: "envPath"; Description: "Add to PATH variable (useful to use the CLI from anywhere)"
 
 [Files]
