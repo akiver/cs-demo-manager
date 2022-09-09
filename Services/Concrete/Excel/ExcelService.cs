@@ -1,6 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-using NPOI.SS.UserModel;
+﻿using System.Threading.Tasks;
 
 namespace Services.Concrete.Excel
 {
@@ -8,20 +6,38 @@ namespace Services.Concrete.Excel
     {
         public async Task GenerateXls(SingleExportConfiguration configuration)
         {
-            SingleExport export = new SingleExport(configuration);
-            IWorkbook workbook = await export.Generate();
-            FileStream sw = File.Create(configuration.FileName);
-            workbook.Write(sw);
-            sw.Close();
+            await Task.Run(async () =>
+            {
+                var workbook = new Workbook();
+                try
+                {
+                    SingleExport export = new SingleExport(workbook, configuration);
+                    await export.Generate();
+                    workbook.Write(configuration.FileName);
+                }
+                finally
+                {
+                    workbook.Dispose();
+                }
+            }, configuration.CancellationToken.Token);
         }
 
         public async Task GenerateXls(MultiExportConfiguration configuration)
         {
-            MultipleExport export = new MultipleExport(configuration);
-            IWorkbook workbook = await export.Generate();
-            FileStream sw = File.Create(configuration.FileName);
-            workbook.Write(sw);
-            sw.Close();
+            await Task.Run(async () =>
+            {
+                var workbook = new Workbook();
+                try
+                {
+                    MultipleExport export = new MultipleExport(workbook, configuration);
+                    await export.Generate();
+                    workbook.Write(configuration.FileName);
+                }
+                finally
+                {
+                    workbook.Dispose();
+                }
+            }, configuration.CancellationToken.Token);
         }
     }
 }

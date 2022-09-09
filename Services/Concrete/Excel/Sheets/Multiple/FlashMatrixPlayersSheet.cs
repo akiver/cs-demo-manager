@@ -2,33 +2,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Core.Models;
-using Core.Models.Events;
-using NPOI.SS.UserModel;
+using Services.Concrete.Excel.Sheets.Single;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    internal class PlayerFlashEntry
+    internal class FlashMatrixPlayersSheet: MultipleDemoSheet
     {
-        public long SteamId { get; set; }
-        public string Name { get; set; }
-
-        public Dictionary<long, float> Durations { get; set; }
-    }
-
-    public class FlashMatrixPlayersSheet : AbstractMultipleSheet
-    {
-        private readonly List<PlayerFlashEntry> _playerEntries = new List<PlayerFlashEntry>();
+        private readonly List<FlashbangMatrixEntry> _playerEntries = new List<FlashbangMatrixEntry>();
         private Dictionary<long, string> _playerNamePerSteamId = new Dictionary<long, string>();
 
-        public FlashMatrixPlayersSheet(IWorkbook workbook)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType> { { string.Empty, CellType.String } };
-            Sheet = workbook.CreateSheet("Flash matrix players");
+            return "Flash matrix players";
+        }
+
+        protected override string[] GetColumnNames()
+        {
+            return new string[]{};
+        }
+
+        public FlashMatrixPlayersSheet(Workbook workbook): base(workbook)
+        {
         }
 
         public override void AddDemo(Demo demo)
         {
-            foreach (Player player in demo.Players)
+            foreach (var player in demo.Players)
             {
                 if (IsMaxPlayerLimitReached())
                 {
@@ -43,65 +42,62 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 _playerNamePerSteamId.Add(player.SteamId, player.Name);
             }
 
-
-            foreach (PlayerBlindedEvent blindEvent in demo.PlayerBlinded)
+            foreach (var blind in demo.PlayerBlinded)
             {
-                if (blindEvent.IsThrowerBot || blindEvent.IsVictimBot || !_playerNamePerSteamId.ContainsKey(blindEvent.ThrowerSteamId))
+                if (blind.IsThrowerBot || blind.IsVictimBot || !_playerNamePerSteamId.ContainsKey(blind.ThrowerSteamId))
                 {
                     continue;
                 }
 
-                PlayerFlashEntry throwerEntry = _playerEntries.Find(entry => entry.SteamId == blindEvent.ThrowerSteamId);
-                if (throwerEntry == null)
+                var entry = _playerEntries.Find(player => player.SteamId == blind.ThrowerSteamId);
+                if (entry == null)
                 {
-                    throwerEntry = new PlayerFlashEntry
+                    entry = new FlashbangMatrixEntry
                     {
-                        SteamId = blindEvent.ThrowerSteamId,
-                        Name = _playerNamePerSteamId[blindEvent.ThrowerSteamId],
+                        SteamId = blind.ThrowerSteamId,
+                        Name = _playerNamePerSteamId[blind.ThrowerSteamId],
                         Durations = new Dictionary<long, float>(),
                     };
-                    _playerEntries.Add(throwerEntry);
+                    _playerEntries.Add(entry);
                 }
 
-                if (throwerEntry.Durations.ContainsKey(blindEvent.VictimSteamId))
+                if (entry.Durations.ContainsKey(blind.VictimSteamId))
                 {
-                    throwerEntry.Durations[blindEvent.VictimSteamId] += blindEvent.Duration;
+                    entry.Durations[blind.VictimSteamId] += blind.Duration;
                 }
                 else
                 {
-                    throwerEntry.Durations.Add(blindEvent.VictimSteamId, blindEvent.Duration);
+                    entry.Durations.Add(blind.VictimSteamId, blind.Duration);
                 }
             }
         }
 
-        protected override void GenerateContent()
+        public override void Generate()
         {
             _playerNamePerSteamId = _playerNamePerSteamId.OrderBy(k => k.Value).ToDictionary(x => x.Key, x => x.Value);
 
-            IRow firstRow = Sheet.CreateRow(0);
-            SetCellValue(firstRow, 0, CellType.String, "Flasher\\Flashed");
-
-            int rowNumber = 1;
-            int firstRowColumnNumber = 1;
-            foreach (KeyValuePair<long, string> player in _playerNamePerSteamId)
+            var firstRowCells = new List<object> { "Flasher\\Flashed" };
+            foreach (var player in _playerNamePerSteamId)
             {
-                string playerName = player.Value;
-                SetCellValue(firstRow, firstRowColumnNumber++, CellType.String, playerName);
+                firstRowCells.Add(player.Value);
+            }
+            WriteRow(firstRowCells);
 
-                IRow row = Sheet.CreateRow(rowNumber++);
-                SetCellValue(row, 0, CellType.String, playerName);
-
-                int columnNumber = 1;
-                foreach (KeyValuePair<long, string> namePerSteamId in _playerNamePerSteamId)
+            foreach (var flasher in _playerNamePerSteamId)
+            {
+                var cells = new List<object> { flasher.Value };
+                foreach (var flashed in _playerNamePerSteamId)
                 {
-                    double duration = 0;
-                    PlayerFlashEntry playerEntry = _playerEntries.Find(p => p.SteamId == player.Key);
-                    if (playerEntry != null && playerEntry.Durations.ContainsKey(namePerSteamId.Key))
+                    var playerEntry = _playerEntries.Find(p => p.SteamId == flasher.Key);
+                    var duration = 0d;
+                    if (playerEntry != null && playerEntry.Durations.ContainsKey(flashed.Key))
                     {
-                        duration = Math.Round(playerEntry.Durations[namePerSteamId.Key], 2);
+                        duration = Math.Round(playerEntry.Durations[flashed.Key], 2);
                     }
-                    SetCellValue(row, columnNumber++, CellType.Numeric, duration);
+                    cells.Add(duration);
                 }
+
+                WriteRow(cells);
             }
         }
 

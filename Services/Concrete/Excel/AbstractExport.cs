@@ -1,13 +1,16 @@
 ﻿using System.Threading.Tasks;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
 
 namespace Services.Concrete.Excel
 {
     public abstract class AbstractExport
     {
-        protected readonly IWorkbook Workbook = new XSSFWorkbook();
+        protected readonly Workbook Workbook;
 
-        public abstract Task<IWorkbook> Generate();
+        protected AbstractExport(Workbook workbook)
+        {
+            Workbook = workbook;
+        }
+
+        public abstract Task Generate();
     }
 }

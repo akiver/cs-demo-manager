@@ -1,63 +1,94 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Models;
-using NPOI.SS.UserModel;
+using Services.Concrete.Excel.Sheets.Multiple;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
-    public class KillMatrixSheet : AbstractSingleSheet
+    internal class KillMatrixSheet: SingleDemoSheet
     {
-        public KillMatrixSheet(IWorkbook workbook, Demo demo)
+        private readonly List<PlayerKillEntry> _playerEntries = new List<PlayerKillEntry>();
+        private Dictionary<long, string> _playerNamePerSteamId = new Dictionary<long, string>();
+
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType> { { string.Empty, CellType.String } };
-            Demo = demo;
-            Sheet = workbook.CreateSheet("Kill matrix");
+            return "Kill matrix";
         }
 
-        protected override void GenerateContent()
+        protected override string[] GetColumnNames()
         {
-            // store players row and columns index
-            Dictionary<long, int> playersRow = new Dictionary<long, int>();
-            Dictionary<long, int> playersColumn = new Dictionary<long, int>();
+            return new string[]{};
+        }
 
-            // first row containing victims name
-            IRow firstRow = Sheet.CreateRow(0);
-            SetCellValue(firstRow, 0, CellType.String, "Killer\\Victim");
+        public KillMatrixSheet(Workbook workbook, Demo demo): base(workbook, demo)
+        {
+        }
 
-            // concat teams players to have a more logic matrix pattern
-            List<Player> players = new List<Player>(Demo.TeamCT.Players).Concat(Demo.TeamT.Players).ToList();
-
-            int columnCount = 1;
-            int rowCount = 1;
-            // create rows and columns with only players name
-            foreach (Player player in players)
+        public override void Generate()
+        {
+            foreach (var player in Demo.Players)
             {
-                // add a column for this player in the first row
-                SetCellValue(firstRow, columnCount, CellType.String, player.Name);
-                playersRow.Add(player.SteamId, rowCount);
-                // create a row for this player
-                IRow row = Sheet.CreateRow(rowCount++);
-                SetCellValue(row, 0, CellType.String, player.Name);
-                playersColumn.Add(player.SteamId, columnCount++);
+                if (player.IsBot || _playerNamePerSteamId.ContainsKey(player.SteamId))
+                {
+                    continue;
+                }
+
+                _playerNamePerSteamId.Add(player.SteamId, player.Name);
             }
 
-            // insert kills value
-            foreach (Player player in players)
+            foreach (var kill in Demo.Kills)
             {
-                if (playersRow.ContainsKey(player.SteamId))
+                if (kill.IsKillerBot || kill.IsVictimBot || !_playerNamePerSteamId.ContainsKey(kill.KillerSteamId))
                 {
-                    int rowIndex = playersRow[player.SteamId];
-                    foreach (Player pl in Demo.Players)
-                    {
-                        if (playersColumn.ContainsKey(pl.SteamId))
-                        {
-                            int columnIndex = playersColumn[pl.SteamId];
-                            int killCount = Demo.Kills.Count(e => e.KillerSteamId == player.SteamId && e.KilledSteamId == pl.SteamId);
-                            IRow row = Sheet.GetRow(rowIndex);
-                            SetCellValue(row, columnIndex, CellType.Numeric, killCount);
-                        }
-                    }
+                    continue;
                 }
+
+                var killerEntry = _playerEntries.Find(entry => entry.SteamId == kill.KillerSteamId);
+                if (killerEntry == null)
+                {
+                    killerEntry = new PlayerKillEntry
+                    {
+                        SteamId = kill.KillerSteamId,
+                        Name = _playerNamePerSteamId[kill.KillerSteamId],
+                        Kills = new Dictionary<long, int>(),
+                    };
+                    _playerEntries.Add(killerEntry);
+                }
+
+                if (killerEntry.Kills.ContainsKey(kill.KilledSteamId))
+                {
+                    killerEntry.Kills[kill.KilledSteamId]++;
+                }
+                else
+                {
+                    killerEntry.Kills.Add(kill.KilledSteamId, 1);
+                }
+            }
+
+            _playerNamePerSteamId = _playerNamePerSteamId.OrderBy(k => k.Value).ToDictionary(x => x.Key, x => x.Value);
+
+            var firstRowCells = new List<object>{ "Killer\\Victim" };
+            foreach (var player in _playerNamePerSteamId)
+            {
+                firstRowCells.Add(player.Value);
+            }
+            WriteRow(firstRowCells);
+
+            foreach (var killer in _playerNamePerSteamId)
+            {
+                var cells = new List<object> { killer.Value };
+                foreach (var victim in _playerNamePerSteamId)
+                {
+                    var playerEntry = _playerEntries.Find(p => p.SteamId == killer.Key);
+                    var killCount = 0;
+                    if (playerEntry != null && playerEntry.Kills.ContainsKey(victim.Key))
+                    {
+                        killCount = playerEntry.Kills[victim.Key];
+                    }
+                    cells.Add(killCount);
+                }
+
+                WriteRow(cells);
             }
         }
     }

@@ -1,47 +1,52 @@
 ﻿using System.Collections.Generic;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
-    public class EntryKillsRoundSheet : AbstractSingleSheet
+    internal class EntryKillsRoundSheet: SingleDemoSheet
     {
-        public EntryKillsRoundSheet(IWorkbook workbook, Demo demo)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
-            {
-                { "Number", CellType.Numeric },
-                { "Killer Name", CellType.String },
-                { "Killer SteamID", CellType.String },
-                { "Victim Name", CellType.String },
-                { "Victim SteamID", CellType.String },
-                { "Weapon", CellType.String },
-                { "Round Won", CellType.String },
-            };
-            Demo = demo;
-            Sheet = workbook.CreateSheet("Entry Kills Rounds");
+            return "Entry Kills Rounds";
         }
 
-        protected override void GenerateContent()
+        protected override string[] GetColumnNames()
         {
-            int rowNumber = 1;
-
-            foreach (Round round in Demo.Rounds)
+            return new[]
             {
-                IRow row = Sheet.CreateRow(rowNumber);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
-                if (round.EntryKillEvent != null)
-                {
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KillerName);
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KillerSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KilledName);
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.KilledSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryKillEvent.Weapon.Name);
-                    SetCellValue(row, columnNumber, CellType.String, round.EntryKillEvent.HasWonRound ? "yes" : "no");
-                }
+                "Number",
+                "Killer Name",
+                "Killer SteamID",
+                "Victim Name",
+                "Victim SteamID",
+                "Weapon",
+                "Round Won",
+            };
+        }
 
-                rowNumber++;
+        public EntryKillsRoundSheet(Workbook workbook, Demo demo): base(workbook, demo)
+        {
+        }
+
+        public override void Generate()
+        {
+            foreach (var round in Demo.Rounds)
+            {
+                if (round.EntryKillEvent == null)
+                {
+                    continue;
+                }
+                var cells = new List<object>
+                {
+                    round.Number,
+                    round.EntryKillEvent.KillerName,
+                    round.EntryKillEvent.KillerSteamId.ToString(),
+                    round.EntryKillEvent.KilledName,
+                    round.EntryKillEvent.KilledSteamId.ToString(),
+                    round.EntryKillEvent.Weapon.Name,
+                    round.EntryKillEvent.HasWonRound ? "yes" : "no",
+                };
+                WriteRow(cells);
             }
         }
     }

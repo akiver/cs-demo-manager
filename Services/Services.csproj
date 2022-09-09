@@ -54,18 +54,6 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NPOI, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OOXML, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OOXML.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXml4Net, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
-    </Reference>
-    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.5.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
-      <HintPath>..\packages\NPOI.2.5.5\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="protobuf-net, Version=3.0.0.0, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
@@ -81,6 +69,7 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
     </Reference>
@@ -121,16 +110,14 @@
     <Compile Include="Concrete\Excel\ExcelService.cs" />
     <Compile Include="Concrete\Excel\MultiExportConfiguration.cs" />
     <Compile Include="Concrete\Excel\MultipleExport.cs" />
-    <Compile Include="Concrete\Excel\Sheets\AbstractMultipleSheet.cs" />
-    <Compile Include="Concrete\Excel\Sheets\AbstractSheet.cs" />
-    <Compile Include="Concrete\Excel\Sheets\AbstractSingleSheet.cs" />
-    <Compile Include="Concrete\Excel\Sheets\IMultipleSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Sheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\FlashMatrixTeamsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\GeneralSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\FlashMatrixPlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\KillMatrixSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\KillsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\MapsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\MultipleDemoSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\PlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\RoundsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Multiple\TeamsSheet.cs" />
@@ -148,8 +135,10 @@
     <Compile Include="Concrete\Excel\Sheets\Single\KillsSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\PlayersSheet.cs" />
     <Compile Include="Concrete\Excel\Sheets\Single\RoundsSheet.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Single\SingleDemoSheet.cs" />
     <Compile Include="Concrete\Excel\SingleExport.cs" />
     <Compile Include="Concrete\Excel\SingleExportConfiguration.cs" />
+    <Compile Include="Concrete\Excel\Workbook.cs" />
     <Compile Include="Concrete\FlashbangService.cs" />
     <Compile Include="Concrete\GameLauncher.cs" />
     <Compile Include="Concrete\HeatmapService.cs" />
@@ -214,8 +203,13 @@
     <Compile Include="Models\Charts\RankDateChart.cs" />
     <Compile Include="Models\Charts\WinDateChart.cs" />
     <Compile Include="Models\DemoFilter.cs" />
-    <Compile Include="Models\Excel\PlayerStats.cs" />
-    <Compile Include="Models\Excel\WeaponsData.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\GeneralSheetRow.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\KillSheetRow.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\MapSheetRow.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\PlayerSheetRow.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\RoundSheetRow.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\TeamSheetRow.cs" />
+    <Compile Include="Concrete\Excel\Sheets\Multiple\WeaponSheetRow.cs" />
     <Compile Include="Models\GameLauncherConfiguration.cs" />
     <Compile Include="Models\GitHub\Release.cs" />
     <Compile Include="Models\Heatmap\HeatmapConfiguration.cs" />

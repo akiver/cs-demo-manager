@@ -1,9 +1,10 @@
 ﻿using System;
 
-namespace Services.Models.Excel
+namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class PlayerStats
+    public class PlayerSheetRow
     {
+        public string Name { get; set; }
         public int MatchCount { get; set; }
 
         public int KillCount { get; set; }

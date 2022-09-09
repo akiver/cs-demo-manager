@@ -1,107 +1,125 @@
 ﻿using System.Collections.Generic;
 using Core.Models;
-using Core.Models.Events;
 using DemoInfo;
-using NPOI.SS.UserModel;
-using Services.Models.Excel;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class WeaponsSheet : AbstractMultipleSheet
+    internal class WeaponsSheet: MultipleDemoSheet
     {
-        private readonly Dictionary<Weapon, WeaponsData> _data = new Dictionary<Weapon, WeaponsData>();
+        private readonly Dictionary<string, WeaponSheetRow> _rowPerWeaponName = new Dictionary<string, WeaponSheetRow>();
         private readonly long _focusSteamId = 0;
+        
+        protected override string GetName()
+        {
+            return "Weapons";
+        }
 
-        public WeaponsSheet(IWorkbook workbook, long steamId = 0)
+        protected override string[] GetColumnNames()
+        {
+            return new[]
+            {
+                "Name",
+                "Kills",
+                "Damage health",
+                "Damage armor",
+                "Shots",
+                "Hits",
+                "Accuracy %",
+            };
+        }
+
+        public WeaponsSheet(Workbook workbook, long steamId = 0): base(workbook)
         {
             _focusSteamId = steamId;
-            Headers = new Dictionary<string, CellType>()
-            {
-                { "Name", CellType.String },
-                { "Kills", CellType.Numeric },
-                { "Damage health", CellType.Numeric },
-                { "Damage armor", CellType.Numeric },
-                { "Shots", CellType.Numeric },
-                { "Hits", CellType.Numeric },
-                { "Accuracy %", CellType.Numeric },
-            };
-            Sheet = workbook.CreateSheet("Weapons");
         }
 
         public override void AddDemo(Demo demo)
         {
-            foreach (WeaponFireEvent weaponFire in demo.WeaponFired)
+            foreach (var weaponFire in demo.WeaponFired)
             {
-                if (_focusSteamId != 0 && weaponFire.ShooterSteamId != _focusSteamId)
+                if (IsUnknownWeapon(weaponFire.Weapon))
+                {
+                    continue;
+                }
+                
+                var shouldIgnoreFocusedPlayerShot = _focusSteamId != 0 && weaponFire.ShooterSteamId != _focusSteamId;
+                if (shouldIgnoreFocusedPlayerShot)
                 {
                     continue;
                 }
 
-                if (weaponFire.Weapon.Element != EquipmentElement.Unknown)
-                {
-                    if (!_data.ContainsKey(weaponFire.Weapon))
-                    {
-                        _data.Add(weaponFire.Weapon, new WeaponsData());
-                    }
-
-                    _data[weaponFire.Weapon].Shots++;
-                }
+                var weaponStats = GetWeaponStatsByName(weaponFire.Weapon.Name);
+                weaponStats.Shots++;
             }
 
-            foreach (PlayerHurtedEvent hurtEvent in demo.PlayersHurted)
+            foreach (var hurtEvent in demo.PlayersHurted)
             {
-                if (_focusSteamId != 0 && hurtEvent.AttackerSteamId != _focusSteamId)
+                if (IsUnknownWeapon(hurtEvent.Weapon))
+                {
+                    continue;
+                }
+                
+                var shouldIgnoreFocusedPlayerHurtEvent = _focusSteamId != 0 && hurtEvent.AttackerSteamId != _focusSteamId;
+                if (shouldIgnoreFocusedPlayerHurtEvent)
                 {
                     continue;
                 }
 
-                if (hurtEvent.Weapon.Element != EquipmentElement.Unknown)
-                {
-                    if (!_data.ContainsKey(hurtEvent.Weapon))
-                    {
-                        _data.Add(hurtEvent.Weapon, new WeaponsData());
-                    }
-
-                    _data[hurtEvent.Weapon].Hits++;
-                    _data[hurtEvent.Weapon].TotalDamageArmor += hurtEvent.ArmorDamage;
-                    _data[hurtEvent.Weapon].TotalDamageHealth += hurtEvent.HealthDamage;
-                }
+                var weaponStats = GetWeaponStatsByName(hurtEvent.Weapon.Name);
+                weaponStats.Hits++;
+                weaponStats.TotalDamageArmor += hurtEvent.ArmorDamage;
+                weaponStats.TotalDamageHealth += hurtEvent.HealthDamage;
             }
 
-            foreach (KillEvent killEvent in demo.Kills)
+            foreach (var killEvent in demo.Kills)
             {
-                if (_focusSteamId != 0 && killEvent.KillerSteamId != _focusSteamId)
+                if (IsUnknownWeapon(killEvent.Weapon))
                 {
                     continue;
                 }
 
-                if (killEvent.Weapon.Element != EquipmentElement.Unknown)
+                var shouldIgnoreFocusedPlayerKill = _focusSteamId != 0 && killEvent.KillerSteamId != _focusSteamId;
+                if (shouldIgnoreFocusedPlayerKill)
                 {
-                    if (!_data.ContainsKey(killEvent.Weapon))
-                    {
-                        _data.Add(killEvent.Weapon, new WeaponsData());
-                    }
-
-                    _data[killEvent.Weapon].KillCount++;
+                    continue;
                 }
+
+                var weaponStats = GetWeaponStatsByName(killEvent.Weapon.Name);
+                weaponStats.KillCount++;
+            }
+        }
+        public override void Generate()
+        {
+            foreach (var entry in _rowPerWeaponName)
+            {
+                var row = entry.Value;
+                var cells = new List<object>
+                {
+                    entry.Key,
+                    row.KillCount,
+                    row.TotalDamageHealth,
+                    row.TotalDamageArmor,
+                    row.Shots,
+                    row.Hits,
+                    row.Accuracy,
+                };
+                WriteRow(cells);
             }
         }
 
-        protected override void GenerateContent()
+        private WeaponSheetRow GetWeaponStatsByName(string weaponName)
         {
-            int rowCount = 1;
-            foreach (KeyValuePair<Weapon, WeaponsData> weaponData in _data)
+            if (!_rowPerWeaponName.ContainsKey(weaponName))
             {
-                IRow row = Sheet.CreateRow(rowCount++);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.String, weaponData.Key.Name);
-                SetCellValue(row, columnNumber++, CellType.Numeric, weaponData.Value.KillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, weaponData.Value.TotalDamageHealth);
-                SetCellValue(row, columnNumber++, CellType.Numeric, weaponData.Value.TotalDamageArmor);
-                SetCellValue(row, columnNumber++, CellType.Numeric, weaponData.Value.Shots);
-                SetCellValue(row, columnNumber++, CellType.Numeric, weaponData.Value.Hits);
-                SetCellValue(row, columnNumber, CellType.Numeric, weaponData.Value.Accurary);
+                _rowPerWeaponName.Add(weaponName, new WeaponSheetRow());
             }
+
+            return _rowPerWeaponName[weaponName];
+        }
+
+        private static bool IsUnknownWeapon(Weapon weapon)
+        {
+            return weapon.Element == EquipmentElement.Unknown;
         }
     }
 }

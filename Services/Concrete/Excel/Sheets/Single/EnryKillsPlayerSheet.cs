@@ -1,42 +1,46 @@
 ﻿using System.Collections.Generic;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
-    public class EntryKillsPlayerSheet : AbstractSingleSheet
+    internal class EntryKillsPlayerSheet: SingleDemoSheet
     {
-        public EntryKillsPlayerSheet(IWorkbook workbook, Demo demo)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
-            {
-                { "Name", CellType.String },
-                { "SteamID", CellType.String },
-                { "Total", CellType.Numeric },
-                { "Win", CellType.Numeric },
-                { "Loss", CellType.Numeric },
-                { "Rate", CellType.Numeric },
-            };
-            Demo = demo;
-            Sheet = workbook.CreateSheet("Entry Kills Players");
+            return "Entry Kills Players";
         }
 
-        protected override void GenerateContent()
+        protected override string[] GetColumnNames()
         {
-            int rowNumber = 1;
-
-            foreach (Player player in Demo.Players)
+            return new[]
             {
-                IRow row = Sheet.CreateRow(rowNumber);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.String, player.Name);
-                SetCellValue(row, columnNumber++, CellType.String, player.SteamId.ToString());
-                SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKills.Count);
-                SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillWonCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, player.EntryKillLossCount);
-                SetCellValue(row, columnNumber, CellType.Numeric, player.RatioEntryKill);
+                "Name",
+                "SteamID",
+                "Total",
+                "Win",
+                "Loss",
+                "Rate",
+            };
+        }
 
-                rowNumber++;
+        public EntryKillsPlayerSheet(Workbook workbook, Demo demo): base(workbook, demo)
+        {
+        }
+
+        public override void Generate()
+        {
+            foreach (var player in Demo.Players)
+            {
+                var cells = new List<object>
+                {
+                    player.Name,
+                    player.SteamId.ToString(),
+                    player.EntryKills.Count,
+                    player.EntryKillWonCount,
+                    player.EntryKillLossCount,
+                    player.RatioEntryKill,
+                };
+                WriteRow(cells);
             }
         }
     }

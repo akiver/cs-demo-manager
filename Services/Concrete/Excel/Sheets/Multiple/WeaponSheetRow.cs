@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Services.Models.Excel
+namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class WeaponsData
+    public class WeaponSheetRow
     {
         public int KillCount { get; set; }
 
@@ -14,6 +14,6 @@ namespace Services.Models.Excel
 
         public int Hits { get; set; }
 
-        public decimal Accurary => Shots == 0 ? 0 : Math.Round((decimal)(Hits * 100) / Shots, 2);
+        public decimal Accuracy => Shots == 0 ? 0 : Math.Round((decimal)(Hits * 100) / Shots, 2);
     }
 }

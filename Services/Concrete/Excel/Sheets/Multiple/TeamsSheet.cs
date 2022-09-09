@@ -1,200 +1,129 @@
 ﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using Core.Models;
-using Core.Models.Events;
-using NPOI.SS.UserModel;
 using Team = Core.Models.Team;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class TeamsSheet : AbstractMultipleSheet
+    internal class TeamsSheet: MultipleDemoSheet
     {
-        readonly List<Team> _teams = new List<Team>();
+        private readonly Dictionary<string, TeamSheetRow> _rowPerTeamName = new Dictionary<string, TeamSheetRow>();
 
-        public TeamsSheet(IWorkbook workbook)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
+            return "Teams";
+        }
+
+        protected override string[] GetColumnNames()
+        {
+            return new[]
             {
-                { "Name", CellType.String },
-                { "Match", CellType.Numeric },
-                { "Win", CellType.Numeric },
-                { "Lost", CellType.Numeric },
-                { "Kills", CellType.Numeric },
-                { "Deaths", CellType.Numeric },
-                { "Assists", CellType.Numeric },
-                { "Rounds", CellType.Numeric },
-                { "Round win", CellType.Numeric },
-                { "Round lost", CellType.Numeric },
-                { "Round CT win", CellType.Numeric },
-                { "Round CT lost", CellType.Numeric },
-                { "Round T win", CellType.Numeric },
-                { "Round T lost", CellType.Numeric },
-                { "Win pistol round", CellType.Numeric },
-                { "Win eco round", CellType.Numeric },
-                { "Win semi-eco round", CellType.Numeric },
-                { "Win force-buy round", CellType.Numeric },
-                { "Bomb planted", CellType.Numeric },
-                { "Bomb defused", CellType.Numeric },
-                { "Bomb exploded", CellType.Numeric },
-                { "Bomb planted on A", CellType.Numeric },
-                { "Bomb planted on B", CellType.Numeric },
-                { "5K", CellType.Numeric },
-                { "4K", CellType.Numeric },
-                { "3K", CellType.Numeric },
-                { "2K", CellType.Numeric },
-                { "1K", CellType.Numeric },
-                { "Trade kill", CellType.Numeric },
-                { "Trade death", CellType.Numeric },
-                { "Jump kill", CellType.Numeric },
-                { "Crouch kill", CellType.Numeric },
-                { "Flash", CellType.Numeric },
-                { "HE", CellType.Numeric },
-                { "Smoke", CellType.Numeric },
-                { "Molotov", CellType.Numeric },
-                { "Incendiary", CellType.Numeric },
-                { "Decoy", CellType.Numeric },
+                "Name",
+                "Match",
+                "Win",
+                "Lost",
+                "Kills",
+                "Deaths",
+                "Assists",
+                "Rounds",
+                "Round win",
+                "Round lost",
+                "Round CT win",
+                "Round CT lost",
+                "Round T win",
+                "Round T lost",
+                "Win pistol round",
+                "Win eco round",
+                "Win semi-eco round",
+                "Win force-buy round",
+                "Bomb planted",
+                "Bomb defused",
+                "Bomb exploded",
+                "Bomb planted on A",
+                "Bomb planted on B",
+                "5K",
+                "4K",
+                "3K",
+                "2K",
+                "1K",
+                "Trade kill",
+                "Trade death",
+                "Jump kill",
+                "Crouch kill",
+                "Flash",
+                "HE",
+                "Smoke",
+                "Molotov",
+                "Incendiary",
+                "Decoy",
             };
-            Sheet = workbook.CreateSheet("Teams");
+        }
+
+        public TeamsSheet(Workbook workbook) : base(workbook)
+        {
         }
 
         public override void AddDemo(Demo demo)
         {
-            if (_teams.Contains(demo.TeamCT))
-            {
-                Team team = _teams.First(t => t.Equals(demo.TeamCT));
-                UpdateTeamStats(demo, team);
-            }
-            else
-            {
-                Team team = demo.TeamCT.Clone();
-                InitTeam(demo, team);
-                _teams.Add(team);
-            }
-
-            if (_teams.Contains(demo.TeamT))
-            {
-                Team team = _teams.First(t => t.Equals(demo.TeamT));
-                UpdateTeamStats(demo, team);
-            }
-            else
-            {
-                Team team = demo.TeamT.Clone();
-                InitTeam(demo, team);
-                _teams.Add(team);
-            }
+            UpdateTeamStats(demo, demo.TeamCT);
+            UpdateTeamStats(demo, demo.TeamT);
         }
 
-        protected override void GenerateContent()
+        private void UpdateTeamStats(Demo demo, Team team)
         {
-            int rowCount = 1;
-            foreach (Team team in _teams)
+            if (!_rowPerTeamName.ContainsKey(team.Name))
             {
-                IRow row = Sheet.CreateRow(rowCount++);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.String, team.Name);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.MatchCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.KillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.DeathCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.AssistCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.RoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundCtCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundCtCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinRoundTCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.LostRoundTCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinPistolRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinEcoRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinSemiEcoRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.WinForceBuyRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombDefusedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombExplodedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedOnACount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.BombPlantedOnBCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.FiveKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.FourKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.ThreeKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.TwoKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.OneKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.TradeDeathCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.JumpKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.CrouchKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.FlashbangThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.HeGrenadeThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.SmokeThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.MolotovThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, team.IncendiaryThrownCount);
-                SetCellValue(row, columnNumber, CellType.Numeric, team.DecoyThrownCount);
+                _rowPerTeamName.Add(team.Name, new TeamSheetRow());
             }
-        }
-
-
-        /// <summary>
-        /// Initialize team values for the first time
-        /// </summary>
-        /// <param name="demo"></param>
-        /// <param name="team"></param>
-        private static void InitTeam(Demo demo, Team team)
-        {
-            team.RoundCount = demo.Rounds.Count();
-            UpdateWinner(demo, team);
-            UpdateRoundsStats(demo, team);
-            UpdateBombStats(demo, team);
-        }
-
-        /// <summary>
-        /// Update team's stats
-        /// </summary>
-        /// <param name="demo"></param>
-        /// <param name="team"></param>
-        private static void UpdateTeamStats(Demo demo, Team team)
-        {
-            team.MatchCount++;
-            team.RoundCount += demo.Rounds.Count();
-            team.Players = demo.TeamCT.Equals(team)
-                ? new ObservableCollection<Player>(demo.TeamCT.Players.Concat(team.Players).ToList())
-                : new ObservableCollection<Player>(demo.TeamT.Players.Concat(team.Players).ToList());
-            UpdateWinner(demo, team);
-            UpdateRoundsStats(demo, team);
-            UpdateBombStats(demo, team);
-        }
-
-        private static void UpdateWinner(Demo demo, Team team)
-        {
-            if (demo.Winner == null)
+            
+            var row = _rowPerTeamName[team.Name];
+            row.MatchCount++;
+            row.KillCount += team.KillCount;
+            row.AssistCount += team.AssistCount;
+            row.DeathCount += team.DeathCount;
+            row.RoundCount += demo.Rounds.Count();
+            row.FiveKillCount += team.FiveKillCount;
+            row.FourKillCount += team.FourKillCount;
+            row.ThreeKillCount += team.ThreeKillCount;
+            row.TwoKillCount += team.TwoKillCount;
+            row.OneKillCount += team.OneKillCount;
+            row.TradeKillCount += team.TradeKillCount;
+            row.TradeDeathCount += team.TradeDeathCount;
+            row.JumpKillCount += team.JumpKillCount;
+            row.CrouchKillCount += team.CrouchKillCount;
+            row.FlashbangCount += team.FlashbangThrownCount;
+            row.HeGrenadeCount += team.HeGrenadeThrownCount;
+            row.SmokeCount += team.SmokeThrownCount;
+            row.DecoyCount += team.DecoyThrownCount;
+            row.MolotovCount += team.MolotovThrownCount;
+            row.IncendiaryCount += team.IncendiaryThrownCount;
+            row.BombPlantedCount += team.BombPlantedCount;
+            row.BombDefusedCount += team.BombDefusedCount;
+            row.BombExplodedCount += team.BombExplodedCount;
+            if (demo.Winner != null)
             {
-                return;
+                if (demo.Winner.Equals(team))
+                {
+                    row.WonCount++;
+                }
+                else
+                {
+                    row.LostCount++;
+                }
             }
 
-            if (demo.Winner.Equals(team))
-            {
-                team.WinCount++;
-            }
-            else
-            {
-                team.LostCount++;
-            }
-        }
-
-        private static void UpdateRoundsStats(Demo demo, Team team)
-        {
-            foreach (Round round in demo.Rounds)
+            foreach (var round in demo.Rounds)
             {
                 if (round.WinnerName == team.Name)
                 {
-                    team.WinRoundCount++;
+                    row.RoundWonCount++;
                     if (round.WinnerSide == Side.CounterTerrorist)
                     {
-                        team.WinRoundCtCount++;
+                        row.RoundWonAsCtCount++;
                     }
                     else
                     {
-                        team.WinRoundTCount++;
+                        row.RoundWonAsTerroCount++;
                     }
 
                     if (round.SideTrouble != Side.None)
@@ -202,50 +131,98 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                         switch (round.Type)
                         {
                             case RoundType.PISTOL_ROUND:
-                                team.WinPistolRoundCount++;
+                                row.PistolRoundWonCount++;
                                 break;
                             case RoundType.ECO:
-                                team.WinEcoRoundCount++;
+                                row.EcoRoundWonCount++;
                                 break;
                             case RoundType.SEMI_ECO:
-                                team.WinSemiEcoRoundCount++;
+                                row.SemiEcoRoundWonCount++;
                                 break;
                             case RoundType.FORCE_BUY:
-                                team.WinForceBuyRoundCount++;
+                                row.ForceBuyRoundWonCount++;
                                 break;
                         }
                     }
                 }
                 else
                 {
-                    team.LostRoundCount++;
+                    row.RoundLostCount++;
                     if (round.WinnerSide == Side.CounterTerrorist)
                     {
-                        team.LostRoundTCount++;
+                        row.RoundLostAsTerroCount++;
                     }
                     else
                     {
-                        team.LostRoundCtCount++;
+                        row.RoundLostAsCtCount++;
                     }
                 }
             }
-        }
 
-        private static void UpdateBombStats(Demo demo, Team team)
-        {
-            foreach (BombPlantedEvent plantedEvent in demo.BombPlanted)
+            foreach (var plantedEvent in demo.BombPlanted)
             {
                 if (team.Players.FirstOrDefault(p => p.SteamId == plantedEvent.PlanterSteamId) != null)
                 {
                     if (plantedEvent.Site == "A")
                     {
-                        team.BombPlantedOnACount++;
+                        row.BombPlantedOnACount++;
                     }
                     else
                     {
-                        team.BombPlantedOnBCount++;
+                        row.BombPlantedOnBCount++;
                     }
                 }
+            }
+        }
+
+        public override void Generate()
+        {
+            foreach (var entry in _rowPerTeamName)
+            {
+                var row = entry.Value;
+                var cells = new List<object>
+                {
+                    entry.Key,
+                    row.MatchCount,
+                    row.WonCount,
+                    row.LostCount,
+                    row.KillCount,
+                    row.DeathCount,
+                    row.AssistCount,
+                    row.RoundCount,
+                    row.RoundWonCount,
+                    row.RoundLostCount,
+                    row.RoundWonAsCtCount,
+                    row.RoundLostAsCtCount,
+                    row.RoundWonAsTerroCount,
+                    row.RoundLostAsTerroCount,
+                    row.PistolRoundWonCount,
+                    row.EcoRoundWonCount,
+                    row.SemiEcoRoundWonCount,
+                    row.ForceBuyRoundWonCount,
+                    row.BombPlantedCount,
+                    row.BombDefusedCount,
+                    row.BombExplodedCount,
+                    row.BombPlantedOnACount,
+                    row.BombPlantedOnBCount,
+                    row.FiveKillCount,
+                    row.FourKillCount,
+                    row.ThreeKillCount,
+                    row.TwoKillCount,
+                    row.OneKillCount,
+                    row.TradeKillCount,
+                    row.TradeDeathCount,
+                    row.JumpKillCount,
+                    row.CrouchKillCount,
+                    row.FlashbangCount,
+                    row.HeGrenadeCount,
+                    row.SmokeCount,
+                    row.MolotovCount,
+                    row.IncendiaryCount,
+                    row.DecoyCount,
+                };
+                WriteRow(cells);
+                
             }
         }
     }

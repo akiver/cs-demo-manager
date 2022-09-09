@@ -1,105 +1,151 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Core.Models;
-using Core.Models.Events;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class KillsSheet : AbstractMultipleSheet
+    internal class KillsSheet: MultipleDemoSheet
     {
-        private readonly Dictionary<string, KillEvent[]> _KillsPerDemoId = new Dictionary<string, KillEvent[]>();
+        private readonly Dictionary<string, KillSheetRow[]> _rowsPerDemoId = new Dictionary<string, KillSheetRow[]>();
 
-        public KillsSheet(IWorkbook workbook)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
+            return "Kills";
+        }
+
+        protected override string[] GetColumnNames()
+        {
+            return new[]
             {
-                { "Demo ID", CellType.String },
-                { "Tick", CellType.Numeric },
-                { "Round", CellType.Numeric },
-                { "Time death (s)", CellType.Numeric },
-                { "Killer", CellType.String },
-                { "Killer SteamID", CellType.String },
-                { "Killer side", CellType.String },
-                { "Killer team", CellType.String },
-                { "Killer bot", CellType.Boolean },
-                { "Killer blinded", CellType.Boolean },
-                { "Killer vel X", CellType.Numeric },
-                { "Killer vel Y", CellType.Numeric },
-                { "Killer vel Z", CellType.Numeric },
-                { "Victim", CellType.String },
-                { "Victim SteamId", CellType.String },
-                { "Victim side", CellType.String },
-                { "Victim team", CellType.String },
-                { "Victim bot", CellType.Boolean },
-                { "Victim blinded", CellType.Boolean },
-                { "Assister", CellType.String },
-                { "Assister SteamID", CellType.String },
-                { "assister bot", CellType.Boolean },
-                { "Weapon", CellType.String },
-                { "Headshot", CellType.Boolean },
-                { "Crouching", CellType.Boolean },
-                { "Trade kill", CellType.Boolean },
-                { "Killer X", CellType.Numeric },
-                { "Killer Y", CellType.Numeric },
-                { "Killer Z", CellType.Numeric },
-                { "Victim X", CellType.Numeric },
-                { "Victim Y", CellType.Numeric },
-                { "Victim Z", CellType.Numeric },
+
+                "Demo ID",
+                "Tick",
+                "Round",
+                "Time death (s)",
+                "Killer",
+                "Killer SteamID",
+                "Killer side",
+                "Killer team",
+                "Killer bot",
+                "Killer blinded",
+                "Killer vel X",
+                "Killer vel Y",
+                "Killer vel Z",
+                "Victim",
+                "Victim SteamId",
+                "Victim side",
+                "Victim team",
+                "Victim bot",
+                "Victim blinded",
+                "Assister",
+                "Assister SteamID",
+                "assister bot",
+                "Weapon",
+                "Headshot",
+                "Crouching",
+                "Trade kill",
+                "Killer X",
+                "Killer Y",
+                "Killer Z",
+                "Victim X",
+                "Victim Y",
+                "Victim Z",
             };
-            Sheet = workbook.CreateSheet("Kills");
+        }
+
+        public KillsSheet(Workbook workbook): base(workbook)
+        {
         }
 
         public override void AddDemo(Demo demo)
         {
-            if (!_KillsPerDemoId.ContainsKey(demo.Id))
+            if (!_rowsPerDemoId.ContainsKey(demo.Id))
             {
-                _KillsPerDemoId.Add(demo.Id, demo.Kills.ToArray());
+                _rowsPerDemoId[demo.Id] = new KillSheetRow[demo.Kills.Count];
+                for(var index = 0; index < demo.Kills.Count; index++)
+                {
+                    var kill = demo.Kills[index];
+                    var row = new KillSheetRow
+                    {
+                        Tick = kill.Tick,
+                        RoundNumber = kill.RoundNumber,
+                        TimeDeathSeconds = kill.TimeDeathSeconds,
+                        KillerName = kill.KillerName,
+                        KillerSteamId = kill.KillerSteamId,
+                        KillerSide = kill.KillerSide,
+                        KillerTeamName = kill.KillerTeam,
+                        KillerIsControllingBot = kill.IsKillerBot,
+                        KillerIsBlinded = kill.KillerIsBlinded,
+                        KillerVelocityX = kill.KillerVelocityX,
+                        KillerVelocityY = kill.KillerVelocityY,
+                        KillerVelocityZ = kill.KillerVelocityZ,
+                        VictimName = kill.KilledName,
+                        VictimSteamId = kill.KilledSteamId,
+                        VictimSide = kill.KilledSide,
+                        VictimTeamName = kill.KilledTeam,
+                        VictimIsControllingBot = kill.KilledIsControllingBot,
+                        VictimIsBlinded = kill.VictimIsBlinded,
+                        AssisterName = kill.AssisterName,
+                        AssisterSteamId = kill.AssisterSteamId,
+                        AssisterIsControllingBot = kill.AssisterIsControllingBot,
+                        WeaponName = kill.Weapon.Name,
+                        IsHeadshot = kill.IsHeadshot,
+                        IsKillerCrouching = kill.IsKillerCrouching,
+                        IsTradeKill = kill.IsTradeKill,
+                        KillerX = kill.Point.KillerX,
+                        KillerY = kill.Point.KillerY,
+                        KillerZ = kill.Point.KillerZ,
+                        VictimX = kill.Point.VictimX,
+                        VictimY = kill.Point.VictimY,
+                        VictimZ = kill.Point.VictimZ,
+                    };
+
+                    _rowsPerDemoId[demo.Id][index] = row;
+                }
             }
         }
 
-        protected override void GenerateContent()
+        public override void Generate()
         {
-            int rowNumber = 1;
-            foreach (KeyValuePair<string, KillEvent[]> kvp in _KillsPerDemoId)
+            foreach (var entry in _rowsPerDemoId)
             {
-                string demoId = kvp.Key;
-                foreach (KillEvent kill in kvp.Value)
+                foreach (var kill in entry.Value)
                 {
-                    IRow row = Sheet.CreateRow(rowNumber++);
-                    int columnNumber = 0;
-                    SetCellValue(row, columnNumber++, CellType.String, demoId);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.Tick);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.RoundNumber);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.TimeDeathSeconds);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KillerName);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KillerSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KillerSide.AsString());
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KillerTeam);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.KillerIsControllingBot);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.KillerIsBlinded);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.KillerVelocityX);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.KillerVelocityY);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.KillerVelocityZ);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KilledName);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KilledSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KilledSide.AsString());
-                    SetCellValue(row, columnNumber++, CellType.String, kill.KilledTeam);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.KilledIsControllingBot);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.VictimIsBlinded);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.AssisterName);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.AssisterSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.AssisterIsControllingBot);
-                    SetCellValue(row, columnNumber++, CellType.String, kill.Weapon.Name);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.IsHeadshot);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.IsKillerCrouching);
-                    SetCellValue(row, columnNumber++, CellType.Boolean, kill.IsTradeKill);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.Point.KillerX);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.Point.KillerY);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.Point.KillerZ);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.Point.VictimX);
-                    SetCellValue(row, columnNumber++, CellType.Numeric, kill.Point.VictimY);
-                    SetCellValue(row, columnNumber, CellType.Numeric, kill.Point.VictimZ);
+                    var cells = new List<object>
+                    {
+                        entry.Key,
+                        kill.Tick,
+                        kill.RoundNumber,
+                        kill.TimeDeathSeconds,
+                        kill.KillerName,
+                        kill.KillerSteamId.ToString(),
+                        kill.KillerSide.AsString(),
+                        kill.KillerTeamName,
+                        kill.KillerIsControllingBot,
+                        kill.KillerIsBlinded,
+                        kill.KillerVelocityX,
+                        kill.KillerVelocityY,
+                        kill.KillerVelocityZ,
+                        kill.VictimName,
+                        kill.VictimSteamId.ToString(),
+                        kill.VictimSide.AsString(),
+                        kill.VictimTeamName,
+                        kill.VictimIsControllingBot,
+                        kill.VictimIsBlinded,
+                        kill.AssisterName,
+                        kill.AssisterSteamId.ToString(),
+                        kill.AssisterIsControllingBot,
+                        kill.WeaponName,
+                        kill.IsHeadshot,
+                        kill.IsKillerCrouching,
+                        kill.IsTradeKill,
+                        kill.KillerX,
+                        kill.KillerY,
+                        kill.KillerZ,
+                        kill.VictimX,
+                        kill.VictimY,
+                        kill.VictimZ,
+                    };
+                    WriteRow(cells);
                 }
             }
         }

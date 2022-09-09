@@ -1,47 +1,53 @@
 ﻿using System.Collections.Generic;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
-    public class EntryHoldKillsRoundSheet : AbstractSingleSheet
+    internal class EntryHoldKillsRoundSheet: SingleDemoSheet
     {
-        public EntryHoldKillsRoundSheet(IWorkbook workbook, Demo demo)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
-            {
-                { "Number", CellType.Numeric },
-                { "Killer Name", CellType.String },
-                { "Killer SteamID", CellType.String },
-                { "Victim Name", CellType.String },
-                { "Victim SteamID", CellType.String },
-                { "Weapon", CellType.String },
-                { "Round Won", CellType.String },
-            };
-            Demo = demo;
-            Sheet = workbook.CreateSheet("Entry Hold Kills Rounds");
+            return "Entry Hold Kills Rounds";
         }
 
-        protected override void GenerateContent()
+        protected override string[] GetColumnNames()
         {
-            int rowNumber = 1;
-
-            foreach (Round round in Demo.Rounds)
+            return new[]
             {
-                IRow row = Sheet.CreateRow(rowNumber);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.Numeric, round.Number);
-                if (round.EntryHoldKillEvent != null)
+                "Number",
+                "Killer Name",
+                "Killer SteamID",
+                "Victim Name",
+                "Victim SteamID",
+                "Weapon",
+                "Round Won",
+            };
+        }
+
+        public EntryHoldKillsRoundSheet(Workbook workbook, Demo demo): base(workbook, demo)
+        {
+        }
+
+        public override void Generate()
+        {
+            foreach (var round in Demo.Rounds)
+            {
+                if (round.EntryHoldKillEvent == null)
                 {
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KillerName);
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KillerSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KilledName);
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.KilledSteamId.ToString());
-                    SetCellValue(row, columnNumber++, CellType.String, round.EntryHoldKillEvent.Weapon.Name);
-                    SetCellValue(row, columnNumber, CellType.String, round.EntryHoldKillEvent.HasWonRound ? "yes" : "no");
+                    continue;
                 }
 
-                rowNumber++;
+                var cells = new List<object>
+                {
+                    round.Number,
+                    round.EntryHoldKillEvent.KillerName,
+                    round.EntryHoldKillEvent.KillerSteamId.ToString(),
+                    round.EntryHoldKillEvent.KilledName,
+                    round.EntryHoldKillEvent.KilledSteamId.ToString(),
+                    round.EntryHoldKillEvent.Weapon.Name,
+                    round.EntryHoldKillEvent.HasWonRound ? "yes" : "no",
+                };
+                WriteRow(cells);
             }
         }
     }

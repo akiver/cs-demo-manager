@@ -2,27 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
-    public class FlashMatrixTeamsSheet : AbstractSingleSheet
+    internal class FlashMatrixTeamsSheet : SingleDemoSheet
     {
-        public FlashMatrixTeamsSheet(IWorkbook workbook, Demo demo)
+        public FlashMatrixTeamsSheet(Workbook workbook, Demo demo): base(workbook, demo)
         {
-            Headers = new Dictionary<string, CellType> { { string.Empty, CellType.String } };
-            Demo = demo;
-            Sheet = workbook.CreateSheet("Flash matrix teams");
         }
 
-        protected override void GenerateContent()
+        protected override string GetName()
         {
-            // first row containing teams name
-            IRow row = Sheet.CreateRow(0);
-            SetCellValue(row, 0, CellType.String, "Flasher\\Flashed");
-            SetCellValue(row, 1, CellType.String, Demo.TeamT.Name);
-            SetCellValue(row, 2, CellType.String, Demo.TeamCT.Name);
+            return "Flash matrix teams";
+        }
 
+        protected override string[] GetColumnNames()
+        {
+            return new string[]{};
+        }
+
+        public override void Generate()
+        {
             float teamCtvsTeamTDuration = Demo.PlayerBlinded.Where(e => e.ThrowerTeamName == Demo.TeamCT.Name && e.VictimTeamName == Demo.TeamT.Name)
                 .Sum(e => e.Duration);
             float teamTvsTeamCtDuration = Demo.PlayerBlinded.Where(e => e.ThrowerTeamName == Demo.TeamT.Name && e.VictimTeamName == Demo.TeamCT.Name)
@@ -33,15 +33,27 @@ namespace Services.Concrete.Excel.Sheets.Single
             float teamTvsTeamTDuration = Demo.PlayerBlinded.Where(e => e.ThrowerTeamName == Demo.TeamT.Name && e.VictimTeamName == Demo.TeamT.Name)
                 .Sum(e => e.Duration);
 
-            row = Sheet.CreateRow(1);
-            SetCellValue(row, 0, CellType.String, Demo.TeamCT.Name);
-            SetCellValue(row, 1, CellType.Numeric, Math.Round(teamCtvsTeamTDuration, 2));
-            SetCellValue(row, 2, CellType.Numeric, Math.Round(teamCTvsTeamCtDuration, 2));
 
-            row = Sheet.CreateRow(2);
-            SetCellValue(row, 0, CellType.String, Demo.TeamT.Name);
-            SetCellValue(row, 1, CellType.Numeric, Math.Round(teamTvsTeamTDuration, 2));
-            SetCellValue(row, 2, CellType.Numeric, Math.Round(teamTvsTeamCtDuration, 2));
+            WriteRow(new List<object>
+            {
+                "Flasher\\Flashed",
+                Demo.TeamT.Name,
+                Demo.TeamCT.Name,
+            });
+
+            WriteRow(new List<object>
+            {
+                Demo.TeamCT.Name,
+                Math.Round(teamCtvsTeamTDuration, 2),
+                Math.Round(teamCTvsTeamCtDuration, 2),
+            });
+
+            WriteRow(new List<object>
+            {
+                Demo.TeamT.Name,
+                Math.Round(teamTvsTeamTDuration, 2),
+                Math.Round(teamTvsTeamCtDuration, 2),
+            });
         }
     }
 }

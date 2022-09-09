@@ -3,7 +3,6 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
-using NPOI.SS.UserModel;
 using Services.Concrete.Analyzer;
 using Services.Concrete.Excel.Sheets.Multiple;
 using Services.Interfaces;
@@ -26,23 +25,23 @@ namespace Services.Concrete.Excel
         private readonly MultiExportConfiguration _configuration;
         private int _currentDemoNumber = 0;
 
-        public MultipleExport(MultiExportConfiguration configuration)
+        public MultipleExport(Workbook workbook, MultiExportConfiguration configuration): base(workbook)
         {
             _configuration = configuration;
             _cacheService = new CacheService();
-            _generalSheet = new GeneralSheet(Workbook);
-            _playersSheet = new PlayersSheet(Workbook);
-            _mapsSheet = new MapsSheet(Workbook, _configuration.FocusSteamId);
-            _teamsSheet = new TeamsSheet(Workbook);
-            _weaponsSheet = new WeaponsSheet(Workbook, _configuration.FocusSteamId);
-            _roundsSheet = new RoundsSheet(Workbook);
-            _killsSheet = new KillsSheet(Workbook);
-            _killMatrixSheet = new KillMatrixSheet(Workbook);
-            _flashMatrixPlayersSheet = new FlashMatrixPlayersSheet(Workbook);
-            _flashMatrixTeamsSheet = new FlashMatrixTeamsSheet(Workbook);
+            _generalSheet = new GeneralSheet(workbook);
+            _roundsSheet = new RoundsSheet(workbook);
+            _playersSheet = new PlayersSheet(workbook);
+            _teamsSheet = new TeamsSheet(workbook);
+            _mapsSheet = new MapsSheet(workbook, _configuration.FocusSteamId);
+            _killsSheet = new KillsSheet(workbook);
+            _weaponsSheet = new WeaponsSheet(workbook, _configuration.FocusSteamId);
+            _killMatrixSheet = new KillMatrixSheet(workbook);
+            _flashMatrixPlayersSheet = new FlashMatrixPlayersSheet(workbook);
+            _flashMatrixTeamsSheet = new FlashMatrixTeamsSheet(workbook);
         }
 
-        public override async Task<IWorkbook> Generate()
+        public override async Task Generate()
         {
             CancellationToken cancellationToken = _configuration.CancellationToken.Token;
             foreach (string demoPath in _configuration.DemoPaths)
@@ -100,8 +99,8 @@ namespace Services.Concrete.Excel
                 cancellationToken.ThrowIfCancellationRequested();
                 _generalSheet.AddDemo(demo);
                 _playersSheet.AddDemo(demo);
-                _mapsSheet.AddDemo(demo);
                 _teamsSheet.AddDemo(demo);
+                _mapsSheet.AddDemo(demo);
                 _weaponsSheet.AddDemo(demo);
                 _roundsSheet.AddDemo(demo);
                 _killsSheet.AddDemo(demo);
@@ -132,8 +131,6 @@ namespace Services.Concrete.Excel
             cancellationToken.ThrowIfCancellationRequested();
             _flashMatrixTeamsSheet.Generate();
             cancellationToken.ThrowIfCancellationRequested();
-
-            return Workbook;
         }
     }
 }

@@ -1,133 +1,195 @@
 using System;
 using System.Collections.Generic;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class GeneralSheet : AbstractMultipleSheet
+    internal class GeneralSheet: MultipleDemoSheet
     {
-        private readonly List<Demo> _demos = new List<Demo>();
+        private readonly Dictionary<string, GeneralSheetRow> _rowPerDemoId = new Dictionary<string, GeneralSheetRow>();
 
-        public GeneralSheet(IWorkbook workbook)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
+            return "General";
+        }
+
+        protected override string[] GetColumnNames()
+        {
+            return new[]
             {
-                { "Filename", CellType.String },
-                { "ID", CellType.String },
-                { "Date", CellType.String },
-                { "Type", CellType.String },
-                { "Source", CellType.String },
-                { "Map", CellType.String },
-                { "Hostname", CellType.String },
-                { "Client", CellType.String },
-                { "Server Tickrate", CellType.Numeric },
-                { "Framerate", CellType.Numeric },
-                { "Duration", CellType.Numeric },
-                { "Ticks", CellType.Numeric },
-                { "Name team 1", CellType.String },
-                { "Name team 2", CellType.String },
-                { "Score team 1", CellType.Numeric },
-                { "Score team 2", CellType.Numeric },
-                { "Score 1st half team 1", CellType.Numeric },
-                { "Score 1st half team 2", CellType.Numeric },
-                { "Score 2nd half team 1", CellType.Numeric },
-                { "Score 2nd half team 2", CellType.Numeric },
-                { "Winner", CellType.String },
-                { "Kills", CellType.Numeric },
-                { "Assists", CellType.Numeric },
-                { "5K", CellType.Numeric },
-                { "4K", CellType.Numeric },
-                { "3K", CellType.Numeric },
-                { "2K", CellType.Numeric },
-                { "1K", CellType.Numeric },
-                { "Trade Kill", CellType.Numeric },
-                { "Average Damage Per Round", CellType.Numeric },
-                { "Total Damage Health", CellType.Numeric },
-                { "Total Damage Armor", CellType.Numeric },
-                { "Average KAST", CellType.Numeric },
-                { "Clutch", CellType.Numeric },
-                { "Bomb Defused", CellType.Numeric },
-                { "Bomb Exploded", CellType.Numeric },
-                { "Bomb Planted", CellType.Numeric },
-                { "Flashbang", CellType.Numeric },
-                { "Smoke", CellType.Numeric },
-                { "HE", CellType.Numeric },
-                { "Decoy", CellType.Numeric },
-                { "Molotov", CellType.Numeric },
-                { "Incendiary", CellType.Numeric },
-                { "Shots", CellType.Numeric },
-                { "Hits", CellType.Numeric },
-                { "Round", CellType.Numeric },
-                { "Comment", CellType.String },
-                { "Cheater", CellType.Numeric },
+                "Filename",
+                "ID",
+                "Date",
+                "Type",
+                "Source",
+                "Map",
+                "Hostname",
+                "Client",
+                "Server Tickrate",
+                "Framerate",
+                "Duration",
+                "Ticks",
+                "Name team 1",
+                "Name team 2",
+                "Score team 1",
+                "Score team 2",
+                "Score 1st half team 1",
+                "Score 1st half team 2",
+                "Score 2nd half team 1",
+                "Score 2nd half team 2",
+                "Winner",
+                "Kills",
+                "Assists",
+                "5K",
+                "4K",
+                "3K",
+                "2K",
+                "1K",
+                "Trade kill",
+                "Average Damage Per Round",
+                "Total Damage Health",
+                "Total Damage Armor",
+                "Average KAST",
+                "Clutch",
+                "Bomb Defused",
+                "Bomb Exploded",
+                "Bomb Planted",
+                "Flashbang",
+                "Smoke",
+                "HE",
+                "Decoy",
+                "Molotov",
+                "Incendiary",
+                "Shots",
+                "Hits",
+                "Round",
+                "Comment",
+                "Cheater",
             };
-            Sheet = workbook.CreateSheet("General");
+        }
+
+        public GeneralSheet(Workbook workbook) : base(workbook)
+        {
         }
 
         public override void AddDemo(Demo demo)
         {
-            if (!_demos.Contains(demo))
+            if (_rowPerDemoId.ContainsKey(demo.Id))
             {
-                _demos.Add(demo);
+                return;
             }
+
+            var row = new GeneralSheetRow
+            {
+                Name = demo.Name,
+                Id = demo.Id,
+                Date = demo.DateAsString,
+                Type = demo.Type,
+                Source = demo.Source.Label,
+                MapName = demo.MapName,
+                Hostname = demo.Hostname,
+                ClientName = demo.ClientName,
+                ServerTickrate = demo.ServerTickrate,
+                Tickrate = demo.Tickrate,
+                Duration = demo.Duration,
+                Ticks = demo.Ticks,
+                TeamNameCT = demo.TeamCT.Name,
+                TeamNameT = demo.TeamT.Name,
+                ScoreTeamCt = demo.ScoreTeamCt,
+                ScoreTeamT = demo.ScoreTeamT,
+                ScoreFirstHalfTeamCt = demo.ScoreFirstHalfTeamCt,
+                ScoreFirstHalfTeamT = demo.ScoreFirstHalfTeamT,
+                ScoreSecondHalfTeamCt = demo.ScoreSecondHalfTeamCt,
+                ScoreSecondHalfTeamT = demo.ScoreSecondHalfTeamT,
+                WinnerName = demo.Winner != null ? demo.Winner.Name : string.Empty,
+                KillCount = demo.KillCount,
+                AssistCount = demo.AssistCount,
+                FiveKillCount = demo.FiveKillCount,
+                FourKillCount = demo.FourKillCount,
+                ThreeKillCount = demo.ThreeKillCount,
+                TwoKillCount = demo.TwoKillCount,
+                OneKillCount = demo.OneKillCount,
+                TradeKillCount = demo.TradeKillCount,
+                AverageHealthDamage = demo.AverageHealthDamage,
+                DamageHealthCount = demo.DamageHealthCount,
+                DamageArmorCount = demo.DamageArmorCount,
+                AverageKast = demo.AverageKast,
+                ClutchCount = demo.ClutchCount,
+                BombDefusedCount = demo.BombDefusedCount,
+                BombExplodedCount = demo.BombExplodedCount,
+                BombPlantedCount = demo.BombPlantedCount,
+                FlashbangThrownCount = demo.FlashbangThrownCount,
+                SmokeThrownCount = demo.SmokeThrownCount,
+                HeThrownCount = demo.HeThrownCount,
+                DecoyThrownCount = demo.DecoyThrownCount,
+                MolotovThrownCount = demo.MolotovThrownCount,
+                IncendiaryThrownCount = demo.IncendiaryThrownCount,
+                WeaponFiredCount = demo.WeaponFiredCount,
+                HitCount = demo.HitCount,
+                RoundCount = demo.Rounds.Count,
+                Comment = demo.Comment,
+                CheaterCount = demo.CheaterCount,
+            };
+            _rowPerDemoId[demo.Id] = row;
         }
 
-        protected override void GenerateContent()
+        public override void Generate()
         {
-            int rowNumber = 1;
-            foreach (Demo demo in _demos)
+            foreach (var rowPerDemoId in _rowPerDemoId)
             {
-                IRow row = Sheet.CreateRow(rowNumber++);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.String, demo.Name);
-                SetCellValue(row, columnNumber++, CellType.String, demo.Id);
-                SetCellValue(row, columnNumber++, CellType.String, demo.DateAsString);
-                SetCellValue(row, columnNumber++, CellType.String, demo.Type);
-                SetCellValue(row, columnNumber++, CellType.String, demo.SourceName);
-                SetCellValue(row, columnNumber++, CellType.String, demo.MapName);
-                SetCellValue(row, columnNumber++, CellType.String, demo.Hostname);
-                SetCellValue(row, columnNumber++, CellType.String, demo.ClientName);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ServerTickrate);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.Tickrate);
-                SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.Duration, 2));
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.Ticks);
-                SetCellValue(row, columnNumber++, CellType.String, demo.TeamCT.Name);
-                SetCellValue(row, columnNumber++, CellType.String, demo.TeamT.Name);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreTeamCt);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreTeamT);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeamCt);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreFirstHalfTeamT);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeamCt);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ScoreSecondHalfTeamT);
-                SetCellValue(row, columnNumber++, CellType.String, demo.Winner != null ? demo.Winner.Name : string.Empty);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.KillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.AssistCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.FiveKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.FourKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ThreeKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.TwoKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.OneKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.TradeKillCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.AverageHealthDamage);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageHealthCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.DamageArmorCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, Math.Round(demo.AverageKast, 2));
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.ClutchCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombDefusedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombExplodedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.BombPlantedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.FlashbangThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.SmokeThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.HeThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.DecoyThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.MolotovThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.IncendiaryThrownCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.WeaponFiredCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.HitCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, demo.Rounds.Count);
-                SetCellValue(row, columnNumber++, CellType.String, demo.Comment);
-                SetCellValue(row, columnNumber, CellType.Boolean, demo.CheaterCount);
+                var demo = rowPerDemoId.Value;
+                var cells = new List<object>
+                {
+                    demo.Name,
+                    demo.Id,
+                    demo.Date,
+                    demo.Type,
+                    demo.Source,
+                    demo.MapName,
+                    demo.Hostname,
+                    demo.ClientName,
+                    demo.ServerTickrate,
+                    demo.Tickrate,
+                    Math.Round(demo.Duration, 2),
+                    demo.Ticks,
+                    demo.TeamNameCT,
+                    demo.TeamNameT,
+                    demo.ScoreTeamCt,
+                    demo.ScoreTeamT,
+                    demo.ScoreFirstHalfTeamCt,
+                    demo.ScoreFirstHalfTeamT,
+                    demo.ScoreSecondHalfTeamCt,
+                    demo.ScoreSecondHalfTeamT,
+                    demo.WinnerName,
+                    demo.KillCount,
+                    demo.AssistCount,
+                    demo.FiveKillCount,
+                    demo.FourKillCount,
+                    demo.ThreeKillCount,
+                    demo.TwoKillCount,
+                    demo.OneKillCount,
+                    demo.TradeKillCount,
+                    demo.AverageHealthDamage,
+                    demo.DamageHealthCount,
+                    demo.DamageArmorCount,
+                    Math.Round(demo.AverageKast, 2),
+                    demo.ClutchCount,
+                    demo.BombDefusedCount,
+                    demo.BombExplodedCount,
+                    demo.BombPlantedCount,
+                    demo.FlashbangThrownCount,
+                    demo.SmokeThrownCount,
+                    demo.HeThrownCount,
+                    demo.DecoyThrownCount,
+                    demo.MolotovThrownCount,
+                    demo.IncendiaryThrownCount,
+                    demo.WeaponFiredCount,
+                    demo.HitCount,
+                    demo.RoundCount,
+                    demo.Comment,
+                    demo.CheaterCount,
+                };
+                WriteRow(cells);
             }
         }
     }

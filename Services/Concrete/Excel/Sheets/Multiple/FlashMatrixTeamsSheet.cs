@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Core.Models;
 using Core.Models.Events;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
@@ -14,15 +13,23 @@ namespace Services.Concrete.Excel.Sheets.Multiple
         public Dictionary<string, float> Durations { get; set; }
     }
 
-    public class FlashMatrixTeamsSheet : AbstractMultipleSheet
+    internal class FlashMatrixTeamsSheet: MultipleDemoSheet
     {
         private readonly List<TeamMatrixData> _matrixData = new List<TeamMatrixData>();
         private readonly List<string> _teamNames = new List<string>();
 
-        public FlashMatrixTeamsSheet(IWorkbook workbook)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType> { { string.Empty, CellType.String } };
-            Sheet = workbook.CreateSheet("Flash matrix teams");
+            return "Flash matrix teams";
+        }
+
+        protected override string[] GetColumnNames()
+        {
+            return new string[] { };
+        }
+
+        public FlashMatrixTeamsSheet(Workbook workbook): base(workbook)
+        {
         }
 
         public override void AddDemo(Demo demo)
@@ -32,29 +39,33 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             ComputeTeamStats(demo.TeamT, demo.TeamCT, blindEvents);
         }
 
-        protected override void GenerateContent()
+        public override void Generate()
         {
             _teamNames.Sort();
 
-            IRow firstRow = Sheet.CreateRow(0);
-            SetCellValue(firstRow, 0, CellType.String, "Flasher\\Flashed");
-
-            int rowNumber = 1;
-            int columnNumber = 1;
-            foreach (string teamName in _teamNames)
+            var firstRowCells = new List<object> { "Flasher\\Flashed" };
+            foreach (var teamName in _teamNames)
             {
-                TeamMatrixData teamData = _matrixData.Find(data => data.Name == teamName);
-                SetCellValue(firstRow, columnNumber++, CellType.String, teamData.Name);
+                firstRowCells.Add(teamName);
+            }
+            WriteRow(firstRowCells);
 
-                IRow row = Sheet.CreateRow(rowNumber++);
-                SetCellValue(row, 0, CellType.String, teamData.Name);
 
-                int killColumnNumber = 1;
-                foreach (var teamNameColumn in _teamNames)
+            foreach (var flasherTeamName in _teamNames)
+            {
+                var cells = new List<object> { flasherTeamName };
+                foreach (var flashedTeamName in _teamNames)
                 {
-                    double duration = teamData.Durations.ContainsKey(teamNameColumn) ? Math.Round(teamData.Durations[teamNameColumn], 2) : 0;
-                    SetCellValue(row, killColumnNumber++, CellType.Numeric, duration);
+                    var flasherEntry = _matrixData.Find(p => p.Name == flasherTeamName);
+                    var duration = 0d;
+                    if (flasherEntry != null && flasherEntry.Durations.ContainsKey(flashedTeamName))
+                    {
+                        duration = Math.Round(flasherEntry.Durations[flashedTeamName], 2);
+                    }
+                    cells.Add(duration);
                 }
+
+                WriteRow(cells);
             }
         }
 

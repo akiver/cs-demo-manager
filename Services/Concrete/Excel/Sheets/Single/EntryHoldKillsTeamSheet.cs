@@ -1,42 +1,49 @@
 ﻿using System.Collections.Generic;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Single
 {
-    public class EntryHoldKillsTeamSheet : AbstractSingleSheet
+    internal class EntryHoldKillsTeamSheet: SingleDemoSheet
     {
-        public EntryHoldKillsTeamSheet(IWorkbook workbook, Demo demo)
+        protected override string GetName()
         {
-            Headers = new Dictionary<string, CellType>()
-            {
-                { "Name", CellType.String },
-                { "Total", CellType.Numeric },
-                { "Win", CellType.Numeric },
-                { "Loss", CellType.Numeric },
-                { "Rate", CellType.Numeric },
-            };
-            Demo = demo;
-            Sheet = workbook.CreateSheet("Entry Hold Kills Teams");
+            return "Entry Hold Kills Teams";
         }
 
-        protected override void GenerateContent()
+        protected override string[] GetColumnNames()
         {
-            IRow row = Sheet.CreateRow(1);
-            int columnNumber = 0;
-            SetCellValue(row, columnNumber++, CellType.String, Demo.TeamCT.Name);
-            SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryHoldKillCount);
-            SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryHoldKillWonCount);
-            SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamCT.EntryHoldKillLossCount);
-            SetCellValue(row, columnNumber, CellType.Numeric, Demo.TeamCT.RatioEntryHoldKill);
+            return new[]
+            {
+                "Name",
+                "Total",
+                "Win",
+                "Loss",
+                "Rate",
+            };
+        }
 
-            row = Sheet.CreateRow(2);
-            columnNumber = 0;
-            SetCellValue(row, columnNumber++, CellType.String, Demo.TeamT.Name);
-            SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryHoldKillCount);
-            SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryHoldKillWonCount);
-            SetCellValue(row, columnNumber++, CellType.Numeric, Demo.TeamT.EntryHoldKillLossCount);
-            SetCellValue(row, columnNumber, CellType.Numeric, Demo.TeamT.RatioEntryHoldKill);
+        public EntryHoldKillsTeamSheet(Workbook workbook, Demo demo): base(workbook, demo)
+        {
+        }
+
+        public override void Generate()
+        {
+            WriteRow(new List<object>
+            {
+                Demo.TeamCT.Name,
+                Demo.TeamCT.EntryHoldKillCount,
+                Demo.TeamCT.EntryHoldKillWonCount,
+                Demo.TeamCT.EntryHoldKillLossCount,
+                Demo.TeamCT.RatioEntryHoldKill,
+            });
+            WriteRow(new List<object>
+            {
+                Demo.TeamT.Name,
+                Demo.TeamT.EntryHoldKillCount,
+                Demo.TeamT.EntryHoldKillWonCount,
+                Demo.TeamT.EntryHoldKillLossCount,
+                Demo.TeamT.RatioEntryHoldKill,
+            });
         }
     }
 }

@@ -154,10 +154,6 @@ Source: "Manager\bin\x86\Release\MahApps.Metro.IconPacks.Core.dll"; DestDir: "{a
 Source: "Manager\bin\x86\Release\MahApps.Metro.IconPacks.Material.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\Microsoft.Xaml.Behaviors.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\NPOI.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\NPOI.OOXML.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\NPOI.OpenXml4Net.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "Manager\bin\x86\Release\NPOI.OpenXmlFormats.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\protobuf-net.Core.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\protobuf-net.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\steam_api.dll"; DestDir: "{app}"; Flags: ignoreversion

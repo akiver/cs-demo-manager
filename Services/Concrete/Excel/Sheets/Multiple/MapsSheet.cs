@@ -1,131 +1,129 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using Core.Models;
-using NPOI.SS.UserModel;
 
 namespace Services.Concrete.Excel.Sheets.Multiple
 {
-    public class MapsSheet : AbstractMultipleSheet
+    internal class MapsSheet: MultipleDemoSheet
     {
-        private readonly List<Map> _maps = new List<Map>();
+        private readonly Dictionary<string, MapSheetRow> _rowPerMapName = new Dictionary<string, MapSheetRow>();
         private readonly long _focusSteamId = 0;
 
-        public MapsSheet(IWorkbook workbook, long steamId = 0)
+        protected override string GetName()
+        {
+            return "Maps";
+        }
+
+        protected override string[] GetColumnNames()
+        {
+            return new[]
+            {
+                "Name",
+                "Match",
+                "Round",
+                "Round win CT",
+                "Round win T",
+                "Round win pistol round",
+                "Round win eco",
+                "Round win Semi-eco",
+                "Round win force-buy",
+                "Bomb planted",
+                "Bomb defused",
+                "Bomb exploded",
+                "Bomb planted on A",
+                "Bomb planted on B",
+            };
+        }
+
+        public MapsSheet(Workbook workbook, long steamId = 0): base(workbook)
         {
             _focusSteamId = steamId;
-            Headers = new Dictionary<string, CellType>()
-            {
-                { "Name", CellType.String },
-                { "Match", CellType.Numeric },
-                { "Round", CellType.Numeric },
-                { "Round win CT", CellType.Numeric },
-                { "Round win T", CellType.Numeric },
-                { "Round win pistol round", CellType.Numeric },
-                { "Round win eco", CellType.Numeric },
-                { "Round win Semi-eco", CellType.Numeric },
-                { "Round win force-buy", CellType.Numeric },
-                { "Bomb planted", CellType.Numeric },
-                { "Bomb defused", CellType.Numeric },
-                { "Bomb exploded", CellType.Numeric },
-                { "Bomb planted on A", CellType.Numeric },
-                { "Bomb planted on B", CellType.Numeric },
-            };
-            Sheet = workbook.CreateSheet("Maps");
         }
 
         public override void AddDemo(Demo demo)
         {
-            Map map = _maps.Find(m => m.Name == demo.MapName);
-            bool isUnknownMap = map == null;
-            if (isUnknownMap)
+            if (!_rowPerMapName.ContainsKey(demo.MapName))
             {
-                map = new Map
-                {
-                    Name = demo.MapName,
-                };
+                _rowPerMapName.Add(demo.MapName, new MapSheetRow());
             }
 
-            if (_focusSteamId != 0)
+            var row = _rowPerMapName[demo.MapName];
+
+            if (_focusSteamId == 0)
             {
-                Player playerInDemo = demo.Players.FirstOrDefault(player => player.SteamId == _focusSteamId);
-                if (playerInDemo != null)
-                {
-                    ComputePlayerStats(demo, map, playerInDemo);
-                    if (isUnknownMap)
-                    {
-                        _maps.Add(map);
-                    }
-                }
+                ComputeGlobalStats(demo, row);
             }
             else
             {
-                ComputeGlobalStats(demo, map);
-                if (isUnknownMap)
+                var playerInDemo = demo.Players.FirstOrDefault(player => player.SteamId == _focusSteamId);
+                if (playerInDemo != null)
                 {
-                    _maps.Add(map);
+                    ComputePlayerStats(demo, row, playerInDemo);
                 }
             }
         }
 
-        protected override void GenerateContent()
+        public override void Generate()
         {
-            int rowCount = 1;
-            foreach (Map map in _maps)
+            foreach (var entry in _rowPerMapName)
             {
-                IRow row = Sheet.CreateRow(rowCount++);
-                int columnNumber = 0;
-                SetCellValue(row, columnNumber++, CellType.String, map.Name);
-                SetCellValue(row, columnNumber++, CellType.String, map.MatchCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.RoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.WinCounterTerroritsCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.WinTerroristCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.WinPistolRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.WinEcoRoundCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.WinSemiEcoCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.WinForceBuyCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.BombPlantedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.BombDefusedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.BombExplodedCount);
-                SetCellValue(row, columnNumber++, CellType.Numeric, map.BombPlantedOnACount);
-                SetCellValue(row, columnNumber, CellType.Numeric, map.BombPlantedOnBCount);
+                var row = entry.Value;
+                var cells = new List<object>
+                {
+                    entry.Key,
+                    row.MatchCount,
+                    row.RoundCount,
+                    row.WinCounterTerroristCount,
+                    row.WinTerroristCount,
+                    row.WinPistolRoundCount,
+                    row.WinEcoRoundCount,
+                    row.WinSemiEcoCount,
+                    row.WinForceBuyCount,
+                    row.BombPlantedCount,
+                    row.BombDefusedCount,
+                    row.BombExplodedCount,
+                    row.BombPlantedOnACount,
+                    row.BombPlantedOnBCount,
+                };
+                WriteRow(cells);
             }
         }
 
-        private void ComputeGlobalStats(Demo demo, Map map)
+        private static void ComputeGlobalStats(Demo demo, MapSheetRow row)
         {
-            map.MatchCount++;
-            map.RoundCount += demo.Rounds.Count();
-            map.BombPlantedCount += demo.BombPlantedCount;
-            map.BombDefusedCount += demo.BombDefusedCount;
-            map.BombExplodedCount += demo.BombExplodedCount;
-            map.BombPlantedOnACount += demo.BombPlanted.Count(bomb => bomb.Site == "A");
-            map.BombPlantedOnBCount += demo.BombPlanted.Count(bomb => bomb.Site == "B");
-            map.WinCounterTerroritsCount += demo.Rounds.Count(round => round.WinnerSide == Side.CounterTerrorist);
-            map.WinTerroristCount += demo.Rounds.Count(round => round.WinnerSide == Side.Terrorist);
-            List<Round> roundsWonByTeamInTrouble = demo.Rounds.Where(round => round.WinnerSide == round.SideTrouble).ToList();
-            map.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ECO);
-            map.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SEMI_ECO);
-            map.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.FORCE_BUY);
-            map.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PISTOL_ROUND);
+            row.MatchCount++;
+            row.RoundCount += demo.Rounds.Count();
+            row.BombPlantedCount += demo.BombPlantedCount;
+            row.BombDefusedCount += demo.BombDefusedCount;
+            row.BombExplodedCount += demo.BombExplodedCount;
+            row.BombPlantedOnACount += demo.BombPlanted.Count(bomb => bomb.Site == "A");
+            row.BombPlantedOnBCount += demo.BombPlanted.Count(bomb => bomb.Site == "B");
+            row.WinCounterTerroristCount += demo.Rounds.Count(round => round.WinnerSide == Side.CounterTerrorist);
+            row.WinTerroristCount += demo.Rounds.Count(round => round.WinnerSide == Side.Terrorist);
+            var roundsWonByTeamInTrouble = demo.Rounds.Where(round => round.WinnerSide == round.SideTrouble).ToList();
+            row.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ECO);
+            row.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SEMI_ECO);
+            row.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.FORCE_BUY);
+            row.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PISTOL_ROUND);
         }
 
-        private void ComputePlayerStats(Demo demo, Map map, Player player)
+        private void ComputePlayerStats(Demo demo, MapSheetRow row, Player player)
         {
-            map.MatchCount++;
-            map.RoundCount += demo.Rounds.Count();
-            map.BombPlantedCount += demo.BombPlanted.Count(bomb => bomb.PlanterSteamId == _focusSteamId);
-            map.BombDefusedCount += demo.BombDefused.Count(bomb => bomb.DefuserSteamId == _focusSteamId);
-            map.BombExplodedCount += demo.BombExploded.Count(bomb => bomb.PlanterSteamId == _focusSteamId);
-            map.BombPlantedOnACount += demo.BombPlanted.Count(bomb => bomb.PlanterSteamId == _focusSteamId && bomb.Site == "A");
-            map.BombPlantedOnBCount += demo.BombPlanted.Count(bomb => bomb.PlanterSteamId == _focusSteamId && bomb.Site == "B");
-            List<Round> roundsWon = demo.Rounds.Where(round => round.WinnerName == player.TeamName).ToList();
-            map.WinCounterTerroritsCount += roundsWon.Count(round => round.WinnerSide == Side.CounterTerrorist);
-            map.WinTerroristCount += roundsWon.Count(round => round.WinnerSide == Side.Terrorist);
-            List<Round> roundsWonByTeamInTrouble = roundsWon.Where(round => round.WinnerSide == round.SideTrouble).ToList();
-            map.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ECO);
-            map.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SEMI_ECO);
-            map.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.FORCE_BUY);
-            map.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PISTOL_ROUND);
+            row.MatchCount++;
+            row.RoundCount += demo.Rounds.Count();
+            row.BombPlantedCount += demo.BombPlanted.Count(bomb => bomb.PlanterSteamId == _focusSteamId);
+            row.BombDefusedCount += demo.BombDefused.Count(bomb => bomb.DefuserSteamId == _focusSteamId);
+            row.BombExplodedCount += demo.BombExploded.Count(bomb => bomb.PlanterSteamId == _focusSteamId);
+            row.BombPlantedOnACount += demo.BombPlanted.Count(bomb => bomb.PlanterSteamId == _focusSteamId && bomb.Site == "A");
+            row.BombPlantedOnBCount += demo.BombPlanted.Count(bomb => bomb.PlanterSteamId == _focusSteamId && bomb.Site == "B");
+            var roundsWon = demo.Rounds.Where(round => round.WinnerName == player.TeamName).ToList();
+            row.WinCounterTerroristCount += roundsWon.Count(round => round.WinnerSide == Side.CounterTerrorist);
+            row.WinTerroristCount += roundsWon.Count(round => round.WinnerSide == Side.Terrorist);
+            var roundsWonByTeamInTrouble = roundsWon.Where(round => round.WinnerSide == round.SideTrouble).ToList();
+            row.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ECO);
+            row.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SEMI_ECO);
+            row.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.FORCE_BUY);
+            row.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PISTOL_ROUND);
         }
     }
 }
