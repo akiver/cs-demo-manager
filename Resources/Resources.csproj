@@ -267,6 +267,12 @@
   <ItemGroup>
     <Resource Include="images\maps\overview\de_tuscan.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_breach.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\preview\breach.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

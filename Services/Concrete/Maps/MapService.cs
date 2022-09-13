@@ -39,6 +39,7 @@ namespace Services.Concrete.Maps
         private const string CHLORINE = "de_chlorine";
         private const string ANCIENT = "de_ancient";
         private const string TUSCAN = "de_tuscan";
+        private const string BREACH = "de_breach";
 
         public static string[] SimpleRadarMaps =
         {
@@ -57,7 +58,7 @@ namespace Services.Concrete.Maps
             DUST2, INFERNO, NUKE, CACHE, SEASON, TRAIN, CBBLE, OVERPASS,
             MIRAGE, EMPIRE, SANTORINI, TULIP, ROYAL, CRUISE, COAST, MIKLA,
             CANALS, AGENCY, AUSTRIA, SUBZERO, BIOME, OFFICE, VERTIGO, ANUBIS,
-            CHLORINE, ANCIENT, TUSCAN,
+            CHLORINE, ANCIENT, TUSCAN, BREACH,
         };
 
         public Map Map { get; set; }
@@ -164,6 +165,9 @@ namespace Services.Concrete.Maps
                     break;
                 case TUSCAN:
                     Map = new Tuscan();
+                    break;
+                case BREACH:
+                    Map = new Breach();
                     break;
                 default:
                     throw new MapUnavailableException(demo.MapName);
