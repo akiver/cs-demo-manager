@@ -51,6 +51,8 @@ namespace Services.Concrete.Maps
             "de_new_nuke",
             "de_overpass",
             "de_train",
+            "de_ancient",
+            "de_vertigo",
         };
 
         public static string[] Maps =

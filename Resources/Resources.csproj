@@ -273,6 +273,12 @@
   <ItemGroup>
     <Resource Include="images\maps\preview\breach.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\simpleradar\de_ancient.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\simpleradar\de_vertigo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
