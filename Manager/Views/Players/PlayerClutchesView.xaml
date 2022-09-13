@@ -332,7 +332,7 @@
                     <DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithoutDelayCommand}"
+                                <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
                                         CommandParameter="{Binding SelectedItem.Tick, ElementName=ClutchsDataGrid}"
                                         Style="{StaticResource BaseButton}"
                                         Content="{x:Static properties:Resources.Watch}" />
