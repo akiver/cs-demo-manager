@@ -264,6 +264,9 @@
   <ItemGroup>
     <Resource Include="images\maps\preview\ancient.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\maps\overview\de_tuscan.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>

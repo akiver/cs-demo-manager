@@ -117,6 +117,7 @@
     <Compile Include="Models\Maps\Season.cs" />
     <Compile Include="Models\Maps\Train.cs" />
     <Compile Include="Models\Maps\Tulip.cs" />
+    <Compile Include="Models\Maps\Tuscan.cs" />
     <Compile Include="Models\Maps\Vertigo.cs" />
     <Compile Include="Models\protobuf\cstrike15_gcmessages.cs" />
     <Compile Include="Models\protobuf\descriptor.cs" />
