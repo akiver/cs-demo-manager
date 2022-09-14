@@ -9,6 +9,7 @@
              xmlns:properties="clr-namespace:Manager.Properties"
              xmlns:controls="clr-namespace:Manager.Controls"
              xmlns:multiSelectComboBox="clr-namespace:Manager.Internals.MultiSelectComboBox"
+             xmlns:internal="clr-namespace:Manager.Internals"
              mc:Ignorable="d"
              d:DesignHeight="720"
              d:DesignWidth="1280"
@@ -240,7 +241,7 @@
                   Style="{StaticResource DataGridStyle}"
                   ItemsSource="{Binding Demos, IsAsync=True}"
                   RowStyle="{StaticResource DataGridRowMainListDemosStyle}"
-                  mahapps:MultiSelectorHelper.SelectedItems="{Binding SelectedDemos}">
+                  internal:MultiSelectorHelper.SelectedItems="{Binding SelectedDemos}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"

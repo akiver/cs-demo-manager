@@ -195,6 +195,7 @@
     <Compile Include="Internals\MultiSelectComboBox\MultiSelectComboBox.xaml.cs">
       <DependentUpon>MultiSelectComboBox.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Internals\MultiSelectorHelper.cs" />
     <Compile Include="Internals\MultiSelect\IMultiSelectCollectionView.cs" />
     <Compile Include="Internals\Mouse\MouseGestureExtended.cs" />
     <Compile Include="Internals\MultiSelect\MultiSelect.cs" />

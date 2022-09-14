@@ -1093,7 +1093,7 @@ namespace Core.Models
 
         public override int GetHashCode()
         {
-            return base.GetHashCode();
+            return Path.GetHashCode();
         }
 
         public Demo Copy()
