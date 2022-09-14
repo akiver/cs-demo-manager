@@ -4278,6 +4278,10 @@ Error: {0}.</target>
           <source>Video codec</source>
           <target state="new">Video codec</target>
         </trans-unit>
+        <trans-unit id="LabelDate" translate="yes" xml:space="preserve">
+          <source>Date</source>
+          <target state="new">Date</target>
+        </trans-unit>
       </group>
     </body>
   </file>

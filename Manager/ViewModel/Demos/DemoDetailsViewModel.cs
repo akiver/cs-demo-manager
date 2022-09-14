@@ -20,8 +20,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -220,6 +222,20 @@ namespace Manager.ViewModel.Demos
         {
             get { return _playersTeam2Collection; }
             set { Set(() => PlayersTeam2Collection, ref _playersTeam2Collection, value); }
+        }
+
+        public string Date
+        {
+            get
+            {
+                if (Settings.Default.DateFormatEuropean)
+                {
+                    return Demo.Date.ToString("dd-MM-yyyy HH:mm:ss", CultureInfo.InvariantCulture);
+                }
+
+                return Demo.Date.ToString("yyyy-MM-dd HH:mm:ss", CultureInfo.InvariantCulture);
+            }
+
         }
 
         #endregion

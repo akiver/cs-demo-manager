@@ -285,6 +285,22 @@
                                     <ColumnDefinition Width="*" />
                                 </Grid.ColumnDefinitions>
 
+                                <TextBlock Text="{x:Static properties:Resources.LabelDate}"
+                                           Grid.Column="0"
+                                           Style="{StaticResource TextBlockHighlight}">
+                                    <Run Text=" " />
+                                </TextBlock>
+                                <TextBlock Text="{Binding Date}"
+                                           Grid.Column="1"
+                                           Style="{StaticResource TextBlockSmall}" />
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
                                 <TextBlock Text="{x:Static properties:Resources.LabelType}"
                                            Grid.Column="0"
                                            Style="{StaticResource TextBlockHighlight}">

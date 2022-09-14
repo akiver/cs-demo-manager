@@ -3307,6 +3307,9 @@ Error: {0}.</value>
   <data name="LabelAudioCodec" xml:space="preserve">
     <value>Audio codec</value>
   </data>
+  <data name="LabelDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
   <data name="LabelVideoCodec" xml:space="preserve">
     <value>Video codec</value>
   </data>

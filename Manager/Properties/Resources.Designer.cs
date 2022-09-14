@@ -5358,6 +5358,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string LabelDate {
+            get {
+                return ResourceManager.GetString("LabelDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Display time (seconds):.
         /// </summary>
         public static string LabelDisplayTimeSeconds {
