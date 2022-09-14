@@ -4271,6 +4271,10 @@ Error: {0}.</target>
           <source>Invalid demo file.</source>
           <target state="final">Le fichier de la démo est invalide.</target>
         </trans-unit>
+        <trans-unit id="DialogExportAllDemosConfirmation" translate="yes" xml:space="preserve">
+          <source>Do you want to export only the selected demos or all the demos within the selected folder?</source>
+          <target state="final">Voulez-vous exporter seulement les démos sélectionnées ou toutes les démos dans le dossier courant?</target>
+        </trans-unit>
       </group>
     </body>
   </file>

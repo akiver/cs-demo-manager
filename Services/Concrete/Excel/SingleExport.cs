@@ -41,6 +41,7 @@ namespace Services.Concrete.Excel
                     demo = await analyzer.AnalyzeDemoAsync(cancellationToken);
                     cancellationToken.ThrowIfCancellationRequested();
                     await _cacheService.WriteDemoDataCache(demo);
+                    _configuration.OnAnalyzeSuccess?.Invoke(demo);
                 }
                 catch (Exception ex)
                 {

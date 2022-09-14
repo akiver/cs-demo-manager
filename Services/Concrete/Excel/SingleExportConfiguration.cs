@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Core.Models;
 using Core.Models.Source;
 
 namespace Services.Concrete.Excel
@@ -12,6 +13,7 @@ namespace Services.Concrete.Excel
         public Source Source;
         public Action OnProcessingDemo = null;
         public Action OnAnalyzeStart = null;
+        public Action<Demo> OnAnalyzeSuccess = null;
         public CancellationTokenSource CancellationToken = new CancellationTokenSource();
     }
 }

@@ -239,16 +239,12 @@
                   x:Name="DataGridDemos"
                   Style="{StaticResource DataGridStyle}"
                   ItemsSource="{Binding Demos, IsAsync=True}"
-                  RowStyle="{StaticResource DataGridRowMainListDemosStyle}">
+                  RowStyle="{StaticResource DataGridRowMainListDemosStyle}"
+                  mahapps:MultiSelectorHelper.SelectedItems="{Binding SelectedDemos}">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="MouseDoubleClick">
                     <i:InvokeCommandAction Command="{Binding Source={StaticResource Locator}, Path=DemoList.ShowDemoDetailsCommand}"
                                            CommandParameter="{Binding SelectedDemos}" />
-                </i:EventTrigger>
-                <i:EventTrigger EventName="SelectionChanged">
-                    <i:InvokeCommandAction
-                        Command="{Binding DemosSelectionChangedCommand}"
-                        CommandParameter="{Binding SelectedItems, ElementName=DataGridDemos}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
             <DataGrid.Columns>

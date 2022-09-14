@@ -3301,4 +3301,7 @@ Error: {0}.</value>
   <data name="DialogInvalidDemo" xml:space="preserve">
     <value>Invalid demo file.</value>
   </data>
+  <data name="DialogExportAllDemosConfirmation" xml:space="preserve">
+    <value>Do you want to export only the selected demos or all the demos within the selected folder?</value>
+  </data>
 </root>

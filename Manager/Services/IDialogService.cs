@@ -31,6 +31,8 @@ namespace Manager.Services
 
         Task<MessageDialogResult> ShowAnalyzeAllDemosAsync();
 
+        Task<MessageDialogResult> ShowExportAllDemosAsync();
+
         Task<MessageDialogResult> ShowHighLowWatchAsync();
 
         Task<MessageDialogResult> ShowHeatmapDataNotFoundAsync(string eventType);

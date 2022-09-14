@@ -1947,6 +1947,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do you want to export only the selected demos or all the demos within the selected folder?.
+        /// </summary>
+        public static string DialogExportAllDemosConfirmation {
+            get {
+                return ResourceManager.GetString("DialogExportAllDemosConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do you want to export data into a single file or in multiple files?.
         /// </summary>
         public static string DialogExportMultipleOrSingle {

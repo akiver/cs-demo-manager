@@ -1,7 +1,6 @@
 #region Imports
 
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -94,7 +93,7 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand<ObservableCollection<Demo>> _removeDemosFromCacheCommand;
 
-        private RelayCommand<ObservableCollection<Demo>> _exportExcelCommand;
+        private RelayCommand _exportExcelCommand;
 
         private RelayCommand _showMoreDemosCommand;
 
@@ -129,8 +128,6 @@ namespace Manager.ViewModel.Demos
         private RelayCommand<string> _saveStatusDemoCommand;
 
         private RelayCommand<string> _setDemoSourceCommand;
-
-        private RelayCommand<IList> _demosSelectionChangedCommand;
 
         private RelayCommand _stopAnalyzeCommand;
 
@@ -512,13 +509,13 @@ namespace Manager.ViewModel.Demos
             }
         }
 
-        public RelayCommand<ObservableCollection<Demo>> ExportExcelCommand
+        public RelayCommand ExportExcelCommand
         {
             get
             {
                 return _exportExcelCommand
-                       ?? (_exportExcelCommand = new RelayCommand<ObservableCollection<Demo>>(
-                           async demos =>
+                       ?? (_exportExcelCommand = new RelayCommand(
+                           async () =>
                            {
                                if (Properties.Settings.Default.SelectedStatsAccountSteamID != 0)
                                {
@@ -531,7 +528,43 @@ namespace Manager.ViewModel.Demos
                                    }
                                }
 
-                               if (demos.Count > 1)
+                               var demosToExport = new List<Demo>(SelectedDemos.ToList());
+                               var areAllDemosSelected = SelectedDemos.Count == Demos.Count;
+                               if (areAllDemosSelected)
+                               {
+                                   MessageDialogResult result = await _dialogService.ShowExportAllDemosAsync();
+                                   bool isCancel = result == MessageDialogResult.FirstAuxiliary;
+                                   if (isCancel)
+                                   {
+                                       return;
+                                   }
+
+                                   var isExportAllDemos = result == MessageDialogResult.Negative;
+                                   if (isExportAllDemos)
+                                   {
+                                       Notification = Properties.Resources.NotificationLoadingAllDemos;
+                                       List<string> folders = new List<string>();
+                                       if (SelectedFolder != null)
+                                       {
+                                           folders.Add(SelectedFolder);
+                                       }
+                                       else
+                                       {
+                                           folders = Folders.ToList();
+                                       }
+
+                                       var allDemos = await _demosService.GetDemosHeader(folders);
+                                       foreach (var demo in allDemos)
+                                       {
+                                           if (!demosToExport.Contains(demo))
+                                           {
+                                               demosToExport.Add(demo);
+                                           }
+                                       }
+                                   }
+                               }
+
+                               if (demosToExport.Count > 1)
                                {
                                    var isMultipleExport = await _dialogService.ShowExportDemosAsync();
                                    switch (isMultipleExport)
@@ -558,7 +591,7 @@ namespace Manager.ViewModel.Demos
 
                                                    List<string> demoPaths = new List<string>();
                                                    _cts = new CancellationTokenSource();
-                                                   foreach (Demo demo in demos)
+                                                   foreach (var demo in demosToExport)
                                                    {
                                                        if (demo.SourceName == Pov.NAME)
                                                        {
@@ -575,17 +608,7 @@ namespace Manager.ViewModel.Demos
                                                        CancellationToken = _cts,
                                                        OnProcessingDemo = (demoPath, demoCount, totalCount) => Notification = $"Retrieving demo {demoPath}",
                                                        OnAnalyzeStart = demoPath => Notification = string.Format(Properties.Resources.NotificationAnalyzingDemo, demoPath),
-                                                       OnAnalyzeSuccess = demo =>
-                                                       {
-                                                           foreach (Demo actualDemo in Demos.ToList())
-                                                           {
-                                                               if (actualDemo.Id == demo.Id)
-                                                               {
-                                                                   Demos.Remove(actualDemo);
-                                                                   Demos.Add(demo);
-                                                               }
-                                                           }
-                                                       },
+                                                       OnAnalyzeSuccess = OnAnalyzeSuccess,
                                                        OnGeneratingXlsxFile = () => Notification = "Generating XLSX...",
                                                    };
                                                    await _excelService.GenerateXls(configuration);
@@ -628,7 +651,7 @@ namespace Manager.ViewModel.Demos
                                                    _cts = new CancellationTokenSource();
                                                    int demosExportFailedCount = 0;
 
-                                                   foreach (Demo demo in demos)
+                                                   foreach (var demo in demosToExport)
                                                    {
                                                        try
                                                        {
@@ -640,6 +663,7 @@ namespace Manager.ViewModel.Demos
                                                                DemoPath = demo.Path,
                                                                FileName = exportFilePath,
                                                                CancellationToken = _cts,
+                                                               OnAnalyzeSuccess = OnAnalyzeSuccess,
                                                            };
                                                            await _excelService.GenerateXls(configuration);
                                                        }
@@ -669,7 +693,7 @@ namespace Manager.ViewModel.Demos
                                }
                                else
                                {
-                                   Demo demo = demos.First();
+                                   var demo = demosToExport.First();
                                    SaveFileDialog saveExportDialog = new SaveFileDialog
                                    {
                                        FileName = demo.Name.Substring(0, demo.Name.Length - 4) + "-export.xlsx",
@@ -690,6 +714,7 @@ namespace Manager.ViewModel.Demos
                                                DemoPath = demo.Path,
                                                FileName = saveExportDialog.FileName,
                                                CancellationToken = _cts,
+                                               OnAnalyzeSuccess = OnAnalyzeSuccess,
                                            };
                                            await _excelService.GenerateXls(configuration);
                                        }
@@ -724,7 +749,7 @@ namespace Manager.ViewModel.Demos
 
                                CommandManager.InvalidateRequerySuggested();
                            },
-                           demos => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
+                           () => SelectedDemos != null && SelectedDemos.Any() && !IsBusy));
             }
         }
 
@@ -1107,31 +1132,6 @@ namespace Manager.ViewModel.Demos
                        ?? (_setDemoSourceCommand = new RelayCommand<string>(
                            async source => { SelectedDemos = await _demosService.SetSource(SelectedDemos, source); },
                            source => SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy));
-            }
-        }
-
-        /// <summary>
-        /// Command fired when a demo selection is done
-        /// </summary>
-        public RelayCommand<IList> DemosSelectionChangedCommand
-        {
-            get
-            {
-                return _demosSelectionChangedCommand
-                       ?? (_demosSelectionChangedCommand = new RelayCommand<IList>(
-                           demos =>
-                           {
-                               if (demos == null)
-                               {
-                                   return;
-                               }
-
-                               SelectedDemos.Clear();
-                               foreach (Demo demo in demos)
-                               {
-                                   SelectedDemos.Add(demo);
-                               }
-                           }));
             }
         }
 
@@ -1655,6 +1655,26 @@ namespace Manager.ViewModel.Demos
         private void UpdateSuspectBannedCount(int count)
         {
             NewBannedPlayerCount += count;
+        }
+
+        private void OnAnalyzeSuccess(Demo newDemo)
+        {
+            Application.Current.Dispatcher.Invoke(delegate
+            {
+                var currentDemo = Demos.FirstOrDefault(demo => demo.Id == newDemo.Id);
+                if (currentDemo == null)
+                {
+                    return;
+                }
+
+                var isInSelection = SelectedDemos.Contains(newDemo);
+                Demos.Remove(currentDemo);
+                Demos.Add(newDemo);
+                if (isInSelection)
+                {
+                    SelectedDemos.Add(newDemo);
+                }
+            });
         }
 
         private void HandleSelectedAccountChangedMessage(SelectedAccountChangedMessage msg)

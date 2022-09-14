@@ -108,6 +108,20 @@ namespace Manager.Services
                 MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
         }
 
+        public async Task<MessageDialogResult> ShowExportAllDemosAsync()
+        {
+            var metroWindow = Application.Current.MainWindow as MetroWindow;
+            var dialogOptions = new MetroDialogSettings
+            {
+                AffirmativeButtonText = Properties.Resources.Selection,
+                NegativeButtonText = Properties.Resources.AllFemale,
+                FirstAuxiliaryButtonText = Properties.Resources.Cancel,
+            };
+
+            return await metroWindow.ShowMessageAsync(Properties.Resources.Export, Properties.Resources.DialogExportAllDemosConfirmation,
+                MessageDialogStyle.AffirmativeAndNegativeAndSingleAuxiliary, dialogOptions);
+        }
+
         public async Task<MessageDialogResult> ShowHighLowWatchAsync()
         {
             MetroWindow metroWindow = Application.Current.MainWindow as MetroWindow;
