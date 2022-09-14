@@ -125,6 +125,8 @@ namespace Manager.ViewModel.Players
 
         public List<KillEvent> Kills => Demo.Kills.Where(k => k.KillerSteamId == CurrentPlayer.SteamId).ToList();
 
+        public List<KillEvent> Deaths => Demo.Kills.Where(k => k.KilledSteamId == CurrentPlayer.SteamId).ToList();
+
         #endregion
 
         #region Commands

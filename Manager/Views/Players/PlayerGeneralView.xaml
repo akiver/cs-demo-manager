@@ -24,6 +24,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
 
@@ -167,7 +168,58 @@
             </Border>
         </Grid>
 
-        <Grid Grid.Column="2"
+        <Grid Grid.Column="2" Margin="10 0 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0"
+                       Text="{x:Static properties:Resources.Deaths}"
+                       Style="{StaticResource TextBlockSectionTitle}" />
+            <Border Grid.Row="1"
+                    BorderBrush="{DynamicResource MahApps.Brushes.ThemeForeground}"
+                    BorderThickness="1"
+                    Padding="10">
+                <DataGrid Name="DeathsDataGrid"
+                          ItemsSource="{Binding Deaths}"
+                          Style="{StaticResource DataGridStyle}">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn HeaderStyle="{StaticResource RoundNumberHeader}"
+                                            Width="Auto"
+                                            Header="{x:Static properties:Resources.Round}"
+                                            Binding="{Binding RoundNumber}" />
+                        <DataGridTextColumn HeaderStyle="{StaticResource KilledNameHeader}"
+                                            Width="Auto"
+                                            Header="{x:Static properties:Resources.HeaderKiller}"
+                                            Binding="{Binding KillerName}" />
+                        <DataGridTextColumn HeaderStyle="{StaticResource AssisterNameHeader}"
+                                            Width="Auto"
+                                            Header="{x:Static properties:Resources.HeaderAssister}"
+                                            Binding="{Binding AssisterName}" />
+                        <DataGridTextColumn HeaderStyle="{StaticResource HeadshotHeader}"
+                                            Width="Auto"
+                                            Header="{x:Static properties:Resources.HeaderHeadshots}"
+                                            Binding="{Binding IsHeadshot, Converter={StaticResource BooleanToStringConverter}}" />
+                        <DataGridTextColumn HeaderStyle="{StaticResource WeaponNameHeader}"
+                                            Width="Auto"
+                                            Header="{x:Static properties:Resources.HeaderWeapon}"
+                                            Binding="{Binding Weapon.Name}" />
+                        <DataGridTemplateColumn Header="{x:Static properties:Resources.Watch}">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Command="{Binding Source={StaticResource Locator}, Path=PlayerDetails.WatchDemoWithDelayCommand}"
+                                            CommandParameter="{Binding SelectedItem.Tick, ElementName=DeathsDataGrid}"
+                                            Style="{DynamicResource BaseButton}"
+                                            Content="{x:Static properties:Resources.Watch}" />
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="3"
               Margin="10 0 0 0"
               Width="Auto">
             <Grid.RowDefinitions>
