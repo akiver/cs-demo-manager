@@ -5,6 +5,11 @@ namespace Services.Models.Movie
 {
     public class MovieConfiguration
     {
+        public static string DefaultAudioCodec = "libmp3lame";
+        public static string DefaultVideoCodec = "libx264";
+        public static int DefaultAudioBitrate = 256;
+        public static int DefaultVideoQuality = 23;
+
         public Demo Demo { get; set; }
 
         /// <summary>s
@@ -76,25 +81,23 @@ namespace Services.Models.Movie
 
         /// <summary>
         /// Video codec used for FFmpeg.
-        /// Force x264 ATM, maybe make it configurable?
         /// </summary>
-        public string VideoCodec { get; set; } = "libx264";
+        public string VideoCodec { get; set; } = DefaultVideoCodec;
 
         /// <summary>
         /// x264 quality (crf parameter value).
         /// </summary>
-        public int VideoQuality { get; set; } = 23;
+        public int VideoQuality { get; set; } = DefaultVideoQuality;
 
         /// <summary>
         /// Audio codec used for FFmpeg.
-        /// Force MP3 ATM, maybe make it configurable?
         /// </summary>
-        public string AudioCodec { get; set; } = "libmp3lame";
+        public string AudioCodec { get; set; } = DefaultAudioCodec;
 
         /// <summary>
         /// Audio bitrate used for FFmpeg.
         /// </summary>
-        public int AudioBitrate { get; set; } = 256;
+        public int AudioBitrate { get; set; } = DefaultAudioBitrate;
 
         /// <summary>
         /// Path where raw files (tga and wav) will be saved.

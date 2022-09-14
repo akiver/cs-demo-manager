@@ -395,6 +395,11 @@
                                                 Style="{DynamicResource GeneralButton}"
                                                 IsEnabled="{Binding IsFFmpegInstalled}"
                                                 Command="{Binding NavigateToFFmpegFolder}" />
+                                        <Button Content="{x:Static properties:Resources.Reset}"
+                                                ToolTip="{x:Static properties:Resources.Reset}"
+                                                Style="{DynamicResource GeneralButton}"
+                                                IsEnabled="{Binding IsFFmpegInstalled}"
+                                                Command="{Binding ResetFfmpegConfigurationCommand}" />
                                     </StackPanel>
                                 </DockPanel>
                             </Border>
@@ -404,6 +409,26 @@
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Label Grid.Column="0"
+                                           Content="{x:Static properties:Resources.LabelVideoCodec}" />
+                                    <TextBox Grid.Column="1"
+                                             Style="{StaticResource MovieTextBox}"
+                                             Text="{Binding VideoCodec}"
+                                             IsEnabled="{Binding GenerateVideoFile, Mode=OneWay}" />
+                                    <Label Grid.Column="2"
+                                           Content="{x:Static properties:Resources.LabelAudioCodec}" />
+                                    <TextBox Grid.Column="3"
+                                             Style="{StaticResource MovieTextBox}"
+                                             Text="{Binding AudioCodec}"
+                                             IsEnabled="{Binding GenerateVideoFile, Mode=OneWay}" />
+                                </Grid>
+
+                                <Grid Margin="0 5 0 0">
+                                    <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
                                         <ColumnDefinition Width="Auto" />
@@ -420,8 +445,8 @@
                                                            NumericInputMode="Numbers"
                                                            IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
                                                            Value="{Binding VideoQuality}" />
-                                    <Label Grid.Column="4" Content="{x:Static properties:Resources.LabelAudioBitrate}" />
-                                    <ComboBox Grid.Column="5"
+                                    <Label Grid.Column="2" Content="{x:Static properties:Resources.LabelAudioBitrate}" />
+                                    <ComboBox Grid.Column="3"
                                               IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
                                               ItemsSource="{Binding AudioBitrateValues}"
                                               SelectedItem="{Binding AudioBitrate}" />

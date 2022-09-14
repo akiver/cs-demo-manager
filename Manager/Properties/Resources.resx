@@ -3304,4 +3304,10 @@ Error: {0}.</value>
   <data name="DialogExportAllDemosConfirmation" xml:space="preserve">
     <value>Do you want to export only the selected demos or all the demos within the selected folder?</value>
   </data>
+  <data name="LabelAudioCodec" xml:space="preserve">
+    <value>Audio codec</value>
+  </data>
+  <data name="LabelVideoCodec" xml:space="preserve">
+    <value>Video codec</value>
+  </data>
 </root>

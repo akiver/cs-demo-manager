@@ -392,5 +392,11 @@
     <Setting Name="ShowKastColumn" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="MovieAudioCodec" Type="System.String" Scope="User">
+      <Value Profile="(Default)">libmp3lame</Value>
+    </Setting>
+    <Setting Name="MovieVideoCodec" Type="System.String" Scope="User">
+      <Value Profile="(Default)">libx264</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

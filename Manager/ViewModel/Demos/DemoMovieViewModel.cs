@@ -69,6 +69,7 @@ namespace Manager.ViewModel.Demos
         private RelayCommand _toggleDemoCommentVisibility;
         private RelayCommand<PlayersSelection> _copyPlayerSteamId;
         private RelayCommand<MouseButtonEventArgs> _timelineRightClick;
+        public RelayCommand ResetFfmpegConfigurationCommand { get; }
         private ObservableCollection<TimelineEvent> _timelineEventList = new ObservableCollection<TimelineEvent>();
         private MovieService _movieService;
         private MovieConfiguration _movieConfig = new MovieConfiguration();
@@ -235,6 +236,38 @@ namespace Manager.ViewModel.Demos
         {
             get => _teamTplayersSelection;
             set { Set(() => TeamTplayersSelection, ref _teamTplayersSelection, value); }
+        }
+
+        public string AudioCodec
+        {
+            get => _movieConfig.AudioCodec;
+            set
+            {
+                if (value == "")
+                {
+                    value = MovieConfiguration.DefaultAudioCodec;
+                }
+                _movieConfig.AudioCodec = value;
+                Settings.Default.MovieAudioCodec = value;
+                RaisePropertyChanged(() => AudioCodec);
+                RaisePropertyChanged(() => FFmpegCommand);
+            }
+        }
+
+        public string VideoCodec
+        {
+            get => _movieConfig.VideoCodec;
+            set
+            {
+                if (value == "")
+                {
+                    value = MovieConfiguration.DefaultVideoCodec;
+                }
+                _movieConfig.VideoCodec = value;
+                Settings.Default.MovieVideoCodec = value;
+                RaisePropertyChanged(() => VideoCodec);
+                RaisePropertyChanged(() => FFmpegCommand);
+            }
         }
 
         public bool UseVirtualDub
@@ -1493,6 +1526,7 @@ namespace Manager.ViewModel.Demos
                 IsBusy = false;
             }
 
+            ResetFfmpegConfigurationCommand = new RelayCommand(ResetFfmpegConfiguration);
             Messenger.Default.Register<CustomHlaeLocationChangedMessage>(this, OnHlaeCustomLocationChanged);
             Messenger.Default.Register<CustomFfmpegLocationChanged>(this, OnFfmpegCustomLocationChanged);
         }
@@ -1541,6 +1575,14 @@ namespace Manager.ViewModel.Demos
             Notification = Properties.Resources.VirtualDubEncodingInProgress;
         }
 
+        private void ResetFfmpegConfiguration()
+        {
+            VideoCodec = MovieConfiguration.DefaultVideoCodec;
+            AudioCodec = MovieConfiguration.DefaultAudioCodec;
+            AudioBitrate = MovieConfiguration.DefaultAudioBitrate;
+            VideoQuality = MovieConfiguration.DefaultVideoQuality;
+        }
+
         private void InitConfiguration()
         {
             OutputFileName = Demo.NameWithoutExtension;
@@ -1558,6 +1600,8 @@ namespace Manager.ViewModel.Demos
             EnableHlaeConfigParentFolder = Settings.Default.MovieEnableHlaeConfigParent;
             HlaeConfigParentFolderPath = Settings.Default.MovieHlaeConfigParentFolderPath;
             DeathNoticesDisplayTime = Settings.Default.MovieDeathNoticesDisplayTime;
+            AudioCodec = Settings.Default.MovieAudioCodec;
+            VideoCodec = Settings.Default.MovieVideoCodec;
             if (!Settings.Default.MovieShowDefaultCfg)
             {
                 Cfg = Settings.Default.MovieUserCfg;
@@ -1579,7 +1623,9 @@ namespace Manager.ViewModel.Demos
                 Width = Width,
                 Height = Height,
                 UseVirtualDub = UseVirtualDub,
+                VideoCodec = Settings.Default.MovieVideoCodec,
                 VideoQuality = VideoQuality,
+                AudioCodec = Settings.Default.MovieAudioCodec,
                 AudioBitrate = AudioBitrate,
                 CleanUpRawFiles = CleanUpRawFiles,
                 OpenInExplorer = OpenInExplorer,

@@ -5331,6 +5331,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Audio codec.
+        /// </summary>
+        public static string LabelAudioCodec {
+            get {
+                return ResourceManager.GetString("LabelAudioCodec", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Command-line input:.
         /// </summary>
         public static string LabelCLI {
@@ -5588,6 +5597,15 @@ namespace Manager.Properties {
         public static string LabelType {
             get {
                 return ResourceManager.GetString("LabelType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Video codec.
+        /// </summary>
+        public static string LabelVideoCodec {
+            get {
+                return ResourceManager.GetString("LabelVideoCodec", resourceCulture);
             }
         }
         

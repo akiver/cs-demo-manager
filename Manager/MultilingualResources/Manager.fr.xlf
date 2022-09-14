@@ -4275,6 +4275,14 @@ Error: {0}.</target>
           <source>Do you want to export only the selected demos or all the demos within the selected folder?</source>
           <target state="final">Voulez-vous exporter seulement les démos sélectionnées ou toutes les démos dans le dossier courant?</target>
         </trans-unit>
+        <trans-unit id="LabelAudioCodec" translate="yes" xml:space="preserve">
+          <source>Audio codec</source>
+          <target state="final">Codec audio</target>
+        </trans-unit>
+        <trans-unit id="LabelVideoCodec" translate="yes" xml:space="preserve">
+          <source>Video codec</source>
+          <target state="final">Codec vidéo</target>
+        </trans-unit>
       </group>
     </body>
   </file>
