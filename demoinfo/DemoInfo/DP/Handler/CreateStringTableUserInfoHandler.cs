@@ -61,11 +61,11 @@ namespace DemoInfo.DP.Handler
 
                         entry = history[index].Substring(0, bytestocopy);
 
-                        entry += reader.ReadString(1024);
+                        entry += reader.ReadString();
                     }
                     else
                     {
-                        entry = reader.ReadString(1024);
+                        entry = reader.ReadString();
                     }
                 }
 

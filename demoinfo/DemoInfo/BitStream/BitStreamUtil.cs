@@ -49,16 +49,16 @@ namespace DemoInfo
 
         public static string ReadString(this IBitStream bs)
         {
-            return bs.ReadString(int.MaxValue);
+            return bs.ReadStringLimited(4096, false);
         }
 
-        public static string ReadString(this IBitStream bs, int limit)
+        private static string ReadStringLimited(this IBitStream bs, int limit, bool endOnNewLine = true)
         {
             var result = new List<byte>(512);
             for (int pos = 0; pos < limit; pos++)
             {
                 var b = bs.ReadByte();
-                if (b == 0 || b == 10)
+                if (b == 0 || (endOnNewLine && b == 10))
                 {
                     break;
                 }
