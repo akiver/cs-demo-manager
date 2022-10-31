@@ -16,6 +16,7 @@ namespace DemoInfo
         float ReadFloat();
         byte[] ReadBits(int bits);
         int ReadProtobufVarInt();
+        long ReadFixedInt64();
 
         // Chunking: You can begin chunks with a specified length.
         // You can then determine whether you've already read

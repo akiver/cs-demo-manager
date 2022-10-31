@@ -275,6 +275,10 @@ namespace DemoInfo
         /// </summary>
         public event EventHandler<TeamScoreChangeEventArgs> TeamScoreChange;
 
+        public event EventHandler<VoiceInitEventArgs> VoiceInit;
+
+        public event EventHandler<VoiceDataEventArgs> VoiceData;
+
         #endregion
 
         /// <summary>
@@ -1722,6 +1726,22 @@ namespace DemoInfo
             if (TeamScoreChange != null)
             {
                 TeamScoreChange(this, args);
+            }
+        }
+
+        internal void RaiseVoiceInit(VoiceInitEventArgs args)
+        {
+            if (VoiceInit != null)
+            {
+                VoiceInit(this, args);
+            }
+        }
+
+        internal void RaiseVoiceData(VoiceDataEventArgs args)
+        {
+            if (VoiceData != null)
+            {
+                VoiceData(this, args);
             }
         }
 

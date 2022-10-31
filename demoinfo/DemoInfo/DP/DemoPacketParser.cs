@@ -60,6 +60,14 @@ namespace DemoInfo.DP
                         new EncryptedMessage().Parse(bitstream, demo);
                     }
                 }
+                else if (cmd == (int)SVC_Messages.svc_VoiceInit)
+                {
+                    new VoiceInit().Parse(bitstream, demo);
+                }
+                else if (cmd == (int)SVC_Messages.svc_VoiceData)
+                {
+                    new VoiceData().Parse(bitstream, demo);
+                }
 
                 bitstream.EndChunk();
             }

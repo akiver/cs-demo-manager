@@ -308,6 +308,15 @@ namespace DemoInfo.BitStreamImpl
             return result;
         }
 
+        public long ReadFixedInt64()
+        {
+            byte[] bytes = ReadBytes(8);
+            long result = bytes[0] | (long)bytes[1] << 8 | (long)bytes[2] << 16 | (long)bytes[3] << 24 |
+                (long)bytes[4] << 32 | (long)bytes[5] << 40 | (long)bytes[6] << 48 | (long)bytes[7] << 56;
+
+            return result;
+        }
+
         // MSB masks (protobuf varint end signal)
         private const uint MSB_1 = 0x00000080;
         private const uint MSB_2 = 0x00008000;
