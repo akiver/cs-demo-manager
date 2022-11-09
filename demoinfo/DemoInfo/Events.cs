@@ -658,7 +658,7 @@ namespace DemoInfo
             {
                 ItemIndex = 13,
                 OriginalName = "weapon_galilar",
-                Element = EquipmentElement.Gallil,
+                Element = EquipmentElement.Galil,
             },
             new EquipmentMapping
             {
@@ -1051,7 +1051,7 @@ namespace DemoInfo
         Negev = 206,
 
         //Rifle
-        Gallil = 301,
+        Galil = 301,
         Famas = 302,
         AK47 = 303,
         M4A4 = 304,
