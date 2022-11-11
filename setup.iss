@@ -143,6 +143,7 @@ Source: "Manager\bin\x86\Release\csgodm.resources.dll"; DestDir: "{app}"; Flags:
 Source: "Manager\bin\x86\Release\csgodm.services.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\CSGOSuspectsBot.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\CSGOSuspectsBot.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "Manager\bin\x86\Release\csgove.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\DemoInfo.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Manager\bin\x86\Release\GalaSoft.MvvmLight.Extras.dll"; DestDir: "{app}"; Flags: ignoreversion

@@ -3203,4 +3203,34 @@ Error: {0}.</value>
   <data name="LabelVideoCodec" xml:space="preserve">
     <value>Codec vidéo</value>
   </data>
+  <data name="LabelDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ExportPlayersVoice" xml:space="preserve">
+    <value>Exporter la voix des joueurs</value>
+  </data>
+  <data name="CsgoNotFound" xml:space="preserve">
+    <value>CSGO n'a pas été trouvé.</value>
+  </data>
+  <data name="FailedToParseDemo" xml:space="preserve">
+    <value>{0}: Erreur pendant le parsing de la démo.</value>
+  </data>
+  <data name="CsgoAudioLibraryNotFound" xml:space="preserve">
+    <value>La librairie audio de CSGO n'a pas été trouvée.</value>
+  </data>
+  <data name="DemoNotFound" xml:space="preserve">
+    <value>{0}: Démo non trouvée.</value>
+  </data>
+  <data name="FailedToLoadCsgoAudioLibrary" xml:space="preserve">
+    <value>Le chargement de la librairie audio de CSGO a échoué.</value>
+  </data>
+  <data name="NoPlayersVoiceDataFound" xml:space="preserve">
+    <value>{0}: Aucune donnée vocale dans cette démo.</value>
+  </data>
+  <data name="UnsupportedAudioCodec" xml:space="preserve">
+    <value>{0}: Le codec audio utilisé dans cette démo n'est pas supporté.</value>
+  </data>
+  <data name="DialogExportDone" xml:space="preserve">
+    <value>Export terminé.</value>
+  </data>
 </root>

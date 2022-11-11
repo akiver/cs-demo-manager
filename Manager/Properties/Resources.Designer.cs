@@ -980,11 +980,29 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSGO audio library not found..
+        /// </summary>
+        public static string CsgoAudioLibraryNotFound {
+            get {
+                return ResourceManager.GetString("CsgoAudioLibraryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to csgo.exe path.
         /// </summary>
         public static string CsgoExePath {
             get {
                 return ResourceManager.GetString("CsgoExePath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CSGO not found..
+        /// </summary>
+        public static string CsgoNotFound {
+            get {
+                return ResourceManager.GetString("CsgoNotFound", resourceCulture);
             }
         }
         
@@ -1201,6 +1219,15 @@ namespace Manager.Properties {
         public static string DemoName {
             get {
                 return ResourceManager.GetString("DemoName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Demo not found..
+        /// </summary>
+        public static string DemoNotFound {
+            get {
+                return ResourceManager.GetString("DemoNotFound", resourceCulture);
             }
         }
         
@@ -1952,6 +1979,15 @@ namespace Manager.Properties {
         public static string DialogExportAllDemosConfirmation {
             get {
                 return ResourceManager.GetString("DialogExportAllDemosConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export done..
+        /// </summary>
+        public static string DialogExportDone {
+            get {
+                return ResourceManager.GetString("DialogExportDone", resourceCulture);
             }
         }
         
@@ -2951,6 +2987,33 @@ namespace Manager.Properties {
         public static string ExportJson {
             get {
                 return ResourceManager.GetString("ExportJson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export players voice.
+        /// </summary>
+        public static string ExportPlayersVoice {
+            get {
+                return ResourceManager.GetString("ExportPlayersVoice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to load CSGO audio library..
+        /// </summary>
+        public static string FailedToLoadCsgoAudioLibrary {
+            get {
+                return ResourceManager.GetString("FailedToLoadCsgoAudioLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Failed to parse demo..
+        /// </summary>
+        public static string FailedToParseDemo {
+            get {
+                return ResourceManager.GetString("FailedToParseDemo", resourceCulture);
             }
         }
         
@@ -6007,6 +6070,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0}: No players voice data found..
+        /// </summary>
+        public static string NoPlayersVoiceDataFound {
+            get {
+                return ResourceManager.GetString("NoPlayersVoiceDataFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not analyzable.
         /// </summary>
         public static string NotAnalyzable {
@@ -9047,6 +9119,15 @@ namespace Manager.Properties {
         public static string Unknown {
             get {
                 return ResourceManager.GetString("Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}: Unsupported audio codec..
+        /// </summary>
+        public static string UnsupportedAudioCodec {
+            get {
+                return ResourceManager.GetString("UnsupportedAudioCodec", resourceCulture);
             }
         }
         

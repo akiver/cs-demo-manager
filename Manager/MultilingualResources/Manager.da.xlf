@@ -4283,6 +4283,42 @@ Error: {0}.</target>
           <source>Date</source>
           <target state="new">Date</target>
         </trans-unit>
+        <trans-unit id="ExportPlayersVoice" translate="yes" xml:space="preserve">
+          <source>Export players voice</source>
+          <target state="new">Export players voice</target>
+        </trans-unit>
+        <trans-unit id="CsgoNotFound" translate="yes" xml:space="preserve">
+          <source>CSGO not found.</source>
+          <target state="new">CSGO not found.</target>
+        </trans-unit>
+        <trans-unit id="FailedToParseDemo" translate="yes" xml:space="preserve">
+          <source>{0}: Failed to parse demo.</source>
+          <target state="new">{0}: Failed to parse demo.</target>
+        </trans-unit>
+        <trans-unit id="CsgoAudioLibraryNotFound" translate="yes" xml:space="preserve">
+          <source>CSGO audio library not found.</source>
+          <target state="new">CSGO audio library not found.</target>
+        </trans-unit>
+        <trans-unit id="DemoNotFound" translate="yes" xml:space="preserve">
+          <source>{0}: Demo not found.</source>
+          <target state="new">{0}: Demo not found.</target>
+        </trans-unit>
+        <trans-unit id="FailedToLoadCsgoAudioLibrary" translate="yes" xml:space="preserve">
+          <source>Failed to load CSGO audio library.</source>
+          <target state="new">Failed to load CSGO audio library.</target>
+        </trans-unit>
+        <trans-unit id="NoPlayersVoiceDataFound" translate="yes" xml:space="preserve">
+          <source>{0}: No players voice data found.</source>
+          <target state="new">{0}: No players voice data found.</target>
+        </trans-unit>
+        <trans-unit id="UnsupportedAudioCodec" translate="yes" xml:space="preserve">
+          <source>{0}: Unsupported audio codec.</source>
+          <target state="new">{0}: Unsupported audio codec.</target>
+        </trans-unit>
+        <trans-unit id="DialogExportDone" translate="yes" xml:space="preserve">
+          <source>Export done.</source>
+          <target state="new">Export done.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

@@ -32,6 +32,8 @@ using Services.Concrete.Excel;
 using Services.Concrete.ThirdParties;
 using Services.Exceptions;
 using Services.Exceptions.Export;
+using Services.Exceptions.Launcher;
+using Services.Exceptions.Voice;
 using Services.Interfaces;
 using Services.Models;
 using Services.Models.ThirdParties;
@@ -55,6 +57,7 @@ namespace Manager.ViewModel.Demos
         private readonly ISteamService _steamService;
 
         private readonly IAccountStatsService _accountStatsService;
+        private readonly IVoiceService _voiceService;
 
         private readonly ExcelService _excelService;
 
@@ -360,6 +363,8 @@ namespace Manager.ViewModel.Demos
         #endregion
 
         #region Commands
+
+        public RelayCommand ExportPlayersVoiceCommand { get; }
 
         /// <summary>
         /// Command to start demo(s) analysis
@@ -1148,7 +1153,13 @@ namespace Manager.ViewModel.Demos
                            {
                                if (_cts != null)
                                {
-                                   _cts.Cancel();
+                                   try
+                                   {
+                                       _cts.Cancel();
+                                   }
+                                   catch (Exception)
+                                   {
+                                   }
                                    Notification = Properties.Resources.NotificationCancelling;
                                    IsCancellable = false;
                                    // small delay to be sure to send the msg after the last progress event trigerred
@@ -1395,7 +1406,7 @@ namespace Manager.ViewModel.Demos
 
         public DemoListViewModel(
             IDemosService demosService, IDialogService dialogService, ISteamService steamService,
-            ICacheService cacheService, ExcelService excelService, IAccountStatsService accountStatsService)
+            ICacheService cacheService, ExcelService excelService, IAccountStatsService accountStatsService, IVoiceService voiceService)
         {
             _demosService = demosService;
             _dialogService = dialogService;
@@ -1403,7 +1414,9 @@ namespace Manager.ViewModel.Demos
             _cacheService = cacheService;
             _excelService = excelService;
             _accountStatsService = accountStatsService;
+            _voiceService = voiceService;
             _demosService.ShowOnlyAccountDemos = Properties.Settings.Default.ShowOnlyAccountDemos;
+            ExportPlayersVoiceCommand = new RelayCommand(async () => await ExportPlayersVoice(), () => SelectedDemos.Any() && !IsBusy);
 
             if (IsInDesignModeStatic)
             {
@@ -1587,6 +1600,111 @@ namespace Manager.ViewModel.Demos
                 case DemoStatus.NAME_DEMO_STATUS_ERROR:
                     Properties.Settings.Default.ShowOldDemos = items.ContainsKey(name);
                     break;
+            }
+        }
+
+        private async Task ExportPlayersVoice()
+        {
+            var folderDialog = new FolderBrowserDialog
+            {
+                SelectedPath = Path.GetDirectoryName(SelectedDemos[0].Path),
+                ShowNewFolderButton = true,
+            };
+            var result = folderDialog.ShowDialog();
+            if (result != DialogResult.OK)
+            {
+                return;
+            }
+
+            var warnings = new List<string>();
+            _cts = new CancellationTokenSource();
+            foreach (var demo in SelectedDemos.ToList())
+            {
+                try
+                {
+                    IsBusy = true;
+                    IsCancellable = true;
+                    Notification = string.Format(Properties.Resources.NotificationExportingDemo, demo.Name);
+                    await _voiceService.ExportPlayersVoice(demo.Path, folderDialog.SelectedPath, _cts.Token);
+                }
+                catch (Exception ex)
+                {
+                    if (ex is OperationCanceledException)
+                    {
+                        break;
+                    }
+                    if (ex is InvalidExecutableException)
+                    {
+                        warnings.Add("Invalid CSGO voice extractor executable.");
+                        break;
+                    }
+                    if (ex is CsgoNotFoundException)
+                    {
+                        warnings.Add(Properties.Resources.CsgoNotFound);
+                        break;
+                    }
+                    if (ex is CsgoAudioLibNotFoundException)
+                    {
+                        warnings.Add(Properties.Resources.CsgoAudioLibraryNotFound);
+                        break;
+                    }
+                    if (ex is LoadCsgoAudioLibException)
+                    {
+                        warnings.Add(Properties.Resources.FailedToLoadCsgoAudioLibrary);
+                        break;
+                    }
+                    if (ex is InvalidArgsException)
+                    {
+                        warnings.Add("Failed to start CSGO voice extractor.");
+                        break;
+                    }
+                    if (ex is CreateAudioFileException)
+                    {
+                        warnings.Add(demo.Path + ": Failed to create audio file.");
+                    }
+                    else if (ex is DecodingException)
+                    {
+                        warnings.Add(demo.Path + ": Failed to decode audio data.");
+                    }
+                    else if (ex is DemoNotFoundException)
+                    {
+                        warnings.Add(string.Format(Properties.Resources.DemoNotFound, demo.Path));
+                    }
+                    else if (ex is NoVoiceDataException)
+                    {
+                        warnings.Add(string.Format(Properties.Resources.NoPlayersVoiceDataFound, demo.Path));
+                    }
+                    else if (ex is DemoParsingException)
+                    {
+                        warnings.Add(string.Format(Properties.Resources.FailedToParseDemo, demo.Path));
+                    }
+                    else if (ex is UnsupportedAudioCodecException)
+                    {
+                        warnings.Add(string.Format(Properties.Resources.UnsupportedAudioCodec, demo.Path));
+                    }
+                    else
+                    {
+                        warnings.Add("Unknown exception:\n" + ex.Message);
+                    }
+                }
+            }
+
+            IsBusy = false;
+            IsCancellable = false;
+
+            if (_cts.IsCancellationRequested)
+            {
+                return;
+            }
+            
+            if (warnings.Count > 0)
+            {
+                var message = warnings.Aggregate(string.Empty, (current, warning) => current + warning + Environment.NewLine);
+                await _dialogService.ShowMessageAsync(message, MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                await _dialogService.ShowMessageAsync(Properties.Resources.DialogExportDone, MessageDialogStyle.Affirmative);
             }
         }
 

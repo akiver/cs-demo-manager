@@ -3313,4 +3313,31 @@ Error: {0}.</value>
   <data name="LabelVideoCodec" xml:space="preserve">
     <value>Video codec</value>
   </data>
+  <data name="ExportPlayersVoice" xml:space="preserve">
+    <value>Export players voice</value>
+  </data>
+  <data name="CsgoAudioLibraryNotFound" xml:space="preserve">
+    <value>CSGO audio library not found.</value>
+  </data>
+  <data name="CsgoNotFound" xml:space="preserve">
+    <value>CSGO not found.</value>
+  </data>
+  <data name="DemoNotFound" xml:space="preserve">
+    <value>{0}: Demo not found.</value>
+  </data>
+  <data name="DialogExportDone" xml:space="preserve">
+    <value>Export done.</value>
+  </data>
+  <data name="FailedToLoadCsgoAudioLibrary" xml:space="preserve">
+    <value>Failed to load CSGO audio library.</value>
+  </data>
+  <data name="FailedToParseDemo" xml:space="preserve">
+    <value>{0}: Failed to parse demo.</value>
+  </data>
+  <data name="NoPlayersVoiceDataFound" xml:space="preserve">
+    <value>{0}: No players voice data found.</value>
+  </data>
+  <data name="UnsupportedAudioCodec" xml:space="preserve">
+    <value>{0}: Unsupported audio codec.</value>
+  </data>
 </root>

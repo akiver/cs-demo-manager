@@ -1,12 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Net.Http;
-using System.Security.Cryptography;
 using Newtonsoft.Json.Linq;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -305,16 +303,6 @@ namespace Services.Concrete
             return string.Empty;
         }
 
-        private static string GetSha1HashFile(string filePath)
-        {
-            using (FileStream stream = File.OpenRead(filePath))
-            {
-                SHA1Managed sha = new SHA1Managed();
-                byte[] hash = sha.ComputeHash(stream);
-                return BitConverter.ToString(hash).Replace("-", string.Empty);
-            }
-        }
-
         public async Task<List<string>> GetNewSuspectBannedArray(List<string> suspectIdList, List<string> suspectBannedIdList)
         {
             // Get the SteamIDs that aren't in the banned list
@@ -340,7 +328,7 @@ namespace Services.Concrete
         {
             ct.ThrowIfCancellationRequested();
             string boilerPath = AppDomain.CurrentDomain.BaseDirectory + BOILER_EXE_NAME;
-            string hash = GetSha1HashFile(boilerPath);
+            string hash = Hash.GetSha1HashFile(boilerPath);
             if (!hash.Equals(BOILER_SHA1))
             {
                 throw new InvalidBoilerExecutableException();

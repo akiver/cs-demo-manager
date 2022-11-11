@@ -56,6 +56,7 @@ namespace Manager.ViewModel
                 SimpleIoc.Default.Register<IDialogService, DialogService>();
             }
 
+            SimpleIoc.Default.Register<IVoiceService, VoiceService>();
             SimpleIoc.Default.Register<PageNavigationViewModel>();
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<DemoListViewModel>();

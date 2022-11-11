@@ -21,6 +21,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <OutputPath>..\Manager\bin\x86\Release\</OutputPath>
@@ -30,6 +31,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup Label="MultilingualAppToolkit">
     <MultilingualAppToolkitVersion>4.0</MultilingualAppToolkitVersion>
@@ -154,6 +156,7 @@
     <Compile Include="Concrete\StuffService.cs" />
     <Compile Include="Concrete\ThirdParties\CsgoDashStatsComService.cs" />
     <Compile Include="Concrete\ThirdParties\ThirdPartiesServiceFactory.cs" />
+    <Compile Include="Concrete\VoiceService.cs" />
     <Compile Include="Design\AccountStatsDesignService.cs" />
     <Compile Include="Design\CacheDesignService.cs" />
     <Compile Include="Design\DamageDesignService.cs" />
@@ -179,8 +182,19 @@
     <Compile Include="Exceptions\Launcher\SteamExecutableNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
+    <Compile Include="Exceptions\Voice\CreateAudioFileException.cs" />
+    <Compile Include="Exceptions\Voice\DecodingException.cs" />
+    <Compile Include="Exceptions\Voice\DemoNotFoundException.cs" />
+    <Compile Include="Exceptions\Voice\DemoParsingException.cs" />
+    <Compile Include="Exceptions\Voice\InvalidArgsException.cs" />
+    <Compile Include="Exceptions\Voice\InvalidExecutableException.cs" />
+    <Compile Include="Exceptions\Voice\LoadCsgoAudioLibException.cs" />
+    <Compile Include="Exceptions\Voice\NoVoiceDataException.cs" />
+    <Compile Include="Exceptions\Voice\UnsupportedAudioCodecException.cs" />
+    <Compile Include="Exceptions\Voice\CsgoAudioLibNotFoundException.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="FileOperationApiWrapper.cs" />
+    <Compile Include="Hash.cs" />
     <Compile Include="Interfaces\IAccountStatsService.cs" />
     <Compile Include="Interfaces\ICacheService.cs" />
     <Compile Include="Interfaces\IDamageService.cs" />
@@ -193,6 +207,7 @@
     <Compile Include="Interfaces\ISteamService.cs" />
     <Compile Include="Interfaces\IStuffService.cs" />
     <Compile Include="Interfaces\IThirdPartyInterface.cs" />
+    <Compile Include="Interfaces\IVoiceService.cs" />
     <Compile Include="Models\Charts\CrouchKillDateChart.cs" />
     <Compile Include="Models\Charts\DamageDateChart.cs" />
     <Compile Include="Models\Charts\GenericDoubleChart.cs" />
@@ -448,6 +463,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="boiler.exe">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="csgove.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="steam_api.dll">

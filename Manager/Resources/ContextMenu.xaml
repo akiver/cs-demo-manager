@@ -28,6 +28,8 @@
         <MenuItem Header="{x:Static properties:Resources.CopyPlayDemoCommand}"
                   Command="{Binding DemoList.CopyPlaydemoCommand, Source={StaticResource Locator}}"
                   CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}" />
+        <MenuItem Header="{x:Static properties:Resources.ExportPlayersVoice}"
+                  Command="{Binding DemoList.ExportPlayersVoiceCommand, Source={StaticResource Locator}}" />
         <MenuItem Header="{x:Static properties:Resources.Status}"
                   ItemsSource="{Binding Settings.StatusList, Source={StaticResource Locator}}"
                   DataContext="{StaticResource DemoStatus}"

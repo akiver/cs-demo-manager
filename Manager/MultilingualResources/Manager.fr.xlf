@@ -4285,7 +4285,43 @@ Error: {0}.</target>
         </trans-unit>
         <trans-unit id="LabelDate" translate="yes" xml:space="preserve">
           <source>Date</source>
-          <target state="new">Date</target>
+          <target state="final">Date</target>
+        </trans-unit>
+        <trans-unit id="ExportPlayersVoice" translate="yes" xml:space="preserve">
+          <source>Export players voice</source>
+          <target state="final">Exporter la voix des joueurs</target>
+        </trans-unit>
+        <trans-unit id="CsgoNotFound" translate="yes" xml:space="preserve">
+          <source>CSGO not found.</source>
+          <target state="final">CSGO n'a pas été trouvé.</target>
+        </trans-unit>
+        <trans-unit id="FailedToParseDemo" translate="yes" xml:space="preserve">
+          <source>{0}: Failed to parse demo.</source>
+          <target state="final">{0}: Erreur pendant le parsing de la démo.</target>
+        </trans-unit>
+        <trans-unit id="CsgoAudioLibraryNotFound" translate="yes" xml:space="preserve">
+          <source>CSGO audio library not found.</source>
+          <target state="final">La librairie audio de CSGO n'a pas été trouvée.</target>
+        </trans-unit>
+        <trans-unit id="DemoNotFound" translate="yes" xml:space="preserve">
+          <source>{0}: Demo not found.</source>
+          <target state="final">{0}: Démo non trouvée.</target>
+        </trans-unit>
+        <trans-unit id="FailedToLoadCsgoAudioLibrary" translate="yes" xml:space="preserve">
+          <source>Failed to load CSGO audio library.</source>
+          <target state="final">Le chargement de la librairie audio de CSGO a échoué.</target>
+        </trans-unit>
+        <trans-unit id="NoPlayersVoiceDataFound" translate="yes" xml:space="preserve">
+          <source>{0}: No players voice data found.</source>
+          <target state="final">{0}: Aucune donnée vocale dans cette démo.</target>
+        </trans-unit>
+        <trans-unit id="UnsupportedAudioCodec" translate="yes" xml:space="preserve">
+          <source>{0}: Unsupported audio codec.</source>
+          <target state="final">{0}: Le codec audio utilisé dans cette démo n'est pas supporté.</target>
+        </trans-unit>
+        <trans-unit id="DialogExportDone" translate="yes" xml:space="preserve">
+          <source>Export done.</source>
+          <target state="final">Export terminé.</target>
         </trans-unit>
       </group>
     </body>
