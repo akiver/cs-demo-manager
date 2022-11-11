@@ -358,11 +358,11 @@ namespace Services.Concrete
                         stats.KillGalilarCount +=
                             demo.Kills.Count(
                                 k => k.KillerSteamId != 0 && k.KillerSteamId == SelectedStatsAccountSteamId &&
-                                     k.Weapon.Element == EquipmentElement.Gallil);
+                                     k.Weapon.Element == EquipmentElement.Galil);
                         stats.DeathGalilarCount +=
                             demo.Kills.Count(
                                 k => k.KilledSteamId != 0 && k.KilledSteamId == SelectedStatsAccountSteamId &&
-                                     k.Weapon.Element == EquipmentElement.Gallil);
+                                     k.Weapon.Element == EquipmentElement.Galil);
 
                         stats.KillSg553Count +=
                             demo.Kills.Count(

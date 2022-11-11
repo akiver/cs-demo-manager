@@ -169,7 +169,7 @@ namespace Core.Models
             },
             new Weapon
             {
-                Element = EquipmentElement.Gallil,
+                Element = EquipmentElement.Galil,
                 Name = GALIL,
                 Type = WeaponType.Rifle,
                 KillAward = 300,
