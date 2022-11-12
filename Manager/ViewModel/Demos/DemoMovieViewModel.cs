@@ -748,12 +748,6 @@ namespace Manager.ViewModel.Demos
                                    return;
                                }
 
-                               if (Process.GetProcessesByName("Steam").Length == 0)
-                               {
-                                   await _dialogService.ShowErrorAsync(Properties.Resources.SteamMustBeRunning, MessageDialogStyle.Affirmative);
-                                   return;
-                               }
-
                                if (RequiredSpace >= 30)
                                {
                                    MessageDialogResult confirm = await _dialogService.ShowMessageAsync(
@@ -827,10 +821,11 @@ namespace Manager.ViewModel.Demos
                                    }
 
                                    IsBusy = true;
+                                   HasNotification = true;
+                                   Notification = Properties.Resources.StartingCSGO;
                                    RaisePropertyChanged(() => IsPlayerListEnabled);
                                    Win32Utils.SendMessageToBot(Win32Utils.WM_TOGGLE_DOWNLOAD_NOTIFICATION);
                                    await _movieService.Start();
-                                   // TODO notification
                                }
                                catch (Exception ex)
                                {
@@ -1545,34 +1540,29 @@ namespace Manager.ViewModel.Demos
             RaisePropertyChanged(() => FFmpegCommand);
         }
 
-        private void HandleOnGameRunning()
-        {
-            HasNotification = true;
-            Notification = Properties.Resources.CSGORecordingInProgress;
-        }
-
-        private void OnHLAEStarted()
-        {
-            HasNotification = true;
-            Notification = Properties.Resources.StartingHLAE;
-        }
-
         private void OnFFmpegStarted()
         {
-            HasNotification = true;
             Notification = Properties.Resources.FFmpegEncodingInProgress;
         }
 
         private void OnGameStarted()
         {
-            HasNotification = true;
-            Notification = Properties.Resources.StartingCSGO;
+            Notification = Properties.Resources.CSGORecordingInProgress;
         }
 
         private void OnVirtualDubStarted()
         {
-            HasNotification = true;
             Notification = Properties.Resources.VirtualDubEncodingInProgress;
+        }
+
+        private void OnFFmpegClosed()
+        {
+            HasNotification = false;
+        }
+
+        private void OnVirtualDubClosed()
+        {
+            HasNotification = false;
         }
 
         private void ResetFfmpegConfiguration()
@@ -1637,14 +1627,10 @@ namespace Manager.ViewModel.Demos
             };
             _movieService = new MovieService(_movieConfig);
             _movieService.OnVirtualDubStarted += OnVirtualDubStarted;
-            _movieService.OnVirtualDubClosed += () => HasNotification = false;
+            _movieService.OnVirtualDubClosed += OnVirtualDubClosed;
             _movieService.OnFFmpegStarted += OnFFmpegStarted;
-            _movieService.OnFFmpegClosed += () => HasNotification = false;
+            _movieService.OnFFmpegClosed += OnFFmpegClosed;
             _movieService.OnGameStarted += OnGameStarted;
-            _movieService.OnGameRunning += HandleOnGameRunning;
-            _movieService.OnGameClosed += () => HasNotification = false;
-            _movieService.OnHLAEStarted += OnHLAEStarted;
-            _movieService.OnHLAEClosed += () => HasNotification = false;
 
             // update FFmpeg CLI when movie service has been created
             RaisePropertyChanged(() => FFmpegCommand);

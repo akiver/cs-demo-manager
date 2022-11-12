@@ -2926,9 +2926,6 @@
   <data name="StartingCSGO" xml:space="preserve">
     <value>正在启动 Counter Strike: Global Offensive，请稍等…… </value>
   </data>
-  <data name="StartingHLAE" xml:space="preserve">
-    <value>正在启动 HLAE 组件，请稍等……</value>
-  </data>
   <data name="TimeLineNotAvailableWarning" xml:space="preserve">
     <value>比赛时间线 (Timeline) 在 POV 或是损坏的录像文件中不可用。您需要手动输入节点 (Tick)。在此情况下，为录像文件添加注释也许可以减少一些麻烦。</value>
   </data>
@@ -3066,9 +3063,6 @@
   </data>
   <data name="Tools" xml:space="preserve">
     <value>工具</value>
-  </data>
-  <data name="SteamMustBeRunning" xml:space="preserve">
-    <value>您的 Steam 客户端必须处于运行状态</value>
   </data>
   <data name="SeeDocOnWebsite" xml:space="preserve">
     <value>参阅网站上的文档</value>

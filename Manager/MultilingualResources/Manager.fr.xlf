@@ -3950,10 +3950,6 @@ Veuillez installer la mise à jour en cliquant sur le bouton "Mettre à jour".</
           <source>Starting CSGO, please wait...</source>
           <target state="final">Lancement de CSGO en cours, veuillez patienter...</target>
         </trans-unit>
-        <trans-unit id="StartingHLAE" translate="yes" xml:space="preserve">
-          <source>Starting HLAE, please wait...</source>
-          <target state="final">Lancement d'HLAE en cours, veuillez patienter...</target>
-        </trans-unit>
         <trans-unit id="TimeLineNotAvailableWarning" translate="yes" xml:space="preserve">
           <source>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</source>
           <target state="final">La chronologie n'est pas disponible avec les démos POV ou corrompues, vous devez saisir les ticks de début et fin manuellement.
@@ -4136,10 +4132,6 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
         <trans-unit id="Tools" translate="yes" xml:space="preserve">
           <source>Tools</source>
           <target state="final">Utilitaires</target>
-        </trans-unit>
-        <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
-          <source>Steam must be running.</source>
-          <target state="final">Steam doit être lancé pour continuer.</target>
         </trans-unit>
         <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
           <source>See documentation on the website</source>

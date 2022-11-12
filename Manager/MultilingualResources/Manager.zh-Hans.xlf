@@ -3946,10 +3946,6 @@ Please update it by clicking on the "Update" button.</source>
           <source>Starting CSGO, please wait...</source>
           <target state="final">正在启动 Counter Strike: Global Offensive，请稍等…… </target>
         </trans-unit>
-        <trans-unit id="StartingHLAE" translate="yes" xml:space="preserve">
-          <source>Starting HLAE, please wait...</source>
-          <target state="final">正在启动 HLAE 组件，请稍等……</target>
-        </trans-unit>
         <trans-unit id="TimeLineNotAvailableWarning" translate="yes" xml:space="preserve">
           <source>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</source>
           <target state="final">比赛时间线 (Timeline) 在 POV 或是损坏的录像文件中不可用。您需要手动输入节点 (Tick)。在此情况下，为录像文件添加注释也许可以减少一些麻烦。</target>
@@ -4131,10 +4127,6 @@ Please update it by clicking on the "Update" button.</source>
         <trans-unit id="Tools" translate="yes" xml:space="preserve">
           <source>Tools</source>
           <target state="final">工具</target>
-        </trans-unit>
-        <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
-          <source>Steam must be running.</source>
-          <target state="final">您的 Steam 客户端必须处于运行状态</target>
         </trans-unit>
         <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
           <source>See documentation on the website</source>

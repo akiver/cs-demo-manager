@@ -3947,10 +3947,6 @@ Bitte aktualisieren Sie mit dem Klicken auf den "Update"-Button.</target>
           <source>Starting CSGO, please wait...</source>
           <target state="new">Starte CSGO, bitte warten...</target>
         </trans-unit>
-        <trans-unit id="StartingHLAE" translate="yes" xml:space="preserve">
-          <source>Starting HLAE, please wait...</source>
-          <target state="new">Starte HLAE, bitte warten...</target>
-        </trans-unit>
         <trans-unit id="TimeLineNotAvailableWarning" translate="yes" xml:space="preserve">
           <source>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</source>
           <target state="new">Die Timeline ist nicht mit POV oder fehlerhaften Demos verfügbar. Sie müssen die Ticks manuell eingeben. Einen Kommentar zur Demo hinzuzufügen wäre in diesem Fall nützlich.</target>
@@ -4132,10 +4128,6 @@ Bitte aktualisieren Sie mit dem Klicken auf den "Update"-Button.</target>
         <trans-unit id="Tools" translate="yes" xml:space="preserve">
           <source>Tools</source>
           <target state="new">Tools</target>
-        </trans-unit>
-        <trans-unit id="SteamMustBeRunning" translate="yes" xml:space="preserve">
-          <source>Steam must be running.</source>
-          <target state="new">Steam muss laufen.</target>
         </trans-unit>
         <trans-unit id="SeeDocOnWebsite" translate="yes" xml:space="preserve">
           <source>See documentation on the website</source>

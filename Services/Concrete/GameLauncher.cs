@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Core;
 using Core.Models;
@@ -33,13 +34,13 @@ namespace Services.Concrete
         private const int MOLOTOV_TIME = 8; // Seconds average waiting time for a molotov end
         private const string ARGUMENT_SEPARATOR = " ";
 
-        /// <summary>
-        /// Launcher configuration
-        /// </summary>
         private readonly GameLauncherConfiguration _config;
-
-        private readonly List<string> _arguments = new List<string> { "-applaunch 730", "-novid" };
+        private const int TELNET_PORT = 2121;
+        private readonly List<string> _telnetCommandArguments = new List<string>();
+        private readonly List<string> _arguments = new List<string> { "-insecure", "-novid", $"-netconport {TELNET_PORT}" };
         private readonly Process _process = new Process();
+        private static string _lastVdmFilePath;
+        private static bool _isWaitingForExit = false;
 
         private readonly List<string> _hlaeArguments = new List<string>
         {
@@ -58,10 +59,43 @@ namespace Services.Concrete
 
         private async Task StartGame()
         {
+            if (_config.UseTelnetConnection)
+            {
+                var telnetConnection = await GetTelNetConnection();
+                if (telnetConnection != null)
+                {
+                    try
+                    {
+                        _telnetCommandArguments.Insert(0, $"playdemo \"{_config.Demo.Path}\"");
+                        var command = string.Join(ARGUMENT_SEPARATOR, _telnetCommandArguments);
+                        telnetConnection.Write(command);
+                        var shouldDeleteLastVdm = _lastVdmFilePath != null && _lastVdmFilePath != _config.Demo.GetVdmFilePath();
+                        if (shouldDeleteLastVdm)
+                        {
+                            DeleteVdmFile();
+                        }
+
+                        _lastVdmFilePath = _config.Demo.GetVdmFilePath();
+                        return;
+                    }
+                    catch (Exception ex)
+                    {
+                        Logger.Instance.Log(ex);
+                    }
+                    finally
+                    {
+                        telnetConnection.Dispose();
+                    }
+                }
+            }
+
+            KillCsgo();
             SetupResolutionParameters();
+            _lastVdmFilePath = _config.Demo.GetVdmFilePath();
 
             if (_config.EnableHlae)
             {
+                KillHlae();
                 _arguments.Add(_config.LaunchParameters);
                 List<string> argList = new List<string>(_hlaeArguments)
                 {
@@ -88,11 +122,15 @@ namespace Services.Concrete
                     UseShellExecute = false,
                 };
                 _process.StartInfo = psi;
+                _isWaitingForExit = true;
                 _process.Start();
-                _config.OnHLAEStarted?.Invoke();
-                // wait for HLAE process to exit
                 await _process.WaitForExitAsync();
-                _config.OnHLAEClosed?.Invoke();
+                var csgoProcess = await WaitForCsgoProcess();
+                _config.OnGameStarted?.Invoke();
+                if (csgoProcess != null)
+                {
+                    await csgoProcess.WaitForExitAsync();
+                }
             }
             else
             {
@@ -100,24 +138,13 @@ namespace Services.Concrete
                 ProcessStartInfo psi = new ProcessStartInfo
                 {
                     Arguments = args + " " + _config.LaunchParameters,
-                    FileName = _config.SteamExePath,
+                    FileName = _config.CsgoExePath,
                 };
                 _process.StartInfo = psi;
+                _isWaitingForExit = true;
                 _process.Start();
-            }
-
-            if (_config.DeleteVdmFileAtStratup)
-            {
-                DeleteVdmFile();
-            }
-
-            _config.OnGameStarted?.Invoke();
-
-            Process csgoProcess = await WaitForCsgoProcess();
-            if (csgoProcess != null)
-            {
-                _config.OnGameRunning?.Invoke();
-                await csgoProcess.WaitForExitAsync();
+                _config.OnGameStarted?.Invoke();
+                await _process.WaitForExitAsync();
             }
 
             if (_config.OnGameClosed != null)
@@ -125,36 +152,35 @@ namespace Services.Concrete
                 await _config.OnGameClosed();
             }
 
-            if (_config.DeleteVdmFileWhenClosed)
+            if (!_isWaitingForExit)
             {
                 DeleteVdmFile();
             }
+
+            _isWaitingForExit = false;
         }
 
         private async Task<Process> WaitForCsgoProcess()
         {
             Process process = null;
             int attemptCount = 0;
-            await Task.Run(async () =>
+            for (;;)
             {
-                for (;;)
+                await Task.Delay(3000);
+                Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
+                if (processes.Length > 0)
                 {
-                    await Task.Delay(3000);
-                    Process[] processes = Process.GetProcessesByName(AppSettings.CSGO_PROCESS_NAME);
-                    if (processes.Length > 0)
-                    {
-                        process = processes[0];
-                        break;
-                    }
-
-                    if (attemptCount == 6)
-                    {
-                        break;
-                    }
-
-                    attemptCount++;
+                    process = processes[0];
+                    break;
                 }
-            });
+
+                if (attemptCount == 6)
+                {
+                    break;
+                }
+
+                attemptCount++;
+            }
 
             return process;
         }
@@ -170,37 +196,39 @@ namespace Services.Concrete
 
         private void DeleteVdmFile()
         {
-            string vdmPath = _config.Demo.GetVdmFilePath();
-            if (File.Exists(vdmPath))
+            if (_lastVdmFilePath == null)
             {
-                File.Delete(vdmPath);
+                return;
+            }
+            if (File.Exists(_lastVdmFilePath))
+            {
+                File.Delete(_lastVdmFilePath);
             }
         }
 
         public async Task WatchDemo()
         {
-            PrepareGameLaunching();
+            AssertExecutablesExist();
             await StartGame();
         }
 
         public async Task WatchHighlightDemo(bool fromPlayerPerspective)
         {
-            PrepareGameLaunching();
+            AssertExecutablesExist();
             if (_config.UseCustomActionsGeneration)
             {
                 GenerateHighLowVdm(true, fromPlayerPerspective);
-                _config.DeleteVdmFileAtStratup = false;
             }
             else
             {
                 if (fromPlayerPerspective)
                 {
+                    _telnetCommandArguments.Add(_config.FocusPlayerSteamId.ToString());
                     _arguments.Add(_config.FocusPlayerSteamId.ToString());
                 }
                 else
                 {
                     GenerateHighLowVdm(true, false);
-                    _config.DeleteVdmFileAtStratup = false;
                 }
             }
 
@@ -209,21 +237,22 @@ namespace Services.Concrete
 
         public async Task WatchLowlightDemo(bool fromPlayerPerspective)
         {
-            PrepareGameLaunching();
+            AssertExecutablesExist();
             if (_config.UseCustomActionsGeneration)
             {
                 GenerateHighLowVdm(false, fromPlayerPerspective);
-                _config.DeleteVdmFileAtStratup = false;
             }
             else
             {
                 if (fromPlayerPerspective)
                 {
                     GenerateHighLowVdm(false);
-                    _config.DeleteVdmFileAtStratup = false;
                 }
                 else
                 {
+                    _telnetCommandArguments.Add(_config.FocusPlayerSteamId.ToString());
+                    _telnetCommandArguments.Add("lowlights");
+
                     _arguments.Add(_config.FocusPlayerSteamId.ToString());
                     _arguments.Add("lowlights");
                 }
@@ -234,7 +263,7 @@ namespace Services.Concrete
 
         public async Task WatchDemoAt(int tick, bool delay = false)
         {
-            PrepareGameLaunching();
+            AssertExecutablesExist();
             if (delay)
             {
                 int tickDelayCount = (int)(_config.Demo.ServerTickrate * PLAYBACK_DELAY);
@@ -252,13 +281,12 @@ namespace Services.Concrete
 
             string content = string.Format(Properties.Resources.main, generated);
             File.WriteAllText(_config.Demo.GetVdmFilePath(), content);
-            _config.DeleteVdmFileAtStratup = false;
             await StartGame();
         }
 
         public async Task WatchPlayerStuff(Player player, string selectedType)
         {
-            PrepareGameLaunching();
+            AssertExecutablesExist();
             EquipmentElement type = EquipmentElement.Unknown;
             switch (selectedType)
             {
@@ -280,39 +308,28 @@ namespace Services.Concrete
             }
 
             GeneratePlayerStuffVdm(player, type);
-            _config.DeleteVdmFileAtStratup = false;
             await StartGame();
         }
 
         public async Task WatchPlayer()
         {
-            PrepareGameLaunching();
+            AssertExecutablesExist();
             GenerateWatchPlayerVdm();
-            _config.DeleteVdmFileAtStratup = false;
             await StartGame();
         }
 
-        private void PrepareGameLaunching()
+        private void AssertExecutablesExist()
         {
-            KillCsgo();
+            if (!File.Exists(_config.CsgoExePath))
+            {
+                throw new CsgoNotFoundException();
+            }
+            
             if (_config.EnableHlae)
             {
-                KillHlae();
-                if (!File.Exists(_config.CsgoExePath))
-                {
-                    throw new CsgoNotFoundException();
-                }
-
                 if (!File.Exists(_config.HlaeExePath))
                 {
                     throw new HlaeNotFound();
-                }
-            }
-            else
-            {
-                if (!File.Exists(_config.SteamExePath))
-                {
-                    throw new SteamExecutableNotFoundException();
                 }
             }
         }
@@ -658,6 +675,25 @@ namespace Services.Concrete
                     process.WaitForExit();
                 }
             }
+        }
+
+        private static Task<TelnetConnection> GetTelNetConnection()
+        {
+            return Task.Run(() =>
+            {
+                try
+                {
+                    return new TelnetConnection("127.0.0.1", TELNET_PORT);
+                }
+                catch (Exception ex)
+                {
+                    if (!(ex is SocketException))
+                    {
+                        Logger.Instance.Log(ex);
+                    }
+                    return null;
+                }
+            });
         }
 
         public void Dispose()

@@ -10,14 +10,19 @@ namespace Manager.Services
     {
         public static GameLauncherConfiguration BuildGameLauncherConfiguration(Demo demo)
         {
+            var csgoExePath = Settings.Default.CsgoExePath;
+            if (csgoExePath == "")
+            {
+                csgoExePath = AppSettings.GetCsgoExePath();
+            }
+
             return new GameLauncherConfiguration(demo)
             {
-                SteamExePath = AppSettings.SteamExePath(),
                 Width = Settings.Default.ResolutionWidth,
                 Height = Settings.Default.ResolutionHeight,
                 Fullscreen = Settings.Default.IsFullscreen,
                 EnableHlae = Settings.Default.EnableHlae,
-                CsgoExePath = Settings.Default.CsgoExePath,
+                CsgoExePath = csgoExePath,
                 EnableHlaeConfigParent = Settings.Default.EnableHlaeConfigParent,
                 HlaeConfigParentFolderPath = Settings.Default.HlaeConfigParentFolderPath,
                 HlaeExePath = HlaeService.GetHlaeExePath(),

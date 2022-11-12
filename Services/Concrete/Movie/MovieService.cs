@@ -44,10 +44,7 @@ namespace Services.Concrete.Movie
         public event Action OnFFmpegStarted;
         public event Action OnFFmpegClosed;
         public event Action OnGameStarted;
-        public event Action OnGameRunning;
         public event Action OnGameClosed;
-        public event Action OnHLAEStarted;
-        public event Action OnHLAEClosed;
 
         public MovieService(MovieConfiguration config)
         {
@@ -79,6 +76,7 @@ namespace Services.Concrete.Movie
 
         public async Task Start()
         {
+            KillProcesses();
             if (_config.GenerateRawFiles)
             {
                 GenerateCfgFile();
@@ -87,11 +85,7 @@ namespace Services.Concrete.Movie
                 {
                     EnableHlae = true,
                     OnGameStarted = HandleGameStarted,
-                    OnGameRunning = HandleGameRunning,
                     OnGameClosed = HandleGameClosed,
-                    OnHLAEStarted = HandleHLAEStarted,
-                    OnHLAEClosed = HandleHLAEClosed,
-                    DeleteVdmFileAtStratup = false,
                     CsgoExePath = AppSettings.GetCsgoExePath(), // TODO move it?
                     EnableHlaeConfigParent = _config.EnableHlaeConfigParent,
                     Fullscreen = _config.FullScreen,
@@ -100,7 +94,7 @@ namespace Services.Concrete.Movie
                     HlaeConfigParentFolderPath = _config.HlaeConfigParentFolderPath,
                     HlaeExePath = HlaeService.GetHlaeExePath(),
                     LaunchParameters = _config.LaunchParameters,
-                    SteamExePath = AppSettings.SteamExePath(), // TODO move it?
+                    UseTelnetConnection = false,
                 };
 
                 GameLauncher launcher = new GameLauncher(config);
@@ -155,10 +149,17 @@ namespace Services.Concrete.Movie
             Directory.Delete(lastTakeFolderPath, true);
         }
 
-        /// <summary>
-        /// Kill all processes.
-        /// </summary>
         public void Cancel()
+        {
+            KillProcesses();
+            var vdmFilePath = _config.Demo.GetVdmFilePath();
+            if (File.Exists(vdmFilePath))
+            {
+                File.Delete(vdmFilePath);
+            }
+        }
+
+        private static void KillProcesses()
         {
             string[] names = { "csgo", "HLAE", "ffmpeg", "Veedub64", "VirtualDub" };
             foreach (string name in names)
@@ -558,21 +559,6 @@ namespace Services.Concrete.Movie
         private Task HandleGameStarted()
         {
             return Task.Run(() => OnGameStarted?.Invoke());
-        }
-
-        private Task HandleGameRunning()
-        {
-            return Task.Run(() => OnGameRunning?.Invoke());
-        }
-
-        private Task HandleHLAEStarted()
-        {
-            return Task.Run(() => OnHLAEStarted?.Invoke());
-        }
-
-        private Task HandleHLAEClosed()
-        {
-            return Task.Run(() => OnHLAEClosed?.Invoke());
         }
 
         private static void KillProcess(string processName)

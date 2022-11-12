@@ -169,24 +169,6 @@ namespace Core
         };
 
         /// <summary>
-        /// Return the Steam exe path from the registry
-        /// </summary>
-        /// <returns></returns>
-        public static string SteamExePath()
-        {
-            return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam", "SteamExe", null);
-        }
-
-        /// <summary>
-        /// Return the Steam path
-        /// </summary>
-        /// <returns></returns>
-        public static string SteamPath()
-        {
-            return (string)Registry.GetValue(@"HKEY_CURRENT_USER\SOFTWARE\Valve\Steam", "SteamPath", null);
-        }
-
-        /// <summary>
         /// Return the CSGO path (csgo folder)
         /// </summary>
         /// <returns></returns>

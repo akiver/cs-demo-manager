@@ -3121,9 +3121,6 @@ Please update it by clicking on the "Update" button.</value>
   <data name="StartingCSGO" xml:space="preserve">
     <value>Starting CSGO, please wait...</value>
   </data>
-  <data name="StartingHLAE" xml:space="preserve">
-    <value>Starting HLAE, please wait...</value>
-  </data>
   <data name="Thrown" xml:space="preserve">
     <value>thrown</value>
   </data>
@@ -3201,9 +3198,6 @@ Please update it by clicking on the "Update" button.</value>
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Tools</value>
-  </data>
-  <data name="SteamMustBeRunning" xml:space="preserve">
-    <value>Steam must be running.</value>
   </data>
   <data name="SeeDocOnWebsite" xml:space="preserve">
     <value>See documentation on the website</value>

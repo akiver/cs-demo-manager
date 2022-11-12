@@ -57,8 +57,8 @@ namespace Manager.ViewModel.Shared
             string message = defaultMessage ?? string.Format(Properties.Resources.DialogErrorStartingCsgo, ex.Message);
             switch (ex)
             {
-                case SteamExecutableNotFoundException _:
-                    message = Properties.Resources.DialogSteamNotFound;
+                case CsgoNotFoundException _:
+                    message = Properties.Resources.CsgoNotFound;
                     break;
                 case HlaeNotFound _:
                     message = Properties.Resources.HlaeNotFound;

@@ -143,6 +143,7 @@
     <Compile Include="Concrete\Excel\Workbook.cs" />
     <Compile Include="Concrete\FlashbangService.cs" />
     <Compile Include="Concrete\GameLauncher.cs" />
+    <Compile Include="Concrete\TelnetClient.cs" />
     <Compile Include="Concrete\HeatmapService.cs" />
     <Compile Include="Concrete\KillService.cs" />
     <Compile Include="Concrete\Maps\MapService.cs" />
@@ -179,7 +180,6 @@
     <Compile Include="Exceptions\Launcher\HlaeNotFound.cs" />
     <Compile Include="Exceptions\Launcher\KillCsgoException.cs" />
     <Compile Include="Exceptions\Launcher\KillHlaeException.cs" />
-    <Compile Include="Exceptions\Launcher\SteamExecutableNotFoundException.cs" />
     <Compile Include="Exceptions\Map\MapException.cs" />
     <Compile Include="Exceptions\Map\MapUnavailableException.cs" />
     <Compile Include="Exceptions\Voice\CreateAudioFileException.cs" />

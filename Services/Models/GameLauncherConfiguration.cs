@@ -14,11 +14,6 @@ namespace Services.Models
         public Demo Demo { get; }
 
         /// <summary>
-        /// Path to steam.exe, required to start the game.
-        /// </summary>
-        public string SteamExePath { get; set; }
-
-        /// <summary>
         /// Start game in fullscreen?
         /// </summary>
         public bool Fullscreen { get; set; }
@@ -64,16 +59,6 @@ namespace Services.Models
         public string LaunchParameters { get; set; }
 
         /// <summary>
-        /// Delete the demo's VDM file before starting the game?
-        /// </summary>
-        public bool DeleteVdmFileAtStratup { get; set; } = true;
-
-        /// <summary>
-        /// Delete the demo's VDM file when the game is closed?
-        /// </summary>
-        public bool DeleteVdmFileWhenClosed { get; set; } = true;
-
-        /// <summary>
         /// Use built-in game highlight lowlight?
         /// </summary>
         public bool UseCustomActionsGeneration { get; set; } = true;
@@ -94,18 +79,8 @@ namespace Services.Models
         public Func<Task> OnGameStarted = null;
 
         /// <summary>
-        /// Called when the csgo.exe process has been detected.
+        /// Avoid restarting CSGO if a Telnet connection is available.
         /// </summary>
-        public Func<Task> OnGameRunning = null;
-
-        /// <summary>
-        /// Called when HLAE has started.
-        /// </summary>
-        public Func<Task> OnHLAEStarted = null;
-
-        /// <summary>
-        /// Called when HLAE is closed.
-        /// </summary>
-        public Func<Task> OnHLAEClosed = null;
+        public bool UseTelnetConnection { get; set; } = true;
     }
 }

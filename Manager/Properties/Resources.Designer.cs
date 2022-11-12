@@ -7573,15 +7573,6 @@ namespace Manager.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting HLAE, please wait....
-        /// </summary>
-        public static string StartingHLAE {
-            get {
-                return ResourceManager.GetString("StartingHLAE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Start money.
         /// </summary>
         public static string StartMoney {
@@ -7641,15 +7632,6 @@ namespace Manager.Properties {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Steam must be running..
-        /// </summary>
-        public static string SteamMustBeRunning {
-            get {
-                return ResourceManager.GetString("SteamMustBeRunning", resourceCulture);
             }
         }
         

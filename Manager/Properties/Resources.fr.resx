@@ -2953,9 +2953,6 @@ Veuillez installer la mise à jour en cliquant sur le bouton "Mettre à jour".</
   <data name="StartingCSGO" xml:space="preserve">
     <value>Lancement de CSGO en cours, veuillez patienter...</value>
   </data>
-  <data name="StartingHLAE" xml:space="preserve">
-    <value>Lancement d'HLAE en cours, veuillez patienter...</value>
-  </data>
   <data name="TimeLineNotAvailableWarning" xml:space="preserve">
     <value>La chronologie n'est pas disponible avec les démos POV ou corrompues, vous devez saisir les ticks de début et fin manuellement.
 Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks importants.</value>
@@ -3094,9 +3091,6 @@ Il peut être pratique dans ce cas d'ajouter un commentaire pour noter les ticks
   </data>
   <data name="Tools" xml:space="preserve">
     <value>Utilitaires</value>
-  </data>
-  <data name="SteamMustBeRunning" xml:space="preserve">
-    <value>Steam doit être lancé pour continuer.</value>
   </data>
   <data name="SeeDocOnWebsite" xml:space="preserve">
     <value>Voir la documentation sur le site Internet</value>
