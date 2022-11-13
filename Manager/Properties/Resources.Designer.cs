@@ -9204,6 +9204,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Watch as a suspect.
+        /// </summary>
+        public static string WatchAsSuspect {
+            get {
+                return ResourceManager.GetString("WatchAsSuspect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Watched.
         /// </summary>
         public static string Watched {

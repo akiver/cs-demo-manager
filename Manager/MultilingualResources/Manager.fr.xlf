@@ -4315,6 +4315,10 @@ Error: {0}.</target>
           <source>Export done.</source>
           <target state="final">Export terminé.</target>
         </trans-unit>
+        <trans-unit id="WatchAsSuspect" translate="yes" xml:space="preserve">
+          <source>Watch as a suspect</source>
+          <target state="final">Voir comme suspect</target>
+        </trans-unit>
       </group>
     </body>
   </file>

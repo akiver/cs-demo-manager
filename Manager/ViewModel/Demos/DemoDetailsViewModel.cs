@@ -23,7 +23,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -243,6 +242,7 @@ namespace Manager.ViewModel.Demos
         #region Commands
 
         public RelayCommand<string> CopyPlayerSteamIdCommand { get; }
+        public RelayCommand WatchPlayerAsSuspectCommand { get; }
 
         public RelayCommand WindowLoaded
         {
@@ -994,6 +994,7 @@ namespace Manager.ViewModel.Demos
             _excelService = excelService;
             _roundService = roundService;
             CopyPlayerSteamIdCommand = new RelayCommand<string>(CopyPlayerSteamId);
+            WatchPlayerAsSuspectCommand = new RelayCommand(WatchPlayerAsSuspect, () => SelectedPlayer != null);
 
             Sources = Source.Sources;
 
@@ -1165,6 +1166,21 @@ namespace Manager.ViewModel.Demos
                 };
                 Messenger.Default.Send(msg);
             }));
+        }
+
+        private async void WatchPlayerAsSuspect()
+        {
+            try
+            {
+                GameLauncherConfiguration config = Config.BuildGameLauncherConfiguration(Demo);
+                config.FocusPlayerSteamId = SelectedPlayer.SteamId;
+                GameLauncher launcher = new GameLauncher(config);
+                await launcher.WatchPlayerAsSuspect();
+            }
+            catch (Exception ex)
+            {
+                await HandleGameLauncherException(ex);
+            }
         }
 
         private void CopyPlayerSteamId(string steamId)

@@ -3227,4 +3227,7 @@ Error: {0}.</value>
   <data name="DialogExportDone" xml:space="preserve">
     <value>Export terminé.</value>
   </data>
+  <data name="WatchAsSuspect" xml:space="preserve">
+    <value>Voir comme suspect</value>
+  </data>
 </root>

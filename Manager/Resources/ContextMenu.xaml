@@ -119,6 +119,8 @@
         <MenuItem Header="{x:Static properties:Resources.WatchLowlights}"
                   Command="{Binding DemoDetails.WatchLowlights, Source={StaticResource Locator}}"
                   CommandParameter="{Binding DemoDetails.SelectedPlayer, Source={StaticResource Locator}}" />
+        <MenuItem Header="{x:Static properties:Resources.WatchAsSuspect}"
+                  Command="{Binding DemoDetails.WatchPlayerAsSuspectCommand, Source={StaticResource Locator}}" />
         <MenuItem Header="{x:Static properties:Resources.AddToAccountList}"
                   Command="{Binding DemoDetails.AddPlayerToAccountListCommand, Source={StaticResource Locator}}"
                   CommandParameter="{Binding DemoDetails.SelectedPlayer.SteamId, Source={StaticResource Locator}}" />

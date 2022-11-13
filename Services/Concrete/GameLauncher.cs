@@ -318,6 +318,14 @@ namespace Services.Concrete
             await StartGame();
         }
 
+        public async Task WatchPlayerAsSuspect()
+        {
+            AssertExecutablesExist();
+            _arguments.Add(_config.FocusPlayerSteamId + " anonsuspect");
+            _telnetCommandArguments.Add(_config.FocusPlayerSteamId + " anonsuspect");
+            await StartGame();
+        }
+
         private void AssertExecutablesExist()
         {
             if (!File.Exists(_config.CsgoExePath))

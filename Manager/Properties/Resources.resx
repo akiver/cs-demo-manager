@@ -3334,4 +3334,7 @@ Error: {0}.</value>
   <data name="UnsupportedAudioCodec" xml:space="preserve">
     <value>{0}: Unsupported audio codec.</value>
   </data>
+  <data name="WatchAsSuspect" xml:space="preserve">
+    <value>Watch as a suspect</value>
+  </data>
 </root>
