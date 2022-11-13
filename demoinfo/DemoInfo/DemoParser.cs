@@ -174,7 +174,7 @@ namespace DemoInfo
         /// <summary>
         /// Occurs when the plant is aborted
         /// </summary>
-        public event EventHandler<BombEventArgs> BombAbortPlant;
+        public event EventHandler<BombPlantAbortedArgs> BombAbortPlant;
 
         /// <summary>
         /// Occurs when the bomb has been planted.
@@ -494,6 +494,10 @@ namespace DemoInfo
         /// <value>The current tick.</value>
         public int IngameTick { get; internal set; }
 
+        public Player CurrentDefuser { get; internal set; }
+        public Player BombCarrier { get; internal set; }
+        public Player CurrentPlanter { get; internal set; }
+
         /// <summary>
         /// How far we've advanced in the demo in seconds. 
         /// </summary>
@@ -794,6 +798,44 @@ namespace DemoInfo
             HandleInfernos();
 
             HandleGameRules();
+
+            HandleBomb();
+        }
+
+        private void HandleBomb()
+        {
+            SendTableParser.FindByName("CC4").OnNewEntity += (object sender, EntityCreatedEventArgs e) =>
+            {
+                e.Entity.FindProperty("m_vecOrigin").VectorRecived += (xx, update) =>
+                {
+                    BombCarrier = null;
+                };
+
+                e.Entity.FindProperty("m_hOwner").IntRecived += (xx, update) =>
+                {
+                    BombCarrier = PlayingParticipants.FirstOrDefault(p => p.EntityID == (update.Value & INDEX_MASK));
+                };
+
+                e.Entity.FindProperty("m_bStartedArming").IntRecived += (xx, update) =>
+                {
+                    if (update.Value != 0)
+                    {
+                        CurrentPlanter = BombCarrier;
+                    } else if (CurrentPlanter != null)
+                    {
+                        CurrentPlanter.IsPlanting = false;
+                        RaiseBombAbortPlant(new BombPlantAbortedArgs
+                        {
+                            Player = CurrentPlanter,
+                        });
+                    }
+                };
+            };
+
+            SendTableParser.FindByName("CPlantedC4").OnNewEntity += (object sender, EntityCreatedEventArgs e) =>
+            {
+                BombCarrier = null;
+            };
         }
 
         private void HandleTeamScores()
@@ -1094,6 +1136,21 @@ namespace DemoInfo
                 }
 
                 p.HasDefuseKit = hasDefuserNow;
+            };
+            playerEntity.FindProperty("m_bIsDefusing").IntRecived += (sender, e) =>
+            {
+                var isDefusing = e.Value == 1;
+                if (p == CurrentDefuser && p.IsDefusing && !isDefusing)
+                {
+                    RaiseBombAbortDefuse(new BombDefuseEventArgs
+                    {
+                        HasKit = p.HasDefuseKit,
+                        Player = p,
+                    });
+                    CurrentDefuser = null;
+                }
+
+                p.IsDefusing = isDefusing;
             };
             playerEntity.FindProperty("m_bHasHelmet").IntRecived += (sender, e) =>
             {
@@ -1601,7 +1658,7 @@ namespace DemoInfo
             }
         }
 
-        internal void RaiseBombAbortPlant(BombEventArgs args)
+        internal void RaiseBombAbortPlant(BombPlantAbortedArgs args)
         {
             if (BombAbortPlant != null)
             {

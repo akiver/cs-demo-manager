@@ -420,18 +420,27 @@ namespace DemoInfo.DP.Handler
                     switch (eventDescriptor.Name)
                     {
                         case "bomb_beginplant":
+                            parser.CurrentPlanter = bombEventArgs.Player;
+                            if (parser.CurrentPlanter != null)
+                            {
+                                parser.CurrentPlanter.IsPlanting = true;
+                            }
                             parser.RaiseBombBeginPlant(bombEventArgs);
                             break;
-                        case "bomb_abortplant":
-                            parser.RaiseBombAbortPlant(bombEventArgs);
-                            break;
                         case "bomb_planted":
+                            if (parser.CurrentPlanter != null)
+                            {
+                                parser.CurrentPlanter.IsPlanting = false;
+                            }
+                            parser.CurrentPlanter = null;
                             parser.RaiseBombPlanted(bombEventArgs);
                             break;
                         case "bomb_defused":
+                            parser.CurrentDefuser = null;
                             parser.RaiseBombDefused(bombEventArgs);
                             break;
                         case "bomb_exploded":
+                            parser.CurrentDefuser = null;
                             parser.RaiseBombExploded(bombEventArgs);
                             break;
                     }
@@ -442,14 +451,8 @@ namespace DemoInfo.DP.Handler
                     var e = new BombDefuseEventArgs();
                     e.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
                     e.HasKit = (bool)data["haskit"];
+                    parser.CurrentDefuser = e.Player;
                     parser.RaiseBombBeginDefuse(e);
-                    break;
-                case "bomb_abortdefuse":
-                    data = MapData(eventDescriptor, rawEvent);
-                    var e2 = new BombDefuseEventArgs();
-                    e2.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
-                    e2.HasKit = e2.Player.HasDefuseKit;
-                    parser.RaiseBombAbortDefuse(e2);
                     break;
             }
         }

@@ -192,6 +192,11 @@ namespace DemoInfo
         public bool HasKit { get; set; }
     }
 
+    public class BombPlantAbortedArgs : EventArgs
+    {
+        public Player Player { get; set; }
+    }
+
     public class PlayerHurtEventArgs : EventArgs
     {
         /// <summary>
