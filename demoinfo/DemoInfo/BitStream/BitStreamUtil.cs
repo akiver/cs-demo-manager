@@ -85,7 +85,7 @@ namespace DemoInfo
 
         public static string ReadCString(this IBitStream reader, int length)
         {
-            return Encoding.Default.GetString(reader.ReadBytes(length)).Split(new char[] { '\0' }, 2)[0];
+            return Encoding.UTF8.GetString(reader.ReadBytes(length)).Split(new char[] { '\0' }, 2)[0];
         }
 
         public static uint ReadVarInt(this IBitStream bs)
