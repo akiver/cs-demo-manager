@@ -21,9 +21,9 @@ namespace Services.Concrete
                         result += demo.PlayersHurted.Where(e => steamIdList.Contains(e.AttackerSteamId) && e.HitGroup == Hitgroup.Chest
                             && roundNumberList.Contains(e.RoundNumber)).Sum(e => e.HealthDamage);
                         break;
+                    case Hitgroup.Neck:
                     case Hitgroup.Head:
-                        result += demo.PlayersHurted.Where(e => steamIdList.Contains(e.AttackerSteamId) && e.HitGroup == Hitgroup.Head
-                            && roundNumberList.Contains(e.RoundNumber)).Sum(e => e.HealthDamage);
+                        result += demo.PlayersHurted.Where(e => steamIdList.Contains(e.AttackerSteamId) && e.HitGroup == Hitgroup.Head || e.HitGroup == Hitgroup.Neck && roundNumberList.Contains(e.RoundNumber)).Sum(e => e.HealthDamage);
                         break;
                     case Hitgroup.LeftArm:
                         result += demo.PlayersHurted.Where(e => steamIdList.Contains(e.AttackerSteamId) && e.HitGroup == Hitgroup.LeftArm

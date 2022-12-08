@@ -470,6 +470,7 @@ namespace DemoInfo
         RightArm = 5,
         LeftLeg = 6,
         RightLeg = 7,
+        Neck = 8,
         Gear = 10,
     };
 
