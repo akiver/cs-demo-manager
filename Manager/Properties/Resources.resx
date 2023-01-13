@@ -3337,4 +3337,7 @@ Error: {0}.</value>
   <data name="WatchAsSuspect" xml:space="preserve">
     <value>Watch as a suspect</value>
   </data>
+  <data name="DialogStartingCsgoAccessDenied" xml:space="preserve">
+    <value>Access was denied when trying to start CSGO. Make sure to close any running anti cheat software and retry.</value>
+  </data>
 </root>

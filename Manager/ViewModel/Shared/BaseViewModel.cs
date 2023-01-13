@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Core;
@@ -68,6 +69,13 @@ namespace Manager.ViewModel.Shared
                     break;
                 case KillHlaeException _:
                     message = string.Format(Properties.Resources.DialogErrorKillingHlae, ex.InnerException != null ? ex.InnerException.Message : ex.Message);
+                    break;
+                case Win32Exception e:
+                    // Possible codes https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-erref/18d8fbe8-a967-4f1c-ae50-99ca8e491d2d
+                    if (e.NativeErrorCode == 5) // ERROR_ACCESS_DENIED
+                    {
+                        message = Properties.Resources.DialogStartingCsgoAccessDenied;
+                    }
                     break;
             }
 

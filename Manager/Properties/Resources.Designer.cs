@@ -2538,6 +2538,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Access was denied when trying to start CSGO. Make sure to close any running anti cheat software and retry..
+        /// </summary>
+        public static string DialogStartingCsgoAccessDenied {
+            get {
+                return ResourceManager.GetString("DialogStartingCsgoAccessDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Steam doesn&apos;t seems to be installed.
         ///Unable to start the game..
         /// </summary>

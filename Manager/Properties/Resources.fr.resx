@@ -3230,4 +3230,7 @@ Error: {0}.</value>
   <data name="WatchAsSuspect" xml:space="preserve">
     <value>Voir comme suspect</value>
   </data>
+  <data name="DialogStartingCsgoAccessDenied" xml:space="preserve">
+    <value>L'accès a été refusé en essayant de lancer CSGO. Assurez-vous de fermer tout logiciel anti-triche en cours d'exécution et réessayez.</value>
+  </data>
 </root>
