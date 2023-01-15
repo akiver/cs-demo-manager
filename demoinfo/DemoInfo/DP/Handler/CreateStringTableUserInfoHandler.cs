@@ -109,6 +109,15 @@ namespace DemoInfo.DP.Handler
                     PlayerInfo info = PlayerInfo.ParseFrom(playerReader);
 
                     parser.RawPlayers[entryIndex] = info;
+
+                    if (parser.Header.ClientName == info.Name)
+                    {
+                        parser.recordingPlayerSlot = entryIndex;
+                        parser.RaisePOVRecordingPlayerDetected(new POVRecordingPlayerDetectedEventArgs{
+                            Player = info,
+                            PlayerSlot = entryIndex,
+                        });
+                    }
                 }
                 else if (table.Name == "instancebaseline")
                 {

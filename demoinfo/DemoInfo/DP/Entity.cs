@@ -9,14 +9,16 @@ namespace DemoInfo.DP
     internal class Entity
     {
         public int ID { get; set; }
+        public uint SerialNumber { get; set; }
 
         public ServerClass ServerClass { get; set; }
 
         public PropertyEntry[] Props { get; private set; }
 
-        public Entity(int id, ServerClass serverClass)
+        public Entity(int id, uint serialNumber, ServerClass serverClass)
         {
             ID = id;
+            SerialNumber = serialNumber;
             ServerClass = serverClass;
 
             var flattenedProps = ServerClass.FlattenedProps;

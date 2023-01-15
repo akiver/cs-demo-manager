@@ -279,6 +279,12 @@ namespace DemoInfo
 
         public event EventHandler<VoiceDataEventArgs> VoiceData;
 
+        /// <summary>
+        /// Occurs when a player started recording the demo locally.
+        /// If this event is dispatched, it means it's a client-side (POV) demo.
+        /// </summary>
+        public event EventHandler<POVRecordingPlayerDetectedEventArgs> POVRecordingPlayerDetected;
+
         #endregion
 
         /// <summary>
@@ -373,6 +379,12 @@ namespace DemoInfo
         internal int bombsiteAIndex = -1, bombsiteBIndex = -1;
 
         internal Vector bombsiteACenter, bombsiteBCenter;
+
+        /// <summary>
+        /// Set to the client slot of the recording player.
+        /// Always -1 for GOTV demos.
+        /// </summary>
+        internal int recordingPlayerSlot = -1;
 
         /// <summary>
         /// The ID of the CT-Team
@@ -1071,14 +1083,30 @@ namespace DemoInfo
             p.Position = new Vector();
             p.Velocity = new Vector();
 
+            string positionPropNameXY;
+            string positionPropNameZ;
+
+            var isGotv = recordingPlayerSlot == -1;
+            var isRecording = recordingPlayerSlot == playerEntity.ID - 1;
+            if (isGotv || isRecording)
+            {
+                positionPropNameXY = "cslocaldata.m_vecOrigin";
+                positionPropNameZ = "cslocaldata.m_vecOrigin[2]";
+            }
+            else
+            {
+                positionPropNameXY = "csnonlocaldata.m_vecOrigin";
+                positionPropNameZ = "csnonlocaldata.m_vecOrigin[2]";
+            }
+
             //position update
-            playerEntity.FindProperty("cslocaldata.m_vecOrigin").VectorRecived += (sender, e) =>
+            playerEntity.FindProperty(positionPropNameXY).VectorRecived += (sender, e) =>
             {
                 p.Position.X = e.Value.X;
                 p.Position.Y = e.Value.Y;
             };
 
-            playerEntity.FindProperty("cslocaldata.m_vecOrigin[2]").FloatRecived += (sender, e) => { p.Position.Z = e.Value; };
+            playerEntity.FindProperty(positionPropNameZ).FloatRecived += (sender, e) => { p.Position.Z = e.Value; };
 
             //team update
             //problem: Teams are networked after the players... How do we solve that?
@@ -1799,6 +1827,14 @@ namespace DemoInfo
             if (VoiceData != null)
             {
                 VoiceData(this, args);
+            }
+        }
+
+        internal void RaisePOVRecordingPlayerDetected(POVRecordingPlayerDetectedEventArgs args)
+        {
+            if (POVRecordingPlayerDetected != null)
+            {
+                POVRecordingPlayerDetected(this, args);
             }
         }
 

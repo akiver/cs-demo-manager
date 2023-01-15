@@ -508,6 +508,13 @@ namespace DemoInfo
         public Player Player { get; set; }
     }
 
+    public class POVRecordingPlayerDetectedEventArgs : EventArgs
+    {
+        public PlayerInfo Player { get; set; }
+
+        public int PlayerSlot { get; set; }
+    }
+
     public class Equipment
     {
         internal int EntityID { get; set; }

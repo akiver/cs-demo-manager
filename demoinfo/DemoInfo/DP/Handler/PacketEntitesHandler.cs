@@ -7,84 +7,89 @@ namespace DemoInfo.DP.Handler
     public static class PacketEntitesHandler
     {
         /// <summary>
-        /// Decodes the bytes in the packet-entites message. 
+        /// Decodes the bytes in the packet-entities message. 
         /// </summary>
         /// <param name="packetEntities">Packet entities.</param>
         /// <param name="reader">Reader.</param>
         /// <param name="parser">Parser.</param>
         public static void Apply(PacketEntities packetEntities, IBitStream reader, DemoParser parser)
         {
-            int currentEntity = -1;
+            int entityIndex = -1;
 
-            for (int i = 0; i < packetEntities.UpdatedEntries; i++)
+            for (var i = 0; i < packetEntities.UpdatedEntries; i++)
             {
-                //First read which entity is updated
-                currentEntity += 1 + (int)reader.ReadUBitInt();
+                entityIndex += 1 + (int)reader.ReadUBitInt();
 
-                //Find out whether we should create, destroy or update it. 
-                // Leave flag
-                if (!reader.ReadBit())
+                if (reader.ReadBit())
                 {
-                    // enter flag
+                    // FHDR_LEAVEPVS => LeavePVS
                     if (reader.ReadBit())
                     {
-                        //create it
-                        var e = ReadEnterPVS(reader, currentEntity, parser);
-
-                        parser.Entities[currentEntity] = e;
-
+                        // FHDR_LEAVEPVS | FHDR_DELETE => LeavePVS with force delete. Should never happen on full update
+                        var e = parser.Entities[entityIndex];
+                        if (e != null)
+                        {
+                            e.ServerClass.AnnounceDestroyedEntity(e);
+                            e.Leave();
+                            parser.Entities[entityIndex] = null;
+                        }
+                    }
+                }
+                else if (reader.ReadBit())
+                {
+                    // FHDR_ENTERPVS => EnterPVS
+                    var newEntity = ReadEnterPVS(reader, entityIndex, parser);
+                    parser.Entities[entityIndex] = newEntity;
+                }
+                else
+                {
+                    // Delta update
+                    var e = parser.Entities[entityIndex];
+                    if (e != null)
+                    {
                         e.ApplyUpdate(reader);
                     }
                     else
                     {
-                        // preserve / update
-                        Entity e = parser.Entities[currentEntity];
-                        e.ApplyUpdate(reader);
-                    }
-                }
-                else
-                {
-                    Entity e = parser.Entities[currentEntity];
-                    e.ServerClass.AnnounceDestroyedEntity(e);
-
-                    // leave / destroy
-                    e.Leave();
-                    parser.Entities[currentEntity] = null;
-
-                    //dunno, but you gotta read this.
-                    if (reader.ReadBit())
-                    {
+                        throw new Exception("Entity with index " + entityIndex + " doesn't exist but got an update");
                     }
                 }
             }
         }
 
         /// <summary>
-        /// Reads an update that occures when a new edict enters the PVS (potentially visible system)
+        /// Reads an update that occurs when a new edict enters the PVS (potentially visible system)
         /// </summary>
         /// <returns>The new Entity.</returns>
-        private static Entity ReadEnterPVS(IBitStream reader, int id, DemoParser parser)
+        private static Entity ReadEnterPVS(IBitStream reader, int entityId, DemoParser parser)
         {
-            //What kind of entity?
-            int serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
+            var serverClassID = (int)reader.ReadInt(parser.SendTableParser.ClassBits);
+            var entityClass = parser.SendTableParser.ServerClasses[serverClassID];
+            var serialNumber = reader.ReadInt(10);
 
-            //So find the correct server class
-            ServerClass entityClass = parser.SendTableParser.ServerClasses[serverClassID];
+            var existingEntity = parser.Entities[entityId];
+            if (existingEntity != null && existingEntity.SerialNumber == serialNumber)
+            {
+                existingEntity.ApplyUpdate(reader);
+                return existingEntity;
+            }
 
-            reader.ReadInt(10); //Entity serial. 
-            //Never used anywhere I guess. Every parser just skips this
+            // Serial numbers are different, delete the entity
+            if (existingEntity != null)
+            {
+                existingEntity.ServerClass.AnnounceDestroyedEntity(existingEntity);
+                existingEntity.Leave();
+                parser.Entities[entityId] = null;
+            }
 
-
-            Entity newEntity = new Entity(id, entityClass);
-
-            //give people the chance to subscribe to events for this
+            var newEntity = new Entity(entityId, serialNumber, entityClass);
             newEntity.ServerClass.AnnounceNewEntity(newEntity);
 
             //And then parse the instancebaseline. 
             //basically you could call
             //newEntity.ApplyUpdate(parser.instanceBaseline[entityClass]; 
             //This code below is just faster, since it only parses stuff once
-            //which is faster. 
+            //which is faster.
 
             object[] fastBaseline;
             if (parser.PreprocessedBaselines.TryGetValue(serverClassID, out fastBaseline))
@@ -96,7 +101,7 @@ namespace DemoInfo.DP.Handler
                 var preprocessedBaseline = new List<object>();
                 if (parser.instanceBaseline.ContainsKey(serverClassID))
                 {
-                    using (var collector = new PropertyCollector(newEntity, preprocessedBaseline))
+                    using (new PropertyCollector(newEntity, preprocessedBaseline))
                     using (var bitStream = BitStreamUtil.Create(parser.instanceBaseline[serverClassID]))
                     {
                         newEntity.ApplyUpdate(bitStream);
@@ -105,6 +110,8 @@ namespace DemoInfo.DP.Handler
 
                 parser.PreprocessedBaselines.Add(serverClassID, preprocessedBaseline.ToArray());
             }
+
+            newEntity.ApplyUpdate(reader);
 
             return newEntity;
         }
