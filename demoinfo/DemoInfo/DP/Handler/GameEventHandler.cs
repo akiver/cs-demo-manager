@@ -10,6 +10,9 @@ namespace DemoInfo.DP.Handler
     /// </summary>
     public static class GameEventHandler
     {
+        // Track players fall damages per tick to properly detect damages caused by the "World".
+        private static readonly Dictionary<int, int> _userIdFallDamagePerTick = new Dictionary<int, int>();
+
         public static void HandleGameEventList(IEnumerable<GameEventList.Descriptor> gel, DemoParser parser)
         {
             parser.GEH_Descriptors = new Dictionary<int, GameEventList.Descriptor>();
@@ -146,45 +149,42 @@ namespace DemoInfo.DP.Handler
 
                     data = MapData(eventDescriptor, rawEvent);
 
-                    WeaponFiredEventArgs fire = new WeaponFiredEventArgs();
-                    fire.Shooter = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
-
-                    if (fire.Shooter != null && fire.Shooter.ActiveWeapon != null)
+                    var fire = new WeaponFiredEventArgs
                     {
-                        fire.Weapon = fire.Shooter.ActiveWeapon;
+                        Shooter = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null,
+                        Weapon = new Equipment((string)data["weapon"]),
+                    };
+
+                    parser.RaiseWeaponFired(fire);
+                    break;
+                case "player_falldamage":
+                    data = MapData(eventDescriptor, rawEvent);
+                    var fallDamageUserId = (int)data["userid"];
+                    if (_userIdFallDamagePerTick.ContainsKey(fallDamageUserId))
+                    {
+                        _userIdFallDamagePerTick[fallDamageUserId] = parser.IngameTick;
                     }
                     else
                     {
-                        // should not happen but we never know
-                        fire.Weapon = new Equipment((string)data["weapon"]);
+                        _userIdFallDamagePerTick.Add(fallDamageUserId, parser.IngameTick);
                     }
-
-                    parser.RaiseWeaponFired(fire);
                     break;
                 case "player_death":
                     data = MapData(eventDescriptor, rawEvent);
 
                     PlayerKilledEventArgs kill = new PlayerKilledEventArgs();
 
-                    kill.Victim = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
+                    var victimUserId = (int)data["userid"];
+                    kill.Victim = parser.Players.ContainsKey(victimUserId) ? parser.Players[victimUserId] : null;
                     kill.Killer = parser.Players.ContainsKey((int)data["attacker"]) ? parser.Players[(int)data["attacker"]] : null;
                     kill.Assister = parser.Players.ContainsKey((int)data["assister"]) ? parser.Players[(int)data["assister"]] : null;
                     kill.Headshot = (bool)data["headshot"];
                     kill.Weapon = new Equipment((string)data["weapon"], (string)data["weapon_itemid"]);
+                    kill.Weapon = GetAttackerWeapon(parser, kill.Weapon, victimUserId);
 
                     if (data.ContainsKey("assistedflash"))
                     {
                         kill.AssistedFlash = (bool)data["assistedflash"];
-                    }
-
-                    if (kill.Killer != null && kill.Killer.ActiveWeapon != null)
-                    {
-                        // in case of grenade kills, killer's active weapon is not his grenade at this state
-                        if (kill.Weapon == null || kill.Weapon != null && kill.Weapon.Class != EquipmentClass.Grenade)
-                        {
-                            kill.Weapon = kill.Killer.ActiveWeapon;
-                            kill.Weapon.SkinID = (string)data["weapon_itemid"];
-                        }
                     }
 
                     kill.PenetratedObjects = (int)data["penetrated"];
@@ -195,23 +195,15 @@ namespace DemoInfo.DP.Handler
                     data = MapData(eventDescriptor, rawEvent);
 
                     PlayerHurtEventArgs hurt = new PlayerHurtEventArgs();
-                    hurt.Player = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
+                    var userId = (int)data["userid"];
+                    hurt.Player = parser.Players.ContainsKey(userId) ? parser.Players[userId] : null;
                     hurt.Attacker = parser.Players.ContainsKey((int)data["attacker"]) ? parser.Players[(int)data["attacker"]] : null;
                     hurt.Health = (int)data["health"];
                     hurt.Armor = (int)data["armor"];
                     hurt.HealthDamage = (int)data["dmg_health"];
                     hurt.ArmorDamage = (int)data["dmg_armor"];
                     hurt.Hitgroup = (Hitgroup)(int)data["hitgroup"];
-                    hurt.Weapon = new Equipment((string)data["weapon"]);
-
-                    if (hurt.Attacker != null && hurt.Attacker.ActiveWeapon != null)
-                    {
-                        // in case of grenade attacks, attacker's active weapon is not his grenade at this state
-                        if (hurt.Weapon == null || hurt.Weapon != null && hurt.Weapon.Class != EquipmentClass.Grenade)
-                        {
-                            hurt.Weapon = hurt.Attacker.ActiveWeapon;
-                        }
-                    }
+                    hurt.Weapon = GetAttackerWeapon(parser, new Equipment((string)data["weapon"]), userId);
 
                     parser.RaisePlayerHurt(hurt);
                     break;
@@ -483,6 +475,27 @@ namespace DemoInfo.DP.Handler
             long authServer = Convert.ToInt64(steamID.Substring(8, 1));
             long authID = Convert.ToInt64(steamID.Substring(10));
             return 76561197960265728 + authID * 2 + authServer;
+        }
+
+
+        /// <summary>
+        /// Try to return the more accurate weapon for player_hurt/player_death events that have an unknown weapon.
+        /// It can happens with players death caused by fall damages or bomb damages.
+        /// </summary>
+        private static Equipment GetAttackerWeapon(DemoParser parser, Equipment equipment, int userId)
+        {
+            if (equipment.Weapon != EquipmentElement.Unknown)
+            {
+                return equipment;
+            }
+
+            // The player took damages from falling at the current tick, set the weapon to "World".
+            if (_userIdFallDamagePerTick.ContainsKey(userId) && _userIdFallDamagePerTick[userId] == parser.IngameTick)
+            {
+                return new Equipment("weapon_world");
+            }
+
+            return new Equipment("weapon_c4");
         }
     }
 }

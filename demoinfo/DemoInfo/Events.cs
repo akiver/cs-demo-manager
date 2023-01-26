@@ -619,6 +619,9 @@ namespace DemoInfo
                     case "weapon_molotovgrenade":
                         weapon = EquipmentElement.Molotov;
                         break;
+                    case "weapon_planted_c4":
+                        weapon = EquipmentElement.Bomb;
+                        break;
                     default:
                         Trace.WriteLine("Unknown weapon. " + originalString, "Equipment.MapEquipment()");
                         break;
