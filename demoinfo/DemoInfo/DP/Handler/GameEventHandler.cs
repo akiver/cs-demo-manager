@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace DemoInfo.DP.Handler
@@ -343,39 +344,29 @@ namespace DemoInfo.DP.Handler
 
                 case "player_team":
                     data = MapData(eventDescriptor, rawEvent);
-                    PlayerTeamEventArgs playerTeamEvent = new PlayerTeamEventArgs();
-
-                    Team t = Team.Spectate;
-
-                    int team = (int)data["team"];
-
-                    if (team == parser.tID)
+                    var swapped = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
+                    var newTeam = (Team)data["team"];
+                    if (swapped != null)
                     {
-                        t = Team.Terrorist;
+                        if (swapped.Team != newTeam)
+                        {
+                            swapped.Team = newTeam;
+                        }
                     }
-                    else if (team == parser.ctID)
+                    else
                     {
-                        t = Team.CounterTerrorist;
-                    }
-
-                    playerTeamEvent.NewTeam = t;
-
-                    t = Team.Spectate;
-                    team = (int)data["oldteam"];
-                    if (team == parser.tID)
-                    {
-                        t = Team.Terrorist;
-                    }
-                    else if (team == parser.ctID)
-                    {
-                        t = Team.CounterTerrorist;
+                        // ¯\_(ツ)_/¯
+                        Trace.WriteLine("player_team event occurred but the swapped player is null");
                     }
 
-                    playerTeamEvent.OldTeam = t;
-
-                    playerTeamEvent.Swapped = parser.Players.ContainsKey((int)data["userid"]) ? parser.Players[(int)data["userid"]] : null;
-                    playerTeamEvent.IsBot = (bool)data["isbot"];
-                    playerTeamEvent.Silent = (bool)data["silent"];
+                    var playerTeamEvent = new PlayerTeamEventArgs
+                    {
+                        NewTeam = newTeam,
+                        OldTeam = (Team)data["oldteam"],
+                        Swapped = swapped,
+                        IsBot = (bool)data["isbot"],
+                        Silent = (bool)data["silent"],
+                    };
 
                     parser.RaisePlayerTeam(playerTeamEvent);
                     break;

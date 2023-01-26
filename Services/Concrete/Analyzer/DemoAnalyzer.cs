@@ -1477,7 +1477,7 @@ namespace Services.Concrete.Analyzer
 
         protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
         {
-            if (e.Swapped == null || e.Swapped.SteamID == 0)
+            if (e.Swapped == null || e.Swapped.SteamID == 0 || e.NewTeam == DemoInfo.Team.Spectate)
             {
                 return;
             }
