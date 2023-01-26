@@ -1475,6 +1475,11 @@ namespace Services.Concrete.Analyzer
             playerDisconnected.IsConnected = false;
         }
 
+        protected void HandlePOVPlayerRecordingDetected(object sender, POVRecordingPlayerDetectedEventArgs e)
+        {
+            Demo.Type = Pov.NAME;
+        }
+
         protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
         {
             if (e.Swapped == null || e.Swapped.SteamID == 0 || e.NewTeam == DemoInfo.Team.Spectate)

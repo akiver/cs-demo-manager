@@ -74,6 +74,7 @@ namespace Services.Concrete.Analyzer
             Parser.WinPanelMatch += HandleWinPanelMatch;
             Parser.GamePhaseChanged += HandleGamePhaseChanged;
             Parser.RoundWinStatusChanged += HandleRoundWinStatusChanged;
+            Parser.POVRecordingPlayerDetected += HandlePOVPlayerRecordingDetected;
         }
 
         public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)

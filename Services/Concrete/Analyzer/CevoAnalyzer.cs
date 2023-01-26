@@ -74,6 +74,7 @@ namespace Services.Concrete.Analyzer
             Parser.PlayerTeam += HandlePlayerTeam;
             Parser.SayText2 += HandleSayText2;
             Parser.FreezetimeEnded += HandleFreezetimeEnded;
+            Parser.POVRecordingPlayerDetected += HandlePOVPlayerRecordingDetected;
         }
 
         protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
