@@ -988,21 +988,29 @@ namespace DemoInfo
         {
             SendTableParser.FindByName("CCSGameRulesProxy").OnNewEntity += (object sender, EntityCreatedEventArgs e) =>
             {
+                GamePhase currentGamePhase = GamePhase.Init;
+                RoundWinStatus currentWinStatus = RoundWinStatus.Unassigned;
                 e.Entity.FindProperty("cs_gamerules_data.m_gamePhase").IntRecived += (xx, update) =>
                 {
+                    var newGamePhase = (GamePhase)update.Value;
                     GamePhaseChangedArgs ev = new GamePhaseChangedArgs
                     {
-                        GamePhase = (GamePhase)update.Value
+                        OldGamePhase = currentGamePhase,
+                        NewGamePhase = newGamePhase,
                     };
                     RaiseGamePhaseChanged(ev);
+                    currentGamePhase = newGamePhase;
                 };
                 e.Entity.FindProperty("cs_gamerules_data.m_iRoundWinStatus").IntRecived += (xx, update) =>
                 {
+                    var newWinStats = (RoundWinStatus)update.Value;
                     RoundWinStatusChangedArgs ev = new RoundWinStatusChangedArgs
                     {
-                        WinStatus = (RoundWinStatus)update.Value
+                        OldWinStatus = currentWinStatus,
+                        NewWinStatus = newWinStats,
                     };
                     RaiseRoundWinStatusChanged(ev);
+                    currentWinStatus = newWinStats;
                 };
             };
         }
