@@ -175,7 +175,13 @@ namespace Services.Concrete.Analyzer
                 return;
             }
 
-            switch (e.GamePhase)
+            var valueChanged = e.NewGamePhase != e.OldGamePhase;
+            if (!valueChanged)
+            {
+                return;
+            }
+
+            switch (e.NewGamePhase)
             {
                 case GamePhase.TeamSideSwitch:
                     SwapTeams();
@@ -197,7 +203,9 @@ namespace Services.Concrete.Analyzer
                 return;
             }
 
-            bool isRoundStart = e.WinStatus == RoundWinStatus.Unassigned;
+            // m_iRoundWinStatus may be updated several times with the same value at the same tick with POV demos.
+            var valueChanged = e.OldWinStatus != e.NewWinStatus;
+            bool isRoundStart = e.NewWinStatus == RoundWinStatus.Unassigned && valueChanged;
             if (isRoundStart && !_isRoundStartOccurred)
             {
                 AddCurrentRound();
