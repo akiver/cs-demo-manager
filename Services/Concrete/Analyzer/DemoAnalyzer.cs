@@ -92,7 +92,10 @@ namespace Services.Concrete.Analyzer
         private Player _playerInClutch1 = null;
         private Player _playerInClutch2 = null;
 
-        private static readonly Regex LocalRegex = new Regex("^[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]+(\\:[0-9]{1,5})?$");
+        private static readonly Regex LocalRegex = new Regex("^\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d+(\\:\\d{1,5})?$");
+        // Dunno how it's generated but it's the demo's server name pattern when a player start recording a POV demo with recent CSGO versions.
+        // When using the "status" command, this value is displayed next to the CSGO version, so I think it's based on the CSGO version.
+        private static readonly Regex ModernLocalRegex = new Regex(@"=\[[a-zA-Z]:\d+:\d+:\d+\]");
         private static readonly Regex FILENAME_FACEIT_REGEX = new Regex("^[0-9]+_team[a-z0-9-]+-team[a-z0-9-]+_de_[a-z0-9]+\\.dem");
         private static readonly Regex FILENAME_EBOT_REGEX = new Regex("^([0-9]*)_(.*?)-(.*?)_(.*?)(.dem)$");
 
@@ -165,9 +168,9 @@ namespace Services.Concrete.Analyzer
         protected abstract void HandleMatchStarted(object sender, MatchStartedEventArgs e);
         protected abstract void HandleRoundStart(object sender, RoundStartedEventArgs e);
 
-        public static DemoAnalyzer Factory(Demo demo)
+        public static DemoAnalyzer Factory(Demo demo, string sourceName)
         {
-            switch (demo.SourceName)
+            switch (sourceName)
             {
                 case Valve.NAME:
                 case PopFlash.NAME:
@@ -183,7 +186,10 @@ namespace Services.Concrete.Analyzer
                 case Cevo.NAME:
                     return new CevoAnalyzer(demo);
                 case Pov.NAME:
-                    return null;
+                    // TODO refactor This is a quick workaround to support POV demos without changing how analyzer classes are constructed.
+                    // We should not do recursive calls like this, analyzers should only take the demo path and optionally a forced source and return the Demo.
+                    var source = DetermineDemoSource(demo);
+                    return Factory(demo, source.Name);
                 default:
                     return null;
             }
@@ -241,7 +247,12 @@ namespace Services.Concrete.Analyzer
             demo.Duration = header.PlaybackTime;
             // Valve maps moved from competitive to scrimmage (only mirage ATM) contains the suffix "_scrimmagemap" in the header.
             demo.MapName = header.MapName.Replace("_scrimmagemap", "");
-            demo.Source = DetermineDemoSource(demo, header);
+            demo.Source = DetermineDemoSource(demo);
+            if (IsPovDemo(header.ServerName))
+            {
+                demo.Type = Pov.NAME;
+                demo.Source = Source.Factory(Pov.NAME);
+            }
             demo.Ticks = header.PlaybackTicks;
 
             // Read .info file to get the real match date
@@ -267,16 +278,8 @@ namespace Services.Concrete.Analyzer
             return demo;
         }
 
-        private static Source DetermineDemoSource(Demo demo, DemoHeader header)
+        private static Source DetermineDemoSource(Demo demo)
         {
-            // Check if it's a POV demo
-            Match match = LocalRegex.Match(header.ServerName);
-            if (match.Success || header.ServerName.Contains("localhost"))
-            {
-                demo.Type = Pov.NAME;
-                return Source.Factory(Pov.NAME);
-            }
-
             // Check for faceit demos
             // (Before May 2015) Faceit : uses regex - no false positive but could miss some Faceit demo (when premade playing because of custom team name)
             // (May 2015) Faceit : uses hostname
@@ -327,6 +330,16 @@ namespace Services.Concrete.Analyzer
 
             // If none of the previous checks matched, we use ValveAnalyzer
             return Source.Factory(Valve.NAME);
+        }
+
+        private static bool IsPovDemo(string serverName)
+        {
+            if (serverName.Contains("localhost"))
+            {
+                return true;
+            }
+
+            return LocalRegex.Match(serverName).Success || ModernLocalRegex.Match(serverName).Success;
         }
 
         #region Events Handlers

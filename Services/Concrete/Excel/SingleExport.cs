@@ -32,7 +32,7 @@ namespace Services.Concrete.Excel
                 try
                 {
                     _configuration.OnAnalyzeStart?.Invoke();
-                    var analyzer = DemoAnalyzer.Factory(demo);
+                    var analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
                     if (_configuration.Source != null)
                     {
                         demo.Source = _configuration.Source;

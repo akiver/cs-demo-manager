@@ -304,8 +304,7 @@ namespace Manager.ViewModel.Demos
                            roundNumber =>
                            {
                                Navigation.ShowRoundDetails(Demo, roundNumber);
-                           }, roundNumber => !IsBusy && Demo != null
-                                                     && Demo.Source.GetType() != typeof(Pov) && SelectedRound != null));
+                           }, roundNumber => !IsBusy && Demo != null && SelectedRound != null));
             }
         }
 
@@ -318,8 +317,7 @@ namespace Manager.ViewModel.Demos
                            player =>
                            {
                                Navigation.ShowPlayerDetails(Demo, player);
-                           }, player => !IsBusy && Demo != null
-                                                && Demo.Source.GetType() != typeof(Pov) && SelectedPlayer != null));
+                           }, player => !IsBusy && Demo != null && SelectedPlayer != null));
             }
         }
 
@@ -338,7 +336,7 @@ namespace Manager.ViewModel.Demos
                                }
 
                                Navigation.ShowDemoHeatmap(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -351,7 +349,7 @@ namespace Manager.ViewModel.Demos
                            () =>
                            {
                                Navigation.ShowDemoOverview(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -364,7 +362,7 @@ namespace Manager.ViewModel.Demos
                            () =>
                            {
                                Navigation.ShowDemoKills(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -377,7 +375,7 @@ namespace Manager.ViewModel.Demos
                            () =>
                            {
                                Navigation.ShowDemoDamages(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -396,7 +394,7 @@ namespace Manager.ViewModel.Demos
                                }
 
                                Navigation.ShowDemoFlashbangs(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -409,7 +407,7 @@ namespace Manager.ViewModel.Demos
                            () =>
                            {
                                Navigation.ShowDemoChat(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -448,7 +446,7 @@ namespace Manager.ViewModel.Demos
                                }
 
                                Navigation.ShowDemoStuffs(Demo);
-                           }, () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           }, () => !IsBusy && Demo != null));
             }
         }
 
@@ -614,7 +612,7 @@ namespace Manager.ViewModel.Demos
                                    }
                                }
                            },
-                           () => Demo != null && !IsBusy && Demo.Source.GetType() != typeof(Pov)));
+                           () => Demo != null && !IsBusy));
             }
         }
 
@@ -671,7 +669,7 @@ namespace Manager.ViewModel.Demos
                                HasNotification = false;
                                CommandManager.InvalidateRequerySuggested();
                            },
-                           () => !IsBusy && Demo != null && Demo.Source.GetType() != typeof(Pov)));
+                           () => !IsBusy && Demo != null));
             }
         }
 

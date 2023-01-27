@@ -302,7 +302,7 @@ namespace Manager.ViewModel.Demos
                 }
 
                 // POV filter
-                if (!IsShowPovDemos && data.SourceName == Pov.NAME)
+                if (!IsShowPovDemos && data.Type == Pov.NAME)
                 {
                     return false;
                 }
@@ -419,8 +419,7 @@ namespace Manager.ViewModel.Demos
                                    await RefreshLastRankAccount();
                                }
                            },
-                           demos => SelectedDemos != null && SelectedDemos.Count > 0 &&
-                                    SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
+                           demos => SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy));
             }
         }
 
@@ -598,10 +597,6 @@ namespace Manager.ViewModel.Demos
                                                    _cts = new CancellationTokenSource();
                                                    foreach (var demo in demosToExport)
                                                    {
-                                                       if (demo.SourceName == Pov.NAME)
-                                                       {
-                                                           continue;
-                                                       }
                                                        demoPaths.Add(demo.Path);
                                                    }
 
@@ -904,8 +899,7 @@ namespace Manager.ViewModel.Demos
 
                                await RefreshBannedPlayerCount();
                            },
-                           demos => SelectedDemos != null && SelectedDemos.Count > 0 &&
-                                    SelectedDemos.Count(d => d.Source.GetType() == typeof(Pov)) == 0 && !IsBusy));
+                           demos => SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy));
             }
         }
 

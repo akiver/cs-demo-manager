@@ -13,18 +13,10 @@ namespace CLI
         protected string _outputFolderPath;
         protected bool _forceAnalyze = false;
         protected long _focusSteamId = 0;
-        protected List<string> _availableSources = new List<string>();
 
         public ExportCommand(string commandName, string description) : base(commandName, description)
         {
             _demoPaths = new List<string>();
-            foreach (Source source in Source.Sources)
-            {
-                if (source.Name != Pov.NAME)
-                {
-                    _availableSources.Add(source.Name);
-                }
-            }
         }
 
         protected void ParseArgs(string[] args, string[] allowedOptions)

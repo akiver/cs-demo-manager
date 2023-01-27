@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
+using Core.Models.Source;
 using Services.Concrete;
 using Services.Concrete.Analyzer;
 
@@ -24,7 +25,7 @@ namespace CLI
             Console.WriteLine(@"");
             Console.WriteLine(@"Demos path can be either .dem files location or a directory. It can be relative or absolute.");
             Console.WriteLine(@"The --output argument specify the directory where output files will be saved.");
-            Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", _availableSources)}]");
+            Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", Source.Sources)}]");
             Console.WriteLine(@"The --force-analyze argument force demos analyzes (ignore cached data).");
             Console.WriteLine(@"");
             Console.WriteLine(@"Examples:");
@@ -84,7 +85,7 @@ namespace CLI
                         try
                         {
                             Console.WriteLine($@"Analyzing demo {demoPath}");
-                            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+                            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
                             demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
                             await cacheService.WriteDemoDataCache(demo);
                         }

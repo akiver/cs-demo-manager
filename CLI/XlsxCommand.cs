@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using Core.Models.Source;
 using Services.Concrete.Excel;
 using Services.Exceptions.Export;
 
@@ -25,7 +26,7 @@ namespace CLI
             Console.WriteLine(@"");
             Console.WriteLine(@"Demos path can be either .dem files location or a directory. It can be relative or absolute.");
             Console.WriteLine(@"The --output argument specify the directory where output files will be saved.");
-            Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", _availableSources)}]");
+            Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", Source.Sources)}]");
             Console.WriteLine(@"The --single argument generates a single XLSX file instead of one per demo.");
             Console.WriteLine(@"The --steamid argument makes data in some sheets focusing on the player with the given SteamID (works with --single only).");
             Console.WriteLine(@"The --force-analyze argument force demos analyzes (ignore cached data).");

@@ -349,45 +349,42 @@ namespace Manager.ViewModel.Suspects
 
                                for (int i = 0; i < demos.Count; i++)
                                {
-                                   if (demos[i].Source.GetType() != typeof(Pov) && IsBusy)
+                                   try
                                    {
-                                       try
+                                       if (_cts == null)
                                        {
-                                           if (_cts == null)
-                                           {
-                                               _cts = new CancellationTokenSource();
-                                           }
+                                           _cts = new CancellationTokenSource();
+                                       }
 
-                                           Notification = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
-                                           demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
-                                           await _cacheService.WriteDemoDataCache(demos[i]);
-                                           if (demos[i].Players.Any())
+                                       Notification = string.Format(Properties.Resources.NotificationAnalyzingDemo, demos[i].Name);
+                                       demos[i] = await _demosService.AnalyzeDemo(demos[i], _cts.Token);
+                                       await _cacheService.WriteDemoDataCache(demos[i]);
+                                       if (demos[i].Players.Any())
+                                       {
+                                           foreach (Player playerExtended in demos[i].Players)
                                            {
-                                               foreach (Player playerExtended in demos[i].Players)
-                                               {
-                                                   Notification = Properties.Resources.NotificationAddingSuspects;
-                                                   await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
-                                               }
+                                               Notification = Properties.Resources.NotificationAddingSuspects;
+                                               await _cacheService.AddSuspectToCache(playerExtended.SteamId.ToString());
                                            }
                                        }
-                                       catch (Exception e)
+                                   }
+                                   catch (Exception e)
+                                   {
+                                       Logger.Instance.Log(e);
+                                       await _dialogService.ShowErrorAsync(
+                                           string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, demos[i].Name,
+                                               AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
+                                       if (demos[i].Duration == 0.0) // invalid header
                                        {
-                                           Logger.Instance.Log(e);
-                                           await _dialogService.ShowErrorAsync(
-                                               string.Format(Properties.Resources.DialogErrorWhileAnalyzingDemo, demos[i].Name,
-                                                   AppSettings.APP_WEBSITE), MessageDialogStyle.Affirmative);
-                                           if (demos[i].Duration == 0.0) // invalid header
-                                           {
-                                               demos[i].Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
-                                           }
-                                           else
-                                           {
-                                               demos[i].Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
-                                           }
-
-                                           demosFailed.Add(demos[i]);
-                                           await _cacheService.WriteDemoDataCache(demos[i]);
+                                           demos[i].Status = DemoStatus.NAME_DEMO_STATUS_CORRUPTED;
                                        }
+                                       else
+                                       {
+                                           demos[i].Status = DemoStatus.NAME_DEMO_STATUS_ERROR;
+                                       }
+
+                                       demosFailed.Add(demos[i]);
+                                       await _cacheService.WriteDemoDataCache(demos[i]);
                                    }
                                }
 

@@ -12,7 +12,6 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using Core;
 using Core.Models;
-using Core.Models.Source;
 using GalaSoft.MvvmLight.CommandWpf;
 using GalaSoft.MvvmLight.Messaging;
 using MahApps.Metro.Controls.Dialogs;
@@ -100,11 +99,6 @@ namespace Manager.ViewModel.Demos
         /// </summary>
         private bool _isCorruptedDemo;
 
-        /// <summary>
-        /// Flag to adapt the UI with POV demos.
-        /// </summary>
-        private bool _isPovDemo;
-
         public bool IsInstalling
         {
             get => _isInstalling;
@@ -145,12 +139,6 @@ namespace Manager.ViewModel.Demos
         {
             get => _isTimelineAvailable;
             set { Set(() => IsTimelineAvailable, ref _isTimelineAvailable, value); }
-        }
-
-        public bool IsPovDemo
-        {
-            get => _isPovDemo;
-            set { Set(() => IsPovDemo, ref _isPovDemo, value); }
         }
 
         public bool IsCorruptedDemo
@@ -614,7 +602,7 @@ namespace Manager.ViewModel.Demos
         public string MandatoryCvars => string.Join(Environment.NewLine, MovieService.MandatoryCommands) + Environment.NewLine + "host_framerate " +
                                         FrameRate;
 
-        public bool IsAnalyzeRequired => !IsPovDemo && !IsTimelineAvailable && !IsCorruptedDemo;
+        public bool IsAnalyzeRequired => !IsTimelineAvailable && !IsCorruptedDemo;
 
         public bool IsPlayerListEnabled => FocusOnPlayer && !IsBusy;
 
@@ -1433,9 +1421,8 @@ namespace Manager.ViewModel.Demos
                                {
                                    Notification = Properties.Resources.LoadingData;
                                    HasNotification = true;
-                                   IsPovDemo = Demo.Type == Pov.NAME;
                                    IsCorruptedDemo = Demo.Ticks == 0;
-                                   IsIncompatibleDemo = IsCorruptedDemo || IsPovDemo;
+                                   IsIncompatibleDemo = IsCorruptedDemo;
 
                                    foreach (Player player in Demo.TeamCT.Players)
                                    {

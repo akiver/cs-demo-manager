@@ -221,7 +221,7 @@ namespace Services.Concrete
                 await _cacheService.RemoveDemo(demo.Id);
             }
 
-            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
 
             demo = await analyzer.AnalyzeDemoAsync(token, progressCallback);
 
@@ -266,7 +266,7 @@ namespace Services.Concrete
                 await _cacheService.RemoveDemo(demo.Id);
             }
 
-            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+            DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
             analyzer.AnalyzePlayersPosition = true;
 
             demo = await analyzer.AnalyzeDemoAsync(token);

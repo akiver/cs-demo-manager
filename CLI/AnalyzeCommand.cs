@@ -15,18 +15,11 @@ namespace CLI
         public const string COMMAND_NAME = "analyze";
         protected Source _source;
         protected readonly List<string> _demoPaths = new List<string>();
-        protected List<string> _availableSources = new List<string>();
         protected bool _forceAnalyze = false;
 
         public AnalyzeCommand() : base(COMMAND_NAME, @"Analyze demos, data will be available from the GUI.")
         {
-            foreach (Source source in Source.Sources)
-            {
-                if (source.Name != Pov.NAME)
-                {
-                    _availableSources.Add(source.Name);
-                }
-            }
+            
         }
 
         public override async Task Run(string[] args)
@@ -66,7 +59,7 @@ namespace CLI
                     }
 
                     Console.WriteLine($@"Analyzing demo {demoPath}");
-                    DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+                    DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
                     demo = await analyzer.AnalyzeDemoAsync(new CancellationTokenSource().Token);
                     await cacheService.WriteDemoDataCache(demo);
                 }
@@ -183,7 +176,7 @@ namespace CLI
             Console.WriteLine($@"Usage: {Program.ExeName} {COMMAND_NAME} demoPaths... [--source] [--force]");
             Console.WriteLine(@"");
             Console.WriteLine(@"Demos path can be either .dem files location or a directory. It can be relative or absolute.");
-            Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", _availableSources)}]");
+            Console.WriteLine($@"The --source argument force the analysis logic of the demo analyzer. Available values: [{string.Join(",", Source.Sources)}]");
             Console.WriteLine(@"The --force argument force demos analyzes (ignore cached data).");
             Console.WriteLine(@"");
             Console.WriteLine(@"Examples:");

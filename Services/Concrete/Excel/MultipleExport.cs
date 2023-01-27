@@ -69,7 +69,7 @@ namespace Services.Concrete.Excel
                     try
                     {
                         _configuration.OnAnalyzeStart?.Invoke(demoPath);
-                        DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo);
+                        DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
                         if (_configuration.Source != null)
                         {
                             demo.Source = _configuration.Source;
