@@ -233,6 +233,8 @@ namespace Services.Concrete.Analyzer
 
         protected override void HandleRoundStart(object sender, RoundStartedEventArgs e)
         {
+            RegisterUnknownPlayers();
+            
             if (!IsMatchStarted)
             {
                 return;
@@ -241,26 +243,6 @@ namespace Services.Concrete.Analyzer
             _isRoundStartOccurred = true;
             _suicideCount = 0;
             IsLastRoundHalf = false;
-            // Check players count to prevent missing players who was connected after the match started event
-            if (Demo.Players.Count < 10)
-            {
-                // Add all players to our ObservableCollection of PlayerExtended
-                foreach (DemoInfo.Player player in Parser.PlayingParticipants)
-                {
-                    // don't add bot and already known players
-                    if (player.SteamID != 0 && Demo.Players.FirstOrDefault(p => p.SteamId == player.SteamID) == null)
-                    {
-                        Player pl = new Player
-                        {
-                            SteamId = player.SteamID,
-                            Name = player.Name,
-                            Side = player.Team.ToSide(),
-                        };
-                        Demo.Players.Add(pl);
-                        pl.TeamName = pl.Side == Side.CounterTerrorist ? Demo.TeamCT.Name : Demo.TeamT.Name;
-                    }
-                }
-            }
 
             CreateNewRound();
         }
@@ -317,7 +299,7 @@ namespace Services.Concrete.Analyzer
             {
                 return;
             }
-
+            
             Weapon weapon = Weapon.WeaponList.FirstOrDefault(w => w.Element == e.Weapon.Weapon);
             if (weapon == null)
             {
@@ -497,35 +479,6 @@ namespace Services.Concrete.Analyzer
             }
         }
 
-        protected new void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
-        {
-            if (e.Swapped == null || e.Swapped.SteamID == 0)
-            {
-                return;
-            }
-
-            Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
-            if (player == null)
-            {
-                return;
-            }
-
-            player.IsConnected = true;
-            player.Side = e.NewTeam.ToSide();
-            // add the player to his team if he is not
-            if (!Demo.TeamCT.Players.Contains(player) && !Demo.TeamT.Players.Contains(player))
-            {
-                if (Demo.TeamCT.Players.Count > Demo.TeamT.Players.Count)
-                {
-                    Demo.TeamT.Players.Add(player);
-                }
-                else
-                {
-                    Demo.TeamCT.Players.Add(player);
-                }
-            }
-        }
-
         #endregion
 
         #region Process
@@ -548,35 +501,7 @@ namespace Services.Concrete.Analyzer
             Demo.TeamCT.CurrentSide = Side.CounterTerrorist;
             Demo.TeamT.CurrentSide = Side.Terrorist;
 
-            // Add all players to our ObservableCollection of PlayerExtended
-            foreach (DemoInfo.Player player in Parser.PlayingParticipants)
-            {
-                // don't add bot
-                if (player.SteamID != 0)
-                {
-                    Player pl = new Player
-                    {
-                        SteamId = player.SteamID,
-                        Name = player.Name,
-                        Side = player.Team.ToSide(),
-                    };
-                    if (!Demo.Players.Contains(pl))
-                    {
-                        Demo.Players.Add(pl);
-                        if (pl.Side == Side.CounterTerrorist && !Demo.TeamCT.Players.Contains(pl))
-                        {
-                            Demo.TeamCT.Players.Add(pl);
-                            pl.TeamName = Demo.TeamCT.Name;
-                        }
-
-                        if (pl.Side == Side.Terrorist && !Demo.TeamT.Players.Contains(pl))
-                        {
-                            Demo.TeamT.Players.Add(pl);
-                            pl.TeamName = Demo.TeamT.Name;
-                        }
-                    }
-                }
-            }
+            RegisterUnknownPlayers();
 
             // First round handled here because round_start is raised before begin_new_match
             CreateNewRound();

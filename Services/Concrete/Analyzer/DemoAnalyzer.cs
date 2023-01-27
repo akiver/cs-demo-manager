@@ -1487,32 +1487,32 @@ namespace Services.Concrete.Analyzer
                 return;
             }
 
-            Player player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
-            if (player == null)
+            var side = e.NewTeam.ToSide();
+            var player = Demo.Players.FirstOrDefault(p => p.SteamId == e.Swapped.SteamID);
+            if (player != null)
             {
-                Player newPlayer = new Player
-                {
-                    SteamId = e.Swapped.SteamID,
-                    Name = e.Swapped.Name,
-                    Side = e.NewTeam.ToSide(),
-                };
-                Demo.Players.Add(newPlayer);
-                if (e.NewTeam.ToSide() == Side.CounterTerrorist)
-                {
-                    Demo.TeamCT.Players.Add(newPlayer);
-                    newPlayer.TeamName = Demo.TeamCT.Name;
-                }
-                else
-                {
-                    Demo.TeamT.Players.Add(newPlayer);
-                    newPlayer.TeamName = Demo.TeamT.Name;
-                }
-
+                player.IsConnected = true;
+                player.Side = side;
                 return;
             }
 
-            player.IsConnected = true;
-            player.Side = e.NewTeam.ToSide();
+            var newPlayer = new Player
+            {
+                SteamId = e.Swapped.SteamID,
+                Name = e.Swapped.Name,
+                Side = side,
+            };
+            if (side == Side.CounterTerrorist)
+            {
+                Demo.TeamCT.Players.Add(newPlayer);
+                newPlayer.TeamName = Demo.TeamCT.Name;
+            }
+            else
+            {
+                Demo.TeamT.Players.Add(newPlayer);
+                newPlayer.TeamName = Demo.TeamT.Name;
+            }
+            Demo.Players.Add(newPlayer);
         }
 
         protected void HandleSayText2(object sender, SayText2EventArgs e)
@@ -2502,6 +2502,44 @@ namespace Services.Concrete.Analyzer
         protected Team GetTeamBySide(Side side)
         {
             return Demo.TeamCT.CurrentSide == side ? Demo.TeamCT : Demo.TeamT;
+        }
+
+        protected void RegisterUnknownPlayers()
+        {
+            foreach (DemoInfo.Player participant in Parser.Participants)
+            {
+                if (participant.SteamID == 0 || participant.Team == DemoInfo.Team.Spectate)
+                {
+                    continue;
+                }
+
+                var player = Demo.Players.FirstOrDefault(p => p.SteamId == participant.SteamID);
+                if (player != null)
+                {
+                    continue;
+                }
+
+                player = new Player
+                {
+                    SteamId = participant.SteamID,
+                    Name = participant.Name,
+                    Side = participant.Team.ToSide(),
+                };
+
+                switch (participant.Team)
+                {
+                    case DemoInfo.Team.CounterTerrorist when !Demo.TeamCT.Players.Contains(player):
+                        Demo.TeamCT.Players.Add(player);
+                        player.TeamName = Demo.TeamCT.Name;
+                        break;
+                    case DemoInfo.Team.Terrorist when !Demo.TeamT.Players.Contains(player):
+                        Demo.TeamT.Players.Add(player);
+                        player.TeamName = Demo.TeamT.Name;
+                        break;
+                }
+
+                Demo.Players.Add(player);
+            }
         }
 
         /// <summary>
