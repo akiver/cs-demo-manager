@@ -52,7 +52,7 @@ namespace Core.Models
         /// <summary>
         /// Type (POV or GOTV)
         /// </summary>
-        private string _type = "GOTV";
+        private DemoType _type = DemoType.GOTV;
 
         /// <summary>
         /// Demo's tickrate (16 usually)
@@ -436,6 +436,7 @@ namespace Core.Models
             set { Set(() => Name, ref _name, value); }
         }
 
+        [JsonIgnore]
         public string NameWithoutExtension => System.IO.Path.GetFileNameWithoutExtension(Name);
 
         [JsonProperty("date")]
@@ -481,7 +482,7 @@ namespace Core.Models
         }
 
         [JsonProperty("type")]
-        public string Type
+        public DemoType Type
         {
             get { return _type; }
             set { Set(() => Type, ref _type, value); }

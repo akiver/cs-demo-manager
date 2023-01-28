@@ -40,7 +40,7 @@ namespace Services.Design
             demo.FiveKillCount = 1;
             demo.Path = "C:\\mydemo.dem";
             demo.ServerTickrate = 128;
-            demo.Type = "GOTV";
+            demo.Type = DemoType.GOTV;
             demo.Comment = "My comment";
             demo.Status = "none";
 
@@ -93,11 +93,11 @@ namespace Services.Design
                 round.Number = i + 1;
                 if (i == 1 || i == 16)
                 {
-                    round.Type = RoundType.PISTOL_ROUND;
+                    round.Type = RoundType.PistolRound;
                 }
                 else
                 {
-                    round.Type = r.Next(100) < 50 ? RoundType.NORMAL : RoundType.FORCE_BUY;
+                    round.Type = r.Next(100) < 50 ? RoundType.Normal : RoundType.ForceBuy;
                 }
 
                 if (r.Next(100) < 20)

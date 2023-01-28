@@ -130,16 +130,16 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                     {
                         switch (round.Type)
                         {
-                            case RoundType.PISTOL_ROUND:
+                            case RoundType.PistolRound:
                                 row.PistolRoundWonCount++;
                                 break;
-                            case RoundType.ECO:
+                            case RoundType.Eco:
                                 row.EcoRoundWonCount++;
                                 break;
-                            case RoundType.SEMI_ECO:
+                            case RoundType.SemiEco:
                                 row.SemiEcoRoundWonCount++;
                                 break;
-                            case RoundType.FORCE_BUY:
+                            case RoundType.ForceBuy:
                                 row.ForceBuyRoundWonCount++;
                                 break;
                         }

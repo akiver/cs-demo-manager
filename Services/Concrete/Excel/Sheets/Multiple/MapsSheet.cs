@@ -101,10 +101,10 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             row.WinCounterTerroristCount += demo.Rounds.Count(round => round.WinnerSide == Side.CounterTerrorist);
             row.WinTerroristCount += demo.Rounds.Count(round => round.WinnerSide == Side.Terrorist);
             var roundsWonByTeamInTrouble = demo.Rounds.Where(round => round.WinnerSide == round.SideTrouble).ToList();
-            row.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ECO);
-            row.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SEMI_ECO);
-            row.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.FORCE_BUY);
-            row.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PISTOL_ROUND);
+            row.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.Eco);
+            row.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SemiEco);
+            row.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ForceBuy);
+            row.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PistolRound);
         }
 
         private void ComputePlayerStats(Demo demo, MapSheetRow row, Player player)
@@ -120,10 +120,10 @@ namespace Services.Concrete.Excel.Sheets.Multiple
             row.WinCounterTerroristCount += roundsWon.Count(round => round.WinnerSide == Side.CounterTerrorist);
             row.WinTerroristCount += roundsWon.Count(round => round.WinnerSide == Side.Terrorist);
             var roundsWonByTeamInTrouble = roundsWon.Where(round => round.WinnerSide == round.SideTrouble).ToList();
-            row.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ECO);
-            row.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SEMI_ECO);
-            row.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.FORCE_BUY);
-            row.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PISTOL_ROUND);
+            row.WinEcoRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.Eco);
+            row.WinSemiEcoCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.SemiEco);
+            row.WinForceBuyCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.ForceBuy);
+            row.WinPistolRoundCount += roundsWonByTeamInTrouble.Count(round => round.Type == RoundType.PistolRound);
         }
     }
 }

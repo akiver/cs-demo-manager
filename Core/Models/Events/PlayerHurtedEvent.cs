@@ -19,7 +19,6 @@ namespace Core.Models.Events
         public long AttackerSteamId { get; set; }
 
         [JsonProperty("attacker_side")]
-        [JsonConverter(typeof(SideToStringConverter))]
         public Side AttackerSide { get; set; }
 
         [JsonProperty("armor_damage")] public int ArmorDamage { get; set; }

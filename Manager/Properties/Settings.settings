@@ -23,8 +23,8 @@
     <Setting Name="SelectedStatsAccountSteamID" Type="System.Int64" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ShowPovDemos" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="DemoTypeFilter" Type="System.String" Scope="User">
+      <Value Profile="(Default)">all</Value>
     </Setting>
     <Setting Name="ShowEbotDemos" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>

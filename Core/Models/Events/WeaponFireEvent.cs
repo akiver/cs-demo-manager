@@ -14,7 +14,6 @@ namespace Core.Models.Events
         [JsonProperty("shooter_name")] public string ShooterName { get; set; }
 
         [JsonProperty("shooter_side")]
-        [JsonConverter(typeof(SideToStringConverter))]
         public Side ShooterSide { get; set; }
 
         [JsonProperty("weapon")] public Weapon Weapon { get; set; }

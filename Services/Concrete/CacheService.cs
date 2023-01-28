@@ -13,6 +13,7 @@ using Core.Models.Serialization;
 using Core.Models.Source;
 using Services.Interfaces;
 using Services.Models;
+using Newtonsoft.Json.Converters;
 
 namespace Services.Concrete
 {
@@ -670,6 +671,10 @@ namespace Services.Concrete
                 NullValueHandling = NullValueHandling.Include,
                 ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
                 Formatting = Formatting.Indented,
+                Converters = new List<JsonConverter>
+                {
+                    new StringEnumConverter(),
+                },
             };
             demo.PlayerBlinded = await GetDemoPlayerBlindedAsync(demo);
             demo.WeaponFired = await GetDemoWeaponFiredAsync(demo);

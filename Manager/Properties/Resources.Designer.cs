@@ -1304,6 +1304,24 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to GOTV.
+        /// </summary>
+        public static string DemoTypeGotv {
+            get {
+                return ResourceManager.GetString("DemoTypeGotv", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to POV.
+        /// </summary>
+        public static string DemoTypePov {
+            get {
+                return ResourceManager.GetString("DemoTypePov", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (First kill by a CT).
         /// </summary>
         public static string DescriptionEntryHoldKills {

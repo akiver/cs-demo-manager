@@ -4319,6 +4319,14 @@ Error: {0}.</target>
           <source>Access was denied when trying to start CSGO. Make sure to close any running anti cheat software and retry.</source>
           <target state="new">Access was denied when trying to start CSGO. Make sure to close any running anti cheat software and retry.</target>
         </trans-unit>
+        <trans-unit id="DemoTypeGotv" translate="yes" xml:space="preserve">
+          <source>GOTV</source>
+          <target state="new">GOTV</target>
+        </trans-unit>
+        <trans-unit id="DemoTypePov" translate="yes" xml:space="preserve">
+          <source>POV</source>
+          <target state="new">POV</target>
+        </trans-unit>
       </group>
     </body>
   </file>

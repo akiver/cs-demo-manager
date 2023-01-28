@@ -23,8 +23,6 @@ namespace Core.Models.Source
                         return Properties.Resources.faceit;
                     case Cevo.NAME:
                         return Properties.Resources.cevo;
-                    case Pov.NAME:
-                        return Properties.Resources.pov;
                     case Esl.NAME:
                         return Properties.Resources.esl;
                     case PopFlash.NAME:
@@ -49,8 +47,6 @@ namespace Core.Models.Source
                     return new Esea();
                 case Ebot.NAME:
                     return new Ebot();
-                case Pov.NAME:
-                    return new Pov();
                 case Faceit.NAME:
                     return new Faceit();
                 case Cevo.NAME:
@@ -79,7 +75,6 @@ namespace Core.Models.Source
             new Valve(),
             new Wanmei(),
             new Esportal(),
-            new Pov(),
         };
     }
 }

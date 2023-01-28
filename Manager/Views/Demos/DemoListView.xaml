@@ -200,8 +200,17 @@
                           Command="{Binding ShowAllFoldersCommand}"
                           CommandParameter="{Binding IsChecked, ElementName=CheckBoxShowAllFolders}" />
 
+                <ComboBox ItemsSource="{Binding DemoTypeFilterOptions}"
+                          SelectedItem="{Binding SelectedDemoTypeFilterOption}"
+                          IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
+                          DisplayMemberPath="Label"
+                          SelectedValuePath="Value"
+                          mahapps:TextBoxHelper.Watermark="Type"
+                          Margin="5" />
+
                 <multiSelectComboBox:MultiSelectComboBox ItemsSource="{Binding DemoSourcesSelectors}"
                                                          SelectedItems="{Binding DemoSourcesSelected}"
+                                                         IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
                                                          Watermark="{x:Static properties:Resources.Source}"
                                                          Margin="0 5 0 5" />
 

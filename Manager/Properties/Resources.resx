@@ -3340,4 +3340,10 @@ Error: {0}.</value>
   <data name="DialogStartingCsgoAccessDenied" xml:space="preserve">
     <value>Access was denied when trying to start CSGO. Make sure to close any running anti cheat software and retry.</value>
   </data>
+  <data name="DemoTypeGotv" xml:space="preserve">
+    <value>GOTV</value>
+  </data>
+  <data name="DemoTypePov" xml:space="preserve">
+    <value>POV</value>
+  </data>
 </root>

@@ -87,6 +87,7 @@
     <Compile Include="AppSettings.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Models\DemoBasicData.cs" />
+    <Compile Include="Models\DemoType.cs" />
     <Compile Include="Models\Events\ChatMessage.cs" />
     <Compile Include="Models\Language.cs" />
     <Compile Include="Models\Map.cs" />
@@ -124,10 +125,8 @@
     <Compile Include="Models\protobuf\descriptor.cs" />
     <Compile Include="Models\protobuf\engine_gcmessages.cs" />
     <Compile Include="Models\protobuf\steammessages.cs" />
-    <Compile Include="Models\Serialization\EndReasonToStringConverter.cs" />
     <Compile Include="Models\Serialization\LongListToStringListConverter.cs" />
     <Compile Include="Models\Serialization\LongToStringConverter.cs" />
-    <Compile Include="Models\Serialization\SideToStringConverter.cs" />
     <Compile Include="Models\Side.cs" />
     <Compile Include="Models\Source\Esl.cs" />
     <Compile Include="Models\Source\Esportal.cs" />
@@ -179,7 +178,6 @@
     <Compile Include="Models\Source\Esea.cs" />
     <Compile Include="Models\Source\Faceit.cs" />
     <Compile Include="Models\Source\PopFlash.cs" />
-    <Compile Include="Models\Source\Pov.cs" />
     <Compile Include="Models\Source\Source.cs" />
     <Compile Include="Models\Source\Valve.cs" />
     <Compile Include="Models\Steam\PlayerBan.cs" />

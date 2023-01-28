@@ -4,42 +4,41 @@ using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Core.Models.Events;
-using Core.Models.Serialization;
 using DemoInfo;
 
 namespace Core.Models
 {
     public enum RoundType
     {
-        ECO = 0,
-        SEMI_ECO = 1,
-        NORMAL = 2,
-        FORCE_BUY = 3,
-        PISTOL_ROUND = 4,
+        Eco = 0,
+        SemiEco = 1,
+        Normal = 2,
+        ForceBuy = 3,
+        PistolRound = 4,
     }
 
-    public static class RoundExtenstions
+    public static class RoundExtensions
     {
         public static string AsString(this RoundEndReason reason)
         {
             switch (reason)
             {
                 case RoundEndReason.CTWin:
-                    return AppSettings.CT_WIN;
+                    return "Counter-Terrorists win";
                 case RoundEndReason.TerroristWin:
-                    return AppSettings.T_WIN;
+                    return "Terrorists win";
                 case RoundEndReason.TargetBombed:
-                    return AppSettings.BOMB_EXPLODED;
+                    return "Bomb exploded";
                 case RoundEndReason.BombDefused:
-                    return AppSettings.BOMB_DEFUSED;
+                    return "Bomb defused";
                 case RoundEndReason.CTSurrender:
-                    return AppSettings.CT_SURRENDER;
+                    return "CT surrender";
                 case RoundEndReason.TerroristsSurrender:
-                    return AppSettings.T_SURRENDER;
+                    return "T surrender";
                 case RoundEndReason.TargetSaved:
-                    return AppSettings.TARGET_SAVED;
+                    return "Time over";
                 default:
-                    return AppSettings.UNKNOWN;
+                    return "Unknown";
             }
         }
 
@@ -47,18 +46,18 @@ namespace Core.Models
         {
             switch (type)
             {
-                case RoundType.ECO:
-                    return AppSettings.ECO;
-                case RoundType.SEMI_ECO:
-                    return AppSettings.SEMI_ECO;
-                case RoundType.FORCE_BUY:
-                    return AppSettings.FORCE_BUY;
-                case RoundType.NORMAL:
-                    return AppSettings.NORMAL;
-                case RoundType.PISTOL_ROUND:
-                    return AppSettings.PISTOL_ROUND;
+                case RoundType.Eco:
+                    return "Eco";
+                case RoundType.SemiEco:
+                    return "Semi-Eco";
+                case RoundType.ForceBuy:
+                    return "Force buy";
+                case RoundType.Normal:
+                    return "Normal";
+                case RoundType.PistolRound:
+                    return "Pistol round";
                 default:
-                    return AppSettings.UNKNOWN;
+                    return "Unknown";
             }
         }
     }
@@ -357,7 +356,6 @@ namespace Core.Models
         }
 
         [JsonProperty("end_reason")]
-        [JsonConverter(typeof(EndReasonToStringConverter))]
         public RoundEndReason EndReason
         {
             get { return _endReason; }
@@ -372,7 +370,6 @@ namespace Core.Models
         }
 
         [JsonProperty("winner_side")]
-        [JsonConverter(typeof(SideToStringConverter))]
         public Side WinnerSide
         {
             get { return _winnerSide; }
@@ -562,7 +559,6 @@ namespace Core.Models
         }
 
         [JsonProperty("side_trouble")]
-        [JsonConverter(typeof(SideToStringConverter))]
         public Side SideTrouble
         {
             get { return _sideTrouble; }
@@ -817,7 +813,7 @@ namespace Core.Models
             ThreeKillCount = 0;
             TradeKillCount = 0;
             Tick = tick;
-            Type = RoundType.NORMAL;
+            Type = RoundType.Normal;
             TwoKillCount = 0;
             WinnerName = string.Empty;
             WinnerSide = Side.None;

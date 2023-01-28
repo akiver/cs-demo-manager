@@ -14,8 +14,8 @@
         public float Tickrate { get; set; }
         public float Duration { get; set; }
         public int Ticks { get; set; }
-        public string TeamNameCT{ get; set; }
-        public string TeamNameT{ get; set; }
+        public string TeamNameCT { get; set; }
+        public string TeamNameT { get; set; }
         public int ScoreTeamCt { get; set; }
         public int ScoreTeamT { get; set; }
         public int ScoreFirstHalfTeamCt { get; set; }

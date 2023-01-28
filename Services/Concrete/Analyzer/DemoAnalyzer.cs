@@ -185,11 +185,6 @@ namespace Services.Concrete.Analyzer
                     return new EbotAnalyzer(demo);
                 case Cevo.NAME:
                     return new CevoAnalyzer(demo);
-                case Pov.NAME:
-                    // TODO refactor This is a quick workaround to support POV demos without changing how analyzer classes are constructed.
-                    // We should not do recursive calls like this, analyzers should only take the demo path and optionally a forced source and return the Demo.
-                    var source = DetermineDemoSource(demo);
-                    return Factory(demo, source.Name);
                 default:
                     return null;
             }
@@ -250,8 +245,7 @@ namespace Services.Concrete.Analyzer
             demo.Source = DetermineDemoSource(demo);
             if (IsPovDemo(header.ServerName))
             {
-                demo.Type = Pov.NAME;
-                demo.Source = Source.Factory(Pov.NAME);
+                demo.Type = DemoType.POV;
             }
             demo.Ticks = header.PlaybackTicks;
 
@@ -888,7 +882,7 @@ namespace Services.Concrete.Analyzer
                 // Not 100% accurate maybe improved it with current equipement...
                 if (CurrentRound.StartMoneyTeamCt == 4000 && CurrentRound.StartMoneyTeamT == 4000)
                 {
-                    CurrentRound.Type = RoundType.PISTOL_ROUND;
+                    CurrentRound.Type = RoundType.PistolRound;
                 }
                 else
                 {
@@ -898,22 +892,22 @@ namespace Services.Concrete.Analyzer
                             (((double)CurrentRound.EquipementValueTeamCt + CurrentRound.EquipementValueTeamT) / 2) * 100, 2));
                     if (diffPercent >= 90)
                     {
-                        CurrentRound.Type = RoundType.ECO;
+                        CurrentRound.Type = RoundType.Eco;
                     }
                     else if (diffPercent >= 75 && diffPercent < 90)
                     {
-                        CurrentRound.Type = RoundType.SEMI_ECO;
+                        CurrentRound.Type = RoundType.SemiEco;
                     }
                     else if (diffPercent >= 50 && diffPercent < 75)
                     {
-                        CurrentRound.Type = RoundType.FORCE_BUY;
+                        CurrentRound.Type = RoundType.ForceBuy;
                     }
                     else
                     {
-                        CurrentRound.Type = RoundType.NORMAL;
+                        CurrentRound.Type = RoundType.Normal;
                     }
 
-                    if (CurrentRound.Type != RoundType.NORMAL)
+                    if (CurrentRound.Type != RoundType.Normal)
                     {
                         CurrentRound.SideTrouble = CurrentRound.EquipementValueTeamCt > CurrentRound.EquipementValueTeamT
                             ? Side.Terrorist
@@ -1490,7 +1484,7 @@ namespace Services.Concrete.Analyzer
 
         protected void HandlePOVPlayerRecordingDetected(object sender, POVRecordingPlayerDetectedEventArgs e)
         {
-            Demo.Type = Pov.NAME;
+            Demo.Type = DemoType.POV;
         }
 
         protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)

@@ -219,6 +219,7 @@
     <Compile Include="Messages\UpdateTaskbarProgressMessage.cs" />
     <Compile Include="Models\DemoMovie\PlayersSelection.cs" />
     <Compile Include="Models\DemoStatus.cs" />
+    <Compile Include="Models\DemoTypeFilterOption.cs" />
     <Compile Include="Models\Formatters\CustomSecondsFormatter.cs" />
     <Compile Include="Models\Formatters\DemoMovieIntervalFormatter.cs" />
     <Compile Include="Models\Selectors\DemoTimelineTemplateSelector.cs" />

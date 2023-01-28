@@ -12,15 +12,15 @@ namespace Manager.Converters
             RoundType type = (RoundType)value;
             switch (type)
             {
-                case RoundType.NORMAL:
+                case RoundType.Normal:
                     return Properties.Resources.RoundTypeNormal;
-                case RoundType.ECO:
+                case RoundType.Eco:
                     return Properties.Resources.RoundTypeEco;
-                case RoundType.FORCE_BUY:
+                case RoundType.ForceBuy:
                     return Properties.Resources.RoundTypeForceBuy;
-                case RoundType.PISTOL_ROUND:
+                case RoundType.PistolRound:
                     return Properties.Resources.RoundTypePistolRound;
-                case RoundType.SEMI_ECO:
+                case RoundType.SemiEco:
                     return Properties.Resources.RoundTypeSemiEco;
                 default:
                     return Properties.Resources.Unknown;

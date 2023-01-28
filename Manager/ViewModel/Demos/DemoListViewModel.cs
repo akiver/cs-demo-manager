@@ -82,6 +82,9 @@ namespace Manager.ViewModel.Demos
 
         private List<DemoStatus> _statuses;
 
+        private List<DemoTypeFilterOption> _demoTypeFilterFilterOptions = DemoTypeFilterOption.Options;
+        private DemoTypeFilterOption _selectedDemoTypeFilterOption = DemoTypeFilterOption.AllFilterOption;
+
         private ICollectionView _dataGridDemosCollection;
 
         private string _filterDemoText;
@@ -176,7 +179,7 @@ namespace Manager.ViewModel.Demos
 
         public bool IsShowOldDemos => Properties.Settings.Default.ShowOldDemos;
 
-        public bool IsShowPovDemos => Properties.Settings.Default.ShowPovDemos;
+        public string DemoTypeFilter => Properties.Settings.Default.DemoTypeFilter;
 
         public bool IsShowEbotDemos => Properties.Settings.Default.ShowEbotDemos;
 
@@ -206,6 +209,22 @@ namespace Manager.ViewModel.Demos
         {
             get { return _statuses; }
             set { Set(() => Statuses, ref _statuses, value); }
+        }
+
+        public List<DemoTypeFilterOption> DemoTypeFilterOptions
+        {
+            get => _demoTypeFilterFilterOptions;
+            set { Set(() => DemoTypeFilterOptions, ref _demoTypeFilterFilterOptions, value); }
+        }
+
+        public DemoTypeFilterOption SelectedDemoTypeFilterOption
+        {
+            get => _selectedDemoTypeFilterOption;
+            set {
+                Set(() => SelectedDemoTypeFilterOption, ref _selectedDemoTypeFilterOption, value);
+                Properties.Settings.Default.DemoTypeFilter = value.Value;
+                FilterCollection();
+            }
         }
 
         public int NewBannedPlayerCount
@@ -287,72 +306,69 @@ namespace Manager.ViewModel.Demos
         public bool Filter(object obj)
         {
             var data = obj as Demo;
-            if (data != null)
+            if (data == null)
             {
-                // Text filter
-                if (!string.IsNullOrEmpty(_filterDemoText))
-                {
-                    return data.Name.Contains(_filterDemoText) || data.MapName.Contains(_filterDemoText)
-                                                               || data.Comment.Contains(_filterDemoText) || data.Hostname.Contains(_filterDemoText)
-                                                               || data.ClientName.Contains(_filterDemoText) ||
-                                                               data.TeamCT.Name.Contains(_filterDemoText)
-                                                               || data.TeamT.Name.Contains(_filterDemoText) ||
-                                                               data.SourceName.Contains(_filterDemoText)
-                                                               || data.DateAsString.Contains(_filterDemoText);
-                }
-
-                // POV filter
-                if (!IsShowPovDemos && data.Type == Pov.NAME)
-                {
-                    return false;
-                }
-
-                // eBot filter
-                if (!IsShowEbotDemos && data.SourceName == Ebot.NAME)
-                {
-                    return false;
-                }
-
-                // ESEA filter
-                if (!IsShowEseaDemos && data.SourceName == Esea.NAME)
-                {
-                    return false;
-                }
-
-                // Valve filter
-                if (!IsShowValveDemos && data.SourceName == Valve.NAME)
-                {
-                    return false;
-                }
-
-                // Faceit filter
-                if (!IsShowFaceitDemos && data.SourceName == Faceit.NAME)
-                {
-                    return false;
-                }
-
-                // Cevo filter
-                if (!IsShowCevoDemos && data.SourceName == Cevo.NAME)
-                {
-                    return false;
-                }
-
-                // PopFlash filter
-                if (!IsShowPopFlashDemos && data.SourceName == PopFlash.NAME)
-                {
-                    return false;
-                }
-
-                // No analyzable demos filter
-                if (!IsShowOldDemos && data.Status == DemoStatus.NAME_DEMO_STATUS_ERROR)
-                {
-                    return false;
-                }
-
-                return true;
+                return false;
             }
 
-            return false;
+            // Text filter
+            if (!string.IsNullOrEmpty(_filterDemoText))
+            {
+                return data.Name.Contains(_filterDemoText) || data.MapName.Contains(_filterDemoText)
+                                                           || data.Comment.Contains(_filterDemoText) || data.Hostname.Contains(_filterDemoText)
+                                                           || data.ClientName.Contains(_filterDemoText) ||
+                                                           data.TeamCT.Name.Contains(_filterDemoText)
+                                                           || data.TeamT.Name.Contains(_filterDemoText) ||
+                                                           data.SourceName.Contains(_filterDemoText)
+                                                           || data.DateAsString.Contains(_filterDemoText);
+            }
+
+            if (DemoTypeFilter != DemoTypeFilterOption.AllFilterOption.Value)
+            {
+                if (DemoTypeFilter == DemoTypeFilterOption.PovFilterOption.Value)
+                {
+                    return data.Type == DemoType.POV;
+                }
+                
+                return data.Type == DemoType.GOTV;
+            }
+
+            if (!IsShowEbotDemos && data.SourceName == Ebot.NAME)
+            {
+                return false;
+            }
+
+            if (!IsShowEseaDemos && data.SourceName == Esea.NAME)
+            {
+                return false;
+            }
+
+            if (!IsShowValveDemos && data.SourceName == Valve.NAME)
+            {
+                return false;
+            }
+
+            if (!IsShowFaceitDemos && data.SourceName == Faceit.NAME)
+            {
+                return false;
+            }
+
+            if (!IsShowCevoDemos && data.SourceName == Cevo.NAME)
+            {
+                return false;
+            }
+
+            if (!IsShowPopFlashDemos && data.SourceName == PopFlash.NAME)
+            {
+                return false;
+            }
+
+            if (!IsShowOldDemos && data.Status == DemoStatus.NAME_DEMO_STATUS_ERROR)
+            {
+                return false;
+            }
+
+            return true;
         }
 
         private void FilterCollection()
@@ -1433,6 +1449,7 @@ namespace Manager.ViewModel.Demos
             DispatcherHelper.CheckBeginInvokeOnUI(
                 async () =>
                 {
+                    InitializeDemoTypeFilter();
                     LoadDemoSourcesSelection();
 
                     IsBusy = true;
@@ -1484,6 +1501,17 @@ namespace Manager.ViewModel.Demos
                 });
         }
 
+        private void InitializeDemoTypeFilter()
+        {
+            if (DemoTypeFilter == DemoTypeFilterOption.GotvFilterOption.Value)
+            {
+                SelectedDemoTypeFilterOption = DemoTypeFilterOption.GotvFilterOption;
+            } else if (DemoTypeFilter == DemoTypeFilterOption.PovFilterOption.Value)
+            {
+                SelectedDemoTypeFilterOption = DemoTypeFilterOption.PovFilterOption;
+            }
+        }
+
         private void LoadDemoSourcesSelection()
         {
             DemoSourcesSelectors = new Dictionary<string, object>
@@ -1494,7 +1522,6 @@ namespace Manager.ViewModel.Demos
                 { Faceit.NAME, "FaceIt" },
                 { Esea.NAME, "ESEA" },
                 { PopFlash.NAME, "Popflash" },
-                { Pov.NAME, "POV" },
                 { DemoStatus.NAME_DEMO_STATUS_ERROR, Properties.Resources.NoAnalyzableDemos },
             };
 
@@ -1526,11 +1553,6 @@ namespace Manager.ViewModel.Demos
             if (Properties.Settings.Default.ShowPopFlashDemos)
             {
                 _demoSourcesSelected.Add(PopFlash.NAME, "PopFlash");
-            }
-
-            if (Properties.Settings.Default.ShowPovDemos)
-            {
-                _demoSourcesSelected.Add(Pov.NAME, "POV");
             }
 
             if (Properties.Settings.Default.ShowOldDemos)
@@ -1587,9 +1609,6 @@ namespace Manager.ViewModel.Demos
                     break;
                 case PopFlash.NAME:
                     Properties.Settings.Default.ShowPopFlashDemos = items.ContainsKey(name);
-                    break;
-                case Pov.NAME:
-                    Properties.Settings.Default.ShowPovDemos = items.ContainsKey(name);
                     break;
                 case DemoStatus.NAME_DEMO_STATUS_ERROR:
                     Properties.Settings.Default.ShowOldDemos = items.ContainsKey(name);

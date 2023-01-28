@@ -12,7 +12,7 @@ namespace Manager.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.3.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.4.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -109,13 +109,13 @@ namespace Manager.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool ShowPovDemos {
+        [global::System.Configuration.DefaultSettingValueAttribute("all")]
+        public string DemoTypeFilter {
             get {
-                return ((bool)(this["ShowPovDemos"]));
+                return ((string)(this["DemoTypeFilter"]));
             }
             set {
-                this["ShowPovDemos"] = value;
+                this["DemoTypeFilter"] = value;
             }
         }
         

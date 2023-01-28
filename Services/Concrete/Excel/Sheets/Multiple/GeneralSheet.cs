@@ -84,7 +84,7 @@ namespace Services.Concrete.Excel.Sheets.Multiple
                 Name = demo.Name,
                 Id = demo.Id,
                 Date = demo.DateAsString,
-                Type = demo.Type,
+                Type = demo.Type.AsString(),
                 Source = demo.Source.Label,
                 MapName = demo.MapName,
                 Hostname = demo.Hostname,

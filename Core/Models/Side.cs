@@ -8,7 +8,7 @@
         CounterTerrorist = 3,
     }
 
-    public static class SideExtentions
+    public static class SideExtensions
     {
         public static string AsString(this Side side)
         {

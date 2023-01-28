@@ -163,7 +163,7 @@ namespace Services.Design
                     BombDefused = null,
                     BombPlanted = null,
                     BombExploded = null,
-                    Type = RoundType.NORMAL,
+                    Type = RoundType.Normal,
                     EndReason = RoundEndReason.CTWin,
                     EntryKillEvent = new EntryKillEvent(random.Next(1, 10000), random.Next(1, 100))
                     {
@@ -196,7 +196,7 @@ namespace Services.Design
             demo.FourKillCount = 3;
             demo.FiveKillCount = 1;
             demo.Path = "C:\\mydemo.dem";
-            demo.Type = "GOTV";
+            demo.Type = DemoType.GOTV;
             demo.Comment = "comment";
             demo.TeamCT = teamCt;
             demo.TeamT = teamT;
@@ -397,7 +397,7 @@ namespace Services.Design
                 FourKillCount = random.Next(3),
                 FiveKillCount = random.Next(1),
                 Path = "C:\\mydemo.dem",
-                Type = "GOTV",
+                Type = DemoType.GOTV,
                 Comment = "comment",
                 Players = players,
                 MostBombPlantedPlayer = players.ElementAt(random.Next(10)),

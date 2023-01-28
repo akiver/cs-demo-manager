@@ -12,7 +12,6 @@ namespace Core.Models.Events
         [JsonProperty("thrower_name")] public string ThrowerName { get; set; }
 
         [JsonProperty("thrower_side")]
-        [JsonConverter(typeof(SideToStringConverter))]
         public Side ThrowerSide { get; set; }
 
         [JsonProperty("heatmap_point")] public HeatmapPoint Point { get; set; }
