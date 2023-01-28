@@ -623,7 +623,7 @@
                                                Value="{Binding Height}" />
                     </StackPanel>
 
-                    <StackPanel Orientation="Horizontal" Margin="0 0 0 5">
+                    <WrapPanel Orientation="Horizontal" Margin="0 0 0 5">
                         <Label Content="{x:Static properties:Resources.LabelStartTick}"
                                Foreground="{StaticResource OrangeBrush}" />
                         <mahapps:NumericUpDown Minimum="0"
@@ -650,7 +650,7 @@
                                                IsEnabled="{Binding IsBusy, Converter={StaticResource BooleanInvertedConverter}}"
                                                Visibility="{Binding IsCorruptedDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}"
                                                Value="{Binding Duration}" />
-                    </StackPanel>
+                    </WrapPanel>
 
                     <StackPanel Orientation="Horizontal"
                                 Visibility="{Binding IsPovDemo, Converter={StaticResource BooleanToVisibilityInvertedConverter}}">
