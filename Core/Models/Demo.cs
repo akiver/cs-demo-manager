@@ -55,14 +55,15 @@ namespace Core.Models
         private DemoType _type = DemoType.GOTV;
 
         /// <summary>
-        /// Demo's tickrate (16 usually)
+        /// Demo's frame rate (frames / demo-ticks per second).
+        /// Can be 0 for corrupted demo headers.
         /// </summary>
-        private float _tickrate;
+        private float _frameRate;
 
         /// <summary>
-        /// Server's tickrate (64 or 128 usually)
+        /// Tickrate of the server that recorded the demo.
         /// </summary>
-        private float _serverTickrate;
+        private float _tickrate;
 
         /// <summary>
         /// Demo duration
@@ -488,18 +489,18 @@ namespace Core.Models
             set { Set(() => Type, ref _type, value); }
         }
 
+        [JsonProperty("frame_rate")]
+        public float FrameRate
+        {
+            get { return _frameRate; }
+            set { Set(() => FrameRate, ref _frameRate, value); }
+        }
+
         [JsonProperty("tickrate")]
         public float Tickrate
         {
             get { return _tickrate; }
             set { Set(() => Tickrate, ref _tickrate, value); }
-        }
-
-        [JsonProperty("server_tickrate")]
-        public float ServerTickrate
-        {
-            get { return _serverTickrate; }
-            set { Set(() => ServerTickrate, ref _serverTickrate, value); }
         }
 
         [JsonProperty("duration")]
@@ -1153,7 +1154,7 @@ namespace Core.Models
                 MostDamagingWeapon = MostDamagingWeapon,
                 MvpCount = MvpCount,
                 Path = Path,
-                ServerTickrate = ServerTickrate,
+                Tickrate = Tickrate,
                 Status = Status,
                 SmokeThrownCount = SmokeThrownCount,
                 Surrender = Surrender,
@@ -1161,7 +1162,7 @@ namespace Core.Models
                 TradeKillCount = TradeKillCount,
                 TeamCT = TeamCT.Clone(),
                 TeamT = TeamT.Clone(),
-                Tickrate = Tickrate,
+                FrameRate = FrameRate,
                 Type = Type,
                 WeaponFiredCount = WeaponFiredCount,
                 Winner = Winner,

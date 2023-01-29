@@ -16,7 +16,7 @@ namespace Services.Design
             for (int i = 0; i < 7; i++)
             {
                 int timeEvent = ran.Next(1, 100);
-                roundEventList.Add(new KillEventTimeline(demo.ServerTickrate, timeEvent, (int)(timeEvent + demo.ServerTickrate)));
+                roundEventList.Add(new KillEventTimeline(demo.Tickrate, timeEvent, (int)(timeEvent + demo.Tickrate)));
             }
 
             return Task.FromResult(roundEventList);

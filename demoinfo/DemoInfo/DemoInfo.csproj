@@ -74,6 +74,7 @@
     <Compile Include="DP\Entity.cs" />
     <Compile Include="DP\FastNetmessages\CVar.cs" />
     <Compile Include="DP\FastNetmessages\CVars.cs" />
+    <Compile Include="DP\FastNetmessages\ServerInfo.cs" />
     <Compile Include="DP\FastNetmessages\VoiceData.cs" />
     <Compile Include="DP\FastNetmessages\VoiceInit.cs" />
     <Compile Include="DP\FastNetmessages\EncryptedMessage.cs" />

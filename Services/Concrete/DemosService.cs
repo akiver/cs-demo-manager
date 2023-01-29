@@ -624,7 +624,7 @@ namespace Services.Concrete
         public Task<List<TimelineEvent>> GetTimeLineEventList(Demo demo)
         {
             List<TimelineEvent> events = new List<TimelineEvent>();
-            float tickrate = demo.ServerTickrate;
+            float tickrate = demo.Tickrate;
             foreach (Round round in demo.Rounds)
             {
                 int endTick = round.EndTickOfficially > 0 ? round.EndTickOfficially : round.EndTick;
@@ -637,7 +637,7 @@ namespace Services.Concrete
 
             foreach (KillEvent e in demo.Kills)
             {
-                events.Add(new KillEventTimeline(tickrate, e.Tick, (int)(e.Tick + demo.Tickrate))
+                events.Add(new KillEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     VictimName = e.KilledName,
                     KillerName = e.KillerName,
@@ -648,7 +648,7 @@ namespace Services.Concrete
             List<WeaponFireEvent> flashs = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Flash).ToList();
             foreach (WeaponFireEvent e in flashs)
             {
-                events.Add(new FlashThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+                events.Add(new FlashThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     ThrowerName = e.ShooterName,
                 });
@@ -657,7 +657,7 @@ namespace Services.Concrete
             List<WeaponFireEvent> smokes = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Smoke).ToList();
             foreach (WeaponFireEvent e in smokes)
             {
-                events.Add(new SmokeThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+                events.Add(new SmokeThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     ThrowerName = e.ShooterName,
                 });
@@ -666,7 +666,7 @@ namespace Services.Concrete
             List<WeaponFireEvent> he = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.HE).ToList();
             foreach (WeaponFireEvent e in he)
             {
-                events.Add(new HeThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+                events.Add(new HeThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     ThrowerName = e.ShooterName,
                 });
@@ -675,7 +675,7 @@ namespace Services.Concrete
             List<WeaponFireEvent> molotovs = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Molotov).ToList();
             foreach (WeaponFireEvent e in molotovs)
             {
-                events.Add(new MolotovThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+                events.Add(new MolotovThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     ThrowerName = e.ShooterName,
                 });
@@ -684,7 +684,7 @@ namespace Services.Concrete
             List<WeaponFireEvent> incendiaries = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Incendiary).ToList();
             foreach (WeaponFireEvent e in incendiaries)
             {
-                events.Add(new IncendiaryThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+                events.Add(new IncendiaryThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     ThrowerName = e.ShooterName,
                 });
@@ -693,7 +693,7 @@ namespace Services.Concrete
             List<WeaponFireEvent> decoys = demo.WeaponFired.Where(e => e.Weapon.Element == EquipmentElement.Decoy).ToList();
             foreach (WeaponFireEvent e in decoys)
             {
-                events.Add(new DecoyThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)demo.Tickrate)
+                events.Add(new DecoyThrownEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate)
                 {
                     ThrowerName = e.ShooterName,
                 });
@@ -703,7 +703,7 @@ namespace Services.Concrete
             {
                 if (round.BombPlanted != null)
                 {
-                    events.Add(new BombPlantedEventTimeline(tickrate, round.BombPlanted.Tick, round.BombPlanted.Tick + (int)demo.Tickrate)
+                    events.Add(new BombPlantedEventTimeline(tickrate, round.BombPlanted.Tick, round.BombPlanted.Tick + (int)tickrate)
                     {
                         PlanterName = round.BombPlanted.PlanterName,
                         Site = round.BombPlanted.Site,
@@ -712,7 +712,7 @@ namespace Services.Concrete
 
                 if (round.BombDefused != null)
                 {
-                    events.Add(new BombDefusedEventTimeline(tickrate, round.BombDefused.Tick, round.BombDefused.Tick + (int)demo.Tickrate)
+                    events.Add(new BombDefusedEventTimeline(tickrate, round.BombDefused.Tick, round.BombDefused.Tick + (int)tickrate)
                     {
                         Site = round.BombDefused.Site,
                         DefuserName = round.BombDefused.DefuserName,
@@ -721,7 +721,7 @@ namespace Services.Concrete
 
                 if (round.BombExploded != null)
                 {
-                    events.Add(new BombExplodedEventTimeline(tickrate, round.BombExploded.Tick, round.BombExploded.Tick + (int)demo.Tickrate)
+                    events.Add(new BombExplodedEventTimeline(tickrate, round.BombExploded.Tick, round.BombExploded.Tick + (int)tickrate)
                     {
                         PlanterName = round.BombExploded.PlanterName,
                         Site = round.BombExploded.Site,

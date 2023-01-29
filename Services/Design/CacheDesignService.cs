@@ -29,7 +29,7 @@ namespace Services.Design
             demo.Source = new Valve();
             demo.Id = "de_dust25445648778447878";
             demo.Name = "esea_nip_vs_titan.dem";
-            demo.Tickrate = 32;
+            demo.FrameRate = 32;
             demo.MapName = "de_dust2";
             demo.ClientName = "localhost";
             demo.Hostname = "local";
@@ -39,7 +39,7 @@ namespace Services.Design
             demo.FourKillCount = 2;
             demo.FiveKillCount = 1;
             demo.Path = "C:\\mydemo.dem";
-            demo.ServerTickrate = 128;
+            demo.Tickrate = 128;
             demo.Type = DemoType.GOTV;
             demo.Comment = "My comment";
             demo.Status = "none";

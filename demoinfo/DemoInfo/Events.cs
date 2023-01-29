@@ -362,6 +362,8 @@ namespace DemoInfo
         /// Number of rank the player win / lost between the beggining and the end of the match
         /// </summary>
         public float RankChange { get; set; }
+
+        public float RankTypeId { get; set; }
     }
 
     /// <summary>
@@ -508,6 +510,32 @@ namespace DemoInfo
         public uint SectionNumber { get; set; }
         public uint UncompressedSampleOffset { get; set; }
         public Player Player { get; set; }
+    }
+
+    public class ServerInfoEventArgs : EventArgs
+    {
+        public int Protocol { get; set; }
+        public int ServerCount { get; set; }
+        public bool IsDedicated { get; set; }
+        public bool IsOfficialValveServer { get; set; }
+        public bool IsHltv { get; set; }
+        public bool IsReplay { get; set; }
+        public bool IsRedirectingToProxyRelay { get; set; }
+        public int COs { get; set; }
+        public uint MapCrc { get; set; }
+        public uint ClientCrc { get; set; }
+        public uint StringTableCrc { get; set; }
+        public int MaxClients { get; set; }
+        public int MaxClasses { get; set; }
+        public int PlayerSlot { get; set; }
+        public float TickInterval { get; set; }
+        public string GameDir { get; set; }
+        public string MapName { get; set; }
+        public string MapGroupName { get; set; }
+        public string SkyName { get; set; }
+        public string Hostname { get; set; }
+        public uint PublicIp { get; set; }
+        public long UgcMapId { get; set; }
     }
 
     public class POVRecordingPlayerDetectedEventArgs : EventArgs

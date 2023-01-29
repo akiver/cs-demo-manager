@@ -37,8 +37,8 @@ namespace Services.Concrete
                                         {
                                             Tick = weaponFired[i].Tick,
                                             RoundSeconds =
-                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
-                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
+                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.Tickrate, 2),
+                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.Tickrate, 2),
                                             RoundNumber = round.Number,
                                             Type = StuffType.SMOKE,
                                             StartX = weaponFired[i].Point.X,
@@ -77,8 +77,8 @@ namespace Services.Concrete
                                         {
                                             Tick = weaponFired[i].Tick,
                                             RoundSeconds =
-                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
-                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
+                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.Tickrate, 2),
+                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.Tickrate, 2),
                                             RoundNumber = round.Number,
                                             Type = StuffType.FLASHBANG,
                                             StartX = weaponFired[i].Point.X,
@@ -120,8 +120,8 @@ namespace Services.Concrete
                                         {
                                             Tick = weaponFired[i].Tick,
                                             RoundSeconds =
-                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
-                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
+                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.Tickrate, 2),
+                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.Tickrate, 2),
                                             RoundNumber = round.Number,
                                             Type = StuffType.HE,
                                             StartX = weaponFired[i].Point.X,
@@ -161,8 +161,8 @@ namespace Services.Concrete
                                         {
                                             Tick = weaponFired[i].Tick,
                                             RoundSeconds =
-                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
-                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
+                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.Tickrate, 2),
+                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.Tickrate, 2),
                                             RoundNumber = round.Number,
                                             Type = StuffType.MOLOTOV,
                                             StartX = weaponFired[i].Point.X,
@@ -203,8 +203,8 @@ namespace Services.Concrete
                                         {
                                             Tick = weaponFired[i].Tick,
                                             RoundSeconds =
-                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
-                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
+                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.Tickrate, 2),
+                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.Tickrate, 2),
                                             RoundNumber = round.Number,
                                             Type = StuffType.INCENDIARY,
                                             StartX = weaponFired[i].Point.X,
@@ -243,8 +243,8 @@ namespace Services.Concrete
                                         {
                                             Tick = weaponFired[i].Tick,
                                             RoundSeconds =
-                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.ServerTickrate, 2),
-                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.ServerTickrate, 2),
+                                                (float)Math.Round((weaponFired[i].Tick - round.FreezetimeEndTick) / demo.Tickrate, 2),
+                                            DemoSeconds = (float)Math.Round(weaponFired[i].Tick / demo.Tickrate, 2),
                                             RoundNumber = round.Number,
                                             Type = StuffType.DECOY,
                                             StartX = weaponFired[i].Point.X,

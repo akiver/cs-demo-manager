@@ -12,6 +12,7 @@
         public int RankNew;
         public int NumWins;
         public float RankChange;
+        public int RankTypeId;
 
         public void Parse(IBitStream bitstream, DemoParser parser)
         {
@@ -41,6 +42,10 @@
                 {
                     RankChange = bitstream.ReadFloat();
                 }
+                else if (wireType == 0 && fieldnum == 6)
+                {
+                    RankTypeId = bitstream.ReadProtobufVarInt();
+                }
             }
 
             Raise(parser);
@@ -55,6 +60,7 @@
                 RankNew = RankNew,
                 WinCount = NumWins,
                 RankChange = RankChange,
+                RankTypeId = RankTypeId,
             };
 
             parser.RaiseRankUpdate(e);

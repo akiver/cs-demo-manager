@@ -75,6 +75,7 @@ namespace Services.Concrete.Analyzer
             Parser.SayText2 += HandleSayText2;
             Parser.FreezetimeEnded += HandleFreezetimeEnded;
             Parser.POVRecordingPlayerDetected += HandlePOVPlayerRecordingDetected;
+            Parser.ServerInfo += HandleServerInfo;
         }
 
         protected void HandleWinPanelMatch(object sender, WinPanelMatchEventArgs e)
@@ -158,7 +159,7 @@ namespace Services.Concrete.Analyzer
             }
 
             CurrentRound.EndTickOfficially = Parser.IngameTick;
-            CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTickOfficially - CurrentRound.Tick) / Demo.ServerTickrate, 2);
+            CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTickOfficially - CurrentRound.Tick) / Demo.Tickrate, 2);
 
             CheckForSpecialClutchEnd();
             UpdateKillsCount();

@@ -185,8 +185,8 @@ namespace Services.Design
             demo.Id = "de_dust25445648778447878";
             demo.Source = new Valve();
             demo.Name = "esea_nip_vs_titan.dem";
-            demo.Tickrate = 15;
-            demo.ServerTickrate = 128;
+            demo.FrameRate = 15;
+            demo.Tickrate = 128;
             demo.MapName = "de_dust2";
             demo.ClientName = "localhost";
             demo.Hostname = "local";
@@ -295,11 +295,11 @@ namespace Services.Design
         public Task<List<TimelineEvent>> GetTimeLineEventList(Demo demo)
         {
             List<TimelineEvent> events = new List<TimelineEvent>();
-            float tickrate = demo.ServerTickrate;
+            float tickrate = demo.Tickrate;
 
             foreach (KillEvent e in demo.Kills)
             {
-                events.Add(new KillEventTimeline(tickrate, e.Tick, (int)(e.Tick + demo.Tickrate)));
+                events.Add(new KillEventTimeline(tickrate, e.Tick, e.Tick + (int)tickrate));
             }
 
             foreach (Round round in demo.Rounds)
@@ -386,8 +386,8 @@ namespace Services.Design
             {
                 Id = "de_dust25445648778447878",
                 Name = "mydemo.dem",
-                Tickrate = 32,
-                ServerTickrate = 64,
+                FrameRate = 32,
+                Tickrate = 64,
                 MapName = "de_dust2",
                 ClientName = "localhost",
                 Hostname = "local",

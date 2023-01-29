@@ -385,7 +385,7 @@ namespace Manager.ViewModel.Demos
                 if (Demo != null && TimelineEventList.Count > 0)
                 {
                     TimelineEventList.RemoveAt(0);
-                    StartTickEventMarkerTimeline e = new StartTickEventMarkerTimeline(Demo.ServerTickrate, value, value + (int)Demo.ServerTickrate);
+                    StartTickEventMarkerTimeline e = new StartTickEventMarkerTimeline(Demo.Tickrate, value, value + (int)Demo.Tickrate);
                     TimelineEventList.Insert(0, e);
                 }
 
@@ -404,7 +404,7 @@ namespace Manager.ViewModel.Demos
                 if (Demo != null && TimelineEventList.Count > 1)
                 {
                     TimelineEventList.RemoveAt(1);
-                    EndTickEventMarkerTimeline e = new EndTickEventMarkerTimeline(Demo.ServerTickrate, value, value + (int)Demo.ServerTickrate);
+                    EndTickEventMarkerTimeline e = new EndTickEventMarkerTimeline(Demo.Tickrate, value, value + (int)Demo.Tickrate);
                     TimelineEventList.Insert(1, e);
                 }
 
@@ -429,9 +429,9 @@ namespace Manager.ViewModel.Demos
         {
             get
             {
-                if (Demo != null && Demo.ServerTickrate > 0 && StartTick > 0 && EndTick > 0 && EndTick > StartTick)
+                if (Demo != null && Demo.Tickrate > 0 && StartTick > 0 && EndTick > 0 && EndTick > StartTick)
                 {
-                    return (EndTick - StartTick) / Demo.ServerTickrate;
+                    return (EndTick - StartTick) / Demo.Tickrate;
                 }
 
                 return 0;
@@ -440,7 +440,7 @@ namespace Manager.ViewModel.Demos
             {
                 if (StartTick > 0)
                 {
-                    EndTick = (int)(StartTick + Demo.ServerTickrate * value);
+                    EndTick = (int)(StartTick + Demo.Tickrate * value);
                 }
             }
         }
@@ -467,7 +467,7 @@ namespace Manager.ViewModel.Demos
                 if (FrameRate > 0 && StartTick != 0 && EndTick != 0 && EndTick > StartTick)
                 {
                     int tickCount = EndTick - StartTick;
-                    float ratio = tickCount / Demo.ServerTickrate;
+                    float ratio = tickCount / Demo.Tickrate;
                     float tgaCount = ratio * FrameRate;
                     float imageSize = Width * Height * 24f / 8f / 1024f / 1024f; // 24 bit depth
                     value = tgaCount * imageSize / 1024f;
@@ -620,7 +620,7 @@ namespace Manager.ViewModel.Demos
                                RadTimeline timeline = (RadTimeline)e.Source;
                                Point point = e.MouseDevice.GetPosition(timeline);
                                DateTime dateTime = timeline.ConvertPointToDateTime(point);
-                               SelectedTick = (int)(dateTime.Subtract(DateTime.Today).TotalSeconds * Demo.ServerTickrate);
+                               SelectedTick = (int)(dateTime.Subtract(DateTime.Today).TotalSeconds * Demo.Tickrate);
                            },
                            demo => Demo != null));
             }
@@ -1282,7 +1282,7 @@ namespace Manager.ViewModel.Demos
                                int seconds = await GetSecondsFromInput();
                                if (seconds > 0)
                                {
-                                   StartTick = (int)(tick - seconds * Demo.ServerTickrate);
+                                   StartTick = (int)(tick - seconds * Demo.Tickrate);
                                }
                            }, tick => !IsBusy));
             }
@@ -1299,7 +1299,7 @@ namespace Manager.ViewModel.Demos
                                int seconds = await GetSecondsFromInput();
                                if (seconds > 0)
                                {
-                                   StartTick = (int)(tick + seconds * Demo.ServerTickrate);
+                                   StartTick = (int)(tick + seconds * Demo.Tickrate);
                                }
                            }, tick => !IsBusy));
             }
@@ -1316,7 +1316,7 @@ namespace Manager.ViewModel.Demos
                                int seconds = await GetSecondsFromInput();
                                if (seconds > 0)
                                {
-                                   EndTick = (int)(tick - seconds * Demo.ServerTickrate);
+                                   EndTick = (int)(tick - seconds * Demo.Tickrate);
                                }
                            }, tick => !IsBusy));
             }
@@ -1333,7 +1333,7 @@ namespace Manager.ViewModel.Demos
                                int seconds = await GetSecondsFromInput();
                                if (seconds > 0)
                                {
-                                   EndTick = (int)(tick + seconds * Demo.ServerTickrate);
+                                   EndTick = (int)(tick + seconds * Demo.Tickrate);
                                }
                            }, tick => !IsBusy));
             }

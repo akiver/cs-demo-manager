@@ -68,6 +68,10 @@ namespace DemoInfo.DP
                 {
                     new VoiceData().Parse(bitstream, demo);
                 }
+                else if (cmd == (int)SVC_Messages.svc_ServerInfo)
+                {
+                    new ServerInfo().Parse(bitstream, demo);
+                }
 
                 bitstream.EndChunk();
             }

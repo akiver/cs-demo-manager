@@ -75,6 +75,7 @@ namespace Services.Concrete.Analyzer
             Parser.GamePhaseChanged += HandleGamePhaseChanged;
             Parser.RoundWinStatusChanged += HandleRoundWinStatusChanged;
             Parser.POVRecordingPlayerDetected += HandlePOVPlayerRecordingDetected;
+            Parser.ServerInfo += HandleServerInfo;
         }
 
         public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)
@@ -335,7 +336,7 @@ namespace Services.Concrete.Analyzer
                     VictimY = e.Victim.Position.Y,
                     VictimZ = e.Victim.Position.Z,
                 },
-                TimeDeathSeconds = (float)Math.Round((Parser.IngameTick - CurrentRound.FreezetimeEndTick) / Demo.ServerTickrate, 2),
+                TimeDeathSeconds = (float)Math.Round((Parser.IngameTick - CurrentRound.FreezetimeEndTick) / Demo.Tickrate, 2),
             };
 
             bool killerIsBot = e.Killer != null && e.Killer.SteamID == 0;

@@ -10,8 +10,8 @@
         public string MapName { get; set; }
         public string Hostname { get; set; }
         public string ClientName { get; set; }
-        public float ServerTickrate { get; set; }
         public float Tickrate { get; set; }
+        public float FrameRate { get; set; }
         public float Duration { get; set; }
         public int Ticks { get; set; }
         public string TeamNameCT { get; set; }

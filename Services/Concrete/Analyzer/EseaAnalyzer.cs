@@ -51,6 +51,7 @@ namespace Services.Concrete.Analyzer
             Parser.PlayerTeam += HandlePlayerTeam;
             Parser.SayText2 += HandleSayText2;
             Parser.POVRecordingPlayerDetected += HandlePOVPlayerRecordingDetected;
+            Parser.ServerInfo += HandleServerInfo;
         }
 
         public override async Task<Demo> AnalyzeDemoAsync(CancellationToken token, Action<string, float> progressCallback = null)

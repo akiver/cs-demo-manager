@@ -356,12 +356,12 @@
                                     Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowDemoTypeColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <DataGridTextColumn Width="Auto"
                                     Header="{x:Static properties:Resources.HeaderTickrate}"
-                                    Binding="{Binding ServerTickrate}"
+                                    Binding="{Binding Tickrate}"
                                     HeaderStyle="{StaticResource TickrateHeader}"
                                     Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowTickrateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <DataGridTextColumn Width="Auto"
                                     Header="{x:Static properties:Resources.HeaderFramerate}"
-                                    Binding="{Binding Tickrate}"
+                                    Binding="{Binding FrameRate}"
                                     HeaderStyle="{StaticResource FramerateHeader}"
                                     Visibility="{Binding Source={StaticResource Locator}, Path=Settings.ShowFramerateColumn, Converter={StaticResource BooleanToVisibilityConverter}}" />
                 <DataGridTextColumn Width="Auto"

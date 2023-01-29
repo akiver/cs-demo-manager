@@ -354,7 +354,7 @@
                                            Style="{StaticResource TextBlockHighlight}">
                                     <Run Text=" " />
                                 </TextBlock>
-                                <TextBlock Text="{Binding Demo.ServerTickrate}"
+                                <TextBlock Text="{Binding Demo.Tickrate}"
                                            Grid.Column="1"
                                            Style="{StaticResource TextBlockSmall}" />
                             </Grid>

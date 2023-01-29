@@ -279,6 +279,8 @@ namespace DemoInfo
 
         public event EventHandler<VoiceDataEventArgs> VoiceData;
 
+        public event EventHandler<ServerInfoEventArgs> ServerInfo;
+
         /// <summary>
         /// Occurs when a player started recording the demo locally.
         /// If this event is dispatched, it means it's a client-side (POV) demo.
@@ -467,21 +469,41 @@ namespace DemoInfo
         internal Dictionary<int, byte[]> instanceBaseline = new Dictionary<int, byte[]>();
 
         /// <summary>
-        /// The tickrate *of the demo* (16 for normal GOTV-demos)
+        /// Number of seconds per tick.
+        /// Updated on CSVCMsg_ServerInfo message, it helps dealing with corrupted demos.
         /// </summary>
-        /// <value>The tick rate.</value>
+        internal float tickInterval;
+
+        /// <summary>
+        ///  Number of ticks per second.
+        /// </summary>
         public float TickRate
         {
-            get { return Header.PlaybackFrames / Header.PlaybackTime; }
+            get
+            {
+                if (tickInterval != 0)
+                {
+                    return 1 / tickInterval;
+                }
+                
+                return Header.PlaybackFrames / Header.PlaybackTime;
+            }
         }
 
         /// <summary>
-        /// How long a tick of the demo is in s^-1
+        /// How long a single tick of the demo takes in seconds.
         /// </summary>
-        /// <value>The tick time.</value>
         public float TickTime
         {
-            get { return Header.PlaybackTime / Header.PlaybackFrames; }
+            get
+            {
+                if (tickInterval != 0)
+                {
+                    return tickInterval;
+                }
+
+                return Header.PlaybackTime / Header.PlaybackFrames;
+            }
         }
 
         /// <summary>
@@ -550,8 +572,9 @@ namespace DemoInfo
             {
                 this.NetMessageDecryptionKey = new IceKey(2, netMessageDecryptionKey);
             }
-        }
 
+            ServerInfo += OnServerInfo;
+        }
 
         /// <summary>
         /// Parses the header (first few hundret bytes) of the demo. 
@@ -1421,6 +1444,11 @@ namespace DemoInfo
             inferno.OnDestroyEntity += (s, infEntity) => { InfernoOwners.Remove(infEntity.Entity.ID); };
         }
 
+        private void OnServerInfo(object sender, ServerInfoEventArgs e)
+        {
+            tickInterval = e.TickInterval;
+        }
+
         #region EventCaller
 
         internal void RaiseMatchStarted()
@@ -1835,6 +1863,14 @@ namespace DemoInfo
             if (VoiceData != null)
             {
                 VoiceData(this, args);
+            }
+        }
+
+        internal void RaiseServerInfo(ServerInfoEventArgs args)
+        {
+            if (ServerInfo != null)
+            {
+                ServerInfo(this, args);
             }
         }
 

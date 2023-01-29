@@ -266,7 +266,7 @@ namespace Services.Concrete
             AssertExecutablesExist();
             if (delay)
             {
-                int tickDelayCount = (int)(_config.Demo.ServerTickrate * PLAYBACK_DELAY);
+                int tickDelayCount = (int)(_config.Demo.Tickrate * PLAYBACK_DELAY);
                 if (tick > tickDelayCount)
                 {
                     tick -= tickDelayCount;
@@ -348,12 +348,12 @@ namespace Services.Concrete
             string generated = string.Empty;
             int actionCount = 0;
             int lastTick = 0;
-            int beginTickDelayCount = (int)(demo.ServerTickrate * STUFF_BEGIN_DELAY);
-            int endTickDelayCount = (int)(demo.ServerTickrate * STUFF_END_DELAY);
+            int beginTickDelayCount = (int)(demo.Tickrate * STUFF_BEGIN_DELAY);
+            int endTickDelayCount = (int)(demo.Tickrate * STUFF_END_DELAY);
             int lastSuffSartedTick = 0;
             // max delay between 2 stuffs
-            int maxTickDelayCount = (int)(demo.ServerTickrate * MAX_NEXT_STUFF_DELAY);
-            int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
+            int maxTickDelayCount = (int)(demo.Tickrate * MAX_NEXT_STUFF_DELAY);
+            int nextActionDelayCount = (int)(demo.Tickrate * NEXT_ACTION_DELAY);
             string message = GetFastForwardMessage(type);
 
             foreach (WeaponFireEvent e in demo.WeaponFired)
@@ -417,7 +417,7 @@ namespace Services.Concrete
                                 generated += string.Format(Properties.Resources.skip_ahead, ++actionCount, startToTick, skipToTick);
                                 generated += string.Format(Properties.Resources.spec_player, ++actionCount, startToTick, e.ShooterSteamId);
                                 // the molotov may have not burned, use time average instead
-                                lastSuffSartedTick = e.Tick + (int)(demo.ServerTickrate * MOLOTOV_TIME);
+                                lastSuffSartedTick = e.Tick + (int)(demo.Tickrate * MOLOTOV_TIME);
                             }
 
                             break;
@@ -512,11 +512,11 @@ namespace Services.Concrete
             int actionCount = 0;
             string generated = string.Empty;
             int currentRoundNumber = 0;
-            int tickDelayCount = isHighlight ? (int)(demo.ServerTickrate * HIGHLIGHT_DELAY) : (int)(demo.ServerTickrate * LOWLIGHT_DELAY);
+            int tickDelayCount = isHighlight ? (int)(demo.Tickrate * HIGHLIGHT_DELAY) : (int)(demo.Tickrate * LOWLIGHT_DELAY);
             int maxTickCountNextKill = isHighlight
-                ? (int)(demo.ServerTickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY)
-                : (int)(demo.ServerTickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
-            int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
+                ? (int)(demo.Tickrate * HIGHLIGHT_MAX_NEXT_KILL_DELAY)
+                : (int)(demo.Tickrate * LOWLIGHT_MAX_NEXT_KILL_DELAY);
+            int nextActionDelayCount = (int)(demo.Tickrate * NEXT_ACTION_DELAY);
             string message = "Fast forwarding to the next kill...";
 
             foreach (KillEvent e in demo.Kills)
@@ -528,7 +528,7 @@ namespace Services.Concrete
                     // check if the player had others kills during the current round
                     if (isHighlight && currentRoundNumber == e.RoundNumber)
                     {
-                        startTick = startTick + (int)(demo.ServerTickrate * SWITCH_PLAYER_DELAY);
+                        startTick = startTick + (int)(demo.Tickrate * SWITCH_PLAYER_DELAY);
                         // fast forward if the next kill is far away
                         if (e.Tick - lastTick > maxTickCountNextKill)
                         {
@@ -590,7 +590,7 @@ namespace Services.Concrete
             int startTick = 0;
             int actionCount = 0;
             string generated = string.Empty;
-            int nextActionDelayCount = (int)(demo.ServerTickrate * NEXT_ACTION_DELAY);
+            int nextActionDelayCount = (int)(demo.Tickrate * NEXT_ACTION_DELAY);
 
             var playerDeaths = demo.Kills.Where(k => k.KilledSteamId == _config.FocusPlayerSteamId);
 

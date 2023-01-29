@@ -90,17 +90,17 @@ namespace Manager.ViewModel.Demos
         {
             get
             {
-                if (Demo.Tickrate > 0 && Demo.Tickrate <= 17)
+                if (Demo.FrameRate > 0 && Demo.FrameRate <= 17)
                 {
                     return 16 * _frameLimiterMultiplier;
                 }
 
-                if (Demo.Tickrate > 17 && Demo.Tickrate <= 33)
+                if (Demo.FrameRate > 17 && Demo.FrameRate <= 33)
                 {
                     return 47 * _frameLimiterMultiplier;
                 }
 
-                if (Demo.Tickrate > 33 && Demo.Tickrate <= 44)
+                if (Demo.FrameRate > 33 && Demo.FrameRate <= 44)
                 {
                     if (_frameLimiterMultiplier > 1)
                     {

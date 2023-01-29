@@ -227,7 +227,7 @@ namespace Services.Concrete.Analyzer
             demo.Hostname = header.ServerName;
             if (header.PlaybackTicks != 0 && header.PlaybackTime != 0)
             {
-                demo.ServerTickrate = header.PlaybackTicks / header.PlaybackTime;
+                demo.Tickrate = header.PlaybackTicks / header.PlaybackTime;
             }
             else
             {
@@ -236,7 +236,7 @@ namespace Services.Concrete.Analyzer
 
             if (header.PlaybackFrames != 0 && header.PlaybackTime != 0)
             {
-                demo.Tickrate = (int)Math.Round((double)header.PlaybackFrames / header.PlaybackTime);
+                demo.FrameRate = (int)Math.Round((double)header.PlaybackFrames / header.PlaybackTime);
             }
 
             demo.Duration = header.PlaybackTime;
@@ -472,7 +472,7 @@ namespace Services.Concrete.Analyzer
                     VictimY = e.Victim.Position.Y,
                     VictimZ = e.Victim.Position.Z,
                 },
-                TimeDeathSeconds = (float)Math.Round((Parser.IngameTick - CurrentRound.FreezetimeEndTick) / Demo.ServerTickrate, 2),
+                TimeDeathSeconds = (float)Math.Round((Parser.IngameTick - CurrentRound.FreezetimeEndTick) / Demo.Tickrate, 2),
             };
 
             killed.IsAlive = false;
@@ -602,7 +602,7 @@ namespace Services.Concrete.Analyzer
             }
 
             CurrentRound.EndTick = Parser.IngameTick;
-            CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTick - CurrentRound.Tick) / Demo.ServerTickrate, 2);
+            CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTick - CurrentRound.Tick) / Demo.Tickrate, 2);
             CurrentRound.EndReason = e.Reason;
             UpdateTeamScore(e);
             ProcessRoundEndReward(e);
@@ -661,7 +661,7 @@ namespace Services.Concrete.Analyzer
             }
 
             CurrentRound.EndTickOfficially = Parser.IngameTick;
-            CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTickOfficially - CurrentRound.Tick) / Demo.ServerTickrate, 2);
+            CurrentRound.Duration = (float)Math.Round((CurrentRound.EndTickOfficially - CurrentRound.Tick) / Demo.Tickrate, 2);
 
             // sometimes round_end isn't triggered, I update scores here
             if (!IsRoundEndOccured)
@@ -1485,6 +1485,11 @@ namespace Services.Concrete.Analyzer
         protected void HandlePOVPlayerRecordingDetected(object sender, POVRecordingPlayerDetectedEventArgs e)
         {
             Demo.Type = DemoType.POV;
+        }
+
+        protected void HandleServerInfo(object sender, ServerInfoEventArgs e)
+        {
+            Demo.Tickrate = Parser.TickRate;
         }
 
         protected void HandlePlayerTeam(object sender, PlayerTeamEventArgs e)
