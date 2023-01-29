@@ -271,7 +271,7 @@ namespace Manager.ViewModel.Demos
             {
                 return _setDemoSourceCommand
                        ?? (_setDemoSourceCommand = new RelayCommand<Source>(
-                           async source => { await _demosService.SetSource(Demo, source.Name); },
+                           async source => { await _demosService.UpdateSource(Demo, source.Name); },
                            source => Demo != null && source != null && source.Name != Demo.SourceName));
             }
         }

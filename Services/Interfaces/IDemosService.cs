@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Core.Models;
@@ -89,7 +88,7 @@ namespace Services.Interfaces
         /// <param name="demos"></param>
         /// <param name="source"></param>
         /// <returns></returns>
-        Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source);
+        Task<List<Demo>> UpdateSource(List<Demo> demos, string source);
 
         /// <summary>
         /// Change a single demo's source
@@ -97,7 +96,9 @@ namespace Services.Interfaces
         /// <param name="demo"></param>
         /// <param name="source"></param>
         /// <returns></returns>
-        Task<Demo> SetSource(Demo demo, string source);
+        Task<Demo> UpdateSource(Demo demo, string source);
+
+        Task<List<Demo>> UpdateType(List<Demo> demos, DemoType type);
 
         Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token);
 

@@ -223,7 +223,12 @@ namespace Services.Design
             return Task.FromResult(demo);
         }
 
-        public Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source)
+        public Task<List<Demo>> UpdateSource(List<Demo> demos, string source)
+        {
+            return Task.FromResult(demos);
+        }
+
+        public Task<List<Demo>> UpdateType(List<Demo> demos, DemoType type)
         {
             return Task.FromResult(demos);
         }
@@ -282,7 +287,7 @@ namespace Services.Design
             return Task.FromResult("CSGO-Vd1T-FD32d-549td-DF41f-Td8dZ");
         }
 
-        public Task<Demo> SetSource(Demo demo, string source)
+        public Task<Demo> UpdateSource(Demo demo, string source)
         {
             return Task.FromResult(demo);
         }

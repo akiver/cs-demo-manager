@@ -133,8 +133,6 @@ namespace Manager.ViewModel.Demos
 
         private RelayCommand<string> _saveStatusDemoCommand;
 
-        private RelayCommand<string> _setDemoSourceCommand;
-
         private RelayCommand _stopAnalyzeCommand;
 
         private RelayCommand _downloadDemosCommand;
@@ -215,6 +213,14 @@ namespace Manager.ViewModel.Demos
         {
             get => _demoTypeFilterFilterOptions;
             set { Set(() => DemoTypeFilterOptions, ref _demoTypeFilterFilterOptions, value); }
+        }
+
+        public List<DemoTypeFilterOption> DemoTypeOptions
+        {
+            get
+            {
+                return DemoTypeFilterOptions.Where(x => x.Value != "all").ToList();
+            }
         }
 
         public DemoTypeFilterOption SelectedDemoTypeFilterOption
@@ -381,6 +387,8 @@ namespace Manager.ViewModel.Demos
         #region Commands
 
         public RelayCommand ExportPlayersVoiceCommand { get; }
+        public RelayCommand<string> UpdateDemosSourceCommand { get; }
+        public RelayCommand<string> UpdateDemosTypeCommand { get; }
 
         /// <summary>
         /// Command to start demo(s) analysis
@@ -1137,20 +1145,6 @@ namespace Manager.ViewModel.Demos
         }
 
         /// <summary>
-        /// Command to set the demo's source
-        /// </summary>
-        public RelayCommand<string> SetDemoSourceCommand
-        {
-            get
-            {
-                return _setDemoSourceCommand
-                       ?? (_setDemoSourceCommand = new RelayCommand<string>(
-                           async source => { SelectedDemos = await _demosService.SetSource(SelectedDemos, source); },
-                           source => SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy));
-            }
-        }
-
-        /// <summary>
         /// Command to stop current analyze
         /// </summary>
         public RelayCommand StopAnalyzeCommand
@@ -1427,6 +1421,9 @@ namespace Manager.ViewModel.Demos
             _voiceService = voiceService;
             _demosService.ShowOnlyAccountDemos = Properties.Settings.Default.ShowOnlyAccountDemos;
             ExportPlayersVoiceCommand = new RelayCommand(async () => await ExportPlayersVoice(), () => SelectedDemos.Any() && !IsBusy);
+            UpdateDemosSourceCommand = new RelayCommand<string>(async (source) => await UpdateDemosSource(source),
+                CanUpdateSelectedDemos());
+                UpdateDemosTypeCommand = new RelayCommand<string>(async (demoType) => await UpdateDemosType(demoType), CanUpdateSelectedDemos());
 
             if (IsInDesignModeStatic)
             {
@@ -1588,6 +1585,11 @@ namespace Manager.ViewModel.Demos
             CommandManager.InvalidateRequerySuggested();
         }
 
+        private bool CanUpdateSelectedDemos()
+        {
+            return SelectedDemos != null && SelectedDemos.Count > 0 && !IsBusy;
+        }
+
         private static void UpdateDemoSourceSettings(Dictionary<string, object> items, string name)
         {
             switch (name)
@@ -1613,6 +1615,33 @@ namespace Manager.ViewModel.Demos
                 case DemoStatus.NAME_DEMO_STATUS_ERROR:
                     Properties.Settings.Default.ShowOldDemos = items.ContainsKey(name);
                     break;
+            }
+        }
+
+        private async Task UpdateDemosSource(string source)
+        {
+            var updatedDemos = await _demosService.UpdateSource(SelectedDemos.ToList(), source);
+            foreach (var updatedDemo in updatedDemos)
+            {
+                var demoToUpdate = Demos.FirstOrDefault(demo => demo.Id == updatedDemo.Id);
+                if (demoToUpdate != null)
+                {
+                    demoToUpdate.Source = updatedDemo.Source;
+                    demoToUpdate.SourceName = updatedDemo.SourceName;
+                }
+            }
+        }
+
+        private async Task UpdateDemosType(string demoType)
+        {
+            var updatedDemos = await _demosService.UpdateType(SelectedDemos.ToList(), DemoTypeExtensions.FromString(demoType));
+            foreach (var updatedDemo in updatedDemos)
+            {
+                var demoToUpdate = Demos.FirstOrDefault(demo => demo.Id == updatedDemo.Id);
+                if (demoToUpdate != null)
+                {
+                    demoToUpdate.Type = updatedDemo.Type;
+                }
             }
         }
 

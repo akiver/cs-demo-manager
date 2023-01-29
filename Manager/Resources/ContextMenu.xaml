@@ -53,6 +53,19 @@
         <MenuItem Header="{x:Static properties:Resources.AddPlayersToSuspects}"
                   Command="{Binding DemoList.AddPlayersToSuspectsListCommand, Source={StaticResource Locator}}"
                   CommandParameter="{Binding DemoList.SelectedDemos, Source={StaticResource Locator}}" />
+        <MenuItem Header="{x:Static properties:Resources.Type}"
+                  ItemsSource="{Binding DemoList.DemoTypeOptions, Source={StaticResource Locator}}"
+                  DisplayMemberPath="Label">
+            <MenuItem.ItemContainerStyle>
+                <Style TargetType="{x:Type MenuItem}"
+                       BasedOn="{StaticResource MahApps.Styles.MenuItem}">
+                    <Setter Property="Command"
+                            Value="{Binding DemoList.UpdateDemosTypeCommand, Source={StaticResource Locator}}" />
+                    <Setter Property="CommandParameter"
+                            Value="{Binding Value}" />
+                </Style>
+            </MenuItem.ItemContainerStyle>
+        </MenuItem>
         <MenuItem Header="{x:Static properties:Resources.Source}"
                   ItemsSource="{Binding DemoDetails.Sources, Source={StaticResource Locator}}"
                   DisplayMemberPath="Label">
@@ -60,7 +73,7 @@
                 <Style TargetType="{x:Type MenuItem}"
                        BasedOn="{StaticResource MahApps.Styles.MenuItem}">
                     <Setter Property="Command"
-                            Value="{Binding DemoList.SetDemoSourceCommand, Source={StaticResource Locator}}" />
+                            Value="{Binding DemoList.UpdateDemosSourceCommand, Source={StaticResource Locator}}" />
                     <Setter Property="CommandParameter"
                             Value="{Binding Name}" />
                 </Style>

@@ -22,5 +22,18 @@ namespace Core.Models
                     throw new Exception("Invalid demo type " + demoType);
             }
         }
+
+        public static DemoType FromString(string demoType)
+        {
+            switch (demoType)
+            {
+                case "GOTV":
+                    return DemoType.GOTV;
+                case "POV":
+                    return DemoType.POV;
+                default:
+                    throw new Exception("Invalid demo type " + demoType);
+            }
+        }
     }
 }

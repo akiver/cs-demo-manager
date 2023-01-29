@@ -240,22 +240,34 @@ namespace Services.Concrete
             await _cacheService.WriteDemoDataCache(demo);
         }
 
-        public async Task<ObservableCollection<Demo>> SetSource(ObservableCollection<Demo> demos, string source)
+        public async Task<List<Demo>> UpdateSource(List<Demo> demos, string source)
         {
-            foreach (Demo demo in demos)
+            foreach (var demo in demos)
             {
-                await SetSource(demo, source);
+                await UpdateSource(demo, source);
             }
 
             return demos;
         }
 
-        public async Task<Demo> SetSource(Demo demo, string source)
+        public async Task<Demo> UpdateSource(Demo demo, string source)
         {
             demo.SourceName = source;
+            demo.Source = Source.Factory(source);
             await _cacheService.WriteDemoDataCache(demo);
 
             return demo;
+        }
+
+        public async Task<List<Demo>> UpdateType(List<Demo> demos, DemoType type)
+        {
+            foreach (var demo in demos)
+            {
+                demo.Type = type;
+                await _cacheService.WriteDemoDataCache(demo);
+            }
+
+            return demos;
         }
 
         public async Task<Demo> AnalyzePlayersPosition(Demo demo, CancellationToken token)
