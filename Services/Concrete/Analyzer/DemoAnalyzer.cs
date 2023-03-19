@@ -2161,23 +2161,23 @@ namespace Services.Concrete.Analyzer
                     case RoundEndReason.BombDefused:
                         moneyReward = (player.Side == Side.CounterTerrorist) ?
                             WIN_BOMB_DEFUSED :
-                            CalculateLoserMoneyReward(loser, player, BOMB_PLANTED_BONUS);
+                            CalculateLoserMoneyReward(loser, BOMB_PLANTED_BONUS);
                         break;
                     case RoundEndReason.TargetBombed:
                         moneyReward = (player.Side == Side.Terrorist) ?
                             WIN_BOMB_TARGET :
-                            CalculateLoserMoneyReward(loser, player);
+                            CalculateLoserMoneyReward(loser);
                         break;
                     case RoundEndReason.CTWin:
                         bool hasBombPlanted = CurrentRound.BombPlanted != null;
                         moneyReward = (player.Side == Side.CounterTerrorist) ?
                             WIN_ELIMINATION :
-                            CalculateLoserMoneyReward(loser, player, hasBombPlanted ? BOMB_PLANTED_BONUS : 0);
+                            CalculateLoserMoneyReward(loser, hasBombPlanted ? BOMB_PLANTED_BONUS : 0);
                         break;
                     case RoundEndReason.TerroristWin:
                         moneyReward = (player.Side == Side.Terrorist) ?
                             WIN_ELIMINATION :
-                            CalculateLoserMoneyReward(loser, player);
+                            CalculateLoserMoneyReward(loser);
                         break;
                     case RoundEndReason.TargetSaved:
                         if (player.Side == Side.CounterTerrorist)
@@ -2186,7 +2186,7 @@ namespace Services.Concrete.Analyzer
                         }
                         else if (!player.IsAlive)
                         {
-                            moneyReward = CalculateLoserMoneyReward(loser, player);
+                            moneyReward = CalculateLoserMoneyReward(loser);
                         }
 
                         break;
@@ -2202,7 +2202,7 @@ namespace Services.Concrete.Analyzer
             }
         }
 
-        private int CalculateLoserMoneyReward(Team loser, Player player, int otherBonuses = 0)
+        private int CalculateLoserMoneyReward(Team loser, int otherBonuses = 0)
         {
             int lossRowCount = loser.LossRowCount > MAX_LOSS_ROW ? MAX_LOSS_ROW : loser.LossRowCount;
             int totalLossBonus = (lossRowCount - 1) * LOSS_BONUS;
