@@ -120,11 +120,9 @@ namespace Services.Concrete.Analyzer
 
 
         // Money awards
+        private const int MAX_LOSS_ROW = 5;
+        private const int LOSS_BONUS = 500;
         private const int LOSS_ROW_1 = 1400;
-        private const int LOSS_ROW_2 = 1900;
-        private const int LOSS_ROW_3 = 2400;
-        private const int LOSS_ROW_4 = 2900;
-        private const int LOSS_ROW_5 = 3400;
         private const int WIN_BOMB_TARGET = 3500;
         private const int WIN_BOMB_DEFUSED = 3500;
         private const int WIN_TIME_OVER = 3250;
@@ -192,39 +190,52 @@ namespace Services.Concrete.Analyzer
 
         public static Demo ParseDemoHeader(string pathDemoFile)
         {
-            DemoParser parser = new DemoParser(File.OpenRead(pathDemoFile));
+            var demoFileInfo = new FileInfo(pathDemoFile);
 
-            DateTime dateFile = File.GetCreationTime(pathDemoFile);
+            DateTime dateFile = demoFileInfo.CreationTime > demoFileInfo.LastWriteTime ?
+                demoFileInfo.LastWriteTime : demoFileInfo.CreationTime;
 
-            if (dateFile > File.GetLastWriteTime(pathDemoFile))
-            {
-                dateFile = File.GetLastWriteTime(pathDemoFile);
-            }
-
-            Demo demo = new Demo
-            {
-                Name = Path.GetFileName(pathDemoFile),
-                Path = pathDemoFile,
-                Date = dateFile,
-            };
+            DemoHeader header = null;
+            FileStream file = null;
+            DemoParser parser = null;
 
             try
             {
+                file = File.OpenRead(pathDemoFile);
+                parser = new DemoParser(file);
                 parser.ParseHeader();
+                header = parser.Header;
             }
             catch (Exception)
             {
                 // Silently ignore no CSGO demos or unreadable file
                 return null;
             }
+            finally
+            {
+                file.Dispose();
+                parser.Dispose();
+            }
 
-            DemoHeader header = parser.Header;
-            FileInfo fi = new FileInfo(demo.Path);
-            int seconds = (int)fi.LastWriteTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
-            demo.Id = header.MapName.Replace("/", "") + "_" + header.SignonLength + header.PlaybackTicks + header.PlaybackFrames + seconds +
-                      fi.Length;
-            demo.ClientName = header.ClientName;
-            demo.Hostname = header.ServerName;
+            int seconds = (int)demoFileInfo.LastWriteTime.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            string demoId = header.MapName.Replace("/", "") + "_" + header.SignonLength +
+                            header.PlaybackTicks + header.PlaybackFrames + seconds + demoFileInfo.Length;
+
+
+            Demo demo = new Demo
+            {
+                Id = demoId,
+                Name = Path.GetFileName(pathDemoFile),
+                Path = pathDemoFile,
+                Date = dateFile,
+                ClientName = header.ClientName,
+                Hostname = header.ServerName,
+                Duration = header.PlaybackTime,
+                // Valve maps moved from competitive to scrimmage (only mirage ATM) contains the suffix "_scrimmagemap" in the header.
+                MapName = header.MapName.Replace("_scrimmagemap", ""),
+                Ticks = header.PlaybackTicks
+            };
+
             if (header.PlaybackTicks != 0 && header.PlaybackTime != 0)
             {
                 demo.Tickrate = header.PlaybackTicks / header.PlaybackTime;
@@ -239,25 +250,22 @@ namespace Services.Concrete.Analyzer
                 demo.FrameRate = (int)Math.Round((double)header.PlaybackFrames / header.PlaybackTime);
             }
 
-            demo.Duration = header.PlaybackTime;
-            // Valve maps moved from competitive to scrimmage (only mirage ATM) contains the suffix "_scrimmagemap" in the header.
-            demo.MapName = header.MapName.Replace("_scrimmagemap", "");
             demo.Source = DetermineDemoSource(demo);
             if (IsPovDemo(header.ServerName))
             {
                 demo.Type = DemoType.POV;
             }
-            demo.Ticks = header.PlaybackTicks;
+
 
             // Read .info file to get the real match date
             string infoFilePath = demo.Path + ".info";
             if (File.Exists(infoFilePath))
             {
-                using (FileStream file = File.OpenRead(infoFilePath))
+                using (FileStream infoFile = File.OpenRead(infoFilePath))
                 {
                     try
                     {
-                        CDataGCCStrike15v2MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15v2MatchInfo>(file);
+                        CDataGCCStrike15v2MatchInfo infoMsg = Serializer.Deserialize<CDataGCCStrike15v2MatchInfo>(infoFile);
                         DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                         demo.Date = date.AddSeconds(infoMsg.Matchtime).ToLocalTime();
                     }
@@ -1860,7 +1868,6 @@ namespace Services.Concrete.Analyzer
         /// <returns></returns>
         private static double ComputeHltv2OrgRating(Player player, Demo demo)
         {
-            //KAST
             double KAST = 0;
             int KASTrounds = 0;
             for (int round = 0; round < demo.Rounds.Count; round++)
@@ -1874,20 +1881,12 @@ namespace Services.Concrete.Analyzer
 
             KAST = HLTV2_KAST_MOD * ((double)KASTrounds / (double)demo.Rounds.Count * 100.0F);
 
-            //KPR
+
             double KPR = HLTV2_KPR_MOD * player.KillPerRound;
-
-            //DPR
             double DPR = HLTV2_DPR_MOD * player.DeathPerRound;
-
-            //ADR
             double ADR = HLTV2_ADR_MOD * player.AverageHealthDamage;
-
-            //Impact
             double Impact = HLTV2_IMPACT_MOD * (HLTV2_IMPACT_KPR_MOD * player.KillPerRound + HLTV2_IMPACT_APR_MOD * player.AssistPerRound +
                                                 HLTV2_IMPACT_OFFSET_MOD);
-
-            //HLTV2
             double HLTV2 = KAST + KPR + DPR + Impact + ADR + HLTV2_OFFSET_MOD;
 
             return Math.Round(HLTV2, 3);
@@ -2152,299 +2151,62 @@ namespace Services.Concrete.Analyzer
 
         protected void ProcessRoundEndReward(RoundEndedEventArgs e)
         {
-            Team looser = CurrentRound.WinnerName == Demo.TeamCT.Name ? Demo.TeamT : Demo.TeamCT;
+            Team loser = CurrentRound.WinnerName == Demo.TeamCT.Name ? Demo.TeamT : Demo.TeamCT;
             foreach (Player player in Demo.Players)
             {
+                int moneyReward = 0;
+
                 switch (e.Reason)
                 {
                     case RoundEndReason.BombDefused:
-                        if (player.Side == Side.CounterTerrorist)
-                        {
-                            if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] = WIN_BOMB_DEFUSED;
-                            }
-                            else
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] += WIN_BOMB_DEFUSED;
-                            }
-                        }
-                        else
-                        {
-                            switch (looser.LossRowCount)
-                            {
-                                case 1:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_1 + BOMB_PLANTED_BONUS;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_1 + BOMB_PLANTED_BONUS;
-                                    }
-
-                                    break;
-                                case 2:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_2 + BOMB_PLANTED_BONUS;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_2 + BOMB_PLANTED_BONUS;
-                                    }
-
-                                    break;
-                                case 3:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_3 + BOMB_PLANTED_BONUS;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_3 + BOMB_PLANTED_BONUS;
-                                    }
-
-                                    break;
-                                case 4:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_4 + BOMB_PLANTED_BONUS;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_4 + BOMB_PLANTED_BONUS;
-                                    }
-
-                                    break;
-                                default:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_5 + BOMB_PLANTED_BONUS;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_5 + BOMB_PLANTED_BONUS;
-                                    }
-
-                                    break;
-                            }
-                        }
-
+                        moneyReward = (player.Side == Side.CounterTerrorist) ?
+                            WIN_BOMB_DEFUSED :
+                            CalculateLoserMoneyReward(loser, player, BOMB_PLANTED_BONUS);
                         break;
                     case RoundEndReason.TargetBombed:
-                        if (player.Side == Side.Terrorist)
-                        {
-                            if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] = WIN_BOMB_TARGET;
-                            }
-                            else
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] += WIN_BOMB_TARGET;
-                            }
-                        }
-                        else
-                        {
-                            UpdateLooserMoneyReward(looser, player);
-                        }
-
+                        moneyReward = (player.Side == Side.Terrorist) ?
+                            WIN_BOMB_TARGET :
+                            CalculateLoserMoneyReward(loser, player);
                         break;
                     case RoundEndReason.CTWin:
-                        if (player.Side == Side.CounterTerrorist)
-                        {
-                            if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] = WIN_ELIMINATION;
-                            }
-                            else
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] += WIN_ELIMINATION;
-                            }
-                        }
-                        else
-                        {
-                            switch (looser.LossRowCount)
-                            {
-                                case 1:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_1 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_1;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_1 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_1;
-                                    }
-
-                                    break;
-                                case 2:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_2 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_2;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_2 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_2;
-                                    }
-
-                                    break;
-                                case 3:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_3 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_3;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_3 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_3;
-                                    }
-
-                                    break;
-                                case 4:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_4 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_4;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_4 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_4;
-                                    }
-
-                                    break;
-                                default:
-                                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] = CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_5 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_5;
-                                    }
-                                    else
-                                    {
-                                        player.RoundsMoneyEarned[CurrentRound.Number] += CurrentRound.BombPlanted != null
-                                            ? LOSS_ROW_5 + BOMB_PLANTED_BONUS
-                                            : LOSS_ROW_5;
-                                    }
-
-                                    break;
-                            }
-                        }
-
+                        bool hasBombPlanted = CurrentRound.BombPlanted != null;
+                        moneyReward = (player.Side == Side.CounterTerrorist) ?
+                            WIN_ELIMINATION :
+                            CalculateLoserMoneyReward(loser, player, hasBombPlanted ? BOMB_PLANTED_BONUS : 0);
                         break;
                     case RoundEndReason.TerroristWin:
-                        if (player.Side == Side.Terrorist)
-                        {
-                            if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] = WIN_ELIMINATION;
-                            }
-                            else
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] += WIN_ELIMINATION;
-                            }
-                        }
-                        else
-                        {
-                            UpdateLooserMoneyReward(looser, player);
-                        }
-
+                        moneyReward = (player.Side == Side.Terrorist) ?
+                            WIN_ELIMINATION :
+                            CalculateLoserMoneyReward(loser, player);
                         break;
                     case RoundEndReason.TargetSaved:
                         if (player.Side == Side.CounterTerrorist)
                         {
-                            if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] = WIN_TIME_OVER;
-                            }
-                            else
-                            {
-                                player.RoundsMoneyEarned[CurrentRound.Number] += WIN_TIME_OVER;
-                            }
+                            moneyReward = WIN_TIME_OVER;
                         }
                         else if (!player.IsAlive)
                         {
-                            UpdateLooserMoneyReward(looser, player);
+                            moneyReward = CalculateLoserMoneyReward(loser, player);
                         }
 
                         break;
                 }
+
+                if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
+                {
+                    player.RoundsMoneyEarned[CurrentRound.Number] = moneyReward;
+                    continue;
+                }
+
+                player.RoundsMoneyEarned[CurrentRound.Number] += moneyReward;
             }
         }
 
-        private void UpdateLooserMoneyReward(Team looser, Player player)
+        private int CalculateLoserMoneyReward(Team loser, Player player, int otherBonuses = 0)
         {
-            switch (looser.LossRowCount)
-            {
-                case 1:
-                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_1;
-                    }
-                    else
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_1;
-                    }
-
-                    break;
-                case 2:
-                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_2;
-                    }
-                    else
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_2;
-                    }
-
-                    break;
-                case 3:
-                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_3;
-                    }
-                    else
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_3;
-                    }
-
-                    break;
-                case 4:
-                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_4;
-                    }
-                    else
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_4;
-                    }
-
-                    break;
-                default:
-                    if (!player.RoundsMoneyEarned.ContainsKey(CurrentRound.Number))
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] = LOSS_ROW_5;
-                    }
-                    else
-                    {
-                        player.RoundsMoneyEarned[CurrentRound.Number] += LOSS_ROW_5;
-                    }
-
-                    break;
-            }
+            int lossRowCount = loser.LossRowCount > MAX_LOSS_ROW ? MAX_LOSS_ROW : loser.LossRowCount;
+            int totalLossBonus = (lossRowCount - 1) * LOSS_BONUS;
+            return LOSS_ROW_1 + totalLossBonus + otherBonuses;
         }
 
         protected void ProcessAnalyzeEnded()
