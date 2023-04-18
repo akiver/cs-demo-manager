@@ -47,6 +47,7 @@ namespace Manager
             "Paco González López / monxas (Spanish)",
             "aLieN (Hungarian)",
             "Mad-Kingu (Turkish)",
+            "Aleksandr \"3vaLpwner\" Kolesnikov (Russian)",
         };
 
         public App()
