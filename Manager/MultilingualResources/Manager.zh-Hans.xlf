@@ -2795,7 +2795,7 @@ Demos with this suspect might not have been analyzed.</source>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
           <source>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</source>
+You have to remove it from your account and white list to be able to add him in your suspect list.</source>
           <target state="final">该玩家已经在您的嫌疑列表 / 白名单 / 账户列表中。 
 您必须先将其从账户列表 / 白名单中移除，才能将其添加至嫌疑列表</target>
         </trans-unit>
@@ -2907,7 +2907,7 @@ Demos with this player might not have been analyzed.</source>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</source>
+You have to remove it from your account list to be able to add him in your suspect list.</source>
           <target state="final">该玩家已经在您的嫌疑列表或账户列表中。
 您必须先将其从账户列表中移除，才能将其添加至嫌疑列表。</target>
         </trans-unit>

@@ -2795,7 +2795,7 @@ Demók amik ehhez a gyanúítotthoz köthetők, lehet nem lettek analizálva.</t
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
           <source>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</source>
+You have to remove it from your account and white list to be able to add him in your suspect list.</source>
           <target state="final">Ez a játékos a gyanúsított / engedélyezettek / fiók listádon szerepel.
 El kell távolítanod a fiókod és az engedélyezettek listájáról, ahhoz, hogy a gyanúsítottak listájára kerüljön.</target>
         </trans-unit>
@@ -2907,7 +2907,7 @@ Lehet, hogy nem lett elemezve demó a játékosról.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</source>
+You have to remove it from your account list to be able to add him in your suspect list.</source>
           <target state="final">A játékos már szerepel a gyanúsítottak között, vagy a fiók listán.
 El kell távolítania a fiók listáról ahhoz, hogy a gyanúsítottak listáján szerepelhessen.</target>
         </trans-unit>

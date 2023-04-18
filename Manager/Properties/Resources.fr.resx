@@ -2119,7 +2119,7 @@ Voulez-vous faire une sauvegarde de vos données personnalisées (status, commen
     <value>Ajout du suspect...</value>
   </data>
   <data name="NotificationMovingSuspectsToWhitelist" xml:space="preserve">
-    <value>Déplacement des supects vers la liste blanche...</value>
+    <value>Déplacement des suspects vers la liste blanche...</value>
   </data>
   <data name="NotificationPlayerAlreadyInWhitelist" xml:space="preserve">
     <value>Joueur déjà dans la liste blanche.</value>

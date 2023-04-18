@@ -2219,7 +2219,7 @@ Demos with this suspect might not have been analyzed.</value>
   </data>
   <data name="DialogPlayerAlreadyInSuspectWhitelist" xml:space="preserve">
     <value>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</value>
+You have to remove it from your account and white list to be able to add him in your suspect list.</value>
   </data>
   <data name="DialogUpdateRequireClearCache" xml:space="preserve">
     <value>This update requires to clear custom data from cache (your suspects list will not be removed).
@@ -2301,7 +2301,7 @@ Demos with this player might not have been analyzed.</value>
   </data>
   <data name="DialogPlayerAlreadyInSuspectsList" xml:space="preserve">
     <value>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</value>
+You have to remove it from your account list to be able to add him in your suspect list.</value>
   </data>
   <data name="DialogPlayerAlreadyInWhitelist" xml:space="preserve">
     <value>This player is already in your whitelist or he is in your account list.

@@ -2795,9 +2795,9 @@ Demos with this suspect might not have been analyzed.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
           <source>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</source>
+You have to remove it from your account and white list to be able to add him in your suspect list.</source>
           <target state="new">This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</target>
+You have to remove it from your account and white list to be able to add him in your suspect list.</target>
         </trans-unit>
         <trans-unit id="DialogUpdateRequireClearCache" translate="yes" xml:space="preserve">
           <source>This update requires to clear custom data from cache (your suspects list will not be removed).
@@ -2907,9 +2907,9 @@ Demos with this player might not have been analyzed.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</source>
+You have to remove it from your account list to be able to add him in your suspect list.</source>
           <target state="new">This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</target>
+You have to remove it from your account list to be able to add him in your suspect list.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInWhitelist" translate="yes" xml:space="preserve">
           <source>This player is already in your whitelist or he is in your account list.

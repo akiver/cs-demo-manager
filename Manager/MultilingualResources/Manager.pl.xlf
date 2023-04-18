@@ -2796,7 +2796,7 @@ Być może dema tego podejrzanego nie były analizowane.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
           <source>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</source>
+You have to remove it from your account and white list to be able to add him in your suspect list.</source>
           <target state="final">Ten gracz jest na liście kont / podejrzanych / whiteliście.
 Musisz usunąć go z listy kont lub whitelisty by móc dodać go do listy podejrzanych.</target>
         </trans-unit>
@@ -2908,7 +2908,7 @@ Być może dema tego gracza nie były analizowane.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</source>
+You have to remove it from your account list to be able to add him in your suspect list.</source>
           <target state="final">Ten gracz jest już na twojej liście podejrzanych lub na liście kont.
 Musisz usunąć go z listy kont by móc dodać go do listy podejrzanych.</target>
         </trans-unit>

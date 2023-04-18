@@ -2806,7 +2806,7 @@ Il est possible que les démos contenant ce suspect n'aient pas été analysées
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
           <source>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</source>
+You have to remove it from your account and white list to be able to add him in your suspect list.</source>
           <target state="final">Ce joueur se trouve déjà soit dans votre liste de suspect, liste blanche ou liste de compte.
 Vous devez d'abord le supprimer de votre liste blanche et de votre liste de compte pour pouvoir l'ajouter aux suspects.</target>
         </trans-unit>
@@ -2827,7 +2827,7 @@ Voulez-vous faire une sauvegarde de vos données personnalisées (status, commen
         </trans-unit>
         <trans-unit id="NotificationMovingSuspectsToWhitelist" translate="yes" xml:space="preserve">
           <source>Moving suspect(s) to whitelist...</source>
-          <target state="final">Déplacement des supects vers la liste blanche...</target>
+          <target state="final">Déplacement des suspects vers la liste blanche...</target>
         </trans-unit>
         <trans-unit id="NotificationPlayerAlreadyInWhitelist" translate="yes" xml:space="preserve">
           <source>Player already in your whitelist.</source>
@@ -2883,7 +2883,7 @@ Il est possible que les démos contenant ce joueur n'aient pas été analysées.
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</source>
+You have to remove it from your account list to be able to add him in your suspect list.</source>
           <target state="final">Ce joueur est soit déjà dans la liste des suspects ou il est présent dans votre liste de comptes.
 Vous devez le supprimer de la liste des comptes pour pouvoir l'ajouter à la liste des suspects.</target>
         </trans-unit>
