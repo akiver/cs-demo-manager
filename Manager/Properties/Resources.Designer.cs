@@ -2354,7 +2354,7 @@ namespace Manager.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to This player is already in your suspect or he is in your account list.
-        ///You have to remove it from your account list to be able to add him in your supect list..
+        ///You have to remove it from your account list to be able to add him in your suspect list..
         /// </summary>
         public static string DialogPlayerAlreadyInSuspectsList {
             get {
@@ -2364,7 +2364,7 @@ namespace Manager.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to This player is in your suspect / white / account list.
-        ///You have to remove it from your account and white list to be able to add him in your supect list..
+        ///You have to remove it from your account and white list to be able to add him in your suspect list..
         /// </summary>
         public static string DialogPlayerAlreadyInSuspectWhitelist {
             get {

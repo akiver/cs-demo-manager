@@ -2810,7 +2810,7 @@ Repeticiones con este sospechoso pueden no haberse analizado.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectWhitelist" translate="yes" xml:space="preserve">
           <source>This player is in your suspect / white / account list.
-You have to remove it from your account and white list to be able to add him in your supect list.</source>
+You have to remove it from your account and white list to be able to add him in your suspect list.</source>
           <target state="translated">Este jugador está en tu lista de sospechosos / lista blanca / lista de cuentas.
 Tienes que eliminarlo de tu cuenta y lista blanca para poder añadirlo a tu lista de sospechosos.</target>
         </trans-unit>
@@ -2922,7 +2922,7 @@ Las repeticiones con este jugador podrían no haber sido analizadas.</target>
         </trans-unit>
         <trans-unit id="DialogPlayerAlreadyInSuspectsList" translate="yes" xml:space="preserve">
           <source>This player is already in your suspect or he is in your account list.
-You have to remove it from your account list to be able to add him in your supect list.</source>
+You have to remove it from your account list to be able to add him in your suspect list.</source>
           <target state="translated">Este jugador ya está en tu lista de sospechosos o está en tu lista de cuentas.
 Tienes que eliminarlo de tu lista de cuentas para poder añadirlo a tu lista de sospechosos.</target>
         </trans-unit>
