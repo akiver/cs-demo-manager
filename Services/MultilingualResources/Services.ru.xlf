@@ -28,7 +28,7 @@
         </trans-unit>
         <trans-unit id="HE" translate="yes" xml:space="preserve">
           <source>HE</source>
-          <target state="needs-review">Боевая граната</target>
+          <target state="needs-review">Осколочная граната</target>
         </trans-unit>
         <trans-unit id="Killed" translate="yes" xml:space="preserve">
           <source>{0} killed {1}</source>
@@ -64,7 +64,7 @@
         </trans-unit>
         <trans-unit id="ThrownHeGrenade" translate="yes" xml:space="preserve">
           <source>{0} thrown a HE grenade</source>
-          <target state="needs-review">{0} бросил боевую гранату</target>
+          <target state="needs-review">{0} бросил осколочную гранату</target>
         </trans-unit>
         <trans-unit id="ThrownIncendiary" translate="yes" xml:space="preserve">
           <source>{0} thrown an incendiary</source>
@@ -137,7 +137,7 @@
         </trans-unit>
         <trans-unit id="HEEventName" translate="yes" xml:space="preserve">
           <source>of the HE</source>
-          <target state="needs-review">боевой гранаты</target>
+          <target state="needs-review">осколочной гранаты</target>
         </trans-unit>
         <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
           <source>Incendiary</source>

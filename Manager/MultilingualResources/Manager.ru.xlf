@@ -1676,7 +1676,7 @@
         </trans-unit>
         <trans-unit id="HeGrenades" translate="yes" xml:space="preserve">
           <source>HE Grenades</source>
-          <target state="needs-review">Боевые гранаты</target>
+          <target state="needs-review">Осколочные гранаты</target>
         </trans-unit>
         <trans-unit id="Incendiaries" translate="yes" xml:space="preserve">
           <source>Incendiaries</source>
@@ -2250,7 +2250,7 @@ You can find more information on {0}.
 - POV демки не поддерживаются.
 - Демки, взятые с пользовательского сервера, официально не поддерживаются и поэтому могут работать некорректно, вы можете попробовать изменить источник демки и повторно проанализировать её.
 
-Пожалуйста создавайте заявку на GitHub с упомянутыми демками, только если они получены из поддерживаемого источника. 
+Пожалуйста, создавайте заявку на GitHub с упомянутыми демками, только если они получены из поддерживаемого источника. 
 Дополнительную информацию вы можете найти на {0}.
 
 {1}</target>
@@ -2507,7 +2507,7 @@ Unable to start the game.</source>
         </trans-unit>
         <trans-unit id="DialogSelectCsgoPath" translate="yes" xml:space="preserve">
           <source>Please select the csgo.exe file location to enable it.</source>
-          <target state="needs-review">Пожалуйста выберите расположение файла csgo.exe, чтобы включить эту опцию'.</target>
+          <target state="needs-review">Выберите расположение файла csgo.exe, чтобы включить эту опцию'.</target>
         </trans-unit>
         <trans-unit id="DialogVdmFilesDeleted" translate="yes" xml:space="preserve">
           <source>VDM files deleted.</source>
@@ -2566,7 +2566,7 @@ You can find more information on {1}.</source>
 - POV демки не поддерживаются.
 - Демки, взятые с пользовательского сервера, официально не поддерживаются и поэтому могут работать некорректно, вы можете попробовать изменить источник демки и повторно проанализировать её.
 
-Пожалуйста создавайте заявку на GitHub с упомянутой демкой, только если она получена из поддерживаемого источника. 
+Пожалуйста, создавайте заявку на GitHub с упомянутой демкой, только если она получена из поддерживаемого источника. 
 Дополнительную информацию вы можете найти на {1}.</target>
         </trans-unit>
         <trans-unit id="DialogMapNotSupported" translate="yes" xml:space="preserve">
@@ -2745,7 +2745,7 @@ You can find more information on {1}.</source>
           <source>It seems that CSGO is not installed on your main hard drive.
 The defaults "csgo" and "replays" can not be found. Please add folders from the settings.</source>
           <target state="needs-review">Похоже, CSGO не установлена на вашем основном жестком диске.
-Не удается найти папки «csgo» и «replays». Пожалуйста добавьте папки через настройки.</target>
+Не удается найти папки «csgo» и «replays». Добавьте папки через настройки.</target>
         </trans-unit>
         <trans-unit id="DialogErrorWhileDeletingPlayer" translate="yes" xml:space="preserve">
           <source>Error while deleting player.</source>
@@ -3262,7 +3262,7 @@ You have to remove it from your account list to be able to add him in your white
           <source>An unexpected error occured. Please send the 'errors.log' file accessible from settings.
 Message Error :
 {0}</source>
-          <target state="needs-review">Возникла непредвиденная ошибка. Пожалуйста отправьте доступный в настройках файл 'errors.log'.
+          <target state="needs-review">Возникла непредвиденная ошибка. Отправьте доступный в настройках файл 'errors.log'.
 Сообщение об Ошибке :
 {0}</target>
         </trans-unit>
@@ -3374,7 +3374,7 @@ Message Error :
         </trans-unit>
         <trans-unit id="DialogConfigurationCorrupted" translate="yes" xml:space="preserve">
           <source>Your configuration file is corrupted. Please restart the application to reset your configuration.</source>
-          <target state="needs-review">Ваша конфигурация повреждена. Пожалуйста перезагрузите приложение, чтобы сбросить вашу конфигурацию.</target>
+          <target state="needs-review">Ваша конфигурация повреждена. Перезагрузите приложение, чтобы сбросить вашу конфигурацию.</target>
         </trans-unit>
         <trans-unit id="EnableMovieMakingConfigParentFolder" translate="yes" xml:space="preserve">
           <source>Enable movie making config parent folder</source>
@@ -3466,7 +3466,7 @@ Do you want to install it? (It's recommended to avoid possible crash due to CSGO
 Please enter the share code (example: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</source>
           <target state="needs-review">Вы собираетесь скачать демку по общему коду.
 
-Пожалуйста введите общий код (пример: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
+Введите общий код (пример: CSGO-orkmt-Z8udN-apVEh-GQtx3-sU7CR).</target>
         </trans-unit>
         <trans-unit id="DialogTitleDownloadDemoFromShareCode" translate="yes" xml:space="preserve">
           <source>Download demo from share code</source>
@@ -3606,7 +3606,7 @@ You may have missing data for this demos.</source>
         </trans-unit>
         <trans-unit id="HE" translate="yes" xml:space="preserve">
           <source>HE</source>
-          <target state="needs-review">БГ</target>
+          <target state="needs-review">ОГ</target>
         </trans-unit>
         <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
           <source>Incendiary</source>
@@ -3748,25 +3748,25 @@ Do you want to continue?</source>
         </trans-unit>
         <trans-unit id="DialogInstallFFmpegFirst" translate="yes" xml:space="preserve">
           <source>Please install FFmpeg first from FFmpeg section.</source>
-          <target state="needs-review">Пожалуйста сначала установите FFmpeg из раздела FFmpeg.</target>
+          <target state="needs-review">Сначала установите FFmpeg из раздела FFmpeg.</target>
         </trans-unit>
         <trans-unit id="DialogInstallHLAEFirst" translate="yes" xml:space="preserve">
           <source>Please install HLAE first from HLAE section.</source>
-          <target state="needs-review">Пожалуйста сначала установите HLAE из раздела HLAE.</target>
+          <target state="needs-review">Сначала установите HLAE из раздела HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogInstallVirtuaDubFirst" translate="yes" xml:space="preserve">
           <source>Please install VirtualDub first from VirtualDub section.</source>
-          <target state="needs-review">Пожалуйста сначала установите VirtualDub из раздела VirtualDub.</target>
+          <target state="needs-review">Сначала установите VirtualDub из раздела VirtualDub.</target>
         </trans-unit>
         <trans-unit id="DialogPleaseUpdateHLAE" translate="yes" xml:space="preserve">
           <source>A new HLAE version is available.
 Please update it by clicking on the "Update" button.</source>
           <target state="needs-review">Доступна новая версия HLAE.
-Пожалуйста обновите его, нажав кнопку "Обновить".</target>
+Обновите его, нажав кнопку "Обновить".</target>
         </trans-unit>
         <trans-unit id="DialogSelectCsgoExeLocation" translate="yes" xml:space="preserve">
           <source>Please select csgo.exe path from HLAE section.</source>
-          <target state="needs-review">Пожалуйста укажите путь к файлу csgo.exe в разделе HLAE.</target>
+          <target state="needs-review">Укажите путь к файлу csgo.exe в разделе HLAE.</target>
         </trans-unit>
         <trans-unit id="DialogSelectRawFilesDestination" translate="yes" xml:space="preserve">
           <source>Please select a raw files folder destination.</source>
@@ -3800,7 +3800,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="FFmpegEncodingInProgress" translate="yes" xml:space="preserve">
           <source>FFmpeg encoding in progress, please wait...</source>
-          <target state="needs-review">FFmpeg кодирование в процессе, подождите...</target>
+          <target state="needs-review">Производится кодирование при помощи FFmpeg, подождите...</target>
         </trans-unit>
         <trans-unit id="FollowingCFGWillBeExecuted" translate="yes" xml:space="preserve">
           <source>The following CFG will be automatically executed:</source>
@@ -3828,7 +3828,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="InstallingVirtualDub" translate="yes" xml:space="preserve">
           <source>Installing VirtualDub...</source>
-          <target state="needs-review">Устанавливается VirtualDub...</target>
+          <target state="needs-review">VirtualDub устанавливается......</target>
         </trans-unit>
         <trans-unit id="Killed" translate="yes" xml:space="preserve">
           <source>killed</source>
@@ -3888,7 +3888,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="LabelVideoFramerate" translate="yes" xml:space="preserve">
           <source>Video framerate:</source>
-          <target state="needs-review">Фреймрейт видео:</target>
+          <target state="needs-review">Частота кадров видео:</target>
         </trans-unit>
         <trans-unit id="LabelVideoQuality" translate="yes" xml:space="preserve">
           <source>Video quality:</source>
@@ -3944,7 +3944,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="StartingCSGO" translate="yes" xml:space="preserve">
           <source>Starting CSGO, please wait...</source>
-          <target state="needs-review">Запускается CSGO, подождите...</target>
+          <target state="needs-review">CSGO запускается, подождите...</target>
         </trans-unit>
         <trans-unit id="TimeLineNotAvailableWarning" translate="yes" xml:space="preserve">
           <source>Timeline is not available with POV or corrupted demos. You have to enter ticks manually. Adding a comment to the demo may be useful in this case.</source>
@@ -4016,11 +4016,11 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="ValidNumberRequired" translate="yes" xml:space="preserve">
           <source>A valid number is required.</source>
-          <target state="needs-review">Требуется корректное число.</target>
+          <target state="needs-review">Требуется числовое значение.</target>
         </trans-unit>
         <trans-unit id="VirtualDubEncodingInProgress" translate="yes" xml:space="preserve">
           <source>VirtualDub encoding in progress, please wait...</source>
-          <target state="needs-review">VirtualDub кодирование в процессе, подождите...</target>
+          <target state="needs-review">Производится кодирование при помощи VirtualDub, подождите...</target>
         </trans-unit>
         <trans-unit id="With" translate="yes" xml:space="preserve">
           <source>with</source>
@@ -4069,7 +4069,7 @@ Please update it by clicking on the "Update" button.</source>
           <target state="needs-review">Фокус на убийце</target>
         </trans-unit>
         <trans-unit id="Movie" translate="yes" xml:space="preserve">
-          <source>Movie</source>
+          <source>Movie</source>о
           <target state="needs-review">Видеофайл</target>
         </trans-unit>
         <trans-unit id="ToolTipMovie" translate="yes" xml:space="preserve">
@@ -4078,31 +4078,31 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="Adecoy" translate="yes" xml:space="preserve">
           <source>a decoy</source>
-          <target state="needs-review">отвлекающую гранату</target>
+          <target state="needs-review">отвлекающую</target>
         </trans-unit>
         <trans-unit id="AFlashbang" translate="yes" xml:space="preserve">
           <source>a flashbang</source>
-          <target state="needs-review">световую гранату</target>
+          <target state="needs-review">световую</target>
         </trans-unit>
         <trans-unit id="AMolotov" translate="yes" xml:space="preserve">
           <source>a molotov</source>
-          <target state="needs-review">коктейль Молотова</target>
+          <target state="needs-review">Молотов</target>
         </trans-unit>
         <trans-unit id="AnHE" translate="yes" xml:space="preserve">
           <source>an HE</source>
-          <target state="needs-review">БГ</target>
+          <target state="needs-review">осколочную</target>
         </trans-unit>
         <trans-unit id="AnIncendiary" translate="yes" xml:space="preserve">
           <source>an incendiary</source>
-          <target state="needs-review">зажигательную гранату</target>
+          <target state="needs-review">зажигательную</target>
         </trans-unit>
         <trans-unit id="Asmoke" translate="yes" xml:space="preserve">
           <source>a smoke</source>
-          <target state="needs-review">дымовую гранату</target>
+          <target state="needs-review">дымовую</target>
         </trans-unit>
         <trans-unit id="Thrown" translate="yes" xml:space="preserve">
           <source>thrown</source>
-          <target state="needs-review">брошена</target>
+          <target state="needs-review">бросил</target>
         </trans-unit>
         <trans-unit id="ToolTipShowCFG" translate="yes" xml:space="preserve">
           <source>Show CFG</source>
@@ -4118,7 +4118,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="NotificationInstallingFFmpeg" translate="yes" xml:space="preserve">
           <source>Installing FFmpeg...</source>
-          <target state="needs-review">Устанавливается FFmpeg...</target>
+          <target state="needs-review">FFmpeg устанавливается...</target>
         </trans-unit>
         <trans-unit id="CreditsTools" translate="yes" xml:space="preserve">
           <source>CSGO Demo Manager uses internally the following tools:</source>
@@ -4174,11 +4174,11 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="LabelDisplayTimeSeconds" translate="yes" xml:space="preserve">
           <source>Display time (seconds):</source>
-          <target state="needs-review">Оотображать время (секунды):</target>
+          <target state="needs-review">Отображать время (секунды):</target>
         </trans-unit>
         <trans-unit id="CheckForUpdatesOnAppStartup" translate="yes" xml:space="preserve">
           <source>Check for updates on app startup</source>
-          <target state="needs-review">Проверять на обновления при запуске</target>
+          <target state="needs-review">Проверять обновления при запуске</target>
         </trans-unit>
         <trans-unit id="MaxConcurrentAnalyzes" translate="yes" xml:space="preserve">
           <source>Max concurrent demo analyzes</source>
@@ -4226,7 +4226,7 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="DialogInvalidExecutable" translate="yes" xml:space="preserve">
           <source>Invalid executable.</source>
-          <target state="needs-review">Неверный исполняемый файл.</target>
+          <target state="needs-review">Недопустимый исполняемый файл.</target>
         </trans-unit>
         <trans-unit id="DialogInvalidHlaeExecutablePath" translate="yes" xml:space="preserve">
           <source>The path contains non-basic latin characters which may lead to unexpected behaviors in-game. Please select a folder that contains only 7-bit ASCII characters.</source>
@@ -4234,24 +4234,24 @@ Please update it by clicking on the "Update" button.</source>
         </trans-unit>
         <trans-unit id="HlaeNotFound" translate="yes" xml:space="preserve">
           <source>HLAE not found. Please install it by enabling it from settings.</source>
-          <target state="needs-review">HLAE не найден. Установите его, включив его в настройках.</target>
+          <target state="needs-review">HLAE не найден. Установите его при помощи меню настроек.</target>
         </trans-unit>
         <trans-unit id="DialogErrorKillingCsgo" translate="yes" xml:space="preserve">
           <source>Failed to close CSGO, please do it manually and try again.
 Error: {0}.</source>
-          <target state="needs-review">Ошибка при закрытии CSGO, сделайте это вручную и попробуйте снова.
+          <target state="needs-review">Не удалось закрыть CSGO, сделайте это вручную и попробуйте снова.
 Ошибка: {0}.</target>
         </trans-unit>
         <trans-unit id="DialogErrorKillingHlae" translate="yes" xml:space="preserve">
           <source>Failed to close HLAE, please do it manually and try again.
 Error: {0}.</source>
-          <target state="needs-review">Ошибка при закрытии HLAE, сделайте это вручную и попробуйте снова.
+          <target state="needs-review">Не удалось закрыть HLAE, сделайте это вручную и попробуйте снова.
 Ошибка: {0}.</target>
         </trans-unit>
         <trans-unit id="DialogErrorStartingCsgo" translate="yes" xml:space="preserve">
           <source>Failed to start CSGO.
 Error: {0}.</source>
-          <target state="needs-review">Ошибка при запуске CSGO.
+          <target state="needs-review">Не удалось запустить CSGO.
 Ошибка: {0}.</target>
         </trans-unit>
         <trans-unit id="DialogInvalidDemo" translate="yes" xml:space="preserve">
@@ -4276,7 +4276,7 @@ Error: {0}.</source>
         </trans-unit>
         <trans-unit id="ExportPlayersVoice" translate="yes" xml:space="preserve">
           <source>Export players voice</source>
-          <target state="needs-review">Экспортировать голос игроков</target>
+          <target state="needs-review">Экспорт голосового чата</target>
         </trans-unit>
         <trans-unit id="CsgoNotFound" translate="yes" xml:space="preserve">
           <source>CSGO not found.</source>
@@ -4296,7 +4296,7 @@ Error: {0}.</source>
         </trans-unit>
         <trans-unit id="FailedToLoadCsgoAudioLibrary" translate="yes" xml:space="preserve">
           <source>Failed to load CSGO audio library.</source>
-          <target state="needs-review">Ошибка при запуске аудио библиотеки CSGO.</target>
+          <target state="needs-review">Не удалось загрузить аудио библиотеку CSGO.</target>
         </trans-unit>
         <trans-unit id="NoPlayersVoiceDataFound" translate="yes" xml:space="preserve">
           <source>{0}: No players voice data found.</source>
@@ -4312,11 +4312,11 @@ Error: {0}.</source>
         </trans-unit>
         <trans-unit id="WatchAsSuspect" translate="yes" xml:space="preserve">
           <source>Watch as a suspect</source>
-          <target state="needs-review">Смотреть как подозреваемого</target>
+          <target state="needs-review">Смотреть от лица подозреваемого</target>
         </trans-unit>
         <trans-unit id="DialogStartingCsgoAccessDenied" translate="yes" xml:space="preserve">
           <source>Access was denied when trying to start CSGO. Make sure to close any running anti cheat software and retry.</source>
-          <target state="needs-review">Доступ запрещен при попытке запустить CSGO. Убедитесь, что закрыли все запущенные античитерские программы и попробуйте снова.</target>
+          <target state="needs-review">Ошибка при попытке запуска CSGO: доступ запрещён. Закройте все античит-программы и попробуйте снова.</target>
         </trans-unit>
         <trans-unit id="DemoTypeGotv" translate="yes" xml:space="preserve">
           <source>GOTV</source>
