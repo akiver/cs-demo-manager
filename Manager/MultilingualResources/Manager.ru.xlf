@@ -713,7 +713,7 @@
         </trans-unit>
         <trans-unit id="Flashbangs" translate="yes" xml:space="preserve">
           <source>Flashbangs</source>
-          <target state="needs-review">Ослепления</target>
+          <target state="needs-review">Световая</target>
         </trans-unit>
         <trans-unit id="Heatmap" translate="yes" xml:space="preserve">
           <source>Heatmap</source>
@@ -753,7 +753,7 @@
         </trans-unit>
         <trans-unit id="LabelMostKillingWeapon" translate="yes" xml:space="preserve">
           <source>Most killing weapon</source>
-          <target state="needs-review">Самое убивающее оружие</target>
+          <target state="needs-review">Самое смертоносное оружие</target>
         </trans-unit>
         <trans-unit id="LabelPlayerStats" translate="yes" xml:space="preserve">
           <source>Player stats</source>
@@ -1608,7 +1608,7 @@
         </trans-unit>
         <trans-unit id="Decoys" translate="yes" xml:space="preserve">
           <source>Decoys</source>
-          <target state="needs-review">Отвлекающие гранаты</target>
+          <target state="needs-review">Отвлекающая</target>
         </trans-unit>
         <trans-unit id="EndReasonBombDefused" translate="yes" xml:space="preserve">
           <source>Bomb defused</source>
@@ -1676,11 +1676,11 @@
         </trans-unit>
         <trans-unit id="HeGrenades" translate="yes" xml:space="preserve">
           <source>HE Grenades</source>
-          <target state="needs-review">Осколочные гранаты</target>
+          <target state="needs-review">Осколочная</target>
         </trans-unit>
         <trans-unit id="Incendiaries" translate="yes" xml:space="preserve">
           <source>Incendiaries</source>
-          <target state="needs-review">Зажигательные</target>
+          <target state="needs-review">Зажигательная</target>
         </trans-unit>
         <trans-unit id="LabelWinnerSide" translate="yes" xml:space="preserve">
           <source>Winner side</source>
@@ -1688,7 +1688,7 @@
         </trans-unit>
         <trans-unit id="Molotovs" translate="yes" xml:space="preserve">
           <source>Molotovs</source>
-          <target state="needs-review">Коктейли Иолотова</target>
+          <target state="needs-review">Молотов</target>
         </trans-unit>
         <trans-unit id="Players" translate="yes" xml:space="preserve">
           <source>Players</source>
@@ -1700,7 +1700,7 @@
         </trans-unit>
         <trans-unit id="Smoke" translate="yes" xml:space="preserve">
           <source>Smoke</source>
-          <target state="needs-review">Дымовые гранаты</target>
+          <target state="needs-review">Дымовая</target>
         </trans-unit>
         <trans-unit id="StartMoney" translate="yes" xml:space="preserve">
           <source>Start money</source>
@@ -1857,7 +1857,7 @@
         </trans-unit>
         <trans-unit id="Round" translate="yes" xml:space="preserve">
           <source>Round</source>
-          <target state="needs-review">Раундов</target>
+          <target state="needs-review">Раунд</target>
         </trans-unit>
         <trans-unit id="RoundTypeEco" translate="yes" xml:space="preserve">
           <source>Eco</source>
@@ -2611,7 +2611,7 @@ You can find more information on {1}.</source>
         </trans-unit>
         <trans-unit id="Both" translate="yes" xml:space="preserve">
           <source>Both</source>
-          <target state="needs-review">Оба</target>
+          <target state="needs-review">Обе</target>
         </trans-unit>
         <trans-unit id="CounterTerrorists" translate="yes" xml:space="preserve">
           <source>Counter-Terrorists</source>
@@ -2967,7 +2967,7 @@ You have to remove it from your account list to be able to add him in your white
         </trans-unit>
         <trans-unit id="Smokes" translate="yes" xml:space="preserve">
           <source>Smokes</source>
-          <target state="needs-review">Дымовые гранаты</target>
+          <target state="needs-review">Дымовая</target>
         </trans-unit>
         <trans-unit id="CT" translate="yes" xml:space="preserve">
           <source>CT</source>
@@ -3598,23 +3598,23 @@ You may have missing data for this demos.</source>
         </trans-unit>
         <trans-unit id="Decoy" translate="yes" xml:space="preserve">
           <source>Decoy</source>
-          <target state="needs-review">Отвлекающая граната</target>
+          <target state="needs-review">Отвлекающая</target>
         </trans-unit>
         <trans-unit id="Flashbang" translate="yes" xml:space="preserve">
           <source>Flashbang</source>
-          <target state="needs-review">Световая граната</target>
+          <target state="needs-review">Световая</target>
         </trans-unit>
         <trans-unit id="HE" translate="yes" xml:space="preserve">
           <source>HE</source>
-          <target state="needs-review">ОГ</target>
+          <target state="needs-review">Осколочная</target>
         </trans-unit>
         <trans-unit id="Incendiary" translate="yes" xml:space="preserve">
           <source>Incendiary</source>
-          <target state="needs-review">Зажигательная граната</target>
+          <target state="needs-review">Зажигательная</target>
         </trans-unit>
         <trans-unit id="Molotov" translate="yes" xml:space="preserve">
           <source>Molotov</source>
-          <target state="needs-review">Коктейль Молотова</target>
+          <target state="needs-review">Молотов</target>
         </trans-unit>
         <trans-unit id="FocusOnPlayer" translate="yes" xml:space="preserve">
           <source>Focus on player</source>
@@ -4276,11 +4276,11 @@ Error: {0}.</source>
         </trans-unit>
         <trans-unit id="ExportPlayersVoice" translate="yes" xml:space="preserve">
           <source>Export players voice</source>
-          <target state="needs-review">Экспорт голосового чата</target>
+          <target state="needs-review">Экспорт голосов игроков</target>
         </trans-unit>
         <trans-unit id="CsgoNotFound" translate="yes" xml:space="preserve">
           <source>CSGO not found.</source>
-          <target state="needs-review">CSGO не найдена.</target>
+          <target state="needs-review">Не удалось найти CSGO.</target>
         </trans-unit>
         <trans-unit id="FailedToParseDemo" translate="yes" xml:space="preserve">
           <source>{0}: Failed to parse demo.</source>
