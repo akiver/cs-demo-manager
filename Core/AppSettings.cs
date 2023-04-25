@@ -127,7 +127,7 @@ namespace Core
             {
                 Key = "ru-RU",
                 Name = "Russian",
-                IsEnabled = false,
+                IsEnabled = true,
             },
             new Language
             {

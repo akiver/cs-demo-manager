@@ -936,7 +936,7 @@
         </trans-unit>
         <trans-unit id="HeaderToolTipAccountProfileUrl" translate="yes" xml:space="preserve">
           <source>Account's Profile URL</source>
-          <target state="needs-review">Ссылка на Профиль Аккаунта</target>>
+          <target state="needs-review">Ссылка на Профиль Аккаунта</target>
         </trans-unit>
         <trans-unit id="HeaderToolTipAccountStatus" translate="yes" xml:space="preserve">
           <source>Account's Status (offline, online...)</source>
@@ -4069,7 +4069,7 @@ Please update it by clicking on the "Update" button.</source>
           <target state="needs-review">Фокус на убийце</target>
         </trans-unit>
         <trans-unit id="Movie" translate="yes" xml:space="preserve">
-          <source>Movie</source>о
+          <source>Movie</source>
           <target state="needs-review">Видеофайл</target>
         </trans-unit>
         <trans-unit id="ToolTipMovie" translate="yes" xml:space="preserve">
