@@ -4326,6 +4326,14 @@ Error: {0}.</target>
           <source>POV</source>
           <target state="new">POV</target>
         </trans-unit>
+        <trans-unit id="SteamApiKeyLabel" translate="yes" xml:space="preserve">
+          <source>Steam API key</source>
+          <target state="new">Steam API key</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidSteamApiKey" translate="yes" xml:space="preserve">
+          <source>Invalid Steam API key.</source>
+          <target state="new">Invalid Steam API key.</target>
+        </trans-unit>
       </group>
     </body>
   </file>

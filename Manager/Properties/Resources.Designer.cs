@@ -2201,6 +2201,15 @@ namespace Manager.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid Steam API key..
+        /// </summary>
+        public static string DialogInvalidSteamApiKey {
+            get {
+                return ResourceManager.GetString("DialogInvalidSteamApiKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid tick..
         /// </summary>
         public static string DialogInvalidTick {
@@ -7659,6 +7668,15 @@ namespace Manager.Properties {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Steam API key.
+        /// </summary>
+        public static string SteamApiKeyLabel {
+            get {
+                return ResourceManager.GetString("SteamApiKeyLabel", resourceCulture);
             }
         }
         

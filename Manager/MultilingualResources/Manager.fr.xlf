@@ -4325,11 +4325,19 @@ Error: {0}.</target>
         </trans-unit>
         <trans-unit id="DemoTypeGotv" translate="yes" xml:space="preserve">
           <source>GOTV</source>
-          <target state="new">GOTV</target>
+          <target state="final">GOTV</target>
         </trans-unit>
         <trans-unit id="DemoTypePov" translate="yes" xml:space="preserve">
           <source>POV</source>
-          <target state="new">POV</target>
+          <target state="final">POV</target>
+        </trans-unit>
+        <trans-unit id="SteamApiKeyLabel" translate="yes" xml:space="preserve">
+          <source>Steam API key</source>
+          <target state="final">Clé Steam API</target>
+        </trans-unit>
+        <trans-unit id="DialogInvalidSteamApiKey" translate="yes" xml:space="preserve">
+          <source>Invalid Steam API key.</source>
+          <target state="final">Clé Steam API invalide.</target>
         </trans-unit>
       </group>
     </body>

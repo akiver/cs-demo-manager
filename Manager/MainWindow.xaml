@@ -647,6 +647,27 @@
                                 </Hyperlink>
                                 <Run Text="." />
                             </TextBlock>
+
+                            <Label Target="{Binding ElementName=SteamApiKeyTextBox}"
+                                   Content="{x:Static properties:Resources.SteamApiKeyLabel}" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <TextBox x:Name="SteamApiKeyTextBox"
+                                         Height="30"
+                                         Text="{Binding Source={StaticResource Locator}, Path=Settings.SteamApiKey}" />
+                                <Button Grid.Column="1" Command="{Binding Source={StaticResource Locator}, Path=Settings.ApplySteamApiKeyCommand}"
+                                        Style="{DynamicResource SettingsButton}"
+                                        Margin="10 0 0 0"
+                                        Content="Apply" />
+                                <Button Grid.Column="2" Command="{Binding Source={StaticResource Locator}, Path=Settings.ResetSteamApiKeyCommand}"
+                                        Style="{DynamicResource SettingsButton}"
+                                        Margin="10 0 0 0"
+                                        Content="{x:Static properties:Resources.Reset}" />
+                            </Grid>
                             <Button Command="{Binding Source={StaticResource Locator}, Path=Settings.NavigateToLogFile}"
                                     Style="{DynamicResource SettingsButton}"
                                     Content="{x:Static properties:Resources.BrowseToErrorsFile}" />

@@ -55,7 +55,7 @@ namespace Services.Concrete
                 using (var httpClient = new HttpClient())
                 {
                     //  Grab general infos from user
-                    string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, steamId);
+                    string url = string.Format(PLAYERS_SUMMARIES_URL, GetSteamApiKey(), steamId);
                     HttpResponseMessage result = await httpClient.GetAsync(url);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -68,7 +68,7 @@ namespace Services.Concrete
                         }
 
                         // Grab VAC ban infos from user
-                        url = string.Format(PLAYERS_BAN_URL, Properties.Resources.steam_api_key, steamId);
+                        url = string.Format(PLAYERS_BAN_URL, GetSteamApiKey(), steamId);
                         result = await httpClient.GetAsync(url);
                         if (result.StatusCode == HttpStatusCode.OK)
                         {
@@ -123,7 +123,7 @@ namespace Services.Concrete
                 {
                     string ids = string.Join(",", users.ToArray());
                     //  Grab general infos from user
-                    string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
+                    string url = string.Format(PLAYERS_SUMMARIES_URL, GetSteamApiKey(), ids);
                     HttpResponseMessage result = await httpClient.GetAsync(url);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -136,7 +136,7 @@ namespace Services.Concrete
                         }
 
                         // Grab VAC ban infos from user
-                        url = string.Format(PLAYERS_BAN_URL, Properties.Resources.steam_api_key, ids);
+                        url = string.Format(PLAYERS_BAN_URL, GetSteamApiKey(), ids);
                         result = await httpClient.GetAsync(url);
                         if (result.StatusCode == HttpStatusCode.OK)
                         {
@@ -195,7 +195,7 @@ namespace Services.Concrete
                 using (var httpClient = new HttpClient())
                 {
                     string ids = string.Join(",", steamIds.ToArray());
-                    string url = string.Format(PLAYERS_SUMMARIES_URL, Properties.Resources.steam_api_key, ids);
+                    string url = string.Format(PLAYERS_SUMMARIES_URL, GetSteamApiKey(), ids);
                     HttpResponseMessage result = await httpClient.GetAsync(url);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -254,7 +254,7 @@ namespace Services.Concrete
             {
                 using (var httpClient = new HttpClient())
                 {
-                    string url = string.Format(STEAM_RESOLVE_VANITY_URL, Properties.Resources.steam_api_key, username);
+                    string url = string.Format(STEAM_RESOLVE_VANITY_URL, GetSteamApiKey(), username);
                     HttpResponseMessage result = await httpClient.GetAsync(url);
                     if (result.StatusCode == HttpStatusCode.OK)
                     {
@@ -354,6 +354,16 @@ namespace Services.Concrete
             await boiler.WaitForExitAsync(ct);
 
             return boiler.ExitCode;
+        }
+
+        private static string GetSteamApiKey()
+        {
+            if (!string.IsNullOrWhiteSpace(Properties.Settings.Default.SteamApiKey))
+            {
+                return Properties.Settings.Default.SteamApiKey;
+            }
+
+            return Properties.Resources.steam_api_key;
         }
     }
 }

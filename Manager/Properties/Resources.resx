@@ -3346,4 +3346,10 @@ Error: {0}.</value>
   <data name="DemoTypePov" xml:space="preserve">
     <value>POV</value>
   </data>
+  <data name="SteamApiKeyLabel" xml:space="preserve">
+    <value>Steam API key</value>
+  </data>
+  <data name="DialogInvalidSteamApiKey" xml:space="preserve">
+    <value>Invalid Steam API key.</value>
+  </data>
 </root>

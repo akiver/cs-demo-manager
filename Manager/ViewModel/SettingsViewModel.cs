@@ -23,6 +23,10 @@ using Services.Exceptions;
 using Services.Interfaces;
 using Application = System.Windows.Application;
 using OpenFileDialog = Microsoft.Win32.OpenFileDialog;
+using Newtonsoft.Json;
+using Services.Models.GitHub;
+using System.Net;
+using System.Net.Http;
 
 namespace Manager.ViewModel
 {
@@ -43,6 +47,8 @@ namespace Manager.ViewModel
         private bool _isShowAllPlayers = Settings.Default.IsShowAllPlayers;
 
         private string _launchParameters = Settings.Default.LaunchParameters;
+
+        private string _steamApiKey = ServicesSettings.Default.SteamApiKey;
 
         private int _demosListSize = Settings.Default.DemosListSize;
 
@@ -341,6 +347,10 @@ namespace Manager.ViewModel
         public RelayCommand UpdateCustomFfmpegLocationCommand { get; }
         public RelayCommand ResetCustomFfmpegLocationCommand { get; }
 
+        public RelayCommand ApplySteamApiKeyCommand { get; }
+
+        public RelayCommand ResetSteamApiKeyCommand { get; }
+
         public List<ComboboxSelector> Languages
         {
             get { return _languages; }
@@ -552,6 +562,12 @@ namespace Manager.ViewModel
                 Settings.Default.IsFullscreen = value;
                 Set(() => ResolutionFullscreen, ref _resolutionFullscreen, value);
             }
+        }
+
+        public string SteamApiKey
+        {
+            get { return _steamApiKey; }
+            set { Set(() => SteamApiKey, ref _steamApiKey, value); }
         }
 
         public string LaunchParameters
@@ -1909,6 +1925,8 @@ namespace Manager.ViewModel
             RevealFfmpegExecutableCommand = new RelayCommand(async () => await RevealFfmpegExecutable());
             UpdateCustomFfmpegLocationCommand = new RelayCommand(async () => await UpdateCustomFfmpegLocation());
             ResetCustomFfmpegLocationCommand = new RelayCommand(ResetFfmpegCustomLocation);
+            ApplySteamApiKeyCommand = new RelayCommand(ApplySteamApiKey);
+            ResetSteamApiKeyCommand = new RelayCommand(ResetSteamApiKey);
 
             Notification = Properties.Resources.Settings;
 
@@ -2187,6 +2205,27 @@ namespace Manager.ViewModel
         {
             IsFfmpegCustomLocationEnabled = ServicesSettings.Default.IsFfmpegCustomLocationEnabled;
             FfmpegExecutableLocation = ServicesSettings.Default.FfmpegExecutableLocation;
+        }
+
+        private async void ApplySteamApiKey()
+        {
+            var url = $"https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v2/?key={SteamApiKey}&steamids=[]";
+            var client = new HttpClient(new HttpClientHandler { AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate });
+            var response = client.GetAsync(url).Result;
+            if (response.StatusCode != HttpStatusCode.OK)
+            {
+                await _dialogService.ShowErrorAsync(Properties.Resources.DialogInvalidSteamApiKey, MessageDialogStyle.Affirmative);
+            }
+            else
+            {
+                ServicesSettings.Default.SteamApiKey = SteamApiKey;
+            }
+        }
+
+        private void ResetSteamApiKey()
+        {
+            ServicesSettings.Default.SteamApiKey = "";
+            SteamApiKey = "";
         }
     }
 }
