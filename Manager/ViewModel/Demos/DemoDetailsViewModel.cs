@@ -649,7 +649,6 @@ namespace Manager.ViewModel.Demos
                                    Demo = await _demosService.AnalyzeDemo(Demo, _cts.Token, HandleAnalyzeProgress);
                                    OvertimesCollection = new ObservableCollection<Overtime>(Demo.Overtimes);
 
-                                   await FetchPlayersAvatar();
                                    UpdatePlayersSort();
 
                                    if (AppSettings.IsInternetConnectionAvailable())
@@ -1091,28 +1090,10 @@ namespace Manager.ViewModel.Demos
             UpdatePlayersSort();
             RoundsCollection = CollectionViewSource.GetDefaultView(Demo.Rounds);
             OvertimesCollection = new ObservableCollection<Overtime>(Demo.Overtimes);
-            await FetchPlayersAvatar();
             new ViewModelLocator().Settings.IsShowAllPlayers = true;
             UpdateDemosPagination();
             IsBusy = false;
             HasNotification = false;
-        }
-
-        private async Task FetchPlayersAvatar()
-        {
-            if (AppSettings.IsInternetConnectionAvailable() && Demo.Players.Any())
-            {
-                IEnumerable<string> steamIdList = Demo.Players.Select(p => p.SteamId.ToString()).Distinct();
-                List<PlayerSummary> playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
-                foreach (PlayerSummary playerSummary in playerSummaryList)
-                {
-                    Player player = Demo.Players.FirstOrDefault(p => p.SteamId.ToString() == playerSummary.SteamId);
-                    if (player != null)
-                    {
-                        player.AvatarUrl = playerSummary.AvatarFull;
-                    }
-                }
-            }
         }
 
         private void UpdatePlayersSort()

@@ -12,6 +12,7 @@ using Core.Models.Events;
 using Core.Models.protobuf;
 using Core.Models.Serialization;
 using Core.Models.Source;
+using Core.Models.Steam;
 using DemoInfo;
 using ICSharpCode.SharpZipLib.BZip2;
 using Newtonsoft.Json;
@@ -224,6 +225,11 @@ namespace Services.Concrete
             DemoAnalyzer analyzer = DemoAnalyzer.Factory(demo, demo.SourceName);
 
             demo = await analyzer.AnalyzeDemoAsync(token, progressCallback);
+
+            if (AppSettings.IsInternetConnectionAvailable() && demo.Players.Any())
+            {
+                UpdateDemoPlayersAvatar(demo);
+            }
 
             return demo;
         }
@@ -742,6 +748,20 @@ namespace Services.Concrete
             }
 
             return Task.FromResult(events);
+        }
+
+        private async void UpdateDemoPlayersAvatar(Demo demo)
+        {
+            var steamIdList = demo.Players.Select(p => p.SteamId.ToString()).Distinct();
+            var playerSummaryList = await _steamService.GetUserSummaryAsync(steamIdList.ToList());
+            foreach (var playerSummary in playerSummaryList)
+            {
+                var player = demo.Players.FirstOrDefault(p => p.SteamId.ToString() == playerSummary.SteamId);
+                if (player != null)
+                {
+                    player.AvatarUrl = playerSummary.AvatarFull;
+                }
+            }
         }
     }
 }
