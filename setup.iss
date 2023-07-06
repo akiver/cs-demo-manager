@@ -1,9 +1,9 @@
-#define AppVer "2.14.3"
+#define AppVer "2.15.0"
 #define AppName "CSGO Demos Manager"
 #define ExeName "CSGODemosManager.exe"
 #define AppWebsite "https://www.csgo-demos-manager.com"
 ; Set it to 1 to clear the cache at startup
-#define ClearCache 0
+#define ClearCache 1
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
