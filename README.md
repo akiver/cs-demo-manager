@@ -1,16 +1,17 @@
 # CSGO Demo Manager
 
 CSGO Demo Manager is an application to manage replays from the game Counter-Strike: Global Offensive.
-You can download the last release from https://csgo-demo-manager.com.
+You can download the last release from https://cs-demo-manager.com.
 
 You can follow [@CSGODemoManager](https://twitter.com/CSGODemoManager) on Twitter to keep updated on releases.
 
 ## Preview
 
 ![preview](https://github.com/akiver/CSGO-Demos-Manager/blob/main/preview.jpg)
-More screenshots and video are available at [https://csgo-demo-manager.com](https://csgo-demo-manager.com).
+More screenshots and video are available at [https://cs-demo-manager.com](https://cs-demo-manager.com).
 
 ## Features
+
 - Generate data from demos (kills, deaths, round stats, damages...)
 - Watch demos (Highlights / Lowlights from any perspective, rounds, stuffs...)
 - Export data to Excel / JSON
@@ -48,17 +49,17 @@ Please follow the [AngularJS commit conventions](https://docs.google.com/documen
 
 ## Credits
 
-* [DemoInfo](https://github.com/StatsHelix/demoinfo)
-* [HLAE](https://github.com/advancedfx/advancedfx/wiki/Half-Life-Advanced-Effects)
-* [Simple Radar](http://simpleradar.com/)
-* [VirtualDub](http://www.virtualdub.org/)
-* [FFmpeg](http://ffmpeg.org/)
+- [DemoInfo](https://github.com/StatsHelix/demoinfo)
+- [HLAE](https://github.com/advancedfx/advancedfx/wiki/Half-Life-Advanced-Effects)
+- [Simple Radar](http://simpleradar.com/)
+- [VirtualDub](http://www.virtualdub.org/)
+- [FFmpeg](http://ffmpeg.org/)
 
 ## Donate
 
- If you want to say thank you, please feel free to make a donation. Thank you!
+If you want to say thank you, please feel free to make a donation. Thank you!
 
- [![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4K9LM2PMM8D3E&lc=US&item_name=CSGO%20Demos%20Manager&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
+[![Paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=4K9LM2PMM8D3E&lc=US&item_name=CSGO%20Demos%20Manager&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted)
 
 ## Translation
 
@@ -69,12 +70,14 @@ The application translation is done with the resources based system [Microsoft M
 To translate the application in a specific language, the only files that you have to edit are `XLIFF` files (`.xlf`). Those files are located in the folder `MultilingualResources` of each project.
 
 The following projects have their own translations files:
+
 - `Core`
 - `Bot`
 - `Manager`
 - `Services`
 
 For example, if you want to translate the app in Spanish, you will have to edit the following files:
+
 - `Core.es.xlf` (from `Core` project)
 - `Services.es.xlf` (from `Services` project)
 - `Manager.es.xlf` (from `Manager` project)
@@ -100,14 +103,14 @@ For example, if you want to translate the app in Spanish, you will have to edit 
 - Some resources are displayed in the xlf editor but are not translatable. You can use the editor filter to hide it.
 
 - If you want to test your translations before commiting files, you have to setup your system to be able to build the application by yourself.
-Please follow the build instructions from the readme file.
+  Please follow the build instructions from the readme file.
 
 - Sometimes it's not easy to guess exactly where a string is used, I added some comments visible from the xlf editor to help you.
 
 - Some strings contains characters such as **"{0}"** or **"{1}"**.
-These are placeholder for variables.
+  These are placeholder for variables.
 
-*Example:*
+_Example:_
 
 The string resource **"DialogDemosHaveBeenDownloaded"** is in English **"{0} demo(s) have been downloaded."**.
 It means that **{0}** will be replaced by the number of demos downloaded.
