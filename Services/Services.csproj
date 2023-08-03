@@ -409,7 +409,6 @@
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
-    <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
   </ItemGroup>
@@ -433,7 +432,6 @@
     <XliffResource Include="MultilingualResources\Services.ru.xlf" />
     <XliffResource Include="MultilingualResources\Services.sr-Cyrl.xlf" />
     <XliffResource Include="MultilingualResources\Services.tr-TR.xlf" />
-    <XliffResource Include="MultilingualResources\Services.tr.xlf" />
     <XliffResource Include="MultilingualResources\Services.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Services.zh-Hant.xlf" />
   </ItemGroup>
