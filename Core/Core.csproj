@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Core</RootNamespace>
     <AssemblyName>csgodm.core</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -213,7 +213,6 @@
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
-    <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
   </ItemGroup>
@@ -331,7 +330,6 @@
     <XliffResource Include="MultilingualResources\Core.ru.xlf" />
     <XliffResource Include="MultilingualResources\Core.sr-Cyrl.xlf" />
     <XliffResource Include="MultilingualResources\Core.tr-TR.xlf" />
-    <XliffResource Include="MultilingualResources\Core.tr.xlf" />
     <XliffResource Include="MultilingualResources\Core.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Core.zh-Hant.xlf" />
   </ItemGroup>

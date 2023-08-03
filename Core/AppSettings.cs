@@ -143,7 +143,7 @@ namespace Core
             },
             new Language
             {
-                Key = "tr",
+                Key = "tr-TR",
                 Name = "Turkish",
                 IsEnabled = true,
             },

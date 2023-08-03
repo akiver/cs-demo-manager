@@ -576,7 +576,6 @@
     <EmbeddedResource Include="Properties\Resources.ru.resx" />
     <EmbeddedResource Include="Properties\Resources.sr-Cyrl.resx" />
     <EmbeddedResource Include="Properties\Resources.tr-TR.resx" />
-    <EmbeddedResource Include="Properties\Resources.tr.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hans.resx" />
     <EmbeddedResource Include="Properties\Resources.zh-Hant.resx" />
     <None Include="packages.config" />
@@ -655,7 +654,6 @@
     <XliffResource Include="MultilingualResources\Manager.ru.xlf" />
     <XliffResource Include="MultilingualResources\Manager.sr-Cyrl.xlf" />
     <XliffResource Include="MultilingualResources\Manager.tr-TR.xlf" />
-    <XliffResource Include="MultilingualResources\Manager.tr.xlf" />
     <XliffResource Include="MultilingualResources\Manager.zh-Hans.xlf" />
     <XliffResource Include="MultilingualResources\Manager.zh-Hant.xlf" />
   </ItemGroup>
