@@ -26,7 +26,7 @@ namespace Services.Concrete.Analyzer
         private bool _isRoundFinal = false;
 
         /// <summary>
-        /// Used to support buggy demos such as the one is this issue https://github.com/akiver/CSGO-Demos-Manager/issues/484
+        /// Used to support buggy demos such as the one is this issue https://github.com/akiver/cs-demo-manager/issues/484
         /// The round end officially event of the 14th round AND the round start event of the 15th round are not triggered.
         /// To handle this scenario, this flag is synced with m_iRoundWinStatus and round start events.
         /// Note: even the CSGO client playback system skips the 15th round when forwarding from the 14th to 15th round.

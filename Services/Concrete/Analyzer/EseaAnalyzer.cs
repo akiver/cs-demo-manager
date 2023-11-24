@@ -127,7 +127,7 @@ namespace Services.Concrete.Analyzer
             if (_matchStartedByRound[CurrentRound.Number] > 2 || isMatchStarted)
             {
                 IsMatchStarted = true;
-                // https://github.com/akiver/CSGO-Demos-Manager/issues/76
+                // https://github.com/akiver/cs-demo-manager/issues/76
                 // some ESEA demos have 1 match_started between round_end event
                 // that prevent to create a new round when it should had been created
                 if (Demo.Rounds.Count == CurrentRound.Number)

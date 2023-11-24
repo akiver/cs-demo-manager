@@ -642,7 +642,7 @@
                                 <Run Text="{x:Static properties:Resources.InfomationHelpTranslatingApp}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
+                                           CommandParameter="https://github.com/akiver/cs-demo-manager">
                                     GitHub
                                 </Hyperlink>
                                 <Run Text="." />
@@ -685,7 +685,7 @@
                                 <Run Text="{x:Static properties:Resources.SourceCodeAvailable}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://github.com/akiver/CSGO-Demos-Manager">
+                                           CommandParameter="https://github.com/akiver/cs-demo-manager">
                                     GitHub
                                 </Hyperlink>
                                 <Run Text="." />
@@ -695,7 +695,7 @@
                                 <Run Text="{x:Static properties:Resources.EncounteredBug}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://github.com/akiver/CSGO-Demos-Manager/issues">
+                                           CommandParameter="https://github.com/akiver/cs-demo-manager/issues">
                                     GitHub
                                 </Hyperlink>
                                 <Run Text="." />
@@ -704,7 +704,7 @@
                                 <Run Text="{x:Static properties:Resources.WantSayThank}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://csgo-demo-manager.com/download">
+                                           CommandParameter="https://cs-demo-manager.com/download">
                                     <Run Text="{x:Static properties:Resources.Donation}" />
                                 </Hyperlink>
                                 <Run Text="." />
@@ -714,8 +714,8 @@
                                 <Run Text="{x:Static properties:Resources.AlwaysDownload}" />
                                 <Hyperlink Style="{StaticResource HyperLinkStyle}"
                                            Command="{Binding HandleHyperLinkCommand}"
-                                           CommandParameter="https://csgo-demo-manager.com">
-                                    https://csgo-demo-manager.com
+                                           CommandParameter="https://cs-demo-manager.com">
+                                    https://cs-demo-manager.com
                                 </Hyperlink>
                                 <Run Text="." />
                             </TextBlock>

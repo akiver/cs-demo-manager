@@ -135,7 +135,7 @@
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseDown">
                         <i:InvokeCommandAction Command="{Binding HandleHyperLinkCommand}"
-                                               CommandParameter="https://csgo-demos-manager.com/docs/movie" />
+                                               CommandParameter="https://cs-demo-manager.com/docs/movie" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </iconPacks:PackIconMaterial>

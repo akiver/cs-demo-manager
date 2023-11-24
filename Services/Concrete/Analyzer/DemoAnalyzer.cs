@@ -862,7 +862,7 @@ namespace Services.Concrete.Analyzer
 
             if (!IsFirstShotOccured)
             {
-                IsFreezetime = false; // fix for demos that round_freeze_end sometimes not fired https://github.com/akiver/CSGO-Demos-Manager/issues/273
+                IsFreezetime = false; // fix for demos that round_freeze_end sometimes not fired https://github.com/akiver/cs-demo-manager/issues/273
                 IsFirstShotOccured = true;
                 // update the equipement value for each player
                 foreach (DemoInfo.Player pl in Parser.PlayingParticipants)
