@@ -148,14 +148,14 @@ namespace Manager.ViewModel
                                {
                                    if (Properties.Settings.Default.EnableCheckUpdate)
                                    {
-                                       string newRealaseDownloadUrl = await GetNewReleaseDownloadUrl();
-                                       if (newRealaseDownloadUrl != null)
+                                       var newReleaseUrl = await GetNewReleaseDownloadUrl();
+                                       if (newReleaseUrl != null)
                                        {
                                            var download = await _dialogService.ShowMessageAsync(Properties.Resources.DialogNewVersionAvailable,
                                                MessageDialogStyle.AffirmativeAndNegative);
                                            if (download == MessageDialogResult.Affirmative)
                                            {
-                                               Process.Start(newRealaseDownloadUrl);
+                                               Process.Start(newReleaseUrl);
                                            }
                                        }
                                    }
@@ -406,7 +406,7 @@ namespace Manager.ViewModel
                 {
                     ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
                     httpClient.DefaultRequestHeaders.Add("User-Agent", "csgo-demos-manager");
-                    string url = "https://api.github.com/repos/akiver/csgo-demos-manager/releases/latest";
+                    string url = "https://api.github.com/repos/akiver/cs-demo-manager/releases/latest";
                     HttpResponseMessage response = await httpClient.GetAsync(url);
                     string json = await response.Content.ReadAsStringAsync();
                     Release release = await Task.Factory.StartNew(() => JsonConvert.DeserializeObject<Release>(json));
@@ -417,6 +417,11 @@ namespace Manager.ViewModel
                     }
 
                     Version lastVersion = new Version(version);
+
+                    if (lastVersion.Major >= 3)
+                    {
+                        return "https://cs-demo-manager.com";
+                    }
 
                     var resultCompare = AppSettings.APP_VERSION.CompareTo(lastVersion);
                     if (resultCompare < 0 && release.Assets.Count > 0)
