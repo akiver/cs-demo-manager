@@ -1,4 +1,4 @@
-#define AppVer "2.15.0"
+#define AppVer "2.16.0"
 #define AppName "CSGO Demos Manager"
 #define ExeName "CSGODemosManager.exe"
 #define AppWebsite "https://www.csgo-demos-manager.com"
