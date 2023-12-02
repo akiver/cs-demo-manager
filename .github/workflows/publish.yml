@@ -1,0 +1,174 @@
+name: Publish new release
+
+on:
+  workflow_dispatch:
+    inputs:
+      release-type:
+        type: choice
+        description: Select the release type
+        required: true
+        options:
+          - major
+          - patch
+          - minor
+
+jobs:
+  ensure-changes:
+    name: Ensure there are changes
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required to get all existing tags
+          fetch-tags: true
+
+      - name: Stop if there are no new changes
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 --always)
+          LAST_COMMIT=$(git rev-parse HEAD)
+          LASTEST_TAG_COMMIT=$(git rev-list -n 1 $LATEST_TAG)
+          if [ "$LASTEST_TAG_COMMIT" == "$LAST_COMMIT" ]; then
+            echo "No new changes since the last tag. Stopping the workflow."
+            exit 1
+          fi
+          exit 0
+
+  build-macos:
+    name: Build macOS
+    runs-on: macos-latest
+    needs: ensure-changes
+
+    steps:
+      - name: Install Apple certificate
+        run: |
+          # create variables
+          CERTIFICATE_PATH=$RUNNER_TEMP/build_certificate.p12
+          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+
+          # import certificate and provisioning profile from secrets
+          echo -n "$BUILD_CERTIFICATE_BASE64" | base64 --decode -o $CERTIFICATE_PATH
+
+          # create temporary keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+          security set-keychain-settings -lut 21600 $KEYCHAIN_PATH
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" $KEYCHAIN_PATH
+
+          # import certificate to keychain
+          security import $CERTIFICATE_PATH -P "$P12_PASSWORD" -A -t cert -f pkcs12 -k $KEYCHAIN_PATH
+          security list-keychain -d user -s $KEYCHAIN_PATH
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_APPLICATION_CERTIFICATE }}
+          P12_PASSWORD: ${{ secrets.APPLE_P12_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Create new version
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Package and create release
+        run: |
+          npm install
+          npm run build
+          npm run package -- --mac --publish always
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+
+  build-linux:
+    name: Build Linux
+    runs-on: ubuntu-latest
+    needs: ensure-changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Create new version
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Package and create release
+        run: |
+          npm install
+          npm run build
+          npm run package -- --linux --publish always
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  build-windows:
+    name: Build Windows
+    runs-on: windows-latest
+    needs: ensure-changes
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Create new version
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Package and create release
+        run: |
+          npm install
+          npm run build
+          npm run package -- --win --publish always
+        env:
+          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  publish-on-github:
+    name: Publish on GitHub
+    runs-on: ubuntu-latest
+    needs: [build-macos, build-linux, build-windows]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Create new version
+        run: |
+          git config --global user.name github-actions
+          git config --global user.email github-actions@github.com
+          npm version ${{ github.event.inputs.release-type }} -m "chore: v%s"
+
+      - name: Push the tag to GitHub
+        run: git push origin main --tags

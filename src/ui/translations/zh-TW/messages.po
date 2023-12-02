@@ -1,0 +1,5597 @@
+msgid ""
+msgstr ""
+"POT-Creation-Date: 2023-05-21 14:06+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: @lingui/cli\n"
+"Language: zh\n"
+"Project-Id-Version: cs-demo-manager\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-29 23:35\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Traditional\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: cs-demo-manager\n"
+"X-Crowdin-Project-ID: 631068\n"
+"X-Crowdin-Language: zh-TW\n"
+"X-Crowdin-File: /src/ui/translations/en/messages.po\n"
+"X-Crowdin-File-ID: 198\n"
+
+#: src/ui/analyses/action-bar/remove-all-analyses-button.tsx
+msgid "Remove all"
+msgstr ""
+
+#: src/ui/analyses/action-bar/remove-analyses-succeed-button.tsx
+msgid "Remove succeed analyses"
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "Pending analysis…"
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "Analyzing demo…"
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "An error occurred while analyzing the demo."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "Analysis succeed."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "Inserting match…"
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "Match inserted into the database."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgctxt "Analysis status"
+msgid "An error occurred while inserting the match into the database."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "Please open an issue on <0>GitHub</0> that includes the logs below and a link to download the demo."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "Logs:"
+msgstr ""
+
+#: src/ui/analyses/no-analysis.tsx
+msgid "No demo analysis in progress."
+msgstr ""
+
+#: src/ui/analyses/table/context-menu/remove-demo-from-analyses-item.tsx
+msgctxt "Context menu"
+msgid "Remove"
+msgstr ""
+
+#: src/ui/analyses/table/context-menu/see-demo-item.tsx
+#: src/ui/components/context-menu/items/navigate-to-matches-demo-item.tsx
+msgctxt "Context menu"
+msgid "See demo"
+msgstr ""
+
+#: src/ui/analyses/table/context-menu/see-match-item.tsx
+#: src/ui/demos/table/demo-context-menu.tsx
+msgctxt "Context menu"
+msgid "See match"
+msgstr ""
+
+#: src/ui/analyses/table/status-cell.tsx
+msgctxt "Analysis status"
+msgid "Analyzing"
+msgstr ""
+
+#: src/ui/analyses/table/status-cell.tsx
+msgctxt "Analysis status"
+msgid "Error"
+msgstr ""
+
+#: src/ui/analyses/table/status-cell.tsx
+msgctxt "Analysis status"
+msgid "Inserting"
+msgstr ""
+
+#: src/ui/analyses/table/status-cell.tsx
+msgctxt "Analysis status"
+msgid "Done"
+msgstr ""
+
+#: src/ui/analyses/table/status-cell.tsx
+msgctxt "Analysis status"
+msgid "Pending"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Source"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Source"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+msgctxt "Table header"
+msgid "Status"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Status"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+msgctxt "Table header"
+msgid "Demo path"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+msgctxt "Table header tooltip"
+msgid "Demo path"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Map"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Map"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+msgctxt "Table header"
+msgid "Date added"
+msgstr ""
+
+#: src/ui/analyses/table/use-analyses-columns.ts
+msgctxt "Table header tooltip"
+msgid "Date added"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-competitive-rank-chart.tsx
+msgctxt "Chart title"
+msgid "Ban per competitive rank"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-date-chart.tsx
+#: src/ui/player/rank/player-competitive-rank-history.tsx
+#: src/ui/player/rank/player-premier-rank-history.tsx
+msgctxt "Chart axis label"
+msgid "Date"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-date-chart.tsx
+msgctxt "Chart axis label"
+msgid "Bans"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-date-chart.tsx
+msgctxt "Chart tooltip"
+msgid "Bans"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-date-chart.tsx
+msgid "Ban count over time"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-premier-rank-chart.tsx
+msgid "Tier {tier}: {bannedCount}"
+msgstr ""
+
+#: src/ui/ban/stats/ban-per-premier-rank-chart.tsx
+msgctxt "Chart title"
+msgid "Ban per Premier rank"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgctxt "Panel title"
+msgid "Players"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgctxt "Panel title"
+msgid "Banned players"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgctxt "Panel title"
+msgid "Banned players percentage"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgctxt "Panel title"
+msgid "AVG banned players/match"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgctxt "Panel title"
+msgid "AVG banned account age"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgid "{averageBannedAccountAgeInYears, plural, one {# year} other {# years}}"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgctxt "Panel title"
+msgid "Median banned account age"
+msgstr ""
+
+#: src/ui/ban/stats/ban-stats.tsx
+msgid "{medianBannedAccountAgeInYears, plural, one {# year} other {# years}}"
+msgstr ""
+
+#: src/ui/ban/stats/last-bans.tsx
+msgid "Last bans"
+msgstr ""
+
+#: src/ui/ban/stats/no-ban-message.tsx
+msgid "No bans yet"
+msgstr ""
+
+#: src/ui/ban/stats/no-stats.tsx
+msgid "No VAC ban stats to show, you must analyze demos to generate stats."
+msgstr ""
+
+#: src/ui/bootstrap/app-loader.tsx
+msgid "An error occurred while loading the application."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database-button.tsx
+msgctxt "Button"
+msgid "Connect"
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "It usually means that the PostgreSQL service is not running, make sure it's running."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "Make sure PostgreSQL is running and your settings are correct."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "CS Demo Manager requires a PostgreSQL database."
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/connect-database.tsx
+msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
+msgstr ""
+
+#: src/ui/bootstrap/connect-database/help-link.tsx
+msgid "Please read the <0>documentation</0> for help."
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
+msgid "The Steam API returned a forbidden error"
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
+msgid "Steam API returned a 429 status code"
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
+msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-provider.tsx
+msgid "The connection to the WebSocket server failed with code {code}."
+msgstr ""
+
+#: src/ui/bootstrap/web-socket-provider.tsx
+msgid "An error occurred connecting to the WebSocket server."
+msgstr ""
+
+#: src/ui/comment/use-update-comment.tsx
+#: src/ui/components/context-menu/items/change-matches-type-item.tsx
+#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+#: src/ui/components/dialogs/delete-matches-dialog.tsx
+#: src/ui/demos/table/update-demos-type-item.tsx
+#: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
+#: src/ui/downloads/pending/remove-download-button.tsx
+#: src/ui/downloads/pending/remove-downloads-button.tsx
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+#: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
+#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+#: src/ui/player/use-update-player-comment.tsx
+#: src/ui/search/filters/search-maps-input.tsx
+#: src/ui/search/filters/search-players-input.tsx
+#: src/ui/settings/about/clear-logs-button.tsx
+#: src/ui/settings/bans/ignored-steam-accounts.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+#: src/ui/settings/maps/add-map-dialog.tsx
+#: src/ui/settings/maps/edit-map-dialog.tsx
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+#: src/ui/settings/ui/reset-tables-state.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "An error occurred"
+msgstr ""
+
+#: src/ui/components/buttons/analyze-button.tsx
+msgctxt "Button"
+msgid "Analyze"
+msgstr ""
+
+#: src/ui/components/buttons/apply-button.tsx
+msgctxt "Button"
+msgid "Apply"
+msgstr ""
+
+#: src/ui/components/buttons/cancel-button.tsx
+msgctxt "Button"
+msgid "Cancel"
+msgstr ""
+
+#: src/ui/components/buttons/change-button.tsx
+msgctxt "Button"
+msgid "Change"
+msgstr ""
+
+#: src/ui/components/buttons/close-button.tsx
+msgctxt "Button"
+msgid "Close"
+msgstr ""
+
+#: src/ui/components/buttons/copy-button.tsx
+msgctxt "Button"
+msgid "Copy"
+msgstr ""
+
+#: src/ui/components/buttons/copy-share-code-button.tsx
+msgctxt "Button"
+msgid "Copy share code"
+msgstr ""
+
+#: src/ui/components/buttons/copy-steamid-button.tsx
+msgid "Copy SteamID"
+msgstr ""
+
+#: src/ui/components/buttons/delete-button.tsx
+msgctxt "Button"
+msgid "Delete"
+msgstr ""
+
+#: src/ui/components/buttons/details-button.tsx
+msgctxt "Button"
+msgid "Details"
+msgstr ""
+
+#: src/ui/components/buttons/install-button.tsx
+msgctxt "Button"
+msgid "Install"
+msgstr ""
+
+#: src/ui/components/buttons/refresh-button.tsx
+msgctxt "Button"
+msgid "Refresh"
+msgstr ""
+
+#: src/ui/components/buttons/remove-button.tsx
+msgctxt "Button"
+msgid "Remove"
+msgstr ""
+
+#: src/ui/components/buttons/reset-button.tsx
+msgctxt "Button"
+msgid "Reset"
+msgstr ""
+
+#: src/ui/components/buttons/retry-button.tsx
+msgctxt "Button"
+msgid "Retry"
+msgstr ""
+
+#: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
+#: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
+#: src/ui/components/context-menu/items/reveal-file-in-explorer-item.tsx
+msgid "{0, select, darwin {Reveal in Finder} win32 {Reveal in Explorer} other {Reveal in files explorer}}"
+msgstr ""
+
+#: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
+msgid "Folder not found"
+msgstr ""
+
+#: src/ui/components/buttons/reveal-log-file-button.tsx
+msgid "Reveal log file"
+msgstr ""
+
+#: src/ui/components/buttons/save-button.tsx
+msgctxt "Button"
+msgid "Save"
+msgstr ""
+
+#: src/ui/components/buttons/see-demo-button.tsx
+msgctxt "Button"
+msgid "See demo"
+msgstr ""
+
+#: src/ui/components/buttons/see-match-button.tsx
+#: src/ui/demo/see-match-button.tsx
+msgctxt "Button"
+msgid "See match"
+msgstr ""
+
+#: src/ui/components/buttons/update-button.tsx
+msgctxt "Button"
+msgid "Update"
+msgstr ""
+
+#: src/ui/components/buttons/watch-button.tsx
+#: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
+msgctxt "Button"
+msgid "Watch"
+msgstr ""
+
+#: src/ui/components/context-menu/items/analyze-item.tsx
+msgctxt "Context menu"
+msgid "Analyze"
+msgstr ""
+
+#: src/ui/components/context-menu/items/change-matches-type-item.tsx
+#: src/ui/demos/table/update-demos-type-item.tsx
+msgctxt "Context menu"
+msgid "Change type"
+msgstr ""
+
+#: src/ui/components/context-menu/items/change-matches-type-item.tsx
+msgctxt "Context menu"
+msgid "GOTV"
+msgstr ""
+
+#: src/ui/components/context-menu/items/change-matches-type-item.tsx
+msgctxt "Context menu"
+msgid "POV"
+msgstr ""
+
+#: src/ui/components/context-menu/items/change-source-item.tsx
+msgctxt "Context menu"
+msgid "Change source"
+msgstr ""
+
+#: src/ui/components/context-menu/items/comment-item.tsx
+msgctxt "Context menu"
+msgid "Comment"
+msgstr ""
+
+#: src/ui/components/context-menu/items/copy-checksums-item.tsx
+msgctxt "Copy context menu"
+msgid "Checksum"
+msgstr ""
+
+#: src/ui/components/context-menu/items/copy-filepath-item.tsx
+msgctxt "Copy context menu"
+msgid "File path"
+msgstr ""
+
+#: src/ui/components/context-menu/items/copy-item.tsx
+msgctxt "Context menu"
+msgid "Copy"
+msgstr ""
+
+#: src/ui/components/context-menu/items/copy-sharecode-item.tsx
+msgctxt "Copy context menu"
+msgid "Share code"
+msgstr ""
+
+#: src/ui/components/context-menu/items/copy-steamid-item.tsx
+msgctxt "Context menu"
+msgid "Copy Steam ID"
+msgstr ""
+
+#: src/ui/components/context-menu/items/delete-item.tsx
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgctxt "Context menu"
+msgid "Delete"
+msgstr ""
+
+#: src/ui/components/context-menu/items/details-item.tsx
+msgctxt "Context menu"
+msgid "Details"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-matches-item.tsx
+msgctxt "Context menu"
+msgid "Export"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-matches-to-json-item.tsx
+msgctxt "Context menu"
+msgid "JSON"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-matches-to-xlsx-item.tsx
+msgctxt "Context menu"
+msgid "XLSX"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Export in progress…"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Exporting demo {demoNumber} of {totalDemoCount}..."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Export done."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Demo not found: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Decoding error: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "No voice data found for demo: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Failed to parse demo: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Unsupported audio codec: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Failed to create audio file: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Invalid arguments for demo: {demoPath}"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Failed to load the Counter-Strike audio library."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/video-loader.tsx
+msgid "Counter-Strike executable not found."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "You need to install <0>Rosetta</0>."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/rename-dialog.tsx
+#: src/ui/demo/demo-name-input.tsx
+#: src/ui/demos/table/demos-table.tsx
+#: src/ui/dialogs/tags-dialog.tsx
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+#: src/ui/downloads/download-demos-button.tsx
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/downloads/valve/last-matches-loader.tsx
+#: src/ui/match/grenades/finder/grenades-finder-loader.tsx
+#: src/ui/match/match-loader.tsx
+#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/update-demo-location.tsx
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+#: src/ui/matches/table/matches-table.tsx
+#: src/ui/player/load-player-error.tsx
+#: src/ui/players/players-table.tsx
+#: src/ui/search/search-results.tsx
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+#: src/ui/settings/database/database-size.tsx
+#: src/ui/settings/database/optimize-database-button.tsx
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+#: src/ui/settings/maps/delete-map-dialog.tsx
+#: src/ui/settings/maps/reset-default-maps-button.tsx
+msgid "An error occurred."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Players voice export"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Warnings:"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Button label"
+msgid "Export"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgctxt "Context menu"
+msgid "Export players voice"
+msgstr ""
+
+#: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
+msgctxt "Context menu"
+msgid "Open FACEIT profile"
+msgstr ""
+
+#: src/ui/components/context-menu/items/open-steam-profile-item.tsx
+msgctxt "Context menu"
+msgid "Open Steam community profile"
+msgstr ""
+
+#: src/ui/components/context-menu/items/pin-player-item.tsx
+msgctxt "Context menu"
+msgid "Pin this player"
+msgstr ""
+
+#: src/ui/components/context-menu/items/rename-item.tsx
+msgctxt "Context menu"
+msgid "Rename"
+msgstr ""
+
+#: src/ui/components/context-menu/items/see-player-profile-item.tsx
+msgctxt "Context menu"
+msgid "See profile"
+msgstr ""
+
+#: src/ui/components/context-menu/items/show-player-matches-item.tsx
+msgctxt "Context menu"
+msgid "Show matches"
+msgstr ""
+
+#: src/ui/components/context-menu/items/tags-item.tsx
+msgctxt "Context menu"
+msgid "Tags"
+msgstr ""
+
+#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
+msgid "This demo is not the same as the one of the match"
+msgstr ""
+
+#: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
+msgctxt "Context menu"
+msgid "Update demo location"
+msgstr ""
+
+#: src/ui/components/context-menu/items/watch-item.tsx
+#: src/ui/components/context-menu/items/watch-player-item.tsx
+#: src/ui/match/grenades/finder/context-menu.tsx
+msgctxt "Context menu"
+msgid "Watch"
+msgstr ""
+
+#: src/ui/components/context-menu/items/watch-player-as-suspect-item.tsx
+msgctxt "Context menu to watch a player as a suspect"
+msgid "As a suspect"
+msgstr ""
+
+#: src/ui/components/context-menu/items/watch-player-highlights-item.tsx
+msgctxt "Context menu watch player highlights"
+msgid "Highlights"
+msgstr ""
+
+#: src/ui/components/context-menu/items/watch-player-lowlights-item.tsx
+msgctxt "Context menu watch player lowlights"
+msgid "Lowlights"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "{demoAlreadyInDatabaseCount, plural, one {# demo is already in the database} other {# demos are already in the database}}"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgctxt "Checkbox label"
+msgid "Analyze demos already in database?"
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "{0, plural, one {# demo will be analyzed} other {# demos will be analyzed}}"
+msgstr ""
+
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+msgid "{demoCount, plural, one {# demo updated} other {# demos updated}}"
+msgstr ""
+
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+msgid "Update source"
+msgstr ""
+
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+msgid "Change it only if the source is unknown or incorrect in the app! (for instance Valve instead of FACEIT)"
+msgstr ""
+
+#: src/ui/components/dialogs/change-demos-source-dialog.tsx
+msgid "Changing a demo's source require to re-analyze it to update its match data!"
+msgstr ""
+
+#: src/ui/components/dialogs/counter-strike-running-dialog.tsx
+msgid "Counter-Strike is running"
+msgstr ""
+
+#: src/ui/components/dialogs/counter-strike-running-dialog.tsx
+msgid "Counter-Strike is running."
+msgstr ""
+
+#: src/ui/components/dialogs/counter-strike-running-dialog.tsx
+msgid "Do you want to close the game and continue?"
+msgstr ""
+
+#: src/ui/components/dialogs/delete-demos-dialog.tsx
+msgid "{0, plural, one {The demo has been deleted.} other {# demos deleted.}}"
+msgstr ""
+
+#: src/ui/components/dialogs/delete-demos-dialog.tsx
+msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
+msgstr ""
+
+#: src/ui/components/dialogs/delete-demos-dialog.tsx
+#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
+msgid "{0, plural, one {Delete demo} other {Delete demos}}"
+msgstr ""
+
+#: src/ui/components/dialogs/delete-demos-dialog.tsx
+msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
+msgstr ""
+
+#: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
+msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
+msgstr ""
+
+#: src/ui/components/dialogs/delete-matches-dialog.tsx
+msgid "{0, plural, one {The match will be deleted only from the database not your filesystem.} other {These matches will be deleted only from the database not your filesystem.}}"
+msgstr ""
+
+#: src/ui/components/dialogs/demo-not-found-dialog.tsx
+#: src/ui/demo/demo-loader.tsx
+#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/video-loader.tsx
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Demo not found."
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Dialog title"
+msgid "JSON export"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Button label"
+msgid "Select"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Notification"
+msgid "Export done"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Notification"
+msgid "Click here to reveal the output folder"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "File destination"
+msgid "Output"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Button to select an export output folder"
+msgid "Select folder"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+msgctxt "Checkbox label"
+msgid "Minify"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+#: src/ui/match/heatmap/export-button.tsx
+msgctxt "Button"
+msgid "Export"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Dialog title"
+msgid "Excel export"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "General"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Players"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Exporting match {matchCount} of {totalMatchCount}…"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgid "Generating sheet {translatedSheetName}…"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Radio label"
+msgid "Single file"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Radio label"
+msgid "Multiple files"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheets"
+msgid "Sheets"
+msgstr ""
+
+#: src/ui/components/dialogs/rename-dialog.tsx
+msgid "Invalid name."
+msgstr ""
+
+#: src/ui/components/dialogs/rename-dialog.tsx
+msgid "Only the name visible from the application will change, it will not change the filename on your operating system."
+msgstr ""
+
+#: src/ui/components/dialogs/select-pov-dialog.tsx
+msgid "Point of view"
+msgstr ""
+
+#: src/ui/components/dialogs/select-pov-dialog.tsx
+msgid "Do you want to watch it from the player's POV or the enemy's POV?"
+msgstr ""
+
+#: src/ui/components/dialogs/select-pov-dialog.tsx
+msgctxt "Watch from player point of view"
+msgid "Player"
+msgstr ""
+
+#: src/ui/components/dialogs/select-pov-dialog.tsx
+msgctxt "Watch from enemy point of view"
+msgid "Enemy"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Option label for demo analysis status"
+msgid "All"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Option label for demo analysis status"
+msgid "Not in database"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Option label for demo analysis status"
+msgid "Pending"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Option label for demo analysis status"
+msgid "In progress"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Option label for demo analysis status"
+msgid "In database"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Option label for demo analysis status"
+msgid "Error"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/analysis-status-select.tsx
+msgctxt "Demo analysis status"
+msgid "Status"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/demo-types-filter.tsx
+msgctxt "Demo type"
+msgid "GOTV"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/demo-types-filter.tsx
+msgctxt "Demo type"
+msgid "POV"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/demo-types-filter.tsx
+msgctxt "Demo type filter label"
+msgid "Demo types"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/dropdown-filter.tsx
+msgctxt "Button"
+msgid "Filters"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/filter-selection.tsx
+msgctxt "Button filter"
+msgid "All"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/filter-selection.tsx
+msgctxt "Button filter"
+msgid "None"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/game-filter.tsx
+msgctxt "Games filter label"
+msgid "Games"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/game-modes-filter.tsx
+msgctxt "Game modes filter label"
+msgid "Modes"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/match-length-filter.tsx
+msgctxt "Match length"
+msgid "MR 8"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/match-length-filter.tsx
+msgctxt "Match length"
+msgid "MR 12"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/match-length-filter.tsx
+msgctxt "Match length"
+msgid "MR 15"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/match-length-filter.tsx
+msgctxt "Match length filter label"
+msgid "Length"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "All time"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Today"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Last week"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Last month"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Last 3 month"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Last year"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Last 2 years"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/period-filter.tsx
+msgctxt "Period filter preset"
+msgid "Last 5 years"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/ranking-select.tsx
+msgctxt "Option label for ranking filter"
+msgid "All"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/ranking-select.tsx
+msgctxt "Option label for ranking filter"
+msgid "Ranked"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/ranking-select.tsx
+msgctxt "Option label for ranking filter"
+msgid "Unranked"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/ranking-select.tsx
+msgctxt "Ranking filter label"
+msgid "Ranking"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/sources-filter.tsx
+msgctxt "Demo source filter label"
+msgid "Sources"
+msgstr ""
+
+#: src/ui/components/dropdown-filter/tags-filter.tsx
+msgctxt "Tags filter label"
+msgid "Tags"
+msgstr ""
+
+#: src/ui/components/inputs/comment-input.tsx
+msgctxt "Input placeholder"
+msgid "Comment"
+msgstr ""
+
+#: src/ui/components/inputs/database-name-input.tsx
+#: src/ui/settings/maps/map-dialog/name-input.tsx
+msgctxt "Input label"
+msgid "Name"
+msgstr ""
+
+#: src/ui/components/inputs/database-name-input.tsx
+msgctxt "Input placeholder"
+msgid "Name"
+msgstr ""
+
+#: src/ui/components/inputs/file-or-directory-input.tsx
+msgctxt "Button"
+msgid "Select"
+msgstr ""
+
+#: src/ui/components/inputs/hostname-input.tsx
+msgctxt "Button"
+msgid "Hostname"
+msgstr ""
+
+#: src/ui/components/inputs/hostname-input.tsx
+msgctxt "Input placeholder"
+msgid "Hostname"
+msgstr ""
+
+#: src/ui/components/inputs/password-input.tsx
+msgctxt "Input label"
+msgid "Password"
+msgstr ""
+
+#: src/ui/components/inputs/password-input.tsx
+msgctxt "Input placeholder"
+msgid "Password"
+msgstr ""
+
+#: src/ui/components/inputs/port-input.tsx
+msgctxt "Input label"
+msgid "Port"
+msgstr ""
+
+#: src/ui/components/inputs/port-input.tsx
+msgctxt "Input placeholder"
+msgid "Port"
+msgstr ""
+
+#: src/ui/components/inputs/select/players-select.tsx
+msgctxt "Players filter category"
+msgid "Players"
+msgstr ""
+
+#: src/ui/components/inputs/select/radar-level-select.tsx
+msgid "Upper"
+msgstr ""
+
+#: src/ui/components/inputs/select/radar-level-select.tsx
+msgid "Lower"
+msgstr ""
+
+#: src/ui/components/inputs/select/radar-level-select.tsx
+#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
+msgid "Radar level"
+msgstr ""
+
+#: src/ui/components/inputs/select/rounds-select.tsx
+msgctxt "Filter rounds category"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/components/inputs/select/side-select.tsx
+msgctxt "Select team option"
+msgid "CT"
+msgstr ""
+
+#: src/ui/components/inputs/select/side-select.tsx
+msgctxt "Select team option"
+msgid "T"
+msgstr ""
+
+#: src/ui/components/inputs/select/side-select.tsx
+msgctxt "Filter side category"
+msgid "Side"
+msgstr ""
+
+#: src/ui/components/inputs/select/teams-select.tsx
+msgctxt "Filter teams name category"
+msgid "Teams"
+msgstr ""
+
+#: src/ui/components/inputs/select/weapon-types-filter.tsx
+msgctxt "Filter weapon types category"
+msgid "Weapon types"
+msgstr ""
+
+#: src/ui/components/inputs/text-input-filter.tsx
+msgctxt "Input placeholder"
+msgid "{0, select, darwin {Filter… (⌘+F)} other {Filter… (CTRL+F)}}"
+msgstr ""
+
+#: src/ui/components/inputs/username-input.tsx
+msgctxt "Input label"
+msgid "Username"
+msgstr ""
+
+#: src/ui/components/inputs/username-input.tsx
+msgctxt "Input placeholder"
+msgid "Username"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Comment"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Comment"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Tags"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Tags"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Bans"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Bans"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Game"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Game"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Type"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Type"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header"
+msgid "Team A"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Team A"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header"
+msgid "Team B"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Team B"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header score team A"
+msgid "STA"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score Team A"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Score Team A"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header score team B"
+msgid "STB"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Score Team B"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Score Team B"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header kill count"
+msgid "K"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header assist count"
+msgid "A"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Assists"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Assists"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header death count"
+msgid "D"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Deaths"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Deaths"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Date"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Date"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header"
+msgid "Mode"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Game mode"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Duration"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Duration"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header collateral kill count"
+msgid "CK"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Collateral Kill (two or more enemies killed with a single bullet)"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Dropdown column visibility"
+msgid "Collateral kill"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Ticks"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Ticks"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Tickrate"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Tickrate"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/match/weapons/weapons-accuracy.tsx
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "Name"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/demos/table/use-demos-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Name"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Path"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Path"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Server name"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Server name"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Client name"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Client name"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header"
+msgid "Analyze date"
+msgstr ""
+
+#: src/ui/components/matches/use-matches-columns.tsx
+msgctxt "Table header tooltip"
+msgid "Analyze date"
+msgstr ""
+
+#: src/ui/components/panels/average-damages-per-round-panel.tsx
+msgctxt "Panel title"
+msgid "ADR"
+msgstr ""
+
+#: src/ui/components/panels/average-deaths-per-round-panel.tsx
+msgctxt "Panel title"
+msgid "Average deaths/round"
+msgstr ""
+
+#: src/ui/components/panels/average-kills-per-round-panel.tsx
+msgctxt "Panel title"
+msgid "Average kills/round"
+msgstr ""
+
+#: src/ui/components/panels/headshot-panel.tsx
+msgctxt "Panel title"
+msgid "HS %"
+msgstr ""
+
+#: src/ui/components/panels/headshot-panel.tsx
+#: src/ui/match/players/clutches-panel.tsx
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/components/panels/headshot-panel.tsx
+msgctxt "Panel label"
+msgid "Deaths"
+msgstr ""
+
+#: src/ui/components/panels/headshot-panel.tsx
+msgctxt "Panel label"
+msgid "Assists"
+msgstr ""
+
+#: src/ui/components/panels/headshot-panel.tsx
+msgctxt "Panel label"
+msgid "Headshots"
+msgstr ""
+
+#: src/ui/components/panels/hltv-rating-2-panel.tsx
+msgctxt "Panel title"
+msgid "HLTV 2.0"
+msgstr ""
+
+#: src/ui/components/panels/hltv-rating-panel.tsx
+msgctxt "Panel title"
+msgid "HLTV 1.0"
+msgstr ""
+
+#: src/ui/components/panels/kast-panel.tsx
+msgctxt "Panel title"
+msgid "KAST"
+msgstr ""
+
+#: src/ui/components/panels/kill-death-ratio-panel.tsx
+msgctxt "Panel title"
+msgid "Kills/Deaths"
+msgstr ""
+
+#: src/ui/components/panels/kills-panel.tsx
+msgctxt "Panel title"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/components/panels/kills-panel.tsx
+msgctxt "Panel label"
+msgid "Wallbang kills"
+msgstr ""
+
+#: src/ui/components/panels/kills-panel.tsx
+msgctxt "Panel label"
+msgid "Collateral kills"
+msgstr ""
+
+#: src/ui/components/panels/multi-kills-panel.tsx
+msgctxt "Panel title"
+msgid "Multi kills"
+msgstr ""
+
+#: src/ui/components/panels/multi-kills-panel.tsx
+msgctxt "Panel label"
+msgid "5K"
+msgstr ""
+
+#: src/ui/components/panels/multi-kills-panel.tsx
+msgctxt "Panel label"
+msgid "4K"
+msgstr ""
+
+#: src/ui/components/panels/multi-kills-panel.tsx
+msgctxt "Panel label"
+msgid "3K"
+msgstr ""
+
+#: src/ui/components/panels/multi-kills-panel.tsx
+msgctxt "Panel label"
+msgid "2K"
+msgstr ""
+
+#: src/ui/components/panels/multi-kills-panel.tsx
+msgctxt "Panel label"
+msgid "1K"
+msgstr ""
+
+#: src/ui/components/panels/objectives-panel.tsx
+msgctxt "Panel title"
+msgid "Objectives"
+msgstr ""
+
+#: src/ui/components/panels/objectives-panel.tsx
+msgctxt "Panel label"
+msgid "Bomb planted"
+msgstr ""
+
+#: src/ui/components/panels/objectives-panel.tsx
+msgctxt "Panel label"
+msgid "Bomb defused"
+msgstr ""
+
+#: src/ui/components/panels/objectives-panel.tsx
+msgctxt "Panel label"
+msgid "Hostage rescued"
+msgstr ""
+
+#: src/ui/components/panels/rounds-panel.tsx
+msgctxt "Panel title"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/components/panels/rounds-panel.tsx
+msgctxt "Panel label"
+msgid "Total"
+msgstr ""
+
+#: src/ui/components/panels/rounds-panel.tsx
+msgctxt "Panel label"
+msgid "CT"
+msgstr ""
+
+#: src/ui/components/panels/rounds-panel.tsx
+msgctxt "Panel label"
+msgid "T"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel title"
+msgid "Utilities"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel label"
+msgid "HE grenades"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Flashbangs"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Smokes"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Molotovs"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Incendiaries"
+msgstr ""
+
+#: src/ui/components/panels/utilities-panel.tsx
+msgctxt "Panel label"
+msgid "Decoys"
+msgstr ""
+
+#: src/ui/components/table/cells/bans-cell.tsx
+msgctxt "Tooltip"
+msgid "VAC banned"
+msgstr ""
+
+#: src/ui/components/table/cells/bans-cell.tsx
+msgctxt "Tooltip"
+msgid "Game banned"
+msgstr ""
+
+#: src/ui/components/table/cells/bans-cell.tsx
+msgctxt "Tooltip"
+msgid "Community banned"
+msgstr ""
+
+#: src/ui/components/table/cells/comment-cell.tsx
+msgctxt "Tooltip"
+msgid "Comment"
+msgstr ""
+
+#: src/ui/components/table/columns-visibility-dropdown.tsx
+msgctxt "Dropdown"
+msgid "Columns"
+msgstr ""
+
+#: src/ui/components/tags.tsx
+msgid "No tags"
+msgstr ""
+
+#: src/ui/components/timeline/timestamp-item.tsx
+msgctxt "Minutes timestamp in timelines"
+msgid "{minutes} min"
+msgstr ""
+
+#: src/ui/components/unsupported-map.tsx
+msgid "Map not supported."
+msgstr ""
+
+#: src/ui/components/unsupported-map.tsx
+msgid "You can add custom maps from settings, please read the<0> documentation </0>for more details."
+msgstr ""
+
+#: src/ui/components/valve-match/player-performance/performance-timeline.tsx
+msgid "<0>{playerName}</0> Round performance"
+msgstr ""
+
+#: src/ui/components/valve-match/player-performance/round-context-menu.tsx
+msgid "Watch round"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Avatar"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "K/D diff"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Kill/Death difference"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header mvp count"
+msgid "MVP"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Most Valuable Player"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header score"
+msgid "S"
+msgstr ""
+
+#: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Score"
+msgstr ""
+
+#: src/ui/components/valve-match/valve-match-overview.tsx
+#: src/ui/demo/demo-match-status.tsx
+msgid "Demo analysis in progress."
+msgstr ""
+
+#: src/ui/demo/demo-comment-input.tsx
+msgid "Comment:"
+msgstr ""
+
+#: src/ui/demo/demo-date.tsx
+msgid "Date:"
+msgstr ""
+
+#: src/ui/demo/demo-duration.tsx
+msgid "Duration:"
+msgstr ""
+
+#: src/ui/demo/demo-information.tsx
+msgid "Path:"
+msgstr ""
+
+#: src/ui/demo/demo-information.tsx
+msgid "Share code:"
+msgstr ""
+
+#: src/ui/demo/demo-information.tsx
+msgid "Server name:"
+msgstr ""
+
+#: src/ui/demo/demo-information.tsx
+msgid "Client name:"
+msgstr ""
+
+#: src/ui/demo/demo-information.tsx
+msgid "Tickrate:"
+msgstr ""
+
+#: src/ui/demo/demo-information.tsx
+msgid "Framerate:"
+msgstr ""
+
+#: src/ui/demo/demo-loader.tsx
+msgid "Loading demo…"
+msgstr ""
+
+#: src/ui/demo/demo-loader.tsx
+msgid "An error occurred while loading demo."
+msgstr ""
+
+#: src/ui/demo/demo-map.tsx
+msgid "Map:"
+msgstr ""
+
+#: src/ui/demo/demo-match-status.tsx
+msgid "The source of this demo is not supported."
+msgstr ""
+
+#: src/ui/demo/demo-match-status.tsx
+msgctxt "Button"
+msgid "Change source"
+msgstr ""
+
+#: src/ui/demo/demo-match-status.tsx
+msgid "This demo has been analyzed."
+msgstr ""
+
+#: src/ui/demo/demo-match-status.tsx
+msgid "This demo has not been analyzed yet."
+msgstr ""
+
+#: src/ui/demo/demo-name-input.tsx
+msgid "Name:"
+msgstr ""
+
+#: src/ui/demo/demo-source.tsx
+msgid "Source:"
+msgstr ""
+
+#: src/ui/demo/demo-tags.tsx
+msgid "Tags:"
+msgstr ""
+
+#: src/ui/demo/next-demo-link.tsx
+msgid "Next demo ({0}+→)"
+msgstr ""
+
+#: src/ui/demo/previous-demo-link.tsx
+msgid "Previous demo ({0}+←)"
+msgstr ""
+
+#: src/ui/demo/see-match-button.tsx
+msgctxt "Tooltip"
+msgid "Demo analysis in progress."
+msgstr ""
+
+#: src/ui/demo/see-match-button.tsx
+msgctxt "Tooltip"
+msgid "This demo has not been analyzed yet."
+msgstr ""
+
+#: src/ui/demos/current-folder-select.tsx
+msgctxt "Checkbox label"
+msgid "See all folders"
+msgstr ""
+
+#: src/ui/demos/table/delete-demos-from-database-item.tsx
+msgid "Delete from database"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "Pending analysis…"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "Analyzing…"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "Analyze error"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "Insertion error"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "Inserting into database…"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "In database"
+msgstr ""
+
+#: src/ui/demos/table/demo-status-cell.tsx
+msgid "Not in database"
+msgstr ""
+
+#: src/ui/demos/table/demos-count.tsx
+msgid "{0, plural, one {# demo} other {# demos}}"
+msgstr ""
+
+#: src/ui/demos/table/demos-table.tsx
+msgid "No folders found."
+msgstr ""
+
+#: src/ui/demos/table/loading-demos-message.tsx
+msgid "Loading demos…"
+msgstr ""
+
+#: src/ui/demos/table/loading-demos-message.tsx
+msgid "Loading {loadedDemoCount} of {demoToLoadCount} demos…"
+msgstr ""
+
+#: src/ui/demos/table/no-demos.tsx
+msgid "No demos found with current filters."
+msgstr ""
+
+#: src/ui/demos/table/no-demos.tsx
+msgid "No demos found in the current folder."
+msgstr ""
+
+#: src/ui/demos/table/selected-demo-count.tsx
+msgid "{selectedDemoCount, plural, one {# demo selected} other {# demos selected}}"
+msgstr ""
+
+#: src/ui/demos/table/update-demos-type-item.tsx
+msgid "GOTV"
+msgstr ""
+
+#: src/ui/demos/table/update-demos-type-item.tsx
+msgid "POV"
+msgstr ""
+
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header"
+msgid "Frame rate"
+msgstr ""
+
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Table header tooltip"
+msgid "Frame rate"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "CEVO"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "eBot"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "ESL"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "ESEA"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "Esportal"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "FACEIT"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "FASTCUP"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "Gamers Club"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "PopFlash"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "Valve"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
+msgid "Unknown"
+msgstr ""
+
+#: src/ui/dialogs/confirm-dialog.tsx
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
+msgctxt "Button"
+msgid "Confirm"
+msgstr ""
+
+#: src/ui/dialogs/tags-dialog.tsx
+#: src/ui/settings/settings-tabs.tsx
+msgid "Tags"
+msgstr ""
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+msgid "Demo location"
+msgstr ""
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+#: src/ui/match/video/update-demo-location.tsx
+msgid "The demo located at <0>{demoFilePath}</0> doesn't exists."
+msgstr ""
+
+#: src/ui/dialogs/update-demo-location-dialog.tsx
+#: src/ui/match/video/update-demo-location.tsx
+msgctxt "Button"
+msgid "Update demo location"
+msgstr ""
+
+#: src/ui/downloads/dowload-required-tooltip.tsx
+msgctxt "Tooltip"
+msgid "You must download the demo first"
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+#: src/ui/downloads/download-demos-button.tsx
+msgid "A download folder is required. You can change it from settings."
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+#: src/ui/downloads/download-demos-button.tsx
+msgid "The download folder doesn't exist, please change it from the settings."
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgid "This match is already in pending downloads."
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgid "This match is already in your downloads folder."
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+#: src/ui/downloads/pending/download-actions.tsx
+msgid "The download link has expired."
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+msgctxt "Tooltip"
+msgid "Download link expired"
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+msgctxt "Tooltip"
+msgid "Download in progress"
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+msgctxt "Tooltip"
+msgid "Demo already downloaded"
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgctxt "Button"
+msgid "Download"
+msgstr ""
+
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgid "Invalid share code."
+msgstr ""
+
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgid "An error occurred while decoding the share code."
+msgstr ""
+
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgctxt "Dialog title"
+msgid "Share code"
+msgstr ""
+
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgid "Enter a share code"
+msgstr ""
+
+#: src/ui/downloads/download-demo-from-share-code-button.tsx
+msgctxt "Button"
+msgid "Share code"
+msgstr ""
+
+#: src/ui/downloads/download-demos-button.tsx
+msgctxt "Button"
+msgid "Download all"
+msgstr ""
+
+#: src/ui/downloads/downloads-folder-required.tsx
+msgid "A downloads folder is required."
+msgstr ""
+
+#: src/ui/downloads/downloads-folder-required.tsx
+msgctxt "Button"
+msgid "Select downloads folder"
+msgstr ""
+
+#: src/ui/downloads/faceit/current-match.tsx
+msgctxt "Button"
+msgid "See on FACEIT"
+msgstr ""
+
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+msgid "Fetching last FACEIT matches…"
+msgstr ""
+
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "The FACEIT API returned a forbidden error, please check your API key."
+msgstr ""
+
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+msgid "The FACEIT API returned an unauthorized status code, please check your API key."
+msgstr ""
+
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "Invalid FACEIT API request."
+msgstr ""
+
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "The FACEIT API returned an error, please re-try later."
+msgstr ""
+
+#: src/ui/downloads/faceit/last-matches-loader.tsx
+msgid "No matches found for the current FACEIT account."
+msgstr ""
+
+#: src/ui/downloads/faceit/no-faceit-account.tsx
+msgid "To add a FACEIT account, enter your FACEIT nickname."
+msgstr ""
+
+#: src/ui/downloads/faceit/no-faceit-account.tsx
+msgctxt "Input placeholder"
+msgid "FACEIT nickname"
+msgstr ""
+
+#: src/ui/downloads/faceit/no-faceit-account.tsx
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "The nickname is case sensitive!"
+msgstr ""
+
+#: src/ui/downloads/faceit/no-faceit-account.tsx
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+#: src/ui/settings/tags/add-tag.tsx
+msgctxt "Button"
+msgid "Add"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header kill death ratio"
+msgid "K/D"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Kill-Death Ratio"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header headshot count"
+msgid "HS"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Headshot"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header headshot percentage"
+msgid "HS%"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Headshot Percentage"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "3K"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "3-kill rounds"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "4K"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "4-kill rounds"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "5K"
+msgstr ""
+
+#: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "5-kill rounds"
+msgstr ""
+
+#: src/ui/downloads/pending-downloads-link.tsx
+msgctxt "Link"
+msgid "Pending downloads"
+msgstr ""
+
+#: src/ui/downloads/pending/download-actions.tsx
+msgid "An error occurred while downloading the demo."
+msgstr ""
+
+#: src/ui/downloads/pending/pending-downloads-list.tsx
+msgid "No pending downloads."
+msgstr ""
+
+#: src/ui/downloads/pending/remove-downloads-button.tsx
+msgctxt "Button"
+msgid "Remove downloads"
+msgstr ""
+
+#: src/ui/downloads/reveal-download-folder-in-explorer-button.tsx
+msgctxt "Button"
+msgid "Reveal download folder"
+msgstr ""
+
+#: src/ui/downloads/reveal-download-folder-in-explorer-button.tsx
+msgctxt "Tooltip"
+msgid "A download folder is required. You can change it from settings."
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-result-text.tsx
+msgid "Defeat"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-result-text.tsx
+msgid "Victory"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-result-text.tsx
+msgid "Tied"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-result-text.tsx
+msgid "Unplayed"
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "Invalid arguments provided to boiler."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "Error while contacting Steam, please retry later."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "You are already connected to the CS game coordinator, make sure to close CS and retry."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "Steam needs to be restarted."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "Steam is not running or the current account is not logged in."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "Steam account not connected."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "No matches found."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "An error occurred while writing the matches file."
+msgstr ""
+
+#: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
+msgctxt "Boiler-writter error message"
+msgid "Matches file not found."
+msgstr ""
+
+#: src/ui/downloads/valve/fetch-matches-confirmation.tsx
+msgid "It will close Counter-Strike if it's running and start automatically for a few seconds."
+msgstr ""
+
+#: src/ui/downloads/valve/fetch-matches-confirmation.tsx
+msgid "Continue"
+msgstr ""
+
+#: src/ui/downloads/valve/last-matches-loader.tsx
+msgid "Fetching last matches…"
+msgstr ""
+
+#: src/ui/downloads/valve/no-matches-found.tsx
+msgid "No matches found for the current Steam account."
+msgstr ""
+
+#: src/ui/hooks/use-clipboard.tsx
+msgctxt "Toast"
+msgid "Copied to clipboard"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Demo not found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Match not found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "{game} is not supported on your operating system"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "No kills found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "No deaths found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "The demo's path contains unsupported characters by CSGO"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Steam is not running"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Counter-Strike starting…"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Premier"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Competitive 5v5"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Scrimmage 5v5"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Scrimmage 2v2"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Casual"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Silver I"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Silver II"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Silver III"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Silver IV"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Silver Elite"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Silver Elite Master"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Gold Nova I"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Gold Nova II"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Gold Nova III"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Gold Nova Master"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Master Guardian I"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Master Guardian II"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Master Guardian Elite"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Distinguished Master Guardian"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Legendary Eagle"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Legendary Eagle Master"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "Supreme Master First Class"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+msgctxt "CS competitive rank"
+msgid "The Global Elite"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-name.ts
+#: src/ui/hooks/use-get-rank-tier-name.ts
+msgctxt "CS rank"
+msgid "Not ranked"
+msgstr ""
+
+#: src/ui/hooks/use-get-rank-tier-name.ts
+msgctxt "CS premier rank tier"
+msgid "Tier {tier}"
+msgstr ""
+
+#: src/ui/hooks/use-translate-economy-ban.ts
+msgctxt "Steam economy ban status"
+msgid "None"
+msgstr ""
+
+#: src/ui/hooks/use-translate-economy-ban.ts
+msgctxt "Steam economy ban status"
+msgid "Probation"
+msgstr ""
+
+#: src/ui/hooks/use-translate-economy-ban.ts
+msgctxt "Steam economy ban status"
+msgid "Banned"
+msgstr ""
+
+#: src/ui/hooks/use-translate-economy-ban.ts
+msgctxt "Steam economy ban status"
+msgid "Unknown"
+msgstr ""
+
+#: src/ui/keyboard/keyboard-shortcut.ts
+msgctxt "Keyboard shortcut"
+msgid "C"
+msgstr ""
+
+#: src/ui/left-bar/analyses-link.tsx
+msgctxt "Tooltip"
+msgid "Analyses"
+msgstr ""
+
+#: src/ui/left-bar/bans-link.tsx
+msgctxt "Tooltip"
+msgid "VAC bans"
+msgstr ""
+
+#: src/ui/left-bar/demos-link.tsx
+msgctxt "Tooltip"
+msgid "Demos"
+msgstr ""
+
+#: src/ui/left-bar/downloads-link.tsx
+msgctxt "Tooltip"
+msgid "Downloads"
+msgstr ""
+
+#: src/ui/left-bar/matches-link.tsx
+msgctxt "Tooltip"
+msgid "Matches"
+msgstr ""
+
+#: src/ui/left-bar/pinned-player-link.tsx
+msgctxt "Tooltip"
+msgid "Pinned player"
+msgstr ""
+
+#: src/ui/left-bar/players-link.tsx
+msgctxt "Tooltip"
+msgid "Players"
+msgstr ""
+
+#: src/ui/left-bar/search-link.tsx
+msgctxt "Tooltip"
+msgid "Search"
+msgstr ""
+
+#: src/ui/left-bar/settings-button.tsx
+msgid "Settings ({shortcut})"
+msgstr ""
+
+#: src/ui/match/chat-messages/chat-message.tsx
+msgctxt "Chat message status"
+msgid "*DEAD*"
+msgstr ""
+
+#: src/ui/match/chat-messages/empty-chat-messages.tsx
+msgid "No chat messages found."
+msgstr ""
+
+#: src/ui/match/chat-messages/empty-chat-messages.tsx
+msgid "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
+msgstr ""
+
+#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+msgctxt "OS save dialog title"
+msgid "Export"
+msgstr ""
+
+#: src/ui/match/chat-messages/export-chat-messages-button.tsx
+msgid "Chat messages exported"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-advantage-chart.tsx
+msgctxt "Chart tooltip"
+msgid "{teamName} has +${money} more than {oppositeTeamName}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-advantage-chart.tsx
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+#: src/ui/match/economy/team-equipment-values-chart.tsx
+msgctxt "Chart axis label"
+msgid "Round"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-advantage-chart.tsx
+msgctxt "Chart tooltip"
+msgid "Round {roundNumber}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-advantage-chart.tsx
+msgctxt "Chart axis label"
+msgid "Winner"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-advantage-chart.tsx
+#: src/ui/match/economy/team-equipment-values-chart.tsx
+msgctxt "Chart tooltip"
+msgid "Winner: {winnerName}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-advantage-chart.tsx
+msgid "Advantage"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+msgctxt "Chart axis label money value"
+msgid "{money}K"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+msgctxt "Chart tooltip"
+msgid "Round: {roundNumber}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+msgctxt "Chart tooltip economy type"
+msgid "Type: {0}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+msgctxt "Chart tooltip"
+msgid "Equipment value: ${money}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+msgid "Breakdown"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
+msgctxt "Chart tooltip"
+msgid "{winnerTeamName} won the round {roundNumber}"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+msgctxt "Economy type"
+msgid "Pistol"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+msgctxt "Economy type"
+msgid "Eco"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+msgctxt "Economy type"
+msgid "Semi buy"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+msgctxt "Economy type"
+msgid "Force buy"
+msgstr ""
+
+#: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
+msgctxt "Economy type"
+msgid "Full buy"
+msgstr ""
+
+#: src/ui/match/economy/team-equipment-values-chart.tsx
+msgctxt "Chart axis tooltip"
+msgid "Round {roundNumber}"
+msgstr ""
+
+#: src/ui/match/economy/team-equipment-values-chart.tsx
+msgctxt "Chart label"
+msgid "Winner"
+msgstr ""
+
+#: src/ui/match/economy/team-equipment-values-chart.tsx
+#: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Equipment value"
+msgstr ""
+
+#: src/ui/match/grenades/finder/context-menu.tsx
+msgctxt "Context menu"
+msgid "Copy position"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+#: src/ui/match/grenades/stats/grenade-select.tsx
+msgctxt "Grenade name"
+msgid "Smoke"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+#: src/ui/match/grenades/stats/grenade-select.tsx
+msgctxt "Grenade name"
+msgid "Flashbang"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+#: src/ui/match/grenades/stats/grenade-select.tsx
+msgctxt "Grenade name"
+msgid "HE Grenade"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+msgctxt "Grenade name"
+msgid "Decoy"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+msgctxt "Grenade name"
+msgid "Molotov"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+msgctxt "Grenade name"
+msgid "Incendiary"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenade-name-select.tsx
+msgctxt "Input label"
+msgid "Grenade"
+msgstr ""
+
+#: src/ui/match/grenades/finder/grenades-finder-loader.tsx
+msgid "No grenades found."
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header"
+msgid "Player"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Player's name"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header"
+msgid "Tick"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Tick"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header"
+msgid "Round"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Round"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header velocity"
+msgid "Vel X"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Thrower velocity X"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header velocity"
+msgid "Vel Y"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Thrower velocity Y"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header velocity"
+msgid "Vel Z"
+msgstr ""
+
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Thrower velocity Z"
+msgstr ""
+
+#: src/ui/match/grenades/grenades-tabs.tsx
+msgctxt "Tab link"
+msgid "Stats"
+msgstr ""
+
+#: src/ui/match/grenades/grenades-tabs.tsx
+msgctxt "Tab link grenades finder"
+msgid "Finder"
+msgstr ""
+
+#: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
+msgctxt "OS save dialog title"
+msgid "Export as PNG"
+msgstr ""
+
+#: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
+msgctxt "Button"
+msgid "Export as PNG"
+msgstr ""
+
+#: src/ui/match/grenades/stats/grenade-select.tsx
+msgctxt "Grenade name"
+msgid "Fire"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/fire-labels.tsx
+#: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
+msgid "Damage"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/fire-labels.tsx
+#: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
+msgid "Damage per throw"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/fire-labels.tsx
+#: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
+msgid "Enemies damaged per throw"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/fire-labels.tsx
+msgid "Average damage per round"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
+msgid "Duration"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
+msgid "Players flashed"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
+msgid "Player flashed per throw"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
+msgid "Average player flashed per round"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
+msgid "Damages per round"
+msgstr ""
+
+#: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
+msgid "Killed"
+msgstr ""
+
+#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
+msgid "Players flashbang matrix"
+msgstr ""
+
+#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
+msgid "<0>{flasherName}</0> flashed <1>{flashedName}</1> around <2>{roundedDuration}s</2>"
+msgstr ""
+
+#: src/ui/match/heatmap/input-blur.tsx
+msgctxt "Input label"
+msgid "Blur"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Deaths"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Shots"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "HE"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Flashbang"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Smoke"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Molotov"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+msgctxt "Heatmap event"
+msgid "Decoy"
+msgstr ""
+
+#: src/ui/match/heatmap/input-event.tsx
+#: src/ui/search/search.tsx
+msgctxt "Input label"
+msgid "Event"
+msgstr ""
+
+#: src/ui/match/heatmap/input-opacity.tsx
+msgctxt "Input label"
+msgid "Opacity"
+msgstr ""
+
+#: src/ui/match/heatmap/input-radius.tsx
+msgctxt "Input label"
+msgid "Radius"
+msgstr ""
+
+#: src/ui/match/match-loader.tsx
+msgid "Fetching match…"
+msgstr ""
+
+#: src/ui/match/match-loader.tsx
+msgid "Match not found."
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgid "Previous match ({shortcut})"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgid "Next match ({shortcut})"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+#: src/ui/player/player-tabs.tsx
+msgctxt "Tab link"
+msgid "Overview"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Players"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Heatmap"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Weapons"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Grenades"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Economy"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "2D viewer"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Video"
+msgstr ""
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Chat"
+msgstr ""
+
+#: src/ui/match/overview/action-bar/export-match-as-xlsx-button.tsx
+msgctxt "Button"
+msgid "XLSX export"
+msgstr ""
+
+#: src/ui/match/overview/action-bar/export-match-to-json-button.tsx
+msgctxt "Button"
+msgid "JSON export"
+msgstr ""
+
+#: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
+msgctxt "Dialog title"
+msgid "Watch at tick"
+msgstr ""
+
+#: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
+msgid "The playback will start at the specified tick."
+msgstr ""
+
+#: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
+msgctxt "Button"
+msgid "Watch at tick"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+msgid "Invalid crosshair share code"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
+msgctxt "Context menu sub item"
+msgid "Crosshair config"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-share-code-item.tsx
+msgctxt "Context menu sub item"
+msgid "Crosshair share code"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/copy-player-data-item.tsx
+msgid "Steam ID"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
+msgctxt "Context menu"
+msgid "Generate kills video"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgctxt "Versus"
+msgid "vs"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Source"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Name"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Client name"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Server name"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Tickrate"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Framerate"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/match-information.tsx
+msgid "Checksum"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/rounds-timeline.tsx
+#: src/ui/match/rounds/overview/rounds-entries.tsx
+msgctxt "Tooltip"
+msgid "Switch sides"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "Rank"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Rank"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header damage health"
+msgid "DMG"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Damages"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header kast"
+msgid "KAST"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header average damage per round"
+msgid "ADR"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Average Damage per Round"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header utility damage per round"
+msgid "UDR"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Utility damage per round"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "HLTV 2.0"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Estimated HLTV 2.0 rating"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "HLTV"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "HLTV 1.0 rating"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header utility damage"
+msgid "UD"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Total Utility Damage Dealt"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header first kill count"
+msgid "FK"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "First kills of a round"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header first death count"
+msgid "FD"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "First deaths of a round"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header trade kill count"
+msgid "TK"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Trade Kills (Kill revenged within 5s after a teammate died)"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header trade death count"
+msgid "TD"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Trade Deaths (Death revenged by a teammate within 5s after the player died)"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header first trade kill count"
+msgid "FTK"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "First Trade Kills (Kill revenged within 5s after a teammate died)"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header first trade death count"
+msgid "FTD"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "First Trade Deaths (Death revenged by a teammate within 5s after the player died)"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header wallbang kill count"
+msgid "WB"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Wallbang Kill"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header bomb planted count"
+msgid "BP"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Bomb Planted"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header bomb defused count"
+msgid "BD"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Bomb Defused"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header hostage rescued count"
+msgid "HR"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "Hostage Rescued"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "2K"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "2-kill rounds"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "1v5"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "1 versus 5 won"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "1v4"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "1 versus 4 won"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "1v3"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "1 versus 3 won"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "1v2"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "1 versus 2 won"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header"
+msgid "1v1"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "1 versus 1 won"
+msgstr ""
+
+#: src/ui/match/players/clutches-panel.tsx
+msgctxt "Panel title"
+msgid "Clutches"
+msgstr ""
+
+#: src/ui/match/players/clutches-panel.tsx
+msgctxt "Panel label"
+msgid "Round"
+msgstr ""
+
+#: src/ui/match/players/clutches-panel.tsx
+msgctxt "Panel label"
+msgid "Opponents"
+msgstr ""
+
+#: src/ui/match/players/clutches-panel.tsx
+msgctxt "Panel label"
+msgid "Won"
+msgstr ""
+
+#: src/ui/match/players/clutches-panel.tsx
+msgctxt "Panel label"
+msgid "Survived"
+msgstr ""
+
+#: src/ui/match/players/clutches-panel.tsx
+msgctxt "Tooltip"
+msgid "Watch clutch"
+msgstr ""
+
+#: src/ui/match/players/kills-panel.tsx
+#: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/search/results/result-row.tsx
+msgid "Round {roundNumber}"
+msgstr ""
+
+#: src/ui/match/players/kills-panel.tsx
+#: src/ui/match/rounds/round/kill-feed.tsx
+msgctxt "Tooltip"
+msgid "Watch kill"
+msgstr ""
+
+#: src/ui/match/players/player-action-bar.tsx
+msgctxt "Tooltip"
+msgid "Banned player"
+msgstr ""
+
+#: src/ui/match/players/player-action-bar.tsx
+msgctxt "Button"
+msgid "See global stats"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel title"
+msgid "Weapons"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "Name"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "HS%"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "Damages"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "Shots"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "Hits"
+msgstr ""
+
+#: src/ui/match/players/weapons-panel.tsx
+msgctxt "Panel label"
+msgid "Accuracy"
+msgstr ""
+
+#: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Cash"
+msgstr ""
+
+#: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Cash spent"
+msgstr ""
+
+#: src/ui/match/rounds/overview/round-entry.tsx
+#: src/ui/match/rounds/round/round-top-bar.tsx
+msgctxt "Tooltip"
+msgid "Watch round"
+msgstr ""
+
+#: src/ui/match/rounds/round/clutches.tsx
+msgid "No clutches in this round"
+msgstr ""
+
+#: src/ui/match/rounds/round/clutches.tsx
+msgid "{clutcherName} won a 1v{opponentCount}"
+msgstr ""
+
+#: src/ui/match/rounds/round/clutches.tsx
+msgid "{clutcherName} lost a 1v{opponentCount}"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Gameplay"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Time alive"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Kills"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Headshot kills"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Trade kills"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Airborne kills"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Blinded kills"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Chicken kills"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Deaths"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Trade deaths"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Blinded deaths"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Grenades"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Flash"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "HE"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Smoke"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Decoy"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Molotov"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Damages"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Shots"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Damage dealt"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Opponents hurt"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Own damage"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Own team damage"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Economy"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Strategy"
+msgstr ""
+
+#: src/ui/match/rounds/round/players-information.tsx
+msgid "Players stats"
+msgstr ""
+
+#: src/ui/match/rounds/rounds-navigation-bar.tsx
+msgid "Overview"
+msgstr ""
+
+#: src/ui/match/video/close-game-after-recording-checkbox.tsx
+msgctxt "Checkbox label"
+msgid "Close the game when recording is done"
+msgstr ""
+
+#: src/ui/match/video/death-notices-duration-input.tsx
+msgid "Death notices duration (seconds)"
+msgstr ""
+
+#: src/ui/match/video/encoder-software-select.tsx
+msgctxt "Select label of video encoder"
+msgid "Encoder software"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/audio-codec-input.tsx
+msgctxt "Input label"
+msgid "Audio codec"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
+msgctxt "Tooltip"
+msgid "Impact the video quality, from 0 to 51 with 0 for the best quality resulting in a larger file"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
+msgctxt "Input label"
+msgid "Quality"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-audio-bitrate-select.tsx
+msgctxt "Input label"
+msgid "Audio bitrate"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-input-parameters-input.tsx
+msgctxt "Input label"
+msgid "Input parameters"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
+msgid "You must install HLAE first"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
+msgid "Installing FFmpeg…"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
+msgid "FFmpeg has been installed"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
+msgid "An error occurred while installing FFmpeg"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-output-parameters-input.tsx
+msgctxt "Input label"
+msgid "Output parameters"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-update-button.tsx
+msgid "Updating FFmpeg…"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-update-button.tsx
+msgid "FFmpeg has been updated"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/ffmpeg-update-button.tsx
+msgid "An error occurred while updating FFmpeg"
+msgstr ""
+
+#: src/ui/match/video/ffmpeg/video-codec-input.tsx
+msgctxt "Input label"
+msgid "Video codec"
+msgstr ""
+
+#: src/ui/match/video/generate-button.tsx
+msgctxt "Button"
+msgid "Generate"
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgid "Player's kill sequences"
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgctxt "Select label"
+msgid "Player"
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgctxt "Button"
+msgid "Generate player's kill sequences"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Generation in progress…"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Please keep the CS2 window focused; otherwise the camera focus may not change."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "In-game recording in progress…"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Generating video for sequence {sequenceNumber} / {sequenceCount}…"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Concatenating sequences…"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "The demo's path contains unsupported characters by CSGO."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Failed to start the game, make sure Steam is running and you are connected."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "HLAE is not installed."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "VirtualDub is not installed."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "FFmpeg is not installed."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "No sequences provided."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "One or more sequences are overlapping, at least 2 seconds are required between 2 sequences."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Steam is not running."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "FFmpeg returned an error."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "VirtualDub returned an error."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "WAV file not found."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Raw files not found."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "HLAE returned an error."
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Generation done"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgid "Output:"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgctxt "Button"
+msgid "Reveal raw files folder"
+msgstr ""
+
+#: src/ui/match/video/generating-dialog.tsx
+msgctxt "Button"
+msgid "Reveal output folder"
+msgstr ""
+
+#: src/ui/match/video/height-resolution-input.tsx
+msgctxt "Input label"
+msgid "Height"
+msgstr ""
+
+#: src/ui/match/video/height-resolution-input.tsx
+#: src/ui/settings/playback/game-height.tsx
+msgctxt "Input placeholder"
+msgid "Height"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-config-folder-path.tsx
+msgctxt "Checkbox label"
+msgid "Enable config folder"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-config-folder-path.tsx
+msgctxt "Input label"
+msgid "Config folder"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-install-button.tsx
+msgid "Installing HLAE…"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-install-button.tsx
+msgid "HLAE has been installed"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-install-button.tsx
+msgid "An error occurred while installing HLAE"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-parameters.tsx
+msgctxt "Input label"
+msgid "Parameters"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-update-button.tsx
+msgid "Updating HLAE…"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-update-button.tsx
+msgid "HLAE has been updated"
+msgstr ""
+
+#: src/ui/match/video/hlae/hlae-update-button.tsx
+msgid "An error occurred while updating HLAE"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb defused plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on defuser"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgid "Tick: {tick}"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-defused-item.tsx
+msgid "Bomb defused by {defuserName} on site {site}"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb exploded plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on planter"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
+msgid "Bomb exploded on site {site}"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the bomb planted plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Tooltip"
+msgid "Tick: {tick}"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/bomb-planted-item.tsx
+msgctxt "Tooltip"
+msgid "Bomb planted by {planterName} on site {site}"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill minus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill plus X seconds as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill minus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Set the tick of the kill plus X seconds as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on killer"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Context menu"
+msgid "Focus camera on victim"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/kill-item.tsx
+msgctxt "Tooltip"
+msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/match-timeline.tsx
+msgctxt "Timeline group label"
+msgid "Bomb"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/match-timeline.tsx
+msgctxt "Tooltip"
+msgid "Start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/match-timeline.tsx
+msgctxt "Tooltip"
+msgid "End tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round start tick as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round start tick as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round end tick as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/round-item.tsx
+msgctxt "Context menu"
+msgid "Set round end tick as end tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
+msgctxt "Dialog title"
+msgid "Enter the number of seconds"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set tick {tick} as start tick"
+msgstr ""
+
+#: src/ui/match/video/match-timeline/tick-context-menu.tsx
+msgctxt "Context menu"
+msgid "Set tick {tick} as end tick"
+msgstr ""
+
+#: src/ui/match/video/reset-settings-button.tsx
+msgctxt "Button"
+msgid "Reset settings"
+msgstr ""
+
+#: src/ui/match/video/sequences-summary.tsx
+msgid "{0, plural, one {# sequence} other {# sequences}}"
+msgstr ""
+
+#: src/ui/match/video/sequences/add-new-sequence-button.tsx
+msgctxt "Button"
+msgid "Add new sequence"
+msgstr ""
+
+#: src/ui/match/video/sequences/cfg-input.tsx
+msgctxt "Input label"
+msgid "CFG"
+msgstr ""
+
+#: src/ui/match/video/sequences/delete-sequences-button.tsx
+msgctxt "Button"
+msgid "Delete sequences"
+msgstr ""
+
+#: src/ui/match/video/sequences/end-tick-input.tsx
+msgctxt "Input label"
+msgid "End tick"
+msgstr ""
+
+#: src/ui/match/video/sequences/focus-camera-player-select.tsx
+msgctxt "Input label"
+msgid "Focus camera on player"
+msgstr ""
+
+#: src/ui/match/video/sequences/save-sequence-button.tsx
+msgid "End tick must be greater than start tick"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequence-death-notices.tsx
+msgid "Death notices"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequence-disk-space.tsx
+msgid "~{requiredDiskSpace}GB"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequence-duration.tsx
+msgctxt "Duration"
+msgid "{seconds} seconds"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-disk-space.tsx
+msgctxt "Disk usage in gigabyte"
+msgid "~{requiredDiskSpace}GB"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-duration.tsx
+msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
+msgstr ""
+
+#: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
+msgctxt "Context menu"
+msgid "Edit"
+msgstr ""
+
+#: src/ui/match/video/sequences/start-tick-input.tsx
+msgctxt "Input label"
+msgid "Start tick"
+msgstr ""
+
+#: src/ui/match/video/show-only-death-notices-checkbox.tsx
+msgctxt "Input label"
+msgid "Show only death notices"
+msgstr ""
+
+#: src/ui/match/video/software-browse-button.tsx
+msgctxt "Button"
+msgid "Browse"
+msgstr ""
+
+#: src/ui/match/video/software.tsx
+msgctxt "Software installation status"
+msgid "Not installed"
+msgstr ""
+
+#: src/ui/match/video/update-demo-location.tsx
+msgid "This demo checksum doesn't match the one associated with the match."
+msgstr ""
+
+#: src/ui/match/video/video-loader.tsx
+msgid "An error occurred. (Code {errorCode})"
+msgstr ""
+
+#: src/ui/match/video/video-loader.tsx
+msgid "The video generator is currently available only on Windows for Counter-Strike 2 demos."
+msgstr ""
+
+#: src/ui/match/video/video-loader.tsx
+msgid "Loading video generator…"
+msgstr ""
+
+#: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
+msgid "Installing VirtualDub…"
+msgstr ""
+
+#: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
+msgid "VirtualDub has been installed"
+msgstr ""
+
+#: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
+msgid "An error occurred while installing VirtualDub"
+msgstr ""
+
+#: src/ui/match/video/width-resolution-input.tsx
+msgctxt "Input label"
+msgid "Width"
+msgstr ""
+
+#: src/ui/match/video/width-resolution-input.tsx
+#: src/ui/settings/playback/game-width.tsx
+msgctxt "Input placeholder"
+msgid "Width"
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "It will analyze the demo and generate positions required for the 2D viewer."
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Inserting positions into the database…"
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Analyzing demo…"
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Positions"
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Positions require disk space, it's recommended to delete them from the database settings when you don't need them anymore."
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Generate"
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Positions haven't been generated yet."
+msgstr ""
+
+#: src/ui/match/viewer-2d/no-positions-found.tsx
+msgid "Generate positions"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
+msgctxt "Map radar level"
+msgid "Upper"
+msgstr ""
+
+#: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
+msgctxt "Map radar level"
+msgid "Lower"
+msgstr ""
+
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "An error occurred while loading round number {roundNumber}."
+msgstr ""
+
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "Round number {roundNumber} not found."
+msgstr ""
+
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "Loading round number {roundNumber}…"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Head {headPercentage}% of hits"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Chest {chestPercentage}% of hits"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Right arm {rightArmPercentage} % of hits"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Stomach {stomachPercentage}% of hits"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Left arm {leftArmPercentage}% of hits"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Right leg {rightLegPercentage}% of hits"
+msgstr ""
+
+#: src/ui/match/weapons/body.tsx
+msgctxt "Tooltip"
+msgid "Left leg {leftLegPercentage}% of hits"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Hits"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgctxt "Table header"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgctxt "Table header"
+msgid "Damages"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgctxt "Table header"
+msgid "Hits"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgctxt "Table header"
+msgid "Accuracy"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgctxt "Table header"
+msgid "HS%"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Head"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Chest"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Stomach"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Left arm"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Right arm"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Left leg"
+msgstr ""
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Right leg"
+msgstr ""
+
+#: src/ui/matches/table/match-count.tsx
+msgid "{matchCount, plural, one {# match} other {# matches}}"
+msgstr ""
+
+#: src/ui/matches/table/match-with-cheater-indicator.tsx
+msgid "{matchWithCheaterCount, plural, one {# match with a cheater} other {# matches with a cheater}}"
+msgstr ""
+
+#: src/ui/matches/table/matches-table.tsx
+msgid "Loading matches…"
+msgstr ""
+
+#: src/ui/matches/table/no-matches.tsx
+msgid "No match found with active filters."
+msgstr ""
+
+#: src/ui/matches/table/no-matches.tsx
+msgid "No match found yet, you have to analyze demos to generate matches."
+msgstr ""
+
+#: src/ui/matches/table/selected-match-count.tsx
+msgid "{0, plural, one {# match selected} other {# matches selected}}"
+msgstr ""
+
+#: src/ui/player/charts/average-damage-per-round-chart.tsx
+msgctxt "Chart title"
+msgid "Damage Per Round over time"
+msgstr ""
+
+#: src/ui/player/charts/average-damage-per-round-chart.tsx
+msgctxt "Chart axis label average damage per round"
+msgid "ADR"
+msgstr ""
+
+#: src/ui/player/charts/clutch-won-percentage-chart.tsx
+msgctxt "Chart title"
+msgid "Clutch won over time"
+msgstr ""
+
+#: src/ui/player/charts/clutch-won-percentage-chart.tsx
+msgctxt "Chart axis label"
+msgid "Won %"
+msgstr ""
+
+#: src/ui/player/charts/competitive-rank-repartition-chart.tsx
+msgctxt "Chart title"
+msgid "Players competitive rank repartition"
+msgstr ""
+
+#: src/ui/player/charts/headshot-percentage-chart.tsx
+msgctxt "Chart title"
+msgid "Headshot percentage over time"
+msgstr ""
+
+#: src/ui/player/charts/headshot-percentage-chart.tsx
+msgctxt "Chart axis label"
+msgid "HS%"
+msgstr ""
+
+#: src/ui/player/charts/kill-death-ratio-chart.tsx
+msgctxt "Chart title"
+msgid "Kill/death over time"
+msgstr ""
+
+#: src/ui/player/charts/kill-death-ratio-chart.tsx
+msgctxt "Chart axis label kill death ratio"
+msgid "K/D"
+msgstr ""
+
+#: src/ui/player/charts/match-count-chart.tsx
+msgctxt "Chart title"
+msgid "Number of matches played over time"
+msgstr ""
+
+#: src/ui/player/charts/match-count-chart.tsx
+msgctxt "Chart axis label match count"
+msgid "Match"
+msgstr ""
+
+#: src/ui/player/charts/premier-rank-repartition-chart.tsx
+msgctxt "Chart title"
+msgid "Players Premier rank repartition"
+msgstr ""
+
+#: src/ui/player/charts/use-player-chart-options.ts
+#: src/ui/player/charts/x-axis.tsx
+msgctxt "Select option time period"
+msgid "Day"
+msgstr ""
+
+#: src/ui/player/charts/use-player-chart-options.ts
+#: src/ui/player/charts/x-axis.tsx
+msgctxt "Select option time period"
+msgid "Month"
+msgstr ""
+
+#: src/ui/player/charts/use-player-chart-options.ts
+#: src/ui/player/charts/x-axis.tsx
+msgctxt "Select option time period"
+msgid "Year"
+msgstr ""
+
+#: src/ui/player/charts/use-player-chart-options.ts
+#: src/ui/player/charts/x-axis.tsx
+msgctxt "Select option time period"
+msgid "Match"
+msgstr ""
+
+#: src/ui/player/charts/x-axis.tsx
+msgctxt "Input label"
+msgid "X Axis"
+msgstr ""
+
+#: src/ui/player/load-player-error.tsx
+msgid "No data was found with active filters."
+msgstr ""
+
+#: src/ui/player/load-player-error.tsx
+msgid "This player is not in any analyzed demos."
+msgstr ""
+
+#: src/ui/player/overview/last-matches.tsx
+msgid "No matches."
+msgstr ""
+
+#: src/ui/player/overview/last-matches.tsx
+msgctxt "Panel title"
+msgid "Last matches"
+msgstr ""
+
+#: src/ui/player/overview/matchmaking-panel.tsx
+msgctxt "Panel title"
+msgid "Matchmaking"
+msgstr ""
+
+#: src/ui/player/overview/matchmaking-panel.tsx
+msgctxt "Panel label"
+msgid "Premier rank"
+msgstr ""
+
+#: src/ui/player/overview/matchmaking-panel.tsx
+msgctxt "Panel label"
+msgid "Competitive rank"
+msgstr ""
+
+#: src/ui/player/overview/matchmaking-panel.tsx
+#: src/ui/player/overview/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Wins"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel title"
+msgid "VAC"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel label"
+msgid "Bans"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel label"
+msgid "Game bans"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel label"
+msgid "Last ban date"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel label"
+msgid "Economy ban"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel label"
+msgid "Community banned"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgctxt "Panel label"
+msgid "Profile"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgid "Private"
+msgstr ""
+
+#: src/ui/player/overview/vac-panel.tsx
+msgid "Public"
+msgstr ""
+
+#: src/ui/player/overview/win-rate-panel.tsx
+msgctxt "Panel title"
+msgid "Win ratio"
+msgstr ""
+
+#: src/ui/player/overview/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Matches played"
+msgstr ""
+
+#: src/ui/player/overview/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Ties"
+msgstr ""
+
+#: src/ui/player/overview/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Defeats"
+msgstr ""
+
+#: src/ui/player/pinned-player.tsx
+msgid "No pinned player found."
+msgstr ""
+
+#: src/ui/player/pinned-player.tsx
+msgid "You can pin a player from scoreboards or the players list."
+msgstr ""
+
+#: src/ui/player/player-loader.tsx
+msgid "Loading player…"
+msgstr ""
+
+#: src/ui/player/player-tabs.tsx
+msgctxt "Tab link"
+msgid "Graphs"
+msgstr ""
+
+#: src/ui/player/player-tabs.tsx
+msgctxt "Tab link"
+msgid "Maps"
+msgstr ""
+
+#: src/ui/player/player-tabs.tsx
+msgctxt "Tab link"
+msgid "Rank"
+msgstr ""
+
+#: src/ui/player/player-tabs.tsx
+msgctxt "Tab link"
+msgid "Matches"
+msgstr ""
+
+#: src/ui/player/rank/player-competitive-rank-history.tsx
+msgctxt "Chart title"
+msgid "Competitive matchmaking rank history"
+msgstr ""
+
+#: src/ui/player/rank/player-competitive-rank-history.tsx
+#: src/ui/player/rank/player-premier-rank-history.tsx
+msgctxt "Chart axis label"
+msgid "Rank"
+msgstr ""
+
+#: src/ui/player/rank/player-premier-rank-history.tsx
+msgctxt "Chart title"
+msgid "Premier mode rank history"
+msgstr ""
+
+#: src/ui/player/rank/use-get-win-count-translation.ts
+msgid "Win count: {winCount}"
+msgstr ""
+
+#: src/ui/players/action-bar/ban-filter.tsx
+msgctxt "Select option Steam ban status"
+msgid "None"
+msgstr ""
+
+#: src/ui/players/action-bar/ban-filter.tsx
+msgctxt "Select option Steam ban status"
+msgid "VAC banned"
+msgstr ""
+
+#: src/ui/players/action-bar/ban-filter.tsx
+msgctxt "Select option Steam ban status"
+msgid "Game banned"
+msgstr ""
+
+#: src/ui/players/action-bar/ban-filter.tsx
+msgctxt "Select option Steam ban status"
+msgid "Community banned"
+msgstr ""
+
+#: src/ui/players/action-bar/ban-filter.tsx
+msgctxt "Ban filter title"
+msgid "Bans"
+msgstr ""
+
+#: src/ui/players/no-players.tsx
+msgid "No player found with current filters."
+msgstr ""
+
+#: src/ui/players/no-players.tsx
+msgid "No player found, you have to analyze demos to generate players."
+msgstr ""
+
+#: src/ui/players/players-table.tsx
+msgid "Loading players…"
+msgstr ""
+
+#: src/ui/players/table/bans-indicators.tsx
+msgid "{vacBannedPlayerCount, plural, one {# VAC ban} other {# VAC bans}}"
+msgstr ""
+
+#: src/ui/players/table/bans-indicators.tsx
+msgid "{gameBannedPlayerCount, plural, one {# game ban} other {# game bans}}"
+msgstr ""
+
+#: src/ui/players/table/bans-indicators.tsx
+msgid "{communityBannedPlayerCount, plural, one {# community ban} other {# community bans}}"
+msgstr ""
+
+#: src/ui/players/table/player-count.tsx
+msgid "{0, plural, one {# player} other {# players}}"
+msgstr ""
+
+#: src/ui/players/table/selected-player-count.tsx
+msgid "{0, plural, one {# player selected} other {# players selected}}"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Avatar"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header match count"
+msgid "Matches"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Number of matches played"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Headshot"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Headshot %"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Utility damage per round"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Average Damage per Round"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "Last match date"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Last match date"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header"
+msgid "Last ban date"
+msgstr ""
+
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Table header tooltip"
+msgid "Last ban date"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "5 kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "4 kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "1 versus 5"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "1 versus 4"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "1 versus 3"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Wallbang kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Collateral kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Knife kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Jump kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
+msgid "Ninja defuse"
+msgstr ""
+
+#: src/ui/search/filters/search-maps-input.tsx
+msgctxt "Input placeholder"
+msgid "Map's name"
+msgstr ""
+
+#: src/ui/search/filters/search-maps-input.tsx
+msgid "No maps found"
+msgstr ""
+
+#: src/ui/search/filters/search-players-input.tsx
+msgctxt "Input placeholder"
+msgid "Nickname or SteamID"
+msgstr ""
+
+#: src/ui/search/filters/search-players-input.tsx
+msgid "No players found"
+msgstr ""
+
+#: src/ui/search/results/collateral-kills-results.tsx
+msgid "Deaths {deathCount}"
+msgstr ""
+
+#: src/ui/search/results/ninja-defuse-results.tsx
+msgid "CT {ctAliveCount}"
+msgstr ""
+
+#: src/ui/search/results/ninja-defuse-results.tsx
+msgid "T {tAliveCount}"
+msgstr ""
+
+#: src/ui/search/search-results.tsx
+msgid "You have to analyze demos first to search for events."
+msgstr ""
+
+#: src/ui/search/search-results.tsx
+msgid "Click on the search button to reveal events."
+msgstr ""
+
+#: src/ui/search/search-results.tsx
+msgid "Searching…"
+msgstr ""
+
+#: src/ui/search/search-results.tsx
+msgid "No results found."
+msgstr ""
+
+#: src/ui/search/search.tsx
+msgctxt "Input label"
+msgid "Players"
+msgstr ""
+
+#: src/ui/search/search.tsx
+msgctxt "Input label"
+msgid "Maps"
+msgstr ""
+
+#: src/ui/search/search.tsx
+msgctxt "Input label"
+msgid "Period"
+msgstr ""
+
+#: src/ui/search/search.tsx
+msgctxt "Button"
+msgid "Search"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Automatically download updates."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgctxt "Settings title"
+msgid "Auto update"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Information"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Credits"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Special thanks to the following developers for their open-source work related to Counter-Strike that at some point helped create CS Demo Manager ❤️."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@LaihoE</0> for his reverse engineering work on CS2 demo parsing. His parser is available on <1>GitHub</1>."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@main--</0> and <1>@moritzuehling</1> for creating <2>DemoInfo</2>, one of the first CSGO demo parsers used for years in CSGO Demo Manager V2."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@markus-wa</0> for creating and maintaining <1>demoinfocs-golang</1>, the demo parser internally used by CS Demo Manager V3."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "<0>@saul</0>, a Source Engine/CS wizard who created a <1>CSGO</1> and <2>CS2</2> demo parser and share his CS related knowledge through various <3>open-source</3> <4>projects</4>. You can support him on <5>GitHub</5>."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Donate"
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
+msgstr ""
+
+#: src/ui/settings/about/about.tsx
+msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
+msgstr ""
+
+#: src/ui/settings/about/clear-logs-button.tsx
+msgid "Log file cleared"
+msgstr ""
+
+#: src/ui/settings/about/clear-logs-button.tsx
+msgid "Clear log file"
+msgstr ""
+
+#: src/ui/settings/about/reset-settings-button.tsx
+msgctxt "Dialog title"
+msgid "Reset settings"
+msgstr ""
+
+#: src/ui/settings/about/reset-settings-button.tsx
+msgid "It will reset settings excepted database information!"
+msgstr ""
+
+#: src/ui/settings/about/reset-settings-button.tsx
+msgid "Reset settings"
+msgstr ""
+
+#: src/ui/settings/analyze/toggle-analyze-positions.tsx
+msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
+msgstr ""
+
+#: src/ui/settings/analyze/toggle-analyze-positions.tsx
+msgid "Analyze player/grenade positions"
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "This account is already ignored."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "Steam account not found."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "Invalid Steam community URL."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "The Steam API returned a forbidden error."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "Too many requests sent to the Steam API."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "The Steam API returned an error."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgctxt "Dialog title"
+msgid "Ignore Steam account"
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgid "The Steam account will be ignored from VAC ban stats."
+msgstr ""
+
+#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+msgctxt "Input label"
+msgid "SteamID64 or Steam community profile URL"
+msgstr ""
+
+#: src/ui/settings/bans/ignored-steam-accounts.tsx
+msgctxt "Settings title"
+msgid "Ignored Steam accounts"
+msgstr ""
+
+#: src/ui/settings/bans/ignored-steam-accounts.tsx
+msgid "Add Steam account"
+msgstr ""
+
+#: src/ui/settings/bans/ignored-steam-accounts.tsx
+msgid "The following Steam accounts will be ignored from VAC ban stats."
+msgstr ""
+
+#: src/ui/settings/bans/ignored-steam-accounts.tsx
+msgid "No ignored Steam account yet."
+msgstr ""
+
+#: src/ui/settings/database/database-size.tsx
+msgid "Database size: <0>{size}</0>."
+msgstr ""
+
+#: src/ui/settings/database/disconnect-database-button.tsx
+msgctxt "Dialog title"
+msgid "Disconnect database"
+msgstr ""
+
+#: src/ui/settings/database/disconnect-database-button.tsx
+msgid "It will close the database connection and cancel all running queries!"
+msgstr ""
+
+#: src/ui/settings/database/disconnect-database-button.tsx
+msgid "Database disconnection failed with the following error:"
+msgstr ""
+
+#: src/ui/settings/database/disconnect-database-button.tsx
+msgctxt "Button"
+msgid "Disconnect"
+msgstr ""
+
+#: src/ui/settings/database/optimize-database-button.tsx
+msgid "Optimize database"
+msgstr ""
+
+#: src/ui/settings/database/optimize-database-button.tsx
+msgid "Delete positions"
+msgstr ""
+
+#: src/ui/settings/database/optimize-database-button.tsx
+msgid "It will delete all data required for the 2D viewer!"
+msgstr ""
+
+#: src/ui/settings/database/optimize-database-button.tsx
+msgid "Delete demos that are not on the filesystem anymore"
+msgstr ""
+
+#: src/ui/settings/database/optimize-database-button.tsx
+msgctxt "Button"
+msgid "Optimize database"
+msgstr ""
+
+#: src/ui/settings/database/reset-database-button.tsx
+msgctxt "Dialog title"
+msgid "Reset database"
+msgstr ""
+
+#: src/ui/settings/database/reset-database-button.tsx
+msgid "It will delete all data in the database!"
+msgstr ""
+
+#: src/ui/settings/database/reset-database-button.tsx
+msgctxt "Button"
+msgid "Reset database"
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
+msgid "Automatically download FACEIT demos in the background."
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
+#: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
+msgctxt "Settings title"
+msgid "Background download"
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
+msgid "Automatically download FACEIT demos at application startup."
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-faceit-demos.tsx
+#: src/ui/settings/downloads/auto-download-valve-demos.tsx
+msgctxt "Settings title"
+msgid "Startup download"
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
+msgid "Automatically download Valve matchmaking demos in the background."
+msgstr ""
+
+#: src/ui/settings/downloads/auto-download-valve-demos.tsx
+msgid "Automatically download Valve matchmaking demos at application startup."
+msgstr ""
+
+#: src/ui/settings/downloads/download-folder-path.tsx
+msgid "Download folder"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "Add FACEIT account"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgctxt "Input label"
+msgid "FACEIT nickname"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgctxt "Input placeholder"
+msgid "Nickname"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "No accounts"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "Set as current account"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgid "Accounts"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-accounts.tsx
+msgctxt "Button"
+msgid "Add account"
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "FACEIT restricted demos download through a <0>private API</0> that prevents us from downloading demos from CS:DM."
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "A request has been submitted to allow CS:DM. In the meantime, you have to download demos from your browser."
+msgstr ""
+
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "Player not found."
+msgstr ""
+
+#: src/ui/settings/downloads/use-add-faceit-account.tsx
+msgid "The FACEIT API returned a 401 code, please check you API key."
+msgstr ""
+
+#: src/ui/settings/folders/add-folder-button.tsx
+msgctxt "Button"
+msgid "Add a folder"
+msgstr ""
+
+#: src/ui/settings/folders/folder-row.tsx
+msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
+msgstr ""
+
+#: src/ui/settings/folders/include-sub-directories-switch.tsx
+msgid "Include subdirectories"
+msgstr ""
+
+#: src/ui/settings/folders/use-add-folder.tsx
+msgid "This folder is already in your settings"
+msgstr ""
+
+#: src/ui/settings/integrations/faceit-api-key.tsx
+#: src/ui/settings/integrations/steam-api-key.tsx
+msgid "API key applied"
+msgstr ""
+
+#: src/ui/settings/integrations/faceit-api-key.tsx
+#: src/ui/settings/integrations/steam-api-key.tsx
+msgid "Invalid API key"
+msgstr ""
+
+#: src/ui/settings/integrations/faceit-api-key.tsx
+#: src/ui/settings/integrations/steam-api-key.tsx
+msgid "Network error"
+msgstr ""
+
+#: src/ui/settings/integrations/faceit-api-key.tsx
+#: src/ui/settings/integrations/steam-api-key.tsx
+msgctxt "Input placeholder"
+msgid "API key"
+msgstr ""
+
+#: src/ui/settings/integrations/integrations-settings.tsx
+msgid "Steam API key"
+msgstr ""
+
+#: src/ui/settings/integrations/integrations-settings.tsx
+msgid "Custom Steam API key used to retrieve information from Steam"
+msgstr ""
+
+#: src/ui/settings/integrations/integrations-settings.tsx
+msgid "FACEIT API key"
+msgstr ""
+
+#: src/ui/settings/integrations/integrations-settings.tsx
+msgid "Custom FACEIT API key used to retrieve information from FACEIT"
+msgstr ""
+
+#: src/ui/settings/maps/add-map-button.tsx
+msgctxt "Button"
+msgid "Add a map"
+msgstr ""
+
+#: src/ui/settings/maps/add-map-dialog.tsx
+msgid "This map already exists."
+msgstr ""
+
+#: src/ui/settings/maps/delete-map-dialog.tsx
+msgid "Do you want to delete this map?"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/coordinate-x-input.tsx
+msgctxt "Input label"
+msgid "Coordinate X"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/coordinate-y-input.tsx
+msgctxt "Input label"
+msgid "Coordinate Y"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
+#: src/ui/settings/maps/map-dialog/radar-input.tsx
+msgid "Radar image size must be {fileWidth}x{fileHeight}."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
+#: src/ui/settings/maps/map-dialog/radar-input.tsx
+#: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
+msgid "Invalid PNG file."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
+msgctxt "Input label"
+msgid "Lower radar"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
+msgctxt "Dialog title"
+msgid "Map"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
+msgid "Documentation"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Name is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Coordinate X is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Coordinate Y is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/map-form-provider.tsx
+msgid "Scale is required."
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/radar-input.tsx
+msgctxt "Input label"
+msgid "Radar"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/scale-input.tsx
+msgctxt "Input label"
+msgid "Scale"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
+msgid "Thumbnail image pixels must be smaller than {maxFileWidth}x{maxFileHeight}"
+msgstr ""
+
+#: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
+msgctxt "Input label"
+msgid "Thumbnail"
+msgstr ""
+
+#: src/ui/settings/maps/map-entry.tsx
+msgctxt "Button"
+msgid "Edit"
+msgstr ""
+
+#: src/ui/settings/maps/maps-settings.tsx
+msgctxt "Select label"
+msgid "Game"
+msgstr ""
+
+#: src/ui/settings/maps/reset-default-maps-button.tsx
+msgctxt "Dialog title"
+msgid "Reset maps"
+msgstr ""
+
+#: src/ui/settings/maps/reset-default-maps-button.tsx
+msgid "It will reset default maps."
+msgstr ""
+
+#: src/ui/settings/maps/reset-default-maps-button.tsx
+msgctxt "Button"
+msgid "Reset default maps"
+msgstr ""
+
+#: src/ui/settings/playback/cs2-highlights-warning.tsx
+msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
+msgstr ""
+
+#: src/ui/settings/playback/custom-highlights.tsx
+msgid "Use a custom highlights algorithm to generate players highlights"
+msgstr ""
+
+#: src/ui/settings/playback/custom-highlights.tsx
+msgctxt "Settings title"
+msgid "Custom highlights"
+msgstr ""
+
+#: src/ui/settings/playback/custom-lowlights.tsx
+msgid "Use a custom lowlights algorithm to generate players lowlights"
+msgstr ""
+
+#: src/ui/settings/playback/custom-lowlights.tsx
+msgctxt "Settings title"
+msgid "Lowlights"
+msgstr ""
+
+#: src/ui/settings/playback/game-fullscreen.tsx
+msgid "Start the game in fullscreen mode"
+msgstr ""
+
+#: src/ui/settings/playback/game-fullscreen.tsx
+msgctxt "Settings title"
+msgid "Fullscreen"
+msgstr ""
+
+#: src/ui/settings/playback/game-height.tsx
+msgid "Set the game height resolution"
+msgstr ""
+
+#: src/ui/settings/playback/game-height.tsx
+msgctxt "Settings title"
+msgid "Height"
+msgstr ""
+
+#: src/ui/settings/playback/game-width.tsx
+msgid "Set the game width resolution"
+msgstr ""
+
+#: src/ui/settings/playback/game-width.tsx
+msgctxt "Settings title"
+msgid "Width"
+msgstr ""
+
+#: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
+msgctxt "Settings title"
+msgid "After kill delay (highlights)"
+msgstr ""
+
+#: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
+msgid "How many seconds to wait before skipping to the next kill when watching highlights"
+msgstr ""
+
+#: src/ui/settings/playback/highlights-watch-before-kill-delay.tsx
+msgctxt "Settings title"
+msgid "Before kill delay (highlights)"
+msgstr ""
+
+#: src/ui/settings/playback/highlights-watch-before-kill-delay.tsx
+msgid "How many seconds to start before a kill when watching highlights"
+msgstr ""
+
+#: src/ui/settings/playback/launch-parameters.tsx
+msgctxt "Input placeholder"
+msgid "Launch parameters"
+msgstr ""
+
+#: src/ui/settings/playback/launch-parameters.tsx
+msgid "Additional launch parameters added to the game when it starts"
+msgstr ""
+
+#: src/ui/settings/playback/launch-parameters.tsx
+msgctxt "Settings title"
+msgid "Launch parameters"
+msgstr ""
+
+#: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
+msgctxt "Settings title"
+msgid "After kill delay (lowlights)"
+msgstr ""
+
+#: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
+msgid "How many seconds to wait before skipping to the next kill when watching lowlights"
+msgstr ""
+
+#: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
+msgctxt "Settings title"
+msgid "Before kill delay (lowlights)"
+msgstr ""
+
+#: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
+msgid "How many seconds to start before a kill when watching lowlights"
+msgstr ""
+
+#: src/ui/settings/playback/watch-before-kill-delay.tsx
+msgctxt "Input placeholder"
+msgid "Delay (seconds)"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "UI"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Folders"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Maps"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Download"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Playback"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Analyze"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Video"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Ban"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Integrations"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "Database"
+msgstr ""
+
+#: src/ui/settings/settings-tabs.tsx
+msgid "About"
+msgstr ""
+
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+msgid "The name is already taken"
+msgstr ""
+
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+msgid "The name is too long"
+msgstr ""
+
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+msgid "The name is too short"
+msgstr ""
+
+#: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
+msgid "Invalid color"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
+msgctxt "Select option initial page"
+msgid "Matches"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
+msgctxt "Select option initial page"
+msgid "Demos"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
+msgctxt "Select option initial page"
+msgid "Players"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
+msgctxt "Select option initial page"
+msgid "Download"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
+msgid "Initial page displayed on app startup"
+msgstr ""
+
+#: src/ui/settings/ui/initial-page-select.tsx
+msgctxt "Settings title"
+msgid "Initial page"
+msgstr ""
+
+#: src/ui/settings/ui/language-select.tsx
+msgid "Application language"
+msgstr ""
+
+#: src/ui/settings/ui/language-select.tsx
+msgctxt "Settings title"
+msgid "Language"
+msgstr ""
+
+#. Reset tables (columns order, visibility…)
+#: src/ui/settings/ui/reset-tables-state.tsx
+msgctxt "Button"
+msgid "Reset tables"
+msgstr ""
+
+#: src/ui/settings/ui/system-startup-behavior.tsx
+msgid "Minimized"
+msgstr ""
+
+#: src/ui/settings/ui/system-startup-behavior.tsx
+msgid "No"
+msgstr ""
+
+#: src/ui/settings/ui/system-startup-behavior.tsx
+msgid "Yes"
+msgstr ""
+
+#: src/ui/settings/ui/system-startup-behavior.tsx
+msgid "Open the application automatically after you log in to your computer"
+msgstr ""
+
+#: src/ui/settings/ui/system-startup-behavior.tsx
+msgctxt "Settings title"
+msgid "System startup behavior"
+msgstr ""
+
+#: src/ui/settings/ui/theme-select.tsx
+msgctxt "Select option theme"
+msgid "Light"
+msgstr ""
+
+#: src/ui/settings/ui/theme-select.tsx
+msgctxt "Select option theme"
+msgid "Dark"
+msgstr ""
+
+#: src/ui/settings/ui/theme-select.tsx
+msgid "Application UI theme"
+msgstr ""
+
+#: src/ui/settings/ui/theme-select.tsx
+msgctxt "Settings title"
+msgid "Theme"
+msgstr ""
+
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "File not found"
+msgstr ""
+
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+msgid "Invalid FFmpeg executable"
+msgstr ""
+
+#: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Enable custom location"
+msgstr ""
+
+#: src/ui/settings/video/hlae/hlae-config-folder-path.tsx
+msgid "Enable config folder"
+msgstr ""
+
+#: src/ui/settings/video/hlae/hlae-location.tsx
+msgid "Invalid HLAE executable"
+msgstr ""
+
+#: src/ui/title-bar/history/history-back-button.tsx
+msgctxt "Tooltip"
+msgid "Back in history"
+msgstr ""
+
+#: src/ui/title-bar/history/history-forward-button.tsx
+msgctxt "Tooltip"
+msgid "Forward in history"
+msgstr ""
+
+#: src/ui/title-bar/update-available-button.tsx
+msgid "Update ready!"
+msgstr ""
+

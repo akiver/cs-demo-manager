@@ -1,0 +1,23 @@
+{
+  "configurations": [
+    {
+      "name": "Linux",
+      "includePath": ["${workspaceFolder}/**"],
+      "compilerArgs": ["-Wall", "-Wno-infinite-recursion", "-shared", "-fPIC"],
+      "defines": [
+        "POSIX=1",
+        "NO_MALLOC_OVERRIDE=1",
+        "COMPILER_GCC=1",
+        "PLATFORM_POSIX=1",
+        "DX64BITS=1",
+        "PLATFORM_64BITS = 1",
+        "_LINUX=1"
+      ],
+      "compilerPath": "/usr/bin/g++",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "linux-gcc-x64"
+    }
+  ],
+  "version": 4
+}

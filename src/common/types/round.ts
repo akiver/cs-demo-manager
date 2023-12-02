@@ -1,0 +1,32 @@
+import type { EconomyType, RoundEndReason, TeamNumber } from 'csdm/common/types/counter-strike';
+import type { ColumnID } from 'csdm/common/types/column-id';
+
+export type Round = {
+  id: ColumnID;
+  matchChecksum: string;
+  number: number;
+  startTick: number;
+  startFrame: number;
+  freezetimeEndTick: number;
+  freezetimeEndFrame: number;
+  endTick: number;
+  endFrame: number;
+  endOfficiallyTick: number;
+  endOfficiallyFrame: number;
+  teamAScore: number;
+  teamBScore: number;
+  teamASide: TeamNumber;
+  teamBSide: TeamNumber;
+  teamAStartMoney: number;
+  teamBStartMoney: number;
+  teamAMoneySpent: number;
+  teamBMoneySpent: number;
+  teamAEquipmentValue: number;
+  teamBEquipmentValue: number;
+  teamAEconomyType: EconomyType;
+  teamBEconomyType: EconomyType;
+  duration: number;
+  endReason: RoundEndReason;
+  winnerTeamName: string;
+  winnerSide: TeamNumber;
+};

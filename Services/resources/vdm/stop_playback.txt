@@ -1,6 +1,0 @@
-﻿"{0}"
-	{{
-		factory "StopPlayback"
-		name "stop"
-		starttick "{1}"
-	}}

@@ -1,0 +1,166 @@
+import React, { useEffect, useState } from 'react';
+import { Trans } from '@lingui/macro';
+import { SettingsView } from 'csdm/ui/settings/settings-view';
+import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
+import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
+import type { Migration } from 'csdm/node/database/migrations/fetch-migrations';
+import { CopyButton } from 'csdm/ui/components/buttons/copy-button';
+import { ExternalLink } from 'csdm/ui/components/external-link';
+import { RevealLogFileButton } from 'csdm/ui/components/buttons/reveal-log-file-button';
+import { ClearLogsButton } from './clear-logs-button';
+import { ResetSettingsButton } from './reset-settings-button';
+import { SettingsEntry } from '../settings-entry';
+import { Switch } from 'csdm/ui/components/inputs/switch';
+import { useSettings } from '../use-settings';
+import { useUpdateSettings } from '../use-update-settings';
+
+export function About() {
+  const client = useWebSocketClient();
+  const [migrations, setMigrations] = useState<Migration[]>([]);
+  const info = window.csdm.getAppInformation();
+  const { autoDownloadUpdates } = useSettings();
+  const updateSettings = useUpdateSettings();
+
+  useEffect(() => {
+    (async () => {
+      const result = await client.send({
+        name: RendererClientMessageName.FetchLastMigrations,
+      });
+
+      setMigrations(result);
+    })();
+  }, [client]);
+
+  const data: string[] = [
+    `Version: ${APP_VERSION}`,
+    `OS: ${info.platform} ${info.arch} ${info.osVersion}`,
+    `Electron: ${info.electronVersion}`,
+    `Chrome: ${info.chromeVersion}`,
+    'Last database migrations:',
+    ...migrations.map((migration) => `v${migration.version} - ${migration.date}`),
+  ];
+
+  return (
+    <SettingsView>
+      <div className="flex flex-col gap-y-20">
+        <h2 className="text-title">CS Demo Manager</h2>
+
+        <section>
+          <SettingsEntry
+            interactiveComponent={
+              <Switch
+                isChecked={autoDownloadUpdates}
+                onChange={(event) => {
+                  const checked = event.target.checked;
+                  window.csdm.toggleAutoDownloadUpdates(checked);
+                  updateSettings({
+                    autoDownloadUpdates: checked,
+                  });
+                }}
+              />
+            }
+            description={<Trans>Automatically download updates.</Trans>}
+            title={<Trans context="Settings title">Auto update</Trans>}
+          />
+        </section>
+
+        <section className="flex flex-col">
+          <h2 className="text-subtitle">
+            <Trans>Information</Trans>
+          </h2>
+          {data.map((line) => (
+            <p key={line} className="selectable">
+              {line}
+            </p>
+          ))}
+          <div className="flex items-center mt-4 gap-x-8">
+            <CopyButton data={data.join('\n')} />
+            <RevealLogFileButton />
+            <ClearLogsButton />
+            <ResetSettingsButton />
+          </div>
+        </section>
+
+        <section>
+          <h3 className="text-subtitle">
+            <Trans>Credits</Trans>
+          </h3>
+          <p>
+            <Trans>
+              Special thanks to the following developers for their open-source work related to Counter-Strike that at
+              some point helped create CS Demo Manager ❤️.
+            </Trans>
+          </p>
+          <ul className="mt-4 selectable">
+            <li>
+              <Trans>
+                <ExternalLink href="https://github.com/dtugend">@dtugend</ExternalLink>, the main developer of{' '}
+                <ExternalLink href="https://github.com/advancedfx/advancedfx">HLAE</ExternalLink> which CS Demo Manager
+                uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can
+                support the HLAE team{' '}
+                <ExternalLink href="https://www.advancedfx.org/credits/#donors">here</ExternalLink>.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
+                <ExternalLink href="https://github.com/LaihoE">@LaihoE</ExternalLink> for his reverse engineering work
+                on CS2 demo parsing. His parser is available on{' '}
+                <ExternalLink href="https://github.com/LaihoE/demoparser">GitHub</ExternalLink>.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
+                <ExternalLink href="https://github.com/main--">@main--</ExternalLink> and{' '}
+                <ExternalLink href="https://github.com/moritzuehling">@moritzuehling</ExternalLink> for creating{' '}
+                <ExternalLink href="https://github.com/StatsHelix/demoinfo">DemoInfo</ExternalLink>, one of the first
+                CSGO demo parsers used for years in CSGO Demo Manager V2.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
+                <ExternalLink href="https://github.com/markus-wa">@markus-wa</ExternalLink> for creating and maintaining{' '}
+                <ExternalLink href="https://github.com/markus-wa/demoinfocs-golang">demoinfocs-golang</ExternalLink>,
+                the demo parser internally used by CS Demo Manager V3.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
+                <ExternalLink href="https://github.com/saul">@saul</ExternalLink>, a Source Engine/CS wizard who created
+                a <ExternalLink href="https://github.com/saul/demofile">CSGO</ExternalLink> and{' '}
+                <ExternalLink href="https://github.com/saul/demofile-net">CS2</ExternalLink> demo parser and share his
+                CS related knowledge through various{' '}
+                <ExternalLink href="https://github.com/saul/cvar-unhide-s2">open-source</ExternalLink>{' '}
+                <ExternalLink href="https://github.com/saul/node-csgo-voice">projects</ExternalLink>. You can support
+                him on <ExternalLink href="https://github.com/sponsors/saul">GitHub</ExternalLink>.
+              </Trans>
+            </li>
+          </ul>
+        </section>
+
+        <section>
+          <h3 className="text-subtitle">
+            <Trans>Donate</Trans>
+          </h3>
+          <p>
+            <Trans>
+              CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since
+              then.
+            </Trans>
+          </p>
+          <p>
+            <Trans>
+              It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy
+              using.
+            </Trans>
+          </p>
+          <p>
+            <Trans>
+              Your <ExternalLink href="https://cs-demo-manager.com/download">donation</ExternalLink> is greatly
+              appreciated and motivates me to continue working on CS Demo Manager. Thank you!
+            </Trans>
+          </p>
+        </section>
+      </div>
+    </SettingsView>
+  );
+}

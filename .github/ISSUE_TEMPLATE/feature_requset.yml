@@ -1,0 +1,38 @@
+name: '🚀 Enhancement or feature request'
+description: Suggest an idea
+labels: ['feature request']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Before creating a feature request make sure that this hasn't been [requested before](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+label%3Afeateure-request).
+
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: |
+        What problem is this solving
+      description: |
+        A clear and concise description of what the problem is.
+      placeholder: |
+        When I [...] I want to [...] so that I [...]
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: |
+        A clear and concise description of what you would like to happen to solve the problem.
+        It can be technical, UI/UX related, or anything else.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternative
+    attributes:
+      label: |
+        Describe alternatives you've considered
+      description: |
+        A clear and concise description of any alternative solutions you've considered.

@@ -1,0 +1,32 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch CLI",
+      "osx": {
+        "runtimeExecutable": "${workspaceFolder}/scripts/cli_darwin.sh"
+      },
+      "windows": {
+        "runtimeExecutable": "${workspaceFolder}/scripts/cli.bat"
+      },
+      "linux": {
+        "runtimeExecutable": "${workspaceFolder}/scripts/cli.sh"
+      },
+      "outFiles": ["${workspaceFolder}/out/cli.js"],
+      "args": ["analyze"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Current Test File",
+      "autoAttachChildProcesses": true,
+      "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
+      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "args": ["run", "${relativeFile}"],
+      "smartStep": true,
+      "console": "integratedTerminal"
+    }
+  ]
+}

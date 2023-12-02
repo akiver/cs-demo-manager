@@ -1,0 +1,90 @@
+name: Validate
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: TS compile
+        run: npm run compile
+
+  lint-and-format:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm clean-install
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Code format
+        run: npm run format -- --check
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: '.node-version'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm clean-install --ignore-scripts
+
+      - name: Test
+        run: npm run test
+
+      - name: Check if all translations have been extracted
+        id: git-diff
+        run: |
+          npm run i18n:extract
+          echo "MODIFIED=$(if [ -n "$(git diff --ignore-blank-lines src/ui/translations src/electron-main/translations)" ]; then echo "true"; else echo "false"; fi)" >> "$GITHUB_OUTPUT"
+
+      - name: Fail if all translations have not been extracted
+        if: steps.git-diff.outputs.MODIFIED == 'true'
+        run: |
+          echo "::error title=Translations not up-to-date::Some translations are not extracted. Please run 'npm run i18n:extract' and commit the changes."
+          exit 1
+
+      - name: Find dead code
+        run: npm run deadcode

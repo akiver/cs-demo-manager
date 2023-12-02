@@ -1,0 +1,1 @@
+[Documentation](https://cs-demo-manager.com/docs/developer/cs2-server-plugin)
