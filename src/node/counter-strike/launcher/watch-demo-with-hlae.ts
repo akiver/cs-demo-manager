@@ -11,6 +11,7 @@ import { getCounterStrikeExecutablePath } from '../get-counter-strike-executable
 import { installCs2ServerPlugin } from './cs2-server-plugin';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { sleep } from 'csdm/common/sleep';
+import { defineCfgFolderLocation } from './define-cfg-folder-location';
 
 export type HlaeOptions = {
   demoPath: string;
@@ -117,6 +118,7 @@ export async function watchDemoWithHlae({
       // Wait a few seconds before installing the plugin as its files may still be locked by CS2
       await sleep(2000);
     }
+    defineCfgFolderLocation();
     await installCs2ServerPlugin();
   } else {
     hlaeParameters.push(

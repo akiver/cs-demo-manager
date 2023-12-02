@@ -15,6 +15,7 @@ import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-
 import { isMac } from 'csdm/node/os/is-mac';
 import { assertSteamIsRunning } from './assert-steam-is-running';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
+import { defineCfgFolderLocation } from './define-cfg-folder-location';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -131,6 +132,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
   }
 
   if (game !== Game.CSGO) {
+    defineCfgFolderLocation();
     await installCs2ServerPlugin();
   }
 
