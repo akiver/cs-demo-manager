@@ -24,6 +24,10 @@ export class PlayersSheet extends MultipleMatchExportSheet<PlayerRow> {
         cellFormatter: (row) => row.name,
       },
       {
+        name: 'team_name',
+        cellFormatter: (row) => row.teamName,
+      },
+      {
         name: 'kill_count',
 
         cellFormatter: (row) => row.killCount,

@@ -6,6 +6,7 @@ import { fetchLastPlayersLastData } from '../player/fetch-players-last-data';
 
 type PlayerQueryResult = {
   steamId: string;
+  teamName: string;
   matchCount: number;
   killCount: number;
   assistCount: number;
@@ -52,6 +53,7 @@ export async function fetchPlayersRows(checksums: string[]) {
   const players = await db
     .selectFrom('players')
     .select('steam_id as steamId')
+    .select('team_name as teamName')
     .select(count<number>('match_checksum').as('matchCount'))
     .select(sum<number>('players.kill_count').as('killCount'))
     .select(sum<number>('players.death_count').as('deathCount'))
@@ -81,7 +83,7 @@ export async function fetchPlayersRows(checksums: string[]) {
     )
     .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
     .where('matches.checksum', 'in', checksums)
-    .groupBy('steam_id')
+    .groupBy(['steam_id', 'team_name'])
     .execute();
 
   const steamIds = players.map((player) => player.steamId);
