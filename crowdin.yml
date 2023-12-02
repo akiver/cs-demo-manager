@@ -1,0 +1,23 @@
+project_id: '631068'
+api_token_env: CROWDIN_PERSONAL_TOKEN
+project_identifier: cs-demo-manager
+preserve_hierarchy: true
+
+files:
+  - source: /src/ui/translations/en/*.po
+    translation: /src/ui/translations/%two_letters_code%/%original_file_name%
+    languages_mapping:
+      two_letters_code:
+        es-ES: es
+        pt-BR: pt-BR
+        zh-CN: zh-CN
+        zh-TW: zh-TW
+
+  - source: /src/electron-main/translations/en/*.json
+    translation: /src/electron-main/translations/%two_letters_code%/%original_file_name%
+    languages_mapping:
+      two_letters_code:
+        es-ES: es
+        pt-BR: pt-BR
+        zh-CN: zh-CN
+        zh-TW: zh-TW

@@ -1,0 +1,183 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`Get demo header > should parse Source 1 demos 1`] = `
+{
+  "clientName": "GOTV Demo",
+  "filestamp": "HL2DEMO",
+  "mapName": "de_mirage",
+  "networkProtocol": 3448003,
+  "playbackFrames": 2646802437,
+  "playbackTicks": 506479907,
+  "playbackTime": -7.335084749131074e-35,
+  "serverName": "Counter-Strike: Global Offensive",
+  "signonLength": 167362,
+}
+`;
+
+exports[`Get demo header > should parse Source 1 demos 2`] = `
+{
+  "clientName": "GOTV Demo",
+  "filestamp": "HL2DEMO",
+  "mapName": "de_dust2",
+  "networkProtocol": 13826,
+  "playbackFrames": 3257991171,
+  "playbackTicks": 177259333,
+  "playbackTime": 90.37890625,
+  "serverName": "Valve CS:GO Spain Server (srcds1150-mad1.195.16)",
+  "signonLength": 1174405509,
+}
+`;
+
+exports[`Get demo header > should parse Source 1 demos 3`] = `
+{
+  "clientName": "GOTV Demo",
+  "filestamp": "HL2DEMO",
+  "mapName": "de_anubis",
+  "networkProtocol": 13839,
+  "playbackFrames": 18297344,
+  "playbackTicks": 36648005,
+  "playbackTime": 5.460462782168529e-32,
+  "serverName": "Valve CS:GO EU North Server (srcds3053-sto1.183.37)",
+  "signonLength": 2730651136,
+}
+`;
+
+exports[`Get demo header > should parse Source 1 demos 4`] = `
+{
+  "clientName": "GOTV Demo",
+  "filestamp": "HL2DEMO",
+  "mapName": "de_cache",
+  "networkProtocol": 13571,
+  "playbackFrames": 0,
+  "playbackTicks": 0,
+  "playbackTime": 0,
+  "serverName": "Counter-Strike: Global Offensive",
+  "signonLength": 0,
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 1`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "DJ =DDD!",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": "csgo",
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "=[A:1:1887247373:22970]",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 2`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "SourceTV Demo",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": undefined,
+  "mapName": "de_dust2",
+  "networkProtocol": 13860,
+  "serverName": "Valve Counter-Strike 2 poland Server (srcds1013-waw1.189.57)",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 3`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "standing on the gravitron",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": "csgo",
+  "mapName": "de_dust2",
+  "networkProtocol": 13860,
+  "serverName": "=[A:1:548154372:22974]",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 4`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "DJ =DDD!",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": "csgo",
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "=[A:1:2359911430:22971]",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 5`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "Black_Yuzia",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": "csgo",
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "loopback:1",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 6`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "SourceTV Demo",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": undefined,
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "Valve Counter-Strike 2 eu_north Server (srcds8144-sto1.188.37)",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 7`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "SourceTV Demo",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": undefined,
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "Valve Counter-Strike 2 poland Server (srcds1014-waw1.189.218)",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 8`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "SourceTV Demo",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": undefined,
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "Valve Counter-Strike 2 eu_west Server (srcds113-fra2.271.20)",
+}
+`;
+
+exports[`Get demo header > should parse Source 2 demos 9`] = `
+{
+  "buildNumber": 9640,
+  "clientName": "SourceTV Demo",
+  "demoVersionGuid": "8e9d71ab-04a1-4c01-bb61-acfede27c046",
+  "demoVersionName": "valve_demo_2",
+  "filestamp": "PBDEMS2",
+  "game": undefined,
+  "mapName": "de_dust2",
+  "networkProtocol": 13858,
+  "serverName": "Valve Counter-Strike 2 poland Server (srcds1011-waw1.189.175)",
+}
+`;

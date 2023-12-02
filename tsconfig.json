@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "module": "ESNext",
+    "jsx": "react",
+    "target": "ESNext",
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noErrorTruncation": true,
+    "baseUrl": ".",
+    "strict": true,
+    "paths": {
+      "csdm/*": ["./src/*"]
+    }
+  },
+  "include": ["src/**/*", "types"]
+}

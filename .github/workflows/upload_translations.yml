@@ -1,0 +1,30 @@
+name: Upload translations to Crowdin
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/ui/translations/**/*.po'
+      - 'src/electron-main/translations/**/*.json'
+  workflow_dispatch:
+
+jobs:
+  upload-translations-to-crowdin:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload translations to Crowdin
+        uses: crowdin/github-action@v1
+        with:
+          upload_sources: true
+          upload_translations: true
+          download_translations: false
+          create_pull_request: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.CROWDIN_GH_TOKEN }}
+          CROWDIN_PROJECT_ID: '631068'
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}

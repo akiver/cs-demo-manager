@@ -1,0 +1,102 @@
+name: '🐛 Bug report'
+description: Report a reproducible bug or regression
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This form is only for submitting bug reports.
+        If you have a usage question or are unsure if it's a bug, please post a question in the 
+        [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions).
+        If it's a feature request please use the [feature request form](https://github.com/akiver/cs-demo-manager/issues/new?template=feature_requset.yml).
+
+        Before submitting a new bug/issue, please check the links below to see if there is a solution or question posted there already:
+         - If it's related to CS2 please check if it's a known [CS2 limitation](http://cs-demo-manager.com/docs/cs2)
+         - The [documentation](https://cs-demo-manager.com/docs), especially the [FAQ](https://cs-demo-manager.com/docs/faq)
+         - [Open issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
+         - [Closed issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)
+         - [Discussions tab](https://github.com/akiver/cs-demo-manager/discussions)
+
+        If an issue already exists do not create a new one, and instead 👍 upvote the existing one.
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: Provide a clear and concise description of the issue you are running into.
+    validations:
+      required: true
+
+  - type: textarea
+    id: demo-links
+    attributes:
+      label: Demo links
+      description: |
+        If your bug has something to do with demo analysis, please provide a link to download the demo(s).
+      placeholder: |
+        e.g. Dropbox, Google Drive, Mega, Azure etc.
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: |
+        A step-by-step description of how to reproduce the issue.
+        Screenshots or videos can be drag and dropped inside this editor ↓
+        For more information on the supported file image/file types and the file size limits, please refer to the
+        following link: https://docs.github.com/en/github/writing-on-github/working-with-advanced-formatting/attaching-files
+      placeholder: |
+        1. Start the application
+        2. Go to ...
+        3. Third step
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Provide a clear and concise description of what you expected to happen.
+      placeholder: |
+        I would expected ___ but i am seeing ___
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: How often does this bug happen?
+      description: |
+        Following the repro steps above, how easily are you able to reproduce this bug?
+      options:
+        - Every time
+        - Often
+        - Sometimes
+        - Only once
+
+  - type: textarea
+    id: log
+    attributes:
+      label: Log file
+      description: |
+        Attaching the application log file can help us debug the issue.
+      placeholder: |
+        The log file can be revealed from the application by going to Settings -> About.
+        The default location is: ~/.csdm/logs/csdm.log
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment information
+      description: |
+        Please open the application, go to the Settings and click on the "Copy" button from the "About" tab and paste the results.
+      placeholder: |
+        - Version: xxx
+        - OS: xxx
+        - Electron: xxx
+        - Chrome: xxx
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional
+    attributes:
+      label: Additional context
+      description: Add extra information about the issue here.

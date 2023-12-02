@@ -1,0 +1,41 @@
+// Electron IPC channels used to communicate between the main and renderer processes.
+// As node integration in the renderer process is disabled, listeners or callers methods used in the renderer process
+// to interact with the main process must be injected to the window object through the preload script (see preload.ts).
+export const IPCChannel = {
+  GetStartupArguments: 'get-startup-arguments',
+  ClearStartupArguments: 'clear-startup-arguments',
+  GetSystemStartupBehavior: 'get-system-startup-behavior',
+  UpdateSystemStartupBehavior: 'update-system-startup-behavior',
+  LocaleChanged: 'locale-changed',
+  OpenDemFile: 'open-dem-file',
+  OpenSettings: 'open-settings',
+  ToggleSettingsVisibility: 'toggle-settings-visibility',
+  ShowAbout: 'toggle-about',
+  ShowWindow: 'show-window',
+  ReloadWindow: 'reload-window',
+  RestartApp: 'restart-app',
+  BrowseToFolder: 'browse-to-folder',
+  BrowseToFile: 'browse-to-file',
+  ShowTitleBarMenu: 'show-title-bar-menu',
+  MinimizeWindow: 'minimize-window',
+  MaximizeWindow: 'maximize-window',
+  UnMazimizeWindow: 'un_maximize-window',
+  CloseWindow: 'close-window',
+  WindowClose: 'window-close',
+  IsWindowMaximized: 'is-window-maximized',
+  WindowUnMaximized: 'window-un-maximized',
+  WindowMaximized: 'window-maximized',
+  ShowSaveDialog: 'show-save-dialog',
+  ShowOpenDialog: 'show-open-dialog',
+  CanGoBack: 'can-go-back',
+  CanGoForward: 'can-go-forward',
+  NavigateToPlayers: 'navigate-to-players',
+  NavigateToPendingDownloads: 'navigate-to-pending-downloads',
+  NavigateToBans: 'navigate-to-bans',
+  HasUpdateReadyToInstall: 'has-update-ready-to-install',
+  UpdateDownloaded: 'update-downloaded',
+  InstallUpdate: 'install-update',
+  ToggleAutoUpdate: 'toggle-auto-update',
+} as const;
+
+export type IPCChannel = (typeof IPCChannel)[keyof typeof IPCChannel];

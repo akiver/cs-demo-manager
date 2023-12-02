@@ -1,0 +1,14 @@
+import { useRef } from 'react';
+
+export function useBombExplosionImage() {
+  const imageRef = useRef<HTMLImageElement | null>(null);
+
+  if (imageRef.current === null) {
+    imageRef.current = new Image();
+    // Base64 of the icon "explosion-icon.svg"
+    imageRef.current.src =
+      'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbDpzcGFjZT0icHJlc2VydmUiIHZpZXdCb3g9IjAgMCAzMC4wOTMgMjguOTQzIj4KICA8cGF0aAogICAgZmlsbC1ydWxlPSJldmVub2RkIgogICAgZmlsbD0iI2Q3MzczZiIKICAgIGQ9Im0xMS45NzYgOS45MTcgMS4xMTcgMy44MDktMy40MzMuMzAyIDIuODM4IDIuMzE0LTEuNDE5IDIuNjg4IDIuNjg4LTEuMzQ0LjMgMi45ODggMS45MzktMi41NDEgMi4zODkgMS45NDItLjY3LTIuNjExIDMuMDYxLS45NzEtMi42MTItMS40MTkgMi4wOS0zLjA2NC0zLjIxLjg5Ni0uMjk4LTMuNTgzLTEuODY4IDMuMjg2LTIuOTEyLTIuNjkyem02LjI4MS04LjU1NC42NzQgOC4wOTEgNy4yNDktMi4wMjEtNC43MjIgNi45MSA1LjkwMiAzLjIwNy02LjkxIDIuMTg4IDEuNTE0IDUuOS01LjM5NC00LjM4MS00LjM4MiA1LjcyOS0uNjc0LTYuNzQzLTYuMDY5IDMuMDM1IDMuMjAyLTYuMDY5LTYuNDA3LTUuMjI4IDcuNzU1LS42NzQtMi41MjctOC41OTYgNi41NzUgNi4wNjkgNC4yMTQtNy40MTd6bS0zLjc3OSAxNC4zNzMtLjk3MS0uNzkyIDEuMTcyLS4xLS4zODItMS4zMDMuOTk3LjkyMS42MzYtMS4xMjIuMTAxIDEuMjIzIDEuMDk3LS4zMDYtLjcxMSAxLjA0Ni44OTIuNDgxLTEuMDQ3LjMzNC4yMjkuODkzLS44MTUtLjY2Ni0uNjYyLjg3LS4xMDQtMS4wMi0uOTE3LjQ2LjQ4NS0uOTE5eiIKICAgIGNsaXAtcnVsZT0iZXZlbm9kZCIKICAvPgo8L3N2Zz4K';
+  }
+
+  return imageRef.current;
+}

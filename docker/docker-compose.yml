@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    restart: always
+    container_name: csdm-postgresql
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-csdm_dev}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+    ports:
+      - '${POSTGRES_PORT:-5432}:5432'

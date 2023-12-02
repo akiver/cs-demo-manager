@@ -1,0 +1,10 @@
+{
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.rootFontSize": 14,
+  "search.exclude": {
+    "cs2-server-plugin": true
+  }
+}

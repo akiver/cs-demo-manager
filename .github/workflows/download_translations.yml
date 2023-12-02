@@ -1,0 +1,45 @@
+name: Download translations from Crowdin
+
+on:
+  schedule:
+    - cron: '0 */12 * * *' # Every 12 hours
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  download-translations-from-crowdin:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      max-parallel: 1 # Should be 1 to avoid parallel builds
+      matrix:
+        lc: [es-ES, fr, pt-BR, zh-CN, zh-TW]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download translations from Crowdin
+        uses: crowdin/github-action@v1
+        with:
+          upload_sources: false
+          upload_translations: false
+          download_translations: true
+          create_pull_request: true
+          localization_branch_name: l10n_crowdin_download_translations_${{ matrix.lc }}
+          pull_request_title: 'feat: update translations - ${{ matrix.lc }}'
+          pull_request_labels: 'i18n'
+          pull_request_base_branch_name: 'main'
+          commit_message: |
+            feat: update translations - ${{ matrix.lc }}
+
+            [skip ci]
+          download_language: ${{ matrix.lc }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.CROWDIN_GH_TOKEN }}
+          CROWDIN_PROJECT_ID: '631068'
+          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
