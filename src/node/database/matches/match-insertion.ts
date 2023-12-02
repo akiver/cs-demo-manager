@@ -39,7 +39,9 @@ export async function insertFromCsv<Table>({
 }: InsertFromCsvOptions<Table>) {
   const { database, username, hostname, port, password } = databaseSettings;
   const columnNames = columns.join(',');
-  const command = `-c "\\copy ${tableName}(${columnNames}) FROM '${csvFilePath}' CSV DELIMITER ','" "postgresql://${username}:${password}@${hostname}:${port}/${database}"`;
+  const command = `-c "\\copy ${tableName}(${columnNames}) FROM '${csvFilePath}' CSV DELIMITER ','" "postgresql://${username}:${encodeURIComponent(
+    password,
+  )}@${hostname}:${port}/${database}"`;
   await executePsql(command);
 }
 
