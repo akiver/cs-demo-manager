@@ -13,6 +13,7 @@ import { SeeDemoButton } from '../see-demo-button';
 import { useGetDownloadedDemoPath } from 'csdm/ui/downloads/use-get-downloaded-demo-path';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import { useSelectedPlayer } from './use-selected-player';
+import { CopyDemoLinkButton } from 'csdm/ui/components/buttons/copy-demo-link-button';
 
 export function CurrentMatch() {
   const match = useSelectedMatch();
@@ -38,6 +39,7 @@ export function CurrentMatch() {
             <RevealDemoInExplorerButton demoFileName={match.name} downloadStatus={match.downloadStatus} />
             <SeeDemoButton demoFileName={match.name} downloadStatus={match.downloadStatus} />
             <WatchDemoButton demoFileName={match.name} game={match.game} downloadStatus={match.downloadStatus} />
+            {match.demoUrl && <CopyDemoLinkButton link={match.demoUrl} />}
             <CopyShareCodeButton shareCode={match.sharecode} />
           </>
         }

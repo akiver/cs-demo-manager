@@ -372,6 +372,11 @@ msgctxt "Button"
 msgid "Copy"
 msgstr ""
 
+#: src/ui/components/buttons/copy-demo-link-button.tsx
+msgctxt "Button"
+msgid "Copy demo link"
+msgstr ""
+
 #: src/ui/components/buttons/copy-share-code-button.tsx
 msgctxt "Button"
 msgid "Copy share code"

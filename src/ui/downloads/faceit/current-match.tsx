@@ -10,6 +10,7 @@ import { Match } from './match';
 import { useCurrentMatch } from './use-current-match';
 import { Button } from 'csdm/ui/components/buttons/button';
 import { SeeDemoButton } from 'csdm/ui/downloads/see-demo-button';
+import { CopyDemoLinkButton } from 'csdm/ui/components/buttons/copy-demo-link-button';
 
 function SeeOnFaceitButton() {
   const match = useCurrentMatch();
@@ -49,6 +50,7 @@ function ActionBar() {
           <RevealDemoInExplorerButton demoFileName={match.id} downloadStatus={match.downloadStatus} />
           <SeeDemoButton demoFileName={match.id} downloadStatus={match.downloadStatus} />
           <WatchDemoButton demoFileName={match.id} game={match.game} downloadStatus={match.downloadStatus} />
+          {match.demoUrl && <CopyDemoLinkButton link={match.demoUrl} />}
           <SeeOnFaceitButton />
         </>
       }
