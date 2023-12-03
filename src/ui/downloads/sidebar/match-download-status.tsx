@@ -1,4 +1,5 @@
 import React from 'react';
+import { Trans } from '@lingui/macro';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import { Spinner } from 'csdm/ui/components/spinner';
 import { Tooltip } from 'csdm/ui/components/tooltip';
@@ -17,31 +18,31 @@ export function MatchDownloadStatus({ status }: Props) {
   switch (status) {
     case DownloadStatus.Error:
       return (
-        <Tooltip content="Error on download">
+        <Tooltip content={<Trans context="Download status">Error on download</Trans>}>
           <ExclamationTriangleIcon width={iconSize} className="text-red-400" />
         </Tooltip>
       );
     case DownloadStatus.NotDownloaded:
       return (
-        <Tooltip content="Not downloaded">
+        <Tooltip content={<Trans context="Download status">Not downloaded</Trans>}>
           <DownloadIcon width={iconSize} className="text-orange-400" />
         </Tooltip>
       );
     case DownloadStatus.Downloading:
       return (
-        <Tooltip content="Downloading...">
+        <Tooltip content={<Trans context="Download status">Downloading…</Trans>}>
           <Spinner size={iconSize} />
         </Tooltip>
       );
     case DownloadStatus.Expired:
       return (
-        <Tooltip content="Expired">
+        <Tooltip content={<Trans context="Download status">Expired</Trans>}>
           <ExpiredIcon width={iconSize} className="text-orange-400" />
         </Tooltip>
       );
     default:
       return (
-        <Tooltip content="Downloaded">
+        <Tooltip content={<Trans context="Download status">Downloaded</Trans>}>
           <CheckCircleIcon width={iconSize} className="text-green-400" />
         </Tooltip>
       );

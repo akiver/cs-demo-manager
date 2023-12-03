@@ -2326,6 +2326,31 @@ msgctxt "Tooltip"
 msgid "A download folder is required. You can change it from settings."
 msgstr "Un dossier de téléchargement est requis. Vous pouvez le modifier depuis les paramètres."
 
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Error on download"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Not downloaded"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Downloading…"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Expired"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Downloaded"
+msgstr ""
+
 #: src/ui/downloads/sidebar/match-result-text.tsx
 msgid "Defeat"
 msgstr "Défaite"
