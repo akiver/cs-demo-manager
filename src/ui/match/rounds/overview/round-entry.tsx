@@ -137,6 +137,10 @@ type PanelHeaderProps = {
 
 function PanelHeader({ round, playersTeamA, playersTeamB, kills, match }: PanelHeaderProps) {
   const roundNumber = round.number;
+  const bombExploded = match.bombsExploded.find((bomb) => bomb.roundNumber === roundNumber);
+  const bombDefused = match.bombsDefused.find((bomb) => bomb.roundNumber === roundNumber);
+  const bombEventSite = bombExploded?.site || bombDefused?.site;
+
   return (
     <>
       <p className="text-body-strong">
@@ -147,7 +151,19 @@ function PanelHeader({ round, playersTeamA, playersTeamB, kills, match }: PanelH
         <TeamText teamNumber={round.teamASide} className="text-title mx-8">
           {round.teamAScore}
         </TeamText>
-        <RoundEndReasonIcon round={round} />
+        <div className="flex flex-col items-center">
+          <RoundEndReasonIcon round={round} />
+          {bombEventSite && (
+            <p
+              className="text-subtitle"
+              style={{
+                color: getTeamColor(round.winnerSide),
+              }}
+            >
+              {bombEventSite}
+            </p>
+          )}
+        </div>
         <TeamText teamNumber={round.teamBSide} className="text-title mx-8">
           {round.teamBScore}
         </TeamText>
