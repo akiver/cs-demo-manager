@@ -3500,6 +3500,10 @@ msgid "Cash spent"
 msgstr "Cash spent"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
+msgid "Economy type"
+msgstr "Economy type"
+
+#: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/round-top-bar.tsx
 msgctxt "Tooltip"
 msgid "Watch round"
