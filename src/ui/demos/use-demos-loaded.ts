@@ -4,5 +4,5 @@ import { useDemosStatus } from './use-demos-status';
 export function useDemosLoaded() {
   const status = useDemosStatus();
 
-  return status === Status.Success;
+  return status !== Status.Idle && status !== Status.Loading;
 }
