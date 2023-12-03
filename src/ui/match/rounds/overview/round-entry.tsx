@@ -12,6 +12,7 @@ import { RoundEndReasonIcon } from 'csdm/ui/icons/round-end-reason-icon';
 import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { CollapsePanel } from 'csdm/ui/components/collapse-panel/collapse-panel';
 import type { Match } from 'csdm/common/types/match';
+import { useTranslateEconomyType } from '../../economy/team-economy-breakdown/use-translate-economy-type';
 
 type AvatarsProps = {
   players: Player[];
@@ -58,18 +59,18 @@ function Avatars({ players, kills }: AvatarsProps) {
   );
 }
 
-type EconomyRowProps = {
+type RowProps = {
   title: ReactNode;
-  valueTeamA: number;
-  valueTeamB: number;
+  valueTeamA: string;
+  valueTeamB: string;
 };
 
-function EconomyRow({ valueTeamA, valueTeamB, title }: EconomyRowProps) {
+function Row({ valueTeamA, valueTeamB, title }: RowProps) {
   return (
     <div className="grid gap-8 grid-cols-[minmax(60px,_auto)_1fr_minmax(60px,_auto)] whitespace-nowrap">
-      <p className="text-left">${valueTeamA}</p>
+      <p className="text-left">{valueTeamA}</p>
       <p className="text-center">{title}</p>
-      <p className="text-right">${valueTeamB}</p>
+      <p className="text-right">{valueTeamB}</p>
     </div>
   );
 }
@@ -82,6 +83,7 @@ type ContentProps = {
 
 function Content({ round, kills, roundStartFrame }: ContentProps) {
   const match = useCurrentMatch();
+  const { translateEconomyType } = useTranslateEconomyType();
 
   return (
     <div className="flex gap-x-16 w-full">
@@ -100,16 +102,25 @@ function Content({ round, kills, roundStartFrame }: ContentProps) {
         })}
       </div>
       <div>
-        <EconomyRow title={<Trans>Cash</Trans>} valueTeamA={round.teamAStartMoney} valueTeamB={round.teamBStartMoney} />
-        <EconomyRow
-          title={<Trans>Cash spent</Trans>}
-          valueTeamA={round.teamAMoneySpent}
-          valueTeamB={round.teamBMoneySpent}
+        <Row
+          title={<Trans>Cash</Trans>}
+          valueTeamA={`$${round.teamAStartMoney}`}
+          valueTeamB={`$${round.teamBStartMoney}`}
         />
-        <EconomyRow
+        <Row
+          title={<Trans>Cash spent</Trans>}
+          valueTeamA={`$${round.teamAMoneySpent}`}
+          valueTeamB={`$${round.teamBMoneySpent}`}
+        />
+        <Row
           title={<Trans>Equipment value</Trans>}
-          valueTeamA={round.teamAEquipmentValue}
-          valueTeamB={round.teamBEquipmentValue}
+          valueTeamA={`$${round.teamAEquipmentValue}`}
+          valueTeamB={`$${round.teamBEquipmentValue}`}
+        />
+        <Row
+          title={<Trans>Economy type</Trans>}
+          valueTeamA={translateEconomyType(round.teamAEconomyType)}
+          valueTeamB={translateEconomyType(round.teamBEconomyType)}
         />
       </div>
     </div>
