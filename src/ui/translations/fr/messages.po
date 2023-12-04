@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-29 23:33\n"
+"PO-Revision-Date: 2023-12-04 01:19\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -375,7 +375,7 @@ msgstr "Copier"
 #: src/ui/components/buttons/copy-demo-link-button.tsx
 msgctxt "Button"
 msgid "Copy demo link"
-msgstr ""
+msgstr "Copier le lien de la démo"
 
 #: src/ui/components/buttons/copy-share-code-button.tsx
 msgctxt "Button"
@@ -2329,27 +2329,27 @@ msgstr "Un dossier de téléchargement est requis. Vous pouvez le modifier depui
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Error on download"
-msgstr ""
+msgstr "Erreur lors du téléchargement"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Not downloaded"
-msgstr ""
+msgstr "Non téléchargée"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Downloading…"
-msgstr ""
+msgstr "Téléchargement en cours…"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Expired"
-msgstr ""
+msgstr "Expiré"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Downloaded"
-msgstr ""
+msgstr "Téléchargé"
 
 #: src/ui/downloads/sidebar/match-result-text.tsx
 msgid "Defeat"
@@ -3536,7 +3536,7 @@ msgstr "Argent dépensé"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 msgid "Economy type"
-msgstr ""
+msgstr "Économie"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/round-top-bar.tsx
