@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-04 11:19\n"
+"PO-Revision-Date: 2023-12-05 12:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -20,297 +20,297 @@ msgstr ""
 
 #: src/ui/analyses/action-bar/remove-all-analyses-button.tsx
 msgid "Remove all"
-msgstr ""
+msgstr "移除所有"
 
 #: src/ui/analyses/action-bar/remove-analyses-succeed-button.tsx
 msgid "Remove succeed analyses"
-msgstr ""
+msgstr "删除已成功分析的结果"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Pending analysis…"
-msgstr ""
+msgstr "等待分析…"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Analyzing demo…"
-msgstr ""
+msgstr "录像分析中…"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "An error occurred while analyzing the demo."
-msgstr ""
+msgstr "分析录像时发生错误。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Analysis succeed."
-msgstr ""
+msgstr "分析成功。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Inserting match…"
-msgstr ""
+msgstr "插入比赛数据…"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "Match inserted into the database."
-msgstr ""
+msgstr "将比赛结果输入数据库中。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgctxt "Analysis status"
 msgid "An error occurred while inserting the match into the database."
-msgstr ""
+msgstr "在比赛结果输入数据库中时发生错误。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please open an issue on <0>GitHub</0> that includes the logs below and a link to download the demo."
-msgstr ""
+msgstr "请就以下问题打开 <0>GitHub</0> ，其中包括以下日志和下载录像的链接。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Logs:"
-msgstr ""
+msgstr "日志："
 
 #: src/ui/analyses/no-analysis.tsx
 msgid "No demo analysis in progress."
-msgstr ""
+msgstr "没有正在进行分析中的录像。"
 
 #: src/ui/analyses/table/context-menu/remove-demo-from-analyses-item.tsx
 msgctxt "Context menu"
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/ui/analyses/table/context-menu/see-demo-item.tsx
 #: src/ui/components/context-menu/items/navigate-to-matches-demo-item.tsx
 msgctxt "Context menu"
 msgid "See demo"
-msgstr ""
+msgstr "查看录像"
 
 #: src/ui/analyses/table/context-menu/see-match-item.tsx
 #: src/ui/demos/table/demo-context-menu.tsx
 msgctxt "Context menu"
 msgid "See match"
-msgstr ""
+msgstr "查看比赛"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Analyzing"
-msgstr ""
+msgstr "分析中"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Inserting"
-msgstr ""
+msgstr "插入"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: src/ui/analyses/table/status-cell.tsx
 msgctxt "Analysis status"
 msgid "Pending"
-msgstr ""
+msgstr "挂起"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Source"
-msgstr ""
+msgstr "来源"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Source"
-msgstr ""
+msgstr "数据来源"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
 msgid "Demo path"
-msgstr ""
+msgstr "录像路径"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header tooltip"
 msgid "Demo path"
-msgstr ""
+msgstr "录像路径"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header"
 msgid "Date added"
-msgstr ""
+msgstr "添加日期"
 
 #: src/ui/analyses/table/use-analyses-columns.ts
 msgctxt "Table header tooltip"
 msgid "Date added"
-msgstr ""
+msgstr "添加日期"
 
 #: src/ui/ban/stats/ban-per-competitive-rank-chart.tsx
 msgctxt "Chart title"
 msgid "Ban per competitive rank"
-msgstr ""
+msgstr "禁止每一个竞技等级"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 #: src/ui/player/rank/player-competitive-rank-history.tsx
 #: src/ui/player/rank/player-premier-rank-history.tsx
 msgctxt "Chart axis label"
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 msgctxt "Chart axis label"
 msgid "Bans"
-msgstr ""
+msgstr "黑名单"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Bans"
-msgstr ""
+msgstr "黑名单"
 
 #: src/ui/ban/stats/ban-per-date-chart.tsx
 msgid "Ban count over time"
-msgstr ""
+msgstr "随时间变化的封禁次数"
 
 #: src/ui/ban/stats/ban-per-premier-rank-chart.tsx
 msgid "Tier {tier}: {bannedCount}"
-msgstr ""
+msgstr "级别 {tier}: {bannedCount}"
 
 #: src/ui/ban/stats/ban-per-premier-rank-chart.tsx
 msgctxt "Chart title"
 msgid "Ban per Premier rank"
-msgstr ""
+msgstr "禁止每一个最高的段位"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Banned players"
-msgstr ""
+msgstr "封禁玩家"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Banned players percentage"
-msgstr ""
+msgstr "封禁玩家的占比"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "AVG banned players/match"
-msgstr ""
+msgstr "封禁玩家/比赛的平均值"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "AVG banned account age"
-msgstr ""
+msgstr "被封禁账户的平均值"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "{averageBannedAccountAgeInYears, plural, one {# year} other {# years}}"
-msgstr ""
+msgstr "{averageBannedAccountAgeInYears, plural, one {# 年} other {# 年}}"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgctxt "Panel title"
 msgid "Median banned account age"
-msgstr ""
+msgstr "被封禁账户的中位值"
 
 #: src/ui/ban/stats/ban-stats.tsx
 msgid "{medianBannedAccountAgeInYears, plural, one {# year} other {# years}}"
-msgstr ""
+msgstr "{medianBannedAccountAgeInYears, plural, one {# 年} other {# 年}}"
 
 #: src/ui/ban/stats/last-bans.tsx
 msgid "Last bans"
-msgstr ""
+msgstr "最后一次的封禁"
 
 #: src/ui/ban/stats/no-ban-message.tsx
 msgid "No bans yet"
-msgstr ""
+msgstr "尚未封禁"
 
 #: src/ui/ban/stats/no-stats.tsx
 msgid "No VAC ban stats to show, you must analyze demos to generate stats."
-msgstr ""
+msgstr "没有被 VAC 封禁的统计数据，您必须分析录像才能生成统计数据。"
 
 #: src/ui/bootstrap/app-loader.tsx
 msgid "An error occurred while loading the application."
-msgstr ""
+msgstr "加载应用程序时发生错误。"
 
 #: src/ui/bootstrap/connect-database/connect-database-button.tsx
 msgctxt "Button"
 msgid "Connect"
-msgstr ""
+msgstr "连接"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that PostgreSQL is not installed on your system or the path to the <0>psql</0> executable is not in your <1>PATH</1> environment variable."
-msgstr ""
+msgstr "这通常意味着您的系统上未安装 PostgreSQL，或者 <0>psql</0> 可执行文件的路径不在 <1>PATH</1> 环境变量中。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "It usually means that the PostgreSQL service is not running, make sure it's running."
-msgstr ""
+msgstr "这通常意味着 PostgreSQL 服务未运行，请确保其正常运行。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "Make sure PostgreSQL is running and your settings are correct."
-msgstr ""
+msgstr "请确认 PostgreSQL 正在运行并且您的设置是正确的。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "CS Demo Manager requires a PostgreSQL database."
-msgstr ""
+msgstr "CS Demo Manager 需要 PostgreSQL 数据库。"
 
 #: src/ui/bootstrap/connect-database/connect-database.tsx
 msgid "{secondsBeforeNextTry, plural, one {Retrying in # second…} other {Retrying in # seconds…}}"
-msgstr ""
+msgstr "{secondsBeforeNextTry, plural, one {重试于 # 秒后…} other {重试于 # 秒后…}}"
 
 #: src/ui/bootstrap/connect-database/help-link.tsx
 msgid "Please read the <0>documentation</0> for help."
-msgstr ""
+msgstr "请阅读<0>文档</0>以获得帮助。"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "The Steam API returned a forbidden error"
-msgstr ""
+msgstr "Steam API 返回了一条错误的信息"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "Steam API returned a 429 status code"
-msgstr ""
+msgstr "Steam API 返回了 429 状态代码"
 
 #: src/ui/bootstrap/web-socket-listeners/use-register-ban-listeners.tsx
 msgid "An error occurred while checking for new banned Steam accounts (code {errorCode})"
-msgstr ""
+msgstr "在检查新的被封禁的 Steam 账户时发生了错误 (代码 {errorCode})"
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "The connection to the WebSocket server failed with code {code}."
-msgstr ""
+msgstr "与 WebSocket 服务器的连接失败，代码为 {code}。"
 
 #: src/ui/bootstrap/web-socket-provider.tsx
 msgid "An error occurred connecting to the WebSocket server."
-msgstr ""
+msgstr "连接到远程服务器时出错。"
 
 #: src/ui/comment/use-update-comment.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
@@ -340,266 +340,266 @@ msgstr ""
 #: src/ui/settings/video/hlae/hlae-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "An error occurred"
-msgstr ""
+msgstr "出现错误"
 
 #: src/ui/components/buttons/analyze-button.tsx
 msgctxt "Button"
 msgid "Analyze"
-msgstr ""
+msgstr "分析"
 
 #: src/ui/components/buttons/apply-button.tsx
 msgctxt "Button"
 msgid "Apply"
-msgstr ""
+msgstr "应用"
 
 #: src/ui/components/buttons/cancel-button.tsx
 msgctxt "Button"
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: src/ui/components/buttons/change-button.tsx
 msgctxt "Button"
 msgid "Change"
-msgstr ""
+msgstr "更改"
 
 #: src/ui/components/buttons/close-button.tsx
 msgctxt "Button"
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 #: src/ui/components/buttons/copy-button.tsx
 msgctxt "Button"
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: src/ui/components/buttons/copy-demo-link-button.tsx
 msgctxt "Button"
 msgid "Copy demo link"
-msgstr ""
+msgstr "复制录像链接"
 
 #: src/ui/components/buttons/copy-share-code-button.tsx
 msgctxt "Button"
 msgid "Copy share code"
-msgstr ""
+msgstr "复制共享代码"
 
 #: src/ui/components/buttons/copy-steamid-button.tsx
 msgid "Copy SteamID"
-msgstr ""
+msgstr "复制 Steam ID"
 
 #: src/ui/components/buttons/delete-button.tsx
 msgctxt "Button"
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: src/ui/components/buttons/details-button.tsx
 msgctxt "Button"
 msgid "Details"
-msgstr ""
+msgstr "详细信息"
 
 #: src/ui/components/buttons/install-button.tsx
 msgctxt "Button"
 msgid "Install"
-msgstr ""
+msgstr "安装"
 
 #: src/ui/components/buttons/refresh-button.tsx
 msgctxt "Button"
 msgid "Refresh"
-msgstr ""
+msgstr "刷新"
 
 #: src/ui/components/buttons/remove-button.tsx
 msgctxt "Button"
 msgid "Remove"
-msgstr ""
+msgstr "移除"
 
 #: src/ui/components/buttons/reset-button.tsx
 msgctxt "Button"
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 #: src/ui/components/buttons/retry-button.tsx
 msgctxt "Button"
 msgid "Retry"
-msgstr ""
+msgstr "重试"
 
 #: src/ui/components/buttons/reveal-file-in-explorer-button.tsx
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 #: src/ui/components/context-menu/items/reveal-file-in-explorer-item.tsx
 msgid "{0, select, darwin {Reveal in Finder} win32 {Reveal in Explorer} other {Reveal in files explorer}}"
-msgstr ""
+msgstr "{0, select, darwin {在Finder中显示} win32 {在资源管理器中显示} other {在文件管理器中显示}}"
 
 #: src/ui/components/buttons/reveal-folder-in-explorer-button.tsx
 msgid "Folder not found"
-msgstr ""
+msgstr "未找到文件夹"
 
 #: src/ui/components/buttons/reveal-log-file-button.tsx
 msgid "Reveal log file"
-msgstr ""
+msgstr "显示日志文件"
 
 #: src/ui/components/buttons/save-button.tsx
 msgctxt "Button"
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 #: src/ui/components/buttons/see-demo-button.tsx
 msgctxt "Button"
 msgid "See demo"
-msgstr ""
+msgstr "查看录像"
 
 #: src/ui/components/buttons/see-match-button.tsx
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Button"
 msgid "See match"
-msgstr ""
+msgstr "查看比赛"
 
 #: src/ui/components/buttons/update-button.tsx
 msgctxt "Button"
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: src/ui/components/buttons/watch-button.tsx
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Button"
 msgid "Watch"
-msgstr ""
+msgstr "观看"
 
 #: src/ui/components/context-menu/items/analyze-item.tsx
 msgctxt "Context menu"
 msgid "Analyze"
-msgstr ""
+msgstr "分析"
 
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 #: src/ui/demos/table/update-demos-type-item.tsx
 msgctxt "Context menu"
 msgid "Change type"
-msgstr ""
+msgstr "更改类型"
 
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 msgctxt "Context menu"
 msgid "GOTV"
-msgstr ""
+msgstr "GOTV"
 
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 msgctxt "Context menu"
 msgid "POV"
-msgstr ""
+msgstr "POV"
 
 #: src/ui/components/context-menu/items/change-source-item.tsx
 msgctxt "Context menu"
 msgid "Change source"
-msgstr ""
+msgstr "修改源文件"
 
 #: src/ui/components/context-menu/items/comment-item.tsx
 msgctxt "Context menu"
 msgid "Comment"
-msgstr ""
+msgstr "评论"
 
 #: src/ui/components/context-menu/items/copy-checksums-item.tsx
 msgctxt "Copy context menu"
 msgid "Checksum"
-msgstr ""
+msgstr "校验和"
 
 #: src/ui/components/context-menu/items/copy-filepath-item.tsx
 msgctxt "Copy context menu"
 msgid "File path"
-msgstr ""
+msgstr "文件路径"
 
 #: src/ui/components/context-menu/items/copy-item.tsx
 msgctxt "Context menu"
 msgid "Copy"
-msgstr ""
+msgstr "复制"
 
 #: src/ui/components/context-menu/items/copy-sharecode-item.tsx
 msgctxt "Copy context menu"
 msgid "Share code"
-msgstr ""
+msgstr "分享代码"
 
 #: src/ui/components/context-menu/items/copy-steamid-item.tsx
 msgctxt "Context menu"
 msgid "Copy Steam ID"
-msgstr ""
+msgstr "复制 Steam ID"
 
 #: src/ui/components/context-menu/items/delete-item.tsx
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgctxt "Context menu"
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 #: src/ui/components/context-menu/items/details-item.tsx
 msgctxt "Context menu"
 msgid "Details"
-msgstr ""
+msgstr "详细信息"
 
 #: src/ui/components/context-menu/items/export-matches-item.tsx
 msgctxt "Context menu"
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 #: src/ui/components/context-menu/items/export-matches-to-json-item.tsx
 msgctxt "Context menu"
 msgid "JSON"
-msgstr ""
+msgstr "JSON"
 
 #: src/ui/components/context-menu/items/export-matches-to-xlsx-item.tsx
 msgctxt "Context menu"
 msgid "XLSX"
-msgstr ""
+msgstr "XLSX"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Export in progress…"
-msgstr ""
+msgstr "正在导出中…"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Exporting demo {demoNumber} of {totalDemoCount}..."
-msgstr ""
+msgstr "导出录像 {demoNumber} 到 {totalDemoCount}..."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Export done."
-msgstr ""
+msgstr "导出完成。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Demo not found: {demoPath}"
-msgstr ""
+msgstr "未找到录像: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Decoding error: {demoPath}"
-msgstr ""
+msgstr "解码错误: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "No voice data found for demo: {demoPath}"
-msgstr ""
+msgstr "未找到用于录像的语音数据: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to parse demo: {demoPath}"
-msgstr ""
+msgstr "解析录像失败: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Unsupported audio codec: {demoPath}"
-msgstr ""
+msgstr "不支持音频解码器: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to create audio file: {demoPath}"
-msgstr ""
+msgstr "创建音频文件失败: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Invalid arguments for demo: {demoPath}"
-msgstr ""
+msgstr "录像参数无效: {demoPath}"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to load the Counter-Strike audio library."
-msgstr ""
+msgstr "加载Counter-Strike音频库失败。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/video/generating-dialog.tsx
 #: src/ui/match/video/video-loader.tsx
 msgid "Counter-Strike executable not found."
-msgstr ""
+msgstr "未找到 Counter-Strike 可执行文件。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "You need to install <0>Rosetta</0>."
-msgstr ""
+msgstr "您需要安装 <0>Rosetta</0>。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
@@ -629,167 +629,167 @@ msgstr ""
 #: src/ui/settings/maps/delete-map-dialog.tsx
 #: src/ui/settings/maps/reset-default-maps-button.tsx
 msgid "An error occurred."
-msgstr ""
+msgstr "出现错误。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Players voice export"
-msgstr ""
+msgstr "玩家语音导出"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Warnings:"
-msgstr ""
+msgstr "警告："
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Button label"
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgctxt "Context menu"
 msgid "Export players voice"
-msgstr ""
+msgstr "导出玩家语音"
 
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open FACEIT profile"
-msgstr ""
+msgstr "打开 FACEIT 配置文件"
 
 #: src/ui/components/context-menu/items/open-steam-profile-item.tsx
 msgctxt "Context menu"
 msgid "Open Steam community profile"
-msgstr ""
+msgstr "打开 Steam 社区个人资料"
 
 #: src/ui/components/context-menu/items/pin-player-item.tsx
 msgctxt "Context menu"
 msgid "Pin this player"
-msgstr ""
+msgstr "固定此玩家"
 
 #: src/ui/components/context-menu/items/rename-item.tsx
 msgctxt "Context menu"
 msgid "Rename"
-msgstr ""
+msgstr "重命名"
 
 #: src/ui/components/context-menu/items/see-player-profile-item.tsx
 msgctxt "Context menu"
 msgid "See profile"
-msgstr ""
+msgstr "查看个人资料"
 
 #: src/ui/components/context-menu/items/show-player-matches-item.tsx
 msgctxt "Context menu"
 msgid "Show matches"
-msgstr ""
+msgstr "显示对局"
 
 #: src/ui/components/context-menu/items/tags-item.tsx
 msgctxt "Context menu"
 msgid "Tags"
-msgstr ""
+msgstr "标签"
 
 #: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
 msgid "This demo is not the same as the one of the match"
-msgstr ""
+msgstr "此录像与比赛录像不同"
 
 #: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
 msgctxt "Context menu"
 msgid "Update demo location"
-msgstr ""
+msgstr "更新录像文件位置"
 
 #: src/ui/components/context-menu/items/watch-item.tsx
 #: src/ui/components/context-menu/items/watch-player-item.tsx
 #: src/ui/match/grenades/finder/context-menu.tsx
 msgctxt "Context menu"
 msgid "Watch"
-msgstr ""
+msgstr "观看"
 
 #: src/ui/components/context-menu/items/watch-player-as-suspect-item.tsx
 msgctxt "Context menu to watch a player as a suspect"
 msgid "As a suspect"
-msgstr ""
+msgstr "作为嫌疑人"
 
 #: src/ui/components/context-menu/items/watch-player-highlights-item.tsx
 msgctxt "Context menu watch player highlights"
 msgid "Highlights"
-msgstr ""
+msgstr "高光"
 
 #: src/ui/components/context-menu/items/watch-player-lowlights-item.tsx
 msgctxt "Context menu watch player lowlights"
 msgid "Lowlights"
-msgstr ""
+msgstr "低谷"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
-msgstr ""
+msgstr "{demosSourceNotSupportedCount, plural, one {不支持录像源} other {#不支持录像的来源}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
-msgstr ""
+msgstr "{demosAnalysesInProgressCount, plural, one {录像已在等待分析} other {# 录像已在等待分析}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demoAlreadyInDatabaseCount, plural, one {# demo is already in the database} other {# demos are already in the database}}"
-msgstr ""
+msgstr "{demoAlreadyInDatabaseCount, plural, one {录像已在等待分析} other {# 录像已在等待分析}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgctxt "Checkbox label"
 msgid "Analyze demos already in database?"
-msgstr ""
+msgstr "分析数据库中已有的录像？"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{0, plural, one {# demo will be analyzed} other {# demos will be analyzed}}"
-msgstr ""
+msgstr "{0, plural, one {# 将进行对录像的分析} other {# 将进行对录像的分析}}"
 
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 msgid "{demoCount, plural, one {# demo updated} other {# demos updated}}"
-msgstr ""
+msgstr "{demoCount, plural, one {# 录像已更新} other {# 录像已更新}}"
 
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 msgid "Update source"
-msgstr ""
+msgstr "更新来源"
 
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 msgid "Change it only if the source is unknown or incorrect in the app! (for instance Valve instead of FACEIT)"
-msgstr ""
+msgstr "只有在应用程序中来源不明或不正确时才进行更改！(例如用 Valve 代替 FACEIT）"
 
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 msgid "Changing a demo's source require to re-analyze it to update its match data!"
-msgstr ""
+msgstr "更改录像源需要重新分析以更新其比赛数据！"
 
 #: src/ui/components/dialogs/counter-strike-running-dialog.tsx
 msgid "Counter-Strike is running"
-msgstr ""
+msgstr "Counter-Strike 正在运行"
 
 #: src/ui/components/dialogs/counter-strike-running-dialog.tsx
 msgid "Counter-Strike is running."
-msgstr ""
+msgstr "Counter-Strike 正在运行。"
 
 #: src/ui/components/dialogs/counter-strike-running-dialog.tsx
 msgid "Do you want to close the game and continue?"
-msgstr ""
+msgstr "您想关闭游戏并继续吗"
 
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo has been deleted.} other {# demos deleted.}}"
-msgstr ""
+msgstr "{0, plural, one {# 录像已被删除} other {# 已删除录像}}"
 
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo has not been deleted.} other {# demos have not been deleted.}}"
-msgstr ""
+msgstr "{0, plural, one {# 录像已被删除} other {# 已删除录像}}"
 
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {Delete demo} other {Delete demos}}"
-msgstr ""
+msgstr "{0, plural, one {删除录像} other {删除录像}}"
 
 #: src/ui/components/dialogs/delete-demos-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted only from your filesystem, not the database.} other {The demos will be deleted only from your filesystem, not the database.}}"
-msgstr ""
+msgstr "{0, plural, one {录像只会从您的系统文件中删除，而不是数据库。} other {这些录像只会从您的系统文件中删除，而不是数据库。}}"
 
 #: src/ui/components/dialogs/delete-demos-from-database-dialog.tsx
 msgid "{0, plural, one {The demo will be deleted from the database, not your filesystem.} other {The demos will be deleted only from the database, not your filesystem.}}"
-msgstr ""
+msgstr "{0, plural, one {录像只会从您的数据库中删除，而不是系统文件。} other {这些录像只会从您的数据库中删除，而不是系统文件。}}"
 
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 msgid "{0, plural, one {The match will be deleted only from the database not your filesystem.} other {These matches will be deleted only from the database not your filesystem.}}"
-msgstr ""
+msgstr "{0, plural, one {比赛只会从您的数据库中删除，而不是系统文件。} other {这些比赛只会从您的数据库中删除，而不是系统文件。}}"
 
 #: src/ui/components/dialogs/demo-not-found-dialog.tsx
 #: src/ui/demo/demo-loader.tsx
@@ -797,43 +797,43 @@ msgstr ""
 #: src/ui/match/video/video-loader.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Demo not found."
-msgstr ""
+msgstr "未找到录像。"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Dialog title"
 msgid "JSON export"
-msgstr ""
+msgstr "导出 JSON"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Button label"
 msgid "Select"
-msgstr ""
+msgstr "选择"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Notification"
 msgid "Export done"
-msgstr ""
+msgstr "导出完成"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Notification"
 msgid "Click here to reveal the output folder"
-msgstr ""
+msgstr "单击此处显示输出文件夹"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "File destination"
 msgid "Output"
-msgstr ""
+msgstr "输出"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Button to select an export output folder"
 msgid "Select folder"
-msgstr ""
+msgstr "选择文件夹"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 msgctxt "Checkbox label"
 msgid "Minify"
-msgstr ""
+msgstr "最小化"
 
 #: src/ui/components/dialogs/export-matches-to-json-dialog.tsx
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
@@ -841,297 +841,297 @@ msgstr ""
 #: src/ui/match/heatmap/export-button.tsx
 msgctxt "Button"
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Dialog title"
 msgid "Excel export"
-msgstr ""
+msgstr "Excel 导出"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "General"
-msgstr ""
+msgstr "常规"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Rounds"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Kills"
-msgstr ""
+msgstr "击杀次数"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Exporting match {matchCount} of {totalMatchCount}…"
-msgstr ""
+msgstr "导出比赛 {matchCount} 到 {totalMatchCount}…"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Generating sheet {translatedSheetName}…"
-msgstr ""
+msgstr "生成工作表 {translatedSheetName}..."
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Radio label"
 msgid "Single file"
-msgstr ""
+msgstr "单个文件"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Radio label"
 msgid "Multiple files"
-msgstr ""
+msgstr "多个文件"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheets"
 msgid "Sheets"
-msgstr ""
+msgstr "工作表"
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Invalid name."
-msgstr ""
+msgstr "无效名称。"
 
 #: src/ui/components/dialogs/rename-dialog.tsx
 msgid "Only the name visible from the application will change, it will not change the filename on your operating system."
-msgstr ""
+msgstr "只会更改应用程序中可见的名称，而不会更改操作系统中的文件名。"
 
 #: src/ui/components/dialogs/select-pov-dialog.tsx
 msgid "Point of view"
-msgstr ""
+msgstr "视角"
 
 #: src/ui/components/dialogs/select-pov-dialog.tsx
 msgid "Do you want to watch it from the player's POV or the enemy's POV?"
-msgstr ""
+msgstr "你想要从玩家的POV或敌人的POV观看它吗？"
 
 #: src/ui/components/dialogs/select-pov-dialog.tsx
 msgctxt "Watch from player point of view"
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/components/dialogs/select-pov-dialog.tsx
 msgctxt "Watch from enemy point of view"
 msgid "Enemy"
-msgstr ""
+msgstr "敌人"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
 msgid "Not in database"
-msgstr ""
+msgstr "不在数据库中"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
 msgid "Pending"
-msgstr ""
+msgstr "挂起"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
 msgid "In progress"
-msgstr ""
+msgstr "进行中"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
 msgid "In database"
-msgstr ""
+msgstr "在数据库中"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Option label for demo analysis status"
 msgid "Error"
-msgstr ""
+msgstr "错误"
 
 #: src/ui/components/dropdown-filter/analysis-status-select.tsx
 msgctxt "Demo analysis status"
 msgid "Status"
-msgstr ""
+msgstr "状态"
 
 #: src/ui/components/dropdown-filter/demo-types-filter.tsx
 msgctxt "Demo type"
 msgid "GOTV"
-msgstr ""
+msgstr "GOTV"
 
 #: src/ui/components/dropdown-filter/demo-types-filter.tsx
 msgctxt "Demo type"
 msgid "POV"
-msgstr ""
+msgstr "POV"
 
 #: src/ui/components/dropdown-filter/demo-types-filter.tsx
 msgctxt "Demo type filter label"
 msgid "Demo types"
-msgstr ""
+msgstr "录像类型"
 
 #: src/ui/components/dropdown-filter/dropdown-filter.tsx
 msgctxt "Button"
 msgid "Filters"
-msgstr ""
+msgstr "筛选器"
 
 #: src/ui/components/dropdown-filter/filter-selection.tsx
 msgctxt "Button filter"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: src/ui/components/dropdown-filter/filter-selection.tsx
 msgctxt "Button filter"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: src/ui/components/dropdown-filter/game-filter.tsx
 msgctxt "Games filter label"
 msgid "Games"
-msgstr ""
+msgstr "游戏"
 
 #: src/ui/components/dropdown-filter/game-modes-filter.tsx
 msgctxt "Game modes filter label"
 msgid "Modes"
-msgstr ""
+msgstr "模组"
 
 #: src/ui/components/dropdown-filter/match-length-filter.tsx
 msgctxt "Match length"
 msgid "MR 8"
-msgstr ""
+msgstr "MR 8"
 
 #: src/ui/components/dropdown-filter/match-length-filter.tsx
 msgctxt "Match length"
 msgid "MR 12"
-msgstr ""
+msgstr "MR 12"
 
 #: src/ui/components/dropdown-filter/match-length-filter.tsx
 msgctxt "Match length"
 msgid "MR 15"
-msgstr ""
+msgstr "MR 15"
 
 #: src/ui/components/dropdown-filter/match-length-filter.tsx
 msgctxt "Match length filter label"
 msgid "Length"
-msgstr ""
+msgstr "长度"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "All time"
-msgstr ""
+msgstr "所有时间"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Today"
-msgstr ""
+msgstr "今天"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last week"
-msgstr ""
+msgstr "过去一周内"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last month"
-msgstr ""
+msgstr "上个月"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last 3 month"
-msgstr ""
+msgstr "最近三个月"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last year"
-msgstr ""
+msgstr "过去一年内"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last 2 years"
-msgstr ""
+msgstr "最近两年内"
 
 #: src/ui/components/dropdown-filter/period-filter.tsx
 msgctxt "Period filter preset"
 msgid "Last 5 years"
-msgstr ""
+msgstr "过去五年内"
 
 #: src/ui/components/dropdown-filter/ranking-select.tsx
 msgctxt "Option label for ranking filter"
 msgid "All"
-msgstr ""
+msgstr "全部"
 
 #: src/ui/components/dropdown-filter/ranking-select.tsx
 msgctxt "Option label for ranking filter"
 msgid "Ranked"
-msgstr ""
+msgstr "排位赛"
 
 #: src/ui/components/dropdown-filter/ranking-select.tsx
 msgctxt "Option label for ranking filter"
 msgid "Unranked"
-msgstr ""
+msgstr "未排序"
 
 #: src/ui/components/dropdown-filter/ranking-select.tsx
 msgctxt "Ranking filter label"
 msgid "Ranking"
-msgstr ""
+msgstr "排名"
 
 #: src/ui/components/dropdown-filter/sources-filter.tsx
 msgctxt "Demo source filter label"
 msgid "Sources"
-msgstr ""
+msgstr "来源"
 
 #: src/ui/components/dropdown-filter/tags-filter.tsx
 msgctxt "Tags filter label"
 msgid "Tags"
-msgstr ""
+msgstr "标签"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment"
-msgstr ""
+msgstr "评论"
 
 #: src/ui/components/inputs/database-name-input.tsx
 #: src/ui/settings/maps/map-dialog/name-input.tsx
 msgctxt "Input label"
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/ui/components/inputs/database-name-input.tsx
 msgctxt "Input placeholder"
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/ui/components/inputs/file-or-directory-input.tsx
 msgctxt "Button"
 msgid "Select"
-msgstr ""
+msgstr "选择"
 
 #: src/ui/components/inputs/hostname-input.tsx
 msgctxt "Button"
 msgid "Hostname"
-msgstr ""
+msgstr "主机名"
 
 #: src/ui/components/inputs/hostname-input.tsx
 msgctxt "Input placeholder"
 msgid "Hostname"
-msgstr ""
+msgstr "主机名"
 
 #: src/ui/components/inputs/password-input.tsx
 msgctxt "Input label"
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: src/ui/components/inputs/password-input.tsx
 msgctxt "Input placeholder"
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 #: src/ui/components/inputs/port-input.tsx
 msgctxt "Input label"
 msgid "Port"
-msgstr ""
+msgstr "端口"
 
 #: src/ui/components/inputs/port-input.tsx
 msgctxt "Input placeholder"
 msgid "Port"
-msgstr ""
+msgstr "端口"
 
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
@@ -1159,12 +1159,12 @@ msgstr ""
 #: src/ui/components/inputs/select/side-select.tsx
 msgctxt "Select team option"
 msgid "CT"
-msgstr ""
+msgstr "CT"
 
 #: src/ui/components/inputs/select/side-select.tsx
 msgctxt "Select team option"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: src/ui/components/inputs/select/side-select.tsx
 msgctxt "Filter side category"
@@ -1339,7 +1339,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header assist count"
 msgid "A"
-msgstr ""
+msgstr "A"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1348,13 +1348,13 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Assists"
-msgstr ""
+msgstr "助攻"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Assists"
-msgstr ""
+msgstr "助攻"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1363,7 +1363,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header death count"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1372,35 +1372,35 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Deaths"
-msgstr ""
+msgstr "死亡"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Deaths"
-msgstr ""
+msgstr "死亡"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header"
 msgid "Mode"
-msgstr ""
+msgstr "模式"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Game mode"
-msgstr ""
+msgstr "游戏模式"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -1607,27 +1607,27 @@ msgstr ""
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "5K"
-msgstr ""
+msgstr "5K"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "4K"
-msgstr ""
+msgstr "4K"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "3K"
-msgstr ""
+msgstr "3K"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "2K"
-msgstr ""
+msgstr "2K"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "1K"
-msgstr ""
+msgstr "1K"
 
 #: src/ui/components/panels/objectives-panel.tsx
 msgctxt "Panel title"
@@ -1707,22 +1707,22 @@ msgstr ""
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
 msgid "VAC banned"
-msgstr ""
+msgstr "VAC 封禁"
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
 msgid "Game banned"
-msgstr ""
+msgstr "游戏封禁"
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
 msgid "Community banned"
-msgstr ""
+msgstr "社区封禁"
 
 #: src/ui/components/table/cells/comment-cell.tsx
 msgctxt "Tooltip"
 msgid "Comment"
-msgstr ""
+msgstr "评论"
 
 #: src/ui/components/table/columns-visibility-dropdown.tsx
 msgctxt "Dropdown"
