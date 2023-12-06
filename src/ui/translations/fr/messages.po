@@ -2466,6 +2466,10 @@ msgid "Steam is not running"
 msgstr "Steam n'est pas lancé"
 
 #: src/ui/hooks/use-counter-strike.tsx
+msgid "The game crashed, please see <0>this documentation</0> for help."
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
 msgstr "Lancement de Counter-Strike…"
 

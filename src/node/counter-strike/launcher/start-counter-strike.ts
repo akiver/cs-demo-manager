@@ -16,6 +16,7 @@ import { isMac } from 'csdm/node/os/is-mac';
 import { assertSteamIsRunning } from './assert-steam-is-running';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
+import { GameError } from './errors/game-error';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -167,9 +168,13 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
       logger.log('Game output: \n', output);
 
       const hasRunLongEnough = Date.now() - startTime >= 2000;
-      if (code !== 0 && !hasRunLongEnough) {
-        logger.error('An error occurred while starting the game');
-        return reject(new StartCounterStrikeError(output));
+      if (code !== 0) {
+        if (hasRunLongEnough) {
+          return reject(new GameError());
+        } else {
+          logger.error('An error occurred while starting the game');
+          return reject(new StartCounterStrikeError(output));
+        }
       }
 
       return resolve();

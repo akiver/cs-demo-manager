@@ -14,6 +14,7 @@ import type { WatchPlayerLowlightsPayload } from 'csdm/server/handlers/renderer-
 import type { WatchPlayerHighlightsPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-highlights-handler';
 import type { WatchPlayerAsSuspectPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-as-suspect-handler';
 import type { WatchDemoErrorPayload } from 'csdm/server/handlers/renderer-process/counter-strike/counter-strike';
+import { ExternalLink } from '../components/external-link';
 
 function getErrorMessageFromError(error: WatchDemoErrorPayload) {
   const { errorCode } = error;
@@ -50,6 +51,18 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
       return <Trans>The demo's path contains unsupported characters by CSGO</Trans>;
     case ErrorCode.SteamNotRunning:
       return <Trans>Steam is not running</Trans>;
+    case ErrorCode.GameError:
+      return (
+        <p>
+          <Trans>
+            The game crashed, please see{' '}
+            <ExternalLink href="https://cs-demo-manager.com/docs/faq/playback#cs2-demo-playback-doesnt-start-or-crashes">
+              this documentation
+            </ExternalLink>{' '}
+            for help.
+          </Trans>
+        </p>
+      );
     default:
       return <Trans>An error occurred</Trans>;
   }

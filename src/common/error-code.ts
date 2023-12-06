@@ -20,6 +20,7 @@ export const ErrorCode = {
   InvalidDemoHeader: 418,
   StartCounterStrikeError: 419,
   UnsupportedGame: 420,
+  GameError: 421,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   MapAlreadyExists: 600,
