@@ -64,7 +64,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   if (outputParameters !== '') {
     args.push(outputParameters);
   }
-  args.push(getSequenceOutputFilePath(outputFolderPath, sequence));
+  args.push('"' + getSequenceOutputFilePath(outputFolderPath, sequence) + '"');
 
   return args;
 }

@@ -96,7 +96,7 @@ export async function watchDemoWithHlae({
   const csExecutablePath = await getCounterStrikeExecutablePath(game);
 
   const hlaeParameters: string[] = ['-noGui', '-autoStart'];
-  const launchOptions = ['-insecure', '-novid', '-sw', '+playdemo', `"${demoPath}"`];
+  const launchOptions = ['-insecure', '-novid', '-sw', '+playdemo', `\\"${demoPath}\\"`];
   if (width) {
     launchOptions.push('-width', String(width));
   }
