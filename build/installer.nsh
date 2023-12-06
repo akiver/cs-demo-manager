@@ -24,16 +24,18 @@
 !macroend
 
 !macro customUnInstall
-  ; Delete the installation folder from the PATH env variable
-  EnVar::SetHKCU
-  EnVar::DeleteValue "PATH" "$INSTDIR"
-  Pop $0
-  ${If} $0 != 0
-      MessageBox MB_OK "Unable to delete $INSTDIR to PATH"
-  ${EndIf}
+  ${ifNot} ${isUpdated}
+    ; Delete the installation folder from the PATH env variable
+    EnVar::SetHKCU
+    EnVar::DeleteValue "PATH" "$INSTDIR"
+    Pop $0
+    ${If} $0 != 0
+        MessageBox MB_OK "Unable to delete $INSTDIR to PATH"
+    ${EndIf}
 
-  ; Delete the CSDM folder
-  RMDir /r "$PROFILE\.csdm"
-  ; Delete the updater folder
-  RMDir /r "$PROFILE\AppData\Local\cs-demo-manager-updater"
+    ; Delete the CSDM folder
+    RMDir /r "$PROFILE\.csdm"
+    ; Delete the updater folder
+    RMDir /r "$PROFILE\AppData\Local\cs-demo-manager-updater"
+  ${endIf}
 !macroend
