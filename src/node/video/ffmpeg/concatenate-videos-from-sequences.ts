@@ -43,7 +43,7 @@ function getFfmpegArgs(options: ConcatenateVideoOptions) {
   }
   for (const sequence of sequences) {
     const sequenceOutputFilePath = getSequenceOutputFilePath(outputFolderPath, sequence);
-    args.push(`-i ${sequenceOutputFilePath}`);
+    args.push(`-i "${sequenceOutputFilePath}"`);
   }
   args.push(
     `-vcodec ${videoCodec} -pix_fmt yuv420p`,
