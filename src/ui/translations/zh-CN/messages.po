@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-05 12:05\n"
+"PO-Revision-Date: 2023-12-06 12:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -1136,25 +1136,25 @@ msgstr "端口"
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 msgid "Upper"
-msgstr ""
+msgstr "高级"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 msgid "Lower"
-msgstr ""
+msgstr "较低"
 
 #: src/ui/components/inputs/select/radar-level-select.tsx
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgid "Radar level"
-msgstr ""
+msgstr "雷达级别"
 
 #: src/ui/components/inputs/select/rounds-select.tsx
 msgctxt "Filter rounds category"
 msgid "Rounds"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/components/inputs/select/side-select.tsx
 msgctxt "Select team option"
@@ -1169,144 +1169,144 @@ msgstr "T"
 #: src/ui/components/inputs/select/side-select.tsx
 msgctxt "Filter side category"
 msgid "Side"
-msgstr ""
+msgstr "侧面"
 
 #: src/ui/components/inputs/select/teams-select.tsx
 msgctxt "Filter teams name category"
 msgid "Teams"
-msgstr ""
+msgstr "团队"
 
 #: src/ui/components/inputs/select/weapon-types-filter.tsx
 msgctxt "Filter weapon types category"
 msgid "Weapon types"
-msgstr ""
+msgstr "武器类型"
 
 #: src/ui/components/inputs/text-input-filter.tsx
 msgctxt "Input placeholder"
 msgid "{0, select, darwin {Filter… (⌘+F)} other {Filter… (CTRL+F)}}"
-msgstr ""
+msgstr "{0, select, darwin {过滤器… (⌘+F)} other {过滤器… (CTRL+F)}}"
 
 #: src/ui/components/inputs/username-input.tsx
 msgctxt "Input label"
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 #: src/ui/components/inputs/username-input.tsx
 msgctxt "Input placeholder"
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Comment"
-msgstr ""
+msgstr "评论"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Comment"
-msgstr ""
+msgstr "评论"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Tags"
-msgstr ""
+msgstr "标签"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
 msgid "Tags"
-msgstr ""
+msgstr "标签"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Bans"
-msgstr ""
+msgstr "全部违规名单"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Bans"
-msgstr ""
+msgstr "全部违规名单"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Game"
-msgstr ""
+msgstr "游戏"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Game"
-msgstr ""
+msgstr "游戏"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header"
 msgid "Team A"
-msgstr ""
+msgstr "Team A"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Team A"
-msgstr ""
+msgstr "Team A"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header"
 msgid "Team B"
-msgstr ""
+msgstr "Team B"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Team B"
-msgstr ""
+msgstr "Team B"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header score team A"
 msgid "STA"
-msgstr ""
+msgstr "STA"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Score Team A"
-msgstr ""
+msgstr "Score Team A"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
 msgid "Score Team A"
-msgstr ""
+msgstr "Score Team A"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header score team B"
 msgid "STB"
-msgstr ""
+msgstr "STB"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Score Team B"
-msgstr ""
+msgstr "Score Team B"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
 msgid "Score Team B"
-msgstr ""
+msgstr "Score Team B"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1315,7 +1315,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header kill count"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1324,13 +1324,13 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Kills"
-msgstr ""
+msgstr "击杀次数"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Kills"
-msgstr ""
+msgstr "击杀次数"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1406,54 +1406,54 @@ msgstr "游戏模式"
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Duration"
-msgstr ""
+msgstr "持续时间"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Duration"
-msgstr ""
+msgstr "持续时间"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header collateral kill count"
 msgid "CK"
-msgstr ""
+msgstr "CK"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Collateral Kill (two or more enemies killed with a single bullet)"
-msgstr ""
+msgstr "附带击杀(两个或多个的敌人用一枚子弹击杀)"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Dropdown column visibility"
 msgid "Collateral kill"
-msgstr ""
+msgstr "附带击杀"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Ticks"
-msgstr ""
+msgstr "Ticks"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Ticks"
-msgstr ""
+msgstr "Ticks"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Tickrate"
-msgstr ""
+msgstr "Tickrate"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Tickrate"
-msgstr ""
+msgstr "Tickrate"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1464,7 +1464,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
@@ -1474,135 +1474,135 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Path"
-msgstr ""
+msgstr "路径"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Server name"
-msgstr ""
+msgstr "服务器名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Server name"
-msgstr ""
+msgstr "服务器名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Client name"
-msgstr ""
+msgstr "用户名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Client name"
-msgstr ""
+msgstr "用户名称"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header"
 msgid "Analyze date"
-msgstr ""
+msgstr "分析日期"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 msgctxt "Table header tooltip"
 msgid "Analyze date"
-msgstr ""
+msgstr "分析日期"
 
 #: src/ui/components/panels/average-damages-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "ADR"
-msgstr ""
+msgstr "ADR"
 
 #: src/ui/components/panels/average-deaths-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "Average deaths/round"
-msgstr ""
+msgstr "平均死亡/一回合"
 
 #: src/ui/components/panels/average-kills-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "Average kills/round"
-msgstr ""
+msgstr "平均杀敌/一回合"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel title"
 msgid "HS %"
-msgstr ""
+msgstr "HS %"
 
 #: src/ui/components/panels/headshot-panel.tsx
 #: src/ui/match/players/clutches-panel.tsx
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel label"
 msgid "Deaths"
-msgstr ""
+msgstr "死亡数"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel label"
 msgid "Assists"
-msgstr ""
+msgstr "助攻"
 
 #: src/ui/components/panels/headshot-panel.tsx
 msgctxt "Panel label"
 msgid "Headshots"
-msgstr ""
+msgstr "爆头"
 
 #: src/ui/components/panels/hltv-rating-2-panel.tsx
 msgctxt "Panel title"
 msgid "HLTV 2.0"
-msgstr ""
+msgstr "HLTV 2.0"
 
 #: src/ui/components/panels/hltv-rating-panel.tsx
 msgctxt "Panel title"
 msgid "HLTV 1.0"
-msgstr ""
+msgstr "HLTV 1.0"
 
 #: src/ui/components/panels/kast-panel.tsx
 msgctxt "Panel title"
 msgid "KAST"
-msgstr ""
+msgstr "KAST"
 
 #: src/ui/components/panels/kill-death-ratio-panel.tsx
 msgctxt "Panel title"
 msgid "Kills/Deaths"
-msgstr ""
+msgstr "击杀/死亡"
 
 #: src/ui/components/panels/kills-panel.tsx
 msgctxt "Panel title"
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/components/panels/kills-panel.tsx
 msgctxt "Panel label"
 msgid "Wallbang kills"
-msgstr ""
+msgstr "穿墙击杀"
 
 #: src/ui/components/panels/kills-panel.tsx
 msgctxt "Panel label"
 msgid "Collateral kills"
-msgstr ""
+msgstr "附带击杀"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel title"
 msgid "Multi kills"
-msgstr ""
+msgstr "连杀"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
@@ -1632,47 +1632,47 @@ msgstr "1K"
 #: src/ui/components/panels/objectives-panel.tsx
 msgctxt "Panel title"
 msgid "Objectives"
-msgstr ""
+msgstr "目标"
 
 #: src/ui/components/panels/objectives-panel.tsx
 msgctxt "Panel label"
 msgid "Bomb planted"
-msgstr ""
+msgstr "炸弹已经安放"
 
 #: src/ui/components/panels/objectives-panel.tsx
 msgctxt "Panel label"
 msgid "Bomb defused"
-msgstr ""
+msgstr "炸弹已拆除"
 
 #: src/ui/components/panels/objectives-panel.tsx
 msgctxt "Panel label"
 msgid "Hostage rescued"
-msgstr ""
+msgstr "拯救人质"
 
 #: src/ui/components/panels/rounds-panel.tsx
 msgctxt "Panel title"
 msgid "Rounds"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/components/panels/rounds-panel.tsx
 msgctxt "Panel label"
 msgid "Total"
-msgstr ""
+msgstr "总计"
 
 #: src/ui/components/panels/rounds-panel.tsx
 msgctxt "Panel label"
 msgid "CT"
-msgstr ""
+msgstr "CT"
 
 #: src/ui/components/panels/rounds-panel.tsx
 msgctxt "Panel label"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel title"
 msgid "Utilities"
-msgstr ""
+msgstr "工具"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
@@ -1682,27 +1682,27 @@ msgstr ""
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Flashbangs"
-msgstr ""
+msgstr "闪光弹"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Smokes"
-msgstr ""
+msgstr "烟雾弹"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Molotovs"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Incendiaries"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Decoys"
-msgstr ""
+msgstr "诱饵弹"
 
 #: src/ui/components/table/cells/bans-cell.tsx
 msgctxt "Tooltip"
@@ -1727,32 +1727,32 @@ msgstr "评论"
 #: src/ui/components/table/columns-visibility-dropdown.tsx
 msgctxt "Dropdown"
 msgid "Columns"
-msgstr ""
+msgstr "列"
 
 #: src/ui/components/tags.tsx
 msgid "No tags"
-msgstr ""
+msgstr "没有标签"
 
 #: src/ui/components/timeline/timestamp-item.tsx
 msgctxt "Minutes timestamp in timelines"
 msgid "{minutes} min"
-msgstr ""
+msgstr "{minutes} 分钟"
 
 #: src/ui/components/unsupported-map.tsx
 msgid "Map not supported."
-msgstr ""
+msgstr "不支持此地图"
 
 #: src/ui/components/unsupported-map.tsx
 msgid "You can add custom maps from settings, please read the<0> documentation </0>for more details."
-msgstr ""
+msgstr "您可以从设置中添加自定义地图，请阅读<0>文档</0>以了解更多详情。"
 
 #: src/ui/components/valve-match/player-performance/performance-timeline.tsx
 msgid "<0>{playerName}</0> Round performance"
-msgstr ""
+msgstr "<0>{playerName}</0> 回合表现"
 
 #: src/ui/components/valve-match/player-performance/round-context-menu.tsx
 msgid "Watch round"
-msgstr ""
+msgstr "观看回合"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
@@ -1760,7 +1760,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Avatar"
-msgstr ""
+msgstr "头像"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
@@ -1768,7 +1768,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "K/D diff"
-msgstr ""
+msgstr "K/D diff"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
@@ -1776,7 +1776,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Kill/Death difference"
-msgstr ""
+msgstr "Kill/Death difference"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
@@ -1784,7 +1784,7 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header mvp count"
 msgid "MVP"
-msgstr ""
+msgstr "MVP"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
@@ -1792,242 +1792,242 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Most Valuable Player"
-msgstr ""
+msgstr "Most Valuable Player"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header score"
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: src/ui/components/valve-match/use-valve-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Score"
-msgstr ""
+msgstr "Score"
 
 #: src/ui/components/valve-match/valve-match-overview.tsx
 #: src/ui/demo/demo-match-status.tsx
 msgid "Demo analysis in progress."
-msgstr ""
+msgstr "录像正在进行分析中。"
 
 #: src/ui/demo/demo-comment-input.tsx
 msgid "Comment:"
-msgstr ""
+msgstr "评论:"
 
 #: src/ui/demo/demo-date.tsx
 msgid "Date:"
-msgstr ""
+msgstr "日期:"
 
 #: src/ui/demo/demo-duration.tsx
 msgid "Duration:"
-msgstr ""
+msgstr "持续时间:"
 
 #: src/ui/demo/demo-information.tsx
 msgid "Path:"
-msgstr ""
+msgstr "路径:"
 
 #: src/ui/demo/demo-information.tsx
 msgid "Share code:"
-msgstr ""
+msgstr "分享代码:"
 
 #: src/ui/demo/demo-information.tsx
 msgid "Server name:"
-msgstr ""
+msgstr "服务器名称:"
 
 #: src/ui/demo/demo-information.tsx
 msgid "Client name:"
-msgstr ""
+msgstr "用户名称:"
 
 #: src/ui/demo/demo-information.tsx
 msgid "Tickrate:"
-msgstr ""
+msgstr "Tickrate:"
 
 #: src/ui/demo/demo-information.tsx
 msgid "Framerate:"
-msgstr ""
+msgstr "Framerate:"
 
 #: src/ui/demo/demo-loader.tsx
 msgid "Loading demo…"
-msgstr ""
+msgstr "加载录像中…"
 
 #: src/ui/demo/demo-loader.tsx
 msgid "An error occurred while loading demo."
-msgstr ""
+msgstr "加载录像时发生错误。"
 
 #: src/ui/demo/demo-map.tsx
 msgid "Map:"
-msgstr ""
+msgstr "地图:"
 
 #: src/ui/demo/demo-match-status.tsx
 msgid "The source of this demo is not supported."
-msgstr ""
+msgstr "不支持此录像的来源。"
 
 #: src/ui/demo/demo-match-status.tsx
 msgctxt "Button"
 msgid "Change source"
-msgstr ""
+msgstr "更改源"
 
 #: src/ui/demo/demo-match-status.tsx
 msgid "This demo has been analyzed."
-msgstr ""
+msgstr "这个录像已经被分析过了。"
 
 #: src/ui/demo/demo-match-status.tsx
 msgid "This demo has not been analyzed yet."
-msgstr ""
+msgstr "这个录像还没有被分析过。"
 
 #: src/ui/demo/demo-name-input.tsx
 msgid "Name:"
-msgstr ""
+msgstr "名称:"
 
 #: src/ui/demo/demo-source.tsx
 msgid "Source:"
-msgstr ""
+msgstr "来源:"
 
 #: src/ui/demo/demo-tags.tsx
 msgid "Tags:"
-msgstr ""
+msgstr "标签:"
 
 #: src/ui/demo/next-demo-link.tsx
 msgid "Next demo ({0}+→)"
-msgstr ""
+msgstr "下一个录像 ({0}+→)"
 
 #: src/ui/demo/previous-demo-link.tsx
 msgid "Previous demo ({0}+←)"
-msgstr ""
+msgstr "上一个录像 ({0}+←)"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
 msgid "Demo analysis in progress."
-msgstr ""
+msgstr "录像正在进行分析。"
 
 #: src/ui/demo/see-match-button.tsx
 msgctxt "Tooltip"
 msgid "This demo has not been analyzed yet."
-msgstr ""
+msgstr "这个录像还没有被分析过。"
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "See all folders"
-msgstr ""
+msgstr "选择所有文件夹"
 
 #: src/ui/demos/table/delete-demos-from-database-item.tsx
 msgid "Delete from database"
-msgstr ""
+msgstr "从数据库中删除"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Pending analysis…"
-msgstr ""
+msgstr "等待分析中…"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Analyzing…"
-msgstr ""
+msgstr "分析中…"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Analyze error"
-msgstr ""
+msgstr "分析错误"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Insertion error"
-msgstr ""
+msgstr "插入错误"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Inserting into database…"
-msgstr ""
+msgstr "插入到数据库中…"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "In database"
-msgstr ""
+msgstr "在数据库中"
 
 #: src/ui/demos/table/demo-status-cell.tsx
 msgid "Not in database"
-msgstr ""
+msgstr "不在数据库中"
 
 #: src/ui/demos/table/demos-count.tsx
 msgid "{0, plural, one {# demo} other {# demos}}"
-msgstr ""
+msgstr "{0, plural, one {# 录像} other {# 录像}}"
 
 #: src/ui/demos/table/demos-table.tsx
 msgid "No folders found."
-msgstr ""
+msgstr "未找到文件夹。"
 
 #: src/ui/demos/table/loading-demos-message.tsx
 msgid "Loading demos…"
-msgstr ""
+msgstr "加载录像中…"
 
 #: src/ui/demos/table/loading-demos-message.tsx
 msgid "Loading {loadedDemoCount} of {demoToLoadCount} demos…"
-msgstr ""
+msgstr "在 {loadedDemoCount} 加载 {demoToLoadCount} 录像…"
 
 #: src/ui/demos/table/no-demos.tsx
 msgid "No demos found with current filters."
-msgstr ""
+msgstr "当前筛选条件下未找到录像。"
 
 #: src/ui/demos/table/no-demos.tsx
 msgid "No demos found in the current folder."
-msgstr ""
+msgstr "当前文件夹中未发现录像。"
 
 #: src/ui/demos/table/selected-demo-count.tsx
 msgid "{selectedDemoCount, plural, one {# demo selected} other {# demos selected}}"
-msgstr ""
+msgstr "{selectedDemoCount, plural, one {# 录像已选择} other {# 录像已选择}}"
 
 #: src/ui/demos/table/update-demos-type-item.tsx
 msgid "GOTV"
-msgstr ""
+msgstr "GOTV"
 
 #: src/ui/demos/table/update-demos-type-item.tsx
 msgid "POV"
-msgstr ""
+msgstr "POV"
 
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
 msgid "Frame rate"
-msgstr ""
+msgstr "帧率"
 
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header tooltip"
 msgid "Frame rate"
-msgstr ""
+msgstr "帧率"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "CEVO"
-msgstr ""
+msgstr "CEVO"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "eBot"
-msgstr ""
+msgstr "eBot"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "ESL"
-msgstr ""
+msgstr "ESL"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "ESEA"
-msgstr ""
+msgstr "ESEA"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Esportal"
-msgstr ""
+msgstr "Esportal"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "FACEIT"
-msgstr ""
+msgstr "FACEIT"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "FASTCUP"
-msgstr ""
+msgstr "FASTCUP"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Gamers Club"
-msgstr ""
+msgstr "Gamers Club"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
