@@ -1,7 +1,13 @@
 process.env.PROCESS_NAME = 'renderer';
 import 'csdm/node/logger';
 import path from 'node:path';
-import type { OpenDialogOptions, OpenDialogReturnValue, SaveDialogOptions, SaveDialogReturnValue } from 'electron';
+import type {
+  IpcRendererEvent,
+  OpenDialogOptions,
+  OpenDialogReturnValue,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
+} from 'electron';
 import { ipcRenderer, contextBridge } from 'electron';
 import fs from 'fs-extra';
 import { getRankImageSrc } from 'csdm/node/filesystem/get-rank-image-src';
@@ -142,9 +148,9 @@ const api: PreloadApi = {
     };
   },
 
-  onOpenDemoFile: (callback: (demoPath: string) => void) => {
+  onOpenDemoFile: (callback: (event: IpcRendererEvent, demoPath: string) => void) => {
     ipcRenderer.on(IPCChannel.OpenDemFile, (event, demoPath: string) => {
-      callback(demoPath);
+      callback(event, demoPath);
     });
 
     return () => {

@@ -1,4 +1,10 @@
-import type { OpenDialogOptions, SaveDialogOptions, SaveDialogReturnValue, OpenDialogReturnValue } from 'electron';
+import type {
+  OpenDialogOptions,
+  SaveDialogOptions,
+  SaveDialogReturnValue,
+  OpenDialogReturnValue,
+  IpcRendererEvent,
+} from 'electron';
 import type fs from 'fs-extra';
 import type { ILogger } from 'csdm/node/logger';
 import type { Settings } from 'csdm/node/settings/settings';
@@ -52,7 +58,7 @@ declare global {
     getAudio: (audioFileName: AudioFileName) => Audio;
     getPathDirectoryName: (path: string) => string;
     showMainWindow: () => void;
-    onOpenDemoFile: (callback: (demoPath: string) => void) => () => void;
+    onOpenDemoFile: (callback: (event: IpcRendererEvent, demoPath: string) => void) => () => void;
     onOpenSettings: (callback: () => void) => () => void;
     onToggleSettingsVisibility: (callback: () => void) => () => void;
     onShowAbout: (callback: () => void) => () => void;
