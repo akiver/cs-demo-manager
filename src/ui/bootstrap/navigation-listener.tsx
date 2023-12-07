@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import type { IpcRendererEvent } from 'electron';
 import { useWebSocketClient } from '../hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
@@ -68,12 +69,15 @@ export function NavigationListener({ children }: Props) {
         payload: demoPath,
       });
     };
+    const onOpenDemoFile = (event: IpcRendererEvent, demoPath: string) => {
+      sendNavigateToDemoOrMatch(demoPath);
+    };
 
     if (demoPathArgument !== undefined) {
       sendNavigateToDemoOrMatch(demoPathArgument);
     }
 
-    const unListen = window.csdm.onOpenDemoFile(sendNavigateToDemoOrMatch);
+    const unListen = window.csdm.onOpenDemoFile(onOpenDemoFile);
 
     return () => {
       unListen();
