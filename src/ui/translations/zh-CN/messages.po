@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-06 12:05\n"
+"PO-Revision-Date: 2023-12-07 21:23\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -1582,7 +1582,7 @@ msgstr "HLTV 1.0"
 #: src/ui/components/panels/kast-panel.tsx
 msgctxt "Panel title"
 msgid "KAST"
-msgstr "KAST"
+msgstr "回合贡献率"
 
 #: src/ui/components/panels/kill-death-ratio-panel.tsx
 msgctxt "Panel title"
@@ -1682,7 +1682,7 @@ msgstr "工具"
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "HE grenades"
-msgstr ""
+msgstr "高爆手雷"
 
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
@@ -2037,426 +2037,426 @@ msgstr "Gamers Club"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "PopFlash"
-msgstr ""
+msgstr "PopFlash"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Valve"
-msgstr ""
+msgstr "Valve"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/ui/dialogs/confirm-dialog.tsx
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 #: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
 msgctxt "Button"
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #: src/ui/dialogs/tags-dialog.tsx
 #: src/ui/settings/settings-tabs.tsx
 msgid "Tags"
-msgstr ""
+msgstr "标签"
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 msgid "Demo location"
-msgstr ""
+msgstr "录像路径"
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 #: src/ui/match/video/update-demo-location.tsx
 msgid "The demo located at <0>{demoFilePath}</0> doesn't exists."
-msgstr ""
+msgstr "录像位于<0>{demoFilePath}</0>的位置并不存在"
 
 #: src/ui/dialogs/update-demo-location-dialog.tsx
 #: src/ui/match/video/update-demo-location.tsx
 msgctxt "Button"
 msgid "Update demo location"
-msgstr ""
+msgstr "更新录像文件位置"
 
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
 msgid "You must download the demo first"
-msgstr ""
+msgstr "您必须先下载录像"
 
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
 msgid "A download folder is required. You can change it from settings."
-msgstr ""
+msgstr "需要一个下载文件夹。您可以在设置中进行更改。"
 
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
 msgid "The download folder doesn't exist, please change it from the settings."
-msgstr ""
+msgstr "下载文件夹不存在，请从设置中更改。"
 
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgid "This match is already in pending downloads."
-msgstr ""
+msgstr "这场比赛已经在等待下载中。"
 
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgid "This match is already in your downloads folder."
-msgstr ""
+msgstr "您的下载文件夹中已包含此匹配的比赛。"
 
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/pending/download-actions.tsx
 msgid "The download link has expired."
-msgstr ""
+msgstr "下载链接已过期。"
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
 msgid "Download link expired"
-msgstr ""
+msgstr "下载链接已过期"
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
 msgid "Download in progress"
-msgstr ""
+msgstr "正在下载"
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
 msgid "Demo already downloaded"
-msgstr ""
+msgstr "录像已被下载"
 
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgctxt "Button"
 msgid "Download"
-msgstr ""
+msgstr "下载"
 
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgid "Invalid share code."
-msgstr ""
+msgstr "分享代码错误"
 
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgid "An error occurred while decoding the share code."
-msgstr ""
+msgstr "解析分享代码出错"
 
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgctxt "Dialog title"
 msgid "Share code"
-msgstr ""
+msgstr "分享代码"
 
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgid "Enter a share code"
-msgstr ""
+msgstr "输入分享代码"
 
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 msgctxt "Button"
 msgid "Share code"
-msgstr ""
+msgstr "分享代码"
 
 #: src/ui/downloads/download-demos-button.tsx
 msgctxt "Button"
 msgid "Download all"
-msgstr ""
+msgstr "下载全部"
 
 #: src/ui/downloads/downloads-folder-required.tsx
 msgid "A downloads folder is required."
-msgstr ""
+msgstr "需要下载文件夹"
 
 #: src/ui/downloads/downloads-folder-required.tsx
 msgctxt "Button"
 msgid "Select downloads folder"
-msgstr ""
+msgstr "选择下载文件夹"
 
 #: src/ui/downloads/faceit/current-match.tsx
 msgctxt "Button"
 msgid "See on FACEIT"
-msgstr ""
+msgstr "在FACEIT 上查看"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 msgid "Fetching last FACEIT matches…"
-msgstr ""
+msgstr "加载最后一次的 FACEIT 匹配中国年..."
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The FACEIT API returned a forbidden error, please check your API key."
-msgstr ""
+msgstr "FACEIT API 返回了一个错误 (禁止访问), 请检查您的 API 密钥。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 msgid "The FACEIT API returned an unauthorized status code, please check your API key."
-msgstr ""
+msgstr "FACEIT API 返回了一个错误 (未授权), 请检查您的 API 密钥。"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Invalid FACEIT API request."
-msgstr ""
+msgstr "FACEIT API 请求无效"
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The FACEIT API returned an error, please re-try later."
-msgstr ""
+msgstr "FACEIT API 返回了一个错误, 请稍后重试."
 
 #: src/ui/downloads/faceit/last-matches-loader.tsx
 msgid "No matches found for the current FACEIT account."
-msgstr ""
+msgstr "未找到当前 FACEIT 账号匹配的数据."
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 msgid "To add a FACEIT account, enter your FACEIT nickname."
-msgstr ""
+msgstr "请输入你的 FACEIT 昵称以添加 FACEIT 账号."
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 msgctxt "Input placeholder"
 msgid "FACEIT nickname"
-msgstr ""
+msgstr "FACEIT 昵称"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgid "The nickname is case sensitive!"
-msgstr ""
+msgstr "昵称对大小写敏感!"
 
 #: src/ui/downloads/faceit/no-faceit-account.tsx
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 #: src/ui/settings/tags/add-tag.tsx
 msgctxt "Button"
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header kill death ratio"
 msgid "K/D"
-msgstr ""
+msgstr "击杀/死亡"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Kill-Death Ratio"
-msgstr ""
+msgstr "击杀-死亡比例"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header headshot count"
 msgid "HS"
-msgstr ""
+msgstr "爆头"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Headshot"
-msgstr ""
+msgstr "爆头"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header headshot percentage"
 msgid "HS%"
-msgstr ""
+msgstr "爆头率"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Headshot Percentage"
-msgstr ""
+msgstr "爆头率"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "3K"
-msgstr ""
+msgstr "3杀"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "3-kill rounds"
-msgstr ""
+msgstr "3杀回合"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "4K"
-msgstr ""
+msgstr "4杀"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "4-kill rounds"
-msgstr ""
+msgstr "4杀回合"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "5K"
-msgstr ""
+msgstr "5杀"
 
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "5-kill rounds"
-msgstr ""
+msgstr "5杀回合"
 
 #: src/ui/downloads/pending-downloads-link.tsx
 msgctxt "Link"
 msgid "Pending downloads"
-msgstr ""
+msgstr "等待下载"
 
 #: src/ui/downloads/pending/download-actions.tsx
 msgid "An error occurred while downloading the demo."
-msgstr ""
+msgstr "下载录像时发生了错误."
 
 #: src/ui/downloads/pending/pending-downloads-list.tsx
 msgid "No pending downloads."
-msgstr ""
+msgstr "没有等待中的下载."
 
 #: src/ui/downloads/pending/remove-downloads-button.tsx
 msgctxt "Button"
 msgid "Remove downloads"
-msgstr ""
+msgstr "删除下载"
 
 #: src/ui/downloads/reveal-download-folder-in-explorer-button.tsx
 msgctxt "Button"
 msgid "Reveal download folder"
-msgstr ""
+msgstr "打开下载文件夹"
 
 #: src/ui/downloads/reveal-download-folder-in-explorer-button.tsx
 msgctxt "Tooltip"
 msgid "A download folder is required. You can change it from settings."
-msgstr ""
+msgstr "需要下载文件夹. 您可以从设置更改它."
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Error on download"
-msgstr ""
+msgstr "下载时出错"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Not downloaded"
-msgstr ""
+msgstr "未下载"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Downloading…"
-msgstr ""
+msgstr "正在下载..."
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Expired"
-msgstr ""
+msgstr "已过期"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Downloaded"
-msgstr ""
+msgstr "已下载"
 
 #: src/ui/downloads/sidebar/match-result-text.tsx
 msgid "Defeat"
-msgstr ""
+msgstr "战败"
 
 #: src/ui/downloads/sidebar/match-result-text.tsx
 msgid "Victory"
-msgstr ""
+msgstr "胜利"
 
 #: src/ui/downloads/sidebar/match-result-text.tsx
 msgid "Tied"
-msgstr ""
+msgstr "平手"
 
 #: src/ui/downloads/sidebar/match-result-text.tsx
 msgid "Unplayed"
-msgstr ""
+msgstr "未播放的"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Invalid arguments provided to boiler."
-msgstr ""
+msgstr "无效的参数"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Error while contacting Steam, please retry later."
-msgstr ""
+msgstr "与 Steam 通信发生错误, 请稍后重试"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "You are already connected to the CS game coordinator, make sure to close CS and retry."
-msgstr ""
+msgstr "你已经连接至 CS 游戏协调器, 请关闭 CS 后重试."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Steam needs to be restarted."
-msgstr ""
+msgstr "Steam 需要重新启动"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Steam is not running or the current account is not logged in."
-msgstr ""
+msgstr "Steam未运行或当前账号未登录"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Steam account not connected."
-msgstr ""
+msgstr "未与Steam账户连接。"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "No matches found."
-msgstr ""
+msgstr "未找到匹配结果。"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "An error occurred while writing the matches file."
-msgstr ""
+msgstr "写入文件时发生错误。"
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Matches file not found."
-msgstr ""
+msgstr "未找到相应的文件路径。"
 
 #: src/ui/downloads/valve/fetch-matches-confirmation.tsx
 msgid "It will close Counter-Strike if it's running and start automatically for a few seconds."
-msgstr ""
+msgstr "如果 Counter-Strike 正在运行，它会自动关闭并在几秒钟后重新启动"
 
 #: src/ui/downloads/valve/fetch-matches-confirmation.tsx
 msgid "Continue"
-msgstr ""
+msgstr "继续"
 
 #: src/ui/downloads/valve/last-matches-loader.tsx
 msgid "Fetching last matches…"
-msgstr ""
+msgstr "获取最近的比赛信息中…"
 
 #: src/ui/downloads/valve/no-matches-found.tsx
 msgid "No matches found for the current Steam account."
-msgstr ""
+msgstr "未找到当前 Steam 账号匹配的数据."
 
 #: src/ui/hooks/use-clipboard.tsx
 msgctxt "Toast"
 msgid "Copied to clipboard"
-msgstr ""
+msgstr "已复制到剪贴板"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Demo not found"
-msgstr ""
+msgstr "未找到demo录像"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Match not found"
-msgstr ""
+msgstr "未找到比赛"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr ""
+msgstr "请确保通过在 Steam 上选择 CS2 的 \"Betas\" 属性中的 \"csgo_legacy\" 分支来安装 CS:GO。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"
-msgstr ""
+msgstr "您的操作系统不支持 {game}"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
-msgstr ""
+msgstr "没有发现击杀"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
@@ -2464,1308 +2464,1308 @@ msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No deaths found"
-msgstr ""
+msgstr "未找到死亡"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The demo's path contains unsupported characters by CSGO"
-msgstr ""
+msgstr "Demo路径包含CSGO不支持的字符"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Steam is not running"
-msgstr ""
+msgstr "未运行Steam"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr ""
+msgstr "游戏崩溃了，请查看<0>此文档</0>以获取帮助。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
-msgstr ""
+msgstr "正在启动Counter-Strike"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Premier"
-msgstr ""
+msgstr "优先模式"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Competitive 5v5"
-msgstr ""
+msgstr "竞技模式 5v5"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Scrimmage 5v5"
-msgstr ""
+msgstr "练习赛 5v5"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Scrimmage 2v2"
-msgstr ""
+msgstr "练习赛 2v2"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Casual"
-msgstr ""
+msgstr "休闲模式"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver I"
-msgstr ""
+msgstr "白银I"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver II"
-msgstr ""
+msgstr "白银Ⅱ"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver III"
-msgstr ""
+msgstr "白银III"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver IV"
-msgstr ""
+msgstr "白银IV"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver Elite"
-msgstr ""
+msgstr "白银精英"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver Elite Master"
-msgstr ""
+msgstr "白银精英大师"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Gold Nova I"
-msgstr ""
+msgstr "黄金I"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Gold Nova II"
-msgstr ""
+msgstr "黄金II"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Gold Nova III"
-msgstr ""
+msgstr "黄金III"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Gold Nova Master"
-msgstr ""
+msgstr "黄金大师"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Master Guardian I"
-msgstr ""
+msgstr "大师级守卫者"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Master Guardian II"
-msgstr ""
+msgstr "大师级守卫者II"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Master Guardian Elite"
-msgstr ""
+msgstr "精英大师守卫者"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Distinguished Master Guardian"
-msgstr ""
+msgstr "杰出大师守卫者"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Legendary Eagle"
-msgstr ""
+msgstr "传奇之鹰"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Legendary Eagle Master"
-msgstr ""
+msgstr "传奇之鹰大师"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Supreme Master First Class"
-msgstr ""
+msgstr "至尊大师一"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "The Global Elite"
-msgstr ""
+msgstr "大地球"
 
 #: src/ui/hooks/use-get-rank-name.ts
 #: src/ui/hooks/use-get-rank-tier-name.ts
 msgctxt "CS rank"
 msgid "Not ranked"
-msgstr ""
+msgstr "无段位"
 
 #: src/ui/hooks/use-get-rank-tier-name.ts
 msgctxt "CS premier rank tier"
 msgid "Tier {tier}"
-msgstr ""
+msgstr "段位 {tier}"
 
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
 msgid "Probation"
-msgstr ""
+msgstr "冷却时间Probation"
 
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
 msgid "Banned"
-msgstr ""
+msgstr "已封禁"
 
 #: src/ui/hooks/use-translate-economy-ban.ts
 msgctxt "Steam economy ban status"
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/ui/keyboard/keyboard-shortcut.ts
 msgctxt "Keyboard shortcut"
 msgid "C"
-msgstr ""
+msgstr "C"
 
 #: src/ui/left-bar/analyses-link.tsx
 msgctxt "Tooltip"
 msgid "Analyses"
-msgstr ""
+msgstr "分析"
 
 #: src/ui/left-bar/bans-link.tsx
 msgctxt "Tooltip"
 msgid "VAC bans"
-msgstr ""
+msgstr "VAC封禁"
 
 #: src/ui/left-bar/demos-link.tsx
 msgctxt "Tooltip"
 msgid "Demos"
-msgstr ""
+msgstr "回放"
 
 #: src/ui/left-bar/downloads-link.tsx
 msgctxt "Tooltip"
 msgid "Downloads"
-msgstr ""
+msgstr "下载"
 
 #: src/ui/left-bar/matches-link.tsx
 msgctxt "Tooltip"
 msgid "Matches"
-msgstr ""
+msgstr "比赛"
 
 #: src/ui/left-bar/pinned-player-link.tsx
 msgctxt "Tooltip"
 msgid "Pinned player"
-msgstr ""
+msgstr "置顶的玩家"
 
 #: src/ui/left-bar/players-link.tsx
 msgctxt "Tooltip"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/left-bar/search-link.tsx
 msgctxt "Tooltip"
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: src/ui/left-bar/settings-button.tsx
 msgid "Settings ({shortcut})"
-msgstr ""
+msgstr "设置 ({shortcut})"
 
 #: src/ui/match/chat-messages/chat-message.tsx
 msgctxt "Chat message status"
 msgid "*DEAD*"
-msgstr ""
+msgstr "*死亡*"
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "No chat messages found."
-msgstr ""
+msgstr "未找到聊天消息"
 
 #: src/ui/match/chat-messages/empty-chat-messages.tsx
 msgid "Chat messages are available only if the <0>.info</0> file of the demo is next to its <1>.dem</1> file during analysis."
-msgstr ""
+msgstr "只有当演示的<0>.info</0> 文件在分析中处于其<1>.dem</1> 文件旁边时，聊天信息才可用。"
 
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgctxt "OS save dialog title"
 msgid "Export"
-msgstr ""
+msgstr "导出"
 
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgid "Chat messages exported"
-msgstr ""
+msgstr "已导出聊天消息"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
 msgid "{teamName} has +${money} more than {oppositeTeamName}"
-msgstr ""
+msgstr "{teamName}比{oppositeTeamName}多了+${money}"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 msgctxt "Chart axis label"
 msgid "Round"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Round {roundNumber}"
-msgstr ""
+msgstr "回合{roundNumber}"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart axis label"
 msgid "Winner"
-msgstr ""
+msgstr "获胜方"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Winner: {winnerName}"
-msgstr ""
+msgstr "获胜方：{winnerName}"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgid "Advantage"
-msgstr ""
+msgstr "优势"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart axis label money value"
 msgid "{money}K"
-msgstr ""
+msgstr "{money}K"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Round: {roundNumber}"
-msgstr ""
+msgstr "回合:{roundNumber}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip economy type"
 msgid "Type: {0}"
-msgstr ""
+msgstr "类型：{0}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
 msgid "Equipment value: ${money}"
-msgstr ""
+msgstr "装备价值：${money}"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgid "Breakdown"
-msgstr ""
+msgstr "崩溃"
 
 #: src/ui/match/economy/team-economy-breakdown/team-economy-breakdown-chart.tsx
 msgctxt "Chart tooltip"
 msgid "{winnerTeamName} won the round {roundNumber}"
-msgstr ""
+msgstr "{winnerTeamName}赢得了回合{roundNumber}"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
 msgctxt "Economy type"
 msgid "Pistol"
-msgstr ""
+msgstr "手枪局"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
 msgctxt "Economy type"
 msgid "Eco"
-msgstr ""
+msgstr "经济局"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
 msgctxt "Economy type"
 msgid "Semi buy"
-msgstr ""
+msgstr "半起局"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
 msgctxt "Economy type"
 msgid "Force buy"
-msgstr ""
+msgstr "强起"
 
 #: src/ui/match/economy/team-economy-breakdown/use-translate-economy-type.ts
 msgctxt "Economy type"
 msgid "Full buy"
-msgstr ""
+msgstr "全起"
 
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 msgctxt "Chart axis tooltip"
 msgid "Round {roundNumber}"
-msgstr ""
+msgstr "回合{roundNumber}"
 
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 msgctxt "Chart label"
 msgid "Winner"
-msgstr ""
+msgstr "获胜方"
 
 #: src/ui/match/economy/team-equipment-values-chart.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Equipment value"
-msgstr ""
+msgstr "装备价值"
 
 #: src/ui/match/grenades/finder/context-menu.tsx
 msgctxt "Context menu"
 msgid "Copy position"
-msgstr ""
+msgstr "复制位置"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "Smoke"
-msgstr ""
+msgstr "烟雾弹"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "Flashbang"
-msgstr ""
+msgstr "闪光弹"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "HE Grenade"
-msgstr ""
+msgstr "高爆手雷"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 msgctxt "Grenade name"
 msgid "Decoy"
-msgstr ""
+msgstr "诱饵弹"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 msgctxt "Grenade name"
 msgid "Molotov"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 msgctxt "Grenade name"
 msgid "Incendiary"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/match/grenades/finder/grenade-name-select.tsx
 msgctxt "Input label"
 msgid "Grenade"
-msgstr ""
+msgstr "手雷"
 
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 msgid "No grenades found."
-msgstr ""
+msgstr "未发现手榴弹。"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header"
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header tooltip"
 msgid "Player's name"
-msgstr ""
+msgstr "玩家名称"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header"
 msgid "Tick"
-msgstr ""
+msgstr "Tick"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header tooltip"
 msgid "Tick"
-msgstr ""
+msgstr "Tick"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header"
 msgid "Round"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header tooltip"
 msgid "Round"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header velocity"
 msgid "Vel X"
-msgstr ""
+msgstr "Vel X"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header tooltip"
 msgid "Thrower velocity X"
-msgstr ""
+msgstr "抛射速度 X"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header velocity"
 msgid "Vel Y"
-msgstr ""
+msgstr "Vel Y"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header tooltip"
 msgid "Thrower velocity Y"
-msgstr ""
+msgstr "抛射速度 Y"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header velocity"
 msgid "Vel Z"
-msgstr ""
+msgstr "Vel Z"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header tooltip"
 msgid "Thrower velocity Z"
-msgstr ""
+msgstr "抛射速度 Z"
 
 #: src/ui/match/grenades/grenades-tabs.tsx
 msgctxt "Tab link"
 msgid "Stats"
-msgstr ""
+msgstr "统计信息"
 
 #: src/ui/match/grenades/grenades-tabs.tsx
 msgctxt "Tab link grenades finder"
 msgid "Finder"
-msgstr ""
+msgstr "查找"
 
 #: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
 msgctxt "OS save dialog title"
 msgid "Export as PNG"
-msgstr ""
+msgstr "导出为 PNG"
 
 #: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
 msgctxt "Button"
 msgid "Export as PNG"
-msgstr ""
+msgstr "导出为 PNG"
 
 #: src/ui/match/grenades/stats/grenade-select.tsx
 msgctxt "Grenade name"
 msgid "Fire"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Damage"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Damage per throw"
-msgstr ""
+msgstr "每投掷伤害"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Enemies damaged per throw"
-msgstr ""
+msgstr "每次投掷对敌人造成的伤害"
 
 #: src/ui/match/grenades/stats/labels/fire-labels.tsx
 msgid "Average damage per round"
-msgstr ""
+msgstr "每回合平均伤害"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Duration"
-msgstr ""
+msgstr "持续时间"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Players flashed"
-msgstr ""
+msgstr "被白的玩家"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Player flashed per throw"
-msgstr ""
+msgstr "每次投掷导致被闪的玩家数"
 
 #: src/ui/match/grenades/stats/labels/flashbang-labels.tsx
 msgid "Average player flashed per round"
-msgstr ""
+msgstr "每回合平均被闪的玩家数"
 
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Damages per round"
-msgstr ""
+msgstr "每轮比赛中的平均伤害量"
 
 #: src/ui/match/grenades/stats/labels/he-grenade-labels.tsx
 msgid "Killed"
-msgstr ""
+msgstr "击杀"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "Players flashbang matrix"
-msgstr ""
+msgstr "玩家闪光弹数据矩阵"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "<0>{flasherName}</0> flashed <1>{flashedName}</1> around <2>{roundedDuration}s</2>"
-msgstr ""
+msgstr "<0>{flasherName}</0> 对 <1>{flashedName}</1> 造成了闪光，持续了约 <2>{roundedDuration} 秒</2>。"
 
 #: src/ui/match/heatmap/input-blur.tsx
 msgctxt "Input label"
 msgid "Blur"
-msgstr ""
+msgstr "模糊"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Deaths"
-msgstr ""
+msgstr "死亡数"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Shots"
-msgstr ""
+msgstr "射击次数"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "HE"
-msgstr ""
+msgstr "高爆手雷"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Flashbang"
-msgstr ""
+msgstr "闪光震撼弹"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Smoke"
-msgstr ""
+msgstr "烟雾弹"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Molotov"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/match/heatmap/input-event.tsx
 msgctxt "Heatmap event"
 msgid "Decoy"
-msgstr ""
+msgstr "诱饵弹"
 
 #: src/ui/match/heatmap/input-event.tsx
 #: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Event"
-msgstr ""
+msgstr "事件"
 
 #: src/ui/match/heatmap/input-opacity.tsx
 msgctxt "Input label"
 msgid "Opacity"
-msgstr ""
+msgstr "不透明度"
 
 #: src/ui/match/heatmap/input-radius.tsx
 msgctxt "Input label"
 msgid "Radius"
-msgstr ""
+msgstr "半径"
 
 #: src/ui/match/match-loader.tsx
 msgid "Fetching match…"
-msgstr ""
+msgstr "获取比赛信息中…"
 
 #: src/ui/match/match-loader.tsx
 msgid "Match not found."
-msgstr ""
+msgstr "未找到比赛"
 
 #: src/ui/match/match-tabs.tsx
 msgid "Previous match ({shortcut})"
-msgstr ""
+msgstr "上一场比赛({shortcut})"
 
 #: src/ui/match/match-tabs.tsx
 msgid "Next match ({shortcut})"
-msgstr ""
+msgstr "下一场比赛({shortcut})"
 
 #: src/ui/match/match-tabs.tsx
 #: src/ui/player/player-tabs.tsx
 msgctxt "Tab link"
 msgid "Overview"
-msgstr ""
+msgstr "概览"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Rounds"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Heatmap"
-msgstr ""
+msgstr "热力图"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Weapons"
-msgstr ""
+msgstr "武器"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Grenades"
-msgstr ""
+msgstr "手雷"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Economy"
-msgstr ""
+msgstr "经济"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "2D viewer"
-msgstr ""
+msgstr "2D 查看器"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Video"
-msgstr ""
+msgstr "视频"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Chat"
-msgstr ""
+msgstr "聊天"
 
 #: src/ui/match/overview/action-bar/export-match-as-xlsx-button.tsx
 msgctxt "Button"
 msgid "XLSX export"
-msgstr ""
+msgstr "导出为XLSX"
 
 #: src/ui/match/overview/action-bar/export-match-to-json-button.tsx
 msgctxt "Button"
 msgid "JSON export"
-msgstr ""
+msgstr "导出 为JSON"
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Dialog title"
 msgid "Watch at tick"
-msgstr ""
+msgstr "观看特定时刻"
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgid "The playback will start at the specified tick."
-msgstr ""
+msgstr "回放将会从指定的时刻开始播放"
 
 #: src/ui/match/overview/action-bar/watch-match-at-tick-button.tsx
 msgctxt "Button"
 msgid "Watch at tick"
-msgstr ""
+msgstr "观看特定时刻"
 
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 msgid "Invalid crosshair share code"
-msgstr ""
+msgstr "无效的准星代码"
 
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 msgctxt "Context menu sub item"
 msgid "Crosshair config"
-msgstr ""
+msgstr "准星设置"
 
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-share-code-item.tsx
 msgctxt "Context menu sub item"
 msgid "Crosshair share code"
-msgstr ""
+msgstr "准星分享代码"
 
 #: src/ui/match/overview/scoreboard/context-menu/copy-player-data-item.tsx
 msgid "Steam ID"
-msgstr ""
+msgstr "Steam ID"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
 msgid "Generate kills video"
-msgstr ""
+msgstr "生成击杀视频"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
 msgid "vs"
-msgstr ""
+msgstr "vs"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Source"
-msgstr ""
+msgstr "来源"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Client name"
-msgstr ""
+msgstr "用户名称"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Server name"
-msgstr ""
+msgstr "服务器名称"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Tickrate"
-msgstr ""
+msgstr "Tickrate"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Framerate"
-msgstr ""
+msgstr "帧速率"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgid "Checksum"
-msgstr ""
+msgstr "校验码"
 
 #: src/ui/match/overview/scoreboard/rounds-timeline.tsx
 #: src/ui/match/rounds/overview/rounds-entries.tsx
 msgctxt "Tooltip"
 msgid "Switch sides"
-msgstr ""
+msgstr "交换阵营"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "Rank"
-msgstr ""
+msgstr "排名"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Rank"
-msgstr ""
+msgstr "排名"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header damage health"
 msgid "DMG"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Damages"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header kast"
 msgid "KAST"
-msgstr ""
+msgstr "回合贡献率"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
-msgstr ""
+msgstr "玩家在这一比赛中击杀、协助、存活或被交换的比赛回合百分比"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header average damage per round"
 msgid "ADR"
-msgstr ""
+msgstr "伤害/回合"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Average Damage per Round"
-msgstr ""
+msgstr "每回合平均伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header utility damage per round"
 msgid "UDR"
-msgstr ""
+msgstr "UDR"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Utility damage per round"
-msgstr ""
+msgstr "道具每回合平均伤害"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "HLTV 2.0"
-msgstr ""
+msgstr "HLTV 2.0"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Estimated HLTV 2.0 rating"
-msgstr ""
+msgstr "Estimated HLTV 2.0 rating"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "HLTV"
-msgstr ""
+msgstr "HLTV"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "HLTV 1.0 rating"
-msgstr ""
+msgstr "Estimated HLTV 1.0 rating"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header utility damage"
 msgid "UD"
-msgstr ""
+msgstr "UD"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Total Utility Damage Dealt"
-msgstr ""
+msgstr "总辅助伤害量"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first kill count"
 msgid "FK"
-msgstr ""
+msgstr "FK"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "First kills of a round"
-msgstr ""
+msgstr "首杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first death count"
 msgid "FD"
-msgstr ""
+msgstr "FD"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "First deaths of a round"
-msgstr ""
+msgstr "首个死亡"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade kill count"
 msgid "TK"
-msgstr ""
+msgstr "TK"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Trade Kills (Kill revenged within 5s after a teammate died)"
-msgstr ""
+msgstr "补枪击杀(队友死亡后5秒内报仇)"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade death count"
 msgid "TD"
-msgstr ""
+msgstr "TD"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Trade Deaths (Death revenged by a teammate within 5s after the player died)"
-msgstr ""
+msgstr "交换死亡(一名玩家死亡后的5秒内有队友进行了复仇击杀)"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade kill count"
 msgid "FTK"
-msgstr ""
+msgstr "FTK"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "First Trade Kills (Kill revenged within 5s after a teammate died)"
-msgstr ""
+msgstr "首个人头交换(队友死亡后的5秒内实现了一次复仇击杀)"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade death count"
 msgid "FTD"
-msgstr ""
+msgstr "FTD"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "First Trade Deaths (Death revenged by a teammate within 5s after the player died)"
-msgstr ""
+msgstr "首个人头交换死亡(玩家死亡后，队友在5秒内进行了复仇击杀)"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header wallbang kill count"
 msgid "WB"
-msgstr ""
+msgstr "WB"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Wallbang Kill"
-msgstr ""
+msgstr "穿墙击杀"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb planted count"
 msgid "BP"
-msgstr ""
+msgstr "BP"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Bomb Planted"
-msgstr ""
+msgstr "炸弹安放数"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb defused count"
 msgid "BD"
-msgstr ""
+msgstr "BD"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Bomb Defused"
-msgstr ""
+msgstr "炸弹拆除数"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header hostage rescued count"
 msgid "HR"
-msgstr ""
+msgstr "HR"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "Hostage Rescued"
-msgstr ""
+msgstr "拯救人质"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "2K"
-msgstr ""
+msgstr "2K"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "2-kill rounds"
-msgstr ""
+msgstr "击杀2人的回合"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "1v5"
-msgstr ""
+msgstr "1v5"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "1 versus 5 won"
-msgstr ""
+msgstr "1v5残局胜利"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "1v4"
-msgstr ""
+msgstr "1v4"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "1 versus 4 won"
-msgstr ""
+msgstr "1v4残局胜利"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "1v3"
-msgstr ""
+msgstr "1v3"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "1 versus 3 won"
-msgstr ""
+msgstr "1v3残局胜利"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "1v2"
-msgstr ""
+msgstr "1v2"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "1 versus 2 won"
-msgstr ""
+msgstr "1v2残局胜利"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header"
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "1 versus 1 won"
-msgstr ""
+msgstr "1v1残局胜利"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel title"
 msgid "Clutches"
-msgstr ""
+msgstr "翻盘"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel label"
 msgid "Round"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel label"
 msgid "Opponents"
-msgstr ""
+msgstr "对手"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel label"
 msgid "Won"
-msgstr ""
+msgstr "胜利"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel label"
 msgid "Survived"
-msgstr ""
+msgstr "存活"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Tooltip"
 msgid "Watch clutch"
-msgstr ""
+msgstr "观看关键局"
 
 #: src/ui/match/players/kills-panel.tsx
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/search/results/result-row.tsx
 msgid "Round {roundNumber}"
-msgstr ""
+msgstr "回合 {roundNumber}"
 
 #: src/ui/match/players/kills-panel.tsx
 #: src/ui/match/rounds/round/kill-feed.tsx
 msgctxt "Tooltip"
 msgid "Watch kill"
-msgstr ""
+msgstr "观看击杀"
 
 #: src/ui/match/players/player-action-bar.tsx
 msgctxt "Tooltip"
 msgid "Banned player"
-msgstr ""
+msgstr "已被封禁的玩家"
 
 #: src/ui/match/players/player-action-bar.tsx
 msgctxt "Button"
 msgid "See global stats"
-msgstr ""
+msgstr "查看全局统计数据"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel title"
 msgid "Weapons"
-msgstr ""
+msgstr "武器"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Name"
-msgstr ""
+msgstr "名字"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "HS%"
-msgstr ""
+msgstr "爆头率"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Damages"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Shots"
-msgstr ""
+msgstr "射击次数"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Hits"
-msgstr ""
+msgstr "击中次数"
 
 #: src/ui/match/players/weapons-panel.tsx
 msgctxt "Panel label"
 msgid "Accuracy"
-msgstr ""
+msgstr "精准度"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash"
-msgstr ""
+msgstr "经济"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Cash spent"
-msgstr ""
+msgstr "花费经济"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 msgid "Economy type"
-msgstr ""
+msgstr "Eco的种类"
 
 #: src/ui/match/rounds/overview/round-entry.tsx
 #: src/ui/match/rounds/round/round-top-bar.tsx
 msgctxt "Tooltip"
 msgid "Watch round"
-msgstr ""
+msgstr "观看回合"
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "No clutches in this round"
-msgstr ""
+msgstr "本回合没有关键残局"
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "{clutcherName} won a 1v{opponentCount}"
-msgstr ""
+msgstr "{clutcherName} 赢得了1vs {opponentCount}"
 
 #: src/ui/match/rounds/round/clutches.tsx
 msgid "{clutcherName} lost a 1v{opponentCount}"
-msgstr ""
+msgstr "{clutcherName} 输掉了1v{opponentCount}"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
-msgstr ""
+msgstr "Gameplay"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Time alive"
-msgstr ""
+msgstr "存活时间"
 
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Headshot kills"
-msgstr ""
+msgstr "爆头击杀"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Trade kills"
-msgstr ""
+msgstr "换人击杀"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Airborne kills"
-msgstr ""
+msgstr "空摘"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Blinded kills"
-msgstr ""
+msgstr "被致盲时的击杀"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Chicken kills"
-msgstr ""
+msgstr "杀鸡的数量"
 
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Deaths"
-msgstr ""
+msgstr "死亡数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Trade deaths"
-msgstr ""
+msgstr "换人死亡数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Blinded deaths"
-msgstr ""
+msgstr "致盲死亡数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Grenades"
-msgstr ""
+msgstr "手雷"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Flash"
-msgstr ""
+msgstr "闪光"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "HE"
-msgstr ""
+msgstr "高爆手雷"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Smoke"
-msgstr ""
+msgstr "烟雾弹"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Decoy"
-msgstr ""
+msgstr "诱饵弹"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Molotov"
-msgstr ""
+msgstr "燃烧弹"
 
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Damages"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Shots"
-msgstr ""
+msgstr "射击次数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Damage dealt"
-msgstr ""
+msgstr "造成伤害"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Opponents hurt"
-msgstr ""
+msgstr "敌人受伤"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Own damage"
-msgstr ""
+msgstr "自身伤害"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Own team damage"
-msgstr ""
+msgstr "队友伤害"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Economy"
-msgstr ""
+msgstr "经济"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Strategy"
-msgstr ""
+msgstr "战略"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Players stats"
-msgstr ""
+msgstr "玩家数据"
 
 #: src/ui/match/rounds/rounds-navigation-bar.tsx
 msgid "Overview"
-msgstr ""
+msgstr "概览"
 
 #: src/ui/match/video/close-game-after-recording-checkbox.tsx
 msgctxt "Checkbox label"
 msgid "Close the game when recording is done"
-msgstr ""
+msgstr "录制完成后关闭游戏"
 
 #: src/ui/match/video/death-notices-duration-input.tsx
 msgid "Death notices duration (seconds)"
-msgstr ""
+msgstr "死亡通知持续时间(秒)"
 
 #: src/ui/match/video/encoder-software-select.tsx
 msgctxt "Select label of video encoder"
 msgid "Encoder software"
-msgstr ""
+msgstr "编码器"
 
 #: src/ui/match/video/ffmpeg/audio-codec-input.tsx
 msgctxt "Input label"
 msgid "Audio codec"
-msgstr ""
+msgstr "音频编解码器"
 
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Tooltip"
 msgid "Impact the video quality, from 0 to 51 with 0 for the best quality resulting in a larger file"
-msgstr ""
+msgstr "调整视频质量，范围从 0 到 51，其中 0 代表最佳质量，但会导致文件更大"
 
 #: src/ui/match/video/ffmpeg/constant-rate-factor-input.tsx
 msgctxt "Input label"
 msgid "Quality"
-msgstr ""
+msgstr "品质"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-audio-bitrate-select.tsx
 msgctxt "Input label"
 msgid "Audio bitrate"
-msgstr ""
+msgstr "音频码率"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-input-parameters-input.tsx
 msgctxt "Input label"
 msgid "Input parameters"
-msgstr ""
+msgstr "输入参数"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
 msgid "You must install HLAE first"
-msgstr ""
+msgstr "您必须先安装HLAE"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
 msgid "Installing FFmpeg…"
-msgstr ""
+msgstr "正在安装FFmpeg…"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
 msgid "FFmpeg has been installed"
-msgstr ""
+msgstr "FFmpeg 已安装"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-install-button.tsx
 msgid "An error occurred while installing FFmpeg"
-msgstr ""
+msgstr "在安装FFmpeg时出现错误"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-output-parameters-input.tsx
 msgctxt "Input label"
 msgid "Output parameters"
-msgstr ""
+msgstr "输出参数"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-update-button.tsx
 msgid "Updating FFmpeg…"
-msgstr ""
+msgstr "更新FFmpeg…"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-update-button.tsx
 msgid "FFmpeg has been updated"
-msgstr ""
+msgstr "FFmpeg已更新"
 
 #: src/ui/match/video/ffmpeg/ffmpeg-update-button.tsx
 msgid "An error occurred while updating FFmpeg"
-msgstr ""
+msgstr "在更新FFmpeg时出现错误"
 
 #: src/ui/match/video/ffmpeg/video-codec-input.tsx
 msgctxt "Input label"
 msgid "Video codec"
-msgstr ""
+msgstr "视频编解码器"
 
 #: src/ui/match/video/generate-button.tsx
 msgctxt "Button"
 msgid "Generate"
-msgstr ""
+msgstr "生成"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "Player's kill sequences"
-msgstr ""
+msgstr "玩家的击杀序列"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
@@ -3823,7 +3823,7 @@ msgstr ""
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "FFmpeg is not installed."
-msgstr ""
+msgstr "FFmpeg 未安装"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "No sequences provided."
@@ -3919,36 +3919,36 @@ msgstr ""
 
 #: src/ui/match/video/hlae/hlae-update-button.tsx
 msgid "HLAE has been updated"
-msgstr ""
+msgstr "HLAE 已更新"
 
 #: src/ui/match/video/hlae/hlae-update-button.tsx
 msgid "An error occurred while updating HLAE"
-msgstr ""
+msgstr "在更新 HLAE 时发生了错误"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb defused as start tick"
-msgstr ""
+msgstr "将拆除炸弹的时刻设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb defused minus X seconds as start tick"
-msgstr ""
+msgstr "将拆除炸弹的时刻减去 X 秒作为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb defused plus X seconds as start tick"
-msgstr ""
+msgstr "将拆除炸弹的时刻加上 X 秒作为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb defused as end tick"
-msgstr ""
+msgstr "将拆除炸弹的时刻设置为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb defused minus X seconds as end tick"
-msgstr ""
+msgstr "将拆除炸弹的时刻减去 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
@@ -3992,57 +3992,57 @@ msgstr ""
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb exploded minus X seconds as end tick"
-msgstr ""
+msgstr "将炸弹爆炸的时间减去 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb exploded plus X seconds as end tick"
-msgstr ""
+msgstr "将炸弹爆炸的时间加上 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Focus camera on planter"
-msgstr ""
+msgstr "将摄像机对焦在下包的人身上"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgid "Bomb exploded on site {site}"
-msgstr ""
+msgstr "炸弹在{site} 点爆炸"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb planted as start tick"
-msgstr ""
+msgstr "将炸弹种植的时刻设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb planted minus X seconds as start tick"
-msgstr ""
+msgstr "将炸弹安放的时刻减去X秒作为开始刻"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb planted plus X seconds as start tick"
-msgstr ""
+msgstr "将炸弹安放的时刻加上 X 秒作为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb planted as end tick"
-msgstr ""
+msgstr "将炸弹安放的时刻设置为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb planted minus X seconds as end tick"
-msgstr ""
+msgstr "将炸弹安放的时刻减去X秒作为结束刻"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb planted plus X seconds as end tick"
-msgstr ""
+msgstr "将炸弹安放的时刻加上 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Tooltip"
 msgid "Tick: {tick}"
-msgstr ""
+msgstr "Tick：{tick}"
 
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Tooltip"
