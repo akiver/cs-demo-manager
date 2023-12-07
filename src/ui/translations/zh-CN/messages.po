@@ -717,6 +717,11 @@ msgctxt "Context menu watch player lowlights"
 msgid "Lowlights"
 msgstr "低谷"
 
+#: src/ui/components/context-menu/items/watch-player-rounds-item.tsx
+msgctxt "Context menu watch player rounds"
+msgid "Rounds"
+msgstr ""
+
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
 msgstr "{demosSourceNotSupportedCount, plural, one {不支持录像源} other {#不支持录像的来源}}"
@@ -2451,6 +2456,10 @@ msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "No rounds found"
 msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx

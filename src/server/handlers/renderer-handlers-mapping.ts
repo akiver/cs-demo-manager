@@ -156,6 +156,10 @@ import { fetchMigrationsHandler } from './renderer-process/migrations/fetch-migr
 import type { Migration } from 'csdm/node/database/migrations/fetch-migrations';
 import { deleteDemosFromDatabaseHandler } from './renderer-process/demo/delete-demos-from-database-handler';
 import type { WatchDemoErrorPayload } from './renderer-process/counter-strike/counter-strike';
+import {
+  watchPlayerRoundsHandler,
+  type WatchPlayerRoundsPayload,
+} from './renderer-process/counter-strike/watch-player-rounds-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -214,6 +218,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.CancelVideosGeneration]: Handler;
   [RendererClientMessageName.FetchMatchGrenadesThrow]: Handler<string, GrenadeThrow[]>;
   [RendererClientMessageName.WatchDemo]: Handler<WatchDemoPayload, WatchDemoErrorPayload | undefined>;
+  [RendererClientMessageName.WatchPlayerRounds]: Handler<WatchPlayerRoundsPayload, WatchDemoErrorPayload | undefined>;
   [RendererClientMessageName.WatchPlayerHighlights]: Handler<
     WatchPlayerHighlightsPayload,
     WatchDemoErrorPayload | undefined
@@ -306,6 +311,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.CancelVideosGeneration]: cancelVideosGenerationHandler,
   [RendererClientMessageName.FetchMatchGrenadesThrow]: fetchMatchGrenadesThrowHandler,
   [RendererClientMessageName.WatchDemo]: watchDemoHandler,
+  [RendererClientMessageName.WatchPlayerRounds]: watchPlayerRoundsHandler,
   [RendererClientMessageName.WatchPlayerHighlights]: watchPlayerHighlightsHandler,
   [RendererClientMessageName.WatchPlayerLowlights]: watchPlayerLowlightsHandler,
   [RendererClientMessageName.WatchPlayerAsSuspect]: watchPlayerAsSuspectHandler,

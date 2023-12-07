@@ -46,6 +46,7 @@ export const RendererClientMessageName = {
   DeleteMap: 'delete-map',
   ResetMaps: 'reset-maps',
   WatchDemo: 'watch-demo',
+  WatchPlayerRounds: 'watch-player-rounds',
   WatchPlayerHighlights: 'watch-player-highlights',
   WatchPlayerLowlights: 'watch-player-lowlights',
   WatchPlayerAsSuspect: 'watch-player-as-suspect',

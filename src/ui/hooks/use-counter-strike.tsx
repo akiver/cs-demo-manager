@@ -15,6 +15,7 @@ import type { WatchPlayerHighlightsPayload } from 'csdm/server/handlers/renderer
 import type { WatchPlayerAsSuspectPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-as-suspect-handler';
 import type { WatchDemoErrorPayload } from 'csdm/server/handlers/renderer-process/counter-strike/counter-strike';
 import { ExternalLink } from '../components/external-link';
+import type { WatchPlayerRoundsPayload } from 'csdm/server/handlers/renderer-process/counter-strike/watch-player-rounds-handler';
 
 function getErrorMessageFromError(error: WatchDemoErrorPayload) {
   const { errorCode } = error;
@@ -45,6 +46,8 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
     }
     case ErrorCode.NoKillsFound:
       return <Trans>No kills found</Trans>;
+    case ErrorCode.NoRoundsFound:
+      return <Trans>No rounds found</Trans>;
     case ErrorCode.NoDeathsFound:
       return <Trans>No deaths found</Trans>;
     case ErrorCode.InvalidDemoPath:
@@ -190,8 +193,19 @@ export function useCounterStrike() {
     handleError(error);
   };
 
+  const watchPlayerRounds = async (options: WatchPlayerRoundsPayload) => {
+    const unlisten = listenForCsStarting();
+    const error = await client.send({
+      name: RendererClientMessageName.WatchPlayerRounds,
+      payload: options,
+    });
+    unlisten();
+    handleError(error);
+  };
+
   return {
     watchDemo,
+    watchPlayerRounds,
     watchPlayerLowlights,
     watchPlayerHighlights,
     watchPlayerAsSuspect,

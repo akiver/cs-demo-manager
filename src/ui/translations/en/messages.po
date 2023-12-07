@@ -712,6 +712,11 @@ msgctxt "Context menu watch player lowlights"
 msgid "Lowlights"
 msgstr "Lowlights"
 
+#: src/ui/components/context-menu/items/watch-player-rounds-item.tsx
+msgctxt "Context menu watch player rounds"
+msgid "Rounds"
+msgstr "Rounds"
+
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
 msgstr "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
@@ -2447,6 +2452,10 @@ msgstr "{game} is not supported on your operating system"
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
 msgstr "No kills found"
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "No rounds found"
+msgstr "No rounds found"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No deaths found"
