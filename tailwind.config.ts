@@ -178,9 +178,7 @@ const config: Config = {
           '-webkit-user-drag': 'none',
         },
         '.appearance-v-slider': {
-          // TODO deps Deprecated since Chromium 115. Should be replaced with writing-mode: vertical-rl; when it's supported.
-          // https://bugs.chromium.org/p/chromium/issues/detail?id=1472659
-          '-webkit-appearance': 'slider-vertical',
+          'writing-mode': 'vertical-rl',
         },
         '.scrollbar-stable': {
           'scrollbar-gutter': 'stable',
