@@ -3,6 +3,7 @@ import type { Download } from 'csdm/common/download/download-types';
 import { DownloadStatus } from 'csdm/common/types/download-status';
 import { initializeAppSuccess } from 'csdm/ui/bootstrap/bootstrap-actions';
 import {
+  downloadDemoCorrupted,
   downloadDemoError,
   downloadDemoExpired,
   downloadDemoProgressChanged,
@@ -50,6 +51,9 @@ export const pendingDownloadsReducer = createReducer(initialState, (builder) => 
     })
     .addCase(downloadDemoExpired, (state, action) => {
       state.status[action.payload.matchId] = DownloadStatus.Expired;
+    })
+    .addCase(downloadDemoCorrupted, (state, action) => {
+      state.status[action.payload.matchId] = DownloadStatus.Corrupted;
     })
     .addCase(abortDownload, (state, action) => {
       const { matchId } = action.payload;

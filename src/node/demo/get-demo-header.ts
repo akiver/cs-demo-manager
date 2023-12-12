@@ -188,7 +188,7 @@ export async function getDemoHeader(demoFilePath: string): Promise<DemoHeader> {
       return readSource2DemoHeader(buffer);
     }
 
-    throw new InvalidDemoHeader('Invalid filestamp');
+    throw new InvalidDemoHeader(`Invalid filestamp ${filestamp}`);
   } finally {
     await fs.close(fd);
   }

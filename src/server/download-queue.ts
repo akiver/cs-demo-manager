@@ -19,6 +19,7 @@ import { DownloadLinkExpired } from 'csdm/node/download/errors/download-link-exp
 import { isDownloadLinkExpired } from 'csdm/node/download/is-download-link-expired';
 import { WriteDemoInfoFileError } from 'csdm/node/download/errors/write-info-file-error';
 import { insertDownloadHistory } from 'csdm/node/database/download-history/insert-download-history';
+import { InvalidDemoHeader } from 'csdm/node/demo/errors/invalid-demo-header';
 const streamPipeline = util.promisify(pipeline);
 
 class DownloadDemoQueue {
@@ -217,7 +218,24 @@ class DownloadDemoQueue {
         }
       }
 
-      const demoChecksum = await getDemoChecksumFromDemoPath(demoPath);
+      let demoChecksum: string;
+      try {
+        demoChecksum = await getDemoChecksumFromDemoPath(demoPath);
+      } catch (error) {
+        if (error instanceof InvalidDemoHeader) {
+          logger.error('Invalid demo header from downloaded demo');
+          logger.error(error);
+          return server.sendMessageToRendererProcess({
+            name: RendererServerMessageName.DownloadDemoCorrupted,
+            payload: currentDownload.matchId,
+          });
+        }
+
+        logger.error('Failed to get demo checksum from downloaded demo');
+
+        throw error;
+      }
+
       await insertDownloadHistory(currentDownload.matchId);
 
       server.sendMessageToRendererProcess({

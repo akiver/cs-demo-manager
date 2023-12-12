@@ -22,7 +22,7 @@ export async function detectDemoGame(demoPath: string): Promise<Game> {
       return Game.CS2;
     }
 
-    throw new InvalidDemoHeader('Invalid filestamp');
+    throw new InvalidDemoHeader(`Invalid filestamp ${filestamp}`);
   } finally {
     await fs.close(fd);
   }

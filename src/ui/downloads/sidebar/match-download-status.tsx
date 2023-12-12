@@ -7,6 +7,7 @@ import { ExpiredIcon } from 'csdm/ui/icons/expired-icon';
 import { DownloadIcon } from 'csdm/ui/icons/download-icon';
 import { CheckCircleIcon } from 'csdm/ui/icons/check-circle-icon';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
+import { FileCorruptedIcon } from 'csdm/ui/icons/file-corrupted-icon';
 
 type Props = {
   status: DownloadStatus;
@@ -38,6 +39,12 @@ export function MatchDownloadStatus({ status }: Props) {
       return (
         <Tooltip content={<Trans context="Download status">Expired</Trans>}>
           <ExpiredIcon width={iconSize} className="text-orange-400" />
+        </Tooltip>
+      );
+    case DownloadStatus.Corrupted:
+      return (
+        <Tooltip content={<Trans context="Download status">Corrupted</Trans>}>
+          <FileCorruptedIcon width={iconSize} className="text-orange-400" />
         </Tooltip>
       );
     default:

@@ -5,7 +5,7 @@ import type { ErrorCode } from 'csdm/common/error-code';
 import type { FaceitMatch } from 'csdm/common/types/faceit-match';
 import type { FaceitAccount } from '../../../common/types/faceit-account';
 import { initializeAppSuccess } from '../../bootstrap/bootstrap-actions';
-import { downloadsAdded } from '../downloads-actions';
+import { downloadDemoCorrupted, downloadsAdded } from '../downloads-actions';
 import { DownloadSource } from '../../../common/download/download-types';
 import { downloadDemoSuccess } from '../downloads-actions';
 import { downloadDemoExpired } from '../downloads-actions';
@@ -74,6 +74,12 @@ export const faceitReducer = createReducer(initialState, (builder) => {
       const match = state.matches.find((match) => match.id === action.payload.matchId);
       if (match !== undefined) {
         match.downloadStatus = DownloadStatus.Expired;
+      }
+    })
+    .addCase(downloadDemoCorrupted, (state, action) => {
+      const match = state.matches.find((match) => match.id === action.payload.matchId);
+      if (match !== undefined) {
+        match.downloadStatus = DownloadStatus.Corrupted;
       }
     })
     .addCase(downloadDemoError, (state, action) => {

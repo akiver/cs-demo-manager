@@ -39,6 +39,7 @@ export const RendererServerMessageName = {
   DownloadsAdded: 'downloads-added',
   DownloadDemoExpired: 'download-demo-expired',
   DownloadDemoProgress: 'download-demo-progress',
+  DownloadDemoCorrupted: 'download-demo-corrupted',
   DownloadDemoError: 'download-error',
   DownloadDemoSuccess: 'download-demo-success',
   DownloadDemoInCurrentFolderLoaded: 'downloaded-demo-in-current-folder-loaded',
@@ -84,6 +85,7 @@ export interface RendererServerMessagePayload extends SharedServerMessagePayload
   [RendererServerMessageName.DownloadDemoExpired]: string;
   [RendererServerMessageName.DownloadDemoProgress]: DownloadDemoProgressPayload;
   [RendererServerMessageName.DownloadDemoSuccess]: DownloadDemoSuccess;
+  [RendererServerMessageName.DownloadDemoCorrupted]: string;
   [RendererServerMessageName.DownloadDemoError]: string;
   [RendererServerMessageName.DownloadDemoInCurrentFolderLoaded]: Demo;
   [RendererServerMessageName.ExportMatchesToXlsxMatchProgress]: ExportMatchesToXlsxProgressPayload;

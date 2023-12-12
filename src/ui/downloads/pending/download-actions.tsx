@@ -11,6 +11,7 @@ import { useDownloadProgress } from './use-download-progress';
 import { useDownloadStatus } from './use-download-status';
 import { RemoveDownloadButton } from './remove-download-button';
 import { RevealDemoInExplorerButton } from 'csdm/ui/downloads/reveal-demo-in-explorer-button';
+import { FileCorruptedIcon } from 'csdm/ui/icons/file-corrupted-icon';
 
 type Props = {
   matchId: string;
@@ -43,6 +44,14 @@ export function DownloadActions({ matchId, demoFileName }: Props) {
       bottomContent = (
         <p>
           <Trans>The download link has expired.</Trans>
+        </p>
+      );
+      break;
+    case DownloadStatus.Corrupted:
+      statusIcon = <FileCorruptedIcon className="w-16 text-orange-400" />;
+      bottomContent = (
+        <p>
+          <Trans>The downloaded demo is corrupted. You can retry later.</Trans>
         </p>
       );
       break;

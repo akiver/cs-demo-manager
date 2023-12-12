@@ -10,6 +10,7 @@ import {
 } from 'csdm/ui/downloads/valve/valve-actions';
 import {
   demoDownloadedInCurrentFolderLoaded,
+  downloadDemoCorrupted,
   downloadDemoError,
   downloadDemoExpired,
   downloadDemoProgressChanged,
@@ -79,6 +80,11 @@ export function useRegisterDownloadsListeners(client: WebSocketClient) {
     };
     client.on(RendererServerMessageName.DownloadDemoSuccess, onDownloadDemoSuccess);
 
+    const onDownloadDemoCorrupted = (matchId: string) => {
+      dispatch(downloadDemoCorrupted({ matchId }));
+    };
+    client.on(RendererServerMessageName.DownloadDemoCorrupted, onDownloadDemoCorrupted);
+
     const onDownloadDemoError = (matchId: string) => {
       dispatch(downloadDemoError({ matchId }));
     };
@@ -94,6 +100,7 @@ export function useRegisterDownloadsListeners(client: WebSocketClient) {
       client.off(RendererServerMessageName.DownloadDemoProgress, onDownloadProgress);
       client.off(RendererServerMessageName.DownloadDemoExpired, onDemoExpired);
       client.off(RendererServerMessageName.DownloadDemoSuccess, onDownloadDemoSuccess);
+      client.off(RendererServerMessageName.DownloadDemoCorrupted, onDownloadDemoCorrupted);
       client.off(RendererServerMessageName.DownloadDemoError, onDownloadDemoError);
       client.off(RendererServerMessageName.DownloadDemoInCurrentFolderLoaded, onDownloadedDemoInCurrentFolderLoaded);
     };

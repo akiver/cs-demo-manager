@@ -61,6 +61,10 @@ export function DownloadDemoButton({ download, status }: Props) {
     case DownloadStatus.Expired:
       tooltip = <Trans context="Tooltip">Download link expired</Trans>;
       break;
+    case DownloadStatus.Corrupted:
+      tooltip = <Trans context="Tooltip">The demo is corrupted</Trans>;
+      isDisabled = false;
+      break;
     case DownloadStatus.Downloading:
       tooltip = <Trans context="Tooltip">Download in progress</Trans>;
       break;

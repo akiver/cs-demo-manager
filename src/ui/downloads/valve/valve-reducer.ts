@@ -12,7 +12,13 @@ import {
   matchSelected,
   steamIdSelected,
 } from './valve-actions';
-import { downloadDemoError, downloadDemoExpired, downloadDemoSuccess, downloadsAdded } from '../downloads-actions';
+import {
+  downloadDemoCorrupted,
+  downloadDemoError,
+  downloadDemoExpired,
+  downloadDemoSuccess,
+  downloadsAdded,
+} from '../downloads-actions';
 import { abortDownload } from '../pending/pending-actions';
 import { downloadFolderChanged } from 'csdm/ui/settings/settings-actions';
 import type { ErrorCode } from 'csdm/common/error-code';
@@ -86,6 +92,12 @@ export const valveReducer = createReducer(initialState, (builder) => {
       const match = state.matches.find((match) => match.id === action.payload.matchId);
       if (match !== undefined) {
         match.downloadStatus = DownloadStatus.Expired;
+      }
+    })
+    .addCase(downloadDemoCorrupted, (state, action) => {
+      const match = state.matches.find((match) => match.id === action.payload.matchId);
+      if (match !== undefined) {
+        match.downloadStatus = DownloadStatus.Corrupted;
       }
     })
     .addCase(downloadDemoError, (state, action) => {

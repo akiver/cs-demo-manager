@@ -2116,6 +2116,11 @@ msgstr ""
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
+msgid "The demo is corrupted"
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+msgctxt "Tooltip"
 msgid "Download in progress"
 msgstr ""
 
@@ -2309,6 +2314,10 @@ msgid "Pending downloads"
 msgstr ""
 
 #: src/ui/downloads/pending/download-actions.tsx
+msgid "The downloaded demo is corrupted. You can retry later."
+msgstr ""
+
+#: src/ui/downloads/pending/download-actions.tsx
 msgid "An error occurred while downloading the demo."
 msgstr ""
 
@@ -2349,6 +2358,11 @@ msgstr ""
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Expired"
+msgstr ""
+
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Corrupted"
 msgstr ""
 
 #: src/ui/downloads/sidebar/match-download-status.tsx

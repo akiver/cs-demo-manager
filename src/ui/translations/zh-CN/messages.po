@@ -2116,6 +2116,11 @@ msgstr "下载链接已过期"
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
+msgid "The demo is corrupted"
+msgstr ""
+
+#: src/ui/downloads/download-demo-button.tsx
+msgctxt "Tooltip"
 msgid "Download in progress"
 msgstr "正在下载"
 
@@ -2309,6 +2314,10 @@ msgid "Pending downloads"
 msgstr "等待下载"
 
 #: src/ui/downloads/pending/download-actions.tsx
+msgid "The downloaded demo is corrupted. You can retry later."
+msgstr ""
+
+#: src/ui/downloads/pending/download-actions.tsx
 msgid "An error occurred while downloading the demo."
 msgstr "下载录像时发生了错误."
 
@@ -2350,6 +2359,11 @@ msgstr "正在下载..."
 msgctxt "Download status"
 msgid "Expired"
 msgstr "已过期"
+
+#: src/ui/downloads/sidebar/match-download-status.tsx
+msgctxt "Download status"
+msgid "Corrupted"
+msgstr ""
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
