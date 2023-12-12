@@ -29,7 +29,11 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
         ]);
       });
     })
-    .select(sql<number>`COUNT(kills.id) FILTER (WHERE kills.penetrated_objects > 0)`.as('wallbang_kill_count'))
+    .select(
+      sql<number>`COUNT(kills.id) FILTER (WHERE kills.penetrated_objects > 0 AND kills.killer_steam_id = players.steam_id)`.as(
+        'wallbang_kill_count',
+      ),
+    )
     .where('players.match_checksum', '=', checksum)
     .where('kills.match_checksum', '=', checksum)
     .groupBy([
