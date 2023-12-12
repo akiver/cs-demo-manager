@@ -29,6 +29,11 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
     recordingFolderPath = path.join(csgoFolderPath, 'csgo');
   }
 
+  const recordingFolderExists = await fs.pathExists(recordingFolderPath);
+  if (!recordingFolderExists) {
+    throw new RawFilesNotFoundError();
+  }
+
   for (const sequence of sequences) {
     const sequenceName = getSequenceName(sequence);
     const tgaFiles = await glob(`**/${sequenceName}*.tga`, {
