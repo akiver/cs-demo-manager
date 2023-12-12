@@ -52,42 +52,42 @@ demoactions
   {
     factory \\"SkipAhead\\"
     name \\"SkipAhead7\\"
-    starttick \\"318\\"
+    starttick \\"268\\"
     skiptotick \\"210\\"
   }
   \\"8\\"
   {
     factory \\"PlayCommands\\"
     name \\"spec8\\"
-    starttick \\"318\\"
+    starttick \\"268\\"
     commands \\"spec_lock_to_accountid fakeKillerSteamId\\"
   }
   \\"9\\"
   {
     factory \\"PlayCommands\\"
     name \\"spec9\\"
-    starttick \\"318\\"
+    starttick \\"268\\"
     commands \\"spec_player_by_accountid fakeKillerSteamId\\"
   }
   \\"10\\"
   {
     factory \\"SkipAhead\\"
     name \\"SkipAhead10\\"
-    starttick \\"418\\"
+    starttick \\"358\\"
     skiptotick \\"310\\"
   }
   \\"11\\"
   {
     factory \\"PlayCommands\\"
     name \\"spec11\\"
-    starttick \\"418\\"
+    starttick \\"358\\"
     commands \\"spec_lock_to_accountid fakeKillerSteamId\\"
   }
   \\"12\\"
   {
     factory \\"PlayCommands\\"
     name \\"spec12\\"
-    starttick \\"418\\"
+    starttick \\"358\\"
     commands \\"spec_player_by_accountid fakeKillerSteamId\\"
   }
   \\"13\\"

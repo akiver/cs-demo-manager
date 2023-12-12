@@ -16,8 +16,11 @@ export async function generatePlayerRoundsJsonFile({ demoPath, rounds, steamId }
     json.addSkipAhead(currentTick, round.freezeTimeEndTick);
     json.addSpecPlayer(currentTick, steamId);
 
-    const roundEndTick = rounds[index]?.tickEnd ?? 0;
-    currentTick = roundEndTick + 128;
+    if (round.deathTick !== null) {
+      currentTick = round.deathTick + 128;
+    } else {
+      currentTick = round.tickEnd + 128;
+    }
 
     if (index === rounds.length - 1) {
       json.addStopPlayback(currentTick);

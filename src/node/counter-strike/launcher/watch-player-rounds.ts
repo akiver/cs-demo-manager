@@ -14,14 +14,22 @@ export type Round = {
   number: number;
   tickEnd: number;
   freezeTimeEndTick: number;
+  deathTick: number | null;
 };
 
-async function fetchRounds(checksum: string) {
+async function fetchRounds(checksum: string, steamId: string) {
   const rows = await db
     .selectFrom('rounds')
     .select(['number', 'freeze_time_end_tick', 'end_tick'])
-    .where('match_checksum', '=', checksum)
-    .orderBy('freeze_time_end_tick', 'asc')
+    .where('rounds.match_checksum', '=', checksum)
+    .leftJoin('kills', function (qb) {
+      return qb
+        .onRef('kills.match_checksum', '=', 'rounds.match_checksum')
+        .onRef('kills.round_number', '=', 'rounds.number')
+        .on('kills.victim_steam_id', '=', steamId);
+    })
+    .select(['kills.tick as deathTick'])
+    .orderBy('rounds.freeze_time_end_tick', 'asc')
     .execute();
 
   const rounds: Round[] = rows.map((row) => {
@@ -29,6 +37,7 @@ async function fetchRounds(checksum: string) {
       number: row.number,
       tickEnd: row.end_tick,
       freezeTimeEndTick: row.freeze_time_end_tick,
+      deathTick: row.deathTick,
     };
   });
 
@@ -50,7 +59,7 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   }
 
   const checksum = await getDemoChecksumFromDemoPath(demoPath);
-  const rounds = await fetchRounds(checksum);
+  const rounds = await fetchRounds(checksum, steamId);
   if (rounds.length === 0) {
     throw new NoRoundsFound();
   }

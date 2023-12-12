@@ -13,21 +13,25 @@ describe(`Generate player's rounds VDM file`, () => {
         number: 1,
         freezeTimeEndTick: 10,
         tickEnd: 90,
+        deathTick: null,
       },
       {
         number: 2,
         freezeTimeEndTick: 110,
         tickEnd: 190,
+        deathTick: 140,
       },
       {
         number: 3,
         freezeTimeEndTick: 210,
         tickEnd: 290,
+        deathTick: 230,
       },
       {
         number: 4,
         freezeTimeEndTick: 310,
         tickEnd: 390,
+        deathTick: null,
       },
     ];
 
