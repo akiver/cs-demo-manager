@@ -1,8 +1,11 @@
 import fs from 'fs-extra';
 import path from 'node:path';
+import VDF from 'vdf-parser';
 import { getSteamFolderPath } from './get-steam-folder-path';
 import { CounterStrikeExecutableNotFound } from './launcher/errors/counter-strike-executable-not-found';
 import type { Game } from 'csdm/common/types/counter-strike';
+
+type LibraryFolders = { libraryfolders: Record<string, { path: string; apps: Record<string, string> }> };
 
 /**
  * Return the path to the "Counter-Strike Global Offensive" folder.
@@ -21,28 +24,25 @@ export async function getCsgoFolderPath() {
     return;
   }
 
-  // Linux / MacOS:
-  // "1"		"/home/akiver/Desktop/games"
-  // Windows:
-  // "1"		"E:\\Steam\\Games"
-  const pathRegex = /"(([a-z]:|\/)(.*))"/gi;
-  const vdfContent = await fs.readFile(vdfPath);
-  const lines = vdfContent.toString().split('\n');
-  const libraries = [steamFolderPath];
-  for (const line of lines) {
-    const matches = pathRegex.exec(line);
-    if (matches?.[1] !== undefined) {
-      libraries.push(matches[1]);
-    }
-  }
+  const vdfContent = await fs.readFile(vdfPath, 'utf-8');
+  const data = VDF.parse<LibraryFolders>(vdfContent);
 
-  for (const library of libraries) {
-    const csgoFolderPath = path.join(library, 'steamapps', 'common', 'Counter-Strike Global Offensive');
+  for (const index in data.libraryfolders) {
+    const entry = data.libraryfolders[index];
+    const hasCsApp = Object.keys(entry.apps).includes('730');
+    if (!hasCsApp) {
+      continue;
+    }
+
+    const csgoFolderPath = path.join(entry.path, 'steamapps', 'common', 'Counter-Strike Global Offensive');
     const csgoFolderExists = await fs.pathExists(csgoFolderPath);
     if (csgoFolderExists) {
       return csgoFolderPath;
     }
   }
+
+  logger.log('CSGO folder not found in libraryfolders.vdf');
+  logger.log(vdfContent);
 }
 
 export async function getCsgoFolderPathOrThrow(game: Game) {

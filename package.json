@@ -120,6 +120,7 @@
     "typescript": "5.3.3",
     "unbzip2-stream": "1.4.3",
     "undici": "6.0.1",
+    "vdf-parser": "1.2.1",
     "vite": "4.5.0",
     "vitest": "0.34.6",
     "ws": "8.14.2"
