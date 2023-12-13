@@ -38,6 +38,10 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Cevo;
   }
 
+  if (serverName.includes('challengermode')) {
+    return DemoSource.Challengermode;
+  }
+
   if (serverName.includes('esl')) {
     return DemoSource.Esl;
   }

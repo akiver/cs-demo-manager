@@ -14,6 +14,13 @@ export function useGetDemoSourceName() {
             message: 'CEVO',
           }),
         );
+      case DemoSource.Challengermode:
+        return _(
+          msg({
+            context: 'Demo source name',
+            message: 'Challengermode',
+          }),
+        );
       case DemoSource.Ebot:
         return _(
           msg({
@@ -95,6 +102,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Cevo,
       name: getDemoSourceName(DemoSource.Cevo),
+    },
+    {
+      value: DemoSource.Challengermode,
+      name: getDemoSourceName(DemoSource.Challengermode),
     },
     {
       value: DemoSource.Ebot,

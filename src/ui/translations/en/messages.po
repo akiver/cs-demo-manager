@@ -1996,6 +1996,11 @@ msgstr "CEVO"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "Challengermode"
+msgstr "Challengermode"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "eBot"
 msgstr "eBot"
 

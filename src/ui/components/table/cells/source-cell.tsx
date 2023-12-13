@@ -26,6 +26,9 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.Ebot:
       fileName = 'ebot.png';
       break;
+    case DemoSource.Challengermode:
+      fileName = 'challengermode.png';
+      break;
     case DemoSource.Unknown:
       fileName = 'unknown.png';
       break;

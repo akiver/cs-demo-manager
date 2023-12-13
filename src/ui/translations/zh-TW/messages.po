@@ -2001,6 +2001,11 @@ msgstr ""
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "Challengermode"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "eBot"
 msgstr ""
 
