@@ -222,24 +222,7 @@ class DownloadDemoQueue {
         }
       }
 
-      let demoChecksum: string;
-      try {
-        demoChecksum = await getDemoChecksumFromDemoPath(demoPath);
-      } catch (error) {
-        if (error instanceof InvalidDemoHeader) {
-          logger.error('Invalid demo header from downloaded demo');
-          logger.error(error);
-          return server.sendMessageToRendererProcess({
-            name: RendererServerMessageName.DownloadDemoCorrupted,
-            payload: currentDownload.matchId,
-          });
-        }
-
-        logger.error('Failed to get demo checksum from downloaded demo');
-
-        throw error;
-      }
-
+      const demoChecksum = await getDemoChecksumFromDemoPath(demoPath);
       await insertDownloadHistory(currentDownload.matchId);
 
       server.sendMessageToRendererProcess({
@@ -260,6 +243,14 @@ class DownloadDemoQueue {
         logger.error(error);
         server.sendMessageToRendererProcess({
           name: RendererServerMessageName.DownloadDemoError,
+          payload: currentDownload.matchId,
+        });
+      }
+      if (error instanceof InvalidDemoHeader) {
+        logger.error('Invalid demo header from downloaded demo');
+        logger.error(error);
+        server.sendMessageToRendererProcess({
+          name: RendererServerMessageName.DownloadDemoCorrupted,
           payload: currentDownload.matchId,
         });
       }
