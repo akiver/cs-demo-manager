@@ -722,6 +722,10 @@ msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supp
 msgstr "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "Please see this <0>documentation</0> for details."
+msgstr "Please see this <0>documentation</0> for details."
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
 msgstr "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
 
