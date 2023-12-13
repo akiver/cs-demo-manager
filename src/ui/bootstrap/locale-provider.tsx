@@ -16,7 +16,7 @@ export function LocaleProvider({ children }: Props) {
     const loadLocaleMessages = async () => {
       try {
         const folderName = getLocaleFolderName(locale);
-        const po = await import(`../translations/${folderName}/messages.po`);
+        const po = await import(`../translations/${folderName}/messages.po?lingui`);
         i18n.loadAndActivate({ locale, messages: po.messages });
       } catch (error) {
         const en = await import('../translations/en/messages.po');

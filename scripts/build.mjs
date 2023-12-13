@@ -25,7 +25,7 @@ async function buildRendererProcessBundle() {
       sourcemap: true,
       chunkSizeWarningLimit: 3000,
     },
-    configFile: path.join(rootFolderPath, 'vite.config.ts'),
+    configFile: path.join(rootFolderPath, 'vite.config.mts'),
     esbuild: {
       // Do not minify identifiers in order to have real functions name in logs that are written on the FS.
       // I didn't find a way to have logs in production builds pointing to the actual .ts/.tsx file.

@@ -88,7 +88,7 @@ async function buildAndWatchRendererProcessBundle() {
       watch: {},
     },
     logLevel: 'warn',
-    configFile: path.join(rootFolderPath, 'vite.config.ts'),
+    configFile: path.join(rootFolderPath, 'vite.config.mts'),
     define: {
       ...commonDefine,
       REACT_STRICT_MODE_ENABLED: process.env.REACT_STRICT_MODE_ENABLED ?? false,

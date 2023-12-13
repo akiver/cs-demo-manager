@@ -25,7 +25,7 @@ module.exports = {
     'dist',
     'out',
     'static',
-    'vite.config.ts',
+    'vite.config.mts',
     'lingui.config.ts',
     '*.po',
     '*.png',
