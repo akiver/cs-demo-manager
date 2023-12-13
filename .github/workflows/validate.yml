@@ -30,7 +30,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm clean-install
+        run: npm clean-install --force
 
       - name: TS compile
         run: npm run compile
@@ -48,7 +48,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm clean-install
+        run: npm clean-install --force
 
       - name: Lint
         run: npm run lint
@@ -69,7 +69,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
-        run: npm clean-install --ignore-scripts
+        run: npm clean-install --force
 
       - name: Test
         run: npm run test
