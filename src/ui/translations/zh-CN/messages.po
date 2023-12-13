@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-07 21:23\n"
+"PO-Revision-Date: 2023-12-13 00:10\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -720,7 +720,7 @@ msgstr "低谷"
 #: src/ui/components/context-menu/items/watch-player-rounds-item.tsx
 msgctxt "Context menu watch player rounds"
 msgid "Rounds"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
@@ -2474,7 +2474,7 @@ msgstr "没有发现击杀"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
-msgstr ""
+msgstr "未发现回合"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No deaths found"
@@ -3779,61 +3779,61 @@ msgstr "生成"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "Player's kill sequences"
-msgstr "玩家的击杀序列"
+msgstr "玩家的击杀镜头"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
 msgid "Player"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
-msgstr ""
+msgstr "如果两次击杀间隔少于10秒，或两个镜头之间间隔少于2秒，那么将生成一个单一镜头"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Button"
 msgid "Generate player's kill sequences"
-msgstr ""
+msgstr "生成玩家的击杀镜头"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Generation in progress…"
-msgstr ""
+msgstr "生成中..."
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Please keep the CS2 window focused; otherwise the camera focus may not change."
-msgstr ""
+msgstr "请保持 CS2 窗口处于焦点状态；否则摄像的焦点可能不会改变"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "In-game recording in progress…"
-msgstr ""
+msgstr "游戏内录制中…"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Generating video for sequence {sequenceNumber} / {sequenceCount}…"
-msgstr ""
+msgstr "正在为镜头 {sequenceNumber} / {sequenceCount} 生成视频…"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Concatenating sequences…"
-msgstr ""
+msgstr "正在连接镜头中…"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "The demo's path contains unsupported characters by CSGO."
-msgstr ""
+msgstr "Demo路径包含CSGO不支持的字符"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Failed to start the game, make sure Steam is running and you are connected."
-msgstr ""
+msgstr "游戏启动失败，请确保 Steam 正在运行并且您已连接"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Please make sure that CS:GO is installed by selecting the <0>csgo_legacy</0> branch from the CS2 \"Betas\" property tab on Steam."
-msgstr ""
+msgstr "请确保通过在 Steam 上选择 CS2 的 \"Betas\" 属性中的 <0>csgo_legacy</0>分支来安装 CS:GO"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "HLAE is not installed."
-msgstr ""
+msgstr "HLAE 未安装"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "VirtualDub is not installed."
-msgstr ""
+msgstr "VirtualDub未安装"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "FFmpeg is not installed."
@@ -3841,95 +3841,95 @@ msgstr "FFmpeg 未安装"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "No sequences provided."
-msgstr ""
+msgstr "没有提供序列"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "One or more sequences are overlapping, at least 2 seconds are required between 2 sequences."
-msgstr ""
+msgstr "一个或多个镜头重叠，两个镜头之间至少需要2秒"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Steam is not running."
-msgstr ""
+msgstr "Steam不在运行"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "FFmpeg returned an error."
-msgstr ""
+msgstr "FFmpeg返回了一个错误"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "VirtualDub returned an error."
-msgstr ""
+msgstr "VirtualDub返回了一个错误"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "WAV file not found."
-msgstr ""
+msgstr "未找到WAV文件"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Raw files not found."
-msgstr ""
+msgstr "未找到原始文件"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "HLAE returned an error."
-msgstr ""
+msgstr "HLAE返回了一个错误"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Generation done"
-msgstr ""
+msgstr "生成已完成"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Output:"
-msgstr ""
+msgstr "输出:"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgctxt "Button"
 msgid "Reveal raw files folder"
-msgstr ""
+msgstr "显示原始文件文件夹"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgctxt "Button"
 msgid "Reveal output folder"
-msgstr ""
+msgstr "选择存储目录"
 
 #: src/ui/match/video/height-resolution-input.tsx
 msgctxt "Input label"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #: src/ui/match/video/height-resolution-input.tsx
 #: src/ui/settings/playback/game-height.tsx
 msgctxt "Input placeholder"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgctxt "Checkbox label"
 msgid "Enable config folder"
-msgstr ""
+msgstr "打开配置目录"
 
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgctxt "Input label"
 msgid "Config folder"
-msgstr ""
+msgstr "配置文件夹"
 
 #: src/ui/match/video/hlae/hlae-install-button.tsx
 msgid "Installing HLAE…"
-msgstr ""
+msgstr "正在安装HLAE..."
 
 #: src/ui/match/video/hlae/hlae-install-button.tsx
 msgid "HLAE has been installed"
-msgstr ""
+msgstr "HLAE已经被安装"
 
 #: src/ui/match/video/hlae/hlae-install-button.tsx
 msgid "An error occurred while installing HLAE"
-msgstr ""
+msgstr "安装HLAE时出现错误"
 
 #: src/ui/match/video/hlae/hlae-parameters.tsx
 msgctxt "Input label"
 msgid "Parameters"
-msgstr ""
+msgstr "参数"
 
 #: src/ui/match/video/hlae/hlae-update-button.tsx
 msgid "Updating HLAE…"
-msgstr ""
+msgstr "正在更新HLAE..."
 
 #: src/ui/match/video/hlae/hlae-update-button.tsx
 msgid "HLAE has been updated"
@@ -3967,41 +3967,41 @@ msgstr "将拆除炸弹的时刻减去 X 秒作为结束时刻"
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb defused plus X seconds as end tick"
-msgstr ""
+msgstr "将炸弹拆除的时刻加上 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgctxt "Context menu"
 msgid "Focus camera on defuser"
-msgstr ""
+msgstr "将摄像机对焦在拆包的人身上"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgid "Tick: {tick}"
-msgstr ""
+msgstr "Tick: {tick}"
 
 #: src/ui/match/video/match-timeline/bomb-defused-item.tsx
 msgid "Bomb defused by {defuserName} on site {site}"
-msgstr ""
+msgstr "炸弹在{site} 点被{defuserName} 拆除"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb exploded as start tick"
-msgstr ""
+msgstr "将炸弹爆炸的时刻设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb exploded minus X seconds as start tick"
-msgstr ""
+msgstr "将炸弹爆炸的时刻减去 X 秒作为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb exploded plus X seconds as start tick"
-msgstr ""
+msgstr "将炸弹爆炸的时间加上 X 秒设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the bomb exploded as end tick"
-msgstr ""
+msgstr "将炸弹爆炸的时刻设置为结束时刻"
 
 #: src/ui/match/video/match-timeline/bomb-exploded-item.tsx
 msgctxt "Context menu"
@@ -4061,269 +4061,269 @@ msgstr "Tick：{tick}"
 #: src/ui/match/video/match-timeline/bomb-planted-item.tsx
 msgctxt "Tooltip"
 msgid "Bomb planted by {planterName} on site {site}"
-msgstr ""
+msgstr "{planterName} 在{site} 点安放炸弹"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the kill as start tick"
-msgstr ""
+msgstr "将击杀的时刻设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the kill minus X seconds as start tick"
-msgstr ""
+msgstr "将击杀的时刻减去 X 秒作为开始时刻"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the kill plus X seconds as start tick"
-msgstr ""
+msgstr "将击杀的时刻加上 X 秒作为开始时刻"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the kill as end tick"
-msgstr ""
+msgstr "将击杀的时刻设置为结束时刻"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the kill minus X seconds as end tick"
-msgstr ""
+msgstr "将击杀的时刻减去 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Set the tick of the kill plus X seconds as end tick"
-msgstr ""
+msgstr "将击杀的时刻加上 X 秒作为结束时刻"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Focus camera on killer"
-msgstr ""
+msgstr "将摄像机对焦在凶手身上"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Context menu"
 msgid "Focus camera on victim"
-msgstr ""
+msgstr "将摄像机对焦在受害者身上"
 
 #: src/ui/match/video/match-timeline/kill-item.tsx
 msgctxt "Tooltip"
 msgid "<0>{killerName}</0> killed<1>{victimName}</1> with<2>{weaponName}</2>"
-msgstr ""
+msgstr "<0>{killerName}</0> 用<2>{weaponName}</2> 杀死了<1>{victimName}</1>"
 
 #: src/ui/match/video/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Rounds"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/video/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/match/video/match-timeline/match-timeline.tsx
 msgctxt "Timeline group label"
 msgid "Bomb"
-msgstr ""
+msgstr "炸弹"
 
 #: src/ui/match/video/match-timeline/match-timeline.tsx
 msgctxt "Tooltip"
 msgid "Start tick"
-msgstr ""
+msgstr "开始时刻"
 
 #: src/ui/match/video/match-timeline/match-timeline.tsx
 msgctxt "Tooltip"
 msgid "End tick"
-msgstr ""
+msgstr "结束时刻"
 
 #: src/ui/match/video/match-timeline/round-item.tsx
 msgctxt "Context menu"
 msgid "Set round start tick as start tick"
-msgstr ""
+msgstr "将回合开始时刻设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/round-item.tsx
 msgctxt "Context menu"
 msgid "Set round start tick as end tick"
-msgstr ""
+msgstr "将回合开始时刻设置为结束时刻"
 
 #: src/ui/match/video/match-timeline/round-item.tsx
 msgctxt "Context menu"
 msgid "Set round end tick as start tick"
-msgstr ""
+msgstr "将回合结束设为起始时刻"
 
 #: src/ui/match/video/match-timeline/round-item.tsx
 msgctxt "Context menu"
 msgid "Set round end tick as end tick"
-msgstr ""
+msgstr "将回合结束设置为结束时刻"
 
 #: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
 msgctxt "Dialog title"
 msgid "Enter the number of seconds"
-msgstr ""
+msgstr "输入秒数"
 
 #: src/ui/match/video/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Set tick {tick} as start tick"
-msgstr ""
+msgstr "将时间点 {tick} 设置为起始时刻"
 
 #: src/ui/match/video/match-timeline/tick-context-menu.tsx
 msgctxt "Context menu"
 msgid "Set tick {tick} as end tick"
-msgstr ""
+msgstr "将时间点 {tick} 设置为结束时刻"
 
 #: src/ui/match/video/reset-settings-button.tsx
 msgctxt "Button"
 msgid "Reset settings"
-msgstr ""
+msgstr "重置设置"
 
 #: src/ui/match/video/sequences-summary.tsx
 msgid "{0, plural, one {# sequence} other {# sequences}}"
-msgstr ""
+msgstr "{0, plural, one {# 录像} other {# 录像}}"
 
 #: src/ui/match/video/sequences/add-new-sequence-button.tsx
 msgctxt "Button"
 msgid "Add new sequence"
-msgstr ""
+msgstr "增加新的镜头"
 
 #: src/ui/match/video/sequences/cfg-input.tsx
 msgctxt "Input label"
 msgid "CFG"
-msgstr ""
+msgstr "配置"
 
 #: src/ui/match/video/sequences/delete-sequences-button.tsx
 msgctxt "Button"
 msgid "Delete sequences"
-msgstr ""
+msgstr "删除镜头"
 
 #: src/ui/match/video/sequences/end-tick-input.tsx
 msgctxt "Input label"
 msgid "End tick"
-msgstr ""
+msgstr "结束时刻"
 
 #: src/ui/match/video/sequences/focus-camera-player-select.tsx
 msgctxt "Input label"
 msgid "Focus camera on player"
-msgstr ""
+msgstr "对焦摄像头在玩家身上"
 
 #: src/ui/match/video/sequences/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
-msgstr ""
+msgstr "结束时刻必须大于起始时刻"
 
 #: src/ui/match/video/sequences/sequence-death-notices.tsx
 msgid "Death notices"
-msgstr ""
+msgstr "死亡通知"
 
 #: src/ui/match/video/sequences/sequence-disk-space.tsx
 msgid "~{requiredDiskSpace}GB"
-msgstr ""
+msgstr "~{requiredDiskSpace}GB"
 
 #: src/ui/match/video/sequences/sequence-duration.tsx
 msgctxt "Duration"
 msgid "{seconds} seconds"
-msgstr ""
+msgstr "{seconds} 秒"
 
 #: src/ui/match/video/sequences/sequences-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
 msgid "~{requiredDiskSpace}GB"
-msgstr ""
+msgstr "~{requiredDiskSpace}GB"
 
 #: src/ui/match/video/sequences/sequences-duration.tsx
 msgid "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
-msgstr ""
+msgstr "{duration, plural, zero {0 seconds} one {1 second} other {# seconds}}"
 
 #: src/ui/match/video/sequences/sequences-timelines/sequence-item.tsx
 msgctxt "Context menu"
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: src/ui/match/video/sequences/start-tick-input.tsx
 msgctxt "Input label"
 msgid "Start tick"
-msgstr ""
+msgstr "开始时刻"
 
 #: src/ui/match/video/show-only-death-notices-checkbox.tsx
 msgctxt "Input label"
 msgid "Show only death notices"
-msgstr ""
+msgstr "只显示死亡通知"
 
 #: src/ui/match/video/software-browse-button.tsx
 msgctxt "Button"
 msgid "Browse"
-msgstr ""
+msgstr "预览"
 
 #: src/ui/match/video/software.tsx
 msgctxt "Software installation status"
 msgid "Not installed"
-msgstr ""
+msgstr "未安装"
 
 #: src/ui/match/video/update-demo-location.tsx
 msgid "This demo checksum doesn't match the one associated with the match."
-msgstr ""
+msgstr "此demo校验与比赛信息不匹配"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "An error occurred. (Code {errorCode})"
-msgstr ""
+msgstr "发生了错误(错误代码 {errorCode})"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "The video generator is currently available only on Windows for Counter-Strike 2 demos."
-msgstr ""
+msgstr "视频生成器目前仅适用于 Windows 系统中的CS2 demo."
 
 #: src/ui/match/video/video-loader.tsx
 msgid "Loading video generator…"
-msgstr ""
+msgstr "正在加载视频生成器…"
 
 #: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
 msgid "Installing VirtualDub…"
-msgstr ""
+msgstr "正在安装VirtualDub…"
 
 #: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
 msgid "VirtualDub has been installed"
-msgstr ""
+msgstr "VirtualDub已被安装"
 
 #: src/ui/match/video/virtualdub/virtual-dub-install-button.tsx
 msgid "An error occurred while installing VirtualDub"
-msgstr ""
+msgstr "安装VirtualDub时发生错误"
 
 #: src/ui/match/video/width-resolution-input.tsx
 msgctxt "Input label"
 msgid "Width"
-msgstr ""
+msgstr "高度"
 
 #: src/ui/match/video/width-resolution-input.tsx
 #: src/ui/settings/playback/game-width.tsx
 msgctxt "Input placeholder"
 msgid "Width"
-msgstr ""
+msgstr "高度"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "It will analyze the demo and generate positions required for the 2D viewer."
-msgstr ""
+msgstr "它将分析demo并生成2D视图器所需的位置。"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Inserting positions into the database…"
-msgstr ""
+msgstr "正在把位置插入到数据库..."
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Analyzing demo…"
-msgstr ""
+msgstr "分析demo中..."
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Positions"
-msgstr ""
+msgstr "位置"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Positions require disk space, it's recommended to delete them from the database settings when you don't need them anymore."
-msgstr ""
+msgstr "位置需要磁盘空间，建议在不需要时从数据库设置中删除"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Generate"
-msgstr ""
+msgstr "生成"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Positions haven't been generated yet."
-msgstr ""
+msgstr "位置尚未生成"
 
 #: src/ui/match/viewer-2d/no-positions-found.tsx
 msgid "Generate positions"
-msgstr ""
+msgstr "生成位置"
 
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
@@ -5002,15 +5002,15 @@ msgstr ""
 #: src/ui/settings/about/reset-settings-button.tsx
 msgctxt "Dialog title"
 msgid "Reset settings"
-msgstr ""
+msgstr "重置设置"
 
 #: src/ui/settings/about/reset-settings-button.tsx
 msgid "It will reset settings excepted database information!"
-msgstr ""
+msgstr "这将重置除数据库信息以外的设置！"
 
 #: src/ui/settings/about/reset-settings-button.tsx
 msgid "Reset settings"
-msgstr ""
+msgstr "重置设置"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
@@ -5111,7 +5111,7 @@ msgstr ""
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Delete demos that are not on the filesystem anymore"
-msgstr ""
+msgstr "删除不再存在于本地文件系统中的demo"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgctxt "Button"
@@ -5121,16 +5121,16 @@ msgstr ""
 #: src/ui/settings/database/reset-database-button.tsx
 msgctxt "Dialog title"
 msgid "Reset database"
-msgstr ""
+msgstr "重置数据库"
 
 #: src/ui/settings/database/reset-database-button.tsx
 msgid "It will delete all data in the database!"
-msgstr ""
+msgstr "这将删除数据库中的所有数据！"
 
 #: src/ui/settings/database/reset-database-button.tsx
 msgctxt "Button"
 msgid "Reset database"
-msgstr ""
+msgstr "重置数据库"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
 msgid "Automatically download FACEIT demos in the background."
@@ -5144,13 +5144,13 @@ msgstr ""
 
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
 msgid "Automatically download FACEIT demos at application startup."
-msgstr ""
+msgstr "在本程序启动时自动下载FACEIT的demo"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
 #: src/ui/settings/downloads/auto-download-valve-demos.tsx
 msgctxt "Settings title"
 msgid "Startup download"
-msgstr ""
+msgstr "启动下载"
 
 #: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
 msgid "Automatically download Valve matchmaking demos in the background."
@@ -5158,42 +5158,42 @@ msgstr ""
 
 #: src/ui/settings/downloads/auto-download-valve-demos.tsx
 msgid "Automatically download Valve matchmaking demos at application startup."
-msgstr ""
+msgstr "在本程序启动时自动下载Valve匹配的demo"
 
 #: src/ui/settings/downloads/download-folder-path.tsx
 msgid "Download folder"
-msgstr ""
+msgstr "下载文件夹路径"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgid "Add FACEIT account"
-msgstr ""
+msgstr "添加FACEIT帐户"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgctxt "Input label"
 msgid "FACEIT nickname"
-msgstr ""
+msgstr "FACEIT昵称"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgctxt "Input placeholder"
 msgid "Nickname"
-msgstr ""
+msgstr "昵称"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgid "No accounts"
-msgstr ""
+msgstr "无账号"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgid "Set as current account"
-msgstr ""
+msgstr "设置为当前账号"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgid "Accounts"
-msgstr ""
+msgstr "账号"
 
 #: src/ui/settings/downloads/faceit-accounts.tsx
 msgctxt "Button"
 msgid "Add account"
-msgstr ""
+msgstr "增加一个账号"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "FACEIT restricted demos download through a <0>private API</0> that prevents us from downloading demos from CS:DM."
@@ -5205,28 +5205,28 @@ msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Player not found."
-msgstr ""
+msgstr "未找到该玩家"
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "The FACEIT API returned a 401 code, please check you API key."
-msgstr ""
+msgstr "FACEIT API 返回了一个401错误, 请检查您的 API 密钥。"
 
 #: src/ui/settings/folders/add-folder-button.tsx
 msgctxt "Button"
 msgid "Add a folder"
-msgstr ""
+msgstr "增加一个文件夹"
 
 #: src/ui/settings/folders/folder-row.tsx
 msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
-msgstr ""
+msgstr "此文件夹包含在启动CS:GO时阻止demo播放的字符！(不是CS2)"
 
 #: src/ui/settings/folders/include-sub-directories-switch.tsx
 msgid "Include subdirectories"
-msgstr ""
+msgstr "包括子目录"
 
 #: src/ui/settings/folders/use-add-folder.tsx
 msgid "This folder is already in your settings"
-msgstr ""
+msgstr "此文件夹已经在你的设置中"
 
 #: src/ui/settings/integrations/faceit-api-key.tsx
 #: src/ui/settings/integrations/steam-api-key.tsx
@@ -5268,11 +5268,11 @@ msgstr ""
 #: src/ui/settings/maps/add-map-button.tsx
 msgctxt "Button"
 msgid "Add a map"
-msgstr ""
+msgstr "添加一个地图"
 
 #: src/ui/settings/maps/add-map-dialog.tsx
 msgid "This map already exists."
-msgstr ""
+msgstr "此地图已经存在"
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Do you want to delete this map?"
@@ -5356,21 +5356,21 @@ msgstr ""
 #: src/ui/settings/maps/maps-settings.tsx
 msgctxt "Select label"
 msgid "Game"
-msgstr ""
+msgstr "游戏"
 
 #: src/ui/settings/maps/reset-default-maps-button.tsx
 msgctxt "Dialog title"
 msgid "Reset maps"
-msgstr ""
+msgstr "重置地图"
 
 #: src/ui/settings/maps/reset-default-maps-button.tsx
 msgid "It will reset default maps."
-msgstr ""
+msgstr "这将重置默认地图"
 
 #: src/ui/settings/maps/reset-default-maps-button.tsx
 msgctxt "Button"
 msgid "Reset default maps"
-msgstr ""
+msgstr "重置默认地图"
 
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
@@ -5478,11 +5478,11 @@ msgstr ""
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
-msgstr ""
+msgstr "UI设置"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Folders"
-msgstr ""
+msgstr "文件夹"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Maps"
@@ -5490,7 +5490,7 @@ msgstr ""
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Download"
-msgstr ""
+msgstr "下载"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Playback"
@@ -5539,86 +5539,86 @@ msgstr ""
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Matches"
-msgstr ""
+msgstr "比赛"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Demos"
-msgstr ""
+msgstr "Demos"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
 msgid "Download"
-msgstr ""
+msgstr "下载"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgid "Initial page displayed on app startup"
-msgstr ""
+msgstr "应用程序启动时显示的初始页面"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Settings title"
 msgid "Initial page"
-msgstr ""
+msgstr "初始页面"
 
 #: src/ui/settings/ui/language-select.tsx
 msgid "Application language"
-msgstr ""
+msgstr "应用程序语言"
 
 #: src/ui/settings/ui/language-select.tsx
 msgctxt "Settings title"
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
 #. Reset tables (columns order, visibility…)
 #: src/ui/settings/ui/reset-tables-state.tsx
 msgctxt "Button"
 msgid "Reset tables"
-msgstr ""
+msgstr "Reset tables"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Minimized"
-msgstr ""
+msgstr "最小化"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgid "Open the application automatically after you log in to your computer"
-msgstr ""
+msgstr "在你打开电脑后自动启动本程序"
 
 #: src/ui/settings/ui/system-startup-behavior.tsx
 msgctxt "Settings title"
 msgid "System startup behavior"
-msgstr ""
+msgstr "自启动偏好"
 
 #: src/ui/settings/ui/theme-select.tsx
 msgctxt "Select option theme"
 msgid "Light"
-msgstr ""
+msgstr "亮色主题"
 
 #: src/ui/settings/ui/theme-select.tsx
 msgctxt "Select option theme"
 msgid "Dark"
-msgstr ""
+msgstr "暗色主题"
 
 #: src/ui/settings/ui/theme-select.tsx
 msgid "Application UI theme"
-msgstr ""
+msgstr "界面主题"
 
 #: src/ui/settings/ui/theme-select.tsx
 msgctxt "Settings title"
 msgid "Theme"
-msgstr ""
+msgstr "主题"
 
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
