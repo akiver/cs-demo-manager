@@ -161,7 +161,11 @@ class DownloadDemoQueue {
     const demoPath = this.buildDemoPath(downloadFolderPath, currentDownload.fileName);
     const infoPath = this.buildDemoInfoFilePath(demoPath);
     try {
-      const response = await request(currentDownload.demoUrl, { signal: controller.signal, method: 'GET' });
+      const response = await request(currentDownload.demoUrl, {
+        signal: controller.signal,
+        method: 'GET',
+        maxRedirections: 1,
+      });
       if (response.statusCode === 404) {
         server.sendMessageToRendererProcess({
           name: RendererServerMessageName.DownloadDemoExpired,
