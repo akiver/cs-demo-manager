@@ -65,16 +65,10 @@ type Options = {
   onGameStart: () => void;
   onSequenceStart: (sequenceNumber: number, sequenceCount: number) => void;
   onConcatenateSequencesStart: () => void;
-  onSuccess: () => void;
 };
 
-async function buildVideos({ signal, generateOnlyRawFiles, onSuccess, ...options }: Options) {
+async function buildVideos({ signal, ...options }: Options) {
   throwIfAborted(signal);
-
-  if (generateOnlyRawFiles) {
-    onSuccess();
-    return;
-  }
 
   const {
     encoderSoftware,
@@ -147,23 +141,22 @@ async function buildVideos({ signal, generateOnlyRawFiles, onSuccess, ...options
       await deleteSequencesRawFiles(rawFilesFolderPath, sequences);
     }
   }
-
-  onSuccess();
 }
 
 export async function generateVideos(options: Options) {
   const { signal } = options;
   throwIfAborted(signal);
 
-  const cleanupFiles = () => {
-    if (options.game === Game.CSGO) {
-      deleteVdmFile(demoPath);
-    } else {
-      deleteJsonActionsFile(demoPath);
+  const cleanupFiles = async (deleteOutputFile = true) => {
+    const promises: Promise<void>[] = [
+      deleteVdmFile(demoPath),
+      deleteJsonActionsFile(demoPath),
+      deleteSequencesRawFiles(rawFilesFolderPath, options.sequences),
+    ];
+    if (deleteOutputFile) {
+      promises.push(deleteSequencesOutputFile(outputFolderPath, options.sequences));
     }
-
-    deleteSequencesRawFiles(rawFilesFolderPath, options.sequences);
-    deleteSequencesOutputFile(outputFolderPath, options.sequences);
+    await Promise.all(promises);
   };
 
   async function onAbort() {
@@ -220,7 +213,7 @@ export async function generateVideos(options: Options) {
 
   throwIfAborted(signal);
 
-  await deleteSequencesRawFiles(rawFilesFolderPath, sequences);
+  await cleanupFiles();
 
   if (game === Game.CSGO) {
     await createVdmFileForRecording({
@@ -258,7 +251,6 @@ export async function generateVideos(options: Options) {
         width,
         height,
         signal,
-        onGameExit: cleanupFiles,
       };
       await watchDemoWithHlae(hlaeOptions);
     } else {
@@ -274,7 +266,13 @@ export async function generateVideos(options: Options) {
     }
 
     await moveSequencesRawFiles(sequences, rawFilesFolderPath, game);
+
+    if (generateOnlyRawFiles) {
+      return;
+    }
+
     await buildVideos(options);
+    await cleanupFiles(false);
   } catch (error) {
     if (signal.aborted) {
       throw abortError;

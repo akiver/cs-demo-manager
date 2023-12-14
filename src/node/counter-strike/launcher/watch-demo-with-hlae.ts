@@ -21,7 +21,6 @@ export type HlaeOptions = {
   hlaeExecutablePath: string;
   csgoLaunchOptions?: string;
   signal: AbortSignal;
-  onGameExit: () => void;
 };
 
 async function waitForCounterStrikeExit() {
@@ -38,7 +37,7 @@ async function waitForCounterStrikeExit() {
   });
 }
 
-async function startHlae(command: string, onGameExit: () => void, signal: AbortSignal) {
+async function startHlae(command: string, signal: AbortSignal) {
   logger.log('Starting HLAE with command', command);
 
   return new Promise<void>((resolve, reject) => {
@@ -67,7 +66,6 @@ async function startHlae(command: string, onGameExit: () => void, signal: AbortS
       }
 
       await waitForCounterStrikeExit();
-      onGameExit();
 
       return resolve();
     });
@@ -82,7 +80,6 @@ export async function watchDemoWithHlae({
   width,
   height,
   signal,
-  onGameExit,
 }: HlaeOptions) {
   if (!isWindows) {
     throw new Error('HLAE is available only on Windows');
@@ -140,5 +137,5 @@ export async function watchDemoWithHlae({
 
   const command = `"${hlaeExecutablePath}" ${hlaeParameters.join(' ')}`;
 
-  await startHlae(command, onGameExit, signal);
+  await startHlae(command, signal);
 }

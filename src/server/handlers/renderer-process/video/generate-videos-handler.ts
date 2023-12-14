@@ -55,11 +55,6 @@ export async function generateVideosHandler(payload: GenerateVideosPayload) {
       ...payload,
       signal: videoAbortController.signal,
       onGameStart,
-      onSuccess: () => {
-        server.sendMessageToRendererProcess({
-          name: RendererServerMessageName.VideosGenerationSuccess,
-        });
-      },
       onSequenceStart: (sequenceNumber: number, sequenceCount: number) => {
         server.sendMessageToRendererProcess({
           name: RendererServerMessageName.GeneratingVideoFromSequence,
@@ -74,6 +69,9 @@ export async function generateVideosHandler(payload: GenerateVideosPayload) {
           name: RendererServerMessageName.ConcatenateSequencesStart,
         });
       },
+    });
+    server.sendMessageToRendererProcess({
+      name: RendererServerMessageName.VideosGenerationSuccess,
     });
   } catch (error) {
     if (error instanceof AbortError) {
