@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-04 01:19\n"
+"PO-Revision-Date: 2023-12-14 00:09\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -720,7 +720,7 @@ msgstr "Pires moments"
 #: src/ui/components/context-menu/items/watch-player-rounds-item.tsx
 msgctxt "Context menu watch player rounds"
 msgid "Rounds"
-msgstr ""
+msgstr "Rounds"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosSourceNotSupportedCount, plural, one {The demo's source is not supported} other {# demos source are not supported}}"
@@ -2002,7 +2002,7 @@ msgstr "CEVO"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Challengermode"
-msgstr ""
+msgstr "Challengermode"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2122,7 +2122,7 @@ msgstr "Le lien de téléchargement a expiré"
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
 msgid "The demo is corrupted"
-msgstr ""
+msgstr "La démo est corrompue"
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
@@ -2320,7 +2320,7 @@ msgstr "Téléchargements en attente"
 
 #: src/ui/downloads/pending/download-actions.tsx
 msgid "The downloaded demo is corrupted. You can retry later."
-msgstr ""
+msgstr "La démo est corrompue, veuillez réessayer plus tard."
 
 #: src/ui/downloads/pending/download-actions.tsx
 msgid "An error occurred while downloading the demo."
@@ -2368,7 +2368,7 @@ msgstr "Expiré"
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Corrupted"
-msgstr ""
+msgstr "Corrompu"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
@@ -2479,7 +2479,7 @@ msgstr "Aucun kill trouvé"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No rounds found"
-msgstr ""
+msgstr "Aucun round trouvé"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No deaths found"
@@ -2495,7 +2495,7 @@ msgstr "Steam n'est pas lancé"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr ""
+msgstr "Le jeu a planté, merci de consulter <0>cette documentation</0> pour obtenir de l'aide."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
