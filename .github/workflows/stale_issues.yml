@@ -1,0 +1,28 @@
+name: Close stale issues
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Once a day
+
+jobs:
+  stale:
+    runs-on: ubuntu-latest
+
+    permissions:
+      issues: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Close stale issues
+        uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          stale-issue-message: 'This issue was closed due to inactivity. Feel free to reopen if needed.'
+          days-before-pr-stale: -1
+          days-before-issue-stale: 23
+          days-before-issue-close: 7
+          stale-issue-label: 'stale'
+          any-of-labels: 'reply-needed'
+          exempt-issue-labels: 'V2'
