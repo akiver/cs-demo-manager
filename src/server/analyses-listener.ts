@@ -9,6 +9,8 @@ import { processMatchInsertion } from 'csdm/node/database/matches/process-match-
 import { CorruptedDemoError } from 'csdm/node/demo-analyzer/corrupted-demo-error';
 import { analyzeDemo } from 'csdm/node/demo/analyze-demo';
 import { getSettings } from 'csdm/node/settings/get-settings';
+import { getErrorCodeFromError } from './get-error-code-from-error';
+import type { ErrorCode } from 'csdm/common/error-code';
 
 class AnalysesListener {
   private analyses: Analysis[] = [];
@@ -140,7 +142,7 @@ class AnalysesListener {
       await this.insertMatch(checksum, demoPath);
     } catch (error) {
       logger.error('Error while analyzing demo');
-      if (error !== undefined) {
+      if (error) {
         logger.error(error);
       }
       const isCorruptedDemo = error instanceof CorruptedDemoError;
@@ -172,15 +174,29 @@ class AnalysesListener {
       logger.error('Error while inserting match');
       logger.error(error);
       if (this.currentAnalysis) {
-        this.currentAnalysis.output += error instanceof Error ? error.message : String(error);
+        let errorOutput: string;
+        if (error instanceof Error) {
+          errorOutput = error.message;
+          if (error.stack) {
+            errorOutput += `\n${error.stack}`;
+          }
+          if (error.cause) {
+            errorOutput += `\n${error.cause}`;
+          }
+        } else {
+          errorOutput = String(error);
+        }
+        this.currentAnalysis.output += errorOutput;
       }
-      this.updateCurrentAnalysisStatus(AnalysisStatus.InsertError);
+
+      this.updateCurrentAnalysisStatus(AnalysisStatus.InsertError, getErrorCodeFromError(error));
     }
   }
 
-  private updateCurrentAnalysisStatus = (status: AnalysisStatus) => {
+  private updateCurrentAnalysisStatus = (status: AnalysisStatus, errorCode?: ErrorCode) => {
     if (this.currentAnalysis !== undefined) {
       this.currentAnalysis.status = status;
+      this.currentAnalysis.errorCode = errorCode;
       server.sendMessageToRendererProcess({
         name: RendererServerMessageName.AnalysisUpdated,
         payload: this.currentAnalysis,

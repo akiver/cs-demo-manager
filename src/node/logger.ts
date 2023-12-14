@@ -79,6 +79,10 @@ class Logger implements ILogger {
 
   private jsonStringifyReplacer = (key: any, value: any) => {
     if (value instanceof Error) {
+      if (value.cause) {
+        return `${value.stack}\n\tCAUSE: ${value.cause}`;
+      }
+
       return value.stack;
     }
 

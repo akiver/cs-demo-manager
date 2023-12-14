@@ -79,6 +79,8 @@ export const ErrorCode = {
 
   InvalidDemoName: 3100,
   AnalyzeCorruptedDemo: 3200,
+  InsertMatchDuplicatedChecksum: 3201,
+  InsertRoundsError: 3210,
 
   SteamNotRunning: 4000,
 } as const;

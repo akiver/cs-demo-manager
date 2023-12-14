@@ -62,7 +62,19 @@ msgid "An error occurred while inserting the match into the database."
 msgstr ""
 
 #: src/ui/analyses/analysis-logs.tsx
-msgid "Please open an issue on <0>GitHub</0> that includes the logs below and a link to download the demo."
+msgid "The analysis failed with the error code: <0>{0}</0>"
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue <1>only if the documentation says you should for this error code</1>."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue."
 msgstr ""
 
 #: src/ui/analyses/analysis-logs.tsx

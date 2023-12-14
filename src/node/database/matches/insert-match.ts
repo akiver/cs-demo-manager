@@ -42,6 +42,8 @@ import {
   type InsertOptions,
 } from './match-insertion';
 import { insertMatchPositions } from './insert-match-positions';
+import { InsertRoundsError } from './errors/insert-rounds-error';
+import { DuplicatedMatchChecksum } from './errors/duplicated-match-checksum';
 
 async function insertShots({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
   const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_shots.csv');
@@ -262,44 +264,48 @@ async function insertPlayers({ outputFolderPath, demoName, databaseSettings }: I
 }
 
 async function insertRounds({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
-  const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_rounds.csv');
+  try {
+    const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_rounds.csv');
 
-  await insertFromCsv<RoundTable>({
-    databaseSettings,
-    tableName: 'rounds',
-    csvFilePath,
-    columns: [
-      'number',
-      'start_tick',
-      'start_frame',
-      'freeze_time_end_tick',
-      'freeze_time_end_frame',
-      'end_tick',
-      'end_frame',
-      'end_officially_tick',
-      'end_officially_frame',
-      'team_a_name',
-      'team_b_name',
-      'team_a_score',
-      'team_b_score',
-      'team_a_side',
-      'team_b_side',
-      'team_a_start_money',
-      'team_b_start_money',
-      'team_a_equipment_value',
-      'team_b_equipment_value',
-      'team_a_money_spent',
-      'team_b_money_spent',
-      'team_a_economy_type',
-      'team_b_economy_type',
-      'duration',
-      'end_reason',
-      'winner_name',
-      'winner_side',
-      'overtime_number',
-      'match_checksum',
-    ],
-  });
+    await insertFromCsv<RoundTable>({
+      databaseSettings,
+      tableName: 'rounds',
+      csvFilePath,
+      columns: [
+        'number',
+        'start_tick',
+        'start_frame',
+        'freeze_time_end_tick',
+        'freeze_time_end_frame',
+        'end_tick',
+        'end_frame',
+        'end_officially_tick',
+        'end_officially_frame',
+        'team_a_name',
+        'team_b_name',
+        'team_a_score',
+        'team_b_score',
+        'team_a_side',
+        'team_b_side',
+        'team_a_start_money',
+        'team_b_start_money',
+        'team_a_equipment_value',
+        'team_b_equipment_value',
+        'team_a_money_spent',
+        'team_b_money_spent',
+        'team_a_economy_type',
+        'team_b_economy_type',
+        'duration',
+        'end_reason',
+        'winner_name',
+        'winner_side',
+        'overtime_number',
+        'match_checksum',
+      ],
+    });
+  } catch (error) {
+    throw new InsertRoundsError(error);
+  }
 }
 
 async function insertDamages({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
@@ -764,44 +770,52 @@ async function insertChickenDeaths({ outputFolderPath, demoName, databaseSetting
 }
 
 async function insertMatchFromCsv({ outputFolderPath, demoName, databaseSettings }: InsertOptions) {
-  const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_match.csv');
+  try {
+    const csvFilePath = getCsvFilePath(outputFolderPath, demoName, '_match.csv');
 
-  await insertFromCsv<MatchTable>({
-    databaseSettings,
-    tableName: 'matches',
-    csvFilePath,
-    columns: [
-      'checksum',
-      'game',
-      'demo_path',
-      'name',
-      'date',
-      'source',
-      'type',
-      'map_name',
-      'server_name',
-      'client_name',
-      'tick_count',
-      'tickrate',
-      'framerate',
-      'duration',
-      'network_protocol',
-      'build_number',
-      'game_type',
-      'game_mode',
-      'game_mode_str',
-      'is_ranked',
-      'kill_count',
-      'assist_count',
-      'death_count',
-      'shot_count',
-      'winner_name',
-      'winner_side',
-      'overtime_count',
-      'max_rounds',
-      'has_vac_live_ban',
-    ],
-  });
+    await insertFromCsv<MatchTable>({
+      databaseSettings,
+      tableName: 'matches',
+      csvFilePath,
+      columns: [
+        'checksum',
+        'game',
+        'demo_path',
+        'name',
+        'date',
+        'source',
+        'type',
+        'map_name',
+        'server_name',
+        'client_name',
+        'tick_count',
+        'tickrate',
+        'framerate',
+        'duration',
+        'network_protocol',
+        'build_number',
+        'game_type',
+        'game_mode',
+        'game_mode_str',
+        'is_ranked',
+        'kill_count',
+        'assist_count',
+        'death_count',
+        'shot_count',
+        'winner_name',
+        'winner_side',
+        'overtime_count',
+        'max_rounds',
+        'has_vac_live_ban',
+      ],
+    });
+  } catch (error) {
+    if (error instanceof Error && error.message.includes('matches_pkey')) {
+      throw new DuplicatedMatchChecksum(error);
+    }
+
+    throw error;
+  }
 }
 
 function getShareCodeFromMatchInfo(matchInfo: CDataGCCStrike15_v2_MatchInfo) {
