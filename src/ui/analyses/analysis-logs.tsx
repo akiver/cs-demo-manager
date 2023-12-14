@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { Trans, msg } from '@lingui/macro';
 import type { Analysis } from 'csdm/common/types/analysis';
 import { AnalysisStatus } from 'csdm/common/types/analysis-status';
@@ -105,24 +105,61 @@ export function AnalysisLogs() {
   }
 
   const logs = generateLogs(selectedAnalysis);
+
+  const renderError = () => {
+    const isRoundInsertionError = selectedAnalysis.output.includes('copy rounds(');
+
+    let message: ReactNode;
+    switch (true) {
+      case isRoundInsertionError:
+        message = (
+          <div>
+            <p>
+              <Trans>The insertion of a round failed.</Trans>
+            </p>
+            <p>
+              <Trans>
+                Please ensure the game doesn't crash or go back to the main menu while watching the demo in-game and
+                that the playback doesn't end in the middle of a round.
+              </Trans>
+            </p>
+            <p>
+              <Trans>
+                If it does, it means the demo is corrupted and it's not fixable - otherwise, please open an issue on{' '}
+                <ExternalLink href="https://github.com/akiver/cs-demo-manager/issues">GitHub</ExternalLink> that
+                includes the logs below and a link to download the demo.
+              </Trans>
+            </p>
+          </div>
+        );
+        break;
+      default:
+        message = (
+          <p>
+            <Trans>
+              Please open an issue on{' '}
+              <ExternalLink href="https://github.com/akiver/cs-demo-manager/issues">GitHub</ExternalLink> that includes
+              the logs below and a link to download the demo.
+            </Trans>
+          </p>
+        );
+    }
+
+    return (
+      <div className="flex items-center gap-x-8 py-8">
+        <ExclamationTriangleIcon className="w-24 h-24 text-red-700" />
+        {message}
+      </div>
+    );
+  };
+
   return (
     <div className="h-[420px] p-16 w-full border-t border-t-gray-300 mt-auto overflow-y-auto">
       <div className="flex flex-col justify-end">
         {logs.map((log, index) => {
           return <p key={`${log}${index}`}>{log}</p>;
         })}
-        {isAnalysisErrorStatus(selectedAnalysis.status) && (
-          <div className="flex items-center gap-x-8 py-8">
-            <ExclamationTriangleIcon className="w-24 h-24 text-red-700" />
-            <p>
-              <Trans>
-                Please open an issue on{' '}
-                <ExternalLink href="https://github.com/akiver/cs-demo-manager/issues">GitHub</ExternalLink> that
-                includes the logs below and a link to download the demo.
-              </Trans>
-            </p>
-          </div>
-        )}
+        {isAnalysisErrorStatus(selectedAnalysis.status) && renderError()}
       </div>
       {selectedAnalysis.output && (
         <div className="flex flex-col gap-y-4 w-full mt-12">

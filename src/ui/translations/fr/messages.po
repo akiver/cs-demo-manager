@@ -62,6 +62,18 @@ msgid "An error occurred while inserting the match into the database."
 msgstr "Une erreur est survenue lors de l'insertion du match dans la base de données."
 
 #: src/ui/analyses/analysis-logs.tsx
+msgid "The insertion of a round failed."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "Please ensure the game doesn't crash or go back to the main menu while watching the demo in-game and that the playback doesn't end in the middle of a round."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
+msgid "If it does, it means the demo is corrupted and it's not fixable - otherwise, please open an issue on <0>GitHub</0> that includes the logs below and a link to download the demo."
+msgstr ""
+
+#: src/ui/analyses/analysis-logs.tsx
 msgid "Please open an issue on <0>GitHub</0> that includes the logs below and a link to download the demo."
 msgstr "Merci d'ouvrir un ticket sur <0>GitHub</0> qui inclut les logs ci-dessous et un lien pour télécharger la démo."
 
