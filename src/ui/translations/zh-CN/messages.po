@@ -2542,6 +2542,51 @@ msgctxt "Game mode"
 msgid "Casual"
 msgstr "休闲模式"
 
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Co-Operative"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Co-Operative Mission"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Custom"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Deathmatch"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Arms Race Bomb"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Arms Race"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Skirmish"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Survival"
+msgstr ""
+
+#: src/ui/hooks/use-get-game-mode-translation.ts
+msgctxt "Game mode"
+msgid "Unknown"
+msgstr ""
+
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
 msgid "Silver I"
