@@ -65,10 +65,14 @@ async function checkIfCounterStrikeHasBeenClosed() {
   intervalId = setInterval(checkIfCounterStrikeHasBeenClosed, intervalMs);
 }
 
-export function listenForCounterStrikeClosed() {
+export function stopListeningForCounterStrikeClosed() {
   if (intervalId !== null) {
     clearInterval(intervalId);
   }
+}
+
+export function listenForCounterStrikeClosed() {
+  stopListeningForCounterStrikeClosed();
 
   intervalId = setInterval(checkIfCounterStrikeHasBeenClosed, checkIntervalMs);
 }

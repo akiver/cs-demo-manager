@@ -5,6 +5,7 @@ import { migrateDatabase } from 'csdm/node/database/migrations/migrate-database'
 import { createDatabase } from 'csdm/node/database/create-database';
 import { ensurePsqlIsInstalled } from 'csdm/node/database/psql/ensure-psql-is-installed';
 import { PsqlTimeout } from 'csdm/node/database/psql/errors/psql-timeout';
+import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 
 export async function connectDatabase(databaseSettings?: DatabaseSettings | undefined) {
   await ensurePsqlIsInstalled();
@@ -25,4 +26,5 @@ export async function connectDatabase(databaseSettings?: DatabaseSettings | unde
 
   createDatabaseConnection(databaseSettings);
   await migrateDatabase();
+  startBackgroundTasks();
 }

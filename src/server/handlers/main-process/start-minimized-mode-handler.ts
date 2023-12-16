@@ -1,5 +1,4 @@
 import { connectDatabase } from 'csdm/node/database/connect-database';
-import { startBackgroundTasks } from 'csdm/server/start-background-tasks';
 
 export async function startMinimizedModeHandler(): Promise<void> {
   return new Promise((resolve) => {
@@ -8,7 +7,6 @@ export async function startMinimizedModeHandler(): Promise<void> {
     const startMinimizedMode = async () => {
       try {
         await connectDatabase();
-        startBackgroundTasks();
         if (timer !== null) {
           globalThis.clearInterval(timer);
         }
