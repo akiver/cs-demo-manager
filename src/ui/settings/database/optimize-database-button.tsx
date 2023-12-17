@@ -24,6 +24,7 @@ function OptimizeDatabaseDialog() {
     isBusy: false,
     payload: {
       clearPositions: false,
+      clearOrphanDemos: false,
       clearDemos: false,
     },
   });
@@ -84,6 +85,21 @@ function OptimizeDatabaseDialog() {
       <Checkbox
         id="delete-orphan-demos"
         label={<Trans>Delete demos that are not on the filesystem anymore</Trans>}
+        isChecked={state.payload.clearOrphanDemos}
+        isDisabled={state.isBusy}
+        onChange={(event) => {
+          setState({
+            ...state,
+            payload: {
+              ...state.payload,
+              clearOrphanDemos: event.target.checked,
+            },
+          });
+        }}
+      />
+      <Checkbox
+        id="delete-demos"
+        label={<Trans>Clear demos cache</Trans>}
         isChecked={state.payload.clearDemos}
         isDisabled={state.isBusy}
         onChange={(event) => {

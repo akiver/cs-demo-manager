@@ -72,7 +72,7 @@ export async function fetchDemosTable(filter: DemosTableFilter, { onProgress }: 
       }
 
       try {
-        const demoInDatabase: Demo | undefined = demosInDatabase.find((demo) => demo.filePath === filePath);
+        const demoInDatabase = demosInDatabase.find((demo) => demo.filePath === filePath);
         if (demoInDatabase !== undefined) {
           demos.push(demoInDatabase);
           continue;
