@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-13 00:10\n"
+"PO-Revision-Date: 2023-12-17 23:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -63,19 +63,19 @@ msgstr "在比赛结果输入数据库中时发生错误。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "The analysis failed with the error code: <0>{0}</0>"
-msgstr ""
+msgstr "分析失败，错误代码为：<0>{0}</0>"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
-msgstr ""
+msgstr "请阅读错误代码<0>文档</0>了解代码以及您可以做些什么。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue <1>only if the documentation says you should for this error code</1>."
-msgstr ""
+msgstr "请阅读并按照 <0>GitHub 上的说明</0>报告问题<1>，前提是您可以在此文档中找到错误的代码</1>。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue."
-msgstr ""
+msgstr "请阅读并按照 <0>GitHub</0> 上的说明来报告问题。"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Logs:"
@@ -740,7 +740,7 @@ msgstr "{demosSourceNotSupportedCount, plural, one {不支持录像源} other {#
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "Please see this <0>documentation</0> for details."
-msgstr ""
+msgstr "请阅读这个<0>文档</0>以获得帮助。"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
@@ -1628,27 +1628,27 @@ msgstr "连杀"
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "5K"
-msgstr "5K"
+msgstr "5杀"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "4K"
-msgstr "4K"
+msgstr "4杀"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "3K"
-msgstr "3K"
+msgstr "3杀"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "2K"
-msgstr "2K"
+msgstr "2杀"
 
 #: src/ui/components/panels/multi-kills-panel.tsx
 msgctxt "Panel label"
 msgid "1K"
-msgstr "1K"
+msgstr "1杀"
 
 #: src/ui/components/panels/objectives-panel.tsx
 msgctxt "Panel title"
@@ -2018,7 +2018,7 @@ msgstr "CEVO"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Challengermode"
-msgstr ""
+msgstr "挑战模式"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2143,7 +2143,7 @@ msgstr "下载链接已过期"
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
 msgid "The demo is corrupted"
-msgstr ""
+msgstr "录像已损坏"
 
 #: src/ui/downloads/download-demo-button.tsx
 msgctxt "Tooltip"
@@ -2341,7 +2341,7 @@ msgstr "等待下载"
 
 #: src/ui/downloads/pending/download-actions.tsx
 msgid "The downloaded demo is corrupted. You can retry later."
-msgstr ""
+msgstr "下载的demo已经存坏，您可以稍后再试"
 
 #: src/ui/downloads/pending/download-actions.tsx
 msgid "An error occurred while downloading the demo."
@@ -2389,7 +2389,7 @@ msgstr "已过期"
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
 msgid "Corrupted"
-msgstr ""
+msgstr "已损坏"
 
 #: src/ui/downloads/sidebar/match-download-status.tsx
 msgctxt "Download status"
@@ -2550,47 +2550,47 @@ msgstr "休闲模式"
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Co-Operative"
-msgstr ""
+msgstr "携手合作"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Co-Operative Mission"
-msgstr ""
+msgstr "合作任务"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Custom"
-msgstr ""
+msgstr "自定义"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Deathmatch"
-msgstr ""
+msgstr "死斗模式"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Arms Race Bomb"
-msgstr ""
+msgstr "军备竞赛炸弹"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Arms Race"
-msgstr ""
+msgstr "军备竞赛"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Skirmish"
-msgstr ""
+msgstr "遭遇战"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Survival"
-msgstr ""
+msgstr "生存"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Unknown"
-msgstr ""
+msgstr "未知"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
@@ -3686,7 +3686,7 @@ msgstr "被致盲时的击杀"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Chicken kills"
-msgstr "杀鸡的数量"
+msgstr "鸡的击杀数"
 
 #: src/ui/match/rounds/round/players-information.tsx
 #: src/ui/match/rounds/round/players-information.tsx
@@ -3707,7 +3707,7 @@ msgstr "手雷"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Flash"
-msgstr "闪光"
+msgstr "闪光震撼弹"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "HE"
@@ -4399,93 +4399,93 @@ msgstr "生成位置"
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
 msgid "Upper"
-msgstr ""
+msgstr "更高"
 
 #: src/ui/match/viewer-2d/playback-bar/radar-level-button.tsx
 msgctxt "Map radar level"
 msgid "Lower"
-msgstr ""
+msgstr "更低"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading round number {roundNumber}."
-msgstr ""
+msgstr "在加载第{roundNumber} 回合时发生了错误."
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "Round number {roundNumber} not found."
-msgstr ""
+msgstr "回合{roundNumber} 未找到"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "Loading round number {roundNumber}…"
-msgstr ""
+msgstr "正在加载回合{roundNumber}…"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Head {headPercentage}% of hits"
-msgstr ""
+msgstr "{headPercentage}%头部命中"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Chest {chestPercentage}% of hits"
-msgstr ""
+msgstr "{chestPercentage}%胸部命中"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Right arm {rightArmPercentage} % of hits"
-msgstr ""
+msgstr "{rightArmPercentage}%右手击中"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Stomach {stomachPercentage}% of hits"
-msgstr ""
+msgstr "{stomachPercentage}%胃部击中"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Left arm {leftArmPercentage}% of hits"
-msgstr ""
+msgstr "{leftArmPercentage}%左手击中"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Right leg {rightLegPercentage}% of hits"
-msgstr ""
+msgstr "{rightLegPercentage}%右腿击中"
 
 #: src/ui/match/weapons/body.tsx
 msgctxt "Tooltip"
 msgid "Left leg {leftLegPercentage}% of hits"
-msgstr ""
+msgstr "{leftLegPercentage}%左腿击中"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Hits"
-msgstr ""
+msgstr "击中次数"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgctxt "Table header"
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgctxt "Table header"
 msgid "Damages"
-msgstr ""
+msgstr "伤害"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgctxt "Table header"
 msgid "Hits"
-msgstr ""
+msgstr "击中次数"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgctxt "Table header"
 msgid "Accuracy"
-msgstr ""
+msgstr "精准度"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgctxt "Table header"
 msgid "HS%"
-msgstr ""
+msgstr "爆头率%"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Head"
-msgstr ""
+msgstr "头部"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Chest"
@@ -4568,7 +4568,7 @@ msgstr ""
 #: src/ui/player/charts/headshot-percentage-chart.tsx
 msgctxt "Chart axis label"
 msgid "HS%"
-msgstr ""
+msgstr "爆头率%"
 
 #: src/ui/player/charts/kill-death-ratio-chart.tsx
 msgctxt "Chart title"
@@ -4599,13 +4599,13 @@ msgstr ""
 #: src/ui/player/charts/x-axis.tsx
 msgctxt "Select option time period"
 msgid "Day"
-msgstr ""
+msgstr "天"
 
 #: src/ui/player/charts/use-player-chart-options.ts
 #: src/ui/player/charts/x-axis.tsx
 msgctxt "Select option time period"
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 #: src/ui/player/charts/use-player-chart-options.ts
 #: src/ui/player/charts/x-axis.tsx
@@ -4842,22 +4842,22 @@ msgstr ""
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header match count"
 msgid "Matches"
-msgstr ""
+msgstr "比赛"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Number of matches played"
-msgstr ""
+msgstr "比赛次数"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot"
-msgstr ""
+msgstr "爆头"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot %"
-msgstr ""
+msgstr "爆头率%"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
