@@ -4,6 +4,9 @@ import type { ReactNode } from 'react';
 import { SettingsOverlay } from './settings-overlay';
 import { SettingsCategory } from './settings-category';
 import { DialogProvider } from '../components/dialogs/dialog-provider';
+import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
+import { useFocusLastActiveElement } from 'csdm/ui/hooks/use-focus-last-active-element';
+import { APP_ELEMENT_ID, SETTINGS_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 
 export type SettingsOverlay = {
   category: SettingsCategory;
@@ -36,6 +39,7 @@ type Props = {
 };
 
 export function SettingsOverlayProvider({ children }: Props) {
+  const { focusElement, updateElement } = useFocusLastActiveElement();
   const [areSettingsVisible, setAreSettingsVisible] = useState(false);
   const [category, setCategory] = useState<SettingsCategory>(SettingsCategory.UI);
   const transitions = useTransition(areSettingsVisible, {
@@ -57,16 +61,23 @@ export function SettingsOverlayProvider({ children }: Props) {
     setCategory(category);
   };
 
-  const openSettings = useCallback((category?: SettingsCategory) => {
-    if (category) {
-      showCategory(category);
-    }
-    setAreSettingsVisible(true);
-  }, []);
+  const openSettings = useCallback(
+    (category?: SettingsCategory) => {
+      if (category) {
+        showCategory(category);
+      }
+      updateElement();
+      makeElementInert(APP_ELEMENT_ID);
+      setAreSettingsVisible(true);
+    },
+    [updateElement],
+  );
 
-  const closeSettings = () => {
+  const closeSettings = useCallback(() => {
+    makeElementNonInert(APP_ELEMENT_ID);
+    focusElement();
     setAreSettingsVisible(false);
-  };
+  }, [focusElement]);
 
   useEffect(() => {
     const onOpenSettings = () => {
@@ -82,7 +93,11 @@ export function SettingsOverlayProvider({ children }: Props) {
 
   useEffect(() => {
     const toggleSettingsVisibility = () => {
-      setAreSettingsVisible(!areSettingsVisible);
+      if (areSettingsVisible) {
+        closeSettings();
+      } else {
+        openSettings();
+      }
     };
 
     const unListen = window.csdm.onToggleSettingsVisibility(toggleSettingsVisibility);
@@ -90,14 +105,14 @@ export function SettingsOverlayProvider({ children }: Props) {
     return () => {
       unListen();
     };
-  }, [areSettingsVisible]);
+  }, [openSettings, closeSettings, areSettingsVisible]);
 
   useEffect(() => {
-    const toggleSettingsVisibility = () => {
-      openSettings(SettingsCategory.Analyze);
+    const showAbout = () => {
+      openSettings(SettingsCategory.About);
     };
 
-    const unListen = window.csdm.onShowAbout(toggleSettingsVisibility);
+    const unListen = window.csdm.onShowAbout(showAbout);
 
     return () => {
       unListen();
@@ -116,7 +131,7 @@ export function SettingsOverlayProvider({ children }: Props) {
       {children}
       {transitions((style, isVisible) => {
         return isVisible ? (
-          <DialogProvider>
+          <DialogProvider inertElementId={SETTINGS_ELEMENT_ID}>
             <SettingsOverlay style={style} onClose={closeSettings} />
           </DialogProvider>
         ) : null;

@@ -10,7 +10,8 @@ import { WebSocketProvider } from 'csdm/ui/bootstrap/web-socket-provider';
 import { DatabaseLoader } from 'csdm/ui/bootstrap/database-loader';
 import { DialogProvider } from 'csdm/ui/components/dialogs/dialog-provider';
 import { ToastsProvider } from 'csdm/ui/components/toasts/toasts-provider';
-import { SettingsOverlayProvider } from '../settings/settings-overlay-provider';
+import { SettingsOverlayProvider } from 'csdm/ui/settings/settings-overlay-provider';
+import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <ToastsProvider>
             <SettingsProvider>
               <WebSocketProvider>
-                <DialogProvider>
+                <DialogProvider inertElementId={APP_ELEMENT_ID}>
                   <DatabaseLoader>
                     <SettingsOverlayProvider>
                       <AppLoader />

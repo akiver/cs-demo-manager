@@ -2,6 +2,8 @@ import ReactDOM from 'react-dom';
 import React, { createContext, useState } from 'react';
 import type { ReactNode } from 'react';
 import { useTransition, animated } from '@react-spring/web';
+import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
+import { useFocusLastActiveElement } from 'csdm/ui/hooks/use-focus-last-active-element';
 
 type DialogContextState = {
   showDialog: (dialog: ReactNode) => void;
@@ -19,10 +21,12 @@ export const DialogContext = createContext<DialogContextState>({
 
 type Props = {
   children: ReactNode;
+  inertElementId: string;
 };
 
-export function DialogProvider({ children }: Props) {
+export function DialogProvider({ children, inertElementId }: Props) {
   const [dialog, setDialog] = useState<ReactNode | undefined>(undefined);
+  const { focusElement, updateElement } = useFocusLastActiveElement();
   const transitions = useTransition(dialog, {
     from: {
       opacity: 0,
@@ -44,9 +48,13 @@ export function DialogProvider({ children }: Props) {
       value={{
         showDialog: (dialog) => {
           setDialog(dialog);
+          updateElement();
+          makeElementInert(inertElementId);
         },
         hideDialog: () => {
           setDialog(undefined);
+          makeElementNonInert(inertElementId);
+          focusElement();
         },
       }}
     >

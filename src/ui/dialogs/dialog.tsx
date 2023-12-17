@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import type { ReactNode } from 'react';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
 import { useDialog } from '../components/dialogs/use-dialog';
-import { useFocusTrap } from '../hooks/use-focus-trap';
 
 type BaseProps = {
   closeOnBackgroundClicked?: boolean;
@@ -21,7 +20,7 @@ export function Dialog({
   onEnterPressed,
   blockNavigation = true,
 }: BaseProps) {
-  const container = useFocusTrap();
+  const container = useRef<HTMLDivElement>(null);
   useBlockNavigation(blockNavigation);
   const { hideDialog } = useDialog();
 

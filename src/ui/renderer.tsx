@@ -1,11 +1,12 @@
 globalThis.logger = window.csdm.logger;
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { onWindowError } from 'csdm/common/on-window-error';
 import { RouterProvider } from 'react-router-dom';
-import { router } from './router';
-import { ThemeName } from '../common/types/theme-name';
-import { isSelectAllKeyboardEvent } from './keyboard/keyboard';
+import { onWindowError } from 'csdm/common/on-window-error';
+import { router } from 'csdm/ui/router';
+import { ThemeName } from 'csdm/common/types/theme-name';
+import { isSelectAllKeyboardEvent } from 'csdm/ui/keyboard/keyboard';
+import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 import './index.css';
 
 window.addEventListener('error', onWindowError);
@@ -29,6 +30,6 @@ async function updateThemeClassName() {
 
 updateThemeClassName();
 
-const container = document.getElementById('app') as HTMLDivElement;
+const container = document.getElementById(APP_ELEMENT_ID) as HTMLDivElement;
 const root = ReactDOM.createRoot(container);
 root.render(<RouterProvider router={router} />);

@@ -4,6 +4,7 @@ import type { SpringValue } from '@react-spring/web';
 import { animated } from '@react-spring/web';
 import { Settings } from './settings';
 import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
+import { SETTINGS_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 
 type Props = {
   onClose: () => void;
@@ -27,6 +28,7 @@ export function SettingsOverlay({ onClose, style }: Props) {
       className="absolute inset-0 z-1 bg-overlay focus-within:outline-none"
       style={style}
       onKeyDown={onKeyDown}
+      id={SETTINGS_ELEMENT_ID}
     >
       <Settings />
     </animated.div>,

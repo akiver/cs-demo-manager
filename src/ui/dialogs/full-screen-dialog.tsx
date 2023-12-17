@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import type { SpringValue } from '@react-spring/web';
 import { useTransition, animated } from '@react-spring/web';
-import { useBlockNavigation } from '../hooks/use-block-navigation';
-import { useFocusTrap } from '../hooks/use-focus-trap';
+import { useBlockNavigation } from 'csdm/ui/hooks/use-block-navigation';
+import { makeElementInert, makeElementNonInert } from 'csdm/ui/shared/inert';
+import { useFocusLastActiveElement } from 'csdm/ui/hooks/use-focus-last-active-element';
+import { APP_ELEMENT_ID } from 'csdm/ui/shared/element-ids';
 
 type Props = {
   isVisible: boolean;
@@ -17,7 +19,18 @@ type DialogProps = {
 };
 
 function Dialog({ children, style }: DialogProps) {
-  const container = useFocusTrap();
+  const container = useRef<HTMLDivElement>(null);
+  const { updateElement, focusElement } = useFocusLastActiveElement();
+
+  useEffect(() => {
+    updateElement();
+    makeElementInert(APP_ELEMENT_ID);
+
+    return () => {
+      makeElementNonInert(APP_ELEMENT_ID);
+      focusElement();
+    };
+  }, [updateElement, focusElement]);
 
   useEffect(() => {
     container.current?.focus();
