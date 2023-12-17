@@ -1,4 +1,4 @@
-import glob from 'tiny-glob';
+import glob from 'tiny-readdir-glob';
 import type { Folder } from 'csdm/node/settings/settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
 
@@ -26,9 +26,7 @@ export async function getDemosFilePathsToLoad() {
   const filePaths: string[] = [];
   for (const folder of foldersToInclude) {
     const pattern = folder.includeSubFolders ? '**/*.dem' : '*.dem';
-    const files = await glob(pattern, {
-      absolute: true,
-      filesOnly: true,
+    const { files } = await glob(pattern, {
       cwd: folder.path,
     });
     filePaths.push(...files);

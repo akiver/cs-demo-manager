@@ -5,13 +5,11 @@
 import path from 'node:path';
 import fs from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import glob from 'tiny-glob';
+import glob from 'tiny-readdir-glob';
 
 const rootFolderPath = fileURLToPath(new URL('..', import.meta.url));
 
-const files = await glob('**/*.po', {
-  absolute: true,
-  filesOnly: true,
+const { files } = await glob('**/*.po', {
   cwd: path.resolve(rootFolderPath, 'src', 'ui', 'translations'),
 });
 

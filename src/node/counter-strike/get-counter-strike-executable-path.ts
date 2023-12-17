@@ -1,5 +1,5 @@
 import path from 'node:path';
-import glob from 'tiny-glob';
+import glob from 'tiny-readdir-glob';
 import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import { isMac } from 'csdm/node/os/is-mac';
@@ -50,11 +50,10 @@ export async function getCounterStrikeExecutablePath(game: Game): Promise<string
    * that depend on the OS arch.
    */
   const steamScriptName = game === Game.CS2 ? 'SteamLinuxRuntime_sniper/_v2-entry-point' : 'steam-runtime/run.sh';
-  const [runSteamScriptPath] = await glob(`**/${steamScriptName}`, {
+  const { files } = await glob(`**/${steamScriptName}`, {
     cwd: steamFolderPath,
-    absolute: true,
-    filesOnly: true,
   });
+  const [runSteamScriptPath] = files;
   if (!runSteamScriptPath) {
     throw new CounterStrikeExecutableNotFound(game);
   }
