@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-14 00:09\n"
+"PO-Revision-Date: 2023-12-17 23:26\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -63,19 +63,19 @@ msgstr "Une erreur est survenue lors de l'insertion du match dans la base de don
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "The analysis failed with the error code: <0>{0}</0>"
-msgstr ""
+msgstr "L'analyse a échoué avec le code d'erreur : <0>{0}</0>"
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read the error codes <0>documentation</0> to understand the code signification and what you can do."
-msgstr ""
+msgstr "Merci de lire la <0>documentation</0> des codes d'erreur pour comprendre sa signification et ce que vous pouvez faire."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue <1>only if the documentation says you should for this error code</1>."
-msgstr ""
+msgstr "Veuillez lire et suivre les instructions sur <0>GitHub</0> pour signaler le problème <1>uniquement si la documentation dit que vous devriez pour ce code d’erreur</1>."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Please read and follow the instructions on <0>GitHub</0> to report the issue."
-msgstr ""
+msgstr "Veuillez lire et suivre les instructions sur <0>GitHub</0> pour signaler le problème."
 
 #: src/ui/analyses/analysis-logs.tsx
 msgid "Logs:"
@@ -740,7 +740,7 @@ msgstr "{demosSourceNotSupportedCount, plural, one {La source de la démo n'est 
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "Please see this <0>documentation</0> for details."
-msgstr ""
+msgstr "Merci de lire la <0>documentation</0> pour obtenir de l'aide."
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
@@ -2058,7 +2058,7 @@ msgstr "Gamers Club"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Perfect World"
-msgstr ""
+msgstr "Perfect World"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2550,47 +2550,47 @@ msgstr "Occasionnel"
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Co-Operative"
-msgstr ""
+msgstr "Co-Operative"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Co-Operative Mission"
-msgstr ""
+msgstr "Co-Operative Mission"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Custom"
-msgstr ""
+msgstr "Personnalisé"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Deathmatch"
-msgstr ""
+msgstr "Deathmatch"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Arms Race Bomb"
-msgstr ""
+msgstr "Arms Race Bomb"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Arms Race"
-msgstr ""
+msgstr "Arms Race"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Skirmish"
-msgstr ""
+msgstr "Skirmish"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Survival"
-msgstr ""
+msgstr "Survival"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Unknown"
-msgstr ""
+msgstr "Inconnu"
 
 #: src/ui/hooks/use-get-rank-name.ts
 msgctxt "CS competitive rank"
@@ -5186,7 +5186,7 @@ msgstr "Supprimer les démos qui ne sont plus sur le système de fichiers"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Clear demos cache"
-msgstr ""
+msgstr "Vider le cache des démos"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgctxt "Button"
