@@ -28,7 +28,7 @@ function getRowId(demo: Demo) {
   return demo.filePath;
 }
 
-const fuzzySearchColumnIds: Paths<Demo>[] = ['checksum', 'name', 'mapName', 'source'];
+const fuzzySearchColumnIds: Paths<Demo>[] = ['checksum', 'name', 'mapName', 'serverName', 'clientName', 'source'];
 
 type Props = {
   children: ReactNode;

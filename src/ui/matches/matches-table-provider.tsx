@@ -25,7 +25,15 @@ function getRowId(match: MatchTable): string {
   return match.checksum;
 }
 
-const fuzzySearchColumnIds: Paths<MatchTable>[] = ['checksum', 'name', 'mapName', 'teamAName', 'teamBName'];
+const fuzzySearchColumnIds: Paths<MatchTable>[] = [
+  'checksum',
+  'name',
+  'mapName',
+  'teamAName',
+  'teamBName',
+  'serverName',
+  'clientName',
+];
 
 type Props = {
   children: ReactNode;
