@@ -41,7 +41,8 @@ export function Sidebar() {
             isSelected={match.id === selectedMatchId}
             mapName={match.mapName}
             scoreOnTheLeft={match.teams[0].score}
-            scoreOnTheRight={match.teams[1].score}
+            // Sometimes there is only one team https://www.faceit.com/en/cs2/room/1-cf691eae-3371-4b7e-bfe2-785ba16d66a4/scoreboard
+            scoreOnTheRight={match.teams[1]?.score ?? 0}
             selectMatch={() => {
               dispatch(matchSelected({ matchId: match.id }));
             }}
