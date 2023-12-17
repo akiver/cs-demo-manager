@@ -5185,6 +5185,10 @@ msgid "Delete demos that are not on the filesystem anymore"
 msgstr "Supprimer les démos qui ne sont plus sur le système de fichiers"
 
 #: src/ui/settings/database/optimize-database-button.tsx
+msgid "Clear demos cache"
+msgstr ""
+
+#: src/ui/settings/database/optimize-database-button.tsx
 msgctxt "Button"
 msgid "Optimize database"
 msgstr "Optimiser la base de données"
