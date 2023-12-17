@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { enUS, fr } from 'date-fns/locale';
+import { enUS, fr, zhCN } from 'date-fns/locale';
 import { DayPicker } from 'react-day-picker';
 import type { DateRange } from 'react-day-picker';
 import { useLocale } from 'csdm/ui/settings/ui/use-locale';
@@ -8,6 +8,8 @@ function getFnsLocale(locale: string) {
   switch (locale) {
     case 'fr':
       return fr;
+    case 'zh-CN':
+      return zhCN;
     default:
       return enUS;
   }
