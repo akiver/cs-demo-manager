@@ -70,6 +70,13 @@ export function useGetDemoSourceName() {
             message: 'Gamers Club',
           }),
         );
+      case DemoSource.PerfectWorld:
+        return _(
+          msg({
+            context: 'Demo source name',
+            message: 'Perfect World',
+          }),
+        );
       case DemoSource.Popflash:
         return _(
           msg({
@@ -142,6 +149,10 @@ export function useDemoSources() {
     {
       value: DemoSource.Valve,
       name: getDemoSourceName(DemoSource.Valve),
+    },
+    {
+      value: DemoSource.PerfectWorld,
+      name: getDemoSourceName(DemoSource.PerfectWorld),
     },
     {
       value: DemoSource.Unknown,

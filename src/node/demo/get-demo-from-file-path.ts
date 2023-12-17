@@ -75,6 +75,10 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.Valve;
   }
 
+  if (serverName.includes('完美世界')) {
+    return DemoSource.PerfectWorld;
+  }
+
   return DemoSource.Unknown;
 }
 
