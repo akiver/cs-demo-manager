@@ -1,7 +1,23 @@
-import { DemoSource, SupportedDemoSources, Game } from 'csdm/common/types/counter-strike';
+import { DemoSource, Game } from 'csdm/common/types/counter-strike';
 
 export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
-  [Game.CSGO]: SupportedDemoSources,
-  [Game.CS2]: [DemoSource.Valve, DemoSource.FaceIt, DemoSource.Ebot, DemoSource.Esl, DemoSource.Challengermode],
-  [Game.CS2LT]: [DemoSource.Valve, DemoSource.FaceIt],
+  [Game.CSGO]: [
+    DemoSource.Challengermode,
+    DemoSource.Ebot,
+    DemoSource.Esea,
+    DemoSource.Esl,
+    DemoSource.FaceIt,
+    DemoSource.PerfectWorld,
+    DemoSource.Popflash,
+    DemoSource.Valve,
+  ],
+  [Game.CS2]: [
+    DemoSource.Challengermode,
+    DemoSource.Ebot,
+    DemoSource.Esl,
+    DemoSource.FaceIt,
+    DemoSource.PerfectWorld,
+    DemoSource.Valve,
+  ],
+  [Game.CS2LT]: [DemoSource.Challengermode, DemoSource.FaceIt, DemoSource.Valve],
 };
