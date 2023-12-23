@@ -131,7 +131,7 @@
   "engines": {
     "node": "18"
   },
-  "resolutions": {
+  "overrides": {
     "node-gyp": "10.0.1",
     "esbuild": "0.19.10"
   }
