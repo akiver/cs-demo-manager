@@ -9,7 +9,7 @@ type Props = {
 
 export function FilterCategory({ name, children, right }: Props) {
   return (
-    <div className="flex flex-col gap-y-8 max-h-[134px] overflow-auto">
+    <div className="flex flex-col gap-y-8 max-h-[150px] overflow-auto">
       <div className="flex justify-between">
         <p>{name}</p>
         {right}
