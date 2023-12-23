@@ -8,13 +8,17 @@ import { useFolders } from 'csdm/ui/settings/folders/use-folders';
 import { FolderIcon } from 'csdm/ui/icons/folder-icon';
 import { useDemosLoaded } from 'csdm/ui/demos/use-demos-loaded';
 import { useFetchDemos } from 'csdm/ui/demos/use-fetch-demos';
+import { useToggleFolderSubFoldersInclusion } from 'csdm/ui/settings/folders/use-toggle-folder-sub-folders-inclusion';
 
 export function CurrentFolderSelect() {
   const folders = useFolders();
   const { currentFolderPath, showAllFolders } = useDemosSettings();
+  const folder = folders.find((folder) => folder.path === currentFolderPath);
+  const toggleFolderSubFoldersInclusion = useToggleFolderSubFoldersInclusion();
   const demosLoaded = useDemosLoaded();
   const updateSettings = useUpdateSettings();
   const fetchDemos = useFetchDemos();
+  const canInteract = demosLoaded && folders.length > 0;
 
   return (
     <div className="flex items-center p-8 gap-12">
@@ -40,11 +44,23 @@ export function CurrentFolderSelect() {
           })}
         />
       </div>
+      {folder && (
+        <Checkbox
+          id="include-sub-folders"
+          label={<Trans context="Checkbox label">Include subfolders</Trans>}
+          isChecked={folder.includeSubFolders}
+          isDisabled={showAllFolders || !canInteract}
+          onChange={async (event) => {
+            await toggleFolderSubFoldersInclusion(folder.path, event.target.checked);
+            await fetchDemos();
+          }}
+        />
+      )}
       <Checkbox
         id="select-all-folders"
         label={<Trans context="Checkbox label">See all folders</Trans>}
         isChecked={showAllFolders}
-        isDisabled={!demosLoaded || folders.length === 0}
+        isDisabled={!canInteract}
         onChange={async (event) => {
           const isChecked = event.target.checked;
           await updateSettings({

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import { IncludeSubDirectoriesSwitch } from './include-sub-directories-switch';
+import { IncludeSubFoldersSwitch } from './include-sub-folders-switch';
 import { RemoveFolderButton } from './remove-folder-button';
 import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
 import type { Folder } from 'csdm/node/settings/settings';
@@ -16,7 +16,7 @@ export function FolderRow({ folder }: Props) {
     <div className="flex flex-col border border-gray-300 p-8 rounded">
       <p className="font-semibold selectable">{folder.path}</p>
       <div className="flex items-center justify-between mt-4">
-        <IncludeSubDirectoriesSwitch folder={folder} />
+        <IncludeSubFoldersSwitch folder={folder} />
         <div className="flex gap-x-8">
           <RevealFolderInExplorerButton path={folder.path} />
           <RemoveFolderButton folderPath={folder.path} />

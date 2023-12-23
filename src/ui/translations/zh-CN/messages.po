@@ -1970,6 +1970,11 @@ msgstr "这个录像还没有被分析过。"
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
+msgid "Include subfolders"
+msgstr ""
+
+#: src/ui/demos/current-folder-select.tsx
+msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr "选择所有文件夹"
 
@@ -5489,9 +5494,9 @@ msgstr "增加一个文件夹"
 msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
 msgstr "此文件夹包含在启动CS:GO时阻止demo播放的字符！(不是CS2)"
 
-#: src/ui/settings/folders/include-sub-directories-switch.tsx
-msgid "Include subdirectories"
-msgstr "包括子目录"
+#: src/ui/settings/folders/include-sub-folders-switch.tsx
+msgid "Include subfolders"
+msgstr ""
 
 #: src/ui/settings/folders/use-add-folder.tsx
 msgid "This folder is already in your settings"

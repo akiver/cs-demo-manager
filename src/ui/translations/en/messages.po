@@ -1965,6 +1965,11 @@ msgstr "This demo has not been analyzed yet."
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
+msgid "Include subfolders"
+msgstr "Include subfolders"
+
+#: src/ui/demos/current-folder-select.tsx
+msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr "See all folders"
 
@@ -5484,9 +5489,9 @@ msgstr "Add a folder"
 msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
 msgstr "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
 
-#: src/ui/settings/folders/include-sub-directories-switch.tsx
-msgid "Include subdirectories"
-msgstr "Include subdirectories"
+#: src/ui/settings/folders/include-sub-folders-switch.tsx
+msgid "Include subfolders"
+msgstr "Include subfolders"
 
 #: src/ui/settings/folders/use-add-folder.tsx
 msgid "This folder is already in your settings"

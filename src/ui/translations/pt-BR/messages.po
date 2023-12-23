@@ -1970,6 +1970,11 @@ msgstr ""
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
+msgid "Include subfolders"
+msgstr ""
+
+#: src/ui/demos/current-folder-select.tsx
+msgctxt "Checkbox label"
 msgid "See all folders"
 msgstr ""
 
@@ -5489,8 +5494,8 @@ msgstr ""
 msgid "This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)"
 msgstr ""
 
-#: src/ui/settings/folders/include-sub-directories-switch.tsx
-msgid "Include subdirectories"
+#: src/ui/settings/folders/include-sub-folders-switch.tsx
+msgid "Include subfolders"
 msgstr ""
 
 #: src/ui/settings/folders/use-add-folder.tsx
