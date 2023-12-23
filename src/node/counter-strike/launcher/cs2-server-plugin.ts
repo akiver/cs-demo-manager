@@ -17,9 +17,12 @@ function getServerPluginFolderFromGamePath(executablePath: string) {
   return path.join(executablePath, 'game', 'csgo', 'csdm');
 }
 
-// 1. Copy the server binary to the game folder
-// 2. Patch gameinfo.gi to tell the game to load the plugin
+// 1. Uninstall the plugin if it's already installed
+// 2. Copy the server binary to the game folder
+// 3. Patch gameinfo.gi to tell the game to load the plugin
 export async function installCs2ServerPlugin() {
+  await uninstallCs2ServerPlugin();
+
   const csgoFolderPath = await getCsgoFolderPathOrThrow(Game.CS2);
   const pluginFolder = getServerPluginFolderFromGamePath(csgoFolderPath);
   const binFolderPath = isWindows ? path.join(pluginFolder, 'bin') : path.join(pluginFolder, 'bin', 'linuxsteamrt64');
