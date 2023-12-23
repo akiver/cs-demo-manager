@@ -23,6 +23,7 @@ export function CfgInput() {
         defaultValue={sequence.cfg}
         placeholder="CFG executed at the beginning of the sequence. &#10;&#10;Example: &#10;cl_draw_only_deathnotices 0"
         resizable={false}
+        spellCheck={false}
         onBlur={onBlur}
       />
     </div>
