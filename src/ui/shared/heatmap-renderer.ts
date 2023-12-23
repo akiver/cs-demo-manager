@@ -25,11 +25,7 @@ export class HeatmapRenderer {
 
   public constructor(canvas: HTMLCanvasElement) {
     this.ctx = canvas.getContext('2d', {
-      // Since Electron 28, setting willReadFrequently to either false or true makes getImageData() return empty data.
-      // Disabling hardware acceleration with app.disableHardwareAcceleration() fixes the issue but View transitions
-      // are not smooth anymore.
-      // https://www.electronjs.org/docs/latest/tutorial/offscreen-rendering
-      willReadFrequently: undefined,
+      willReadFrequently: true,
     }) as CanvasRenderingContext2D;
     this.width = canvas.width;
     this.height = canvas.height;
