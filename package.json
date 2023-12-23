@@ -132,7 +132,6 @@
     "node": "18"
   },
   "overrides": {
-    "node-gyp": "10.0.1",
     "esbuild": "0.19.10"
   }
 }
