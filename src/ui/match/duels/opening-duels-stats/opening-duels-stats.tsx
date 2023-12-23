@@ -194,42 +194,46 @@ export function OpeningDuelsStats() {
 
   return (
     <Content>
-      <div className="flex items-center gap-16">
-        <OpeningDuelResultSelect
-          selectedResult={selectedResult}
-          onChange={(result) => {
-            setSelectedResult(result);
-          }}
-        />
-        <SideSelect
-          selectedSides={selectedSides}
-          onChange={(side) => {
-            setSelectedSides(side === undefined ? [] : [side]);
-          }}
-        />
-      </div>
-      <div className="flex items-center gap-x-16 mt-12">
-        <TeamChart
-          teamName={teamNameA}
-          players={playersTeamA}
-          kills={openingKills}
-          result={selectedResult}
-          sides={selectedSides}
-        />
-        <TeamChart
-          teamName={teamNameB}
-          players={playersTeamB}
-          kills={openingKills}
-          result={selectedResult}
-          sides={selectedSides}
-        />
-      </div>
+      <div className="flex flex-wrap gap-16">
+        <div className="flex flex-col">
+          <div className="flex items-center gap-16">
+            <OpeningDuelResultSelect
+              selectedResult={selectedResult}
+              onChange={(result) => {
+                setSelectedResult(result);
+              }}
+            />
+            <SideSelect
+              selectedSides={selectedSides}
+              onChange={(side) => {
+                setSelectedSides(side === undefined ? [] : [side]);
+              }}
+            />
+          </div>
+          <div className="flex items-center gap-x-16 mt-12">
+            <TeamChart
+              teamName={teamNameA}
+              players={playersTeamA}
+              kills={openingKills}
+              result={selectedResult}
+              sides={selectedSides}
+            />
+            <TeamChart
+              teamName={teamNameB}
+              players={playersTeamB}
+              kills={openingKills}
+              result={selectedResult}
+              sides={selectedSides}
+            />
+          </div>
+        </div>
 
-      <div className="mt-16">
-        <h3 className="text-body-strong mb-8">
-          <Trans>Round breakdown</Trans>
-        </h3>
-        <OpeningDuelsRoundBreakdown openingKills={openingKills} />
+        <div className="flex flex-col">
+          <h3 className="text-body-strong mb-8">
+            <Trans>Round breakdown</Trans>
+          </h3>
+          <OpeningDuelsRoundBreakdown openingKills={openingKills} />
+        </div>
       </div>
     </Content>
   );
