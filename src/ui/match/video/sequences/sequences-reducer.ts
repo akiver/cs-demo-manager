@@ -18,6 +18,13 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
     .addCase(addSequence, (state, action) => {
       const { sequence, demoFilePath } = action.payload;
       const sequences = state[demoFilePath] ?? [];
+      const sequenceAlreadyExists = sequences.some(({ number, startTick, endTick }) => {
+        return number === sequence.number || (startTick === sequence.startTick && endTick === sequence.endTick);
+      });
+      if (sequenceAlreadyExists) {
+        return;
+      }
+
       sequences.push(sequence);
       state[demoFilePath] = sequences;
     })

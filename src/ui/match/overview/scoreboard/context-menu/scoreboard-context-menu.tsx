@@ -9,10 +9,9 @@ import { CopyPlayerDataItem } from './copy-player-data-item';
 import { OpenSteamProfileItem } from 'csdm/ui/components/context-menu/items/open-steam-profile-item';
 import { DetailsItem } from 'csdm/ui/components/context-menu/items/details-item';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
-import { useNavigate } from 'react-router-dom';
-import { buildMatchPlayerPath } from 'csdm/ui/routes-paths';
 import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { isCounterStrikeStartable, isVideoGenerationAvailable } from 'csdm/ui/hooks/use-counter-strike';
+import { useNavigateToMatchPlayer } from 'csdm/ui/hooks/navigation/use-navigate-to-match-player';
 
 type Props = {
   steamId: string;
@@ -21,14 +20,14 @@ type Props = {
 
 export function ScoreboardContextMenu({ steamId, demoPath }: Props) {
   const match = useCurrentMatch();
-  const navigate = useNavigate();
+  const navigateToMatchPlayer = useNavigateToMatchPlayer();
   const canStartCs = isCounterStrikeStartable(match.game);
 
   return (
     <ContextMenu>
       <DetailsItem
         onClick={() => {
-          navigate(buildMatchPlayerPath(match.checksum, steamId));
+          navigateToMatchPlayer(match.checksum, steamId);
         }}
       />
       {canStartCs && <WatchPlayerItem demoPath={demoPath} steamId={steamId} game={match.game} />}

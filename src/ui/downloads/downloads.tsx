@@ -9,8 +9,8 @@ export function Downloads() {
   return (
     <>
       <TabLinks>
-        <TabLink url="" text="Valve" />
-        <TabLink url={RoutePath.DownloadsFaceit} text="FACEIT" />
+        <TabLink url="">Valve</TabLink>
+        <TabLink url={RoutePath.DownloadsFaceit}>FACEIT</TabLink>
         <PendingDownloadsLink />
       </TabLinks>
       <Outlet />

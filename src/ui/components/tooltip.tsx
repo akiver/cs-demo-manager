@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import React, { cloneElement, useState } from 'react';
-import type { Middleware } from '@floating-ui/react';
+import type { Middleware, Strategy } from '@floating-ui/react';
 import {
   offset,
   shift,
@@ -13,9 +13,45 @@ import {
   useRole,
   autoPlacement,
   useMergeRefs,
+  useClientPoint,
 } from '@floating-ui/react';
 
 type Placement = 'top' | 'right' | 'bottom' | 'left';
+
+type WrapperProps = {
+  placement: Placement;
+  x: number;
+  y: number;
+  strategy: Strategy;
+  children: ReactNode;
+  refs: ReturnType<typeof useFloating>['refs'];
+  getFloatingProps: ReturnType<typeof useInteractions>['getFloatingProps'];
+};
+
+function Wrapper({ x, y, refs, children, strategy, placement, getFloatingProps }: WrapperProps) {
+  const arrowClasses: Record<Placement, string> = {
+    right: 'tooltip-right',
+    left: 'tooltip-left',
+    top: 'tooltip-top',
+    bottom: 'tooltip-bottom',
+  };
+  const arrowClassName = arrowClasses[placement] ?? '';
+
+  return (
+    <div
+      ref={refs.setFloating}
+      className={`bg-gray-75 border border-gray-400 p-8 rounded select-none transition-opacity duration-300 z-10 ${arrowClassName}`}
+      style={{
+        position: strategy,
+        top: y,
+        left: x,
+      }}
+      {...getFloatingProps()}
+    >
+      {children}
+    </div>
+  );
+}
 
 type Props = {
   children: React.ReactElement;
@@ -73,27 +109,17 @@ export function Tooltip({
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const ref = useMergeRefs([refs.setReference, (children as any).ref]);
 
-  const arrowClasses: Record<Placement, string> = {
-    right: 'tooltip-right',
-    left: 'tooltip-left',
-    top: 'tooltip-top',
-    bottom: 'tooltip-bottom',
-  };
-  const arrowClassName = arrowClasses[finalPlacement as Placement] ?? '';
-
   const node = (
-    <div
-      ref={refs.setFloating}
-      className={`bg-gray-75 border border-gray-400 p-8 rounded select-none transition-opacity duration-300 z-10 ${arrowClassName}`}
-      style={{
-        position: strategy,
-        top: y,
-        left: x,
-      }}
-      {...getFloatingProps()}
+    <Wrapper
+      refs={refs}
+      strategy={strategy}
+      x={x}
+      y={y}
+      placement={finalPlacement as Placement}
+      getFloatingProps={getFloatingProps}
     >
       {content}
-    </div>
+    </Wrapper>
   );
 
   return (
@@ -102,4 +128,29 @@ export function Tooltip({
       {isVisible ? (renderInPortal ? ReactDOM.createPortal(node, document.body) : node) : null}
     </>
   );
+}
+
+type Options = {
+  isVisible: boolean;
+  children: React.ReactNode;
+  placement?: Placement;
+};
+
+export function useTooltip({ children, placement = 'top', isVisible }: Options) {
+  const { x, y, strategy, context, refs } = useFloating({
+    placement,
+    open: isVisible,
+    middleware: [offset(16), shift()],
+    whileElementsMounted: autoUpdate,
+  });
+
+  const { getReferenceProps, getFloatingProps } = useInteractions([useClientPoint(context)]);
+
+  const node = (
+    <Wrapper refs={refs} strategy={strategy} x={x} y={y} placement={placement} getFloatingProps={getFloatingProps}>
+      {children}
+    </Wrapper>
+  );
+
+  return { refs, getReferenceProps, node };
 }

@@ -43,16 +43,12 @@ export function MatchPlayers() {
       <TabLinks>
         {sortedPlayers.map((player) => {
           return (
-            <TabLink
-              key={player.steamId}
-              url={buildMatchPlayerPath(match.checksum, player.steamId)}
-              text={
-                <div className="flex items-center gap-x-4">
-                  <Avatar avatarUrl={player.avatar} playerName={player.name} size={20} />
-                  <p>{player.name}</p>
-                </div>
-              }
-            />
+            <TabLink key={player.steamId} url={buildMatchPlayerPath(match.checksum, player.steamId)}>
+              <div className="flex items-center gap-x-4">
+                <Avatar avatarUrl={player.avatar} playerName={player.name} size={20} />
+                <p>{player.name}</p>
+              </div>
+            </TabLink>
           );
         })}
       </TabLinks>

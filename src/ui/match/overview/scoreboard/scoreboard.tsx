@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Player } from 'csdm/common/types/player';
-import { TeamScore } from '../../../components/match/team-score';
+import { TeamScore } from 'csdm/ui/components/match/team-score';
 import { ScoreboardContextMenu } from './context-menu/scoreboard-context-menu';
 import { TableName } from 'csdm/node/settings/table/table-name';
 import { useContextMenu } from 'csdm/ui/components/context-menu/use-context-menu';
@@ -10,8 +10,7 @@ import type { TableInstance } from 'csdm/ui/components/table/table-types';
 import { useTable } from 'csdm/ui/components/table/use-table';
 import { Table } from 'csdm/ui/components/table/table';
 import { Message } from 'csdm/ui/components/message';
-import { useNavigate } from 'react-router-dom';
-import { buildMatchPlayerPath } from 'csdm/ui/routes-paths';
+import { useNavigateToMatchPlayer } from 'csdm/ui/hooks/navigation/use-navigate-to-match-player';
 
 function getRowId(player: Player) {
   return player.steamId;
@@ -29,7 +28,7 @@ export function Scoreboard({ teamName, score, scoreOppositeTeam, isDefuseMap, pl
   const { showContextMenu } = useContextMenu();
   const match = useCurrentMatch();
   const columns = useScoreboardColumns(isDefuseMap);
-  const navigate = useNavigate();
+  const navigateToMatchPlayer = useNavigateToMatchPlayer();
 
   const onContextMenu = (event: MouseEvent, table: TableInstance<Player>) => {
     const players = table.getSelectedRows();
@@ -41,7 +40,7 @@ export function Scoreboard({ teamName, score, scoreOppositeTeam, isDefuseMap, pl
   };
 
   const navigateToPlayer = (player: Player) => {
-    navigate(buildMatchPlayerPath(match.checksum, player.steamId));
+    navigateToMatchPlayer(match.checksum, player.steamId);
   };
 
   const table = useTable({

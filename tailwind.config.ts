@@ -157,7 +157,7 @@ const config: Config = {
         },
       },
       animation: {
-        'grow-height': 'grow-height 0.5s ease-in',
+        'grow-height': 'grow-height 0.3s ease-in',
       },
     },
   },

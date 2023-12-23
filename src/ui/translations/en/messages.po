@@ -469,6 +469,11 @@ msgctxt "Button"
 msgid "Watch"
 msgstr "Watch"
 
+#: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
+msgctxt "Context menu"
+msgid "Add to video sequences"
+msgstr "Add to video sequences"
+
 #: src/ui/components/context-menu/items/analyze-item.tsx
 msgctxt "Context menu"
 msgid "Analyze"
@@ -704,6 +709,7 @@ msgstr "Update demo location"
 
 #: src/ui/components/context-menu/items/watch-item.tsx
 #: src/ui/components/context-menu/items/watch-player-item.tsx
+#: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
 #: src/ui/match/grenades/finder/context-menu.tsx
 msgctxt "Context menu"
 msgid "Watch"
@@ -1148,6 +1154,21 @@ msgstr "Port"
 msgctxt "Input placeholder"
 msgid "Port"
 msgstr "Port"
+
+#: src/ui/components/inputs/select/opening-duel-result-select.tsx
+msgctxt "Opening duel result select option"
+msgid "Won"
+msgstr "Won"
+
+#: src/ui/components/inputs/select/opening-duel-result-select.tsx
+msgctxt "Opening duel result select option"
+msgid "Lost"
+msgstr "Lost"
+
+#: src/ui/components/inputs/select/opening-duel-result-select.tsx
+msgctxt "Opening duel result filter category"
+msgid "Opening duel result"
+msgstr "Opening duel result"
 
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
@@ -1739,6 +1760,26 @@ msgstr "Community banned"
 msgctxt "Tooltip"
 msgid "Comment"
 msgstr "Comment"
+
+#: src/ui/components/table/cells/kill-attributes-cell.tsx
+msgctxt "Tooltip kill"
+msgid "Headshot"
+msgstr "Headshot"
+
+#: src/ui/components/table/cells/kill-attributes-cell.tsx
+msgctxt "Tooltip kill"
+msgid "Wallbang"
+msgstr "Wallbang"
+
+#: src/ui/components/table/cells/kill-attributes-cell.tsx
+msgctxt "Tooltip kill"
+msgid "Blinded"
+msgstr "Blinded"
+
+#: src/ui/components/table/cells/kill-attributes-cell.tsx
+msgctxt "Tooltip kill"
+msgid "Jump kill"
+msgstr "Jump kill"
 
 #: src/ui/components/table/columns-visibility-dropdown.tsx
 msgctxt "Dropdown"
@@ -2708,6 +2749,26 @@ msgctxt "Steam economy ban status"
 msgid "Unknown"
 msgstr "Unknown"
 
+#: src/ui/hooks/use-translate-team-number.ts
+msgctxt "Team side"
+msgid "CT"
+msgstr "CT"
+
+#: src/ui/hooks/use-translate-team-number.ts
+msgctxt "Team side"
+msgid "T"
+msgstr "T"
+
+#: src/ui/hooks/use-translate-team-number.ts
+msgctxt "Team side"
+msgid "SPEC"
+msgstr "SPEC"
+
+#: src/ui/hooks/use-translate-team-number.ts
+msgctxt "Team side"
+msgid "Unassigned"
+msgstr "Unassigned"
+
 #: src/ui/keyboard/keyboard-shortcut.ts
 msgctxt "Keyboard shortcut"
 msgid "C"
@@ -2778,6 +2839,144 @@ msgstr "Export"
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 msgid "Chat messages exported"
 msgstr "Chat messages exported"
+
+#: src/ui/match/duels/match-duels.tsx
+msgctxt "Tab link"
+msgid "Opening duels stats"
+msgstr "Opening duels stats"
+
+#: src/ui/match/duels/match-duels.tsx
+msgctxt "Tab link "
+msgid "Opening duels map"
+msgstr "Opening duels map"
+
+#: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
+msgctxt "Context menu"
+msgid "See killer details"
+msgstr "See killer details"
+
+#: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
+msgctxt "Context menu"
+msgid "See victim details"
+msgstr "See victim details"
+
+#: src/ui/match/duels/opening-duels-map/opening-duels-map-loader.tsx
+msgid "No kills found."
+msgstr "No kills found."
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header"
+msgid "Round"
+msgstr "Round"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
+msgctxt "Table header tooltip"
+msgid "Round"
+msgstr "Round"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header"
+msgid "Killer"
+msgstr "Killer"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Killer's name"
+msgstr "Killer's name"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header"
+msgid "Victim"
+msgstr "Victim"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Victim's name"
+msgstr "Victim's name"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header"
+msgid "Weapon"
+msgstr "Weapon"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Weapon's name"
+msgstr "Weapon's name"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header"
+msgid "Attributes"
+msgstr "Attributes"
+
+#: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Kill's attributes"
+msgstr "Kill's attributes"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header"
+msgid "Killer side"
+msgstr "Killer side"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Killer's side"
+msgstr "Killer's side"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header"
+msgid "Victim side"
+msgstr "Victim side"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
+msgctxt "Table header tooltip"
+msgid "Victim's side"
+msgstr "Victim's side"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "{openDuelWonPercentage}%"
+msgstr "{openDuelWonPercentage}%"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "Opening duels won"
+msgstr "Opening duels won"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "{openDuelLostPercentage}%"
+msgstr "{openDuelLostPercentage}%"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "Opening duels lost"
+msgstr "Opening duels lost"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "Open duels lost: {lostCount}"
+msgstr "Open duels lost: {lostCount}"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "Open duels won: {wonCount}"
+msgstr "Open duels won: {wonCount}"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "Open duels: <0>{openingDuelCount}</0>"
+msgstr "Open duels: <0>{openingDuelCount}</0>"
+
+#: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
+msgid "Round breakdown"
+msgstr "Round breakdown"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
@@ -2947,16 +3146,6 @@ msgstr "Tick"
 msgctxt "Table header tooltip"
 msgid "Tick"
 msgstr "Tick"
-
-#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
-msgctxt "Table header"
-msgid "Round"
-msgstr "Round"
-
-#: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
-msgctxt "Table header tooltip"
-msgid "Round"
-msgstr "Round"
 
 #: src/ui/match/grenades/finder/use-grenades-finder-columns.ts
 msgctxt "Table header velocity"
@@ -3166,6 +3355,11 @@ msgstr "Heatmap"
 msgctxt "Tab link"
 msgid "Weapons"
 msgstr "Weapons"
+
+#: src/ui/match/match-tabs.tsx
+msgctxt "Tab link"
+msgid "Duels"
+msgstr "Duels"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"

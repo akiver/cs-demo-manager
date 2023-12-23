@@ -7,11 +7,21 @@ import { RoutePath } from 'csdm/ui/routes-paths';
 export function PlayerTabs() {
   return (
     <TabLinks>
-      <TabLink url="" text={<Trans context="Tab link">Overview</Trans>} />
-      <TabLink url={RoutePath.PlayerCharts} text={<Trans context="Tab link">Graphs</Trans>} />
-      <TabLink url={RoutePath.PlayerMaps} text={<Trans context="Tab link">Maps</Trans>} />
-      <TabLink url={RoutePath.PlayerRank} text={<Trans context="Tab link">Rank</Trans>} />
-      <TabLink url={RoutePath.PlayerMatches} text={<Trans context="Tab link">Matches</Trans>} />
+      <TabLink url="">
+        <Trans context="Tab link">Overview</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.PlayerCharts}>
+        <Trans context="Tab link">Graphs</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.PlayerMaps}>
+        <Trans context="Tab link">Maps</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.PlayerRank}>
+        <Trans context="Tab link">Rank</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.PlayerMatches}>
+        <Trans context="Tab link">Matches</Trans>
+      </TabLink>
     </TabLinks>
   );
 }

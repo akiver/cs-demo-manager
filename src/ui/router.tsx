@@ -37,6 +37,9 @@ import { InitialRouteRedirector } from 'csdm/ui/bootstrap/initial-route-redirect
 import { RoutePath } from 'csdm/ui/routes-paths';
 import { PlayerRank } from './player/rank/player-rank';
 import { ErrorBoundary } from './error-boundary';
+import { OpeningDuelsMapLoader } from 'csdm/ui/match/duels/opening-duels-map/opening-duels-map-loader';
+import { MatchDuels } from 'csdm/ui/match/duels/match-duels';
+import { OpeningDuelsStats } from 'csdm/ui/match/duels/opening-duels-stats/opening-duels-stats';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -54,6 +57,10 @@ export const router = createHashRouter(
           <Route path=":steamId" element={<MatchPlayers />} />
         </Route>
         <Route path={RoutePath.MatchHeatmap} element={<HeatmapLoader />} />
+        <Route path={RoutePath.MatchDuels} element={<MatchDuels />}>
+          <Route index={true} element={<OpeningDuelsStats />} />
+          <Route path={RoutePath.MatchOpeningDuelsMap} element={<OpeningDuelsMapLoader />} />
+        </Route>
         <Route path={RoutePath.MatchWeapons} element={<Weapons />} />
         <Route path={RoutePath.MatchGrenades} element={<MatchGrenades />}>
           <Route index={true} element={<GrenadesStats />} />

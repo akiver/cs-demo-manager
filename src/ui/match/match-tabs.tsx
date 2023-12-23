@@ -6,7 +6,9 @@ import { TabLink } from 'csdm/ui/components/tabs/tab-link';
 import { buildMatchPath, RoutePath } from 'csdm/ui/routes-paths';
 import { NextLink, PreviousLink } from 'csdm/ui/components/links';
 import { useCurrentMatch } from './use-current-match';
-import { isCounterStrikeStartable } from '../hooks/use-counter-strike';
+import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
+import { useCurrentMatchSequences } from 'csdm/ui/match/video/sequences/use-current-match-sequences';
+import { TabLinkNumberBadge } from 'csdm/ui/components/tabs/tab-link-number-badge';
 
 function PreviousMatchLink() {
   const location = useLocation();
@@ -34,22 +36,49 @@ function NextMatchLink() {
 
 export function MatchTabs() {
   const match = useCurrentMatch();
+  const sequences = useCurrentMatchSequences();
 
   return (
     <TabLinks>
       <PreviousMatchLink />
-      <TabLink url="" text={<Trans context="Tab link">Overview</Trans>} />
-      <TabLink url={RoutePath.MatchRounds} text={<Trans context="Tab link">Rounds</Trans>} end={false} />
-      <TabLink url={RoutePath.MatchPlayers} text={<Trans context="Tab link">Players</Trans>} end={false} />
-      <TabLink url={RoutePath.MatchHeatmap} text={<Trans context="Tab link">Heatmap</Trans>} />
-      <TabLink url={RoutePath.MatchWeapons} text={<Trans context="Tab link">Weapons</Trans>} />
-      <TabLink url={RoutePath.MatchGrenades} text={<Trans context="Tab link">Grenades</Trans>} end={false} />
-      <TabLink url={RoutePath.MatchEconomy} text={<Trans context="Tab link">Economy</Trans>} />
-      <TabLink url={RoutePath.Match2dViewer} text={<Trans context="Tab link">2D viewer</Trans>} end={false} />
+      <TabLink url="">
+        <Trans context="Tab link">Overview</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchRounds} end={false}>
+        <Trans context="Tab link">Rounds</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchPlayers} end={false}>
+        <Trans context="Tab link">Players</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchHeatmap}>
+        <Trans context="Tab link">Heatmap</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchWeapons}>
+        <Trans context="Tab link">Weapons</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchDuels} end={false}>
+        <Trans context="Tab link">Duels</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchGrenades} end={false}>
+        <Trans context="Tab link">Grenades</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchEconomy}>
+        <Trans context="Tab link">Economy</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.Match2dViewer} end={false}>
+        <Trans context="Tab link">2D viewer</Trans>
+      </TabLink>
       {isCounterStrikeStartable(match.game) && (
-        <TabLink url={RoutePath.MatchVideo} text={<Trans context="Tab link">Video</Trans>} />
+        <div className="relative">
+          <TabLink url={RoutePath.MatchVideo}>
+            <Trans context="Tab link">Video</Trans>
+          </TabLink>
+          <TabLinkNumberBadge number={sequences.length} />
+        </div>
       )}
-      <TabLink url={RoutePath.MatchChat} text={<Trans context="Tab link">Chat</Trans>} />
+      <TabLink url={RoutePath.MatchChat}>
+        <Trans context="Tab link">Chat</Trans>
+      </TabLink>
       <NextMatchLink />
     </TabLinks>
   );

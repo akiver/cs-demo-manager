@@ -16,23 +16,23 @@ function buildPlayersDeathNotices(players: Player[]) {
   return deathNotices;
 }
 
-const MINIMUM_SECONDS_BETWEEN_TWO_SEQUENCES = 2;
-const MAX_SECONDS_BETWEEN_KILLS = 10;
-const START_SECONDS_BEFORE_KILL = 5;
-const END_SECONDS_AFTER_KILL = 2;
-
 export function buildPlayerKillsSequences(match: Match, steamId: string) {
   const playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
   if (playerKills.length === 0) {
     return [];
   }
 
+  const minimunSecondsBetweenTwoSequences = 2;
+  const maxSecondsBetweenKills = 10;
+  const startSecondsBeforeKill = 5;
+  const endSecondsAfterKill = 2;
+
   const deathNotices = buildPlayersDeathNotices(match.players);
   const sequences: Sequence[] = [];
-  const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * MINIMUM_SECONDS_BETWEEN_TWO_SEQUENCES);
-  const additionalTicksBeforeKill = Math.round(match.tickrate * START_SECONDS_BEFORE_KILL);
-  const additionalTicksAfterKill = Math.round(match.tickrate * END_SECONDS_AFTER_KILL);
-  const maxTicksBetweenKills = Math.round(match.tickrate * MAX_SECONDS_BETWEEN_KILLS);
+  const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimunSecondsBetweenTwoSequences);
+  const additionalTicksBeforeKill = Math.round(match.tickrate * startSecondsBeforeKill);
+  const additionalTicksAfterKill = Math.round(match.tickrate * endSecondsAfterKill);
+  const maxTicksBetweenKills = Math.round(match.tickrate * maxSecondsBetweenKills);
 
   for (const [index, kill] of playerKills.entries()) {
     const sequenceStartTick = Math.max(1, kill.tick - additionalTicksBeforeKill);

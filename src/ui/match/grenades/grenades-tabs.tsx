@@ -7,8 +7,12 @@ import { RoutePath } from 'csdm/ui/routes-paths';
 export function GrenadesTabs() {
   return (
     <TabLinks>
-      <TabLink url="" text={<Trans context="Tab link">Stats</Trans>} />
-      <TabLink url={RoutePath.MatchGrenadesFinder} text={<Trans context="Tab link grenades finder">Finder</Trans>} />
+      <TabLink url="">
+        <Trans context="Tab link">Stats</Trans>
+      </TabLink>
+      <TabLink url={RoutePath.MatchGrenadesFinder}>
+        <Trans context="Tab link grenades finder">Finder</Trans>
+      </TabLink>
     </TabLinks>
   );
 }
