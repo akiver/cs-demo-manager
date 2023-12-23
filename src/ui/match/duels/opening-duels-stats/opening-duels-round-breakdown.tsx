@@ -14,7 +14,7 @@ import { CounterStrikeRunningDialog } from 'csdm/ui/components/dialogs/counter-s
 import { useTranslateTeamNumber } from 'csdm/ui/hooks/use-translate-team-number';
 import { KillAttributesCell } from 'csdm/ui/components/table/cells/kill-attributes-cell';
 
-export function useColumns() {
+function useColumns() {
   const _ = useI18n();
   const translateTeam = useTranslateTeamNumber();
 
