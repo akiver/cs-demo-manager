@@ -1,6 +1,6 @@
 import path from 'node:path';
 import os from 'node:os';
-import glob from 'tiny-readdir-glob';
+import glob from 'fast-glob';
 import fs from 'fs-extra';
 import type { DatabaseSettings } from 'csdm/node/settings/settings';
 import type { Database } from 'csdm/node/database/schema';
@@ -46,11 +46,10 @@ export async function insertFromCsv<Table>({
 }
 
 export async function deleteCsvFilesInOutputFolder(outputFolderPath: string) {
-  const { files } = await glob('*.csv', {
+  const files = await glob('*.csv', {
     cwd: outputFolderPath,
+    absolute: true,
   });
 
-  for (const csvFile of files) {
-    await fs.remove(csvFile);
-  }
+  await Promise.all(files.map((csvFile) => fs.remove(csvFile)));
 }

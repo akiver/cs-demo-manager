@@ -1,5 +1,5 @@
 import path from 'node:path';
-import glob from 'tiny-readdir-glob';
+import glob from 'fast-glob';
 import fs from 'fs-extra';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { Sequence } from 'csdm/common/types/sequence';
@@ -34,17 +34,20 @@ export async function getSequenceRawFiles(sequence: Sequence, recordingFolderPat
     const sequenceRawFilesFolderPath = path.join(recordingFolderPath, sequenceName);
     await assertFolderExists(sequenceRawFilesFolderPath);
 
-    const { directories: takeFolders } = await glob(`${sequenceName}/take*`, {
-      depth: 1,
+    const takeFolders = await glob(`${sequenceName}/take*`, {
       cwd: recordingFolderPath,
+      absolute: true,
+      onlyDirectories: true,
+      deep: 1,
     });
     assertPathsNotEmpty(takeFolders);
 
     const hlaeRawFilesFolderPath = takeFolders[takeFolders.length - 1];
     await assertFolderExists(hlaeRawFilesFolderPath);
 
-    const { files: tgaFiles } = await glob(`defaultNormal/*.tga`, {
+    const tgaFiles = await glob(`defaultNormal/*.tga`, {
       cwd: hlaeRawFilesFolderPath,
+      absolute: true,
     });
     assertPathsNotEmpty(tgaFiles);
 
@@ -57,8 +60,9 @@ export async function getSequenceRawFiles(sequence: Sequence, recordingFolderPat
   const sequenceRawFilesFolderPath = path.join(recordingFolderPath, sequenceName);
   await assertFolderExists(sequenceRawFilesFolderPath);
 
-  const { files: tgaFiles } = await glob(`**/*${sequenceName}*.tga`, {
+  const tgaFiles = await glob(`**/${sequenceName}*.tga`, {
     cwd: recordingFolderPath,
+    absolute: true,
   });
   assertPathsNotEmpty(tgaFiles);
 

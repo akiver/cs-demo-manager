@@ -1,5 +1,5 @@
 import fs from 'fs-extra';
-import glob from 'tiny-readdir-glob';
+import glob from 'fast-glob';
 import path from 'node:path';
 import os from 'node:os';
 import { Command } from './command';
@@ -129,8 +129,9 @@ export class AnalyzeCommand extends Command {
         try {
           const stats = await fs.stat(arg);
           if (stats.isDirectory()) {
-            const { files } = await glob('*.dem', {
+            const files = await glob('*.dem', {
               cwd: arg,
+              absolute: true,
             });
             this.demoPaths.push(...files);
           } else if (stats.isFile() && arg.endsWith('.dem')) {

@@ -1,6 +1,6 @@
 import path from 'node:path';
 import fs from 'fs-extra';
-import glob from 'tiny-readdir-glob';
+import glob from 'fast-glob';
 import { Game } from 'csdm/common/types/counter-strike';
 import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
@@ -36,8 +36,9 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
 
   for (const sequence of sequences) {
     const sequenceName = getSequenceName(sequence);
-    const { files: tgaFiles } = await glob(`**/*${sequenceName}*.tga`, {
+    const tgaFiles = await glob(`**/${sequenceName}*.tga`, {
       cwd: recordingFolderPath,
+      absolute: true,
     });
     if (tgaFiles.length === 0) {
       throw new RawFilesNotFoundError();
