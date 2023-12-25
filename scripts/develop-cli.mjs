@@ -20,7 +20,7 @@ const context = await esbuild.context({
   define: {
     IS_PRODUCTION: 'false',
     IS_DEV: 'true',
-    'process.env.STEAM_API_KEY': `"${process.env.STEAM_API_KEY}"`,
+    'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
     'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
   },
   external: ['pg-native'],

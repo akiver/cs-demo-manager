@@ -54,7 +54,7 @@ async function buildWebSocketServerBundle() {
     external: ['pg-native'],
     define: {
       ...commonDefine,
-      'process.env.STEAM_API_KEY': `"${process.env.STEAM_API_KEY}"`,
+      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
       'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
     },
     plugins: [nativeNodeModulesPlugin],
@@ -115,7 +115,7 @@ async function buildCliBundle() {
     mainFields: ['module', 'main'],
     define: {
       ...commonDefine,
-      'process.env.STEAM_API_KEY': `"${process.env.STEAM_API_KEY}"`,
+      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
       'process.env.FACEIT_API_KEY': `"${process.env.FACEIT_API_KEY}"`,
     },
     external: ['pg-native'],

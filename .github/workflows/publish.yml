@@ -82,7 +82,7 @@ jobs:
           npm run build
           npm run package -- --mac --publish always
         env:
-          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           APPLE_ID: ${{ secrets.APPLE_ID }}
@@ -115,7 +115,7 @@ jobs:
           npm run build
           npm run package -- --linux --publish always
         env:
-          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
@@ -145,7 +145,7 @@ jobs:
           npm run build
           npm run package -- --win --publish always
         env:
-          STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+          STEAM_API_KEYS: ${{ secrets.STEAM_API_KEYS }}
           FACEIT_API_KEY: ${{ secrets.FACEIT_API_KEY }}
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 

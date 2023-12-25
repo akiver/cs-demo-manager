@@ -112,7 +112,7 @@ async function buildWebSocketProcessBundle() {
     external: ['pg-native'],
     define: {
       ...commonDefine,
-      'process.env.STEAM_API_KEY': `"${process.env.STEAM_API_KEY}"`,
+      'process.env.STEAM_API_KEYS': `"${process.env.STEAM_API_KEYS}"`,
     },
     plugins: [
       nativeNodeModulesPlugin,

@@ -6,5 +6,7 @@ export async function getSteamApiKey() {
     return steamApiKey;
   }
 
-  return process.env.STEAM_API_KEY;
+  const keys = process.env.STEAM_API_KEYS.split(',');
+
+  return keys[Math.floor(Math.random() * keys.length)];
 }
