@@ -1,19 +1,34 @@
-import { getUsersSummary } from 'csdm/node/steam-web-api/get-users-summary';
 import { SteamApiError } from 'csdm/node/steam-web-api/steamapi-error';
 import type { ValvePlayer } from 'csdm/common/types/valve-match';
+import { buildSteamAccountsFromSteamIds } from 'csdm/node/database/steam-accounts/build-steam-accounts-from-steam-ids';
+import { insertSteamAccounts } from 'csdm/node/database/steam-accounts/insert-steam-accounts';
+import type { InsertableSteamAccount } from 'csdm/node/database/steam-accounts/steam-account-table';
+import { fetchSteamAccounts } from 'csdm/node/database/steam-accounts/fetch-steam-accounts';
 
 export async function updateValvePlayersFromSteam(players: ValvePlayer[]) {
   try {
-    const steamIds: string[] = players.map((player) => player.steamId);
-    const playersSummaries = await getUsersSummary(steamIds);
+    const steamIds = players.map((player) => player.steamId);
+    let accounts: InsertableSteamAccount[] = await fetchSteamAccounts(steamIds);
+    const needsToFetchPlayersFromSteam =
+      steamIds.filter((steamId) => {
+        return !accounts.some((account) => account.steam_id === steamId);
+      }).length > 0;
+
+    if (needsToFetchPlayersFromSteam) {
+      accounts = await buildSteamAccountsFromSteamIds(steamIds);
+      if (accounts.length === 0) {
+        return;
+      }
+
+      await insertSteamAccounts(accounts);
+    }
+
     for (const player of players) {
+      const account = accounts.find((account) => account.steam_id === player.steamId);
       // ! When a Steam account has been deleted the API returns an empty object, make sure it really exists.
-      const playerSummary = playersSummaries.find((summary) => {
-        return summary.steamid === player.steamId;
-      });
-      if (playerSummary) {
-        player.name = playerSummary.personaname;
-        player.avatar = playerSummary.avatar;
+      if (account) {
+        player.name = account.name;
+        player.avatar = account.avatar;
       } else {
         player.name = 'Deleted account';
       }
