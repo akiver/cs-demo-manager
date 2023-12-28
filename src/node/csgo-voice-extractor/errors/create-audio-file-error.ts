@@ -3,7 +3,7 @@ import { ErrorCode } from 'csdm/common/error-code';
 
 export class CreateAudioFileError extends BaseError {
   public constructor() {
-    super(ErrorCode.CsgoVoiceExtractorCreateAudioFileError);
+    super(ErrorCode.CsVoiceExtractorCreateAudioFileError);
     this.message = 'Failed to create audio file';
   }
 }

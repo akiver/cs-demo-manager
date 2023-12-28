@@ -603,11 +603,16 @@ msgid "Failed to load the Counter-Strike audio library."
 msgstr "Failed to load the Counter-Strike audio library."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/generating-dialog.tsx
-#: src/ui/match/video/video-loader.tsx
-msgid "Counter-Strike executable not found."
-msgstr "Counter-Strike executable not found."
+msgid "Failed to open the demo file."
+msgstr "Failed to open the demo file."
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Some required library files are missing."
+msgstr "Some required library files are missing."
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "This demo format is not supported."
+msgstr "This demo format is not supported."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "You need to install <0>Rosetta</0>."
@@ -646,6 +651,10 @@ msgstr "An error occurred."
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Players voice export"
 msgstr "Players voice export"
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Valve Matchmaking demos do not contain voice audio data!"
+msgstr "Valve Matchmaking demos do not contain voice audio data!"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Warnings:"
@@ -2526,6 +2535,12 @@ msgstr "Demo not found"
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Match not found"
 msgstr "Match not found"
+
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/video-loader.tsx
+msgid "Counter-Strike executable not found."
+msgstr "Counter-Strike executable not found."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."

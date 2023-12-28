@@ -13,46 +13,27 @@ import { AudioDecodingError } from './errors/audio-decoding-error';
 import { CreateAudioFileError } from './errors/create-audio-file-error';
 import { CsgoVoiceExtractorUnknownError } from './errors/csgo-voice-extractor-unknown-error';
 import { DemoNotFound } from 'csdm/node/counter-strike/launcher/errors/demo-not-found';
-import { CounterStrikeExecutableNotFound } from '../counter-strike/launcher/errors/counter-strike-executable-not-found';
-import { Game } from 'csdm/common/types/counter-strike';
 import { BadCpuTypeError } from './errors/bad-cpu-type-error';
-
-async function assertCsgoLibFilesExist(csgoAudioLibsFolderPath: string) {
-  let requiredFiles: string[] = [];
-  if (isWindows) {
-    requiredFiles = ['vaudio_celt.dll', 'tier0.dll'];
-  } else if (isMac) {
-    requiredFiles = ['vaudio_celt.dylib', 'libtier0.dylib', 'libvstdlib.dylib'];
-  } else {
-    requiredFiles = ['vaudio_celt_client.so', 'libtier0_client.so'];
-  }
-
-  for (const fileName of requiredFiles) {
-    const fileExists = await fs.pathExists(path.resolve(csgoAudioLibsFolderPath, fileName));
-    if (!fileExists) {
-      throw new CounterStrikeExecutableNotFound(Game.CSGO);
-    }
-  }
-}
+import { MissingLibraryFiles } from './errors/missing-library-files';
+import { UnsupportedDemoFormat } from './errors/unsupported-demo-format';
+import { OpenDemoError } from './errors/open-demo-error';
 
 export async function startCsgoVoiceExtractor(demoPath: string, outputFolderPath: string) {
-  const csgoLibFolderPath = path.join(getStaticFolderPath(), 'csgove');
-  await assertCsgoLibFilesExist(csgoLibFolderPath);
-
   await fs.mkdirp(outputFolderPath);
 
   return new Promise<void>((resolve, reject) => {
-    const executablePath = path.join(csgoLibFolderPath, isWindows ? 'csgove.exe' : 'csgove');
-    const args = [executablePath, '-exit-on-first-error', `-output="${outputFolderPath}"`, `"${demoPath}"`];
+    const librariesFolderPath = path.join(getStaticFolderPath(), 'csgove');
+    const executablePath = path.join(librariesFolderPath, isWindows ? 'csgove.exe' : 'csgove');
+    const args = [`"${executablePath}"`, '-exit-on-first-error', `-output="${outputFolderPath}"`, `"${demoPath}"`];
     const command = args.join(' ');
     const libraryPathVarName = isMac ? 'DYLD_LIBRARY_PATH' : 'LD_LIBRARY_PATH';
 
-    logger.log('Starting csgo-voice-extractor with command:', command);
+    logger.log('Starting cs-voice-extractor with command:', command);
     const extractorProcess = exec(command, {
       windowsHide: true,
       env: {
         ...process.env,
-        [libraryPathVarName]: csgoLibFolderPath,
+        [libraryPathVarName]: librariesFolderPath,
       },
     });
 
@@ -67,7 +48,7 @@ export async function startCsgoVoiceExtractor(demoPath: string, outputFolderPath
     });
 
     extractorProcess.on('exit', (code: number) => {
-      logger.log('CSGO voice extractor exited with code:', code);
+      logger.log('CS voice extractor exited with code:', code);
       const exitCodes = {
         InvalidArguments: 10,
         LoadCsgoLibError: 11,
@@ -77,6 +58,9 @@ export async function startCsgoVoiceExtractor(demoPath: string, outputFolderPath
         NoVoiceDataFound: 15,
         DecodingError: 16,
         WavFileCreationError: 17,
+        OpenDemoError: 18,
+        UnsupportedDemo: 19,
+        MissingLibraryFiles: 20,
       } as const;
 
       switch (code) {
@@ -84,6 +68,12 @@ export async function startCsgoVoiceExtractor(demoPath: string, outputFolderPath
           return resolve();
         case exitCodes.InvalidArguments:
           return reject(new InvalidArgs());
+        case exitCodes.MissingLibraryFiles:
+          return reject(new MissingLibraryFiles());
+        case exitCodes.OpenDemoError:
+          return reject(new OpenDemoError());
+        case exitCodes.UnsupportedDemo:
+          return reject(new UnsupportedDemoFormat());
         case exitCodes.LoadCsgoLibError:
           return reject(new LoadCsgoLibError());
         case exitCodes.DemoNotFound:

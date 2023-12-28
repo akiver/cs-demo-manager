@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 const projectPath = fileURLToPath(new URL('..', import.meta.url));
 const staticFolderPath = fileURLToPath(new URL('../static', import.meta.url));
 
-export async function installCsgoVoiceExtractor(platform = process.platform) {
+export async function installCounterStrikeVoiceExtractor(platform = process.platform) {
   const supportedPlatforms = ['darwin', 'win32', 'linux'];
   if (!supportedPlatforms.includes(platform)) {
     throw new Error(`Unsupported platform: ${platform}`);

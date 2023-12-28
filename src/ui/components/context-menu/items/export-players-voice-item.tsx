@@ -4,10 +4,10 @@ import { ContextMenuItem } from 'csdm/ui/components/context-menu/context-menu-it
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
-import { useDialog } from '../../dialogs/use-dialog';
-import { RevealFolderInExplorerButton } from '../../buttons/reveal-folder-in-explorer-button';
-import { ButtonVariant } from '../../buttons/button';
-import { CloseButton } from '../../buttons/close-button';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { RevealFolderInExplorerButton } from 'csdm/ui/components/buttons/reveal-folder-in-explorer-button';
+import { ButtonVariant } from 'csdm/ui/components/buttons/button';
+import { CloseButton } from 'csdm/ui/components/buttons/close-button';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
 import type {
   ExportDemoPlayersVoiceErrorPayload,
@@ -15,9 +15,9 @@ import type {
 } from 'csdm/server/handlers/renderer-process/demo/export-demo-players-voice-handler';
 import { ErrorCode } from 'csdm/common/error-code';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
-import { ErrorMessage } from '../../error-message';
+import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { ExclamationTriangleIcon } from 'csdm/ui/icons/exclamation-triangle-icon';
-import { ExternalLink } from '../../external-link';
+import { ExternalLink } from 'csdm/ui/components/external-link';
 
 type DialogProps = {
   outputFolderPath: string;
@@ -54,29 +54,35 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
         case ErrorCode.DemoNotFound:
           addWarning(<Trans>Demo not found: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorDecodingError:
+        case ErrorCode.CsVoiceExtractorDecodingError:
           addWarning(<Trans>Decoding error: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorNoVoiceDataFound:
+        case ErrorCode.CsVoiceExtractorNoVoiceDataFound:
           addWarning(<Trans>No voice data found for demo: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorParsingError:
+        case ErrorCode.CsVoiceExtractorParsingError:
           addWarning(<Trans>Failed to parse demo: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorUnsupportedAudioCodec:
+        case ErrorCode.CsVoiceExtractorUnsupportedAudioCodec:
           addWarning(<Trans>Unsupported audio codec: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorCreateAudioFileError:
+        case ErrorCode.CsVoiceExtractorCreateAudioFileError:
           addWarning(<Trans>Failed to create audio file: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorInvalidArgs:
+        case ErrorCode.CsVoiceExtractorInvalidArgs:
           addWarning(<Trans>Invalid arguments for demo: {demoPath}</Trans>);
           break;
-        case ErrorCode.CsgoVoiceExtractorLoadCsgoLibError:
+        case ErrorCode.CsVoiceExtractorLoadCsgoLibError:
           setError(<Trans>Failed to load the Counter-Strike audio library.</Trans>);
           break;
-        case ErrorCode.CounterStrikeExecutableNotFound:
-          setError(<Trans>Counter-Strike executable not found.</Trans>);
+        case ErrorCode.CsVoiceExtractorOpenDemoError:
+          addWarning(<Trans>Failed to open the demo file.</Trans>);
+          break;
+        case ErrorCode.CsVoiceExtractorMissingLibraryFiles:
+          setError(<Trans>Some required library files are missing.</Trans>);
+          break;
+        case ErrorCode.CsVoiceExtractorUnsupportedDemoFormat:
+          addWarning(<Trans>This demo format is not supported.</Trans>);
           break;
         case ErrorCode.BadCpuType:
           setError(
@@ -111,6 +117,12 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
           </DialogTitle>
         </DialogHeader>
         <DialogContent>
+          <div className="flex items-center gap-x-4 mb-16">
+            <ExclamationTriangleIcon className="w-16 h-16 text-red-700" />
+            <p>
+              <Trans>Valve Matchmaking demos do not contain voice audio data!</Trans>
+            </p>
+          </div>
           {warnings.length > 0 && (
             <div className="flex flex-col">
               <div className="flex items-center gap-x-8 mb-8">

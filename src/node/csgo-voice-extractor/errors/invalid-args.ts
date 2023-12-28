@@ -3,7 +3,7 @@ import { ErrorCode } from 'csdm/common/error-code';
 
 export class InvalidArgs extends BaseError {
   public constructor() {
-    super(ErrorCode.CsgoVoiceExtractorInvalidArgs);
+    super(ErrorCode.CsVoiceExtractorInvalidArgs);
     this.message = 'Invalid arguments';
   }
 }

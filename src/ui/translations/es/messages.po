@@ -608,10 +608,15 @@ msgid "Failed to load the Counter-Strike audio library."
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
-#: src/ui/hooks/use-counter-strike.tsx
-#: src/ui/match/video/generating-dialog.tsx
-#: src/ui/match/video/video-loader.tsx
-msgid "Counter-Strike executable not found."
+msgid "Failed to open the demo file."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Some required library files are missing."
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "This demo format is not supported."
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
@@ -650,6 +655,10 @@ msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Players voice export"
+msgstr ""
+
+#: src/ui/components/context-menu/items/export-players-voice-item.tsx
+msgid "Valve Matchmaking demos do not contain voice audio data!"
 msgstr ""
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
@@ -2530,6 +2539,12 @@ msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Match not found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/video/generating-dialog.tsx
+#: src/ui/match/video/video-loader.tsx
+msgid "Counter-Strike executable not found."
 msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx

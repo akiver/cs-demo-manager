@@ -3,7 +3,7 @@ import { ErrorCode } from 'csdm/common/error-code';
 
 export class UnsupportedAudioCodec extends BaseError {
   public constructor() {
-    super(ErrorCode.CsgoVoiceExtractorUnsupportedAudioCodec);
+    super(ErrorCode.CsVoiceExtractorUnsupportedAudioCodec);
     this.message = 'Unsupported audio codec';
   }
 }

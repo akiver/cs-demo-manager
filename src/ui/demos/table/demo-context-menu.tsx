@@ -27,7 +27,6 @@ import { ExportPlayersVoiceItem } from 'csdm/ui/components/context-menu/items/ex
 import { ChangeDemosSourceDialog } from 'csdm/ui/components/dialogs/change-demos-source-dialog';
 import { UpdateDemosTypeItem } from './update-demos-type-item';
 import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
-import { Game } from 'csdm/common/types/counter-strike';
 import { DeleteDemosFromDatabaseItem } from './delete-demos-from-database-item';
 import { DeleteDemosFromDatabaseDialog } from 'csdm/ui/components/dialogs/delete-demos-from-database-dialog';
 
@@ -75,7 +74,6 @@ export function DemoContextMenu({ onCommentClick, demos }: Props) {
   const checksums = demos.map((demo) => demo.checksum);
   const filepaths = demos.map((demo) => demo.filePath);
   const selectedDemo = demos[demos.length - 1];
-  const hasSource2DemoSelected = demos.some((demo) => demo.game !== Game.CSGO);
 
   const onTagsClick = () => {
     showDialog(<DemosTagsDialog demos={demos} />);
@@ -107,7 +105,7 @@ export function DemoContextMenu({ onCommentClick, demos }: Props) {
       <NavigateToDemoItem demoPath={selectedDemo.filePath} />
       <NavigateToMatchItem demos={demos} />
       <AnalyzeItem demos={demos} />
-      {!hasSource2DemoSelected && <ExportPlayersVoiceItem demoPaths={filepaths} />}
+      <ExportPlayersVoiceItem demoPaths={filepaths} />
       <Separator />
       <CommentItem onClick={onCommentClick} isDisabled={demos.length !== 1} />
       <TagsItem onClick={onTagsClick} />
