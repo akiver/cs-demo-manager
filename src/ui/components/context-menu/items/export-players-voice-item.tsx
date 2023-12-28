@@ -132,9 +132,9 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
                 </p>
               </div>
               <ul className="flex flex-col gap-y-8 p-8 rounded max-w-[824px] max-h-[224px] overflow-auto bg-gray-100">
-                {warnings.map((warning) => {
+                {warnings.map((warning, index) => {
                   return (
-                    <li key={String(warning)} className="select-text break-all selectable">
+                    <li key={`${warning}${index}`} className="select-text break-all selectable">
                       {warning}
                     </li>
                   );
