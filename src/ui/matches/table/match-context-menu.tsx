@@ -23,6 +23,7 @@ import { CopyItem } from 'csdm/ui/components/context-menu/items/copy-item';
 import { ExportMatchesItem } from 'csdm/ui/components/context-menu/items/export-matches-item';
 import { WatchItem } from 'csdm/ui/components/context-menu/items/watch-item';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
+import { ExportPlayersVoiceItem } from 'csdm/ui/components/context-menu/items/export-players-voice-item';
 
 type Props = {
   matchChecksums: string[];
@@ -76,6 +77,7 @@ export function MatchContextMenu({ selectedMatches, matchChecksums, onCommentCli
       <TagsItem onClick={onTagsClick} />
       <Separator />
       <ExportMatchesItem matches={selectedMatches} />
+      <ExportPlayersVoiceItem demoPaths={filepaths} />
       <Separator />
       <CopyItem>
         <CopyShareCodeItem shareCodes={shareCodes} />
