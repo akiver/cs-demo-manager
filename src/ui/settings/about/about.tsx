@@ -94,6 +94,13 @@ export function About() {
           <ul className="mt-4 selectable">
             <li>
               <Trans>
+                <ExternalLink href="https://github.com/DandrewsDev">@DandrewsDev</ExternalLink> for his work on CS2
+                demos{' '}
+                <ExternalLink href="https://github.com/DandrewsDev/CS2VoiceData">voice data extraction</ExternalLink>.
+              </Trans>
+            </li>
+            <li>
+              <Trans>
                 <ExternalLink href="https://github.com/dtugend">@dtugend</ExternalLink>, the main developer of{' '}
                 <ExternalLink href="https://github.com/advancedfx/advancedfx">HLAE</ExternalLink> which CS Demo Manager
                 uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can

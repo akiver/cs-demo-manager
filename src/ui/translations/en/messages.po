@@ -5236,6 +5236,10 @@ msgid "Special thanks to the following developers for their open-source work rel
 msgstr "Special thanks to the following developers for their open-source work related to Counter-Strike that at some point helped create CS Demo Manager ❤️."
 
 #: src/ui/settings/about/about.tsx
+msgid "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."
+msgstr "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."
+
+#: src/ui/settings/about/about.tsx
 msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
 msgstr "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
 
