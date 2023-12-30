@@ -115,7 +115,7 @@ function TeamChart({ teamName, players, kills, result, sides }: TeamChartProps) 
         </div>
       </div>
 
-      <div className="flex gap-x-12 mt-8">
+      <div className="flex justify-center gap-x-12 mt-8">
         {playersStats.map(({ steamId, avatar, name, wonCount, lostCount }) => {
           const openingDuelCount = wonCount + lostCount;
           return (
