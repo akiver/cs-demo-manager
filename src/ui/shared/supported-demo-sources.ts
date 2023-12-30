@@ -10,6 +10,7 @@ export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
     DemoSource.PerfectWorld,
     DemoSource.Popflash,
     DemoSource.Valve,
+    DemoSource.Fastcup,
   ],
   [Game.CS2]: [
     DemoSource.Challengermode,
@@ -18,6 +19,7 @@ export const SupportedDemoSourcesPerGame: Record<Game, DemoSource[]> = {
     DemoSource.FaceIt,
     DemoSource.PerfectWorld,
     DemoSource.Valve,
+    DemoSource.Fastcup,
   ],
   [Game.CS2LT]: [DemoSource.Challengermode, DemoSource.FaceIt, DemoSource.Valve],
 };

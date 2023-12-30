@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "@akiver/boiler-writter": "1.4.0",
-    "@akiver/cs-demo-analyzer": "1.0.7",
+    "@akiver/cs-demo-analyzer": "1.1.0",
     "@akiver/csgo-voice-extractor": "2.0.0",
     "@crowdin/cli": "3.15.0",
     "@floating-ui/react": "0.26.4",
