@@ -4,8 +4,6 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import type { Kill } from 'csdm/common/types/kill';
 import { PlayersSelect } from 'csdm/ui/components/inputs/select/players-select';
 import { SideSelect } from 'csdm/ui/components/inputs/select/side-select';
-import { OpeningDuelResultSelect } from 'csdm/ui/components/inputs/select/opening-duel-result-select';
-import { OpeningDuelResult } from 'csdm/common/types/opening-duel-result';
 import { useTooltip } from 'csdm/ui/components/tooltip';
 import { KillFeedEntry } from 'csdm/ui/components/kill-feed-entry';
 import { CounterStrikeRunningDialog } from 'csdm/ui/components/dialogs/counter-strike-running-dialog';
@@ -40,7 +38,6 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
   const [hoveringKill, setHoveringKill] = useState<Kill | undefined>(undefined);
   const [selectedSteamIds, setSelectedSteamIds] = useState<string[]>([]);
   const [selectedSides, setSelectedSides] = useState<TeamNumber[]>([]);
-  const [selectedResult, setSelectedResult] = useState<OpeningDuelResult | undefined>(undefined);
   const isTooltipVisible = hoveringKill !== undefined;
 
   const watchKill = (kill: Kill) => {
@@ -67,44 +64,41 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
   };
 
   const buildKills = () => {
-    const tableKills: Kill[] = [];
-    const wonKills: Kill[] = [];
-    const lostKills: Kill[] = [];
-    const includeWon = !selectedResult || selectedResult === OpeningDuelResult.Won;
-    const includeLost = !selectedResult || selectedResult === OpeningDuelResult.Lost;
+    const filteredKills: Kill[] = [];
 
-    const shouldIncludeSteamId = (steamId: string) => {
+    const isSteamIdSelected = (steamId: string) => {
       return !selectedSteamIds.length || (selectedSteamIds.length > 0 && selectedSteamIds.includes(steamId));
     };
 
-    const shouldIncludeSide = (side: TeamNumber) => {
+    const isSideSelected = (side: TeamNumber) => {
       return !selectedSides.length || (selectedSides.length > 0 && selectedSides.includes(side));
     };
 
     for (const kill of kills) {
-      const includeKiller =
-        includeWon && shouldIncludeSteamId(kill.killerSteamId) && shouldIncludeSide(kill.killerSide);
-      if (includeKiller) {
-        wonKills.push(kill);
+      if (filteredKills.includes(kill)) {
+        continue;
       }
 
-      const includeVictim =
-        includeLost && shouldIncludeSteamId(kill.victimSteamId) && shouldIncludeSide(kill.victimSide);
-      if (includeVictim) {
-        lostKills.push(kill);
+      const shouldIncludeSteamId = isSteamIdSelected(kill.killerSteamId) || isSteamIdSelected(kill.victimSteamId);
+      if (!shouldIncludeSteamId) {
+        continue;
       }
 
-      if (includeVictim || includeKiller) {
-        tableKills.push(kill);
+      const shouldIncludeSide = isSideSelected(kill.killerSide);
+      if (!shouldIncludeSide) {
+        continue;
       }
+
+      filteredKills.push(kill);
     }
-    return { tableKills, wonKills, lostKills };
+
+    return filteredKills;
   };
 
-  const { tableKills, wonKills, lostKills } = buildKills();
+  const filteredKills = buildKills();
 
   const table = useTable<Kill>({
-    data: tableKills,
+    data: filteredKills,
     columns: useOpeningDuelsMapColumns(),
     getRowId,
     rowSelection: 'single',
@@ -122,9 +116,13 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
     radarFileSrc,
     draw: (interactiveCanvas, context) => {
       const { zoomedToRadarX, zoomedToRadarY, zoomedSize, getMouseX, getMouseY } = interactiveCanvas;
-      let hoveringKill: Kill | undefined = undefined;
 
-      for (const kill of wonKills) {
+      let hoveringKill: Kill | undefined = undefined;
+      const mouseX = getMouseX();
+      const mouseY = getMouseY();
+
+      for (const kill of filteredKills) {
+        // Draw killer
         const scaledX = zoomedToRadarX(kill.killerX);
         const scaledY = zoomedToRadarY(kill.killerY);
         const playerRadius = zoomedSize(8);
@@ -136,28 +134,25 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
         context.fill();
         context.stroke();
 
-        if (!hoveringKill) {
-          const mouseX = getMouseX();
-          const mouseY = getMouseY();
-          if (context.isPointInPath(mouseX, mouseY)) {
-            hoveringKill = kill;
-          }
+        if (!hoveringKill && context.isPointInPath(mouseX, mouseY)) {
+          hoveringKill = kill;
         }
 
-        const hasLostKill = lostKills.some((k) => k.id === kill.id);
-        if (hasLostKill) {
-          const scaledVictimX = zoomedToRadarX(kill.victimX);
-          const scaledVictimY = zoomedToRadarY(kill.victimY);
-          context.beginPath();
-          context.moveTo(scaledX, scaledY);
-          context.lineTo(scaledVictimX, scaledVictimY);
-          context.strokeStyle = selectedKill?.id === kill.id ? 'red' : 'white';
-          context.lineWidth = zoomedSize(1);
-          context.stroke();
-        }
-      }
+        // Draw line to victim
+        const scaledVictimX = zoomedToRadarX(kill.victimX);
+        const scaledVictimY = zoomedToRadarY(kill.victimY);
+        context.beginPath();
+        context.moveTo(scaledX, scaledY);
+        context.lineTo(scaledVictimX, scaledVictimY);
+        context.strokeStyle = selectedKill?.id === kill.id ? 'red' : 'white';
+        context.lineWidth = zoomedSize(1);
+        context.stroke();
 
-      for (const kill of lostKills) {
+        if (!hoveringKill && context.isPointInStroke(mouseX, mouseY)) {
+          hoveringKill = kill;
+        }
+
+        // Draw victim
         const paths = drawPlayerDeath(
           context,
           interactiveCanvas,
@@ -167,8 +162,6 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
           selectedKill?.id === kill.id ? 'red' : undefined,
         );
         if (!hoveringKill) {
-          const mouseX = getMouseX();
-          const mouseY = getMouseY();
           const isHoveringKill = paths.some((path) => {
             return context.isPointInStroke(path, mouseX, mouseY);
           });
@@ -240,12 +233,6 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
             selectedSides={selectedSides}
             onChange={(selectedSide) => {
               setSelectedSides(selectedSide === undefined ? [] : [selectedSide]);
-            }}
-          />
-          <OpeningDuelResultSelect
-            selectedResult={selectedResult}
-            onChange={(selectedResult) => {
-              setSelectedResult(selectedResult);
             }}
           />
         </div>
