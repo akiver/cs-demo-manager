@@ -19,7 +19,8 @@ jobs:
         uses: actions/stale@v9
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-          stale-issue-message: 'This issue was closed due to inactivity. Feel free to reopen if needed.'
+          stale-issue-message: ''
+          close-issue-message: 'This issue was closed due to inactivity. Feel free to reopen if needed.'
           days-before-pr-stale: -1
           days-before-issue-stale: 23
           days-before-issue-close: 7
