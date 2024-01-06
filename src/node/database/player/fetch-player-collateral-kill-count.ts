@@ -17,7 +17,7 @@ export async function fetchPlayerCollateralKillCount(filters: FetchPlayerFilters
       .having(count<number>('tick'), '>', 1);
 
     if (filters.startDate !== undefined && filters.endDate !== undefined) {
-      query = query.where(sql`matches.date between ${filters.startDate} and ${filters.endDate}`);
+      query = query.where(sql<boolean>`matches.date between ${filters.startDate} and ${filters.endDate}`);
     }
 
     if (filters.sources.length > 0) {

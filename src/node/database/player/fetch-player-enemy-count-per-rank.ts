@@ -28,7 +28,7 @@ async function fetchMatchChecksumsWithPlayer({
     });
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   if (ranking !== RankingFilter.All) {
@@ -80,7 +80,7 @@ async function fetchPlayerEnemiesRankInMatches(
   }
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   if (ranking !== RankingFilter.All) {

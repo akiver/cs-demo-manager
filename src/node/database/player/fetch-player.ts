@@ -65,7 +65,7 @@ function buildQuery({
           .where('penetrated_objects', '>', 0);
 
         if (startDate !== undefined && endDate !== undefined) {
-          wallbangsQuery = wallbangsQuery.where(sql`matches.date between ${startDate} and ${endDate}`);
+          wallbangsQuery = wallbangsQuery.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
         }
 
         if (sources.length > 0) {
@@ -123,7 +123,7 @@ function buildQuery({
     ]);
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   if (sources.length > 0) {

@@ -28,7 +28,7 @@ export async function fetchLastPlayerData(filters: FetchPlayerFilters): Promise<
   }
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   const accountPromise = db

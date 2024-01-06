@@ -27,7 +27,7 @@ export async function searchNinjaDefuse({ steamIds, mapNames, startDate, endDate
   }
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   if (demoSources.length > 0) {

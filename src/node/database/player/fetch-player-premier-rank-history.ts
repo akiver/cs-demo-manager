@@ -19,7 +19,7 @@ export async function fetchPlayerPremierRankHistory({
     .orderBy('date', 'asc');
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   const history = await query.execute();

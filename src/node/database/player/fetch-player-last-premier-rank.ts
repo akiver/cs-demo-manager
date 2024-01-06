@@ -21,7 +21,7 @@ export async function fetchPlayerLastPremierRank({
     .orderBy('matches.date', 'desc');
 
   if (startDate !== undefined && endDate !== undefined) {
-    query = query.where(sql`matches.date between ${startDate} and ${endDate}`);
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
   }
 
   const row = await query.executeTakeFirst();
