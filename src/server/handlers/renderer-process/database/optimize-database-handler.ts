@@ -1,8 +1,10 @@
+import { sql } from 'kysely';
 import { server } from 'csdm/server/server';
 import { RendererServerMessageName } from 'csdm/server/renderer-server-message-name';
 import { deletePositions } from 'csdm/node/database/delete-positions';
 import { deleteOrphanDemos } from 'csdm/node/database/demos/delete-orphan-demos';
 import { deleteDemos } from 'csdm/node/database/demos/delete-demos';
+import { db } from 'csdm/node/database/database';
 
 export type OptimizeDatabasePayload = {
   clearPositions: boolean;
@@ -24,6 +26,8 @@ export async function optimizeDatabaseHandler({
     } else if (clearOrphanDemos) {
       await deleteOrphanDemos();
     }
+
+    await sql`VACUUM FULL`.execute(db);
 
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.OptimizeDatabaseSuccess,
