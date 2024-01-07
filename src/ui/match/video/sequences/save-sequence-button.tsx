@@ -18,7 +18,7 @@ export function SaveSequenceButton({ onClick, closeDialog }: Props) {
 
   const handleClick = () => {
     const { startTick, endTick } = sequence;
-    if (endTick <= startTick) {
+    if (Number(endTick) <= Number(startTick)) {
       showDialog(
         <Dialog>
           <DialogContent>
