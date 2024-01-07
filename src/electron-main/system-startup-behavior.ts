@@ -12,7 +12,7 @@ import { isLinux } from 'csdm/node/os/is-linux';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { isMac } from 'csdm/node/os/is-mac';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
-import { getRegistryStringKey } from 'csdm/node/os/windows-registry';
+import { getRegistryStringKey, writeRegistryStringKey } from 'csdm/node/os/windows-registry';
 
 // @platform linux
 function getDesktopFilePath() {
@@ -71,11 +71,24 @@ export async function updateSystemStartupBehavior(behavior: StartupBehavior) {
   }
 
   if (!isLinux) {
+    const args = behavior === StartupBehavior.Minimized ? ['--login', '--minimized'] : ['--login'];
     app.setLoginItemSettings({
       openAtLogin: behavior !== StartupBehavior.Off,
       openAsHidden: behavior === StartupBehavior.Minimized,
-      args: behavior === StartupBehavior.Minimized ? ['--login', '--minimized'] : ['--login'],
+      args,
     });
+
+    const exePath = app.getPath('exe');
+    // When the username contains spaces on Windows, openAtLogin doesn't work because the path is not surrounded by
+    // double quotes.
+    // TODO deps Remove this when https://github.com/electron/electron/issues/32657 is fixed
+    if (isWindows && exePath.includes(' ')) {
+      await writeRegistryStringKey({
+        path: 'Software\\Microsoft\\Windows\\CurrentVersion\\Run',
+        name: 'com.akiver.csdm',
+        data: `"${exePath}" ${args.join(' ')}`,
+      });
+    }
 
     return;
   }

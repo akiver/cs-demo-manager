@@ -1,19 +1,27 @@
-import type { HKEY } from '@vscode/windows-registry';
-
 type Options = {
-  hive?: HKEY;
   path: string;
   name: string;
 };
 
-export async function getRegistryStringKey({ hive, path, name }: Options) {
+export async function getRegistryStringKey({ path, name }: Options) {
   try {
-    const registry = await import('@vscode/windows-registry');
-    const data = registry.GetStringRegKey(hive ?? 'HKEY_CURRENT_USER', path, name);
+    const { HKEY, enumerateValues } = await import('registry-js');
+    const entry = enumerateValues(HKEY.HKEY_CURRENT_USER, path).find((value) => {
+      return value.name === name;
+    });
 
-    return data;
+    if (typeof entry?.data !== 'string') {
+      return undefined;
+    }
+
+    return entry.data;
   } catch (error) {
     logger.error(error);
     return undefined;
   }
+}
+
+export async function writeRegistryStringKey({ path, name, data }: Options & { data: string }) {
+  const { HKEY, RegistryValueType, setValue } = await import('registry-js');
+  setValue(HKEY.HKEY_CURRENT_USER, path, name, RegistryValueType.REG_SZ, data);
 }
