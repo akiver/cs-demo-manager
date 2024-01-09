@@ -17,6 +17,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import { SequenceDiskSpace } from './sequence-disk-space';
 import { useCurrentMatch } from '../../use-current-match';
 import { CancelButton } from 'csdm/ui/components/buttons/cancel-button';
+import { SequenceXRayCheckbox } from './sequence-x-ray-checkbox';
 
 type Props = {
   isVisible: boolean;
@@ -65,6 +66,7 @@ export function SequenceDialog({ isVisible, closeDialog, onSaveClick, initialSeq
                     <StartTickInput />
                     <EndTickInput />
                   </div>
+                  <SequenceXRayCheckbox />
                   <FocusCameraPlayerSelect />
                   <div>
                     <SequenceDuration />

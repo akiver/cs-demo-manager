@@ -46,6 +46,9 @@ export async function createJsonActionsFileForRecording({
       .addSkipAhead(skipAheadTick, setupSequenceTick)
       .addExecCommand(setupSequenceTick, `host_framerate ${framerate}`);
 
+    const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
+    json.addExecCommand(setupSequenceTick, showXrayCommand);
+
     json
       .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
       .addExecCommand(sequence.endTick, 'endmovie');

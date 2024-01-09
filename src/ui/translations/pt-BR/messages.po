@@ -4531,6 +4531,11 @@ msgctxt "Duration"
 msgid "{seconds} seconds"
 msgstr ""
 
+#: src/ui/match/video/sequences/sequence-x-ray-checkbox.tsx
+msgctxt "Input label"
+msgid "Show X-Ray"
+msgstr ""
+
 #: src/ui/match/video/sequences/sequences-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
 msgid "~{requiredDiskSpace}GB"

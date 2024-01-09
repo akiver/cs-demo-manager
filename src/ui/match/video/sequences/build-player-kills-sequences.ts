@@ -61,6 +61,7 @@ export function buildPlayerKillsSequences(match: Match, steamId: string) {
       endTick: sequenceEndTick,
       deathNotices,
       playerFocusSteamId: steamId,
+      showXRay: false,
     });
   }
 

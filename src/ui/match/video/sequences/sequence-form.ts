@@ -6,5 +6,6 @@ export type SequenceForm = {
   endTick: string;
   deathNotices: DeathNoticesPlayerOptions[];
   playerFocusSteamId?: string;
+  showXRay: boolean;
   cfg?: string;
 };

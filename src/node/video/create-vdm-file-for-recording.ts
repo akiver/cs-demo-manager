@@ -72,6 +72,9 @@ export async function createVdmFileForRecording({
       .addSkipAhead(skipAheadTick, setupSequenceTick)
       .addExecCommands(setupSequenceTick, `host_framerate ${framerate}`);
 
+    const showXrayCommand = `spec_show_xray ${sequence.showXRay ? 1 : 0}`;
+    vdm.addExecCommands(setupSequenceTick, showXrayCommand);
+
     if (isWindows) {
       const hlaeOutputFolderPath = getHlaeRawFilesFolderPath(rawFilesFolderPath, sequence);
       vdm
