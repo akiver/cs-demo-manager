@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { fetchMatchSuccess, updateMatchDemoLocationSuccess } from './match-actions';
+import { fetchMatchSuccess, updateMatchDemoLocationSuccess, playerSpectateKeyUpdated } from './match-actions';
 import type { Match } from 'csdm/common/types/match';
 import { commentUpdated } from 'csdm/ui/comment/comment-actions';
 import { checksumsTagsUpdated } from 'csdm/ui/tags/tags-actions';
@@ -38,6 +38,12 @@ export const entityReducer = createReducer(initialState, (builder) => {
     .addCase(updateMatchDemoLocationSuccess, (state, action) => {
       if (state !== null) {
         state.demoFilePath = action.payload.demoFilePath;
+      }
+    })
+    .addCase(playerSpectateKeyUpdated, (state, action) => {
+      const player = state?.players.find((player) => player.id === action.payload.id);
+      if (player) {
+        player.spectateKey = action.payload.key;
       }
     })
     .addCase(addIgnoredSteamAccountSuccess, (state, action) => {

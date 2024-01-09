@@ -1,11 +1,11 @@
 import type { Rank, RankType, PlayerColor } from 'csdm/common/types/counter-strike';
-import type { ColumnID } from 'csdm/common/types/column-id';
 
 export type Player = {
-  id: ColumnID;
+  id: string;
   matchChecksum: string;
   steamId: string;
   name: string;
+  spectateKey: number;
   killCount: number;
   deathCount: number;
   assistCount: number;

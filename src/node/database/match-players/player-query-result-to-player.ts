@@ -9,6 +9,7 @@ export function playerQueryResultToPlayer(
 ): Player {
   return {
     steamId: row.steam_id,
+    spectateKey: row.index,
     assistCount: row.assist_count,
     averageDamagePerRound: row.average_damage_per_round,
     averageDeathPerRound: row.average_death_per_round,
@@ -29,7 +30,7 @@ export function playerQueryResultToPlayer(
     mvpCount: row.mvp_count,
     headshotCount: row.headshot_count,
     headshotPercentage: row.headshot_percentage,
-    id: row.id,
+    id: String(row.id),
     kast: row.kast,
     killCount: row.kill_count,
     killDeathRatio: row.kill_death_ratio,

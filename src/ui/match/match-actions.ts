@@ -5,3 +5,4 @@ export const fetchMatchSuccess = createAction<{ match: Match }>('match/fetchSucc
 export const updateMatchDemoLocationSuccess = createAction<{ checksum: string; demoFilePath: string }>(
   'match/demoLocationUpdated',
 );
+export const playerSpectateKeyUpdated = createAction<{ id: string; key: number }>('match/playerSpectateKeyUpdated');

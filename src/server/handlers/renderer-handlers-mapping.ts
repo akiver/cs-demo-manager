@@ -160,6 +160,10 @@ import {
   watchPlayerRoundsHandler,
   type WatchPlayerRoundsPayload,
 } from './renderer-process/counter-strike/watch-player-rounds-handler';
+import {
+  updatePlayerSpectateKeyHandler,
+  type UpdatePlayerSpectateKeyPayload,
+} from './renderer-process/match/update-player-spectate-key-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -195,6 +199,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateDemosType]: Handler<UpdateDemosTypePayload>;
   [RendererClientMessageName.ExportDemoPlayersVoice]: Handler<ExportDemoPlayersVoicePayload>;
   [RendererClientMessageName.UpdateMatchesType]: Handler<UpdateMatchesTypePayload>;
+  [RendererClientMessageName.UpdatePlayerSpectateKey]: Handler<UpdatePlayerSpectateKeyPayload>;
   [RendererClientMessageName.ExportMatchesToXlsx]: Handler<ExportMatchesToXlsxPayload>;
   [RendererClientMessageName.ExportMatchesToJson]: Handler<ExportMatchesToJsonPayload>;
   [RendererClientMessageName.AddIgnoredSteamAccount]: Handler<string, IgnoredSteamAccount>;
@@ -288,6 +293,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateDemosSource]: updateDemosSourceHandler,
   [RendererClientMessageName.ExportDemoPlayersVoice]: exportDemoPlayersVoiceHandler,
   [RendererClientMessageName.UpdateMatchesType]: updateMatchesTypeHandler,
+  [RendererClientMessageName.UpdatePlayerSpectateKey]: updatePlayerSpectateKeyHandler,
   [RendererClientMessageName.ExportMatchesToXlsx]: exportMatchesToXlsxHandler,
   [RendererClientMessageName.ExportMatchesToJson]: exportMatchesToJsonHandler,
   [RendererClientMessageName.AddIgnoredSteamAccount]: addIgnoredSteamAccountHandler,

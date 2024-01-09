@@ -330,6 +330,7 @@ msgstr "连接到远程服务器时出错。"
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 #: src/ui/demos/table/update-demos-type-item.tsx
+#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 #: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
@@ -2157,6 +2158,23 @@ msgctxt "Button"
 msgid "Update demo location"
 msgstr "更新录像文件位置"
 
+#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
+msgctxt "Dialog title"
+msgid "Update player's spectate key"
+msgstr ""
+
+#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
+msgid "The player's spectate key corresponds to the keyboard key (0 to 9) used to focus the camera on the player during playback."
+msgstr ""
+
+#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
+msgid "To find the correct key, you have to watch the demo and press the number keys until the camera is on the player."
+msgstr ""
+
+#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
+msgid "Change it only if the camera doesn't focus on the correct player when watching highlights, generating a video with camera focus…"
+msgstr ""
+
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
 msgid "You must download the demo first"
@@ -3458,6 +3476,11 @@ msgctxt "Context menu"
 msgid "Generate kills video"
 msgstr "生成击杀视频"
 
+#: src/ui/match/overview/scoreboard/context-menu/scoreboard-context-menu.tsx
+msgctxt "Context menu"
+msgid "Update spectate key"
+msgstr ""
+
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
 msgid "vs"
@@ -4486,6 +4509,10 @@ msgstr "结束时刻"
 msgctxt "Input label"
 msgid "Focus camera on player"
 msgstr "对焦摄像头在玩家身上"
+
+#: src/ui/match/video/sequences/focus-camera-player-select.tsx
+msgid "Spectate key: <0>{0}</0>"
+msgstr ""
 
 #: src/ui/match/video/sequences/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
