@@ -109,10 +109,7 @@ export const demosReducer = createReducer(initialState, (builder) => {
     .addCase(insertMatchSuccess, (state, action) => {
       const demos = state.entities.filter((demo) => demo.checksum === action.payload.checksum);
       for (const demo of demos) {
-        demo.tickCount = action.payload.tickCount;
-        demo.tickrate = action.payload.tickrate;
-        demo.frameRate = action.payload.frameRate;
-        demo.duration = action.payload.duration;
+        Object.assign(demo, action.payload);
       }
     })
     .addCase(demosDeleted, () => {

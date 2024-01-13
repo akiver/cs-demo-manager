@@ -101,6 +101,10 @@ function removeNullBytesFromString(value: string) {
   return value.replaceAll('\0', '');
 }
 
+function removeUnicodeReplacementChars(value: string) {
+  return value.replaceAll('\uFFFD', '');
+}
+
 function readSource1DemoHeader(buffer: Buffer) {
   // const protocol = buffer.readUInt32LE(8); // 4
   const networkProtocol = buffer.readUInt32LE(12); // 4
@@ -157,8 +161,8 @@ function readSource2DemoHeader(buffer: Buffer) {
   const header: DemoHeader = {
     filestamp: 'PBDEMS2',
     networkProtocol: msg.networkProtocol,
-    serverName: msg.serverName,
-    clientName: msg.clientName,
+    serverName: removeUnicodeReplacementChars(msg.serverName),
+    clientName: removeUnicodeReplacementChars(msg.clientName),
     mapName: msg.mapName,
     buildNumber: msg.buildNum,
     demoVersionGuid: msg.demoVersionGuid,

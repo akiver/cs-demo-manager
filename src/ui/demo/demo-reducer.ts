@@ -78,10 +78,10 @@ export const demoReducer = createReducer(initialState, (builder) => {
     })
     .addCase(insertMatchSuccess, (state, action) => {
       if (state.demo && state.demo.checksum === action.payload.checksum) {
-        state.demo.tickCount = action.payload.tickCount;
-        state.demo.tickrate = action.payload.tickrate;
-        state.demo.frameRate = action.payload.frameRate;
-        state.demo.duration = action.payload.duration;
+        state.demo = {
+          ...state.demo,
+          ...action.payload,
+        };
       }
     });
 });

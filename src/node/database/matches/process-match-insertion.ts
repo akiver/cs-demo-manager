@@ -7,7 +7,7 @@ import { fetchMatchTable } from './fetch-match-table';
 import type { InsertMatchParameters } from './insert-match';
 import { insertMatch } from './insert-match';
 import { Game } from 'csdm/common/types/counter-strike';
-import { updateDemoPlaybackValues } from '../demos/update-demo-playback-values';
+import { updateDemo } from '../demos/update-demo';
 
 export async function processMatchInsertion({ checksum, demoPath, outputFolderPath }: InsertMatchParameters) {
   await insertMatch({
@@ -36,12 +36,7 @@ export async function processMatchInsertion({ checksum, demoPath, outputFolderPa
   const match = await fetchMatchTable(checksum);
 
   if (match.game !== Game.CSGO) {
-    await updateDemoPlaybackValues(checksum, {
-      tickCount: match.tickCount,
-      tickRate: match.tickrate,
-      frameRate: match.frameRate,
-      duration: match.duration,
-    });
+    await updateDemo(checksum, match);
   }
 
   return match;
