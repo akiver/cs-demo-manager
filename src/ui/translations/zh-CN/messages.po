@@ -2586,8 +2586,14 @@ msgid "No deaths found"
 msgstr "未找到死亡"
 
 #: src/ui/hooks/use-counter-strike.tsx
-msgid "The demo's path contains unsupported characters by CSGO"
-msgstr "Demo路径包含CSGO不支持的字符"
+#: src/ui/match/video/generating-dialog.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/video/generating-dialog.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
+msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Steam is not running"
@@ -4122,10 +4128,6 @@ msgstr "正在为镜头 {sequenceNumber} / {sequenceCount} 生成视频…"
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Concatenating sequences…"
 msgstr "正在连接镜头中…"
-
-#: src/ui/match/video/generating-dialog.tsx
-msgid "The demo's path contains unsupported characters by CSGO."
-msgstr "Demo路径包含CSGO不支持的字符"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Failed to start the game, make sure Steam is running and you are connected."

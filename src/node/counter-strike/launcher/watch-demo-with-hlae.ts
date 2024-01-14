@@ -85,9 +85,7 @@ export async function watchDemoWithHlae({
     throw new Error('HLAE is available only on Windows');
   }
 
-  if (game === Game.CSGO) {
-    assertDemoPathIsValid(demoPath);
-  }
+  assertDemoPathIsValid(demoPath, game);
 
   const csHasBeenKilled = await killCounterStrikeProcesses();
   const csExecutablePath = await getCounterStrikeExecutablePath(game);

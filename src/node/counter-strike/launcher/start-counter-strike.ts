@@ -38,10 +38,7 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
 
   await assertSteamIsRunning();
 
-  // All chars seem to be supported on CS2
-  if (game === Game.CSGO) {
-    assertDemoPathIsValid(demoPath);
-  }
+  assertDemoPathIsValid(demoPath, game);
 
   const executablePath = await getCounterStrikeExecutablePath(game);
 

@@ -2586,7 +2586,13 @@ msgid "No deaths found"
 msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
-msgid "The demo's path contains unsupported characters by CSGO"
+#: src/ui/match/video/generating-dialog.tsx
+msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
+#: src/ui/match/video/generating-dialog.tsx
+msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
 msgstr ""
 
 #: src/ui/hooks/use-counter-strike.tsx
@@ -4121,10 +4127,6 @@ msgstr ""
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Concatenating sequences…"
-msgstr ""
-
-#: src/ui/match/video/generating-dialog.tsx
-msgid "The demo's path contains unsupported characters by CSGO."
 msgstr ""
 
 #: src/ui/match/video/generating-dialog.tsx

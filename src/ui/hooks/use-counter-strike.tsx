@@ -51,7 +51,24 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
     case ErrorCode.NoDeathsFound:
       return <Trans>No deaths found</Trans>;
     case ErrorCode.InvalidDemoPath:
-      return <Trans>The demo's path contains unsupported characters by CSGO</Trans>;
+      return (
+        <div>
+          <p>
+            <Trans>
+              The demo's path contains characters that are not supported by Counter-Strike and would prevent playback.
+            </Trans>
+          </p>
+          <p>
+            <Trans>
+              You have to move the demo in a folder that contains only Basic Latin characters - see{' '}
+              <ExternalLink href="https://cs-demo-manager.com/docs/faq/playback#cs2-demo-playback-doesnt-start-or-crashes">
+                this documentation
+              </ExternalLink>{' '}
+              for details.
+            </Trans>
+          </p>
+        </div>
+      );
     case ErrorCode.SteamNotRunning:
       return <Trans>Steam is not running</Trans>;
     case ErrorCode.GameError:

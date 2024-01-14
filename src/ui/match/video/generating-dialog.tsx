@@ -17,6 +17,7 @@ import type {
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import { useCurrentMatch } from '../use-current-match';
 import { Game } from 'csdm/common/types/counter-strike';
+import { ExternalLink } from 'csdm/ui/components/external-link';
 
 type Props = {
   closeDialog: () => void;
@@ -79,7 +80,25 @@ export function GeneratingVideosDialog({ closeDialog }: Props) {
           case ErrorCode.DemoNotFound:
             return <Trans>Demo not found.</Trans>;
           case ErrorCode.InvalidDemoPath:
-            return <Trans>The demo's path contains unsupported characters by CSGO.</Trans>;
+            return (
+              <div>
+                <p>
+                  <Trans>
+                    The demo's path contains characters that are not supported by Counter-Strike and would prevent
+                    playback.
+                  </Trans>
+                </p>
+                <p>
+                  <Trans>
+                    You have to move the demo in a folder that contains only Basic Latin characters - see{' '}
+                    <ExternalLink href="https://cs-demo-manager.com/docs/faq/playback#cs2-demo-playback-doesnt-start-or-crashes">
+                      this documentation
+                    </ExternalLink>{' '}
+                    for details.
+                  </Trans>
+                </p>
+              </div>
+            );
           case ErrorCode.StartCounterStrikeError:
             return (
               <div className="flex flex-col gap-y-4">
