@@ -12,7 +12,7 @@ body:
         If it's a feature request please use the [feature request form](https://github.com/akiver/cs-demo-manager/issues/new?template=feature_requset.yml).
 
         Before submitting a new bug/issue, please check the links below to see if there is a solution or question posted there already:
-         - If it's related to CS2 please check if it's a known [CS2 limitation](http://cs-demo-manager.com/docs/cs2)
+         - If it's related to CS2 please check if it's a known [CS2 limitation](https://cs-demo-manager.com/docs/cs2)
          - The [documentation](https://cs-demo-manager.com/docs), especially the [FAQ](https://cs-demo-manager.com/docs/faq/installation)
          - [Open issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc)
          - [Closed issues](https://github.com/akiver/cs-demo-manager/issues?q=is%3Aissue+sort%3Aupdated-desc+is%3Aclosed)

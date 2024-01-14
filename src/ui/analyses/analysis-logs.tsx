@@ -128,7 +128,7 @@ export function AnalysisLogs() {
           <p>
             <Trans>
               Please read the error codes{' '}
-              <ExternalLink href="http://cs-demo-manager.com/docs/guides/demos-analysis#analysis-errors">
+              <ExternalLink href="https://cs-demo-manager.com/docs/guides/demos-analysis#analysis-errors">
                 documentation
               </ExternalLink>{' '}
               to understand the code signification and what you can do.
