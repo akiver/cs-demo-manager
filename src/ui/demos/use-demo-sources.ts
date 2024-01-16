@@ -1,6 +1,7 @@
 import { msg } from '@lingui/macro';
 import { DemoSource } from 'csdm/common/types/counter-strike';
 import { useI18n } from '../hooks/use-i18n';
+import { assertSoftNever } from 'csdm/common/assert-soft-never';
 
 export function useGetDemoSourceName() {
   const _ = useI18n();
@@ -63,6 +64,13 @@ export function useGetDemoSourceName() {
             message: 'FASTCUP',
           }),
         );
+      case DemoSource.FiveEPlay:
+        return _(
+          msg({
+            context: 'Demo source name',
+            message: '5EPlay',
+          }),
+        );
       case DemoSource.Gamersclub:
         return _(
           msg({
@@ -91,12 +99,22 @@ export function useGetDemoSourceName() {
             message: 'Valve',
           }),
         );
-      default:
+      case DemoSource.Unknown:
         return _(
           msg({
             context: 'Demo source name',
             message: 'Unknown',
           }),
+        );
+      default:
+        return assertSoftNever(
+          demoSource,
+          _(
+            msg({
+              context: 'Demo source name',
+              message: 'Unknown',
+            }),
+          ),
         );
     }
   };
@@ -139,8 +157,16 @@ export function useDemoSources() {
       name: getDemoSourceName(DemoSource.Fastcup),
     },
     {
+      value: DemoSource.FiveEPlay,
+      name: getDemoSourceName(DemoSource.FiveEPlay),
+    },
+    {
       value: DemoSource.Gamersclub,
       name: getDemoSourceName(DemoSource.Gamersclub),
+    },
+    {
+      value: DemoSource.PerfectWorld,
+      name: getDemoSourceName(DemoSource.PerfectWorld),
     },
     {
       value: DemoSource.Popflash,
@@ -149,10 +175,6 @@ export function useDemoSources() {
     {
       value: DemoSource.Valve,
       name: getDemoSourceName(DemoSource.Valve),
-    },
-    {
-      value: DemoSource.PerfectWorld,
-      name: getDemoSourceName(DemoSource.PerfectWorld),
     },
     {
       value: DemoSource.Unknown,

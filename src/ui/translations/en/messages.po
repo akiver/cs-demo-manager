@@ -2103,6 +2103,11 @@ msgstr "FASTCUP"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "5EPlay"
+msgstr "5EPlay"
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Gamers Club"
 msgstr "Gamers Club"
 
@@ -2121,6 +2126,7 @@ msgctxt "Demo source name"
 msgid "Valve"
 msgstr "Valve"
 
+#: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Unknown"

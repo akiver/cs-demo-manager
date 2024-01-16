@@ -79,6 +79,11 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
     return DemoSource.PerfectWorld;
   }
 
+  const fiveEPlayRegex = /^g\d+-(.*)[a-zA-Z0-9_]*$/;
+  if (fiveEPlayRegex.exec(demoName) !== null) {
+    return DemoSource.FiveEPlay;
+  }
+
   return DemoSource.Unknown;
 }
 

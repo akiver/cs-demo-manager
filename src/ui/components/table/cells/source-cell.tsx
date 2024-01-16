@@ -24,11 +24,14 @@ function useDemoSourceImageSrc(source: DemoSource) {
     case DemoSource.PerfectWorld:
       fileName = isDarkTheme ? `${source}-white.png` : `${source}-black.png`;
       break;
+    case DemoSource.Challengermode:
+      fileName = 'challengermode.png';
+      break;
     case DemoSource.Ebot:
       fileName = 'ebot.png';
       break;
-    case DemoSource.Challengermode:
-      fileName = 'challengermode.png';
+    case DemoSource.FiveEPlay:
+      fileName = '5eplay.png';
       break;
     case DemoSource.Unknown:
       fileName = 'unknown.png';

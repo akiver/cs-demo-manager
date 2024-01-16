@@ -2108,6 +2108,11 @@ msgstr ""
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
+msgid "5EPlay"
+msgstr ""
+
+#: src/ui/demos/use-demo-sources.ts
+msgctxt "Demo source name"
 msgid "Gamers Club"
 msgstr ""
 
@@ -2126,6 +2131,7 @@ msgctxt "Demo source name"
 msgid "Valve"
 msgstr ""
 
+#: src/ui/demos/use-demo-sources.ts
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Unknown"
