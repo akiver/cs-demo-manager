@@ -18,16 +18,16 @@ export async function optimizeDatabaseHandler({
   clearDemos,
 }: OptimizeDatabasePayload) {
   try {
-    if (clearPositions) {
-      await deletePositions();
-    }
     if (clearDemos) {
       await deleteDemos();
     } else if (clearOrphanDemos) {
       await deleteOrphanDemos();
     }
 
-    await sql`VACUUM FULL`.execute(db);
+    if (clearPositions) {
+      await deletePositions();
+      await sql`VACUUM FULL`.execute(db);
+    }
 
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.OptimizeDatabaseSuccess,
