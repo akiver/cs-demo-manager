@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-17 23:26\n"
+"PO-Revision-Date: 2024-01-17 00:10\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -478,7 +478,7 @@ msgstr "观看"
 #: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
 msgctxt "Context menu"
 msgid "Add to video sequences"
-msgstr ""
+msgstr "添加到视频序列"
 
 #: src/ui/components/context-menu/items/analyze-item.tsx
 msgctxt "Context menu"
@@ -610,15 +610,15 @@ msgstr "加载Counter-Strike音频库失败。"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to open the demo file."
-msgstr ""
+msgstr "打开demo文件失败"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Some required library files are missing."
-msgstr ""
+msgstr "缺少一些必须的依赖文件"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "This demo format is not supported."
-msgstr ""
+msgstr "暂不支持此demo格式"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "You need to install <0>Rosetta</0>."
@@ -660,7 +660,7 @@ msgstr "玩家语音导出"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Valve Matchmaking demos do not contain voice audio data!"
-msgstr ""
+msgstr "Valve官方匹配demo不包含语音音频数据！"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Warnings:"
@@ -1173,17 +1173,17 @@ msgstr "端口"
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result select option"
 msgid "Won"
-msgstr ""
+msgstr "胜利"
 
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result select option"
 msgid "Lost"
-msgstr ""
+msgstr "失败"
 
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result filter category"
 msgid "Opening duel result"
-msgstr ""
+msgstr "突破结果"
 
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
@@ -1779,22 +1779,22 @@ msgstr "评论"
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Headshot"
-msgstr ""
+msgstr "爆头"
 
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Wallbang"
-msgstr ""
+msgstr "穿墙"
 
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Blinded"
-msgstr ""
+msgstr "致盲"
 
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Jump kill"
-msgstr ""
+msgstr "爆笑跳杀"
 
 #: src/ui/components/table/columns-visibility-dropdown.tsx
 msgctxt "Dropdown"
@@ -1981,7 +1981,7 @@ msgstr "这个录像还没有被分析过。"
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "Include subfolders"
-msgstr ""
+msgstr "包含子文件"
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
@@ -2119,7 +2119,7 @@ msgstr "Gamers Club"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "Perfect World"
-msgstr ""
+msgstr "完美世界"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2807,22 +2807,22 @@ msgstr "未知"
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "CT"
-msgstr ""
+msgstr "CT"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "SPEC"
-msgstr ""
+msgstr "观察者"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "Unassigned"
-msgstr ""
+msgstr "未分配"
 
 #: src/ui/keyboard/keyboard-shortcut.ts
 msgctxt "Keyboard shortcut"
@@ -2898,26 +2898,26 @@ msgstr "已导出聊天消息"
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Opening duels stats"
-msgstr ""
+msgstr "突破统计"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link "
 msgid "Opening duels map"
-msgstr ""
+msgstr "突破地图"
 
 #: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
 msgctxt "Context menu"
 msgid "See killer details"
-msgstr ""
+msgstr "查看击杀者详情"
 
 #: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
 msgctxt "Context menu"
 msgid "See victim details"
-msgstr ""
+msgstr "查看受害者详情"
 
 #: src/ui/match/duels/opening-duels-map/opening-duels-map-loader.tsx
 msgid "No kills found."
-msgstr ""
+msgstr "未找到击杀。"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
@@ -2937,101 +2937,101 @@ msgstr "回合"
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Killer"
-msgstr ""
+msgstr "击杀者"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Killer's name"
-msgstr ""
+msgstr "击杀者名称"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Victim"
-msgstr ""
+msgstr "受害者"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Victim's name"
-msgstr ""
+msgstr "受害者名称"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Weapon"
-msgstr ""
+msgstr "武器"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Weapon's name"
-msgstr ""
+msgstr "武器名称"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Attributes"
-msgstr ""
+msgstr "属性"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Kill's attributes"
-msgstr ""
+msgstr "击杀属性"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Killer side"
-msgstr ""
+msgstr "击杀者阵营"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Killer's side"
-msgstr ""
+msgstr "击杀者阵营"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Victim side"
-msgstr ""
+msgstr "受害者阵营"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Victim's side"
-msgstr ""
+msgstr "受害者阵营"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "{openDuelWonPercentage}%"
-msgstr ""
+msgstr "{openDuelWonPercentage}%"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Opening duels won"
-msgstr ""
+msgstr "突破成功"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "{openDuelLostPercentage}%"
-msgstr ""
+msgstr "{openDuelLostPercentage}%"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Opening duels lost"
-msgstr ""
+msgstr "突破失败"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels lost: {lostCount}"
-msgstr ""
+msgstr "突破失败: {lostCount}"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels won: {wonCount}"
-msgstr ""
+msgstr "突破成功: {wonCount}"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels: <0>{openingDuelCount}</0>"
-msgstr ""
+msgstr "突破击杀: <0>{openingDuelCount}</0>"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Round breakdown"
-msgstr ""
+msgstr "回合击杀"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
@@ -3414,7 +3414,7 @@ msgstr "武器"
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Duels"
-msgstr ""
+msgstr "一对一"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
@@ -4743,27 +4743,27 @@ msgstr "头部"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Chest"
-msgstr ""
+msgstr "胸部"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Stomach"
-msgstr ""
+msgstr "腹部"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Left arm"
-msgstr ""
+msgstr "左臂"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Right arm"
-msgstr ""
+msgstr "右臂"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Left leg"
-msgstr ""
+msgstr "左腿"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Right leg"
-msgstr ""
+msgstr "右腿"
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"
@@ -4775,19 +4775,19 @@ msgstr ""
 
 #: src/ui/matches/table/matches-table.tsx
 msgid "Loading matches…"
-msgstr ""
+msgstr "加在比赛中…"
 
 #: src/ui/matches/table/no-matches.tsx
 msgid "No match found with active filters."
-msgstr ""
+msgstr "未找到与筛选结果匹配的比赛。"
 
 #: src/ui/matches/table/no-matches.tsx
 msgid "No match found yet, you have to analyze demos to generate matches."
-msgstr ""
+msgstr "尚未找到比赛，您必须分析录像后才能生成匹配的比赛。"
 
 #: src/ui/matches/table/selected-match-count.tsx
 msgid "{0, plural, one {# match selected} other {# matches selected}}"
-msgstr ""
+msgstr "{0, plural, one {# 录像已选择} other {# 录像已选择}}"
 
 #: src/ui/player/charts/average-damage-per-round-chart.tsx
 msgctxt "Chart title"
@@ -4797,7 +4797,7 @@ msgstr ""
 #: src/ui/player/charts/average-damage-per-round-chart.tsx
 msgctxt "Chart axis label average damage per round"
 msgid "ADR"
-msgstr ""
+msgstr "伤害/回合"
 
 #: src/ui/player/charts/clutch-won-percentage-chart.tsx
 msgctxt "Chart title"
@@ -4832,7 +4832,7 @@ msgstr ""
 #: src/ui/player/charts/kill-death-ratio-chart.tsx
 msgctxt "Chart axis label kill death ratio"
 msgid "K/D"
-msgstr ""
+msgstr "击杀/死亡"
 
 #: src/ui/player/charts/match-count-chart.tsx
 msgctxt "Chart title"
@@ -4865,7 +4865,7 @@ msgstr "月"
 #: src/ui/player/charts/x-axis.tsx
 msgctxt "Select option time period"
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 #: src/ui/player/charts/use-player-chart-options.ts
 #: src/ui/player/charts/x-axis.tsx
@@ -4919,37 +4919,37 @@ msgstr ""
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel title"
 msgid "VAC"
-msgstr ""
+msgstr "VAC"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Bans"
-msgstr ""
+msgstr "封禁"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Game bans"
-msgstr ""
+msgstr "游戏封禁"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Last ban date"
-msgstr ""
+msgstr "最后封禁的日期"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Economy ban"
-msgstr ""
+msgstr "禁止交易"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Community banned"
-msgstr ""
+msgstr "社区封禁"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Profile"
-msgstr ""
+msgstr "资料"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgid "Private"
@@ -4977,7 +4977,7 @@ msgstr ""
 #: src/ui/player/overview/win-rate-panel.tsx
 msgctxt "Panel label"
 msgid "Defeats"
-msgstr ""
+msgstr "败北"
 
 #: src/ui/player/pinned-player.tsx
 msgid "No pinned player found."
@@ -5665,26 +5665,26 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgctxt "Input label"
 msgid "Radar"
-msgstr ""
+msgstr "雷达"
 
 #: src/ui/settings/maps/map-dialog/scale-input.tsx
 msgctxt "Input label"
 msgid "Scale"
-msgstr ""
+msgstr "缩放"
 
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Thumbnail image pixels must be smaller than {maxFileWidth}x{maxFileHeight}"
-msgstr ""
+msgstr "缩略图像素必须小于 {maxFileWidth}x{maxFileHeight}"
 
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgctxt "Input label"
 msgid "Thumbnail"
-msgstr ""
+msgstr "缩略图"
 
 #: src/ui/settings/maps/map-entry.tsx
 msgctxt "Button"
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 #: src/ui/settings/maps/maps-settings.tsx
 msgctxt "Select label"
@@ -5707,57 +5707,57 @@ msgstr "重置默认地图"
 
 #: src/ui/settings/playback/cs2-highlights-warning.tsx
 msgid "CS2 doesn't have a built-in highlights/lowlights algorithm yet. The custom algorithm is always used for CS2 demos."
-msgstr ""
+msgstr "CS2 还没有内置的高光/低光算法。CS2 回放始终使用自定义算法。"
 
 #: src/ui/settings/playback/custom-highlights.tsx
 msgid "Use a custom highlights algorithm to generate players highlights"
-msgstr ""
+msgstr "使用自定义高光算法生成玩家的高光时刻"
 
 #: src/ui/settings/playback/custom-highlights.tsx
 msgctxt "Settings title"
 msgid "Custom highlights"
-msgstr ""
+msgstr "自定义高光时刻"
 
 #: src/ui/settings/playback/custom-lowlights.tsx
 msgid "Use a custom lowlights algorithm to generate players lowlights"
-msgstr ""
+msgstr "使用自定义低光算法生成玩家的低光时刻"
 
 #: src/ui/settings/playback/custom-lowlights.tsx
 msgctxt "Settings title"
 msgid "Lowlights"
-msgstr ""
+msgstr "低光时刻"
 
 #: src/ui/settings/playback/game-fullscreen.tsx
 msgid "Start the game in fullscreen mode"
-msgstr ""
+msgstr "以全屏模式开始游戏"
 
 #: src/ui/settings/playback/game-fullscreen.tsx
 msgctxt "Settings title"
 msgid "Fullscreen"
-msgstr ""
+msgstr "全屏"
 
 #: src/ui/settings/playback/game-height.tsx
 msgid "Set the game height resolution"
-msgstr ""
+msgstr "设置游戏分辨率高度"
 
 #: src/ui/settings/playback/game-height.tsx
 msgctxt "Settings title"
 msgid "Height"
-msgstr ""
+msgstr "高度"
 
 #: src/ui/settings/playback/game-width.tsx
 msgid "Set the game width resolution"
-msgstr ""
+msgstr "设置游戏分辨率宽度"
 
 #: src/ui/settings/playback/game-width.tsx
 msgctxt "Settings title"
 msgid "Width"
-msgstr ""
+msgstr "宽度"
 
 #: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
 msgid "After kill delay (highlights)"
-msgstr ""
+msgstr "击杀后延迟 (高光时刻)"
 
 #: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
 msgid "How many seconds to wait before skipping to the next kill when watching highlights"
