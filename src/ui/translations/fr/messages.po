@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-17 23:26\n"
+"PO-Revision-Date: 2024-01-17 00:20\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -478,7 +478,7 @@ msgstr "Regarder"
 #: src/ui/components/context-menu/items/add-to-video-sequences-item.tsx
 msgctxt "Context menu"
 msgid "Add to video sequences"
-msgstr ""
+msgstr "Ajouter aux séquences vidéo"
 
 #: src/ui/components/context-menu/items/analyze-item.tsx
 msgctxt "Context menu"
@@ -610,15 +610,15 @@ msgstr "Échec du chargement de la bibliothèque audio Counter-Strike."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Failed to open the demo file."
-msgstr ""
+msgstr "Impossible d'ouvrir le fichier démo."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Some required library files are missing."
-msgstr ""
+msgstr "Certains fichiers requis sont manquants."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "This demo format is not supported."
-msgstr ""
+msgstr "Ce format de démo n'est pas pris en charge."
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "You need to install <0>Rosetta</0>."
@@ -660,7 +660,7 @@ msgstr "Export voix des joueurs"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Valve Matchmaking demos do not contain voice audio data!"
-msgstr ""
+msgstr "Les démos de Matchmaking ne contiennent pas de données audio !"
 
 #: src/ui/components/context-menu/items/export-players-voice-item.tsx
 msgid "Warnings:"
@@ -1173,17 +1173,17 @@ msgstr "Port"
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result select option"
 msgid "Won"
-msgstr ""
+msgstr "Gagné"
 
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result select option"
 msgid "Lost"
-msgstr ""
+msgstr "Perdu"
 
 #: src/ui/components/inputs/select/opening-duel-result-select.tsx
 msgctxt "Opening duel result filter category"
 msgid "Opening duel result"
-msgstr ""
+msgstr "Résultat du duel d'ouverture"
 
 #: src/ui/components/inputs/select/players-select.tsx
 msgctxt "Players filter category"
@@ -1779,22 +1779,22 @@ msgstr "Commentaire"
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Headshot"
-msgstr ""
+msgstr "Headshot"
 
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Wallbang"
-msgstr ""
+msgstr "Wallbang"
 
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Blinded"
-msgstr ""
+msgstr "Aveuglé"
 
 #: src/ui/components/table/cells/kill-attributes-cell.tsx
 msgctxt "Tooltip kill"
 msgid "Jump kill"
-msgstr ""
+msgstr "Jump kill"
 
 #: src/ui/components/table/columns-visibility-dropdown.tsx
 msgctxt "Dropdown"
@@ -1981,7 +1981,7 @@ msgstr "Cette démo n'a pas encore été analysée."
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
 msgid "Include subfolders"
-msgstr ""
+msgstr "Inclure les sous-dossiers"
 
 #: src/ui/demos/current-folder-select.tsx
 msgctxt "Checkbox label"
@@ -2109,7 +2109,7 @@ msgstr "FASTCUP"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "5EPlay"
-msgstr ""
+msgstr "5EPlay"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2167,19 +2167,19 @@ msgstr "Mettre à jour l'emplacement de la démo"
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update player's spectate key"
-msgstr ""
+msgstr "Changer la touche spectateur du joueur"
 
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgid "The player's spectate key corresponds to the keyboard key (0 to 9) used to focus the camera on the player during playback."
-msgstr ""
+msgstr "La touche spectateur du joueur correspond à la touche du clavier (0 à 9) utilisée pour focaliser la caméra sur le joueur pendant la lecture."
 
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgid "To find the correct key, you have to watch the demo and press the number keys until the camera is on the player."
-msgstr ""
+msgstr "Pour trouver la bonne touche, vous devez regarder la démo et appuyer sur les touches numériques jusqu'à ce que la caméra soit sur le joueur."
 
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgid "Change it only if the camera doesn't focus on the correct player when watching highlights, generating a video with camera focus…"
-msgstr ""
+msgstr "Ne le modifier que si la caméra ne se place pas sur le bon joueur lors du visionnage des highlights, pendant la génération d'une vidéo…"
 
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
@@ -2594,12 +2594,12 @@ msgstr "Aucune mort trouvée"
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/video/generating-dialog.tsx
 msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr ""
+msgstr "Le chemin de la démo contient des caractères qui ne sont pas pris en charge par Counter-Strike qui empêcheraient la lecture."
 
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/video/generating-dialog.tsx
 msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr ""
+msgstr "Vous devez déplacer la démo dans un dossier qui ne contient que des caractères latin de base - voir <0>cette documentation</0> pour plus de détails."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Steam is not running"
@@ -2807,22 +2807,22 @@ msgstr "Inconnu"
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "CT"
-msgstr ""
+msgstr "CT"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "T"
-msgstr ""
+msgstr "T"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "SPEC"
-msgstr ""
+msgstr "SPEC"
 
 #: src/ui/hooks/use-translate-team-number.ts
 msgctxt "Team side"
 msgid "Unassigned"
-msgstr ""
+msgstr "Non assigné"
 
 #: src/ui/keyboard/keyboard-shortcut.ts
 msgctxt "Keyboard shortcut"
@@ -2898,26 +2898,26 @@ msgstr "Messages du chat exportés"
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
 msgid "Opening duels stats"
-msgstr ""
+msgstr "Statistiques des duels d'ouverture"
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link "
 msgid "Opening duels map"
-msgstr ""
+msgstr "Map duels d'ouverture"
 
 #: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
 msgctxt "Context menu"
 msgid "See killer details"
-msgstr ""
+msgstr "Voir les détails du tueur"
 
 #: src/ui/match/duels/opening-duels-map/opening-duel-context-menu.tsx
 msgctxt "Context menu"
 msgid "See victim details"
-msgstr ""
+msgstr "Voir les détails de la victime"
 
 #: src/ui/match/duels/opening-duels-map/opening-duels-map-loader.tsx
 msgid "No kills found."
-msgstr ""
+msgstr "Aucun kill trouvé."
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
@@ -2937,101 +2937,101 @@ msgstr "Round"
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Killer"
-msgstr ""
+msgstr "Tueur"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Killer's name"
-msgstr ""
+msgstr "Nom du tueur"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Victim"
-msgstr ""
+msgstr "Victime"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Victim's name"
-msgstr ""
+msgstr "Nom de la victime"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Weapon"
-msgstr ""
+msgstr "Arme"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Weapon's name"
-msgstr ""
+msgstr "Nom de l'arme"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Attributes"
-msgstr ""
+msgstr "Attributs"
 
 #: src/ui/match/duels/opening-duels-map/use-opening-duels-map-columns.ts
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Kill's attributes"
-msgstr ""
+msgstr "Attributs du kill"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Killer side"
-msgstr ""
+msgstr "Side tueur"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Killer's side"
-msgstr ""
+msgstr "Side du tueur"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header"
 msgid "Victim side"
-msgstr ""
+msgstr "Side victime"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-round-breakdown.tsx
 msgctxt "Table header tooltip"
 msgid "Victim's side"
-msgstr ""
+msgstr "Side de la victime"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "{openDuelWonPercentage}%"
-msgstr ""
+msgstr "{openDuelWonPercentage}%"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Opening duels won"
-msgstr ""
+msgstr "Duels d'ouverture gagnés"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "{openDuelLostPercentage}%"
-msgstr ""
+msgstr "{openDuelLostPercentage}%"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Opening duels lost"
-msgstr ""
+msgstr "Duels d'ouverture perdus"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels lost: {lostCount}"
-msgstr ""
+msgstr "Duels d'ouverture perdu : {lostCount}"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels won: {wonCount}"
-msgstr ""
+msgstr "Duels d'ouverture gagné : {wonCount}"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Open duels: <0>{openingDuelCount}</0>"
-msgstr ""
+msgstr "Duels d'ouverture: <0>{openingDuelCount}</0>"
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Round breakdown"
-msgstr ""
+msgstr "Détails par round"
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
 msgctxt "Chart tooltip"
@@ -3414,7 +3414,7 @@ msgstr "Armes"
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
 msgid "Duels"
-msgstr ""
+msgstr "Duels"
 
 #: src/ui/match/match-tabs.tsx
 msgctxt "Tab link"
@@ -3491,7 +3491,7 @@ msgstr "Générer une vidéo des kills"
 #: src/ui/match/overview/scoreboard/context-menu/scoreboard-context-menu.tsx
 msgctxt "Context menu"
 msgid "Update spectate key"
-msgstr ""
+msgstr "Mettre à jour la touche spectateur"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
@@ -4520,7 +4520,7 @@ msgstr "Focaliser la caméra sur le joueur"
 
 #: src/ui/match/video/sequences/focus-camera-player-select.tsx
 msgid "Spectate key: <0>{0}</0>"
-msgstr ""
+msgstr "Touche spectateur : <0>{0}</0>"
 
 #: src/ui/match/video/sequences/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
@@ -4542,7 +4542,7 @@ msgstr "{seconds} secondes"
 #: src/ui/match/video/sequences/sequence-x-ray-checkbox.tsx
 msgctxt "Input label"
 msgid "Show X-Ray"
-msgstr ""
+msgstr "Afficher les rayons X"
 
 #: src/ui/match/video/sequences/sequences-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
@@ -5282,7 +5282,7 @@ msgstr "Un grand merci aux développeurs suivants pour leur travail open-source 
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."
-msgstr ""
+msgstr "<0>@DandrewsDev</0> pour son travail sur <1>l'extraction de données vocales</1> des démos CS2."
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
@@ -5555,7 +5555,7 @@ msgstr "Ce dossier contient des caractères qui empêcheront la lecture des dém
 
 #: src/ui/settings/folders/include-sub-folders-switch.tsx
 msgid "Include subfolders"
-msgstr ""
+msgstr "Inclure les sous-dossiers"
 
 #: src/ui/settings/folders/use-add-folder.tsx
 msgid "This folder is already in your settings"
