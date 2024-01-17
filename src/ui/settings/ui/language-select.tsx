@@ -20,6 +20,10 @@ export function LanguageSelect() {
       label: 'Français',
     },
     {
+      value: 'pt-BR',
+      label: 'Português (Brasil)',
+    },
+    {
       value: 'zh-CN',
       label: '简体中文',
     },
