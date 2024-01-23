@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-17 00:10\n"
+"PO-Revision-Date: 2024-01-19 00:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -2109,7 +2109,7 @@ msgstr "FASTCUP"
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
 msgid "5EPlay"
-msgstr ""
+msgstr "5E对战平台"
 
 #: src/ui/demos/use-demo-sources.ts
 msgctxt "Demo source name"
@@ -2167,19 +2167,19 @@ msgstr "更新录像文件位置"
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgctxt "Dialog title"
 msgid "Update player's spectate key"
-msgstr ""
+msgstr "更新玩家的旁观键"
 
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgid "The player's spectate key corresponds to the keyboard key (0 to 9) used to focus the camera on the player during playback."
-msgstr ""
+msgstr "玩家的观战键与键盘上的按键（0 至 9）相对应，用于在回放DEMO过程中将摄像头对准玩家。"
 
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgid "To find the correct key, you have to watch the demo and press the number keys until the camera is on the player."
-msgstr ""
+msgstr "要找到正确的按键，您必须观看Demo并按下数字键，直到相机选择正确的玩家为止。"
 
 #: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 msgid "Change it only if the camera doesn't focus on the correct player when watching highlights, generating a video with camera focus…"
-msgstr ""
+msgstr "只有在观看集锦时摄像机没有对准正确的玩家时才进行更改，生成一段摄像机焦点在玩家身上的视频..."
 
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
@@ -2594,12 +2594,12 @@ msgstr "未找到死亡"
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/video/generating-dialog.tsx
 msgid "The demo's path contains characters that are not supported by Counter-Strike and would prevent playback."
-msgstr ""
+msgstr "演示路径中包含的字符不受《Counter-Strike》支持，因此无法播放。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/video/generating-dialog.tsx
 msgid "You have to move the demo in a folder that contains only Basic Latin characters - see <0>this documentation</0> for details."
-msgstr ""
+msgstr "您必须将演示移动到只包含基本拉丁字符的文件夹中 - 详情请参阅<0>本文档</0>。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Steam is not running"
@@ -3491,7 +3491,7 @@ msgstr "生成击杀视频"
 #: src/ui/match/overview/scoreboard/context-menu/scoreboard-context-menu.tsx
 msgctxt "Context menu"
 msgid "Update spectate key"
-msgstr ""
+msgstr "更新旁观密钥"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
@@ -4219,7 +4219,7 @@ msgstr "高度"
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgctxt "Checkbox label"
 msgid "Enable config folder"
-msgstr "打开配置目录"
+msgstr "使用配置目录"
 
 #: src/ui/match/video/hlae/hlae-config-folder-path.tsx
 msgctxt "Input label"
@@ -4520,7 +4520,7 @@ msgstr "对焦摄像头在玩家身上"
 
 #: src/ui/match/video/sequences/focus-camera-player-select.tsx
 msgid "Spectate key: <0>{0}</0>"
-msgstr ""
+msgstr "旁观键: <0>{0}</0>"
 
 #: src/ui/match/video/sequences/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"
@@ -4542,7 +4542,7 @@ msgstr "{seconds} 秒"
 #: src/ui/match/video/sequences/sequence-x-ray-checkbox.tsx
 msgctxt "Input label"
 msgid "Show X-Ray"
-msgstr ""
+msgstr "显示 X-Ray"
 
 #: src/ui/match/video/sequences/sequences-disk-space.tsx
 msgctxt "Disk usage in gigabyte"
@@ -4767,11 +4767,11 @@ msgstr "右腿"
 
 #: src/ui/matches/table/match-count.tsx
 msgid "{matchCount, plural, one {# match} other {# matches}}"
-msgstr ""
+msgstr "{matchCount, plural, other {# 个匹配}}"
 
 #: src/ui/matches/table/match-with-cheater-indicator.tsx
 msgid "{matchWithCheaterCount, plural, one {# match with a cheater} other {# matches with a cheater}}"
-msgstr ""
+msgstr "{matchWithCheaterCount, plural, other {# 与作弊者的比赛}}"
 
 #: src/ui/matches/table/matches-table.tsx
 msgid "Loading matches…"
@@ -4792,7 +4792,7 @@ msgstr "{0, plural, one {# 录像已选择} other {# 录像已选择}}"
 #: src/ui/player/charts/average-damage-per-round-chart.tsx
 msgctxt "Chart title"
 msgid "Damage Per Round over time"
-msgstr ""
+msgstr "每轮持续伤害"
 
 #: src/ui/player/charts/average-damage-per-round-chart.tsx
 msgctxt "Chart axis label average damage per round"
@@ -4807,7 +4807,7 @@ msgstr ""
 #: src/ui/player/charts/clutch-won-percentage-chart.tsx
 msgctxt "Chart axis label"
 msgid "Won %"
-msgstr ""
+msgstr "胜率%"
 
 #: src/ui/player/charts/competitive-rank-repartition-chart.tsx
 msgctxt "Chart title"
@@ -4842,7 +4842,7 @@ msgstr ""
 #: src/ui/player/charts/match-count-chart.tsx
 msgctxt "Chart axis label match count"
 msgid "Match"
-msgstr ""
+msgstr "对战"
 
 #: src/ui/player/charts/premier-rank-repartition-chart.tsx
 msgctxt "Chart title"
@@ -4871,12 +4871,12 @@ msgstr "年"
 #: src/ui/player/charts/x-axis.tsx
 msgctxt "Select option time period"
 msgid "Match"
-msgstr ""
+msgstr "对战"
 
 #: src/ui/player/charts/x-axis.tsx
 msgctxt "Input label"
 msgid "X Axis"
-msgstr ""
+msgstr "X轴"
 
 #: src/ui/player/load-player-error.tsx
 msgid "No data was found with active filters."
@@ -4884,16 +4884,16 @@ msgstr ""
 
 #: src/ui/player/load-player-error.tsx
 msgid "This player is not in any analyzed demos."
-msgstr ""
+msgstr "这位玩家不在任何分析过的Demo中。"
 
 #: src/ui/player/overview/last-matches.tsx
 msgid "No matches."
-msgstr ""
+msgstr "暂无比赛。"
 
 #: src/ui/player/overview/last-matches.tsx
 msgctxt "Panel title"
 msgid "Last matches"
-msgstr ""
+msgstr "最近比赛"
 
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel title"
@@ -4914,7 +4914,7 @@ msgstr ""
 #: src/ui/player/overview/win-rate-panel.tsx
 msgctxt "Panel label"
 msgid "Wins"
-msgstr ""
+msgstr "胜场"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel title"
@@ -4953,26 +4953,26 @@ msgstr "资料"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgid "Private"
-msgstr ""
+msgstr "私密"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgid "Public"
-msgstr ""
+msgstr "公开"
 
 #: src/ui/player/overview/win-rate-panel.tsx
 msgctxt "Panel title"
 msgid "Win ratio"
-msgstr ""
+msgstr "胜率"
 
 #: src/ui/player/overview/win-rate-panel.tsx
 msgctxt "Panel label"
 msgid "Matches played"
-msgstr ""
+msgstr "比赛场次"
 
 #: src/ui/player/overview/win-rate-panel.tsx
 msgctxt "Panel label"
 msgid "Ties"
-msgstr ""
+msgstr "平局"
 
 #: src/ui/player/overview/win-rate-panel.tsx
 msgctxt "Panel label"
@@ -4981,35 +4981,35 @@ msgstr "败北"
 
 #: src/ui/player/pinned-player.tsx
 msgid "No pinned player found."
-msgstr ""
+msgstr "没有找到标记的玩家。"
 
 #: src/ui/player/pinned-player.tsx
 msgid "You can pin a player from scoreboards or the players list."
-msgstr ""
+msgstr "您可以从记分板或玩家列表中标记一名玩家。"
 
 #: src/ui/player/player-loader.tsx
 msgid "Loading player…"
-msgstr ""
+msgstr "正在加载玩家…"
 
 #: src/ui/player/player-tabs.tsx
 msgctxt "Tab link"
 msgid "Graphs"
-msgstr ""
+msgstr "图表"
 
 #: src/ui/player/player-tabs.tsx
 msgctxt "Tab link"
 msgid "Maps"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/player/player-tabs.tsx
 msgctxt "Tab link"
 msgid "Rank"
-msgstr ""
+msgstr "排名"
 
 #: src/ui/player/player-tabs.tsx
 msgctxt "Tab link"
 msgid "Matches"
-msgstr ""
+msgstr "比赛"
 
 #: src/ui/player/rank/player-competitive-rank-history.tsx
 msgctxt "Chart title"
@@ -5020,7 +5020,7 @@ msgstr ""
 #: src/ui/player/rank/player-premier-rank-history.tsx
 msgctxt "Chart axis label"
 msgid "Rank"
-msgstr ""
+msgstr "排名"
 
 #: src/ui/player/rank/player-premier-rank-history.tsx
 msgctxt "Chart title"
@@ -5029,69 +5029,69 @@ msgstr ""
 
 #: src/ui/player/rank/use-get-win-count-translation.ts
 msgid "Win count: {winCount}"
-msgstr ""
+msgstr "胜场：{winCount}"
 
 #: src/ui/players/action-bar/ban-filter.tsx
 msgctxt "Select option Steam ban status"
 msgid "None"
-msgstr ""
+msgstr "无"
 
 #: src/ui/players/action-bar/ban-filter.tsx
 msgctxt "Select option Steam ban status"
 msgid "VAC banned"
-msgstr ""
+msgstr "VAC 封禁"
 
 #: src/ui/players/action-bar/ban-filter.tsx
 msgctxt "Select option Steam ban status"
 msgid "Game banned"
-msgstr ""
+msgstr "游戏封禁"
 
 #: src/ui/players/action-bar/ban-filter.tsx
 msgctxt "Select option Steam ban status"
 msgid "Community banned"
-msgstr ""
+msgstr "社区封禁"
 
 #: src/ui/players/action-bar/ban-filter.tsx
 msgctxt "Ban filter title"
 msgid "Bans"
-msgstr ""
+msgstr "封禁"
 
 #: src/ui/players/no-players.tsx
 msgid "No player found with current filters."
-msgstr ""
+msgstr "未找到与筛选结果匹配的玩家。"
 
 #: src/ui/players/no-players.tsx
 msgid "No player found, you have to analyze demos to generate players."
-msgstr ""
+msgstr "未找到玩家，您必须分析录像来生成匹配的玩家"
 
 #: src/ui/players/players-table.tsx
 msgid "Loading players…"
-msgstr ""
+msgstr "正在加载玩家…"
 
 #: src/ui/players/table/bans-indicators.tsx
 msgid "{vacBannedPlayerCount, plural, one {# VAC ban} other {# VAC bans}}"
-msgstr ""
+msgstr "{vacBannedPlayerCount, plural, other {# VAC封禁}}"
 
 #: src/ui/players/table/bans-indicators.tsx
 msgid "{gameBannedPlayerCount, plural, one {# game ban} other {# game bans}}"
-msgstr ""
+msgstr "{gameBannedPlayerCount, plural, other {# 游戏封禁}}"
 
 #: src/ui/players/table/bans-indicators.tsx
 msgid "{communityBannedPlayerCount, plural, one {# community ban} other {# community bans}}"
-msgstr ""
+msgstr "{communityBannedPlayerCount, plural, other {# 社区封禁}}"
 
 #: src/ui/players/table/player-count.tsx
 msgid "{0, plural, one {# player} other {# players}}"
-msgstr ""
+msgstr "{0, plural, other {# 玩家}}"
 
 #: src/ui/players/table/selected-player-count.tsx
 msgid "{0, plural, one {# player selected} other {# players selected}}"
-msgstr ""
+msgstr "{0, plural, other {# 玩家已选择}}"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Avatar"
-msgstr ""
+msgstr "头像"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header match count"
@@ -5116,100 +5116,100 @@ msgstr "爆头率%"
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Utility damage per round"
-msgstr ""
+msgstr "道具每回合平均伤害"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Average Damage per Round"
-msgstr ""
+msgstr "每回合平均伤害"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "Last match date"
-msgstr ""
+msgstr "最后对战的日期"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Last match date"
-msgstr ""
+msgstr "最后对战的日期"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"
 msgid "Last ban date"
-msgstr ""
+msgstr "最后封禁的日期"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header tooltip"
 msgid "Last ban date"
-msgstr ""
+msgstr "最后封禁的日期"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "5 kills"
-msgstr ""
+msgstr "5杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "4 kills"
-msgstr ""
+msgstr "4杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "1 versus 5"
-msgstr ""
+msgstr "1v5残局"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "1 versus 4"
-msgstr ""
+msgstr "1v4"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "1 versus 3"
-msgstr ""
+msgstr "1v3"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Wallbang kills"
-msgstr ""
+msgstr "穿墙击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Collateral kills"
-msgstr ""
+msgstr "附带击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Knife kills"
-msgstr ""
+msgstr "匕首击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Jump kills"
-msgstr ""
+msgstr "空中飞人击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Ninja defuse"
-msgstr ""
+msgstr "偷包（也可能是明抢"
 
 #: src/ui/search/filters/search-maps-input.tsx
 msgctxt "Input placeholder"
 msgid "Map's name"
-msgstr ""
+msgstr "地图名称"
 
 #: src/ui/search/filters/search-maps-input.tsx
 msgid "No maps found"
-msgstr ""
+msgstr "没有找到相关地图"
 
 #: src/ui/search/filters/search-players-input.tsx
 msgctxt "Input placeholder"
 msgid "Nickname or SteamID"
-msgstr ""
+msgstr "昵称或 SteamID"
 
 #: src/ui/search/filters/search-players-input.tsx
 msgid "No players found"
-msgstr ""
+msgstr "未找到玩家"
 
 #: src/ui/search/results/collateral-kills-results.tsx
 msgid "Deaths {deathCount}"
@@ -5217,47 +5217,47 @@ msgstr ""
 
 #: src/ui/search/results/ninja-defuse-results.tsx
 msgid "CT {ctAliveCount}"
-msgstr ""
+msgstr "CT {ctAliveCount}"
 
 #: src/ui/search/results/ninja-defuse-results.tsx
 msgid "T {tAliveCount}"
-msgstr ""
+msgstr "T {tAliveCount}"
 
 #: src/ui/search/search-results.tsx
 msgid "You have to analyze demos first to search for events."
-msgstr ""
+msgstr "您必须先分析demo才能查找事件"
 
 #: src/ui/search/search-results.tsx
 msgid "Click on the search button to reveal events."
-msgstr ""
+msgstr "点击搜索按钮来显示事件"
 
 #: src/ui/search/search-results.tsx
 msgid "Searching…"
-msgstr ""
+msgstr "正在搜索…"
 
 #: src/ui/search/search-results.tsx
 msgid "No results found."
-msgstr ""
+msgstr "未找到结果。"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Players"
-msgstr ""
+msgstr "玩家"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Maps"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Period"
-msgstr ""
+msgstr "期间"
 
 #: src/ui/search/search.tsx
 msgctxt "Button"
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 #: src/ui/settings/about/about.tsx
 msgid "Automatically download updates."
@@ -5266,67 +5266,67 @@ msgstr ""
 #: src/ui/settings/about/about.tsx
 msgctxt "Settings title"
 msgid "Auto update"
-msgstr ""
+msgstr "自动更新"
 
 #: src/ui/settings/about/about.tsx
 msgid "Information"
-msgstr ""
+msgstr "信息"
 
 #: src/ui/settings/about/about.tsx
 msgid "Credits"
-msgstr ""
+msgstr "鸣谢"
 
 #: src/ui/settings/about/about.tsx
 msgid "Special thanks to the following developers for their open-source work related to Counter-Strike that at some point helped create CS Demo Manager ❤️."
-msgstr ""
+msgstr "特别感谢以下开发人员所做的与《Counter-Strike》相关的开源工作，他们的工作在一定程度上帮助创建了 CS Demo Manager ❤️。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@DandrewsDev</0> for his work on CS2 demos <1>voice data extraction</1>."
-msgstr ""
+msgstr "<0>@DandrewsDev</0>因他在 CS2Demo上的<1>语音数据提取</1>。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@dtugend</0>, the main developer of <1>HLAE</1> which CS Demo Manager uses to generate videos. Without HLAE the CS moviemaking community would not be the same. You can support the HLAE team <2>here</2>."
-msgstr ""
+msgstr "<0>@dtugend</0>, CS Demo Manager用于生成视频的<1>HLAE</1>的主要开发者。 没有HLAE，CS视频制作社区将截然不同。您可以支持HLAE团队<2>这里</2>。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@LaihoE</0> for his reverse engineering work on CS2 demo parsing. His parser is available on <1>GitHub</1>."
-msgstr ""
+msgstr "<0>@LaihoE</0>用于逆向CS2 Demo解析。他的逆向工程可在<1>GitHub</1>上查阅。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@main--</0> and <1>@moritzuehling</1> for creating <2>DemoInfo</2>, one of the first CSGO demo parsers used for years in CSGO Demo Manager V2."
-msgstr ""
+msgstr "<0>@main--</0>和<1>@moritzuehling</1>用于创建<2>Demo信息</2>，是多年来在CSGO Demo Manager V2中使用的第一个CSGODemo解析器。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@markus-wa</0> for creating and maintaining <1>demoinfocs-golang</1>, the demo parser internally used by CS Demo Manager V3."
-msgstr ""
+msgstr "<0>@markus-wa</0>用于创建和维护<1>deminfocs-golang</1>，CS Demo Manager V3内使用的演示解析器。"
 
 #: src/ui/settings/about/about.tsx
 msgid "<0>@saul</0>, a Source Engine/CS wizard who created a <1>CSGO</1> and <2>CS2</2> demo parser and share his CS related knowledge through various <3>open-source</3> <4>projects</4>. You can support him on <5>GitHub</5>."
-msgstr ""
+msgstr "<0>@saul</0>，一个Source Engine/CS 向导，创建了一个<1>CSGO</1>和<2>CS2</2>演示解析器，并通过各种<3>开源</3><4>项目</4>分享他的CS相关知识。 您可以在 <5>GitHub </5>上支持他。"
 
 #: src/ui/settings/about/about.tsx
 msgid "Donate"
-msgstr ""
+msgstr "捐助"
 
 #: src/ui/settings/about/about.tsx
 msgid "CS Demo Manager is a project that I started during college in 2014 and maintained as much as I can since then."
-msgstr ""
+msgstr "CS Demo Manager 是我在 2014 年大学期间启动的一个项目，从那时起我一直在尽力维护它。"
 
 #: src/ui/settings/about/about.tsx
 msgid "It's not backed by any corporate entity and is a free and open-source software that I hope you enjoy using."
-msgstr ""
+msgstr "它没有任何公司实体的支持，是一个自由和开放源码软件，我希望你们能够享受它。"
 
 #: src/ui/settings/about/about.tsx
 msgid "Your <0>donation</0> is greatly appreciated and motivates me to continue working on CS Demo Manager. Thank you!"
-msgstr ""
+msgstr "您的<0>捐赠</0>非常感谢，促使我继续致力于CS Demo Manager。谢谢！"
 
 #: src/ui/settings/about/clear-logs-button.tsx
 msgid "Log file cleared"
-msgstr ""
+msgstr "日志文件已清除"
 
 #: src/ui/settings/about/clear-logs-button.tsx
 msgid "Clear log file"
-msgstr ""
+msgstr "清除日志文件"
 
 #: src/ui/settings/about/reset-settings-button.tsx
 msgctxt "Dialog title"
@@ -5343,100 +5343,100 @@ msgstr "重置设置"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
-msgstr ""
+msgstr "分析时分析玩家/手榴弹位置，仅2D查看器需要位置。 启用后，它会增加输入数据库和磁盘空间使用的匹配时间。"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions"
-msgstr ""
+msgstr "分析玩家/手榴弹位置"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "This account is already ignored."
-msgstr ""
+msgstr "该账户已被忽略。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "Steam account not found."
-msgstr ""
+msgstr "Steam账户未找到。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "Invalid Steam community URL."
-msgstr ""
+msgstr "无效的 Steam 社区 URL。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "The Steam API returned a forbidden error."
-msgstr ""
+msgstr "Steam API 返回了一条被禁止的错误."
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "Too many requests sent to the Steam API."
-msgstr ""
+msgstr "发送给Steam API的请求过多。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "The Steam API returned an error."
-msgstr ""
+msgstr "Steam API 返回了一个错误。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Dialog title"
 msgid "Ignore Steam account"
-msgstr ""
+msgstr "忽略Steam账户"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgid "The Steam account will be ignored from VAC ban stats."
-msgstr ""
+msgstr "Steam账户将从被 VAC封禁状态忽略。"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Input label"
 msgid "SteamID64 or Steam community profile URL"
-msgstr ""
+msgstr "Steam 64位ID或Steam社区资料URL"
 
 #: src/ui/settings/bans/ignored-steam-accounts.tsx
 msgctxt "Settings title"
 msgid "Ignored Steam accounts"
-msgstr ""
+msgstr "已忽略Steam的账户"
 
 #: src/ui/settings/bans/ignored-steam-accounts.tsx
 msgid "Add Steam account"
-msgstr ""
+msgstr "添加Steam账户"
 
 #: src/ui/settings/bans/ignored-steam-accounts.tsx
 msgid "The following Steam accounts will be ignored from VAC ban stats."
-msgstr ""
+msgstr "以下Steam账户将从被 VAC封禁状态忽略。"
 
 #: src/ui/settings/bans/ignored-steam-accounts.tsx
 msgid "No ignored Steam account yet."
-msgstr ""
+msgstr "暂未已忽略Steam的账户."
 
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."
-msgstr ""
+msgstr "数据库大小: <0>{size}</0>."
 
 #: src/ui/settings/database/disconnect-database-button.tsx
 msgctxt "Dialog title"
 msgid "Disconnect database"
-msgstr ""
+msgstr "断开数据库连接"
 
 #: src/ui/settings/database/disconnect-database-button.tsx
 msgid "It will close the database connection and cancel all running queries!"
-msgstr ""
+msgstr "它将关闭数据库连接并取消所有正在运行的查询！"
 
 #: src/ui/settings/database/disconnect-database-button.tsx
 msgid "Database disconnection failed with the following error:"
-msgstr ""
+msgstr "数据库断开连接失败，错误为："
 
 #: src/ui/settings/database/disconnect-database-button.tsx
 msgctxt "Button"
 msgid "Disconnect"
-msgstr ""
+msgstr "断开连接"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Optimize database"
-msgstr ""
+msgstr "优化数据库"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Delete positions"
-msgstr ""
+msgstr "删除位置"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "It will delete all data required for the 2D viewer!"
-msgstr ""
+msgstr "它将删除2D查看器所需的所有数据！"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Delete demos that are not on the filesystem anymore"
@@ -5444,12 +5444,12 @@ msgstr "删除不再存在于本地文件系统中的demo"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Clear demos cache"
-msgstr ""
+msgstr "清除Demo缓存"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgctxt "Button"
 msgid "Optimize database"
-msgstr ""
+msgstr "优化数据库"
 
 #: src/ui/settings/database/reset-database-button.tsx
 msgctxt "Dialog title"
@@ -5467,13 +5467,13 @@ msgstr "重置数据库"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
 msgid "Automatically download FACEIT demos in the background."
-msgstr ""
+msgstr "在后台自动下载FACEIT演示。"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos-background.tsx
 #: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
 msgctxt "Settings title"
 msgid "Background download"
-msgstr ""
+msgstr "后台下载"
 
 #: src/ui/settings/downloads/auto-download-faceit-demos.tsx
 msgid "Automatically download FACEIT demos at application startup."
@@ -5487,7 +5487,7 @@ msgstr "启动下载"
 
 #: src/ui/settings/downloads/auto-download-valve-demos-background.tsx
 msgid "Automatically download Valve matchmaking demos in the background."
-msgstr ""
+msgstr "在后台自动下载官匹的Demo"
 
 #: src/ui/settings/downloads/auto-download-valve-demos.tsx
 msgid "Automatically download Valve matchmaking demos at application startup."
@@ -5530,11 +5530,11 @@ msgstr "增加一个账号"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "FACEIT restricted demos download through a <0>private API</0> that prevents us from downloading demos from CS:DM."
-msgstr ""
+msgstr "FACEIT 限制下载通过 <0>private API</0> 阻止我们从 CS:DM 下载演示。"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
 msgid "A request has been submitted to allow CS:DM. In the meantime, you have to download demos from your browser."
-msgstr ""
+msgstr "已经提交了允许CS:DM的请求。同时，您必须从您的浏览器下载演示。"
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Player not found."
@@ -5555,7 +5555,7 @@ msgstr "此文件夹包含在启动CS:GO时阻止demo播放的字符！(不是CS
 
 #: src/ui/settings/folders/include-sub-folders-switch.tsx
 msgid "Include subfolders"
-msgstr ""
+msgstr "包含子文件夹"
 
 #: src/ui/settings/folders/use-add-folder.tsx
 msgid "This folder is already in your settings"
@@ -5564,39 +5564,39 @@ msgstr "此文件夹已经在你的设置中"
 #: src/ui/settings/integrations/faceit-api-key.tsx
 #: src/ui/settings/integrations/steam-api-key.tsx
 msgid "API key applied"
-msgstr ""
+msgstr "API 密钥已应用"
 
 #: src/ui/settings/integrations/faceit-api-key.tsx
 #: src/ui/settings/integrations/steam-api-key.tsx
 msgid "Invalid API key"
-msgstr ""
+msgstr "无效的 API 密钥"
 
 #: src/ui/settings/integrations/faceit-api-key.tsx
 #: src/ui/settings/integrations/steam-api-key.tsx
 msgid "Network error"
-msgstr ""
+msgstr "网络错误"
 
 #: src/ui/settings/integrations/faceit-api-key.tsx
 #: src/ui/settings/integrations/steam-api-key.tsx
 msgctxt "Input placeholder"
 msgid "API key"
-msgstr ""
+msgstr "API 密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Steam API key"
-msgstr ""
+msgstr "Steam API 密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Custom Steam API key used to retrieve information from Steam"
-msgstr ""
+msgstr "自定义Steam API密钥用于从Steam 获取信息"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "FACEIT API key"
-msgstr ""
+msgstr "FACEIT API密钥"
 
 #: src/ui/settings/integrations/integrations-settings.tsx
 msgid "Custom FACEIT API key used to retrieve information from FACEIT"
-msgstr ""
+msgstr "自定义FACEIT API密钥用于从FACEIT 获取信息"
 
 #: src/ui/settings/maps/add-map-button.tsx
 msgctxt "Button"
@@ -5609,28 +5609,28 @@ msgstr "此地图已经存在"
 
 #: src/ui/settings/maps/delete-map-dialog.tsx
 msgid "Do you want to delete this map?"
-msgstr ""
+msgstr "你想要删除这张地图吗？"
 
 #: src/ui/settings/maps/map-dialog/coordinate-x-input.tsx
 msgctxt "Input label"
 msgid "Coordinate X"
-msgstr ""
+msgstr "X 坐标"
 
 #: src/ui/settings/maps/map-dialog/coordinate-y-input.tsx
 msgctxt "Input label"
 msgid "Coordinate Y"
-msgstr ""
+msgstr "Y 坐标"
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgid "Radar image size must be {fileWidth}x{fileHeight}."
-msgstr ""
+msgstr "小地图（雷达）尺寸必须为 {fileWidth}x{fileHeight}."
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgid "Invalid PNG file."
-msgstr ""
+msgstr "无效的 PNG 文件。"
 
 #: src/ui/settings/maps/map-dialog/lower-radar-input.tsx
 msgctxt "Input label"
@@ -5640,27 +5640,27 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
 msgctxt "Dialog title"
 msgid "Map"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/settings/maps/map-dialog/map-form-dialog.tsx
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Name is required."
-msgstr ""
+msgstr "名称必须填写"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Coordinate X is required."
-msgstr ""
+msgstr "需要X坐标。"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Coordinate Y is required."
-msgstr ""
+msgstr "需要Y坐标。"
 
 #: src/ui/settings/maps/map-dialog/map-form-provider.tsx
 msgid "Scale is required."
-msgstr ""
+msgstr "缩放必须填写"
 
 #: src/ui/settings/maps/map-dialog/radar-input.tsx
 msgctxt "Input label"
@@ -5761,30 +5761,30 @@ msgstr "击杀后延迟 (高光时刻)"
 
 #: src/ui/settings/playback/highlights-watch-after-kill-delay.tsx
 msgid "How many seconds to wait before skipping to the next kill when watching highlights"
-msgstr ""
+msgstr "观看高光时，跳转到下一个击杀前需要等待几秒钟"
 
 #: src/ui/settings/playback/highlights-watch-before-kill-delay.tsx
 msgctxt "Settings title"
 msgid "Before kill delay (highlights)"
-msgstr ""
+msgstr "击杀前延迟 (高光时刻)"
 
 #: src/ui/settings/playback/highlights-watch-before-kill-delay.tsx
 msgid "How many seconds to start before a kill when watching highlights"
-msgstr ""
+msgstr "观看高光时，击杀前多少秒开始播放"
 
 #: src/ui/settings/playback/launch-parameters.tsx
 msgctxt "Input placeholder"
 msgid "Launch parameters"
-msgstr ""
+msgstr "启动参数"
 
 #: src/ui/settings/playback/launch-parameters.tsx
 msgid "Additional launch parameters added to the game when it starts"
-msgstr ""
+msgstr "游戏开始时添加的附加参数"
 
 #: src/ui/settings/playback/launch-parameters.tsx
 msgctxt "Settings title"
 msgid "Launch parameters"
-msgstr ""
+msgstr "启动参数"
 
 #: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
 msgctxt "Settings title"
@@ -5793,7 +5793,7 @@ msgstr ""
 
 #: src/ui/settings/playback/lowlights-watch-after-kill-delay.tsx
 msgid "How many seconds to wait before skipping to the next kill when watching lowlights"
-msgstr ""
+msgstr "观看低谷时，跳转到下一个击杀前需要等待几秒钟"
 
 #: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
 msgctxt "Settings title"
@@ -5807,7 +5807,7 @@ msgstr ""
 #: src/ui/settings/playback/watch-before-kill-delay.tsx
 msgctxt "Input placeholder"
 msgid "Delay (seconds)"
-msgstr ""
+msgstr "延迟 (秒)"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
@@ -5819,7 +5819,7 @@ msgstr "文件夹"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Maps"
-msgstr ""
+msgstr "地图"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Download"
@@ -5827,47 +5827,47 @@ msgstr "下载"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Playback"
-msgstr ""
+msgstr "播放"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Analyze"
-msgstr ""
+msgstr "分析"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Video"
-msgstr ""
+msgstr "视频"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Ban"
-msgstr ""
+msgstr "封禁"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Integrations"
-msgstr ""
+msgstr "集成"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "Database"
-msgstr ""
+msgstr "数据库"
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "The name is already taken"
-msgstr ""
+msgstr "此名称已被使用"
 
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "The name is too long"
-msgstr ""
+msgstr "此名称超出长度限制"
 
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "The name is too short"
-msgstr ""
+msgstr "此名称过短"
 
 #: src/ui/settings/tags/use-get-tag-error-message-from-error.ts
 msgid "Invalid color"
-msgstr ""
+msgstr "颜色无效"
 
 #: src/ui/settings/ui/initial-page-select.tsx
 msgctxt "Select option initial page"
@@ -5956,24 +5956,24 @@ msgstr "主题"
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "File not found"
-msgstr ""
+msgstr "未能找到文件"
 
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 msgid "Invalid FFmpeg executable"
-msgstr ""
+msgstr "无效的 FFmpeg 可执行文件"
 
 #: src/ui/settings/video/ffmpeg/ffmpeg-location.tsx
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "Enable custom location"
-msgstr ""
+msgstr "使用自定义位置"
 
 #: src/ui/settings/video/hlae/hlae-config-folder-path.tsx
 msgid "Enable config folder"
-msgstr ""
+msgstr "使用配置文件夹"
 
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "Invalid HLAE executable"
-msgstr ""
+msgstr "无效的 HLAE 可执行文件"
 
 #: src/ui/title-bar/history/history-back-button.tsx
 msgctxt "Tooltip"
@@ -5987,5 +5987,5 @@ msgstr ""
 
 #: src/ui/title-bar/update-available-button.tsx
 msgid "Update ready!"
-msgstr ""
+msgstr "更新已准备就绪！"
 
