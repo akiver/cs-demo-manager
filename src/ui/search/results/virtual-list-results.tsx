@@ -31,7 +31,7 @@ export function VirtualListResults<ItemType>({ items, renderItem }: Props<ItemTy
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto" ref={wrapperRef}>
+    <div className="size-full overflow-y-auto" ref={wrapperRef}>
       <div style={containerStyle} className="flex flex-col gap-y-8">
         {virtualItems.map((item) => {
           return renderItem(items[item.index]);

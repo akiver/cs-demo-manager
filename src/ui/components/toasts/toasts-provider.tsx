@@ -80,13 +80,13 @@ export function ToastsProvider({ children }: Props) {
             let icon: ReactNode = null;
             switch (toast.type) {
               case 'success':
-                icon = <CheckCircleIcon className="w-24 h-24 mr-8 text-green-500 self-center" />;
+                icon = <CheckCircleIcon className="size-24 mr-8 text-green-500 self-center" />;
                 break;
               case 'error':
-                icon = <TimesCircleIcon className="w-24 h-24 mr-8 text-red-500 self-center" />;
+                icon = <TimesCircleIcon className="size-24 mr-8 text-red-500 self-center" />;
                 break;
               case 'warning':
-                icon = <ExclamationTriangleIcon className="w-24 h-24 mr-8 text-orange-500 self-center" />;
+                icon = <ExclamationTriangleIcon className="size-24 mr-8 text-orange-500 self-center" />;
                 break;
             }
 

@@ -39,7 +39,7 @@ function Dialog({ children, style }: DialogProps) {
   return (
     <animated.div
       ref={container}
-      className="absolute inset-0 w-full h-full bg-overlay z-1 pt-[var(--title-bar-height)] focus-visible:outline-none"
+      className="absolute inset-0 size-full bg-overlay z-1 pt-[var(--title-bar-height)] focus-visible:outline-none"
       style={style}
       tabIndex={-1}
       role="dialog"

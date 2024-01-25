@@ -57,7 +57,7 @@ export function VolumeButton() {
         />
       )}
       <div
-        className="w-full h-full"
+        className="size-full"
         onClick={() => {
           const newVolume = volume === min ? max : min;
           setVolume(newVolume);

@@ -14,7 +14,7 @@ export function CfgInput() {
   };
 
   return (
-    <div className="flex flex-col gap-y-8 w-[300px] h-[300px]">
+    <div className="flex flex-col gap-y-8 size-[300px]">
       <InputLabel htmlFor="cfg">
         <Trans context="Input label">CFG</Trans>
       </InputLabel>

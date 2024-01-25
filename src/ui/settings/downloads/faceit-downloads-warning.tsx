@@ -6,7 +6,7 @@ import { ExternalLink } from 'csdm/ui/components/external-link';
 export function FaceitDownloadsWarning() {
   return (
     <div className="flex items-center gap-x-8">
-      <ExclamationTriangleIcon className="w-32 h-32 text-red-700" />
+      <ExclamationTriangleIcon className="size-32 text-red-700" />
       <div>
         <p className="selectable">
           <Trans>

@@ -30,7 +30,7 @@ export function ErrorBoundary() {
   };
 
   return (
-    <div className="flex flex-col items-center h-full w-full">
+    <div className="flex flex-col items-center size-full">
       <div className="flex flex-col mt-48 gap-y-12 w-full p-24">
         <h1 className="text-title">A runtime error occurred</h1>
 

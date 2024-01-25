@@ -24,7 +24,7 @@ export function FolderRow({ folder }: Props) {
       </div>
       {pathContainsInvalidCsgoChars(folder.path) && (
         <div className="flex items-center gap-x-4 mt-4">
-          <ExclamationTriangleIcon className="w-12 h-12 text-orange-700" />
+          <ExclamationTriangleIcon className="size-12 text-orange-700" />
           <p className="text-caption">
             <Trans>
               This folder contains characters that will prevent demo playback when starting CS:GO! (not CS2)

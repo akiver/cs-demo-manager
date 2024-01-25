@@ -9,7 +9,7 @@ type CircleProps = {
 };
 
 function Circle({ className }: CircleProps) {
-  return <div className={`w-12 h-12 rounded-full mr-4 ${className}`} />;
+  return <div className={`size-12 rounded-full mr-4 ${className}`} />;
 }
 
 export function WinRatePanel() {

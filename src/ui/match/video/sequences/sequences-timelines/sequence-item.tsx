@@ -78,7 +78,7 @@ export function SequenceItem({ sequence, players, ticksPerSecond, isOverlapping,
       renderInPortal={true}
     >
       <div
-        className={`flex justify-center flex-col h-full border-y border-gray-700 w-full overflow-hidden ${
+        className={`flex justify-center flex-col size-full border-y border-gray-700 overflow-hidden ${
           isOverlapping ? 'text-white bg-red-700' : 'text-gray-900 bg-gray-75'
         }`}
         onContextMenu={onContextMenu}

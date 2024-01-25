@@ -8,7 +8,7 @@ type Props = {
 export function ErrorMessage({ message }: Props) {
   return (
     <div className="flex items-center gap-x-8">
-      <ExclamationTriangleIcon className="w-20 h-20 text-red-700" />
+      <ExclamationTriangleIcon className="size-20 text-red-700" />
       <p className="leading-none">{message}</p>
     </div>
   );

@@ -118,7 +118,7 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
         </DialogHeader>
         <DialogContent>
           <div className="flex items-center gap-x-4 mb-16">
-            <ExclamationTriangleIcon className="w-16 h-16 text-red-700" />
+            <ExclamationTriangleIcon className="size-16 text-red-700" />
             <p>
               <Trans>Valve Matchmaking demos do not contain voice audio data!</Trans>
             </p>
@@ -126,7 +126,7 @@ function ExportPlayersVoiceDialog({ outputFolderPath }: DialogProps) {
           {warnings.length > 0 && (
             <div className="flex flex-col">
               <div className="flex items-center gap-x-8 mb-8">
-                <ExclamationTriangleIcon className="w-16 h-16 text-orange-700" />
+                <ExclamationTriangleIcon className="size-16 text-orange-700" />
                 <p>
                   <Trans>Warnings:</Trans>
                 </p>

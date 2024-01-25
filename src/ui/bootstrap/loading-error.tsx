@@ -11,7 +11,7 @@ export function LoadingError({ title, error }: Props) {
     <div className="flex flex-col h-screen items-center justify-center">
       <div>
         <div className="flex items-center gap-x-8">
-          <ExclamationTriangleIcon className="w-24 h-24 text-red-700" />
+          <ExclamationTriangleIcon className="size-24 text-red-700" />
           <p className="text-title">{title}</p>
         </div>
         <p className="select-text mt-8 text-body-strong">{error}</p>

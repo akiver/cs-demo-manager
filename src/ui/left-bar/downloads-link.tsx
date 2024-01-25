@@ -9,7 +9,7 @@ export function DownloadsLink() {
   return (
     <LeftBarLink
       icon={
-        <div className="relative w-full h-full">
+        <div className="relative size-full">
           <PendingDownloadsBadge />
           <DownloadIcon />
         </div>

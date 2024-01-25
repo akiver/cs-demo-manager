@@ -114,7 +114,7 @@ export function Viewer2D() {
   return (
     <FullscreenProvider>
       <div className="flex flex-1 justify-between relative overflow-y-auto bg-gray-50" ref={setWrapper}>
-        <div className="absolute inset-0 w-full h-full overflow-hidden">
+        <div className="absolute inset-0 size-full overflow-hidden">
           <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} />
         </div>
         <Timer />

@@ -23,9 +23,7 @@ export function Avatar({ avatarUrl, playerName, playerColor, size }: Props) {
 
   return (
     <img
-      className={`border ${
-        playerColor ? getPlayerColorBorderClassName(playerColor) : 'border-gray-300'
-      } w-[100px] h-[100px]`}
+      className={`border ${playerColor ? getPlayerColorBorderClassName(playerColor) : 'border-gray-300'} size-[100px]`}
       style={{
         width: size,
         height: size,

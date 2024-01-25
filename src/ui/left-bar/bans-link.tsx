@@ -43,7 +43,7 @@ export function BansLink() {
   return (
     <LeftBarLink
       icon={
-        <div className="relative w-full h-full">
+        <div className="relative size-full">
           <BanCountBadge banCount={newBannedAccountCount} />
           <ShieldIcon />
         </div>

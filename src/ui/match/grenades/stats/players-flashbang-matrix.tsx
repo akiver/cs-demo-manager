@@ -13,7 +13,7 @@ import { useCssVariableValue } from 'csdm/ui/hooks/use-css-variable-value';
 function TeamIndicator({ color }: { color: string }) {
   return (
     <div
-      className="flex self-center w-8 h-8 rounded-full"
+      className="flex self-center size-8 rounded-full"
       style={{
         backgroundColor: color,
       }}

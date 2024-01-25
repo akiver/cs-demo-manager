@@ -14,7 +14,7 @@ export function PremierRank({ rank }: Props) {
 
   return (
     <div
-      className="flex relative w-full h-full"
+      className="flex relative size-full"
       style={{
         color: `var(--cs-rating-tier-${tier})`,
       }}

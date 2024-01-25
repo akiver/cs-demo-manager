@@ -13,7 +13,7 @@ const Circle = React.forwardRef(function Circle({ color, top }: CircleProps, ref
   return (
     <div
       ref={ref}
-      className="absolute w-8 h-8 rounded-full border"
+      className="absolute size-8 rounded-full border"
       style={{
         top: `${top}px`,
         backgroundColor: color,

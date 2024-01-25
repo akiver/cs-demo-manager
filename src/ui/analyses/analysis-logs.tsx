@@ -161,7 +161,7 @@ export function AnalysisLogs() {
 
     return (
       <div className="flex items-center gap-x-8 py-8">
-        <ExclamationTriangleIcon className="w-24 h-24 text-red-700" />
+        <ExclamationTriangleIcon className="size-24 text-red-700" />
         {message}
       </div>
     );

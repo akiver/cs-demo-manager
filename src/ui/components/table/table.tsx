@@ -72,8 +72,9 @@ export function Table<DataType extends Data>({ table }: Props<DataType>) {
                   {...columnProps}
                 >
                   <div
-                    className={`flex items-center justify-between h-full px-8 border-gray-300 border-y border-r last:border-r-0
-                    ${hasDragOver ? 'border-l-2 border-l-blue-700' : 'border-l-transparent'}`}
+                    className={`${
+                      hasDragOver ? 'border-l-2 border-l-blue-700' : 'border-l-transparent'
+                    } flex items-center justify-between h-full px-8 border-gray-300 border-y border-r last:border-r-0`}
                   >
                     <span
                       className={`flex-1 text-body-strong truncate ${

@@ -239,7 +239,7 @@ export function OpeningDuelsMap({ map, kills, radarFileSrc }: Props) {
         <Table<Kill> table={table} />
       </div>
       <div className="flex flex-1 relative bg-gray-50" ref={setWrapper}>
-        <div className="absolute top-0 h-full w-full overflow-hidden">
+        <div className="absolute top-0 size-full overflow-hidden">
           <canvas
             ref={(ref) => {
               canvasRef.current = ref;

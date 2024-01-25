@@ -7,7 +7,7 @@ type CircleProps = {
 };
 
 const Circle = React.forwardRef(function Circle({ className }: CircleProps, ref: React.Ref<HTMLDivElement>) {
-  return <div ref={ref} className={`w-8 h-8 rounded-full ${className}`} />;
+  return <div ref={ref} className={`size-8 rounded-full ${className}`} />;
 });
 
 type Props = {

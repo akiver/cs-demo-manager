@@ -36,7 +36,7 @@ export function NoFaceitAccount() {
         />
       </div>
       <div className="flex items-center gap-x-8 mt-4">
-        <ExclamationTriangleIcon className="w-12 h-12 text-orange-700" />
+        <ExclamationTriangleIcon className="size-12 text-orange-700" />
         <p className="text-caption">
           <Trans>The nickname is case sensitive!</Trans>
         </p>

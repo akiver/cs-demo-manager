@@ -8,7 +8,7 @@ import { FilterSelection } from 'csdm/ui/components/dropdown-filter/filter-selec
 function ColorIndicator({ color }: { color: string }) {
   return (
     <div
-      className="w-12 h-12 rounded-full border border-gray-300"
+      className="size-12 rounded-full border border-gray-300"
       style={{
         backgroundColor: color,
       }}

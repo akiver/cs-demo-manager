@@ -9,7 +9,7 @@ export function AnalysesLink() {
   return (
     <LeftBarLink
       icon={
-        <div className="relative w-full h-full">
+        <div className="relative size-full">
           <PendingAnalysesBadge />
           <PendingIcon />
         </div>

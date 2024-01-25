@@ -74,7 +74,7 @@ export function UpdatePlayerSpectateKeyDialog({ playerId, defaultKey }: Props) {
           </Trans>
         </p>
         <div className="flex items-center gap-x-4">
-          <ExclamationTriangleIcon className="w-16 h-16 text-red-700 shrink-0" />
+          <ExclamationTriangleIcon className="size-16 text-red-700 shrink-0" />
           <p>
             <Trans>
               Change it only if the camera doesn't focus on the correct player when watching highlights, generating a

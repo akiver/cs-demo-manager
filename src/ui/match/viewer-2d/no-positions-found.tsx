@@ -73,7 +73,7 @@ function GeneratingDialog({ onPositionsAvailable }: Props) {
             <Trans>It will analyze the demo and generate positions required for the 2D viewer.</Trans>
           </p>
           <div className="flex items-center gap-x-4">
-            <ExclamationTriangleIcon className="w-16 h-16 shrink-0 text-orange-700" />
+            <ExclamationTriangleIcon className="size-16 shrink-0 text-orange-700" />
             <p>
               <Trans>
                 Positions require disk space, it's recommended to delete them from the database settings when you don't
