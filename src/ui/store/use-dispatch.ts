@@ -4,6 +4,4 @@ import type { store } from './store';
 
 type AppDispatch = typeof store.dispatch;
 
-export function useDispatch() {
-  return useDispatchRedux<AppDispatch>();
-}
+export const useDispatch = useDispatchRedux.withTypes<AppDispatch>();
