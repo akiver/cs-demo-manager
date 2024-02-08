@@ -2553,18 +2553,6 @@ msgid "Continue"
 msgstr "Continuar"
 
 #: src/ui/downloads/valve/last-matches-loader.tsx
-msgid "The CS:GO Steam game coordinator was shut down in the last major CS2 update, preventing us from retrieving your last CS2 MM matches."
-msgstr ""
-
-#: src/ui/downloads/valve/last-matches-loader.tsx
-msgid "Downloading demos is currently unavailable and will be back as soon as possible."
-msgstr ""
-
-#: src/ui/downloads/valve/last-matches-loader.tsx
-msgid "You can follow this <0>issue</0> on GitHub to get updates."
-msgstr ""
-
-#: src/ui/downloads/valve/last-matches-loader.tsx
 msgid "Fetching last matches…"
 msgstr "Obtendo últimas partidas…"
 

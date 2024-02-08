@@ -9,9 +9,6 @@ import { fetchDownloadHistories } from 'csdm/node/database/download-history/fetc
 import { ErrorCode } from 'csdm/common/error-code';
 
 export async function downloadLastValveMatches() {
-  // TODO notImplemented Revert when downloading demos is back
-  return [];
-
   try {
     server.sendMessageToRendererProcess({
       name: RendererServerMessageName.FetchLastValveMatchesStart,

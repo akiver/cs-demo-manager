@@ -9,8 +9,7 @@ export function DownloadsActionBar() {
     <ActionBar
       left={
         <>
-          {/* TODO notImplemented Revert when downloading demos is back */}
-          {false && <DownloadDemoFromShareCodeButton />}
+          <DownloadDemoFromShareCodeButton />
           <RevealDownloadFolderInExplorerButton />
           <RemoveDownloadsButton />
         </>
