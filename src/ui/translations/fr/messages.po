@@ -763,6 +763,14 @@ msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pendin
 msgstr "{demosAnalysesInProgressCount, plural, one {La démo est déjà en attente d'analyse} other {# démos sont déjà en attente d'analyse}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "Demos from the last CS2 major update are not supported yet."
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
+msgid "Please follow this <0>issue</0> to get updates."
+msgstr ""
+
+#: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demoAlreadyInDatabaseCount, plural, one {# demo is already in the database} other {# demos are already in the database}}"
 msgstr "{demoAlreadyInDatabaseCount, plural, one {# démo est déjà dans la base de données} other {# démos sont déjà dans la base de données}}"
 
@@ -2543,6 +2551,18 @@ msgstr "Counter-Strike se fermera s'il est en cours d'exécution et se lancera a
 #: src/ui/downloads/valve/fetch-matches-confirmation.tsx
 msgid "Continue"
 msgstr "Continuer"
+
+#: src/ui/downloads/valve/last-matches-loader.tsx
+msgid "The CS:GO Steam game coordinator was shut down in the last major CS2 update, preventing us from retrieving your last CS2 MM matches."
+msgstr ""
+
+#: src/ui/downloads/valve/last-matches-loader.tsx
+msgid "Downloading demos is currently unavailable and will be back as soon as possible."
+msgstr ""
+
+#: src/ui/downloads/valve/last-matches-loader.tsx
+msgid "You can follow this <0>issue</0> on GitHub to get updates."
+msgstr ""
 
 #: src/ui/downloads/valve/last-matches-loader.tsx
 msgid "Fetching last matches…"

@@ -100,12 +100,14 @@ export function DemoContextMenu({ onCommentClick, demos }: Props) {
     showDialog(<DemoNotFoundDialog demoPath={demoPath} />);
   };
 
+  const areVoicesExportable = demos.every((demo) => demo.networkProtocol < 13987);
+
   return (
     <ContextMenu>
       <NavigateToDemoItem demoPath={selectedDemo.filePath} />
       <NavigateToMatchItem demos={demos} />
       <AnalyzeItem demos={demos} />
-      <ExportPlayersVoiceItem demoPaths={filepaths} />
+      {areVoicesExportable && <ExportPlayersVoiceItem demoPaths={filepaths} />}
       <Separator />
       <CommentItem onClick={onCommentClick} isDisabled={demos.length !== 1} />
       <TagsItem onClick={onTagsClick} />
