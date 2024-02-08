@@ -53,6 +53,7 @@ export async function getCounterStrikeExecutablePath(game: Game): Promise<string
   const [runSteamScriptPath] = await glob(`**/${steamScriptName}`, {
     cwd: steamFolderPath,
     absolute: true,
+    followSymbolicLinks: false,
   });
   if (!runSteamScriptPath) {
     throw new CounterStrikeExecutableNotFound(game);
