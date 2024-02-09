@@ -18,7 +18,6 @@ export function useProcessDemosToAnalyze() {
     const analyzableDemos: Demo[] = [];
     let demosSourceNotSupportedCount = 0;
     let demosAnalysesInProgressCount = 0;
-    let cs2DemosNotSupportedCount = 0;
     const demosAlreadyInDatabase: Demo[] = [];
     for (const demo of demos) {
       if (!SupportedDemoSourcesPerGame[demo.game].includes(demo.source)) {
@@ -38,19 +37,11 @@ export function useProcessDemosToAnalyze() {
         continue;
       }
 
-      if (demo.networkProtocol >= 13987) {
-        cs2DemosNotSupportedCount++;
-        continue;
-      }
-
       analyzableDemos.push(demo);
     }
 
     const isSelectionAnalyzable =
-      demosAlreadyInDatabase.length === 0 &&
-      demosAnalysesInProgressCount === 0 &&
-      demosSourceNotSupportedCount === 0 &&
-      cs2DemosNotSupportedCount === 0;
+      demosAlreadyInDatabase.length === 0 && demosAnalysesInProgressCount === 0 && demosSourceNotSupportedCount === 0;
     if (isSelectionAnalyzable) {
       addDemosToAnalyses(analyzableDemos);
     } else {
@@ -60,7 +51,6 @@ export function useProcessDemosToAnalyze() {
           demosAlreadyInDatabase={demosAlreadyInDatabase}
           demosAnalysesInProgressCount={demosAnalysesInProgressCount}
           demosSourceNotSupportedCount={demosSourceNotSupportedCount}
-          cs2DemosNotSupportedCount={cs2DemosNotSupportedCount}
         />,
       );
     }

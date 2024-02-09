@@ -758,14 +758,6 @@ msgid "{demosAnalysesInProgressCount, plural, one {The demo is already in pendin
 msgstr "{demosAnalysesInProgressCount, plural, one {The demo is already in pending analyses} other {# demos are already in pending analyses}}"
 
 #: src/ui/components/dialogs/analyze-demos-dialog.tsx
-msgid "Demos from the last CS2 major update are not supported yet."
-msgstr "Demos from the last CS2 major update are not supported yet."
-
-#: src/ui/components/dialogs/analyze-demos-dialog.tsx
-msgid "Please follow this <0>issue</0> to get updates."
-msgstr "Please follow this <0>issue</0> to get updates."
-
-#: src/ui/components/dialogs/analyze-demos-dialog.tsx
 msgid "{demoAlreadyInDatabaseCount, plural, one {# demo is already in the database} other {# demos are already in the database}}"
 msgstr "{demoAlreadyInDatabaseCount, plural, one {# demo is already in the database} other {# demos are already in the database}}"
 

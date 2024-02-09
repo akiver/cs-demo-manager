@@ -10,7 +10,6 @@ type Props = {
   analyzableDemos: Demo[];
   demosSourceNotSupportedCount: number;
   demosAnalysesInProgressCount: number;
-  cs2DemosNotSupportedCount: number;
   demosAlreadyInDatabase: Demo[];
 };
 
@@ -19,7 +18,6 @@ export function AnalyzeConfirmationDialog({
   demosAlreadyInDatabase,
   demosAnalysesInProgressCount,
   demosSourceNotSupportedCount,
-  cs2DemosNotSupportedCount,
 }: Props) {
   const addDemosToAnalyses = useAddDemosToAnalyses();
   const [shouldReanalyzeDemos, setShouldReanalyzeDemos] = useState(false);
@@ -66,20 +64,6 @@ export function AnalyzeConfirmationDialog({
               one="The demo is already in pending analyses"
               other="# demos are already in pending analyses"
             />
-          </li>
-        )}
-        {cs2DemosNotSupportedCount > 0 && (
-          <li>
-            <p className="text-body-strong">
-              <Trans>Demos from the last CS2 major update are not supported yet.</Trans>
-            </p>
-            <p>
-              <Trans>
-                Please follow this{' '}
-                <ExternalLink href="https://github.com/akiver/cs-demo-manager/issues/753">issue</ExternalLink> to get
-                updates.
-              </Trans>
-            </p>
           </li>
         )}
         {demoAlreadyInDatabaseCount > 0 && (
