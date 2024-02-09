@@ -65,9 +65,6 @@ export class DownloadValveCommand extends DownloadBaseCommand {
   }
 
   public async run() {
-    // TODO notImplemented Revert when downloading demos is back
-    console.warn(`This command is currently disabled, see https://github.com/akiver/cs-demo-manager/issues/753.`);
-    return;
     this.parseArgs();
 
     this.outputFolderPath = await this.getOutputFolder();
