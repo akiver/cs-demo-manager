@@ -37,9 +37,9 @@ export class DownloadValveCommand extends DownloadBaseCommand {
   public printHelp() {
     console.log(this.getDescription());
     console.log('');
-    console.log(`Usage: csdm ${DownloadValveCommand.Name} [shareCodes...] [--output]`);
+    console.log(`Usage: csdm ${DownloadValveCommand.Name} [shareCodes...] ${this.formatFlagForHelp(this.outputFlag)}`);
     console.log('');
-    console.log('The --output argument specify the directory where demos will be downloaded.');
+    console.log(`The ${this.outputFlag} flag specify the directory where demos will be downloaded.`);
     console.log(`Default value in order of preference:`);
     console.log('\t1. Download folder specified in the application settings.');
     console.log('\t2. The Counter-Strike folder "replays".');
@@ -56,7 +56,7 @@ export class DownloadValveCommand extends DownloadBaseCommand {
     );
     console.log('');
     console.log('To change the directory where demos will be downloaded:');
-    console.log(`    csdm ${DownloadValveCommand.Name} --output "C:\\Users\\username\\Downloads"`);
+    console.log(`    csdm ${DownloadValveCommand.Name} ${this.outputFlag} "C:\\Users\\username\\Downloads"`);
   }
 
   public constructor(args: string[]) {
@@ -101,20 +101,19 @@ export class DownloadValveCommand extends DownloadBaseCommand {
 
     for (let index = 0; index < this.args.length; index++) {
       const arg = this.args[index];
-      const isOption = arg.startsWith('--');
-      if (isOption) {
+      if (this.isFlagArgument(arg)) {
         switch (arg) {
-          case '--output':
+          case this.outputFlag:
             if (this.args.length > index + 1) {
               index += 1;
               this.outputFolderPath = this.args[index];
             } else {
-              console.log('Missing --output option value');
+              console.log(`Missing ${this.outputFlag} value`);
               this.exitWithFailure();
             }
             break;
           default:
-            console.log(`Unknown option: ${arg}`);
+            console.log(`Unknown flag: ${arg}`);
             this.exitWithFailure();
         }
       } else {

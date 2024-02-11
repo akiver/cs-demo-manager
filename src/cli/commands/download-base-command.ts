@@ -9,6 +9,7 @@ import { isPathWritable } from 'csdm/node/filesystem/is-path-writable';
 
 export abstract class DownloadBaseCommand extends Command {
   protected outputFolderPath = '';
+  protected outputFlag = '--output';
 
   protected async getOutputFolder() {
     if (this.outputFolderPath !== '') {

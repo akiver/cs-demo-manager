@@ -32,4 +32,16 @@ export abstract class Command {
     createDatabaseConnection(settings.database);
     await migrateDatabase();
   }
+
+  protected isFlagArgument(arg: string) {
+    return arg.startsWith('--');
+  }
+
+  protected formatFlagForHelp(flag: string) {
+    return `[${flag}]`;
+  }
+
+  protected formatFlagsForHelp(flags: string[]) {
+    return flags.map(this.formatFlagForHelp).join(' ');
+  }
 }
