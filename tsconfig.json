@@ -14,8 +14,8 @@
     "baseUrl": ".",
     "strict": true,
     "paths": {
-      "csdm/*": ["./src/*"],
-    },
+      "csdm/*": ["./src/*"]
+    }
   },
-  "include": ["src/**/*", "types"],
+  "include": ["src/**/*", "types"]
 }
