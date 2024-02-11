@@ -30,7 +30,7 @@ function getDemoSource(demoHeader: DemoHeader, demoName: string): DemoSource {
   const faceitRegex = /\d+_team[\da-z-]+-team[\da-z-]+_de_[\da-z]+\\.dem/;
 
   const serverName = demoHeader.serverName.toLowerCase();
-  if (serverName.includes('faceit') || faceitRegex.exec(demoName) !== null) {
+  if (serverName.includes('faceit') || serverName.includes('blast') || faceitRegex.exec(demoName) !== null) {
     return DemoSource.FaceIt;
   }
 
