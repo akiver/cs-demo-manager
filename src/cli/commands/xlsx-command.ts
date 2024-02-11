@@ -156,7 +156,7 @@ export class XlsxCommand extends Command {
           case '--single':
             this.generateSingleFile = true;
             break;
-          case '--force':
+          case '--force-analyze':
             this.forceAnalyze = true;
             break;
           case '--output-folder':
