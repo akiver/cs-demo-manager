@@ -449,9 +449,9 @@ EXPORT void* CreateInterface(const char* pName, int* pReturnCode)
         }
 
         serverConfigConnect = (AppSystemConnectFn)vtable[0];
-        serverConfigShutdown = (AppSystemShutdownFn)vtable[4];
+        serverConfigShutdown = (AppSystemShutdownFn)vtable[1];
         vtable[0] = &Connect;
-        vtable[4] = &Shutdown;
+        vtable[1] = &Shutdown;
 
         DWORD ignore = 0;
         if (!VirtualProtect(vtable, sizeof(void**), oldProtect, &ignore))
