@@ -31,6 +31,7 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
 
   const recordingFolderExists = await fs.pathExists(recordingFolderPath);
   if (!recordingFolderExists) {
+    logger.error(`Recording folder does not exist ${recordingFolderPath}`);
     throw new RawFilesNotFoundError();
   }
 
@@ -41,6 +42,7 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
       absolute: true,
     });
     if (tgaFiles.length === 0) {
+      logger.error(`TGA files not found for sequence ${sequenceName}`);
       throw new RawFilesNotFoundError();
     }
 

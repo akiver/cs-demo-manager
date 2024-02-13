@@ -18,6 +18,7 @@ async function assertWavFileExists(wavFilePath: string) {
 async function assertFolderExists(folderPath: string) {
   const exists = await fs.pathExists(folderPath);
   if (!exists) {
+    logger.error(`Folder does not exist ${folderPath}`);
     throw new RawFilesNotFoundError();
   }
 }
@@ -60,6 +61,7 @@ export async function getSequenceRawFiles(sequence: Sequence, recordingFolderPat
   const sequenceRawFilesFolderPath = path.join(recordingFolderPath, sequenceName);
   await assertFolderExists(sequenceRawFilesFolderPath);
 
+  logger.log(`Looking for raw files in ${sequenceRawFilesFolderPath} for sequence ${sequenceName}`);
   const tgaFiles = await glob(`**/${sequenceName}*.tga`, {
     cwd: recordingFolderPath,
     absolute: true,
