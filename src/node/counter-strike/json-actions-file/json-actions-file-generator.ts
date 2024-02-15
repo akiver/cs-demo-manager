@@ -63,6 +63,6 @@ export class JSONActionsFileGenerator {
   }
 
   private getValidTick(tick: number): number {
-    return Math.max(10, tick);
+    return Math.max(64, tick);
   }
 }
