@@ -32,7 +32,6 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
   const match = await getPlaybackMatch({
     demoPath,
     steamId,
-    game,
     type: WatchType.Highlights,
   });
   if (game === Game.CSGO) {

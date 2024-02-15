@@ -7,7 +7,6 @@
 #include "cdll_interfaces.h"
 #ifdef _WIN32
 #define SERVER_LIB_PATH "\\csgo\\bin\\win64\\server.dll"
-#include <Windows.h>
 #else
 #include <dlfcn.h>
 #include <sys/mman.h>
@@ -102,53 +101,6 @@ inline bool FileExists(const std::string& name) {
     std::ifstream f(name.c_str());
 
     return f.good();
-}
-
-// Returns the keyboard shortcut as a char for a player from his index.
-// The player index must be between 1 and 10 as keyboard shortcuts are from 1 to 0.
-char GetKeyCharFromPlayerIndex(int playerIndex) {
-    if (playerIndex < 1 || playerIndex > 10) {
-        Log("Invalid player index: %d", playerIndex);
-        return ' ';
-    }
-
-    if (playerIndex == 10) {
-		return '0';
-	}
-
-    return static_cast<char>(playerIndex + '0');
-}
-
-void FocusCameraOnPlayer(int playerIndex) {
-#ifdef _WIN32
-    char keyChar = GetKeyCharFromPlayerIndex(playerIndex);
-    if (keyChar == ' ') {
-        return;
-    }
-
-    HWND gameWindow = FindWindow(NULL, "Counter-Strike 2");
-    if (gameWindow == NULL) {
-        Log("CS2 window not found");
-        return;
-    }
-
-    int scanCode = MapVirtualKey(keyChar, MAPVK_VK_TO_VSC);
-    LPARAM lParam = (scanCode << 16) | 1;
-
-    if (IsIconic(gameWindow)) {
-        ShowWindow(gameWindow, SW_RESTORE);
-    }
-
-    SetForegroundWindow(gameWindow);
-
-    Sleep(100);
-
-    Log("Sending key press: %c", keyChar);
-    PostMessage(gameWindow, WM_KEYDOWN, keyChar, lParam);
-    PostMessage(gameWindow, WM_KEYUP, keyChar, lParam);
-#else
-    Log("FocusCameraOnPlayer not implemented on Linux");
-#endif
 }
 
 ISource2EngineToClient* GetEngine()
@@ -266,30 +218,6 @@ void PlaybackLoop() {
 
             for (auto action : actions) {
                 if (action.tick == newTick) {
-                    // Workaround until hopefully CS2 get a proper command to focus the camera on a player by SteamID.
-                    // ATM we send a keyboard event to the game window.
-                    if (action.cmd.find("spec_lock_to_accountid") != std::string::npos) {
-                        // Make sure keyboard numbers are bound to slots, otherwise the keyboard inputs sent to the game window won't work
-                        engine->ExecuteClientCmd(0, "bind 0 slot10", true);
-                        for (int i = 1; i <= 9; i++) {
-                            auto key = std::to_string(i);
-                            auto cmd = "bind " + key + " slot" + key;
-                            engine->ExecuteClientCmd(0, cmd.c_str(), true);
-                        }
-
-                        engine->ExecuteClientCmd(0, "hideconsole", true);
-
-                        try {
-                            auto playerIndex = std::stoi(action.cmd.substr(action.cmd.find(" ") + 1));
-                            FocusCameraOnPlayer(playerIndex);
-                        }
-                        catch (const std::exception& e) {
-                            Log("Invalid player index: %s", action.cmd.c_str());
-                        }
-
-                        continue;
-                    }
-
                     Log("Executing: %s", action.cmd.c_str());
                     engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
                 }

@@ -5,7 +5,6 @@ export type Player = {
   matchChecksum: string;
   steamId: string;
   name: string;
-  spectateKey: number;
   killCount: number;
   deathCount: number;
   assistCount: number;

@@ -1,8 +1,6 @@
 import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { JSONActionsFileGenerator } from 'csdm/node/counter-strike/json-actions-file/json-actions-file-generator';
-import { fetchPlayersIndexes } from '../database/players/fetch-players-indexes';
-import { getDemoChecksumFromDemoPath } from '../demo/get-demo-checksum-from-demo-path';
 
 type Options = {
   rawFilesFolderPath: string;
@@ -23,9 +21,6 @@ export async function createJsonActionsFileForRecording({
   showOnlyDeathNotices,
   tickrate,
 }: Options) {
-  const checksum = await getDemoChecksumFromDemoPath(demoPath);
-  const playerIndexes = await fetchPlayersIndexes(checksum);
-
   const json = new JSONActionsFileGenerator(demoPath);
   const mandatoryCommands = ['sv_cheats 1', 'volume 1'];
   for (const command of mandatoryCommands) {
@@ -53,8 +48,8 @@ export async function createJsonActionsFileForRecording({
       .addExecCommand(sequence.startTick, `startmovie ${getSequenceName(sequence)}`)
       .addExecCommand(sequence.endTick, 'endmovie');
 
-    if (sequence.playerFocusSteamId && playerIndexes[sequence.playerFocusSteamId]) {
-      json.addSpecPlayer(setupSequenceTick, String(playerIndexes[sequence.playerFocusSteamId]));
+    if (sequence.playerFocusSteamId) {
+      json.addSpecPlayer(setupSequenceTick, sequence.playerFocusSteamId);
     }
 
     if (typeof sequence.cfg === 'string') {

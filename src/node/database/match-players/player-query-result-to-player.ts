@@ -9,7 +9,6 @@ export function playerQueryResultToPlayer(
 ): Player {
   return {
     steamId: row.steam_id,
-    spectateKey: row.index,
     assistCount: row.assist_count,
     averageDamagePerRound: row.average_damage_per_round,
     averageDeathPerRound: row.average_death_per_round,

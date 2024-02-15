@@ -5,7 +5,6 @@ import { deleteVdmFile } from './delete-vdm-file';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { db } from 'csdm/node/database/database';
-import { fetchPlayersIndexes } from 'csdm/node/database/players/fetch-players-indexes';
 import { generatePlayerRoundsVdmFile } from 'csdm/node/vdm/generate-player-rounds-vdm-file';
 import { NoRoundsFound } from './errors/not-rounds-found';
 import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-player-rounds-json-file';
@@ -65,16 +64,10 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
   }
 
   if (game !== Game.CSGO) {
-    const playersIndexes = await fetchPlayersIndexes(checksum);
-    let playerIndex = steamId;
-    if (playersIndexes[steamId]) {
-      playerIndex = String(playersIndexes[steamId]);
-    }
-
     await generatePlayerRoundsJsonFile({
       demoPath,
       rounds,
-      steamId: playerIndex,
+      steamId,
     });
   } else {
     await generatePlayerRoundsVdmFile({

@@ -32,16 +32,9 @@ export function GeneratingVideosDialog({ closeDialog }: Props) {
   const match = useCurrentMatch();
   const [message, setMessage] = useState(() => {
     return (
-      <>
-        <p>
-          <Trans>Generation in progress…</Trans>
-        </p>
-        {match.game !== Game.CSGO && (
-          <p>
-            <Trans>Please keep the CS2 window focused; otherwise the camera focus may not change.</Trans>
-          </p>
-        )}
-      </>
+      <p>
+        <Trans>Generation in progress…</Trans>
+      </p>
     );
   });
 

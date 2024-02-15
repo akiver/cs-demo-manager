@@ -11,8 +11,6 @@ import { useTable } from 'csdm/ui/components/table/use-table';
 import { Table } from 'csdm/ui/components/table/table';
 import { Message } from 'csdm/ui/components/message';
 import { useNavigateToMatchPlayer } from 'csdm/ui/hooks/navigation/use-navigate-to-match-player';
-import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { UpdatePlayerSpectateKeyDialog } from 'csdm/ui/dialogs/update-player-spectate-key-dialog';
 
 function getRowId(player: Player) {
   return player.steamId;
@@ -28,7 +26,6 @@ type Props = {
 
 export function Scoreboard({ teamName, score, scoreOppositeTeam, isDefuseMap, players }: Props) {
   const { showContextMenu } = useContextMenu();
-  const { showDialog } = useDialog();
   const match = useCurrentMatch();
   const columns = useScoreboardColumns(isDefuseMap);
   const navigateToMatchPlayer = useNavigateToMatchPlayer();
@@ -41,18 +38,7 @@ export function Scoreboard({ teamName, score, scoreOppositeTeam, isDefuseMap, pl
 
     const [player] = players;
 
-    const onUpdatePlayerSpectateKeyClick = () => {
-      showDialog(<UpdatePlayerSpectateKeyDialog playerId={player.id} defaultKey={player.spectateKey} />);
-    };
-
-    showContextMenu(
-      event,
-      <ScoreboardContextMenu
-        steamId={player.steamId}
-        demoPath={match.demoFilePath}
-        onUpdateSpectateKeyClick={onUpdatePlayerSpectateKeyClick}
-      />,
-    );
+    showContextMenu(event, <ScoreboardContextMenu steamId={player.steamId} demoPath={match.demoFilePath} />);
   };
 
   const navigateToPlayer = (player: Player) => {

@@ -1,8 +1,6 @@
 import { WatchType } from 'csdm/common/types/watch-type';
 import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 import { db } from '../database';
-import { Game } from 'csdm/common/types/counter-strike';
-import { fetchPlayersIndexes } from '../players/fetch-players-indexes';
 
 type PlaybackKill = {
   tick: number;
@@ -21,13 +19,12 @@ export type PlaybackMatch = {
 };
 
 type Options = {
-  game: Game;
   demoPath: string;
   steamId: string;
   type: WatchType;
 };
 
-export async function getPlaybackMatch({ game, demoPath, steamId, type }: Options) {
+export async function getPlaybackMatch({ demoPath, steamId, type }: Options) {
   const checksum = await getDemoChecksumFromDemoPath(demoPath);
   const match = await db
     .selectFrom('matches')
@@ -66,20 +63,6 @@ export async function getPlaybackMatch({ game, demoPath, steamId, type }: Option
     demoPath,
     kills,
   };
-
-  if (game !== Game.CSGO) {
-    const playersIndexes = await fetchPlayersIndexes(checksum);
-    const playerIndex = String(playersIndexes[steamId]) ?? steamId;
-    playbackMatch.steamId = playerIndex;
-    for (const kill of playbackMatch.kills) {
-      if (kill.killerSteamId && playersIndexes[kill.killerSteamId]) {
-        kill.killerSteamId = String(playersIndexes[kill.killerSteamId]);
-      }
-      if (playersIndexes[kill.victimSteamId]) {
-        kill.victimSteamId = String(playersIndexes[kill.victimSteamId]);
-      }
-    }
-  }
 
   return playbackMatch;
 }

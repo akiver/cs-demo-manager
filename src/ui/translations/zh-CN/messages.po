@@ -330,7 +330,6 @@ msgstr "连接到远程服务器时出错。"
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
 #: src/ui/components/dialogs/delete-matches-dialog.tsx
 #: src/ui/demos/table/update-demos-type-item.tsx
-#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
 #: src/ui/downloads/faceit/use-update-current-faceit-account.tsx
 #: src/ui/downloads/pending/remove-download-button.tsx
 #: src/ui/downloads/pending/remove-downloads-button.tsx
@@ -2164,23 +2163,6 @@ msgctxt "Button"
 msgid "Update demo location"
 msgstr "更新录像文件位置"
 
-#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
-msgctxt "Dialog title"
-msgid "Update player's spectate key"
-msgstr "更新玩家的旁观键"
-
-#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
-msgid "The player's spectate key corresponds to the keyboard key (0 to 9) used to focus the camera on the player during playback."
-msgstr "玩家的观战键与键盘上的按键（0 至 9）相对应，用于在回放DEMO过程中将摄像头对准玩家。"
-
-#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
-msgid "To find the correct key, you have to watch the demo and press the number keys until the camera is on the player."
-msgstr "要找到正确的按键，您必须观看Demo并按下数字键，直到相机选择正确的玩家为止。"
-
-#: src/ui/dialogs/update-player-spectate-key-dialog.tsx
-msgid "Change it only if the camera doesn't focus on the correct player when watching highlights, generating a video with camera focus…"
-msgstr "只有在观看集锦时摄像机没有对准正确的玩家时才进行更改，生成一段摄像机焦点在玩家身上的视频..."
-
 #: src/ui/downloads/dowload-required-tooltip.tsx
 msgctxt "Tooltip"
 msgid "You must download the demo first"
@@ -3488,11 +3470,6 @@ msgctxt "Context menu"
 msgid "Generate kills video"
 msgstr "生成击杀视频"
 
-#: src/ui/match/overview/scoreboard/context-menu/scoreboard-context-menu.tsx
-msgctxt "Context menu"
-msgid "Update spectate key"
-msgstr "更新旁观密钥"
-
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
 msgid "vs"
@@ -4120,10 +4097,6 @@ msgid "Generation in progress…"
 msgstr "生成中..."
 
 #: src/ui/match/video/generating-dialog.tsx
-msgid "Please keep the CS2 window focused; otherwise the camera focus may not change."
-msgstr "请保持 CS2 窗口处于焦点状态；否则摄像的焦点可能不会改变"
-
-#: src/ui/match/video/generating-dialog.tsx
 msgid "In-game recording in progress…"
 msgstr "游戏内录制中…"
 
@@ -4517,10 +4490,6 @@ msgstr "结束时刻"
 msgctxt "Input label"
 msgid "Focus camera on player"
 msgstr "对焦摄像头在玩家身上"
-
-#: src/ui/match/video/sequences/focus-camera-player-select.tsx
-msgid "Spectate key: <0>{0}</0>"
-msgstr "旁观键: <0>{0}</0>"
 
 #: src/ui/match/video/sequences/save-sequence-button.tsx
 msgid "End tick must be greater than start tick"

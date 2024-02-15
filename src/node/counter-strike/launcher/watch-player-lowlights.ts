@@ -23,7 +23,6 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
   const settings = await getSettings();
   const { useCustomLowlights, lowlights } = settings.playback;
   const match = await getPlaybackMatch({
-    game,
     demoPath,
     steamId,
     type: WatchType.Lowlights,

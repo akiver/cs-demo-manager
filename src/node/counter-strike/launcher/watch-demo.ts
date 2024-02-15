@@ -4,8 +4,6 @@ import { VDMGenerator } from 'csdm/node/vdm/generator';
 import { JSONActionsFileGenerator } from '../json-actions-file/json-actions-file-generator';
 import { detectDemoGame } from './detect-demo-game';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
-import { fetchPlayersIndexes } from 'csdm/node/database/players/fetch-players-indexes';
-import { getDemoChecksumFromDemoPath } from 'csdm/node/demo/get-demo-checksum-from-demo-path';
 
 async function generateVdmFile(demoPath: string, startTick?: number, steamId?: string) {
   const vdm = new VDMGenerator(demoPath);
@@ -26,14 +24,7 @@ async function generateJsonActionsFile(demoPath: string, startTick?: number, ste
   }
 
   if (steamId !== undefined) {
-    // Override the SteamID by the player index as CS2 doesn't have a command to focus a player by SteamID yet
-    // TODO CS2 This should be removed and any where we use player indexes once CS2 has a command to focus on a player by SteamID
-    const checksum = await getDemoChecksumFromDemoPath(demoPath);
-    const playerIndexes = await fetchPlayersIndexes(checksum);
-    const playerIndex = playerIndexes[steamId];
-    if (playerIndex) {
-      generator.addSpecPlayer(startTick ?? 0, String(playerIndex));
-    }
+    generator.addSpecPlayer(startTick ?? 0, steamId);
   }
 
   await generator.write();
