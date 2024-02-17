@@ -10,13 +10,11 @@ const config: KnipConfig = {
     'src/server/dev-preload.ts',
   ],
   project: ['src/**/*.{ts,tsx}', '!**/*.test.{ts,tsx}'],
-  exclude: ['nsTypes', 'nsExports', 'dependencies', 'unlisted'],
-  ignore: [
-    '**/*/lingui.config.ts',
-    'src/ui/hooks/use-focus-layers.ts',
-    'src/electron-main/web-socket/web-socket-client.ts',
-  ],
-  vitest: false,
+  rules: {
+    devDependencies: 'off',
+  },
+  ignore: ['**/*/lingui.config.ts'],
+  ignoreDependencies: ['@lingui/core'],
 };
 
 export default config;
