@@ -5310,6 +5310,14 @@ msgstr "Cela réinitialisera les paramètres de l'application à l'exception des
 msgid "Reset settings"
 msgstr "Réinitialiser les paramètres"
 
+#: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
+msgid "Bans that happened before the player was first seen in a match will be ignored."
+msgstr ""
+
+#: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
+msgid "Ignore bans happened before first match"
+msgstr ""
+
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
 msgstr "Analyser les positions des joueurs/grenades lors de l'analyse. Les positions ne sont requises que pour la visionneuse 2D. Lorsque cette option est activée, le temps d'insertion des matchs dans la base de données augmente ainsi que l'espace disque utilisé."

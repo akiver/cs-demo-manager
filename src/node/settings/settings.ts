@@ -116,6 +116,10 @@ export type VideoSettings = {
   hlae: HlaeSettings;
 };
 
+type BanSettings = {
+  ignoreBanBeforeFirstSeen: boolean;
+};
+
 export type Settings = {
   schemaVersion: number;
   autoDownloadUpdates: boolean;
@@ -133,4 +137,5 @@ export type Settings = {
   download: DownloadSettings;
   matches: MatchesSettings;
   players: PlayersSettings;
+  ban: BanSettings;
 };

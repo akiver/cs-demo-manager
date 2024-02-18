@@ -28,3 +28,9 @@ export async function getSettings(): Promise<Settings> {
     return recoveringSettings;
   }
 }
+
+export async function getBanSettings() {
+  const settings = await getSettings();
+
+  return settings.ban ?? defaultSettings.ban;
+}

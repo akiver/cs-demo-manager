@@ -14,6 +14,7 @@ import { LastBans } from './last-bans';
 import { BanPerPremierRankChart } from './ban-per-premier-rank-chart';
 import type { BannedSteamAccount } from 'csdm/common/types/banned-steam-account';
 import { roundNumber } from 'csdm/common/math/round-number';
+import { useBanSettings } from 'csdm/ui/settings/bans/use-ban-settings';
 
 function formatDateToDurationYears(date: string) {
   const now = new Date().getTime();
@@ -37,6 +38,7 @@ type State = {
 
 export function BanStats() {
   const client = useWebSocketClient();
+  const { ignoreBanBeforeFirstSeen } = useBanSettings();
   const [status, setStatus] = useState<Status>(Status.Loading);
   const [stats, setStats] = useState<State>({
     bannedAccountCount: 0,
@@ -76,7 +78,7 @@ export function BanStats() {
     return () => {
       client.off(RendererServerMessageName.IgnoredSteamAccountsChanged, fetchStats);
     };
-  }, [client]);
+  }, [client, ignoreBanBeforeFirstSeen]);
 
   if (status === Status.Loading) {
     return <Message message="Loading ban stats..." />;

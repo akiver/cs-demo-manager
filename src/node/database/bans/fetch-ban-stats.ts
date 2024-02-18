@@ -1,9 +1,10 @@
 import { roundNumber } from 'csdm/common/math/round-number';
 import type { BanStats } from 'csdm/common/types/ban-stats';
-import { db } from '../database';
-import { fetchMatchCount } from '../matches/fetch-match-count';
-import { fetchBannedSteamAccounts } from '../steam-accounts/fetch-banned-steam-accounts';
-import { fetchBannedAccountAgeStats } from '../steam-accounts/fetch-banned-account-age-stats';
+import { db } from 'csdm/node/database/database';
+import { fetchMatchCount } from 'csdm/node/database/matches/fetch-match-count';
+import { fetchBannedSteamAccounts } from 'csdm/node/database/steam-accounts/fetch-banned-steam-accounts';
+import { fetchBannedAccountAgeStats } from 'csdm/node/database/steam-accounts/fetch-banned-account-age-stats';
+import { getBanSettings } from 'csdm/node/settings/get-settings';
 
 async function fetchAccountCount() {
   const { count } = db.fn;
@@ -18,11 +19,12 @@ async function fetchAccountCount() {
 }
 
 export async function fetchBanStats(): Promise<BanStats> {
+  const { ignoreBanBeforeFirstSeen } = await getBanSettings();
   const [bannedAccounts, accountCount, matchCount, age] = await Promise.all([
-    fetchBannedSteamAccounts(),
+    fetchBannedSteamAccounts(ignoreBanBeforeFirstSeen),
     fetchAccountCount(),
     fetchMatchCount(),
-    fetchBannedAccountAgeStats(),
+    fetchBannedAccountAgeStats(ignoreBanBeforeFirstSeen),
   ]);
   const bannedAccountCount = bannedAccounts.length;
   const bannedAccountPercentage = accountCount > 0 ? roundNumber((bannedAccountCount / accountCount) * 100) : 0;

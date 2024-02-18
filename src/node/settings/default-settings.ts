@@ -126,4 +126,7 @@ export const defaultSettings: Settings = {
   players: {
     bans: [],
   },
+  ban: {
+    ignoreBanBeforeFirstSeen: true,
+  },
 };

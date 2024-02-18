@@ -1,8 +1,9 @@
 import { db } from 'csdm/node/database/database';
 import type { BannedSteamAccount } from 'csdm/common/types/banned-steam-account';
 
-export async function fetchBannedSteamAccounts() {
-  const rows = await db
+export async function fetchBannedSteamAccounts(ignoreBanBeforeFirstSeen: boolean) {
+  const { ref } = db.dynamic;
+  let query = db
     .selectFrom('steam_accounts')
     .select(['steam_accounts.steam_id', 'steam_accounts.avatar', 'steam_accounts.name', 'steam_accounts.last_ban_date'])
     .distinctOn('steam_accounts.steam_id')
@@ -17,9 +18,13 @@ export async function fetchBannedSteamAccounts() {
     .select('matches.date as match_date')
     .orderBy('steam_accounts.last_ban_date', 'desc')
     .orderBy('steam_accounts.steam_id', 'asc')
-    .orderBy('matches.date', 'desc')
-    .execute();
+    .orderBy('matches.date', 'desc');
 
+  if (ignoreBanBeforeFirstSeen) {
+    query = query.whereRef('steam_accounts.last_ban_date', '>=', ref('matches.date'));
+  }
+
+  const rows = await query.execute();
   const bannedAccounts = rows.map<BannedSteamAccount>((row) => {
     return {
       steamId: row.steam_id,
