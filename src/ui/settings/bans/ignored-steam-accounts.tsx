@@ -1,23 +1,17 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
-import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
 import { DeleteButton } from 'csdm/ui/components/buttons/delete-button';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
-import { useDispatch } from 'csdm/ui/store/use-dispatch';
-import { deleteIgnoredSteamAccountSuccess } from 'csdm/ui/ban/ban-actions';
 import { useIgnoredSteamAccounts } from 'csdm/ui/ban/use-ignored-steam-accounts';
 import { AddIgnoredSteamAccountDialog } from './add-ignored-steam-account-dialog';
 import { buildPlayerSteamProfileUrl } from 'csdm/ui/shared/build-player-steam-profile-url';
+import { useRemoveIgnoredSteamAccount } from './use-ignored-steam-account';
 
 export function IgnoredSteamAccounts() {
-  const client = useWebSocketClient();
   const accounts = useIgnoredSteamAccounts();
   const { showDialog } = useDialog();
-  const showToast = useShowToast();
-  const dispatch = useDispatch();
+  const { removeIgnoredSteamAccount } = useRemoveIgnoredSteamAccount();
 
   const onClick = () => {
     showDialog(<AddIgnoredSteamAccountDialog />);
@@ -39,22 +33,7 @@ export function IgnoredSteamAccounts() {
       {accounts.length > 0 ? (
         accounts.map((account) => {
           const onDeleteClick = async () => {
-            try {
-              await client.send({
-                name: RendererClientMessageName.DeleteIgnoredSteamAccount,
-                payload: account.steamId,
-              });
-              dispatch(
-                deleteIgnoredSteamAccountSuccess({
-                  account,
-                }),
-              );
-            } catch (error) {
-              showToast({
-                content: <Trans>An error occurred</Trans>,
-                type: 'error',
-              });
-            }
+            await removeIgnoredSteamAccount(account);
           };
 
           return (

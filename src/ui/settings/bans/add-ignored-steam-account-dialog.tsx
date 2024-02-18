@@ -1,58 +1,26 @@
 import React, { useState, type ReactNode } from 'react';
 import { Trans } from '@lingui/macro';
-import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { SpinnableButton } from 'csdm/ui/components/buttons/spinnable-button';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
 import { Status } from 'csdm/common/types/status';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { CloseButton } from 'csdm/ui/components/buttons/close-button';
-import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
-import { ErrorCode } from 'csdm/common/error-code';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { addIgnoredSteamAccountSuccess } from 'csdm/ui/ban/ban-actions';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
-
-function getErrorMessageFromError(error: unknown) {
-  switch (error) {
-    case ErrorCode.SteamAccountAlreadyIgnored:
-      return <Trans>This account is already ignored.</Trans>;
-    case ErrorCode.SteamAccountNotFound:
-      return <Trans>Steam account not found.</Trans>;
-    case ErrorCode.InvalidSteamCommunityUrl:
-      return <Trans>Invalid Steam community URL.</Trans>;
-    case ErrorCode.SteamApiForbidden:
-      return <Trans>The Steam API returned a forbidden error.</Trans>;
-    case ErrorCode.SteamApiTooManyRequests:
-      return <Trans>Too many requests sent to the Steam API.</Trans>;
-    case ErrorCode.SteamApiError:
-      return <Trans>The Steam API returned an error.</Trans>;
-    default:
-      return <Trans>An error occurred.</Trans>;
-  }
-}
+import { useIgnoreSteamAccount } from './use-ignored-steam-account';
 
 export function AddIgnoredSteamAccountDialog() {
-  const client = useWebSocketClient();
   const [status, setStatus] = useState<Status>(Status.Idle);
   const [errorMessage, setErrorMessage] = useState<ReactNode>('');
   const [steamIdentifier, setSteamIdentifier] = useState('');
-  const dispatch = useDispatch();
   const { hideDialog } = useDialog();
+  const { ignoreSteamAccount, getErrorMessageFromError } = useIgnoreSteamAccount();
 
   const submit = async () => {
     try {
       setStatus(Status.Loading);
-      const account = await client.send({
-        name: RendererClientMessageName.AddIgnoredSteamAccount,
-        payload: steamIdentifier,
-      });
-      dispatch(
-        addIgnoredSteamAccountSuccess({
-          account,
-        }),
-      );
+      await ignoreSteamAccount(steamIdentifier);
       hideDialog();
     } catch (error) {
       setStatus(Status.Error);

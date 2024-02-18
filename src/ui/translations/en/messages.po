@@ -336,7 +336,7 @@ msgstr "An error occurred connecting to the WebSocket server."
 #: src/ui/search/filters/search-maps-input.tsx
 #: src/ui/search/filters/search-players-input.tsx
 #: src/ui/settings/about/clear-logs-button.tsx
-#: src/ui/settings/bans/ignored-steam-accounts.tsx
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/downloads/faceit-accounts.tsx
 #: src/ui/settings/maps/add-map-dialog.tsx
 #: src/ui/settings/maps/edit-map-dialog.tsx
@@ -639,7 +639,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/player/load-player-error.tsx
 #: src/ui/players/players-table.tsx
 #: src/ui/search/search-results.tsx
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/database/database-size.tsx
 #: src/ui/settings/database/optimize-database-button.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
@@ -671,6 +671,20 @@ msgstr "Export"
 msgctxt "Context menu"
 msgid "Export players voice"
 msgstr "Export players voice"
+
+#: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
+msgctxt "Context menu"
+msgid "Stop ignoring player's bans"
+msgstr "Stop ignoring player's bans"
+
+#: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
+msgid "Steam account added to ignored list"
+msgstr "Steam account added to ignored list"
+
+#: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
+msgctxt "Context menu"
+msgid "Ignore player's bans"
+msgstr "Ignore player's bans"
 
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
@@ -5322,30 +5336,6 @@ msgid "Analyze player/grenade positions"
 msgstr "Analyze player/grenade positions"
 
 #: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
-msgid "This account is already ignored."
-msgstr "This account is already ignored."
-
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
-msgid "Steam account not found."
-msgstr "Steam account not found."
-
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
-msgid "Invalid Steam community URL."
-msgstr "Invalid Steam community URL."
-
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
-msgid "The Steam API returned a forbidden error."
-msgstr "The Steam API returned a forbidden error."
-
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
-msgid "Too many requests sent to the Steam API."
-msgstr "Too many requests sent to the Steam API."
-
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
-msgid "The Steam API returned an error."
-msgstr "The Steam API returned an error."
-
-#: src/ui/settings/bans/add-ignored-steam-account-dialog.tsx
 msgctxt "Dialog title"
 msgid "Ignore Steam account"
 msgstr "Ignore Steam account"
@@ -5375,6 +5365,30 @@ msgstr "The following Steam accounts will be ignored from VAC ban stats."
 #: src/ui/settings/bans/ignored-steam-accounts.tsx
 msgid "No ignored Steam account yet."
 msgstr "No ignored Steam account yet."
+
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+msgid "This account is already ignored."
+msgstr "This account is already ignored."
+
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+msgid "Steam account not found."
+msgstr "Steam account not found."
+
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+msgid "Invalid Steam community URL."
+msgstr "Invalid Steam community URL."
+
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+msgid "The Steam API returned a forbidden error."
+msgstr "The Steam API returned a forbidden error."
+
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+msgid "Too many requests sent to the Steam API."
+msgstr "Too many requests sent to the Steam API."
+
+#: src/ui/settings/bans/use-ignored-steam-account.tsx
+msgid "The Steam API returned an error."
+msgstr "The Steam API returned an error."
 
 #: src/ui/settings/database/database-size.tsx
 msgid "Database size: <0>{size}</0>."

@@ -12,6 +12,7 @@ import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Separator } from 'csdm/ui/components/context-menu/separator';
 import { isCounterStrikeStartable, isVideoGenerationAvailable } from 'csdm/ui/hooks/use-counter-strike';
 import { useNavigateToMatchPlayer } from 'csdm/ui/hooks/navigation/use-navigate-to-match-player';
+import { IgnoreSteamAccountBanItem } from 'csdm/ui/components/context-menu/items/ignore-steam-account-ban-item';
 
 type Props = {
   steamId: string;
@@ -40,6 +41,7 @@ export function ScoreboardContextMenu({ steamId, demoPath }: Props) {
       <Separator />
       {isVideoGenerationAvailable(match.game) && <GeneratePlayerKillsVideoItem steamId={steamId} />}
       <PinPlayerItem steamId={steamId} />
+      <IgnoreSteamAccountBanItem steamId={steamId} />
     </ContextMenu>
   );
 }
