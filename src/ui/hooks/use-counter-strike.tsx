@@ -83,6 +83,17 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
           </Trans>
         </p>
       );
+    case ErrorCode.AccessDenied:
+      return (
+        <div>
+          <p>
+            <Trans>The game process exited with an access denied error.</Trans>
+          </p>
+          <p>
+            <Trans>Make sure to close any anti-cheat software and retry.</Trans>
+          </p>
+        </div>
+      );
     default:
       return <Trans>An error occurred</Trans>;
   }
@@ -165,7 +176,7 @@ export function useCounterStrike() {
     const message = getErrorMessageFromError(error);
     showToast({
       content: message,
-      id: `watch-demo-${error.demoPath}-error`,
+      id: 'game-starting',
       type: 'error',
     });
   };

@@ -27,7 +27,8 @@ export function ToastsProvider({ children }: Props) {
 
   const showToast = (options: ShowToastOptions) => {
     const toastId = options.id ?? window.crypto.randomUUID();
-    window.clearTimeout(timeouts.current.get(toastId)?.id);
+    const timeoutId = timeouts.current.get(toastId)?.id;
+    window.clearTimeout(timeoutId);
 
     const durationInMs = 5000;
     timeouts.current.set(toastId, {
@@ -38,7 +39,7 @@ export function ToastsProvider({ children }: Props) {
       msRemaining: durationInMs,
     });
 
-    const isToastAlreadyExists = toasts.some((toast) => toast.id === toastId);
+    const isToastAlreadyExists = timeoutId !== undefined || toasts.some((toast) => toast.id === toastId);
     if (isToastAlreadyExists) {
       setToasts((toasts) => {
         return toasts.map((toast) => {

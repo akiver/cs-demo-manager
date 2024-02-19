@@ -17,6 +17,7 @@ import { assertSteamIsRunning } from './assert-steam-is-running';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
 import { GameError } from './errors/game-error';
+import { AccessDeniedError } from './errors/access-denied-error';
 
 type StartCounterStrikeOptions = {
   demoPath: string;
@@ -170,6 +171,11 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
           return reject(new GameError());
         } else {
           logger.error('An error occurred while starting the game');
+
+          if (output.includes('Access is denied')) {
+            return reject(new AccessDeniedError());
+          }
+
           return reject(new StartCounterStrikeError(output));
         }
       }

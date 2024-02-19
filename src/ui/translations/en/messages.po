@@ -2601,6 +2601,14 @@ msgid "The game crashed, please see <0>this documentation</0> for help."
 msgstr "The game crashed, please see <0>this documentation</0> for help."
 
 #: src/ui/hooks/use-counter-strike.tsx
+msgid "The game process exited with an access denied error."
+msgstr "The game process exited with an access denied error."
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Make sure to close any anti-cheat software and retry."
+msgstr "Make sure to close any anti-cheat software and retry."
+
+#: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
 msgstr "Counter-Strike starting…"
 
