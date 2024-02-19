@@ -32,7 +32,7 @@ export function getLastRoundStatsMessage(matchInfoMessage: CDataGCCStrike15_v2_M
 function getMatchResult(lastRoundMsg: CMsgGCCStrike15_v2_MatchmakingServerRoundStats): ValveMatchResult {
   const matchResult = lastRoundMsg.matchResult;
 
-  if (matchResult === undefined) {
+  if (matchResult === undefined || matchResult === 0) {
     return ValveMatchResult.Tied;
   }
 
