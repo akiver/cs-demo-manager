@@ -37,10 +37,10 @@ function getMatchResult(lastRoundMsg: CMsgGCCStrike15_v2_MatchmakingServerRoundS
   }
 
   if (matchResult === 1) {
-    return ValveMatchResult.TWon;
+    return lastRoundMsg.bSwitchedTeams ? ValveMatchResult.CTWon : ValveMatchResult.TWon;
   }
 
-  return ValveMatchResult.CTWon;
+  return lastRoundMsg.bSwitchedTeams ? ValveMatchResult.TWon : ValveMatchResult.CTWon;
 }
 
 export function buildMatchName(lastRoundReservationId: bigint, tvPort: number, serverIp: number) {
@@ -60,26 +60,34 @@ function getTeamNames(tournamentTeams: TournamentTeam[]) {
   return { teamNameStartedCT, teamNameStartedT };
 }
 
-function getPlayerStartedTeamNumber(accountIds: number[], steamId3: number) {
+function getPlayerStartedTeamNumber(accountIds: number[], steamId3: number, switchedTeams = false) {
   // Index 0 to 4 => players that started as CT
   // Index 5 to 9 => players that started as T
   const playerIndexLastRound = accountIds.indexOf(steamId3);
-  const startMatchTeamNumber = playerIndexLastRound < 5 ? TeamNumber.CT : TeamNumber.T;
+  if (playerIndexLastRound < 5) {
+    return switchedTeams ? TeamNumber.T : TeamNumber.CT;
+  }
 
-  return startMatchTeamNumber;
+  return switchedTeams ? TeamNumber.CT : TeamNumber.T;
 }
 
-function getPlayerTeamNumberForRound(player: ValvePlayer, roundNumber: number) {
-  if (roundNumber <= 15) {
+function getPlayerTeamNumberForRound(
+  player: ValvePlayer,
+  roundNumber: number,
+  // maxRounds is always present in CS2 messages but not necessarily in CS:GO messages.
+  // Fallback to the CS:GO 30 max rounds rule by default.
+  maxRounds = 30,
+) {
+  if (roundNumber <= maxRounds / 2) {
     return player.startMatchTeamNumber;
   }
-  if (roundNumber <= 30) {
+  if (roundNumber <= maxRounds) {
     return player.startMatchTeamNumber === TeamNumber.CT ? TeamNumber.T : TeamNumber.CT;
   }
 
   // Handle overtimes available with official tournament events, it assumes it's an MR3 overtimes.
   const previousTeamNumber = player.rounds[roundNumber - 2].teamNumber;
-  const overtimeRoundNumber = roundNumber - 30;
+  const overtimeRoundNumber = roundNumber - maxRounds;
   const isBeginningOfOvertime = overtimeRoundNumber % 3 === 1;
   if (isBeginningOfOvertime) {
     return previousTeamNumber === TeamNumber.CT ? TeamNumber.T : TeamNumber.CT;
@@ -99,14 +107,21 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
   if (roundstatsall.length > 0) {
     roundstatsall.map((roundMessage, roundIndex) => {
       const roundNumber = roundIndex + 1;
-      const [scoreTeamStartedCt, scoreTeamStartedT] = roundMessage.teamScores;
+      let [scoreTeamStartedCt, scoreTeamStartedT] = roundMessage.teamScores;
+      if (roundMessage.bSwitchedTeams) {
+        [scoreTeamStartedCt, scoreTeamStartedT] = [scoreTeamStartedT, scoreTeamStartedCt];
+      }
       const { accountIds } = roundMessage.reservation as CMsgGCCStrike15_v2_MatchmakingGC2ServerReserve;
       for (const [playerIndex, steamId3] of accountIds.entries()) {
         const steamId64 = steamId3ToSteamId64(steamId3);
         let player = players.find((player) => player.steamId === steamId64);
 
         if (player === undefined) {
-          const startMatchTeamNumber = getPlayerStartedTeamNumber(lastRoundReservation.accountIds, steamId3);
+          const startMatchTeamNumber = getPlayerStartedTeamNumber(
+            lastRoundReservation.accountIds,
+            steamId3,
+            lastRoundMessage.bSwitchedTeams,
+          );
           player = {
             steamId: steamId64,
             name: `Player ${playerIndex + 1}`,
@@ -140,7 +155,7 @@ export function getValveMatchFromMatchInfoProtobufMesssage(matchInfoMessage: CDa
           headshotCount: enemyHeadshots[playerIndex] - player.headshotCount,
           mvpCount: mvps[playerIndex] - player.mvp,
           hasWon: hasPlayerWonRound(player),
-          teamNumber: getPlayerTeamNumberForRound(player, roundNumber),
+          teamNumber: getPlayerTeamNumberForRound(player, roundNumber, lastRoundMessage.maxRounds),
         };
         player.rounds.push(round);
 

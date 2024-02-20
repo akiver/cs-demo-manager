@@ -59,4 +59,16 @@ describe('get Valve match from protobuf message', () => {
       expect(buildMatchForSnapshot(match)).toMatchSnapshot(fileName);
     });
   });
+
+  describe('CS2 Matchmaking', () => {
+    const files = ['match730_003668313874395824202_1729175012_271', 'match730_003668537425296097309_2104686856_273'];
+
+    it.each(files)('should return correct values for %s', async (fileName) => {
+      const matchMessage = await readInfoFile(`${fileName}.dem.info`);
+
+      const match = getValveMatchFromMatchInfoProtobufMesssage(matchMessage);
+
+      expect(buildMatchForSnapshot(match)).toMatchSnapshot(fileName);
+    });
+  });
 });

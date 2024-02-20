@@ -44,7 +44,7 @@ export function Sidebar() {
     <div className="border-r border-r-gray-300 overflow-auto min-w-fit">
       {matches.map((match) => {
         const playerLoggedOnSteam = match.players.find((player) => player.steamId === currentSteamId);
-        const result: MatchResult = getMatchResultForPlayerFromMatchResult(match.result, playerLoggedOnSteam);
+        const result = getMatchResultForPlayerFromMatchResult(match.result, playerLoggedOnSteam);
 
         let scoreOnTheLeft = match.scoreTeamStartedCT;
         let scoreOnTheRight = match.scoreTeamStartedT;
@@ -58,10 +58,10 @@ export function Sidebar() {
             sideOnTheLeft = TeamNumber.CT;
             sideOnTheRight = TeamNumber.T;
           } else {
+            scoreOnTheLeft = match.scoreTeamStartedT;
+            scoreOnTheRight = match.scoreTeamStartedCT;
             sideOnTheLeft = TeamNumber.T;
             sideOnTheRight = TeamNumber.CT;
-            scoreOnTheLeft = match.scoreTeamStartedCT;
-            scoreOnTheRight = match.scoreTeamStartedT;
           }
         }
 
