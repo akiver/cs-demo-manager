@@ -113,6 +113,7 @@ if (isFirstAppInstance) {
     let isOpenedAtLogin = false;
     let shouldStartMinimized = false;
     if (isMac) {
+      // eslint-disable-next-line deprecation/deprecation
       const { wasOpenedAtLogin, wasOpenedAsHidden } = app.getLoginItemSettings();
       isOpenedAtLogin = wasOpenedAtLogin;
       shouldStartMinimized = isOpenedAtLogin && wasOpenedAsHidden;

@@ -5,11 +5,7 @@ import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { StartupBehavior } from 'csdm/common/types/startup-behavior';
 
 export function SystemStartupBehavior() {
-  // Because the login items API on macOS Ventura changed, the Electron option "openAsHidden" doesn't work anymore.
-  // It means that the we can't start the app minimized on startup.
-  // Electron doesn't support the new API yet but it will in a future update.
-  // See the PR https://github.com/electron/electron/pull/37244
-  // TODO deps Make the minimized behavior working on macOS 13+ (Darwin version 22) when Electron supports it
+  // Apple removed the option to hide apps on startup in macOS 13 Ventura
   let isAtLeastMacOs13 = false;
   if (window.csdm.isMac) {
     const osVersion = window.csdm.getAppInformation().osVersion;

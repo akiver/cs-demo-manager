@@ -48,6 +48,7 @@ export async function getSystemStartupBehavior(): Promise<StartupBehavior> {
       return StartupBehavior.Off;
     }
 
+    // eslint-disable-next-line deprecation/deprecation
     return settings.openAsHidden ? StartupBehavior.Minimized : StartupBehavior.On;
   }
 
