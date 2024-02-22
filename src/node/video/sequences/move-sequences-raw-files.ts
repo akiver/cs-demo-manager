@@ -35,18 +35,32 @@ export async function moveSequencesRawFiles(sequences: Sequence[], destinationFo
     throw new RawFilesNotFoundError();
   }
 
+  logger.log(`Moving sequences raw files from ${recordingFolderPath} to ${destinationFolderPath}`);
+
   for (const sequence of sequences) {
     const sequenceName = getSequenceName(sequence);
     const tgaFiles = await glob(`**/${sequenceName}*.tga`, {
       cwd: recordingFolderPath,
+      followSymbolicLinks: false,
       absolute: true,
+      onlyFiles: true,
     });
+    logger.log(
+      `TGA files found for sequence ${sequenceName} ${sequence.startTick} ${sequence.endTick}: ${tgaFiles.length}`,
+    );
     if (tgaFiles.length === 0) {
       logger.error(`TGA files not found for sequence ${sequenceName}`);
       throw new RawFilesNotFoundError();
     }
 
+    logger.log(`First TGA file: ${tgaFiles[0]}`);
+    if (tgaFiles.length > 1) {
+      logger.log(`Last TGA file: ${tgaFiles[tgaFiles.length - 1]}`);
+    }
+
     const rawFilesFolderPath = path.dirname(tgaFiles[0]);
+    logger.log(`Sequence raw files folder: ${rawFilesFolderPath}`);
+
     const wavFilePath = path.join(rawFilesFolderPath, isWindows ? `${sequenceName}.wav` : `${sequenceName}.WAV`);
     if (!(await fs.pathExists(wavFilePath))) {
       throw new WavFileNotFound();
