@@ -3489,8 +3489,18 @@ msgstr "Steam ID"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
-msgid "Generate kills video"
-msgstr "Générer une vidéo des kills"
+msgid "Kills"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
+msgctxt "Context menu"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/context-menu/generate-player-video-item.tsx
+msgctxt "Context menu"
+msgid "Generate video"
+msgstr ""
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
@@ -4090,6 +4100,22 @@ msgstr "Une erreur est survenue lors de la mise à jour de FFmpeg"
 msgctxt "Input label"
 msgid "Video codec"
 msgstr "Codec vidéo"
+
+#: src/ui/match/video/generate-button.tsx
+msgid "Disk space warning"
+msgstr ""
+
+#: src/ui/match/video/generate-button.tsx
+msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
+msgstr ""
+
+#: src/ui/match/video/generate-button.tsx
+msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
+msgstr ""
+
+#: src/ui/match/video/generate-button.tsx
+msgid "Are you sure you want to continue?"
+msgstr ""
 
 #: src/ui/match/video/generate-button.tsx
 msgctxt "Button"

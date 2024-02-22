@@ -1,6 +1,6 @@
 import React from 'react';
 import { SeePlayerProfileItem } from 'csdm/ui/components/context-menu/items/see-player-profile-item';
-import { GeneratePlayerKillsVideoItem } from './generate-player-kills-video-item';
+import { GeneratePlayerVideoItem } from './generate-player-video-item';
 import { ContextMenu } from 'csdm/ui/components/context-menu/context-menu';
 import { PinPlayerItem } from 'csdm/ui/components/context-menu/items/pin-player-item';
 import { ShowPlayerMatchesItem } from 'csdm/ui/components/context-menu/items/show-player-matches-item';
@@ -39,7 +39,7 @@ export function ScoreboardContextMenu({ steamId, demoPath }: Props) {
       <Separator />
       <CopyPlayerDataItem steamId={steamId} />
       <Separator />
-      {isVideoGenerationAvailable(match.game) && <GeneratePlayerKillsVideoItem steamId={steamId} />}
+      {isVideoGenerationAvailable(match.game) && <GeneratePlayerVideoItem steamId={steamId} />}
       <PinPlayerItem steamId={steamId} />
       <IgnoreSteamAccountBanItem steamId={steamId} />
     </ContextMenu>

@@ -22,14 +22,14 @@ export function buildPlayerKillsSequences(match: Match, steamId: string) {
     return [];
   }
 
-  const minimunSecondsBetweenTwoSequences = 2;
+  const minimumSecondsBetweenTwoSequences = 2;
   const maxSecondsBetweenKills = 10;
   const startSecondsBeforeKill = 5;
   const endSecondsAfterKill = 2;
 
   const deathNotices = buildPlayersDeathNotices(match.players);
   const sequences: Sequence[] = [];
-  const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimunSecondsBetweenTwoSequences);
+  const ticksRequiredBetweenTwoSequences = Math.round(match.tickrate * minimumSecondsBetweenTwoSequences);
   const additionalTicksBeforeKill = Math.round(match.tickrate * startSecondsBeforeKill);
   const additionalTicksAfterKill = Math.round(match.tickrate * endSecondsAfterKill);
   const maxTicksBetweenKills = Math.round(match.tickrate * maxSecondsBetweenKills);

@@ -13,3 +13,6 @@ export const deleteSequences = createAction<{ demoFilePath: string }>('match/vid
 export const generatePlayerKillsSequences = createAction<{ steamId: string; match: Match }>(
   'match/video/sequences/generatePlayerKills',
 );
+export const generatePlayerRoundsSequences = createAction<{ steamId: string; match: Match }>(
+  'match/video/sequences/generatePlayerRounds',
+);

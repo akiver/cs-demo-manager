@@ -13,6 +13,9 @@ import { useIsCsRunning } from 'csdm/ui/hooks/use-is-cs-running';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
 import { FullScreenDialog } from 'csdm/ui/dialogs/full-screen-dialog';
 import type { GenerateVideosPayload } from 'csdm/server/handlers/renderer-process/video/generate-videos-handler';
+import { useSequencesRequiredDiskSpace } from './sequences/use-sequences-required-disk-space';
+import { ConfirmDialog } from 'csdm/ui/dialogs/confirm-dialog';
+import { Game } from 'csdm/common/types/counter-strike';
 
 export function GenerateButton() {
   const match = useCurrentMatch();
@@ -21,6 +24,7 @@ export function GenerateButton() {
   const { settings } = useVideoSettings();
   const [isCheckingForCsStatus, setIsCheckingForCsStatus] = useState(false);
   const [isGeneratingVideos, setIsGeneratingVideos] = useState(false);
+  const requiredDiskSpace = useSequencesRequiredDiskSpace();
   const client = useWebSocketClient();
   const isCsRunning = useIsCsRunning();
 
@@ -39,15 +43,41 @@ export function GenerateButton() {
     });
   };
 
-  const onClick = async () => {
-    setIsCheckingForCsStatus(true);
-    const csIsRunning = await isCsRunning();
-    if (csIsRunning) {
-      showDialog(<CounterStrikeRunningDialog onConfirmClick={startVideosGeneration} />);
+  const onClick = () => {
+    const tryStartGeneration = async () => {
+      setIsCheckingForCsStatus(true);
+      const csIsRunning = await isCsRunning();
+      if (csIsRunning) {
+        showDialog(<CounterStrikeRunningDialog onConfirmClick={startVideosGeneration} />);
+      } else {
+        startVideosGeneration();
+      }
+      setIsCheckingForCsStatus(false);
+    };
+
+    if (requiredDiskSpace > 40) {
+      showDialog(
+        <ConfirmDialog title={<Trans>Disk space warning</Trans>} onConfirm={tryStartGeneration}>
+          <p>
+            {match.game === Game.CSGO ? (
+              <Trans>
+                You will need at least <strong>{requiredDiskSpace}GB</strong> of free disk space to generate the videos.
+              </Trans>
+            ) : (
+              <Trans>
+                You will need at least <strong>{requiredDiskSpace}GB</strong> of free disk space on the disk where CS2
+                is installed to generate the videos.
+              </Trans>
+            )}
+          </p>
+          <p>
+            <Trans>Are you sure you want to continue?</Trans>
+          </p>
+        </ConfirmDialog>,
+      );
     } else {
-      startVideosGeneration();
+      tryStartGeneration();
     }
-    setIsCheckingForCsStatus(false);
   };
 
   const isDisabled = sequences.length === 0 || isCheckingForCsStatus;
