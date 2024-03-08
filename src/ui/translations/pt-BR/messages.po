@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-24 00:10\n"
+"PO-Revision-Date: 2024-03-05 00:10\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -680,16 +680,16 @@ msgstr "Exportar voz dos jogadores"
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Stop ignoring player's bans"
-msgstr ""
+msgstr "Parar de ignorar os banimentos do jogador"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgid "Steam account added to ignored list"
-msgstr ""
+msgstr "Conta Steam adicionada à lista ignorada"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Ignore player's bans"
-msgstr ""
+msgstr "Ignorar banimento do jogador"
 
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
