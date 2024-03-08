@@ -103,6 +103,7 @@ const config = {
     target: [
       { target: 'deb', arch: ['x64'] },
       { target: 'rpm', arch: ['x64'] },
+      { target: 'AppImage', arch: ['x64'] },
     ],
     icon: 'build/icon.icns',
     extraFiles: [

@@ -34,7 +34,7 @@ export function initialize(autoDownloadUpdates: boolean) {
     }
 
     // TODO deps Auto updates on Linux. electron-builder/electron-updater issue.
-    // It works on Debian distros but not on Fedora.
+    // It works on Debian distros but not on Fedora - untested with AppImage.
     if (isLinux) {
       lastDownloadedVersion = event.version;
       sendUpdateDownloadedMessage();
