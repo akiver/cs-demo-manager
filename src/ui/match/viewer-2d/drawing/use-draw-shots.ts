@@ -1,11 +1,8 @@
 import { useRef } from 'react';
-import { TeamNumber, WeaponName } from 'csdm/common/types/counter-strike';
-import { usePlaySound } from './use-play-sound';
 import { useViewerContext } from '../use-viewer-context';
 import type { InteractiveCanvas } from '../../../hooks/use-interactive-map-canvas';
 import { degreesToRadians } from './degrees-to-radians';
 import type { Shot } from 'csdm/common/types/shot';
-import { AudioFileName } from './use-play-sound';
 import { getTeamColor } from '../../../styles/get-team-color';
 
 type AnimatedShot = Shot & {
@@ -14,35 +11,7 @@ type AnimatedShot = Shot & {
 
 export function useDrawShots() {
   const { shots, currentFrame } = useViewerContext();
-  const { playSound } = usePlaySound();
   const pendingAnimatedShotsRef = useRef<AnimatedShot[]>([]);
-
-  const playWeaponAudio = (weaponName: WeaponName, side: TeamNumber) => {
-    let audioFileName: AudioFileName;
-    switch (weaponName) {
-      case WeaponName.Flashbang:
-        audioFileName = side === TeamNumber.CT ? AudioFileName.CTFlashbang : AudioFileName.TFlashbang;
-        playSound(audioFileName);
-        break;
-      case WeaponName.Smoke:
-        audioFileName = side === TeamNumber.CT ? AudioFileName.CTSmoke : AudioFileName.TSmoke;
-        playSound(audioFileName);
-        break;
-      case WeaponName.HEGrenade:
-        audioFileName = side === TeamNumber.CT ? AudioFileName.CTGrenade : AudioFileName.TGrenade;
-        playSound(audioFileName);
-        break;
-      case WeaponName.Molotov:
-      case WeaponName.Incendiary:
-        audioFileName = side === TeamNumber.CT ? AudioFileName.CTMolotov : AudioFileName.TMolotov;
-        playSound(audioFileName);
-        break;
-      case WeaponName.Decoy:
-        audioFileName = side === TeamNumber.CT ? AudioFileName.CTDecoy : AudioFileName.TDecoy;
-        playSound(audioFileName);
-        break;
-    }
-  };
 
   const drawShots = (
     context: CanvasRenderingContext2D,
@@ -78,8 +47,6 @@ export function useDrawShots() {
         ...shot,
         time: 0.1,
       });
-
-      playWeaponAudio(shot.weaponName, shot.playerSide);
     }
     pendingAnimatedShotsRef.current = pendingAnimatedShots.filter((animation) => {
       return animation.time < 1;

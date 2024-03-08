@@ -16,7 +16,6 @@ import type { getPngInformation } from 'csdm/node/filesystem/get-png-information
 import type { PremierRank, Rank } from 'csdm/common/types/counter-strike';
 import type { writeTableState } from 'csdm/node/settings/table/write-table-state';
 import type { readTableState } from 'csdm/node/settings/table/read-table-state';
-import type { AudioFileName } from 'csdm/ui/match/viewer-2d/drawing/use-play-sound';
 import type { Argument } from 'csdm/common/types/argument';
 import type { ElementToImageOptions } from 'csdm/preload/element-to-image';
 import type { ThemeName } from 'csdm/common/types/theme-name';

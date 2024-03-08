@@ -1,7 +1,6 @@
 import React from 'react';
 import { Timeline } from './timeline';
 import { PlayPauseButton } from './play-pause-button';
-import { VolumeButton } from './volume-button';
 import { SpeedButton } from './speed-button';
 import { FullscreenButton } from './fullscreen-button';
 import { NextRoundButton } from './next-round-button';
@@ -15,7 +14,6 @@ export function PlaybackBar() {
       <PreviousRoundButton />
       <NextRoundButton />
       <SpeedButton />
-      <VolumeButton />
       <Timeline />
       <RadarLevelButton />
       <FullscreenButton />

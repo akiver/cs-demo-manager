@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import React, { createContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { BombDefused } from 'csdm/common/types/bomb-defused';
 import type { BombPlanted } from 'csdm/common/types/bomb-planted';
@@ -24,12 +24,9 @@ import type { DecoyStart } from 'csdm/common/types/decoy-start';
 import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import type { FlashbangExplode } from 'csdm/common/types/flashbang-explode';
-import type { AudioFileName } from './drawing/use-play-sound';
 
 type ViewerContext = {
   framerate: number;
-  volume: number;
-  setVolume: (volume: number) => void;
   speed: number;
   setSpeed: (speed: number) => void;
   currentFrame: number;
@@ -64,7 +61,6 @@ type ViewerContext = {
   setRadarLevel: (radarLevel: RadarLevel) => void;
   focusedPlayerId: string | undefined;
   updateFocusedPlayerId: (id: string) => void;
-  audioPerFrame: Partial<Record<AudioFileName, number>>;
 };
 
 export const ViewerContext = createContext<ViewerContext | undefined>(undefined);
@@ -122,7 +118,6 @@ export function ViewerProvider({
 }: Props) {
   const match = useCurrentMatch();
   const [speed, setSpeed] = useState(1);
-  const [volume, setVolume] = useState(1);
   const [currentFrame, setCurrentFrame] = useState(round.freezetimeEndFrame);
   const [isPlaying, setIsPlaying] = useState(false);
   const [focusedPlayerId, setFocusedPlayerId] = useState<string | undefined>(undefined);
@@ -131,14 +126,6 @@ export function ViewerProvider({
   const frameRate = match.frameRate > 0 ? match.frameRate : match.tickrate / 2;
   const timeRemaining = (remainingFrameCount / frameRate) * 1000;
   const navigate = useNavigate();
-  const audioPerFrame = useRef<Partial<Record<AudioFileName, number>>>({});
-
-  useEffect(() => {
-    const volume = window.localStorage.getItem('viewer2D.volume');
-    if (volume) {
-      setVolume(+volume);
-    }
-  }, []);
 
   return (
     <ViewerContext.Provider
@@ -174,12 +161,7 @@ export function ViewerProvider({
         setCurrentFrame,
         timeRemaining,
         speed,
-        volume,
         isPlaying,
-        setVolume: (volume: number) => {
-          setVolume(volume);
-          window.localStorage.setItem('viewer2D.volume', volume.toString());
-        },
         setSpeed,
         setIsPlaying,
         kills,
@@ -188,7 +170,6 @@ export function ViewerProvider({
         changeRound: (roundNumber: number) => {
           navigate(buildMatch2dViewerRoundPath(match.checksum, roundNumber));
         },
-        audioPerFrame: audioPerFrame.current,
       }}
     >
       {children}
