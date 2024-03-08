@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-19 00:11\n"
+"PO-Revision-Date: 2024-02-23 00:10\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -680,16 +680,16 @@ msgstr "导出玩家语音"
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Stop ignoring player's bans"
-msgstr ""
+msgstr "停止忽视玩家的封禁"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgid "Steam account added to ignored list"
-msgstr ""
+msgstr "Steam 账号已添加到忽略列表"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Ignore player's bans"
-msgstr ""
+msgstr "忽略玩家的封禁"
 
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
@@ -4819,7 +4819,7 @@ msgstr "伤害/回合"
 #: src/ui/player/charts/clutch-won-percentage-chart.tsx
 msgctxt "Chart title"
 msgid "Clutch won over time"
-msgstr ""
+msgstr "加时赛中获得力克千钧胜利"
 
 #: src/ui/player/charts/clutch-won-percentage-chart.tsx
 msgctxt "Chart axis label"
@@ -4829,12 +4829,12 @@ msgstr "胜率%"
 #: src/ui/player/charts/competitive-rank-repartition-chart.tsx
 msgctxt "Chart title"
 msgid "Players competitive rank repartition"
-msgstr ""
+msgstr "玩家的竞技段位分布"
 
 #: src/ui/player/charts/headshot-percentage-chart.tsx
 msgctxt "Chart title"
 msgid "Headshot percentage over time"
-msgstr ""
+msgstr "随时间变化的爆头率"
 
 #: src/ui/player/charts/headshot-percentage-chart.tsx
 msgctxt "Chart axis label"
@@ -4844,7 +4844,7 @@ msgstr "爆头率%"
 #: src/ui/player/charts/kill-death-ratio-chart.tsx
 msgctxt "Chart title"
 msgid "Kill/death over time"
-msgstr ""
+msgstr "随时间变化的击杀/死亡比例(kd)"
 
 #: src/ui/player/charts/kill-death-ratio-chart.tsx
 msgctxt "Chart axis label kill death ratio"
