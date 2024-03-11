@@ -1,4 +1,4 @@
-import { type Expression, type SqlBool } from 'kysely';
+import { sql, type Expression, type SqlBool } from 'kysely';
 import type { Game, Rank } from 'csdm/common/types/counter-strike';
 import type { PlayerTable } from 'csdm/common/types/player-table';
 import { db } from 'csdm/node/database/database';
@@ -46,10 +46,10 @@ async function fetchPlayersStats(filter: PlayersTableFilter): Promise<PlayersSta
     .selectFrom('players')
     .select([
       'players.steam_id as steamId',
-      sum<number>('kill_count').as('killCount'),
-      sum<number>('death_count').as('deathCount'),
+      sum<number>('players.kill_count').as('killCount'),
+      sum<number>('players.death_count').as('deathCount'),
       avg<number>('kill_death_ratio').as('killDeathRatio'),
-      sum<number>('assist_count').as('assistCount'),
+      sum<number>('players.assist_count').as('assistCount'),
       sum<number>('headshot_count').as('headshotCount'),
       sum<number>('three_kill_count').as('threeKillCount'),
       sum<number>('four_kill_count').as('fourKillCount'),
@@ -66,7 +66,13 @@ async function fetchPlayersStats(filter: PlayersTableFilter): Promise<PlayersSta
     ])
     .leftJoin('player_comments', 'player_comments.steam_id', 'players.steam_id')
     .select('player_comments.comment')
+    .leftJoin('matches', 'matches.checksum', 'players.match_checksum')
     .groupBy(['players.steam_id', 'player_comments.comment']);
+
+  const { startDate, endDate } = filter;
+  if (startDate && endDate) {
+    query = query.where(sql<boolean>`matches.date between ${startDate} and ${endDate}`);
+  }
 
   if (filter.bans.length > 0) {
     query = query

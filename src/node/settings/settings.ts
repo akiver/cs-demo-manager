@@ -5,7 +5,7 @@ import type { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { MatchesTableFilter } from 'csdm/node/database/matches/matches-table-filter';
 import type { RankingFilter } from 'csdm/common/types/ranking-filter';
 import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filter';
-import type { BanFilter } from 'csdm/common/types/ban-filter';
+import type { PlayersTableFilter } from '../database/players/players-table-filter';
 
 export type Folder = {
   path: string;
@@ -94,9 +94,7 @@ type DownloadSettings = {
 
 export type MatchesSettings = MatchesTableFilter;
 
-export type PlayersSettings = {
-  bans: BanFilter[];
-};
+export type PlayersSettings = PlayersTableFilter;
 
 export type VideoSettings = {
   encoderSoftware: EncoderSoftware;

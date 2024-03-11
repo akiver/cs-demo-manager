@@ -3,7 +3,7 @@ import type { DemoSource, DemoType, Game } from 'csdm/common/types/counter-strik
 import { DropdownFilter } from 'csdm/ui/components/dropdown-filter/dropdown-filter';
 import { useDemosLoaded } from 'csdm/ui/demos/use-demos-loaded';
 import { FilterSeparator } from 'csdm/ui/components/dropdown-filter/filter-separator';
-import type { DateRange } from 'csdm/common/date/date-range';
+import { formatDate, type DateRange } from 'csdm/common/date/date-range';
 import { PeriodFilter } from 'csdm/ui/components/dropdown-filter/period-filter';
 import { SourcesFilter } from 'csdm/ui/components/dropdown-filter/sources-filter';
 import { TagsFilter } from 'csdm/ui/components/dropdown-filter/tags-filter';
@@ -22,9 +22,9 @@ export function DemosFilterDropdown() {
     useActiveDemosFilters();
   const fetchDemos = useFetchDemos();
 
-  const onPeriodChange = (dateRange: DateRange | undefined) => {
-    const startDate = dateRange?.from?.toLocaleDateString('fr-CA');
-    const endDate = dateRange?.to?.toLocaleDateString('fr-CA');
+  const onPeriodChange = (range: DateRange | undefined) => {
+    const startDate = formatDate(range?.from);
+    const endDate = formatDate(range?.to);
     fetchDemos({
       startDate,
       endDate,

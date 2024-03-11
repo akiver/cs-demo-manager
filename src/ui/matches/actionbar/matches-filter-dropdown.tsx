@@ -10,7 +10,7 @@ import { FilterSeparator } from 'csdm/ui/components/dropdown-filter/filter-separ
 import type { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { useMatchesLoaded } from 'csdm/ui/matches/use-matches-loaded';
 import { useFetchMatches } from 'csdm/ui/matches/use-fetch-matches';
-import type { DateRange } from 'csdm/common/date/date-range';
+import { formatDate, type DateRange } from 'csdm/common/date/date-range';
 import { useActiveMatchesFilters } from '../use-active-matches-filters';
 import { MatchLengthFilter } from 'csdm/ui/components/dropdown-filter/match-length-filter';
 import { useMatchesSettings } from 'csdm/ui/settings/use-matches-settings';
@@ -67,8 +67,8 @@ export function MatchesFilterDropdown() {
     });
   };
   const onPeriodChange = (range: DateRange | undefined) => {
-    const startDate = range?.from?.toLocaleDateString('fr-CA');
-    const endDate = range?.to?.toLocaleDateString('fr-CA');
+    const startDate = formatDate(range?.from);
+    const endDate = formatDate(range?.to);
 
     fetchMatches({
       startDate,

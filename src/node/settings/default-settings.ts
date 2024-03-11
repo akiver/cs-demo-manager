@@ -125,6 +125,8 @@ export const defaultSettings: Settings = {
   },
   players: {
     bans: [],
+    startDate: undefined,
+    endDate: undefined,
   },
   ban: {
     ignoreBanBeforeFirstSeen: true,

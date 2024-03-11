@@ -23,7 +23,7 @@ import { Status } from 'csdm/common/types/status';
 import { SearchEventInput } from './filters/search-event-input';
 import { SearchMapsInput } from './filters/search-maps-input';
 import { PeriodFilter } from 'csdm/ui/components/dropdown-filter/period-filter';
-import type { DateRange } from 'csdm/common/date/date-range';
+import { formatDate, type DateRange } from 'csdm/common/date/date-range';
 import { SourcesFilter } from 'csdm/ui/components/dropdown-filter/sources-filter';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import { Trans } from '@lingui/macro';
@@ -77,8 +77,8 @@ export function Search() {
   };
 
   const onPeriodChange = (range: DateRange | undefined) => {
-    const startDate = range?.from?.toLocaleDateString('fr-CA');
-    const endDate = range?.to?.toLocaleDateString('fr-CA');
+    const startDate = formatDate(range?.from);
+    const endDate = formatDate(range?.to);
     dispatch(periodChanged({ startDate, endDate }));
   };
 

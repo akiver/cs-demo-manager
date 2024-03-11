@@ -8,22 +8,22 @@ import { usePlayersSettings } from 'csdm/ui/settings/use-players-settings';
 export function useFetchPlayers() {
   const dispatch = useDispatch();
   const client = useWebSocketClient();
-  const { updateSettings, bans } = usePlayersSettings();
+  const { updateSettings, bans, startDate, endDate } = usePlayersSettings();
 
   return async (options?: Partial<PlayersTableFilter>) => {
     try {
       const payload: PlayersTableFilter = {
         bans: options?.bans ?? bans,
+        startDate: options && 'startDate' in options ? options.startDate : startDate,
+        endDate: options && 'endDate' in options ? options.endDate : endDate,
       };
       dispatch(fetchPlayersStart({ filter: payload }));
+      await updateSettings(payload);
       const players = await client.send({
         name: RendererClientMessageName.FetchPlayersTable,
         payload,
       });
       dispatch(fetchPlayersSuccess({ players }));
-      await updateSettings({
-        bans: options?.bans ?? bans,
-      });
     } catch (error) {
       dispatch(fetchPlayersError());
     }

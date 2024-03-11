@@ -5,7 +5,7 @@ import { FilterSeparator } from 'csdm/ui/components/dropdown-filter/filter-separ
 import { usePlayerProfileSettings } from 'csdm/ui/settings/use-player-profile-settings';
 import { useFetchPlayer } from './use-fetch-player';
 import type { RankingFilter } from 'csdm/common/types/ranking-filter';
-import type { DateRange } from 'csdm/common/date/date-range';
+import { formatDate, type DateRange } from 'csdm/common/date/date-range';
 import { PeriodFilter } from 'csdm/ui/components/dropdown-filter/period-filter';
 import { SourcesFilter } from 'csdm/ui/components/dropdown-filter/sources-filter';
 import { GameModesFilter } from 'csdm/ui/components/dropdown-filter/game-modes-filter';
@@ -66,8 +66,8 @@ export function PlayerFilterDropdown() {
     });
   };
   const onPeriodChange = (range: DateRange | undefined) => {
-    const startDate = range?.from?.toLocaleDateString('fr-CA');
-    const endDate = range?.to?.toLocaleDateString('fr-CA');
+    const startDate = formatDate(range?.from);
+    const endDate = formatDate(range?.to);
     fetchPlayer({
       startDate,
       endDate,

@@ -18,5 +18,7 @@ export function usePlayersSettings() {
       );
     },
     bans: settings.players.bans,
+    startDate: settings.players.startDate,
+    endDate: settings.players.endDate,
   };
 }
