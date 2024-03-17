@@ -1,4 +1,5 @@
 import React from 'react';
+import { msg } from '@lingui/macro';
 import { Select, type SelectOption } from 'csdm/ui/components/inputs/select';
 import { SearchEvent } from 'csdm/common/types/search/search-event';
 import { Status } from 'csdm/common/types/status';
@@ -6,7 +7,6 @@ import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import { useSearchState } from '../use-search-state';
 import { searchEventChanged } from '../search-actions';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
-import { msg } from '@lingui/macro';
 
 function useSearchEventOptions(): SelectOption<SearchEvent>[] {
   const _ = useI18n();
@@ -92,6 +92,15 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
         }),
       ),
       value: SearchEvent.JumpKills,
+    },
+    {
+      label: _(
+        msg({
+          message: 'Team kills',
+          context: 'Select option label',
+        }),
+      ),
+      value: SearchEvent.TeamKills,
     },
     {
       label: _(

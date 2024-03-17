@@ -5207,6 +5207,11 @@ msgstr "空中飞人击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
+msgid "Team kills"
+msgstr ""
+
+#: src/ui/search/filters/search-event-input.tsx
+msgctxt "Select option label"
 msgid "Ninja defuse"
 msgstr "偷包（也可能是明抢"
 

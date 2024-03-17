@@ -9,6 +9,7 @@ export const SearchEvent = {
   KnifeKills: 'knife-kills',
   NinjaDefuse: 'ninja-defuse',
   JumpKills: 'jump-kills',
+  TeamKills: 'team-kills',
 } as const;
 
 export type SearchEvent = (typeof SearchEvent)[keyof typeof SearchEvent];

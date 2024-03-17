@@ -57,6 +57,7 @@ export function SearchResults() {
       return <CollateralKillsResults kills={result as CollateralKillResult[]} />;
     case SearchEvent.KnifeKills:
     case SearchEvent.JumpKills:
+    case SearchEvent.TeamKills:
       return <KillsResults kills={result as KillResult[]} />;
     case SearchEvent.NinjaDefuse:
       return <NinjaDefuseResults bombsDefused={result as NinjaDefuseResult[]} />;
