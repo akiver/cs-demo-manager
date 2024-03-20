@@ -6,7 +6,7 @@ import type { SearchFilter } from 'csdm/common/types/search/search-filter';
 
 type Filter = SearchFilter;
 
-export async function searchNinjaDefuse({ steamIds, mapNames, startDate, endDate, demoSources }: Filter) {
+export async function searchNinjaDefuse({ steamIds, mapNames, startDate, endDate, demoSources, roundTagIds }: Filter) {
   let query = db
     .selectFrom('bombs_defused')
     .selectAll('bombs_defused')
@@ -16,7 +16,16 @@ export async function searchNinjaDefuse({ steamIds, mapNames, startDate, endDate
     .orderBy('bombs_defused.match_checksum')
     .orderBy('bombs_defused.defuser_name')
     .orderBy('bombs_defused.round_number')
-    .where('bombs_defused.t_alive_count', '>', 0);
+    .where('bombs_defused.t_alive_count', '>', 0)
+    .$if(roundTagIds.length > 0, (qb) => {
+      return qb
+        .leftJoin('round_tags', function (qb) {
+          return qb
+            .onRef('matches.checksum', '=', 'round_tags.checksum')
+            .onRef('bombs_defused.round_number', '=', 'round_tags.round_number');
+        })
+        .where('round_tags.tag_id', 'in', roundTagIds);
+    });
 
   if (steamIds.length > 0) {
     query = query.where('bombs_defused.defuser_steam_id', 'in', steamIds);

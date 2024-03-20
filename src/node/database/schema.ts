@@ -44,6 +44,7 @@ import type { SmokeStartTable } from './smoke-started/smoke-start-table';
 import type { IgnoredSteamAccountTable } from './steam-accounts/ignored-steam-account-table';
 import type { SteamAccountTable } from './steam-accounts/steam-account-table';
 import type { ChecksumTagTable } from './tags/checksum-tag-table';
+import type { RoundTagTable } from './tags/round-tag-table';
 import type { TagTable } from './tags/tag-table';
 import type { TeamTable } from './teams/team-table';
 import type { TimestampTable } from './timestamps/timestamp-table';
@@ -92,6 +93,7 @@ export type Database = {
   player_economies: PlayerEconomyTable;
   player_positions: PlayerPositionTable;
   players: MatchPlayerTable;
+  round_tags: RoundTagTable;
   rounds: RoundTable;
   shots: ShotTable;
   smokes_start: SmokeStartTable;

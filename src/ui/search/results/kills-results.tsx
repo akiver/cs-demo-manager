@@ -6,6 +6,7 @@ import { VirtualListResults } from './virtual-list-results';
 import { DotSeparator } from './dot-separator';
 import { MapImage, MatchDate, RoundNumber, Row, RowLeft, RowRight } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
+import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 
 type Props = {
   kills: KillResult[];
@@ -37,6 +38,7 @@ export function KillsResults({ kills }: Props) {
                 focusSteamId={kill.killerSteamId}
                 game={kill.game}
               />
+              <SeeRoundLink checksum={kill.matchChecksum} roundNumber={kill.roundNumber} />
               <SeeMatchButton checksum={kill.matchChecksum} />
             </RowRight>
           </Row>

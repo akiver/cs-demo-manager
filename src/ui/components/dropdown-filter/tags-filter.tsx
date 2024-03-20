@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { useTags } from 'csdm/ui/tags/use-tags';
 import { Trans } from '@lingui/macro';
 import { FilterCategory } from 'csdm/ui/components/dropdown-filter/filter-category';
@@ -20,9 +20,10 @@ type Props = {
   selectedTagIds: string[];
   onChange: (tagIds: string[]) => void;
   hasActiveFilter: boolean;
+  title?: ReactNode;
 };
 
-export function TagsFilter({ selectedTagIds, onChange, hasActiveFilter }: Props) {
+export function TagsFilter({ selectedTagIds, onChange, hasActiveFilter, title }: Props) {
   const tags = useTags();
 
   const onSelectAllClick = () => {
@@ -36,7 +37,7 @@ export function TagsFilter({ selectedTagIds, onChange, hasActiveFilter }: Props)
 
   return (
     <FilterCategory
-      name={<Trans context="Tags filter label">Tags</Trans>}
+      name={title ?? <Trans context="Tags filter label">Tags</Trans>}
       right={
         <FilterSelection
           onSelectAllClick={onSelectAllClick}

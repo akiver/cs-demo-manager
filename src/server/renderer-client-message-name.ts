@@ -68,6 +68,7 @@ export const RendererClientMessageName = {
   UpdateTag: 'update-tag',
   DeleteTag: 'delete-tag',
   UpdateChecksumTags: 'update-checksums-tags',
+  UpdateRoundTags: 'update-round-tags',
   IsCsRunning: 'is-cs-running',
   GetCsgoTelenetConnectionStatus: 'get-csgo-telnet-connection-status',
   ResetTablesState: 'reset-tables-state',

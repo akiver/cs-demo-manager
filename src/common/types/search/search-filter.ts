@@ -6,4 +6,5 @@ export type SearchFilter = {
   startDate: string | undefined;
   endDate: string | undefined;
   demoSources: DemoSource[];
+  roundTagIds: string[];
 };

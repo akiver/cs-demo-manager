@@ -1,53 +1,28 @@
 import React, { useState } from 'react';
 import { Trans } from '@lingui/macro';
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from 'csdm/ui/dialogs/dialog';
-import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { useTags } from 'csdm/ui/tags/use-tags';
-import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
-import type { UpdateChecksumsTagsPayload } from 'csdm/server/handlers/renderer-process/tags/update-checksums-tags-handler';
-import { useDialog } from '../components/dialogs/use-dialog';
-import { CloseButton } from '../components/buttons/close-button';
-import { useDispatch } from '../store/use-dispatch';
-import { checksumsTagsUpdated } from '../tags/tags-actions';
-import { useShowToast } from '../components/toasts/use-show-toast';
+import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
+import { CloseButton } from 'csdm/ui/components/buttons/close-button';
+import { SaveButton } from '../components/buttons/save-button';
+import { areArraysValuesTheSame } from 'csdm/common/array/are-arrays-values-the-same';
 
 type Props = {
-  checksums: string[];
   defaultTagIds: string[];
+  onTagIdsUpdated: (tagIds: string[]) => void;
 };
 
-export function TagsDialog({ checksums, defaultTagIds }: Props) {
-  const client = useWebSocketClient();
+export function TagsDialog({ defaultTagIds, onTagIdsUpdated }: Props) {
   const tags = useTags();
-  const dispatch = useDispatch();
   const { hideDialog } = useDialog();
-  const showToast = useShowToast();
   const [selectedTags, setSelectedTags] = useState(defaultTagIds);
 
-  const updateTagIds = async (tagIds: string[]) => {
-    try {
-      const payload: UpdateChecksumsTagsPayload = {
-        checksums,
-        tagIds,
-      };
-      await client.send({
-        name: RendererClientMessageName.UpdateChecksumTags,
-        payload,
-      });
-
-      dispatch(
-        checksumsTagsUpdated({
-          checksums,
-          tagIds,
-        }),
-      );
-    } catch (error) {
-      showToast({
-        content: <Trans>An error occurred.</Trans>,
-        id: 'checksums-tags-update-error',
-        type: 'error',
-      });
+  const onSaveClick = () => {
+    const changed = !areArraysValuesTheSame(selectedTags, defaultTagIds);
+    if (changed) {
+      onTagIdsUpdated(selectedTags);
     }
+    hideDialog();
   };
 
   return (
@@ -77,7 +52,6 @@ export function TagsDialog({ checksums, defaultTagIds }: Props) {
                     ? selectedTags.filter((id) => id !== tag.id)
                     : [...selectedTags, tag.id];
                   setSelectedTags(newSelectedTagIds);
-                  updateTagIds(newSelectedTagIds);
                 }}
               >
                 <div
@@ -94,6 +68,7 @@ export function TagsDialog({ checksums, defaultTagIds }: Props) {
         </div>
       </DialogContent>
       <DialogFooter>
+        <SaveButton onClick={onSaveClick} />
         <CloseButton onClick={hideDialog} />
       </DialogFooter>
     </Dialog>

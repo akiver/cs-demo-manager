@@ -629,7 +629,7 @@ msgstr ""
 #: src/ui/components/dialogs/rename-dialog.tsx
 #: src/ui/demo/demo-name-input.tsx
 #: src/ui/demos/table/demos-table.tsx
-#: src/ui/dialogs/tags-dialog.tsx
+#: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
@@ -637,6 +637,7 @@ msgstr ""
 #: src/ui/downloads/valve/last-matches-loader.tsx
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 #: src/ui/match/match-loader.tsx
+#: src/ui/match/rounds/round/round-tags.tsx
 #: src/ui/match/video/generating-dialog.tsx
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
@@ -1261,6 +1262,11 @@ msgctxt "Input placeholder"
 msgid "Username"
 msgstr ""
 
+#: src/ui/components/links/see-round-link.tsx
+msgctxt "Link"
+msgid "See round"
+msgstr ""
+
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -1650,6 +1656,7 @@ msgid "Kills/Deaths"
 msgstr ""
 
 #: src/ui/components/panels/kills-panel.tsx
+#: src/ui/match/rounds/round/kill-feed.tsx
 msgctxt "Panel title"
 msgid "Kills"
 msgstr ""
@@ -1814,7 +1821,12 @@ msgctxt "Dropdown"
 msgid "Columns"
 msgstr ""
 
-#: src/ui/components/tags.tsx
+#: src/ui/components/tags/tags.tsx
+msgid "Edit tags"
+msgstr ""
+
+#: src/ui/components/tags/tags.tsx
+#: src/ui/match/rounds/round/round-tags.tsx
 msgid "No tags"
 msgstr ""
 
@@ -3794,6 +3806,7 @@ msgid "1 versus 1 won"
 msgstr ""
 
 #: src/ui/match/players/clutches-panel.tsx
+#: src/ui/match/rounds/round/clutches.tsx
 msgctxt "Panel title"
 msgid "Clutches"
 msgstr ""
@@ -3912,6 +3925,11 @@ msgstr ""
 msgid "{clutcherName} lost a 1v{opponentCount}"
 msgstr ""
 
+#: src/ui/match/rounds/round/end-reason.tsx
+msgctxt "Panel title"
+msgid "Round end reason"
+msgstr ""
+
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
 msgstr ""
@@ -4018,6 +4036,17 @@ msgstr ""
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Players stats"
+msgstr ""
+
+#: src/ui/match/rounds/round/round-tags.tsx
+msgctxt "Panel title"
+msgid "Tags"
+msgstr ""
+
+#: src/ui/match/rounds/round/round-tags.tsx
+#: src/ui/settings/maps/map-entry.tsx
+msgctxt "Button"
+msgid "Edit"
 msgstr ""
 
 #: src/ui/match/rounds/rounds-navigation-bar.tsx
@@ -5272,6 +5301,11 @@ msgid "Maps"
 msgstr ""
 
 #: src/ui/search/search.tsx
+msgctxt "Round tags filter label"
+msgid "Round tags"
+msgstr ""
+
+#: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Period"
 msgstr ""
@@ -5709,11 +5743,6 @@ msgstr ""
 #: src/ui/settings/maps/map-dialog/thumbnail-input.tsx
 msgctxt "Input label"
 msgid "Thumbnail"
-msgstr ""
-
-#: src/ui/settings/maps/map-entry.tsx
-msgctxt "Button"
-msgid "Edit"
 msgstr ""
 
 #: src/ui/settings/maps/maps-settings.tsx

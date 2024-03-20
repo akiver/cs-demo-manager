@@ -2,6 +2,7 @@ import React from 'react';
 import { RoundEndReason } from 'csdm/common/types/counter-strike';
 import { Panel } from 'csdm/ui/components/panel';
 import { useCurrentRound } from './use-current-round';
+import { Trans } from '@lingui/macro';
 
 const roundEndReasonText: Record<number, string> = {
   [RoundEndReason.TargetBombed]: 'Target Successfully Bombed!',
@@ -28,7 +29,7 @@ export function EndReason() {
   const endReasonText = roundEndReasonText[round.endReason] || 'Unknown reason';
 
   return (
-    <Panel header="Round end reason" fitHeight={true}>
+    <Panel header={<Trans context="Panel title">Round end reason</Trans>} fitHeight={true}>
       <p>{endReasonText}</p>
     </Panel>
   );

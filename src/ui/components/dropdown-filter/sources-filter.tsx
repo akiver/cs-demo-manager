@@ -9,7 +9,7 @@ import { FilterSelection } from 'csdm/ui/components/dropdown-filter/filter-selec
 type Props = {
   selectedSources: DemoSource[];
   onChange: (sources: DemoSource[]) => void;
-  hasActiveFilter?: boolean;
+  hasActiveFilter: boolean;
 };
 
 export function SourcesFilter({ selectedSources, onChange, hasActiveFilter }: Props) {

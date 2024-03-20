@@ -1,4 +1,4 @@
-import type { Match } from '../../../common/types/match';
+import type { Match } from 'csdm/common/types/match';
 import { db } from 'csdm/node/database/database';
 import { matchRowToMatch } from './match-row-to-match';
 import { fetchPlayers } from '../match-players/fetch-players';

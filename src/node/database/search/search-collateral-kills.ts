@@ -7,7 +7,14 @@ import type { SearchFilter } from 'csdm/common/types/search/search-filter';
 
 type Filter = SearchFilter;
 
-export async function searchCollateralKills({ steamIds, mapNames, startDate, endDate, demoSources }: Filter) {
+export async function searchCollateralKills({
+  steamIds,
+  mapNames,
+  startDate,
+  endDate,
+  demoSources,
+  roundTagIds,
+}: Filter) {
   let query = db
     .selectFrom('kills as k1')
     .selectAll('k1')
@@ -25,6 +32,15 @@ export async function searchCollateralKills({ steamIds, mapNames, startDate, end
     })
     .innerJoin('matches', 'matches.checksum', 'k1.match_checksum')
     .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .$if(roundTagIds.length > 0, (qb) => {
+      return qb
+        .leftJoin('round_tags', function (qb) {
+          return qb
+            .onRef('k1.match_checksum', '=', 'round_tags.checksum')
+            .onRef('k1.round_number', '=', 'round_tags.round_number');
+        })
+        .where('round_tags.tag_id', 'in', roundTagIds);
+    })
     .groupBy(['k1.id', 'matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
     .orderBy('matches.date', 'desc')
     .orderBy('k1.match_checksum')

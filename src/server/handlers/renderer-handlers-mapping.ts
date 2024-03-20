@@ -160,6 +160,7 @@ import {
   watchPlayerRoundsHandler,
   type WatchPlayerRoundsPayload,
 } from './renderer-process/counter-strike/watch-player-rounds-handler';
+import { updateRoundTagsHandler, type UpdateRoundTagsPayload } from './renderer-process/tags/update-round-tags-handler';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -238,6 +239,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.UpdateTag]: Handler<Tag>;
   [RendererClientMessageName.DeleteTag]: Handler<ColumnID>;
   [RendererClientMessageName.UpdateChecksumTags]: Handler<UpdateChecksumsTagsPayload>;
+  [RendererClientMessageName.UpdateRoundTags]: Handler<UpdateRoundTagsPayload>;
   [RendererClientMessageName.IsCsRunning]: Handler<void, boolean>;
   [RendererClientMessageName.GetCsgoTelenetConnectionStatus]: Handler<void, Status>;
   [RendererClientMessageName.ResetMaps]: Handler<Game, Map[]>;
@@ -322,6 +324,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.UpdateTag]: updateTagHandler,
   [RendererClientMessageName.DeleteTag]: deleteTagHandler,
   [RendererClientMessageName.UpdateChecksumTags]: updateChecksumsTagsHandler,
+  [RendererClientMessageName.UpdateRoundTags]: updateRoundTagsHandler,
   [RendererClientMessageName.IsCsRunning]: isCounterStrikeRunningHandler,
   [RendererClientMessageName.GetCsgoTelenetConnectionStatus]: getCsgoTelnetConnectionStatusHandler,
   [RendererClientMessageName.ResetMaps]: resetMapsHandler,
