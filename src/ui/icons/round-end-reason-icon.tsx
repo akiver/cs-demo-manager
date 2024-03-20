@@ -39,7 +39,7 @@ export function RoundEndReasonIcon({ round }: Props) {
 
   return (
     <div
-      className="w-[20px]"
+      className="w-20"
       style={{
         color: getTeamColor(round.winnerSide),
       }}

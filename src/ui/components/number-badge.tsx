@@ -28,7 +28,7 @@ export function NumberBadge({ number }: Props) {
 
   return (
     <div
-      className="flex items-center justify-center h-[20px] min-w-[20px] bg-blue-700 text-white px-4 rounded-full text-center transition-[300ms]"
+      className="flex items-center justify-center h-20 min-w-20 bg-blue-700 text-white px-4 rounded-full text-center transition-[300ms]"
       style={{
         transform: `translateY(${animate ? '-30px' : 0})`,
       }}

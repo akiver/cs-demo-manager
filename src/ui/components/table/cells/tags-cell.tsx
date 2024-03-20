@@ -17,7 +17,7 @@ export function TagsCell({ data }: Props) {
     .slice(0, maxVisibleTagCount);
 
   return (
-    <div className="relative h-[32px]">
+    <div className="relative h-32">
       {tags.map((tag, index) => {
         const top = index === 0 ? yOffset : index * yOffset + yOffset;
         return <TagIndicator key={tag.id} tag={tag} top={top} />;
