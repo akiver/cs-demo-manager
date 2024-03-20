@@ -12,6 +12,7 @@ import {
   searchSuccess,
   demoSourcesChanged,
   roundTagIdsChanged,
+  matchTagIdsChanged,
 } from './search-actions';
 import { useSearchState } from './use-search-state';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -33,7 +34,8 @@ import { TagsFilter } from '../components/dropdown-filter/tags-filter';
 export function Search() {
   const dispatch = useDispatch();
   const client = useWebSocketClient();
-  const { status, event, players, mapNames, startDate, endDate, demoSources, roundTagIds } = useSearchState();
+  const { status, event, players, mapNames, startDate, endDate, demoSources, roundTagIds, matchTagIds } =
+    useSearchState();
   const isLoading = status === Status.Loading;
 
   const onPlayerSelected = (player: PlayerResult) => {
@@ -60,6 +62,10 @@ export function Search() {
     dispatch(roundTagIdsChanged({ tagIds }));
   };
 
+  const onMatchTagIdsChanged = (tagIds: string[]) => {
+    dispatch(matchTagIdsChanged({ tagIds }));
+  };
+
   const onSearchClick = async () => {
     try {
       dispatch(searchStart());
@@ -74,6 +80,7 @@ export function Search() {
           endDate,
           demoSources,
           roundTagIds,
+          matchTagIds,
         },
       });
 
@@ -120,6 +127,13 @@ export function Search() {
               selectedSources={demoSources}
               onChange={onDemoSourcesChanged}
               hasActiveFilter={demoSources.length > 0}
+            />
+          </div>
+          <div>
+            <TagsFilter
+              selectedTagIds={matchTagIds}
+              onChange={onMatchTagIdsChanged}
+              hasActiveFilter={matchTagIds.length > 0}
             />
           </div>
           <div>

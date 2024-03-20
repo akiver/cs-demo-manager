@@ -14,6 +14,7 @@ import {
   searchEventChanged,
   demoSourcesChanged,
   roundTagIdsChanged,
+  matchTagIdsChanged,
 } from './search-actions';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import type { SearchResult } from 'csdm/common/types/search/search-result';
@@ -28,6 +29,7 @@ type FinderState = {
   readonly endDate: string | undefined;
   readonly demoSources: DemoSource[];
   readonly roundTagIds: string[];
+  readonly matchTagIds: string[];
 };
 
 const initialState: FinderState = {
@@ -40,6 +42,7 @@ const initialState: FinderState = {
   endDate: undefined,
   demoSources: [],
   roundTagIds: [],
+  matchTagIds: [],
 };
 
 export const searchReducer = createReducer(initialState, (builder) => {
@@ -72,6 +75,9 @@ export const searchReducer = createReducer(initialState, (builder) => {
     })
     .addCase(roundTagIdsChanged, (state, action) => {
       state.roundTagIds = action.payload.tagIds;
+    })
+    .addCase(matchTagIdsChanged, (state, action) => {
+      state.matchTagIds = action.payload.tagIds;
     })
     .addCase(periodChanged, (state, action) => {
       state.startDate = action.payload.startDate;

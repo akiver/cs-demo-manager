@@ -7,4 +7,5 @@ export type SearchFilter = {
   endDate: string | undefined;
   demoSources: DemoSource[];
   roundTagIds: string[];
+  matchTagIds: string[];
 };
