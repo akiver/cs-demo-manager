@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import type { DemoSource } from 'csdm/common/types/counter-strike';
 import { useDispatch } from 'csdm/ui/store/use-dispatch';
 import {
@@ -30,6 +30,7 @@ import { SourcesFilter } from 'csdm/ui/components/dropdown-filter/sources-filter
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import { Trans } from '@lingui/macro';
 import { TagsFilter } from '../components/dropdown-filter/tags-filter';
+import { isCtrlOrCmdEvent } from '../keyboard/keyboard';
 
 export function Search() {
   const dispatch = useDispatch();
@@ -66,7 +67,7 @@ export function Search() {
     dispatch(matchTagIdsChanged({ tagIds }));
   };
 
-  const onSearchClick = async () => {
+  const search = async () => {
     try {
       dispatch(searchStart());
       const steamIds = players.map((player) => player.steamId);
@@ -95,6 +96,20 @@ export function Search() {
     const endDate = formatDate(range?.to);
     dispatch(periodChanged({ startDate, endDate }));
   };
+
+  useEffect(() => {
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && isCtrlOrCmdEvent(e)) {
+        search();
+      }
+    };
+
+    window.addEventListener('keydown', onKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', onKeyDown);
+    };
+  });
 
   return (
     <div className="flex flex-col flex-1 overflow-y-auto">
@@ -157,7 +172,7 @@ export function Search() {
             />
           </div>
           <div>
-            <Button variant={ButtonVariant.Primary} onClick={onSearchClick} isDisabled={isLoading}>
+            <Button variant={ButtonVariant.Primary} onClick={search} isDisabled={isLoading}>
               <Trans context="Button">Search</Trans>
             </Button>
           </div>
