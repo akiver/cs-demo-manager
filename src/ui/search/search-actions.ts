@@ -11,6 +11,7 @@ export const playerRemoved = createAction<{ steamId: string }>('search/playerRem
 export const mapSelected = createAction<{ mapName: string }>('search/mapSelected');
 export const mapRemoved = createAction<{ mapName: string }>('search/mapRemoved');
 export const demoSourcesChanged = createAction<{ demoSources: DemoSource[] }>('search/sourcesChanged');
+export const roundTagIdsChanged = createAction<{ tagIds: string[] }>('search/roundTagIdsChanged');
 export const periodChanged = createAction<{ startDate: string | undefined; endDate: string | undefined }>(
   'search/periodChanged',
 );

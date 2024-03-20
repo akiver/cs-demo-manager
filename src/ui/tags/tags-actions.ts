@@ -7,3 +7,6 @@ export const tagDeleted = createAction<{ tagId: string }>('tags/deleteSuccess');
 export const checksumsTagsUpdated = createAction<{ checksums: string[]; tagIds: string[] }>(
   'tags/checksumsTagsUpdated',
 );
+export const roundTagsUpdated = createAction<{ checksum: string; roundNumber: number; tagIds: string[] }>(
+  'tags/roundTagsUpdated',
+);

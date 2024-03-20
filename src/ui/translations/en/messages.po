@@ -624,7 +624,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/components/dialogs/rename-dialog.tsx
 #: src/ui/demo/demo-name-input.tsx
 #: src/ui/demos/table/demos-table.tsx
-#: src/ui/dialogs/tags-dialog.tsx
+#: src/ui/dialogs/checksums-tags-dialog.tsx
 #: src/ui/downloads/download-demo-button.tsx
 #: src/ui/downloads/download-demo-from-share-code-button.tsx
 #: src/ui/downloads/download-demos-button.tsx
@@ -632,6 +632,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/downloads/valve/last-matches-loader.tsx
 #: src/ui/match/grenades/finder/grenades-finder-loader.tsx
 #: src/ui/match/match-loader.tsx
+#: src/ui/match/rounds/round/round-tags.tsx
 #: src/ui/match/video/generating-dialog.tsx
 #: src/ui/match/video/update-demo-location.tsx
 #: src/ui/match/viewer-2d/no-positions-found.tsx
@@ -1256,6 +1257,11 @@ msgctxt "Input placeholder"
 msgid "Username"
 msgstr "Username"
 
+#: src/ui/components/links/see-round-link.tsx
+msgctxt "Link"
+msgid "See round"
+msgstr "See round"
+
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -1645,6 +1651,7 @@ msgid "Kills/Deaths"
 msgstr "Kills/Deaths"
 
 #: src/ui/components/panels/kills-panel.tsx
+#: src/ui/match/rounds/round/kill-feed.tsx
 msgctxt "Panel title"
 msgid "Kills"
 msgstr "Kills"
@@ -1809,7 +1816,12 @@ msgctxt "Dropdown"
 msgid "Columns"
 msgstr "Columns"
 
-#: src/ui/components/tags.tsx
+#: src/ui/components/tags/tags.tsx
+msgid "Edit tags"
+msgstr "Edit tags"
+
+#: src/ui/components/tags/tags.tsx
+#: src/ui/match/rounds/round/round-tags.tsx
 msgid "No tags"
 msgstr "No tags"
 
@@ -3789,6 +3801,7 @@ msgid "1 versus 1 won"
 msgstr "1 versus 1 won"
 
 #: src/ui/match/players/clutches-panel.tsx
+#: src/ui/match/rounds/round/clutches.tsx
 msgctxt "Panel title"
 msgid "Clutches"
 msgstr "Clutches"
@@ -3907,6 +3920,11 @@ msgstr "{clutcherName} won a 1v{opponentCount}"
 msgid "{clutcherName} lost a 1v{opponentCount}"
 msgstr "{clutcherName} lost a 1v{opponentCount}"
 
+#: src/ui/match/rounds/round/end-reason.tsx
+msgctxt "Panel title"
+msgid "Round end reason"
+msgstr "Round end reason"
+
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
 msgstr "Gameplay"
@@ -4014,6 +4032,17 @@ msgstr "Strategy"
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Players stats"
 msgstr "Players stats"
+
+#: src/ui/match/rounds/round/round-tags.tsx
+msgctxt "Panel title"
+msgid "Tags"
+msgstr "Tags"
+
+#: src/ui/match/rounds/round/round-tags.tsx
+#: src/ui/settings/maps/map-entry.tsx
+msgctxt "Button"
+msgid "Edit"
+msgstr "Edit"
 
 #: src/ui/match/rounds/rounds-navigation-bar.tsx
 msgid "Overview"
@@ -5267,6 +5296,11 @@ msgid "Maps"
 msgstr "Maps"
 
 #: src/ui/search/search.tsx
+msgctxt "Round tags filter label"
+msgid "Round tags"
+msgstr "Round tags"
+
+#: src/ui/search/search.tsx
 msgctxt "Input label"
 msgid "Period"
 msgstr "Period"
@@ -5705,11 +5739,6 @@ msgstr "Thumbnail image pixels must be smaller than {maxFileWidth}x{maxFileHeigh
 msgctxt "Input label"
 msgid "Thumbnail"
 msgstr "Thumbnail"
-
-#: src/ui/settings/maps/map-entry.tsx
-msgctxt "Button"
-msgid "Edit"
-msgstr "Edit"
 
 #: src/ui/settings/maps/maps-settings.tsx
 msgctxt "Select label"

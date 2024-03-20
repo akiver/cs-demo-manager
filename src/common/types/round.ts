@@ -29,4 +29,5 @@ export type Round = {
   endReason: RoundEndReason;
   winnerTeamName: string;
   winnerSide: TeamNumber;
+  tagIds: string[];
 };

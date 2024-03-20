@@ -1,5 +1,5 @@
 import React from 'react';
-import { TagsDialog as CommonTagsDialog } from 'csdm/ui/dialogs/tags-dialog';
+import { ChecksumsTagsDialog } from 'csdm/ui/dialogs/checksums-tags-dialog';
 import type { MatchTable } from 'csdm/common/types/match-table';
 
 type Props = {
@@ -14,5 +14,5 @@ export function TagsDialog({ matches }: Props) {
     tagIds.push(...match.tagIds);
   }
 
-  return <CommonTagsDialog checksums={checksums} defaultTagIds={tagIds} />;
+  return <ChecksumsTagsDialog checksums={checksums} defaultTagIds={tagIds} />;
 }

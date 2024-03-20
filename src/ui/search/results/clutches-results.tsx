@@ -5,6 +5,7 @@ import { VirtualListResults } from './virtual-list-results';
 import { DotSeparator } from './dot-separator';
 import { MapImage, MatchDate, PlayerName, RoundNumber, Row, RowLeft, RowRight, TeamSideIcon } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
+import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 
 type Props = {
   clutches: ClutchResult[];
@@ -35,6 +36,7 @@ export function ClutchesResults({ clutches }: Props) {
                 tick={clutch.tick - 64 * 5}
                 focusSteamId={clutch.clutcherSteamId}
               />
+              <SeeRoundLink checksum={clutch.matchChecksum} roundNumber={clutch.roundNumber} />
               <SeeMatchButton checksum={clutch.matchChecksum} />
             </RowRight>
           </Row>

@@ -46,7 +46,7 @@ export function Clutches() {
   }
 
   return (
-    <Panel header="Clutches" fitHeight={true}>
+    <Panel header={<Trans context="Panel title">Clutches</Trans>} fitHeight={true}>
       {renderPanelContent(clutches)}
     </Panel>
   );

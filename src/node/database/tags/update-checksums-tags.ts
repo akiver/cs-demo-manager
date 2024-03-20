@@ -3,8 +3,12 @@ import type { ChecksumTagRow } from 'csdm/node/database/tags/checksum-tag-table'
 import { uniqueArray } from 'csdm/common/array/unique-array';
 
 export async function updateChecksumsTags(checksums: string[], tagIds: string[]) {
-  const rows: ChecksumTagRow[] = [];
   const uniqueTagIds = uniqueArray(tagIds);
+  if (uniqueTagIds.length === 0) {
+    return;
+  }
+
+  const rows: ChecksumTagRow[] = [];
   for (const checksum of checksums) {
     for (const tagId of uniqueTagIds) {
       rows.push({
@@ -14,17 +18,19 @@ export async function updateChecksumsTags(checksums: string[], tagIds: string[])
     }
   }
 
-  await db.deleteFrom('checksum_tags').where('checksum', 'in', checksums).execute();
-  if (rows.length > 0) {
-    await db
+  await db.transaction().execute(async (transaction) => {
+    await transaction
+      .deleteFrom('checksum_tags')
+      .where('checksum', 'in', checksums)
+      .where('tag_id', 'not in', uniqueTagIds)
+      .execute();
+
+    await transaction
       .insertInto('checksum_tags')
       .values(rows)
       .onConflict((oc) => {
-        return oc.columns(['checksum', 'tag_id']).doUpdateSet({
-          checksum: (b) => b.ref('excluded.checksum'),
-          tag_id: (b) => b.ref('excluded.tag_id'),
-        });
+        return oc.columns(['checksum', 'tag_id']).doNothing();
       })
       .execute();
-  }
+  });
 }

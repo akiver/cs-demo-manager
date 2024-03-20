@@ -10,6 +10,7 @@ import { PlayersInformation } from './players-information';
 import { Content } from 'csdm/ui/components/content';
 import { RoundsNavigationBar } from '../rounds-navigation-bar';
 import { PlayersEconomyChart } from './players-economy-chart';
+import { RoundTags } from './round-tags';
 
 export function Round() {
   const match = useCurrentMatch();
@@ -46,6 +47,7 @@ export function Round() {
           <KillFeed />
           <Clutches />
           <EndReason />
+          <RoundTags />
         </div>
         <div className="mt-12">
           <PlayersEconomyChart />

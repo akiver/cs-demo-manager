@@ -7,6 +7,7 @@ import { VirtualListResults } from './virtual-list-results';
 import { DotSeparator } from './dot-separator';
 import { MapImage, MatchDate, PlayerName, RoundNumber, RowLeft, RowRight, TeamSideIcon } from './result-row';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
+import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 
 type Props = {
   multiKills: MultiKillResult[];
@@ -40,6 +41,7 @@ export function MultiKillsResults({ multiKills }: Props) {
                     focusSteamId={multiKill.killerSteamId}
                     game={multiKill.game}
                   />
+                  <SeeRoundLink checksum={multiKill.matchChecksum} roundNumber={multiKill.roundNumber} />
                   <SeeMatchButton checksum={multiKill.matchChecksum} />
                 </RowRight>
               </div>

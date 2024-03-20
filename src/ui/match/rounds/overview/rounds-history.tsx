@@ -1,7 +1,28 @@
 import type { ReactNode } from 'react';
 import React from 'react';
-import { RoundEndReasonIcon } from '../../../icons/round-end-reason-icon';
-import { useCurrentMatch } from '../../use-current-match';
+import { RoundEndReasonIcon } from 'csdm/ui/icons/round-end-reason-icon';
+import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
+import { useI18n } from 'csdm/ui/hooks/use-i18n';
+import { TagIndicator } from 'csdm/ui/components/tags/tag-indicator';
+import { useTags } from 'csdm/ui/tags/use-tags';
+
+function Tags({ tagIds }: { tagIds: string[] }) {
+  const maxVisibleTagCount = 9;
+  const allTags = useTags();
+  const tags = allTags
+    .filter((tag) => {
+      return tagIds.includes(tag.id);
+    })
+    .slice(0, maxVisibleTagCount);
+
+  return (
+    <div className="flex flex-wrap gap-4 px-4">
+      {tags.map((tag) => {
+        return <TagIndicator key={tag.id} tag={tag} />;
+      })}
+    </div>
+  );
+}
 
 function Cell({ children }: { children: ReactNode }) {
   return (
@@ -23,23 +44,28 @@ function TitleCell({ title }: { title: string }) {
 
 export function RoundsHistory() {
   const { teamA, teamB, rounds } = useCurrentMatch();
+  const _ = useI18n();
 
   return (
     <div
-      className="grid grid-rows-[30px_repeat(2,_35px)] gap-px grid-flow-col max-w-fit overflow-x-auto border border-gray-300 bg-gray-300 flex-none mb-12"
+      className="grid grid-rows-[30px_repeat(3,_35px)] gap-px grid-flow-col max-w-fit overflow-x-auto border border-gray-300 bg-gray-300 flex-none mb-12"
       style={{
         gridTemplateColumns: `auto repeat(${rounds.length}, 40px)`,
       }}
     >
-      <TitleCell title="Round" />
+      <TitleCell title={_('Round')} />
       <TitleCell title={teamA.name} />
       <TitleCell title={teamB.name} />
+      <TitleCell title={_('Tags')} />
       {rounds.map((round) => {
         return (
           <React.Fragment key={`round-${round.number}`}>
             <Cell>{round.number}</Cell>
             <Cell>{round.winnerTeamName === teamA.name && <RoundEndReasonIcon round={round} />}</Cell>
             <Cell>{round.winnerTeamName === teamB.name && <RoundEndReasonIcon round={round} />}</Cell>
+            <Cell>
+              <Tags tagIds={round.tagIds} />
+            </Cell>
           </React.Fragment>
         );
       })}

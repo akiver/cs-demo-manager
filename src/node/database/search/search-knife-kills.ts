@@ -7,17 +7,26 @@ import type { SearchFilter } from 'csdm/common/types/search/search-filter';
 
 type Filter = SearchFilter;
 
-export async function searchKnifeKills({ steamIds, mapNames, startDate, endDate, demoSources }: Filter) {
+export async function searchKnifeKills({ steamIds, mapNames, startDate, endDate, demoSources, roundTagIds }: Filter) {
   let query = db
     .selectFrom('kills')
     .selectAll('kills')
     .innerJoin('matches', 'matches.checksum', 'kills.match_checksum')
     .select(['matches.map_name', 'matches.date', 'matches.demo_path', 'matches.game'])
+    .$if(roundTagIds.length > 0, (qb) => {
+      return qb
+        .leftJoin('round_tags', function (qb) {
+          return qb
+            .onRef('kills.match_checksum', '=', 'round_tags.checksum')
+            .onRef('kills.round_number', '=', 'round_tags.round_number');
+        })
+        .where('round_tags.tag_id', 'in', roundTagIds);
+    })
     .orderBy('matches.date', 'desc')
+    .where('kills.weapon_type', '=', WeaponType.Melee)
     .orderBy('kills.match_checksum')
     .orderBy('kills.killer_name')
-    .orderBy('kills.round_number')
-    .where('kills.weapon_type', '=', WeaponType.Melee);
+    .orderBy('kills.round_number');
 
   if (steamIds.length > 0) {
     query = query.where('killer_steam_id', 'in', steamIds);

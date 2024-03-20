@@ -1,19 +1,31 @@
-import type { Round } from 'csdm/common/types/round';
 import { db } from 'csdm/node/database/database';
 import { RoundNotFound } from './errors/round-not-found';
 import { roundRowToRound } from './round-row-to-round';
+import { fetchRoundTags } from '../tags/fetch-round-tags';
 
-export async function fetchRound(checksum: string, roundNumber: number) {
-  const roundRow = await db
+async function fetchRoundRow(checksum: string, roundNumber: number) {
+  const row = await db
     .selectFrom('rounds')
     .selectAll()
     .where('match_checksum', '=', checksum)
     .where('number', '=', roundNumber)
     .executeTakeFirst();
-  if (roundRow === undefined) {
+
+  if (!row) {
     throw new RoundNotFound();
   }
-  const round: Round = roundRowToRound(roundRow);
+
+  return row;
+}
+
+export async function fetchRound(checksum: string, roundNumber: number) {
+  const [roundRow, tagRows] = await Promise.all([
+    fetchRoundRow(checksum, roundNumber),
+    fetchRoundTags(checksum, roundNumber),
+  ]);
+
+  const tagIds = tagRows.map((tagRow) => tagRow.tag_id);
+  const round = roundRowToRound(roundRow, tagIds);
 
   return round;
 }

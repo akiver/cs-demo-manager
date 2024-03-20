@@ -6,6 +6,7 @@ import { VirtualListResults } from './virtual-list-results';
 import { DotSeparator } from './dot-separator';
 import { SeeMatchButton } from 'csdm/ui/components/buttons/see-match-button';
 import { MapImage, MatchDate, PlayerName, RoundNumber, Row, RowLeft, RowRight } from './result-row';
+import { SeeRoundLink } from 'csdm/ui/components/links/see-round-link';
 
 type Props = {
   bombsDefused: NinjaDefuseResult[];
@@ -45,6 +46,7 @@ export function NinjaDefuseResults({ bombsDefused }: Props) {
                 focusSteamId={bombDefused.defuserSteamId}
                 game={bombDefused.game}
               />
+              <SeeRoundLink checksum={bombDefused.matchChecksum} roundNumber={bombDefused.roundNumber} />
               <SeeMatchButton checksum={bombDefused.matchChecksum} />
             </RowRight>
           </Row>

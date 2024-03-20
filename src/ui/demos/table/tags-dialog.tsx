@@ -1,5 +1,5 @@
 import React from 'react';
-import { TagsDialog } from 'csdm/ui/dialogs/tags-dialog';
+import { ChecksumsTagsDialog } from 'csdm/ui/dialogs/checksums-tags-dialog';
 import type { Demo } from 'csdm/common/types/demo';
 
 type Props = {
@@ -14,5 +14,5 @@ export function DemosTagsDialog({ demos }: Props) {
     tagIds.push(...demo.tagIds);
   }
 
-  return <TagsDialog checksums={checksums} defaultTagIds={tagIds} />;
+  return <ChecksumsTagsDialog checksums={checksums} defaultTagIds={tagIds} />;
 }

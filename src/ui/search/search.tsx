@@ -11,6 +11,7 @@ import {
   searchStart,
   searchSuccess,
   demoSourcesChanged,
+  roundTagIdsChanged,
 } from './search-actions';
 import { useSearchState } from './use-search-state';
 import { Button, ButtonVariant } from 'csdm/ui/components/buttons/button';
@@ -27,11 +28,12 @@ import { formatDate, type DateRange } from 'csdm/common/date/date-range';
 import { SourcesFilter } from 'csdm/ui/components/dropdown-filter/sources-filter';
 import type { PlayerResult } from 'csdm/common/types/search/player-result';
 import { Trans } from '@lingui/macro';
+import { TagsFilter } from '../components/dropdown-filter/tags-filter';
 
 export function Search() {
   const dispatch = useDispatch();
   const client = useWebSocketClient();
-  const { status, event, players, mapNames, startDate, endDate, demoSources } = useSearchState();
+  const { status, event, players, mapNames, startDate, endDate, demoSources, roundTagIds } = useSearchState();
   const isLoading = status === Status.Loading;
 
   const onPlayerSelected = (player: PlayerResult) => {
@@ -54,6 +56,10 @@ export function Search() {
     dispatch(demoSourcesChanged({ demoSources }));
   };
 
+  const onRoundTagIdsChanged = (tagIds: string[]) => {
+    dispatch(roundTagIdsChanged({ tagIds }));
+  };
+
   const onSearchClick = async () => {
     try {
       dispatch(searchStart());
@@ -67,6 +73,7 @@ export function Search() {
           startDate,
           endDate,
           demoSources,
+          roundTagIds,
         },
       });
 
@@ -109,7 +116,19 @@ export function Search() {
             />
           </div>
           <div>
-            <SourcesFilter selectedSources={demoSources} onChange={onDemoSourcesChanged} />
+            <SourcesFilter
+              selectedSources={demoSources}
+              onChange={onDemoSourcesChanged}
+              hasActiveFilter={demoSources.length > 0}
+            />
+          </div>
+          <div>
+            <TagsFilter
+              selectedTagIds={roundTagIds}
+              onChange={onRoundTagIdsChanged}
+              hasActiveFilter={roundTagIds.length > 0}
+              title={<Trans context="Round tags filter label">Round tags</Trans>}
+            />
           </div>
           <div className="flex flex-col gap-y-8">
             <p>

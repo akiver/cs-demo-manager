@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro';
-import { Tags } from 'csdm/ui/components/tags';
+import { Tags } from 'csdm/ui/components/tags/tags';
 import React from 'react';
 
 type Props = {

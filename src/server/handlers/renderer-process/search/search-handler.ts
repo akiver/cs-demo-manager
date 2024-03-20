@@ -25,6 +25,7 @@ export async function searchHandler(payload: SearchPayload) {
       startDate: payload.startDate,
       endDate: payload.endDate,
       demoSources: payload.demoSources,
+      roundTagIds: payload.roundTagIds,
     };
     switch (payload.event) {
       case SearchEvent.FiveKill:

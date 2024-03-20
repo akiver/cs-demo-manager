@@ -14,7 +14,7 @@ export function KillFeed() {
   });
 
   return (
-    <Panel header="Kills" fitHeight={true}>
+    <Panel header={<Trans context="Panel title">Kills</Trans>} fitHeight={true}>
       <div className="flex flex-col gap-y-4">
         {kills.map((kill) => {
           const { tick, victimName, killerSteamId } = kill;
