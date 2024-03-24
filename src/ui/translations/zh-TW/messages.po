@@ -4049,6 +4049,12 @@ msgctxt "Button"
 msgid "Edit"
 msgstr ""
 
+#: src/ui/match/rounds/round/round.tsx
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "Round number {roundNumber} not found."
+msgstr ""
+
 #: src/ui/match/rounds/rounds-navigation-bar.tsx
 msgid "Overview"
 msgstr ""
@@ -4708,11 +4714,6 @@ msgstr ""
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading round number {roundNumber}."
-msgstr ""
-
-#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
-#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
-msgid "Round number {roundNumber} not found."
 msgstr ""
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx

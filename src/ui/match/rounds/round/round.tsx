@@ -11,6 +11,8 @@ import { Content } from 'csdm/ui/components/content';
 import { RoundsNavigationBar } from '../rounds-navigation-bar';
 import { PlayersEconomyChart } from './players-economy-chart';
 import { RoundTags } from './round-tags';
+import { Message } from 'csdm/ui/components/message';
+import { Trans } from '@lingui/macro';
 
 export function Round() {
   const match = useCurrentMatch();
@@ -38,6 +40,11 @@ export function Round() {
       window.removeEventListener('keydown', onKeyDown);
     };
   });
+
+  const round = match.rounds.find((round) => round.number === roundNumber);
+  if (!round) {
+    return <Message message={<Trans>Round number {roundNumber} not found.</Trans>} />;
+  }
 
   return (
     <>

@@ -4049,6 +4049,12 @@ msgctxt "Button"
 msgid "Edit"
 msgstr "编辑"
 
+#: src/ui/match/rounds/round/round.tsx
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
+msgid "Round number {roundNumber} not found."
+msgstr "回合{roundNumber} 未找到"
+
 #: src/ui/match/rounds/rounds-navigation-bar.tsx
 msgid "Overview"
 msgstr "概览"
@@ -4709,11 +4715,6 @@ msgstr "更低"
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "An error occurred while loading round number {roundNumber}."
 msgstr "在加载第{roundNumber} 回合时发生了错误."
-
-#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
-#: src/ui/match/viewer-2d/viewer-2d-loader.tsx
-msgid "Round number {roundNumber} not found."
-msgstr "回合{roundNumber} 未找到"
 
 #: src/ui/match/viewer-2d/viewer-2d-loader.tsx
 msgid "Loading round number {roundNumber}…"
