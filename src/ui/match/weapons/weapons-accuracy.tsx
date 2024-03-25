@@ -35,39 +35,85 @@ function buildHitGroupData(damages: Damage[], totalDamageCount: number): HitGrou
   };
 }
 
-function getFilteredDamages(filters: Filter, damages: Damage[]) {
+function getFilteredDamages(filters: Filter, damages: Damage[], weaponName?: WeaponName) {
   let filteredDamages: Damage[] = damages.filter((damage) => {
     return damage.hitgroup !== HitGroup.Generic && damage.hitgroup !== HitGroup.Gear;
   });
 
-  const roundsNumbers = filters.roundsNumber;
-  if (roundsNumbers.length > 0) {
-    filteredDamages = filteredDamages.filter((damage) => roundsNumbers.includes(damage.roundNumber));
+  if (weaponName) {
+    filteredDamages = filteredDamages.filter((damage) => damage.weaponName === weaponName);
   }
 
-  const teamNames = filters.teamNames;
+  const { roundsNumber, teamNames, steamIds, sides, weaponTypes } = filters;
+  if (roundsNumber.length > 0) {
+    filteredDamages = filteredDamages.filter((damage) => roundsNumber.includes(damage.roundNumber));
+  }
+
   if (teamNames.length > 0) {
     filteredDamages = filteredDamages.filter((damage) => teamNames.includes(damage.attackerTeamName));
   }
 
-  const sides = filters.sides;
   if (sides.length > 0) {
     filteredDamages = filteredDamages.filter((damage) => sides.includes(damage.attackerSide));
   }
 
-  const steamIds = filters.steamIds;
   if (steamIds.length > 0) {
     filteredDamages = filteredDamages.filter((damage) => steamIds.includes(damage.attackerSteamId));
   }
 
-  const weaponTypes = filters.weaponTypes;
   if (weaponTypes.length > 0) {
-    filteredDamages = filteredDamages.filter((damage) => {
-      return weaponTypes.includes(damage.weaponType);
-    });
+    filteredDamages = filteredDamages.filter((damage) => weaponTypes.includes(damage.weaponType));
   }
 
   return filteredDamages;
+}
+
+function getWeaponKills(weaponName: WeaponName, filters: Filter, match: Match) {
+  let filteredKills = match.kills.filter((kill) => kill.weaponName === weaponName);
+  const { roundsNumber, teamNames, steamIds, sides, weaponTypes } = filters;
+  if (roundsNumber.length > 0) {
+    filteredKills = filteredKills.filter((kill) => roundsNumber.includes(kill.roundNumber));
+  }
+
+  if (teamNames.length > 0) {
+    filteredKills = filteredKills.filter((kill) => teamNames.includes(kill.killerTeamName));
+  }
+
+  if (sides.length > 0) {
+    filteredKills = filteredKills.filter((kill) => sides.includes(kill.killerSide));
+  }
+
+  if (steamIds.length > 0) {
+    filteredKills = filteredKills.filter((kill) => steamIds.includes(kill.killerSteamId));
+  }
+
+  if (weaponTypes.length > 0) {
+    filteredKills = filteredKills.filter((kill) => weaponTypes.includes(kill.weaponType));
+  }
+
+  return filteredKills;
+}
+
+function getWeaponShots(weaponName: WeaponName, filters: Filter, match: Match) {
+  let filteredShots = match.shots.filter((shot) => shot.weaponName === weaponName);
+  const { roundsNumber, teamNames, steamIds, sides } = filters;
+  if (roundsNumber.length > 0) {
+    filteredShots = filteredShots.filter((shot) => roundsNumber.includes(shot.roundNumber));
+  }
+
+  if (teamNames.length > 0) {
+    filteredShots = filteredShots.filter((shot) => teamNames.includes(shot.playerTeamName));
+  }
+
+  if (sides.length > 0) {
+    filteredShots = filteredShots.filter((shot) => sides.includes(shot.playerSide));
+  }
+
+  if (steamIds.length > 0) {
+    filteredShots = filteredShots.filter((shot) => steamIds.includes(shot.playerSteamId));
+  }
+
+  return filteredShots;
 }
 
 function getBodyDataFromFilters(filters: Filter, damages: Damage[]) {
@@ -95,23 +141,26 @@ function getBodyDataFromFilters(filters: Filter, damages: Damage[]) {
 }
 
 function buildWeaponsStats(filters: Filter, match: Match) {
-  const filteredDamages = getFilteredDamages(filters, match.damages);
   const weaponsStats: Record<string, WeaponStat> = {};
-  for (const damage of filteredDamages) {
-    const weaponStat = weaponsStats[damage.weaponName];
-    if (weaponStat !== undefined) {
+  for (const { weaponName, weaponType } of match.damages) {
+    if (weaponsStats[weaponName]) {
       continue;
     }
 
-    const killCount = match.kills.filter((kill) => kill.weaponName === damage.weaponName).length;
-    const shotCount = match.shots.filter((shot) => shot.weaponName === damage.weaponName).length;
-    const damages = match.damages.filter((dmg) => dmg.weaponName === damage.weaponName);
+    const damages = getFilteredDamages(filters, match.damages, weaponName);
+    const damageCount = damages.reduce((previousDamage, damage) => previousDamage + damage.healthDamage, 0);
+    if (damageCount === 0) {
+      continue;
+    }
+
+    const killCount = getWeaponKills(weaponName, filters, match).length;
+    const shotCount = getWeaponShots(weaponName, filters, match).length;
     const hitCount = damages.length;
     const headshotCount = damages.filter((damage) => damage.hitgroup === HitGroup.Head).length;
-    const damageCount = damages.reduce((previousDamage, damage) => previousDamage + damage.healthDamage, 0);
-    weaponsStats[damage.weaponName] = {
-      name: damage.weaponName,
-      type: damage.weaponType,
+
+    weaponsStats[weaponName] = {
+      name: weaponName,
+      type: weaponType,
       killCount,
       hitCount,
       shotCount,
