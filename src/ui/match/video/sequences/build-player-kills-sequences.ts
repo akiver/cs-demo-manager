@@ -2,6 +2,7 @@ import type { DeathNoticesPlayerOptions } from 'csdm/common/types/death-notice-p
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Match } from 'csdm/common/types/match';
 import type { Player } from 'csdm/common/types/player';
+import type { WeaponName } from 'csdm/common/types/counter-strike';
 
 function buildPlayersDeathNotices(players: Player[]) {
   const deathNotices: DeathNoticesPlayerOptions[] = players.map((player) => {
@@ -16,8 +17,14 @@ function buildPlayersDeathNotices(players: Player[]) {
   return deathNotices;
 }
 
-export function buildPlayerKillsSequences(match: Match, steamId: string) {
-  const playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
+export function buildPlayerKillsSequences(match: Match, steamId: string, weapons?: WeaponName[]) {
+  let playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
+  if (weapons) {
+    playerKills = playerKills.filter((kill) => {
+      return weapons.includes(kill.weaponName);
+    });
+  }
+
   if (playerKills.length === 0) {
     return [];
   }

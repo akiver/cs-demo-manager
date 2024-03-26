@@ -1133,6 +1133,11 @@ msgctxt "Tags filter label"
 msgid "Tags"
 msgstr "Tags"
 
+#: src/ui/components/dropdown-filter/weapons-filter.tsx
+msgctxt "Weapons filter label"
+msgid "Weapons"
+msgstr ""
+
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
 msgid "Comment"
@@ -4158,8 +4163,17 @@ msgid "Generate"
 msgstr "Générer"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
-msgid "Player's kill sequences"
-msgstr "Séquences victime du joueur"
+msgid "This player has no kills."
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
+msgstr "Si 2 kills sont séparés de moins de 10 secondes ou si 2 séquences sont séparées de moins de 2 secondes, une seule séquence sera générée."
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgctxt "Dialog title"
+msgid "Generate player's sequences"
+msgstr ""
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
@@ -4167,13 +4181,24 @@ msgid "Player"
 msgstr "Joueur"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
-msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
-msgstr "Si 2 kills sont séparés de moins de 10 secondes ou si 2 séquences sont séparées de moins de 2 secondes, une seule séquence sera générée."
+msgctxt "Select label"
+msgid "Event"
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgctxt "Select option"
+msgid "Kill"
+msgstr ""
+
+#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+msgctxt "Select option"
+msgid "Round"
+msgstr ""
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Button"
-msgid "Generate player's kill sequences"
-msgstr "Générer les séquences des kills du joueur"
+msgid "Generate player's sequences"
+msgstr ""
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Generation in progress…"
@@ -4640,7 +4665,7 @@ msgstr "Une erreur est survenue. (Code {errorCode})"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "The video generator is currently available only on Windows for Counter-Strike 2 demos."
-msgstr "Le générateur de vidéos est actuellement disponible uniquement sur Windows pour les démos Counter-Strike 2."
+msgstr ""
 
 #: src/ui/match/video/video-loader.tsx
 msgid "Loading video generator…"

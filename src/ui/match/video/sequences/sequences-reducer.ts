@@ -6,10 +6,13 @@ import {
   deleteSequences,
   generatePlayerKillsSequences,
   generatePlayerRoundsSequences,
+  generatePlayerSequences,
   updateSequence,
 } from './sequences-actions';
 import { buildPlayerKillsSequences } from './build-player-kills-sequences';
 import { buildPlayerRoundsSequences } from './build-player-rounds-sequences';
+import { PlayerSequenceEvent } from './player-sequence-event';
+import { assertNever } from 'csdm/common/assert-never';
 
 export type SequencesByDemoFilePath = { [demoFilePath: string]: Sequence[] | undefined };
 
@@ -52,6 +55,21 @@ export const sequencesReducer = createReducer(initialState, (builder) => {
       const { match, steamId } = action.payload;
       const sequences = buildPlayerKillsSequences(match, steamId);
       state[match.demoFilePath] = sequences;
+    })
+    .addCase(generatePlayerSequences, (state, action) => {
+      const { match, steamId, event, weapons } = action.payload;
+      switch (event) {
+        case PlayerSequenceEvent.Rounds: {
+          state[match.demoFilePath] = buildPlayerRoundsSequences(match, steamId);
+          break;
+        }
+        case PlayerSequenceEvent.Kills: {
+          state[match.demoFilePath] = buildPlayerKillsSequences(match, steamId, weapons);
+          break;
+        }
+        default:
+          return assertNever(event, `Unknown player sequence event: ${event}`);
+      }
     })
     .addCase(generatePlayerRoundsSequences, (state, action) => {
       const { match, steamId } = action.payload;
