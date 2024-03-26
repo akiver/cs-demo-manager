@@ -12,4 +12,4 @@ Companion application for your Counter-Strike demos.
 
 ## License
 
-[MIT](https://github.com/akiver/cs-demo-manager/blob/main/LICENSE.md)
+[MIT](https://github.com/akiver/cs-demo-manager/blob/main/LICENSE)
