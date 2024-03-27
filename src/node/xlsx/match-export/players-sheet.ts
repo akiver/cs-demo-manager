@@ -44,6 +44,11 @@ export class PlayersSheet extends SingleMatchExportSheet<Player> {
         cellFormatter: (row) => row.score,
       },
       {
+        name: 'mvp',
+
+        cellFormatter: (row) => row.mvpCount,
+      },
+      {
         name: 'headshot_count',
         cellFormatter: (row) => row.headshotCount,
       },

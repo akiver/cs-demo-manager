@@ -40,6 +40,8 @@ type PlayerQueryResult = {
   bombPlantedCount: number;
   bombDefusedCount: number;
   hostageRescuedCount: number;
+  score: number;
+  mvpCount: number;
 };
 
 export type PlayerRow = PlayerQueryResult & {
@@ -71,6 +73,8 @@ export async function fetchPlayersRows(checksums: string[]) {
     .select(sum<number>('bomb_planted_count').as('bombPlantedCount'))
     .select(sum<number>('bomb_defused_count').as('bombDefusedCount'))
     .select(sum<number>('hostage_rescued_count').as('hostageRescuedCount'))
+    .select(sum<number>('mvp_count').as('mvpCount'))
+    .select(sum<number>('score').as('score'))
     .select(avg<number>('headshot_percentage').as('headshotPercentage'))
     .select(avg<number>('kast').as('kast'))
     .select(avg<number>('hltv_rating').as('hltvRating'))

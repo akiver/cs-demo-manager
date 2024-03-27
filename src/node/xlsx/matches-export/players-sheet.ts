@@ -45,6 +45,14 @@ export class PlayersSheet extends MultipleMatchExportSheet<PlayerRow> {
         cellFormatter: (row) => roundNumber(row.killDeathRatio, 1),
       },
       {
+        name: 'score',
+        cellFormatter: (row) => row.score,
+      },
+      {
+        name: 'mvp',
+        cellFormatter: (row) => row.mvpCount,
+      },
+      {
         name: 'headshot_count',
         cellFormatter: (row) => row.headshotCount,
       },
