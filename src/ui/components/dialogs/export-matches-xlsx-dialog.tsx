@@ -203,8 +203,8 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
       };
     };
 
-    if (outputType === OutputType.SingleFile || isSingleMatchSelected) {
-      const name = isSingleMatchSelected ? `${matches[0].name}.xlsx` : `${matches.length}-matches.xlsx`;
+    if (outputType === OutputType.SingleFile && !isSingleMatchSelected) {
+      const name = `${matches.length}-matches.xlsx`;
       const options: SaveDialogOptions = {
         buttonLabel: _(
           msg({
