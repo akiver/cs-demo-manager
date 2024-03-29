@@ -1,3 +1,4 @@
+import { ClutchesSheet } from './matches-export/clutches-sheet';
 import { KillsSheet } from './matches-export/kills-sheet';
 import { MatchesSheet } from './matches-export/matches-sheet';
 import { PlayersSheet } from './matches-export/players-sheet';
@@ -15,6 +16,7 @@ type MatchesXlsxExportOptions = {
     [SheetName.Rounds]: boolean;
     [SheetName.Kills]: boolean;
     [SheetName.Weapons]: boolean;
+    [SheetName.Clutches]: boolean;
   };
   onSheetGenerationStart?: (sheetName: SheetName) => void;
 };
@@ -59,6 +61,12 @@ export class MatchesXlsxExport {
       if (this.options.sheets[SheetName.Weapons]) {
         this.options.onSheetGenerationStart?.(SheetName.Weapons);
         const sheet = new WeaponsSheet(this.workbook, this.options.checksums);
+        await sheet.generate();
+      }
+
+      if (this.options.sheets[SheetName.Clutches]) {
+        this.options.onSheetGenerationStart?.(SheetName.Clutches);
+        const sheet = new ClutchesSheet(this.workbook, this.options.checksums);
         await sheet.generate();
       }
 

@@ -68,6 +68,10 @@ const translationPerSheetName: Record<SheetName, MessageDescriptor> = {
     context: 'Excel sheet',
     message: 'Weapons',
   }),
+  [SheetName.Clutches]: msg({
+    context: 'Excel sheet',
+    message: 'Clutches',
+  }),
   [SheetName.PlayersFlashbangMatrix]: msg({
     context: 'Excel sheet',
     message: 'Players Flashbang matrix',
@@ -210,6 +214,7 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
         [SheetName.Kills]: formData.has('sheets.kills'),
         [SheetName.Rounds]: formData.has('sheets.rounds'),
         [SheetName.Weapons]: formData.has('sheets.weapons'),
+        [SheetName.Clutches]: formData.has('sheets.clutches'),
         [SheetName.PlayersFlashbangMatrix]: formData.has('sheets.playersFlashbangMatrix'),
       };
     };
@@ -339,6 +344,12 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
                   label={_(translationPerSheetName[SheetName.Weapons])}
                   id="weapons"
                   name="sheets.weapons"
+                  defaultChecked={true}
+                />
+                <Checkbox
+                  label={_(translationPerSheetName[SheetName.Clutches])}
+                  id="clutches"
+                  name="sheets.clutches"
                   defaultChecked={true}
                 />
                 {(isSingleMatchSelected || outputType === OutputType.MultipleFiles) && (

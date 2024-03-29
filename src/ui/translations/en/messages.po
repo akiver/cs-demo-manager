@@ -922,6 +922,11 @@ msgstr "Weapons"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
+msgid "Clutches"
+msgstr "Clutches"
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
 msgid "Players Flashbang matrix"
 msgstr "Players Flashbang matrix"
 

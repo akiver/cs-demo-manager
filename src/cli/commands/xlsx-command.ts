@@ -14,6 +14,7 @@ export class XlsxCommand extends ExportCommand {
     [SheetName.Rounds]: true,
     [SheetName.Kills]: true,
     [SheetName.Weapons]: true,
+    [SheetName.Clutches]: true,
     [SheetName.PlayersFlashbangMatrix]: true,
   };
   private singleFlag = '--single';

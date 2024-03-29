@@ -4,6 +4,7 @@ export const SheetName = {
   Rounds: 'rounds',
   Kills: 'kills',
   Weapons: 'weapons',
+  Clutches: 'clutches',
   PlayersFlashbangMatrix: 'players-flashbang-matrix',
 } as const;
 

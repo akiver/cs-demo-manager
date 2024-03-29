@@ -7,6 +7,7 @@ import { SheetName } from './sheet-name';
 import { Workbook } from './workbook';
 import { WeaponsSheet } from './match-export/weapons-sheet';
 import { PlayersFlashbangMatrixSheet } from './match-export/players-flashbang-matrix-sheet';
+import { CLutchesSheet } from './match-export/clutches-sheet';
 
 type MatchXlsxExportOptions = {
   checksum: string;
@@ -17,6 +18,7 @@ type MatchXlsxExportOptions = {
     [SheetName.Rounds]: boolean;
     [SheetName.Kills]: boolean;
     [SheetName.Weapons]: boolean;
+    [SheetName.Clutches]: boolean;
     [SheetName.PlayersFlashbangMatrix]: boolean;
   };
 };
@@ -58,6 +60,10 @@ export class MatchXlsxExport {
       if (this.options.sheets[SheetName.PlayersFlashbangMatrix]) {
         const sheet = new PlayersFlashbangMatrixSheet(this.workbook, match);
         await sheet.generate();
+      }
+      if (this.options.sheets[SheetName.Clutches]) {
+        const sheet = new CLutchesSheet(this.workbook, match);
+        sheet.generate();
       }
 
       await this.workbook.write(this.options.outputFilePath);

@@ -10,6 +10,7 @@ type SheetsVisibility = {
   [SheetName.Rounds]: boolean;
   [SheetName.Kills]: boolean;
   [SheetName.Weapons]: boolean;
+  [SheetName.Clutches]: boolean;
   [SheetName.PlayersFlashbangMatrix]: boolean;
 };
 
