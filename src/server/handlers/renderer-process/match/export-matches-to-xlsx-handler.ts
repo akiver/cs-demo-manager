@@ -9,6 +9,8 @@ type SheetsVisibility = {
   [SheetName.Players]: boolean;
   [SheetName.Rounds]: boolean;
   [SheetName.Kills]: boolean;
+  [SheetName.Weapons]: boolean;
+  [SheetName.PlayersFlashbangMatrix]: boolean;
 };
 
 export type ExportMatchesToXlsxPayload =

@@ -5,6 +5,8 @@ import { PlayersSheet } from './match-export/players-sheet';
 import { RoundsSheet } from './match-export/rounds-sheet';
 import { SheetName } from './sheet-name';
 import { Workbook } from './workbook';
+import { WeaponsSheet } from './match-export/weapons-sheet';
+import { PlayersFlashbangMatrixSheet } from './match-export/players-flashbang-matrix-sheet';
 
 type MatchXlsxExportOptions = {
   checksum: string;
@@ -14,6 +16,8 @@ type MatchXlsxExportOptions = {
     [SheetName.Players]: boolean;
     [SheetName.Rounds]: boolean;
     [SheetName.Kills]: boolean;
+    [SheetName.Weapons]: boolean;
+    [SheetName.PlayersFlashbangMatrix]: boolean;
   };
 };
 
@@ -32,20 +36,28 @@ export class MatchXlsxExport {
 
       const [match] = await fetchMatchesByChecksums([this.options.checksum]);
       if (this.options.sheets[SheetName.General]) {
-        const generalSheet = new GeneralSheet(this.workbook, match);
-        generalSheet.generate();
+        const sheet = new GeneralSheet(this.workbook, match);
+        sheet.generate();
       }
       if (this.options.sheets[SheetName.Rounds]) {
-        const roundsSheet = new RoundsSheet(this.workbook, match);
-        roundsSheet.generate();
+        const sheet = new RoundsSheet(this.workbook, match);
+        sheet.generate();
       }
       if (this.options.sheets[SheetName.Players]) {
-        const playersSheet = new PlayersSheet(this.workbook, match);
-        playersSheet.generate();
+        const sheet = new PlayersSheet(this.workbook, match);
+        sheet.generate();
       }
       if (this.options.sheets[SheetName.Kills]) {
-        const killsSheet = new KillsSheet(this.workbook, match);
-        killsSheet.generate();
+        const sheet = new KillsSheet(this.workbook, match);
+        sheet.generate();
+      }
+      if (this.options.sheets[SheetName.Weapons]) {
+        const sheet = new WeaponsSheet(this.workbook, match);
+        await sheet.generate();
+      }
+      if (this.options.sheets[SheetName.PlayersFlashbangMatrix]) {
+        const sheet = new PlayersFlashbangMatrixSheet(this.workbook, match);
+        await sheet.generate();
       }
 
       await this.workbook.write(this.options.outputFilePath);

@@ -2,6 +2,7 @@ import { KillsSheet } from './matches-export/kills-sheet';
 import { MatchesSheet } from './matches-export/matches-sheet';
 import { PlayersSheet } from './matches-export/players-sheet';
 import { RoundsSheet } from './matches-export/rounds-sheet';
+import { WeaponsSheet } from './matches-export/weapons-sheet';
 import { SheetName } from './sheet-name';
 import { Workbook } from './workbook';
 
@@ -13,6 +14,7 @@ type MatchesXlsxExportOptions = {
     [SheetName.Players]: boolean;
     [SheetName.Rounds]: boolean;
     [SheetName.Kills]: boolean;
+    [SheetName.Weapons]: boolean;
   };
   onSheetGenerationStart?: (sheetName: SheetName) => void;
 };
@@ -29,28 +31,35 @@ export class MatchesXlsxExport {
   public async generate() {
     try {
       await this.workbook.initialize();
+      // TODO refactor Use a loop
       if (this.options.sheets[SheetName.General]) {
         this.options.onSheetGenerationStart?.(SheetName.General);
-        const matchesSheet = new MatchesSheet(this.workbook, this.options.checksums);
-        await matchesSheet.generate();
+        const sheet = new MatchesSheet(this.workbook, this.options.checksums);
+        await sheet.generate();
       }
 
       if (this.options.sheets[SheetName.Rounds]) {
         this.options.onSheetGenerationStart?.(SheetName.Rounds);
-        const roundsSheet = new RoundsSheet(this.workbook, this.options.checksums);
-        await roundsSheet.generate();
+        const sheet = new RoundsSheet(this.workbook, this.options.checksums);
+        await sheet.generate();
       }
 
       if (this.options.sheets[SheetName.Players]) {
         this.options.onSheetGenerationStart?.(SheetName.Players);
-        const playersSheet = new PlayersSheet(this.workbook, this.options.checksums);
-        await playersSheet.generate();
+        const sheet = new PlayersSheet(this.workbook, this.options.checksums);
+        await sheet.generate();
       }
 
       if (this.options.sheets[SheetName.Kills]) {
         this.options.onSheetGenerationStart?.(SheetName.Kills);
-        const killsSheet = new KillsSheet(this.workbook, this.options.checksums);
-        await killsSheet.generate();
+        const sheet = new KillsSheet(this.workbook, this.options.checksums);
+        await sheet.generate();
+      }
+
+      if (this.options.sheets[SheetName.Weapons]) {
+        this.options.onSheetGenerationStart?.(SheetName.Weapons);
+        const sheet = new WeaponsSheet(this.workbook, this.options.checksums);
+        await sheet.generate();
       }
 
       await this.workbook.write(this.options.outputFilePath);

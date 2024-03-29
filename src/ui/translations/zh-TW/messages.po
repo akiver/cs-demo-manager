@@ -336,6 +336,7 @@ msgstr ""
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 #: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
+#: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/search/filters/search-maps-input.tsx
@@ -917,6 +918,16 @@ msgstr ""
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Kills"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Weapons"
+msgstr ""
+
+#: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
+msgctxt "Excel sheet"
+msgid "Players Flashbang matrix"
 msgstr ""
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
@@ -3322,11 +3333,11 @@ msgid "Killed"
 msgstr ""
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-msgid "Players flashbang matrix"
+msgid "<0>{0}</0> flashed <1>{1}</1> around <2>{2}s</2>"
 msgstr ""
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
-msgid "<0>{flasherName}</0> flashed <1>{flashedName}</1> around <2>{roundedDuration}s</2>"
+msgid "Players flashbang matrix"
 msgstr ""
 
 #: src/ui/match/heatmap/input-blur.tsx

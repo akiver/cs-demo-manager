@@ -161,6 +161,8 @@ import {
   type WatchPlayerRoundsPayload,
 } from './renderer-process/counter-strike/watch-player-rounds-handler';
 import { updateRoundTagsHandler, type UpdateRoundTagsPayload } from './renderer-process/tags/update-round-tags-handler';
+import { fetchMatchFlashbangMatrixRowsHandler } from './renderer-process/match/fetch-match-flashbang-matrix-rows-handler';
+import type { FlashbangMatrixRow } from 'csdm/common/types/flashbang-matrix-row';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -217,6 +219,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.EnableFfmpegCustomLocation]: Handler<string, FfmpegVersionChangedPayload>;
   [RendererClientMessageName.DisableFfmpegCustomLocation]: Handler<boolean, FfmpegVersionChangedPayload>;
   [RendererClientMessageName.CancelVideosGeneration]: Handler;
+  [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: Handler<string, FlashbangMatrixRow[]>;
   [RendererClientMessageName.FetchMatchGrenadesThrow]: Handler<string, GrenadeThrow[]>;
   [RendererClientMessageName.WatchDemo]: Handler<WatchDemoPayload, WatchDemoErrorPayload | undefined>;
   [RendererClientMessageName.WatchPlayerRounds]: Handler<WatchPlayerRoundsPayload, WatchDemoErrorPayload | undefined>;
@@ -311,6 +314,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.EnableFfmpegCustomLocation]: enableFfmpegCustomLocationHandler,
   [RendererClientMessageName.DisableFfmpegCustomLocation]: disableFfmpegCustomLocationHandler,
   [RendererClientMessageName.CancelVideosGeneration]: cancelVideosGenerationHandler,
+  [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: fetchMatchFlashbangMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchGrenadesThrow]: fetchMatchGrenadesThrowHandler,
   [RendererClientMessageName.WatchDemo]: watchDemoHandler,
   [RendererClientMessageName.WatchPlayerRounds]: watchPlayerRoundsHandler,

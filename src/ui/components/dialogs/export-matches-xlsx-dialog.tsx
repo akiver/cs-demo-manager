@@ -64,6 +64,14 @@ const translationPerSheetName: Record<SheetName, MessageDescriptor> = {
     context: 'Excel sheet',
     message: 'Kills',
   }),
+  [SheetName.Weapons]: msg({
+    context: 'Excel sheet',
+    message: 'Weapons',
+  }),
+  [SheetName.PlayersFlashbangMatrix]: msg({
+    context: 'Excel sheet',
+    message: 'Players Flashbang matrix',
+  }),
 };
 
 type ExportingContentProps = {
@@ -167,6 +175,7 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
   const _ = useI18n();
   const client = useWebSocketClient();
   const { hideDialog } = useDialog();
+  const [outputType, setOutputType] = useState<OutputType>(OutputType.SingleFile);
   const [atLeastOneSheetSelected, setAtLeastOneSheetSelected] = useState(true);
   const isExportButtonDisabled = !atLeastOneSheetSelected;
   const isSingleMatchSelected = matches.length === 1;
@@ -200,6 +209,8 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
         [SheetName.Players]: formData.has('sheets.players'),
         [SheetName.Kills]: formData.has('sheets.kills'),
         [SheetName.Rounds]: formData.has('sheets.rounds'),
+        [SheetName.Weapons]: formData.has('sheets.weapons'),
+        [SheetName.PlayersFlashbangMatrix]: formData.has('sheets.playersFlashbangMatrix'),
       };
     };
 
@@ -274,12 +285,14 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
             value={OutputType.SingleFile}
             label={<Trans context="Radio label">Single file</Trans>}
             defaultChecked={true}
+            onChange={() => setOutputType(OutputType.SingleFile)}
           />
           <RadioInput
             id="multiple"
             name="output-type"
             value={OutputType.MultipleFiles}
             label={<Trans context="Radio label">Multiple files</Trans>}
+            onChange={() => setOutputType(OutputType.MultipleFiles)}
           />
         </div>
       </div>
@@ -322,6 +335,20 @@ function ExportOptionsDialog({ matches, onExportStart }: ExportDialogContentProp
                   name="sheets.kills"
                   defaultChecked={true}
                 />
+                <Checkbox
+                  label={_(translationPerSheetName[SheetName.Weapons])}
+                  id="weapons"
+                  name="sheets.weapons"
+                  defaultChecked={true}
+                />
+                {(isSingleMatchSelected || outputType === OutputType.MultipleFiles) && (
+                  <Checkbox
+                    label={_(translationPerSheetName[SheetName.PlayersFlashbangMatrix])}
+                    id="players-flashbang-matrix"
+                    name="sheets.playersFlashbangMatrix"
+                    defaultChecked={true}
+                  />
+                )}
               </div>
             </div>
           </div>

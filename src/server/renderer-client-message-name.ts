@@ -8,6 +8,7 @@ export const RendererClientMessageName = {
   FetchMatchesTable: 'fetch-matches-table',
   FetchMatchByChecksum: 'fetch-match-by-checksum',
   FetchMatchGrenadesThrow: 'fetch-match-grenades-throw',
+  FetchMatchFlashbangMatrixRows: 'fetch-match-flashbang-matrix-rows',
   FetchHeatmapPoints: 'fetch-heatmap-points',
   Fetch2DViewerData: 'fetch-2d-viewer-data',
   UpdateComment: 'update-match-comment',

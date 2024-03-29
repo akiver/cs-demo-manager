@@ -12,7 +12,9 @@ export abstract class Sheet<RowType> {
     this.workbook = workbook;
     this.workbook.addSheet(this.getName());
     const columnNames = this.getColumns().map((column) => column.name);
-    this.workbook.addRowToSheet(this.getName(), columnNames);
+    if (columnNames.length > 0) {
+      this.workbook.addRowToSheet(this.getName(), columnNames);
+    }
   }
 
   protected writeRow(row: RowType) {
@@ -21,6 +23,10 @@ export abstract class Sheet<RowType> {
       cells.push(column.cellFormatter(row));
     }
 
+    this.workbook.addRowToSheet(this.getName(), cells);
+  }
+
+  protected writeCells(cells: CellValue[]) {
     this.workbook.addRowToSheet(this.getName(), cells);
   }
 }
