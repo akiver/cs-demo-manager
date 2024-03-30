@@ -10,12 +10,16 @@ import { useSequenceForm } from './use-sequence-form';
 export function FocusCameraPlayerSelect() {
   const { sequence, updateSequence } = useSequenceForm();
   const match = useCurrentMatch();
-  const options: SelectOption[] = match.players.map((player) => {
-    return {
-      value: player.steamId,
-      label: player.name,
-    };
-  });
+  const options: SelectOption[] = match.players
+    .toSorted((playerA, playerB) => {
+      return playerA.name.localeCompare(playerB.name);
+    })
+    .map((player) => {
+      return {
+        value: player.steamId,
+        label: player.name,
+      };
+    });
   const lastSelectedSteamId = useRef<string | undefined>(sequence.playerFocusSteamId);
   const isChecked = sequence.playerFocusSteamId !== undefined;
   const isDisabled = options.length === 0 || sequence.playerFocusSteamId === undefined;
