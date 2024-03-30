@@ -147,12 +147,11 @@ export async function generateVideos(options: Options) {
   const { signal } = options;
   throwIfAborted(signal);
 
-  const cleanupFiles = async (deleteOutputFile = true) => {
-    const promises: Promise<void>[] = [
-      deleteVdmFile(demoPath),
-      deleteJsonActionsFile(demoPath),
-      deleteSequencesRawFiles(rawFilesFolderPath, options.sequences),
-    ];
+  const cleanupFiles = async (deleteOutputFile = true, deleteRawFiles = true) => {
+    const promises: Promise<void>[] = [deleteVdmFile(demoPath), deleteJsonActionsFile(demoPath)];
+    if (deleteRawFiles) {
+      promises.push(deleteSequencesRawFiles(rawFilesFolderPath, options.sequences));
+    }
     if (deleteOutputFile) {
       promises.push(deleteSequencesOutputFile(outputFolderPath, options.sequences));
     }
@@ -272,7 +271,7 @@ export async function generateVideos(options: Options) {
     }
 
     await buildVideos(options);
-    await cleanupFiles(false);
+    await cleanupFiles(false, options.deleteRawFilesAfterEncoding);
   } catch (error) {
     if (signal.aborted) {
       throw abortError;
