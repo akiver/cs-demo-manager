@@ -6,12 +6,14 @@ import { isWindows } from 'csdm/node/os/is-windows';
 import { getSequenceName } from 'csdm/node/video/sequences/get-sequence-name';
 import { getSequenceRawFiles } from 'csdm/node/video/sequences/get-sequence-raw-files';
 import { executeFfmpeg } from 'csdm/node/video/ffmpeg/execute-ffmpeg';
+import type { VideoContainer } from 'csdm/common/types/video-container';
 
 type GenerateVideoWithFFmpegSettings = {
   game: Game;
   rawFilesFolderPath: string;
   outputFolderPath: string;
   framerate: number;
+  videoContainer: VideoContainer;
   videoCodec: string;
   audioCodec: string;
   constantRateFactor: number;
@@ -30,6 +32,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
     framerate,
     audioBitrate,
     constantRateFactor,
+    videoContainer,
     videoCodec,
     audioCodec,
     inputParameters,
@@ -47,7 +50,6 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
 
   const args: string[] = [
     '-y', // override the file if it exists
-    '-f image2',
     `-framerate ${framerate}`,
   ];
   if (inputParameters !== '') {
@@ -56,7 +58,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   args.push(
     `-i "${rawFilesPathPattern}"`,
     `-i "${wavFilePath}"`,
-    `-vcodec ${videoCodec} -pix_fmt yuv420p`,
+    `-vcodec ${videoCodec}`,
     `-crf ${constantRateFactor}`,
     `-acodec ${audioCodec}`,
     `-b:a ${audioBitrate}K`,
@@ -64,7 +66,7 @@ async function getFFmpegArgs(settings: GenerateVideoWithFFmpegSettings) {
   if (outputParameters !== '') {
     args.push(outputParameters);
   }
-  args.push('"' + getSequenceOutputFilePath(outputFolderPath, sequence) + '"');
+  args.push('"' + getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer) + '"');
 
   return args;
 }

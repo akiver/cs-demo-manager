@@ -3,6 +3,7 @@ import type { Sequence } from 'csdm/common/types/sequence';
 import { getSequenceOutputFilePath } from 'csdm/node/video/sequences/get-sequence-output-file-path';
 import { deleteSequencesOutputFile } from 'csdm/node/video/sequences/delete-sequences-output-file';
 import { executeFfmpeg } from 'csdm/node/video/ffmpeg/execute-ffmpeg';
+import type { VideoContainer } from 'csdm/common/types/video-container';
 
 function computeComplexFilter(sequences: Sequence[]) {
   const streams: string[] = [];
@@ -16,6 +17,7 @@ function computeComplexFilter(sequences: Sequence[]) {
 type ConcatenateVideoOptions = {
   sequences: Sequence[];
   outputFolderPath: string;
+  videoContainer: VideoContainer;
   videoCodec: string;
   audioCodec: string;
   constantRateFactor: number;
@@ -34,6 +36,7 @@ function getFfmpegArgs(options: ConcatenateVideoOptions) {
     outputParameters,
     sequences,
     videoCodec,
+    videoContainer,
   } = options;
 
   const args: string[] = [];
@@ -42,7 +45,7 @@ function getFfmpegArgs(options: ConcatenateVideoOptions) {
     args.push(inputParameters);
   }
   for (const sequence of sequences) {
-    const sequenceOutputFilePath = getSequenceOutputFilePath(outputFolderPath, sequence);
+    const sequenceOutputFilePath = getSequenceOutputFilePath(outputFolderPath, sequence, videoContainer);
     args.push(`-i "${sequenceOutputFilePath}"`);
   }
   args.push(
@@ -63,5 +66,5 @@ function getFfmpegArgs(options: ConcatenateVideoOptions) {
 export async function concatenateVideosFromSequences(options: ConcatenateVideoOptions, signal: AbortSignal) {
   const args: string[] = getFfmpegArgs(options);
   await executeFfmpeg(args, signal);
-  await deleteSequencesOutputFile(options.outputFolderPath, options.sequences);
+  await deleteSequencesOutputFile(options.outputFolderPath, options.sequences, options.videoContainer);
 }

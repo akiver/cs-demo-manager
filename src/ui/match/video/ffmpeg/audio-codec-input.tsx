@@ -1,8 +1,8 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import { DEFAULT_AUDIO_CODEC } from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { TextInput } from 'csdm/ui/components/inputs/text-input';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 export function AudioCodecInput() {
   const { settings, updateSettings } = useVideoSettings();
@@ -10,7 +10,7 @@ export function AudioCodecInput() {
   const onBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const newAudioCodec = event.target.value.trim();
     if (newAudioCodec === '') {
-      event.target.value = DEFAULT_AUDIO_CODEC;
+      event.target.value = defaultSettings.video.ffmpegSettings.audioCodec;
     } else if (newAudioCodec !== settings.ffmpegSettings.audioCodec) {
       updateSettings({
         ffmpegSettings: {

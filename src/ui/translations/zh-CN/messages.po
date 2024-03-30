@@ -4157,6 +4157,11 @@ msgctxt "Input label"
 msgid "Video codec"
 msgstr "视频编解码器"
 
+#: src/ui/match/video/ffmpeg/video-container-select.tsx
+msgctxt "Input label"
+msgid "Video container"
+msgstr ""
+
 #: src/ui/match/video/generate-button.tsx
 msgid "Disk space warning"
 msgstr ""

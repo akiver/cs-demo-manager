@@ -1,7 +1,6 @@
 import React from 'react';
 import { Trans, msg } from '@lingui/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { DEFAULT_HEIGHT_RESOLUTION } from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
@@ -13,7 +12,7 @@ export function HeightResolutionInput() {
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     let newHeight = Number(event.target.value);
     if (newHeight < minimalHeight) {
-      newHeight = DEFAULT_HEIGHT_RESOLUTION;
+      newHeight = minimalHeight;
       event.target.value = newHeight.toString();
     }
 

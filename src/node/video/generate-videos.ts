@@ -33,10 +33,12 @@ import { startCounterStrike } from 'csdm/node/counter-strike/launcher/start-coun
 import { deleteJsonActionsFile } from 'csdm/node/counter-strike/json-actions-file/delete-json-actions-file';
 import { moveSequencesRawFiles } from 'csdm/node/video/sequences/move-sequences-raw-files';
 import type { Sequence } from 'csdm/common/types/sequence';
+import { VideoContainer } from 'csdm/common/types/video-container';
 
 type FfmpegSettings = {
   audioBitrate: number;
   constantRateFactor: number;
+  videoContainer: VideoContainer;
   videoCodec: string;
   audioCodec: string;
   inputParameters: string;
@@ -93,6 +95,7 @@ async function buildVideos({ signal, ...options }: Options) {
           game,
           audioBitrate: ffmpegSettings.audioBitrate,
           constantRateFactor: ffmpegSettings.constantRateFactor,
+          videoContainer: ffmpegSettings.videoContainer,
           videoCodec: ffmpegSettings.videoCodec,
           audioCodec: ffmpegSettings.audioCodec,
           inputParameters: ffmpegSettings.inputParameters,
@@ -132,6 +135,7 @@ async function buildVideos({ signal, ...options }: Options) {
         constantRateFactor: ffmpegSettings.constantRateFactor,
         audioCodec: ffmpegSettings.audioCodec,
         videoCodec: ffmpegSettings.videoCodec,
+        videoContainer: ffmpegSettings.videoContainer,
         inputParameters: ffmpegSettings.inputParameters,
         outputParameters: ffmpegSettings.outputParameters,
       },
@@ -153,7 +157,9 @@ export async function generateVideos(options: Options) {
       promises.push(deleteSequencesRawFiles(rawFilesFolderPath, options.sequences));
     }
     if (deleteOutputFile) {
-      promises.push(deleteSequencesOutputFile(outputFolderPath, options.sequences));
+      const videoContainer =
+        options.encoderSoftware === EncoderSoftware.FFmpeg ? options.ffmpegSettings.videoContainer : VideoContainer.AVI;
+      promises.push(deleteSequencesOutputFile(outputFolderPath, options.sequences, videoContainer));
     }
     await Promise.all(promises);
   };

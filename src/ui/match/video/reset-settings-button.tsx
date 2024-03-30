@@ -1,41 +1,45 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import {
-  DEFAULT_AUDIO_CODEC,
-  DEFAULT_DEATH_NOTICES_DURATION,
-  DEFAULT_ENCODER_SOFTWARE,
-  DEFAULT_FFMPEG_AUDIO_BITRATE,
-  DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR,
-  DEFAULT_FRAMERATE,
-  DEFAULT_HEIGHT_RESOLUTION,
-  DEFAULT_VIDEO_CODEC,
-  DEFAULT_WIDTH_RESOLUTION,
-} from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Button } from 'csdm/ui/components/buttons/button';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 export function ResetSettingsButton() {
   const { updateSettings } = useVideoSettings();
   const onClick = () => {
+    const {
+      closeGameAfterRecording,
+      concatenateSequences,
+      deleteRawFilesAfterEncoding,
+      showOnlyDeathNotices,
+      deathNoticesDuration,
+      encoderSoftware,
+      ffmpegSettings,
+      framerate,
+      generateOnlyRawFiles,
+      height,
+      width,
+    } = defaultSettings.video;
     updateSettings({
-      closeGameAfterRecording: true,
-      concatenateSequences: false,
-      deleteRawFilesAfterEncoding: true,
-      showOnlyDeathNotices: true,
-      deathNoticesDuration: DEFAULT_DEATH_NOTICES_DURATION,
-      encoderSoftware: DEFAULT_ENCODER_SOFTWARE,
+      closeGameAfterRecording,
+      concatenateSequences,
+      deleteRawFilesAfterEncoding,
+      showOnlyDeathNotices,
+      deathNoticesDuration,
+      encoderSoftware,
       ffmpegSettings: {
-        audioBitrate: DEFAULT_FFMPEG_AUDIO_BITRATE,
-        constantRateFactor: DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR,
-        videoCodec: DEFAULT_VIDEO_CODEC,
-        audioCodec: DEFAULT_AUDIO_CODEC,
-        inputParameters: '',
-        outputParameters: '',
+        audioBitrate: ffmpegSettings.audioBitrate,
+        constantRateFactor: ffmpegSettings.constantRateFactor,
+        videoCodec: ffmpegSettings.videoCodec,
+        audioCodec: ffmpegSettings.audioCodec,
+        inputParameters: ffmpegSettings.inputParameters,
+        outputParameters: ffmpegSettings.outputParameters,
+        videoContainer: ffmpegSettings.videoContainer,
       },
-      framerate: DEFAULT_FRAMERATE,
-      generateOnlyRawFiles: false,
-      height: DEFAULT_HEIGHT_RESOLUTION,
-      width: DEFAULT_WIDTH_RESOLUTION,
+      framerate,
+      generateOnlyRawFiles,
+      height,
+      width,
     });
   };
   return (

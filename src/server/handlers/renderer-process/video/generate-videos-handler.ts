@@ -9,10 +9,12 @@ import { onGameStart } from '../counter-strike/counter-strike';
 import type { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { Sequence } from 'csdm/common/types/sequence';
 import type { Game } from 'csdm/common/types/counter-strike';
+import type { VideoContainer } from 'csdm/common/types/video-container';
 
 type FfmpegSettings = {
   audioBitrate: number;
   constantRateFactor: number;
+  videoContainer: VideoContainer;
   videoCodec: string;
   audioCodec: string;
   inputParameters: string;

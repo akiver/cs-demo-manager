@@ -10,6 +10,7 @@ import { VirtualDubError } from 'csdm/node/video/errors/virtual-dub-error';
 import { getSequenceOutputFilePath } from 'csdm/node/video/sequences/get-sequence-output-file-path';
 import { windowsToUnixPathSeparator } from 'csdm/node/filesystem/windows-to-unix-path-separator';
 import { getSequenceRawFiles } from 'csdm/node/video/sequences/get-sequence-raw-files';
+import { VideoContainer } from 'csdm/common/types/video-container';
 
 type GenerateVideoWithVirtualDubSettings = {
   game: Game;
@@ -74,7 +75,9 @@ async function writeVirtualDubScript({
 }: GenerateVideoWithVirtualDubSettings) {
   const { tgaFiles, wavFilePath } = await getSequenceRawFiles(sequence, rawFilesFolderPath, game);
 
-  const outputFilePath = windowsToUnixPathSeparator(getSequenceOutputFilePath(outputFolderPath, sequence));
+  const outputFilePath = windowsToUnixPathSeparator(
+    getSequenceOutputFilePath(outputFolderPath, sequence, VideoContainer.AVI),
+  );
 
   const script = generateVirtualDubScript(
     framerate,

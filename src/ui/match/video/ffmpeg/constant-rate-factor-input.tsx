@@ -2,19 +2,20 @@ import React from 'react';
 import { Trans } from '@lingui/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
 import { InputLabel } from 'csdm/ui/components/inputs/input-label';
-import { DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR } from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 export function ConstantRateFactorInput() {
   const { settings, updateSettings } = useVideoSettings();
   const minValue = 0;
   const maxValue = 51;
+  const defaultValue = defaultSettings.video.ffmpegSettings.constantRateFactor;
 
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     const value = event.target.value.trim();
-    let newConstantRateFactor = value === '' ? DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR : Number(value);
+    let newConstantRateFactor = value === '' ? defaultValue : Number(value);
     if (newConstantRateFactor < 0) {
-      newConstantRateFactor = DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR;
+      newConstantRateFactor = defaultValue;
     } else if (newConstantRateFactor > maxValue) {
       newConstantRateFactor = maxValue;
     }
@@ -47,7 +48,7 @@ export function ConstantRateFactorInput() {
         max={maxValue}
         onBlur={onBlur}
         defaultValue={settings.ffmpegSettings.constantRateFactor}
-        placeholder={String(DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR)}
+        placeholder={String(defaultValue)}
       />
     </div>
   );

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Trans, msg } from '@lingui/macro';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { DEFAULT_WIDTH_RESOLUTION } from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
@@ -13,7 +12,7 @@ export function WidthResolutionInput() {
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     let newWidth = Number(event.target.value);
     if (newWidth < minimalWidth) {
-      newWidth = DEFAULT_WIDTH_RESOLUTION;
+      newWidth = minimalWidth;
       event.target.value = newWidth.toString();
     }
 

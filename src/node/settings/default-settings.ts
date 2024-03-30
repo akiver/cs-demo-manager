@@ -1,19 +1,10 @@
-import {
-  DEFAULT_AUDIO_CODEC,
-  DEFAULT_DEATH_NOTICES_DURATION,
-  DEFAULT_ENCODER_SOFTWARE,
-  DEFAULT_FFMPEG_AUDIO_BITRATE,
-  DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR,
-  DEFAULT_FRAMERATE,
-  DEFAULT_HEIGHT_RESOLUTION,
-  DEFAULT_VIDEO_CODEC,
-  DEFAULT_WIDTH_RESOLUTION,
-} from 'csdm/ui/settings/video/default-values';
 import { CURRENT_SCHEMA_VERSION } from './schema-version';
 import type { Settings } from './settings';
 import { Page } from 'csdm/node/settings/page';
 import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { AnalysisStatusFilter } from 'csdm/common/types/analysis-status-filter';
+import { EncoderSoftware } from 'csdm/common/types/encoder-software';
+import { VideoContainer } from 'csdm/common/types/video-container';
 
 export const defaultSettings: Settings = {
   schemaVersion: CURRENT_SCHEMA_VERSION,
@@ -69,22 +60,23 @@ export const defaultSettings: Settings = {
     concatenateSequences: false,
     deleteRawFilesAfterEncoding: true,
     showOnlyDeathNotices: true,
-    deathNoticesDuration: DEFAULT_DEATH_NOTICES_DURATION,
-    encoderSoftware: DEFAULT_ENCODER_SOFTWARE,
+    deathNoticesDuration: 5,
+    encoderSoftware: EncoderSoftware.FFmpeg,
     ffmpegSettings: {
-      audioBitrate: DEFAULT_FFMPEG_AUDIO_BITRATE,
-      constantRateFactor: DEFAULT_FFMPEG_CONSTANT_RATE_FACTOR,
+      audioBitrate: 256,
+      constantRateFactor: 23,
       customLocationEnabled: false,
       customExecutableLocation: '',
-      videoCodec: DEFAULT_VIDEO_CODEC,
-      audioCodec: DEFAULT_AUDIO_CODEC,
+      videoContainer: VideoContainer.AVI,
+      videoCodec: 'libx264',
+      audioCodec: 'libmp3lame',
       inputParameters: '',
       outputParameters: '',
     },
-    framerate: DEFAULT_FRAMERATE,
+    framerate: 30,
     generateOnlyRawFiles: false,
-    height: DEFAULT_HEIGHT_RESOLUTION,
-    width: DEFAULT_WIDTH_RESOLUTION,
+    height: 720,
+    width: 1280,
     rawFilesFolderPath: '',
     outputFolderPath: '',
     hlae: {

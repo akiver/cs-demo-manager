@@ -4152,6 +4152,11 @@ msgctxt "Input label"
 msgid "Video codec"
 msgstr "Video codec"
 
+#: src/ui/match/video/ffmpeg/video-container-select.tsx
+msgctxt "Input label"
+msgid "Video container"
+msgstr "Video container"
+
 #: src/ui/match/video/generate-button.tsx
 msgid "Disk space warning"
 msgstr "Disk space warning"

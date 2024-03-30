@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { DEFAULT_DEATH_NOTICES_DURATION } from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
 import { Trans } from '@lingui/macro';
 import { useCurrentMatch } from '../use-current-match';
 import { Game } from 'csdm/common/types/counter-strike';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 export function DeathNoticesDurationInput() {
   const { settings, updateSettings } = useVideoSettings();
@@ -19,7 +19,7 @@ export function DeathNoticesDurationInput() {
   const onBlur = async () => {
     let newDuration = Number(duration);
     if (duration === '') {
-      newDuration = DEFAULT_DEATH_NOTICES_DURATION;
+      newDuration = defaultSettings.video.deathNoticesDuration;
       setDuration(String(newDuration));
     }
 

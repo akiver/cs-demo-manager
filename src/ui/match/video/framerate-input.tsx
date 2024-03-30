@@ -1,7 +1,7 @@
 import React from 'react';
 import { InputNumber } from 'csdm/ui/components/inputs/number-input';
-import { DEFAULT_FRAMERATE } from 'csdm/ui/settings/video/default-values';
 import { useVideoSettings } from 'csdm/ui/settings/video/use-video-settings';
+import { defaultSettings } from 'csdm/node/settings/default-settings';
 
 export function FramerateInput() {
   const { settings, updateSettings } = useVideoSettings();
@@ -9,7 +9,7 @@ export function FramerateInput() {
   const onBlur = async (event: React.FocusEvent<HTMLInputElement>) => {
     let newFramerate = Number(event.target.value);
     if (newFramerate <= 0) {
-      newFramerate = DEFAULT_FRAMERATE;
+      newFramerate = defaultSettings.video.framerate;
       event.target.value = newFramerate.toString();
     }
 

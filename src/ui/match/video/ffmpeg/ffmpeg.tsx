@@ -12,6 +12,7 @@ import { VideoCodecInput } from './video-codec-input';
 import { AudioCodecInput } from './audio-codec-input';
 import { FfmpegInputParametersInput } from './ffmpeg-input-parameters-input';
 import { FfmpegOutputParametersInput } from './ffmpeg-output-parameters-input';
+import { VideoContainerSelect } from './video-container-select';
 
 export function Ffmpeg() {
   const installedFfmpegVersion = useInstalledFfmpegVersion();
@@ -34,6 +35,7 @@ export function Ffmpeg() {
           <FfmpegAudioBitrateSelect />
         </div>
         <div className="flex gap-x-8">
+          <VideoContainerSelect />
           <VideoCodecInput />
           <ConstantRateFactorInput />
         </div>

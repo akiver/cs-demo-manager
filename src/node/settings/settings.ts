@@ -6,6 +6,7 @@ import type { MatchesTableFilter } from 'csdm/node/database/matches/matches-tabl
 import type { RankingFilter } from 'csdm/common/types/ranking-filter';
 import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filter';
 import type { PlayersTableFilter } from '../database/players/players-table-filter';
+import type { VideoContainer } from 'csdm/common/types/video-container';
 
 export type Folder = {
   path: string;
@@ -78,6 +79,7 @@ export type FfmpegSettings = {
   constantRateFactor: number;
   customLocationEnabled: boolean;
   customExecutableLocation: string;
+  videoContainer: VideoContainer;
   videoCodec: string;
   audioCodec: string;
   inputParameters: string;
