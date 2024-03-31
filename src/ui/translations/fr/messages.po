@@ -8,7 +8,7 @@ msgstr ""
 "Language: fr\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-17 00:20\n"
+"PO-Revision-Date: 2024-03-31 19:56\n"
 "Last-Translator: \n"
 "Language-Team: French\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
@@ -682,16 +682,16 @@ msgstr "Exporter la voix des joueurs"
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Stop ignoring player's bans"
-msgstr ""
+msgstr "Arrêtez d'ignorer les bans du joueur"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgid "Steam account added to ignored list"
-msgstr ""
+msgstr "Compte Steam ajouté à la liste des comptes ignorés"
 
 #: src/ui/components/context-menu/items/ignore-steam-account-ban-item.tsx
 msgctxt "Context menu"
 msgid "Ignore player's bans"
-msgstr ""
+msgstr "Ignorer les bans du joueur"
 
 #: src/ui/components/context-menu/items/open-faceit-profile-item.tsx
 msgctxt "Context menu"
@@ -923,17 +923,17 @@ msgstr "Kills"
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Weapons"
-msgstr ""
+msgstr "Armes"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Clutches"
-msgstr ""
+msgstr "Clutchs"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Players Flashbang matrix"
-msgstr ""
+msgstr "Matrice flashbang des joueurs"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Exporting match {matchCount} of {totalMatchCount}…"
@@ -1152,7 +1152,7 @@ msgstr "Tags"
 #: src/ui/components/dropdown-filter/weapons-filter.tsx
 msgctxt "Weapons filter label"
 msgid "Weapons"
-msgstr ""
+msgstr "Armes"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
@@ -1286,7 +1286,7 @@ msgstr "Nom d’utilisateur"
 #: src/ui/components/links/see-round-link.tsx
 msgctxt "Link"
 msgid "See round"
-msgstr ""
+msgstr "Voir le round"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -1844,7 +1844,7 @@ msgstr "Colonnes"
 
 #: src/ui/components/tags/tags.tsx
 msgid "Edit tags"
-msgstr ""
+msgstr "Modifier les tags"
 
 #: src/ui/components/tags/tags.tsx
 #: src/ui/match/rounds/round/round-tags.tsx
@@ -2640,11 +2640,11 @@ msgstr "Le jeu a planté, merci de consulter <0>cette documentation</0> pour obt
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The game process exited with an access denied error."
-msgstr ""
+msgstr "Le processus de jeu s'est terminé avec une erreur \"access denied\"."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Make sure to close any anti-cheat software and retry."
-msgstr ""
+msgstr "Assurez-vous de fermer tout logiciel anti-triche et réessayez."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
@@ -3339,7 +3339,7 @@ msgstr "Kills"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "<0>{0}</0> flashed <1>{1}</1> around <2>{2}s</2>"
-msgstr ""
+msgstr "<0>{0}</0> a flashé <1>{1}</1> environ <2>{2}s</2>"
 
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 msgid "Players flashbang matrix"
@@ -3523,17 +3523,17 @@ msgstr "Steam ID"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
 msgid "Kills"
-msgstr ""
+msgstr "Kills"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
 msgctxt "Context menu"
 msgid "Rounds"
-msgstr ""
+msgstr "Rounds"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-video-item.tsx
 msgctxt "Context menu"
 msgid "Generate video"
-msgstr ""
+msgstr "Générer une vidéo"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
@@ -3949,7 +3949,7 @@ msgstr "{clutcherName} a perdu un 1v{opponentCount}"
 #: src/ui/match/rounds/round/end-reason.tsx
 msgctxt "Panel title"
 msgid "Round end reason"
-msgstr ""
+msgstr "Raison fin de round"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
@@ -4062,7 +4062,7 @@ msgstr "Statistiques des joueurs"
 #: src/ui/match/rounds/round/round-tags.tsx
 msgctxt "Panel title"
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: src/ui/match/rounds/round/round-tags.tsx
 #: src/ui/settings/maps/map-entry.tsx
@@ -4160,23 +4160,23 @@ msgstr "Codec vidéo"
 #: src/ui/match/video/ffmpeg/video-container-select.tsx
 msgctxt "Input label"
 msgid "Video container"
-msgstr ""
+msgstr "Conteneur vidéo"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "Disk space warning"
-msgstr ""
+msgstr "Avertissement d'espace disque"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
-msgstr ""
+msgstr "Vous aurez besoin d'au moins <0>{requiredDiskSpace}GB</0> d'espace disque libre pour générer les vidéos."
 
 #: src/ui/match/video/generate-button.tsx
 msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-msgstr ""
+msgstr "Vous aurez besoin d'au moins <0>{requiredDiskSpace}GB</0> d'espace disque libre sur le disque où CS2 est installé pour générer les vidéos."
 
 #: src/ui/match/video/generate-button.tsx
 msgid "Are you sure you want to continue?"
-msgstr ""
+msgstr "Voulez-vous vraiment continuer ?"
 
 #: src/ui/match/video/generate-button.tsx
 msgctxt "Button"
@@ -4185,7 +4185,7 @@ msgstr "Générer"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "This player has no kills."
-msgstr ""
+msgstr "Ce joueur n'a pas de kills."
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
@@ -4194,7 +4194,7 @@ msgstr "Si 2 kills sont séparés de moins de 10 secondes ou si 2 séquences son
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Dialog title"
 msgid "Generate player's sequences"
-msgstr ""
+msgstr "Générer les séquences du joueur"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
@@ -4204,22 +4204,22 @@ msgstr "Joueur"
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
 msgid "Event"
-msgstr ""
+msgstr "Evénement"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select option"
 msgid "Kill"
-msgstr ""
+msgstr "Kill"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select option"
 msgid "Round"
-msgstr ""
+msgstr "Round"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Button"
 msgid "Generate player's sequences"
-msgstr ""
+msgstr "Générer les séquences du joueur"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Generation in progress…"
@@ -4686,7 +4686,7 @@ msgstr "Une erreur est survenue. (Code {errorCode})"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "The video generator is currently available only on Windows for Counter-Strike 2 demos."
-msgstr ""
+msgstr "Le générateur de vidéos est actuellement disponible uniquement sur Windows pour les démos Counter-Strike 2."
 
 #: src/ui/match/video/video-loader.tsx
 msgid "Loading video generator…"
@@ -5284,7 +5284,7 @@ msgstr "Jump kills"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Team kills"
-msgstr ""
+msgstr "Team Kills"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
@@ -5350,7 +5350,7 @@ msgstr "Maps"
 #: src/ui/search/search.tsx
 msgctxt "Round tags filter label"
 msgid "Round tags"
-msgstr ""
+msgstr "Rounds tags"
 
 #: src/ui/search/search.tsx
 msgctxt "Input label"
@@ -5446,11 +5446,11 @@ msgstr "Réinitialiser les paramètres"
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Bans that happened before the player was first seen in a match will be ignored."
-msgstr ""
+msgstr "Les bans qui ont eu lieu avant que le joueur ne soit vu pour la première fois dans un match seront ignorées."
 
 #: src/ui/settings/analyze/ignore-ban-before-first-seen.tsx
 msgid "Ignore bans happened before first match"
-msgstr ""
+msgstr "Ignorer les bans qui ont eu lieu avant le premier match"
 
 #: src/ui/settings/analyze/toggle-analyze-positions.tsx
 msgid "Analyze player/grenade positions during analysis. Positions are required only for the 2D viewer. When enabled it increases time to insert matches into database and disk space usage."
@@ -5918,20 +5918,20 @@ msgstr "Délai (secondes)"
 #: src/ui/settings/playback/watch-round-after-delay.tsx
 msgctxt "Settings title"
 msgid "After round delay"
-msgstr ""
+msgstr "Délai après fin de round"
 
 #: src/ui/settings/playback/watch-round-after-delay.tsx
 msgid "How many seconds to wait before skipping to the next round at the end of the round or when the player dies."
-msgstr ""
+msgstr "Combien de secondes attendre avant de passer au prochain tour à la fin du round ou lorsque le joueur meurt."
 
 #: src/ui/settings/playback/watch-round-before-delay.tsx
 msgctxt "Settings title"
 msgid "Before round delay"
-msgstr ""
+msgstr "Délai avant début de round"
 
 #: src/ui/settings/playback/watch-round-before-delay.tsx
 msgid "How many seconds to start before the end of the round's freeze time."
-msgstr ""
+msgstr "Combien de secondes avant la fin du freeze time démarrera la lecture."
 
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
