@@ -16,7 +16,7 @@ import { FramerateInput } from './framerate-input';
 import { ConcatenateSequencesCheckbox } from './concatenate-sequences-checkbox';
 import { GenerateOnlyRawFilesCheckbox } from './generate-only-raw-files-checkbox';
 import { DeleteRawFilesAfterEncodingCheckbox } from './delete-raw-files-after-encoding-checkbox';
-import { GeneratePlayerKillsSequencesButton } from './generate-player-kills-sequences-button';
+import { GeneratePlayerSequencesButton } from './generate-player-sequences-button';
 import { DeleteSequencesButton } from './sequences/delete-sequences-button';
 import { ShowOnlyDeathNoticesCheckbox } from './show-only-death-notices-checkbox';
 import { RawFilesFolderPath } from './raw-files-folder-path';
@@ -30,7 +30,7 @@ export function MatchVideo() {
         <div className="flex items-center gap-x-8">
           <GenerateButton />
           <AddNewSequenceButton />
-          <GeneratePlayerKillsSequencesButton />
+          <GeneratePlayerSequencesButton />
           <ResetSettingsButton />
           <DeleteSequencesButton />
           <SequencesSummary />

@@ -156,7 +156,7 @@ function SelectPlayerDialog() {
   );
 }
 
-export function GeneratePlayerKillsSequencesButton() {
+export function GeneratePlayerSequencesButton() {
   const { showDialog } = useDialog();
 
   const onClick = () => {

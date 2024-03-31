@@ -2179,7 +2179,7 @@ msgid "Unknown"
 msgstr "Unknown"
 
 #: src/ui/dialogs/confirm-dialog.tsx
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 #: src/ui/match/video/match-timeline/select-seconds-dialog.tsx
 msgctxt "Button"
 msgid "Confirm"
@@ -4178,40 +4178,40 @@ msgctxt "Button"
 msgid "Generate"
 msgstr "Generate"
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "This player has no kills."
 msgstr "This player has no kills."
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
 msgstr "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Dialog title"
 msgid "Generate player's sequences"
 msgstr "Generate player's sequences"
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "Player"
 msgstr "Player"
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select label"
 msgid "Event"
 msgstr "Event"
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Kill"
 msgstr "Kill"
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Select option"
 msgid "Round"
 msgstr "Round"
 
-#: src/ui/match/video/generate-player-kills-sequences-button.tsx
+#: src/ui/match/video/generate-player-sequences-button.tsx
 msgctxt "Button"
 msgid "Generate player's sequences"
 msgstr "Generate player's sequences"
