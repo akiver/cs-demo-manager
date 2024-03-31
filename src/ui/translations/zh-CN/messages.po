@@ -8,7 +8,7 @@ msgstr ""
 "Language: zh\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-02-23 00:10\n"
+"PO-Revision-Date: 2024-03-31 19:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
@@ -1152,7 +1152,7 @@ msgstr "标签"
 #: src/ui/components/dropdown-filter/weapons-filter.tsx
 msgctxt "Weapons filter label"
 msgid "Weapons"
-msgstr ""
+msgstr "武器"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
@@ -1286,7 +1286,7 @@ msgstr "用户名"
 #: src/ui/components/links/see-round-link.tsx
 msgctxt "Link"
 msgid "See round"
-msgstr ""
+msgstr "查看回合"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -1844,7 +1844,7 @@ msgstr "列"
 
 #: src/ui/components/tags/tags.tsx
 msgid "Edit tags"
-msgstr ""
+msgstr "编辑标签"
 
 #: src/ui/components/tags/tags.tsx
 #: src/ui/match/rounds/round/round-tags.tsx
@@ -2640,11 +2640,11 @@ msgstr "游戏崩溃了，请查看<0>此文档</0>以获取帮助。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The game process exited with an access denied error."
-msgstr ""
+msgstr "游戏进程因拒绝访问错误而退出。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Make sure to close any anti-cheat software and retry."
-msgstr ""
+msgstr "确保关闭任何反作弊软件，然后重试。"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
@@ -3523,17 +3523,17 @@ msgstr "Steam ID"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
 msgid "Kills"
-msgstr ""
+msgstr "击杀数"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
 msgctxt "Context menu"
 msgid "Rounds"
-msgstr ""
+msgstr "回合数"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-video-item.tsx
 msgctxt "Context menu"
 msgid "Generate video"
-msgstr ""
+msgstr "生成视频"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
@@ -3949,7 +3949,7 @@ msgstr "{clutcherName} 输掉了1v{opponentCount}"
 #: src/ui/match/rounds/round/end-reason.tsx
 msgctxt "Panel title"
 msgid "Round end reason"
-msgstr ""
+msgstr "回合结束原因"
 
 #: src/ui/match/rounds/round/players-information.tsx
 msgid "Gameplay"
@@ -4062,7 +4062,7 @@ msgstr "玩家数据"
 #: src/ui/match/rounds/round/round-tags.tsx
 msgctxt "Panel title"
 msgid "Tags"
-msgstr ""
+msgstr "标签"
 
 #: src/ui/match/rounds/round/round-tags.tsx
 #: src/ui/settings/maps/map-entry.tsx
@@ -4164,19 +4164,19 @@ msgstr ""
 
 #: src/ui/match/video/generate-button.tsx
 msgid "Disk space warning"
-msgstr ""
+msgstr "磁盘空间警告"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
-msgstr ""
+msgstr "您至少需要<0>{requiredDiskSpace}GB</0>的可用磁盘空间来生成视频。"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space on the disk where CS2 is installed to generate the videos."
-msgstr ""
+msgstr "您至少需要<0>{requiredDiskSpace}GB</0>可用磁盘空间在安装 CS2 的位置以便生成视频。"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "Are you sure you want to continue?"
-msgstr ""
+msgstr "您确定要继续吗？"
 
 #: src/ui/match/video/generate-button.tsx
 msgctxt "Button"
@@ -4185,7 +4185,7 @@ msgstr "生成"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "This player has no kills."
-msgstr ""
+msgstr "该玩家没有击杀。"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
@@ -4194,7 +4194,7 @@ msgstr "如果两次击杀间隔少于10秒，或两个镜头之间间隔少于2
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Dialog title"
 msgid "Generate player's sequences"
-msgstr ""
+msgstr "创建玩家序列"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
@@ -4204,22 +4204,22 @@ msgstr "玩家"
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
 msgid "Event"
-msgstr ""
+msgstr "事件"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select option"
 msgid "Kill"
-msgstr ""
+msgstr "击杀"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select option"
 msgid "Round"
-msgstr ""
+msgstr "回合"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Button"
 msgid "Generate player's sequences"
-msgstr ""
+msgstr "创建玩家序列"
 
 #: src/ui/match/video/generating-dialog.tsx
 msgid "Generation in progress…"
@@ -4686,7 +4686,7 @@ msgstr "发生了错误(错误代码 {errorCode})"
 
 #: src/ui/match/video/video-loader.tsx
 msgid "The video generator is currently available only on Windows for Counter-Strike 2 demos."
-msgstr ""
+msgstr "视频生成器目前仅适用于 Windows 系统中的Counter-Strike 2 录像."
 
 #: src/ui/match/video/video-loader.tsx
 msgid "Loading video generator…"
@@ -4930,7 +4930,7 @@ msgstr "击杀/死亡"
 #: src/ui/player/charts/match-count-chart.tsx
 msgctxt "Chart title"
 msgid "Number of matches played over time"
-msgstr ""
+msgstr "一段时间内的比赛次数"
 
 #: src/ui/player/charts/match-count-chart.tsx
 msgctxt "Chart axis label match count"
@@ -4940,7 +4940,7 @@ msgstr "对战"
 #: src/ui/player/charts/premier-rank-repartition-chart.tsx
 msgctxt "Chart title"
 msgid "Players Premier rank repartition"
-msgstr ""
+msgstr "玩家的Premier段位分布"
 
 #: src/ui/player/charts/use-player-chart-options.ts
 #: src/ui/player/charts/x-axis.tsx
@@ -4973,7 +4973,7 @@ msgstr "X轴"
 
 #: src/ui/player/load-player-error.tsx
 msgid "No data was found with active filters."
-msgstr ""
+msgstr "未找到与筛选结果匹配的数据。"
 
 #: src/ui/player/load-player-error.tsx
 msgid "This player is not in any analyzed demos."
@@ -4991,7 +4991,7 @@ msgstr "最近比赛"
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel title"
 msgid "Matchmaking"
-msgstr ""
+msgstr "匹配中"
 
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
@@ -6102,12 +6102,12 @@ msgstr "无效的 HLAE 可执行文件"
 #: src/ui/title-bar/history/history-back-button.tsx
 msgctxt "Tooltip"
 msgid "Back in history"
-msgstr ""
+msgstr "上一页"
 
 #: src/ui/title-bar/history/history-forward-button.tsx
 msgctxt "Tooltip"
 msgid "Forward in history"
-msgstr ""
+msgstr "下一页"
 
 #: src/ui/title-bar/update-available-button.tsx
 msgid "Update ready!"
