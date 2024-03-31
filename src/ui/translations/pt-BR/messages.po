@@ -8,7 +8,7 @@ msgstr ""
 "Language: pt\n"
 "Project-Id-Version: cs-demo-manager\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-05 00:10\n"
+"PO-Revision-Date: 2024-03-31 19:43\n"
 "Last-Translator: \n"
 "Language-Team: Portuguese, Brazilian\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -923,17 +923,17 @@ msgstr "Abates"
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Weapons"
-msgstr ""
+msgstr "Armas"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Clutches"
-msgstr ""
+msgstr "Clutches"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgctxt "Excel sheet"
 msgid "Players Flashbang matrix"
-msgstr ""
+msgstr "Matriz de granada de luz"
 
 #: src/ui/components/dialogs/export-matches-xlsx-dialog.tsx
 msgid "Exporting match {matchCount} of {totalMatchCount}…"
@@ -1152,7 +1152,7 @@ msgstr "Marcadores"
 #: src/ui/components/dropdown-filter/weapons-filter.tsx
 msgctxt "Weapons filter label"
 msgid "Weapons"
-msgstr ""
+msgstr "Armas"
 
 #: src/ui/components/inputs/comment-input.tsx
 msgctxt "Input placeholder"
@@ -1286,7 +1286,7 @@ msgstr "Nome de usuário"
 #: src/ui/components/links/see-round-link.tsx
 msgctxt "Link"
 msgid "See round"
-msgstr ""
+msgstr "Ver rodada"
 
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/demos/table/use-demos-columns.ts
@@ -1844,7 +1844,7 @@ msgstr "Colunas"
 
 #: src/ui/components/tags/tags.tsx
 msgid "Edit tags"
-msgstr ""
+msgstr "Editar marcadores"
 
 #: src/ui/components/tags/tags.tsx
 #: src/ui/match/rounds/round/round-tags.tsx
@@ -2523,17 +2523,17 @@ msgstr "Não reproduzidos"
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Invalid arguments provided to boiler."
-msgstr ""
+msgstr "Argumentos inválidos fornecidos para o boiler."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Error while contacting Steam, please retry later."
-msgstr ""
+msgstr "Erro ao contatar a Steam, por favor, tente novamente mais tarde."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "You are already connected to the CS game coordinator, make sure to close CS and retry."
-msgstr ""
+msgstr "Você já está conectado ao coordenador de jogos CS, certifique-se de fechar o CS e tentar novamente."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
@@ -2558,16 +2558,16 @@ msgstr "Nenhuma partida encontrada."
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "An error occurred while writing the matches file."
-msgstr ""
+msgstr "Ocorreu um erro ao escrever o arquivo da partida."
 
 #: src/ui/downloads/use-get-boiler-error-message-from-error-code.ts
 msgctxt "Boiler-writter error message"
 msgid "Matches file not found."
-msgstr ""
+msgstr "Arquivo da partida não encontrado."
 
 #: src/ui/downloads/valve/fetch-matches-confirmation.tsx
 msgid "It will close Counter-Strike if it's running and start automatically for a few seconds."
-msgstr ""
+msgstr "Fechará o Counter-Strike, se estiver em execução, e iniciará automaticamente por alguns segundos."
 
 #: src/ui/downloads/valve/fetch-matches-confirmation.tsx
 msgid "Continue"
@@ -2602,11 +2602,11 @@ msgstr "Executável Counter-Strike não encontrado."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
-msgstr ""
+msgstr "Certifique-se que o CS:GO está instalado selecionando o ramo \"csgo_legacy\" na aba de propriedades \"Betas\" do CS2 na Steam."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"
-msgstr ""
+msgstr "{game} não é suportado no seu sistema operacional"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
@@ -2636,15 +2636,15 @@ msgstr "A Steam não está sendo executada"
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The game crashed, please see <0>this documentation</0> for help."
-msgstr ""
+msgstr "O jogo travou, por favor, veja <0>esta documentação</0> para obter ajuda."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "The game process exited with an access denied error."
-msgstr ""
+msgstr "O processo do jogo foi encerrado com um erro de acesso negado."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Make sure to close any anti-cheat software and retry."
-msgstr ""
+msgstr "Certifique-se de fechar qualquer software anti-trapaça e tentar novamente."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "Counter-Strike starting…"
@@ -2663,12 +2663,12 @@ msgstr "Competitivo 5v5"
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Scrimmage 5v5"
-msgstr ""
+msgstr "Treino 5x5"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Scrimmage 2v2"
-msgstr ""
+msgstr "Treino 2x2"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
@@ -2698,7 +2698,7 @@ msgstr "Mata-mata"
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Arms Race Bomb"
-msgstr ""
+msgstr "Corriga armada com bomba"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
@@ -2708,7 +2708,7 @@ msgstr "Corrida armada"
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
 msgid "Skirmish"
-msgstr ""
+msgstr "Batalha"
 
 #: src/ui/hooks/use-get-game-mode-translation.ts
 msgctxt "Game mode"
@@ -3523,17 +3523,17 @@ msgstr "ID da Steam"
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-kills-video-item.tsx
 msgctxt "Context menu"
 msgid "Kills"
-msgstr ""
+msgstr "Abates"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-rounds-video-item.tsx
 msgctxt "Context menu"
 msgid "Rounds"
-msgstr ""
+msgstr "Rodadas"
 
 #: src/ui/match/overview/scoreboard/context-menu/generate-player-video-item.tsx
 msgctxt "Context menu"
 msgid "Generate video"
-msgstr ""
+msgstr "Gerar vídeo"
 
 #: src/ui/match/overview/scoreboard/match-information.tsx
 msgctxt "Versus"
@@ -3830,7 +3830,7 @@ msgstr "1 contra 1 vencidos"
 #: src/ui/match/rounds/round/clutches.tsx
 msgctxt "Panel title"
 msgid "Clutches"
-msgstr ""
+msgstr "Clutches"
 
 #: src/ui/match/players/clutches-panel.tsx
 msgctxt "Panel label"
@@ -4062,7 +4062,7 @@ msgstr "Estatísticas dos jogadores"
 #: src/ui/match/rounds/round/round-tags.tsx
 msgctxt "Panel title"
 msgid "Tags"
-msgstr ""
+msgstr "Marcadores"
 
 #: src/ui/match/rounds/round/round-tags.tsx
 #: src/ui/settings/maps/map-entry.tsx
@@ -4092,7 +4092,7 @@ msgstr ""
 #: src/ui/match/video/encoder-software-select.tsx
 msgctxt "Select label of video encoder"
 msgid "Encoder software"
-msgstr ""
+msgstr "Software de codificador"
 
 #: src/ui/match/video/ffmpeg/audio-codec-input.tsx
 msgctxt "Input label"
@@ -4160,11 +4160,11 @@ msgstr "Codec de vídeo"
 #: src/ui/match/video/ffmpeg/video-container-select.tsx
 msgctxt "Input label"
 msgid "Video container"
-msgstr ""
+msgstr "Contêiner de vídeo"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "Disk space warning"
-msgstr ""
+msgstr "Aviso sobre o uso do disco"
 
 #: src/ui/match/video/generate-button.tsx
 msgid "You will need at least <0>{requiredDiskSpace}GB</0> of free disk space to generate the videos."
@@ -4185,7 +4185,7 @@ msgstr "Gerar"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "This player has no kills."
-msgstr ""
+msgstr "Este jogador não tem abates."
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgid "If 2 kills are less than 10 seconds apart or 2 sequences are less than 2 seconds apart, a single sequence will be generated."
@@ -4204,17 +4204,17 @@ msgstr "Jogador"
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select label"
 msgid "Event"
-msgstr ""
+msgstr "Evento"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select option"
 msgid "Kill"
-msgstr ""
+msgstr "Abate"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Select option"
 msgid "Round"
-msgstr ""
+msgstr "Rodada"
 
 #: src/ui/match/video/generate-player-kills-sequences-button.tsx
 msgctxt "Button"
@@ -4905,7 +4905,7 @@ msgstr "% Vitórias"
 #: src/ui/player/charts/competitive-rank-repartition-chart.tsx
 msgctxt "Chart title"
 msgid "Players competitive rank repartition"
-msgstr ""
+msgstr "Repartição dos jogadores no modo competitivo"
 
 #: src/ui/player/charts/headshot-percentage-chart.tsx
 msgctxt "Chart title"
@@ -4920,7 +4920,7 @@ msgstr "% TC"
 #: src/ui/player/charts/kill-death-ratio-chart.tsx
 msgctxt "Chart title"
 msgid "Kill/death over time"
-msgstr ""
+msgstr "Abates/mortes ao longo do tempo"
 
 #: src/ui/player/charts/kill-death-ratio-chart.tsx
 msgctxt "Chart axis label kill death ratio"
@@ -4991,7 +4991,7 @@ msgstr "Últimas partidas"
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel title"
 msgid "Matchmaking"
-msgstr ""
+msgstr "Organização de partidas"
 
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
@@ -5032,7 +5032,7 @@ msgstr "Data do ultimo banimento"
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
 msgid "Economy ban"
-msgstr ""
+msgstr "Banimento de economia"
 
 #: src/ui/player/overview/vac-panel.tsx
 msgctxt "Panel label"
@@ -5078,7 +5078,7 @@ msgstr "Nenhum jogador fixado encontrado."
 
 #: src/ui/player/pinned-player.tsx
 msgid "You can pin a player from scoreboards or the players list."
-msgstr ""
+msgstr "Você pode fixar um jogador a partir dos placares ou da lista de jogadores."
 
 #: src/ui/player/player-loader.tsx
 msgid "Loading player…"
@@ -5155,7 +5155,7 @@ msgstr "Nenhum jogador encontrado com os filtros atuais."
 
 #: src/ui/players/no-players.tsx
 msgid "No player found, you have to analyze demos to generate players."
-msgstr ""
+msgstr "Nenhum jogador encontrado, você precisa analisar demos para gerar jogadores."
 
 #: src/ui/players/players-table.tsx
 msgid "Loading players…"
@@ -5167,7 +5167,7 @@ msgstr "{vacBannedPlayerCount, plural,one {# banimento VAC} other {# banimentos 
 
 #: src/ui/players/table/bans-indicators.tsx
 msgid "{gameBannedPlayerCount, plural, one {# game ban} other {# game bans}}"
-msgstr ""
+msgstr "{gameBannedPlayerCount, plural,one {# banimento em jogo} other {# banimentos em jogo}}"
 
 #: src/ui/players/table/bans-indicators.tsx
 msgid "{communityBannedPlayerCount, plural, one {# community ban} other {# community bans}}"
@@ -5284,7 +5284,7 @@ msgstr "Abate pulando"
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
 msgid "Team kills"
-msgstr ""
+msgstr "Abates de companheiros"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
