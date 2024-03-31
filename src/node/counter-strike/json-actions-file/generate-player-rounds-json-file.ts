@@ -5,25 +5,40 @@ type Options = {
   demoPath: string;
   rounds: Round[];
   steamId: string;
+  beforeDelaySeconds: number;
+  afterDelaySeconds: number;
 };
 
-export async function generatePlayerRoundsJsonFile({ demoPath, rounds, steamId }: Options) {
+export async function generatePlayerRoundsJsonFile({
+  demoPath,
+  rounds,
+  steamId,
+  beforeDelaySeconds,
+  afterDelaySeconds,
+}: Options) {
   const json = new JSONActionsFileGenerator(demoPath);
 
+  const beforeRoundTicks = beforeDelaySeconds > 0 ? beforeDelaySeconds * 64 : 128;
+  const afterRoundTicks = afterDelaySeconds > 0 ? afterDelaySeconds * 64 : 128;
   let currentTick = 0;
   for (let index = 0; index < rounds.length; index++) {
     const round = rounds[index];
-    json.addSkipAhead(currentTick, round.freezeTimeEndTick);
+    const startTick = Math.max(round.freezeTimeEndTick - beforeRoundTicks, 0);
+    if (currentTick + afterRoundTicks < startTick) {
+      json.addSkipAhead(currentTick, startTick);
+    }
     json.addSpecPlayer(currentTick, steamId);
 
     if (round.deathTick !== null) {
-      currentTick = round.deathTick + 128;
+      // Unlock the camera when the player dies so we can spectate on other players
+      json.addSpecPlayer(round.deathTick, '-1');
+      currentTick = round.deathTick + afterRoundTicks;
     } else {
-      currentTick = round.tickEnd + 128;
+      currentTick = round.tickEnd + afterRoundTicks;
     }
 
     if (index === rounds.length - 1) {
-      json.addStopPlayback(currentTick);
+      json.addStopPlayback(currentTick + afterRoundTicks);
     }
   }
 

@@ -11,34 +11,37 @@ describe(`Generate player's rounds VDM file`, () => {
     const rounds: Round[] = [
       {
         number: 1,
-        freezeTimeEndTick: 10,
-        tickEnd: 90,
+        freezeTimeEndTick: 1000,
+        tickEnd: 5480,
         deathTick: null,
       },
       {
         number: 2,
-        freezeTimeEndTick: 110,
-        tickEnd: 190,
-        deathTick: 140,
+        freezeTimeEndTick: 10880,
+        tickEnd: 14680,
+        deathTick: 12800,
       },
       {
         number: 3,
-        freezeTimeEndTick: 210,
-        tickEnd: 290,
-        deathTick: 230,
+        freezeTimeEndTick: 16280,
+        tickEnd: 19880,
+        deathTick: 18600,
       },
       {
         number: 4,
-        freezeTimeEndTick: 310,
-        tickEnd: 390,
+        freezeTimeEndTick: 21480,
+        tickEnd: 24680,
         deathTick: null,
       },
     ];
 
     const vdm = await generatePlayerRoundsVdmFile({
+      tickrate: 64,
       demoPath,
       rounds,
       steamId: fakePlayerSteamId,
+      beforeDelaySeconds: 2,
+      afterDelaySeconds: 6,
     });
 
     const vdmContent = await fs.readFile(vdm.getVdmPath(), 'utf8');

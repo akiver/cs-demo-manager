@@ -10,6 +10,8 @@ import { HighlightsWatchAfterKillDelay } from './highlights-watch-after-kill-del
 import { LowlightsWatchBeforeKillDelay } from './lowlights-watch-before-kill-delay';
 import { LowlightsWatchAfterKillDelay } from './lowlights-watch-after-kill-delay';
 import { CustomLowlights } from './custom-lowlights';
+import { WatchRoundBeforeDelay } from './watch-round-before-delay';
+import { WatchRoundAfterDelay } from './watch-round-after-delay';
 
 export function PlaybackSettings() {
   return (
@@ -24,6 +26,8 @@ export function PlaybackSettings() {
       <CustomLowlights />
       <LowlightsWatchBeforeKillDelay />
       <LowlightsWatchAfterKillDelay />
+      <WatchRoundBeforeDelay />
+      <WatchRoundAfterDelay />
     </SettingsView>
   );
 }

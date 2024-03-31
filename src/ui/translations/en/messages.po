@@ -5910,6 +5910,24 @@ msgctxt "Input placeholder"
 msgid "Delay (seconds)"
 msgstr "Delay (seconds)"
 
+#: src/ui/settings/playback/watch-round-after-delay.tsx
+msgctxt "Settings title"
+msgid "After round delay"
+msgstr "After round delay"
+
+#: src/ui/settings/playback/watch-round-after-delay.tsx
+msgid "How many seconds to wait before skipping to the next round at the end of the round or when the player dies."
+msgstr "How many seconds to wait before skipping to the next round at the end of the round or when the player dies."
+
+#: src/ui/settings/playback/watch-round-before-delay.tsx
+msgctxt "Settings title"
+msgid "Before round delay"
+msgstr "Before round delay"
+
+#: src/ui/settings/playback/watch-round-before-delay.tsx
+msgid "How many seconds to start before the end of the round's freeze time."
+msgstr "How many seconds to start before the end of the round's freeze time."
+
 #: src/ui/settings/settings-tabs.tsx
 msgid "UI"
 msgstr "UI"

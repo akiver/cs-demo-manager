@@ -59,6 +59,10 @@ type PlaybackSettings = {
   useCustomLowlights: boolean;
   highlights: PlaybackTypeSettings;
   lowlights: PlaybackTypeSettings;
+  round: {
+    beforeRoundDelayInSeconds: number; // how many seconds the playback should start before the end of rounds freeze time
+    afterRoundDelayInSeconds: number; // how many seconds to wait before skipping to the next round (on round end or player death)
+  };
   launchParameters: string;
 };
 

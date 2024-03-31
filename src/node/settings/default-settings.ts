@@ -53,6 +53,10 @@ export const defaultSettings: Settings = {
       beforeKillDelayInSeconds: 5,
       afterKillDelayInSeconds: 2,
     },
+    round: {
+      beforeRoundDelayInSeconds: 0,
+      afterRoundDelayInSeconds: 2,
+    },
     launchParameters: '',
   },
   video: {

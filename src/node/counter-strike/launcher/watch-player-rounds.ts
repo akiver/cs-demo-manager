@@ -8,6 +8,7 @@ import { db } from 'csdm/node/database/database';
 import { generatePlayerRoundsVdmFile } from 'csdm/node/vdm/generate-player-rounds-vdm-file';
 import { NoRoundsFound } from './errors/not-rounds-found';
 import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-player-rounds-json-file';
+import { getSettings } from 'csdm/node/settings/get-settings';
 
 export type Round = {
   number: number;
@@ -43,6 +44,16 @@ async function fetchRounds(checksum: string, steamId: string) {
   return rounds;
 }
 
+async function fetchMatchTickrate(checksum: string) {
+  const row = await db
+    .selectFrom('matches')
+    .select(['tickrate'])
+    .where('matches.checksum', '=', checksum)
+    .executeTakeFirst();
+
+  return row?.tickrate ?? 64;
+}
+
 type Options = {
   demoPath: string;
   steamId: string;
@@ -63,17 +74,25 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     throw new NoRoundsFound();
   }
 
+  const settings = await getSettings();
+  const { beforeRoundDelayInSeconds, afterRoundDelayInSeconds } = settings.playback.round;
   if (game !== Game.CSGO) {
     await generatePlayerRoundsJsonFile({
       demoPath,
       rounds,
       steamId,
+      beforeDelaySeconds: beforeRoundDelayInSeconds,
+      afterDelaySeconds: afterRoundDelayInSeconds,
     });
   } else {
+    const tickrate = await fetchMatchTickrate(checksum);
     await generatePlayerRoundsVdmFile({
+      tickrate,
       demoPath,
       rounds,
       steamId,
+      beforeDelaySeconds: beforeRoundDelayInSeconds,
+      afterDelaySeconds: afterRoundDelayInSeconds,
     });
   }
 
