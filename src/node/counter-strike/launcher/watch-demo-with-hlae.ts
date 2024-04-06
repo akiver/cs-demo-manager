@@ -108,6 +108,7 @@ export async function watchDemoWithHlae({
       `-hookDllPath "${path.join(path.dirname(hlaeExecutablePath), 'x64', 'AfxHookSource2.dll')}"`,
       `-programPath "${csExecutablePath}"`,
       `-cmdLine "${launchOptions.join(' ')}"`,
+      '-afxDisableSteamStorage',
     );
     if (csHasBeenKilled) {
       // Wait a few seconds before installing the plugin as its files may still be locked by CS2
