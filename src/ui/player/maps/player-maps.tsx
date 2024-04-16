@@ -40,14 +40,14 @@ function MapEntry({ mapStats }: Props) {
           <div className="flex items-center gap-x-4">
             <CounterTerroristIcon width={32} />
             <WinRate
-              value={roundNumber((mapStats.roundWinCountAsCt / mapStats.roundCount) * 100, 1)}
+              value={roundNumber((mapStats.roundWinCountAsCt / mapStats.roundCountAsCt) * 100, 1)}
               barClassName="bg-ct"
             />
           </div>
           <div className="flex items-center gap-x-4">
             <TerroristIcon width={32} />
             <WinRate
-              value={roundNumber((mapStats.roundWinCountAsT / mapStats.roundCount) * 100, 1)}
+              value={roundNumber((mapStats.roundWinCountAsT / mapStats.roundCountAsT) * 100, 1)}
               barClassName="bg-terro"
             />
           </div>

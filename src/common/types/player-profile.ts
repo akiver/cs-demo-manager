@@ -13,6 +13,8 @@ export type MapStats = {
   lostCount: number;
   tiedCount: number;
   roundCount: number;
+  roundCountAsT: number;
+  roundCountAsCt: number;
   roundWinCount: number;
   roundLostCount: number;
   roundWinCountAsCt: number;

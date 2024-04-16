@@ -19,6 +19,8 @@ type MapGlobalStats = {
 type MapRoundStats = {
   mapName: string;
   roundCount: number;
+  roundCountAsCt: number;
+  roundCountAsT: number;
   roundWinCount: number;
   roundLostCount: number;
   roundWinCountAsCt: number;
@@ -123,6 +125,8 @@ function buildRoundsQuery({
       sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_name = players.team_name AND rounds.winner_side = 2)`.as(
         'roundWinCountAsT',
       ),
+      sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_side = 2)`.as('roundCountAsT'),
+      sql<number>`COUNT(rounds.id) FILTER (WHERE rounds.winner_side = 3)`.as('roundCountAsCt'),
       count<number>('rounds.id').as('roundCount'),
     ])
     .where('players.steam_id', '=', steamId)
