@@ -24,6 +24,7 @@ import type { DecoyStart } from 'csdm/common/types/decoy-start';
 import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import type { FlashbangExplode } from 'csdm/common/types/flashbang-explode';
+import type { Game } from 'csdm/common/types/counter-strike';
 
 type ViewerContext = {
   framerate: number;
@@ -36,6 +37,7 @@ type ViewerContext = {
   setIsPlaying: (isPlaying: boolean) => void;
   changeRound: (roundNumber: number) => void;
   map: Map;
+  game: Game;
   kills: Kill[];
   round: Round;
   shots: Shot[];
@@ -55,8 +57,6 @@ type ViewerContext = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
-  radarFilePath: string;
-  lowerRadarFilePath: string | undefined;
   radarLevel: RadarLevel;
   setRadarLevel: (radarLevel: RadarLevel) => void;
   focusedPlayerId: string | undefined;
@@ -87,8 +87,6 @@ type Props = {
   bombExploded: BombExploded | null;
   bombPlanted: BombPlanted | null;
   bombDefused: BombDefused | null;
-  radarFilePath: string;
-  lowerRadarFilePath: string | undefined;
 };
 
 export function ViewerProvider({
@@ -104,8 +102,6 @@ export function ViewerProvider({
   grenadePositions,
   infernoPositions,
   chickenPositions,
-  radarFilePath,
-  lowerRadarFilePath,
   bombsPlantStart,
   bombsDefuseStart,
   bombExploded,
@@ -136,11 +132,10 @@ export function ViewerProvider({
           const newId = id === focusedPlayerId ? undefined : id;
           setFocusedPlayerId(newId);
         },
-        radarFilePath,
         setRadarLevel,
-        lowerRadarFilePath,
         radarLevel,
         map,
+        game: match.game,
         playerPositions,
         heGrenadesExplode,
         smokesStart,

@@ -2,7 +2,6 @@ import React, { useState, useEffect, type ReactNode } from 'react';
 import { Trans } from '@lingui/macro';
 import { Status } from 'csdm/common/types/status';
 import { Viewer2D } from './viewer-2d';
-import type { Map } from 'csdm/common/types/map';
 import { UnsupportedMap } from '../../components/unsupported-map';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
 import { Message } from 'csdm/ui/components/message';
@@ -37,8 +36,6 @@ import { NoPositionsFound } from './no-positions-found';
 type State = {
   error: ReactNode | undefined;
   round: Round | undefined;
-  radarFilePath?: string;
-  lowerRadarFilePath?: string;
   playerPositions: PlayerPosition[];
   kills: Kill[];
   shots: Shot[];
@@ -89,7 +86,7 @@ export function Viewer2DLoader() {
   const roundNumber = Number(roundNumberParameter || 1);
   const client = useWebSocketClient();
   const match = useCurrentMatch();
-  const map: Map | undefined = useCurrentMatchMap();
+  const map = useCurrentMatchMap();
   const [state, setState] = useState<State>(defaultState);
 
   useEffect(() => {
@@ -169,8 +166,6 @@ export function Viewer2DLoader() {
   return (
     <ViewerProvider
       map={map}
-      radarFilePath={map.radarFilePath}
-      lowerRadarFilePath={map.lowerRadarFilePath}
       shots={state.shots}
       kills={state.kills}
       round={state.round}

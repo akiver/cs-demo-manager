@@ -5,6 +5,7 @@ export function loadImageFromFilePath(imagePath: string) {
       resolve(image);
     });
     image.addEventListener('error', reject);
-    image.src = `file://${imagePath}?timestamp=${Date.now()}`;
+    const src = imagePath.startsWith('file://') ? imagePath : `file://${imagePath}`;
+    image.src = `${src}?timestamp=${Date.now()}`;
   });
 }

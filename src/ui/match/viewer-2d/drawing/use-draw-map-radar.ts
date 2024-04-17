@@ -4,22 +4,29 @@ import type { InteractiveCanvas } from 'csdm/ui/hooks/use-interactive-map-canvas
 import { useViewerContext } from '../use-viewer-context';
 import { RadarLevel } from 'csdm/ui/maps/radar-level';
 import { loadImageFromFilePath } from 'csdm/ui/shared/load-image-from-file-path';
+import { useGetMapRadarSrc } from 'csdm/ui/maps/use-get-map-radar-src';
 
 export function useDrawMapRadar() {
-  const { radarFilePath, lowerRadarFilePath, radarLevel } = useViewerContext();
+  const { map, game, radarLevel } = useViewerContext();
   const radarImage = useRef<HTMLImageElement | null>(null);
   const lowerRadarImage = useRef<HTMLImageElement | null>(null);
+  const getMapRadarFileSrc = useGetMapRadarSrc();
 
   useEffect(() => {
     const loadRadarImages = async () => {
-      radarImage.current = await loadImageFromFilePath(radarFilePath);
-      if (lowerRadarFilePath !== undefined) {
+      const upperRadarFilePath = getMapRadarFileSrc(map.name, game, RadarLevel.Upper);
+      if (upperRadarFilePath) {
+        radarImage.current = await loadImageFromFilePath(upperRadarFilePath);
+      }
+
+      const lowerRadarFilePath = getMapRadarFileSrc(map.name, game, RadarLevel.Lower);
+      if (lowerRadarFilePath) {
         lowerRadarImage.current = await loadImageFromFilePath(lowerRadarFilePath);
       }
     };
 
     loadRadarImages();
-  }, [radarFilePath, lowerRadarFilePath]);
+  }, [getMapRadarFileSrc, game, map.name, radarLevel]);
 
   const drawMapRadar = (context: CanvasRenderingContext2D, { zoomedSize, zoomedX, zoomedY }: InteractiveCanvas) => {
     if (context === null) {

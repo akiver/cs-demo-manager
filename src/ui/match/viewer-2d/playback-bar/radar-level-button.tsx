@@ -56,9 +56,9 @@ function RadarLevelMenu() {
 
 export function RadarLevelButton() {
   const [isMenuVisible, setIsMenuVisible] = useState(false);
-  const { lowerRadarFilePath } = useViewerContext();
+  const { map } = useViewerContext();
 
-  if (lowerRadarFilePath === undefined) {
+  if (map.lowerRadarFilePath === undefined) {
     return null;
   }
 
