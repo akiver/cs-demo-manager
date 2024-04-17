@@ -5640,11 +5640,15 @@ msgid "Add account"
 msgstr ""
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "FACEIT restricted demos download through a <0>private API</0> that prevents us from downloading demos from CS:DM."
+msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
 msgstr ""
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "A request has been submitted to allow CS:DM. In the meantime, you have to download demos from your browser."
+msgid "You <0>don't have to ask</0> FACEIT for an API key. It requires some work, but demo downloads will be back in a near future."
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "In the meantime, you have to download demos from your browser."
 msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx

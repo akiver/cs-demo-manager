@@ -10,15 +10,19 @@ export function FaceitDownloadsWarning() {
       <div>
         <p className="selectable">
           <Trans>
-            FACEIT restricted demos download through a{' '}
+            FACEIT restricted demo downloads through a{' '}
             <ExternalLink href="https://docs.faceit.com/getting-started/Guides/download-api">private API</ExternalLink>{' '}
-            that prevents us from downloading demos from CS:DM.
+            and recently gave us a server-side API key with the maximum rate limit.
           </Trans>
         </p>
         <p className="selectable">
           <Trans>
-            A request has been submitted to allow CS:DM. In the meantime, you have to download demos from your browser.
+            You <strong>don't have to ask</strong> FACEIT for an API key. It requires some work, but demo downloads will
+            be back in a near future.
           </Trans>
+        </p>
+        <p className="selectable">
+          <Trans>In the meantime, you have to download demos from your browser.</Trans>
         </p>
       </div>
     </div>

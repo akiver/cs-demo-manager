@@ -5640,12 +5640,16 @@ msgid "Add account"
 msgstr "增加一个账号"
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "FACEIT restricted demos download through a <0>private API</0> that prevents us from downloading demos from CS:DM."
-msgstr "FACEIT 限制下载通过 <0>private API</0> 阻止我们从 CS:DM 下载演示。"
+msgid "FACEIT restricted demo downloads through a <0>private API</0> and recently gave us a server-side API key with the maximum rate limit."
+msgstr ""
 
 #: src/ui/settings/downloads/faceit-downloads-warning.tsx
-msgid "A request has been submitted to allow CS:DM. In the meantime, you have to download demos from your browser."
-msgstr "已经提交了允许CS:DM的请求。同时，您必须从您的浏览器下载演示。"
+msgid "You <0>don't have to ask</0> FACEIT for an API key. It requires some work, but demo downloads will be back in a near future."
+msgstr ""
+
+#: src/ui/settings/downloads/faceit-downloads-warning.tsx
+msgid "In the meantime, you have to download demos from your browser."
+msgstr ""
 
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 msgid "Player not found."
