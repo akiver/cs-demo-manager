@@ -2,7 +2,7 @@ import { Game } from 'csdm/common/types/counter-strike';
 import { generatePlayerKillsVdmFile } from 'csdm/node/vdm/generate-player-kills-vdm-file';
 import { startCounterStrike } from './start-counter-strike';
 import { detectDemoGame } from './detect-demo-game';
-import { getPlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
+import { getPlaybackMatch, type PlaybackMatch } from 'csdm/node/database/watch/get-match-playback';
 import { NoKillsFound } from 'csdm/node/counter-strike/launcher/errors/no-kills-found';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { deleteVdmFile } from './delete-vdm-file';
@@ -17,6 +17,13 @@ type Options = {
   perspective: Perspective;
   onGameStart: () => void;
 };
+
+function assertPlayerHasKills(match: PlaybackMatch, steamId: string) {
+  const playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
+  if (playerKills.length === 0) {
+    throw new NoKillsFound();
+  }
+}
 
 export async function watchPlayerHighlights({ demoPath, steamId, perspective, onGameStart }: Options) {
   const game = await detectDemoGame(demoPath);
@@ -40,9 +47,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
         // Fallback to CSGO built in highlights
         additionalArguments.push(steamId);
       } else {
-        if (match.kills.length === 0) {
-          throw new NoKillsFound();
-        }
+        assertPlayerHasKills(match, steamId);
 
         await generatePlayerKillsVdmFile({
           match,
@@ -60,6 +65,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     if (match === undefined) {
       throw new NoKillsFound();
     }
+    assertPlayerHasKills(match, steamId);
 
     await generatePlayerKillsJsonFile({
       match,
