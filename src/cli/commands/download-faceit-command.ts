@@ -54,7 +54,7 @@ export class DownloadFaceitCommand extends DownloadBaseCommand {
 
   public async run() {
     console.warn(
-      `This command is currently disabled, see https://cs-demo-manager.com/docs/faq/download#why-faceit-downloads-are-disabled.`,
+      `This command is currently disabled, see https://cs-demo-manager.com/docs/guides/downloads#why-faceit-downloads-are-disabled.`,
     );
     return;
     this.parseArgs();

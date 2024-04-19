@@ -49,7 +49,7 @@ export function AnalyzeConfirmationDialog({
             <p>
               <Trans>
                 Please see this{' '}
-                <ExternalLink href="https://cs-demo-manager.com/docs/faq/stats#the-demo-source-is-not-supported">
+                <ExternalLink href="https://cs-demo-manager.com/docs/guides/demos-analysis#the-demo-source-is-not-supported">
                   documentation
                 </ExternalLink>{' '}
                 for details.

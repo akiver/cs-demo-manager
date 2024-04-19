@@ -84,7 +84,7 @@ export function GeneratingVideosDialog({ closeDialog }: Props) {
                 <p>
                   <Trans>
                     You have to move the demo in a folder that contains only Basic Latin characters - see{' '}
-                    <ExternalLink href="https://cs-demo-manager.com/docs/faq/playback#cs2-demo-playback-doesnt-start-or-crashes">
+                    <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback#cs2-demo-playback-doesnt-start-or-crashes">
                       this documentation
                     </ExternalLink>{' '}
                     for details.

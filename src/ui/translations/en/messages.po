@@ -2596,8 +2596,16 @@ msgid "Counter-Strike executable not found."
 msgstr "Counter-Strike executable not found."
 
 #: src/ui/hooks/use-counter-strike.tsx
+msgid "Make sure Steam is not installed through Flatpak as it's not supported!"
+msgstr "Make sure Steam is not installed through Flatpak as it's not supported!"
+
+#: src/ui/hooks/use-counter-strike.tsx
 msgid "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
 msgstr "Please make sure that CS:GO is installed by selecting the \"csgo_legacy\" branch from the CS2 \"Betas\" property tab on Steam."
+
+#: src/ui/hooks/use-counter-strike.tsx
+msgid "Read the <0>documentation</0> for more information."
+msgstr "Read the <0>documentation</0> for more information."
 
 #: src/ui/hooks/use-counter-strike.tsx
 msgid "{game} is not supported on your operating system"

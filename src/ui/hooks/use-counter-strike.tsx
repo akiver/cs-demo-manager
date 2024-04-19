@@ -30,6 +30,11 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
           <p>
             <Trans>Counter-Strike executable not found.</Trans>
           </p>
+          {window.csdm.isLinux && (
+            <p>
+              <Trans>Make sure Steam is not installed through Flatpak as it's not supported!</Trans>
+            </p>
+          )}
           {error.game === Game.CSGO && (
             <p>
               <Trans>
@@ -38,6 +43,13 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
               </Trans>
             </p>
           )}
+          <p>
+            <Trans>
+              Read the{' '}
+              <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback">documentation</ExternalLink> for
+              more information.
+            </Trans>
+          </p>
         </div>
       );
     case ErrorCode.UnsupportedGame: {
@@ -61,7 +73,7 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
           <p>
             <Trans>
               You have to move the demo in a folder that contains only Basic Latin characters - see{' '}
-              <ExternalLink href="https://cs-demo-manager.com/docs/faq/playback#cs2-demo-playback-doesnt-start-or-crashes">
+              <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback#cs2-demo-playback-doesnt-start-or-crashes">
                 this documentation
               </ExternalLink>{' '}
               for details.
@@ -76,7 +88,7 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
         <p>
           <Trans>
             The game crashed, please see{' '}
-            <ExternalLink href="https://cs-demo-manager.com/docs/faq/playback#cs2-demo-playback-doesnt-start-or-crashes">
+            <ExternalLink href="https://cs-demo-manager.com/docs/guides/playback#cs2-demo-playback-doesnt-start-or-crashes">
               this documentation
             </ExternalLink>{' '}
             for help.
