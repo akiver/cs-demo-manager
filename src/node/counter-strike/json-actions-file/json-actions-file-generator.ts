@@ -30,6 +30,12 @@ export class JSONActionsFileGenerator {
       cmd: `spec_lock_to_accountid ${steamId}`,
       tick: this.getValidTick(tick),
     });
+    // The camera may be stuck in free mode with some demos (probably related to a server configuration)
+    // Force the first person camera mode so the camera will properly focus on the player.
+    this.actions.push({
+      cmd: 'spec_mode 1',
+      tick: this.getValidTick(tick),
+    });
 
     return this;
   }
