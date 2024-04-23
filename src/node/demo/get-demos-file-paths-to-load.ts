@@ -1,6 +1,6 @@
-import glob from 'fast-glob';
 import type { Folder } from 'csdm/node/settings/settings';
 import { getSettings } from 'csdm/node/settings/get-settings';
+import { findDemosInFolders } from './find-demos-in-folders';
 
 async function getFoldersToInclude(): Promise<Folder[]> {
   const settings = await getSettings();
@@ -21,17 +21,8 @@ async function getFoldersToInclude(): Promise<Folder[]> {
 }
 
 export async function getDemosFilePathsToLoad() {
-  const foldersToInclude: Folder[] = await getFoldersToInclude();
-
-  const filePaths: string[] = [];
-  for (const folder of foldersToInclude) {
-    const pattern = folder.includeSubFolders ? '**/*.dem' : '*.dem';
-    const files = await glob(pattern, {
-      cwd: folder.path,
-      absolute: true,
-    });
-    filePaths.push(...files);
-  }
+  const foldersToInclude = await getFoldersToInclude();
+  const filePaths = await findDemosInFolders(foldersToInclude);
 
   return filePaths;
 }

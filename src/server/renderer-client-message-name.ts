@@ -82,6 +82,7 @@ export const RendererClientMessageName = {
   SearchMaps: 'search-maps',
   FetchLastMigrations: 'fetch-last-migrations',
   DeleteDemosFromDatabase: 'delete-demos-from-database',
+  ImportDataFromV2Backup: 'import-data-from-v2-backup',
 } as const;
 
 export type RendererClientMessageName = (typeof RendererClientMessageName)[keyof typeof RendererClientMessageName];

@@ -71,7 +71,7 @@ class BitStream {
   }
 }
 
-type DemoHeaderSource1 = {
+export type DemoHeaderSource1 = {
   filestamp: 'HL2DEMO';
   serverName: string;
   clientName: string;

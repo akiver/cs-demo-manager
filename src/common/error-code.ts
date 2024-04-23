@@ -80,6 +80,7 @@ export const ErrorCode = {
   TagNameTooShort: 3001,
   TagNameTooLong: 3002,
   InvalidTagColor: 3003,
+  TagNotFound: 3004,
 
   InvalidDemoName: 3100,
   AnalyzeCorruptedDemo: 3200,
@@ -87,6 +88,8 @@ export const ErrorCode = {
   InsertRoundsError: 3210,
 
   SteamNotRunning: 4000,
+
+  InvalidBackupFile: 4100,
 } as const;
 
 export type ErrorCode = (typeof ErrorCode)[keyof typeof ErrorCode];

@@ -1,21 +1,10 @@
 import { sql } from 'kysely';
 import type { Migration } from '../migration';
-import type { InsertableTag } from 'csdm/node/database/tags/tag-table';
+import { insertDefaultTags } from 'csdm/node/database/tags/insert-default-tags';
 
 const createTagsTable: Migration = {
   schemaVersion: 1,
   run: async (transaction) => {
-    const defaultTags: InsertableTag[] = [
-      {
-        name: 'To watch',
-        color: '#f29423',
-      },
-      {
-        name: 'Watched',
-        color: '#33ab84',
-      },
-    ];
-
     await transaction.schema
       .createTable('tags')
       .ifNotExists()
@@ -47,11 +36,7 @@ const createTagsTable: Migration = {
     EXECUTE PROCEDURE delete_checksum_tag_relation();`;
     await deleteTrigger.execute(transaction);
 
-    await transaction
-      .insertInto('tags')
-      .values(defaultTags)
-      .onConflict((oc) => oc.column('name').doNothing())
-      .execute();
+    await insertDefaultTags();
   },
 };
 

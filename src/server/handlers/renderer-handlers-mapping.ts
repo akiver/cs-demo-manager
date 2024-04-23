@@ -163,6 +163,11 @@ import {
 import { updateRoundTagsHandler, type UpdateRoundTagsPayload } from './renderer-process/tags/update-round-tags-handler';
 import { fetchMatchFlashbangMatrixRowsHandler } from './renderer-process/match/fetch-match-flashbang-matrix-rows-handler';
 import type { FlashbangMatrixRow } from 'csdm/common/types/flashbang-matrix-row';
+import { importDataFromV2BackupHandler } from './renderer-process/database/import-data-from-v2-backup-handler';
+import type {
+  ImportV2BackupOptions,
+  ImportV2BackupResult,
+} from 'csdm/node/database/database/import-data-from-v2-backup';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -256,6 +261,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.SearchMaps]: Handler<MapNamesFilter, string[]>;
   [RendererClientMessageName.FetchLastMigrations]: Handler<void, Migration[]>;
   [RendererClientMessageName.DeleteDemosFromDatabase]: Handler<string[]>;
+  [RendererClientMessageName.ImportDataFromV2Backup]: Handler<ImportV2BackupOptions, ImportV2BackupResult>;
 }
 
 // Mapping between message names and server handlers sent from the Electron renderer process to the WebSocket server.
@@ -342,4 +348,5 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.SearchMaps]: searchMapNamesHandler,
   [RendererClientMessageName.FetchLastMigrations]: fetchMigrationsHandler,
   [RendererClientMessageName.DeleteDemosFromDatabase]: deleteDemosFromDatabaseHandler,
+  [RendererClientMessageName.ImportDataFromV2Backup]: importDataFromV2BackupHandler,
 };

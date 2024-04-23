@@ -643,6 +643,7 @@ msgstr "You need to install <0>Rosetta</0>."
 #: src/ui/search/search-results.tsx
 #: src/ui/settings/bans/use-ignored-steam-account.tsx
 #: src/ui/settings/database/database-size.tsx
+#: src/ui/settings/database/import-v2-data-button.tsx
 #: src/ui/settings/database/optimize-database-button.tsx
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 #: src/ui/settings/maps/delete-map-dialog.tsx
@@ -2066,6 +2067,7 @@ msgid "{0, plural, one {# demo} other {# demos}}"
 msgstr "{0, plural, one {# demo} other {# demos}}"
 
 #: src/ui/demos/table/demos-table.tsx
+#: src/ui/settings/database/import-v2-data-button.tsx
 msgid "No folders found."
 msgstr "No folders found."
 
@@ -5539,6 +5541,74 @@ msgstr "Database disconnection failed with the following error:"
 msgctxt "Button"
 msgid "Disconnect"
 msgstr "Disconnect"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "You must select at least one data to import."
+msgstr "You must select at least one data to import."
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "You must select a CS:DM V2 backup file."
+msgstr "You must select a CS:DM V2 backup file."
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "You need at least one folder."
+msgstr "You need at least one folder."
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "The backup file is invalid."
+msgstr "The backup file is invalid."
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "A required tag has not been found."
+msgstr "A required tag has not been found."
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "Select the JSON backup file generated from the CS:DM V2."
+msgstr "Select the JSON backup file generated from the CS:DM V2."
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgctxt "Button"
+msgid "Select backup file"
+msgstr "Select backup file"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "Import comments"
+msgstr "Import comments"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "Import statuses"
+msgstr "Import statuses"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "The comment and status of the demos inside the following folders will be updated:"
+msgstr "The comment and status of the demos inside the following folders will be updated:"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "{demoToImportCount, plural, one {<0>#</0> demo to import found in the backup file.} other {<1>#</1> demos to import found in the backup file.}}"
+msgstr "{demoToImportCount, plural, one {<0>#</0> demo to import found in the backup file.} other {<1>#</1> demos to import found in the backup file.}}"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "{demoToImportCount, plural, one {<0>{demoFoundCount}</0> demo found in folders.} other {<1>{demoFoundCount}</1> demos found in folders.}}"
+msgstr "{demoToImportCount, plural, one {<0>{demoFoundCount}</0> demo found in folders.} other {<1>{demoFoundCount}</1> demos found in folders.}}"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgid "{demoToImportCount, plural, one {<0>{updatedDemoCount}</0> demo updated:} other {<1>{updatedDemoCount}</1> demos updated:}}"
+msgstr "{demoToImportCount, plural, one {<0>{updatedDemoCount}</0> demo updated:} other {<1>{updatedDemoCount}</1> demos updated:}}"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgctxt "Dialog title"
+msgid "Import CS:DM V2"
+msgstr "Import CS:DM V2"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgctxt "Button"
+msgid "Import"
+msgstr "Import"
+
+#: src/ui/settings/database/import-v2-data-button.tsx
+msgctxt "Button"
+msgid "Import V2 data"
+msgstr "Import V2 data"
 
 #: src/ui/settings/database/optimize-database-button.tsx
 msgid "Optimize database"
