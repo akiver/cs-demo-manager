@@ -325,6 +325,7 @@ msgid "An error occurred connecting to the WebSocket server."
 msgstr ""
 
 #: src/ui/comment/use-update-comment.tsx
+#: src/ui/components/buttons/export-html-element-as-image-button.tsx
 #: src/ui/components/context-menu/items/change-matches-type-item.tsx
 #: src/ui/components/context-menu/items/update-match-demo-location-item.tsx
 #: src/ui/components/dialogs/change-demos-source-dialog.tsx
@@ -335,7 +336,7 @@ msgstr ""
 #: src/ui/downloads/pending/remove-downloads-button.tsx
 #: src/ui/hooks/use-counter-strike.tsx
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
-#: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
+#: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/player/use-update-player-comment.tsx
@@ -407,6 +408,16 @@ msgstr ""
 #: src/ui/components/buttons/details-button.tsx
 msgctxt "Button"
 msgid "Details"
+msgstr ""
+
+#: src/ui/components/buttons/export-html-element-as-image-button.tsx
+msgctxt "OS save dialog title"
+msgid "Export as PNG"
+msgstr ""
+
+#: src/ui/components/buttons/export-html-element-as-image-button.tsx
+msgctxt "Button"
+msgid "Export as PNG"
 msgstr ""
 
 #: src/ui/components/buttons/install-button.tsx
@@ -2944,6 +2955,11 @@ msgstr ""
 
 #: src/ui/match/duels/match-duels.tsx
 msgctxt "Tab link"
+msgid "Duels matrix"
+msgstr ""
+
+#: src/ui/match/duels/match-duels.tsx
+msgctxt "Tab link"
 msgid "Opening duels stats"
 msgstr ""
 
@@ -3078,6 +3094,10 @@ msgstr ""
 
 #: src/ui/match/duels/opening-duels-stats/opening-duels-stats.tsx
 msgid "Round breakdown"
+msgstr ""
+
+#: src/ui/match/duels/players-duels-matrix.tsx
+msgid "<0>{killerName}</0> killed <1>{victimName}</1> <2>{killCount}</2> times"
 msgstr ""
 
 #: src/ui/match/economy/team-economy-advantage-chart.tsx
@@ -3287,16 +3307,6 @@ msgstr ""
 #: src/ui/match/grenades/grenades-tabs.tsx
 msgctxt "Tab link grenades finder"
 msgid "Finder"
-msgstr ""
-
-#: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
-msgctxt "OS save dialog title"
-msgid "Export as PNG"
-msgstr ""
-
-#: src/ui/match/grenades/stats/export-players-flashbang-matrix-button.tsx
-msgctxt "Button"
-msgid "Export as PNG"
 msgstr ""
 
 #: src/ui/match/grenades/stats/grenade-select.tsx

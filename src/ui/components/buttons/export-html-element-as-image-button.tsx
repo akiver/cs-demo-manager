@@ -5,15 +5,16 @@ import { useShowToast } from 'csdm/ui/components/toasts/use-show-toast';
 import { useI18n } from 'csdm/ui/hooks/use-i18n';
 
 type Props = {
-  getMatrixElement: () => HTMLElement | null;
+  getElement: () => HTMLElement | null;
+  fileName: string;
 };
 
-export function ExportPlayersFlashbangMatrixButton({ getMatrixElement }: Props) {
+export function ExportHtmlElementAsImageButton({ getElement, fileName }: Props) {
   const showToast = useShowToast();
   const _ = useI18n();
 
   const onClick = async () => {
-    const element = getMatrixElement();
+    const element = getElement();
     if (!element) {
       return;
     }
@@ -21,7 +22,7 @@ export function ExportPlayersFlashbangMatrixButton({ getMatrixElement }: Props) 
     try {
       const filePath = await window.csdm.elementToImage({
         element,
-        fileName: `flashbang-matrix-${Date.now()}`,
+        fileName,
         title: _(
           msg({
             context: 'OS save dialog title',

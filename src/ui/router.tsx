@@ -40,6 +40,7 @@ import { ErrorBoundary } from './error-boundary';
 import { OpeningDuelsMapLoader } from 'csdm/ui/match/duels/opening-duels-map/opening-duels-map-loader';
 import { MatchDuels } from 'csdm/ui/match/duels/match-duels';
 import { OpeningDuelsStats } from 'csdm/ui/match/duels/opening-duels-stats/opening-duels-stats';
+import { PlayersDuelsMatrix } from './match/duels/players-duels-matrix';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -58,7 +59,8 @@ export const router = createHashRouter(
         </Route>
         <Route path={RoutePath.MatchHeatmap} element={<HeatmapLoader />} />
         <Route path={RoutePath.MatchDuels} element={<MatchDuels />}>
-          <Route index={true} element={<OpeningDuelsStats />} />
+          <Route index={true} element={<PlayersDuelsMatrix />} />
+          <Route path={RoutePath.MatchOpeningDuelsStats} element={<OpeningDuelsStats />} />
           <Route path={RoutePath.MatchOpeningDuelsMap} element={<OpeningDuelsMapLoader />} />
         </Route>
         <Route path={RoutePath.MatchWeapons} element={<Weapons />} />

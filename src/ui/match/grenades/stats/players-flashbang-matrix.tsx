@@ -3,10 +3,9 @@ import { Trans } from '@lingui/macro';
 import type { TeamNumber } from 'csdm/common/types/counter-strike';
 import { useCurrentMatch } from 'csdm/ui/match/use-current-match';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';
-import { getTeamColor } from 'csdm/ui/styles/get-team-color';
 import { Tooltip } from 'csdm/ui/components/tooltip';
 import { getColorAtPercentage, hexToRgb } from 'csdm/ui/shared/colors';
-import { ExportPlayersFlashbangMatrixButton } from 'csdm/ui/match/grenades/stats/export-players-flashbang-matrix-button';
+import { ExportHtmlElementAsImageButton } from 'csdm/ui/components/buttons/export-html-element-as-image-button';
 import { useCssVariableValue } from 'csdm/ui/hooks/use-css-variable-value';
 import { useWebSocketClient } from 'csdm/ui/hooks/use-web-socket-client';
 import { RendererClientMessageName } from 'csdm/server/renderer-client-message-name';
@@ -14,17 +13,7 @@ import { Status } from 'csdm/common/types/status';
 import { Spinner } from 'csdm/ui/components/spinner';
 import { ErrorMessage } from 'csdm/ui/components/error-message';
 import type { FlashbangMatrixRow } from 'csdm/common/types/flashbang-matrix-row';
-
-function TeamIndicator({ color }: { color: string }) {
-  return (
-    <div
-      className="flex self-center size-8 rounded-full"
-      style={{
-        backgroundColor: color,
-      }}
-    />
-  );
-}
+import { TeamIndicator } from 'csdm/ui/components/match/team-indicator';
 
 type PlayerInfo = {
   steamId: string;
@@ -83,15 +72,13 @@ export function PlayersFlashbangMatrix() {
       return (
         <div className="flex flex-col w-fit" ref={chart}>
           {players.map((flasher) => {
-            const teamColor = getTeamColor(flasher.teamNumber);
-
             return (
               <div key={flasher.steamId} className="flex">
                 <div className="flex items-center gap-x-8">
                   <p className="w-[128px] truncate selectable" title={flasher.name}>
                     {flasher.name}
                   </p>
-                  <TeamIndicator color={teamColor} />
+                  <TeamIndicator teamNumber={flasher.teamNumber} />
                 </div>
                 <div className="flex ml-8">
                   {flasher.rows.map((row) => {
@@ -131,11 +118,9 @@ export function PlayersFlashbangMatrix() {
           <div className="flex mt-8">
             <div className="flex w-[152px]" />
             {players.map((player) => {
-              const teamColor = getTeamColor(player.teamNumber);
-
               return (
                 <div key={player.steamId} className="flex flex-col gap-y-4 w-[84px]">
-                  <TeamIndicator color={teamColor} />
+                  <TeamIndicator teamNumber={player.teamNumber} />
                   <p className="overflow-hidden break-words selectable" title={player.name}>
                     {player.name}
                   </p>
@@ -161,7 +146,12 @@ export function PlayersFlashbangMatrix() {
           <PanelTitle>
             <Trans>Players flashbang matrix</Trans>
           </PanelTitle>
-          {status === Status.Success && <ExportPlayersFlashbangMatrixButton getMatrixElement={() => chart.current} />}
+          {status === Status.Success && (
+            <ExportHtmlElementAsImageButton
+              getElement={() => chart.current}
+              fileName={`flashbang-matrix-${Date.now()}`}
+            />
+          )}
         </div>
       }
     >

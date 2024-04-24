@@ -10,6 +10,9 @@ export function MatchDuels() {
     <>
       <TabLinks>
         <TabLink url="">
+          <Trans context="Tab link">Duels matrix</Trans>
+        </TabLink>
+        <TabLink url={RoutePath.MatchOpeningDuelsStats}>
           <Trans context="Tab link">Opening duels stats</Trans>
         </TabLink>
         <TabLink url={RoutePath.MatchOpeningDuelsMap}>

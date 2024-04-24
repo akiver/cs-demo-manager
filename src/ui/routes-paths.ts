@@ -6,6 +6,7 @@ export const RoutePath = {
   MatchPlayers: 'players',
   MatchWeapons: 'weapons',
   MatchDuels: 'duels',
+  MatchOpeningDuelsStats: 'opening-duels-stats',
   MatchOpeningDuelsMap: 'opening-duels-map',
   MatchGrenades: 'grenades',
   MatchGrenadesFinder: 'finder',

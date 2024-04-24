@@ -168,6 +168,8 @@ import type {
   ImportV2BackupOptions,
   ImportV2BackupResult,
 } from 'csdm/node/database/database/import-data-from-v2-backup';
+import { fetchMatchDuelsMatrixRowsHandler } from './renderer-process/match/fetch-match-duels-matrix-rows-handler';
+import type { DuelMatrixRow } from 'csdm/common/types/duel-matrix-row';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -225,6 +227,7 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.DisableFfmpegCustomLocation]: Handler<boolean, FfmpegVersionChangedPayload>;
   [RendererClientMessageName.CancelVideosGeneration]: Handler;
   [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: Handler<string, FlashbangMatrixRow[]>;
+  [RendererClientMessageName.FetchMatchDuelsMatrixRows]: Handler<string, DuelMatrixRow[]>;
   [RendererClientMessageName.FetchMatchGrenadesThrow]: Handler<string, GrenadeThrow[]>;
   [RendererClientMessageName.WatchDemo]: Handler<WatchDemoPayload, WatchDemoErrorPayload | undefined>;
   [RendererClientMessageName.WatchPlayerRounds]: Handler<WatchPlayerRoundsPayload, WatchDemoErrorPayload | undefined>;
@@ -321,6 +324,7 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.DisableFfmpegCustomLocation]: disableFfmpegCustomLocationHandler,
   [RendererClientMessageName.CancelVideosGeneration]: cancelVideosGenerationHandler,
   [RendererClientMessageName.FetchMatchFlashbangMatrixRows]: fetchMatchFlashbangMatrixRowsHandler,
+  [RendererClientMessageName.FetchMatchDuelsMatrixRows]: fetchMatchDuelsMatrixRowsHandler,
   [RendererClientMessageName.FetchMatchGrenadesThrow]: fetchMatchGrenadesThrowHandler,
   [RendererClientMessageName.WatchDemo]: watchDemoHandler,
   [RendererClientMessageName.WatchPlayerRounds]: watchPlayerRoundsHandler,
