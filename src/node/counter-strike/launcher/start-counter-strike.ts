@@ -25,13 +25,13 @@ type StartCounterStrikeOptions = {
   width?: number;
   height?: number;
   fullscreen?: boolean;
-  additionalArguments?: string[];
+  playDemoArgs?: string[];
   signal?: AbortSignal;
   onGameStart: () => void;
 };
 
 export async function startCounterStrike(options: StartCounterStrikeOptions) {
-  const { demoPath, game, signal, additionalArguments, fullscreen } = options;
+  const { demoPath, game, signal, playDemoArgs, fullscreen } = options;
 
   if (game === Game.CS2 && isMac) {
     throw new UnsupportedGame(game);
@@ -50,8 +50,8 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     const telnetConnection = await getCsgoTelnetConnection();
     if (telnetConnection !== undefined) {
       let command = `playdemo "${demoPath}"`;
-      if (Array.isArray(additionalArguments)) {
-        command += `${additionalArguments.join(' ')}`;
+      if (Array.isArray(playDemoArgs)) {
+        command += ` ${playDemoArgs.join(' ')}`;
       }
       try {
         logger.log('Sending playdemo command to CSGO', command);
@@ -91,8 +91,8 @@ export async function startCounterStrike(options: StartCounterStrikeOptions) {
     '+playdemo',
     `"${demoPath}"`,
   ];
-  if (additionalArguments) {
-    launchParameters.push(...additionalArguments);
+  if (playDemoArgs) {
+    launchParameters.push(...playDemoArgs);
   }
   launchParameters.push(userLaunchParameters);
   const width = options.width ?? userWidth;

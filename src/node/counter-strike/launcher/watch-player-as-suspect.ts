@@ -3,7 +3,8 @@ import { startCounterStrike } from './start-counter-strike';
 import { deleteVdmFile } from './delete-vdm-file';
 import { detectDemoGame } from './detect-demo-game';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
-import { isMac } from 'csdm/node/os/is-mac';
+import { getSettings } from 'csdm/node/settings/get-settings';
+import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
 type Options = {
   demoPath: string;
@@ -15,15 +16,27 @@ export async function watchPlayerAsSuspect({ demoPath, steamId, onGameStart }: O
   const game = await detectDemoGame(demoPath);
   if (game === Game.CSGO) {
     await deleteVdmFile(demoPath);
-  } else if (!isMac) {
+  } else {
     await deleteJsonActionsFile(demoPath);
   }
 
-  // TODO CS2 Re-enable it in the UI if CS2 support the anonsuspect argument one day
-  await startCounterStrike({
-    demoPath,
-    game,
-    additionalArguments: [steamId, 'anonsuspect'],
-    onGameStart,
-  });
+  const settings = await getSettings();
+  const { useHlae } = settings.playback;
+  const playDemoArgs = [steamId, 'anonsuspect'];
+
+  if (useHlae) {
+    await watchDemoWithHlae({
+      demoPath,
+      game,
+      playDemoArgs,
+      onGameStart,
+    });
+  } else {
+    await startCounterStrike({
+      demoPath,
+      game,
+      playDemoArgs,
+      onGameStart,
+    });
+  }
 }

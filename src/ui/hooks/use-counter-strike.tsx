@@ -56,6 +56,9 @@ function getErrorMessageFromError(error: WatchDemoErrorPayload) {
       const game = error.game;
       return <Trans>{game} is not supported on your operating system</Trans>;
     }
+    case ErrorCode.HlaeNotInstalled: {
+      return <Trans>HLAE executable not found</Trans>;
+    }
     case ErrorCode.NoKillsFound:
       return <Trans>No kills found</Trans>;
     case ErrorCode.NoRoundsFound:

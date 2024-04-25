@@ -4,7 +4,11 @@ import type { Migration } from './migration';
 // Don't forget to increment the variable CURRENT_SCHEMA_VERSION!
 // Migrations are lazy loaded because we don't need to keep them in memory.
 export async function getAllMigrations(): Promise<Migration[]> {
-  const modules = await Promise.all([import('./migrations/initialize-locale'), import('./migrations/v2')]);
+  const modules = await Promise.all([
+    import('./migrations/initialize-locale'),
+    import('./migrations/v2'),
+    import('./migrations/v3'),
+  ]);
   const migrations: Migration[] = modules.map((module) => module.default);
 
   return migrations.sort((migrationA, migrationB) => {

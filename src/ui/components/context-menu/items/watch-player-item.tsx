@@ -19,6 +19,7 @@ export function WatchPlayerItem({ demoPath, steamId, game }: Props) {
       <WatchPlayerRoundsItem steamId={steamId} demoPath={demoPath} />
       <WatchPlayerHighlightsItem steamId={steamId} demoPath={demoPath} game={game} />
       <WatchPlayerLowlightsItem steamId={steamId} demoPath={demoPath} game={game} />
+      {/* TODO CS2 Re-enable it if CS2 supports the anonsuspect argument one day */}
       {game === Game.CSGO && <WatchPlayerAsSuspectItem steamId={steamId} demoPath={demoPath} />}
     </SubContextMenu>
   );

@@ -12,6 +12,7 @@ import { LowlightsWatchAfterKillDelay } from './lowlights-watch-after-kill-delay
 import { CustomLowlights } from './custom-lowlights';
 import { WatchRoundBeforeDelay } from './watch-round-before-delay';
 import { WatchRoundAfterDelay } from './watch-round-after-delay';
+import { UseHlae } from './use-hlae';
 
 export function PlaybackSettings() {
   return (
@@ -28,6 +29,7 @@ export function PlaybackSettings() {
       <LowlightsWatchAfterKillDelay />
       <WatchRoundBeforeDelay />
       <WatchRoundAfterDelay />
+      {window.csdm.isWindows && <UseHlae />}
     </SettingsView>
   );
 }

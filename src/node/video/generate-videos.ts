@@ -12,7 +12,6 @@ import { VirtualDubNotInstalled } from 'csdm/node/video/errors/virtual-dub-not-i
 import { isFfmpegInstalled } from 'csdm/node/video/ffmpeg/is-ffmpeg-installed';
 import { FfmpegNotInstalled } from 'csdm/node/video/errors/ffmpeg-not-installed';
 import { HlaeNotInstalled } from 'csdm/node/video/errors/hlae-not-installed';
-import { getHlaeExecutablePath } from 'csdm/node/video/hlae/hlae-location';
 import { isWindows } from 'csdm/node/os/is-windows';
 import { killCounterStrikeProcesses } from 'csdm/node/counter-strike/kill-counter-strike-processes';
 import { EncoderSoftware } from 'csdm/common/types/encoder-software';
@@ -248,14 +247,14 @@ export async function generateVideos(options: Options) {
 
   try {
     if (isWindows) {
-      const hlaeExecutablePath = await getHlaeExecutablePath();
       const hlaeOptions: HlaeOptions = {
         demoPath,
         game,
-        hlaeExecutablePath,
         width,
         height,
+        fullscreen: false,
         signal,
+        gameParameters: null,
       };
       await watchDemoWithHlae(hlaeOptions);
     } else {

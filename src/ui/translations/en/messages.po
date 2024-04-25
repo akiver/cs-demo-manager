@@ -2625,6 +2625,10 @@ msgid "{game} is not supported on your operating system"
 msgstr "{game} is not supported on your operating system"
 
 #: src/ui/hooks/use-counter-strike.tsx
+msgid "HLAE executable not found"
+msgstr "HLAE executable not found"
+
+#: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
 msgstr "No kills found"
 
@@ -5996,6 +6000,15 @@ msgstr "Before kill delay (lowlights)"
 #: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
 msgid "How many seconds to start before a kill when watching lowlights"
 msgstr "How many seconds to start before a kill when watching lowlights"
+
+#: src/ui/settings/playback/use-hlae.tsx
+msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
+msgstr "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
+
+#: src/ui/settings/playback/use-hlae.tsx
+msgctxt "Settings title"
+msgid "Use HLAE"
+msgstr "Use HLAE"
 
 #: src/ui/settings/playback/watch-before-kill-delay.tsx
 msgctxt "Input placeholder"

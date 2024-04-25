@@ -12,15 +12,19 @@ import { installCs2ServerPlugin } from './cs2-server-plugin';
 import { assertDemoPathIsValid } from './assert-demo-path-is-valid';
 import { sleep } from 'csdm/common/sleep';
 import { defineCfgFolderLocation } from './define-cfg-folder-location';
+import { getHlaeExecutablePathOrThrow } from 'csdm/node/video/hlae/hlae-location';
 
 export type HlaeOptions = {
   demoPath: string;
   game: Game;
+  fullscreen?: boolean;
   width?: number;
   height?: number;
-  hlaeExecutablePath: string;
-  csgoLaunchOptions?: string;
-  signal: AbortSignal;
+  playDemoArgs?: string[];
+  gameParameters?: string | null;
+  hlaeParameters?: string;
+  signal?: AbortSignal;
+  onGameStart?: () => void;
 };
 
 async function waitForCounterStrikeExit() {
@@ -37,12 +41,12 @@ async function waitForCounterStrikeExit() {
   });
 }
 
-async function startHlae(command: string, signal: AbortSignal) {
+async function startHlae(command: string, signal?: AbortSignal) {
   logger.log('Starting HLAE with command', command);
 
   return new Promise<void>((resolve, reject) => {
     const hlaeProcess = exec(command, { windowsHide: true }, (error, stdout, stderr) => {
-      if (signal.aborted) {
+      if (signal?.aborted) {
         return;
       }
 
@@ -57,7 +61,7 @@ async function startHlae(command: string, signal: AbortSignal) {
     hlaeProcess.on('exit', async (code) => {
       logger.log('HLAE exited with code', code);
 
-      if (signal.aborted) {
+      if (signal?.aborted) {
         return reject(abortError);
       }
 
@@ -72,34 +76,46 @@ async function startHlae(command: string, signal: AbortSignal) {
   });
 }
 
-export async function watchDemoWithHlae({
-  demoPath,
-  game,
-  hlaeExecutablePath,
-  csgoLaunchOptions,
-  width,
-  height,
-  signal,
-}: HlaeOptions) {
+export async function watchDemoWithHlae(options: HlaeOptions) {
   if (!isWindows) {
     throw new Error('HLAE is available only on Windows');
   }
 
+  const { demoPath, game, signal } = options;
   assertDemoPathIsValid(demoPath, game);
 
+  const hlaeExecutablePath = await getHlaeExecutablePathOrThrow();
   const csHasBeenKilled = await killCounterStrikeProcesses();
   const csExecutablePath = await getCounterStrikeExecutablePath(game);
+  const settings = await getSettings();
+  const {
+    width: userWidth,
+    height: userHeight,
+    fullscreen: userFullscreen,
+    launchParameters: userLaunchParameters,
+  } = settings.playback;
 
-  const hlaeParameters: string[] = ['-noGui', '-autoStart'];
-  const launchOptions = ['-insecure', '-novid', '-sw', '+playdemo', `\\"${demoPath}\\"`];
-  if (width) {
-    launchOptions.push('-width', String(width));
+  const gameParameters = ['-insecure', '-novid', '+playdemo', `\\"${demoPath}\\"`];
+  if (Array.isArray(options.playDemoArgs)) {
+    gameParameters.push(...options.playDemoArgs);
   }
-  if (height) {
-    launchOptions.push('-height', String(height));
+  const width = options.width ?? userWidth;
+  gameParameters.push('-width', String(width));
+  const height = options.height ?? userHeight;
+  gameParameters.push('-height', String(height));
+  const enableFullscreen = options.fullscreen ?? userFullscreen;
+  gameParameters.push(enableFullscreen ? '-fullscreen' : '-sw');
+  if (options.gameParameters !== null) {
+    const parameters = options.gameParameters ?? userLaunchParameters;
+    if (typeof parameters === 'string' && parameters !== '') {
+      gameParameters.push(parameters);
+    }
   }
-  if (csgoLaunchOptions !== undefined) {
-    launchOptions.push(csgoLaunchOptions);
+
+  const hlaeParameters = ['-noGui', '-autoStart', '-afxDisableSteamStorage'];
+  const { configFolderEnabled, configFolderPath, parameters: userHlaeParameters } = settings.video.hlae;
+  if (configFolderEnabled && configFolderPath !== '') {
+    hlaeParameters.push('-mmcfgEnabled true', `-mmcfg "${configFolderPath}"`);
   }
 
   if (game !== Game.CSGO) {
@@ -107,8 +123,7 @@ export async function watchDemoWithHlae({
       '-customLoader',
       `-hookDllPath "${path.join(path.dirname(hlaeExecutablePath), 'x64', 'AfxHookSource2.dll')}"`,
       `-programPath "${csExecutablePath}"`,
-      `-cmdLine "${launchOptions.join(' ')}"`,
-      '-afxDisableSteamStorage',
+      `-cmdLine "${gameParameters.join(' ')}"`,
     );
     if (csHasBeenKilled) {
       // Wait a few seconds before installing the plugin as its files may still be locked by CS2
@@ -120,21 +135,17 @@ export async function watchDemoWithHlae({
     hlaeParameters.push(
       '-csgoLauncher',
       `-csgoExe "${csExecutablePath}"`,
-      `-customLaunchOptions "${launchOptions.join(' ')}"`,
+      `-customLaunchOptions "${gameParameters.join(' ')}"`,
     );
   }
 
-  const settings = await getSettings();
-  const { configFolderEnabled, configFolderPath, parameters } = settings.video.hlae;
-  if (configFolderEnabled && configFolderPath !== '') {
-    hlaeParameters.push('-mmcfgEnabled true', `-mmcfg "${configFolderPath}"`);
-  }
-
-  if (typeof parameters === 'string') {
+  const parameters = options.hlaeParameters ?? userHlaeParameters;
+  if (typeof parameters === 'string' && parameters !== '') {
     hlaeParameters.push(parameters);
   }
 
   const command = `"${hlaeExecutablePath}" ${hlaeParameters.join(' ')}`;
 
+  options.onGameStart?.();
   await startHlae(command, signal);
 }

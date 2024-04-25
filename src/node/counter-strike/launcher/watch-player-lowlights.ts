@@ -10,6 +10,7 @@ import { deleteVdmFile } from './delete-vdm-file';
 import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { generatePlayerDeathsJsonFile } from '../json-actions-file/generate-player-deaths-json-file';
+import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
 function assertPlayerHasDeaths(match: PlaybackMatch, steamId: string) {
   const playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
@@ -26,9 +27,9 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     await deleteJsonActionsFile(demoPath);
   }
 
-  const additionalArguments: string[] = [];
+  const playDemoArgs: string[] = [];
   const settings = await getSettings();
-  const { useCustomLowlights, lowlights } = settings.playback;
+  const { useCustomLowlights, lowlights, useHlae } = settings.playback;
   const match = await getPlaybackMatch({
     demoPath,
     steamId,
@@ -38,7 +39,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     if (useCustomLowlights) {
       if (match === undefined) {
         // Fallback to CSGO built in lowlights
-        additionalArguments.push(steamId, 'lowlights');
+        playDemoArgs.push(steamId, 'lowlights');
       } else {
         assertPlayerHasDeaths(match, steamId);
 
@@ -51,7 +52,7 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
         });
       }
     } else {
-      additionalArguments.push(steamId, 'lowlights');
+      playDemoArgs.push(steamId, 'lowlights');
     }
   } else {
     // CS2 built-in lowlights is not yet available, so we always use custom lowlights
@@ -68,10 +69,19 @@ export async function watchPlayerLowlights({ demoPath, steamId, perspective, onG
     });
   }
 
-  await startCounterStrike({
-    demoPath,
-    game,
-    additionalArguments,
-    onGameStart,
-  });
+  if (useHlae) {
+    await watchDemoWithHlae({
+      demoPath,
+      game,
+      playDemoArgs,
+      onGameStart,
+    });
+  } else {
+    await startCounterStrike({
+      demoPath,
+      game,
+      playDemoArgs,
+      onGameStart,
+    });
+  }
 }

@@ -58,6 +58,7 @@ export const defaultSettings: Settings = {
       afterRoundDelayInSeconds: 2,
     },
     launchParameters: '',
+    useHlae: false,
   },
   video: {
     closeGameAfterRecording: true,

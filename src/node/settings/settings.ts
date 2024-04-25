@@ -64,6 +64,7 @@ type PlaybackSettings = {
     afterRoundDelayInSeconds: number; // how many seconds to wait before skipping to the next round (on round end or player death)
   };
   launchParameters: string;
+  useHlae: boolean;
 };
 
 export type PlayerProfileSettings = {

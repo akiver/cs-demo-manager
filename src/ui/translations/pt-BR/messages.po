@@ -2630,6 +2630,10 @@ msgid "{game} is not supported on your operating system"
 msgstr "{game} não é suportado no seu sistema operacional"
 
 #: src/ui/hooks/use-counter-strike.tsx
+msgid "HLAE executable not found"
+msgstr ""
+
+#: src/ui/hooks/use-counter-strike.tsx
 msgid "No kills found"
 msgstr "Nenhum abate encontrado"
 
@@ -6001,6 +6005,15 @@ msgstr "Atraso após morrer (piores momentos)"
 #: src/ui/settings/playback/lowlights-watch-before-kill-delay.tsx
 msgid "How many seconds to start before a kill when watching lowlights"
 msgstr "Quantos segundos antes de um abate ao assistir os piores momentos"
+
+#: src/ui/settings/playback/use-hlae.tsx
+msgid "Start Counter-Strike using HLAE configured in the <0>video settings</0>"
+msgstr ""
+
+#: src/ui/settings/playback/use-hlae.tsx
+msgctxt "Settings title"
+msgid "Use HLAE"
+msgstr ""
 
 #: src/ui/settings/playback/watch-before-kill-delay.tsx
 msgctxt "Input placeholder"

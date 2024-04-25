@@ -9,6 +9,7 @@ import { generatePlayerRoundsVdmFile } from 'csdm/node/vdm/generate-player-round
 import { NoRoundsFound } from './errors/not-rounds-found';
 import { generatePlayerRoundsJsonFile } from '../json-actions-file/generate-player-rounds-json-file';
 import { getSettings } from 'csdm/node/settings/get-settings';
+import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
 export type Round = {
   number: number;
@@ -96,9 +97,17 @@ export async function watchPlayerRounds({ demoPath, steamId, onGameStart }: Opti
     });
   }
 
-  await startCounterStrike({
-    demoPath,
-    game,
-    onGameStart,
-  });
+  if (settings.playback.useHlae) {
+    await watchDemoWithHlae({
+      demoPath,
+      game,
+      onGameStart,
+    });
+  } else {
+    await startCounterStrike({
+      demoPath,
+      game,
+      onGameStart,
+    });
+  }
 }

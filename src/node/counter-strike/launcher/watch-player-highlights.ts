@@ -10,6 +10,7 @@ import { WatchType } from 'csdm/common/types/watch-type';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
 import { generatePlayerKillsJsonFile } from '../json-actions-file/generate-player-kills-json-file';
 import type { Perspective } from 'csdm/common/types/perspective';
+import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
 type Options = {
   demoPath: string;
@@ -33,9 +34,9 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     await deleteJsonActionsFile(demoPath);
   }
 
-  const additionalArguments: string[] = [];
+  const playDemoArgs: string[] = [];
   const settings = await getSettings();
-  const { useCustomHighlights, highlights } = settings.playback;
+  const { useCustomHighlights, highlights, useHlae } = settings.playback;
   const match = await getPlaybackMatch({
     demoPath,
     steamId,
@@ -45,7 +46,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     if (useCustomHighlights) {
       if (match === undefined) {
         // Fallback to CSGO built in highlights
-        additionalArguments.push(steamId);
+        playDemoArgs.push(steamId);
       } else {
         assertPlayerHasKills(match, steamId);
 
@@ -58,7 +59,7 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
         });
       }
     } else {
-      additionalArguments.push(steamId);
+      playDemoArgs.push(steamId);
     }
   } else {
     // CS2 built-in highlights is not yet available, so we always use custom highlights
@@ -66,7 +67,6 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
       throw new NoKillsFound();
     }
     assertPlayerHasKills(match, steamId);
-
     await generatePlayerKillsJsonFile({
       match,
       perspective,
@@ -75,10 +75,19 @@ export async function watchPlayerHighlights({ demoPath, steamId, perspective, on
     });
   }
 
-  await startCounterStrike({
-    demoPath,
-    game,
-    additionalArguments,
-    onGameStart,
-  });
+  if (useHlae) {
+    await watchDemoWithHlae({
+      demoPath,
+      game,
+      playDemoArgs,
+      onGameStart,
+    });
+  } else {
+    await startCounterStrike({
+      demoPath,
+      game,
+      playDemoArgs,
+      onGameStart,
+    });
+  }
 }

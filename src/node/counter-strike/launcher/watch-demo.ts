@@ -4,6 +4,8 @@ import { VDMGenerator } from 'csdm/node/vdm/generator';
 import { JSONActionsFileGenerator } from '../json-actions-file/json-actions-file-generator';
 import { detectDemoGame } from './detect-demo-game';
 import { deleteJsonActionsFile } from '../json-actions-file/delete-json-actions-file';
+import { getSettings } from 'csdm/node/settings/get-settings';
+import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
 async function generateVdmFile(demoPath: string, startTick?: number, steamId?: string) {
   const vdm = new VDMGenerator(demoPath);
@@ -51,8 +53,16 @@ export async function watchDemo(options: Options) {
     await generateJsonActionsFile(demoPath, startTick, focusSteamId);
   }
 
-  await startCounterStrike({
-    ...options,
-    game,
-  });
+  const settings = await getSettings();
+  if (settings.playback.useHlae) {
+    await watchDemoWithHlae({
+      ...options,
+      game,
+    });
+  } else {
+    await startCounterStrike({
+      ...options,
+      game,
+    });
+  }
 }
