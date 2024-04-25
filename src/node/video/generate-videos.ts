@@ -84,6 +84,7 @@ async function buildVideos({ signal, ...options }: Options) {
     onSequenceStart,
     onConcatenateSequencesStart,
   } = options;
+  const shouldConcatenate = concatenateSequences && sequences.length > 1;
 
   for (const sequence of sequences) {
     onSequenceStart(sequence.number, sequences.length);
@@ -119,12 +120,12 @@ async function buildVideos({ signal, ...options }: Options) {
       );
     }
 
-    if (!concatenateSequences && deleteRawFilesAfterEncoding) {
+    if (!shouldConcatenate && deleteRawFilesAfterEncoding) {
       await deleteSequenceRawFiles(rawFilesFolderPath, sequence);
     }
   }
 
-  if (concatenateSequences) {
+  if (shouldConcatenate) {
     onConcatenateSequencesStart();
     await concatenateVideosFromSequences(
       {
