@@ -22,13 +22,20 @@ export async function createJsonActionsFileForRecording({
   tickrate,
 }: Options) {
   const json = new JSONActionsFileGenerator(demoPath);
-  const mandatoryCommands = ['sv_cheats 1', 'volume 1'];
+  const mandatoryCommands = [
+    'sv_cheats 1',
+    'volume 1',
+    'cl_hud_telemetry_frametime_show 0',
+    'cl_hud_telemetry_net_misdelivery_show 0',
+    'cl_hud_telemetry_ping_show 0',
+    'cl_hud_telemetry_serverrecvmargin_graph_show 0',
+    'r_show_build_info 0',
+  ];
   for (const command of mandatoryCommands) {
     json.addExecCommand(1, command);
   }
   if (showOnlyDeathNotices) {
     json.addExecCommand(1, 'cl_draw_only_deathnotices 1');
-    json.addExecCommand(1, 'r_show_build_info 0');
   }
 
   for (let i = 0; i < sequences.length; i++) {
