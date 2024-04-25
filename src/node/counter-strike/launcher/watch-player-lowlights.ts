@@ -13,8 +13,8 @@ import { generatePlayerDeathsJsonFile } from '../json-actions-file/generate-play
 import { watchDemoWithHlae } from './watch-demo-with-hlae';
 
 function assertPlayerHasDeaths(match: PlaybackMatch, steamId: string) {
-  const playerKills = match.kills.filter((kill) => kill.killerSteamId === steamId);
-  if (playerKills.length === 0) {
+  const playerDeaths = match.kills.filter((kill) => kill.victimSteamId === steamId);
+  if (playerDeaths.length === 0) {
     throw new NoDeathsFound();
   }
 }
