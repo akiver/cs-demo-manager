@@ -3,7 +3,7 @@ import type { Stats } from 'node:fs';
 import { InvalidBackupFile } from './errors/invalid-backup-file';
 import { getSettings } from 'csdm/node/settings/get-settings';
 import { findDemosInFolders } from 'csdm/node/demo/find-demos-in-folders';
-import { getDemoHeader, type DemoHeaderSource1 } from 'csdm/node/demo/get-demo-header';
+import { getDemoHeader, type DemoHeader, type DemoHeaderSource1 } from 'csdm/node/demo/get-demo-header';
 import { getDemoChecksumFromFileStats } from 'csdm/node/demo/get-demo-checksum-from-file-stats';
 import { insertOrUpdateComment } from 'csdm/node/database/comments/insert-or-update-comment';
 import { updateChecksumsTags } from 'csdm/node/database/tags/update-checksums-tags';
@@ -31,7 +31,9 @@ export type ImportV2BackupResult = {
 };
 
 function getDemoIdV2(header: DemoHeaderSource1, stats: Stats) {
-  const seconds = new Date(stats.mtime.getTime() - stats.mtime.getTimezoneOffset() * 60000).getTime() / 1000;
+  const seconds = Math.trunc(
+    new Date(stats.mtime.getTime() - stats.mtime.getTimezoneOffset() * 60000).getTime() / 1000,
+  );
 
   return `${header.mapName.replace('/', '')}_${header.signonLength}${header.playbackTicks}${header.playbackFrames}${seconds}${stats.size}`;
 }
@@ -100,8 +102,14 @@ export async function importDataFromV2Backup(options: ImportV2BackupOptions): Pr
   }
 
   for (const demoPath of demoPaths) {
-    const header = await getDemoHeader(demoPath);
-    if (header.filestamp !== 'HL2DEMO') {
+    let header: DemoHeader | undefined;
+    try {
+      header = await getDemoHeader(demoPath);
+    } catch (error) {
+      // Ignore invalid header
+    }
+
+    if (header?.filestamp !== 'HL2DEMO') {
       continue;
     }
 
