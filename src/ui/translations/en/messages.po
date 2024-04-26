@@ -1303,6 +1303,7 @@ msgid "Comment"
 msgstr "Comment"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Comment"
@@ -1315,6 +1316,7 @@ msgid "Tags"
 msgstr "Tags"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Tags"
 msgstr "Tags"
@@ -1426,6 +1428,7 @@ msgid "Kills"
 msgstr "Kills"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Kills"
@@ -1450,6 +1453,7 @@ msgid "Assists"
 msgstr "Assists"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Assists"
@@ -1474,6 +1478,7 @@ msgid "Deaths"
 msgstr "Deaths"
 
 #: src/ui/components/matches/use-matches-columns.tsx
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Deaths"
@@ -2109,6 +2114,11 @@ msgstr "GOTV"
 #: src/ui/demos/table/update-demos-type-item.tsx
 msgid "POV"
 msgstr "POV"
+
+#: src/ui/demos/table/use-demos-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Status"
+msgstr "Status"
 
 #: src/ui/demos/table/use-demos-columns.ts
 msgctxt "Table header"
@@ -3616,6 +3626,11 @@ msgid "Damages"
 msgstr "Damages"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Damages"
+msgstr "Damages"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header kast"
 msgid "KAST"
@@ -3641,6 +3656,12 @@ msgstr "Average Damage per Round"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Average Damage per Round"
+msgstr "Average Damage per Round"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header utility damage per round"
 msgid "UDR"
 msgstr "UDR"
@@ -3650,6 +3671,22 @@ msgstr "UDR"
 msgctxt "Table header tooltip"
 msgid "Utility damage per round"
 msgstr "Utility damage per round"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Utility Damage per Round"
+msgstr "Utility Damage per Round"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+#: src/ui/players/table/use-players-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Headshot"
+msgstr "Headshot"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Headshot percentage"
+msgstr "Headshot percentage"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
@@ -3686,6 +3723,11 @@ msgid "Total Utility Damage Dealt"
 msgstr "Total Utility Damage Dealt"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Utility Damage"
+msgstr "Utility Damage"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first kill count"
 msgid "FK"
 msgstr "FK"
@@ -3694,6 +3736,11 @@ msgstr "FK"
 msgctxt "Table header tooltip"
 msgid "First kills of a round"
 msgstr "First kills of a round"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "First Kills"
+msgstr "First Kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first death count"
@@ -3706,6 +3753,11 @@ msgid "First deaths of a round"
 msgstr "First deaths of a round"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "First Deaths"
+msgstr "First Deaths"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade kill count"
 msgid "TK"
 msgstr "TK"
@@ -3714,6 +3766,11 @@ msgstr "TK"
 msgctxt "Table header tooltip"
 msgid "Trade Kills (Kill revenged within 5s after a teammate died)"
 msgstr "Trade Kills (Kill revenged within 5s after a teammate died)"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Trade Kills"
+msgstr "Trade Kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header trade death count"
@@ -3726,6 +3783,11 @@ msgid "Trade Deaths (Death revenged by a teammate within 5s after the player die
 msgstr "Trade Deaths (Death revenged by a teammate within 5s after the player died)"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Trade Deaths"
+msgstr "Trade Deaths"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade kill count"
 msgid "FTK"
 msgstr "FTK"
@@ -3734,6 +3796,11 @@ msgstr "FTK"
 msgctxt "Table header tooltip"
 msgid "First Trade Kills (Kill revenged within 5s after a teammate died)"
 msgstr "First Trade Kills (Kill revenged within 5s after a teammate died)"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "First Trade Kills"
+msgstr "First Trade Kills"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header first trade death count"
@@ -3746,6 +3813,11 @@ msgid "First Trade Deaths (Death revenged by a teammate within 5s after the play
 msgstr "First Trade Deaths (Death revenged by a teammate within 5s after the player died)"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "First Trade Deaths"
+msgstr "First Trade Deaths"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header wallbang kill count"
 msgid "WB"
 msgstr "WB"
@@ -3756,12 +3828,32 @@ msgid "Wallbang Kill"
 msgstr "Wallbang Kill"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Wallbang Kills"
+msgstr "Wallbang Kills"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Collateral Kills"
+msgstr "Collateral Kills"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Score"
+msgstr "Score"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header bomb planted count"
 msgid "BP"
 msgstr "BP"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
+msgid "Bomb Planted"
+msgstr "Bomb Planted"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
 msgid "Bomb Planted"
 msgstr "Bomb Planted"
 
@@ -3776,12 +3868,22 @@ msgid "Bomb Defused"
 msgstr "Bomb Defused"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "Bomb Defused"
+msgstr "Bomb Defused"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header hostage rescued count"
 msgid "HR"
 msgstr "HR"
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
+msgid "Hostage Rescued"
+msgstr "Hostage Rescued"
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
 msgid "Hostage Rescued"
 msgstr "Hostage Rescued"
 
@@ -5217,11 +5319,6 @@ msgstr "Number of matches played"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Dropdown column visibility"
-msgid "Headshot"
-msgstr "Headshot"
-
-#: src/ui/players/table/use-players-columns.ts
-msgctxt "Dropdown column visibility"
 msgid "Headshot %"
 msgstr "Headshot %"
 
@@ -5229,11 +5326,6 @@ msgstr "Headshot %"
 msgctxt "Dropdown column visibility"
 msgid "Utility damage per round"
 msgstr "Utility damage per round"
-
-#: src/ui/players/table/use-players-columns.ts
-msgctxt "Dropdown column visibility"
-msgid "Average Damage per Round"
-msgstr "Average Damage per Round"
 
 #: src/ui/players/table/use-players-columns.ts
 msgctxt "Table header"

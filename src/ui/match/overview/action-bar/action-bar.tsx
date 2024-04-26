@@ -7,6 +7,7 @@ import { SeeDemoButton } from './see-demo-button';
 import { CopyMatchShareCodeButton } from './copy-match-share-code';
 import { ExportMatchAsXlsxButton } from './export-match-as-xlsx-button';
 import { ExportMatchToJsonButton } from './export-match-to-json-button';
+import { ScoreboardColumnsVisibility } from './scoreboard-columns-visibility';
 
 export function MatchActionBar() {
   return (
@@ -22,6 +23,7 @@ export function MatchActionBar() {
           <ExportMatchToJsonButton />
         </>
       }
+      right={<ScoreboardColumnsVisibility />}
     />
   );
 }

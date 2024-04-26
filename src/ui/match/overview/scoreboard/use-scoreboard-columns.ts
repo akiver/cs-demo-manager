@@ -28,6 +28,7 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         width: getTableRowHeight(),
         Cell: ScoreboardAvatarCell,
         noPadding: true,
+        allowHiding: false,
         allowResize: false,
         allowSort: false,
         allowMove: false,
@@ -91,6 +92,7 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Name',
           }),
         ),
+        allowHiding: false,
         width: 160,
       },
       {
@@ -105,6 +107,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         headerTooltip: _(
           msg({
             context: 'Table header tooltip',
+            message: 'Kills',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
             message: 'Kills',
           }),
         ),
@@ -127,6 +135,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Assists',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Assists',
+          }),
+        ),
         width: 40,
         maxWidth: 100,
         textAlign: 'right',
@@ -143,6 +157,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         headerTooltip: _(
           msg({
             context: 'Table header tooltip',
+            message: 'Deaths',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
             message: 'Deaths',
           }),
         ),
@@ -204,6 +224,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Damages',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Damages',
+          }),
+        ),
         width: 60,
         maxWidth: 100,
         textAlign: 'right',
@@ -245,6 +271,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Average Damage per Round',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Average Damage per Round',
+          }),
+        ),
         width: 50,
         maxWidth: 100,
         textAlign: 'right',
@@ -265,6 +297,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           msg({
             context: 'Table header tooltip',
             message: 'Utility damage per round',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Utility Damage per Round',
           }),
         ),
         width: 50,
@@ -289,6 +327,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Headshot',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Headshot',
+          }),
+        ),
         width: 50,
         maxWidth: 100,
         textAlign: 'right',
@@ -306,6 +350,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           msg({
             context: 'Table header tooltip',
             message: 'Headshot Percentage',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Headshot percentage',
           }),
         ),
         width: 50,
@@ -393,6 +443,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Total Utility Damage Dealt',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Utility Damage',
+          }),
+        ),
         width: 50,
         maxWidth: 100,
         textAlign: 'right',
@@ -410,6 +466,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           msg({
             context: 'Table header tooltip',
             message: 'First kills of a round',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'First Kills',
           }),
         ),
         width: 40,
@@ -431,6 +493,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'First deaths of a round',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'First Deaths',
+          }),
+        ),
         width: 40,
         maxWidth: 100,
         textAlign: 'right',
@@ -448,6 +516,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           msg({
             context: 'Table header tooltip',
             message: 'Trade Kills (Kill revenged within 5s after a teammate died)',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Trade Kills',
           }),
         ),
         width: 40,
@@ -469,6 +543,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Trade Deaths (Death revenged by a teammate within 5s after the player died)',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Trade Deaths',
+          }),
+        ),
         width: 40,
         maxWidth: 100,
         textAlign: 'right',
@@ -486,6 +566,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           msg({
             context: 'Table header tooltip',
             message: 'First Trade Kills (Kill revenged within 5s after a teammate died)',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'First Trade Kills',
           }),
         ),
         width: 40,
@@ -507,6 +593,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'First Trade Deaths (Death revenged by a teammate within 5s after the player died)',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'First Trade Deaths',
+          }),
+        ),
         width: 40,
         maxWidth: 100,
         textAlign: 'right',
@@ -524,6 +616,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           msg({
             context: 'Table header tooltip',
             message: 'Wallbang Kill',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Wallbang Kills',
           }),
         ),
         width: 40,
@@ -545,6 +643,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
             message: 'Collateral Kill (two or more enemies killed with a single bullet)',
           }),
         ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Collateral Kills',
+          }),
+        ),
         width: 40,
         maxWidth: 100,
         textAlign: 'right',
@@ -561,6 +665,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         headerTooltip: _(
           msg({
             context: 'Table header tooltip',
+            message: 'Score',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
             message: 'Score',
           }),
         ),
@@ -587,6 +697,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
               message: 'Bomb Planted',
             }),
           ),
+          visibilityText: _(
+            msg({
+              context: 'Dropdown column visibility',
+              message: 'Bomb Planted',
+            }),
+          ),
           width: 40,
           maxWidth: 100,
           textAlign: 'right',
@@ -603,6 +719,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
           headerTooltip: _(
             msg({
               context: 'Table header tooltip',
+              message: 'Bomb Defused',
+            }),
+          ),
+          visibilityText: _(
+            msg({
+              context: 'Dropdown column visibility',
               message: 'Bomb Defused',
             }),
           ),
@@ -624,6 +746,12 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         headerTooltip: _(
           msg({
             context: 'Table header tooltip',
+            message: 'Hostage Rescued',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
             message: 'Hostage Rescued',
           }),
         ),

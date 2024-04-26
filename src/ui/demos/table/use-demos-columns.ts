@@ -30,7 +30,12 @@ export function useDemosColumns() {
           }),
         ),
         width: 20,
-        visibilityText: 'Comment',
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Comment',
+          }),
+        ),
         Cell: CommentCell,
         allowResize: false,
         allowSort: false,
@@ -46,7 +51,12 @@ export function useDemosColumns() {
             context: 'Table header tooltip',
           }),
         ),
-        visibilityText: 'Tags',
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Tags',
+          }),
+        ),
         Cell: TagsCell,
         width: 20,
         allowResize: false,
@@ -63,7 +73,12 @@ export function useDemosColumns() {
             context: 'Table header tooltip',
           }),
         ),
-        visibilityText: 'Status',
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'Status',
+          }),
+        ),
         Cell: DemoStatusCell,
         width: 30,
         allowResize: false,

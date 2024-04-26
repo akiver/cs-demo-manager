@@ -5,16 +5,20 @@ type Props<DataType extends Data> = {
   columnId: string;
   label: string;
   table: TableInstance<DataType>;
+  tables?: TableInstance<DataType>[];
 };
 
-export function ColumnVisibility<DataType extends Data>({ table, columnId, label }: Props<DataType>) {
+export function ColumnVisibility<DataType extends Data>({ table, columnId, label, tables = [] }: Props<DataType>) {
   const isVisible = table.isColumnVisible(columnId);
 
   const onClick = () => {
-    if (isVisible) {
-      table.hideColumn(columnId);
-    } else {
-      table.showColumn(columnId);
+    const allTables = [table, ...tables];
+    for (const table of allTables) {
+      if (isVisible) {
+        table.hideColumn(columnId);
+      } else {
+        table.showColumn(columnId);
+      }
     }
   };
 
