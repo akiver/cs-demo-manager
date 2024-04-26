@@ -1,7 +1,8 @@
-import { db } from '../database';
+import type { Kysely } from 'kysely';
 import type { InsertableTag } from './tag-table';
+import type { Database } from '../schema';
 
-export async function insertDefaultTags() {
+export async function insertDefaultTags(db: Kysely<Database>) {
   const defaultTags: InsertableTag[] = [
     {
       name: 'To watch',

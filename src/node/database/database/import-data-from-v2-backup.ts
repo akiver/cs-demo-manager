@@ -10,6 +10,7 @@ import { updateChecksumsTags } from 'csdm/node/database/tags/update-checksums-ta
 import { fetchTags } from 'csdm/node/database/tags/fetch-tags';
 import { insertDefaultTags } from 'csdm/node/database/tags/insert-default-tags';
 import { TagNotFound } from 'csdm/node/database/tags/errors/tag-not-found';
+import { db } from '../database';
 
 type DemoBackup = {
   Id: string;
@@ -86,7 +87,7 @@ export async function importDataFromV2Backup(options: ImportV2BackupOptions): Pr
   }
   result.demoFoundCount = demoPaths.length;
 
-  await insertDefaultTags();
+  await insertDefaultTags(db);
 
   const tags = await fetchTags();
   const toWatchTag = tags.find((tag) => tag.name === 'To watch');

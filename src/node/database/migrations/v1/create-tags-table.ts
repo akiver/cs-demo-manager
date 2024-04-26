@@ -36,7 +36,7 @@ const createTagsTable: Migration = {
     EXECUTE PROCEDURE delete_checksum_tag_relation();`;
     await deleteTrigger.execute(transaction);
 
-    await insertDefaultTags();
+    await insertDefaultTags(transaction);
   },
 };
 
