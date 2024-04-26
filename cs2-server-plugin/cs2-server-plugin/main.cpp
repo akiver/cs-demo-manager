@@ -14,7 +14,7 @@
 #define PAGESIZE 4096
 #endif
 
-// IDK registering a cmd on Linux makes the game process exit with a non zero code (Segmentation fault)
+// IDKW registering a cmd on Linux makes the game process exit with a non zero code (Segmentation fault)
 #ifdef _WIN32
 #define CON_COMMAND_ENABLED 1
 #endif
@@ -101,6 +101,44 @@ inline bool FileExists(const std::string& name) {
     std::ifstream f(name.c_str());
 
     return f.good();
+}
+
+// Thank you Saul! https://github.com/saul/cvar-unhide-s2
+static void UnhideCommandsAndCvars()
+{
+    uint64 flagsToRemove = (FCVAR_HIDDEN | FCVAR_DEVELOPMENTONLY | FCVAR_MISSING3);
+
+    ConCommandHandle cmdHandle{};
+    auto invalidConcmd = g_pCVar->GetCommand(cmdHandle);
+    int cmdIdx = 0;
+    for (;;)
+    {
+        cmdHandle.Set(cmdIdx++);
+        auto concmd = g_pCVar->GetCommand(cmdHandle);
+        if (concmd == invalidConcmd)
+            break;
+
+        if (concmd->GetFlags() & flagsToRemove)
+        {
+            concmd->RemoveFlags(flagsToRemove);
+        }
+    }
+
+    ConVarHandle cvarHandle{};
+    auto invalidCvar = g_pCVar->GetConVar(cvarHandle);
+    int cvarIdx = 0;
+    for (;;)
+    {
+        cvarHandle.Set(cvarIdx++);
+        auto convar = g_pCVar->GetConVar(cvarHandle);
+        if (convar == invalidCvar)
+            break;
+
+        if (convar->flags & flagsToRemove)
+        {
+            convar->flags &= ~flagsToRemove;
+        }
+    }
 }
 
 ISource2EngineToClient* GetEngine()
@@ -194,8 +232,9 @@ void PlaybackLoop() {
             Log("Demo playback started %d", currentTick);
             currentTick = -1;
 
-            // Required to make startmovie command work on Windows + HLAE
-            engine->ExecuteClientCmd(0, "mirv_cvar_unhide_all", true);
+            // Required to make the spec_lock_to_accountid command working since the 25/04/2024 update - it looks like the command has been hidden.
+            // Also required to use the startmovie command.
+            UnhideCommandsAndCvars();
         }
         else if (!newIsPlayingDemo && isPlayingDemo) {
             Log("Demo playback stopped %d", currentTick);
