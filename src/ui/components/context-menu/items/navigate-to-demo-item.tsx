@@ -4,13 +4,18 @@ import { DetailsItem } from './details-item';
 
 type Props = {
   demoPath: string;
+  siblingDemoPaths: string[];
 };
 
-export function NavigateToDemoItem({ demoPath }: Props) {
+export function NavigateToDemoItem({ demoPath, siblingDemoPaths }: Props) {
   const navigateToDemo = useNavigateToDemo();
 
   const onClick = () => {
-    navigateToDemo(demoPath);
+    navigateToDemo(demoPath, {
+      state: {
+        siblingDemoPaths,
+      },
+    });
   };
 
   return <DetailsItem onClick={onClick} />;

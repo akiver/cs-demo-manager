@@ -63,9 +63,10 @@ function NavigateToMatchItem({ demos }: NavigateToMatchItemProps) {
 type Props = {
   demos: Demo[];
   onCommentClick: () => void;
+  siblingDemoPaths: string[];
 };
 
-export function DemoContextMenu({ onCommentClick, demos }: Props) {
+export function DemoContextMenu({ onCommentClick, demos, siblingDemoPaths }: Props) {
   const { showDialog } = useDialog();
   if (demos.length === 0) {
     return null;
@@ -102,7 +103,7 @@ export function DemoContextMenu({ onCommentClick, demos }: Props) {
 
   return (
     <ContextMenu>
-      <NavigateToDemoItem demoPath={selectedDemo.filePath} />
+      <NavigateToDemoItem demoPath={selectedDemo.filePath} siblingDemoPaths={siblingDemoPaths} />
       <NavigateToMatchItem demos={demos} />
       <AnalyzeItem demos={demos} />
       <ExportPlayersVoiceItem demoPaths={filepaths} />

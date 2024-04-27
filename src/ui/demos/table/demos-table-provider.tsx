@@ -59,7 +59,14 @@ export function DemosTableProvider({ children }: Props) {
   });
 
   const onContextMenu = (event: MouseEvent, table: TableInstance<Demo>) => {
-    showContextMenu(event, <DemoContextMenu demos={table.getSelectedRows()} onCommentClick={showWidget} />);
+    showContextMenu(
+      event,
+      <DemoContextMenu
+        demos={table.getSelectedRows()}
+        onCommentClick={showWidget}
+        siblingDemoPaths={table.getRowIds()}
+      />,
+    );
   };
 
   const handleNavigateToDemo = (demo: Demo, table: TableInstance<Demo>) => {
