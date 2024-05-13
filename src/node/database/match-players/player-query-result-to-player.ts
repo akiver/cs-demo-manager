@@ -69,6 +69,7 @@ export function playerQueryResultToPlayer(
     crosshairShareCode: row.crosshair_share_code,
     collateralKillCount,
     wallbangKillCount: row.wallbang_kill_count,
+    noScopeKillCount: row.no_scope_kill_count,
     color: row.color,
   };
 }

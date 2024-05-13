@@ -34,6 +34,11 @@ export async function fetchPlayers(checksum: string): Promise<Player[]> {
         'wallbang_kill_count',
       ),
     )
+    .select(
+      sql<number>`COUNT(kills.id) FILTER (WHERE kills.is_no_scope = true AND kills.killer_steam_id = players.steam_id)`.as(
+        'no_scope_kill_count',
+      ),
+    )
     .where('players.match_checksum', '=', checksum)
     .where('kills.match_checksum', '=', checksum)
     .groupBy([

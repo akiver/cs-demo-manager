@@ -12,6 +12,7 @@ import { TeamText } from 'csdm/ui/components/team-text';
 import { useGetTimeElapsedBetweenFrames } from 'csdm/ui/match/use-time-elapsed-between-frames';
 import { PenetrateIcon } from 'csdm/ui/icons/penetrate-icon';
 import { BlindIcon } from 'csdm/ui/icons/blind-icon';
+import { NoScopeIcon } from 'csdm/ui/icons/noscope-icon';
 
 function isBombDeathKill(kill: Kill) {
   return kill.killerSide === TeamNumber.UNASSIGNED && kill.killerName === WeaponName.World;
@@ -85,6 +86,7 @@ function renderWeapon(kill: Kill) {
   return (
     <div className="flex gap-8">
       {renderWeaponIcon(kill)}
+      {kill.isNoScope && <NoScopeIcon height={20} />}
       {kill.penetratedObjects > 0 && <PenetrateIcon height={20} />}
       {kill.isHeadshot && <HeadshotIcon height={20} />}
     </div>

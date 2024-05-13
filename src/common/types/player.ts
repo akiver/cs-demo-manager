@@ -56,6 +56,7 @@ export type Player = {
   fiveKillCount: number;
   collateralKillCount: number;
   wallbangKillCount: number;
+  noScopeKillCount: number;
   avatar: string | null;
   hostageRescuedCount: number;
   hltvRating: number;

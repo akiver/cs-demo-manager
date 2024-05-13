@@ -3843,6 +3843,21 @@ msgid "Collateral Kills"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header no scope kill count"
+msgid "NS"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Table header tooltip"
+msgid "No Scope Kill"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
+msgctxt "Dropdown column visibility"
+msgid "No Scope Kills"
+msgstr ""
+
+#: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Score"
 msgstr ""

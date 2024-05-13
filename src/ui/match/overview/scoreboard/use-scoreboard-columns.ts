@@ -654,6 +654,31 @@ export function useScoreboardColumns(isDefuseMap: boolean) {
         textAlign: 'right',
       },
       {
+        id: 'noScopeKillCount',
+        accessor: 'noScopeKillCount',
+        headerText: _(
+          msg({
+            context: 'Table header no scope kill count',
+            message: 'NS',
+          }),
+        ),
+        headerTooltip: _(
+          msg({
+            context: 'Table header tooltip',
+            message: 'No Scope Kill',
+          }),
+        ),
+        visibilityText: _(
+          msg({
+            context: 'Dropdown column visibility',
+            message: 'No Scope Kills',
+          }),
+        ),
+        width: 40,
+        maxWidth: 100,
+        textAlign: 'right',
+      },
+      {
         id: 'score',
         accessor: 'score',
         headerText: _(
