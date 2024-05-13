@@ -123,6 +123,7 @@ function getBodyDataFromFilters(filters: Filter, damages: Damage[]) {
   const rightArmDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.RightArm);
   const chestDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.Chest);
   const headDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.Head);
+  const neckDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.Neck);
   const leftLegDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.LeftLeg);
   const rightLegDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.RightLeg);
   const stomachDamages = filteredDamages.filter((damage) => damage.hitgroup === HitGroup.Stomach);
@@ -132,6 +133,7 @@ function getBodyDataFromFilters(filters: Filter, damages: Damage[]) {
     rightArm: buildHitGroupData(rightArmDamages, totalDamageCount),
     chest: buildHitGroupData(chestDamages, totalDamageCount),
     head: buildHitGroupData(headDamages, totalDamageCount),
+    neck: buildHitGroupData(neckDamages, totalDamageCount),
     leftLeg: buildHitGroupData(leftLegDamages, totalDamageCount),
     rightLeg: buildHitGroupData(rightLegDamages, totalDamageCount),
     stomach: buildHitGroupData(stomachDamages, totalDamageCount),
@@ -182,6 +184,7 @@ function buildWeaponsStats(filters: Filter, match: Match) {
 
 export type HumanBodyData = {
   head: HitGroupData;
+  neck: HitGroupData;
   chest: HitGroupData;
   stomach: HitGroupData;
   leftLeg: HitGroupData;
@@ -461,6 +464,7 @@ export function WeaponsAccuracy() {
 
           <div className="flex flex-col justify-evenly">
             <HitGroupStats text={<Trans>Head</Trans>} value={bodyData.head} />
+            <HitGroupStats text={<Trans>Neck</Trans>} value={bodyData.neck} />
             <HitGroupStats text={<Trans>Chest</Trans>} value={bodyData.chest} />
             <HitGroupStats text={<Trans>Stomach</Trans>} value={bodyData.stomach} />
             <HitGroupStats text={<Trans>Left arm</Trans>} value={bodyData.leftArm} />

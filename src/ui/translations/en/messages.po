@@ -4971,6 +4971,10 @@ msgid "Head"
 msgstr "Head"
 
 #: src/ui/match/weapons/weapons-accuracy.tsx
+msgid "Neck"
+msgstr "Neck"
+
+#: src/ui/match/weapons/weapons-accuracy.tsx
 msgid "Chest"
 msgstr "Chest"
 
