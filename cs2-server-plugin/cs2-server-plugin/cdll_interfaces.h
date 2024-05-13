@@ -32,12 +32,11 @@ public:
     virtual int _Unknown_009(void) = 0;
     virtual int _Unknown_010(void) = 0;
     virtual int _Unknown_011(void) = 0;
-    virtual int _Unknown_012(void) = 0;
-    virtual int _Unknown_013(void) = 0;
+    virtual bool IsPlayingDemo(void) = 0; //:012
+    virtual bool IsDemoPaused(void) = 0; //:013
+
     virtual int _Unknown_014(void) = 0;
     virtual int _Unknown_015(void) = 0;
-
-    virtual float GetDemoTimeScale(void) = 0; //:016
 };
 
 
@@ -67,7 +66,7 @@ public:
     virtual void _Unknown_020(void) = 0;
     virtual void _Unknown_021(void) = 0;
     virtual void _Unknown_022(void) = 0;
-    virtual void  _Unknown_023(void) = 0;
+    virtual void _Unknown_023(void) = 0;
     virtual void _Unknown_024(void) = 0;
     virtual void _Unknown_025(void) = 0;
     virtual void _Unknown_026(void) = 0;
@@ -76,22 +75,22 @@ public:
     virtual void _Unknown_029(void) = 0;
     virtual void _Unknown_030(void) = 0;
     virtual void _Unknown_031(void) = 0;
-    virtual bool IsInGame(void) = 0;
+    virtual void _Unknown_032(void) = 0;
     virtual void _Unknown_033(void) = 0;
     virtual void _Unknown_034(void) = 0;
-
-    virtual bool IsPlayingDemo(void) = 0; //:035
-
+    virtual void _Unknown_035(void) = 0;
     virtual void _Unknown_036(void) = 0;
     virtual void _Unknown_037(void) = 0;
-    virtual void _Unknown_038(void) = 0;
+
+    virtual bool IsPlayingDemo(void) = 0; //:038
+
     virtual void _Unknown_039(void) = 0;
-
-    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:040
-
+    virtual void _Unknown_040(void) = 0;
     virtual void _Unknown_041(void) = 0;
     virtual void _Unknown_042(void) = 0;
-    virtual void _Unknown_043(void) = 0;
+
+    virtual void ExecuteClientCmd(int iUnk0MaybeSplitScreenSlotSetTo0, const char* pszCommands, bool bUnk2SetToTrue) = 0; //:043
+
     virtual void _Unknown_044(void) = 0;
     virtual void _Unknown_045(void) = 0;
     virtual void _Unknown_046(void) = 0;
@@ -104,9 +103,14 @@ public:
     virtual void _Unknown_053(void) = 0;
     virtual void _Unknown_054(void) = 0;
     virtual void _Unknown_055(void) = 0;
-    virtual void _Unknown_056(void) = 0;
 
-    virtual IDemoFile* GetDemoFile(void) = 0; //:057
+    virtual char const* GetLevelName(void) = 0; //:056
+    virtual char const* GetLevelNameShort(void) = 0; //:057
+
+    virtual void _Unknown_058(void) = 0;
+    virtual void _Unknown_059(void) = 0;
+
+    virtual IDemoFile* GetDemoFile(void) = 0; //:060
 };
 
 enum ClientFrameStage_t
