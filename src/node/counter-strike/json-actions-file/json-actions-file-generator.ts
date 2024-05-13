@@ -36,6 +36,11 @@ export class JSONActionsFileGenerator {
       cmd: 'spec_mode 1',
       tick: this.getValidTick(tick),
     });
+    // Remove the lock so users can focus the camera on other players if they want to
+    this.actions.push({
+      cmd: `spec_lock_to_accountid 0`,
+      tick: this.getValidTick(tick + 64),
+    });
 
     return this;
   }
