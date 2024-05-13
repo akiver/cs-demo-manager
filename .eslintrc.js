@@ -89,6 +89,7 @@ module.exports = {
           '-',
           '>',
           '?',
+          '/',
           'HLAE',
           'FFmpeg',
           'Valve',
