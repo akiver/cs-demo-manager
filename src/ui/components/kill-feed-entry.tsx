@@ -14,6 +14,7 @@ import { PenetrateIcon } from 'csdm/ui/icons/penetrate-icon';
 import { BlindIcon } from 'csdm/ui/icons/blind-icon';
 import { NoScopeIcon } from 'csdm/ui/icons/noscope-icon';
 import { ThroughSmokeKillIcon } from 'csdm/ui/icons/through-smoke-kill-icon';
+import { AirborneKillIcon } from 'csdm/ui/icons/airborne-kill-icon';
 
 function isBombDeathKill(kill: Kill) {
   return kill.killerSide === TeamNumber.UNASSIGNED && kill.killerName === WeaponName.World;
@@ -86,6 +87,7 @@ function renderWeaponIcon(kill: Kill) {
 function renderWeapon(kill: Kill) {
   return (
     <div className="flex gap-8">
+      {kill.isKillerAirborne && <AirborneKillIcon height={18} className="-mr-8 -mt-4" />}
       {renderWeaponIcon(kill)}
       {kill.isNoScope && <NoScopeIcon height={20} />}
       {kill.isThroughSmoke && <ThroughSmokeKillIcon height={20} />}
