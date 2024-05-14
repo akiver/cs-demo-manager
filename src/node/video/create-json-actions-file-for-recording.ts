@@ -38,6 +38,9 @@ export async function createJsonActionsFileForRecording({
     json.addExecCommand(1, 'cl_draw_only_deathnotices 1');
   }
 
+  // Pause the playback for a few seconds to avoid seeing the loading screen.
+  json.addPausePlayback(1);
+
   for (let i = 0; i < sequences.length; i++) {
     const sequence = sequences[i];
     const roundedTickrate = Math.round(tickrate);

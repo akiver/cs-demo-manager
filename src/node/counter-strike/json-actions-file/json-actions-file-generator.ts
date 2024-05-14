@@ -54,6 +54,16 @@ export class JSONActionsFileGenerator {
     return this;
   }
 
+  // "pause_playback" is a fake command that pause the demo's playback a few seconds from the VSP.
+  public addPausePlayback(tick: number) {
+    this.actions.push({
+      cmd: 'pause_playback',
+      tick: this.getValidTick(tick),
+    });
+
+    return this;
+  }
+
   public addExecCommand(tick: number, cmd: string) {
     this.actions.push({
       cmd,

@@ -257,8 +257,18 @@ void PlaybackLoop() {
 
             for (auto action : actions) {
                 if (action.tick == newTick) {
-                    Log("Executing: %s", action.cmd.c_str());
-                    engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
+                    if (action.cmd == "pause_playback")
+                    {
+                        Log("Pausing demo playback");
+                        engine->ExecuteClientCmd(0, "demo_pause", true);
+                        std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+                        Log("Resuming demo playback");
+                        engine->ExecuteClientCmd(0, "demo_resume", true);
+                    } else
+                    {
+                        Log("Executing: %s", action.cmd.c_str());
+                        engine->ExecuteClientCmd(0, action.cmd.c_str(), true);
+                    }
                 }
             }
         }
