@@ -1,4 +1,5 @@
 globalThis.logger = window.csdm.logger;
+document.title = 'CS Demo Manager';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { RouterProvider } from 'react-router-dom';
