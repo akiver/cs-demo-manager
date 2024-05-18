@@ -13,7 +13,7 @@ type Props = {
 
 export function WatchBeforeKillDelay({ title, description, defaultValue, onChange }: Props) {
   const _ = useI18n();
-  const minSeconds = 1;
+  const minSeconds = 0;
   const maxSeconds = 30;
 
   const onBlur = (event: React.ChangeEvent<HTMLInputElement>) => {
