@@ -3,6 +3,7 @@ export const TableName = {
   Demos: 'demos',
   MatchScoreboard: 'match-scoreboard',
   Players: 'players',
+  Teams: 'teams',
 } as const;
 
 export type TableName = (typeof TableName)[keyof typeof TableName];

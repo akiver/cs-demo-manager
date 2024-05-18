@@ -8,6 +8,7 @@ import { BansLink } from './bans-link';
 import { MatchesLink } from './matches-link';
 import { DemosLink } from './demos-link';
 import { SearchLink } from './search-link';
+import { TeamsLink } from './teams-link';
 
 export function LeftBar() {
   return (
@@ -19,6 +20,7 @@ export function LeftBar() {
       <MatchesLink />
       <DemosLink />
       <PlayersLink />
+      <TeamsLink />
       <DownloadsLink />
       <BansLink />
       <SearchLink />

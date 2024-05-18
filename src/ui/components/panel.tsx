@@ -32,7 +32,7 @@ export function PanelValue({ children, variant = PanelValueVariant.Default }: Pa
 }
 
 type PanelStatRowProps = {
-  title: string;
+  title: ReactNode;
   value: number;
 };
 

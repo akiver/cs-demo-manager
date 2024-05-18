@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Trans } from '@lingui/macro';
 import { Heatmap } from 'csdm/ui/match/heatmap/heatmap';
 import { HeatmapFilters } from 'csdm/ui/match/heatmap/heatmap-filters';
 import { UnsupportedMap } from 'csdm/ui/components/unsupported-map';
@@ -54,11 +55,11 @@ export function HeatmapLoader() {
   }, [radarFileSrc]);
 
   if (status === Status.Loading) {
-    return <Message message="Loading map..." />;
+    return <Message message={<Trans>Loading map…</Trans>} />;
   }
 
   if (status === Status.Error) {
-    return <Message message="An error occurred while loading map." />;
+    return <Message message={<Trans>An error occurred</Trans>} />;
   }
 
   if (!isSupportedMap) {

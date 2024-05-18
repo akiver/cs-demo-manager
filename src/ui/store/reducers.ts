@@ -14,6 +14,8 @@ import { bootstrapReducer } from '../bootstrap/bootstrap-reducer';
 import { playerReducer } from 'csdm/ui/player/player-reducer';
 import { tagsReducer } from 'csdm/ui/tags/tags-reducer';
 import { searchReducer } from '../search/search-reducer';
+import { teamsReducer } from '../teams/teams-reducer';
+import { teamReducer } from '../team/team-reducer';
 
 export const reducers = combineReducers({
   bootstrap: bootstrapReducer,
@@ -28,6 +30,8 @@ export const reducers = combineReducers({
   cache: cacheReducer,
   players: playersReducer,
   player: playerReducer,
+  teams: teamsReducer,
+  team: teamReducer,
   settings: settingsReducer,
   tags: tagsReducer,
   search: searchReducer,

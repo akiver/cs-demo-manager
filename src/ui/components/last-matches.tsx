@@ -1,9 +1,8 @@
 import React from 'react';
 import { Trans } from '@lingui/macro';
-import type { LastMatch as Match } from 'csdm/common/types/player-profile';
+import type { LastMatch as Match } from 'csdm/common/types/last-match';
 import { LastMatch } from './last-match';
 import { Panel, PanelTitle } from 'csdm/ui/components/panel';
-import { usePlayer } from '../use-player';
 
 function renderMatches(matches: Match[]) {
   if (matches.length === 0) {
@@ -19,9 +18,11 @@ function renderMatches(matches: Match[]) {
   });
 }
 
-export function LastMatches() {
-  const { lastMatches } = usePlayer();
+type Props = {
+  matches: Match[];
+};
 
+export function LastMatches({ matches }: Props) {
   return (
     <Panel
       header={
@@ -30,7 +31,7 @@ export function LastMatches() {
         </PanelTitle>
       }
     >
-      <div className="flex gap-x-12">{renderMatches(lastMatches)}</div>
+      <div className="flex gap-x-12">{renderMatches(matches)}</div>
     </Panel>
   );
 }

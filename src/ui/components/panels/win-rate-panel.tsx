@@ -2,7 +2,6 @@ import React from 'react';
 import { Trans } from '@lingui/macro';
 import { roundNumberPercentage } from 'csdm/common/math/round-number-percentage';
 import { Panel, PanelRow, PanelTitle, PanelValue, PanelValueVariant } from 'csdm/ui/components/panel';
-import { usePlayer } from '../use-player';
 
 type CircleProps = {
   className: string;
@@ -12,8 +11,14 @@ function Circle({ className }: CircleProps) {
   return <div className={`size-12 rounded-full mr-4 ${className}`} />;
 }
 
-export function WinRatePanel() {
-  const { matchCount, wonMatchCount, lostMatchCount, tiedMatchCount } = usePlayer();
+type Props = {
+  matchCount: number;
+  wonMatchCount: number;
+  lostMatchCount: number;
+  tiedMatchCount: number;
+};
+
+export function WinRatePanel({ matchCount, wonMatchCount, lostMatchCount, tiedMatchCount }: Props) {
   const winRatePercent = matchCount > 0 ? roundNumberPercentage(wonMatchCount / matchCount) : 0;
 
   return (

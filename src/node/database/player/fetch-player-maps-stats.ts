@@ -2,7 +2,7 @@ import { sql } from 'kysely';
 import { RankingFilter } from 'csdm/common/types/ranking-filter';
 import { db } from 'csdm/node/database/database';
 import type { FetchPlayerFilters } from './fetch-player-filters';
-import type { MapStats } from 'csdm/common/types/player-profile';
+import type { MapStats } from 'csdm/common/types/map-stats';
 
 type MapGlobalStats = {
   mapName: string;

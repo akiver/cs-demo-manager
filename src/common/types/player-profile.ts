@@ -1,40 +1,12 @@
 import type { CompetitiveRankHistory } from 'csdm/common/types/charts/competitive-rank-history';
 import type { PlayerChartsData } from 'csdm/common/types/charts/player-charts-data';
-import type { Rank, Game, CompetitiveRank, PremierRank } from 'csdm/common/types/counter-strike';
+import type { Rank, CompetitiveRank, PremierRank } from 'csdm/common/types/counter-strike';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import type { EconomyBan } from 'csdm/node/steam-web-api/steam-constants';
 import type { Clutch } from './clutch';
 import type { PremierRankHistory } from './charts/premier-rank-history';
-
-export type MapStats = {
-  mapName: string;
-  matchCount: number;
-  winCount: number;
-  lostCount: number;
-  tiedCount: number;
-  roundCount: number;
-  roundCountAsT: number;
-  roundCountAsCt: number;
-  roundWinCount: number;
-  roundLostCount: number;
-  roundWinCountAsCt: number;
-  roundWinCountAsT: number;
-  killDeathRatio: number;
-  averageDamagesPerRound: number;
-  kast: number;
-  headshotPercentage: number;
-};
-
-export type LastMatch = {
-  checksum: string;
-  game: Game;
-  date: string;
-  scoreTeamA: number;
-  scoreTeamB: number;
-  mapName: string;
-  winnerName: string;
-  playerTeamName: string;
-};
+import type { LastMatch } from './last-match';
+import type { MapStats } from './map-stats';
 
 export type PlayerProfile = {
   steamId: string;

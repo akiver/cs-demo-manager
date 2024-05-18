@@ -1,5 +1,5 @@
 import React from 'react';
-import type { LastMatch as Match } from 'csdm/common/types/player-profile';
+import type { LastMatch as Match } from 'csdm/common/types/last-match';
 import { useNavigateToMatch } from 'csdm/ui/hooks/use-navigate-to-match';
 import { useFormatDate } from 'csdm/ui/hooks/use-format-date';
 import { useGetMapThumbnailSrc } from 'csdm/ui/maps/use-get-map-thumbnail-src';
@@ -16,7 +16,7 @@ export function LastMatch({ match }: Props) {
     navigateToMatch(match.checksum);
   };
   const isTieGame = match.winnerName === '';
-  const hasPlayerWon = match.winnerName === match.playerTeamName;
+  const hasPlayerWon = match.winnerName === match.focusTeamName;
 
   return (
     <div className="flex items-center min-w-fit cursor-pointer gap-x-4" onClick={onClick}>

@@ -10,7 +10,6 @@ import { DeleteItem } from 'csdm/ui/components/context-menu/items/delete-item';
 import { CommentItem } from 'csdm/ui/components/context-menu/items/comment-item';
 import { RevealDemoInExplorerItem } from 'csdm/ui/components/context-menu/items/reveal-demo-in-explorer-item';
 import { useDialog } from 'csdm/ui/components/dialogs/use-dialog';
-import { TagsDialog } from './tags-dialog';
 import { UpdateDemoLocationDialog } from 'csdm/ui/dialogs/update-demo-location-dialog';
 import type { MatchTable } from 'csdm/common/types/match-table';
 import { PlayerDeleteMatchesDialog } from './player-delete-matches-dialog';
@@ -23,6 +22,7 @@ import { RenameItem } from 'csdm/ui/components/context-menu/items/rename-item';
 import { RenameMatchDialog } from 'csdm/ui/matches/dialogs/rename-match-dialog';
 import { WatchItem } from 'csdm/ui/components/context-menu/items/watch-item';
 import { isCounterStrikeStartable } from 'csdm/ui/hooks/use-counter-strike';
+import { MatchesTagsDialog } from 'csdm/ui/matches/dialogs/tags-dialog';
 
 type Props = {
   matchChecksums: string[];
@@ -48,7 +48,7 @@ export function PlayerMatchContextMenu({ selectedMatches, matchChecksums, onComm
   const selectedMatch = selectedMatches[selectedMatches.length - 1];
 
   const onTagsClick = () => {
-    showDialog(<TagsDialog matches={selectedMatches} />);
+    showDialog(<MatchesTagsDialog matches={selectedMatches} />);
   };
 
   const onDeleteClick = () => {

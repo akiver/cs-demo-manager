@@ -23,6 +23,7 @@ export const ErrorCode = {
   GameError: 421,
   NoRoundsFound: 422,
   AccessDenied: 423,
+  TeamNotFound: 424,
   InvalidDemoPath: 505,
   ChecksumsMismatch: 506,
   MapAlreadyExists: 600,
