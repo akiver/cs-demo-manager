@@ -25,6 +25,9 @@ import type { SmokeStart } from 'csdm/common/types/smoke-start';
 import type { HeGrenadeExplode } from 'csdm/common/types/he-grenade-explode';
 import type { FlashbangExplode } from 'csdm/common/types/flashbang-explode';
 import type { Game } from 'csdm/common/types/counter-strike';
+import { useDispatch } from 'csdm/ui/store/use-dispatch';
+import { focusedPlayerChanged, speedChanged } from './viewer-actions';
+import { useViewer2DState } from './use-viewer-state';
 
 type ViewerContext = {
   framerate: number;
@@ -112,11 +115,11 @@ export function ViewerProvider({
   smokesStart,
   flashbangsExplode,
 }: Props) {
+  const dispatch = useDispatch();
   const match = useCurrentMatch();
-  const [speed, setSpeed] = useState(1);
+  const viewerState = useViewer2DState();
   const [currentFrame, setCurrentFrame] = useState(round.freezetimeEndFrame);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [focusedPlayerId, setFocusedPlayerId] = useState<string | undefined>(undefined);
   const [radarLevel, setRadarLevel] = useState<RadarLevel>(RadarLevel.Upper);
   const remainingFrameCount = round.endOfficiallyFrame - currentFrame;
   const frameRate = match.frameRate > 0 ? match.frameRate : match.tickrate / 2;
@@ -127,11 +130,6 @@ export function ViewerProvider({
     <ViewerContext.Provider
       value={{
         framerate: frameRate,
-        focusedPlayerId,
-        updateFocusedPlayerId: (id: string) => {
-          const newId = id === focusedPlayerId ? undefined : id;
-          setFocusedPlayerId(newId);
-        },
         setRadarLevel,
         radarLevel,
         map,
@@ -155,15 +153,22 @@ export function ViewerProvider({
         currentFrame,
         setCurrentFrame,
         timeRemaining,
-        speed,
         isPlaying,
-        setSpeed,
         setIsPlaying,
         kills,
         shots,
         round,
         changeRound: (roundNumber: number) => {
           navigate(buildMatch2dViewerRoundPath(match.checksum, roundNumber));
+        },
+        speed: viewerState.speed,
+        setSpeed: (speed: number) => {
+          dispatch(speedChanged({ speed }));
+        },
+        focusedPlayerId: viewerState.focusedPlayerId,
+        updateFocusedPlayerId: (id: string) => {
+          const newId = id === viewerState.focusedPlayerId ? undefined : id;
+          dispatch(focusedPlayerChanged({ focusedPlayerId: newId }));
         },
       }}
     >
