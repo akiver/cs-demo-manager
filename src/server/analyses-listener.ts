@@ -15,9 +15,7 @@ import type { ErrorCode } from 'csdm/common/error-code';
 class AnalysesListener {
   private analyses: Analysis[] = [];
   private currentAnalysis: Analysis | undefined;
-  private intervalTimer: NodeJS.Timeout | null = null;
   private outputFolderPath: string; // Folder path where CSV files will be write on the host
-  private checkAnalysesDoneIntervalInMs = 5000;
 
   public constructor() {
     this.outputFolderPath = path.resolve(os.tmpdir(), 'cs-demo-manager');
@@ -38,7 +36,7 @@ class AnalysesListener {
       return;
     }
 
-    const analyses: Analysis[] = demosNotInPendingAnalyses.map((demo) => {
+    const analyses = demosNotInPendingAnalyses.map((demo) => {
       const analysis: Analysis = {
         addedAt: new Date().toUTCString(),
         status: AnalysisStatus.Pending,
@@ -73,9 +71,6 @@ class AnalysesListener {
   };
 
   public clear() {
-    if (this.intervalTimer) {
-      clearInterval(this.intervalTimer);
-    }
     this.analyses = [];
     this.currentAnalysis = undefined;
   }
@@ -85,33 +80,19 @@ class AnalysesListener {
   };
 
   private async loopUntilAnalysesDone() {
-    const loop = async () => {
-      if (!this.hasPendingAnalyses() && this.intervalTimer !== null) {
-        clearInterval(this.intervalTimer);
-        return;
-      }
-
-      if (this.currentAnalysis === undefined) {
-        try {
-          this.currentAnalysis = this.analyses.shift();
-          await this.processAnalysis();
-        } finally {
-          this.currentAnalysis = undefined;
-        }
-      }
-    };
-
-    this.intervalTimer = setInterval(loop, this.checkAnalysesDoneIntervalInMs);
-    await loop();
-  }
-
-  private readonly processAnalysis = async () => {
-    const currentAnalysis = this.currentAnalysis;
-    if (currentAnalysis === undefined) {
+    if (this.currentAnalysis) {
       return;
     }
 
-    const { demoChecksum: checksum, demoPath, source } = currentAnalysis;
+    this.currentAnalysis = this.analyses.shift();
+    while (this.currentAnalysis) {
+      await this.processAnalysis(this.currentAnalysis);
+      this.currentAnalysis = this.analyses.shift();
+    }
+  }
+
+  private readonly processAnalysis = async (analysis: Analysis) => {
+    const { demoChecksum: checksum, demoPath, source } = analysis;
     try {
       this.updateCurrentAnalysisStatus(AnalysisStatus.Analyzing);
       const settings = await getSettings();
@@ -122,18 +103,18 @@ class AnalysesListener {
         analyzePositions: settings.analyze.analyzePositions,
         onStdout: (data) => {
           logger.log(data);
-          currentAnalysis.output += data;
+          analysis.output += data;
           server.sendMessageToRendererProcess({
             name: RendererServerMessageName.AnalysisUpdated,
-            payload: currentAnalysis,
+            payload: analysis,
           });
         },
         onStderr(data) {
           logger.error(data);
-          currentAnalysis.output += data;
+          analysis.output += data;
           server.sendMessageToRendererProcess({
             name: RendererServerMessageName.AnalysisUpdated,
-            payload: currentAnalysis,
+            payload: analysis,
           });
         },
       });
