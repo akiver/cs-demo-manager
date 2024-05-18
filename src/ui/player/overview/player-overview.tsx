@@ -1,9 +1,9 @@
 import React from 'react';
 import { Content } from 'csdm/ui/components/content';
-import { WinRatePanel } from 'csdm/ui/player/overview/win-rate-panel';
-import { MultiKillsPanel } from 'csdm/ui/player/overview/multi-kills-panel';
-import { LastMatches } from 'csdm/ui/player/overview/last-matches';
-import { ObjectivesPanel } from './objectives-panel';
+import { PlayerWinRatePanel } from 'csdm/ui/player/overview/player-win-rate-panel';
+import { PlayerMultiKillsPanel } from 'csdm/ui/player/overview/player-multi-kills-panel';
+import { PlayerLastMatches } from 'csdm/ui/player/overview/player-last-matches';
+import { PlayerObjectivesPanel } from './player-objectives-panel';
 import { MatchmakingPanel } from './matchmaking-panel';
 import { VacPanel } from './vac-panel';
 import { KillsPanel } from 'csdm/ui/components/panels/kills-panel';
@@ -16,7 +16,7 @@ import { RoundsPanel } from 'csdm/ui/components/panels/rounds-panel';
 import { KillDeathRatioPanel } from 'csdm/ui/components/panels/kill-death-ratio-panel';
 import { AverageKillsPerRoundPanel } from 'csdm/ui/components/panels/average-kills-per-round-panel';
 import { AverageDeathsPerRoundPanel } from 'csdm/ui/components/panels/average-deaths-per-round-panel';
-import { ClutchesPanel } from 'csdm/ui/player/overview/clutches-panel';
+import { PlayerClutchesPanel } from 'csdm/ui/player/overview/player-clutches-panel';
 import { HltvRatingPanel } from 'csdm/ui/components/panels/hltv-rating-panel';
 import { PlayerCommentInput } from './player-comment-input';
 
@@ -46,7 +46,7 @@ export function PlayerOverview() {
       <div className="flex flex-col gap-y-12">
         <div className="flex gap-8 flex-wrap">
           <MatchmakingPanel />
-          <WinRatePanel />
+          <PlayerWinRatePanel />
           <div className="flex flex-col gap-y-8">
             <HltvRatingPanel hltvRating={hltvRating} />
             <HltvRating2Panel hltvRating2={hltvRating2} />
@@ -71,15 +71,15 @@ export function PlayerOverview() {
           />
           <KillsPanel collateralKillCount={collateralKillCount} wallbangKillCount={wallbangKillCount} />
           <RoundsPanel roundCount={roundCount} roundCountAsCt={roundCountAsCt} roundCountAsT={roundCountAsT} />
-          <MultiKillsPanel />
-          <ObjectivesPanel />
+          <PlayerMultiKillsPanel />
+          <PlayerObjectivesPanel />
           <VacPanel />
         </div>
         <div>
-          <ClutchesPanel />
+          <PlayerClutchesPanel />
         </div>
         <div>
-          <LastMatches />
+          <PlayerLastMatches />
         </div>
         <div className="min-h-[128px] max-w-[512px] h-max">
           <PlayerCommentInput />

@@ -1,12 +1,12 @@
 import React from 'react';
-import { MultiKillsPanel as CommonMultiKillsPanel } from 'csdm/ui/components/panels/multi-kills-panel';
+import { MultiKillsPanel } from 'csdm/ui/components/panels/multi-kills-panel';
 import { usePlayer } from '../use-player';
 
-export function MultiKillsPanel() {
+export function PlayerMultiKillsPanel() {
   const { oneKillCount, twoKillCount, threeKillCount, fourKillCount, fiveKillCount } = usePlayer();
 
   return (
-    <CommonMultiKillsPanel
+    <MultiKillsPanel
       oneKillCount={oneKillCount}
       twoKillCount={twoKillCount}
       threeKillCount={threeKillCount}

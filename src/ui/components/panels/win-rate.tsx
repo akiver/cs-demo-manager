@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
 import { PanelValue } from 'csdm/ui/components/panel';
 
 type Props = {
-  title?: string;
+  title?: ReactNode;
   value: number;
   barClassName?: string;
 };

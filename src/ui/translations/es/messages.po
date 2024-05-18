@@ -338,6 +338,7 @@ msgstr ""
 #: src/ui/match/chat-messages/export-chat-messages-button.tsx
 #: src/ui/match/duels/players-duels-matrix.tsx
 #: src/ui/match/grenades/stats/players-flashbang-matrix.tsx
+#: src/ui/match/heatmap/heatmap-loader.tsx
 #: src/ui/match/overview/scoreboard/context-menu/copy-crosshair-config-item.tsx
 #: src/ui/player/use-update-player-comment.tsx
 #: src/ui/search/filters/search-maps-input.tsx
@@ -537,6 +538,11 @@ msgctxt "Context menu"
 msgid "Copy"
 msgstr ""
 
+#: src/ui/components/context-menu/items/copy-name-item.tsx
+msgctxt "Context menu"
+msgid "Copy name"
+msgstr ""
+
 #: src/ui/components/context-menu/items/copy-sharecode-item.tsx
 msgctxt "Copy context menu"
 msgid "Share code"
@@ -664,6 +670,8 @@ msgstr ""
 #: src/ui/settings/downloads/use-add-faceit-account.tsx
 #: src/ui/settings/maps/delete-map-dialog.tsx
 #: src/ui/settings/maps/reset-default-maps-button.tsx
+#: src/ui/team/load-team-error.tsx
+#: src/ui/teams/teams-table.tsx
 msgid "An error occurred."
 msgstr ""
 
@@ -1295,9 +1303,76 @@ msgctxt "Input placeholder"
 msgid "Username"
 msgstr ""
 
+#: src/ui/components/last-matches.tsx
+msgid "No matches."
+msgstr ""
+
+#: src/ui/components/last-matches.tsx
+msgctxt "Panel title"
+msgid "Last matches"
+msgstr ""
+
 #: src/ui/components/links/see-round-link.tsx
 msgctxt "Link"
 msgid "See round"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgctxt "Panel title"
+msgid "Matches"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+#: src/ui/components/maps-stats.tsx
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "Total"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+#: src/ui/components/maps-stats.tsx
+msgid "Win"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+#: src/ui/components/maps-stats.tsx
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "Lost"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+#: src/ui/components/panels/rounds-panel.tsx
+msgctxt "Panel title"
+msgid "Rounds"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgctxt "Panel title"
+msgid "Sides"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgctxt "Panel title"
+msgid "Impact"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgid "K/D"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgid "ADR"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgid "KAST"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgid "HS%"
+msgstr ""
+
+#: src/ui/components/maps-stats.tsx
+msgid "No maps stats found."
 msgstr ""
 
 #: src/ui/components/matches/use-matches-columns.tsx
@@ -1419,6 +1494,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header kill count"
 msgid "K"
 msgstr ""
@@ -1428,6 +1504,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Kills"
 msgstr ""
@@ -1435,6 +1512,7 @@ msgstr ""
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Kills"
 msgstr ""
@@ -1444,6 +1522,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header assist count"
 msgid "A"
 msgstr ""
@@ -1453,6 +1532,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Assists"
 msgstr ""
@@ -1460,6 +1540,7 @@ msgstr ""
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Assists"
 msgstr ""
@@ -1469,6 +1550,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header death count"
 msgid "D"
 msgstr ""
@@ -1478,6 +1560,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Deaths"
 msgstr ""
@@ -1485,6 +1568,7 @@ msgstr ""
 #: src/ui/components/matches/use-matches-columns.tsx
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Deaths"
 msgstr ""
@@ -1571,6 +1655,7 @@ msgstr ""
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/match/weapons/weapons-accuracy.tsx
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "Name"
 msgstr ""
@@ -1581,6 +1666,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Name"
 msgstr ""
@@ -1644,6 +1730,49 @@ msgstr ""
 #: src/ui/components/panels/average-kills-per-round-panel.tsx
 msgctxt "Panel title"
 msgid "Average kills/round"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "Won"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "Avg kill"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "Save rate"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+#: src/ui/match/players/clutches-panel.tsx
+#: src/ui/match/rounds/round/clutches.tsx
+msgctxt "Panel title"
+msgid "Clutches"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "Overall"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "1v1"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "1v2"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "1v3"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "1v4"
+msgstr ""
+
+#: src/ui/components/panels/clutches-panel.tsx
+msgid "1v5"
 msgstr ""
 
 #: src/ui/components/panels/headshot-panel.tsx
@@ -1760,11 +1889,6 @@ msgid "Hostage rescued"
 msgstr ""
 
 #: src/ui/components/panels/rounds-panel.tsx
-msgctxt "Panel title"
-msgid "Rounds"
-msgstr ""
-
-#: src/ui/components/panels/rounds-panel.tsx
 msgctxt "Panel label"
 msgid "Total"
 msgstr ""
@@ -1812,6 +1936,32 @@ msgstr ""
 #: src/ui/components/panels/utilities-panel.tsx
 msgctxt "Panel label"
 msgid "Decoys"
+msgstr ""
+
+#: src/ui/components/panels/win-rate-panel.tsx
+msgctxt "Panel title"
+msgid "Win ratio"
+msgstr ""
+
+#: src/ui/components/panels/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Matches played"
+msgstr ""
+
+#: src/ui/components/panels/win-rate-panel.tsx
+#: src/ui/player/overview/matchmaking-panel.tsx
+msgctxt "Panel label"
+msgid "Wins"
+msgstr ""
+
+#: src/ui/components/panels/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Ties"
+msgstr ""
+
+#: src/ui/components/panels/win-rate-panel.tsx
+msgctxt "Panel label"
+msgid "Defeats"
 msgstr ""
 
 #: src/ui/components/table/cells/bans-cell.tsx
@@ -1901,6 +2051,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "K/D diff"
 msgstr ""
@@ -1909,6 +2060,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Kill/Death difference"
 msgstr ""
@@ -2384,6 +2536,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header kill death ratio"
 msgid "K/D"
 msgstr ""
@@ -2391,6 +2544,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Kill-Death Ratio"
 msgstr ""
@@ -2398,6 +2552,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header headshot count"
 msgid "HS"
 msgstr ""
@@ -2405,6 +2560,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Headshot"
 msgstr ""
@@ -2412,6 +2568,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header headshot percentage"
 msgid "HS%"
 msgstr ""
@@ -2419,6 +2576,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Headshot Percentage"
 msgstr ""
@@ -2426,6 +2584,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "3K"
 msgstr ""
@@ -2433,6 +2592,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "3-kill rounds"
 msgstr ""
@@ -2440,6 +2600,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "4K"
 msgstr ""
@@ -2447,6 +2608,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "4-kill rounds"
 msgstr ""
@@ -2454,6 +2616,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "5K"
 msgstr ""
@@ -2461,6 +2624,7 @@ msgstr ""
 #: src/ui/downloads/faceit/use-faceit-scoreboard-columns.ts
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "5-kill rounds"
 msgstr ""
@@ -2945,6 +3109,11 @@ msgstr ""
 msgid "Settings ({shortcut})"
 msgstr ""
 
+#: src/ui/left-bar/teams-link.tsx
+msgctxt "Tooltip"
+msgid "Teams"
+msgstr ""
+
 #: src/ui/match/chat-messages/chat-message.tsx
 msgctxt "Chat message status"
 msgid "*DEAD*"
@@ -3379,6 +3548,10 @@ msgstr ""
 msgid "Players flashbang matrix"
 msgstr ""
 
+#: src/ui/match/heatmap/heatmap-loader.tsx
+msgid "Loading map…"
+msgstr ""
+
 #: src/ui/match/heatmap/input-blur.tsx
 msgctxt "Input label"
 msgid "Blur"
@@ -3458,6 +3631,7 @@ msgstr ""
 
 #: src/ui/match/match-tabs.tsx
 #: src/ui/player/player-tabs.tsx
+#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Overview"
 msgstr ""
@@ -3637,30 +3811,35 @@ msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header kast"
 msgid "KAST"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Percentage of rounds in which the player either had a kill, assist, survived or was traded"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header average damage per round"
 msgid "ADR"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Average Damage per Round"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Average Damage per Round"
 msgstr ""
@@ -3684,6 +3863,7 @@ msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot"
 msgstr ""
@@ -3695,24 +3875,28 @@ msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "HLTV 2.0"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Estimated HLTV 2.0 rating"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "HLTV"
 msgstr ""
 
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "HLTV 1.0 rating"
 msgstr ""
@@ -3965,12 +4149,6 @@ msgstr ""
 #: src/ui/match/overview/scoreboard/use-scoreboard-columns.ts
 msgctxt "Table header tooltip"
 msgid "1 versus 1 won"
-msgstr ""
-
-#: src/ui/match/players/clutches-panel.tsx
-#: src/ui/match/rounds/round/clutches.tsx
-msgctxt "Panel title"
-msgid "Clutches"
 msgstr ""
 
 #: src/ui/match/players/clutches-panel.tsx
@@ -5117,20 +5295,12 @@ msgid "X Axis"
 msgstr ""
 
 #: src/ui/player/load-player-error.tsx
+#: src/ui/team/load-team-error.tsx
 msgid "No data was found with active filters."
 msgstr ""
 
 #: src/ui/player/load-player-error.tsx
 msgid "This player is not in any analyzed demos."
-msgstr ""
-
-#: src/ui/player/overview/last-matches.tsx
-msgid "No matches."
-msgstr ""
-
-#: src/ui/player/overview/last-matches.tsx
-msgctxt "Panel title"
-msgid "Last matches"
 msgstr ""
 
 #: src/ui/player/overview/matchmaking-panel.tsx
@@ -5146,12 +5316,6 @@ msgstr ""
 #: src/ui/player/overview/matchmaking-panel.tsx
 msgctxt "Panel label"
 msgid "Competitive rank"
-msgstr ""
-
-#: src/ui/player/overview/matchmaking-panel.tsx
-#: src/ui/player/overview/win-rate-panel.tsx
-msgctxt "Panel label"
-msgid "Wins"
 msgstr ""
 
 #: src/ui/player/overview/vac-panel.tsx
@@ -5197,26 +5361,6 @@ msgstr ""
 msgid "Public"
 msgstr ""
 
-#: src/ui/player/overview/win-rate-panel.tsx
-msgctxt "Panel title"
-msgid "Win ratio"
-msgstr ""
-
-#: src/ui/player/overview/win-rate-panel.tsx
-msgctxt "Panel label"
-msgid "Matches played"
-msgstr ""
-
-#: src/ui/player/overview/win-rate-panel.tsx
-msgctxt "Panel label"
-msgid "Ties"
-msgstr ""
-
-#: src/ui/player/overview/win-rate-panel.tsx
-msgctxt "Panel label"
-msgid "Defeats"
-msgstr ""
-
 #: src/ui/player/pinned-player.tsx
 msgid "No pinned player found."
 msgstr ""
@@ -5235,6 +5379,7 @@ msgid "Graphs"
 msgstr ""
 
 #: src/ui/player/player-tabs.tsx
+#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Maps"
 msgstr ""
@@ -5245,6 +5390,7 @@ msgid "Rank"
 msgstr ""
 
 #: src/ui/player/player-tabs.tsx
+#: src/ui/team/team-tabs.tsx
 msgctxt "Tab link"
 msgid "Matches"
 msgstr ""
@@ -5332,16 +5478,19 @@ msgid "Avatar"
 msgstr ""
 
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header match count"
 msgid "Matches"
 msgstr ""
 
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Number of matches played"
 msgstr ""
 
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Dropdown column visibility"
 msgid "Headshot %"
 msgstr ""
@@ -5352,11 +5501,13 @@ msgid "Utility damage per round"
 msgstr ""
 
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header"
 msgid "Last match date"
 msgstr ""
 
 #: src/ui/players/table/use-players-columns.ts
+#: src/ui/teams/table/use-teams-columns.ts
 msgctxt "Table header tooltip"
 msgid "Last match date"
 msgstr ""
@@ -6313,6 +6464,34 @@ msgstr ""
 
 #: src/ui/settings/video/hlae/hlae-location.tsx
 msgid "Invalid HLAE executable"
+msgstr ""
+
+#: src/ui/team/load-team-error.tsx
+msgid "This team is not in any analyzed demos."
+msgstr ""
+
+#: src/ui/team/team-loader.tsx
+msgid "Loading team…"
+msgstr ""
+
+#: src/ui/teams/no-teams.tsx
+msgid "No team found with current filters."
+msgstr ""
+
+#: src/ui/teams/no-teams.tsx
+msgid "No team found, you have to analyze demos to generate teams."
+msgstr ""
+
+#: src/ui/teams/table/selected-team-count.tsx
+msgid "{0, plural, one {# team selected} other {# teams selected}}"
+msgstr ""
+
+#: src/ui/teams/table/team-count.tsx
+msgid "{0, plural, one {# team} other {# teams}}"
+msgstr ""
+
+#: src/ui/teams/teams-table.tsx
+msgid "Loading teams…"
 msgstr ""
 
 #: src/ui/title-bar/history/history-back-button.tsx

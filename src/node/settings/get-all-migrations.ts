@@ -8,6 +8,7 @@ export async function getAllMigrations(): Promise<Migration[]> {
     import('./migrations/initialize-locale'),
     import('./migrations/v2'),
     import('./migrations/v3'),
+    import('./migrations/v4'),
   ]);
   const migrations: Migration[] = modules.map((module) => module.default);
 

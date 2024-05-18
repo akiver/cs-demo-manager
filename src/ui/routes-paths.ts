@@ -26,6 +26,9 @@ export const RoutePath = {
   DownloadsFaceit: 'faceit',
   DownloadsPending: 'pending',
   Ban: '/ban',
+  Teams: '/teams',
+  TeamMatches: 'matches',
+  TeamMaps: 'maps',
 } as const;
 export type RoutePath = (typeof RoutePath)[keyof typeof RoutePath];
 
@@ -68,4 +71,8 @@ export function buildPlayerMatchesPath(playerSteamId: string) {
 
 export function buildPendingDownloadPath() {
   return `${RoutePath.Downloads}/${RoutePath.DownloadsPending}`;
+}
+
+export function buildTeamPath(name: string) {
+  return `${RoutePath.Teams}/${name}`;
 }

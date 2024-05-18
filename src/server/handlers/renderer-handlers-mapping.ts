@@ -170,6 +170,12 @@ import type {
 } from 'csdm/node/database/database/import-data-from-v2-backup';
 import { fetchMatchDuelsMatrixRowsHandler } from './renderer-process/match/fetch-match-duels-matrix-rows-handler';
 import type { DuelMatrixRow } from 'csdm/common/types/duel-matrix-row';
+import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filter';
+import type { TeamTable } from 'csdm/common/types/team-table';
+import { fetchTeamsTableHandler } from './renderer-process/team/fetch-teams-table-handler';
+import { fetchTeamHandler } from './renderer-process/team/fetch-team-handler';
+import type { FetchTeamFilters } from 'csdm/node/database/team/fetch-team-filters';
+import type { TeamProfile } from 'csdm/common/types/team-profile';
 
 export interface RendererMessageHandlers {
   [RendererClientMessageName.InitializeApplication]: Handler<void, InitializeApplicationSuccessPayload>;
@@ -188,6 +194,8 @@ export interface RendererMessageHandlers {
   [RendererClientMessageName.LoadDemoByPath]: Handler<string, Demo>;
   [RendererClientMessageName.NavigateToDemoOrMatch]: Handler<string>;
   [RendererClientMessageName.FetchPlayersTable]: Handler<PlayersTableFilter, PlayerTable[]>;
+  [RendererClientMessageName.FetchTeamsTable]: Handler<TeamsTableFilter, TeamTable[]>;
+  [RendererClientMessageName.FetchTeam]: Handler<FetchTeamFilters, TeamProfile>;
   [RendererClientMessageName.AddDemosToAnalyses]: Handler<Demo[]>;
   [RendererClientMessageName.RemoveDemosFromAnalyses]: Handler<string[]>;
   [RendererClientMessageName.GenerateMatchPositions]: Handler<GenerateMatchPositionsPayload>;
@@ -285,6 +293,8 @@ export const rendererHandlers: RendererMessageHandlers = {
   [RendererClientMessageName.LoadDemoByPath]: loadDemoHandler,
   [RendererClientMessageName.NavigateToDemoOrMatch]: navigateToDemoOrMatch,
   [RendererClientMessageName.FetchPlayersTable]: fetchPlayersHandler,
+  [RendererClientMessageName.FetchTeamsTable]: fetchTeamsTableHandler,
+  [RendererClientMessageName.FetchTeam]: fetchTeamHandler,
   [RendererClientMessageName.AddDemosToAnalyses]: addDemosToAnalysesHandler,
   [RendererClientMessageName.RemoveDemosFromAnalyses]: removeDemosFromAnalysesHandler,
   [RendererClientMessageName.GenerateMatchPositions]: generateMatchPositionsHandler,

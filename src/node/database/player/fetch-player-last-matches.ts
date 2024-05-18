@@ -1,10 +1,10 @@
 import { sql } from 'kysely';
 import { TeamLetter } from 'csdm/common/types/counter-strike';
-import type { LastMatch } from 'csdm/common/types/player-profile';
+import type { LastMatch } from 'csdm/common/types/last-match';
 import { db } from 'csdm/node/database/database';
 
 export async function fetchPlayerLastMatches(steamId: string): Promise<LastMatch[]> {
-  const matches: LastMatch[] = await db
+  const matches = await db
     .selectFrom('matches')
     .select([
       'matches.checksum',
@@ -14,7 +14,7 @@ export async function fetchPlayerLastMatches(steamId: string): Promise<LastMatch
       sql<string>`to_char(matches.date, 'YYYY-MM-DD"T"HH24:MI:SS.MS"Z"')`.as('date'),
     ])
     .innerJoin('players', 'players.match_checksum', 'matches.checksum')
-    .select('players.team_name as playerTeamName')
+    .select('players.team_name as focusTeamName')
     .innerJoin('teams as teamA', function (qb) {
       return qb.on('teamA.letter', '=', TeamLetter.A).onRef('teamA.match_checksum', '=', 'matches.checksum');
     })

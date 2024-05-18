@@ -5,8 +5,9 @@ import type { EncoderSoftware } from 'csdm/common/types/encoder-software';
 import type { MatchesTableFilter } from 'csdm/node/database/matches/matches-table-filter';
 import type { RankingFilter } from 'csdm/common/types/ranking-filter';
 import type { DemosTableFilter } from 'csdm/node/database/demos/demos-table-filter';
-import type { PlayersTableFilter } from '../database/players/players-table-filter';
+import type { PlayersTableFilter } from 'csdm/node/database/players/players-table-filter';
 import type { VideoContainer } from 'csdm/common/types/video-container';
+import type { TeamsTableFilter } from 'csdm/node/database/teams/teams-table-filter';
 
 export type Folder = {
   path: string;
@@ -103,6 +104,19 @@ export type MatchesSettings = MatchesTableFilter;
 
 export type PlayersSettings = PlayersTableFilter;
 
+export type TeamsSettings = TeamsTableFilter;
+
+export type TeamProfileSettings = {
+  demoSources: DemoSource[];
+  games: Game[];
+  demoTypes: DemoType[];
+  gameModes: GameMode[];
+  tagIds: string[];
+  maxRounds: number[];
+  startDate: string | undefined;
+  endDate: string | undefined;
+};
+
 export type VideoSettings = {
   encoderSoftware: EncoderSoftware;
   framerate: number;
@@ -142,5 +156,7 @@ export type Settings = {
   download: DownloadSettings;
   matches: MatchesSettings;
   players: PlayersSettings;
+  teams: TeamsSettings;
+  teamProfile: TeamProfileSettings;
   ban: BanSettings;
 };

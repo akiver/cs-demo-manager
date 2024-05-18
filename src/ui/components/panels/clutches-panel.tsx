@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { type ReactNode } from 'react';
+import { Trans } from '@lingui/macro';
 import { Panel, PanelStatRow } from 'csdm/ui/components/panel';
 import { roundNumber } from 'csdm/common/math/round-number';
 import { WinRate } from 'csdm/ui/components/panels/win-rate';
-import { usePlayer } from '../use-player';
+import type { Clutch } from 'csdm/common/types/clutch';
 
 type ClutchProps = {
-  title: string;
+  title: ReactNode;
   opponentCount: number;
+  allClutches: Clutch[];
 };
 
-function Clutch({ title, opponentCount }: ClutchProps) {
-  const { clutches: allClutches } = usePlayer();
+function ClutchBlock({ allClutches, title, opponentCount }: ClutchProps) {
   const clutches =
     opponentCount > 0 ? allClutches.filter((clutch) => clutch.opponentCount === opponentCount) : allClutches;
   const wonCount = clutches.filter((clutch) => clutch.won).length;
@@ -26,29 +27,33 @@ function Clutch({ title, opponentCount }: ClutchProps) {
     <div className="flex flex-col w-[192px] border border-gray-300 p-8 rounded">
       <p className="text-body-strong">{title}</p>
       <div className="flex flex-col mt-12">
-        <PanelStatRow title="Total" value={clutches.length} />
-        <PanelStatRow title="Won" value={wonCount} />
-        <PanelStatRow title="Lost" value={lostCount} />
-        <PanelStatRow title="Avg kill" value={averageKill} />
+        <PanelStatRow title={<Trans>Total</Trans>} value={clutches.length} />
+        <PanelStatRow title={<Trans>Won</Trans>} value={wonCount} />
+        <PanelStatRow title={<Trans>Lost</Trans>} value={lostCount} />
+        <PanelStatRow title={<Trans>Avg kill</Trans>} value={averageKill} />
         <div className="flex flex-col gap-y-px">
           <WinRate value={winRate} barClassName="bg-green-700" />
-          <WinRate title="Save rate" value={saveRate} barClassName="bg-orange-700" />
+          <WinRate title={<Trans>Save rate</Trans>} value={saveRate} barClassName="bg-orange-700" />
         </div>
       </div>
     </div>
   );
 }
 
-export function ClutchesPanel() {
+type Props = {
+  clutches: Clutch[];
+};
+
+export function ClutchesPanel({ clutches }: Props) {
   return (
-    <Panel header="Clutches">
+    <Panel header={<Trans context="Panel title">Clutches</Trans>}>
       <div className="flex flex-wrap gap-12">
-        <Clutch opponentCount={0} title="Overall" />
-        <Clutch opponentCount={1} title="1v1" />
-        <Clutch opponentCount={2} title="1v2" />
-        <Clutch opponentCount={3} title="1v3" />
-        <Clutch opponentCount={4} title="1v4" />
-        <Clutch opponentCount={5} title="1v5" />
+        <ClutchBlock opponentCount={0} title={<Trans>Overall</Trans>} allClutches={clutches} />
+        <ClutchBlock opponentCount={1} title={<Trans>1v1</Trans>} allClutches={clutches} />
+        <ClutchBlock opponentCount={2} title={<Trans>1v2</Trans>} allClutches={clutches} />
+        <ClutchBlock opponentCount={3} title={<Trans>1v3</Trans>} allClutches={clutches} />
+        <ClutchBlock opponentCount={4} title={<Trans>1v4</Trans>} allClutches={clutches} />
+        <ClutchBlock opponentCount={5} title={<Trans>1v5</Trans>} allClutches={clutches} />
       </div>
     </Panel>
   );

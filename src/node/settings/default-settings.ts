@@ -125,6 +125,20 @@ export const defaultSettings: Settings = {
     startDate: undefined,
     endDate: undefined,
   },
+  teams: {
+    startDate: undefined,
+    endDate: undefined,
+  },
+  teamProfile: {
+    gameModes: [],
+    games: [],
+    demoSources: [],
+    demoTypes: [],
+    tagIds: [],
+    maxRounds: [],
+    startDate: undefined,
+    endDate: undefined,
+  },
   ban: {
     ignoreBanBeforeFirstSeen: true,
   },

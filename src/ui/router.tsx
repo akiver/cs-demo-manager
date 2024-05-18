@@ -40,7 +40,12 @@ import { ErrorBoundary } from './error-boundary';
 import { OpeningDuelsMapLoader } from 'csdm/ui/match/duels/opening-duels-map/opening-duels-map-loader';
 import { MatchDuels } from 'csdm/ui/match/duels/match-duels';
 import { OpeningDuelsStats } from 'csdm/ui/match/duels/opening-duels-stats/opening-duels-stats';
-import { PlayersDuelsMatrix } from './match/duels/players-duels-matrix';
+import { PlayersDuelsMatrix } from 'csdm/ui/match/duels/players-duels-matrix';
+import { Teams } from 'csdm/ui/teams/teams';
+import { Team } from 'csdm/ui/team/team';
+import { TeamOverview } from 'csdm/ui/team/overview/team-overview';
+import { TeamMatchesTable } from './team/matches/team-matches-table';
+import { TeamMaps } from './team/maps/team-maps';
 
 export const router = createHashRouter(
   createRoutesFromElements(
@@ -85,6 +90,12 @@ export const router = createHashRouter(
         <Route path={RoutePath.PlayerMaps} element={<PlayerMaps />} />
         <Route path={RoutePath.PlayerRank} element={<PlayerRank />} />
         <Route path={RoutePath.PlayerMatches} element={<PlayerMatchesTable />} />
+      </Route>
+      <Route path={RoutePath.Teams} element={<Teams />} />
+      <Route path={`${RoutePath.Teams}/:name`} element={<Team />}>
+        <Route index={true} element={<TeamOverview />} />
+        <Route path={RoutePath.TeamMaps} element={<TeamMaps />} />
+        <Route path={RoutePath.TeamMatches} element={<TeamMatchesTable />} />
       </Route>
       <Route path={RoutePath.Search} element={<Search />} />
       <Route path={RoutePath.Ban} element={<BanStats />} />

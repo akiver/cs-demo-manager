@@ -9,8 +9,11 @@ import { fetchChecksumTags } from '../tags/fetch-checksum-tags';
 import { fetchCollateralKillCountPerMatch } from './fetch-collateral-kill-count-per-match';
 import type { MatchesTableFilter } from './matches-table-filter';
 
-export async function fetchMatchesTable(filter: MatchesTableFilter & { steamId?: string }): Promise<MatchTable[]> {
-  const { startDate, endDate, steamId, ranking, tagIds, sources, games, gameModes, maxRounds, demoTypes } = filter;
+export async function fetchMatchesTable(
+  filter: MatchesTableFilter & { steamId?: string; teamName?: string },
+): Promise<MatchTable[]> {
+  const { startDate, endDate, steamId, ranking, tagIds, sources, games, gameModes, maxRounds, demoTypes, teamName } =
+    filter;
   let query = db
     .selectFrom('matches')
     .selectAll('matches')
@@ -39,6 +42,12 @@ export async function fetchMatchesTable(filter: MatchesTableFilter & { steamId?:
 
   if (steamId !== undefined) {
     query = query.where('players.steam_id', '=', steamId);
+  }
+
+  if (teamName !== undefined) {
+    query = query.where((eb) => {
+      return eb('teamA.name', '=', teamName).or('teamB.name', '=', teamName);
+    });
   }
 
   if (startDate !== undefined && endDate !== undefined) {

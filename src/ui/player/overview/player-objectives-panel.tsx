@@ -1,12 +1,12 @@
 import React from 'react';
-import { ObjectivesPanel as CommonObjectivesPanel } from 'csdm/ui/components/panels/objectives-panel';
+import { ObjectivesPanel } from 'csdm/ui/components/panels/objectives-panel';
 import { usePlayer } from '../use-player';
 
-export function ObjectivesPanel() {
+export function PlayerObjectivesPanel() {
   const { bombDefusedCount, bombPlantedCount, hostageRescuedCount } = usePlayer();
 
   return (
-    <CommonObjectivesPanel
+    <ObjectivesPanel
       bombDefusedCount={bombDefusedCount}
       bombPlantedCount={bombPlantedCount}
       hostageRescuedCount={hostageRescuedCount}
