@@ -5408,8 +5408,8 @@ msgstr "Abate colateral"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
-msgid "Knife kills"
-msgstr "Abates com facas"
+msgid "Knife/Tazer kills"
+msgstr ""
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"

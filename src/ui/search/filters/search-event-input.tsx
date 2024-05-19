@@ -78,7 +78,7 @@ function useSearchEventOptions(): SelectOption<SearchEvent>[] {
     {
       label: _(
         msg({
-          message: 'Knife kills',
+          message: 'Knife/Tazer kills',
           context: 'Select option label',
         }),
       ),

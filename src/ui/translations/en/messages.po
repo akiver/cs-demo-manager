@@ -5403,8 +5403,8 @@ msgstr "Collateral kills"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
-msgid "Knife kills"
-msgstr "Knife kills"
+msgid "Knife/Tazer kills"
+msgstr "Knife/Tazer kills"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"

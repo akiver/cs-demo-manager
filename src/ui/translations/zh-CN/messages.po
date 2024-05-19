@@ -5408,8 +5408,8 @@ msgstr "附带击杀"
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
-msgid "Knife kills"
-msgstr "匕首击杀"
+msgid "Knife/Tazer kills"
+msgstr ""
 
 #: src/ui/search/filters/search-event-input.tsx
 msgctxt "Select option label"
